@@ -80,10 +80,10 @@ void transfer(context_object context) {
 
     printf("native: %lo\n", fools_system->native);
     
-    while (context->self.pointer != fools_system->native) {
-        printf("current: %lo\n", context->self.pointer);
+    while (context->self.native != fools_system->native) {
+        printf("current: %lo\n", context->self.native);
         old_context = context;
-        context = make_context(*header(context->self.pointer), 1);
+        context = make_context(header(context->self.pointer), 1);
         context->arguments->values[0] = (object)old_context;
     }
     
