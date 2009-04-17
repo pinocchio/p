@@ -78,9 +78,8 @@ void native(context_object context) {
 void transfer(context_object context) {
     context_object old_context;
 
-    while (context->self.pointer != fools_system->native) {
+    while (context->self.native != fools_system->native) {
         old_context = context;
-        header(context->self.pointer);
         context = make_context(header(context->self.pointer), 1);
         context->arguments->values[0] = (object)old_context;
     }

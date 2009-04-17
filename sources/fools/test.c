@@ -11,7 +11,7 @@ void test_header() {
     string_object string2 = NEW(struct string);
     
     header(string1)       = (object) string2;
-    assert(header(string1).pointer == string2);
+    assert(header(string1).pointer == (int*)string2);
 }
 
 void test_array() {
@@ -31,8 +31,6 @@ void test_array() {
 
 void test_native_layout() {
     SETUP;
-    //printf("h: %x\n", header(fools_system->native).native);
-    //printf("h2: %x\n", fools_system->native);
     assert(header(fools_system->native).native == fools_system->native);
     assert(fools_system->native->function == &native);
 }
@@ -72,10 +70,6 @@ void test_transfer() {
 
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
-
-    assert(fools_system->native->function == &native);
-
-    object o = inner->self;
 
     assert(fools_system->native->function == &native);
 
