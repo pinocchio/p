@@ -31,6 +31,8 @@ void test_array() {
 
 void test_native_layout() {
     SETUP;
+    //printf("h: %x\n", header(fools_system->native).native);
+    //printf("h2: %x\n", fools_system->native);
     assert(header(fools_system->native).native == fools_system->native);
     assert(fools_system->native->function == &native);
 }
