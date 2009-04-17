@@ -11,7 +11,7 @@ void test_header() {
     string_object string2 = NEW(struct string);
     
     header(string1)       = (object) string2;
-    assert(header(string1).pointer == (int*)string2);
+    assert(header(string1).string == string2);
 }
 
 void test_array() {
