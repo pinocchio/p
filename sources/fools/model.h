@@ -4,10 +4,14 @@
 #include <stdlib.h>
 
 #define header_size sizeof(object)
-#define NEW(layout) \
+#define NEW(layout) NEW_ARRAYED(layout, 1)
+
+#define NEW_ARRAYED(layout, size) \
             (layout*)(\
-                malloc(header_size + sizeof(layout))\
+                malloc(header_size + sizeof(layout[size]))\
             + header_size)
+
+#define header(o) *(object*)((o) - header_size)
 
 struct behaviour;
 struct class;
@@ -16,7 +20,8 @@ struct number;
 struct array;
 struct dict;
 struct nil;
-struct fools;
+struct native;
+struct context;
 
 typedef struct behaviour*   behaviour_object;
 typedef struct class*       class_object;
@@ -24,8 +29,12 @@ typedef struct string*      string_object;
 typedef struct number*      number_object;
 typedef struct array*       array_object;
 typedef struct dict*        dict_object;
-typedef struct fools*       fools_object;
 typedef struct nil*         nil_object;
+typedef struct native*      native_object;
+typedef struct context*     context_object;
+
+struct fools;
+typedef struct fools*       fools_object;
 
 typedef union {
     behaviour_object behaviour;
@@ -36,6 +45,8 @@ typedef union {
     dict_object      dict;
     fools_object     fools;
     nil_object       nil;
+    native_object    native;
+    context_object   context;
     void*            random;
 } object;
 
@@ -60,7 +71,7 @@ struct number {
 
 struct array {
     number_object       size;
-    object*             values;
+    object              values[];
 };
 
 struct dict {
@@ -70,10 +81,20 @@ struct dict {
 
 struct nil { };
 
+struct native {
+    void (*function)(context_object);
+};
+
+struct context {
+    object              self;
+    array_object        arguments;
+};
+
 struct fools {
     nil_object          nil;
     class_object        behaviour_class;
     class_object        class_class;
+    native_object       native;
 };
 
 extern behaviour_object make_behaviour(fools_object system, int size, object super);
@@ -83,5 +104,10 @@ extern number_object    make_number(fools_object system, int value);
 extern array_object     make_array(fools_object system, int size);
 extern dict_object      make_dict(fools_object system, int init_size);
 extern nil_object       make_nil(fools_object system);
+extern context_object   make_context(fools_object system, object self, int size);
+
+extern native_object    make_native(void (*native)(context_object));
+extern void             native(context_object context);
+extern void             meta_native(context_object context);
 
 #endif // MODEL_H

@@ -1,4 +1,4 @@
-CFILES=model.c fools.c bootstrap.c primitives.c
+CFILES=model.c bootstrap.c primitives.c
 HFILES=model.h bootstrap.h primitives.h
 PROGRAM=fools
 VERSION=0.1
@@ -12,8 +12,12 @@ OBJECTS=$(CFILES:.c=.o)
 
 all: $(PROGRAM)
 
-$(PROGRAM): $(OBJECTS)
+$(PROGRAM): $(OBJECTS) $(PROGRAM).o
 	$(CC) -o $@ $^
+
+test: $(OBJECTS) test.o
+	$(CC) -o $@ $^
+	./test
 
 clean:
 	rm -rf $(OBJECTS) $(PROGRAM) make.depend
