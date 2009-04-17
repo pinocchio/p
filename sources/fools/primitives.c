@@ -1,9 +1,15 @@
 #include <model.h>
 
-void iplus(number_object left, number_object first, number_object second) {
-    left->value = first->value + second->value;
+void iplus(context_object context) {
+    number_object* left = (number_object*)context->arguments->values[0].raw;
+    number_object first = context->arguments->values[1].number;
+    number_object second = context->arguments->values[2].number;
+    *left = make_number(first->value + second->value);
 }
 
-void iminus(number_object left, number_object first, number_object second) {
-    left->value = first->value - second->value;
+void iminus(context_object context) {
+    number_object* left = (number_object*)context->arguments->values[0].raw;
+    number_object first = context->arguments->values[1].number;
+    number_object second = context->arguments->values[2].number;
+    *left = make_number(first->value - second->value);
 }

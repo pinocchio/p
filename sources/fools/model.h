@@ -47,7 +47,7 @@ typedef union {
     nil_object       nil;
     native_object    native;
     context_object   context;
-    void*            random;
+    void*            raw;
 } object;
 
 struct behaviour {
@@ -97,14 +97,14 @@ struct fools {
     native_object       native;
 };
 
-extern behaviour_object make_behaviour(fools_object system, int size, object super);
-extern class_object     make_class(fools_object system, int size, object super, const char* name);
-extern string_object    make_string(fools_object system, const char* value);
-extern number_object    make_number(fools_object system, int value);
-extern array_object     make_array(fools_object system, int size);
-extern dict_object      make_dict(fools_object system, int init_size);
-extern nil_object       make_nil(fools_object system);
-extern context_object   make_context(fools_object system, object self, int size);
+extern behaviour_object make_behaviour(int size, object super);
+extern class_object     make_class(int size, object super, const char* name);
+extern string_object    make_string(const char* value);
+extern number_object    make_number(int value);
+extern array_object     make_array(int size);
+extern dict_object      make_dict(int init_size);
+extern nil_object       make_nil();
+extern context_object   make_context(object self, int size);
 
 extern native_object    make_native(void (*native)(context_object));
 extern void             native(context_object context);

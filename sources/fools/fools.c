@@ -10,10 +10,10 @@ int main() {
     assert(nil == system->nil);
     assert(nil != 0);
 
-    number_object one = make_number(system, 1);    
+    number_object one = make_number(1);    
     printf("%i\n", one->value);
 
-    string_object a_string = make_string(system, "boe");
+    string_object a_string = make_string("boe");
     printf("%s\n", a_string->value);
 
     return 0;

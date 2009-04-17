@@ -4,16 +4,16 @@
 #include <stdio.h>
 
 #define SETUP\
-    fools_object system = bootstrap();
+    bootstrap();
 
 void test_array() {
     SETUP;
 
-    array_object a = make_array(system, 100);
+    array_object a = make_array(100);
     assert(a->size->value == 100);
     int i;
     for(i = 0; i < 100; i++) {
-        a->values[i] = (object)make_number(system, i);
+        a->values[i] = (object)make_number(i);
     }
     
     for(i = 0; i < 100; i++) {
@@ -24,21 +24,24 @@ void test_array() {
 void native_test_single_arg_5(context_object c) {
     assert(c->arguments->size->value == 1);
     assert(c->arguments->values[0].number->value == 5);
+    c->arguments->values[0].number->value = 6;
 }
 
 void test_native() {
     SETUP;
 
     native_object n = make_native(&native_test_single_arg_5);
-    header(n) = (object)system->native;
+    header(n) = (object)fools_system->native;
 
-    context_object inner = make_context(system, (object)n, 1);
-    inner->arguments->values[0] = (object)make_number(system, 5);
+    context_object inner = make_context((object)n, 1);
+    inner->arguments->values[0] = (object)make_number(5);
 
-    context_object outer = make_context(system, (object)NULL, 1);
-    outer->arguments->values[0] =  
+    context_object outer = make_context((object)NULL, 1);
+    outer->arguments->values[0] = (object)inner;
 
-    native(c);
+    native(outer);
+
+    assert(inner->arguments->values[0].number->value == 6);
 }
 
 int main() {
