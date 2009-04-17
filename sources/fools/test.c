@@ -67,8 +67,6 @@ void test_transfer() {
 
     native_object n = make_native(&native_test_single_arg_5);
     header(n) = (object)fools_system->native;
-    printf("N: %x\n", n);
-    printf("HN: %x\n", header(n));
     
     assert(fools_system->native->function == &native);
 
@@ -77,9 +75,7 @@ void test_transfer() {
 
     assert(fools_system->native->function == &native);
 
-    printf("N2: %x\n", inner->self);
     object o = inner->self;
-    printf("HN2: %x\n", header(o.pointer));
 
     assert(fools_system->native->function == &native);
 
