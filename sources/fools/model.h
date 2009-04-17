@@ -5,8 +5,8 @@
 
 #define header_size sizeof(object)
 
-#define PINC(pointer) ((char*) (pointer) + 1) 
-#define PDEC(pointer) ((char*) (pointer) - 1) 
+#define PINC(pointer) (((int*) pointer) + 1) 
+#define PDEC(pointer) (((int*) pointer) - 1)
 
 #define NEW(layout) NEW_ARRAYED(layout, 1)
 
@@ -50,7 +50,7 @@ typedef union {
     nil_object       nil;
     native_object    native;
     context_object   context;
-    void*            pointer;
+    int*             pointer;
 } object;
 
 struct behaviour {
