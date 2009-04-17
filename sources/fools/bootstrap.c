@@ -1,4 +1,5 @@
 #include <bootstrap.h>
+#include <assert.h>
 
 fools_object fools_system;
 
@@ -13,6 +14,12 @@ fools_object bootstrap() {
     //system->behaviour_class       = make_class(5, (object)nil, "Behaviour");
     //system->class_class           = make_class(5, (object)nil, "Class");
     fools_system->native            = make_native(&native);
+    
+    assert(fools_system->native->function == &native);
+
     header(fools_system->native)    = (object)fools_system->native;
+
+    assert(fools_system->native->function == &native);
+
     return fools_system;
 }

@@ -29,15 +29,16 @@ void test_array() {
     }
 }
 
+void test_native_layout() {
+    SETUP;
+    assert(header(fools_system->native).native == fools_system->native);
+    assert(fools_system->native->function == &native);
+}
+
 void native_test_single_arg_5(context_object c) {
     assert(c->arguments->size->value == 1);
     assert(c->arguments->values[0].number->value == 5);
     c->arguments->values[0].number->value = 6;
-}
-
-void test_native_layout() {
-    SETUP;
-    assert(header(fools_system->native).native == fools_system->native);
 }
 
 void test_native() {
@@ -49,7 +50,7 @@ void test_native() {
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
 
-    context_object outer = make_context((object)NULL, 1);
+    context_object outer = make_context((object)fools_system->nil, 1);
     outer->arguments->values[0] = (object)inner;
 
     native(outer);
@@ -60,10 +61,25 @@ void test_native() {
 void test_transfer() {
     SETUP;
 
+    assert(fools_system->native->function == &native);
+
     native_object n = make_native(&native_test_single_arg_5);
     header(n) = (object)fools_system->native;
+    printf("N: %x\n", n);
+    printf("HN: %x\n", header(n));
+    
+    assert(fools_system->native->function == &native);
+
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
+
+    assert(fools_system->native->function == &native);
+
+    printf("N2: %x\n", inner->self);
+    object o = inner->self;
+    printf("HN2: %x\n", header(o.pointer));
+
+    assert(fools_system->native->function == &native);
 
     transfer(inner);
 
