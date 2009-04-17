@@ -5,8 +5,8 @@
 
 #define header_size sizeof(object)
 
-#define PINC(pointer) (((int*) pointer) + 1) 
-#define PDEC(pointer) (((int*) pointer) - 1)
+#define PINC(p) (((pointer) p) + 1) 
+#define PDEC(p) (((pointer) p) - 1)
 
 #define NEW(layout) NEW_ARRAYED(layout, 1)
 
@@ -35,6 +35,7 @@ typedef struct dict*        dict_object;
 typedef struct nil*         nil_object;
 typedef struct native*      native_object;
 typedef struct context*     context_object;
+typedef int**               pointer;
 
 struct fools;
 typedef struct fools*       fools_object;
@@ -50,7 +51,7 @@ typedef union {
     nil_object       nil;
     native_object    native;
     context_object   context;
-    int*             pointer;
+    pointer          pointer;
 } object;
 
 struct behaviour {
