@@ -78,5 +78,5 @@ context_object make_context(fools_object system, object self, int size) {
 void native(context_object context) {
     assert(context->arguments->size->value == 1);
     context_object passed_context = context->arguments->values[0].context;
-    context->self.native->function(passed_context);
+    passed_context->self.native->function(passed_context);
 }

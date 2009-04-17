@@ -32,8 +32,11 @@ void test_native() {
     native_object n = make_native(&native_test_single_arg_5);
     header(n) = (object)system->native;
 
-    context_object c = make_context(system, (object)n, 1);
-    c->arguments->values[0] = (object)make_number(system, 5);
+    context_object inner = make_context(system, (object)n, 1);
+    inner->arguments->values[0] = (object)make_number(system, 5);
+
+    context_object outer = make_context(system, (object)NULL, 1);
+    outer->arguments->values[0] =  
 
     native(c);
 }
@@ -41,7 +44,7 @@ void test_native() {
 int main() {
 
     test_array();
-    //test_native();   
+    test_native();   
 
     return 0;
     
