@@ -1,7 +1,9 @@
-void iplus(int* result, int left, int right) {
-    *result = left + right;
+#include <model.h>
+
+void iplus(number_object left, number_object first, number_object second) {
+    left->value = first->value + second->value;
 }
 
-void iminus(int* result, int left, int right) {
-    *result = left - right;
+void iminus(number_object left, number_object first, number_object second) {
+    left->value = first->value - second->value;
 }
