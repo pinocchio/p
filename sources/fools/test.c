@@ -61,17 +61,11 @@ void test_native() {
 void test_transfer() {
     SETUP;
 
-    assert(fools_system->native->function == &native);
-
     native_object n = make_native(&native_test_single_arg_5);
     header(n) = (object)fools_system->native;
     
-    assert(fools_system->native->function == &native);
-
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
-
-    assert(fools_system->native->function == &native);
 
     transfer(inner);
 
