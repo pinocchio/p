@@ -29,6 +29,8 @@ void native_test_single_arg_5(context_object c) {
 
 void test_native_layout() {
     SETUP;
+    printf("%lo\n", header(fools_system->native));
+    printf("%lo\n", fools_system->native);
     assert(header(fools_system->native) == fools_system->native);
 }
 

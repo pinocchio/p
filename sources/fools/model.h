@@ -11,7 +11,7 @@
                 malloc(header_size + sizeof(layout[size]))\
             + header_size)
 
-#define header(o) (object)((o) - header_size)
+#define header(o) (object*)((o) - header_size)
 
 struct behaviour;
 struct class;

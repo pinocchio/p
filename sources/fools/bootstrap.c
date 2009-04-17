@@ -13,6 +13,6 @@ fools_object bootstrap() {
     //system->behaviour_class       = make_class(5, (object)nil, "Behaviour");
     //system->class_class           = make_class(5, (object)nil, "Class");
     fools_system->native            = make_native(&native);
-    header(fools_system->native)    = (object)fools_system->native;
+    *header(fools_system->native)    = (object)fools_system->native;
     return fools_system;
 }
