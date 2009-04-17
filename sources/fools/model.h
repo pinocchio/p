@@ -4,14 +4,17 @@
 #include <stdlib.h>
 
 #define header_size sizeof(object)
+
+#define PINC(pointer) ((char*) (pointer) + 1) 
+#define PDEC(pointer) ((char*) (pointer) - 1) 
+
 #define NEW(layout) NEW_ARRAYED(layout, 1)
 
 #define NEW_ARRAYED(layout, size) \
             (layout*)(\
-                (char *)malloc(header_size + sizeof(layout[size]))\
-            + 1)
+               PINC(malloc(header_size + sizeof(layout[size]))))
 
-#define header(o) (*(object*)((char *)(o) - 1))
+#define header(o) (*(object*)PDEC(o))
 
 struct behaviour;
 struct class;
