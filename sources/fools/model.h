@@ -11,7 +11,7 @@
                 malloc(header_size + sizeof(layout[size]))\
             + header_size)
 
-#define header(o) *(object*)((o) - header_size)
+#define header(o) (object)((o) - header_size)
 
 struct behaviour;
 struct class;
@@ -47,7 +47,7 @@ typedef union {
     nil_object       nil;
     native_object    native;
     context_object   context;
-    void*            raw;
+    void*            pointer;
 } object;
 
 struct behaviour {
@@ -108,6 +108,6 @@ extern context_object   make_context(object self, int size);
 
 extern native_object    make_native(void (*native)(context_object));
 extern void             native(context_object context);
-extern void             meta_native(context_object context);
+extern void             transfer(context_object context);
 
 #endif // MODEL_H

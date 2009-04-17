@@ -27,11 +27,16 @@ void native_test_single_arg_5(context_object c) {
     c->arguments->values[0].number->value = 6;
 }
 
+void test_native_layout() {
+    SETUP;
+    assert(header(fools_system->native) == fools_system->native);
+}
+
 void test_native() {
     SETUP;
 
     native_object n = make_native(&native_test_single_arg_5);
-    header(n) = (object)fools_system->native;
+    *header(n) = (object)fools_system->native;
 
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
@@ -44,10 +49,26 @@ void test_native() {
     assert(inner->arguments->values[0].number->value == 6);
 }
 
+void test_transfer() {
+    SETUP;
+
+    native_object n = make_native(&native_test_single_arg_5);
+    *header(n) = (object)fools_system->native;
+
+    context_object inner = make_context((object)n, 1);
+    inner->arguments->values[0] = (object)make_number(5);
+
+    transfer(inner);
+
+    assert(inner->arguments->values[0].number->value == 6);
+}
+
 int main() {
 
     test_array();
+    test_native_layout();
     test_native();   
+    test_transfer();
 
     return 0;
     
