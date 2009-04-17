@@ -6,6 +6,14 @@
 #define SETUP\
     bootstrap();
 
+void test_header() {
+    string_object string1 = NEW(struct string);
+    string_object string2 = NEW(struct string);
+    
+    header(string1)       = (object) string2;
+    assert(header(string1).pointer == string2);
+}
+
 void test_array() {
     SETUP;
 
@@ -54,7 +62,6 @@ void test_transfer() {
 
     native_object n = make_native(&native_test_single_arg_5);
     header(n) = (object)fools_system->native;
-
     context_object inner = make_context((object)n, 1);
     inner->arguments->values[0] = (object)make_number(5);
 
@@ -64,7 +71,8 @@ void test_transfer() {
 }
 
 int main() {
-
+    
+    test_header();
     test_array();
     test_native_layout();
     test_native();   

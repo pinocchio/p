@@ -8,10 +8,10 @@
 
 #define NEW_ARRAYED(layout, size) \
             (layout*)(\
-                malloc(header_size + sizeof(layout[size]))\
-            + header_size)
+                (char *)malloc(header_size + sizeof(layout[size]))\
+            + 1)
 
-#define header(o) (*(object*)((o) - header_size))
+#define header(o) (*(object*)((char *)(o) - 1))
 
 struct behaviour;
 struct class;
