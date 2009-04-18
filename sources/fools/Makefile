@@ -1,5 +1,5 @@
-CFILES=model.c bootstrap.c primitives.c
-HFILES=model.h bootstrap.h primitives.h
+CFILES=model.c bootstrap.c primitives.c system.c
+HFILES=model.h bootstrap.h primitives.h system.h
 PROGRAM=fools
 VERSION=0.1
 
@@ -7,6 +7,7 @@ FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -g -Wall -I.
 
+TEST_OBJECTS= test test.o
 SOURCES=$(CFILES) $(HFILES) Makefile
 OBJECTS=$(CFILES:.c=.o)
 
@@ -20,7 +21,7 @@ test: $(OBJECTS) test.o
 	./test
 
 clean:
-	rm -rf $(OBJECTS) $(PROGRAM) make.depend
+	rm -rf $(OBJECTS) $(PROGRAM) $(TEST_OBJECTS) make.depend
 
 TARBZ2=$(FULLNAME).tar.bz2
 

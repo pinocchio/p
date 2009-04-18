@@ -1,4 +1,5 @@
 #include <bootstrap.h>
+#include <system.h>
 #include <assert.h>
 
 fools_object fools_system;

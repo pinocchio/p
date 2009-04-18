@@ -109,9 +109,6 @@ extern array_object     make_array(int size);
 extern dict_object      make_dict(int init_size);
 extern nil_object       make_nil();
 extern context_object   make_context(object self, int size);
-
 extern native_object    make_native(void (*native)(context_object));
-extern void             native(context_object context);
-extern void             transfer(context_object context);
 
 #endif // MODEL_H
