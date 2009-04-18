@@ -14,7 +14,7 @@ void transfer(context_object context) {
     while (context->self.native != fools_system->native) {
         old_context = context;
         context = make_context(header(context->self.pointer), 1);
-        context->arguments->values[0] = (object)old_context;
+        array_at_put(context->arguments, 0, (object)old_context);
     }
     
     native_target(context->self.native)(context);

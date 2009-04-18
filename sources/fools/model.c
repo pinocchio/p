@@ -81,6 +81,12 @@ object inline array_at(array_object array, int index) {
     return array->values[index];
 }
 
+void inline array_at_put(array_object array, int index, object new_value) {
+    assert(0 <= index);
+    assert(index < number_value(array->size));
+    array->values[index] = new_value;
+}
+
 transfer_target native_target(native_object native) {
     return native->target;
 }

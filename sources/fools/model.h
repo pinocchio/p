@@ -115,6 +115,7 @@ extern native_object    make_native(transfer_target native);
 
 extern int inline number_value(number_object number);
 extern object inline array_at(array_object array, int index);
+extern void inline array_at_put(array_object array, int index, object new_value);
 extern transfer_target native_target(native_object native);
 
 #endif // MODEL_H
