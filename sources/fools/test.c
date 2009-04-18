@@ -38,8 +38,8 @@ void test_native_layout() {
 
 void native_test_single_arg_5(context_object c) {
     assert(c->arguments->size->value == 1);
-    assert(c->arguments->values[0].number->value == 5);
-    c->arguments->values[0].number->value = 6;
+    assert(number_value(array_at(c->arguments, 0).number) == 5);
+    array_at(c->arguments, 0).number->value = 6;
 }
 
 void test_native() {
@@ -49,14 +49,14 @@ void test_native() {
     header(n) = (object)fools_system->native;
 
     context_object inner = make_context((object)n, 1);
-    inner->arguments->values[0] = (object)make_number(5);
+    array_at_put(inner->arguments, 0, (object)make_number(5));
 
     context_object outer = make_context((object)fools_system->nil, 1);
-    outer->arguments->values[0] = (object)inner;
+    array_at_put(outer->arguments, 0, (object)inner);
 
     native(outer);
 
-    assert(inner->arguments->values[0].number->value == 6);
+    assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
 void test_transfer() {
@@ -66,11 +66,11 @@ void test_transfer() {
     header(n) = (object)fools_system->native;
     
     context_object inner = make_context((object)n, 1);
-    inner->arguments->values[0] = (object)make_number(5);
+    array_at_put(inner->arguments, 0, (object)make_number(5));
 
     transfer(inner);
 
-    assert(inner->arguments->values[0].number->value == 6);
+    assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
 int main() {
