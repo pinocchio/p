@@ -22,11 +22,11 @@ void test_array() {
     assert(a->size->value == 100);
     int i;
     for(i = 0; i < 100; i++) {
-        a->values[i] = (object)make_number(i);
+        array_at_put(a, i, (object)make_number(i));
     }
     
     for(i = 0; i < 100; i++) {
-        assert(a->values[i].number->value == i);
+        assert(array_at(a, i).number->value == i);
     }
 }
 
