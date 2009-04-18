@@ -111,4 +111,7 @@ extern nil_object       make_nil();
 extern context_object   make_context(object self, int size);
 extern native_object    make_native(void (*native)(context_object));
 
+extern int inline number_value(number_object number);
+extern object inline array_at(array_object array, int index);
+
 #endif // MODEL_H

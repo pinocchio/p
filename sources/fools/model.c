@@ -68,3 +68,15 @@ context_object make_context(object self, int size) {
     result->arguments = make_array(size);
     return result;
 }
+
+// Accessors
+
+int inline number_value(number_object number) {
+    return number->value;
+}
+
+object inline array_at(array_object array, int index) {
+    assert(0 <= index);
+    assert(index < number_value(array->size));
+    return array->values[index];
+}

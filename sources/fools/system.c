@@ -3,9 +3,8 @@
 #include <assert.h>
 #include <bootstrap.h>
 
-void native(context_object context) {
-    assert(context->arguments->size->value == 1);
-    context_object passed_context = context->arguments->values[0].context;
+void inline native(context_object context) {
+    context_object passed_context = array_at(context->arguments, 0).context;
     passed_context->self.native->function(passed_context);
 }
 
