@@ -21,7 +21,7 @@ test: $(OBJECTS) test.o
 	./test
 
 clean:
-	rm -rf $(OBJECTS) $(PROGRAM) $(TEST_OBJECTS) make.depend
+	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) make.depend
 
 TARBZ2=$(FULLNAME).tar.bz2
 

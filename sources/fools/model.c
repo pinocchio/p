@@ -56,9 +56,9 @@ nil_object make_nil() {
     return NEW(struct nil);
 }
 
-native_object make_native(void (*native)(context_object)) {
+native_object make_native(transfer_target native) {
     native_object result = NEW(struct native);
-    result->function = native;
+    result->target = native;
     return result;
 }
 
@@ -79,4 +79,8 @@ object inline array_at(array_object array, int index) {
     assert(0 <= index);
     assert(index < number_value(array->size));
     return array->values[index];
+}
+
+transfer_target native_target(native_object native) {
+    return native->target;
 }

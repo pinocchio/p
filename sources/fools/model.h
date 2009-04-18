@@ -37,6 +37,8 @@ typedef struct native*      native_object;
 typedef struct context*     context_object;
 typedef int**               pointer;
 
+typedef void (*transfer_target)(context_object);
+
 struct fools;
 typedef struct fools*       fools_object;
 
@@ -86,7 +88,7 @@ struct dict {
 struct nil { };
 
 struct native {
-    void (*function)(context_object);
+    transfer_target target;
 };
 
 struct context {
@@ -109,9 +111,10 @@ extern array_object     make_array(int size);
 extern dict_object      make_dict(int init_size);
 extern nil_object       make_nil();
 extern context_object   make_context(object self, int size);
-extern native_object    make_native(void (*native)(context_object));
+extern native_object    make_native(transfer_target native);
 
 extern int inline number_value(number_object number);
 extern object inline array_at(array_object array, int index);
+extern transfer_target native_target(native_object native);
 
 #endif // MODEL_H

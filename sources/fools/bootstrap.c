@@ -18,7 +18,5 @@ fools_object bootstrap() {
  
     header(fools_system->native)    = (object)fools_system->native;
 
-    assert(fools_system->native->function == &native);
-
     return fools_system;
 }

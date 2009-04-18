@@ -5,7 +5,7 @@
 
 void inline native(context_object context) {
     context_object passed_context = array_at(context->arguments, 0).context;
-    passed_context->self.native->function(passed_context);
+    native_target(passed_context->self.native)(passed_context);
 }
 
 void transfer(context_object context) {
@@ -17,5 +17,5 @@ void transfer(context_object context) {
         context->arguments->values[0] = (object)old_context;
     }
     
-    context->self.native->function(context);
+    native_target(context->self.native)(context);
 }

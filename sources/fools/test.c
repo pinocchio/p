@@ -33,7 +33,7 @@ void test_array() {
 void test_native_layout() {
     SETUP;
     assert(header(fools_system->native).native == fools_system->native);
-    assert(fools_system->native->function == &native);
+    assert(native_target(fools_system->native) == &native);
 }
 
 void native_test_single_arg_5(context_object c) {
