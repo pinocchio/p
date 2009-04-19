@@ -20,7 +20,7 @@ void with_native_class_lookup(context_object context) {
         class_context->self = class->class;
         transfer(class_context);
     } else {
-        native_target(native.native)(receiver_context);
+        native_target(native.native)(class_context);
     }
 }
 
@@ -28,8 +28,6 @@ fools_object bootstrap() {
     fools_system                    = NEW(struct fools);
     nil_object nil                  = make_nil();
     fools_system->nil               = nil;
-    //system->behaviour_class       = make_class(5, (object)nil, "Behaviour");
-    //system->class_class           = make_class(5, (object)nil, "Class");
     fools_system->native            = make_native(&native);
  
     header(fools_system->native)    = (object)fools_system->native;
