@@ -1,4 +1,5 @@
 #include <bootstrap.h>
+#include <primitives.h>
 #include <system.h>
 #include <assert.h>
 
@@ -33,10 +34,15 @@ fools_object bootstrap() {
     header(fools_system->native.pointer)    = fools_system->native;
 
     fools_system->native_metaclass          = (object)make_native(&with_native_class_lookup);
+    fools_system->symbols_known_to_the_vm   = make_array(2);
+    object s_at                             = (object)make_string("at:");
+    object s_at_put                         = (object)make_string("at:put:");
+    array_at_put(fools_system->symbols_known_to_the_vm, 0, s_at);
+    array_at_put(fools_system->symbols_known_to_the_vm, 1, s_at_put);
 
-    fools_system->dict_class                = (object)make_native_class(2);
-    //dict_at_put(fools_system->dict_class, 0, (object)symbol(make_string("at:")),     (object)make_native(&prim_dict_at));
-    //dict_at_put(fools_system->dict_class, 1, (object)symbol(make_string("at:put:")), (object)make_native(&prim_dict_at_put));
+    fools_system->dict_class                = make_native_class(2);
+    dict_at_put(fools_system->dict_class->natives, 0, s_at,     (object)make_native(&prim_dict_at));
+    dict_at_put(fools_system->dict_class->natives, 1, s_at_put, (object)make_native(&prim_dict_at_put));
 
     return fools_system;
 }

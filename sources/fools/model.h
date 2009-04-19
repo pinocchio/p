@@ -100,7 +100,8 @@ struct fools {
     nil_object          nil;
     object              native;
     object              native_metaclass;
-    object              dict_class;
+    native_class_object dict_class;
+    array_object        symbols_known_to_the_vm;
 };
 
 extern native_class_object  make_native_class(int size);
