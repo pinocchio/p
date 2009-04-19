@@ -30,9 +30,10 @@ array_object make_array(int size) {
 }
 
 dict_object make_dict(int init_size) {
-    dict_object result = NEW(struct dict);
-    result->keys       = make_array(init_size);
-    result->values     = make_array(init_size);
+    dict_object result  = NEW(struct dict);
+    result->keys        = make_array(init_size);
+    result->values      = make_array(init_size);
+    header(result)      = (object)fools_system->dict_class;
     return result;
 }
 

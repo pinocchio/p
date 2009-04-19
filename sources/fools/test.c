@@ -90,6 +90,46 @@ void test_dict() {
     assert(dict_at(dict, (object)k3).nil == fools_system->nil);
 }
 
+void test_transfer_dict() {
+    SETUP;
+
+    dict_object dict = make_dict(2);
+
+    string_object k1 = make_string("One");
+    string_object k2 = make_string("Two");
+    string_object k3 = make_string("Three");
+    number_object v1 = make_number(1);
+    number_object v2 = make_number(2);
+
+    context_object context = make_context((object)dict, 3);
+
+    printf("created context\n");
+
+    array_at_put(context->arguments,
+                 0,
+                 array_at(fools_system->symbols_known_to_the_vm, 1));
+    array_at_put(context->arguments, 1, (object)k1);
+    array_at_put(context->arguments, 2, (object)v1);
+
+    printf("transfer to context\n");
+
+    transfer(context);
+
+    printf("transferred to context\n");
+
+    array_at_put(context->arguments,
+                 0,
+                 array_at(fools_system->symbols_known_to_the_vm, 1));
+    array_at_put(context->arguments, 1, (object)k2);
+    array_at_put(context->arguments, 2, (object)v2);
+
+    transfer(context);
+
+    assert(dict_at(dict, (object)k1).number == v1);
+    assert(dict_at(dict, (object)k2).number == v2);
+    assert(dict_at(dict, (object)k3).nil == fools_system->nil);
+}
+
 void test_string_equals() {
     SETUP;
 
@@ -105,6 +145,7 @@ int main() {
     test_native();   
     test_transfer();
     test_dict();
+    test_transfer_dict();
     test_string_equals();
 
     return 0;
