@@ -101,27 +101,23 @@ void test_transfer_dict() {
     number_object v1 = make_number(1);
     number_object v2 = make_number(2);
 
-    context_object context = make_context((object)dict, 3);
-
-    printf("created context\n");
+    context_object context = make_context((object)dict, 4);
 
     array_at_put(context->arguments,
                  0,
                  array_at(fools_system->symbols_known_to_the_vm, 1));
-    array_at_put(context->arguments, 1, (object)k1);
-    array_at_put(context->arguments, 2, (object)v1);
-
-    printf("transfer to context\n");
+    array_at_put(context->arguments, 1, (object)make_number(0));
+    array_at_put(context->arguments, 2, (object)k1);
+    array_at_put(context->arguments, 3, (object)v1);
 
     transfer(context);
 
-    printf("transferred to context\n");
-
     array_at_put(context->arguments,
                  0,
                  array_at(fools_system->symbols_known_to_the_vm, 1));
-    array_at_put(context->arguments, 1, (object)k2);
-    array_at_put(context->arguments, 2, (object)v2);
+    array_at_put(context->arguments, 1, (object)make_number(1));
+    array_at_put(context->arguments, 2, (object)k2);
+    array_at_put(context->arguments, 3, (object)v2);
 
     transfer(context);
 
@@ -149,5 +145,4 @@ int main() {
     test_string_equals();
 
     return 0;
-    
 }

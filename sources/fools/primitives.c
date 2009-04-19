@@ -21,8 +21,10 @@ void prim_dict_at(context_object context) {
 }
 
 void prim_dict_at_put(context_object context) {
-    number_object index = array_at(context->arguments, 0).number;
-    object key          = array_at(context->arguments, 1);
-    object value        = array_at(context->arguments, 2);
-    dict_at_put(context->self.dict, number_value(index), key, value);
+    context_object receiver = array_at(context->arguments, 0).context;
+    // arguments at: 0 -> selector
+    number_object index     = array_at(receiver->arguments, 1).number;
+    object key              = array_at(receiver->arguments, 2);
+    object value            = array_at(receiver->arguments, 3);
+    dict_at_put(receiver->self.dict, number_value(index), key, value);
 }
