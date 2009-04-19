@@ -9,12 +9,9 @@ void inline native(context_object context) {
 }
 
 void inline transfer(context_object context) {
-    context_object old_context;
 
     while (context->self.pointer != fools_system->native.pointer) {
-        old_context = context;
-        context = make_context(header(context->self.pointer), 1);
-        array_at_put(context->arguments, 0, (object)old_context);
+        context = make_meta_context(context);
     }
     
     native_target(context->self.native)(context);

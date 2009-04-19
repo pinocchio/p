@@ -110,6 +110,7 @@ extern number_object        make_number(int value);
 extern array_object         make_array(int size);
 extern dict_object          make_dict(int init_size);
 extern nil_object           make_nil();
+extern context_object       inline make_meta_context(context_object context);
 extern context_object       make_context(object self, int size);
 extern native_object        make_native(transfer_target native);
 

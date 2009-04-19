@@ -55,6 +55,12 @@ context_object make_context(object self, int size) {
     return result;
 }
 
+context_object inline make_meta_context(context_object context) {
+    context_object result = make_context(header(context->self.pointer), 1);
+    array_at_put(result->arguments, 0, (object)context);
+    return result;
+}
+
 // Accessors
 
 int inline number_value(number_object number) {
