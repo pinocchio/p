@@ -100,7 +100,8 @@ struct fools {
     nil_object          nil;
     object              behaviour_class;
     object              class_class;
-    native_object       native;
+    object              native;
+    object              native_metaclass;
 };
 
 extern native_class_object  make_native_class(int size, object class);

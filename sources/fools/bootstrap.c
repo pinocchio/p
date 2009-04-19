@@ -25,12 +25,14 @@ void with_native_class_lookup(context_object context) {
 }
 
 fools_object bootstrap() {
-    fools_system                    = NEW(struct fools);
-    nil_object nil                  = make_nil();
-    fools_system->nil               = nil;
-    fools_system->native            = make_native(&native);
+    fools_system                            = NEW(struct fools);
+    nil_object nil                          = make_nil();
+    fools_system->nil                       = nil;
+    fools_system->native                    = (object)make_native(&native);
  
-    header(fools_system->native)    = (object)fools_system->native;
+    header(fools_system->native.pointer)    = fools_system->native;
+
+    fools_system->native_metaclass          = (object)make_native(&with_native_class_lookup);
 
     return fools_system;
 }

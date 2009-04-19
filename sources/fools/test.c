@@ -32,8 +32,8 @@ void test_array() {
 
 void test_native_layout() {
     SETUP;
-    assert(header(fools_system->native).native == fools_system->native);
-    assert(native_target(fools_system->native) == &native);
+    assert(header(fools_system->native.pointer).pointer == fools_system->native.pointer);
+    assert(native_target(fools_system->native.native) == &native);
 }
 
 void native_test_single_arg_5(context_object c) {
@@ -46,7 +46,6 @@ void test_native() {
     SETUP;
 
     native_object n = make_native(&native_test_single_arg_5);
-    header(n) = (object)fools_system->native;
 
     context_object inner = make_context((object)n, 1);
     array_at_put(inner->arguments, 0, (object)make_number(5));
@@ -82,7 +81,6 @@ void test_transfer() {
     SETUP;
 
     native_object n = make_native(&native_test_single_arg_5);
-    header(n) = (object)fools_system->native;
     
     context_object inner = make_context((object)n, 1);
     array_at_put(inner->arguments, 0, (object)make_number(5));

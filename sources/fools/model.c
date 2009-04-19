@@ -7,6 +7,7 @@ native_class_object make_native_class(int size, object class) {
     native_class_object result  = NEW(struct native_class);
     result->natives             = make_dict(size);
     result->class               = class;
+    header(result)              = fools_system->native_metaclass;
     return result;
 }
 
@@ -41,8 +42,9 @@ nil_object make_nil() {
 }
 
 native_object make_native(transfer_target native) {
-    native_object result = NEW(struct native);
-    result->target = native;
+    native_object result    = NEW(struct native);
+    header(result)          = fools_system->native;
+    result->target          = native;
     return result;
 }
 
