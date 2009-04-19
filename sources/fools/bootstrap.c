@@ -18,10 +18,10 @@ void with_native_class_lookup(context_object context) {
 
     if (native.nil == fools_system->nil) {
         class_context->self = class->class;
-        transfer(class_context);
     } else {
-        native_target(native.native)(class_context);
+        class_context->self = native;
     }
+    transfer(class_context);
 }
 
 fools_object bootstrap() {
@@ -33,6 +33,10 @@ fools_object bootstrap() {
     header(fools_system->native.pointer)    = fools_system->native;
 
     fools_system->native_metaclass          = (object)make_native(&with_native_class_lookup);
+
+    fools_system->dict_class                = (object)make_native_class(2);
+    //dict_at_put(fools_system->dict_class, 0, (object)symbol(make_string("at:")),     (object)make_native(&prim_dict_at));
+    //dict_at_put(fools_system->dict_class, 1, (object)symbol(make_string("at:put:")), (object)make_native(&prim_dict_at_put));
 
     return fools_system;
 }

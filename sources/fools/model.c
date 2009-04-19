@@ -3,10 +3,9 @@
 #include <assert.h>
 #include <bootstrap.h>
 
-native_class_object make_native_class(int size, object class) {
+native_class_object make_native_class(int size) {
     native_class_object result  = NEW(struct native_class);
     result->natives             = make_dict(size);
-    result->class               = class;
     header(result)              = fools_system->native_metaclass;
     return result;
 }
@@ -61,6 +60,14 @@ int inline number_value(number_object number) {
     return number->value;
 }
 
+char* string_value(string_object string) {
+    return string->value;
+}
+
+number_object inline string_size(string_object string) {
+    return string->size;
+}
+
 number_object inline array_size(array_object array) {
     return array->size;
 }
@@ -88,7 +95,7 @@ void inline array_at_put(array_object array, int index, object new_value) {
     raw_array_at_put(array, index, new_value);
 }
 
-transfer_target native_target(native_object native) {
+transfer_target inline native_target(native_object native) {
     return native->target;
 }
 
@@ -107,4 +114,13 @@ object inline dict_at(dict_object dict, object key) {
 void inline dict_at_put(dict_object dict, int index, object key, object value) {
     array_at_put(dict->keys, index, key);
     array_at_put(dict->values, index, value);
+}
+
+int inline string_equals(string_object string1, string_object string2) {
+    int left_size   = number_value(string_size(string1));
+    int right_size  = number_value(string_size(string2));
+    return (left_size == right_size) &&
+           (strncmp(string_value(string1),
+                   string_value(string2),
+                   left_size) == 0);
 }

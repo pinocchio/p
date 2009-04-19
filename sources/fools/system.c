@@ -8,7 +8,7 @@ void inline native(context_object context) {
     native_target(passed_context->self.native)(passed_context);
 }
 
-void transfer(context_object context) {
+void inline transfer(context_object context) {
     context_object old_context;
 
     while (context->self.pointer != fools_system->native.pointer) {

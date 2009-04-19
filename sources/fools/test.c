@@ -32,7 +32,7 @@ void test_array() {
 
 void test_native_layout() {
     SETUP;
-    assert(header(fools_system->native.pointer).pointer == fools_system->native.pointer);
+    assert(header(fools_system->native.pointer).native == fools_system->native.native);
     assert(native_target(fools_system->native.native) == &native);
 }
 
@@ -58,6 +58,19 @@ void test_native() {
     assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
+void test_transfer() {
+    SETUP;
+
+    native_object n = make_native(&native_test_single_arg_5);
+    
+    context_object inner = make_context((object)n, 1);
+    array_at_put(inner->arguments, 0, (object)make_number(5));
+
+    transfer(inner);
+
+    assert(number_value(array_at(inner->arguments, 0).number) == 6);
+}
+
 void test_dict() {
     SETUP;
 
@@ -77,17 +90,11 @@ void test_dict() {
     assert(dict_at(dict, (object)k3).nil == fools_system->nil);
 }
 
-void test_transfer() {
+void test_string_equals() {
     SETUP;
 
-    native_object n = make_native(&native_test_single_arg_5);
-    
-    context_object inner = make_context((object)n, 1);
-    array_at_put(inner->arguments, 0, (object)make_number(5));
-
-    transfer(inner);
-
-    assert(number_value(array_at(inner->arguments, 0).number) == 6);
+    assert(string_equals(make_string("a string"), make_string("a string")));
+    assert(!string_equals(make_string("a string"), make_string("b string")));
 }
 
 int main() {
@@ -98,6 +105,7 @@ int main() {
     test_native();   
     test_transfer();
     test_dict();
+    test_string_equals();
 
     return 0;
     

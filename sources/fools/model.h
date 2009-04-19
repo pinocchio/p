@@ -98,13 +98,12 @@ struct context {
 
 struct fools {
     nil_object          nil;
-    object              behaviour_class;
-    object              class_class;
     object              native;
     object              native_metaclass;
+    object              dict_class;
 };
 
-extern native_class_object  make_native_class(int size, object class);
+extern native_class_object  make_native_class(int size);
 extern string_object        make_string(const char* value);
 extern number_object        make_number(int value);
 extern array_object         make_array(int size);
@@ -113,11 +112,12 @@ extern nil_object           make_nil();
 extern context_object       make_context(object self, int size);
 extern native_object        make_native(transfer_target native);
 
-extern int inline number_value(number_object number);
-extern object inline array_at(array_object array, int index);
-extern void inline array_at_put(array_object array, int index, object new_value);
-extern transfer_target native_target(native_object native);
-extern object inline dict_at(dict_object dict, object key);
-extern void inline dict_at_put(dict_object dict, int index, object key, object value);
+extern int              inline number_value(number_object number);
+extern object           inline array_at(array_object array, int index);
+extern void             inline array_at_put(array_object array, int index, object new_value);
+extern transfer_target  inline native_target(native_object native);
+extern object           inline dict_at(dict_object dict, object key);
+extern void             inline dict_at_put(dict_object dict, int index, object key, object value);
+extern int              inline string_equals(string_object string1, string_object string2);
 
 #endif // MODEL_H
