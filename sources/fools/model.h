@@ -16,8 +16,8 @@
 
 #define header(o) (*(object*)PDEC(o))
 
-struct behaviour;
-struct class;
+struct classified_object;
+struct native_class;
 struct string;
 struct number;
 struct array;
@@ -26,16 +26,16 @@ struct nil;
 struct native;
 struct context;
 
-typedef struct behaviour*   behaviour_object;
-typedef struct class*       class_object;
-typedef struct string*      string_object;
-typedef struct number*      number_object;
-typedef struct array*       array_object;
-typedef struct dict*        dict_object;
-typedef struct nil*         nil_object;
-typedef struct native*      native_object;
-typedef struct context*     context_object;
-typedef int**               pointer;
+typedef struct classified_object*   classified_object;
+typedef struct native_class*        native_class_object;
+typedef struct string*              string_object;
+typedef struct number*              number_object;
+typedef struct array*               array_object;
+typedef struct dict*                dict_object;
+typedef struct nil*                 nil_object;
+typedef struct native*              native_object;
+typedef struct context*             context_object;
+typedef int**                       pointer;
 
 typedef void (*transfer_target)(context_object);
 
@@ -43,27 +43,27 @@ struct fools;
 typedef struct fools*       fools_object;
 
 typedef union {
-    behaviour_object behaviour;
-    class_object     class;
-    string_object    string;
-    number_object    number;
-    array_object     array;
-    dict_object      dict;
-    fools_object     fools;
-    nil_object       nil;
-    native_object    native;
-    context_object   context;
-    pointer          pointer;
+    classified_object   classified;
+    native_class_object native_class;
+    string_object       string;
+    number_object       number;
+    array_object        array;
+    dict_object         dict;
+    fools_object        fools;
+    nil_object          nil;
+    native_object       native;
+    context_object      context;
+    pointer             pointer;
 } object;
 
-struct behaviour {
-    dict_object         methods;
-    object    super;
+struct classified_object {
+    object class;
+    object fields[];
 };
 
-struct class {
-    struct behaviour    behaviour;
-    string_object       name;
+struct native_class {
+    dict_object         natives;
+    object              class;
 };
 
 struct string {
@@ -98,24 +98,25 @@ struct context {
 
 struct fools {
     nil_object          nil;
-    class_object        behaviour_class;
-    class_object        class_class;
+    object              behaviour_class;
+    object              class_class;
     native_object       native;
 };
 
-extern behaviour_object make_behaviour(int size, object super);
-extern class_object     make_class(int size, object super, const char* name);
-extern string_object    make_string(const char* value);
-extern number_object    make_number(int value);
-extern array_object     make_array(int size);
-extern dict_object      make_dict(int init_size);
-extern nil_object       make_nil();
-extern context_object   make_context(object self, int size);
-extern native_object    make_native(transfer_target native);
+extern native_class_object  make_native_class(int size, object class);
+extern string_object        make_string(const char* value);
+extern number_object        make_number(int value);
+extern array_object         make_array(int size);
+extern dict_object          make_dict(int init_size);
+extern nil_object           make_nil();
+extern context_object       make_context(object self, int size);
+extern native_object        make_native(transfer_target native);
 
 extern int inline number_value(number_object number);
 extern object inline array_at(array_object array, int index);
 extern void inline array_at_put(array_object array, int index, object new_value);
 extern transfer_target native_target(native_object native);
+extern object inline dict_at(dict_object dict, object key);
+extern void inline dict_at_put(dict_object dict, int index, object key, object value);
 
 #endif // MODEL_H

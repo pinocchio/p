@@ -59,6 +59,25 @@ void test_native() {
     assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
+void test_dict() {
+    SETUP;
+
+    dict_object dict = make_dict(2);
+
+    string_object k1 = make_string("One");
+    string_object k2 = make_string("Two");
+    string_object k3 = make_string("Three");
+    number_object v1 = make_number(1);
+    number_object v2 = make_number(2);
+
+    dict_at_put(dict, 0, (object)k1, (object)v1);
+    dict_at_put(dict, 1, (object)k2, (object)v2);
+    
+    assert(dict_at(dict, (object)k1).number == v1);
+    assert(dict_at(dict, (object)k2).number == v2);
+    assert(dict_at(dict, (object)k3).nil == fools_system->nil);
+}
+
 void test_transfer() {
     SETUP;
 
@@ -80,6 +99,7 @@ int main() {
     test_native_layout();
     test_native();   
     test_transfer();
+    test_dict();
 
     return 0;
     
