@@ -26,12 +26,11 @@ void with_native_class_lookup(context_object context) {
 }
 
 void inline define_native(native_class_object cls,
-                          int index,
                           const char* name,
                           transfer_target native) {
-    object symbol = (object)make_string(name);
-    array_at_put(fools_system->symbols_known_to_the_vm, index, symbol);
-    dict_at_put(cls->natives, index, symbol, (object)make_native(native));
+    dict_at_put(cls->natives,
+                symbol_known_to_the_vm(name),
+                (object)make_native(native));
 }
 
 fools_object bootstrap() {
@@ -43,13 +42,13 @@ fools_object bootstrap() {
     header(fools_system->native.pointer)    = fools_system->native;
 
     fools_system->native_metaclass          = (object)make_native(&with_native_class_lookup);
+
     fools_system->symbols_known_to_the_vm   = make_array(2);
+
     fools_system->dict_class                = make_native_class(2);
-
     header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
+    define_native(fools_system->dict_class, "at:",       &prim_dict_at);
+    define_native(fools_system->dict_class, "at:put:",   &prim_dict_at_put);
 
-    define_native(fools_system->dict_class, 0, "at:",       &prim_dict_at);
-    define_native(fools_system->dict_class, 1, "at:put:",   &prim_dict_at_put);
-    
     return fools_system;
 }

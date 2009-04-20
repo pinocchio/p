@@ -15,16 +15,17 @@ void prim_number_minus(context_object context) {
 }
 
 void prim_dict_at(context_object context) {
-    object* left = (object*)array_at(context->arguments, 0).pointer;
-    object key   = array_at(context->arguments, 1);
-    *left        = dict_at(context->self.dict, key);
+    context_object receiver = array_at(context->arguments, 0).context;
+    // arguments at: 0 -> selector
+    object key              = array_at(receiver->arguments, 1);
+    object* value           = (object*)array_at(receiver->arguments, 2).pointer;
+    *value = dict_at(receiver->self.dict, key);
 }
 
 void prim_dict_at_put(context_object context) {
     context_object receiver = array_at(context->arguments, 0).context;
     // arguments at: 0 -> selector
-    number_object index     = array_at(receiver->arguments, 1).number;
-    object key              = array_at(receiver->arguments, 2);
-    object value            = array_at(receiver->arguments, 3);
-    dict_at_put(receiver->self.dict, number_value(index), key, value);
+    object key              = array_at(receiver->arguments, 1);
+    object value            = array_at(receiver->arguments, 2);
+    dict_at_put(receiver->self.dict, key, value);
 }

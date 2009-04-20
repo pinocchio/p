@@ -22,6 +22,7 @@ void test_array() {
     assert(a->size->value == 100);
     int i;
     for(i = 0; i < 100; i++) {
+        assert(array_at(a, i).nil == fools_system->nil);
         array_at_put(a, i, (object)make_number(i));
     }
     
@@ -82,8 +83,8 @@ void test_dict() {
     number_object v1 = make_number(1);
     number_object v2 = make_number(2);
 
-    dict_at_put(dict, 0, (object)k1, (object)v1);
-    dict_at_put(dict, 1, (object)k2, (object)v2);
+    dict_at_put(dict, (object)k1, (object)v1);
+    dict_at_put(dict, (object)k2, (object)v2);
     
     assert(dict_at(dict, (object)k1).number == v1);
     assert(dict_at(dict, (object)k2).number == v2);
@@ -103,27 +104,40 @@ void test_transfer_dict() {
 
     context_object context = make_context((object)dict, 4);
 
-    array_at_put(context->arguments,
-                 0,
-                 array_at(fools_system->symbols_known_to_the_vm, 1));
-    array_at_put(context->arguments, 1, (object)make_number(0));
-    array_at_put(context->arguments, 2, (object)k1);
-    array_at_put(context->arguments, 3, (object)v1);
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("at:put:"));
+    array_at_put(context->arguments, 1, (object)k1);
+    array_at_put(context->arguments, 2, (object)v1);
 
     transfer(context);
 
-    array_at_put(context->arguments,
-                 0,
-                 array_at(fools_system->symbols_known_to_the_vm, 1));
-    array_at_put(context->arguments, 1, (object)make_number(1));
-    array_at_put(context->arguments, 2, (object)k2);
-    array_at_put(context->arguments, 3, (object)v2);
+    array_at_put(context->arguments, 1, (object)k2);
+    array_at_put(context->arguments, 2, (object)v2);
 
     transfer(context);
 
     assert(dict_at(dict, (object)k1).number == v1);
     assert(dict_at(dict, (object)k2).number == v2);
     assert(dict_at(dict, (object)k3).nil == fools_system->nil);
+
+    context = make_context((object)dict, 3);
+    object result;
+
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("at:"));
+    array_at_put(context->arguments, 1, (object)k1);
+    array_at_put(context->arguments, 2, (object)(pointer)&result);
+
+    transfer(context);
+    assert(result.number == v1);
+
+    array_at_put(context->arguments, 1, (object)k2);
+
+    transfer(context);
+    assert(result.number == v2);
+
+    array_at_put(context->arguments, 1, (object)k3);
+
+    transfer(context);
+    assert(result.nil == fools_system->nil);
 }
 
 void test_string_equals() {

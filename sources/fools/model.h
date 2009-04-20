@@ -94,6 +94,7 @@ struct native {
 struct context {
     object              self;
     array_object        arguments;
+    object              return_context;
 };
 
 struct fools {
@@ -117,9 +118,11 @@ extern native_object        make_native(transfer_target native);
 extern int              inline number_value(number_object number);
 extern object           inline array_at(array_object array, int index);
 extern void             inline array_at_put(array_object array, int index, object new_value);
+extern void             inline raw_array_at_put(array_object array, int index, object new_value);
 extern transfer_target  inline native_target(native_object native);
 extern object           inline dict_at(dict_object dict, object key);
-extern void             inline dict_at_put(dict_object dict, int index, object key, object value);
+extern void             inline dict_at_put(dict_object dict, object key, object value);
 extern int              inline string_equals(string_object string1, string_object string2);
+extern object           inline symbol_known_to_the_vm(const char* string);
 
 #endif // MODEL_H

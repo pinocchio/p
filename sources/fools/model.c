@@ -26,6 +26,10 @@ number_object make_number(int value) {
 array_object make_array(int size) {
     array_object result = (array_object)NEW_ARRAYED(object, size + 1);
     result->size        = make_number(size);
+    int i;
+    for (i = 0; i < size; i++) {
+        raw_array_at_put(result, i, (object)fools_system->nil);
+    }
     return result;
 }
 
@@ -49,9 +53,10 @@ native_object make_native(transfer_target native) {
 }
 
 context_object make_context(object self, int size) {
-    context_object result = NEW(struct context);
-    result->self = self;
-    result->arguments = make_array(size);
+    context_object result   = NEW(struct context);
+    result->self            = self;
+    result->arguments       = make_array(size);
+    result->return_context  = (object)fools_system->nil;
     return result;
 }
 
@@ -106,20 +111,34 @@ transfer_target inline native_target(native_object native) {
     return native->target;
 }
 
-object inline dict_at(dict_object dict, object key) {
-    array_object keys   = dict->keys;
-    array_object values = dict->values;
+int inline dict_index_of(dict_object dict, object key) {
+    array_object keys = dict->keys;
+
     int i;
     for (i = 0; i < number_value(array_size(keys)); i++) {
         if (raw_array_at(keys, i).pointer == key.pointer) {
-            return raw_array_at(values, i);
+            return i;
         }
     }
-    return (object)fools_system->nil;
+    return -1;
 }
 
-void inline dict_at_put(dict_object dict, int index, object key, object value) {
-    array_at_put(dict->keys, index, key);
+object inline dict_at(dict_object dict, object key) {
+    int index = dict_index_of(dict, key);
+    if (index == -1) {
+        return (object)fools_system->nil;
+    } else {
+        return array_at(dict->values, index);
+    }
+}
+
+void inline dict_at_put(dict_object dict, object key, object value) {
+    int index = dict_index_of(dict, key);
+    if (index == -1) {
+        index = dict_index_of(dict, (object)fools_system->nil);
+        assert(index != -1);
+        array_at_put(dict->keys, index, key);
+    }
     array_at_put(dict->values, index, value);
 }
 
@@ -130,4 +149,24 @@ int inline string_equals(string_object string1, string_object string2) {
            (strncmp(string_value(string1),
                    string_value(string2),
                    left_size) == 0);
+}
+
+object inline symbol_known_to_the_vm(const char* string) {
+    array_object symbols = fools_system->symbols_known_to_the_vm;
+    string_object the_string = make_string(string);
+    int i;
+    for (i = 0; i < number_value(array_size(symbols)); i++) {
+        object o = raw_array_at(symbols, i);
+
+        if (o.nil == fools_system->nil) {
+            array_at_put(symbols, i, (object)the_string);
+            return (object)the_string;
+        }
+
+        if (string_equals(o.string, the_string)) {
+            return o;
+        }
+    }
+
+    assert(NULL);
 }
