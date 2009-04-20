@@ -132,12 +132,35 @@ object inline dict_at(dict_object dict, object key) {
     }
 }
 
+void inline dict_expand(dict_object dict) {
+    array_object old_keys   = dict->keys;
+    array_object old_values = dict->values;
+    int old_size = number_value(array_size(old_keys));
+    int size = 2 * old_size;
+
+    dict->keys = make_array(size);
+    dict->values = make_array(size);
+
+    for (--old_size; old_size >= 0; old_size--) {
+        array_at_put(dict->keys,    old_size, array_at(old_keys,   old_size));
+        array_at_put(dict->values,  old_size, array_at(old_values, old_size));
+    }
+}
+
+int inline dict_bind_key(dict_object dict, object key) {
+    int index = dict_index_of(dict, (object)fools_system->nil);
+    if (index == -1) {
+        index = number_value(array_size(dict->keys));
+        dict_expand(dict);
+    }
+    array_at_put(dict->keys, index, key);
+    return index;
+}
+
 void inline dict_at_put(dict_object dict, object key, object value) {
     int index = dict_index_of(dict, key);
     if (index == -1) {
-        index = dict_index_of(dict, (object)fools_system->nil);
-        assert(index != -1);
-        array_at_put(dict->keys, index, key);
+        index = dict_bind_key(dict, key);
     }
     array_at_put(dict->values, index, value);
 }
