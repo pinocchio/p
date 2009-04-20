@@ -96,7 +96,7 @@ void inline array_check_bounds(array_object array, int index) {
 }
 
 object inline raw_array_at(array_object array, int index) {
-    return object_at((variable_object)array, index + 1);
+    return array->values[index];
 }
 
 object inline array_at(array_object array, int index) {
@@ -105,7 +105,7 @@ object inline array_at(array_object array, int index) {
 }
 
 void inline raw_array_at_put(array_object array, int index, object new_value) {
-    object_at_put((variable_object)array, index + 1, new_value);
+    array->values[index] = new_value;
 }
 
 void inline array_at_put(array_object array, int index, object new_value) {
