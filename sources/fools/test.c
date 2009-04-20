@@ -20,7 +20,9 @@ void test_array() {
 
     array_object a = make_array(100);
     assert(a->size->value == 100);
+
     int i;
+
     for(i = 0; i < 100; i++) {
         assert(array_at(a, i).nil == fools_system->nil);
         array_at_put(a, i, (object)make_number(i));
@@ -145,6 +147,16 @@ void test_transfer_dict() {
 
     transfer(context);
     assert(result.nil == fools_system->nil);
+}
+
+void test_variable_object() {
+    variable_object result = make_object(10, (object)fools_system->nil);
+
+    assert(header(result).nil == fools_system->nil);
+    int i;
+    for (i = 0; i < 10; i++) {
+        assert(object_at(result, i).nil == fools_system->nil);
+    }
 }
 
 int main() {

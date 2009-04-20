@@ -8,15 +8,15 @@
 #define PINC(p) (((pointer) p) + 1) 
 #define PDEC(p) (((pointer) p) - 1)
 
-#define NEW(layout) NEW_ARRAYED(layout, 1)
+#define NEW(layout) NEW_ARRAYED(layout*, layout, 1)
 
-#define NEW_ARRAYED(layout, size) \
-            (layout*)(\
+#define NEW_ARRAYED(type, layout, size) \
+            (type)(\
                PINC(malloc(header_size + sizeof(layout[size]))))
 
 #define header(o) (*(object*)PDEC(o))
 
-struct classified_object;
+struct variable_object;
 struct native_class;
 struct string;
 struct number;
@@ -26,16 +26,16 @@ struct nil;
 struct native;
 struct context;
 
-typedef struct classified_object*   classified_object;
-typedef struct native_class*        native_class_object;
-typedef struct string*              string_object;
-typedef struct number*              number_object;
-typedef struct array*               array_object;
-typedef struct dict*                dict_object;
-typedef struct nil*                 nil_object;
-typedef struct native*              native_object;
-typedef struct context*             context_object;
-typedef int**                       pointer;
+typedef struct variable_object* variable_object;
+typedef struct native_class*    native_class_object;
+typedef struct string*          string_object;
+typedef struct number*          number_object;
+typedef struct array*           array_object;
+typedef struct dict*            dict_object;
+typedef struct nil*             nil_object;
+typedef struct native*          native_object;
+typedef struct context*         context_object;
+typedef int**                   pointer;
 
 typedef void (*transfer_target)(context_object);
 
@@ -43,7 +43,7 @@ struct fools;
 typedef struct fools*       fools_object;
 
 typedef union {
-    classified_object   classified;
+    variable_object     object;
     native_class_object native_class;
     string_object       string;
     number_object       number;
@@ -56,9 +56,8 @@ typedef union {
     pointer             pointer;
 } object;
 
-struct classified_object {
-    object class;
-    object fields[];
+struct variable_object {
+    object fields[0]; // 0 to tell CC that it can be empty.
 };
 
 struct native_class {
@@ -105,6 +104,7 @@ struct fools {
     array_object        symbols_known_to_the_vm;
 };
 
+extern variable_object      make_object(int size, object interpreter);
 extern native_class_object  make_native_class(int size);
 extern string_object        make_string(const char* value);
 extern number_object        make_number(int value);
@@ -117,12 +117,18 @@ extern native_object        make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);
 extern object           inline array_at(array_object array, int index);
-extern void             inline array_at_put(array_object array, int index, object new_value);
-extern void             inline raw_array_at_put(array_object array, int index, object new_value);
+extern void             inline array_at_put(array_object array,
+                                            int index, object new_value);
+extern void             inline raw_array_at_put(array_object array,
+                                                int index, object new_value);
 extern transfer_target  inline native_target(native_object native);
 extern object           inline dict_at(dict_object dict, object key);
 extern void             inline dict_at_put(dict_object dict, object key, object value);
-extern int              inline string_equals(string_object string1, string_object string2);
+extern int              inline string_equals(string_object string1,
+                                             string_object string2);
 extern object           inline symbol_known_to_the_vm(const char* string);
+extern object           inline object_at(variable_object object, int index);
+extern void             inline object_at_put(variable_object o,
+                                             int index, object value);
 
 #endif // MODEL_H

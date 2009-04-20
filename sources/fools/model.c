@@ -3,6 +3,12 @@
 #include <assert.h>
 #include <bootstrap.h>
 
+variable_object make_object(int size, object interpreter) {
+    variable_object result  = NEW_ARRAYED(variable_object, object, size);
+    header(result)          = interpreter;
+    return result;
+}
+
 native_class_object make_native_class(int size) {
     native_class_object result  = NEW(struct native_class);
     result->natives             = make_dict(size);
@@ -24,7 +30,7 @@ number_object make_number(int value) {
 }
 
 array_object make_array(int size) {
-    array_object result = (array_object)NEW_ARRAYED(object, size + 1);
+    array_object result = NEW_ARRAYED(array_object, object, size + 1);
     result->size        = make_number(size);
     int i;
     for (i = 0; i < size; i++) {
@@ -90,7 +96,7 @@ void inline array_check_bounds(array_object array, int index) {
 }
 
 object inline raw_array_at(array_object array, int index) {
-    return array->values[index];
+    return object_at((variable_object)array, index + 1);
 }
 
 object inline array_at(array_object array, int index) {
@@ -99,7 +105,7 @@ object inline array_at(array_object array, int index) {
 }
 
 void inline raw_array_at_put(array_object array, int index, object new_value) {
-    array->values[index] = new_value;
+    object_at_put((variable_object)array, index + 1, new_value);
 }
 
 void inline array_at_put(array_object array, int index, object new_value) {
@@ -192,4 +198,12 @@ object inline symbol_known_to_the_vm(const char* string) {
     }
 
     assert(NULL);
+}
+
+object inline object_at(variable_object object, int index) {
+    return object->fields[index];
+}
+
+void inline object_at_put(variable_object o, int index, object value) {
+    o->fields[index] = value;
 }
