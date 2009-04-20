@@ -72,6 +72,13 @@ void test_transfer() {
     assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
+void test_string_equals() {
+    SETUP;
+
+    assert(string_equals(make_string("a string"), make_string("a string")));
+    assert(!string_equals(make_string("a string"), make_string("b string")));
+}
+
 void test_dict() {
     SETUP;
 
@@ -140,13 +147,6 @@ void test_transfer_dict() {
     assert(result.nil == fools_system->nil);
 }
 
-void test_string_equals() {
-    SETUP;
-
-    assert(string_equals(make_string("a string"), make_string("a string")));
-    assert(!string_equals(make_string("a string"), make_string("b string")));
-}
-
 int main() {
     
     test_header();
@@ -154,9 +154,9 @@ int main() {
     test_native_layout();
     test_native();   
     test_transfer();
+    test_string_equals();
     test_dict();
     test_transfer_dict();
-    test_string_equals();
 
     return 0;
 }
