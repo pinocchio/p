@@ -6,6 +6,10 @@
 variable_object make_object(int size, object interpreter) {
     variable_object result  = NEW_ARRAYED(variable_object, object, size);
     header(result)          = interpreter;
+    int i;
+    for (i = 0; i < size; i++) {
+        object_at_put(result, i, (object)fools_system->nil);
+    }
     return result;
 }
 
@@ -30,12 +34,9 @@ number_object make_number(int value) {
 }
 
 array_object make_array(int size) {
-    array_object result = NEW_ARRAYED(array_object, object, size + 1);
+    array_object result = (array_object)make_object(size + 1,
+                                                    (object)fools_system->nil);
     result->size        = make_number(size);
-    int i;
-    for (i = 0; i < size; i++) {
-        raw_array_at_put(result, i, (object)fools_system->nil);
-    }
     return result;
 }
 

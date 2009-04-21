@@ -159,6 +159,26 @@ void test_variable_object() {
     }
 }
 
+void test_return_from_context() {
+    SETUP;
+
+    context_object from = make_context((object)fools_system->nil, 0);
+    return_from_context(from);
+
+    native_object n = make_native(&native_test_single_arg_5);
+    
+    context_object to = make_context((object)n, 1);
+    array_at_put(to->arguments, 0, (object)make_number(5));
+
+    from->return_context = (object)to;
+
+    return_from_context(from);
+
+    assert(number_value(array_at(to->arguments, 0).number) == 6);
+}
+
+
+
 int main() {
     
     test_header();
@@ -169,6 +189,8 @@ int main() {
     test_string_equals();
     test_dict();
     test_transfer_dict();
+    test_variable_object();
+    test_return_from_context();
 
     return 0;
 }

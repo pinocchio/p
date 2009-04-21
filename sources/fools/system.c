@@ -16,3 +16,10 @@ void inline transfer(context_object context) {
     
     native_target(context->self.native)(context);
 }
+
+void inline return_from_context(context_object context) {
+    object return_context = context->return_context;
+    if (return_context.nil != fools_system->nil) {
+        transfer(return_context.context);
+    }
+}
