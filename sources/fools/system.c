@@ -35,6 +35,7 @@ void inline return_from_context(context_object context) {
 
 // AST Handling
 
+// ilist>>eval
 void ilist_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
     ilist_object ilist = (ilist_object)ilist_context->self.pointer;
@@ -50,6 +51,7 @@ void ilist_eval(context_object context) {
     transfer(ilist_context);
 }
 
+// ilist>>continue:
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
     int index = number_value(array_at(ilist_context->arguments, 1).number);
@@ -72,27 +74,7 @@ void ilist_continue_eval(context_object context) {
     transfer(context);
 }
 
-/*
-void iassign_eval(context_object context) {
-    context_object iassign_context = array_at(context->arguments, 0).context;
-    iassign_object assignment = (iassign_object)iassign_context->self.pointer;
-    iassign_context->self = assignment->expression;
-    return_context_object return_context =
-        make_return_context(fools_system->iassign_continue_eval, 1);
-    array_at_put(return_context->arguments, 0, assignment);
-    expression_context->return_context = return_context;
-}
-
-void iassign_continue_eval(context_object context) {
-    return_context_object return_context = (return_context_object)context;
-    iassign_object assignment =
-        array_at(return_context->arguments, 0).instruction.assignment;
-
-    *assignment->variable = return_context->return_value;
-    return_from_context(context);
-}
-*/
-
+// idoit>>eval
 void idoit_eval(context_object context) {
     context_object idoit_context = array_at(context->arguments, 0).context;
     idoit_object idoit = idoit_context->self.instruction.idoit;
@@ -106,12 +88,14 @@ void idoit_eval(context_object context) {
     transfer(idoit_context);
 }
 
+// idoit>>evalReturn:
 void idoit_continue_eval(context_object context) {
     context_object idoit_context = array_at(context->arguments, 0).context;
-
+    // ignore the result at arg:1
     return_from_context(idoit_context);
 }
 
+// iconst>>eval
 void iconst_eval(context_object context) {
     context_object iconst_context = array_at(context->arguments, 0).context;
     iconst_object iconst = iconst_context->self.instruction.iconst;
