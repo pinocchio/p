@@ -239,10 +239,7 @@ SETUP(test_icall)
     icall_object icall = make_icall((object)n, 1);
     array_at_put(icall->arguments, 0, (object)make_number(5));
 
-    context_object ci = make_context((object)(instruction)icall, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
-
-    transfer(ci);
+    eval_instruction((instruction)icall);
 
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }

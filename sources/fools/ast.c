@@ -53,3 +53,10 @@ void inline ilist_at_put(ilist_object ilist, int index, instruction value) {
     ilist_check_bounds(ilist, index);
     raw_ilist_at_put(ilist, index, value);
 }
+
+void inline eval_instruction(instruction instruction) {
+    // TODO: cache array with eval
+    context_object context = make_context((object)instruction, 1);
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
+    transfer(context);
+}
