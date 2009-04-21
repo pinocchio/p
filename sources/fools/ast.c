@@ -20,6 +20,17 @@ icall_object make_icall() {
     return result;
 }
 
+iconst_object make_iconst(object constant) {
+    iconst_object result = NEW(struct constant);
+    result->constant = constant;
+    return result;
+}
+
+idoit_object make_idoit() {
+    idoit_object result = NEW(struct doit);
+    return result;
+}
+
 
 // Accessors 
 

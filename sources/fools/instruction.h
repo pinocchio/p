@@ -4,15 +4,21 @@
 struct instruction_list;
 struct assignment;
 struct callable;
+struct doit;
+struct constant;
 
 typedef struct instruction_list* ilist_object;
+typedef struct doit*             idoit_object;
 typedef struct assignment*       iassign_object;
 typedef struct callable*         icall_object;
+typedef struct constant*         iconst_object;
 
 typedef union {
+    idoit_object        idoit;
     ilist_object        ilist;
-    iassign_object      assignment;
-    icall_object        callable;
+    iassign_object      iassignm;
+    icall_object        icall;
+    iconst_object       iconst;
 } instruction;
 
 #endif // INSTRUCTION_H

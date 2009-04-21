@@ -8,9 +8,17 @@ struct instruction_list {
     instruction     instructions[];
 };
 
+struct doit {
+    object          expression;
+};
+
 struct assignment {
     object*         variable;
     object          expression;
+};
+
+struct constant {
+    object          constant;
 };
 
 struct callable {
@@ -18,9 +26,11 @@ struct callable {
     object          arguments[];
 };
 
-extern ilist_object make_ilist(int size);
-extern iassign_object make_iassign();
-extern icall_object make_icall();
+extern ilist_object     make_ilist(int size);
+extern iassign_object   make_iassign();
+extern icall_object     make_icall();
+extern iconst_object    make_iconst(object constant);
+extern idoit_object     make_idoit();
 
 
 extern instruction  inline raw_ilist_at(ilist_object ilist, int index);
