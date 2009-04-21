@@ -33,6 +33,22 @@ void inline return_from_context(context_object context) {
 
 // AST Handling
 
+void ilist_eval(context_object context) {
+    context_object ilist_context = array_at(context->arguments, 0).context;
+    ilist_object ilist = (ilist_object)ilist_context->self.pointer;
+
+    if (number_value(ilist->size) == 0) {
+        return return_from_context(context);
+    }
+    
+    context->self       = fools_system->ilist_continue_eval;
+    context->arguments  = make_array(2);
+    array_at_put(context->arguments, 0, (object)ilist_context);
+    array_at_put(context->arguments, 1, (object)make_number(0));
+
+    transfer(context);
+}
+
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
     int index = number_value(array_at(context->arguments, 1).number);
@@ -54,27 +70,28 @@ void ilist_continue_eval(context_object context) {
     transfer(context);
 }
 
-void ilist_eval(context_object context) {
-    context_object ilist_context = array_at(context->arguments, 0).context;
-    ilist_object ilist = (ilist_object)ilist_context->self.pointer;
-
-    if (number_value(ilist->size) == 0) {
-        return return_from_context(context);
-    }
-    
-    context->self       = fools_system->ilist_continue_eval;
-    context->arguments  = make_array(2);
-    array_at_put(context->arguments, 0, (object)ilist_context);
-    array_at_put(context->arguments, 1, (object)make_number(0));
-
-    transfer(context);
-}
-
-void ilist_assignment(context_object context) {
+/** WORK IN PROGRESS
+ *
+void iassign_eval(context_object context) {
     context_object iassign_context = array_at(context->arguments, 0).context;
     iassign_object assignment = (iassign_object)iassign_context->self.pointer;
-
+    context->self       = assignment->expression;
+    context->arguments  = make_array(0);
+    return_context_object return_context =
+        make_return_context(fools_system->iassign_continue_eval, 1);
+    array_at_put(return_context->arguments, 0, assignment);
+    expression_context->return_context = return_context;
 }
+
+void iassign_continue_eval(context_object context) {
+    return_context_object return_context = (return_context_object)context;
+    iassign_object assignment =
+        array_at(return_context->arguments, 0).instruction.assignment;
+
+    *assignment->variable = return_context->return_value;
+    return_from_context(context);
+}
+*/
 
 // Native class handling
 
