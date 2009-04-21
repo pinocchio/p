@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <model.h>
+#include <ast.h>
 #include <bootstrap.h>
 #include <stdio.h>
 #include <system.h>
@@ -177,7 +178,26 @@ void test_return_from_context() {
     assert(number_value(array_at(to->arguments, 0).number) == 6);
 }
 
+void test_transfer_empty_ilist() {
+    SETUP;
 
+    ilist_object ilist = make_ilist(0);
+
+    context_object ci = make_context((object)(instruction)ilist, 0);
+    transfer(ci);
+}
+
+void test_transfer_empty_ilist_in_ilist() {
+    SETUP;
+
+    ilist_object ilist  = make_ilist(1);
+    ilist_object ilist2 = make_ilist(0);
+
+    ilist_at_put(ilist, 0, (instruction)ilist2);
+
+    context_object ci = make_context((object)(instruction)ilist, 0);
+    transfer(ci);
+}
 
 int main() {
     
@@ -191,6 +211,8 @@ int main() {
     test_transfer_dict();
     test_variable_object();
     test_return_from_context();
+    test_transfer_empty_ilist();
+    test_transfer_empty_ilist_in_ilist();
 
     return 0;
 }

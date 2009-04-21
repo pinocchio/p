@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include <stdlib.h>
+#include <instruction.h>
 
 #define header_size sizeof(object)
 
@@ -53,6 +54,7 @@ typedef union {
     nil_object          nil;
     native_object       native;
     context_object      context;
+    instruction         instruction;
     pointer             pointer;
 } object;
 
@@ -100,6 +102,8 @@ struct fools {
     nil_object          nil;
     object              native;
     object              native_metaclass;
+    object              ilist_metaclass;
+    object              ilist_continue_eval;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
 };
