@@ -42,28 +42,26 @@ void ilist_eval(context_object context) {
     if (number_value(ilist->size) == 0) {
         return return_from_context(ilist_context);
     }
-    
-    context->self       = (object)fools_system->ilist_continue_class;
-    context->arguments  = make_array(2);
-    array_at_put(context->arguments, 0, (object)ilist_context);
-    array_at_put(context->arguments, 1, (object)make_number(0));
 
-    transfer(context);
+    ilist_context->arguments = make_array(2);
+    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("continue:"));
+    array_at_put(ilist_context->arguments, 1, (object)make_number(0));
+
+    transfer(ilist_context);
 }
 
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
-    int index = number_value(array_at(context->arguments, 1).number);
+    int index = number_value(array_at(ilist_context->arguments, 1).number);
     ilist_object ilist = (ilist_object)ilist_context->self.pointer;
     int size = number_value(ilist->size) - 1;
 
     object instruction = (object)raw_ilist_at(ilist, index);
 
     if (index != size) {
-        array_at_put(context->arguments, 1, (object)make_number(index + 1));
-        context_object icontext = make_context(instruction, 1);
-        icontext->return_context = (object)context;
-        context = icontext;
+        array_at_put(ilist_context->arguments, 1, (object)make_number(index + 1));
+        context = make_context(instruction, 1);
+        context->return_context = (object)ilist_context;
     } else { // tailcall.
         context->self = instruction;
         context->arguments = make_array(1);
