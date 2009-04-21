@@ -44,18 +44,14 @@ void ilist_eval(context_object context) {
     }
     
     context->self       = (object)fools_system->ilist_continue_class;
-    context->arguments  = make_array(3);
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
-    array_at_put(context->arguments, 1, (object)ilist_context);
-    array_at_put(context->arguments, 2, (object)make_number(0));
-
-    printf("transferring from ilist_eval\n");
+    context->arguments  = make_array(2);
+    array_at_put(context->arguments, 0, (object)ilist_context);
+    array_at_put(context->arguments, 1, (object)make_number(0));
 
     transfer(context);
 }
 
 void ilist_continue_eval(context_object context) {
-    printf("Into continue eval\n");
     context_object ilist_context = array_at(context->arguments, 0).context;
     int index = number_value(array_at(context->arguments, 1).number);
     ilist_object ilist = (ilist_object)ilist_context->self.pointer;

@@ -200,7 +200,6 @@ void test_transfer_empty_ilist_in_ilist() {
     array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
 
     transfer(ci);
-    printf("tested\n");
 }
 
 int main() {
