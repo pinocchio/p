@@ -21,16 +21,19 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->native_metaclass          = (object)make_native(&with_native_class_lookup);
-    fools_system->ilist_metaclass           = (object)make_native(&ilist_eval);
-    fools_system->ilist_continue_eval       = (object)make_native(&ilist_continue_eval);
+    fools_system->symbols_known_to_the_vm   = make_array(3);
 
-    fools_system->symbols_known_to_the_vm   = make_array(2);
+    fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
-    fools_system->dict_class                = make_native_class(2);
+    fools_system->dict_class = make_native_class(2);
     header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
     define_native(fools_system->dict_class, "at:",       &prim_dict_at);
     define_native(fools_system->dict_class, "at:put:",   &prim_dict_at_put);
+
+    fools_system->ilist_class = make_native_class(1);
+    define_native(fools_system->ilist_class,          "eval", &ilist_eval);
+    fools_system->ilist_continue_class = make_native_class(1);
+    define_native(fools_system->ilist_continue_class, "eval", &ilist_continue_eval);
 
     return fools_system;
 }

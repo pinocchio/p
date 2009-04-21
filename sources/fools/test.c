@@ -183,7 +183,8 @@ void test_transfer_empty_ilist() {
 
     ilist_object ilist = make_ilist(0);
 
-    context_object ci = make_context((object)(instruction)ilist, 0);
+    context_object ci = make_context((object)(instruction)ilist, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
     transfer(ci);
 }
 
@@ -195,8 +196,11 @@ void test_transfer_empty_ilist_in_ilist() {
 
     ilist_at_put(ilist, 0, (instruction)ilist2);
 
-    context_object ci = make_context((object)(instruction)ilist, 0);
+    context_object ci = make_context((object)(instruction)ilist, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
     transfer(ci);
+    printf("tested\n");
 }
 
 int main() {

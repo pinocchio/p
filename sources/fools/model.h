@@ -102,8 +102,8 @@ struct fools {
     nil_object          nil;
     object              native;
     object              native_metaclass;
-    object              ilist_metaclass;
-    object              ilist_continue_eval;
+    native_class_object ilist_class;
+    native_class_object ilist_continue_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
 };

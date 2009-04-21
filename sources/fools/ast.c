@@ -5,7 +5,7 @@
 
 ilist_object make_ilist(int size) {
     ilist_object result = NEW_ARRAYED(ilist_object, object, size + 1);
-    header(result)      = fools_system->ilist_metaclass;
+    header(result)      = (object)fools_system->ilist_class;
     result->size        = make_number(size);
     return result;
 }
