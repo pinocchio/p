@@ -5,10 +5,10 @@
 #include <stdio.h>
 #include <system.h>
 
-#define SETUP\
-    bootstrap();
+#define SETUP(name)\
+    void name() { printf(#name"\n"); bootstrap();
 
-void test_header() {
+SETUP(test_header)
     string_object string1 = NEW(struct string);
     string_object string2 = NEW(struct string);
     
@@ -16,8 +16,7 @@ void test_header() {
     assert(header(string1).string == string2);
 }
 
-void test_array() {
-    SETUP;
+SETUP(test_array)
 
     array_object a = make_array(100);
     assert(a->size->value == 100);
@@ -34,8 +33,7 @@ void test_array() {
     }
 }
 
-void test_native_layout() {
-    SETUP;
+SETUP(test_native_layout)
     assert(header(fools_system->native.pointer).native == fools_system->native.native);
     assert(native_target(fools_system->native.native) == &native);
 }
@@ -46,8 +44,7 @@ void native_test_single_arg_5(context_object c) {
     array_at(c->arguments, 0).number->value = 6;
 }
 
-void test_native() {
-    SETUP;
+SETUP(test_native)
 
     native_object n = make_native(&native_test_single_arg_5);
 
@@ -62,8 +59,7 @@ void test_native() {
     assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
-void test_transfer() {
-    SETUP;
+SETUP(test_transfer)
 
     native_object n = make_native(&native_test_single_arg_5);
     
@@ -75,15 +71,13 @@ void test_transfer() {
     assert(number_value(array_at(inner->arguments, 0).number) == 6);
 }
 
-void test_string_equals() {
-    SETUP;
+SETUP(test_string_equals) 
 
     assert(string_equals(make_string("a string"), make_string("a string")));
     assert(!string_equals(make_string("a string"), make_string("b string")));
 }
 
-void test_dict() {
-    SETUP;
+SETUP(test_dict)
 
     dict_object dict = make_dict(2);
 
@@ -101,8 +95,7 @@ void test_dict() {
     assert(dict_at(dict, (object)k3).nil == fools_system->nil);
 }
 
-void test_transfer_dict() {
-    SETUP;
+SETUP(test_transfer_dict)
 
     dict_object dict = make_dict(2);
 
@@ -150,7 +143,7 @@ void test_transfer_dict() {
     assert(result.nil == fools_system->nil);
 }
 
-void test_variable_object() {
+SETUP(test_variable_object)
     variable_object result = make_object(10, (object)fools_system->nil);
 
     assert(header(result).nil == fools_system->nil);
@@ -160,8 +153,7 @@ void test_variable_object() {
     }
 }
 
-void test_return_from_context() {
-    SETUP;
+SETUP(test_return_from_context)
 
     context_object from = make_context((object)fools_system->nil, 0);
     return_from_context(from);
@@ -178,8 +170,7 @@ void test_return_from_context() {
     assert(number_value(array_at(to->arguments, 0).number) == 6);
 }
 
-void test_transfer_empty_ilist() {
-    SETUP;
+SETUP(test_transfer_empty_ilist)
 
     ilist_object ilist = make_ilist(0);
 
@@ -188,8 +179,7 @@ void test_transfer_empty_ilist() {
     transfer(ci);
 }
 
-void test_transfer_empty_ilist_in_ilist() {
-    SETUP;
+SETUP(test_transfer_empty_ilist_in_ilist)
 
     ilist_object ilist  = make_ilist(2);
     ilist_object ilist2 = make_ilist(0);
@@ -203,8 +193,7 @@ void test_transfer_empty_ilist_in_ilist() {
     transfer(ci);
 }
 
-void test_transfer_iconst() {
-    SETUP;
+SETUP(test_transfer_iconst)
 
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
@@ -219,25 +208,6 @@ void test_transfer_iconst() {
     transfer(ci);
 
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
-}
-
-void test_transfer_idoit() {
-    SETUP;
-
-    ilist_object ilist = make_ilist(0);
-    idoit_object idoit = make_idoit((object)(instruction)ilist);
-
-    context_object ci = make_context((object)(instruction)idoit, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
-
-    transfer(ci);
-
-    object v = (object)make_number(42);
-    iconst_object iconst = make_iconst(v);
-
-    idoit->expression = (object)(instruction)iconst;
-
-    transfer(ci);
 }
 
 int main() {
@@ -255,7 +225,6 @@ int main() {
     test_transfer_empty_ilist();
     test_transfer_empty_ilist_in_ilist();
     test_transfer_iconst();
-    test_transfer_idoit();
 
     return 0;
 }

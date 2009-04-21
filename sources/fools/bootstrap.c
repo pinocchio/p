@@ -27,19 +27,19 @@ fools_object bootstrap() {
 
     fools_system->dict_class = make_native_class(2);
     header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
-    define_native(fools_system->dict_class, "at:",          &prim_dict_at);
-    define_native(fools_system->dict_class, "at:put:",      &prim_dict_at_put);
+    define_native(fools_system->dict_class, "at:",                  &prim_dict_at);
+    define_native(fools_system->dict_class, "at:put:",              &prim_dict_at_put);
 
     fools_system->ilist_class = make_native_class(2);
-    define_native(fools_system->ilist_class, "continue:",   &ilist_continue_eval);
-    define_native(fools_system->ilist_class, "eval",        &ilist_eval);
+    define_native(fools_system->ilist_class, "return:continue:",    &ilist_continue_eval);
+    define_native(fools_system->ilist_class, "eval",                &ilist_eval);
     
-    fools_system->idoit_class = make_native_class(2);
-    define_native(fools_system->idoit_class, "eval",        &idoit_eval);
-    define_native(fools_system->idoit_class, "evalReturn:", &idoit_continue_eval);
-
     fools_system->iconst_class = make_native_class(1);
-    define_native(fools_system->iconst_class, "eval",       &iconst_eval);
+    define_native(fools_system->iconst_class, "eval",               &iconst_eval);
+
+    fools_system->icall_class = make_native_class(1);
+    define_native(fools_system->icall_class, "eval",                &icall_eval);
+    
 
     return fools_system;
 }

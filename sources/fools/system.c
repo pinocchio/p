@@ -44,9 +44,9 @@ void ilist_eval(context_object context) {
         return return_from_context(ilist_context);
     }
 
-    ilist_context->arguments = make_array(2);
-    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("continue:"));
-    array_at_put(ilist_context->arguments, 1, (object)make_number(0));
+    ilist_context->arguments = make_array(3);
+    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("return:continue:"));
+    array_at_put(ilist_context->arguments, 2, (object)make_number(0));
 
     transfer(ilist_context);
 }
@@ -54,14 +54,14 @@ void ilist_eval(context_object context) {
 // ilist>>continue:
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
-    int index = number_value(array_at(ilist_context->arguments, 1).number);
+    int index = number_value(array_at(ilist_context->arguments, 2).number);
     ilist_object ilist = ilist_context->self.instruction.ilist;
     int size = number_value(ilist->size) - 1;
 
     object instruction = (object)raw_ilist_at(ilist, index);
 
     if (index != size) {
-        array_at_put(ilist_context->arguments, 1, (object)make_number(index + 1));
+        array_at_put(ilist_context->arguments, 2, (object)make_number(index + 1));
         context = make_context(instruction, 1);
         context->return_context = (object)ilist_context;
     } else { // tailcall.
@@ -74,26 +74,23 @@ void ilist_continue_eval(context_object context) {
     transfer(context);
 }
 
-// idoit>>eval
-void idoit_eval(context_object context) {
-    context_object idoit_context = array_at(context->arguments, 0).context;
-    idoit_object idoit = idoit_context->self.instruction.idoit;
+// icall>>eval
+void icall_eval(context_object context) {
+} /*
+    context_object icall_context = array_at(context->arguments, 0).context;
+    icall_object icall = icall_context->self.instruction.icall;
 
-    context->self = idoit_context->self;
+    context->self = icall_context->self;
     idoit_context->self = idoit->expression;
     context->arguments = make_array(2);
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("evalReturn:"));
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("return:"));
+    // Return nil by default;
+    array_at_put(context->arguments, 1, (object)fools_system->nil);
     idoit_context->return_context = (object)context;
 
     transfer(idoit_context);
 }
-
-// idoit>>evalReturn:
-void idoit_continue_eval(context_object context) {
-    context_object idoit_context = array_at(context->arguments, 0).context;
-    // ignore the result at arg:1
-    return_from_context(idoit_context);
-}
+*/
 
 // iconst>>eval
 void iconst_eval(context_object context) {

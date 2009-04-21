@@ -8,13 +8,11 @@ struct doit;
 struct constant;
 
 typedef struct instruction_list* ilist_object;
-typedef struct doit*             idoit_object;
 typedef struct assignment*       iassign_object;
 typedef struct callable*         icall_object;
 typedef struct constant*         iconst_object;
 
 typedef union {
-    idoit_object        idoit;
     ilist_object        ilist;
     iassign_object      iassignm;
     icall_object        icall;

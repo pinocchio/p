@@ -23,14 +23,13 @@ struct constant {
 
 struct callable {
     object          receiver;
-    object          arguments[];
+    array_object    arguments;
 };
 
 extern ilist_object     make_ilist(int size);
 extern iassign_object   make_iassign();
 extern icall_object     make_icall();
 extern iconst_object    make_iconst(object constant);
-extern idoit_object     make_idoit();
 
 
 extern instruction  inline raw_ilist_at(ilist_object ilist, int index);

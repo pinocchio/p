@@ -103,7 +103,7 @@ struct fools {
     object              native;
     object              native_metaclass;
     native_class_object ilist_class;
-    native_class_object idoit_class;
+    native_class_object icall_class;
     native_class_object iconst_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
