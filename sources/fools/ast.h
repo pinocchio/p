@@ -19,8 +19,8 @@ struct callable {
 };
 
 extern ilist_object make_ilist(int size);
-extern assignment_object make_assignment();
-extern callable_object make_callable();
+extern iassign_object make_iassign();
+extern icall_object make_icall();
 
 
 extern instruction  inline raw_ilist_at(ilist_object ilist, int index);

@@ -70,6 +70,11 @@ void ilist_eval(context_object context) {
     transfer(context);
 }
 
+void ilist_assignment(context_object context) {
+    context_object iassign_context = array_at(context->arguments, 0).context;
+    iassign_object assignment = (iassign_object)iassign_context->self.pointer;
+
+}
 
 // Native class handling
 

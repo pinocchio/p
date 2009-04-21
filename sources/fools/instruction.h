@@ -6,13 +6,13 @@ struct assignment;
 struct callable;
 
 typedef struct instruction_list* ilist_object;
-typedef struct assignment*       assignment_object;
-typedef struct callable*         callable_object;
+typedef struct assignment*       iassign_object;
+typedef struct callable*         icall_object;
 
 typedef union {
     ilist_object        ilist;
-    assignment_object   assignment;
-    callable_object     callable;
+    iassign_object      assignment;
+    icall_object        callable;
 } instruction;
 
 #endif // INSTRUCTION_H

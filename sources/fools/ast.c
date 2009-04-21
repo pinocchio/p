@@ -10,13 +10,13 @@ ilist_object make_ilist(int size) {
     return result;
 }
 
-assignment_object make_assignment() {
-    assignment_object result = NEW(struct assignment);
+iassign_object make_iassign() {
+    iassign_object result = NEW(struct assignment);
     return result;
 }
 
-callable_object make_callable() {
-    callable_object result = NEW(struct callable);
+icall_object make_icall() {
+    icall_object result = NEW(struct callable);
     return result;
 }
 
