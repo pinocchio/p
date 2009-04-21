@@ -191,10 +191,11 @@ void test_transfer_empty_ilist() {
 void test_transfer_empty_ilist_in_ilist() {
     SETUP;
 
-    ilist_object ilist  = make_ilist(1);
+    ilist_object ilist  = make_ilist(2);
     ilist_object ilist2 = make_ilist(0);
 
     ilist_at_put(ilist, 0, (instruction)ilist2);
+    ilist_at_put(ilist, 1, (instruction)ilist2);
 
     context_object ci = make_context((object)(instruction)ilist, 1);
     array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));

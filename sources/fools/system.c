@@ -28,7 +28,7 @@ void inline transfer(context_object context) {
 void inline return_from_context(context_object context) {
     object return_context = context->return_context;
     if (return_context.nil != fools_system->nil) {
-        transfer(return_context.context);
+        return transfer(return_context.context);
     }
 }
 
@@ -40,7 +40,7 @@ void ilist_eval(context_object context) {
     ilist_object ilist = (ilist_object)ilist_context->self.pointer;
 
     if (number_value(ilist->size) == 0) {
-        return return_from_context(context);
+        return return_from_context(ilist_context);
     }
     
     context->self       = (object)fools_system->ilist_continue_class;
@@ -60,7 +60,7 @@ void ilist_continue_eval(context_object context) {
     object instruction = (object)raw_ilist_at(ilist, index);
 
     if (index != size) {
-        array_at_put(context->arguments, 0, (object)make_number(index + 1));
+        array_at_put(context->arguments, 1, (object)make_number(index + 1));
         context_object icontext = make_context(instruction, 1);
         icontext->return_context = (object)context;
         context = icontext;
