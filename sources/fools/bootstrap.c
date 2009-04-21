@@ -21,7 +21,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(4);
+    fools_system->symbols_known_to_the_vm   = make_array(5);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -33,6 +33,13 @@ fools_object bootstrap() {
     fools_system->ilist_class = make_native_class(2);
     define_native(fools_system->ilist_class, "continue:",   &ilist_continue_eval);
     define_native(fools_system->ilist_class, "eval",        &ilist_eval);
+    
+    fools_system->idoit_class = make_native_class(2);
+    define_native(fools_system->idoit_class, "eval",        &idoit_eval);
+    define_native(fools_system->idoit_class, "evalReturn:", &idoit_continue_eval);
+
+    fools_system->iconst_class = make_native_class(1);
+    define_native(fools_system->iconst_class, "eval",       &iconst_eval);
 
     return fools_system;
 }

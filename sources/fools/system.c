@@ -91,19 +91,36 @@ void iassign_continue_eval(context_object context) {
     *assignment->variable = return_context->return_value;
     return_from_context(context);
 }
+*/
 
 void idoit_eval(context_object context) {
     context_object idoit_context = array_at(context->arguments, 0).context;
     idoit_object idoit = idoit_context->self.instruction.idoit;
 
-    context->self = idoit->expression;
-    context->return_context = make_return_context(idoit_context->return_context);
-    transfer(iexp_context);
+    context->self = idoit_context->self;
+    idoit_context->self = idoit->expression;
+    context->arguments = make_array(2);
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("evalReturn:"));
+    idoit_context->return_context = (object)context;
+
+    transfer(idoit_context);
 }
 
 void idoit_continue_eval(context_object context) {
+    context_object idoit_context = array_at(context->arguments, 0).context;
+
+    return_from_context(idoit_context);
 }
-*/
+
+void iconst_eval(context_object context) {
+    context_object iconst_context = array_at(context->arguments, 0).context;
+    iconst_object iconst = iconst_context->self.instruction.iconst;
+    
+    array_at_put(iconst_context->return_context.context->arguments, 1,
+                 iconst->constant);
+
+    return_from_context(iconst_context);
+}
 
 // Native class handling
 

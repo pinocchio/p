@@ -203,6 +203,43 @@ void test_transfer_empty_ilist_in_ilist() {
     transfer(ci);
 }
 
+void test_transfer_iconst() {
+    SETUP;
+
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+    ilist_object ilist = make_ilist(0);
+
+    context_object ci = make_context((object)(instruction)iconst, 1);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v.pointer);
+}
+
+void test_transfer_idoit() {
+    SETUP;
+
+    ilist_object ilist = make_ilist(0);
+    idoit_object idoit = make_idoit((object)(instruction)ilist);
+
+    context_object ci = make_context((object)(instruction)idoit, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    transfer(ci);
+
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+
+    idoit->expression = (object)(instruction)iconst;
+
+    transfer(ci);
+}
+
 int main() {
     
     test_header();
@@ -217,6 +254,8 @@ int main() {
     test_return_from_context();
     test_transfer_empty_ilist();
     test_transfer_empty_ilist_in_ilist();
+    test_transfer_iconst();
+    test_transfer_idoit();
 
     return 0;
 }

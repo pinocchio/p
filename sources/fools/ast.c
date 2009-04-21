@@ -21,13 +21,16 @@ icall_object make_icall() {
 }
 
 iconst_object make_iconst(object constant) {
-    iconst_object result = NEW(struct constant);
-    result->constant = constant;
+    iconst_object result    = NEW(struct constant);
+    header(result)          = (object)fools_system->iconst_class;
+    result->constant        = constant;
     return result;
 }
 
-idoit_object make_idoit() {
+idoit_object make_idoit(object expression) {
     idoit_object result = NEW(struct doit);
+    header(result)      = (object)fools_system->idoit_class;
+    result->expression  = expression;
     return result;
 }
 

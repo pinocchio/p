@@ -12,5 +12,8 @@ extern void inline return_from_context(context_object context);
 
 extern void ilist_eval(context_object context);
 extern void ilist_continue_eval(context_object context);
+extern void idoit_eval(context_object context);
+extern void idoit_continue_eval(context_object context);
+extern void iconst_eval(context_object context);
 
 #endif

@@ -59,23 +59,12 @@ native_object make_native(transfer_target native) {
     return result;
 }
 
-void init_context(context_object context, object self, int size) {
+context_object make_context(object self, int size) {
+    context_object context  = NEW(struct context);
     context->self           = self;
     context->arguments      = make_array(size);
     context->return_context = (object)fools_system->nil;
-}
-
-context_object make_context(object self, int size) {
-    context_object result = NEW(struct context);
-    init_context(result, self, size);
-    return result;
-}
-
-return_context_object make_return_context(object self, int size) {
-    return_context_object result    = NEW(struct return_context);
-    init_context(&result->context, self, size);
-    result->return_value            = (object)fools_system->nil;
-    return result;
+    return context;
 }
 
 context_object inline make_meta_context(context_object context) {

@@ -26,7 +26,6 @@ struct dict;
 struct nil;
 struct native;
 struct context;
-struct return_context;
 
 typedef struct variable_object* variable_object;
 typedef struct native_class*    native_class_object;
@@ -37,7 +36,6 @@ typedef struct dict*            dict_object;
 typedef struct nil*             nil_object;
 typedef struct native*          native_object;
 typedef struct context*         context_object;
-typedef struct return_context*  return_context_object;
 typedef int**                   pointer;
 
 typedef void (*transfer_target)(context_object);
@@ -100,16 +98,13 @@ struct context {
     object              return_context;
 };
 
-struct return_context {
-    struct context      context;
-    object              return_value;
-};
-
 struct fools {
     nil_object          nil;
     object              native;
     object              native_metaclass;
     native_class_object ilist_class;
+    native_class_object idoit_class;
+    native_class_object iconst_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
 };
@@ -123,7 +118,6 @@ extern dict_object              make_dict(int init_size);
 extern nil_object               make_nil();
 extern context_object           inline make_meta_context(context_object context);
 extern context_object           make_context(object self, int size);
-extern return_context_object    make_return_context(object self, int size);
 extern native_object            make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);
