@@ -28,7 +28,7 @@ struct callable {
 
 extern ilist_object     make_ilist(int size);
 extern iassign_object   make_iassign();
-extern icall_object     make_icall();
+extern icall_object     make_icall(object receiver, int argsize);
 extern iconst_object    make_iconst(object constant);
 
 

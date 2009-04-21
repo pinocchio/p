@@ -232,6 +232,21 @@ SETUP(test_return_of_ilist)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
+SETUP(test_icall)
+
+    native_object n = make_native(&native_test_single_arg_5);
+
+    icall_object icall = make_icall((object)n, 1);
+    array_at_put(icall->arguments, 0, (object)make_number(5));
+
+    context_object ci = make_context((object)(instruction)icall, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    transfer(ci);
+
+    assert(number_value(array_at(icall->arguments, 0).number) == 6);
+}
+
 int main() {
     
     test_header();
@@ -248,6 +263,7 @@ int main() {
     test_transfer_empty_ilist_in_ilist();
     test_transfer_iconst();
     test_return_of_ilist();
+    test_icall();
 
     return 0;
 }

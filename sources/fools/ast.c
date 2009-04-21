@@ -15,11 +15,11 @@ iassign_object make_iassign() {
     return result;
 }
 
-icall_object make_icall(object receiver, array_object arguments) {
+icall_object make_icall(object receiver, int argsize) {
     icall_object result = NEW(struct callable);
     header(result)      = (object)fools_system->icall_class;
     result->receiver    = receiver;
-    result->arguments   = arguments;
+    result->arguments   = make_array(argsize);
     return result;
 }
 
