@@ -59,38 +59,20 @@ void ilist_continue_eval(context_object context) {
     int size = number_value(ilist->size) - 1;
 
     object instruction = (object)raw_ilist_at(ilist, index);
+    context->self = instruction;
 
     if (index != size) {
         array_at_put(ilist_context->arguments, 2, (object)make_number(index + 1));
-        context = make_context(instruction, 1);
         context->return_context = (object)ilist_context;
     } else { // tailcall.
-        context->self = instruction;
         context->arguments = make_array(1);
+        context->return_context = (object)ilist_context->return_context;
     }
     
     array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
 
     transfer(context);
 }
-
-// icall>>eval
-void icall_eval(context_object context) {
-} /*
-    context_object icall_context = array_at(context->arguments, 0).context;
-    icall_object icall = icall_context->self.instruction.icall;
-
-    context->self = icall_context->self;
-    idoit_context->self = idoit->expression;
-    context->arguments = make_array(2);
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("return:"));
-    // Return nil by default;
-    array_at_put(context->arguments, 1, (object)fools_system->nil);
-    idoit_context->return_context = (object)context;
-
-    transfer(idoit_context);
-}
-*/
 
 // iconst>>eval
 void iconst_eval(context_object context) {
@@ -102,6 +84,18 @@ void iconst_eval(context_object context) {
 
     return_from_context(iconst_context);
 }
+
+// icall>>eval
+void icall_eval(context_object context) {
+    context_object icall_context = array_at(context->arguments, 0).context;
+    icall_object icall = icall_context->self.instruction.icall;
+
+    icall_context->self         = icall->receiver;
+    icall_context->arguments    = icall->arguments;
+    
+    transfer(icall_context);
+}
+
 
 // Native class handling
 

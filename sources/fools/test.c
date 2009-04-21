@@ -210,6 +210,28 @@ SETUP(test_transfer_iconst)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
+SETUP(test_return_of_ilist)
+
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+    ilist_object ilist = make_ilist(1);
+    ilist_object empty_ilist = make_ilist(0);
+
+    ilist_at_put(ilist, 0, (instruction)iconst);
+
+    context_object ci = make_context((object)(instruction)ilist, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    context_object rc = make_context((object)(instruction)empty_ilist, 2);
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v.pointer);
+}
+
 int main() {
     
     test_header();
@@ -225,6 +247,7 @@ int main() {
     test_transfer_empty_ilist();
     test_transfer_empty_ilist_in_ilist();
     test_transfer_iconst();
+    test_return_of_ilist();
 
     return 0;
 }
