@@ -19,7 +19,7 @@ void inline transfer(context_object context) {
         context = make_meta_context(context);
     }
     
-    native_target(context->self.native)(context);
+    native(context);
 }
 
 
@@ -53,7 +53,7 @@ void ilist_eval(context_object context) {
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = array_at(context->arguments, 0).context;
     int index = number_value(array_at(ilist_context->arguments, 1).number);
-    ilist_object ilist = (ilist_object)ilist_context->self.pointer;
+    ilist_object ilist = ilist_context->self.instruction.ilist;
     int size = number_value(ilist->size) - 1;
 
     object instruction = (object)raw_ilist_at(ilist, index);
@@ -72,13 +72,11 @@ void ilist_continue_eval(context_object context) {
     transfer(context);
 }
 
-/** WORK IN PROGRESS
- *
+/*
 void iassign_eval(context_object context) {
     context_object iassign_context = array_at(context->arguments, 0).context;
     iassign_object assignment = (iassign_object)iassign_context->self.pointer;
-    context->self       = assignment->expression;
-    context->arguments  = make_array(0);
+    iassign_context->self = assignment->expression;
     return_context_object return_context =
         make_return_context(fools_system->iassign_continue_eval, 1);
     array_at_put(return_context->arguments, 0, assignment);
@@ -92,6 +90,18 @@ void iassign_continue_eval(context_object context) {
 
     *assignment->variable = return_context->return_value;
     return_from_context(context);
+}
+
+void idoit_eval(context_object context) {
+    context_object idoit_context = array_at(context->arguments, 0).context;
+    idoit_object idoit = idoit_context->self.instruction.idoit;
+
+    context->self = idoit->expression;
+    context->return_context = make_return_context(idoit_context->return_context);
+    transfer(iexp_context);
+}
+
+void idoit_continue_eval(context_object context) {
 }
 */
 
