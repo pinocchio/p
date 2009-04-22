@@ -323,4 +323,25 @@ preallocate all objects required for performing its task.
 Given these few requirements a garbage collection mechanism can be
 fully written inside the system itself. 
 
+\subsection{Aliases}
+written vm-level, here app-level = vm-level -> app-level
+
+\subsection{Debugging}
+submethod are objects thus writing a debug-stepper is trivial, just
+write another message which double dispatches back to the debugger.
+
+\subsection{Refactoring}
+submethod structures can be easily extracted to new types of
+evaluatables, which do not need to be methods even (could be done with
+submethod reflectivity as well?). In order to make methods out of them
+some analysis needs to be done.
+
+\subsection{Program Analysis}
+can be done very easily on objects which all have the same kind of
+interpreter. The interpreter defines how analysis has to be done, just
+as with all other reflective capabilities. (Since in the end everything
+is bound to our polymorphic behaviour instructions, at least some
+level will be readable. Native behaviours will have to be called from
+within the jitted code; or inlined directly. Maybe move this to JIT).
+
 \end{document}
