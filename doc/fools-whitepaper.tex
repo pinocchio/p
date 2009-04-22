@@ -1,4 +1,108 @@
 \documentclass{article}
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{alltt}
+\usepackage{color}
+\usepackage{ifthen}
+\usepackage{textcomp}
+\usepackage{amssymb}
+
+% references
+\usepackage[colorlinks]{hyperref}
+\usepackage[all]{hypcap}
+\urlstyle{same}
+\hypersetup{
+    % true means draw the links themselves colored and do not draw a bounding box
+    colorlinks=true, 
+    linkcolor= blue,
+    citecolor= blue,
+    filecolor=blue,
+    urlcolor= blue
+}
+\def\figureautorefname{Figure}%
+\def\tableautorefname{Table}%
+\def\partautorefname{Part}%
+\def\appendixautorefname{Appendix}%
+\def\chapterautorefname{Chapter}%
+\def\sectionautorefname{Section}%
+
+% source code
+\definecolor{source}{gray}{0.9}
+\usepackage{listings}
+\lstset{
+    language={},
+    % characters
+    tabsize=4,
+    upquote=true,
+    keepspaces=true,
+    breaklines=true,
+    breakautoindent=true,
+    columns=fullflexible,
+    basicstyle=\small\sffamily,
+    showstringspaces=false,
+    % numbering
+    % numbers=left,
+    % numbersep=5pt,
+    % numberstyle=\tiny,
+    % numberfirstline=true,
+    % background
+    frame=single, 
+    framerule=0pt,
+    backgroundcolor=\color{source},
+    % captioning
+    captionpos=b,
+    % characters
+    literate=
+        {<<}{$<$\hspace{-0.25em}$<$}1
+        {>>}{$>$\hspace{-0.25em}$>$}1
+        {-}{{\sf -\hspace{-0.13em}-}}1
+        {+}{\raisebox{0.08ex}{+}}1,
+}
+%\setlength{\fboxsep}{2pt}
+%\setlength{\fboxrule}{0pt}
+\newcommand{\ct}[1]{\colorbox{source}{\lstinline[basicstyle=\small\sffamily\upshape]{#1}}}
+
+% comments
+\newboolean{showcomments}
+\setboolean{showcomments}{false}
+%\setboolean{showcomments}{false}
+\ifthenelse{\boolean{showcomments}}
+  {\newcommand{\nb}[2]{
+    \fbox{\bfseries\sffamily\scriptsize#1}
+        {\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}
+   \newcommand{\version}{\emph{\scriptsize$-$Id$-$}}}
+  {\newcommand{\nb}[2]{}
+   \newcommand{\version}{}}
+\newcommand{\fix}[1]{\nb{FIX}{#1}}
+\newcommand{\todo}[1]{\nb{TODO}{#1}}
+\newcommand{\tv}[1]{\nb{toon}{#1}}
+\newcommand{\on}[1]{\nb{oscar}{#1}}
+
+% graphics: \fig{position}{relative-width}{filename}{caption}
+\DeclareGraphicsExtensions{.png,.jpg,.pdf,.eps,.gif}
+\graphicspath{{figures/}}
+\newcommand{\fig}[4]{
+    \begin{figure}[#1]
+        \centering
+        \includegraphics[width=#2\textwidth]{#3}
+        \caption{\label{fig:#3}#4}
+    \end{figure}}
+
+% abbreviations
+\newcommand{\ie}{\emph{i.e.}\xspace}
+\newcommand{\eg}{\emph{e.g.}\xspace}
+\newcommand{\etc}{\emph{etc.}\xspace}
+
+% references
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\secref}[1]{Section~\ref{sec:#1}}
+\newcommand{\lstref}[1]{Listing~\ref{lst:#1}}
+
+
 \title{Bootstrapping a truly reflective system}
 \author{Toon Verwaest}
 
