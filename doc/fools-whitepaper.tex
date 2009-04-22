@@ -252,7 +252,7 @@ for this system is a non-issue. Once an object of one language decides
 to do a transfer, it is up to the object of possibly another language
 to continue and probably return control to its caller at some point.
 
-\subsection{Dynamic Optimization}
+\subsection{Dynamic Optimization\label{sec:dynamicoptimization}}
 When all behaviour of a language is reflective, this automatically
 implies that there is bound to be some interpretative overhead. If you
 consider a limited amount of sub-method instructions which actually
@@ -291,4 +291,36 @@ submethod reflectivity, without having to care about the
 implementation details of how to actually make it run. The only thing
 that needs to be done is implementing the correct meta-object protocol
 on links.
+
+A nice feature of submethod reflectivity is that it allows us to very
+easily build a full aspect oriented language on top of it. So
+submethod reflectivity enables aspect oriented capabilities of our
+system. And as long as the correct interface is implemented
+everywhere, the resulting code can even be optimized using the same
+tracing JIT strategy as described in \secref{dynamicoptimization}.
+
+\subsection{Reflective garbage collection}
+Most modern dynamic languages incorporate a garbage collector within
+their core to manage memory. Generally this garbage collection system
+and its implementation is fully hidden from the language system
+itself. In some cases limited reflection is provided through
+primitives, as is the case for Smalltalk. The only existing languages
+in which garbage collection is fully accessible from within (and
+written in) the language itself, such as C and C++, are languages
+where you can fully circumvent the managed memory system.
+
+In the case of a fully reflective system, a fixed size of memory can
+be allocated to the system when starting up. It has to be decided for
+the system what kind of layout is used inside the system, and the way
+of allocating natively has to be hardwired. However, how the objects
+are managed in their lifespan can be fully decided from within the
+system itself.
+
+Since executing a garbage collector typically also requires a minimal
+amount of objects to be around, the garbage collector will have to
+preallocate all objects required for performing its task.
+
+Given these few requirements a garbage collection mechanism can be
+fully written inside the system itself. 
+
 \end{document}
