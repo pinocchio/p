@@ -1,0 +1,133 @@
+\documentclass{article}
+\title{Bootstrapping a truly reflective system}
+\author{Toon Verwaest}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Programming languages define views on how to operate on machines.
+Often this view is very distinct from what the device below is
+actually executing, \ie the machine view. This makes it hard for
+programs in a programming language to cross the barrier between
+the language view and the machine view.
+
+In order to make a language view work with the machine view, both
+interpretation and compilation techniques have been identified.
+
+Compilation has the advantage that a program can be statically
+analyzed and transformed making it directly fast. The disadvantage is
+that through optimizing compilation, the language view gets lost for
+the runtime of the program. 
+
+As opposed to compilation, interpretation keeps structures embedded in
+the language view around at runtime. Generally the parts which are
+around are limited to the amount of compilation needed to make
+structures interpretable by the interpreter or virtual machine below.
+In most languages there is always at least some step of compilation,
+like parsing, which already partly bridges the gap between the
+language's sourcecode (if any) and the machine view.
+
+Keeping language views around at runtime is important for being able
+to reflect on programs. The reflective capabilities of a language
+are limited to the amount of language structures still around at
+runtime. And those capabilities are also limited to the amount of
+information the interpreter dynamically exposes to the language
+about the language itself.
+
+\subsection{Problem}
+If we look at current reflective systems, we see that those systems
+start from being virtually totally non-reflective and then add
+reflective capabilities step by step. Only certain features are
+exposed, hiding big parts of the internals of the language
+implementation itself from programs written in the language. This
+makes it difficult if not impossible to revert design decisions made
+at interpreter level, at application level. And where it is possible,
+the ways to work around design decisions are made expensive by the
+overhead of automatic behaviour in the system below.
+
+\subsection{Solution}
+In order to avoid applications being stuck in the prison defined by
+their puppet master the virtual machine, a fully reflective language
+system has to be defined from the ground up. To the core of such a
+system, nothing may be added or used without it being able to reflect
+on itself. This implies the first core principle of a fully reflective
+system:
+
+\begin{itemize}
+    \item Both the language system's native behaviour and its
+          application behaviour have the same interface.
+\end{itemize}
+
+Native behaviour in a reflective system is an interesting topic by
+itself. It is absolutely required for a system to be able to be
+bootstrapped. Without native behaviour conceptual implementations
+are bound to recurse infinitely in its own imagination. However,
+native behaviour is the pinnacle of what is non-reflective. This
+brings us to the second and third core principles for fully
+reflective systems:
+
+\begin{itemize}
+    \item Native behaviour has to be localized and identified in the
+          system.
+    \item The amount of native behaviour used for the definition of
+          the core concepts has to be minimized.
+\end{itemize}
+
+Minimizing the amount of concepts is again done by not allowing any
+native to enter the system if it can be composed from other natives.
+
+Note that this last principle clearly states that this is important
+for the definition of the core. Of course it is important that a
+language system can interface with external applications possibly
+written in other languages. Such external applications can by
+themselves be considered non-reflective or native parts of an
+application. Since such natives are outside the scope of reflective
+system, we cannot care about their implementation details.
+
+When building a fully reflective system in modern programming
+languages, we have to take care not to accidentally incorporate
+semantics from the language below in our own system definition. This
+disallows us to use for example the C stack with its stack frames,
+unless reified properly. 
+
+\section{Implementation of a fully reflective system}
+Their are three basic elements which allow us to tie together a fully
+reflective system:
+
+\begin{itemize}
+    \item In all languages there are locations where a group of
+          objects define a context switch. The interface for both
+          native and non-native behaviour is thus defined as a set of
+          objects.
+    \item In all languages, for such a context switch there is a
+          clearly defined interpretation strategy. To be fully
+          reflective each context switch links to its own
+          interpretation strategy.
+    \item A minimal part of the interpretation strategy has to be
+          written natively. Such a strategy is also a context switch.
+          The interpretation strategy of a native context switch is to
+          natively execute the attached behaviour. Thus there is
+          \emph{one} interpretation strategy hardwired in the system
+          which executes the context switch linked to it natively.
+\end{itemize}
+
+While the last basic element allows us to suck in all sorts of native
+behaviour, the third principle of reflective systems refrains us from
+doing so. 
+
+To be fair, in order to get the system running there is one hardwired
+function which knows how to \emph{transfer} to a context, \ie enforce
+a context switch in the system. However this primitive is the most
+basic primitive possible to perform such task and can be seen as the
+invisible power used by Baron Munchausen to get himself out of the swamp.
+Our transfer primitive takes a context switch and switches to its
+interpreter, while passing along a context object which encapsulates both
+the interpreter and the original context switch. In case this interpreter
+is non-native this process continues until a native interpreter is found.
+Once one is found, the native interpreter is responsible for all
+interpretation going on at lower levels.
+
+\end{document}
