@@ -130,4 +130,61 @@ is non-native this process continues until a native interpreter is found.
 Once one is found, the native interpreter is responsible for all
 interpretation going on at lower levels.
 
+\section{Uses of a fully reflective system}
+
+\subsection{Language Implementation}
+The most obvious use of a fully reflective system is to use it to
+implement languages. Languages restrict reflection in a language
+system and impose interpretation strategies. For this reason languages
+are seen as (restrictive) \emph{views} on the system.
+
+A language will define its own parser which will transform code into
+reflective objects. Those reflective objects can then be interpreted
+by custom interpreters attached by the language.
+
+Since objects of all languages are defined to be interpreted by their
+own attached interpreter, interoperability between languages written
+for this system is a non-issue. Once an object of one language decides
+to do a transfer, it is up to the object of possibly another language
+to continue and probably return control to its caller at some point.
+
+\subsection{Dynamic Optimization}
+When all behaviour of a language is reflective, this automatically
+implies that there is bound to be some interpretative overhead. If you
+consider a limited amount of sub-method instructions which actually
+get evaluated by sending the message \emph{eval} to one-another, you
+see that the whole system is self interpretative. This
+\emph{decentralized interpretation} of applications most likely ends
+up having the same (or more in case of towers of interpreters)
+overhead as normal interpreted systems.
+
+The upside is that since everything at sub-method level happens
+through message sends we can easily implement other methods on those
+objects as well. We could for example add tracing evaluation methods.
+When such a tracing method identifies a \emph{warm loop} \cite{JIT},
+it could decide to generate native code for the behaviour and attach
+it to the entry point of the traced loop. Next time when evaluation
+hits the entry point, the node can then directly evaluate the native
+behaviour rather than the interpreted version. In short, being able to
+intercept sub-method calls allows us to write a JIT compiler for a
+system inside the system itself.
+
+\subsection{Submethod reflection}
+In \cite{submethod reflectivity} important properties of submethod
+reflectivity are identified. However, in their implementation there is
+no real submethod reflectivity in the language itself. All submethod
+structures are defined by bytecodes. This forces them to keep methods
+around in twins. Both the AST compiled version of a method and
+its bytecode compiled variant are combined into a reflective method.
+At runtime the bytecode gets executed, but changes to the AST will
+automatically result in regeneration of the bytecode. As such the AST
+is in effect the reflective method and the bytecode a JIT compiled
+version of the AST. 
+
+Since our system and thus also our methods are fully defined in terms
+of reflective objects, it is trivial to experiment with the ideas of
+submethod reflectivity, without having to care about the
+implementation details of how to actually make it run. The only thing
+that needs to be done is implementing the correct meta-object protocol
+on links.
 \end{document}
