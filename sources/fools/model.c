@@ -34,6 +34,7 @@ number_object make_number(int value) {
 }
 
 array_object make_array(int size) {
+    if (size == 0) { return fools_system->empty; }
     array_object result = (array_object)make_object(size + 1,
                                                     (object)fools_system->nil);
     result->size        = make_number(size);

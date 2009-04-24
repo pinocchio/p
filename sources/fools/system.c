@@ -83,7 +83,7 @@ void ilist_continue_eval(context_object context) {
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = iconst_context->self.instruction.iconst;
-    
+
     array_at_put(iconst_context->return_context.context->arguments, 1,
                  iconst->constant);
 
@@ -105,6 +105,27 @@ void icall_eval(context_object context) {
 void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
     iassign_object iassign = iassign_context->self.instruction.iassign;
+    
+    context->self       = iassign->expression;
+    context->arguments  = iassign_context->arguments;
+
+    iassign_context->arguments = make_array(2);
+    array_at_put(iassign_context->arguments, 0, symbol_known_to_the_vm("return:"));
+
+    context->return_context = (object)iassign_context;
+
+    transfer(context);
+}
+
+// iassign>>return:
+void iassign_continue_eval(context_object context) {
+    context_object iassign_context = target_context(context);
+    iassign_object iassign = iassign_context->self.instruction.iassign;
+    
+    object return_value = array_at(iassign_context->arguments, 1);
+    do_assign(iassign, return_value);
+
+    return_from_context(iassign_context);
 }
 
 

@@ -10,8 +10,11 @@ ilist_object make_ilist(int size) {
     return result;
 }
 
-iassign_object make_iassign() {
-    iassign_object result = NEW(struct assignment);
+iassign_object make_iassign(object* variable, object expression) {
+    iassign_object result   = NEW(struct assignment);
+    result->variable        = variable;
+    result->expression      = expression;
+    header(result)          = (object)fools_system->iassign_class;
     return result;
 }
 
@@ -59,4 +62,8 @@ void inline eval_instruction(instruction instruction) {
     context_object context = make_context((object)instruction, 1);
     array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
     transfer(context);
+}
+
+void inline do_assign(iassign_object iassign, object value) {
+    *iassign->variable = value;
 }

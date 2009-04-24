@@ -245,6 +245,24 @@ SETUP(test_icall)
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
 
+SETUP(test_iassign)
+
+    object k;
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+
+    iassign_object iassign = make_iassign(&k, (object)(instruction)iconst);
+
+    context_object ci = make_context((object)(instruction)iassign, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    transfer(ci);
+
+    assert(k.pointer == v.pointer);
+}
+
+
+
 int main() {
     
     test_header();
@@ -262,6 +280,7 @@ int main() {
     test_transfer_iconst();
     test_return_of_ilist();
     test_icall();
+    test_iassign();
 
     return 0;
 }

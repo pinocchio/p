@@ -23,7 +23,7 @@ struct callable {
 };
 
 extern ilist_object     make_ilist(int size);
-extern iassign_object   make_iassign();
+extern iassign_object   make_iassign(object* variable, object expression);
 extern icall_object     make_icall(object receiver, int argsize);
 extern iconst_object    make_iconst(object constant);
 
@@ -34,5 +34,6 @@ extern void         inline raw_ilist_at_put(ilist_object ilist,
 extern void         inline ilist_at_put(ilist_object ilist,
                                         int index, instruction i);
 extern void         inline eval_instruction(instruction instruction);
+extern void         inline do_assign(iassign_object iassign, object value);
 
 #endif // AST_H
