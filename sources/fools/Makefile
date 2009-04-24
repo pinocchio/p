@@ -6,6 +6,7 @@ VERSION=0.1
 FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -g -Wall -I.
+LDFLAGS = -lgc
 
 TEST_OBJECTS= test test.o
 SOURCES=$(CFILES) $(HFILES) Makefile
@@ -14,10 +15,10 @@ OBJECTS=$(CFILES:.c=.o)
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJECTS) $(PROGRAM).o
-	$(CC) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^
 
 test: $(OBJECTS) test.o
-	$(CC) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^
 	./test
 
 clean:

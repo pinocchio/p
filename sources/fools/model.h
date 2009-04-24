@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include <gc/gc.h>
 #include <stdlib.h>
 #include <instruction.h>
 
@@ -13,7 +14,7 @@
 
 #define NEW_ARRAYED(type, layout, size) \
             (type)(\
-               PINC(malloc(header_size + sizeof(layout[size]))))
+               PINC(GC_MALLOC(header_size + sizeof(layout[size]))))
 
 #define header(o) (*(object*)PDEC(o))
 
