@@ -1,4 +1,5 @@
 #include <model.h>
+#include <system.h>
 
 void prim_number_plus(context_object context) {
     number_object* left     = (number_object*)array_at(context->arguments, 0).pointer;

@@ -8,10 +8,6 @@ struct instruction_list {
     instruction     instructions[];
 };
 
-struct doit {
-    object          expression;
-};
-
 struct assignment {
     object*         variable;
     object          expression;

@@ -104,7 +104,7 @@ void icall_eval(context_object context) {
 // iassign>>eval
 void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
-    
+    iassign_object iassign = iassign_context->self.instruction.iassign;
 }
 
 
