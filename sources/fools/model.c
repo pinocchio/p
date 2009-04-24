@@ -60,16 +60,16 @@ native_object make_native(transfer_target native) {
     return result;
 }
 
-context_object make_context(object self, int size) {
+context_object make_context(object interpreter, int size) {
     context_object context  = NEW(struct context);
-    context->self           = self;
+    header(context)         = interpreter;
     context->arguments      = make_array(size);
     context->return_context = (object)fools_system->nil;
     return context;
 }
 
 context_object inline make_meta_context(context_object context) {
-    context_object result = make_context(header(context->self.pointer), 2);
+    context_object result = make_context(header(header(context).pointer), 2);
     array_at_put(result->arguments, 0, symbol_known_to_the_vm("interpret"));
     array_at_put(result->arguments, 1, (object)context);
     return result;

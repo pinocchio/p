@@ -93,7 +93,6 @@ struct native {
 };
 
 struct context {
-    object              self;
     array_object        arguments;
     object              return_context;
 };
@@ -103,6 +102,7 @@ struct fools {
     array_object        empty;
     object              native;
     object              native_metaclass;
+    object              class_lookup;
     native_class_object ilist_class;
     native_class_object icall_class;
     native_class_object iconst_class;
@@ -120,7 +120,7 @@ extern array_object             make_array(int size);
 extern dict_object              make_dict(int init_size);
 extern nil_object               make_nil();
 extern context_object           inline make_meta_context(context_object context);
-extern context_object           make_context(object self, int size);
+extern context_object           make_context(object interpreter, int size);
 extern native_object            make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);

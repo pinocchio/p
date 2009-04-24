@@ -289,7 +289,24 @@ SETUP(test_ivar_read)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
+/* start-stub
+SETUP(test_class_lookup)
 
+    object class_lookup =
+        (object)make_object(1, fools_system->with_cls_interpreter);
+    // instvar_1: name
+    // instvar_2: super
+    // instvar_3: methoddict
+    object cls = (object)make_object(3, (object)fools_system->nil);
+    object_at_put(cls.object, 0, (object)make_string("A class"));
+    object_at_put(cls.object, 1, (object)fools_system->nil);
+    object_at_put(cls.object, 2, (object)make_dict(1));
+
+    object_at_put(class_lookup.object, 0, cls);
+    
+    
+}
+*/
 
 int main() {
     

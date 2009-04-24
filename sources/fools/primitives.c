@@ -22,7 +22,7 @@ void prim_dict_at(context_object context) {
     // arguments at: 0 -> selector
     object key              = array_at(receiver->arguments, 1);
     object* value           = (object*)array_at(receiver->arguments, 2).pointer;
-    *value = dict_at(receiver->self.dict, key);
+    *value = dict_at(header(receiver).dict, key);
 }
 
 void prim_dict_at_put(context_object context) {
@@ -30,5 +30,5 @@ void prim_dict_at_put(context_object context) {
     // arguments at: 0 -> selector
     object key              = array_at(receiver->arguments, 1);
     object value            = array_at(receiver->arguments, 2);
-    dict_at_put(receiver->self.dict, key, value);
+    dict_at_put(header(receiver).dict, key, value);
 }
