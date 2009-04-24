@@ -131,25 +131,36 @@ void ivar_assign(context_object context) {
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
 
-    env_object env = array_at(ivar_context->arguments, 2).env;
+    object env = array_at(ivar_context->arguments, 2);
 
     object value = array_at(ivar_context->arguments, 1);
-    variable_assign(ivar, env, value);
+    
+    header(ivar_context) = env;
+    ivar_context->arguments = make_array(4);
+    array_at_put(ivar_context->arguments, 0,
+                 symbol_known_to_the_vm("store:at:in:"));
+    array_at_put(ivar_context->arguments, 1, value);
+    array_at_put(ivar_context->arguments, 2, (object)ivar->index);
+    array_at_put(ivar_context->arguments, 3, ivar->scope);
 
-    return_from_context(ivar_context);
+    transfer(ivar_context);
 }
 
-// iconst>>eval:
+// ivar>>eval:
 void ivar_eval(context_object context) {
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
 
-    env_object env = array_at(ivar_context->arguments, 1).env;
+    object env = array_at(ivar_context->arguments, 1);
 
-    array_at_put(ivar_context->return_context.context->arguments, 1,
-                 variable_value(ivar, env));
+    header(ivar_context) = env;
+    ivar_context->arguments = make_array(3);
+    array_at_put(ivar_context->arguments, 0,
+                 symbol_known_to_the_vm("fetch:from:"));
+    array_at_put(ivar_context->arguments, 1, (object)ivar->index);
+    array_at_put(ivar_context->arguments, 2, ivar->scope);
 
-    return_from_context(ivar_context);
+    transfer(ivar_context);
 }
 
 /*

@@ -251,7 +251,9 @@ SETUP(test_icall)
 
 SETUP(test_iassign_ivar)
 
-    array_object k = make_array(1);
+    env_object k = make_env((object)fools_system->nil,
+                            (object)fools_system->nil,
+                            1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar((object)fools_system->nil,
@@ -265,12 +267,14 @@ SETUP(test_iassign_ivar)
 
     transfer(ci);
 
-    assert(array_at(k, 0).pointer == v.pointer);
+    assert(env_at(k, 0).pointer == v.pointer);
 }
 
 SETUP(test_ivar_read)
 
-    array_object k = make_array(1);
+    env_object k = make_env((object)fools_system->nil,
+                            (object)fools_system->nil,
+                            1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar((object)fools_system->nil,

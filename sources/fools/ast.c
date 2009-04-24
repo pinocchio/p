@@ -71,14 +71,3 @@ void inline eval_instruction(instruction instruction) {
     array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval:"));
     transfer(context);
 }
-
-void inline variable_assign(ivar_object variable, env_object env, object value) {
-    array_at_put(((object)env).array,
-                 number_value(variable->index),
-                 value);
-}
-
-object inline variable_value(ivar_object variable, env_object env) {
-    return array_at(((object)env).array,
-                    number_value(variable->index));
-}
