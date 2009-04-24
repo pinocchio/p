@@ -6,10 +6,25 @@
 
 #include <stdio.h>
 
+
+// Context handling
+
+void inline return_from_context(context_object context) {
+    object return_context = context->return_context;
+    if (return_context.nil != fools_system->nil) {
+        return transfer(return_context.context);
+    }
+}
+
+context_object inline target_context(context_object interpreter_context) {
+    return array_at(interpreter_context->arguments, 1).context;
+}
+
+
 // Transferring primitives.
 
 void inline native(context_object context) {
-    context_object passed_context = array_at(context->arguments, 0).context;
+    context_object passed_context = target_context(context);
     native_target(passed_context->self.native)(passed_context);
 }
 
@@ -23,21 +38,11 @@ void inline transfer(context_object context) {
 }
 
 
-// Context handling
-
-void inline return_from_context(context_object context) {
-    object return_context = context->return_context;
-    if (return_context.nil != fools_system->nil) {
-        return transfer(return_context.context);
-    }
-}
-
-
 // AST Handling
 
 // ilist>>eval
 void ilist_eval(context_object context) {
-    context_object ilist_context = array_at(context->arguments, 0).context;
+    context_object ilist_context = target_context(context);
     ilist_object ilist = (ilist_object)ilist_context->self.pointer;
 
     if (number_value(ilist->size) == 0) {
@@ -53,7 +58,7 @@ void ilist_eval(context_object context) {
 
 // ilist>>continue:
 void ilist_continue_eval(context_object context) {
-    context_object ilist_context = array_at(context->arguments, 0).context;
+    context_object ilist_context = target_context(context);
     int index = number_value(array_at(ilist_context->arguments, 2).number);
     ilist_object ilist = ilist_context->self.instruction.ilist;
     int size = number_value(ilist->size) - 1;
@@ -76,7 +81,7 @@ void ilist_continue_eval(context_object context) {
 
 // iconst>>eval
 void iconst_eval(context_object context) {
-    context_object iconst_context = array_at(context->arguments, 0).context;
+    context_object iconst_context = target_context(context);
     iconst_object iconst = iconst_context->self.instruction.iconst;
     
     array_at_put(iconst_context->return_context.context->arguments, 1,
@@ -87,7 +92,7 @@ void iconst_eval(context_object context) {
 
 // icall>>eval
 void icall_eval(context_object context) {
-    context_object icall_context = array_at(context->arguments, 0).context;
+    context_object icall_context = target_context(context);
     icall_object icall = icall_context->self.instruction.icall;
 
     icall_context->self         = icall->receiver;
@@ -96,12 +101,18 @@ void icall_eval(context_object context) {
     transfer(icall_context);
 }
 
+// iassign>>eval
+void iassign_eval(context_object context) {
+    context_object iassign_context = target_context(context);
+    
+}
+
 
 // Native class handling
 
 void with_native_class_lookup(context_object context) {
-    context_object class_context    = array_at(context->arguments, 0).context;
-    context_object receiver_context = array_at(class_context->arguments, 0).context;
+    context_object class_context    = target_context(context);
+    context_object receiver_context = target_context(class_context);
     native_class_object class       = class_context->self.native_class;
     dict_object natives             = class->natives;
     array_object arguments          = receiver_context->arguments;

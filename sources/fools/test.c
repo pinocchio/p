@@ -51,8 +51,7 @@ SETUP(test_native)
     context_object inner = make_context((object)n, 1);
     array_at_put(inner->arguments, 0, (object)make_number(5));
 
-    context_object outer = make_context((object)fools_system->nil, 1);
-    array_at_put(outer->arguments, 0, (object)inner);
+    context_object outer = make_meta_context(inner);
 
     native(outer);
 
@@ -130,6 +129,7 @@ SETUP(test_transfer_dict)
     array_at_put(context->arguments, 2, (object)(pointer)&result);
 
     transfer(context);
+
     assert(result.number == v1);
 
     array_at_put(context->arguments, 1, (object)k2);
@@ -140,6 +140,7 @@ SETUP(test_transfer_dict)
     array_at_put(context->arguments, 1, (object)k3);
 
     transfer(context);
+
     assert(result.nil == fools_system->nil);
 }
 

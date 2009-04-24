@@ -15,7 +15,7 @@ void prim_number_minus(context_object context) {
 }
 
 void prim_dict_at(context_object context) {
-    context_object receiver = array_at(context->arguments, 0).context;
+    context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object key              = array_at(receiver->arguments, 1);
     object* value           = (object*)array_at(receiver->arguments, 2).pointer;
@@ -23,7 +23,7 @@ void prim_dict_at(context_object context) {
 }
 
 void prim_dict_at_put(context_object context) {
-    context_object receiver = array_at(context->arguments, 0).context;
+    context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object key              = array_at(receiver->arguments, 1);
     object value            = array_at(receiver->arguments, 2);
