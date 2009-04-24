@@ -54,6 +54,7 @@ env_object make_env(object scope, object parent, int size) {
     result->scope       = scope;
     result->parent      = parent;
     result->values      = make_array(size);
+    header(result)      = (object)fools_system->env_class;
     return result;
 }
 

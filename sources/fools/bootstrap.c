@@ -22,7 +22,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(6);
+    fools_system->symbols_known_to_the_vm   = make_array(8);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -47,6 +47,10 @@ fools_object bootstrap() {
     fools_system->ivar_class = make_native_class(2);
     define_native(fools_system->ivar_class, "eval:",      &ivar_eval);
     define_native(fools_system->ivar_class, "assign:in:", &ivar_assign);
+
+    fools_system->env_class = make_native_class(2);
+    define_native(fools_system->env_class, "fetch:from:", &prim_env_fetch_from);
+    define_native(fools_system->env_class, "store:at:in:", &prim_env_store_at_in);
 
     return fools_system;
 }

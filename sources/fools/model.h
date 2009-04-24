@@ -117,6 +117,7 @@ struct fools {
     native_class_object iconst_class;
     native_class_object ivar_class;
     native_class_object iassign_class;
+    native_class_object env_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
 };

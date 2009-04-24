@@ -298,6 +298,57 @@ SETUP(test_ivar_read)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
+SETUP(test_env_lookup)
+
+    object e1k = (object)make_string("env1 identifier");
+    object e2k = (object)make_string("env2 identifier");
+
+    object v1 = (object)make_string("v1");
+    object v2 = (object)make_string("v2");
+    object v3 = (object)make_string("v3");
+
+    env_object env1 = make_env(e1k,
+                               (object)fools_system->nil,
+                               1);
+
+    env_object env2 = make_env(e2k,
+                               (object)env1,
+                               1);
+
+    context_object ci = make_context((object)env1, 4);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
+    array_at_put(ci->arguments, 1, v1);
+    array_at_put(ci->arguments, 2, (object)make_number(0));
+    array_at_put(ci->arguments, 3, e1k);
+
+    transfer(ci);
+
+    assert(array_at(env1->values, 0).pointer == v1.pointer);
+
+    ci = make_context((object)env2, 4);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
+    array_at_put(ci->arguments, 1, v2);
+    array_at_put(ci->arguments, 2, (object)make_number(0));
+    array_at_put(ci->arguments, 3, e2k);
+
+    transfer(ci);
+
+    assert(array_at(env1->values, 0).pointer == v1.pointer);
+    assert(array_at(env2->values, 0).pointer == v2.pointer);
+
+    ci = make_context((object)env2, 4);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
+    array_at_put(ci->arguments, 1, v3);
+    array_at_put(ci->arguments, 2, (object)make_number(0));
+    array_at_put(ci->arguments, 3, e1k);
+
+    transfer(ci);
+
+    assert(array_at(env1->values, 0).pointer == v3.pointer);
+    assert(array_at(env2->values, 0).pointer == v2.pointer);
+
+}
+
 /* start-stub
 SETUP(test_class_lookup)
 
@@ -336,6 +387,7 @@ int main() {
     test_icall();
     test_iassign_ivar();
     test_ivar_read();
+    test_env_lookup();
 
     return 0;
 }
