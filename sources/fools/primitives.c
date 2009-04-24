@@ -1,6 +1,7 @@
 #include <model.h>
 #include <system.h>
 
+/* broken
 void prim_number_plus(context_object context) {
     number_object* left     = (number_object*)array_at(context->arguments, 0).pointer;
     number_object first     = array_at(context->arguments, 1).number;
@@ -14,6 +15,7 @@ void prim_number_minus(context_object context) {
     number_object second    = array_at(context->arguments, 2).number;
     *left = make_number(first->value - second->value);
 }
+*/
 
 void prim_dict_at(context_object context) {
     context_object receiver = target_context(context);
