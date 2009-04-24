@@ -249,59 +249,6 @@ SETUP(test_icall)
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
 
-SETUP(test_iassign_ivar)
-
-    env_object k = make_env((object)fools_system->nil,
-                            (object)fools_system->nil,
-                            1);
-    object v = (object)make_number(42);
-    iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar((object)fools_system->nil,
-                                 make_number(0));
-
-    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
-
-    context_object ci = make_context((object)(instruction)iassign, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
-
-    transfer(ci);
-
-    assert(env_at(k, 0).pointer == v.pointer);
-}
-
-SETUP(test_ivar_read)
-
-    env_object k = make_env((object)fools_system->nil,
-                            (object)fools_system->nil,
-                            1);
-    object v = (object)make_number(42);
-    iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar((object)fools_system->nil,
-                                 make_number(0));
-
-    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
-
-    context_object ci = make_context((object)(instruction)iassign, 3);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
-
-    transfer(ci);
-
-    ilist_object ilist = make_ilist(0);
-
-    ci = make_context((object)(instruction)ivar, 2);
-    context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
-    ci->return_context = (object)rc;
-
-    transfer(ci);
-
-    assert(array_at(rc->arguments, 1).pointer == v.pointer);
-}
-
 SETUP(test_env_lookup)
 
     object e1k = (object)make_string("env1 identifier");
@@ -377,6 +324,59 @@ SETUP(test_env_lookup)
 
     assert(array_at(rc->arguments, 1).pointer == v2.pointer);
 
+}
+
+SETUP(test_iassign_ivar)
+
+    env_object k = make_env((object)fools_system->nil,
+                            (object)fools_system->nil,
+                            1);
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+    ivar_object ivar = make_ivar((object)fools_system->nil,
+                                 make_number(0));
+
+    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
+
+    context_object ci = make_context((object)(instruction)iassign, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
+
+    transfer(ci);
+
+    assert(env_at(k, 0).pointer == v.pointer);
+}
+
+SETUP(test_ivar_read)
+
+    env_object k = make_env((object)fools_system->nil,
+                            (object)fools_system->nil,
+                            1);
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+    ivar_object ivar = make_ivar((object)fools_system->nil,
+                                 make_number(0));
+
+    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
+
+    context_object ci = make_context((object)(instruction)iassign, 3);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
+
+    transfer(ci);
+
+    ilist_object ilist = make_ilist(0);
+
+    ci = make_context((object)(instruction)ivar, 2);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
 /* start-stub
