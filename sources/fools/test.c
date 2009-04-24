@@ -347,6 +347,32 @@ SETUP(test_env_lookup)
     assert(array_at(env1->values, 0).pointer == v3.pointer);
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
+    ci = make_context((object)env2, 3);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("fetch:from:"));
+    array_at_put(ci->arguments, 1, (object)make_number(0));
+    array_at_put(ci->arguments, 2, e1k);
+
+    ilist_object ilist = make_ilist(0);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v3.pointer);
+
+    ci = make_context((object)env2, 3);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("fetch:from:"));
+    array_at_put(ci->arguments, 1, (object)make_number(0));
+    array_at_put(ci->arguments, 2, e2k);
+
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v2.pointer);
+
 }
 
 /* start-stub
