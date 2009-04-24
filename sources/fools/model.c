@@ -49,6 +49,14 @@ dict_object make_dict(int init_size) {
     return result;
 }
 
+env_object make_env(object scope, object parent, int size) {
+    env_object result   = NEW(struct env);
+    result->scope       = scope;
+    result->parent      = parent;
+    result->values      = make_array(size);
+    return result;
+}
+
 nil_object make_nil() {
     return NEW(struct nil);
 }
@@ -209,4 +217,12 @@ object inline object_at(variable_object object, int index) {
 
 void inline object_at_put(variable_object o, int index, object value) {
     o->fields[index] = value;
+}
+
+object inline env_at(env_object env, int index) {
+    return array_at(env->values, index);
+}
+
+void inline env_at_put(env_object env, int index, object value) {
+    array_at_put(env->values, index, value);
 }

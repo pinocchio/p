@@ -91,8 +91,8 @@ struct dict {
 
 struct env {
     object              scope;
+    object              parent;
     array_object        values;
-    env_object          parent;
 };
 
 struct nil { };
@@ -127,6 +127,7 @@ extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
 extern dict_object              make_dict(int init_size);
+extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 extern context_object           inline make_meta_context(context_object context);
 extern context_object           make_context(object interpreter, int size);
@@ -147,5 +148,7 @@ extern object           inline symbol_known_to_the_vm(const char* string);
 extern object           inline object_at(variable_object object, int index);
 extern void             inline object_at_put(variable_object o,
                                              int index, object value);
+extern object           inline env_at(env_object env, int index);
+extern void             inline env_at_put(env_object env, int index, object value);
 
 #endif // MODEL_H
