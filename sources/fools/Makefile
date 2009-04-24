@@ -1,5 +1,5 @@
 CFILES=model.c bootstrap.c primitives.c system.c ast.c
-HFILES=model.h bootstrap.h primitives.h system.h ast.h
+HFILES=model.h bootstrap.h primitives.h system.h ast.h gc.h
 PROGRAM=fools
 VERSION=0.1
 
