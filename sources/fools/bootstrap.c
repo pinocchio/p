@@ -44,7 +44,8 @@ fools_object bootstrap() {
     fools_system->iassign_class = make_native_class(1);
     define_native(fools_system->iassign_class, "eval",    &iassign_eval);
 
-    fools_system->ivar_class = make_native_class(1);
+    fools_system->ivar_class = make_native_class(2);
+    define_native(fools_system->ivar_class, "eval",       &ivar_eval);
     define_native(fools_system->ivar_class, "assign:",    &ivar_assign);
 
     return fools_system;

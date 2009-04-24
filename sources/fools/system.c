@@ -129,6 +129,16 @@ void ivar_assign(context_object context) {
     return_from_context(ivar_context);
 }
 
+// iconst>>eval
+void ivar_eval(context_object context) {
+    context_object ivar_context = target_context(context);
+    ivar_object ivar = ivar_context->self.instruction.ivar;
+
+    array_at_put(ivar_context->return_context.context->arguments, 1,
+                 variable_value(ivar));
+
+    return_from_context(ivar_context);
+}
 
 // Native class handling
 

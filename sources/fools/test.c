@@ -245,7 +245,7 @@ SETUP(test_icall)
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
 
-SETUP(test_iassign)
+SETUP(test_iassign_ivar)
 
     object k;
     object v = (object)make_number(42);
@@ -260,6 +260,33 @@ SETUP(test_iassign)
     transfer(ci);
 
     assert(k.pointer == v.pointer);
+}
+
+SETUP(test_ivar_read)
+
+    object k;
+    object v = (object)make_number(42);
+    iconst_object iconst = make_iconst(v);
+    ivar_object ivar = make_ivar(&k);
+
+    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
+
+    context_object ci = make_context((object)(instruction)iassign, 1);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+
+    transfer(ci);
+
+    ilist_object ilist = make_ilist(0);
+
+    ci = make_context((object)(instruction)ivar, 1);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
 
@@ -281,7 +308,8 @@ int main() {
     test_transfer_iconst();
     test_return_of_ilist();
     test_icall();
-    test_iassign();
+    test_iassign_ivar();
+    test_ivar_read();
 
     return 0;
 }
