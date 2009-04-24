@@ -175,8 +175,9 @@ SETUP(test_transfer_empty_ilist)
 
     ilist_object ilist = make_ilist(0);
 
-    context_object ci = make_context((object)(instruction)ilist, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    context_object ci = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)fools_system->nil);
     transfer(ci);
 }
 
@@ -188,8 +189,9 @@ SETUP(test_transfer_empty_ilist_in_ilist)
     ilist_at_put(ilist, 0, (instruction)ilist2);
     ilist_at_put(ilist, 1, (instruction)ilist2);
 
-    context_object ci = make_context((object)(instruction)ilist, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    context_object ci = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)fools_system->nil);
 
     transfer(ci);
 }
@@ -200,10 +202,11 @@ SETUP(test_transfer_iconst)
     iconst_object iconst = make_iconst(v);
     ilist_object ilist = make_ilist(0);
 
-    context_object ci = make_context((object)(instruction)iconst, 1);
+    context_object ci = make_context((object)(instruction)iconst, 2);
     context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)fools_system->nil);
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -220,11 +223,12 @@ SETUP(test_return_of_ilist)
 
     ilist_at_put(ilist, 0, (instruction)iconst);
 
-    context_object ci = make_context((object)(instruction)ilist, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    context_object ci = make_context((object)(instruction)ilist, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)fools_system->nil);
 
     context_object rc = make_context((object)(instruction)empty_ilist, 2);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
 
     ci->return_context = (object)rc;
 
@@ -247,41 +251,46 @@ SETUP(test_icall)
 
 SETUP(test_iassign_ivar)
 
-    object k;
+    array_object k = make_array(1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar(&k);
+    ivar_object ivar = make_ivar((object)fools_system->nil,
+                                 make_number(0));
 
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
-    context_object ci = make_context((object)(instruction)iassign, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    context_object ci = make_context((object)(instruction)iassign, 2);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
 
     transfer(ci);
 
-    assert(k.pointer == v.pointer);
+    assert(array_at(k, 0).pointer == v.pointer);
 }
 
 SETUP(test_ivar_read)
 
-    object k;
+    array_object k = make_array(1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar(&k);
+    ivar_object ivar = make_ivar((object)fools_system->nil,
+                                 make_number(0));
 
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
-    context_object ci = make_context((object)(instruction)iassign, 1);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
+    context_object ci = make_context((object)(instruction)iassign, 3);
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
 
     transfer(ci);
 
     ilist_object ilist = make_ilist(0);
 
-    ci = make_context((object)(instruction)ivar, 1);
+    ci = make_context((object)(instruction)ivar, 2);
     context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
+    array_at_put(ci->arguments, 1, (object)k);
+    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
     ci->return_context = (object)rc;
 
     transfer(ci);

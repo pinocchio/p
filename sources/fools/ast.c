@@ -33,10 +33,11 @@ iconst_object make_iconst(object constant) {
     return result;
 }
 
-ivar_object make_ivar(object* variable) {
+ivar_object make_ivar(object scope, number_object index) {
     ivar_object result      = NEW(struct variable);
     header(result)          = (object)fools_system->ivar_class;
-    result->variable        = variable;
+    result->scope           = scope;
+    result->index           = index;
     return result;
 }
 
@@ -67,14 +68,17 @@ void inline ilist_at_put(ilist_object ilist, int index, instruction value) {
 void inline eval_instruction(instruction instruction) {
     // TODO: cache array with eval
     context_object context = make_context((object)instruction, 1);
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval:"));
     transfer(context);
 }
 
-void inline variable_assign(ivar_object variable, object value) {
-    *variable->variable = value;
+void inline variable_assign(ivar_object variable, env_object env, object value) {
+    array_at_put(((object)env).array,
+                 number_value(variable->index),
+                 value);
 }
 
-object inline variable_value(ivar_object variable) {
-    return *variable->variable;
+object inline variable_value(ivar_object variable, env_object env) {
+    return array_at(((object)env).array,
+                    number_value(variable->index));
 }

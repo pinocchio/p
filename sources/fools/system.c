@@ -40,7 +40,7 @@ void inline transfer(context_object context) {
 
 // AST Handling
 
-// ilist>>eval
+// ilist>>eval:
 void ilist_eval(context_object context) {
     context_object ilist_context = target_context(context);
     ilist_object ilist = (ilist_object)header(ilist_context).pointer;
@@ -49,14 +49,17 @@ void ilist_eval(context_object context) {
         return return_from_context(ilist_context);
     }
 
-    ilist_context->arguments = make_array(3);
-    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("return:continue:"));
+    object environment = array_at(ilist_context->arguments, 1);
+
+    ilist_context->arguments = make_array(4);
+    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("return:continue:env:"));
     array_at_put(ilist_context->arguments, 2, (object)make_number(0));
+    array_at_put(ilist_context->arguments, 3, environment);
 
     transfer(ilist_context);
 }
 
-// ilist>>continue:
+// ilist>>return:continue:env:
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = target_context(context);
     int index = number_value(array_at(ilist_context->arguments, 2).number);
@@ -70,16 +73,16 @@ void ilist_continue_eval(context_object context) {
         array_at_put(ilist_context->arguments, 2, (object)make_number(index + 1));
         context->return_context = (object)ilist_context;
     } else { // tailcall.
-        context->arguments = make_array(1);
+        context->arguments = make_array(2);
         context->return_context = (object)ilist_context->return_context;
     }
     
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval"));
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm("eval:"));
 
     transfer(context);
 }
 
-// iconst>>eval
+// iconst>>eval:
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).instruction.iconst;
@@ -90,7 +93,7 @@ void iconst_eval(context_object context) {
     return_from_context(iconst_context);
 }
 
-// icall>>eval
+// icall>>eval:
 void icall_eval(context_object context) {
     context_object icall_context = target_context(context);
     icall_object icall = header(icall_context).instruction.icall;
@@ -101,44 +104,64 @@ void icall_eval(context_object context) {
     transfer(icall_context);
 }
 
-// iassign>>eval
+// iassign>>eval:
 void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
     iassign_object iassign = header(iassign_context).instruction.iassign;
     
+
+    env_object env = array_at(iassign_context->arguments, 1).env;
+
     header(context)     = iassign->expression;
     context->arguments  = iassign_context->arguments;
 
     header(iassign_context)    = (object)(instruction)iassign->variable;
-    iassign_context->arguments = make_array(2);
-    array_at_put(iassign_context->arguments, 0, symbol_known_to_the_vm("assign:"));
+    iassign_context->arguments = make_array(3);
+    array_at_put(iassign_context->arguments, 0,
+                 symbol_known_to_the_vm("assign:in:"));
+    array_at_put(iassign_context->arguments, 2, (object)env);
 
     context->return_context = (object)iassign_context;
 
     transfer(context);
 }
 
-// ivar>>assign:
+// ivar>>assign:in:
 void ivar_assign(context_object context) {
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
-    
+
+    env_object env = array_at(ivar_context->arguments, 2).env;
+
     object value = array_at(ivar_context->arguments, 1);
-    variable_assign(ivar, value);
+    variable_assign(ivar, env, value);
 
     return_from_context(ivar_context);
 }
 
-// iconst>>eval
+// iconst>>eval:
 void ivar_eval(context_object context) {
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
 
+    env_object env = array_at(ivar_context->arguments, 1).env;
+
     array_at_put(ivar_context->return_context.context->arguments, 1,
-                 variable_value(ivar));
+                 variable_value(ivar, env));
 
     return_from_context(ivar_context);
 }
+
+/*
+// ifunc>>eval
+void ifunc_eval(context_object context) {
+    context_object ifunc_context = target_context(context);
+    ifunc_object ifunc = header(ifunc_context).instruction.ifunc;
+    
+    environment_object env = make_environment(number_value(ifunc->size));
+    
+}
+*/
 
 // Native class handling
 

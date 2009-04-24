@@ -17,6 +17,7 @@
 
 #define header(o) (*(object*)PDEC(o))
 
+struct env;
 struct variable_object;
 struct native_class;
 struct string;
@@ -27,6 +28,7 @@ struct nil;
 struct native;
 struct context;
 
+typedef struct env*             env_object;
 typedef struct variable_object* variable_object;
 typedef struct native_class*    native_class_object;
 typedef struct string*          string_object;
@@ -54,6 +56,7 @@ typedef union {
     nil_object          nil;
     native_object       native;
     context_object      context;
+    env_object          env;
     instruction         instruction;
     pointer             pointer;
 } object;
@@ -84,6 +87,12 @@ struct array {
 struct dict {
     array_object        keys;
     array_object        values;
+};
+
+struct env {
+    object              scope;
+    array_object        values;
+    env_object          parent;
 };
 
 struct nil { };

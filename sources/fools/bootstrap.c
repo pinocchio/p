@@ -32,21 +32,21 @@ fools_object bootstrap() {
     define_native(fools_system->dict_class, "at:put:",    &prim_dict_at_put);
 
     fools_system->ilist_class = make_native_class(2);
-    define_native(fools_system->ilist_class, "return:continue:",  &ilist_continue_eval);
-    define_native(fools_system->ilist_class, "eval",      &ilist_eval);
+    define_native(fools_system->ilist_class, "return:continue:env:",  &ilist_continue_eval);
+    define_native(fools_system->ilist_class, "eval:",     &ilist_eval);
     
     fools_system->iconst_class = make_native_class(1);
-    define_native(fools_system->iconst_class, "eval",     &iconst_eval);
+    define_native(fools_system->iconst_class, "eval:",    &iconst_eval);
 
     fools_system->icall_class = make_native_class(1);
-    define_native(fools_system->icall_class, "eval",      &icall_eval);
+    define_native(fools_system->icall_class, "eval:",     &icall_eval);
 
     fools_system->iassign_class = make_native_class(1);
-    define_native(fools_system->iassign_class, "eval",    &iassign_eval);
+    define_native(fools_system->iassign_class, "eval:",   &iassign_eval);
 
     fools_system->ivar_class = make_native_class(2);
-    define_native(fools_system->ivar_class, "eval",       &ivar_eval);
-    define_native(fools_system->ivar_class, "assign:",    &ivar_assign);
+    define_native(fools_system->ivar_class, "eval:",      &ivar_eval);
+    define_native(fools_system->ivar_class, "assign:in:", &ivar_assign);
 
     return fools_system;
 }

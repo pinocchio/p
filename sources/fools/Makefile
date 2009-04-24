@@ -37,5 +37,5 @@ $(TARBZ2): $(SOURCES)
 
 include make.depend
 
-make.depend: $(CFILES)
+make.depend: $(CFILES) test.c fools.c
 	$(CC) -I. -M $^ > $@
