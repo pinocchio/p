@@ -109,23 +109,24 @@ void iassign_eval(context_object context) {
     context->self       = iassign->expression;
     context->arguments  = iassign_context->arguments;
 
+    iassign_context->self      = (object)(instruction)iassign->variable;
     iassign_context->arguments = make_array(2);
-    array_at_put(iassign_context->arguments, 0, symbol_known_to_the_vm("return:"));
+    array_at_put(iassign_context->arguments, 0, symbol_known_to_the_vm("assign:"));
 
     context->return_context = (object)iassign_context;
 
     transfer(context);
 }
 
-// iassign>>return:
-void iassign_continue_eval(context_object context) {
-    context_object iassign_context = target_context(context);
-    iassign_object iassign = iassign_context->self.instruction.iassign;
+// ivar>>assign:
+void ivar_assign(context_object context) {
+    context_object ivar_context = target_context(context);
+    ivar_object ivar = ivar_context->self.instruction.ivar;
     
-    object return_value = array_at(iassign_context->arguments, 1);
-    do_assign(iassign, return_value);
+    object value = array_at(ivar_context->arguments, 1);
+    variable_assign(ivar, value);
 
-    return_from_context(iassign_context);
+    return_from_context(ivar_context);
 }
 
 

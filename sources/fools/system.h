@@ -16,6 +16,6 @@ extern void ilist_continue_eval(context_object context);
 extern void icall_eval(context_object context);
 extern void iconst_eval(context_object context);
 extern void iassign_eval(context_object context);
-extern void iassign_continue_eval(context_object context);
+extern void ivar_assign(context_object context);
 
 #endif

@@ -10,7 +10,7 @@ ilist_object make_ilist(int size) {
     return result;
 }
 
-iassign_object make_iassign(object* variable, object expression) {
+iassign_object make_iassign(ivar_object variable, object expression) {
     iassign_object result   = NEW(struct assignment);
     result->variable        = variable;
     result->expression      = expression;
@@ -30,6 +30,13 @@ iconst_object make_iconst(object constant) {
     iconst_object result    = NEW(struct constant);
     header(result)          = (object)fools_system->iconst_class;
     result->constant        = constant;
+    return result;
+}
+
+ivar_object make_ivar(object* variable) {
+    ivar_object result      = NEW(struct variable);
+    header(result)          = (object)fools_system->ivar_class;
+    result->variable        = variable;
     return result;
 }
 
@@ -64,6 +71,10 @@ void inline eval_instruction(instruction instruction) {
     transfer(context);
 }
 
-void inline do_assign(iassign_object iassign, object value) {
-    *iassign->variable = value;
+void inline variable_assign(ivar_object variable, object value) {
+    *variable->variable = value;
+}
+
+object inline variable_value(ivar_object variable) {
+    return *variable->variable;
 }

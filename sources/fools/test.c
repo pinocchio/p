@@ -250,8 +250,9 @@ SETUP(test_iassign)
     object k;
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
+    ivar_object ivar = make_ivar(&k);
 
-    iassign_object iassign = make_iassign(&k, (object)(instruction)iconst);
+    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
     context_object ci = make_context((object)(instruction)iassign, 1);
     array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval"));
