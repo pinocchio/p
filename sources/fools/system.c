@@ -20,6 +20,10 @@ object inline argument_at(context_object context, int index) {
     return array_at(context->arguments, index);
 }
 
+context_object inline return_context(context_object context) {
+    return context->return_context.context;
+}
+
 // Context handling
 
 void inline return_from_context(context_object context) {
@@ -87,7 +91,7 @@ void ilist_continue_eval(context_object context) {
         context->return_context = (object)ilist_context;
     } else { // tailcall.
         context->arguments = make_array(2);
-        context->return_context = (object)ilist_context->return_context;
+        context->return_context = ilist_context->return_context;
     }
     
     set_message(context, "eval:");
@@ -100,7 +104,7 @@ void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).instruction.iconst;
 
-    set_argument(iconst_context->return_context.context,
+    set_argument(return_context(iconst_context),
                  1, iconst->constant);
 
     return_from_context(iconst_context);
@@ -181,11 +185,9 @@ void iscoped_eval(context_object context) {
     object dynamic_env = argument_at(iscoped_context, 1);
     object static_env  = iscoped->scope;
 
-    context_object return_context = iscoped_context->return_context.context;
-
     header(iscoped_context) = iscoped->expression;
     set_argument(iscoped_context, 1, static_env);
-    set_argument(return_context, 2, dynamic_env); 
+    set_argument(return_context(iscoped_context), 2, dynamic_env); 
 
     transfer(iscoped_context);
 }
@@ -196,7 +198,7 @@ void icapture_eval(context_object context) {
 
     object dynamic_env = argument_at(icapture_context, 1);
 
-    set_argument(icapture_context->return_context.context, 1, dynamic_env);
+    set_argument(return_context(icapture_context), 1, dynamic_env);
 
     return_from_context(icapture_context);
 }
