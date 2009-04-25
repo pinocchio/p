@@ -198,8 +198,8 @@ disallows us to use for example the C stack with its stack frames,
 unless reified properly. 
 
 \section{Implementation of a fully reflective system}
-Their are three basic elements which allow us to tie together a fully
-reflective system:
+Their are three basic design considerations which allow us to tie
+together a fully reflective system:
 
 \begin{itemize}
     \item In all languages there are locations where a group of
@@ -218,25 +218,131 @@ reflective system:
           which executes the context switch linked to it natively.
 \end{itemize}
 
-While the last basic element allows us to suck in all sorts of native
-behaviour, the third principle of reflective systems refrains us from
-doing so. 
+While the last design consideration allows us to suck in all sorts of
+native behaviour, the third principle of reflective systems refrains us
+from doing so. 
 
-To be fair, in order to get the system running there is one hardwired
+\subsection{Context -- Hardwired Data}
+There is once type of object which is required to be built-in into the base
+language system. Contexts are the representation of actions taken at
+execution time. When an interpreter is activated, there is a context
+representing the call to the interpreter. When this interpreter is non-native,
+there is another context object representing the call to its meta-interpreter.
+The meta-interpreter will be invoked by sending \verb$interpret:$ to it, with
+the first invocation context as an argument. And so on, until the
+meta-interpreter happens to be a native interpreter. This native interpreter
+will in its execution be responsible for the execution of the tower of
+interpreters below.
+
+\subsection{Transfer -- Hardwired Behaviour}
+In order to get the system running there is one hardwired
 function which knows how to \emph{transfer} to a context, \ie enforce
-a context switch in the system. However this primitive is the most
-basic primitive possible to perform such task and can be seen as the
-invisible power used by Baron Munchausen to get himself out of the swamp.
-Our transfer primitive takes a context switch and switches to its
-interpreter, while passing along a context object which encapsulates both
-the interpreter and the original context switch. In case this interpreter
-is non-native this process continues until a native interpreter is found.
-Once one is found, the native interpreter is responsible for all
-interpretation going on at lower levels.
+a context switch in the system. This primitive is the most
+basic primitive possible to perform such task.
+
+\subsection{Native Interpreters}
+In order to make the whole base system reified, all other kinds of native
+behaviour are made accessible via objects and message sends. While most
+languages just have bytecode or assembler representing the actions to be taken
+at runtime, our language system models all behaviour in terms of objects as
+well. These objects are fully polymorphic objects which can be accessed at
+runtime.
+
+Since their is of course no system around which handles message
+dispatch one way or another, all objects which cross the barrier between
+native and non-native have a special type of interpreter, \ie a
+\emph{native interpreter}. A native interpreter is an interpreter which knows
+about a very limited set of native operations. Whenever the message evaluated
+by an interpreter; or the message sent to an object; matches on of the native
+operations, the native functionality corresponding to the message is directly
+invoked. When such a message is not understood natively, another interpreter
+which is linked to the native interpreter gets invoked with the original
+context. Like this objects can natively understand certain messages, while
+being able to still implement their own type of context evaluation.
+
+Since native objects (objects interpreted by native interpreters) are
+immutable with respect to their native behaviour, the set of types of native
+objects is as limited as possible. This while being large enough to allow
+developers to easily compose them to build any type of system. 
+
+An important feature of native objects is that they follow the principle that
+all native behaviour and non-native behaviour has to go through the same
+interface. Since native objects are activated through a normal message sending
+mechanism, they can be interchanged with objects which are not implemented
+natively. These non-native objects will be a lot slower\footnote{This depends
+on results in JIT compiling non-native structures. Eventually it might even be
+faster!}, but might be a lot more elaborate and what is more important: they
+can be changed from within the system.
+
+\subsubsection{Environment}
+Environments are passed around from behavioural object to behavioural object
+and represent the data space of a running program. There are two primitive
+operations linked with environments, one to store data at a certain location,
+and one to retrieve data of a certain location.
+
+\subsubsection{Behaviour}
+Behavioural objects are used to represent submethod structures which decide
+execution. Behavioural objects are evaluated natively by sending them the
+message \verb$eval:$ with the enviroment in which they have to be evaluated as
+an argument.
+
+All of the following six native behavioural objects are required to bootstrap
+a fully object oriented language system:
+
+\begin{description}
+    \item[IConst] is an object which when sent \verb$eval:$ it sets the first argument
+                  of the return context to its assigned constant value.
+
+    \item[ILists] are objects which nest other evaluable objects. When sent \verb$eval:$
+                  they sent themselves \verb$return:env:continue:$ with \emph{nil}, the
+                  environment passed to \verb$eval:$ and an initial index $0$ in the ilist of
+                  evaluable objects.
+
+                  Whenever \verb$return:env:continue:$ is receiver, the evaluable object at the
+                  passed index is retrieved. The ilist then invokes \verb$eval:$ with the current
+                  environment on the found object, after pointing the return context to itself
+                  with the next index. While sending \verb$eval:$ to the last object in the ilist
+                  the return context is linked to the return context of the ilist.
+
+
+    \item[IVar]   is a type of object which relates code to runtime
+                  environments. It natively triggers environment lookups and
+                  stores.
+
+    \item[IAssign] will evaluate the expression linked to it; after pointing
+                   its continuation at an assignment of the linked variable.
+
+    \item[ICall]   represents a location where the context switches to
+                   another interpreter. This kind of action is an abstraction
+                   which generalizes over all sorts of switches around in
+                   other languages, such as method invocation, macro and
+                   function calls, calls to predicates, \dots 
+
+    \item[IScoped] is an object which contains a pointer to an environment and
+                   another to an expression. Whenever evaluated it creates a
+                   new sub-environment of the environment stored in the
+                   iscoped and passes that environment along in the evaluation
+                   of the expression linked to the iscoped.
+\end{description}
+
+\subsubsection{Primitives}
+In order to make the system actually perform useful tasks, some extra native
+behaviour needs to be installed. For method lookup to work, the system needs
+to be able to test equality and perform actions depending on the results. This
+requires a native way of comparing objects and the availability of boolean
+objects. 
+
+\subsection{Tying The Loose Ends Together}
+At this point we have all the types of native structures that we need to
+actually build useful reflective languages. However, the fact that native
+objects have a fallback link to other interpreters means that we have to fill
+them in somehow. \todo{we put classes there... should check if it would make
+sense to put something else there; like a default erroring system. Layout of
+the instruction objects is fixed though...}
 
 \section{Uses of a fully reflective system}
 
-\subsection{Language Implementation}
+\subsection{Language Skins}
 The most obvious use of a fully reflective system is to use it to
 implement languages. Languages restrict reflection in a language
 system and impose interpretation strategies. For this reason languages
@@ -251,6 +357,12 @@ own attached interpreter, interoperability between languages written
 for this system is a non-issue. Once an object of one language decides
 to do a transfer, it is up to the object of possibly another language
 to continue and probably return control to its caller at some point.
+
+The original parser will be written in a language skin available before
+the conception of the new language. Given that a running system is persisted
+using Smalltalk-style images, once the new language is properly
+functional the \emph{bootstrapping parser} can be replaced by a parser
+written in terms of the language itself.
 
 \subsection{Dynamic Optimization\label{sec:dynamicoptimization}}
 When all behaviour of a language is reflective, this automatically
@@ -343,5 +455,19 @@ as with all other reflective capabilities. (Since in the end everything
 is bound to our polymorphic behaviour instructions, at least some
 level will be readable. Native behaviours will have to be called from
 within the jitted code; or inlined directly. Maybe move this to JIT).
+
+\section{Other Considerations}
+\subsection{FFI}
+FFI in a fully reflective language system should be fairly straightforward.
+For native foreign functions, wrappers can be created in the same way as they
+are created for native behaviour used by the system itself. Foreign
+functionality written in high-level languages could be accommodated by writing
+a new language skin. This last point would automatically enable all high-level
+languages for which a skin exist to interoperate.
+
+\subsection{Windows}
+An oo windowing DSL like \emph{Glamour} should be used as a library for
+creating graphical browsers of all sorts for the language system. FFI can be
+used to bridge between \emph{glamour} and existing windowing toolkits.
 
 \end{document}
