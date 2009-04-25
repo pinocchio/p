@@ -180,6 +180,18 @@ void iscoped_eval(context_object context) {
     transfer(iscoped_context);
 }
 
+// icapture>>eval:
+void icapture_eval(context_object context) {
+    context_object icapture_context = target_context(context);
+
+    object dynamic_env = array_at(icapture_context->arguments, 1);
+
+    array_at_put(icapture_context->return_context.context->arguments, 1,
+                 dynamic_env);
+
+    return_from_context(icapture_context);
+}
+
 // Native class handling
 
 void with_native_class_lookup(context_object context) {

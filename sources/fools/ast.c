@@ -41,6 +41,12 @@ ivar_object make_ivar(object scope, number_object index) {
     return result;
 }
 
+icapture_object make_icapture() {
+    icapture_object result  = NEW(struct capture);
+    header(result)          = (object)fools_system->icapture_class;
+    return result;
+}
+
 // Accessors 
 
 number_object inline ilist_size(ilist_object ilist) {

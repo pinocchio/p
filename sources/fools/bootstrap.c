@@ -1,6 +1,7 @@
 #include <bootstrap.h>
 #include <primitives.h>
 #include <system.h>
+#include <ast.h>
 #include <assert.h>
 
 fools_object fools_system;
@@ -47,6 +48,11 @@ fools_object bootstrap() {
     fools_system->ivar_class = make_native_class(2);
     define_native(fools_system->ivar_class, "eval:",      &ivar_eval);
     define_native(fools_system->ivar_class, "assign:in:", &ivar_assign);
+
+    fools_system->icapture_class = make_native_class(1);
+    define_native(fools_system->icapture_class, "eval:", &icapture_eval);
+
+    fools_system->icapture = (object)(instruction)make_icapture();
 
     fools_system->env_class = make_native_class(2);
     define_native(fools_system->env_class, "fetch:from:", &prim_env_fetch_from);

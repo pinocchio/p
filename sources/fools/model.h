@@ -113,11 +113,13 @@ struct fools {
     object              native;
     object              native_metaclass;
     object              class_lookup;
+    object              icapture;
     native_class_object ilist_class;
     native_class_object icall_class;
     native_class_object iconst_class;
     native_class_object ivar_class;
     native_class_object iassign_class;
+    native_class_object icapture_class;
     native_class_object env_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;
