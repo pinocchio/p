@@ -20,6 +20,10 @@ object inline argument_at(context_object context, int index) {
     return array_at(context->arguments, index);
 }
 
+object inline message(context_object context) {
+    return argument_at(context, 0);
+}
+
 context_object inline return_context(context_object context) {
     return context->return_context.context;
 }
@@ -210,7 +214,7 @@ void with_native_class_lookup(context_object context) {
     context_object receiver_context = target_context(class_context);
     native_class_object class       = header(class_context).native_class;
     dict_object natives             = class->natives;
-    object selector                 = argument_at(receiver_context, 0);
+    object selector                 = message(receiver_context);
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
