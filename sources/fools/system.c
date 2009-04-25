@@ -52,17 +52,17 @@ void ilist_eval(context_object context) {
     object environment = array_at(ilist_context->arguments, 1);
 
     ilist_context->arguments = make_array(4);
-    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("return:continue:env:"));
-    array_at_put(ilist_context->arguments, 2, (object)make_number(0));
-    array_at_put(ilist_context->arguments, 3, environment);
+    array_at_put(ilist_context->arguments, 0, symbol_known_to_the_vm("return:env:continue:"));
+    array_at_put(ilist_context->arguments, 2, environment);
+    array_at_put(ilist_context->arguments, 3, (object)make_number(0));
 
     transfer(ilist_context);
 }
 
-// ilist>>return:continue:env:
+// ilist>>return:env:continue:
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = target_context(context);
-    int index = number_value(array_at(ilist_context->arguments, 2).number);
+    int index = number_value(array_at(ilist_context->arguments, 3).number);
     ilist_object ilist = header(ilist_context).instruction.ilist;
     int size = number_value(ilist->size) - 1;
 
@@ -70,7 +70,7 @@ void ilist_continue_eval(context_object context) {
     header(context) = instruction;
 
     if (index != size) {
-        array_at_put(ilist_context->arguments, 2, (object)make_number(index + 1));
+        array_at_put(ilist_context->arguments, 3, (object)make_number(index + 1));
         context->return_context = (object)ilist_context;
     } else { // tailcall.
         context->arguments = make_array(2);
@@ -163,16 +163,22 @@ void ivar_eval(context_object context) {
     transfer(ivar_context);
 }
 
-/*
-// ifunc>>eval
-void ifunc_eval(context_object context) {
-    context_object ifunc_context = target_context(context);
-    ifunc_object ifunc = header(ifunc_context).instruction.ifunc;
-    
-    environment_object env = make_environment(number_value(ifunc->size));
-    
+// [..., ilist>>return:continue:env:, iscoped>>eval:]
+void iscoped_eval(context_object context) {
+    context_object iscoped_context = target_context(context);
+    iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
+
+    object dynamic_env = array_at(iscoped_context->arguments, 1);
+    object static_env  = iscoped->scope;
+
+    context_object return_context = iscoped_context->return_context.context;
+
+    header(iscoped_context) = iscoped->expression;
+    array_at_put(iscoped_context->arguments, 1, static_env);
+    array_at_put(return_context->arguments, 2, dynamic_env); 
+
+    transfer(iscoped_context);
 }
-*/
 
 // Native class handling
 

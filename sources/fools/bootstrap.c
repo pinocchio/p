@@ -32,7 +32,7 @@ fools_object bootstrap() {
     define_native(fools_system->dict_class, "at:put:",    &prim_dict_at_put);
 
     fools_system->ilist_class = make_native_class(2);
-    define_native(fools_system->ilist_class, "return:continue:env:",  &ilist_continue_eval);
+    define_native(fools_system->ilist_class, "return:env:continue:",  &ilist_continue_eval);
     define_native(fools_system->ilist_class, "eval:",     &ilist_eval);
     
     fools_system->iconst_class = make_native_class(1);

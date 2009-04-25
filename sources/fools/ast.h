@@ -27,11 +27,17 @@ struct variable {
     number_object   index;
 };
 
+struct scoped {
+    object          scope;
+    object          expression;
+};
+
 extern ilist_object     make_ilist(int size);
 extern iassign_object   make_iassign(ivar_object variable, object expression);
 extern icall_object     make_icall(object receiver, int argsize);
 extern iconst_object    make_iconst(object constant);
 extern ivar_object      make_ivar(object scope, number_object index);
+extern iscoped_object   make_iscoped(object scope, object expression);
 
 
 extern instruction inline raw_ilist_at(ilist_object ilist, int index);
