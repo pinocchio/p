@@ -360,7 +360,7 @@ SETUP(test_ivar_read)
 
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
-    context_object ci = make_context((object)(instruction)iassign, 3);
+    context_object ci = make_context((object)(instruction)iassign, 2);
     set_message(ci, "eval:");
     set_argument(ci, 1, (object)k);
 
