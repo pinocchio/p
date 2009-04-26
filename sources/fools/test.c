@@ -40,8 +40,8 @@ SETUP(test_native_layout)
 
 void native_test_single_arg_5(context_object c) {
     assert(c->arguments->size->value == 1);
-    assert(number_value(array_at(c->arguments, 0).number) == 5);
-    array_at(c->arguments, 0).number->value = 6;
+    assert(number_value(argument_at(c, 0).number) == 5);
+    argument_at(c, 0).number->value = 6;
 }
 
 SETUP(test_native)
@@ -49,13 +49,13 @@ SETUP(test_native)
     native_object n = make_native(&native_test_single_arg_5);
 
     context_object inner = make_context((object)n, 1);
-    array_at_put(inner->arguments, 0, (object)make_number(5));
+    set_argument(inner, 0, (object)make_number(5));
 
     context_object outer = make_meta_context(inner);
 
     native(outer);
 
-    assert(number_value(array_at(inner->arguments, 0).number) == 6);
+    assert(number_value(argument_at(inner, 0).number) == 6);
 }
 
 SETUP(test_transfer)
@@ -63,11 +63,11 @@ SETUP(test_transfer)
     native_object n = make_native(&native_test_single_arg_5);
     
     context_object inner = make_context((object)n, 1);
-    array_at_put(inner->arguments, 0, (object)make_number(5));
+    set_argument(inner, 0, (object)make_number(5));
 
     transfer(inner);
 
-    assert(number_value(array_at(inner->arguments, 0).number) == 6);
+    assert(number_value(argument_at(inner, 0).number) == 6);
 }
 
 SETUP(test_string_equals) 
@@ -106,14 +106,14 @@ SETUP(test_transfer_dict)
 
     context_object context = make_context((object)dict, 4);
 
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("at:put:"));
-    array_at_put(context->arguments, 1, (object)k1);
-    array_at_put(context->arguments, 2, (object)v1);
+    set_message(context, "at:put:");
+    set_argument(context, 1, (object)k1);
+    set_argument(context, 2, (object)v1);
 
     transfer(context);
 
-    array_at_put(context->arguments, 1, (object)k2);
-    array_at_put(context->arguments, 2, (object)v2);
+    set_argument(context, 1, (object)k2);
+    set_argument(context, 2, (object)v2);
 
     transfer(context);
 
@@ -124,20 +124,20 @@ SETUP(test_transfer_dict)
     context = make_context((object)dict, 3);
     object result;
 
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm("at:"));
-    array_at_put(context->arguments, 1, (object)k1);
-    array_at_put(context->arguments, 2, (object)(pointer)&result);
+    set_message(context, "at:");
+    set_argument(context, 1, (object)k1);
+    set_argument(context, 2, (object)(pointer)&result);
 
     transfer(context);
 
     assert(result.number == v1);
 
-    array_at_put(context->arguments, 1, (object)k2);
+    set_argument(context, 1, (object)k2);
 
     transfer(context);
     assert(result.number == v2);
 
-    array_at_put(context->arguments, 1, (object)k3);
+    set_argument(context, 1, (object)k3);
 
     transfer(context);
 
@@ -162,13 +162,13 @@ SETUP(test_return_from_context)
     native_object n = make_native(&native_test_single_arg_5);
     
     context_object to = make_context((object)n, 1);
-    array_at_put(to->arguments, 0, (object)make_number(5));
+    set_argument(to, 0, (object)make_number(5));
 
     from->return_context = (object)to;
 
     return_from_context(from);
 
-    assert(number_value(array_at(to->arguments, 0).number) == 6);
+    assert(number_value(argument_at(to, 0).number) == 6);
 }
 
 SETUP(test_transfer_empty_ilist)
@@ -176,8 +176,8 @@ SETUP(test_transfer_empty_ilist)
     ilist_object ilist = make_ilist(0);
 
     context_object ci = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)fools_system->nil);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)fools_system->nil);
     transfer(ci);
 }
 
@@ -190,8 +190,8 @@ SETUP(test_transfer_empty_ilist_in_ilist)
     ilist_at_put(ilist, 1, (instruction)ilist2);
 
     context_object ci = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)fools_system->nil);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)fools_system->nil);
 
     transfer(ci);
 }
@@ -204,14 +204,14 @@ SETUP(test_transfer_iconst)
 
     context_object ci = make_context((object)(instruction)iconst, 2);
     context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)fools_system->nil);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)fools_system->nil);
+    set_message(rc, "eval:");
     ci->return_context = (object)rc;
 
     transfer(ci);
 
-    assert(array_at(rc->arguments, 1).pointer == v.pointer);
+    assert(argument_at(rc, 1).pointer == v.pointer);
 }
 
 SETUP(test_return_of_ilist)
@@ -224,17 +224,17 @@ SETUP(test_return_of_ilist)
     ilist_at_put(ilist, 0, (instruction)iconst);
 
     context_object ci = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)fools_system->nil);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)fools_system->nil);
 
     context_object rc = make_context((object)(instruction)empty_ilist, 2);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    set_message(rc, "eval:");
 
     ci->return_context = (object)rc;
 
     transfer(ci);
 
-    assert(array_at(rc->arguments, 1).pointer == v.pointer);
+    assert(argument_at(rc, 1).pointer == v.pointer);
 }
 
 SETUP(test_icall)
@@ -267,20 +267,20 @@ SETUP(test_env_lookup)
                                1);
 
     context_object ci = make_context((object)env1, 4);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
-    array_at_put(ci->arguments, 1, v1);
-    array_at_put(ci->arguments, 2, (object)make_number(0));
-    array_at_put(ci->arguments, 3, e1k);
+    set_message(ci, "store:at:in:");
+    set_argument(ci, 1, v1);
+    set_argument(ci, 2, (object)make_number(0));
+    set_argument(ci, 3, e1k);
 
     transfer(ci);
 
     assert(array_at(env1->values, 0).pointer == v1.pointer);
 
     ci = make_context((object)env2, 4);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
-    array_at_put(ci->arguments, 1, v2);
-    array_at_put(ci->arguments, 2, (object)make_number(0));
-    array_at_put(ci->arguments, 3, e2k);
+    set_message(ci, "store:at:in:");
+    set_argument(ci, 1, v2);
+    set_argument(ci, 2, (object)make_number(0));
+    set_argument(ci, 3, e2k);
 
     transfer(ci);
 
@@ -288,10 +288,10 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 4);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("store:at:in:"));
-    array_at_put(ci->arguments, 1, v3);
-    array_at_put(ci->arguments, 2, (object)make_number(0));
-    array_at_put(ci->arguments, 3, e1k);
+    set_message(ci, "store:at:in:");
+    set_argument(ci, 1, v3);
+    set_argument(ci, 2, (object)make_number(0));
+    set_argument(ci, 3, e1k);
 
     transfer(ci);
 
@@ -299,13 +299,13 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 3);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("fetch:from:"));
-    array_at_put(ci->arguments, 1, (object)make_number(0));
-    array_at_put(ci->arguments, 2, e1k);
+    set_message(ci, "fetch:from:");
+    set_argument(ci, 1, (object)make_number(0));
+    set_argument(ci, 2, e1k);
 
     ilist_object ilist = make_ilist(0);
     context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    set_message(rc, "eval:");
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -313,11 +313,12 @@ SETUP(test_env_lookup)
     assert(array_at(rc->arguments, 1).pointer == v3.pointer);
 
     ci = make_context((object)env2, 3);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("fetch:from:"));
-    array_at_put(ci->arguments, 1, (object)make_number(0));
-    array_at_put(ci->arguments, 2, e2k);
+    
+    set_message(ci, "fetch:from:");
+    set_argument(ci, 1, (object)make_number(0));
+    set_argument(ci, 2, e2k);
 
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    set_message(rc, "eval:");
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -339,8 +340,8 @@ SETUP(test_iassign_ivar)
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
     context_object ci = make_context((object)(instruction)iassign, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)k);
 
     transfer(ci);
 
@@ -360,8 +361,8 @@ SETUP(test_ivar_read)
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
     context_object ci = make_context((object)(instruction)iassign, 3);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)k);
 
     transfer(ci);
 
@@ -369,9 +370,9 @@ SETUP(test_ivar_read)
 
     ci = make_context((object)(instruction)ivar, 2);
     context_object rc = make_context((object)(instruction)ilist, 2);
-    array_at_put(ci->arguments, 0, symbol_known_to_the_vm("eval:"));
-    array_at_put(ci->arguments, 1, (object)k);
-    array_at_put(rc->arguments, 0, symbol_known_to_the_vm("eval:"));
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)k);
+    set_message(rc, "eval:");
     ci->return_context = (object)rc;
 
     transfer(ci);
