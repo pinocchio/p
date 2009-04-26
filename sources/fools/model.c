@@ -79,8 +79,8 @@ context_object make_context(object interpreter, int size) {
 
 context_object inline make_meta_context(context_object context) {
     context_object result = make_context(header(header(context).pointer), 2);
-    array_at_put(result->arguments, 0, symbol_known_to_the_vm("interpret"));
-    array_at_put(result->arguments, 1, (object)context);
+    set_message(result, "interpret:");
+    set_argument(result, 1, (object)context);
     return result;
 }
 

@@ -121,11 +121,16 @@ void icall_invoke(context_object context) {
     set_message(icall_context, "subScopeFor:arguments:");
     set_argument(icall_context, 1, interpreter);
     set_argument(icall_context, 2, (object)icall->arguments);
-    context->return_context = (object)return_context(icall_context);
-    icall_context->return_context = (object)context;
+
+    context_object ret_context = make_context(interpreter, 2);
+    set_message(ret_context, "interpret:");
+    set_argument(ret_context, 1, (object)context);
+    ret_context->return_context = (object)return_context(icall_context);
+    
+    icall_context->return_context = (object)ret_context;
 
     header(context)     = interpreter;
-    set_message(context, "eval:");
+    context->arguments  = icall->arguments;
 
     transfer(icall_context);
 }
@@ -135,7 +140,6 @@ void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
     iassign_object iassign = header(iassign_context).instruction.iassign;
     
-
     env_object env = argument_at(iassign_context, 1).env;
 
     header(context)     = iassign->expression;

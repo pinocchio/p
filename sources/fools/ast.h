@@ -48,5 +48,6 @@ extern void        inline raw_ilist_at_put(ilist_object ilist,
 extern void        inline ilist_at_put(ilist_object ilist,
                                        int index, instruction i);
 extern void        inline eval_instruction(instruction instruction);
+extern void        inline set_callarg(icall_object icall, int index, object value);
 
 #endif // AST_H

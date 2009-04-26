@@ -85,3 +85,9 @@ void inline eval_instruction(instruction instruction) {
     set_message(context, "eval:");
     transfer(context);
 }
+
+void inline set_callarg(icall_object icall, int index, object value) {
+    array_at_put(icall->arguments, index, value);
+}
+
+

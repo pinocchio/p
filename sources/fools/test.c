@@ -315,11 +315,20 @@ SETUP(test_env_lookup)
 
 }
 
-void native_icallable(context_object call) {
-    assert(argument_at(call, 0).pointer ==
-           symbol_known_to_the_vm("eval:").pointer);
+void native_icallable(context_object c) {
+    printf("in icallable\n");
+    context_object call = target_context(c);
+
+    printf("target ctx: %x\n", call);
+
+    assert(argument_at(c, 0).pointer ==
+           symbol_known_to_the_vm("interpret:").pointer);
+
+    printf("message was interpret\n");
 
     env_object env = argument_at(call, 1).env;
+
+    printf("got env from call\n");
 
     native_object interpreter = env_at(env, 0).native;
     assert(interpreter->target == &native_icallable);
@@ -328,9 +337,10 @@ void native_icallable(context_object call) {
     number_object first = array_at(arguments, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;
+    printf("exit icallable\n");
 }
 
-
+/*
 SETUP(test_icall)
 
     iconst_object iconst =
@@ -341,7 +351,7 @@ SETUP(test_icall)
     object v = (object)make_number(5);
 
     icall_object icall = make_icall((object)(instruction)iconst, 1);
-    array_at_put(icall->arguments, 0, v);
+    set_callarg(icall, 0, v);
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
@@ -353,6 +363,7 @@ SETUP(test_icall)
 
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
+*/
 
 SETUP(test_iassign_ivar)
 
@@ -407,6 +418,37 @@ SETUP(test_ivar_read)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
+SETUP(test_new_iscoped)
+
+    object iscope_class =
+        //(object)make_object(0,
+            (object)fools_system->iscope_metaclass
+        //)
+        ;
+
+    iconst_object iconst = make_iconst(iscope_class);
+
+    object v = (object)make_number(5);
+    object exp = (object)(instruction)make_iconst(v);
+
+    icall_object icall = make_icall((object)(instruction)iconst, 2);
+    set_callarg(icall, 0, symbol_known_to_the_vm("new:"));
+    set_callarg(icall, 1, exp);
+
+    context_object ci = make_context((object)(instruction)icall, 2);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)make_env((object)fools_system->nil,
+                                         (object)fools_system->nil,
+                                         0));
+
+    ilist_object ilist = make_ilist(0);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    set_message(rc, "eval:");
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+}
+
 /* start-stub
 SETUP(test_class_lookup)
 
@@ -443,9 +485,10 @@ int main() {
     test_transfer_iconst();
     test_return_of_ilist();
     test_env_lookup();
-    test_icall();
+    // test_icall();
     test_iassign_ivar();
     test_ivar_read();
+    test_new_iscoped();
 
     return 0;
 }

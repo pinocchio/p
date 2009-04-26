@@ -80,7 +80,10 @@ void prim_env_subscope(context_object context) {
     // arguments
     env_at_put(new_env, 1, argument_at(receiver, 2));
 
-    set_argument(return_context(receiver), 1, (object)new_env);
+    context_object interp_context = return_context(receiver);
+    context_object eval_context   = argument_at(interp_context, 1).context;
+
+    set_argument(eval_context, 1, (object)new_env);
 
     return_from_context(receiver);
 }
@@ -95,13 +98,16 @@ void prim_env_parent(context_object context) {
 
 void prim_iscope_new(context_object context) {
     context_object receiver = target_context(context);
-    // arguments at: 0 -> selector
-    object env = header(receiver);
-    iscoped_object iscoped = make_iscoped(env, argument_at(receiver, 1));
-    
-    set_argument(return_context(receiver), 1, (object)(instruction)iscoped);
+    // context  -> eval: env
+    // receiver -> new: expression
+    iscoped_object iscoped =
+        make_iscoped(
+            argument_at(context, 1),   // env
+            argument_at(receiver, 1)); // expression
 
-    return_from_context(receiver);
+    set_argument(return_context(context), 1, (object)(instruction)iscoped);
+
+    return_from_context(context);
 }
 
 void prim_iscoped_scope(context_object context) {
