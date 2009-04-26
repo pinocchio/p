@@ -67,3 +67,16 @@ void prim_env_store_at_in(context_object context) {
     header(receiver) = env->parent;
     transfer(receiver);
 }
+
+void prim_env_new(context_object context) {
+    context_object receiver = target_context(context);
+    // arguments at: 0 -> selector
+    object env = header(receiver);
+    object arguments = argument_at(receiver, 1);
+    env_object new_env = make_env((object)fools_system->nil, env, 1);
+    env_at_put(new_env, 0, arguments);
+
+    set_argument(return_context(receiver), 1, (object)new_env);
+
+    return_from_context(receiver);
+}

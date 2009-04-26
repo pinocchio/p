@@ -18,7 +18,7 @@ struct constant {
 };
 
 struct callable {
-    object          receiver;
+    object          interpreter;
     array_object    arguments;
 };
 

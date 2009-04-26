@@ -14,6 +14,7 @@ extern void inline return_from_context(context_object context);
 extern void ilist_eval(context_object context);
 extern void ilist_continue_eval(context_object context);
 extern void icall_eval(context_object context);
+extern void icall_invoke(context_object context);
 extern void iconst_eval(context_object context);
 extern void iassign_eval(context_object context);
 extern void ivar_eval(context_object context);

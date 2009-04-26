@@ -96,10 +96,37 @@ void icall_eval(context_object context) {
     context_object icall_context = target_context(context);
     icall_object icall = header(icall_context).instruction.icall;
 
-    header(icall_context)       = icall->receiver;
-    icall_context->arguments    = icall->arguments;
-    
-    transfer(icall_context);
+    object env = argument_at(icall_context, 1);
+
+    header(context)                 = icall->interpreter;
+    context->return_context         = (object)icall_context;
+    context->arguments              = icall_context->arguments;
+
+    icall_context->arguments        = make_array(3);
+    set_message(icall_context, "invoke:env:");
+    set_argument(icall_context, 2, env);
+
+    transfer(context);
+}
+
+// icall>>invoke:env:
+void icall_invoke(context_object context) {
+    context_object icall_context = target_context(context);
+    icall_object icall  = header(icall_context).instruction.icall;
+
+    object interpreter  = argument_at(icall_context, 1);
+    object env          = argument_at(icall_context, 2);
+
+    header(context)     = env;
+    set_message(context, "new:");
+    set_argument(context, 1, (object)icall->arguments);
+    context->return_context = (object)icall_context;
+
+    header(icall_context)   = interpreter;
+    icall_context->arguments = make_array(2);
+    set_message(icall_context, "eval:");
+
+    transfer(context);
 }
 
 // iassign>>eval:

@@ -23,7 +23,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(8);
+    fools_system->symbols_known_to_the_vm   = make_array(10);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -39,8 +39,9 @@ fools_object bootstrap() {
     fools_system->iconst_class = make_native_class(1);
     define_native(fools_system->iconst_class, "eval:",    &iconst_eval);
 
-    fools_system->icall_class = make_native_class(1);
-    define_native(fools_system->icall_class, "eval:",     &icall_eval);
+    fools_system->icall_class = make_native_class(2);
+    define_native(fools_system->icall_class, "eval:",       &icall_eval);
+    define_native(fools_system->icall_class, "invoke:env:", &icall_invoke);
 
     fools_system->iassign_class = make_native_class(1);
     define_native(fools_system->iassign_class, "eval:",   &iassign_eval);
@@ -57,6 +58,7 @@ fools_object bootstrap() {
     fools_system->env_class = make_native_class(2);
     define_native(fools_system->env_class, "fetch:from:", &prim_env_fetch_from);
     define_native(fools_system->env_class, "store:at:in:", &prim_env_store_at_in);
+    define_native(fools_system->env_class, "new:", &prim_env_new);
 
     return fools_system;
 }

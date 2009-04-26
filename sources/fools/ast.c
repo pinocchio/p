@@ -18,10 +18,10 @@ iassign_object make_iassign(ivar_object variable, object expression) {
     return result;
 }
 
-icall_object make_icall(object receiver, int argsize) {
+icall_object make_icall(object interpreter, int argsize) {
     icall_object result = NEW(struct callable);
     header(result)      = (object)fools_system->icall_class;
-    result->receiver    = receiver;
+    result->interpreter = interpreter;
     result->arguments   = make_array(argsize);
     return result;
 }
@@ -71,6 +71,7 @@ void inline ilist_at_put(ilist_object ilist, int index, instruction value) {
     raw_ilist_at_put(ilist, index, value);
 }
 
+// TODO: remove function.
 void inline eval_instruction(instruction instruction) {
     context_object context = make_context((object)instruction, 2);
     set_message(context, "eval:");

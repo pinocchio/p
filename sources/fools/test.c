@@ -237,18 +237,6 @@ SETUP(test_return_of_ilist)
     assert(argument_at(rc, 1).pointer == v.pointer);
 }
 
-SETUP(test_icall)
-
-    native_object n = make_native(&native_test_single_arg_5);
-
-    icall_object icall = make_icall((object)n, 1);
-    array_at_put(icall->arguments, 0, (object)make_number(5));
-
-    eval_instruction((instruction)icall);
-
-    assert(number_value(array_at(icall->arguments, 0).number) == 6);
-}
-
 SETUP(test_env_lookup)
 
     object e1k = (object)make_string("env1 identifier");
@@ -325,6 +313,41 @@ SETUP(test_env_lookup)
 
     assert(array_at(rc->arguments, 1).pointer == v2.pointer);
 
+}
+
+void native_icallable(context_object call) {
+    assert(argument_at(call, 0).pointer ==
+           symbol_known_to_the_vm("eval:").pointer);
+
+    env_object env = argument_at(call, 1).env;
+
+    array_object arguments = env_at(env, 0).array;
+    number_object first = array_at(arguments, 0).number;
+    assert(number_value(first) == 5);
+    first->value = 6;
+}
+
+
+SETUP(test_icall)
+
+    iconst_object iconst =  make_iconst(
+                                (object)make_native(
+                                    &native_icallable));
+
+    object v = (object)make_number(5);
+
+    icall_object icall = make_icall((object)(instruction)iconst, 1);
+    array_at_put(icall->arguments, 0, v);
+
+    context_object ci = make_context((object)(instruction)icall, 2);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)make_env((object)fools_system->nil,
+                                         (object)fools_system->nil,
+                                         0));
+
+    transfer(ci);
+
+    assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
 
 SETUP(test_iassign_ivar)
@@ -415,10 +438,10 @@ int main() {
     test_transfer_empty_ilist_in_ilist();
     test_transfer_iconst();
     test_return_of_ilist();
+    test_env_lookup();
     test_icall();
     test_iassign_ivar();
     test_ivar_read();
-    test_env_lookup();
 
     return 0;
 }
