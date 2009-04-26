@@ -227,3 +227,27 @@ object inline env_at(env_object env, int index) {
 void inline env_at_put(env_object env, int index, object value) {
     array_at_put(env->values, index, value);
 }
+
+void inline set_message(context_object context, const char* value) {
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm(value));
+}
+
+void inline set_argument(context_object context, int index, object value) {
+    array_at_put(context->arguments, index, value);
+}
+
+object inline argument_at(context_object context, int index) {
+    return array_at(context->arguments, index);
+}
+
+message_object inline make_message(int size) {
+    return make_array(size);
+}
+
+object inline message(context_object context) {
+    return argument_at(context, 0);
+}
+
+context_object inline return_context(context_object context) {
+    return context->return_context.context;
+}

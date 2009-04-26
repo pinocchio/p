@@ -39,6 +39,7 @@ typedef struct dict*            dict_object;
 typedef struct nil*             nil_object;
 typedef struct native*          native_object;
 typedef struct context*         context_object;
+typedef array_object            message_object;
 typedef int**                   pointer;
 
 typedef void (*transfer_target)(context_object);
@@ -154,5 +155,11 @@ extern void             inline object_at_put(variable_object o,
                                              int index, object value);
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);
+extern context_object   inline return_context(context_object context);
+extern void             inline set_message(context_object context, const char* value);
+extern void             inline set_argument(context_object context, int index, object value);
+extern object           inline argument_at(context_object context, int index);
+extern message_object   inline make_message(int size);
+extern object           inline message(context_object context);
 
 #endif // MODEL_H

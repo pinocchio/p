@@ -3,30 +3,7 @@
 #include <ast.h>
 #include <assert.h>
 #include <bootstrap.h>
-
 #include <stdio.h>
-
-// Helper functions
-
-void inline set_message(context_object context, const char* value) {
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm(value));
-}
-
-void inline set_argument(context_object context, int index, object value) {
-    array_at_put(context->arguments, index, value);
-}
-
-object inline argument_at(context_object context, int index) {
-    return array_at(context->arguments, index);
-}
-
-object inline message(context_object context) {
-    return argument_at(context, 0);
-}
-
-context_object inline return_context(context_object context) {
-    return context->return_context.context;
-}
 
 // Context handling
 
