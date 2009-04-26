@@ -47,6 +47,14 @@ icapture_object make_icapture() {
     return result;
 }
 
+iscoped_object make_iscoped(object scope, object expression) {
+    iscoped_object result   = NEW(struct scoped);
+    header(result)          = (object)fools_system->iscope_class;
+    result->scope           = scope;
+    result->expression      = expression;
+    return result;
+}
+
 // Accessors 
 
 number_object inline ilist_size(ilist_object ilist) {

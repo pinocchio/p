@@ -20,5 +20,6 @@ extern void iassign_eval(context_object context);
 extern void ivar_eval(context_object context);
 extern void ivar_assign(context_object context);
 extern void icapture_eval(context_object context);
+extern void iscoped_eval(context_object context);
 
 #endif

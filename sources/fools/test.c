@@ -321,7 +321,10 @@ void native_icallable(context_object call) {
 
     env_object env = argument_at(call, 1).env;
 
-    array_object arguments = env_at(env, 0).array;
+    native_object interpreter = env_at(env, 0).native;
+    assert(interpreter->target == &native_icallable);
+    
+    array_object arguments = env_at(env, 1).array;
     number_object first = array_at(arguments, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;
@@ -330,9 +333,10 @@ void native_icallable(context_object call) {
 
 SETUP(test_icall)
 
-    iconst_object iconst =  make_iconst(
-                                (object)make_native(
-                                    &native_icallable));
+    iconst_object iconst =
+        make_iconst(
+            (object)make_native(
+                &native_icallable));
 
     object v = (object)make_number(5);
 

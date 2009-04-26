@@ -6,7 +6,10 @@
 
 fools_object fools_system;
 
-void inline define_native(native_class_object cls,
+#define define_native(cls, name, native)\
+    do_define_native(fools_system->cls, name, &native)
+
+void inline do_define_native(native_class_object cls,
                           const char* name,
                           transfer_target native) {
     dict_at_put(cls->natives,
@@ -23,42 +26,50 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(10);
+    fools_system->symbols_known_to_the_vm   = make_array(13);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
     fools_system->dict_class = make_native_class(2);
     header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
-    define_native(fools_system->dict_class, "at:",        &prim_dict_at);
-    define_native(fools_system->dict_class, "at:put:",    &prim_dict_at_put);
+    define_native(dict_class, "at:",                    prim_dict_at);
+    define_native(dict_class, "at:put:",                prim_dict_at_put);
 
     fools_system->ilist_class = make_native_class(2);
-    define_native(fools_system->ilist_class, "return:env:continue:",  &ilist_continue_eval);
-    define_native(fools_system->ilist_class, "eval:",     &ilist_eval);
+    define_native(ilist_class, "return:env:continue:",  ilist_continue_eval);
+    define_native(ilist_class, "eval:",                 ilist_eval);
     
     fools_system->iconst_class = make_native_class(1);
-    define_native(fools_system->iconst_class, "eval:",    &iconst_eval);
+    define_native(iconst_class, "eval:",                iconst_eval);
 
     fools_system->icall_class = make_native_class(2);
-    define_native(fools_system->icall_class, "eval:",       &icall_eval);
-    define_native(fools_system->icall_class, "invoke:env:", &icall_invoke);
+    define_native(icall_class, "eval:",                 icall_eval);
+    define_native(icall_class, "invoke:env:",           icall_invoke);
 
     fools_system->iassign_class = make_native_class(1);
-    define_native(fools_system->iassign_class, "eval:",   &iassign_eval);
+    define_native(iassign_class, "eval:",               iassign_eval);
 
     fools_system->ivar_class = make_native_class(2);
-    define_native(fools_system->ivar_class, "eval:",      &ivar_eval);
-    define_native(fools_system->ivar_class, "assign:in:", &ivar_assign);
+    define_native(ivar_class, "eval:",                  ivar_eval);
+    define_native(ivar_class, "assign:in:",             ivar_assign);
 
     fools_system->icapture_class = make_native_class(1);
-    define_native(fools_system->icapture_class, "eval:", &icapture_eval);
+    define_native(icapture_class, "eval:",              icapture_eval);
 
     fools_system->icapture = (object)(instruction)make_icapture();
 
-    fools_system->env_class = make_native_class(2);
-    define_native(fools_system->env_class, "fetch:from:", &prim_env_fetch_from);
-    define_native(fools_system->env_class, "store:at:in:", &prim_env_store_at_in);
-    define_native(fools_system->env_class, "new:", &prim_env_new);
+    fools_system->env_class = make_native_class(4);
+    define_native(env_class, "fetch:from:",             prim_env_fetch_from);
+    define_native(env_class, "store:at:in:",            prim_env_store_at_in);
+    define_native(env_class, "subScopeFor:arguments:",  prim_env_subscope);
+    define_native(env_class, "parent:",                 prim_env_parent);
+
+    fools_system->iscope_metaclass = make_native_class(1);
+    define_native(iscope_metaclass, "new:",             prim_iscope_new);
+
+    fools_system->iscope_class = make_native_class(2);
+    define_native(iscope_class, "eval:",                iscoped_eval);
+    define_native(iscope_class, "scope",                prim_iscoped_scope);
 
     return fools_system;
 }

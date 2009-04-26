@@ -117,16 +117,17 @@ void icall_invoke(context_object context) {
     object interpreter  = argument_at(icall_context, 1);
     object env          = argument_at(icall_context, 2);
 
-    header(context)     = env;
-    set_message(context, "new:");
-    set_argument(context, 1, (object)icall->arguments);
-    context->return_context = (object)icall_context;
+    header(icall_context) = env;
+    set_message(icall_context, "subScopeFor:arguments:");
+    set_argument(icall_context, 1, interpreter);
+    set_argument(icall_context, 2, (object)icall->arguments);
+    context->return_context = (object)return_context(icall_context);
+    icall_context->return_context = (object)context;
 
-    header(icall_context)   = interpreter;
-    icall_context->arguments = make_array(2);
-    set_message(icall_context, "eval:");
+    header(context)     = interpreter;
+    set_message(context, "eval:");
 
-    transfer(context);
+    transfer(icall_context);
 }
 
 // iassign>>eval:
@@ -185,18 +186,13 @@ void ivar_eval(context_object context) {
     transfer(ivar_context);
 }
 
-// [..., ilist>>return:continue:env:, iscoped>>eval:]
+// iscoped>>eval:
 void iscoped_eval(context_object context) {
     context_object iscoped_context = target_context(context);
     iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
 
-    object dynamic_env = argument_at(iscoped_context, 1);
-    object static_env  = iscoped->scope;
-
+    // we just eval the attached expression.
     header(iscoped_context) = iscoped->expression;
-    set_argument(iscoped_context, 1, static_env);
-    set_argument(return_context(iscoped_context), 2, dynamic_env); 
-
     transfer(iscoped_context);
 }
 
@@ -207,7 +203,6 @@ void icapture_eval(context_object context) {
     object dynamic_env = argument_at(icapture_context, 1);
 
     set_argument(return_context(icapture_context), 1, dynamic_env);
-
     return_from_context(icapture_context);
 }
 
