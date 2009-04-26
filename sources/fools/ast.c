@@ -72,7 +72,6 @@ void inline ilist_at_put(ilist_object ilist, int index, instruction value) {
 }
 
 void inline eval_instruction(instruction instruction) {
-    // TODO: cache array with eval
     context_object context = make_context((object)instruction, 2);
     set_message(context, "eval:");
     transfer(context);
