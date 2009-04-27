@@ -107,6 +107,7 @@ void prim_iscope_new(context_object context) {
             argument_at(context, 1),   // env
             argument_at(receiver, 1)); // expression
 
+    // return from the evaluation context rather than calling context.
     set_argument(return_context(context), 1, (object)(instruction)iscoped);
 
     return_from_context(context);

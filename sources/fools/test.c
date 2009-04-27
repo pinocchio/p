@@ -468,9 +468,9 @@ int main() {
     test_transfer_iconst();
     test_return_of_ilist();
     test_env_lookup();
-    test_icall();
     test_iassign_ivar();
     test_ivar_read();
+    test_icall();
     test_new_iscoped();
 
     return 0;
