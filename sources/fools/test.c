@@ -246,11 +246,11 @@ SETUP(test_env_lookup)
     object v2 = (object)make_string("v2");
     object v3 = (object)make_string("v3");
 
-    env_object env1 = make_env(e1k,
+    env_object env1 = make_env(0, e1k,
                                (object)fools_system->nil,
                                1);
 
-    env_object env2 = make_env(e2k,
+    env_object env2 = make_env(0, e2k,
                                (object)env1,
                                1);
 
@@ -317,7 +317,7 @@ SETUP(test_env_lookup)
 
 SETUP(test_iassign_ivar)
 
-    env_object k = make_env((object)fools_system->nil,
+    env_object k = make_env(0, (object)fools_system->nil,
                             (object)fools_system->nil,
                             1);
     object v = (object)make_number(42);
@@ -338,7 +338,7 @@ SETUP(test_iassign_ivar)
 
 SETUP(test_ivar_read)
 
-    env_object k = make_env((object)fools_system->nil,
+    env_object k = make_env(0, (object)fools_system->nil,
                             (object)fools_system->nil,
                             1);
     object v = (object)make_number(42);
@@ -371,13 +371,13 @@ SETUP(test_ivar_read)
 void native_icallable(context_object c) {
     assert(argument_at(c, 0).string ==
            symbol_known_to_the_vm("eval:").string);
+
     env_object env = argument_at(c, 1).env;
 
     native_object interpreter = env_at(env, 0).native;
     assert(interpreter->target == &native_icallable);
-    
-    array_object arguments = env_at(env, 1).array;
-    number_object first = array_at(arguments, 0).number;
+
+    number_object first = array_at(env->arguments, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;
 }
@@ -396,7 +396,7 @@ SETUP(test_icall)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    set_argument(ci, 1, (object)make_env((object)fools_system->nil,
+    set_argument(ci, 1, (object)make_env(0, (object)fools_system->nil,
                                          (object)fools_system->nil,
                                          0));
 
@@ -419,7 +419,8 @@ SETUP(test_new_iscoped)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    set_argument(ci, 1, (object)make_env((object)fools_system->nil,
+    set_argument(ci, 1, (object)make_env(0,
+                                         (object)fools_system->nil,
                                          (object)fools_system->nil,
                                          0));
 

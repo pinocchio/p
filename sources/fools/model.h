@@ -92,6 +92,7 @@ struct dict {
 };
 
 struct env {
+    array_object        arguments;
     object              scope;
     object              parent;
     array_object        values;
@@ -134,7 +135,8 @@ extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
 extern dict_object              make_dict(int init_size);
-extern env_object               make_env(object scope, object parent, int size);
+extern env_object               make_env(array_object arguments, object scope,
+                                         object parent, int size);
 extern nil_object               make_nil();
 extern context_object           inline make_meta_context(context_object context);
 extern context_object           make_context(object interpreter, int size);

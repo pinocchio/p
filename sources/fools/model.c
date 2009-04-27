@@ -49,8 +49,10 @@ dict_object make_dict(int init_size) {
     return result;
 }
 
-env_object make_env(object scope, object parent, int size) {
+env_object make_env(array_object arguments, object scope,
+                    object parent, int size) {
     env_object result   = NEW(struct env);
+    result->arguments   = arguments;
     result->scope       = scope;
     result->parent      = parent;
     result->values      = make_array(size);

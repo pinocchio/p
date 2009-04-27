@@ -124,6 +124,7 @@ void icall_invoke(context_object context) {
 
     header(context)     = interpreter;
     set_message(context, "eval:");
+    context->return_context = icall_context->return_context;
 
     context_object class_context  = make_meta_context(context);
     icall_context->return_context = (object)class_context;
@@ -209,22 +210,16 @@ void icapture_eval(context_object context) {
 // Native class handling
 
 void with_native_class_lookup(context_object context) {
-    printf("Native: %s\n", message(context).string->value);
     context_object class_context    = target_context(context);
-    printf("Classn: %s\n", message(class_context).string->value);
     context_object receiver_context = target_context(class_context);
-    printf("rc: %x\n", receiver_context);
-    printf("Messan: %s\n", message(receiver_context).string->value);
     native_class_object class       = header(class_context).native_class;
     dict_object natives             = class->natives;
     object selector                 = message(receiver_context);
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
-        printf("Non native: %s\n\n", selector.string->value);
         header(class_context) = class->class;
     } else {
-        printf("Native: %s\n\n", selector.string->value);
         header(class_context) = native;
     }
     transfer(class_context);

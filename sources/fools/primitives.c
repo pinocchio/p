@@ -73,18 +73,19 @@ void prim_env_subscope(context_object context) {
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
-    env_object new_env = make_env((object)fools_system->nil, env, 2);
+                                  // arguments
+    env_object new_env = make_env(argument_at(receiver, 2).array,
+                                  (object)fools_system->nil,
+                                  env,
+                                  2);
     
     // interpreter
     env_at_put(new_env, 0, argument_at(receiver, 1));
-    // arguments
-    env_at_put(new_env, 1, argument_at(receiver, 2));
 
     context_object interp_context = return_context(receiver);
     context_object class_context  = target_context(interp_context);
 
     set_argument(class_context, 1, (object)new_env);
-    printf("arg: %x\n", argument_at(class_context, 1));
 
     return_from_context(receiver);
 }
