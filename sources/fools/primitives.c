@@ -81,11 +81,10 @@ void prim_env_subscope(context_object context) {
     env_at_put(new_env, 1, argument_at(receiver, 2));
 
     context_object interp_context = return_context(receiver);
-    context_object eval_context   = argument_at(interp_context, 1).context;
+    context_object class_context  = target_context(interp_context);
 
-    printf("setting argument\n");
-    set_argument(eval_context, 1, (object)new_env);
-    printf("set argument\n");
+    set_argument(class_context, 1, (object)new_env);
+    printf("arg: %x\n", argument_at(class_context, 1));
 
     return_from_context(receiver);
 }

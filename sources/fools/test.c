@@ -369,19 +369,9 @@ SETUP(test_ivar_read)
 }
 
 void native_icallable(context_object c) {
-    printf("in icallable\n");
-    context_object call = target_context(c);
-
-    printf("target ctx: %x\n", call);
-
-    assert(argument_at(c, 0).pointer ==
-           symbol_known_to_the_vm("interpret:").pointer);
-
-    printf("message was interpret\n");
-
-    env_object env = argument_at(call, 1).env;
-
-    printf("got env from call\n");
+    assert(argument_at(c, 0).string ==
+           symbol_known_to_the_vm("eval:").string);
+    env_object env = argument_at(c, 1).env;
 
     native_object interpreter = env_at(env, 0).native;
     assert(interpreter->target == &native_icallable);
@@ -401,7 +391,7 @@ SETUP(test_icall)
 
     object v = (object)make_number(5);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 1);
+    icall_object icall = make_icall((object)(instruction)iconst, 2);
     set_callarg(icall, 0, v);
 
     context_object ci = make_context((object)(instruction)icall, 2);
