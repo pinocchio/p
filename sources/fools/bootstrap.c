@@ -26,7 +26,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(13);
+    fools_system->symbols_known_to_the_vm   = make_array(14);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -70,6 +70,11 @@ fools_object bootstrap() {
     fools_system->iscope_class = make_native_class(2);
     define_native(iscope_class, "eval:",                iscoped_eval);
     define_native(iscope_class, "scope",                prim_iscoped_scope);
+
+    fools_system->ivinstr_class = make_native_class(2);
+    define_native(ivinstr_class, "eval:",               icall_eval);
+    define_native(ivinstr_class, "invoke:env:",         ivinstr_invoke);
+
 
     return fools_system;
 }

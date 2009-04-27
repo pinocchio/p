@@ -32,6 +32,10 @@ struct scoped {
     object          expression;
 };
 
+struct vinstruction {
+    object          expression;
+};
+
 struct capture { };
 
 extern ilist_object     make_ilist(int size);
@@ -41,6 +45,7 @@ extern iconst_object    make_iconst(object constant);
 extern ivar_object      make_ivar(object scope, number_object index);
 extern iscoped_object   make_iscoped(object scope, object expression);
 extern icapture_object  make_icapture();
+extern ivinstr_object   make_ivinstr(object expression);
 
 extern instruction inline raw_ilist_at(ilist_object ilist, int index);
 extern void        inline raw_ilist_at_put(ilist_object ilist,
@@ -49,5 +54,6 @@ extern void        inline ilist_at_put(ilist_object ilist,
                                        int index, instruction i);
 extern void        inline eval_instruction(instruction instruction);
 extern void        inline set_callarg(icall_object icall, int index, object value);
+extern void        inline set_callmsg(icall_object icall, const char* string);
 
 #endif // AST_H

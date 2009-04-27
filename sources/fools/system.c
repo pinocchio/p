@@ -132,6 +132,24 @@ void icall_invoke(context_object context) {
     transfer(icall_context);
 }
 
+// ivinstr>>invoke:env:
+void ivinstr_invoke(context_object context) {
+
+    context_object icall_context = target_context(context);
+    icall_object icall  = header(icall_context).instruction.icall;
+
+    object interpreter  = argument_at(icall_context, 1);
+    object env          = argument_at(icall_context, 2);
+
+    header(context) = interpreter;
+    set_message(context, "eval:");
+    set_argument(icall_context, 1, env);
+
+    context->return_context = icall_context->return_context;
+
+    transfer(context);
+}
+
 // iassign>>eval:
 void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
@@ -194,6 +212,7 @@ void iscoped_eval(context_object context) {
 
     // we just eval the attached expression.
     header(iscoped_context) = iscoped->expression;
+
     transfer(iscoped_context);
 }
 

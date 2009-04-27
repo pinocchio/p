@@ -47,6 +47,13 @@ icapture_object make_icapture() {
     return result;
 }
 
+ivinstr_object make_ivinstr(object expression) {
+    ivinstr_object result   = NEW(struct vinstruction);
+    header(result)          = (object)fools_system->ivinstr_class;
+    result->expression      = expression;
+    return result;
+}
+
 iscoped_object make_iscoped(object scope, object expression) {
     iscoped_object result   = NEW(struct scoped);
     header(result)          = (object)fools_system->iscope_class;
@@ -90,4 +97,6 @@ void inline set_callarg(icall_object icall, int index, object value) {
     array_at_put(icall->arguments, index, value);
 }
 
-
+void inline set_callmsg(icall_object icall, const char* string) {
+    set_callarg(icall, 0, symbol_known_to_the_vm(string));
+}

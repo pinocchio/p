@@ -419,10 +419,11 @@ SETUP(test_new_iscoped)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    set_argument(ci, 1, (object)make_env(0,
-                                         (object)fools_system->nil,
-                                         (object)fools_system->nil,
-                                         0));
+    env_object start = make_env(0,
+                                (object)fools_system->nil,
+                                (object)fools_system->nil,
+                                0);
+    set_argument(ci, 1, (object)start);
 
     ilist_object ilist = make_ilist(0);
     context_object rc = make_context((object)(instruction)ilist, 2);
@@ -430,6 +431,54 @@ SETUP(test_new_iscoped)
     ci->return_context = (object)rc;
 
     transfer(ci);
+
+    iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
+
+    assert(iscope->expression.pointer == exp.pointer);
+    assert(iscope->scope.env->parent.env == start);
+
+}
+
+SETUP(test_eval_iscoped)
+
+    object iscope_class = (object)fools_system->iscope_metaclass;
+    iconst_object iconst = make_iconst(iscope_class);
+
+    object v = (object)make_number(5);
+    object exp = (object)(instruction)make_iconst(v);
+
+    icall_object icall = make_icall((object)(instruction)iconst, 2);
+    set_callmsg(icall, "new:");
+    set_callarg(icall, 1, exp);
+
+    context_object ci = make_context((object)(instruction)icall, 2);
+    set_message(ci, "eval:");
+    env_object start = make_env(0, (object)fools_system->nil,
+                                (object)fools_system->nil, 0);
+    set_argument(ci, 1, (object)start);
+
+    ilist_object ilist = make_ilist(0);
+    context_object rc = make_context((object)(instruction)ilist, 2);
+    set_message(rc, "eval:");
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
+
+    iconst->constant = (object)(instruction)iscope;
+    ivinstr_object ivinstr = make_ivinstr((object)(instruction)iconst);
+
+    ci = make_context((object)(instruction)ivinstr, 2);
+    set_message(ci, "eval:");
+    set_argument(ci, 1, (object)start);
+
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(argument_at(rc, 1).pointer == v.pointer);
+
 }
 
 /* start-stub
@@ -472,6 +521,7 @@ int main() {
     test_ivar_read();
     test_icall();
     test_new_iscoped();
+    test_eval_iscoped();
 
     return 0;
 }
