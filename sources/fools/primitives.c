@@ -99,18 +99,15 @@ void prim_env_parent(context_object context) {
 }
 
 void prim_iscope_new(context_object context) {
-    context_object receiver = target_context(context);
-    // context  -> eval: env
-    // receiver -> new: expression
+    context_object iscope_context = target_context(context);
     iscoped_object iscoped =
         make_iscoped(
-            argument_at(context, 1),   // env
-            argument_at(receiver, 1)); // expression
+            argument_at(iscope_context, 1),  // env
+            argument_at(iscope_context, 2)); // expression
 
-    // return from the evaluation context rather than calling context.
-    set_argument(return_context(context), 1, (object)(instruction)iscoped);
+    set_argument(return_context(iscope_context), 1, (object)(instruction)iscoped);
 
-    return_from_context(context);
+    return_from_context(iscope_context);
 }
 
 void prim_iscoped_scope(context_object context) {

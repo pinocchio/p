@@ -369,15 +369,7 @@ SETUP(test_ivar_read)
 }
 
 void native_icallable(context_object c) {
-    assert(argument_at(c, 0).string ==
-           symbol_known_to_the_vm("eval:").string);
-
-    env_object env = argument_at(c, 1).env;
-
-    native_object interpreter = env_at(env, 0).native;
-    assert(interpreter->target == &native_icallable);
-
-    number_object first = array_at(env->arguments, 0).number;
+    number_object first = argument_at(c, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;
 }
@@ -407,15 +399,18 @@ SETUP(test_icall)
 
 SETUP(test_new_iscoped)
 
-    object iscope_class = (object)fools_system->iscope_metaclass;
+    object iscope_class =
+        (object)make_object(0,
+            (object)fools_system->iscope_metaclass
+        );
     iconst_object iconst = make_iconst(iscope_class);
 
     object v = (object)make_number(5);
     object exp = (object)(instruction)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 2);
-    set_callarg(icall, 0, symbol_known_to_the_vm("new:"));
-    set_callarg(icall, 1, exp);
+    icall_object icall = make_icall((object)(instruction)iconst, 3);
+    set_callarg(icall, 0, symbol_known_to_the_vm("env:new:"));
+    set_callarg(icall, 2, exp);
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
@@ -435,26 +430,31 @@ SETUP(test_new_iscoped)
     iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
 
     assert(iscope->expression.pointer == exp.pointer);
-    assert(iscope->scope.env->parent.env == start);
+    assert(iscope->scope.env == start);
 
 }
 
 SETUP(test_eval_iscoped)
 
-    object iscope_class = (object)fools_system->iscope_metaclass;
+    object iscope_class =
+        (object)make_object(0,
+            (object)fools_system->iscope_metaclass
+        );
     iconst_object iconst = make_iconst(iscope_class);
 
     object v = (object)make_number(5);
     object exp = (object)(instruction)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 2);
-    set_callmsg(icall, "new:");
-    set_callarg(icall, 1, exp);
+    icall_object icall = make_icall((object)(instruction)iconst, 3);
+    set_callarg(icall, 0, symbol_known_to_the_vm("env:new:"));
+    set_callarg(icall, 2, exp);
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    env_object start = make_env(0, (object)fools_system->nil,
-                                (object)fools_system->nil, 0);
+    env_object start = make_env(0,
+                                (object)fools_system->nil,
+                                (object)fools_system->nil,
+                                0);
     set_argument(ci, 1, (object)start);
 
     ilist_object ilist = make_ilist(0);

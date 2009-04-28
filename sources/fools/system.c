@@ -117,6 +117,21 @@ void icall_invoke(context_object context) {
     object interpreter  = argument_at(icall_context, 1);
     object env          = argument_at(icall_context, 2);
 
+    header(context) = interpreter;
+    context->arguments = icall->arguments;
+    set_argument(context, 1, env);
+    context->return_context = icall_context->return_context;
+    transfer(context);
+}
+
+// ivinstr>>invoke:env:
+void ivinstr_invoke(context_object context) {
+    context_object icall_context = target_context(context);
+    icall_object icall  = header(icall_context).instruction.icall;
+
+    object interpreter  = argument_at(icall_context, 1);
+    object env          = argument_at(icall_context, 2);
+
     header(icall_context) = env;
     set_message(icall_context, "subScopeFor:arguments:");
     set_argument(icall_context, 1, interpreter);
@@ -126,29 +141,11 @@ void icall_invoke(context_object context) {
     set_message(context, "eval:");
     context->return_context = icall_context->return_context;
 
-    context_object class_context  = make_meta_context(context);
-    icall_context->return_context = (object)class_context;
+    icall_context->return_context = (object)context;
 
     transfer(icall_context);
 }
 
-// ivinstr>>invoke:env:
-void ivinstr_invoke(context_object context) {
-
-    context_object icall_context = target_context(context);
-    icall_object icall  = header(icall_context).instruction.icall;
-
-    object interpreter  = argument_at(icall_context, 1);
-    object env          = argument_at(icall_context, 2);
-
-    header(context) = interpreter;
-    set_message(context, "eval:");
-    set_argument(icall_context, 1, env);
-
-    context->return_context = icall_context->return_context;
-
-    transfer(context);
-}
 
 // iassign>>eval:
 void iassign_eval(context_object context) {
@@ -237,8 +234,10 @@ void with_native_class_lookup(context_object context) {
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
+        // printf("non-native: %s\n", selector.string->value);
         header(class_context) = class->class;
     } else {
+        // printf("native: %s\n", selector.string->value);
         header(class_context) = native;
     }
     transfer(class_context);
