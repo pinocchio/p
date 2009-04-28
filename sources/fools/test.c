@@ -246,11 +246,11 @@ SETUP(test_env_lookup)
     object v2 = (object)make_string("v2");
     object v3 = (object)make_string("v3");
 
-    env_object env1 = make_env(0, e1k,
+    env_object env1 = make_env(e1k,
                                (object)fools_system->nil,
                                1);
 
-    env_object env2 = make_env(0, e2k,
+    env_object env2 = make_env(e2k,
                                (object)env1,
                                1);
 
@@ -317,7 +317,7 @@ SETUP(test_env_lookup)
 
 SETUP(test_iassign_ivar)
 
-    env_object k = make_env(0, (object)fools_system->nil,
+    env_object k = make_env((object)fools_system->nil,
                             (object)fools_system->nil,
                             1);
     object v = (object)make_number(42);
@@ -338,7 +338,7 @@ SETUP(test_iassign_ivar)
 
 SETUP(test_ivar_read)
 
-    env_object k = make_env(0, (object)fools_system->nil,
+    env_object k = make_env((object)fools_system->nil,
                             (object)fools_system->nil,
                             1);
     object v = (object)make_number(42);
@@ -388,7 +388,7 @@ SETUP(test_icall)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    set_argument(ci, 1, (object)make_env(0, (object)fools_system->nil,
+    set_argument(ci, 1, (object)make_env((object)fools_system->nil,
                                          (object)fools_system->nil,
                                          0));
 
@@ -414,8 +414,7 @@ SETUP(test_new_iscoped)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    env_object start = make_env(0,
-                                (object)fools_system->nil,
+    env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,
                                 0);
     set_argument(ci, 1, (object)start);
@@ -451,8 +450,7 @@ SETUP(test_eval_iscoped)
 
     context_object ci = make_context((object)(instruction)icall, 2);
     set_message(ci, "eval:");
-    env_object start = make_env(0,
-                                (object)fools_system->nil,
+    env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,
                                 0);
     set_argument(ci, 1, (object)start);
