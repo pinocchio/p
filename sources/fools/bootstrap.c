@@ -67,6 +67,9 @@ fools_object bootstrap() {
     fools_system->iscope_metaclass = make_native_class(1);
     define_native(iscope_metaclass, "env:new:",         prim_iscope_new);
 
+    fools_system->iscope =
+        (object)make_object(0, (object)fools_system->iscope_metaclass);
+
     fools_system->iscope_class = make_native_class(2);
     define_native(iscope_class, "eval:",                iscoped_eval);
     define_native(iscope_class, "scope",                prim_iscoped_scope);

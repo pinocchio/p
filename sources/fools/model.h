@@ -115,6 +115,7 @@ struct fools {
     object              native_metaclass;
     object              class_lookup;
     object              icapture;
+    object              iscope;
     native_class_object ilist_class;
     native_class_object icall_class;
     native_class_object iconst_class;
@@ -142,6 +143,7 @@ extern context_object           make_context(object interpreter, int size);
 extern native_object            make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);
+extern number_object    inline array_size(array_object array);
 extern object           inline array_at(array_object array, int index);
 extern void             inline array_at_put(array_object array,
                                             int index, object new_value);

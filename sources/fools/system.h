@@ -23,4 +23,6 @@ extern void icapture_eval(context_object context);
 extern void iscoped_eval(context_object context);
 extern void ivinstr_invoke(context_object context);
 
+extern object inline make_func(array_object arguments, object body);
+
 #endif

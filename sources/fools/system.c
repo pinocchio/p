@@ -242,3 +242,67 @@ void with_native_class_lookup(context_object context) {
     }
     transfer(class_context);
 }
+
+// Function bootstrapping
+
+object inline make_func(array_object arguments, object body) {
+
+    iconst_object iconst = make_iconst(fools_system->iscope);
+
+    int argsize = number_value(array_size(arguments));
+    // Eval args, switch context, eval body
+    ilist_object exp = make_ilist(argsize + 3); 
+
+
+    icall_object parent_env = make_icall(fools_system->icapture, 1);
+    set_callmsg(parent_env, "parent");
+
+    // var1 = (capture) parent
+    ilist_at_put(exp, 0, (instruction)
+        make_iassign(
+            make_ivar((object)fools_system->nil, make_number(1)),
+            (object)(instruction)
+            parent_env));
+
+    icall_object arg_eval;
+    // var2 = (var2 eval: var1)
+    // ...  ...  ...
+    // varN+1 = (varN+1 eval: var1)
+    int i;
+    for (i = 0; i < argsize; i++) {
+        ivar_object variable = array_at(arguments, i).instruction.ivar;
+        variable->index = make_number(i + 2); // skip receiver and dynamic scope
+
+        arg_eval = make_icall((object)(instruction)variable, 2);
+        set_callmsg(arg_eval, "eval:");
+        set_callarg(arg_eval, 1,
+            (object)(instruction)
+            make_ivar((object)fools_system->nil,
+                       make_number(1)));
+        ilist_at_put(exp, i + 1, // skip scope fetching
+            (instruction)
+            make_iassign(
+                variable,
+                (object)(instruction)arg_eval
+            )
+        );
+    }
+
+    icall_object self_scope = make_icall(
+        (object)(instruction)
+        make_ivar((object)fools_system->nil, 0), 1); // receiver
+    set_callmsg(self_scope, "scope");
+
+    icall_object switch_env = make_icall(fools_system->icapture, 2);
+    set_callmsg(switch_env, "parent:");
+    set_callarg(switch_env, 1, (object)(instruction)self_scope);
+        
+    ilist_at_put(exp, argsize + 1, (instruction)switch_env);
+    ilist_at_put(exp, argsize + 2, body.instruction);
+
+    icall_object icall = make_icall((object)(instruction)iconst, 3);
+    set_callmsg(icall, "env:new:");
+    set_callarg(icall, 2, (object)(instruction)exp);
+
+    return (object)(instruction)icall;
+}
