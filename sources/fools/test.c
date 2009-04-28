@@ -581,17 +581,44 @@ SETUP(test_eval_function_no_args)
 
 }
 
+SETUP(test_make_function_1_arg)
+
+    env_object env = make_env((object)fools_system->nil,
+                              (object)fools_system->nil, 0);
+
+
+
+    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)(instruction)ivar);
+
+    object constant_function =
+        make_func(arguments,
+                    (object)(instruction)
+                    ivar
+                  );
+
+    context_object make_eval_context(ci, constant_function.instruction, env);
+    build_return(ci, rc);
+
+    transfer(ci);
+}
+
 SETUP(test_eval_function_1_arg)
 
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
 
-    iconst_object the_instr = make_iconst((object)make_number(42));
+
+    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)(instruction)ivar);
+
     object constant_function =
-        make_func(make_array(0),
+        make_func(arguments,
                     (object)(instruction)
-                    the_instr
+                    ivar
                   );
 
     context_object make_eval_context(ci, constant_function.instruction, env);
@@ -599,9 +626,12 @@ SETUP(test_eval_function_1_arg)
 
     transfer(ci);
 
+    object arg = (object)make_number(42);
+
     object scoped_function = argument_at(rc, 1);
     object iconst = (object)(instruction)make_iconst(scoped_function);
-    ivinstr_object ivinstr = make_ivinstr(iconst, 0);
+    ivinstr_object ivinstr = make_ivinstr(iconst, 1);
+    set_ivi_arg(ivinstr, 0, (object)(instruction)make_iconst(arg));
 
     make_eval_context(ci, ivinstr, env);
     ci->return_context = (object)rc;
@@ -609,7 +639,6 @@ SETUP(test_eval_function_1_arg)
     transfer(ci);
 
     assert(number_value(argument_at(rc, 1).number) == 42);
-
 }
 
 /* start-stub
@@ -658,6 +687,8 @@ int main() {
     test_make_function_no_args();
     test_ilist_pass_context();
     test_eval_function_no_args();
+    test_make_function_1_arg();
     test_eval_function_1_arg();
+
     return 0;
 }

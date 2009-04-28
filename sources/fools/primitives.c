@@ -3,6 +3,9 @@
 #include <system.h>
 #include <bootstrap.h>
 
+#define NDEBUG 1
+#define debug if (!NDEBUG) printf
+
 /* broken
 void prim_number_plus(context_object context) {
     number_object* left     = (number_object*)array_at(context->arguments, 0).pointer;
@@ -55,39 +58,47 @@ void prim_env_fetch_from(context_object context) {
 }
 
 void prim_env_store_at_in(context_object context) {
-    printf("env>>store:at:in:\n");
+    debug("env>>store:at:in:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 3).pointer) {
         int index = number_value(array_at(receiver->arguments, 2).number);
-        printf("fetch at index: %i\n", index);
+        debug("fetch at index: %i\n", index);
         object value = array_at(receiver->arguments, 1);
-        printf("store at index: %i: %x\n", index, value.pointer);
+        debug("store at index: %i: %x\n", index, value.pointer);
         env_at_put(env, index, value);
-        printf("done\n");
+        debug("done\n");
         return return_from_context(receiver);
     }
     if (env->parent.nil == fools_system->nil) {
         return;
     }
     header(receiver) = env->parent;
-    printf("ret>>env>>store:at:in:\n");
+    debug("ret>>env>>store:at:in:\n");
     set_transfer(receiver);
 }
 
 void prim_env_subscope(context_object context) {
     context_object receiver = target_context(context);
+    object env          = header(receiver);
     // arguments at: 0 -> selector
-    object env = header(receiver);
+    object interpreter  = argument_at(receiver, 1);
+    object arguments    = argument_at(receiver, 2);
+    // XXX gravely breaking encapsulation!
+    int argsize         = number_value(interpreter.instruction.iscoped->argsize.number);
+
+    // slot 1 is reserved for the interpreter;
+    // slot 2 is reserved for the dynamic env;
     env_object new_env = make_env((object)fools_system->nil,
                                   env,
-                                  10); // hardwired for now.
+                                  argsize + 2);
     
-    // interpreter
-    env_at_put(new_env, 0, argument_at(receiver, 1));
-    // arguments
-    env_at_put(new_env, 1, argument_at(receiver, 2));
+    env_at_put(new_env, 0, interpreter);
+    int i;
+    for (i = 0; i < argsize; i++) {
+        env_at_put(new_env, i + 2, array_at(arguments.array, i));
+    }
                                   
     context_object interp_context = return_context(receiver);
     set_argument(interp_context, 1, (object)new_env);
@@ -96,22 +107,22 @@ void prim_env_subscope(context_object context) {
 }
 
 void prim_env_set_parent(context_object context) {
-    printf("env>>parent:\n");
+    debug("env>>parent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
     env.env->parent = argument_at(receiver, 0);
-    printf("ret>>env>>parent:\n");
+    debug("ret>>env>>parent:\n");
     return_from_context(receiver);
 }
 
 void prim_env_parent(context_object context) {
-    printf("env>>parent\n");
+    debug("env>>parent\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
     set_argument(return_context(receiver), 1, env.env->parent);
-    printf("ret>>env>>parent\n");
+    debug("ret>>env>>parent\n");
     return_from_context(receiver);
 }
 

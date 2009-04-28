@@ -59,4 +59,6 @@ extern void        inline eval_instruction(instruction instruction);
 extern void        inline set_callarg(icall_object icall, int index, object value);
 extern void        inline set_callmsg(icall_object icall, const char* string);
 
+extern void        inline set_ivi_arg(ivinstr_object ivinstr, int index, object value);
+
 #endif // AST_H

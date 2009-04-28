@@ -5,6 +5,10 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
+#define NDEBUG 1
+
+#define debug if (!NDEBUG) printf
+
 // Context handling
 
 context_object global_context;
@@ -50,7 +54,7 @@ void inline transfer(context_object context) {
 
 // ilist>>eval:
 void ilist_eval(context_object context) {
-    printf("ilist>>eval:\n");
+    debug("ilist>>eval:\n");
     context_object ilist_context = target_context(context);
     ilist_object ilist = (ilist_object)header(ilist_context).pointer;
 
@@ -72,7 +76,7 @@ void ilist_eval(context_object context) {
 void ilist_continue_eval(context_object context) {
     context_object ilist_context = target_context(context);
     int index = number_value(argument_at(ilist_context, 3).number);
-    printf("ilist>>return:env:continue: %i\n", index);
+    debug("ilist>>return:env:continue: %i\n", index);
     ilist_object ilist = header(ilist_context).instruction.ilist;
     int size = number_value(ilist->size) - 1;
 
@@ -99,19 +103,19 @@ void ilist_continue_eval(context_object context) {
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).instruction.iconst;
-    printf("iconst>>eval: %x\n", iconst->constant.pointer);
+    debug("iconst>>eval: %x\n", iconst->constant.pointer);
 
     set_argument(return_context(iconst_context),
                  1, iconst->constant);
 
-    printf("ret>>iconst>>eval:\n");
+    debug("ret>>iconst>>eval:\n");
 
     return_from_context(iconst_context);
 }
 
 // icall>>eval:
 void icall_eval(context_object context) {
-    printf("icall>>eval:\n");
+    debug("icall>>eval:\n");
     context_object icall_context = target_context(context);
     icall_object icall = header(icall_context).instruction.icall;
 
@@ -125,13 +129,13 @@ void icall_eval(context_object context) {
     set_message(icall_context, "invoke:env:");
     set_argument(icall_context, 2, env);
 
-    printf("ret>>icall>>eval:\n");
+    debug("ret>>icall>>eval:\n");
     set_transfer(context);
 }
 
 // icall>>invoke:env:
 void icall_invoke(context_object context) {
-    printf("icall>>invoke:env:\n");
+    debug("icall>>invoke:env:\n");
     context_object icall_context = target_context(context);
     icall_object icall  = header(icall_context).instruction.icall;
 
@@ -143,13 +147,13 @@ void icall_invoke(context_object context) {
     set_argument(context, 1, env);
     context->return_context = icall_context->return_context;
 
-    printf("ret>>icall>>invoke:env:\n");
+    debug("ret>>icall>>invoke:env:\n");
     set_transfer(context);
 }
 
 // ivinstr>>invoke:env:
 void ivinstr_invoke(context_object context) {
-    printf("ivinstr>>eval:\n");
+    debug("ivinstr>>eval:\n");
     context_object ivinstr_context = target_context(context);
     ivinstr_object ivinstr  = header(ivinstr_context).instruction.ivinstr;
 
@@ -167,7 +171,7 @@ void ivinstr_invoke(context_object context) {
 
     ivinstr_context->return_context = (object)context;
 
-    printf("ret>>ivinstr>>eval:\n");
+    debug("ret>>ivinstr>>eval:\n");
     set_transfer(ivinstr_context);
 }
 
@@ -177,7 +181,7 @@ void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
     iassign_object iassign = header(iassign_context).instruction.iassign;
 
-    printf("iassign>>eval:\n");
+    debug("iassign>>eval:\n");
     
     env_object env = argument_at(iassign_context, 1).env;
 
@@ -191,7 +195,7 @@ void iassign_eval(context_object context) {
 
     context->return_context = (object)iassign_context;
 
-    printf("ret>>iassign>>eval:\n");
+    debug("ret>>iassign>>eval:\n");
 
     set_transfer(context);
 }
@@ -201,7 +205,7 @@ void ivar_assign(context_object context) {
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
 
-    printf("ivar>>assign:in:\n");
+    debug("ivar>>assign:in:\n");
 
     object env = argument_at(ivar_context, 2);
 
@@ -219,7 +223,7 @@ void ivar_assign(context_object context) {
 
 // ivar>>eval:
 void ivar_eval(context_object context) {
-    printf("ivar>>eval:\n");
+    debug("ivar>>eval:\n");
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).instruction.ivar;
 
@@ -231,20 +235,20 @@ void ivar_eval(context_object context) {
     set_argument(ivar_context, 1, (object)ivar->index);
     set_argument(ivar_context, 2, ivar->scope);
 
-    printf("ret>>ivinstr>>eval:\n");
+    debug("ret>>ivinstr>>eval:\n");
     set_transfer(ivar_context);
 }
 
 // iscoped>>eval:
 void iscoped_eval(context_object context) {
-    printf("iscoped>>eval:\n");
+    debug("iscoped>>eval:\n");
     context_object iscoped_context = target_context(context);
     iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
 
     // we just eval the attached expression.
     header(iscoped_context) = iscoped->expression;
 
-    printf("ret>>iscoped>>eval:\n");
+    debug("ret>>iscoped>>eval:\n");
     set_transfer(iscoped_context);
 }
 
@@ -252,13 +256,13 @@ void iscoped_eval(context_object context) {
 void icapture_eval(context_object context) {
     context_object icapture_context = target_context(context);
 
-    printf("icapture>>eval:\n");
+    debug("icapture>>eval:\n");
 
     object dynamic_env = argument_at(icapture_context, 1);
 
     set_argument(return_context(icapture_context), 1, dynamic_env);
 
-    printf("ret>>icapture>>eval: %x\n", dynamic_env.pointer);
+    debug("ret>>icapture>>eval: %x\n", dynamic_env.pointer);
 
     return_from_context(icapture_context);
 }
@@ -274,12 +278,12 @@ void with_native_class_lookup(context_object context) {
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
-        printf("non-native: %x, %x, %x: %s\n",
+        debug("non-native: %x, %x, %x: %s\n",
                 context, class_context, receiver_context,
                 selector.string->value);
         header(class_context) = class->class;
     } else {
-        printf("native: %s\n", selector.string->value);
+        debug("native: %s\n", selector.string->value);
         header(class_context) = native;
     }
     set_transfer(class_context);

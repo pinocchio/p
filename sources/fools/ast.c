@@ -102,3 +102,9 @@ void inline set_callarg(icall_object icall, int index, object value) {
 void inline set_callmsg(icall_object icall, const char* string) {
     set_callarg(icall, 0, symbol_known_to_the_vm(string));
 }
+
+void inline set_ivi_arg(ivinstr_object ivinstr, int index, object value) {
+    array_at_put(ivinstr->arguments, index, value);
+}
+
+
