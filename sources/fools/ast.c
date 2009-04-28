@@ -55,11 +55,12 @@ ivinstr_object make_ivinstr(object expression, int argsize) {
     return result;
 }
 
-iscoped_object make_iscoped(object scope, object expression) {
+iscoped_object make_iscoped(object scope, object expression, object argsize) {
     iscoped_object result   = NEW(struct scoped);
     header(result)          = (object)fools_system->iscope_class;
     result->scope           = scope;
     result->expression      = expression;
+    result->argsize         = argsize;
     return result;
 }
 

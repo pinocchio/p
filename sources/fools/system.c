@@ -7,8 +7,6 @@
 
 // Context handling
 
-//#define set_transfer(context) transfer(context)
-
 context_object global_context;
 
 void inline set_transfer(context_object context) {
@@ -345,9 +343,10 @@ object inline make_func(array_object arguments, object body) {
     ilist_at_put(exp, argsize + 1, (instruction)switch_env);
     ilist_at_put(exp, argsize + 2, body.instruction);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 3);
-    set_callmsg(icall, "env:new:");
+    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    set_callmsg(icall, "env:new:size:");
     set_callarg(icall, 2, (object)(instruction)exp);
+    set_callarg(icall, 3, (object)array_size(arguments));
 
     return (object)(instruction)icall;
 }

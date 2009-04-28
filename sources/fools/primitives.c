@@ -120,7 +120,8 @@ void prim_iscope_new(context_object context) {
     iscoped_object iscoped =
         make_iscoped(
             argument_at(iscope_context, 1),  // env
-            argument_at(iscope_context, 2)); // expression
+            argument_at(iscope_context, 2),  // expression
+            argument_at(iscope_context, 3)); // argsize
 
     set_argument(return_context(iscope_context), 1, (object)(instruction)iscoped);
 

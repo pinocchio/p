@@ -391,9 +391,10 @@ SETUP(test_new_iscoped)
     object v = (object)make_number(5);
     object exp = (object)(instruction)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 3);
-    set_callmsg(icall, "env:new:");
+    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    set_callmsg(icall, "env:new:size:");
     set_callarg(icall, 2, exp);
+    set_callarg(icall, 3, (object)make_number(0));
 
     env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,
@@ -419,9 +420,10 @@ SETUP(test_eval_iscoped)
     object v = (object)make_number(5);
     object exp = (object)(instruction)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 3);
-    set_callmsg(icall, "env:new:");
+    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    set_callmsg(icall, "env:new:size:");
     set_callarg(icall, 2, exp);
+    set_callarg(icall, 3, (object)make_number(0));
 
     env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,
@@ -579,6 +581,37 @@ SETUP(test_eval_function_no_args)
 
 }
 
+SETUP(test_eval_function_1_arg)
+
+    env_object env = make_env((object)fools_system->nil,
+                              (object)fools_system->nil, 0);
+
+
+    iconst_object the_instr = make_iconst((object)make_number(42));
+    object constant_function =
+        make_func(make_array(0),
+                    (object)(instruction)
+                    the_instr
+                  );
+
+    context_object make_eval_context(ci, constant_function.instruction, env);
+    build_return(ci, rc);
+
+    transfer(ci);
+
+    object scoped_function = argument_at(rc, 1);
+    object iconst = (object)(instruction)make_iconst(scoped_function);
+    ivinstr_object ivinstr = make_ivinstr(iconst, 0);
+
+    make_eval_context(ci, ivinstr, env);
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+
+    assert(number_value(argument_at(rc, 1).number) == 42);
+
+}
+
 /* start-stub
 SETUP(test_class_lookup)
 
@@ -625,5 +658,6 @@ int main() {
     test_make_function_no_args();
     test_ilist_pass_context();
     test_eval_function_no_args();
+    test_eval_function_1_arg();
     return 0;
 }
