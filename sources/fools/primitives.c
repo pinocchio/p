@@ -83,6 +83,7 @@ void prim_env_subscope(context_object context) {
     // arguments at: 0 -> selector
     object interpreter  = argument_at(receiver, 1);
     object arguments    = argument_at(receiver, 2);
+
     // XXX gravely breaking encapsulation!
     int argsize         = number_value(interpreter.instruction.iscoped->argsize.number);
 
@@ -93,6 +94,8 @@ void prim_env_subscope(context_object context) {
                                   argsize + 2);
     
     env_at_put(new_env, 0, interpreter);
+
+    // XXX gravely breaking encapsulation!
     int i;
     for (i = 0; i < argsize; i++) {
         env_at_put(new_env, i + 2, array_at(arguments.array, i));

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <system.h>
 
+// Some nice helper constructs.
 #define SETUP(name)\
     void name() { printf(#name"\n"); bootstrap();
 

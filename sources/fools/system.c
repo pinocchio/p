@@ -102,6 +102,7 @@ void ilist_continue_eval(context_object context) {
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).instruction.iconst;
+
     debug("iconst>>eval\n");
 
     set_argument(return_context(iconst_context),
