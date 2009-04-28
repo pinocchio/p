@@ -454,21 +454,28 @@ SETUP(test_icapture)
     assert(argument_at(rc, 1).env == env);
 }
 
-/*
-SETUP(test_function_no_args)
+
+SETUP(test_make_function_no_args)
+
+    env_object env = make_env((object)fools_system->nil,
+                              (object)fools_system->nil, 0);
 
     object constant_function =
         make_func(make_array(0),
                   (object)(instruction)
                   make_iconst((object)make_number(42)));
 
-    iconst_object iconst = make_iconst(constant_function);
-    ivinstr_object ivinstr = make_ivinstr((object)(instruction)iconst);
+    context_object make_eval_context(ci, constant_function.instruction, env);
+    build_return(ci, rc);
 
-    ci 
+    transfer(ci);
+
+    object result = argument_at(rc, 1);
+    assert(header(result.pointer).native_class == fools_system->iscope_class);
+    assert(result.instruction.iscoped->scope.env == env);
 
 }
-*/
+
 
 
 /* start-stub
@@ -513,7 +520,7 @@ int main() {
     test_new_iscoped();
     test_eval_iscoped();
     test_icapture();
-    //test_function_no_args();
+    test_make_function_no_args();
 
     return 0;
 }
