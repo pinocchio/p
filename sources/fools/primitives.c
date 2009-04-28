@@ -2,6 +2,7 @@
 #include <ast.h>
 #include <system.h>
 #include <bootstrap.h>
+#include <stdio.h>
 
 #define NDEBUG 1
 #define debug if (!NDEBUG) printf
@@ -64,11 +65,8 @@ void prim_env_store_at_in(context_object context) {
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 3).pointer) {
         int index = number_value(array_at(receiver->arguments, 2).number);
-        debug("fetch at index: %i\n", index);
         object value = array_at(receiver->arguments, 1);
-        debug("store at index: %i: %x\n", index, value.pointer);
         env_at_put(env, index, value);
-        debug("done\n");
         return return_from_context(receiver);
     }
     if (env->parent.nil == fools_system->nil) {

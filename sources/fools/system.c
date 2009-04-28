@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 #define NDEBUG 1
-
 #define debug if (!NDEBUG) printf
 
 // Context handling
@@ -103,7 +102,7 @@ void ilist_continue_eval(context_object context) {
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).instruction.iconst;
-    debug("iconst>>eval: %x\n", iconst->constant.pointer);
+    debug("iconst>>eval\n");
 
     set_argument(return_context(iconst_context),
                  1, iconst->constant);
@@ -262,7 +261,7 @@ void icapture_eval(context_object context) {
 
     set_argument(return_context(icapture_context), 1, dynamic_env);
 
-    debug("ret>>icapture>>eval: %x\n", dynamic_env.pointer);
+    debug("ret>>icapture>>eval:\n");
 
     return_from_context(icapture_context);
 }
@@ -278,8 +277,7 @@ void with_native_class_lookup(context_object context) {
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
-        debug("non-native: %x, %x, %x: %s\n",
-                context, class_context, receiver_context,
+        debug("non-native: %s\n",
                 selector.string->value);
         header(class_context) = class->class;
     } else {
