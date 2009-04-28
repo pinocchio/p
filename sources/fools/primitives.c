@@ -25,6 +25,7 @@ void prim_dict_at(context_object context) {
     object key              = array_at(receiver->arguments, 1);
     object* value           = (object*)array_at(receiver->arguments, 2).pointer;
     *value = dict_at(header(receiver).dict, key);
+    return_from_context(receiver);
 }
 
 void prim_dict_at_put(context_object context) {
@@ -33,6 +34,7 @@ void prim_dict_at_put(context_object context) {
     object key              = array_at(receiver->arguments, 1);
     object value            = array_at(receiver->arguments, 2);
     dict_at_put(header(receiver).dict, key, value);
+    return_from_context(receiver);
 }
 
 void prim_env_fetch_from(context_object context) {
@@ -49,24 +51,29 @@ void prim_env_fetch_from(context_object context) {
         return;
     }
     header(receiver) = env->parent;
-    transfer(receiver);
+    set_transfer(receiver);
 }
 
 void prim_env_store_at_in(context_object context) {
+    printf("env>>store:at:in:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 3).pointer) {
         int index = number_value(array_at(receiver->arguments, 2).number);
+        printf("fetch at index: %i\n", index);
         object value = array_at(receiver->arguments, 1);
+        printf("store at index: %i: %x\n", index, value.pointer);
         env_at_put(env, index, value);
+        printf("done\n");
         return return_from_context(receiver);
     }
     if (env->parent.nil == fools_system->nil) {
         return;
     }
     header(receiver) = env->parent;
-    transfer(receiver);
+    printf("ret>>env>>store:at:in:\n");
+    set_transfer(receiver);
 }
 
 void prim_env_subscope(context_object context) {
@@ -75,27 +82,36 @@ void prim_env_subscope(context_object context) {
     object env = header(receiver);
     env_object new_env = make_env((object)fools_system->nil,
                                   env,
-                                  2);
+                                  10); // hardwired for now.
     
     // interpreter
     env_at_put(new_env, 0, argument_at(receiver, 1));
     // arguments
     env_at_put(new_env, 1, argument_at(receiver, 2));
                                   
-
     context_object interp_context = return_context(receiver);
-    context_object class_context  = target_context(interp_context);
-
-    set_argument(class_context, 1, (object)new_env);
+    set_argument(interp_context, 1, (object)new_env);
 
     return_from_context(receiver);
 }
 
-void prim_env_parent(context_object context) {
+void prim_env_set_parent(context_object context) {
+    printf("env>>parent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
     env.env->parent = argument_at(receiver, 0);
+    printf("ret>>env>>parent:\n");
+    return_from_context(receiver);
+}
+
+void prim_env_parent(context_object context) {
+    printf("env>>parent\n");
+    context_object receiver = target_context(context);
+    // arguments at: 0 -> selector
+    object env = header(receiver);
+    set_argument(return_context(receiver), 1, env.env->parent);
+    printf("ret>>env>>parent\n");
     return_from_context(receiver);
 }
 

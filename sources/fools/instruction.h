@@ -27,7 +27,7 @@ typedef union {
     ivar_object         ivar;
     iscoped_object      iscoped;
     icapture_object     icapture;
-    ivinstr_object      ivinstruction;
+    ivinstr_object      ivinstr;
 } instruction;
 
 #endif // INSTRUCTION_H

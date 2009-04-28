@@ -47,10 +47,11 @@ icapture_object make_icapture() {
     return result;
 }
 
-ivinstr_object make_ivinstr(object expression) {
+ivinstr_object make_ivinstr(object expression, int argsize) {
     ivinstr_object result   = NEW(struct vinstruction);
     header(result)          = (object)fools_system->ivinstr_class;
     result->expression      = expression;
+    result->arguments       = make_array(argsize);
     return result;
 }
 

@@ -34,6 +34,7 @@ struct scoped {
 
 struct vinstruction {
     object          expression;
+    array_object    arguments;
 };
 
 struct capture { };
@@ -45,7 +46,7 @@ extern iconst_object    make_iconst(object constant);
 extern ivar_object      make_ivar(object scope, number_object index);
 extern iscoped_object   make_iscoped(object scope, object expression);
 extern icapture_object  make_icapture();
-extern ivinstr_object   make_ivinstr(object expression);
+extern ivinstr_object   make_ivinstr(object expression, int argsize);
 
 extern instruction inline raw_ilist_at(ilist_object ilist, int index);
 extern void        inline raw_ilist_at_put(ilist_object ilist,

@@ -11,6 +11,7 @@ extern void prim_env_fetch_from(context_object context);
 extern void prim_env_store_at_in(context_object context);
 extern void prim_env_subscope(context_object context);
 extern void prim_env_parent(context_object context);
+extern void prim_env_set_parent(context_object context);
 
 extern void prim_iscope_new(context_object context);
 extern void prim_iscoped_scope(context_object context);

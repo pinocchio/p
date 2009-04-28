@@ -62,7 +62,8 @@ fools_object bootstrap() {
     define_native(env_class, "fetch:from:",             prim_env_fetch_from);
     define_native(env_class, "store:at:in:",            prim_env_store_at_in);
     define_native(env_class, "subScopeFor:arguments:",  prim_env_subscope);
-    define_native(env_class, "parent:",                 prim_env_parent);
+    define_native(env_class, "parent:",                 prim_env_set_parent);
+    define_native(env_class, "parent",                  prim_env_parent);
 
     fools_system->iscope_metaclass = make_native_class(1);
     define_native(iscope_metaclass, "env:new:",         prim_iscope_new);
