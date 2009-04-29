@@ -124,7 +124,7 @@ struct fools {
     native_class_object icapture_class;
     native_class_object iscope_metaclass;
     native_class_object iscope_class;
-    native_class_object ivinstr_class;
+    native_class_object appcall_class;
     native_class_object env_class;
     native_class_object dict_class;
     array_object        symbols_known_to_the_vm;

@@ -81,7 +81,7 @@ void ilist_continue_eval(context_object context) {
     ilist_object ilist = header(ilist_context).instruction.ilist;
     int size = number_value(ilist->size) - 1;
 
-    env_object env = argument_at(ilist_context, 2).env;
+    object env = argument_at(ilist_context, 2);
 
     object instruction = (object)raw_ilist_at(ilist, index);
     header(context) = instruction;
@@ -95,7 +95,7 @@ void ilist_continue_eval(context_object context) {
     }
     
     set_message(context, "eval:");
-    set_argument(context, 1, (object)env);
+    set_argument(context, 1, env);
 
     set_transfer(context);
 }
@@ -155,22 +155,22 @@ void icall_invoke(context_object context) {
     set_transfer(context);
 }
 
-// ivinstr>>invoke:env:
-void ivinstr_invoke(context_object context) {
-    debug("ivinstr>>invoke:env::\n");
-    context_object ivinstr_context = target_context(context);
-    ivinstr_object ivinstr  = header(ivinstr_context).instruction.ivinstr;
+// appcall>>invoke:env:
+void appcall_invoke(context_object context) {
+    debug("appcall>>invoke:env::\n");
+    context_object appcall_context = target_context(context);
+    appcall_object appcall  = header(appcall_context).instruction.appcall;
 
-    object interpreter  = argument_at(ivinstr_context, 1);
-    object env          = argument_at(ivinstr_context, 2);
+    object interpreter  = argument_at(appcall_context, 1);
+    object env          = argument_at(appcall_context, 2);
 
-    header(ivinstr_context) = interpreter;
-    set_message(ivinstr_context, "eval:withArguments:");
-    set_argument(ivinstr_context, 1, env);
-    set_argument(ivinstr_context, 2, (object)ivinstr->arguments);
+    header(appcall_context) = interpreter;
+    set_message(appcall_context, "eval:withArguments:");
+    set_argument(appcall_context, 1, env);
+    set_argument(appcall_context, 2, (object)appcall->arguments);
 
-    debug("ret>>ivinstr>>invoke:env::\n");
-    set_transfer(ivinstr_context);
+    debug("ret>>appcall>>invoke:env::\n");
+    set_transfer(appcall_context);
 }
 
 
@@ -232,7 +232,7 @@ void ivar_eval(context_object context) {
     set_argument(ivar_context, 1, (object)ivar->index);
     set_argument(ivar_context, 2, ivar->scope);
 
-    debug("ret>>ivinstr>>eval:\n");
+    debug("ret>>appcall>>eval:\n");
     set_transfer(ivar_context);
 }
 
@@ -443,9 +443,9 @@ object inline make_func(array_object arguments, object body) {
     set_callmsg(parent_env, "parent");
 
     icall_object arg_eval;
-    // var2 = (var2 eval: (env parent))
+    // var1 = (var1 eval: (env parent))
     // ...  ...  ...
-    // varN+1 = (varN+1 eval: (env parent))
+    // varN = (varN eval: (env parent))
     int i;
     for (i = 0; i < argsize; i++) {
         ivar_object variable = array_at(arguments, i).instruction.ivar;

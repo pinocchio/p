@@ -421,9 +421,9 @@ SETUP(test_eval_iscoped)
     iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
 
     iconst->constant = (object)(instruction)iscope;
-    ivinstr_object ivinstr = make_ivinstr((object)(instruction)iconst, 0);
+    appcall_object appcall = make_appcall((object)(instruction)iconst, 0);
 
-    make_eval_context(ci, ivinstr, start);
+    make_eval_context(ci, appcall, start);
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -554,9 +554,9 @@ SETUP(test_eval_function_no_args)
 
     object scoped_function = argument_at(rc, 1);
     object iconst = (object)(instruction)make_iconst(scoped_function);
-    ivinstr_object ivinstr = make_ivinstr(iconst, 0);
+    appcall_object appcall = make_appcall(iconst, 0);
 
-    make_eval_context(ci, ivinstr, env);
+    make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -614,10 +614,10 @@ SETUP(test_eval_function_1_arg)
 
     object scoped_function = argument_at(rc, 1);
     object iconst = (object)(instruction)make_iconst(scoped_function);
-    ivinstr_object ivinstr = make_ivinstr(iconst, 1);
-    set_ivi_arg(ivinstr, 0, (object)(instruction)make_iconst(arg));
+    appcall_object appcall = make_appcall(iconst, 1);
+    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
 
-    make_eval_context(ci, ivinstr, env);
+    make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
 
     transfer(ci);

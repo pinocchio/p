@@ -77,9 +77,9 @@ fools_object bootstrap() {
     define_native(iscope_class, "doEval:withArguments:",iscoped_eval);
     define_native(iscope_class, "scope",                iscoped_scope);
 
-    fools_system->ivinstr_class = make_native_class(2);
-    define_native(ivinstr_class, "eval:",               icall_eval);
-    define_native(ivinstr_class, "invoke:env:",         ivinstr_invoke);
+    fools_system->appcall_class = make_native_class(2);
+    define_native(appcall_class, "eval:",               icall_eval);
+    define_native(appcall_class, "invoke:env:",         appcall_invoke);
 
 
     return fools_system;

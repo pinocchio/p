@@ -8,7 +8,7 @@ struct constant;
 struct variable;
 struct scoped;
 struct capture;
-struct vinstruction;
+struct appcall;
 
 typedef struct instruction_list* ilist_object;
 typedef struct assignment*       iassign_object;
@@ -17,7 +17,7 @@ typedef struct constant*         iconst_object;
 typedef struct variable*         ivar_object;
 typedef struct scoped*           iscoped_object;
 typedef struct capture*          icapture_object;
-typedef struct vinstruction*     ivinstr_object;
+typedef struct appcall*          appcall_object;
 
 typedef union {
     ilist_object        ilist;
@@ -27,7 +27,7 @@ typedef union {
     ivar_object         ivar;
     iscoped_object      iscoped;
     icapture_object     icapture;
-    ivinstr_object      ivinstr;
+    appcall_object      appcall;
 } instruction;
 
 #endif // INSTRUCTION_H

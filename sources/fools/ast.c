@@ -47,9 +47,9 @@ icapture_object make_icapture() {
     return result;
 }
 
-ivinstr_object make_ivinstr(object expression, int argsize) {
-    ivinstr_object result   = NEW(struct vinstruction);
-    header(result)          = (object)fools_system->ivinstr_class;
+appcall_object make_appcall(object expression, int argsize) {
+    appcall_object result   = NEW(struct appcall);
+    header(result)          = (object)fools_system->appcall_class;
     result->expression      = expression;
     result->arguments       = make_array(argsize);
     return result;
@@ -103,8 +103,12 @@ void inline set_callmsg(icall_object icall, const char* string) {
     set_callarg(icall, 0, symbol_known_to_the_vm(string));
 }
 
-void inline set_ivi_arg(ivinstr_object ivinstr, int index, object value) {
-    array_at_put(ivinstr->arguments, index, value);
+void inline set_appcarg(appcall_object appcall, int index, object value) {
+    array_at_put(appcall->arguments, index, value);
+}
+
+void inline set_appcmsg(appcall_object appcall, const char* string) {
+    set_appcarg(appcall, 0, symbol_known_to_the_vm(string));
 }
 
 

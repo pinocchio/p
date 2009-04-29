@@ -31,7 +31,7 @@ extern void ivar_assign(context_object context);
 
 extern void icapture_eval(context_object context);
 
-extern void ivinstr_invoke(context_object context);
+extern void appcall_invoke(context_object context);
 
 extern void env_fetch_from(context_object context);
 extern void env_store_at_in(context_object context);
