@@ -404,7 +404,7 @@ void env_set_parent(context_object context) {
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
-    env.env->parent = argument_at(receiver, 0);
+    env.env->parent = argument_at(receiver, 1);
     debug("ret>>env>>parent:\n");
     return_from_context(receiver);
 }
