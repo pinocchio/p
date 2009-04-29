@@ -343,11 +343,13 @@ void env_fetch_from(context_object context) {
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 2).pointer) {
+        printf("equals!\n");
         int index = number_value(array_at(receiver->arguments, 1).number);
         array_at_put(receiver->return_context.context->arguments,
                      1, env_at(env, index));
         return return_from_context(receiver);
     }
+    printf("failed!\n");
     if (env->parent.nil == fools_system->nil) {
         return;
     }

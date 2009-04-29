@@ -625,6 +625,59 @@ SETUP(test_eval_function_1_arg)
     assert(number_value(argument_at(rc, 1).number) == 42);
 }
 
+SETUP(test_eval_nested_function)
+
+    env_object env = make_env((object)fools_system->nil,
+                              (object)fools_system->nil, 0);
+
+    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)(instruction)ivar);
+
+    object constant_function1 =
+        make_func(make_array(0),
+                    (object)(instruction)
+                    ivar
+                  );
+
+
+    object constant_function = make_func(arguments, constant_function1);
+
+    context_object make_eval_context(ci, constant_function.instruction, env);
+    build_return(ci, rc);
+
+    transfer(ci);
+
+    object arg = (object)make_number(42);
+
+    object scoped_function = argument_at(rc, 1);
+    object iconst = (object)(instruction)make_iconst(scoped_function);
+    appcall_object appcall = make_appcall(iconst, 1);
+    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
+
+    make_eval_context(ci, appcall, env);
+    ci->return_context = (object)rc;
+
+    transfer(ci);
+    
+    object nested_function = argument_at(rc, 1);
+
+    assert(header(nested_function.pointer).native_class ==
+           fools_system->iscope_class);
+
+    iconst = (object)(instruction)make_iconst(nested_function);
+    appcall = make_appcall(iconst, 1);
+    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
+
+    make_eval_context(ci, appcall, env);
+    ci->return_context = (object)rc;
+
+    printf("START--------------------\n");
+    transfer(ci);
+
+    // assert(number_value(argument_at(rc, 1).number) == 42);
+}
+
 /* start-stub
 SETUP(test_class_lookup)
 
@@ -672,6 +725,7 @@ int main() {
     test_eval_function_no_args();
     test_make_function_1_arg();
     test_eval_function_1_arg();
+    test_eval_nested_function();
 
     return 0;
 }
