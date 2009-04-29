@@ -26,7 +26,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(15);
+    fools_system->symbols_known_to_the_vm   = make_array(17);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -40,26 +40,29 @@ fools_object bootstrap() {
     define_native(ilist_class, "return:env:continue:",  ilist_continue_eval);
     define_native(ilist_class, "eval:",                 ilist_eval);
     
-    fools_system->iconst_class = make_native_class(1);
+    fools_system->iconst_class = make_native_class(2);
     define_native(iconst_class, "eval:",                iconst_eval);
+    define_native(iconst_class, "preEval:env:",         pre_eval_env);
 
-    fools_system->icall_class = make_native_class(2);
+    fools_system->icall_class = make_native_class(3);
     define_native(icall_class, "eval:",                 icall_eval);
-    define_native(icall_class, "invoke:env:",           icall_invoke);
+    define_native(icall_class, "invoke:env:",           icall_invoke_env);
+    define_native(icall_class, "preEval:env:",          pre_eval_env);
 
     fools_system->iassign_class = make_native_class(1);
     define_native(iassign_class, "eval:",               iassign_eval);
 
-    fools_system->ivar_class = make_native_class(2);
+    fools_system->ivar_class = make_native_class(3);
     define_native(ivar_class, "eval:",                  ivar_eval);
     define_native(ivar_class, "assign:in:",             ivar_assign);
+    define_native(ivar_class, "preEval:env:",           pre_eval_env);
 
     fools_system->icapture_class = make_native_class(1);
     define_native(icapture_class, "eval:",              icapture_eval);
 
     fools_system->icapture = (object)(instruction)make_icapture();
 
-    fools_system->env_class = make_native_class(4);
+    fools_system->env_class = make_native_class(5);
     define_native(env_class, "fetch:from:",             env_fetch_from);
     define_native(env_class, "store:at:in:",            env_store_at_in);
     define_native(env_class, "subScope:",               env_subscope);
@@ -72,7 +75,7 @@ fools_object bootstrap() {
     fools_system->iscope =
         (object)make_object(0, (object)fools_system->iscope_metaclass);
 
-    fools_system->iscope_class = make_native_class(2);
+    fools_system->iscope_class = make_native_class(3);
     define_native(iscope_class, "eval:withArguments:",  iscoped_eval_arguments);
     define_native(iscope_class, "doEval:withArguments:",iscoped_eval);
     define_native(iscope_class, "scope",                iscoped_scope);
