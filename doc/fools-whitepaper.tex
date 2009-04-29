@@ -152,6 +152,19 @@ at interpreter level, at application level. And where it is possible,
 the ways to work around design decisions are made expensive by the
 overhead of automatic behaviour in the system below.
 
+Next to only being partly reflective, the bridge between interpreter-level and
+application-level is often a dangerous one. This is due to the fact that 
+encapsulation is only enforced both at interpreter-level for interpreter
+structures and application-level for application structures. Encapsulation is
+not preserved cross-meta-barrier as the interpreter has full
+encapsulation-breaking access to application-level constructs. The more
+reflective such a system is, the more brittle it gets. As an example thereof
+you can see how easy it is to break a Smalltalk implementation by doing
+something reflective at application-level resulting in crashing of the VM
+below. While guards can be put in place almost everywhere to get around the
+breaking of the VM, this is as unsafe as any application that does not use
+proper encapsulation.
+
 \subsection{Solution}
 In order to avoid applications being stuck in the prison defined by
 their puppet master the virtual machine, a fully reflective language
@@ -190,6 +203,9 @@ written in other languages. Such external applications can by
 themselves be considered non-reflective or native parts of an
 application. Since such natives are outside the scope of reflective
 system, we cannot care about their implementation details.
+
+% XXX add something about how we don't break it by maintaining the interfaces
+% at all levels.
 
 When building a fully reflective system in modern programming
 languages, we have to take care not to accidentally incorporate
