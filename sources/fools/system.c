@@ -269,8 +269,10 @@ void iscoped_eval_arguments(context_object context) {
     int argsize = number_value(iscoped->argsize.number);
 
     header(context) = env;
-    set_message(context, "subScope:");
+    context->arguments = make_array(3);
+    set_message(context, "subScope:key:");
     set_argument(context, 1, (object)make_number(argsize + 2));
+    set_argument(context, 2, iscoped->expression);
 
     context->return_context = (object)iscoped_context;
     
@@ -307,6 +309,15 @@ void iscoped_eval(context_object context) {
 
     debug("ret>>iscoped>>doEval:withArguments\n");
     set_transfer(context);
+}
+
+// iscoped>>scope
+void iscoped_scope(context_object context) {
+    context_object receiver = target_context(context);
+    // arguments at: 0 -> selector
+    iscoped_object iscoped = header(receiver).instruction.iscoped;
+    set_argument(return_context(receiver), 1, iscoped->scope);
+    return_from_context(receiver);
 }
 
 // icapture>>eval:
@@ -370,16 +381,17 @@ void env_store_at_in(context_object context) {
 void env_subscope(context_object context) {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
-    debug("env>>subScope:\n");
+    debug("env>>subScope:key:\n");
     context_object receiver = target_context(context);
     object env  = header(receiver);
     // arguments at: 0 -> selector
     int size    = number_value(argument_at(receiver, 1).number);
+    object key  = argument_at(receiver, 2);
 
-    env_object new_env = make_env((object)fools_system->nil, env, size);
+    env_object new_env = make_env(key, env, size);
     set_argument(return_context(receiver), 1, (object)new_env);
 
-    debug("ret>>env>>subScope:\n");
+    debug("ret>>env>>subScope:key:\n");
 
     return_from_context(receiver);
 }
@@ -418,15 +430,6 @@ void iscope_new(context_object context) {
     set_argument(return_context(iscope_context), 1, (object)(instruction)iscoped);
 
     return_from_context(iscope_context);
-}
-
-// iscope>>scope
-void iscoped_scope(context_object context) {
-    context_object receiver = target_context(context);
-    // arguments at: 0 -> selector
-    iscoped_object iscoped = header(receiver).instruction.iscoped;
-    set_argument(return_context(receiver), 1, iscoped->scope);
-    return_from_context(receiver);
 }
 
 // Native class handling
@@ -471,6 +474,7 @@ object inline make_func(array_object arguments, object body) {
     for (i = 0; i < argsize; i++) {
         ivar_object variable = array_at(arguments, i).instruction.ivar;
         variable->index = make_number(i + 1); // skip receiver
+        variable->scope = (object)(instruction)exp;
 
         arg_eval = make_icall((object)(instruction)variable, 3);
         set_callmsg(arg_eval, "preEval:env:");

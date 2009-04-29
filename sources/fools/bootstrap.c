@@ -67,7 +67,7 @@ fools_object bootstrap() {
     fools_system->env_class = make_native_class(5);
     define_native(env_class, "fetch:from:",             env_fetch_from);
     define_native(env_class, "store:at:in:",            env_store_at_in);
-    define_native(env_class, "subScope:",               env_subscope);
+    define_native(env_class, "subScope:key:",           env_subscope);
     define_native(env_class, "parent:",                 env_set_parent);
     define_native(env_class, "parent",                  env_parent);
 
