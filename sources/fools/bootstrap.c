@@ -36,9 +36,10 @@ fools_object bootstrap() {
 //    define_native(dict_class, "at:",                    prim_dict_at);
 //    define_native(dict_class, "at:put:",                prim_dict_at_put);
 
-    fools_system->ilist_class = make_native_class(2);
+    fools_system->ilist_class = make_native_class(3);
     define_native(ilist_class, "return:env:continue:",  ilist_continue_eval);
     define_native(ilist_class, "eval:",                 ilist_eval);
+    define_native(ilist_class, "preEval:env:",          pre_eval_env);
     
     fools_system->iconst_class = make_native_class(2);
     define_native(iconst_class, "eval:",                iconst_eval);
@@ -49,8 +50,9 @@ fools_object bootstrap() {
     define_native(icall_class, "invoke:env:",           icall_invoke_env);
     define_native(icall_class, "preEval:env:",          pre_eval_env);
 
-    fools_system->iassign_class = make_native_class(1);
+    fools_system->iassign_class = make_native_class(2);
     define_native(iassign_class, "eval:",               iassign_eval);
+    define_native(iassign_class, "preEval:env:",        pre_eval_env);
 
     fools_system->ivar_class = make_native_class(3);
     define_native(ivar_class, "eval:",                  ivar_eval);
