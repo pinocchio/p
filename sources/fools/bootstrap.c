@@ -26,7 +26,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(17);
+    fools_system->symbols_known_to_the_vm   = make_array(15);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 

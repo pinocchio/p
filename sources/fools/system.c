@@ -155,66 +155,6 @@ void icall_invoke_env(context_object context) {
     set_transfer(context);
 }
 
-// icall>>evalWithArg:
-void icall_eval_with_arg(context_object context) {
-    debug("icall>>evalWithArg:\n");
-    context_object icall_context = target_context(context);
-    icall_object icall = header(icall_context).instruction.icall;
-
-    header(context)                 = icall->interpreter;
-    context->return_context         = (object)icall_context;
-    context->arguments              = icall_context->arguments;
-
-    icall_context->arguments        = make_array(2);
-    set_message(icall_context, "invokeWithArg:env:");
-
-    debug("ret>>icall>>evalWithArg:\n");
-    set_transfer(context);
-}
-
-// icall>>invokeWithArg:env:
-void icall_invoke(context_object context) {
-    debug("icall>>invokeWithArg:env:\n");
-    context_object icall_context = target_context(context);
-    icall_object icall = header(icall_context).instruction.icall;
-
-    object interpreter  = argument_at(icall_context, 1);
-    object env          = argument_at(icall_context, 2);
-
-    // XXX breaking encapsulation!
-    header(context) = array_at(icall->arguments, 0); 
-    context->return_context         = (object)icall_context;
-
-    header(context)                 = icall->interpreter;
-    context->arguments              = icall_context->arguments;
-
-
-    icall_context->arguments        = make_array(3);
-    set_message(icall_context, "arg:invoke:env:");
-    set_argument(icall_context, 2, interpreter);
-    set_argument(icall_context, 3, env);
-
-    debug("ret>>icall>>invokeWithArg:env:\n");
-    set_transfer(context);
-}
-
-// icall>>arg:invoke:env:
-void icall_arg_invoke_env(context_object context) {
-    debug("icall>>arg:invoke:env:\n");
-    context_object icall_context = target_context(context);
-
-    object interpreter  = argument_at(icall_context, 2);
-    object argument     = argument_at(icall_context, 1);
-
-    header(context) = interpreter;
-    context->arguments = make_array(1);
-    array_at_put(context->arguments, 0, argument);
-    context->return_context = icall_context->return_context;
-
-    debug("ret>>icall>>arg:invoke:env:\n");
-    set_transfer(context);
-}
-
 // appcall>>invoke:env:
 void appcall_invoke(context_object context) {
     debug("appcall>>invoke:env:\n");
