@@ -60,21 +60,21 @@ fools_object bootstrap() {
     fools_system->icapture = (object)(instruction)make_icapture();
 
     fools_system->env_class = make_native_class(4);
-    define_native(env_class, "fetch:from:",             prim_env_fetch_from);
-    define_native(env_class, "store:at:in:",            prim_env_store_at_in);
-    define_native(env_class, "subScopeFor:arguments:",  prim_env_subscope);
-    define_native(env_class, "parent:",                 prim_env_set_parent);
-    define_native(env_class, "parent",                  prim_env_parent);
+    define_native(env_class, "fetch:from:",             env_fetch_from);
+    define_native(env_class, "store:at:in:",            env_store_at_in);
+    define_native(env_class, "subScopeFor:arguments:",  env_subscope);
+    define_native(env_class, "parent:",                 env_set_parent);
+    define_native(env_class, "parent",                  env_parent);
 
     fools_system->iscope_metaclass = make_native_class(1);
-    define_native(iscope_metaclass, "env:new:size:",    prim_iscope_new);
+    define_native(iscope_metaclass, "env:new:size:",    iscope_new);
 
     fools_system->iscope =
         (object)make_object(0, (object)fools_system->iscope_metaclass);
 
     fools_system->iscope_class = make_native_class(2);
     define_native(iscope_class, "eval:",                iscoped_eval);
-    define_native(iscope_class, "scope",                prim_iscoped_scope);
+    define_native(iscope_class, "scope",                iscoped_scope);
 
     fools_system->ivinstr_class = make_native_class(2);
     define_native(ivinstr_class, "eval:",               icall_eval);
