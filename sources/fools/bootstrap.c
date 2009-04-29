@@ -30,10 +30,11 @@ fools_object bootstrap() {
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
-    fools_system->dict_class = make_native_class(2);
-    header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
-    define_native(dict_class, "at:",                    prim_dict_at);
-    define_native(dict_class, "at:put:",                prim_dict_at_put);
+// currently broken.
+//    fools_system->dict_class = make_native_class(2);
+//    header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
+//    define_native(dict_class, "at:",                    prim_dict_at);
+//    define_native(dict_class, "at:put:",                prim_dict_at_put);
 
     fools_system->ilist_class = make_native_class(2);
     define_native(ilist_class, "return:env:continue:",  ilist_continue_eval);

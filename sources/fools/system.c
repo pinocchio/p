@@ -73,6 +73,8 @@ void ilist_eval(context_object context) {
 
 // ilist>>return:env:continue:
 void ilist_continue_eval(context_object context) {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
     context_object ilist_context = target_context(context);
     int index = number_value(argument_at(ilist_context, 3).number);
     debug("ilist>>return:env:continue: %i\n", index);
@@ -183,7 +185,7 @@ void iassign_eval(context_object context) {
 
     debug("iassign>>eval:\n");
     
-    env_object env = argument_at(iassign_context, 1).env;
+    object env = argument_at(iassign_context, 1);
 
     header(context)     = iassign->expression;
     context->arguments  = iassign_context->arguments;
@@ -191,7 +193,7 @@ void iassign_eval(context_object context) {
     header(iassign_context)    = (object)(instruction)iassign->variable;
     iassign_context->arguments = make_array(3);
     set_message(iassign_context, "assign:in:");
-    set_argument(iassign_context, 2, (object)env);
+    set_argument(iassign_context, 2, env);
 
     context->return_context = (object)iassign_context;
 
@@ -207,9 +209,8 @@ void ivar_assign(context_object context) {
 
     debug("ivar>>assign:in:\n");
 
-    object env = argument_at(ivar_context, 2);
-
-    object value = argument_at(ivar_context, 1);
+    object value    = argument_at(ivar_context, 1);
+    object env      = argument_at(ivar_context, 2);
     
     header(ivar_context) = env;
     ivar_context->arguments = make_array(4);

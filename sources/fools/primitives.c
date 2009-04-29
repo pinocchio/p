@@ -21,7 +21,6 @@ void prim_number_minus(context_object context) {
     number_object second    = array_at(context->arguments, 2).number;
     *left = make_number(first->value - second->value);
 }
-*/
 
 void prim_dict_at(context_object context) {
     context_object receiver = target_context(context);
@@ -40,8 +39,11 @@ void prim_dict_at_put(context_object context) {
     dict_at_put(header(receiver).dict, key, value);
     return_from_context(receiver);
 }
+*/
 
 void prim_env_fetch_from(context_object context) {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
@@ -59,6 +61,8 @@ void prim_env_fetch_from(context_object context) {
 }
 
 void prim_env_store_at_in(context_object context) {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
     debug("env>>store:at:in:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
@@ -78,6 +82,8 @@ void prim_env_store_at_in(context_object context) {
 }
 
 void prim_env_subscope(context_object context) {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
     context_object receiver = target_context(context);
     object env          = header(receiver);
     // arguments at: 0 -> selector
