@@ -5,7 +5,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 1
+#define NDEBUG 0
 #define debug if (!NDEBUG) printf
 
 // Context handling
@@ -145,6 +145,8 @@ void icall_invoke(context_object context) {
     object env          = argument_at(icall_context, 2);
 
     header(context) = interpreter;
+    // XXX should be a copy of the arguments;
+    // ensuring that it's an array!
     context->arguments = icall->arguments;
     set_argument(context, 1, env);
     context->return_context = icall_context->return_context;
@@ -155,25 +157,19 @@ void icall_invoke(context_object context) {
 
 // ivinstr>>invoke:env:
 void ivinstr_invoke(context_object context) {
-    debug("ivinstr>>eval:\n");
+    debug("ivinstr>>invoke:env::\n");
     context_object ivinstr_context = target_context(context);
     ivinstr_object ivinstr  = header(ivinstr_context).instruction.ivinstr;
 
     object interpreter  = argument_at(ivinstr_context, 1);
     object env          = argument_at(ivinstr_context, 2);
 
-    header(ivinstr_context) = env;
-    set_message(ivinstr_context, "subScopeFor:arguments:");
-    set_argument(ivinstr_context, 1, interpreter);
+    header(ivinstr_context) = interpreter;
+    set_message(ivinstr_context, "eval:withArguments:");
+    set_argument(ivinstr_context, 1, env);
     set_argument(ivinstr_context, 2, (object)ivinstr->arguments);
 
-    header(context)     = interpreter;
-    set_message(context, "eval:");
-    context->return_context = ivinstr_context->return_context;
-
-    ivinstr_context->return_context = (object)context;
-
-    debug("ret>>ivinstr>>eval:\n");
+    debug("ret>>ivinstr>>invoke:env::\n");
     set_transfer(ivinstr_context);
 }
 
@@ -240,17 +236,56 @@ void ivar_eval(context_object context) {
     set_transfer(ivar_context);
 }
 
-// iscoped>>eval:
-void iscoped_eval(context_object context) {
-    debug("iscoped>>eval:\n");
+// iscoped>>eval:withArguments:
+void iscoped_eval_arguments(context_object context) {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
+    debug("iscoped>>eval:withArguments:\n");
     context_object iscoped_context = target_context(context);
     iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
 
-    // we just eval the attached expression.
-    header(iscoped_context) = iscoped->expression;
+    object env = argument_at(iscoped_context, 1);
+    int argsize = number_value(iscoped->argsize.number);
 
-    debug("ret>>iscoped>>eval:\n");
-    set_transfer(iscoped_context);
+    header(context) = env;
+    set_message(context, "subScope:");
+    set_argument(context, 1, (object)make_number(argsize + 2));
+
+    context->return_context = (object)iscoped_context;
+    
+    set_message(iscoped_context, "doEval:withArguments:");
+
+    debug("ret>>iscoped>>eval:withArguments:\n");
+    set_transfer(context);
+}
+
+// iscoped>>eval:
+void iscoped_eval(context_object context) {
+    debug("iscoped>>doEval:withArguments\n");
+    context_object iscoped_context = target_context(context);
+    iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
+
+    // filling in scope with interpreter + arguments.
+    // XXX have to do this by extending the continuation context!
+    object env          = argument_at(iscoped_context, 1);
+    array_object args   = argument_at(iscoped_context, 2).array;
+    env_at_put(env.env, 0, (object)(instruction)iscoped);
+
+    int argsize = number_value(iscoped->argsize.number);
+
+    int i;
+    for (i = 0; i < argsize; i++) {
+        env_at_put(env.env, i + 1, array_at(args, i));
+    }
+
+    // we just eval the attached expression.
+    header(context) = iscoped->expression;
+    set_message(context, "eval:");
+    set_argument(context, 1, env);
+    context->return_context = iscoped_context->return_context;
+
+    debug("ret>>iscoped>>doEval:withArguments\n");
+    set_transfer(context);
 }
 
 // icapture>>eval:
@@ -310,35 +345,20 @@ void env_store_at_in(context_object context) {
     set_transfer(receiver);
 }
 
-// env>>subScopeFor:arguments:
+// env>>subScope:
 void env_subscope(context_object context) {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
+    debug("env>>subScope:\n");
     context_object receiver = target_context(context);
-    object env          = header(receiver);
+    object env  = header(receiver);
     // arguments at: 0 -> selector
-    object interpreter  = argument_at(receiver, 1);
-    object arguments    = argument_at(receiver, 2);
+    int size    = number_value(argument_at(receiver, 1).number);
 
-    // XXX gravely breaking encapsulation!
-    int argsize         = number_value(interpreter.instruction.iscoped->argsize.number);
+    env_object new_env = make_env((object)fools_system->nil, env, size);
+    set_argument(return_context(receiver), 1, (object)new_env);
 
-    // slot 1 is reserved for the interpreter;
-    // slot 2 is reserved for the dynamic env;
-    env_object new_env = make_env((object)fools_system->nil,
-                                  env,
-                                  argsize + 2);
-    
-    env_at_put(new_env, 0, interpreter);
-
-    // XXX gravely breaking encapsulation!
-    int i;
-    for (i = 0; i < argsize; i++) {
-        env_at_put(new_env, i + 2, array_at(arguments.array, i));
-    }
-                                  
-    context_object interp_context = return_context(receiver);
-    set_argument(interp_context, 1, (object)new_env);
+    debug("ret>>env>>subScope:\n");
 
     return_from_context(receiver);
 }
@@ -417,36 +437,24 @@ object inline make_func(array_object arguments, object body) {
 
     int argsize = number_value(array_size(arguments));
     // Eval args, switch context, eval body
-    ilist_object exp = make_ilist(argsize + 3); 
-
+    ilist_object exp = make_ilist(argsize + 2); 
 
     icall_object parent_env = make_icall(fools_system->icapture, 2);
     set_callmsg(parent_env, "parent");
 
-    // var1 = (capture) parent
-    //ilist_at_put(exp, 0, (instruction)parent_env);
-    ilist_at_put(exp, 0, (instruction)
-        make_iassign(
-            make_ivar((object)fools_system->nil, make_number(1)),
-            (object)(instruction)
-            parent_env));
-
     icall_object arg_eval;
-    // var2 = (var2 eval: var1)
+    // var2 = (var2 eval: (env parent))
     // ...  ...  ...
-    // varN+1 = (varN+1 eval: var1)
+    // varN+1 = (varN+1 eval: (env parent))
     int i;
     for (i = 0; i < argsize; i++) {
         ivar_object variable = array_at(arguments, i).instruction.ivar;
-        variable->index = make_number(i + 2); // skip receiver and dynamic scope
+        variable->index = make_number(i + 1); // skip receiver
 
         arg_eval = make_icall((object)(instruction)variable, 2);
         set_callmsg(arg_eval, "eval:");
-        set_callarg(arg_eval, 1,
-            (object)(instruction)
-            make_ivar((object)fools_system->nil,
-                       make_number(1)));
-        ilist_at_put(exp, i + 1, // skip scope fetching
+        set_callarg(arg_eval, 1, (object)(instruction)parent_env);
+        ilist_at_put(exp, i,
             (instruction)
             make_iassign(
                 variable,
@@ -464,8 +472,8 @@ object inline make_func(array_object arguments, object body) {
     set_callmsg(switch_env, "parent:");
     set_callarg(switch_env, 1, (object)(instruction)self_scope);
         
-    ilist_at_put(exp, argsize + 1, (instruction)switch_env);
-    ilist_at_put(exp, argsize + 2, body.instruction);
+    ilist_at_put(exp, argsize, (instruction)switch_env);
+    ilist_at_put(exp, argsize + 1, body.instruction);
 
     icall_object icall = make_icall((object)(instruction)iconst, 4);
     set_callmsg(icall, "env:new:size:");

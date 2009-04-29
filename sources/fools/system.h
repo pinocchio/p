@@ -41,6 +41,7 @@ extern void env_set_parent(context_object context);
 
 extern void iscope_new(context_object context);
 
+extern void iscoped_eval_arguments(context_object context);
 extern void iscoped_eval(context_object context);
 extern void iscoped_scope(context_object context);
 
