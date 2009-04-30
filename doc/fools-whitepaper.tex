@@ -254,7 +254,9 @@ interpreters below.
 In order to get the system running there is one hardwired
 function which knows how to \emph{transfer} to a context, \ie enforce
 a context switch in the system. This primitive is the most
-basic primitive possible to perform such task.
+basic primitive possible to perform such task. Transfer works as a
+\emph{trampoline} for the current interpretation action. (but should be
+replaced by real gotos?)
 
 \subsection{Native Interpreters}
 In order to make the whole base system reified, all other kinds of native
