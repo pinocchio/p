@@ -107,8 +107,7 @@ void iconst_eval(context_object context) {
 
     debug("iconst>>eval\n");
 
-    set_argument(return_context(iconst_context),
-                 1, iconst->constant);
+    set_argument(return_context(iconst_context), 1, iconst->constant);
 
     debug("ret>>iconst>>eval:\n");
 
@@ -351,7 +350,6 @@ void env_fetch_from(context_object context) {
     }
     if (env->parent.nil == fools_system->nil) {
         assert(NULL); // XXX should go to error-handler here.
-        return;
     }
     header(receiver) = env->parent;
     debug("ret>>env>>fetch:from:\n");
