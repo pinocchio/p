@@ -7,7 +7,7 @@
 
 // Some nice helper constructs.
 #define SETUP(name)\
-    void name() { printf(#name"\n"); bootstrap();
+    void name() { printf("################################## "#name"\n"); bootstrap();
 
 #define build_return(for_c, name)\
     ilist_object m1ilist = make_ilist(0);\
@@ -460,7 +460,7 @@ SETUP(test_env_parent)
     icall_object icall = make_icall(
                             (object)(instruction)
                             make_iconst((object)env2), 2);
-    set_callmsg(icall, "parent");
+    set_callmsg(icall, "envParent:");
     context_object make_eval_context(ci, icall, env);
     build_return(ci, rc);
 
@@ -482,7 +482,7 @@ SETUP(test_capture_parent)
     // automatically.
     // !!!
     icall_object icall = make_icall(fools_system->icapture, 2);
-    set_callmsg(icall, "parent");
+    set_callmsg(icall, "envParent:");
     context_object make_eval_context(ci, icall, env2);
     build_return(ci, rc);
 
@@ -522,7 +522,7 @@ SETUP(test_ilist_pass_context)
                               (object)env, 0);
 
     icall_object icall = make_icall(fools_system->icapture, 2);
-    set_callmsg(icall, "parent");
+    set_callmsg(icall, "envParent:");
 
     ilist_at_put(ilist, 0, (instruction)icall);
 
@@ -640,7 +640,6 @@ SETUP(test_eval_nested_function)
                     ivar
                   );
 
-
     object constant_function = make_func(arguments, constant_function1);
 
     context_object make_eval_context(ci, constant_function.instruction, env);
@@ -672,10 +671,9 @@ SETUP(test_eval_nested_function)
     make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
 
-    printf("START--------------------\n");
     transfer(ci);
 
-    // assert(number_value(argument_at(rc, 1).number) == 42);
+    assert(number_value(argument_at(rc, 1).number) == 42);
 }
 
 /* start-stub

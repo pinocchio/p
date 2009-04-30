@@ -40,6 +40,7 @@ extern void env_store_at_in(context_object context);
 extern void env_subscope(context_object context);
 extern void env_parent(context_object context);
 extern void env_set_parent(context_object context);
+extern void env_set_env_parent(context_object context);
 
 extern void iscope_new(context_object context);
 

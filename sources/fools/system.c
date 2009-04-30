@@ -5,7 +5,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 0
+#define NDEBUG 1
 #define debug if (!NDEBUG) printf
 
 // Context handling
@@ -339,21 +339,22 @@ void icapture_eval(context_object context) {
 void env_fetch_from(context_object context) {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
+    debug("env>>fetch:from:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 2).pointer) {
-        printf("equals!\n");
         int index = number_value(array_at(receiver->arguments, 1).number);
-        array_at_put(receiver->return_context.context->arguments,
-                     1, env_at(env, index));
+        object value = env_at(env, index);
+        array_at_put(receiver->return_context.context->arguments, 1, value);
         return return_from_context(receiver);
     }
-    printf("failed!\n");
     if (env->parent.nil == fools_system->nil) {
+        assert(NULL); // XXX should go to error-handler here.
         return;
     }
     header(receiver) = env->parent;
+    debug("ret>>env>>fetch:from:\n");
     set_transfer(receiver);
 }
 
@@ -398,30 +399,55 @@ void env_subscope(context_object context) {
     return_from_context(receiver);
 }
 
+// env>>env:parent:
+void env_set_env_parent(context_object context) {
+    debug("env>>env:parent:\n");
+    context_object receiver = target_context(context);
+    // arguments at: 0 -> selector
+    object env = argument_at(receiver, 1);
+    object new_env = argument_at(receiver, 2);
+
+    header(context) = new_env;
+    set_message(context, "eval:");
+    set_argument(context, 1, env);
+
+    context->return_context = (object)receiver;
+
+    set_message(receiver, "parent:");
+
+    debug("ret>>env>>env:parent:\n");
+    set_transfer(context);
+}
+
 // env>>parent:
 void env_set_parent(context_object context) {
     debug("env>>parent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
-    env.env->parent = argument_at(receiver, 1);
+    object new_env = argument_at(receiver, 1);
+
+    env.env->parent = new_env;
+
+    assert(env.env->parent.env != env.env);
     debug("ret>>env>>parent:\n");
     return_from_context(receiver);
 }
 
 // env>>parent
 void env_parent(context_object context) {
-    debug("env>>parent\n");
+    debug("env>>envParent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     object env = header(receiver);
     set_argument(return_context(receiver), 1, env.env->parent);
-    debug("ret>>env>>parent\n");
+    debug("ret>>env>>envParent:\n");
     return_from_context(receiver);
 }
 
 // iscope_class>>env:new:size:
 void iscope_new(context_object context) {
+    debug("iscopecls>>env:new:size:\n");
     context_object iscope_context = target_context(context);
     iscoped_object iscoped =
         make_iscoped(
@@ -431,6 +457,7 @@ void iscope_new(context_object context) {
 
     set_argument(return_context(iscope_context), 1, (object)(instruction)iscoped);
 
+    debug("ret>>iscopecls>>env:new:size:\n");
     return_from_context(iscope_context);
 }
 
@@ -466,7 +493,7 @@ object inline make_func(array_object arguments, object body) {
     ilist_object exp = make_ilist(argsize + 2); 
 
     icall_object parent_env = make_icall(fools_system->icapture, 2);
-    set_callmsg(parent_env, "parent");
+    set_callmsg(parent_env, "envParent:");
 
     icall_object arg_eval;
     // var1 = (var1 eval: (env parent))
@@ -492,12 +519,12 @@ object inline make_func(array_object arguments, object body) {
 
     icall_object self_scope = make_icall(
         (object)(instruction)
-        make_ivar((object)fools_system->nil, 0), 1); // receiver
-    set_callmsg(self_scope, "scope");
+        make_ivar((object)(instruction)exp, make_number(0)), 2); // receiver
+    set_callmsg(self_scope, "scopeInEnv:");
 
-    icall_object switch_env = make_icall(fools_system->icapture, 2);
-    set_callmsg(switch_env, "parent:");
-    set_callarg(switch_env, 1, (object)(instruction)self_scope);
+    icall_object switch_env = make_icall(fools_system->icapture, 3);
+    set_callmsg(switch_env, "env:parent:");
+    set_callarg(switch_env, 2, (object)(instruction)self_scope);
         
     ilist_at_put(exp, argsize, (instruction)switch_env);
     ilist_at_put(exp, argsize + 1, body.instruction);
