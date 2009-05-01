@@ -514,10 +514,11 @@ object inline make_func(array_object arguments, object body) {
             )
         );
     }
-
-    icall_object self_scope = make_icall(
-        (object)(instruction)
-        make_ivar((object)(instruction)exp, make_number(0)), 2); // receiver
+    
+    ivar_object receiver_var = make_ivar();
+    receiver_var->scope = (object)(instruction)exp;
+    icall_object self_scope = make_icall((object)(instruction)receiver_var, 2);
+        
     set_callmsg(self_scope, "scopeInEnv:");
 
     icall_object switch_env = make_icall(fools_system->icapture, 3);

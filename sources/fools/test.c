@@ -303,8 +303,7 @@ SETUP(test_iassign_ivar)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar((object)fools_system->nil,
-                                 make_number(0));
+    ivar_object ivar = make_ivar();
 
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
@@ -322,8 +321,7 @@ SETUP(test_ivar_read)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar((object)fools_system->nil,
-                                 make_number(0));
+    ivar_object ivar = make_ivar();
 
     iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
 
@@ -572,7 +570,7 @@ SETUP(test_make_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)(instruction)ivar);
 
@@ -595,7 +593,7 @@ SETUP(test_eval_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)(instruction)ivar);
 
@@ -630,7 +628,7 @@ SETUP(test_eval_nested_function)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
-    ivar_object ivar = make_ivar((object)fools_system->nil, 0);
+    ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)(instruction)ivar);
 

@@ -121,7 +121,7 @@
                 (code (string-append "appcall_object "
                                      name
                                      " = make_appcall(" appname ", "
-                                     (number->string (- (length parts) 1)) ";\n"))
+                                     (number->string (- (length parts) 1)) ");\n"))
                 (args (let loop ((todo (cdr parts))
                                  (idx 0)
                                  (code ""))
@@ -133,5 +133,13 @@
            (list (string-append prefix code args)
                  name)))))
 
+
+(define natives
+  '((+ "scheme_primitive_plus")
+    (* "scheme_primitive_times")
+    (/ "scheme_primitive_divide")
+    (- "scheme_primitive_minus")
+    ))
+
 (define (transform-code code)
-  (car (transform-expression code '())))
+  (car (transform-expression code natives)))

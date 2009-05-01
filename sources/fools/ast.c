@@ -33,11 +33,11 @@ iconst_object make_iconst(object constant) {
     return result;
 }
 
-ivar_object make_ivar(object scope, number_object index) {
+ivar_object make_ivar() {
     ivar_object result      = NEW(struct variable);
     header(result)          = (object)fools_system->ivar_class;
-    result->scope           = scope;
-    result->index           = index;
+    result->scope           = (object)fools_system->nil;
+    result->index           = make_number(0);
     return result;
 }
 
