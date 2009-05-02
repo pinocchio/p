@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <system.h>
 #include <scheme_natives.h>
+#include <print.h>
 
 int main () {
     bootstrap();

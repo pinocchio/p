@@ -22,32 +22,7 @@
 
     object result = return_value(rc);
 
-    if (header(result.pointer).native_class == fools_system->number_class) {
-        printf("result: %i\n", result.number->value);
-        return 0;
-    }
-
-    if (header(result.pointer).native_class == fools_system->string_class) {
-        printf("result: %s\n", result.string->value);
-        return 0;
-    }
-
-    if (result.pointer == fools_system->true.pointer) {
-        printf("true\n");
-        return 0;
-    }
-
-    if (result.pointer == fools_system->false.pointer) {
-        printf("false\n");
-        return 0;
-    }
-
-    if (result.nil == fools_system->nil) {
-        printf("nil\n");
-        return 0;
-    }
-
-    printf("Got unknown return type: %x\n", result.pointer);
+    print_object(result);
 
     return 0;
 }
