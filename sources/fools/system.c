@@ -467,8 +467,9 @@ void with_native_class_lookup(context_object context) {
     object native                   = dict_at(natives, selector);
 
     if (native.nil == fools_system->nil) {
-        debug("non-native: %s\n",
+        debug("non-native: %s sent \n",
                 selector.string->value);
+        //print_object(class_context);
         header(class_context) = class->class;
     } else {
         debug("native: %s\n", selector.string->value);

@@ -65,9 +65,11 @@ void scheme_smallerp_func(context_object context) {
 
     object result;
     if (arg1->value < arg2->value) {
-        result = fools_system->true;
+        result = (object)make_iconst(fools_system->true);
+        printf("smaller\n");
     } else {
-        result = fools_system->false;
+        result = (object)make_iconst(fools_system->false);
+        printf("bigger\n");
     }
 
     set_argument(return_context(context), 1, result);

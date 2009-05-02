@@ -25,10 +25,37 @@ void print_object(object o) {
         return;
     }
 
-    if (o.nil == fools_system->nil) {
+    if (header(o.pointer).native_class == fools_system->nil) {
         printf("nil\n");
         return;
     }
+
+    if (header(o.pointer).native_class == fools_system->iconst_class) {
+        printf("iconst\n");
+        return;
+    }
+
+    if (header(o.pointer).native_class == fools_system->iassign_class) {
+        printf("iassign\n");
+        return;
+    }
+
+    if (header(o.pointer).native_class == fools_system->ivar_class) {
+        printf("ivar\n");
+        return;
+    }
+
+    if (header(o.pointer).native_class == fools_system->icall_class) {
+        printf("icall\n");
+        return;
+    }
+
+    if (header(o.pointer).native_class == fools_system->ilist_class) {
+        printf("ilist\n");
+        return;
+    }
+
+
 
     printf("Unknown type at: %x\n", o.pointer);
 }

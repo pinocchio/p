@@ -2,8 +2,9 @@
 
 (display
 (transform-code
+    (+ 10 (+ 20 5))
     ;(< 40 2)
-    'eval:
+    ;(if (< 20 4) 20 10)
     ;((lambda (fib)
     ;    (set! fib
     ;        (lambda (x)

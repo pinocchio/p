@@ -91,6 +91,7 @@ fools_object bootstrap() {
     fools_system->appcall_class = make_native_class(2);
     define_native(appcall_class, "eval:",               icall_eval);
     define_native(appcall_class, "invoke:env:",         appcall_invoke);
+    define_native(appcall_class, "preEval:env:",        pre_eval_env);
 
 
     // Native objects needed to do anything useful
