@@ -5,7 +5,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 0
+#define NDEBUG 1
 #define debug if (!NDEBUG) printf
 
 // Context handling
@@ -142,9 +142,18 @@ void icall_invoke_env(context_object context) {
     object env          = argument_at(icall_context, 2);
 
     header(context) = interpreter;
-    // XXX should be a copy of the arguments;
-    // ensuring that it's an array!
-    context->arguments = icall->arguments;
+
+    // XXX Do an ensuring copy! Check it's an array!
+    int argsize = number_value(array_size(icall->arguments));
+    array_object context_arguments = make_array(argsize);
+
+    int i;
+    for (i = 0; i < argsize; i++) {
+        array_at_put(context_arguments, i, array_at(icall->arguments, i));
+    }
+    // until here.
+
+    context->arguments = context_arguments;
     set_argument(context, 1, env);
     context->return_context = icall_context->return_context;
 
@@ -310,11 +319,13 @@ void iscoped_eval(context_object context) {
 
 // iscoped>>scope
 void iscoped_scope(context_object context) {
+    debug("iscoped>>scope");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     iscoped_object iscoped = header(receiver).iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
     return_from_context(receiver);
+    debug("ret>>iscoped>>scope: %x\n", iscoped->scope.pointer);
 }
 
 // icapture>>eval:

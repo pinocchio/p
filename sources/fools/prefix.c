@@ -13,6 +13,8 @@ int main () {
 
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
+    
+    printf("start_env: %x\n", env);
 
 /* Generated code */
 

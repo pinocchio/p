@@ -76,6 +76,7 @@ context_object make_context(object interpreter, int size) {
     context_object context  = NEW(struct context);
     //printf("Made context: %x\n", context);
     header(context)         = interpreter;
+    //printf("created new context: %x\n", context);
     context->arguments      = make_array(size);
     context->return_context = (object)fools_system->nil;
     return context;
