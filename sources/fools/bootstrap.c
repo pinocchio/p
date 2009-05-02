@@ -62,7 +62,7 @@ fools_object bootstrap() {
     fools_system->icapture_class = make_native_class(1);
     define_native(icapture_class, "eval:",              icapture_eval);
 
-    fools_system->icapture = (object)(instruction)make_icapture();
+    fools_system->icapture = (object)make_icapture();
 
     fools_system->env_class = make_native_class(6);
     define_native(env_class, "fetch:from:",             env_fetch_from);

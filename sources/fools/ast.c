@@ -75,24 +75,17 @@ void inline ilist_check_bounds(ilist_object ilist, int index) {
     assert(index < number_value(ilist_size(ilist)));
 }
 
-instruction inline raw_ilist_at(ilist_object ilist, int index) {
+object inline raw_ilist_at(ilist_object ilist, int index) {
     return ilist->instructions[index];
 }
 
-void inline raw_ilist_at_put(ilist_object ilist, int index, instruction value) {
+void inline raw_ilist_at_put(ilist_object ilist, int index, object value) {
     ilist->instructions[index] = value;
 }
 
-void inline ilist_at_put(ilist_object ilist, int index, instruction value) {
+void inline ilist_at_put(ilist_object ilist, int index, object value) {
     ilist_check_bounds(ilist, index);
     raw_ilist_at_put(ilist, index, value);
-}
-
-// TODO: remove function.
-void inline eval_instruction(instruction instruction) {
-    context_object context = make_context((object)instruction, 2);
-    set_message(context, "eval:");
-    transfer(context);
 }
 
 void inline set_callarg(icall_object icall, int index, object value) {

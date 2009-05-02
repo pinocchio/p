@@ -5,7 +5,7 @@
 
 struct instruction_list {
     number_object   size;
-    instruction     instructions[];
+    object          instructions[];
 };
 
 struct assignment {
@@ -50,12 +50,11 @@ extern iscoped_object   make_iscoped(object scope, object expression, object
 extern icapture_object  make_icapture();
 extern appcall_object   make_appcall(object expression, int argsize);
 
-extern instruction inline raw_ilist_at(ilist_object ilist, int index);
+extern object      inline raw_ilist_at(ilist_object ilist, int index);
 extern void        inline raw_ilist_at_put(ilist_object ilist,
-                                           int index, instruction i);
+                                           int index, object i);
 extern void        inline ilist_at_put(ilist_object ilist,
-                                       int index, instruction i);
-extern void        inline eval_instruction(instruction instruction);
+                                       int index, object i);
 extern void        inline set_callarg(icall_object icall, int index, object value);
 extern void        inline set_callmsg(icall_object icall, const char* string);
 

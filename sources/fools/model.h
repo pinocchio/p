@@ -3,7 +3,6 @@
 
 #include <gc.h>
 #include <stdlib.h>
-#include <instruction.h>
 
 #define header_size sizeof(object)
 
@@ -28,19 +27,35 @@ struct dict;
 struct nil;
 struct native;
 struct context;
+struct instruction_list;
+struct assignment;
+struct callable;
+struct constant;
+struct variable;
+struct scoped;
+struct capture;
+struct appcall;
 
-typedef struct env*             env_object;
-typedef struct variable_object* variable_object;
-typedef struct native_class*    native_class_object;
-typedef struct string*          string_object;
-typedef struct number*          number_object;
-typedef struct array*           array_object;
-typedef struct dict*            dict_object;
-typedef struct nil*             nil_object;
-typedef struct native*          native_object;
-typedef struct context*         context_object;
-typedef array_object            message_object;
-typedef int**                   pointer;
+typedef struct instruction_list* ilist_object;
+typedef struct assignment*       iassign_object;
+typedef struct callable*         icall_object;
+typedef struct constant*         iconst_object;
+typedef struct variable*         ivar_object;
+typedef struct scoped*           iscoped_object;
+typedef struct capture*          icapture_object;
+typedef struct appcall*          appcall_object;
+typedef struct env*              env_object;
+typedef struct variable_object*  variable_object;
+typedef struct native_class*     native_class_object;
+typedef struct string*           string_object;
+typedef struct number*           number_object;
+typedef struct array*            array_object;
+typedef struct dict*             dict_object;
+typedef struct nil*              nil_object;
+typedef struct native*           native_object;
+typedef struct context*          context_object;
+typedef array_object             message_object;
+typedef void**                   pointer;
 
 typedef void (*transfer_target)(context_object);
 
@@ -48,6 +63,14 @@ struct fools;
 typedef struct fools*       fools_object;
 
 typedef union {
+    ilist_object        ilist;
+    iassign_object      iassign;
+    icall_object        icall;
+    iconst_object       iconst;
+    ivar_object         ivar;
+    iscoped_object      iscoped;
+    icapture_object     icapture;
+    appcall_object      appcall;
     variable_object     object;
     native_class_object native_class;
     string_object       string;
@@ -59,7 +82,6 @@ typedef union {
     native_object       native;
     context_object      context;
     env_object          env;
-    instruction         instruction;
     pointer             pointer;
 } object;
 

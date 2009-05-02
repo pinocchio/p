@@ -78,7 +78,7 @@ void ilist_continue_eval(context_object context) {
     context_object ilist_context = target_context(context);
     int index = number_value(argument_at(ilist_context, 3).number);
     debug("ilist>>return:env:continue: %i\n", index);
-    ilist_object ilist = header(ilist_context).instruction.ilist;
+    ilist_object ilist = header(ilist_context).ilist;
     int size = number_value(ilist->size) - 1;
 
     object env = argument_at(ilist_context, 2);
@@ -103,7 +103,7 @@ void ilist_continue_eval(context_object context) {
 // iconst>>eval:
 void iconst_eval(context_object context) {
     context_object iconst_context = target_context(context);
-    iconst_object iconst = header(iconst_context).instruction.iconst;
+    iconst_object iconst = header(iconst_context).iconst;
 
     debug("iconst>>eval\n");
 
@@ -118,7 +118,7 @@ void iconst_eval(context_object context) {
 void icall_eval(context_object context) {
     debug("icall>>eval:\n");
     context_object icall_context = target_context(context);
-    icall_object icall = header(icall_context).instruction.icall;
+    icall_object icall = header(icall_context).icall;
 
     object env = argument_at(icall_context, 1);
 
@@ -138,7 +138,7 @@ void icall_eval(context_object context) {
 void icall_invoke_env(context_object context) {
     debug("icall>>invoke:env:\n");
     context_object icall_context = target_context(context);
-    icall_object icall  = header(icall_context).instruction.icall;
+    icall_object icall  = header(icall_context).icall;
 
     object interpreter  = argument_at(icall_context, 1);
     object env          = argument_at(icall_context, 2);
@@ -158,7 +158,7 @@ void icall_invoke_env(context_object context) {
 void appcall_invoke(context_object context) {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = target_context(context);
-    appcall_object appcall  = header(appcall_context).instruction.appcall;
+    appcall_object appcall  = header(appcall_context).appcall;
 
     object interpreter  = argument_at(appcall_context, 1);
     object env          = argument_at(appcall_context, 2);
@@ -176,7 +176,7 @@ void appcall_invoke(context_object context) {
 // iassign>>eval:
 void iassign_eval(context_object context) {
     context_object iassign_context = target_context(context);
-    iassign_object iassign = header(iassign_context).instruction.iassign;
+    iassign_object iassign = header(iassign_context).iassign;
 
     debug("iassign>>eval:\n");
     
@@ -185,7 +185,7 @@ void iassign_eval(context_object context) {
     header(context)     = iassign->expression;
     context->arguments  = iassign_context->arguments;
 
-    header(iassign_context)    = (object)(instruction)iassign->variable;
+    header(iassign_context)    = (object)iassign->variable;
     iassign_context->arguments = make_array(3);
     set_message(iassign_context, "assign:in:");
     set_argument(iassign_context, 2, env);
@@ -200,7 +200,7 @@ void iassign_eval(context_object context) {
 // ivar>>assign:in:
 void ivar_assign(context_object context) {
     context_object ivar_context = target_context(context);
-    ivar_object ivar = header(ivar_context).instruction.ivar;
+    ivar_object ivar = header(ivar_context).ivar;
 
     debug("ivar>>assign:in:\n");
 
@@ -242,7 +242,7 @@ void pre_eval_env(context_object context) {
 void ivar_eval(context_object context) {
     debug("ivar>>eval:\n");
     context_object ivar_context = target_context(context);
-    ivar_object ivar = header(ivar_context).instruction.ivar;
+    ivar_object ivar = header(ivar_context).ivar;
 
     object env = argument_at(ivar_context, 1);
 
@@ -262,7 +262,7 @@ void iscoped_eval_arguments(context_object context) {
     // Test arguments!
     debug("iscoped>>eval:withArguments:\n");
     context_object iscoped_context = target_context(context);
-    iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
+    iscoped_object iscoped = header(iscoped_context).iscoped;
 
     object env = argument_at(iscoped_context, 1);
     int argsize = number_value(iscoped->argsize.number);
@@ -285,13 +285,13 @@ void iscoped_eval_arguments(context_object context) {
 void iscoped_eval(context_object context) {
     debug("iscoped>>doEval:withArguments\n");
     context_object iscoped_context = target_context(context);
-    iscoped_object iscoped = header(iscoped_context).instruction.iscoped;
+    iscoped_object iscoped = header(iscoped_context).iscoped;
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
     object env          = argument_at(iscoped_context, 1);
     array_object args   = argument_at(iscoped_context, 2).array;
-    env_at_put(env.env, 0, (object)(instruction)iscoped);
+    env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
 
@@ -314,7 +314,7 @@ void iscoped_eval(context_object context) {
 void iscoped_scope(context_object context) {
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
-    iscoped_object iscoped = header(receiver).instruction.iscoped;
+    iscoped_object iscoped = header(receiver).iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
     return_from_context(receiver);
 }
@@ -453,7 +453,7 @@ void iscope_new(context_object context) {
             argument_at(iscope_context, 2),  // expression
             argument_at(iscope_context, 3)); // argsize
 
-    set_argument(return_context(iscope_context), 1, (object)(instruction)iscoped);
+    set_argument(return_context(iscope_context), 1, (object)iscoped);
 
     debug("ret>>iscopecls>>env:new:size:\n");
     return_from_context(iscope_context);
@@ -499,39 +499,38 @@ object inline make_func(array_object arguments, object body) {
     // varN = (varN eval: (env parent))
     int i;
     for (i = 0; i < argsize; i++) {
-        ivar_object variable = array_at(arguments, i).instruction.ivar;
+        ivar_object variable = array_at(arguments, i).ivar;
         variable->index = make_number(i + 1); // skip receiver
-        variable->scope = (object)(instruction)exp;
+        variable->scope = (object)exp;
 
-        arg_eval = make_icall((object)(instruction)variable, 3);
+        arg_eval = make_icall((object)variable, 3);
         set_callmsg(arg_eval, "preEval:env:");
-        set_callarg(arg_eval, 2, (object)(instruction)parent_env);
+        set_callarg(arg_eval, 2, (object)parent_env);
         ilist_at_put(exp, i,
-            (instruction)
-            make_iassign(
+            (object)make_iassign(
                 variable,
-                (object)(instruction)arg_eval
+                (object)arg_eval
             )
         );
     }
     
     ivar_object receiver_var = make_ivar();
-    receiver_var->scope = (object)(instruction)exp;
-    icall_object self_scope = make_icall((object)(instruction)receiver_var, 2);
+    receiver_var->scope = (object)exp;
+    icall_object self_scope = make_icall((object)receiver_var, 2);
         
     set_callmsg(self_scope, "scopeInEnv:");
 
     icall_object switch_env = make_icall(fools_system->icapture, 3);
     set_callmsg(switch_env, "env:parent:");
-    set_callarg(switch_env, 2, (object)(instruction)self_scope);
+    set_callarg(switch_env, 2, (object)self_scope);
         
-    ilist_at_put(exp, argsize, (instruction)switch_env);
-    ilist_at_put(exp, argsize + 1, body.instruction);
+    ilist_at_put(exp, argsize, (object)switch_env);
+    ilist_at_put(exp, argsize + 1, body);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    icall_object icall = make_icall((object)iconst, 4);
     set_callmsg(icall, "env:new:size:");
-    set_callarg(icall, 2, (object)(instruction)exp);
+    set_callarg(icall, 2, (object)exp);
     set_callarg(icall, 3, (object)array_size(arguments));
 
-    return (object)(instruction)icall;
+    return (object)icall;
 }

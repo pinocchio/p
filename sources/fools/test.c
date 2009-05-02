@@ -11,13 +11,13 @@
 
 #define build_return(for_c, name)\
     ilist_object m1ilist = make_ilist(0);\
-    context_object name = make_context((object)(instruction)m1ilist, 2);\
+    context_object name = make_context((object)m1ilist, 2);\
     set_message(name, "eval:");\
     for_c->return_context = (object)rc;
 
 
 #define make_eval_context(name, todo, env)\
-    name = make_context((object)(instruction)todo, 2);\
+    name = make_context((object)todo, 2);\
     set_message(name, "eval:");\
     set_argument(name, 1, (object)env);
 
@@ -184,8 +184,8 @@ SETUP(test_transfer_empty_ilist_in_ilist)
     ilist_object ilist  = make_ilist(2);
     ilist_object ilist2 = make_ilist(0);
 
-    ilist_at_put(ilist, 0, (instruction)ilist2);
-    ilist_at_put(ilist, 1, (instruction)ilist2);
+    ilist_at_put(ilist, 0, (object)ilist2);
+    ilist_at_put(ilist, 1, (object)ilist2);
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
 
@@ -211,7 +211,7 @@ SETUP(test_return_of_ilist)
     iconst_object iconst = make_iconst(v);
     ilist_object ilist = make_ilist(1);
 
-    ilist_at_put(ilist, 0, (instruction)iconst);
+    ilist_at_put(ilist, 0, (object)iconst);
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
     build_return(ci, rc);
@@ -305,7 +305,7 @@ SETUP(test_iassign_ivar)
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar();
 
-    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
+    iassign_object iassign = make_iassign(ivar, (object)iconst);
 
     context_object make_eval_context(ci, iassign, k);
 
@@ -323,7 +323,7 @@ SETUP(test_ivar_read)
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar();
 
-    iassign_object iassign = make_iassign(ivar, (object)(instruction)iconst);
+    iassign_object iassign = make_iassign(ivar, (object)iconst);
 
     context_object make_eval_context(ci, iassign, k);
 
@@ -353,7 +353,7 @@ SETUP(test_icall)
 
     object v = (object)make_number(5);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 2);
+    icall_object icall = make_icall((object)iconst, 2);
     set_callarg(icall, 0, v);
 
     context_object make_eval_context(ci, icall,
@@ -371,9 +371,9 @@ SETUP(test_new_iscoped)
     iconst_object iconst = make_iconst(fools_system->iscope);
 
     object v = (object)make_number(5);
-    object exp = (object)(instruction)make_iconst(v);
+    object exp = (object)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    icall_object icall = make_icall((object)iconst, 4);
     set_callmsg(icall, "env:new:size:");
     set_callarg(icall, 2, exp);
     set_callarg(icall, 3, (object)make_number(0));
@@ -387,7 +387,7 @@ SETUP(test_new_iscoped)
 
     transfer(ci);
 
-    iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
+    iscoped_object iscope = argument_at(rc, 1).iscoped;
 
     assert(header(iscope).native_class == fools_system->iscope_class);
     assert(iscope->expression.pointer == exp.pointer);
@@ -400,9 +400,9 @@ SETUP(test_eval_iscoped)
     iconst_object iconst = make_iconst(fools_system->iscope);
 
     object v = (object)make_number(5);
-    object exp = (object)(instruction)make_iconst(v);
+    object exp = (object)make_iconst(v);
 
-    icall_object icall = make_icall((object)(instruction)iconst, 4);
+    icall_object icall = make_icall((object)iconst, 4);
     set_callmsg(icall, "env:new:size:");
     set_callarg(icall, 2, exp);
     set_callarg(icall, 3, (object)make_number(0));
@@ -416,10 +416,10 @@ SETUP(test_eval_iscoped)
 
     transfer(ci);
 
-    iscoped_object iscope = argument_at(rc, 1).instruction.iscoped;
+    iscoped_object iscope = argument_at(rc, 1).iscoped;
 
-    iconst->constant = (object)(instruction)iscope;
-    appcall_object appcall = make_appcall((object)(instruction)iconst, 0);
+    iconst->constant = (object)iscope;
+    appcall_object appcall = make_appcall((object)iconst, 0);
 
     make_eval_context(ci, appcall, start);
     ci->return_context = (object)rc;
@@ -435,7 +435,7 @@ SETUP(test_icapture)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
-    context_object make_eval_context(ci, fools_system->icapture.instruction, env);
+    context_object make_eval_context(ci, fools_system->icapture, env);
     build_return(ci, rc);
 
     transfer(ci);
@@ -456,7 +456,7 @@ SETUP(test_env_parent)
     // automatically.
     // !!!
     icall_object icall = make_icall(
-                            (object)(instruction)
+                            (object)
                             make_iconst((object)env2), 2);
     set_callmsg(icall, "envParent:");
     context_object make_eval_context(ci, icall, env);
@@ -496,17 +496,17 @@ SETUP(test_make_function_no_args)
 
     object constant_function =
         make_func(make_array(0),
-                  (object)(instruction)
+                  (object)
                   make_iconst((object)make_number(42)));
 
-    context_object make_eval_context(ci, constant_function.instruction, env);
+    context_object make_eval_context(ci, constant_function, env);
     build_return(ci, rc);
 
     transfer(ci);
 
     object result = argument_at(rc, 1);
     assert(header(result.pointer).native_class == fools_system->iscope_class);
-    assert(result.instruction.iscoped->scope.env == env);
+    assert(result.iscoped->scope.env == env);
 
 }
 
@@ -522,7 +522,7 @@ SETUP(test_ilist_pass_context)
     icall_object icall = make_icall(fools_system->icapture, 2);
     set_callmsg(icall, "envParent:");
 
-    ilist_at_put(ilist, 0, (instruction)icall);
+    ilist_at_put(ilist, 0, (object)icall);
 
     context_object make_eval_context(ci, ilist, env2);
     build_return(ci, rc);
@@ -541,17 +541,17 @@ SETUP(test_eval_function_no_args)
     iconst_object the_instr = make_iconst((object)make_number(42));
     object constant_function =
         make_func(make_array(0),
-                    (object)(instruction)
+                    (object)
                     the_instr
                   );
 
-    context_object make_eval_context(ci, constant_function.instruction, env);
+    context_object make_eval_context(ci, constant_function, env);
     build_return(ci, rc);
 
     transfer(ci);
 
     object scoped_function = argument_at(rc, 1);
-    object iconst = (object)(instruction)make_iconst(scoped_function);
+    object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 0);
 
     make_eval_context(ci, appcall, env);
@@ -572,15 +572,15 @@ SETUP(test_make_function_1_arg)
 
     ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)(instruction)ivar);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function =
         make_func(arguments,
-                    (object)(instruction)
+                    (object)
                     ivar
                   );
 
-    context_object make_eval_context(ci, constant_function.instruction, env);
+    context_object make_eval_context(ci, constant_function, env);
     build_return(ci, rc);
 
     transfer(ci);
@@ -595,15 +595,15 @@ SETUP(test_eval_function_1_arg)
 
     ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)(instruction)ivar);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function =
         make_func(arguments,
-                    (object)(instruction)
+                    (object)
                     ivar
                   );
 
-    context_object make_eval_context(ci, constant_function.instruction, env);
+    context_object make_eval_context(ci, constant_function, env);
     build_return(ci, rc);
 
     transfer(ci);
@@ -611,9 +611,9 @@ SETUP(test_eval_function_1_arg)
     object arg = (object)make_number(42);
 
     object scoped_function = argument_at(rc, 1);
-    object iconst = (object)(instruction)make_iconst(scoped_function);
+    object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
+    set_appcarg(appcall, 0, (object)make_iconst(arg));
 
     make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
@@ -630,17 +630,17 @@ SETUP(test_eval_nested_function)
 
     ivar_object ivar = make_ivar();
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)(instruction)ivar);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function1 =
         make_func(make_array(0),
-                    (object)(instruction)
+                    (object)
                     ivar
                   );
 
     object constant_function = make_func(arguments, constant_function1);
 
-    context_object make_eval_context(ci, constant_function.instruction, env);
+    context_object make_eval_context(ci, constant_function, env);
     build_return(ci, rc);
 
     transfer(ci);
@@ -648,9 +648,9 @@ SETUP(test_eval_nested_function)
     object arg = (object)make_number(42);
 
     object scoped_function = argument_at(rc, 1);
-    object iconst = (object)(instruction)make_iconst(scoped_function);
+    object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
+    set_appcarg(appcall, 0, (object)make_iconst(arg));
 
     make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
@@ -662,9 +662,9 @@ SETUP(test_eval_nested_function)
     assert(header(nested_function.pointer).native_class ==
            fools_system->iscope_class);
 
-    iconst = (object)(instruction)make_iconst(nested_function);
+    iconst = (object)make_iconst(nested_function);
     appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)(instruction)make_iconst(arg));
+    set_appcarg(appcall, 0, (object)make_iconst(arg));
 
     make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
