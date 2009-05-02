@@ -15,6 +15,21 @@ extern void inline set_transfer(context_object context);
 extern context_object inline target_context(context_object interpreter_context);
 extern void inline return_from_context(context_object context);
 
+// Convenience macros.
+#define build_return(for_c, name)\
+    ilist_object m1ilist = make_ilist(0);\
+    context_object name = make_context((object)m1ilist, 2);\
+    set_message(name, "eval:");\
+    for_c->return_context = (object)rc;
+
+#define return_value(rc)\
+    argument_at(rc, 1)
+
+#define make_eval_context(name, todo, env)\
+    name = make_context((object)todo, 2);\
+    set_message(name, "eval:");\
+    set_argument(name, 1, (object)env);
+
 // Bootstrapping natives.
 extern void pre_eval_env(context_object context);
 

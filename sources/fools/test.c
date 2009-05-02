@@ -9,19 +9,6 @@
 #define SETUP(name)\
     void name() { printf("################################## "#name"\n"); bootstrap();
 
-#define build_return(for_c, name)\
-    ilist_object m1ilist = make_ilist(0);\
-    context_object name = make_context((object)m1ilist, 2);\
-    set_message(name, "eval:");\
-    for_c->return_context = (object)rc;
-
-
-#define make_eval_context(name, todo, env)\
-    name = make_context((object)todo, 2);\
-    set_message(name, "eval:");\
-    set_argument(name, 1, (object)env);
-
-
 SETUP(test_header)
     string_object string1 = NEW(struct string);
     string_object string2 = NEW(struct string);
@@ -202,7 +189,7 @@ SETUP(test_transfer_iconst)
 
     transfer(ci);
 
-    assert(argument_at(rc, 1).pointer == v.pointer);
+    assert(return_value(rc).pointer == v.pointer);
 }
 
 SETUP(test_return_of_ilist)
@@ -218,7 +205,7 @@ SETUP(test_return_of_ilist)
 
     transfer(ci);
 
-    assert(argument_at(rc, 1).pointer == v.pointer);
+    assert(return_value(rc).pointer == v.pointer);
 }
 
 SETUP(test_env_lookup)
@@ -387,7 +374,7 @@ SETUP(test_new_iscoped)
 
     transfer(ci);
 
-    iscoped_object iscope = argument_at(rc, 1).iscoped;
+    iscoped_object iscope = return_value(rc).iscoped;
 
     assert(header(iscope).native_class == fools_system->iscope_class);
     assert(iscope->expression.pointer == exp.pointer);
@@ -416,7 +403,7 @@ SETUP(test_eval_iscoped)
 
     transfer(ci);
 
-    iscoped_object iscope = argument_at(rc, 1).iscoped;
+    iscoped_object iscope = return_value(rc).iscoped;
 
     iconst->constant = (object)iscope;
     appcall_object appcall = make_appcall((object)iconst, 0);
@@ -426,7 +413,7 @@ SETUP(test_eval_iscoped)
 
     transfer(ci);
 
-    assert(argument_at(rc, 1).pointer == v.pointer);
+    assert(return_value(rc).pointer == v.pointer);
 
 }
 
@@ -440,7 +427,7 @@ SETUP(test_icapture)
 
     transfer(ci);
 
-    assert(argument_at(rc, 1).env == env);
+    assert(return_value(rc).env == env);
 }
 
 SETUP(test_env_parent)
@@ -464,7 +451,7 @@ SETUP(test_env_parent)
 
     transfer(ci);
     
-    assert(argument_at(rc, 1).env == env);                     
+    assert(return_value(rc).env == env);                     
 }
 
 SETUP(test_capture_parent)
@@ -486,7 +473,7 @@ SETUP(test_capture_parent)
 
     transfer(ci);
     
-    assert(argument_at(rc, 1).env == env);                     
+    assert(return_value(rc).env == env);                     
 }
 
 SETUP(test_make_function_no_args)
@@ -504,7 +491,7 @@ SETUP(test_make_function_no_args)
 
     transfer(ci);
 
-    object result = argument_at(rc, 1);
+    object result = return_value(rc);
     assert(header(result.pointer).native_class == fools_system->iscope_class);
     assert(result.iscoped->scope.env == env);
 
@@ -529,7 +516,7 @@ SETUP(test_ilist_pass_context)
 
     transfer(ci);
     
-    assert(argument_at(rc, 1).env == env);
+    assert(return_value(rc).env == env);
 }
 
 SETUP(test_eval_function_no_args)
@@ -550,7 +537,7 @@ SETUP(test_eval_function_no_args)
 
     transfer(ci);
 
-    object scoped_function = argument_at(rc, 1);
+    object scoped_function = return_value(rc);
     object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 0);
 
@@ -559,7 +546,7 @@ SETUP(test_eval_function_no_args)
 
     transfer(ci);
 
-    assert(number_value(argument_at(rc, 1).number) == 42);
+    assert(number_value(return_value(rc).number) == 42);
 
 }
 
@@ -610,7 +597,7 @@ SETUP(test_eval_function_1_arg)
 
     object arg = (object)make_number(42);
 
-    object scoped_function = argument_at(rc, 1);
+    object scoped_function = return_value(rc);
     object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 1);
     set_appcarg(appcall, 0, (object)make_iconst(arg));
@@ -620,7 +607,7 @@ SETUP(test_eval_function_1_arg)
 
     transfer(ci);
 
-    assert(number_value(argument_at(rc, 1).number) == 42);
+    assert(number_value(return_value(rc).number) == 42);
 }
 
 SETUP(test_eval_nested_function)
@@ -647,7 +634,7 @@ SETUP(test_eval_nested_function)
 
     object arg = (object)make_number(42);
 
-    object scoped_function = argument_at(rc, 1);
+    object scoped_function = return_value(rc);
     object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 1);
     set_appcarg(appcall, 0, (object)make_iconst(arg));
@@ -657,7 +644,7 @@ SETUP(test_eval_nested_function)
 
     transfer(ci);
     
-    object nested_function = argument_at(rc, 1);
+    object nested_function = return_value(rc);
 
     assert(header(nested_function.pointer).native_class ==
            fools_system->iscope_class);
@@ -671,7 +658,7 @@ SETUP(test_eval_nested_function)
 
     transfer(ci);
 
-    assert(number_value(argument_at(rc, 1).number) == 42);
+    assert(number_value(return_value(rc).number) == 42);
 }
 
 int main() {

@@ -5,7 +5,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 1
+#define NDEBUG 0
 #define debug if (!NDEBUG) printf
 
 // Context handling

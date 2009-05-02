@@ -28,8 +28,9 @@ string_object make_string(const char* value) {
 }
 
 number_object make_number(int value) {
-    number_object result = NEW(struct number);
-    result->value = value;
+    number_object result    = NEW(struct number);
+    result->value           = value;
+    header(result)          = (object)fools_system->number_class;
     return result;
 }
 
