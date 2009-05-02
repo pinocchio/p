@@ -13,8 +13,8 @@ fools_object fools_system;
     (object)make_object(0, (object)fools_system->cls)
 
 void inline do_define_native(native_class_object cls,
-                          const char* name,
-                          transfer_target native) {
+                             const char* name,
+                             transfer_target native) {
     dict_at_put(cls->natives,
                 symbol_known_to_the_vm(name),
                 (object)make_native(native));
