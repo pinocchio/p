@@ -106,6 +106,7 @@ fools_object bootstrap() {
     define_native(number_class, "env:/",                number_env_divide);
 
     fools_system->string_class = make_native_class(0);
+    fools_system->array_class = make_native_class(0);
 
     return fools_system;
 }

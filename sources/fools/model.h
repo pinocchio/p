@@ -159,6 +159,7 @@ struct fools {
     // Minimal native classes
     native_class_object number_class;
     native_class_object string_class;
+    native_class_object array_class;
     native_class_object true_class;
     native_class_object false_class;
 };

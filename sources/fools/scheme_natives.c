@@ -64,7 +64,7 @@ void scheme_smallerp_func(context_object context) {
     number_object arg2 = env_at(env, 2).number;
 
     object result;
-    if (arg1 < arg2) {
+    if (arg1->value < arg2->value) {
         result = fools_system->true;
     } else {
         result = fools_system->false;
@@ -73,7 +73,7 @@ void scheme_smallerp_func(context_object context) {
     set_argument(return_context(context), 1, result);
 
     return_from_context(context);
-    printf("exit minorp\n");
+    printf("exit smallerp\n");
 }
 
 object scheme_string_to_symbol;

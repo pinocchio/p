@@ -21,9 +21,10 @@ native_class_object make_native_class(int size) {
 }
 
 string_object make_string(const char* value) {
-    string_object result = NEW(struct string);
-    result->value = strdup(value);
-    result->size  = make_number(strlen(value));
+    string_object result    = NEW(struct string);
+    result->value           = strdup(value);
+    result->size            = make_number(strlen(value));
+    header(result)          = (object)fools_system->string_class;
     return result;
 }
 
@@ -36,9 +37,10 @@ number_object make_number(int value) {
 
 array_object make_array(int size) {
     if (size == 0) { return fools_system->empty; }
-    array_object result = (array_object)make_object(size + 1,
+    array_object result     = (array_object)make_object(size + 1,
                                                     (object)fools_system->nil);
-    result->size        = make_number(size);
+    result->size            = make_number(size);
+    header(result)          = (object)fools_system->array_class;
     return result;
 }
 
