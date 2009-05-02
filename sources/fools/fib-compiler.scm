@@ -2,8 +2,7 @@
 
 (display
 (transform-code
-    42
-    ;(+ 1 2)
+    (+ 1 2)
     ;((lambda (fib)
     ;    (set! fib
     ;        (lambda (x)
