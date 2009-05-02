@@ -8,7 +8,7 @@ FULLNAME=$(PROGRAM)-$(VERSION)
 CFLAGS = -g -Wall -I.
 LDFLAGS = -lgc
 
-TEST_OBJECTS= test test.o fib fib.o
+TEST_OBJECTS= test test.o fib fib.o fib.c
 SOURCES=$(CFILES) $(HFILES) Makefile
 OBJECTS=$(CFILES:.c=.o)
 
@@ -20,6 +20,11 @@ $(PROGRAM): $(OBJECTS) $(PROGRAM).o
 test: $(OBJECTS) test.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	./test
+
+fib.c: prefix.c postfix.c fib-compiler.scm lambda-compiler.scm
+	cat prefix.c > fib.c
+	mzscheme -r fib-compiler.scm >> fib.c
+	cat postfix.c >> fib.c
 
 fib: $(OBJECTS) fib.o
 	$(CC) $(LDFLAGS) -o $@ $^

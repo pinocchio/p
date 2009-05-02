@@ -80,7 +80,7 @@
     (list (string-append
            (car names)
            (car body)
-           "iassign_object " name " = make_iassign(" (cadr names) ", (object)" (cadr body) ");\n")
+           "iassign_object " name " = make_iassign(" (cadr names) ".ivar, (object)" (cadr body) ");\n")
           name
           '())))
 
