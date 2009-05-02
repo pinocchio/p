@@ -12,8 +12,7 @@ object scheme_plus_1;
 object scheme_plus_2;
 
 void scheme_plus_func(context_object context) {
-    printf("In scheme_plus_func!\n");
-
+    // XXX breaks encapsulation. FIX!
     assert(argument_at(context, 0).pointer ==
            symbol_known_to_the_vm("eval:").pointer);
 
