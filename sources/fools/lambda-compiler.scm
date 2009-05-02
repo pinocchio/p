@@ -30,6 +30,8 @@
                 (string-append result
                                "array_at_put(" name ", " (number->string idx) ", " (cadr (car todo)) ");\n"))))))
       
+;; Currently buggy; you can't accept the defines to extend the lambda header; you have to wrap:
+;; (lambda normalargs ((lambda defines body) nil nil ...))
 (define (transform-lambda a-lambda outervars)
   (let* ((args (cadr a-lambda))
          (body (cddr a-lambda))
@@ -67,7 +69,7 @@
                          (string-append code
                                         "ilist_at_put(" name ", " (number->string idx) ", " c ");\n")
                          (append extravar extravars)))
-                 (transform-expression (car todo) vars))))))
+                 (transform-expression (car todo) (append vars extravars)))))))
 
 (define (transform-set! expression vars)
   (unless (= (length expression) 3)
@@ -120,11 +122,28 @@
         (else
          (let* ((varname (cadr expression))
                 (name (make-var-name "defined" varname))) 
-           (list "" (car (transform-expression
-                          `(set! ,varname
-                                 ,@(cddr expression))
-                          (cons (list varname name) vars)))
+           (list (car (transform-expression
+                       `(set! ,varname
+                              ,@(cddr expression))
+                       (cons (list varname name) vars)))
+                 name
                  (list (list varname name)))))))
+
+(define (transform-if expression vars)
+  (transform-expression
+   `(,(cadr expression) ; smalltalk-type booleans
+     (lambda () ,(caddr expression))
+     (lambda () ,(cadddr expression))) vars))
+
+(define (transform-when expression vars)
+  (transform-if `(if ,(cadr expression)
+                     ,(caddr expression)
+                     (lambda () null))))
+
+(define (transform-unless expression vars)
+  (transform-if `(if ,(cadr expression)
+                     (lambda () null)
+                     ,(caddr expression))))
 
 (define (transform-expression expression vars)
   (cond ((list? expression)
@@ -136,9 +155,9 @@
            ((let) (transform-let expression vars))
            ((letrec) (transform-letrec expression vars))
            ((let*) (transform-let* expression vars))
-           ((if) (error "if not supported yet"))
-           ((when) (error "when not supported yet"))
-           ((unless) (error "unless not supported yet"))
+           ((if) (transform-if expression vars))
+           ((when) (transform-when expression vars))
+           ((unless) (transform-unless expression vars))
            (else (transform-application expression vars))))
         ((number? expression) (transform-number expression vars))
         ((symbol? expression) (transform-symbol expression vars))
@@ -209,6 +228,7 @@
     (list?          "scheme_consp")
     (cons?          "scheme_consp")
     (error          "scheme_error")
+    (null           "(object)fools_system->nil")
     ;(vector        XXX has to generate arrays)
     ))
 
