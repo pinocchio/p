@@ -84,6 +84,14 @@
          (case (car expression)
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
+           ((define) (error "define not supported yet"))
+           ((quote) (error "Quoting not supported yet"))
+           ((let) (error "Let not supported yet"))
+           ((letrec) (error "Letrec not supported yet"))
+           ((let*) (error "let* not supported yet"))
+           ((if) (error "if not supported yet"))
+           ((when) (error "when not supported yet"))
+           ((unless) (error "unless not supported yet"))
            (else (transform-application expression vars))))
         ((number? expression) (transform-number expression vars))
         ((symbol? expression) (transform-symbol expression vars))
@@ -105,40 +113,56 @@
 
 
 (define (transform-application expression vars)
-  (cond ((eq? 'quote (car expression)) ; maybe unnecessary? :)
-         (unless (symbol? (cadr expression))
-           (error "Not a symbol!" expresson))
-         (let ((result (assoc (cadr expression) vars)))
-           (if result
-               (list "" (cadr result))
-               (error "Unfound binding!" expression))))
-        (else 
-         (let* ((parts (map (lambda (exp) (transform-expression exp vars)) expression))
-                (prefix (apply string-append (map car parts)))
-                (appname (cadr (car parts)))
-                (name (make-var-name "appcall" (string->symbol appname)))
-                
-                (code (string-append "appcall_object "
-                                     name
-                                     " = make_appcall(" appname ", "
-                                     (number->string (- (length parts) 1)) ");\n"))
-                (args (let loop ((todo (cdr parts))
-                                 (idx 0)
-                                 (code ""))
-                        (if (null? todo)
-                            code
-                            (loop (cdr todo)
-                                  (+ idx 1)
-                                  (string-append code (transform-appcall-arg name (cadr (car todo)) idx)))))))
-           (list (string-append prefix code args)
-                 name)))))
+  (let* ((parts (map (lambda (exp) (transform-expression exp vars)) expression))
+         (prefix (apply string-append (map car parts)))
+         (appname (cadr (car parts)))
+         (name (make-var-name "appcall" (string->symbol appname)))
+         
+         (code (string-append "appcall_object "
+                              name
+                              " = make_appcall(" appname ", "
+                              (number->string (- (length parts) 1)) ");\n"))
+         (args (let loop ((todo (cdr parts))
+                          (idx 0)
+                          (code ""))
+                 (if (null? todo)
+                     code
+                     (loop (cdr todo)
+                           (+ idx 1)
+                           (string-append code (transform-appcall-arg name (cadr (car todo)) idx)))))))
+    (list (string-append prefix code args)
+          name)))
 
 
 (define natives
-  '((+ "scheme_primitive_plus")
-    (* "scheme_primitive_times")
-    (/ "scheme_primitive_divide")
-    (- "scheme_primitive_minus")
+  '((+              "scheme_plus")
+    (*              "scheme_times")
+    (/              "scheme_divide")
+    (-              "scheme_minus")
+    (<              "scheme_smallerp")
+    (<=             "scheme_smaller_equalp")
+    (>              "scheme_biggerp")
+    (>=             "scheme_bigger_equalp")
+    (=              "scheme_equalp")
+    (eq?            "scheme_eqp")
+    (equal?         "scheme_equalp")
+    (string-append  "scheme_string_append")
+    (string-ref     "scheme_string_ref")
+    (vector-ref     "scheme_vector_ref")
+    (vector?        "scheme_vectorp")
+    (string?        "scheme_stringp")
+    (cons           "scheme_cons")
+    (car            "scheme_car")
+    (cdr            "scheme_cdr")
+    (cadr           "scheme_cadr")
+    (cddr           "scheme_cddr")
+    (symbolp        "scheme_symbolp")
+    (string->symbol "scheme_string_to_symbol")
+    (pair?          "scheme_consp")
+    (list?          "scheme_consp")
+    (cons?          "scheme_consp")
+    (error          "scheme_error")
+    ;(vector        XXX has to generate arrays)
     ))
 
 (define (transform-code code)
