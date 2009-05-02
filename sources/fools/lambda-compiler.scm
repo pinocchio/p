@@ -79,6 +79,34 @@
            "iassign_object " name " = make_iassign(" (cadr names) ", (object)" (cadr body) ");\n")
           name)))
 
+(define (transform-let expression vars)
+  (let ((names (map car (cadr expression)))
+        (values (map cadr (cadr expression)))
+        (body (cddr expression)))
+    (transform-expression `((lambda ,names ,@body) ,values) vars)))
+
+(define (transform-letrec expression vars)
+  (let ((names (map car (cadr expression)))
+        (values (map cadr (cadr expression)))
+        (body (cddr expression)))
+    (transform-expression `((lambda ,names
+                              ,@(map (lambda (name value) `(set! ,name ,value)) names values)
+                              ,@body)) vars)))
+
+(define (transform-let* expression vars)
+  (let ((names (map car (cadr expression)))
+        (values (map cadr (cadr expression)))
+        (body (cddr expression)))
+    (transform-expression
+     `((lambda ()
+         ,(let loop ((names names)
+                     (values values))
+            (if (null? names)
+                body
+                `((lambda (,(car names))
+                    ,(loop (cdr names) (cdr values)))
+                  ,(car values)))))) vars)))
+        
 (define (transform-expression expression vars)
   (cond ((list? expression)
          (case (car expression)
@@ -86,9 +114,9 @@
            ((lambda) (transform-lambda expression vars))
            ((define) (error "define not supported yet"))
            ((quote) (error "Quoting not supported yet"))
-           ((let) (error "Let not supported yet"))
-           ((letrec) (error "Letrec not supported yet"))
-           ((let*) (error "let* not supported yet"))
+           ((let) (transform-let expression vars))
+           ((letrec) (transform-letrec expression vars))
+           ((let*) (transform-let* expression vars))
            ((if) (error "if not supported yet"))
            ((when) (error "when not supported yet"))
            ((unless) (error "unless not supported yet"))
