@@ -36,13 +36,13 @@
          (name (make-var-name "lambda" 'x))
          (vars (map make-vars args))
          (transformed (transform-expression-list body (append outervars vars)))
-         (argarray (make-arguments vars name)))
+         (argarray (make-arguments (append vars (caddr transformed)) name)))
     (list (string-append
            (apply string-append (map caddr vars))
            (car transformed)
            (car argarray)
-           "object " name " = make_func(" (cadr argarray) ", (object)(instruction)" (cadr transformed) ");\n")
-          name)))
+           "object " name " = make_func(" (cadr argarray) ", (object)" (cadr transformed) ");\n")
+          name '())))
 
 (define (transform-expression-list expressions vars)
   (let* ((size (length expressions))
@@ -56,15 +56,17 @@
     (let loop ((todo expressions)
                (idx 0)
                (prefix "")
-               (code code))
+               (code code)
+               (extravars '()))
       (if (null? todo)
-          (list (string-append prefix code) name)
-          (apply (lambda (pre c)
+          (list (string-append prefix code) name extravars)
+          (apply (lambda (pre c extravar)
                    (loop (cdr todo)
                          (+ idx 1)
                          (string-append prefix pre)
                          (string-append code
-                                        "ilist_at_put(" name ", " (number->string idx) ", " c ");\n")))
+                                        "ilist_at_put(" name ", " (number->string idx) ", " c ");\n")
+                         (append extravar extravars)))
                  (transform-expression (car todo) vars))))))
 
 (define (transform-set! expression vars)
@@ -77,7 +79,8 @@
            (car names)
            (car body)
            "iassign_object " name " = make_iassign(" (cadr names) ", (object)" (cadr body) ");\n")
-          name)))
+          name
+          '())))
 
 (define (transform-let expression vars)
   (let ((names (map car (cadr expression)))
@@ -107,13 +110,29 @@
                     ,(loop (cdr names) (cdr values)))
                   ,(car values)))))) vars)))
         
+(define (transform-define expression vars)
+  (cond ((list? (cadr expression))
+         (transform-define `(define ,(car (cadr expression))
+                              (lambda ,(cdr (cadr expression))
+                                ,@(cddr expression))) vars))
+        ((pair? (cadr expression))
+         (error "functions with varargs not supported yet!"))
+        (else
+         (let* ((varname (cadr expression))
+                (name (make-var-name "defined" varname))) 
+           (list "" (car (transform-expression
+                          `(set! ,varname
+                                 ,@(cddr expression))
+                          (cons (list varname name) vars)))
+                 (list (list varname name)))))))
+
 (define (transform-expression expression vars)
   (cond ((list? expression)
          (case (car expression)
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
-           ((define) (error "define not supported yet"))
-           ((quote) (error "Quoting not supported yet"))
+           ((define) (transform-define expression vars))
+           ((quote) (error "Quoting not supported yet" expression))
            ((let) (transform-let expression vars))
            ((letrec) (transform-letrec expression vars))
            ((let*) (transform-let* expression vars))
@@ -129,12 +148,12 @@
   (let ((name (make-var-name "number" (string->symbol (number->string expression)))))
     (list (string-append "object "
                          name
-                         " = (object)(instruction)make_iconst((object)make_number("
+                         " = (object)make_iconst((object)make_number("
                          (number->string expression)
-                         "));\n") name)))
+                         "));\n") name '())))
 
 (define (transform-symbol expression vars)
-  (list "" (cadr (assoc expression vars))))
+  (list "" (cadr (assoc expression vars)) '()))
 
 (define (transform-appcall-arg app name idx)
   (string-append "set_appcarg(" app ", " (number->string idx) ", " name ");\n"))
@@ -159,7 +178,7 @@
                            (+ idx 1)
                            (string-append code (transform-appcall-arg name (cadr (car todo)) idx)))))))
     (list (string-append prefix code args)
-          name)))
+          name '())))
 
 
 (define natives
@@ -193,5 +212,5 @@
     ;(vector        XXX has to generate arrays)
     ))
 
-(define (transform-code code)
-  (car (transform-expression code natives)))
+(define-syntax-rule (transform-code code ...)
+  (car (transform-expression `(lambda () code ...) natives)))
