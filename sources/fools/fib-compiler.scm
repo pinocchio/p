@@ -2,14 +2,14 @@
 
 (display
 (transform-code
-    (+ 1 2)
-    ;((lambda (fib)
-    ;    (set! fib
-    ;        (lambda (x)
-    ;            (if (< x 1)
-    ;                1
-    ;                (+ (fib (- x 1))
-    ;                   (fib (- x 2))))))
-    ;    (fib 30))
-    ;  null)
+    ;(+ 1 2)
+    ((lambda (fib)
+        (set! fib
+            (lambda (x)
+                (if (< x 1)
+                    1
+                    (+ (fib (- x 1))
+                       (fib (- x 2))))))
+        (fib 30))
+      null)
 ))
