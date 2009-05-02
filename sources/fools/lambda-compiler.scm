@@ -132,8 +132,9 @@
 (define (transform-if expression vars)
   (transform-expression
    `(,(cadr expression) ; smalltalk-type booleans
-     (lambda () ,(caddr expression))
-     (lambda () ,(cadddr expression))) vars))
+     'ifTrue:ifFalse:
+     ,(caddr expression)
+     ,(cadddr expression)) vars))
 
 (define (transform-when expression vars)
   (transform-if `(if ,(cadr expression)
@@ -145,13 +146,23 @@
                      (lambda () null)
                      ,(caddr expression))))
 
+(define (transform-new-symbol symbol vars)
+  (transform-expression
+   `(string->symbol
+     ,(symbol->string symbol)) vars))
+
+(define (transform-quoted expression vars)
+  (cond ((and (= (length expression) 2) (symbol? (cadr expression)))
+         (transform-new-symbol (cadr expression) vars))
+        (else (error "Only symbols are known for now."))))
+
 (define (transform-expression expression vars)
   (cond ((list? expression)
          (case (car expression)
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
            ((define) (transform-define expression vars))
-           ((quote) (error "Quoting not supported yet" expression))
+           ((quote) (transform-quoted expression vars))
            ((let) (transform-let expression vars))
            ((letrec) (transform-letrec expression vars))
            ((let*) (transform-let* expression vars))
@@ -161,6 +172,7 @@
            (else (transform-application expression vars))))
         ((number? expression) (transform-number expression vars))
         ((symbol? expression) (transform-symbol expression vars))
+        ((string? expression) (transform-string expression vars))
         (else (error "Unknown type: " expression))))
 
 (define (transform-number expression vars)
@@ -171,8 +183,23 @@
                          (number->string expression)
                          "));\n") name '())))
 
+(define (transform-string expression vars)
+  (let ((name (make-var-name "string" 'constant)))
+    (list (string-append "object "
+                         name
+                         " = (object)make_iconst((object)make_string(\""
+                         expression
+                         "\"));\n") name '())))
+
 (define (transform-symbol expression vars)
-  (list "" (cadr (assoc expression vars)) '()))
+  (let ((binding (assoc expression vars)))
+    (if binding
+        (list "" (cadr binding) '())
+        (begin
+          (display "Unbound identifier: " (current-error-port))
+          (write expression (current-error-port))
+          (newline (current-error-port))
+          (error)))))
 
 (define (transform-appcall-arg app name idx)
   (string-append "set_appcarg(" app ", " (number->string idx) ", " name ");\n"))
