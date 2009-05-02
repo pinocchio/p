@@ -9,6 +9,9 @@ fools_object fools_system;
 #define define_native(cls, name, native)\
     do_define_native(fools_system->cls, name, &native)
 
+#define make_empty_object(cls)\
+    (object)make_object(0, (object)fools_system->cls)
+
 void inline do_define_native(native_class_object cls,
                           const char* name,
                           transfer_target native) {
@@ -26,7 +29,7 @@ fools_object bootstrap() {
  
     header(fools_system->native.pointer)    = fools_system->native;
 
-    fools_system->symbols_known_to_the_vm   = make_array(16);
+    fools_system->symbols_known_to_the_vm   = make_array(21);
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
@@ -75,8 +78,7 @@ fools_object bootstrap() {
     fools_system->iscope_metaclass = make_native_class(1);
     define_native(iscope_metaclass, "env:new:size:",    iscope_new);
 
-    fools_system->iscope =
-        (object)make_object(0, (object)fools_system->iscope_metaclass);
+    fools_system->iscope = make_empty_object(iscope_metaclass);
 
     fools_system->iscope_class = make_native_class(3);
     define_native(iscope_class, "eval:withArguments:",  iscoped_eval_arguments);
@@ -87,6 +89,23 @@ fools_object bootstrap() {
     define_native(appcall_class, "eval:",               icall_eval);
     define_native(appcall_class, "invoke:env:",         appcall_invoke);
 
+
+    // Native objects needed to do anything useful
+
+    fools_system->true_class = make_native_class(1);
+    define_native(true_class, "env:ifTrue:ifFalse:",    true_env_if);
+    fools_system->true  = make_empty_object(true_class);
+    fools_system->false_class = make_native_class(1);
+    define_native(false_class, "env:ifTrue:ifFalse:",   false_env_if);
+    fools_system->false = make_empty_object(false_class);
+
+    fools_system->number_class = make_native_class(4);
+    define_native(number_class, "env:+",                number_env_plus);
+    define_native(number_class, "env:-",                number_env_minus);
+    define_native(number_class, "env:*",                number_env_times);
+    define_native(number_class, "env:/",                number_env_divide);
+
+    fools_system->string_class = make_native_class(0);
 
     return fools_system;
 }

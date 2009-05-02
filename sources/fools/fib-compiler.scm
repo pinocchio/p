@@ -7,8 +7,8 @@
             (lambda (x)
                 (if (< x 1)
                     1
-                    (+ (fib (- x 1)
-                            (- x 2))))))
-        (fib 20))
+                    (+ (fib (- x 1))
+                       (fib (- x 2))))))
+        (fib 30))
       null))
 )

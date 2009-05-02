@@ -131,13 +131,19 @@ struct context {
 };
 
 struct fools {
+    // Objects known to the system
     nil_object          nil;
+    object              true;
+    object              false;
     array_object        empty;
     object              native;
     object              native_metaclass;
     object              class_lookup;
     object              icapture;
     object              iscope;
+    array_object        symbols_known_to_the_vm;
+
+    // Evaluation related classes
     native_class_object ilist_class;
     native_class_object icall_class;
     native_class_object iconst_class;
@@ -149,7 +155,12 @@ struct fools {
     native_class_object appcall_class;
     native_class_object env_class;
     native_class_object dict_class;
-    array_object        symbols_known_to_the_vm;
+
+    // Minimal native classes
+    native_class_object number_class;
+    native_class_object string_class;
+    native_class_object true_class;
+    native_class_object false_class;
 };
 
 extern variable_object          make_object(int size, object interpreter);
