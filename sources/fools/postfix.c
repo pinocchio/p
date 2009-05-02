@@ -28,7 +28,7 @@
     }
 
     if (header(result.pointer).native_class == fools_system->string_class) {
-        printf("result: %i\n", result.number->value);
+        printf("result: %s\n", result.string->value);
         return 0;
     }
 

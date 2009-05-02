@@ -2,7 +2,8 @@
 
 (display
 (transform-code
-    (< 40 2)
+    ;(< 40 2)
+    'eval:
     ;((lambda (fib)
     ;    (set! fib
     ;        (lambda (x)

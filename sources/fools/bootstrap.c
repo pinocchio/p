@@ -39,6 +39,9 @@ fools_object bootstrap() {
 //    define_native(dict_class, "at:",                    prim_dict_at);
 //    define_native(dict_class, "at:put:",                prim_dict_at_put);
 
+    fools_system->string_class = make_native_class(0);
+    fools_system->array_class = make_native_class(0);
+
     fools_system->ilist_class = make_native_class(3);
     define_native(ilist_class, "return:env:continue:",  ilist_continue_eval);
     define_native(ilist_class, "eval:",                 ilist_eval);
@@ -104,9 +107,6 @@ fools_object bootstrap() {
     define_native(number_class, "env:-",                number_env_minus);
     define_native(number_class, "env:*",                number_env_times);
     define_native(number_class, "env:/",                number_env_divide);
-
-    fools_system->string_class = make_native_class(0);
-    fools_system->array_class = make_native_class(0);
 
     return fools_system;
 }
