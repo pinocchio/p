@@ -1,0 +1,32 @@
+Architecture
+------------
+- finish scheme system
+    - fix fib evaluation bugs
+    - figure out a good way of writing scheme natives in terms of message
+      sends
+    - look at importing existing scheme parsers and syntax compilers
+    - setup a scheme REPL with access to the system
+- finish smalltalk system
+    - attach a lookup written in scheme to all classes as interpreter
+    - hand-build the basic meta-hierarchy with a C method to build new
+      instances.
+    - import smalltalk parser written in scheme or compile to our C format
+      from within smalltalk (some peg...)
+
+
+Roadmap
+-------
+- look at interaction with GTK; try to import glamour and use it to build an
+  initial IDE and debugger.
+- try to get pthreads working.
+
+
+VM Optimizations
+----------------
+
+- Make sure symbols known to the VM are not constantly calculated but static
+- Rewrite iList>>eval to directly queue all actions in the list rather than
+  always returning and continuing.
+- check if Const is required or not.
+- make sure methods don't take contexts as arguments anymore but directly find
+  the thread-local one.

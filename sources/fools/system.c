@@ -424,6 +424,7 @@ void env_set_parent(context_object context) {
 
     env.env->parent = new_env;
 
+    // Don't accidentally set parent to self!
     assert(env.env->parent.env != env.env);
     debug("ret>>env>>parent:\n");
     return_from_context(receiver);
