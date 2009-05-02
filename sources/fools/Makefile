@@ -8,7 +8,7 @@ FULLNAME=$(PROGRAM)-$(VERSION)
 CFLAGS = -g -Wall -I.
 LDFLAGS = -lgc
 
-TEST_OBJECTS= test test.o
+TEST_OBJECTS= test test.o fib fib.o
 SOURCES=$(CFILES) $(HFILES) Makefile
 OBJECTS=$(CFILES:.c=.o)
 
@@ -20,6 +20,10 @@ $(PROGRAM): $(OBJECTS) $(PROGRAM).o
 test: $(OBJECTS) test.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	./test
+
+fib: $(OBJECTS) fib.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	./fib
 
 clean:
 	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) make.depend

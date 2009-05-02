@@ -10,9 +10,9 @@
 
 (define (make-vars arg)
   (let ((var-name (make-var-name "ivar" arg)))
-    (list arg var-name (string-append "ivar_object "
+    (list arg var-name (string-append "object "
                                       var-name
-                                      " = make_ivar((object)fools_system->nil, 0);\n"))))
+                                      " = (object)make_ivar((object)fools_system->nil, 0);\n"))))
 
 
 (define (make-arguments vars name)
@@ -67,7 +67,7 @@
                          (+ idx 1)
                          (string-append prefix pre)
                          (string-append code
-                                        "ilist_at_put(" name ", " (number->string idx) ", " c ");\n")
+                                        "ilist_at_put(" name ", " (number->string idx) ", (object)" c ");\n")
                          (append extravar extravars)))
                  (transform-expression (car todo) (append vars extravars)))))))
 
@@ -202,7 +202,7 @@
           (error)))))
 
 (define (transform-appcall-arg app name idx)
-  (string-append "set_appcarg(" app ", " (number->string idx) ", " name ");\n"))
+  (string-append "set_appcarg(" app ", " (number->string idx) ", (object)" name ");\n"))
 
 
 (define (transform-application expression vars)
@@ -213,7 +213,7 @@
          
          (code (string-append "appcall_object "
                               name
-                              " = make_appcall(" appname ", "
+                              " = make_appcall((object)" appname ", "
                               (number->string (- (length parts) 1)) ");\n"))
          (args (let loop ((todo (cdr parts))
                           (idx 0)
