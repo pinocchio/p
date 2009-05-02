@@ -43,9 +43,7 @@ void inline transfer(context_object context) {
         }
 
         native(global_context);
-
     }
-    
 }
 
 
@@ -326,7 +324,6 @@ void icapture_eval(context_object context) {
     debug("icapture>>eval:\n");
 
     object dynamic_env = argument_at(icapture_context, 1);
-
     set_argument(return_context(icapture_context), 1, dynamic_env);
 
     debug("ret>>icapture>>eval:\n");
@@ -509,9 +506,7 @@ object inline make_func(array_object arguments, object body) {
         ilist_at_put(exp, i,
             (object)make_iassign(
                 variable,
-                (object)arg_eval
-            )
-        );
+                (object)arg_eval));
     }
     
     ivar_object receiver_var = make_ivar();
