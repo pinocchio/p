@@ -97,10 +97,10 @@ fools_object bootstrap() {
     // Native objects needed to do anything useful
 
     fools_system->true_class = make_native_class(1);
-    define_native(true_class, "env:ifTrue:ifFalse:",    true_env_if);
+    define_native(true_class, "ifTrue:ifFalse:",        true_env_if);
     fools_system->true  = make_empty_object(true_class);
     fools_system->false_class = make_native_class(1);
-    define_native(false_class, "env:ifTrue:ifFalse:",   false_env_if);
+    define_native(false_class, "ifTrue:ifFalse:",       false_env_if);
     fools_system->false = make_empty_object(false_class);
 
     fools_system->number_class = make_native_class(4);

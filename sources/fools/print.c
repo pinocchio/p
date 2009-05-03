@@ -55,6 +55,11 @@ void print_object(object o) {
         return;
     }
 
+    if (header(o.pointer).native_class == fools_system->iscope_class) {
+        printf("iscoped\n");
+        return;
+    }
+
 
 
     printf("Unknown type at: %x\n", o.pointer);

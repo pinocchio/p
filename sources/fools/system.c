@@ -5,7 +5,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 1
+#define NDEBUG 0
 #define debug if (!NDEBUG) printf
 
 // Context handling
@@ -121,6 +121,8 @@ void icall_eval(context_object context) {
     object env = argument_at(icall_context, 1);
 
     header(context)                 = icall->interpreter;
+    print_object(icall->interpreter);
+    printf(" interpreter: %x\n", icall->interpreter);
     context->return_context         = (object)icall_context;
     context->arguments              = icall_context->arguments;
 
@@ -171,6 +173,7 @@ void appcall_invoke(context_object context) {
     object env          = argument_at(appcall_context, 2);
 
     header(appcall_context) = interpreter;
+    printf("interpreter: %x\n", interpreter.pointer);
     set_message(appcall_context, "eval:withArguments:");
     set_argument(appcall_context, 1, env);
     set_argument(appcall_context, 2, (object)appcall->arguments);
@@ -319,13 +322,13 @@ void iscoped_eval(context_object context) {
 
 // iscoped>>scope
 void iscoped_scope(context_object context) {
-    debug("iscoped>>scope");
+    debug("iscoped>>scope\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
     iscoped_object iscoped = header(receiver).iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
     return_from_context(receiver);
-    debug("ret>>iscoped>>scope: %x\n", iscoped->scope.pointer);
+    debug("ret>>iscoped>>scope\n");
 }
 
 // icapture>>eval:

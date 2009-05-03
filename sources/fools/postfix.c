@@ -1,11 +1,8 @@
 
 /* end of generated code */
 
-    context_object make_eval_context(ci, lambda_1_x, env);
-    build_return(ci, rc);
-    transfer(ci);
-
-    object scoped_main = return_value(rc);
+    object scoped_main;
+    eval_in_scope(lambda_1_x, env, scoped_main);
 
     assert(header(scoped_main.pointer).native_class ==
            fools_system->iscope_class);
@@ -14,8 +11,8 @@
 
     appcall_object maincall = make_appcall(const_scoped_main, 0);
     
-    make_eval_context(ci, maincall, env); 
-    ci->return_context = (object)rc;
+    context_object make_eval_context(ci, maincall, env); 
+    build_return(ci, rc);
     
     printf("------- Starting eval ------\n");
     transfer(ci);

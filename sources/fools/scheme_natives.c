@@ -49,6 +49,27 @@ void scheme_minus_func(context_object context) {
     return_from_context(context);
 }
 
+object scheme_true;
+object scheme_true_1;
+object scheme_true_2;
+
+void scheme_true_func(context_object context) {
+    printf("in scheme_true\n");
+    exit(0);
+    printf("exit sts\n");
+}
+
+object scheme_false;
+object scheme_false_1;
+object scheme_false_2;
+
+void scheme_false_func(context_object context) {
+    printf("in scheme false\n");
+    printf("%s\n", message(context).string->value);
+    exit(0);
+    printf("exit sts\n");
+}
+
 object scheme_smallerp;
 object scheme_smallerp_1;
 object scheme_smallerp_2;
@@ -65,13 +86,16 @@ void scheme_smallerp_func(context_object context) {
 
     object result;
     if (arg1->value < arg2->value) {
-        result = (object)make_iconst(fools_system->true);
+        //result = fools_system->true;
+        result = scheme_true;
         printf("smaller\n");
     } else {
-        result = (object)make_iconst(fools_system->false);
+        //result = fools_system->false;
+        result = scheme_false;
         printf("bigger\n");
     }
 
+    printf("result: %x\n", result.pointer);
     set_argument(return_context(context), 1, result);
 
     return_from_context(context);
@@ -89,6 +113,7 @@ void scheme_sts_func(context_object context) {
 
     env_object env = argument_at(context, 1).env;
     string_object arg1 = env_at(env, 1).string;
+    printf("going to sts: %s\n", arg1->value);
     object result = symbol_known_to_the_vm(arg1->value);
 
     set_argument(return_context(context), 1, result);
@@ -124,4 +149,20 @@ void bootstrap_scheme() {
     array_at_put(arguments, 0, scheme_string_to_symbol_1);
     scheme_string_to_symbol = make_func(arguments,
                         (object)make_native(&scheme_sts_func));
+
+    arguments = make_array(2);
+    scheme_true_1 = (object)make_ivar();
+    scheme_true_2 = (object)make_ivar();
+    array_at_put(arguments, 0, scheme_true_1);
+    array_at_put(arguments, 0, scheme_true_2);
+    scheme_true  = make_func(arguments,
+                    fools_system->true);
+
+    arguments = make_array(2);
+    scheme_false_1 = (object)make_ivar();
+    scheme_false_2 = (object)make_ivar();
+    array_at_put(arguments, 0, scheme_false_1);
+    array_at_put(arguments, 0, scheme_false_2);
+    scheme_false = make_func(arguments,
+                    fools_system->false);
 }

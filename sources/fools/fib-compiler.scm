@@ -2,9 +2,11 @@
 
 (display
 (transform-code
-    (+ (+ 20 5) 10)
+    ;(+ (+ (+ 20 5) 10) (+ 10 59))
     ;(< 40 2)
-    ;(if (< 20 4) 20 10)
+    (if (< 20 4)
+        20
+        10)
     ;((lambda (fib)
     ;    (set! fib
     ;        (lambda (x)

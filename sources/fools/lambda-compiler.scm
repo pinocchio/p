@@ -10,9 +10,10 @@
 
 (define (make-vars arg)
   (let ((var-name (make-var-name "ivar" arg)))
-    (list arg var-name (string-append "object "
-                                      var-name
-                                      " = (object)make_ivar((object)fools_system->nil, 0);\n"))))
+    (list arg var-name
+        (string-append "object "
+                       var-name
+                       " = (object)make_ivar((object)fools_system->nil, 0);\n"))))
 
 
 (define (make-arguments vars name)
@@ -28,9 +29,12 @@
           (loop (cdr todo)
                 (+ idx 1)
                 (string-append result
-                               "array_at_put(" name ", " (number->string idx) ", " (cadr (car todo)) ");\n"))))))
+                               "array_at_put(" name
+                               ", " (number->string idx)
+                               ", " (cadr (car todo)) ");\n"))))))
       
-;; Currently buggy; you can't accept the defines to extend the lambda header; you have to wrap:
+;; Currently buggy; you can't accept the defines to extend the
+;; lambda header; you have to wrap:
 ;; (lambda normalargs ((lambda defines body) nil nil ...))
 (define (transform-lambda a-lambda outervars)
   (let* ((args (cadr a-lambda))
@@ -43,7 +47,9 @@
            (apply string-append (map caddr vars))
            (car transformed)
            (car argarray)
-           "object " name " = make_func(" (cadr argarray) ", (object)" (cadr transformed) ");\n")
+           "object " name " = make_func("
+           (cadr argarray) ", (object)"
+           (cadr transformed) ");\n")
           name '())))
 
 (define (transform-expression-list expressions vars)
@@ -67,7 +73,9 @@
                          (+ idx 1)
                          (string-append prefix pre)
                          (string-append code
-                                        "ilist_at_put(" name ", " (number->string idx) ", (object)" c ");\n")
+                                        "ilist_at_put(" name
+                                        ", " (number->string idx)
+                                        ", (object)" c ");\n")
                          (append extravar extravars)))
                  (transform-expression (car todo) (append vars extravars)))))))
 
@@ -80,7 +88,9 @@
     (list (string-append
            (car names)
            (car body)
-           "iassign_object " name " = make_iassign(" (cadr names) ".ivar, (object)" (cadr body) ");\n")
+           "iassign_object " name
+           " = make_iassign(" (cadr names)
+           ".ivar, (object)" (cadr body) ");\n")
           name
           '())))
 
@@ -95,7 +105,9 @@
         (values (map cadr (cadr expression)))
         (body (cddr expression)))
     (transform-expression `((lambda ,names
-                              ,@(map (lambda (name value) `(set! ,name ,value)) names values)
+                              ,@(map (lambda (name value)
+                                        `(set! ,name ,value))
+                                     names values)
                               ,@body)) vars)))
 
 (define (transform-let* expression vars)
@@ -176,7 +188,9 @@
         (else (error "Unknown type: " expression))))
 
 (define (transform-number expression vars)
-  (let ((name (make-var-name "number" (string->symbol (number->string expression)))))
+  (let ((name (make-var-name "number"
+                            (string->symbol
+                                (number->string expression)))))
     (list (string-append "object "
                          name
                          " = (object)make_iconst((object)make_number("
@@ -202,7 +216,9 @@
           (error)))))
 
 (define (transform-appcall-arg app name idx)
-  (string-append "set_appcarg(" app ", " (number->string idx) ", (object)" name ");\n"))
+  (string-append "set_appcarg(" app
+                 ", " (number->string idx)
+                 ", (object)" name ");\n"))
 
 
 (define (transform-application expression vars)
@@ -222,7 +238,10 @@
                      code
                      (loop (cdr todo)
                            (+ idx 1)
-                           (string-append code (transform-appcall-arg name (cadr (car todo)) idx)))))))
+                           (string-append code
+                                (transform-appcall-arg
+                                    name
+                                    (cadr (car todo)) idx)))))))
     (list (string-append prefix code args)
           name '())))
 
