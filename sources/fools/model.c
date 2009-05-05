@@ -84,7 +84,7 @@ context_object make_context(object interpreter, int size) {
 
 context_object inline make_meta_context(context_object context) {
     context_object result = make_context(header(header(context).pointer), 2);
-    set_message(result, "interpret:");
+    set_message(result, INTERPRET);
     set_argument(result, 1, (object)context);
     return result;
 }
@@ -197,24 +197,9 @@ int inline string_equals(string_object string1, string_object string2) {
                    left_size) == 0);
 }
 
-object inline symbol_known_to_the_vm(const char* string) {
+object inline symbol_known_to_the_vm(int index) {
     array_object symbols = fools_system->symbols_known_to_the_vm;
-    string_object the_string = make_string(string);
-    int i;
-    for (i = 0; i < number_value(array_size(symbols)); i++) {
-        object o = raw_array_at(symbols, i);
-
-        if (o.nil == fools_system->nil) {
-            array_at_put(symbols, i, (object)the_string);
-            return (object)the_string;
-        }
-
-        if (string_equals(o.string, the_string)) {
-            return o;
-        }
-    }
-
-    assert(NULL);
+    return array_at(symbols, index);
 }
 
 object inline object_at(variable_object object, int index) {
@@ -233,8 +218,8 @@ void inline env_at_put(env_object env, int index, object value) {
     array_at_put(env->values, index, value);
 }
 
-void inline set_message(context_object context, const char* value) {
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm(value));
+void inline set_message(context_object context, int index) {
+    array_at_put(context->arguments, 0, symbol_known_to_the_vm(index));
 }
 
 void inline set_argument(context_object context, int index, object value) {

@@ -19,7 +19,7 @@ extern void inline return_from_context(context_object context);
 #define build_return(for_c, name)\
     ilist_object m1ilist = make_ilist(0);\
     context_object name = make_context((object)m1ilist, 2);\
-    set_message(name, "eval:");\
+    set_message(name, EVAL);\
     for_c->return_context = (object)rc;
 
 #define return_value(rc)\
@@ -27,7 +27,7 @@ extern void inline return_from_context(context_object context);
 
 #define make_eval_context(name, todo, env)\
     name = make_context((object)todo, 2);\
-    set_message(name, "eval:");\
+    set_message(name, EVAL);\
     set_argument(name, 1, (object)env);
 
 // Bootstrapping natives.

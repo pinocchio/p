@@ -3,6 +3,8 @@ HFILES=model.h bootstrap.h primitives.h system.h ast.h print.h scheme_natives.h 
 PROGRAM=fools
 VERSION=0.1
 
+TARGET=fib
+
 FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -g -Wall -I.
@@ -29,6 +31,9 @@ fib.c: prefix.c postfix.c fib-compiler.scm lambda-compiler.scm
 fib: $(OBJECTS) fib.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	./fib
+
+profile: 
+	$(MAKE) CFLAGS="-g -O1 -pg $(CFLAGS)" LDFLAGS="-pg $(LDFLAGS)" $(TARGET)
 
 clean:
 	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) make.depend

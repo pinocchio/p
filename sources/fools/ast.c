@@ -92,16 +92,16 @@ void inline set_callarg(icall_object icall, int index, object value) {
     array_at_put(icall->arguments, index, value);
 }
 
-void inline set_callmsg(icall_object icall, const char* string) {
-    set_callarg(icall, 0, symbol_known_to_the_vm(string));
+void inline set_callmsg(icall_object icall, int index) {
+    set_callarg(icall, 0, symbol_known_to_the_vm(index));
 }
 
 void inline set_appcarg(appcall_object appcall, int index, object value) {
     array_at_put(appcall->arguments, index, value);
 }
 
-void inline set_appcmsg(appcall_object appcall, const char* string) {
-    set_appcarg(appcall, 0, symbol_known_to_the_vm(string));
+void inline set_appcmsg(appcall_object appcall, int index) {
+    set_appcarg(appcall, 0, symbol_known_to_the_vm(index));
 }
 
 

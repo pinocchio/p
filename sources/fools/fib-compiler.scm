@@ -4,16 +4,18 @@
 (transform-code
     ;(+ (+ (+ 20 5) 10) (+ 10 59))
     ;(< 40 2)
-    (if (< 20 4)
-        20
-        10)
-    ;((lambda (fib)
-    ;    (set! fib
-    ;        (lambda (x)
-    ;            (if (< x 1)
-    ;                1
-    ;                (+ (fib (- x 1))
-    ;                   (fib (- x 2))))))
-    ;    (fib 30))
-    ;  null)
+    ;((lambda (test)
+    ;    (if (< 10 20)
+    ;        test
+    ;        (+ 10 20)))
+    ;    null)
+    ((lambda (fib)
+        (set! fib
+            (lambda (x)
+                (if (< x 1)
+                    1
+                    (+ (fib (- x 1))
+                       (fib (- x 2))))))
+        (fib 20))
+      null)
 ))

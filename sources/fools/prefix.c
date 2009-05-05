@@ -23,11 +23,5 @@ int main () {
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
-    eval_in_scope(scheme_true,  env, scheme_true);
-    eval_in_scope(scheme_false, env, scheme_false);
-
-    printf("true: %x\n", fools_system->true);
-    printf("false: %x\n", fools_system->false);
-    
 /* Generated code */
 

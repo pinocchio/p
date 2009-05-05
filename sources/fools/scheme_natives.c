@@ -7,15 +7,18 @@
 #include <assert.h>
 #include <stdio.h>
 
+#define NDEBUG 1
+#define debug if (!NDEBUG) printf
+
 object scheme_plus;
 object scheme_plus_1;
 object scheme_plus_2;
 
 void scheme_plus_func(context_object context) {
-    printf("in plus\n");
+    debug("in plus\n");
     // XXX breaks encapsulation. FIX!
     assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm("eval:").pointer);
+           symbol_known_to_the_vm(EVAL).pointer);
 
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
@@ -24,7 +27,7 @@ void scheme_plus_func(context_object context) {
 
     set_argument(return_context(context), 1, (object)result);
 
-    printf("exit plus\n");
+    debug("exit plus\n");
     return_from_context(context);
 }
 
@@ -34,9 +37,9 @@ object scheme_minus_2;
 
 void scheme_minus_func(context_object context) {
     // XXX breaks encapsulation. FIX!
-    printf("in minus\n");
+    debug("in minus\n");
     assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm("eval:").pointer);
+           symbol_known_to_the_vm(EVAL).pointer);
 
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
@@ -45,29 +48,43 @@ void scheme_minus_func(context_object context) {
 
     set_argument(return_context(context), 1, (object)result);
 
-    printf("exit minus\n");
+    debug("exit minus\n");
     return_from_context(context);
 }
 
 object scheme_true;
-object scheme_true_1;
-object scheme_true_2;
 
 void scheme_true_func(context_object context) {
-    printf("in scheme_true\n");
-    exit(0);
-    printf("exit sts\n");
+    // XXX breaks encapsulation
+    debug("in scheme_true\n");
+    object env = argument_at(context, 1);
+    array_object arguments = argument_at(context, 2).array;
+    object if_true = array_at(arguments, 0);
+
+    header(context) = if_true;
+    context->arguments = make_array(2);
+    set_message(context, EVAL);
+    set_argument(context, 1, env);
+
+    set_transfer(context);
+    debug("exit scheme_true\n");
 }
 
 object scheme_false;
-object scheme_false_1;
-object scheme_false_2;
 
 void scheme_false_func(context_object context) {
-    printf("in scheme false\n");
-    printf("%s\n", message(context).string->value);
-    exit(0);
-    printf("exit sts\n");
+    debug("in scheme_false\n");
+    object env = argument_at(context, 1);
+    array_object arguments = argument_at(context, 2).array;
+    object if_false = array_at(arguments, 1);
+
+    header(context) = if_false;
+    context->arguments = make_array(2);
+    set_message(context, EVAL);
+    set_argument(context, 1, env);
+
+    set_transfer(context);
+    debug("exit scheme_false\n");
 }
 
 object scheme_smallerp;
@@ -75,10 +92,10 @@ object scheme_smallerp_1;
 object scheme_smallerp_2;
 
 void scheme_smallerp_func(context_object context) {
-    printf("in smallerp\n");
+    debug("in smallerp\n");
     // XXX breaks encapsulation. FIX!
     assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm("eval:").pointer);
+           symbol_known_to_the_vm(EVAL).pointer);
 
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
@@ -88,38 +105,18 @@ void scheme_smallerp_func(context_object context) {
     if (arg1->value < arg2->value) {
         //result = fools_system->true;
         result = scheme_true;
-        printf("smaller\n");
+        debug("smaller\n");
     } else {
         //result = fools_system->false;
         result = scheme_false;
-        printf("bigger\n");
+        debug("bigger\n");
     }
 
-    printf("result: %x\n", result.pointer);
+    debug("result: %x\n", result.pointer);
     set_argument(return_context(context), 1, result);
 
     return_from_context(context);
-    printf("exit smallerp\n");
-}
-
-object scheme_string_to_symbol;
-object scheme_string_to_symbol_1;
-
-void scheme_sts_func(context_object context) {
-    // XXX breaks encapsulation. FIX!
-    printf("in sts\n");
-    assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm("eval:").pointer);
-
-    env_object env = argument_at(context, 1).env;
-    string_object arg1 = env_at(env, 1).string;
-    printf("going to sts: %s\n", arg1->value);
-    object result = symbol_known_to_the_vm(arg1->value);
-
-    set_argument(return_context(context), 1, result);
-
-    return_from_context(context);
-    printf("exit sts\n");
+    debug("exit smallerp\n");
 }
 
 void bootstrap_scheme() {
@@ -144,25 +141,6 @@ void bootstrap_scheme() {
     array_at_put(arguments, 1, scheme_smallerp_2);
     scheme_smallerp = make_func(arguments, (object)make_native(&scheme_smallerp_func));
 
-    scheme_string_to_symbol_1 = (object)make_ivar();
-    arguments = make_array(1);
-    array_at_put(arguments, 0, scheme_string_to_symbol_1);
-    scheme_string_to_symbol = make_func(arguments,
-                        (object)make_native(&scheme_sts_func));
-
-    arguments = make_array(2);
-    scheme_true_1 = (object)make_ivar();
-    scheme_true_2 = (object)make_ivar();
-    array_at_put(arguments, 0, scheme_true_1);
-    array_at_put(arguments, 0, scheme_true_2);
-    scheme_true  = make_func(arguments,
-                    fools_system->true);
-
-    arguments = make_array(2);
-    scheme_false_1 = (object)make_ivar();
-    scheme_false_2 = (object)make_ivar();
-    array_at_put(arguments, 0, scheme_false_1);
-    array_at_put(arguments, 0, scheme_false_2);
-    scheme_false = make_func(arguments,
-                    fools_system->false);
+    scheme_true  = (object)make_native(&scheme_true_func);
+    scheme_false  = (object)make_native(&scheme_false_func);
 }

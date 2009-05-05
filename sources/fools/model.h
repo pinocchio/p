@@ -188,14 +188,14 @@ extern object           inline dict_at(dict_object dict, object key);
 extern void             inline dict_at_put(dict_object dict, object key, object value);
 extern int              inline string_equals(string_object string1,
                                              string_object string2);
-extern object           inline symbol_known_to_the_vm(const char* string);
+extern object           inline symbol_known_to_the_vm(int index);
 extern object           inline object_at(variable_object object, int index);
 extern void             inline object_at_put(variable_object o,
                                              int index, object value);
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);
 extern context_object   inline return_context(context_object context);
-extern void             inline set_message(context_object context, const char* value);
+extern void             inline set_message(context_object context, int index);
 extern void             inline set_argument(context_object context, int index, object value);
 extern object           inline argument_at(context_object context, int index);
 extern message_object   inline make_message(int size);

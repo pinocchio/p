@@ -50,6 +50,7 @@ SETUP(test_native)
 
     native_object n = make_native(&native_test_single_arg_5);
 
+
     context_object inner = make_context((object)n, 1);
     set_argument(inner, 0, (object)make_number(5));
 
@@ -226,7 +227,7 @@ SETUP(test_env_lookup)
                                1);
 
     context_object ci = make_context((object)env1, 4);
-    set_message(ci, "store:at:in:");
+    set_message(ci, STORE_AT_IN);
     set_argument(ci, 1, v1);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
@@ -236,7 +237,7 @@ SETUP(test_env_lookup)
     assert(array_at(env1->values, 0).pointer == v1.pointer);
 
     ci = make_context((object)env2, 4);
-    set_message(ci, "store:at:in:");
+    set_message(ci, STORE_AT_IN);
     set_argument(ci, 1, v2);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e2k);
@@ -247,7 +248,7 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 4);
-    set_message(ci, "store:at:in:");
+    set_message(ci, STORE_AT_IN);
     set_argument(ci, 1, v3);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
@@ -258,7 +259,7 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 3);
-    set_message(ci, "fetch:from:");
+    set_message(ci, FETCH_FROM);
     set_argument(ci, 1, (object)make_number(0));
     set_argument(ci, 2, e1k);
 
@@ -270,11 +271,11 @@ SETUP(test_env_lookup)
 
     ci = make_context((object)env2, 3);
     
-    set_message(ci, "fetch:from:");
+    set_message(ci, FETCH_FROM);
     set_argument(ci, 1, (object)make_number(0));
     set_argument(ci, 2, e2k);
 
-    set_message(rc, "eval:");
+    set_message(rc, EVAL);
     ci->return_context = (object)rc;
 
     transfer(ci);
@@ -361,7 +362,7 @@ SETUP(test_new_iscoped)
     object exp = (object)make_iconst(v);
 
     icall_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, "env:new:size:");
+    set_callmsg(icall, ENV_NEW_SIZE);
     set_callarg(icall, 2, exp);
     set_callarg(icall, 3, (object)make_number(0));
 
@@ -390,7 +391,7 @@ SETUP(test_eval_iscoped)
     object exp = (object)make_iconst(v);
 
     icall_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, "env:new:size:");
+    set_callmsg(icall, ENV_NEW_SIZE);
     set_callarg(icall, 2, exp);
     set_callarg(icall, 3, (object)make_number(0));
 
@@ -445,7 +446,7 @@ SETUP(test_env_parent)
     icall_object icall = make_icall(
                             (object)
                             make_iconst((object)env2), 2);
-    set_callmsg(icall, "envParent:");
+    set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env);
     build_return(ci, rc);
 
@@ -467,7 +468,7 @@ SETUP(test_capture_parent)
     // automatically.
     // !!!
     icall_object icall = make_icall(fools_system->icapture, 2);
-    set_callmsg(icall, "envParent:");
+    set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env2);
     build_return(ci, rc);
 
@@ -507,7 +508,7 @@ SETUP(test_ilist_pass_context)
                               (object)env, 0);
 
     icall_object icall = make_icall(fools_system->icapture, 2);
-    set_callmsg(icall, "envParent:");
+    set_callmsg(icall, ENV_PARENT);
 
     ilist_at_put(ilist, 0, (object)icall);
 

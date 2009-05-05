@@ -56,9 +56,9 @@ extern void        inline raw_ilist_at_put(ilist_object ilist,
 extern void        inline ilist_at_put(ilist_object ilist,
                                        int index, object i);
 extern void        inline set_callarg(icall_object icall, int index, object value);
-extern void        inline set_callmsg(icall_object icall, const char* string);
+extern void        inline set_callmsg(icall_object icall, int index);
 
 extern void        inline set_appcarg(appcall_object appcall, int index, object value);
-extern void        inline set_appcmsg(appcall_object appcall, const char* string);
+extern void        inline set_appcmsg(appcall_object appcall, int index);
 
 #endif // AST_H

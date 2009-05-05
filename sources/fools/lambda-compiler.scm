@@ -144,7 +144,6 @@
 (define (transform-if expression vars)
   (transform-expression
    `(,(cadr expression) ; smalltalk-type booleans
-     'ifTrue:ifFalse:
      ,(caddr expression)
      ,(cadddr expression)) vars))
 
@@ -274,7 +273,7 @@
     (list?          "scheme_consp")
     (cons?          "scheme_consp")
     (error          "scheme_error")
-    (null           "(object)fools_system->nil")
+    (null           "(object)make_iconst((object)fools_system->nil)")
     ;(vector        XXX has to generate arrays)
     ))
 

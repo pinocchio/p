@@ -25,7 +25,7 @@ void print_object(object o) {
         return;
     }
 
-    if (header(o.pointer).native_class == fools_system->nil) {
+    if (o.nil == fools_system->nil) {
         printf("nil\n");
         return;
     }
@@ -62,5 +62,5 @@ void print_object(object o) {
 
 
 
-    printf("Unknown type at: %x\n", o.pointer);
+    printf("Unknown type at: %p\n", o.pointer);
 }
