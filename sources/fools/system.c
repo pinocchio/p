@@ -39,13 +39,13 @@ void inline native() {
     context_object context = get_context();
     //global_context = passed_context;
     if (ntarget((object)context) == &native) {
-        printf("-------------------------------------alternative path\n");
+        printf("-------------------------------------alternative path: 1\n");
         ntarget((object)context)();
     } else if (ntarget((object)pheader(context)) == &native) {
-        printf("-------------------------------------alternative path\n");
+        printf("-------------------------------------alternative path: 2\n");
         ntarget(header(context))();
     } else if (ntarget((object)pheader(pheader(context))) == &native) {
-        printf("-------------------------------------alternative path\n");
+        printf("-------------------------------------alternative path: 3\n");
         ntarget(header(context))();
     } else {
         printf("native func: %p\n", ntarget((object)pheader(pheader(context))));
@@ -542,7 +542,9 @@ void with_native_class_lookup() {
         header(class_context) = class->class;
     } else {
         debug("native: %s\n", selector.string->value);
-        header(class_context) = native;
+        set_transfer(receiver_context);
+        native_target(native.native)();
+        //header(class_context) = native;
     }
     set_transfer(class_context);
 }
