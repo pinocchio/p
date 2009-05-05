@@ -7,13 +7,14 @@
 extern void inline transfer(context_object context);
 
 // Structures to build interfaces to C.
-extern void with_native_class_lookup(context_object context);
-extern void inline native(context_object context);
+extern void with_native_class_lookup();
+extern void inline native();
 
 // Meta-interpretation primitives.
 extern void inline set_transfer(context_object context);
 extern context_object inline target_context(context_object interpreter_context);
 extern void inline return_from_context(context_object context);
+extern context_object inline get_context();
 
 // Convenience macros.
 #define build_return(for_c, name)\
@@ -31,37 +32,37 @@ extern void inline return_from_context(context_object context);
     set_argument(name, 1, (object)env);
 
 // Bootstrapping natives.
-extern void pre_eval_env(context_object context);
+extern void pre_eval_env();
 
-extern void ilist_eval(context_object context);
-extern void ilist_continue_eval(context_object context);
+extern void ilist_eval();
+extern void ilist_continue_eval();
 
-extern void icall_eval(context_object context);
-extern void icall_invoke_env(context_object context);
+extern void icall_eval();
+extern void icall_invoke_env();
 
-extern void iconst_eval(context_object context);
+extern void iconst_eval();
 
-extern void iassign_eval(context_object context);
+extern void iassign_eval();
 
-extern void ivar_eval(context_object context);
-extern void ivar_assign(context_object context);
+extern void ivar_eval();
+extern void ivar_assign();
 
-extern void icapture_eval(context_object context);
+extern void icapture_eval();
 
-extern void appcall_invoke(context_object context);
+extern void appcall_invoke();
 
-extern void env_fetch_from(context_object context);
-extern void env_store_at_in(context_object context);
-extern void env_subscope(context_object context);
-extern void env_parent(context_object context);
-extern void env_set_parent(context_object context);
-extern void env_set_env_parent(context_object context);
+extern void env_fetch_from();
+extern void env_store_at_in();
+extern void env_subscope();
+extern void env_parent();
+extern void env_set_parent();
+extern void env_set_env_parent();
 
-extern void iscope_new(context_object context);
+extern void iscope_new();
 
-extern void iscoped_eval_arguments(context_object context);
-extern void iscoped_eval(context_object context);
-extern void iscoped_scope(context_object context);
+extern void iscoped_eval_arguments();
+extern void iscoped_eval();
+extern void iscoped_scope();
 
 // Convenience function for composing primitives into closures.
 extern object inline make_func(array_object arguments, object body);

@@ -14,12 +14,10 @@ object scheme_plus;
 object scheme_plus_1;
 object scheme_plus_2;
 
-void scheme_plus_func(context_object context) {
+void scheme_plus_func() {
+    context_object context = get_context();
     debug("in plus\n");
     // XXX breaks encapsulation. FIX!
-    assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm(EVAL).pointer);
-
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
     number_object arg2 = env_at(env, 2).number;
@@ -35,12 +33,10 @@ object scheme_minus;
 object scheme_minus_1;
 object scheme_minus_2;
 
-void scheme_minus_func(context_object context) {
-    // XXX breaks encapsulation. FIX!
+void scheme_minus_func() {
+    context_object context = get_context();
     debug("in minus\n");
-    assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm(EVAL).pointer);
-
+    // XXX breaks encapsulation. FIX!
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
     number_object arg2 = env_at(env, 2).number;
@@ -54,9 +50,10 @@ void scheme_minus_func(context_object context) {
 
 object scheme_true;
 
-void scheme_true_func(context_object context) {
-    // XXX breaks encapsulation
+void scheme_true_func() {
+    context_object context = get_context();
     debug("in scheme_true\n");
+    // XXX breaks encapsulation
     object env = argument_at(context, 1);
     array_object arguments = argument_at(context, 2).array;
     object if_true = array_at(arguments, 0);
@@ -72,7 +69,8 @@ void scheme_true_func(context_object context) {
 
 object scheme_false;
 
-void scheme_false_func(context_object context) {
+void scheme_false_func() {
+    context_object context = get_context();
     debug("in scheme_false\n");
     object env = argument_at(context, 1);
     array_object arguments = argument_at(context, 2).array;
@@ -91,11 +89,10 @@ object scheme_smallerp;
 object scheme_smallerp_1;
 object scheme_smallerp_2;
 
-void scheme_smallerp_func(context_object context) {
+void scheme_smallerp_func() {
+    context_object context = get_context();
     debug("in smallerp\n");
     // XXX breaks encapsulation. FIX!
-    assert(argument_at(context, 0).pointer ==
-           symbol_known_to_the_vm(EVAL).pointer);
 
     env_object env = argument_at(context, 1).env;
     number_object arg1 = env_at(env, 1).number;
@@ -112,7 +109,7 @@ void scheme_smallerp_func(context_object context) {
         debug("bigger\n");
     }
 
-    debug("result: %x\n", result.pointer);
+    debug("result: %p\n", result.pointer);
     set_argument(return_context(context), 1, result);
 
     return_from_context(context);

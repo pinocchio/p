@@ -24,12 +24,18 @@ context_object inline target_context(context_object interpreter_context) {
     return argument_at(interpreter_context, 1).context;
 }
 
+context_object inline get_context() {
+    return global_context;
+}
+
 
 // Transferring primitives.
 
-void inline native(context_object context) {
+void inline native() {
+    context_object context = get_context();
     context_object passed_context = target_context(context);
-    native_target(header(passed_context).native)(passed_context);
+    global_context = passed_context;
+    native_target(header(passed_context).native)();
 }
 
 void inline transfer(context_object context) {
@@ -42,7 +48,7 @@ void inline transfer(context_object context) {
             global_context = make_meta_context(global_context);
         }
 
-        native(global_context);
+        native();
     }
 }
 
@@ -50,7 +56,8 @@ void inline transfer(context_object context) {
 // AST Handling
 
 // ilist>>eval:
-void ilist_eval(context_object context) {
+void ilist_eval() {
+    context_object context = get_context();
     debug("ilist>>eval:\n");
     context_object ilist_context = target_context(context);
     ilist_object ilist = (ilist_object)header(ilist_context).pointer;
@@ -70,7 +77,8 @@ void ilist_eval(context_object context) {
 }
 
 // ilist>>return:env:continue:
-void ilist_continue_eval(context_object context) {
+void ilist_continue_eval() {
+    context_object context = get_context();
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     context_object ilist_context = target_context(context);
@@ -99,7 +107,8 @@ void ilist_continue_eval(context_object context) {
 }
 
 // iconst>>eval:
-void iconst_eval(context_object context) {
+void iconst_eval() {
+    context_object context = get_context();
     context_object iconst_context = target_context(context);
     iconst_object iconst = header(iconst_context).iconst;
 
@@ -113,7 +122,8 @@ void iconst_eval(context_object context) {
 }
 
 // icall>>eval:
-void icall_eval(context_object context) {
+void icall_eval() {
+    context_object context = get_context();
     debug("icall>>eval:\n");
     context_object icall_context = target_context(context);
     icall_object icall = header(icall_context).icall;
@@ -133,7 +143,8 @@ void icall_eval(context_object context) {
 }
 
 // icall>>invoke:env:
-void icall_invoke_env(context_object context) {
+void icall_invoke_env() {
+    context_object context = get_context();
     debug("icall>>invoke:env:\n");
     context_object icall_context = target_context(context);
     icall_object icall  = header(icall_context).icall;
@@ -162,7 +173,8 @@ void icall_invoke_env(context_object context) {
 }
 
 // appcall>>invoke:env:
-void appcall_invoke(context_object context) {
+void appcall_invoke() {
+    context_object context = get_context();
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = target_context(context);
     appcall_object appcall  = header(appcall_context).appcall;
@@ -181,7 +193,8 @@ void appcall_invoke(context_object context) {
 
 
 // iassign>>eval:
-void iassign_eval(context_object context) {
+void iassign_eval() {
+    context_object context = get_context();
     context_object iassign_context = target_context(context);
     iassign_object iassign = header(iassign_context).iassign;
 
@@ -205,7 +218,8 @@ void iassign_eval(context_object context) {
 }
 
 // ivar>>assign:in:
-void ivar_assign(context_object context) {
+void ivar_assign() {
+    context_object context = get_context();
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).ivar;
 
@@ -225,7 +239,8 @@ void ivar_assign(context_object context) {
 }
 
 // o>>preEval:env:
-void pre_eval_env(context_object context) {
+void pre_eval_env() {
+    context_object context = get_context();
     debug("o>>preEval:env:\n");
     context_object receiver = target_context(context);
 
@@ -246,7 +261,8 @@ void pre_eval_env(context_object context) {
 }
 
 // ivar>>eval:
-void ivar_eval(context_object context) {
+void ivar_eval() {
+    context_object context = get_context();
     debug("ivar>>eval:\n");
     context_object ivar_context = target_context(context);
     ivar_object ivar = header(ivar_context).ivar;
@@ -264,7 +280,8 @@ void ivar_eval(context_object context) {
 }
 
 // iscoped>>eval:withArguments:
-void iscoped_eval_arguments(context_object context) {
+void iscoped_eval_arguments() {
+    context_object context = get_context();
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("iscoped>>eval:withArguments:\n");
@@ -289,7 +306,8 @@ void iscoped_eval_arguments(context_object context) {
 }
 
 // iscoped>>eval:
-void iscoped_eval(context_object context) {
+void iscoped_eval() {
+    context_object context = get_context();
     debug("iscoped>>doEval:withArguments\n");
     context_object iscoped_context = target_context(context);
     iscoped_object iscoped = header(iscoped_context).iscoped;
@@ -318,7 +336,8 @@ void iscoped_eval(context_object context) {
 }
 
 // iscoped>>scope
-void iscoped_scope(context_object context) {
+void iscoped_scope() {
+    context_object context = get_context();
     debug("iscoped>>scope\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
@@ -329,7 +348,8 @@ void iscoped_scope(context_object context) {
 }
 
 // icapture>>eval:
-void icapture_eval(context_object context) {
+void icapture_eval() {
+    context_object context = get_context();
     context_object icapture_context = target_context(context);
 
     debug("icapture>>eval:\n");
@@ -343,7 +363,8 @@ void icapture_eval(context_object context) {
 }
 
 // env>>fetch:from:
-void env_fetch_from(context_object context) {
+void env_fetch_from() {
+    context_object context = get_context();
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>fetch:from:\n");
@@ -365,7 +386,8 @@ void env_fetch_from(context_object context) {
 }
 
 // env>>store:at:in:
-void env_store_at_in(context_object context) {
+void env_store_at_in() {
+    context_object context = get_context();
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>store:at:in:\n");
@@ -387,7 +409,8 @@ void env_store_at_in(context_object context) {
 }
 
 // env>>subScope:
-void env_subscope(context_object context) {
+void env_subscope() {
+    context_object context = get_context();
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>subScope:key:\n");
@@ -406,7 +429,8 @@ void env_subscope(context_object context) {
 }
 
 // env>>env:parent:
-void env_set_env_parent(context_object context) {
+void env_set_env_parent() {
+    context_object context = get_context();
     debug("env>>env:parent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
@@ -426,7 +450,8 @@ void env_set_env_parent(context_object context) {
 }
 
 // env>>parent:
-void env_set_parent(context_object context) {
+void env_set_parent() {
+    context_object context = get_context();
     debug("env>>parent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
@@ -442,7 +467,8 @@ void env_set_parent(context_object context) {
 }
 
 // env>>parent
-void env_parent(context_object context) {
+void env_parent() {
+    context_object context = get_context();
     debug("env>>envParent:\n");
     context_object receiver = target_context(context);
     // arguments at: 0 -> selector
@@ -453,7 +479,8 @@ void env_parent(context_object context) {
 }
 
 // iscope_class>>env:new:size:
-void iscope_new(context_object context) {
+void iscope_new() {
+    context_object context = get_context();
     debug("iscopecls>>env:new:size:\n");
     context_object iscope_context = target_context(context);
     iscoped_object iscoped =
@@ -470,7 +497,8 @@ void iscope_new(context_object context) {
 
 // Native class handling
 
-void with_native_class_lookup(context_object context) {
+void with_native_class_lookup() {
+    context_object context = get_context();
     context_object class_context    = target_context(context);
     context_object receiver_context = target_context(class_context);
     native_class_object class       = header(class_context).native_class;

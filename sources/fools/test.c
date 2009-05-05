@@ -39,7 +39,8 @@ SETUP(test_native_layout)
     assert(native_target(fools_system->native.native) == &native);
 }
 
-void native_test_single_arg_5(context_object c) {
+void native_test_single_arg_5() {
+    context_object c = get_context();
     assert(c->arguments->size->value == 1);
     assert(number_value(argument_at(c, 0).number) == 5);
     argument_at(c, 0).number->value = 6;
@@ -55,6 +56,8 @@ SETUP(test_native)
     set_argument(inner, 0, (object)make_number(5));
 
     context_object outer = make_meta_context(inner);
+
+    set_transfer(outer);
 
     native(outer);
 
@@ -325,7 +328,8 @@ SETUP(test_ivar_read)
     assert(array_at(rc->arguments, 1).pointer == v.pointer);
 }
 
-void native_icallable(context_object c) {
+void native_icallable() {
+    context_object c = get_context();
     number_object first = argument_at(c, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;

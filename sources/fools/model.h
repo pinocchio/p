@@ -57,7 +57,7 @@ typedef struct context*          context_object;
 typedef array_object             message_object;
 typedef void**                   pointer;
 
-typedef void (*transfer_target)(context_object);
+typedef void (*transfer_target)();
 
 struct fools;
 typedef struct fools*       fools_object;
