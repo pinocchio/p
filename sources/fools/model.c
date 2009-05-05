@@ -74,9 +74,8 @@ native_object make_native(transfer_target native) {
 
 context_object make_context(object interpreter, int size) {
     context_object context  = NEW(struct context);
-    //printf("Made context: %x\n", context);
+    printf("Made context: %p\n", context);
     header(context)         = interpreter;
-    //printf("created new context: %x\n", context);
     context->arguments      = make_array(size);
     context->return_context = (object)fools_system->nil;
     return context;
@@ -84,7 +83,7 @@ context_object make_context(object interpreter, int size) {
 
 context_object inline make_meta_context(context_object context) {
     context_object result = make_context(header(header(context).pointer), 2);
-    set_message(result, INTERPRET);
+    //set_message(result, INTERPRET);
     set_argument(result, 1, (object)context);
     return result;
 }
@@ -151,7 +150,7 @@ object inline dict_at(dict_object dict, object key) {
     if (index == -1) {
         return (object)fools_system->nil;
     } else {
-        return array_at(dict->values, index);
+        return raw_array_at(dict->values, index);
     }
 }
 
@@ -165,8 +164,8 @@ void inline dict_expand(dict_object dict) {
     dict->values = make_array(size);
 
     for (--old_size; old_size >= 0; old_size--) {
-        array_at_put(dict->keys,    old_size, array_at(old_keys,   old_size));
-        array_at_put(dict->values,  old_size, array_at(old_values, old_size));
+        raw_array_at_put(dict->keys,    old_size, raw_array_at(old_keys,   old_size));
+        raw_array_at_put(dict->values,  old_size, raw_array_at(old_values, old_size));
     }
 }
 
@@ -185,7 +184,7 @@ void inline dict_at_put(dict_object dict, object key, object value) {
     if (index == -1) {
         index = dict_bind_key(dict, key);
     }
-    array_at_put(dict->values, index, value);
+    raw_array_at_put(dict->values, index, value);
 }
 
 int inline string_equals(string_object string1, string_object string2) {
@@ -199,7 +198,7 @@ int inline string_equals(string_object string1, string_object string2) {
 
 object inline symbol_known_to_the_vm(int index) {
     array_object symbols = fools_system->symbols_known_to_the_vm;
-    return array_at(symbols, index);
+    return raw_array_at(symbols, index);
 }
 
 object inline object_at(variable_object object, int index) {
@@ -219,11 +218,11 @@ void inline env_at_put(env_object env, int index, object value) {
 }
 
 void inline set_message(context_object context, int index) {
-    array_at_put(context->arguments, 0, symbol_known_to_the_vm(index));
+    raw_array_at_put(context->arguments, 0, symbol_known_to_the_vm(index));
 }
 
 void inline set_argument(context_object context, int index, object value) {
-    array_at_put(context->arguments, index, value);
+    raw_array_at_put(context->arguments, index, value);
 }
 
 object inline argument_at(context_object context, int index) {

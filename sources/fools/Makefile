@@ -7,8 +7,8 @@ TARGET=fib
 
 FULLNAME=$(PROGRAM)-$(VERSION)
 
-CFLAGS = -O3 -g -Wall -I. -pg
-LDFLAGS = -lgc -pg
+CFLAGS = -O3 -g -Wall -I.
+LDFLAGS = -lgc
 
 TEST_OBJECTS= test test.o fib fib.o fib.c
 SOURCES=$(CFILES) $(HFILES) Makefile

@@ -112,7 +112,7 @@ fools_object bootstrap() {
     define_native(iscope_class, DOEVAL_WITHARGUMENTS,   iscoped_eval);
     define_native(iscope_class, SCOPE_IN_ENV,           iscoped_scope);
 
-    fools_system->appcall_class = make_native_class(2);
+    fools_system->appcall_class = make_native_class(3);
     define_native(appcall_class, EVAL,                  icall_eval);
     define_native(appcall_class, INVOKE_ENV,            appcall_invoke);
     define_native(appcall_class, PRE_EVAL_ENV,          pre_eval_env);
