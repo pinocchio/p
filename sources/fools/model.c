@@ -222,7 +222,7 @@ void inline set_argument(context_object context, int index, object value) {
 }
 
 object inline argument_at(context_object context, int index) {
-    return array_at(context->arguments, index);
+    return raw_array_at(context->arguments, index);
 }
 
 message_object inline make_message(int size) {

@@ -202,5 +202,8 @@ extern void             inline set_argument(context_object context, int index, o
 extern object           inline argument_at(context_object context, int index);
 extern message_object   inline make_message(int size);
 extern object           inline message(context_object context);
+#define assert_argsize(context, size) assert(number_value(array_size(context->arguments)) >= size)
+
+
 
 #endif // MODEL_H

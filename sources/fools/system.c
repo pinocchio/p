@@ -79,6 +79,7 @@ void inline transfer(context_object context) {
 void ilist_eval() {
     debug("ilist>>eval:\n");
     context_object ilist_context = get_context();
+    assert_argsize(ilist_context, 2);
     ilist_object ilist = (ilist_object)header(ilist_context).pointer;
 
     if (number_value(ilist->size) == 0) {
@@ -111,6 +112,7 @@ void ilist_continue_eval() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     context_object ilist_context = get_context();
+    assert_argsize(ilist_context, 5);
     int index = number_value(argument_at(ilist_context, 3).number);
     debug("ilist>>return:env:continue: %i\n", index);
 
@@ -155,6 +157,8 @@ void iconst_eval() {
 void icall_eval() {
     debug("icall>>eval:\n");
     context_object icall_context = get_context();
+    assert_argsize(icall_context, 2);
+
     icall_object icall = header(icall_context).icall;
 
     object env = argument_at(icall_context, 1);
@@ -174,7 +178,10 @@ void icall_eval() {
 void icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
+    assert_argsize(icall_context, 3);
+
     icall_object icall  = header(icall_context).icall;
+
 
     object interpreter  = argument_at(icall_context, 1);
     object env          = argument_at(icall_context, 2);
@@ -202,7 +209,10 @@ void icall_invoke_env() {
 void appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
+    assert_argsize(appcall_context, 3);
+
     appcall_object appcall  = header(appcall_context).appcall;
+
 
     object interpreter  = argument_at(appcall_context, 1);
     object env          = argument_at(appcall_context, 2);
@@ -220,6 +230,8 @@ void appcall_invoke() {
 // iassign>>eval:
 void iassign_eval() {
     context_object iassign_context = get_context();
+    assert_argsize(iassign_context, 2);
+
     iassign_object iassign = header(iassign_context).iassign;
 
     debug("iassign>>eval:\n");
@@ -243,6 +255,8 @@ void iassign_eval() {
 // ivar>>assign:in:
 void ivar_assign() {
     context_object ivar_context = get_context();
+    assert_argsize(ivar_context, 3);
+
     ivar_object ivar = header(ivar_context).ivar;
 
     debug("ivar>>assign:in:\n");
@@ -264,6 +278,7 @@ void ivar_assign() {
 void pre_eval_env() {
     debug("o>>preEval:env:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 3);
 
     object env      = argument_at(receiver, 1);
     object env_arg  = argument_at(receiver, 2);
@@ -285,6 +300,8 @@ void pre_eval_env() {
 void ivar_eval() {
     debug("ivar>>eval:\n");
     context_object ivar_context = get_context();
+    assert_argsize(ivar_context, 2);
+
     ivar_object ivar = header(ivar_context).ivar;
 
     object env = argument_at(ivar_context, 1);
@@ -305,6 +322,8 @@ void iscoped_eval_arguments() {
     // Test arguments!
     debug("iscoped>>eval:withArguments:\n");
     context_object iscoped_context = get_context();
+    assert_argsize(iscoped_context, 3);
+
     iscoped_object iscoped = header(iscoped_context).iscoped;
 
     object env = argument_at(iscoped_context, 1);
@@ -327,6 +346,8 @@ void iscoped_eval_arguments() {
 void iscoped_eval() {
     debug("iscoped>>doEval:withArguments\n");
     context_object iscoped_context = get_context();
+    assert_argsize(iscoped_context, 3);
+
     iscoped_object iscoped = header(iscoped_context).iscoped;
 
     // filling in scope with interpreter + arguments.
@@ -366,6 +387,7 @@ void iscoped_scope() {
 // icapture>>eval:
 void icapture_eval() {
     context_object icapture_context = get_context();
+    assert_argsize(icapture_context, 2);
 
     debug("icapture>>eval:\n");
 
@@ -383,6 +405,7 @@ void env_fetch_from() {
     // Test arguments!
     debug("env>>fetch:from:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 2).pointer) {
@@ -405,6 +428,7 @@ void env_store_at_in() {
     // Test arguments!
     debug("env>>store:at:in:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 4);
     // arguments at: 0 -> selector
     env_object env = header(receiver).env;
     if (env->scope.pointer == array_at(receiver->arguments, 3).pointer) {
@@ -427,6 +451,7 @@ void env_subscope() {
     // Test arguments!
     debug("env>>subScope:key:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 3);
     object env  = header(receiver);
     // arguments at: 0 -> selector
     int size    = number_value(argument_at(receiver, 1).number);
@@ -444,6 +469,7 @@ void env_subscope() {
 void env_set_env_parent() {
     debug("env>>env:parent:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
     object env = argument_at(receiver, 1);
     object new_env = argument_at(receiver, 2);
@@ -464,6 +490,7 @@ void env_set_env_parent() {
 void env_set_parent() {
     debug("env>>parent:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
     object env = header(receiver);
     object new_env = argument_at(receiver, 1);
@@ -480,6 +507,7 @@ void env_set_parent() {
 void env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
+    assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
     object env = header(receiver);
     set_argument(return_context(receiver), 1, env.env->parent);
@@ -491,6 +519,7 @@ void env_parent() {
 void iscope_new() {
     debug("iscopecls>>env:new:size:\n");
     context_object iscope_context = get_context();
+    assert_argsize(iscope_context, 4);
     iscoped_object iscoped =
         make_iscoped(
             argument_at(iscope_context, 1),  // env
