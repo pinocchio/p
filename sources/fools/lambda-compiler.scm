@@ -53,6 +53,8 @@
           name '())))
 
 (define (transform-expression-list expressions vars)
+    (if (= (length expressions) 1)
+        (transform-expression (car expressions) vars)
   (let* ((size (length expressions))
          (name (make-var-name "ilist" 'lambda))
          (code (string-append
@@ -77,7 +79,8 @@
                                         ", " (number->string idx)
                                         ", (object)" c ");\n")
                          (append extravar extravars)))
-                 (transform-expression (car todo) (append vars extravars)))))))
+                 (transform-expression (car todo) (append vars
+extravars))))))))
 
 (define (transform-set! expression vars)
   (unless (= (length expression) 3)
