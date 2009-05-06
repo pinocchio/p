@@ -167,9 +167,9 @@ void icall_eval() {
     header(icall_context)           = icall->interpreter;
     icall_context->return_context   = (object)context;
 
-    icall_context->arguments        = make_array(2);
-    set_message(icall_context, EVAL);
-    set_argument(icall_context, 1, env);
+    //icall_context->arguments        = make_array(2);
+    //set_message(icall_context, EVAL);
+    //set_argument(icall_context, 1, env);
 
     debug("ret>>icall>>eval:\n");
     //set_transfer(icall_context);
