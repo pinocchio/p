@@ -5,11 +5,11 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 0
+#define NDEBUG 1
 #define debug if (!NDEBUG) printf
 
 #define pheader(o) header(o).pointer
-#define ntarget(o) native_target((o).native)
+#define ntarget(o) native_target(((object)o).native)
 
 // Context handling
 
@@ -35,40 +35,40 @@ context_object inline get_context() {
 // Transferring primitives.
 
 void inline native() {
-    //context_object context = get_context();
-    context_object context = get_context();
-    //global_context = passed_context;
-    if (ntarget((object)context) == &native) {
-        printf("-------------------------------------alternative path: 1\n");
-        ntarget((object)context)();
-    } else if (ntarget((object)pheader(context)) == &native) {
-        printf("-------------------------------------alternative path: 2\n");
-        ntarget(header(context))();
-    } else if (ntarget((object)pheader(pheader(context))) == &native) {
-        printf("-------------------------------------alternative path: 3\n");
-        ntarget(header(context))();
-    } else {
-        printf("native func: %p\n", ntarget((object)pheader(pheader(context))));
-        //printf("native func: %p\n", native_target(header(context).native));
-        //native_target(((object)context).native)();
-        ntarget((object)pheader(pheader(context)))();
+    // Finds the code which was tagged with native and executes it.
+    // Code tagged with native has to know by itself on which level it
+    // executes!
+    pointer code = (pointer)global_context;
+    while (pheader(code) != ((object)fools_system->native).pointer) {
+        code = pheader(code);
     }
+    global_context->code = (object)code;
 }
 
 void inline transfer(context_object context) {
 
     global_context = context;
+    object action;
 
     while (((object)global_context).nil != fools_system->nil) {
 
-        printf("while: %p\n", global_context);
-
-        while (pheader(pheader(pheader(global_context)))
-                 != fools_system->native.pointer) {
-            global_context = make_meta_context(global_context);
+        if (global_context->code.nil == fools_system->nil) {
+            // call -> object -> class -> C
+            action = (object)pheader(pheader(pheader(global_context)));
+        } else {
+            action = global_context->code;
+            // don't keep pointers for future use.
+            global_context->code = (object)fools_system->nil;
         }
 
-        native();
+        ntarget(action)();
+
+        //while (pheader(pheader(pheader(global_context)))
+        //         != fools_system->native.pointer) {
+        //    global_context = make_meta_context(global_context);
+        //}
+
+        //native();
     }
 }
 
@@ -81,21 +81,15 @@ void ilist_eval() {
     context_object ilist_context = get_context();
     ilist_object ilist = (ilist_object)header(ilist_context).pointer;
 
-    printf("Ilist: %p\n", ilist);
-
     if (number_value(ilist->size) == 0) {
-        printf("empty\n");
         return return_from_context(ilist_context);
     }
 
     if (number_value(ilist->size) == 1) {
         object instruction = (object)raw_ilist_at(ilist, 0);
         header(ilist_context) = instruction;
-        printf("single\n");
         return;
     }
-
-    printf("NON_EMPTY\n");
 
     context_object rec = make_context((object)ilist, 5);
 
@@ -107,10 +101,7 @@ void ilist_eval() {
     // optimization, reuse object.
     set_argument(rec, 4, (object)ilist_context); 
 
-    //rec->return_context = ilist_context->return_context;
-
-    printf("rec: %p\n", rec);
-    exit(0);
+    rec->return_context = ilist_context->return_context;
 
     set_transfer(rec);
 }
@@ -176,9 +167,9 @@ void icall_eval() {
     header(icall_context)           = icall->interpreter;
     icall_context->return_context   = (object)context;
 
-    icall_context->arguments        = make_array(3);
-    set_message(icall_context, INVOKE_ENV);
-    set_argument(icall_context, 2, env);
+    icall_context->arguments        = make_array(2);
+    set_message(icall_context, EVAL);
+    set_argument(icall_context, 1, env);
 
     debug("ret>>icall>>eval:\n");
     //set_transfer(icall_context);
@@ -520,33 +511,23 @@ void iscope_new() {
 // Native class handling
 
 void with_native_class_lookup() {
-    printf("in 1\n");
-    context_object class_context    = get_context();
-    printf("in 2: %p\n", class_context);
-    context_object receiver_context = target_context(class_context);
-    printf("in 3: %p\n", receiver_context);
-    native_class_object class       = header(class_context).native_class;
-    printf("Class: %p\n", class);
-    print_object((object)class_context);
-    printf("in 4\n");
+    context_object receiver_context = get_context();
+                                    // call -> object -> class
+    native_class_object class       = header(pheader(receiver_context)).native_class;
     dict_object natives             = class->natives;
-    printf("in 5\n");
     object selector                 = message(receiver_context);
-    printf("in 6\n");
     object native                   = dict_at(natives, selector);
-    printf("in 7\n");
 
     if (native.nil == fools_system->nil) {
         debug("non-native: %s sent \n",
                 selector.string->value);
-        header(class_context) = class->class;
+        //header(class_context) = class->class;
+        exit(0);
     } else {
         debug("native: %s\n", selector.string->value);
-        set_transfer(receiver_context);
-        native_target(native.native)();
-        //header(class_context) = native;
+        receiver_context->code = native;
     }
-    set_transfer(class_context);
+    //set_transfer(receiver_context);
 }
 
 // Function bootstrapping

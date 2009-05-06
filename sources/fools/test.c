@@ -52,8 +52,6 @@ SETUP(test_native)
     native_object n = make_native(&native_test_single_arg_5);
 
 
-    printf("test: %p\n", n);
-
     context_object inner = make_context((object)n, 1);
     set_argument(inner, 0, (object)make_number(5));
 
@@ -169,10 +167,6 @@ SETUP(test_transfer_empty_ilist)
     ilist_object ilist = make_ilist(0);
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
-    printf("context: %p\n", ci);
-    printf("ilist: %p\n", ilist);
-    printf("target: %p\n", &with_native_class_lookup);
-    printf("native func: %p\n", &native);
     transfer(ci);
 }
 
