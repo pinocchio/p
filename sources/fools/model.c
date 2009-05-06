@@ -82,13 +82,6 @@ context_object make_context(object interpreter, int size) {
     return context;
 }
 
-context_object inline make_meta_context(context_object context) {
-    context_object result = make_context(header(header(context).pointer), 2);
-    //set_message(result, INTERPRET);
-    set_argument(result, 1, (object)context);
-    return result;
-}
-
 // Accessors
 
 int inline number_value(number_object number) {
@@ -147,12 +140,14 @@ int inline dict_index_of(dict_object dict, object key) {
 }
 
 object inline dict_at(dict_object dict, object key) {
-    int index = dict_index_of(dict, key);
-    if (index == -1) {
-        return (object)fools_system->nil;
-    } else {
-        return raw_array_at(dict->values, index);
+    int size = number_value(array_size(dict->keys));
+    int i;
+    for (i = 0; i < size; i++) {
+        if (raw_array_at(dict->keys, i).pointer == key.pointer) {
+            return raw_array_at(dict->values, i);
+        }
     }
+    return (object)fools_system->nil;
 }
 
 void inline dict_expand(dict_object dict) {
@@ -176,7 +171,7 @@ int inline dict_bind_key(dict_object dict, object key) {
         index = number_value(array_size(dict->keys));
         dict_expand(dict);
     }
-    array_at_put(dict->keys, index, key);
+    raw_array_at_put(dict->keys, index, key);
     return index;
 }
 

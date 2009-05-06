@@ -47,23 +47,6 @@ void native_test_single_arg_5() {
     return_from_context(c);
 }
 
-SETUP(test_native)
-
-    native_object n = make_native(&native_test_single_arg_5);
-
-
-    context_object inner = make_context((object)n, 1);
-    set_argument(inner, 0, (object)make_number(5));
-
-    context_object outer = make_meta_context(inner);
-
-    set_transfer(outer);
-
-    native(outer);
-
-    assert(number_value(argument_at(inner, 0).number) == 6);
-}
-
 SETUP(test_transfer)
 
     native_object n = make_native(&native_test_single_arg_5);
@@ -670,7 +653,6 @@ int main() {
     test_header();
     test_array();
     test_native_layout();
-    //test_native();  // broken for now. 
     test_transfer();
     test_string_equals();
     //test_dict();
