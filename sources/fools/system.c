@@ -507,7 +507,6 @@ void env_set_parent() {
 void env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
-    assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
     object env = header(receiver);
     set_argument(return_context(receiver), 1, env.env->parent);
