@@ -318,6 +318,36 @@ void ivar_assign() {
     set_transfer(ivar_context);
 }
 
+// ivar>>eval:
+void ivar_eval() {
+    debug("ivar>>eval:\n");
+    context_object ivar_context = get_context();
+    assert_argsize(ivar_context, 2);
+
+    ivar_object ivar = header(ivar_context).ivar;
+
+    object env = argument_at(ivar_context, 1);
+
+    new_target(ivar_context, env);
+    ivar_context->arguments = make_array(3);
+    set_message(ivar_context, FETCH_FROM);
+    set_argument(ivar_context, 1, (object)ivar->index);
+    set_argument(ivar_context, 2, ivar->scope);
+
+    debug("ret>>ivar>>eval:\n");
+    set_transfer(ivar_context);
+}
+
+void ivar_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL,         ivar_eval);
+    if_selector(selector, ASSIGN_IN,    ivar_assign);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    assert(NULL);
+}
+
 // o>>preEval:env:
 void pre_eval_env() {
     debug("o>>preEval:env:\n");
@@ -338,26 +368,6 @@ void pre_eval_env() {
 
     debug("ret>>o>>preEval:env:\n");
     set_transfer(context);
-}
-
-// ivar>>eval:
-void ivar_eval() {
-    debug("ivar>>eval:\n");
-    context_object ivar_context = get_context();
-    assert_argsize(ivar_context, 2);
-
-    ivar_object ivar = header(ivar_context).ivar;
-
-    object env = argument_at(ivar_context, 1);
-
-    new_target(ivar_context, env);
-    ivar_context->arguments = make_array(3);
-    set_message(ivar_context, FETCH_FROM);
-    set_argument(ivar_context, 1, (object)ivar->index);
-    set_argument(ivar_context, 2, ivar->scope);
-
-    debug("ret>>ivar>>eval:\n");
-    set_transfer(ivar_context);
 }
 
 // iscoped>>eval:withArguments:
@@ -429,7 +439,7 @@ void iscoped_scope() {
 }
 
 // icapture>>eval:
-void icapture_eval() {
+void inline icapture_eval() {
     context_object icapture_context = get_context();
     assert_argsize(icapture_context, 2);
 
@@ -443,8 +453,16 @@ void icapture_eval() {
     return_from_context(icapture_context);
 }
 
+void icapture_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL, icapture_eval);
+    assert(NULL);
+}
+
 // env>>fetch:from:
-void env_fetch_from() {
+void inline env_fetch_from() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>fetch:from:\n");
@@ -467,7 +485,7 @@ void env_fetch_from() {
 }
 
 // env>>store:at:in:
-void env_store_at_in() {
+void inline env_store_at_in() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>store:at:in:\n");
@@ -490,7 +508,7 @@ void env_store_at_in() {
 }
 
 // env>>subScope:key:
-void env_subscope() {
+void inline env_subscope() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>subScope:key:\n");
@@ -510,7 +528,7 @@ void env_subscope() {
 }
 
 // env>>env:parent:
-void env_set_env_parent() {
+void inline env_set_env_parent() {
     debug("env>>env:parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
@@ -531,7 +549,7 @@ void env_set_env_parent() {
 }
 
 // env>>parent:
-void env_set_parent() {
+void inline env_set_parent() {
     debug("env>>parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
@@ -548,7 +566,7 @@ void env_set_parent() {
 }
 
 // env>>parent
-void env_parent() {
+void inline env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
@@ -558,6 +576,18 @@ void env_parent() {
     return_from_context(receiver);
 }
 
+void env_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, FETCH_FROM,       env_fetch_from);
+    if_selector(selector, STORE_AT_IN,      env_store_at_in);
+    if_selector(selector, SUBSCOPE_KEY,     env_subscope);
+    if_selector(selector, ENV_SET_PARENT,   env_set_env_parent);
+    if_selector(selector, PARENT,           env_set_parent);
+    if_selector(selector, ENV_PARENT,       env_parent);
+    assert(NULL);
+}
 // iscope_class>>env:new:size:
 void iscope_new() {
     debug("iscopecls>>env:new:size:\n");

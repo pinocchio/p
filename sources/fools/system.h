@@ -39,20 +39,10 @@ extern void ilist_dispatch();
 extern void icall_dispatch();
 extern void iconst_dispatch();
 extern void iassign_dispatch();
-
-extern void ivar_eval();
-extern void ivar_assign();
-
-extern void icapture_eval();
-
+extern void ivar_dispatch();
+extern void icapture_dispatch();
 extern void appcall_dispatch();
-
-extern void env_fetch_from();
-extern void env_store_at_in();
-extern void env_subscope();
-extern void env_parent();
-extern void env_set_parent();
-extern void env_set_env_parent();
+extern void env_dispatch();
 
 extern void iscope_new();
 

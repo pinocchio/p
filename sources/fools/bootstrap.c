@@ -61,28 +61,16 @@ fools_object bootstrap() {
 
     bootstrap_symbols();
 
-    fools_system->ilist_class   = wrap_dispatcher(ilist_dispatch);
-    fools_system->iconst_class  = wrap_dispatcher(iconst_dispatch);
-    fools_system->icall_class   = wrap_dispatcher(icall_dispatch);
-    fools_system->iassign_class = wrap_dispatcher(iassign_dispatch);
-
-    fools_system->ivar_class = make_native_class(3);
-    define_native(ivar_class, EVAL,                     ivar_eval);
-    define_native(ivar_class, ASSIGN_IN,                ivar_assign);
-    define_native(ivar_class, PRE_EVAL_ENV,             pre_eval_env);
-
-    fools_system->icapture_class = make_native_class(1);
-    define_native(icapture_class, EVAL,                 icapture_eval);
+    fools_system->ilist_class       = wrap_dispatcher(ilist_dispatch);
+    fools_system->iconst_class      = wrap_dispatcher(iconst_dispatch);
+    fools_system->icall_class       = wrap_dispatcher(icall_dispatch);
+    fools_system->iassign_class     = wrap_dispatcher(iassign_dispatch);
+    fools_system->ivar_class        = wrap_dispatcher(ivar_dispatch);
+    fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
 
     fools_system->icapture = (object)make_icapture();
 
-    fools_system->env_class = make_native_class(6);
-    define_native(env_class, FETCH_FROM,                env_fetch_from);
-    define_native(env_class, STORE_AT_IN,               env_store_at_in);
-    define_native(env_class, SUBSCOPE_KEY,              env_subscope);
-    define_native(env_class, ENV_SET_PARENT,            env_set_env_parent);
-    define_native(env_class, PARENT,                    env_set_parent);
-    define_native(env_class, ENV_PARENT,                env_parent);
+    fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
     fools_system->iscope_metaclass = make_native_class(1);
     define_native(iscope_metaclass, ENV_NEW_SIZE,       iscope_new);
