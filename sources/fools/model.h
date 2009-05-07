@@ -148,7 +148,7 @@ struct fools {
 
     // Evaluation related classes
     native_class_object ilist_class;
-    native_class_object icall_class;
+    object icall_class;
     native_class_object iconst_class;
     native_class_object ivar_class;
     native_class_object iassign_class;

@@ -20,6 +20,8 @@ void inline do_define_native(native_class_object cls,
                 (object)make_native(native));
 }
 
+#define wrap_dispatcher(dispatch) (object)make_object(1, (object)make_native(dispatch))
+
 #define define_symbol(idx, value)\
     raw_array_at_put(fools_system->symbols_known_to_the_vm,\
                      idx,\
@@ -54,12 +56,6 @@ fools_object bootstrap() {
 
     fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
 
-// currently broken.
-//    fools_system->dict_class = make_native_class(2);
-//    header(fools_system->dict_class->natives) = (object)fools_system->dict_class;
-//    define_native(dict_class, "at:",                    prim_dict_at);
-//    define_native(dict_class, "at:put:",                prim_dict_at_put);
-
     fools_system->string_class = make_native_class(0);
     fools_system->array_class = make_native_class(0);
 
@@ -73,9 +69,7 @@ fools_object bootstrap() {
     define_native(iconst_class, EVAL,                   iconst_eval);
     define_native(iconst_class, PRE_EVAL_ENV,           pre_eval_env);
 
-    fools_system->icall_class = make_native_class(2);
-    define_native(icall_class, EVAL,                    icall_eval);
-    define_native(icall_class, PRE_EVAL_ENV,            pre_eval_env);
+    fools_system->icall_class = wrap_dispatcher(icall_dispatch);
 
     fools_system->iassign_class = make_native_class(2);
     define_native(iassign_class, EVAL,                  iassign_eval);

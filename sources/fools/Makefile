@@ -33,7 +33,7 @@ fib: $(OBJECTS) fib.o
 	./fib
 
 profile: 
-	$(MAKE) CFLAGS="-g -O1 -pg $(CFLAGS)" LDFLAGS="-pg $(LDFLAGS)" $(TARGET)
+	$(MAKE) CFLAGS="-pg $(CFLAGS)" LDFLAGS="-pg $(LDFLAGS)" $(TARGET)
 
 clean:
 	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) make.depend

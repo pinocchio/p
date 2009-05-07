@@ -38,8 +38,7 @@ extern void pre_eval_env();
 extern void ilist_eval();
 extern void ilist_continue_eval();
 
-extern void icall_eval();
-extern void icall_invoke_env();
+extern void icall_dispatch();
 
 extern void iconst_eval();
 

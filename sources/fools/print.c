@@ -45,7 +45,7 @@ void print_object(object o) {
         return;
     }
 
-    if (header(o.pointer).native_class == fools_system->icall_class) {
+    if (pheader(o.pointer) == fools_system->icall_class.pointer) {
         printf("icall\n");
         return;
     }
