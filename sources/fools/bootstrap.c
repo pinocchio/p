@@ -61,13 +61,10 @@ fools_object bootstrap() {
 
     bootstrap_symbols();
 
-    fools_system->ilist_class = wrap_dispatcher(ilist_dispatch);
-    fools_system->iconst_class = wrap_dispatcher(iconst_dispatch);
-    fools_system->icall_class = wrap_dispatcher(icall_dispatch);
-
-    fools_system->iassign_class = make_native_class(2);
-    define_native(iassign_class, EVAL,                  iassign_eval);
-    define_native(iassign_class, PRE_EVAL_ENV,          pre_eval_env);
+    fools_system->ilist_class   = wrap_dispatcher(ilist_dispatch);
+    fools_system->iconst_class  = wrap_dispatcher(iconst_dispatch);
+    fools_system->icall_class   = wrap_dispatcher(icall_dispatch);
+    fools_system->iassign_class = wrap_dispatcher(iassign_dispatch);
 
     fools_system->ivar_class = make_native_class(3);
     define_native(ivar_class, EVAL,                     ivar_eval);

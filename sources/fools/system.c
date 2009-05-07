@@ -132,7 +132,7 @@ void ilist_dispatch() {
 }
 
 // iconst>>eval:
-void iconst_eval() {
+void inline iconst_eval() {
     context_object iconst_context = get_context();
     iconst_object iconst = header(iconst_context).iconst;
 
@@ -263,7 +263,7 @@ void appcall_dispatch() {
 }
 
 // iassign>>eval:
-void iassign_eval() {
+void inline iassign_eval() {
     context_object iassign_context = get_context();
     assert_argsize(iassign_context, 2);
 
@@ -285,6 +285,15 @@ void iassign_eval() {
     debug("ret>>iassign>>eval:\n");
 
     //set_transfer(iassign_context);
+}
+
+void iassign_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL,         iassign_eval);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    assert(NULL);
 }
 
 // ivar>>assign:in:

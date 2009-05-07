@@ -38,8 +38,7 @@ extern void pre_eval_env();
 extern void ilist_dispatch();
 extern void icall_dispatch();
 extern void iconst_dispatch();
-
-extern void iassign_eval();
+extern void iassign_dispatch();
 
 extern void ivar_eval();
 extern void ivar_assign();
