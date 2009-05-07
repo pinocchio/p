@@ -25,7 +25,6 @@ void inline do_define_native(native_class_object cls,
     
 void bootstrap_symbols() {
     define_symbol(INTERPRET,            "interpret:");
-    define_symbol(RETURN_ENV_CONTINUE,  "return:env:continue:");
     define_symbol(EVAL,                 "eval:");
     define_symbol(PRE_EVAL_ENV,         "preEval:env:");
     define_symbol(ASSIGN_IN,            "assign:in:");
@@ -65,8 +64,7 @@ fools_object bootstrap() {
 
     bootstrap_symbols();
 
-    fools_system->ilist_class = make_native_class(3);
-    define_native(ilist_class, RETURN_ENV_CONTINUE,     ilist_continue_eval);
+    fools_system->ilist_class = make_native_class(2);
     define_native(ilist_class, EVAL,                    ilist_eval);
     define_native(ilist_class, PRE_EVAL_ENV,            pre_eval_env);
     

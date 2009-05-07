@@ -10,7 +10,6 @@ enum SYMBOL {
     // Meta-contexts
     INTERPRET,
     // General purpose
-    RETURN_ENV_CONTINUE,
     EVAL,
     PRE_EVAL_ENV,
     // Variable
@@ -30,6 +29,6 @@ enum SYMBOL {
     SCOPE_IN_ENV
 };
 
-#define NBR_SYMBOLS 15
+#define NBR_SYMBOLS 14
 
 #endif // BOOTSTRAP_H
