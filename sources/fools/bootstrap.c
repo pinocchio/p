@@ -21,10 +21,11 @@ void inline do_define_native(native_class_object cls,
 }
 
 #define define_symbol(idx, value)\
-    array_at_put(fools_system->symbols_known_to_the_vm, idx, (object)make_string(value))
+    raw_array_at_put(fools_system->symbols_known_to_the_vm,\
+                     idx,\
+                     (object)make_string(value))
     
 void bootstrap_symbols() {
-    define_symbol(INTERPRET,            "interpret:");
     define_symbol(EVAL,                 "eval:");
     define_symbol(PRE_EVAL_ENV,         "preEval:env:");
     define_symbol(ASSIGN_IN,            "assign:in:");

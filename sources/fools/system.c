@@ -141,14 +141,15 @@ void icall_eval() {
     icall_object icall = header(icall_context).icall;
 
     object env = argument_at(icall_context, 1);
+    set_argument(icall_context, 0, env);
+    icall_context->code = &icall_invoke_env;
+    
+    context_object context = make_context(icall->interpreter, 2);
+    set_message(context, EVAL);
+    set_argument(context, 1, env);
+    context->return_context = (object)icall_context;
 
-    context_object context = make_context((object)icall, 2);
-    set_argument(context, 0, env);
-    context->code = &icall_invoke_env;
-    context->return_context = icall_context->return_context;
-
-    new_target(icall_context, icall->interpreter);
-    icall_context->return_context   = (object)context;
+    set_transfer(context);
 
     debug("ret>>icall>>eval:\n");
 }
@@ -179,7 +180,6 @@ void icall_invoke_env() {
     set_argument(icall_context, 1, env);
 
     debug("ret>>icall>>invoke:env:\n");
-    //set_transfer(context);
 }
 
 // appcall>>eval:

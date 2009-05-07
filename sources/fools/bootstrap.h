@@ -7,8 +7,6 @@ extern fools_object fools_system;
 extern fools_object bootstrap();
 
 enum SYMBOL {
-    // Meta-contexts
-    INTERPRET,
     // General purpose
     EVAL,
     PRE_EVAL_ENV,
@@ -29,6 +27,6 @@ enum SYMBOL {
     SCOPE_IN_ENV
 };
 
-#define NBR_SYMBOLS 14
+#define NBR_SYMBOLS 13
 
 #endif // BOOTSTRAP_H
