@@ -16,6 +16,8 @@
                PINC(FOOLS_ALLOC(header_size + sizeof(layout[size]))))
 
 #define header(o) (*(object*)PDEC(o))
+#define pheader(o) header(o).pointer
+#define ntarget(o) native_target((o).native)
 
 struct env;
 struct variable_object;

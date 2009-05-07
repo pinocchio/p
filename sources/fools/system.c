@@ -8,9 +8,6 @@
 #define NDEBUG 1
 #define debug if (!NDEBUG) printf
 
-#define pheader(o) header(o).pointer
-#define ntarget(o) native_target(((object)o).native)
-
 // Context handling
 
 context_object global_context;
@@ -31,6 +28,16 @@ context_object inline get_context() {
     return global_context;
 }
 
+void inline new_target(context_object context, object target) {
+    header(context) = target;
+    context->code = header(pheader(target.pointer));
+}
+
+void inline set_new_message(context_object context, int index) {
+    context->code = header(pheader(pheader(context)));
+    set_message(context, index);
+}
+
 
 // Transferring primitives.
 
@@ -48,27 +55,9 @@ void inline native() {
 void inline transfer(context_object context) {
 
     global_context = context;
-    object action;
 
     while (((object)global_context).nil != fools_system->nil) {
-
-        if (global_context->code.nil == fools_system->nil) {
-            // call -> object -> class -> C
-            action = (object)pheader(pheader(pheader(global_context)));
-        } else {
-            action = global_context->code;
-            // don't keep pointers for future use.
-            global_context->code = (object)fools_system->nil;
-        }
-
-        ntarget(action)();
-
-        //while (pheader(pheader(pheader(global_context)))
-        //         != fools_system->native.pointer) {
-        //    global_context = make_meta_context(global_context);
-        //}
-
-        //native();
+        ntarget(global_context->code)();
     }
 }
 
@@ -88,7 +77,7 @@ void ilist_eval() {
 
     if (number_value(ilist->size) == 1) {
         object instruction = (object)raw_ilist_at(ilist, 0);
-        header(ilist_context) = instruction;
+        new_target(ilist_context, instruction);
         return;
     }
 
@@ -131,7 +120,7 @@ void ilist_continue_eval() {
     }
     
     object instruction = (object)raw_ilist_at(ilist, index);
-    header(context) = instruction;
+    new_target(context, instruction);
 
     set_message(context, EVAL);
     set_argument(context, 1, env);
@@ -168,7 +157,7 @@ void icall_eval() {
     set_argument(context, 2, env);
     context->return_context = icall_context->return_context;
 
-    header(icall_context)           = icall->interpreter;
+    new_target(icall_context, icall->interpreter);
     icall_context->return_context   = (object)context;
 
     debug("ret>>icall>>eval:\n");
@@ -186,7 +175,7 @@ void icall_invoke_env() {
     object interpreter  = argument_at(icall_context, 1);
     object env          = argument_at(icall_context, 2);
 
-    header(icall_context) = interpreter;
+    new_target(icall_context, interpreter);
 
     // XXX Do an ensuring copy! Check it's an array!
     int argsize = number_value(array_size(icall->arguments));
@@ -217,7 +206,7 @@ void appcall_invoke() {
     object interpreter  = argument_at(appcall_context, 1);
     object env          = argument_at(appcall_context, 2);
 
-    header(appcall_context) = interpreter;
+    new_target(appcall_context, interpreter);
     set_message(appcall_context, EVAL_WITHARGUMENTS);
     set_argument(appcall_context, 1, env);
     set_argument(appcall_context, 2, (object)appcall->arguments);
@@ -238,7 +227,7 @@ void iassign_eval() {
     
     object env = argument_at(iassign_context, 1);
 
-    header(iassign_context)     = iassign->expression;
+    new_target(iassign_context, iassign->expression);
 
     context_object context = make_context((object)iassign->variable, 3);
     set_message(context, ASSIGN_IN);
@@ -264,7 +253,7 @@ void ivar_assign() {
     object value    = argument_at(ivar_context, 1);
     object env      = argument_at(ivar_context, 2);
 
-    header(ivar_context) = env;
+    new_target(ivar_context, env);
     ivar_context->arguments = make_array(4);
     set_message(ivar_context, STORE_AT_IN);
     set_argument(ivar_context, 1, value);
@@ -288,7 +277,7 @@ void pre_eval_env() {
     set_argument(context, 1, env);
 
     receiver->arguments = make_array(2);
-    set_message(receiver, EVAL);
+    set_new_message(receiver, EVAL);
 
     context->return_context = (object)receiver;
 
@@ -306,7 +295,7 @@ void ivar_eval() {
 
     object env = argument_at(ivar_context, 1);
 
-    header(ivar_context) = env;
+    new_target(ivar_context, env);
     ivar_context->arguments = make_array(3);
     set_message(ivar_context, FETCH_FROM);
     set_argument(ivar_context, 1, (object)ivar->index);
@@ -336,7 +325,7 @@ void iscoped_eval_arguments() {
 
     context->return_context = (object)iscoped_context;
     
-    set_message(iscoped_context, DOEVAL_WITHARGUMENTS);
+    set_new_message(iscoped_context, DOEVAL_WITHARGUMENTS);
 
     debug("ret>>iscoped>>eval:withArguments:\n");
     set_transfer(context);
@@ -364,7 +353,7 @@ void iscoped_eval() {
     }
 
     // we just eval the attached expression.
-    header(iscoped_context) = iscoped->expression;
+    new_target(iscoped_context, iscoped->expression);
     iscoped_context->arguments = make_array(2);
     set_message(iscoped_context, EVAL);
     set_argument(iscoped_context, 1, env);
@@ -417,7 +406,7 @@ void env_fetch_from() {
     if (env->parent.nil == fools_system->nil) {
         assert(NULL); // XXX should go to error-handler here.
     }
-    header(receiver) = env->parent;
+    new_target(receiver, env->parent);
     debug("ret>>env>>fetch:from:\n");
     set_transfer(receiver);
 }
@@ -440,12 +429,12 @@ void env_store_at_in() {
     if (env->parent.nil == fools_system->nil) {
         return;
     }
-    header(receiver) = env->parent;
+    new_target(receiver, env->parent);
     debug("ret>>env>>store:at:in:\n");
     set_transfer(receiver);
 }
 
-// env>>subScope:
+// env>>subScope:key:
 void env_subscope() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
@@ -480,7 +469,7 @@ void env_set_env_parent() {
 
     context->return_context = (object)receiver;
 
-    set_message(receiver, PARENT);
+    set_new_message(receiver, PARENT);
 
     debug("ret>>env>>env:parent:\n");
     set_transfer(context);
@@ -545,12 +534,11 @@ void with_native_class_lookup() {
         debug("non-native: %s sent \n",
                 selector.string->value);
         //header(class_context) = class->class;
-        exit(0);
+        assert(NULL);
     } else {
         debug("native: %s\n", selector.string->value);
         receiver_context->code = native;
     }
-    //set_transfer(receiver_context);
 }
 
 // Function bootstrapping
