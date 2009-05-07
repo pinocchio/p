@@ -130,7 +130,7 @@ struct native {
 struct context {
     array_object        arguments;
     object              return_context;
-    object              code;
+    transfer_target     code;
 };
 
 struct fools {

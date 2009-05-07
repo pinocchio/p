@@ -30,11 +30,11 @@ context_object inline get_context() {
 
 void inline new_target(context_object context, object target) {
     header(context) = target;
-    context->code = header(pheader(target.pointer));
+    context->code = ntarget(header(pheader(target.pointer)));
 }
 
 void inline set_new_message(context_object context, int index) {
-    context->code = header(pheader(pheader(context)));
+    context->code = ntarget(header(pheader(pheader(context))));
     set_message(context, index);
 }
 
@@ -45,11 +45,11 @@ void inline native() {
     // Finds the code which was tagged with native and executes it.
     // Code tagged with native has to know by itself on which level it
     // executes!
-    pointer code = (pointer)global_context;
-    while (pheader(code) != ((object)fools_system->native).pointer) {
-        code = pheader(code);
+    object code = (object)global_context;
+    while (pheader(code.pointer) != ((object)fools_system->native).pointer) {
+        code = header(code.pointer);
     }
-    global_context->code = (object)code;
+    global_context->code = ntarget(code);
 }
 
 void inline transfer(context_object context) {
@@ -57,7 +57,7 @@ void inline transfer(context_object context) {
     global_context = context;
 
     while (((object)global_context).nil != fools_system->nil) {
-        ntarget(global_context->code)();
+        global_context->code();
     }
 }
 
@@ -537,7 +537,7 @@ void with_native_class_lookup() {
         assert(NULL);
     } else {
         debug("native: %s\n", selector.string->value);
-        receiver_context->code = native;
+        receiver_context->code = ntarget(native);
     }
 }
 
