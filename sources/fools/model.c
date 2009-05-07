@@ -214,8 +214,12 @@ void inline env_at_put(env_object env, int index, object value) {
 }
 
 void inline set_message(context_object context, int index) {
-    context->code = ntarget(header(pheader(pheader(context))));
     raw_array_at_put(context->arguments, 0, symbol_known_to_the_vm(index));
+}
+
+void inline set_new_message(context_object context, int index) {
+    context->code = ntarget(header(pheader(pheader(context))));
+    set_message(context, index);
 }
 
 void inline set_argument(context_object context, int index, object value) {

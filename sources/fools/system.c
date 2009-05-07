@@ -33,12 +33,6 @@ void inline new_target(context_object context, object target) {
     context->code = ntarget(header(pheader(target.pointer)));
 }
 
-void inline set_new_message(context_object context, int index) {
-    context->code = ntarget(header(pheader(pheader(context))));
-    set_message(context, index);
-}
-
-
 // Transferring primitives.
 
 void inline native() {
@@ -98,12 +92,8 @@ void ilist_eval() {
 
 // ilist>>return:env:continue:
 void ilist_continue_eval() {
-    // XXX Breaking encapsulation without testing.
-    // Test arguments!
     context_object ilist_context = get_context();
-    assert_argsize(ilist_context, 4);
     int index = number_value(argument_at(ilist_context, 3).number);
-    debug("ilist>>return:env:continue: %i\n", index);
 
     ilist_object ilist = header(ilist_context).ilist;
     int size = number_value(ilist->size) - 1;
@@ -167,7 +157,6 @@ void icall_eval() {
 void icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
-    assert_argsize(icall_context, 2);
 
     icall_object icall  = header(icall_context).icall;
 
@@ -218,10 +207,8 @@ void appcall_eval() {
 void appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
-    assert_argsize(appcall_context, 2);
 
     appcall_object appcall  = header(appcall_context).appcall;
-
 
     object env          = argument_at(appcall_context, 0);
     object expression   = argument_at(appcall_context, 1);

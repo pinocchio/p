@@ -60,7 +60,7 @@ void scheme_true_func() {
 
     header(context) = if_true;
     context->arguments = make_array(2);
-    set_message(context, EVAL);
+    set_new_message(context, EVAL);
     set_argument(context, 1, env);
 
     set_transfer(context);
@@ -78,7 +78,7 @@ void scheme_false_func() {
 
     header(context) = if_false;
     context->arguments = make_array(2);
-    set_message(context, EVAL);
+    set_new_message(context, EVAL);
     set_argument(context, 1, env);
 
     set_transfer(context);
