@@ -67,6 +67,7 @@ fools_object bootstrap() {
     fools_system->iassign_class     = wrap_dispatcher(iassign_dispatch);
     fools_system->ivar_class        = wrap_dispatcher(ivar_dispatch);
     fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
+    fools_system->iscope_class      = wrap_dispatcher(iscoped_dispatch);
 
     fools_system->icapture = (object)make_icapture();
 
@@ -77,10 +78,6 @@ fools_object bootstrap() {
 
     fools_system->iscope = make_empty_object(iscope_metaclass);
 
-    fools_system->iscope_class = make_native_class(3);
-    define_native(iscope_class, EVAL_WITHARGUMENTS,     iscoped_eval_arguments);
-    define_native(iscope_class, DOEVAL_WITHARGUMENTS,   iscoped_eval);
-    define_native(iscope_class, SCOPE_IN_ENV,           iscoped_scope);
 
     fools_system->appcall_class = wrap_dispatcher(appcall_dispatch);
 

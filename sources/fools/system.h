@@ -43,12 +43,9 @@ extern void ivar_dispatch();
 extern void icapture_dispatch();
 extern void appcall_dispatch();
 extern void env_dispatch();
+extern void iscoped_dispatch();
 
 extern void iscope_new();
-
-extern void iscoped_eval_arguments();
-extern void iscoped_eval();
-extern void iscoped_scope();
 
 // Convenience function for composing primitives into closures.
 extern object inline make_func(array_object arguments, object body);

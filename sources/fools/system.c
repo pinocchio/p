@@ -370,32 +370,6 @@ void pre_eval_env() {
     set_transfer(context);
 }
 
-// iscoped>>eval:withArguments:
-void iscoped_eval_arguments() {
-    // XXX Breaking encapsulation without testing.
-    // Test arguments!
-    debug("iscoped>>eval:withArguments:\n");
-    context_object iscoped_context = get_context();
-    assert_argsize(iscoped_context, 3);
-
-    iscoped_object iscoped = header(iscoped_context).iscoped;
-
-    object env = argument_at(iscoped_context, 1);
-    int argsize = number_value(iscoped->argsize.number);
-
-    context_object context = make_context(env, 3);
-    set_message(context, SUBSCOPE_KEY);
-    set_argument(context, 1, (object)make_number(argsize + 2));
-    set_argument(context, 2, iscoped->expression);
-
-    context->return_context = (object)iscoped_context;
-    
-    set_new_message(iscoped_context, DOEVAL_WITHARGUMENTS);
-
-    debug("ret>>iscoped>>eval:withArguments:\n");
-    set_transfer(context);
-}
-
 // iscoped>>eval:
 void iscoped_eval() {
     debug("iscoped>>doEval:withArguments\n");
@@ -427,8 +401,35 @@ void iscoped_eval() {
     //set_transfer(iscoped_context);
 }
 
+// iscoped>>eval:withArguments:
+void inline iscoped_eval_arguments() {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
+    debug("iscoped>>eval:withArguments:\n");
+    context_object iscoped_context = get_context();
+    assert_argsize(iscoped_context, 3);
+
+    iscoped_object iscoped = header(iscoped_context).iscoped;
+
+    object env = argument_at(iscoped_context, 1);
+    int argsize = number_value(iscoped->argsize.number);
+
+    context_object context = make_context(env, 3);
+    set_message(context, SUBSCOPE_KEY);
+    set_argument(context, 1, (object)make_number(argsize + 2));
+    set_argument(context, 2, iscoped->expression);
+
+    context->return_context = (object)iscoped_context;
+    
+    iscoped_context->code = &iscoped_eval;
+
+    debug("ret>>iscoped>>eval:withArguments:\n");
+    set_transfer(context);
+}
+
+
 // iscoped>>scope
-void iscoped_scope() {
+void inline iscoped_scope() {
     debug("iscoped>>scope\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
@@ -436,6 +437,15 @@ void iscoped_scope() {
     set_argument(return_context(receiver), 1, iscoped->scope);
     return_from_context(receiver);
     debug("ret>>iscoped>>scope\n");
+}
+
+void iscoped_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_eval_arguments);
+    if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
+    assert(NULL);
 }
 
 // icapture>>eval:
