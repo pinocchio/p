@@ -364,7 +364,7 @@ SETUP(test_new_iscoped)
 
     iscoped_object iscope = return_value(rc).iscoped;
 
-    assert(header(iscope).native_class == fools_system->iscope_class);
+    assert(pheader(iscope) == fools_system->iscope_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
     assert(iscope->scope.env == start);
 
@@ -480,7 +480,7 @@ SETUP(test_make_function_no_args)
     transfer(ci);
 
     object result = return_value(rc);
-    assert(header(result.pointer).native_class == fools_system->iscope_class);
+    assert(pheader(result.pointer) == fools_system->iscope_class.pointer);
     assert(result.iscoped->scope.env == env);
 
 }
@@ -634,8 +634,8 @@ SETUP(test_eval_nested_function)
     
     object nested_function = return_value(rc);
 
-    assert(header(nested_function.pointer).native_class ==
-           fools_system->iscope_class);
+    assert(pheader(nested_function.pointer) ==
+           fools_system->iscope_class.pointer);
 
     iconst = (object)make_iconst(nested_function);
     appcall = make_appcall(iconst, 1);

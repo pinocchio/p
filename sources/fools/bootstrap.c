@@ -12,10 +12,10 @@ fools_object fools_system;
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)
 
-void inline do_define_native(native_class_object cls,
+void inline do_define_native(object cls,
                              int index,
                              transfer_target native) {
-    dict_at_put(cls->natives,
+    dict_at_put(cls.native_class->natives,
                 symbol_known_to_the_vm(index),
                 (object)make_native(native));
 }
@@ -103,11 +103,9 @@ fools_object bootstrap() {
     define_native(iscope_class, DOEVAL_WITHARGUMENTS,   iscoped_eval);
     define_native(iscope_class, SCOPE_IN_ENV,           iscoped_scope);
 
-    fools_system->appcall_class = make_native_class(2);
-    define_native(appcall_class, EVAL,                  appcall_eval);
-    define_native(appcall_class, PRE_EVAL_ENV,          pre_eval_env);
+    fools_system->appcall_class = wrap_dispatcher(appcall_dispatch);
 
-    fools_system->number_class = make_native_class(4);
+    fools_system->number_class = make_native_class(0);
 
     return fools_system;
 }

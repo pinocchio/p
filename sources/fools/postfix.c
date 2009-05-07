@@ -4,8 +4,8 @@
     object scoped_main;
     eval_in_scope(lambda_1_x, env, scoped_main);
 
-    assert(header(scoped_main.pointer).native_class ==
-           fools_system->iscope_class);
+    assert(pheader(scoped_main.pointer) ==
+           fools_system->iscope_class.pointer);
 
     object const_scoped_main = (object)make_iconst(scoped_main);
 

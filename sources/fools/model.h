@@ -147,28 +147,28 @@ struct fools {
     array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
-    native_class_object ilist_class;
+    object ilist_class;
     object icall_class;
-    native_class_object iconst_class;
-    native_class_object ivar_class;
-    native_class_object iassign_class;
-    native_class_object icapture_class;
-    native_class_object iscope_metaclass;
-    native_class_object iscope_class;
-    native_class_object appcall_class;
-    native_class_object env_class;
-    native_class_object dict_class;
+    object iconst_class;
+    object ivar_class;
+    object iassign_class;
+    object icapture_class;
+    object iscope_metaclass;
+    object iscope_class;
+    object appcall_class;
+    object env_class;
+    object dict_class;
 
     // Minimal native classes
-    native_class_object number_class;
-    native_class_object string_class;
-    native_class_object array_class;
-    native_class_object true_class;
-    native_class_object false_class;
+    object number_class;
+    object string_class;
+    object array_class;
+    object true_class;
+    object false_class;
 };
 
 extern variable_object          make_object(int size, object interpreter);
-extern native_class_object      make_native_class(int size);
+extern object                   make_native_class(int size);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
