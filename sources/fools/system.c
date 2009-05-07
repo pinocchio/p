@@ -81,15 +81,15 @@ void ilist_eval() {
         return;
     }
 
-    context_object rec = make_context((object)ilist, 5);
+    context_object rec = make_context((object)ilist, 4);
 
     object environment = argument_at(ilist_context, 1);
 
-    set_message(rec, RETURN_ENV_CONTINUE);
+    // optimization, reuse object.
+    set_argument(rec, 0, (object)ilist_context); 
     set_argument(rec, 2, environment);
     set_argument(rec, 3, (object)make_number(0));
-    // optimization, reuse object.
-    set_argument(rec, 4, (object)ilist_context); 
+    rec->code = &ilist_continue_eval;
 
     rec->return_context = ilist_context->return_context;
 
@@ -101,7 +101,7 @@ void ilist_continue_eval() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     context_object ilist_context = get_context();
-    assert_argsize(ilist_context, 5);
+    assert_argsize(ilist_context, 4);
     int index = number_value(argument_at(ilist_context, 3).number);
     debug("ilist>>return:env:continue: %i\n", index);
 
@@ -109,7 +109,7 @@ void ilist_continue_eval() {
     int size = number_value(ilist->size) - 1;
 
     object env = argument_at(ilist_context, 2);
-    context_object context = argument_at(ilist_context, 4).context;
+    context_object context = argument_at(ilist_context, 0).context;
 
     if (index < size) {
         set_argument(ilist_context, 3, (object)make_number(index + 1));
@@ -152,9 +152,9 @@ void icall_eval() {
 
     object env = argument_at(icall_context, 1);
 
-    context_object context = make_context((object)icall, 3);
-    set_message(context, INVOKE_ENV);
-    set_argument(context, 2, env);
+    context_object context = make_context((object)icall, 2);
+    set_argument(context, 0, env);
+    context->code = &icall_invoke_env;
     context->return_context = icall_context->return_context;
 
     new_target(icall_context, icall->interpreter);
@@ -167,13 +167,12 @@ void icall_eval() {
 void icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
-    assert_argsize(icall_context, 3);
+    assert_argsize(icall_context, 2);
 
     icall_object icall  = header(icall_context).icall;
 
-
+    object env          = argument_at(icall_context, 0);
     object interpreter  = argument_at(icall_context, 1);
-    object env          = argument_at(icall_context, 2);
 
     new_target(icall_context, interpreter);
 
@@ -194,19 +193,40 @@ void icall_invoke_env() {
     //set_transfer(context);
 }
 
+// appcall>>eval:
+void appcall_eval() {
+    debug("appcall>>eval:\n");
+    context_object appcall_context = get_context();
+    assert_argsize(appcall_context, 2);
+
+    appcall_object appcall = header(appcall_context).appcall;
+
+    object env = argument_at(appcall_context, 1);
+
+    context_object context = make_context((object)appcall, 3);
+    set_argument(context, 0, env);
+    context->code = &appcall_invoke;
+    context->return_context = appcall_context->return_context;
+
+    new_target(appcall_context, appcall->expression);
+    appcall_context->return_context   = (object)context;
+
+    debug("ret>>appcall>>eval:\n");
+}
+
 // appcall>>invoke:env:
 void appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
-    assert_argsize(appcall_context, 3);
+    assert_argsize(appcall_context, 2);
 
     appcall_object appcall  = header(appcall_context).appcall;
 
 
-    object interpreter  = argument_at(appcall_context, 1);
-    object env          = argument_at(appcall_context, 2);
+    object env          = argument_at(appcall_context, 0);
+    object expression   = argument_at(appcall_context, 1);
 
-    new_target(appcall_context, interpreter);
+    new_target(appcall_context, expression);
     set_message(appcall_context, EVAL_WITHARGUMENTS);
     set_argument(appcall_context, 1, env);
     set_argument(appcall_context, 2, (object)appcall->arguments);

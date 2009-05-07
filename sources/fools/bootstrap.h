@@ -13,7 +13,6 @@ enum SYMBOL {
     RETURN_ENV_CONTINUE,
     EVAL,
     PRE_EVAL_ENV,
-    INVOKE_ENV,
     // Variable
     ASSIGN_IN,
     FETCH_FROM,
@@ -31,6 +30,6 @@ enum SYMBOL {
     SCOPE_IN_ENV
 };
 
-#define NBR_SYMBOLS 16
+#define NBR_SYMBOLS 15
 
 #endif // BOOTSTRAP_H

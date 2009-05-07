@@ -28,7 +28,6 @@ void bootstrap_symbols() {
     define_symbol(RETURN_ENV_CONTINUE,  "return:env:continue:");
     define_symbol(EVAL,                 "eval:");
     define_symbol(PRE_EVAL_ENV,         "preEval:env:");
-    define_symbol(INVOKE_ENV,           "invoke:env:");
     define_symbol(ASSIGN_IN,            "assign:in:");
     define_symbol(FETCH_FROM,           "fetch:from:");
     define_symbol(STORE_AT_IN,          "store:at:in:");
@@ -75,9 +74,8 @@ fools_object bootstrap() {
     define_native(iconst_class, EVAL,                   iconst_eval);
     define_native(iconst_class, PRE_EVAL_ENV,           pre_eval_env);
 
-    fools_system->icall_class = make_native_class(3);
+    fools_system->icall_class = make_native_class(2);
     define_native(icall_class, EVAL,                    icall_eval);
-    define_native(icall_class, INVOKE_ENV,              icall_invoke_env);
     define_native(icall_class, PRE_EVAL_ENV,            pre_eval_env);
 
     fools_system->iassign_class = make_native_class(2);
@@ -112,9 +110,8 @@ fools_object bootstrap() {
     define_native(iscope_class, DOEVAL_WITHARGUMENTS,   iscoped_eval);
     define_native(iscope_class, SCOPE_IN_ENV,           iscoped_scope);
 
-    fools_system->appcall_class = make_native_class(3);
-    define_native(appcall_class, EVAL,                  icall_eval);
-    define_native(appcall_class, INVOKE_ENV,            appcall_invoke);
+    fools_system->appcall_class = make_native_class(2);
+    define_native(appcall_class, EVAL,                  appcall_eval);
     define_native(appcall_class, PRE_EVAL_ENV,          pre_eval_env);
 
     fools_system->number_class = make_native_class(4);

@@ -50,6 +50,7 @@ extern void ivar_assign();
 
 extern void icapture_eval();
 
+extern void appcall_eval();
 extern void appcall_invoke();
 
 extern void env_fetch_from();
