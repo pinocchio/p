@@ -35,12 +35,9 @@ extern context_object inline get_context();
 // Bootstrapping natives.
 extern void pre_eval_env();
 
-extern void ilist_eval();
-extern void ilist_continue_eval();
-
+extern void ilist_dispatch();
 extern void icall_dispatch();
-
-extern void iconst_eval();
+extern void iconst_dispatch();
 
 extern void iassign_eval();
 

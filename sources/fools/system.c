@@ -62,8 +62,36 @@ void inline transfer(context_object context) {
 
 // AST Handling
 
+// ilist>>return:env:continue:
+void ilist_continue_eval() {
+    context_object ilist_context = get_context();
+    int index = number_value(argument_at(ilist_context, 3).number);
+
+    ilist_object ilist = header(ilist_context).ilist;
+    int size = number_value(ilist->size) - 1;
+
+    object env = argument_at(ilist_context, 2);
+    context_object context = argument_at(ilist_context, 0).context;
+
+    if (index < size) {
+        set_argument(ilist_context, 3, (object)make_number(index + 1));
+        context->return_context = (object)ilist_context;
+    } else { // tailcall.
+        context->arguments = make_array(2);
+        context->return_context = ilist_context->return_context;
+    }
+    
+    object instruction = (object)raw_ilist_at(ilist, index);
+    new_target(context, instruction);
+
+    set_message(context, EVAL);
+    set_argument(context, 1, env);
+
+    set_transfer(context);
+}
+
 // ilist>>eval:
-void ilist_eval() {
+void inline ilist_eval() {
     debug("ilist>>eval:\n");
     context_object ilist_context = get_context();
     assert_argsize(ilist_context, 2);
@@ -94,32 +122,13 @@ void ilist_eval() {
     set_transfer(rec);
 }
 
-// ilist>>return:env:continue:
-void ilist_continue_eval() {
-    context_object ilist_context = get_context();
-    int index = number_value(argument_at(ilist_context, 3).number);
-
-    ilist_object ilist = header(ilist_context).ilist;
-    int size = number_value(ilist->size) - 1;
-
-    object env = argument_at(ilist_context, 2);
-    context_object context = argument_at(ilist_context, 0).context;
-
-    if (index < size) {
-        set_argument(ilist_context, 3, (object)make_number(index + 1));
-        context->return_context = (object)ilist_context;
-    } else { // tailcall.
-        context->arguments = make_array(2);
-        context->return_context = ilist_context->return_context;
-    }
-    
-    object instruction = (object)raw_ilist_at(ilist, index);
-    new_target(context, instruction);
-
-    set_message(context, EVAL);
-    set_argument(context, 1, env);
-
-    set_transfer(context);
+void ilist_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL,         ilist_eval);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    assert(NULL);
 }
 
 // iconst>>eval:
@@ -134,6 +143,15 @@ void iconst_eval() {
     debug("ret>>iconst>>eval:\n");
 
     return_from_context(iconst_context);
+}
+
+void iconst_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL,         iconst_eval);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    assert(NULL);
 }
 
 // icall>>invoke:env:
