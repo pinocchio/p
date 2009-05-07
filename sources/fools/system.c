@@ -598,9 +598,10 @@ void env_dispatch() {
     if_selector(selector, ENV_PARENT,       env_parent);
     assert(NULL);
 }
-// iscope_class>>env:new:size:
-void iscope_new() {
+// iscoped_class>>env:new:size:
+void inline iscoped_class_new() {
     debug("iscopecls>>env:new:size:\n");
+    printf("new iscoped\n");
     context_object iscope_context = get_context();
     assert_argsize(iscope_context, 4);
     iscoped_object iscoped =
@@ -615,6 +616,13 @@ void iscope_new() {
     return_from_context(iscope_context);
 }
 
+void iscoped_class_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, ENV_NEW_SIZE, iscoped_class_new);
+    assert(NULL);
+}
 // Native class handling
 
 void with_native_class_lookup() {

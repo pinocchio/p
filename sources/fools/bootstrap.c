@@ -68,18 +68,12 @@ fools_object bootstrap() {
     fools_system->ivar_class        = wrap_dispatcher(ivar_dispatch);
     fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
     fools_system->iscope_class      = wrap_dispatcher(iscoped_dispatch);
-
-    fools_system->icapture = (object)make_icapture();
-
+    fools_system->iscope_metaclass  = wrap_dispatcher(iscoped_class_dispatch);
+    fools_system->appcall_class     = wrap_dispatcher(appcall_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
-    fools_system->iscope_metaclass = make_native_class(1);
-    define_native(iscope_metaclass, ENV_NEW_SIZE,       iscope_new);
-
+    fools_system->icapture = (object)make_icapture();
     fools_system->iscope = make_empty_object(iscope_metaclass);
-
-
-    fools_system->appcall_class = wrap_dispatcher(appcall_dispatch);
 
     fools_system->number_class = make_native_class(0);
 
