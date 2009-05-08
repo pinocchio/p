@@ -9,7 +9,7 @@
 #define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
 
 #define if_selector(selector, symb, todo)\
-    if (selector.pointer == symbol_known_to_the_vm(symb).pointer)\
+    if (selector.pointer == symb.pointer)\
         return todo();
 
 int _indent_ = 0;

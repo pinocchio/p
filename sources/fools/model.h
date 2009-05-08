@@ -199,8 +199,8 @@ extern void             inline object_at_put(variable_object o,
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);
 extern context_object   inline return_context(context_object context);
-extern void             inline set_message(context_object context, int index);
-extern void             inline set_new_message(context_object context, int index);
+extern void             inline set_message(context_object context, object msg);
+extern void             inline set_new_message(context_object context, object msg);
 extern void             inline set_argument(context_object context, int index, object value);
 extern object           inline argument_at(context_object context, int index);
 extern message_object   inline make_message(int size);

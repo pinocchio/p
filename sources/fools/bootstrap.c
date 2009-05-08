@@ -4,7 +4,27 @@
 #include <ast.h>
 #include <assert.h>
 
+// System global
 fools_object fools_system;
+
+// Global symbols
+// General purpose
+object EVAL;
+object PRE_EVAL_ENV;
+// Variable
+object ASSIGN_IN;
+object FETCH_FROM;
+// Environment
+object STORE_AT_IN;
+object SUBSCOPE_KEY;
+object ENV_PARENT;
+object ENV_SET_PARENT;
+object PARENT;
+// Iscope_class
+object ENV_NEW_SIZE;
+// Iscope
+object EVAL_WITHARGUMENTS;
+object SCOPE_IN_ENV;
 
 #define define_native(cls, name, native)\
     do_define_native(fools_system->cls, name, &native)
@@ -22,10 +42,11 @@ void inline do_define_native(object cls,
 
 #define wrap_dispatcher(dispatch) (object)make_object(1, (object)make_native(dispatch))
 
-#define define_symbol(idx, value)\
-    raw_array_at_put(fools_system->symbols_known_to_the_vm,\
-                     idx,\
-                     (object)make_string(value))
+#define define_symbol(name, value)\
+    name = (object)make_string(value);
+    //raw_array_at_put(fools_system->symbols_known_to_the_vm,
+    //                 idx,
+    //                 name)
     
 void bootstrap_symbols() {
     define_symbol(EVAL,                 "eval:");
@@ -39,7 +60,6 @@ void bootstrap_symbols() {
     define_symbol(PARENT,               "parent:");
     define_symbol(ENV_NEW_SIZE,         "env:new:size:");
     define_symbol(EVAL_WITHARGUMENTS,   "eval:withArguments:");
-    define_symbol(DOEVAL_WITHARGUMENTS, "doEval:withArguments:");
     define_symbol(SCOPE_IN_ENV,         "scope:in:env:");
 }
 
