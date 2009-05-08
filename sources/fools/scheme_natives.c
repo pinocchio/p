@@ -143,9 +143,11 @@ void bootstrap_scheme() {
 
     env_object env = empty_env;
     eval_in_scope(scheme_smallerp, env, scheme_smallerp);
-    //scheme_smallerp = (object)make_iconst(scheme_smallerp);
     eval_in_scope(scheme_minus, env, scheme_minus);
-    //scheme_minus = (object)make_iconst(scheme_minus);
     eval_in_scope(scheme_plus, env, scheme_plus);
+    
+    // Remove once the compiler is up-to-date
+    //scheme_smallerp = (object)make_iconst(scheme_smallerp);
+    //scheme_minus = (object)make_iconst(scheme_minus);
     //scheme_plus = (object)make_iconst(scheme_plus);
 }
