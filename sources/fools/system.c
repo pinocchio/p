@@ -6,11 +6,28 @@
 #include <stdio.h>
 
 #define NDEBUG 1
-#define debug if (!NDEBUG) printf
+#define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
 
 #define if_selector(selector, symb, todo)\
     if (selector.pointer == symbol_known_to_the_vm(symb).pointer)\
         return todo();
+
+int _indent_ = 0;
+
+void indent() {
+    int i;
+    for (i = 0; i < _indent_; i++) {
+        printf("\t");
+    }
+}
+
+void inline inc() { if (!NDEBUG) _indent_++; }
+void inline dec() { if (!NDEBUG) _indent_--; }
+
+void doesnotunderstand(const char* class, object selector) {
+    printf("DNU: %s>>%s\n", class, selector.string->value);
+    assert(NULL);
+}
 
 // Context handling
 
@@ -79,6 +96,7 @@ void ilist_continue_eval() {
     } else { // tailcall.
         context->arguments = make_array(2);
         context->return_context = ilist_context->return_context;
+        dec();
     }
     
     object instruction = (object)raw_ilist_at(ilist, index);
@@ -107,6 +125,7 @@ void inline ilist_eval() {
         return;
     }
 
+
     context_object rec = make_context((object)ilist, 4);
 
     object environment = argument_at(ilist_context, 1);
@@ -116,10 +135,12 @@ void inline ilist_eval() {
     set_argument(rec, 2, environment);
     set_argument(rec, 3, (object)make_number(0));
     rec->code = &ilist_continue_eval;
-
     rec->return_context = ilist_context->return_context;
 
     set_transfer(rec);
+
+    debug("ret>>ilist>>eval:\n");
+    inc();
 }
 
 void ilist_dispatch() {
@@ -128,7 +149,7 @@ void ilist_dispatch() {
     object selector = message(context);
     if_selector(selector, EVAL,         ilist_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("ilist", selector);
 }
 
 // iconst>>eval:
@@ -136,7 +157,7 @@ void inline iconst_eval() {
     context_object iconst_context = get_context();
     iconst_object iconst = header(iconst_context).iconst;
 
-    debug("iconst>>eval\n");
+    debug("iconst>>eval: %p\n", iconst);
 
     set_argument(return_context(iconst_context), 1, iconst->constant);
 
@@ -151,7 +172,7 @@ void iconst_dispatch() {
     object selector = message(context);
     if_selector(selector, EVAL,         iconst_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("iconst", selector);
 }
 
 // icall>>invoke:env:
@@ -180,6 +201,7 @@ void inline icall_invoke_env() {
     set_argument(icall_context, 1, env);
 
     debug("ret>>icall>>invoke:env:\n");
+    dec();
 }
 
 // icall>>eval:
@@ -202,6 +224,7 @@ void inline icall_eval() {
     set_transfer(context);
 
     debug("ret>>icall>>eval:\n");
+    inc();
 }
 
 void icall_dispatch() {
@@ -210,7 +233,7 @@ void icall_dispatch() {
     object selector = message(context);
     if_selector(selector, EVAL,         icall_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("icall", selector);
 }
 
 // appcall>>invoke:env:
@@ -229,7 +252,7 @@ void appcall_invoke() {
     set_argument(appcall_context, 2, (object)appcall->arguments);
 
     debug("ret>>appcall>>invoke:env:\n");
-    set_transfer(appcall_context);
+    dec();
 }
 
 // appcall>>eval:
@@ -251,6 +274,7 @@ void appcall_eval() {
     appcall_context->return_context   = (object)context;
 
     debug("ret>>appcall>>eval:\n");
+    inc();
 }
 
 void appcall_dispatch() {
@@ -259,7 +283,7 @@ void appcall_dispatch() {
     object selector = message(context);
     if_selector(selector, EVAL,         appcall_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("appcall", selector);
 }
 
 // iassign>>eval:
@@ -293,7 +317,7 @@ void iassign_dispatch() {
     object selector = message(context);
     if_selector(selector, EVAL,         iassign_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("iassign", selector);
 }
 
 // ivar>>assign:in:
@@ -345,7 +369,7 @@ void ivar_dispatch() {
     if_selector(selector, EVAL,         ivar_eval);
     if_selector(selector, ASSIGN_IN,    ivar_assign);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    assert(NULL);
+    doesnotunderstand("ivar", selector);
 }
 
 // o>>preEval:env:
@@ -370,84 +394,6 @@ void pre_eval_env() {
     set_transfer(context);
 }
 
-// iscoped>>eval:
-void iscoped_eval() {
-    debug("iscoped>>doEval:withArguments\n");
-    context_object iscoped_context = get_context();
-    assert_argsize(iscoped_context, 3);
-
-    iscoped_object iscoped = header(iscoped_context).iscoped;
-
-    // filling in scope with interpreter + arguments.
-    // XXX have to do this by extending the continuation context!
-    object env          = argument_at(iscoped_context, 1);
-    array_object args   = argument_at(iscoped_context, 2).array;
-    env_at_put(env.env, 0, (object)iscoped);
-
-    int argsize = number_value(iscoped->argsize.number);
-
-    int i;
-    for (i = 0; i < argsize; i++) {
-        env_at_put(env.env, i + 1, array_at(args, i));
-    }
-
-    // we just eval the attached expression.
-    new_target(iscoped_context, iscoped->expression);
-    iscoped_context->arguments = make_array(2);
-    set_message(iscoped_context, EVAL);
-    set_argument(iscoped_context, 1, env);
-
-    debug("ret>>iscoped>>doEval:withArguments\n");
-    //set_transfer(iscoped_context);
-}
-
-// iscoped>>eval:withArguments:
-void inline iscoped_eval_arguments() {
-    // XXX Breaking encapsulation without testing.
-    // Test arguments!
-    debug("iscoped>>eval:withArguments:\n");
-    context_object iscoped_context = get_context();
-    assert_argsize(iscoped_context, 3);
-
-    iscoped_object iscoped = header(iscoped_context).iscoped;
-
-    object env = argument_at(iscoped_context, 1);
-    int argsize = number_value(iscoped->argsize.number);
-
-    context_object context = make_context(env, 3);
-    set_message(context, SUBSCOPE_KEY);
-    set_argument(context, 1, (object)make_number(argsize + 2));
-    set_argument(context, 2, iscoped->expression);
-
-    context->return_context = (object)iscoped_context;
-    
-    iscoped_context->code = &iscoped_eval;
-
-    debug("ret>>iscoped>>eval:withArguments:\n");
-    set_transfer(context);
-}
-
-
-// iscoped>>scope
-void inline iscoped_scope() {
-    debug("iscoped>>scope\n");
-    context_object receiver = get_context();
-    // arguments at: 0 -> selector
-    iscoped_object iscoped = header(receiver).iscoped;
-    set_argument(return_context(receiver), 1, iscoped->scope);
-    return_from_context(receiver);
-    debug("ret>>iscoped>>scope\n");
-}
-
-void iscoped_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
-    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_eval_arguments);
-    if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
-    assert(NULL);
-}
-
 // icapture>>eval:
 void inline icapture_eval() {
     context_object icapture_context = get_context();
@@ -468,7 +414,7 @@ void icapture_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, EVAL, icapture_eval);
-    assert(NULL);
+    doesnotunderstand("icapture", selector);
 }
 
 // env>>fetch:from:
@@ -596,12 +542,89 @@ void env_dispatch() {
     if_selector(selector, ENV_SET_PARENT,   env_set_env_parent);
     if_selector(selector, PARENT,           env_set_parent);
     if_selector(selector, ENV_PARENT,       env_parent);
-    assert(NULL);
+    doesnotunderstand("env", selector);
 }
+
+// iscoped>>eval:
+void iscoped_eval() {
+    debug("iscoped>>doEval:withArguments\n");
+    context_object iscoped_context = get_context();
+    assert_argsize(iscoped_context, 3);
+
+    iscoped_object iscoped = header(iscoped_context).iscoped;
+
+    // filling in scope with interpreter + arguments.
+    // XXX have to do this by extending the continuation context!
+    object env          = argument_at(iscoped_context, 1);
+    array_object args   = argument_at(iscoped_context, 2).array;
+    env_at_put(env.env, 0, (object)iscoped);
+
+    int argsize = number_value(iscoped->argsize.number);
+
+    int i;
+    for (i = 0; i < argsize; i++) {
+        env_at_put(env.env, i + 1, array_at(args, i));
+    }
+
+    // we just eval the attached expression.
+    new_target(iscoped_context, iscoped->expression);
+    iscoped_context->arguments = make_array(2);
+    set_message(iscoped_context, EVAL);
+    set_argument(iscoped_context, 1, env);
+
+    debug("ret>>iscoped>>doEval:withArguments\n");
+    //set_transfer(iscoped_context);
+}
+
+// iscoped>>eval:withArguments:
+void inline iscoped_eval_arguments() {
+    // XXX Breaking encapsulation without testing.
+    // Test arguments!
+    debug("iscoped>>eval:withArguments:\n");
+    context_object iscoped_context = get_context();
+    assert_argsize(iscoped_context, 3);
+
+    iscoped_object iscoped = header(iscoped_context).iscoped;
+
+    object env = argument_at(iscoped_context, 1);
+    int argsize = number_value(iscoped->argsize.number);
+
+    context_object context = make_context(env, 3);
+    set_message(context, SUBSCOPE_KEY);
+    set_argument(context, 1, (object)make_number(argsize + 2));
+    set_argument(context, 2, iscoped->expression);
+
+    context->return_context = (object)iscoped_context;
+    
+    iscoped_context->code = &iscoped_eval;
+
+    debug("ret>>iscoped>>eval:withArguments:\n");
+    set_transfer(context);
+}
+
+// iscoped>>scope
+void inline iscoped_scope() {
+    debug("iscoped>>scope\n");
+    context_object receiver = get_context();
+    // arguments at: 0 -> selector
+    iscoped_object iscoped = header(receiver).iscoped;
+    set_argument(return_context(receiver), 1, iscoped->scope);
+    return_from_context(receiver);
+    debug("ret>>iscoped>>scope\n");
+}
+
+void iscoped_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_eval_arguments);
+    if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
+    doesnotunderstand("iscoped", selector);
+}
+
 // iscoped_class>>env:new:size:
 void inline iscoped_class_new() {
     debug("iscopecls>>env:new:size:\n");
-    printf("new iscoped\n");
     context_object iscope_context = get_context();
     assert_argsize(iscope_context, 4);
     iscoped_object iscoped =
@@ -621,7 +644,7 @@ void iscoped_class_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, ENV_NEW_SIZE, iscoped_class_new);
-    assert(NULL);
+    doesnotunderstand("iscoped_class", selector);
 }
 // Native class handling
 

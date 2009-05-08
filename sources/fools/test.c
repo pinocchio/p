@@ -644,6 +644,8 @@ SETUP(test_eval_nested_function)
     make_eval_context(ci, appcall, env);
     ci->return_context = (object)rc;
 
+    printf("done building iscopes\n");
+
     transfer(ci);
 
     assert(number_value(return_value(rc).number) == 42);

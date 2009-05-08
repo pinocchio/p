@@ -31,6 +31,13 @@ extern context_object inline get_context();
     set_message(name, EVAL);\
     set_argument(name, 1, (object)env);
 
+#define eval_in_scope(input, env, output)\
+    { \
+        context_object make_eval_context(ci, input, env);\
+        build_return(ci, rc);\
+        transfer(ci);\
+        output = return_value(rc);\
+    }
 
 // Bootstrapping natives.
 extern void pre_eval_env();

@@ -206,7 +206,7 @@ extern object           inline argument_at(context_object context, int index);
 extern message_object   inline make_message(int size);
 extern object           inline message(context_object context);
 #define assert_argsize(context, size) assert(number_value(array_size(context->arguments)) >= size)
-
-
+#define empty_env make_env((object)fools_system->nil,\
+                           (object)fools_system->nil, 0)
 
 #endif // MODEL_H
