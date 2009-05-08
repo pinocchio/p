@@ -300,6 +300,7 @@ void inline dircall_eval() {
     set_message(context, EVAL_WITHARGUMENTS);
     set_argument(context, 1, env);
     set_argument(context, 2, (object)dircall->arguments);
+    context->return_context = dircall_context->return_context;
     set_transfer(context);
     debug("ret>>dircall>>eval:\n");
 }
@@ -309,6 +310,7 @@ void dircall_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, EVAL,         dircall_eval);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("dircall", selector);
 }
 
@@ -333,8 +335,6 @@ void inline iassign_eval() {
     iassign_context->return_context = (object)context;
 
     debug("ret>>iassign>>eval:\n");
-
-    //set_transfer(iassign_context);
 }
 
 void iassign_dispatch() {
