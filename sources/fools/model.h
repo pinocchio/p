@@ -135,7 +135,6 @@ struct fools {
     object              false;
     array_object        empty;
     object              native;
-    object              native_metaclass;
     object              class_lookup;
     object              icapture;
     object              iscope;
