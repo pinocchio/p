@@ -38,6 +38,11 @@ struct appcall {
     array_object    arguments;
 };
 
+struct dircall {
+    object          interpreter;
+    array_object    arguments;
+};
+
 struct capture { };
 
 extern ilist_object     make_ilist(int size);
@@ -49,6 +54,7 @@ extern iscoped_object   make_iscoped(object scope, object expression, object
                                      argsize);
 extern icapture_object  make_icapture();
 extern appcall_object   make_appcall(object expression, int argsize);
+extern dircall_object   make_dircall(object interpreter, int argsize);
 
 extern object      inline raw_ilist_at(ilist_object ilist, int index);
 extern void        inline raw_ilist_at_put(ilist_object ilist,
@@ -60,5 +66,9 @@ extern void        inline set_callmsg(icall_object icall, object msg);
 
 extern void        inline set_appcarg(appcall_object appcall, int index, object value);
 extern void        inline set_appcmsg(appcall_object appcall, object msg);
+
+extern void        inline set_dircarg(dircall_object dircall, int index, object value);
+extern void        inline set_dircmsg(dircall_object dircall, object msg);
+
 
 #endif // AST_H

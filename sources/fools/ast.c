@@ -57,6 +57,14 @@ appcall_object make_appcall(object expression, int argsize) {
     return result;
 }
 
+dircall_object make_dircall(object interpreter, int argsize) {
+    dircall_object result   = NEW(struct dircall);
+    header(result)          = (object)fools_system->dircall_class;
+    result->interpreter     = interpreter;
+    result->arguments       = make_array(argsize);
+    return result;
+}
+
 iscoped_object make_iscoped(object scope, object expression, object argsize) {
     iscoped_object result   = NEW(struct scoped);
     header(result)          = (object)fools_system->iscope_class;
@@ -106,4 +114,10 @@ void inline set_appcmsg(appcall_object appcall, object msg) {
     set_appcarg(appcall, 0, msg);
 }
 
+void inline set_dircarg(dircall_object dircall, int index, object value) {
+    array_at_put(dircall->arguments, index, value);
+}
 
+void inline set_dircmsg(dircall_object dircall, object msg) {
+    set_dircarg(dircall, 0, msg);
+}

@@ -37,6 +37,7 @@ struct variable;
 struct scoped;
 struct capture;
 struct appcall;
+struct dircall;
 
 typedef struct instruction_list* ilist_object;
 typedef struct assignment*       iassign_object;
@@ -46,6 +47,7 @@ typedef struct variable*         ivar_object;
 typedef struct scoped*           iscoped_object;
 typedef struct capture*          icapture_object;
 typedef struct appcall*          appcall_object;
+typedef struct dircall*          dircall_object;
 typedef struct env*              env_object;
 typedef struct variable_object*  variable_object;
 typedef struct native_class*     native_class_object;
@@ -73,6 +75,7 @@ typedef union {
     iscoped_object      iscoped;
     icapture_object     icapture;
     appcall_object      appcall;
+    dircall_object      dircall;
     variable_object     object;
     native_class_object native_class;
     string_object       string;
@@ -156,6 +159,7 @@ struct fools {
     object iscope_metaclass;
     object iscope_class;
     object appcall_class;
+    object dircall_class;
     object env_class;
     object dict_class;
 

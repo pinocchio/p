@@ -49,6 +49,7 @@ extern void iassign_dispatch();
 extern void ivar_dispatch();
 extern void icapture_dispatch();
 extern void appcall_dispatch();
+extern void dircall_dispatch();
 extern void env_dispatch();
 extern void iscoped_dispatch();
 extern void iscoped_class_dispatch();
