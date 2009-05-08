@@ -1,5 +1,4 @@
 #include <system.h>
-#include <stdio.h>
 
 // icall>>invoke:env:
 void inline icall_invoke_env() {

@@ -1,5 +1,4 @@
 #include <system.h>
-#include <stdio.h>
 
 // ilist>>return:env:continue:
 void ilist_continue_eval() {

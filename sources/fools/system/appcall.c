@@ -1,5 +1,4 @@
 #include <system.h>
-#include <stdio.h>
 
 // appcall>>invoke:env:
 void appcall_invoke() {

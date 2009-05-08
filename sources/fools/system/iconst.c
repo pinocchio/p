@@ -1,5 +1,4 @@
 #include <system.h>
-#include <stdio.h>
 
 // iconst>>eval:
 void inline iconst_eval() {

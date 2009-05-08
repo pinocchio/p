@@ -56,8 +56,9 @@ void bootstrap_symbols() {
 fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
+
+    // This has to go!
     fools_system->native                    = (object)make_native(&native);
- 
     header(fools_system->native.pointer)    = fools_system->native;
 
     fools_system->string_class  = empty_class;
