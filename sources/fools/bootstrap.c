@@ -1,7 +1,6 @@
 #include <bootstrap.h>
 #include <primitives.h>
 #include <system.h>
-#include <ast.h>
 #include <assert.h>
 
 // System global

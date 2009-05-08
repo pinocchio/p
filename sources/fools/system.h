@@ -2,7 +2,6 @@
 #define SYSTEM_H
 
 #include <model.h>
-#include <ast.h>
 #include <bootstrap.h>
 #include <assert.h>
 #include <stdio.h>

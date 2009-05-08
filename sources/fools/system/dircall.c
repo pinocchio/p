@@ -1,3 +1,4 @@
+//#include <system/dircall.h>
 #include <system.h>
 
 void inline dircall_eval() {
@@ -26,4 +27,22 @@ void dircall_dispatch() {
     if_selector(selector, EVAL,         dircall_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("dircall", selector);
+}
+
+// Object creation
+dircall_object make_dircall(object interpreter, int argsize) {
+    dircall_object result   = NEW(struct dircall);
+    header(result)          = (object)fools_system->dircall_class;
+    result->interpreter     = interpreter;
+    result->arguments       = make_array(argsize);
+    return result;
+}
+
+// Accessors
+void inline set_dircarg(dircall_object dircall, int index, object value) {
+    array_at_put(dircall->arguments, index, value);
+}
+
+void inline set_dircmsg(dircall_object dircall, object msg) {
+    set_dircarg(dircall, 0, msg);
 }

@@ -22,3 +22,10 @@ void icapture_dispatch() {
     if_selector(selector, EVAL, icapture_eval);
     doesnotunderstand("icapture", selector);
 }
+
+// Object creation
+icapture_object make_icapture() {
+    icapture_object result  = NEW(struct capture);
+    header(result)          = (object)fools_system->icapture_class;
+    return result;
+}

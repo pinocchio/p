@@ -51,3 +51,12 @@ void ivar_dispatch() {
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("ivar", selector);
 }
+
+// Object creation
+ivar_object make_ivar() {
+    ivar_object result      = NEW(struct variable);
+    header(result)          = (object)fools_system->ivar_class;
+    result->scope           = (object)fools_system->nil;
+    result->index           = make_number(0);
+    return result;
+}

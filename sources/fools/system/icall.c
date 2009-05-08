@@ -61,3 +61,21 @@ void icall_dispatch() {
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("icall", selector);
 }
+
+// Object creation
+icall_object make_icall(object interpreter, int argsize) {
+    icall_object result = NEW(struct callable);
+    header(result)      = (object)fools_system->icall_class;
+    result->interpreter = interpreter;
+    result->arguments   = make_array(argsize);
+    return result;
+}
+
+// Accessors
+void inline set_callarg(icall_object icall, int index, object value) {
+    array_at_put(icall->arguments, index, value);
+}
+
+void inline set_callmsg(icall_object icall, object msg) {
+    set_callarg(icall, 0, msg);
+}

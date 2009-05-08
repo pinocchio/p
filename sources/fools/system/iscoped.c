@@ -101,3 +101,13 @@ void iscoped_class_dispatch() {
     if_selector(selector, ENV_NEW_SIZE, iscoped_class_new);
     doesnotunderstand("iscoped_class", selector);
 }
+
+// Object creation
+iscoped_object make_iscoped(object scope, object expression, object argsize) {
+    iscoped_object result   = NEW(struct scoped);
+    header(result)          = (object)fools_system->iscope_class;
+    result->scope           = scope;
+    result->expression      = expression;
+    result->argsize         = argsize;
+    return result;
+}

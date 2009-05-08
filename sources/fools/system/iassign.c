@@ -32,4 +32,11 @@ void iassign_dispatch() {
     doesnotunderstand("iassign", selector);
 }
 
-
+// Object creation
+iassign_object make_iassign(ivar_object variable, object expression) {
+    iassign_object result   = NEW(struct assignment);
+    result->variable        = variable;
+    result->expression      = expression;
+    header(result)          = (object)fools_system->iassign_class;
+    return result;
+}

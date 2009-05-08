@@ -2,7 +2,6 @@
 #include <bootstrap.h>
 #include <system.h>
 #include <scheme_natives.h>
-#include <ast.h>
 
 #include <assert.h>
 #include <stdio.h>

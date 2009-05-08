@@ -50,3 +50,21 @@ void appcall_dispatch() {
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("appcall", selector);
 }
+
+// Object creation
+appcall_object make_appcall(object expression, int argsize) {
+    appcall_object result   = NEW(struct appcall);
+    header(result)          = (object)fools_system->appcall_class;
+    result->expression      = expression;
+    result->arguments       = make_array(argsize);
+    return result;
+}
+
+// Accessors
+void inline set_appcarg(appcall_object appcall, int index, object value) {
+    array_at_put(appcall->arguments, index, value);
+}
+
+void inline set_appcmsg(appcall_object appcall, object msg) {
+    set_appcarg(appcall, 0, msg);
+}

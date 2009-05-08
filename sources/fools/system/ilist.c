@@ -73,3 +73,34 @@ void ilist_dispatch() {
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("ilist", selector);
 }
+
+// Object creation
+ilist_object make_ilist(int size) {
+    ilist_object result = NEW_ARRAYED(ilist_object, object, size + 1);
+    header(result)      = (object)fools_system->ilist_class;
+    result->size        = make_number(size);
+    return result;
+}
+
+// Accessors
+number_object inline ilist_size(ilist_object ilist) {
+    return ilist->size;
+}
+
+void inline ilist_check_bounds(ilist_object ilist, int index) {
+    assert(0 <= index);
+    assert(index < number_value(ilist_size(ilist)));
+}
+
+object inline raw_ilist_at(ilist_object ilist, int index) {
+    return ilist->instructions[index];
+}
+
+void inline raw_ilist_at_put(ilist_object ilist, int index, object value) {
+    ilist->instructions[index] = value;
+}
+
+void inline ilist_at_put(ilist_object ilist, int index, object value) {
+    ilist_check_bounds(ilist, index);
+    raw_ilist_at_put(ilist, index, value);
+}
