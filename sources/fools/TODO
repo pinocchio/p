@@ -25,9 +25,9 @@ VM Optimizations
 ----------------
 
 - Make sure symbols known to the VM are not constantly calculated but static
+    - DONE
+    - make sure symbols are still known to the runtime.
 - Think about a symbol table in general. And give symbols a different class.
 - Rewrite iList>>eval to directly queue all actions in the list rather than
   always returning and continuing.
 - check if Const is required or not.
-- make sure methods don't take contexts as arguments anymore but directly find
-  the thread-local one.
