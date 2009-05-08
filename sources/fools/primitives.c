@@ -4,9 +4,6 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
-#define NDEBUG 0
-#define debug if (!NDEBUG) printf
-
 // number>>+
 void number_env_plus(context_object context) {
     debug("number>>+\n");

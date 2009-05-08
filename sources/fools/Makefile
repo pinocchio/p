@@ -1,5 +1,13 @@
-CFILES=model.c bootstrap.c primitives.c system.c ast.c print.c scheme_natives.c
-HFILES=model.h bootstrap.h primitives.h system.h ast.h print.h scheme_natives.h gc.h
+CFILES=model.c bootstrap.c primitives.c system.c ast.c print.c\
+scheme_natives.c\
+system/icall.c system/appcall.c system/ilist.c system/iconst.c\
+system/dircall.c system/iassign.c system/ivar.c system/icapture.c\
+system/env.c system/iscoped.c
+HFILES=model.h bootstrap.h primitives.h system.h ast.h print.h\
+scheme_natives.h gc.h\
+system/icall.h system/appcall.h system/ilist.h system/iconst.h\
+system/dircall.h system/iassign.h system/ivar.h system/icapture.h\
+system/env.h system/iscoped.h
 PROGRAM=fools
 VERSION=0.1
 

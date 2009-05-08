@@ -13,13 +13,6 @@ variable_object make_object(int size, object interpreter) {
     return result;
 }
 
-object make_native_class(int size) {
-    native_class_object result  = NEW(struct native_class);
-    result->natives             = make_dict(size);
-    header(result)              = fools_system->native_metaclass;
-    return (object)result;
-}
-
 string_object make_string(const char* value) {
     string_object result    = NEW(struct string);
     result->value           = strdup(value);

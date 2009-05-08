@@ -21,7 +21,6 @@
 
 struct env;
 struct variable_object;
-struct native_class;
 struct string;
 struct number;
 struct array;
@@ -50,7 +49,6 @@ typedef struct appcall*          appcall_object;
 typedef struct dircall*          dircall_object;
 typedef struct env*              env_object;
 typedef struct variable_object*  variable_object;
-typedef struct native_class*     native_class_object;
 typedef struct string*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
@@ -77,7 +75,6 @@ typedef union {
     appcall_object      appcall;
     dircall_object      dircall;
     variable_object     object;
-    native_class_object native_class;
     string_object       string;
     number_object       number;
     array_object        array;
@@ -92,11 +89,6 @@ typedef union {
 
 struct variable_object {
     object fields[0]; // 0 to tell CC that it can be empty.
-};
-
-struct native_class {
-    dict_object         natives;
-    object              class;
 };
 
 struct string {
@@ -172,7 +164,6 @@ struct fools {
 };
 
 extern variable_object          make_object(int size, object interpreter);
-extern object                   make_native_class(int size);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);

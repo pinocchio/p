@@ -7,9 +7,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-#define NDEBUG 1
-#define debug if (!NDEBUG) printf
-
 object scheme_plus;
 object scheme_plus_1;
 object scheme_plus_2;
@@ -147,7 +144,7 @@ void bootstrap_scheme() {
     eval_in_scope(scheme_plus, env, scheme_plus);
     
     // Remove once the compiler is up-to-date
-    //scheme_smallerp = (object)make_iconst(scheme_smallerp);
-    //scheme_minus = (object)make_iconst(scheme_minus);
-    //scheme_plus = (object)make_iconst(scheme_plus);
+    scheme_smallerp = (object)make_iconst(scheme_smallerp);
+    scheme_minus = (object)make_iconst(scheme_minus);
+    scheme_plus = (object)make_iconst(scheme_plus);
 }

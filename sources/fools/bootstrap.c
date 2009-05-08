@@ -26,19 +26,8 @@ object ENV_NEW_SIZE;
 object EVAL_WITHARGUMENTS;
 object SCOPE_IN_ENV;
 
-#define define_native(cls, name, native)\
-    do_define_native(fools_system->cls, name, &native)
-
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)
-
-void inline do_define_native(object cls,
-                             int index,
-                             transfer_target native) {
-    dict_at_put(cls.native_class->natives,
-                symbol_known_to_the_vm(index),
-                (object)make_native(native));
-}
 
 #define wrap_dispatcher(dispatch) (object)make_object(1, (object)make_native(dispatch))
 
@@ -63,21 +52,23 @@ void bootstrap_symbols() {
     define_symbol(SCOPE_IN_ENV,         "scope:in:env:");
 }
 
+#define empty_class (object)make_object(1, (object)fools_system->nil);
+
 fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
-    fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
-    fools_system->empty->size               = make_number(0);
     fools_system->native                    = (object)make_native(&native);
  
     header(fools_system->native.pointer)    = fools_system->native;
 
+    fools_system->string_class  = empty_class;
+    fools_system->array_class   = empty_class;
+    fools_system->number_class  = empty_class;
+
+    fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
+    fools_system->empty->size               = make_number(0);
+    header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
-
-    fools_system->native_metaclass = (object)make_native(&with_native_class_lookup);
-
-    fools_system->string_class = make_native_class(0);
-    fools_system->array_class = make_native_class(0);
 
     bootstrap_symbols();
 
@@ -95,8 +86,6 @@ fools_object bootstrap() {
 
     fools_system->icapture = (object)make_icapture();
     fools_system->iscope = make_empty_object(iscope_metaclass);
-
-    fools_system->number_class = make_native_class(0);
 
     return fools_system;
 }
