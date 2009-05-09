@@ -3,6 +3,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 
+/*
 // number>>+
 void number_env_plus(context_object context) {
     debug("number>>+\n");
@@ -90,3 +91,4 @@ void false_env_if(context_object context) {
     debug("false>>ifTrue:ifFalse:\n");
     set_transfer(if_context);
 }
+*/

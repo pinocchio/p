@@ -70,7 +70,7 @@ context_object make_context(object interpreter, int size) {
     //printf("++++++++++++++++++++++++++++ Made context: %p\n", context);
     header(context)         = interpreter;
     context->arguments      = make_array(size);
-    context->code           = ntarget(header(pheader(interpreter.pointer)));
+    context->code           = ntarget(header(interpreter.pointer));
     context->return_context = (object)fools_system->nil;
     return context;
 }

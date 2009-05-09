@@ -22,17 +22,13 @@ void inline return_from_context(context_object context) {
     return set_transfer(return_context(context));
 }
 
-context_object inline target_context(context_object interpreter_context) {
-    return argument_at(interpreter_context, 1).context;
-}
-
 context_object inline get_context() {
     return global_context;
 }
 
 void inline new_target(context_object context, object target) {
     header(context) = target;
-    context->code = ntarget(header(pheader(target.pointer)));
+    context->code = ntarget(header(target.pointer));
 }
 
 // Transferring primitives.

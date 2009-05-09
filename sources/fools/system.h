@@ -27,7 +27,6 @@ extern void inline native();
 
 // Meta-interpretation primitives.
 extern void inline set_transfer(context_object context);
-extern context_object inline target_context(context_object interpreter_context);
 extern void inline return_from_context(context_object context);
 extern context_object inline get_context();
 extern void inline new_target(context_object context, object target);
