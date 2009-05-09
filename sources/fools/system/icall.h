@@ -10,7 +10,7 @@ extern void        inline set_callarg(icall_object icall, int index, object valu
 extern void        inline set_callmsg(icall_object icall, object msg);
 
 // Structure
-struct callable {
+struct icall {
     object          interpreter;
     array_object    arguments;
 };

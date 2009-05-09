@@ -4,6 +4,6 @@
 extern void icapture_dispatch();
 extern icapture_object make_icapture();
 
-struct capture { };
+struct icapture { };
 
 #endif // SYSTEM_ICAPTURE_H

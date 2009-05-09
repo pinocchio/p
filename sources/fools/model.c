@@ -22,9 +22,8 @@ string_object make_string(const char* value) {
 }
 
 number_object make_number(int value) {
-    number_object result    = NEW(struct number);
+    new_instance(number);
     result->value           = value;
-    header(result)          = (object)fools_system->number_class;
     return result;
 }
 
@@ -38,19 +37,17 @@ array_object make_array(int size) {
 }
 
 dict_object make_dict(int init_size) {
-    dict_object result  = NEW(struct dict);
+    new_instance(dict);
     result->keys        = make_array(init_size);
     result->values      = make_array(init_size);
-    header(result)      = (object)fools_system->dict_class;
     return result;
 }
 
 env_object make_env(object scope, object parent, int size) {
-    env_object result   = NEW(struct env);
+    new_instance(env);
     result->scope       = scope;
     result->parent      = parent;
     result->values      = make_array(size);
-    header(result)      = (object)fools_system->env_class;
     return result;
 }
 

@@ -345,7 +345,7 @@ SETUP(test_icall)
 
 SETUP(test_new_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscope);
+    iconst_object iconst = make_iconst(fools_system->iscoped);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -366,7 +366,7 @@ SETUP(test_new_iscoped)
 
     iscoped_object iscope = return_value(rc).iscoped;
 
-    assert(pheader(iscope) == fools_system->iscope_class.pointer);
+    assert(pheader(iscope) == fools_system->iscoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
     assert(iscope->scope.env == start);
 
@@ -374,7 +374,7 @@ SETUP(test_new_iscoped)
 
 SETUP(test_eval_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscope);
+    iconst_object iconst = make_iconst(fools_system->iscoped);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -482,7 +482,7 @@ SETUP(test_make_function_no_args)
     transfer(ci);
 
     object result = return_value(rc);
-    assert(pheader(result.pointer) == fools_system->iscope_class.pointer);
+    assert(pheader(result.pointer) == fools_system->iscoped_class.pointer);
     assert(result.iscoped->scope.env == env);
 
 }
@@ -637,7 +637,7 @@ SETUP(test_eval_nested_function)
     object nested_function = return_value(rc);
 
     assert(pheader(nested_function.pointer) ==
-           fools_system->iscope_class.pointer);
+           fools_system->iscoped_class.pointer);
 
     iconst = (object)make_iconst(nested_function);
     appcall = make_appcall(iconst, 1);

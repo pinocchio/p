@@ -63,8 +63,7 @@ void icall_dispatch() {
 
 // Object creation
 icall_object make_icall(object interpreter, int argsize) {
-    icall_object result = NEW(struct callable);
-    header(result)      = (object)fools_system->icall_class;
+    new_instance(icall);
     result->interpreter = interpreter;
     result->arguments   = make_array(argsize);
     return result;

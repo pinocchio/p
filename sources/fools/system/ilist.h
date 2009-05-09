@@ -13,7 +13,7 @@ extern void        inline ilist_at_put(ilist_object ilist,
                                        int index, object i);
 
 // Structure
-struct instruction_list {
+struct ilist {
     number_object   size;
     object          instructions[];
 };

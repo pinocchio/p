@@ -25,7 +25,6 @@ void icapture_dispatch() {
 
 // Object creation
 icapture_object make_icapture() {
-    icapture_object result  = NEW(struct capture);
-    header(result)          = (object)fools_system->icapture_class;
+    new_instance(icapture);
     return result;
 }

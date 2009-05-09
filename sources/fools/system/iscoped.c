@@ -104,8 +104,7 @@ void iscoped_class_dispatch() {
 
 // Object creation
 iscoped_object make_iscoped(object scope, object expression, object argsize) {
-    iscoped_object result   = NEW(struct scoped);
-    header(result)          = (object)fools_system->iscope_class;
+    new_instance(iscoped);
     result->scope           = scope;
     result->expression      = expression;
     result->argsize         = argsize;

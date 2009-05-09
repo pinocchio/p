@@ -4,7 +4,7 @@
 extern void iconst_dispatch();
 extern iconst_object make_iconst(object constant);
 
-struct constant {
+struct iconst {
     object          constant;
 };
 

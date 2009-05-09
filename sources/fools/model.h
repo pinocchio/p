@@ -15,6 +15,10 @@
             (type)(\
                PINC(FOOLS_ALLOC(header_size + sizeof(layout[size]))))
 
+#define new_instance(cls)\
+    cls##_##object result = NEW(struct cls);\
+    header(result)        = (object)fools_system->cls##_##class;
+
 #define header(o) (*(object*)PDEC(o))
 #define pheader(o) header(o).pointer
 #define ntarget(o) native_target((o).native)
@@ -28,23 +32,24 @@ struct dict;
 struct nil;
 struct native;
 struct context;
-struct instruction_list;
-struct assignment;
-struct callable;
-struct constant;
-struct variable;
-struct scoped;
-struct capture;
+
+struct ilist;
+struct iassign;
+struct icall;
+struct iconst;
+struct ivar;
+struct iscoped;
+struct icapture;
 struct appcall;
 struct dircall;
 
-typedef struct instruction_list* ilist_object;
-typedef struct assignment*       iassign_object;
-typedef struct callable*         icall_object;
-typedef struct constant*         iconst_object;
-typedef struct variable*         ivar_object;
-typedef struct scoped*           iscoped_object;
-typedef struct capture*          icapture_object;
+typedef struct ilist*            ilist_object;
+typedef struct iassign*          iassign_object;
+typedef struct icall*            icall_object;
+typedef struct iconst*           iconst_object;
+typedef struct ivar*             ivar_object;
+typedef struct iscoped*          iscoped_object;
+typedef struct icapture*         icapture_object;
 typedef struct appcall*          appcall_object;
 typedef struct dircall*          dircall_object;
 typedef struct env*              env_object;
@@ -137,7 +142,7 @@ struct fools {
     object              native;
     object              class_lookup;
     object              icapture;
-    object              iscope;
+    object              iscoped;
     array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
@@ -147,8 +152,8 @@ struct fools {
     object ivar_class;
     object iassign_class;
     object icapture_class;
-    object iscope_metaclass;
-    object iscope_class;
+    object iscoped_metaclass;
+    object iscoped_class;
     object appcall_class;
     object dircall_class;
     object env_class;

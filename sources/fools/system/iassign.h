@@ -4,7 +4,7 @@
 extern void iassign_dispatch();
 extern iassign_object make_iassign(ivar_object variable, object expression);
 
-struct assignment {
+struct iassign {
     ivar_object     variable;
     object          expression;
 };

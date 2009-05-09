@@ -25,8 +25,7 @@ void iconst_dispatch() {
 
 // Object creation
 iconst_object make_iconst(object constant) {
-    iconst_object result    = NEW(struct constant);
-    header(result)          = (object)fools_system->iconst_class;
+    new_instance(iconst);
     result->constant        = constant;
     //printf("new iconst: %p for %p\n", result, constant.pointer);
     return result;

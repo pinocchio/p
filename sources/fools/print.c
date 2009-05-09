@@ -55,7 +55,7 @@ void print_object(object o) {
         return;
     }
 
-    if (pheader(o.pointer) == fools_system->iscope_class.pointer) {
+    if (pheader(o.pointer) == fools_system->iscoped_class.pointer) {
         printf("iscoped\n");
         return;
     }
