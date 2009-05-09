@@ -59,7 +59,5 @@ extern void pre_eval_env();
 
 // Convenience function for composing primitives into closures.
 extern void doesnotunderstand(const char* class, object selector);
-extern object inline make_func(array_object arguments, object body);
-extern object inline make_dyn_func(array_object arguments, object body);
 
 #endif

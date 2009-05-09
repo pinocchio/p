@@ -1,10 +1,10 @@
 CFILES=model.c bootstrap.c primitives.c system.c print.c\
-scheme_natives.c debug.c\
+scheme/natives.c scheme/system.c debug.c\
 system/icall.c system/appcall.c system/ilist.c system/iconst.c\
 system/dircall.c system/iassign.c system/ivar.c system/icapture.c\
 system/env.c system/iscoped.c
 HFILES=model.h bootstrap.h primitives.h system.h print.h gc.h\
-scheme_natives.h debug.h\
+scheme/natives.h scheme/system.h debug.h\
 system/icall.h system/appcall.h system/ilist.h system/iconst.h\
 system/dircall.h system/iassign.h system/ivar.h system/icapture.h\
 system/env.h system/iscoped.h

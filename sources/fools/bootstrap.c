@@ -60,6 +60,7 @@ fools_object bootstrap() {
     // This has to go!
     fools_system->native                    = (object)make_native(&native);
     header(fools_system->native.pointer)    = fools_system->native;
+    // This has to go!
 
     fools_system->string_class  = empty_class;
     fools_system->array_class   = empty_class;

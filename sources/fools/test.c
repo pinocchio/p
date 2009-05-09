@@ -3,6 +3,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 #include <system.h>
+#include <scheme/system.h>
 
 // Some nice helper constructs.
 #define SETUP(name)\

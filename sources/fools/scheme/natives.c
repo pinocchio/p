@@ -1,7 +1,8 @@
 #include <model.h>
 #include <bootstrap.h>
 #include <system.h>
-#include <scheme_natives.h>
+#include <scheme/natives.h>
+#include <scheme/system.h>
 
 #include <assert.h>
 #include <stdio.h>

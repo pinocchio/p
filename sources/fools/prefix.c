@@ -3,7 +3,8 @@
 #include <bootstrap.h>
 #include <stdio.h>
 #include <system.h>
-#include <scheme_natives.h>
+#include <scheme/system.h>
+#include <scheme/natives.h>
 #include <print.h>
 
 int main () {
