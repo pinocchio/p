@@ -1,23 +1,9 @@
 #include <system.h>
 #include <stdio.h>
 
-#define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
-
 #define if_selector(selector, symb, todo)\
     if (selector.pointer == symb.pointer)\
         return todo();
-
-int _indent_ = 0;
-
-void indent() {
-    int i;
-    for (i = 0; i < _indent_; i++) {
-        printf("\t");
-    }
-}
-
-void inline inc() { if (!NDEBUG) _indent_++; }
-void inline dec() { if (!NDEBUG) _indent_--; }
 
 void doesnotunderstand(const char* class, object selector) {
     printf("DNU: %s>>%s\n", class, selector.string->value);

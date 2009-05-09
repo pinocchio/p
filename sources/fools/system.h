@@ -6,6 +6,8 @@
 #include <assert.h>
 #include <stdio.h>
 
+#include <debug.h>
+
 #include <system/appcall.h>
 #include <system/dircall.h>
 #include <system/env.h>
@@ -16,17 +18,6 @@
 #include <system/ilist.h>
 #include <system/iscoped.h>
 #include <system/ivar.h>
-
-#define NDEBUG 1
-#define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
-
-#define if_selector(selector, symb, todo)\
-    if (selector.pointer == symb.pointer)\
-        return todo();
-
-extern void indent();
-extern void inline inc();
-extern void inline dec();
 
 // Starting an evaluation thread.
 extern void inline transfer(context_object context);
