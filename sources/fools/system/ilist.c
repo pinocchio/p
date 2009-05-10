@@ -49,8 +49,9 @@ static void inline ilist_eval() {
     object env = argument_at(ilist_context, 1);
 
     pop_context();
-    ilist_context = make_context((object)ilist, 3);
 
+    ilist_context = make_empty_context(3);
+    ilist_context->interpreter = (object)ilist;
     set_argument(ilist_context, 0, env);
     set_argument(ilist_context, 2, (object)make_number(0));
     ilist_context->code = &ilist_continue_eval;

@@ -4,12 +4,15 @@ system/icall.c system/appcall.c system/ilist.c system/iconst.c\
 system/dircall.c system/iassign.c system/ivar.c system/icapture.c\
 system/env.c system/iscoped.c
 HFILES=model.h bootstrap.h primitives.h system.h print.h gc.h\
-scheme/natives.h scheme/system.h debug.h thread.h\
+scheme/natives.h scheme/system.h debug.h thread.h constants.h\
 system/icall.h system/appcall.h system/ilist.h system/iconst.h\
 system/dircall.h system/iassign.h system/ivar.h system/icapture.h\
 system/env.h system/iscoped.h
 PROGRAM=fools
 VERSION=0.1
+
+EXTRA_SOURCES=fib-compiler.scm lambda-compiler.scm prefix.c postfix.c\
+test.c Makefile fools.c
 
 TARGET=fib
 
@@ -19,7 +22,7 @@ CFLAGS = -O3 -g -Wall -I.
 LDFLAGS = -lgc
 
 TEST_OBJECTS= test test.o fib fib.o fib.c
-SOURCES=$(CFILES) $(HFILES) Makefile
+SOURCES=$(CFILES) $(HFILES) $(EXTRA_SOURCES)
 OBJECTS=$(CFILES:.c=.o)
 
 all: $(PROGRAM)

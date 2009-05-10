@@ -31,7 +31,10 @@ static void inline appcall_eval() {
     object env = argument_at(appcall_context, 1);
     pop_context();
 
-    context_object context = make_context((object)appcall, 3);
+    context_object context = make_empty_context(3); // already make it big
+                                                    // enough for
+                                                    // appcall_invoke.
+    context->interpreter = (object)appcall;
     set_argument(context, 0, env);
     context->code = &appcall_invoke;
 
