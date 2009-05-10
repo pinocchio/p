@@ -8,8 +8,9 @@ context_object stk_idx;
 context_object stk_bottom;
 
 void init_thread() {
-    stk_bottom = NEW_ARRAYED(context_object, object, STACK_SIZE);
-    stk_idx = stk_bottom;
+    stk_bottom  = NEW_ARRAYED(context_object, object, STACK_SIZE);
+    stk_idx     = stk_bottom;
+    stk_return  = make_empty_context(2);
 }
 
 static void expand_stack() {

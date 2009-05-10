@@ -176,6 +176,7 @@ extern dict_object              make_dict(int init_size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 extern context_object           make_context(object interpreter, int size);
+extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);

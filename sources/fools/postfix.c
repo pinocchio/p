@@ -11,13 +11,10 @@
 
     appcall_object maincall = make_appcall(const_scoped_main, 0);
     
-    context_object build_return(rc);
     context_object make_eval_context(ci, maincall, env); 
     
     printf("------- Starting eval ------\n");
-    transfer(ci);
-
-    object result = return_value(rc);
+    object result = transfer(ci);
 
     print_object(result);
 

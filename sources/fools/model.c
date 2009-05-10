@@ -64,18 +64,15 @@ native_object make_native(transfer_target native) {
 }
 
 context_object make_context(object interpreter, int size) {
-    /*
-    context_object context  = NEW(struct context);
-    //printf("++++++++++++++++++++++++++++ Made context: %p\n", context);
-    header(context)         = interpreter;
-    context->arguments      = make_array(size);
-    context->code           = ntarget(header(interpreter.pointer));
-    context->return_context = (object)fools_system->nil;
-    return context;
-    */
     context_object result   = stack_claim(size + 3);
     result->interpreter     = interpreter;
     result->code            = ntarget(header(interpreter.pointer));
+    result->arguments.size  = make_number(size);
+    return result;
+}
+
+context_object make_empty_context(int size) {
+    context_object result   = stack_claim(size + 3);
     result->arguments.size  = make_number(size);
     return result;
 }

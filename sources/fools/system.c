@@ -14,6 +14,7 @@ void doesnotunderstand(const char* class, object selector) {
 // Context handling
 
 context_object global_context;
+context_object stk_return;
 
 void inline set_transfer(context_object context) {
     global_context = context;
@@ -47,11 +48,12 @@ void inline native() {
 }
 
 // Meta-interpreter just takes the next action and performs it.
-void inline transfer(context_object context) {
+object inline transfer(context_object context) {
     global_context = context;
-    while (!empty_stack()) {
+    while (global_context != stk_return) {
         global_context->code();
     }
+    return return_value(stk_return);
 }
 
 // AST Handling
