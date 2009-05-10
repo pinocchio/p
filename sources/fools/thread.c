@@ -12,11 +12,11 @@ void init_thread() {
     stk_idx = stk_bottom;
 }
 
-static void inline expand_stack() {
+static void expand_stack() {
     assert(NULL);
 }
 
-context_object stack_claim(int size) {
+context_object inline stack_claim(int size) {
     if (STACK_SIZE - (stk_idx - stk_bottom) < size) {
         expand_stack();
     }
@@ -24,14 +24,14 @@ context_object stack_claim(int size) {
     return stk_idx;
 }
 
-void pop_context() {
+void inline pop_context() {
     stk_idx = return_context(get_context());
 }
 
-void stack_set_context() {
+void inline stack_set_context() {
     stk_idx = get_context();
 }
 
-int empty_stack() {
+int inline empty_stack() {
     return stk_idx == stk_bottom;
 }
