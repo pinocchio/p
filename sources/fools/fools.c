@@ -16,5 +16,5 @@ int main() {
     string_object a_string = make_string("boe");
     printf("%s\n", a_string->value);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

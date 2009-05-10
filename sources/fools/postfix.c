@@ -21,5 +21,5 @@
 
     print_object(result);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
