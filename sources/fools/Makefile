@@ -52,7 +52,7 @@ dist: $(TARBZ2)
 
 $(TARBZ2): $(SOURCES)
 	mkdir -p .dist/$(FULLNAME)
-	cp $(SOURCES) .dist/$(FULLNAME)
+	for i in $(SOURCES); do mkdir -p .dist/$(FULLNAME)/`dirname $$i`; cp $$i .dist/$(FULLNAME)/$$i; done
 	cd .dist; tar cfj $@ $(FULLNAME); cp $@ ..; cd ..
 	rm -rf .dist
 
