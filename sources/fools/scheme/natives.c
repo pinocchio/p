@@ -3,6 +3,7 @@
 #include <system.h>
 #include <scheme/natives.h>
 #include <scheme/system.h>
+#include <thread.h>
 
 #include <assert.h>
 #include <stdio.h>
@@ -55,9 +56,9 @@ void scheme_true_func() {
     array_object arguments = argument_at(context, 2).array;
     object if_true = array_at(arguments, 0);
 
-    header(context) = if_true;
-    context->arguments = make_array(2);
-    set_new_message(context, EVAL);
+    pop_context();
+    context = make_context(if_true, 2);
+    set_message(context, EVAL);
     set_argument(context, 1, env);
 
     set_transfer(context);
@@ -73,9 +74,9 @@ void scheme_false_func() {
     array_object arguments = argument_at(context, 2).array;
     object if_false = array_at(arguments, 1);
 
-    header(context) = if_false;
-    context->arguments = make_array(2);
-    set_new_message(context, EVAL);
+    pop_context();
+    context = make_context(if_false, 2);
+    set_message(context, EVAL);
     set_argument(context, 1, env);
 
     set_transfer(context);

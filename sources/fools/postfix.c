@@ -11,8 +11,8 @@
 
     appcall_object maincall = make_appcall(const_scoped_main, 0);
     
+    context_object build_return(rc);
     context_object make_eval_context(ci, maincall, env); 
-    build_return(ci, rc);
     
     printf("------- Starting eval ------\n");
     transfer(ci);

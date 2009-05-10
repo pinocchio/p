@@ -8,11 +8,12 @@ static void inline env_fetch_from() {
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
-    env_object env = header(receiver).env;
-    if (env->scope.pointer == array_at(receiver->arguments, 2).pointer) {
-        int index = number_value(array_at(receiver->arguments, 1).number);
+    env_object env = receiver->interpreter.env;
+
+    if (env->scope.pointer == argument_at(receiver, 2).pointer) {
+        int index = number_value(argument_at(receiver, 1).number);
         object value = env_at(env, index);
-        array_at_put(receiver->return_context.context->arguments, 1, value);
+        set_argument(return_context(receiver), 1, value);
         return return_from_context(receiver);
     }
     if (env->parent.nil == fools_system->nil) {
@@ -20,7 +21,6 @@ static void inline env_fetch_from() {
     }
     new_target(receiver, env->parent);
     debug("ret>>env>>fetch:from:\n");
-    set_transfer(receiver);
 }
 
 // env>>store:at:in:
@@ -31,10 +31,10 @@ static void inline env_store_at_in() {
     context_object receiver = get_context();
     assert_argsize(receiver, 4);
     // arguments at: 0 -> selector
-    env_object env = header(receiver).env;
-    if (env->scope.pointer == array_at(receiver->arguments, 3).pointer) {
-        int index = number_value(array_at(receiver->arguments, 2).number);
-        object value = array_at(receiver->arguments, 1);
+    env_object env = receiver->interpreter.env;
+    if (env->scope.pointer == argument_at(receiver, 3).pointer ) {
+        int index = number_value(argument_at(receiver, 2).number);
+        object value = argument_at(receiver, 1);
         env_at_put(env, index, value);
         return return_from_context(receiver);
     }
@@ -53,7 +53,7 @@ static void inline env_subscope() {
     debug("env>>subScope:key:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
-    object env  = header(receiver);
+    object env  = receiver->interpreter;
     // arguments at: 0 -> selector
     int size    = number_value(argument_at(receiver, 1).number);
     object key  = argument_at(receiver, 2);
@@ -72,7 +72,7 @@ static void inline env_set_parent() {
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
-    object env = header(receiver);
+    object env = receiver->interpreter;
     object new_env = argument_at(receiver, 1);
 
     env.env->parent = new_env;
@@ -96,9 +96,7 @@ static void inline env_set_env_parent() {
     set_message(context, EVAL);
     set_argument(context, 1, env);
 
-    context->return_context = (object)receiver;
-
-    set_new_message(receiver, PARENT);
+    set_message(receiver, PARENT);
     receiver->code = &env_set_parent;
 
     debug("ret>>env>>env:parent:\n");
@@ -110,7 +108,7 @@ static void inline env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
-    object env = header(receiver);
+    object env = receiver->interpreter;
     set_argument(return_context(receiver), 1, env.env->parent);
     debug("ret>>env>>envParent:\n");
     return_from_context(receiver);

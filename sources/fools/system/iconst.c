@@ -3,7 +3,7 @@
 // iconst>>eval:
 static void inline iconst_eval() {
     context_object iconst_context = get_context();
-    iconst_object iconst = header(iconst_context).iconst;
+    iconst_object iconst = iconst_context->interpreter.iconst;
 
     debug("iconst>>eval: %p\n", iconst);
 

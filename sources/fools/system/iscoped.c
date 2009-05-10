@@ -1,4 +1,5 @@
 #include <system.h>
+#include <thread.h>
 
 // iscoped>>eval:
 static void inline iscoped_eval() {
@@ -6,7 +7,7 @@ static void inline iscoped_eval() {
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
 
-    iscoped_object iscoped = header(iscoped_context).iscoped;
+    iscoped_object iscoped = iscoped_context->interpreter.iscoped;
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
@@ -22,13 +23,13 @@ static void inline iscoped_eval() {
     }
 
     // we just eval the attached expression.
-    new_target(iscoped_context, iscoped->expression);
-    iscoped_context->arguments = make_array(2);
+    pop_context();
+    iscoped_context = make_context(iscoped->expression, 2);
     set_message(iscoped_context, EVAL);
     set_argument(iscoped_context, 1, env);
 
     debug("ret>>iscoped>>doEval:withArguments\n");
-    //set_transfer(iscoped_context);
+    set_transfer(iscoped_context);
 }
 
 // iscoped>>eval:withArguments:
@@ -39,7 +40,7 @@ static void inline iscoped_eval_arguments() {
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
 
-    iscoped_object iscoped = header(iscoped_context).iscoped;
+    iscoped_object iscoped = iscoped_context->interpreter.iscoped;
 
     object env = argument_at(iscoped_context, 1);
     int argsize = number_value(iscoped->argsize.number);
@@ -49,8 +50,6 @@ static void inline iscoped_eval_arguments() {
     set_argument(context, 1, (object)make_number(argsize + 2));
     set_argument(context, 2, iscoped->expression);
 
-    context->return_context = (object)iscoped_context;
-    
     iscoped_context->code = &iscoped_eval;
 
     debug("ret>>iscoped>>eval:withArguments:\n");
@@ -62,7 +61,7 @@ static void inline iscoped_scope() {
     debug("iscoped>>scope\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
-    iscoped_object iscoped = header(receiver).iscoped;
+    iscoped_object iscoped = receiver->interpreter.iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
     return_from_context(receiver);
     debug("ret>>iscoped>>scope\n");

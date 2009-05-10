@@ -2,6 +2,7 @@
 #include <string.h>
 #include <assert.h>
 #include <bootstrap.h>
+#include <thread.h>
 
 variable_object make_object(int size, object interpreter) {
     variable_object result  = NEW_ARRAYED(variable_object, object, size);
@@ -63,6 +64,7 @@ native_object make_native(transfer_target native) {
 }
 
 context_object make_context(object interpreter, int size) {
+    /*
     context_object context  = NEW(struct context);
     //printf("++++++++++++++++++++++++++++ Made context: %p\n", context);
     header(context)         = interpreter;
@@ -70,6 +72,12 @@ context_object make_context(object interpreter, int size) {
     context->code           = ntarget(header(interpreter.pointer));
     context->return_context = (object)fools_system->nil;
     return context;
+    */
+    context_object result   = stack_claim(size + 3);
+    result->interpreter     = interpreter;
+    result->code            = ntarget(header(interpreter.pointer));
+    result->arguments.size  = make_number(size);
+    return result;
 }
 
 // Accessors
@@ -204,7 +212,7 @@ void inline env_at_put(env_object env, int index, object value) {
 }
 
 void inline set_message(context_object context, object msg) {
-    raw_array_at_put(context->arguments, 0, msg);
+    raw_array_at_put(&context->arguments, 0, msg);
 }
 
 void inline set_new_message(context_object context, object msg) {
@@ -213,11 +221,11 @@ void inline set_new_message(context_object context, object msg) {
 }
 
 void inline set_argument(context_object context, int index, object value) {
-    raw_array_at_put(context->arguments, index, value);
+    raw_array_at_put(&context->arguments, index, value);
 }
 
 object inline argument_at(context_object context, int index) {
-    return raw_array_at(context->arguments, index);
+    return raw_array_at(&context->arguments, index);
 }
 
 message_object inline make_message(int size) {
@@ -229,5 +237,6 @@ object inline message(context_object context) {
 }
 
 context_object inline return_context(context_object context) {
-    return context->return_context.context;
+    int size = number_value(array_size(&context->arguments));
+    return context - size - 3;
 }

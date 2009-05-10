@@ -1,24 +1,28 @@
 #include <system.h>
+#include <thread.h>
 
 // iassign>>eval:
 static void inline iassign_eval() {
     context_object iassign_context = get_context();
     assert_argsize(iassign_context, 2);
 
-    iassign_object iassign = header(iassign_context).iassign;
+    iassign_object iassign = iassign_context->interpreter.iassign;
 
     debug("iassign>>eval:\n");
     
     object env = argument_at(iassign_context, 1);
 
-    new_target(iassign_context, iassign->expression);
+    pop_context();
 
     context_object context = make_context((object)iassign->variable, 3);
     set_message(context, ASSIGN_IN);
     set_argument(context, 2, env);
-    context->return_context = iassign_context->return_context;
 
-    iassign_context->return_context = (object)context;
+    context = make_context(iassign->expression, 2);
+    set_message(context, EVAL);
+    set_argument(context, 1, env);
+
+    set_transfer(context);
 
     debug("ret>>iassign>>eval:\n");
 }

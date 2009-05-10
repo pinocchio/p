@@ -1,28 +1,25 @@
 #include <system.h>
+#include <thread.h>
 
 // ilist>>return:env:continue:
 static void inline ilist_continue_eval() {
     context_object ilist_context = get_context();
-    int index = number_value(argument_at(ilist_context, 3).number);
+    int index = number_value(argument_at(ilist_context, 2).number);
 
-    ilist_object ilist = header(ilist_context).ilist;
+    ilist_object ilist = ilist_context->interpreter.ilist;
     int size = number_value(ilist->size) - 1;
 
-    object env = argument_at(ilist_context, 2);
-    context_object context = argument_at(ilist_context, 0).context;
+    object env = argument_at(ilist_context, 0);
+    object instruction = (object)raw_ilist_at(ilist, index);
 
     if (index < size) {
-        set_argument(ilist_context, 3, (object)make_number(index + 1));
-        context->return_context = (object)ilist_context;
+        set_argument(ilist_context, 2, (object)make_number(index + 1));
     } else { // tailcall.
-        context->arguments = make_array(2);
-        context->return_context = ilist_context->return_context;
+        pop_context();
         dec();
     }
-    
-    object instruction = (object)raw_ilist_at(ilist, index);
-    new_target(context, instruction);
 
+    context_object context = make_context(instruction, 2);
     set_message(context, EVAL);
     set_argument(context, 1, env);
 
@@ -34,33 +31,33 @@ static void inline ilist_eval() {
     debug("ilist>>eval:\n");
     context_object ilist_context = get_context();
     assert_argsize(ilist_context, 2);
-    ilist_object ilist = (ilist_object)header(ilist_context).pointer;
+    ilist_object ilist = ilist_context->interpreter.ilist;
 
     if (number_value(ilist->size) == 0) {
-        return return_from_context(ilist_context);
+        return_from_context(ilist_context);
+        debug("ret>>ilist>>eval(0):\n");
+        return;
     }
 
     if (number_value(ilist->size) == 1) {
         object instruction = (object)raw_ilist_at(ilist, 0);
         new_target(ilist_context, instruction);
+        debug("ret>>ilist>>eval(1):\n");
         return;
     }
 
+    object env = argument_at(ilist_context, 1);
 
-    context_object rec = make_context((object)ilist, 4);
+    pop_context();
+    ilist_context = make_context((object)ilist, 3);
 
-    object environment = argument_at(ilist_context, 1);
+    set_argument(ilist_context, 0, env);
+    set_argument(ilist_context, 2, (object)make_number(0));
+    ilist_context->code = &ilist_continue_eval;
 
-    // optimization, reuse object.
-    set_argument(rec, 0, (object)ilist_context); 
-    set_argument(rec, 2, environment);
-    set_argument(rec, 3, (object)make_number(0));
-    rec->code = &ilist_continue_eval;
-    rec->return_context = ilist_context->return_context;
+    set_transfer(ilist_context);
 
-    set_transfer(rec);
-
-    debug("ret>>ilist>>eval:\n");
+    debug("ret>>ilist>>eval(n):\n");
     inc();
 }
 

@@ -2,6 +2,7 @@
 #include <primitives.h>
 #include <system.h>
 #include <assert.h>
+#include <thread.h>
 
 // System global
 fools_object fools_system;
@@ -87,6 +88,8 @@ fools_object bootstrap() {
 
     fools_system->icapture = (object)make_icapture();
     fools_system->iscoped = make_empty_object(iscoped_metaclass);
+
+    init_thread();
 
     return fools_system;
 }

@@ -41,7 +41,7 @@ SETUP(test_array)
 
 void native_test_single_arg_5() {
     context_object c = get_context();
-    assert(c->arguments->size->value == 1);
+    assert(number_value(array_size(&c->arguments)) == 1);
     assert(number_value(argument_at(c, 0).number) == 5);
     argument_at(c, 0).number->value = 6;
     return_from_context(c);
@@ -66,76 +66,6 @@ SETUP(test_string_equals)
     assert(string_equals(make_string("a string"), make_string("a string")));
     assert(!string_equals(make_string("a string"), make_string("b string")));
 }
-
-/* invalid. replace by valid tests!
-SETUP(test_dict)
-
-    dict_object dict = make_dict(2);
-
-    string_object k1 = make_string("One");
-    string_object k2 = make_string("Two");
-    string_object k3 = make_string("Three");
-    number_object v1 = make_number(1);
-    number_object v2 = make_number(2);
-
-    dict_at_put(dict, (object)k1, (object)v1);
-    dict_at_put(dict, (object)k2, (object)v2);
-    
-    assert(dict_at(dict, (object)k1).number == v1);
-    assert(dict_at(dict, (object)k2).number == v2);
-    assert(dict_at(dict, (object)k3).nil == fools_system->nil);
-}
-
-SETUP(test_transfer_dict)
-
-    dict_object dict = make_dict(2);
-
-    string_object k1 = make_string("One");
-    string_object k2 = make_string("Two");
-    string_object k3 = make_string("Three");
-    number_object v1 = make_number(1);
-    number_object v2 = make_number(2);
-
-    context_object context = make_context((object)dict, 4);
-
-    set_message(context, "at:put:");
-    set_argument(context, 1, (object)k1);
-    set_argument(context, 2, (object)v1);
-
-    transfer(context);
-
-    set_argument(context, 1, (object)k2);
-    set_argument(context, 2, (object)v2);
-
-    transfer(context);
-
-    assert(dict_at(dict, (object)k1).number == v1);
-    assert(dict_at(dict, (object)k2).number == v2);
-    assert(dict_at(dict, (object)k3).nil == fools_system->nil);
-
-    context = make_context((object)dict, 3);
-    object result;
-
-    set_message(context, "at:");
-    set_argument(context, 1, (object)k1);
-    set_argument(context, 2, (object)(pointer)&result);
-
-    transfer(context);
-
-    assert(result.number == v1);
-
-    set_argument(context, 1, (object)k2);
-
-    transfer(context);
-    assert(result.number == v2);
-
-    set_argument(context, 1, (object)k3);
-
-    transfer(context);
-
-    assert(result.nil == fools_system->nil);
-}
-*/
 
 SETUP(test_variable_object)
     variable_object result = make_object(10, (object)fools_system->nil);
@@ -173,8 +103,8 @@ SETUP(test_transfer_iconst)
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, iconst, fools_system->nil);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -189,8 +119,8 @@ SETUP(test_return_of_ilist)
 
     ilist_at_put(ilist, 0, (object)iconst);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, ilist, fools_system->nil);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -246,17 +176,17 @@ SETUP(test_env_lookup)
     assert(array_at(env1->values, 0).pointer == v3.pointer);
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
+    context_object build_return(rc);
     ci = make_context((object)env2, 3);
     set_message(ci, FETCH_FROM);
     set_argument(ci, 1, (object)make_number(0));
     set_argument(ci, 2, e1k);
 
-    build_return(ci, rc);
-
     transfer(ci);
 
-    assert(array_at(rc->arguments, 1).pointer == v3.pointer);
+    assert(argument_at(rc, 1).pointer == v3.pointer);
 
+    build_return(rc);
     ci = make_context((object)env2, 3);
     
     set_message(ci, FETCH_FROM);
@@ -264,11 +194,10 @@ SETUP(test_env_lookup)
     set_argument(ci, 2, e2k);
 
     set_message(rc, EVAL);
-    ci->return_context = (object)rc;
 
     transfer(ci);
 
-    assert(array_at(rc->arguments, 1).pointer == v2.pointer);
+    assert(argument_at(rc, 1).pointer == v2.pointer);
 
 }
 
@@ -305,12 +234,12 @@ SETUP(test_ivar_read)
 
     transfer(ci);
 
+    context_object build_return(rc);
     make_eval_context(ci, ivar, k);
-    build_return(ci, rc);
 
     transfer(ci);
 
-    assert(array_at(rc->arguments, 1).pointer == v.pointer);
+    assert(argument_at(rc, 1).pointer == v.pointer);
 }
 
 void native_icallable() {
@@ -330,7 +259,7 @@ SETUP(test_icall)
 
     object v = (object)make_number(5);
 
-    icall_object icall = make_icall((object)iconst, 2);
+    icall_object icall = make_icall((object)iconst, 1);
     set_callarg(icall, 0, v);
 
     context_object make_eval_context(ci, icall,
@@ -359,8 +288,8 @@ SETUP(test_new_iscoped)
                                 (object)fools_system->nil,
                                 0);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, icall, start);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -388,8 +317,8 @@ SETUP(test_eval_iscoped)
                                 (object)fools_system->nil,
                                 0);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, icall, start);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -398,8 +327,8 @@ SETUP(test_eval_iscoped)
     iconst->constant = (object)iscope;
     appcall_object appcall = make_appcall((object)iconst, 0);
 
+    build_return(rc);
     make_eval_context(ci, appcall, start);
-    ci->return_context = (object)rc;
 
     transfer(ci);
 
@@ -412,8 +341,8 @@ SETUP(test_icapture)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, fools_system->icapture, env);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -436,8 +365,8 @@ SETUP(test_env_parent)
                             (object)
                             make_iconst((object)env2), 2);
     set_callmsg(icall, ENV_PARENT);
+    context_object build_return(rc);
     context_object make_eval_context(ci, icall, env);
-    build_return(ci, rc);
 
     transfer(ci);
     
@@ -458,8 +387,8 @@ SETUP(test_capture_parent)
     // !!!
     icall_object icall = make_icall(fools_system->icapture, 2);
     set_callmsg(icall, ENV_PARENT);
+    context_object build_return(rc);
     context_object make_eval_context(ci, icall, env2);
-    build_return(ci, rc);
 
     transfer(ci);
     
@@ -476,8 +405,8 @@ SETUP(test_make_function_no_args)
                   (object)
                   make_iconst((object)make_number(42)));
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, constant_function, env);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -501,8 +430,8 @@ SETUP(test_ilist_pass_context)
 
     ilist_at_put(ilist, 0, (object)icall);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, ilist, env2);
-    build_return(ci, rc);
 
     transfer(ci);
     
@@ -522,8 +451,8 @@ SETUP(test_eval_function_no_args)
                     the_instr
                   );
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, constant_function, env);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -531,8 +460,8 @@ SETUP(test_eval_function_no_args)
     object iconst = (object)make_iconst(scoped_function);
     appcall_object appcall = make_appcall(iconst, 0);
 
+    build_return(rc);
     make_eval_context(ci, appcall, env);
-    ci->return_context = (object)rc;
 
     transfer(ci);
 
@@ -557,8 +486,8 @@ SETUP(test_make_function_1_arg)
                     ivar
                   );
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, constant_function, env);
-    build_return(ci, rc);
 
     transfer(ci);
 }
@@ -580,8 +509,8 @@ SETUP(test_eval_function_1_arg)
                     ivar
                   );
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, constant_function, env);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -592,8 +521,8 @@ SETUP(test_eval_function_1_arg)
     appcall_object appcall = make_appcall(iconst, 1);
     set_appcarg(appcall, 0, (object)make_iconst(arg));
 
+    build_return(rc);
     make_eval_context(ci, appcall, env);
-    ci->return_context = (object)rc;
 
     transfer(ci);
 
@@ -617,8 +546,8 @@ SETUP(test_eval_nested_function)
 
     object constant_function = make_func(arguments, constant_function1);
 
+    context_object build_return(rc);
     context_object make_eval_context(ci, constant_function, env);
-    build_return(ci, rc);
 
     transfer(ci);
 
@@ -629,8 +558,8 @@ SETUP(test_eval_nested_function)
     appcall_object appcall = make_appcall(iconst, 1);
     set_appcarg(appcall, 0, (object)make_iconst(arg));
 
+    build_return(rc);
     make_eval_context(ci, appcall, env);
-    ci->return_context = (object)rc;
 
     transfer(ci);
     
@@ -643,8 +572,8 @@ SETUP(test_eval_nested_function)
     appcall = make_appcall(iconst, 1);
     set_appcarg(appcall, 0, (object)make_iconst(arg));
 
+    build_return(rc);
     make_eval_context(ci, appcall, env);
-    ci->return_context = (object)rc;
 
     transfer(ci);
 

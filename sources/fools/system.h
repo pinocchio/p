@@ -32,11 +32,9 @@ extern context_object inline get_context();
 extern void inline new_target(context_object context, object target);
 
 // Convenience macros.
-#define build_return(for_c, name)\
-    ilist_object m1ilist = make_ilist(0);\
-    context_object name = make_context((object)m1ilist, 2);\
-    set_message(name, EVAL);\
-    for_c->return_context = (object)rc;
+#define build_return(name)\
+    name = make_context((object)make_ilist(0), 2);\
+    set_message(name, EVAL);
 
 #define return_value(rc)\
     argument_at(rc, 1)
@@ -48,8 +46,8 @@ extern void inline new_target(context_object context, object target);
 
 #define eval_in_scope(input, env, output)\
     { \
+        context_object build_return(rc);\
         context_object make_eval_context(ci, input, env);\
-        build_return(ci, rc);\
         transfer(ci);\
         output = return_value(rc);\
     }

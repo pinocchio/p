@@ -89,6 +89,7 @@ typedef union {
     native_object       native;
     context_object      context;
     env_object          env;
+    transfer_target     target;
     pointer             pointer;
 } object;
 
@@ -128,9 +129,9 @@ struct native {
 };
 
 struct context {
-    array_object        arguments;
-    object              return_context;
     transfer_target     code;
+    object              interpreter;
+    struct array        arguments;
 };
 
 struct fools {
@@ -174,7 +175,6 @@ extern array_object             make_array(int size);
 extern dict_object              make_dict(int init_size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
-extern context_object           inline make_meta_context(context_object context);
 extern context_object           make_context(object interpreter, int size);
 extern native_object            make_native(transfer_target native);
 
@@ -204,7 +204,7 @@ extern void             inline set_argument(context_object context, int index, o
 extern object           inline argument_at(context_object context, int index);
 extern message_object   inline make_message(int size);
 extern object           inline message(context_object context);
-#define assert_argsize(context, size) assert(number_value(array_size(context->arguments)) >= size)
+#define assert_argsize(context, size) assert(number_value(array_size(&context->arguments)) >= size)
 #define empty_env make_env((object)fools_system->nil,\
                            (object)fools_system->nil, 0)
 

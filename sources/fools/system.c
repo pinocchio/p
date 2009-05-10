@@ -1,4 +1,5 @@
 #include <system.h>
+#include <thread.h>
 #include <stdio.h>
 
 #define if_selector(selector, symb, todo)\
@@ -16,6 +17,7 @@ context_object global_context;
 
 void inline set_transfer(context_object context) {
     global_context = context;
+    stack_set_context();
 }
 
 void inline return_from_context(context_object context) {
@@ -27,7 +29,7 @@ context_object inline get_context() {
 }
 
 void inline new_target(context_object context, object target) {
-    header(context) = target;
+    context->interpreter = target;
     context->code = ntarget(header(target.pointer));
 }
 
@@ -37,22 +39,20 @@ void inline native() {
     // Finds the code which was tagged with native and executes it.
     // Code tagged with native has to know by itself on which level it
     // executes!
-    object code = (object)global_context;
+    object code = global_context->interpreter;
     while (pheader(code.pointer) != ((object)fools_system->native).pointer) {
         code = header(code.pointer);
     }
     global_context->code = ntarget(code);
 }
 
+// Meta-interpreter just takes the next action and performs it.
 void inline transfer(context_object context) {
-
     global_context = context;
-
-    while (((object)global_context).nil != fools_system->nil) {
+    while (!empty_stack()) {
         global_context->code();
     }
 }
-
 
 // AST Handling
 
@@ -62,41 +62,18 @@ void pre_eval_env() {
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
 
+    object interp   = receiver->interpreter;
     object env      = argument_at(receiver, 1);
     object env_arg  = argument_at(receiver, 2);
+
+    pop_context();
+    receiver = make_context(interp, 2);
+    set_message(receiver, EVAL);
 
     context_object context = make_context(env_arg, 2);
     set_message(context, EVAL);
     set_argument(context, 1, env);
 
-    receiver->arguments = make_array(2);
-    set_new_message(receiver, EVAL);
-
-    context->return_context = (object)receiver;
-
     debug("ret>>o>>preEval:env:\n");
     set_transfer(context);
 }
-/*
-// Native class handling
-
-void with_native_class_lookup() {
-    context_object receiver_context = get_context();
-                                    // call -> object -> class
-    native_class_object class       = header(pheader(receiver_context)).native_class;
-    dict_object natives             = class->natives;
-    object selector                 = message(receiver_context);
-    object native                   = dict_at(natives, selector);
-
-    if (native.nil == fools_system->nil) {
-        debug("non-native: %s sent \n",
-                selector.string->value);
-        //header(class_context) = class->class;
-        assert(NULL);
-    } else {
-        debug("native: %s\n", selector.string->value);
-        receiver_context->code = ntarget(native);
-    }
-}*/
-
-

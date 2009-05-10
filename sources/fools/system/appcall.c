@@ -1,11 +1,12 @@
 #include <system.h>
+#include <thread.h>
 
 // appcall>>invoke:env:
 static void inline appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
 
-    appcall_object appcall  = header(appcall_context).appcall;
+    appcall_object appcall  = appcall_context->interpreter.appcall;
 
     object env          = argument_at(appcall_context, 0);
     object expression   = argument_at(appcall_context, 1);
@@ -25,19 +26,21 @@ static void inline appcall_eval() {
     context_object appcall_context = get_context();
     assert_argsize(appcall_context, 2);
 
-    appcall_object appcall = header(appcall_context).appcall;
+    appcall_object appcall = appcall_context->interpreter.appcall;
 
     object env = argument_at(appcall_context, 1);
+    pop_context();
 
     context_object context = make_context((object)appcall, 3);
     set_argument(context, 0, env);
     context->code = &appcall_invoke;
-    context->return_context = appcall_context->return_context;
 
-    new_target(appcall_context, appcall->expression);
-    appcall_context->return_context   = (object)context;
+    appcall_context = make_context(appcall->expression, 2);
+    set_message(appcall_context, EVAL);
+    set_argument(appcall_context, 1, env);
 
     debug("ret>>appcall>>eval:\n");
+    set_transfer(appcall_context);
     inc();
 }
 

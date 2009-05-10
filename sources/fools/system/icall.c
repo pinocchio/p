@@ -1,29 +1,31 @@
 #include <system.h>
+#include <thread.h>
 
 // icall>>invoke:env:
 static void inline icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
 
-    icall_object icall  = header(icall_context).icall;
+    icall_object icall = icall_context->interpreter.icall;
 
     object env          = argument_at(icall_context, 0);
     object interpreter  = argument_at(icall_context, 1);
 
-    new_target(icall_context, interpreter);
-
     // XXX Do an ensuring copy! Check it's an array!
     int argsize = number_value(array_size(icall->arguments));
-    array_object context_arguments = make_array(argsize);
+
+    pop_context();
+    icall_context = make_context(interpreter, argsize);
 
     int i;
     for (i = 0; i < argsize; i++) {
-        raw_array_at_put(context_arguments, i, raw_array_at(icall->arguments, i));
+        set_argument(icall_context, i, raw_array_at(icall->arguments, i));
     }
     // until here.
 
-    icall_context->arguments = context_arguments;
     set_argument(icall_context, 1, env);
+
+    set_transfer(icall_context);
 
     debug("ret>>icall>>invoke:env:\n");
     dec();
@@ -35,7 +37,7 @@ static void inline icall_eval() {
     context_object icall_context = get_context();
     assert_argsize(icall_context, 2);
 
-    icall_object icall = header(icall_context).icall;
+    icall_object icall = icall_context->interpreter.icall;
 
     object env = argument_at(icall_context, 1);
     set_argument(icall_context, 0, env);
@@ -44,7 +46,6 @@ static void inline icall_eval() {
     context_object context = make_context(icall->interpreter, 2);
     set_message(context, EVAL);
     set_argument(context, 1, env);
-    context->return_context = (object)icall_context;
 
     set_transfer(context);
 
