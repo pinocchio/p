@@ -52,6 +52,11 @@ extern void inline new_target(context_object context, object target);
         output = return_value(rc);\
     }
 
+
+#define if_selector(selector, symb, todo)\
+    if (selector.pointer == symb.pointer)\
+        return todo();
+
 // Bootstrapping natives.
 extern void pre_eval_env();
 
