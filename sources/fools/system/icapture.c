@@ -1,7 +1,7 @@
 #include <system.h>
 
 // icapture>>eval:
-void inline icapture_eval() {
+static void inline icapture_eval() {
     context_object icapture_context = get_context();
     assert_argsize(icapture_context, 2);
 

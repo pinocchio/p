@@ -1,7 +1,7 @@
 #include <system.h>
 
 // iscoped>>eval:
-void iscoped_eval() {
+static void inline iscoped_eval() {
     debug("iscoped>>doEval:withArguments\n");
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
@@ -32,7 +32,7 @@ void iscoped_eval() {
 }
 
 // iscoped>>eval:withArguments:
-void inline iscoped_eval_arguments() {
+static void inline iscoped_eval_arguments() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("iscoped>>eval:withArguments:\n");
@@ -58,7 +58,7 @@ void inline iscoped_eval_arguments() {
 }
 
 // iscoped>>scope
-void inline iscoped_scope() {
+static void inline iscoped_scope() {
     debug("iscoped>>scope\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
@@ -78,7 +78,7 @@ void iscoped_dispatch() {
 }
 
 // iscoped_class>>env:new:size:
-void inline iscoped_class_new() {
+static void inline iscoped_class_new() {
     debug("iscopecls>>env:new:size:\n");
     context_object iscope_context = get_context();
     assert_argsize(iscope_context, 4);

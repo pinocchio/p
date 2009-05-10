@@ -1,7 +1,7 @@
 #include <system.h>
 
 // ilist>>return:env:continue:
-void ilist_continue_eval() {
+static void inline ilist_continue_eval() {
     context_object ilist_context = get_context();
     int index = number_value(argument_at(ilist_context, 3).number);
 
@@ -30,7 +30,7 @@ void ilist_continue_eval() {
 }
 
 // ilist>>eval:
-void inline ilist_eval() {
+static void inline ilist_eval() {
     debug("ilist>>eval:\n");
     context_object ilist_context = get_context();
     assert_argsize(ilist_context, 2);

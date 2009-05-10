@@ -1,7 +1,7 @@
 #include <system.h>
 
 // iconst>>eval:
-void inline iconst_eval() {
+static void inline iconst_eval() {
     context_object iconst_context = get_context();
     iconst_object iconst = header(iconst_context).iconst;
 

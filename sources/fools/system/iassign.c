@@ -1,7 +1,7 @@
 #include <system.h>
 
 // iassign>>eval:
-void inline iassign_eval() {
+static void inline iassign_eval() {
     context_object iassign_context = get_context();
     assert_argsize(iassign_context, 2);
 

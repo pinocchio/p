@@ -1,7 +1,7 @@
 #include <system.h>
 
 // env>>fetch:from:
-void inline env_fetch_from() {
+static void inline env_fetch_from() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>fetch:from:\n");
@@ -24,7 +24,7 @@ void inline env_fetch_from() {
 }
 
 // env>>store:at:in:
-void inline env_store_at_in() {
+static void inline env_store_at_in() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>store:at:in:\n");
@@ -47,7 +47,7 @@ void inline env_store_at_in() {
 }
 
 // env>>subScope:key:
-void inline env_subscope() {
+static void inline env_subscope() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
     debug("env>>subScope:key:\n");
@@ -67,7 +67,7 @@ void inline env_subscope() {
 }
 
 // env>>parent:
-void inline env_set_parent() {
+static void inline env_set_parent() {
     debug("env>>parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
@@ -84,7 +84,7 @@ void inline env_set_parent() {
 }
 
 // env>>env:parent:
-void inline env_set_env_parent() {
+static void inline env_set_env_parent() {
     debug("env>>env:parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
@@ -106,7 +106,7 @@ void inline env_set_env_parent() {
 }
 
 // env>>parent
-void inline env_parent() {
+static void inline env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector

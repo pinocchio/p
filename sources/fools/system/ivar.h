@@ -4,7 +4,7 @@
 extern void ivar_dispatch();
 extern ivar_object make_ivar();
 
-struct variable {
+struct ivar {
     object          scope;
     number_object   index;
 };

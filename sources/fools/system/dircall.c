@@ -1,7 +1,7 @@
 //#include <system/dircall.h>
 #include <system.h>
 
-void inline dircall_eval() {
+static void inline dircall_eval() {
     debug("dircall>>eval:\n");
     context_object dircall_context = get_context();
     assert_argsize(dircall_context, 2);

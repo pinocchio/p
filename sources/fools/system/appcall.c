@@ -1,7 +1,7 @@
 #include <system.h>
 
 // appcall>>invoke:env:
-void appcall_invoke() {
+static void inline appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
 
@@ -20,7 +20,7 @@ void appcall_invoke() {
 }
 
 // appcall>>eval:
-void appcall_eval() {
+static void inline appcall_eval() {
     debug("appcall>>eval:\n");
     context_object appcall_context = get_context();
     assert_argsize(appcall_context, 2);

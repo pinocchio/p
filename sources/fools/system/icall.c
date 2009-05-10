@@ -1,7 +1,7 @@
 #include <system.h>
 
 // icall>>invoke:env:
-void inline icall_invoke_env() {
+static void inline icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
 
@@ -30,7 +30,7 @@ void inline icall_invoke_env() {
 }
 
 // icall>>eval:
-void inline icall_eval() {
+static void inline icall_eval() {
     debug("icall>>eval:\n");
     context_object icall_context = get_context();
     assert_argsize(icall_context, 2);

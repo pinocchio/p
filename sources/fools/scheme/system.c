@@ -1,4 +1,5 @@
 #include <scheme/system.h>
+#include <system/ivar.h>
 #include <system.h>
 
 // Function bootstrapping
@@ -6,7 +7,7 @@
 // Function which doesn't switch to static scope on eval automatically.
 object inline make_dyn_func(array_object arguments, object body) {
 
-    iconst_object iconst = make_iconst(fools_system->iscope);
+    iconst_object iconst = make_iconst(fools_system->iscoped);
 
     int argsize = number_value(array_size(arguments));
     // Eval args, eval body
@@ -46,7 +47,7 @@ object inline make_dyn_func(array_object arguments, object body) {
 
 object inline make_func(array_object arguments, object body) {
 
-    iconst_object iconst = make_iconst(fools_system->iscope);
+    iconst_object iconst = make_iconst(fools_system->iscoped);
 
     int argsize = number_value(array_size(arguments));
     // Eval args, switch context, eval body
