@@ -18,11 +18,11 @@ context_object stk_return;
 
 void inline set_transfer(context_object context) {
     global_context = context;
-    stack_set_context();
 }
 
 void inline return_from_context(context_object context) {
-    return set_transfer(return_context(context));
+    set_transfer(return_context(context));
+    stack_set_context();
 }
 
 context_object inline get_context() {
