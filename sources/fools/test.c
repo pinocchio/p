@@ -35,11 +35,6 @@ SETUP(test_array)
     }
 }
 
-//SETUP(test_native_layout)
-//    assert(header(fools_system->native.pointer).native == fools_system->native.native);
-//    assert(native_target(fools_system->native.native) == &native);
-//}
-
 void native_test_single_arg_5() {
     context_object c = get_context();
     assert(number_value(array_size(&c->arguments)) == 1);
@@ -47,20 +42,6 @@ void native_test_single_arg_5() {
     argument_at(c, 0).number->value = 6;
     pop_context();
 }
-
-/*
-SETUP(test_transfer)
-
-    native_object n = make_native(&native_test_single_arg_5);
-    
-    context_object inner = make_context((object)n, 1);
-    set_argument(inner, 0, (object)make_number(5));
-
-    transfer(inner);
-
-    assert(number_value(argument_at(inner, 0).number) == 6);
-}
-*/
 
 SETUP(test_string_equals) 
 
@@ -553,11 +534,7 @@ SETUP(test_eval_nested_function)
 int main() {
     test_header();
     test_array();
-    //test_native_layout();
-    //test_transfer();
     test_string_equals();
-    //test_dict();
-    //test_transfer_dict();
     test_variable_object();
     test_transfer_empty_ilist();
     test_transfer_empty_ilist_in_ilist();
