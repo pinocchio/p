@@ -63,7 +63,7 @@ static void inline iscoped_scope() {
     // arguments at: 0 -> selector
     iscoped_object iscoped = receiver->interpreter.iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
-    return_from_context(receiver);
+    pop_context();
     debug("ret>>iscoped>>scope\n");
 }
 
@@ -90,7 +90,7 @@ static void inline iscoped_class_new() {
     set_argument(return_context(iscope_context), 1, (object)iscoped);
 
     debug("ret>>iscopecls>>env:new:size:\n");
-    return_from_context(iscope_context);
+    pop_context();
 }
 
 void iscoped_class_dispatch() {

@@ -2,9 +2,16 @@
 #define THREAD_H
 
 extern void init_thread();
-extern inline context_object stack_claim(int size);
-extern inline void pop_context();
-extern inline void stack_set_context();
-extern inline int empty_stack();
+
+extern context_object inline stack_claim(int size);
+extern void inline pop_context();
+extern void inline set_transfer(context_object context);
+
+extern int inline empty_stack();
+extern object inline get_stk_return();
+extern context_object inline get_context();
+
+
+
 
 #endif // THREAD_H

@@ -1,4 +1,5 @@
 #include <system.h>
+#include <thread.h>
 
 // icapture>>eval:
 static void inline icapture_eval() {
@@ -12,7 +13,7 @@ static void inline icapture_eval() {
 
     debug("ret>>icapture>>eval:\n");
 
-    return_from_context(icapture_context);
+    pop_context();
 }
 
 void icapture_dispatch() {

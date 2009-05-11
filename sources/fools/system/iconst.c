@@ -1,4 +1,5 @@
 #include <system.h>
+#include <thread.h>
 
 // iconst>>eval:
 static void inline iconst_eval() {
@@ -11,7 +12,7 @@ static void inline iconst_eval() {
 
     debug("ret>>iconst>>eval:\n");
 
-    return_from_context(iconst_context);
+    pop_context();
 }
 
 void iconst_dispatch() {

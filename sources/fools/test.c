@@ -3,6 +3,7 @@
 #include <bootstrap.h>
 #include <stdio.h>
 #include <system.h>
+#include <thread.h>
 #include <scheme/system.h>
 
 // Some nice helper constructs.
@@ -44,7 +45,7 @@ void native_test_single_arg_5() {
     assert(number_value(array_size(&c->arguments)) == 1);
     assert(number_value(argument_at(c, 0).number) == 5);
     argument_at(c, 0).number->value = 6;
-    return_from_context(c);
+    pop_context();
 }
 
 /*
@@ -240,7 +241,7 @@ void native_icallable() {
     number_object first = argument_at(c, 0).number;
     assert(number_value(first) == 5);
     first->value = 6;
-    return_from_context(c);
+    pop_context();
 }
 
 SETUP(test_icall)

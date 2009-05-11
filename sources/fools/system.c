@@ -13,22 +13,6 @@ void doesnotunderstand(const char* class, object selector) {
 
 // Context handling
 
-context_object global_context;
-context_object stk_return;
-
-void inline set_transfer(context_object context) {
-    global_context = context;
-}
-
-void inline return_from_context(context_object context) {
-    set_transfer(return_context(context));
-    stack_set_context();
-}
-
-context_object inline get_context() {
-    return global_context;
-}
-
 void inline new_target(context_object context, object target) {
     context->interpreter = target;
     context->code = ntarget(header(target.pointer));
@@ -40,20 +24,19 @@ void inline native() {
     // Finds the code which was tagged with native and executes it.
     // Code tagged with native has to know by itself on which level it
     // executes!
-    object code = global_context->interpreter;
+    object code = get_context()->interpreter;
     while (pheader(code.pointer) != ((object)fools_system->native).pointer) {
         code = header(code.pointer);
     }
-    global_context->code = ntarget(code);
+    get_context()->code = ntarget(code);
 }
 
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer(context_object context) {
-    global_context = context;
-    while (global_context != stk_return) {
-        global_context->code();
+    while (!empty_stack()) {
+        get_context()->code();
     }
-    return return_value(stk_return);
+    return get_stk_return();
 }
 
 // AST Handling

@@ -24,7 +24,7 @@ void scheme_plus_func() {
     set_argument(return_context(context), 1, (object)result);
 
     debug("exit plus\n");
-    return_from_context(context);
+    pop_context();
 }
 
 object scheme_minus;
@@ -43,7 +43,7 @@ void scheme_minus_func() {
     set_argument(return_context(context), 1, (object)result);
 
     debug("exit minus\n");
-    return_from_context(context);
+    pop_context();
 }
 
 object scheme_true;
@@ -110,7 +110,7 @@ void scheme_smallerp_func() {
     debug("result: %p\n", result.pointer);
     set_argument(return_context(context), 1, result);
 
-    return_from_context(context);
+    pop_context();
     debug("exit smallerp\n");
 }
 

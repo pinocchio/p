@@ -1,4 +1,5 @@
 #include <system.h>
+#include <thread.h>
 
 // env>>fetch:from:
 static void inline env_fetch_from() {
@@ -14,7 +15,7 @@ static void inline env_fetch_from() {
         int index = number_value(argument_at(receiver, 1).number);
         object value = env_at(env, index);
         set_argument(return_context(receiver), 1, value);
-        return return_from_context(receiver);
+        return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {
         assert(NULL); // XXX should go to error-handler here.
@@ -36,7 +37,7 @@ static void inline env_store_at_in() {
         int index = number_value(argument_at(receiver, 2).number);
         object value = argument_at(receiver, 1);
         env_at_put(env, index, value);
-        return return_from_context(receiver);
+        return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {
         return;
@@ -63,7 +64,7 @@ static void inline env_subscope() {
 
     debug("ret>>env>>subScope:key:\n");
 
-    return_from_context(receiver);
+    pop_context();
 }
 
 // env>>parent:
@@ -80,7 +81,7 @@ static void inline env_set_parent() {
     // Don't accidentally set parent to self!
     assert(env.env->parent.env != env.env);
     debug("ret>>env>>parent:\n");
-    return_from_context(receiver);
+    pop_context();
 }
 
 // env>>env:parent:
@@ -111,7 +112,7 @@ static void inline env_parent() {
     object env = receiver->interpreter;
     set_argument(return_context(receiver), 1, env.env->parent);
     debug("ret>>env>>envParent:\n");
-    return_from_context(receiver);
+    pop_context();
 }
 
 void env_dispatch() {

@@ -6,11 +6,16 @@
 
 context_object stk_idx;
 context_object stk_bottom;
+context_object stk_return;
 
-void init_thread() {
-    stk_bottom  = NEW_ARRAYED(context_object, object, STACK_SIZE);
+void inline init_stack(int size) {
+    stk_bottom  = NEW_ARRAYED(context_object, object, size);
     stk_idx     = stk_bottom;
     stk_return  = make_empty_context(2);
+}
+
+void init_thread() {
+    init_stack(STACK_SIZE);
 }
 
 static void expand_stack() {
@@ -29,10 +34,18 @@ void inline pop_context() {
     stk_idx = return_context(get_context());
 }
 
-void inline stack_set_context() {
-    stk_idx = get_context();
+int inline empty_stack() {
+    return stk_idx == stk_return;
 }
 
-int inline empty_stack() {
-    return stk_idx == stk_bottom;
+object inline get_stk_return() {
+    return return_value(stk_return);
+}
+
+context_object inline get_context() {
+    return stk_idx;
+}
+
+void inline set_transfer(context_object context) {
+    stk_idx = context;
 }

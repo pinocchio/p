@@ -34,7 +34,7 @@ static void inline ilist_eval() {
     ilist_object ilist = ilist_context->interpreter.ilist;
 
     if (number_value(ilist->size) == 0) {
-        return_from_context(ilist_context);
+        pop_context();
         debug("ret>>ilist>>eval(0):\n");
         return;
     }
