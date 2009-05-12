@@ -36,6 +36,8 @@ static void inline iscoped_eval() {
 static void inline iscoped_eval_arguments() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
+
+    // TODO make subscope of the iscoped>>scope rather than the passed env.
     debug("iscoped>>eval:withArguments:\n");
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
