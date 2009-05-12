@@ -39,13 +39,6 @@ array_object make_array(int size) {
     return result;
 }
 
-dict_object make_dict(int init_size) {
-    new_instance(dict);
-    result->keys        = make_array(init_size);
-    result->values      = make_array(init_size);
-    return result;
-}
-
 env_object make_env(object scope, object parent, int size) {
     new_instance(env);
     result->scope       = scope;
@@ -122,62 +115,6 @@ void inline array_at_put(array_object array, int index, object new_value) {
 
 transfer_target inline native_target(native_object native) {
     return native->target;
-}
-
-int inline dict_index_of(dict_object dict, object key) {
-    array_object keys = dict->keys;
-
-    int i;
-    for (i = 0; i < number_value(array_size(keys)); i++) {
-        if (raw_array_at(keys, i).pointer == key.pointer) {
-            return i;
-        }
-    }
-    return -1;
-}
-
-object inline dict_at(dict_object dict, object key) {
-    int size = number_value(array_size(dict->keys));
-    int i;
-    for (i = 0; i < size; i++) {
-        if (raw_array_at(dict->keys, i).pointer == key.pointer) {
-            return raw_array_at(dict->values, i);
-        }
-    }
-    return (object)fools_system->nil;
-}
-
-void inline dict_expand(dict_object dict) {
-    array_object old_keys   = dict->keys;
-    array_object old_values = dict->values;
-    int old_size = number_value(array_size(old_keys));
-    int size = 2 * old_size;
-
-    dict->keys = make_array(size);
-    dict->values = make_array(size);
-
-    for (--old_size; old_size >= 0; old_size--) {
-        raw_array_at_put(dict->keys,    old_size, raw_array_at(old_keys,   old_size));
-        raw_array_at_put(dict->values,  old_size, raw_array_at(old_values, old_size));
-    }
-}
-
-int inline dict_bind_key(dict_object dict, object key) {
-    int index = dict_index_of(dict, (object)fools_system->nil);
-    if (index == -1) {
-        index = number_value(array_size(dict->keys));
-        dict_expand(dict);
-    }
-    raw_array_at_put(dict->keys, index, key);
-    return index;
-}
-
-void inline dict_at_put(dict_object dict, object key, object value) {
-    int index = dict_index_of(dict, key);
-    if (index == -1) {
-        index = dict_bind_key(dict, key);
-    }
-    raw_array_at_put(dict->values, index, value);
 }
 
 int inline string_equals(string_object string1, string_object string2) {

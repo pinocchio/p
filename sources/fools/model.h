@@ -28,7 +28,6 @@ struct variable_object;
 struct string;
 struct number;
 struct array;
-struct dict;
 struct nil;
 struct native;
 struct context;
@@ -57,7 +56,6 @@ typedef struct variable_object*  variable_object;
 typedef struct string*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
-typedef struct dict*             dict_object;
 typedef struct nil*              nil_object;
 typedef struct native*           native_object;
 typedef struct context*          context_object;
@@ -83,7 +81,6 @@ typedef union {
     string_object       string;
     number_object       number;
     array_object        array;
-    dict_object         dict;
     fools_object        fools;
     nil_object          nil;
     native_object       native;
@@ -109,11 +106,6 @@ struct number {
 struct array {
     number_object       size;
     object              values[];
-};
-
-struct dict {
-    array_object        keys;
-    array_object        values;
 };
 
 struct env {
@@ -159,7 +151,6 @@ struct fools {
     object appcall_class;
     object dircall_class;
     object env_class;
-    object dict_class;
 
     // Minimal native classes
     object number_class;
@@ -173,7 +164,6 @@ extern variable_object          make_object(int size, object interpreter);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
-extern dict_object              make_dict(int init_size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 extern context_object           make_context(object self, int size);
@@ -189,8 +179,6 @@ extern void             inline array_at_put(array_object array,
 extern void             inline raw_array_at_put(array_object array,
                                                 int index, object new_value);
 extern transfer_target  inline native_target(native_object native);
-extern object           inline dict_at(dict_object dict, object key);
-extern void             inline dict_at_put(dict_object dict, object key, object value);
 extern int              inline string_equals(string_object string1,
                                              string_object string2);
 extern object           inline symbol_known_to_the_vm(int index);
