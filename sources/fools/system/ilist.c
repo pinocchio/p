@@ -1,29 +1,8 @@
 #include <system.h>
 #include <thread.h>
 
-// ilist>>return:env:continue:
-static void inline ilist_continue_eval() {
-    context_object ilist_context = get_context();
-    int index = number_value(argument_at(ilist_context, 2).number);
-
-    ilist_object ilist = ilist_context->interpreter.ilist;
-    int size = number_value(ilist->size) - 1;
-
-    object env = argument_at(ilist_context, 0);
-    object instruction = (object)raw_ilist_at(ilist, index);
-
-    if (index < size) {
-        set_argument(ilist_context, 2, (object)make_number(index + 1));
-    } else { // tailcall.
-        pop_context();
-        dec();
-    }
-
-    context_object context = make_context(instruction, 2);
-    set_message(context, EVAL);
-    set_argument(context, 1, env);
-
-    set_transfer(context);
+static void inline pop_continue() {
+    pop_context();
 }
 
 // ilist>>eval:
@@ -39,22 +18,20 @@ static void inline ilist_eval() {
         return;
     }
 
-    if (number_value(ilist->size) == 1) {
-        object instruction = (object)raw_ilist_at(ilist, 0);
-        new_target(ilist_context, instruction);
-        debug("ret>>ilist>>eval(1):\n");
-        return;
-    }
+    int end = number_value(ilist->size) - 1;
 
+    object instruction = (object)raw_ilist_at(ilist, end);
+    new_target(ilist_context, instruction);
     object env = argument_at(ilist_context, 1);
 
-    pop_context();
-
-    ilist_context = make_empty_context(3);
-    ilist_context->interpreter = (object)ilist;
-    set_argument(ilist_context, 0, env);
-    set_argument(ilist_context, 2, (object)make_number(0));
-    ilist_context->code = &ilist_continue_eval;
+    for (--end; 0 <= end; end--) {
+        context_object ilist_pop = make_empty_context(2);
+        ilist_pop->code = &pop_continue;
+        instruction = (object)raw_ilist_at(ilist, end);
+        ilist_context = make_context(instruction, 2);
+        set_message(ilist_context, EVAL);
+        set_argument(ilist_context, 1, env);
+    }
 
     set_transfer(ilist_context);
 
