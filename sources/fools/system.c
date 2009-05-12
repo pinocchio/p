@@ -64,7 +64,6 @@ void pre_eval_env() {
     set_message(receiver, EVAL);
 
     receiver = make_empty_context(2);
-    receiver->env = env;
     receiver->code = &switch_env;
 
     context_object context = make_context(env_arg, 1);
