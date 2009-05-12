@@ -1,10 +1,6 @@
 #include <system.h>
 #include <thread.h>
 
-static void inline pop_continue() {
-    pop_context();
-}
-
 // ilist>>eval:
 static void inline ilist_eval() {
     debug("ilist>>eval:\n");
@@ -26,7 +22,7 @@ static void inline ilist_eval() {
 
     for (--end; 0 <= end; end--) {
         context_object ilist_pop = make_empty_context(2);
-        ilist_pop->code = &pop_continue;
+        ilist_pop->code = &pop_context;
         instruction = (object)raw_ilist_at(ilist, end);
         ilist_context = make_context(instruction, 2);
         set_message(ilist_context, EVAL);
