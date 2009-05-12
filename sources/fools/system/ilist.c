@@ -20,6 +20,8 @@ static void inline ilist_eval() {
     new_target(ilist_context, instruction);
     object env = argument_at(ilist_context, 1);
 
+    // Lign up all the context frames necessary to perform
+    // the whole ilist.
     for (--end; 0 <= end; end--) {
         context_object ilist_pop = make_empty_context(2);
         ilist_pop->code = &pop_context;

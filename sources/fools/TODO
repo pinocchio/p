@@ -27,6 +27,4 @@ VM Optimizations
     - DONE
     - make sure symbols are still known to the runtime.
 - Think about a symbol table in general. And give symbols a different class.
-- Rewrite iList>>eval to directly queue all actions in the list rather than
-  always returning and continuing.
 - check if Const is required or not.

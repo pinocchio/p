@@ -10,5 +10,3 @@ void indent() {
     }
 }
 
-void inline inc() { if (!NDEBUG) _indent_++; }
-void inline dec() { if (!NDEBUG) _indent_--; }

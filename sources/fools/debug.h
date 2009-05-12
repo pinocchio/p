@@ -5,7 +5,9 @@
 #define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
 
 extern void indent();
-extern void inline inc();
-extern void inline dec();
+extern int _indent_;
+
+#define inc() { if (!NDEBUG) _indent_++; }
+#define dec() { if (!NDEBUG) _indent_--; }
 
 #endif // DEBUG_H
