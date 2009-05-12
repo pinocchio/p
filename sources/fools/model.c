@@ -237,5 +237,5 @@ object inline message(context_object context) {
 
 context_object inline return_context(context_object context) {
     int size = number_value(array_size(&context->arguments));
-    return context - size - 3;
+    return context - size - ctx_size;
 }

@@ -131,6 +131,7 @@ struct native {
 struct context {
     transfer_target     code;
     object              self;
+    object              env;
     struct array        arguments;
 };
 
