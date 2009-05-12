@@ -2,20 +2,19 @@
 #include <thread.h>
 
 static void inline dircall_eval() {
-    debug("dircall>>eval:\n");
+    debug("dircall>>eval\n");
     context_object dircall_context = get_context();
-    assert_argsize(dircall_context, 2);
     
     dircall_object dircall = dircall_context->self.dircall;
     
-    object env          = argument_at(dircall_context, 1);
+    object env          = dircall_context->env;
     object self         = dircall->self;
 
     pop_context();
-    context_object context = make_context(self, 3);
+    context_object context  = make_context(self, 2);
+    context->env            = env;
     set_message(context, EVAL_WITHARGUMENTS);
-    set_argument(context, 1, env);
-    set_argument(context, 2, (object)dircall->arguments);
+    set_argument(context, 1, (object)dircall->arguments);
     set_transfer(context);
     debug("ret>>dircall>>eval:\n");
 }

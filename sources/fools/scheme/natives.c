@@ -16,7 +16,7 @@ void scheme_plus_func() {
     context_object context = get_context();
     debug("in plus\n");
     // XXX breaks encapsulation. FIX!
-    env_object env = argument_at(context, 1).env;
+    env_object env = context->env.env;
     number_object arg1 = env_at(env, 1).number;
     number_object arg2 = env_at(env, 2).number;
     number_object result = make_number(arg1->value + arg2->value);
@@ -35,7 +35,7 @@ void scheme_minus_func() {
     context_object context = get_context();
     debug("in minus\n");
     // XXX breaks encapsulation. FIX!
-    env_object env = argument_at(context, 1).env;
+    env_object env = context->env.env;
     number_object arg1 = env_at(env, 1).number;
     number_object arg2 = env_at(env, 2).number;
     number_object result = make_number(arg1->value - arg2->value);
@@ -52,14 +52,14 @@ void scheme_true_func() {
     context_object context = get_context();
     debug("in scheme_true\n");
     // XXX breaks encapsulation
-    object env = argument_at(context, 1);
-    array_object arguments = argument_at(context, 2).array;
+    object env = context->env;
+    array_object arguments = argument_at(context, 1).array;
     object if_true = array_at(arguments, 0);
 
     pop_context();
-    context = make_context(if_true, 2);
+    context = make_context(if_true, 1);
+    context->env = env;
     set_message(context, EVAL);
-    set_argument(context, 1, env);
 
     set_transfer(context);
     debug("exit scheme_true\n");
@@ -70,14 +70,15 @@ object scheme_false;
 void scheme_false_func() {
     context_object context = get_context();
     debug("in scheme_false\n");
-    object env = argument_at(context, 1);
-    array_object arguments = argument_at(context, 2).array;
+    array_object arguments = argument_at(context, 1).array;
     object if_false = array_at(arguments, 1);
 
+    object env = context->env;
+
     pop_context();
-    context = make_context(if_false, 2);
+    context = make_context(if_false, 1);
+    context->env = env;
     set_message(context, EVAL);
-    set_argument(context, 1, env);
 
     set_transfer(context);
     debug("exit scheme_false\n");
@@ -92,7 +93,7 @@ void scheme_smallerp_func() {
     debug("in smallerp\n");
     // XXX breaks encapsulation. FIX!
 
-    env_object env = argument_at(context, 1).env;
+    env_object env = context->env.env;
     number_object arg1 = env_at(env, 1).number;
     number_object arg2 = env_at(env, 2).number;
 

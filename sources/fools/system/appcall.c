@@ -1,48 +1,45 @@
 #include <system.h>
 #include <thread.h>
 
-// appcall>>invoke:env:
+// appcall>>invoke:
 static void inline appcall_invoke() {
-    debug("appcall>>invoke:env:\n");
+    debug("appcall>>invoke:\n");
     context_object appcall_context = get_context();
 
-    appcall_object appcall  = appcall_context->self.appcall;
+    appcall_object appcall = appcall_context->self.appcall;
 
-    object env          = argument_at(appcall_context, 0);
-    object expression   = argument_at(appcall_context, 1);
+    object expression = argument_at(appcall_context, 1);
 
     new_target(appcall_context, expression);
     set_message(appcall_context, EVAL_WITHARGUMENTS);
-    set_argument(appcall_context, 1, env);
-    set_argument(appcall_context, 2, (object)appcall->arguments);
+    set_argument(appcall_context, 1, (object)appcall->arguments);
 
-    debug("ret>>appcall>>invoke:env:\n");
+    debug("ret>>appcall>>invoke:\n");
     dec();
 }
 
 // appcall>>eval:
 static void inline appcall_eval() {
-    debug("appcall>>eval:\n");
+    debug("appcall>>eval\n");
     context_object appcall_context = get_context();
-    assert_argsize(appcall_context, 2);
 
     appcall_object appcall = appcall_context->self.appcall;
 
-    object env = argument_at(appcall_context, 1);
+    object env = appcall_context->env;
     pop_context();
 
-    context_object context = make_empty_context(3); // already make it big
+    context_object context = make_empty_context(2); // already make it big
                                                     // enough for
                                                     // appcall_invoke.
+    context->env = env;
     context->self = (object)appcall;
-    set_argument(context, 0, env);
     context->code = &appcall_invoke;
 
-    appcall_context = make_context(appcall->expression, 2);
+    appcall_context = make_context(appcall->expression, 1);
+    appcall_context->env = env;
     set_message(appcall_context, EVAL);
-    set_argument(appcall_context, 1, env);
 
-    debug("ret>>appcall>>eval:\n");
+    debug("ret>>appcall>>eval\n");
     set_transfer(appcall_context);
     inc();
 }

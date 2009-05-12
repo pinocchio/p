@@ -4,14 +4,13 @@
 // icapture>>eval:
 static void inline icapture_eval() {
     context_object icapture_context = get_context();
-    assert_argsize(icapture_context, 2);
 
-    debug("icapture>>eval:\n");
+    debug("icapture>>eval\n");
 
-    object dynamic_env = argument_at(icapture_context, 1);
+    object dynamic_env = icapture_context->env;
     set_argument(return_context(icapture_context), 1, dynamic_env);
 
-    debug("ret>>icapture>>eval:\n");
+    debug("ret>>icapture>>eval %p\n", dynamic_env.pointer);
 
     pop_context();
 }

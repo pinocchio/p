@@ -3,14 +3,13 @@
 
 // ilist>>eval:
 static void inline ilist_eval() {
-    debug("ilist>>eval:\n");
+    debug("ilist>>eval\n");
     context_object ilist_context = get_context();
-    assert_argsize(ilist_context, 2);
     ilist_object ilist = ilist_context->self.ilist;
 
     if (number_value(ilist->size) == 0) {
         pop_context();
-        debug("ret>>ilist>>eval(0):\n");
+        debug("ret>>ilist>>eval(0)\n");
         return;
     }
 
@@ -18,7 +17,7 @@ static void inline ilist_eval() {
 
     object instruction = (object)raw_ilist_at(ilist, end);
     new_target(ilist_context, instruction);
-    object env = argument_at(ilist_context, 1);
+    object env = ilist_context->env;
 
     // Lign up all the context frames necessary to perform
     // the whole ilist.
@@ -26,14 +25,14 @@ static void inline ilist_eval() {
         context_object ilist_pop = make_empty_context(2);
         ilist_pop->code = &pop_context;
         instruction = (object)raw_ilist_at(ilist, end);
-        ilist_context = make_context(instruction, 2);
+        ilist_context = make_context(instruction, 1);
         set_message(ilist_context, EVAL);
-        set_argument(ilist_context, 1, env);
+        ilist_context->env = env;
     }
 
     set_transfer(ilist_context);
 
-    debug("ret>>ilist>>eval(n):\n");
+    debug("ret>>ilist>>eval(n)\n");
     inc();
 }
 

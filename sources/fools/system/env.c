@@ -62,14 +62,15 @@ static void inline env_subscope() {
     env_object new_env = make_env(key, env, size);
     set_argument(return_context(receiver), 1, (object)new_env);
 
-    debug("ret>>env>>subScope:key:\n");
+    debug("ret>>env>>subScope:key: %p\n", new_env);
 
     pop_context();
 }
 
 // env>>parent:
-static void inline env_set_parent() {
-    debug("env>>parent:\n");
+static void inline env_do_set_parent() {
+    // actual setting of the evaluted parent. related to env>>parent:
+    debug("internal>>env>>parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
@@ -80,27 +81,26 @@ static void inline env_set_parent() {
 
     // Don't accidentally set parent to self!
     assert(env.env->parent.env != env.env);
-    debug("ret>>env>>parent:\n");
     pop_context();
+    debug("internal>>ret>>env>>parent:\n");
 }
 
-// env>>env:parent:
-static void inline env_set_env_parent() {
-    debug("env>>env:parent:\n");
+// env>>parent:
+static void inline env_set_parent() {
+    debug("env>>parent:\n");
     context_object receiver = get_context();
-    assert_argsize(receiver, 3);
+    assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
-    object env = argument_at(receiver, 1);
-    object new_env = argument_at(receiver, 2);
+    object env = receiver->env;
+    object new_env = argument_at(receiver, 1);
 
-    context_object context = make_context(new_env, 2);
+    context_object context = make_context(new_env, 1);
+    context->env = env;
     set_message(context, EVAL);
-    set_argument(context, 1, env);
 
-    set_message(receiver, PARENT);
-    receiver->code = &env_set_parent;
+    receiver->code = &env_do_set_parent;
 
-    debug("ret>>env>>env:parent:\n");
+    debug("ret>>env>>parent:\n");
     set_transfer(context);
 }
 
@@ -122,7 +122,7 @@ void env_dispatch() {
     if_selector(selector, FETCH_FROM,       env_fetch_from);
     if_selector(selector, STORE_AT_IN,      env_store_at_in);
     if_selector(selector, SUBSCOPE_KEY,     env_subscope);
-    if_selector(selector, ENV_SET_PARENT,   env_set_env_parent);
+    if_selector(selector, ENV_SET_PARENT,   env_set_parent);
     if_selector(selector, ENV_PARENT,       env_parent);
     doesnotunderstand("env", selector);
 }

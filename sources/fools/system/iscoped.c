@@ -3,16 +3,16 @@
 
 // iscoped>>eval:
 static void inline iscoped_eval() {
-    debug("iscoped>>doEval:withArguments\n");
+    debug("iscoped>>doWithArguments:\n");
     context_object iscoped_context = get_context();
-    assert_argsize(iscoped_context, 3);
 
     iscoped_object iscoped = iscoped_context->self.iscoped;
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
+    array_object args   = argument_at(iscoped_context, 0).array;
     object env          = argument_at(iscoped_context, 1);
-    array_object args   = argument_at(iscoped_context, 2).array;
+
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
@@ -24,11 +24,11 @@ static void inline iscoped_eval() {
 
     // we just eval the attached expression.
     pop_context();
-    iscoped_context = make_context(iscoped->expression, 2);
+    iscoped_context = make_context(iscoped->expression, 1);
+    iscoped_context->env = env;
     set_message(iscoped_context, EVAL);
-    set_argument(iscoped_context, 1, env);
 
-    debug("ret>>iscoped>>doEval:withArguments\n");
+    debug("ret>>iscoped>>doWithArguments\n");
     set_transfer(iscoped_context);
 }
 
@@ -38,23 +38,27 @@ static void inline iscoped_eval_arguments() {
     // Test arguments!
 
     // TODO make subscope of the iscoped>>scope rather than the passed env.
-    debug("iscoped>>eval:withArguments:\n");
+    debug("iscoped>>withArguments:\n");
     context_object iscoped_context = get_context();
-    assert_argsize(iscoped_context, 3);
+    assert_argsize(iscoped_context, 2);
+
+    // Move argument so that the subscope will be at 1.
+    set_argument(iscoped_context, 0, argument_at(iscoped_context, 1));
 
     iscoped_object iscoped = iscoped_context->self.iscoped;
 
-    object env = argument_at(iscoped_context, 1);
+    object env = iscoped_context->env;
     int argsize = number_value(iscoped->argsize.number);
 
     context_object context = make_context(env, 3);
+    context->env = env;
     set_message(context, SUBSCOPE_KEY);
     set_argument(context, 1, (object)make_number(argsize + 2));
     set_argument(context, 2, iscoped->expression);
 
     iscoped_context->code = &iscoped_eval;
 
-    debug("ret>>iscoped>>eval:withArguments:\n");
+    debug("ret>>iscoped>>withArguments:\n");
     set_transfer(context);
 }
 
@@ -80,18 +84,18 @@ void iscoped_dispatch() {
 
 // iscoped_class>>env:new:size:
 static void inline iscoped_class_new() {
-    debug("iscopecls>>env:new:size:\n");
+    debug("iscopecls>>new:size:\n");
     context_object iscope_context = get_context();
-    assert_argsize(iscope_context, 4);
+    assert_argsize(iscope_context, 3);
     iscoped_object iscoped =
         make_iscoped(
-            argument_at(iscope_context, 1),  // env
-            argument_at(iscope_context, 2),  // expression
-            argument_at(iscope_context, 3)); // argsize
+            iscope_context->env,             // env
+            argument_at(iscope_context, 1),  // expression
+            argument_at(iscope_context, 2)); // argsize
 
     set_argument(return_context(iscope_context), 1, (object)iscoped);
 
-    debug("ret>>iscopecls>>env:new:size:\n");
+    debug("ret>>iscopecls>>new:size:\n");
     pop_context();
 }
 

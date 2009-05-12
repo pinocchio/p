@@ -6,11 +6,11 @@ static void inline iconst_eval() {
     context_object iconst_context = get_context();
     iconst_object iconst = iconst_context->self.iconst;
 
-    debug("iconst>>eval: %p\n", iconst);
+    debug("iconst>>eval %p\n", iconst);
 
     set_argument(return_context(iconst_context), 1, iconst->constant);
 
-    debug("ret>>iconst>>eval:\n");
+    debug("ret>>iconst>>eval\n");
 
     pop_context();
 }

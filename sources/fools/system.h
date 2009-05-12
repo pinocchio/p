@@ -32,10 +32,10 @@ extern void inline new_target(context_object context, object target);
 #define return_value(rc)\
     argument_at(rc, 1)
 
-#define make_eval_context(name, todo, env)\
-    name = make_context((object)todo, 2);\
+#define make_eval_context(name, todo, environment)\
+    name = make_context((object)todo, 1);\
     set_message(name, EVAL);\
-    set_argument(name, 1, (object)env);
+    name->env = (object)environment;
 
 #define eval_in_scope(input, env, output)\
     { \

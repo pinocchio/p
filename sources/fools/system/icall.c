@@ -3,19 +3,20 @@
 
 // icall>>invoke:env:
 static void inline icall_invoke_env() {
-    debug("icall>>invoke:env:\n");
+    debug("icall>>invoke:\n");
     context_object icall_context = get_context();
 
     icall_object icall = icall_context->self.icall;
 
-    object env          = argument_at(icall_context, 0);
+    object env          = icall_context->env;
     object self         = argument_at(icall_context, 1);
 
     // XXX Do an ensuring copy! Check it's an array!
     int argsize = number_value(array_size(icall->arguments));
 
     pop_context();
-    icall_context = make_context(self, argsize);
+    icall_context       = make_context(self, argsize);
+    icall_context->env  = env;
 
     int i;
     for (i = 0; i < argsize; i++) {
@@ -23,33 +24,29 @@ static void inline icall_invoke_env() {
     }
     // until here.
 
-    set_argument(icall_context, 1, env);
-
     set_transfer(icall_context);
 
-    debug("ret>>icall>>invoke:env:\n");
+    debug("ret>>icall>>invoke:\n");
     dec();
 }
 
 // icall>>eval:
 static void inline icall_eval() {
-    debug("icall>>eval:\n");
+    debug("icall>>eval\n");
     context_object icall_context = get_context();
-    assert_argsize(icall_context, 2);
 
     icall_object icall = icall_context->self.icall;
 
-    object env = argument_at(icall_context, 1);
-    set_argument(icall_context, 0, env);
+    object env = icall_context->env;;
     icall_context->code = &icall_invoke_env;
     
     context_object context = make_context(icall->self, 2);
+    context->env = env;
     set_message(context, EVAL);
-    set_argument(context, 1, env);
 
     set_transfer(context);
 
-    debug("ret>>icall>>eval:\n");
+    debug("ret>>icall>>eval\n");
     inc();
 }
 

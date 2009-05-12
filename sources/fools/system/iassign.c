@@ -4,27 +4,25 @@
 // iassign>>eval:
 static void inline iassign_eval() {
     context_object iassign_context = get_context();
-    assert_argsize(iassign_context, 2);
-
     iassign_object iassign = iassign_context->self.iassign;
 
-    debug("iassign>>eval:\n");
+    debug("iassign>>eval\n");
     
-    object env = argument_at(iassign_context, 1);
+    object env = iassign_context->env;
 
     pop_context();
 
-    context_object context = make_context((object)iassign->variable, 3);
+    context_object context = make_context((object)iassign->variable, 2);
+    context->env = env;
     set_message(context, ASSIGN_IN);
-    set_argument(context, 2, env);
 
-    context = make_context(iassign->expression, 2);
+    context = make_context(iassign->expression, 1);
+    context->env = env;
     set_message(context, EVAL);
-    set_argument(context, 1, env);
 
     set_transfer(context);
 
-    debug("ret>>iassign>>eval:\n");
+    debug("ret>>iassign>>eval\n");
 }
 
 void iassign_dispatch() {

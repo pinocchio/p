@@ -13,7 +13,7 @@ object inline make_dyn_func(array_object arguments, object body) {
     // Eval args, eval body
     ilist_object exp = make_ilist(argsize + 1); 
 
-    icall_object parent_env = make_icall(fools_system->icapture, 2);
+    icall_object parent_env = make_icall(fools_system->icapture, 1);
     set_callmsg(parent_env, ENV_PARENT);
 
     icall_object arg_eval;
@@ -26,9 +26,9 @@ object inline make_dyn_func(array_object arguments, object body) {
         variable->index = make_number(i + 1); // skip receiver
         variable->scope = (object)exp;
 
-        arg_eval = make_icall((object)variable, 3);
+        arg_eval = make_icall((object)variable, 2);
         set_callmsg(arg_eval, PRE_EVAL_ENV);
-        set_callarg(arg_eval, 2, (object)parent_env);
+        set_callarg(arg_eval, 1, (object)parent_env);
         ilist_at_put(exp, i,
             (object)make_iassign(
                 variable,
@@ -37,10 +37,10 @@ object inline make_dyn_func(array_object arguments, object body) {
     
     ilist_at_put(exp, argsize, body);
 
-    icall_object icall = make_icall((object)iconst, 4);
+    icall_object icall = make_icall((object)iconst, 3);
     set_callmsg(icall, ENV_NEW_SIZE);
-    set_callarg(icall, 2, (object)exp);
-    set_callarg(icall, 3, (object)array_size(arguments));
+    set_callarg(icall, 1, (object)exp);
+    set_callarg(icall, 2, (object)array_size(arguments));
 
     return (object)icall;
 }
@@ -66,9 +66,9 @@ object inline make_func(array_object arguments, object body) {
         variable->index = make_number(i + 1); // skip receiver
         variable->scope = (object)exp;
 
-        arg_eval = make_icall((object)variable, 3);
+        arg_eval = make_icall((object)variable, 2);
         set_callmsg(arg_eval, PRE_EVAL_ENV);
-        set_callarg(arg_eval, 2, (object)parent_env);
+        set_callarg(arg_eval, 1, (object)parent_env);
         ilist_at_put(exp, i,
             (object)make_iassign(
                 variable,
@@ -81,17 +81,17 @@ object inline make_func(array_object arguments, object body) {
         
     set_callmsg(self_scope, SCOPE_IN_ENV);
 
-    icall_object switch_env = make_icall(fools_system->icapture, 3);
+    icall_object switch_env = make_icall(fools_system->icapture, 2);
     set_callmsg(switch_env, ENV_SET_PARENT);
-    set_callarg(switch_env, 2, (object)self_scope);
+    set_callarg(switch_env, 1, (object)self_scope);
         
     ilist_at_put(exp, argsize, (object)switch_env);
     ilist_at_put(exp, argsize + 1, body);
 
-    icall_object icall = make_icall((object)iconst, 4);
+    icall_object icall = make_icall((object)iconst, 3);
     set_callmsg(icall, ENV_NEW_SIZE);
-    set_callarg(icall, 2, (object)exp);
-    set_callarg(icall, 3, (object)array_size(arguments));
+    set_callarg(icall, 1, (object)exp);
+    set_callarg(icall, 2, (object)array_size(arguments));
 
     return (object)icall;
 }

@@ -1,41 +1,43 @@
 #include <system.h>
 #include <thread.h>
 
-// ivar>>assign:in:
+// ivar>>assign:
 static void inline ivar_assign() {
     context_object ivar_context = get_context();
-    assert_argsize(ivar_context, 3);
+    assert_argsize(ivar_context, 2);
 
     ivar_object ivar = ivar_context->self.ivar;
 
-    debug("ivar>>assign:in:\n");
+    debug("ivar>>assign:\n");
 
+    object env      = ivar_context->env;
     object value    = argument_at(ivar_context, 1);
-    object env      = argument_at(ivar_context, 2);
 
     pop_context();
-    
+
     ivar_context = make_context(env, 4);
+    ivar_context->env = env;
+
     set_message(ivar_context, STORE_AT_IN);
     set_argument(ivar_context, 1, value);
     set_argument(ivar_context, 2, (object)ivar->index);
     set_argument(ivar_context, 3, ivar->scope);
 
     set_transfer(ivar_context);
+    debug("ret>>ivar>>assign:\n");
 }
 
 // ivar>>eval:
 static void inline ivar_eval() {
-    debug("ivar>>eval:\n");
+    debug("ivar>>eval\n");
     context_object ivar_context = get_context();
-    assert_argsize(ivar_context, 2);
-
     ivar_object ivar = ivar_context->self.ivar;
 
-    object env = argument_at(ivar_context, 1);
+    object env = ivar_context->env;
 
     pop_context();
     ivar_context = make_context(env, 3);
+    ivar_context->env = env;
     set_message(ivar_context, FETCH_FROM);
     set_argument(ivar_context, 1, (object)ivar->index);
     set_argument(ivar_context, 2, ivar->scope);
