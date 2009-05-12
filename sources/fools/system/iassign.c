@@ -6,7 +6,7 @@ static void inline iassign_eval() {
     context_object iassign_context = get_context();
     assert_argsize(iassign_context, 2);
 
-    iassign_object iassign = iassign_context->interpreter.iassign;
+    iassign_object iassign = iassign_context->self.iassign;
 
     debug("iassign>>eval:\n");
     

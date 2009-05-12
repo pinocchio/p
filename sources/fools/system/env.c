@@ -9,7 +9,7 @@ static void inline env_fetch_from() {
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
-    env_object env = receiver->interpreter.env;
+    env_object env = receiver->self.env;
 
     if (env->scope.pointer == argument_at(receiver, 2).pointer) {
         int index = number_value(argument_at(receiver, 1).number);
@@ -32,7 +32,7 @@ static void inline env_store_at_in() {
     context_object receiver = get_context();
     assert_argsize(receiver, 4);
     // arguments at: 0 -> selector
-    env_object env = receiver->interpreter.env;
+    env_object env = receiver->self.env;
     if (env->scope.pointer == argument_at(receiver, 3).pointer ) {
         int index = number_value(argument_at(receiver, 2).number);
         object value = argument_at(receiver, 1);
@@ -54,7 +54,7 @@ static void inline env_subscope() {
     debug("env>>subScope:key:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
-    object env  = receiver->interpreter;
+    object env  = receiver->self;
     // arguments at: 0 -> selector
     int size    = number_value(argument_at(receiver, 1).number);
     object key  = argument_at(receiver, 2);
@@ -73,7 +73,7 @@ static void inline env_set_parent() {
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
-    object env = receiver->interpreter;
+    object env = receiver->self;
     object new_env = argument_at(receiver, 1);
 
     env.env->parent = new_env;
@@ -109,7 +109,7 @@ static void inline env_parent() {
     debug("env>>envParent:\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
-    object env = receiver->interpreter;
+    object env = receiver->self;
     set_argument(return_context(receiver), 1, env.env->parent);
     debug("ret>>env>>envParent:\n");
     pop_context();

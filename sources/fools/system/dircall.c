@@ -6,13 +6,13 @@ static void inline dircall_eval() {
     context_object dircall_context = get_context();
     assert_argsize(dircall_context, 2);
     
-    dircall_object dircall = dircall_context->interpreter.dircall;
+    dircall_object dircall = dircall_context->self.dircall;
     
     object env          = argument_at(dircall_context, 1);
-    object interpreter  = dircall->interpreter;
+    object self         = dircall->self;
 
     pop_context();
-    context_object context = make_context(interpreter, 3);
+    context_object context = make_context(self, 3);
     set_message(context, EVAL_WITHARGUMENTS);
     set_argument(context, 1, env);
     set_argument(context, 2, (object)dircall->arguments);
@@ -30,10 +30,10 @@ void dircall_dispatch() {
 }
 
 // Object creation
-dircall_object make_dircall(object interpreter, int argsize) {
+dircall_object make_dircall(object self, int argsize) {
     dircall_object result   = NEW(struct dircall);
     header(result)          = (object)fools_system->dircall_class;
-    result->interpreter     = interpreter;
+    result->self            = self;
     result->arguments       = make_array(argsize);
     return result;
 }

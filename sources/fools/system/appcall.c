@@ -6,7 +6,7 @@ static void inline appcall_invoke() {
     debug("appcall>>invoke:env:\n");
     context_object appcall_context = get_context();
 
-    appcall_object appcall  = appcall_context->interpreter.appcall;
+    appcall_object appcall  = appcall_context->self.appcall;
 
     object env          = argument_at(appcall_context, 0);
     object expression   = argument_at(appcall_context, 1);
@@ -26,7 +26,7 @@ static void inline appcall_eval() {
     context_object appcall_context = get_context();
     assert_argsize(appcall_context, 2);
 
-    appcall_object appcall = appcall_context->interpreter.appcall;
+    appcall_object appcall = appcall_context->self.appcall;
 
     object env = argument_at(appcall_context, 1);
     pop_context();
@@ -34,7 +34,7 @@ static void inline appcall_eval() {
     context_object context = make_empty_context(3); // already make it big
                                                     // enough for
                                                     // appcall_invoke.
-    context->interpreter = (object)appcall;
+    context->self = (object)appcall;
     set_argument(context, 0, env);
     context->code = &appcall_invoke;
 

@@ -4,6 +4,8 @@
 #include <bootstrap.h>
 #include <thread.h>
 
+#define ctx_size (sizeof(struct context) / sizeof(object))
+
 variable_object make_object(int size, object interpreter) {
     variable_object result  = NEW_ARRAYED(variable_object, object, size);
     header(result)          = interpreter;
@@ -63,16 +65,16 @@ native_object make_native(transfer_target native) {
     return result;
 }
 
-context_object make_context(object interpreter, int size) {
-    context_object result   = stack_claim(size + 3);
-    result->interpreter     = interpreter;
-    result->code            = ntarget(header(interpreter.pointer));
+context_object make_context(object self, int size) {
+    context_object result   = stack_claim(size + ctx_size);
+    result->self            = self;
+    result->code            = ntarget(header(self.pointer));
     result->arguments.size  = make_number(size);
     return result;
 }
 
 context_object make_empty_context(int size) {
-    context_object result   = stack_claim(size + 3);
+    context_object result   = stack_claim(size + ctx_size);
     result->arguments.size  = make_number(size);
     return result;
 }

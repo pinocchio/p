@@ -6,16 +6,16 @@ static void inline icall_invoke_env() {
     debug("icall>>invoke:env:\n");
     context_object icall_context = get_context();
 
-    icall_object icall = icall_context->interpreter.icall;
+    icall_object icall = icall_context->self.icall;
 
     object env          = argument_at(icall_context, 0);
-    object interpreter  = argument_at(icall_context, 1);
+    object self         = argument_at(icall_context, 1);
 
     // XXX Do an ensuring copy! Check it's an array!
     int argsize = number_value(array_size(icall->arguments));
 
     pop_context();
-    icall_context = make_context(interpreter, argsize);
+    icall_context = make_context(self, argsize);
 
     int i;
     for (i = 0; i < argsize; i++) {
@@ -37,13 +37,13 @@ static void inline icall_eval() {
     context_object icall_context = get_context();
     assert_argsize(icall_context, 2);
 
-    icall_object icall = icall_context->interpreter.icall;
+    icall_object icall = icall_context->self.icall;
 
     object env = argument_at(icall_context, 1);
     set_argument(icall_context, 0, env);
     icall_context->code = &icall_invoke_env;
     
-    context_object context = make_context(icall->interpreter, 2);
+    context_object context = make_context(icall->self, 2);
     set_message(context, EVAL);
     set_argument(context, 1, env);
 
@@ -63,9 +63,9 @@ void icall_dispatch() {
 }
 
 // Object creation
-icall_object make_icall(object interpreter, int argsize) {
+icall_object make_icall(object self, int argsize) {
     new_instance(icall);
-    result->interpreter = interpreter;
+    result->self        = self;
     result->arguments   = make_array(argsize);
     return result;
 }

@@ -14,7 +14,7 @@ void doesnotunderstand(const char* class, object selector) {
 // Context handling
 
 void inline new_target(context_object context, object target) {
-    context->interpreter = target;
+    context->self = target;
     context->code = ntarget(header(target.pointer));
 }
 
@@ -24,7 +24,7 @@ void inline native() {
     // Finds the code which was tagged with native and executes it.
     // Code tagged with native has to know by itself on which level it
     // executes!
-    object code = get_context()->interpreter;
+    object code = get_context()->self;
     while (pheader(code.pointer) != ((object)fools_system->native).pointer) {
         code = header(code.pointer);
     }
@@ -47,12 +47,12 @@ void pre_eval_env() {
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
 
-    object interp   = receiver->interpreter;
+    object self     = receiver->self;
     object env      = argument_at(receiver, 1);
     object env_arg  = argument_at(receiver, 2);
 
     pop_context();
-    receiver = make_context(interp, 2);
+    receiver = make_context(self, 2);
     set_message(receiver, EVAL);
 
     context_object context = make_context(env_arg, 2);

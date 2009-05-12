@@ -4,7 +4,7 @@
 // iconst>>eval:
 static void inline iconst_eval() {
     context_object iconst_context = get_context();
-    iconst_object iconst = iconst_context->interpreter.iconst;
+    iconst_object iconst = iconst_context->self.iconst;
 
     debug("iconst>>eval: %p\n", iconst);
 

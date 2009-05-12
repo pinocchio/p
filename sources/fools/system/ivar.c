@@ -6,7 +6,7 @@ static void inline ivar_assign() {
     context_object ivar_context = get_context();
     assert_argsize(ivar_context, 3);
 
-    ivar_object ivar = ivar_context->interpreter.ivar;
+    ivar_object ivar = ivar_context->self.ivar;
 
     debug("ivar>>assign:in:\n");
 
@@ -30,7 +30,7 @@ static void inline ivar_eval() {
     context_object ivar_context = get_context();
     assert_argsize(ivar_context, 2);
 
-    ivar_object ivar = ivar_context->interpreter.ivar;
+    ivar_object ivar = ivar_context->self.ivar;
 
     object env = argument_at(ivar_context, 1);
 

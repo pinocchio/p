@@ -1,6 +1,7 @@
 Architecture
 ------------
 - finish scheme system
+    - subscope of iscoped>>scope rather than the passed env
     - figure out a good way of writing scheme natives in terms of message
       sends -> better than the current "native()" approach
     - look at importing existing scheme parsers and syntax compilers

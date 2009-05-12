@@ -6,7 +6,7 @@ static void inline ilist_eval() {
     debug("ilist>>eval:\n");
     context_object ilist_context = get_context();
     assert_argsize(ilist_context, 2);
-    ilist_object ilist = ilist_context->interpreter.ilist;
+    ilist_object ilist = ilist_context->self.ilist;
 
     if (number_value(ilist->size) == 0) {
         pop_context();

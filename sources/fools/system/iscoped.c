@@ -7,7 +7,7 @@ static void inline iscoped_eval() {
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
 
-    iscoped_object iscoped = iscoped_context->interpreter.iscoped;
+    iscoped_object iscoped = iscoped_context->self.iscoped;
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
@@ -42,7 +42,7 @@ static void inline iscoped_eval_arguments() {
     context_object iscoped_context = get_context();
     assert_argsize(iscoped_context, 3);
 
-    iscoped_object iscoped = iscoped_context->interpreter.iscoped;
+    iscoped_object iscoped = iscoped_context->self.iscoped;
 
     object env = argument_at(iscoped_context, 1);
     int argsize = number_value(iscoped->argsize.number);
@@ -63,7 +63,7 @@ static void inline iscoped_scope() {
     debug("iscoped>>scope\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
-    iscoped_object iscoped = receiver->interpreter.iscoped;
+    iscoped_object iscoped = receiver->self.iscoped;
     set_argument(return_context(receiver), 1, iscoped->scope);
     pop_context();
     debug("ret>>iscoped>>scope\n");
