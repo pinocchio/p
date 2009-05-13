@@ -9,13 +9,21 @@
     ;        test
     ;        (+ 10 20)))
     ;    null)
-    ((lambda (fib)
-        (set! fib
-            (lambda (x)
-                (if (< x 1)
-                    1
-                    (+ (fib (- x 1))
-                       (fib (- x 2))))))
-        (fib 20))
-      null)
+
+
+    (let test ((a 10))
+        (if (< a 0)
+            a
+            (test (- a 1)))
+    )
+
+    ;((lambda (fib)
+    ;    (set! fib
+    ;        (lambda (x)
+    ;            (if (< x 1)
+    ;                1
+    ;                (+ (fib (- x 1))
+    ;                   (fib (- x 2))))))
+    ;    (fib 20))
+    ;  null)
 ))
