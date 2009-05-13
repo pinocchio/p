@@ -115,6 +115,37 @@ void scheme_smallerp_func() {
     debug("exit smallerp\n");
 }
 
+object scheme_eqp;
+object scheme_eqp_1;
+object scheme_eqp_2;
+
+void scheme_eqp_func() {
+    context_object context = get_context();
+    debug("in eqp\n");
+    // XXX breaks encapsulation. FIX!
+
+    env_object env = context->env.env;
+    object arg1 = env_at(env, 1);
+    object arg2 = env_at(env, 2);
+
+    object result;
+    if (arg1.pointer == arg2.pointer) {
+        //result = fools_system->true;
+        result = scheme_true;
+        debug("smaller\n");
+    } else {
+        //result = fools_system->false;
+        result = scheme_false;
+        debug("bigger\n");
+    }
+
+    debug("result: %p\n", result.pointer);
+    set_argument(return_context(context), 1, result);
+
+    pop_context();
+    debug("exit eqp\n");
+}
+
 void bootstrap_scheme() {
     scheme_plus_1 = (object)make_ivar();
     scheme_plus_2 = (object)make_ivar();
@@ -136,6 +167,13 @@ void bootstrap_scheme() {
     array_at_put(arguments, 0, scheme_smallerp_1);
     array_at_put(arguments, 1, scheme_smallerp_2);
     scheme_smallerp = make_dyn_func(arguments, (object)make_native(&scheme_smallerp_func));
+
+    scheme_eqp_1 = (object)make_ivar();
+    scheme_eqp_2 = (object)make_ivar();
+    arguments = make_array(2);
+    array_at_put(arguments, 0, scheme_eqp_1);
+    array_at_put(arguments, 1, scheme_eqp_2);
+    scheme_eqp = make_dyn_func(arguments, (object)make_native(&scheme_eqp_func));
 
     scheme_true  = (object)make_native(&scheme_true_func);
     scheme_false  = (object)make_native(&scheme_false_func);

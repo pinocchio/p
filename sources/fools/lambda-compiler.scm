@@ -176,9 +176,11 @@ extravars))))))))
                      ,(caddr expression))))
 
 (define (transform-new-symbol symbol vars)
-  (transform-expression
-   `(string->symbol
-     ,(symbol->string symbol)) vars))
+    (list ""
+        (string-append "SYMBOL_" (symbol->string symbol))))
+  ;(transform-expression
+  ; `(string->symbol
+  ;   ,(symbol->string symbol)) vars))
 
 (define (transform-quoted expression vars)
   (cond ((and (= (length expression) 2) (symbol? (cadr expression)))

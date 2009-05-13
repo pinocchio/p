@@ -4,6 +4,7 @@
 extern object scheme_plus;
 extern object scheme_minus;
 extern object scheme_smallerp;
+extern object scheme_eqp;
 
 extern object scheme_string_to_symbol;
 
