@@ -2,28 +2,9 @@
 
 (display
 (transform-code
-    ;(+ (+ (+ 20 5) 10) (+ 10 59))
-    ;(< 40 2)
-    ;((lambda (test)
-    ;    (if (< 10 20)
-    ;        test
-    ;        (+ 10 20)))
-    ;    null)
-
-
-    (let test ((a 10))
-        (if (< a 0)
-            a
-            (test (- a 1)))
-    )
-
-    ;((lambda (fib)
-    ;    (set! fib
-    ;        (lambda (x)
-    ;            (if (< x 1)
-    ;                1
-    ;                (+ (fib (- x 1))
-    ;                   (fib (- x 2))))))
-    ;    (fib 20))
-    ;  null)
+    (let fib ((x 20))
+        (if (< x 1)
+            1
+            (+ (fib (- x 1))
+               (fib (- x 2)))))
 ))
