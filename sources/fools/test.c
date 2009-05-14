@@ -267,7 +267,10 @@ SETUP(test_new_iscoped)
 
     object result = transfer(ci);
 
-    iscoped_object iscope = result.iscoped;
+    object level_shifter = header(result.pointer);
+    assert(level_shifter.native->target == &shift_level);
+
+    iscoped_object iscope = header(level_shifter.pointer).iscoped;
 
     assert(pheader(iscope) == fools_system->iscoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
@@ -298,9 +301,9 @@ SETUP(test_eval_iscoped)
     iscoped_object iscope = result.iscoped;
 
     iconst->constant = (object)iscope;
-    appcall_object appcall = make_appcall((object)iconst, 0);
+    icall = make_icall((object)iconst, 0);
 
-    make_eval_context(ci, appcall, start);
+    make_eval_context(ci, icall, start);
 
     result = transfer(ci);
 
@@ -328,13 +331,9 @@ SETUP(test_env_parent)
     env_object env2 = make_env((object)fools_system->nil,
                               (object)env, 0);
 
-    // !!!
-    // needs size 2 since call: expects interpreter level and passes env
-    // automatically.
-    // !!!
     icall_object icall = make_icall(
                             (object)
-                            make_iconst((object)env2), 2);
+                            make_iconst((object)env2), 1);
     set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env);
 
@@ -351,11 +350,7 @@ SETUP(test_capture_parent)
     env_object env2 = make_env((object)fools_system->nil,
                               (object)env, 0);
 
-    // !!!
-    // needs size 2 since call: expects interpreter level and passes env
-    // automatically.
-    // !!!
-    icall_object icall = make_icall(fools_system->icapture, 2);
+    icall_object icall = make_icall(fools_system->icapture, 1);
     set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env2);
 
@@ -369,8 +364,11 @@ SETUP(test_make_function_no_args)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
+    array_object args = make_array(1);
+    array_at_put(args, 0, (object)make_ivar());
+
     object constant_function =
-        make_func(make_array(0),
+        make_func(args,
                   (object)
                   make_iconst((object)make_number(42)));
 
@@ -378,8 +376,10 @@ SETUP(test_make_function_no_args)
 
     object result = transfer(ci);
 
-    assert(pheader(result.pointer) == fools_system->iscoped_class.pointer);
-    assert(result.iscoped->scope.env == env);
+    object iscope = header(pheader(result.pointer));
+
+    assert(pheader(iscope.pointer) == fools_system->iscoped_class.pointer);
+    assert(iscope.iscoped->scope.env == env);
 
 }
 
@@ -411,8 +411,12 @@ SETUP(test_eval_function_no_args)
 
 
     iconst_object the_instr = make_iconst((object)make_number(42));
+
+    array_object args = make_array(1);
+    array_at_put(args, 0, (object)make_ivar());
+
     object constant_function =
-        make_func(make_array(0),
+        make_func(args,
                     (object)
                     the_instr
                   );
@@ -422,9 +426,9 @@ SETUP(test_eval_function_no_args)
     object scoped_function = transfer(ci);
 
     object iconst = (object)make_iconst(scoped_function);
-    appcall_object appcall = make_appcall(iconst, 0);
+    icall_object icall = make_icall(iconst, 0);
 
-    make_eval_context(ci, appcall, env);
+    make_eval_context(ci, icall, env);
 
     object result = transfer(ci);
 
@@ -440,8 +444,9 @@ SETUP(test_make_function_1_arg)
 
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_object arguments = make_array(2);
+    array_at_put(arguments, 0, (object)make_ivar()); // self
+    array_at_put(arguments, 1, (object)ivar);
 
     object constant_function =
         make_func(arguments,
@@ -462,8 +467,9 @@ SETUP(test_eval_function_1_arg)
 
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_object arguments = make_array(2);
+    array_at_put(arguments, 0, (object)make_ivar()); // self
+    array_at_put(arguments, 1, (object)ivar);
 
     object constant_function =
         make_func(arguments,
@@ -478,10 +484,10 @@ SETUP(test_eval_function_1_arg)
     object arg = (object)make_number(42);
 
     object iconst = (object)make_iconst(scoped_function);
-    appcall_object appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)make_iconst(arg));
+    icall_object icall = make_icall(iconst, 1);
+    set_callarg(icall, 0, (object)make_iconst(arg));
 
-    make_eval_context(ci, appcall, env);
+    make_eval_context(ci, icall, env);
 
     object result = transfer(ci);
 
@@ -494,11 +500,15 @@ SETUP(test_eval_nested_function)
                               (object)fools_system->nil, 0);
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_object arguments = make_array(2);
+    array_at_put(arguments, 0, (object)make_ivar()); // self
+    array_at_put(arguments, 1, (object)ivar);
+
+    array_object args = make_array(1);
+    array_at_put(args, 0, (object)make_ivar()); // self
 
     object constant_function1 =
-        make_func(make_array(0),
+        make_func(args,
                     (object)
                     ivar
                   );
@@ -510,21 +520,21 @@ SETUP(test_eval_nested_function)
 
     object arg = (object)make_number(42);
     object iconst = (object)make_iconst(scoped_function);
-    appcall_object appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)make_iconst(arg));
+    icall_object icall = make_icall(iconst, 1);
+    set_callarg(icall, 0, (object)make_iconst(arg));
 
-    make_eval_context(ci, appcall, env);
+    make_eval_context(ci, icall, env);
 
     object nested_function = transfer(ci);
     
-    assert(pheader(nested_function.pointer) ==
-           fools_system->iscoped_class.pointer);
+    //assert(pheader(nested_function.pointer) ==
+    //       fools_system->iscoped_class.pointer);
 
     iconst = (object)make_iconst(nested_function);
-    appcall = make_appcall(iconst, 1);
-    set_appcarg(appcall, 0, (object)make_iconst(arg));
+    icall = make_icall(iconst, 1);
+    set_callarg(icall, 0, (object)make_iconst(arg));
 
-    make_eval_context(ci, appcall, env);
+    make_eval_context(ci, icall, env);
 
     object result = transfer(ci);
 

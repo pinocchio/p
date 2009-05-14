@@ -53,7 +53,7 @@ static void inline iscoped_eval_arguments() {
     context_object context = make_context(env, 3);
     context->env = env;
     set_message(context, SUBSCOPE_KEY);
-    set_argument(context, 1, (object)make_number(argsize + 2));
+    set_argument(context, 1, (object)make_number(argsize + 1)); // + iscoped
     set_argument(context, 2, iscoped->expression);
 
     iscoped_context->code = &iscoped_eval;
@@ -87,13 +87,13 @@ static void inline iscoped_class_new() {
     debug("iscopecls>>new:size:\n");
     context_object iscope_context = get_context();
     assert_argsize(iscope_context, 3);
-    iscoped_object iscoped =
+    object iscoped =
         make_iscoped(
             iscope_context->env,             // env
             argument_at(iscope_context, 1),  // expression
             argument_at(iscope_context, 2)); // argsize
 
-    set_argument(return_context(iscope_context), 1, (object)iscoped);
+    set_argument(return_context(iscope_context), 1, iscoped);
 
     debug("ret>>iscopecls>>new:size:\n");
     pop_context();
@@ -108,10 +108,11 @@ void iscoped_class_dispatch() {
 }
 
 // Object creation
-iscoped_object make_iscoped(object scope, object expression, object argsize) {
+object make_iscoped(object scope, object expression, object argsize) {
     new_instance(iscoped);
     result->scope           = scope;
     result->expression      = expression;
     result->argsize         = argsize;
-    return result;
+    object func = make_level_shift((object)result);
+    return (object)make_object(0, func); // funcs don't have instance variables.
 }

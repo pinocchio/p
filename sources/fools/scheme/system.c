@@ -9,7 +9,7 @@ object inline make_dyn_func(array_object arguments, object body) {
 
     iconst_object iconst = make_iconst(fools_system->iscoped);
 
-    int argsize = number_value(array_size(arguments));
+    int argsize = number_value(array_size(arguments)) - 1;
     // Eval args, eval body
     ilist_object exp = make_ilist(argsize + 1); 
 
@@ -22,8 +22,8 @@ object inline make_dyn_func(array_object arguments, object body) {
     // varN = (varN eval: (env parent))
     int i;
     for (i = 0; i < argsize; i++) {
-        ivar_object variable = array_at(arguments, i).ivar;
-        variable->index = make_number(i + 1); // skip receiver
+        ivar_object variable = array_at(arguments, i + 1).ivar;
+        variable->index = make_number(i + 2); // skip receiver and self
         variable->scope = (object)exp;
 
         arg_eval = make_icall((object)variable, 2);
@@ -49,12 +49,15 @@ object inline make_func(array_object arguments, object body) {
 
     iconst_object iconst = make_iconst(fools_system->iscoped);
 
-    int argsize = number_value(array_size(arguments));
+    int argsize = number_value(array_size(arguments)) - 1;
     // Eval args, switch context, eval body
-    ilist_object exp = make_ilist(argsize + 2); 
+    ilist_object exp = make_ilist(argsize + 2);
 
     icall_object parent_env = make_icall(fools_system->icapture, 2);
     set_callmsg(parent_env, ENV_PARENT);
+
+    ivar_object self_var = array_at(arguments, 0).ivar;
+    self_var->scope = (object)exp;
 
     icall_object arg_eval;
     // var1 = (var1 eval: (env parent))
@@ -62,8 +65,8 @@ object inline make_func(array_object arguments, object body) {
     // varN = (varN eval: (env parent))
     int i;
     for (i = 0; i < argsize; i++) {
-        ivar_object variable = array_at(arguments, i).ivar;
-        variable->index = make_number(i + 1); // skip receiver
+        ivar_object variable = array_at(arguments, i + 1).ivar;
+        variable->index = make_number(i + 2); // skip receiver + self
         variable->scope = (object)exp;
 
         arg_eval = make_icall((object)variable, 2);
@@ -77,8 +80,8 @@ object inline make_func(array_object arguments, object body) {
     
     ivar_object receiver_var = make_ivar();
     receiver_var->scope = (object)exp;
+
     icall_object self_scope = make_icall((object)receiver_var, 2);
-        
     set_callmsg(self_scope, SCOPE_IN_ENV);
 
     icall_object switch_env = make_icall(fools_system->icapture, 2);

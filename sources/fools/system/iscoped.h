@@ -3,9 +3,9 @@
 
 extern void iscoped_dispatch();
 extern void iscoped_class_dispatch();
-extern iscoped_object make_iscoped(object scope,
-                                   object expression,
-                                   object argsize);
+extern object make_iscoped(object scope,
+                           object expression,
+                           object argsize);
 
 struct iscoped {
     object          scope;

@@ -2,13 +2,13 @@ CFILES=model.c bootstrap.c primitives.c system.c print.c\
 scheme/natives.c scheme/system.c scheme/symbols.c debug.c thread.c\
 system/icall.c system/appcall.c system/ilist.c system/iconst.c\
 system/dircall.c system/iassign.c system/ivar.c system/icapture.c\
-system/env.c system/iscoped.c
+system/env.c system/iscoped.c system/switch.c
 HFILES=model.h bootstrap.h primitives.h system.h print.h gc.h\
 scheme/natives.h scheme/system.h scheme/symbols.h debug.h thread.h\
 constants.h\
 system/icall.h system/appcall.h system/ilist.h system/iconst.h\
 system/dircall.h system/iassign.h system/ivar.h system/icapture.h\
-system/env.h system/iscoped.h
+system/env.h system/iscoped.h system/switch.h
 PROGRAM=fools
 VERSION=0.1
 

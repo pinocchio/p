@@ -172,7 +172,11 @@ object inline message(context_object context) {
     return argument_at(context, 0);
 }
 
+int inline context_size(context_object context) {
+    return number_value(array_size(&context->arguments));
+}
+
 context_object inline return_context(context_object context) {
-    int size = number_value(array_size(&context->arguments));
+    int size = context_size(context);
     return context - size - ctx_size;
 }

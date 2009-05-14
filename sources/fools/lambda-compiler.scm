@@ -13,7 +13,7 @@
     (list arg var-name
         (string-append "object "
                        var-name
-                       " = (object)make_ivar((object)fools_system->nil, 0);\n"))))
+                       " = (object)make_ivar();\n"))))
 
 
 (define (make-arguments vars name)
@@ -40,7 +40,7 @@
   (let* ((args (cadr a-lambda))
          (body (cddr a-lambda))
          (name (make-var-name "lambda" 'x))
-         (vars (map make-vars args))
+         (vars (map make-vars (cons 'self args)))
          (transformed (transform-expression-list body (append outervars vars)))
          (argarray (make-arguments (append vars (caddr transformed)) name)))
     (list (string-append
@@ -237,8 +237,8 @@ extravars))))))))
           (newline (current-error-port))
           (error)))))
 
-(define (transform-appcall-arg app name idx)
-  (string-append "set_appcarg(" app
+(define (transform-icall-arg app name idx)
+  (string-append "set_callarg(" app
                  ", " (number->string idx)
                  ", (object)" name ");\n"))
 
@@ -247,11 +247,11 @@ extravars))))))))
   (let* ((parts (map (lambda (exp) (transform-expression exp vars)) expression))
          (prefix (apply string-append (map car parts)))
          (appname (cadr (car parts)))
-         (name (make-var-name "appcall" (string->symbol appname)))
+         (name (make-var-name "icall" (string->symbol appname)))
          
-         (code (string-append "appcall_object "
+         (code (string-append "icall_object "
                               name
-                              " = make_appcall((object)" appname ", "
+                              " = make_icall((object)" appname ", "
                               (number->string (- (length parts) 1)) ");\n"))
          (args (let loop ((todo (cdr parts))
                           (idx 0)
@@ -261,7 +261,7 @@ extravars))))))))
                      (loop (cdr todo)
                            (+ idx 1)
                            (string-append code
-                                (transform-appcall-arg
+                                (transform-icall-arg
                                     name
                                     (cadr (car todo)) idx)))))))
     (list (string-append prefix code args)
