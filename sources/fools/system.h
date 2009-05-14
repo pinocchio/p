@@ -8,8 +8,6 @@
 
 #include <debug.h>
 
-#include <system/appcall.h>
-#include <system/dircall.h>
 #include <system/env.h>
 #include <system/iassign.h>
 #include <system/icall.h>

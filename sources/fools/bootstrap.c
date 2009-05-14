@@ -82,8 +82,6 @@ fools_object bootstrap() {
     fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
     fools_system->iscoped_class     = wrap_dispatcher(iscoped_dispatch);
     fools_system->iscoped_metaclass = wrap_dispatcher(iscoped_class_dispatch);
-    fools_system->appcall_class     = wrap_dispatcher(appcall_dispatch);
-    fools_system->dircall_class     = wrap_dispatcher(dircall_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
     fools_system->icapture = (object)make_icapture();

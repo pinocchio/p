@@ -39,8 +39,6 @@ struct iconst;
 struct ivar;
 struct iscoped;
 struct icapture;
-struct appcall;
-struct dircall;
 
 typedef struct ilist*            ilist_object;
 typedef struct iassign*          iassign_object;
@@ -49,8 +47,6 @@ typedef struct iconst*           iconst_object;
 typedef struct ivar*             ivar_object;
 typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
-typedef struct appcall*          appcall_object;
-typedef struct dircall*          dircall_object;
 typedef struct env*              env_object;
 typedef struct variable_object*  variable_object;
 typedef struct string*           string_object;
@@ -75,8 +71,6 @@ typedef union {
     ivar_object         ivar;
     iscoped_object      iscoped;
     icapture_object     icapture;
-    appcall_object      appcall;
-    dircall_object      dircall;
     variable_object     object;
     string_object       string;
     number_object       number;
@@ -148,8 +142,6 @@ struct fools {
     object icapture_class;
     object iscoped_metaclass;
     object iscoped_class;
-    object appcall_class;
-    object dircall_class;
     object env_class;
 
     // Minimal native classes
