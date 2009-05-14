@@ -16,7 +16,7 @@
 #include <system/ilist.h>
 #include <system/iscoped.h>
 #include <system/ivar.h>
-#include <system/switch.h>
+#include <system/shift.h>
 
 // Starting an evaluation thread.
 extern object inline transfer(context_object context);
