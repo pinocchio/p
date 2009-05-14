@@ -45,7 +45,3 @@ object inline get_stk_return() {
 context_object inline get_context() {
     return stk_idx;
 }
-
-void inline set_transfer(context_object context) {
-    stk_idx = context;
-}

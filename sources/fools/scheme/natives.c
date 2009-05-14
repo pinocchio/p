@@ -60,7 +60,6 @@ void scheme_true_func() {
     context->env = env;
     set_message(context, EVAL);
 
-    set_transfer(context);
     debug("exit scheme_true\n");
 }
 
@@ -78,7 +77,6 @@ void scheme_false_func() {
     context->env = env;
     set_message(context, EVAL);
 
-    set_transfer(context);
     debug("exit scheme_false\n");
 }
 

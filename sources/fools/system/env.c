@@ -44,7 +44,6 @@ static void inline env_store_at_in() {
     }
     new_target(receiver, env->parent);
     debug("ret>>env>>store:at:in:\n");
-    set_transfer(receiver);
 }
 
 // env>>subScope:key:
@@ -101,7 +100,6 @@ static void inline env_set_parent() {
     receiver->code = &env_do_set_parent;
 
     debug("ret>>env>>parent:\n");
-    set_transfer(context);
 }
 
 // env>>parent

@@ -24,8 +24,6 @@ static void inline icall_invoke_env() {
     }
     // until here.
 
-    set_transfer(icall_context);
-
     debug("ret>>icall>>invoke:\n");
     dec();
 }
@@ -43,8 +41,6 @@ static void inline icall_eval() {
     context_object context = make_context(icall->self, 1);
     context->env = env;
     set_message(context, EVAL);
-
-    set_transfer(context);
 
     debug("ret>>icall>>eval\n");
     inc();

@@ -30,8 +30,6 @@ static void inline ilist_eval() {
         ilist_context->env = env;
     }
 
-    set_transfer(ilist_context);
-
     debug("ret>>ilist>>eval(n)\n");
     inc();
 }

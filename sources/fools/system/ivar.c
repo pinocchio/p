@@ -23,7 +23,6 @@ static void inline ivar_assign() {
     set_argument(ivar_context, 2, (object)ivar->index);
     set_argument(ivar_context, 3, ivar->scope);
 
-    set_transfer(ivar_context);
     debug("ret>>ivar>>assign:\n");
 }
 
@@ -43,7 +42,6 @@ static void inline ivar_eval() {
     set_argument(ivar_context, 2, ivar->scope);
 
     debug("ret>>ivar>>eval:\n");
-    set_transfer(ivar_context);
 }
 
 void ivar_dispatch() {

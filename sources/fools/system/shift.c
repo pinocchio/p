@@ -29,7 +29,6 @@ void shift_level() {
     set_argument(context, 1, (object)arguments);
 
     debug("ret>>shiftLevel\n");
-    // set_transfer(context);
 }
 
 object make_level_shift(object dispatch) {

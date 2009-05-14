@@ -20,8 +20,6 @@ static void inline iassign_eval() {
     context->env = env;
     set_message(context, EVAL);
 
-    set_transfer(context);
-
     debug("ret>>iassign>>eval\n");
 }
 

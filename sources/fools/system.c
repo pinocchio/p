@@ -72,5 +72,4 @@ void pre_eval_env() {
     set_argument(context, 1, env);
 
     debug("ret>>o>>preEval:\n");
-    set_transfer(context);
 }

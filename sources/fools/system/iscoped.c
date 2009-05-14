@@ -29,7 +29,6 @@ static void inline iscoped_eval() {
     set_message(iscoped_context, EVAL);
 
     debug("ret>>iscoped>>doWithArguments\n");
-    set_transfer(iscoped_context);
 }
 
 // iscoped>>eval:withArguments:
@@ -59,7 +58,6 @@ static void inline iscoped_eval_arguments() {
     iscoped_context->code = &iscoped_eval;
 
     debug("ret>>iscoped>>withArguments:\n");
-    set_transfer(context);
 }
 
 // iscoped>>scope

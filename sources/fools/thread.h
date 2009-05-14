@@ -5,7 +5,6 @@ extern void init_thread();
 
 extern context_object inline stack_claim(int size);
 extern void inline pop_context();
-extern void inline set_transfer(context_object context);
 
 extern int inline empty_stack();
 extern object inline get_stk_return();
