@@ -37,10 +37,10 @@ static void inline icall_eval() {
 
     icall_object icall = icall_context->self.icall;
 
-    object env = icall_context->env;;
+    object env = icall_context->env;
     icall_context->code = &icall_invoke_env;
     
-    context_object context = make_context(icall->self, 2);
+    context_object context = make_context(icall->self, 1);
     context->env = env;
     set_message(context, EVAL);
 

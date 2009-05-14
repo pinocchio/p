@@ -5,6 +5,7 @@
 #include <system.h>
 #include <scheme/system.h>
 #include <scheme/natives.h>
+#include <scheme/symbols.h>
 #include <print.h>
 
 int main () {
