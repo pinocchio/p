@@ -19,7 +19,7 @@
 #include <system/shift.h>
 
 // Starting an evaluation thread.
-extern object inline transfer(context_object context);
+extern object inline transfer();
 
 // Structures to build interfaces to C.
 extern void inline native();
@@ -39,7 +39,7 @@ extern void inline new_target(context_object context, object target);
 #define eval_in_scope(input, env, output)\
     { \
         context_object make_eval_context(ci, input, env);\
-        output = transfer(ci);\
+        output = transfer();\
     }
 
 

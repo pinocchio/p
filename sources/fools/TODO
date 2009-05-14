@@ -23,7 +23,7 @@ Roadmap
 
 VM Optimizations
 ----------------
-
+- Inline env->values in env for faster alloc. Maybe even make env-stack
 - Make sure symbols known to the VM are not constantly calculated but static
     - DONE
     - make sure symbols are still known to the runtime.

@@ -64,7 +64,7 @@ SETUP(test_transfer_empty_ilist)
     ilist_object ilist = make_ilist(0);
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
-    transfer(ci);
+    transfer();
 }
 
 SETUP(test_transfer_empty_ilist_in_ilist)
@@ -77,7 +77,7 @@ SETUP(test_transfer_empty_ilist_in_ilist)
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
 
-    transfer(ci);
+    transfer();
 }
 
 SETUP(test_transfer_iconst)
@@ -87,7 +87,7 @@ SETUP(test_transfer_iconst)
 
     context_object make_eval_context(ci, iconst, fools_system->nil);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(result.pointer == v.pointer);
 }
@@ -102,7 +102,7 @@ SETUP(test_return_of_ilist)
 
     context_object make_eval_context(ci, ilist, fools_system->nil);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(result.pointer == v.pointer);
 }
@@ -130,7 +130,7 @@ SETUP(test_env_lookup)
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
 
-    transfer(ci);
+    transfer();
 
     assert(array_at(env1->values, 0).pointer == v1.pointer);
 
@@ -140,7 +140,7 @@ SETUP(test_env_lookup)
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e2k);
 
-    transfer(ci);
+    transfer();
 
     assert(array_at(env1->values, 0).pointer == v1.pointer);
     assert(array_at(env2->values, 0).pointer == v2.pointer);
@@ -151,7 +151,7 @@ SETUP(test_env_lookup)
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
 
-    transfer(ci);
+    transfer();
 
     assert(array_at(env1->values, 0).pointer == v3.pointer);
     assert(array_at(env2->values, 0).pointer == v2.pointer);
@@ -161,7 +161,7 @@ SETUP(test_env_lookup)
     set_argument(ci, 1, (object)make_number(0));
     set_argument(ci, 2, e1k);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(result.pointer == v3.pointer);
 
@@ -171,7 +171,7 @@ SETUP(test_env_lookup)
     set_argument(ci, 1, (object)make_number(0));
     set_argument(ci, 2, e2k);
 
-    result = transfer(ci);
+    result = transfer();
 
     assert(result.pointer == v2.pointer);
 
@@ -190,7 +190,7 @@ SETUP(test_iassign_ivar)
 
     context_object make_eval_context(ci, iassign, k);
 
-    transfer(ci);
+    transfer();
 
     assert(env_at(k, 0).pointer == v.pointer);
 }
@@ -208,11 +208,11 @@ SETUP(test_ivar_read)
 
     context_object make_eval_context(ci, iassign, k);
 
-    transfer(ci);
+    transfer();
 
     make_eval_context(ci, ivar, k);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(result.pointer == v.pointer);
 }
@@ -242,7 +242,7 @@ SETUP(test_icall)
                  (object)fools_system->nil,
                  0));
 
-    transfer(ci);
+    transfer();
 
     assert(number_value(array_at(icall->arguments, 0).number) == 6);
 }
@@ -265,7 +265,7 @@ SETUP(test_new_iscoped)
 
     context_object make_eval_context(ci, icall, start);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target == &shift_level);
@@ -296,7 +296,7 @@ SETUP(test_eval_iscoped)
 
     context_object make_eval_context(ci, icall, start);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     iscoped_object iscope = result.iscoped;
 
@@ -305,7 +305,7 @@ SETUP(test_eval_iscoped)
 
     make_eval_context(ci, icall, start);
 
-    result = transfer(ci);
+    result = transfer();
 
     assert(result.pointer == v.pointer);
 
@@ -318,7 +318,7 @@ SETUP(test_icapture)
 
     context_object make_eval_context(ci, fools_system->icapture, env);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(result.env == env);
 }
@@ -337,7 +337,7 @@ SETUP(test_env_parent)
     set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env);
 
-    object result = transfer(ci);
+    object result = transfer();
     
     assert(result.env == env);                     
 }
@@ -354,7 +354,7 @@ SETUP(test_capture_parent)
     set_callmsg(icall, ENV_PARENT);
     context_object make_eval_context(ci, icall, env2);
 
-    object result = transfer(ci);
+    object result = transfer();
     
     assert(result.env == env);                     
 }
@@ -374,7 +374,7 @@ SETUP(test_make_function_no_args)
 
     context_object make_eval_context(ci, constant_function, env);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     object iscope = header(pheader(result.pointer));
 
@@ -399,7 +399,7 @@ SETUP(test_ilist_pass_context)
 
     context_object make_eval_context(ci, ilist, env2);
 
-    object result = transfer(ci);
+    object result = transfer();
     
     assert(result.env == env);
 }
@@ -423,14 +423,14 @@ SETUP(test_eval_function_no_args)
 
     context_object make_eval_context(ci, constant_function, env);
 
-    object scoped_function = transfer(ci);
+    object scoped_function = transfer();
 
     object iconst = (object)make_iconst(scoped_function);
     icall_object icall = make_icall(iconst, 0);
 
     make_eval_context(ci, icall, env);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(number_value(result.number) == 42);
 
@@ -456,7 +456,7 @@ SETUP(test_make_function_1_arg)
 
     context_object make_eval_context(ci, constant_function, env);
 
-    transfer(ci);
+    transfer();
 }
 
 SETUP(test_eval_function_1_arg)
@@ -479,7 +479,7 @@ SETUP(test_eval_function_1_arg)
 
     context_object make_eval_context(ci, constant_function, env);
 
-    object scoped_function = transfer(ci);
+    object scoped_function = transfer();
 
     object arg = (object)make_number(42);
 
@@ -489,7 +489,7 @@ SETUP(test_eval_function_1_arg)
 
     make_eval_context(ci, icall, env);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(number_value(result.number) == 42);
 }
@@ -516,7 +516,7 @@ SETUP(test_eval_nested_function)
     object constant_function = make_func(arguments, constant_function1);
     context_object make_eval_context(ci, constant_function, env);
 
-    object scoped_function = transfer(ci);
+    object scoped_function = transfer();
 
     object arg = (object)make_number(42);
     object iconst = (object)make_iconst(scoped_function);
@@ -525,7 +525,7 @@ SETUP(test_eval_nested_function)
 
     make_eval_context(ci, icall, env);
 
-    object nested_function = transfer(ci);
+    object nested_function = transfer();
     
     //assert(pheader(nested_function.pointer) ==
     //       fools_system->iscoped_class.pointer);
@@ -536,7 +536,7 @@ SETUP(test_eval_nested_function)
 
     make_eval_context(ci, icall, env);
 
-    object result = transfer(ci);
+    object result = transfer();
 
     assert(number_value(result.number) == 42);
 }

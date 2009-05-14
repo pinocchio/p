@@ -14,7 +14,7 @@
     context_object make_eval_context(ci, maincall, env); 
     
     printf("------- Starting eval ------\n");
-    object result = transfer(ci);
+    object result = transfer();
 
     print_object(result);
 
