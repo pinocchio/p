@@ -518,12 +518,8 @@ SETUP(test_eval_nested_function)
 
     object nested_function = transfer();
     
-    //assert(pheader(nested_function.pointer) ==
-    //       fools_system->iscoped_class.pointer);
-
     iconst = (object)make_iconst(nested_function);
-    icall = make_icall(iconst, 1);
-    set_callarg(icall, 0, (object)make_iconst(arg));
+    icall = make_icall(iconst, 0);
 
     make_eval_context(ci, icall, env);
 
