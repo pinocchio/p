@@ -84,6 +84,8 @@ fools_object bootstrap() {
     fools_system->iscoped_metaclass = wrap_dispatcher(iscoped_class_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
+    fools_system->level_shifter     = wrap_dispatcher(shift_level);
+
     fools_system->icapture = (object)make_icapture();
     fools_system->iscoped = make_empty_object(iscoped_metaclass);
 

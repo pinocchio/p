@@ -61,7 +61,7 @@ static void inline env_subscope() {
     env_object new_env = make_env(key, env, size);
     set_argument(return_context(receiver), 1, (object)new_env);
 
-    debug("ret>>env>>subScope:key: %p\n", new_env);
+    debug("ret>>env>>subScope:key: %i, %p\n", size, new_env);
 
     pop_context();
 }

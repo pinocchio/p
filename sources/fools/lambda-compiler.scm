@@ -40,7 +40,7 @@
   (let* ((args (cadr a-lambda))
          (body (cddr a-lambda))
          (name (make-var-name "lambda" 'x))
-         (vars (map make-vars (cons 'self args)))
+         (vars (map make-vars args))
          (transformed (transform-expression-list body (append outervars vars)))
          (argarray (make-arguments (append vars (caddr transformed)) name)))
     (list (string-append

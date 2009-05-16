@@ -266,11 +266,11 @@ SETUP(test_new_iscoped)
     context_object make_eval_context(ci, icall, start);
 
     object result = transfer();
+    
+    iscoped_object iscope = (iscoped_object)PINC(result.pointer);
 
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target == &shift_level);
-
-    iscoped_object iscope = header(level_shifter.pointer).iscoped;
 
     assert(pheader(iscope) == fools_system->iscoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
@@ -376,10 +376,10 @@ SETUP(test_make_function_no_args)
 
     object result = transfer();
 
-    object iscope = header(pheader(result.pointer));
+    iscoped_object iscope = (iscoped_object)PINC(result.pointer);
 
-    assert(pheader(iscope.pointer) == fools_system->iscoped_class.pointer);
-    assert(iscope.iscoped->scope.env == env);
+    assert(pheader(iscope) == fools_system->iscoped_class.pointer);
+    assert(iscope->scope.env == env);
 
 }
 
@@ -412,11 +412,8 @@ SETUP(test_eval_function_no_args)
 
     iconst_object the_instr = make_iconst((object)make_number(42));
 
-    array_object args = make_array(1);
-    array_at_put(args, 0, (object)make_ivar());
-
     object constant_function =
-        make_func(args,
+        make_func(make_array(0),
                     (object)
                     the_instr
                   );
@@ -444,9 +441,8 @@ SETUP(test_make_function_1_arg)
 
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(2);
-    array_at_put(arguments, 0, (object)make_ivar()); // self
-    array_at_put(arguments, 1, (object)ivar);
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function =
         make_func(arguments,
@@ -467,9 +463,8 @@ SETUP(test_eval_function_1_arg)
 
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(2);
-    array_at_put(arguments, 0, (object)make_ivar()); // self
-    array_at_put(arguments, 1, (object)ivar);
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function =
         make_func(arguments,
@@ -500,15 +495,11 @@ SETUP(test_eval_nested_function)
                               (object)fools_system->nil, 0);
 
     ivar_object ivar = make_ivar();
-    array_object arguments = make_array(2);
-    array_at_put(arguments, 0, (object)make_ivar()); // self
-    array_at_put(arguments, 1, (object)ivar);
-
-    array_object args = make_array(1);
-    array_at_put(args, 0, (object)make_ivar()); // self
+    array_object arguments = make_array(1);
+    array_at_put(arguments, 0, (object)ivar);
 
     object constant_function1 =
-        make_func(args,
+        make_func(make_array(0),
                     (object)
                     ivar
                   );

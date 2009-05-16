@@ -8,7 +8,7 @@
             (+ (fib (- x 1))
                (fib (- x 2)))))
 
-; Method lookup.
+;; Method lookup.
 ;(lambda (self msg args)
 ;    (let loop ((class (self 'class)))
 ;        (if (eq? class null)

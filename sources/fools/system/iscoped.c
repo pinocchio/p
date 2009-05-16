@@ -16,6 +16,7 @@ static void inline iscoped_eval() {
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
+    assert(number_value(array_size(args)) == argsize);
 
     int i;
     for (i = 0; i < argsize; i++) {
@@ -80,7 +81,7 @@ void iscoped_dispatch() {
     doesnotunderstand("iscoped", selector);
 }
 
-// iscoped_class>>env:new:size:
+// iscoped_class>>new:size:
 static void inline iscoped_class_new() {
     debug("iscopecls>>new:size:\n");
     context_object iscope_context = get_context();
@@ -107,10 +108,13 @@ void iscoped_class_dispatch() {
 
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
-    new_instance(iscoped);
-    result->scope           = scope;
-    result->expression      = expression;
-    result->argsize         = argsize;
-    object func = make_level_shift((object)result);
-    return (object)make_object(0, func); // funcs don't have instance variables.
+    //new_instance(iscoped);
+    iscoped_object result = NEW_ARRAYED(iscoped_object, object, 4);
+    *(object*)PDEC(PDEC(result))    = fools_system->level_shifter;
+    header(result)                  = fools_system->iscoped_class;
+    result->scope                   = scope;
+    result->expression              = expression;
+    result->argsize                 = argsize;
+
+    return (object)PDEC(result);
 }

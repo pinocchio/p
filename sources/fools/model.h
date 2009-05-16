@@ -144,6 +144,9 @@ struct fools {
     object iscoped_class;
     object env_class;
 
+    // Level shifting
+    object level_shifter;
+
     // Minimal native classes
     object number_class;
     object string_class;

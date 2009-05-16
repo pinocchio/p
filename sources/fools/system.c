@@ -34,7 +34,6 @@ void inline native() {
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer() {
     while (!empty_stack()) {
-        //printf("env is: %p\n", get_context()->env.pointer);
         get_context()->code();
     }
     return get_stk_return();
