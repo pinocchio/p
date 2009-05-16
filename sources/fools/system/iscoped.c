@@ -108,18 +108,11 @@ void iscoped_class_dispatch() {
 
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
-    /* This object has a double header.
-     * header1 -> level_shifter
-     * header2 -> iscoped_class
-     * header1 gets invoked by default, and it will shift level and let
-     * header2 handle it.
-     */
-    iscoped_object result = NEW_ARRAYED(iscoped_object, object, 4);
-    *(object*)PDEC(PDEC(result))    = fools_system->level_shifter;
-    header(result)                  = fools_system->iscoped_class;
+    variable_object func = make_object(1, fools_system->level_shifter);
+    new_instance(iscoped);
     result->scope                   = scope;
     result->expression              = expression;
     result->argsize                 = argsize;
-
-    return (object)PDEC(result);
+    object_at_put(func, 0, (object)result);
+    return (object)func;
 }

@@ -38,7 +38,7 @@ void shift_level() {
     context_object context = get_context();
 
     object env = context->env;
-    object dispatch = (object)PINC(context->self.pointer); // skip header
+    object dispatch = object_at(context->self.object, 0);
     
     int argsize = context_size(context);
     array_object arguments = make_array(argsize);

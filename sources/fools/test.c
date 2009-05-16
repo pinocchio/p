@@ -267,7 +267,7 @@ SETUP(test_new_iscoped)
 
     object result = transfer();
     
-    iscoped_object iscope = (iscoped_object)PINC(result.pointer);
+    iscoped_object iscope = object_at(result.object, 0).iscoped;
 
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target == &shift_level);
@@ -376,8 +376,7 @@ SETUP(test_make_function_no_args)
 
     object result = transfer();
 
-    iscoped_object iscope = (iscoped_object)PINC(result.pointer);
-
+    iscoped_object iscope = object_at(result.object, 0).iscoped;
     assert(pheader(iscope) == fools_system->iscoped_class.pointer);
     assert(iscope->scope.env == env);
 
