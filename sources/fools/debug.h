@@ -6,6 +6,8 @@
 
 extern void indent();
 extern int _indent_;
+#define reset_debug() {\
+    if (!NDEBUG) { _indent_ = 0; debug("------ starting evaluation\n"); } }
 
 #define inc() { if (!NDEBUG) _indent_++; }
 #define dec() { if (!NDEBUG) _indent_--; }

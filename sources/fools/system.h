@@ -17,6 +17,7 @@
 #include <system/iscoped.h>
 #include <system/ivar.h>
 #include <system/shift.h>
+#include <system/ifixed.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();

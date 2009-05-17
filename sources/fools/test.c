@@ -254,10 +254,13 @@ SETUP(test_new_iscoped)
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
 
-    icall_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, ENV_NEW_SIZE);
+    icall_object icall = make_icall((object)iconst, 3);
+    set_callmsg(icall, NEW_SIZE);
     set_callarg(icall, 1, exp);
     set_callarg(icall, 2, (object)make_number(0));
+
+    icall = make_icall((object)icall, 1);
+    set_callmsg(icall, SHIFT);
 
     env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,
@@ -286,9 +289,12 @@ SETUP(test_eval_iscoped)
     object exp = (object)make_iconst(v);
 
     icall_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, ENV_NEW_SIZE);
+    set_callmsg(icall, NEW_SIZE);
     set_callarg(icall, 1, exp);
     set_callarg(icall, 2, (object)make_number(0));
+
+    icall = make_icall((object)icall, 1);
+    set_callmsg(icall, SHIFT);
 
     env_object start = make_env((object)fools_system->nil,
                                 (object)fools_system->nil,

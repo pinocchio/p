@@ -72,12 +72,21 @@ static void inline iscoped_scope() {
     debug("ret>>iscoped>>scope\n");
 }
 
+void iscoped_shift() {
+    context_object context = get_context();
+    variable_object func = make_object(1, fools_system->level_shifter);
+    object_at_put(func, 0, context->self);
+    set_argument(return_context(context), 1, (object)func);
+    pop_context();
+}
+
 void iscoped_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_eval_arguments);
     if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
+    if_selector(selector, SHIFT,                iscoped_shift);
     doesnotunderstand("iscoped", selector);
 }
 
@@ -102,17 +111,15 @@ void iscoped_class_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
-    if_selector(selector, ENV_NEW_SIZE, iscoped_class_new);
+    if_selector(selector, NEW_SIZE, iscoped_class_new);
     doesnotunderstand("iscoped_class", selector);
 }
 
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
-    variable_object func = make_object(1, fools_system->level_shifter);
     new_instance(iscoped);
-    result->scope                   = scope;
-    result->expression              = expression;
-    result->argsize                 = argsize;
-    object_at_put(func, 0, (object)result);
-    return (object)func;
+    result->scope       = scope;
+    result->expression  = expression;
+    result->argsize     = argsize;
+    return (object)result;
 }

@@ -39,6 +39,7 @@ struct iconst;
 struct ivar;
 struct iscoped;
 struct icapture;
+struct ifixed;
 
 typedef struct ilist*            ilist_object;
 typedef struct iassign*          iassign_object;
@@ -47,6 +48,7 @@ typedef struct iconst*           iconst_object;
 typedef struct ivar*             ivar_object;
 typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
+typedef struct ifixed*           ifixed_object;
 typedef struct env*              env_object;
 typedef struct variable_object*  variable_object;
 typedef struct string*           string_object;
@@ -71,6 +73,7 @@ typedef union {
     ivar_object         ivar;
     iscoped_object      iscoped;
     icapture_object     icapture;
+    ifixed_object       ifixed;
     variable_object     object;
     string_object       string;
     number_object       number;
@@ -142,6 +145,7 @@ struct fools {
     object icapture_class;
     object iscoped_metaclass;
     object iscoped_class;
+    object ifixed_class;
     object env_class;
 
     // Level shifting

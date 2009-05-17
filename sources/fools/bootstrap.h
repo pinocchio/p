@@ -19,10 +19,19 @@ extern object ENV_PARENT;
 extern object ENV_SET_PARENT;
 extern object PARENT;
 // Iscope_class
-extern object ENV_NEW_SIZE;
+extern object NEW_SIZE;
 // Iscope
 extern object EVAL_WITHARGUMENTS;
 extern object SCOPE_IN_ENV;
+extern object SHIFT;
+// Ifixed
+extern object DISPATCH;
+extern object OBJECT_AT;
+extern object OBJECT_AT_PUT;
+extern object NEW;
+extern object DELEGATE;
+extern object SIZE;
+extern object DISPATCH_DELEGATE_SIZE;
 
 #define NBR_SYMBOLS 12
 

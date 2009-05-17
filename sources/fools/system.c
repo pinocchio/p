@@ -33,6 +33,7 @@ void inline native() {
 
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer() {
+    reset_debug();
     while (!empty_stack()) {
         get_context()->code();
     }
