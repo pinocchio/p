@@ -23,8 +23,7 @@
 void inline add_eval_args_code(ilist_object exp,
                                array_object arguments,
                                int argsize) {
-    icall_object parent_env = make_icall(fools_system->icapture, 2);
-    set_callmsg(parent_env, ENV_PARENT);
+    icall_object icall1(parent_env, fools_system->icapture, ENV_PARENT);
 
     icall_object arg_eval;
     // var1 = (var1 eval: (env parent))
@@ -38,9 +37,7 @@ void inline add_eval_args_code(ilist_object exp,
 
         icall2(arg_eval, variable, PRE_EVAL_ENV, parent_env);
         ilist_at_put(exp, i,
-            (object)make_iassign(
-                variable,
-                (object)arg_eval));
+            (object)make_iassign(variable, (object)arg_eval));
     }
 }
  
@@ -49,7 +46,6 @@ void inline add_switch_scope_code(ilist_object exp, int position) {
     receiver_var->scope = (object)exp;
 
     icall_object icall1(self_scope, receiver_var, SCOPE_IN_ENV);
-
     icall_object icall2(switch_env, fools_system->icapture,
                         ENV_SET_PARENT, self_scope)
 
