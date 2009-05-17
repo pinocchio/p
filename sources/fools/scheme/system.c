@@ -1,5 +1,4 @@
 #include <scheme/system.h>
-#include <system/ivar.h>
 #include <system.h>
 
 // Function bootstrapping
@@ -22,6 +21,7 @@
 
 void inline add_eval_args_code(ilist_object exp,
                                array_object arguments,
+                               int toskip,
                                int argsize) {
     icall_object icall1(parent_env, fools_system->icapture, ENV_PARENT);
 
@@ -32,7 +32,7 @@ void inline add_eval_args_code(ilist_object exp,
     int i;
     for (i = 0; i < argsize; i++) {
         ivar_object variable = array_at(arguments, i).ivar;
-        variable->index = make_number(i + 1); // skip receiver
+        variable->index = make_number(i + toskip);
         variable->scope = (object)exp;
 
         icall2(arg_eval, variable, PRE_EVAL_ENV, parent_env);
@@ -68,7 +68,7 @@ object inline make_dyn_func(array_object arguments, object body) {
     // Eval args, eval body
     ilist_object exp = make_ilist(argsize + 1); 
 
-    add_eval_args_code(exp, arguments, argsize);
+    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
     ilist_at_put(exp, argsize, body);
 
     return iscoped_for((object)exp,
@@ -80,7 +80,7 @@ object inline make_func(array_object arguments, object body) {
     // Eval args, switch context, eval body
     ilist_object exp = make_ilist(argsize + 2);
 
-    add_eval_args_code(exp, arguments, argsize);
+    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
     add_switch_scope_code(exp, argsize);
     ilist_at_put(exp, argsize + 1, body);
 
