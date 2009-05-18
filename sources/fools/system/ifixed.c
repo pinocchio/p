@@ -14,10 +14,9 @@ void ifixed_dispatcher() {
     debug("ret>>an_ifixed>>dispatcher\n");
 }
 
-void ifixed_at() {
+static void ifixed_at_do() {
     debug("an_ifixed>>at\n");
     context_object context = get_context();
-    assert_argsize(context, 2);
 
     object self = context->self;
     object interp = header(self.pointer);
@@ -36,7 +35,16 @@ void ifixed_at() {
     debug("ret>>an_ifixed>>at\n");
 }
 
-void ifixed_at_put() {
+static void inline ifixed_at() {
+    debug("an_ifixed>>at(pre)\n");
+    context_object ifixed_context = get_context();
+    assert_argsize(ifixed_context, 2);
+    push_eval_of(ifixed_context, 1);
+    ifixed_context->code = &ifixed_at_do;
+    debug("ret>>an_ifixed>>at(pre)\n");
+}
+
+static void ifixed_at_put_do() {
     debug("an_ifixed>>atput\n");
     context_object context = get_context();
     assert_argsize(context, 3);
@@ -58,6 +66,16 @@ void ifixed_at_put() {
 
     pop_context();
     debug("ret>>an_ifixed>>atput\n");
+}
+
+static void inline ifixed_at_put() {
+    debug("an_ifixed>>atput(pre)\n");
+    context_object ifixed_context = get_context();
+    assert_argsize(ifixed_context, 2);
+    push_eval_of(ifixed_context, 1);
+    push_eval_of(ifixed_context, 2);
+    ifixed_context->code = &ifixed_at_put_do;
+    debug("ret>>an_ifixed>>atput(pre)\n");
 }
 
 void ifixed_shift_level() {

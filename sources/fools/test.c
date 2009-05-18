@@ -543,10 +543,10 @@ object create_class_dispatch() {
         (let loop ((class ((self 'dispatch) 'delegate)))
             (if (eq? class null)
                 (self 'doesNotUnderstand msg args)
-                (let ((method ((class 'at 2) 'lookup msg)))
+                (let ((method ((class 'at 1) 'lookup msg)))
                     (if method
                         (method 'execute args)
-                        (loop (class 'at 1))))))))
+                        (loop (class 'at 0))))))))
 */
 object ivar_3_self = (object)make_ivar();
 object ivar_4_args = (object)make_ivar();
@@ -569,7 +569,7 @@ object ivar_19_method = (object)make_ivar();
 icall_object icall_20_ivar_19_method = make_icall((object)ivar_19_method, 2);
 set_callarg(icall_20_ivar_19_method, 0, (object)SYMBOL_execute);
 set_callarg(icall_20_ivar_19_method, 1, (object)ivar_4_args);
-object number_21_1 = (object)make_iconst((object)make_number(1));
+object number_21_1 = (object)make_iconst((object)make_number(0));
 icall_object icall_22_ivar_15_class = make_icall((object)ivar_15_class, 2);
 set_callarg(icall_22_ivar_15_class, 0, OBJECT_AT);
 set_callarg(icall_22_ivar_15_class, 1, (object)number_21_1);
@@ -581,7 +581,7 @@ set_callarg(icall_24_ivar_19_method, 1, (object)icall_23_ivar_11_loop);
 array_object array_25_lambda_18_x = make_array(1);
 array_at_put(array_25_lambda_18_x, 0, ivar_19_method);
 object lambda_18_x = make_func(array_25_lambda_18_x, (object)icall_24_ivar_19_method);
-object number_26_2 = (object)make_iconst((object)make_number(2));
+object number_26_2 = (object)make_iconst((object)make_number(1));
 icall_object icall_27_ivar_15_class = make_icall((object)ivar_15_class, 2);
 set_callarg(icall_27_ivar_15_class, 0, OBJECT_AT);
 set_callarg(icall_27_ivar_15_class, 1, (object)number_26_2);
@@ -719,31 +719,80 @@ SETUP(test_ifixed_object)
     object result = transfer();
     assert(result.pointer == ifixed.pointer);
     
-    icall2(icall, make_iconst(thefixed), OBJECT_AT, (object)make_number(0));
+    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+           (object)make_iconst((object)make_number(0)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
     assert(result.nil == fools_system->nil);
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT, (object)make_number(4));
+    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+           (object)make_iconst((object)make_number(4)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
     assert(result.nil == fools_system->nil);
 
     icall3(icall, make_iconst(thefixed),
-           OBJECT_AT_PUT, (object)make_number(3), ifixed);
+           OBJECT_AT_PUT, (object)make_iconst((object)make_number(3)),
+           (object)make_iconst(ifixed));
     make_eval_context(ci, icall, env);
 
     transfer();
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT, (object)make_number(3));
+    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+           (object)make_iconst((object)make_number(3)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
     assert(result.pointer == ifixed.pointer);
 
 }
+
+SETUP(test_ifixed_dispatch)
+
+    env_object env = make_env((object)fools_system->nil,
+                              (object)fools_system->nil, 0);
+
+    object class_dispatch = create_class_dispatch();
+    icall_object icall4(icall, (object)make_iconst(fools_system->ifixed),
+                        DISPATCH_DELEGATE_SIZE,
+                        class_dispatch,
+                        (object)make_iconst((object)fools_system->nil),
+                        (object)make_iconst((object)make_number(2))); // superclass + methoddict
+
+    context_object make_eval_context(ci, icall, env);
+
+    object class_ifixed = transfer();    
+
+    icall1(icall, make_iconst(class_ifixed), NEW);
+    make_eval_context(ci, icall, env);
+
+    object theclass = transfer();
+
+    icall4(icall, (object)make_iconst(fools_system->ifixed),
+                  DISPATCH_DELEGATE_SIZE,
+                  class_dispatch,
+                  (object)make_iconst(theclass),
+                  (object)make_iconst((object)make_number(5)));
+
+    make_eval_context(ci, icall, env);
+
+    object instance_ifixed = transfer();    
+
+    icall1(icall, make_iconst(instance_ifixed), NEW);
+    make_eval_context(ci, icall, env);
+
+    object instance = transfer();
+
+    icall1(icall, make_iconst(instance), NEW);
+    make_eval_context(ci, icall, env);
+
+    printf("env: %p\n", env);
+
+    transfer();
+}
+
 
 int main() {
     test_header();
@@ -772,6 +821,7 @@ int main() {
     test_make_ifixed();
     test_ifixed_natives();
     test_ifixed_object();
+    test_ifixed_dispatch();
 
     return 0;
 }

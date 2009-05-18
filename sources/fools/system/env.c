@@ -5,14 +5,15 @@
 static void inline env_fetch_from() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
-    debug("env>>fetch:from:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
     env_object env = receiver->self.env;
+    debug("env>>fetch:from: %p\n", env);
 
     if (env->scope.pointer == argument_at(receiver, 2).pointer) {
         int index = number_value(argument_at(receiver, 1).number);
+        debug("index: %i\n", index);
         object value = env_at(env, index);
         set_argument(return_context(receiver), 1, value);
         return pop_context();
@@ -20,6 +21,7 @@ static void inline env_fetch_from() {
     if (env->parent.nil == fools_system->nil) {
         assert(NULL); // XXX should go to error-handler here.
     }
+    debug("fallback to parent: %p\n", env->parent.pointer);
     new_target(receiver, env->parent);
     debug("ret>>env>>fetch:from:\n");
 }
@@ -69,12 +71,12 @@ static void inline env_subscope() {
 // env>>parent:
 static void inline env_do_set_parent() {
     // actual setting of the evaluted parent. related to env>>parent:
-    debug("internal>>env>>parent:\n");
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
     object env = receiver->self;
     object new_env = argument_at(receiver, 1);
+    debug("internal>>env>>parent: %p\n", new_env.env);
 
     env.env->parent = new_env;
 
