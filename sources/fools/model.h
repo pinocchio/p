@@ -200,4 +200,9 @@ extern int              inline context_size(context_object context);
 #define empty_env make_env((object)fools_system->nil,\
                            (object)fools_system->nil, 0)
 
+#define array_check_bounds(array, index)\
+    assert(0 <= index);\
+    assert(index < number_value(array_size(array)));
+
+
 #endif // MODEL_H

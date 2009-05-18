@@ -35,6 +35,9 @@ void inline native() {
 object inline transfer() {
     reset_debug();
     while (!empty_stack()) {
+        /*if (get_context()->env.pointer == NULL) {
+            debug("HELP! NULLPOINTER GIVEN AS ENV\n");
+        }*/
         get_context()->code();
     }
     return get_stk_return();

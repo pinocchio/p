@@ -90,11 +90,6 @@ number_object inline array_size(array_object array) {
     return array->size;
 }
 
-void inline array_check_bounds(array_object array, int index) {
-    assert(0 <= index);
-    assert(index < number_value(array_size(array)));
-}
-
 object inline raw_array_at(array_object array, int index) {
     return array->values[index];
 }

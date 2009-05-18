@@ -119,6 +119,7 @@ void iscoped_class_dispatch() {
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
     new_instance(iscoped);
+    assert(scope.pointer != NULL);
     result->scope       = scope;
     result->expression  = expression;
     result->argsize     = argsize;

@@ -15,7 +15,9 @@ void inline push_ival(object exp, context_object target, number_object pos) {
     set_argument(c, 0, (object)(&target->arguments));
     set_argument(c, 2, (object)pos);
     c->code = &ival;
+    // Check if this is always true.
 
     c = make_context(exp, 1);
+    c->env = target->env;
     set_message(c, EVAL);
 }

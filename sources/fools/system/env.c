@@ -76,6 +76,7 @@ static void inline env_do_set_parent() {
     // arguments at: 0 -> selector
     object env = receiver->self;
     object new_env = argument_at(receiver, 1);
+    assert(new_env.pointer != NULL);
     debug("internal>>env>>parent: %p\n", new_env.env);
 
     env.env->parent = new_env;
