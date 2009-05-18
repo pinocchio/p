@@ -43,7 +43,8 @@ static void inline iscoped_eval_arguments() {
     assert_argsize(iscoped_context, 2);
 
     // Move argument so that the subscope will be at 1.
-    set_argument(iscoped_context, 0, argument_at(iscoped_context, 1));
+    object arguments = argument_at(iscoped_context, 1);
+    set_argument(iscoped_context, 0, arguments);
 
     iscoped_object iscoped = iscoped_context->self.iscoped;
 

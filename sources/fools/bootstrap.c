@@ -81,8 +81,8 @@ fools_object bootstrap() {
     // This has to go!
 
     fools_system->string_class  = empty_class;
-    fools_system->array_class   = empty_class;
     fools_system->number_class  = empty_class;
+    fools_system->array_class   = wrap_dispatcher(array_dispatch);
 
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
     fools_system->empty->size               = make_number(0);
@@ -98,14 +98,16 @@ fools_object bootstrap() {
     fools_system->ivar_class        = wrap_dispatcher(ivar_dispatch);
     fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
     fools_system->iscoped_class     = wrap_dispatcher(iscoped_dispatch);
-    fools_system->ifixed_class      = wrap_dispatcher(ifixed_dispatch);
     fools_system->iscoped_metaclass = wrap_dispatcher(iscoped_class_dispatch);
+    fools_system->ifixed_class      = wrap_dispatcher(ifixed_dispatch);
+    fools_system->ifixed_metaclass  = wrap_dispatcher(ifixed_class_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
     fools_system->level_shifter     = wrap_dispatcher(shift_level);
 
-    fools_system->icapture = (object)make_icapture();
-    fools_system->iscoped = make_empty_object(iscoped_metaclass);
+    fools_system->icapture  = (object)make_icapture();
+    fools_system->iscoped   = make_empty_object(iscoped_metaclass);
+    fools_system->ifixed    = make_empty_object(ifixed_metaclass);
 
     init_thread();
 

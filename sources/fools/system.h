@@ -19,6 +19,8 @@
 #include <system/shift.h>
 #include <system/ifixed.h>
 
+#include <system/array.h>
+
 // Starting an evaluation thread.
 extern object inline transfer();
 

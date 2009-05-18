@@ -36,7 +36,7 @@
 ;; Currently buggy; you can't accept the defines to extend the
 ;; lambda header; you have to wrap:
 ;; (lambda normalargs ((lambda defines body) nil nil ...))
-(define (transform-lambda a-lambda outervars)
+(define (transform-lambda-type type a-lambda outervars)
   (let* ((args (cadr a-lambda))
          (body (cddr a-lambda))
          (name (make-var-name "lambda" 'x))
@@ -47,10 +47,16 @@
            (apply string-append (map caddr vars))
            (car transformed)
            (car argarray)
-           "object " name " = make_func("
+           "object " name " = make_" type "("
            (cadr argarray) ", (object)"
            (cadr transformed) ");\n")
           name '())))
+
+(define (transform-lambda a-lambda outvars)
+    (transform-lambda-type "func" a-lambda outvars))
+
+(define (transform-dispatch a-lambda outvars)
+    (transform-lambda-type "dispatch" a-lambda outvars))
 
 (define (transform-expression-list expressions vars)
     (if (= (length expressions) 1)
@@ -195,6 +201,7 @@ extravars))))))))
          (case (car expression)
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
+           ((dispatch) (transform-dispatch expression vars))
            ((define) (transform-define expression vars))
            ((quote) (transform-quoted expression vars))
            ((let) (transform-let expression vars))

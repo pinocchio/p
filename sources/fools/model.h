@@ -134,6 +134,7 @@ struct fools {
     object              class_lookup;
     object              icapture;
     object              iscoped;
+    object              ifixed;
     array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
@@ -143,9 +144,10 @@ struct fools {
     object ivar_class;
     object iassign_class;
     object icapture_class;
-    object iscoped_metaclass;
     object iscoped_class;
+    object iscoped_metaclass;
     object ifixed_class;
+    object ifixed_metaclass;
     object env_class;
 
     // Level shifting

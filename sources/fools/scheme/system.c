@@ -3,26 +3,10 @@
 
 // Function bootstrapping
 
-#define build_icall(name, receiver, msg, size)\
-    name = make_icall((object)receiver, size);\
-    set_callmsg(name, msg);
-
-#define icall1(name, receiver, msg)\
-    build_icall(name, receiver, msg, 1)
-
-#define icall2(name, receiver, msg, arg)\
-    build_icall(name, receiver, msg, 2)\
-    set_callarg(name, 1, (object)arg);
-
-#define icall3(name, receiver, msg, arg1, arg2)\
-    build_icall(name, receiver, msg, 3)\
-    set_callarg(name, 1, (object)arg1);\
-    set_callarg(name, 2, (object)arg2);
-
 void inline add_eval_args_code(ilist_object exp,
                                array_object arguments,
                                int toskip,
-                               int argsize) {
+                               int todo) {
     icall_object icall1(parent_env, fools_system->icapture, ENV_PARENT);
 
     icall_object arg_eval;
@@ -30,7 +14,7 @@ void inline add_eval_args_code(ilist_object exp,
     // ...  ...  ...
     // varN = (varN eval: (env parent))
     int i;
-    for (i = 0; i < argsize; i++) {
+    for (i = 0; i < todo; i++) {
         ivar_object variable = array_at(arguments, i).ivar;
         variable->index = make_number(i + toskip);
         variable->scope = (object)exp;
@@ -83,6 +67,18 @@ object inline make_func(array_object arguments, object body) {
     add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
     add_switch_scope_code(exp, argsize);
     ilist_at_put(exp, argsize + 1, body);
+
+    return iscoped_for((object)exp,
+                       (object)array_size(arguments));
+}
+
+// Function which doesn't evaluate its arguments
+object inline make_dispatch(array_object arguments, object body) {
+    // Eval args, switch context, eval body
+    ilist_object exp = make_ilist(2);
+
+    add_switch_scope_code(exp, 0);
+    ilist_at_put(exp, 1, body);
 
     return iscoped_for((object)exp,
                        (object)array_size(arguments));
