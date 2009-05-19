@@ -24,9 +24,24 @@ void inline add_eval_args_code(ilist_object exp,
             (object)make_iassign(variable, (object)arg_eval));
     }
 }
- 
+
+void inline add_init_args_code(ilist_object exp,
+                               array_object arguments,
+                               int toskip) {
+    // var1 = (var1 eval: (env parent))
+    // ...  ...  ...
+    // varN = (varN eval: (env parent))
+    int todo = number_value(array_size(arguments));
+    int i;
+    for (i = 0; i < todo; i++) {
+        ivar_object variable = array_at(arguments, i).ivar;
+        variable->index = make_number(i + toskip);
+        variable->scope = (object)exp;
+    }
+}
+
 void inline add_switch_scope_code(ilist_object exp, int position) {
-    ivar_object receiver_var = make_ivar();
+    ivar_object receiver_var = make_ivar("switchvar");
     receiver_var->scope = (object)exp;
 
     icall_object icall1(self_scope, receiver_var, SCOPE_IN_ENV);
@@ -77,6 +92,7 @@ object inline make_dispatch(array_object arguments, object body) {
     // Eval args, switch context, eval body
     ilist_object exp = make_ilist(2);
 
+    add_init_args_code(exp, arguments, 1);
     add_switch_scope_code(exp, 0);
     ilist_at_put(exp, 1, body);
 

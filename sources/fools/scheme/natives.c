@@ -142,29 +142,29 @@ void scheme_eqp_func() {
 }
 
 void bootstrap_scheme() {
-    scheme_plus_1 = (object)make_ivar();
-    scheme_plus_2 = (object)make_ivar();
+    scheme_plus_1 = (object)make_ivar("+l");
+    scheme_plus_2 = (object)make_ivar("+r");
     array_object arguments = make_array(2);
     array_at_put(arguments, 0, scheme_plus_1);
     array_at_put(arguments, 1, scheme_plus_2);
     scheme_plus = make_dyn_func(arguments, (object)make_native(&scheme_plus_func));
 
-    scheme_minus_1 = (object)make_ivar();
-    scheme_minus_2 = (object)make_ivar();
+    scheme_minus_1 = (object)make_ivar("-l");
+    scheme_minus_2 = (object)make_ivar("-r");
     arguments = make_array(2);
     array_at_put(arguments, 0, scheme_minus_1);
     array_at_put(arguments, 1, scheme_minus_2);
     scheme_minus = make_dyn_func(arguments, (object)make_native(&scheme_minus_func));
 
-    scheme_smallerp_1 = (object)make_ivar();
-    scheme_smallerp_2 = (object)make_ivar();
+    scheme_smallerp_1 = (object)make_ivar("<l");
+    scheme_smallerp_2 = (object)make_ivar("<r");
     arguments = make_array(2);
     array_at_put(arguments, 0, scheme_smallerp_1);
     array_at_put(arguments, 1, scheme_smallerp_2);
     scheme_smallerp = make_dyn_func(arguments, (object)make_native(&scheme_smallerp_func));
 
-    scheme_eqp_1 = (object)make_ivar();
-    scheme_eqp_2 = (object)make_ivar();
+    scheme_eqp_1 = (object)make_ivar("eql");
+    scheme_eqp_2 = (object)make_ivar("eqr");
     arguments = make_array(2);
     array_at_put(arguments, 0, scheme_eqp_1);
     array_at_put(arguments, 1, scheme_eqp_2);

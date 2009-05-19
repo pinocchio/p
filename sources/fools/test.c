@@ -186,7 +186,7 @@ SETUP(test_iassign_ivar)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar();
+    ivar_object ivar = make_ivar("iv");
 
     iassign_object iassign = make_iassign(ivar, (object)iconst);
 
@@ -204,7 +204,7 @@ SETUP(test_ivar_read)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar();
+    ivar_object ivar = make_ivar("iv");
 
     iassign_object iassign = make_iassign(ivar, (object)iconst);
 
@@ -373,7 +373,7 @@ SETUP(test_make_function_no_args)
                               (object)fools_system->nil, 0);
 
     array_object args = make_array(1);
-    array_at_put(args, 0, (object)make_ivar());
+    array_at_put(args, 0, (object)make_ivar("iv"));
 
     object constant_function =
         make_func(args,
@@ -447,7 +447,7 @@ SETUP(test_make_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar();
+    ivar_object ivar = make_ivar("iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -469,7 +469,7 @@ SETUP(test_eval_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar();
+    ivar_object ivar = make_ivar("iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -501,7 +501,7 @@ SETUP(test_eval_nested_function)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
-    ivar_object ivar = make_ivar();
+    ivar_object ivar = make_ivar("iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -548,16 +548,16 @@ object create_class_dispatch() {
                         (method 'execute args)
                         (loop (class 'at 0))))))))
 */
-object ivar_3_self = (object)make_ivar();
-object ivar_4_args = (object)make_ivar();
-object ivar_6_msg = (object)make_ivar();
+object ivar_3_self = (object)make_ivar("self");
+object ivar_4_args = (object)make_ivar("args");
+object ivar_6_msg = (object)make_ivar("msg");
 object number_8_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_9_ivar_4_args = make_icall((object)ivar_4_args, 3);
 set_callarg(icall_9_ivar_4_args, 0, OBJECT_AT_PUT);
 set_callarg(icall_9_ivar_4_args, 1, (object)number_8_0);
 set_callarg(icall_9_ivar_4_args, 2, (object)ivar_3_self);
-object ivar_11_loop = (object)make_ivar();
-object ivar_15_class = (object)make_ivar();
+object ivar_11_loop = (object)make_ivar("loop");
+object ivar_15_class = (object)make_ivar("class");
 icall_object icall_16_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_16_scheme_eqp, 0, (object)ivar_15_class);
 set_callarg(icall_16_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
@@ -565,7 +565,7 @@ icall_object icall_17_ivar_3_self = make_icall((object)ivar_3_self, 3);
 set_callarg(icall_17_ivar_3_self, 0, (object)SYMBOL_doesNotUnderstand);
 set_callarg(icall_17_ivar_3_self, 1, (object)ivar_6_msg);
 set_callarg(icall_17_ivar_3_self, 2, (object)ivar_4_args);
-object ivar_19_method = (object)make_ivar();
+object ivar_19_method = (object)make_ivar("method");
 icall_object icall_20_ivar_19_method = make_icall((object)ivar_19_method, 2);
 set_callarg(icall_20_ivar_19_method, 0, (object)SYMBOL_execute);
 set_callarg(icall_20_ivar_19_method, 1, (object)ivar_4_args);

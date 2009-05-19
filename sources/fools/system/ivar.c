@@ -28,9 +28,9 @@ static void inline ivar_assign() {
 
 // ivar>>eval:
 static void inline ivar_eval() {
-    debug("ivar>>eval\n");
     context_object ivar_context = get_context();
     ivar_object ivar = ivar_context->self.ivar;
+    debug("ivar>>eval \"%s\"\n", string_value(ivar->name));
 
     object env = ivar_context->env;
 
@@ -55,8 +55,9 @@ void ivar_dispatch() {
 }
 
 // Object creation
-ivar_object make_ivar() {
+ivar_object make_ivar(const char* name) {
     new_instance(ivar);
+    result->name            = make_string(name);
     result->scope           = (object)fools_system->nil;
     result->index           = make_number(0);
     return result;
