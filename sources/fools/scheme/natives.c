@@ -33,11 +33,11 @@ void scheme##_##name##_##func_do() {\
 }\
 preval2(scheme##_##name);
 
-#define load_op(name)\
+#define init_op(name)\
     scheme##_##name = (object)make_iconst(\
                         (object)make_object(0,\
                             (object)make_native(&scheme##_##name##_##func)));
-#define load_direct_op(name)\
+#define init_direct_op(name)\
     scheme##_##name = (object)make_object(0,\
                         (object)make_native(&scheme##_##name##_##func));
 
@@ -114,10 +114,10 @@ static void scheme_eqp_func_do() {
 preval2(scheme_eqp)
 
 void bootstrap_scheme() {
-    load_op(plus);
-    load_op(minus);
-    load_op(smallerp);
-    load_op(eqp);
-    load_direct_op(true);
-    load_direct_op(false);
+    init_op(plus);
+    init_op(minus);
+    init_op(smallerp);
+    init_op(eqp);
+    init_direct_op(true);
+    init_direct_op(false);
 }
