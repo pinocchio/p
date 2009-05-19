@@ -13,7 +13,7 @@
     (list arg var-name
         (string-append "object "
                        var-name
-                       " = (object)make_ivar();\n"))))
+                       " = (object)make_ivar(\"" (symbol->string arg) "\");\n"))))
 
 
 (define (make-arguments vars name)

@@ -1,10 +1,8 @@
 #include <system.h>
 #include <thread.h>
 
-void iarray_at() {
+void iarray_at_do() {
     context_object context = get_context();
-    assert_argsize(context, 2);
-
     array_object array = context->self.array;
 
     object idx = argument_at(context, 1);
@@ -17,10 +15,8 @@ void iarray_at() {
     debug("ret>>array>>at:\n");
 }
 
-void iarray_at_put() {
+void iarray_at_put_do() {
     context_object context = get_context();
-    assert_argsize(context, 3);
-
     array_object array = context->self.array;
 
     object idx = argument_at(context, 1);
@@ -31,7 +27,22 @@ void iarray_at_put() {
 
     array_at_put(array, index, value);
     pop_context();
-    debug("ret>>array>>at:put:");
+    debug("ret>>array>>at:put:\n");
+}
+
+void iarray_at() {
+    context_object context = get_context();
+    assert_argsize(context, 2);
+    push_eval_of(context, 1);
+    context->code = &iarray_at_do;
+}
+
+void iarray_at_put() {
+    context_object context = get_context();
+    assert_argsize(context, 3);
+    push_eval_of(context, 1);
+    push_eval_of(context, 2);
+    context->code = &iarray_at_put_do;
 }
 
 void array_dispatch() {

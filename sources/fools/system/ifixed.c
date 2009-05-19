@@ -1,6 +1,5 @@
 #include <system.h>
 #include <thread.h>
-#include <system/ival.h>
 
 void ifixed_dispatcher() {
     debug("an_ifixed>>dispatcher\n");

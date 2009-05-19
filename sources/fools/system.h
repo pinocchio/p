@@ -18,6 +18,7 @@
 #include <system/ivar.h>
 #include <system/shift.h>
 #include <system/ifixed.h>
+#include <system/ival.h>
 
 #include <system/array.h>
 
