@@ -46,34 +46,24 @@ binop(plus,  +)
 binop(minus, -)
 
 object scheme_true;
-
 void scheme_true_func() {
     context_object context = get_context();
     debug("in scheme_true\n");
-    // XXX breaks encapsulation
-    object env = context->env;
     object if_true = argument_at(context, 0);
 
-    pop_context();
-    context = make_context(if_true, 1);
-    context->env = env;
+    new_target(context, if_true);
     set_message(context, EVAL);
 
     debug("exit scheme_true\n");
 }
 
 object scheme_false;
-
 void scheme_false_func() {
     context_object context = get_context();
     debug("in scheme_false\n");
     object if_false = argument_at(context, 1);
 
-    object env = context->env;
-
-    pop_context();
-    context = make_context(if_false, 1);
-    context->env = env;
+    new_target(context, if_false);
     set_message(context, EVAL);
 
     debug("exit scheme_false\n");
