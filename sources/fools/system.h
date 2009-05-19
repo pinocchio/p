@@ -26,9 +26,6 @@
 // Starting an evaluation thread.
 extern object inline transfer();
 
-// Structures to build interfaces to C.
-extern void inline native();
-
 // Meta-interpretation primitives.
 extern void inline new_target(context_object context, object target);
 

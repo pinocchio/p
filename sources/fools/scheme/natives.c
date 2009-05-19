@@ -37,6 +37,10 @@ preval2(scheme##_##name);
     scheme##_##name = (object)make_iconst(\
                         (object)make_object(0,\
                             (object)make_native(&scheme##_##name##_##func)));
+#define load_direct_op(name)\
+    scheme##_##name = (object)make_object(0,\
+                        (object)make_native(&scheme##_##name##_##func));
+
 
 binop(plus,  +)
 binop(minus, -)
@@ -124,7 +128,6 @@ void bootstrap_scheme() {
     load_op(minus);
     load_op(smallerp);
     load_op(eqp);
-
-    scheme_true  = (object)make_native(&scheme_true_func);
-    scheme_false  = (object)make_native(&scheme_false_func);
+    load_direct_op(true);
+    load_direct_op(false);
 }

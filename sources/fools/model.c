@@ -60,7 +60,6 @@ nil_object make_nil() {
 
 native_object make_native(transfer_target native) {
     native_object result    = NEW(struct native);
-    header(result)          = fools_system->native;
     result->target          = native;
     return result;
 }

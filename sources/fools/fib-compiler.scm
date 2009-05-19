@@ -2,7 +2,7 @@
 
 (display
 (transform-code
-    (let fib ((x 20))
+    (let fib ((x 23))
         (if (< x 1)
             1
             (+ (fib (- x 1))

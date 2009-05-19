@@ -18,19 +18,6 @@ void inline new_target(context_object context, object target) {
     context->code = ntarget(header(target.pointer));
 }
 
-// Transferring primitives.
-
-void inline native() {
-    // Finds the code which was tagged with native and executes it.
-    // Code tagged with native has to know by itself on which level it
-    // executes!
-    object code = get_context()->self;
-    while (pheader(code.pointer) != ((object)fools_system->native).pointer) {
-        code = header(code.pointer);
-    }
-    get_context()->code = ntarget(code);
-}
-
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer() {
     reset_debug();

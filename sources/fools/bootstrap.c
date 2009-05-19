@@ -76,11 +76,6 @@ fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
 
-    // This has to go!
-    fools_system->native                    = (object)make_native(&native);
-    header(fools_system->native.pointer)    = fools_system->native;
-    // This has to go!
-
     fools_system->string_class  = empty_class;
     fools_system->number_class  = empty_class;
     fools_system->array_class   = wrap_dispatcher(array_dispatch);
