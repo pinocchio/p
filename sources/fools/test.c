@@ -547,7 +547,7 @@ object create_class_dispatch() {
                 (self 'doesNotUnderstand msg args)
                 (let ((method ((class 'at 1) 'msg msg)))
                     (if (eq? method null)
-                        (method 'execute args)
+                        (method 'withArguments args)
                         (loop (class 'at 0))))))))
 */
 object ivar_3_self = (object)make_ivar("self");
@@ -572,7 +572,7 @@ icall_object icall_20_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_20_scheme_eqp, 0, (object)ivar_19_method);
 set_callarg(icall_20_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
 icall_object icall_21_ivar_19_method = make_icall((object)ivar_19_method, 2);
-set_callarg(icall_21_ivar_19_method, 0, (object)SYMBOL_execute);
+set_callarg(icall_21_ivar_19_method, 0, (object)EVAL_WITHARGUMENTS);
 set_callarg(icall_21_ivar_19_method, 1, (object)ivar_4_args);
 object number_22_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_23_ivar_15_class = make_icall((object)ivar_15_class, 2);
@@ -836,5 +836,5 @@ int main() {
     test_ifixed_object();
     test_ifixed_dispatch();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
