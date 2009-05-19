@@ -10,9 +10,11 @@ void iarray_at() {
     object idx = argument_at(context, 1);
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
+    debug("array>>at: %i\n", index);
 
     set_argument(return_context(context), 1, array_at(array, index));
     pop_context();
+    debug("ret>>array>>at:\n");
 }
 
 void iarray_at_put() {
@@ -25,9 +27,11 @@ void iarray_at_put() {
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     object value = argument_at(context, 2);
+    debug("array>>at:put: %i, %p\n", index, value.pointer);
 
     array_at_put(array, index, value);
     pop_context();
+    debug("ret>>array>>at:put:");
 }
 
 void array_dispatch() {
