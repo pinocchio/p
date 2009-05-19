@@ -181,7 +181,6 @@ void bootstrap_scheme() {
     
     // Remove once the compiler is up-to-date
     scheme_eqp = (object)make_iconst(scheme_eqp);
-    printf("EQP:------------------------------ %p\n", scheme_eqp);
     scheme_smallerp = (object)make_iconst(scheme_smallerp);
     scheme_minus = (object)make_iconst(scheme_minus);
     scheme_plus = (object)make_iconst(scheme_plus);

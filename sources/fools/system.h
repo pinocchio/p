@@ -21,6 +21,7 @@
 #include <system/ival.h>
 
 #include <system/array.h>
+#include <system/dict.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();

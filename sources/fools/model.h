@@ -28,6 +28,7 @@ struct variable_object;
 struct string;
 struct number;
 struct array;
+struct dict;
 struct nil;
 struct native;
 struct context;
@@ -54,10 +55,10 @@ typedef struct variable_object*  variable_object;
 typedef struct string*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
+typedef struct dict*             dict_object;
 typedef struct nil*              nil_object;
 typedef struct native*           native_object;
 typedef struct context*          context_object;
-typedef array_object             message_object;
 typedef void**                   pointer;
 
 typedef void (*transfer_target)();
@@ -78,6 +79,7 @@ typedef union {
     string_object       string;
     number_object       number;
     array_object        array;
+    dict_object         dict;
     fools_object        fools;
     nil_object          nil;
     native_object       native;
@@ -103,6 +105,10 @@ struct number {
 struct array {
     number_object       size;
     object              values[];
+};
+
+struct dict {
+    array_object        values;
 };
 
 struct env {
@@ -157,6 +163,7 @@ struct fools {
     object number_class;
     object string_class;
     object array_class;
+    object dict_class;
     object true_class;
     object false_class;
 };
@@ -165,6 +172,7 @@ extern variable_object          make_object(int size, object interpreter);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
+extern dict_object              make_dict(int size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 extern context_object           make_context(object self, int size);
@@ -193,7 +201,6 @@ extern void             inline set_message(context_object context, object msg);
 extern void             inline set_new_message(context_object context, object msg);
 extern void             inline set_argument(context_object context, int index, object value);
 extern object           inline argument_at(context_object context, int index);
-extern message_object   inline make_message(int size);
 extern object           inline message(context_object context);
 extern int              inline context_size(context_object context);
 #define assert_argsize(context, size) assert(number_value(array_size(&context->arguments)) >= size)

@@ -39,6 +39,13 @@ array_object make_array(int size) {
     return result;
 }
 
+dict_object make_dict(int size) {
+    assert(size);
+    new_instance(dict);
+    result->values = make_array(size * 2);
+    return result;
+}
+
 env_object make_env(object scope, object parent, int size) {
     new_instance(env);
     result->scope       = scope;
@@ -157,10 +164,6 @@ void inline set_argument(context_object context, int index, object value) {
 
 object inline argument_at(context_object context, int index) {
     return raw_array_at(&context->arguments, index);
-}
-
-message_object inline make_message(int size) {
-    return make_array(size);
 }
 
 object inline message(context_object context) {

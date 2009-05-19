@@ -84,6 +84,7 @@ fools_object bootstrap() {
     fools_system->string_class  = empty_class;
     fools_system->number_class  = empty_class;
     fools_system->array_class   = wrap_dispatcher(array_dispatch);
+    fools_system->dict_class    = wrap_dispatcher(dict_dispatch);
 
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
     fools_system->empty->size               = make_number(0);

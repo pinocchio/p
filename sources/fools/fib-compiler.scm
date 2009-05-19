@@ -16,7 +16,7 @@
             (if (eq? class null)
                 (self 'doesNotUnderstand msg args)
                 (let ((method ((class 'at 1) 'lookup msg)))
-                    (if method
+                    (if (eq? method null)
                         (method 'execute args)
                         (loop (class 'at 0))))))))
 ))

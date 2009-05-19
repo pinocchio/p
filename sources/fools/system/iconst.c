@@ -10,7 +10,7 @@ static void inline iconst_eval() {
 
     set_argument(return_context(iconst_context), 1, iconst->constant);
 
-    debug("ret>>iconst>>eval\n");
+    debug("ret>>iconst>>eval %p\n", iconst->constant.pointer);
 
     pop_context();
 }
