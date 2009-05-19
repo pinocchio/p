@@ -8,43 +8,38 @@
 #include <assert.h>
 #include <stdio.h>
 
-object scheme_plus;
-object scheme_plus_1;
-object scheme_plus_2;
-
-void scheme_plus_func() {
-    context_object context = get_context();
-    debug("in plus\n");
-    // XXX breaks encapsulation. FIX!
-    env_object env = context->env.env;
-    number_object arg1 = env_at(env, 1).number;
-    number_object arg2 = env_at(env, 2).number;
-    number_object result = make_number(arg1->value + arg2->value);
-
-    set_argument(return_context(context), 1, (object)result);
-
-    debug("exit plus\n");
-    pop_context();
+#define preval2(name) \
+void name##_##func() {\
+    context_object context = get_context();\
+    assert_argsize(context, 2);\
+    push_eval_of(context, 0);\
+    push_eval_of(context, 1);\
+    context->code = &name##_##func_do;\
 }
 
-object scheme_minus;
-object scheme_minus_1;
-object scheme_minus_2;
+// XXX breaks encapsulation. FIX!
+#define binop(name, op)\
+object scheme##_##name;\
+void scheme##_##name##_##func_do() {\
+    context_object context = get_context();\
+    debug("scheme>>"#name"\n");\
+    number_object arg1 = argument_at(context, 0).number;\
+    number_object arg2 = argument_at(context, 1).number;\
+    number_object result = make_number(arg1->value op arg2->value);\
+\
+    set_argument(return_context(context), 1, (object)result);\
+    debug("ret>>scheme>>"#name"\n");\
+    pop_context();\
+}\
+preval2(scheme##_##name);
 
-void scheme_minus_func() {
-    context_object context = get_context();
-    debug("in minus\n");
-    // XXX breaks encapsulation. FIX!
-    env_object env = context->env.env;
-    number_object arg1 = env_at(env, 1).number;
-    number_object arg2 = env_at(env, 2).number;
-    number_object result = make_number(arg1->value - arg2->value);
+#define load_op(name)\
+    scheme##_##name = (object)make_iconst(\
+                        (object)make_object(0,\
+                            (object)make_native(&scheme##_##name##_##func)));
 
-    set_argument(return_context(context), 1, (object)result);
-
-    debug("exit minus\n");
-    pop_context();
-}
+binop(plus,  +)
+binop(minus, -)
 
 object scheme_true;
 
@@ -81,107 +76,55 @@ void scheme_false_func() {
 }
 
 object scheme_smallerp;
-object scheme_smallerp_1;
-object scheme_smallerp_2;
 
-void scheme_smallerp_func() {
+static void scheme_smallerp_func_do() {
+    dec();
+    debug("scheme>>smallerp\n");
     context_object context = get_context();
-    debug("in smallerp\n");
-    // XXX breaks encapsulation. FIX!
-
-    env_object env = context->env.env;
-    number_object arg1 = env_at(env, 1).number;
-    number_object arg2 = env_at(env, 2).number;
 
     object result;
-    if (arg1->value < arg2->value) {
+    if (number_value(argument_at(context, 0).number) <
+        number_value(argument_at(context, 1).number)) {
         result = scheme_true;
-        debug("smaller\n");
-    } else {
-        //result = fools_system->false;
+    } else { 
         result = scheme_false;
-        debug("bigger\n");
     }
 
-    debug("result: %p\n", result.pointer);
     set_argument(return_context(context), 1, result);
-
     pop_context();
-    debug("exit smallerp\n");
+    debug("ret>>scheme>>smallerp(pre)\n");
 }
+
+preval2(scheme_smallerp)
 
 object scheme_eqp;
-object scheme_eqp_1;
-object scheme_eqp_2;
 
-void scheme_eqp_func() {
+static void scheme_eqp_func_do() {
+    dec();
+    debug("scheme>>eqp\n");
     context_object context = get_context();
-    debug("in eqp\n");
-    // XXX breaks encapsulation. FIX!
-
-    env_object env = context->env.env;
-    object arg1 = env_at(env, 1);
-    object arg2 = env_at(env, 2);
 
     object result;
-    if (arg1.pointer == arg2.pointer) {
-        //result = fools_system->true;
+    if (argument_at(context, 0).pointer == argument_at(context, 1).pointer) {
         result = scheme_true;
-        debug("eq\n");
-    } else {
-        //result = fools_system->false;
+    } else { 
         result = scheme_false;
-        debug("neq\n");
     }
 
-    debug("result: %p\n", result.pointer);
     set_argument(return_context(context), 1, result);
-
     pop_context();
-    debug("exit eqp\n");
+    debug("ret>>scheme>>eqp(pre)\n");
 }
 
+preval2(scheme_eqp)
+
 void bootstrap_scheme() {
-    scheme_plus_1 = (object)make_ivar("+l");
-    scheme_plus_2 = (object)make_ivar("+r");
-    array_object arguments = make_array(2);
-    array_at_put(arguments, 0, scheme_plus_1);
-    array_at_put(arguments, 1, scheme_plus_2);
-    scheme_plus = make_dyn_func(arguments, (object)make_native(&scheme_plus_func));
 
-    scheme_minus_1 = (object)make_ivar("-l");
-    scheme_minus_2 = (object)make_ivar("-r");
-    arguments = make_array(2);
-    array_at_put(arguments, 0, scheme_minus_1);
-    array_at_put(arguments, 1, scheme_minus_2);
-    scheme_minus = make_dyn_func(arguments, (object)make_native(&scheme_minus_func));
-
-    scheme_smallerp_1 = (object)make_ivar("<l");
-    scheme_smallerp_2 = (object)make_ivar("<r");
-    arguments = make_array(2);
-    array_at_put(arguments, 0, scheme_smallerp_1);
-    array_at_put(arguments, 1, scheme_smallerp_2);
-    scheme_smallerp = make_dyn_func(arguments, (object)make_native(&scheme_smallerp_func));
-
-    scheme_eqp_1 = (object)make_ivar("eql");
-    scheme_eqp_2 = (object)make_ivar("eqr");
-    arguments = make_array(2);
-    array_at_put(arguments, 0, scheme_eqp_1);
-    array_at_put(arguments, 1, scheme_eqp_2);
-    scheme_eqp = make_dyn_func(arguments, (object)make_native(&scheme_eqp_func));
+    load_op(plus);
+    load_op(minus);
+    load_op(smallerp);
+    load_op(eqp);
 
     scheme_true  = (object)make_native(&scheme_true_func);
     scheme_false  = (object)make_native(&scheme_false_func);
-
-    env_object env = empty_env;
-    eval_in_scope(scheme_eqp, env, scheme_eqp);
-    eval_in_scope(scheme_smallerp, env, scheme_smallerp);
-    eval_in_scope(scheme_minus, env, scheme_minus);
-    eval_in_scope(scheme_plus, env, scheme_plus);
-    
-    // Remove once the compiler is up-to-date
-    scheme_eqp = (object)make_iconst(scheme_eqp);
-    scheme_smallerp = (object)make_iconst(scheme_smallerp);
-    scheme_minus = (object)make_iconst(scheme_minus);
-    scheme_plus = (object)make_iconst(scheme_plus);
 }
