@@ -16,6 +16,7 @@ static void inline env_fetch_from() {
         debug("index: %i\n", index);
         object value = env_at(env, index);
         set_argument(return_context(receiver), 1, value);
+        debug("ret>>env>>fetch:from:\n");
         return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {
