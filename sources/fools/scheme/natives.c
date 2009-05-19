@@ -87,6 +87,7 @@ static void scheme_smallerp_func_do() {
     context_object context = get_context();
 
     object result;
+    // XXX test args
     if (number_value(argument_at(context, 0).number) <
         number_value(argument_at(context, 1).number)) {
         result = scheme_true;
@@ -123,7 +124,6 @@ static void scheme_eqp_func_do() {
 preval2(scheme_eqp)
 
 void bootstrap_scheme() {
-
     load_op(plus);
     load_op(minus);
     load_op(smallerp);
