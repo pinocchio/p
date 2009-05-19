@@ -16,7 +16,7 @@ static void inline env_fetch_from() {
         debug("index: %i\n", index);
         object value = env_at(env, index);
         set_argument(return_context(receiver), 1, value);
-        debug("ret>>env>>fetch:from:\n");
+        debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
         return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {
@@ -40,6 +40,7 @@ static void inline env_store_at_in() {
         int index = number_value(argument_at(receiver, 2).number);
         object value = argument_at(receiver, 1);
         env_at_put(env, index, value);
+        debug("ret>>env>>store:at:in: %i, %p\n", index, value.pointer);
         return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {

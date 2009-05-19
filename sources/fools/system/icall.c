@@ -30,15 +30,17 @@ static void inline icall_invoke_env() {
 
 // icall>>eval:
 static void inline icall_eval() {
-    debug("icall>>eval\n");
     context_object icall_context = get_context();
 
     icall_object icall = icall_context->self.icall;
+    debug("icall>>eval %p\n", icall);
 
     object env = icall_context->env;
     icall_context->code = &icall_invoke_env;
     
+    debug("making context for: %p\n", icall->self.pointer);
     context_object context = make_context(icall->self, 1);
+    debug("made context\n");
     context->env = env;
     set_message(context, EVAL);
 

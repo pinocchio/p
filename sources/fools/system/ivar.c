@@ -30,7 +30,7 @@ static void inline ivar_assign() {
 static void inline ivar_eval() {
     context_object ivar_context = get_context();
     ivar_object ivar = ivar_context->self.ivar;
-    debug("ivar>>eval \"%s\"\n", string_value(ivar->name));
+    debug("ivar>>eval \"%s\"\n", ivar->name->value);
 
     object env = ivar_context->env;
 

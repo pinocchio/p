@@ -3,6 +3,7 @@
 #include <system.h>
 #include <assert.h>
 #include <thread.h>
+#include <scheme/natives.h>
 
 // System global
 fools_object fools_system;
@@ -110,6 +111,8 @@ fools_object bootstrap() {
     fools_system->ifixed    = make_empty_object(ifixed_metaclass);
 
     init_thread();
+
+    bootstrap_scheme();
 
     return fools_system;
 }

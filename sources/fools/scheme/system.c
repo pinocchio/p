@@ -25,7 +25,7 @@ void inline add_eval_args_code(ilist_object exp,
     }
 }
 
-void inline add_init_args_code(ilist_object exp,
+void inline init_args(ilist_object exp,
                                array_object arguments,
                                int toskip) {
     // var1 = (var1 eval: (env parent))
@@ -92,7 +92,7 @@ object inline make_dispatch(array_object arguments, object body) {
     // Eval args, switch context, eval body
     ilist_object exp = make_ilist(2);
 
-    add_init_args_code(exp, arguments, 1);
+    init_args(exp, arguments, 1);
     add_switch_scope_code(exp, 0);
     ilist_at_put(exp, 1, body);
 

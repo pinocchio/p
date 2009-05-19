@@ -127,11 +127,11 @@ void scheme_eqp_func() {
     if (arg1.pointer == arg2.pointer) {
         //result = fools_system->true;
         result = scheme_true;
-        debug("smaller\n");
+        debug("eq\n");
     } else {
         //result = fools_system->false;
         result = scheme_false;
-        debug("bigger\n");
+        debug("neq\n");
     }
 
     debug("result: %p\n", result.pointer);
@@ -174,11 +174,14 @@ void bootstrap_scheme() {
     scheme_false  = (object)make_native(&scheme_false_func);
 
     env_object env = empty_env;
+    eval_in_scope(scheme_eqp, env, scheme_eqp);
     eval_in_scope(scheme_smallerp, env, scheme_smallerp);
     eval_in_scope(scheme_minus, env, scheme_minus);
     eval_in_scope(scheme_plus, env, scheme_plus);
     
     // Remove once the compiler is up-to-date
+    scheme_eqp = (object)make_iconst(scheme_eqp);
+    printf("EQP:------------------------------ %p\n", scheme_eqp);
     scheme_smallerp = (object)make_iconst(scheme_smallerp);
     scheme_minus = (object)make_iconst(scheme_minus);
     scheme_plus = (object)make_iconst(scheme_plus);

@@ -10,7 +10,9 @@
 
 // Some nice helper constructs.
 #define SETUP(name)\
-    void name() { printf("################################## "#name"\n"); bootstrap();
+    void name() {\
+        printf("################################## "#name"\n");\
+        bootstrap();
 
 SETUP(test_header)
     string_object string1 = NEW(struct string);
@@ -626,6 +628,12 @@ set_callarg(icall_40_lambda_5_x, 0, (object)icall_39_ivar_4_args);
 array_object array_41_lambda_2_x = make_array(2);
 array_at_put(array_41_lambda_2_x, 0, ivar_3_self);
 array_at_put(array_41_lambda_2_x, 1, ivar_4_args);
+
+printf("--------------> %p %p\n", icall_16_scheme_eqp,
+icall_30_icall_16_scheme_eqp);
+
+
+
 return make_dispatch(array_41_lambda_2_x, (object)icall_40_lambda_5_x);
 }
 

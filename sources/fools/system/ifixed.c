@@ -25,6 +25,7 @@ static void ifixed_at_do() {
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     int size = number_value(ifixed->size.number);
+    debug("at %i (size %i)\n", index, size);
 
     assert(0 <= index);
     assert(index < size);
@@ -102,15 +103,11 @@ void ifixed_shift_level() {
         raw_array_at_put(args, argsize, argument_at(context, argsize));
     }
 
-    array_object arguments = make_array(2);
-    raw_array_at_put(arguments, 0, self);
-    raw_array_at_put(arguments, 1, (object)args);
-
     pop_context();
     context = make_context(dispatch, 2);
     context->env = env;
-    set_message(context, EVAL_WITHARGUMENTS);
-    set_argument(context, 1, (object)arguments);
+    set_argument(context, 0, self);
+    set_argument(context, 1, (object)args);
 
     debug("ret>>ifixedShiftLevel\n");
 }
