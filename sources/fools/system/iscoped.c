@@ -75,7 +75,7 @@ static void inline iscoped_scope() {
 
 void iscoped_shift() {
     context_object context = get_context();
-    variable_object func = make_object(1, fools_system->level_shifter);
+    object_object func = make_object(1, fools_system->level_shifter);
     object_at_put(func, 0, context->self);
     set_argument(return_context(context), 1, (object)func);
     pop_context();

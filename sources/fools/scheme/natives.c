@@ -17,22 +17,6 @@ void name##_##func() {\
     context->code = &name##_##func_do;\
 }
 
-// XXX breaks encapsulation. FIX!
-#define binop(name, op)\
-object scheme##_##name;\
-void scheme##_##name##_##func_do() {\
-    context_object context = get_context();\
-    debug("scheme>>"#name"\n");\
-    number_object arg1 = argument_at(context, 0).number;\
-    number_object arg2 = argument_at(context, 1).number;\
-    number_object result = make_number(arg1->value op arg2->value);\
-\
-    set_argument(return_context(context), 1, (object)result);\
-    debug("ret>>scheme>>"#name"\n");\
-    pop_context();\
-}\
-preval2(scheme##_##name);
-
 #define init_op(name)\
     scheme##_##name = (object)make_iconst(\
                         (object)make_object(0,\
@@ -41,9 +25,44 @@ preval2(scheme##_##name);
     scheme##_##name = (object)make_object(0,\
                         (object)make_native(&scheme##_##name##_##func));
 
+#define bin_eval_with(name, type1, type2, func)\
+object scheme##_##name;\
+static void scheme##_##name##_##func_do() {\
+    dec();\
+    debug("scheme>>"#name"\n");\
+    context_object context = get_context();\
+    object result = func(argument_at(context, 0).type1,\
+                         argument_at(context, 1).type2);\
+    set_argument(return_context(context), 1, result);\
+    pop_context();\
+    debug("ret>>scheme>>"#name"\n");\
+}\
+preval2(scheme##_##name);
 
-binop(plus,  +)
-binop(minus, -)
+#define bin_io_op(name, input, output, op)\
+object inline scheme##_##name##_##native(input##_##object left, input##_##object right) {\
+    return (object)make##_##output(input##_##value(left) op input##_##value(right));\
+}\
+bin_eval_with(name, input, input, scheme##_##name##_##native)
+
+
+#define bin_number_number_op(name, op)\
+    bin_io_op(name, number, number, op)
+
+#define bin_number_bool_op(name, op)\
+    bin_io_op(name, number, bool, op)
+
+#define object_value(o) o
+#define bin_object_bool_op(name, op)\
+    bin_io_op(name, object, bool, op)
+
+object inline make_bool(int bl) {
+    if (bl) {
+        return scheme_true;
+    } else {
+        return scheme_false;
+    }
+}
 
 object scheme_true;
 void scheme_true_func() {
@@ -69,49 +88,10 @@ void scheme_false_func() {
     debug("exit scheme_false\n");
 }
 
-object scheme_smallerp;
-
-static void scheme_smallerp_func_do() {
-    dec();
-    debug("scheme>>smallerp\n");
-    context_object context = get_context();
-
-    object result;
-    // XXX test args
-    if (number_value(argument_at(context, 0).number) <
-        number_value(argument_at(context, 1).number)) {
-        result = scheme_true;
-    } else { 
-        result = scheme_false;
-    }
-
-    set_argument(return_context(context), 1, result);
-    pop_context();
-    debug("ret>>scheme>>smallerp(pre)\n");
-}
-
-preval2(scheme_smallerp)
-
-object scheme_eqp;
-
-static void scheme_eqp_func_do() {
-    dec();
-    debug("scheme>>eqp\n");
-    context_object context = get_context();
-
-    object result;
-    if (argument_at(context, 0).pointer == argument_at(context, 1).pointer) {
-        result = scheme_true;
-    } else { 
-        result = scheme_false;
-    }
-
-    set_argument(return_context(context), 1, result);
-    pop_context();
-    debug("ret>>scheme>>eqp(pre)\n");
-}
-
-preval2(scheme_eqp)
+bin_number_number_op(plus,  +)
+bin_number_number_op(minus, -)
+bin_number_bool_op(smallerp, <)
+bin_object_bool_op(eqp, ==)
 
 void bootstrap_scheme() {
     init_op(plus);

@@ -24,7 +24,7 @@
 #define ntarget(o) native_target((o).native)
 
 struct env;
-struct variable_object;
+struct object_object;
 struct string;
 struct number;
 struct array;
@@ -51,7 +51,7 @@ typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
 typedef struct ifixed*           ifixed_object;
 typedef struct env*              env_object;
-typedef struct variable_object*  variable_object;
+typedef struct object_object*  object_object;
 typedef struct string*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
@@ -75,7 +75,7 @@ typedef union {
     iscoped_object      iscoped;
     icapture_object     icapture;
     ifixed_object       ifixed;
-    variable_object     object;
+    object_object     object;
     string_object       string;
     number_object       number;
     array_object        array;
@@ -89,7 +89,7 @@ typedef union {
     pointer             pointer;
 } object;
 
-struct variable_object {
+struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
 
@@ -168,7 +168,7 @@ struct fools {
     object false_class;
 };
 
-extern variable_object          make_object(int size, object interpreter);
+extern object_object          make_object(int size, object interpreter);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
@@ -191,8 +191,8 @@ extern transfer_target  inline native_target(native_object native);
 extern int              inline string_equals(string_object string1,
                                              string_object string2);
 extern object           inline symbol_known_to_the_vm(int index);
-extern object           inline object_at(variable_object object, int index);
-extern void             inline object_at_put(variable_object o,
+extern object           inline object_at(object_object object, int index);
+extern void             inline object_at_put(object_object o,
                                              int index, object value);
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);

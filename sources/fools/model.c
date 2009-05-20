@@ -6,8 +6,8 @@
 
 #define ctx_size (sizeof(struct context) / sizeof(object))
 
-variable_object make_object(int size, object interpreter) {
-    variable_object result  = NEW_ARRAYED(variable_object, object, size);
+object_object make_object(int size, object interpreter) {
+    object_object result  = NEW_ARRAYED(object_object, object, size);
     header(result)          = interpreter;
     int i;
     for (i = 0; i < size; i++) {
@@ -132,11 +132,11 @@ object inline symbol_known_to_the_vm(int index) {
     return raw_array_at(symbols, index);
 }
 
-object inline object_at(variable_object object, int index) {
+object inline object_at(object_object object, int index) {
     return object->fields[index];
 }
 
-void inline object_at_put(variable_object o, int index, object value) {
+void inline object_at_put(object_object o, int index, object value) {
     o->fields[index] = value;
 }
 

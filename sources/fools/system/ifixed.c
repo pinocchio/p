@@ -137,7 +137,7 @@ static void inline ifixed_new() {
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
     int size = number_value(ifixed->size.number);
-    variable_object instance = make_object(size, ifixed->interp);
+    object_object instance = make_object(size, ifixed->interp);
     set_argument(return_context(context), 1, (object)instance);
     pop_context();
     debug("ret>>ifixed>>new\n");

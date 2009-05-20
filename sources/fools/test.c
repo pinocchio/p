@@ -53,8 +53,8 @@ SETUP(test_string_equals)
     assert(!string_equals(make_string("a string"), make_string("b string")));
 }
 
-SETUP(test_variable_object)
-    variable_object result = make_object(10, (object)fools_system->nil);
+SETUP(test_object_object)
+    object_object result = make_object(10, (object)fools_system->nil);
 
     assert(header(result).nil == fools_system->nil);
     int i;
@@ -811,7 +811,7 @@ int main() {
     test_header();
     test_array();
     test_string_equals();
-    test_variable_object();
+    test_object_object();
     test_transfer_empty_ilist();
     test_transfer_empty_ilist_in_ilist();
     test_transfer_iconst();
