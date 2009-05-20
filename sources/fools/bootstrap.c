@@ -82,7 +82,7 @@ fools_object bootstrap() {
     fools_system->dict_class    = wrap_dispatcher(dict_dispatch);
 
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
-    fools_system->empty->size               = make_number(0);
+    fools_system->empty->size               = 0;
     header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 

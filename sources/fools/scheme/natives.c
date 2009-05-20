@@ -88,10 +88,10 @@ void scheme_false_func() {
     debug("exit scheme_false\n");
 }
 
-bin_number_number_op(plus,  +)
-bin_number_number_op(minus, -)
-bin_number_bool_op(smallerp, <)
-bin_object_bool_op(eqp, ==)
+bin_number_number_op( plus,      +  )
+bin_number_number_op( minus,     -  )
+bin_number_bool_op  ( smallerp,  <  )
+bin_object_bool_op  ( eqp,       == )
 
 void bootstrap_scheme() {
     init_op(plus);

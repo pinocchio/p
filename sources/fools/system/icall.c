@@ -12,7 +12,7 @@ static void inline icall_invoke_env() {
     object self         = argument_at(icall_context, 1);
 
     // XXX Do an ensuring copy! Check it's an array!
-    int argsize = number_value(array_size(icall->arguments));
+    int argsize = array_size(icall->arguments);
 
     pop_context();
     icall_context       = make_context(self, argsize);

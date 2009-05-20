@@ -16,7 +16,7 @@ static void inline iscoped_eval() {
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
-    assert(number_value(array_size(args)) == argsize);
+    assert(array_size(args) == argsize);
 
     int i;
     for (i = 0; i < argsize; i++) {

@@ -6,7 +6,7 @@ void ival() {
     array_object args = argument_at(context, 0).array;
     object value = argument_at(context, 1);
     int pos = number_value(argument_at(context, 2).number);
-    debug("ival %i (size %i)\n", pos, number_value(array_size(args)));
+    debug("ival %i (size %i)\n", pos, array_size(args));
     array_at_put(args, pos, value);
     pop_context();
     debug("ret>>ival\n");

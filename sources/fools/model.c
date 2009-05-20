@@ -34,7 +34,7 @@ array_object make_array(int size) {
     if (size == 0) { return fools_system->empty; }
     array_object result     = (array_object)make_object(size + 1,
                                                     (object)fools_system->nil);
-    result->size            = make_number(size);
+    result->size            = size;
     header(result)          = (object)fools_system->array_class;
     return result;
 }
@@ -68,13 +68,13 @@ context_object make_context(object self, int size) {
     context_object result   = stack_claim(size + ctx_size);
     result->self            = self;
     result->code            = ntarget(header(self.pointer));
-    result->arguments.size  = make_number(size);
+    result->arguments.size  = size;
     return result;
 }
 
 context_object make_empty_context(int size) {
     context_object result   = stack_claim(size + ctx_size);
-    result->arguments.size  = make_number(size);
+    result->arguments.size  = size;
     return result;
 }
 
@@ -92,7 +92,7 @@ number_object inline string_size(string_object string) {
     return string->size;
 }
 
-number_object inline array_size(array_object array) {
+int inline array_size(array_object array) {
     return array->size;
 }
 
@@ -170,7 +170,7 @@ object inline message(context_object context) {
 }
 
 int inline context_size(context_object context) {
-    return number_value(array_size(&context->arguments));
+    return array_size(&context->arguments);
 }
 
 context_object inline return_context(context_object context) {

@@ -11,7 +11,7 @@ void dict_at_do() {
     array_object kv = dict->values;
     object result = (object)fools_system->nil;
     int i;
-    int limit = number_value(array_size(dict->values)) / 2;
+    int limit = array_size(dict->values) / 2;
     for (i = 0; i < limit; i++) {
         if (raw_array_at(kv, i * 2).pointer == key.pointer) {
             result = raw_array_at(kv, i * 2 + 1);
@@ -25,7 +25,7 @@ void dict_at_do() {
 }
 
 array_object inline double_array(array_object values) {
-    int oldsize = number_value(array_size(values));
+    int oldsize = array_size(values);
     array_object new = make_array(oldsize * 2);
     for (--oldsize; oldsize >= 0; oldsize--) {
         raw_array_at_put(new, oldsize, raw_array_at(values, oldsize));
@@ -43,7 +43,7 @@ void dict_at_put_do() {
 
     array_object kv = dict->values;
     int i;
-    int limit = number_value(array_size(dict->values)) / 2;
+    int limit = array_size(dict->values) / 2;
     for (i = 0; i < limit; i++) {
         object v = raw_array_at(kv, i * 2);
         if (v.pointer == key.pointer || v.nil == fools_system->nil) {

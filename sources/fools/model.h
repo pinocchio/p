@@ -51,7 +51,7 @@ typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
 typedef struct ifixed*           ifixed_object;
 typedef struct env*              env_object;
-typedef struct object_object*  object_object;
+typedef struct object_object*    object_object;
 typedef struct string*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
@@ -75,7 +75,7 @@ typedef union {
     iscoped_object      iscoped;
     icapture_object     icapture;
     ifixed_object       ifixed;
-    object_object     object;
+    object_object       object;
     string_object       string;
     number_object       number;
     array_object        array;
@@ -103,7 +103,7 @@ struct number {
 };
 
 struct array {
-    number_object       size;
+    int                 size;
     object              values[];
 };
 
@@ -180,7 +180,7 @@ extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
 
 extern int              inline number_value(number_object number);
-extern number_object    inline array_size(array_object array);
+extern int              inline array_size(array_object array);
 extern object           inline array_at(array_object array, int index);
 extern object           inline raw_array_at(array_object array, int index);
 extern void             inline array_at_put(array_object array,
@@ -203,13 +203,13 @@ extern void             inline set_argument(context_object context, int index, o
 extern object           inline argument_at(context_object context, int index);
 extern object           inline message(context_object context);
 extern int              inline context_size(context_object context);
-#define assert_argsize(context, size) assert(number_value(array_size(&context->arguments)) >= size)
+#define assert_argsize(context, size) assert(context_size(context) >= size)
 #define empty_env make_env((object)fools_system->nil,\
                            (object)fools_system->nil, 0)
 
 #define array_check_bounds(array, index)\
     assert(0 <= index);\
-    assert(index < number_value(array_size(array)));
+    assert(index < array_size(array));
 
 
 #endif // MODEL_H

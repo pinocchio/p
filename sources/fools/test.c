@@ -25,7 +25,7 @@ SETUP(test_header)
 SETUP(test_array)
 
     array_object a = make_array(100);
-    assert(a->size->value == 100);
+    assert(a->size == 100);
 
     int i;
 
@@ -41,7 +41,7 @@ SETUP(test_array)
 
 void native_test_single_arg_5() {
     context_object c = get_context();
-    assert(number_value(array_size(&c->arguments)) == 1);
+    assert(array_size(&c->arguments) == 1);
     assert(number_value(argument_at(c, 0).number) == 5);
     argument_at(c, 0).number->value = 6;
     pop_context();

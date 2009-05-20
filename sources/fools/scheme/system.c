@@ -31,7 +31,7 @@ void inline init_args(ilist_object exp,
     // var1 = (var1 eval: (env parent))
     // ...  ...  ...
     // varN = (varN eval: (env parent))
-    int todo = number_value(array_size(arguments));
+    int todo = array_size(arguments);
     int i;
     for (i = 0; i < todo; i++) {
         ivar_object variable = array_at(arguments, i).ivar;
@@ -63,7 +63,7 @@ object iscoped_for(object exp, object size) {
 
 // Function which doesn't switch to static scope on eval automatically.
 object inline make_dyn_func(array_object arguments, object body) {
-    int argsize = number_value(array_size(arguments));
+    int argsize = array_size(arguments);
     // Eval args, eval body
     ilist_object exp = make_ilist(argsize + 1); 
 
@@ -71,11 +71,11 @@ object inline make_dyn_func(array_object arguments, object body) {
     ilist_at_put(exp, argsize, body);
 
     return iscoped_for((object)exp,
-                       (object)array_size(arguments));
+                       (object)make_number(array_size(arguments)));
 }
 
 object inline make_func(array_object arguments, object body) {
-    int argsize = number_value(array_size(arguments));
+    int argsize = array_size(arguments);
     // Eval args, switch context, eval body
     ilist_object exp = make_ilist(argsize + 2);
 
@@ -84,7 +84,7 @@ object inline make_func(array_object arguments, object body) {
     ilist_at_put(exp, argsize + 1, body);
 
     return iscoped_for((object)exp,
-                       (object)array_size(arguments));
+                       (object)make_number(array_size(arguments)));
 }
 
 // Function which doesn't evaluate its arguments
@@ -97,5 +97,5 @@ object inline make_dispatch(array_object arguments, object body) {
     ilist_at_put(exp, 1, body);
 
     return iscoped_for((object)exp,
-                       (object)array_size(arguments));
+                       (object)make_number(array_size(arguments)));
 }
