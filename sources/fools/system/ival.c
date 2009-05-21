@@ -10,6 +10,7 @@ void ival() {
     array_at_put(args, pos, value);
     pop_context();
     debug("ret>>ival\n");
+    dec();
 }
 
 void inline push_ival(object exp, context_object target, number_object pos) {
@@ -22,4 +23,5 @@ void inline push_ival(object exp, context_object target, number_object pos) {
     c = make_context(exp, 1);
     c->env = target->env;
     set_message(c, EVAL);
+    inc();
 }

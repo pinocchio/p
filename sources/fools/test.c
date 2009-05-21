@@ -787,9 +787,6 @@ SETUP(test_ifixed_dispatch)
     make_eval_context(ci, dnu, env);
     dnu = transfer();
 
-    printf("DNU: %p\n", dnu.pointer);
-    printf("nil: %p\n", fools_system->nil);
-
     dict_object methods = make_dict(2);
     icall3(icall, (object)make_iconst((object)methods),
                   OBJECT_AT_PUT,

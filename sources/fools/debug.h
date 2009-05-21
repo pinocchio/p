@@ -10,6 +10,6 @@ extern int _indent_;
     if (!NDEBUG) { _indent_ = 0; debug("------ starting evaluation\n"); } }
 
 #define inc() { if (!NDEBUG) _indent_++; }
-#define dec() { if (!NDEBUG) _indent_--; }
+#define dec() { if (!NDEBUG && _indent_) _indent_--; }
 
 #endif // DEBUG_H

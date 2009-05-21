@@ -31,7 +31,6 @@ static void inline ilist_eval() {
     }
 
     debug("ret>>ilist>>eval(n)\n");
-    inc();
 }
 
 void ilist_dispatch() {
