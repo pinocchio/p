@@ -782,6 +782,7 @@ SETUP(test_ifixed_dispatch)
     array_object args = make_array(2);
     raw_array_at_put(args, 0, mvar);
     raw_array_at_put(args, 1, avar);
+    // TODO should evaluate it's but not shift!
     object dnu = make_dispatch(args, (object)make_iconst(o));
     make_eval_context(ci, dnu, env);
     dnu = transfer();
