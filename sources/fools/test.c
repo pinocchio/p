@@ -777,10 +777,14 @@ SETUP(test_ifixed_dispatch)
 
     object o = (object)make_object(0, (object)fools_system->nil);
 
-    object dnu = (object)make_iscoped(
-                        (object)fools_system->nil,
-                        (object)make_iconst(o),
-                        (object)make_number(1));
+    object mvar = (object)make_ivar("msg");
+    object avar = (object)make_ivar("args");
+    array_object args = make_array(2);
+    raw_array_at_put(args, 0, mvar);
+    raw_array_at_put(args, 1, avar);
+    object dnu = make_dispatch(args, (object)make_iconst(o));
+    make_eval_context(ci, dnu, env);
+    dnu = transfer();
 
     printf("DNU: %p\n", dnu.pointer);
     printf("nil: %p\n", fools_system->nil);
