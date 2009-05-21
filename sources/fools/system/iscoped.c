@@ -16,7 +16,10 @@ static void inline iscoped_eval() {
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
-    assert(array_size(args) == argsize);
+    if(array_size(args) != argsize) {
+        printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
+        assert(NULL);
+    }
 
     int i;
     for (i = 0; i < argsize; i++) {

@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <print.h>
 
 void dict_at_do() {
     context_object context = get_context();
@@ -7,6 +8,7 @@ void dict_at_do() {
 
     object key = argument_at(context, 1);
     debug("dict>>at: %p\n", key.pointer);
+    print_object(key);
 
     array_object kv = dict->values;
     object result = (object)fools_system->nil;
@@ -52,14 +54,17 @@ void dict_at_put_do() {
     }
     
     if (i == limit) {
+        printf("DOUBLING ARRAY------------------\n");
         kv = double_array(kv);
         dict->values = kv;
     }
 
-    raw_array_at_put(kv, i, value);
+    printf("------------------------PUTTING AT: %i %p %p\n", i * 2, key.pointer, value.pointer);
+    raw_array_at_put(kv, i * 2, key);
+    raw_array_at_put(kv, i * 2 + 1, value);
 
     pop_context();
-    debug("ret>>dict>>at:\n");
+    debug("ret>>dict>>at:put:\n");
 }
 
 void dict_at() {

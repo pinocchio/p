@@ -3,6 +3,7 @@
 #include <system.h>
 #include <scheme/natives.h>
 #include <scheme/system.h>
+#include <scheme/symbols.h>
 #include <thread.h>
 
 #include <assert.h>
@@ -67,25 +68,25 @@ object inline make_bool(int bl) {
 object scheme_true;
 void scheme_true_func() {
     context_object context = get_context();
-    debug("in scheme_true\n");
+    debug("scheme>>true\n");
     object if_true = argument_at(context, 0);
 
     new_target(context, if_true);
     set_message(context, EVAL);
 
-    debug("exit scheme_true\n");
+    debug("ret>>scheme>>true\n");
 }
 
 object scheme_false;
 void scheme_false_func() {
     context_object context = get_context();
-    debug("in scheme_false\n");
+    debug("scheme>>false\n");
     object if_false = argument_at(context, 1);
 
     new_target(context, if_false);
     set_message(context, EVAL);
 
-    debug("exit scheme_false\n");
+    debug("ret>>scheme>>false\n");
 }
 
 bin_number_number_op( plus,      +  )
@@ -94,6 +95,7 @@ bin_number_bool_op  ( smallerp,  <  )
 bin_object_bool_op  ( eqp,       == )
 
 void bootstrap_scheme() {
+    bootstrap_scheme_symbols();
     init_op(plus);
     init_op(minus);
     init_op(smallerp);

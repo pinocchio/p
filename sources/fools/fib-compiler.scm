@@ -2,21 +2,21 @@
 
 (display
 (transform-code
-    (let fib ((x 25))
-        (if (< x 1)
-            1
-            (+ (fib (- x 1))
-               (fib (- x 2)))))
- 
+;    (let fib ((x 25))
+;        (if (< x 1)
+;            1
+;            (+ (fib (- x 1))
+;               (fib (- x 2)))))
+; 
 ; Method lookup.
-;(dispatch (self args)
-;    (let ((msg (args 'at 0)))
-;        (args 'atput 0 self)
-;        (let loop ((class ((self 'dispatch) 'delegate)))
-;            (if (eq? class null)
-;                (self 'doesNotUnderstand msg args)
-;                (let ((method ((class 'at 1) 'lookup msg)))
-;                    (if (eq? method null)
-;                        (method 'execute args)
-;                        (loop (class 'at 0))))))))
+(dispatch (self args)
+    (let ((msg (args 'at 0)))
+        (args 'atput 0 self)
+        (let loop ((class ((self 'dispatch) 'delegate)))
+            (if (eq? class null)
+                (self 'doesNotUnderstand msg args)
+                (let ((method ((class 'at 1) 'lookup msg)))
+                    (if (eq? method null)
+                        (loop (class 'at 0))
+                        (method 'execute args)))))))
 ))

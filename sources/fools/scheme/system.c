@@ -28,9 +28,6 @@ void inline add_eval_args_code(ilist_object exp,
 void inline init_args(ilist_object exp,
                                array_object arguments,
                                int toskip) {
-    // var1 = (var1 eval: (env parent))
-    // ...  ...  ...
-    // varN = (varN eval: (env parent))
     int todo = array_size(arguments);
     int i;
     for (i = 0; i < todo; i++) {

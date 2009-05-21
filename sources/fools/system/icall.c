@@ -3,7 +3,6 @@
 
 // icall>>invoke:env:
 static void inline icall_invoke_env() {
-    debug("icall>>invoke:\n");
     context_object icall_context = get_context();
 
     icall_object icall = icall_context->self.icall;
@@ -13,6 +12,7 @@ static void inline icall_invoke_env() {
 
     // XXX Do an ensuring copy! Check it's an array!
     int argsize = array_size(icall->arguments);
+    debug("icall>>invoke: %p (%i)\n", self.pointer, argsize);
 
     pop_context();
     icall_context       = make_context(self, argsize);

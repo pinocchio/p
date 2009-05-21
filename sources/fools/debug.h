@@ -1,7 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#define NDEBUG 1
+#define NDEBUG 0
 #define debug if (!NDEBUG) indent(); if (!NDEBUG) printf
 
 extern void indent();

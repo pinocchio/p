@@ -547,8 +547,8 @@ object create_class_dispatch() {
                 (self 'doesNotUnderstand msg args)
                 (let ((method ((class 'at 1) 'msg msg)))
                     (if (eq? method null)
-                        (method 'withArguments args)
-                        (loop (class 'at 0))))))))
+                        (loop (class 'at 0))
+                        (method 'withArguments args)))))))
 */
 object ivar_3_self = (object)make_ivar("self");
 object ivar_4_args = (object)make_ivar("args");
@@ -571,27 +571,27 @@ object ivar_19_method = (object)make_ivar("method");
 icall_object icall_20_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_20_scheme_eqp, 0, (object)ivar_19_method);
 set_callarg(icall_20_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
-icall_object icall_21_ivar_19_method = make_icall((object)ivar_19_method, 2);
-set_callarg(icall_21_ivar_19_method, 0, (object)EVAL_WITHARGUMENTS);
-set_callarg(icall_21_ivar_19_method, 1, (object)ivar_4_args);
-object number_22_0 = (object)make_iconst((object)make_number(0));
-icall_object icall_23_ivar_15_class = make_icall((object)ivar_15_class, 2);
-set_callarg(icall_23_ivar_15_class, 0, (object)OBJECT_AT);
-set_callarg(icall_23_ivar_15_class, 1, (object)number_22_0);
-icall_object icall_24_ivar_11_loop = make_icall((object)ivar_11_loop, 1);
-set_callarg(icall_24_ivar_11_loop, 0, (object)icall_23_ivar_15_class);
+object number_21_0 = (object)make_iconst((object)make_number(0));
+icall_object icall_22_ivar_15_class = make_icall((object)ivar_15_class, 2);
+set_callarg(icall_22_ivar_15_class, 0, (object)OBJECT_AT);
+set_callarg(icall_22_ivar_15_class, 1, (object)number_21_0);
+icall_object icall_23_ivar_11_loop = make_icall((object)ivar_11_loop, 1);
+set_callarg(icall_23_ivar_11_loop, 0, (object)icall_22_ivar_15_class);
+icall_object icall_24_ivar_19_method = make_icall((object)ivar_19_method, 2);
+set_callarg(icall_24_ivar_19_method, 0, EVAL_WITHARGUMENTS);
+set_callarg(icall_24_ivar_19_method, 1, (object)ivar_4_args);
 icall_object icall_25_icall_20_scheme_eqp = make_icall((object)icall_20_scheme_eqp, 2);
-set_callarg(icall_25_icall_20_scheme_eqp, 0, (object)icall_21_ivar_19_method);
-set_callarg(icall_25_icall_20_scheme_eqp, 1, (object)icall_24_ivar_11_loop);
+set_callarg(icall_25_icall_20_scheme_eqp, 0, (object)icall_23_ivar_11_loop);
+set_callarg(icall_25_icall_20_scheme_eqp, 1, (object)icall_24_ivar_19_method);
 array_object array_26_lambda_18_x = make_array(1);
 array_at_put(array_26_lambda_18_x, 0, ivar_19_method);
 object lambda_18_x = make_func(array_26_lambda_18_x, (object)icall_25_icall_20_scheme_eqp);
 object number_27_1 = (object)make_iconst((object)make_number(1));
 icall_object icall_28_ivar_15_class = make_icall((object)ivar_15_class, 2);
-set_callarg(icall_28_ivar_15_class, 0, (object)OBJECT_AT);
+set_callarg(icall_28_ivar_15_class, 0, OBJECT_AT);
 set_callarg(icall_28_ivar_15_class, 1, (object)number_27_1);
 icall_object icall_29_icall_28_ivar_15_class = make_icall((object)icall_28_ivar_15_class, 2);
-set_callarg(icall_29_icall_28_ivar_15_class, 0, (object)OBJECT_AT);
+set_callarg(icall_29_icall_28_ivar_15_class, 0, OBJECT_AT);
 set_callarg(icall_29_icall_28_ivar_15_class, 1, (object)ivar_6_msg);
 icall_object icall_30_lambda_18_x = make_icall((object)lambda_18_x, 1);
 set_callarg(icall_30_lambda_18_x, 0, (object)icall_29_icall_28_ivar_15_class);
@@ -775,11 +775,22 @@ SETUP(test_ifixed_dispatch)
 
     object theclass = transfer();
 
+    object o = (object)make_object(0, (object)fools_system->nil);
+
+    object dnu = (object)make_iscoped(
+                        (object)fools_system->nil,
+                        (object)make_iconst(o),
+                        (object)make_number(1));
+
+    printf("DNU: %p\n", dnu.pointer);
+    printf("nil: %p\n", fools_system->nil);
+
     dict_object methods = make_dict(2);
     icall3(icall, (object)make_iconst((object)methods),
                   OBJECT_AT_PUT,
                   (object)make_iconst((object)SYMBOL_doesNotUnderstand),
-                  (object)make_iconst((object)fools_system->nil));
+                  (object)make_iconst(dnu));
+
     make_eval_context(ci, icall, env);
     transfer();
 
