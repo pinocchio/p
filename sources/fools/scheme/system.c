@@ -96,3 +96,18 @@ object inline make_dispatch(array_object arguments, object body) {
     return iscoped_for((object)exp,
                        (object)make_number(array_size(arguments)));
 }
+
+object inline make_m(array_object arguments, object body) {
+    int argsize = array_size(arguments);
+    // Eval args, switch context, eval body
+    ilist_object exp = make_ilist(argsize + 2);
+
+    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
+    add_switch_scope_code(exp, argsize);
+    ilist_at_put(exp, argsize + 1, body);
+
+    iconst_object iconst = make_iconst(fools_system->iscoped);
+    icall_object icall3(icall, iconst, NEW_SIZE, (object)exp,
+                        (object)make_number(array_size(arguments)));
+    return (object)icall;
+}

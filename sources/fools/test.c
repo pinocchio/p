@@ -783,7 +783,7 @@ SETUP(test_ifixed_dispatch)
     raw_array_at_put(args, 0, mvar);
     raw_array_at_put(args, 1, avar);
     // TODO should evaluate it's but not shift!
-    object dnu = make_dispatch(args, (object)make_iconst(o));
+    object dnu = make_m(args, mvar);
     make_eval_context(ci, dnu, env);
     dnu = transfer();
 
@@ -816,7 +816,9 @@ SETUP(test_ifixed_dispatch)
     icall1(icall, make_iconst(instance), NEW);
     make_eval_context(ci, icall, env);
 
-    transfer();
+    object result = transfer();
+    printf("result: %p given: %p\n", result.pointer, NEW.pointer);
+    print_object(result);
 }
 
 
