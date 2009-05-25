@@ -7,13 +7,13 @@ static void inline ilist_eval() {
     context_object ilist_context = get_context();
     ilist_object ilist = ilist_context->self.ilist;
 
-    if (number_value(ilist->size) == 0) {
+    if (ilist_size(ilist) == 0) {
         pop_context();
         debug("ret>>ilist>>eval(0)\n");
         return;
     }
 
-    int end = number_value(ilist->size) - 1;
+    int end = ilist_size(ilist) - 1;
 
     object instruction = (object)raw_ilist_at(ilist, end);
     new_target(ilist_context, instruction);
@@ -46,18 +46,18 @@ void ilist_dispatch() {
 ilist_object make_ilist(int size) {
     ilist_object result = NEW_ARRAYED(ilist_object, object, size + 1);
     header(result)      = (object)fools_system->ilist_class;
-    result->size        = make_number(size);
+    result->size        = size;
     return result;
 }
 
 // Accessors
-number_object inline ilist_size(ilist_object ilist) {
+int inline ilist_size(ilist_object ilist) {
     return ilist->size;
 }
 
 void inline ilist_check_bounds(ilist_object ilist, int index) {
     assert(0 <= index);
-    assert(index < number_value(ilist_size(ilist)));
+    assert(index < ilist_size(ilist));
 }
 
 object inline raw_ilist_at(ilist_object ilist, int index) {

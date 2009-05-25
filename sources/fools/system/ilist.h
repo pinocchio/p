@@ -11,10 +11,11 @@ extern void        inline raw_ilist_at_put(ilist_object ilist,
                                            int index, object i);
 extern void        inline ilist_at_put(ilist_object ilist,
                                        int index, object i);
+extern int         inline ilist_size(ilist_object ilist);
 
 // Structure
 struct ilist {
-    number_object   size;
+    int             size;
     object          instructions[];
 };
 
