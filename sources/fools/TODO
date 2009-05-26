@@ -29,3 +29,9 @@ VM Optimizations
     - make sure symbols are still known to the runtime.
 - Think about a symbol table in general. And give symbols a different class.
 - check if Const is required or not.
+
+Rename to Pinocchio
+-------------------
+"A true relationship has to be based on reciprocal subjective appreciation of
+the other person as a person. Bridging that gap will require alot of effort
+from both Geppetto and Pinocchio."
