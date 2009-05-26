@@ -22,6 +22,7 @@ extern object PARENT;
 extern object NEW_SIZE;
 // Iscope
 extern object EVAL_WITHARGUMENTS;
+extern object APPLY;
 extern object SCOPE_IN_ENV;
 extern object SHIFT;
 // Ifixed

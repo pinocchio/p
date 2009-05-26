@@ -104,10 +104,11 @@ void ifixed_shift_level() {
     }
 
     pop_context();
-    context = make_context(dispatch, 2);
+    context = make_context(dispatch, 3);
     context->env = env;
     set_argument(context, 0, self);
-    set_argument(context, 1, (object)args);
+    set_argument(context, 1, env);
+    set_argument(context, 2, (object)args);
 
     debug("ret>>ifixedShiftLevel\n");
 }

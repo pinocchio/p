@@ -14,13 +14,10 @@ void inline add_eval_args_code(ilist_object exp,
     // ...  ...  ...
     // varN = (varN eval: (env parent))
     int i;
-    for (i = 0; i < todo; i++) {
+    for (i = toskip; i < todo; i++) {
         ivar_object variable = array_at(arguments, i).ivar;
-        variable->index = make_number(i + toskip);
-        variable->scope = (object)exp;
-
         icall2(arg_eval, variable, PRE_EVAL_ENV, parent_env);
-        ilist_at_put(exp, i,
+        ilist_at_put(exp, i - toskip,
             (object)make_iassign(variable, (object)arg_eval));
     }
 }
@@ -64,7 +61,8 @@ object inline make_dyn_func(array_object arguments, object body) {
     // Eval args, eval body
     ilist_object exp = make_ilist(argsize + 1); 
 
-    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
+    init_args(exp, arguments, 1); // skip receiver
+    add_eval_args_code(exp, arguments, 0, argsize);
     ilist_at_put(exp, argsize, body);
 
     return iscoped_for((object)exp,
@@ -76,7 +74,8 @@ object inline make_func(array_object arguments, object body) {
     // Eval args, switch context, eval body
     ilist_object exp = make_ilist(argsize + 2);
 
-    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
+    init_args(exp, arguments, 1); // skip receiver;
+    add_eval_args_code(exp, arguments, 0, argsize);
     add_switch_scope_code(exp, argsize);
     ilist_at_put(exp, argsize + 1, body);
 
@@ -99,12 +98,14 @@ object inline make_dispatch(array_object arguments, object body) {
 
 object inline make_m(array_object arguments, object body) {
     int argsize = array_size(arguments);
-    // Eval args, switch context, eval body
-    ilist_object exp = make_ilist(argsize + 2);
+    // Eval args (-1: skip self), switch context, eval body
+    ilist_object exp = make_ilist(argsize + 1);
 
-    add_eval_args_code(exp, arguments, 1, argsize); // skip receiver
-    add_switch_scope_code(exp, argsize);
-    ilist_at_put(exp, argsize + 1, body);
+    
+    init_args(exp, arguments, 1);
+    add_eval_args_code(exp, arguments, 1, argsize); // skip self
+    add_switch_scope_code(exp, argsize - 1);
+    ilist_at_put(exp, argsize, body);
 
     iconst_object iconst = make_iconst(fools_system->iscoped);
     icall_object icall3(icall, iconst, NEW_SIZE, (object)exp,

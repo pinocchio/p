@@ -25,6 +25,7 @@ object PARENT;
 object NEW_SIZE;
 // Iscope
 object EVAL_WITHARGUMENTS;
+object APPLY;
 object SCOPE_IN_ENV;
 object SHIFT;
 // Ifixed
@@ -49,7 +50,7 @@ object DISPATCH_DELEGATE_SIZE;
     
 void bootstrap_symbols() {
     define_symbol(EVAL,                     "eval:");
-    define_symbol(PRE_EVAL_ENV,             "preEval:env:");
+    define_symbol(PRE_EVAL_ENV,             "preEval:");
     define_symbol(ASSIGN_IN,                "assign:in:");
     define_symbol(FETCH_FROM,               "fetch:from:");
     define_symbol(STORE_AT_IN,              "store:at:in:");
@@ -59,6 +60,7 @@ void bootstrap_symbols() {
     define_symbol(PARENT,                   "parent:");
     define_symbol(NEW_SIZE,                 "new:size:");
     define_symbol(EVAL_WITHARGUMENTS,       "eval:withArguments:");
+    define_symbol(APPLY,                    "apply:");
     define_symbol(SCOPE_IN_ENV,             "scope:in:env:");
     define_symbol(DISPATCH,                 "dispatch");
     define_symbol(OBJECT_AT,                "objectAt:");

@@ -18,6 +18,11 @@ static void inline iscoped_eval() {
     int argsize = number_value(iscoped->argsize.number);
     if(array_size(args) != argsize) {
         printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
+        int i;
+        for (i = 0; i < array_size(args); i++) {
+            print_object(raw_array_at(args, i));
+            printf("%p\n", raw_array_at(args, i).pointer);
+        }
         assert(NULL);
     }
 
@@ -35,8 +40,8 @@ static void inline iscoped_eval() {
     debug("ret>>iscoped>>doWithArguments\n");
 }
 
-// iscoped>>eval:withArguments:
-static void inline iscoped_eval_arguments() {
+// iscoped>>withArguments:
+static void inline iscoped_iapply() {
     // XXX Breaking encapsulation without testing.
     // Test arguments!
 
@@ -65,6 +70,13 @@ static void inline iscoped_eval_arguments() {
     debug("ret>>iscoped>>withArguments:\n");
 }
 
+static void inline iscoped_apply() {
+    context_object context = get_context();
+    assert_argsize(context, 2);
+    push_eval_of(context, 1);
+    context->code = &iscoped_iapply;
+}
+
 // iscoped>>scope
 static void inline iscoped_scope() {
     debug("iscoped>>scope\n");
@@ -88,8 +100,9 @@ void iscoped_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
-    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_eval_arguments);
+    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_iapply);
     if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
+    if_selector(selector, APPLY,                iscoped_apply);
     if_selector(selector, SHIFT,                iscoped_shift);
     doesnotunderstand("iscoped", selector);
 }

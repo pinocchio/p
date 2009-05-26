@@ -1,7 +1,15 @@
 #include <model.h>
+#include <system/ivar.h>
 #include <bootstrap.h>
 
 #include <stdio.h>
+
+#define test_type(type)\
+    if (pheader(o.pointer) == fools_system->type##_##class.pointer) {\
+        printf(#type"\n");\
+        return;\
+    }
+
 
 void print_object(object o) {
 
@@ -30,37 +38,24 @@ void print_object(object o) {
         return;
     }
 
-    if (pheader(o.pointer) == fools_system->iconst_class.pointer) {
-        printf("iconst\n");
-        return;
-    }
-
-    if (pheader(o.pointer) == fools_system->iassign_class.pointer) {
-        printf("iassign\n");
-        return;
-    }
-
+    test_type(iconst);
+    test_type(iassign);
     if (pheader(o.pointer) == fools_system->ivar_class.pointer) {
-        printf("ivar\n");
+        printf("ivar(\"%s\")\n", o.ivar->name->value);
         return;
     }
-
-    if (pheader(o.pointer) == fools_system->icall_class.pointer) {
-        printf("icall\n");
-        return;
+    test_type(icall);
+    test_type(ilist);
+    test_type(iscoped);
+    if (pheader(o.pointer) == fools_system->array_class.pointer) {
+        printf("array(%i) [\n", array_size(o.array));
+        int i;
+        for (i = 0; i < array_size(o.array); i++) {
+            printf("    ");
+            print_object(raw_array_at(o.array, i));
+        }
+        printf("]\n");
     }
-
-    if (pheader(o.pointer) == fools_system->ilist_class.pointer) {
-        printf("ilist\n");
-        return;
-    }
-
-    if (pheader(o.pointer) == fools_system->iscoped_class.pointer) {
-        printf("iscoped\n");
-        return;
-    }
-
-
 
     printf("Unknown type at: %p\n", o.pointer);
 }
