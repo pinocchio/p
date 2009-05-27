@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <print.h>
 
 // iscoped>>eval:
 static void inline iscoped_eval() {

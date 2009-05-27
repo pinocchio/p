@@ -1,5 +1,5 @@
 #include <model.h>
-#include <system/ivar.h>
+#include <system.h>
 #include <bootstrap.h>
 
 #include <stdio.h>
@@ -47,6 +47,11 @@ void print_object(object o) {
     test_type(icall);
     test_type(ilist);
     test_type(iscoped);
+    test_type(dict);
+    if (*pheader(o.pointer) == &ifixed_shift_level) {
+        printf("an object\n");
+        return;
+    }
     if (pheader(o.pointer) == fools_system->array_class.pointer) {
         printf("array(%i) [\n", array_size(o.array));
         int i;

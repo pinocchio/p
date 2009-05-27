@@ -22,6 +22,7 @@
 
 #include <system/array.h>
 #include <system/dict.h>
+#include <system/string.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();

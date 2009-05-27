@@ -76,7 +76,7 @@ fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
 
-    fools_system->string_class      = empty_class;
+    fools_system->string_class      = wrap_dispatcher(string_dispatch);
     fools_system->number_class      = empty_class;
     fools_system->array_class       = wrap_dispatcher(array_dispatch);
     fools_system->dict_class        = wrap_dispatcher(dict_dispatch);

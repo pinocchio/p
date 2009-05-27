@@ -20,7 +20,7 @@
 ;                        (loop (class 'OBJECT_AT 0))
 ;                        (method 'APPLY_IN args env)))))))
 (let ((doesNotUnderstand
-        (lambda (self msg env args)
+        (method (self msg env args)
             msg))
       (d (dispatch (self env args)
         (let ((msg (args 'OBJECT_AT 0)))
@@ -40,5 +40,5 @@
         (mdict 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand doesNotUnderstand)
         (let* ((o_if (ifixed 'DISPATCH_DELEGATE_SIZE d acls 0))
                (an_o (o_if 'NEW)))
-            an_o)))
+            (an_o 'NEW)))) ; should yield "basicNew" from DNU
 ))
