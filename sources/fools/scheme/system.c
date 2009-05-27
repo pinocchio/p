@@ -7,7 +7,7 @@ void inline add_eval_args_code(ilist_object exp,
                                array_object arguments,
                                int toskip,
                                int todo) {
-    icall_object icall1(parent_env, fools_system->icapture, ENV_PARENT);
+    icall_object icall1(parent_env, fools_system->icapture, PARENT);
 
     icall_object arg_eval;
     // var1 = (var1 eval: (env parent))
@@ -38,9 +38,9 @@ void inline add_switch_scope_code(ilist_object exp, int position) {
     ivar_object receiver_var = make_ivar("switchvar");
     receiver_var->scope = (object)exp;
 
-    icall_object icall1(self_scope, receiver_var, SCOPE_IN_ENV);
+    icall_object icall1(self_scope, receiver_var, SCOPE);
     icall_object icall2(switch_env, fools_system->icapture,
-                        ENV_SET_PARENT, self_scope)
+                        SET_PARENT, self_scope)
 
     ilist_at_put(exp, position, (object)switch_env);
 }

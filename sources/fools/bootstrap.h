@@ -15,15 +15,14 @@ extern object FETCH_FROM;
 // Environment
 extern object STORE_AT_IN;
 extern object SUBSCOPE_KEY;
-extern object ENV_PARENT;
-extern object ENV_SET_PARENT;
+extern object SET_PARENT;
 extern object PARENT;
 // Iscope_class
 extern object NEW_SIZE;
 // Iscope
-extern object EVAL_WITHARGUMENTS;
+extern object IAPPLY;
 extern object APPLY;
-extern object SCOPE_IN_ENV;
+extern object SCOPE;
 extern object SHIFT;
 // Ifixed
 extern object DISPATCH;

@@ -100,10 +100,10 @@ void iscoped_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
-    if_selector(selector, EVAL_WITHARGUMENTS,   iscoped_iapply);
-    if_selector(selector, SCOPE_IN_ENV,         iscoped_scope);
-    if_selector(selector, APPLY,                iscoped_apply);
-    if_selector(selector, SHIFT,                iscoped_shift);
+    if_selector(selector, IAPPLY, iscoped_iapply);
+    if_selector(selector, SCOPE,  iscoped_scope);
+    if_selector(selector, APPLY,  iscoped_apply);
+    if_selector(selector, SHIFT,  iscoped_shift);
     doesnotunderstand("iscoped", selector);
 }
 

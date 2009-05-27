@@ -18,15 +18,14 @@ object FETCH_FROM;
 // Environment
 object STORE_AT_IN;
 object SUBSCOPE_KEY;
-object ENV_PARENT;
-object ENV_SET_PARENT;
+object SET_PARENT;
 object PARENT;
 // Iscope_class
 object NEW_SIZE;
 // Iscope
-object EVAL_WITHARGUMENTS;
+object IAPPLY;
 object APPLY;
-object SCOPE_IN_ENV;
+object SCOPE;
 object SHIFT;
 // Ifixed
 object DISPATCH;
@@ -49,19 +48,18 @@ object DISPATCH_DELEGATE_SIZE;
     //                 name)
     
 void bootstrap_symbols() {
-    define_symbol(EVAL,                     "eval:");
+    define_symbol(EVAL,                     "eval");
     define_symbol(PRE_EVAL_ENV,             "preEval:");
     define_symbol(ASSIGN_IN,                "assign:in:");
     define_symbol(FETCH_FROM,               "fetch:from:");
     define_symbol(STORE_AT_IN,              "store:at:in:");
     define_symbol(SUBSCOPE_KEY,             "subScope:key:");
-    define_symbol(ENV_PARENT,               "envParent:");
-    define_symbol(ENV_SET_PARENT,           "env:parent:");
-    define_symbol(PARENT,                   "parent:");
+    define_symbol(SET_PARENT,               "parent:");
+    define_symbol(PARENT,                   "parent");
     define_symbol(NEW_SIZE,                 "new:size:");
-    define_symbol(EVAL_WITHARGUMENTS,       "eval:withArguments:");
+    define_symbol(IAPPLY,                   "iapply:");
     define_symbol(APPLY,                    "apply:");
-    define_symbol(SCOPE_IN_ENV,             "scope:in:env:");
+    define_symbol(SCOPE,                    "scope");
     define_symbol(DISPATCH,                 "dispatch");
     define_symbol(OBJECT_AT,                "objectAt:");
     define_symbol(OBJECT_AT_PUT,            "objectAt:put:");

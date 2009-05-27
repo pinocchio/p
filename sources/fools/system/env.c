@@ -95,26 +95,19 @@ static void inline env_set_parent() {
     context_object receiver = get_context();
     assert_argsize(receiver, 2);
     // arguments at: 0 -> selector
-    object env = receiver->env;
-    object new_env = argument_at(receiver, 1);
-
-    context_object context = make_context(new_env, 1);
-    context->env = env;
-    set_message(context, EVAL);
-
+    push_eval_of(receiver, 1);
     receiver->code = &env_do_set_parent;
-
     debug("ret>>env>>parent:\n");
 }
 
 // env>>parent
 static void inline env_parent() {
-    debug("env>>envParent:\n");
+    debug("env>>parent\n");
     context_object receiver = get_context();
     // arguments at: 0 -> selector
     object env = receiver->self;
     set_argument(return_context(receiver), 1, env.env->parent);
-    debug("ret>>env>>envParent:\n");
+    debug("ret>>env>>parent\n");
     pop_context();
 }
 
@@ -125,7 +118,7 @@ void env_dispatch() {
     if_selector(selector, FETCH_FROM,       env_fetch_from);
     if_selector(selector, STORE_AT_IN,      env_store_at_in);
     if_selector(selector, SUBSCOPE_KEY,     env_subscope);
-    if_selector(selector, ENV_SET_PARENT,   env_set_parent);
-    if_selector(selector, ENV_PARENT,       env_parent);
+    if_selector(selector, SET_PARENT,   env_set_parent);
+    if_selector(selector, PARENT,           env_parent);
     doesnotunderstand("env", selector);
 }

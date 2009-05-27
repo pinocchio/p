@@ -345,7 +345,7 @@ SETUP(test_env_parent)
     icall_object icall = make_icall(
                             (object)
                             make_iconst((object)env2), 1);
-    set_callmsg(icall, ENV_PARENT);
+    set_callmsg(icall, PARENT);
     context_object make_eval_context(ci, icall, env);
 
     object result = transfer();
@@ -362,7 +362,7 @@ SETUP(test_capture_parent)
                               (object)env, 0);
 
     icall_object icall = make_icall(fools_system->icapture, 1);
-    set_callmsg(icall, ENV_PARENT);
+    set_callmsg(icall, PARENT);
     context_object make_eval_context(ci, icall, env2);
 
     object result = transfer();
@@ -402,8 +402,8 @@ SETUP(test_ilist_pass_context)
     env_object env2 = make_env((object)fools_system->nil,
                               (object)env, 0);
 
-    icall_object icall = make_icall(fools_system->icapture, 2);
-    set_callmsg(icall, ENV_PARENT);
+    icall_object icall = make_icall(fools_system->icapture, 1);
+    set_callmsg(icall, PARENT);
 
     ilist_at_put(ilist, 0, (object)icall);
 
