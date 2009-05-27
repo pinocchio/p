@@ -183,7 +183,7 @@ extravars))))))))
 
 (define (transform-new-symbol symbol vars)
     (list ""
-        (string-append "SYMBOL_" (symbol->string symbol))))
+       (symbol->string symbol)))
   ;(transform-expression
   ; `(string->symbol
   ;   ,(symbol->string symbol)) vars))

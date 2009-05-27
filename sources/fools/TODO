@@ -30,6 +30,13 @@ VM Optimizations
 - Think about a symbol table in general. And give symbols a different class.
 - check if Const is required or not.
 
+Language Hacks
+--------------
+- actors
+- multimethods
+- automatic curry
+- prolog
+
 Rename to Pinocchio
 -------------------
 "A true relationship has to be based on reciprocal subjective appreciation of

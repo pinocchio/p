@@ -9,7 +9,7 @@ static void inline env_fetch_from() {
     assert_argsize(receiver, 3);
     // arguments at: 0 -> selector
     env_object env = receiver->self.env;
-    debug("env>>fetch:from: %p\n", env);
+    debug("env>>fetch:from: (%i) %p\n", env->values->size, env);
 
     if (env->scope.pointer == argument_at(receiver, 2).pointer) {
         int index = number_value(argument_at(receiver, 1).number);

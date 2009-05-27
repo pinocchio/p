@@ -10,15 +10,15 @@
  ;
 ; Method lookup.
 (dispatch (self env args)
-    (let ((msg (args 'at 0)))
-        (args 'atput 0 self)
-        (let loop ((class ((self 'dispatch) 'delegate)))
+    (let ((msg (args 'OBJECT_AT 0)))
+        (args 'OBJECT_AT_PUT 0 self)
+        (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
             (if (eq? class null)
-                (self 'doesNotUnderstand msg env args)
-                (let ((method ((class 'at 1) 'at msg)))
+                (self 'SYMBOL_doesNotUnderstand msg env args)
+                (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
                     (if (eq? method null)
-                        (loop (class 'at 0))
-                        (method 'apply args)))))))
+                        (loop (class 'OBJECT_AT 0))
+                        (method 'APPLY (args 'EVAL env))))))))
 ;(let ((doesNotUnderstand
 ;        (lambda (self msg env args)
 ;            msg))

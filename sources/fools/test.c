@@ -789,8 +789,10 @@ SETUP(test_ifixed_dispatch)
     raw_array_at_put(args, 2, evar);
     raw_array_at_put(args, 3, avar);
     // TODO should evaluate it's but not shift!
-    icall_object icall2(docall, make_iconst(mvar),
+    icall_object icall2(ecall, evar,
                         PRE_EVAL_ENV, fools_system->icapture);
+    icall_object icall2(docall, mvar,
+                        PRE_EVAL_ENV, ecall);
     object dnu = make_m(args, (object)docall);
     make_eval_context(ci, dnu, env);
     dnu = transfer();
