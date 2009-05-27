@@ -543,7 +543,7 @@ object create_class_dispatch() {
 (dispatch (self env args)
     (let ((msg (args 'OBJECT_AT 0)))
         (args 'OBJECT_AT_PUT 0 self)
-        (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
+        (let loop ((class (self 'DISPATCH)))
             (if (eq? class null)
                 (self 'SYMBOL_doesNotUnderstand msg env args)
                 (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
@@ -551,6 +551,7 @@ object create_class_dispatch() {
                         (loop (class 'OBJECT_AT 0))
                         (method 'APPLY_IN args env)))))))
 */
+object null         = (object)make_iconst((object)fools_system->nil);
 object ivar_3_self = (object)make_ivar("self");
 object ivar_4_env = (object)make_ivar("env");
 object ivar_5_args = (object)make_ivar("args");
@@ -564,31 +565,31 @@ object ivar_12_loop = (object)make_ivar("loop");
 object ivar_16_class = (object)make_ivar("class");
 icall_object icall_17_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_17_scheme_eqp, 0, (object)ivar_16_class);
-set_callarg(icall_17_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
+set_callarg(icall_17_scheme_eqp, 1, (object)null);
 icall_object icall_18_ivar_3_self = make_icall((object)ivar_3_self, 4);
 set_callarg(icall_18_ivar_3_self, 0, (object)SYMBOL_doesNotUnderstand);
 set_callarg(icall_18_ivar_3_self, 1, (object)ivar_7_msg);
 set_callarg(icall_18_ivar_3_self, 2, (object)ivar_4_env);
 set_callarg(icall_18_ivar_3_self, 3, (object)ivar_5_args);
-object ivar_20_method = (object)make_ivar("method");
+object ivar_20_amethod = (object)make_ivar("amethod");
 icall_object icall_21_scheme_eqp = make_icall((object)scheme_eqp, 2);
-set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_method);
-set_callarg(icall_21_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
+set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_amethod);
+set_callarg(icall_21_scheme_eqp, 1, (object)null);
 object number_22_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_23_ivar_16_class = make_icall((object)ivar_16_class, 2);
 set_callarg(icall_23_ivar_16_class, 0, (object)OBJECT_AT);
 set_callarg(icall_23_ivar_16_class, 1, (object)number_22_0);
 icall_object icall_24_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
 set_callarg(icall_24_ivar_12_loop, 0, (object)icall_23_ivar_16_class);
-icall_object icall_25_ivar_20_method = make_icall((object)ivar_20_method, 3);
-set_callarg(icall_25_ivar_20_method, 0, (object)APPLY_IN);
-set_callarg(icall_25_ivar_20_method, 1, (object)ivar_5_args);
-set_callarg(icall_25_ivar_20_method, 2, (object)ivar_4_env);
+icall_object icall_25_ivar_20_amethod = make_icall((object)ivar_20_amethod, 3);
+set_callarg(icall_25_ivar_20_amethod, 0, (object)APPLY_IN);
+set_callarg(icall_25_ivar_20_amethod, 1, (object)ivar_5_args);
+set_callarg(icall_25_ivar_20_amethod, 2, (object)ivar_4_env);
 icall_object icall_26_icall_21_scheme_eqp = make_icall((object)icall_21_scheme_eqp, 2);
 set_callarg(icall_26_icall_21_scheme_eqp, 0, (object)icall_24_ivar_12_loop);
-set_callarg(icall_26_icall_21_scheme_eqp, 1, (object)icall_25_ivar_20_method);
+set_callarg(icall_26_icall_21_scheme_eqp, 1, (object)icall_25_ivar_20_amethod);
 array_object array_27_lambda_19_x = make_array(1);
-array_at_put(array_27_lambda_19_x, 0, ivar_20_method);
+array_at_put(array_27_lambda_19_x, 0, ivar_20_amethod);
 object lambda_19_x = make_func(array_27_lambda_19_x, (object)icall_26_icall_21_scheme_eqp);
 object number_28_1 = (object)make_iconst((object)make_number(1));
 icall_object icall_29_ivar_16_class = make_icall((object)ivar_16_class, 2);
@@ -608,35 +609,33 @@ object lambda_15_x = make_func(array_33_lambda_15_x, (object)icall_32_icall_17_s
 iassign_object iassign_14_x = make_iassign(ivar_12_loop.ivar, (object)lambda_15_x);
 icall_object icall_34_ivar_3_self = make_icall((object)ivar_3_self, 1);
 set_callarg(icall_34_ivar_3_self, 0, (object)DISPATCH);
-icall_object icall_35_icall_34_ivar_3_self = make_icall((object)icall_34_ivar_3_self, 1);
-set_callarg(icall_35_icall_34_ivar_3_self, 0, (object)DELEGATE);
-icall_object icall_36_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
-set_callarg(icall_36_ivar_12_loop, 0, (object)icall_35_icall_34_ivar_3_self);
+icall_object icall_35_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
+set_callarg(icall_35_ivar_12_loop, 0, (object)icall_34_ivar_3_self);
 ilist_object ilist_13_lambda = make_ilist(2);
 ilist_at_put(ilist_13_lambda, 0, (object)iassign_14_x);
-ilist_at_put(ilist_13_lambda, 1, (object)icall_36_ivar_12_loop);
-array_object array_37_lambda_11_x = make_array(1);
-array_at_put(array_37_lambda_11_x, 0, ivar_12_loop);
-object lambda_11_x = make_func(array_37_lambda_11_x, (object)ilist_13_lambda);
-icall_object icall_38_lambda_11_x = make_icall((object)lambda_11_x, 1);
-set_callarg(icall_38_lambda_11_x, 0, (object)(object)make_iconst((object)fools_system->nil));
+ilist_at_put(ilist_13_lambda, 1, (object)icall_35_ivar_12_loop);
+array_object array_36_lambda_11_x = make_array(1);
+array_at_put(array_36_lambda_11_x, 0, ivar_12_loop);
+object lambda_11_x = make_func(array_36_lambda_11_x, (object)ilist_13_lambda);
+icall_object icall_37_lambda_11_x = make_icall((object)lambda_11_x, 1);
+set_callarg(icall_37_lambda_11_x, 0, (object)null);
 ilist_object ilist_8_lambda = make_ilist(2);
 ilist_at_put(ilist_8_lambda, 0, (object)icall_10_ivar_5_args);
-ilist_at_put(ilist_8_lambda, 1, (object)icall_38_lambda_11_x);
-array_object array_39_lambda_6_x = make_array(1);
-array_at_put(array_39_lambda_6_x, 0, ivar_7_msg);
-object lambda_6_x = make_func(array_39_lambda_6_x, (object)ilist_8_lambda);
-object number_40_0 = (object)make_iconst((object)make_number(0));
-icall_object icall_41_ivar_5_args = make_icall((object)ivar_5_args, 2);
-set_callarg(icall_41_ivar_5_args, 0, (object)OBJECT_AT);
-set_callarg(icall_41_ivar_5_args, 1, (object)number_40_0);
-icall_object icall_42_lambda_6_x = make_icall((object)lambda_6_x, 1);
-set_callarg(icall_42_lambda_6_x, 0, (object)icall_41_ivar_5_args);
-array_object array_43_lambda_2_x = make_array(3);
-array_at_put(array_43_lambda_2_x, 0, ivar_3_self);
-array_at_put(array_43_lambda_2_x, 1, ivar_4_env);
-array_at_put(array_43_lambda_2_x, 2, ivar_5_args);
-return make_dispatch(array_43_lambda_2_x, (object)icall_42_lambda_6_x);
+ilist_at_put(ilist_8_lambda, 1, (object)icall_37_lambda_11_x);
+array_object array_38_lambda_6_x = make_array(1);
+array_at_put(array_38_lambda_6_x, 0, ivar_7_msg);
+object lambda_6_x = make_func(array_38_lambda_6_x, (object)ilist_8_lambda);
+object number_39_0 = (object)make_iconst((object)make_number(0));
+icall_object icall_40_ivar_5_args = make_icall((object)ivar_5_args, 2);
+set_callarg(icall_40_ivar_5_args, 0, (object)OBJECT_AT);
+set_callarg(icall_40_ivar_5_args, 1, (object)number_39_0);
+icall_object icall_41_lambda_6_x = make_icall((object)lambda_6_x, 1);
+set_callarg(icall_41_lambda_6_x, 0, (object)icall_40_ivar_5_args);
+array_object array_42_lambda_2_x = make_array(3);
+array_at_put(array_42_lambda_2_x, 0, ivar_3_self);
+array_at_put(array_42_lambda_2_x, 1, ivar_4_env);
+array_at_put(array_42_lambda_2_x, 2, ivar_5_args);
+return make_dispatch(array_42_lambda_2_x, (object)icall_41_lambda_6_x);
 }
 
 SETUP(test_make_ifixed)
@@ -680,17 +679,10 @@ SETUP(test_ifixed_natives)
     assert(number_value(ifixed.ifixed->size.number) == 5);
     assert(ifixed.ifixed->delegate.nil == fools_system->nil);
 
-    icall1(icall, make_iconst(ifixed), DELEGATE);
-    make_eval_context(ci, icall, env);
-
-    object result = transfer();
-
-    assert(result.nil == fools_system->nil);
-
     icall1(icall, make_iconst(ifixed), SIZE);
     make_eval_context(ci, icall, env);
 
-    result = transfer();
+    object result = transfer();
 
     assert(number_value(result.number) == 5);
 
