@@ -197,9 +197,9 @@ extravars))))))))
         (else (error "Only symbols are known for now."))))
 
 (define (transform-expression expression vars)
-   #| (display "EXPRESSION:")
+    #|(display "EXPRESSION:")
     (display expression)
-    (newline) |#
+    (newline)|#
   (cond ((list? expression)
          (case (car expression)
            ((set!) (transform-set! expression vars))

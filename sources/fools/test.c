@@ -790,15 +790,13 @@ SETUP(test_ifixed_dispatch)
     raw_array_at_put(args, 2, evar);
     raw_array_at_put(args, 3, avar);
     // TODO should evaluate it's but not shift!
-    object dnu = make_m(args, (object)avar);
-    make_eval_context(ci, dnu, env);
-    dnu = transfer();
+    object dnu = make_m(args, (object)mvar);
 
     dict_object methods = make_dict(2);
     icall3(icall, (object)make_iconst((object)methods),
                   OBJECT_AT_PUT,
                   (object)make_iconst((object)SYMBOL_doesNotUnderstand),
-                  (object)make_iconst(dnu));
+                  dnu);
 
     make_eval_context(ci, icall, env);
     transfer();
