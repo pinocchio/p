@@ -24,7 +24,7 @@ object PARENT;
 object NEW_SIZE;
 // Iscope
 object IAPPLY;
-object APPLY;
+object APPLY_IN;
 object SCOPE;
 object SHIFT;
 // Ifixed
@@ -49,7 +49,7 @@ object DISPATCH_DELEGATE_SIZE;
     
 void bootstrap_symbols() {
     define_symbol(EVAL,                     "eval");
-    define_symbol(PRE_EVAL_ENV,             "preEval:");
+    define_symbol(PRE_EVAL_ENV,             "eval:");
     define_symbol(ASSIGN_IN,                "assign:in:");
     define_symbol(FETCH_FROM,               "fetch:from:");
     define_symbol(STORE_AT_IN,              "store:at:in:");
@@ -58,7 +58,7 @@ void bootstrap_symbols() {
     define_symbol(PARENT,                   "parent");
     define_symbol(NEW_SIZE,                 "new:size:");
     define_symbol(IAPPLY,                   "iapply:");
-    define_symbol(APPLY,                    "apply:");
+    define_symbol(APPLY_IN,                 "apply:in:");
     define_symbol(SCOPE,                    "scope");
     define_symbol(DISPATCH,                 "dispatch");
     define_symbol(OBJECT_AT,                "objectAt:");

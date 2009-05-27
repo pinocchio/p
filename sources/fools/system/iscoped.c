@@ -70,11 +70,18 @@ static void inline iscoped_iapply() {
     debug("ret>>iscoped>>withArguments:\n");
 }
 
-static void inline iscoped_apply() {
+static void inline iscoped_switch_and_iapply() {
     context_object context = get_context();
-    assert_argsize(context, 2);
-    push_eval_of(context, 1);
+    context->env = argument_at(context, 2);
     context->code = &iscoped_iapply;
+}
+
+static void inline iscoped_apply_in() {
+    context_object context = get_context();
+    assert_argsize(context, 3);
+    push_eval_of(context, 1);
+    push_eval_of(context, 2);
+    context->code = &iscoped_switch_and_iapply;
 }
 
 // iscoped>>scope
@@ -100,10 +107,10 @@ void iscoped_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
-    if_selector(selector, IAPPLY, iscoped_iapply);
-    if_selector(selector, SCOPE,  iscoped_scope);
-    if_selector(selector, APPLY,  iscoped_apply);
-    if_selector(selector, SHIFT,  iscoped_shift);
+    if_selector(selector, IAPPLY,   iscoped_iapply);
+    if_selector(selector, SCOPE,    iscoped_scope);
+    if_selector(selector, APPLY_IN, iscoped_apply_in);
+    if_selector(selector, SHIFT,    iscoped_shift);
     doesnotunderstand("iscoped", selector);
 }
 

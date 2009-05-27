@@ -21,7 +21,7 @@ extern object PARENT;
 extern object NEW_SIZE;
 // Iscope
 extern object IAPPLY;
-extern object APPLY;
+extern object APPLY_IN;
 extern object SCOPE;
 extern object SHIFT;
 // Ifixed

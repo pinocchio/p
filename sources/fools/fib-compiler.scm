@@ -2,23 +2,23 @@
 
 (display
 (transform-code
-    (let fib ((x 25))
-        (if (< x 1)
-            1
-            (+ (fib (- x 1))
-               (fib (- x 2)))))
+;    (let fib ((x 25))
+;        (if (< x 1)
+;            1
+ ;           (+ (fib (- x 1))
+  ;             (fib (- x 2)))))
  
 ; Method lookup.
-;(dispatch (self env args)
-;    (let ((msg (args 'OBJECT_AT 0)))
-;        (args 'OBJECT_AT_PUT 0 self)
-;        (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
-;            (if (eq? class null)
-;                (self 'SYMBOL_doesNotUnderstand msg env args)
-;                (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
-;                    (if (eq? method null)
-;                        (loop (class 'OBJECT_AT 0))
-;                        (method 'APPLY (args 'EVAL env))))))))
+(dispatch (self env args)
+    (let ((msg (args 'OBJECT_AT 0)))
+        (args 'OBJECT_AT_PUT 0 self)
+        (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
+            (if (eq? class null)
+                (self 'SYMBOL_doesNotUnderstand msg env args)
+                (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
+                    (if (eq? method null)
+                        (loop (class 'OBJECT_AT 0))
+                        (method 'APPLY_IN args env)))))))
 ;(let ((doesNotUnderstand
 ;        (lambda (self msg env args)
 ;            msg))

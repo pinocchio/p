@@ -540,16 +540,16 @@ SETUP(test_eval_nested_function)
 
 object create_class_dispatch() {
 /* Code generated from:
- (dispatch (self env args)
-    (let ((msg (args 'at 0)))
-        (args 'atput 0 self)
-        (let loop ((class ((self 'dispatch) 'delegate)))
+(dispatch (self env args)
+    (let ((msg (args 'OBJECT_AT 0)))
+        (args 'OBJECT_AT_PUT 0 self)
+        (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
             (if (eq? class null)
-                (self 'doesNotUnderstand msg env args)
-                (let ((method ((class 'at 1) 'at msg)))
+                (self 'SYMBOL_doesNotUnderstand msg env args)
+                (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
                     (if (eq? method null)
-                        (loop (class 'at 0))
-                        (method 'apply args)))))))   
+                        (loop (class 'OBJECT_AT 0))
+                        (method 'APPLY_IN args env)))))))
 */
 object ivar_3_self = (object)make_ivar("self");
 object ivar_4_env = (object)make_ivar("env");
@@ -557,7 +557,7 @@ object ivar_5_args = (object)make_ivar("args");
 object ivar_7_msg = (object)make_ivar("msg");
 object number_9_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_10_ivar_5_args = make_icall((object)ivar_5_args, 3);
-set_callarg(icall_10_ivar_5_args, 0, OBJECT_AT_PUT);
+set_callarg(icall_10_ivar_5_args, 0, (object)OBJECT_AT_PUT);
 set_callarg(icall_10_ivar_5_args, 1, (object)number_9_0);
 set_callarg(icall_10_ivar_5_args, 2, (object)ivar_3_self);
 object ivar_12_loop = (object)make_ivar("loop");
@@ -576,13 +576,14 @@ set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_method);
 set_callarg(icall_21_scheme_eqp, 1, (object)(object)make_iconst((object)fools_system->nil));
 object number_22_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_23_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_23_ivar_16_class, 0, OBJECT_AT);
+set_callarg(icall_23_ivar_16_class, 0, (object)OBJECT_AT);
 set_callarg(icall_23_ivar_16_class, 1, (object)number_22_0);
 icall_object icall_24_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
 set_callarg(icall_24_ivar_12_loop, 0, (object)icall_23_ivar_16_class);
-icall_object icall_25_ivar_20_method = make_icall((object)ivar_20_method, 2);
-set_callarg(icall_25_ivar_20_method, 0, APPLY);
+icall_object icall_25_ivar_20_method = make_icall((object)ivar_20_method, 3);
+set_callarg(icall_25_ivar_20_method, 0, (object)APPLY_IN);
 set_callarg(icall_25_ivar_20_method, 1, (object)ivar_5_args);
+set_callarg(icall_25_ivar_20_method, 2, (object)ivar_4_env);
 icall_object icall_26_icall_21_scheme_eqp = make_icall((object)icall_21_scheme_eqp, 2);
 set_callarg(icall_26_icall_21_scheme_eqp, 0, (object)icall_24_ivar_12_loop);
 set_callarg(icall_26_icall_21_scheme_eqp, 1, (object)icall_25_ivar_20_method);
@@ -591,10 +592,10 @@ array_at_put(array_27_lambda_19_x, 0, ivar_20_method);
 object lambda_19_x = make_func(array_27_lambda_19_x, (object)icall_26_icall_21_scheme_eqp);
 object number_28_1 = (object)make_iconst((object)make_number(1));
 icall_object icall_29_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_29_ivar_16_class, 0, OBJECT_AT);
+set_callarg(icall_29_ivar_16_class, 0, (object)OBJECT_AT);
 set_callarg(icall_29_ivar_16_class, 1, (object)number_28_1);
 icall_object icall_30_icall_29_ivar_16_class = make_icall((object)icall_29_ivar_16_class, 2);
-set_callarg(icall_30_icall_29_ivar_16_class, 0, OBJECT_AT);
+set_callarg(icall_30_icall_29_ivar_16_class, 0, (object)OBJECT_AT);
 set_callarg(icall_30_icall_29_ivar_16_class, 1, (object)ivar_7_msg);
 icall_object icall_31_lambda_19_x = make_icall((object)lambda_19_x, 1);
 set_callarg(icall_31_lambda_19_x, 0, (object)icall_30_icall_29_ivar_16_class);
@@ -606,9 +607,9 @@ array_at_put(array_33_lambda_15_x, 0, ivar_16_class);
 object lambda_15_x = make_func(array_33_lambda_15_x, (object)icall_32_icall_17_scheme_eqp);
 iassign_object iassign_14_x = make_iassign(ivar_12_loop.ivar, (object)lambda_15_x);
 icall_object icall_34_ivar_3_self = make_icall((object)ivar_3_self, 1);
-set_callarg(icall_34_ivar_3_self, 0, DISPATCH);
+set_callarg(icall_34_ivar_3_self, 0, (object)DISPATCH);
 icall_object icall_35_icall_34_ivar_3_self = make_icall((object)icall_34_ivar_3_self, 1);
-set_callarg(icall_35_icall_34_ivar_3_self, 0, DELEGATE);
+set_callarg(icall_35_icall_34_ivar_3_self, 0, (object)DELEGATE);
 icall_object icall_36_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
 set_callarg(icall_36_ivar_12_loop, 0, (object)icall_35_icall_34_ivar_3_self);
 ilist_object ilist_13_lambda = make_ilist(2);
@@ -627,7 +628,7 @@ array_at_put(array_39_lambda_6_x, 0, ivar_7_msg);
 object lambda_6_x = make_func(array_39_lambda_6_x, (object)ilist_8_lambda);
 object number_40_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_41_ivar_5_args = make_icall((object)ivar_5_args, 2);
-set_callarg(icall_41_ivar_5_args, 0, OBJECT_AT);
+set_callarg(icall_41_ivar_5_args, 0, (object)OBJECT_AT);
 set_callarg(icall_41_ivar_5_args, 1, (object)number_40_0);
 icall_object icall_42_lambda_6_x = make_icall((object)lambda_6_x, 1);
 set_callarg(icall_42_lambda_6_x, 0, (object)icall_41_ivar_5_args);
@@ -789,11 +790,7 @@ SETUP(test_ifixed_dispatch)
     raw_array_at_put(args, 2, evar);
     raw_array_at_put(args, 3, avar);
     // TODO should evaluate it's but not shift!
-    icall_object icall2(ecall, evar,
-                        PRE_EVAL_ENV, fools_system->icapture);
-    icall_object icall2(docall, mvar,
-                        PRE_EVAL_ENV, ecall);
-    object dnu = make_m(args, (object)docall);
+    object dnu = make_m(args, (object)mvar);
     make_eval_context(ci, dnu, env);
     dnu = transfer();
 
