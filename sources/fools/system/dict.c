@@ -67,14 +67,14 @@ void dict_at_put_do() {
     debug("ret>>dict>>at:put:\n");
 }
 
-void dict_at() {
+static void inline dict_at() {
     context_object context = get_context();
     assert_argsize(context, 2);
     push_eval_of(context, 1);
     context->code = &dict_at_do;
 }
 
-void dict_at_put() {
+static void inline dict_at_put() {
     context_object context = get_context();
     assert_argsize(context, 3);
     push_eval_of(context, 1);
@@ -89,4 +89,20 @@ void dict_dispatch() {
     if_selector(selector, OBJECT_AT,        dict_at);
     if_selector(selector, OBJECT_AT_PUT,    dict_at_put);
     doesnotunderstand("dict", selector);
+}
+
+static void inline dict_new() {
+    debug("dict>>new\n");
+    context_object context = get_context();
+    set_argument(return_context(context), 1, (object)make_dict(2));
+    pop_context();
+    debug("ret>>dict>>new\n");
+}
+
+void dict_class_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, NEW, dict_new);
+    doesnotunderstand("dict class", selector);
 }

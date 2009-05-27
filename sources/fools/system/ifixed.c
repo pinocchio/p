@@ -45,7 +45,6 @@ static void inline ifixed_at() {
 }
 
 static void ifixed_at_put_do() {
-    debug("an_ifixed>>atput\n");
     context_object context = get_context();
     assert_argsize(context, 3);
 
@@ -57,6 +56,7 @@ static void ifixed_at_put_do() {
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     int size = number_value(ifixed->size.number);
+    debug("an_ifixed>>atput (%i of %i)\n", index, size);
 
     assert(0 <= index);
     assert(index < size);

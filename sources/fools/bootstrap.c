@@ -76,10 +76,11 @@ fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
 
-    fools_system->string_class  = empty_class;
-    fools_system->number_class  = empty_class;
-    fools_system->array_class   = wrap_dispatcher(array_dispatch);
-    fools_system->dict_class    = wrap_dispatcher(dict_dispatch);
+    fools_system->string_class      = empty_class;
+    fools_system->number_class      = empty_class;
+    fools_system->array_class       = wrap_dispatcher(array_dispatch);
+    fools_system->dict_class        = wrap_dispatcher(dict_dispatch);
+    fools_system->dict_metaclass    = wrap_dispatcher(dict_class_dispatch);
 
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
     fools_system->empty->size               = 0;
@@ -105,6 +106,7 @@ fools_object bootstrap() {
     fools_system->icapture  = (object)make_icapture();
     fools_system->iscoped   = make_empty_object(iscoped_metaclass);
     fools_system->ifixed    = make_empty_object(ifixed_metaclass);
+    fools_system->dict      = make_empty_object(dict_metaclass);
 
     init_thread();
 
