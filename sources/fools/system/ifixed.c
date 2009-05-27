@@ -86,7 +86,7 @@ void ifixed_shift_level() {
 
     if (context_size(context) >= 1) {
         object selector = message(context);
-        if_selector(selector, DISPATCH,         ifixed_dispatcher);
+        if_selector(selector, DELEGATE,         ifixed_dispatcher);
         if_selector(selector, OBJECT_AT,        ifixed_at);
         if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
     }
@@ -120,15 +120,6 @@ static void inline ifixed_size() {
     set_argument(return_context(context), 1, ifixed->size);
     pop_context();
     debug("ret>>ifixed>>size\n");
-}
-
-static void inline ifixed_delegate() {
-    debug("ifixed>>delegate\n");
-    context_object context = get_context();
-    ifixed_object ifixed = context->self.ifixed;
-    set_argument(return_context(context), 1, ifixed->delegate);
-    pop_context();
-    debug("ret>>ifixed>>delegate\n");
 }
 
 static void inline ifixed_new() {

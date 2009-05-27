@@ -543,7 +543,7 @@ object create_class_dispatch() {
 (dispatch (self env args)
     (let ((msg (args 'OBJECT_AT 0)))
         (args 'OBJECT_AT_PUT 0 self)
-        (let loop ((class (self 'DISPATCH)))
+        (let loop ((class (self 'DELEGATE)))
             (if (eq? class null)
                 (self 'SYMBOL_doesNotUnderstand msg env args)
                 (let ((method ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
@@ -608,7 +608,7 @@ array_at_put(array_33_lambda_15_x, 0, ivar_16_class);
 object lambda_15_x = make_func(array_33_lambda_15_x, (object)icall_32_icall_17_scheme_eqp);
 iassign_object iassign_14_x = make_iassign(ivar_12_loop.ivar, (object)lambda_15_x);
 icall_object icall_34_ivar_3_self = make_icall((object)ivar_3_self, 1);
-set_callarg(icall_34_ivar_3_self, 0, (object)DISPATCH);
+set_callarg(icall_34_ivar_3_self, 0, (object)DELEGATE);
 icall_object icall_35_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
 set_callarg(icall_35_ivar_12_loop, 0, (object)icall_34_ivar_3_self);
 ilist_object ilist_13_lambda = make_ilist(2);
@@ -715,7 +715,7 @@ SETUP(test_ifixed_object)
 
     object thefixed = transfer();
 
-    icall1(icall, make_iconst(thefixed), DISPATCH);
+    icall1(icall, make_iconst(thefixed), DELEGATE);
     make_eval_context(ci, icall, env);
 
     object result = transfer();
