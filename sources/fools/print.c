@@ -48,6 +48,7 @@ void print_object(object o) {
     test_type(ilist);
     test_type(iscoped);
     test_type(dict);
+    test_type(env);
     if (*pheader(o.pointer) == &ifixed_shift_level) {
         printf("an object\n");
         return;
@@ -60,6 +61,7 @@ void print_object(object o) {
             print_object(raw_array_at(o.array, i));
         }
         printf("]\n");
+        return;
     }
 
     printf("Unknown type at: %p\n", o.pointer);
