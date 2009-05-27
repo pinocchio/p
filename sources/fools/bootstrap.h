@@ -25,7 +25,6 @@ extern object APPLY_IN;
 extern object SCOPE;
 extern object SHIFT;
 // Ifixed
-extern object DISPATCH;
 extern object OBJECT_AT;
 extern object OBJECT_AT_PUT;
 extern object NEW;

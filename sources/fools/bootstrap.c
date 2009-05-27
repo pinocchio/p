@@ -28,7 +28,6 @@ object APPLY_IN;
 object SCOPE;
 object SHIFT;
 // Ifixed
-object DISPATCH;
 object OBJECT_AT;
 object OBJECT_AT_PUT;
 object NEW;
@@ -60,7 +59,6 @@ void bootstrap_symbols() {
     define_symbol(IAPPLY,                   "iapply:");
     define_symbol(APPLY_IN,                 "apply:in:");
     define_symbol(SCOPE,                    "scope");
-    define_symbol(DISPATCH,                 "dispatch");
     define_symbol(OBJECT_AT,                "objectAt:");
     define_symbol(OBJECT_AT_PUT,            "objectAt:put:");
     define_symbol(NEW,                      "basicNew");
