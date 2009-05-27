@@ -25,7 +25,7 @@
       (d (dispatch (self env args)
         (let ((msg (args 'OBJECT_AT 0)))
             (args 'OBJECT_AT_PUT 0 self)
-            (let loop ((class ((self 'DISPATCH) 'DELEGATE)))
+            (let loop ((class (self 'DISPATCH)))
                 (if (eq? class null)
                     (self 'SYMBOL_doesNotUnderstand msg env args)
                     (let ((amethod ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))

@@ -149,9 +149,9 @@ void ifixed_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, NEW,      ifixed_new);
-    if_selector(selector, DELEGATE, ifixed_delegate);
     if_selector(selector, SIZE,     ifixed_size);
-    doesnotunderstand("ifixed", selector);
+    /* Other messages sent bounce off to the delegate. */
+    new_target(context, context->self.ifixed->delegate);
 }
 
 // ifixed_class>>new:size:
