@@ -4,6 +4,7 @@
 #include <scheme/natives.h>
 #include <scheme/system.h>
 #include <scheme/symbols.h>
+#include <print.h>
 #include <thread.h>
 
 #include <assert.h>
