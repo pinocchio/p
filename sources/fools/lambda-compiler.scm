@@ -199,12 +199,29 @@ extravars))))))))
 (define (transform-begin expression vars)
     (transform-expression-list (cdr expression) vars))
 
+(define (transform-case expression vars)
+    (let ((totest (cadr expression))
+          (branches (cddr expression)))
+        (transform-expression
+            (let loop ((todo branches))
+                (cond 
+                    ((null? todo) 'null)
+                    ((eq? (car (car todo)) 'else)
+                        `(begin ,@(cdr (car todo))))
+                    (else
+                        `(if (eq? ,totest ',(caar (car todo)))
+                            (begin
+                                ,@(cdr (car todo)))
+                            ,(loop (cdr todo))))))
+             vars)))
+
 (define (transform-expression expression vars)
     #|(display "EXPRESSION:")
     (display expression)
     (newline)|#
   (cond ((list? expression)
          (case (car expression)
+           ((case) (transform-case expression vars))
            ((begin) (transform-begin expression vars))
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
