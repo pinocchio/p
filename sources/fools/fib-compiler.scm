@@ -23,7 +23,8 @@
 (let ((doesNotUnderstand
         (method (self msg env args)
             (display "Message not understood: ")
-            (display msg)))
+            (display msg)
+            null))
       (lookup 
         (lambda (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
@@ -36,14 +37,14 @@
                                 (loop (class 'SYMBOL_super))
                                 (amethod 'APPLY_IN args env)))))))))
     (let ((classdisp (dispatch (self env args)
-                (let ((msg (args 'OBJECT_AT 0)))
-                    (case msg
-                        ((SYMBOL_lookup)
-                         (let ((selector ((args 'OBJECT_AT 1) 'PRE_EVAL_ENV env))
-                               (mdict (self 'OBJECT_AT 1)))
-                            (mdict 'OBJECT_AT selector)))
-                        ((SYMBOL_super) (self 'OBJECT_AT 0))
-                        (else (lookup self env args))))))
+            (let ((msg (args 'OBJECT_AT 0)))
+                (case msg
+                    ((SYMBOL_lookup)
+                     (let ((selector ((args 'OBJECT_AT 1) 'PRE_EVAL_ENV env))
+                           (mdict (self 'OBJECT_AT 1)))
+                        (mdict 'OBJECT_AT selector)))
+                    ((SYMBOL_super) (self 'OBJECT_AT 0))
+                    (else (lookup self env args))))))
           (objdisp (dispatch (self env args)
             (lookup self env args))))
     (let* ((cls_if (ifixed 'DISPATCH_DELEGATE_SIZE classdisp null 2))
@@ -54,5 +55,5 @@
         (mdict 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand doesNotUnderstand)
         (let* ((o_if (ifixed 'DISPATCH_DELEGATE_SIZE objdisp acls 0))
                (an_o (o_if 'NEW)))
-            (an_o 'NEW))))) ; should yield "basicNew" from DNU
+            (an_o 'NEW))))) ; should invoke DNU with "basicNew"
 ))
