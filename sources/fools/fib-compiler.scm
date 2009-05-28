@@ -34,7 +34,7 @@
                             (if (eq? amethod null)
                                 (loop (class 'SYMBOL_super))
                                 (amethod 'APPLY_IN args env)))))))))
-    (let ((cd (dispatch (self env args)
+    (let ((classdisp (dispatch (self env args)
                 (let ((msg (args 'OBJECT_AT 0)))
                     (case msg
                         ((SYMBOL_lookup)
@@ -43,15 +43,15 @@
                             (mdict 'OBJECT_AT selector)))
                         ((SYMBOL_super) (self 'OBJECT_AT 0))
                         (else (lookup self env args))))))
-          (d (dispatch (self env args)
+          (objdisp (dispatch (self env args)
             (lookup self env args))))
-    (let* ((cls_if (ifixed 'DISPATCH_DELEGATE_SIZE cd null 2))
+    (let* ((cls_if (ifixed 'DISPATCH_DELEGATE_SIZE classdisp null 2))
            (acls (cls_if 'NEW))
            (mdict (dictionary 'NEW)))
         (acls 'OBJECT_AT_PUT 0 null) ; superclass
         (acls 'OBJECT_AT_PUT 1 mdict) 
         (mdict 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand doesNotUnderstand)
-        (let* ((o_if (ifixed 'DISPATCH_DELEGATE_SIZE d acls 0))
+        (let* ((o_if (ifixed 'DISPATCH_DELEGATE_SIZE objdisp acls 0))
                (an_o (o_if 'NEW)))
             (an_o 'NEW))))) ; should yield "basicNew" from DNU
 ))
