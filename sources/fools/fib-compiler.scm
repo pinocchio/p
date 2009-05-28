@@ -22,7 +22,8 @@
 |#
 (let ((doesNotUnderstand
         (method (self msg env args)
-            msg))
+            (display "Message not understood: ")
+            (display msg)))
       (lookup 
         (lambda (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
