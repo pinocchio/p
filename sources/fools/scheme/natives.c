@@ -94,6 +94,22 @@ bin_number_number_op( minus,     -  )
 bin_number_bool_op  ( smallerp,  <  )
 bin_object_bool_op  ( eqp,       == )
 
+static void scheme_display_func_do() {
+    debug("scheme>>display\n");
+    context_object context = get_context();
+    print_object(argument_at(context, 0));
+    pop_context();
+    debug("ret>>scheme>>display\n");
+}
+
+static void scheme_display_func() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    push_eval_of(context, 0);
+    context->code = &scheme_display_func_do;
+}
+object scheme_display;
+
 void bootstrap_scheme() {
     bootstrap_scheme_symbols();
     init_op(plus);
@@ -102,4 +118,6 @@ void bootstrap_scheme() {
     init_op(eqp);
     init_direct_op(true);
     init_direct_op(false);
+
+    init_op(display);
 }

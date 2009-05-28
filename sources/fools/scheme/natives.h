@@ -10,6 +10,7 @@ extern object scheme_string_to_symbol;
 
 extern object scheme_true;
 extern object scheme_false;
+extern object scheme_display;
 
 extern void bootstrap_scheme();
 
