@@ -31,6 +31,7 @@ object SHIFT;
 object OBJECT_AT;
 object OBJECT_AT_PUT;
 object NEW;
+object SIZED;
 object DELEGATE;
 object SIZE;
 object DISPATCH_DELEGATE_SIZE;
@@ -62,6 +63,7 @@ void bootstrap_symbols() {
     define_symbol(OBJECT_AT,                "objectAt:");
     define_symbol(OBJECT_AT_PUT,            "objectAt:put:");
     define_symbol(NEW,                      "basicNew");
+    define_symbol(SIZED,                    "basicNew:");
     define_symbol(DELEGATE,                 "delegate");
     define_symbol(SIZE,                     "size");
     define_symbol(DISPATCH_DELEGATE_SIZE,   "dispatch:delegate:size:");
@@ -77,6 +79,7 @@ fools_object bootstrap() {
     fools_system->string_class      = wrap_dispatcher(string_dispatch);
     fools_system->number_class      = empty_class;
     fools_system->array_class       = wrap_dispatcher(array_dispatch);
+    fools_system->array_metaclass   = wrap_dispatcher(array_class_dispatch);
     fools_system->dict_class        = wrap_dispatcher(dict_dispatch);
     fools_system->dict_metaclass    = wrap_dispatcher(dict_class_dispatch);
 
@@ -105,6 +108,7 @@ fools_object bootstrap() {
     fools_system->iscoped   = make_empty_object(iscoped_metaclass);
     fools_system->ifixed    = make_empty_object(ifixed_metaclass);
     fools_system->dict      = make_empty_object(dict_metaclass);
+    fools_system->array     = make_empty_object(array_metaclass);
 
     init_thread();
 

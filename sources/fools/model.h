@@ -142,6 +142,7 @@ struct fools {
     object              iscoped;
     object              ifixed;
     object              dict;
+    object              array;
     array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
@@ -164,6 +165,7 @@ struct fools {
     object number_class;
     object string_class;
     object array_class;
+    object array_metaclass;
     object dict_class;
     object dict_metaclass;
     object true_class;

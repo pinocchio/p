@@ -1,12 +1,13 @@
 #include <model.h>
 #include <system.h>
 #include <bootstrap.h>
+#include <scheme/natives.h>
 
 #include <stdio.h>
 
 #define test_type(type)\
     if (pheader(o.pointer) == fools_system->type##_##class.pointer) {\
-        printf(#type"\n");\
+        printf(#type" at: %p\n", o.pointer);\
         return;\
     }
 
@@ -23,12 +24,12 @@ void print_object(object o) {
         return;
     }
 
-    if (o.pointer == fools_system->true.pointer) {
+    if (o.pointer == scheme_true.pointer) {
         printf("true\n");
         return;
     }
 
-    if (o.pointer == fools_system->false.pointer) {
+    if (o.pointer == scheme_false.pointer) {
         printf("false\n");
         return;
     }
@@ -47,10 +48,11 @@ void print_object(object o) {
     test_type(icall);
     test_type(ilist);
     test_type(iscoped);
+    test_type(ifixed);
     test_type(dict);
     test_type(env);
     if (*pheader(o.pointer) == &ifixed_shift_level) {
-        printf("an object\n");
+        printf("an object at: %p\n", o.pointer);
         return;
     }
     if (pheader(o.pointer) == fools_system->array_class.pointer) {

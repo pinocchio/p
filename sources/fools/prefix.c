@@ -15,6 +15,7 @@ int main () {
 
     object ifixed       = (object)make_iconst(fools_system->ifixed);
     object dictionary   = (object)make_iconst(fools_system->dict);
+    object array        = (object)make_iconst(fools_system->array);
     object null         = (object)make_iconst((object)fools_system->nil);
 /* Generated code */
 

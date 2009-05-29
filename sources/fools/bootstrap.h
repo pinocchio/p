@@ -28,10 +28,11 @@ extern object SHIFT;
 extern object OBJECT_AT;
 extern object OBJECT_AT_PUT;
 extern object NEW;
+extern object SIZED;
 extern object DELEGATE;
 extern object SIZE;
 extern object DISPATCH_DELEGATE_SIZE;
 
-#define NBR_SYMBOLS 12
+#define NBR_SYMBOLS 20
 
 #endif // BOOTSTRAP_H
