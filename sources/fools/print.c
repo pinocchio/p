@@ -20,7 +20,7 @@ void print_object(object o) {
     }
 
     if (pheader(o.pointer) == fools_system->string_class.pointer) {
-        printf("%s\n", o.string->value);
+        printf("%s", o.string->value);
         return;
     }
 

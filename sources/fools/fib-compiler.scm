@@ -8,31 +8,6 @@
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
  
-; Method lookup.
-#|(dispatch (self env args)
-    (let ((msg (args 'OBJECT_AT 0)))
-        (if (eq? msg 'SYMBOL_class)
-            (self 'DELEGATE)
-            (args 'OBJECT_AT_PUT 0 self)
-            (let loop ((class (self 'DELEGATE)))
-                (if (eq? class null)
-                    (self 'SYMBOL_doesNotUnderstand msg env args)
-                    (let ((amethod ((class 'OBJECT_AT 1) 'OBJECT_AT msg)))
-                        (if (eq? amethod null)
-                            (loop (class 'OBJECT_AT 0))
-                            (amethod 'APPLY_IN args env))))))))
-
-    (let* ((cls_if (ifixed 'DISPATCH_DELEGATE_SIZE classdisp null 2))
-           (acls (cls_if 'NEW))
-           (mdict (dictionary 'NEW)))
-        (acls 'OBJECT_AT_PUT 0 null) ; superclass
-        (acls 'OBJECT_AT_PUT 1 mdict) 
-        (mdict 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand doesNotUnderstand)
-        (let* ((o_if (ifixed 'DISPATCH_DELEGATE_SIZE objdisp acls 0))
-               (an_o (o_if 'NEW)))
-            (an_o 'NEW))) ; should invoke DNU with "basicNew"
-|#
-
 (let ((doesNotUnderstand
         (method (self msg env args)
             (display "Message not understood: ")
@@ -41,12 +16,14 @@
       (oprint (method (self)
                 (display "Instance of: ")
                 (display ((self 'SYMBOL_class) 'SYMBOL_name))
-                (display " .... done.")
+                (display "\\n")
               ))
       (clsname (method (self)
                 (self 'OBJECT_AT 3)))
       (mclsname (method (self)
-                "... class"))
+                (display ((self 'SYMBOL_instance) 'SYMBOL_name))
+                " class"))
+      (mclsinstance (method (self) (self 'OBJECT_AT 3)))
       (lookup 
         (lambda (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
@@ -62,7 +39,7 @@
                                     (if (eq? amethod null)
                                         (loop (class 'SYMBOL_super))
                                         (amethod 'APPLY_IN args env)))))))))))
-    (display "STAGE 1")
+    ;(display "STAGE 1")
     (let ((classdisp (dispatch (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
                 (case msg
@@ -74,7 +51,7 @@
                     (else (lookup self env args))))))
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    (display "STAGE 2")
+    ;(display "STAGE 2")
     (let* ((buildclass (lambda (cls)
                 (ifixed 'DISPATCH_DELEGATE_SIZE
                         classdisp cls 4)))
@@ -86,18 +63,14 @@
 
            (newclass
                 (method (self name super instlayout clslayout)
-                    (display "GENERATING NEW CLASS")
                     (let ((mclass (metaclass 'NEW))
                           (class null)
                           (fixclass (lambda (class dispatch)
                               (let loop ((current class)
                                          (size 0))
                                   (if (eq? null current)
-                                      (begin
-                                        (display "Making class of size: ")
-                                        (display size)
-                                        (ifixed 'DISPATCH_DELEGATE_SIZE
-                                                dispatch class size))
+                                      (ifixed 'DISPATCH_DELEGATE_SIZE
+                                               dispatch class size)
                                       (loop (current 'SYMBOL_super)
                                           (+ size
                                              ((current 'OBJECT_AT 2)
@@ -129,6 +102,7 @@
         (metaclass 'OBJECT_AT_PUT 3 "Metaclass")
         (mcdict 'OBJECT_AT_PUT 'SYMBOL_new newclass)
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
+        ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
 
         (object_class 'OBJECT_AT_PUT 0 metaclass_class)
         (object_class 'OBJECT_AT_PUT 1 (dictionary 'NEW))
@@ -140,12 +114,8 @@
         (object 'OBJECT_AT_PUT 2 (vector))
         (object 'OBJECT_AT_PUT 3 "Object")
                                 
-        (display "GOING TO SEND")
-        (display metaclass_class)
-
         (let ((classBehaviour null)
               (class null))
-            (display "STAGE 5")
             (set! classBehaviour (metaclass 'SYMBOL_new
                                     "ClassBehaviour" object
                                     (vector 'SYMBOL_super
@@ -160,18 +130,18 @@
             (metaclass_class 'OBJECT_AT_PUT 0 object_class)
             (metaclass_class 'OBJECT_AT_PUT 2 (vector))
             (object_class    'OBJECT_AT_PUT 0 class)
-            (display "TESTS")
-            (display (eq? (object 'SYMBOL_super) null))
-            (display (eq? (object_class 'SYMBOL_super) class))
-            (display (eq? (class 'SYMBOL_super) classBehaviour))
-            (display (eq? ((class 'DELEGATE) 'SYMBOL_super)
-                          (classBehaviour 'DELEGATE)))
-            (display (eq? (metaclass_class 'SYMBOL_super) object_class))
-            (display (eq? (metaclass 'SYMBOL_super) classBehaviour))
-            (display (eq? (classBehaviour 'SYMBOL_super) object))
-            (display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
-                          object_class))
-            (display (eq? (object_class 'DELEGATE) metaclass))
+            ;(display "TESTS")
+            ;(display (eq? (object 'SYMBOL_super) null))
+            ;(display (eq? (object_class 'SYMBOL_super) class))
+            ;(display (eq? (class 'SYMBOL_super) classBehaviour))
+            ;(display (eq? ((class 'DELEGATE) 'SYMBOL_super)
+            ;              (classBehaviour 'DELEGATE)))
+            ;(display (eq? (metaclass_class 'SYMBOL_super) object_class))
+            ;(display (eq? (metaclass 'SYMBOL_super) classBehaviour))
+            ;(display (eq? (classBehaviour 'SYMBOL_super) object))
+            ;(display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
+            ;              object_class))
+            ;(display (eq? (object_class 'DELEGATE) metaclass))
             ((object 'NEW) 'SYMBOL_print)
             (object 'SYMBOL_print)))))
 

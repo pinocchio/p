@@ -184,17 +184,13 @@ static void ifixed_stub_set_delegate_do() {
     debug("ifixed_stub>>delegate:\n");
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
-    print_object(ifixed->delegate);
     ifixed->delegate = argument_at(context, 1);
-    printf("new......\n");
-    print_object(ifixed->delegate.pointer);
     *pheader(ifixed) = &ifixed_dispatch;
     pop_context();
     debug("ret>>ifixed_stub>>delegate:\n");
 }
 
 static void inline ifixed_stub_set_delegate() {
-    printf("==========================================================\n");
     context_object context = get_context();
     assert_argsize(context, 2);
     push_eval_of(context, 1);
