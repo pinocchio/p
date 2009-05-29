@@ -35,6 +35,8 @@ object SIZED;
 object DELEGATE;
 object SIZE;
 object DISPATCH_DELEGATE_SIZE;
+object DISPATCH_SIZE;
+object SET_DELEGATE;
 
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)
@@ -65,8 +67,10 @@ void bootstrap_symbols() {
     define_symbol(NEW,                      "basicNew");
     define_symbol(SIZED,                    "basicNew:");
     define_symbol(DELEGATE,                 "delegate");
+    define_symbol(SET_DELEGATE,             "delegate:");
     define_symbol(SIZE,                     "size");
     define_symbol(DISPATCH_DELEGATE_SIZE,   "dispatch:delegate:size:");
+    define_symbol(DISPATCH_SIZE,            "dispatch:size:");
     define_symbol(SHIFT,                    "shift");
 }
 
@@ -100,6 +104,7 @@ fools_object bootstrap() {
     fools_system->iscoped_metaclass = wrap_dispatcher(iscoped_class_dispatch);
     fools_system->ifixed_class      = wrap_dispatcher(ifixed_dispatch);
     fools_system->ifixed_metaclass  = wrap_dispatcher(ifixed_class_dispatch);
+    fools_system->ifixed_stub_metaclass  = wrap_dispatcher(ifixed_stub_class_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 
     fools_system->level_shifter     = wrap_dispatcher(shift_level);
@@ -107,6 +112,7 @@ fools_object bootstrap() {
     fools_system->icapture  = (object)make_icapture();
     fools_system->iscoped   = make_empty_object(iscoped_metaclass);
     fools_system->ifixed    = make_empty_object(ifixed_metaclass);
+    fools_system->ifixed_stub = make_empty_object(ifixed_stub_metaclass);
     fools_system->dict      = make_empty_object(dict_metaclass);
     fools_system->array     = make_empty_object(array_metaclass);
 

@@ -141,6 +141,7 @@ struct fools {
     object              icapture;
     object              iscoped;
     object              ifixed;
+    object              ifixed_stub;
     object              dict;
     object              array;
     array_object        symbols_known_to_the_vm;
@@ -156,6 +157,7 @@ struct fools {
     object iscoped_metaclass;
     object ifixed_class;
     object ifixed_metaclass;
+    object ifixed_stub_metaclass;
     object env_class;
 
     // Level shifting

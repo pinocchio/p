@@ -7,7 +7,7 @@ void ifixed_dispatcher() {
     object self = context->self;
     object interp = header(self.pointer);
     object ifixed = (object)(pointer)*PINC(interp.pointer);
-    
+
     set_argument(return_context(context), 1, ifixed);
     pop_context();
     debug("ret>>an_ifixed>>dispatcher\n");
@@ -145,7 +145,7 @@ void ifixed_dispatch() {
     new_target(context, context->self.ifixed->delegate);
 }
 
-// ifixed_class>>new:size:
+// ifixed_class>>dispatch:delegate:size:
 static void ifixed_class_new_do() {
     debug("ifixedcls>>dispatch:delegate:size:\n");
     context_object ifixed_context = get_context();
@@ -160,7 +160,7 @@ static void ifixed_class_new_do() {
     pop_context();
 }
 
-// ifixed_class>>new:size:(pre)
+// ifixed_class>>dispatch:delegate:size:(pre)
 static void ifixed_class_new() {
     debug("ifixedcls>>(pre)\n");
     context_object ifixed_context = get_context();
@@ -178,6 +178,74 @@ void ifixed_class_dispatch() {
     object selector = message(context);
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     doesnotunderstand("ifixed_class", selector);
+}
+
+static void ifixed_stub_set_delegate_do() {
+    debug("ifixed_stub>>delegate:\n");
+    context_object context = get_context();
+    ifixed_object ifixed = context->self.ifixed;
+    print_object(ifixed->delegate);
+    ifixed->delegate = argument_at(context, 1);
+    printf("new......\n");
+    print_object(ifixed->delegate.pointer);
+    *pheader(ifixed) = &ifixed_dispatch;
+    pop_context();
+    debug("ret>>ifixed_stub>>delegate:\n");
+}
+
+static void inline ifixed_stub_set_delegate() {
+    printf("==========================================================\n");
+    context_object context = get_context();
+    assert_argsize(context, 2);
+    push_eval_of(context, 1);
+    context->code = &ifixed_stub_set_delegate_do;
+}
+
+static void ifixed_stub_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, NEW,          ifixed_new);
+    if_selector(selector, SIZE,         ifixed_size);
+    if_selector(selector, SET_DELEGATE, ifixed_stub_set_delegate)
+    /* TODO check if it makes sense to fall back to class */
+    doesnotunderstand("ifixed_stub_class", selector);
+}
+
+// ifixed_class>>dispatch:delegate:size:
+static void ifixed_stub_class_new_do() {
+    debug("ifixed_stubcls>>dispatch:size:\n");
+    context_object ifixed_context = get_context();
+    object ifixed =
+        make_ifixed(
+            argument_at(ifixed_context, 1),  // dispatch
+            (object)fools_system->nil,       // delegate
+            argument_at(ifixed_context, 2)); // size
+
+    *pheader(ifixed.pointer) = &ifixed_stub_dispatch;
+
+    set_argument(return_context(ifixed_context), 1, ifixed);
+    debug("ret>>ifixed_stubcls>>dispatch:size:\n");
+    pop_context();
+}
+
+// ifixed_stub_class>>dispatch:size:(pre)
+static void inline ifixed_stub_class_new() {
+    debug("ifixed_stubcls>>(pre)\n");
+    context_object ifixed_context = get_context();
+    assert_argsize(ifixed_context, 3);
+    push_eval_of(ifixed_context, 1);
+    push_eval_of(ifixed_context, 2);
+    ifixed_context->code = &ifixed_stub_class_new_do;
+    debug("ret>>ifixed_stubcls>>(pre)\n");
+}
+
+void ifixed_stub_class_dispatch() {
+    context_object context = get_context();
+    assert_argsize(context, 1);
+    object selector = message(context);
+    if_selector(selector, DISPATCH_SIZE, ifixed_stub_class_new);
+    doesnotunderstand("ifixed_stub_class", selector);
 }
 
 // Object creation

@@ -78,10 +78,9 @@
     (let* ((buildclass (lambda (cls)
                 (ifixed 'DISPATCH_DELEGATE_SIZE
                         classdisp cls 4)))
-           (metaclass_stub (buildclass null))
-           (metaclass_class (buildclass (metaclass_stub 'NEW)))
-           (metaclass (buildclass (metaclass_class 'NEW)))
-           (object_class (buildclass (metaclass_stub 'NEW)))
+           (metaclass (ifixed_stub 'DISPATCH_SIZE classdisp 4))
+           (metaclass_class (buildclass (metaclass 'NEW)))
+           (object_class (buildclass (metaclass 'NEW)))
            (object (buildclass (object_class 'NEW)))
            (mcdict (dictionary 'NEW)) 
 
@@ -116,7 +115,8 @@
                        (mclass 'OBJECT_AT_PUT 3 class)
                        class)))
            )
-        (display "STAGE 3")
+        ; Fill the empty stub for the metaclass in with the actual metaclass.
+        (metaclass 'SET_DELEGATE (metaclass_class 'NEW))
         (metaclass_class 'OBJECT_AT_PUT 1 mcdict)
         (metaclass_class 'OBJECT_AT_PUT 2
             (vector 'SYMBOL_super
@@ -172,6 +172,7 @@
             (display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
                           object_class))
             (display (eq? (object_class 'DELEGATE) metaclass))
-            ((object 'NEW) 'SYMBOL_print)))))
+            ((object 'NEW) 'SYMBOL_print)
+            (object 'SYMBOL_print)))))
 
 ))

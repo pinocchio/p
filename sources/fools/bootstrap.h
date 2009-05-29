@@ -32,6 +32,8 @@ extern object SIZED;
 extern object DELEGATE;
 extern object SIZE;
 extern object DISPATCH_DELEGATE_SIZE;
+extern object DISPATCH_SIZE;
+extern object SET_DELEGATE;
 
 #define NBR_SYMBOLS 20
 
