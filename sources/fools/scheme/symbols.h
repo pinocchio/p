@@ -13,6 +13,7 @@ extern object SYMBOL_methodDict;
 extern object SYMBOL_layout;
 extern object SYMBOL_name;
 extern object SYMBOL_print;
+extern object SYMBOL_subclass;
 
 extern void bootstrap_scheme_symbols();
 
