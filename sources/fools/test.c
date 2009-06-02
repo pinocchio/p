@@ -814,8 +814,8 @@ SETUP(test_ifixed_dispatch)
     make_eval_context(ci, icall, env);
 
     object result = transfer();
-    printf("result: %p given: %p\n", result.pointer, NEW.pointer);
     print_object(result);
+    printf("\n");
 }
 
 

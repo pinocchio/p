@@ -86,7 +86,7 @@
           ; corresponding Metaclass.
            (newclass
                 (method (self name super instlayout clslayout)
-                    (let ((mclass (metaclass 'NEW))
+                    (let ((mclass (self 'NEW))
                           (class null)
                           (fixclass (lambda (class dispatch)
                               (let loop ((current class)
@@ -108,6 +108,9 @@
                        (class 'OBJECT_AT_PUT 2 instlayout)
                        (class 'OBJECT_AT_PUT 3 name)
                        (set! class (fixclass class objdisp))
+                       ((class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+                            (method (self)
+                                (class 'NEW)))
                        (mclass 'OBJECT_AT_PUT 3 class)
                        class)))
 
@@ -140,6 +143,8 @@
        ; Install the accessor methods
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
+        ((metaclass_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+            (method (self) (metaclass 'NEW)))
 
        ; Fill in info about Objects
         (object_class 'OBJECT_AT_PUT 0 metaclass_class)
