@@ -41,7 +41,7 @@
          (body (cddr a-lambda))
          (name (make-var-name "lambda" 'x))
          (vars (map make-vars args))
-         (transformed (transform-expression-list body (append outervars vars)))
+         (transformed (transform-expression-list body (append vars outervars)))
          (argarray (make-arguments (append vars (caddr transformed)) name)))
     (list (string-append
            (apply string-append (map caddr vars))

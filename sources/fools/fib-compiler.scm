@@ -24,22 +24,57 @@
       (mclsname (method (self)
                 (display ((self 'SYMBOL_instance) 'SYMBOL_name))
                 " class"))
-      (mclsinstance (method (self) (self 'OBJECT_AT 3)))
+      (mclsinstance (method (self)
+            (self 'OBJECT_AT 3)))
 
     ; Here I define a general dispatching mechanism for objects and classes:
 
-      (lookup
+      #|(lookup
         (lambda (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
-                ;(display msg)
+                (if (eq? msg 'SYMBOL_print)
+                    (begin)
+                    (if (eq? msg 'SYMBOL_name)
+                        (begin
+                            (display self)
+                            (display " RECEIVED NAME\\n"))
+                        (if (eq? msg 'SYMBOL_instance)
+                            (begin)
+                            (begin
+                                (display msg)
+                                (display " to ")
+                                (self 'SYMBOL_print)))))
                 (args 'OBJECT_AT_PUT 0 self)
                 (let loop ((class (self 'DELEGATE)))
                     (if (eq? class null)
-                        (self 'SYMBOL_doesNotUnderstand msg env args)
+                        (if (eq? msg 'SYMBOL_print)
+                            (display "<unknown>")
+                            (if (eq? msg 'SYMBOL_doesNotUnderstand)
+                                (display "ERROR Received DNU!")
+                                (begin
+                                    (display "SENDING DNU\\n")
+                                    (self 'SYMBOL_doesNotUnderstand msg env args))))
                         (let ((amethod (class 'SYMBOL_lookup msg)))
                             (if (eq? amethod null)
                                 (loop (class 'SYMBOL_super))
-                                (amethod 'APPLY_IN args env)))))))))
+                                (amethod 'APPLY_IN args env)))))))|#
+      (lookup
+        (lambda (self env args)
+            (let ((msg (args 'OBJECT_AT 0)))
+                ;(display "LOOKUP: ")
+                ;(display msg)
+                ;(display "\\n")
+                (args 'OBJECT_AT_PUT 0 self)
+                (let loop ((class (self 'DELEGATE)))
+                    (if (eq? class null)
+                        (if (eq? msg 'SYMBOL_doesNotUnderstand)
+                             (display "ERROR Received DNU!")
+                             (self 'SYMBOL_doesNotUnderstand msg env args))
+                        (let ((amethod (class 'SYMBOL_lookup msg)))
+                            (if (eq? amethod null)
+                                (loop (class 'SYMBOL_super))
+                                (amethod 'APPLY_IN args env)))))))
+        ))
     ;(display "STAGE 1")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
@@ -72,10 +107,10 @@
            (metaclass_class (buildclass (metaclass 'NEW)))
 
           ; The Object class is an instance of metaclass too
-           (object_class (buildclass (metaclass 'NEW)))
+           (object_class (metaclass 'NEW))
 
           ; Object is just a normal class with no instance variables
-           (object (buildclass (object_class 'NEW)))
+           (object ((buildclass object_class) 'NEW))
 
           ; We use the C implementation of dictionaries for bootstrapping
            (mcdict (dictionary 'NEW))
@@ -101,16 +136,15 @@
                        (mclass 'OBJECT_AT_PUT 0 (super 'DELEGATE))
                        (mclass 'OBJECT_AT_PUT 1 (dictionary 'NEW))
                        (mclass 'OBJECT_AT_PUT 2 clslayout)
-                       (set! mclass (fixclass mclass classdisp))
-                       (set! class (mclass 'NEW))
+                       (set! class ((fixclass mclass classdisp) 'NEW))
                        (class 'OBJECT_AT_PUT 0 super)
                        (class 'OBJECT_AT_PUT 1 (dictionary 'NEW))
                        (class 'OBJECT_AT_PUT 2 instlayout)
                        (class 'OBJECT_AT_PUT 3 name)
-                       (set! class (fixclass class objdisp))
-                       ((class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
-                            (method (self)
-                                (class 'NEW)))
+                       (let ((class (fixclass class objdisp)))
+                          ((mclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+                                (method (self)
+                                    (class 'NEW))))
                        (mclass 'OBJECT_AT_PUT 3 class)
                        class)))
 
@@ -134,7 +168,6 @@
                     'SYMBOL_name))
       
        ; Fill in info about Metaclasses
-        (metaclass_class 'OBJECT_AT_PUT 3 metaclass)
         (metaclass 'OBJECT_AT_PUT 1 (dictionary 'NEW))
         (metaclass 'OBJECT_AT_PUT 2 (vector 'SYMBOL_instance))
         (metaclass 'OBJECT_AT_PUT 3 "Metaclass")
@@ -143,8 +176,9 @@
        ; Install the accessor methods
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
-        ((metaclass_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
-            (method (self) (metaclass 'NEW)))
+        (let ((metaclass metaclass))
+            (mcdict 'OBJECT_AT_PUT 'NEW
+                    (method (self) (metaclass 'NEW))))
 
        ; Fill in info about Objects
         (object_class 'OBJECT_AT_PUT 0 metaclass_class)
@@ -156,13 +190,16 @@
         (object 'OBJECT_AT_PUT 3 "Object")
 
        ; Install DNU + test methods
-        ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name     clsname)
         ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_subclass subclass)
         ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_print oprint)
         ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand
-                                              doesNotUnderstand)
+                                               doesNotUnderstand)
         ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_class
                                               (method (self) (self 'DELEGATE)))
+        (let ((o (ifixed 'DISPATCH_DELEGATE_SIZE
+                                objdisp object 0)))
+            ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+                (method (self) (o 'NEW))))
                                
        ; Create ClassBehaviour and Class
         (let* ((classBehaviour (metaclass 'SYMBOL_new
@@ -176,27 +213,38 @@
                                   (vector 'SYMBOL_name)
                                   (vector))))
 
-            ; Now fix all bootstrap "dandling" pointers
+            ((class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name clsname)
+
+            ; Now fix all bootstrap "dangling" pointers
             (metaclass       'OBJECT_AT_PUT 0 classBehaviour)
-            (metaclass_class 'OBJECT_AT_PUT 0 object_class)
+            (metaclass_class 'OBJECT_AT_PUT 0 class)
             (metaclass_class 'OBJECT_AT_PUT 2 (vector))
             (object_class    'OBJECT_AT_PUT 0 class)
+            
+            ; Remove the ifixed indirection for tests.
+            (set! metaclass (metaclass_class 'DELEGATE))
+            (metaclass_class 'OBJECT_AT_PUT 3 metaclass)
 
             ;(display "TESTS")
-            ;(display (eq? (object 'SYMBOL_super) null))
-            ;(display (eq? (object_class 'SYMBOL_super) class))
-            ;(display (eq? (class 'SYMBOL_super) classBehaviour))
-            ;(display (eq? ((class 'DELEGATE) 'SYMBOL_super)
-            ;              (classBehaviour 'DELEGATE)))
-            ;(display (eq? (metaclass_class 'SYMBOL_super) object_class))
-            ;(display (eq? (metaclass 'SYMBOL_super) classBehaviour))
-            ;(display (eq? (classBehaviour 'SYMBOL_super) object))
-            ;(display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
-            ;              object_class))
-            ;(display (eq? (object_class 'DELEGATE) metaclass))
+            (display (eq? (object 'SYMBOL_super) null))
+            (display (eq? (object_class 'SYMBOL_super) class))
+            (display (eq? (class 'SYMBOL_super) classBehaviour))
+            (display (eq? ((class 'DELEGATE) 'SYMBOL_super)
+                          (classBehaviour 'DELEGATE)))
+            (display (eq? (metaclass_class 'SYMBOL_super) class))
+            (display (eq? (metaclass 'SYMBOL_super) classBehaviour))
+            (display (eq? (classBehaviour 'SYMBOL_super) object))
+            (display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
+                          object_class))
+            (display (eq? (object_class 'DELEGATE) metaclass))
+            (display (eq? ((metaclass 'DELEGATE) 'DELEGATE) metaclass))
+            (display (metaclass 'DELEGATE))
+
             ((object 'NEW) 'SYMBOL_print)
             (object 'SYMBOL_print)
             (metaclass 'SYMBOL_instance)
+            (object_class 'NEW)
+            ((class 'NEW) 'SYMBOL_print)
 
             (let* ((ev (vector))
                    (magnitude (object 'SYMBOL_subclass "Magnitude" ev ev))
