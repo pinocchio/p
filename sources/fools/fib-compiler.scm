@@ -119,8 +119,7 @@
 
             (subclass
                 (method (self name instlayout clslayout)
-                    (metaclass 'SYMBOL_new name self instlayout clslayout)))
-           )
+                    (metaclass 'SYMBOL_new name self instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
         (metaclass 'SET_DELEGATE (metaclass_class 'NEW))
@@ -212,7 +211,9 @@
             ((object 'NEW) 'SYMBOL_print)
             (object 'SYMBOL_print)
             (metaclass 'SYMBOL_instance)
-            (object_class 'NEW)
+            (object_class 'NEW) ; Metaclasses don't have a NEW. The "NEW" is
+                                ; only generated on the spot to create its
+                                ; single instance in "newclass"
             ((class 'NEW) 'SYMBOL_print)
 
             (let* ((ev (vector))
