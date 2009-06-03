@@ -719,7 +719,7 @@ SETUP(test_ifixed_object)
     make_eval_context(ci, icall, env);
 
     object result = transfer();
-    assert(result.pointer == ifixed.pointer);
+    assert(result.pointer == ifixed.ifixed->delegate.pointer);
     
     icall2(icall, make_iconst(thefixed), OBJECT_AT,
            (object)make_iconst((object)make_number(0)));

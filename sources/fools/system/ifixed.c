@@ -8,7 +8,7 @@ void ifixed_dispatcher() {
     object interp = header(self.pointer);
     object ifixed = (object)(pointer)*PINC(interp.pointer);
 
-    set_argument(return_context(context), 1, ifixed);
+    set_argument(return_context(context), 1, ifixed.ifixed->delegate);
     pop_context();
     debug("ret>>an_ifixed>>dispatcher\n");
 }
