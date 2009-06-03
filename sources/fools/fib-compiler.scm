@@ -9,7 +9,8 @@
   ;             (fib (- x 2)))))
  
 (let ((getself (lambda (o) (o 'OBJECT_AT 0)))
-      (getsuper (lambda (o) (o 'OBJECT_AT 1))))
+      (getsuper (lambda (o) (o 'OBJECT_AT 1)))
+      (bind (lambda (self super) (vector self super))))
 (let ((doesNotUnderstand
         (method (s msg env args)
             (display "Message not understood: ")
@@ -47,11 +48,11 @@
                                 (loop (class 'SYMBOL_super))
                                 (begin
                                     (args 'OBJECT_AT_PUT 0
-                                        (vector self
-                                                ; Constructing a "super"
-                                                (lambda (args)
-                                                    (lookup (args 'OBJECT_AT 0)
-                                                        (class 'SYMBOL_super)))))
+                                        (bind self
+                                              ; Constructing a "super"
+                                              (lambda (args)
+                                                  (lookup (args 'OBJECT_AT 0)
+                                                      (class 'SYMBOL_super)))))
                                     (amethod 'APPLY_IN args env))))))))))
     ;(display "STAGE 1")
     ; Classes have a more specific dispatch than objects
