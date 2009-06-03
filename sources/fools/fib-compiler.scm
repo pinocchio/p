@@ -28,37 +28,7 @@
             (self 'OBJECT_AT 3)))
 
     ; Here I define a general dispatching mechanism for objects and classes:
-
-      #|(lookup
-        (lambda (self env args)
-            (let ((msg (args 'OBJECT_AT 0)))
-                (if (eq? msg 'SYMBOL_print)
-                    (begin)
-                    (if (eq? msg 'SYMBOL_name)
-                        (begin
-                            (display self)
-                            (display " RECEIVED NAME\\n"))
-                        (if (eq? msg 'SYMBOL_instance)
-                            (begin)
-                            (begin
-                                (display msg)
-                                (display " to ")
-                                (self 'SYMBOL_print)))))
-                (args 'OBJECT_AT_PUT 0 self)
-                (let loop ((class (self 'DELEGATE)))
-                    (if (eq? class null)
-                        (if (eq? msg 'SYMBOL_print)
-                            (display "<unknown>")
-                            (if (eq? msg 'SYMBOL_doesNotUnderstand)
-                                (display "ERROR Received DNU!")
-                                (begin
-                                    (display "SENDING DNU\\n")
-                                    (self 'SYMBOL_doesNotUnderstand msg env args))))
-                        (let ((amethod (class 'SYMBOL_lookup msg)))
-                            (if (eq? amethod null)
-                                (loop (class 'SYMBOL_super))
-                                (amethod 'APPLY_IN args env)))))))|#
-      (lookup
+     (lookup
         (lambda (self env args)
             (let ((msg (args 'OBJECT_AT 0)))
                 ;(display "LOOKUP: ")
@@ -73,8 +43,7 @@
                         (let ((amethod (class 'SYMBOL_lookup msg)))
                             (if (eq? amethod null)
                                 (loop (class 'SYMBOL_super))
-                                (amethod 'APPLY_IN args env)))))))
-        ))
+                                (amethod 'APPLY_IN args env)))))))))
     ;(display "STAGE 1")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
