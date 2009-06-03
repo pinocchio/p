@@ -10,7 +10,8 @@
  
 (let ((getself (lambda (o) (o 'OBJECT_AT 0)))
       (getsuper (lambda (o) (o 'OBJECT_AT 1)))
-      (bind (lambda (self super) (vector self super))))
+      (bind (lambda (self super) (vector self super)))
+      (methoddict (lambda (c) (c 'OBJECT_AT 1))))
 (let ((doesNotUnderstand
         (method (s msg env args)
             (display "Message not understood: ")
@@ -51,7 +52,8 @@
                                         (bind self
                                               ; Constructing a "super"
                                               (lambda (args)
-                                                  (lookup (args 'OBJECT_AT 0)
+                                                  (lookup
+                                                      (args 'OBJECT_AT 0)
                                                       (class 'SYMBOL_super)))))
                                     (amethod 'APPLY_IN args env))))))))))
     ;(display "STAGE 1")
@@ -152,8 +154,8 @@
         (mcdict 'OBJECT_AT_PUT 'SYMBOL_new newclass)
 
        ; Install the accessor methods
-        ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
-        ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
+        ((methoddict metaclass) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
+        ((methoddict metaclass) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
         (let ((metaclass metaclass))
             (mcdict 'OBJECT_AT_PUT 'NEW
                     (method (s) (metaclass 'NEW))))
@@ -168,15 +170,15 @@
         (object 'OBJECT_AT_PUT 3 "Object")
 
        ; Install DNU + test methods
-        ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_subclass subclass)
-        ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_print oprint)
-        ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand
+        ((methoddict object_class) 'OBJECT_AT_PUT 'SYMBOL_subclass subclass)
+        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_print oprint)
+        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand
                                                doesNotUnderstand)
-        ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_class
+        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_class
                                               (method (s) ((getself s) 'DELEGATE)))
         (let ((o (ifixed 'DISPATCH_DELEGATE_SIZE
                                 objdisp object 0)))
-            ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+            ((methoddict object_class) 'OBJECT_AT_PUT 'NEW
                 (method (s) (o 'NEW))))
                                
        ; Create ClassBehaviour and Class
@@ -191,8 +193,8 @@
                                   (vector 'SYMBOL_name)
                                   (vector))))
 
-            ((class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name clsname)
-            ((classBehaviour 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_methodDict
+            ((methoddict class) 'OBJECT_AT_PUT 'SYMBOL_name clsname)
+            ((methoddict classBehaviour) 'OBJECT_AT_PUT 'SYMBOL_methodDict
                 (method (s) ((getself s) 'OBJECT_AT 1)))
 
             ; Now fix all bootstrap "dangling" pointers
