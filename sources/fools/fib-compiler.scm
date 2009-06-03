@@ -8,34 +8,36 @@
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
  
+(let ((getself (lambda (o) (o 'OBJECT_AT 0)))
+      (getsuper (lambda (o) (o 'OBJECT_AT 1))))
 (let ((doesNotUnderstand
-        (method (self msg env args)
+        (method (s msg env args)
             (display "Message not understood: ")
             (display msg)
             (display "\\n")
             null))
-      (oprint (method (self)
+      (oprint (method (s)
                 (display "Instance of: ")
-                (display ((self 'DELEGATE) 'SYMBOL_name))
+                (display (((getself s) 'DELEGATE) 'SYMBOL_name))
                 (display "\\n")
               ))
-      (clsname (method (self)
-                (self 'OBJECT_AT 3)))
-      (mclsname (method (self)
-                (display ((self 'SYMBOL_instance) 'SYMBOL_name))
+      (clsname (method (s)
+                ((getself s) 'OBJECT_AT 3)))
+      (mclsname (method (s)
+                (display (((getself s) 'SYMBOL_instance) 'SYMBOL_name))
                 " class"))
-      (mclsinstance (method (self)
-            (self 'OBJECT_AT 3)))
+      (mclsinstance (method (s)
+            ((getself s) 'OBJECT_AT 3)))
 
     ; Here I define a general dispatching mechanism for objects and classes:
      (lookup
         (lambda (self env args)
-            (let ((msg (args 'OBJECT_AT 0)))
+            (let lookup ((msg (args 'OBJECT_AT 0))
+                         (class (self 'DELEGATE)))
                 ;(display "LOOKUP: ")
                 ;(display msg)
                 ;(display "\\n")
-                (args 'OBJECT_AT_PUT 0 self)
-                (let loop ((class (self 'DELEGATE)))
+                (let loop ((class class))
                     (if (eq? class null)
                         (if (eq? msg 'SYMBOL_doesNotUnderstand)
                              (display "ERROR Received DNU!")
@@ -43,7 +45,14 @@
                         (let ((amethod (class 'SYMBOL_lookup msg)))
                             (if (eq? amethod null)
                                 (loop (class 'SYMBOL_super))
-                                (amethod 'APPLY_IN args env)))))))))
+                                (begin
+                                    (args 'OBJECT_AT_PUT 0
+                                        (vector self
+                                                ; Constructing a "super"
+                                                (lambda (args)
+                                                    (lookup (args 'OBJECT_AT 0)
+                                                        (class 'SYMBOL_super)))))
+                                    (amethod 'APPLY_IN args env))))))))))
     ;(display "STAGE 1")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
@@ -89,8 +98,8 @@
           ; it can be called on Metaclass. It generates a new Class and its
           ; corresponding Metaclass.
            (newclass
-                (method (self name super instlayout clslayout)
-                    (let ((mclass (self 'NEW))
+                (method (s name super instlayout clslayout)
+                    (let ((mclass ((getself s) 'NEW))
                           (class null)
                           (fixclass (lambda (class dispatch)
                               (let loop ((current class)
@@ -112,14 +121,14 @@
                        (class 'OBJECT_AT_PUT 3 name)
                        (let ((class (fixclass class objdisp)))
                           ((mclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
-                                (method (self)
+                                (method (s)
                                     (class 'NEW))))
                        (mclass 'OBJECT_AT_PUT 3 class)
                        class)))
 
             (subclass
-                (method (self name instlayout clslayout)
-                    (metaclass 'SYMBOL_new name self instlayout clslayout))))
+                (method (s name instlayout clslayout)
+                    (metaclass 'SYMBOL_new name (getself s) instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
         (metaclass 'SET_DELEGATE (metaclass_class 'NEW))
@@ -146,7 +155,7 @@
         ((metaclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
         (let ((metaclass metaclass))
             (mcdict 'OBJECT_AT_PUT 'NEW
-                    (method (self) (metaclass 'NEW))))
+                    (method (s) (metaclass 'NEW))))
 
        ; Fill in info about Objects
         (object_class 'OBJECT_AT_PUT 0 metaclass_class)
@@ -163,11 +172,11 @@
         ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand
                                                doesNotUnderstand)
         ((object 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_class
-                                              (method (self) (self 'DELEGATE)))
+                                              (method (s) ((getself s) 'DELEGATE)))
         (let ((o (ifixed 'DISPATCH_DELEGATE_SIZE
                                 objdisp object 0)))
             ((object_class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
-                (method (self) (o 'NEW))))
+                (method (s) (o 'NEW))))
                                
        ; Create ClassBehaviour and Class
         (let* ((classBehaviour (metaclass 'SYMBOL_new
@@ -182,6 +191,8 @@
                                   (vector))))
 
             ((class 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_name clsname)
+            ((classBehaviour 'OBJECT_AT 1) 'OBJECT_AT_PUT 'SYMBOL_methodDict
+                (method (s) ((getself s) 'OBJECT_AT 1)))
 
             ; Now fix all bootstrap "dangling" pointers
             (metaclass       'OBJECT_AT_PUT 0 classBehaviour)
@@ -206,7 +217,6 @@
                           object_class))
             (display (eq? (object_class 'DELEGATE) metaclass))
             (display (eq? ((metaclass 'DELEGATE) 'DELEGATE) metaclass))
-            (display (metaclass 'DELEGATE))
 
             ((object 'NEW) 'SYMBOL_print)
             (object 'SYMBOL_print)
@@ -215,7 +225,7 @@
                                 ; only generated on the spot to create its
                                 ; single instance in "newclass"
             ((class 'NEW) 'SYMBOL_print)
-
+        
             (let* ((ev (vector))
                    (magnitude (object 'SYMBOL_subclass "Magnitude" ev ev))
                    (number (magnitude 'SYMBOL_subclass "Number" ev ev))
@@ -232,10 +242,19 @@
                                       "OrderedCollection" (vector 1 2 3) ev))
                                                           ; XXX todo :! 
                    (ary (acollection 'SYMBOL_subclass "Array" ev ev)))
-                   
+
+                ((integer 'SYMBOL_methodDict)
+                    'OBJECT_AT_PUT 'SYMBOL_bind
+                    (method (s) (display "IN SELF!\\n")
+                                ((getsuper s) (vector 'SYMBOL_bind))))
+                ((magnitude 'SYMBOL_methodDict)
+                    'OBJECT_AT_PUT 'SYMBOL_bind
+                    (method (s) (display "In SUPER!!\\n")))
+
+                ((integer 'NEW) 'SYMBOL_bind)
 
                 (vector magnitude number integer boolean true false collection
                         sqcollection acollection ocollection ary)
-    )))))
+    ))))))
 
 ))
