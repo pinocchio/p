@@ -46,9 +46,6 @@ object SET_DELEGATE;
 #define define_symbol(name, value)\
     name = (object)make_string(value);
     
-void bootstrap_symbols() {
-}
-
 #define empty_class (object)make_object(1, (object)fools_system->nil);
 
 fools_object bootstrap() {
@@ -66,8 +63,6 @@ fools_object bootstrap() {
     fools_system->empty->size               = 0;
     header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
-
-    bootstrap_symbols();
 
     fools_system->ilist_class       = wrap_dispatcher(ilist_dispatch);
     fools_system->iconst_class      = wrap_dispatcher(iconst_dispatch);

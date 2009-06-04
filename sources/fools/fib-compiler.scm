@@ -232,8 +232,6 @@
 
             ;(display "Minimal system ready!\\n")
 
-
-
             ;(display "TESTS")
             ;(display (eq? (object 'superclass) null))
             ;(display (eq? (object_class 'superclass) class))
@@ -256,7 +254,7 @@
                                      ; single instance in "newclass"
             ((class 'basicNew) 'print)
 
-            (display "STAGE 5\\n")
+            ;(display "STAGE 5\\n")
 
         
             (let* ((ev (vector))
