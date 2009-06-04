@@ -45,33 +45,8 @@ object SET_DELEGATE;
 
 #define define_symbol(name, value)\
     name = (object)make_string(value);
-    //raw_array_at_put(fools_system->symbols_known_to_the_vm,
-    //                 idx,
-    //                 name)
     
 void bootstrap_symbols() {
-    define_symbol(EVAL,                     "eval");
-    define_symbol(PRE_EVAL_ENV,             "eval:");
-    define_symbol(ASSIGN_IN,                "assign:in:");
-    define_symbol(FETCH_FROM,               "fetch:from:");
-    define_symbol(STORE_AT_IN,              "store:at:in:");
-    define_symbol(SUBSCOPE_KEY,             "subScope:key:");
-    define_symbol(SET_PARENT,               "parent:");
-    define_symbol(PARENT,                   "parent");
-    define_symbol(NEW_SIZE,                 "new:size:");
-    define_symbol(IAPPLY,                   "iapply:");
-    define_symbol(APPLY_IN,                 "apply:in:");
-    define_symbol(SCOPE,                    "scope");
-    define_symbol(OBJECT_AT,                "objectAt:");
-    define_symbol(OBJECT_AT_PUT,            "objectAt:put:");
-    define_symbol(NEW,                      "basicNew");
-    define_symbol(SIZED,                    "basicNew:");
-    define_symbol(DELEGATE,                 "delegate");
-    define_symbol(SET_DELEGATE,             "delegate:");
-    define_symbol(SIZE,                     "size");
-    define_symbol(DISPATCH_DELEGATE_SIZE,   "dispatch:delegate:size:");
-    define_symbol(DISPATCH_SIZE,            "dispatch:size:");
-    define_symbol(SHIFT,                    "shift");
 }
 
 #define empty_class (object)make_object(1, (object)fools_system->nil);

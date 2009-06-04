@@ -7,11 +7,16 @@
 ;            1
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
- 
-(let ((getself (lambda (o) (o 'OBJECT_AT 0)))
-      (getsuper (lambda (o) (o 'OBJECT_AT 1)))
+; bootstrap all unused symbols needed for the VM
+(vector 'eval 'store:at:in: 'subScope:key:
+        'parent: 'parent 'new:size: 'iapply:
+        'scope 'basicNew: 'shift)
+
+
+(let ((getself (lambda (o) (o 'objectAt: 0)))
+      (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
-      (methoddict (lambda (c) (c 'OBJECT_AT 1))))
+      (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((doesNotUnderstand
         (method (s msg env args)
             (display "Message not understood: ")
@@ -20,81 +25,81 @@
             null))
       (oprint (method (s)
                 (display "Instance of: ")
-                (display (((getself s) 'DELEGATE) 'SYMBOL_name))
+                (display (((getself s) 'delegate) 'name))
                 (display "\\n")
               ))
       (clsname (method (s)
-                ((getself s) 'OBJECT_AT 3)))
+                ((getself s) 'objectAt: 3)))
       (mclsname (method (s)
-                (display (((getself s) 'SYMBOL_instance) 'SYMBOL_name))
+                (display (((getself s) 'instance) 'name))
                 " class"))
       (mclsinstance (method (s)
-            ((getself s) 'OBJECT_AT 3)))
+            ((getself s) 'objectAt: 3)))
 
     ; Here I define a general dispatching mechanism for objects and classes:
      (lookup
         (lambda (self env args)
-            (let lookup ((msg (args 'OBJECT_AT 0))
-                         (class (self 'DELEGATE)))
+            (let lookup ((msg (args 'objectAt: 0))
+                         (class (self 'delegate)))
                 ;(display "LOOKUP: ")
                 ;(display msg)
                 ;(display "\\n")
                 (let loop ((class class))
                     (if (eq? class null)
-                        (if (eq? msg 'SYMBOL_doesNotUnderstand)
+                        (if (eq? msg 'doesNotUnderstand:in:with:)
                              (display "ERROR Received DNU!")
-                             (self 'SYMBOL_doesNotUnderstand msg env args))
-                        (let ((amethod (class 'SYMBOL_lookup msg)))
+                             (self 'doesNotUnderstand:in:with: msg env args))
+                        (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
-                                (loop (class 'SYMBOL_super))
+                                (loop (class 'superclass))
                                 (begin
-                                    (args 'OBJECT_AT_PUT 0
+                                    (args 'objectAt:put: 0
                                         (bind self
                                               ; Constructing a "super"
                                               (lambda (args)
                                                   (lookup
-                                                      (args 'OBJECT_AT 0)
-                                                      (class 'SYMBOL_super)))))
-                                    (amethod 'APPLY_IN args env))))))))))
-    ;(display "STAGE 1")
+                                                      (args 'objectAt: 0)
+                                                      (class 'superclass)))))
+                                    (amethod 'apply:in: args env))))))))))
+    ;(display "STAGE 1\\n")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
     (let ((classdisp (dispatch (self env args)
-            (let ((msg (args 'OBJECT_AT 0)))
+            (let ((msg (args 'objectAt: 0)))
                 (case msg
-                    ((SYMBOL_lookup)
-                     (let ((selector ((args 'OBJECT_AT 1) 'PRE_EVAL_ENV env))
-                           (mdict (self 'OBJECT_AT 1)))
-                        (mdict 'OBJECT_AT selector)))
-                    ((SYMBOL_super) (self 'OBJECT_AT 0))
+                    ((lookup:)
+                     (let ((selector ((args 'objectAt: 1) 'eval: env))
+                           (mdict (self 'objectAt: 1)))
+                        (mdict 'objectAt: selector)))
+                    ((superclass) (self 'objectAt: 0))
                     (else (lookup self env args))))))
 
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    ;(display "STAGE 2")
+    ;(display "STAGE 2\\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
-                (ifixed 'DISPATCH_DELEGATE_SIZE
+                (ifixed 'dispatch:delegate:size:
                         classdisp cls 4)))
           
           ; The first Metaclass is an instantiatable stub which will become
           ; the real Metaclass later on.
-           (metaclass (ifixed_stub 'DISPATCH_SIZE classdisp 4))
+           (metaclass (ifixed_stub 'dispatch:size: classdisp 4))
 
           ; The Metaclass-class is an instance of metaclass
-           (metaclass_class (buildclass (metaclass 'NEW)))
+           (metaclass_class (buildclass (metaclass 'basicNew)))
 
           ; The Object class is an instance of metaclass too
-           (object_class (metaclass 'NEW))
+           (object_class (metaclass 'basicNew))
 
           ; Object is just a normal class with no instance variables
-           (object ((buildclass object_class) 'NEW))
+           (object ((buildclass object_class) 'basicNew))
 
           ; We use the C implementation of dictionaries for bootstrapping
-           (mcdict (dictionary 'NEW))
+           (mcdict (dictionary 'basicNew))
 
           ; The implementation of classNamed:super:instVars:classVars:
           ; which will be installed in the Metaclass class' dictionary so that
@@ -102,159 +107,184 @@
           ; corresponding Metaclass.
            (newclass
                 (method (s name super instlayout clslayout)
-                    (let ((mclass ((getself s) 'NEW))
+                    (let ((mclass ((getself s) 'new))
                           (class null)
                           (fixclass (lambda (class dispatch)
                               (let loop ((current class)
                                          (size 0))
                                   (if (eq? null current)
-                                      (ifixed 'DISPATCH_DELEGATE_SIZE
+                                      (ifixed 'dispatch:delegate:size:
                                                dispatch class size)
-                                      (loop (current 'SYMBOL_super)
-                                          (+ size
-                                             ((current 'OBJECT_AT 2)
-                                              'SIZE))))))))
-                       (mclass 'OBJECT_AT_PUT 0 (super 'DELEGATE))
-                       (mclass 'OBJECT_AT_PUT 1 (dictionary 'NEW))
-                       (mclass 'OBJECT_AT_PUT 2 clslayout)
-                       (set! class ((fixclass mclass classdisp) 'NEW))
-                       (class 'OBJECT_AT_PUT 0 super)
-                       (class 'OBJECT_AT_PUT 1 (dictionary 'NEW))
-                       (class 'OBJECT_AT_PUT 2 instlayout)
-                       (class 'OBJECT_AT_PUT 3 name)
+                                      (loop (current 'superclass)
+                                            (+ size
+                                               ((current 'objectAt: 2)
+                                                'size))))))))
+                       (mclass 'objectAt:put: 0 (super 'delegate))
+                       (mclass 'objectAt:put: 1 (dictionary 'basicNew))
+                       (mclass 'objectAt:put: 2 clslayout)
+                       (set! class ((fixclass mclass classdisp) 'basicNew))
+                       (class 'objectAt:put: 0 super)
+                       (class 'objectAt:put: 1 (dictionary 'basicNew))
+                       (class 'objectAt:put: 2 instlayout)
+                       (class 'objectAt:put: 3 name)
                        (let ((class (fixclass class objdisp)))
-                          ((mclass 'OBJECT_AT 1) 'OBJECT_AT_PUT 'NEW
+                          ((mclass 'objectAt: 1) 'objectAt:put: 'basicNew
                                 (method (s)
-                                    (class 'NEW))))
-                       (mclass 'OBJECT_AT_PUT 3 class)
+                                    (class 'basicNew))))
+                       (mclass 'objectAt:put: 3 class)
                        class)))
 
             (subclass
                 (method (s name instlayout clslayout)
-                    (metaclass 'SYMBOL_new name (getself s) instlayout clslayout))))
+                    (metaclass 'class:super:instvars:classvars:
+                        name (getself s) instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
-        (metaclass 'SET_DELEGATE (metaclass_class 'NEW))
-        (metaclass_class 'OBJECT_AT_PUT 1 mcdict)
+        (metaclass 'delegate: (metaclass_class 'basicNew))
+        (metaclass_class 'objectAt:put: 1 mcdict)
+
+        ;(display "STAGE 3\\n")
 
        ; For now we ensure that all subclasses of Object get the correct
        ; layout by faking the layout of the first Metaclass. This will later
        ; be overwritten and the instvars will be spread over "Class class"
        ; and "ClassBehaviour class"
-        (metaclass_class 'OBJECT_AT_PUT 2
-            (vector 'SYMBOL_super
-                    'SYMBOL_methodDict
-                    'SYMBOL_layout
-                    'SYMBOL_name))
+        (metaclass_class 'objectAt:put: 2
+            (vector 'superclass
+                    'methodDictionary
+                    'layout
+                    'name))
       
        ; Fill in info about Metaclasses
-        (metaclass 'OBJECT_AT_PUT 1 (dictionary 'NEW))
-        (metaclass 'OBJECT_AT_PUT 2 (vector 'SYMBOL_instance))
-        (metaclass 'OBJECT_AT_PUT 3 "Metaclass")
-        (mcdict 'OBJECT_AT_PUT 'SYMBOL_new newclass)
+        (metaclass 'objectAt:put: 1 (dictionary 'basicNew))
+        (metaclass 'objectAt:put: 2 (vector 'instance))
+        (metaclass 'objectAt:put: 3 'Metaclass)
+        (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
 
        ; Install the accessor methods
-        ((methoddict metaclass) 'OBJECT_AT_PUT 'SYMBOL_name mclsname)
-        ((methoddict metaclass) 'OBJECT_AT_PUT 'SYMBOL_instance mclsinstance)
+        ((methoddict metaclass) 'objectAt:put: 'name mclsname)
+        ((methoddict metaclass) 'objectAt:put: 'instance mclsinstance)
         (let ((metaclass metaclass))
-            (mcdict 'OBJECT_AT_PUT 'NEW
-                    (method (s) (metaclass 'NEW))))
+            (mcdict 'objectAt:put: 'basicNew
+                    (method (s) (metaclass 'basicNew))))
 
        ; Fill in info about Objects
-        (object_class 'OBJECT_AT_PUT 0 metaclass_class)
-        (object_class 'OBJECT_AT_PUT 1 (dictionary 'NEW))
-        (object_class 'OBJECT_AT_PUT 2 (vector))
-        (object_class 'OBJECT_AT_PUT 3 object)
-        (object 'OBJECT_AT_PUT 1 (dictionary 'NEW))
-        (object 'OBJECT_AT_PUT 2 (vector))
-        (object 'OBJECT_AT_PUT 3 "Object")
+        (object_class 'objectAt:put: 0 metaclass_class)
+        (object_class 'objectAt:put: 1 (dictionary 'basicNew))
+        (object_class 'objectAt:put: 2 (vector))
+        (object_class 'objectAt:put: 3 object)
+        (object 'objectAt:put: 1 (dictionary 'basicNew))
+        (object 'objectAt:put: 2 (vector))
+        (object 'objectAt:put: 3 'Object)
 
        ; Install DNU + test methods
-        ((methoddict object_class) 'OBJECT_AT_PUT 'SYMBOL_subclass subclass)
-        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_print oprint)
-        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_doesNotUnderstand
+        ((methoddict object_class) 'objectAt:put:
+            'subclass:instvars:classvars: subclass)
+        ((methoddict object) 'objectAt:put: 'print oprint)
+        ((methoddict object) 'objectAt:put: 'doesNotUnderstand:in:with:
                                                doesNotUnderstand)
-        ((methoddict object) 'OBJECT_AT_PUT 'SYMBOL_class
-                                              (method (s) ((getself s) 'DELEGATE)))
-        (let ((o (ifixed 'DISPATCH_DELEGATE_SIZE
-                                objdisp object 0)))
-            ((methoddict object_class) 'OBJECT_AT_PUT 'NEW
-                (method (s) (o 'NEW))))
-                               
-       ; Create ClassBehaviour and Class
-        (let* ((classBehaviour (metaclass 'SYMBOL_new
-                                          "ClassBehaviour" object
-                                          (vector 'SYMBOL_super
-                                                  'SYMBOL_methodDict
-                                                  'SYMBOL_layout)
-                                          (vector)))
-                (class (metaclass 'SYMBOL_new
-                                  "Class" classBehaviour
-                                  (vector 'SYMBOL_name)
-                                  (vector))))
+        ((methoddict object) 'objectAt:put: 'class
+            (method (s) ((getself s) 'delegate)))
 
-            ((methoddict class) 'OBJECT_AT_PUT 'SYMBOL_name clsname)
-            ((methoddict classBehaviour) 'OBJECT_AT_PUT 'SYMBOL_methodDict
-                (method (s) ((getself s) 'OBJECT_AT 1)))
+        ((methoddict metaclass_class) 'objectAt:put:
+            'new (method (s) ((getself s) 'basicNew)))
+
+        (let ((o (ifixed 'dispatch:delegate:size: objdisp object 0)))
+            ((methoddict object_class) 'objectAt:put: 'basicNew
+                (method (s) (o 'basicNew))))
+
+       ; Create ClassBehaviour and Class
+        (let* ((classBehaviour (object 'subclass:instvars:classvars:
+                                       'ClassBehaviour
+                                          (vector 'superclass
+                                                  'methodDictionary
+                                                  'layout)
+                                          (vector)))
+                (class (classBehaviour 'subclass:instvars:classvars:
+                                        'Class
+                                        (vector 'name)
+                                        (vector))))
+
+            ;(display "STAGE 4\\n")
+
+            ((methoddict class) 'objectAt:put: 'name clsname)
+            ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
+                (method (s) ((getself s) 'objectAt: 1)))
 
             ; Now fix all bootstrap "dangling" pointers
-            (metaclass       'OBJECT_AT_PUT 0 classBehaviour)
-            (metaclass_class 'OBJECT_AT_PUT 0 class)
-            (metaclass_class 'OBJECT_AT_PUT 2 (vector))
-            (object_class    'OBJECT_AT_PUT 0 class)
+            (metaclass       'objectAt:put: 0 classBehaviour)
+            (metaclass_class 'objectAt:put: 0 class)
+            (metaclass_class 'objectAt:put: 2 (vector))
+            (object_class    'objectAt:put: 0 class)
             
             ; Remove the ifixed indirection for tests.
-            (set! metaclass (metaclass_class 'DELEGATE))
-            (metaclass_class 'OBJECT_AT_PUT 3 metaclass)
+            (set! metaclass (metaclass_class 'delegate))
+            (metaclass_class 'objectAt:put: 3 metaclass)
+            ((methoddict metaclass_class) 'objectAt:put:
+                'new null)
+
+            ((methoddict object) 'objectAt:put:
+                'initialize (method (s) (getself s)))
+
+            ((methoddict classBehaviour) 'objectAt:put:
+                'new (method (s)
+                        (((getself s) 'basicNew) 'initialize)))
+
+            ;(display "Minimal system ready!\\n")
+
+
 
             ;(display "TESTS")
-            (display (eq? (object 'SYMBOL_super) null))
-            (display (eq? (object_class 'SYMBOL_super) class))
-            (display (eq? (class 'SYMBOL_super) classBehaviour))
-            (display (eq? ((class 'DELEGATE) 'SYMBOL_super)
-                          (classBehaviour 'DELEGATE)))
-            (display (eq? (metaclass_class 'SYMBOL_super) class))
-            (display (eq? (metaclass 'SYMBOL_super) classBehaviour))
-            (display (eq? (classBehaviour 'SYMBOL_super) object))
-            (display (eq? ((classBehaviour 'DELEGATE) 'SYMBOL_super)
-                          object_class))
-            (display (eq? (object_class 'DELEGATE) metaclass))
-            (display (eq? ((metaclass 'DELEGATE) 'DELEGATE) metaclass))
+            ;(display (eq? (object 'superclass) null))
+            ;(display (eq? (object_class 'superclass) class))
+            ;(display (eq? (class 'superclass) classBehaviour))
+            ;(display (eq? ((class 'delegate) 'superclass)
+            ;              (classBehaviour 'delegate)))
+            ;(display (eq? (metaclass_class 'superclass) class))
+            ;(display (eq? (metaclass 'superclass) classBehaviour))
+            ;(display (eq? (classBehaviour 'superclass) object))
+            ;(display (eq? ((classBehaviour 'delegate) 'superclass)
+            ;              object_class))
+            ;(display (eq? (object_class 'delegate) metaclass))
+            ;(display (eq? ((metaclass 'delegate) 'delegate) metaclass))
 
-            ((object 'NEW) 'SYMBOL_print)
-            (object 'SYMBOL_print)
-            (metaclass 'SYMBOL_instance)
-            (object_class 'NEW) ; Metaclasses don't have a NEW. The "NEW" is
-                                ; only generated on the spot to create its
-                                ; single instance in "newclass"
-            ((class 'NEW) 'SYMBOL_print)
+            ((object 'basicNew) 'print)
+            (object 'print)
+            (metaclass 'instance)
+            (object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
+                                     ; only generated on the spot to create its
+                                     ; single instance in "newclass"
+            ((class 'basicNew) 'print)
+
+            (display "STAGE 5\\n")
+
         
             (let* ((ev (vector))
-                   (magnitude (object 'SYMBOL_subclass "Magnitude" ev ev))
-                   (number (magnitude 'SYMBOL_subclass "Number" ev ev))
-                   (integer (number 'SYMBOL_subclass   "Integer" ev ev))
-                   (boolean (object 'SYMBOL_subclass   "Boolean" ev ev))
-                   (true  (boolean 'SYMBOL_subclass "True"  ev ev))
-                   (false (boolean 'SYMBOL_subclass "False" ev ev))
-                   (collection (object 'SYMBOL_subclass "Collection" ev ev))
-                   (sqcollection (collection 'SYMBOL_subclass
-                                      "SequenceableCollection" ev ev))
-                   (acollection (sqcollection 'SYMBOL_subclass
-                                      "ArrayedCollection" ev ev))
-                   (ocollection (sqcollection 'SYMBOL_subclass
-                                      "OrderedCollection" (vector 1 2 3) ev))
+                   (magnitude (object 'subclass:instvars:classvars: 'Magnitude ev ev))
+                   (number (magnitude 'subclass:instvars:classvars: 'Number ev ev))
+                   (integer (number 'subclass:instvars:classvars:   'Integer ev ev))
+                   (boolean (object 'subclass:instvars:classvars:   'Boolean ev ev))
+                   (true  (boolean 'subclass:instvars:classvars:    'True  ev ev))
+                   (false (boolean 'subclass:instvars:classvars:    'False ev ev))
+                   (collection (object 'subclass:instvars:classvars: 'Collection ev ev))
+                   (sqcollection (collection 'subclass:instvars:classvars:
+                                      'SequenceableCollection ev ev))
+                   (acollection (sqcollection 'subclass:instvars:classvars:
+                                      'ArrayedCollection ev ev))
+                   (ocollection (sqcollection 'subclass:instvars:classvars:
+                                      'OrderedCollection (vector 1 2 3) ev))
                                                           ; XXX todo :! 
-                   (ary (acollection 'SYMBOL_subclass "Array" ev ev)))
+                   (ary (acollection 'subclass:instvars:classvars: 'Array ev ev)))
 
-                ((integer 'SYMBOL_methodDict)
-                    'OBJECT_AT_PUT 'SYMBOL_bind
+                ((integer 'methodDictionary)
+                    'objectAt:put: 'testMethod
                     (method (s) (display "IN SELF!\\n")
-                                ((getsuper s) (vector 'SYMBOL_bind))))
-                ((magnitude 'SYMBOL_methodDict)
-                    'OBJECT_AT_PUT 'SYMBOL_bind
+                                ((getsuper s) (vector 'testMethod))))
+                ((magnitude 'methodDictionary)
+                    'objectAt:put: 'testMethod
                     (method (s) (display "In SUPER!!\\n")))
 
-                ((integer 'NEW) 'SYMBOL_bind)
+                ((integer 'basicNew) 'testMethod)
 
                 (vector magnitude number integer boolean true false collection
                         sqcollection acollection ocollection ary)

@@ -538,6 +538,8 @@ SETUP(test_eval_nested_function)
     assert(number_value(result.number) == 42);
 }
 
+object SYMBOL_doesNotUnderstand;
+
 object create_class_dispatch() {
 /* Code generated from:
 (dispatch (self env args)
@@ -551,6 +553,7 @@ object create_class_dispatch() {
                         (loop (class 'OBJECT_AT 0))
                         (method 'APPLY_IN args env)))))))
 */
+define_symbol(SYMBOL_doesNotUnderstand, "DNU");
 object null         = (object)make_iconst((object)fools_system->nil);
 object ivar_3_self = (object)make_ivar("self");
 object ivar_4_env = (object)make_ivar("env");

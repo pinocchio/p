@@ -1,4 +1,5 @@
 #include <system.h>
+#include <scheme/symbols.h>
 #include <thread.h>
 #include <print.h>
 
@@ -137,6 +138,8 @@ void iscoped_class_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, NEW_SIZE, iscoped_class_new);
+    printf("expected: %p given %p maybe %p\n", NEW_SIZE.pointer,
+selector.pointer, SYMBOLnew_col_size_col_);
     doesnotunderstand("iscoped_class", selector);
 }
 
