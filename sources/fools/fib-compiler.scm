@@ -47,7 +47,7 @@
                 (let loop ((class class))
                     (if (eq? class null)
                         (if (eq? msg 'doesNotUnderstand:in:with:)
-                             (display "ERROR Received DNU!")
+                             (display "ERROR Received DNU!\\n")
                              (self 'doesNotUnderstand:in:with: msg env args))
                         (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
@@ -213,9 +213,9 @@
 
             ; Now fix all bootstrap "dangling" pointers
             (metaclass       'objectAt:put: 0 classBehaviour)
-            (metaclass_class 'objectAt:put: 0 class)
-            (metaclass_class 'objectAt:put: 2 (vector))
             (object_class    'objectAt:put: 0 class)
+            (metaclass_class 'objectAt:put: 0 (classBehaviour 'class))
+            (metaclass_class 'objectAt:put: 2 (vector))
             
             ; Remove the ifixed indirection for tests.
             (set! metaclass (metaclass_class 'delegate))
