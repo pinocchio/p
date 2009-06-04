@@ -59,6 +59,7 @@ nil_object make_nil() {
 }
 
 native_object make_native(transfer_target native) {
+    // Natives don't need a header, so we just allocate what we need.
     native_object result    = (native_object)FOOLS_ALLOC(sizeof(struct native));
     result->target          = (object)native;
     return result;
