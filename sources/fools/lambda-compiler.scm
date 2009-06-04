@@ -319,12 +319,14 @@ extravars))))))))
                          "));\n") name '())))
 
 (define (transform-string expression vars)
-  (let ((name (make-var-name "string" 'constant)))
+  (let ((name (make-var-name "string" 'constant))
+        (os (open-output-string)))
+    (write expression os)
     (list (string-append "object "
                          name
-                         " = (object)make_iconst((object)make_string(\""
-                         expression
-                         "\"));\n") name '())))
+                         " = (object)make_iconst((object)make_string("
+                        (get-output-string os)
+                         "));\n") name '())))
 
 (define (transform-symbol expression vars)
   (let ((binding (assoc expression vars)))

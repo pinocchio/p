@@ -31,6 +31,7 @@ struct array;
 struct dict;
 struct nil;
 struct native;
+struct native_class;
 struct context;
 
 struct ilist;
@@ -58,6 +59,7 @@ typedef struct array*            array_object;
 typedef struct dict*             dict_object;
 typedef struct nil*              nil_object;
 typedef struct native*           native_object;
+typedef struct native_class*     native_class_object;
 typedef struct context*          context_object;
 typedef void**                   pointer;
 
@@ -83,6 +85,7 @@ typedef union {
     fools_object        fools;
     nil_object          nil;
     native_object       native;
+    native_class_object native_class;
     context_object      context;
     env_object          env;
     transfer_target     target;
@@ -120,7 +123,12 @@ struct env {
 struct nil { };
 
 struct native {
-    transfer_target target;
+    object          target;
+};
+
+struct native_class {
+    object          target;
+    object          meta;
 };
 
 struct context {
@@ -184,6 +192,7 @@ extern nil_object               make_nil();
 extern context_object           make_context(object self, int size);
 extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
+extern native_class_object      make_native_class(transfer_target dispatch);
 
 extern int              inline number_value(number_object number);
 extern int              inline array_size(array_object array);

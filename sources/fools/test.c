@@ -278,7 +278,7 @@ SETUP(test_new_iscoped)
     iscoped_object iscope = object_at(result.object, 0).iscoped;
 
     object level_shifter = header(result.pointer);
-    assert(level_shifter.native->target == &shift_level);
+    assert(level_shifter.native->target.target == &shift_level);
 
     assert(pheader(iscope) == fools_system->iscoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);

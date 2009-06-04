@@ -41,7 +41,7 @@ object SET_DELEGATE;
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)
 
-#define wrap_dispatcher(dispatch) (object)make_native(dispatch)
+#define wrap_dispatcher(dispatch) (object)make_native_class(dispatch)
 
 #define define_symbol(name, value)\
     name = (object)make_string(value);

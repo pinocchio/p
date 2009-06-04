@@ -7,6 +7,8 @@
 ;            1
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
+
+
 ; bootstrap all unused symbols needed for the VM
 (vector 'eval 'store:at:in: 'subScope:key:
         'parent: 'parent 'new:size: 'iapply:
@@ -21,12 +23,12 @@
         (method (s msg env args)
             (display "Message not understood: ")
             (display msg)
-            (display "\\n")
+            (display "\n")
             null))
       (oprint (method (s)
                 (display "Instance of: ")
                 (display (((getself s) 'delegate) 'name))
-                (display "\\n")
+                (display "\n")
               ))
       (clsname (method (s)
                 ((getself s) 'objectAt: 3)))
@@ -43,11 +45,11 @@
                          (class (self 'delegate)))
                 ;(display "LOOKUP: ")
                 ;(display msg)
-                ;(display "\\n")
+                ;(display "\n")
                 (let loop ((class class))
                     (if (eq? class null)
                         (if (eq? msg 'doesNotUnderstand:in:with:)
-                             (display "ERROR Received DNU!\\n")
+                             (display "ERROR Received DNU!\n")
                              (self 'doesNotUnderstand:in:with: msg env args))
                         (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
@@ -61,7 +63,7 @@
                                                       (args 'objectAt: 0)
                                                       (class 'superclass)))))
                                     (amethod 'apply:in: args env))))))))))
-    ;(display "STAGE 1\\n")
+    ;(display "STAGE 1\n")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
@@ -78,7 +80,7 @@
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    ;(display "STAGE 2\\n")
+    ;(display "STAGE 2\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
@@ -143,7 +145,7 @@
         (metaclass 'delegate: (metaclass_class 'basicNew))
         (metaclass_class 'objectAt:put: 1 mcdict)
 
-        ;(display "STAGE 3\\n")
+        ;(display "STAGE 3\n")
 
        ; For now we ensure that all subclasses of Object get the correct
        ; layout by faking the layout of the first Metaclass. This will later
@@ -205,7 +207,7 @@
                                         (vector 'name)
                                         (vector))))
 
-            ;(display "STAGE 4\\n")
+            ;(display "STAGE 4\n")
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
@@ -230,7 +232,7 @@
                 'new (method (s)
                         (((getself s) 'basicNew) 'initialize)))
 
-            ;(display "Minimal system ready!\\n")
+            ;(display "Minimal system ready!\n")
 
             ;(display "TESTS")
             ;(display (eq? (object 'superclass) null))
@@ -246,15 +248,15 @@
             ;(display (eq? (object_class 'delegate) metaclass))
             ;(display (eq? ((metaclass 'delegate) 'delegate) metaclass))
 
-            ((object 'basicNew) 'print)
+            ((object 'new) 'print)
             (object 'print)
             (metaclass 'instance)
             (object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
                                      ; only generated on the spot to create its
                                      ; single instance in "newclass"
-            ((class 'basicNew) 'print)
+            ((class 'new) 'print)
 
-            ;(display "STAGE 5\\n")
+            ;(display "STAGE 5\n")
 
         
             (let* ((ev (vector))
@@ -276,11 +278,11 @@
 
                 ((integer 'methodDictionary)
                     'objectAt:put: 'testMethod
-                    (method (s) (display "IN SELF!\\n")
+                    (method (s) (display "IN SELF!\n")
                                 ((getsuper s) (vector 'testMethod))))
                 ((magnitude 'methodDictionary)
                     'objectAt:put: 'testMethod
-                    (method (s) (display "In SUPER!!\\n")))
+                    (method (s) (display "In SUPER!!\n")))
 
                 ((integer 'basicNew) 'testMethod)
 

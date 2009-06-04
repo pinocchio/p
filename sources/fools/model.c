@@ -59,8 +59,14 @@ nil_object make_nil() {
 }
 
 native_object make_native(transfer_target native) {
-    native_object result    = NEW(struct native);
-    result->target          = native;
+    native_object result    = (native_object)FOOLS_ALLOC(sizeof(struct native));
+    result->target          = (object)native;
+    return result;
+}
+
+native_class_object make_native_class(transfer_target dispatch) {
+    native_class_object result  = NEW(struct native_class);
+    result->target              = (object)dispatch;
     return result;
 }
 
@@ -115,7 +121,7 @@ void inline array_at_put(array_object array, int index, object new_value) {
 }
 
 transfer_target inline native_target(native_object native) {
-    return native->target;
+    return native->target.target;
 }
 
 int inline string_equals(string_object string1, string_object string2) {
