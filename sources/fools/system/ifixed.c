@@ -16,7 +16,7 @@ static void ifixed_delegate() {
 }
 
 static void ifixed_at_do() {
-    debug("an_ifixed>>at\n");
+    debug("an_ifixed>>at:\n");
     context_object context = get_context();
 
     object self = context->self;
@@ -32,7 +32,7 @@ static void ifixed_at_do() {
     assert(index < size);
 
     return_from_context(context, object_at(self.object, index));
-    debug("ret>>an_ifixed>>at\n");
+    debug("ret>>an_ifixed>>at:\n");
 }
 
 static void inline ifixed_at() {
@@ -55,7 +55,7 @@ static void ifixed_at_put_do() {
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     int size = number_value(ifixed->size.number);
-    debug("an_ifixed>>atput (%i of %i)\n", index, size);
+    debug("an_ifixed>>at:put: (%i of %i)\n", index, size);
 
     assert(0 <= index);
     assert(index < size);
@@ -64,7 +64,7 @@ static void ifixed_at_put_do() {
     object_at_put(self.object, index, value);
 
     pop_context();
-    debug("ret>>an_ifixed>>atput\n");
+    debug("ret>>an_ifixed>>at:put:\n");
 }
 
 static void inline ifixed_at_put() {
@@ -92,13 +92,7 @@ void ifixed_dispatch() {
     debug("ret>>ifixedShiftLevel\n");
 }
 
-static void inline ifixed_size() {
-    debug("ifixed>>size\n");
-    context_object context = get_context();
-    ifixed_object ifixed = context->self.ifixed;
-    return_from_context(context, ifixed->size);
-    debug("ret>>ifixed>>size\n");
-}
+accessor_for(ifixed, size)
 
 static object inline ifixed_inst(ifixed_object ifixed) {
     return (object)ifixed;
@@ -189,7 +183,7 @@ void ifixed_stub_class_dispatch() {
     doesnotunderstand("ifixed_stub_class", selector);
 }
 
-// ifixed_class>>dispatch:delegate:size:
+// ifixed_stub_class>>dispatch:size:
 static void ifixed_stub_class_new_do() {
     debug("ifixed_stubcls>>dispatch:size:\n");
     context_object ifixed_context = get_context();
@@ -233,7 +227,6 @@ object make_class(object dispatch, object delegate, object size,
     return (object)result;
 }
 
-// Object creation
 object make_stub_class(object dispatch, object size,
                        transfer_target cdispatch) {
     new_instance(ifixed);

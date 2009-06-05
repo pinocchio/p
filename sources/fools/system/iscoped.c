@@ -87,14 +87,7 @@ static void inline iscoped_apply_in() {
 }
 
 // iscoped>>scope
-static void inline iscoped_scope() {
-    debug("iscoped>>scope\n");
-    context_object receiver = get_context();
-    // arguments at: 0 -> selector
-    iscoped_object iscoped = receiver->self.iscoped;
-    return_from_context(receiver, iscoped->scope);
-    debug("ret>>iscoped>>scope\n");
-}
+accessor_for(iscoped, scope)
 
 void iscoped_shift() {
     context_object context = get_context();
@@ -134,8 +127,6 @@ void iscoped_class_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, NEW_SIZE, iscoped_class_new);
-    //printf("expected: %p given %p maybe %p\n", NEW_SIZE.pointer,
-    //       selector.pointer, SYMBOLnew_col_size_col_);
     doesnotunderstand("iscoped_class", selector);
 }
 

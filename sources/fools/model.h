@@ -23,6 +23,14 @@
 #define pheader(o) header(o).pointer
 #define ntarget(o) native_target((o).native)
 
+#define accessor_for(cls, element)\
+static void inline cls##_##element() {\
+    debug(#cls">>"#element"\n");\
+    context_object context = get_context();\
+    return_from_context(context, context->self.cls->element);\
+    debug("ret>>"#cls">>"#element"\n");\
+}
+
 struct env;
 struct object_object;
 struct string;
