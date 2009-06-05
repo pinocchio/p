@@ -660,7 +660,8 @@ SETUP(test_make_ifixed)
     assert(number_value(result.ifixed->size.number) == 5);
     assert(result.ifixed->delegate.nil == fools_system->nil);
 
-    assert((pointer)*PINC(result.ifixed->interp.pointer) == result.pointer);
+    //assert((pointer)*PINC(result.ifixed->interp.pointer) == result.pointer);
+    
 }
 
 SETUP(test_ifixed_natives)

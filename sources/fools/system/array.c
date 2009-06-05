@@ -82,5 +82,6 @@ void array_class_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, SIZED, iarray_new);
-    doesnotunderstand("array class", selector);
+    /* Other messages sent bounce off to the delegate. */
+    new_target(context, context->self.ifixed->delegate);
 }

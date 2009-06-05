@@ -17,9 +17,10 @@ extern object make_stub_class(object dispatch,
 
 
 struct ifixed {
+    object          dispatch;
     object          delegate;
     object          size;
-    object          interp;
+    object          cdisp;
 };
 
 #endif // SYSTEM_ISCOPED_H

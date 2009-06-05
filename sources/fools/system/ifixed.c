@@ -1,16 +1,41 @@
 #include <system.h>
 #include <thread.h>
 
-void ifixed_dispatcher() {
-    debug("an_ifixed>>dispatcher\n");
+static ifixed_object inline ifixed_descr(object inst) {
+    return (ifixed_object)(pheader(inst.pointer) - 3);
+}
+
+void inline fallback_shift(context_object context) {
+    object env = context->env;
+    object self = context->self;
+
+    ifixed_object ifixed = ifixed_descr(self);
+    object dispatch = ifixed->dispatch;
+    
+    int argsize = context_size(context);
+    array_object args = make_array(argsize);
+    
+    for (--argsize; 0 <= argsize; argsize--) {
+        raw_array_at_put(args, argsize, argument_at(context, argsize));
+    }
+
+    pop_context();
+    context = make_context(dispatch, 3);
+    context->env = env;
+    set_argument(context, 0, self);
+    set_argument(context, 1, env);
+    set_argument(context, 2, (object)args);
+}
+
+static void ifixed_delegate() {
+    debug("an_ifixed>>delegate\n");
     context_object context = get_context();
     object self = context->self;
-    object interp = header(self.pointer);
-    object ifixed = (object)(pointer)*PINC(interp.pointer);
+    ifixed_object ifixed = ifixed_descr(self);
 
-    set_argument(return_context(context), 1, ifixed.ifixed->delegate);
+    set_argument(return_context(context), 1, ifixed->delegate);
     pop_context();
-    debug("ret>>an_ifixed>>dispatcher\n");
+    debug("ret>>an_ifixed>>delegate\n");
 }
 
 static void ifixed_at_do() {
@@ -18,8 +43,7 @@ static void ifixed_at_do() {
     context_object context = get_context();
 
     object self = context->self;
-    object interp = header(self.pointer);
-    ifixed_object ifixed = (ifixed_object)*PINC(interp.pointer);
+    ifixed_object ifixed = ifixed_descr(self);
 
     object idx = argument_at(context, 1);
     // XXX breaks encapsulation.
@@ -49,8 +73,7 @@ static void ifixed_at_put_do() {
     assert_argsize(context, 3);
 
     object self = context->self;
-    object interp = header(self.pointer);
-    ifixed_object ifixed = (ifixed_object)*PINC(interp.pointer);
+    ifixed_object ifixed = ifixed_descr(self);
 
     object idx = argument_at(context, 1);
     // XXX breaks encapsulation.
@@ -86,7 +109,7 @@ void ifixed_dispatch() {
 
     if (context_size(context) >= 1) {
         object selector = message(context);
-        if_selector(selector, DELEGATE,         ifixed_dispatcher);
+        if_selector(selector, DELEGATE,         ifixed_delegate);
         if_selector(selector, OBJECT_AT,        ifixed_at);
         if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
     }
@@ -105,6 +128,10 @@ static void inline ifixed_size() {
     debug("ret>>ifixed>>size\n");
 }
 
+static object inline ifixed_inst(ifixed_object ifixed) {
+    return (object)((pointer)ifixed + 3);
+}
+
 static void inline ifixed_new() {
     debug("ifixed>>new\n");
     // XXX breaking encapsulation of the number. should
@@ -112,7 +139,7 @@ static void inline ifixed_new() {
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
     int size = number_value(ifixed->size.number);
-    object_object instance = make_object(size, ifixed->interp);
+    object_object instance = make_object(size, ifixed_inst(ifixed));
     set_argument(return_context(context), 1, (object)instance);
     pop_context();
     debug("ret>>ifixed>>new\n");
@@ -202,9 +229,6 @@ static void ifixed_stub_class_new_do() {
             argument_at(ifixed_context, 2),  // size
             &ifixed_dispatch);
 
-    // XXX this breaks the ifixed_class! broken semantics!
-    //header(ifixed.pointer) = fools_system->ifixed_stub_class;
-
     set_argument(return_context(ifixed_context), 1, ifixed);
     debug("ret>>ifixed_stubcls>>dispatch:size:\n");
     pop_context();
@@ -234,10 +258,9 @@ object make_class(object dispatch, object delegate, object size,
                   transfer_target cdispatch) {
     new_instance(ifixed);
     result->delegate        = delegate;
+    result->dispatch        = dispatch;
     result->size            = size;
-    result->interp          = (object)make_object(2, dispatch);
-    object_at_put(result->interp.object, 0, (object)cdispatch);
-    object_at_put(result->interp.object, 1, (object)result);
+    result->cdisp           = (object)cdispatch;
     return (object)result;
 }
 
@@ -245,10 +268,9 @@ object make_class(object dispatch, object delegate, object size,
 object make_stub_class(object dispatch, object size,
                        transfer_target cdispatch) {
     new_instance(ifixed);
-    header(result)  = fools_system->ifixed_stub_class;
+    header(result)          = fools_system->ifixed_stub_class;
+    result->dispatch        = dispatch;
     result->size            = size;
-    result->interp          = (object)make_object(2, dispatch);
-    object_at_put(result->interp.object, 0, (object)cdispatch);
-    object_at_put(result->interp.object, 1, (object)result);
+    result->cdisp           = (object)cdispatch;
     return (object)result;
 }
