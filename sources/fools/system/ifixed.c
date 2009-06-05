@@ -11,8 +11,7 @@ static void ifixed_delegate() {
     object self = context->self;
     ifixed_object ifixed = ifixed_descr(self);
 
-    set_argument(return_context(context), 1, ifixed->delegate);
-    pop_context();
+    return_from_context(context, ifixed->delegate);
     debug("ret>>an_ifixed>>delegate\n");
 }
 
@@ -31,9 +30,8 @@ static void ifixed_at_do() {
 
     assert(0 <= index);
     assert(index < size);
-    
-    set_argument(return_context(context), 1, object_at(self.object, index));
-    pop_context();
+
+    return_from_context(context, object_at(self.object, index));
     debug("ret>>an_ifixed>>at\n");
 }
 
@@ -80,9 +78,7 @@ static void inline ifixed_at_put() {
 }
 
 void ifixed_dispatch() {
-
     debug("ifixedShiftLevel\n");
-    
     context_object context = get_context();
 
     if (context_size(context) >= 1) {
@@ -93,7 +89,6 @@ void ifixed_dispatch() {
     }
 
     fallback_shift(context);
-
     debug("ret>>ifixedShiftLevel\n");
 }
 
@@ -101,8 +96,7 @@ static void inline ifixed_size() {
     debug("ifixed>>size\n");
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
-    set_argument(return_context(context), 1, ifixed->size);
-    pop_context();
+    return_from_context(context, ifixed->size);
     debug("ret>>ifixed>>size\n");
 }
 
@@ -118,8 +112,7 @@ static void inline ifixed_new() {
     ifixed_object ifixed = context->self.ifixed;
     int size = number_value(ifixed->size.number);
     object_object instance = make_object(size, ifixed_inst(ifixed));
-    set_argument(return_context(context), 1, (object)instance);
-    pop_context();
+    return_from_context(context, (object)instance);
     debug("ret>>ifixed>>new\n");
 }
 
@@ -144,9 +137,8 @@ static void ifixed_class_new_do() {
             argument_at(ifixed_context, 3),  // size
             &ifixed_dispatch);
 
-    set_argument(return_context(ifixed_context), 1, ifixed);
+    return_from_context(ifixed_context, ifixed);
     debug("ret>>ifixedcls>>dispatch:delegate:size:\n");
-    pop_context();
 }
 
 // ifixed_class>>dispatch:delegate:size:(pre)
@@ -207,9 +199,8 @@ static void ifixed_stub_class_new_do() {
             argument_at(ifixed_context, 2),  // size
             &ifixed_dispatch);
 
-    set_argument(return_context(ifixed_context), 1, ifixed);
+    return_from_context(ifixed_context, ifixed);
     debug("ret>>ifixed_stubcls>>dispatch:size:\n");
-    pop_context();
 }
 
 // ifixed_stub_class>>dispatch:size:(pre)

@@ -45,3 +45,8 @@ object inline get_stk_return() {
 context_object inline get_context() {
     return stk_idx;
 }
+
+void inline return_from_context(context_object context, object value) {
+    set_argument(return_context(context), 1, value);
+    pop_context();
+}

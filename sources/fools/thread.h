@@ -10,7 +10,6 @@ extern int inline empty_stack();
 extern object inline get_stk_return();
 extern context_object inline get_context();
 
-
-
+extern void inline return_from_context(context_object context, object value);
 
 #endif // THREAD_H

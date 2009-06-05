@@ -5,14 +5,9 @@
 static void inline iconst_eval() {
     context_object iconst_context = get_context();
     iconst_object iconst = iconst_context->self.iconst;
-
     debug("iconst>>eval %p\n", iconst);
-
-    set_argument(return_context(iconst_context), 1, iconst->constant);
-
+    return_from_context(iconst_context, iconst->constant);
     debug("ret>>iconst>>eval %p\n", iconst->constant.pointer);
-
-    pop_context();
 }
 
 void iconst_dispatch() {

@@ -3,8 +3,7 @@
 
 static void inline identity() {
     context_object context = get_context();
-    set_argument(return_context(context), 1, context->self);
-    pop_context();
+    return_from_context(context, context->self);
 }
 
 void string_dispatch() {

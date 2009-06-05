@@ -43,8 +43,7 @@ static void scheme##_##name##_##func_do() {\
     context_object context = get_context();\
     object result = func(argument_at(context, 0).type1,\
                          argument_at(context, 1).type2);\
-    set_argument(return_context(context), 1, result);\
-    pop_context();\
+    return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
 preval2(scheme##_##name);

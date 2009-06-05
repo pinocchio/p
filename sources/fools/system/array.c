@@ -10,8 +10,7 @@ void iarray_at_do() {
     int index = number_value(idx.number);
     debug("array>>at: %i\n", index);
 
-    set_argument(return_context(context), 1, array_at(array, index));
-    pop_context();
+    return_from_context(context, array_at(array, index));
     debug("ret>>array>>at:\n");
 }
 
@@ -48,8 +47,7 @@ void iarray_at_put() {
 static void inline iarray_size() {
     context_object context = get_context();
     object size = (object)make_number(context->self.array->size);
-    set_argument(return_context(context), 1, size);
-    pop_context();
+    return_from_context(context, size);
 }
 
 void array_dispatch() {
@@ -67,8 +65,7 @@ static void iarray_new_do() {
     // XXX breaks encapsulation
     int size = number_value(argument_at(context, 1).number);
     object result = (object)make_array(size);
-    set_argument(return_context(context), 1, result);
-    pop_context();
+    return_from_context(context, result);
 }
 
 static void inline iarray_new() {

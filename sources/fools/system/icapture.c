@@ -3,16 +3,10 @@
 
 // icapture>>eval:
 static void inline icapture_eval() {
-    context_object icapture_context = get_context();
-
+    context_object context = get_context();
     debug("icapture>>eval\n");
-
-    object dynamic_env = icapture_context->env;
-    set_argument(return_context(icapture_context), 1, dynamic_env);
-
-    debug("ret>>icapture>>eval %p\n", dynamic_env.pointer);
-
-    pop_context();
+    return_from_context(context, context->env);
+    debug("ret>>icapture>>eval %p\n", context->env.env);
 }
 
 void icapture_dispatch() {

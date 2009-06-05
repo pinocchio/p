@@ -15,9 +15,8 @@ static void inline env_fetch_from() {
         int index = number_value(argument_at(receiver, 1).number);
         debug("index: %i\n", index);
         object value = env_at(env, index);
-        set_argument(return_context(receiver), 1, value);
         debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
-        return pop_context();
+        return return_from_context(receiver, value);
     }
     if (env->parent.nil == fools_system->nil) {
         assert(NULL); // XXX should go to error-handler here.
@@ -63,11 +62,9 @@ static void inline env_subscope() {
     object key  = argument_at(receiver, 2);
 
     env_object new_env = make_env(key, env, size);
-    set_argument(return_context(receiver), 1, (object)new_env);
 
+    return_from_context(receiver, (object)new_env);
     debug("ret>>env>>subScope:key: %i, %p\n", size, new_env);
-
-    pop_context();
 }
 
 // env>>parent:
@@ -106,9 +103,8 @@ static void inline env_parent() {
     context_object receiver = get_context();
     // arguments at: 0 -> selector
     object env = receiver->self;
-    set_argument(return_context(receiver), 1, env.env->parent);
+    return_from_context(receiver, env.env->parent);
     debug("ret>>env>>parent\n");
-    pop_context();
 }
 
 void env_dispatch() {

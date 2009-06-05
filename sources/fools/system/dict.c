@@ -20,8 +20,7 @@ void dict_at_do() {
         }
     }
 
-    set_argument(return_context(context), 1, result);
-    pop_context();
+    return_from_context(context, result);
     debug("ret>>dict>>at: (result) %p\n", result.pointer);
 }
 
@@ -91,8 +90,7 @@ void dict_dispatch() {
 static void inline dict_new() {
     debug("dict>>new\n");
     context_object context = get_context();
-    set_argument(return_context(context), 1, (object)make_dict(2));
-    pop_context();
+    return_from_context(context, (object)make_dict(2));
     debug("ret>>dict>>new\n");
 }
 

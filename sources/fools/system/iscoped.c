@@ -92,8 +92,7 @@ static void inline iscoped_scope() {
     context_object receiver = get_context();
     // arguments at: 0 -> selector
     iscoped_object iscoped = receiver->self.iscoped;
-    set_argument(return_context(receiver), 1, iscoped->scope);
-    pop_context();
+    return_from_context(receiver, iscoped->scope);
     debug("ret>>iscoped>>scope\n");
 }
 
@@ -101,8 +100,7 @@ void iscoped_shift() {
     context_object context = get_context();
     object_object func = make_object(1, fools_system->level_shifter);
     object_at_put(func, 0, context->self);
-    set_argument(return_context(context), 1, (object)func);
-    pop_context();
+    return_from_context(context, (object)func);
 }
 
 void iscoped_dispatch() {
@@ -127,10 +125,8 @@ static void inline iscoped_class_new() {
             argument_at(iscope_context, 1),  // expression
             argument_at(iscope_context, 2)); // argsize
 
-    set_argument(return_context(iscope_context), 1, iscoped);
-
+    return_from_context(iscope_context, iscoped);
     debug("ret>>iscopecls>>new:size:\n");
-    pop_context();
 }
 
 void iscoped_class_dispatch() {
@@ -138,8 +134,8 @@ void iscoped_class_dispatch() {
     assert_argsize(context, 1);
     object selector = message(context);
     if_selector(selector, NEW_SIZE, iscoped_class_new);
-    printf("expected: %p given %p maybe %p\n", NEW_SIZE.pointer,
-selector.pointer, SYMBOLnew_col_size_col_);
+    //printf("expected: %p given %p maybe %p\n", NEW_SIZE.pointer,
+    //       selector.pointer, SYMBOLnew_col_size_col_);
     doesnotunderstand("iscoped_class", selector);
 }
 
