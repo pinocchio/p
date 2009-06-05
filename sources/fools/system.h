@@ -19,6 +19,7 @@
 #include <system/shift.h>
 #include <system/ifixed.h>
 #include <system/ival.h>
+#include <system/fallback.h>
 
 #include <system/array.h>
 #include <system/dict.h>

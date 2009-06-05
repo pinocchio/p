@@ -1,30 +1,8 @@
 #include <system.h>
 #include <thread.h>
 
-static ifixed_object inline ifixed_descr(object inst) {
-    return (ifixed_object)(pheader(inst.pointer) - 3);
-}
-
-void inline fallback_shift(context_object context) {
-    object env = context->env;
-    object self = context->self;
-
-    ifixed_object ifixed = ifixed_descr(self);
-    object dispatch = ifixed->dispatch;
-    
-    int argsize = context_size(context);
-    array_object args = make_array(argsize);
-    
-    for (--argsize; 0 <= argsize; argsize--) {
-        raw_array_at_put(args, argsize, argument_at(context, argsize));
-    }
-
-    pop_context();
-    context = make_context(dispatch, 3);
-    context->env = env;
-    set_argument(context, 0, self);
-    set_argument(context, 1, env);
-    set_argument(context, 2, (object)args);
+ifixed_object inline ifixed_descr(object inst) {
+    return (ifixed_object)pheader(inst.pointer);
 }
 
 static void ifixed_delegate() {
@@ -129,7 +107,7 @@ static void inline ifixed_size() {
 }
 
 static object inline ifixed_inst(ifixed_object ifixed) {
-    return (object)((pointer)ifixed + 3);
+    return (object)ifixed;
 }
 
 static void inline ifixed_new() {

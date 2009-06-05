@@ -42,6 +42,7 @@ struct ivar;
 struct iscoped;
 struct icapture;
 struct ifixed;
+struct fallback;
 
 typedef struct ilist*            ilist_object;
 typedef struct iassign*          iassign_object;
@@ -51,6 +52,7 @@ typedef struct ivar*             ivar_object;
 typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
 typedef struct ifixed*           ifixed_object;
+typedef struct fallback*         fallback_object;
 typedef struct env*              env_object;
 typedef struct object_object*    object_object;
 typedef struct string*           string_object;
@@ -77,6 +79,7 @@ typedef union {
     iscoped_object      iscoped;
     icapture_object     icapture;
     ifixed_object       ifixed;
+    fallback_object     fallback;
     object_object       object;
     string_object       string;
     number_object       number;
