@@ -72,8 +72,8 @@ fools_object bootstrap() {
     fools_system->icapture_class    = wrap_dispatcher(icapture_dispatch);
     fools_system->iscoped_class     = wrap_dispatcher(iscoped_dispatch);
     fools_system->iscoped_metaclass = wrap_dispatcher(iscoped_class_dispatch);
-    fools_system->ifixed_class      = wrap_dispatcher(ifixed_dispatch);
-    fools_system->ifixed_metaclass  = wrap_dispatcher(ifixed_class_dispatch);
+    fools_system->ifixed_class      = wrap_dispatcher(ifixed_class_dispatch);
+    fools_system->ifixed_metaclass  = wrap_dispatcher(ifixed_metaclass_dispatch);
     fools_system->ifixed_stub_metaclass  = wrap_dispatcher(ifixed_stub_class_dispatch);
     fools_system->env_class         = wrap_dispatcher(env_dispatch);
 

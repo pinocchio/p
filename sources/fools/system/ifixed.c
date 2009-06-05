@@ -78,7 +78,7 @@ static void inline ifixed_at_put() {
     debug("ret>>an_ifixed>>atput(pre)\n");
 }
 
-void ifixed_shift_level() {
+void ifixed_dispatch() {
 
     debug("ifixedShiftLevel\n");
     
@@ -91,24 +91,7 @@ void ifixed_shift_level() {
         if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
     }
 
-    object env = context->env;
-    object self = context->self;
-    object interp = header(self.pointer);
-    object dispatch = header(interp.pointer);
-    
-    int argsize = context_size(context);
-    array_object args = make_array(argsize);
-    
-    for (--argsize; 0 <= argsize; argsize--) {
-        raw_array_at_put(args, argsize, argument_at(context, argsize));
-    }
-
-    pop_context();
-    context = make_context(dispatch, 3);
-    context->env = env;
-    set_argument(context, 0, self);
-    set_argument(context, 1, env);
-    set_argument(context, 2, (object)args);
+    fallback_shift(context);
 
     debug("ret>>ifixedShiftLevel\n");
 }
@@ -135,7 +118,7 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-void ifixed_dispatch() {
+void ifixed_class_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
@@ -150,10 +133,11 @@ static void ifixed_class_new_do() {
     debug("ifixedcls>>dispatch:delegate:size:\n");
     context_object ifixed_context = get_context();
     object ifixed =
-        make_ifixed(
+        make_class(
             argument_at(ifixed_context, 1),  // dispatch
             argument_at(ifixed_context, 2),  // delegate
-            argument_at(ifixed_context, 3)); // size
+            argument_at(ifixed_context, 3),  // size
+            &ifixed_dispatch);
 
     set_argument(return_context(ifixed_context), 1, ifixed);
     debug("ret>>ifixedcls>>dispatch:delegate:size:\n");
@@ -172,7 +156,7 @@ static void ifixed_class_new() {
     debug("ret>>ifixedcls>>(pre)\n");
 }
 
-void ifixed_class_dispatch() {
+void ifixed_metaclass_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
@@ -185,7 +169,7 @@ static void ifixed_stub_set_delegate_do() {
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
     ifixed->delegate = argument_at(context, 1);
-    *pheader(ifixed) = &ifixed_dispatch;
+    *pheader(ifixed) = &ifixed_class_dispatch;
     pop_context();
     debug("ret>>ifixed_stub>>delegate:\n");
 }
@@ -213,10 +197,11 @@ static void ifixed_stub_class_new_do() {
     debug("ifixed_stubcls>>dispatch:size:\n");
     context_object ifixed_context = get_context();
     object ifixed =
-        make_ifixed(
+        make_class(
             argument_at(ifixed_context, 1),  // dispatch
             (object)fools_system->nil,       // delegate
-            argument_at(ifixed_context, 2)); // size
+            argument_at(ifixed_context, 2),  // size
+            &ifixed_dispatch);
 
     *pheader(ifixed.pointer) = &ifixed_stub_dispatch;
 
@@ -245,12 +230,13 @@ void ifixed_stub_class_dispatch() {
 }
 
 // Object creation
-object make_ifixed(object dispatch, object delegate, object size) {
+object make_class(object dispatch, object delegate, object size,
+                  transfer_target cdispatch) {
     new_instance(ifixed);
     result->delegate        = delegate;
     result->size            = size;
     result->interp          = (object)make_object(2, dispatch);
-    object_at_put(result->interp.object, 0, (object)(pointer)&ifixed_shift_level);
+    object_at_put(result->interp.object, 0, (object)cdispatch);
     object_at_put(result->interp.object, 1, (object)result);
     return (object)result;
 }

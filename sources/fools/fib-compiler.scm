@@ -63,7 +63,7 @@
                                                       (args 'objectAt: 0)
                                                       (class 'superclass)))))
                                     (amethod 'apply:in: args env))))))))))
-    ;(display "STAGE 1\n")
+    (display "STAGE 1\n")
     ; Classes have a more specific dispatch than objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
@@ -80,7 +80,7 @@
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    ;(display "STAGE 2\n")
+    (display "STAGE 2\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
@@ -145,7 +145,7 @@
         (metaclass 'delegate: (metaclass_class 'basicNew))
         (metaclass_class 'objectAt:put: 1 mcdict)
 
-        ;(display "STAGE 3\n")
+        (display "STAGE 3\n")
 
        ; For now we ensure that all subclasses of Object get the correct
        ; layout by faking the layout of the first Metaclass. This will later
@@ -207,7 +207,7 @@
                                         (vector 'name)
                                         (vector))))
 
-            ;(display "STAGE 4\n")
+            (display "STAGE 4\n")
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
@@ -256,7 +256,7 @@
                                      ; single instance in "newclass"
             ((class 'new) 'print)
 
-            ;(display "STAGE 5\n")
+            (display "STAGE 5\n")
 
         
             (let* ((ev (vector))

@@ -51,7 +51,7 @@ void print_object(object o) {
     test_type(ifixed);
     test_type(dict);
     test_type(env);
-    if (*pheader(o.pointer) == &ifixed_shift_level) {
+    if (*pheader(o.pointer) == &ifixed_dispatch) {
         printf("an object at: %p\n", o.pointer);
         return;
     }

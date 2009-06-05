@@ -2,12 +2,13 @@
 #define SYSTEM_IFIXED_H
 
 extern void ifixed_dispatch();
-extern void ifixed_shift_level();
 extern void ifixed_class_dispatch();
+extern void ifixed_metaclass_dispatch();
 extern void ifixed_stub_class_dispatch();
-extern object make_ifixed(object dispatch,
-                          object delegate,
-                          object size);
+extern object make_class(object dispatch,
+                         object delegate,
+                         object size,
+                         transfer_target cdispatch);
 
 struct ifixed {
     object          delegate;
