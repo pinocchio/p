@@ -169,7 +169,7 @@ static void ifixed_stub_set_delegate_do() {
     context_object context = get_context();
     ifixed_object ifixed = context->self.ifixed;
     ifixed->delegate = argument_at(context, 1);
-    *pheader(ifixed) = &ifixed_class_dispatch;
+    header(ifixed) = fools_system->ifixed_class;
     pop_context();
     debug("ret>>ifixed_stub>>delegate:\n");
 }
@@ -181,7 +181,7 @@ static void inline ifixed_stub_set_delegate() {
     context->code = &ifixed_stub_set_delegate_do;
 }
 
-static void ifixed_stub_dispatch() {
+void ifixed_stub_class_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
@@ -197,13 +197,13 @@ static void ifixed_stub_class_new_do() {
     debug("ifixed_stubcls>>dispatch:size:\n");
     context_object ifixed_context = get_context();
     object ifixed =
-        make_class(
+        make_stub_class(
             argument_at(ifixed_context, 1),  // dispatch
-            (object)fools_system->nil,       // delegate
             argument_at(ifixed_context, 2),  // size
             &ifixed_dispatch);
 
-    *pheader(ifixed.pointer) = &ifixed_stub_dispatch;
+    // XXX this breaks the ifixed_class! broken semantics!
+    //header(ifixed.pointer) = fools_system->ifixed_stub_class;
 
     set_argument(return_context(ifixed_context), 1, ifixed);
     debug("ret>>ifixed_stubcls>>dispatch:size:\n");
@@ -221,7 +221,7 @@ static void inline ifixed_stub_class_new() {
     debug("ret>>ifixed_stubcls>>(pre)\n");
 }
 
-void ifixed_stub_class_dispatch() {
+void ifixed_stub_metaclass_dispatch() {
     context_object context = get_context();
     assert_argsize(context, 1);
     object selector = message(context);
@@ -234,6 +234,18 @@ object make_class(object dispatch, object delegate, object size,
                   transfer_target cdispatch) {
     new_instance(ifixed);
     result->delegate        = delegate;
+    result->size            = size;
+    result->interp          = (object)make_object(2, dispatch);
+    object_at_put(result->interp.object, 0, (object)cdispatch);
+    object_at_put(result->interp.object, 1, (object)result);
+    return (object)result;
+}
+
+// Object creation
+object make_stub_class(object dispatch, object size,
+                       transfer_target cdispatch) {
+    new_instance(ifixed);
+    header(result)  = fools_system->ifixed_stub_class;
     result->size            = size;
     result->interp          = (object)make_object(2, dispatch);
     object_at_put(result->interp.object, 0, (object)cdispatch);

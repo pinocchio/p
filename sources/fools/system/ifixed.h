@@ -5,10 +5,16 @@ extern void ifixed_dispatch();
 extern void ifixed_class_dispatch();
 extern void ifixed_metaclass_dispatch();
 extern void ifixed_stub_class_dispatch();
+extern void ifixed_stub_metaclass_dispatch();
 extern object make_class(object dispatch,
                          object delegate,
                          object size,
                          transfer_target cdispatch);
+
+extern object make_stub_class(object dispatch,
+                              object size,
+                              transfer_target cdispatch);
+
 
 struct ifixed {
     object          delegate;
