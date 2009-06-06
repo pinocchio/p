@@ -2,12 +2,8 @@
 #include <thread.h>
 #include <print.h>
 
-void dict_at_do() {
-    context_object context = get_context();
+with_pre_eval1(dict_at, context, key,
     dict_object dict = context->self.dict;
-
-    object key = argument_at(context, 1);
-    debug("dict>>at: %p\n", key.pointer);
 
     array_object kv = dict->values;
     object result = (object)fools_system->nil;
@@ -21,8 +17,7 @@ void dict_at_do() {
     }
 
     return_from_context(context, result);
-    debug("ret>>dict>>at: (result) %p\n", result.pointer);
-}
+)
 
 array_object inline double_array(array_object values) {
     int oldsize = array_size(values);
@@ -33,13 +28,8 @@ array_object inline double_array(array_object values) {
     return new;
 }
 
-void dict_at_put_do() {
-    context_object context = get_context();
+with_pre_eval2(dict_at_put, context, key, value,
     dict_object dict = context->self.dict;
-
-    object key = argument_at(context, 1);
-    object value = argument_at(context, 2);
-    debug("dict>>at:put %p, %p\n", key.pointer, value.pointer);
 
     array_object kv = dict->values;
     int i;
@@ -60,23 +50,7 @@ void dict_at_put_do() {
     raw_array_at_put(kv, i * 2 + 1, value);
 
     pop_context();
-    debug("ret>>dict>>at:put:\n");
-}
-
-static void inline dict_at() {
-    context_object context = get_context();
-    assert_argsize(context, 2);
-    push_eval_of(context, 1);
-    context->code = &dict_at_do;
-}
-
-static void inline dict_at_put() {
-    context_object context = get_context();
-    assert_argsize(context, 3);
-    push_eval_of(context, 1);
-    push_eval_of(context, 2);
-    context->code = &dict_at_put_do;
-}
+)
 
 void dict_dispatch() {
     dispatch_header(context, selector);

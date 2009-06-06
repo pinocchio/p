@@ -18,6 +18,7 @@ static void inline iscoped_eval() {
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = number_value(iscoped->argsize.number);
+
     if(array_size(args) != argsize) {
         printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
         int i;
@@ -72,19 +73,11 @@ static void inline iscoped_iapply() {
     debug("ret>>iscoped>>withArguments:\n");
 }
 
-static void inline iscoped_switch_and_iapply() {
-    context_object context = get_context();
-    context->env = argument_at(context, 2);
-    context->code = &iscoped_iapply;
-}
-
-static void inline iscoped_apply_in() {
-    context_object context = get_context();
-    assert_argsize(context, 3);
-    push_eval_of(context, 1);
-    push_eval_of(context, 2);
-    context->code = &iscoped_switch_and_iapply;
-}
+with_pre_eval2(iscoped_apply_in, context, ignore, env,
+    // XXX ignore is in between to skip compiler warning
+    context->env = ignore = env;
+    iscoped_iapply();
+)
 
 // iscoped>>scope
 accessor_for(iscoped, scope)

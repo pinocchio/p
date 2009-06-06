@@ -3,9 +3,7 @@
 #include <model.h>
 
 void shift_level() {
-
     debug("shiftLevel\n");
-    
     context_object context = get_context();
 
     object env = context->env;
@@ -26,5 +24,3 @@ void shift_level() {
 
     debug("ret>>shiftLevel\n");
 }
-
-

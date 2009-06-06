@@ -8,21 +8,15 @@ ifixed_object inline ifixed_descr(object inst) {
 static void ifixed_delegate() {
     debug("an_ifixed>>delegate\n");
     context_object context = get_context();
-    object self = context->self;
-    ifixed_object ifixed = ifixed_descr(self);
-
+    ifixed_object ifixed = ifixed_descr(context->self);
     return_from_context(context, ifixed->delegate);
     debug("ret>>an_ifixed>>delegate\n");
 }
 
-static void ifixed_at_do() {
-    debug("an_ifixed>>at:\n");
-    context_object context = get_context();
-
+with_pre_eval1(ifixed_at, context, idx,
     object self = context->self;
     ifixed_object ifixed = ifixed_descr(self);
 
-    object idx = argument_at(context, 1);
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     int size = number_value(ifixed->size.number);
@@ -32,26 +26,12 @@ static void ifixed_at_do() {
     assert(index < size);
 
     return_from_context(context, object_at(self.object, index));
-    debug("ret>>an_ifixed>>at:\n");
-}
+);
 
-static void inline ifixed_at() {
-    debug("an_ifixed>>at(pre)\n");
-    context_object ifixed_context = get_context();
-    assert_argsize(ifixed_context, 2);
-    push_eval_of(ifixed_context, 1);
-    ifixed_context->code = &ifixed_at_do;
-    debug("ret>>an_ifixed>>at(pre)\n");
-}
-
-static void ifixed_at_put_do() {
-    context_object context = get_context();
-    assert_argsize(context, 3);
-
+with_pre_eval2(ifixed_at_put, context, idx, value,
     object self = context->self;
     ifixed_object ifixed = ifixed_descr(self);
 
-    object idx = argument_at(context, 1);
     // XXX breaks encapsulation.
     int index = number_value(idx.number);
     int size = number_value(ifixed->size.number);
@@ -60,22 +40,11 @@ static void ifixed_at_put_do() {
     assert(0 <= index);
     assert(index < size);
     
-    object value = argument_at(context, 2);
     object_at_put(self.object, index, value);
 
     pop_context();
     debug("ret>>an_ifixed>>at:put:\n");
-}
-
-static void inline ifixed_at_put() {
-    debug("an_ifixed>>atput(pre)\n");
-    context_object ifixed_context = get_context();
-    assert_argsize(ifixed_context, 2);
-    push_eval_of(ifixed_context, 1);
-    push_eval_of(ifixed_context, 2);
-    ifixed_context->code = &ifixed_at_put_do;
-    debug("ret>>an_ifixed>>atput(pre)\n");
-}
+);
 
 void ifixed_dispatch() {
     debug("ifixedShiftLevel\n");
@@ -110,40 +79,10 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-void ifixed_class_dispatch() {
-    dispatch_header(context, selector);
-    if_selector(selector, NEW,      ifixed_new);
-    if_selector(selector, SIZE,     ifixed_size);
-    /* Other messages sent bounce off to the delegate. */
-    new_target(context, context->self.ifixed->delegate);
-}
-
-// ifixed_class>>dispatch:delegate:size:
-static void ifixed_class_new_do() {
-    debug("ifixedcls>>dispatch:delegate:size:\n");
-    context_object ifixed_context = get_context();
-    object ifixed =
-        make_class(
-            argument_at(ifixed_context, 1),  // dispatch
-            argument_at(ifixed_context, 2),  // delegate
-            argument_at(ifixed_context, 3),  // size
-            &ifixed_dispatch);
-
-    return_from_context(ifixed_context, ifixed);
-    debug("ret>>ifixedcls>>dispatch:delegate:size:\n");
-}
-
-// ifixed_class>>dispatch:delegate:size:(pre)
-static void ifixed_class_new() {
-    debug("ifixedcls>>(pre)\n");
-    context_object ifixed_context = get_context();
-    assert_argsize(ifixed_context, 4);
-    push_eval_of(ifixed_context, 1);
-    push_eval_of(ifixed_context, 2);
-    push_eval_of(ifixed_context, 3);
-    ifixed_context->code = &ifixed_class_new_do;
-    debug("ret>>ifixedcls>>(pre)\n");
-}
+with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
+    object ifixed = make_class(dispatch, delegate, size, &ifixed_dispatch);
+    return_from_context(context, ifixed);
+);
 
 void ifixed_metaclass_dispatch() {
     dispatch_header(context, selector);
@@ -151,56 +90,22 @@ void ifixed_metaclass_dispatch() {
     doesnotunderstand("ifixed_class", selector);
 }
 
-static void ifixed_stub_set_delegate_do() {
-    debug("ifixed_stub>>delegate:\n");
-    context_object context = get_context();
+with_pre_eval1(set_dispatch_delegate, context, arg, 
     ifixed_object ifixed = context->self.ifixed;
-    ifixed->delegate = argument_at(context, 1);
+    ifixed->delegate = arg;
     header(ifixed) = fools_system->ifixed_class;
     pop_context();
-    debug("ret>>ifixed_stub>>delegate:\n");
-}
+)
 
-static void inline ifixed_stub_set_delegate() {
-    context_object context = get_context();
-    assert_argsize(context, 2);
-    push_eval_of(context, 1);
-    context->code = &ifixed_stub_set_delegate_do;
-}
-
-void ifixed_stub_class_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_class(ifixed, 
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
-    if_selector(selector, SET_DELEGATE, ifixed_stub_set_delegate)
-    /* TODO check if it makes sense to fall back to class */
-    doesnotunderstand("ifixed_stub_class", selector);
-}
+)
 
-// ifixed_stub_class>>dispatch:size:
-static void ifixed_stub_class_new_do() {
-    debug("ifixed_stubcls>>dispatch:size:\n");
-    context_object ifixed_context = get_context();
-    object ifixed =
-        make_stub_class(
-            argument_at(ifixed_context, 1),  // dispatch
-            argument_at(ifixed_context, 2),  // size
-            &ifixed_dispatch);
-
-    return_from_context(ifixed_context, ifixed);
-    debug("ret>>ifixed_stubcls>>dispatch:size:\n");
-}
-
-// ifixed_stub_class>>dispatch:size:(pre)
-static void inline ifixed_stub_class_new() {
-    debug("ifixed_stubcls>>(pre)\n");
-    context_object ifixed_context = get_context();
-    assert_argsize(ifixed_context, 3);
-    push_eval_of(ifixed_context, 1);
-    push_eval_of(ifixed_context, 2);
-    ifixed_context->code = &ifixed_stub_class_new_do;
-    debug("ret>>ifixed_stubcls>>(pre)\n");
-}
+with_pre_eval2(ifixed_stub_class_new, context, dispatch, size,
+    object ifixed = make_stub_class(dispatch, size, &ifixed_dispatch);
+    return_from_context(context, ifixed);
+)
 
 void ifixed_stub_metaclass_dispatch() {
     dispatch_header(context, selector);

@@ -14,17 +14,9 @@
 void name##_##func() {\
     context_object context = get_context();\
     assert_argsize(context, 2);\
-    /*printf("left: ");\
-    print_object(argument_at(context, 0));\
-    printf("right..?\n");\
-    print_object(argument_at(context, 1));\
-    printf("right..?\n");\
-    printf("left\n");\
-    */push_eval_of(context, 0);\
-    /*printf("right\n");\
-    */push_eval_of(context, 1);\
-    /*printf("done\n");\
-    */context->code = &name##_##func_do;\
+    push_eval_of(context, 0);\
+    push_eval_of(context, 1);\
+    context->code = &name##_##func_do;\
 }
 
 #define init_op(name)\

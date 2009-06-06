@@ -68,34 +68,15 @@ static void inline env_subscope() {
 }
 
 // env>>parent:
-static void inline env_do_set_parent() {
-    // actual setting of the evaluted parent. related to env>>parent:
-    context_object receiver = get_context();
-    assert_argsize(receiver, 2);
-    // arguments at: 0 -> selector
-    object env = receiver->self;
-    object new_env = argument_at(receiver, 1);
+with_pre_eval1(env_set_parent, context, new_env,
+    object env = context->self;
     assert(new_env.pointer != NULL);
-    debug("internal>>env>>parent: %p\n", new_env.env);
-
     env.env->parent = new_env;
 
-    // Don't accidentally set parent to self!
+    // Don't accidentally set parent to self; a common error
     assert(env.env->parent.env != env.env);
     pop_context();
-    debug("internal>>ret>>env>>parent:\n");
-}
-
-// env>>parent:
-static void inline env_set_parent() {
-    debug("env>>parent:\n");
-    context_object receiver = get_context();
-    assert_argsize(receiver, 2);
-    // arguments at: 0 -> selector
-    push_eval_of(receiver, 1);
-    receiver->code = &env_do_set_parent;
-    debug("ret>>env>>parent:\n");
-}
+)
 
 // env>>parent
 accessor_for(env, parent)
