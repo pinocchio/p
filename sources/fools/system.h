@@ -67,15 +67,15 @@ with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
     ifixed_object ifixed = context->self.ifixed;\
     ifixed->dispatch = dispatch;\
     ifixed->delegate = delegate;\
-    header(ifixed) = fools_system->type##_##class;\
+    header(ifixed) = fools_system->type;\
     pop_context();\
 )\
-void type##_##class_dispatch() {\
+void type##_##dispatch() {\
     dispatch_header(context, selector);\
     messages;\
     new_target(context, context->self.ifixed->delegate);\
 }\
-void type##_##stub_class_dispatch() {\
+void type##_##stub_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
     if_selector(selector, SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\

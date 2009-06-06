@@ -51,6 +51,7 @@ extern object SYMBOLdoesNotUnderstand_col_in_col_with_col_;
 extern object SYMBOLapply_col_in_col_;
 extern object SYMBOLlookup_col_;
 extern object SYMBOLinitialize;
+extern object SYMBOLIFixed;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\

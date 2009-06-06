@@ -79,7 +79,7 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-define_bootstrapping_class(ifixed, 
+define_bootstrapping_class(ifixed_class, 
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
 )
@@ -94,12 +94,10 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
     return_from_context(context, ifixed);
 )
 
-void ifixed_metaclass_dispatch() {
-    dispatch_header(context, selector);
-    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
+define_bootstrapping_class(ifixed_metaclass,
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
-    doesnotunderstand("ifixed_class", selector);
-}
+    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
+)
 
 // Object creation
 object make_class(object dispatch, object delegate, object size,

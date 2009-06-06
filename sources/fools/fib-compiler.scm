@@ -250,6 +250,17 @@
                                      ; single instance in "newclass"
             ((class 'new) 'print)
 
+            (let ((cls (object 'subclass:instvars:classvars:
+                               'IFixed (vector) (vector))))
+                (ifixed 'dispatch:delegate: objdisp cls)
+
+                ;(((ifixed 'class) 'methodDictionary)
+                ;    'objectAt:put: 'testMethod
+                ;    (method (s) (display "JEEEEJ\n")))
+            )
+            ;(ifixed 'testMethod)
+            ;(ifixed 'print)
+
             (display "STAGE 5\n")
 
         

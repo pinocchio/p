@@ -52,6 +52,7 @@ object SYMBOLdoesNotUnderstand_col_in_col_with_col_;
 object SYMBOLapply_col_in_col_;
 object SYMBOLlookup_col_;
 object SYMBOLinitialize;
+object SYMBOLIFixed;
 
 void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLeval,                                "eval");

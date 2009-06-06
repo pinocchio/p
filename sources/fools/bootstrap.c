@@ -39,7 +39,7 @@ object SET_DISPATCH_DELEGATE;
 object WITH_SIZE;
 
 #define make_empty_object(cls)\
-    (object)make_object(0, (object)fools_system->cls)
+    (object)make_object(4, (object)fools_system->cls)
 
 #define wrap_dispatcher(dispatch) (object)make_native_class(dispatch)
 
@@ -73,7 +73,8 @@ fools_object bootstrap() {
     fools_system->iscoped_class         = wrap_dispatcher(iscoped_dispatch);
     fools_system->iscoped_metaclass     = wrap_dispatcher(iscoped_class_dispatch);
     fools_system->ifixed_class          = wrap_dispatcher(ifixed_class_dispatch);
-    fools_system->ifixed_stub_class     = wrap_dispatcher(ifixed_stub_class_dispatch);
+    fools_system->ifixed_stub_class     = wrap_dispatcher(ifixed_class_stub_dispatch);
+    fools_system->ifixed_stub_metaclass = wrap_dispatcher(ifixed_metaclass_stub_dispatch);
     fools_system->ifixed_metaclass      = wrap_dispatcher(ifixed_metaclass_dispatch);
     fools_system->env_class             = wrap_dispatcher(env_dispatch);
 
@@ -81,7 +82,7 @@ fools_object bootstrap() {
 
     fools_system->icapture      = (object)make_icapture();
     fools_system->iscoped       = make_empty_object(iscoped_metaclass);
-    fools_system->ifixed        = make_empty_object(ifixed_metaclass);
+    fools_system->ifixed        = make_empty_object(ifixed_stub_metaclass);
     fools_system->dict          = make_empty_object(dict_metaclass);
     fools_system->array         = make_empty_object(array_metaclass);
 

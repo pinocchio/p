@@ -168,6 +168,7 @@ struct fools {
     object ifixed_class;
     object ifixed_stub_class;
     object ifixed_metaclass;
+    object ifixed_stub_metaclass;
     object env_class;
 
     // Level shifting
