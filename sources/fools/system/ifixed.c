@@ -79,39 +79,26 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
-    object ifixed = make_class(dispatch, delegate, size, &ifixed_dispatch);
-    return_from_context(context, ifixed);
-);
-
-void ifixed_metaclass_dispatch() {
-    dispatch_header(context, selector);
-    if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
-    doesnotunderstand("ifixed_class", selector);
-}
-
-with_pre_eval2(set_dispatch_delegate, context, dispatch, delegate, 
-    ifixed_object ifixed = context->self.ifixed;
-    ifixed->dispatch = dispatch;
-    ifixed->delegate = delegate;
-    header(ifixed) = fools_system->ifixed_class;
-    pop_context();
-)
-
 define_bootstrapping_class(ifixed, 
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
 )
+
+with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
+    object ifixed = make_class(dispatch, delegate, size, &ifixed_dispatch);
+    return_from_context(context, ifixed);
+);
 
 with_pre_eval1(ifixed_stub_class_new, context, size,
     object ifixed = make_stub_class(size, &ifixed_dispatch);
     return_from_context(context, ifixed);
 )
 
-void ifixed_stub_metaclass_dispatch() {
+void ifixed_metaclass_dispatch() {
     dispatch_header(context, selector);
     if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
-    doesnotunderstand("ifixed_stub_class", selector);
+    if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
+    doesnotunderstand("ifixed_class", selector);
 }
 
 // Object creation

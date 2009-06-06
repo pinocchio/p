@@ -83,7 +83,7 @@
           
           ; The first Metaclass is an instantiatable stub which will become
           ; the real Metaclass later on.
-           (metaclass (ifixed_stub 'size: 4))
+           (metaclass (ifixed 'size: 4))
 
           ; The Metaclass-class is an instance of metaclass
            (metaclass_class (buildclass (metaclass 'basicNew)))

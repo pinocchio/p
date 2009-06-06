@@ -63,6 +63,13 @@ static void inline cls##_##element() {\
     object selector = message(context);
 
 #define define_bootstrapping_class(type, messages)\
+with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
+    ifixed_object ifixed = context->self.ifixed;\
+    ifixed->dispatch = dispatch;\
+    ifixed->delegate = delegate;\
+    header(ifixed) = fools_system->type##_##class;\
+    pop_context();\
+)\
 void type##_##class_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
@@ -71,8 +78,8 @@ void type##_##class_dispatch() {\
 void type##_##stub_class_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
-    if_selector(selector, SET_DISPATCH_DELEGATE, set_dispatch_delegate);\
-    doesnotunderstand(#type"_stub_class", selector);\
+    if_selector(selector, SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
+    doesnotunderstand(#type"_stubclass", selector);\
 }
 
 #define with_pre_eval1(name, context, first, body)\
