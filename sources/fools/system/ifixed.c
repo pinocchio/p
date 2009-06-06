@@ -90,9 +90,10 @@ void ifixed_metaclass_dispatch() {
     doesnotunderstand("ifixed_class", selector);
 }
 
-with_pre_eval1(set_dispatch_delegate, context, arg, 
+with_pre_eval2(set_dispatch_delegate, context, dispatch, delegate, 
     ifixed_object ifixed = context->self.ifixed;
-    ifixed->delegate = arg;
+    ifixed->dispatch = dispatch;
+    ifixed->delegate = delegate;
     header(ifixed) = fools_system->ifixed_class;
     pop_context();
 )
@@ -102,14 +103,14 @@ define_bootstrapping_class(ifixed,
     if_selector(selector, SIZE,         ifixed_size);
 )
 
-with_pre_eval2(ifixed_stub_class_new, context, dispatch, size,
-    object ifixed = make_stub_class(dispatch, size, &ifixed_dispatch);
+with_pre_eval1(ifixed_stub_class_new, context, size,
+    object ifixed = make_stub_class(size, &ifixed_dispatch);
     return_from_context(context, ifixed);
 )
 
 void ifixed_stub_metaclass_dispatch() {
     dispatch_header(context, selector);
-    if_selector(selector, DISPATCH_SIZE, ifixed_stub_class_new);
+    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
     doesnotunderstand("ifixed_stub_class", selector);
 }
 
@@ -124,11 +125,9 @@ object make_class(object dispatch, object delegate, object size,
     return (object)result;
 }
 
-object make_stub_class(object dispatch, object size,
-                       transfer_target cdispatch) {
+object make_stub_class(object size, transfer_target cdispatch) {
     new_instance(ifixed);
     header(result)          = fools_system->ifixed_stub_class;
-    result->dispatch        = dispatch;
     result->size            = size;
     result->cdisp           = (object)cdispatch;
     return (object)result;

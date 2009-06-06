@@ -35,8 +35,8 @@ object SIZED;
 object DELEGATE;
 object SIZE;
 object DISPATCH_DELEGATE_SIZE;
-object DISPATCH_SIZE;
-object SET_DELEGATE;
+object SET_DISPATCH_DELEGATE;
+object WITH_SIZE;
 
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)

@@ -9,12 +9,6 @@
   ;             (fib (- x 2)))))
 
 
-; bootstrap all unused symbols needed for the VM
-(vector 'eval 'store:at:in: 'subScope:key:
-        'parent: 'parent 'new:size: 'iapply:
-        'scope 'basicNew: 'shift)
-
-
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
@@ -89,7 +83,7 @@
           
           ; The first Metaclass is an instantiatable stub which will become
           ; the real Metaclass later on.
-           (metaclass (ifixed_stub 'dispatch:size: classdisp 4))
+           (metaclass (ifixed_stub 'size: 4))
 
           ; The Metaclass-class is an instance of metaclass
            (metaclass_class (buildclass (metaclass 'basicNew)))
@@ -142,7 +136,7 @@
                         name (getself s) instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
-        (metaclass 'delegate: (metaclass_class 'basicNew))
+        (metaclass 'dispatch:delegate: classdisp (metaclass_class 'basicNew))
         (metaclass_class 'objectAt:put: 1 mcdict)
 
         (display "STAGE 3\n")

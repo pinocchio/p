@@ -1,7 +1,7 @@
 #ifndef SCHEME_SYMBOLS_H
 #define SCHEME_SYMBOLS_H
 
-extern object SYMBOLdelegate_col_;
+extern object SYMBOLdispatch_col_delegate_col_;
 extern object SYMBOLbasicNew;
 extern object SYMBOLobjectAt_col_put_col_;
 extern object SYMBOLsuperclass;
@@ -24,7 +24,7 @@ extern object SYMBOLstore_col_at_col_in_col_;
 extern object SYMBOLsubScope_col_key_col_;
 extern object SYMBOLparent_col_;
 extern object SYMBOLparent;
-extern object SYMBOLnew_col_size_col_;
+extern object SYMBOLsize_col_;
 extern object SYMBOLiapply_col_;
 extern object SYMBOLscope;
 extern object SYMBOLbasicNew_col_;
@@ -45,7 +45,6 @@ extern object SYMBOLClass;
 extern object SYMBOLClassBehaviour;
 extern object SYMBOLnew;
 extern object SYMBOLsize;
-extern object SYMBOLdispatch_col_size_col_;
 extern object SYMBOLlookup;
 extern object SYMBOLeval_col_;
 extern object SYMBOLdoesNotUnderstand_col_in_col_with_col_;

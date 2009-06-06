@@ -1,7 +1,7 @@
 #include <system.h>
 #include <scheme/symbols.h>
 
-object SYMBOLdelegate_col_;
+object SYMBOLdispatch_col_delegate_col_;
 object SYMBOLbasicNew;
 object SYMBOLobjectAt_col_put_col_;
 object SYMBOLsuperclass;
@@ -24,6 +24,7 @@ object SYMBOLstore_col_at_col_in_col_;
 object SYMBOLsubScope_col_key_col_;
 object SYMBOLparent_col_;
 object SYMBOLparent;
+object SYMBOLsize_col_;
 object SYMBOLnew_col_size_col_;
 object SYMBOLiapply_col_;
 object SYMBOLscope;
@@ -45,7 +46,6 @@ object SYMBOLClass;
 object SYMBOLClassBehaviour;
 object SYMBOLnew;
 object SYMBOLsize;
-object SYMBOLdispatch_col_size_col_;
 object SYMBOLlookup;
 object SYMBOLeval_col_;
 object SYMBOLdoesNotUnderstand_col_in_col_with_col_;
@@ -60,7 +60,6 @@ void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLsubScope_col_key_col_,               "subScope:key:");
     define_symbol(SYMBOLparent_col_,                         "parent:");
     define_symbol(SYMBOLparent,                              "parent");
-    define_symbol(SYMBOLnew_col_size_col_,                   "new:size:");
     define_symbol(SYMBOLiapply_col_,                         "iapply:");
     define_symbol(SYMBOLapply_col_in_col_,                   "apply:in:");
     define_symbol(SYMBOLscope,                               "scope");
@@ -69,10 +68,11 @@ void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLbasicNew,                            "basicNew");
     define_symbol(SYMBOLbasicNew_col_,                       "basicNew:");
     define_symbol(SYMBOLdelegate,                            "delegate");
-    define_symbol(SYMBOLdelegate_col_,                       "delegate:");
+    define_symbol(SYMBOLdispatch_col_delegate_col_,          "dispatch:delegate:");
     define_symbol(SYMBOLsize,                                "size");
+    define_symbol(SYMBOLsize_col_,                           "size:");
+    define_symbol(SYMBOLnew_col_size_col_,                   "new:size:");
     define_symbol(SYMBOLdispatch_col_delegate_col_size_col_, "dispatch:delegate:size:");
-    define_symbol(SYMBOLdispatch_col_size_col_,              "dispatch:size:");
     define_symbol(SYMBOLshift,                               "shift");
     EVAL                    = SYMBOLeval;
     PRE_EVAL_ENV            = SYMBOLeval_col_;
@@ -80,6 +80,7 @@ void bootstrap_scheme_symbols() {
     SUBSCOPE_KEY            = SYMBOLsubScope_col_key_col_;
     SET_PARENT              = SYMBOLparent_col_;
     PARENT                  = SYMBOLparent;
+    WITH_SIZE               = SYMBOLsize_col_;
     NEW_SIZE                = SYMBOLnew_col_size_col_;
     IAPPLY                  = SYMBOLiapply_col_;
     APPLY_IN                = SYMBOLapply_col_in_col_;
@@ -89,9 +90,8 @@ void bootstrap_scheme_symbols() {
     NEW                     = SYMBOLbasicNew;
     SIZED                   = SYMBOLbasicNew_col_;
     DELEGATE                = SYMBOLdelegate;
-    SET_DELEGATE            = SYMBOLdelegate_col_;
+    SET_DISPATCH_DELEGATE   = SYMBOLdispatch_col_delegate_col_;
     SIZE                    = SYMBOLsize;
     DISPATCH_DELEGATE_SIZE  = SYMBOLdispatch_col_delegate_col_size_col_;
-    DISPATCH_SIZE           = SYMBOLdispatch_col_size_col_;
     SHIFT                   = SYMBOLshift;
 }

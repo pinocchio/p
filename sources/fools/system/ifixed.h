@@ -11,8 +11,7 @@ extern object make_class(object dispatch,
                          object size,
                          transfer_target cdispatch);
 
-extern object make_stub_class(object dispatch,
-                              object size,
+extern object make_stub_class(object size,
                               transfer_target cdispatch);
 
 
