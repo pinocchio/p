@@ -79,9 +79,7 @@ static void inline dict_at_put() {
 }
 
 void dict_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, OBJECT_AT,        dict_at);
     if_selector(selector, OBJECT_AT_PUT,    dict_at_put);
     doesnotunderstand("dict", selector);
@@ -95,9 +93,7 @@ static void inline dict_new() {
 }
 
 void dict_class_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, NEW, dict_new);
     doesnotunderstand("dict class", selector);
 }

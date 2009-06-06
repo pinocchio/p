@@ -111,9 +111,7 @@ static void inline ifixed_new() {
 }
 
 void ifixed_class_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, NEW,      ifixed_new);
     if_selector(selector, SIZE,     ifixed_size);
     /* Other messages sent bounce off to the delegate. */
@@ -148,9 +146,7 @@ static void ifixed_class_new() {
 }
 
 void ifixed_metaclass_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     doesnotunderstand("ifixed_class", selector);
 }
@@ -173,9 +169,7 @@ static void inline ifixed_stub_set_delegate() {
 }
 
 void ifixed_stub_class_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
     if_selector(selector, SET_DELEGATE, ifixed_stub_set_delegate)
@@ -209,9 +203,7 @@ static void inline ifixed_stub_class_new() {
 }
 
 void ifixed_stub_metaclass_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, DISPATCH_SIZE, ifixed_stub_class_new);
     doesnotunderstand("ifixed_stub_class", selector);
 }

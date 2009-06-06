@@ -101,9 +101,7 @@ static void inline env_set_parent() {
 accessor_for(env, parent)
 
 void env_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, FETCH_FROM,       env_fetch_from);
     if_selector(selector, STORE_AT_IN,      env_store_at_in);
     if_selector(selector, SUBSCOPE_KEY,     env_subscope);

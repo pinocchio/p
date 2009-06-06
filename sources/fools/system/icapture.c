@@ -10,9 +10,7 @@ static void inline icapture_eval() {
 }
 
 void icapture_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, EVAL, icapture_eval);
     doesnotunderstand("icapture", selector);
 }

@@ -97,9 +97,7 @@ void iscoped_shift() {
 }
 
 void iscoped_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, IAPPLY,   iscoped_iapply);
     if_selector(selector, SCOPE,    iscoped_scope);
     if_selector(selector, APPLY_IN, iscoped_apply_in);
@@ -123,9 +121,7 @@ static void inline iscoped_class_new() {
 }
 
 void iscoped_class_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, NEW_SIZE, iscoped_class_new);
     doesnotunderstand("iscoped_class", selector);
 }

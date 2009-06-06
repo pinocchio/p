@@ -51,6 +51,11 @@ extern void inline new_target(context_object context, object target);
     if (selector.pointer == symb.pointer)\
         return todo();
 
+#define dispatch_header(context, selector)\
+    context_object context = get_context();\
+    assert_argsize(context, 1);\
+    object selector = message(context);
+
 // Bootstrapping natives.
 extern void pre_eval_env();
 

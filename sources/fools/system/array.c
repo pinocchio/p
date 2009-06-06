@@ -51,9 +51,7 @@ static void inline iarray_size() {
 }
 
 void array_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, OBJECT_AT,        iarray_at);
     if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
     if_selector(selector, SIZE,             iarray_size);
@@ -75,9 +73,7 @@ static void inline iarray_new() {
 }
 
 void array_class_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, SIZED, iarray_new);
     /* Other messages sent bounce off to the delegate. */
     new_target(context, context->self.ifixed->delegate);

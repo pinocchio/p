@@ -24,9 +24,7 @@ static void inline iassign_eval() {
 }
 
 void iassign_dispatch() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    object selector = message(context);
+    dispatch_header(context, selector);
     if_selector(selector, EVAL,         iassign_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
     doesnotunderstand("iassign", selector);
