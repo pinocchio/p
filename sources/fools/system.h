@@ -31,6 +31,9 @@ extern object inline transfer();
 // Meta-interpretation primitives.
 extern void inline new_target(context_object context, object target);
 
+// Accessor
+extern void inline object_delegate();
+
 // Convenience macros.
 #define return_value(rc) argument_at(rc, 1)
 
@@ -95,6 +98,7 @@ void type##_##dispatch() {\
     context_object context = get_context();\
     if (context_size(context) >= 1) {\
         object selector = message(context);\
+        if_selector(selector, DELEGATE, object_delegate);\
         messages\
     }\
     fallback_shift(context);\

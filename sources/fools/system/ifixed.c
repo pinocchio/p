@@ -5,14 +5,6 @@ ifixed_object inline ifixed_descr(object inst) {
     return (ifixed_object)pheader(inst.pointer);
 }
 
-static void ifixed_delegate() {
-    debug("an_ifixed>>delegate\n");
-    context_object context = get_context();
-    ifixed_object ifixed = ifixed_descr(context->self);
-    return_from_context(context, ifixed->delegate);
-    debug("ret>>an_ifixed>>delegate\n");
-}
-
 with_pre_eval1(ifixed_at, context, idx,
     object self = context->self;
     ifixed_object ifixed = ifixed_descr(self);
@@ -65,7 +57,6 @@ static void inline ifixed_new() {
 }
 
 define_bootstrapping_instance(ifixed, 
-    if_selector(selector, DELEGATE,         ifixed_delegate);
     if_selector(selector, OBJECT_AT,        ifixed_at);
     if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
 )
@@ -88,7 +79,6 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
 )
 
 define_bootstrapping_instance(ifixed_metaclass,
-    if_selector(selector, DELEGATE,         ifixed_delegate);
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
 )

@@ -61,3 +61,15 @@ void pre_eval_env() {
 
     debug("ret>>o>>preEval:\n");
 }
+
+native_class_object inline class_descr(object inst) {
+    return (native_class_object)pheader(inst.pointer);
+}
+
+void inline object_delegate() {
+    debug("object>>delegate\n");
+    context_object context = get_context();
+    native_class_object cls = class_descr(context->self);
+    return_from_context(context, cls->delegate);
+    debug("ret>>object>>delegate\n");
+}
