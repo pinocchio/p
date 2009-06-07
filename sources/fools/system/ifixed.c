@@ -46,12 +46,6 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
     debug("ret>>an_ifixed>>at:put:\n");
 );
 
-define_bootstrapping_instance(ifixed, 
-    if_selector(selector, DELEGATE,         ifixed_delegate);
-    if_selector(selector, OBJECT_AT,        ifixed_at);
-    if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
-)
-
 accessor_for(ifixed, size)
 
 static object inline ifixed_inst(ifixed_object ifixed) {
@@ -70,7 +64,15 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-define_bootstrapping_class(ifixed, 
+define_bootstrapping_instance(ifixed, 
+    if_selector(selector, DELEGATE,         ifixed_delegate);
+    if_selector(selector, OBJECT_AT,        ifixed_at);
+    if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
+)
+
+define_bcls(ifixed, 
+    ifixed->cdisp  = (object)&ifixed_dispatch;
+    header(ifixed) = fools_system->ifixed_class;,
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
 )
@@ -86,8 +88,13 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
 )
 
 define_bootstrapping_instance(ifixed_metaclass,
+    if_selector(selector, DELEGATE,         ifixed_delegate);
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
+)
+
+define_bootstrapping_class(ifixed_metaclass,
+    if (0) { printf("%p\n", selector.pointer); }
 )
 
 // Object creation

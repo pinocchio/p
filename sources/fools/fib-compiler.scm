@@ -250,28 +250,21 @@
                                      ; single instance in "newclass"
             ((class 'new) 'print)
 
-            #|
-            (let ((ifixed_class (object 'subclass:instvars:classvars:
-                                        'IFixed (vector) (vector))))
+            (let ((ifixed_cls (object 'subclass:instvars:classvars:
+                                      'IFixed (vector) (vector))))
                 ; There is only one "ifixed" in the system!
-                ((ifixed_class 'methodDictionary)
-                    'objectAt:put: 'basicNew
-                    (method (s) ifixed))
+                ; ((ifixed_cls 'methodDictionary)
+                ;   'objectAt:put: 'testMethod
+                ;    (method (s) (display "TESTING!\n")))
 
-                (ifixed 'dispatch:delegate:
+                (ifixed_class 'dispatch:delegate:
                     objdisp
                     ; ifixed is the only instance of the IFixed class
-                    (ifixed_class 'new)))
-            |#
-            ;(display (ifixed 'basicNew))
-                ;(((ifixed 'class) 'methodDictionary)
-                ;    'objectAt:put: 'testMethod
-                ;    (method (s) (display "JEEEEJ\n")))
-
-                ; Is only understood once
-                ;(ifixed 'dispatch:delegate: objdisp cls)
-            ;(ifixed 'testMethod)
-            ;(ifixed 'print)
+                    ifixed_cls)
+                ; DNU
+                ; (ifixed_class 'dispatch:delegate: objdisp ifixed_cls)
+            )
+            ; (ifixed 'testMethod)
 
             (display "STAGE 5\n")
 

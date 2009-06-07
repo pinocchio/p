@@ -196,7 +196,7 @@ extern nil_object               make_nil();
 extern context_object           make_context(object self, int size);
 extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
-extern native_class_object      make_native_class(transfer_target cdisp);
+extern native_class_object      make_native_class(object header, transfer_target cdisp);
 
 extern int              inline number_value(number_object number);
 extern int              inline array_size(array_object array);

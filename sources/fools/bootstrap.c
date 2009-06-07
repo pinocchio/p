@@ -42,8 +42,8 @@ object WITH_SIZE;
     (object)make_object(0, (object)fools_system->cls)
 
 #define wrap_dispatcher(dispatch) (object)make_native(dispatch)
-#define build_native_class(cdisp)\
-    (object)make_native_class(cdisp##_##stub_dispatch)
+#define build_native_class(header, cdisp)\
+    (object)make_native_class(header, cdisp##_##stub_dispatch)
 
 #define define_symbol(name, value)\
     name = (object)make_string(value);
@@ -66,16 +66,18 @@ fools_object bootstrap() {
     header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 
-    fools_system->ilist_class           = build_native_class(ilist);
-    fools_system->iconst_class          = build_native_class(iconst);
-    fools_system->icall_class           = build_native_class(icall);
-    fools_system->iassign_class         = build_native_class(iassign);
-    fools_system->ivar_class            = build_native_class(ivar);
-    fools_system->icapture_class        = build_native_class(icapture);
-    fools_system->iscoped_class         = build_native_class(iscoped);
-    fools_system->iscoped_metaclass     = build_native_class(iscoped_class);
-    fools_system->ifixed_metaclass      = build_native_class(ifixed_metaclass);
-    fools_system->env_class             = build_native_class(env);
+    fools_system->ilist_class           = build_native_class(fools_system->ifixed_stub_class, ilist);
+    fools_system->iconst_class          = build_native_class(fools_system->ifixed_stub_class, iconst);
+    fools_system->icall_class           = build_native_class(fools_system->ifixed_stub_class, icall);
+    fools_system->iassign_class         = build_native_class(fools_system->ifixed_stub_class, iassign);
+    fools_system->ivar_class            = build_native_class(fools_system->ifixed_stub_class, ivar);
+    fools_system->icapture_class        = build_native_class(fools_system->ifixed_stub_class, icapture);
+    fools_system->iscoped_class         = build_native_class(fools_system->ifixed_stub_class, iscoped);
+    fools_system->iscoped_metaclass     = build_native_class(fools_system->ifixed_stub_class, iscoped_class);
+    fools_system->ifixed_metaclass      = build_native_class(
+                                            wrap_dispatcher(ifixed_metaclass_class_stub_dispatch),
+                                            ifixed_metaclass);
+    fools_system->env_class             = build_native_class(fools_system->ifixed_stub_class, env);
     
     /* Special cases which are never to be exposed to the outside world. 
      * They are only used internally to navigate to the right object or flag

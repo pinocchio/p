@@ -6,6 +6,7 @@ extern void ifixed_class_dispatch();
 extern void ifixed_class_stub_dispatch();
 extern void ifixed_metaclass_dispatch();
 extern void ifixed_metaclass_stub_dispatch();
+extern void ifixed_metaclass_class_stub_dispatch();
 extern object make_class(object dispatch,
                          object delegate,
                          object size,
