@@ -2,7 +2,7 @@
 #define SYSTEM_ILIST_H
 
 // Creation
-extern void ilist_dispatch();
+extern void ilist_stub_dispatch();
 extern ilist_object make_ilist(int size);
 
 // Accessors

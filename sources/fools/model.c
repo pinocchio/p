@@ -65,9 +65,10 @@ native_object make_native(transfer_target native) {
     return result;
 }
 
-native_class_object make_native_class(transfer_target dispatch) {
+native_class_object make_native_class(transfer_target cdisp) {
     native_class_object result  = NEW(struct native_class);
-    result->target              = (object)dispatch;
+    header(result)              = fools_system->ifixed_stub_class;
+    result->cdisp               = (object)cdisp;
     return result;
 }
 

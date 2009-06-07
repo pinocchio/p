@@ -46,20 +46,11 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
     debug("ret>>an_ifixed>>at:put:\n");
 );
 
-void ifixed_dispatch() {
-    debug("ifixedShiftLevel\n");
-    context_object context = get_context();
-
-    if (context_size(context) >= 1) {
-        object selector = message(context);
-        if_selector(selector, DELEGATE,         ifixed_delegate);
-        if_selector(selector, OBJECT_AT,        ifixed_at);
-        if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
-    }
-
-    fallback_shift(context);
-    debug("ret>>ifixedShiftLevel\n");
-}
+define_bootstrapping_instance(ifixed, 
+    if_selector(selector, DELEGATE,         ifixed_delegate);
+    if_selector(selector, OBJECT_AT,        ifixed_at);
+    if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);
+)
 
 accessor_for(ifixed, size)
 
@@ -79,7 +70,7 @@ static void inline ifixed_new() {
     debug("ret>>ifixed>>new\n");
 }
 
-define_bootstrapping_class(ifixed_class, 
+define_bootstrapping_class(ifixed, 
     if_selector(selector, NEW,          ifixed_new);
     if_selector(selector, SIZE,         ifixed_size);
 )
@@ -90,11 +81,11 @@ with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
 );
 
 with_pre_eval1(ifixed_stub_class_new, context, size,
-    object ifixed = make_stub_class(size, &ifixed_dispatch);
+    object ifixed = make_stub_class(size, &ifixed_stub_dispatch);
     return_from_context(context, ifixed);
 )
 
-define_bootstrapping_class(ifixed_metaclass,
+define_bootstrapping_instance(ifixed_metaclass,
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
 )

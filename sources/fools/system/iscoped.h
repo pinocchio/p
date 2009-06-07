@@ -1,8 +1,8 @@
 #ifndef SYSTEM_ISCOPED_H
 #define SYSTEM_ISCOPED_H
 
-extern void iscoped_dispatch();
-extern void iscoped_class_dispatch();
+extern void iscoped_stub_dispatch();
+extern void iscoped_class_stub_dispatch();
 extern object make_iscoped(object scope,
                            object expression,
                            object argsize);

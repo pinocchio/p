@@ -33,12 +33,10 @@ static void inline ilist_eval() {
     debug("ret>>ilist>>eval(n)\n");
 }
 
-void ilist_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(ilist, 
     if_selector(selector, EVAL,         ilist_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    doesnotunderstand("ilist", selector);
-}
+)
 
 // Object creation
 ilist_object make_ilist(int size) {

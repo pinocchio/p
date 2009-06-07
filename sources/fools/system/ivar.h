@@ -1,7 +1,7 @@
 #ifndef SYSTEM_IVAR_H
 #define SYSTEM_IVAR_H
 
-extern void ivar_dispatch();
+extern void ivar_stub_dispatch();
 extern ivar_object make_ivar(const char* name);
 
 struct ivar {

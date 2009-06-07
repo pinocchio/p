@@ -39,9 +39,11 @@ object SET_DISPATCH_DELEGATE;
 object WITH_SIZE;
 
 #define make_empty_object(cls)\
-    (object)make_object(4, (object)fools_system->cls)
+    (object)make_object(0, (object)fools_system->cls)
 
-#define wrap_dispatcher(dispatch) (object)make_native_class(dispatch)
+#define wrap_dispatcher(dispatch) (object)make_native(dispatch)
+#define build_native_class(cdisp)\
+    (object)make_native_class(cdisp##_##stub_dispatch)
 
 #define define_symbol(name, value)\
     name = (object)make_string(value);
@@ -64,25 +66,28 @@ fools_object bootstrap() {
     header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 
-    fools_system->ilist_class           = wrap_dispatcher(ilist_dispatch);
-    fools_system->iconst_class          = wrap_dispatcher(iconst_dispatch);
-    fools_system->icall_class           = wrap_dispatcher(icall_dispatch);
-    fools_system->iassign_class         = wrap_dispatcher(iassign_dispatch);
-    fools_system->ivar_class            = wrap_dispatcher(ivar_dispatch);
-    fools_system->icapture_class        = wrap_dispatcher(icapture_dispatch);
-    fools_system->iscoped_class         = wrap_dispatcher(iscoped_dispatch);
-    fools_system->iscoped_metaclass     = wrap_dispatcher(iscoped_class_dispatch);
+    fools_system->ilist_class           = build_native_class(ilist);
+    fools_system->iconst_class          = build_native_class(iconst);
+    fools_system->icall_class           = build_native_class(icall);
+    fools_system->iassign_class         = build_native_class(iassign);
+    fools_system->ivar_class            = build_native_class(ivar);
+    fools_system->icapture_class        = build_native_class(icapture);
+    fools_system->iscoped_class         = build_native_class(iscoped);
+    fools_system->iscoped_metaclass     = build_native_class(iscoped_class);
+    fools_system->ifixed_metaclass      = build_native_class(ifixed_metaclass);
+    fools_system->env_class             = build_native_class(env);
+    
+    /* Special cases which are never to be exposed to the outside world. 
+     * They are only used internally to navigate to the right object or flag
+     * that an instance 'doesNotUnderstand' a message.
+     */
     fools_system->ifixed_class          = wrap_dispatcher(ifixed_class_dispatch);
     fools_system->ifixed_stub_class     = wrap_dispatcher(ifixed_class_stub_dispatch);
-    fools_system->ifixed_stub_metaclass = wrap_dispatcher(ifixed_metaclass_stub_dispatch);
-    fools_system->ifixed_metaclass      = wrap_dispatcher(ifixed_metaclass_dispatch);
-    fools_system->env_class             = wrap_dispatcher(env_dispatch);
-
-    fools_system->level_shifter     = wrap_dispatcher(shift_level);
+    fools_system->level_shifter         = wrap_dispatcher(shift_level);
 
     fools_system->icapture      = (object)make_icapture();
     fools_system->iscoped       = make_empty_object(iscoped_metaclass);
-    fools_system->ifixed        = make_empty_object(ifixed_stub_metaclass);
+    fools_system->ifixed        = make_empty_object(ifixed_metaclass);
     fools_system->dict          = make_empty_object(dict_metaclass);
     fools_system->array         = make_empty_object(array_metaclass);
 

@@ -130,8 +130,9 @@ struct native {
 };
 
 struct native_class {
-    object          target;
-    object          meta;
+    object          cdisp;
+    object          dispatch;
+    object          delegate;
 };
 
 struct context {
@@ -185,7 +186,7 @@ struct fools {
     object false_class;
 };
 
-extern object_object          make_object(int size, object interpreter);
+extern object_object            make_object(int size, object interpreter);
 extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
@@ -195,7 +196,7 @@ extern nil_object               make_nil();
 extern context_object           make_context(object self, int size);
 extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
-extern native_class_object      make_native_class(transfer_target dispatch);
+extern native_class_object      make_native_class(transfer_target cdisp);
 
 extern int              inline number_value(number_object number);
 extern int              inline array_size(array_object array);

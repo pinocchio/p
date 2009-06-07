@@ -1,7 +1,7 @@
 #ifndef SYSTEM_ICONST_H
 #define SYSTEM_ICONST_H
 
-extern void iconst_dispatch();
+extern void iconst_stub_dispatch();
 extern iconst_object make_iconst(object constant);
 
 struct iconst {

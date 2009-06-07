@@ -250,14 +250,26 @@
                                      ; single instance in "newclass"
             ((class 'new) 'print)
 
-            (let ((cls (object 'subclass:instvars:classvars:
-                               'IFixed (vector) (vector))))
-                (ifixed 'dispatch:delegate: objdisp cls)
+            #|
+            (let ((ifixed_class (object 'subclass:instvars:classvars:
+                                        'IFixed (vector) (vector))))
+                ; There is only one "ifixed" in the system!
+                ((ifixed_class 'methodDictionary)
+                    'objectAt:put: 'basicNew
+                    (method (s) ifixed))
 
+                (ifixed 'dispatch:delegate:
+                    objdisp
+                    ; ifixed is the only instance of the IFixed class
+                    (ifixed_class 'new)))
+            |#
+            ;(display (ifixed 'basicNew))
                 ;(((ifixed 'class) 'methodDictionary)
                 ;    'objectAt:put: 'testMethod
                 ;    (method (s) (display "JEEEEJ\n")))
-            )
+
+                ; Is only understood once
+                ;(ifixed 'dispatch:delegate: objdisp cls)
             ;(ifixed 'testMethod)
             ;(ifixed 'print)
 
@@ -265,12 +277,12 @@
 
         
             (let* ((ev (vector))
-                   (magnitude (object 'subclass:instvars:classvars: 'Magnitude ev ev))
-                   (number (magnitude 'subclass:instvars:classvars: 'Number ev ev))
-                   (integer (number 'subclass:instvars:classvars:   'Integer ev ev))
-                   (boolean (object 'subclass:instvars:classvars:   'Boolean ev ev))
-                   (true  (boolean 'subclass:instvars:classvars:    'True  ev ev))
-                   (false (boolean 'subclass:instvars:classvars:    'False ev ev))
+                   (magnitude (object  'subclass:instvars:classvars: 'Magnitude  ev ev))
+                   (number (magnitude  'subclass:instvars:classvars: 'Number     ev ev))
+                   (integer (number    'subclass:instvars:classvars: 'Integer    ev ev))
+                   (boolean (object    'subclass:instvars:classvars: 'Boolean    ev ev))
+                   (true  (boolean     'subclass:instvars:classvars: 'True       ev ev))
+                   (false (boolean     'subclass:instvars:classvars: 'False      ev ev))
                    (collection (object 'subclass:instvars:classvars: 'Collection ev ev))
                    (sqcollection (collection 'subclass:instvars:classvars:
                                       'SequenceableCollection ev ev))

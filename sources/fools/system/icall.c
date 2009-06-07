@@ -48,12 +48,10 @@ static void inline icall_eval() {
     inc();
 }
 
-void icall_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(icall,
     if_selector(selector, EVAL,         icall_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    doesnotunderstand("icall", selector);
-}
+)
 
 // Object creation
 icall_object make_icall(object self, int argsize) {

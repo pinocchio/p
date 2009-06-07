@@ -81,12 +81,10 @@ with_pre_eval1(env_set_parent, context, new_env,
 // env>>parent
 accessor_for(env, parent)
 
-void env_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(env,
     if_selector(selector, FETCH_FROM,       env_fetch_from);
     if_selector(selector, STORE_AT_IN,      env_store_at_in);
     if_selector(selector, SUBSCOPE_KEY,     env_subscope);
     if_selector(selector, SET_PARENT,       env_set_parent);
     if_selector(selector, PARENT,           env_parent);
-    doesnotunderstand("env", selector);
-}
+)

@@ -9,11 +9,9 @@ static void inline icapture_eval() {
     debug("ret>>icapture>>eval %p\n", context->env.env);
 }
 
-void icapture_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(icapture,
     if_selector(selector, EVAL, icapture_eval);
-    doesnotunderstand("icapture", selector);
-}
+)
 
 // Object creation
 icapture_object make_icapture() {

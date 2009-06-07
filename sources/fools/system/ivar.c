@@ -44,18 +44,11 @@ static void inline ivar_eval() {
     debug("ret>>ivar>>eval:\n");
 }
 
-void ivar_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(ivar,
     if_selector(selector, EVAL,         ivar_eval);
     if_selector(selector, ASSIGN_IN,    ivar_assign);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    doesnotunderstand("ivar", selector);
-}
-
-void ivar_class_dispatch() {
-    dispatch_header(context, selector);
-    doesnotunderstand("ivar_class", selector);
-}
+)
 
 // Object creation
 ivar_object make_ivar(const char* name) {

@@ -23,12 +23,10 @@ static void inline iassign_eval() {
     debug("ret>>iassign>>eval\n");
 }
 
-void iassign_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(iassign,
     if_selector(selector, EVAL,         iassign_eval);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    doesnotunderstand("iassign", selector);
-}
+)
 
 // Object creation
 iassign_object make_iassign(ivar_object variable, object expression) {

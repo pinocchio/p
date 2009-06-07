@@ -3,12 +3,10 @@
 
 accessor_for(iconst, constant)
 
-void iconst_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_instance(iconst, 
     if_selector(selector, EVAL,         iconst_constant);
     if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
-    doesnotunderstand("iconst", selector);
-}
+)
 
 // Object creation
 iconst_object make_iconst(object constant) {

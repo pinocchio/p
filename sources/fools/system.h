@@ -65,21 +65,44 @@ static void inline cls##_##element() {\
 #define define_bootstrapping_class(type, messages)\
 with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
     ifixed_object ifixed = context->self.ifixed;\
+    ifixed->cdisp    = (object)&type##_##dispatch;\
     ifixed->dispatch = dispatch;\
     ifixed->delegate = delegate;\
-    header(ifixed) = fools_system->type;\
+    header(ifixed) = fools_system->type##_##class;\
     pop_context();\
 )\
-void type##_##dispatch() {\
+void type##_##class_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
     new_target(context, context->self.ifixed->delegate);\
 }\
-void type##_##stub_dispatch() {\
+void type##_##class_stub_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
     if_selector(selector, SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
     doesnotunderstand(#type"_stubclass", selector);\
+}
+
+#define define_bootstrapping_instance(type, messages)\
+void type##_##dispatch() {\
+    debug(#type"_dispatch\n");\
+    context_object context = get_context();\
+    if (context_size(context) >= 1) {\
+        object selector = message(context);\
+        messages\
+    }\
+    fallback_shift(context);\
+    debug("ret>>"#type"_dispatch\n");\
+}\
+void type##_##stub_dispatch() {\
+    debug(#type"_stub_dispatch\n");\
+    context_object context = get_context();\
+    if (context_size(context) >= 1) {\
+        object selector = message(context);\
+        messages\
+        doesnotunderstand(#type"_stub", selector);\
+    }\
+    debug("ret>>"#type"_stub_dispatch\n");\
 }
 
 #define with_pre_eval1(name, context, first, body)\
