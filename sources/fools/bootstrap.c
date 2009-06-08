@@ -28,6 +28,10 @@ object IAPPLY;
 object APPLY_IN;
 object SCOPE;
 object SHIFT;
+// Icapture
+object INSTANCE;
+// Iassign
+object TO_EXPRESSION;
 // Ifixed
 object OBJECT_AT;
 object OBJECT_AT_PUT;
@@ -75,11 +79,9 @@ fools_object bootstrap() {
     fools_system->iconst_class          = build_native_class(fools_system->ifixed_stub_class, iconst);
     fools_system->icall_class           = build_native_class(fools_system->ifixed_stub_class, icall);
     fools_system->iassign_class         = build_native_class(fools_system->ifixed_stub_class, iassign);
-    fools_system->ivar_class            = build_native_class(fools_system->ifixed_stub_class, ivar);
-    fools_system->icapture_class        = build_native_class(fools_system->ifixed_stub_class, icapture);
+    fools_system->ivar_class            = incomplete_class(ivar);
+    fools_system->icapture_class        = incomplete_class(icapture);
     fools_system->iscoped_class         = incomplete_class(iscoped);
-    //fools_system->iscoped_class         = build_native_class(fools_system->ifixed_stub_class, iscoped);
-    //fools_system->iscoped_metaclass     = build_native_class(fools_system->ifixed_stub_class, iscoped_class);
     fools_system->env_class             = incomplete_class(env);
     fools_system->ifixed_metaclass      = incomplete_class(ifixed_metaclass);
     

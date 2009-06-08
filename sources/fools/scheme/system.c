@@ -18,7 +18,7 @@ void inline add_eval_args_code(ilist_object exp,
         ivar_object variable = array_at(arguments, i).ivar;
         icall2(arg_eval, variable, PRE_EVAL_ENV, parent_env);
         ilist_at_put(exp, i - toskip,
-            (object)make_iassign(variable, (object)arg_eval));
+            (object)make_iassign((object)variable, (object)arg_eval));
     }
 }
 

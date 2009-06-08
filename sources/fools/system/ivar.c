@@ -44,10 +44,19 @@ static void inline ivar_eval() {
     debug("ret>>ivar>>eval:\n");
 }
 
-define_bootstrapping_instance(ivar,
+with_pre_eval1(ivar_new, context, w_name,
+    // XXX breaking encapsulation
+    const char* name = w_name.string->value;
+    return_from_context(context, (object)make_ivar(name));
+)
+
+define_bootstrapping_class(ivar,
+    // instance
     if_selector(selector, EVAL,         ivar_eval);
     if_selector(selector, ASSIGN_IN,    ivar_assign);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    // class
+    if_selector(selector, SIZED,        ivar_new); // should rename SIZED...
 )
 
 // Object creation

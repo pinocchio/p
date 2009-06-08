@@ -25,6 +25,10 @@ extern object IAPPLY;
 extern object APPLY_IN;
 extern object SCOPE;
 extern object SHIFT;
+// Icapture
+extern object INSTANCE;
+// Iassign
+extern object TO_EXPRESSION;
 // Ifixed
 extern object OBJECT_AT;
 extern object OBJECT_AT_PUT;

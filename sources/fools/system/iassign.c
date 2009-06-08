@@ -23,13 +23,20 @@ static void inline iassign_eval() {
     debug("ret>>iassign>>eval\n");
 }
 
-define_bootstrapping_instance(iassign,
-    if_selector(selector, EVAL,         iassign_eval);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+with_pre_eval2(iassign_new, context, variable, expression,
+    return_from_context(context, (object)make_iassign(variable, expression));
+)
+
+define_bootstrapping_class(iassign,
+    // instance
+    if_selector(selector, EVAL,             iassign_eval);
+    if_selector(selector, PRE_EVAL_ENV,     pre_eval_env);,
+    // class
+    if_selector(selector, TO_EXPRESSION,    iassign_new);
 )
 
 // Object creation
-iassign_object make_iassign(ivar_object variable, object expression) {
+iassign_object make_iassign(object variable, object expression) {
     new_instance(iassign);
     result->variable        = variable;
     result->expression      = expression;

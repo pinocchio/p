@@ -9,8 +9,18 @@ static void inline icapture_eval() {
     debug("ret>>icapture>>eval %p\n", context->env.env);
 }
 
-define_bootstrapping_instance(icapture,
-    if_selector(selector, EVAL, icapture_eval);
+static void inline icapture_instance() {
+    debug("icapture_class>>instance\n");
+    context_object context = get_context();
+    return_from_context(context, fools_system->icapture);
+    debug("ret>>icapture_class>>instance\n");
+}
+
+define_bootstrapping_class(icapture,
+    // instance
+    if_selector(selector, EVAL, icapture_eval);,
+    // class
+    if_selector(selector, INSTANCE, icapture_instance);
 )
 
 // Object creation
