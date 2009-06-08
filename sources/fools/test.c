@@ -191,7 +191,7 @@ SETUP(test_iassign_ivar)
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar("iv");
 
-    iassign_object iassign = make_iassign(ivar, (object)iconst);
+    iassign_object iassign = make_iassign((object)ivar, (object)iconst);
 
     context_object make_eval_context(ci, iassign, k);
 
@@ -209,7 +209,7 @@ SETUP(test_ivar_read)
     iconst_object iconst = make_iconst(v);
     ivar_object ivar = make_ivar("iv");
 
-    iassign_object iassign = make_iassign(ivar, (object)iconst);
+    iassign_object iassign = make_iassign((object)ivar, (object)iconst);
 
     context_object make_eval_context(ci, iassign, k);
 
@@ -609,7 +609,7 @@ set_callarg(icall_32_icall_17_scheme_eqp, 1, (object)icall_31_lambda_19_x);
 array_object array_33_lambda_15_x = make_array(1);
 array_at_put(array_33_lambda_15_x, 0, ivar_16_class);
 object lambda_15_x = make_func(array_33_lambda_15_x, (object)icall_32_icall_17_scheme_eqp);
-iassign_object iassign_14_x = make_iassign(ivar_12_loop.ivar, (object)lambda_15_x);
+iassign_object iassign_14_x = make_iassign(ivar_12_loop, (object)lambda_15_x);
 icall_object icall_34_ivar_3_self = make_icall((object)ivar_3_self, 1);
 set_callarg(icall_34_ivar_3_self, 0, (object)DELEGATE);
 icall_object icall_35_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
