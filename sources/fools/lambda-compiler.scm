@@ -400,6 +400,7 @@ extravars))))))))
     (dictionary     "dictionary")
     (array          "array")
     (null           "null")
+    (env_class      "env_class")
     ;(vector        XXX has to generate arrays)
     ))
 

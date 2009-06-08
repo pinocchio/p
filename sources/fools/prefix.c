@@ -14,6 +14,8 @@ int main () {
     env_object env = empty_env;
 
     object ifixed_class = (object)make_iconst(fools_system->ifixed_metaclass);
+    object env_class    = (object)make_iconst(fools_system->env_class);
+
     object ifixed       = (object)make_iconst(fools_system->ifixed);
     object dictionary   = (object)make_iconst(fools_system->dict);
     object array        = (object)make_iconst(fools_system->array);

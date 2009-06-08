@@ -15,6 +15,7 @@ extern object FETCH_FROM;
 // Environment
 extern object STORE_AT_IN;
 extern object SUBSCOPE_KEY;
+extern object SCOPE_KEY;
 extern object SET_PARENT;
 extern object PARENT;
 // Iscope_class

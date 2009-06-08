@@ -65,11 +65,12 @@ static void inline cls##_##element() {\
     assert_argsize(context, 1);\
     object selector = message(context);
 
-#define define_bootstrapping_class(type, messages)\
+#define define_bootstrapping_class(type, instmsgs, classmsgs)\
+    define_bootstrapping_instance(type, instmsgs);\
     define_bcls(type,\
                 ifixed->cdisp    = (object)&type##_##dispatch;\
                 *pheader(ifixed) = &type##_##class_dispatch;,\
-                messages)
+                classmsgs)
 
 #define define_bcls(type, boot, messages)\
 void type##_##class_dispatch() {\
@@ -79,7 +80,6 @@ void type##_##class_dispatch() {\
 }\
 with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
     ifixed_object ifixed = context->self.ifixed;\
-    printf("setting dispatch of %p\n", context->self.ifixed);\
     boot;\
     ifixed->dispatch = dispatch;\
     ifixed->delegate = delegate;\

@@ -254,7 +254,7 @@ SETUP(test_icall)
 
 SETUP(test_new_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscoped);
+    iconst_object iconst = make_iconst(fools_system->iscoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -288,7 +288,7 @@ SETUP(test_new_iscoped)
 
 SETUP(test_eval_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscoped);
+    iconst_object iconst = make_iconst(fools_system->iscoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);

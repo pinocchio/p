@@ -89,13 +89,6 @@ void iscoped_shift() {
     return_from_context(context, (object)func);
 }
 
-define_bootstrapping_instance(iscoped,
-    if_selector(selector, IAPPLY,   iscoped_iapply);
-    if_selector(selector, SCOPE,    iscoped_scope);
-    if_selector(selector, APPLY_IN, iscoped_apply_in);
-    if_selector(selector, SHIFT,    iscoped_shift);
-)
-
 // iscoped_class>>new:size:
 static void inline iscoped_class_new() {
     debug("iscopecls>>new:size:\n");
@@ -111,7 +104,13 @@ static void inline iscoped_class_new() {
     debug("ret>>iscopecls>>new:size:\n");
 }
 
-define_bootstrapping_instance(iscoped_class,
+define_bootstrapping_class(iscoped,
+    // instance
+    if_selector(selector, IAPPLY,   iscoped_iapply);
+    if_selector(selector, SCOPE,    iscoped_scope);
+    if_selector(selector, APPLY_IN, iscoped_apply_in);
+    if_selector(selector, SHIFT,    iscoped_shift);,
+    // class
     if_selector(selector, NEW_SIZE, iscoped_class_new);
 )
 

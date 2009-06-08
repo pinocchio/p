@@ -22,6 +22,7 @@ object SYMBOLobjectAt_col_;
 object SYMBOLeval;
 object SYMBOLstore_col_at_col_in_col_;
 object SYMBOLsubScope_col_key_col_;
+object SYMBOLscope_col_key_col_;
 object SYMBOLparent_col_;
 object SYMBOLparent;
 object SYMBOLsize_col_;
@@ -53,12 +54,16 @@ object SYMBOLapply_col_in_col_;
 object SYMBOLlookup_col_;
 object SYMBOLinitialize;
 object SYMBOLIFixed;
+object SYMBOLEnvironment;
+object SYMBOLkey;
+object SYMBOLindex;
 
 void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLeval,                                "eval");
     define_symbol(SYMBOLeval_col_,                           "eval:");
     define_symbol(SYMBOLstore_col_at_col_in_col_,            "store:at:in:");
     define_symbol(SYMBOLsubScope_col_key_col_,               "subScope:key:");
+    define_symbol(SYMBOLscope_col_key_col_,                  "scope:key:");
     define_symbol(SYMBOLparent_col_,                         "parent:");
     define_symbol(SYMBOLparent,                              "parent");
     define_symbol(SYMBOLiapply_col_,                         "iapply:");
@@ -79,6 +84,7 @@ void bootstrap_scheme_symbols() {
     PRE_EVAL_ENV            = SYMBOLeval_col_;
     STORE_AT_IN             = SYMBOLstore_col_at_col_in_col_;
     SUBSCOPE_KEY            = SYMBOLsubScope_col_key_col_;
+    SCOPE_KEY               = SYMBOLscope_col_key_col_;
     SET_PARENT              = SYMBOLparent_col_;
     PARENT                  = SYMBOLparent;
     WITH_SIZE               = SYMBOLsize_col_;

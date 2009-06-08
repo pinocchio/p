@@ -43,6 +43,7 @@ static void inline env_store_at_in() {
         return pop_context();
     }
     if (env->parent.nil == fools_system->nil) {
+        assert(NULL); // TODO we currently fail hard in this case.
         return;
     }
     new_target(receiver, env->parent);
@@ -81,10 +82,20 @@ with_pre_eval1(env_set_parent, context, new_env,
 // env>>parent
 accessor_for(env, parent)
 
-define_bootstrapping_instance(env,
+with_pre_eval2(env_class_scope_key, context, key, w_size,
+    // XXX breaks encapsulation
+    int size    = number_value(w_size.number);
+    env_object new_env = make_env(key, (object)fools_system->nil, size);
+    return_from_context(context, (object)new_env);
+)
+
+define_bootstrapping_class(env,
+    // instance
     if_selector(selector, FETCH_FROM,       env_fetch_from);
     if_selector(selector, STORE_AT_IN,      env_store_at_in);
     if_selector(selector, SUBSCOPE_KEY,     env_subscope);
     if_selector(selector, SET_PARENT,       env_set_parent);
-    if_selector(selector, PARENT,           env_parent);
+    if_selector(selector, PARENT,           env_parent);,
+    // class
+    if_selector(selector, SCOPE_KEY, env_class_scope_key);
 )

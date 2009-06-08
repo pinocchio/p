@@ -1,7 +1,7 @@
 #include <system.h>
 #include <thread.h>
 
-ifixed_object inline ifixed_descr(object inst) {
+static ifixed_object inline ifixed_descr(object inst) {
     return (ifixed_object)pheader(inst.pointer);
 }
 
@@ -78,12 +78,11 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
     return_from_context(context, ifixed);
 )
 
-define_bootstrapping_instance(ifixed_metaclass,
-    if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
-    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);
-)
-
 define_bootstrapping_class(ifixed_metaclass,
+    // instance
+    if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
+    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);,
+    // class // using selector to avoid compiler warnings
     if (0) { printf("%p\n", selector.pointer); }
 )
 

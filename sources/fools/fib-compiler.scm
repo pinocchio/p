@@ -242,6 +242,36 @@
             ;(display (eq? (object_class 'delegate) metaclass))
             ;(display (eq? ((metaclass 'delegate) 'delegate) metaclass))
 
+            (ifixed_class 'dispatch:delegate:
+                objdisp
+                (object 'subclass:instvars:classvars:
+                        'IFixed (vector) (vector)))
+
+            (((ifixed_class 'class) 'methodDictionary)
+                'objectAt:put: 'basicNew
+                (method (s) (display "TODO: flag error\n")))
+
+            (env_class 'dispatch:delegate:
+                objdisp
+                (object 'subclass:instvars:classvars:
+                        'Environment (vector 'key 'index) (vector)))
+
+            (((env_class 'class) 'methodDictionary)
+                'objectAt:put: 'basicNew
+                (method (s) (display "TODO: flag error\n")))
+
+            ;(let ((el (env_class 'scope:key: 4 env_class))
+            ;      (el2 (env_class 'scope:key: 3 ifixed_class)))
+            ;    (el2 'parent: el)
+            ;    (display "Test:\n")
+            ;    (display (el 'parent))
+            ;    (display (el2 'parent))
+            ;    (display el)
+            ;    )
+
+
+            (display "STAGE 5\n")
+
             ((object 'new) 'print)
             (object 'print)
             (metaclass 'instance)
@@ -249,25 +279,6 @@
                                      ; only generated on the spot to create its
                                      ; single instance in "newclass"
             ((class 'new) 'print)
-
-            (let ((ifixed_cls (object 'subclass:instvars:classvars:
-                                      'IFixed (vector) (vector))))
-                ; There is only one "ifixed" in the system!
-                ; ((ifixed_cls 'methodDictionary)
-                ;   'objectAt:put: 'testMethod
-                ;    (method (s) (display "TESTING!\n")))
-
-                (ifixed_class 'dispatch:delegate:
-                    objdisp
-                    ; ifixed is the only instance of the IFixed class
-                    ifixed_cls)
-                ; DNU
-                ; (ifixed_class 'dispatch:delegate: objdisp ifixed_cls)
-            )
-            ; (ifixed 'testMethod)
-
-            (display "STAGE 5\n")
-
         
             (let* ((ev (vector))
                    (magnitude (object  'subclass:instvars:classvars: 'Magnitude  ev ev))

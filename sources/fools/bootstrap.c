@@ -18,6 +18,7 @@ object FETCH_FROM;
 // Environment
 object STORE_AT_IN;
 object SUBSCOPE_KEY;
+object SCOPE_KEY;
 object SET_PARENT;
 object PARENT;
 // Iscope_class
@@ -47,8 +48,12 @@ object WITH_SIZE;
 
 #define define_symbol(name, value)\
     name = (object)make_string(value);
+
+#define incomplete_class(name)\
+    build_native_class(wrap_dispatcher(name##_##class_stub_dispatch),\
+                       name)
     
-#define empty_class (object)make_object(1, (object)fools_system->nil);
+#define empty_class (object)make_object(0, (object)fools_system->nil);
 
 fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
@@ -72,12 +77,11 @@ fools_object bootstrap() {
     fools_system->iassign_class         = build_native_class(fools_system->ifixed_stub_class, iassign);
     fools_system->ivar_class            = build_native_class(fools_system->ifixed_stub_class, ivar);
     fools_system->icapture_class        = build_native_class(fools_system->ifixed_stub_class, icapture);
-    fools_system->iscoped_class         = build_native_class(fools_system->ifixed_stub_class, iscoped);
-    fools_system->iscoped_metaclass     = build_native_class(fools_system->ifixed_stub_class, iscoped_class);
-    fools_system->ifixed_metaclass      = build_native_class(
-                                            wrap_dispatcher(ifixed_metaclass_class_stub_dispatch),
-                                            ifixed_metaclass);
-    fools_system->env_class             = build_native_class(fools_system->ifixed_stub_class, env);
+    fools_system->iscoped_class         = incomplete_class(iscoped);
+    //fools_system->iscoped_class         = build_native_class(fools_system->ifixed_stub_class, iscoped);
+    //fools_system->iscoped_metaclass     = build_native_class(fools_system->ifixed_stub_class, iscoped_class);
+    fools_system->env_class             = incomplete_class(env);
+    fools_system->ifixed_metaclass      = incomplete_class(ifixed_metaclass);
     
     /* Special cases which are never to be exposed to the outside world. 
      * They are only used internally to navigate to the right object or flag
@@ -88,7 +92,6 @@ fools_object bootstrap() {
     fools_system->level_shifter         = wrap_dispatcher(shift_level);
 
     fools_system->icapture      = (object)make_icapture();
-    fools_system->iscoped       = make_empty_object(iscoped_metaclass);
     fools_system->ifixed        = make_empty_object(ifixed_metaclass);
     fools_system->dict          = make_empty_object(dict_metaclass);
     fools_system->array         = make_empty_object(array_metaclass);

@@ -22,6 +22,7 @@ extern object SYMBOLobjectAt_col_;
 extern object SYMBOLeval;
 extern object SYMBOLstore_col_at_col_in_col_;
 extern object SYMBOLsubScope_col_key_col_;
+extern object SYMBOLscope_col_key_col_;
 extern object SYMBOLparent_col_;
 extern object SYMBOLparent;
 extern object SYMBOLsize_col_;
@@ -52,6 +53,9 @@ extern object SYMBOLapply_col_in_col_;
 extern object SYMBOLlookup_col_;
 extern object SYMBOLinitialize;
 extern object SYMBOLIFixed;
+extern object SYMBOLEnvironment;
+extern object SYMBOLkey;
+extern object SYMBOLindex;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\

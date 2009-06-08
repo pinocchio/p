@@ -48,7 +48,7 @@ void inline add_switch_scope_code(ilist_object exp, int position) {
 object iscoped_for(object exp, object size) {
     // TODO: optimization: don't wrap iscoped in a const.
     // Just don't eval the receiver.
-    iconst_object iconst = make_iconst(fools_system->iscoped);
+    iconst_object iconst = make_iconst(fools_system->iscoped_class);
     icall_object icall3(icall, iconst, NEW_SIZE, exp, size);
     icall1(icall, icall, SHIFT);
     return (object)icall;
@@ -107,7 +107,7 @@ object inline make_m(array_object arguments, object body) {
     add_switch_scope_code(exp, argsize - 1);
     ilist_at_put(exp, argsize, body);
 
-    iconst_object iconst = make_iconst(fools_system->iscoped);
+    iconst_object iconst = make_iconst(fools_system->iscoped_class);
     icall_object icall3(icall, iconst, NEW_SIZE, (object)exp,
                         (object)make_number(array_size(arguments)));
     return (object)icall;

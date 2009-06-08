@@ -151,7 +151,6 @@ struct fools {
     object              native;
     object              class_lookup;
     object              icapture;
-    object              iscoped;
     object              ifixed;
     object              dict;
     object              array;
@@ -165,7 +164,6 @@ struct fools {
     object iassign_class;
     object icapture_class;
     object iscoped_class;
-    object iscoped_metaclass;
     object ifixed_class;
     object ifixed_stub_class;
     object ifixed_metaclass;
