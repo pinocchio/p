@@ -78,7 +78,7 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
     return_from_context(context, ifixed);
 )
 
-define_bootstrapping_class(ifixed_metaclass,
+define_bootstrapping_class(fixed,
     // instance
     if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
     if_selector(selector, WITH_SIZE, ifixed_stub_class_new);,

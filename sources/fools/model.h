@@ -164,11 +164,11 @@ struct fools {
     object iassign_class;
     object icapture_class;
     object iscoped_class;
+    object fixed_class;
+    object env_class;
+
     object ifixed_class;
     object ifixed_stub_class;
-    object ifixed_metaclass;
-    object ifixed_stub_metaclass;
-    object env_class;
 
     // Level shifting
     object level_shifter;
