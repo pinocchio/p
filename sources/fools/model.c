@@ -3,8 +3,6 @@
 #include <bootstrap.h>
 #include <thread.h>
 
-#define ctx_size (sizeof(struct context) / sizeof(object))
-
 object_object make_object(int size, object interpreter) {
     object_object result  = NEW_ARRAYED(object_object, object, size);
     header(result)          = interpreter;
@@ -57,20 +55,6 @@ native_class_object make_native_class(object header, transfer_target cdisp) {
     return result;
 }
 
-context_object make_context(object self, int size) {
-    context_object result   = stack_claim(size + ctx_size);
-    result->self            = self;
-    result->code            = ntarget(header(self.pointer));
-    result->arguments.size  = size;
-    return result;
-}
-
-context_object make_empty_context(int size) {
-    context_object result   = stack_claim(size + ctx_size);
-    result->arguments.size  = size;
-    return result;
-}
-
 // Accessors
 
 int inline array_size(array_object array) {
@@ -113,34 +97,4 @@ object inline env_at(env_object env, int index) {
 
 void inline env_at_put(env_object env, int index, object value) {
     array_at_put(env->values, index, value);
-}
-
-void inline set_message(context_object context, object msg) {
-    raw_array_at_put(&context->arguments, 0, msg);
-}
-
-void inline set_new_message(context_object context, object msg) {
-    context->code = ntarget(header(pheader(pheader(context))));
-    set_message(context, msg);
-}
-
-void inline set_argument(context_object context, int index, object value) {
-    raw_array_at_put(&context->arguments, index, value);
-}
-
-object inline argument_at(context_object context, int index) {
-    return raw_array_at(&context->arguments, index);
-}
-
-object inline message(context_object context) {
-    return argument_at(context, 0);
-}
-
-int inline context_size(context_object context) {
-    return array_size(&context->arguments);
-}
-
-context_object inline return_context(context_object context) {
-    int size = context_size(context);
-    return context - size - ctx_size;
 }

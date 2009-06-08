@@ -126,13 +126,6 @@ struct native_class {
     object          delegate;
 };
 
-struct context {
-    transfer_target     code;
-    object              self;
-    object              env;
-    struct array        arguments;
-};
-
 struct fools {
     // Objects known to the system
     nil_object          nil;
@@ -180,8 +173,7 @@ extern array_object             make_array(int size);
 extern dict_object              make_dict(int size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
-extern context_object           make_context(object self, int size);
-extern context_object           make_empty_context(int size);
+
 extern native_object            make_native(transfer_target native);
 extern native_class_object      make_native_class(object header, transfer_target cdisp);
 
@@ -199,13 +191,6 @@ extern void             inline object_at_put(object_object o,
                                              int index, object value);
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);
-extern context_object   inline return_context(context_object context);
-extern void             inline set_message(context_object context, object msg);
-extern void             inline set_new_message(context_object context, object msg);
-extern void             inline set_argument(context_object context, int index, object value);
-extern object           inline argument_at(context_object context, int index);
-extern object           inline message(context_object context);
-extern int              inline context_size(context_object context);
 #define assert_argsize(context, size) assert(context_size(context) >= size)
 #define empty_env make_env((object)fools_system->nil,\
                            (object)fools_system->nil, 0)
