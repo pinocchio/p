@@ -52,13 +52,6 @@ with_pre_eval2(dict_at_put, context, key, value,
     pop_context();
 )
 
-void dict_dispatch() {
-    dispatch_header(context, selector);
-    if_selector(selector, OBJECT_AT,        dict_at);
-    if_selector(selector, OBJECT_AT_PUT,    dict_at_put);
-    doesnotunderstand("dict", selector);
-}
-
 static void inline dict_new() {
     debug("dict>>new\n");
     context_object context = get_context();
@@ -66,8 +59,8 @@ static void inline dict_new() {
     debug("ret>>dict>>new\n");
 }
 
-void dict_class_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_class(dict,
+    if_selector(selector, OBJECT_AT,        dict_at);
+    if_selector(selector, OBJECT_AT_PUT,    dict_at_put);,
     if_selector(selector, NEW, dict_new);
-    doesnotunderstand("dict class", selector);
-}
+)

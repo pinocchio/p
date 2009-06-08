@@ -18,10 +18,10 @@ int main () {
     object env_class    = (object)make_iconst(fools_system->env_class);
     object string       = (object)make_iconst(fools_system->string_class);
     object integer      = (object)make_iconst(fools_system->number_class);
-
     object array        = (object)make_iconst(fools_system->array_class);
+    object dictionary   = (object)make_iconst(fools_system->dict_class);
+
     object ifixed       = (object)make_iconst(fools_system->ifixed);
-    object dictionary   = (object)make_iconst(fools_system->dict);
     object null         = (object)make_iconst((object)fools_system->nil);
 /* Generated code */
 

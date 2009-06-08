@@ -132,12 +132,9 @@ struct fools {
     object              true;
     object              false;
     array_object        empty;
-    object              native;
-    object              class_lookup;
     object              icapture;
     object              ifixed;
     object              array;
-    object              dict;
 
     // Evaluation related classes
     object ilist_class;
@@ -150,6 +147,7 @@ struct fools {
     object fixed_class;
     object env_class;
 
+    // Classes related to object formats
     object ifixed_class;
     object ifixed_stub_class;
 
@@ -164,9 +162,6 @@ struct fools {
     object string_class;
     object array_class;
     object dict_class;
-    object dict_metaclass;
-    object true_class;
-    object false_class;
 };
 
 extern object_object            make_object(int size, object interpreter);

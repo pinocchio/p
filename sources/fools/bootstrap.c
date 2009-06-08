@@ -31,10 +31,6 @@ fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
 
-    fools_system->number_class      = incomplete_class(number);
-    fools_system->dict_class        = wrap_dispatcher(dict_dispatch);
-    fools_system->dict_metaclass    = wrap_dispatcher(dict_class_dispatch);
-
     fools_system->ilist_class    = incomplete_class(ilist);
     fools_system->iconst_class   = incomplete_class(iconst);
     fools_system->icall_class    = incomplete_class(icall);
@@ -45,6 +41,8 @@ fools_object bootstrap() {
     fools_system->env_class      = incomplete_class(env);
     fools_system->fixed_class    = incomplete_class(fixed);
     fools_system->string_class   = incomplete_class(string);
+    fools_system->number_class   = incomplete_class(number);
+    fools_system->dict_class     = incomplete_class(dict);
 
     /* Special cases which are never to be exposed to the outside world. 
      * They are only used internally to navigate to the right object or flag
@@ -52,9 +50,9 @@ fools_object bootstrap() {
      */
     fools_system->ifixed_class      = wrap_dispatcher(ifixed_class_dispatch);
     fools_system->ifixed_stub_class = wrap_dispatcher(ifixed_class_stub_dispatch);
+
     fools_system->iarray_class      = wrap_dispatcher(iarray_class_dispatch);
     fools_system->iarray_stub_class = wrap_dispatcher(iarray_class_stub_dispatch);
-
     fools_system->array_class       = incomplete_typed_class(iarray);
 
     // Build after building the array_class!
@@ -66,7 +64,6 @@ fools_object bootstrap() {
 
     fools_system->icapture      = (object)make_icapture();
     fools_system->ifixed        = make_empty_object(fixed_class);
-    fools_system->dict          = make_empty_object(dict_metaclass);
 
     init_thread();
 
