@@ -15,12 +15,6 @@ object_object make_object(int size, object interpreter) {
     return result;
 }
 
-number_object make_number(int value) {
-    new_instance(number);
-    result->value           = value;
-    return result;
-}
-
 array_object make_array(int size) {
     if (size == 0) { return fools_system->empty; }
     array_object result     = (array_object)make_object(size + 1,
@@ -79,10 +73,6 @@ context_object make_empty_context(int size) {
 
 // Accessors
 
-int inline number_value(number_object number) {
-    return number->value;
-}
-
 int inline array_size(array_object array) {
     return array->size;
 }
@@ -107,11 +97,6 @@ void inline array_at_put(array_object array, int index, object new_value) {
 
 transfer_target inline native_target(native_object native) {
     return native->target.target;
-}
-
-object inline symbol_known_to_the_vm(int index) {
-    array_object symbols = fools_system->symbols_known_to_the_vm;
-    return raw_array_at(symbols, index);
 }
 
 object inline object_at(object_object object, int index) {

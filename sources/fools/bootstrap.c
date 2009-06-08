@@ -28,11 +28,9 @@ fools_object bootstrap() {
     fools_system                            = NEW(struct fools);
     fools_system->nil                       = make_nil();
 
-    fools_system->number_class      = empty_class;
+    fools_system->number_class      = incomplete_class(number);
     fools_system->dict_class        = wrap_dispatcher(dict_dispatch);
     fools_system->dict_metaclass    = wrap_dispatcher(dict_class_dispatch);
-
-    fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 
     fools_system->ilist_class    = incomplete_class(ilist);
     fools_system->iconst_class   = incomplete_class(iconst);

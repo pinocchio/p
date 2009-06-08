@@ -42,6 +42,4 @@ extern object DISPATCH_DELEGATE_SIZE;
 extern object SET_DISPATCH_DELEGATE;
 extern object WITH_SIZE;
 
-#define NBR_SYMBOLS 20
-
 #endif // BOOTSTRAP_H

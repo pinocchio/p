@@ -99,10 +99,6 @@ struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
 
-struct number {
-    int                 value;
-};
-
 struct array {
     int                 size;
     object              values[];
@@ -148,7 +144,6 @@ struct fools {
     object              icapture;
     object              ifixed;
     object              dict;
-    array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
     object ilist_class;
@@ -181,7 +176,6 @@ struct fools {
 };
 
 extern object_object            make_object(int size, object interpreter);
-extern number_object            make_number(int value);
 extern array_object             make_array(int size);
 extern dict_object              make_dict(int size);
 extern env_object               make_env(object scope, object parent, int size);
@@ -191,7 +185,6 @@ extern context_object           make_empty_context(int size);
 extern native_object            make_native(transfer_target native);
 extern native_class_object      make_native_class(object header, transfer_target cdisp);
 
-extern int              inline number_value(number_object number);
 extern int              inline array_size(array_object array);
 extern object           inline array_at(array_object array, int index);
 extern object           inline raw_array_at(array_object array, int index);

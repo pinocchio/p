@@ -2,11 +2,6 @@
 #include <thread.h>
 #include <string.h>
 
-static void inline identity() {
-    context_object context = get_context();
-    return_from_context(context, context->self);
-}
-
 with_pre_eval1(string_new, context, w_size,
     // XXX breaking encapsulation
     int size = number_value(w_size.number);

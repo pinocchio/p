@@ -3,14 +3,14 @@ scheme/natives.c scheme/system.c scheme/symbols.c debug.c thread.c\
 system/icall.c system/ilist.c system/iconst.c system/ival.c\
 system/iassign.c system/ivar.c system/icapture.c system/ifixed.c\
 system/env.c system/iscoped.c system/shift.c system/array.c system/dict.c\
-system/string.c system/fallback.c
+system/string.c system/fallback.c system/number.c
 HFILES=model.h bootstrap.h primitives.h system.h print.h gc.h\
 scheme/natives.h scheme/system.h scheme/symbols.h debug.h thread.h\
 constants.h\
 system/icall.h system/ilist.h system/iconst.h system/ival.h\
 system/iassign.h system/ivar.h system/icapture.h system/ifixed.h\
 system/env.h system/iscoped.h system/shift.h system/array.h system/dict.h\
-system/string.h system/fallback.h
+system/string.h system/fallback.h system/number.h
 PROGRAM=fools
 VERSION=0.1
 

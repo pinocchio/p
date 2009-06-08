@@ -35,7 +35,7 @@
     ; Here I define a general dispatching mechanism for objects and classes:
      (lookup
         (lambda (self env args)
-            (let lookup ((msg (args 'objectAt: 0))
+            (let lookup ((msg ((args 'objectAt: 0) 'eval: env))
                          (class (self 'delegate)))
                 ;(display "LOOKUP: ")
                 ;(display msg)
@@ -290,7 +290,7 @@
             (let* ((ev (vector))
                    (magnitude (object  'subclass:instvars:classvars: 'Magnitude  ev ev))
                    (number (magnitude  'subclass:instvars:classvars: 'Number     ev ev))
-                   (integer (number    'subclass:instvars:classvars: 'Integer    ev ev))
+                   (ointeger (number   'subclass:instvars:classvars: 'Integer    ev ev))
                    (boolean (object    'subclass:instvars:classvars: 'Boolean    ev ev))
                    (true  (boolean     'subclass:instvars:classvars: 'True       ev ev))
                    (false (boolean     'subclass:instvars:classvars: 'False      ev ev))
@@ -317,8 +317,10 @@
 
                 ;((integer 'basicNew) 'testMethod)
 
-                (array  'dispatch:delegate: objdisp oarray)
-                (string 'dispatch:delegate: objdisp ostring)
+                (array   'dispatch:delegate: objdisp oarray)
+                (string  'dispatch:delegate: objdisp ostring)
+                (integer 'dispatch:delegate: objdisp ointeger)
+
                 ((array 'class) 'store:method:
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
                 ((array 'class) 'store:method:
@@ -331,6 +333,12 @@
                 (string 'store:method: 'testMethod
                     (method (s) (display "HELLO!") (display (getself s))
                                 (display "\n")))
+
+                (integer 'store:method: +
+                    (method (s other)
+                        (+ (getself s) other)))
+
+                (display (1 + 2))
 
                 ("biep" 'testMethod)
 
@@ -355,7 +363,7 @@
                 ;    (display "done test\n")
                 ;    )
                         
-                (vector magnitude number integer boolean true false collection
+                (vector magnitude number ointeger boolean true false collection
                         sqcollection acollection ocollection oarray)
     ))))))
 

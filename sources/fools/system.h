@@ -24,6 +24,7 @@
 #include <system/array.h>
 #include <system/dict.h>
 #include <system/string.h>
+#include <system/number.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();
@@ -176,5 +177,6 @@ static void inline name() {\
 /* Globally used functions */
 extern void pre_eval_env();
 extern void doesnotunderstand(const char* class, object selector);
+extern void inline identity();
 
 #endif

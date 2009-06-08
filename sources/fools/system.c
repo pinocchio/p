@@ -73,3 +73,8 @@ void inline object_delegate() {
     return_from_context(context, cls->delegate);
     debug("ret>>object>>delegate\n");
 }
+
+void inline identity() {
+    context_object context = get_context();
+    return_from_context(context, context->self);
+}

@@ -403,6 +403,7 @@ extravars))))))))
     (array          "array")
     (ifixed         "ifixed")
     (string         "string")
+    (integer        "integer")
     ;(vector        XXX has to generate arrays)
     ))
 
