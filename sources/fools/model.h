@@ -104,10 +104,6 @@ struct array {
     object              values[];
 };
 
-struct dict {
-    array_object        values;
-};
-
 struct env {
     object              scope;
     object              parent;
@@ -166,7 +162,6 @@ struct fools {
 
 extern object_object            make_object(int size, object interpreter);
 extern array_object             make_array(int size);
-extern dict_object              make_dict(int size);
 extern env_object               make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 

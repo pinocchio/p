@@ -64,3 +64,12 @@ define_bootstrapping_class(dict,
     if_selector(selector, OBJECT_AT_PUT,    dict_at_put);,
     if_selector(selector, NEW, dict_new);
 )
+
+
+// Object creation
+dict_object make_dict(int size) {
+    assert(size);
+    new_instance(dict);
+    result->values = make_array(size * 2);
+    return result;
+}

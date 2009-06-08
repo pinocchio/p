@@ -22,13 +22,6 @@ array_object make_array(int size) {
     return result;
 }
 
-dict_object make_dict(int size) {
-    assert(size);
-    new_instance(dict);
-    result->values = make_array(size * 2);
-    return result;
-}
-
 env_object make_env(object scope, object parent, int size) {
     new_instance(env);
     result->scope       = scope;
