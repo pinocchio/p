@@ -1,6 +1,44 @@
 #include <system.h>
 #include <scheme/symbols.h>
 
+// Global symbols, readable format
+// General purpose
+object EVAL;
+object PRE_EVAL_ENV;
+// Variable
+object ASSIGN_IN;
+object FETCH_FROM;
+// Environment
+object STORE_AT_IN;
+object SUBSCOPE_KEY;
+object SCOPE_KEY;
+object SET_PARENT;
+object PARENT;
+// Iscope_class
+object NEW_SIZE;
+// Iscope
+object IAPPLY;
+object APPLY_IN;
+object SCOPE;
+object SHIFT;
+// Icapture
+object INSTANCE;
+// Iassign
+object TO_EXPRESSION;
+// Icall
+object TO_SIZED;
+// Ifixed
+object OBJECT_AT;
+object OBJECT_AT_PUT;
+object NEW;
+object SIZED;
+object DELEGATE;
+object SIZE;
+object DISPATCH_DELEGATE_SIZE;
+object SET_DISPATCH_DELEGATE;
+object WITH_SIZE;
+
+// Global symbols, generatable format
 object SYMBOLdispatch_col_delegate_col_;
 object SYMBOLbasicNew;
 object SYMBOLobjectAt_col_put_col_;
@@ -61,6 +99,7 @@ object SYMBOLto_col_expression_col_;
 object SYMBOLto_col_sized_col_;
 
 void bootstrap_scheme_symbols() {
+    // Ensure all symbols used by the VM are bootstrapped.
     define_symbol(SYMBOLeval,                                "eval");
     define_symbol(SYMBOLeval_col_,                           "eval:");
     define_symbol(SYMBOLstore_col_at_col_in_col_,            "store:at:in:");

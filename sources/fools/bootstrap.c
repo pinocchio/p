@@ -8,43 +8,6 @@
 // System global
 fools_object fools_system;
 
-// Global symbols
-// General purpose
-object EVAL;
-object PRE_EVAL_ENV;
-// Variable
-object ASSIGN_IN;
-object FETCH_FROM;
-// Environment
-object STORE_AT_IN;
-object SUBSCOPE_KEY;
-object SCOPE_KEY;
-object SET_PARENT;
-object PARENT;
-// Iscope_class
-object NEW_SIZE;
-// Iscope
-object IAPPLY;
-object APPLY_IN;
-object SCOPE;
-object SHIFT;
-// Icapture
-object INSTANCE;
-// Iassign
-object TO_EXPRESSION;
-// Icall
-object TO_SIZED;
-// Ifixed
-object OBJECT_AT;
-object OBJECT_AT_PUT;
-object NEW;
-object SIZED;
-object DELEGATE;
-object SIZE;
-object DISPATCH_DELEGATE_SIZE;
-object SET_DISPATCH_DELEGATE;
-object WITH_SIZE;
-
 #define make_empty_object(cls)\
     (object)make_object(0, (object)fools_system->cls)
 
@@ -78,7 +41,7 @@ fools_object bootstrap() {
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 
     fools_system->ilist_class           = build_native_class(fools_system->ifixed_stub_class, ilist);
-    fools_system->iconst_class          = build_native_class(fools_system->ifixed_stub_class, iconst);
+    fools_system->iconst_class          = incomplete_class(iconst);
     fools_system->icall_class           = incomplete_class(icall);
     fools_system->iassign_class         = incomplete_class(iassign);
     fools_system->ivar_class            = incomplete_class(ivar);

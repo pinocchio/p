@@ -3,9 +3,16 @@
 
 accessor_for(iconst, constant)
 
-define_bootstrapping_instance(iconst, 
+with_pre_eval1(iconst_new, context, constant,
+    return_from_context(context, (object)make_iconst(constant));
+)
+
+define_bootstrapping_class(iconst, 
+    // instance
     if_selector(selector, EVAL,         iconst_constant);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    // class
+    if_selector(selector, SIZED,        iconst_new);
 )
 
 // Object creation
