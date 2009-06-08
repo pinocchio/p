@@ -216,15 +216,22 @@
             ; Remove the ifixed indirection for tests.
             (set! metaclass (metaclass_class 'delegate))
             (metaclass_class 'objectAt:put: 3 metaclass)
-            ((methoddict metaclass_class) 'objectAt:put:
+            ((metaclass_class 'methodDictionary) 'objectAt:put:
                 'new null)
 
-            ((methoddict object) 'objectAt:put:
+            ((object 'methodDictionary) 'objectAt:put:
                 'initialize (method (s) (getself s)))
 
-            ((methoddict classBehaviour) 'objectAt:put:
+            ((classBehaviour 'methodDictionary) 'objectAt:put:
                 'new (method (s)
                         (((getself s) 'basicNew) 'initialize)))
+            
+            ((classBehaviour 'methodDictionary)
+                'objectAt:put: 'store:method:
+                    (method (s name method)
+                        (((getself s) 'methodDictionary)
+                            'objectAt:put: name method)))
+
 
             ;(display "Minimal system ready!\n")
 
@@ -256,9 +263,9 @@
                 (object 'subclass:instvars:classvars:
                         'Environment (vector 'key 'index) (vector)))
 
-            (((env_class 'class) 'methodDictionary)
-                'objectAt:put: 'basicNew
+            ((env_class 'class) 'store:method: 'basicNew
                 (method (s) (display "TODO: flag error\n")))
+
 
             ;(let ((el (env_class 'scope:key: 4 env_class))
             ;      (el2 (env_class 'scope:key: 3 ifixed_class)))
@@ -289,26 +296,67 @@
                    (false (boolean     'subclass:instvars:classvars: 'False      ev ev))
                    (collection (object 'subclass:instvars:classvars: 'Collection ev ev))
                    (sqcollection (collection 'subclass:instvars:classvars:
-                                      'SequenceableCollection ev ev))
+                                        'SequenceableCollection ev ev))
                    (acollection (sqcollection 'subclass:instvars:classvars:
-                                      'ArrayedCollection ev ev))
+                                        'ArrayedCollection ev ev))
                    (ocollection (sqcollection 'subclass:instvars:classvars:
-                                      'OrderedCollection (vector 1 2 3) ev))
+                                        'OrderedCollection (vector 1 2 3) ev))
                                                           ; XXX todo :! 
-                   (ary (acollection 'subclass:instvars:classvars: 'Array ev ev)))
+                   (oarray  (acollection 'subclass:instvars:classvars:
+                                        'Array ev ev))
+                   (ostring (acollection 'subclass:instvars:classvars:
+                                        'String ev ev)))
 
-                ((integer 'methodDictionary)
-                    'objectAt:put: 'testMethod
-                    (method (s) (display "IN SELF!\n")
-                                ((getsuper s) (vector 'testMethod))))
-                ((magnitude 'methodDictionary)
-                    'objectAt:put: 'testMethod
-                    (method (s) (display "In SUPER!!\n")))
+                ;((integer 'methodDictionary)
+                ;    'objectAt:put: 'testMethod
+                ;    (method (s) (display "IN SELF!\n")
+                ;                ((getsuper s) (vector 'testMethod))))
+                ;((magnitude 'methodDictionary)
+                ;    'objectAt:put: 'testMethod
+                ;    (method (s) (display "In SUPER!!\n")))
 
-                ((integer 'basicNew) 'testMethod)
+                ;((integer 'basicNew) 'testMethod)
 
+                (array  'dispatch:delegate: objdisp oarray)
+                (string 'dispatch:delegate: objdisp ostring)
+                ((array 'class) 'store:method:
+                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
+                ((array 'class) 'store:method:
+                    'basicNew: (method (s size) (array 'basicNew: size)))
+                ((string 'class) 'store:method:
+                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
+                ((string 'class) 'store:method:
+                    'basicNew: (method (s size) (string 'basicNew: size)))
+
+                (string 'store:method: 'testMethod
+                    (method (s) (display "HELLO!") (display (getself s))
+                                (display "\n")))
+
+                ("biep" 'testMethod)
+
+                
+
+                ;(let ((test "BOE\n"))
+                ;    ((string 'methodDictionary) 'objectAt:put:
+                ;        'testMethod (method (s)
+                ;            (display "bla\n")
+                ;            (display (getself s))
+                ;            (display (getself s))
+                ;            (display (getself s))
+                ;            (display "biep\n")))
+                ;    (test 'testMethod))
+
+                ;(let ((test (array 'basicNew: 10)))
+                ;    ((array 'methodDictionary) 'objectAt:put:
+                ;        'testMethod (method (s) (display "BOE\n")
+                ;                                (display ((getself s) 'size))))
+                ;    (display "DO test\n")
+                ;    (test 'testMethod)
+                ;    (display "done test\n")
+                ;    )
+                        
                 (vector magnitude number integer boolean true false collection
-                        sqcollection acollection ocollection ary)
+                        sqcollection acollection ocollection oarray)
     ))))))
 
 ))

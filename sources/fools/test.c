@@ -657,7 +657,7 @@ SETUP(test_make_ifixed)
 
     object result = transfer();    
 
-    assert(number_value(result.ifixed->size.number) == 5);
+    assert(result.ifixed->size == 5);
     assert(result.ifixed->delegate.nil == fools_system->nil);
 
     //assert((pointer)*PINC(result.ifixed->interp.pointer) == result.pointer);
@@ -680,7 +680,7 @@ SETUP(test_ifixed_natives)
 
     object ifixed = transfer();    
 
-    assert(number_value(ifixed.ifixed->size.number) == 5);
+    assert(ifixed.ifixed->size == 5);
     assert(ifixed.ifixed->delegate.nil == fools_system->nil);
 
     icall1(icall, make_iconst(ifixed), SIZE);

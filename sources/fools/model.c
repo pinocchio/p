@@ -1,5 +1,4 @@
 #include <model.h>
-#include <string.h>
 #include <assert.h>
 #include <bootstrap.h>
 #include <thread.h>
@@ -13,14 +12,6 @@ object_object make_object(int size, object interpreter) {
     for (i = 0; i < size; i++) {
         object_at_put(result, i, (object)fools_system->nil);
     }
-    return result;
-}
-
-string_object make_string(const char* value) {
-    string_object result    = NEW(struct string);
-    result->value           = strdup(value);
-    result->size            = make_number(strlen(value));
-    header(result)          = (object)fools_system->string_class;
     return result;
 }
 
@@ -92,14 +83,6 @@ int inline number_value(number_object number) {
     return number->value;
 }
 
-char* string_value(string_object string) {
-    return string->value;
-}
-
-number_object inline string_size(string_object string) {
-    return string->size;
-}
-
 int inline array_size(array_object array) {
     return array->size;
 }
@@ -124,15 +107,6 @@ void inline array_at_put(array_object array, int index, object new_value) {
 
 transfer_target inline native_target(native_object native) {
     return native->target.target;
-}
-
-int inline string_equals(string_object string1, string_object string2) {
-    int left_size   = number_value(string_size(string1));
-    int right_size  = number_value(string_size(string2));
-    return (left_size == right_size) &&
-           (strncmp(string_value(string1),
-                   string_value(string2),
-                   left_size) == 0);
 }
 
 object inline symbol_known_to_the_vm(int index) {

@@ -115,6 +115,13 @@ void type##_##stub_dispatch() {\
     debug("ret>>"#type"_stub_dispatch\n");\
 }
 
+#define define_bootstrapping_type(name, instmsgs, classmsgs)\
+    define_bootstrapping_instance(name, instmsgs)\
+    define_bcls(name,\
+        ifixed->cdisp   = (object)&name##_##dispatch;\
+        header(ifixed)  = fools_system->name##_##class;,\
+        classmsgs)
+
 #define with_pre_eval1(name, context, first, body)\
 static void name##_##do() {\
     debug(#name"\n");\

@@ -99,11 +99,6 @@ struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
 
-struct string {
-    number_object       size;
-    char*               value;
-};
-
 struct number {
     int                 value;
 };
@@ -153,7 +148,6 @@ struct fools {
     object              icapture;
     object              ifixed;
     object              dict;
-    object              array;
     array_object        symbols_known_to_the_vm;
 
     // Evaluation related classes
@@ -170,6 +164,9 @@ struct fools {
     object ifixed_class;
     object ifixed_stub_class;
 
+    object iarray_class;
+    object iarray_stub_class;
+
     // Level shifting
     object level_shifter;
 
@@ -177,7 +174,6 @@ struct fools {
     object number_class;
     object string_class;
     object array_class;
-    object array_metaclass;
     object dict_class;
     object dict_metaclass;
     object true_class;
@@ -185,7 +181,6 @@ struct fools {
 };
 
 extern object_object            make_object(int size, object interpreter);
-extern string_object            make_string(const char* value);
 extern number_object            make_number(int value);
 extern array_object             make_array(int size);
 extern dict_object              make_dict(int size);
@@ -205,8 +200,6 @@ extern void             inline array_at_put(array_object array,
 extern void             inline raw_array_at_put(array_object array,
                                                 int index, object new_value);
 extern transfer_target  inline native_target(native_object native);
-extern int              inline string_equals(string_object string1,
-                                             string_object string2);
 extern object           inline symbol_known_to_the_vm(int index);
 extern object           inline object_at(object_object object, int index);
 extern void             inline object_at_put(object_object o,

@@ -57,6 +57,8 @@ extern object SYMBOLEnvironment;
 extern object SYMBOLkey;
 extern object SYMBOLindex;
 extern object SYMBOLto_col_expression_col_;
+extern object SYMBOLString;
+extern object SYMBOLstore_col_method_col_;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\

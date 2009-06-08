@@ -1,7 +1,12 @@
 #ifndef SYSTEM_ARRAY_H
 #define SYSTEM_ARRAY_H
 
-extern void array_dispatch();
-extern void array_class_dispatch();
+extern void iarray_dispatch();
+extern void iarray_stub_dispatch();
+extern void iarray_class_dispatch();
+extern void iarray_class_stub_dispatch();
+
+extern void array_stub_dispatch();
+extern void array_class_stub_dispatch();
 
 #endif // SYSTEM_ARRAY_H

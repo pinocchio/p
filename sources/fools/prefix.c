@@ -15,10 +15,11 @@ int main () {
 
     object ifixed_class = (object)make_iconst(fools_system->fixed_class);
     object env_class    = (object)make_iconst(fools_system->env_class);
+    object array        = (object)make_iconst(fools_system->array_class);
+    object string       = (object)make_iconst(fools_system->string_class);
 
     object ifixed       = (object)make_iconst(fools_system->ifixed);
     object dictionary   = (object)make_iconst(fools_system->dict);
-    object array        = (object)make_iconst(fools_system->array);
     object null         = (object)make_iconst((object)fools_system->nil);
 /* Generated code */
 

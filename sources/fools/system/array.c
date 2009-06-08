@@ -22,14 +22,6 @@ static void inline iarray_size() {
     return_from_context(context, size);
 }
 
-void array_dispatch() {
-    dispatch_header(context, selector);
-    if_selector(selector, OBJECT_AT,        iarray_at);
-    if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
-    if_selector(selector, SIZE,             iarray_size);
-    doesnotunderstand("array", selector);
-}
-
 with_pre_eval1(iarray_new, context, w_size,
     // XXX breaks encapsulation
     int size = number_value(w_size.number);
@@ -37,9 +29,20 @@ with_pre_eval1(iarray_new, context, w_size,
     return_from_context(context, result);
 )
 
-void array_class_dispatch() {
-    dispatch_header(context, selector);
+define_bootstrapping_type(iarray,
+    // instance
+    if_selector(selector, OBJECT_AT,        iarray_at);
+    if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
+    if_selector(selector, SIZE,             iarray_size);,
+    // class
     if_selector(selector, SIZED, iarray_new);
-    /* Other messages sent bounce off to the delegate. */
-    new_target(context, context->self.ifixed->delegate);
-}
+)
+
+define_bootstrapping_class(array,
+     // instance
+    if_selector(selector, OBJECT_AT,        iarray_at);
+    if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
+    if_selector(selector, SIZE,             iarray_size);,
+    // class
+    if_selector(selector, SIZED, iarray_new);
+)
