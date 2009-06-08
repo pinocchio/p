@@ -97,8 +97,9 @@ bin_object_bool_op  ( eqp,       == )
 static void scheme_display_func_do() {
     debug("scheme>>display\n");
     context_object context = get_context();
-    print_object(argument_at(context, 0));
-    pop_context();
+    object v = argument_at(context, 0);
+    print_object(v);
+    return_from_context(context, v);
     debug("ret>>scheme>>display\n");
 }
 

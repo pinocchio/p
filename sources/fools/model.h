@@ -136,6 +136,7 @@ struct fools {
     object              class_lookup;
     object              icapture;
     object              ifixed;
+    object              array;
     object              dict;
 
     // Evaluation related classes

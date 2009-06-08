@@ -150,12 +150,13 @@
                     'methodDictionary
                     'layout
                     'name))
-      
+
        ; Fill in info about Metaclasses
         (metaclass 'objectAt:put: 1 (dictionary 'basicNew))
         (metaclass 'objectAt:put: 2 (vector 'instance))
         (metaclass 'objectAt:put: 3 'Metaclass)
         (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
+
 
        ; Install the accessor methods
         ((methoddict metaclass) 'objectAt:put: 'name mclsname)
@@ -164,7 +165,7 @@
             (mcdict 'objectAt:put: 'basicNew
                     (method (s) (metaclass 'basicNew))))
 
-       ; Fill in info about Objects
+      ; Fill in info about Objects
         (object_class 'objectAt:put: 0 metaclass_class)
         (object_class 'objectAt:put: 1 (dictionary 'basicNew))
         (object_class 'objectAt:put: 2 (vector))
@@ -330,17 +331,17 @@
                 ((string 'class) 'store:method:
                     'basicNew: (method (s size) (string 'basicNew: size)))
 
-                (string 'store:method: 'testMethod
-                    (method (s) (display "HELLO!") (display (getself s))
-                                (display "\n")))
-
                 (integer 'store:method: +
                     (method (s other)
                         (+ (getself s) other)))
 
-                (display (1 + 2))
+                ;(display (1 + 2))
 
-                ("biep" 'testMethod)
+                ;(string 'store:method: 'testMethod
+                ;    (method (s) (display "HELLO!") (display (getself s))
+                ;                (display "\n")))
+
+                ;("biep" 'testMethod)
 
                 
 
@@ -363,8 +364,7 @@
                 ;    (display "done test\n")
                 ;    )
                         
-                (vector magnitude number ointeger boolean true false collection
-                        sqcollection acollection ocollection oarray)
+                "SYSTEM READY\n"
     ))))))
 
 ))

@@ -21,6 +21,9 @@ fools_object fools_system;
 #define incomplete_class(name)\
     build_native_class(wrap_dispatcher(name##_##class_stub_dispatch),\
                        name)
+
+#define incomplete_typed_class(type)\
+    build_native_class(fools_system->type##_##stub_class, type);
     
 #define empty_class (object)make_object(0, (object)fools_system->nil);
 
@@ -41,15 +44,8 @@ fools_object bootstrap() {
     fools_system->iscoped_class  = incomplete_class(iscoped);
     fools_system->env_class      = incomplete_class(env);
     fools_system->fixed_class    = incomplete_class(fixed);
-
-    fools_system->array_class    = incomplete_class(array);
     fools_system->string_class   = incomplete_class(string);
 
-    // Build after building the array_class!
-    fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
-    fools_system->empty->size               = 0;
-    header(fools_system->empty)             = fools_system->array_class;
-    
     /* Special cases which are never to be exposed to the outside world. 
      * They are only used internally to navigate to the right object or flag
      * that an instance 'doesNotUnderstand' a message.
@@ -58,6 +54,13 @@ fools_object bootstrap() {
     fools_system->ifixed_stub_class = wrap_dispatcher(ifixed_class_stub_dispatch);
     fools_system->iarray_class      = wrap_dispatcher(iarray_class_dispatch);
     fools_system->iarray_stub_class = wrap_dispatcher(iarray_class_stub_dispatch);
+
+    fools_system->array_class       = incomplete_typed_class(iarray);
+
+    // Build after building the array_class!
+    fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
+    fools_system->empty->size               = 0;
+    header(fools_system->empty)             = fools_system->array_class;
 
     fools_system->level_shifter     = wrap_dispatcher(shift_level);
 
