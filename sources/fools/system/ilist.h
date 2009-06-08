@@ -3,6 +3,8 @@
 
 // Creation
 extern void ilist_stub_dispatch();
+extern void ilist_class_stub_dispatch();
+
 extern ilist_object make_ilist(int size);
 
 // Accessors

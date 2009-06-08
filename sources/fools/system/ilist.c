@@ -33,9 +33,18 @@ static void inline ilist_eval() {
     debug("ret>>ilist>>eval(n)\n");
 }
 
-define_bootstrapping_instance(ilist, 
+with_pre_eval1(ilist_new, context, w_size,
+    // XXX breaking encapsulation
+    int size = number_value(w_size.number);
+    return_from_context(context, (object)make_ilist(size));
+)
+
+define_bootstrapping_class(ilist, 
+    // instance
     if_selector(selector, EVAL,         ilist_eval);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    // class
+    if_selector(selector, SIZED,        ilist_new);
 )
 
 // Object creation

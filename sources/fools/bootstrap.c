@@ -40,7 +40,7 @@ fools_object bootstrap() {
     header(fools_system->empty)             = fools_system->array_class;
     fools_system->symbols_known_to_the_vm   = make_array(NBR_SYMBOLS);
 
-    fools_system->ilist_class           = build_native_class(fools_system->ifixed_stub_class, ilist);
+    fools_system->ilist_class           = incomplete_class(ilist);
     fools_system->iconst_class          = incomplete_class(iconst);
     fools_system->icall_class           = incomplete_class(icall);
     fools_system->iassign_class         = incomplete_class(iassign);
