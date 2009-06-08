@@ -48,9 +48,18 @@ static void inline icall_eval() {
     inc();
 }
 
-define_bootstrapping_instance(icall,
+with_pre_eval2(icall_new, context, w_self, w_size,
+    // XXX breaking encapsulation.
+    int size = number_value(w_size.number);
+    return_from_context(context, (object)make_icall(w_self, size));
+)
+
+define_bootstrapping_class(icall,
+    // instance
     if_selector(selector, EVAL,         icall_eval);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);
+    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    // class
+    if_selector(selector, TO_SIZED,     icall_new);
 )
 
 // Object creation

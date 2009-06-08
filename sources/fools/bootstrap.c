@@ -32,6 +32,8 @@ object SHIFT;
 object INSTANCE;
 // Iassign
 object TO_EXPRESSION;
+// Icall
+object TO_SIZED;
 // Ifixed
 object OBJECT_AT;
 object OBJECT_AT_PUT;
@@ -77,7 +79,7 @@ fools_object bootstrap() {
 
     fools_system->ilist_class           = build_native_class(fools_system->ifixed_stub_class, ilist);
     fools_system->iconst_class          = build_native_class(fools_system->ifixed_stub_class, iconst);
-    fools_system->icall_class           = build_native_class(fools_system->ifixed_stub_class, icall);
+    fools_system->icall_class           = incomplete_class(icall);
     fools_system->iassign_class         = incomplete_class(iassign);
     fools_system->ivar_class            = incomplete_class(ivar);
     fools_system->icapture_class        = incomplete_class(icapture);

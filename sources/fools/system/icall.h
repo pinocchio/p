@@ -3,6 +3,7 @@
 
 // Creation
 extern void icall_stub_dispatch();
+extern void icall_class_stub_dispatch();
 extern icall_object make_icall(object self, int argsize);
 
 // Accessors

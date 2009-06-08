@@ -58,6 +58,7 @@ object SYMBOLEnvironment;
 object SYMBOLkey;
 object SYMBOLindex;
 object SYMBOLto_col_expression_col_;
+object SYMBOLto_col_sized_col_;
 
 void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLeval,                                "eval");
@@ -83,6 +84,7 @@ void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLshift,                               "shift");
     define_symbol(SYMBOLinstance,                            "instance");
     define_symbol(SYMBOLto_col_expression_col_,              "to:expression:");
+    define_symbol(SYMBOLto_col_sized_col_,                   "to:sized:");
     EVAL                    = SYMBOLeval;
     PRE_EVAL_ENV            = SYMBOLeval_col_;
     STORE_AT_IN             = SYMBOLstore_col_at_col_in_col_;
@@ -106,4 +108,5 @@ void bootstrap_scheme_symbols() {
     SHIFT                   = SYMBOLshift;
     INSTANCE                = SYMBOLinstance;
     TO_EXPRESSION           = SYMBOLto_col_expression_col_;
+    TO_SIZED                = SYMBOLto_col_sized_col_;
 }

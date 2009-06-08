@@ -29,6 +29,8 @@ extern object SHIFT;
 extern object INSTANCE;
 // Iassign
 extern object TO_EXPRESSION;
+// Icall
+extern object TO_SIZED;
 // Ifixed
 extern object OBJECT_AT;
 extern object OBJECT_AT_PUT;
