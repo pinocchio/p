@@ -25,7 +25,7 @@ int inline string_equals(string_object string1, string_object string2) {
                    left_size) == 0);
 }
 
-define_bootstrapping_class(string,
+define_bootstrapping_type(istring,
     // instance
     if_selector(selector, EVAL,         identity);
     if_selector(selector, PRE_EVAL_ENV, identity);,
@@ -40,6 +40,14 @@ string_object make_string(const char* value) {
     result->size            = make_number(strlen(value));
     header(result)          = (object)fools_system->string_class;
     return result;
+}
+
+object make_symbol(const char* value) {
+    string_object result    = NEW(struct string);
+    result->value           = strdup(value);
+    result->size            = make_number(strlen(value));
+    header(result)          = (object)fools_system->symbol_class;
+    return (object)result;
 }
 
 string_object make_string_sized(int size) {

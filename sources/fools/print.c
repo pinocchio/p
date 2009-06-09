@@ -19,7 +19,10 @@ void print_object(object o) {
         return;
     }
 
-    if (pheader(o.pointer) == fools_system->string_class.pointer) {
+    if (pheader(pheader(o.pointer)) ==
+            fools_system->istring_stub_class.pointer ||
+            pheader(pheader(o.pointer)) ==
+            fools_system->istring_class.pointer) {
         printf("%s", o.string->value);
         return;
     }

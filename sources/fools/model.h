@@ -150,12 +150,16 @@ struct fools {
     object iarray_class;
     object iarray_stub_class;
 
+    object istring_class;
+    object istring_stub_class;
+
     // Level shifting
     object level_shifter;
 
     // Minimal native classes
     object number_class;
     object string_class;
+    object symbol_class;
     object array_class;
     object dict_class;
 };

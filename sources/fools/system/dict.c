@@ -60,11 +60,12 @@ static void inline dict_new() {
 }
 
 define_bootstrapping_class(dict,
+    // instance
     if_selector(selector, OBJECT_AT,        dict_at);
     if_selector(selector, OBJECT_AT_PUT,    dict_at_put);,
+    // class
     if_selector(selector, NEW, dict_new);
 )
-
 
 // Object creation
 dict_object make_dict(int size) {

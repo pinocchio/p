@@ -17,6 +17,7 @@ int main () {
     object ifixed_class = (object)make_iconst(fools_system->fixed_class);
     object env_class    = (object)make_iconst(fools_system->env_class);
     object string       = (object)make_iconst(fools_system->string_class);
+    object symbol       = (object)make_iconst(fools_system->symbol_class);
     object integer      = (object)make_iconst(fools_system->number_class);
     object array        = (object)make_iconst(fools_system->array_class);
     object dictionary   = (object)make_iconst(fools_system->dict_class);

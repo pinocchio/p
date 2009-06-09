@@ -40,7 +40,6 @@ fools_object bootstrap() {
     fools_system->iscoped_class  = incomplete_class(iscoped);
     fools_system->env_class      = incomplete_class(env);
     fools_system->fixed_class    = incomplete_class(fixed);
-    fools_system->string_class   = incomplete_class(string);
     fools_system->number_class   = incomplete_class(number);
     fools_system->dict_class     = incomplete_class(dict);
 
@@ -54,6 +53,11 @@ fools_object bootstrap() {
     fools_system->iarray_class      = wrap_dispatcher(iarray_class_dispatch);
     fools_system->iarray_stub_class = wrap_dispatcher(iarray_class_stub_dispatch);
     fools_system->array_class       = incomplete_typed_class(iarray);
+
+    fools_system->istring_class      = wrap_dispatcher(istring_class_dispatch);
+    fools_system->istring_stub_class = wrap_dispatcher(istring_class_stub_dispatch);
+    fools_system->string_class       = incomplete_typed_class(istring);
+    fools_system->symbol_class       = incomplete_typed_class(istring);
 
     // Build after building the array_class!
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);

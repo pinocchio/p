@@ -59,10 +59,11 @@ extern object SYMBOLindex;
 extern object SYMBOLto_col_expression_col_;
 extern object SYMBOLString;
 extern object SYMBOLstore_col_method_col_;
+extern object SYMBOLSymbol;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\
-        name = (object)make_string(value);\
+        name = make_symbol(value);\
     }
 
 extern void bootstrap_scheme_symbols();

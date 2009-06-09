@@ -36,7 +36,8 @@
      (lookup
         (lambda (self env args)
             (let lookup ((msg ((args 'objectAt: 0) 'eval: env))
-                         (class (self 'delegate)))
+                         (class (self 'delegate))
+                         (args args))
                 ;(display "LOOKUP: ")
                 ;(display msg)
                 ;(display "\n")
@@ -52,10 +53,14 @@
                                     (args 'objectAt:put: 0
                                         (bind self
                                               ; Constructing a "super"
+                                              ; XXX TODO this is broken!
+                                              ; The args get evaluated in the
+                                              ; wrong scope
                                               (lambda (args)
                                                   (lookup
                                                       (args 'objectAt: 0)
-                                                      (class 'superclass)))))
+                                                      (class 'superclass)
+                                                      args))))
                                     (amethod 'apply:in: args env))))))))))
     (display "STAGE 1\n")
     ; Classes have a more specific dispatch than objects
@@ -306,7 +311,9 @@
                    (oarray  (acollection 'subclass:instvars:classvars:
                                         'Array ev ev))
                    (ostring (acollection 'subclass:instvars:classvars:
-                                        'String ev ev)))
+                                        'String ev ev))
+                   (osymbol (ostring 'subclass:instvars:classvars:
+                                        'Symbol ev ev)))
 
                 ;((integer 'methodDictionary)
                 ;    'objectAt:put: 'testMethod
@@ -320,6 +327,7 @@
 
                 (array   'dispatch:delegate: objdisp oarray)
                 (string  'dispatch:delegate: objdisp ostring)
+                (symbol  'dispatch:delegate: objdisp osymbol)
                 (integer 'dispatch:delegate: objdisp ointeger)
 
                 ((array 'class) 'store:method:
@@ -330,6 +338,11 @@
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
                 ((string 'class) 'store:method:
                     'basicNew: (method (s size) (string 'basicNew: size)))
+                ((symbol 'class) 'store:method:
+                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
+                ((symbol 'class) 'store:method:
+                    'basicNew: (method (s size) (symbol 'basicNew: size)))
+
 
                 (integer 'store:method: +
                     (method (s other)
@@ -337,13 +350,19 @@
 
                 ;(display (1 + 2))
 
-                ;(string 'store:method: 'testMethod
-                ;    (method (s) (display "HELLO!") (display (getself s))
-                ;                (display "\n")))
+                (string 'store:method: 'testMethod
+                    (method (s) (display "HELLO!") (display (getself s))
+                                (display "\n")))
 
-                ;("biep" 'testMethod)
+                ("biep" 'testMethod)
+                ('testMethod 'testMethod)
 
-                
+                (symbol 'store:method: 'testMethod
+                    (method (s) (display "2H!") (display (getself s))
+                                (display "\n")))
+
+                ("biep" 'testMethod)
+                ('testMethod 'testMethod)
 
                 ;(let ((test "BOE\n"))
                 ;    ((string 'methodDictionary) 'objectAt:put:
