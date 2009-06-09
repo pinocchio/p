@@ -32,7 +32,7 @@
       (mclsinstance (method (s)
             ((getself s) 'objectAt: 3)))
 
-    ; Here I define a general dispatching mechanism for objects and classes:
+    ; Here I define a general dispatching mechanism for Objects and classes:
      (lookup
         (lambda (self env args)
             (let lookup ((msg ((args 'objectAt: 0) 'eval: env))
@@ -63,7 +63,7 @@
                                                       args))))
                                     (amethod 'apply:in: args env))))))))))
     (display "STAGE 1\n")
-    ; Classes have a more specific dispatch than objects
+    ; Classes have a more specific dispatch than Objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
     (let ((classdisp (dispatch (self env args)
@@ -88,19 +88,19 @@
           
           ; The first Metaclass is an instantiatable stub which will become
           ; the real Metaclass later on.
-           (metaclass (ifixed 'size: 4))
+           (Metaclass (ifixed 'size: 4))
 
-          ; The Metaclass-class is an instance of metaclass
-           (metaclass_class (buildclass (metaclass 'basicNew)))
+          ; The Metaclass-class is an instance of Metaclass
+           (Metaclass_class (buildclass (Metaclass 'basicNew)))
 
-          ; The Object class is an instance of metaclass too
-           (object_class (metaclass 'basicNew))
+          ; The Object class is an instance of Metaclass too
+           (Object_class (Metaclass 'basicNew))
 
           ; Object is just a normal class with no instance variables
-           (object ((buildclass object_class) 'basicNew))
+           (Object ((buildclass Object_class) 'basicNew))
 
           ; We use the C implementation of dictionaries for bootstrapping
-           (mcdict (dictionary 'basicNew))
+           (mcdict (Dictionary 'basicNew))
 
           ; The implementation of classNamed:super:instVars:classVars:
           ; which will be installed in the Metaclass class' dictionary so that
@@ -121,11 +121,11 @@
                                                ((current 'objectAt: 2)
                                                 'size))))))))
                        (mclass 'objectAt:put: 0 (super 'delegate))
-                       (mclass 'objectAt:put: 1 (dictionary 'basicNew))
+                       (mclass 'objectAt:put: 1 (Dictionary 'basicNew))
                        (mclass 'objectAt:put: 2 clslayout)
                        (set! class ((fixclass mclass classdisp) 'basicNew))
                        (class 'objectAt:put: 0 super)
-                       (class 'objectAt:put: 1 (dictionary 'basicNew))
+                       (class 'objectAt:put: 1 (Dictionary 'basicNew))
                        (class 'objectAt:put: 2 instlayout)
                        (class 'objectAt:put: 3 name)
                        (let ((class (fixclass class objdisp)))
@@ -137,12 +137,12 @@
 
             (subclass
                 (method (s name instlayout clslayout)
-                    (metaclass 'class:super:instvars:classvars:
+                    (Metaclass 'class:super:instvars:classvars:
                         name (getself s) instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
-        (metaclass 'dispatch:delegate: classdisp (metaclass_class 'basicNew))
-        (metaclass_class 'objectAt:put: 1 mcdict)
+        (Metaclass 'dispatch:delegate: classdisp (Metaclass_class 'basicNew))
+        (Metaclass_class 'objectAt:put: 1 mcdict)
 
         (display "STAGE 3\n")
 
@@ -150,53 +150,53 @@
        ; layout by faking the layout of the first Metaclass. This will later
        ; be overwritten and the instvars will be spread over "Class class"
        ; and "ClassBehaviour class"
-        (metaclass_class 'objectAt:put: 2
+        (Metaclass_class 'objectAt:put: 2
             (vector 'superclass
                     'methodDictionary
                     'layout
                     'name))
 
        ; Fill in info about Metaclasses
-        (metaclass 'objectAt:put: 1 (dictionary 'basicNew))
-        (metaclass 'objectAt:put: 2 (vector 'instance))
-        (metaclass 'objectAt:put: 3 'Metaclass)
+        (Metaclass 'objectAt:put: 1 (Dictionary 'basicNew))
+        (Metaclass 'objectAt:put: 2 (vector 'instance))
+        (Metaclass 'objectAt:put: 3 'Metaclass)
         (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
 
 
        ; Install the accessor methods
-        ((methoddict metaclass) 'objectAt:put: 'name mclsname)
-        ((methoddict metaclass) 'objectAt:put: 'instance mclsinstance)
-        (let ((metaclass metaclass))
+        ((methoddict Metaclass) 'objectAt:put: 'name mclsname)
+        ((methoddict Metaclass) 'objectAt:put: 'instance mclsinstance)
+        (let ((Metaclass Metaclass))
             (mcdict 'objectAt:put: 'basicNew
-                    (method (s) (metaclass 'basicNew))))
+                    (method (s) (Metaclass 'basicNew))))
 
       ; Fill in info about Objects
-        (object_class 'objectAt:put: 0 metaclass_class)
-        (object_class 'objectAt:put: 1 (dictionary 'basicNew))
-        (object_class 'objectAt:put: 2 (vector))
-        (object_class 'objectAt:put: 3 object)
-        (object 'objectAt:put: 1 (dictionary 'basicNew))
-        (object 'objectAt:put: 2 (vector))
-        (object 'objectAt:put: 3 'Object)
+        (Object_class 'objectAt:put: 0 Metaclass_class)
+        (Object_class 'objectAt:put: 1 (Dictionary 'basicNew))
+        (Object_class 'objectAt:put: 2 (vector))
+        (Object_class 'objectAt:put: 3 Object)
+        (Object 'objectAt:put: 1 (Dictionary 'basicNew))
+        (Object 'objectAt:put: 2 (vector))
+        (Object 'objectAt:put: 3 'Object)
 
        ; Install DNU + test methods
-        ((methoddict object_class) 'objectAt:put:
+        ((methoddict Object_class) 'objectAt:put:
             'subclass:instvars:classvars: subclass)
-        ((methoddict object) 'objectAt:put: 'print oprint)
-        ((methoddict object) 'objectAt:put: 'doesNotUnderstand:in:with:
+        ((methoddict Object) 'objectAt:put: 'print oprint)
+        ((methoddict Object) 'objectAt:put: 'doesNotUnderstand:in:with:
                                                doesNotUnderstand)
-        ((methoddict object) 'objectAt:put: 'class
+        ((methoddict Object) 'objectAt:put: 'class
             (method (s) ((getself s) 'delegate)))
 
-        ((methoddict metaclass_class) 'objectAt:put:
+        ((methoddict Metaclass_class) 'objectAt:put:
             'new (method (s) ((getself s) 'basicNew)))
 
-        (let ((o (ifixed 'dispatch:delegate:size: objdisp object 0)))
-            ((methoddict object_class) 'objectAt:put: 'basicNew
+        (let ((o (ifixed 'dispatch:delegate:size: objdisp Object 0)))
+            ((methoddict Object_class) 'objectAt:put: 'basicNew
                 (method (s) (o 'basicNew))))
 
        ; Create ClassBehaviour and Class
-        (let* ((classBehaviour (object 'subclass:instvars:classvars:
+        (let* ((classBehaviour (Object 'subclass:instvars:classvars:
                                        'ClassBehaviour
                                           (vector 'superclass
                                                   'methodDictionary
@@ -214,18 +214,18 @@
                 (method (s) ((getself s) 'objectAt: 1)))
 
             ; Now fix all bootstrap "dangling" pointers
-            (metaclass       'objectAt:put: 0 classBehaviour)
-            (object_class    'objectAt:put: 0 class)
-            (metaclass_class 'objectAt:put: 0 (classBehaviour 'class))
-            (metaclass_class 'objectAt:put: 2 (vector))
+            (Metaclass       'objectAt:put: 0 classBehaviour)
+            (Object_class    'objectAt:put: 0 class)
+            (Metaclass_class 'objectAt:put: 0 (classBehaviour 'class))
+            (Metaclass_class 'objectAt:put: 2 (vector))
             
             ; Remove the ifixed indirection for tests.
-            (set! metaclass (metaclass_class 'delegate))
-            (metaclass_class 'objectAt:put: 3 metaclass)
-            ((metaclass_class 'methodDictionary) 'objectAt:put:
+            (set! Metaclass (Metaclass_class 'delegate))
+            (Metaclass_class 'objectAt:put: 3 Metaclass)
+            ((Metaclass_class 'methodDictionary) 'objectAt:put:
                 'new null)
 
-            ((object 'methodDictionary) 'objectAt:put:
+            ((Object 'methodDictionary) 'objectAt:put:
                 'initialize (method (s) (getself s)))
 
             ((classBehaviour 'methodDictionary) 'objectAt:put:
@@ -242,39 +242,39 @@
             ;(display "Minimal system ready!\n")
 
             ;(display "TESTS")
-            ;(display (eq? (object 'superclass) null))
-            ;(display (eq? (object_class 'superclass) class))
+            ;(display (eq? (Object 'superclass) null))
+            ;(display (eq? (Object_class 'superclass) class))
             ;(display (eq? (class 'superclass) classBehaviour))
             ;(display (eq? ((class 'delegate) 'superclass)
             ;              (classBehaviour 'delegate)))
-            ;(display (eq? (metaclass_class 'superclass) class))
-            ;(display (eq? (metaclass 'superclass) classBehaviour))
-            ;(display (eq? (classBehaviour 'superclass) object))
+            ;(display (eq? (Metaclass_class 'superclass) class))
+            ;(display (eq? (Metaclass 'superclass) classBehaviour))
+            ;(display (eq? (classBehaviour 'superclass) Object))
             ;(display (eq? ((classBehaviour 'delegate) 'superclass)
-            ;              object_class))
-            ;(display (eq? (object_class 'delegate) metaclass))
-            ;(display (eq? ((metaclass 'delegate) 'delegate) metaclass))
+            ;              Object_class))
+            ;(display (eq? (Object_class 'delegate) Metaclass))
+            ;(display (eq? ((Metaclass 'delegate) 'delegate) Metaclass))
 
-            (ifixed_class 'dispatch:delegate:
+            (IFixed 'dispatch:delegate:
                 objdisp
-                (object 'subclass:instvars:classvars:
+                (Object 'subclass:instvars:classvars:
                         'IFixed (vector) (vector)))
 
-            (((ifixed_class 'class) 'methodDictionary)
+            (((IFixed 'class) 'methodDictionary)
                 'objectAt:put: 'basicNew
                 (method (s) (display "TODO: flag error\n")))
 
-            (env_class 'dispatch:delegate:
+            (Env 'dispatch:delegate:
                 objdisp
-                (object 'subclass:instvars:classvars:
+                (Object 'subclass:instvars:classvars:
                         'Environment (vector 'key 'index) (vector)))
 
-            ((env_class 'class) 'store:method: 'basicNew
+            ((Env 'class) 'store:method: 'basicNew
                 (method (s) (display "TODO: flag error\n")))
 
 
-            ;(let ((el (env_class 'scope:key: 4 env_class))
-            ;      (el2 (env_class 'scope:key: 3 ifixed_class)))
+            ;(let ((el (Env 'scope:key: 4 Env))
+            ;      (el2 (Env 'scope:key: 3 IFixed)))
             ;    (el2 'parent: el)
             ;    (display "Test:\n")
             ;    (display (el 'parent))
@@ -285,22 +285,23 @@
 
             (display "STAGE 5\n")
 
-            ((object 'new) 'print)
-            (object 'print)
-            (metaclass 'instance)
-            (object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
+            ((Object 'new) 'print)
+            (Object 'print)
+            (Metaclass 'instance)
+            (Object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
                                      ; only generated on the spot to create its
                                      ; single instance in "newclass"
             ((class 'new) 'print)
         
             (let* ((ev (vector))
-                   (magnitude (object  'subclass:instvars:classvars: 'Magnitude  ev ev))
+                   (undef (Object 'subclass:instvars:classvars: 'UndefinedObject ev ev))
+                   (magnitude (Object  'subclass:instvars:classvars: 'Magnitude  ev ev))
                    (number (magnitude  'subclass:instvars:classvars: 'Number     ev ev))
                    (ointeger (number   'subclass:instvars:classvars: 'Integer    ev ev))
-                   (boolean (object    'subclass:instvars:classvars: 'Boolean    ev ev))
+                   (boolean (Object    'subclass:instvars:classvars: 'Boolean    ev ev))
                    (true  (boolean     'subclass:instvars:classvars: 'True       ev ev))
                    (false (boolean     'subclass:instvars:classvars: 'False      ev ev))
-                   (collection (object 'subclass:instvars:classvars: 'Collection ev ev))
+                   (collection (Object 'subclass:instvars:classvars: 'Collection ev ev))
                    (sqcollection (collection 'subclass:instvars:classvars:
                                         'SequenceableCollection ev ev))
                    (acollection (sqcollection 'subclass:instvars:classvars:
@@ -325,24 +326,27 @@
 
                 ;((integer 'basicNew) 'testMethod)
 
-                (array   'dispatch:delegate: objdisp oarray)
-                (string  'dispatch:delegate: objdisp ostring)
-                (symbol  'dispatch:delegate: objdisp osymbol)
-                (integer 'dispatch:delegate: objdisp ointeger)
+                (Array        'dispatch:delegate: objdisp oarray)
+                (String       'dispatch:delegate: objdisp ostring)
+                (Symbol       'dispatch:delegate: objdisp osymbol)
+                (SmallInteger 'dispatch:delegate: objdisp ointeger)
+                (UndefinedObject 'dispatch:delegate: objdisp undef)
 
-                ((array 'class) 'store:method:
+                (null 'testMethod)
+
+                ((Array 'class) 'store:method:
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
-                ((array 'class) 'store:method:
-                    'basicNew: (method (s size) (array 'basicNew: size)))
-                ((string 'class) 'store:method:
+                ((Array 'class) 'store:method:
+                    'basicNew: (method (s size) (Array 'basicNew: size)))
+                ((String 'class) 'store:method:
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
-                ((string 'class) 'store:method:
-                    'basicNew: (method (s size) (string 'basicNew: size)))
-                ((symbol 'class) 'store:method:
-                    'basicNew: (method (s size) (symbol 'basicNew: size)))
+                ((String 'class) 'store:method:
+                    'basicNew: (method (s size) (String 'basicNew: size)))
+                ((Symbol 'class) 'store:method:
+                    'basicNew: (method (s size) (Symbol 'basicNew: size)))
 
 
-                (integer 'store:method: +
+                (SmallInteger 'store:method: +
                     (method (s other)
                         (+ (getself s) other)))
 

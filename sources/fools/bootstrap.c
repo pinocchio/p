@@ -22,6 +22,10 @@ fools_object fools_system;
     build_native_class(wrap_dispatcher(name##_##class_stub_dispatch),\
                        name)
 
+#define incomplete_ifixed_class(name, size)\
+    name = make_class((object)make_number(size), &ifixed_stub_dispatch);\
+    header(name.pointer) = fools_system->ifixed_stub_class;
+
 #define incomplete_typed_class(type)\
     build_native_class(fools_system->type##_##stub_class, type);
 
@@ -60,11 +64,14 @@ fools_object bootstrap() {
     fools_system->string_class = incomplete_typed_class(istring);
     fools_system->symbol_class = incomplete_typed_class(istring);
     fools_system->dict_class   = incomplete_typed_class(idict);
+    incomplete_ifixed_class(fools_system->nil_class, 0);
 
     // Build after building the array_class!
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
     fools_system->empty->size               = 0;
     header(fools_system->empty)             = fools_system->array_class;
+    // Set after building the nil_class
+    header(fools_system->nil) = fools_system->nil_class;
 
     fools_system->level_shifter     = wrap_dispatcher(shift_level);
 

@@ -165,6 +165,7 @@ struct fools {
     object symbol_class;
     object array_class;
     object dict_class;
+    object nil_class;
 };
 
 extern object_object            make_object(int size, object interpreter);

@@ -9,20 +9,27 @@
 #include <scheme/symbols.h>
 #include <print.h>
 
+#define import_object(name)\
+    (object)make_iconst((object)fools_system->name);
+#define import_class(name)\
+    import_object(name##_##class);
+
 int main () {
     bootstrap();
 
     env_object env = empty_env;
 
-    object ifixed_class = (object)make_iconst(fools_system->fixed_class);
-    object env_class    = (object)make_iconst(fools_system->env_class);
-    object string       = (object)make_iconst(fools_system->string_class);
-    object symbol       = (object)make_iconst(fools_system->symbol_class);
-    object integer      = (object)make_iconst(fools_system->number_class);
-    object array        = (object)make_iconst(fools_system->array_class);
-    object dictionary   = (object)make_iconst(fools_system->dict_class);
+    object Env              = import_class(env);
+    object IFixed           = import_class(fixed); 
+    object String           = import_class(string);
+    object Symbol           = import_class(symbol);
+    object SmallInteger     = import_class(number);
+    object Array            = import_class(array); 
+    object Dictionary       = import_class(dict);
+    object UndefinedObject  = import_class(nil);
 
-    object ifixed       = (object)make_iconst(fools_system->ifixed);
-    object null         = (object)make_iconst((object)fools_system->nil);
+    object ifixed           = import_object(ifixed);
+    object null             = import_object(nil);
+
 /* Generated code */
 

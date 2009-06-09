@@ -100,6 +100,7 @@ object SYMBOLto_col_sized_col_;
 object SYMBOLString;
 object SYMBOLstore_col_method_col_;
 object SYMBOLSymbol;
+object SYMBOLUndefinedObject;
 
 void bootstrap_scheme_symbols() {
     // Ensure all symbols used by the VM are bootstrapped.

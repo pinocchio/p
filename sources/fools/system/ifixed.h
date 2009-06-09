@@ -2,6 +2,7 @@
 #define SYSTEM_IFIXED_H
 
 extern void ifixed_dispatch();
+extern void ifixed_stub_dispatch();
 extern void ifixed_class_dispatch();
 extern void ifixed_class_stub_dispatch();
 
