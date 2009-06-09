@@ -294,27 +294,28 @@
             ((class 'new) 'print)
         
             (let* ((ev (vector))
-                   (undef (Object 'subclass:instvars:classvars: 'UndefinedObject ev ev))
-                   (magnitude (Object  'subclass:instvars:classvars: 'Magnitude  ev ev))
-                   (number (magnitude  'subclass:instvars:classvars: 'Number     ev ev))
-                   (ointeger (number   'subclass:instvars:classvars: 'Integer    ev ev))
-                   (boolean (Object    'subclass:instvars:classvars: 'Boolean    ev ev))
-                   (true  (boolean     'subclass:instvars:classvars: 'True       ev ev))
-                   (false (boolean     'subclass:instvars:classvars: 'False      ev ev))
-                   (collection (Object 'subclass:instvars:classvars: 'Collection ev ev))
-                   (sqcollection (collection 'subclass:instvars:classvars:
-                                        'SequenceableCollection ev ev))
-                   (acollection (sqcollection 'subclass:instvars:classvars:
-                                        'ArrayedCollection ev ev))
-                   (ocollection (sqcollection 'subclass:instvars:classvars:
-                                        'OrderedCollection (vector 1 2 3) ev))
-                                                          ; XXX todo :! 
-                   (oarray  (acollection 'subclass:instvars:classvars:
-                                        'Array ev ev))
-                   (ostring (acollection 'subclass:instvars:classvars:
-                                        'String ev ev))
-                   (osymbol (ostring 'subclass:instvars:classvars:
-                                        'Symbol ev ev)))
+                   (make_empty_subclass (lambda (cls name)
+                        (cls 'subclass:instvars:classvars: name ev ev)))
+                   (store_empty (lambda (int super name)
+                        (int 'dispatch:delegate: objdisp
+                            (make_empty_subclass super name))))
+                   (Magnitude (make_empty_subclass Object 'Magnitude))
+                   (Number (make_empty_subclass Magnitude 'Number))
+                   (Integer (make_empty_subclass Number 'Integer))
+                   (SmInt (make_empty_subclass Integer 'SmallInteger))
+                   (Boolean (make_empty_subclass Object 'Boolean))
+                   (True (make_empty_subclass Boolean 'True))
+                   (False (make_empty_subclass Boolean 'False))
+                   (Collection (make_empty_subclass Object 'Collection))
+                   (SqCol (make_empty_subclass Collection 'SequenceableCollection))
+                   (ArCol (make_empty_subclass SqCol 'ArrayedCollection))
+                   (OrCol (SqCol 'subclass:instvars:classvars:
+                                 'OrderedCollection (vector 1 2 3) ev))
+                                                    ; XXX todo :! 
+                   (Arrayc  (make_empty_subclass ArCol 'Array))
+                   (Stringc (make_empty_subclass ArCol 'String))
+                   (Symbolc (make_empty_subclass Stringc 'Symbol))
+                   (Evaluatable (make_empty_subclass Object 'Evaluatable)))
 
                 ;((integer 'methodDictionary)
                 ;    'objectAt:put: 'testMethod
@@ -326,13 +327,19 @@
 
                 ;((integer 'basicNew) 'testMethod)
 
-                (Array        'dispatch:delegate: objdisp oarray)
-                (String       'dispatch:delegate: objdisp ostring)
-                (Symbol       'dispatch:delegate: objdisp osymbol)
-                (SmallInteger 'dispatch:delegate: objdisp ointeger)
-                (UndefinedObject 'dispatch:delegate: objdisp undef)
+                (Array        'dispatch:delegate: objdisp Arrayc)
+                (String       'dispatch:delegate: objdisp Stringc)
+                (Symbol       'dispatch:delegate: objdisp Symbolc)
+                (SmallInteger 'dispatch:delegate: objdisp SmInt)
 
-                (null 'testMethod)
+                (store_empty UndefinedObject   Object       'UndefinedObject)
+                (store_empty IScoped           Object       'IScoped)
+                (store_empty IList             Evaluatable  'IList)
+                (store_empty ICall             Evaluatable  'ICall)
+                (store_empty IConst            Evaluatable  'IConst)
+                (store_empty IVar              Evaluatable  'IVar)
+                (store_empty IAssign           Evaluatable  'IAssign)
+                (store_empty ICapture          Evaluatable  'ICapture)
 
                 ((Array 'class) 'store:method:
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
@@ -345,10 +352,13 @@
                 ((Symbol 'class) 'store:method:
                     'basicNew: (method (s size) (Symbol 'basicNew: size)))
 
+                ;(display ((ICapture 'instance) 'eval))
 
                 (SmallInteger 'store:method: +
                     (method (s other)
                         (+ (getself s) other)))
+
+                ;(display (IList 'basicNew: 4))
 
                 ;(display (1 + 2))
 

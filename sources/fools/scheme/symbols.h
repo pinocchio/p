@@ -61,6 +61,15 @@ extern object SYMBOLString;
 extern object SYMBOLstore_col_method_col_;
 extern object SYMBOLSymbol;
 extern object SYMBOLUndefinedObject;
+extern object SYMBOLSmallInteger;
+extern object SYMBOLIList;
+extern object SYMBOLICall;
+extern object SYMBOLIConst;
+extern object SYMBOLIVar;
+extern object SYMBOLIAssign;
+extern object SYMBOLICapture;
+extern object SYMBOLIScoped;
+extern object SYMBOLEvaluatable;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\

@@ -28,6 +28,14 @@ int main () {
     object Dictionary       = import_class(dict);
     object UndefinedObject  = import_class(nil);
 
+    object IList            = import_class(ilist);
+    object ICall            = import_class(icall);
+    object IConst           = import_class(iconst);
+    object IVar             = import_class(ivar);
+    object IAssign          = import_class(iassign);
+    object ICapture         = import_class(icapture);
+    object IScoped          = import_class(iscoped);
+
     object ifixed           = import_object(ifixed);
     object null             = import_object(nil);
 

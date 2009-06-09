@@ -101,6 +101,15 @@ object SYMBOLString;
 object SYMBOLstore_col_method_col_;
 object SYMBOLSymbol;
 object SYMBOLUndefinedObject;
+object SYMBOLSmallInteger;
+object SYMBOLIList;
+object SYMBOLICall;
+object SYMBOLIConst;
+object SYMBOLIVar;
+object SYMBOLIAssign;
+object SYMBOLICapture;
+object SYMBOLIScoped;
+object SYMBOLEvaluatable;
 
 void bootstrap_scheme_symbols() {
     // Ensure all symbols used by the VM are bootstrapped.
