@@ -15,10 +15,9 @@ object_object make_object(int size, object interpreter) {
 
 array_object make_array(int size) {
     if (size == 0) { return fools_system->empty; }
-    array_object result     = (array_object)make_object(size + 1,
-                                                    (object)fools_system->nil);
-    result->size            = size;
-    header(result)          = (object)fools_system->array_class;
+    array_object result = (array_object)make_object(size + 1,
+                            (object)fools_system->array_class);
+    result->size        = size;
     return result;
 }
 

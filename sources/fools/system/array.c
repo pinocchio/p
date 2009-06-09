@@ -37,12 +37,3 @@ define_bootstrapping_type(iarray,
     // class
     if_selector(selector, SIZED,            iarray_new);
 )
-
-/*define_bootstrapping_class(array,
-     // instance
-    if_selector(selector, OBJECT_AT,        iarray_at);
-    if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
-    if_selector(selector, SIZE,             iarray_size);,
-    // class
-    if_selector(selector, SIZED, iarray_new);
-)*/
