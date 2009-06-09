@@ -339,8 +339,6 @@
                 ((string 'class) 'store:method:
                     'basicNew: (method (s size) (string 'basicNew: size)))
                 ((symbol 'class) 'store:method:
-                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
-                ((symbol 'class) 'store:method:
                     'basicNew: (method (s size) (symbol 'basicNew: size)))
 
 
@@ -350,19 +348,19 @@
 
                 ;(display (1 + 2))
 
-                (string 'store:method: 'testMethod
-                    (method (s) (display "HELLO!") (display (getself s))
-                                (display "\n")))
+                ;(string 'store:method: 'testMethod
+                ;    (method (s) (display "HELLO!") (display (getself s))
+                ;                (display "\n")))
 
-                ("biep" 'testMethod)
-                ('testMethod 'testMethod)
+                ;("biep" 'testMethod)
+                ;('testMethod 'testMethod)
 
-                (symbol 'store:method: 'testMethod
-                    (method (s) (display "2H!") (display (getself s))
-                                (display "\n")))
+                ;(symbol 'store:method: 'testMethod
+                ;    (method (s) (display "2H!") (display (getself s))
+                ;                (display "\n")))
 
-                ("biep" 'testMethod)
-                ('testMethod 'testMethod)
+                ;("biep" 'testMethod)
+                ;('testMethod 'testMethod)
 
                 ;(let ((test "BOE\n"))
                 ;    ((string 'methodDictionary) 'objectAt:put:

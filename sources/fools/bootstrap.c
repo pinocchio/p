@@ -24,6 +24,12 @@ fools_object fools_system;
 
 #define incomplete_typed_class(type)\
     build_native_class(fools_system->type##_##stub_class, type);
+
+#define setup_type(type)\
+    fools_system->type##_##class =\
+        wrap_dispatcher(type##_##class_dispatch);\
+    fools_system->type##_##stub_class =\
+        wrap_dispatcher(type##_##class_stub_dispatch);
     
 #define empty_class (object)make_object(0, (object)fools_system->nil);
 
@@ -41,23 +47,19 @@ fools_object bootstrap() {
     fools_system->env_class      = incomplete_class(env);
     fools_system->fixed_class    = incomplete_class(fixed);
     fools_system->number_class   = incomplete_class(number);
-    fools_system->dict_class     = incomplete_class(dict);
 
-    /* Special cases which are never to be exposed to the outside world. 
-     * They are only used internally to navigate to the right object or flag
-     * that an instance 'doesNotUnderstand' a message.
+    /* Objects used for handling types; these should not be exposed to the
+     * outside world as they are internal objects
      */
-    fools_system->ifixed_class      = wrap_dispatcher(ifixed_class_dispatch);
-    fools_system->ifixed_stub_class = wrap_dispatcher(ifixed_class_stub_dispatch);
+    setup_type(ifixed);
+    setup_type(iarray);
+    setup_type(istring);
+    setup_type(idict);
 
-    fools_system->iarray_class      = wrap_dispatcher(iarray_class_dispatch);
-    fools_system->iarray_stub_class = wrap_dispatcher(iarray_class_stub_dispatch);
-    fools_system->array_class       = incomplete_typed_class(iarray);
-
-    fools_system->istring_class      = wrap_dispatcher(istring_class_dispatch);
-    fools_system->istring_stub_class = wrap_dispatcher(istring_class_stub_dispatch);
-    fools_system->string_class       = incomplete_typed_class(istring);
-    fools_system->symbol_class       = incomplete_typed_class(istring);
+    fools_system->array_class  = incomplete_typed_class(iarray);
+    fools_system->string_class = incomplete_typed_class(istring);
+    fools_system->symbol_class = incomplete_typed_class(istring);
+    fools_system->dict_class   = incomplete_typed_class(idict);
 
     // Build after building the array_class!
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);

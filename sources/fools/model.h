@@ -153,6 +153,9 @@ struct fools {
     object istring_class;
     object istring_stub_class;
 
+    object idict_class;
+    object idict_stub_class;
+
     // Level shifting
     object level_shifter;
 

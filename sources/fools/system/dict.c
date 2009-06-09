@@ -59,7 +59,7 @@ static void inline dict_new() {
     debug("ret>>dict>>new\n");
 }
 
-define_bootstrapping_class(dict,
+define_bootstrapping_type(idict,
     // instance
     if_selector(selector, OBJECT_AT,        dict_at);
     if_selector(selector, OBJECT_AT_PUT,    dict_at_put);,
