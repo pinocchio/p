@@ -22,9 +22,3 @@ define_bootstrapping_class(icapture,
     // class
     if_selector(selector, INSTANCE, icapture_instance);
 )
-
-// Object creation
-icapture_object make_icapture() {
-    new_instance(icapture);
-    return result;
-}

@@ -5,6 +5,4 @@ extern void icapture_stub_dispatch();
 extern void icapture_class_stub_dispatch();
 extern icapture_object make_icapture();
 
-struct icapture { };
-
 #endif // SYSTEM_ICAPTURE_H
