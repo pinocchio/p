@@ -67,9 +67,8 @@ fools_object bootstrap() {
     incomplete_ifixed_class(fools_system->nil_class, 0);
 
     // Build after building the array_class!
-    fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
+    fools_system->empty = (array_object)make_object(1, fools_system->array_class);
     fools_system->empty->size   = 0;
-    header(fools_system->empty) = fools_system->array_class;
     // Set after building the nil_class
     header(fools_system->nil) = fools_system->nil_class;
 
