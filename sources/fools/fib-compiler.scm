@@ -302,7 +302,6 @@
                    (Magnitude (make_empty_subclass Object 'Magnitude))
                    (Number (make_empty_subclass Magnitude 'Number))
                    (Integer (make_empty_subclass Number 'Integer))
-                   (SmInt (make_empty_subclass Integer 'SmallInteger))
                    (Boolean (make_empty_subclass Object 'Boolean))
                    (True (make_empty_subclass Boolean 'True))
                    (False (make_empty_subclass Boolean 'False))
@@ -312,9 +311,7 @@
                    (OrCol (SqCol 'subclass:instvars:classvars:
                                  'OrderedCollection (vector 1 2 3) ev))
                                                     ; XXX todo :! 
-                   (Arrayc  (make_empty_subclass ArCol 'Array))
                    (Stringc (make_empty_subclass ArCol 'String))
-                   (Symbolc (make_empty_subclass Stringc 'Symbol))
                    (Evaluatable (make_empty_subclass Object 'Evaluatable)))
 
                 ;((integer 'methodDictionary)
@@ -327,11 +324,10 @@
 
                 ;((integer 'basicNew) 'testMethod)
 
-                (Array        'dispatch:delegate: objdisp Arrayc)
                 (String       'dispatch:delegate: objdisp Stringc)
-                (Symbol       'dispatch:delegate: objdisp Symbolc)
-                (SmallInteger 'dispatch:delegate: objdisp SmInt)
-
+                (store_empty Symbol            Stringc      'Symbol)
+                (store_empty SmallInteger      Integer      'SmallInteger)
+                (store_empty Array             ArCol        'Array)
                 (store_empty UndefinedObject   Object       'UndefinedObject)
                 (store_empty IScoped           Object       'IScoped)
                 (store_empty IList             Evaluatable  'IList)

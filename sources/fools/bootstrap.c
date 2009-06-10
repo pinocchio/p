@@ -68,12 +68,12 @@ fools_object bootstrap() {
 
     // Build after building the array_class!
     fools_system->empty = (array_object)make_object(1, (object)fools_system->nil);
-    fools_system->empty->size               = 0;
-    header(fools_system->empty)             = fools_system->array_class;
+    fools_system->empty->size   = 0;
+    header(fools_system->empty) = fools_system->array_class;
     // Set after building the nil_class
     header(fools_system->nil) = fools_system->nil_class;
 
-    fools_system->level_shifter     = wrap_dispatcher(shift_level);
+    fools_system->level_shifter = wrap_dispatcher(shift_level);
 
     fools_system->icapture      = (object)make_icapture();
     fools_system->ifixed        = make_empty_object(fixed_class);
