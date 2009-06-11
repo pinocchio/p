@@ -96,30 +96,28 @@ define_bootstrapping_type(outfile,
     if_selector(selector, ON,    outputfile_open);
 )
 
-// Object creation
-object make_inputfile(const wchar_t* filename) {
-    int len = wcslen(filename);
+char* unicode_to_ascii(const wchar_t* str) {
+    int len = wcslen(str);
     char* charname = (char*)FOOLS_ALLOC(sizeof(char[len]));
 
-    if (wcstombs(charname, filename, len) != len) {
-        printf("Filename not ASCII compatible!\n");
+    if (wcstombs(charname, str, len) != len) {
+        printf("String not ASCII compatible!\n");
         assert(NULL);
-    }    
+    }
 
+    return charname;
+}
+
+// Object creation
+object make_inputfile(const wchar_t* filename) {
+    char* charname = unicode_to_ascii(filename);
     new_instance(inputfile);
     result->file = fopen(charname, "r");
     return (object)result;
 }
 
 object make_outputfile(const wchar_t* filename) {
-    int len = wcslen(filename);
-    char* charname = (char*)FOOLS_ALLOC(sizeof(char[len]));
-
-    if (wcstombs(charname, filename, len) != len) {
-        printf("Filename not ASCII compatible!\n");
-        assert(NULL);
-    }    
-
+    char* charname = unicode_to_ascii(filename);
     new_instance(outputfile);
     result->file = fopen(charname, "w");
     return (object)result;
