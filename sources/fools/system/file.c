@@ -58,10 +58,33 @@ with_pre_eval1(outputfile_open, context, name,
     return_from_context(context, make_outputfile(filename));
 )
 
+static void inline inputfile_size() {
+    context_object context = get_context();
+    inputfile_object f = context->self.inputfile;
+    FILE* fp = f->file;
+    if (fp == NULL) {
+        printf("File nullpointer\n");
+        assert(NULL);
+    }
+    long pos = ftell(fp);
+    rewind(fp);
+    char cur;
+    int size = 0;
+    while ((cur = fgetc(fp)) != EOF) {
+        if (!(cur & 0x80) || (cur & 0x40)) {
+            size++;
+        }
+    }
+    fseek(fp, pos, SEEK_SET);
+    
+    return_from_context(context, (object)make_number(size));
+}
+
 define_bootstrapping_type(infile,
     // instance
     if_selector(selector, READ, inputfile_read);
-    if_selector(selector, END,  inputfile_end);,
+    if_selector(selector, END,  inputfile_end);
+    if_selector(selector, SIZE, inputfile_size);,
     // class
     if_selector(selector, ON,   inputfile_open);
 )

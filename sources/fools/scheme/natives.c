@@ -92,6 +92,7 @@ void scheme_false_func() {
 bin_number_number_op( plus,      +  )
 bin_number_number_op( minus,     -  )
 bin_number_bool_op  ( smallerp,  <  )
+bin_number_bool_op  ( equalp,    == )
 bin_object_bool_op  ( eqp,       == )
 
 static void scheme_display_func_do() {
@@ -116,6 +117,7 @@ void bootstrap_scheme() {
     init_op(plus);
     init_op(minus);
     init_op(smallerp);
+    init_op(equalp);
     init_op(eqp);
     init_direct_op(true);
     init_direct_op(false);
