@@ -5,7 +5,7 @@
 
 #define addbyte(to, from)\
     to <<= 6;\
-    to += (fgetc(from) & 0x3F)
+    to += (fgetc(from) ^ 0x80)
 
 static void inline inputfile_read() {
     context_object context = get_context();
@@ -19,9 +19,8 @@ static void inline inputfile_read() {
             assert(NULL);
         }
         result = first;
-        int i;
         if (first & 1<<7) {
-            result &= 0x3F; // TODO FIXME
+            int i;
             for (i = 0; i < 3; i++) {
                 if (first & 1<<(6-i)) {
                     addbyte(result, fp);
@@ -29,6 +28,8 @@ static void inline inputfile_read() {
                 }
                 break;
             }
+            i;
+            result &= (1<<((i+1)*8-i-3)) - 1;
         }
         return_from_context(context, (object)make_char(result));
     }
