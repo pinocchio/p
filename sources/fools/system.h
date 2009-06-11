@@ -26,6 +26,7 @@
 #include <system/string.h>
 #include <system/number.h>
 #include <system/file.h>
+#include <system/char.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();

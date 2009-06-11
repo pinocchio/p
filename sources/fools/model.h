@@ -39,6 +39,7 @@ struct native_class;
 struct context;
 struct inputfile;
 struct outputfile;
+struct chr;
 
 struct ilist;
 struct iassign;
@@ -71,6 +72,7 @@ typedef struct native_class*     native_class_object;
 typedef struct context*          context_object;
 typedef struct inputfile*        inputfile_object;
 typedef struct outputfile*       outputfile_object;
+typedef struct chr*              chr_object;
 typedef void**                   pointer;
 
 typedef void (*transfer_target)();
@@ -102,6 +104,7 @@ typedef union {
     transfer_target     target;
     inputfile_object    inputfile;
     outputfile_object   outputfile;
+    chr_object          chr;
     pointer             pointer;
 } object;
 
@@ -158,8 +161,9 @@ struct fools {
     declare_type(iarray);
     declare_type(istring);
     declare_type(idict);
-    declare_type(inputfile);
-    declare_type(outputfile);
+    declare_type(infile);
+    declare_type(outfile);
+    declare_type(char);
 
     // Level shifting
     object level_shifter;
@@ -170,7 +174,10 @@ struct fools {
     object symbol_class;
     object array_class;
     object dict_class;
+    object inputfile_class;
+    object outputfile_class;
     object nil_class;
+    object chr_class;
 };
 
 extern object_object            make_object(int size, object interpreter);

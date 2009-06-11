@@ -1,13 +1,14 @@
 #ifndef SYSTEM_FILE_H
 #define SYSTEM_FILE_H
 
-extern void inputfile_stub_dispatch();
-extern void inputfile_class_dispatch();
-extern void inputfile_class_stub_dispatch();
-extern void outputfile_stub_dispatch();
-extern void outputfile_class_dispatch();
-extern void outputfile_class_stub_dispatch();
-extern object make_file(const wchar_t* filename, int write);
+extern void infile_stub_dispatch();
+extern void infile_class_dispatch();
+extern void infile_class_stub_dispatch();
+extern void outfile_stub_dispatch();
+extern void outfile_class_dispatch();
+extern void outfile_class_stub_dispatch();
+extern object make_inputfile(const wchar_t* filename);
+extern object make_outputfile(const wchar_t* filename);
 
 struct inputfile {
     FILE* file;
