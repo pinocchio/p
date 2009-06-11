@@ -23,7 +23,7 @@ void print_object(object o) {
             fools_system->istring_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
             fools_system->istring_class.pointer) {
-        printf("%s", o.string->value);
+        printf("%ls", o.string->value);
         return;
     }
 
@@ -45,7 +45,7 @@ void print_object(object o) {
     test_type(iconst);
     test_type(iassign);
     if (pheader(o.pointer) == fools_system->ivar_class.pointer) {
-        printf("ivar(\"%s\")\n", o.ivar->name->value);
+        printf("ivar(\"%ls\")\n", o.ivar->name->value);
         return;
     }
     test_type(icall);

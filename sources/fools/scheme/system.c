@@ -35,7 +35,7 @@ void inline init_args(ilist_object exp,
 }
 
 void inline add_switch_scope_code(ilist_object exp, int position) {
-    ivar_object receiver_var = make_ivar("switchvar");
+    ivar_object receiver_var = make_ivar(L"switchvar");
     receiver_var->scope = (object)exp;
 
     icall_object icall1(self_scope, receiver_var, SCOPE);

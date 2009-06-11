@@ -21,7 +21,7 @@ TARGET=fib
 
 FULLNAME=$(PROGRAM)-$(VERSION)
 
-CFLAGS = -O3 -g -Wall -I.
+CFLAGS = -O3 -g -Wall -I. -D_GNU_SOURCE
 LDFLAGS = -lgc
 
 TEST_OBJECTS= test test.o fib fib.o fib.c

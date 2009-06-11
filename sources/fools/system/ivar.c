@@ -30,7 +30,7 @@ static void inline ivar_assign() {
 static void inline ivar_eval() {
     context_object ivar_context = get_context();
     ivar_object ivar = ivar_context->self.ivar;
-    debug("ivar>>eval \"%s\"\n", ivar->name->value);
+    debug("ivar>>eval \"%ls\"\n", ivar->name->value);
 
     object env = ivar_context->env;
 
@@ -46,7 +46,8 @@ static void inline ivar_eval() {
 
 with_pre_eval1(ivar_new, context, w_name,
     // XXX breaking encapsulation
-    const char* name = w_name.string->value;
+    // probably should at least clone the value ...
+    const wchar_t* name = w_name.string->value;
     return_from_context(context, (object)make_ivar(name));
 )
 
@@ -60,7 +61,7 @@ define_bootstrapping_class(ivar,
 )
 
 // Object creation
-ivar_object make_ivar(const char* name) {
+ivar_object make_ivar(const wchar_t* name) {
     new_instance(ivar);
     result->name            = make_string(name);
     result->scope           = (object)fools_system->nil;

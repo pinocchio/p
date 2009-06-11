@@ -90,7 +90,7 @@ void type##_##class_stub_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
     if_selector(selector, SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
-    doesnotunderstand(#type"_stubclass", selector);\
+    doesnotunderstand(L""#type"_stubclass", selector);\
 }
 
 #define define_bootstrapping_instance(type, messages)\
@@ -111,7 +111,7 @@ void type##_##stub_dispatch() {\
     if (context_size(context) >= 1) {\
         object selector = message(context);\
         messages\
-        doesnotunderstand(#type"_stub", selector);\
+        doesnotunderstand(L""#type"_stub", selector);\
     }\
     debug("ret>>"#type"_stub_dispatch\n");\
 }
@@ -176,7 +176,7 @@ static void inline name() {\
 
 /* Globally used functions */
 extern void pre_eval_env();
-extern void doesnotunderstand(const char* class, object selector);
+extern void doesnotunderstand(const wchar_t* class, object selector);
 extern void inline identity();
 
 #endif

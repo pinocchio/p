@@ -3,7 +3,7 @@
 
 extern void ivar_class_stub_dispatch();
 extern void ivar_stub_dispatch();
-extern ivar_object make_ivar(const char* name);
+extern ivar_object make_ivar(const wchar_t* name);
 
 struct ivar {
     string_object   name;

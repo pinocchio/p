@@ -15,7 +15,7 @@
     (list arg var-name
         (string-append "object "
                        var-name
-                       " = (object)make_ivar(\"" (symbol->string arg) "\");\n"))))
+                       " = (object)make_ivar(L\"" (symbol->string arg) "\");\n"))))
 
 
 (define (make-arguments vars name)
@@ -230,7 +230,7 @@ extravars))))))))
           (display (string-append "extern object " code ";\n")
                    (current-error-port))
           (list (string-append "define_symbol("
-                               code ", \""
+                               code ", L\""
                                (symbol->string symbol)
                                "\");\n")
                 code)))))
@@ -324,7 +324,7 @@ extravars))))))))
     (write expression os)
     (list (string-append "object "
                          name
-                         " = (object)make_iconst((object)make_string("
+                         " = (object)make_iconst((object)make_string(L"
                         (get-output-string os)
                          "));\n") name '())))
 

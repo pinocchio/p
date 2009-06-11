@@ -50,8 +50,8 @@ void native_test_single_arg_5() {
 
 SETUP(test_string_equals) 
 
-    assert(string_equals(make_string("a string"), make_string("a string")));
-    assert(!string_equals(make_string("a string"), make_string("b string")));
+    assert(string_equals(make_string(L"a string"), make_string(L"a string")));
+    assert(!string_equals(make_string(L"a string"), make_string(L"b string")));
 }
 
 SETUP(test_object_object)
@@ -114,12 +114,12 @@ SETUP(test_return_of_ilist)
 
 SETUP(test_env_lookup)
 
-    object e1k = (object)make_string("env1 identifier");
-    object e2k = (object)make_string("env2 identifier");
+    object e1k = (object)make_string(L"env1 identifier");
+    object e2k = (object)make_string(L"env2 identifier");
 
-    object v1 = (object)make_string("v1");
-    object v2 = (object)make_string("v2");
-    object v3 = (object)make_string("v3");
+    object v1 = (object)make_string(L"v1");
+    object v2 = (object)make_string(L"v2");
+    object v3 = (object)make_string(L"v3");
 
     env_object env1 = make_env(e1k,
                                (object)fools_system->nil,
@@ -189,7 +189,7 @@ SETUP(test_iassign_ivar)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar("iv");
+    ivar_object ivar = make_ivar(L"iv");
 
     iassign_object iassign = make_iassign((object)ivar, (object)iconst);
 
@@ -207,7 +207,7 @@ SETUP(test_ivar_read)
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
-    ivar_object ivar = make_ivar("iv");
+    ivar_object ivar = make_ivar(L"iv");
 
     iassign_object iassign = make_iassign((object)ivar, (object)iconst);
 
@@ -376,7 +376,7 @@ SETUP(test_make_function_no_args)
                               (object)fools_system->nil, 0);
 
     array_object args = make_array(1);
-    array_at_put(args, 0, (object)make_ivar("iv"));
+    array_at_put(args, 0, (object)make_ivar(L"iv"));
 
     object constant_function =
         make_func(args,
@@ -450,7 +450,7 @@ SETUP(test_make_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar("iv");
+    ivar_object ivar = make_ivar(L"iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -472,7 +472,7 @@ SETUP(test_eval_function_1_arg)
 
 
 
-    ivar_object ivar = make_ivar("iv");
+    ivar_object ivar = make_ivar(L"iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -504,7 +504,7 @@ SETUP(test_eval_nested_function)
     env_object env = make_env((object)fools_system->nil,
                               (object)fools_system->nil, 0);
 
-    ivar_object ivar = make_ivar("iv");
+    ivar_object ivar = make_ivar(L"iv");
     array_object arguments = make_array(1);
     array_at_put(arguments, 0, (object)ivar);
 
@@ -553,19 +553,19 @@ object create_class_dispatch() {
                         (loop (class 'OBJECT_AT 0))
                         (method 'APPLY_IN args env)))))))
 */
-define_symbol(SYMBOL_doesNotUnderstand, "DNU");
+define_symbol(SYMBOL_doesNotUnderstand, L"DNU");
 object null         = (object)make_iconst((object)fools_system->nil);
-object ivar_3_self = (object)make_ivar("self");
-object ivar_4_env = (object)make_ivar("env");
-object ivar_5_args = (object)make_ivar("args");
-object ivar_7_msg = (object)make_ivar("msg");
+object ivar_3_self = (object)make_ivar(L"self");
+object ivar_4_env = (object)make_ivar(L"env");
+object ivar_5_args = (object)make_ivar(L"args");
+object ivar_7_msg = (object)make_ivar(L"msg");
 object number_9_0 = (object)make_iconst((object)make_number(0));
 icall_object icall_10_ivar_5_args = make_icall((object)ivar_5_args, 3);
 set_callarg(icall_10_ivar_5_args, 0, (object)OBJECT_AT_PUT);
 set_callarg(icall_10_ivar_5_args, 1, (object)number_9_0);
 set_callarg(icall_10_ivar_5_args, 2, (object)ivar_3_self);
-object ivar_12_loop = (object)make_ivar("loop");
-object ivar_16_class = (object)make_ivar("class");
+object ivar_12_loop = (object)make_ivar(L"loop");
+object ivar_16_class = (object)make_ivar(L"class");
 icall_object icall_17_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_17_scheme_eqp, 0, (object)ivar_16_class);
 set_callarg(icall_17_scheme_eqp, 1, (object)null);
@@ -574,7 +574,7 @@ set_callarg(icall_18_ivar_3_self, 0, (object)SYMBOL_doesNotUnderstand);
 set_callarg(icall_18_ivar_3_self, 1, (object)ivar_7_msg);
 set_callarg(icall_18_ivar_3_self, 2, (object)ivar_4_env);
 set_callarg(icall_18_ivar_3_self, 3, (object)ivar_5_args);
-object ivar_20_amethod = (object)make_ivar("amethod");
+object ivar_20_amethod = (object)make_ivar(L"amethod");
 icall_object icall_21_scheme_eqp = make_icall((object)scheme_eqp, 2);
 set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_amethod);
 set_callarg(icall_21_scheme_eqp, 1, (object)null);
@@ -776,10 +776,10 @@ SETUP(test_ifixed_dispatch)
 
     object theclass = transfer();
 
-    object svar = (object)make_ivar("self");
-    object mvar = (object)make_ivar("msg");
-    object evar = (object)make_ivar("env");
-    object avar = (object)make_ivar("args");
+    object svar = (object)make_ivar(L"self");
+    object mvar = (object)make_ivar(L"msg");
+    object evar = (object)make_ivar(L"env");
+    object avar = (object)make_ivar(L"args");
     array_object args = make_array(4);
     raw_array_at_put(args, 0, svar);
     raw_array_at_put(args, 1, mvar);

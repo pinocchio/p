@@ -6,8 +6,8 @@
     if (selector.pointer == symb.pointer)\
         return todo();
 
-void doesnotunderstand(const char* class, object selector) {
-    printf("DNU: %s>>%s\n", class, selector.string->value);
+void doesnotunderstand(const wchar_t* class, object selector) {
+    printf("DNU: %ls>>%ls\n", class, selector.string->value);
     assert(NULL);
 }
 

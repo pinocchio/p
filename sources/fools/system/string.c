@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <wchar.h>
 #include <string.h>
 
 with_pre_eval1(string_new, context, w_size,
@@ -8,7 +9,7 @@ with_pre_eval1(string_new, context, w_size,
     return_from_context(context, (object)make_string_sized(size));
 )
 
-char* string_value(string_object string) {
+wchar_t* string_value(string_object string) {
     return string->value;
 }
 
@@ -20,7 +21,7 @@ int inline string_equals(string_object string1, string_object string2) {
     int left_size   = number_value(string_size(string1));
     int right_size  = number_value(string_size(string2));
     return (left_size == right_size) &&
-           (strncmp(string_value(string1),
+           (memcmp(string_value(string1),
                    string_value(string2),
                    left_size) == 0);
 }
@@ -34,25 +35,28 @@ define_bootstrapping_type(istring,
 )
 
 // Object creation
-string_object make_string(const char* value) {
+string_object make_string(const wchar_t* value) {
     string_object result    = NEW(struct string);
-    result->value           = strdup(value);
-    result->size            = make_number(strlen(value));
+    result->value           = wcsdup(value);
+    result->size            = make_number(wcslen(value));
     header(result)          = (object)fools_system->string_class;
     return result;
 }
 
-object make_symbol(const char* value) {
+// should become wchar_t*
+// and printf("%ls", wchar_t*)
+// for unicode support.
+object make_symbol(const wchar_t* value) {
     string_object result    = NEW(struct string);
-    result->value           = strdup(value);
-    result->size            = make_number(strlen(value));
+    result->value           = wcsdup(value);
+    result->size            = make_number(wcslen(value));
     header(result)          = (object)fools_system->symbol_class;
     return (object)result;
 }
 
 string_object make_string_sized(int size) {
     string_object result    = NEW(struct string);
-    result->value           = (char*)FOOLS_ALLOC(sizeof(char[size]));
+    result->value           = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t[size]));
     result->size            = make_number(size);
     header(result)          = (object)fools_system->string_class;
     return result;
