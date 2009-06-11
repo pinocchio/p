@@ -37,6 +37,11 @@ object SIZE;
 object DISPATCH_DELEGATE_SIZE;
 object SET_DISPATCH_DELEGATE;
 object WITH_SIZE;
+// File
+object ON;
+object READ;
+object END;
+object WRITE;
 
 // Global symbols, generatable format
 object SYMBOLdispatch_col_delegate_col_;
@@ -110,6 +115,10 @@ object SYMBOLIAssign;
 object SYMBOLICapture;
 object SYMBOLIScoped;
 object SYMBOLEvaluatable;
+object SYMBOLon_col_;
+object SYMBOLreadChar;
+object SYMBOLwriteChar_col_;
+object SYMBOLatEnd;
 
 void bootstrap_scheme_symbols() {
     // Ensure all symbols used by the VM are bootstrapped.
@@ -137,6 +146,12 @@ void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLinstance,                            L"instance");
     define_symbol(SYMBOLto_col_expression_col_,              L"to:expression:");
     define_symbol(SYMBOLto_col_sized_col_,                   L"to:sized:");
+    define_symbol(SYMBOLon_col_,                             L"on:");
+    define_symbol(SYMBOLreadChar,                            L"readChar");
+    define_symbol(SYMBOLwriteChar_col_,                      L"writeChar:");
+    define_symbol(SYMBOLatEnd,                               L"atEnd");
+
+
     EVAL                    = SYMBOLeval;
     PRE_EVAL_ENV            = SYMBOLeval_col_;
     STORE_AT_IN             = SYMBOLstore_col_at_col_in_col_;
@@ -161,4 +176,8 @@ void bootstrap_scheme_symbols() {
     INSTANCE                = SYMBOLinstance;
     TO_EXPRESSION           = SYMBOLto_col_expression_col_;
     TO_SIZED                = SYMBOLto_col_sized_col_;
+    ON                      = SYMBOLon_col_;
+    READ                    = SYMBOLreadChar;
+    WRITE                   = SYMBOLwriteChar_col_;
+    END                     = SYMBOLatEnd;
 }

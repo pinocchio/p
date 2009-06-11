@@ -25,6 +25,7 @@
 #include <system/dict.h>
 #include <system/string.h>
 #include <system/number.h>
+#include <system/file.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();

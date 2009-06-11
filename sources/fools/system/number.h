@@ -8,7 +8,7 @@ extern number_object    make_number(int value);
 extern int inline       number_value(number_object number);
 
 struct number {
-    int                 value;
+    int value;
 };
 
 #endif // SYSTEM_NUMBER_H

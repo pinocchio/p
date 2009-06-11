@@ -54,11 +54,15 @@ fools_object bootstrap() {
     setup_type(iarray);
     setup_type(istring);
     setup_type(idict);
+    setup_type(inputfile);
+    setup_type(outputfile);
 
     fools_system->array_class       = incomplete_typed_class(iarray);
     fools_system->string_class      = incomplete_typed_class(istring);
     fools_system->symbol_class      = incomplete_typed_class(istring);
     fools_system->dict_class        = incomplete_typed_class(idict);
+    fools_system->inputfile_class   = incomplete_typed_class(inputfile);
+    fools_system->outputfile_class  = incomplete_typed_class(outputfile);
     incomplete_ifixed_class(fools_system->nil_class, 0);
 
     // Build after building the array_class!

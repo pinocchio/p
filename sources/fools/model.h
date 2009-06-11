@@ -23,6 +23,10 @@
 #define pheader(o) header(o).pointer
 #define ntarget(o) native_target((o).native)
 
+#define declare_type(name)\
+    object name##_##class;\
+    object name##_##stub_class;
+
 struct env;
 struct object_object;
 struct string;
@@ -33,6 +37,8 @@ struct nil;
 struct native;
 struct native_class;
 struct context;
+struct inputfile;
+struct outputfile;
 
 struct ilist;
 struct iassign;
@@ -63,6 +69,8 @@ typedef struct nil*              nil_object;
 typedef struct native*           native_object;
 typedef struct native_class*     native_class_object;
 typedef struct context*          context_object;
+typedef struct inputfile*        inputfile_object;
+typedef struct outputfile*       outputfile_object;
 typedef void**                   pointer;
 
 typedef void (*transfer_target)();
@@ -92,6 +100,8 @@ typedef union {
     context_object      context;
     env_object          env;
     transfer_target     target;
+    inputfile_object    inputfile;
+    outputfile_object   outputfile;
     pointer             pointer;
 } object;
 
@@ -144,17 +154,12 @@ struct fools {
     object env_class;
 
     // Classes related to object formats
-    object ifixed_class;
-    object ifixed_stub_class;
-
-    object iarray_class;
-    object iarray_stub_class;
-
-    object istring_class;
-    object istring_stub_class;
-
-    object idict_class;
-    object idict_stub_class;
+    declare_type(ifixed);
+    declare_type(iarray);
+    declare_type(istring);
+    declare_type(idict);
+    declare_type(inputfile);
+    declare_type(outputfile);
 
     // Level shifting
     object level_shifter;
