@@ -355,11 +355,13 @@
                         (+ (getself s) other)))
 
                 (let ((file (InputFile 'on: "fib-compiler.scm")))
-                    (let loop ((char (file 'readChar)))
-                        (display char)
-                        (if (file 'atEnd)
-                            (display "\n...done\n")
-                            (loop (file 'readChar))))
+                    (if (file 'atEnd)
+                        (display "What?\n")
+                        (let loop ((char (file 'readChar)))
+                            (display char)
+                            (if (file 'atEnd)
+                                (display "\n...done\n")
+                                (loop (file 'readChar)))))
                 )
 
                 ;(display ("boe" 'objectAt: 2))
