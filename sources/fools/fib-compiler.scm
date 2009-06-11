@@ -363,10 +363,10 @@
                 )
 
                 ;(display ("boe" 'objectAt: 2))
-                ;(let ((s "boe\n"))
-                ;    ;(s 'objectAt:put: 2 #\ƺ)
-                ;    ;(display #\ƺ)
-                ;    (display s))
+                (let ((s "boe\n"))
+                    (s 'objectAt:put: 2 #\ƺ)
+                    (display #\ƺ)
+                    (display s))
 
 
                 ;(display "blaboe\n")

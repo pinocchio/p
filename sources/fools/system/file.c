@@ -4,8 +4,8 @@
 #include <wchar.h>
 
 #define addbyte(to, from)\
-    to = to << 8;\
-    to += fgetc(from)
+    to <<= 6;\
+    to += (fgetc(from) & 0x3F)
 
 static void inline inputfile_read() {
     context_object context = get_context();
@@ -21,6 +21,7 @@ static void inline inputfile_read() {
         result = first;
         int i;
         if (first & 1<<7) {
+            result &= 0x3F; // TODO FIXME
             for (i = 0; i < 3; i++) {
                 if (first & 1<<(6-i)) {
                     addbyte(result, fp);
