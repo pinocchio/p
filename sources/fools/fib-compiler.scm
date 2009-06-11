@@ -354,6 +354,23 @@
                     (method (s other)
                         (+ (getself s) other)))
 
+                (let ((file (InputFile 'on: "fib-compiler.scm")))
+                    (let loop ((char (file 'readChar)))
+                        (display char)
+                        (if (file 'atEnd)
+                            (display "\n...done\n")
+                            (loop (file 'readChar))))
+                )
+
+                ;(display ("boe" 'objectAt: 2))
+                ;(let ((s "boe\n"))
+                ;    ;(s 'objectAt:put: 2 #\ƺ)
+                ;    ;(display #\ƺ)
+                ;    (display s))
+
+
+                ;(display "blaboe\n")
+
                 ;(display (IList 'basicNew: 4))
 
                 ;(display (1 + 2))

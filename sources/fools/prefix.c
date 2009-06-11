@@ -35,6 +35,8 @@ int main () {
     object IAssign          = import_class(iassign);
     object ICapture         = import_class(icapture);
     object IScoped          = import_class(iscoped);
+    object InputFile        = import_class(inputfile);
+    object OutputFile       = import_class(outputfile);
 
     object ifixed           = import_object(ifixed);
     object null             = import_object(nil);

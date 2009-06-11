@@ -306,6 +306,7 @@ extravars))))))))
         ((number? expression) (transform-number expression vars))
         ((symbol? expression) (transform-symbol expression vars))
         ((string? expression) (transform-string expression vars))
+        ((char? expression)   (transform-char expression vars))
         (else (error "Unknown type: " expression))))
 
 (define (transform-number expression vars)
@@ -317,6 +318,14 @@ extravars))))))))
                          " = (object)make_iconst((object)make_number("
                          (number->string expression)
                          "));\n") name '())))
+
+(define (transform-char expression vars)
+  (let ((name (make-var-name "char" 'x)))
+    (list (string-append "object "
+                         name
+                         " = (object)make_iconst((object)make_char(L'"
+                         (make-string 1 expression)
+                         "'));\n") name '())))
 
 (define (transform-string expression vars)
   (let ((name (make-var-name "string" 'constant))
@@ -413,6 +422,8 @@ extravars))))))))
     (IAssign        "IAssign")
     (ICapture       "ICapture")
     (IScoped        "IScoped")
+    (InputFile      "InputFile")
+    (OutputFile     "OutputFile")
     ))
 
 (define-syntax-rule (transform-code code ...)

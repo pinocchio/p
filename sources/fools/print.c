@@ -27,6 +27,14 @@ void print_object(object o) {
         return;
     }
 
+    if (pheader(pheader(o.pointer)) ==
+            fools_system->char_stub_class.pointer ||
+            pheader(pheader(o.pointer)) ==
+            fools_system->char_class.pointer) {
+        printf("%lc", o.chr->value);
+        return;
+    }
+
     if (o.pointer == scheme_true.pointer) {
         printf("true\n");
         return;

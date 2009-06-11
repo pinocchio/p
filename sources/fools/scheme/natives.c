@@ -120,5 +120,8 @@ void bootstrap_scheme() {
     init_direct_op(true);
     init_direct_op(false);
 
+    fools_system->true  = scheme_true;
+    fools_system->false = scheme_false;
+
     init_op(display);
 }

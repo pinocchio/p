@@ -36,7 +36,16 @@ static void inline inputfile_read() {
 with_pre_eval1(outputfile_write, context, wchr,
 )
 
-static void inline file_end() {
+static void inline inputfile_end() {
+    context_object context = get_context();
+    FILE* file = context->self.inputfile->file;
+    int c = fgetc(file);
+    if (c == EOF) {
+        return_from_context(context, fools_system->true);
+    } else {
+        ungetc(c, file);
+        return_from_context(context, fools_system->false);
+    }
 }
 
 with_pre_eval1(inputfile_open, context, name,
@@ -54,15 +63,14 @@ with_pre_eval1(outputfile_open, context, name,
 define_bootstrapping_type(infile,
     // instance
     if_selector(selector, READ, inputfile_read);
-    if_selector(selector, END,  file_end);,
+    if_selector(selector, END,  inputfile_end);,
     // class
     if_selector(selector, ON,   inputfile_open);
 )
 
 define_bootstrapping_type(outfile,
     // instance
-    if_selector(selector, WRITE, outputfile_write);
-    if_selector(selector, END,   file_end);,
+    if_selector(selector, WRITE, outputfile_write);,
     // class
     if_selector(selector, ON,    outputfile_open);
 )
