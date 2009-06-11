@@ -2,7 +2,7 @@
 #include <system.h>
 #include <bootstrap.h>
 #include <scheme/natives.h>
-
+#include <wchar.h>
 #include <stdio.h>
 
 #define test_type(type)\

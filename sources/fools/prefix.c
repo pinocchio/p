@@ -8,6 +8,7 @@
 #include <scheme/system.h>
 #include <scheme/symbols.h>
 #include <print.h>
+#include <locale.h>
 
 #define import_object(name)\
     (object)make_iconst((object)fools_system->name);
@@ -16,6 +17,8 @@
 
 int main () {
     bootstrap();
+
+    setlocale(LC_ALL, "");
 
     env_object env = empty_env;
 
