@@ -309,8 +309,11 @@
                    (SqCol (make_empty_subclass Collection 'SequenceableCollection))
                    (ArCol (make_empty_subclass SqCol 'ArrayedCollection))
                    (OrCol (SqCol 'subclass:instvars:classvars:
-                                 'OrderedCollection (vector 1 2 3) ev))
-                                                    ; XXX todo :! 
+                                 'OrderedCollection
+                                 (vector 'array 'firstIndex 'lastIndex) ev)) 
+                   (AFile (make_empty_subclass Object 'AbstractFile))
+                   (IFile (make_empty_subclass AFile 'InputFile))
+                   (OFile (make_empty_subclass AFile 'OutputFile))
                    (Stringc (make_empty_subclass ArCol 'String))
                    (Evaluatable (make_empty_subclass Object 'Evaluatable)))
 
@@ -371,6 +374,14 @@
                     (s 'objectAt:put: 2 #\ƺ)
                     (display #\ƺ)
                     (display s))
+
+                (InputFile 'dispatch:delegate:
+                            objdisp
+                            (make_empty_subclass IFile 'UTF8InputFile))
+                (OutputFile 'dispatch:delegate:
+                            objdisp
+                            (make_empty_subclass OFile 'UTF8OutputFile))
+                (InputFile 'test)
 
 
                 ;(display "blaboe\n")
