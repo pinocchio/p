@@ -354,15 +354,18 @@
                     (method (s other)
                         (+ (getself s) other)))
 
+                ;(let* ((file (InputFile 'on: "fib-compiler.scm"))
+                ;       (size (file 'size))
+                ;       (s (String 'basicNew: size)))
+                ;    (let loop ((current 0))
+                ;        (if (= current size)
+                ;            (display s)
+                ;            (begin
+                ;                (s 'objectAt:put: current (file 'readChar))
+                ;                (loop (+ current 1))))))
                 (let* ((file (InputFile 'on: "fib-compiler.scm"))
-                       (size (file 'size))
-                       (s (String 'basicNew: size)))
-                    (let loop ((current 0))
-                        (if (= current size)
-                            (display s)
-                            (begin
-                                (s 'objectAt:put: current (file 'readChar))
-                                (loop (+ current 1))))))
+                       (s (file 'readAllChars)))
+                    (display s))
 
                 (let ((s "boe\n"))
                     (s 'objectAt:put: 2 #\ƺ)

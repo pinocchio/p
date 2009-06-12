@@ -15,3 +15,8 @@ chr_object make_char(wchar_t value) {
     result->value           = value;
     return result;
 }
+
+chr_object make_empty_char() {
+    new_instance(chr);
+    return result;
+}

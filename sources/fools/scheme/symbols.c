@@ -42,6 +42,7 @@ object ON;
 object READ;
 object END;
 object WRITE;
+object READ_ALL;
 
 // Global symbols, generatable format
 object SYMBOLdispatch_col_delegate_col_;
@@ -119,6 +120,7 @@ object SYMBOLon_col_;
 object SYMBOLreadChar;
 object SYMBOLwriteChar_col_;
 object SYMBOLatEnd;
+object SYMBOLreadAllChars;
 
 void bootstrap_scheme_symbols() {
     // Ensure all symbols used by the VM are bootstrapped.
@@ -150,6 +152,7 @@ void bootstrap_scheme_symbols() {
     define_symbol(SYMBOLreadChar,                            L"readChar");
     define_symbol(SYMBOLwriteChar_col_,                      L"writeChar:");
     define_symbol(SYMBOLatEnd,                               L"atEnd");
+    define_symbol(SYMBOLreadAllChars,                        L"readAllChars");
 
 
     EVAL                    = SYMBOLeval;
@@ -180,4 +183,5 @@ void bootstrap_scheme_symbols() {
     READ                    = SYMBOLreadChar;
     WRITE                   = SYMBOLwriteChar_col_;
     END                     = SYMBOLatEnd;
+    READ_ALL                = SYMBOLreadAllChars;
 }

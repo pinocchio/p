@@ -41,6 +41,7 @@ extern object READ;
 extern object ON;
 extern object WRITE;
 extern object END;
+extern object READ_ALL;
 
 extern object SYMBOLdispatch_col_delegate_col_;
 extern object SYMBOLbasicNew;
@@ -115,6 +116,7 @@ extern object SYMBOLon_col_;
 extern object SYMBOLreadChar;
 extern object SYMBOLwriteChar_col_;
 extern object SYMBOLatEnd;
+extern object SYMBOLreadAllChars;
 
 
 #define define_symbol(name, value)\
