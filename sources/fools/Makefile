@@ -41,7 +41,7 @@ test: $(OBJECTS) test.o
 
 fib.c: prefix.c postfix.c fib-compiler.scm lambda-compiler.scm
 	cat prefix.c > fib.c
-	mzscheme -r fib-compiler.scm >> fib.c 2>header.h
+	mzscheme -r fib-compiler.scm >> fib.c
 	cat postfix.c >> fib.c
 
 fib: $(OBJECTS) fib.o
