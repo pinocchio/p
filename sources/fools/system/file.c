@@ -33,16 +33,32 @@ static void utf8_read_char(FILE* fp, wchar_t* result) {
     }
     *result = first;
     if (first & 1<<7) {
+        if (!(first & 1<<6)) {
+            printf("Found non-utf8 char\n");
+            exit(EXIT_FAILURE);
+        }
         int i;
-        for (i = 0; i < 3; i++) {
+        // we can only grok UTF8 up to wchar_t/byte bytes
+        for (i = 0; i < sizeof(wchar_t) - 1; i++) {
             if (first & 1<<(6-i)) {
                 *result <<= 6;
                 *result += (fgetc(fp) ^ 0x80);
                 continue;
             }
-            break;
+            goto after;
         }
-        *result &= (1<<((i+1)*6-i)) - 1;
+        /* In case we read sizeof(wchar_t) bytes, we check if the next one
+         * should be part of the current unicode character. If so, we fail.
+         */
+        int next = fgetc(fp);
+        if (next & 1<<7 && !(next & 1<<6)) {
+            printf("UTF-8 character too big for the system\n");
+            exit(EXIT_FAILURE);
+        }
+        ungetc(next, fp);
+        /* If not, just continue. */
+        after:
+            *result &= (1<<((i+1)*6-i)) - 1;
     }
 }
 
