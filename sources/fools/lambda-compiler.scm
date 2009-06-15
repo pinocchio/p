@@ -332,10 +332,11 @@ extravars))))))))
            ((unless) (transform-unless expression vars))
            ((vector) (transform-vector expression vars))
            (else (transform-application expression vars))))
-        ((number? expression) (transform-number expression vars))
-        ((symbol? expression) (transform-symbol expression vars))
-        ((string? expression) (transform-string expression vars))
-        ((char? expression)   (transform-char expression vars))
+        ((number? expression)  (transform-number expression vars))
+        ((symbol? expression)  (transform-symbol expression vars))
+        ((string? expression)  (transform-string expression vars))
+        ((char? expression)    (transform-char expression vars))
+        ((boolean? expression) (transform-bool expression vars))
         (else (error "Unknown type: " expression))))
 
 (define (transform-number expression vars)
@@ -347,6 +348,13 @@ extravars))))))))
                          " = (object)make_iconst((object)make_number("
                          (number->string expression)
                          "));\n") name '())))
+
+(define (transform-bool expression vars)
+    (list ""
+        (if expression
+            "true"
+            "false")
+        '()))
 
 (define (transform-char expression vars)
   (let ((name (make-var-name "char" 'x)))

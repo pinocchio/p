@@ -48,7 +48,7 @@ static void utf8_read_char(FILE* fp, wchar_t* result) {
                 *result += (next ^ 1<<7);
                 continue;
             }
-            goto after;
+            goto finally;
         }
         /* In case we read sizeof(wchar_t) bytes, we check if the next one
          * should be part of the current unicode character. If so, we fail.
@@ -57,8 +57,8 @@ static void utf8_read_char(FILE* fp, wchar_t* result) {
             printf("Non UTF-8 character or UTF-8 character too big for the system's Unicode\n");
             exit(EXIT_FAILURE);
         }
-        /* If not, just continue. */
-        after:
+        /* If ot, just continue. */
+        finally:
             *result &= (1<<((i+1)*6-i)) - 1;
     }
 }

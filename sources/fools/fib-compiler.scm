@@ -8,15 +8,17 @@
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
 
-
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
       (methoddict (lambda (c) (c 'objectAt: 1))))
+(let ((Object 
 (let ((doesNotUnderstand
         (method (s msg env args)
             (display "Message not understood: ")
             (display msg)
+            (display " in: ")
+            (display (getself s))
             (display "\n")
             null))
       (oprint (method (s)
@@ -62,7 +64,7 @@
                                                       (class 'superclass)
                                                       args))))
                                     (amethod 'apply:in: args env))))))))))
-    (display "STAGE 1\n")
+    ;(display "STAGE 1\n")
     ; Classes have a more specific dispatch than Objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
@@ -79,7 +81,7 @@
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    (display "STAGE 2\n")
+    ;(display "STAGE 2\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
@@ -144,33 +146,33 @@
         (Metaclass 'dispatch:delegate: classdisp (Metaclass_class 'basicNew))
         (Metaclass_class 'objectAt:put: 1 mcdict)
 
-        (display "STAGE 3\n")
+        ;(display "STAGE 3\n")
 
-       ; For now we ensure that all subclasses of Object get the correct
-       ; layout by faking the layout of the first Metaclass. This will later
-       ; be overwritten and the instvars will be spread over "Class class"
-       ; and "ClassBehaviour class"
+        ; For now we ensure that all subclasses of Object get the correct
+        ; layout by faking the layout of the first Metaclass. This will later
+        ; be overwritten and the instvars will be spread over "Class class"
+        ; and "ClassBehaviour class"
         (Metaclass_class 'objectAt:put: 2
             (vector 'superclass
                     'methodDictionary
                     'layout
                     'name))
 
-       ; Fill in info about Metaclasses
+        ; Fill in info about Metaclasses
         (Metaclass 'objectAt:put: 1 (Dictionary 'basicNew))
         (Metaclass 'objectAt:put: 2 (vector 'instance))
         (Metaclass 'objectAt:put: 3 'Metaclass)
         (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
 
 
-       ; Install the accessor methods
+        ; Install the accessor methods
         ((methoddict Metaclass) 'objectAt:put: 'name mclsname)
         ((methoddict Metaclass) 'objectAt:put: 'instance mclsinstance)
         (let ((Metaclass Metaclass))
             (mcdict 'objectAt:put: 'basicNew
                     (method (s) (Metaclass 'basicNew))))
 
-      ; Fill in info about Objects
+        ; Fill in info about Objects
         (Object_class 'objectAt:put: 0 Metaclass_class)
         (Object_class 'objectAt:put: 1 (Dictionary 'basicNew))
         (Object_class 'objectAt:put: 2 (vector))
@@ -179,7 +181,7 @@
         (Object 'objectAt:put: 2 (vector))
         (Object 'objectAt:put: 3 'Object)
 
-       ; Install DNU + test methods
+        ; Install DNU + test methods
         ((methoddict Object_class) 'objectAt:put:
             'subclass:instvars:classvars: subclass)
         ((methoddict Object) 'objectAt:put: 'print oprint)
@@ -195,7 +197,7 @@
             ((methoddict Object_class) 'objectAt:put: 'basicNew
                 (method (s) (o 'basicNew))))
 
-       ; Create ClassBehaviour and Class
+        ; Create ClassBehaviour and Class
         (let* ((classBehaviour (Object 'subclass:instvars:classvars:
                                        'ClassBehaviour
                                           (vector 'superclass
@@ -207,7 +209,7 @@
                                         (vector 'name)
                                         (vector))))
 
-            (display "STAGE 4\n")
+            ;(display "STAGE 4\n")
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
@@ -283,15 +285,15 @@
             ;    )
 
 
-            (display "STAGE 5\n")
+            ;(display "STAGE 5\n")
 
-            ((Object 'new) 'print)
-            (Object 'print)
-            (Metaclass 'instance)
-            (Object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
+            ;((Object 'new) 'print)
+            ;(Object 'print)
+            ;(Metaclass 'instance)
+            ;(Object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
                                      ; only generated on the spot to create its
                                      ; single instance in "newclass"
-            ((class 'new) 'print)
+            ;((class 'new) 'print)
         
             (let* ((ev (vector))
                    (make_empty_subclass (lambda (cls name)
@@ -327,7 +329,7 @@
 
                 ;((integer 'basicNew) 'testMethod)
 
-                (String       'dispatch:delegate: objdisp Stringc)
+                (String      'dispatch:delegate: objdisp Stringc)
                 (store_empty Symbol            Stringc      'Symbol)
                 (store_empty SmallInteger      Integer      'SmallInteger)
                 (store_empty Array             ArCol        'Array)
@@ -370,10 +372,10 @@
                        (s (file 'readAllChars)))
                     (display s))
 
-                (let ((s "boe\n"))
-                    (s 'objectAt:put: 2 #\ƺ)
-                    (display #\ƺ)
-                    (display s))
+                ;(let ((s "boe\n"))
+                ;    (s 'objectAt:put: 2 #\ƺ)
+                ;    (display #\ƺ)
+                ;    (display s))
 
                 (InputFile 'dispatch:delegate:
                             objdisp
@@ -381,8 +383,7 @@
                 (OutputFile 'dispatch:delegate:
                             objdisp
                             (make_empty_subclass OFile 'UTF8OutputFile))
-                (InputFile 'test)
-
+                ;(InputFile 'test)
 
                 ;(display "blaboe\n")
 
@@ -423,7 +424,191 @@
                 ;    (display "done test\n")
                 ;    )
                         
-                "SYSTEM READY\n"
-    ))))))
+                ;(display "SYSTEM READY\n")
+                Object
+    )))))))
+    
+    (let* ((StringScanner
+                (Object 'subclass:instvars:classvars:
+                    'StringScanner
+                    (vector 'string 'position)
+                    (vector)))
+           (Expression
+                (Object 'subclass:instvars:classvars:
+                    'Expression
+                    (vector 'name 'omit)
+                    (vector)))
+           (Sequence
+                (Expression 'subclass:instvars:classvars:
+                    'SequenceExpression
+                    (vector 'children 'skipWhitespace)
+                    (vector)))
+           (OrderedChoice
+                (Expression 'subclass:instvars:classvars:
+                    'OrderedChoiceExpression
+                    (vector 'children)
+                    (vector)))
+           (Repetition
+                (Expression 'subclass:instvars:classvars:
+                    'Repetition
+                    (vector 'child 'skipWhitespace)
+                    (vector)))
+           (OneOrMore
+                (Repetition 'subclass:instvars:classvars:
+                    'OneOrMoreExpression
+                    (vector)
+                    (vector)))
+           (ZeroOrMore
+                (Repetition 'subclass:instvars:classvars:
+                    'ZeroOrMoreExpression
+                    (vector)
+                    (vector)))
+           (ZeroOrOne
+                (Repetition 'subclass:instvars:classvars:
+                    'ZeroOrOneExpression
+                    (vector)
+                    (vector)))
+           (AndPredicate
+                (Repetition 'subclass:instvars:classvars:
+                    'AndPredicate
+                    (vector)
+                    (vector)))
+           (NotPredicate
+               (Repetition 'subclass:instvars:classvars:
+                    'NotPredicate
+                    (vector 'consume)
+                    (vector)))
+           (Terminal
+               (Expression 'subclass:instvars:classvars:
+                    'Terminal
+                    (vector 'regexp)
+                    (vector))))
 
-))
+        (Expression 'store:method: 'printString
+            (method (s)
+                (let ((self (getself s)))
+                    (display (self 'name))
+                    (display " (")
+                    (display ((self 'class) 'name))
+                    (display ")\n"))))
+        (Expression 'store:method: 'match:in:
+            (method (s input scope)
+                (let ((self (getself s))
+                    (self 'performMatch:in: input scope)))))
+        (Expression 'store:method: 'performMatch:in:
+            (method (s input scope)
+                (let* ((self (getself s))
+                       (save (input 'pos))
+                       (match (self 'privateMatch:in: input scope)))
+                    (if (eq? match null)
+                        (input 'pos: save)
+                        (begin))
+                    match)))
+        (Expression 'store:method: 'privateMatch:in:
+            (method (s input scope)
+                ((getself s) 'subclassResponsibility)))
+        (Expression 'store:method: 'asExpression
+            (method (s)
+                (getself s)))
+        (Expression 'store:method: 'omit
+            (method (s)
+                ((getself s) 'objectAt: 1)))
+        (Expression 'store:method: 'name
+            (method (s)
+                ((getself s) 'objectAt: 0)))
+        (Expression 'store:method: 'plus
+            (method (s)
+                (OneOrMore 'for: (getself s))))
+        (Expression 'store:method: 'times
+            (method (s)
+                (ZeroOrMore 'for: (getself s))))
+        (Expression 'store:method: 'and
+            (method (s)
+                (AndPredicate 'for: (getself s))))
+        (Expression 'store:method: 'not
+            (method (s)
+                (NotPredicate 'for: (getself s))))
+        (Expression 'store:method: 'minus
+            (method (s)
+                (let ((result (NotPredicate 'for: (getself s))))
+                    (result 'consume: #f))))
+
+        (Expression 'store:method: '&
+            (method (s other)
+                (Sequence 'with:with: (getself s) other)))
+        (Expression 'store:method: '\|
+            (method (s other)
+                (OrderedChoice 'with:with: (getself s) other)))
+        (Expression 'store:method: 'strongAnd:
+            (method (s other)
+                (let ((result ((getself s) '& other)))
+                    (result 'skipWhitespace: #f)
+                    result)))
+        (Expression 'store:method: '?
+            (method (s)
+                (ZeroOrOne 'for: (getself s))))
+        (Expression 'store:method: '*
+            (method (s)
+                ((getself s) 'times)))
+        (Expression 'store:method: 'strongTimes
+            (method (s)
+                (let ((result ((getself s) '*)))
+                    (result 'skipWhitespace: #f)
+                    result)))
+        (Expression 'store:method: '+
+            (method (s)
+                ((getself s) 'plus)))
+        (Expression 'store:method: 'strongPlus
+            (method (s)
+                (let ((result ((getself s) '+)))
+                    (result 'skipWhitespace: #f)
+                    result)))
+
+        (StringScanner 'store:method: 'pos
+            (method (s)
+                ((getself s) 'objectAt: 1)))
+
+        (StringScanner 'store:method: 'string
+            (method (s)
+                ((getself s) 'objectAt: 0)))
+
+        (StringScanner 'store:method: 'pos:
+            (method (s new)
+                ((getself s) 'objectAt:put: 1 new)))
+
+        (StringScanner 'store:method: 'string:
+            (method (s new)
+                ((getself s) 'objectAt:put: 0 new)))
+
+        (StringScanner 'store:method: 'next
+            (method (s)
+                (let* ((self (getself s))
+                       (str  (self 'objectAt: 0))
+                       (pos  (self 'objectAt: 1))
+                       (res  (str 'objectAt: pos)))
+                    (self 'objectAt:put: 1 (+ pos 1))
+                    res)))
+
+        (StringScanner 'store:method: 'initialize
+            (method (s)
+                ((getself s) 'pos: 0)
+                (getself s)))
+
+        (StringScanner 'store:method: 'atEnd
+            (method (s)
+                (let ((self (getself s)))
+                    (= (self 'pos) ((self 'string) 'size)))))
+
+        ((StringScanner 'class) 'store:method: 'on:
+            (method (s str)
+                (let ((result ((getself s) 'new)))
+                    (result 'string: str)
+                    result)))
+
+        (Sequence 'store:method: 'privateMatch:in:
+            (method (s input scope)
+                (let loop ((matches (
+
+    )
+)
+)))

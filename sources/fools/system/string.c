@@ -50,11 +50,18 @@ with_pre_eval2(string_at_put, context, w_idx, w_char,
     pop_context();
 )
 
+static void inline istring_size() {
+    context_object context = get_context(); 
+    object result = (object)context->self.string->size;
+    return_from_context(context, result);
+}
+
 define_bootstrapping_type(istring,
     // instance
     if_selector(selector, EVAL,             identity);
     if_selector(selector, PRE_EVAL_ENV,     identity);
     if_selector(selector, OBJECT_AT,        string_at);
+    if_selector(selector, SIZE,             istring_size);
     if_selector(selector, OBJECT_AT_PUT,    string_at_put);,
     // class
     if_selector(selector, SIZED,            string_new);

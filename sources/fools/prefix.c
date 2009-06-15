@@ -43,6 +43,8 @@ int main () {
 
     object ifixed           = import_object(ifixed);
     object null             = import_object(nil);
+    object true             = import_object(true);
+    object false            = import_object(false);
 
 /* Generated code */
 
