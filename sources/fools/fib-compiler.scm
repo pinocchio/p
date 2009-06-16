@@ -605,9 +605,17 @@
                     (result 'string: str)
                     result)))
 
-        (Sequence 'store:method: 'privateMatch:in:
-            (method (s input scope)
-                (let loop ((matches (
+        (display (= 5 (callec (lambda (cont) 5))))
+
+
+        (display (= 10
+            (callec (lambda (cont)
+                        (cont 10)
+                        5))))
+
+        ;(Sequence 'store:method: 'privateMatch:in:
+        ;    (method (s input scope)
+        ;        (let loop ((matches (
 
     )
 )

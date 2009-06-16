@@ -10,6 +10,19 @@
 #include <assert.h>
 #include <stdio.h>
 
+#define preval1(name, context, argument, body) \
+void name##_##do() {\
+    context_object context = get_context();\
+    object argument = argument_at(context, 0);\
+    body;\
+}\
+void scheme##_##name##_##func() {\
+    context_object context = get_context();\
+    assert_argsize(context, 1);\
+    push_eval_of(context, 0);\
+    context->code = &name##_##do;\
+}
+
 #define preval2(name) \
 void name##_##func() {\
     context_object context = get_context();\
@@ -112,6 +125,31 @@ static void scheme_display_func() {
 }
 object scheme_display;
 
+object scheme_callec;
+object scheme_continue;
+
+object make_ec() {
+    object_object ec = make_object(1, scheme_continue);
+    object_at_put(ec, 0, (object)get_context());
+    return (object)make_iconst((object)ec);
+}
+
+preval1(callec, context, lambda,
+    object env = context->env;
+    pop_context();
+    object ec = make_ec();
+    context = make_context(lambda, 1);
+    context->env = env;
+    set_argument(context, 0, ec);
+)
+
+preval1(cont, context, value,
+    object self = context->self;
+    pop_context();
+    set_context(object_at(self.object, 0));
+    ...
+)
+
 void bootstrap_scheme() {
     bootstrap_scheme_symbols();
     init_op(plus);
@@ -122,8 +160,9 @@ void bootstrap_scheme() {
     init_direct_op(true);
     init_direct_op(false);
 
-    fools_system->true  = scheme_true;
-    fools_system->false = scheme_false;
+    fools_system->true      = scheme_true;
+    fools_system->false     = scheme_false;
 
+    init_op(callec);
     init_op(display);
 }

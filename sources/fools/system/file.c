@@ -57,7 +57,7 @@ static void utf8_read_char(FILE* fp, wchar_t* result) {
             printf("Non UTF-8 character or UTF-8 character too big for the system's Unicode\n");
             exit(EXIT_FAILURE);
         }
-        /* If ot, just continue. */
+        /* If not, just continue. */
         finally:
             *result &= (1<<((i+1)*6-i)) - 1;
     }

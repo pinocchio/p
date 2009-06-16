@@ -440,6 +440,7 @@ extravars))))))))
     (cons?          "scheme_consp")
     (error          "scheme_error")
     (display        "scheme_display")
+    (callec         "scheme_callec")
     (null           "null")
     (ifixed         "ifixed")
     ; Classes built in the system
