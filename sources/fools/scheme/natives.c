@@ -145,9 +145,7 @@ preval1(callec, context, lambda,
 
 preval1(cont, context, value,
     object self = context->self;
-    pop_context();
-    set_context(object_at(self.object, 0));
-    ...
+    return_to_context(object_at(self.object, 0).context, value);
 )
 
 void bootstrap_scheme() {
@@ -159,6 +157,8 @@ void bootstrap_scheme() {
     init_op(eqp);
     init_direct_op(true);
     init_direct_op(false);
+
+    scheme_continue = (object)make_native(&scheme_cont_func);
 
     fools_system->true      = scheme_true;
     fools_system->false     = scheme_false;

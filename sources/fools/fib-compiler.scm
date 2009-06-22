@@ -607,10 +607,11 @@
 
         (display (= 5 (callec (lambda (cont) 5))))
 
-
         (display (= 10
             (callec (lambda (cont)
+                        (display "boe\n")
                         (cont 10)
+                        (display "bla\n")
                         5))))
 
         ;(Sequence 'store:method: 'privateMatch:in:

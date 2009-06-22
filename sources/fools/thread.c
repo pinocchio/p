@@ -32,8 +32,16 @@ context_object inline stack_claim(int size) {
     return stk_idx;
 }
 
+static void inline set_context(context_object context) {
+    stk_idx = context;
+}
+
+context_object inline get_context() {
+    return stk_idx;
+}
+
 void inline pop_context() {
-    stk_idx = return_context(get_context());
+    set_context(return_context(get_context()));
 }
 
 int inline empty_stack() {
@@ -44,8 +52,9 @@ object inline get_stk_return() {
     return return_value(stk_return);
 }
 
-context_object inline get_context() {
-    return stk_idx;
+void inline return_to_context(context_object context, object value) {
+    set_argument(context, 1, value);
+    set_context(context);
 }
 
 void inline return_from_context(context_object context, object value) {
