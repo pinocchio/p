@@ -434,8 +434,8 @@
     (letrec ((StringScanner (newclass StringScanner Object 
                             (string position) ()
                     ((pos        (s) ((getself s) 'objectAt: 1))
-                     (string     (s) ((getself s) 'objectAt: 0))
                      (pos:       (s new) ((getself s) 'objectAt:put: 1 new))
+                     (string     (s) ((getself s) 'objectAt: 0))
                      (string:    (s new) ((getself s) 'objectAt:put: 0 new))
                      (next       (s)  
                           (let* ((self (getself s))
@@ -498,50 +498,51 @@
                                     result)))
                 ()))
            (Sequence
-                (Expression 'subclass:instvars:classvars:
-                    'SequenceExpression
-                    (vector 'children 'skipWhitespace)
-                    (vector)))
+                (newclass Sequence Expression (children skipWhitespace) ()
+                    ()
+                    ()
+                ))
            (OrderedChoice
-                (Expression 'subclass:instvars:classvars:
-                    'OrderedChoiceExpression
-                    (vector 'children)
-                    (vector)))
+                (newclass OrderedChoice Expression (children) ()
+                    ()
+                    ()
+                ))
            (Repetition
-                (Expression 'subclass:instvars:classvars:
-                    'Repetition
-                    (vector 'child 'skipWhitespace)
-                    (vector)))
+                (newclass Repetition Expression (child skipWhitespace) ()
+                    ()
+                    ()
+                ))
            (OneOrMore
-                (Repetition 'subclass:instvars:classvars:
-                    'OneOrMoreExpression
-                    (vector)
-                    (vector)))
+                (newclass OneOrMore Repetition () ()
+                    ()
+                    ()
+                ))
            (ZeroOrMore
-                (Repetition 'subclass:instvars:classvars:
-                    'ZeroOrMoreExpression
-                    (vector)
-                    (vector)))
+                (newclass ZeroOrMore Repetition () ()
+                    ()
+                    ()
+                ))
            (ZeroOrOne
-                (Repetition 'subclass:instvars:classvars:
-                    'ZeroOrOneExpression
-                    (vector)
-                    (vector)))
+                (newclass ZeroOrOne Repetition () ()
+                    ()
+                    ()
+                ))
            (AndPredicate
-                (Repetition 'subclass:instvars:classvars:
-                    'AndPredicate
-                    (vector)
-                    (vector)))
+                (newclass AndPredicate Repetition () ()
+                    ()
+                    ()
+                ))
            (NotPredicate
-               (Repetition 'subclass:instvars:classvars:
-                    'NotPredicate
-                    (vector 'consume)
-                    (vector)))
+                (newclass NotPredicate Repetition (consume) ()
+                    ()
+                    ()
+                ))
            (Terminal
-               (Expression 'subclass:instvars:classvars:
-                    'Terminal
-                    (vector 'regexp)
-                    (vector))))
+                (newclass Terminal Expression (regexp) ()
+                    ()
+                    ()
+                ))
+            )
 
         (display (= 5 (callec (lambda (cont) 5))))
 
