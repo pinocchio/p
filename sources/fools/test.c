@@ -261,8 +261,8 @@ SETUP(test_new_iscoped)
 
     icall_object icall = make_icall((object)iconst, 3);
     set_callmsg(icall, NEW_SIZE);
-    set_callarg(icall, 1, exp);
-    set_callarg(icall, 2, (object)make_number(0));
+    set_callarg(icall, 1, (object)make_iconst(exp));
+    set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
 
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
@@ -295,8 +295,8 @@ SETUP(test_eval_iscoped)
 
     icall_object icall = make_icall((object)iconst, 4);
     set_callmsg(icall, NEW_SIZE);
-    set_callarg(icall, 1, exp);
-    set_callarg(icall, 2, (object)make_number(0));
+    set_callarg(icall, 1, (object)make_iconst(exp));
+    set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
 
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);

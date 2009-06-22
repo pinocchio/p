@@ -90,19 +90,19 @@ void iscoped_shift() {
 }
 
 // iscoped_class>>new:size:
-static void inline iscoped_class_new() {
+with_pre_eval2(iscoped_class_new, context, expression, argsize,
     debug("iscopecls>>new:size:\n");
     context_object iscope_context = get_context();
     assert_argsize(iscope_context, 3);
     object iscoped =
         make_iscoped(
-            iscope_context->env,             // env
-            argument_at(iscope_context, 1),  // expression
-            argument_at(iscope_context, 2)); // argsize
+            iscope_context->env,
+            expression,
+            argsize);
 
     return_from_context(iscope_context, iscoped);
     debug("ret>>iscopecls>>new:size:\n");
-}
+)
 
 define_bootstrapping_class(iscoped,
     // instance

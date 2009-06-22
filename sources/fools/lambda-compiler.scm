@@ -2,6 +2,20 @@
 
 (define var-id 0)
 
+(define (nth list idx) 
+    (when (or (not (list? list))
+              (not (number? idx))
+              (< idx 1)
+              (> idx (length list)))
+        (error list idx))
+    (let loop ((idx idx) 
+               (list list)) 
+        (if (= idx 1) 
+            (car list) 
+            (loop (- idx 1) 
+                  (cdr list)))))
+
+
 (define (make-var-name type name)
   (set! var-id (+ var-id 1))
   (string-append type
@@ -137,7 +151,7 @@ extravars))))))))
                               ,@(map (lambda (name value)
                                         `(set! ,name ,value))
                                      names values)
-                              ,@body)) vars)))
+                              ,@body) ,@(map (lambda (n) 'null) names)) vars)))
 
 (define (transform-let* expression vars)
   (let ((names (map car (cadr expression)))
@@ -314,8 +328,9 @@ extravars))))))))
     #|(display "EXPRESSION:")
     (display expression)
     (newline)|#
-  (cond ((list? expression)
+    (cond ((list? expression)
          (case (car expression)
+           ((newclass) (transform-class expression vars))
            ((case) (transform-case expression vars))
            ((begin) (transform-begin expression vars))
            ((set!) (transform-set! expression vars))
@@ -338,6 +353,31 @@ extravars))))))))
         ((char? expression)    (transform-char expression vars))
         ((boolean? expression) (transform-bool expression vars))
         (else (error "Unknown type: " expression))))
+
+(define (transform-class expression vars)
+    (let ((addquote (lambda (argument) `',argument))
+          (transform-method 
+                (lambda (class)
+                    (lambda (method)
+                        (apply (lambda (name args . body)
+                                    `(,class 'store:method: ',name 
+                                             (method ,args ,@body)))
+                                method)))))
+    (let ((name (nth expression 2))
+          (superclass (nth expression 3))
+          (inst-vars (map addquote (nth expression 4)))
+          (class-vars (map addquote (nth expression 5)))
+          (inst-methods (nth expression 6))
+          (class-methods (nth expression 7)))
+       (transform-expression 
+        `(let ((,name (,superclass 'subclass:instvars:classvars: 
+                                    ',name
+                                    (vector ,@inst-vars) 
+                                    (vector ,@class-vars))))
+                ,@(map (transform-method name) inst-methods)
+                ,@(map (transform-method `(,name 'class)) class-methods)
+                ,name)
+        vars))))
 
 (define (transform-number expression vars)
   (let ((name (make-var-name "number"
@@ -441,6 +481,7 @@ extravars))))))))
     (error          "scheme_error")
     (display        "scheme_display")
     (callec         "scheme_callec")
+    (exit           "scheme_exit")
     (null           "null")
     (ifixed         "ifixed")
     ; Classes built in the system

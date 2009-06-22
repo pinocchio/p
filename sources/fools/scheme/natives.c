@@ -131,7 +131,7 @@ object scheme_continue;
 object make_ec() {
     object_object ec = make_object(1, scheme_continue);
     object_at_put(ec, 0, (object)get_context());
-    return (object)make_iconst((object)ec);
+    return (object)ec;
 }
 
 preval1(callec, context, lambda,
@@ -140,12 +140,26 @@ preval1(callec, context, lambda,
     object ec = make_ec();
     context = make_context(lambda, 1);
     context->env = env;
-    set_argument(context, 0, ec);
+    set_argument(context, 0, (object)make_iconst(ec));
+    // marker on return_context
+    set_argument(return_context(context), 1, ec);
 )
 
 preval1(cont, context, value,
     object self = context->self;
-    return_to_context(object_at(self.object, 0).context, value);
+    context_object return_context = object_at(self.object, 0).context;
+    if (argument_at(return_context, 1).object != self.object) {
+        // TODO
+        printf("Continuing finished escape continuation\n");
+        exit(-1);
+    }
+    return_to_context(return_context, value);
+)
+
+object scheme_exit;
+
+preval1(exit, context, value,
+    exit(number_value(value.number));
 )
 
 void bootstrap_scheme() {
@@ -165,4 +179,5 @@ void bootstrap_scheme() {
 
     init_op(callec);
     init_op(display);
+    init_op(exit);
 }

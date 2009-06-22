@@ -8,6 +8,9 @@
  ;           (+ (fib (- x 1))
   ;             (fib (- x 2)))))
 
+(callec (lambda (success)
+(let ((error (callec (lambda (error)
+(success
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
@@ -428,16 +431,72 @@
                 Object
     )))))))
     
-    (let* ((StringScanner
-                (Object 'subclass:instvars:classvars:
-                    'StringScanner
-                    (vector 'string 'position)
-                    (vector)))
-           (Expression
-                (Object 'subclass:instvars:classvars:
-                    'Expression
-                    (vector 'name 'omit)
-                    (vector)))
+    (letrec ((StringScanner (newclass StringScanner Object 
+                            (string position) ()
+                    ((pos        (s) ((getself s) 'objectAt: 1))
+                     (string     (s) ((getself s) 'objectAt: 0))
+                     (pos:       (s new) ((getself s) 'objectAt:put: 1 new))
+                     (string:    (s new) ((getself s) 'objectAt:put: 0 new))
+                     (next       (s)  
+                          (let* ((self (getself s))
+                                 (str  (self 'objectAt: 0))
+                                 (pos  (self 'objectAt: 1))
+                                 (res  (str 'objectAt: pos)))
+                              (self 'objectAt:put: 1 (+ pos 1))
+                              res))
+                     (initialize (s) ((getself s) 'pos: 0) (getself s))
+                     (atEnd      (s) (let ((self (getself s)))
+                                  (= (self 'pos) 
+                                     ((self 'string) 'size)))))
+                    ((on:        (s str) (let ((result ((getself s) 'new)))
+                                      (result 'string: str)
+                                      result)))))
+           (Expression (newclass Expression Object (name omit) ()
+                ((printString (s)
+                    (let ((self (getself s)))
+                        (display (self 'name))
+                        (display " (")
+                        (display ((self 'class) 'name))
+                        (display ")\n")))
+                 (match:in: (s input scope)
+                    (let ((self (getself s))
+                        (self 'performMatch:in: input scope))))
+                 (performMatch:in: (s input scope)
+                    (let* ((self (getself s))
+                           (save (input 'pos))
+                           (match (self 'privateMatch:in: input scope)))
+                        (if (eq? match null)
+                            (input 'pos: save)
+                            (begin))
+                        match))
+                 (privateMatch:in: (s input scope)
+                    ((getself s) 'subclassResponsibility))
+                 (asExpression (s) (getself s))
+                 (omit (s) ((getself s) 'objectAt: 1))
+                 (name (s) ((getself s) 'objectAt: 0))
+                 (plus (s) (OneOrMore 'for: (getself s)))
+                 (times (s) (ZeroOrMore 'for: (getself s)))
+                 (and (s) (AndPredicate 'for: (getself s)))
+                 (not (s) (NotPredicate 'for: (getself s)))
+                 (minus (s) (let ((result (NotPredicate 'for: (getself s))))
+                                (result 'consume: #f)))
+
+                 (& (s other) (Sequence 'with:with: (getself s) other))
+                 (\| (s other) (OrderedChoice 'with:with: (getself s) other))
+                 (strongAnd: (s other)
+                    (let ((result ((getself s) '& other)))
+                        (result 'skipWhitespace: #f)
+                        result))
+                 (? (s) (ZeroOrOne 'for: (getself s)))
+                 (* (s) ((getself s) 'times))
+                 (strongTimes (s) (let ((result ((getself s) '*)))
+                                    (result 'skipWhitespace: #f)
+                                    result))
+                 (+ (s) ((getself s) 'plus))
+                 (strongPlus (s) (let ((result ((getself s) '+)))
+                                    (result 'skipWhitespace: #f)
+                                    result)))
+                ()))
            (Sequence
                 (Expression 'subclass:instvars:classvars:
                     'SequenceExpression
@@ -484,127 +543,6 @@
                     (vector 'regexp)
                     (vector))))
 
-        (Expression 'store:method: 'printString
-            (method (s)
-                (let ((self (getself s)))
-                    (display (self 'name))
-                    (display " (")
-                    (display ((self 'class) 'name))
-                    (display ")\n"))))
-        (Expression 'store:method: 'match:in:
-            (method (s input scope)
-                (let ((self (getself s))
-                    (self 'performMatch:in: input scope)))))
-        (Expression 'store:method: 'performMatch:in:
-            (method (s input scope)
-                (let* ((self (getself s))
-                       (save (input 'pos))
-                       (match (self 'privateMatch:in: input scope)))
-                    (if (eq? match null)
-                        (input 'pos: save)
-                        (begin))
-                    match)))
-        (Expression 'store:method: 'privateMatch:in:
-            (method (s input scope)
-                ((getself s) 'subclassResponsibility)))
-        (Expression 'store:method: 'asExpression
-            (method (s)
-                (getself s)))
-        (Expression 'store:method: 'omit
-            (method (s)
-                ((getself s) 'objectAt: 1)))
-        (Expression 'store:method: 'name
-            (method (s)
-                ((getself s) 'objectAt: 0)))
-        (Expression 'store:method: 'plus
-            (method (s)
-                (OneOrMore 'for: (getself s))))
-        (Expression 'store:method: 'times
-            (method (s)
-                (ZeroOrMore 'for: (getself s))))
-        (Expression 'store:method: 'and
-            (method (s)
-                (AndPredicate 'for: (getself s))))
-        (Expression 'store:method: 'not
-            (method (s)
-                (NotPredicate 'for: (getself s))))
-        (Expression 'store:method: 'minus
-            (method (s)
-                (let ((result (NotPredicate 'for: (getself s))))
-                    (result 'consume: #f))))
-
-        (Expression 'store:method: '&
-            (method (s other)
-                (Sequence 'with:with: (getself s) other)))
-        (Expression 'store:method: '\|
-            (method (s other)
-                (OrderedChoice 'with:with: (getself s) other)))
-        (Expression 'store:method: 'strongAnd:
-            (method (s other)
-                (let ((result ((getself s) '& other)))
-                    (result 'skipWhitespace: #f)
-                    result)))
-        (Expression 'store:method: '?
-            (method (s)
-                (ZeroOrOne 'for: (getself s))))
-        (Expression 'store:method: '*
-            (method (s)
-                ((getself s) 'times)))
-        (Expression 'store:method: 'strongTimes
-            (method (s)
-                (let ((result ((getself s) '*)))
-                    (result 'skipWhitespace: #f)
-                    result)))
-        (Expression 'store:method: '+
-            (method (s)
-                ((getself s) 'plus)))
-        (Expression 'store:method: 'strongPlus
-            (method (s)
-                (let ((result ((getself s) '+)))
-                    (result 'skipWhitespace: #f)
-                    result)))
-
-        (StringScanner 'store:method: 'pos
-            (method (s)
-                ((getself s) 'objectAt: 1)))
-
-        (StringScanner 'store:method: 'string
-            (method (s)
-                ((getself s) 'objectAt: 0)))
-
-        (StringScanner 'store:method: 'pos:
-            (method (s new)
-                ((getself s) 'objectAt:put: 1 new)))
-
-        (StringScanner 'store:method: 'string:
-            (method (s new)
-                ((getself s) 'objectAt:put: 0 new)))
-
-        (StringScanner 'store:method: 'next
-            (method (s)
-                (let* ((self (getself s))
-                       (str  (self 'objectAt: 0))
-                       (pos  (self 'objectAt: 1))
-                       (res  (str 'objectAt: pos)))
-                    (self 'objectAt:put: 1 (+ pos 1))
-                    res)))
-
-        (StringScanner 'store:method: 'initialize
-            (method (s)
-                ((getself s) 'pos: 0)
-                (getself s)))
-
-        (StringScanner 'store:method: 'atEnd
-            (method (s)
-                (let ((self (getself s)))
-                    (= (self 'pos) ((self 'string) 'size)))))
-
-        ((StringScanner 'class) 'store:method: 'on:
-            (method (s str)
-                (let ((result ((getself s) 'new)))
-                    (result 'string: str)
-                    result)))
-
         (display (= 5 (callec (lambda (cont) 5))))
 
         (display (= 10
@@ -614,10 +552,40 @@
                         (display "bla\n")
                         5))))
 
-        ;(Sequence 'store:method: 'privateMatch:in:
-        ;    (method (s input scope)
-        ;        (let loop ((matches (
+        ;(let ((bla null))
+        ;    (display (+ 10
+        ;            (callec (lambda (cont)
+        ;                (set! bla cont)
+        ;                20))))
+        ;    (display (+ 40 ((lambda (x) (bla 4)) 4))))
+
+        ;(let ((cls (Object 'subclass:instvars:classvars: 'Boe (vector) (vector))))
+        ;    (cls 'store:method: 'eval (method (s) "EVAL ACTIVATED!\n"))
+        
+        (display "HERE\n")
+        (let ((cls (newclass cls Object () ()
+                    ((eval (s) "EVAL ACTIVADED!\n"))
+                    ())))
+            (display cls)
+            (display (eq? ((IScoped 'new:size: (cls 'new) 0) 'scope)
+                          ((ICapture 'instance) 'eval)))
+         
+            (let ((test (IScoped 'new:size: (cls 'new) 0)))
+                (display "going to eval\n")
+                (display (test 'apply:in: (vector) ((ICapture 'instance) 'eval)))
+                (display "done one\n")
+                (let ((test2 (test 'shift)))
+                    (display (test2))))
+        )
+
+        (error "bla")
 
     )
-)
-)))
+)))))))
+
+(display "Failure: ")
+(display error)
+(display "\n")
+(exit 1)
+
+)))))

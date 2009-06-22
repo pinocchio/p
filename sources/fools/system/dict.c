@@ -49,7 +49,7 @@ with_pre_eval2(dict_at_put, context, key, value,
     raw_array_at_put(kv, i * 2, key);
     raw_array_at_put(kv, i * 2 + 1, value);
 
-    pop_context();
+    return_from_context(context, value);
 )
 
 static void inline dict_new() {
