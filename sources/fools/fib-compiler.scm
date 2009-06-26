@@ -49,7 +49,7 @@
                 (let loop ((class class))
                     (if (eq? class null)
                         (if (eq? msg 'doesNotUnderstand:in:with:)
-                             (display "ERROR Received DNU!\n")
+                             (error "ERROR Received DNU!\n")
                              (self 'doesNotUnderstand:in:with: msg env args))
                         (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
@@ -480,7 +480,6 @@
                  (not (s) (NotPredicate 'for: (getself s)))
                  (minus (s) (let ((result (NotPredicate 'for: (getself s))))
                                 (result 'consume: #f)))
-
                  (& (s other) (Sequence 'with:with: (getself s) other))
                  (\| (s other) (OrderedChoice 'with:with: (getself s) other))
                  (strongAnd: (s other)
@@ -579,7 +578,7 @@
                     (display (test2))))
         )
 
-        (error "bla")
+        ;(error "bla")
 
     )
 )))))))
