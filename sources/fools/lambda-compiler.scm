@@ -330,17 +330,13 @@ extravars))))))))
 (define (do-load expression vars)
     (let ((f (open-input-file (cadr expression))))
         (let loop ((exp (read f))
-                   (results '()))
+                   (exps '()))
             (if (eof-object? exp)
                 (begin
                     (close-input-port f)
-                    (list
-                        (apply string-append (map car results))
-                        (last (map cadr results))
-                        (apply append (map caddr results))))
-                (loop (read f)
-                      (cons (transform-expression exp vars)
-                            results))))))
+                    (transform-expression `(begin ,@(reverse exps)) vars))
+                (loop (read f) (cons exp exps))))))
+                      
 
 (define (transform-expression expression vars)
     #|(display "EXPRESSION:")

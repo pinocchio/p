@@ -18,12 +18,11 @@
 (let ((Object 
 (let ((doesNotUnderstand
         (method (s msg env args)
-            (display "Message not understood: ")
-            (display msg)
-            (display " in: ")
-            (display (getself s))
-            (display "\n")
-            null))
+            (error (vector "Message not understood: "
+                           msg
+                           " in: "
+                           (getself s)
+                           "\n"))))
       (oprint (method (s)
                 (display "Instance of: ")
                 (display (((getself s) 'delegate) 'name))
@@ -308,6 +307,8 @@
                 ((Symbol 'class) 'store:method:
                     'basicNew: (method (s size) (Symbol 'basicNew: size)))
 
+                (load "test-core.scm")
+
                 Object
     )))))))
     
@@ -425,6 +426,8 @@
             )
 
            (load "test-pinocchio.scm")
+
+           ;(Object 'bla)
 
 ))))))))
 
