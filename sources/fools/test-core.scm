@@ -1,6 +1,6 @@
-;(display "Minimal system ready!\n")
+(display "TESTING SYSTEM\n")
 
-(display "Core tests\n")
+(display "\nCore tests\n")
 (display (eq? (Object 'superclass) null))
 (display (eq? (Object_class 'superclass) class))
 (display (eq? (class 'superclass) classBehaviour))
@@ -14,15 +14,13 @@
 (display (eq? (Object_class 'delegate) Metaclass))
 (display (eq? ((Metaclass 'delegate) 'delegate) Metaclass))
 
-(display "Environment tests\n")
+(display "\nEnvironment tests\n")
 (let ((el (Env 'scope:key: 4 Env))
       (el2 (Env 'scope:key: 3 IFixed)))
     (el2 'parent: el)
     (display (eq? (el 'parent) null))
     (display (eq? (el2 'parent) el)))
 
-
-;(display "STAGE 5\n")
 
 ;((Object 'new) 'print)
 ;(Object 'print)
@@ -50,6 +48,10 @@
     (method (s other)
         (+ (getself s) other)))
 
+
+(display "\nSmallInteger tests\n")
+(display (= (40 + 2) 42))
+
 ;(let* ((file (InputFile 'on: "fib-compiler.scm"))
 ;       (size (file 'size))
 ;       (s (String 'basicNew: size)))
@@ -59,9 +61,11 @@
 ;            (begin
 ;                (s 'objectAt:put: current (file 'readChar))
 ;                (loop (+ current 1))))))
-(let* ((file (InputFile 'on: "fib-compiler.scm"))
-       (s (file 'readAllChars)))
-    (display s))
+
+
+;(let* ((file (InputFile 'on: "fib-compiler.scm"))
+;       (s (file 'readAllChars)))
+;    (display s))
 
 ;(let ((s "boe\n"))
 ;    (s 'objectAt:put: 2 #\ƺ)
@@ -83,29 +87,20 @@
 
 ;(display (1 + 2))
 
-;(string 'store:method: 'testMethod
-;    (method (s) (display "HELLO!") (display (getself s))
-;                (display "\n")))
+(display "\nString extension tests\n")
 
-;("biep" 'testMethod)
-;('testMethod 'testMethod)
+(String 'store:method: 'testMethod
+    (method (s) 40))
 
-;(symbol 'store:method: 'testMethod
-;    (method (s) (display "2H!") (display (getself s))
-;                (display "\n")))
+(display (= ("biep" 'testMethod) 40))
+(display (= ('testMethod 'testMethod) 40))
 
-;("biep" 'testMethod)
-;('testMethod 'testMethod)
+(Symbol 'store:method: 'testMethod
+    (method (s) 42))
 
-;(let ((test "BOE\n"))
-;    ((string 'methodDictionary) 'objectAt:put:
-;        'testMethod (method (s)
-;            (display "bla\n")
-;            (display (getself s))
-;            (display (getself s))
-;            (display (getself s))
-;            (display "biep\n")))
-;    (test 'testMethod))
+(display (= ("biep" 'testMethod) 40))
+(display (= ('testMethod 'testMethod) 42))
+
 
 ;(let ((test (array 'basicNew: 10)))
 ;    ((array 'methodDictionary) 'objectAt:put:
@@ -116,6 +111,6 @@
 ;    (display "done test\n")
 ;    )
         
-;(display "SYSTEM READY\n")
+(display "\nSYSTEM READY\n")
 
 
