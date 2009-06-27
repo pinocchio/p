@@ -1,4 +1,4 @@
-TARGET=fools-whitepaper
+TARGET=pinocchio-whitepaper
 
 OUTPUT=$(TARGET).pdf
 INPUT=$(TARGET).tex
