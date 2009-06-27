@@ -309,6 +309,6 @@
 (display "Failure: ")
 (display error)
 (display "\n")
-(exit 1)
+(exit -1)
 
 )))

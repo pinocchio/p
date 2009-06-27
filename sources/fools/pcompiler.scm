@@ -20,9 +20,9 @@
   (set! var-id (+ var-id 1))
   (string-append type
                  "_"
-                 (number->string var-id)
+                 (string->code (number->string var-id))
                  "_"
-                 (symbol->string name)))
+                 (string->code (symbol->string name))))
 
 (define (make-vars arg)
   (let ((var-name (make-var-name "ivar" arg)))
