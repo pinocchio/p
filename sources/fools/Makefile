@@ -13,22 +13,23 @@ system/iassign.h system/ivar.h system/icapture.h system/ifixed.h\
 system/env.h system/iscoped.h system/shift.h system/array.h system/dict.h\
 system/string.h system/fallback.h system/number.h system/file.h\
 system/char.h
-PROGRAM=fools
+SFILES=prefix.c postfix.c pcompiler.scm
+PFILES=boot/core.p boot/pinocchio.scm boot/peg.p
+TFILES=test.c boot/test/test-core.p boot/test/test-peg.p
+PROGRAM=pinocchio
 VERSION=0.1
 
-EXTRA_SOURCES=fib-compiler.scm lambda-compiler.scm prefix.c postfix.c\
-test.c Makefile fools.c
-
-TARGET=fib
+EXTRA_SOURCES=$(SFILES) $(PFILES) $(TFILES) Makefile
 
 FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -O3 -g -Wall -I. -D_GNU_SOURCE
 LDFLAGS = -lgc
 
-TEST_OBJECTS= test test.o fib fib.o fib.c
+TEST_OBJECTS=test test.o
 SOURCES=$(CFILES) $(HFILES) $(EXTRA_SOURCES)
 OBJECTS=$(CFILES:.c=.o)
+GENERATED=pinocchio.c
 
 all: $(PROGRAM)
 
@@ -39,20 +40,16 @@ test: $(OBJECTS) test.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	./test
 
-fib.c: prefix.c postfix.c fib-compiler.scm lambda-compiler.scm
-	cat prefix.c > fib.c
-	mzscheme -r fib-compiler.scm >> fib.c
-	cat postfix.c >> fib.c
-
-fib: $(OBJECTS) fib.o
-	$(CC) $(LDFLAGS) -o $@ $^
-	./fib
+pinocchio.c: $(SFILES) $(PFILES)
+	cat prefix.c > $@
+	mzscheme -r boot/pinocchio.scm >> $@
+	cat postfix.c >> $@
 
 profile: 
 	$(MAKE) CFLAGS="-pg $(CFLAGS)" LDFLAGS="-pg $(LDFLAGS)" $(TARGET)
 
 clean:
-	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) make.depend
+	rm -rf $(OBJECTS) $(PROGRAM) $(PROGRAM).o $(TEST_OBJECTS) $(GENERATED) make.depend
 
 TARBZ2=$(FULLNAME).tar.bz2
 
@@ -68,5 +65,5 @@ $(TARBZ2): $(SOURCES)
 
 include make.depend
 
-make.depend: $(CFILES) test.c fools.c
+make.depend: $(CFILES) test.c pinocchio.c
 	$(CC) -I. -M $^ > $@

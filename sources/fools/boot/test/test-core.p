@@ -22,15 +22,7 @@
     (display (eq? (el2 'parent) el)))
 
 
-;((Object 'new) 'print)
-;(Object 'print)
-;(Metaclass 'instance)
-;(Object_class 'basicNew) ; Metaclasses don't have a NEW. The "NEW" is
-                         ; only generated on the spot to create its
-                         ; single instance in "newclass"
-;((class 'new) 'print)
- 
-
+; XXX Broken!
 ;((integer 'methodDictionary)
 ;    'objectAt:put: 'testMethod
 ;    (method (s) (display "IN SELF!\n")
@@ -52,34 +44,10 @@
 (display "\nSmallInteger tests\n")
 (display (= (40 + 2) 42))
 
-;(let* ((file (InputFile 'on: "fib-compiler.scm"))
-;       (size (file 'size))
-;       (s (String 'basicNew: size)))
-;    (let loop ((current 0))
-;        (if (= current size)
-;            (display s)
-;            (begin
-;                (s 'objectAt:put: current (file 'readChar))
-;                (loop (+ current 1))))))
-
-
-;(let* ((file (InputFile 'on: "fib-compiler.scm"))
-;       (s (file 'readAllChars)))
-;    (display s))
-
-;(let ((s "boe\n"))
-;    (s 'objectAt:put: 2 #\ƺ)
-;    (display #\ƺ)
-;    (display s))
-
-;(InputFile 'dispatch:delegate:
-;            objdisp
-;            (make_empty_subclass IFile 'UTF8InputFile))
-;(OutputFile 'dispatch:delegate:
-;            objdisp
-;            (make_empty_subclass OFile 'UTF8OutputFile))
-
-;(InputFile 'test)
+(display "\nUnicode tests\n")
+(let ((s "boe\n"))
+    (s 'objectAt:put: 2 #\ƺ)
+    (display (= (s 'objectAt: 2) #\ƺ)))
 
 ;(display "blaboe\n")
 
@@ -101,16 +69,39 @@
 (display (= ("biep" 'testMethod) 40))
 (display (= ('testMethod 'testMethod) 42))
 
+(display "\nArray extension tests\n")
+(let ((test (Array 'basicNew: 10)))
+    ((Array 'methodDictionary) 'objectAt:put:
+        'testMethod (method (s) ((getself s) 'size)))
+    (display (= (test 'testMethod) 10)))
 
-;(let ((test (array 'basicNew: 10)))
-;    ((array 'methodDictionary) 'objectAt:put:
-;        'testMethod (method (s) (display "BOE\n")
-;                                (display ((getself s) 'size))))
-;    (display "DO test\n")
-;    (test 'testMethod)
-;    (display "done test\n")
-;    )
-        
+;(display "\nFile tests\n")
+;(let* ((file (InputFile 'on: "fib-compiler.scm"))
+;       (size (file 'size))
+;       (s (String 'basicNew: size)))
+;    (let loop ((current 0))
+;        (if (= current size)
+;            (display s)
+;            (begin
+;                (s 'objectAt:put: current (file 'readChar))
+;                (loop (+ current 1))))))
+
+
+;(let* ((file (InputFile 'on: "fib-compiler.scm"))
+;       (s (file 'readAllChars)))
+;    (display s))
+
+;(InputFile 'dispatch:delegate:
+;            objdisp
+;            (make_empty_subclass IFile 'UTF8InputFile))
+;(OutputFile 'dispatch:delegate:
+;            objdisp
+;            (make_empty_subclass OFile 'UTF8OutputFile))
+
+;(InputFile 'test)
+
+      
+
 (display "\nSYSTEM READY\n")
 
 

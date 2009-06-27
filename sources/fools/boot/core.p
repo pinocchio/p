@@ -1,13 +1,3 @@
-(load "lambda-compiler.scm")
-
-(display
-(transform-code
-;    (let fib ((x 25))
-;        (if (< x 1)
-;            1
- ;           (+ (fib (- x 1))
-  ;             (fib (- x 2)))))
-
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (success
@@ -36,7 +26,7 @@
       (mclsinstance (method (s)
             ((getself s) 'objectAt: 3)))
 
-    ; Here I define a general dispatching mechanism for Objects and classes:
+     ; Here I define a general dispatching mechanism for Objects and classes:
      (lookup
         (lambda (self env args)
             (let lookup ((msg ((args 'objectAt: 0) 'eval: env))
@@ -48,7 +38,7 @@
                 (let loop ((class class))
                     (if (eq? class null)
                         (if (eq? msg 'doesNotUnderstand:in:with:)
-                             (error "ERROR Received DNU!\n")
+                             (error "Fatal error: recursive DNU!\n")
                              (self 'doesNotUnderstand:in:with: msg env args))
                         (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
@@ -307,133 +297,18 @@
                 ((Symbol 'class) 'store:method:
                     'basicNew: (method (s size) (Symbol 'basicNew: size)))
 
-                (load "test-core.scm")
+                (load "boot/test/test-core.p")
 
                 Object
     )))))))
-    
-    (letrec ((StringScanner (newclass StringScanner Object 
-                            (string position) ()
-                    ((pos        (s) ((getself s) 'objectAt: 1))
-                     (pos:       (s new) ((getself s) 'objectAt:put: 1 new))
-                     (string     (s) ((getself s) 'objectAt: 0))
-                     (string:    (s new) ((getself s) 'objectAt:put: 0 new))
-                     (next       (s)  
-                          (let* ((self (getself s))
-                                 (str  (self 'objectAt: 0))
-                                 (pos  (self 'objectAt: 1))
-                                 (res  (str 'objectAt: pos)))
-                              (self 'objectAt:put: 1 (+ pos 1))
-                              res))
-                     (initialize (s) ((getself s) 'pos: 0) (getself s))
-                     (atEnd      (s) (let ((self (getself s)))
-                                  (= (self 'pos) 
-                                     ((self 'string) 'size)))))
-                    ((on:        (s str) (let ((result ((getself s) 'new)))
-                                      (result 'string: str)
-                                      result)))))
-           (Expression (newclass Expression Object (name omit) ()
-                ((printString (s)
-                    (let ((self (getself s)))
-                        (display (self 'name))
-                        (display " (")
-                        (display ((self 'class) 'name))
-                        (display ")\n")))
-                 (match:in: (s input scope)
-                    (let ((self (getself s))
-                        (self 'performMatch:in: input scope))))
-                 (performMatch:in: (s input scope)
-                    (let* ((self (getself s))
-                           (save (input 'pos))
-                           (match (self 'privateMatch:in: input scope)))
-                        (if (eq? match null)
-                            (input 'pos: save)
-                            (begin))
-                        match))
-                 (privateMatch:in: (s input scope)
-                    ((getself s) 'subclassResponsibility))
-                 (asExpression (s) (getself s))
-                 (omit (s) ((getself s) 'objectAt: 1))
-                 (name (s) ((getself s) 'objectAt: 0))
-                 (plus (s) (OneOrMore 'for: (getself s)))
-                 (times (s) (ZeroOrMore 'for: (getself s)))
-                 (and (s) (AndPredicate 'for: (getself s)))
-                 (not (s) (NotPredicate 'for: (getself s)))
-                 (minus (s) (let ((result (NotPredicate 'for: (getself s))))
-                                (result 'consume: #f)))
-                 (& (s other) (Sequence 'with:with: (getself s) other))
-                 (\| (s other) (OrderedChoice 'with:with: (getself s) other))
-                 (strongAnd: (s other)
-                    (let ((result ((getself s) '& other)))
-                        (result 'skipWhitespace: #f)
-                        result))
-                 (? (s) (ZeroOrOne 'for: (getself s)))
-                 (* (s) ((getself s) 'times))
-                 (strongTimes (s) (let ((result ((getself s) '*)))
-                                    (result 'skipWhitespace: #f)
-                                    result))
-                 (+ (s) ((getself s) 'plus))
-                 (strongPlus (s) (let ((result ((getself s) '+)))
-                                    (result 'skipWhitespace: #f)
-                                    result)))
-                ()))
-           (Sequence
-                (newclass Sequence Expression (children skipWhitespace) ()
-                    ( 
-                    )
-                    ()
-                ))
-           (OrderedChoice
-                (newclass OrderedChoice Expression (children) ()
-                    ()
-                    ()
-                ))
-           (Repetition
-                (newclass Repetition Expression (child skipWhitespace) ()
-                    ()
-                    ()
-                ))
-           (OneOrMore
-                (newclass OneOrMore Repetition () ()
-                    ()
-                    ()
-                ))
-           (ZeroOrMore
-                (newclass ZeroOrMore Repetition () ()
-                    ()
-                    ()
-                ))
-           (ZeroOrOne
-                (newclass ZeroOrOne Repetition () ()
-                    ()
-                    ()
-                ))
-           (AndPredicate
-                (newclass AndPredicate Repetition () ()
-                    ()
-                    ()
-                ))
-           (NotPredicate
-                (newclass NotPredicate Repetition (consume) ()
-                    ()
-                    ()
-                ))
-           (Terminal
-                (newclass Terminal Expression (regexp) ()
-                    ()
-                    ()
-                ))
-            )
 
-           (load "test-pinocchio.scm")
+    (load "boot/peg.p")
 
-           ;(Object 'bla)
-
-))))))))
+)))))))
 
 (display "Failure: ")
 (display error)
 (display "\n")
 (exit 1)
 
-)))))
+)))
