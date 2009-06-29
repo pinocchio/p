@@ -375,9 +375,8 @@ extravars))))))))
                (expression (reverse (cdr expression))))
         (if (null? expression)
             (transform-expression result vars)
-            (loop `(cons ,(car expression) ,result) 
-                (cdr expression))))
-
+            (loop `(cons ,(car expression) ,result)
+                   (cdr expression)))))
 
 (define (transform-class expression vars)
     (let ((addquote (lambda (argument) `',argument))

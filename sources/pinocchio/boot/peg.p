@@ -76,14 +76,10 @@
                             (result 'consume: #f)))
              (& (s other)
                 (Sequence 'on:
-                    (cons (getself s)
-                        (cons (other 'asParser)
-                            null))))
+                    (list (getself s) (other 'asParser))))
              (\| (s other)
                 (OrderedChoice 'on:
-                    (cons (getself s)
-                        (cons (other 'asParser)
-                            null))))
+                    (list (getself s) (other 'asParser))))
              (strongAnd: (s other)
                 (let ((result ((getself s) '& other)))
                     (result 'skipWhitespace: #f)
