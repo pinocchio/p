@@ -27,3 +27,11 @@
     (sscan 'next)
     (sscan 'next)
     (display (sscan 'atEnd)))
+
+(let ((input (StringScanner 'on: "Test"))
+      (parser (#\T 'asParser)))
+    (display (= #\T (parser 'match:in: input null))))
+
+(let ((input (StringScanner 'on: "Test"))
+      (parser ((#\T 'asParser) '& #\e)))
+    (display (parser 'match:in: input null)))

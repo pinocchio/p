@@ -40,6 +40,7 @@ int main () {
     object IScoped          = import_class(iscoped);
     object InputFile        = import_class(inputfile);
     object OutputFile       = import_class(outputfile);
+    object Character        = import_class(chr);
 
     object ifixed           = import_object(ifixed);
     object null             = import_object(nil);

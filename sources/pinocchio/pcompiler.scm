@@ -518,6 +518,7 @@ extravars))))))))
     (IScoped        "IScoped")
     (InputFile      "InputFile")
     (OutputFile     "OutputFile")
+    (Character      "Character")
     ))
 
 (define-syntax-rule (transform-code code ...)

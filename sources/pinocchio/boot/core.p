@@ -276,6 +276,7 @@
                 (String      'dispatch:delegate: objdisp Stringc)
                 (store_empty Symbol            Stringc      'Symbol)
                 (store_empty SmallInteger      Integer      'SmallInteger)
+                (store_empty Character         Magnitude    'Character)
                 (store_empty Array             ArCol        'Array)
                 (store_empty UndefinedObject   Object       'UndefinedObject)
                 (store_empty IScoped           Object       'IScoped)
