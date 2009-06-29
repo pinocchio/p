@@ -100,7 +100,22 @@
 
 ;(InputFile 'test)
 
-      
+(display "\nEscape contination tests\n")
+(display (= 5 (callec (lambda (cont) 5))))
+
+(display (= 10
+    (callec (lambda (cont)
+                (cont 10)
+                5))))
+
+;(let ((bla null))
+;    (display (+ 10
+;            (callec (lambda (cont)
+;                (set! bla cont)
+;                20))))
+;    (display (+ 40 ((lambda (x) (bla 4)) 4))))
+
+     
 
 (display "\nSYSTEM READY\n")
 

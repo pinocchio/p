@@ -33,6 +33,9 @@ GENERATED=pinocchio.c
 
 all: $(PROGRAM)
 
+run: $(PROGRAM)
+	./$^
+
 $(PROGRAM): $(OBJECTS) $(PROGRAM).o
 	$(CC) $(LDFLAGS) -o $@ $^
 
@@ -40,7 +43,7 @@ test: $(OBJECTS) test.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	./test
 
-pinocchio.c: $(SFILES) $(PFILES)
+pinocchio.c: $(SFILES) $(PFILES) $(TFILES)
 	cat prefix.c > $@
 	mzscheme -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
