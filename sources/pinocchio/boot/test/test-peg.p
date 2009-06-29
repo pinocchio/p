@@ -35,3 +35,7 @@
 (let ((input (StringScanner 'on: "Test"))
       (parser ((#\T 'asParser) '& #\e)))
     (display (parser 'match:in: input null)))
+
+(let ((input (StringScanner 'on: "Test"))
+      (parser ((#\Q 'asParser) '\| #\T)))
+    (display (= #\T (parser 'match:in: input null))))
