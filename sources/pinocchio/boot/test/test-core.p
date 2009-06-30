@@ -22,26 +22,31 @@
     (display (eq? (el2 'parent) el)))
 
 
-; XXX Broken!
-;((integer 'methodDictionary)
-;    'objectAt:put: 'testMethod
-;    (method (s) (display "IN SELF!\n")
-;                ((getsuper s) (vector 'testMethod))))
-;((magnitude 'methodDictionary)
-;    'objectAt:put: 'testMethod
-;    (method (s) (display "In SUPER!!\n")))
+(display "\nSuper-send testing\n")
+((Integer 'methodDictionary)
+    'objectAt:put: 'testMethod
+    (method (s) (+ 40 ((getsuper s) (vector 'testMethod)))))
+((Magnitude 'methodDictionary)
+    'objectAt:put: 'testMethod
+    (method (s) 2))
 
-;((integer 'basicNew) 'testMethod)
+(display (= 42 ((Integer 'basicNew) 'testMethod)))
 
+((Integer 'methodDictionary)
+    'objectAt:put: 'testMethod
+    (method (s) ((getsuper s) (vector 'testMethod: 40))))
 
-;(display ((ICapture 'instance) 'eval))
+((Magnitude 'methodDictionary)
+    'objectAt:put: 'testMethod:
+    (method (s x) (+ x 2)))
 
+(display (= 42 ((Integer 'basicNew) 'testMethod)))
+
+(display "\nSmallInteger tests\n")
 (SmallInteger 'store:method: +
     (method (s other)
         (+ (getself s) other)))
 
-
-(display "\nSmallInteger tests\n")
 (display (= (40 + 2) 42))
 
 (display "\nUnicode tests\n")

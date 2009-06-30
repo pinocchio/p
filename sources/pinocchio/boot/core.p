@@ -4,6 +4,17 @@
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
+      (constwrap (lambda (array)
+            (let* ((size (array 'size))
+                   (result (Array 'basicNew: size)))
+                (let loop ((idx 0))
+                    (if (= idx size)
+                        result
+                        (begin
+                            (result 'objectAt:put: idx
+                                (IConst 'basicNew: (array 'objectAt: idx)))
+                            (loop (+ idx 1))))))))
+                        
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
 (let ((doesNotUnderstand
@@ -54,7 +65,7 @@
                                                   (lookup
                                                       (args 'objectAt: 0)
                                                       (class 'superclass)
-                                                      args))))
+                                                      (constwrap args)))))
                                     (amethod 'apply:in: args env))))))))))
     ;(display "STAGE 1\n")
     ; Classes have a more specific dispatch than Objects
