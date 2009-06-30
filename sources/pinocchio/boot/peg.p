@@ -206,9 +206,18 @@
             ))
        (ZeroOrOne
             (newclass ZeroOrOne Repetition () ()
-                ()
+                ((privateMatch:in: (s input scope)
+                    (let* ((self (getself s))
+                           (child (self 'child))
+                           (match (child 'match:in: input scope)))
+                        (if (eq? null match)
+                            (list "")
+                            (if (child 'omit)
+                                (list "")
+                                match)))))
                 ()
             ))
+
        (AndPredicate
             (newclass AndPredicate Repetition () ()
                 ()
