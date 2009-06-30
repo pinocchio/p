@@ -57,14 +57,12 @@
                                 (begin
                                     (args 'objectAt:put: 0
                                         (bind self
-                                              ; Constructing a "super"
-                                              ; XXX TODO this is broken!
-                                              ; The args get evaluated in the
-                                              ; wrong scope
                                               (lambda (args)
                                                   (lookup
                                                       (args 'objectAt: 0)
                                                       (class 'superclass)
+                                                      ; TODO FIXME very ugly
+                                                      ; hack to make it work
                                                       (constwrap args)))))
                                     (amethod 'apply:in: args env))))))))))
     ;(display "STAGE 1\n")

@@ -184,7 +184,10 @@
                                           pos
                                           (child 'match:in: input scope)))))))
                 )
-                ()
+                ((for: (s child)
+                    (let ((result ((getself s) 'new)))
+                        (result 'child: child)
+                        result)))
             ))
        (OneOrMore
             (newclass OneOrMore Repetition () ()
@@ -193,7 +196,12 @@
             ))
        (ZeroOrMore
             (newclass ZeroOrMore Repetition () ()
-                ()
+                ((privateMatch:in: (s input scope)
+                    (let ((match ((getsuper s)
+                                    (vector 'privateMatch:in: input scope))))
+                        (if (eq? null match)
+                            (list "")
+                            match))))
                 ()
             ))
        (ZeroOrOne
