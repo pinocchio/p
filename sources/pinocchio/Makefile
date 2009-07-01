@@ -23,7 +23,7 @@ EXTRA_SOURCES=$(SFILES) $(PFILES) $(TFILES) Makefile
 
 FULLNAME=$(PROGRAM)-$(VERSION)
 
-CFLAGS = -O3 -g -Wall -I. -D_GNU_SOURCE
+CFLAGS = -O3 -g -Wall -I. # -D_GNU_SOURCE
 LDFLAGS = -lgc
 
 TEST_OBJECTS=test test.o

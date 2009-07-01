@@ -25,11 +25,11 @@
 
 (let ((input (StringScanner 'on: "abababaa"))
       (parser (((#\a 'asParser) '& #\b) '*)))
-    (display (= (length (parser 'match:in: input null)) 3)))
+    (display (= 3 (length (parser 'match:in: input null)))))
 
 (let ((input (StringScanner 'on: "abababaa"))
       (parser (((#\a 'asParser) '& #\b) '+)))
-    (display (= (length (parser 'match:in: input null)) 3)))
+    (display (= 3 (length (parser 'match:in: input null)))))
 
 (let ((input (StringScanner 'on: "abababaa"))
       (parser (((#\b 'asParser) '& #\a) '+)))

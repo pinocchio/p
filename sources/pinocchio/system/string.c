@@ -3,6 +3,16 @@
 #include <wchar.h>
 #include <string.h>
 
+wchar_t* wcsdup(const wchar_t* input) {
+    int len = wcslen(input);
+    wchar_t* output = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t) * len);
+    int i = 0;
+    for (; i < len; i++) {
+        output[i] = input[i];
+    }
+    return output;
+}
+
 with_pre_eval1(string_new, context, w_size,
     // XXX breaking encapsulation
     int size = number_value(w_size.number);
