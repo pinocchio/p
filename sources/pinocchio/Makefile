@@ -24,7 +24,11 @@ EXTRA_SOURCES=$(SFILES) $(PFILES) $(TFILES) Makefile
 FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -O3 -g -Wall -I.
-LDFLAGS = -lgc
+
+PLATFORM := $(shell uname)
+ifneq ($(PLATFORM), Darwin)
+    LDFLAGS = -lgc
+endif
 
 TEST_OBJECTS=test test.o
 SOURCES=$(CFILES) $(HFILES) $(EXTRA_SOURCES)
