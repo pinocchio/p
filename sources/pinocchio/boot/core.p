@@ -65,7 +65,7 @@
                                                       ; hack to make it work
                                                       (constwrap args)))))
                                     (amethod 'apply:in: args env))))))))))
-    ;(display "STAGE 1\n")
+    (display "STAGE 1\n")
     ; Classes have a more specific dispatch than Objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
@@ -82,7 +82,7 @@
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    ;(display "STAGE 2\n")
+    (display "STAGE 2\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
@@ -147,7 +147,7 @@
         (Metaclass 'dispatch:delegate: classdisp (Metaclass_class 'basicNew))
         (Metaclass_class 'objectAt:put: 1 mcdict)
 
-        ;(display "STAGE 3\n")
+        (display "STAGE 3\n")
 
         ; For now we ensure that all subclasses of Object get the correct
         ; layout by faking the layout of the first Metaclass. This will later
@@ -163,7 +163,9 @@
         (Metaclass 'objectAt:put: 1 (Dictionary 'basicNew))
         (Metaclass 'objectAt:put: 2 (vector 'instance))
         (Metaclass 'objectAt:put: 3 'Metaclass)
+        (display "STAGE 3.2\n")
         (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
+        (display "STAGE 3.5\n")
 
 
         ; Install the accessor methods
@@ -210,7 +212,7 @@
                                         (vector 'name)
                                         (vector))))
 
-            ;(display "STAGE 4\n")
+            (display "STAGE 4\n")
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
