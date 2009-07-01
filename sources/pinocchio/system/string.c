@@ -4,7 +4,7 @@
 #include <string.h>
 
 wchar_t* wcsdup(const wchar_t* input) {
-    int len = wcslen(input);
+    int len = wcslen(input) + 1;
     wchar_t* output = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t) * len);
     int i = 0;
     for (; i < len; i++) {
