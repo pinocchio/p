@@ -163,7 +163,7 @@
         (Metaclass 'objectAt:put: 1 (Dictionary 'basicNew))
         (Metaclass 'objectAt:put: 2 (vector 'instance))
         (display "STAGE 3.2\n")
-        (Metaclass 'objectAt:put: 3 'Metaclass)
+        (Metaclass 'objectAt:put: 3 (vector 'Metaclass))
         (display "STAGE 3.5\n")
         (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
 

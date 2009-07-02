@@ -42,3 +42,7 @@
 (let ((input (StringScanner 'on: "abababaa"))
       (parser (((#\b 'asParser) '& #\a) '?)))
     (display (= 1 (length (parser 'match:in: input null)))))
+
+(let ((input (StringScanner 'on: "abababaa"))
+      (parser ("abab" 'asParser)))
+    (display (= 4 (length (parser 'match:in: input null)))))

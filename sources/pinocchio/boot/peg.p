@@ -158,7 +158,7 @@
                         (result 'children: children)
                         result)))
             ))
-       (Repetition
+       (OneOrMore
             (newclass Repetition Expression (child skipWhitespace) ()
                 ((child (s) ((getself s) 'objectAt: 2))
                  (child: (s new) ((getself s) 'objectAt:put: 2 new))
@@ -192,13 +192,8 @@
                         (result 'child: child)
                         result)))
             ))
-       (OneOrMore
-            (newclass OneOrMore Repetition () ()
-                ()
-                ()
-            ))
        (ZeroOrMore
-            (newclass ZeroOrMore Repetition () ()
+            (newclass ZeroOrMore OneOrMore () ()
                 ((privateMatch:in: (s input scope)
                     (let ((match ((getsuper s)
                                     (vector 'privateMatch:in: input scope))))
@@ -208,7 +203,7 @@
                 ()
             ))
        (ZeroOrOne
-            (newclass ZeroOrOne Repetition () ()
+            (newclass ZeroOrOne OneOrMore () ()
                 ((privateMatch:in: (s input scope)
                     (let* ((self (getself s))
                            (child (self 'child))
@@ -222,12 +217,12 @@
             ))
 
        (AndPredicate
-            (newclass AndPredicate Repetition () ()
+            (newclass AndPredicate OneOrMore () ()
                 ()
                 ()
             ))
        (NotPredicate
-            (newclass NotPredicate Repetition (consume) ()
+            (newclass NotPredicate OneOrMore (consume) ()
                 ()
                 ()
             ))
@@ -253,6 +248,17 @@
 
         (Character 'store:method: 'asParser
             (method (s) (Terminal 'char: (getself s))))
+
+        (String 'store:method: 'asParser
+            (method (s)
+                (let* ((self (getself s))
+                       (size (self 'size)))
+                    (let loop ((idx 0) (result null))
+                        (if (= idx size)
+                            (Sequence 'on: (reverse result))
+                            (loop (+ idx 1)
+                                  (cons ((self 'objectAt: idx) 'asParser)
+                                        result)))))))
 
        (load "boot/test/test-peg.p")
 
