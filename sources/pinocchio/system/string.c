@@ -86,9 +86,6 @@ string_object make_string(const wchar_t* value) {
     return result;
 }
 
-// should become wchar_t*
-// and printf("%ls", wchar_t*)
-// for unicode support.
 object make_symbol(const wchar_t* value) {
     string_object result    = NEW(struct string);
     result->value           = wcsdup(value);
