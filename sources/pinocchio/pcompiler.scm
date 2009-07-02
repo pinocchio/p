@@ -274,7 +274,7 @@ extravars))))))))
         (list "" (cadr previous))
         (let ((code (symbol->code symbol)))
           (set! symbols (cons (list symbol code) symbols))
-          (list (string-append "object " code " = null;\n"
+          (list (string-append "object " code " = (object)(void**)NULL;\n"
                                "define_symbol("
                                code ", L\""
                                (symbol->string symbol)
