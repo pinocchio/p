@@ -1,4 +1,4 @@
-#include <scheme/system.h>
+#include <scheme/behaviour.h>
 #include <system.h>
 
 // Function bootstrapping
