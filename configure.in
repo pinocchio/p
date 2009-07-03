@@ -18,6 +18,9 @@ AC_CHECK_LIB([gc], [GC_malloc])
 # Checks for header files.
 AC_CHECK_HEADERS([locale.h stdlib.h string.h wchar.h])
 
+# Checks for programs.
+AC_CHECK_TOOL([MZSCHEME], [mzscheme])
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL
 AC_C_INLINE

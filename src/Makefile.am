@@ -21,5 +21,5 @@ boot/test/test-core.p boot/test/test-peg.p
 
 pinocchio.c: $(EXTRA_DIST) prefix.c postfix.c
 	cat prefix.c > $@
-	mzscheme -r boot/pinocchio.scm >> $@
+	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
