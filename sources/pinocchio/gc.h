@@ -1,11 +1,11 @@
 #ifndef GC_H
 #define GC_H
 
-#ifdef __APPLE__
-    #define FOOLS_ALLOC malloc
-#else
-    #include <gc/gc.h>
-    #define FOOLS_ALLOC GC_MALLOC
-#endif
+// get the boehm garbage collector at:
+//      http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/
+// make sure to disable thread support on OS X
+//      ./configure --disable-threads
+#include <gc/gc.h>
+#define FOOLS_ALLOC GC_MALLOC
 
 #endif // GC_H

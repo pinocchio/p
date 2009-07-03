@@ -25,10 +25,7 @@ FULLNAME=$(PROGRAM)-$(VERSION)
 
 CFLAGS = -O3 -g -Wall -I.
 
-PLATFORM := $(shell uname)
-ifneq ($(PLATFORM), Darwin)
-    LDFLAGS = -lgc
-endif
+LDFLAGS = -lgc
 
 TEST_OBJECTS=test test.o
 SOURCES=$(CFILES) $(HFILES) $(EXTRA_SOURCES)
