@@ -2,7 +2,7 @@
 #include <bootstrap.h>
 #include <system.h>
 #include <scheme/natives.h>
-#include <scheme/system.h>
+#include <scheme/behaviour.h>
 #include <scheme/symbols.h>
 #include <print.h>
 #include <thread.h>

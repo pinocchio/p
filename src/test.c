@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <system.h>
 #include <thread.h>
-#include <scheme/system.h>
+#include <scheme/behaviour.h>
 #include <scheme/symbols.h>
 #include <scheme/natives.h>
 #include <print.h>
