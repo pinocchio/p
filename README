@@ -4,4 +4,4 @@ Pinocchio
 To start building the project from SVN, make sure autotools is installed. If
 it is installed, run the following to build the project:
 
-autoreconf && ./configure && make
+autoreconf --install && ./configure && make
