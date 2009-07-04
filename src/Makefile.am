@@ -17,9 +17,9 @@ pinocchio_SOURCES=$(SOURCES) pinocchio.c
 test_SOURCES=$(SOURCES) test.c
 
 EXTRA_DIST=pcompiler.scm boot/core.p boot/peg.p\
-boot/test/test-core.p boot/test/test-peg.p
+boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c
 
-pinocchio.c: $(EXTRA_DIST) prefix.c postfix.c
+pinocchio.c: $(EXTRA_DIST)
 	cat prefix.c > $@
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
