@@ -12,8 +12,9 @@
 
 #define import_object(name)\
     (object)make_iconst((object)fools_system->name);
+
 #define import_class(name)\
-    import_object(name##_##class);
+    import_object(name##_class);
 
 int main () {
     bootstrap();

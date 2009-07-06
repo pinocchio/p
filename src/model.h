@@ -6,7 +6,7 @@
 
 #define header_size sizeof(object)
 
-#define PINC(p) (((pointer) p) + 1) 
+#define  (p) (((pointer) p) + 1) 
 #define PDEC(p) (((pointer) p) - 1)
 
 #define NEW(layout) NEW_ARRAYED(layout*, layout, 1)
@@ -20,7 +20,9 @@
     header(result)        = (object)fools_system->cls##_##class;
 
 #define header(o) (*(object*)PDEC(o))
+
 #define pheader(o) header(o).pointer
+
 #define ntarget(o) native_target((o).native)
 
 #define declare_type(name)\
