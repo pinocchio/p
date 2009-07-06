@@ -246,7 +246,7 @@
                         (self 'omit: #f)
                         (self 'extendScope: #f)
                         (self 'separator:
-                            (((#\t 'asParser) '\| #\space) '\| "\n"))
+                            (((#\t 'asParser) '\| #\space) '\| "\n")))
                  )
                  (<= (s expression) ((getself s) 'expression: expression))
                  (match:in: (s input scope)
