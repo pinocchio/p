@@ -19,6 +19,7 @@ test_SOURCES=$(SOURCES) test.c
 EXTRA_DIST=pcompiler.scm boot/core.p boot/peg.p\
 boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c
 
+CLEANFILES=pinocchio.c test
 
 pinocchio.c: $(EXTRA_DIST)
 	cat prefix.c > $@
