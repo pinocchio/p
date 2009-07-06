@@ -46,3 +46,7 @@
 (let ((input (StringScanner 'on: "abababaa"))
       (parser ("abab" 'asParser)))
     (display (= 4 (length (parser 'match:in: input null)))))
+
+(let ((parser (Parser 'named: "Test")))
+    (parser '<= ("abab" 'asParser))
+    (parser '=~ "abababaa" null))

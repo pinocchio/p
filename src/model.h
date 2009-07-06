@@ -6,7 +6,7 @@
 
 #define header_size sizeof(object)
 
-#define  (p) (((pointer) p) + 1) 
+#define PINC(p) (((pointer) p) + 1) 
 #define PDEC(p) (((pointer) p) - 1)
 
 #define NEW(layout) NEW_ARRAYED(layout*, layout, 1)
