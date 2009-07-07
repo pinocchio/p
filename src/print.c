@@ -15,7 +15,7 @@
 void print_object(object o) {
 
     if (pheader(o.pointer) == fools_system->number_class.pointer) {
-        printf("%i\n", o.number->value);
+        printf("%i", o.number->value);
         return;
     }
 

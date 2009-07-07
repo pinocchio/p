@@ -306,21 +306,19 @@
             ))
         )
 
-        (Character 'store:method: 'asParser
-            (method (s) (Terminal 'char: (getself s))))
+       (Character 'store:method: 'asParser
+           (method (s) (Terminal 'char: (getself s))))
 
-        (String 'store:method: 'asParser
-            (method (s)
-                (let* ((self (getself s))
-                       (size (self 'size)))
-                    (let loop ((idx 0) (result null))
-                        (if (= idx size)
-                            (Sequence 'on: (reverse result))
-                            (loop (+ idx 1)
-                                  (cons ((self 'objectAt: idx) 'asParser)
-                                        result)))))))
+       (String 'store:method: 'asParser
+           (method (s)
+               (let* ((self (getself s))
+                      (size (self 'size)))
+                   (let loop ((idx 0) (result null))
+                       (if (= idx size)
+                           (Sequence 'on: (reverse result))
+                           (loop (+ idx 1)
+                                 (cons ((self 'objectAt: idx) 'asParser)
+                                       result)))))))
 
        (load "boot/test/test-peg.p")
-
-       ;(Object 'bla)
 )
