@@ -49,4 +49,5 @@
 
 (let ((parser (Parser 'named: "Test")))
     (parser '<= ("abab" 'asParser))
+    (parser 'do: (lambda (scope result) (list->string result)))
     (parser '=~ "abababaa" null))

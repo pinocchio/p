@@ -259,7 +259,7 @@
                                 (if (eq? semantics #f)
                                     match
                                     (semantics scope match))))))
-                 (do (s l) ((getself s) 'semantics: l))
+                 (do: (s l) ((getself s) 'semantics: l))
                  (=~ (s input scope)
                     (let* ((self (getself s))
                            (scanner (StringScanner 'on: input))
@@ -286,7 +286,7 @@
                         (result 'initialize: name)
                         result)))
             ))
-       (Terminal
+        (Terminal
             (newclass Terminal Expression (char) ()
                 ((char (s) ((getself s) 'objectAt: 2))
                  (char: (s new) ((getself s) 'objectAt:put: 2 new))
@@ -304,6 +304,17 @@
                         (result 'char: char)
                         result)))
             ))
+
+        (list->string (lambda (list)
+            (let ((result (String 'basicNew: (length list))))
+                (let loop ((todo list)
+                           (idx 0))
+                    (if (eq? todo null)
+                        result
+                        (begin
+                            (result 'objectAt:put: idx (car todo))
+                            (loop (cdr todo) (+ idx 1))))))))
+
         )
 
        (Character 'store:method: 'asParser
