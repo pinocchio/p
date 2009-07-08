@@ -13,7 +13,7 @@
 
 (let ((input (StringScanner 'on: "Test"))
       (parser (#\T 'asParser)))
-    (display (= #\T (parser 'match:in: input null))))
+    (display (= 1 ((parser 'match:in: input null) 'size))))
 
 (let ((input (StringScanner 'on: "Test"))
       (parser ((#\T 'asParser) '& #\e)))
@@ -21,7 +21,7 @@
 
 (let ((input (StringScanner 'on: "Test"))
       (parser ((#\Q 'asParser) '\| #\T)))
-    (display (= #\T (parser 'match:in: input null))))
+    (display (= 1 ((parser 'match:in: input null) 'size))))
 
 (let ((input (StringScanner 'on: "abababaa"))
       (parser (((#\a 'asParser) '& #\b) '*)))
