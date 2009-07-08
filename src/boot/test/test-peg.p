@@ -45,9 +45,8 @@
 
 (let ((input (StringScanner 'on: "abababaa"))
       (parser ("abab" 'asParser)))
-    (display (= 4 (length (parser 'match:in: input null)))))
+    (display (= 4 ((parser 'match:in: input null) 'size))))
 
 (let ((parser (Parser 'named: "Test")))
     (parser '<= ("abab" 'asParser))
-    (parser 'do: (lambda (scope result) (list->string result)))
-    (parser '=~ "abababaa" null))
+    (parser '=~ "abababaa"))

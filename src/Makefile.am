@@ -17,7 +17,8 @@ pinocchio_SOURCES=$(SOURCES) pinocchio.c
 test_SOURCES=$(SOURCES) test.c
 
 EXTRA_DIST=pcompiler.scm boot/core.p boot/peg.p\
-boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c
+boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
+boot/smalltalk.p boot/test/test-smalltalk.p
 
 CLEANFILES=pinocchio.c test
 
