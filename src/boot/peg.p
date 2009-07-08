@@ -252,8 +252,8 @@
                         (self 'semantics: #f)
                         (self 'omit: #f)
                         (self 'extendScope: #f)
-                        ;(self 'separator:
-                        ;    (((#\t 'asParser) '\| #\space) '\| #\newline))
+                        (self 'separator:
+                            (((#\t 'asParser) '\| #\space) '\| "\n"))
                     )
                  )
                  (<= (s expression) ((getself s) 'expression: expression))
