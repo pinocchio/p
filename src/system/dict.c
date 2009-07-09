@@ -1,6 +1,7 @@
 #include <system.h>
 #include <thread.h>
 #include <print.h>
+#include <assert.h>
 
 with_pre_eval1(dict_at, context, key,
     dict_object dict = context->self.dict;

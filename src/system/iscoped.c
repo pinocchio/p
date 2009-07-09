@@ -1,4 +1,5 @@
 #include <system.h>
+#include <assert.h>
 #include <scheme/symbols.h>
 #include <thread.h>
 #include <print.h>

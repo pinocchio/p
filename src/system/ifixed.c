@@ -1,4 +1,5 @@
 #include <system.h>
+#include <assert.h>
 #include <thread.h>
 
 static ifixed_object inline ifixed_descr(object inst) {

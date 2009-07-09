@@ -5,16 +5,34 @@
 #define if_selector(selector, symb, todo)\
     if (selector.pointer == symb.pointer)\
         return todo();
+void inline call_error(object message) {
+    pop_context();
+    context_object context = make_context(fools_system->error, 1);
+    set_argument(context, 0, message);
+}
 
 void doesnotunderstand(const wchar_t* class, object selector) {
     wchar_t buffer[1024];
     debug("does not understand\n");
     swprintf(buffer, 1024, L"DNU: %ls>>%ls\n", class, selector.string->value);
-    wdebug(buffer);
-    object message = (object)make_string(buffer);
-    pop_context();
-    context_object context = make_context(fools_system->error, 1);
-    set_argument(context, 0, message);
+    call_error((object)make_string(buffer));
+
+}
+
+void ensure(int condition, const wchar_t* message) {
+    if(!condition) {
+        call_error((object)make_string(message));
+    } 
+}
+
+int ensure_greater_equals(int v1, int v2, const wchar_t* format, const char* file, unsigned int line) {
+    int result = v1 < v2;
+    if (result) {
+        wchar_t buffer[1024];
+        swprintf(buffer, 1024, format, file, line, v1, v2);
+        call_error((object)make_string(buffer));
+    }
+    return result;
 }
 
 // Context handling

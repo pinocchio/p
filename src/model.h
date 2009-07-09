@@ -205,13 +205,18 @@ extern void             inline object_at_put(object_object o,
                                              int index, object value);
 extern object           inline env_at(env_object env, int index);
 extern void             inline env_at_put(env_object env, int index, object value);
-#define assert_argsize(context, size) assert(context_size(context) >= size)
+#define assert_argsize(context, size)\
+    if (ensure_greater_equals(context_size(context), size,\
+        L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\
+    { return; }
+    
+
 #define empty_env make_env((object)fools_system->nil,\
                            (object)fools_system->nil, 0)
 
 #define array_check_bounds(array, index)\
-    assert(0 <= index);\
-    assert(index < array_size(array));
+    ensure(0 <= index, L"Out of bounds");\
+    ensure(index < array_size(array), L"Out of bounds");
 
 
 #endif // MODEL_H

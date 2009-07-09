@@ -3,7 +3,6 @@
 
 #include <model.h>
 #include <bootstrap.h>
-#include <assert.h>
 #include <stdio.h>
 
 #include <debug.h>

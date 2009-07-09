@@ -1,4 +1,5 @@
 #include <system.h>
+#include <assert.h>
 #include <thread.h>
 
 // env>>fetch:from:
