@@ -315,8 +315,6 @@
                 Object
     )))))))
 
-    (ifixed 'dispatch:delegate:size:)
-
     (load "boot/peg.p")
 
 )))))))
