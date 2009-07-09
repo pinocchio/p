@@ -1,6 +1,7 @@
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (success
+
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
@@ -250,7 +251,7 @@
 
             (((IFixed 'class) 'methodDictionary)
                 'objectAt:put: 'basicNew
-                (method (s) (display "TODO: flag error\n")))
+                (method (s) (error "There is only one ifixed object in the system\n")))
 
             (Env 'dispatch:delegate:
                 objdisp
@@ -258,7 +259,7 @@
                         'Environment (vector 'key 'index) (vector)))
 
             ((Env 'class) 'store:method: 'basicNew
-                (method (s) (display "TODO: flag error\n")))
+                (method (s) (error "Should not basicNew environments\n")))
        
             (let* ((ev (vector))
                    (make_empty_subclass (lambda (cls name)

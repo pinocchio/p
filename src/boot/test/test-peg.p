@@ -47,6 +47,8 @@
       (parser ("abab" 'asParser)))
     (display (= 4 ((parser 'match:in: input null) 'size))))
 
+(display (1 + null))
+
 (let ((parser (Parser 'named: "Test")))
     (parser '<= ("abab" 'asParser))
     (parser '=~ "abababaa"))

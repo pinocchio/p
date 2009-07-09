@@ -1,4 +1,4 @@
-SUBDIRS=src doc
+SUBDIRS=src 
 dist_doc_DATA=README
 
 test:
