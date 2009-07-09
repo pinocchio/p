@@ -178,6 +178,8 @@ static void inline name() {\
 /* Globally used functions */
 extern void pre_eval_env();
 extern void doesnotunderstand(const wchar_t* class, object selector);
+extern int ensure_greater_equals(int v1, int v2, const wchar_t* format, const char* file, unsigned int line);
+extern void ensure(int condition, const wchar_t* message);
 extern void inline identity();
 
 #endif

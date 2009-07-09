@@ -1,6 +1,7 @@
 #include <system.h>
 #include <thread.h>
 #include <stdio.h>
+#include <wchar.h>
 
 #define if_selector(selector, symb, todo)\
     if (selector.pointer == symb.pointer)\
