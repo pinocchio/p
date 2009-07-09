@@ -1,7 +1,7 @@
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (success
-
+(1 'someMessage)
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))

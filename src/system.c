@@ -7,8 +7,14 @@
         return todo();
 
 void doesnotunderstand(const wchar_t* class, object selector) {
-    printf("DNU: %ls>>%ls\n", class, selector.string->value);
-    assert(NULL);
+    wchar_t buffer[1024];
+    debug("does not understand\n");
+    swprintf(buffer, 1024, L"DNU: %ls>>%ls\n", class, selector.string->value);
+    wdebug(buffer);
+    object message = (object)make_string(buffer);
+    pop_context();
+    context_object context = make_context(fools_system->error, 1);
+    set_argument(context, 0, message);
 }
 
 // Context handling

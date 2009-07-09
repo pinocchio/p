@@ -146,6 +146,7 @@ struct fools {
     object              icapture;
     object              ifixed;
     object              array;
+    object              error;
 
     // Evaluation related classes
     object ilist_class;

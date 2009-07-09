@@ -108,21 +108,13 @@ bin_number_bool_op  ( smallerp,  <  )
 bin_number_bool_op  ( equalp,    == )
 bin_object_bool_op  ( eqp,       == )
 
-static void scheme_display_func_do() {
+preval1(display, context, v,
     debug("scheme>>display\n");
-    context_object context = get_context();
-    object v = argument_at(context, 0);
     print_object(v);
     return_from_context(context, v);
     debug("ret>>scheme>>display\n");
-}
+)
 
-static void scheme_display_func() {
-    context_object context = get_context();
-    assert_argsize(context, 1);
-    push_eval_of(context, 0);
-    context->code = &scheme_display_func_do;
-}
 object scheme_display;
 
 object scheme_callec;
@@ -156,6 +148,20 @@ preval1(cont, context, value,
     return_to_context(return_context, value);
 )
 
+preval1(error, context, message,
+    print_object(message);
+    exit(-1);
+)
+
+object scheme_error;
+
+preval1(error_handler, context, error_handler,
+    fools_system->error     = error_handler;
+    return_from_context(context, error_handler);
+)
+
+object scheme_error_handler;
+
 object scheme_exit;
 
 preval1(exit, context, value,
@@ -180,4 +186,8 @@ void bootstrap_scheme() {
     init_op(callec);
     init_op(display);
     init_op(exit);
+    init_direct_op(error);
+    init_op(error_handler);
+
+    fools_system->error     = scheme_error;
 }
