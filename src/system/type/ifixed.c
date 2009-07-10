@@ -61,8 +61,8 @@ define_bootstrapping_type(ifixed,
     if_selector(OBJECT_AT,        ifixed_at);
     if_selector(OBJECT_AT_PUT,    ifixed_at_put);,
     // class
-    if_selector(NEW,          ifixed_new);
-    if_selector(SIZE,         ifixed_size);
+    if_selector(BASICNEW,         ifixed_new);
+    if_selector(SIZE,             ifixed_size);
 )
 
 with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,

@@ -65,7 +65,7 @@ define_bootstrapping_type(idict,
     if_selector(OBJECT_AT,        dict_at);
     if_selector(OBJECT_AT_PUT,    dict_at_put);,
     // class
-    if_selector(NEW, dict_new);
+    if_selector(BASICNEW,         dict_new);
 )
 
 // Object creation

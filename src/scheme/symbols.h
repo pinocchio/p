@@ -30,7 +30,7 @@ extern object TO_SIZED;
 // Ifixed
 extern object OBJECT_AT;
 extern object OBJECT_AT_PUT;
-extern object NEW;
+extern object BASICNEW;
 extern object SIZED;
 extern object DELEGATE;
 extern object SIZE;

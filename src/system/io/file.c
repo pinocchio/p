@@ -92,6 +92,8 @@ static void inline inputfile_read() {
 }
 
 with_pre_eval1(outputfile_write, context, wchr,
+    // make the compiler warnin disappear
+    if (0) { wchr = wchr; }
 )
 
 static void inline inputfile_end() {

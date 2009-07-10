@@ -31,7 +31,7 @@ object TO_SIZED;
 // Ifixed
 object DELEGATE;
 object DISPATCH_DELEGATE_SIZE;
-object NEW;
+object BASICNEW;
 object OBJECT_AT;
 object OBJECT_AT_PUT;
 object SET_DISPATCH_DELEGATE;
@@ -48,6 +48,7 @@ object WRITE;
 void bootstrap_scheme_symbols() {
     // Ensure all symbols used by the VM are bootstrapped.
     define_symbol(APPLY_IN,                 L"apply:in:");
+    define_symbol(BASICNEW,                 L"basicNew");
     define_symbol(DELEGATE,                 L"delegate");
     define_symbol(DISPATCH_DELEGATE_SIZE,   L"dispatch:delegate:size:");
     define_symbol(END,                      L"atEnd");
@@ -55,7 +56,6 @@ void bootstrap_scheme_symbols() {
     define_symbol(HASH,                     L"hash");
     define_symbol(IAPPLY,                   L"iapply:");
     define_symbol(INSTANCE,                 L"instance");
-    define_symbol(NEW,                      L"basicNew");
     define_symbol(NEW_SIZE,                 L"new:size:");
     define_symbol(OBJECT_AT,                L"objectAt:");
     define_symbol(OBJECT_AT_PUT,            L"objectAt:put:");
