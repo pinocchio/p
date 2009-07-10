@@ -5,14 +5,19 @@ thread.c model.h bootstrap.h primitives.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
 scheme/symbols.c scheme/symbols.h\
-system/array.c system/array.h system/char.c system/char.h system/dict.c\
-system/dict.h system/env.c system/env.h system/fallback.c system/fallback.h\
-system/file.c system/file.h system/iassign.c system/iassign.h system/icall.c\
-system/icall.h system/icapture.c system/icapture.h system/iconst.c\
-system/iconst.h system/ifixed.c system/ifixed.h system/ilist.c system/ilist.h\
-system/iscoped.c system/iscoped.h system/ival.c system/ival.h system/ivar.c\
-system/ivar.h system/number.c system/number.h system/shift.c system/shift.h\
-system/string.c system/string.h
+system/ast/iassign.c system/ast/icall.h system/ast/iassign.h\
+system/ast/icapture.h system/ast/ivar.h system/ast/icapture.c\
+system/ast/ilist.c system/ast/icall.c system/ast/ivar.c\
+system/ast/ilist.h system/ast/iconst.h system/ast/iscoped.h\
+system/ast/iconst.c system/ast/iscoped.c\
+system/io/file.h system/io/file.c\
+system/runtime/env.c system/runtime/env.h\
+system/type/dict.c system/type/number.c system/type/string.h system/type/dict.h\
+system/type/number.h system/type/array.c system/type/array.h system/type/char.c\
+system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
+system/tool/ival.c system/tool/shift.h system/tool/ival.h system/tool/fallback.c\
+system/tool/fallback.h system/tool/shift.c
+
 pinocchio_SOURCES=$(SOURCES) pinocchio.c
 test_SOURCES=$(SOURCES) test.c
 

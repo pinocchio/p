@@ -7,25 +7,28 @@
 
 #include <debug.h>
 
-#include <system/env.h>
-#include <system/iassign.h>
-#include <system/icall.h>
-#include <system/icapture.h>
-#include <system/iconst.h>
-#include <system/ilist.h>
-#include <system/iscoped.h>
-#include <system/ivar.h>
-#include <system/shift.h>
-#include <system/ifixed.h>
-#include <system/ival.h>
-#include <system/fallback.h>
+#include <system/ast/iassign.h>
+#include <system/ast/icall.h>
+#include <system/ast/icapture.h>
+#include <system/ast/iconst.h>
+#include <system/ast/ilist.h>
+#include <system/ast/iscoped.h>
+#include <system/ast/ivar.h>
 
-#include <system/array.h>
-#include <system/dict.h>
-#include <system/string.h>
-#include <system/number.h>
-#include <system/file.h>
-#include <system/char.h>
+#include <system/tool/ival.h>
+#include <system/tool/fallback.h>
+#include <system/tool/shift.h>
+
+#include <system/type/ifixed.h>
+#include <system/type/array.h>
+#include <system/type/dict.h>
+#include <system/type/string.h>
+#include <system/type/number.h>
+#include <system/type/char.h>
+
+#include <system/runtime/env.h>
+
+#include <system/io/file.h>
 
 // Starting an evaluation thread.
 extern object inline transfer();
