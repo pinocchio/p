@@ -4,6 +4,7 @@
 // General purpose
 extern object EVAL;
 extern object PRE_EVAL_ENV;
+extern object HASH;
 // Variable
 extern object ASSIGN_IN;
 extern object FETCH_FROM;

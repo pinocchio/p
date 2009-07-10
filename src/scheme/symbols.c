@@ -5,6 +5,7 @@
 // General purpose
 object EVAL;
 object PRE_EVAL_ENV;
+object HASH;
 // Variable
 object ASSIGN_IN;
 object FETCH_FROM;
@@ -51,6 +52,7 @@ void bootstrap_scheme_symbols() {
     define_symbol(DISPATCH_DELEGATE_SIZE,   L"dispatch:delegate:size:");
     define_symbol(END,                      L"atEnd");
     define_symbol(EVAL,                     L"eval");
+    define_symbol(HASH,                     L"hash");
     define_symbol(IAPPLY,                   L"iapply:");
     define_symbol(INSTANCE,                 L"instance");
     define_symbol(NEW,                      L"basicNew");

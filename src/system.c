@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <wchar.h>
 
-#define if_selector(selector, symb, todo)\
+#define if_selector(symb, todo)\
     if (selector.pointer == symb.pointer)\
         return todo();
 void inline call_error(object message) {

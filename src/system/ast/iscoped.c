@@ -18,7 +18,7 @@ static void inline iscoped_eval() {
 
     env_at_put(env.env, 0, (object)iscoped);
 
-    int argsize = number_value(iscoped->argsize.number);
+    int argsize = iscoped->argsize.number->value;
 
     if(array_size(args) != argsize) {
         printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
@@ -61,7 +61,7 @@ static void inline iscoped_iapply() {
     iscoped_object iscoped = iscoped_context->self.iscoped;
 
     object env = iscoped_context->env;
-    int argsize = number_value(iscoped->argsize.number);
+    int argsize = iscoped->argsize.number->value;
 
     context_object context = make_context(env, 3);
     context->env = env;

@@ -50,7 +50,7 @@ static void inline icall_eval() {
 
 with_pre_eval2(icall_new, context, w_self, w_size,
     // XXX breaking encapsulation.
-    int size = number_value(w_size.number);
+    int size = w_size.number->value;
     return_from_context(context, (object)make_icall(w_self, size));
 )
 

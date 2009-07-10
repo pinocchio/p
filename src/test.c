@@ -43,13 +43,12 @@ SETUP(test_array)
 void native_test_single_arg_5() {
     context_object c = get_context();
     assert(array_size(&c->arguments) == 1);
-    assert(number_value(argument_at(c, 0).number) == 5);
+    assert(argument_at(c, 0).number->value == 5);
     argument_at(c, 0).number->value = 6;
     pop_context();
 }
 
 SETUP(test_string_equals) 
-
     assert(string_equals(make_string(L"a string"), make_string(L"a string")));
     assert(!string_equals(make_string(L"a string"), make_string(L"b string")));
 }
@@ -225,7 +224,7 @@ SETUP(test_ivar_read)
 void native_icallable() {
     context_object c = get_context();
     number_object first = argument_at(c, 0).number;
-    assert(number_value(first) == 5);
+    assert(first->value == 5);
     first->value = 6;
     pop_context();
 }
@@ -249,7 +248,7 @@ SETUP(test_icall)
 
     transfer();
 
-    assert(number_value(array_at(icall->arguments, 0).number) == 6);
+    assert(array_at(icall->arguments, 0).number->value == 6);
 }
 
 SETUP(test_new_iscoped)
@@ -439,7 +438,7 @@ SETUP(test_eval_function_no_args)
 
     object result = transfer();
 
-    assert(number_value(result.number) == 42);
+    assert(result.number->value == 42);
 
 }
 
@@ -496,7 +495,7 @@ SETUP(test_eval_function_1_arg)
 
     object result = transfer();
 
-    assert(number_value(result.number) == 42);
+    assert(result.number->value == 42);
 }
 
 SETUP(test_eval_nested_function)
@@ -535,7 +534,7 @@ SETUP(test_eval_nested_function)
 
     object result = transfer();
 
-    assert(number_value(result.number) == 42);
+    assert(result.number->value == 42);
 }
 
 object SYMBOL_doesNotUnderstand;
@@ -688,7 +687,7 @@ SETUP(test_ifixed_natives)
 
     object result = transfer();
 
-    assert(number_value(result.number) == 5);
+    assert(result.number->value == 5);
 
     icall1(icall, make_iconst(ifixed), NEW);
     make_eval_context(ci, icall, env);

@@ -14,6 +14,7 @@ extern int           inline string_equals(string_object string1,
 
 struct string {
     number_object       size;
+    number_object       hash;
     wchar_t*            value;
 };
 

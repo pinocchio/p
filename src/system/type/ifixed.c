@@ -11,7 +11,7 @@ with_pre_eval1(ifixed_at, context, idx,
     ifixed_object ifixed = ifixed_descr(self);
 
     // XXX breaks encapsulation.
-    int index = number_value(idx.number);
+    int index = idx.number->value;
     debug("at %i (size %i)\n", index, ifixed->size);
 
     assert(0 <= index);
@@ -25,7 +25,7 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
     ifixed_object ifixed = ifixed_descr(self);
 
     // XXX breaks encapsulation.
-    int index = number_value(idx.number);
+    int index = idx.number->value;
     debug("an_ifixed>>at:put: (%i of %i)\n", index, ifixed->size);
 
     assert(0 <= index);
@@ -91,7 +91,7 @@ define_bootstrapping_class(fixed,
 object make_class(object size, transfer_target cdispatch) {
     new_instance(ifixed);
     // XXX breaking encapsulation
-    result->size            = number_value(size.number);
+    result->size            = size.number->value;
     result->cdisp           = (object)cdispatch;
     return (object)result;
 }

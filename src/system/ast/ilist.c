@@ -24,11 +24,11 @@ static void inline ilist_eval() {
     // the whole ilist.
     for (--end; 0 <= end; end--) {
         context_object ilist_pop = make_empty_context(2);
-        ilist_pop->code = &pop_context;
-        instruction = (object)raw_ilist_at(ilist, end);
-        ilist_context = make_context(instruction, 1);
+        ilist_pop->code          = &pop_context;
+        instruction              = (object)raw_ilist_at(ilist, end);
+        ilist_context            = make_context(instruction, 1);
         set_message(ilist_context, EVAL);
-        ilist_context->env = env;
+        ilist_context->env       = env;
     }
 
     debug("ret>>ilist>>eval(n)\n");
@@ -36,7 +36,7 @@ static void inline ilist_eval() {
 
 with_pre_eval1(ilist_new, context, w_size,
     // XXX breaking encapsulation
-    int size = number_value(w_size.number);
+    int size = w_size.number->value;
     return_from_context(context, (object)make_ilist(size));
 )
 

@@ -4,8 +4,8 @@
 void ival() {
     context_object context = get_context();
     array_object args = argument_at(context, 0).array;
-    object value = argument_at(context, 1);
-    int pos = number_value(argument_at(context, 2).number);
+    object value      = argument_at(context, 1);
+    int pos           = argument_at(context, 2).number->value;
     debug("ival %i (size %i)\n", pos, array_size(args));
     array_at_put(args, pos, value);
     pop_context();

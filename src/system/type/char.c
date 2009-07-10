@@ -1,6 +1,9 @@
 #include <system.h>
 #include <thread.h>
 
+
+// TODO cache the first 128 chars
+
 define_bootstrapping_type(char,
     // instance
     if_selector(EVAL,         identity);,
@@ -12,7 +15,7 @@ define_bootstrapping_type(char,
 // Object creation
 chr_object make_char(wchar_t value) {
     new_instance(chr);
-    result->value           = value;
+    result->value = value;
     return result;
 }
 

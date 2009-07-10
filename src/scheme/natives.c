@@ -55,7 +55,7 @@ preval2(scheme##_##name);
 
 #define bin_io_op(name, input, output, op)\
 object inline scheme##_##name##_##native(input##_##object left, input##_##object right) {\
-    return (object)make##_##output(input##_##value(left) op input##_##value(right));\
+    return (object)make##_##output(left->value op right->value);\
 }\
 bin_eval_with(name, input, input, scheme##_##name##_##native)
 
@@ -66,9 +66,11 @@ bin_eval_with(name, input, input, scheme##_##name##_##native)
 #define bin_number_bool_op(name, op)\
     bin_io_op(name, number, bool, op)
 
-#define object_value(o) o
 #define bin_object_bool_op(name, op)\
-    bin_io_op(name, object, bool, op)
+object inline scheme##_##name##_##native(object_object left, object_object right) {\
+    return (object)make_bool(left op right);\
+}\
+bin_eval_with(name, object, object, scheme##_##name##_##native)
 
 object inline make_bool(int bl) {
     if (bl) {
@@ -165,7 +167,8 @@ object scheme_error_handler;
 object scheme_exit;
 
 preval1(exit, context, value,
-    exit(number_value(value.number));
+    // XXX breaks encapsulation
+    exit(value.number->value);
 )
 
 void bootstrap_scheme() {

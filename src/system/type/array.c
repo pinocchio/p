@@ -4,14 +4,14 @@
 with_pre_eval1(iarray_at, context, idx,
     array_object array = context->self.array;
     // XXX breaks encapsulation.
-    int index = number_value(idx.number);
+    int index = idx.number->value;
     return_from_context(context, array_at(array, index));
 )
 
 with_pre_eval2(iarray_at_put, context, idx, value,
     array_object array = context->self.array;
     // XXX breaks encapsulation.
-    int index = number_value(idx.number);
+    int index = idx.number->value;
     array_at_put(array, index, value);
     pop_context();
 )
@@ -24,7 +24,7 @@ static void inline iarray_size() {
 
 with_pre_eval1(iarray_new, context, w_size,
     // XXX breaks encapsulation
-    int size = number_value(w_size.number);
+    int size = w_size.number->value;
     object result = (object)make_array(size);
     return_from_context(context, result);
 )

@@ -13,7 +13,7 @@ static void inline env_fetch_from() {
     debug("env>>fetch:from: (%i) %p\n", env->values->size, env);
 
     if (env->scope.pointer == argument_at(receiver, 2).pointer) {
-        int index = number_value(argument_at(receiver, 1).number);
+        int index = argument_at(receiver, 1).number->value;
         debug("index: %i\n", index);
         object value = env_at(env, index);
         debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
@@ -37,7 +37,7 @@ static void inline env_store_at_in() {
     // arguments at: 0 -> selector
     env_object env = receiver->self.env;
     if (env->scope.pointer == argument_at(receiver, 3).pointer ) {
-        int index = number_value(argument_at(receiver, 2).number);
+        int index = argument_at(receiver, 2).number->value;
         object value = argument_at(receiver, 1);
         env_at_put(env, index, value);
         debug("ret>>env>>store:at:in: %i, %p\n", index, value.pointer);
@@ -60,7 +60,7 @@ static void inline env_subscope() {
     assert_argsize(receiver, 3);
     object env  = receiver->self;
     // arguments at: 0 -> selector
-    int size    = number_value(argument_at(receiver, 1).number);
+    int size    = argument_at(receiver, 1).number->value;
     object key  = argument_at(receiver, 2);
 
     env_object new_env = make_env(key, env, size);
@@ -85,7 +85,7 @@ accessor_for(env, parent)
 
 with_pre_eval2(env_class_scope_key, context, key, w_size,
     // XXX breaks encapsulation
-    int size    = number_value(w_size.number);
+    int size    = w_size.number->value;
     env_object new_env = make_env(key, (object)fools_system->nil, size);
     return_from_context(context, (object)new_env);
 )
