@@ -23,7 +23,7 @@
 #include <system/type/array.h>
 #include <system/type/dict.h>
 #include <system/type/string.h>
-#include <system/type/number.h>
+#include <system/type/smallint.h>
 #include <system/type/char.h>
 
 #include <system/runtime/env.h>
