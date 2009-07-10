@@ -132,19 +132,19 @@ static void inline inputfile_size() {
 
 define_bootstrapping_type(infile,
     // instance
-    if_selector(selector, READ,     inputfile_read);
-    if_selector(selector, END,      inputfile_end);
-    if_selector(selector, SIZE,     inputfile_size);
-    if_selector(selector, READ_ALL, inputfile_read_all);,
+    if_selector(READ,     inputfile_read);
+    if_selector(END,      inputfile_end);
+    if_selector(SIZE,     inputfile_size);
+    if_selector(READ_ALL, inputfile_read_all);,
     // class
-    if_selector(selector, ON,       inputfile_open);
+    if_selector(ON,       inputfile_open);
 )
 
 define_bootstrapping_type(outfile,
     // instance
-    if_selector(selector, WRITE,    outputfile_write);,
+    if_selector(WRITE,    outputfile_write);,
     // class
-    if_selector(selector, ON,       outputfile_open);
+    if_selector(ON,       outputfile_open);
 )
 
 char* unicode_to_ascii(const wchar_t* str) {

@@ -3,7 +3,7 @@
 
 define_bootstrapping_class(number,
     // instance
-    if_selector(selector, EVAL,         identity);,
+    if_selector(EVAL,         identity);,
     // class
     // XXX to avoid compiler warnings
     if (0) { printf("%p", selector.pointer); }

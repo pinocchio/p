@@ -53,11 +53,11 @@ with_pre_eval1(ivar_new, context, w_name,
 
 define_bootstrapping_class(ivar,
     // instance
-    if_selector(selector, EVAL,         ivar_eval);
-    if_selector(selector, ASSIGN_IN,    ivar_assign);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    if_selector(EVAL,         ivar_eval);
+    if_selector(ASSIGN_IN,    ivar_assign);
+    if_selector(PRE_EVAL_ENV, pre_eval_env);,
     // class
-    if_selector(selector, SIZED,        ivar_new); // should rename SIZED...
+    if_selector(SIZED,        ivar_new); // should rename SIZED...
 )
 
 // Object creation

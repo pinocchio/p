@@ -56,10 +56,10 @@ with_pre_eval2(icall_new, context, w_self, w_size,
 
 define_bootstrapping_class(icall,
     // instance
-    if_selector(selector, EVAL,         icall_eval);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    if_selector(EVAL,         icall_eval);
+    if_selector(PRE_EVAL_ENV, pre_eval_env);,
     // class
-    if_selector(selector, TO_SIZED,     icall_new);
+    if_selector(TO_SIZED,     icall_new);
 )
 
 // Object creation

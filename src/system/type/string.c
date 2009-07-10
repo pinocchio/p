@@ -69,13 +69,13 @@ static void inline istring_size() {
 
 define_bootstrapping_type(istring,
     // instance
-    if_selector(selector, EVAL,             identity);
-    if_selector(selector, PRE_EVAL_ENV,     identity);
-    if_selector(selector, OBJECT_AT,        string_at);
-    if_selector(selector, SIZE,             istring_size);
-    if_selector(selector, OBJECT_AT_PUT,    string_at_put);,
+    if_selector(EVAL,             identity);
+    if_selector(PRE_EVAL_ENV,     identity);
+    if_selector(OBJECT_AT,        string_at);
+    if_selector(SIZE,             istring_size);
+    if_selector(OBJECT_AT_PUT,    string_at_put);,
     // class
-    if_selector(selector, SIZED,            string_new);
+    if_selector(SIZED,            string_new);
 )
 
 // Object creation

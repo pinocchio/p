@@ -29,10 +29,10 @@ with_pre_eval2(iassign_new, context, variable, expression,
 
 define_bootstrapping_class(iassign,
     // instance
-    if_selector(selector, EVAL,             iassign_eval);
-    if_selector(selector, PRE_EVAL_ENV,     pre_eval_env);,
+    if_selector(EVAL,             iassign_eval);
+    if_selector(PRE_EVAL_ENV,     pre_eval_env);,
     // class
-    if_selector(selector, TO_EXPRESSION,    iassign_new);
+    if_selector(TO_EXPRESSION,    iassign_new);
 )
 
 // Object creation

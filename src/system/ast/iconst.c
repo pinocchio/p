@@ -9,11 +9,11 @@ with_pre_eval1(iconst_new, context, constant,
 
 define_bootstrapping_class(iconst, 
     // instance
-    if_selector(selector, EVAL,         iconst_constant);
-    if_selector(selector, PRE_EVAL_ENV, pre_eval_env);,
+    if_selector(EVAL,         iconst_constant);
+    if_selector(PRE_EVAL_ENV, pre_eval_env);,
     // class
     // TODO: rename SIZED to something related to the action symbol: basicNew:
-    if_selector(selector, SIZED,        iconst_new);
+    if_selector(SIZED,        iconst_new);
 )
 
 // Object creation

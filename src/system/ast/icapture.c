@@ -18,7 +18,7 @@ static void inline icapture_instance() {
 
 define_bootstrapping_class(icapture,
     // instance
-    if_selector(selector, EVAL, icapture_eval);,
+    if_selector(EVAL, icapture_eval);,
     // class
-    if_selector(selector, INSTANCE, icapture_instance);
+    if_selector(INSTANCE, icapture_instance);
 )

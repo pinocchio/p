@@ -107,12 +107,12 @@ with_pre_eval2(iscoped_class_new, context, expression, argsize,
 
 define_bootstrapping_class(iscoped,
     // instance
-    if_selector(selector, IAPPLY,   iscoped_iapply);
-    if_selector(selector, SCOPE,    iscoped_scope);
-    if_selector(selector, APPLY_IN, iscoped_apply_in);
-    if_selector(selector, SHIFT,    iscoped_shift);,
+    if_selector(IAPPLY,   iscoped_iapply);
+    if_selector(SCOPE,    iscoped_scope);
+    if_selector(APPLY_IN, iscoped_apply_in);
+    if_selector(SHIFT,    iscoped_shift);,
     // class
-    if_selector(selector, NEW_SIZE, iscoped_class_new);
+    if_selector(NEW_SIZE, iscoped_class_new);
 )
 
 // Object creation

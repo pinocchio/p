@@ -92,11 +92,11 @@ with_pre_eval2(env_class_scope_key, context, key, w_size,
 
 define_bootstrapping_class(env,
     // instance
-    if_selector(selector, FETCH_FROM,       env_fetch_from);
-    if_selector(selector, STORE_AT_IN,      env_store_at_in);
-    if_selector(selector, SUBSCOPE_KEY,     env_subscope);
-    if_selector(selector, SET_PARENT,       env_set_parent);
-    if_selector(selector, PARENT,           env_parent);,
+    if_selector(FETCH_FROM,       env_fetch_from);
+    if_selector(STORE_AT_IN,      env_store_at_in);
+    if_selector(SUBSCOPE_KEY,     env_subscope);
+    if_selector(SET_PARENT,       env_set_parent);
+    if_selector(PARENT,           env_parent);,
     // class
-    if_selector(selector, SCOPE_KEY, env_class_scope_key);
+    if_selector(SCOPE_KEY, env_class_scope_key);
 )

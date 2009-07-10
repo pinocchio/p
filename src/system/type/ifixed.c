@@ -58,11 +58,11 @@ static void inline ifixed_new() {
 
 define_bootstrapping_type(ifixed, 
     // instance
-    if_selector(selector, OBJECT_AT,        ifixed_at);
-    if_selector(selector, OBJECT_AT_PUT,    ifixed_at_put);,
+    if_selector(OBJECT_AT,        ifixed_at);
+    if_selector(OBJECT_AT_PUT,    ifixed_at_put);,
     // class
-    if_selector(selector, NEW,          ifixed_new);
-    if_selector(selector, SIZE,         ifixed_size);
+    if_selector(NEW,          ifixed_new);
+    if_selector(SIZE,         ifixed_size);
 )
 
 with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
@@ -80,8 +80,8 @@ with_pre_eval1(ifixed_stub_class_new, context, size,
 
 define_bootstrapping_class(fixed,
     // instance
-    if_selector(selector, DISPATCH_DELEGATE_SIZE, ifixed_class_new);
-    if_selector(selector, WITH_SIZE, ifixed_stub_class_new);,
+    if_selector(DISPATCH_DELEGATE_SIZE, ifixed_class_new);
+    if_selector(WITH_SIZE, ifixed_stub_class_new);,
     // class
     // XXX using selector to avoid compiler warnings
     if (0) { printf("%p\n", selector.pointer); }

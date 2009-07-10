@@ -31,9 +31,9 @@ with_pre_eval1(iarray_new, context, w_size,
 
 define_bootstrapping_type(iarray,
     // instance
-    if_selector(selector, OBJECT_AT,        iarray_at);
-    if_selector(selector, OBJECT_AT_PUT,    iarray_at_put);
-    if_selector(selector, SIZE,             iarray_size);,
+    if_selector(OBJECT_AT,        iarray_at);
+    if_selector(OBJECT_AT_PUT,    iarray_at_put);
+    if_selector(SIZE,             iarray_size);,
     // class
-    if_selector(selector, SIZED,            iarray_new);
+    if_selector(SIZED,            iarray_new);
 )

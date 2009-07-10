@@ -61,7 +61,7 @@ static void inline cls##_##element() {\
         output = transfer();\
     }
 
-#define if_selector(selector, symb, todo)\
+#define if_selector(symb, todo)\
     if (selector.pointer == symb.pointer)\
         return todo();
 
@@ -93,7 +93,7 @@ with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
 void type##_##class_stub_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
-    if_selector(selector, SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
+    if_selector(SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
     doesnotunderstand(L""#type"_stubclass", selector);\
 }
 
@@ -103,7 +103,7 @@ void type##_##dispatch() {\
     context_object context = get_context();\
     if (context_size(context) >= 1) {\
         object selector = message(context);\
-        if_selector(selector, DELEGATE, object_delegate);\
+        if_selector(DELEGATE, object_delegate);\
         messages\
     }\
     fallback_shift(context);\
