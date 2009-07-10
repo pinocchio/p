@@ -15,6 +15,7 @@ system/runtime/env.c system/runtime/env.h\
 system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
 system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\
 system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
+system/type/symbol.c system/type/symbol.h\
 system/tool/ival.c system/tool/shift.h system/tool/ival.h system/tool/fallback.c\
 system/tool/fallback.h system/tool/shift.c
 

@@ -22,6 +22,7 @@
 #include <system/type/ifixed.h>
 #include <system/type/array.h>
 #include <system/type/dict.h>
+#include <system/type/symbol.h>
 #include <system/type/string.h>
 #include <system/type/smallint.h>
 #include <system/type/char.h>
@@ -127,15 +128,16 @@ void type##_##stub_dispatch() {\
         header(ifixed)  = fools_system->name##_##class;,\
         classmsgs)
 
+// TODO change back to static void
 #define with_pre_eval1(name, context, first, body)\
-static void name##_##do() {\
+void name##_##do() {\
     debug(#name"\n");\
     context_object context = get_context();\
     object first = argument_at(context, 1);\
     body;\
     debug("ret>>"#name"\n");\
 }\
-static void inline name() {\
+void inline name() {\
     context_object context = get_context();\
     assert_argsize(context, 2);\
     push_eval_of(context, 1);\
@@ -143,7 +145,7 @@ static void inline name() {\
 }
 
 #define with_pre_eval2(name, context, first, second, body)\
-static void name##_##do() {\
+void name##_##do() {\
     debug(#name"\n");\
     context_object context = get_context();\
     object first  = argument_at(context, 1);\
@@ -151,7 +153,7 @@ static void name##_##do() {\
     body;\
     debug("ret>>"#name"\n");\
 }\
-static void inline name() {\
+void inline name() {\
     context_object context = get_context();\
     assert_argsize(context, 3);\
     push_eval_of(context, 1);\
@@ -160,7 +162,7 @@ static void inline name() {\
 }
 
 #define with_pre_eval3(name, context, first, second, third, body)\
-static void name##_##do() {\
+void name##_##do() {\
     debug(#name"\n");\
     context_object context = get_context();\
     object first  = argument_at(context, 1);\
@@ -169,7 +171,7 @@ static void name##_##do() {\
     body;\
     debug("ret>>"#name"\n");\
 }\
-static void inline name() {\
+void inline name() {\
     context_object context = get_context();\
     assert_argsize(context, 4);\
     push_eval_of(context, 1);\

@@ -31,7 +31,7 @@
 
 struct env;
 struct object_object;
-struct string;
+struct symbol;
 struct number;
 struct array;
 struct dict;
@@ -64,7 +64,8 @@ typedef struct ifixed*           ifixed_object;
 typedef struct fallback*         fallback_object;
 typedef struct env*              env_object;
 typedef struct object_object*    object_object;
-typedef struct string*           string_object;
+typedef struct symbol*           symbol_object;
+typedef struct symbol*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
 typedef struct dict*             dict_object;
@@ -93,6 +94,7 @@ typedef union {
     ifixed_object       ifixed;
     fallback_object     fallback;
     object_object       object;
+    symbol_object       symbol;
     string_object       string;
     number_object       number;
     array_object        array;
@@ -162,6 +164,7 @@ struct fools {
     // Classes related to object formats
     declare_type(ifixed);
     declare_type(iarray);
+    declare_type(isymbol);
     declare_type(istring);
     declare_type(idict);
     declare_type(infile);

@@ -4,9 +4,18 @@
 
 // TODO cache the first 128 chars
 
+
+void inline char_hash() {
+    context_object context = get_context();
+    chr_object self        = context->self.chr;
+    // TODO switch to long
+    return_from_context(context, (object) make_number((int)self->value));
+}
+
 define_bootstrapping_type(char,
     // instance
-    if_selector(EVAL,         identity);,
+    if_selector(EVAL,         identity);
+    if_selector(HASH,         char_hash);,
     // class
     // XXX to avoid compiler warnings
     if (0) { printf("%p", selector.pointer); }
@@ -21,5 +30,6 @@ chr_object make_char(wchar_t value) {
 
 chr_object make_empty_char() {
     new_instance(chr);
+    result->value = NULL;
     return result;
 }

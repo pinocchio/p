@@ -9,6 +9,7 @@ extern chr_object    make_char(wchar_t value);
 extern chr_object    make_empty_char();
 
 struct chr {
+    number_object hash;
     wchar_t value;
 };
 

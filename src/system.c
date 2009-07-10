@@ -37,7 +37,6 @@ int ensure_greater_equals(int v1, int v2, const wchar_t* format, const char* fil
 }
 
 // Context handling
-
 void inline new_target(context_object context, object target) {
     context->self = target;
     context->code = ntarget(header(target.pointer));

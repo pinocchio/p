@@ -46,7 +46,7 @@ extern object READ_ALL;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\
-        name = make_symbol(value);\
+        name = (object)make_symbol(value);\
     }
 
 extern void bootstrap_scheme_symbols();
