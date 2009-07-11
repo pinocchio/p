@@ -4,9 +4,6 @@
 
 // TODO cache the first 128 chars
 
-// cache the empty char
-chr_object empty_chr_object;
-
 void inline char_hash() {
     context_object context = get_context();
     chr_object self        = context->self.chr;
@@ -25,8 +22,11 @@ define_bootstrapping_type(char,
 
 // Object creation
 chr_object make_char(wchar_t value) {
-    if (!value) { return empty_chr_object }
     new_instance(chr);
     result->value = value;
     return result;
+}
+
+chr_object make_empty_char() {
+    return make_char(L"");
 }
