@@ -2,13 +2,13 @@
 #include <assert.h>
 #include <thread.h>
 
-static ifixed_object inline ifixed_descr(object inst) {
-    return (ifixed_object)pheader(inst.pointer);
+static ifixed_t_object inline ifixed_descr(object inst) {
+    return (ifixed_t_object)pheader(inst.pointer);
 }
 
 with_pre_eval1(ifixed_at, context, idx,
     object self = context->self;
-    ifixed_object ifixed = ifixed_descr(self);
+    ifixed_t_object ifixed = ifixed_descr(self);
 
     // XXX breaks encapsulation.
     int index = idx.number->value;
@@ -22,7 +22,7 @@ with_pre_eval1(ifixed_at, context, idx,
 
 with_pre_eval2(ifixed_at_put, context, idx, value,
     object self = context->self;
-    ifixed_object ifixed = ifixed_descr(self);
+    ifixed_t_object ifixed = ifixed_descr(self);
 
     // XXX breaks encapsulation.
     int index = idx.number->value;
@@ -39,18 +39,18 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
 
 static void inline ifixed_size() {
     context_object context = get_context();
-    ifixed_object ifixed = context->self.ifixed;
+    ifixed_t_object ifixed = context->self.ifixed;
     return_from_context(context, (object)make_number(ifixed->size));
 }
 
-static object inline ifixed_inst(ifixed_object ifixed) {
+static object inline ifixed_inst(ifixed_t_object ifixed) {
     return (object)ifixed;
 }
 
 static void inline ifixed_new() {
     debug("ifixed>>new\n");
     context_object context = get_context();
-    ifixed_object ifixed = context->self.ifixed;
+    ifixed_t_object ifixed = context->self.ifixed;
     object_object instance = make_object(ifixed->size, ifixed_inst(ifixed));
     return_from_context(context, (object)instance);
     debug("ret>>ifixed>>new\n");
@@ -89,7 +89,7 @@ define_bootstrapping_class(fixed,
 
 // Object creation
 object make_class(object size, transfer_target cdispatch) {
-    new_instance(ifixed);
+    new_instance(ifixed_t);
     // XXX breaking encapsulation
     result->size            = size.number->value;
     result->cdisp           = (object)cdispatch;

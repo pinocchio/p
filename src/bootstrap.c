@@ -59,7 +59,6 @@ woodstock_t bootstrap() {
     woodstock->dict_class        = incomplete_class(dict);
     woodstock->runtime_env_class = incomplete_class(runtime_env);
     woodstock->fixed_class       = incomplete_class(fixed);
-    woodstock->ifixed_class      = incomplete_class(fixed);
     woodstock->ast_assign_class  = incomplete_class(ast_assign);
     woodstock->ast_call_class    = incomplete_class(ast_call);
     woodstock->ast_capture_class = incomplete_class(ast_capture);

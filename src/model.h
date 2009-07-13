@@ -50,7 +50,7 @@ struct ast_const;
 struct ast_var;
 struct ast_scoped;
 struct ast_capture;
-struct ifixed;
+struct ifixed_t;
 struct fallback;
 
 typedef struct ast_list*         ast_list_object;
@@ -60,7 +60,7 @@ typedef struct ast_const*        ast_const_object;
 typedef struct ast_var*          ast_var_object;
 typedef struct ast_scoped*       ast_scoped_object;
 typedef struct ast_capture*      ast_capture_object;
-typedef struct ifixed*           ifixed_object;
+typedef struct ifixed_t*         ifixed_t_object;
 typedef struct fallback*         fallback_object;
 typedef struct runtime_env*      runtime_env_object;
 typedef struct object_object*    object_object;
@@ -91,24 +91,24 @@ typedef union {
     ast_var_object         ivar;
     ast_scoped_object      iscoped;
     ast_capture_object     icapture;
-    ifixed_object       ifixed;
-    fallback_object     fallback;
-    object_object       object;
-    symbol_object       symbol;
-    string_object       string;
-    number_object       number;
-    array_object        array;
-    dict_object         dict;
-    nil_object          nil;
-    native_object       native;
-    native_class_object native_class;
-    context_object      context;
-    runtime_env_object  env;
-    transfer_target     target;
-    infile_object       infile;
-    outfile_object      outfile;
-    chr_object          chr;
-    pointer             pointer;
+    ifixed_t_object        ifixed;
+    fallback_object        fallback;
+    object_object          object;
+    symbol_object          symbol;
+    string_object          string;
+    number_object          number;
+    array_object           array;
+    dict_object            dict;
+    nil_object             nil;
+    native_object          native;
+    native_class_object    native_class;
+    context_object         context;
+    runtime_env_object     env;
+    transfer_target        target;
+    infile_object          infile;
+    outfile_object         outfile;
+    chr_object             chr;
+    pointer                pointer;
 } object;
 
 // TODO push these structs directly into the system/*/*.h
@@ -160,7 +160,6 @@ struct woodstock {
     object ast_scoped_class;
     object runtime_env_class;
     object fixed_class;
-    object ifixed_class;
 
     // Classes related to object formats
     declare_metaclass(array);

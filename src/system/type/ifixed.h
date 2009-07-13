@@ -9,7 +9,7 @@ extern object make_class(object size,
                          transfer_target cdispatch);
 
 
-struct ifixed {
+struct ifixed_t {
     object          cdisp;
     object          dispatch;
     object          delegate;
