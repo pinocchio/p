@@ -1,7 +1,14 @@
 #ifndef SYSTEM_ENV_H
 #define SYSTEM_ENV_H
 
-extern void env_stub_dispatch();
-extern void env_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(runtime_env);
+
+struct env {
+    object              scope;
+    object              parent;
+    array_object        values;
+};
+
 
 #endif // SYSTEM_ENV_H

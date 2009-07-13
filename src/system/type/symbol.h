@@ -1,11 +1,10 @@
 #ifndef SYSTEM_SYMBOL_H
 #define SYSTEM_SYMBOL_H
 
-extern wchar_t* wcsdup(const wchar_t* input);
+#include <system/type/type.h>
+export_type(symbol);
 
-extern void isymbol_stub_dispatch();
-extern void isymbol_class_dispatch();
-extern void isymbol_class_stub_dispatch();
+extern wchar_t* wcsdup(const wchar_t* input);
 
 extern symbol_object make_symbol(const wchar_t* value);
 

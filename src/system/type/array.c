@@ -29,7 +29,7 @@ with_pre_eval1(iarray_new, context, w_size,
     return_from_context(context, result);
 )
 
-define_bootstrapping_type(iarray,
+define_bootstrapping_type(array,
     // instance
     if_selector(OBJECT_AT,        iarray_at);
     if_selector(OBJECT_AT_PUT,    iarray_at_put);

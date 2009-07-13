@@ -57,7 +57,7 @@ void inline symbol_size() {
     return_from_context(context, (object)self->size);
 }
 
-define_bootstrapping_type(isymbol,
+define_bootstrapping_type(symbol,
     // instance
     if_selector(EVAL,         identity);
     if_selector(PRE_EVAL_ENV, identity);

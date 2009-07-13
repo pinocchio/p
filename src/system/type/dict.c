@@ -60,7 +60,7 @@ static void inline dict_new() {
     debug("ret>>dict>>new\n");
 }
 
-define_bootstrapping_type(idict,
+define_bootstrapping_type(dict,
     // instance
     if_selector(OBJECT_AT,        dict_at);
     if_selector(OBJECT_AT_PUT,    dict_at_put);,

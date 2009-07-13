@@ -1,9 +1,8 @@
 #ifndef SYSTEM_DICT_H
 #define SYSTEM_DICT_H
 
-extern void idict_stub_dispatch();
-extern void idict_class_dispatch();
-extern void idict_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(dict);
 
 extern dict_object make_dict(int size);
 

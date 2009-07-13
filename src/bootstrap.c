@@ -15,56 +15,63 @@ woodstock_t woodstock;
 #define build_native_class(header, cdisp)\
     (object)make_native_class(header, cdisp##_##stub_dispatch)
 
-#define incomplete_class(name)\
-    build_native_class(wrap_dispatcher(name##_##class_stub_dispatch),\
-                       name)
-
 #define incomplete_ifixed_class(name, size)\
     name = make_class((object)make_number(size), &ifixed_stub_dispatch);\
-    header(name.pointer) = woodstock->ifixed_stub_class;
+    header(name.pointer) = woodstock->ifixed_t_stub_class;
 
-#define incomplete_typed_class(type)\
-    build_native_class(woodstock->type##_##stub_class, type);
+#define incomplete_class(type)\
+    build_native_class(woodstock->type##_##t_stub_class, type);
 
 #define setup_type(type)\
-    woodstock->type##_##class =\
+    woodstock->type##_##t_class =\
         wrap_dispatcher(type##_##class_dispatch);\
-    woodstock->type##_##stub_class =\
+    woodstock->type##_##t_stub_class =\
         wrap_dispatcher(type##_##class_stub_dispatch);
     
 woodstock_t bootstrap() {
     woodstock                    = NEW(struct woodstock);
     woodstock->nil               = make_nil();
 
-    woodstock->ilist_class       = incomplete_class(ilist);
-    woodstock->iconst_class      = incomplete_class(iconst);
-    woodstock->icall_class       = incomplete_class(icall);
-    woodstock->iassign_class     = incomplete_class(iassign);
-    woodstock->ivar_class        = incomplete_class(ivar);
-    woodstock->icapture_class    = incomplete_class(icapture);
-    woodstock->iscoped_class     = incomplete_class(iscoped);
-    woodstock->env_class         = incomplete_class(env);
-    woodstock->fixed_class       = incomplete_class(fixed);
-    woodstock->number_class      = incomplete_class(number);
-
     /* Objects used for handling types; these should not be exposed to the
      * outside world as they are internal objects
      */
-    setup_type(ifixed);
-    setup_type(iarray);
-    setup_type(istring);
-    setup_type(idict);
-    setup_type(infile);
-    setup_type(outfile);
+    setup_type(array);
+    setup_type(ast_assign);
+    setup_type(ast_call);
+    setup_type(ast_capture);
+    setup_type(ast_const);
+    setup_type(ast_list);
+    setup_type(ast_scoped);
+    setup_type(ast_var);
     setup_type(char);
+    setup_type(dict);
+    setup_type(fixed);
+    setup_type(ifixed);
+    setup_type(infile);
+    setup_type(number);
+    setup_type(outfile);
+    setup_type(runtime_env);
+    setup_type(string);
+    setup_type(symbol);
 
-    woodstock->array_class       = incomplete_typed_class(iarray);
-    woodstock->string_class      = incomplete_typed_class(istring);
-    woodstock->symbol_class      = incomplete_typed_class(istring);
-    woodstock->dict_class        = incomplete_typed_class(idict);
-    woodstock->inputfile_class   = incomplete_typed_class(infile);
-    woodstock->outputfile_class  = incomplete_typed_class(outfile);
-    woodstock->chr_class         = incomplete_typed_class(char);
+    woodstock->array_class       = incomplete_class(array);
+    woodstock->chr_class         = incomplete_class(char);
+    woodstock->dict_class        = incomplete_class(dict);
+    woodstock->env_class         = incomplete_class(runtime_env);
+    woodstock->fixed_class       = incomplete_class(fixed);
+    woodstock->iassign_class     = incomplete_class(ast_assign);
+    woodstock->icall_class       = incomplete_class(ast_call);
+    woodstock->icapture_class    = incomplete_class(ast_capture);
+    woodstock->iconst_class      = incomplete_class(ast_const);
+    woodstock->ilist_class       = incomplete_class(ast_list);
+    woodstock->infile_class      = incomplete_class(infile);
+    woodstock->iscoped_class     = incomplete_class(ast_scoped);
+    woodstock->ivar_class        = incomplete_class(ast_var);
+    woodstock->number_class      = incomplete_class(number);
+    woodstock->outfile_class     = incomplete_class(outfile);
+    woodstock->string_class      = incomplete_class(string);   
+    woodstock->symbol_class      = incomplete_class(symbol);
+    
     incomplete_ifixed_class(woodstock->nil_class, 0);
 
     // Build after building the array_class!

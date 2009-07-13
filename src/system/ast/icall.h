@@ -2,8 +2,9 @@
 #define SYSTEM_ICALL_H
 
 // Creation
-extern void icall_stub_dispatch();
-extern void icall_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(ast_call);
+
 extern icall_object make_icall(object self, int argsize);
 
 // Accessors

@@ -27,7 +27,7 @@ with_pre_eval2(string_at_put, context, w_idx, w_char,
     pop_context();
 )
 
-define_bootstrapping_type(istring,
+define_bootstrapping_type(string,
     // instance
     if_selector(EVAL,          identity);
     if_selector(PRE_EVAL_ENV,  identity);

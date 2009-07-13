@@ -1,8 +1,9 @@
 #ifndef SYSTEM_ICONST_H
 #define SYSTEM_ICONST_H
 
-extern void iconst_stub_dispatch();
-extern void iconst_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(ast_const);
+
 extern iconst_object make_iconst(object constant);
 
 struct iconst {

@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 #define test_type(type)\
-    if (pheader(o.pointer) == woodstock->type##_##class.pointer) {\
+    if (pheader(o.pointer) == woodstock->type##_##t_class.pointer) {\
         printf(#type" at: %p\n", o.pointer);\
         return;\
     }
@@ -20,17 +20,17 @@ void print_object(object o) {
     }
 
     if (pheader(pheader(o.pointer)) ==
-            woodstock->istring_stub_class.pointer ||
+            woodstock->string_t_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
-            woodstock->istring_class.pointer) {
+            woodstock->string_t_class.pointer) {
         printf("%ls", o.string->value);
         return;
     }
 
     if (pheader(pheader(o.pointer)) ==
-            woodstock->char_stub_class.pointer ||
+            woodstock->char_t_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
-            woodstock->char_class.pointer) {
+            woodstock->char_t_class.pointer) {
         printf("%lc", o.chr->value);
         return;
     }
@@ -50,22 +50,18 @@ void print_object(object o) {
         return;
     }
 
-    test_type(iconst);
-    test_type(iassign);
+    test_type(ast_const);
+    test_type(ast_assign);
     if (pheader(o.pointer) == woodstock->ivar_class.pointer) {
         printf("ivar(\"%ls\")\n", o.ivar->name->value);
         return;
     }
-    test_type(icall);
-    test_type(ilist);
-    test_type(iscoped);
+    test_type(ast_call);
+    test_type(ast_list);
+    test_type(ast_scoped);
     test_type(ifixed);
     test_type(dict);
-    test_type(env);
-    if (*pheader(o.pointer) == &ifixed_dispatch) {
-        printf("an object at: %p\n", o.pointer);
-        return;
-    }
+    test_type(runtime_env);
     if (pheader(o.pointer) == woodstock->array_class.pointer) {
         printf("array(%i) [\n", array_size(o.array));
         int i;

@@ -27,7 +27,7 @@ with_pre_eval2(iassign_new, context, variable, expression,
     return_from_context(context, (object)make_iassign(variable, expression));
 )
 
-define_bootstrapping_class(iassign,
+define_bootstrapping_class(ast_assign,
     // instance
     if_selector(EVAL,             iassign_eval);
     if_selector(PRE_EVAL_ENV,     pre_eval_env);,

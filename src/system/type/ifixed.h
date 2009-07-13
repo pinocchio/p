@@ -1,14 +1,10 @@
 #ifndef SYSTEM_IFIXED_H
 #define SYSTEM_IFIXED_H
 
-extern void ifixed_dispatch();
-extern void ifixed_stub_dispatch();
-extern void ifixed_class_dispatch();
-extern void ifixed_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(ifixed);
+export_type(fixed);
 
-extern void fixed_dispatch();
-extern void fixed_stub_dispatch();
-extern void fixed_class_stub_dispatch();
 extern object make_class(object size,
                          transfer_target cdispatch);
 

@@ -22,7 +22,7 @@ array_object make_array(int size) {
 }
 
 env_object make_env(object scope, object parent, int size) {
-    new_instance(env);
+    new_instance(runtime_env);
     result->scope       = scope;
     result->parent      = parent;
     result->values      = make_array(size);

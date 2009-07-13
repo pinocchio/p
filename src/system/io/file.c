@@ -82,23 +82,23 @@ static string_object utf8_read_all(FILE* fp) {
     return result;
 }
 
-static void inline inputfile_read() {
+static void inline infile_read() {
     context_object context = get_context();
-    inputfile_object file = context->self.inputfile;
-    chr_object result = make_empty_char();
+    infile_object file     = context->self.infile;
+    chr_object result      = make_empty_char();
     FILE* fp = file->file;
     utf8_read_char(fp, &result->value);
     return_from_context(context, (object)result);
 }
 
-with_pre_eval1(outputfile_write, context, wchr,
+with_pre_eval1(outfile_write, context, wchr,
     // make the compiler warnin disappear
     if (0) { wchr = wchr; }
 )
 
-static void inline inputfile_end() {
+static void inline infile_end() {
     context_object context = get_context();
-    FILE* file = context->self.inputfile->file;
+    FILE* file = context->self.infile->file;
     if (file_at_end(file)) {
         return_from_context(context, woodstock->true);
     } else {
@@ -106,47 +106,47 @@ static void inline inputfile_end() {
     }
 }
 
-static void inline inputfile_read_all() {
+static void inline infile_read_all() {
     context_object context = get_context();
-    inputfile_object file = context->self.inputfile;
+    infile_object file = context->self.infile;
     string_object result = utf8_read_all(file->file);
     return_from_context(context, (object)result);
 }
 
-with_pre_eval1(inputfile_open, context, name,
+with_pre_eval1(infile_open, context, name,
     // XXX todo: check type
     wchar_t* filename = name.string->value;
-    return_from_context(context, make_inputfile(filename));
+    return_from_context(context, make_infile(filename));
 )
 
-with_pre_eval1(outputfile_open, context, name,
+with_pre_eval1(outfile_open, context, name,
     // XXX todo: check type
     wchar_t* filename = name.string->value;
-    return_from_context(context, make_outputfile(filename));
+    return_from_context(context, make_outfile(filename));
 )
 
-static void inline inputfile_size() {
+static void inline infile_size() {
     context_object context = get_context();
-    inputfile_object f = context->self.inputfile;
+    infile_object f = context->self.infile;
     int size = utf8_size(f->file);
     return_from_context(context, (object)make_number(size));
 }
 
 define_bootstrapping_type(infile,
     // instance
-    if_selector(READ,     inputfile_read);
-    if_selector(END,      inputfile_end);
-    if_selector(SIZE,     inputfile_size);
-    if_selector(READ_ALL, inputfile_read_all);,
+    if_selector(READ,     infile_read);
+    if_selector(END,      infile_end);
+    if_selector(SIZE,     infile_size);
+    if_selector(READ_ALL, infile_read_all);,
     // class
-    if_selector(ON,       inputfile_open);
+    if_selector(ON,       infile_open);
 )
 
 define_bootstrapping_type(outfile,
     // instance
-    if_selector(WRITE,    outputfile_write);,
+    if_selector(WRITE,    outfile_write);,
     // class
-    if_selector(ON,       outputfile_open);
+    if_selector(ON,       outfile_open);
 )
 
 char* unicode_to_ascii(const wchar_t* str) {
@@ -162,16 +162,16 @@ char* unicode_to_ascii(const wchar_t* str) {
 }
 
 // Object creation
-object make_inputfile(const wchar_t* filename) {
+object make_infile(const wchar_t* filename) {
     char* charname = unicode_to_ascii(filename);
-    new_instance(inputfile);
+    new_instance(infile);
     result->file = fopen(charname, "r");
     return (object)result;
 }
 
-object make_outputfile(const wchar_t* filename) {
+object make_outfile(const wchar_t* filename) {
     char* charname = unicode_to_ascii(filename);
-    new_instance(outputfile);
+    new_instance(outfile);
     result->file = fopen(charname, "w");
     return (object)result;
 }

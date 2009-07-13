@@ -90,7 +90,7 @@ with_pre_eval2(env_class_scope_key, context, key, w_size,
     return_from_context(context, (object)new_env);
 )
 
-define_bootstrapping_class(env,
+define_bootstrapping_class(runtime_env,
     // instance
     if_selector(FETCH_FROM,       env_fetch_from);
     if_selector(STORE_AT_IN,      env_store_at_in);

@@ -125,7 +125,7 @@ void type##_##stub_dispatch() {\
     define_bootstrapping_instance(name, instmsgs)\
     define_bcls(name,\
         ifixed->cdisp   = (object)&name##_##dispatch;\
-        header(ifixed)  = woodstock->name##_##class;,\
+        header(ifixed)  = woodstock->name##_##t_class;,\
         classmsgs)
 
 // TODO change back to static void

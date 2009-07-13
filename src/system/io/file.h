@@ -7,14 +7,14 @@ extern void infile_class_stub_dispatch();
 extern void outfile_stub_dispatch();
 extern void outfile_class_dispatch();
 extern void outfile_class_stub_dispatch();
-extern object make_inputfile(const wchar_t* filename);
-extern object make_outputfile(const wchar_t* filename);
+extern object make_infile(const wchar_t* filename);
+extern object make_outfile(const wchar_t* filename);
 
-struct inputfile {
+struct infile {
     FILE* file;
 };
 
-struct outputfile {
+struct outfile {
     FILE* file;
 };
 

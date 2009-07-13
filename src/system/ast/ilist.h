@@ -2,8 +2,8 @@
 #define SYSTEM_ILIST_H
 
 // Creation
-extern void ilist_stub_dispatch();
-extern void ilist_class_stub_dispatch();
+#include <system/type/type.h>
+export_type(ast_list);
 
 extern ilist_object make_ilist(int size);
 

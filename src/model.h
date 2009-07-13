@@ -17,7 +17,7 @@
 
 #define new_instance(cls)\
     cls##_##object result = NEW(struct cls);\
-    header(result)        = (object)woodstock->cls##_##class;
+    header(result)        = (object)woodstock->cls##_##t_class;
 
 #define header(o) (*(object*)POINTER_DEC(o))
 
@@ -25,9 +25,9 @@
 
 #define ntarget(o) native_target((o).native)
 
-#define declare_type(name)\
-    object name##_##class;\
-    object name##_##stub_class;
+#define declare_metaclass(name)\
+    object name##_##t_class;\
+    object name##_##t_stub_class;
 
 struct env;
 struct object_object;
@@ -39,8 +39,8 @@ struct nil;
 struct native;
 struct native_class;
 struct context;
-struct inputfile;
-struct outputfile;
+struct infile;
+struct outfile;
 struct chr;
 
 struct ilist;
@@ -62,7 +62,7 @@ typedef struct iscoped*          iscoped_object;
 typedef struct icapture*         icapture_object;
 typedef struct ifixed*           ifixed_object;
 typedef struct fallback*         fallback_object;
-typedef struct env*              env_object;
+typedef struct runtime_env*      runtime_env_object;
 typedef struct object_object*    object_object;
 typedef struct symbol*           symbol_object;
 typedef struct symbol*           string_object;
@@ -73,8 +73,8 @@ typedef struct nil*              nil_object;
 typedef struct native*           native_object;
 typedef struct native_class*     native_class_object;
 typedef struct context*          context_object;
-typedef struct inputfile*        inputfile_object;
-typedef struct outputfile*       outputfile_object;
+typedef struct infile*           infile_object;
+typedef struct outfile*          outfile_object;
 typedef struct chr*              chr_object;
 typedef void**                   pointer;
 
@@ -103,14 +103,15 @@ typedef union {
     native_object       native;
     native_class_object native_class;
     context_object      context;
-    env_object          env;
+    runtime_env_object  env;
     transfer_target     target;
-    inputfile_object    inputfile;
-    outputfile_object   outputfile;
+    infile_object       infile;
+    outfile_object      outfile;
     chr_object          chr;
     pointer             pointer;
 } object;
 
+// TODO push these structs directly into the system/*/*.h
 struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
@@ -161,14 +162,24 @@ struct woodstock {
     object env_class;
 
     // Classes related to object formats
-    declare_type(ifixed);
-    declare_type(iarray);
-    declare_type(isymbol);
-    declare_type(istring);
-    declare_type(idict);
-    declare_type(infile);
-    declare_type(outfile);
-    declare_type(char);
+    declare_metaclass(array);
+    declare_metaclass(ast_assign);
+    declare_metaclass(ast_call);
+    declare_metaclass(ast_capture);
+    declare_metaclass(ast_const);
+    declare_metaclass(ast_list);
+    declare_metaclass(ast_scoped);
+    declare_metaclass(ast_var);
+    declare_metaclass(char);
+    declare_metaclass(dict);
+    declare_metaclass(fixed);
+    declare_metaclass(ifixed);
+    declare_metaclass(infile);
+    declare_metaclass(number);
+    declare_metaclass(outfile);
+    declare_metaclass(runtime_env);
+    declare_metaclass(string);
+    declare_metaclass(symbol);
 
     // Level shifting
     object level_shifter;
@@ -179,8 +190,8 @@ struct woodstock {
     object symbol_class;
     object array_class;
     object dict_class;
-    object inputfile_class;
-    object outputfile_class;
+    object infile_class;
+    object outfile_class;
     object nil_class;
     object chr_class;
 };

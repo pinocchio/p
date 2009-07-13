@@ -12,7 +12,7 @@ system/ast/ilist.h system/ast/iconst.h system/ast/iscoped.h\
 system/ast/iconst.c system/ast/iscoped.c\
 system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
-system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
+system/type/type.h system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
 system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\
 system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
 system/type/symbol.c system/type/symbol.h\
