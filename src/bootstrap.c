@@ -6,7 +6,7 @@
 #include <scheme/natives.h>
 
 // System global
-p_object woodstock;
+woodstock_t woodstock;
 
 #define make_sized_object(cls, size)\
     ((object)make_object(size, (object)woodstock->cls))
@@ -32,8 +32,8 @@ p_object woodstock;
     woodstock->type##_##stub_class =\
         wrap_dispatcher(type##_##class_stub_dispatch);
     
-p_object bootstrap() {
-    woodstock                    = NEW(struct fools);
+woodstock_t bootstrap() {
+    woodstock                    = NEW(struct woodstock);
     woodstock->nil               = make_nil();
 
     woodstock->ilist_class       = incomplete_class(ilist);

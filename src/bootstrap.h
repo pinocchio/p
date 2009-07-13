@@ -4,7 +4,7 @@
 #include <model.h>
 #include <scheme/symbols.h>
 
-extern p_object woodstock;
-extern p_object bootstrap();
+extern woodstock_t woodstock;
+extern woodstock_t bootstrap();
 
 #endif // BOOTSTRAP_H

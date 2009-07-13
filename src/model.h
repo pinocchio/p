@@ -80,8 +80,8 @@ typedef void**                   pointer;
 
 typedef void (*transfer_target)();
 
-struct fools;
-typedef struct fools*       p_object;
+struct woodstock;
+typedef struct woodstock*       woodstock_t;
 
 typedef union {
     ilist_object        ilist;
@@ -138,7 +138,7 @@ struct native_class {
     object          delegate;
 };
 
-struct fools {
+struct woodstock {
     // Objects known to the system
     nil_object          nil;
     object              true;
