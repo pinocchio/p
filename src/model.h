@@ -141,25 +141,25 @@ struct native_class {
 
 struct woodstock {
     // Objects known to the system
-    nil_object          nil;
-    object              true;
-    object              false;
     array_object        empty;
-    object              ast_capture;
-    object              ifixed;
+    nil_object          nil;
     object              array;
+    object              ast_capture;
     object              error;
+    object              false;
+    object              ifixed;
+    object              true;
 
     // Evaluation related classes
-    object ast_list_class;
-    object ast_call_class;
-    object ast_const_class;
-    object ast_var_class;
     object ast_assign_class;
+    object ast_call_class;
     object ast_capture_class;
+    object ast_const_class;
+    object ast_list_class;
     object ast_scoped_class;
-    object runtime_env_class;
+    object ast_var_class;
     object fixed_class;
+    object runtime_env_class;
 
     // Classes related to object formats
     declare_metaclass(array);
@@ -185,15 +185,15 @@ struct woodstock {
     object level_shifter;
 
     // Minimal native classes
-    object number_class;
-    object string_class;
-    object symbol_class;
     object array_class;
+    object chr_class;
     object dict_class;
     object infile_class;
-    object outfile_class;
     object nil_class;
-    object chr_class;
+    object number_class;
+    object outfile_class;
+    object string_class;
+    object symbol_class;
 };
 
 extern object_object            make_object(int size, object interpreter);
