@@ -71,13 +71,6 @@ static void inline cls##_##element() {\
     assert_argsize(context, 1);\
     object selector = message(context);
 
-#define define_bootstrapping_class(type, instmsgs, classmsgs)\
-    define_bootstrapping_instance(type, instmsgs);\
-    define_bcls(type,\
-                ifixed->cdisp    = (object)&type##_##dispatch;\
-                *pheader(ifixed) = &type##_##class_dispatch;,\
-                classmsgs)
-
 #define define_bcls(type, boot, messages)\
 void type##_##class_dispatch() {\
     dispatch_header(context, selector);\

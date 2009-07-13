@@ -54,7 +54,7 @@ with_pre_eval2(icall_new, context, w_self, w_size,
     return_from_context(context, (object)make_icall(w_self, size));
 )
 
-define_bootstrapping_class(ast_call,
+define_bootstrapping_type(ast_call,
     // instance
     if_selector(EVAL,         icall_eval);
     if_selector(PRE_EVAL_ENV, pre_eval_env);,

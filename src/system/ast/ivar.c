@@ -51,7 +51,7 @@ with_pre_eval1(ivar_new, context, w_name,
     return_from_context(context, (object)make_ivar(name));
 )
 
-define_bootstrapping_class(ast_var,
+define_bootstrapping_type(ast_var,
     // instance
     if_selector(EVAL,         ivar_eval);
     if_selector(ASSIGN_IN,    ivar_assign);

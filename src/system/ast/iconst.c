@@ -7,7 +7,7 @@ with_pre_eval1(iconst_new, context, constant,
     return_from_context(context, (object)make_iconst(constant));
 )
 
-define_bootstrapping_class(ast_const, 
+define_bootstrapping_type(ast_const, 
     // instance
     if_selector(EVAL,         iconst_constant);
     if_selector(PRE_EVAL_ENV, pre_eval_env);,

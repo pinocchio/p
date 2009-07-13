@@ -11,16 +11,16 @@ woodstock_t woodstock;
 #define make_sized_object(cls, size)\
     ((object)make_object(size, (object)woodstock->cls))
 
-#define wrap_dispatcher(dispatch) (object)make_native(dispatch)
-#define build_native_class(header, cdisp)\
-    (object)make_native_class(header, cdisp##_##stub_dispatch)
-
 #define incomplete_ifixed_class(name, size)\
     name = make_class((object)make_number(size), &ifixed_stub_dispatch);\
     header(name.pointer) = woodstock->ifixed_t_stub_class;
 
 #define incomplete_class(type)\
-    build_native_class(woodstock->type##_##t_stub_class, type);
+    (object)make_native_class(woodstock->type##_##t_stub_class,\
+                              type##_##stub_dispatch)
+
+#define wrap_dispatcher(dispatch)\
+    (object)make_native(dispatch)
 
 #define setup_type(type)\
     woodstock->type##_##t_class =\

@@ -105,7 +105,7 @@ with_pre_eval2(iscoped_class_new, context, expression, argsize,
     debug("ret>>iscopecls>>new:size:\n");
 )
 
-define_bootstrapping_class(ast_scoped,
+define_bootstrapping_type(ast_scoped,
     // instance
     if_selector(IAPPLY,   iscoped_iapply);
     if_selector(SCOPE,    iscoped_scope);

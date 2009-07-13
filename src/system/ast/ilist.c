@@ -40,7 +40,7 @@ with_pre_eval1(ilist_new, context, w_size,
     return_from_context(context, (object)make_ilist(size));
 )
 
-define_bootstrapping_class(ast_list, 
+define_bootstrapping_type(ast_list, 
     // instance
     if_selector(EVAL,         ilist_eval);
     if_selector(PRE_EVAL_ENV, pre_eval_env);,

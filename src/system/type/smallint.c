@@ -7,7 +7,7 @@ static void inline smallint_hash() {
     return_from_context(context, context->self);
 }
 
-define_bootstrapping_class(number,
+define_bootstrapping_type(number,
     // instance
     if_selector(EVAL,         identity);
     if_selector(HASH,         smallint_hash);,

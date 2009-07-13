@@ -16,7 +16,7 @@ static void inline icapture_instance() {
     debug("ret>>icapture_class>>instance\n");
 }
 
-define_bootstrapping_class(ast_capture,
+define_bootstrapping_type(ast_capture,
     // instance
     if_selector(EVAL, icapture_eval);,
     // class
