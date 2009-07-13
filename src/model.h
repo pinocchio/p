@@ -198,7 +198,7 @@ struct woodstock {
 
 extern object_object            make_object(int size, object interpreter);
 extern array_object             make_array(int size);
-extern env_object               make_env(object scope, object parent, int size);
+extern runtime_env_object       make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 
 extern native_object            make_native(transfer_target native);
@@ -216,8 +216,8 @@ extern object           inline symbol_known_to_the_vm(int index);
 extern object           inline object_at(object_object object, int index);
 extern void             inline object_at_put(object_object o,
                                              int index, object value);
-extern object           inline env_at(env_object env, int index);
-extern void             inline env_at_put(env_object env, int index, object value);
+extern object           inline env_at(runtime_env_object env, int index);
+extern void             inline env_at_put(runtime_env_object env, int index, object value);
 #define assert_argsize(context, size)\
     if (ensure_greater_equals(context_size(context), size,\
         L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\
