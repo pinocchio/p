@@ -29,7 +29,7 @@
     object name##_##t_class;\
     object name##_##t_stub_class;
 
-struct env;
+struct runtime_env;
 struct object_object;
 struct symbol;
 struct number;

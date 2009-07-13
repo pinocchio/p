@@ -14,7 +14,7 @@
     (object)make_iconst((object)woodstock->name);
 
 #define import_class(name)\
-    import_object(name##_class);
+    import_object(name##_##t_class);
 
 int main () {
     bootstrap();
@@ -23,7 +23,7 @@ int main () {
 
     runtime_env_object env = empty_env;
 
-    object Env              = import_class(env);
+    object Env              = import_class(runtime_env);
     object IFixed           = import_class(fixed); 
     object String           = import_class(string);
     object Symbol           = import_class(symbol);
@@ -39,8 +39,8 @@ int main () {
     object IAssign          = import_class(ast_assign);
     object ICapture         = import_class(ast_capture);
     object IScoped          = import_class(ast_scoped);
-    object InputFile        = import_class(inputfile);
-    object OutputFile       = import_class(outputfile);
+    object InputFile        = import_class(infile);
+    object OutputFile       = import_class(outfile);
     object Character        = import_class(chr);
 
     object ifixed           = import_object(ifixed);
