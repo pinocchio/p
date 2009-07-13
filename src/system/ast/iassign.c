@@ -4,7 +4,7 @@
 // iassign>>eval:
 static void inline iassign_eval() {
     context_object iassign_context = get_context();
-    iassign_object iassign = iassign_context->self.iassign;
+    ast_assign_object iassign = iassign_context->self.iassign;
 
     debug("iassign>>eval\n");
     
@@ -36,8 +36,8 @@ define_bootstrapping_class(ast_assign,
 )
 
 // Object creation
-iassign_object make_iassign(object variable, object expression) {
-    new_instance(iassign);
+ast_assign_object make_iassign(object variable, object expression) {
+    new_instance(ast_assign);
     result->variable        = variable;
     result->expression      = expression;
     return result;

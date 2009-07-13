@@ -6,7 +6,7 @@ static void inline ivar_assign() {
     context_object ivar_context = get_context();
     assert_argsize(ivar_context, 2);
 
-    ivar_object ivar = ivar_context->self.ivar;
+    ast_var_object ivar = ivar_context->self.ivar;
 
     debug("ivar>>assign:\n");
 
@@ -29,7 +29,7 @@ static void inline ivar_assign() {
 // ivar>>eval:
 static void inline ivar_eval() {
     context_object ivar_context = get_context();
-    ivar_object ivar = ivar_context->self.ivar;
+    ast_var_object ivar = ivar_context->self.ivar;
     debug("ivar>>eval \"%ls\"\n", ivar->name->value);
 
     object env = ivar_context->env;
@@ -61,8 +61,8 @@ define_bootstrapping_class(ast_var,
 )
 
 // Object creation
-ivar_object make_ivar(const wchar_t* name) {
-    new_instance(ivar);
+ast_var_object make_ivar(const wchar_t* name) {
+    new_instance(ast_var);
     result->name            = make_string(name);
     result->scope           = (object)woodstock->nil;
     result->index           = make_number(0);

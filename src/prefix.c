@@ -32,13 +32,13 @@ int main () {
     object Dictionary       = import_class(dict);
     object UndefinedObject  = import_class(nil);
 
-    object IList            = import_class(ilist);
-    object ICall            = import_class(icall);
-    object IConst           = import_class(iconst);
-    object IVar             = import_class(ivar);
-    object IAssign          = import_class(iassign);
-    object ICapture         = import_class(icapture);
-    object IScoped          = import_class(iscoped);
+    object IList            = import_class(ast_list);
+    object ICall            = import_class(ast_call);
+    object IConst           = import_class(ast_const);
+    object IVar             = import_class(ast_var);
+    object IAssign          = import_class(ast_assign);
+    object ICapture         = import_class(ast_capture);
+    object IScoped          = import_class(ast_scoped);
     object InputFile        = import_class(inputfile);
     object OutputFile       = import_class(outputfile);
     object Character        = import_class(chr);

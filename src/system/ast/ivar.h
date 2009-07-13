@@ -4,9 +4,9 @@
 #include <system/type/type.h>
 export_type(ast_var);
 
-extern ivar_object make_ivar(const wchar_t* name);
+extern ast_var_object make_ivar(const wchar_t* name);
 
-struct ivar {
+struct ast_var {
     string_object   name;
     object          scope;
     number_object   index;

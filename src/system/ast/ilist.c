@@ -6,7 +6,7 @@
 static void inline ilist_eval() {
     debug("ilist>>eval\n");
     context_object ilist_context = get_context();
-    ilist_object ilist = ilist_context->self.ilist;
+    ast_list_object ilist = ilist_context->self.ilist;
 
     if (ilist_size(ilist) == 0) {
         pop_context();
@@ -49,32 +49,32 @@ define_bootstrapping_class(ast_list,
 )
 
 // Object creation
-ilist_object make_ilist(int size) {
-    ilist_object result = NEW_ARRAYED(ilist_object, object, size + 1);
+ast_list_object make_ilist(int size) {
+    ast_list_object result = NEW_ARRAYED(ast_list_object, object, size + 1);
     header(result)      = (object)woodstock->ilist_class;
     result->size        = size;
     return result;
 }
 
 // Accessors
-int inline ilist_size(ilist_object ilist) {
+int inline ilist_size(ast_list_object ilist) {
     return ilist->size;
 }
 
-void inline ilist_check_bounds(ilist_object ilist, int index) {
+void inline ilist_check_bounds(ast_list_object ilist, int index) {
     assert(0 <= index);
-    assert(index < ilist_size(ilist));
+    assert(index < ilist_size(ast_list));
 }
 
-object inline raw_ilist_at(ilist_object ilist, int index) {
+object inline raw_ilist_at(ast_list_object ilist, int index) {
     return ilist->instructions[index];
 }
 
-void inline raw_ilist_at_put(ilist_object ilist, int index, object value) {
+void inline raw_ilist_at_put(ast_list_object ilist, int index, object value) {
     ilist->instructions[index] = value;
 }
 
-void inline ilist_at_put(ilist_object ilist, int index, object value) {
+void inline ilist_at_put(ast_list_object ilist, int index, object value) {
     ilist_check_bounds(ilist, index);
     raw_ilist_at_put(ilist, index, value);
 }

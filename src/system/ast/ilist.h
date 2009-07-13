@@ -5,18 +5,18 @@
 #include <system/type/type.h>
 export_type(ast_list);
 
-extern ilist_object make_ilist(int size);
+extern ast_list_object make_ilist(int size);
 
 // Accessors
-extern object      inline raw_ilist_at(ilist_object ilist, int index);
-extern void        inline raw_ilist_at_put(ilist_object ilist,
+extern object      inline raw_ilist_at(ast_list_object ilist, int index);
+extern void        inline raw_ilist_at_put(ast_list_object ilist,
                                            int index, object i);
-extern void        inline ilist_at_put(ilist_object ilist,
+extern void        inline ilist_at_put(ast_list_object ilist,
                                        int index, object i);
-extern int         inline ilist_size(ilist_object ilist);
+extern int         inline ilist_size(ast_list_object ilist);
 
 // Structure
-struct ilist {
+struct ast_list {
     int             size;
     object          instructions[];
 };

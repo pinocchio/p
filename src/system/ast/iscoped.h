@@ -8,7 +8,7 @@ extern object make_iscoped(object scope,
                            object expression,
                            object argsize);
 
-struct iscoped {
+struct ast_scoped {
     object          scope;
     object          expression;
     object          argsize;

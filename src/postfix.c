@@ -11,7 +11,7 @@
 
     object const_scoped_main = (object)make_iconst(scoped_main);
 
-    icall_object maincall = make_icall(const_scoped_main, 0);
+    ast_call_object maincall = make_icall(const_scoped_main, 0);
     
     context_object make_eval_context(ci, maincall, env); 
     

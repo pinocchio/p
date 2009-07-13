@@ -28,9 +28,9 @@ void print_object(object o) {
     }
 
     if (pheader(pheader(o.pointer)) ==
-            woodstock->char_t_stub_class.pointer ||
+            woodstock->chr_t_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
-            woodstock->char_t_class.pointer) {
+            woodstock->chr_t_class.pointer) {
         printf("%lc", o.chr->value);
         return;
     }

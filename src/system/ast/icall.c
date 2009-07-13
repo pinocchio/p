@@ -5,7 +5,7 @@
 static void inline icall_invoke_env() {
     context_object icall_context = get_context();
 
-    icall_object icall = icall_context->self.icall;
+    ast_call_object icall = icall_context->self.icall;
 
     object env          = icall_context->env;
     object self         = argument_at(icall_context, 1);
@@ -32,7 +32,7 @@ static void inline icall_invoke_env() {
 static void inline icall_eval() {
     context_object icall_context = get_context();
 
-    icall_object icall = icall_context->self.icall;
+    ast_call_object icall = icall_context->self.icall;
     debug("icall>>eval %p\n", icall);
 
     object env = icall_context->env;
@@ -63,18 +63,18 @@ define_bootstrapping_class(ast_call,
 )
 
 // Object creation
-icall_object make_icall(object self, int argsize) {
-    new_instance(icall);
+ast_call_object make_icall(object self, int argsize) {
+    new_instance(ast_call);
     result->self        = self;
     result->arguments   = make_array(argsize);
     return result;
 }
 
 // Accessors
-void inline set_callarg(icall_object icall, int index, object value) {
+void inline set_callarg(ast_call_object icall, int index, object value) {
     array_at_put(icall->arguments, index, value);
 }
 
-void inline set_callmsg(icall_object icall, object msg) {
+void inline set_callmsg(ast_call_object icall, object msg) {
     set_callarg(icall, 0, msg);
 }

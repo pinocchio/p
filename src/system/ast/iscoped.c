@@ -9,7 +9,7 @@ static void inline iscoped_eval() {
     debug("iscoped>>doWithArguments:\n");
     context_object iscoped_context = get_context();
 
-    iscoped_object iscoped = iscoped_context->self.iscoped;
+    ast_scoped_object iscoped = iscoped_context->self.iscoped;
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
@@ -58,7 +58,7 @@ static void inline iscoped_iapply() {
     object arguments = argument_at(iscoped_context, 1);
     set_argument(iscoped_context, 0, arguments);
 
-    iscoped_object iscoped = iscoped_context->self.iscoped;
+    ast_scoped_object iscoped = iscoped_context->self.iscoped;
 
     object env = iscoped_context->env;
     int argsize = iscoped->argsize.number->value;
@@ -117,7 +117,7 @@ define_bootstrapping_class(ast_scoped,
 
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
-    new_instance(iscoped);
+    new_instance(ast_scoped);
     assert(scope.pointer != NULL);
     result->scope       = scope;
     result->expression  = expression;

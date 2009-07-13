@@ -11,7 +11,7 @@ void inline char_hash() {
     return_from_context(context, (object) make_number((int)self->value));
 }
 
-define_bootstrapping_type(char,
+define_bootstrapping_type(chr,
     // instance
     if_selector(EVAL,         identity);
     if_selector(HASH,         char_hash);,

@@ -5,14 +5,14 @@
 #include <system/type/type.h>
 export_type(ast_call);
 
-extern icall_object make_icall(object self, int argsize);
+extern ast_call_object make_icall(object self, int argsize);
 
 // Accessors
-extern void        inline set_callarg(icall_object icall, int index, object value);
-extern void        inline set_callmsg(icall_object icall, object msg);
+extern void        inline set_callarg(ast_call_object icall, int index, object value);
+extern void        inline set_callmsg(ast_call_object icall, object msg);
 
 // Structure
-struct icall {
+struct ast_call {
     object          self;
     array_object    arguments;
 };

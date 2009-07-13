@@ -17,8 +17,8 @@ define_bootstrapping_class(ast_const,
 )
 
 // Object creation
-iconst_object make_iconst(object constant) {
-    new_instance(iconst);
+ast_const_object make_iconst(object constant) {
+    new_instance(ast_const);
     result->constant        = constant;
     return result;
 }

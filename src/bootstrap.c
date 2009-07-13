@@ -43,7 +43,7 @@ woodstock_t bootstrap() {
     setup_type(ast_list);
     setup_type(ast_scoped);
     setup_type(ast_var);
-    setup_type(char);
+    setup_type(chr);
     setup_type(dict);
     setup_type(fixed);
     setup_type(ifixed);
@@ -55,7 +55,7 @@ woodstock_t bootstrap() {
     setup_type(symbol);
 
     woodstock->array_class       = incomplete_class(array);
-    woodstock->chr_class         = incomplete_class(char);
+    woodstock->chr_class         = incomplete_class(chr);
     woodstock->dict_class        = incomplete_class(dict);
     woodstock->env_class         = incomplete_class(runtime_env);
     woodstock->fixed_class       = incomplete_class(fixed);

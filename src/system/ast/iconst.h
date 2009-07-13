@@ -4,9 +4,9 @@
 #include <system/type/type.h>
 export_type(ast_const);
 
-extern iconst_object make_iconst(object constant);
+extern ast_const_object make_iconst(object constant);
 
-struct iconst {
+struct ast_const {
     object          constant;
 };
 

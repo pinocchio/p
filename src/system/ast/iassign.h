@@ -4,9 +4,9 @@
 #include <system/type/type.h>
 export_type(ast_assign);
 
-extern iassign_object make_iassign(object variable, object expression);
+extern ast_assign_object make_iassign(object variable, object expression);
 
-struct iassign {
+struct ast_assign {
     object          variable;
     object          expression;
 };
