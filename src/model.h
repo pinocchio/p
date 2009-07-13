@@ -121,7 +121,7 @@ struct array {
     object              values[];
 };
 
-struct env {
+struct runtime_env {
     object              scope;
     object              parent;
     array_object        values;

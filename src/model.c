@@ -21,7 +21,7 @@ array_object make_array(int size) {
     return result;
 }
 
-env_object make_env(object scope, object parent, int size) {
+runtime_env_object make_env(object scope, object parent, int size) {
     new_instance(runtime_env);
     result->scope       = scope;
     result->parent      = parent;
@@ -83,10 +83,10 @@ void inline object_at_put(object_object o, int index, object value) {
     o->fields[index] = value;
 }
 
-object inline env_at(env_object env, int index) {
+object inline env_at(runtime_env_object env, int index) {
     return array_at(env->values, index);
 }
 
-void inline env_at_put(env_object env, int index, object value) {
+void inline env_at_put(runtime_env_object env, int index, object value) {
     array_at_put(env->values, index, value);
 }
