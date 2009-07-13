@@ -74,7 +74,7 @@ with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
 
 with_pre_eval1(ifixed_stub_class_new, context, size,
     object ifixed           = make_class(size, &ifixed_stub_dispatch);
-    header(ifixed.pointer)  = fools_system->ifixed_stub_class;
+    header(ifixed.pointer)  = woodstock->ifixed_stub_class;
     return_from_context(context, ifixed);
 )
 

@@ -6,20 +6,20 @@
 
 #define header_size sizeof(object)
 
-#define PINC(p) (((pointer) p) + 1) 
-#define PDEC(p) (((pointer) p) - 1)
+#define POINTER_INC(p) (((pointer) p) + 1) 
+#define POINTER_DEC(p) (((pointer) p) - 1)
 
 #define NEW(layout) NEW_ARRAYED(layout*, layout, 1)
 
 #define NEW_ARRAYED(type, layout, size) \
             (type)(\
-               PINC(FOOLS_ALLOC(header_size + sizeof(layout[size]))))
+               POINTER_INC(PALLOC(header_size + sizeof(layout[size]))))
 
 #define new_instance(cls)\
     cls##_##object result = NEW(struct cls);\
-    header(result)        = (object)fools_system->cls##_##class;
+    header(result)        = (object)woodstock->cls##_##class;
 
-#define header(o) (*(object*)PDEC(o))
+#define header(o) (*(object*)POINTER_DEC(o))
 
 #define pheader(o) header(o).pointer
 
@@ -81,7 +81,7 @@ typedef void**                   pointer;
 typedef void (*transfer_target)();
 
 struct fools;
-typedef struct fools*       fools_object;
+typedef struct fools*       p_object;
 
 typedef union {
     ilist_object        ilist;
@@ -99,7 +99,6 @@ typedef union {
     number_object       number;
     array_object        array;
     dict_object         dict;
-    fools_object        fools;
     nil_object          nil;
     native_object       native;
     native_class_object native_class;
@@ -214,8 +213,8 @@ extern void             inline env_at_put(env_object env, int index, object valu
     { return; }
     
 
-#define empty_env make_env((object)fools_system->nil,\
-                           (object)fools_system->nil, 0)
+#define empty_env make_env((object)woodstock->nil,\
+                           (object)woodstock->nil, 0)
 
 #define array_check_bounds(array, index)\
     ensure(0 <= index, L"Out of bounds");\

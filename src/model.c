@@ -5,18 +5,18 @@
 
 object_object make_object(int size, object interpreter) {
     object_object result  = NEW_ARRAYED(object_object, object, size);
-    header(result)          = interpreter;
+    header(result)        = interpreter;
     int i;
     for (i = 0; i < size; i++) {
-        object_at_put(result, i, (object)fools_system->nil);
+        object_at_put(result, i, (object)woodstock->nil);
     }
     return result;
 }
 
 array_object make_array(int size) {
-    if (size == 0) { return fools_system->empty; }
+    if (size == 0) { return woodstock->empty; }
     array_object result = (array_object)make_object(size + 1,
-                            (object)fools_system->array_class);
+                            (object)woodstock->array_class);
     result->size        = size;
     return result;
 }
@@ -35,7 +35,7 @@ nil_object make_nil() {
 
 native_object make_native(transfer_target native) {
     // Natives don't need a header, so we just allocate what we need.
-    native_object result    = (native_object)FOOLS_ALLOC(sizeof(struct native));
+    native_object result    = (native_object)PALLOC(sizeof(struct native));
     result->target          = (object)native;
     return result;
 }

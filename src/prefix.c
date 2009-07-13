@@ -11,7 +11,7 @@
 #include <locale.h>
 
 #define import_object(name)\
-    (object)make_iconst((object)fools_system->name);
+    (object)make_iconst((object)woodstock->name);
 
 #define import_class(name)\
     import_object(name##_class);

@@ -4,7 +4,7 @@
 #include <model.h>
 #include <scheme/symbols.h>
 
-extern fools_object fools_system;
-extern fools_object bootstrap();
+extern p_object woodstock;
+extern p_object bootstrap();
 
 #endif // BOOTSTRAP_H

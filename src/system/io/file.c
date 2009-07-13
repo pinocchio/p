@@ -100,9 +100,9 @@ static void inline inputfile_end() {
     context_object context = get_context();
     FILE* file = context->self.inputfile->file;
     if (file_at_end(file)) {
-        return_from_context(context, fools_system->true);
+        return_from_context(context, woodstock->true);
     } else {
-        return_from_context(context, fools_system->false);
+        return_from_context(context, woodstock->false);
     }
 }
 
@@ -151,7 +151,7 @@ define_bootstrapping_type(outfile,
 
 char* unicode_to_ascii(const wchar_t* str) {
     int len = wcslen(str);
-    char* charname = (char*)FOOLS_ALLOC(sizeof(char[len]));
+    char* charname = (char*)PALLOC(sizeof(char[len]));
 
     if (wcstombs(charname, str, len) != len) {
         printf("String not ASCII compatible!\n");

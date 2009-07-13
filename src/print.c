@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 #define test_type(type)\
-    if (pheader(o.pointer) == fools_system->type##_##class.pointer) {\
+    if (pheader(o.pointer) == woodstock->type##_##class.pointer) {\
         printf(#type" at: %p\n", o.pointer);\
         return;\
     }
@@ -14,23 +14,23 @@
 
 void print_object(object o) {
 
-    if (pheader(o.pointer) == fools_system->number_class.pointer) {
+    if (pheader(o.pointer) == woodstock->number_class.pointer) {
         printf("%i", o.number->value);
         return;
     }
 
     if (pheader(pheader(o.pointer)) ==
-            fools_system->istring_stub_class.pointer ||
+            woodstock->istring_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
-            fools_system->istring_class.pointer) {
+            woodstock->istring_class.pointer) {
         printf("%ls", o.string->value);
         return;
     }
 
     if (pheader(pheader(o.pointer)) ==
-            fools_system->char_stub_class.pointer ||
+            woodstock->char_stub_class.pointer ||
             pheader(pheader(o.pointer)) ==
-            fools_system->char_class.pointer) {
+            woodstock->char_class.pointer) {
         printf("%lc", o.chr->value);
         return;
     }
@@ -45,14 +45,14 @@ void print_object(object o) {
         return;
     }
 
-    if (o.nil == fools_system->nil) {
+    if (o.nil == woodstock->nil) {
         printf("nil\n");
         return;
     }
 
     test_type(iconst);
     test_type(iassign);
-    if (pheader(o.pointer) == fools_system->ivar_class.pointer) {
+    if (pheader(o.pointer) == woodstock->ivar_class.pointer) {
         printf("ivar(\"%ls\")\n", o.ivar->name->value);
         return;
     }
@@ -66,7 +66,7 @@ void print_object(object o) {
         printf("an object at: %p\n", o.pointer);
         return;
     }
-    if (pheader(o.pointer) == fools_system->array_class.pointer) {
+    if (pheader(o.pointer) == woodstock->array_class.pointer) {
         printf("array(%i) [\n", array_size(o.array));
         int i;
         for (i = 0; i < array_size(o.array); i++) {

@@ -12,7 +12,7 @@ static void inline icapture_eval() {
 static void inline icapture_instance() {
     debug("icapture_class>>instance\n");
     context_object context = get_context();
-    return_from_context(context, fools_system->icapture);
+    return_from_context(context, woodstock->icapture);
     debug("ret>>icapture_class>>instance\n");
 }
 

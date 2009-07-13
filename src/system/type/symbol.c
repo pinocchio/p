@@ -6,7 +6,7 @@
 
 wchar_t* wcsdup(const wchar_t* input) {
     int len         = wcslen(input) + 1;
-    wchar_t* output = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t) * len);
+    wchar_t* output = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
     int i           = 0;
     for (; i < len; i++) {
         output[i] = input[i];
@@ -73,16 +73,16 @@ symbol_object make_symbol(const wchar_t* value) {
     result->hash         = NULL;
     result->value        = wcsdup(value);
     result->size         = make_number(wcslen(value));
-    header(result)       = (object)fools_system->symbol_class;
+    header(result)       = (object)woodstock->symbol_class;
     return result;
 }
 
 symbol_object make_symbol_sized(int size) {
     symbol_object result = NEW(struct symbol);
     result->hash         = NULL;
-    result->value        = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t[size]));
+    result->value        = (wchar_t*)PALLOC(sizeof(wchar_t[size]));
     result->size         = make_number(size);
-    header(result)       = (object)fools_system->symbol_class;
+    header(result)       = (object)woodstock->symbol_class;
     return result;
 }
 

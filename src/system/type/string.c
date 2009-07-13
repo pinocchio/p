@@ -4,6 +4,10 @@
 #include <wchar.h>
 #include <string.h>
 
+int inline string_equals(string_object string1, string_object string2) {
+    return symbol_equals((symbol_object) string1, (symbol_object) string2);
+}
+
 with_pre_eval1(string_new, context, w_size,
     // XXX breaking encapsulation
     int size = w_size.number->value;
@@ -41,7 +45,7 @@ string_object make_string(const wchar_t* value) {
     result->hash         = NULL;
     result->value        = wcsdup(value);
     result->size         = make_number(wcslen(value));
-    header(result)       = (object)fools_system->string_class;
+    header(result)       = (object)woodstock->string_class;
     return result;
 }
 
@@ -49,8 +53,9 @@ string_object make_string_sized(int size) {
     // string and symbol share the same struct
     string_object result = NEW(struct symbol);
     result->hash         = NULL;
-    result->value        = (wchar_t*)FOOLS_ALLOC(sizeof(wchar_t[size]));
+    result->value        = (wchar_t*)PALLOC(sizeof(wchar_t[size]));
     result->size         = make_number(size);
-    header(result)       = (object)fools_system->string_class;
+    header(result)       = (object)woodstock->string_class;
     return result;
 }
+

@@ -16,22 +16,21 @@
         bootstrap();
 
 SETUP(test_header)
-    string_object string1 = NEW(struct string);
-    string_object string2 = NEW(struct string);
+    string_object string1 = NEW(struct symbol);
+    string_object string2 = NEW(struct symbol);
     
     header(string1)       = (object) string2;
     assert(header(string1).string == string2);
 }
 
 SETUP(test_array)
-
     array_object a = make_array(100);
     assert(a->size == 100);
 
     int i;
 
     for(i = 0; i < 100; i++) {
-        assert(array_at(a, i).nil == fools_system->nil);
+        assert(array_at(a, i).nil == woodstock->nil);
         array_at_put(a, i, (object)make_number(i));
     }
     
@@ -54,12 +53,12 @@ SETUP(test_string_equals)
 }
 
 SETUP(test_object_object)
-    object_object result = make_object(10, (object)fools_system->nil);
+    object_object result = make_object(10, (object)woodstock->nil);
 
-    assert(header(result).nil == fools_system->nil);
+    assert(header(result).nil == woodstock->nil);
     int i;
     for (i = 0; i < 10; i++) {
-        assert(object_at(result, i).nil == fools_system->nil);
+        assert(object_at(result, i).nil == woodstock->nil);
     }
 }
 
@@ -67,7 +66,7 @@ SETUP(test_transfer_empty_ilist)
 
     ilist_object ilist = make_ilist(0);
 
-    context_object make_eval_context(ci, ilist, fools_system->nil);
+    context_object make_eval_context(ci, ilist, woodstock->nil);
     transfer();
 }
 
@@ -79,7 +78,7 @@ SETUP(test_transfer_empty_ilist_in_ilist)
     ilist_at_put(ilist, 0, (object)ilist2);
     ilist_at_put(ilist, 1, (object)ilist2);
 
-    context_object make_eval_context(ci, ilist, fools_system->nil);
+    context_object make_eval_context(ci, ilist, woodstock->nil);
 
     transfer();
 }
@@ -89,7 +88,7 @@ SETUP(test_transfer_iconst)
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
 
-    context_object make_eval_context(ci, iconst, fools_system->nil);
+    context_object make_eval_context(ci, iconst, woodstock->nil);
 
     object result = transfer();
 
@@ -104,7 +103,7 @@ SETUP(test_return_of_ilist)
 
     ilist_at_put(ilist, 0, (object)iconst);
 
-    context_object make_eval_context(ci, ilist, fools_system->nil);
+    context_object make_eval_context(ci, ilist, woodstock->nil);
 
     object result = transfer();
 
@@ -121,7 +120,7 @@ SETUP(test_env_lookup)
     object v3 = (object)make_string(L"v3");
 
     env_object env1 = make_env(e1k,
-                               (object)fools_system->nil,
+                               (object)woodstock->nil,
                                1);
 
     env_object env2 = make_env(e2k,
@@ -183,8 +182,8 @@ SETUP(test_env_lookup)
 
 SETUP(test_iassign_ivar)
 
-    env_object k = make_env((object)fools_system->nil,
-                            (object)fools_system->nil,
+    env_object k = make_env((object)woodstock->nil,
+                            (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
@@ -201,8 +200,8 @@ SETUP(test_iassign_ivar)
 
 SETUP(test_ivar_read)
 
-    env_object k = make_env((object)fools_system->nil,
-                            (object)fools_system->nil,
+    env_object k = make_env((object)woodstock->nil,
+                            (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
     iconst_object iconst = make_iconst(v);
@@ -242,8 +241,8 @@ SETUP(test_icall)
     set_callarg(icall, 0, v);
 
     context_object make_eval_context(ci, icall,
-        make_env((object)fools_system->nil,
-                 (object)fools_system->nil,
+        make_env((object)woodstock->nil,
+                 (object)woodstock->nil,
                  0));
 
     transfer();
@@ -253,7 +252,7 @@ SETUP(test_icall)
 
 SETUP(test_new_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscoped_class);
+    iconst_object iconst = make_iconst(woodstock->iscoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -266,8 +265,8 @@ SETUP(test_new_iscoped)
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
 
-    env_object start = make_env((object)fools_system->nil,
-                                (object)fools_system->nil,
+    env_object start = make_env((object)woodstock->nil,
+                                (object)woodstock->nil,
                                 0);
 
     context_object make_eval_context(ci, icall, start);
@@ -279,7 +278,7 @@ SETUP(test_new_iscoped)
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target.target == &shift_level);
 
-    assert(pheader(iscope) == fools_system->iscoped_class.pointer);
+    assert(pheader(iscope) == woodstock->iscoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
     assert(iscope->scope.env == start);
 
@@ -287,7 +286,7 @@ SETUP(test_new_iscoped)
 
 SETUP(test_eval_iscoped)
 
-    iconst_object iconst = make_iconst(fools_system->iscoped_class);
+    iconst_object iconst = make_iconst(woodstock->iscoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -300,8 +299,8 @@ SETUP(test_eval_iscoped)
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
 
-    env_object start = make_env((object)fools_system->nil,
-                                (object)fools_system->nil,
+    env_object start = make_env((object)woodstock->nil,
+                                (object)woodstock->nil,
                                 0);
 
     context_object make_eval_context(ci, icall, start);
@@ -323,10 +322,10 @@ SETUP(test_eval_iscoped)
 
 SETUP(test_icapture)
     
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
-    context_object make_eval_context(ci, fools_system->icapture, env);
+    context_object make_eval_context(ci, woodstock->icapture, env);
 
     object result = transfer();
 
@@ -335,10 +334,10 @@ SETUP(test_icapture)
 
 SETUP(test_env_parent)
     
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)fools_system->nil,
+    env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
     icall_object icall = make_icall(
@@ -354,13 +353,13 @@ SETUP(test_env_parent)
 
 SETUP(test_capture_parent)
     
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)fools_system->nil,
+    env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    icall_object icall = make_icall(fools_system->icapture, 1);
+    icall_object icall = make_icall(woodstock->icapture, 1);
     set_callmsg(icall, PARENT);
     context_object make_eval_context(ci, icall, env2);
 
@@ -371,8 +370,8 @@ SETUP(test_capture_parent)
 
 SETUP(test_make_function_no_args)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     array_object args = make_array(1);
     array_at_put(args, 0, (object)make_ivar(L"iv"));
@@ -387,7 +386,7 @@ SETUP(test_make_function_no_args)
     object result = transfer();
 
     iscoped_object iscope = object_at(result.object, 0).iscoped;
-    assert(pheader(iscope) == fools_system->iscoped_class.pointer);
+    assert(pheader(iscope) == woodstock->iscoped_class.pointer);
     assert(iscope->scope.env == env);
 
 }
@@ -395,13 +394,13 @@ SETUP(test_make_function_no_args)
 SETUP(test_ilist_pass_context)
 
     ilist_object ilist = make_ilist(1);
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)fools_system->nil,
+    env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    icall_object icall = make_icall(fools_system->icapture, 1);
+    icall_object icall = make_icall(woodstock->icapture, 1);
     set_callmsg(icall, PARENT);
 
     ilist_at_put(ilist, 0, (object)icall);
@@ -415,8 +414,8 @@ SETUP(test_ilist_pass_context)
 
 SETUP(test_eval_function_no_args)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
 
     iconst_object the_instr = make_iconst((object)make_number(42));
@@ -444,8 +443,8 @@ SETUP(test_eval_function_no_args)
 
 SETUP(test_make_function_1_arg)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
 
 
@@ -466,8 +465,8 @@ SETUP(test_make_function_1_arg)
 
 SETUP(test_eval_function_1_arg)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
 
 
@@ -500,8 +499,8 @@ SETUP(test_eval_function_1_arg)
 
 SETUP(test_eval_nested_function)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     ivar_object ivar = make_ivar(L"iv");
     array_object arguments = make_array(1);
@@ -553,7 +552,7 @@ object create_class_dispatch() {
                         (method 'APPLY_IN args env)))))))
 */
 define_symbol(SYMBOL_doesNotUnderstand, L"DNU");
-object null         = (object)make_iconst((object)fools_system->nil);
+object null         = (object)make_iconst((object)woodstock->nil);
 object ivar_3_self = (object)make_ivar(L"self");
 object ivar_4_env = (object)make_ivar(L"env");
 object ivar_5_args = (object)make_ivar(L"args");
@@ -642,14 +641,14 @@ return make_dispatch(array_42_lambda_2_x, (object)icall_41_lambda_6_x);
 
 SETUP(test_make_ifixed)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    icall_object icall4(icall, (object)make_iconst(fools_system->ifixed),
+    icall_object icall4(icall, (object)make_iconst(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE,
                         class_dispatch,
-                        (object)make_iconst((object)fools_system->nil),
+                        (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
 
     context_object make_eval_context(ci, icall, env);
@@ -657,7 +656,7 @@ SETUP(test_make_ifixed)
     object result = transfer();    
 
     assert(result.ifixed->size == 5);
-    assert(result.ifixed->delegate.nil == fools_system->nil);
+    assert(result.ifixed->delegate.nil == woodstock->nil);
 
     //assert((pointer)*PINC(result.ifixed->interp.pointer) == result.pointer);
     
@@ -665,14 +664,14 @@ SETUP(test_make_ifixed)
 
 SETUP(test_ifixed_natives)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    icall_object icall4(icall, (object)make_iconst(fools_system->ifixed),
+    icall_object icall4(icall, (object)make_iconst(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE,
                         class_dispatch,
-                        (object)make_iconst((object)fools_system->nil),
+                        (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
 
     context_object make_eval_context(ci, icall, env);
@@ -680,7 +679,7 @@ SETUP(test_ifixed_natives)
     object ifixed = transfer();    
 
     assert(ifixed.ifixed->size == 5);
-    assert(ifixed.ifixed->delegate.nil == fools_system->nil);
+    assert(ifixed.ifixed->delegate.nil == woodstock->nil);
 
     icall1(icall, make_iconst(ifixed), SIZE);
     make_eval_context(ci, icall, env);
@@ -689,7 +688,7 @@ SETUP(test_ifixed_natives)
 
     assert(result.number->value == 5);
 
-    icall1(icall, make_iconst(ifixed), NEW);
+    icall1(icall, make_iconst(ifixed), BASICNEW);
     make_eval_context(ci, icall, env);
 
     transfer();
@@ -699,21 +698,21 @@ SETUP(test_ifixed_natives)
 
 SETUP(test_ifixed_object)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    icall_object icall4(icall, (object)make_iconst(fools_system->ifixed),
+    icall_object icall4(icall, (object)make_iconst(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE,
                         class_dispatch,
-                        (object)make_iconst((object)fools_system->nil),
+                        (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
 
     context_object make_eval_context(ci, icall, env);
 
     object ifixed = transfer();    
 
-    icall1(icall, make_iconst(ifixed), NEW);
+    icall1(icall, make_iconst(ifixed), BASICNEW);
     make_eval_context(ci, icall, env);
 
     object thefixed = transfer();
@@ -729,14 +728,14 @@ SETUP(test_ifixed_object)
     make_eval_context(ci, icall, env);
 
     result = transfer();
-    assert(result.nil == fools_system->nil);
+    assert(result.nil == woodstock->nil);
 
     icall2(icall, make_iconst(thefixed), OBJECT_AT,
            (object)make_iconst((object)make_number(4)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
-    assert(result.nil == fools_system->nil);
+    assert(result.nil == woodstock->nil);
 
     icall3(icall, make_iconst(thefixed),
            OBJECT_AT_PUT, (object)make_iconst((object)make_number(3)),
@@ -756,21 +755,21 @@ SETUP(test_ifixed_object)
 
 SETUP(test_ifixed_dispatch)
 
-    env_object env = make_env((object)fools_system->nil,
-                              (object)fools_system->nil, 0);
+    env_object env = make_env((object)woodstock->nil,
+                              (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    icall_object icall4(icall, (object)make_iconst(fools_system->ifixed),
+    icall_object icall4(icall, (object)make_iconst(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE,
                         class_dispatch,
-                        (object)make_iconst((object)fools_system->nil),
+                        (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(2))); // superclass + methoddict
 
     context_object make_eval_context(ci, icall, env);
 
     object class_ifixed = transfer();    
 
-    icall1(icall, make_iconst(class_ifixed), NEW);
+    icall1(icall, make_iconst(class_ifixed), BASICNEW);
     make_eval_context(ci, icall, env);
 
     object theclass = transfer();
@@ -798,7 +797,7 @@ SETUP(test_ifixed_dispatch)
 
     object_at_put(theclass.object, 1, (object)methods);
 
-    icall4(icall, (object)make_iconst(fools_system->ifixed),
+    icall4(icall, (object)make_iconst(woodstock->ifixed),
                   DISPATCH_DELEGATE_SIZE,
                   class_dispatch,
                   (object)make_iconst(theclass),
@@ -808,12 +807,12 @@ SETUP(test_ifixed_dispatch)
 
     object instance_ifixed = transfer();    
 
-    icall1(icall, make_iconst(instance_ifixed), NEW);
+    icall1(icall, make_iconst(instance_ifixed), BASICNEW);
     make_eval_context(ci, icall, env);
 
     object instance = transfer();
 
-    icall1(icall, make_iconst(instance), NEW);
+    icall1(icall, make_iconst(instance), BASICNEW);
     make_eval_context(ci, icall, env);
 
     object result = transfer();

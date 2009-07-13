@@ -64,7 +64,7 @@ define_bootstrapping_class(ivar,
 ivar_object make_ivar(const wchar_t* name) {
     new_instance(ivar);
     result->name            = make_string(name);
-    result->scope           = (object)fools_system->nil;
+    result->scope           = (object)woodstock->nil;
     result->index           = make_number(0);
     return result;
 }

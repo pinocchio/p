@@ -158,7 +158,7 @@ preval1(error, context, message,
 object scheme_error;
 
 preval1(error_handler, context, error_handler,
-    fools_system->error     = error_handler;
+    woodstock->error     = error_handler;
     return_from_context(context, error_handler);
 )
 
@@ -183,8 +183,8 @@ void bootstrap_scheme() {
 
     scheme_continue = (object)make_native(&scheme_cont_func);
 
-    fools_system->true      = scheme_true;
-    fools_system->false     = scheme_false;
+    woodstock->true      = scheme_true;
+    woodstock->false     = scheme_false;
 
     init_op(callec);
     init_op(display);
@@ -192,5 +192,5 @@ void bootstrap_scheme() {
     init_direct_op(error);
     init_op(error_handler);
 
-    fools_system->error     = scheme_error;
+    woodstock->error     = scheme_error;
 }

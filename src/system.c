@@ -8,7 +8,7 @@
         return todo();
 void inline call_error(object message) {
     pop_context();
-    context_object context = make_context(fools_system->error, 1);
+    context_object context = make_context(woodstock->error, 1);
     set_argument(context, 0, message);
 }
 

@@ -6,6 +6,6 @@
 // make sure to disable thread support on OS X
 //      ./configure --disable-threads
 #include <gc/gc.h>
-#define FOOLS_ALLOC GC_MALLOC
+#define PALLOC GC_MALLOC
 
 #endif // GC_H

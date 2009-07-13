@@ -51,7 +51,7 @@ define_bootstrapping_class(ilist,
 // Object creation
 ilist_object make_ilist(int size) {
     ilist_object result = NEW_ARRAYED(ilist_object, object, size + 1);
-    header(result)      = (object)fools_system->ilist_class;
+    header(result)      = (object)woodstock->ilist_class;
     result->size        = size;
     return result;
 }

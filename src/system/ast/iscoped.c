@@ -85,7 +85,7 @@ accessor_for(iscoped, scope)
 
 void iscoped_shift() {
     context_object context = get_context();
-    object_object func = make_object(1, fools_system->level_shifter);
+    object_object func = make_object(1, woodstock->level_shifter);
     object_at_put(func, 0, context->self);
     return_from_context(context, (object)func);
 }
