@@ -21,7 +21,7 @@ int main () {
 
     setlocale(LC_ALL, "");
 
-    env_object env = empty_env;
+    runtime_env_object env = empty_env;
 
     object Env              = import_class(env);
     object IFixed           = import_class(fixed); 

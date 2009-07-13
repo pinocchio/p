@@ -83,7 +83,7 @@
   (let* ((size (length expressions))
          (name (make-var-name "ilist" 'lambda))
          (code (string-append
-                "ilist_object "
+                "ast_list_object "
                 name
                 " = make_ilist("
                 (number->string size)
@@ -116,7 +116,7 @@ extravars))))))))
     (list (string-append
            (car names)
            (car body)
-           "iassign_object " name
+           "ast_assign_object " name
            " = make_iassign(" (cadr names)
            ", (object)" (cadr body) ");\n")
           name
@@ -460,7 +460,7 @@ extravars))))))))
          (appname (cadr (car parts)))
          (name (make-var-name "icall" (string->symbol appname)))
          
-         (code (string-append "icall_object "
+         (code (string-append "ast_call_object "
                               name
                               " = make_icall((object)" appname ", "
                               (number->string (- (length parts) 1)) ");\n"))
