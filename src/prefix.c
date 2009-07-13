@@ -30,7 +30,7 @@ int main () {
     object SmallInteger     = import_class(number);
     object Array            = import_class(array); 
     object Dictionary       = import_class(dict);
-    object UndefinedObject  = import_class(nil_t);
+    object UndefinedObject  = import_class(nil);
 
     object IList            = import_class(ast_list);
     object ICall            = import_class(ast_call);

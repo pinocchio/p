@@ -1,7 +1,6 @@
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (error-handler error)
-(Dictionary 'basicNew)
 (success
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))

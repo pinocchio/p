@@ -192,7 +192,7 @@ struct woodstock {
     object dict_class;
     object infile_class;
     object outfile_class;
-    object nil_t_class;
+    object nil_class;
     object chr_class;
 };
 
