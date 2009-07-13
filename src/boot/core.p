@@ -1,6 +1,7 @@
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (error-handler error)
+(Dictionary 'basicNew)
 (success
 (let ((getself (lambda (o) (o 'objectAt: 0)))
       (getsuper (lambda (o) (o 'objectAt: 1)))
@@ -66,7 +67,7 @@
                                                       ; hack to make it work
                                                       (constwrap args)))))
                                     (amethod 'apply:in: args env))))))))))
-    ;(display "STAGE 1\n")
+    (display "STAGE 1\n")
     ; Classes have a more specific dispatch than Objects
     ; they know where their super is,
     ; and now how to respond to a "lookup:" message.
@@ -83,13 +84,13 @@
           ; Objects just perform a normal lookup
           (objdisp (dispatch (self env args)
             (lookup self env args))))
-    ;(display "STAGE 2\n")
+    (display "STAGE 2\n")
 
     ; Here we start bootstrapping the meta-hierarchy
     (let* ((buildclass (lambda (cls)
                 (ifixed 'dispatch:delegate:size:
                         classdisp cls 4)))
-          
+
           ; The first Metaclass is an instantiatable stub which will become
           ; the real Metaclass later on.
            (Metaclass (ifixed 'size: 4))
@@ -99,7 +100,7 @@
 
           ; The Object class is an instance of Metaclass too
            (Object_class (Metaclass 'basicNew))
-
+          
           ; Object is just a normal class with no instance variables
            (Object ((buildclass Object_class) 'basicNew))
 
@@ -148,7 +149,7 @@
         (Metaclass 'dispatch:delegate: classdisp (Metaclass_class 'basicNew))
         (Metaclass_class 'objectAt:put: 1 mcdict)
 
-        ;(display "STAGE 3\n")
+        (display "STAGE 3\n")
 
         ; For now we ensure that all subclasses of Object get the correct
         ; layout by faking the layout of the first Metaclass. This will later

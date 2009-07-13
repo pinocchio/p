@@ -14,7 +14,7 @@
     (object)make_iconst((object)woodstock->name);
 
 #define import_class(name)\
-    import_object(name##_##t_class);
+    import_object(name##_##class);
 
 int main () {
     bootstrap();
@@ -30,7 +30,7 @@ int main () {
     object SmallInteger     = import_class(number);
     object Array            = import_class(array); 
     object Dictionary       = import_class(dict);
-    object UndefinedObject  = import_class(nil);
+    object UndefinedObject  = import_class(nil_t);
 
     object IList            = import_class(ast_list);
     object ICall            = import_class(ast_call);
