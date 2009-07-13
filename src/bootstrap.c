@@ -72,13 +72,13 @@ woodstock_t bootstrap() {
     woodstock->string_class      = incomplete_class(string);   
     woodstock->symbol_class      = incomplete_class(symbol);
     
-    incomplete_ifixed_class(woodstock->nil_class, 0);
+    incomplete_ifixed_class(woodstock->nil_t_class, 0);
 
     // Build after building the array_class!
     woodstock->empty             = make_sized_object(array_class, 1).array;
     woodstock->empty->size       = 0;
     // Set after building the nil_class
-    header(woodstock->nil)       = woodstock->nil_class;
+    header(woodstock->nil)       = woodstock->nil_t_class;
 
     woodstock->level_shifter     = wrap_dispatcher(shift_level);
 

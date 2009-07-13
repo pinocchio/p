@@ -119,11 +119,11 @@ SETUP(test_env_lookup)
     object v2 = (object)make_string(L"v2");
     object v3 = (object)make_string(L"v3");
 
-    env_object env1 = make_env(e1k,
+    runtime_env_object env1 = make_env(e1k,
                                (object)woodstock->nil,
                                1);
 
-    env_object env2 = make_env(e2k,
+    runtime_env_object env2 = make_env(e2k,
                                (object)env1,
                                1);
 
@@ -182,7 +182,7 @@ SETUP(test_env_lookup)
 
 SETUP(test_iassign_ivar)
 
-    env_object k = make_env((object)woodstock->nil,
+    runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
@@ -200,7 +200,7 @@ SETUP(test_iassign_ivar)
 
 SETUP(test_ivar_read)
 
-    env_object k = make_env((object)woodstock->nil,
+    runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
@@ -237,10 +237,10 @@ SETUP(test_icall)
 
     object v = (object)make_number(5);
 
-    ast_call_object icall = make_icall((object)iconst, 1);
-    set_callarg(icall, 0, v);
+    ast_call_object ast_call = make_icall((object)iconst, 1);
+    set_callarg(ast_call, 0, v);
 
-    context_object make_eval_context(ci, icall,
+    context_object make_eval_context(ci, ast_call,
         make_env((object)woodstock->nil,
                  (object)woodstock->nil,
                  0));
@@ -265,7 +265,7 @@ SETUP(test_new_iscoped)
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
 
-    env_object start = make_env((object)woodstock->nil,
+    runtime_env_object start = make_env((object)woodstock->nil,
                                 (object)woodstock->nil,
                                 0);
 
@@ -299,7 +299,7 @@ SETUP(test_eval_iscoped)
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
 
-    env_object start = make_env((object)woodstock->nil,
+    runtime_env_object start = make_env((object)woodstock->nil,
                                 (object)woodstock->nil,
                                 0);
 
@@ -322,7 +322,7 @@ SETUP(test_eval_iscoped)
 
 SETUP(test_icapture)
     
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     context_object make_eval_context(ci, woodstock->icapture, env);
@@ -334,10 +334,10 @@ SETUP(test_icapture)
 
 SETUP(test_env_parent)
     
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)woodstock->nil,
+    runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
     ast_call_object icall = make_icall(
@@ -353,10 +353,10 @@ SETUP(test_env_parent)
 
 SETUP(test_capture_parent)
     
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)woodstock->nil,
+    runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
     ast_call_object icall = make_icall(woodstock->icapture, 1);
@@ -370,7 +370,7 @@ SETUP(test_capture_parent)
 
 SETUP(test_make_function_no_args)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     array_object args = make_array(1);
@@ -394,10 +394,10 @@ SETUP(test_make_function_no_args)
 SETUP(test_ilist_pass_context)
 
     ast_list_object ilist = make_ilist(1);
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    env_object env2 = make_env((object)woodstock->nil,
+    runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
     ast_call_object icall = make_icall(woodstock->icapture, 1);
@@ -414,7 +414,7 @@ SETUP(test_ilist_pass_context)
 
 SETUP(test_eval_function_no_args)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
 
@@ -443,7 +443,7 @@ SETUP(test_eval_function_no_args)
 
 SETUP(test_make_function_1_arg)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
 
@@ -465,7 +465,7 @@ SETUP(test_make_function_1_arg)
 
 SETUP(test_eval_function_1_arg)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
 
@@ -499,7 +499,7 @@ SETUP(test_eval_function_1_arg)
 
 SETUP(test_eval_nested_function)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     ast_var_object ivar = make_ivar(L"iv");
@@ -641,7 +641,7 @@ return make_dispatch(array_42_lambda_2_x, (object)icall_41_lambda_6_x);
 
 SETUP(test_make_ifixed)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
@@ -664,7 +664,7 @@ SETUP(test_make_ifixed)
 
 SETUP(test_ifixed_natives)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
@@ -698,7 +698,7 @@ SETUP(test_ifixed_natives)
 
 SETUP(test_ifixed_object)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
@@ -755,7 +755,7 @@ SETUP(test_ifixed_object)
 
 SETUP(test_ifixed_dispatch)
 
-    env_object env = make_env((object)woodstock->nil,
+    runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
