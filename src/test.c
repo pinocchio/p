@@ -252,7 +252,7 @@ SETUP(test_icall)
 
 SETUP(test_new_iscoped)
 
-    ast_const_object iconst = make_iconst(woodstock->iscoped_class);
+    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -278,7 +278,7 @@ SETUP(test_new_iscoped)
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target.target == &shift_level);
 
-    assert(pheader(iscope) == woodstock->iscoped_class.pointer);
+    assert(pheader(iscope) == woodstock->ast_scoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
     assert(iscope->scope.env == start);
 
@@ -286,7 +286,7 @@ SETUP(test_new_iscoped)
 
 SETUP(test_eval_iscoped)
 
-    ast_const_object iconst = make_iconst(woodstock->iscoped_class);
+    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
 
     object v = (object)make_number(5);
     object exp = (object)make_iconst(v);
@@ -320,12 +320,12 @@ SETUP(test_eval_iscoped)
 
 }
 
-SETUP(test_icapture)
+SETUP(test_ast_capture)
     
     runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    context_object make_eval_context(ci, woodstock->icapture, env);
+    context_object make_eval_context(ci, woodstock->ast_capture, env);
 
     object result = transfer();
 
@@ -359,7 +359,7 @@ SETUP(test_capture_parent)
     runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    ast_call_object icall = make_icall(woodstock->icapture, 1);
+    ast_call_object icall = make_icall(woodstock->ast_capture, 1);
     set_callmsg(icall, PARENT);
     context_object make_eval_context(ci, icall, env2);
 
@@ -386,7 +386,7 @@ SETUP(test_make_function_no_args)
     object result = transfer();
 
     ast_scoped_object iscope = object_at(result.object, 0).iscoped;
-    assert(pheader(iscope) == woodstock->iscoped_class.pointer);
+    assert(pheader(iscope) == woodstock->ast_scoped_class.pointer);
     assert(iscope->scope.env == env);
 
 }
@@ -400,7 +400,7 @@ SETUP(test_ilist_pass_context)
     runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    ast_call_object icall = make_icall(woodstock->icapture, 1);
+    ast_call_object icall = make_icall(woodstock->ast_capture, 1);
     set_callmsg(icall, PARENT);
 
     ilist_at_put(ilist, 0, (object)icall);
@@ -836,7 +836,7 @@ int main() {
     // test_icall(); // currently broken
     test_new_iscoped();
     test_eval_iscoped();
-    test_icapture();
+    test_ast_capture();
     test_env_parent();
     test_capture_parent();
     test_make_function_no_args();

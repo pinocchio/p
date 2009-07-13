@@ -51,7 +51,7 @@ define_bootstrapping_class(ast_list,
 // Object creation
 ast_list_object make_ilist(int size) {
     ast_list_object result = NEW_ARRAYED(ast_list_object, object, size + 1);
-    header(result)      = (object)woodstock->ilist_class;
+    header(result)      = (object)woodstock->ast_list_class;
     result->size        = size;
     return result;
 }

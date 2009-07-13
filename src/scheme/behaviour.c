@@ -19,7 +19,7 @@ void inline add_eval_args_code(ast_list_object exp,
                                array_object arguments,
                                int toskip,
                                int todo) {
-    ast_call_object icall1(parent_env, woodstock->icapture, PARENT);
+    ast_call_object icall1(parent_env, woodstock->ast_capture, PARENT);
     ast_call_object arg_eval;
     // var1 = (var1 eval: (env parent))
     // ...  ...  ...       
@@ -38,7 +38,7 @@ void inline add_switch_scope_code(ast_list_object exp, int position) {
     receiver_var->scope = (object)exp;
                            
     ast_call_object icall1(self_scope, receiver_var, SCOPE);
-    ast_call_object icall2(switch_env, woodstock->icapture,
+    ast_call_object icall2(switch_env, woodstock->ast_capture,
                         SET_PARENT, self_scope)
                            
     ilist_at_put(exp, position, (object)switch_env);
@@ -47,7 +47,7 @@ void inline add_switch_scope_code(ast_list_object exp, int position) {
 object iscoped_for(object exp, object size) {
     // TODO: optimization: don't wrap iscoped in a const.
     // Just don't eval the receiver.
-    ast_const_object iconst = make_iconst(woodstock->iscoped_class);
+    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
     ast_call_object icall3(icall, iconst, NEW_SIZE,
                                 (object)make_iconst(exp),
                                 (object)make_iconst(size));
@@ -108,7 +108,7 @@ object inline make_m(array_object arguments, object body) {
     add_switch_scope_code(exp, argsize - 1);
     ilist_at_put(exp, argsize, body);
 
-    ast_const_object iconst = make_iconst(woodstock->iscoped_class);
+    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
     ast_call_object icall3(icall, iconst, NEW_SIZE,
                             (object)make_iconst((object)exp),
                             (object)make_iconst((object)make_number(array_size(arguments))));

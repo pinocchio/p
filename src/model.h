@@ -17,7 +17,7 @@
 
 #define new_instance(cls)\
     cls##_##object result = NEW(struct cls);\
-    header(result)        = (object)woodstock->cls##_##t_class;
+    header(result)        = (object)woodstock->cls##_##class;
 
 #define header(o) (*(object*)POINTER_DEC(o))
 
@@ -145,21 +145,22 @@ struct woodstock {
     object              true;
     object              false;
     array_object        empty;
-    object              icapture;
+    object              ast_capture;
     object              ifixed;
     object              array;
     object              error;
 
     // Evaluation related classes
-    object ilist_class;
-    object icall_class;
-    object iconst_class;
-    object ivar_class;
-    object iassign_class;
-    object icapture_class;
-    object iscoped_class;
+    object ast_list_class;
+    object ast_call_class;
+    object ast_const_class;
+    object ast_var_class;
+    object ast_assign_class;
+    object ast_capture_class;
+    object ast_scoped_class;
+    object runtime_env_class;
     object fixed_class;
-    object env_class;
+    object ifixed_class;
 
     // Classes related to object formats
     declare_metaclass(array);

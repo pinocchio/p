@@ -52,7 +52,7 @@ void print_object(object o) {
 
     test_type(ast_const);
     test_type(ast_assign);
-    if (pheader(o.pointer) == woodstock->ivar_class.pointer) {
+    if (pheader(o.pointer) == woodstock->ast_var_class.pointer) {
         printf("ivar(\"%ls\")\n", o.ivar->name->value);
         return;
     }
