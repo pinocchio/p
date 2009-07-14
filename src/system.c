@@ -12,7 +12,7 @@ void inline call_error(object message) {
     set_argument(context, 0, message);
 }
 
-void doesnotunderstand(const wchar_t* class, object selector) {
+void inline doesnotunderstand(const wchar_t* class, object selector) {
     wchar_t buffer[1024];
     debug("does not understand\n");
     swprintf(buffer, 1024, L"DNU: %ls>>%ls\n", class, selector.string->value);
@@ -20,20 +20,13 @@ void doesnotunderstand(const wchar_t* class, object selector) {
 
 }
 
-void ensure(int condition, const wchar_t* message) {
-    if(!condition) {
-        call_error((object)make_string(message));
-    } 
-}
-
-int ensure_greater_equals(int v1, int v2, const wchar_t* format, const char* file, unsigned int line) {
-    int result = v1 < v2;
-    if (result) {
+int ensure(int condition, const wchar_t* format, const char* file, unsigned int line) {
+    if (!condition) {
         wchar_t buffer[1024];
-        swprintf(buffer, 1024, format, file, line, v1, v2);
+        swprintf(buffer, 1024, format, file, line);
         call_error((object)make_string(buffer));
     }
-    return result;
+    return condition;
 }
 
 // Context handling
@@ -45,6 +38,10 @@ void inline new_target(context_object context, object target) {
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer() {
     reset_debug();
+    return continue_transfer();
+}
+
+object inline continue_transfer() {
     while (!empty_stack()) {
         // printf("self: %p\n", get_context()->self.pointer);
         get_context()->code();

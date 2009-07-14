@@ -201,15 +201,5 @@ extern transfer_target  inline native_target(native_object native);
 extern object           inline object_at(object_object object, int index);
 extern void             inline object_at_put(object_object o,
                                              int index, object value);
-#define assert_argsize(context, size)\
-    if (ensure_greater_equals(context_size(context), size,\
-        L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\
-    { return; }
-
-extern int  			inline isinstance(object o, object class);
-extern object 			inline cast_check(object o, object class);
-
-#define cast(object, class)\
-	(object)cast_check(object, class)
 
 #endif // MODEL_H

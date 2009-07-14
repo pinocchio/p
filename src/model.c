@@ -42,14 +42,3 @@ void inline object_at_put(object_object o, int index, object value) {
     o->fields[index] = value;
 }
 
-int inline isinstance(object o, object class) {
-	return pheader(o.pointer) == class.pointer;
-}
-
-object inline cast_check(object o, object class) {
-	if (isinstance(o, class)) {
-		return o;
-	}
-	// XXX error handler here
-	return o;
-}

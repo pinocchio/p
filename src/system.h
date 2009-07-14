@@ -31,8 +31,14 @@
 
 #include <system/io/file.h>
 
+/* Globally used functions */
+extern void pre_eval_env();
+extern void doesnotunderstand(const wchar_t* class, object selector);
+extern void inline identity();
+
 // Starting an evaluation thread.
 extern object inline transfer();
+extern object inline continue_transfer();
 
 // Meta-interpretation primitives.
 extern void inline new_target(context_object context, object target);
@@ -173,11 +179,34 @@ void inline name() {\
     context->code = &name##_##do;\
 }
 
-/* Globally used functions */
-extern void pre_eval_env();
-extern void doesnotunderstand(const wchar_t* class, object selector);
-extern int ensure_greater_equals(int v1, int v2, const wchar_t* format, const char* file, unsigned int line);
-extern void ensure(int condition, const wchar_t* message);
-extern void inline identity();
+// =============================================================================
+
+extern int ensure_greater_equals(int v1, int v2, const wchar_t* format,
+								 const char* file, unsigned int line);
+
+extern int ensure(int condition, const wchar_t* format, const char* file, unsigned int line);
+
+#define error_guard(condition, format)\
+	if (!ensure((condition), L"%s, line %u, " format L"\n", __FILE__, __LINE__)) {\
+		/*XXX WARN THIS IS A HACK!! C-STACKFRAMES ARE LEFT OVER */\
+		continue_transfer();\
+	}
+
+#define assert_argsize(context, size)\
+	error_guard(greater_equals(context_size(context), (size)), L"Argument mismatch.")
+
+#define greater_equals(number1, number2) (number1 >= number2)
+
+#define cast(var, o, type)\
+	class##_##object var = ((object)(o)).class;\
+	error_guard(isinstance((object)(var), (type)), L"Type mismatch.")
+
+#define isinstance(o, type)\
+	(pheader(pheader((o).pointer)) == woodstock->type##_##t_stub_class.pointer || \
+     pheader(pheader((o).pointer)) == woodstock->type##_##t.pointer)
+
+
+// =============================================================================
+
 
 #endif
