@@ -19,7 +19,7 @@ static void inline env_fetch_from() {
         debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
         return return_from_context(receiver, value);
     }
-    if (env->parent.nil == woodstock->nil) {
+    if (env->parent.object == woodstock->nil) {
         assert(NULL); // XXX should go to error-handler here.
     }
     debug("fallback to parent: %p\n", env->parent.pointer);
@@ -43,7 +43,7 @@ static void inline env_store_at_in() {
         debug("ret>>env>>store:at:in: %i, %p\n", index, value.pointer);
         return pop_context();
     }
-    if (env->parent.nil == woodstock->nil) {
+    if (env->parent.object == woodstock->nil) {
         assert(NULL); // TODO we currently fail hard in this case.
         return;
     }

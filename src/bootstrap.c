@@ -33,7 +33,7 @@ woodstock_t woodstock;
 
 woodstock_t bootstrap() {
     woodstock                    = NEW(struct woodstock);
-    woodstock->nil               = make_nil();
+    woodstock->nil               = make_object(0, (object)(pointer)NULL);
 
     /* Objects used for handling types; these should not be exposed to the
      * outside world as they are internal objects

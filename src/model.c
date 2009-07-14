@@ -14,10 +14,6 @@ object_object make_object(int size, object interpreter) {
     return result;
 }
 
-nil_object make_nil() {
-    return NEW(struct nil);
-}
-
 native_object make_native(transfer_target native) {
     // Natives don't need a header, so we just allocate what we need.
     native_object result    = (native_object)PALLOC(sizeof(struct native));

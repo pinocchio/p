@@ -45,7 +45,7 @@ void print_object(object o) {
         return;
     }
 
-    if (o.nil == woodstock->nil) {
+    if (o.object == woodstock->nil) {
         printf("nil\n");
         return;
     }

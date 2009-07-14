@@ -39,7 +39,6 @@ struct symbol;
 struct number;
 struct array;
 struct dict;
-struct nil;
 struct native;
 struct native_class;
 struct context;
@@ -75,7 +74,6 @@ typedef struct symbol*           string_object;
 typedef struct number*           number_object;
 typedef struct array*            array_object;
 typedef struct dict*             dict_object;
-typedef struct nil*              nil_object;
 typedef struct native*           native_object;
 typedef struct native_class*     native_class_object;
 typedef struct context*          context_object;
@@ -107,7 +105,6 @@ typedef union {
     number_object          number;
     array_object           array;
     dict_object            dict;
-    nil_object             nil;
     native_object          native;
     native_class_object    native_class;
     context_object         context;
@@ -126,8 +123,6 @@ struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
 
-struct nil { };
-
 struct native {
     object          target;
 };
@@ -141,7 +136,7 @@ struct native_class {
 struct woodstock {
     // Objects known to the system
     array_object        empty;
-    nil_object          nil;
+    object_object       nil;
     object              array;
     object              ast_capture;
     object              error;
@@ -198,8 +193,6 @@ struct woodstock {
 // ============================================================================
 
 extern object_object            make_object(int size, object interpreter);
-extern nil_object               make_nil();
-
 extern native_object            make_native(transfer_target native);
 extern native_class_object      make_native_class(object header, transfer_target cdisp);
 

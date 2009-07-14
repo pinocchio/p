@@ -37,7 +37,7 @@ with_pre_eval2(dict_at_put, context, key, value,
     int limit = array_size(dict->values) / 2;
     for (i = 0; i < limit; i++) {
         object v = raw_array_at(kv, i * 2);
-        if (v.pointer == key.pointer || v.nil == woodstock->nil) {
+        if (v.pointer == key.pointer || v.object == woodstock->nil) {
             break;
         }
     }

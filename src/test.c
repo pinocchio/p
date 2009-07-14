@@ -30,7 +30,7 @@ SETUP(test_array)
     int i;
 
     for(i = 0; i < 100; i++) {
-        assert(array_at(a, i).nil == woodstock->nil);
+        assert(array_at(a, i).object == woodstock->nil);
         array_at_put(a, i, (object)make_number(i));
     }
     
@@ -55,10 +55,10 @@ SETUP(test_string_equals)
 SETUP(test_object_object)
     object_object result = make_object(10, (object)woodstock->nil);
 
-    assert(header(result).nil == woodstock->nil);
+    assert(header(result).object == woodstock->nil);
     int i;
     for (i = 0; i < 10; i++) {
-        assert(object_at(result, i).nil == woodstock->nil);
+        assert(object_at(result, i).object == woodstock->nil);
     }
 }
 
@@ -656,7 +656,7 @@ SETUP(test_make_ifixed)
     object result = transfer();    
 
     assert(result.ifixed->size == 5);
-    assert(result.ifixed->delegate.nil == woodstock->nil);
+    assert(result.ifixed->delegate.object == woodstock->nil);
 
     //assert((pointer)*PINC(result.ifixed->interp.pointer) == result.pointer);
     
@@ -679,7 +679,7 @@ SETUP(test_ifixed_natives)
     object ifixed = transfer();    
 
     assert(ifixed.ifixed->size == 5);
-    assert(ifixed.ifixed->delegate.nil == woodstock->nil);
+    assert(ifixed.ifixed->delegate.object == woodstock->nil);
 
     icall1(icall, make_iconst(ifixed), SIZE);
     make_eval_context(ci, icall, env);
@@ -728,14 +728,14 @@ SETUP(test_ifixed_object)
     make_eval_context(ci, icall, env);
 
     result = transfer();
-    assert(result.nil == woodstock->nil);
+    assert(result.object == woodstock->nil);
 
     icall2(icall, make_iconst(thefixed), OBJECT_AT,
            (object)make_iconst((object)make_number(4)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
-    assert(result.nil == woodstock->nil);
+    assert(result.object == woodstock->nil);
 
     icall3(icall, make_iconst(thefixed),
            OBJECT_AT_PUT, (object)make_iconst((object)make_number(3)),
