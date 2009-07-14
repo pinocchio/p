@@ -4,6 +4,8 @@
 #include <gc.h>
 #include <stdlib.h>
 
+// ============================================================================
+
 #define header_size sizeof(object)
 
 #define POINTER_INC(p) (((pointer) p) + 1) 
@@ -29,6 +31,8 @@
     object name##_##t_class;\
     object name##_##t_stub_class;
 
+// ============================================================================
+
 struct runtime_env;
 struct object_object;
 struct symbol;
@@ -52,6 +56,8 @@ struct ast_scoped;
 struct ast_capture;
 struct ifixed_t;
 struct fallback;
+
+// ============================================================================
 
 typedef struct ast_list*         ast_list_object;
 typedef struct ast_assign*       ast_assign_object;
@@ -79,6 +85,8 @@ typedef struct chr*              chr_object;
 typedef void**                   pointer;
 
 typedef void (*transfer_target)();
+
+// ============================================================================
 
 struct woodstock;
 typedef struct woodstock*       woodstock_t;
@@ -111,14 +119,11 @@ typedef union {
     pointer                pointer;
 } object;
 
+// ============================================================================
+
 // TODO push these structs directly into the system/*/*.h
 struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
-};
-
-struct array {
-    int                 size;
-    object              values[];
 };
 
 struct runtime_env {
@@ -126,6 +131,12 @@ struct runtime_env {
     object              parent;
     array_object        values;
 };
+
+struct array {
+    int                 size;
+    object              values[];
+};
+
 
 struct nil { };
 
@@ -196,6 +207,8 @@ struct woodstock {
     object symbol_class;
 };
 
+// ============================================================================
+
 extern object_object            make_object(int size, object interpreter);
 extern array_object             make_array(int size);
 extern runtime_env_object       make_env(object scope, object parent, int size);
@@ -218,11 +231,11 @@ extern void             inline object_at_put(object_object o,
                                              int index, object value);
 extern object           inline env_at(runtime_env_object env, int index);
 extern void             inline env_at_put(runtime_env_object env, int index, object value);
+
 #define assert_argsize(context, size)\
     if (ensure_greater_equals(context_size(context), size,\
         L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\
     { return; }
-    
 
 #define empty_env make_env((object)woodstock->nil,\
                            (object)woodstock->nil, 0)
@@ -231,5 +244,10 @@ extern void             inline env_at_put(runtime_env_object env, int index, obj
     ensure(0 <= index, L"Out of bounds");\
     ensure(index < array_size(array), L"Out of bounds");
 
+extern int  			inline isinstance(object o, object class);
+extern object 			inline cast_check(object o, object class);
+
+#define cast(object, class)\
+	(object)cast_check(object, class)
 
 #endif // MODEL_H

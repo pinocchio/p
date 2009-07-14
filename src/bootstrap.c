@@ -5,8 +5,6 @@
 #include <thread.h>
 #include <scheme/natives.h>
 
-// System global
-woodstock_t woodstock;
 
 #define make_sized_object(cls, size)\
     ((object)make_object(size, (object)woodstock->cls))
@@ -27,7 +25,12 @@ woodstock_t woodstock;
         wrap_dispatcher(type##_##class_dispatch);\
     woodstock->type##_##t_stub_class =\
         wrap_dispatcher(type##_##class_stub_dispatch);
-    
+
+// =============================================================================a
+
+// System global
+woodstock_t woodstock;
+
 woodstock_t bootstrap() {
     woodstock                    = NEW(struct woodstock);
     woodstock->nil               = make_nil();

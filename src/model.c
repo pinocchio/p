@@ -90,3 +90,16 @@ object inline env_at(runtime_env_object env, int index) {
 void inline env_at_put(runtime_env_object env, int index, object value) {
     array_at_put(env->values, index, value);
 }
+
+
+int inline isinstance(object o, object class) {
+	return pheader(o.pointer) == class.pointer;
+}
+
+object inline cast_check(object o, object class) {
+	if (isinstance(o, class)) {
+		return o;
+	}
+	// XXX error handler here
+	return o;
+}
