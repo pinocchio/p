@@ -206,13 +206,6 @@ extern void             inline object_at_put(object_object o,
         L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\
     { return; }
 
-#define empty_env make_env((object)woodstock->nil,\
-                           (object)woodstock->nil, 0)
-
-#define array_check_bounds(array, index)\
-    ensure(0 <= index, L"Out of bounds");\
-    ensure(index < array_size(array), L"Out of bounds");
-
 extern int  			inline isinstance(object o, object class);
 extern object 			inline cast_check(object o, object class);
 

@@ -4,6 +4,10 @@
 #include <system/type/type.h>
 export_type(array);
 
+#define array_check_bounds(array, index)\
+    ensure(0 <= index, L"Out of bounds");\
+    ensure(index < array_size(array), L"Out of bounds");
+
 extern array_object             make_array(int size);
 
 extern int              inline array_size(array_object array);
