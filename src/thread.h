@@ -25,6 +25,10 @@ extern int    inline context_size(context_object context);
 extern void inline return_from_context(context_object context, object value);
 extern void inline return_to_context(context_object context, object value);
 
+// Starting an evaluation thread.
+extern object inline transfer();
+extern object inline continue_transfer();
+
 struct context {
     transfer_target     code;
     object              self;

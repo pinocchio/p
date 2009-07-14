@@ -35,22 +35,8 @@ void inline new_target(context_object context, object target) {
     context->code = ntarget(header(target.pointer));
 }
 
-// Meta-interpreter just takes the next action and performs it.
-object inline transfer() {
-    reset_debug();
-    return continue_transfer();
-}
-
-object inline continue_transfer() {
-    while (!empty_stack()) {
-        // printf("self: %p\n", get_context()->self.pointer);
-        get_context()->code();
-    }
-    return get_stk_return();
-}
 
 // AST Handling
-
 static void switch_env() {
     context_object receiver = get_context();
     object env = argument_at(receiver, 1);

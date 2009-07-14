@@ -36,10 +36,6 @@ extern void pre_eval_env();
 extern void doesnotunderstand(const wchar_t* class, object selector);
 extern void inline identity();
 
-// Starting an evaluation thread.
-extern object inline transfer();
-extern object inline continue_transfer();
-
 // Meta-interpretation primitives.
 extern void inline new_target(context_object context, object target);
 
@@ -203,7 +199,7 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 
 #define isinstance(o, type)\
 	(pheader(pheader((o).pointer)) == woodstock->type##_##t_stub_class.pointer || \
-     pheader(pheader((o).pointer)) == woodstock->type##_##t.pointer)
+     pheader(pheader((o).pointer)) == woodstock->type##_##t_class.pointer)
 
 
 // =============================================================================
