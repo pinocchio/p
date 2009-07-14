@@ -126,12 +126,6 @@ struct object_object {
     object fields[0]; // 0 to tell CC that it can be empty.
 };
 
-struct runtime_env {
-    object              scope;
-    object              parent;
-    array_object        values;
-};
-
 struct nil { };
 
 struct native {
@@ -204,7 +198,6 @@ struct woodstock {
 // ============================================================================
 
 extern object_object            make_object(int size, object interpreter);
-extern runtime_env_object       make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 
 extern native_object            make_native(transfer_target native);
@@ -212,13 +205,9 @@ extern native_class_object      make_native_class(object header, transfer_target
 
 
 extern transfer_target  inline native_target(native_object native);
-extern object           inline symbol_known_to_the_vm(int index);
 extern object           inline object_at(object_object object, int index);
 extern void             inline object_at_put(object_object o,
                                              int index, object value);
-extern object           inline env_at(runtime_env_object env, int index);
-extern void             inline env_at_put(runtime_env_object env, int index, object value);
-
 #define assert_argsize(context, size)\
     if (ensure_greater_equals(context_size(context), size,\
         L"%s, line %u, Argument mismatch. Given: %i, expected %i\n", __FILE__, __LINE__))\

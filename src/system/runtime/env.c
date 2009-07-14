@@ -100,3 +100,19 @@ define_bootstrapping_type(runtime_env,
     // class
     if_selector(SCOPE_KEY, env_class_scope_key);
 )
+
+object inline env_at(runtime_env_object env, int index) {
+    return array_at(env->values, index);
+}
+
+void inline env_at_put(runtime_env_object env, int index, object value) {
+    array_at_put(env->values, index, value);
+}
+
+runtime_env_object make_env(object scope, object parent, int size) {
+    new_instance(runtime_env);
+    result->scope       = scope;
+    result->parent      = parent;
+    result->values      = make_array(size);
+    return result;
+}
