@@ -6,9 +6,6 @@
 #include <scheme/natives.h>
 
 
-#define make_sized_object(cls, size)\
-    ((object)make_object(size, (object)woodstock->cls))
-
 #define incomplete_ifixed_class(name, size)\
     name = make_class((object)make_number(size), &ifixed_stub_dispatch);\
     header(name.pointer) = woodstock->ifixed_t_stub_class;
@@ -26,7 +23,7 @@
     woodstock->type##_##t_stub_class =\
         wrap_dispatcher(type##_##class_stub_dispatch);
 
-// =============================================================================a
+// =============================================================================
 
 // System global
 woodstock_t woodstock;
@@ -78,15 +75,15 @@ woodstock_t bootstrap() {
     incomplete_ifixed_class(woodstock->nil_class, 0);
 
     // Build after building the array_class!
-    woodstock->empty             = make_sized_object(array_class, 1).array;
+    woodstock->empty             = ((array_object)make_object(1, woodstock->array_class));
     woodstock->empty->size       = 0;
     // Set after building the nil_class
     header(woodstock->nil)       = woodstock->nil_class;
 
     woodstock->level_shifter     = wrap_dispatcher(shift_level);
 
-    woodstock->ast_capture       = make_sized_object(ast_capture_class, 0);
-    woodstock->ifixed            = make_sized_object(fixed_class,    0);
+    woodstock->ast_capture       = (object)make_object(0, woodstock->ast_capture_class);
+    woodstock->ifixed            = (object)make_object(0, woodstock->fixed_class);
 
     init_thread();
     bootstrap_scheme();
