@@ -1,6 +1,8 @@
 #ifndef THREAD_H
 #define THREAD_H
 
+#include <system/type/array.h>
+
 extern void init_thread();
 
 extern context_object inline stack_claim(int size);

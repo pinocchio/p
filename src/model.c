@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <bootstrap.h>
 #include <thread.h>
+#include <system/type/array.h>
 
 object_object make_object(int size, object interpreter) {
     object_object result  = NEW_ARRAYED(object_object, object, size);
@@ -10,14 +11,6 @@ object_object make_object(int size, object interpreter) {
     for (i = 0; i < size; i++) {
         object_at_put(result, i, (object)woodstock->nil);
     }
-    return result;
-}
-
-array_object make_array(int size) {
-    if (size == 0) { return woodstock->empty; }
-    array_object result = (array_object)make_object(size + 1,
-                            (object)woodstock->array_class);
-    result->size        = size;
     return result;
 }
 
@@ -48,28 +41,6 @@ native_class_object make_native_class(object header, transfer_target cdisp) {
 }
 
 // Accessors
-
-int inline array_size(array_object array) {
-    return array->size;
-}
-
-object inline raw_array_at(array_object array, int index) {
-    return array->values[index];
-}
-
-object inline array_at(array_object array, int index) {
-    array_check_bounds(array, index);
-    return raw_array_at(array, index);
-}
-
-void inline raw_array_at_put(array_object array, int index, object new_value) {
-    array->values[index] = new_value;
-}
-
-void inline array_at_put(array_object array, int index, object new_value) {
-    array_check_bounds(array, index);
-    raw_array_at_put(array, index, new_value);
-}
 
 transfer_target inline native_target(native_object native) {
     return native->target.target;

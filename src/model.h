@@ -132,12 +132,6 @@ struct runtime_env {
     array_object        values;
 };
 
-struct array {
-    int                 size;
-    object              values[];
-};
-
-
 struct nil { };
 
 struct native {
@@ -210,20 +204,13 @@ struct woodstock {
 // ============================================================================
 
 extern object_object            make_object(int size, object interpreter);
-extern array_object             make_array(int size);
 extern runtime_env_object       make_env(object scope, object parent, int size);
 extern nil_object               make_nil();
 
 extern native_object            make_native(transfer_target native);
 extern native_class_object      make_native_class(object header, transfer_target cdisp);
 
-extern int              inline array_size(array_object array);
-extern object           inline array_at(array_object array, int index);
-extern object           inline raw_array_at(array_object array, int index);
-extern void             inline array_at_put(array_object array,
-                                            int index, object new_value);
-extern void             inline raw_array_at_put(array_object array,
-                                                int index, object new_value);
+
 extern transfer_target  inline native_target(native_object native);
 extern object           inline symbol_known_to_the_vm(int index);
 extern object           inline object_at(object_object object, int index);
