@@ -127,7 +127,7 @@ object make_ec() {
     object_at_put(ec, 0, (object)get_context());
     return (object)ec;
 }
-
+// TODO move to separate files
 preval1(callec, context, lambda,
     object env = context->env;
     pop_context();
@@ -168,7 +168,8 @@ object scheme_exit;
 
 preval1(exit, context, value,
     // XXX breaks encapsulation
-    exit(value.number->value);
+    cast(n, value, number);
+    exit(n->value);
 )
 
 void bootstrap_scheme() {

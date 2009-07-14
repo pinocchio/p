@@ -120,7 +120,16 @@
 ;                20))))
 ;    (display (+ 40 ((lambda (x) (bla 4)) 4))))
 
-     
+
+(display "\nError handling tests\n")
+(display 
+    (begin 
+         (callec 
+            (lambda (cont)
+                (error-handler cont)
+                (exit "a")))
+         (error-handler error)
+         #t)) 
 
 (display "\nSYSTEM READY\n")
 

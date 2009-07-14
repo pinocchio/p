@@ -194,8 +194,8 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 #define greater_equals(number1, number2) (number1 >= number2)
 
 #define cast(var, o, type)\
-	class##_##object var = ((object)(o)).class;\
-	error_guard(isinstance((object)(var), (type)), L"Type mismatch.")
+	type##_##object var = ((object)(o)).type;\
+	error_guard(isinstance((object)(var), type), L"Type mismatch.")
 
 #define isinstance(o, type)\
 	(pheader(pheader((o).pointer)) == woodstock->type##_##t_stub_class.pointer || \
