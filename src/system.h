@@ -7,13 +7,13 @@
 
 #include <debug.h>
 
-#include <system/ast/iassign.h>
-#include <system/ast/icall.h>
-#include <system/ast/icapture.h>
-#include <system/ast/iconst.h>
-#include <system/ast/ilist.h>
-#include <system/ast/iscoped.h>
-#include <system/ast/ivar.h>
+#include <system/ast/assign.h>
+#include <system/ast/call.h>
+#include <system/ast/capture.h>
+#include <system/ast/const.h>
+#include <system/ast/list.h>
+#include <system/ast/scoped.h>
+#include <system/ast/var.h>
 
 #include <system/tool/ival.h>
 #include <system/tool/fallback.h>

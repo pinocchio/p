@@ -5,11 +5,11 @@ thread.c model.h bootstrap.h primitives.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
 scheme/symbols.c scheme/symbols.h\
-system/ast/iassign.c system/ast/icall.h system/ast/iassign.h\
-system/ast/icapture.h system/ast/ivar.h system/ast/icapture.c\
-system/ast/ilist.c system/ast/icall.c system/ast/ivar.c\
-system/ast/ilist.h system/ast/iconst.h system/ast/iscoped.h\
-system/ast/iconst.c system/ast/iscoped.c\
+system/ast/assign.c system/ast/call.h system/ast/assign.h\
+system/ast/capture.h system/ast/var.h system/ast/capture.c\
+system/ast/list.c system/ast/call.c system/ast/var.c\
+system/ast/list.h system/ast/const.h system/ast/scoped.h\
+system/ast/const.c system/ast/scoped.c\
 system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
 system/type/type.h system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
