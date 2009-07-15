@@ -189,9 +189,7 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 	}
 
 #define assert_argsize(context, size)\
-	error_guard(greater_equals(context_size(context), (size)), L"Argument mismatch.")
-
-#define greater_equals(number1, number2) (number1 >= number2)
+	error_guard(context_size(context) >= (size), L"Argument mismatch.")
 
 #define cast(var, o, type)\
 	type##_##object var = ((object)(o)).type;\
