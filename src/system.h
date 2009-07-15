@@ -184,7 +184,6 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 
 #define error_guard(condition, format)\
 	if (!ensure((condition), L"%s, line %u, " format L"\n", __FILE__, __LINE__)) {\
-		/*XXX WARN THIS IS A HACK!! C-STACKFRAMES ARE LEFT OVER */\
 		continue_transfer();\
 	}
 
