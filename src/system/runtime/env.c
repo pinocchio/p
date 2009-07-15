@@ -1,5 +1,4 @@
 #include <system.h>
-#include <assert.h>
 #include <thread.h>
 
 // env>>fetch:from:
@@ -19,9 +18,7 @@ static void inline env_fetch_from() {
         debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
         return return_from_context(receiver, value);
     }
-    if (env->parent.object == woodstock->nil) {
-        assert(NULL); // XXX should go to error-handler here.
-    }
+    error_guard(env->parent.object != woodstock->nil, "Variable not found.");
     debug("fallback to parent: %p\n", env->parent.pointer);
     new_target(receiver, env->parent);
     debug("ret>>env>>fetch:from:\n");
@@ -43,10 +40,7 @@ static void inline env_store_at_in() {
         debug("ret>>env>>store:at:in: %i, %p\n", index, value.pointer);
         return pop_context();
     }
-    if (env->parent.object == woodstock->nil) {
-        assert(NULL); // TODO we currently fail hard in this case.
-        return;
-    }
+    error_guard(env->parent.object != woodstock->nil, "Variable not found.");
     new_target(receiver, env->parent);
     debug("ret>>env>>store:at:in:\n");
 }
@@ -72,11 +66,11 @@ static void inline env_subscope() {
 // env>>parent:
 with_pre_eval1(env_set_parent, context, new_env,
     object env = context->self;
-    assert(new_env.pointer != NULL);
+    error_guard(new_env.pointer != NULL, "Setting parent to NULL.");
     env.env->parent = new_env;
 
     // Don't accidentally set parent to self; a common error
-    assert(env.env->parent.env != env.env);
+    error_guard(env.env->parent.env != env.env, "Building circular environment.");
     pop_context();
 )
 
