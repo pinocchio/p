@@ -45,10 +45,9 @@ static void inline ivar_eval() {
 }
 
 with_pre_eval1(ivar_new, context, w_name,
-    // XXX breaking encapsulation
-    // probably should at least clone the value ...
-    const wchar_t* name = w_name.string->value;
-    return_from_context(context, (object)make_ivar(name));
+    // XXX Should probably clone the value ...
+    cast(name, w_name, string);
+    return_from_context(context, (object)make_ivar(name->value));
 )
 
 define_bootstrapping_type(ast_var,

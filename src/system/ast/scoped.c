@@ -45,9 +45,7 @@ static void inline iscoped_eval() {
 
 // iscoped>>withArguments:
 static void inline iscoped_iapply() {
-    // XXX Breaking encapsulation without testing.
-    // Test arguments!
-
+    // TODO remove IAPPLY from public interface and always use APPLY
     // TODO make subscope of the iscoped>>scope rather than the passed env.
     debug("iscoped>>withArguments:\n");
     context_object iscoped_context = get_context();
@@ -74,7 +72,7 @@ static void inline iscoped_iapply() {
 }
 
 with_pre_eval2(iscoped_apply_in, context, ignore, env,
-    // XXX ignore is in between to skip compiler warning
+    /* Hack: ignore is in between to skip compiler warning. */
     context->env = ignore = env;
     iscoped_iapply();
 )
