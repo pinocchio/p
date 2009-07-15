@@ -2,6 +2,7 @@
 #include <thread.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <scheme/natives.h>
 
 static int utf8_size(FILE* fp) {
     error_guard(fp != NULL, "Trying to get size from invalid file.");
@@ -77,19 +78,15 @@ static void inline infile_read() {
     return_from_context(context, (object)result);
 }
 
-with_pre_eval1(outfile_write, context, wchr,
-    // make the compiler warnin disappear
-    if (0) { wchr = wchr; }
+with_pre_eval1(outfile_write, context, w_chr,
+    // make the compiler warning disappear
+    if (0) { w_chr = w_chr; }
 )
 
 static void inline infile_end() {
     context_object context = get_context();
     FILE* file = context->self.infile->file;
-    if (file_at_end(file)) {
-        return_from_context(context, woodstock->true);
-    } else {
-        return_from_context(context, woodstock->false);
-    }
+    return_from_context(context, make_bool(file_at_end(file)));
 }
 
 static void inline infile_read_all() {
@@ -99,15 +96,15 @@ static void inline infile_read_all() {
     return_from_context(context, (object)result);
 }
 
-with_pre_eval1(infile_open, context, name,
-    // XXX todo: check type
-    wchar_t* filename = name.string->value;
+with_pre_eval1(infile_open, context, w_name,
+    cast(name, w_name, string);
+    wchar_t* filename = name->value;
     return_from_context(context, make_infile(filename));
 )
 
-with_pre_eval1(outfile_open, context, name,
-    // XXX todo: check type
-    wchar_t* filename = name.string->value;
+with_pre_eval1(outfile_open, context, w_name,
+    cast(name, w_name, string);
+    wchar_t* filename = name->value;
     return_from_context(context, make_outfile(filename));
 )
 

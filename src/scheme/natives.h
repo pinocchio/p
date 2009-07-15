@@ -15,6 +15,7 @@ extern object scheme_display;
 extern object scheme_callec;
 extern object scheme_exit;
 extern object scheme_error_handler;
+extern object inline make_bool(int bl);
 
 extern void bootstrap_scheme();
 
