@@ -3,6 +3,7 @@
 #include <system.h>
 #include <thread.h>
 #include <assert.h>
+#include <setjmp.h>
 
 #define ctx_size (sizeof(struct context) / sizeof(object))
 
@@ -107,16 +108,19 @@ context_object make_empty_context(int size) {
     return result;
 }
 
+jmp_buf continue_eval;
+
 // Meta-interpreter just takes the next action and performs it.
 object inline transfer() {
     reset_debug();
-    return continue_transfer();
-}
-
-object inline continue_transfer() {
+    setjmp(continue_eval);
     while (!empty_stack()) {
         // printf("self: %p\n", get_context()->self.pointer);
         get_context()->code();
     }
     return get_stk_return();
+}
+
+object inline continue_transfer() {
+    shortjmp(continue_eval, 0);
 }
