@@ -1,5 +1,4 @@
 #include <system.h>
-#include <assert.h>
 #include <scheme/symbols.h>
 #include <thread.h>
 #include <print.h>
@@ -20,15 +19,15 @@ static void inline iscoped_eval() {
 
     int argsize = iscoped->argsize.number->value;
 
-    if(array_size(args) != argsize) {
-        printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
+    error_guard(array_size(args) == argsize, "Argument mismatch.");
+    /*    printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
         int i;
         for (i = 0; i < array_size(args); i++) {
             print_object(raw_array_at(args, i));
             printf("%p\n", raw_array_at(args, i).pointer);
         }
-        assert(NULL);
-    }
+        error_guard(0, "Argument mismatch.");
+    */
 
     int i;
     for (i = 0; i < argsize; i++) {
@@ -118,7 +117,8 @@ define_bootstrapping_type(ast_scoped,
 // Object creation
 object make_iscoped(object scope, object expression, object argsize) {
     new_instance(ast_scoped);
-    assert(scope.pointer != NULL);
+    error_guard(scope.pointer != NULL,
+                "Trying to build scope with NULL as key.")
     result->scope       = scope;
     result->expression  = expression;
     result->argsize     = argsize;

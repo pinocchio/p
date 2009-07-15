@@ -92,7 +92,7 @@
 ;                (loop (+ current 1))))))
 
 
-;(let* ((file (InputFile 'on: "fib-compiler.scm"))
+;(let* ((file (InputFile 'on: "pcompiler.scm"))
 ;       (s (file 'readAllChars)))
 ;    (display s))
 

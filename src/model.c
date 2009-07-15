@@ -1,5 +1,4 @@
 #include <model.h>
-#include <assert.h>
 #include <bootstrap.h>
 #include <thread.h>
 #include <system/type/array.h>

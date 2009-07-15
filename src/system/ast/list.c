@@ -1,5 +1,4 @@
 #include <system.h>
-#include <assert.h>
 #include <thread.h>
 
 // ilist>>eval:
@@ -35,9 +34,8 @@ static void inline ilist_eval() {
 }
 
 with_pre_eval1(ilist_new, context, w_size,
-    // XXX breaking encapsulation
-    int size = w_size.number->value;
-    return_from_context(context, (object)make_ilist(size));
+    cast(size, w_size, number);
+    return_from_context(context, (object)make_ilist(size->value));
 )
 
 define_bootstrapping_type(ast_list, 
@@ -62,8 +60,10 @@ int inline ilist_size(ast_list_object ilist) {
 }
 
 void inline ilist_check_bounds(ast_list_object ilist, int index) {
-    assert(0 <= index);
-    assert(index < ilist_size(ast_list));
+    error_guard(0 <= index,
+        "InstructionList index out of bounds. (< 0)");
+    error_guard(index < ilist_size(ilist),
+        "InstructionList index out of bounds. (> limit)");
 }
 
 object inline raw_ilist_at(ast_list_object ilist, int index) {

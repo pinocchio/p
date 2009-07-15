@@ -2,13 +2,9 @@
 #include <thread.h>
 #include <stdio.h>
 #include <wchar.h>
-#include <assert.h>
 
 static int utf8_size(FILE* fp) {
-    if (fp == NULL) {
-        printf("File nullpointer\n");
-        assert(NULL);
-    }
+    error_guard(fp != NULL, "Trying to get size from invalid file.");
     long pos = ftell(fp);
     rewind(fp);
     char cur;
@@ -23,28 +19,20 @@ static int utf8_size(FILE* fp) {
 }
  
 static void utf8_read_char(FILE* fp, wchar_t* result) {
-    assert(fp);
+    error_guard(fp != NULL, "Trying to read UTF8 char from invalid file.")
     int first;
-    if ((first = fgetc(fp)) == EOF) {
-        printf("Reading at end of file\n");
-        assert(NULL);
-    }
+    error_guard((first = fgetc(fp)) != EOF, "Reading at end of file.")
     *result = first;
     if (first & 1<<7) {
-        if (!(first & 1<<6)) {
-            printf("Non UTF-8 character\n");
-            exit(EXIT_FAILURE);
-        }
+        error_guard(first & 1<<6, "Non UTF-8 character found.");
         int i;
         // we can only grok UTF8 up to wchar_t/byte bytes
         for (i = 0; i < sizeof(wchar_t) - 1; i++) {
             if (first & 1<<(6-i)) {
                 *result <<= 6;
                 int next = fgetc(fp);
-                if (!(next & 1<<7) || next & 1<<6) {
-                    printf("Invalid follow-up byte in UTF-8 character\n");
-                    exit(EXIT_FAILURE);
-                }
+                error_guard((next & 1<<7) && !(next & 1<<6),
+                    "Invalid follow-up byte in UTF-8 character.");
                 *result += (next ^ 1<<7);
                 continue;
             }
@@ -53,10 +41,8 @@ static void utf8_read_char(FILE* fp, wchar_t* result) {
         /* In case we read sizeof(wchar_t) bytes, we check if the next one
          * should be part of the current unicode character. If so, we fail.
          */
-        if (first & 1<<(6-i)) {
-            printf("Non UTF-8 character or UTF-8 character too big for the system's Unicode\n");
-            exit(EXIT_FAILURE);
-        }
+        error_guard(!(first & 1<<(6-1)),
+            "Non UTF-8 character or too big for system's Unicode.") 
         /* If not, just continue. */
         finally:
             *result &= (1<<((i+1)*6-i)) - 1;
@@ -153,10 +139,8 @@ char* unicode_to_ascii(const wchar_t* str) {
     int len = wcslen(str);
     char* charname = (char*)PALLOC(sizeof(char[len]));
 
-    if (wcstombs(charname, str, len) != len) {
-        printf("String not ASCII compatible!\n");
-        assert(NULL);
-    }
+    error_guard(wcstombs(charname, str, len) == len,
+        "String not ASCII compatible.");
 
     return charname;
 }
@@ -166,6 +150,7 @@ object make_infile(const wchar_t* filename) {
     char* charname = unicode_to_ascii(filename);
     new_instance(infile);
     result->file = fopen(charname, "r");
+    error_guard(result->file != NULL, "File not found.");
     return (object)result;
 }
 
@@ -173,5 +158,6 @@ object make_outfile(const wchar_t* filename) {
     char* charname = unicode_to_ascii(filename);
     new_instance(outfile);
     result->file = fopen(charname, "w");
+    error_guard(result->file != NULL, "File not found.");
     return (object)result;
 }

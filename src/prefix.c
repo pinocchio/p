@@ -1,4 +1,3 @@
-#include <assert.h>
 #include <model.h>
 #include <bootstrap.h>
 #include <stdio.h>

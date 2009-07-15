@@ -17,7 +17,6 @@ void inline doesnotunderstand(const wchar_t* class, object selector) {
     debug("does not understand\n");
     swprintf(buffer, 1024, L"DNU: %ls>>%ls\n", class, selector.string->value);
     call_error((object)make_string(buffer));
-
 }
 
 int ensure(int condition, const wchar_t* format, const char* file, unsigned int line) {

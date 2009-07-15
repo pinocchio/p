@@ -1,7 +1,6 @@
 #include <bootstrap.h>
 #include <primitives.h>
 #include <system.h>
-#include <assert.h>
 #include <thread.h>
 #include <scheme/natives.h>
 

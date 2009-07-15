@@ -6,9 +6,6 @@
     object scoped_main;
     eval_in_scope(lambda_1_x, env, scoped_main);
 
-    //assert(pheader(scoped_main.pointer) ==
-    //       woodstock->iscoped_class.pointer);
-
     object const_scoped_main = (object)make_iconst(scoped_main);
 
     ast_call_object maincall = make_icall(const_scoped_main, 0);

@@ -2,7 +2,6 @@
 #include <model.h>
 #include <system.h>
 #include <thread.h>
-#include <assert.h>
 #include <setjmp.h>
 
 #define ctx_size (sizeof(struct context) / sizeof(object))
@@ -22,7 +21,8 @@ void init_thread() {
 }
 
 static void expand_stack() {
-    assert(NULL);
+    /* TODO implement stack expansion */
+    error_guard(0, "Out of stack.");
 }
 
 context_object inline stack_claim(int size) {

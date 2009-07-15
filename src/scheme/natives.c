@@ -7,7 +7,6 @@
 #include <print.h>
 #include <thread.h>
 
-#include <assert.h>
 #include <stdio.h>
 
 #define preval1(name, context, argument, body) \
