@@ -3,16 +3,14 @@
 
 with_pre_eval1(iarray_at, context, idx,
     array_object array = context->self.array;
-    // XXX breaks encapsulation.
-    int index = idx.number->value;
-    return_from_context(context, array_at(array, index));
+    cast(index, idx, number);
+    return_from_context(context, array_at(array, index->value));
 )
 
 with_pre_eval2(iarray_at_put, context, idx, value,
     array_object array = context->self.array;
-    // XXX breaks encapsulation.
-    int index = idx.number->value;
-    array_at_put(array, index, value);
+    cast(index, idx, number);
+    array_at_put(array, index->value, value);
     pop_context();
 )
 
@@ -23,9 +21,8 @@ static void inline iarray_size() {
 }
 
 with_pre_eval1(iarray_new, context, w_size,
-    // XXX breaks encapsulation
-    int size = w_size.number->value;
-    object result = (object)make_array(size);
+    cast(size, w_size, number);
+    object result = (object)make_array(size->value);
     return_from_context(context, result);
 )
 

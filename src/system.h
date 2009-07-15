@@ -183,16 +183,16 @@ extern int ensure_greater_equals(int v1, int v2, const wchar_t* format,
 extern int ensure(int condition, const wchar_t* format, const char* file, unsigned int line);
 
 #define error_guard(condition, format)\
-	if (!ensure((condition), L"%s, line %u, " format L"\n", __FILE__, __LINE__)) {\
+	if (!ensure((condition), L"%s, line %u, " format "\n", __FILE__, __LINE__)) {\
 		continue_transfer();\
 	}
 
 #define assert_argsize(context, size)\
-	error_guard(context_size(context) >= (size), L"Argument mismatch.")
+	error_guard(context_size(context) >= (size), "Argument mismatch.")
 
 #define cast(var, o, type)\
 	type##_##object var = ((object)(o)).type;\
-	error_guard(isinstance((object)(var), type), L"Type mismatch.")
+	error_guard(isinstance((object)(var), type), "Type mismatch.")
 
 #define isinstance(o, type)\
 	(pheader(pheader((o).pointer)) == woodstock->type##_##t_stub_class.pointer || \
