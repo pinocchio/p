@@ -1,5 +1,4 @@
 #include <system.h>
-#include <assert.h>
 #include <thread.h>
 
 static ifixed_t_object inline ifixed_descr(object inst) {
@@ -10,28 +9,26 @@ with_pre_eval1(ifixed_at, context, idx,
     object self = context->self;
     ifixed_t_object ifixed = ifixed_descr(self);
 
-    // XXX breaks encapsulation.
-    int index = idx.number->value;
-    debug("at %i (size %i)\n", index, ifixed->size);
+    cast(index, idx, number);
+    debug("at %i (size %i)\n", index->value, ifixed->size);
 
-    assert(0 <= index);
-    assert(index < ifixed->size);
+    error_guard(0 <= index->value, "Out of bounds.");
+    error_guard(index->value < ifixed->size, "Out of bounds.");
 
-    return_from_context(context, object_at(self.object, index));
+    return_from_context(context, object_at(self.object, index->value));
 );
 
 with_pre_eval2(ifixed_at_put, context, idx, value,
     object self = context->self;
     ifixed_t_object ifixed = ifixed_descr(self);
 
-    // XXX breaks encapsulation.
-    int index = idx.number->value;
-    debug("an_ifixed>>at:put: (%i of %i)\n", index, ifixed->size);
+    cast(index, idx, number);
+    debug("an_ifixed>>at:put: (%i of %i)\n", index->value, ifixed->size);
 
-    assert(0 <= index);
-    assert(index < ifixed->size);
+    error_guard(0 <= index->value, "Out of bounds.");
+    error_guard(index->value < ifixed->size, "Out of bounds.");
     
-    object_at_put(self.object, index, value);
+    object_at_put(self.object, index->value, value);
 
     pop_context();
     debug("ret>>an_ifixed>>at:put:\n");
@@ -88,10 +85,10 @@ define_bootstrapping_type(fixed,
 )
 
 // Object creation
-object make_class(object size, transfer_target cdispatch) {
+object make_class(object w_size, transfer_target cdispatch) {
     new_instance(ifixed_t);
-    // XXX breaking encapsulation
-    result->size            = size.number->value;
+    cast(size, w_size, number);
+    result->size            = size->value;
     result->cdisp           = (object)cdispatch;
     return (object)result;
 }

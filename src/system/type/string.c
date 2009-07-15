@@ -9,21 +9,17 @@ int inline string_equals(string_object string1, string_object string2) {
 }
 
 with_pre_eval1(string_new, context, w_size,
-    // XXX breaking encapsulation
-    int size = w_size.number->value;
-    return_from_context(context, (object)make_string_sized(size));
+    cast(size, w_size, number);
+    return_from_context(context, (object)make_string_sized(size->value));
 )
 
 with_pre_eval2(string_at_put, context, w_idx, w_char,
-    // XXX breaking encapsulation
-    int idx = w_idx.number->value;
+    cast(idx, w_idx, number);
     string_object self = context->self.string;
-    if (idx >= self->size->value) {
-        printf("Out of bounds: %i of %i!\n", idx, self->size->value-1);
-        assert(NULL);
-    }
-    // XXX breaking encapsulation
-    self->value[idx] = w_char.chr->value;
+    error_guard(idx->value < self->size->value, "Out of bounds.");
+    error_guard(0 <= idx->value, "Out of bounds.");
+    cast(chr, w_char, chr);
+    self->value[idx->value] = chr->value;
     pop_context();
 )
 
