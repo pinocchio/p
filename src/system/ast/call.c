@@ -10,7 +10,6 @@ static void inline icall_invoke_env() {
     object env          = icall_context->env;
     object self         = argument_at(icall_context, 1);
 
-    // XXX Do an ensuring copy! Check it's an array!
     int argsize = array_size(icall->arguments);
     debug("icall>>invoke: %p (%i)\n", self.pointer, argsize);
 
@@ -49,9 +48,8 @@ static void inline icall_eval() {
 }
 
 with_pre_eval2(icall_new, context, w_self, w_size,
-    // XXX breaking encapsulation.
-    int size = w_size.number->value;
-    return_from_context(context, (object)make_icall(w_self, size));
+    cast(size, w_size, number);
+    return_from_context(context, (object)make_icall(w_self, size->value));
 )
 
 define_bootstrapping_type(ast_call,
