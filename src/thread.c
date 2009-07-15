@@ -122,5 +122,5 @@ object inline transfer() {
 }
 
 object inline continue_transfer() {
-    shortjmp(continue_eval, 0);
+    longjmp(continue_eval, 0);
 }
