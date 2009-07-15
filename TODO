@@ -7,9 +7,9 @@ Architecture
     - look at importing existing scheme parsers and syntax compilers
     - setup a scheme REPL with access to the system
 - finish smalltalk system
-    - attach a lookup written in scheme to all classes as interpreter
-    - hand-build the basic meta-hierarchy with a C method to build new
-      instances.
+    - DONE attach a lookup written in scheme to all classes as interpreter
+    - DONE hand-build the basic meta-hierarchy with a C method to build new
+           instances.
     - import smalltalk parser written in scheme or compile to our C format
       from within smalltalk (some peg...)
 
@@ -19,7 +19,7 @@ Roadmap
 - look at interaction with GTK; try to import glamour and use it to build an
   initial IDE and debugger.
 - try to get pthreads working.
-
+- own GC (necessary for multithreading)
 
 VM Optimizations
 ----------------
@@ -28,17 +28,20 @@ VM Optimizations
     - DONE
     - make sure symbols are still known to the runtime.
 - Think about a symbol table in general. And give symbols a different class.
-- check if Const is required or not.
+- Make the argument evaluation of lambdas part of the C-system rather than
+  meta-circular
 
 Language Hacks
 --------------
 - actors
 - multimethods
+    - multiple method lookup implementations
+    - traits-only system?
 - automatic curry
 - prolog
 
-Rename to Pinocchio
--------------------
+Pinocchio
+---------
 "A true relationship has to be based on reciprocal subjective appreciation of
 the other person as a person. Bridging that gap will require alot of effort
 from both Geppetto and Pinocchio."
