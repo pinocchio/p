@@ -93,7 +93,7 @@ context_object inline return_context(context_object context) {
     return context - size - ctx_size;
 }
 
-// Object creation
+/* Object creation */
 context_object make_context(object self, int size) {
     context_object result   = stack_claim(size + ctx_size);
     result->self            = self;
@@ -108,19 +108,25 @@ context_object make_empty_context(int size) {
     return result;
 }
 
+/* Continue eval allows to exit from the current stackframe evaluation and
+ * jump back to the evaluation loop. This is useful for error handling, where
+ * you want to transparantly exit the current evaluation and start the error
+ * handler.
+ */
 jmp_buf continue_eval;
 
-// Meta-interpreter just takes the next action and performs it.
+/* The main interpreter loop handles stackframes until the stack is empty */
 object inline transfer() {
     reset_debug();
+    /* Set the continuation mark to the loop */
     setjmp(continue_eval);
     while (!empty_stack()) {
-        // printf("self: %p\n", get_context()->self.pointer);
         get_context()->code();
     }
     return get_stk_return();
 }
 
+/* Exit the current continuation and jump back to the evaluation loop.*/
 object inline continue_transfer() {
     longjmp(continue_eval, 0);
 }
