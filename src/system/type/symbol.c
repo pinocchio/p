@@ -22,14 +22,13 @@ int inline symbol_equals(symbol_object symbol1, symbol_object symbol2) {
 }
 
 with_pre_eval1(symbol_at, context, w_idx,
-    // XXX breaking encapsulation
-    int idx            = w_idx.number->value;
+    cast(idx, w_idx, number);
     symbol_object self = context->self.symbol;
-    if (idx >= self->size->value) {
-        printf("Out of bounds: %i of %i!\n", idx, self->size->value-1);
-        assert(NULL);
-    }
-    return_from_context(context, (object)make_char(self->value[idx]));
+
+    error_guard(idx->value < self->size->value, "Out of bounds.");
+    error_guard(0 <= idx->value, "Out of bounds.");
+    return_from_context(context,
+        (object)make_char(self->value[idx->value]));
 )
 
 void inline symbol_hash() {
