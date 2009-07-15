@@ -141,11 +141,17 @@ preval1(callec, context, lambda,
 preval1(cont, context, value,
     object self = context->self;
     context_object return_context = object_at(self.object, 0).context;
-    if (argument_at(return_context, 1).object != self.object) {
-        // TODO
-        printf("Continuing finished escape continuation\n");
-        exit(-1);
+
+    int test = argument_at(return_context, 1).object == self.object;
+    if (self.object != woodstock->error.object) {
+        error_guard(test, "Continuing finished escape continuation.");
+    } else {
+        if (!test) {
+            printf("Failing to continue the error-handler!\n");
+            exit(-1);
+        }
     }
+
     return_to_context(return_context, value);
 )
 
@@ -166,7 +172,6 @@ object scheme_error_handler;
 object scheme_exit;
 
 preval1(exit, context, value,
-    // XXX breaks encapsulation
     cast(n, value, number);
     exit(n->value);
 )
