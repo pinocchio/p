@@ -31,7 +31,7 @@
 
 #include <system/io/file.h>
 
-/* Globally used functions */
+// Globally used functions
 extern void pre_eval_env();
 extern void doesnotunderstand(const wchar_t* class, object selector);
 extern void inline identity();

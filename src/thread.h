@@ -27,7 +27,7 @@ extern void inline return_to_context(context_object context, object value);
 
 // Starting an evaluation thread.
 extern object inline transfer();
-extern object inline continue_transfer();
+extern void inline continue_transfer();
 
 struct context {
     transfer_target     code;
