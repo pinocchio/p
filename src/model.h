@@ -202,6 +202,10 @@ struct woodstock {
     // Character table
     object chartable_class;
     object chartable;
+
+    // Streams
+    object stdinstream;
+    object stdoutstream;
 };
 
 // ============================================================================

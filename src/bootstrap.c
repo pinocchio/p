@@ -74,7 +74,10 @@ woodstock_t bootstrap() {
     woodstock->chartable_class   = incomplete_fixed_class(256);
     woodstock->chartable         = (object)make_object(256,
                                         woodstock->chartable_class);
-    
+    // default streams
+    woodstock->stdinstream       = make_instream(stdin);
+    woodstock->stdoutstream      = make_outstream(stdout);
+
     woodstock->nil_class = incomplete_fixed_class(0);
 
     // Build after building the array_class!

@@ -205,10 +205,10 @@ void bootstrap_scheme() {
     init_direct_op(true);
     init_direct_op(false);
 
-    scheme_continue = (object)make_native(&scheme_cont_func);
+    scheme_continue  = (object)make_native(&scheme_cont_func);
 
-    woodstock->true      = scheme_true;
-    woodstock->false     = scheme_false;
+    woodstock->true  = scheme_true;
+    woodstock->false = scheme_false;
 
     init_op(callec);
     init_op(display);
@@ -216,5 +216,5 @@ void bootstrap_scheme() {
     init_direct_op(error);
     init_op(error_handler);
 
-    woodstock->error     = scheme_error;
+    woodstock->error = scheme_error;
 }

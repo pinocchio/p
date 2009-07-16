@@ -132,14 +132,14 @@ char* unicode_to_ascii(const wchar_t* str) {
 // Object creation
 object make_instream(FILE* stream) {
     new_instance(instream);
-    result->file   = stream;
+    result->file = stream;
     error_guard(result->file != NULL, "File not found.");
     return (object)result;
 }
 
 object make_outstream(FILE* stream) {
     new_instance(outstream);
-    result->file   = stream;
+    result->file = stream;
     error_guard(result->file != NULL, "File not found.");
     return (object)result;
 }
