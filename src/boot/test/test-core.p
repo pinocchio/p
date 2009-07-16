@@ -139,8 +139,6 @@
 (display (eq? (charactertable 'objectAt: 119) ("w" 'objectAt: 0)))
 (display (eq? #f (eq? (charactertable 'objectAt: 119) null)))
 
-
-
 (display "\nSYSTEM READY\n")
 
 
