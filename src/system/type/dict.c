@@ -61,8 +61,8 @@ static void inline dict_new() {
 
 define_bootstrapping_type(dict,
     // instance
-    if_selector(OBJECT_AT,        dict_at);
-    if_selector(OBJECT_AT_PUT,    dict_at_put);,
+    if_selector(OBJECT_AT_,        dict_at);
+    if_selector(OBJECT_AT_PUT_,    dict_at_put);,
     // class
     if_selector(BASICNEW,         dict_new);
 )

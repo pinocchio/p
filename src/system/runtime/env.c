@@ -79,12 +79,12 @@ with_pre_eval2(env_class_scope_key, context, w_size, key,
 define_bootstrapping_type(runtime_env,
     // instance
     if_selector(FETCH_FROM,       env_fetch_from);
-    if_selector(STORE_AT_IN,      env_store_at_in);
-    if_selector(SUBSCOPE_KEY,     env_subscope);
-    if_selector(SET_PARENT,       env_set_parent);
+    if_selector(STORE_AT_IN_,      env_store_at_in);
+    if_selector(SUBSCOPE_KEY_,     env_subscope);
+    if_selector(PARENT_,       env_set_parent);
     if_selector(PARENT,           env_parent);,
     // class
-    if_selector(SCOPE_KEY, env_class_scope_key);
+    if_selector(SCOPE_KEY_, env_class_scope_key);
 )
 
 object inline env_at(runtime_env_object env, int index) {

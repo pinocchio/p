@@ -107,17 +107,17 @@ void inline instream_size() {
 
 define_bootstrapping_type(instream,
     // instance
-    if_selector(READ,     instream_read);
-    if_selector(END,      instream_end);
+    if_selector(READCHAR,     instream_read);
+    if_selector(ATEND,      instream_end);
     if_selector(SIZE,     instream_size);
-    if_selector(READ_ALL, instream_read_all);,
+    if_selector(READALLCHARS, instream_read_all);,
     // class
     if (selector.pointer != selector.pointer) {}
 )
 
 define_bootstrapping_type(outstream,
     // instance
-    if_selector(WRITE,    outstream_write);,
+    if_selector(WRITE_CHAR_,    outstream_write);,
     // class
     if (selector.pointer != selector.pointer) {}
 )

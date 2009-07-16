@@ -41,7 +41,7 @@ with_pre_eval1(ilist_new, context, w_size,
 define_bootstrapping_type(ast_list, 
     // instance
     if_selector(EVAL,         ilist_eval);
-    if_selector(PRE_EVAL_ENV, pre_eval_env);,
+    if_selector(EVAL_, pre_eval_env);,
     // class
     if (selector.pointer != selector.pointer) { };
 )

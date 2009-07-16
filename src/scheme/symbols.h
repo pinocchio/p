@@ -3,46 +3,46 @@
 
 // General purpose
 extern object EVAL;
-extern object PRE_EVAL_ENV;
+extern object EVAL_;
 extern object HASH;
 // Variable
 extern object ASSIGN_IN;
 extern object FETCH_FROM;
 // Environment
-extern object STORE_AT_IN;
-extern object SUBSCOPE_KEY;
-extern object SCOPE_KEY;
-extern object SET_PARENT;
+extern object STORE_AT_IN_;
+extern object SUBSCOPE_KEY_;
+extern object SCOPE_KEY_;
+extern object PARENT_;
 extern object PARENT;
 // Iscope_class
-extern object NEW_SIZE;
+extern object NEW_SIZE_;
 // Iscope
-extern object IAPPLY;
-extern object APPLY_IN;
+extern object IAPPLY_;
+extern object APPLY_IN_;
 extern object SCOPE;
 extern object SHIFT;
 // Icapture
 extern object INSTANCE;
 // Iassign
-extern object TO_EXPRESSION;
+extern object TO_EXPRESSION_;
 // Icall
-extern object TO_SIZED;
+extern object TO_SIZED_;
 // Ifixed
-extern object OBJECT_AT;
-extern object OBJECT_AT_PUT;
+extern object OBJECT_AT_;
+extern object OBJECT_AT_PUT_;
 extern object BASICNEW;
-extern object SIZED;
+extern object BASICNEW_;
 extern object DELEGATE;
 extern object SIZE;
-extern object DISPATCH_DELEGATE_SIZE;
-extern object SET_DISPATCH_DELEGATE;
-extern object WITH_SIZE;
+extern object DISPATCH_DELEGATE_SIZE_;
+extern object DISPATCH_DELEGATE_;
+extern object SIZE_;
 // File
-extern object READ;
-extern object ON;
-extern object WRITE;
-extern object END;
-extern object READ_ALL;
+extern object READCHAR;
+extern object ON_;
+extern object WRITE_CHAR_;
+extern object ATEND;
+extern object READALLCHARS;
 
 #define define_symbol(name, value)\
     if (name.pointer == NULL) {\

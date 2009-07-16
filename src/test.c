@@ -128,7 +128,7 @@ SETUP(test_env_lookup)
                                1);
 
     context_object ci = make_context((object)env1, 4);
-    set_message(ci, STORE_AT_IN);
+    set_message(ci, STORE_AT_IN_);
     set_argument(ci, 1, v1);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
@@ -138,7 +138,7 @@ SETUP(test_env_lookup)
     assert(array_at(env1->values, 0).pointer == v1.pointer);
 
     ci = make_context((object)env2, 4);
-    set_message(ci, STORE_AT_IN);
+    set_message(ci, STORE_AT_IN_);
     set_argument(ci, 1, v2);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e2k);
@@ -149,7 +149,7 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 4);
-    set_message(ci, STORE_AT_IN);
+    set_message(ci, STORE_AT_IN_);
     set_argument(ci, 1, v3);
     set_argument(ci, 2, (object)make_number(0));
     set_argument(ci, 3, e1k);
@@ -258,7 +258,7 @@ SETUP(test_new_iscoped)
     object exp = (object)make_iconst(v);
 
     ast_call_object icall = make_icall((object)iconst, 3);
-    set_callmsg(icall, NEW_SIZE);
+    set_callmsg(icall, NEW_SIZE_);
     set_callarg(icall, 1, (object)make_iconst(exp));
     set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
 
@@ -292,7 +292,7 @@ SETUP(test_eval_iscoped)
     object exp = (object)make_iconst(v);
 
     ast_call_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, NEW_SIZE);
+    set_callmsg(icall, NEW_SIZE_);
     set_callarg(icall, 1, (object)make_iconst(exp));
     set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
 
@@ -559,7 +559,7 @@ object ivar_5_args = (object)make_ivar(L"args");
 object ivar_7_msg = (object)make_ivar(L"msg");
 object number_9_0 = (object)make_iconst((object)make_number(0));
 ast_call_object icall_10_ivar_5_args = make_icall((object)ivar_5_args, 3);
-set_callarg(icall_10_ivar_5_args, 0, (object)OBJECT_AT_PUT);
+set_callarg(icall_10_ivar_5_args, 0, (object)OBJECT_AT_PUT_);
 set_callarg(icall_10_ivar_5_args, 1, (object)number_9_0);
 set_callarg(icall_10_ivar_5_args, 2, (object)ivar_3_self);
 object ivar_12_loop = (object)make_ivar(L"loop");
@@ -578,12 +578,12 @@ set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_amethod);
 set_callarg(icall_21_scheme_eqp, 1, (object)null);
 object number_22_0 = (object)make_iconst((object)make_number(0));
 ast_call_object icall_23_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_23_ivar_16_class, 0, (object)OBJECT_AT);
+set_callarg(icall_23_ivar_16_class, 0, (object)OBJECT_AT_);
 set_callarg(icall_23_ivar_16_class, 1, (object)number_22_0);
 ast_call_object icall_24_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
 set_callarg(icall_24_ivar_12_loop, 0, (object)icall_23_ivar_16_class);
 ast_call_object icall_25_ivar_20_amethod = make_icall((object)ivar_20_amethod, 3);
-set_callarg(icall_25_ivar_20_amethod, 0, (object)APPLY_IN);
+set_callarg(icall_25_ivar_20_amethod, 0, (object)APPLY_IN_);
 set_callarg(icall_25_ivar_20_amethod, 1, (object)ivar_5_args);
 set_callarg(icall_25_ivar_20_amethod, 2, (object)ivar_4_env);
 ast_call_object icall_26_icall_21_scheme_eqp = make_icall((object)icall_21_scheme_eqp, 2);
@@ -594,10 +594,10 @@ array_at_put(array_27_lambda_19_x, 0, ivar_20_amethod);
 object lambda_19_x = make_func(array_27_lambda_19_x, (object)icall_26_icall_21_scheme_eqp);
 object number_28_1 = (object)make_iconst((object)make_number(1));
 ast_call_object icall_29_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_29_ivar_16_class, 0, (object)OBJECT_AT);
+set_callarg(icall_29_ivar_16_class, 0, (object)OBJECT_AT_);
 set_callarg(icall_29_ivar_16_class, 1, (object)number_28_1);
 ast_call_object icall_30_icall_29_ivar_16_class = make_icall((object)icall_29_ivar_16_class, 2);
-set_callarg(icall_30_icall_29_ivar_16_class, 0, (object)OBJECT_AT);
+set_callarg(icall_30_icall_29_ivar_16_class, 0, (object)OBJECT_AT_);
 set_callarg(icall_30_icall_29_ivar_16_class, 1, (object)ivar_7_msg);
 ast_call_object icall_31_lambda_19_x = make_icall((object)lambda_19_x, 1);
 set_callarg(icall_31_lambda_19_x, 0, (object)icall_30_icall_29_ivar_16_class);
@@ -628,7 +628,7 @@ array_at_put(array_38_lambda_6_x, 0, ivar_7_msg);
 object lambda_6_x = make_func(array_38_lambda_6_x, (object)ilist_8_lambda);
 object number_39_0 = (object)make_iconst((object)make_number(0));
 ast_call_object icall_40_ivar_5_args = make_icall((object)ivar_5_args, 2);
-set_callarg(icall_40_ivar_5_args, 0, (object)OBJECT_AT);
+set_callarg(icall_40_ivar_5_args, 0, (object)OBJECT_AT_);
 set_callarg(icall_40_ivar_5_args, 1, (object)number_39_0);
 ast_call_object icall_41_lambda_6_x = make_icall((object)lambda_6_x, 1);
 set_callarg(icall_41_lambda_6_x, 0, (object)icall_40_ivar_5_args);
@@ -646,7 +646,7 @@ SETUP(test_make_ifixed)
 
     object class_dispatch = create_class_dispatch();
     ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
-                        DISPATCH_DELEGATE_SIZE,
+                        DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
                         (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
@@ -669,7 +669,7 @@ SETUP(test_ifixed_natives)
 
     object class_dispatch = create_class_dispatch();
     ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
-                        DISPATCH_DELEGATE_SIZE,
+                        DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
                         (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
@@ -703,7 +703,7 @@ SETUP(test_ifixed_object)
 
     object class_dispatch = create_class_dispatch();
     ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
-                        DISPATCH_DELEGATE_SIZE,
+                        DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
                         (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(5)));
@@ -723,14 +723,14 @@ SETUP(test_ifixed_object)
     object result = transfer();
     assert(result.pointer == ifixed.ifixed->delegate.pointer);
     
-    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
            (object)make_iconst((object)make_number(0)));
     make_eval_context(ci, icall, env);
 
     result = transfer();
     assert(result.object == woodstock->nil);
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
            (object)make_iconst((object)make_number(4)));
     make_eval_context(ci, icall, env);
 
@@ -738,13 +738,13 @@ SETUP(test_ifixed_object)
     assert(result.object == woodstock->nil);
 
     icall3(icall, make_iconst(thefixed),
-           OBJECT_AT_PUT, (object)make_iconst((object)make_number(3)),
+           OBJECT_AT_PUT_, (object)make_iconst((object)make_number(3)),
            (object)make_iconst(ifixed));
     make_eval_context(ci, icall, env);
 
     transfer();
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT,
+    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
            (object)make_iconst((object)make_number(3)));
     make_eval_context(ci, icall, env);
 
@@ -760,7 +760,7 @@ SETUP(test_ifixed_dispatch)
 
     object class_dispatch = create_class_dispatch();
     ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
-                        DISPATCH_DELEGATE_SIZE,
+                        DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
                         (object)make_iconst((object)woodstock->nil),
                         (object)make_iconst((object)make_number(2))); // superclass + methoddict
@@ -788,7 +788,7 @@ SETUP(test_ifixed_dispatch)
 
     dict_object methods = make_dict(2);
     icall3(icall, (object)make_iconst((object)methods),
-                  OBJECT_AT_PUT,
+                  OBJECT_AT_PUT_,
                   (object)make_iconst((object)SYMBOL_doesNotUnderstand),
                   dnu);
 
@@ -798,7 +798,7 @@ SETUP(test_ifixed_dispatch)
     object_at_put(theclass.object, 1, (object)methods);
 
     icall4(icall, (object)make_iconst(woodstock->ifixed),
-                  DISPATCH_DELEGATE_SIZE,
+                  DISPATCH_DELEGATE_SIZE_,
                   class_dispatch,
                   (object)make_iconst(theclass),
                   (object)make_iconst((object)make_number(5)));

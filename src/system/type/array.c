@@ -28,11 +28,11 @@ with_pre_eval1(iarray_new, context, w_size,
 
 define_bootstrapping_type(array,
     // instance
-    if_selector(OBJECT_AT,        iarray_at);
-    if_selector(OBJECT_AT_PUT,    iarray_at_put);
+    if_selector(OBJECT_AT_,        iarray_at);
+    if_selector(OBJECT_AT_PUT_,    iarray_at_put);
     if_selector(SIZE,             iarray_size);,
     // class
-    if_selector(SIZED,            iarray_new);
+    if_selector(BASICNEW_,            iarray_new);
 )
 
 int inline array_size(array_object array) {

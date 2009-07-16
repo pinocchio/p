@@ -62,7 +62,7 @@ static void inline iscoped_iapply() {
 
     context_object context = make_context(env, 3);
     context->env = env;
-    set_message(context, SUBSCOPE_KEY);
+    set_message(context, SUBSCOPE_KEY_);
     set_argument(context, 1, (object)make_number(argsize + 1)); // + iscoped
     set_argument(context, 2, iscoped->expression);
 
@@ -104,12 +104,12 @@ with_pre_eval2(iscoped_class_new, context, expression, argsize,
 
 define_bootstrapping_type(ast_scoped,
     // instance
-    if_selector(IAPPLY,   iscoped_iapply);
+    if_selector(IAPPLY_,   iscoped_iapply);
     if_selector(SCOPE,    iscoped_scope);
-    if_selector(APPLY_IN, iscoped_apply_in);
+    if_selector(APPLY_IN_, iscoped_apply_in);
     if_selector(SHIFT,    iscoped_shift);,
     // class
-    if_selector(NEW_SIZE, iscoped_class_new);
+    if_selector(NEW_SIZE_, iscoped_class_new);
 )
 
 // Object creation

@@ -19,7 +19,7 @@ void shift_level() {
     pop_context();
     context = make_context(dispatch, 2);
     context->env = env;
-    set_message(context, IAPPLY);
+    set_message(context, IAPPLY_);
     set_argument(context, 1, (object)arguments);
 
     debug("ret>>shiftLevel\n");

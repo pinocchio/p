@@ -90,7 +90,7 @@ with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
 void type##_##class_stub_dispatch() {\
     dispatch_header(context, selector);\
     messages;\
-    if_selector(SET_DISPATCH_DELEGATE, type##_##set_dispatch_delegate);\
+    if_selector(DISPATCH_DELEGATE_, type##_##set_dispatch_delegate);\
     doesnotunderstand(L""#type"_stubclass", selector);\
 }
 

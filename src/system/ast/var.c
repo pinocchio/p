@@ -18,7 +18,7 @@ static void inline ivar_assign() {
     ivar_context = make_context(env, 4);
     ivar_context->env = env;
 
-    set_message(ivar_context, STORE_AT_IN);
+    set_message(ivar_context, STORE_AT_IN_);
     set_argument(ivar_context, 1, value);
     set_argument(ivar_context, 2, (object)ivar->index);
     set_argument(ivar_context, 3, ivar->scope);
@@ -54,9 +54,9 @@ define_bootstrapping_type(ast_var,
     // instance
     if_selector(EVAL,         ivar_eval);
     if_selector(ASSIGN_IN,    ivar_assign);
-    if_selector(PRE_EVAL_ENV, pre_eval_env);,
+    if_selector(EVAL_, pre_eval_env);,
     // class
-    if_selector(SIZED,        ivar_new); // should rename SIZED...
+    if_selector(BASICNEW_,        ivar_new); // should rename SIZED...
 )
 
 // Object creation

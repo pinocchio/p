@@ -58,8 +58,8 @@ void inline symbol_size() {
 define_bootstrapping_type(symbol,
     // instance
     if_selector(EVAL,         identity);
-    if_selector(PRE_EVAL_ENV, identity);
-    if_selector(OBJECT_AT,    symbol_at);
+    if_selector(EVAL_, identity);
+    if_selector(OBJECT_AT_,    symbol_at);
     if_selector(SIZE,         symbol_size);,
     // class
 )

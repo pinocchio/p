@@ -18,19 +18,19 @@ with_pre_eval1(outfile_open, context, w_name,
 
 define_bootstrapping_type(infile,
     // instance
-    if_selector(READ,     instream_read);
-    if_selector(END,      instream_end);
+    if_selector(READCHAR,     instream_read);
+    if_selector(ATEND,      instream_end);
     if_selector(SIZE,     instream_size);
-    if_selector(READ_ALL, instream_read_all);,
+    if_selector(READALLCHARS, instream_read_all);,
     // class
-    if_selector(ON,       infile_open);
+    if_selector(ON_,       infile_open);
 )
 
 define_bootstrapping_type(outfile,
     // instance
-    if_selector(WRITE,    outstream_write);,
+    if_selector(WRITE_CHAR_,    outstream_write);,
     // class
-    if_selector(ON,       outfile_open);
+    if_selector(ON_,       outfile_open);
 )
 
 // Object creation
