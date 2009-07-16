@@ -22,7 +22,7 @@ void scheme##_##name##_##func() {\
     context->code = &name##_##do;\
 }
 
-#define preval2(name) \
+#define preval2_push(name) \
 void name##_##func() {\
     context_object context = get_context();\
     assert_argsize(context, 2);\
@@ -51,7 +51,7 @@ static void scheme##_##name##_##func_do() {\
     return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
-preval2(scheme##_##name);
+preval2_push(scheme##_##name);
 
 #define bin_eval_with(name, func)\
 object scheme##_##name;\
@@ -64,7 +64,7 @@ static void scheme##_##name##_##func_do() {\
     return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
-preval2(scheme##_##name);
+preval2_push(scheme##_##name);
 
 #define bin_io_op(name, input, output, op)\
 object inline scheme##_##name##_##native(input##_##object left, input##_##object right) {\
