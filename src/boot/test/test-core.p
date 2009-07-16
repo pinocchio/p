@@ -139,6 +139,16 @@
 (display (eq? (charactertable 'objectAt: 119) ("w" 'objectAt: 0)))
 (display (eq? #f (eq? (charactertable 'objectAt: 119) null)))
 
+
+(display "\nStream testing\n")
+(display "\nWrite 'a':")
+(display (char= (stdinstream 'readChar) #\a))
+(stdinstream 'readChar) 
+
+(display "\nWrite the 'HAMMER AND SICKLE'-sign character '☭':")
+(display (char= (stdinstream 'readChar) #\☭))
+(stdinstream 'readChar) 
+
 (display "\nSYSTEM READY\n")
 
 

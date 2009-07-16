@@ -72,9 +72,10 @@ static string_object utf8_read_all(FILE* fp) {
 void inline instream_read() {
     context_object context = get_context();
     instream_object file   = context->self.instream;
-    chr_object result      = make_char(0);
+    wchar_t chr;
     FILE* fp               = file->file;
-    utf8_read_char(fp, &result->value);
+    utf8_read_char(fp, &chr);
+    chr_object result      = make_char(chr);
     return_from_context(context, (object)result);
 }
 

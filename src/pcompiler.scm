@@ -522,6 +522,8 @@ extravars))))))))
     (Character      "Character")
     (CharacterTable "CharacterTable")
     (charactertable "charactertable")
+    (stdinstream    "stdinstream")
+    (stdoutstream   "stdoutstream")
     (UndefinedObject "UndefinedObject")
     ; Built-in classes related to evaluation
     (IList          "IList")

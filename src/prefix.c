@@ -48,6 +48,8 @@ int main () {
     object true             = import_object(true);
     object false            = import_object(false);
     object charactertable   = import_object(chartable);
+    object stdinstream      = import_object(stdinstream);
+    object stdoutstream     = import_object(stdoutstream);
 
 /* Generated code */
 
