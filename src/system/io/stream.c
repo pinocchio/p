@@ -96,17 +96,6 @@ void inline instream_read_all() {
     return_from_context(context, (object)result);
 }
 
-with_pre_eval1(instream_open, context, stream,
-    // TODO add cast here
-    FILE * streampointer ;
-    return_from_context(context, make_instream(streampointer));
-)
-
-with_pre_eval1(outstream_open, context, stream,
-    FILE * streampointer;
-    return_from_context(context, make_outstream(streampointer));
-)
-
 void inline instream_size() {
     context_object context = get_context();
     instream_object f      = context->self.instream;
@@ -121,14 +110,14 @@ define_bootstrapping_type(instream,
     if_selector(SIZE,     instream_size);
     if_selector(READ_ALL, instream_read_all);,
     // class
-    if_selector(ON,       instream_open);
+    if (selector.pointer != selector.pointer) {}
 )
 
 define_bootstrapping_type(outstream,
     // instance
     if_selector(WRITE,    outstream_write);,
     // class
-    if_selector(ON,       outstream_open);
+    if (selector.pointer != selector.pointer) {}
 )
 
 char* unicode_to_ascii(const wchar_t* str) {
