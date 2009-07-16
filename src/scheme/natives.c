@@ -39,14 +39,28 @@ void name##_##func() {\
     scheme##_##name = (object)make_object(0,\
                         (object)make_native(&scheme##_##name##_##func));
 
-#define bin_eval_with(name, type1, type2, func)\
+#define cast_bin_eval_with(name, type1, type2, func)\
 object scheme##_##name;\
 static void scheme##_##name##_##func_do() {\
     dec();\
     debug("scheme>>"#name"\n");\
     context_object context = get_context();\
-    object result = func(argument_at(context, 0).type1,\
-                         argument_at(context, 1).type2);\
+    cast(v1##_##type1, argument_at(context, 0), type1);\
+    cast(v2##_##type2, argument_at(context, 1), type2);\
+    object result = func(v1##_##type1, v2##_##type2);\
+    return_from_context(context, result);\
+    debug("ret>>scheme>>"#name"\n");\
+}\
+preval2(scheme##_##name);
+
+#define bin_eval_with(name, func)\
+object scheme##_##name;\
+static void scheme##_##name##_##func_do() {\
+    dec();\
+    debug("scheme>>"#name"\n");\
+    context_object context = get_context();\
+    object result = func(argument_at(context, 0).object,\
+                         argument_at(context, 1).object);\
     return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
@@ -56,7 +70,7 @@ preval2(scheme##_##name);
 object inline scheme##_##name##_##native(input##_##object left, input##_##object right) {\
     return (object)make##_##output(left->value op right->value);\
 }\
-bin_eval_with(name, input, input, scheme##_##name##_##native)
+cast_bin_eval_with(name, input, input, scheme##_##name##_##native)
 
 
 #define bin_number_number_op(name, op)\
@@ -69,7 +83,7 @@ bin_eval_with(name, input, input, scheme##_##name##_##native)
 object inline scheme##_##name##_##native(object_object left, object_object right) {\
     return (object)make_bool(left op right);\
 }\
-bin_eval_with(name, object, object, scheme##_##name##_##native)
+bin_eval_with(name, scheme##_##name##_##native)
 
 object inline make_bool(int bl) {
     if (bl) {
