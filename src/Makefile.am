@@ -10,7 +10,7 @@ system/ast/capture.h system/ast/var.h system/ast/capture.c\
 system/ast/list.c system/ast/call.c system/ast/var.c\
 system/ast/list.h system/ast/const.h system/ast/scoped.h\
 system/ast/const.c system/ast/scoped.c\
-system/io/file.h system/io/file.c\
+system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
 system/type/type.h system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
 system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\

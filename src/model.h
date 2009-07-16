@@ -33,18 +33,20 @@
 
 // ============================================================================
 
-struct runtime_env;
-struct object_object;
-struct symbol;
-struct number;
 struct array;
+struct chr;
+struct context;
 struct dict;
+struct infile;
+struct instream;
 struct native;
 struct native_class;
-struct context;
-struct infile;
+struct number;
+struct object_object;
 struct outfile;
-struct chr;
+struct outstream;
+struct runtime_env;
+struct symbol;
 
 struct ast_list;
 struct ast_assign;
@@ -58,28 +60,30 @@ struct fallback;
 
 // ============================================================================
 
-typedef struct ast_list*         ast_list_object;
+typedef struct array*            array_object;
 typedef struct ast_assign*       ast_assign_object;
 typedef struct ast_call*         ast_call_object;
-typedef struct ast_const*        ast_const_object;
-typedef struct ast_var*          ast_var_object;
-typedef struct ast_scoped*       ast_scoped_object;
 typedef struct ast_capture*      ast_capture_object;
-typedef struct ifixed_t*         ifixed_t_object;
-typedef struct fallback*         fallback_object;
-typedef struct runtime_env*      runtime_env_object;
-typedef struct object_object*    object_object;
-typedef struct symbol*           symbol_object;
-typedef struct symbol*           string_object;
-typedef struct number*           number_object;
-typedef struct array*            array_object;
+typedef struct ast_const*        ast_const_object;
+typedef struct ast_list*         ast_list_object;
+typedef struct ast_scoped*       ast_scoped_object;
+typedef struct ast_var*          ast_var_object;
+typedef struct chr*              chr_object;
+typedef struct context*          context_object;
 typedef struct dict*             dict_object;
+typedef struct fallback*         fallback_object;
+typedef struct ifixed_t*         ifixed_t_object;
+typedef struct instream*         infile_object;
+typedef struct instream*         instream_object;
 typedef struct native*           native_object;
 typedef struct native_class*     native_class_object;
-typedef struct context*          context_object;
-typedef struct infile*           infile_object;
-typedef struct outfile*          outfile_object;
-typedef struct chr*              chr_object;
+typedef struct number*           number_object;
+typedef struct object_object*    object_object;
+typedef struct outstream*        outfile_object;
+typedef struct outstream*        outstream_object;
+typedef struct runtime_env*      runtime_env_object;
+typedef struct symbol*           string_object;
+typedef struct symbol*           symbol_object;
 typedef void**                   pointer;
 
 typedef void (*transfer_target)();
@@ -90,30 +94,32 @@ struct woodstock;
 typedef struct woodstock*       woodstock_t;
 
 typedef union {
-    ast_list_object        ilist;
+    array_object           array;
     ast_assign_object      iassign;
     ast_call_object        icall;
-    ast_const_object       iconst;
-    ast_var_object         ivar;
-    ast_scoped_object      iscoped;
     ast_capture_object     icapture;
-    ifixed_t_object        ifixed;
-    fallback_object        fallback;
-    object_object          object;
-    symbol_object          symbol;
-    string_object          string;
-    number_object          number;
-    array_object           array;
-    dict_object            dict;
-    native_object          native;
-    native_class_object    native_class;
-    context_object         context;
-    runtime_env_object     env;
-    transfer_target        target;
-    infile_object          infile;
-    outfile_object         outfile;
+    ast_const_object       iconst;
+    ast_list_object        ilist;
+    ast_scoped_object      iscoped;
+    ast_var_object         ivar;
     chr_object             chr;
+    context_object         context;
+    dict_object            dict;
+    fallback_object        fallback;
+    ifixed_t_object        ifixed;
+    infile_object          infile;
+    instream_object        instream;
+    native_class_object    native_class;
+    native_object          native;
+    number_object          number;
+    object_object          object;
+    outfile_object         outfile;
+    outstream_object       outstream;
     pointer                pointer;
+    runtime_env_object     env;
+    string_object          string;
+    symbol_object          symbol;
+    transfer_target        target;
 } object;
 
 // ============================================================================
@@ -169,8 +175,10 @@ struct woodstock {
     declare_metaclass(fixed);
     declare_metaclass(ifixed);
     declare_metaclass(infile);
+    declare_metaclass(instream);
     declare_metaclass(number);
     declare_metaclass(outfile);
+    declare_metaclass(outstream);
     declare_metaclass(runtime_env);
     declare_metaclass(string);
     declare_metaclass(symbol);
@@ -183,9 +191,11 @@ struct woodstock {
     object chr_class;
     object dict_class;
     object infile_class;
+    object instream_class;
     object nil_class;
     object number_class;
     object outfile_class;
+    object outstream_class;
     object string_class;
     object symbol_class;
 

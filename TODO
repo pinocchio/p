@@ -1,18 +1,17 @@
 Architecture
 ------------
-- finish scheme system
-    - subscope of iscoped>>scope rather than the passed env
-    - figure out a good way of writing scheme natives in terms of message
-      sends -> better than the current "native()" approach
-    - look at importing existing scheme parsers and syntax compilers
-    - setup a scheme REPL with access to the system
-- finish smalltalk system
-    - DONE attach a lookup written in scheme to all classes as interpreter
-    - DONE hand-build the basic meta-hierarchy with a C method to build new
-           instances.
-    - import smalltalk parser written in scheme or compile to our C format
-      from within smalltalk (some peg...)
-
+- Input stream mind UTF8 (see file.c)
+- finish peg
+- Think about a symbol table in general. And give symbols a different class.
+    - make sure symbols are still known to the runtime.
+- replace error guard text messages with message objects
+- make ast classes extendable (a class for each type)
+- subscope of iscoped>>scope rather than the passed env
+- figure out a good way of writing scheme natives in terms of message
+  sends -> better than the current "native()" approach
+- setup a scheme REPL with access to the system
+- import smalltalk parser written in scheme or compile to our C format
+  from within smalltalk (some peg...)
 
 Roadmap
 -------
@@ -24,10 +23,6 @@ Roadmap
 VM Optimizations
 ----------------
 - Inline env->values in env for faster alloc. Maybe even make env-stack
-- Make sure symbols known to the VM are not constantly calculated but static
-    - DONE
-    - make sure symbols are still known to the runtime.
-- Think about a symbol table in general. And give symbols a different class.
 - Make the argument evaluation of lambdas part of the C-system rather than
   meta-circular
 

@@ -29,6 +29,7 @@
 
 #include <system/runtime/env.h>
 
+#include <system/io/stream.h>
 #include <system/io/file.h>
 
 // Globally used functions
@@ -123,7 +124,7 @@ void type##_##stub_dispatch() {\
         header(ifixed)  = woodstock->name##_##t_class;,\
         classmsgs)
 
-// TODO change back to static void
+// TODO maybe  change back to static void
 #define with_pre_eval1(name, context, first, body)\
 void name##_##do() {\
     debug(#name"\n");\
