@@ -127,6 +127,6 @@ object inline transfer() {
 }
 
 /* Exit the current continuation and jump back to the evaluation loop.*/
-object inline continue_transfer() {
+void inline continue_transfer() {
     longjmp(continue_eval, 0);
 }
