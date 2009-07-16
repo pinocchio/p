@@ -4,9 +4,9 @@
 
 (let ((sscan (StringScanner 'on: "Test")))
     (display (= 0 (sscan 'pos)))
-    (display (= (sscan 'next) #\T))
+    (display (char= (sscan 'next) #\T))
     (display (= 1 (sscan 'pos)))
-    (display (= (sscan 'next) #\e))
+    (display (char= (sscan 'next) #\e))
     (sscan 'next)
     (sscan 'next)
     (display (sscan 'atEnd)))
@@ -47,7 +47,7 @@
       (parser ("abab" 'asParser)))
     (display (= 4 ((parser 'match:in: input null) 'size))))
 
-(display (1 + null))
+;(display (1 + null))
 
 (let ((parser (Parser 'named: "Test")))
     (parser '<= ("abab" 'asParser))

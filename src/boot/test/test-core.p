@@ -52,7 +52,7 @@
 (display "\nUnicode tests\n")
 (let ((s "boe\n"))
     (s 'objectAt:put: 2 #\ƺ)
-    (display (= (s 'objectAt: 2) #\ƺ)))
+    (display (char= (s 'objectAt: 2) #\ƺ)))
 
 ;(display "blaboe\n")
 

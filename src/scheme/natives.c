@@ -79,6 +79,9 @@ cast_bin_eval_with(name, input, input, scheme##_##name##_##native)
 #define bin_number_bool_op(name, op)\
     bin_io_op(name, number, bool, op)
 
+#define bin_char_bool_op(name, op)\
+    bin_io_op(name, chr, bool, op)
+
 #define bin_object_bool_op(name, op)\
 object inline scheme##_##name##_##native(object_object left, object_object right) {\
     return (object)make_bool(left op right);\
@@ -121,6 +124,7 @@ bin_number_number_op( plus,      +  )
 bin_number_number_op( minus,     -  )
 bin_number_bool_op  ( smallerp,  <  )
 bin_number_bool_op  ( equalp,    == )
+bin_char_bool_op    ( chareqp,   == )
 bin_object_bool_op  ( eqp,       == )
 
 preval1(display, context, v,
@@ -197,6 +201,7 @@ void bootstrap_scheme() {
     init_op(smallerp);
     init_op(equalp);
     init_op(eqp);
+    init_op(chareqp)
     init_direct_op(true);
     init_direct_op(false);
 

@@ -314,8 +314,8 @@
                             (let loop ((idx 0))
                                 (if (= idx (string 'size))
                                     string
-                                    (if (= (input 'next)
-                                           (string 'objectAt: idx))
+                                    (if (char= (input 'next)
+                                               (string 'objectAt: idx))
                                         (loop (+ idx 1))
                                         null)))
                             null)))
