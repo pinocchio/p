@@ -131,6 +131,16 @@
          (error-handler error)
          #t)) 
 
+(display "\nCharacter table tests\n")
+(display (eq? #\v #\v))
+(display (eq? #f (eq? #\䷊ #\䷊)))
+(display (eq? (charactertable 'objectAt: 119) null))
+("w" 'objectAt: 0)
+(display (eq? (charactertable 'objectAt: 119) ("w" 'objectAt: 0)))
+(display (eq? #f (eq? (charactertable 'objectAt: 119) null)))
+
+
+
 (display "\nSYSTEM READY\n")
 
 
