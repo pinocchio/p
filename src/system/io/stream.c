@@ -71,17 +71,18 @@ static string_object utf8_read_all(FILE* fp) {
 
 void inline instream_read() {
     context_object context = get_context();
-    instream_object file   = context->self.instream;
+    instream_object self   = context->self.instream;
     wchar_t chr;
-    FILE* fp               = file->file;
-    utf8_read_char(fp, &chr);
+    utf8_read_char(self->file, &chr);
     chr_object result      = make_char(chr);
     return_from_context(context, (object)result);
 }
 
 with_pre_eval1(outstream_write, context, w_chr,
-    // make the compiler warning disappear
-    if (0) { w_chr = w_chr; }
+    outstream_object self = context->self.outstream;
+    cast(chr_var, w_chr, chr)
+    putwc(chr_var->value, self->file);
+    return_from_context(context, (object)self);
 )
 
 void inline instream_end() {
@@ -92,15 +93,15 @@ void inline instream_end() {
 
 void inline instream_read_all() {
     context_object context = get_context();
-    instream_object file     = context->self.instream;
-    string_object result   = utf8_read_all(file->file);
+    instream_object self   = context->self.instream;
+    string_object result   = utf8_read_all(self->file);
     return_from_context(context, (object)result);
 }
 
 void inline instream_size() {
     context_object context = get_context();
-    instream_object f      = context->self.instream;
-    int size               = utf8_size(f->file);
+    instream_object self   = context->self.instream;
+    int size               = utf8_size(self->file);
     return_from_context(context, (object)make_number(size));
 }
 
