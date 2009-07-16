@@ -72,7 +72,7 @@ static string_object utf8_read_all(FILE* fp) {
 static void inline infile_read() {
     context_object context = get_context();
     infile_object file     = context->self.infile;
-    chr_object result      = make_empty_char();
+    chr_object result      = make_char(L'\0');
     FILE* fp = file->file;
     utf8_read_char(fp, &result->value);
     return_from_context(context, (object)result);

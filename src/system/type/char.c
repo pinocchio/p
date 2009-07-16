@@ -26,7 +26,3 @@ chr_object make_char(wchar_t value) {
     result->value = value;
     return result;
 }
-
-chr_object make_empty_char() {
-    return make_char(L"");
-}
