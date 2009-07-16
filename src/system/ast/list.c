@@ -43,7 +43,7 @@ define_bootstrapping_type(ast_list,
     if_selector(EVAL,         ilist_eval);
     if_selector(PRE_EVAL_ENV, pre_eval_env);,
     // class
-    if_selector(SIZED,        ilist_new);
+    if (selector.pointer != selector.pointer) { };
 )
 
 // Object creation
