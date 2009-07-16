@@ -4,11 +4,6 @@
 #include <thread.h>
 #include <scheme/natives.h>
 
-
-#define incomplete_ifixed_class(name, size)\
-    name = make_class((object)make_number(size), &ifixed_stub_dispatch);\
-    header(name.pointer) = woodstock->ifixed_t_stub_class;
-
 #define incomplete_class(type)\
     (object)make_native_class(woodstock->type##_##t_stub_class,\
                               type##_##stub_dispatch)
@@ -70,8 +65,13 @@ woodstock_t bootstrap() {
     woodstock->outfile_class     = incomplete_class(outfile);
     woodstock->string_class      = incomplete_class(string);   
     woodstock->symbol_class      = incomplete_class(symbol);
+
+    // Optimization classes
+    woodstock->chartable_class   = incomplete_fixed_class(256);
+    woodstock->chartable         = (object)make_object(256,
+                                        woodstock->chartable_class);
     
-    incomplete_ifixed_class(woodstock->nil_class, 0);
+    woodstock->nil_class = incomplete_fixed_class(0);
 
     // Build after building the array_class!
     woodstock->empty             = ((array_object)make_object(1, woodstock->array_class));

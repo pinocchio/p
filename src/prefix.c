@@ -30,6 +30,7 @@ int main () {
     object Array            = import_class(array); 
     object Dictionary       = import_class(dict);
     object UndefinedObject  = import_class(nil);
+    object CharacterTable   = import_class(chartable);
 
     object Character        = import_class(chr);
     object IAssign          = import_class(ast_assign);
@@ -46,6 +47,7 @@ int main () {
     object null             = import_object(nil);
     object true             = import_object(true);
     object false            = import_object(false);
+    object charactertable   = import_object(chartable);
 
 /* Generated code */
 

@@ -188,6 +188,10 @@ struct woodstock {
     object outfile_class;
     object string_class;
     object symbol_class;
+
+    // Character table
+    object chartable_class;
+    object chartable;
 };
 
 // ============================================================================

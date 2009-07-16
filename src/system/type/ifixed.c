@@ -62,17 +62,23 @@ define_bootstrapping_type(ifixed,
     if_selector(SIZE,             ifixed_size);
 )
 
-with_pre_eval3(ifixed_class_new, context, dispatch, delegate, size,
-    object ifixed           = make_class(size, &ifixed_dispatch);
+with_pre_eval3(ifixed_class_new, context, dispatch, delegate, w_size,
+    cast(size, w_size, number);
+    object ifixed           = make_class(size->value, &ifixed_dispatch);
     ifixed.ifixed->delegate = delegate;
     ifixed.ifixed->dispatch = dispatch;
     return_from_context(context, ifixed);
 );
 
-with_pre_eval1(ifixed_stub_class_new, context, size,
-    object ifixed          = make_class(size, &ifixed_stub_dispatch);
+object inline incomplete_fixed_class(int size) {
+    object ifixed = make_class(size, &ifixed_stub_dispatch);
     header(ifixed.pointer) = woodstock->ifixed_t_stub_class;
-    return_from_context(context, ifixed);
+    return ifixed;
+}
+
+with_pre_eval1(ifixed_stub_class_new, context, w_size,
+    cast(size, w_size, number);
+    return_from_context(context, incomplete_fixed_class(size->value));
 )
 
 define_bootstrapping_type(fixed,
@@ -85,10 +91,9 @@ define_bootstrapping_type(fixed,
 )
 
 // Object creation
-object make_class(object w_size, transfer_target cdispatch) {
+object make_class(int size, transfer_target cdispatch) {
     new_instance(ifixed_t);
-    cast(size, w_size, number);
-    result->size            = size->value;
+    result->size            = size;
     result->cdisp           = (object)cdispatch;
     return (object)result;
 }
