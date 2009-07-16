@@ -1,7 +1,6 @@
 #include <system.h>
 #include <thread.h>
 #include <print.h>
-#include <assert.h>
 
 with_pre_eval1(dict_at, context, key,
     dict_object dict = context->self.dict;
@@ -70,7 +69,7 @@ define_bootstrapping_type(dict,
 
 // Object creation
 dict_object make_dict(int size) {
-    assert(size);
+    error_guard(size>0, "Invalid dictionary size");
     new_instance(dict);
     result->values = make_array(size * 2);
     return result;
