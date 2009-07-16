@@ -140,18 +140,18 @@
 (display (eq? #f (eq? (charactertable 'objectAt: 119) null)))
 
 
-(display "\nStream testing\n")
-(display "\nWrite 'a':")
-(display (char= (stdinstream 'readChar) #\a))
-(stdinstream 'readChar) 
-
-(display "\nWrite the 'HAMMER AND SICKLE'-sign character '☭':")
-(display (char= (stdinstream 'readChar) #\☭))
-(stdinstream 'readChar) 
-(display "\nShould be 't':")
-(stdoutstream 'writeChar: #\t)
-(display "\nShould be SWONMAN '☃':")
-(stdoutstream 'writeChar: #\☃)
+;(display "\nStream testing\n")
+;(display "\nWrite 'a':")
+;(display (char= (stdinstream 'readChar) #\a))
+;(stdinstream 'readChar) 
+;
+;(display "\nWrite the 'HAMMER AND SICKLE'-sign character '☭':")
+;(display (char= (stdinstream 'readChar) #\☭))
+;(stdinstream 'readChar) 
+;(display "\nShould be 't':")
+;(stdoutstream 'writeChar: #\t)
+;(display "\nShould be SWONMAN '☃':")
+;(stdoutstream 'writeChar: #\☃)
 
 
 (display "\nSYSTEM READY\n")
