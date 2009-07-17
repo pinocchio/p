@@ -10,6 +10,8 @@
                             '<& ((#\> 'asParser) 'omit: #t)))
                 p))
             )
+        ;this is where one could add more methods
+        ;write parser for st using the one in pharo
        )
        ())))
     

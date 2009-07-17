@@ -1,31 +1,4 @@
-(letrec ((car (lambda (cons) (cons 'car)))
-         (cdr (lambda (cons) (cons 'cdr)))
-         (Cons (newclass Cons Object (car cdr) ()
-                ((car (s) ((getself s) 'objectAt: 0))
-                 (car: (s new) ((getself s) 'objectAt:put: 0 new))
-                 (cdr (s) ((getself s) 'objectAt: 1))
-                 (cdr: (s new) ((getself s) 'objectAt:put: 1 new)))
-                ()))
-         (cons (lambda (l r)
-            (let ((result (Cons 'new)))
-                (result 'car: l)
-                (result 'cdr: r)
-                result)))
-         (reverse (lambda (l)
-            (let loop ((input l)
-                       (result null))
-                (if (eq? input null)
-                    result
-                    (loop (cdr input)
-                          (cons (car input) result))))))
-         (length (lambda (l)
-            (let loop ((input l)
-                       (result 0))
-                (if (eq? input null)
-                    result
-                    (loop (cdr input) (+ result 1))))))
-                    
-         (StringScanner (newclass StringScanner Object 
+(letrec ((StringScanner (newclass StringScanner Object 
                         (string position separator) ()
                 ((pos        (s) ((getself s) 'objectAt: 1))
                  (pos:       (s new) ((getself s) 'objectAt:put: 1 new))
@@ -325,17 +298,6 @@
                         (result 'string: str)
                         result)))
             ))
-
-        (list->string (lambda (list)
-            (let ((result (String 'basicNew: (length list))))
-                (let loop ((todo list)
-                           (idx 0))
-                    (if (eq? todo null)
-                        result
-                        (begin
-                            (result 'objectAt:put: idx (car todo))
-                            (loop (cdr todo) (+ idx 1))))))))
-
         )
 
        (Character 'store:method: 'asParser

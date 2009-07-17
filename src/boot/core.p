@@ -315,7 +315,7 @@
                 Object
     )))))))
 
-    (load "boot/peg.p")
+    (load "boot/scheme.p")
 
 )))))))
 
