@@ -30,9 +30,7 @@
          (append (lambda (l r)
             (if (eq? l null)
                 r
-                (if (eq? (cdr l) null)
-                    (set-cdr! l r)
-                    (append (cdr l) r)))))
+                (cons (car l) (append (cdr l) r)))))
         (list->string (lambda (list)
             (let ((result (String 'basicNew: (length list))))
                 (let loop ((todo list)
