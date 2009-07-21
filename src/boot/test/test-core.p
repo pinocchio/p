@@ -80,6 +80,12 @@
         'testMethod (method (self super) (self 'size)))
     (display (= (test 'testMethod) 10)))
 
+ (display "\nDictionary test\n")
+ (let ((d (Dictionary 'new)))    ;TODO make this test not fail because it cant fail
+      ; (d 'objectAt: 'aKey))
+      )
+
+
 ;(display "\nFile tests\n")
 ;(let* ((file (InputFile 'on: "fib-compiler.scm"))
 ;       (size (file 'size))
