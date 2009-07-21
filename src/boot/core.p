@@ -2,14 +2,11 @@
 (let ((error (callec (lambda (error)
 (error-handler error)
 (success
-(let ((getself (lambda (o) (o 'objectAt: 0)))
-      (getsuper (lambda (o) (o 'objectAt: 1)))
-      (bind (lambda (self super) (vector self super)))
-      (constwrap (lambda (array)
+(let ((constwrap (lambda (array)
             (let* ((size (array 'size)))
                 (let loop ((idx (- size 1))
                            (result null))
-                    (if (< idx 0)
+                    (if (< idx 1)
                         result
                         (loop (- idx 1)
                               (cons (Const 'basicNew: (array 'objectAt: idx))
@@ -18,31 +15,31 @@
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
 (let ((doesNotUnderstand
-        (method (s msg env args)
+        (method (self super msg env args)
             (error (vector "Message not understood: "
                            msg
                            " in: "
-                           (getself s)
+                           self
                            "\n"))))
-      (oprint (method (s)
+      (oprint (method (self super)
                 (display "Instance of: ")
-                (display (((getself s) 'delegate) 'name))
+                (display ((self 'delegate) 'name))
                 (display "\n")
               ))
-      (clsname (method (s)
-                ((getself s) 'objectAt: 3)))
-      (mclsname (method (s)
-                (display (((getself s) 'instance) 'name))
+      (clsname (method (self super)
+                (self 'objectAt: 3)))
+      (mclsname (method (self super)
+                (display ((self 'instance) 'name))
                 " class"))
-      (mclsinstance (method (s)
-            ((getself s) 'objectAt: 3)))
+      (mclsinstance (method (self super)
+            (self 'objectAt: 3)))
 
      ; Here I define a general dispatching mechanism for Objects and classes:
      (lookup
         (lambda (self env args)
             (let lookup ((msg ((args 'objectAt: 0) 'eval: env))
                          (class (self 'delegate))
-                         (args args))
+                         (args (args 'objectAt: 1)))
                 ;(display "LOOKUP: ")
                 ;(display msg)
                 ;(display "\n")
@@ -54,17 +51,19 @@
                         (let ((amethod (class 'lookup: msg)))
                             (if (eq? amethod null)
                                 (loop (class 'superclass))
-                                (begin
-                                    (args 'objectAt:put: 0
-                                        (bind self
-                                              (lambda (args)
-                                                  (lookup
-                                                      (args 'objectAt: 0)
-                                                      (class 'superclass)
-                                                      ; TODO FIXME very ugly
-                                                      ; hack to make it work
-                                                      (constwrap args)))))
-                                    (amethod 'apply:in: args env))))))))))
+                                (begin ;(display "Going to apply\n")
+                                    (amethod 'apply:in:
+                                    (cons self
+                                        ; Super FIXME!!!
+                                        (cons (Const 'basicNew: (lambda (args)
+                                              (lookup
+                                                  (args 'objectAt: 0)
+                                                  (class 'superclass)
+                                                  ; TODO FIXME very ugly
+                                                  ; hack to make it work
+                                                  (constwrap args))))
+                                            args))
+                                    env))))))))))
     (display "STAGE 1\n")
     ; Classes have a more specific dispatch than Objects
     ; they know where their super is,
@@ -111,8 +110,8 @@
           ; it can be called on Metaclass. It generates a new Class and its
           ; corresponding Metaclass.
            (newclass
-                (method (s name super instlayout clslayout)
-                    (let ((mclass ((getself s) 'new))
+                (method (self super name supercls instlayout clslayout)
+                    (let ((mclass (self 'new))
                           (class null)
                           (fixclass (lambda (class dispatch)
                               (let loop ((current class)
@@ -124,25 +123,25 @@
                                             (+ size
                                                ((current 'objectAt: 2)
                                                 'size))))))))
-                       (mclass 'objectAt:put: 0 (super 'delegate))
+                       (mclass 'objectAt:put: 0 (supercls 'delegate))
                        (mclass 'objectAt:put: 1 (Dictionary 'basicNew))
                        (mclass 'objectAt:put: 2 clslayout)
                        (set! class ((fixclass mclass classdisp) 'basicNew))
-                       (class 'objectAt:put: 0 super)
+                       (class 'objectAt:put: 0 supercls)
                        (class 'objectAt:put: 1 (Dictionary 'basicNew))
                        (class 'objectAt:put: 2 instlayout)
                        (class 'objectAt:put: 3 name)
                        (let ((class (fixclass class objdisp)))
                           ((mclass 'objectAt: 1) 'objectAt:put: 'basicNew
-                                (method (s)
+                                (method (self super)
                                     (class 'basicNew))))
                        (mclass 'objectAt:put: 3 class)
                        class)))
 
             (subclass
-                (method (s name instlayout clslayout)
+                (method (self super name instlayout clslayout)
                     (Metaclass 'class:super:instvars:classvars:
-                        name (getself s) instlayout clslayout))))
+                        name self instlayout clslayout))))
         ; Here we fill the empty stub for the Metaclass in with the actual
         ; Metaclass.
         (Metaclass 'dispatch:delegate: classdisp (Metaclass_class 'basicNew))
@@ -172,7 +171,7 @@
         ((methoddict Metaclass) 'objectAt:put: 'instance mclsinstance)
         (let ((Metaclass Metaclass))
             (mcdict 'objectAt:put: 'basicNew
-                    (method (s) (Metaclass 'basicNew))))
+                    (method (self super) (Metaclass 'basicNew))))
 
         ; Fill in info about Objects
         (Object_class 'objectAt:put: 0 Metaclass_class)
@@ -190,14 +189,14 @@
         ((methoddict Object) 'objectAt:put: 'doesNotUnderstand:in:with:
                                                doesNotUnderstand)
         ((methoddict Object) 'objectAt:put: 'class
-            (method (s) ((getself s) 'delegate)))
+            (method (self super) (self 'delegate)))
 
         ((methoddict Metaclass_class) 'objectAt:put:
-            'new (method (s) ((getself s) 'basicNew)))
+            'new (method (self super) (self 'basicNew)))
 
         (let ((o (ifixed 'dispatch:delegate:size: objdisp Object 0)))
             ((methoddict Object_class) 'objectAt:put: 'basicNew
-                (method (s) (o 'basicNew))))
+                (method (self super) (o 'basicNew))))
 
         ; Create ClassBehaviour and Class
         (let* ((classBehaviour (Object 'subclass:instvars:classvars:
@@ -215,7 +214,7 @@
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary
-                (method (s) ((getself s) 'objectAt: 1)))
+                (method (self super) (self 'objectAt: 1)))
 
             ; Now fix all bootstrap "dangling" pointers
             (Metaclass       'objectAt:put: 0 classBehaviour)
@@ -230,16 +229,16 @@
                 'new null)
 
             ((Object 'methodDictionary) 'objectAt:put:
-                'initialize (method (s) (getself s)))
+                'initialize (method (self super) self))
 
             ((classBehaviour 'methodDictionary) 'objectAt:put:
-                'new (method (s)
-                        (((getself s) 'basicNew) 'initialize)))
+                'new (method (self super)
+                        ((self 'basicNew) 'initialize)))
             
             ((classBehaviour 'methodDictionary)
                 'objectAt:put: 'store:method:
-                    (method (s name method)
-                        (((getself s) 'methodDictionary)
+                    (method (self super name method)
+                        ((self 'methodDictionary)
                             'objectAt:put: name method)))
 
             (IFixed 'dispatch:delegate:
@@ -249,7 +248,7 @@
 
             (((IFixed 'class) 'methodDictionary)
                 'objectAt:put: 'basicNew
-                (method (s) (error "There is only one ifixed object in the system\n")))
+                (method (self super) (error "There is only one ifixed object in the system\n")))
 
             (Env 'dispatch:delegate:
                 objdisp
@@ -257,7 +256,7 @@
                         'Environment (vector 'key 'index) (vector)))
 
             ((Env 'class) 'store:method: 'basicNew
-                (method (s) (error "Should not basicNew environments\n")))
+                (method (self super) (error "Should not basicNew environments\n")))
        
             (let* ((ev (vector))
                    (make_empty_subclass (lambda (cls name)
@@ -301,25 +300,26 @@
                 (store_empty Dictionary        Object       'Dictionary)
 
                 ((Array 'class) 'store:method:
-                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
+                    'basicNew (method (self super) (self 'basicNew: 0)))
                 ((Array 'class) 'store:method:
-                    'basicNew: (method (s size) (Array 'basicNew: size)))
+                    'basicNew: (method (self super size) (Array 'basicNew: size)))
                 ((String 'class) 'store:method:
-                    'basicNew (method (s) ((getself s) 'basicNew: 0)))
+                    'basicNew (method (self super) (self 'basicNew: 0)))
                 ((String 'class) 'store:method:
-                    'basicNew: (method (s size) (String 'basicNew: size)))
+                    'basicNew: (method (self super size) (String 'basicNew: size)))
                 ((Symbol 'class) 'store:method:
-                    'basicNew: (method (s size) (Symbol 'basicNew: size)))
+                    'basicNew: (method (self super size) (Symbol 'basicNew: size)))
                 (Dictionary 'store:method:
-                    'at:ifAbsentPut: (method (s key l) (let ((self (getself s))) 
-                        (if (eq? null (self 'objectAt: key)) self 'objectAt:put: key l))))
+                    'at:ifAbsentPut: (method (self super key l) 
+                        (if (eq? null (self 'objectAt: key)) self 'objectAt:put: key l)))
 
                 (load "boot/test/test-core.p")
 
                 Object
     )))))))
 
-    (load "boot/scheme.p")
+    (display "Done\n")
+    ;(load "boot/scheme.p")
 
 )))))))
 

@@ -25,27 +25,27 @@
 (display "\nSuper-send testing\n")
 ((Integer 'methodDictionary)
     'objectAt:put: 'testMethod
-    (method (s) (+ 40 ((getsuper s) (vector 'testMethod)))))
+    (method (self super) (+ 40 (super (vector 'testMethod)))))
 ((Magnitude 'methodDictionary)
     'objectAt:put: 'testMethod
-    (method (s) 2))
+    (method (self super) 2))
 
 (display (= 42 ((Integer 'basicNew) 'testMethod)))
 
 ((Integer 'methodDictionary)
     'objectAt:put: 'testMethod
-    (method (s) ((getsuper s) (vector 'testMethod: 40))))
+    (method (self super) (super (vector 'testMethod: 40))))
 
 ((Magnitude 'methodDictionary)
     'objectAt:put: 'testMethod:
-    (method (s x) (+ x 2)))
+    (method (self super x) (+ x 2)))
 
 (display (= 42 ((Integer 'basicNew) 'testMethod)))
 
 (display "\nSmallInteger tests\n")
 (SmallInteger 'store:method: +
-    (method (s other)
-        (+ (getself s) other)))
+    (method (self super other)
+        (+ self other)))
 
 (display (= (40 + 2) 42))
 
@@ -63,13 +63,13 @@
 (display "\nString extension tests\n")
 
 (String 'store:method: 'testMethod
-    (method (s) 40))
+    (method (self super) 40))
 
 (display (= ("biep" 'testMethod) 40))
 (display (= ('testMethod 'testMethod) 40))
 
 (Symbol 'store:method: 'testMethod
-    (method (s) 42))
+    (method (self super) 42))
 
 (display (= ("biep" 'testMethod) 40))
 (display (= ('testMethod 'testMethod) 42))
@@ -77,7 +77,7 @@
 (display "\nArray extension tests\n")
 (let ((test (Array 'basicNew: 10)))
     ((Array 'methodDictionary) 'objectAt:put:
-        'testMethod (method (s) ((getself s) 'size)))
+        'testMethod (method (self super) (self 'size)))
     (display (= (test 'testMethod) 10)))
 
 ;(display "\nFile tests\n")
@@ -153,11 +153,5 @@
 ;(display "\nShould be SWONMAN '☃':")
 ;(stdoutstream 'writeChar: #\☃)
 
-(display "\nDictionary test\n")
-(let ((d (Dictionary 'new)))    ;TODO make this test not fail because it cant fail
-     ; (d 'objectAt: 'aKey))
-     )
 
 (display "\nSYSTEM READY\n")
-
-
