@@ -312,7 +312,7 @@
             (let ((self (getself s)))
                 ((self 'messageExpression) 
                     '<= (((self 'keywordExpression) '\| (self 'binaryExpression))
-                         '<= (self 'unaryExpression)))
+                         '<= (self 'unaryExpression)))))
         (injectPrimary (s)
             (let ((self (getself s)))
                 ((self 'primary)
