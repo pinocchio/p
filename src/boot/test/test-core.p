@@ -82,8 +82,7 @@
 
  (display "\nDictionary test\n")
  (let ((d (Dictionary 'new)))    ;TODO make this test not fail because it cant fail
-      ; (d 'objectAt: 'aKey))
-      )
+       (d 'objectAt: 'aKey))
 
 
 ;(display "\nFile tests\n")

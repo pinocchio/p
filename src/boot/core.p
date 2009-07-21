@@ -285,19 +285,19 @@
                 (String      'dispatch:delegate: objdisp Stringc)
                 ; inject class in the incomplete_type_classes
                 ;            incomplete class  super class  class name
-                (store_empty Symbol            Stringc      'Symbol)
-                (store_empty SmallInteger      Integer      'SmallInteger)
-                (store_empty Character         Magnitude    'Character)
-                (store_empty Array             ArCol        'Array)
-                (store_empty UndefinedObject   Object       'UndefinedObject)
-                (store_empty Scoped           Object        'Scoped)
+                (store_empty Symbol           Stringc       'Symbol)
+                (store_empty SmallInteger     Integer       'SmallInteger)
+                (store_empty Character        Magnitude     'Character)
+                (store_empty Array            ArCol         'Array)
+                (store_empty UndefinedObject  Object        'UndefinedObject)
+                (store_empty Scoped           Object         'Scoped)
                 (store_empty List             Evaluatable   'List)
                 (store_empty Call             Evaluatable   'Call)
                 (store_empty Const            Evaluatable   'Const)
                 (store_empty Var              Evaluatable   'Var)
                 (store_empty Assign           Evaluatable   'Assign)
                 (store_empty Capture          Evaluatable   'Capture)
-                (store_empty Dictionary        Object       'Dictionary)
+                (store_empty Dictionary       Object        'Dictionary)
 
                 ((Array 'class) 'store:method:
                     'basicNew (method (self super) (self 'basicNew: 0)))
@@ -312,7 +312,8 @@
                 (Dictionary 'store:method:
                     'at:ifAbsentPut: (method (self super key l) 
                         (if (eq? null (self 'objectAt: key)) self 'objectAt:put: key l)))
-
+                ((Dictionary 'class) 'store:method:
+                    'basicNew (method (self super) (Dictionary 'basicNew))) 
                 (load "boot/test/test-core.p")
 
                 Object

@@ -9,6 +9,8 @@
 #include <scheme/natives.h>
 #include <print.h>
 
+// TODO copy to boot/test/test-ast.p
+
 // Some nice helper constructs.
 #define SETUP(name)\
     void name() {\

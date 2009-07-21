@@ -1,7 +1,7 @@
 bin_PROGRAMS=pinocchio
 EXTRA_PROGRAMS=test
-SOURCES=model.c bootstrap.c primitives.c system.c print.c debug.c\
-thread.c model.h bootstrap.h primitives.h system.h print.h gc.h debug.h\
+SOURCES=model.c bootstrap.c system.c print.c debug.c\
+thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
 scheme/symbols.c scheme/symbols.h\
