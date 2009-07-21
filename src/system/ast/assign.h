@@ -1,6 +1,6 @@
 #ifndef SYSTEM_IASSIGN_H
 #define SYSTEM_IASSIGN_H
-
+#include <scheme/natives.h>
 #include <system/type/type.h>
 export_type(ast_assign);
 

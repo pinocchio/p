@@ -127,5 +127,6 @@ void bootstrap_scheme() {
 
     woodstock->error = scheme_error;
 
-    init_op(create_from_array);
+    init_op(ilist_new_from_array);
+    init_op(ivar_new_from_string);
 }

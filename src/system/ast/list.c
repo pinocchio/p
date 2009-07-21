@@ -81,7 +81,7 @@ void inline ilist_at_put(ast_list_object ilist, int index, object value) {
 }
 
 // Creation
-preval1(create_from_array, context, value,
+preval1(ilist_new_from_array, context, value,
 	cast(array_value, value, array);
 	ast_list_object list = make_ilist(array_value->size);
 	int i;

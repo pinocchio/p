@@ -17,7 +17,7 @@ extern void        inline ilist_at_put(ast_list_object ilist,
                                        int index, object i);
 extern int         inline ilist_size(ast_list_object ilist);
 
-preval_header(create_from_array);
+preval_header(ilist_new_from_array);
 
 // Structure
 struct ast_list {

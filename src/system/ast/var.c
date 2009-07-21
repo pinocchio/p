@@ -67,3 +67,9 @@ ast_var_object make_ivar(const wchar_t* name) {
     result->index           = make_number(0);
     return result;
 }
+
+preval1(ivar_new_from_string, context, value,
+	cast(string_var, value, string);
+	return_from_context(context, (object)make_ivar(string_var->value));
+)
+

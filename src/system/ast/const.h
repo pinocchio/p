@@ -1,6 +1,6 @@
 #ifndef SYSTEM_ICONST_H
 #define SYSTEM_ICONST_H
-
+#include <scheme/natives.h>
 #include <system/type/type.h>
 export_type(ast_const);
 

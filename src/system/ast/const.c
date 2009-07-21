@@ -12,7 +12,6 @@ define_bootstrapping_type(ast_const,
     if_selector(EVAL,         iconst_constant);
     if_selector(EVAL_, pre_eval_env);,
     // class
-    // TODO: rename SIZED to something related to the action symbol: basicNew:
     if_selector(BASICNEW_,        iconst_new);
 )
 

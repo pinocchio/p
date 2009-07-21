@@ -33,21 +33,50 @@ void name##_##do() {\
     object argument = argument_at(context, 0);\
     body;\
 }\
-void scheme##_##name##_##func() {\
+preval_push(name, 1);
+
+#define preval2(name, context, arg1, arg2, body) \
+object scheme##_##name;\
+void name##_##do() {\
     context_object context = get_context();\
-    assert_argsize(context, 1);\
-    push_eval_of(context, 0);\
-    context->code = &name##_##do;\
-}
+    object arg1 = argument_at(context, 0);\
+    object arg2 = argument_at(context, 1);\
+    body;\
+}\
+preval_push(name, 2);
+
+#define preval3(name, context, arg1, arg2, arg3, body) \
+object scheme##_##name;\
+void name##_##do() {\
+    context_object context = get_context();\
+    object arg1 = argument_at(context, 0);\
+    object arg2 = argument_at(context, 1);\
+    object arg3 = argument_at(context, 2);\
+    body;\
+}\
+preval_push(name, 3);
 
 
 #define preval2_push(name) \
 void name##_##func() {\
+	context_object context = get_context();\
+	assert_argsize(context, count);\
+	int i;\
+	for (i=0; i<2; i++) {\
+		push_eval_of(context, i);\
+	}\
+	context->code = &name##_##func_do;\
+}
+
+#define preval_push(name, count)\
+void scheme##_##name##_##func() {\
     context_object context = get_context();\
-    assert_argsize(context, 2);\
-    push_eval_of(context, 0);\
-    push_eval_of(context, 1);\
-    context->code = &name##_##func_do;\
+    assert_argsize(context, count);\
+    int i;\
+    for (i=0; i<count; i++) {\
+		push_eval_of(context, i);\
+    }\
+    context->code = &name##_##do;\
 }
 
 
@@ -62,7 +91,7 @@ void name##_##func() {\
 
 #define cast_bin_eval_with(name, type1, type2, func)\
 object scheme##_##name;\
-static void scheme##_##name##_##func_do() {\
+static void name##_##do() {\
     dec();\
     debug("scheme>>"#name"\n");\
     context_object context = get_context();\
@@ -72,12 +101,12 @@ static void scheme##_##name##_##func_do() {\
     return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
-preval2_push(scheme##_##name);
+preval_push(name, 2);
 
 
 #define bin_eval_with(name, func)\
 object scheme##_##name;\
-static void scheme##_##name##_##func_do() {\
+static void name##_##do() {\
     dec();\
     debug("scheme>>"#name"\n");\
     context_object context = get_context();\
@@ -86,7 +115,7 @@ static void scheme##_##name##_##func_do() {\
     return_from_context(context, result);\
     debug("ret>>scheme>>"#name"\n");\
 }\
-preval2_push(scheme##_##name);
+preval_push(name, 2);
 
 
 #define bin_io_op(name, input, output, op)\

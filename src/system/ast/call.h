@@ -1,5 +1,6 @@
 #ifndef SYSTEM_ICALL_H
 #define SYSTEM_ICALL_H
+#include <scheme/natives.h>
 
 // Creation
 #include <system/type/type.h>
