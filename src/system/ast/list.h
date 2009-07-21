@@ -1,6 +1,8 @@
 #ifndef SYSTEM_ILIST_H
 #define SYSTEM_ILIST_H
 
+#include <scheme/natives.h>
+
 // Creation
 #include <system/type/type.h>
 export_type(ast_list);
@@ -14,6 +16,8 @@ extern void        inline raw_ilist_at_put(ast_list_object ilist,
 extern void        inline ilist_at_put(ast_list_object ilist,
                                        int index, object i);
 extern int         inline ilist_size(ast_list_object ilist);
+
+preval_header(create_from_array);
 
 // Structure
 struct ast_list {

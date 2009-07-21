@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <scheme/natives.h>
 
 // ilist>>eval:
 static void inline ilist_eval() {
@@ -40,7 +41,7 @@ with_pre_eval1(ilist_new, context, w_size,
 
 define_bootstrapping_type(ast_list, 
     // instance
-    if_selector(EVAL,         ilist_eval);
+    if_selector(EVAL,  ilist_eval);
     if_selector(EVAL_, pre_eval_env);,
     // class
     if (selector.pointer != selector.pointer) { };
@@ -49,8 +50,8 @@ define_bootstrapping_type(ast_list,
 // Object creation
 ast_list_object make_ilist(int size) {
     ast_list_object result = NEW_ARRAYED(ast_list_object, object, size + 1);
-    header(result)      = (object)woodstock->ast_list_class;
-    result->size        = size;
+    header(result)         = (object)woodstock->ast_list_class;
+    result->size           = size;
     return result;
 }
 
@@ -78,3 +79,14 @@ void inline ilist_at_put(ast_list_object ilist, int index, object value) {
     ilist_check_bounds(ilist, index);
     raw_ilist_at_put(ilist, index, value);
 }
+
+// Creation
+preval1(create_from_array, context, value,
+	cast(array_value, value, array);
+	ast_list_object list = make_ilist(array_value->size);
+	int i;
+	for (i=0; i<array_value->size; ++i) {
+		list->instructions[i] = array_value->values[i];
+	}
+    return_from_context(context, (object)list);
+)

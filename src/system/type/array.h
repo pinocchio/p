@@ -5,8 +5,8 @@
 export_type(array);
 
 #define array_check_bounds(array, index)\
-	error_guard(0 <= index, L"Out of bounds");\
-	error_guard(index < array_size(array), L"Out of bounds");
+	error_guard(0 <= index, "Out of bounds");\
+	error_guard(index < array_size(array), "Out of bounds");
 
 extern array_object             make_array(int size);
 
