@@ -41,5 +41,5 @@
                             (result 'objectAt:put: idx (car todo))
                             (loop (cdr todo) (+ idx 1)))))))))
     (load "boot/test/test-scheme.p")
-    ;(load "boot/peg.p")  
+    (load "boot/peg.p")  
 )

@@ -19,6 +19,8 @@
       (parser ((#\T 'asParser) '& #\e)))
     (display (= 2 (length (parser 'match:in: input null)))))
 
+(display "Mark\n")
+
 (let ((input (StringScanner 'on: "Test"))
       (parser ((#\Q 'asParser) '\| #\T)))
     (display (= 1 ((parser 'match:in: input null) 'size))))
