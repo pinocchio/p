@@ -2,83 +2,83 @@
 #include <thread.h>
 #include <scheme/natives.h>
 
-// icall>>invoke:env:
-static void inline icall_invoke_env() {
-    context_object icall_context = get_context();
+// ast_call>>invoke:env:
+static void inline ast_call_invoke_env() {
+    context_object ast_call_context = get_context();
 
-    ast_call_object icall = icall_context->self.icall;
+    ast_call_object ast_call = ast_call_context->self.ast_call;
 
-    object env          = icall_context->env;
-    object self         = argument_at(icall_context, 1);
+    object env          = ast_call_context->env;
+    object self         = argument_at(ast_call_context, 1);
 
-    int argsize = scheme_list_size(icall->arguments);
-    debug("icall>>invoke: %p (%i)\n", self.pointer, argsize);
+    int argsize = scheme_list_size(ast_call->arguments);
+    debug("ast_call>>invoke: %p (%i)\n", self.pointer, argsize);
 
     pop_context();
-    icall_context       = make_context(self, argsize);
-    icall_context->env  = env;
+    ast_call_context       = make_context(self, argsize);
+    ast_call_context->env  = env;
 
     int i;
     for (i = 0; i < argsize; i++) {
-        set_argument(icall_context, i, scheme_list_at(icall->arguments, i));
+        set_argument(ast_call_context, i, scheme_list_at(ast_call->arguments, i));
     }
     // until here.
 
-    debug("ret>>icall>>invoke:\n");
+    debug("ret>>ast_call>>invoke:\n");
     dec();
 }
 
-// icall>>eval:
-static void inline icall_eval() {
-    context_object icall_context = get_context();
+// ast_call>>eval:
+static void inline ast_call_eval() {
+    context_object ast_call_context = get_context();
 
-    ast_call_object icall = icall_context->self.icall;
-    debug("icall>>eval %p\n", icall);
+    ast_call_object ast_call = ast_call_context->self.ast_call;
+    debug("ast_call>>eval %p\n", ast_call);
 
-    object env = icall_context->env;
-    icall_context->code = &icall_invoke_env;
+    object env = ast_call_context->env;
+    ast_call_context->code = &ast_call_invoke_env;
     
-    debug("making context for: %p\n", icall->self.pointer);
-    context_object context = make_context(icall->self, 1);
+    debug("making context for: %p\n", ast_call->self.pointer);
+    context_object context = make_context(ast_call->self, 1);
     debug("made context\n");
     context->env = env;
     set_message(context, EVAL);
 
-    debug("ret>>icall>>eval\n");
+    debug("ret>>ast_call>>eval\n");
     inc();
 }
 
-with_pre_eval2(icall_new, context, w_self, w_size,
+with_pre_eval2(ast_call_new, context, w_self, w_size,
     cast(size, w_size, number);
-    return_from_context(context, (object)make_icall(w_self, size->value));
+    return_from_context(context, (object)make_ast_call(w_self, size->value));
 )
 
 define_bootstrapping_type(ast_call,
     // instance
-    if_selector(EVAL,         icall_eval);
+    if_selector(EVAL,         ast_call_eval);
     if_selector(EVAL_, pre_eval_env);,
     // class
-    if_selector(TO_SIZED_,     icall_new);
+    if_selector(TO_SIZED_,     ast_call_new);
 )
 
 // Object creation
-ast_call_object make_icall(object self, int argsize) {
+ast_call_object make_ast_call(object self, int argsize) {
     new_instance(ast_call);
     result->self        = self;
     result->arguments   = make_scheme_list(argsize);
     return result;
 }
 
-preval2(icall_new_from_self_size, self, value,
+preval2(ast_call_new_from_self_size, self, value,
 	cast(number_var, value, number);
-	return_from_context(context, (object)make_icall(self, number_var->value));
+	return_from_context(context, (object)make_ast_call(self, number_var->value));
 )
 
 // Accessors
-void inline set_callarg(ast_call_object icall, int index, object value) {
-    scheme_list_at_put(icall->arguments, index, value);
+void inline set_callarg(ast_call_object ast_call, int index, object value) {
+    scheme_list_at_put(ast_call->arguments, index, value);
 }
 
-void inline set_callmsg(ast_call_object icall, object msg) {
-    set_callarg(icall, 0, msg);
+void inline set_callmsg(ast_call_object ast_call, object msg) {
+    set_callarg(ast_call, 0, msg);
 }

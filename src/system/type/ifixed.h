@@ -16,4 +16,4 @@ struct ifixed_t {
     int             size;
 };
 
-#endif // SYSTEM_ISCOPED_H
+#endif // SYSTEM_ast_scoped_H

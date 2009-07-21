@@ -1,5 +1,5 @@
-#ifndef SYSTEM_ILIST_H
-#define SYSTEM_ILIST_H
+#ifndef SYSTEM_ast_list_H
+#define SYSTEM_ast_list_H
 
 #include <scheme/natives.h>
 
@@ -7,17 +7,17 @@
 #include <system/type/type.h>
 export_type(ast_list);
 
-extern ast_list_object make_ilist(int size);
+extern ast_list_object make_ast_list(int size);
 
 // Accessors
-extern object      inline raw_ilist_at(ast_list_object ilist, int index);
-extern void        inline raw_ilist_at_put(ast_list_object ilist,
+extern object      inline raw_ast_list_at(ast_list_object ast_list, int index);
+extern void        inline raw_ast_list_at_put(ast_list_object ast_list,
                                            int index, object i);
-extern void        inline ilist_at_put(ast_list_object ilist,
+extern void        inline ast_list_at_put(ast_list_object ast_list,
                                        int index, object i);
-extern int         inline ilist_size(ast_list_object ilist);
+extern int         inline ast_list_size(ast_list_object ast_list);
 
-preval_header(ilist_new_from_array);
+preval_header(ast_list_new_from_array);
 
 // Structure
 struct ast_list {
@@ -25,4 +25,4 @@ struct ast_list {
     object          instructions[];
 };
 
-#endif // SYSTEM_ILIST_H
+#endif // SYSTEM_ast_list_H

@@ -1,24 +1,24 @@
 #include <system.h>
 #include <thread.h>
 
-// icapture>>eval:
-static void inline icapture_eval() {
+// ast_capture>>eval:
+static void inline ast_capture_eval() {
     context_object context = get_context();
-    debug("icapture>>eval\n");
+    debug("ast_capture>>eval\n");
     return_from_context(context, context->env);
-    debug("ret>>icapture>>eval %p\n", context->env.env);
+    debug("ret>>ast_capture>>eval %p\n", context->env.env);
 }
 
-static void inline icapture_instance() {
-    debug("icapture_class>>instance\n");
+static void inline ast_capture_instance() {
+    debug("ast_capture_class>>instance\n");
     context_object context = get_context();
     return_from_context(context, woodstock->ast_capture);
-    debug("ret>>icapture_class>>instance\n");
+    debug("ret>>ast_capture_class>>instance\n");
 }
 
 define_bootstrapping_type(ast_capture,
     // instance
-    if_selector(EVAL, icapture_eval);,
+    if_selector(EVAL, ast_capture_eval);,
     // class
-    if_selector(INSTANCE, icapture_instance);
+    if_selector(INSTANCE, ast_capture_instance);
 )

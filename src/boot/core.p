@@ -12,7 +12,7 @@
                     (if (< idx 0)
                         result
                         (loop (- idx 1)
-                              (cons (IConst 'basicNew: (array 'objectAt: idx))
+                              (cons (Const 'basicNew: (array 'objectAt: idx))
                                     result)))))))
                         
       (methoddict (lambda (c) (c 'objectAt: 1))))
@@ -291,13 +291,13 @@
                 (store_empty Character         Magnitude    'Character)
                 (store_empty Array             ArCol        'Array)
                 (store_empty UndefinedObject   Object       'UndefinedObject)
-                (store_empty IScoped           Object       'IScoped)
-                (store_empty IList             Evaluatable  'IList)
-                (store_empty ICall             Evaluatable  'ICall)
-                (store_empty IConst            Evaluatable  'IConst)
-                (store_empty IVar              Evaluatable  'IVar)
-                (store_empty IAssign           Evaluatable  'IAssign)
-                (store_empty ICapture          Evaluatable  'ICapture)
+                (store_empty Scoped           Object        'Scoped)
+                (store_empty List             Evaluatable   'List)
+                (store_empty Call             Evaluatable   'Call)
+                (store_empty Const            Evaluatable   'Const)
+                (store_empty Var              Evaluatable   'Var)
+                (store_empty Assign           Evaluatable   'Assign)
+                (store_empty Capture          Evaluatable   'Capture)
                 (store_empty Dictionary        Object       'Dictionary)
 
                 ((Array 'class) 'store:method:

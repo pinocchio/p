@@ -10,7 +10,7 @@
 #include <locale.h>
 
 #define import_object(name)\
-    (object)make_iconst((object)woodstock->name);
+    (object)make_ast_const((object)woodstock->name);
 
 #define import_class(name)\
     import_object(name##_##class);
@@ -33,13 +33,13 @@ int main () {
     object CharacterTable   = import_class(chartable);
 
     object Character        = import_class(chr);
-    object IAssign          = import_class(ast_assign);
-    object ICall            = import_class(ast_call);
-    object ICapture         = import_class(ast_capture);
-    object IConst           = import_class(ast_const);
-    object IList            = import_class(ast_list);
-    object IScoped          = import_class(ast_scoped);
-    object IVar             = import_class(ast_var);
+    object Assign           = import_class(ast_assign);
+    object Call             = import_class(ast_call);
+    object Capture          = import_class(ast_capture);
+    object Const            = import_class(ast_const);
+    object List             = import_class(ast_list);
+    object Scoped           = import_class(ast_scoped);
+    object Var              = import_class(ast_var);
     object InputFile        = import_class(infile);
     object OutputFile       = import_class(outfile);
 

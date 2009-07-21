@@ -25,11 +25,11 @@
                  (string->code (symbol->string name))))
 
 (define (make-vars arg)
-  (let ((var-name (make-var-name "ivar" arg)))
+  (let ((var-name (make-var-name "var" arg)))
     (list arg var-name
         (string-append "object "
                        var-name
-                       " = (object)make_ivar(L\"" (symbol->string arg) "\");\n"))))
+                       " = (object)make_ast_var(L\"" (symbol->string arg) "\");\n"))))
 
 
 (define (make-arguments vars name)
@@ -81,11 +81,11 @@
     (if (= (length expressions) 1)
         (transform-expression (car expressions) vars)
   (let* ((size (length expressions))
-         (name (make-var-name "ilist" 'lambda))
+         (name (make-var-name "ast_list" 'lambda))
          (code (string-append
                 "ast_list_object "
                 name
-                " = make_ilist("
+                " = make_ast_list("
                 (number->string size)
                 ");\n")))
     (let loop ((todo expressions)
@@ -100,7 +100,7 @@
                          (+ idx 1)
                          (string-append prefix pre)
                          (string-append code
-                                        "ilist_at_put(" name
+                                        "ast_list_at_put(" name
                                         ", " (number->string idx)
                                         ", (object)" c ");\n")
                          (append extravar extravars)))
@@ -117,7 +117,7 @@ extravars))))))))
            (car names)
            (car body)
            "ast_assign_object " name
-           " = make_iassign(" (cadr names)
+           " = make_ast_assign(" (cadr names)
            ", (object)" (cadr body) ");\n")
           name
           '())))
@@ -409,7 +409,7 @@ extravars))))))))
                                 (number->string expression)))))
     (list (string-append "object "
                          name
-                         " = (object)make_iconst((object)make_number("
+                         " = (object)make_ast_const((object)make_number("
                          (number->string expression)
                          "));\n") name '())))
 
@@ -424,7 +424,7 @@ extravars))))))))
   (let ((name (make-var-name "char" 'x)))
     (list (string-append "object "
                          name
-                         " = (object)make_iconst((object)make_char(L'"
+                         " = (object)make_ast_const((object)make_char(L'"
                          (make-string 1 expression)
                          "'));\n") name '())))
 
@@ -434,7 +434,7 @@ extravars))))))))
     (write expression os)
     (list (string-append "object "
                          name
-                         " = (object)make_iconst((object)make_string(L"
+                         " = (object)make_ast_const((object)make_string(L"
                         (get-output-string os)
                          "));\n") name '())))
 
@@ -462,7 +462,7 @@ extravars))))))))
          
          (code (string-append "ast_call_object "
                               name
-                              " = make_icall((object)" appname ", "
+                              " = make_ast_call((object)" appname ", "
                               (number->string (- (length parts) 1)) ");\n"))
          (args (let loop ((todo (cdr parts))
                           (idx 0)
@@ -526,13 +526,13 @@ extravars))))))))
     (stdoutstream   "stdoutstream")
     (UndefinedObject "UndefinedObject")
     ; Built-in classes related to evaluation
-    (IList          "IList")
-    (ICall          "ICall")
-    (IConst         "IConst")
-    (IVar           "IVar")
-    (IAssign        "IAssign")
-    (ICapture       "ICapture")
-    (IScoped        "IScoped")
+    (List          "List")
+    (Call          "Call")
+    (Const         "Const")
+    (Var           "Var")
+    (Assign        "Assign")
+    (Capture       "Capture")
+    (Scoped        "Scoped")
     (Env            "Env")
     ))
 

@@ -95,13 +95,13 @@ typedef struct woodstock*       woodstock_t;
 
 typedef union {
     array_object           array;
-    ast_assign_object      iassign;
-    ast_call_object        icall;
-    ast_capture_object     icapture;
-    ast_const_object       iconst;
-    ast_list_object        ilist;
-    ast_scoped_object      iscoped;
-    ast_var_object         ivar;
+    ast_assign_object      ast_assign;
+    ast_call_object        ast_call;
+    ast_capture_object     ast_capture;
+    ast_const_object       ast_const;
+    ast_list_object        ast_list;
+    ast_scoped_object      ast_scoped;
+    ast_var_object         ast_var;
     chr_object             chr;
     context_object         context;
     dict_object            dict;

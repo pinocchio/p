@@ -1,66 +1,66 @@
 #include <system.h>
 #include <thread.h>
 
-// ivar>>assign:
-static void inline ivar_assign() {
-    context_object ivar_context = get_context();
-    assert_argsize(ivar_context, 2);
+// ast_var>>assign:
+static void inline ast_var_assign() {
+    context_object ast_var_context = get_context();
+    assert_argsize(ast_var_context, 2);
 
-    ast_var_object ivar = ivar_context->self.ivar;
+    ast_var_object ast_var = ast_var_context->self.ast_var;
 
-    debug("ivar>>assign:\n");
+    debug("ast_var>>assign:\n");
 
-    object env      = ivar_context->env;
-    object value    = argument_at(ivar_context, 1);
-
-    pop_context();
-
-    ivar_context = make_context(env, 4);
-    ivar_context->env = env;
-
-    set_message(ivar_context, STORE_AT_IN_);
-    set_argument(ivar_context, 1, value);
-    set_argument(ivar_context, 2, (object)ivar->index);
-    set_argument(ivar_context, 3, ivar->scope);
-
-    debug("ret>>ivar>>assign:\n");
-}
-
-// ivar>>eval:
-static void inline ivar_eval() {
-    context_object ivar_context = get_context();
-    ast_var_object ivar = ivar_context->self.ivar;
-    debug("ivar>>eval \"%ls\"\n", ivar->name->value);
-
-    object env = ivar_context->env;
+    object env      = ast_var_context->env;
+    object value    = argument_at(ast_var_context, 1);
 
     pop_context();
-    ivar_context = make_context(env, 3);
-    ivar_context->env = env;
-    set_message(ivar_context, FETCH_FROM);
-    set_argument(ivar_context, 1, (object)ivar->index);
-    set_argument(ivar_context, 2, ivar->scope);
 
-    debug("ret>>ivar>>eval:\n");
+    ast_var_context = make_context(env, 4);
+    ast_var_context->env = env;
+
+    set_message(ast_var_context, STORE_AT_IN_);
+    set_argument(ast_var_context, 1, value);
+    set_argument(ast_var_context, 2, (object)ast_var->index);
+    set_argument(ast_var_context, 3, ast_var->scope);
+
+    debug("ret>>ast_var>>assign:\n");
 }
 
-with_pre_eval1(ivar_new, context, w_name,
+// ast_var>>eval:
+static void inline ast_var_eval() {
+    context_object ast_var_context = get_context();
+    ast_var_object ast_var = ast_var_context->self.ast_var;
+    debug("ast_var>>eval \"%ls\"\n", ast_var->name->value);
+
+    object env = ast_var_context->env;
+
+    pop_context();
+    ast_var_context = make_context(env, 3);
+    ast_var_context->env = env;
+    set_message(ast_var_context, FETCH_FROM);
+    set_argument(ast_var_context, 1, (object)ast_var->index);
+    set_argument(ast_var_context, 2, ast_var->scope);
+
+    debug("ret>>ast_var>>eval:\n");
+}
+
+with_pre_eval1(ast_var_new, context, w_name,
     // XXX Should probably clone the value ...
     cast(name, w_name, string);
-    return_from_context(context, (object)make_ivar(name->value));
+    return_from_context(context, (object)make_ast_var(name->value));
 )
 
 define_bootstrapping_type(ast_var,
     // instance
-    if_selector(EVAL,         ivar_eval);
-    if_selector(ASSIGN_IN,    ivar_assign);
+    if_selector(EVAL,         ast_var_eval);
+    if_selector(ASSIGN_IN,    ast_var_assign);
     if_selector(EVAL_, pre_eval_env);,
     // class
-    if_selector(BASICNEW_,        ivar_new); // should rename SIZED...
+    if_selector(BASICNEW_,        ast_var_new); // should rename SIZED...
 )
 
 // Object creation
-ast_var_object make_ivar(const wchar_t* name) {
+ast_var_object make_ast_var(const wchar_t* name) {
     new_instance(ast_var);
     result->name            = make_string(name);
     result->scope           = (object)woodstock->nil;
@@ -68,8 +68,8 @@ ast_var_object make_ivar(const wchar_t* name) {
     return result;
 }
 
-preval1(ivar_new_from_string, value,
+preval1(ast_var_new_from_string, value,
 	cast(string_var, value, string);
-	return_from_context(context, (object)make_ivar(string_var->value));
+	return_from_context(context, (object)make_ast_var(string_var->value));
 )
 

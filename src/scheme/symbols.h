@@ -21,11 +21,11 @@ extern object IAPPLY_;
 extern object APPLY_IN_;
 extern object SCOPE;
 extern object SHIFT;
-// Icapture
+// ast_capture
 extern object INSTANCE;
-// Iassign
+// ast_assign
 extern object TO_EXPRESSION_;
-// Icall
+// ast_call
 extern object TO_SIZED_;
 // Ifixed
 extern object OBJECT_AT_;

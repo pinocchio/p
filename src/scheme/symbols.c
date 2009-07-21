@@ -22,11 +22,11 @@ object IAPPLY_;
 object APPLY_IN_;
 object SCOPE;
 object SHIFT;
-// Icapture
+// ast_capture
 object INSTANCE;
-// Iassign
+// ast_assign
 object TO_EXPRESSION_;
-// Icall
+// ast_call
 object TO_SIZED_;
 // Ifixed
 object DELEGATE;

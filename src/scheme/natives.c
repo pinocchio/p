@@ -69,7 +69,7 @@ preval1(callec, lambda,
     object ec = make_ec();
     context = make_context(lambda, 1);
     context->env = env;
-    set_argument(context, 0, (object)make_iconst(ec));
+    set_argument(context, 0, (object)make_ast_const(ec));
     // marker on return_context
     set_argument(return_context(context), 1, ec);
 )
@@ -184,10 +184,10 @@ void bootstrap_scheme() {
 
     woodstock->error = scheme_error;
 
-    init_op(ilist_new_from_array);
-    init_op(ivar_new_from_string);
-    init_op(iscoped_new_from_scope_expression_size);
-    init_op(iconst_new_from_object);
-    init_op(icall_new_from_self_size);
-    init_op(iassign_new_from_variable_expression);
+    init_op(ast_list_new_from_array);
+    init_op(ast_var_new_from_string);
+    init_op(ast_scoped_new_from_scope_expression_size);
+    init_op(ast_const_new_from_object);
+    init_op(ast_call_new_from_self_size);
+    init_op(ast_assign_new_from_variable_expression);
 }

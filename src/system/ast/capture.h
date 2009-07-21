@@ -1,9 +1,9 @@
-#ifndef SYSTEM_ICAPTURE_H
-#define SYSTEM_ICAPTURE_H
+#ifndef SYSTEM_ast_capture_H
+#define SYSTEM_ast_capture_H
 #include <scheme/natives.h>
 #include <system/type/type.h>
 export_type(ast_capture);
 
-extern ast_capture_object make_icapture();
+extern ast_capture_object make_ast_capture();
 
-#endif // SYSTEM_ICAPTURE_H
+#endif // SYSTEM_ast_capture_H
