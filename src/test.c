@@ -62,48 +62,48 @@ SETUP(test_object_object)
     }
 }
 
-SETUP(test_transfer_empty_ilist)
+SETUP(test_transfer_empty_ast_list)
 
-    ast_list_object ilist = make_ilist(0);
+    ast_list_object ast_list = make_ast_list(0);
 
-    context_object make_eval_context(ci, ilist, woodstock->nil);
+    context_object make_eval_context(ci, ast_list, woodstock->nil);
     transfer();
 }
 
-SETUP(test_transfer_empty_ilist_in_ilist)
+SETUP(test_transfer_empty_ast_list_in_ast_list)
 
-    ast_list_object ilist  = make_ilist(2);
-    ast_list_object ilist2 = make_ilist(0);
+    ast_list_object ast_list  = make_ast_list(2);
+    ast_list_object ast_list2 = make_ast_list(0);
 
-    ilist_at_put(ilist, 0, (object)ilist2);
-    ilist_at_put(ilist, 1, (object)ilist2);
+    ast_list_at_put(ast_list, 0, (object)ast_list2);
+    ast_list_at_put(ast_list, 1, (object)ast_list2);
 
-    context_object make_eval_context(ci, ilist, woodstock->nil);
+    context_object make_eval_context(ci, ast_list, woodstock->nil);
 
     transfer();
 }
 
-SETUP(test_transfer_iconst)
+SETUP(test_transfer_ast_const)
 
     object v = (object)make_number(42);
-    ast_const_object iconst = make_iconst(v);
+    ast_const_object ast_const = make_ast_const(v);
 
-    context_object make_eval_context(ci, iconst, woodstock->nil);
+    context_object make_eval_context(ci, ast_const, woodstock->nil);
 
     object result = transfer();
 
     assert(result.pointer == v.pointer);
 }
 
-SETUP(test_return_of_ilist)
+SETUP(test_return_of_ast_list)
 
     object v = (object)make_number(42);
-    ast_const_object iconst = make_iconst(v);
-    ast_list_object ilist = make_ilist(1);
+    ast_const_object ast_const = make_ast_const(v);
+    ast_list_object ast_list = make_ast_list(1);
 
-    ilist_at_put(ilist, 0, (object)iconst);
+    ast_list_at_put(ast_list, 0, (object)ast_const);
 
-    context_object make_eval_context(ci, ilist, woodstock->nil);
+    context_object make_eval_context(ci, ast_list, woodstock->nil);
 
     object result = transfer();
 
@@ -180,47 +180,47 @@ SETUP(test_env_lookup)
 
 }
 
-SETUP(test_iassign_ivar)
+SETUP(test_ast_assign_ast_var)
 
     runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
-    ast_const_object iconst = make_iconst(v);
-    ast_var_object ivar = make_ivar(L"iv");
+    ast_const_object ast_const = make_ast_const(v);
+    ast_var_object ast_var = make_ast_var(L"iv");
 
-    ast_assign_object iassign = make_iassign((object)ivar, (object)iconst);
+    ast_assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
 
-    context_object make_eval_context(ci, iassign, k);
+    context_object make_eval_context(ci, ast_assign, k);
 
     transfer();
 
     assert(env_at(k, 0).pointer == v.pointer);
 }
 
-SETUP(test_ivar_read)
+SETUP(test_ast_var_read)
 
     runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v = (object)make_number(42);
-    ast_const_object iconst = make_iconst(v);
-    ast_var_object ivar = make_ivar(L"iv");
+    ast_const_object ast_const = make_ast_const(v);
+    ast_var_object ast_var = make_ast_var(L"iv");
 
-    ast_assign_object iassign = make_iassign((object)ivar, (object)iconst);
+    ast_assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
 
-    context_object make_eval_context(ci, iassign, k);
+    context_object make_eval_context(ci, ast_assign, k);
 
     transfer();
 
-    make_eval_context(ci, ivar, k);
+    make_eval_context(ci, ast_var, k);
 
     object result = transfer();
 
     assert(result.pointer == v.pointer);
 }
 
-void native_icallable() {
+void native_ast_callable() {
     context_object c = get_context();
     number_object first = argument_at(c, 0).number;
     assert(first->value == 5);
@@ -228,16 +228,16 @@ void native_icallable() {
     pop_context();
 }
 
-SETUP(test_icall)
+SETUP(test_ast_call)
 
-    ast_const_object iconst =
-        make_iconst(
+    ast_const_object ast_const =
+        make_ast_const(
             (object)make_native(
-                &native_icallable));
+                &native_ast_callable));
 
     object v = (object)make_number(5);
 
-    ast_call_object ast_call = make_icall((object)iconst, 1);
+    ast_call_object ast_call = make_ast_call((object)ast_const, 1);
     set_callarg(ast_call, 0, v);
 
     context_object make_eval_context(ci, ast_call,
@@ -250,30 +250,30 @@ SETUP(test_icall)
     assert(scheme_list_at(ast_call->arguments, 0).number->value == 6);
 }
 
-SETUP(test_new_iscoped)
+SETUP(test_new_ast_scoped)
 
-    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
+    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
 
     object v = (object)make_number(5);
-    object exp = (object)make_iconst(v);
+    object exp = (object)make_ast_const(v);
 
-    ast_call_object icall = make_icall((object)iconst, 3);
-    set_callmsg(icall, NEW_SIZE_);
-    set_callarg(icall, 1, (object)make_iconst(exp));
-    set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
+    ast_call_object ast_call = make_ast_call((object)ast_const, 3);
+    set_callmsg(ast_call, NEW_SIZE_);
+    set_callarg(ast_call, 1, (object)make_ast_const(exp));
+    set_callarg(ast_call, 2, (object)make_ast_const((object)make_number(0)));
 
-    icall = make_icall((object)icall, 1);
-    set_callmsg(icall, SHIFT);
+    ast_call = make_ast_call((object)ast_call, 1);
+    set_callmsg(ast_call, SHIFT);
 
     runtime_env_object start = make_env((object)woodstock->nil,
                                 (object)woodstock->nil,
                                 0);
 
-    context_object make_eval_context(ci, icall, start);
+    context_object make_eval_context(ci, ast_call, start);
 
     object result = transfer();
     
-    ast_scoped_object iscope = object_at(result.object, 0).iscoped;
+    ast_scoped_object iscope = object_at(result.object, 0).ast_scoped;
 
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target.target == &shift_level);
@@ -284,36 +284,36 @@ SETUP(test_new_iscoped)
 
 }
 
-SETUP(test_eval_iscoped)
+SETUP(test_eval_ast_scoped)
 
-    ast_const_object iconst = make_iconst(woodstock->ast_scoped_class);
+    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
 
     object v = (object)make_number(5);
-    object exp = (object)make_iconst(v);
+    object exp = (object)make_ast_const(v);
 
-    ast_call_object icall = make_icall((object)iconst, 4);
-    set_callmsg(icall, NEW_SIZE_);
-    set_callarg(icall, 1, (object)make_iconst(exp));
-    set_callarg(icall, 2, (object)make_iconst((object)make_number(0)));
+    ast_call_object ast_call = make_ast_call((object)ast_const, 4);
+    set_callmsg(ast_call, NEW_SIZE_);
+    set_callarg(ast_call, 1, (object)make_ast_const(exp));
+    set_callarg(ast_call, 2, (object)make_ast_const((object)make_number(0)));
 
-    icall = make_icall((object)icall, 1);
-    set_callmsg(icall, SHIFT);
+    ast_call = make_ast_call((object)ast_call, 1);
+    set_callmsg(ast_call, SHIFT);
 
     runtime_env_object start =
         make_env((object)woodstock->nil,
                  (object)woodstock->nil,
                  0);
 
-    context_object make_eval_context(ci, icall, start);
+    context_object make_eval_context(ci, ast_call, start);
 
     object result = transfer();
 
-    ast_scoped_object iscope = result.iscoped;
+    ast_scoped_object iscope = result.ast_scoped;
 
-    iconst->constant = (object)iscope;
-    icall = make_icall((object)iconst, 0);
+    ast_const->constant = (object)iscope;
+    ast_call = make_ast_call((object)ast_const, 0);
 
-    make_eval_context(ci, icall, start);
+    make_eval_context(ci, ast_call, start);
 
     result = transfer();
 
@@ -341,11 +341,11 @@ SETUP(test_env_parent)
     runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    ast_call_object icall = make_icall(
+    ast_call_object ast_call = make_ast_call(
                             (object)
-                            make_iconst((object)env2), 1);
-    set_callmsg(icall, PARENT);
-    context_object make_eval_context(ci, icall, env);
+                            make_ast_const((object)env2), 1);
+    set_callmsg(ast_call, PARENT);
+    context_object make_eval_context(ci, ast_call, env);
 
     object result = transfer();
     
@@ -360,9 +360,9 @@ SETUP(test_capture_parent)
     runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    ast_call_object icall = make_icall(woodstock->ast_capture, 1);
-    set_callmsg(icall, PARENT);
-    context_object make_eval_context(ci, icall, env2);
+    ast_call_object ast_call = make_ast_call(woodstock->ast_capture, 1);
+    set_callmsg(ast_call, PARENT);
+    context_object make_eval_context(ci, ast_call, env2);
 
     object result = transfer();
     
@@ -375,38 +375,38 @@ SETUP(test_make_function_no_args)
                               (object)woodstock->nil, 0);
 
     array_object args = make_array(1);
-    array_at_put(args, 0, (object)make_ivar(L"iv"));
+    array_at_put(args, 0, (object)make_ast_var(L"iv"));
 
     object constant_function =
         make_func(args,
                   (object)
-                  make_iconst((object)make_number(42)));
+                  make_ast_const((object)make_number(42)));
 
     context_object make_eval_context(ci, constant_function, env);
 
     object result = transfer();
 
-    ast_scoped_object iscope = object_at(result.object, 0).iscoped;
+    ast_scoped_object iscope = object_at(result.object, 0).ast_scoped;
     assert(pheader(iscope) == woodstock->ast_scoped_class.pointer);
     assert(iscope->scope.env == env);
 
 }
 
-SETUP(test_ilist_pass_context)
+SETUP(test_ast_list_pass_context)
 
-    ast_list_object ilist = make_ilist(1);
+    ast_list_object ast_list = make_ast_list(1);
     runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
     runtime_env_object env2 = make_env((object)woodstock->nil,
                               (object)env, 0);
 
-    ast_call_object icall = make_icall(woodstock->ast_capture, 1);
-    set_callmsg(icall, PARENT);
+    ast_call_object ast_call = make_ast_call(woodstock->ast_capture, 1);
+    set_callmsg(ast_call, PARENT);
 
-    ilist_at_put(ilist, 0, (object)icall);
+    ast_list_at_put(ast_list, 0, (object)ast_call);
 
-    context_object make_eval_context(ci, ilist, env2);
+    context_object make_eval_context(ci, ast_list, env2);
 
     object result = transfer();
     
@@ -419,7 +419,7 @@ SETUP(test_eval_function_no_args)
                               (object)woodstock->nil, 0);
 
 
-    ast_const_object the_instr = make_iconst((object)make_number(42));
+    ast_const_object the_instr = make_ast_const((object)make_number(42));
 
     object constant_function =
         make_func(make_array(0),
@@ -431,10 +431,10 @@ SETUP(test_eval_function_no_args)
 
     object scoped_function = transfer();
 
-    object iconst = (object)make_iconst(scoped_function);
-    ast_call_object icall = make_icall(iconst, 0);
+    object ast_const = (object)make_ast_const(scoped_function);
+    ast_call_object ast_call = make_ast_call(ast_const, 0);
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
 
@@ -449,14 +449,14 @@ SETUP(test_make_function_1_arg)
 
 
 
-    ast_var_object ivar = make_ivar(L"iv");
+    ast_var_object ast_var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_at_put(arguments, 0, (object)ast_var);
 
     object constant_function =
         make_func(arguments,
                     (object)
-                    ivar
+                    ast_var
                   );
 
     context_object make_eval_context(ci, constant_function, env);
@@ -471,14 +471,14 @@ SETUP(test_eval_function_1_arg)
 
 
 
-    ast_var_object ivar = make_ivar(L"iv");
+    ast_var_object ast_var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_at_put(arguments, 0, (object)ast_var);
 
     object constant_function =
         make_func(arguments,
                     (object)
-                    ivar
+                    ast_var
                   );
 
     context_object make_eval_context(ci, constant_function, env);
@@ -487,11 +487,11 @@ SETUP(test_eval_function_1_arg)
 
     object arg = (object)make_number(42);
 
-    object iconst = (object)make_iconst(scoped_function);
-    ast_call_object icall = make_icall(iconst, 1);
-    set_callarg(icall, 0, (object)make_iconst(arg));
+    object ast_const = (object)make_ast_const(scoped_function);
+    ast_call_object ast_call = make_ast_call(ast_const, 1);
+    set_callarg(ast_call, 0, (object)make_ast_const(arg));
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
 
@@ -503,14 +503,14 @@ SETUP(test_eval_nested_function)
     runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    ast_var_object ivar = make_ivar(L"iv");
+    ast_var_object ast_var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ivar);
+    array_at_put(arguments, 0, (object)ast_var);
 
     object constant_function1 =
         make_func(make_array(0),
                     (object)
-                    ivar
+                    ast_var
                   );
 
     object constant_function = make_func(arguments, constant_function1);
@@ -519,18 +519,18 @@ SETUP(test_eval_nested_function)
     object scoped_function = transfer();
 
     object arg = (object)make_number(42);
-    object iconst = (object)make_iconst(scoped_function);
-    ast_call_object icall = make_icall(iconst, 1);
-    set_callarg(icall, 0, (object)make_iconst(arg));
+    object ast_const = (object)make_ast_const(scoped_function);
+    ast_call_object ast_call = make_ast_call(ast_const, 1);
+    set_callarg(ast_call, 0, (object)make_ast_const(arg));
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
 
     object nested_function = transfer();
     
-    iconst = (object)make_iconst(nested_function);
-    icall = make_icall(iconst, 0);
+    ast_const = (object)make_ast_const(nested_function);
+    ast_call = make_ast_call(ast_const, 0);
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
 
@@ -553,91 +553,91 @@ object create_class_dispatch() {
                         (method 'APPLY_IN args env)))))))
 */
 define_symbol(SYMBOL_doesNotUnderstand, L"DNU");
-object null         = (object)make_iconst((object)woodstock->nil);
-object ivar_3_self = (object)make_ivar(L"self");
-object ivar_4_env = (object)make_ivar(L"env");
-object ivar_5_args = (object)make_ivar(L"args");
-object ivar_7_msg = (object)make_ivar(L"msg");
-object number_9_0 = (object)make_iconst((object)make_number(0));
-ast_call_object icall_10_ivar_5_args = make_icall((object)ivar_5_args, 3);
-set_callarg(icall_10_ivar_5_args, 0, (object)OBJECT_AT_PUT_);
-set_callarg(icall_10_ivar_5_args, 1, (object)number_9_0);
-set_callarg(icall_10_ivar_5_args, 2, (object)ivar_3_self);
-object ivar_12_loop = (object)make_ivar(L"loop");
-object ivar_16_class = (object)make_ivar(L"class");
-ast_call_object icall_17_scheme_eqp = make_icall((object)scheme_eqp, 2);
-set_callarg(icall_17_scheme_eqp, 0, (object)ivar_16_class);
-set_callarg(icall_17_scheme_eqp, 1, (object)null);
-ast_call_object icall_18_ivar_3_self = make_icall((object)ivar_3_self, 4);
-set_callarg(icall_18_ivar_3_self, 0, (object)SYMBOL_doesNotUnderstand);
-set_callarg(icall_18_ivar_3_self, 1, (object)ivar_7_msg);
-set_callarg(icall_18_ivar_3_self, 2, (object)ivar_4_env);
-set_callarg(icall_18_ivar_3_self, 3, (object)ivar_5_args);
-object ivar_20_amethod = (object)make_ivar(L"amethod");
-ast_call_object icall_21_scheme_eqp = make_icall((object)scheme_eqp, 2);
-set_callarg(icall_21_scheme_eqp, 0, (object)ivar_20_amethod);
-set_callarg(icall_21_scheme_eqp, 1, (object)null);
-object number_22_0 = (object)make_iconst((object)make_number(0));
-ast_call_object icall_23_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_23_ivar_16_class, 0, (object)OBJECT_AT_);
-set_callarg(icall_23_ivar_16_class, 1, (object)number_22_0);
-ast_call_object icall_24_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
-set_callarg(icall_24_ivar_12_loop, 0, (object)icall_23_ivar_16_class);
-ast_call_object icall_25_ivar_20_amethod = make_icall((object)ivar_20_amethod, 3);
-set_callarg(icall_25_ivar_20_amethod, 0, (object)APPLY_IN_);
-set_callarg(icall_25_ivar_20_amethod, 1, (object)ivar_5_args);
-set_callarg(icall_25_ivar_20_amethod, 2, (object)ivar_4_env);
-ast_call_object icall_26_icall_21_scheme_eqp = make_icall((object)icall_21_scheme_eqp, 2);
-set_callarg(icall_26_icall_21_scheme_eqp, 0, (object)icall_24_ivar_12_loop);
-set_callarg(icall_26_icall_21_scheme_eqp, 1, (object)icall_25_ivar_20_amethod);
+object null         = (object)make_ast_const((object)woodstock->nil);
+object ast_var_3_self = (object)make_ast_var(L"self");
+object ast_var_4_env = (object)make_ast_var(L"env");
+object ast_var_5_args = (object)make_ast_var(L"args");
+object ast_var_7_msg = (object)make_ast_var(L"msg");
+object number_9_0 = (object)make_ast_const((object)make_number(0));
+ast_call_object ast_call_10_ast_var_5_args = make_ast_call((object)ast_var_5_args, 3);
+set_callarg(ast_call_10_ast_var_5_args, 0, (object)OBJECT_AT_PUT_);
+set_callarg(ast_call_10_ast_var_5_args, 1, (object)number_9_0);
+set_callarg(ast_call_10_ast_var_5_args, 2, (object)ast_var_3_self);
+object ast_var_12_loop = (object)make_ast_var(L"loop");
+object ast_var_16_class = (object)make_ast_var(L"class");
+ast_call_object ast_call_17_scheme_eqp = make_ast_call((object)scheme_eqp, 2);
+set_callarg(ast_call_17_scheme_eqp, 0, (object)ast_var_16_class);
+set_callarg(ast_call_17_scheme_eqp, 1, (object)null);
+ast_call_object ast_call_18_ast_var_3_self = make_ast_call((object)ast_var_3_self, 4);
+set_callarg(ast_call_18_ast_var_3_self, 0, (object)SYMBOL_doesNotUnderstand);
+set_callarg(ast_call_18_ast_var_3_self, 1, (object)ast_var_7_msg);
+set_callarg(ast_call_18_ast_var_3_self, 2, (object)ast_var_4_env);
+set_callarg(ast_call_18_ast_var_3_self, 3, (object)ast_var_5_args);
+object ast_var_20_amethod = (object)make_ast_var(L"amethod");
+ast_call_object ast_call_21_scheme_eqp = make_ast_call((object)scheme_eqp, 2);
+set_callarg(ast_call_21_scheme_eqp, 0, (object)ast_var_20_amethod);
+set_callarg(ast_call_21_scheme_eqp, 1, (object)null);
+object number_22_0 = (object)make_ast_const((object)make_number(0));
+ast_call_object ast_call_23_ast_var_16_class = make_ast_call((object)ast_var_16_class, 2);
+set_callarg(ast_call_23_ast_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_23_ast_var_16_class, 1, (object)number_22_0);
+ast_call_object ast_call_24_ast_var_12_loop = make_ast_call((object)ast_var_12_loop, 1);
+set_callarg(ast_call_24_ast_var_12_loop, 0, (object)ast_call_23_ast_var_16_class);
+ast_call_object ast_call_25_ast_var_20_amethod = make_ast_call((object)ast_var_20_amethod, 3);
+set_callarg(ast_call_25_ast_var_20_amethod, 0, (object)APPLY_IN_);
+set_callarg(ast_call_25_ast_var_20_amethod, 1, (object)ast_var_5_args);
+set_callarg(ast_call_25_ast_var_20_amethod, 2, (object)ast_var_4_env);
+ast_call_object ast_call_26_ast_call_21_scheme_eqp = make_ast_call((object)ast_call_21_scheme_eqp, 2);
+set_callarg(ast_call_26_ast_call_21_scheme_eqp, 0, (object)ast_call_24_ast_var_12_loop);
+set_callarg(ast_call_26_ast_call_21_scheme_eqp, 1, (object)ast_call_25_ast_var_20_amethod);
 array_object array_27_lambda_19_x = make_array(1);
-array_at_put(array_27_lambda_19_x, 0, ivar_20_amethod);
-object lambda_19_x = make_func(array_27_lambda_19_x, (object)icall_26_icall_21_scheme_eqp);
-object number_28_1 = (object)make_iconst((object)make_number(1));
-ast_call_object icall_29_ivar_16_class = make_icall((object)ivar_16_class, 2);
-set_callarg(icall_29_ivar_16_class, 0, (object)OBJECT_AT_);
-set_callarg(icall_29_ivar_16_class, 1, (object)number_28_1);
-ast_call_object icall_30_icall_29_ivar_16_class = make_icall((object)icall_29_ivar_16_class, 2);
-set_callarg(icall_30_icall_29_ivar_16_class, 0, (object)OBJECT_AT_);
-set_callarg(icall_30_icall_29_ivar_16_class, 1, (object)ivar_7_msg);
-ast_call_object icall_31_lambda_19_x = make_icall((object)lambda_19_x, 1);
-set_callarg(icall_31_lambda_19_x, 0, (object)icall_30_icall_29_ivar_16_class);
-ast_call_object icall_32_icall_17_scheme_eqp = make_icall((object)icall_17_scheme_eqp, 2);
-set_callarg(icall_32_icall_17_scheme_eqp, 0, (object)icall_18_ivar_3_self);
-set_callarg(icall_32_icall_17_scheme_eqp, 1, (object)icall_31_lambda_19_x);
+array_at_put(array_27_lambda_19_x, 0, ast_var_20_amethod);
+object lambda_19_x = make_func(array_27_lambda_19_x, (object)ast_call_26_ast_call_21_scheme_eqp);
+object number_28_1 = (object)make_ast_const((object)make_number(1));
+ast_call_object ast_call_29_ast_var_16_class = make_ast_call((object)ast_var_16_class, 2);
+set_callarg(ast_call_29_ast_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_29_ast_var_16_class, 1, (object)number_28_1);
+ast_call_object ast_call_30_ast_call_29_ast_var_16_class = make_ast_call((object)ast_call_29_ast_var_16_class, 2);
+set_callarg(ast_call_30_ast_call_29_ast_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_30_ast_call_29_ast_var_16_class, 1, (object)ast_var_7_msg);
+ast_call_object ast_call_31_lambda_19_x = make_ast_call((object)lambda_19_x, 1);
+set_callarg(ast_call_31_lambda_19_x, 0, (object)ast_call_30_ast_call_29_ast_var_16_class);
+ast_call_object ast_call_32_ast_call_17_scheme_eqp = make_ast_call((object)ast_call_17_scheme_eqp, 2);
+set_callarg(ast_call_32_ast_call_17_scheme_eqp, 0, (object)ast_call_18_ast_var_3_self);
+set_callarg(ast_call_32_ast_call_17_scheme_eqp, 1, (object)ast_call_31_lambda_19_x);
 array_object array_33_lambda_15_x = make_array(1);
-array_at_put(array_33_lambda_15_x, 0, ivar_16_class);
-object lambda_15_x = make_func(array_33_lambda_15_x, (object)icall_32_icall_17_scheme_eqp);
-ast_assign_object iassign_14_x = make_iassign(ivar_12_loop, (object)lambda_15_x);
-ast_call_object icall_34_ivar_3_self = make_icall((object)ivar_3_self, 1);
-set_callarg(icall_34_ivar_3_self, 0, (object)DELEGATE);
-ast_call_object icall_35_ivar_12_loop = make_icall((object)ivar_12_loop, 1);
-set_callarg(icall_35_ivar_12_loop, 0, (object)icall_34_ivar_3_self);
-ast_list_object ilist_13_lambda = make_ilist(2);
-ilist_at_put(ilist_13_lambda, 0, (object)iassign_14_x);
-ilist_at_put(ilist_13_lambda, 1, (object)icall_35_ivar_12_loop);
+array_at_put(array_33_lambda_15_x, 0, ast_var_16_class);
+object lambda_15_x = make_func(array_33_lambda_15_x, (object)ast_call_32_ast_call_17_scheme_eqp);
+ast_assign_object ast_assign_14_x = make_ast_assign(ast_var_12_loop, (object)lambda_15_x);
+ast_call_object ast_call_34_ast_var_3_self = make_ast_call((object)ast_var_3_self, 1);
+set_callarg(ast_call_34_ast_var_3_self, 0, (object)DELEGATE);
+ast_call_object ast_call_35_ast_var_12_loop = make_ast_call((object)ast_var_12_loop, 1);
+set_callarg(ast_call_35_ast_var_12_loop, 0, (object)ast_call_34_ast_var_3_self);
+ast_list_object ast_list_13_lambda = make_ast_list(2);
+ast_list_at_put(ast_list_13_lambda, 0, (object)ast_assign_14_x);
+ast_list_at_put(ast_list_13_lambda, 1, (object)ast_call_35_ast_var_12_loop);
 array_object array_36_lambda_11_x = make_array(1);
-array_at_put(array_36_lambda_11_x, 0, ivar_12_loop);
-object lambda_11_x = make_func(array_36_lambda_11_x, (object)ilist_13_lambda);
-ast_call_object icall_37_lambda_11_x = make_icall((object)lambda_11_x, 1);
-set_callarg(icall_37_lambda_11_x, 0, (object)null);
-ast_list_object ilist_8_lambda = make_ilist(2);
-ilist_at_put(ilist_8_lambda, 0, (object)icall_10_ivar_5_args);
-ilist_at_put(ilist_8_lambda, 1, (object)icall_37_lambda_11_x);
+array_at_put(array_36_lambda_11_x, 0, ast_var_12_loop);
+object lambda_11_x = make_func(array_36_lambda_11_x, (object)ast_list_13_lambda);
+ast_call_object ast_call_37_lambda_11_x = make_ast_call((object)lambda_11_x, 1);
+set_callarg(ast_call_37_lambda_11_x, 0, (object)null);
+ast_list_object ast_list_8_lambda = make_ast_list(2);
+ast_list_at_put(ast_list_8_lambda, 0, (object)ast_call_10_ast_var_5_args);
+ast_list_at_put(ast_list_8_lambda, 1, (object)ast_call_37_lambda_11_x);
 array_object array_38_lambda_6_x = make_array(1);
-array_at_put(array_38_lambda_6_x, 0, ivar_7_msg);
-object lambda_6_x = make_func(array_38_lambda_6_x, (object)ilist_8_lambda);
-object number_39_0 = (object)make_iconst((object)make_number(0));
-ast_call_object icall_40_ivar_5_args = make_icall((object)ivar_5_args, 2);
-set_callarg(icall_40_ivar_5_args, 0, (object)OBJECT_AT_);
-set_callarg(icall_40_ivar_5_args, 1, (object)number_39_0);
-ast_call_object icall_41_lambda_6_x = make_icall((object)lambda_6_x, 1);
-set_callarg(icall_41_lambda_6_x, 0, (object)icall_40_ivar_5_args);
+array_at_put(array_38_lambda_6_x, 0, ast_var_7_msg);
+object lambda_6_x = make_func(array_38_lambda_6_x, (object)ast_list_8_lambda);
+object number_39_0 = (object)make_ast_const((object)make_number(0));
+ast_call_object ast_call_40_ast_var_5_args = make_ast_call((object)ast_var_5_args, 2);
+set_callarg(ast_call_40_ast_var_5_args, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_40_ast_var_5_args, 1, (object)number_39_0);
+ast_call_object ast_call_41_lambda_6_x = make_ast_call((object)lambda_6_x, 1);
+set_callarg(ast_call_41_lambda_6_x, 0, (object)ast_call_40_ast_var_5_args);
 array_object array_42_lambda_2_x = make_array(3);
-array_at_put(array_42_lambda_2_x, 0, ivar_3_self);
-array_at_put(array_42_lambda_2_x, 1, ivar_4_env);
-array_at_put(array_42_lambda_2_x, 2, ivar_5_args);
-return make_dispatch(array_42_lambda_2_x, (object)icall_41_lambda_6_x);
+array_at_put(array_42_lambda_2_x, 0, ast_var_3_self);
+array_at_put(array_42_lambda_2_x, 1, ast_var_4_env);
+array_at_put(array_42_lambda_2_x, 2, ast_var_5_args);
+return make_dispatch(array_42_lambda_2_x, (object)ast_call_41_lambda_6_x);
 }
 
 SETUP(test_make_ifixed)
@@ -646,13 +646,13 @@ SETUP(test_make_ifixed)
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
+    ast_call_object ast_call4(ast_call, (object)make_ast_const(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
-                        (object)make_iconst((object)woodstock->nil),
-                        (object)make_iconst((object)make_number(5)));
+                        (object)make_ast_const((object)woodstock->nil),
+                        (object)make_ast_const((object)make_number(5)));
 
-    context_object make_eval_context(ci, icall, env);
+    context_object make_eval_context(ci, ast_call, env);
 
     object result = transfer();    
 
@@ -669,28 +669,28 @@ SETUP(test_ifixed_natives)
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
+    ast_call_object ast_call4(ast_call, (object)make_ast_const(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
-                        (object)make_iconst((object)woodstock->nil),
-                        (object)make_iconst((object)make_number(5)));
+                        (object)make_ast_const((object)woodstock->nil),
+                        (object)make_ast_const((object)make_number(5)));
 
-    context_object make_eval_context(ci, icall, env);
+    context_object make_eval_context(ci, ast_call, env);
 
     object ifixed = transfer();    
 
     assert(ifixed.ifixed->size == 5);
     assert(ifixed.ifixed->delegate.object == woodstock->nil);
 
-    icall1(icall, make_iconst(ifixed), SIZE);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(ifixed), SIZE);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
 
     assert(result.number->value == 5);
 
-    icall1(icall, make_iconst(ifixed), BASICNEW);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(ifixed), BASICNEW);
+    make_eval_context(ci, ast_call, env);
 
     transfer();
 
@@ -703,51 +703,51 @@ SETUP(test_ifixed_object)
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
+    ast_call_object ast_call4(ast_call, (object)make_ast_const(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
-                        (object)make_iconst((object)woodstock->nil),
-                        (object)make_iconst((object)make_number(5)));
+                        (object)make_ast_const((object)woodstock->nil),
+                        (object)make_ast_const((object)make_number(5)));
 
-    context_object make_eval_context(ci, icall, env);
+    context_object make_eval_context(ci, ast_call, env);
 
     object ifixed = transfer();    
 
-    icall1(icall, make_iconst(ifixed), BASICNEW);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(ifixed), BASICNEW);
+    make_eval_context(ci, ast_call, env);
 
     object thefixed = transfer();
 
-    icall1(icall, make_iconst(thefixed), DELEGATE);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(thefixed), DELEGATE);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
     assert(result.pointer == ifixed.ifixed->delegate.pointer);
     
-    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
-           (object)make_iconst((object)make_number(0)));
-    make_eval_context(ci, icall, env);
+    ast_call2(ast_call, make_ast_const(thefixed), OBJECT_AT_,
+           (object)make_ast_const((object)make_number(0)));
+    make_eval_context(ci, ast_call, env);
 
     result = transfer();
     assert(result.object == woodstock->nil);
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
-           (object)make_iconst((object)make_number(4)));
-    make_eval_context(ci, icall, env);
+    ast_call2(ast_call, make_ast_const(thefixed), OBJECT_AT_,
+           (object)make_ast_const((object)make_number(4)));
+    make_eval_context(ci, ast_call, env);
 
     result = transfer();
     assert(result.object == woodstock->nil);
 
-    icall3(icall, make_iconst(thefixed),
-           OBJECT_AT_PUT_, (object)make_iconst((object)make_number(3)),
-           (object)make_iconst(ifixed));
-    make_eval_context(ci, icall, env);
+    ast_call3(ast_call, make_ast_const(thefixed),
+           OBJECT_AT_PUT_, (object)make_ast_const((object)make_number(3)),
+           (object)make_ast_const(ifixed));
+    make_eval_context(ci, ast_call, env);
 
     transfer();
 
-    icall2(icall, make_iconst(thefixed), OBJECT_AT_,
-           (object)make_iconst((object)make_number(3)));
-    make_eval_context(ci, icall, env);
+    ast_call2(ast_call, make_ast_const(thefixed), OBJECT_AT_,
+           (object)make_ast_const((object)make_number(3)));
+    make_eval_context(ci, ast_call, env);
 
     result = transfer();
     assert(result.pointer == ifixed.pointer);
@@ -760,25 +760,25 @@ SETUP(test_ifixed_dispatch)
                               (object)woodstock->nil, 0);
 
     object class_dispatch = create_class_dispatch();
-    ast_call_object icall4(icall, (object)make_iconst(woodstock->ifixed),
+    ast_call_object ast_call4(ast_call, (object)make_ast_const(woodstock->ifixed),
                         DISPATCH_DELEGATE_SIZE_,
                         class_dispatch,
-                        (object)make_iconst((object)woodstock->nil),
-                        (object)make_iconst((object)make_number(2))); // superclass + methoddict
+                        (object)make_ast_const((object)woodstock->nil),
+                        (object)make_ast_const((object)make_number(2))); // superclass + methoddict
 
-    context_object make_eval_context(ci, icall, env);
+    context_object make_eval_context(ci, ast_call, env);
 
     object class_ifixed = transfer();    
 
-    icall1(icall, make_iconst(class_ifixed), BASICNEW);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(class_ifixed), BASICNEW);
+    make_eval_context(ci, ast_call, env);
 
     object theclass = transfer();
 
-    object svar = (object)make_ivar(L"self");
-    object mvar = (object)make_ivar(L"msg");
-    object evar = (object)make_ivar(L"env");
-    object avar = (object)make_ivar(L"args");
+    object svar = (object)make_ast_var(L"self");
+    object mvar = (object)make_ast_var(L"msg");
+    object evar = (object)make_ast_var(L"env");
+    object avar = (object)make_ast_var(L"args");
     array_object args = make_array(4);
     raw_array_at_put(args, 0, svar);
     raw_array_at_put(args, 1, mvar);
@@ -788,33 +788,33 @@ SETUP(test_ifixed_dispatch)
     object dnu = make_m(args, (object)mvar);
 
     dict_object methods = make_dict(2);
-    icall3(icall, (object)make_iconst((object)methods),
+    ast_call3(ast_call, (object)make_ast_const((object)methods),
                   OBJECT_AT_PUT_,
-                  (object)make_iconst((object)SYMBOL_doesNotUnderstand),
+                  (object)make_ast_const((object)SYMBOL_doesNotUnderstand),
                   dnu);
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
     transfer();
 
     object_at_put(theclass.object, 1, (object)methods);
 
-    icall4(icall, (object)make_iconst(woodstock->ifixed),
+    ast_call4(ast_call, (object)make_ast_const(woodstock->ifixed),
                   DISPATCH_DELEGATE_SIZE_,
                   class_dispatch,
-                  (object)make_iconst(theclass),
-                  (object)make_iconst((object)make_number(5)));
+                  (object)make_ast_const(theclass),
+                  (object)make_ast_const((object)make_number(5)));
 
-    make_eval_context(ci, icall, env);
+    make_eval_context(ci, ast_call, env);
 
     object instance_ifixed = transfer();    
 
-    icall1(icall, make_iconst(instance_ifixed), BASICNEW);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(instance_ifixed), BASICNEW);
+    make_eval_context(ci, ast_call, env);
 
     object instance = transfer();
 
-    icall1(icall, make_iconst(instance), BASICNEW);
-    make_eval_context(ci, icall, env);
+    ast_call1(ast_call, make_ast_const(instance), BASICNEW);
+    make_eval_context(ci, ast_call, env);
 
     object result = transfer();
     print_object(result);
@@ -827,21 +827,21 @@ int main() {
     test_array();
     test_string_equals();
     test_object_object();
-    test_transfer_empty_ilist();
-    test_transfer_empty_ilist_in_ilist();
-    test_transfer_iconst();
-    test_return_of_ilist();
+    test_transfer_empty_ast_list();
+    test_transfer_empty_ast_list_in_ast_list();
+    test_transfer_ast_const();
+    test_return_of_ast_list();
     test_env_lookup();
-    test_iassign_ivar();
-    test_ivar_read();
-    // test_icall(); // currently broken
-    test_new_iscoped();
-    test_eval_iscoped();
+    test_ast_assign_ast_var();
+    test_ast_var_read();
+    // test_ast_call(); // currently broken
+    test_new_ast_scoped();
+    test_eval_ast_scoped();
     test_ast_capture();
     test_env_parent();
     test_capture_parent();
     test_make_function_no_args();
-    test_ilist_pass_context();
+    test_ast_list_pass_context();
     test_eval_function_no_args();
     test_make_function_1_arg();
     test_eval_function_1_arg();
