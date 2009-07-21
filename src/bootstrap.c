@@ -1,5 +1,4 @@
 #include <bootstrap.h>
-#include <primitives.h>
 #include <system.h>
 #include <thread.h>
 #include <scheme/natives.h>
