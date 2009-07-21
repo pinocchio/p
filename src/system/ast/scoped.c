@@ -116,4 +116,8 @@ object make_iscoped(object scope, object expression, object argsize) {
     return (object)result;
 }
 
+preval3(iscoped_new_from_scope_expression_size, scope, expression, argsize,
+	return_from_context(context, make_iscoped(scope, expression, argsize));
+)
+
 

@@ -68,7 +68,7 @@ ast_var_object make_ivar(const wchar_t* name) {
     return result;
 }
 
-preval1(ivar_new_from_string, context, value,
+preval1(ivar_new_from_string, value,
 	cast(string_var, value, string);
 	return_from_context(context, (object)make_ivar(string_var->value));
 )

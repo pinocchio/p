@@ -33,7 +33,7 @@ extern object scheme##_##name;\
 extern void scheme##_##name##_##func();
 
 
-#define preval1(name, context, argument, body) \
+#define preval1(name, argument, body) \
 object scheme##_##name;\
 void name##_##do() {\
     context_object context = get_context();\
@@ -42,7 +42,8 @@ void name##_##do() {\
 }\
 preval_push(name, 1);
 
-#define preval2(name, context, arg1, arg2, body) \
+
+#define preval2(name, arg1, arg2, body) \
 object scheme##_##name;\
 void name##_##do() {\
     context_object context = get_context();\
@@ -52,7 +53,8 @@ void name##_##do() {\
 }\
 preval_push(name, 2);
 
-#define preval3(name, context, arg1, arg2, arg3, body) \
+
+#define preval3(name, arg1, arg2, arg3, body) \
 object scheme##_##name;\
 void name##_##do() {\
     context_object context = get_context();\
@@ -64,16 +66,17 @@ void name##_##do() {\
 preval_push(name, 3);
 
 
-#define preval2_push(name) \
-void name##_##func() {\
-	context_object context = get_context();\
-	assert_argsize(context, count);\
-	int i;\
-	for (i=0; i<2; i++) {\
-		push_eval_of(context, i);\
-	}\
-	context->code = &name##_##func_do;\
-}
+#define preval4(name, arg1, arg2, arg3, arg4, body) \
+object scheme##_##name;\
+void name##_##do() {\
+    context_object context = get_context();\
+    object arg1 = argument_at(context, 0);\
+    object arg2 = argument_at(context, 1);\
+    object arg3 = argument_at(context, 2);\
+    object arg4 = argument_at(context, 4);\
+    body;\
+}\
+preval_push(name, 4);
 
 #define preval_push(name, count)\
 void scheme##_##name##_##func() {\

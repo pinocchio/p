@@ -48,10 +48,10 @@ bin_number_bool_op  ( equalp,    == )
 bin_char_bool_op    ( chareqp,   == )
 bin_object_bool_op  ( eqp,       == )
 
-preval1(display, context, v,
+preval1(display, value,
     debug("scheme>>display\n");
-    print_object(v);
-    return_from_context(context, v);
+    print_object(value);
+    return_from_context(context, value);
     debug("ret>>scheme>>display\n");
 )
 
@@ -63,7 +63,7 @@ object make_ec() {
     return (object)ec;
 }
 // TODO move to separate files
-preval1(callec, context, lambda,
+preval1(callec, lambda,
     object env = context->env;
     pop_context();
     object ec = make_ec();
@@ -74,7 +74,7 @@ preval1(callec, context, lambda,
     set_argument(return_context(context), 1, ec);
 )
 
-preval1(cont, context, value,
+preval1(cont, value,
     object self = context->self;
     context_object return_context = object_at(self.object, 0).context;
 
@@ -88,22 +88,22 @@ preval1(cont, context, value,
     return_to_context(return_context, value);
 )
 
-preval1(error, context, message,
+preval1(error, message,
     print_object(message);
     exit(-1);
 )
 
-preval1(error_handler, context, error_handler,
+preval1(error_handler, error_handler,
     woodstock->error     = error_handler;
     return_from_context(context, error_handler);
 )
 
-preval1(exit, context, value,
+preval1(exit, value,
     cast(n, value, number);
     exit(n->value);
 )
 
-preval2(cons, context, car, cdr,
+preval2(cons, car, cdr,
     return_from_context(context, cons(car, cdr));
 )
 
@@ -186,4 +186,5 @@ void bootstrap_scheme() {
 
     init_op(ilist_new_from_array);
     init_op(ivar_new_from_string);
+    init_op(iscoped_new_from_scope_expression_size);
 }
