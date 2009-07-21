@@ -21,3 +21,8 @@ ast_const_object make_iconst(object constant) {
     result->constant        = constant;
     return result;
 }
+
+
+preval1(iconst_new_from_object, constant,
+	return_from_context(context, (object)make_iconst(constant));
+)

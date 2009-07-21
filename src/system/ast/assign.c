@@ -42,3 +42,8 @@ ast_assign_object make_iassign(object variable, object expression) {
     result->expression      = expression;
     return result;
 }
+
+
+preval2(iassign_new_from_variable_expression, variable, expression,
+	return_from_context(context, (object)make_iassign(variable, expression));
+)

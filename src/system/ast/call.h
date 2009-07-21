@@ -7,6 +7,7 @@
 export_type(ast_call);
 
 extern ast_call_object make_icall(object self, int argsize);
+preval_header(icall_new_from_self_size);
 
 // Accessors
 extern void        inline set_callarg(ast_call_object icall, int index, object value);

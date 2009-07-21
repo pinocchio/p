@@ -187,4 +187,7 @@ void bootstrap_scheme() {
     init_op(ilist_new_from_array);
     init_op(ivar_new_from_string);
     init_op(iscoped_new_from_scope_expression_size);
+    init_op(iconst_new_from_object);
+    init_op(icall_new_from_self_size);
+    init_op(iassign_new_from_variable_expression);
 }

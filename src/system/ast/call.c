@@ -69,6 +69,11 @@ ast_call_object make_icall(object self, int argsize) {
     return result;
 }
 
+preval2(icall_new_from_self_size, self, value,
+	cast(number_var, value, number);
+	return_from_context(context, (object)make_icall(self, number_var->value));
+)
+
 // Accessors
 void inline set_callarg(ast_call_object icall, int index, object value) {
     scheme_list_at_put(icall->arguments, index, value);
