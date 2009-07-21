@@ -50,46 +50,51 @@ woodstock_t bootstrap() {
     setup_type(string);
     setup_type(symbol);
 
-    woodstock->array_class       = incomplete_class(array);
-    woodstock->chr_class         = incomplete_class(chr);
-    woodstock->dict_class        = incomplete_class(dict);
-    woodstock->runtime_env_class = incomplete_class(runtime_env);
-    woodstock->fixed_class       = incomplete_class(fixed);
-    woodstock->ast_assign_class  = incomplete_class(ast_assign);
-    woodstock->ast_call_class    = incomplete_class(ast_call);
-    woodstock->ast_capture_class = incomplete_class(ast_capture);
-    woodstock->ast_const_class   = incomplete_class(ast_const);
-    woodstock->ast_list_class    = incomplete_class(ast_list);
-    woodstock->ast_scoped_class  = incomplete_class(ast_scoped);
-    woodstock->ast_var_class     = incomplete_class(ast_var);
-    woodstock->infile_class      = incomplete_class(infile);
-    woodstock->instream_class    = incomplete_class(instream);
-    woodstock->number_class      = incomplete_class(number);
-    woodstock->outfile_class     = incomplete_class(outfile);
-    woodstock->outstream_class   = incomplete_class(outstream);
-    woodstock->string_class      = incomplete_class(string);   
-    woodstock->symbol_class      = incomplete_class(symbol);
+    woodstock->array_class          = incomplete_class(array);
+    woodstock->chr_class            = incomplete_class(chr);
+    woodstock->dict_class           = incomplete_class(dict);
+    woodstock->runtime_env_class    = incomplete_class(runtime_env);
+    woodstock->fixed_class          = incomplete_class(fixed);
+    woodstock->ast_assign_class     = incomplete_class(ast_assign);
+    woodstock->ast_call_class       = incomplete_class(ast_call);
+    woodstock->ast_capture_class    = incomplete_class(ast_capture);
+    woodstock->ast_const_class      = incomplete_class(ast_const);
+    woodstock->ast_list_class       = incomplete_class(ast_list);
+    woodstock->ast_scoped_class     = incomplete_class(ast_scoped);
+    woodstock->ast_var_class        = incomplete_class(ast_var);
+    woodstock->infile_class         = incomplete_class(infile);
+    woodstock->instream_class       = incomplete_class(instream);
+    woodstock->number_class         = incomplete_class(number);
+    woodstock->outfile_class        = incomplete_class(outfile);
+    woodstock->outstream_class      = incomplete_class(outstream);
+    woodstock->string_class         = incomplete_class(string);   
+    woodstock->symbol_class         = incomplete_class(symbol);
 
-    // Optimization classes
-    woodstock->chartable_class   = incomplete_fixed_class(256);
-    woodstock->chartable         = (object)make_object(256,
-                                        woodstock->chartable_class);
+    woodstock->chartable_class      = incomplete_fixed_class(256);
+    woodstock->chartable            = (object)make_object(256,
+                                           woodstock->chartable_class);
+
+    woodstock->cons_class           = incomplete_fixed_class(2);
+
     // default streams
-    woodstock->stdinstream       = make_instream(stdin);
-    woodstock->stdoutstream      = make_outstream(stdout);
+    woodstock->stdinstream          = make_instream(stdin);
+    woodstock->stdoutstream         = make_outstream(stdout);
 
-    woodstock->nil_class = incomplete_fixed_class(0);
+    woodstock->nil_class            = incomplete_fixed_class(0);
 
     // Build after building the array_class!
-    woodstock->empty             = ((array_object)make_object(1, woodstock->array_class));
-    woodstock->empty->size       = 0;
+    woodstock->empty                = ((array_object)make_object(1,
+                                            woodstock->array_class));
+    woodstock->empty->size          = 0;
     // Set after building the nil_class
-    header(woodstock->nil)       = woodstock->nil_class;
+    header(woodstock->nil)          = woodstock->nil_class;
 
-    woodstock->level_shifter     = wrap_dispatcher(shift_level);
+    woodstock->level_shifter        = wrap_dispatcher(shift_level);
 
-    woodstock->ast_capture       = (object)make_object(0, woodstock->ast_capture_class);
-    woodstock->ifixed            = (object)make_object(0, woodstock->fixed_class);
+    woodstock->ast_capture          = (object)make_object(0,
+                                            woodstock->ast_capture_class);
+    woodstock->ifixed               = (object)make_object(0,
+                                            woodstock->fixed_class);
 
     init_thread();
     bootstrap_scheme();

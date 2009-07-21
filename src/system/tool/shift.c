@@ -1,6 +1,7 @@
 #include <system.h>
 #include <thread.h>
 #include <model.h>
+#include <scheme/natives.h>
 
 void shift_level() {
     debug("shiftLevel\n");
@@ -10,10 +11,10 @@ void shift_level() {
     object dispatch = object_at(context->self.object, 0);
     
     int argsize = context_size(context);
-    array_object arguments = make_array(argsize);
+    object arguments = (object)woodstock->nil;
     
-    for (; 0 <= argsize; argsize--) {
-        raw_array_at_put(arguments, argsize, argument_at(context, argsize));
+    for (argsize--; 0 <= argsize; argsize--) {
+        arguments = cons(argument_at(context, argsize), arguments);
     }
 
     pop_context();

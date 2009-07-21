@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <scheme/natives.h>
 
 // icall>>invoke:env:
 static void inline icall_invoke_env() {
@@ -10,7 +11,7 @@ static void inline icall_invoke_env() {
     object env          = icall_context->env;
     object self         = argument_at(icall_context, 1);
 
-    int argsize = array_size(icall->arguments);
+    int argsize = scheme_list_size(icall->arguments);
     debug("icall>>invoke: %p (%i)\n", self.pointer, argsize);
 
     pop_context();
@@ -19,7 +20,7 @@ static void inline icall_invoke_env() {
 
     int i;
     for (i = 0; i < argsize; i++) {
-        set_argument(icall_context, i, raw_array_at(icall->arguments, i));
+        set_argument(icall_context, i, scheme_list_at(icall->arguments, i));
     }
     // until here.
 
@@ -64,13 +65,13 @@ define_bootstrapping_type(ast_call,
 ast_call_object make_icall(object self, int argsize) {
     new_instance(ast_call);
     result->self        = self;
-    result->arguments   = make_array(argsize);
+    result->arguments   = make_scheme_list(argsize);
     return result;
 }
 
 // Accessors
 void inline set_callarg(ast_call_object icall, int index, object value) {
-    array_at_put(icall->arguments, index, value);
+    scheme_list_at_put(icall->arguments, index, value);
 }
 
 void inline set_callmsg(ast_call_object icall, object msg) {

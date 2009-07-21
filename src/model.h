@@ -203,6 +203,8 @@ struct woodstock {
     object chartable_class;
     object chartable;
 
+    object cons_class;
+
     // Streams
     object stdinstream;
     object stdoutstream;

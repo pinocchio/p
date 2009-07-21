@@ -247,7 +247,7 @@ SETUP(test_icall)
 
     transfer();
 
-    assert(array_at(ast_call->arguments, 0).number->value == 6);
+    assert(scheme_list_at(ast_call->arguments, 0).number->value == 6);
 }
 
 SETUP(test_new_iscoped)
@@ -299,9 +299,10 @@ SETUP(test_eval_iscoped)
     icall = make_icall((object)icall, 1);
     set_callmsg(icall, SHIFT);
 
-    runtime_env_object start = make_env((object)woodstock->nil,
-                                (object)woodstock->nil,
-                                0);
+    runtime_env_object start =
+        make_env((object)woodstock->nil,
+                 (object)woodstock->nil,
+                 0);
 
     context_object make_eval_context(ci, icall, start);
 

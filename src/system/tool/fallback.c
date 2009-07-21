@@ -1,5 +1,6 @@
 #include <system.h>
 #include <thread.h>
+#include <scheme/natives.h>
 
 fallback_object inline fallback_descr(object inst) {
     return (fallback_object)pheader(inst.pointer);
@@ -13,10 +14,10 @@ void inline fallback_shift(context_object context) {
     object dispatch = fallback->dispatch;
     
     int argsize = context_size(context);
-    array_object args = make_array(argsize);
-    
+    object args = (object)woodstock->nil;
+
     for (--argsize; 0 <= argsize; argsize--) {
-        raw_array_at_put(args, argsize, argument_at(context, argsize));
+        args = cons(argument_at(context, argsize), args);
     }
 
     pop_context();
@@ -24,5 +25,5 @@ void inline fallback_shift(context_object context) {
     context->env = env;
     set_argument(context, 0, self);
     set_argument(context, 1, env);
-    set_argument(context, 2, (object)args);
+    set_argument(context, 2, args);
 }

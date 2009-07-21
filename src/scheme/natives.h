@@ -7,6 +7,7 @@ extern object scheme_smallerp;
 extern object scheme_equalp;
 extern object scheme_eqp;
 extern object scheme_chareqp;
+extern object scheme_cons;
 
 extern object scheme_string_to_symbol;
 
@@ -17,6 +18,12 @@ extern object scheme_callec;
 extern object scheme_exit;
 extern object scheme_error_handler;
 extern object inline make_bool(int bl);
+
+extern object cons(object car, object cdr);
+extern int scheme_list_size(object l);
+extern object make_scheme_list(int size);
+extern object scheme_list_at(object l, int index);
+extern void scheme_list_at_put(object l, int index, object value);
 
 extern void bootstrap_scheme();
 

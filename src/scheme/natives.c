@@ -103,6 +103,62 @@ preval1(exit, context, value,
     exit(n->value);
 )
 
+preval2(cons, context, car, cdr,
+    return_from_context(context, cons(car, cdr));
+)
+
+object cons(object car, object cdr) {
+    object_object cons = make_object(2, woodstock->cons_class);
+    object_at_put(cons, 0, car);
+    object_at_put(cons, 1, cdr);
+    return (object)cons; 
+}
+
+int scheme_list_size(object l) {
+    object_object list = l.object;
+    int size = 0;
+    while (list != woodstock->nil) {
+        error_guard(pheader(list) == woodstock->cons_class.pointer,
+                    "Not a valid list");
+        size++;
+        list = object_at(list, 1).object;
+    }
+    return size;
+}
+
+object make_scheme_list(int size) {
+    object list = (object)woodstock->nil;
+    while (size > 0) {
+        list = cons((object)woodstock->nil, list);
+        size--;
+    }
+    return list;
+}
+
+object scheme_list_at(object l, int index) {
+    object_object list = l.object;
+    while (index > 0) {
+        error_guard(list != woodstock->nil, "List index out of bounds");
+        error_guard(pheader(list) == woodstock->cons_class.pointer,
+                    "Not a valid list");
+        index--;
+        list = object_at(list, 1).object;
+    }
+    return object_at(list, 0);
+}
+
+void scheme_list_at_put(object l, int index, object value) {
+    object_object list = l.object;
+    while (index > 0) {
+        error_guard(list != woodstock->nil, "List index out of bounds");
+        error_guard(pheader(list) == woodstock->cons_class.pointer,
+                    "Not a valid list");
+        index--;
+        list = object_at(list, 1).object;
+    }
+    object_at_put(list, 0, value);
+}
+
 void bootstrap_scheme() {
     bootstrap_scheme_symbols();
     init_op(plus);
@@ -122,6 +178,7 @@ void bootstrap_scheme() {
     init_op(callec);
     init_op(display);
     init_op(exit);
+    init_op(cons);
     init_direct_op(error);
     init_op(error_handler);
 

@@ -15,7 +15,7 @@ extern void        inline set_callmsg(ast_call_object icall, object msg);
 // Structure
 struct ast_call {
     object          self;
-    array_object    arguments;
+    object          arguments;
 };
 
 // Helper macros

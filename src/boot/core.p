@@ -6,15 +6,14 @@
       (getsuper (lambda (o) (o 'objectAt: 1)))
       (bind (lambda (self super) (vector self super)))
       (constwrap (lambda (array)
-            (let* ((size (array 'size))
-                   (result (Array 'basicNew: size)))
-                (let loop ((idx 0))
-                    (if (= idx size)
+            (let* ((size (array 'size)))
+                (let loop ((idx (- size 1))
+                           (result null))
+                    (if (< idx 0)
                         result
-                        (begin
-                            (result 'objectAt:put: idx
-                                (IConst 'basicNew: (array 'objectAt: idx)))
-                            (loop (+ idx 1))))))))
+                        (loop (- idx 1)
+                              (cons (IConst 'basicNew: (array 'objectAt: idx))
+                                    result)))))))
                         
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
@@ -74,7 +73,8 @@
             (let ((msg (args 'objectAt: 0)))
                 (case msg
                     ((lookup:)
-                     (let ((selector ((args 'objectAt: 1) 'eval: env))
+                     (let ((selector (((args 'objectAt: 1)
+                                        'objectAt: 0) 'eval: env))
                            (mdict (self 'objectAt: 1)))
                         (mdict 'objectAt: selector)))
                     ((superclass) (self 'objectAt: 0))
@@ -211,7 +211,7 @@
                                         (vector 'name)
                                         (vector))))
 
-            ;(display "STAGE 4\n")
+            (display "STAGE 4\n")
 
             ((methoddict class) 'objectAt:put: 'name clsname)
             ((methoddict classBehaviour) 'objectAt:put: 'methodDictionary

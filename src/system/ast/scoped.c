@@ -1,5 +1,6 @@
 #include <system.h>
 #include <scheme/symbols.h>
+#include <scheme/natives.h>
 #include <thread.h>
 #include <print.h>
 
@@ -12,26 +13,18 @@ static void inline iscoped_eval() {
 
     // filling in scope with interpreter + arguments.
     // XXX have to do this by extending the continuation context!
-    array_object args   = argument_at(iscoped_context, 0).array;
-    object env          = argument_at(iscoped_context, 1);
+    object args = argument_at(iscoped_context, 0);
+    object env  = argument_at(iscoped_context, 1);
 
     env_at_put(env.env, 0, (object)iscoped);
 
     int argsize = iscoped->argsize.number->value;
 
-    error_guard(array_size(args) == argsize, "Argument mismatch.");
-    /*    printf("Argument mismatch. (given: %i, expected: %i)\n", array_size(args), argsize);
-        int i;
-        for (i = 0; i < array_size(args); i++) {
-            print_object(raw_array_at(args, i));
-            printf("%p\n", raw_array_at(args, i).pointer);
-        }
-        error_guard(0, "Argument mismatch.");
-    */
+    error_guard(scheme_list_size(args) == argsize, "Argument mismatch.");
 
     int i;
     for (i = 0; i < argsize; i++) {
-        env_at_put(env.env, i + 1, array_at(args, i));
+        env_at_put(env.env, i + 1, scheme_list_at(args, i));
     }
 
     // we just eval the attached expression.
@@ -104,12 +97,12 @@ with_pre_eval2(iscoped_class_new, context, expression, argsize,
 
 define_bootstrapping_type(ast_scoped,
     // instance
-    if_selector(IAPPLY_,   iscoped_iapply);
-    if_selector(SCOPE,    iscoped_scope);
-    if_selector(APPLY_IN_, iscoped_apply_in);
-    if_selector(SHIFT,    iscoped_shift);,
+    if_selector(IAPPLY_,    iscoped_iapply);
+    if_selector(SCOPE,      iscoped_scope);
+    if_selector(APPLY_IN_,  iscoped_apply_in);
+    if_selector(SHIFT,      iscoped_shift);,
     // class
-    if_selector(NEW_SIZE_, iscoped_class_new);
+    if_selector(NEW_SIZE_,  iscoped_class_new);
 )
 
 // Object creation
