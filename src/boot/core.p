@@ -318,8 +318,7 @@
                 Object
     )))))))
 
-    (display "Done\n")
-    ;(load "boot/scheme.p")
+    (load "boot/scheme.p")
 
 )))))))
 
