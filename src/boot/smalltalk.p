@@ -320,6 +320,9 @@
                         '<= (self 'block))
                         '<= (self 'braceExpression))
                         '<= (self 'scopedExpression)))))
+        ;TODO accessor for parsers:
+        (preStoreBinaryDescription (s)
+            )
        )())))
     
     (load "boot/test/test-smalltalk.p"))

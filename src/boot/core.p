@@ -298,6 +298,7 @@
                 (store_empty IVar              Evaluatable  'IVar)
                 (store_empty IAssign           Evaluatable  'IAssign)
                 (store_empty ICapture          Evaluatable  'ICapture)
+                (store_empty Dictionary        Object       'Dictionary)
 
                 ((Array 'class) 'store:method:
                     'basicNew (method (s) ((getself s) 'basicNew: 0)))
@@ -309,6 +310,9 @@
                     'basicNew: (method (s size) (String 'basicNew: size)))
                 ((Symbol 'class) 'store:method:
                     'basicNew: (method (s size) (Symbol 'basicNew: size)))
+                (Dictionary 'store:method:
+                    'at:ifAbsentPut: (method (s key l) (let ((self (getself s))) 
+                        (if (eq? null (self 'objectAt: key)) self 'objectAt:put: key l))))
 
                 (load "boot/test/test-core.p")
 
