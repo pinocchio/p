@@ -301,9 +301,25 @@
                 (p '<= (self 'identifier))
                 (p 'semantics: (lambda (result) result))
                 p)))
-
-        ;this is where one could add more methods
-        ;write parser for st using the one in pharo
+        (injectBinaryObjectDescription (s)
+            (let ((self (getself s)))
+                ((self 'binaryObjectDescription) 
+                    '<= ((self 'binaryExpression) '\| (self 'unaryObjectDescription)))))
+        (injectCascadedMessageExpression (s) ;TODO implement
+            (let ((self (getself s)))
+                ))
+        (injectMessageExpression (s)
+            (let ((self (getself s)))
+                ((self 'messageExpression) 
+                    '<= (((self 'keywordExpression) '\| (self 'binaryExpression))
+                         '<= (self 'unaryExpression)))
+        (injectPrimary (s)
+            (let ((self (getself s)))
+                ((self 'primary)
+                    '<= (((((self 'primaryVariable) '\| (self 'literal))
+                        '<= (self 'block))
+                        '<= (self 'braceExpression))
+                        '<= (self 'scopedExpression)))))
        )())))
     
     (load "boot/test/test-smalltalk.p"))
