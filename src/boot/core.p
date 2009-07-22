@@ -1,3 +1,9 @@
+(let* ((a 1)
+       (b 2))
+    (display "test 1\n")
+    (set! b 5)
+    (display "test 2\n")
+    (set! a 10))
 (callec (lambda (success)
 (let ((error (callec (lambda (error)
 (error-handler error)
@@ -223,6 +229,7 @@
             (Metaclass_class 'objectAt:put: 2 (vector))
             
             ; Remove the ifixed indirection for tests.
+            (display "STAGE 5\n")
             (set! Metaclass (Metaclass_class 'delegate))
             (Metaclass_class 'objectAt:put: 3 Metaclass)
             ((Metaclass_class 'methodDictionary) 'objectAt:put:
@@ -257,6 +264,7 @@
 
             ((Env 'class) 'store:method: 'basicNew
                 (method (self super) (error "Should not basicNew environments\n")))
+
        
             (let* ((ev (vector))
                    (make_empty_subclass (lambda (cls name)

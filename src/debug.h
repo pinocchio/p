@@ -1,7 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#define DEBUG 2
+#define DEBUG 0
 #define debug_enabled (DEBUG==1 || (DEBUG==2 && TMP_DEBUG))
 #define debug  if (debug_enabled) { _line_++; printf("%i\t", _line_); indent(); } if (debug_enabled) printf
 #define wdebug if (debug_enabled) { _line_++; printf("%i\t", _line_); indent(); } if (debug_enabled) wprintf

@@ -23,16 +23,22 @@ static void inline env_fetch_from() {
 }
 
 // env>>store:at:in:
-with_pre_eval3(env_store_at_in, context, value, w_index, key,
+with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
     runtime_env_object env = context->self.env;
-    if (env->scopeId.pointer == key.pointer ) {
+    debug("in env store at\n");
+    if (env->scopeId.pointer == w_key.pointer) {
         cast(index, w_index, number)
-        env_at_put(env, index->value, value);
-        debug("ret>>env>>store:at:in: %i, %p\n", index->value, value.pointer);
+        env_at_put(env, index->value, w_value);
+        debug("ret>>env>>store:at:in: %i, %p\n", index->value, w_value.pointer);
         return pop_context();
     }
     error_guard(env->parent.object != woodstock->nil, "Variable not found.");
+    
     new_target(context, env->parent);
+    set_message(context, STORE_AT_IN_);
+    set_argument(context, 1, (object)make_ast_const(w_value));
+    set_argument(context, 2, (object)make_ast_const(w_index));
+    set_argument(context, 3, (object)make_ast_const(w_key));
 )
 
 // env>>subScope:key:
