@@ -819,6 +819,7 @@ SETUP(test_ifixed_dispatch)
     make_eval_context(ci, ast_call, env);
 
     object result = transfer();
+
     print_object(result);
     printf("\n");
 }
