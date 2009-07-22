@@ -26,7 +26,6 @@ with_pre_eval2(env_fetch_from, receiver, w_index, w_key,
 // env>>store:at:in:
 with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
     runtime_env_object env = context->self.env;
-    debug("in env store at\n");
     if (env->scopeId.pointer == w_key.pointer) {
         cast(index, w_index, number)
         env_at_put(env, index->value, w_value);
