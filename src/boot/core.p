@@ -55,13 +55,13 @@
                                     (amethod 'apply:in:
                                     (cons self
                                         ; Super FIXME!!!
-                                        (cons (Const 'basicNew: (lambda (args)
+                                        (cons (lambda (args)
                                               (lookup
                                                   (args 'objectAt: 0)
                                                   (class 'superclass)
                                                   ; TODO FIXME very ugly
                                                   ; hack to make it work
-                                                  (constwrap args))))
+                                                  (constwrap args)))
                                             args))
                                     env))))))))))
     (display "STAGE 1\n")

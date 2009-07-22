@@ -100,13 +100,13 @@ object inline make_dispatch(array_object arguments, object body) {
 object inline make_m(array_object arguments, object body) {
     int argsize = array_size(arguments);
     // Eval args (-1: skip self), switch context, eval body
-    ast_list_object exp = make_ast_list(argsize + 1);
+    ast_list_object exp = make_ast_list(argsize);
 
     
     init_args(exp, arguments, 1);
-    add_eval_args_code(exp, arguments, 1, argsize); // skip self
-    add_switch_scope_code(exp, argsize - 1);
-    ast_list_at_put(exp, argsize, body);
+    add_eval_args_code(exp, arguments, 2, argsize); // skip self
+    add_switch_scope_code(exp, argsize - 2);
+    ast_list_at_put(exp, argsize - 1, body);
 
     ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
     ast_call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
