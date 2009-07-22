@@ -14,9 +14,9 @@ with_pre_eval2(iarray_at_put, context, idx, value,
     pop_context();
 )
 
-static void inline iarray_size() {
+void iarray_size() {
     context_object context = get_context();
-    object size = (object)make_number(context->self.array->size);
+    object size = (object)make_number(context->self.array->size);    
     return_from_context(context, size);
 }
 
@@ -30,9 +30,9 @@ define_bootstrapping_type(array,
     // instance
     if_selector(OBJECT_AT_,        iarray_at);
     if_selector(OBJECT_AT_PUT_,    iarray_at_put);
-    if_selector(SIZE,             iarray_size);,
+    if_selector(SIZE,              iarray_size);,
     // class
-    if_selector(BASICNEW_,            iarray_new);
+    if_selector(BASICNEW_,         iarray_new);
 )
 
 int inline array_size(array_object array) {

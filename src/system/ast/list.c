@@ -1,6 +1,7 @@
 #include <system.h>
 #include <thread.h>
 #include <scheme/natives.h>
+#include <system/type/array.h>
 
 // ast_list>>eval:
 static void inline ast_list_eval() {
@@ -42,7 +43,10 @@ with_pre_eval1(ast_list_new, context, w_size,
 define_bootstrapping_type(ast_list, 
     // instance
     if_selector(EVAL,  ast_list_eval);
-    if_selector(EVAL_, pre_eval_env);,
+    if_selector(EVAL_, pre_eval_env);
+    // instance array
+    if_selector(OBJECT_AT_,        iarray_at);
+    if_selector(SIZE,              iarray_size);,
     // class
     if (selector.pointer != selector.pointer) { };
 )
@@ -83,7 +87,7 @@ void inline ast_list_at_put(ast_list_object ast_list, int index, object value) {
 // Creation
 preval1(ast_list_new_from_array, value,
 	cast(array_value, value, array);
-	ast_list_object list = make_ast_list(array_value->size);
+    ast_list_object list = make_ast_list(array_value->size);
 	int i;
 	for (i=0; i<array_value->size; ++i) {
 		list->instructions[i] = array_value->values[i];

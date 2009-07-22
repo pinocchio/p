@@ -18,6 +18,9 @@ extern void             inline array_at_put(array_object array,
 extern void             inline raw_array_at_put(array_object array,
                                                 int index, object new_value);
 
+extern void inline iarray_size();
+extern void inline iarray_at();
+
 struct array {
     int                 size;
     object              values[];
