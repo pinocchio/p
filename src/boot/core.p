@@ -11,7 +11,17 @@
                         (loop (- idx 1)
                               (cons (Const 'basicNew: (array 'objectAt: idx))
                                     result)))))))
-                        
+      
+      (assert (lambda (boolean)
+           (if boolean
+               (begin)
+               (error "ERROR!"))))
+      (testsuite (lambda (name l)
+          (display "\n")
+          (display name)
+          (display "...")
+          (l)
+          (display "\n    \033[32mPASSED\033[0m\n")))
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
 (let ((doesNotUnderstand
@@ -325,9 +335,9 @@
 
 )))))))
 
-(display "Failure: ")
+(display "\033[31mFailure: ")
 (display error)
-(display "\n")
+(display "\033[0m\n")
 (exit -1)
 
 )))

@@ -2,15 +2,13 @@
 #include <thread.h>
 
 // env>>fetch:from:
-static void inline env_fetch_from() {
-    context_object receiver = get_context();
-    assert_argsize(receiver, 3);
+with_pre_eval2(env_fetch_from, receiver, w_index, w_key,
     // arguments at: 0 -> selector
     runtime_env_object env = receiver->self.env;
     debug("env>>fetch:from: (%i) %p\n", env->values->size, env);
 
-    if (env->scopeId.pointer == argument_at(receiver, 2).pointer) {
-        cast(index, argument_at(receiver, 1), number);
+    if (env->scopeId.pointer == w_key.pointer) {
+        cast(index, w_index, number);
         debug("index: %i\n", index->value);
         object value = env_at(env, index->value);
         debug("ret>>env>>fetch:from: (return) %p\n", value.pointer);
@@ -19,8 +17,11 @@ static void inline env_fetch_from() {
     error_guard(env->parent.object != woodstock->nil, "Variable not found.");
     debug("fallback to parent: %p\n", env->parent.pointer);
     new_target(receiver, env->parent);
+    set_message(receiver, FETCH_FROM);
+    set_argument_const(receiver, 1, w_index);
+    set_argument_const(receiver, 2, w_key);
     debug("ret>>env>>fetch:from:\n");
-}
+)
 
 // env>>store:at:in:
 with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
@@ -36,9 +37,9 @@ with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
     
     new_target(context, env->parent);
     set_message(context, STORE_AT_IN_);
-    set_argument(context, 1, (object)make_ast_const(w_value));
-    set_argument(context, 2, (object)make_ast_const(w_index));
-    set_argument(context, 3, (object)make_ast_const(w_key));
+    set_argument_const(context, 1, w_value);
+    set_argument_const(context, 2, w_index);
+    set_argument_const(context, 3, w_key);
 )
 
 // env>>subScope:key:

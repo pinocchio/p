@@ -163,8 +163,8 @@ SETUP(test_env_lookup)
 
     ci = make_context((object)env2, 3);
     set_message(ci, FETCH_FROM);
-    set_argument(ci, 1, (object)make_number(0));
-    set_argument(ci, 2, e1k);
+    set_argument_const(ci, 1, (object)make_number(0));
+    set_argument_const(ci, 2, e1k);
 
     object result = transfer();
 
@@ -173,8 +173,8 @@ SETUP(test_env_lookup)
     ci = make_context((object)env2, 3);
     
     set_message(ci, FETCH_FROM);
-    set_argument(ci, 1, (object)make_number(0));
-    set_argument(ci, 2, e2k);
+    set_argument_const(ci, 1, (object)make_number(0));
+    set_argument_const(ci, 2, e2k);
 
     result = transfer();
 
