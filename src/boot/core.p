@@ -223,7 +223,6 @@
             (Metaclass_class 'objectAt:put: 2 (vector))
             
             ; Remove the ifixed indirection for tests.
-            (display "STAGE 5\n")
             (set! Metaclass (Metaclass_class 'delegate))
             (Metaclass_class 'objectAt:put: 3 Metaclass)
             ((Metaclass_class 'methodDictionary) 'objectAt:put:
