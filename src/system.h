@@ -124,7 +124,6 @@ void type##_##stub_dispatch() {\
         header(ifixed)  = woodstock->name##_##t_class;,\
         classmsgs)
 
-// TODO maybe  change back to static void
 #define with_pre_eval1(name, context, first, body)\
 void name##_##do() {\
     debug(#name"\n");\

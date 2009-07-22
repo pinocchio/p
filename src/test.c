@@ -817,11 +817,8 @@ SETUP(test_ifixed_dispatch)
 
     ast_call1(ast_call, make_ast_const(instance), BASICNEW);
     make_eval_context(ci, ast_call, env);
-
-    object result = transfer();
-
-    print_object(result);
-    printf("\n");
+    // assure that the return type is of ast_var
+    cast(var, transfer(), ast_var); 
 }
 
 
