@@ -1,10 +1,10 @@
-(display "\nSmalltalk tests\n")
+(testsuite "Smalltalk tests" (lambda ()
 
-(display
+(assert
     (= 2 ((((SmalltalkParser 'new) 'assignmentOp) 'match:in:
             (StringScanner 'on: ":=bla") null) 'size)))
 
-(display
+(assert
     (= 1 ((((SmalltalkParser 'new) 'initializeBar) 'match:in:
             (StringScanner 'on: "|=bla") null) 'size)))
-
+))
