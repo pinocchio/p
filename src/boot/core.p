@@ -17,11 +17,10 @@
                (begin)
                (error "ERROR!"))))
       (testsuite (lambda (name l)
-          (display "\n")
           (display name)
           (display "...")
           (l)
-          (display "\n    \033[32mPASSED\033[0m\n")))
+          (display "\033[32mPASSED\033[0m\n")))
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
 (let ((doesNotUnderstand

@@ -1,28 +1,28 @@
-(display "TESTING SYSTEM\n")
+(testsuite "Core tests" (lambda ()
 
-(display "\nCore tests\n")
-(display (eq? (Object 'superclass) null))
-(display (eq? (Object_class 'superclass) class))
-(display (eq? (class 'superclass) classBehaviour))
-(display (eq? ((class 'delegate) 'superclass)
+(assert (eq? (Object 'superclass) null))
+(assert (eq? (Object_class 'superclass) class))
+(assert (eq? (class 'superclass) classBehaviour))
+(assert (eq? ((class 'delegate) 'superclass)
               (classBehaviour 'delegate)))
-(display (eq? (Metaclass_class 'superclass) (classBehaviour 'class)))
-(display (eq? (Metaclass 'superclass) classBehaviour))
-(display (eq? (classBehaviour 'superclass) Object))
-(display (eq? ((classBehaviour 'delegate) 'superclass)
+(assert (eq? (Metaclass_class 'superclass) (classBehaviour 'class)))
+(assert (eq? (Metaclass 'superclass) classBehaviour))
+(assert (eq? (classBehaviour 'superclass) Object))
+(assert (eq? ((classBehaviour 'delegate) 'superclass)
               Object_class))
-(display (eq? (Object_class 'delegate) Metaclass))
-(display (eq? ((Metaclass 'delegate) 'delegate) Metaclass))
+(assert (eq? (Object_class 'delegate) Metaclass))
+(assert (eq? ((Metaclass 'delegate) 'delegate) Metaclass))
+))
 
-(display "\nEnvironment tests\n")
+(testsuite "Environment tests" (lambda ()
 (let ((el (Env 'scopeId:size: Env 4))
       (el2 (Env 'scopeId:size: IFixed 3)))
     (el2 'parent: el)
-    (display (eq? (el 'parent) null))
-    (display (eq? (el2 'parent) el)))
+    (assert (eq? (el 'parent) null))
+    (assert (eq? (el2 'parent) el)))
+))
 
-
-(display "\nSuper-send testing\n")
+(testsuite "Super-send testing" (lambda ()
 ((Integer 'methodDictionary)
     'objectAt:put: 'testMethod
     (method (self super) (+ 40 (super (vector 'testMethod)))))
@@ -30,7 +30,7 @@
     'objectAt:put: 'testMethod
     (method (self super) 2))
 
-(display (= 42 ((Integer 'basicNew) 'testMethod)))
+(assert (= 42 ((Integer 'basicNew) 'testMethod)))
 
 ((Integer 'methodDictionary)
     'objectAt:put: 'testMethod
@@ -39,50 +39,54 @@
     'objectAt:put: 'testMethod:
     (method (self super x) (+ x 2)))
 
-(display (= 42 ((Integer 'basicNew) 'testMethod)))
+(assert (= 42 ((Integer 'basicNew) 'testMethod)))
+))
 
-(display "\nSmallInteger tests\n")
+(testsuite "SmallInteger tests" (lambda ()
 (SmallInteger 'store:method: +
     (method (self super other)
         (+ self other)))
 
-(display (= (40 + 2) 42))
+(assert (= (40 + 2) 42))
+))
 
-(display "\nUnicode tests\n")
+(testsuite "Unicode tests" (lambda ()
 (let ((s "boe\n"))
     (s 'objectAt:put: 2 #\ƺ)
-    (display (char= (s 'objectAt: 2) #\ƺ)))
+    (assert (char= (s 'objectAt: 2) #\ƺ)))
+))
+;(assert "blaboe\n")
 
-;(display "blaboe\n")
+;(assert (IList 'basicNew: 4))
 
-;(display (IList 'basicNew: 4))
+;(assert (1 + 2))
 
-;(display (1 + 2))
-
-(display "\nString extension tests\n")
+(testsuite "String extension tests" (lambda ()
 
 (String 'store:method: 'testMethod
     (method (self super) 40))
 
-(display (= ("biep" 'testMethod) 40))
-(display (= ('testMethod 'testMethod) 40))
+(assert (= ("biep" 'testMethod) 40))
+(assert (= ('testMethod 'testMethod) 40))
 
 (Symbol 'store:method: 'testMethod
     (method (self super) 42))
 
-(display (= ("biep" 'testMethod) 40))
-(display (= ('testMethod 'testMethod) 42))
+(assert (= ("biep" 'testMethod) 40))
+(assert (= ('testMethod 'testMethod) 42))
+))
 
-(display "\nArray extension tests\n")
+(testsuite "Array extension tests" (lambda ()
 (let ((test (Array 'basicNew: 10)))
     ((Array 'methodDictionary) 'objectAt:put:
         'testMethod (method (self super) (self 'size)))
-    (display (= (test 'testMethod) 10)))
+    (assert (= (test 'testMethod) 10)))
 
- (display "\nDictionary test\n")
- (let ((d (Dictionary 'new)))    ;TODO make this test not fail because it cant fail
+; (testsuite "Dictionary test" (lambda ()
+ (let ((d (Dictionary 'new)))
        (d 'objectAt: 'aKey))
-
+; ))
+))
 
 ;(display "\nFile tests\n")
 ;(let* ((file (InputFile 'on: "fib-compiler.scm"))
@@ -109,10 +113,10 @@
 
 ;(InputFile 'test)
 
-(display "\nEscape contination tests\n")
-(display (= 5 (callec (lambda (cont) 5))))
+(testsuite "Escape contination tests" (lambda ()
+(assert (= 5 (callec (lambda (cont) 5))))
 
-(display (= 10
+(assert (= 10
     (callec (lambda (cont)
                 (cont 10)
                 5))))
@@ -123,10 +127,10 @@
 ;                (set! bla cont)
 ;                20))))
 ;    (display (+ 40 ((lambda (x) (bla 4)) 4))))
+))
 
-
-(display "\nError handling tests\n")
-(display 
+(testsuite "Error handling tests" (lambda ()
+(assert 
     (begin 
          (callec 
             (lambda (cont)
@@ -134,28 +138,26 @@
                 (exit "a")))
          (error-handler error)
          #t)) 
+))
 
-(display "\nCharacter table tests\n")
-(display (eq? #\v #\v))
-(display (eq? #f (eq? #\䷊ #\䷊)))
-(display (eq? (charactertable 'objectAt: 119) null))
+(testsuite "Character table tests" (lambda ()
+(assert (eq? #\v #\v))
+(assert (eq? #f (eq? #\䷊ #\䷊)))
+(assert (eq? (charactertable 'objectAt: 119) null))
 ("w" 'objectAt: 0)
-(display (eq? (charactertable 'objectAt: 119) ("w" 'objectAt: 0)))
-(display (eq? #f (eq? (charactertable 'objectAt: 119) null)))
-
+(assert (eq? (charactertable 'objectAt: 119) ("w" 'objectAt: 0)))
+(assert (eq? #f (eq? (charactertable 'objectAt: 119) null)))
+))
 
 ;(display "\nStream testing\n")
 ;(display "\nWrite 'a':")
-;(display (char= (stdinstream 'readChar) #\a))
+;(assert (char= (stdinstream 'readChar) #\a))
 ;(stdinstream 'readChar) 
 ;
 ;(display "\nWrite the 'HAMMER AND SICKLE'-sign character '☭':")
-;(display (char= (stdinstream 'readChar) #\☭))
+;(assert (char= (stdinstream 'readChar) #\☭))
 ;(stdinstream 'readChar) 
 ;(display "\nShould be 't':")
 ;(stdoutstream 'writeChar: #\t)
 ;(display "\nShould be SWONMAN '☃':")
 ;(stdoutstream 'writeChar: #\☃)
-
-
-(display "\nSYSTEM READY\n")
