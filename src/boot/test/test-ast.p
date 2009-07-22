@@ -21,3 +21,13 @@
        (l (ast-list (vector const))))
     (display (= (l 'eval) number)))
 
+(let* ((e1k "env1 identifier")
+       (e2k "env2 indetifier")
+       (v1 "v1")
+       (v2 "v2")
+       (v3 "v3")
+       (env1 (env 'scopeId:size: e1k 1))
+       (env2 (env 'scopeId:size: e2k 1)))
+    
+    )
+

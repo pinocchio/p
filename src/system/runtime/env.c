@@ -9,7 +9,7 @@ static void inline env_fetch_from() {
     runtime_env_object env = receiver->self.env;
     debug("env>>fetch:from: (%i) %p\n", env->values->size, env);
 
-    if (env->scope.pointer == argument_at(receiver, 2).pointer) {
+    if (env->scopeId.pointer == argument_at(receiver, 2).pointer) {
         cast(index, argument_at(receiver, 1), number);
         debug("index: %i\n", index->value);
         object value = env_at(env, index->value);
@@ -28,7 +28,7 @@ static void inline env_store_at_in() {
     context_object receiver = get_context();
     assert_argsize(receiver, 4);
     runtime_env_object env = receiver->self.env;
-    if (env->scope.pointer == argument_at(receiver, 3).pointer ) {
+    if (env->scopeId.pointer == argument_at(receiver, 3).pointer ) {
         cast(index, argument_at(receiver, 2), number)
         object value = argument_at(receiver, 1);
         env_at_put(env, index->value, value);
@@ -69,7 +69,7 @@ with_pre_eval1(env_set_parent, context, new_env,
 // env>>parent
 accessor_for(env, parent)
 
-with_pre_eval2(env_class_scope_key, context, w_size, key,
+with_pre_eval2(env_class_scopeid_size, context, key, w_size ,
     cast(size, w_size, number);
 	runtime_env_object new_env =
         make_env(key, (object)woodstock->nil, size->value);
@@ -78,13 +78,13 @@ with_pre_eval2(env_class_scope_key, context, w_size, key,
 
 define_bootstrapping_type(runtime_env,
     // instance
-    if_selector(FETCH_FROM,       env_fetch_from);
-    if_selector(STORE_AT_IN_,      env_store_at_in);
-    if_selector(SUBSCOPE_KEY_,     env_subscope);
-    if_selector(PARENT_,       env_set_parent);
-    if_selector(PARENT,           env_parent);,
+    if_selector(FETCH_FROM,     env_fetch_from);
+    if_selector(STORE_AT_IN_,   env_store_at_in);
+    if_selector(SUBSCOPE_KEY_,  env_subscope);
+    if_selector(PARENT_,        env_set_parent);
+    if_selector(PARENT,         env_parent);,
     // class
-    if_selector(SCOPE_KEY_, env_class_scope_key);
+    if_selector(SCOPEID_SIZE_, env_class_scopeid_size);
 )
 
 object inline env_at(runtime_env_object env, int index) {
@@ -95,10 +95,15 @@ void inline env_at_put(runtime_env_object env, int index, object value) {
     array_at_put(env->values, index, value);
 }
 
-runtime_env_object make_env(object scope, object parent, int size) {
+runtime_env_object make_env(object scopeId, object parent, int size) {
     new_instance(runtime_env);
-    result->scope       = scope;
+    result->scopeId     = scopeId;
     result->parent      = parent;
     result->values      = make_array(size);
     return result;
 }
+
+preval3(env_new_from_id_parent_size, scopeId, parent, v3,
+	cast(size, v3, number);
+	return_from_context(context, (object) make_env(scopeId, parent, size));
+)

@@ -13,8 +13,10 @@ extern void             inline env_at_put(runtime_env_object env, int index, obj
     make_env((object)woodstock->nil,\
              (object)woodstock->nil, 0)
 
+preval_header(env_new_from_id_parent_size);
+
 struct runtime_env {
-    object              scope;
+    object              scopeId;
     object              parent;
     array_object        values;
 };

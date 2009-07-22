@@ -11,7 +11,7 @@ object ASSIGN_IN;
 object FETCH_FROM;
 // Environment
 object PARENT;
-object SCOPE_KEY_;
+object SCOPEID_SIZE_;
 object PARENT_;
 object STORE_AT_IN_;
 object SUBSCOPE_KEY_;
@@ -64,8 +64,8 @@ void bootstrap_scheme_symbols() {
     define_symbol(EVAL_,             		L"eval:");
     define_symbol(READCHAR,                 L"readChar");
     define_symbol(READALLCHARS,             L"readAllChars")
-    define_symbol(SCOPE,                    L"scope");
-    define_symbol(SCOPE_KEY_,               L"scope:key:");
+    define_symbol(SCOPE,                  L"scopeId");
+    define_symbol(SCOPEID_SIZE_,            L"scopeId:size:");
     define_symbol(DISPATCH_DELEGATE_,   	L"dispatch:delegate:");
     define_symbol(PARENT_,               	L"parent:");
     define_symbol(SHIFT,                    L"shift");

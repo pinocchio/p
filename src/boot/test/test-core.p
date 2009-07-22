@@ -15,8 +15,8 @@
 (display (eq? ((Metaclass 'delegate) 'delegate) Metaclass))
 
 (display "\nEnvironment tests\n")
-(let ((el (Env 'scope:key: 4 Env))
-      (el2 (Env 'scope:key: 3 IFixed)))
+(let ((el (Env 'scopeId:size: Env 4))
+      (el2 (Env 'scopeId:size: IFixed 3)))
     (el2 'parent: el)
     (display (eq? (el 'parent) null))
     (display (eq? (el2 'parent) el)))
