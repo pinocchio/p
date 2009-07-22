@@ -31,6 +31,6 @@
     (env1 'parent: null)
     (env2 'parent: env1)
     (env1 'store:at:in: v1 0 e1k)
-    (assert (eq? ((env1 'eval) 'objectAt: 0) v1))
+    (assert (eq? (env1 'objectAt: 0) v1))
     )
 ))
