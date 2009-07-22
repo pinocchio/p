@@ -123,13 +123,13 @@ object cons(object car, object cdr) {
 }
 
 object car(object cons) {
-    error_guard(pheader(cons.object) == woodstock->cons_class.object,
+    error_guard(pheader(cons.object) == woodstock->cons_class.pointer,
         "Not a cons");
     return object_at(cons.object, 0);
 }
 
 object cdr(object cons) {
-    error_guard(pheader(cons.object) == woodstock->cons_class.object,
+    error_guard(pheader(cons.object) == woodstock->cons_class.pointer,
         "Not a cons");
     return object_at(cons.object, 1);
 }
