@@ -512,6 +512,7 @@ extravars))))))))
     (ifixed         "ifixed")
     ; Classes built in the system
     (Array          "Array")
+    (Cons           "Cons")
     (String         "String")
     (Symbol         "Symbol")
     (SmallInteger   "SmallInteger")

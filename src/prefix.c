@@ -31,6 +31,7 @@ int main () {
     object Dictionary       = import_class(dict);
     object UndefinedObject  = import_class(nil);
     object CharacterTable   = import_class(chartable);
+    object Cons             = import_class(cons);
 
     object Character        = import_class(chr);
     object Assign           = import_class(ast_assign);

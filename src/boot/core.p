@@ -298,6 +298,7 @@
                 (store_empty Assign           Evaluatable   'Assign)
                 (store_empty Capture          Evaluatable   'Capture)
                 (store_empty Dictionary       Object        'Dictionary)
+                (store_empty Cons             Object        'Cons)
 
                 ((Array 'class) 'store:method:
                     'basicNew (method (self super) (self 'basicNew: 0)))

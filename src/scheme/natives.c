@@ -107,11 +107,31 @@ preval2(cons, car, cdr,
     return_from_context(context, cons(car, cdr));
 )
 
+preval1(car, cons,
+    return_from_context(context, car(cons));
+)
+
+preval1(cdr, cons,
+    return_from_context(context, cdr(cons));
+)
+
 object cons(object car, object cdr) {
     object_object cons = make_object(2, woodstock->cons_class);
     object_at_put(cons, 0, car);
     object_at_put(cons, 1, cdr);
     return (object)cons; 
+}
+
+object car(object cons) {
+    error_guard(pheader(cons.object) == woodstock->cons_class.object,
+        "Not a cons");
+    return object_at(cons.object, 0);
+}
+
+object cdr(object cons) {
+    error_guard(pheader(cons.object) == woodstock->cons_class.object,
+        "Not a cons");
+    return object_at(cons.object, 1);
 }
 
 int scheme_list_size(object l) {
@@ -179,6 +199,8 @@ void bootstrap_scheme() {
     init_op(display);
     init_op(exit);
     init_op(cons);
+    init_op(car);
+    init_op(cdr);
     init_direct_op(error);
     init_op(error_handler);
 
