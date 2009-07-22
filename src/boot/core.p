@@ -30,7 +30,6 @@
           (display "\033[u\033[70C[\033[32mPASSED\033[0m]\n")))
 
       (methoddict (lambda (c) (c 'objectAt: 1))))
-
 (let ((Object 
 (let ((doesNotUnderstand
         (method (self super msg env args)
