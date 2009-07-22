@@ -131,9 +131,9 @@ SETUP(test_env_lookup)
 
     context_object ci = make_context((object)env1, 4);
     set_message(ci, STORE_AT_IN_);
-    set_argument(ci, 1, v1);
-    set_argument(ci, 2, (object)make_number(0));
-    set_argument(ci, 3, e1k);
+    set_argument(ci, 1, (object) make_ast_const(v1));
+    set_argument(ci, 2, (object) make_ast_const((object)make_number(0)));
+    set_argument(ci, 3, (object) make_ast_const(e1k));
 
     transfer();
 
@@ -141,9 +141,9 @@ SETUP(test_env_lookup)
 
     ci = make_context((object)env2, 4);
     set_message(ci, STORE_AT_IN_);
-    set_argument(ci, 1, v2);
-    set_argument(ci, 2, (object)make_number(0));
-    set_argument(ci, 3, e2k);
+    set_argument(ci, 1, (object) make_ast_const(v2));
+    set_argument(ci, 2, (object) make_ast_const((object)make_number(0)));
+    set_argument(ci, 3, (object) make_ast_const(e2k));
 
     transfer();
 
@@ -152,9 +152,9 @@ SETUP(test_env_lookup)
 
     ci = make_context((object)env2, 4);
     set_message(ci, STORE_AT_IN_);
-    set_argument(ci, 1, v3);
-    set_argument(ci, 2, (object)make_number(0));
-    set_argument(ci, 3, e1k);
+    set_argument(ci, 1, (object) make_ast_const(v3));
+    set_argument(ci, 2, (object) make_ast_const((object)make_number(0)));
+    set_argument(ci, 3, (object) make_ast_const(e1k));
 
     transfer();
 

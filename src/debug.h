@@ -1,7 +1,7 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#define NDEBUG 0
+#define NDEBUG 1
 #define debug if (!NDEBUG) { _line_++; printf("%i\t", _line_); indent(); } if (!NDEBUG) printf
 #define wdebug if (!NDEBUG) { _line_++; printf("%i\t", _line_); indent(); } if (!NDEBUG) wprintf
 

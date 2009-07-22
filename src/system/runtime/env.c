@@ -23,22 +23,17 @@ static void inline env_fetch_from() {
 }
 
 // env>>store:at:in:
-static void inline env_store_at_in() {
-    debug("env>>store:at:in:\n");
-    context_object receiver = get_context();
-    assert_argsize(receiver, 4);
-    runtime_env_object env = receiver->self.env;
-    if (env->scopeId.pointer == argument_at(receiver, 3).pointer ) {
-        cast(index, argument_at(receiver, 2), number)
-        object value = argument_at(receiver, 1);
+with_pre_eval3(env_store_at_in, context, value, w_index, key,
+    runtime_env_object env = context->self.env;
+    if (env->scopeId.pointer == key.pointer ) {
+        cast(index, w_index, number)
         env_at_put(env, index->value, value);
         debug("ret>>env>>store:at:in: %i, %p\n", index->value, value.pointer);
         return pop_context();
     }
     error_guard(env->parent.object != woodstock->nil, "Variable not found.");
-    new_target(receiver, env->parent);
-    debug("ret>>env>>store:at:in:\n");
-}
+    new_target(context, env->parent);
+)
 
 // env>>subScope:key:
 static void inline env_subscope() {
