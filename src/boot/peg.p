@@ -297,5 +297,6 @@
            (method (self super) (Terminal 'string: self)))
 
        (load "boot/test/test-peg.p")
+       (load "boot/test/test-ast.p")
        (load "boot/smalltalk.p")
 )

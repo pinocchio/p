@@ -35,7 +35,6 @@
 ((Integer 'methodDictionary)
     'objectAt:put: 'testMethod
     (method (self super) (super (vector 'testMethod: 40))))
-
 ((Magnitude 'methodDictionary)
     'objectAt:put: 'testMethod:
     (method (self super x) (+ x 2)))
