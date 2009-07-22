@@ -4,11 +4,11 @@
 // ast_var>>assign:
 with_pre_eval1(ast_var_assign, context, value,
     ast_var_object self = context->self.ast_var;
-    object env      = context->env;
+    object env          = context->env;
     pop_context();
 
-    context = make_context(env, 4);
-    context->env = env;
+    context             = make_context(env, 4);
+    context->env        = env;
 
     set_message(context, STORE_AT_IN_);
     set_argument(context, 1, (object)make_ast_const(value));
@@ -19,13 +19,13 @@ with_pre_eval1(ast_var_assign, context, value,
 // ast_var>>eval:
 static void inline ast_var_eval() {
     context_object ast_var_context = get_context();
-    ast_var_object ast_var = ast_var_context->self.ast_var;
+    ast_var_object ast_var         = ast_var_context->self.ast_var;
     debug("ast_var>>eval \"%ls\"\n", ast_var->name->value);
 
     object env = ast_var_context->env;
 
     pop_context();
-    ast_var_context = make_context(env, 3);
+    ast_var_context      = make_context(env, 3);
     ast_var_context->env = env;
     set_message(ast_var_context, FETCH_FROM);
     set_argument(ast_var_context, 1, (object)ast_var->index);
