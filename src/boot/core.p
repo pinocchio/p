@@ -21,13 +21,13 @@
           (display "\033[34m")
           (display msg)
           (display "\033[0m")
-          (display "\033[u\033[71C[\033[34mWARN\033[0m]\n")))
+          (display "\033[100D\033[60C[\033[34mWARN\033[0m]\n")))
 
       (testsuite (lambda (name l)
           (display name)
           (display "...")
           (l)
-          (display "\033[u\033[70C[\033[32mPASSED\033[0m]\n")))
+          (display "\033[100D\033[60C[\033[32mPASSED\033[0m]\n")))
 
       (methoddict (lambda (c) (c 'objectAt: 1))))
 (let ((Object 
