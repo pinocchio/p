@@ -105,5 +105,5 @@ runtime_env_object make_env(object scopeId, object parent, int size) {
 
 preval3(env_new_from_id_parent_size, scopeId, parent, v3,
 	cast(size, v3, number);
-	return_from_context(context, (object) make_env(scopeId, parent, size));
+	return_from_context(context, (object) make_env(scopeId, parent, size->value));
 )

@@ -1,4 +1,4 @@
-(display "AST tests\n")
+(display "\nAST tests\n")
 ; these tests represent the ast tests from test.c
 (let ((l (ast-list (vector))))
     (display (= (l 'size) 0))
@@ -28,6 +28,8 @@
        (v3 "v3")
        (env1 (env 'scopeId:size: e1k 1))
        (env2 (env 'scopeId:size: e2k 1)))
-    
+    (display env1)
+    (env1 'store:at:in: v1 0 e1k)
+    ;(display (eq? ((env1 'eval) 'objectAt: 0) v1))
     )
 
