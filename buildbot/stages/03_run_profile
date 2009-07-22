@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+def run
+    system("cd "+ARGV[0]+";     make run")
+end
+
+# first run
+run()
+# average runs
+
+$runTimes = []
+100.times { |i|
+    run()
+}
