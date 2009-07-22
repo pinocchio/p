@@ -1,5 +1,3 @@
-(display "Internal AST tests")
-
 (testsuite "PEG tests" (lambda ()
 
 (let ((sscan (StringScanner 'on: "Test")))
