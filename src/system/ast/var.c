@@ -2,29 +2,19 @@
 #include <thread.h>
 
 // ast_var>>assign:
-static void inline ast_var_assign() {
-    context_object ast_var_context = get_context();
-    assert_argsize(ast_var_context, 2);
-
-    ast_var_object ast_var = ast_var_context->self.ast_var;
-
-    debug("ast_var>>assign:\n");
-
-    object env      = ast_var_context->env;
-    object value    = argument_at(ast_var_context, 1);
-
+with_pre_eval1(ast_var_assign, context, value,
+    ast_var_object self = context->self.ast_var;
+    object env      = context->env;
     pop_context();
 
-    ast_var_context = make_context(env, 4);
-    ast_var_context->env = env;
+    context = make_context(env, 4);
+    context->env = env;
 
-    set_message(ast_var_context, STORE_AT_IN_);
-    set_argument(ast_var_context, 1, (object)make_ast_const(value));
-    set_argument(ast_var_context, 2, (object)make_ast_const((object)ast_var->index));
-    set_argument(ast_var_context, 3, (object)make_ast_const(ast_var->scope));
-
-    debug("ret>>ast_var>>assign:\n");
-}
+    set_message(context, STORE_AT_IN_);
+    set_argument(context, 1, (object)make_ast_const(value));
+    set_argument(context, 2, (object)make_ast_const((object)self->index));
+    set_argument(context, 3, (object)make_ast_const(self->scope));
+)
 
 // ast_var>>eval:
 static void inline ast_var_eval() {

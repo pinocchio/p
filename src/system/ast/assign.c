@@ -15,11 +15,7 @@ static void inline ast_assign_eval() {
     context_object context = make_context((object)ast_assign->variable, 2);
     context->env = env;
     set_message(context, ASSIGN_IN);
-
-    context = make_context(ast_assign->expression, 1);
-    context->env = env;
-    set_message(context, EVAL);
-
+    set_argument(context, 1, ast_assign->expression);
     debug("ret>>ast_assign>>eval\n");
 }
 
