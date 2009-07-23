@@ -16,10 +16,17 @@ with_pre_eval2(env_fetch_from, receiver, w_index, w_key,
     }
     error_guard(env->parent.object != woodstock->nil, "Variable not found.");
     debug("fallback to parent: %p\n", env->parent.pointer);
-    new_target(receiver, env->parent);
-    set_message(receiver, FETCH_FROM);
-    set_argument_const(receiver, 1, w_index);
-    set_argument_const(receiver, 2, w_key);
+
+    // Optimization, avoid const rewrapping if type is known
+    if (isinstance(env->parent, runtime_env)) {
+        receiver->self = env->parent;
+    } else {
+        new_target(receiver, env->parent);
+        set_message(receiver, FETCH_FROM);
+        set_argument_const(receiver, 1, w_index);
+        set_argument_const(receiver, 2, w_key);
+    }
+
     debug("ret>>env>>fetch:from:\n");
 )
 
@@ -34,11 +41,16 @@ with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
     }
     error_guard(env->parent.object != woodstock->nil, "Variable not found.");
     
-    new_target(context, env->parent);
-    set_message(context, STORE_AT_IN_);
-    set_argument_const(context, 1, w_value);
-    set_argument_const(context, 2, w_index);
-    set_argument_const(context, 3, w_key);
+    // Optimization, avoid const rewrapping if type is known
+    if (isinstance(env->parent, runtime_env)) {
+        context->self = env->parent;
+    } else {
+        new_target(context, env->parent);
+        set_message(context, STORE_AT_IN_);
+        set_argument_const(context, 1, w_value);
+        set_argument_const(context, 2, w_index);
+        set_argument_const(context, 3, w_key);
+    }
 )
 
 // env>>subScope:key:

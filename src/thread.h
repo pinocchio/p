@@ -18,6 +18,7 @@ extern context_object inline return_context(context_object context);
 extern void   inline set_message(context_object context, object msg);
 extern void   inline set_new_message(context_object context, object msg);
 extern void   inline set_argument(context_object context, int index, object value);
+extern void   inline set_argument_const(context_object context, int index, object value);
 extern object inline argument_at(context_object context, int index);
 extern object inline message(context_object context);
 extern int    inline context_size(context_object context);

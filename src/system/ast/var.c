@@ -7,13 +7,23 @@ with_pre_eval1(ast_var_assign, context, value,
     object env          = context->env;
     pop_context();
 
-    context             = make_context(env, 4);
-    context->env        = env;
-
-    set_message(context, STORE_AT_IN_);
-    set_argument(context, 1, (object)make_ast_const(value));
-    set_argument(context, 2, (object)make_ast_const((object)self->index));
-    set_argument(context, 3, (object)make_ast_const(self->scope));
+    context = make_empty_context(4);
+    // Optimization, avoid const rewrapping if type is known
+    if (isinstance(env, runtime_env)) {
+        context->self = env;
+        context->code = &env_store_at_in_do;
+        set_argument(context, 1, value);
+        set_argument(context, 2, (object)self->index);
+        set_argument(context, 3, self->scope);
+    } else {
+        new_target(context, env);
+        context->env = env;
+    
+        set_message(context, STORE_AT_IN_);
+        set_argument_const(context, 1, value);
+        set_argument_const(context, 2, (object)self->index);
+        set_argument_const(context, 3, self->scope);
+    }
 )
 
 // ast_var>>eval:
