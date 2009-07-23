@@ -17,7 +17,6 @@ extern object PARENT;
 // Iscope_class
 extern object NEW_SIZE_;
 // Iscope
-extern object IAPPLY_;
 extern object APPLY_IN_;
 extern object SCOPE;
 extern object SHIFT;

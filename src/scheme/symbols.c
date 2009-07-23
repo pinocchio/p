@@ -18,7 +18,6 @@ object SUBSCOPE_KEY_;
 // Iscope_class
 object NEW_SIZE_;
 // Iscope
-object IAPPLY_;
 object APPLY_IN_;
 object SCOPE;
 object SHIFT;
@@ -54,7 +53,6 @@ void bootstrap_scheme_symbols() {
     define_symbol(ATEND,                    L"atEnd");
     define_symbol(EVAL,                     L"eval");
     define_symbol(HASH,                     L"hash");
-    define_symbol(IAPPLY_,                  L"iapply:");
     define_symbol(INSTANCE,                 L"instance");
     define_symbol(NEW_SIZE_,                L"new:size:");
     define_symbol(OBJECT_AT_,               L"objectAt:");

@@ -18,10 +18,19 @@ void shift_level() {
     }
 
     pop_context();
-    context = make_context(dispatch, 2);
+    context = make_empty_context(2);
     context->env = env;
-    set_message(context, IAPPLY_);
-    set_argument(context, 1, (object)arguments);
+    if (isinstance(dispatch, ast_scoped)) {
+        context->self = dispatch;
+        context->code = &ast_scoped_apply_in_do;
+        set_argument(context, 1, (object)arguments);
+        set_argument(context, 2, env);
+    } else {
+        new_target(context, dispatch);
+        set_message(context, APPLY_IN_);
+        set_argument_const(context, 1, (object)arguments);
+        set_argument_const(context, 2, env);
+    }
 
     debug("ret>>shiftLevel\n");
 }

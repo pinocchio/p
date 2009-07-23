@@ -37,37 +37,24 @@ static void inline ast_scoped_eval() {
 }
 
 // ast_scoped>>withArguments:
-static void inline ast_scoped_iapply() {
-    // TODO remove IAPPLY from public interface and always use APPLY
-    // TODO make subscope of the ast_scoped>>scope rather than the passed env.
-    debug("ast_scoped>>withArguments:\n");
-    context_object ast_scoped_context = get_context();
-    assert_argsize(ast_scoped_context, 2);
+with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
+    ast_scoped_context->env = env;
 
     // Move argument so that the subscope will be at 1.
-    object arguments = argument_at(ast_scoped_context, 1);
     set_argument(ast_scoped_context, 0, arguments);
 
     ast_scoped_object ast_scoped = ast_scoped_context->self.ast_scoped;
 
-    object env = ast_scoped_context->env;
-    int argsize = ast_scoped->argsize.number->value;
+    cast(argsize, ast_scoped->argsize, number);
 
+    // TODO should be subscope of self, rather than env
     context_object context = make_context(env, 3);
     context->env = env;
     set_message(context, SUBSCOPE_KEY_);
-    set_argument(context, 1, (object)make_number(argsize + 1)); // + ast_scoped
+    set_argument(context, 1, (object)make_number(argsize->value + 1)); // + ast_scoped
     set_argument(context, 2, ast_scoped->expression);
 
     ast_scoped_context->code = &ast_scoped_eval;
-
-    debug("ret>>ast_scoped>>withArguments:\n");
-}
-
-with_pre_eval2(ast_scoped_apply_in, context, ignore, env,
-    /* Hack: ignore is in between to skip compiler warning. */
-    context->env = ignore = env;
-    ast_scoped_iapply();
 )
 
 // ast_scoped>>scope
@@ -97,7 +84,6 @@ with_pre_eval2(ast_scoped_class_new, context, expression, argsize,
 
 define_bootstrapping_type(ast_scoped,
     // instance
-    if_selector(IAPPLY_,    ast_scoped_iapply);
     if_selector(SCOPE,      ast_scoped_scope);
     if_selector(APPLY_IN_,  ast_scoped_apply_in);
     if_selector(SHIFT,      ast_scoped_shift);,

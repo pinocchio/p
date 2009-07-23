@@ -10,6 +10,8 @@ extern object make_ast_scoped(object scope,
 
 preval_header(ast_scoped_new_from_scope_expression_size);
 
+extern void ast_scoped_apply_in_do();
+
 struct ast_scoped {
     object          scope;
     object          expression;
