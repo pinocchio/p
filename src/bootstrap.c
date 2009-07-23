@@ -89,6 +89,7 @@ woodstock_t bootstrap() {
     header(woodstock->nil)          = woodstock->nil_class;
 
     woodstock->level_shifter        = wrap_dispatcher(shift_level);
+    woodstock->lambda_shifter       = wrap_dispatcher(shift_lambda);
 
     woodstock->ast_capture          = (object)make_object(0,
                                             woodstock->ast_capture_class);

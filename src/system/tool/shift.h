@@ -3,7 +3,7 @@
 
 #include <system.h>
 
-extern void inline fallback_shift(context_object context);
 extern void shift_level();
+extern void shift_lambda();
 
 #endif // SYSTEM_SWITCH_H

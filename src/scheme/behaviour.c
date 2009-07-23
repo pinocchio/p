@@ -73,15 +73,20 @@ object inline make_dyn_func(array_object arguments, object body) {
 object inline make_func(array_object arguments, object body) {
     int argsize = array_size(arguments);
     // Eval args, switch context, eval body
-    ast_list_object exp = make_ast_list(argsize + 2);
+    ast_list_object exp = make_ast_list(2);
 
     init_args(exp, arguments, 1); // skip receiver;
-    add_eval_args_code(exp, arguments, 0, argsize);
-    add_switch_scope_code(exp, argsize);
-    ast_list_at_put(exp, argsize + 1, body);
+    add_switch_scope_code(exp, 0);
+    ast_list_at_put(exp, 1, body);
 
-    return ast_scoped_for((object) exp,
-                       (object) make_number(array_size(arguments)));
+    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
+    ast_call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
+                                (object)make_ast_const((object)exp),
+                                (object)make_ast_const(
+                                    (object)make_number(
+                                        array_size(arguments))));
+    ast_call1(ast_call, ast_call, LAMBDASHIFT);
+    return (object)ast_call;
 }
 
 // Function which doesn't evaluate its arguments

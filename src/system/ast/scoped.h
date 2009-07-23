@@ -16,7 +16,7 @@ extern void ast_scoped_apply_in_do();
 struct ast_scoped {
     object          scope;
     object          expression;
-    object          argsize;
+    int             argsize;
 };
 
 #endif // SYSTEM_ast_scoped_H

@@ -3,6 +3,21 @@
 #include <model.h>
 #include <scheme/natives.h>
 
+void shift_lambda() {
+    debug("shiftLambda\n");
+    context_object context = get_context();
+
+    int argsize = context_size(context);
+    
+    for (argsize--; 0 <= argsize; argsize--) {
+        push_eval_of(context, argsize);
+    }
+
+    context->code = &shift_level;
+
+    debug("ret>>shiftLambda\n");
+}
+
 void shift_level() {
     debug("shiftLevel\n");
     context_object context = get_context();

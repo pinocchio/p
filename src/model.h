@@ -185,6 +185,7 @@ struct woodstock {
 
     // Level shifting
     object level_shifter;
+    object lambda_shifter;
 
     // Minimal native classes
     object array_class;

@@ -18,6 +18,7 @@ extern object PARENT;
 extern object NEW_SIZE_;
 // Iscope
 extern object APPLY_IN_;
+extern object LAMBDASHIFT;
 extern object SCOPE;
 extern object SHIFT;
 // ast_capture
