@@ -47,12 +47,22 @@ with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
 
     cast(argsize, ast_scoped->argsize, number);
 
+    context_object context = make_empty_context(3);
     // TODO should be subscope of self, rather than env
-    context_object context = make_context(env, 3);
-    context->env = env;
-    set_message(context, SUBSCOPE_KEY_);
-    set_argument(context, 1, (object)make_number(argsize->value + 1)); // + ast_scoped
-    set_argument(context, 2, ast_scoped->expression);
+    if (isinstance(env, runtime_env)) {
+        context->self = env;
+        context->code = &env_subscope_do;
+        set_argument(context, 1,
+            (object)make_number(argsize->value + 1)); // + ast_scoped
+        set_argument(context, 2, ast_scoped->expression);
+    } else {
+        new_target(context, env);
+        context->env = env;
+        set_message(context, SUBSCOPE_KEY_);
+        set_argument_const(context, 1,
+            (object)make_number(argsize->value + 1)); // + ast_scoped
+        set_argument_const(context, 2, ast_scoped->expression);
+    }
 
     ast_scoped_context->code = &ast_scoped_eval;
 )

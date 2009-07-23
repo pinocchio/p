@@ -54,19 +54,14 @@ with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
 )
 
 // env>>subScope:key:
-static void inline env_subscope() {
-    debug("env>>subScope:key:\n");
-    context_object receiver = get_context();
-    assert_argsize(receiver, 3);
+with_pre_eval2(env_subscope, receiver, w_size, w_key,
     object env  = receiver->self;
-    cast(size, argument_at(receiver, 1), number);
-    object key  = argument_at(receiver, 2);
+    cast(size, w_size, number);
 
-    runtime_env_object new_env = make_env(key, env, size->value);
+    runtime_env_object new_env = make_env(w_key, env, size->value);
 
     return_from_context(receiver, (object)new_env);
-    debug("ret>>env>>subScope:key: %i, %p\n", size->value, new_env);
-}
+)
 
 // env>>parent:
 with_pre_eval1(env_set_parent, context, new_env,

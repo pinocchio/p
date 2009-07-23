@@ -2,6 +2,7 @@
 #define SYSTEM_ast_scoped_H
 #include <scheme/natives.h>
 #include <system/type/type.h>
+
 export_type(ast_scoped);
 
 extern object make_ast_scoped(object scope,
