@@ -11,10 +11,10 @@ with_pre_eval1(ast_var_assign, context, value,
     // Optimization, avoid const rewrapping if type is known
     if (isinstance(env, runtime_env)) {
         context->self = env;
-        context->code = &env_store_at_in_do;
         set_argument(context, 1, value);
         set_argument(context, 2, (object)self->index);
         set_argument(context, 3, self->scope);
+        env_store_at_in_do();
     } else {
         new_target(context, env);
         context->env = env;

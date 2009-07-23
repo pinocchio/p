@@ -52,10 +52,10 @@ with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
     // Optimization, avoid const rewrapping if type is known
     if (isinstance(env, runtime_env)) {
         context->self = env;
-        context->code = &env_subscope_do;
         set_argument(context, 1,
             (object)make_number(argsize->value + 1)); // + ast_scoped
         set_argument(context, 2, ast_scoped->expression);
+        env_subscope_do();
     } else {
         new_target(context, env);
         context->env = env;

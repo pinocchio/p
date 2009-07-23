@@ -20,6 +20,7 @@ with_pre_eval2(env_fetch_from, receiver, w_index, w_key,
     // Optimization, avoid const rewrapping if type is known
     if (isinstance(env->parent, runtime_env)) {
         receiver->self = env->parent;
+        env_fetch_from_do();
     } else {
         new_target(receiver, env->parent);
         set_message(receiver, FETCH_FROM);
@@ -44,6 +45,7 @@ with_pre_eval3(env_store_at_in, context, w_value, w_index, w_key,
     // Optimization, avoid const rewrapping if type is known
     if (isinstance(env->parent, runtime_env)) {
         context->self = env->parent;
+        env_store_at_in_do();
     } else {
         new_target(context, env->parent);
         set_message(context, STORE_AT_IN_);

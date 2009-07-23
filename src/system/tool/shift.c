@@ -22,9 +22,9 @@ void shift_level() {
     context->env = env;
     if (isinstance(dispatch, ast_scoped)) {
         context->self = dispatch;
-        context->code = &ast_scoped_apply_in_do;
         set_argument(context, 1, (object)arguments);
         set_argument(context, 2, env);
+        ast_scoped_apply_in_do();
     } else {
         new_target(context, dispatch);
         set_message(context, APPLY_IN_);
