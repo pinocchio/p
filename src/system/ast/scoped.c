@@ -49,6 +49,7 @@ with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
 
     context_object context = make_empty_context(3);
     // TODO should be subscope of self, rather than env
+    // Optimization, avoid const rewrapping if type is known
     if (isinstance(env, runtime_env)) {
         context->self = env;
         context->code = &env_subscope_do;
