@@ -56,7 +56,7 @@ object ast_scoped_for(object exp, object size) {
 }
 
 
-// Function which doesn't switch to static scope on eval automatast_cally.
+// Function which doesn't switch to static scope on eval automatically.
 object inline make_dyn_func(array_object arguments, object body) {
     int argsize = array_size(arguments);
     // Eval args, eval body
