@@ -85,8 +85,6 @@
 
 (testsuite "Dictionary test" (lambda ()
  (let ((d (Dictionary 'new)))
-    ;XXX should probably test that 'answer is absent to begin with, but
-    ;the following test results in a type mismatch
     (assert (eq? (d 'objectAt: 'answer) null)) 
     (d 'at:ifAbsentPut: 'answer 42)
     (assert (= (d 'objectAt: 'answer) 42))
