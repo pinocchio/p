@@ -5,8 +5,8 @@
 with_pre_eval1(dict_at, context, key,
     dict_object dict = context->self.dict;
 
-    array_object kv = dict->values;
-    object result = (object)woodstock->nil;
+    array_object kv  = dict->values;
+    object result    = (object)woodstock->nil;
     int i;
     int limit = array_size(dict->values) / 2;
     for (i = 0; i < limit; i++) {
