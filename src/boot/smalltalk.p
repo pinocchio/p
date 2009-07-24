@@ -333,7 +333,7 @@
             (let ((self self))
                 ((self 'binaryObjectDescription) 
                     '<= ((self 'binaryExpression) '\| (self 'unaryObjectDescription)))))
-        (injectCascadedMessageExpression (self super) ;TODO implement
+        (injectCascadedMessageExpression (self super) 
             (let ((res (self 'cascadedMessageExpression)))
                 (res '<= ((self 'messageExpression) 
                         '& ((((#\; 'asParser) 'omit: #t) 
