@@ -44,6 +44,8 @@ void scheme_false_func() {
 bin_number_number_op( plus,      +  )
 bin_number_number_op( minus,     -  )
 bin_number_bool_op  ( smallerp,  <  )
+bin_number_bool_op  ( smaller_equalp,   <=  )
+bin_number_bool_op  ( bigger_equalp,    >=  )
 bin_number_bool_op  ( equalp,    == )
 bin_char_bool_op    ( chareqp,   == )
 bin_object_bool_op  ( eqp,       == )
@@ -184,6 +186,8 @@ void bootstrap_scheme() {
     init_op(plus);
     init_op(minus);
     init_op(smallerp);
+    init_op(smaller_equalp);
+    init_op(bigger_equalp);
     init_op(equalp);
     init_op(eqp);
     init_op(chareqp)

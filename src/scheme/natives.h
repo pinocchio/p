@@ -4,6 +4,8 @@
 extern object scheme_plus;
 extern object scheme_minus;
 extern object scheme_smallerp;
+extern object scheme_smaller_equalp;
+extern object scheme_bigger_equalp;
 extern object scheme_equalp;
 extern object scheme_eqp;
 extern object scheme_chareqp;

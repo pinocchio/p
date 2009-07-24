@@ -286,8 +286,29 @@
                         (result 'string: str)
                         result)))
             ))
+        (Range
+            (newclass Range Expression (start stop) ()
+                ((start (self super) (self 'objectAt: 2))
+                 (start: (self super new) (self 'objectAt:put: 2 new))
+                 (stop (self super) (self 'objectAt: 3))
+                 (stop: (self super new) (self 'objectAt:put: 3 new))
+                 (privateMatch:in: (self super input scope)
+                    (let ((char (input 'next)))
+                        (if (eq? char null)
+                            char
+                            (if (>= char (self 'start)) 
+                                (if (<= char (self 'stop))
+                                    (char 'asString)
+                                    (null))
+                                (null)))))
+                 )
+                ((between:and: (self super start stop)
+                    (let ((result (self 'new)))
+                        (result 'start: start)
+                        (result 'stop: stop)
+                        result)))
+        ))
         )
-
        (Character 'store:method: 'asParser
            (method (self super)
                 (let ((string (String 'basicNew: 1)))
@@ -296,6 +317,23 @@
 
        (String 'store:method: 'asParser
            (method (self super) (Terminal 'string: self)))
+
+       (String 'store:method: 'asChoice
+           (method (self super) 
+                (let ((result OrderedChoice))
+                    (let loop ((idx 0))
+                        (if (= idx (self 'size))
+                            result
+                            (result '<= ((self 'objectAt: idx) 'asParser)
+                            (loop (+ idx 1))))))))
+
+       (String 'store:method: 'asRange
+            (method (self super)
+                (if (char= (self 'objectAt: 1) #\-) 
+                    (if (= (self 'size) 3)
+                        (Range 'between:and: (self 'objectAt: 0) (self 'objectAt: 2))
+                        (error "Cannot convert String to Range: wrong string size "))
+                    (error "Cannot convert String to Range: second character is not -"))))
 
        (load "boot/test/test-peg.p")
        (load "boot/test/test-ast.p")
