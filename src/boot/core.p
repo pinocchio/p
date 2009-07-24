@@ -331,7 +331,11 @@
                     'basicNew: (method (self super size) (Symbol 'basicNew: size)))
                 (Dictionary 'store:method:
                     'at:ifAbsentPut: (method (self super key l) 
-                        (if (eq? null (self 'objectAt: key)) self 'objectAt:put: key l)))
+                        (let ((element (self 'objectAt: key)))
+                            (if (eq? null element) 
+                                (self 'objectAt:put: key l)
+                                element
+                                ))))
                 ((Dictionary 'class) 'store:method:
                     'basicNew (method (self super) (Dictionary 'basicNew))) 
                 (load "boot/test/test-core.p")

@@ -81,12 +81,18 @@
     ((Array 'methodDictionary) 'objectAt:put:
         'testMethod (method (self super) (self 'size)))
     (assert (= (test 'testMethod) 10)))
-
-; (testsuite "Dictionary test" (lambda ()
- (let ((d (Dictionary 'new)))
-       (d 'objectAt: 'aKey))
-; ))
 ))
+
+(testsuite "Dictionary test" (lambda ()
+ (let ((d (Dictionary 'new)))
+    ;XXX should probably test that 'answer is absent to begin with, but
+    ;the following test results in a type mismatch
+    ;(assert (= (d 'objectAt: 'answer) null)) 
+    (d 'at:ifAbsentPut: 'answer 42)
+    (assert (= (d 'objectAt: 'answer) 42))
+    (d 'at:ifAbsentPut: 'answer 21)
+    (assert (= (d 'objectAt: 'answer) 42))
+)))
 
 ;(display "\nFile tests\n")
 ;(let* ((file (InputFile 'on: "fib-compiler.scm"))
