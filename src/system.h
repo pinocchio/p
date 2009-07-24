@@ -21,7 +21,7 @@
 
 #include <system/type/ifixed.h>
 #include <system/type/array.h>
-#include <system/type/dict.h>
+#include <system/type/dictionary.h>
 #include <system/type/symbol.h>
 #include <system/type/string.h>
 #include <system/type/smallint.h>
@@ -123,6 +123,14 @@ void type##_##stub_dispatch() {\
         ifixed->cdisp   = (object)&name##_##dispatch;\
         header(ifixed)  = woodstock->name##_##t_class;,\
         classmsgs)
+
+#define with_pre_eval0(name, context, body)\
+void inline name() {\
+    debug(#name"\n");\
+    context_object context = get_context();\
+    body;\
+    debug("ret>>"#name"\n");\
+}
 
 #define with_pre_eval1(name, context, first, body)\
 void name##_##do() {\

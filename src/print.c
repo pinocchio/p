@@ -48,7 +48,7 @@ void print_object(object o) {
     test_type(ast_list);
     test_type(ast_scoped);
     test_type(ifixed);
-    test_type(dict);
+    test_type(dictionary);
     test_type(runtime_env);
     if (isinstance(o, array)) {
         printf("array(%i) [\n", array_size(o.array));

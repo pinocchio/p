@@ -28,7 +28,7 @@ int main () {
     object Symbol           = import_class(symbol);
     object SmallInteger     = import_class(number);
     object Array            = import_class(array); 
-    object Dictionary       = import_class(dict);
+    object Dictionary       = import_class(dictionary);
     object UndefinedObject  = import_class(nil);
     object CharacterTable   = import_class(chartable);
     object Cons             = import_class(cons);

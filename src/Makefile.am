@@ -12,7 +12,8 @@ system/ast/list.h system/ast/const.h system/ast/scoped.h\
 system/ast/const.c system/ast/scoped.c\
 system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
-system/type/type.h system/type/dict.c system/type/smallint.c system/type/string.h system/type/dict.h\
+system/type/type.h system/type/dictionary.c system/type/smallint.c\
+system/type/string.h system/type/dictionary.h\
 system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\
 system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
 system/type/symbol.c system/type/symbol.h\
@@ -27,10 +28,14 @@ boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
 boot/smalltalk.p boot/test/test-smalltalk.p boot/test/test-scheme.p\
 boot/test/test-ast.p
 
+GENERATED=pinocchio.c dictionary.c dictionary.h
 
-CLEANFILES=pinocchio.c test
+CLEANFILES=test $(GENERATED)
 
 pinocchio.c: $(EXTRA_DIST)
 	cat prefix.c > $@
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
+
+system/type/dictionary.h: boot/dict.p
+	$(MZSCHEME) -r pprocessor.scm $^

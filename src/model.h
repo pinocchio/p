@@ -36,7 +36,7 @@
 struct array;
 struct chr;
 struct context;
-struct dict;
+struct dictionary;
 struct infile;
 struct instream;
 struct native;
@@ -70,7 +70,7 @@ typedef struct ast_scoped*       ast_scoped_object;
 typedef struct ast_var*          ast_var_object;
 typedef struct chr*              chr_object;
 typedef struct context*          context_object;
-typedef struct dict*             dict_object;
+typedef struct dictionary*       dictionary_object;
 typedef struct fallback*         fallback_object;
 typedef struct ifixed_t*         ifixed_t_object;
 typedef struct instream*         infile_object;
@@ -104,7 +104,7 @@ typedef union {
     ast_var_object         ast_var;
     chr_object             chr;
     context_object         context;
-    dict_object            dict;
+    dictionary_object      dict;
     fallback_object        fallback;
     ifixed_t_object        ifixed;
     infile_object          infile;
@@ -171,7 +171,7 @@ struct woodstock {
     declare_metaclass(ast_scoped);
     declare_metaclass(ast_var);
     declare_metaclass(chr);
-    declare_metaclass(dict);
+    declare_metaclass(dictionary);
     declare_metaclass(fixed);
     declare_metaclass(ifixed);
     declare_metaclass(infile);
@@ -190,7 +190,7 @@ struct woodstock {
     // Minimal native classes
     object array_class;
     object chr_class;
-    object dict_class;
+    object dictionary_class;
     object infile_class;
     object instream_class;
     object nil_class;
