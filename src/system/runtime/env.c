@@ -94,7 +94,7 @@ define_bootstrapping_type(runtime_env,
     if_selector(PARENT_,        env_set_parent);
     if_selector(PARENT,         env_parent);,
     // class
-    if_selector(SCOPEID_SIZE_, env_class_scopeid_size);
+    if_selector(SCOPEID_SIZE_,  env_class_scopeid_size);
 )
 
 object inline env_at(runtime_env_object env, int index) {
@@ -113,7 +113,7 @@ runtime_env_object make_env(object scopeId, object parent, int size) {
     return result;
 }
 
-preval3(env_new_from_id_parent_size, scopeId, parent, v3,
-	cast(size, v3, number);
-	return_from_context(context, (object) make_env(scopeId, parent, size->value));
+preval3(env_new_from_id_parent_size, scopeId, parent, w_size,
+	cast(size, w_size, number);
+	return_from_context(context, (object)make_env(scopeId, parent, size->value));
 )

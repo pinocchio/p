@@ -26,11 +26,35 @@
        (v1 "v1")
        (v2 "v2")
        (v3 "v3")
-       (env1 (Env 'scopeId:size: e1k 1))
-       (env2 (Env 'scopeId:size: e2k 1)))
-    (env1 'parent: null)
-    (env2 'parent: env1)
+       (env1 (env e1k null 1))
+       (env2 (env e2k env1 1)))
     (env1 'store:at:in: v1 0 e1k)
     (assert (eq? (env1 'fetch:from: 0 e1k) v1))
+    (assert (eq? (env2 'fetch:from: 0 e1k) v1))
+
+    (env2 'store:at:in: v2 0 e2k)
+    (assert (eq? (env1 'fetch:from: 0 e1k) v1))
+    (assert (eq? (env2 'fetch:from: 0 e2k) v2))
+
+    (env2 'store:at:in: v3 0 e1k)
+    (assert (eq? (env1 'fetch:from: 0 e1k) v3))
+    ; TODO add assert-fail here
+    ;(assert (eq? (env1 'fetch:from: 0 e2k) v2))
+    (assert (eq? (env2 'fetch:from: 0 e2k) v2))
+    (assert (eq? (env2 'fetch:from: 0 e1k) v3)))
+
+(let* ((env1 (env null null 1))
+       (c (ast-const 42))
+       (v (ast-var "iv"))
+       (assign (ast-assign v c)))
+    ;(assert (eq? (var 'eval) null))
+    (display assign)
+    ;((Capture 'eval) parent: env)
+    ;(display (assign 'eval))
+    ;(assert (= (var 'eval) v))
     )
+
 ))
+
+
+

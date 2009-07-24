@@ -205,9 +205,9 @@ SETUP(test_ast_var_read)
     runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
-    object v = (object)make_number(42);
+    object v                   = (object)make_number(42);
     ast_const_object ast_const = make_ast_const(v);
-    ast_var_object ast_var = make_ast_var(L"iv");
+    ast_var_object ast_var     = make_ast_var(L"iv");
 
     ast_assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
 
