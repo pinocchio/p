@@ -11,4 +11,5 @@ ci: test run
 	svn ci
 
 update:
+	rm -rdf src/.deps
 	autoreconf --install && ./configure
