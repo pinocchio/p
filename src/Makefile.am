@@ -1,7 +1,7 @@
 bin_PROGRAMS=pinocchio
 EXTRA_PROGRAMS=test
-SOURCES=model.c bootstrap.c system.c print.c debug.c\
-thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
+SOURCES=system/type/dictionary.c system/type/dictionary.h model.c bootstrap.c\
+system.c print.c debug.c thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
 scheme/symbols.c scheme/symbols.h\
@@ -12,8 +12,8 @@ system/ast/list.h system/ast/const.h system/ast/scoped.h\
 system/ast/const.c system/ast/scoped.c\
 system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
-system/type/type.h system/type/dictionary.c system/type/smallint.c\
-system/type/string.h system/type/dictionary.h\
+system/type/type.h system/type/smallint.c\
+system/type/string.h\
 system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\
 system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
 system/type/symbol.c system/type/symbol.h\
@@ -39,8 +39,3 @@ pinocchio.c: $(EXTRA_DIST)
 
 system/type/dictionary.c system/type/dictionary.h: boot/dict.p
 	$(MZSCHEME) -r pprocessor.scm $^
-
-make.depend: $(SOURCES)
-	gcc -M $(CFLAGS) -I. $^ > $@
-
-include make.depend
