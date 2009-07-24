@@ -28,7 +28,7 @@ boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
 boot/smalltalk.p boot/test/test-smalltalk.p boot/test/test-scheme.p\
 boot/test/test-ast.p
 
-GENERATED=pinocchio.c dictionary.c dictionary.h
+GENERATED=pinocchio.c system/type/dictionary.c system/type/dictionary.h
 
 CLEANFILES=test $(GENERATED)
 
@@ -37,5 +37,10 @@ pinocchio.c: $(EXTRA_DIST)
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
 
-system/type/dictionary.h: boot/dict.p
+system/type/dictionary.c system/type/dictionary.h: boot/dict.p
 	$(MZSCHEME) -r pprocessor.scm $^
+
+make.depend: $(SOURCES)
+	gcc -M $(CFLAGS) -I. $^ > $@
+
+include make.depend
