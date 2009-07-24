@@ -322,6 +322,12 @@
                     '<= (self 'scopedExpression))))
         (preStoreBinaryDescription (self super)
             ((self 'parsers) 'at:ifAbsentPut: 'binaryObjectDescription (lambda () (Parser 'named: "BINARY-OBJECT-DESCRIPTION"))))
+        (preStoreCascadedMessageExpression (self super)
+            ((self 'parsers) 'at:ifAbsentPut: 'cascadedMessageExpression (lambda () (Parser 'named: "CASCADED-MESSAGE-EXPRESSION"))))
+        (preStoreMessageExpression (self super)
+            ((self 'parsers) 'at:ifAbsentPut: 'messageExpression (lambda () (Parser 'named: "MESSAGE-EXPRESSION"))))
+        (preStorePrimary (self super)
+            ((self 'parsers) 'at:ifAbsentPut: 'primary (lambda () (Parser 'named: "PRIMARY"))))
        )())))
     
     (load "boot/test/test-smalltalk.p"))
