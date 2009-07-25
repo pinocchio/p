@@ -40,13 +40,24 @@ with_pre_eval1(ast_list_new, context, w_size,
     return_from_context(context, (object)make_ast_list(size->value));
 )
 
+with_pre_eval1(gen_ast_list_at, context, idx, 
+        array_object array = context->self.array;
+        cast(index, idx, number);
+        return_from_context(context, array_at(array, index->value));
+        )
+
+with_pre_eval0(gen_ast_list_size, context, 
+        object size = (object)make_number(context->self.array->size);    
+        return_from_context(context, size);
+        )
+
 define_bootstrapping_type(ast_list, 
     // instance
     if_selector(EVAL,  ast_list_eval);
     if_selector(EVAL_, pre_eval_env);
     // instance array
-    if_selector(OBJECT_AT_,        iarray_at);
-    if_selector(SIZE,              iarray_size);,
+    if_selector(OBJECT_AT_,        gen_ast_list_at);
+    if_selector(SIZE,              gen_ast_list_size);,
     // class
     if (selector.pointer != selector.pointer) { };
 )

@@ -1,6 +1,11 @@
 bin_PROGRAMS=pinocchio
 EXTRA_PROGRAMS=test
-SOURCES=system/type/dictionary.c system/type/dictionary.h model.c bootstrap.c\
+
+TYPEGEN=system/type/dictionary.c system/type/dictionary.h system/type/array.c\
+system/type/array.h
+TYPECODE=boot/type/dict.p boot/type/array.p
+
+SOURCES=$(TYPEGEN) model.c bootstrap.c\
 system.c print.c debug.c thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
@@ -14,7 +19,7 @@ system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
 system/type/type.h system/type/smallint.c\
 system/type/string.h\
-system/type/smallint.h system/type/array.c system/type/array.h system/type/char.c\
+system/type/smallint.h system/type/char.c\
 system/type/string.c system/type/char.h system/type/ifixed.c system/type/ifixed.h\
 system/type/symbol.c system/type/symbol.h\
 system/tool/ival.c system/tool/shift.h system/tool/ival.h system/tool/fallback.c\
@@ -28,7 +33,7 @@ boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
 boot/smalltalk.p boot/test/test-smalltalk.p boot/test/test-scheme.p\
 boot/test/test-ast.p boot/type/dict.p
 
-GENERATED=pinocchio.c system/type/dictionary.c system/type/dictionary.h
+GENERATED=pinocchio.c $(TYPEGEN)
 
 CLEANFILES=test $(GENERATED)
 
@@ -37,5 +42,5 @@ pinocchio.c: $(EXTRA_DIST)
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
 
-system/type/dictionary.c system/type/dictionary.h: boot/type/dict.p
+$(TYPEGEN): $(TYPECODE)
 	$(MZSCHEME) -r pprocessor.scm $^

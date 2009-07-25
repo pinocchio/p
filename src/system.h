@@ -209,5 +209,9 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 
 // =============================================================================
 
+#define array_check_bounds(array, index)\
+	error_guard(0 <= index, "Out of bounds");\
+	error_guard(index < array_size(array), "Out of bounds");
+
 
 #endif

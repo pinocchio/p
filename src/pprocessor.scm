@@ -15,7 +15,7 @@
 
 (define (transform-c-method method type)
   (define (transform name args body)
-    (let ((f-name (string-append type "_" (string->code (symbol->string name))))
+    (let ((f-name (string-append "gen_" type "_" (string->code (symbol->string name))))
           (symbol (cadr (assoc name symbols))))
       (string-lowercase! f-name)
       `(,f-name
@@ -45,7 +45,11 @@
                       ,@(map (lambda (h) `("extern " ,(car h) ";")) f-helper)
                       ""
                       ("struct " ,sname " {")
-                      ,@(map (lambda (l) `("\t" ,(cadr l) "_object " ,(car l) ";")) layout)
+                      ,@(map (lambda (l)
+                            `("\t" ,@(if (string? (cadr l))
+                                         (list (cadr l) " ")
+                                         (list (cadr l) "_object "))
+                                   ,(car l) ";")) layout)
                       "};"
                       ""
                       ("#endif // SYSTEM_" ,hname "_H")
