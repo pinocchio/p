@@ -26,7 +26,7 @@ test_SOURCES=$(SOURCES) test.c
 EXTRA_DIST=pcompiler.scm boot/core.p boot/scheme.p boot/peg.p\
 boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
 boot/smalltalk.p boot/test/test-smalltalk.p boot/test/test-scheme.p\
-boot/test/test-ast.p
+boot/test/test-ast.p boot/type/dict.p
 
 GENERATED=pinocchio.c system/type/dictionary.c system/type/dictionary.h
 
@@ -37,5 +37,5 @@ pinocchio.c: $(EXTRA_DIST)
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
 
-system/type/dictionary.c system/type/dictionary.h: boot/dict.p
+system/type/dictionary.c system/type/dictionary.h: boot/type/dict.p
 	$(MZSCHEME) -r pprocessor.scm $^

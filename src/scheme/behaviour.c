@@ -71,7 +71,6 @@ object inline make_dyn_func(array_object arguments, object body) {
 }
 
 object inline make_func(array_object arguments, object body) {
-    int argsize = array_size(arguments);
     // Eval args, switch context, eval body
     ast_list_object exp = make_ast_list(2);
 
