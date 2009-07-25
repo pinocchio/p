@@ -48,10 +48,11 @@
        (v (ast-var "iv"))
        (assign (ast-assign v c)))
     ;(assert (eq? (var 'eval) null))
-    (display assign)
-    ;((Capture 'eval) parent: env)
+    ;TODO to be fixed
+    ;(display assign)
+    ;((Capture 'eval) 'parent: env)
     ;(display (assign 'eval))
-    ;(assert (= (var 'eval) v))
+    ;(assert (= (v 'eval) c))
     )
 
 ))

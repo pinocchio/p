@@ -23,7 +23,7 @@ with_pre_eval2(env_fetch_from, receiver, w_index, w_key,
         env_fetch_from_do();
     } else {
         new_target(receiver, env->parent);
-        set_message(receiver, FETCH_FROM);
+        set_message(receiver, FETCH_FROM_);
         set_argument_const(receiver, 1, w_index);
         set_argument_const(receiver, 2, w_key);
     }
@@ -88,7 +88,7 @@ with_pre_eval2(env_class_scopeid_size, context, key, w_size ,
 
 define_bootstrapping_type(runtime_env,
     // instance
-    if_selector(FETCH_FROM,     env_fetch_from);
+    if_selector(FETCH_FROM_,     env_fetch_from);
     if_selector(STORE_AT_IN_,   env_store_at_in);
     if_selector(SUBSCOPE_KEY_,  env_subscope);
     if_selector(PARENT_,        env_set_parent);

@@ -7,7 +7,7 @@ extern object EVAL_;
 extern object HASH;
 // Variable
 extern object ASSIGN_IN;
-extern object FETCH_FROM;
+extern object FETCH_FROM_;
 // Environment
 extern object STORE_AT_IN_;
 extern object SUBSCOPE_KEY_;

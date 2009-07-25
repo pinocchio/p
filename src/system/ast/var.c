@@ -37,7 +37,7 @@ static void inline ast_var_eval() {
     pop_context();
     ast_var_context      = make_context(env, 3);
     ast_var_context->env = env;
-    set_message(ast_var_context, FETCH_FROM);
+    set_message(ast_var_context, FETCH_FROM_);
     set_argument_const(ast_var_context, 1, (object)ast_var->index);
     set_argument_const(ast_var_context, 2, ast_var->scope);
 

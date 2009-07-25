@@ -162,7 +162,7 @@ SETUP(test_env_lookup)
     assert(array_at(env2->values, 0).pointer == v2.pointer);
 
     ci = make_context((object)env2, 3);
-    set_message(ci, FETCH_FROM);
+    set_message(ci, FETCH_FROM_);
     set_argument_const(ci, 1, (object)make_number(0));
     set_argument_const(ci, 2, e1k);
 
@@ -172,7 +172,7 @@ SETUP(test_env_lookup)
 
     ci = make_context((object)env2, 3);
     
-    set_message(ci, FETCH_FROM);
+    set_message(ci, FETCH_FROM_);
     set_argument_const(ci, 1, (object)make_number(0));
     set_argument_const(ci, 2, e2k);
 

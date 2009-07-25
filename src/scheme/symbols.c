@@ -8,7 +8,7 @@ object EVAL_;
 object HASH;
 // Variable
 object ASSIGN_IN;
-object FETCH_FROM;
+object FETCH_FROM_;
 // Environment
 object PARENT;
 object SCOPEID_SIZE_;
@@ -56,7 +56,7 @@ void bootstrap_scheme_symbols() {
     define_symbol(DISPATCH_DELEGATE_SIZE_,  L"dispatch:delegate:size:");
     define_symbol(EVAL,                     L"eval");
     define_symbol(EVAL_,             		L"eval:");
-    define_symbol(FETCH_FROM,               L"fetch:from:");
+    define_symbol(FETCH_FROM_,               L"fetch:from:");
     define_symbol(HASH,                     L"hash");
     define_symbol(INSTANCE,                 L"instance");
     define_symbol(LAMBDASHIFT,              L"lambdashift");
