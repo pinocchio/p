@@ -20,6 +20,24 @@
     (size ()
         "
         return_from_context(context, (object)context->self.symbol->size);
+        ")
+    (hash ()
+        "
+        symbol_object self     = context->self.symbol;
+        if (self->hash) {
+            return_from_context(context, (object)self->hash);
+            return;
+        }
+        // create the hash int here see pythons unicode symbol hash for more infos
+        int len    = self->size->value;
+        wchar_t *p = self->value;
+        int x      = *p << 7;
+        while (--len >= 0) {
+            x = (1000003*x) ^ *p++;
+        }
+        x ^= self->size->value;
+        self->hash = make_smallint(x);
+        return_from_context(context, (object)self->hash);
         "))
    ()
    (("wchar_t* wcsdup(const wchar_t* input)"
