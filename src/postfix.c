@@ -1,8 +1,6 @@
 
 /* end of generated code */
 
-    bootstrap_scheme_symbols();
-
     object scoped_main;
     eval_in_scope(lambda_1_x, env, scoped_main);
 

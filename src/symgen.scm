@@ -7,7 +7,7 @@
 
             ""
             "#define define_symbol(name, value)\\"
-            "   if (name.pointer == null) {\\"
+            "   if (name.pointer == NULL) {\\"
             "       name = (object)make_symbol(value);\\"
             "   }"
             ""

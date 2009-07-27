@@ -201,8 +201,11 @@ extravars))))))))
                      ,(caddr expression))))
 
 (define symbols
-     '((apply:in:               "APPLY_IN_")
+     '((lambdashift             "LAMBDASHIFT")
+       (apply:in:               "APPLY_IN_")
        (atEnd                   "ATEND")
+       (assign:in:              "ASSIGN_IN")
+       (writeChar:              "WRITE_CHAR_")
        (basicNew                "BASICNEW")
        (basicNew:               "BASICNEW_")
        (delegate                "DELEGATE")

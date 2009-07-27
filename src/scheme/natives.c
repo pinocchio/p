@@ -182,7 +182,7 @@ void scheme_list_at_put(object l, int index, object value) {
 }
 
 void bootstrap_scheme() {
-    bootstrap_scheme_symbols();
+    bootstrap_symbols();
     init_op(plus);
     init_op(minus);
     init_op(smallerp);

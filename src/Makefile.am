@@ -10,7 +10,6 @@ SOURCES=$(TYPEGEN) model.c bootstrap.c\
 system.c print.c debug.c thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
-scheme/symbols.c scheme/symbols.h\
 system/ast/assign.c system/ast/call.h system/ast/assign.h\
 system/ast/capture.h system/ast/var.h system/ast/capture.c\
 system/ast/list.c system/ast/call.c system/ast/var.c\
@@ -32,7 +31,7 @@ test_SOURCES=$(SOURCES) test.c
 EXTRA_DIST=pcompiler.scm boot/core.p boot/scheme.p boot/peg.p\
 boot/test/test-core.p boot/test/test-peg.p prefix.c postfix.c\
 boot/smalltalk.p boot/test/test-smalltalk.p boot/test/test-scheme.p\
-boot/test/test-ast.p boot/type/dict.p
+boot/test/test-ast.p boot/type/dict.p symgen.scm pprocessor.scm
 
 GENERATED=pinocchio.c $(TYPEGEN)
 
