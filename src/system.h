@@ -32,6 +32,9 @@
 #include <system/io/stream.h>
 #include <system/io/file.h>
 
+#include <string.h>
+#include <wchar.h>
+
 // Globally used functions
 extern void pre_eval_env();
 extern void doesnotunderstand(const wchar_t* class, object selector);

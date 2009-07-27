@@ -22,6 +22,22 @@ with_pre_eval2(string_at_put, context, w_idx, w_char,
     pop_context();
 )
 
+with_pre_eval1(symbol_at, context, w_idx,
+    cast(idx, w_idx, smallint);
+    symbol_object self = context->self.symbol;
+
+    error_guard(idx->value < self->size->value, "Out of bounds.");
+    error_guard(0 <= idx->value, "Out of bounds.");
+    return_from_context(context,
+        (object)make_char(self->value[idx->value]));
+)
+
+void inline symbol_size() {
+    context_object context = get_context();
+    symbol_object self = context->self.symbol;
+    return_from_context(context, (object)self->size);
+}
+
 define_bootstrapping_type(string,
     // instance
     if_selector(EVAL,          identity);
