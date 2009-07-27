@@ -11,7 +11,7 @@ preval_header(ast_var_new_from_string);
 struct ast_var {
     string_object   name;
     object          scope;
-    number_object   index;
+    smallint_object index;
 };
 
 #endif // SYSTEM_ast_var_H

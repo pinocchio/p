@@ -6,7 +6,7 @@
     (hash ()
         "
         return_from_context(context,
-            (object)make_number((int)context->self.chr->value));
+            (object)make_smallint((int)context->self.chr->value));
         "))
    ()
    (("chr_object do_make_char(wchar_t value)"

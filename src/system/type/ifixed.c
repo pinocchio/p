@@ -9,7 +9,7 @@ with_pre_eval1(ifixed_at, context, idx,
     object self = context->self;
     ifixed_t_object ifixed = ifixed_descr(self);
 
-    cast(index, idx, number);
+    cast(index, idx, smallint);
     debug("at %i (size %i)\n", index->value, ifixed->size);
 
     error_guard(0 <= index->value, "Out of bounds.");
@@ -22,7 +22,7 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
     object self = context->self;
     ifixed_t_object ifixed = ifixed_descr(self);
 
-    cast(index, idx, number);
+    cast(index, idx, smallint);
     debug("an_ifixed>>at:put: (%i of %i)\n", index->value, ifixed->size);
 
     error_guard(0 <= index->value, "Out of bounds.");
@@ -37,7 +37,7 @@ with_pre_eval2(ifixed_at_put, context, idx, value,
 static void inline ifixed_size() {
     context_object context = get_context();
     ifixed_t_object ifixed = context->self.ifixed;
-    return_from_context(context, (object)make_number(ifixed->size));
+    return_from_context(context, (object)make_smallint(ifixed->size));
 }
 
 static object inline ifixed_inst(ifixed_t_object ifixed) {
@@ -63,7 +63,7 @@ define_bootstrapping_type(ifixed,
 )
 
 with_pre_eval3(ifixed_class_new, context, dispatch, delegate, w_size,
-    cast(size, w_size, number);
+    cast(size, w_size, smallint);
     object ifixed           = make_class(size->value, &ifixed_dispatch);
     ifixed.ifixed->delegate = delegate;
     ifixed.ifixed->dispatch = dispatch;
@@ -77,7 +77,7 @@ object inline incomplete_fixed_class(int size) {
 }
 
 with_pre_eval1(ifixed_stub_class_new, context, w_size,
-    cast(size, w_size, number);
+    cast(size, w_size, smallint);
     return_from_context(context, incomplete_fixed_class(size->value));
 )
 

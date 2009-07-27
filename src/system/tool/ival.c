@@ -5,7 +5,7 @@ void ival() {
     context_object context = get_context();
     array_object args = argument_at(context, 0).array;
     object value      = argument_at(context, 1);
-    int pos           = argument_at(context, 2).number->value;
+    int pos           = argument_at(context, 2).smallint->value;
     debug("ival %i (size %i)\n", pos, array_size(args));
     array_at_put(args, pos, value);
     pop_context();
@@ -13,7 +13,7 @@ void ival() {
     dec();
 }
 
-void inline push_ival(object exp, context_object target, number_object pos) {
+void inline push_ival(object exp, context_object target, smallint_object pos) {
     context_object c = make_empty_context(3);
     set_argument(c, 0, (object)(&target->arguments));
     set_argument(c, 2, (object)pos);

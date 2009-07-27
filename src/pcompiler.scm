@@ -105,8 +105,7 @@
                                         ", " (number->string idx)
                                         ", (object)" c ");\n")
                          (append extravar extravars)))
-                 (transform-expression (car todo) (append vars
-extravars))))))))
+                 (transform-expression (car todo) (append vars extravars))))))))
 
 (define (transform-set! expression vars)
   (unless (= (length expression) 3)
@@ -378,7 +377,7 @@ extravars))))))))
                                 (number->string expression)))))
     (list (string-append "object "
                          name
-                         " = (object)make_ast_const((object)make_number("
+                         " = (object)make_ast_const((object)make_smallint("
                          (number->string expression)
                          "));\n") name '())))
 

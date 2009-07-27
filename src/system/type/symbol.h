@@ -15,8 +15,8 @@ extern int inline symbol_equals(symbol_object symbol1,
                                 symbol_object symbol2);
 
 struct symbol {
-    number_object       size;
-    number_object       hash;
+    smallint_object     size;
+    smallint_object     hash;
     wchar_t*            value;
 };
 

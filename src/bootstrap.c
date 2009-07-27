@@ -42,7 +42,7 @@ woodstock_t bootstrap() {
     setup_type(ifixed);
     setup_type(infile);
     setup_type(instream);
-    setup_type(number);
+    setup_type(smallint);
     setup_type(outfile);
     setup_type(outstream);
     setup_type(runtime_env);
@@ -63,7 +63,7 @@ woodstock_t bootstrap() {
     woodstock->ast_var_class        = incomplete_class(ast_var);
     woodstock->infile_class         = incomplete_class(infile);
     woodstock->instream_class       = incomplete_class(instream);
-    woodstock->number_class         = incomplete_class(number);
+    woodstock->smallint_class       = incomplete_class(smallint);
     woodstock->outfile_class        = incomplete_class(outfile);
     woodstock->outstream_class      = incomplete_class(outstream);
     woodstock->string_class         = incomplete_class(string);   

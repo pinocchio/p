@@ -142,10 +142,10 @@ cast_bin_eval_with(name, input, input, scheme##_##name##_##native)
 
 
 #define bin_number_number_op(name, op)\
-    bin_io_op(name, number, number, op)
+    bin_io_op(name, smallint, smallint, op)
 
 #define bin_number_bool_op(name, op)\
-    bin_io_op(name, number, bool, op)
+    bin_io_op(name, smallint, bool, op)
 
 #define bin_char_bool_op(name, op)\
     bin_io_op(name, chr, bool, op)

@@ -26,7 +26,7 @@ int main () {
     object IFixed           = import_class(fixed); 
     object String           = import_class(string);
     object Symbol           = import_class(symbol);
-    object SmallInteger     = import_class(number);
+    object SmallInteger     = import_class(smallint);
     object Array            = import_class(array); 
     object Dictionary       = import_class(dictionary);
     object UndefinedObject  = import_class(nil);

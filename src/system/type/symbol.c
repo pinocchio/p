@@ -21,7 +21,7 @@ int inline symbol_equals(symbol_object symbol1, symbol_object symbol2) {
 }
 
 with_pre_eval1(symbol_at, context, w_idx,
-    cast(idx, w_idx, number);
+    cast(idx, w_idx, smallint);
     symbol_object self = context->self.symbol;
 
     error_guard(idx->value < self->size->value, "Out of bounds.");
@@ -45,7 +45,7 @@ void inline symbol_hash() {
         x = (1000003*x) ^ *p++;
     }
     x ^= self->size->value;
-    self->hash = make_number(x);
+    self->hash = make_smallint(x);
     return_from_context(context, (object)self->hash);
 }
 
@@ -70,7 +70,7 @@ symbol_object make_symbol(const wchar_t* value) {
     symbol_object result = NEW(struct symbol);
     result->hash         = NULL;
     result->value        = wcsdup(value);
-    result->size         = make_number(wcslen(value));
+    result->size         = make_smallint(wcslen(value));
     header(result)       = (object)woodstock->symbol_class;
     return result;
 }
@@ -79,7 +79,7 @@ symbol_object make_symbol_sized(int size) {
     symbol_object result = NEW(struct symbol);
     result->hash         = NULL;
     result->value        = (wchar_t*)PALLOC(sizeof(wchar_t[size]));
-    result->size         = make_number(size);
+    result->size         = make_smallint(size);
     header(result)       = (object)woodstock->symbol_class;
     return result;
 }

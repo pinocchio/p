@@ -36,18 +36,18 @@ static void inline ast_list_eval() {
 }
 
 with_pre_eval1(ast_list_new, context, w_size,
-    cast(size, w_size, number);
+    cast(size, w_size, smallint);
     return_from_context(context, (object)make_ast_list(size->value));
 )
 
 with_pre_eval1(gen_ast_list_at, context, idx, 
         array_object array = context->self.array;
-        cast(index, idx, number);
+        cast(index, idx, smallint);
         return_from_context(context, array_at(array, index->value));
         )
 
 with_pre_eval0(gen_ast_list_size, context, 
-        object size = (object)make_number(context->self.array->size);    
+        object size = (object)make_smallint(context->self.array->size);    
         return_from_context(context, size);
         )
 

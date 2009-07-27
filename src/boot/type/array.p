@@ -2,24 +2,24 @@
    ((objectAt: (idx)
         "
         array_object array = context->self.array;
-        cast(index, idx, number);
+        cast(index, idx, smallint);
         return_from_context(context, array_at(array, index->value));
         ")
     (objectAt:put: (w_idx value)
         "
         array_object array = context->self.array;
-        cast(index, w_idx, number);
+        cast(index, w_idx, smallint);
         array_at_put(array, index->value, value);
         pop_context();
         ")
     (size ()
         "
-        object size = (object)make_number(context->self.array->size);    
+        object size = (object)make_smallint(context->self.array->size);    
         return_from_context(context, size);
         "))
    ((basicNew: (w_size)
         "
-        cast(size, w_size, number);
+        cast(size, w_size, smallint);
         object result = (object)make_array(size->value);
         return_from_context(context, result);
         "))

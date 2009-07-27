@@ -51,7 +51,7 @@ with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
     if (isinstance(env, runtime_env)) {
         context->self = env;
         set_argument(context, 1,
-            (object)make_number(self->argsize + 1)); // + ast_scoped
+            (object)make_smallint(self->argsize + 1)); // + ast_scoped
         set_argument(context, 2, self->expression);
         env_subscope_do();
     } else {
@@ -59,7 +59,7 @@ with_pre_eval2(ast_scoped_apply_in, ast_scoped_context, arguments, env,
         context->env = env;
         set_message(context, SUBSCOPE_KEY_);
         set_argument_const(context, 1,
-            (object)make_number(self->argsize + 1)); // + ast_scoped
+            (object)make_smallint(self->argsize + 1)); // + ast_scoped
         set_argument_const(context, 2, self->expression);
     }
 
@@ -113,7 +113,7 @@ object make_ast_scoped(object scope, object expression, object argsize) {
     new_instance(ast_scoped);
     error_guard(scope.pointer != NULL,
                 "Trying to build scope with NULL as key.")
-    cast(size, argsize, number);
+    cast(size, argsize, smallint);
     result->scope       = scope;
     result->expression  = expression;
     result->argsize     = size->value;

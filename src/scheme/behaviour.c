@@ -10,7 +10,7 @@ void inline init_args(ast_list_object exp,
     int i;                 
     for (i = 0; i < todo; i++) {
         ast_var_object variable = array_at(arguments, i).ast_var;
-        variable->index      = make_number(i + toskip);
+        variable->index      = make_smallint(i + toskip);
         variable->scope      = (object) exp;
     }                      
 }                          
@@ -67,7 +67,7 @@ object inline make_dyn_func(array_object arguments, object body) {
     ast_list_at_put(exp, argsize, body);
 
     return ast_scoped_for((object)exp,
-                       (object)make_number(array_size(arguments)));
+                       (object)make_smallint(array_size(arguments)));
 }
 
 object inline make_func(array_object arguments, object body) {
@@ -82,7 +82,7 @@ object inline make_func(array_object arguments, object body) {
     ast_call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
                                 (object)make_ast_const((object)exp),
                                 (object)make_ast_const(
-                                    (object)make_number(
+                                    (object)make_smallint(
                                         array_size(arguments))));
     ast_call1(ast_call, ast_call, LAMBDASHIFT);
     return (object)ast_call;
@@ -98,7 +98,7 @@ object inline make_dispatch(array_object arguments, object body) {
     ast_list_at_put(exp, 1, body);
 
     return ast_scoped_for((object)exp,
-                       (object)make_number(array_size(arguments)));
+                       (object)make_smallint(array_size(arguments)));
 }
 
 object inline make_m(array_object arguments, object body) {
@@ -115,6 +115,6 @@ object inline make_m(array_object arguments, object body) {
     ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
     ast_call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
                             (object)make_ast_const((object)exp),
-                            (object)make_ast_const((object)make_number(array_size(arguments))));
+                            (object)make_ast_const((object)make_smallint(array_size(arguments))));
     return (object)ast_call;
 }

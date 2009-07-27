@@ -18,7 +18,7 @@
     }
 
 void print_object(object o) {
-	print_type(number, "%i");
+	print_type(smallint, "%i");
 	print_type(string, "%ls");
 	print_type(symbol, "%ls");
 	print_type(chr, "%lc");

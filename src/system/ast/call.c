@@ -49,7 +49,7 @@ static void inline ast_call_eval() {
 }
 
 with_pre_eval2(ast_call_new, context, w_self, w_size,
-    cast(size, w_size, number);
+    cast(size, w_size, smallint);
     return_from_context(context, (object)make_ast_call(w_self, size->value));
 )
 
@@ -70,7 +70,7 @@ ast_call_object make_ast_call(object self, int argsize) {
 }
 
 preval2(ast_call_new_from_self_size, self, value,
-	cast(number_var, value, number);
+	cast(number_var, value, smallint);
 	return_from_context(context, (object)make_ast_call(self, number_var->value));
 )
 

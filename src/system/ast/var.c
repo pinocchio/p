@@ -64,7 +64,7 @@ ast_var_object make_ast_var(const wchar_t* name) {
     new_instance(ast_var);
     result->name            = make_string(name);
     result->scope           = (object)woodstock->nil;
-    result->index           = make_number(0);
+    result->index           = make_smallint(0);
     return result;
 }
 

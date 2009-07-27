@@ -101,7 +101,7 @@ preval1(error_handler, error_handler,
 )
 
 preval1(exit, value,
-    cast(n, value, number);
+    cast(n, value, smallint);
     exit(n->value);
 )
 

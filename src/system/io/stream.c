@@ -102,7 +102,7 @@ void inline instream_size() {
     context_object context = get_context();
     instream_object self   = context->self.instream;
     int size               = utf8_size(self->file);
-    return_from_context(context, (object)make_number(size));
+    return_from_context(context, (object)make_smallint(size));
 }
 
 define_bootstrapping_type(instream,
