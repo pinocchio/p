@@ -25,7 +25,7 @@
 #include <system/type/symbol.h>
 #include <system/type/string.h>
 #include <system/type/smallint.h>
-#include <system/type/char.h>
+#include <system/type/chr.h>
 
 #include <system/runtime/env.h>
 

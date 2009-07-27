@@ -5,10 +5,10 @@
         cast(index, idx, number);
         return_from_context(context, array_at(array, index->value));
         ")
-    (objectAt:put: (idx value)
+    (objectAt:put: (w_idx value)
         "
         array_object array = context->self.array;
-        cast(index, idx, number);
+        cast(index, w_idx, number);
         array_at_put(array, index->value, value);
         pop_context();
         ")
