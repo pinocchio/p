@@ -1,18 +1,6 @@
 (require (lib "mzlib/string"))
 (load "pcompiler.scm")
 
-(define (list->code input)
-  (define (transform segment)
-    (cond ((string? segment) segment)
-          ((list? segment) (apply string-append (map transform segment)))
-          ((symbol? segment) (symbol->string segment))
-          ((number? segment) (number->string segment))
-          (else (error "Unkown type: " segment))))
-  (apply string-append
-         (map (lambda (s)
-                (string-append (transform s) "\n"))
-              input)))
-
 (define (transform-c-method method type)
   (define (transform name args body)
     (let ((f-name (string-append "gen_" type "_" (string->code (symbol->string name))))

@@ -2,7 +2,8 @@ bin_PROGRAMS=pinocchio
 EXTRA_PROGRAMS=test
 
 TYPEGEN=system/type/dictionary.c system/type/dictionary.h system/type/array.c\
-system/type/array.h system/type/chr.c system/type/chr.h
+system/type/array.h system/type/chr.c system/type/chr.h scheme/symbols.c\
+scheme/symbols.h
 TYPECODE=boot/type/dict.p boot/type/array.p boot/type/char.p
 
 SOURCES=$(TYPEGEN) model.c bootstrap.c\
@@ -43,4 +44,5 @@ pinocchio.c: $(EXTRA_DIST)
 	cat postfix.c >> $@
 
 $(TYPEGEN): $(TYPECODE)
+	$(MZSCHEME) -r symgen.scm
 	$(MZSCHEME) -r pprocessor.scm $^

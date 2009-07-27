@@ -479,6 +479,17 @@ extravars))))))))
     (list (string-append prefix code args)
           name '())))
 
+(define (list->code input)
+  (define (transform segment)
+    (cond ((string? segment) segment)
+          ((list? segment) (apply string-append (map transform segment)))
+          ((symbol? segment) (symbol->string segment))
+          ((number? segment) (number->string segment))
+          (else (error "Unkown type: " segment))))
+  (apply string-append
+         (map (lambda (s)
+                (string-append (transform s) "\n"))
+              input)))
 
 (define natives
   '(
