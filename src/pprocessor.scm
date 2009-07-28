@@ -26,22 +26,24 @@
           (cof (build-path location (string-append sname ".c"))))
       (let ((header `(("#ifndef SYSTEM_" ,hname "_H")
                       ("#define SYSTEM_" ,hname "_H")
-                      "#include <system/type/type.h>"
-                      ""
-                      ("export_type(" ,sname ");")
-                      ""
-                      ,@(map (lambda (h) `("extern " ,(car h) ";")) f-helper)
-                      ""
-                      ("struct " ,sname " {")
-                      ,@(map (lambda (l)
+                       ""
+                       ("extern void " ,sname "_dispatch();")
+                       ("extern void " ,sname "_stub_dispatch();")
+                       ("extern void " ,sname "_class_dispatch();")
+                       ("extern void " ,sname "_class_stub_dispatch();")
+                       ""
+                       ,@(map (lambda (h) `("extern " ,(car h) ";")) f-helper)
+                       ""
+                       ("struct " ,sname " {")
+                       ,@(map (lambda (l)
                             `("\t" ,@(if (string? (cadr l))
                                          (list (cadr l) " ")
                                          (list (cadr l) "_object "))
                                    ,(car l) ";")) layout)
-                      "};"
-                      ""
-                      ("#endif // SYSTEM_" ,hname "_H")
-                      ))
+                       "};"
+                       ""
+                       ("#endif // SYSTEM_" ,hname "_H")
+                       ))
             (body `("#include <system.h>"
                     "#include <thread.h>"
                     "#include <print.h>"

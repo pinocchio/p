@@ -22,7 +22,6 @@ system/ast/list.h system/ast/const.h system/ast/scoped.h\
 system/ast/const.c system/ast/scoped.c\
 system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
-system/type/type.h\
 system/tool/ival.c system/tool/shift.h system/tool/ival.h system/tool/fallback.c\
 system/tool/fallback.h system/tool/shift.c
 

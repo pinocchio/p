@@ -2,7 +2,7 @@
      '((lambdashift             "LAMBDASHIFT")
        (apply:in:               "APPLY_IN_")
        (atEnd                   "ATEND")
-       (assign:in:              "ASSIGN_IN")
+       (assign:                 "ASSIGN_")
        (writeChar:              "WRITE_CHAR_")
        (basicNew                "BASICNEW")
        (basicNew:               "BASICNEW_")

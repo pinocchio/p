@@ -53,7 +53,7 @@ with_pre_eval1(ast_var_new, context, w_name,
 define_bootstrapping_type(ast_var,
     // instance
     if_selector(EVAL,         ast_var_eval);
-    if_selector(ASSIGN_IN,    ast_var_assign);
+    if_selector(ASSIGN_,      ast_var_assign);
     if_selector(EVAL_, pre_eval_env);,
     // class
     if_selector(BASICNEW_,        ast_var_new); // should rename SIZED...

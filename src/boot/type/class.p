@@ -1,5 +1,5 @@
 (bootstrapping-type Class type ((cdisp "object") (dispatch "object")
-                                   (delegate "object") (size "int"))
+                                (delegate "object") (size "int"))
    ((dispatch:delegate:size: (w_disp w_del w_size)
         "
         cast(size, w_size, smallint);
