@@ -32,12 +32,3 @@ native_class_object make_native_class(object header, transfer_target cdisp) {
 transfer_target inline native_target(native_object native) {
     return native->target.target;
 }
-
-object inline object_at(object_object object, int index) {
-    return object->fields[index];
-}
-
-void inline object_at_put(object_object o, int index, object value) {
-    o->fields[index] = value;
-}
-

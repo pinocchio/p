@@ -26,6 +26,7 @@
 #include <system/type/string.h>
 #include <system/type/smallint.h>
 #include <system/type/chr.h>
+#include <system/type/object.h>
 
 #include <system/runtime/env.h>
 
@@ -84,7 +85,7 @@ void type##_##class_dispatch() {\
     new_target(context, context->self.ifixed->delegate);\
 }\
 with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
-    ifixed_t_object ifixed = context->self.ifixed;\
+    object_t_object ifixed = context->self.ifixed;\
     boot;\
     ifixed->dispatch = dispatch;\
     ifixed->delegate = delegate;\

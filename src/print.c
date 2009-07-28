@@ -47,7 +47,7 @@ void print_object(object o) {
     test_type(ast_call);
     test_type(ast_list);
     test_type(ast_scoped);
-    test_type(ifixed);
+    test_type(object);
     test_type(dictionary);
     test_type(runtime_env);
     if (isinstance(o, array)) {

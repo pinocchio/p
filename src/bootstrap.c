@@ -38,8 +38,8 @@ woodstock_t bootstrap() {
     setup_type(ast_var);
     setup_type(chr);
     setup_type(dictionary);
+    setup_type(object);
     setup_type(fixed);
-    setup_type(ifixed);
     setup_type(infile);
     setup_type(instream);
     setup_type(smallint);

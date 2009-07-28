@@ -42,7 +42,7 @@ struct instream;
 struct native;
 struct native_class;
 struct smallint;
-struct object_object;
+struct object;
 struct outfile;
 struct outstream;
 struct runtime_env;
@@ -55,7 +55,7 @@ struct ast_const;
 struct ast_var;
 struct ast_scoped;
 struct ast_capture;
-struct ifixed_t;
+struct object_t;
 struct fallback;
 
 // ============================================================================
@@ -72,13 +72,13 @@ typedef struct chr*              chr_object;
 typedef struct context*          context_object;
 typedef struct dictionary*       dictionary_object;
 typedef struct fallback*         fallback_object;
-typedef struct ifixed_t*         ifixed_t_object;
+typedef struct object_t*         object_t_object;
 typedef struct instream*         infile_object;
 typedef struct instream*         instream_object;
 typedef struct native*           native_object;
 typedef struct native_class*     native_class_object;
 typedef struct smallint*         smallint_object;
-typedef struct object_object*    object_object;
+typedef struct object*           object_object;
 typedef struct outstream*        outfile_object;
 typedef struct outstream*        outstream_object;
 typedef struct runtime_env*      runtime_env_object;
@@ -106,7 +106,7 @@ typedef union {
     context_object         context;
     dictionary_object      dict;
     fallback_object        fallback;
-    ifixed_t_object        ifixed;
+    object_t_object        ifixed;
     infile_object          infile;
     instream_object        instream;
     native_class_object    native_class;
@@ -123,11 +123,6 @@ typedef union {
 } object;
 
 // ============================================================================
-
-// TODO push these structs directly into the system/*/*.h
-struct object_object {
-    object fields[0]; // 0 to tell CC that it can be empty.
-};
 
 struct native {
     object          target;
@@ -172,8 +167,8 @@ struct woodstock {
     declare_metaclass(ast_var);
     declare_metaclass(chr);
     declare_metaclass(dictionary);
+    declare_metaclass(object);
     declare_metaclass(fixed);
-    declare_metaclass(ifixed);
     declare_metaclass(infile);
     declare_metaclass(instream);
     declare_metaclass(smallint);
@@ -219,8 +214,5 @@ extern native_class_object      make_native_class(object header, transfer_target
 
 
 extern transfer_target  inline native_target(native_object native);
-extern object           inline object_at(object_object object, int index);
-extern void             inline object_at_put(object_object o,
-                                             int index, object value);
 
 #endif // MODEL_H
