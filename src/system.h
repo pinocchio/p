@@ -78,55 +78,48 @@ static void inline cls##_##element() {\
     assert_argsize(context, 1);\
     object selector = message(context);
 
-#define define_bcls(type, boot, messages)\
-void type##_##class_dispatch() {\
-    dispatch_header(context, selector);\
-    messages;\
-    new_target(context, context->self.ifixed->delegate);\
-}\
-with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
-    class_object ifixed = context->self.ifixed;\
-    boot;\
-    ifixed->dispatch = dispatch;\
-    ifixed->delegate = delegate;\
-    pop_context();\
-)\
-void type##_##class_stub_dispatch() {\
-    dispatch_header(context, selector);\
-    messages;\
-    if_selector(DISPATCH_DELEGATE_, type##_##set_dispatch_delegate);\
-    doesnotunderstand(L""#type"_stubclass", selector);\
-}
-
-#define define_bootstrapping_instance(type, messages)\
-void type##_##dispatch() {\
-    debug(#type"_dispatch\n");\
-    context_object context = get_context();\
-    if (context_size(context) >= 1) {\
-        object selector = message(context);\
-        if_selector(DELEGATE, object_delegate);\
-        messages\
+#define define_bootstrapping_type(type, instmsgs, classmsgs)\
+    void type##_##dispatch() {\
+        debug(#type"_dispatch\n");\
+        context_object context = get_context();\
+        if (context_size(context) >= 1) {\
+            object selector = message(context);\
+            if_selector(DELEGATE, object_delegate);\
+            instmsgs\
+        }\
+        fallback_shift(context);\
+        debug("ret>>"#type"_dispatch\n");\
     }\
-    fallback_shift(context);\
-    debug("ret>>"#type"_dispatch\n");\
-}\
-void type##_##stub_dispatch() {\
-    debug(#type"_stub_dispatch\n");\
-    context_object context = get_context();\
-    if (context_size(context) >= 1) {\
-        object selector = message(context);\
-        messages\
-        doesnotunderstand(L""#type"_stub", selector);\
+    void type##_##stub_dispatch() {\
+        debug(#type"_stub_dispatch\n");\
+        context_object context = get_context();\
+        if (context_size(context) >= 1) {\
+            object selector = message(context);\
+            instmsgs\
+            doesnotunderstand(L""#type"_stub", selector);\
+        }\
+        debug("ret>>"#type"_stub_dispatch\n");\
     }\
-    debug("ret>>"#type"_stub_dispatch\n");\
-}
+    void type##_##class_dispatch() {\
+        dispatch_header(context, selector);\
+        classmsgs;\
+        new_target(context, context->self.ifixed->delegate);\
+    }\
+    with_pre_eval2(_gen##_##type##_##set_dispatch_delegate, context, dispatch, delegate,\
+        class_object ifixed = context->self.ifixed;\
+        ifixed->cdisp   = (object)&type##_##dispatch;\
+        header(ifixed)  = woodstock->type##_##t_class;\
+        ifixed->dispatch = dispatch;\
+        ifixed->delegate = delegate;\
+        pop_context();\
+    )\
+    void type##_##class_stub_dispatch() {\
+        dispatch_header(context, selector);\
+        classmsgs;\
+        if_selector(DISPATCH_DELEGATE_, _gen##_##type##_##set_dispatch_delegate);\
+        doesnotunderstand(L""#type"_stubclass", selector);\
+    }
 
-#define define_bootstrapping_type(name, instmsgs, classmsgs)\
-    define_bootstrapping_instance(name, instmsgs)\
-    define_bcls(name,\
-        ifixed->cdisp   = (object)&name##_##dispatch;\
-        header(ifixed)  = woodstock->name##_##t_class;,\
-        classmsgs)
 
 #define with_pre_eval0(name, context, body)\
 void inline name() {\
