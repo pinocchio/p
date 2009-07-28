@@ -34,7 +34,7 @@ int main () {
     object Cons             = import_class(cons);
 
     object Character        = import_class(chr);
-    object Assign           = import_class(ast_assign);
+    object Assign           = import_class(assign);
     object Call             = import_class(ast_call);
     object Capture          = import_class(ast_capture);
     object Const            = import_class(ast_const);

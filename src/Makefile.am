@@ -6,16 +6,17 @@ system/type/array.h system/type/chr.c system/type/chr.h scheme/symbols.c\
 scheme/symbols.h system/type/smallint.c system/type/smallint.h\
 system/type/symbol.h system/type/symbol.c system/type/string.c\
 system/type/string.h system/type/object.c system/type/object.h\
-system/type/class.h system/type/class.c
+system/type/class.h system/type/class.c system/ast/assign.c\
+system/ast/assign.h
 TYPECODE=boot/type/dict.p boot/type/array.p boot/type/char.p\
 boot/type/smallint.p boot/type/symbol.p boot/type/string.p boot/type/object.p\
-boot/type/class.p
+boot/type/class.p boot/ast/assign.p
 
 SOURCES=$(TYPEGEN) model.c bootstrap.c\
 system.c print.c debug.c thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
 thread.h constants.h\
 scheme/behaviour.c scheme/behaviour.h scheme/natives.c scheme/natives.h\
-system/ast/assign.c system/ast/call.h system/ast/assign.h\
+system/ast/call.h\
 system/ast/capture.h system/ast/var.h system/ast/capture.c\
 system/ast/list.c system/ast/call.c system/ast/var.c\
 system/ast/list.h system/ast/const.h system/ast/scoped.h\

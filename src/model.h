@@ -49,7 +49,7 @@ struct runtime_env;
 struct symbol;
 
 struct ast_list;
-struct ast_assign;
+struct assign;
 struct ast_call;
 struct ast_const;
 struct ast_var;
@@ -61,7 +61,7 @@ struct fallback;
 // ============================================================================
 
 typedef struct array*            array_object;
-typedef struct ast_assign*       ast_assign_object;
+typedef struct assign*           assign_object;
 typedef struct ast_call*         ast_call_object;
 typedef struct ast_capture*      ast_capture_object;
 typedef struct ast_const*        ast_const_object;
@@ -95,7 +95,7 @@ typedef struct woodstock*       woodstock_t;
 
 typedef union {
     array_object           array;
-    ast_assign_object      ast_assign;
+    assign_object          ast_assign;
     ast_call_object        ast_call;
     ast_capture_object     ast_capture;
     ast_const_object       ast_const;
@@ -146,7 +146,7 @@ struct woodstock {
     object              true;
 
     // Evaluation related classes
-    object ast_assign_class;
+    object assign_class;
     object ast_call_class;
     object ast_capture_class;
     object ast_const_class;
@@ -158,7 +158,7 @@ struct woodstock {
 
     // Classes related to object formats
     declare_metaclass(array);
-    declare_metaclass(ast_assign);
+    declare_metaclass(assign);
     declare_metaclass(ast_call);
     declare_metaclass(ast_capture);
     declare_metaclass(ast_const);

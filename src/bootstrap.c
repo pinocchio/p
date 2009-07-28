@@ -29,7 +29,7 @@ woodstock_t bootstrap() {
      * outside world as they are internal objects
      */
     setup_type(array);
-    setup_type(ast_assign);
+    setup_type(assign);
     setup_type(ast_call);
     setup_type(ast_capture);
     setup_type(ast_const);
@@ -54,7 +54,7 @@ woodstock_t bootstrap() {
     woodstock->dictionary_class     = incomplete_class(dictionary);
     woodstock->runtime_env_class    = incomplete_class(runtime_env);
     woodstock->class_class          = incomplete_class(class);
-    woodstock->ast_assign_class     = incomplete_class(ast_assign);
+    woodstock->assign_class         = incomplete_class(assign);
     woodstock->ast_call_class       = incomplete_class(ast_call);
     woodstock->ast_capture_class    = incomplete_class(ast_capture);
     woodstock->ast_const_class      = incomplete_class(ast_const);

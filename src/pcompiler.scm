@@ -116,7 +116,7 @@
     (list (string-append
            (car names)
            (car body)
-           "ast_assign_object " name
+           "assign_object " name
            " = make_ast_assign(" (cadr names)
            ", (object)" (cadr body) ");\n")
           name

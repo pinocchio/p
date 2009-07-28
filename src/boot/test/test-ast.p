@@ -46,7 +46,7 @@
 (let* ((env1 (env null null 1))
        (c (ast-const 42))
        (v (ast-var "iv"))
-       (assign (ast-assign v c)))
+       (assign (Assign 'to:expression: v c)))
     ;(assert (eq? (var 'eval) null))
     ;TODO to be fixed
     ;(display assign)
