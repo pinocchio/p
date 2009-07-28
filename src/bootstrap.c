@@ -39,7 +39,7 @@ woodstock_t bootstrap() {
     setup_type(chr);
     setup_type(dictionary);
     setup_type(object);
-    setup_type(fixed);
+    setup_type(class);
     setup_type(infile);
     setup_type(instream);
     setup_type(smallint);
@@ -53,7 +53,7 @@ woodstock_t bootstrap() {
     woodstock->chr_class            = incomplete_class(chr);
     woodstock->dictionary_class     = incomplete_class(dictionary);
     woodstock->runtime_env_class    = incomplete_class(runtime_env);
-    woodstock->fixed_class          = incomplete_class(fixed);
+    woodstock->class_class          = incomplete_class(class);
     woodstock->ast_assign_class     = incomplete_class(ast_assign);
     woodstock->ast_call_class       = incomplete_class(ast_call);
     woodstock->ast_capture_class    = incomplete_class(ast_capture);
@@ -94,7 +94,7 @@ woodstock_t bootstrap() {
     woodstock->ast_capture          = (object)make_object(0,
                                             woodstock->ast_capture_class);
     woodstock->ifixed               = (object)make_object(0,
-                                            woodstock->fixed_class);
+                                            woodstock->class_class);
 
     init_thread();
     bootstrap_scheme();

@@ -55,7 +55,7 @@ struct ast_const;
 struct ast_var;
 struct ast_scoped;
 struct ast_capture;
-struct object_t;
+struct class;
 struct fallback;
 
 // ============================================================================
@@ -72,7 +72,7 @@ typedef struct chr*              chr_object;
 typedef struct context*          context_object;
 typedef struct dictionary*       dictionary_object;
 typedef struct fallback*         fallback_object;
-typedef struct object_t*         object_t_object;
+typedef struct class*            class_object;
 typedef struct instream*         infile_object;
 typedef struct instream*         instream_object;
 typedef struct native*           native_object;
@@ -106,7 +106,7 @@ typedef union {
     context_object         context;
     dictionary_object      dict;
     fallback_object        fallback;
-    object_t_object        ifixed;
+    class_object           ifixed;
     infile_object          infile;
     instream_object        instream;
     native_class_object    native_class;
@@ -153,7 +153,7 @@ struct woodstock {
     object ast_list_class;
     object ast_scoped_class;
     object ast_var_class;
-    object fixed_class;
+    object class_class;
     object runtime_env_class;
 
     // Classes related to object formats
@@ -168,7 +168,7 @@ struct woodstock {
     declare_metaclass(chr);
     declare_metaclass(dictionary);
     declare_metaclass(object);
-    declare_metaclass(fixed);
+    declare_metaclass(class);
     declare_metaclass(infile);
     declare_metaclass(instream);
     declare_metaclass(smallint);

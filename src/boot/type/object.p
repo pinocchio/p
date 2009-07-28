@@ -2,7 +2,7 @@
    ((objectAt: (w_idx)
         "
         object self = context->self;
-        object_t_object ifixed = ifixed_descr(self);
+        class_object ifixed = ifixed_descr(self);
 
         cast(index, w_idx, smallint);
         debug(\"at %i (size %i)\\n\", index->value, ifixed->size);
@@ -15,7 +15,7 @@
     (objectAt:put: (w_idx w_value)
         "
         object self = context->self;
-        object_t_object ifixed = ifixed_descr(self);
+        class_object ifixed = ifixed_descr(self);
 
         cast(index, w_idx, smallint);
         debug(\"an_ifixed>>at:put: (%i of %i)\\n\", index->value, ifixed->size);
@@ -29,13 +29,13 @@
         "))
    ((basicNew ()
         "
-        object_t_object ifixed = context->self.ifixed;
+        class_object ifixed = context->self.ifixed;
         object_object instance = make_object(ifixed->size, (object)ifixed);
         return_from_context(context, (object)instance);
         ")
     (size ()
         "
-        object_t_object ifixed = context->self.ifixed;
+        class_object ifixed = context->self.ifixed;
         return_from_context(context, (object)make_smallint(ifixed->size));
         "))
    (("object inline object_at(object_object object, int index)"
@@ -46,7 +46,7 @@
         "
         o->fields[index] = value;
         ")
-    ("object_t_object inline ifixed_descr(object inst)"
+    ("class_object inline ifixed_descr(object inst)"
         "
-        return (object_t_object)pheader(inst.pointer);
+        return (class_object)pheader(inst.pointer);
         ")))

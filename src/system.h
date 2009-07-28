@@ -19,7 +19,6 @@
 #include <system/tool/fallback.h>
 #include <system/tool/shift.h>
 
-#include <system/type/ifixed.h>
 #include <system/type/array.h>
 #include <system/type/dictionary.h>
 #include <system/type/symbol.h>
@@ -27,6 +26,7 @@
 #include <system/type/smallint.h>
 #include <system/type/chr.h>
 #include <system/type/object.h>
+#include <system/type/class.h>
 
 #include <system/runtime/env.h>
 
@@ -85,7 +85,7 @@ void type##_##class_dispatch() {\
     new_target(context, context->self.ifixed->delegate);\
 }\
 with_pre_eval2(type##_##set_dispatch_delegate, context, dispatch, delegate,\
-    object_t_object ifixed = context->self.ifixed;\
+    class_object ifixed = context->self.ifixed;\
     boot;\
     ifixed->dispatch = dispatch;\
     ifixed->delegate = delegate;\

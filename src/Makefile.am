@@ -5,9 +5,11 @@ TYPEGEN=system/type/dictionary.c system/type/dictionary.h system/type/array.c\
 system/type/array.h system/type/chr.c system/type/chr.h scheme/symbols.c\
 scheme/symbols.h system/type/smallint.c system/type/smallint.h\
 system/type/symbol.h system/type/symbol.c system/type/string.c\
-system/type/string.h system/type/object.c system/type/object.h
+system/type/string.h system/type/object.c system/type/object.h\
+system/type/class.h system/type/class.c
 TYPECODE=boot/type/dict.p boot/type/array.p boot/type/char.p\
-boot/type/smallint.p boot/type/symbol.p boot/type/string.p boot/type/object.p
+boot/type/smallint.p boot/type/symbol.p boot/type/string.p boot/type/object.p\
+boot/type/class.p
 
 SOURCES=$(TYPEGEN) model.c bootstrap.c\
 system.c print.c debug.c thread.c model.h bootstrap.h system.h print.h gc.h debug.h\
@@ -20,7 +22,7 @@ system/ast/list.h system/ast/const.h system/ast/scoped.h\
 system/ast/const.c system/ast/scoped.c\
 system/io/stream.h system/io/stream.c system/io/file.h system/io/file.c\
 system/runtime/env.c system/runtime/env.h\
-system/type/type.h system/type/ifixed.c system/type/ifixed.h\
+system/type/type.h\
 system/tool/ival.c system/tool/shift.h system/tool/ival.h system/tool/fallback.c\
 system/tool/fallback.h system/tool/shift.c
 
