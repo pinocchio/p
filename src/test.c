@@ -789,7 +789,7 @@ SETUP(test_ifixed_dispatch)
     // TODO should evaluate it's but not shift!
     object dnu = make_m(args, (object)mvar);
 
-    dict_object methods = make_dict(2);
+    dictionary_object methods = make_dict(2);
     ast_call3(ast_call, (object)make_ast_const((object)methods),
                   OBJECT_AT_PUT_,
                   (object)make_ast_const((object)SYMBOL_doesNotUnderstand),
