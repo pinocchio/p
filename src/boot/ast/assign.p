@@ -10,11 +10,6 @@
         context->env = env;
         set_message(context, ASSIGN_);
         set_argument(context, 1, self->expression);
-        ")
-    (eval: (w_env)
-        "
-        context->env = w_env;
-        gen_assign_eval();
         "))
    ((to:expression: (w_var w_exp)
         "
