@@ -2,16 +2,7 @@
 #include <bootstrap.h>
 #include <thread.h>
 #include <system/type/array.h>
-
-object_object make_object(int size, object interpreter) {
-    object_object result  = NEW_ARRAYED(object_object, object, size);
-    header(result)        = interpreter;
-    int i;
-    for (i = 0; i < size; i++) {
-        object_at_put(result, i, (object)woodstock->nil);
-    }
-    return result;
-}
+#include <system/type/object.h>
 
 native_object make_native(transfer_target native) {
     // Natives don't need a header, so we just allocate what we need.

@@ -49,4 +49,16 @@
     ("class_object inline ifixed_descr(object inst)"
         "
         return (class_object)pheader(inst.pointer);
+        ")
+    ("object_object make_object(int size, object interpreter)"
+        "
+        object_object result  = NEW_ARRAYED(object_object, object, size);
+        header(result)        = interpreter;
+        int i;
+        for (i = 0; i < size; i++) {
+            object_at_put(result, i, (object)woodstock->nil);
+        }
+        return result;
         ")))
+
+))

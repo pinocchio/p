@@ -208,7 +208,6 @@ struct woodstock {
 
 // ============================================================================
 
-extern object_object            make_object(int size, object interpreter);
 extern native_object            make_native(transfer_target native);
 extern native_class_object      make_native_class(object header, transfer_target cdisp);
 
