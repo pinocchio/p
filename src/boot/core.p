@@ -333,7 +333,7 @@
                     'at:ifAbsentPut: (method (self super key l) 
                         (let ((element (self 'objectAt: key)))
                             (if (eq? null element) 
-                                (self 'objectAt:put: key l)
+                                (self 'objectAt:put: key (l))
                                 element
                                 ))))
                 ((Dictionary 'class) 'store:method:

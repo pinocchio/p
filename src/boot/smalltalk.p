@@ -5,16 +5,16 @@
         (parsers: (self super aDictionary) (self 'objectAt:put: 0 aDictionary))
         (id (self super) (self 'objectAt: 1))
         (id: (self super new) (self 'objectAt:put: 1 new))
-;        (doesNotUnderstand: (self super message)
-;            ((self parsers) 'at:ifAbsentPut: (lambda () 
-;                (let ((selector ("initialize" ', message)))
-;                    selector
-;                                    ))))
         (initialize (self super)
             (self 'parsers: (Dictionary 'new))
             (self 'id: 0)
             self)
-        
+       
+        ;(doesNotUnderstand:in:with: (self super message env args)
+         ;   (let ((selector ("initialize" 'concat: (message 'capitalized))))
+         ;       ((self 'parsers) 'at:ifAbsentPut: message (lambda () (self selector))))
+        ;                            (message 'copy))
+
         (initializeAnnotation (self super)
             (let ((self self))
             (let ((p (Parser 'named: "ANNOTATION")))
@@ -373,6 +373,8 @@
             ((self 'parsers) 'at:ifAbsentPut: 'messageExpression (lambda () (Parser 'named: "MESSAGE-EXPRESSION"))))
         (preStorePrimary (self super)
             ((self 'parsers) 'at:ifAbsentPut: 'primary (lambda () (Parser 'named: "PRIMARY"))))
-       )())))
+       )
+       ()
+       )))
     
     (load "boot/test/test-smalltalk.p"))

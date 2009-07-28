@@ -86,10 +86,8 @@
 (testsuite "Dictionary test" (lambda ()
  (let ((d (Dictionary 'new)))
     (assert (eq? (d 'objectAt: 'answer) null)) 
-    (assert (= (d 'at:ifAbsentPut: 'answer 42) 42))
-    (assert (= (d 'at:ifAbsentPut: 'answer 21) 42))
-    (assert (eq? (d 'objectAt: 'l) null))
-    (assert (= ((d 'at:ifAbsentPut: 'l (lambda () 42))) 42))
+    (assert (= (d 'at:ifAbsentPut: 'answer (lambda () 42)) 42))
+    (assert (= (d 'at:ifAbsentPut: 'answer (lambda () 21)) 42))
 )))
 
 ;(display "\nFile tests\n")
