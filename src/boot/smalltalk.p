@@ -3,6 +3,18 @@
             (((":=" 'asParser) '\| #\_) 'omit: #t))
         (parsers (self super) (self 'objectAt: 0))
         (parsers: (self super aDictionary) (self 'objectAt:put: 0 aDictionary))
+        (id (self super) (self 'objectAt: 1))
+        (id: (self super new) (self 'objectAt:put: 1 new))
+;        (doesNotUnderstand: (self super message)
+;            ((self parsers) 'at:ifAbsentPut: (lambda () 
+;                (let ((selector ("initialize" ', message)))
+;                    selector
+;                                    ))))
+        (initialize (self super)
+            (self 'parsers: (Dictionary 'new))
+            (self 'id: 0)
+            self)
+        
         (initializeAnnotation (self super)
             (let ((self self))
             (let ((p (Parser 'named: "ANNOTATION")))
