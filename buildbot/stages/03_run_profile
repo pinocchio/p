@@ -6,9 +6,12 @@ end
 
 # first run
 run()
+
 # average runs
 
 $runTimes = []
+start = Time.now
 100.times { |i|
     run()
 }
+puts (Time.now - start) / 100
