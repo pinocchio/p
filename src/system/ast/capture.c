@@ -1,24 +1,18 @@
 #include <system.h>
 #include <thread.h>
+#include <print.h>
 
-// ast_capture>>eval:
-static void inline ast_capture_eval() {
-    context_object context = get_context();
-    debug("ast_capture>>eval\n");
-    return_from_context(context, context->env);
-    debug("ret>>ast_capture>>eval %p\n", context->env.env);
-}
+with_pre_eval0(gen_capture_eval, context, 
+        return_from_context(context, context->env);
+        )
+with_pre_eval0(gen_capture_instance, context, 
+        return_from_context(context, woodstock->ast_capture);
+        )
 
-static void inline ast_capture_instance() {
-    debug("ast_capture_class>>instance\n");
-    context_object context = get_context();
-    return_from_context(context, woodstock->ast_capture);
-    debug("ret>>ast_capture_class>>instance\n");
-}
-
-define_bootstrapping_type(ast_capture,
+define_bootstrapping_type(capture,
     // instance
-    if_selector(EVAL, ast_capture_eval);,
+    if_selector(EVAL, gen_capture_eval);
+,
     // class
-    if_selector(INSTANCE, ast_capture_instance);
+    if_selector(INSTANCE, gen_capture_instance);
 )

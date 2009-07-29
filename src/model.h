@@ -54,7 +54,7 @@ struct call;
 struct ast_const;
 struct ast_var;
 struct ast_scoped;
-struct ast_capture;
+struct capture;
 struct class;
 struct fallback;
 
@@ -63,7 +63,7 @@ struct fallback;
 typedef struct array*            array_object;
 typedef struct assign*           assign_object;
 typedef struct call*             call_object;
-typedef struct ast_capture*      ast_capture_object;
+typedef struct capture*          capture_object;
 typedef struct ast_const*        ast_const_object;
 typedef struct ast_list*         ast_list_object;
 typedef struct ast_scoped*       ast_scoped_object;
@@ -97,7 +97,7 @@ typedef union {
     array_object           array;
     assign_object          ast_assign;
     call_object            ast_call;
-    ast_capture_object     ast_capture;
+    capture_object         capture;
     ast_const_object       ast_const;
     ast_list_object        ast_list;
     ast_scoped_object      ast_scoped;
@@ -148,7 +148,7 @@ struct woodstock {
     // Evaluation related classes
     object assign_class;
     object call_class;
-    object ast_capture_class;
+    object capture_class;
     object ast_const_class;
     object ast_list_class;
     object ast_scoped_class;
@@ -160,7 +160,7 @@ struct woodstock {
     declare_metaclass(array);
     declare_metaclass(assign);
     declare_metaclass(call);
-    declare_metaclass(ast_capture);
+    declare_metaclass(capture);
     declare_metaclass(ast_const);
     declare_metaclass(ast_list);
     declare_metaclass(ast_scoped);

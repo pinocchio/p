@@ -1,9 +1,13 @@
-#ifndef SYSTEM_ast_capture_H
-#define SYSTEM_ast_capture_H
-#include <scheme/natives.h>
-#include <system/type/type.h>
-export_type(ast_capture);
+#ifndef SYSTEM_CAPTURE_H
+#define SYSTEM_CAPTURE_H
 
-extern ast_capture_object make_ast_capture();
+extern void capture_dispatch();
+extern void capture_stub_dispatch();
+extern void capture_class_dispatch();
+extern void capture_class_stub_dispatch();
 
-#endif // SYSTEM_ast_capture_H
+
+struct capture {
+};
+
+#endif // SYSTEM_CAPTURE_H

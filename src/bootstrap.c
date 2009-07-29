@@ -31,7 +31,7 @@ woodstock_t bootstrap() {
     setup_type(array);
     setup_type(assign);
     setup_type(call);
-    setup_type(ast_capture);
+    setup_type(capture);
     setup_type(ast_const);
     setup_type(ast_list);
     setup_type(ast_scoped);
@@ -56,7 +56,7 @@ woodstock_t bootstrap() {
     woodstock->class_class          = incomplete_class(class);
     woodstock->assign_class         = incomplete_class(assign);
     woodstock->call_class           = incomplete_class(call);
-    woodstock->ast_capture_class    = incomplete_class(ast_capture);
+    woodstock->capture_class        = incomplete_class(capture);
     woodstock->ast_const_class      = incomplete_class(ast_const);
     woodstock->ast_list_class       = incomplete_class(ast_list);
     woodstock->ast_scoped_class     = incomplete_class(ast_scoped);
@@ -92,7 +92,7 @@ woodstock_t bootstrap() {
     woodstock->lambda_shifter       = wrap_dispatcher(shift_lambda);
 
     woodstock->ast_capture          = (object)make_object(0,
-                                            woodstock->ast_capture_class);
+                                            woodstock->capture_class);
     woodstock->ifixed               = (object)make_object(0,
                                             woodstock->class_class);
 
