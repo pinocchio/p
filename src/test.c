@@ -191,7 +191,7 @@ SETUP(test_ast_assign_ast_var)
     ast_const_object ast_const = make_ast_const(v);
     ast_var_object ast_var = make_ast_var(L"iv");
 
-    ast_assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
+    assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
 
     context_object make_eval_context(ci, ast_assign, k);
 
@@ -209,7 +209,7 @@ SETUP(test_ast_var_read)
     ast_const_object ast_const = make_ast_const(v);
     ast_var_object ast_var     = make_ast_var(L"iv");
 
-    ast_assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
+    assign_object ast_assign = make_ast_assign((object)ast_var, (object)ast_const);
 
     context_object make_eval_context(ci, ast_assign, k);
 
@@ -610,7 +610,7 @@ set_callarg(ast_call_32_ast_call_17_scheme_eqp, 1, (object)ast_call_31_lambda_19
 array_object array_33_lambda_15_x = make_array(1);
 array_at_put(array_33_lambda_15_x, 0, ast_var_16_class);
 object lambda_15_x = make_func(array_33_lambda_15_x, (object)ast_call_32_ast_call_17_scheme_eqp);
-ast_assign_object ast_assign_14_x = make_ast_assign(ast_var_12_loop, (object)lambda_15_x);
+assign_object ast_assign_14_x = make_ast_assign(ast_var_12_loop, (object)lambda_15_x);
 call_object ast_call_34_ast_var_3_self = make_ast_call((object)ast_var_3_self, 1);
 set_callarg(ast_call_34_ast_var_3_self, 0, (object)DELEGATE);
 call_object ast_call_35_ast_var_12_loop = make_ast_call((object)ast_var_12_loop, 1);
