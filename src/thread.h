@@ -32,6 +32,7 @@ extern void inline continue_transfer();
 
 struct context {
     transfer_target     code;
+    context_object      dynamic_link;
     object              self;
     object              env;
     struct array        arguments;

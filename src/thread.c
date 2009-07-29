@@ -29,7 +29,9 @@ context_object inline stack_claim(int size) {
     if (STACK_SIZE - (stk_idx - stk_bottom) < size) {
         expand_stack();
     }
+    context_object old = stk_idx;
     stk_idx += size;
+    stk_idx->dynamic_link = old;
     return stk_idx;
 }
 
@@ -43,6 +45,10 @@ context_object inline get_context() {
 
 void inline pop_context() {
     set_context(return_context(get_context()));
+}
+
+context_object inline return_context(context_object context) {
+    return context->dynamic_link;
 }
 
 int inline empty_stack() {
@@ -90,11 +96,6 @@ object inline message(context_object context) {
 
 int inline context_size(context_object context) {
     return array_size(&context->arguments);
-}
-
-context_object inline return_context(context_object context) {
-    int size = context_size(context);
-    return context - size - ctx_size;
 }
 
 /* Object creation */
