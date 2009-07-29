@@ -210,5 +210,30 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
 	error_guard(0 <= index, "Out of bounds");\
 	error_guard(index < array_size(array), "Out of bounds");
 
+// =============================================================================
+
+#define build_ast_call(name, receiver, msg, size)\
+    name = make_ast_call((object)receiver, size);\
+    set_callmsg(name, msg);
+
+#define ast_call1(name, receiver, msg)\
+    build_ast_call(name, receiver, msg, 1)
+
+#define ast_call2(name, receiver, msg, arg)\
+    build_ast_call(name, receiver, msg, 2)\
+    set_callarg(name, 1, (object)arg);
+
+#define ast_call3(name, receiver, msg, arg1, arg2)\
+    build_ast_call(name, receiver, msg, 3)\
+    set_callarg(name, 1, (object)arg1);\
+    set_callarg(name, 2, (object)arg2);
+
+#define ast_call4(name, receiver, msg, arg1, arg2, arg3)\
+    build_ast_call(name, receiver, msg, 4)\
+    set_callarg(name, 1, (object)arg1);\
+    set_callarg(name, 2, (object)arg2);\
+    set_callarg(name, 3, (object)arg3);
+
+// =============================================================================
 
 #endif

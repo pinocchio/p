@@ -44,7 +44,7 @@ void print_object(object o) {
         printf("ast_var(\"%ls\")\n", o.ast_var->name->value);
         return;
     }
-    test_type(ast_call);
+    test_type(call);
     test_type(ast_list);
     test_type(ast_scoped);
     test_type(object);
