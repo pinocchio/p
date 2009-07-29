@@ -52,10 +52,14 @@
         context->env  = env;
 
         int i;
+        object args = ast_call->arguments;
         for (i = 0; i < argsize; i++) {
             // TODO optimize!
-            set_argument(context, i, scheme_list_at(ast_call->arguments, i));
+            set_argument(context, i, car(args));
+            // Fast cdr, car has already tested if it is a cons
+            args = object_at(args.object, 1);
         }
+        error_guard(args.pointer == woodstock->nil, \"Too many arguments\");
 
         dec();
         ")))
