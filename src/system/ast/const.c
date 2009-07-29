@@ -9,10 +9,10 @@ with_pre_eval1(ast_const_new, context, constant,
 
 define_bootstrapping_type(ast_const, 
     // instance
-    if_selector(EVAL,         ast_const_constant);
-    if_selector(EVAL_, pre_eval_env);,
+    if_selector(EVAL,      ast_const_constant);
+    if_selector(EVAL_,     pre_eval_env);,
     // class
-    if_selector(BASICNEW_,        ast_const_new);
+    if_selector(BASICNEW_, ast_const_new);
 )
 
 // Object creation

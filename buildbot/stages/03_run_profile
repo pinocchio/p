@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def run
-    system("cd "+ARGV[0]+";     make run")
+    system("cd "+ARGV[0]+";     make run > /dev/null")
 end
 
 # first run
