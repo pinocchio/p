@@ -38,7 +38,7 @@ int main () {
     object Call             = import_class(call);
     object Capture          = import_class(capture);
     object Const            = import_class(constant);
-    object List             = import_class(ast_list);
+    object List             = import_class(list);
     object Scoped           = import_class(ast_scoped);
     object Var              = import_class(ast_var);
     object InputFile        = import_class(infile);

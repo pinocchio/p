@@ -1,28 +1,21 @@
-#ifndef SYSTEM_ast_list_H
-#define SYSTEM_ast_list_H
+#ifndef SYSTEM_LIST_H
+#define SYSTEM_LIST_H
 
-#include <scheme/natives.h>
+extern void list_dispatch();
+extern void list_stub_dispatch();
+extern void list_class_dispatch();
+extern void list_class_stub_dispatch();
 
-// Creation
-#include <system/type/type.h>
-export_type(ast_list);
+extern list_object make_list(int size);
+extern int inline list_size(list_object list);
+extern void inline list_check_bounds(list_object list, int index);
+extern object inline raw_list_at(list_object list, int index);
+extern void inline raw_list_at_put(list_object list, int index, object value);
+extern void inline list_at_put(list_object list, int index, object value);
 
-extern ast_list_object make_ast_list(int size);
-
-// Accessors
-extern object      inline raw_ast_list_at(ast_list_object ast_list, int index);
-extern void        inline raw_ast_list_at_put(ast_list_object ast_list,
-                                           int index, object i);
-extern void        inline ast_list_at_put(ast_list_object ast_list,
-                                       int index, object i);
-extern int         inline ast_list_size(ast_list_object ast_list);
-
-preval_header(ast_list_new_from_array);
-
-// Structure
-struct ast_list {
-    int             size;
-    object          instructions[];
+struct list {
+	int size;
+	object instructions[];
 };
 
-#endif // SYSTEM_ast_list_H
+#endif // SYSTEM_LIST_H

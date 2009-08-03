@@ -210,7 +210,7 @@ void bootstrap_scheme() {
 
     woodstock->error = scheme_error;
 
-    init_op(ast_list_new_from_array);
+    // init_op(list_new_from_array);
     init_op(ast_var_new_from_string);
     init_op(ast_scoped_new_from_scope_expression_size);
     //init_op(ast_const_new_from_object);

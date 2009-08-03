@@ -3,7 +3,7 @@
 
 // Function bootstrapping
                     
-void inline init_args(ast_list_object exp,
+void inline init_args(list_object exp,
                       array_object arguments,
                       int toskip) {
     int todo = array_size(arguments);
@@ -15,7 +15,7 @@ void inline init_args(ast_list_object exp,
     }                      
 }                          
        
-void inline add_eval_args_code(ast_list_object exp,
+void inline add_eval_args_code(list_object exp,
                                array_object arguments,
                                int toskip,
                                int todo) {
@@ -28,12 +28,12 @@ void inline add_eval_args_code(ast_list_object exp,
     for (i = toskip; i < todo; i++) {
         ast_var_object variable = array_at(arguments, i).ast_var;
         ast_call2(arg_eval, variable, EVAL_, parent_env);
-        ast_list_at_put(exp, i - toskip,
+        list_at_put(exp, i - toskip,
             (object)make_ast_assign((object)variable, (object)arg_eval));
     }                      
 }                          
                            
-void inline add_switch_scope_code(ast_list_object exp, int position) {
+void inline add_switch_scope_code(list_object exp, int position) {
     ast_var_object receiver_var = make_ast_var(L"switchvar");
     receiver_var->scope = (object)exp;
                            
@@ -41,7 +41,7 @@ void inline add_switch_scope_code(ast_list_object exp, int position) {
     call_object ast_call2(switch_env, woodstock->ast_capture,
                         PARENT_, self_scope)
                            
-    ast_list_at_put(exp, position, (object)switch_env);
+    list_at_put(exp, position, (object)switch_env);
 }                          
                            
 object ast_scoped_for(object exp, object size) {
@@ -60,11 +60,11 @@ object ast_scoped_for(object exp, object size) {
 object inline make_dyn_func(array_object arguments, object body) {
     int argsize = array_size(arguments);
     // Eval args, eval body
-    ast_list_object exp = make_ast_list(argsize + 1); 
+    list_object exp = make_list(argsize + 1); 
 
     init_args(exp, arguments, 1); // skip receiver
     add_eval_args_code(exp, arguments, 0, argsize);
-    ast_list_at_put(exp, argsize, body);
+    list_at_put(exp, argsize, body);
 
     return ast_scoped_for((object)exp,
                        (object)make_smallint(array_size(arguments)));
@@ -72,11 +72,11 @@ object inline make_dyn_func(array_object arguments, object body) {
 
 object inline make_func(array_object arguments, object body) {
     // Eval args, switch context, eval body
-    ast_list_object exp = make_ast_list(2);
+    list_object exp = make_list(2);
 
     init_args(exp, arguments, 1); // skip receiver;
     add_switch_scope_code(exp, 0);
-    ast_list_at_put(exp, 1, body);
+    list_at_put(exp, 1, body);
 
     constant_object constant = make_constant(woodstock->ast_scoped_class);
     call_object ast_call3(ast_call, constant, NEW_SIZE_,
@@ -91,11 +91,11 @@ object inline make_func(array_object arguments, object body) {
 // Function which doesn't evaluate its arguments
 object inline make_dispatch(array_object arguments, object body) {
     // Eval args, switch context, eval body
-    ast_list_object exp = make_ast_list(2);
+    list_object exp = make_list(2);
 
     init_args(exp, arguments, 1);
     add_switch_scope_code(exp, 0);
-    ast_list_at_put(exp, 1, body);
+    list_at_put(exp, 1, body);
 
     return ast_scoped_for((object)exp,
                        (object)make_smallint(array_size(arguments)));
@@ -104,13 +104,13 @@ object inline make_dispatch(array_object arguments, object body) {
 object inline make_m(array_object arguments, object body) {
     int argsize = array_size(arguments);
     // Eval args (-1: skip self), switch context, eval body
-    ast_list_object exp = make_ast_list(argsize);
+    list_object exp = make_list(argsize);
 
     
     init_args(exp, arguments, 1);
     add_eval_args_code(exp, arguments, 2, argsize); // skip self
     add_switch_scope_code(exp, argsize - 2);
-    ast_list_at_put(exp, argsize - 1, body);
+    list_at_put(exp, argsize - 1, body);
 
     constant_object constant = make_constant(woodstock->ast_scoped_class);
     call_object ast_call3(ast_call, constant, NEW_SIZE_,

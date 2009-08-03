@@ -48,7 +48,7 @@ struct outstream;
 struct runtime_env;
 struct symbol;
 
-struct ast_list;
+struct list;
 struct assign;
 struct call;
 struct constant;
@@ -65,7 +65,7 @@ typedef struct assign*           assign_object;
 typedef struct call*             call_object;
 typedef struct capture*          capture_object;
 typedef struct constant*         constant_object;
-typedef struct ast_list*         ast_list_object;
+typedef struct list*         list_object;
 typedef struct ast_scoped*       ast_scoped_object;
 typedef struct ast_var*          ast_var_object;
 typedef struct chr*              chr_object;
@@ -99,7 +99,7 @@ typedef union {
     call_object            ast_call;
     capture_object         capture;
     constant_object        ast_const;
-    ast_list_object        ast_list;
+    list_object        list;
     ast_scoped_object      ast_scoped;
     ast_var_object         ast_var;
     chr_object             chr;
@@ -150,7 +150,7 @@ struct woodstock {
     object call_class;
     object capture_class;
     object constant_class;
-    object ast_list_class;
+    object list_class;
     object ast_scoped_class;
     object ast_var_class;
     object class_class;
@@ -162,7 +162,7 @@ struct woodstock {
     declare_metaclass(call);
     declare_metaclass(capture);
     declare_metaclass(constant);
-    declare_metaclass(ast_list);
+    declare_metaclass(list);
     declare_metaclass(ast_scoped);
     declare_metaclass(ast_var);
     declare_metaclass(chr);

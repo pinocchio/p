@@ -1,107 +1,84 @@
 #include <system.h>
 #include <thread.h>
-#include <scheme/natives.h>
-#include <system/type/array.h>
+#include <print.h>
 
-// ast_list>>eval:
-static void inline ast_list_eval() {
-    debug("ast_list>>eval\n");
-    context_object ast_list_context = get_context();
-    ast_list_object ast_list = ast_list_context->self.ast_list;
+list_object make_list(int size) {
+        list_object result = NEW_ARRAYED(list_object, object, size + 1);
+        header(result)         = (object)woodstock->list_class;
+        result->size           = size;
+        return result;
+        }
 
-    if (ast_list_size(ast_list) == 0) {
-        pop_context();
-        debug("ret>>ast_list>>eval(0)\n");
-        return;
-    }
+int inline list_size(list_object list) {
+        return list->size;
+        }
 
-    int end = ast_list_size(ast_list) - 1;
+void inline list_check_bounds(list_object list, int index) {
+        error_guard(0 <= index,
+            "InstructionList index out of bounds. (< 0)");
+        error_guard(index < list_size(list),
+            "InstructionList index out of bounds. (> limit)");
+        }
 
-    object instruction = (object)raw_ast_list_at(ast_list, end);
-    new_target(ast_list_context, instruction);
-    object env = ast_list_context->env;
+object inline raw_list_at(list_object list, int index) {
+        return list->instructions[index];
+        }
 
-    // Lign up all the context frames necessary to perform
-    // the whole ast_list.
-    for (--end; 0 <= end; end--) {
-        context_object ast_list_pop = make_empty_context(2);
-        ast_list_pop->code          = &pop_context;
-        instruction              = (object)raw_ast_list_at(ast_list, end);
-        ast_list_context            = make_context(instruction, 1);
-        set_message(ast_list_context, EVAL);
-        ast_list_context->env       = env;
-    }
+void inline raw_list_at_put(list_object list, int index, object value) {
+        list->instructions[index] = value;
+        }
 
-    debug("ret>>ast_list>>eval(n)\n");
-}
+void inline list_at_put(list_object list, int index, object value) {
+        list_check_bounds(list, index);
+        raw_list_at_put(list, index, value);
+        }
 
-with_pre_eval1(ast_list_new, context, w_size,
-    cast(size, w_size, smallint);
-    return_from_context(context, (object)make_ast_list(size->value));
-)
+with_pre_eval0(gen_list_eval, context,     
+        list_object self = context->self.list;
 
-with_pre_eval1(gen_ast_list_at, context, idx, 
+        if (list_size(self) == 0) {
+            pop_context();
+            debug("ret>>list>>eval(0)\n");
+            return;
+        }
+
+        int end = list_size(self) - 1;
+
+        object instruction = (object)raw_list_at(self, end);
+        new_target(context, instruction);
+        object env = context->env;
+
+        // Lign up all the context frames necessary to perform
+        // the whole list.
+        for (--end; 0 <= end; end--) {
+            context         = make_empty_context(2);
+            context->code   = &pop_context;
+            instruction     = (object)raw_list_at(self, end);
+            context         = make_context(instruction, 1);
+            set_message(context, EVAL);
+            context->env    = env;
+        }
+        )
+with_pre_eval1(gen_list_eval_col_, context, w_env, 
+        context->env = w_env;
+        gen_list_eval();
+        )
+with_pre_eval1(gen_list_objectat_col_, context, w_idx, 
         array_object array = context->self.array;
-        cast(index, idx, smallint);
+        cast(index, w_idx, smallint);
         return_from_context(context, array_at(array, index->value));
         )
-
-with_pre_eval0(gen_ast_list_size, context, 
+with_pre_eval0(gen_list_size, context, 
         object size = (object)make_smallint(context->self.array->size);    
         return_from_context(context, size);
         )
 
-define_bootstrapping_type(ast_list, 
+define_bootstrapping_type(list,
     // instance
-    if_selector(EVAL,  ast_list_eval);
-    if_selector(EVAL_, pre_eval_env);
-    // instance array
-    if_selector(OBJECT_AT_,        gen_ast_list_at);
-    if_selector(SIZE,              gen_ast_list_size);,
+    if_selector(EVAL, gen_list_eval);
+    if_selector(EVAL_, gen_list_eval_col_);
+    if_selector(OBJECT_AT_, gen_list_objectat_col_);
+    if_selector(SIZE, gen_list_size);
+,
     // class
-    if (selector.pointer != selector.pointer) { };
-)
-
-// Object creation
-ast_list_object make_ast_list(int size) {
-    ast_list_object result = NEW_ARRAYED(ast_list_object, object, size + 1);
-    header(result)         = (object)woodstock->ast_list_class;
-    result->size           = size;
-    return result;
-}
-
-// Accessors
-int inline ast_list_size(ast_list_object ast_list) {
-    return ast_list->size;
-}
-
-void inline ast_list_check_bounds(ast_list_object ast_list, int index) {
-    error_guard(0 <= index,
-        "InstructionList index out of bounds. (< 0)");
-    error_guard(index < ast_list_size(ast_list),
-        "InstructionList index out of bounds. (> limit)");
-}
-
-object inline raw_ast_list_at(ast_list_object ast_list, int index) {
-    return ast_list->instructions[index];
-}
-
-void inline raw_ast_list_at_put(ast_list_object ast_list, int index, object value) {
-    ast_list->instructions[index] = value;
-}
-
-void inline ast_list_at_put(ast_list_object ast_list, int index, object value) {
-    ast_list_check_bounds(ast_list, index);
-    raw_ast_list_at_put(ast_list, index, value);
-}
-
-// Creation
-preval1(ast_list_new_from_array, value,
-	cast(array_value, value, array);
-    ast_list_object list = make_ast_list(array_value->size);
-	int i;
-	for (i=0; i<array_value->size; ++i) {
-		list->instructions[i] = array_value->values[i];
-	}
-    return_from_context(context, (object)list);
 )

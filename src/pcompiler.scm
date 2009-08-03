@@ -82,11 +82,11 @@
     (if (= (length expressions) 1)
         (transform-expression (car expressions) vars)
   (let* ((size (length expressions))
-         (name (make-var-name "ast_list" 'lambda))
+         (name (make-var-name "list" 'lambda))
          (code (string-append
-                "ast_list_object "
+                "list_object "
                 name
-                " = make_ast_list("
+                " = make_list("
                 (number->string size)
                 ");\n")))
     (let loop ((todo expressions)
@@ -101,7 +101,7 @@
                          (+ idx 1)
                          (string-append prefix pre)
                          (string-append code
-                                        "ast_list_at_put(" name
+                                        "list_at_put(" name
                                         ", " (number->string idx)
                                         ", (object)" c ");\n")
                          (append extravar extravars)))
@@ -472,7 +472,7 @@
     (ast-assign     "scheme_ast_assign_new_from_variable_expression")
     ; (ast-call       "scheme_ast_call_new_from_self_size")
     ; (ast-const      "scheme_ast_const_new_from_object")
-    (ast-list       "scheme_ast_list_new_from_array")
+    ; (ast-list       "scheme_list_new_from_array")
     (ast-scoped     "scheme_ast_scoped_new_from_scope_expression_size")
     (ast-var        "scheme_ast_var_new_from_string")
     (cadr           "scheme_cadr")
