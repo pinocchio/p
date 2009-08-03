@@ -13,11 +13,11 @@
             (begin))))
 
 (let* ((number 42)
-       (const (ast-const number)))
+       (const (Const 'basicNew: number)))
     (assert (= (const 'eval) number)))
 
 (let* ((number 42)
-       (const (ast-const number))
+       (const (Const 'basicNew: number))
        (l (ast-list (vector const))))
     (assert (= (l 'eval) number)))
 
@@ -44,7 +44,7 @@
     (assert (eq? (env2 'fetch:from: 0 e1k) v3)))
 
 (let* ((env1 (env null null 1))
-       (c (ast-const 42))
+       (c (Const 'basicNew: 42))
        (v (ast-var "iv"))
        (assign (Assign 'to:expression: v c)))
     ;(assert (eq? (var 'eval) null))

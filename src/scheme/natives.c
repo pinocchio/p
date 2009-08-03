@@ -71,7 +71,7 @@ preval1(callec, lambda,
     object ec = make_ec();
     context = make_context(lambda, 1);
     context->env = env;
-    set_argument(context, 0, (object)make_ast_const(ec));
+    set_argument(context, 0, (object)make_constant(ec));
     // marker on return_context
     set_argument(return_context(context), 1, ec);
 )
@@ -213,7 +213,7 @@ void bootstrap_scheme() {
     init_op(ast_list_new_from_array);
     init_op(ast_var_new_from_string);
     init_op(ast_scoped_new_from_scope_expression_size);
-    init_op(ast_const_new_from_object);
+    //init_op(ast_const_new_from_object);
     // init_op(ast_call_new_from_self_size);
     // init_op(ast_assign_new_from_variable_expression);
 

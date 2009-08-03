@@ -38,7 +38,7 @@ void print_object(object o) {
         return;
     }
 
-    test_type(ast_const);
+    test_type(constant);
     test_type(assign);
     if (isinstance(o, ast_var)) {
         printf("ast_var(\"%ls\")\n", o.ast_var->name->value);

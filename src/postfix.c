@@ -4,7 +4,7 @@
     object scoped_main;
     eval_in_scope(lambda_1_x, env, scoped_main);
 
-    object const_scoped_main = (object)make_ast_const(scoped_main);
+    object const_scoped_main = (object)make_constant(scoped_main);
 
     call_object maincall = make_ast_call(const_scoped_main, 0);
     

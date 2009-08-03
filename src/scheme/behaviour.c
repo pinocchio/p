@@ -47,10 +47,10 @@ void inline add_switch_scope_code(ast_list_object exp, int position) {
 object ast_scoped_for(object exp, object size) {
     // TODO: optimization: don't wrap ast_scoped in a const.
     // Just don't eval the receiver.
-    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
-    call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
-                                (object)make_ast_const(exp),
-                                (object)make_ast_const(size));
+    constant_object constant = make_constant(woodstock->ast_scoped_class);
+    call_object ast_call3(ast_call, constant, NEW_SIZE_,
+                                (object)make_constant(exp),
+                                (object)make_constant(size));
     ast_call1(ast_call, ast_call, SHIFT);
     return (object)ast_call;
 }
@@ -78,10 +78,10 @@ object inline make_func(array_object arguments, object body) {
     add_switch_scope_code(exp, 0);
     ast_list_at_put(exp, 1, body);
 
-    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
-    call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
-                                (object)make_ast_const((object)exp),
-                                (object)make_ast_const(
+    constant_object constant = make_constant(woodstock->ast_scoped_class);
+    call_object ast_call3(ast_call, constant, NEW_SIZE_,
+                                (object)make_constant((object)exp),
+                                (object)make_constant(
                                     (object)make_smallint(
                                         array_size(arguments))));
     ast_call1(ast_call, ast_call, LAMBDASHIFT);
@@ -112,9 +112,9 @@ object inline make_m(array_object arguments, object body) {
     add_switch_scope_code(exp, argsize - 2);
     ast_list_at_put(exp, argsize - 1, body);
 
-    ast_const_object ast_const = make_ast_const(woodstock->ast_scoped_class);
-    call_object ast_call3(ast_call, ast_const, NEW_SIZE_,
-                            (object)make_ast_const((object)exp),
-                            (object)make_ast_const((object)make_smallint(array_size(arguments))));
+    constant_object constant = make_constant(woodstock->ast_scoped_class);
+    call_object ast_call3(ast_call, constant, NEW_SIZE_,
+                            (object)make_constant((object)exp),
+                            (object)make_constant((object)make_smallint(array_size(arguments))));
     return (object)ast_call;
 }

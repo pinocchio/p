@@ -97,7 +97,7 @@ void scheme##_##name##_##func() {\
 
 
 #define init_op(name)\
-    scheme##_##name = (object)make_ast_const(\
+    scheme##_##name = (object)make_constant(\
                         (object)make_object(0,\
                             (object)make_native(&scheme##_##name##_##func)));
 #define init_direct_op(name)\

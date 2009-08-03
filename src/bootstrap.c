@@ -32,7 +32,7 @@ woodstock_t bootstrap() {
     setup_type(assign);
     setup_type(call);
     setup_type(capture);
-    setup_type(ast_const);
+    setup_type(constant);
     setup_type(ast_list);
     setup_type(ast_scoped);
     setup_type(ast_var);
@@ -57,7 +57,7 @@ woodstock_t bootstrap() {
     woodstock->assign_class         = incomplete_class(assign);
     woodstock->call_class           = incomplete_class(call);
     woodstock->capture_class        = incomplete_class(capture);
-    woodstock->ast_const_class      = incomplete_class(ast_const);
+    woodstock->constant_class       = incomplete_class(constant);
     woodstock->ast_list_class       = incomplete_class(ast_list);
     woodstock->ast_scoped_class     = incomplete_class(ast_scoped);
     woodstock->ast_var_class        = incomplete_class(ast_var);

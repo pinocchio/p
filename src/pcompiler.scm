@@ -377,7 +377,7 @@
                                 (number->string expression)))))
     (list (string-append "object "
                          name
-                         " = (object)make_ast_const((object)make_smallint("
+                         " = (object)make_constant((object)make_smallint("
                          (number->string expression)
                          "));\n") name '())))
 
@@ -392,7 +392,7 @@
   (let ((name (make-var-name "char" 'x)))
     (list (string-append "object "
                          name
-                         " = (object)make_ast_const((object)make_char(L'"
+                         " = (object)make_constant((object)make_char(L'"
                          (make-string 1 expression)
                          "'));\n") name '())))
 
@@ -402,7 +402,7 @@
     (write expression os)
     (list (string-append "object "
                          name
-                         " = (object)make_ast_const((object)make_string(L"
+                         " = (object)make_constant((object)make_string(L"
                         (get-output-string os)
                          "));\n") name '())))
 
@@ -471,7 +471,7 @@
     (>=             "scheme_bigger_equalp")
     (ast-assign     "scheme_ast_assign_new_from_variable_expression")
     ; (ast-call       "scheme_ast_call_new_from_self_size")
-    (ast-const      "scheme_ast_const_new_from_object")
+    ; (ast-const      "scheme_ast_const_new_from_object")
     (ast-list       "scheme_ast_list_new_from_array")
     (ast-scoped     "scheme_ast_scoped_new_from_scope_expression_size")
     (ast-var        "scheme_ast_var_new_from_string")

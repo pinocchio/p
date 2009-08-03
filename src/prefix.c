@@ -10,7 +10,7 @@
 #include <locale.h>
 
 #define import_object(name)\
-    (object)make_ast_const((object)woodstock->name);
+    (object)make_constant((object)woodstock->name);
 
 #define import_class(name)\
     import_object(name##_##class);
@@ -37,7 +37,7 @@ int main () {
     object Assign           = import_class(assign);
     object Call             = import_class(call);
     object Capture          = import_class(capture);
-    object Const            = import_class(ast_const);
+    object Const            = import_class(constant);
     object List             = import_class(ast_list);
     object Scoped           = import_class(ast_scoped);
     object Var              = import_class(ast_var);

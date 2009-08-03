@@ -77,7 +77,7 @@ void inline set_argument(context_object context, int index, object value) {
 }
 
 void inline set_argument_const(context_object context, int index, object value) {
-    raw_array_at_put(&context->arguments, index, (object)make_ast_const(value));
+    raw_array_at_put(&context->arguments, index, (object)make_constant(value));
 }
 
 object inline argument_at(context_object context, int index) {
