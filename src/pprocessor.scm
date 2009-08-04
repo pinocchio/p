@@ -2,13 +2,15 @@
 (load "pcompiler.scm")
 
 (define (fname type name)
-    (string-append "gen_" type "_" (string->code (symbol->string name))))
+    (let ((result
+        (string-append "gen_" type "_" (string->code (symbol->string name)))))
+      (string-lowercase! result)
+      result))
 
 (define (transform-c-method method type)
   (define (transform name args body)
     (let ((f-name (fname type name))
           (symbol (cadr (assoc name symbols))))
-      (string-lowercase! f-name)
       `(,f-name
         ,symbol
         (("with_pre_eval" ,(length args) "(" ,f-name ", context, " ,@(map (lambda (el) `(,el ", ")) args))

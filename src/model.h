@@ -45,7 +45,7 @@ struct smallint;
 struct object;
 struct outfile;
 struct outstream;
-struct runtime_env;
+struct env;
 struct symbol;
 
 struct list;
@@ -81,7 +81,7 @@ typedef struct smallint*         smallint_object;
 typedef struct object*           object_object;
 typedef struct outstream*        outfile_object;
 typedef struct outstream*        outstream_object;
-typedef struct runtime_env*      runtime_env_object;
+typedef struct env*      env_object;
 typedef struct symbol*           string_object;
 typedef struct symbol*           symbol_object;
 typedef void**                   pointer;
@@ -116,7 +116,7 @@ typedef union {
     outfile_object         outfile;
     outstream_object       outstream;
     pointer                pointer;
-    runtime_env_object     env;
+    env_object     env;
     string_object          string;
     symbol_object          symbol;
     transfer_target        target;
@@ -154,7 +154,7 @@ struct woodstock {
     object scoped_class;
     object var_class;
     object class_class;
-    object runtime_env_class;
+    object env_class;
 
     // Classes related to object formats
     declare_metaclass(array);
@@ -174,7 +174,7 @@ struct woodstock {
     declare_metaclass(smallint);
     declare_metaclass(outfile);
     declare_metaclass(outstream);
-    declare_metaclass(runtime_env);
+    declare_metaclass(env);
     declare_metaclass(string);
     declare_metaclass(symbol);
 

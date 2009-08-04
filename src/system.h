@@ -36,6 +36,8 @@
 #include <string.h>
 #include <wchar.h>
 
+#include <scheme/natives.h>
+
 // Globally used functions
 extern void pre_eval_env();
 extern void doesnotunderstand(const wchar_t* class, object selector);
@@ -233,6 +235,11 @@ extern int ensure(int condition, const wchar_t* format, const char* file, unsign
     set_callarg(name, 1, (object)arg1);\
     set_callarg(name, 2, (object)arg2);\
     set_callarg(name, 3, (object)arg3);
+
+
+#define empty_env\
+    make_env((object)woodstock->nil,\
+             (object)woodstock->nil, 0)
 
 // =============================================================================
 

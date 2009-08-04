@@ -211,11 +211,10 @@ void bootstrap_scheme() {
     woodstock->error = scheme_error;
 
     // init_op(list_new_from_array);
-    //init_op(ast_var_new_from_string);
+    // init_op(ast_var_new_from_string);
     // init_op(scoped_new_from_scope_expression_size);
-    //init_op(ast_const_new_from_object);
+    // init_op(ast_const_new_from_object);
     // init_op(ast_call_new_from_self_size);
     // init_op(ast_assign_new_from_variable_expression);
-
-    init_op(env_new_from_id_parent_size);
+    // init_op(env_new_from_id_parent_size);
 }

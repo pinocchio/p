@@ -14,12 +14,12 @@
 
         // TODO should be subscope of self, rather than env
         // Optimization, avoid const rewrapping if type is known
-        if (isinstance(w_env, runtime_env)) {
+        if (isinstance(w_env, env)) {
             context->self = w_env;
             set_argument(context, 1,
                 (object)make_smallint(self->argsize + 1)); // + scoped
             set_argument(context, 2, self->expression);
-            env_subscope_do();
+            gen_env_subscope_col_key_col__do();
         } else {
             new_target(context, w_env);
             context->env = w_env;

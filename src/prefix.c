@@ -20,9 +20,9 @@ int main () {
 
     setlocale(LC_ALL, "");
 
-    runtime_env_object env = empty_env;
+    env_object env = empty_env;
 
-    object Env              = import_class(runtime_env);
+    object Env              = import_class(env);
     object IFixed           = import_class(class); 
     object String           = import_class(string);
     object Symbol           = import_class(symbol);

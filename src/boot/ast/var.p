@@ -7,12 +7,12 @@
 
         context = make_empty_context(4);
         // Optimization, avoid const rewrapping if type is known
-        if (isinstance(env, runtime_env)) {
+        if (isinstance(env, env)) {
             context->self = env;
             set_argument(context, 1, value);
             set_argument(context, 2, (object)self->index);
             set_argument(context, 3, self->scope);
-            env_store_at_in_do();
+            gen_env_store_col_at_col_in_col__do();
         } else {
             new_target(context, env);
             context->env = env;

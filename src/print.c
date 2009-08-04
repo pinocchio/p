@@ -49,7 +49,7 @@ void print_object(object o) {
     test_type(scoped);
     test_type(object);
     test_type(dictionary);
-    test_type(runtime_env);
+    test_type(env);
     if (isinstance(o, array)) {
         printf("array(%i) [\n", array_size(o.array));
         int i;

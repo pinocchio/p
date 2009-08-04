@@ -45,14 +45,14 @@ woodstock_t bootstrap() {
     setup_type(smallint);
     setup_type(outfile);
     setup_type(outstream);
-    setup_type(runtime_env);
+    setup_type(env);
     setup_type(string);
     setup_type(symbol);
 
     woodstock->array_class          = incomplete_class(array);
     woodstock->chr_class            = incomplete_class(chr);
     woodstock->dictionary_class     = incomplete_class(dictionary);
-    woodstock->runtime_env_class    = incomplete_class(runtime_env);
+    woodstock->env_class            = incomplete_class(env);
     woodstock->class_class          = incomplete_class(class);
     woodstock->assign_class         = incomplete_class(assign);
     woodstock->call_class           = incomplete_class(call);
