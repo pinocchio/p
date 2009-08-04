@@ -9,7 +9,7 @@ void inline init_args(list_object exp,
     int todo = array_size(arguments);
     int i;                 
     for (i = 0; i < todo; i++) {
-        ast_var_object variable = array_at(arguments, i).ast_var;
+        var_object variable = array_at(arguments, i).var;
         variable->index      = make_smallint(i + toskip);
         variable->scope      = (object) exp;
     }                      
@@ -26,7 +26,7 @@ void inline add_eval_args_code(list_object exp,
     // varN = (varN eval: (env parent))
     int i;                 
     for (i = toskip; i < todo; i++) {
-        ast_var_object variable = array_at(arguments, i).ast_var;
+        var_object variable = array_at(arguments, i).var;
         ast_call2(arg_eval, variable, EVAL_, parent_env);
         list_at_put(exp, i - toskip,
             (object)make_ast_assign((object)variable, (object)arg_eval));
@@ -34,7 +34,7 @@ void inline add_eval_args_code(list_object exp,
 }                          
                            
 void inline add_switch_scope_code(list_object exp, int position) {
-    ast_var_object receiver_var = make_ast_var(L"switchvar");
+    var_object receiver_var = make_ast_var(L"switchvar");
     receiver_var->scope = (object)exp;
                            
     call_object ast_call1(self_scope, receiver_var, SCOPE);

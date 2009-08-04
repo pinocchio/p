@@ -35,7 +35,7 @@ woodstock_t bootstrap() {
     setup_type(constant);
     setup_type(list);
     setup_type(scoped);
-    setup_type(ast_var);
+    setup_type(var);
     setup_type(chr);
     setup_type(dictionary);
     setup_type(object);
@@ -60,7 +60,7 @@ woodstock_t bootstrap() {
     woodstock->constant_class       = incomplete_class(constant);
     woodstock->list_class           = incomplete_class(list);
     woodstock->scoped_class         = incomplete_class(scoped);
-    woodstock->ast_var_class        = incomplete_class(ast_var);
+    woodstock->var_class            = incomplete_class(var);
     woodstock->infile_class         = incomplete_class(infile);
     woodstock->instream_class       = incomplete_class(instream);
     woodstock->smallint_class       = incomplete_class(smallint);

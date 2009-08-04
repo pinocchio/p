@@ -52,7 +52,7 @@ TODO! Fix tests
 
 (let* ((env1 (env null null 1))
        (c (Const 'basicNew: 42))
-       (v (ast-var "iv"))
+       (v (Var 'basicNew: "iv"))
        (assign (Assign 'to:expression: v c)))
     ;(assert (eq? (var 'eval) null))
     ;TODO to be fixed

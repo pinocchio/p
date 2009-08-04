@@ -40,8 +40,8 @@ void print_object(object o) {
 
     test_type(constant);
     test_type(assign);
-    if (isinstance(o, ast_var)) {
-        printf("ast_var(\"%ls\")\n", o.ast_var->name->value);
+    if (isinstance(o, var)) {
+        printf("var(\"%ls\")\n", o.var->name->value);
         return;
     }
     test_type(call);

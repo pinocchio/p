@@ -64,23 +64,23 @@ SETUP(test_object_object)
     }
 }
 
-SETUP(test_transfer_empty_ast_list)
+SETUP(test_transfer_empty_list)
 
-    ast_list_object ast_list = make_ast_list(0);
+    list_object list = make_list(0);
 
-    context_object make_eval_context(ci, ast_list, woodstock->nil);
+    context_object make_eval_context(ci, list, woodstock->nil);
     transfer();
 }
 
-SETUP(test_transfer_empty_ast_list_in_ast_list)
+SETUP(test_transfer_empty_list_in_list)
 
-    ast_list_object ast_list  = make_ast_list(2);
-    ast_list_object ast_list2 = make_ast_list(0);
+    list_object list  = make_list(2);
+    list_object list2 = make_list(0);
 
-    ast_list_at_put(ast_list, 0, (object)ast_list2);
-    ast_list_at_put(ast_list, 1, (object)ast_list2);
+    list_at_put(list, 0, (object)list2);
+    list_at_put(list, 1, (object)list2);
 
-    context_object make_eval_context(ci, ast_list, woodstock->nil);
+    context_object make_eval_context(ci, list, woodstock->nil);
 
     transfer();
 }
@@ -97,15 +97,15 @@ SETUP(test_transfer_constant)
     assert(result.pointer == v.pointer);
 }
 
-SETUP(test_return_of_ast_list)
+SETUP(test_return_of_list)
 
     object v = (object)make_smallint(42);
     constant_object constant = make_constant(v);
-    ast_list_object ast_list = make_ast_list(1);
+    list_object list = make_list(1);
 
-    ast_list_at_put(ast_list, 0, (object)constant);
+    list_at_put(list, 0, (object)constant);
 
-    context_object make_eval_context(ci, ast_list, woodstock->nil);
+    context_object make_eval_context(ci, list, woodstock->nil);
 
     object result = transfer();
 
@@ -182,16 +182,16 @@ SETUP(test_env_lookup)
 
 }
 
-SETUP(test_ast_assign_ast_var)
+SETUP(test_ast_assign_var)
 
     runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v = (object)make_smallint(42);
     constant_object constant = make_constant(v);
-    ast_var_object ast_var = make_ast_var(L"iv");
+    var_object var = make_ast_var(L"iv");
 
-    assign_object ast_assign = make_ast_assign((object)ast_var, (object)constant);
+    assign_object ast_assign = make_ast_assign((object)var, (object)constant);
 
     context_object make_eval_context(ci, ast_assign, k);
 
@@ -200,22 +200,22 @@ SETUP(test_ast_assign_ast_var)
     assert(env_at(k, 0).pointer == v.pointer);
 }
 
-SETUP(test_ast_var_read)
+SETUP(test_var_read)
 
     runtime_env_object k = make_env((object)woodstock->nil,
                             (object)woodstock->nil,
                             1);
     object v                   = (object)make_smallint(42);
     constant_object constant = make_constant(v);
-    ast_var_object ast_var     = make_ast_var(L"iv");
+    var_object var     = make_ast_var(L"iv");
 
-    assign_object ast_assign = make_ast_assign((object)ast_var, (object)constant);
+    assign_object ast_assign = make_ast_assign((object)var, (object)constant);
 
     context_object make_eval_context(ci, ast_assign, k);
 
     transfer();
 
-    make_eval_context(ci, ast_var, k);
+    make_eval_context(ci, var, k);
 
     object result = transfer();
 
@@ -252,9 +252,9 @@ SETUP(test_ast_call)
     assert(scheme_list_at(ast_call->arguments, 0).smallint->value == 6);
 }
 
-SETUP(test_new_ast_scoped)
+SETUP(test_new_scoped)
 
-    constant_object constant = make_constant(woodstock->ast_scoped_class);
+    constant_object constant = make_constant(woodstock->scoped_class);
 
     object v = (object)make_smallint(5);
     object exp = (object)make_constant(v);
@@ -275,20 +275,20 @@ SETUP(test_new_ast_scoped)
 
     object result = transfer();
     
-    ast_scoped_object iscope = object_at(result.object, 0).ast_scoped;
+    scoped_object iscope = object_at(result.object, 0).scoped;
 
     object level_shifter = header(result.pointer);
     assert(level_shifter.native->target.target == &shift_level);
 
-    assert(pheader(iscope) == woodstock->ast_scoped_class.pointer);
+    assert(pheader(iscope) == woodstock->scoped_class.pointer);
     assert(iscope->expression.pointer == exp.pointer);
     assert(iscope->scope.env == start);
 
 }
 
-SETUP(test_eval_ast_scoped)
+SETUP(test_eval_scoped)
 
-    constant_object constant = make_constant(woodstock->ast_scoped_class);
+    constant_object constant = make_constant(woodstock->scoped_class);
 
     object v = (object)make_smallint(5);
     object exp = (object)make_constant(v);
@@ -310,7 +310,7 @@ SETUP(test_eval_ast_scoped)
 
     object result = transfer();
 
-    ast_scoped_object iscope = result.ast_scoped;
+    scoped_object iscope = result.scoped;
 
     constant->constant = (object)iscope;
     ast_call = make_ast_call((object)constant, 0);
@@ -388,15 +388,15 @@ SETUP(test_make_function_no_args)
 
     object result = transfer();
 
-    ast_scoped_object iscope = object_at(result.object, 0).ast_scoped;
-    assert(pheader(iscope) == woodstock->ast_scoped_class.pointer);
+    scoped_object iscope = object_at(result.object, 0).scoped;
+    assert(pheader(iscope) == woodstock->scoped_class.pointer);
     assert(iscope->scope.env == env);
 
 }
 
-SETUP(test_ast_list_pass_context)
+SETUP(test_list_pass_context)
 
-    ast_list_object ast_list = make_ast_list(1);
+    list_object list = make_list(1);
     runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
@@ -406,9 +406,9 @@ SETUP(test_ast_list_pass_context)
     call_object ast_call = make_ast_call(woodstock->ast_capture, 1);
     set_callmsg(ast_call, PARENT);
 
-    ast_list_at_put(ast_list, 0, (object)ast_call);
+    list_at_put(list, 0, (object)ast_call);
 
-    context_object make_eval_context(ci, ast_list, env2);
+    context_object make_eval_context(ci, list, env2);
 
     object result = transfer();
     
@@ -451,14 +451,14 @@ SETUP(test_make_function_1_arg)
 
 
 
-    ast_var_object ast_var = make_ast_var(L"iv");
+    var_object var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ast_var);
+    array_at_put(arguments, 0, (object)var);
 
     object constant_function =
         make_func(arguments,
                     (object)
-                    ast_var
+                    var
                   );
 
     context_object make_eval_context(ci, constant_function, env);
@@ -473,14 +473,14 @@ SETUP(test_eval_function_1_arg)
 
 
 
-    ast_var_object ast_var = make_ast_var(L"iv");
+    var_object var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ast_var);
+    array_at_put(arguments, 0, (object)var);
 
     object constant_function =
         make_func(arguments,
                     (object)
-                    ast_var
+                    var
                   );
 
     context_object make_eval_context(ci, constant_function, env);
@@ -505,14 +505,14 @@ SETUP(test_eval_nested_function)
     runtime_env_object env = make_env((object)woodstock->nil,
                               (object)woodstock->nil, 0);
 
-    ast_var_object ast_var = make_ast_var(L"iv");
+    var_object var = make_ast_var(L"iv");
     array_object arguments = make_array(1);
-    array_at_put(arguments, 0, (object)ast_var);
+    array_at_put(arguments, 0, (object)var);
 
     object constant_function1 =
         make_func(make_array(0),
                     (object)
-                    ast_var
+                    var
                   );
 
     object constant_function = make_func(arguments, constant_function1);
@@ -556,89 +556,89 @@ object create_class_dispatch() {
 */
 define_symbol(SYMBOL_doesNotUnderstand, L"DNU");
 object null         = (object)make_constant((object)woodstock->nil);
-object ast_var_3_self = (object)make_ast_var(L"self");
-object ast_var_4_env = (object)make_ast_var(L"env");
-object ast_var_5_args = (object)make_ast_var(L"args");
-object ast_var_7_msg = (object)make_ast_var(L"msg");
+object var_3_self = (object)make_ast_var(L"self");
+object var_4_env = (object)make_ast_var(L"env");
+object var_5_args = (object)make_ast_var(L"args");
+object var_7_msg = (object)make_ast_var(L"msg");
 object number_9_0 = (object)make_constant((object)make_smallint(0));
-call_object ast_call_10_ast_var_5_args = make_ast_call((object)ast_var_5_args, 3);
-set_callarg(ast_call_10_ast_var_5_args, 0, (object)OBJECT_AT_PUT_);
-set_callarg(ast_call_10_ast_var_5_args, 1, (object)number_9_0);
-set_callarg(ast_call_10_ast_var_5_args, 2, (object)ast_var_3_self);
-object ast_var_12_loop = (object)make_ast_var(L"loop");
-object ast_var_16_class = (object)make_ast_var(L"class");
+call_object ast_call_10_var_5_args = make_ast_call((object)var_5_args, 3);
+set_callarg(ast_call_10_var_5_args, 0, (object)OBJECT_AT_PUT_);
+set_callarg(ast_call_10_var_5_args, 1, (object)number_9_0);
+set_callarg(ast_call_10_var_5_args, 2, (object)var_3_self);
+object var_12_loop = (object)make_ast_var(L"loop");
+object var_16_class = (object)make_ast_var(L"class");
 call_object ast_call_17_scheme_eqp = make_ast_call((object)scheme_eqp, 2);
-set_callarg(ast_call_17_scheme_eqp, 0, (object)ast_var_16_class);
+set_callarg(ast_call_17_scheme_eqp, 0, (object)var_16_class);
 set_callarg(ast_call_17_scheme_eqp, 1, (object)null);
-call_object ast_call_18_ast_var_3_self = make_ast_call((object)ast_var_3_self, 4);
-set_callarg(ast_call_18_ast_var_3_self, 0, (object)SYMBOL_doesNotUnderstand);
-set_callarg(ast_call_18_ast_var_3_self, 1, (object)ast_var_7_msg);
-set_callarg(ast_call_18_ast_var_3_self, 2, (object)ast_var_4_env);
-set_callarg(ast_call_18_ast_var_3_self, 3, (object)ast_var_5_args);
-object ast_var_20_amethod = (object)make_ast_var(L"amethod");
+call_object ast_call_18_var_3_self = make_ast_call((object)var_3_self, 4);
+set_callarg(ast_call_18_var_3_self, 0, (object)SYMBOL_doesNotUnderstand);
+set_callarg(ast_call_18_var_3_self, 1, (object)var_7_msg);
+set_callarg(ast_call_18_var_3_self, 2, (object)var_4_env);
+set_callarg(ast_call_18_var_3_self, 3, (object)var_5_args);
+object var_20_amethod = (object)make_ast_var(L"amethod");
 call_object ast_call_21_scheme_eqp = make_ast_call((object)scheme_eqp, 2);
-set_callarg(ast_call_21_scheme_eqp, 0, (object)ast_var_20_amethod);
+set_callarg(ast_call_21_scheme_eqp, 0, (object)var_20_amethod);
 set_callarg(ast_call_21_scheme_eqp, 1, (object)null);
 object number_22_0 = (object)make_constant((object)make_smallint(0));
-call_object ast_call_23_ast_var_16_class = make_ast_call((object)ast_var_16_class, 2);
-set_callarg(ast_call_23_ast_var_16_class, 0, (object)OBJECT_AT_);
-set_callarg(ast_call_23_ast_var_16_class, 1, (object)number_22_0);
-call_object ast_call_24_ast_var_12_loop = make_ast_call((object)ast_var_12_loop, 1);
-set_callarg(ast_call_24_ast_var_12_loop, 0, (object)ast_call_23_ast_var_16_class);
-call_object ast_call_25_ast_var_20_amethod = make_ast_call((object)ast_var_20_amethod, 3);
-set_callarg(ast_call_25_ast_var_20_amethod, 0, (object)APPLY_IN_);
-set_callarg(ast_call_25_ast_var_20_amethod, 1, (object)ast_var_5_args);
-set_callarg(ast_call_25_ast_var_20_amethod, 2, (object)ast_var_4_env);
+call_object ast_call_23_var_16_class = make_ast_call((object)var_16_class, 2);
+set_callarg(ast_call_23_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_23_var_16_class, 1, (object)number_22_0);
+call_object ast_call_24_var_12_loop = make_ast_call((object)var_12_loop, 1);
+set_callarg(ast_call_24_var_12_loop, 0, (object)ast_call_23_var_16_class);
+call_object ast_call_25_var_20_amethod = make_ast_call((object)var_20_amethod, 3);
+set_callarg(ast_call_25_var_20_amethod, 0, (object)APPLY_IN_);
+set_callarg(ast_call_25_var_20_amethod, 1, (object)var_5_args);
+set_callarg(ast_call_25_var_20_amethod, 2, (object)var_4_env);
 call_object ast_call_26_ast_call_21_scheme_eqp = make_ast_call((object)ast_call_21_scheme_eqp, 2);
-set_callarg(ast_call_26_ast_call_21_scheme_eqp, 0, (object)ast_call_24_ast_var_12_loop);
-set_callarg(ast_call_26_ast_call_21_scheme_eqp, 1, (object)ast_call_25_ast_var_20_amethod);
+set_callarg(ast_call_26_ast_call_21_scheme_eqp, 0, (object)ast_call_24_var_12_loop);
+set_callarg(ast_call_26_ast_call_21_scheme_eqp, 1, (object)ast_call_25_var_20_amethod);
 array_object array_27_lambda_19_x = make_array(1);
-array_at_put(array_27_lambda_19_x, 0, ast_var_20_amethod);
+array_at_put(array_27_lambda_19_x, 0, var_20_amethod);
 object lambda_19_x = make_func(array_27_lambda_19_x, (object)ast_call_26_ast_call_21_scheme_eqp);
 object number_28_1 = (object)make_constant((object)make_smallint(1));
-call_object ast_call_29_ast_var_16_class = make_ast_call((object)ast_var_16_class, 2);
-set_callarg(ast_call_29_ast_var_16_class, 0, (object)OBJECT_AT_);
-set_callarg(ast_call_29_ast_var_16_class, 1, (object)number_28_1);
-call_object ast_call_30_ast_call_29_ast_var_16_class = make_ast_call((object)ast_call_29_ast_var_16_class, 2);
-set_callarg(ast_call_30_ast_call_29_ast_var_16_class, 0, (object)OBJECT_AT_);
-set_callarg(ast_call_30_ast_call_29_ast_var_16_class, 1, (object)ast_var_7_msg);
+call_object ast_call_29_var_16_class = make_ast_call((object)var_16_class, 2);
+set_callarg(ast_call_29_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_29_var_16_class, 1, (object)number_28_1);
+call_object ast_call_30_ast_call_29_var_16_class = make_ast_call((object)ast_call_29_var_16_class, 2);
+set_callarg(ast_call_30_ast_call_29_var_16_class, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_30_ast_call_29_var_16_class, 1, (object)var_7_msg);
 call_object ast_call_31_lambda_19_x = make_ast_call((object)lambda_19_x, 1);
-set_callarg(ast_call_31_lambda_19_x, 0, (object)ast_call_30_ast_call_29_ast_var_16_class);
+set_callarg(ast_call_31_lambda_19_x, 0, (object)ast_call_30_ast_call_29_var_16_class);
 call_object ast_call_32_ast_call_17_scheme_eqp = make_ast_call((object)ast_call_17_scheme_eqp, 2);
-set_callarg(ast_call_32_ast_call_17_scheme_eqp, 0, (object)ast_call_18_ast_var_3_self);
+set_callarg(ast_call_32_ast_call_17_scheme_eqp, 0, (object)ast_call_18_var_3_self);
 set_callarg(ast_call_32_ast_call_17_scheme_eqp, 1, (object)ast_call_31_lambda_19_x);
 array_object array_33_lambda_15_x = make_array(1);
-array_at_put(array_33_lambda_15_x, 0, ast_var_16_class);
+array_at_put(array_33_lambda_15_x, 0, var_16_class);
 object lambda_15_x = make_func(array_33_lambda_15_x, (object)ast_call_32_ast_call_17_scheme_eqp);
-assign_object ast_assign_14_x = make_ast_assign(ast_var_12_loop, (object)lambda_15_x);
-call_object ast_call_34_ast_var_3_self = make_ast_call((object)ast_var_3_self, 1);
-set_callarg(ast_call_34_ast_var_3_self, 0, (object)DELEGATE);
-call_object ast_call_35_ast_var_12_loop = make_ast_call((object)ast_var_12_loop, 1);
-set_callarg(ast_call_35_ast_var_12_loop, 0, (object)ast_call_34_ast_var_3_self);
-ast_list_object ast_list_13_lambda = make_ast_list(2);
-ast_list_at_put(ast_list_13_lambda, 0, (object)ast_assign_14_x);
-ast_list_at_put(ast_list_13_lambda, 1, (object)ast_call_35_ast_var_12_loop);
+assign_object ast_assign_14_x = make_ast_assign(var_12_loop, (object)lambda_15_x);
+call_object ast_call_34_var_3_self = make_ast_call((object)var_3_self, 1);
+set_callarg(ast_call_34_var_3_self, 0, (object)DELEGATE);
+call_object ast_call_35_var_12_loop = make_ast_call((object)var_12_loop, 1);
+set_callarg(ast_call_35_var_12_loop, 0, (object)ast_call_34_var_3_self);
+list_object list_13_lambda = make_list(2);
+list_at_put(list_13_lambda, 0, (object)ast_assign_14_x);
+list_at_put(list_13_lambda, 1, (object)ast_call_35_var_12_loop);
 array_object array_36_lambda_11_x = make_array(1);
-array_at_put(array_36_lambda_11_x, 0, ast_var_12_loop);
-object lambda_11_x = make_func(array_36_lambda_11_x, (object)ast_list_13_lambda);
+array_at_put(array_36_lambda_11_x, 0, var_12_loop);
+object lambda_11_x = make_func(array_36_lambda_11_x, (object)list_13_lambda);
 call_object ast_call_37_lambda_11_x = make_ast_call((object)lambda_11_x, 1);
 set_callarg(ast_call_37_lambda_11_x, 0, (object)null);
-ast_list_object ast_list_8_lambda = make_ast_list(2);
-ast_list_at_put(ast_list_8_lambda, 0, (object)ast_call_10_ast_var_5_args);
-ast_list_at_put(ast_list_8_lambda, 1, (object)ast_call_37_lambda_11_x);
+list_object list_8_lambda = make_list(2);
+list_at_put(list_8_lambda, 0, (object)ast_call_10_var_5_args);
+list_at_put(list_8_lambda, 1, (object)ast_call_37_lambda_11_x);
 array_object array_38_lambda_6_x = make_array(1);
-array_at_put(array_38_lambda_6_x, 0, ast_var_7_msg);
-object lambda_6_x = make_func(array_38_lambda_6_x, (object)ast_list_8_lambda);
+array_at_put(array_38_lambda_6_x, 0, var_7_msg);
+object lambda_6_x = make_func(array_38_lambda_6_x, (object)list_8_lambda);
 object number_39_0 = (object)make_constant((object)make_smallint(0));
-call_object ast_call_40_ast_var_5_args = make_ast_call((object)ast_var_5_args, 2);
-set_callarg(ast_call_40_ast_var_5_args, 0, (object)OBJECT_AT_);
-set_callarg(ast_call_40_ast_var_5_args, 1, (object)number_39_0);
+call_object ast_call_40_var_5_args = make_ast_call((object)var_5_args, 2);
+set_callarg(ast_call_40_var_5_args, 0, (object)OBJECT_AT_);
+set_callarg(ast_call_40_var_5_args, 1, (object)number_39_0);
 call_object ast_call_41_lambda_6_x = make_ast_call((object)lambda_6_x, 1);
-set_callarg(ast_call_41_lambda_6_x, 0, (object)ast_call_40_ast_var_5_args);
+set_callarg(ast_call_41_lambda_6_x, 0, (object)ast_call_40_var_5_args);
 array_object array_42_lambda_2_x = make_array(3);
-array_at_put(array_42_lambda_2_x, 0, ast_var_3_self);
-array_at_put(array_42_lambda_2_x, 1, ast_var_4_env);
-array_at_put(array_42_lambda_2_x, 2, ast_var_5_args);
+array_at_put(array_42_lambda_2_x, 0, var_3_self);
+array_at_put(array_42_lambda_2_x, 1, var_4_env);
+array_at_put(array_42_lambda_2_x, 2, var_5_args);
 return make_dispatch(array_42_lambda_2_x, (object)ast_call_41_lambda_6_x);
 }
 
@@ -817,8 +817,8 @@ SETUP(test_ifixed_dispatch)
 
     ast_call1(ast_call, make_constant(instance), BASICNEW);
     make_eval_context(ci, ast_call, env);
-    // assure that the return type is of ast_var
-    cast(var, transfer(), ast_var); 
+    // assure that the return type is of var
+    cast(var, transfer(), var); 
 }
 
 
@@ -827,21 +827,21 @@ int main() {
     test_array();
     test_string_equals();
     test_object_object();
-    test_transfer_empty_ast_list();
-    test_transfer_empty_ast_list_in_ast_list();
+    test_transfer_empty_list();
+    test_transfer_empty_list_in_list();
     test_transfer_constant();
-    test_return_of_ast_list();
+    test_return_of_list();
     test_env_lookup();
-    test_ast_assign_ast_var();
-    test_ast_var_read();
+    test_ast_assign_var();
+    test_var_read();
     // test_ast_call(); // currently broken
-    test_new_ast_scoped();
-    test_eval_ast_scoped();
+    test_new_scoped();
+    test_eval_scoped();
     test_ast_capture();
     test_env_parent();
     test_capture_parent();
     test_make_function_no_args();
-    test_ast_list_pass_context();
+    test_list_pass_context();
     test_eval_function_no_args();
     test_make_function_1_arg();
     test_eval_function_1_arg();

@@ -474,7 +474,7 @@
     ; (ast-const      "scheme_ast_const_new_from_object")
     ; (ast-list       "scheme_list_new_from_array")
     (ast-scoped     "scheme_ast_scoped_new_from_scope_expression_size")
-    (ast-var        "scheme_ast_var_new_from_string")
+    ; (ast-var        "scheme_var_new_from_string")
     (cadr           "scheme_cadr")
     (callec         "scheme_callec")
     (car            "scheme_car")

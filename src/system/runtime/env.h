@@ -1,6 +1,7 @@
 #ifndef SYSTEM_ENV_H
 #define SYSTEM_ENV_H
 
+#include <scheme/natives.h>
 #include <system/type/type.h>
 export_type(runtime_env);
 

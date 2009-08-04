@@ -40,7 +40,7 @@ int main () {
     object Const            = import_class(constant);
     object List             = import_class(list);
     object Scoped           = import_class(scoped);
-    object Var              = import_class(ast_var);
+    object Var              = import_class(var);
     object InputFile        = import_class(infile);
     object OutputFile       = import_class(outfile);
 
