@@ -35,11 +35,11 @@ void shift_level() {
     pop_context();
     context = make_empty_context(2);
     context->env = env;
-    if (isinstance(dispatch, ast_scoped)) {
+    if (isinstance(dispatch, scoped)) {
         context->self = dispatch;
         set_argument(context, 1, (object)arguments);
         set_argument(context, 2, env);
-        ast_scoped_apply_in_do();
+        gen_scoped_apply_col_in_col__do();
     } else {
         new_target(context, dispatch);
         set_message(context, APPLY_IN_);

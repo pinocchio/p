@@ -1,9 +1,12 @@
 (require (lib "mzlib/string"))
 (load "pcompiler.scm")
 
+(define (fname type name)
+    (string-append "gen_" type "_" (string->code (symbol->string name))))
+
 (define (transform-c-method method type)
   (define (transform name args body)
-    (let ((f-name (string-append "gen_" type "_" (string->code (symbol->string name))))
+    (let ((f-name (fname type name))
           (symbol (cadr (assoc name symbols))))
       (string-lowercase! f-name)
       `(,f-name
@@ -20,12 +23,13 @@
          (location (build-path "system" package)))
     (string-uppercase! hname)
     (string-lowercase! sname)
+    (string-uppercase! package)
     (let ((tr-inst (map (lambda (el) (transform-c-method el sname)) f-inst))
           (tr-class (map (lambda (el) (transform-c-method el sname)) f-class))
           (hof (build-path location (string-append sname ".h")))
           (cof (build-path location (string-append sname ".c"))))
-      (let ((header `(("#ifndef SYSTEM_" ,hname "_H")
-                      ("#define SYSTEM_" ,hname "_H")
+      (let ((header `(("#ifndef SYSTEM_" ,package "_" ,hname "_H")
+                      ("#define SYSTEM_" ,package "_" ,hname "_H")
                        ""
                        ("extern void " ,sname "_dispatch();")
                        ("extern void " ,sname "_stub_dispatch();")
@@ -33,6 +37,11 @@
                        ("extern void " ,sname "_class_stub_dispatch();")
                        ""
                        ,@(map (lambda (h) `("extern " ,(car h) ";")) f-helper)
+                       ""
+                       ,@(map (lambda (m)
+                            (string-append "extern void "
+                                            (fname sname (car m)) "_do();"))
+                            f-inst)
                        ""
                        ("struct " ,sname " {")
                        ,@(map (lambda (l)
@@ -42,7 +51,7 @@
                                    ,(car l) ";")) layout)
                        "};"
                        ""
-                       ("#endif // SYSTEM_" ,hname "_H")
+                       ("#endif // SYSTEM_" ,package "_" ,hname "_H")
                        ))
             (body `("#include <system.h>"
                     "#include <thread.h>"

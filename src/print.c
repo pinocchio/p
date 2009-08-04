@@ -46,7 +46,7 @@ void print_object(object o) {
     }
     test_type(call);
     test_type(list);
-    test_type(ast_scoped);
+    test_type(scoped);
     test_type(object);
     test_type(dictionary);
     test_type(runtime_env);
