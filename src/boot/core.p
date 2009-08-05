@@ -298,10 +298,27 @@
                    (AFile (make_empty_subclass Object 'AbstractFile))
                    (IFile (make_empty_subclass AFile 'InputFile))
                    (OFile (make_empty_subclass AFile 'OutputFile))
-                   (Stringc (make_empty_subclass ArCol 'String))
                    (Evaluatable (make_empty_subclass Object 'Evaluatable)))
 
-                (String      'dispatch:delegate: objdisp Stringc)
+                (String      'dispatch:delegate: objdisp 
+                    (newclass String ArCol () ()
+                        ((= (self super aString) 
+                            (let ((string (aString 'asString)))
+                                (if (eq? string aString)
+                                    (if (= (self 'size) (aString 'size))
+                                        (let loop ((idx 0))
+                                            (if (= idx (self 'size))
+                                                #t
+                                                (if (char= (self 'objectAt: idx) 
+                                                           (aString 'objectAt: idx))
+                                                  (loop (+ idx 1))
+                                                  #f)))
+                                        #f)
+                                    #f))
+                            )
+                          (asString (self super) self)
+                          (isSymbol (self super) #f))
+                        ()))
                 (load "boot/type/symbol.p")
                 ; inject class in the incomplete_type_classes
                 ;            incomplete class  super class  class name

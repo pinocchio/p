@@ -75,7 +75,8 @@
 (Symbol 'dispatch:delegate: 
         objdisp 
         (newclass Symbol String () (SymbolTable)
-            ((asSymbol (self super) self))
+            ((asSymbol (self super) self)
+             (isSymbol (self super) #t))
             ((SymbolTable (self super) (self 'objectAt: 2))
              (SymbolTable: (self super new) (self 'objectAt:put: 2 new)))
              ))
@@ -125,6 +126,12 @@
                          (initialize (self super)
                             (self 'symbols: (Array 'basicNew: 128))
                             self)
+                         (= (self super aSymbol)
+                            (if (eq? self aSymbol)
+                              #t
+                              (if (eq? (self 'class) (aSymbol 'class))
+                                #f
+                                (super (vector '= aSymbol)))))
                          )
                         ())))
         (Symbol 'SymbolTable: (SymbolTable 'new))
