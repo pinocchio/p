@@ -117,7 +117,7 @@ define_bootstrapping_type(instream,
 
 define_bootstrapping_type(outstream,
     // instance
-    if_selector(WRITE_CHAR_,    outstream_write);,
+    if_selector(WRITECHAR_,    outstream_write);,
     // class
     if (selector.pointer != selector.pointer) {}
 )

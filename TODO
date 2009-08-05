@@ -1,17 +1,20 @@
+Cleanup
+-------
+- move asSymbol from String to Object
+- move all core classes to separate files
+
 Architecture
 ------------
-- Input stream mind UTF8 (see file.c)
 - finish peg
-- Think about a symbol table in general. And give symbols a different class.
+- Think about a symbol table in general. 
     - make sure symbols are still known to the runtime.
-- replace error guard text messages with message objects
 - make ast classes extendable (a class for each type)
-- subscope of iscoped>>scope rather than the passed env
+- replace error guard text messages with message objects
 - figure out a good way of writing scheme natives in terms of message
   sends -> better than the current "native()" approach
 - setup a scheme REPL with access to the system
-- import smalltalk parser written in scheme or compile to our C format
-  from within smalltalk (some peg...)
+- subscope of iscoped>>scope rather than the passed env
+- stderr stream
 
 Primitives
 ----------
@@ -26,9 +29,7 @@ Roadmap
 
 VM Optimizations
 ----------------
-- Inline env->values in env for faster alloc. Maybe even make env-stack
-- Make the argument evaluation of lambdas part of the C-system rather than
-  meta-circular
+- Inline env->values in env for faster alloc. 
 
 Language Hacks
 --------------

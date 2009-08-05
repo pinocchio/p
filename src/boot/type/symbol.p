@@ -135,5 +135,6 @@
                          )
                         ())))
         (Symbol 'SymbolTable: (SymbolTable 'new))
+        ((Symbol 'SymbolTable) 'symbols: _symbols_)
 (load "boot/test/test-symbol.p") 
 )

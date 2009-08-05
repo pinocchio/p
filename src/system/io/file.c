@@ -28,7 +28,7 @@ define_bootstrapping_type(infile,
 
 define_bootstrapping_type(outfile,
     // instance
-    if_selector(WRITE_CHAR_,    outstream_write);,
+    if_selector(WRITECHAR_,    outstream_write);,
     // class
     if_selector(ON_,       outfile_open);
 )

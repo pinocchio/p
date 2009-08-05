@@ -514,6 +514,7 @@
     (charactertable "charactertable")
     (stdinstream    "stdinstream")
     (stdoutstream   "stdoutstream")
+    (_symbols_      "_symbols_")
     ; Built-in classes related to evaluation
     (Assign        "Assign")
     (Call          "Call")
@@ -526,4 +527,16 @@
     ))
 
 (define-syntax-rule (transform-code code ...)
-  (car (transform-expression `(lambda () code ...) natives)))
+  (let ((transformed (car (transform-expression `(lambda () code ...) natives)))
+        (idx 0))
+    (string-append 
+        "array_object __symbols__ = make_array(" (number->string (* (length symbols) 2)) ");\n"
+        "object _symbols_ = (object)make_constant((object)__symbols__);\n"
+        transformed
+        (apply string-append (map (lambda (p) 
+                 (let ((r (string-append 
+                               "array_at_put(__symbols__, "
+                                (number->string idx) ", " (cadr p) ");\n")))
+                   (set! idx (+ idx 1))
+                   r))
+               symbols)))))

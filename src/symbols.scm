@@ -33,5 +33,4 @@
        (to:expression:          "TO_EXPRESSION_")
        (to:sized:               "TO_SIZED_")
        (writeChar:              "WRITECHAR_")
-       (writeChar:              "WRITE_CHAR_")
       ))

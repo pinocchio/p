@@ -317,6 +317,7 @@
                                     #f))
                             )
                           (asString (self super) self)
+                          (asSymbol (self super) ((Symbol 'SymbolTable) 'intern: self))
                           (isSymbol (self super) #f))
                         ()))
                 (load "boot/type/symbol.p")

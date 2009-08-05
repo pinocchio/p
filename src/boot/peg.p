@@ -286,7 +286,7 @@
                         (result 'string: str)
                         result)))
             ))
-        (Range
+        (Range ;probably does not work like that (yet?)
             (newclass Range Expression (start stop) ()
                 ((start (self super) (self 'objectAt: 2))
                  (start: (self super new) (self 'objectAt:put: 2 new))
@@ -296,7 +296,7 @@
                     (let ((char (input 'next)))
                         (if (eq? char null)
                             char
-                            (if (>= char (self 'start)) 
+                            (if (>= char (self 'start)) ;TODO >= should be message send 
                                 (if (<= char (self 'stop))
                                     (char 'asString)
                                     (null))

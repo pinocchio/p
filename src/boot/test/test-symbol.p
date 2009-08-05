@@ -17,5 +17,6 @@
     (assert (= ((s 'symbols) 'size) 4))
     (assert (eq? (s 'lookup: "nicolas") 'nicolas))
     (assert (eq? (s 'lookup: 'angela) null))
+    (assert (eq? ("testMethod" 'asSymbol) 'testMethod))
     )
 ))
