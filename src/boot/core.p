@@ -302,9 +302,9 @@
                    (Evaluatable (make_empty_subclass Object 'Evaluatable)))
 
                 (String      'dispatch:delegate: objdisp Stringc)
+                (load "boot/type/symbol.p")
                 ; inject class in the incomplete_type_classes
                 ;            incomplete class  super class  class name
-                (store_empty Symbol           Stringc       'Symbol)
                 (store_empty SmallInteger     Integer       'SmallInteger)
                 (store_empty Character        Magnitude     'Character)
                 (store_empty Array            ArCol         'Array)

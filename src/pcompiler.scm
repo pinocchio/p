@@ -318,6 +318,7 @@
            ((set!) (transform-set! expression vars))
            ((lambda) (transform-lambda expression vars))
            ((dispatch) (transform-dispatch expression vars))
+           ((bootstrapping-type) (list "" "null" '())) ;TODO generates overhead!!!!111
            ((method) (transform-method expression vars))
            ((define) (transform-define expression vars))
            ((quote) (transform-quoted expression vars))

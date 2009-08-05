@@ -3,6 +3,7 @@
 
 extern object scheme_plus;
 extern object scheme_minus;
+extern object scheme_times;
 extern object scheme_smallerp;
 extern object scheme_smaller_equalp;
 extern object scheme_bigger_equalp;

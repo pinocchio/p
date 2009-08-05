@@ -1,0 +1,8 @@
+(testsuite "Symbol test" (lambda ()
+ (let ((s (SymbolTable 'basicNew)))
+    (s 'symbols: (Array 'basicNew: 1))
+    ((s 'symbols) 'objectAt:put: 0 'silvio)
+    (s 'expand)
+    (assert (= ((s 'symbols) 'size) 2))
+    (assert (eq? ((s 'symbols) 'objectAt: 0) 'silvio)))
+))

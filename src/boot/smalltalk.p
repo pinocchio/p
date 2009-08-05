@@ -11,7 +11,7 @@
             self)
        
         ;(doesNotUnderstand:in:with: (self super message env args)
-         ;   (let ((selector ("initialize" 'concat: (message 'capitalized))))
+         ;   (let ((selector ("initialize" 'concat: message )))
          ;       ((self 'parsers) 'at:ifAbsentPut: message (lambda () (self selector))))
         ;                            (message 'copy))
 

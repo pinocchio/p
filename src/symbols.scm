@@ -1,9 +1,8 @@
 (define symbols
-     '((lambdashift             "LAMBDASHIFT")
+     '(
        (apply:in:               "APPLY_IN_")
-       (atEnd                   "ATEND")
        (assign:                 "ASSIGN_")
-       (writeChar:              "WRITE_CHAR_")
+       (atEnd                   "ATEND")
        (basicNew                "BASICNEW")
        (basicNew:               "BASICNEW_")
        (delegate                "DELEGATE")
@@ -12,8 +11,10 @@
        (eval                    "EVAL")
        (eval:                   "EVAL_")
        (fetch:from:             "FETCH_FROM_")
+       (fromString:             "FROMSTRING_")
        (hash                    "HASH")
        (instance                "INSTANCE")
+       (lambdashift             "LAMBDASHIFT")
        (new:size:               "NEW_SIZE_")
        (objectAt:               "OBJECT_AT_")
        (objectAt:put:           "OBJECT_AT_PUT_")
@@ -32,4 +33,5 @@
        (to:expression:          "TO_EXPRESSION_")
        (to:sized:               "TO_SIZED_")
        (writeChar:              "WRITECHAR_")
+       (writeChar:              "WRITE_CHAR_")
       ))

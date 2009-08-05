@@ -39,7 +39,11 @@
         self->hash = make_smallint(x);
         return_from_context(context, (object)self->hash);
         "))
-   ()
+   ((fromString: (w_string) 
+        "
+        cast(string, w_string, string);
+        return_from_context(context, (object)make_symbol(string->value));
+        "))
    (("wchar_t* wcsdup(const wchar_t* input)"
         "
         int len         = wcslen(input) + 1;
@@ -67,3 +71,62 @@
         return result;
         ")
 ))
+
+(Symbol 'dispatch:delegate: 
+        objdisp 
+        (newclass Symbol String () (SymbolTable)
+            ((asSymbol (self super) self))
+            ((SymbolTable (self super) (self 'objectAt: 2))
+             (SymbolTable: (self super new) (self 'objectAt:put: 2 new)))
+             ))
+
+(let ((SymbolTable (newclass SymbolTable Object (symbols) () 
+                        ((symbols (self super) (self 'objectAt: 0))
+                         (symbols: (self super new) (self 'objectAt:put: 0 new))
+                         (intern: (self super aStringOrSymbol) 
+                            (let ((value (self 'lookup: aStringOrSymbol)))
+                                (if (eq? value  null)
+                                    (let ((aSymbol (if (aStringOrSymbol 'isSymbol)
+                                        aStringOrSymbol
+                                        (Symbol 'fromString: aStringOrSymbol))))
+                                        (self 'store: aSymbol)
+                                        aSymbol)
+                                    value)))
+                         (store: (self super aSymbol) 
+                            (let ((symbols (self 'symbols)))       
+                                (let loop ((idx 0))
+                                    (if (= idx (symbols 'size))
+                                        (begin
+                                        (self 'expand)
+                                        ((self 'symbols) 'objectAt:put: idx aSymbol))
+                                        (if (eq? (symbols 'objectAt: idx) null)
+                                            (symbols 'objectAt:put: idx aSymbol)
+                                            (loop (+ idx 1)))))))
+                         (expand (self super)
+                            (let* ((symbols (self 'symbols))
+                                   (new (Array 'basicNew: (* 2 (symbols 'size)))))
+                                (let loop ((idx 0))
+                                    (if (= idx (symbols 'size))
+                                        (self 'symbols: new)
+                                        (begin
+                                        (new 'objectAt:put: idx (symbols 'objectAt: idx))
+                                        (loop (+ idx 1)))))))
+                         (lookup: (self super aSymbol)
+                            (let ((symbols (self 'symbols)))
+                                (let loop ((idx 0))
+                                    (if (= idx (symbols 'size))
+                                        null
+                                        (let ((current (symbols 'objectAt: idx)))
+                                            (if (eq? current null)
+                                                null
+                                                (if (current '= aSymbol)
+                                                    current
+                                                    (loop (+ idx 1)))))))))
+                         (initialize (self super)
+                            (self 'symbols: (Array 'basicNew: 128))
+                            self)
+                         )
+                        ())))
+        (Symbol 'SymbolTable: (SymbolTable 'new))
+(load "boot/test/test-symbol.p") 
+)

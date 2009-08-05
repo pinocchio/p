@@ -13,6 +13,10 @@ Architecture
 - import smalltalk parser written in scheme or compile to our C format
   from within smalltalk (some peg...)
 
+Primitives
+----------
+- add some char to int transformation
+
 Roadmap
 -------
 - look at interaction with GTK; try to import glamour and use it to build an
