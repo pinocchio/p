@@ -24,7 +24,7 @@
             "
             (send env subScope:key:
                 "(object)make_smallint(self->argsize + 1)"; // + scoped
-                "self->expression")
+                self->expression)
             "
         }
         ")
