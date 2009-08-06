@@ -9,10 +9,9 @@
         context->code = &ast_call_invoke_env;
         
         debug(\"making context for: %p\\n\", ast_call->target.pointer);
-        context = make_context(ast_call->target, 1);
-        context->env = env;
-        set_message(context, EVAL);
-
+        "
+        (send ast_call->target eval)
+        "
         inc();
         ")
     (eval: (w_env)

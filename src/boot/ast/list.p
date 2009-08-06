@@ -21,9 +21,9 @@
             context         = make_empty_context(2);
             context->code   = &pop_context;
             instruction     = (object)raw_list_at(self, end);
-            context         = make_context(instruction, 1);
-            set_message(context, EVAL);
-            context->env    = env;
+            "
+            (send instruction eval)
+            "
         }
         ")
     (eval: (w_env)
