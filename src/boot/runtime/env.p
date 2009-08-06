@@ -20,6 +20,7 @@
             context->self = env->parent;
             gen_env_fetch_col_from_col__do();
         } else {
+            pop_context();
             "
             (send env->parent fetch:from: w_index w_key)
             "
@@ -41,6 +42,7 @@
             context->self = env->parent;
             gen_env_store_col_at_col_in_col__do();
         } else {
+            pop_context();
             "
             (send env->parent store:at:in: w_value w_index w_key)
             "

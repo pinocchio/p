@@ -12,11 +12,14 @@
     (case (car exp)
         ((send)
             (apply (lambda (receiver msg . args)
-                (let ((idx 1))
-                    `("new_target(context, " ,receiver ");\n"
-                      "set_message(context, " ,(cadr (assoc msg symbols)) ");\n"
+                (let ((idx 1)
+                      (sym (gensym "_context")))
+                    `("context_object " ,sym
+                            " = make_context(" ,receiver ", "
+                                               ,(+ (length args) 1) ");\n"
+                      "set_message(" ,sym ", " ,(cadr (assoc msg symbols)) ");\n"
                         ,@(map (lambda (arg)
-                            (let ((result (list "set_argument(context, " idx ", " arg ");\n")))
+                            (let ((result (list "set_argument(" sym ", " idx ", " arg ");\n")))
                                 (set! idx (+ idx 1))
                                 result))
                             args)))) (cdr exp)))
