@@ -77,8 +77,8 @@
         (newclass Symbol String () (SymbolTable)
             ((asSymbol (self super) self)
              (isSymbol (self super) #t))
-            ((SymbolTable (self super) (self 'objectAt: 2))
-             (SymbolTable: (self super new) (self 'objectAt:put: 2 new)))
+            ((SymbolTable (self super) (self 'objectAt: 4))
+             (SymbolTable: (self super new) (self 'objectAt:put: 4 new)))
              ))
 
 (let ((SymbolTable (newclass SymbolTable Object (symbols) () 

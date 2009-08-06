@@ -119,7 +119,7 @@
                 ((children (self super) (self 'objectAt: 2))
                  (children: (self super new) (self 'objectAt:put: 2 new))
                  (<= (self super child)
-                    (self 'children: (append (self 'children) (cons child)))
+                    (self 'children: (append (self 'children) (list child)))
                     self)
 
                  (privateMatch:in: (self super input scope)
@@ -270,7 +270,7 @@
                      self)
                  (privateMatch:in: (self super input scope)
                     (let ((string (self 'string)))
-                        (if (< (string 'size)
+                        (if (<= (string 'size)
                                (input 'remaining))
                             (let loop ((idx 0))
                                 (if (= idx (string 'size))
@@ -279,14 +279,19 @@
                                                (string 'objectAt: idx))
                                         (loop (+ idx 1))
                                         null)))
-                            null)))
+                            (begin (display "Out of bounds\n")
+                            null))))
+                (print (self super)
+                    (display "A terminal parser: ")
+                    (display (self 'string))
+                    (display "\n"))
                 )
                 ((string: (self super str)
                     (let ((result (self 'new)))
                         (result 'string: str)
                         result)))
             ))
-        (Range ;probably does not work like that (yet?)
+        (Range
             (newclass Range Expression (start stop) ()
                 ((start (self super) (self 'objectAt: 2))
                  (start: (self super new) (self 'objectAt:put: 2 new))
@@ -296,16 +301,16 @@
                     (let ((char (input 'next)))
                         (if (eq? char null)
                             char
-                            (if (>= char (self 'start)) ;TODO >= should be message send 
-                                (if (<= char (self 'stop))
+                            (if (>= (char 'charCode) (self 'start)) ;TODO >= should be message send 
+                                (if (<= (char 'charCode) (self 'stop))
                                     (char 'asString)
-                                    (null))
-                                (null)))))
+                                    null)
+                                null))))
                  )
                 ((between:and: (self super start stop)
                     (let ((result (self 'new)))
-                        (result 'start: start)
-                        (result 'stop: stop)
+                        (result 'start: (start 'charCode))
+                        (result 'stop: (stop 'charCode))
                         result)))
         ))
         )
@@ -320,11 +325,12 @@
 
        (String 'store:method: 'asChoice
            (method (self super) 
-                (let ((result OrderedChoice))
+                (let ((result (OrderedChoice 'new)))
                     (let loop ((idx 0))
                         (if (= idx (self 'size))
                             result
-                            (result '<= ((self 'objectAt: idx) 'asParser)
+                            (begin
+                            (result '<= ((self 'objectAt: idx) 'asParser))
                             (loop (+ idx 1))))))))
 
        (String 'store:method: 'asRange

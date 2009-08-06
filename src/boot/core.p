@@ -384,6 +384,11 @@
                     'asUppercase (method (self super)
                         (let ((result (Character 'value: (- (self 'charCode) 32))))
                             result)))
+                (Character 'store:method:
+                    'asString (method (self super)
+                        (let ((result (String 'basicNew: 1)))
+                            (result 'objectAt:put: 0 self)
+                            result)))
                             
                 ((Dictionary 'class) 'store:method:
                     'basicNew (method (self super) (Dictionary 'basicNew))) 
