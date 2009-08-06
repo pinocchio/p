@@ -20,10 +20,9 @@
             context->self = env->parent;
             gen_env_fetch_col_from_col__do();
         } else {
-            new_target(context, env->parent);
-            set_message(context, FETCH_FROM_);
-            set_argument_const(context, 1, w_index);
-            set_argument_const(context, 2, w_key);
+            "
+            (send env->parent fetch:from: w_index w_key)
+            "
         }
         ")
     (store:at:in: (w_value w_index w_key)
@@ -42,11 +41,9 @@
             context->self = env->parent;
             gen_env_store_col_at_col_in_col__do();
         } else {
-            new_target(context, env->parent);
-            set_message(context, STORE_AT_IN_);
-            set_argument_const(context, 1, w_value);
-            set_argument_const(context, 2, w_index);
-            set_argument_const(context, 3, w_key);
+            "
+            (send env->parent store:at:in: w_value w_index w_key)
+            "
         }
         ")
     (subScope:key: (w_size w_key)

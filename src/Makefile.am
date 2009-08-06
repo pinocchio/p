@@ -45,6 +45,6 @@ pinocchio.c: $(EXTRA_DIST)
 	$(MZSCHEME) -r boot/pinocchio.scm >> $@
 	cat postfix.c >> $@
 
-$(TYPEGEN): $(TYPECODE)
+$(TYPEGEN): $(TYPECODE) pprocessor.scm pcompiler.scm symbols.scm
 	$(MZSCHEME) -r symgen.scm
 	$(MZSCHEME) -r pprocessor.scm $^

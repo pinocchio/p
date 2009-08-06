@@ -7,14 +7,37 @@
       (string-lowercase! result)
       result))
 
+(define (transform-c-expression exp)
+    (list->code
+    (case (car exp)
+        ((send)
+            (apply (lambda (receiver msg . args)
+                (let ((idx 1))
+                    `("new_target(context, " ,receiver ");\n"
+                      "set_message(context, " ,(cadr (assoc msg symbols)) ");\n"
+                        ,@(map (lambda (arg)
+                            (let ((result (list "set_argument(context, " idx ", " arg ");\n")))
+                                (set! idx (+ idx 1))
+                                result))
+                            args)))) (cdr exp)))
+        (else (error "Unsupported C expression: " exp)))))
+
+(define (transform-c-body body)
+    (define (transform-c-exp exp)
+        (cond ((string? exp) exp)
+              ((list? exp) (transform-c-expression exp))
+              ((symbol? exp) (cadr (assoc exp symbols)))
+              (else (error "Unknown type: " exp))))
+    (apply string-append (map transform-c-exp body)))
+
 (define (transform-c-method method type)
-  (define (transform name args body)
+  (define (transform name args . body)
     (let ((f-name (fname type name))
           (symbol (cadr (assoc name symbols))))
       `(,f-name
         ,symbol
         (("with_pre_eval" ,(length args) "(" ,f-name ", context, " ,@(map (lambda (el) `(,el ", ")) args))
-         ,body
+         ,(transform-c-body body)
          ")"))))
   (apply transform method))
 
