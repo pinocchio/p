@@ -5,22 +5,18 @@
         object env          = context->env;
         pop_context();
 
-        context = make_empty_context(4);
         // Optimization, avoid const rewrapping if type is known
         if (isinstance(env, env)) {
+            context = make_empty_context(4);
             context->self = env;
             set_argument(context, 1, value);
             set_argument(context, 2, (object)self->index);
             set_argument(context, 3, self->scope);
             gen_env_store_col_at_col_in_col__do();
         } else {
-            new_target(context, env);
-            context->env = env;
-        
-            set_message(context, STORE_AT_IN_);
-            set_argument_const(context, 1, value);
-            set_argument_const(context, 2, (object)self->index);
-            set_argument_const(context, 3, self->scope);
+            "
+            (send env store:at:in: value "(object)self->index" self->scope)
+            "
         }
         ")
     (eval ()
@@ -31,12 +27,8 @@
         object env = context->env;
 
         pop_context();
-        context      = make_context(env, 3);
-        context->env = env;
-        set_message(context, FETCH_FROM_);
-        set_argument_const(context, 1, (object)self->index);
-        set_argument_const(context, 2, self->scope);
-        ")
+        "
+        (send env fetch:from: "(object)self->index" self->scope))
     (eval: (w_env)
         "
         context->env = w_env;
