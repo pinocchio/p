@@ -3,12 +3,22 @@
         "
         return_from_context(context, context->self);
         ")
+    (charCode ()
+        "
+        return_from_context(context,
+            (object)make_smallint((int)context->self.chr->value));
+        ")
     (hash ()
         "
         return_from_context(context,
             (object)make_smallint((int)context->self.chr->value));
         "))
-   ()
+   ((value: (w_intvalue)
+        "
+        cast(intvalue, w_intvalue, smallint);
+        return_from_context(context,
+            (object)make_char(intvalue->value));
+        "))
    (("chr_object do_make_char(wchar_t value)"
         "
         new_instance(chr);

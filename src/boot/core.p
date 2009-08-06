@@ -366,6 +366,25 @@
                                         (result 'objectAt:put: idx (self 'objectAt: idx))
                                         (result 'objectAt:put: idx (aString 'objectAt: (- idx (self 'size)))))
                                     (loop (+ idx 1))))))))
+                (String 'store:method:
+                    'capitalized (method (self super)
+                        (let ((result (self 'copy)))
+                            (result 'objectAt:put: 0 ((self 'objectAt: 0) 'asUppercase))
+                            result)))
+                (String 'store:method:
+                    'copy (method (self super)
+                        (let ((result (String 'basicNew: (self 'size))))
+                            (let loop ((idx 0))
+                                (if (= idx (self 'size))
+                                    result
+                                    (begin
+                                     (result 'objectAt:put: idx (self 'objectAt: idx))
+                                     (loop (+ idx 1))))))))
+                (Character 'store:method:
+                    'asUppercase (method (self super)
+                        (let ((result (Character 'value: (- (self 'charCode) 32))))
+                            result)))
+                            
                 ((Dictionary 'class) 'store:method:
                     'basicNew (method (self super) (Dictionary 'basicNew))) 
                 (load "boot/test/test-core.p")

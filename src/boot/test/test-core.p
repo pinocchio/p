@@ -90,10 +90,11 @@
     (assert (= (d 'at:ifAbsentPut: 'answer (lambda () 21)) 42))
 )))
 
-(testsuite "String concatenation test" (lambda ()
+(testsuite "String test" (lambda ()
     ;do not use char 'w' here or it will break chartable test
     (assert (("hello" 'concat: " there") '= "hello there"))
     (assert (("" 'concat: "") '= ""))
+    (assert (("hello" 'capitalized) '= "Hello"))
 ))
 ;(display "\nFile tests\n")
 ;(let* ((file (InputFile 'on: "fib-compiler.scm"))

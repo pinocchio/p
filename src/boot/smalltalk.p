@@ -10,10 +10,11 @@
             (self 'id: 0)
             self)
        
+        ;XXX this ends up in an infinite loop
         ;(doesNotUnderstand:in:with: (self super message env args)
-         ;   (let ((selector ("initialize" 'concat: (message capitalized))))
-         ;       ((self 'parsers) 'at:ifAbsentPut: message (lambda () (self selector))))
-        ;                            (message 'copy))
+        ;    (let ((selector ("initialize" 'concat: (message 'capitalized))))
+        ;        ((self 'parsers) 'at:ifAbsentPut: 
+        ;                         message (lambda () (self selector)))))
 
         (initializeAnnotation (self super)
             (let ((p (Parser 'named: "ANNOTATION")))
