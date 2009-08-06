@@ -5,9 +5,8 @@
         object env = context->env;
 
         pop_context();
-
         "
-        (send self->variable assign: self->expression)))
+        (direct-send self->variable assign: self->expression)))
    ((to:expression: (w_var w_exp)
         "
         return_from_context(context, (object)make_ast_assign(w_var, w_exp));

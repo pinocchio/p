@@ -1,8 +1,8 @@
 (bootstrapping-type Scoped ast ((scope "object") (expression "object")
                                 (argsize "int"))
-   ((apply:in: (w_args w_env)
+   ((apply:in: (w_args env)
         "
-        context->env = w_env;
+        context->env = env;
 
         // Move argument so that the subscope will be at 1.
         set_argument(context, 0, w_args);
@@ -10,23 +10,22 @@
         scoped_object self = context->self.scoped;
         context->code = &scoped_eval;
 
-        context = make_empty_context(3);
 
         // TODO should be subscope of self, rather than env
         // Optimization, avoid const rewrapping if type is known
-        if (isinstance(w_env, env)) {
-            context->self = w_env;
+        if (isinstance(env, env)) {
+            context = make_empty_context(3);
+            context->self = env;
             set_argument(context, 1,
                 (object)make_smallint(self->argsize + 1)); // + scoped
             set_argument(context, 2, self->expression);
             gen_env_subscope_col_key_col__do();
         } else {
-            new_target(context, w_env);
-            context->env = w_env;
-            set_message(context, SUBSCOPE_KEY_);
-            set_argument_const(context, 1,
-                (object)make_smallint(self->argsize + 1)); // + scoped
-            set_argument_const(context, 2, self->expression);
+            "
+            (send env subScope:key:
+                "(object)make_smallint(self->argsize + 1)"; // + scoped
+                "self->expression")
+            "
         }
         ")
     (scope ()
@@ -80,10 +79,9 @@
 
         // we just eval the attached expression.
         pop_context();
-        scoped_context = make_context(scoped->expression, 1);
-        scoped_context->env = env;
-        set_message(scoped_context, EVAL);
-
+        "
+        (send scoped->expression eval)
+        "
         debug(\"ret>>scoped>>doWithArguments\\n\");
         ")
     ("object make_scoped(object scope, object expression, object argsize)"

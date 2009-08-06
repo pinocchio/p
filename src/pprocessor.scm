@@ -10,7 +10,7 @@
 (define (transform-c-expression exp)
     (list->code
     (case (car exp)
-        ((send)
+        ((direct-send)
             (apply (lambda (receiver msg . args)
                 (let ((idx 1)
                       (sym (gensym "_context")))
@@ -24,6 +24,14 @@
                                 (set! idx (+ idx 1))
                                 result))
                             args)))) (cdr exp)))
+        ((send)
+            (apply (lambda (receiver msg . args)
+                        (list (transform-c-expression
+                            `(direct-send ,receiver ,msg
+                                ,@(map (lambda (arg)
+                                        (list "(object)make_constant(" arg ")"))
+                                    args)))))
+                (cdr exp)))
         (else (error "Unsupported C expression: " exp)))))
 
 (define (transform-c-body body)
@@ -86,7 +94,7 @@
                     "#include <thread.h>"
                     "#include <print.h>"
                     ""
-                    ,@(map (lambda (h) `(,(car h) " {" ,(cadr h) "}\n")) f-helper)
+                    ,@(map (lambda (h) `(,(car h) " {" ,(transform-c-body (cdr h)) "}\n")) f-helper)
                     ,@(map caddr tr-inst)
                     ,@(map caddr tr-class)
                     ""
