@@ -9,12 +9,14 @@
             (self 'parsers: (Dictionary 'new))
             (self 'id: 0)
             self)
-       
-        ;XXX this ends up in an infinite loop
-        ;(doesNotUnderstand:in:with: (self super message env args)
-        ;    (let ((selector ("initialize" 'concat: (message 'capitalized))))
-        ;        ((self 'parsers) 'at:ifAbsentPut: 
-        ;                         message (lambda () (self selector)))))
+     
+        ;XXX should check if the generated symbolname is valid, or we will end up
+        ;in an infinit loop!
+        (doesNotUnderstand:in:with: (self super message env args) 
+            (let ((selector (("initialize" 'concat: (message 'capitalized)) 'asSymbol)))
+                ((self 'parsers) 'at:ifAbsentPut:
+                                 message (lambda () (self selector)))
+                ))
 
         (initializeAnnotation (self super)
             (let ((p (Parser 'named: "ANNOTATION")))
