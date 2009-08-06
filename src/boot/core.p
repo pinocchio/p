@@ -354,6 +354,18 @@
                                 (self 'objectAt:put: key (l))
                                 element
                                 ))))
+                (String 'store:method:
+                    'concat: (method (self super aString)
+                            (let* ((size (+ (self 'size) (aString 'size)))
+                                   (result (String 'basicNew: size))) 
+                              (let loop ((idx 0))
+                                (if (= idx size)
+                                    result
+                                    (begin
+                                    (if (< idx (self 'size))
+                                        (result 'objectAt:put: idx (self 'objectAt: idx))
+                                        (result 'objectAt:put: idx (aString 'objectAt: (- idx (self 'size)))))
+                                    (loop (+ idx 1))))))))
                 ((Dictionary 'class) 'store:method:
                     'basicNew (method (self super) (Dictionary 'basicNew))) 
                 (load "boot/test/test-core.p")
