@@ -14,12 +14,13 @@
             (apply (lambda (receiver msg . args)
                 (let ((idx 1)
                       (sym (gensym "_context")))
-                    `("context_object " ,sym
+                    `(("context_object " ,sym
                             " = make_context(" ,receiver ", "
-                                               ,(+ (length args) 1) ");\n"
-                      "set_message(" ,sym ", " ,(cadr (assoc msg symbols)) ");\n"
+                                               ,(+ (length args) 1) ");")
+                      (,sym "->env = env;")
+                      ("set_message(" ,sym ", " ,(cadr (assoc msg symbols)) ");")
                         ,@(map (lambda (arg)
-                            (let ((result (list "set_argument(" sym ", " idx ", " arg ");\n")))
+                            (let ((result (list "set_argument(" sym ", " idx ", " arg ");")))
                                 (set! idx (+ idx 1))
                                 result))
                             args)))) (cdr exp)))

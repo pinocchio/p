@@ -2,49 +2,51 @@
                                  (values array))
    ((fetch:from: (w_index w_key)
         "
-        env_object env = context->self.env;
-        debug(\"env>>fetch:from: (%i) %p\\n\", env->values->size, env);
+        env_object self = context->self.env;
+        debug(\"env>>fetch:from: (%i) %p\\n\", self->values->size, self);
 
-        if (env->key.pointer == w_key.pointer) {
+        if (self->key.pointer == w_key.pointer) {
             cast(index, w_index, smallint);
             debug(\"index: %i\\n\", index->value);
-            object value = env_at(env, index->value);
+            object value = env_at(self, index->value);
             debug(\"ret>>env>>fetch:from: (return) %p\\n\", value.pointer);
             return return_from_context(context, value);
         }
-        error_guard(env->parent.object != woodstock->nil, \"Variable not found.\");
-        debug(\"fallback to parent: %p\\n\", env->parent.pointer);
+        error_guard(self->parent.object != woodstock->nil, \"Variable not found.\");
+        debug(\"fallback to parent: %p\\n\", self->parent.pointer);
 
         // Optimization, avoid const rewrapping if type is known
-        if (isinstance(env->parent, env)) {
-            context->self = env->parent;
+        if (isinstance(self->parent, env)) {
+            context->self = self->parent;
             gen_env_fetch_col_from_col__do();
         } else {
+            object env = context->env;
             pop_context();
             "
-            (send env->parent fetch:from: w_index w_key)
+            (send self->parent fetch:from: w_index w_key)
             "
         }
         ")
     (store:at:in: (w_value w_index w_key)
         "
-        env_object env = context->self.env;
-        if (env->key.pointer == w_key.pointer) {
+        env_object self = context->self.env;
+        if (self->key.pointer == w_key.pointer) {
             cast(index, w_index, smallint)
-            env_at_put(env, index->value, w_value);
+            env_at_put(self, index->value, w_value);
             debug(\"ret>>env>>store:at:in: %i, %p\\n\", index->value, w_value.pointer);
             return pop_context();
         }
-        error_guard(env->parent.object != woodstock->nil, \"Variable not found.\");
+        error_guard(self->parent.object != woodstock->nil, \"Variable not found.\");
         
         // Optimization, avoid const rewrapping if type is known
-        if (isinstance(env->parent, env)) {
-            context->self = env->parent;
+        if (isinstance(self->parent, env)) {
+            context->self = self->parent;
             gen_env_store_col_at_col_in_col__do();
         } else {
+            object env = context->env;
             pop_context();
             "
-            (send env->parent store:at:in: w_value w_index w_key)
+            (send self->parent store:at:in: w_value w_index w_key)
             "
         }
         ")
