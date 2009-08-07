@@ -27,7 +27,7 @@
                             msg args))))))
         self))
 
-(define (new-lambda syntax args . body)
+(define (new-lambda syntax args body)
     (letrec (
         (self (lambda (msg . args)
             (case msg
@@ -38,7 +38,7 @@
                 (else (error "Lambda does not understand: " msg args))))))
         self))
 
-(define (new-var syntax name)
+(define (new-variable syntax name)
     (letrec (
         (self (lambda (msg . args)
             (case msg
