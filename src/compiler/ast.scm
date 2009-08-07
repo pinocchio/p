@@ -3,14 +3,16 @@
 (define (new-environment . parent)
     (unless (null? parent)
         (set! parent (car parent)))
-    (letrec ((bindings '())
+    (letrec (
+        (bindings '())
+        (code (new-ast-list))
         (lookup (lambda (var)
             (let ((result (assoc var bindings)))
-                (if (null? result)
+                (if result
+                    (cadr result)
                     (if (null? parent)
                         #f
-                        (parent 'lookup var))
-                    (cadr result)))))
+                        (parent 'lookup var))))))
         (bind (lambda (var value)
             (let ((binding (assoc var bindings)))
                 (if binding
@@ -20,6 +22,7 @@
             (case msg
                 ((lookup) (apply lookup args))
                 ((bind) (apply bind args))
+                ((addCode) (apply code (cons 'add args)))
                 (else (error "Environment does not understand: "
                             msg args))))))
         self))
@@ -29,6 +32,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Lambda does not understand: " msg args))))))
         self))
 
@@ -37,6 +43,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #t)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Variable does not understand: " msg args))))))
         self))
 
@@ -45,6 +54,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Assign does not understand: " msg args))))))
         self))
 
@@ -53,6 +65,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Vector does not understand: " msg args))))))
         self))
 
@@ -61,6 +76,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "List does not understand: " msg args))))))
         self))
 
@@ -71,6 +89,9 @@
             (case msg
                 ((toCode) (error "TODO"))
                 ((add) (apply expressions (cons msg args)))
+                ((apply) (apply transform-apply (cons self args)))
+                ((constant?) #f)
+                ((assignable?) #f)
                 (else (error "AstList does not understand: " msg args))))))
         self))
 
@@ -79,6 +100,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "String does not understand: " msg args))))))
         self))
 
@@ -87,6 +111,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #t)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Number does not understand: " msg args))))))
         self))
 
@@ -95,6 +122,9 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #t)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Character does not understand: " msg args))))))
         self))
 
@@ -103,14 +133,18 @@
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((constant?) #t)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Bool does not understand: " msg args))))))
         self))
 
-(define (new-application syntax name . args)
+(define (new-application syntax receiver arguments)
     (letrec (
         (self (lambda (msg . args)
             (case msg
                 ((toCode) (error "TODO"))
+                ((assignable?) #f)
                 (else (error "Application does not understand: " msg args))))))
     self))
 
@@ -121,6 +155,9 @@
                 (self (lambda (msg . args)
                     (case msg
                         ((toCode) (error "TODO"))
+                        ((constant?) #t)
+                        ((assignable?) #f)
+                        ((apply) (apply transform-apply (cons self args)))
                         (else (error "Symbol does not understand: "
                                     msg args))))))
                     self))
@@ -140,9 +177,13 @@
     (let ((natives '()))
         (define (make-native symbol native)
             (letrec (
+                
                 (self (lambda (msg . args)
                     (case msg
                         ((toCode) native)
+                        ((constant?) #t)
+                        ((assignable?) #f)
+                        ((apply) (apply transform-apply (cons self args)))
                         (else (error "Native does not understand: "
                             msg args))))))
                 self))
@@ -154,7 +195,10 @@
                     (cons (list symbol (make-native symbol native))
                           natives))))
         (define (lookup symbol)
-            (assoc symbol natives))
+            (let ((result (assoc symbol natives)))
+                (if result
+                    (cadr result)
+                    result)))
         (lambda (msg . args)
             (case msg
                 ((bind) (apply bind args))

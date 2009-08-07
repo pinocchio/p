@@ -54,3 +54,9 @@
                 ((values) values)
                 (else "Collection DNU: " msg args)))))
         self))
+
+(define (syntax->datum stx)
+    (let ((current (syntax-e stx)))
+        (if (list? current)
+            (map syntax->datum current)
+            current)))
