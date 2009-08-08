@@ -25,13 +25,7 @@
         (sources (new-collection))
 
         (parse-literal (lambda (scope stx literal)
-            (cond ((number? literal)
-                    (display "Found number: ") (display stx) (display " at: ")
-                    (display (syntax-line stx)) (display ":") (display
-                    (syntax-column stx)) (display " in ") (display
-(syntax-source stx)) (display " value: ") (display (syntax-e stx)) (display " ")
-(display literal) (newline)
-                    (new-number literal))
+            (cond ((number? literal) (new-number literal))
                   ((string? literal) (new-string literal))
                   (else (let ((transformer (scope 'lookup literal)))
                             (if transformer transformer
