@@ -60,3 +60,24 @@
         (if (list? current)
             (map syntax->datum current)
             current)))
+
+(define-syntax syntax-transformer
+    (syntax-rules ()
+        ((_ name (parser scope stx) ((match ...) toexpand ...) ...)
+         (define name
+         (let* (
+            (stx-transformer (lambda (parser scope stx input)
+                (syntax-case input ()
+                    ((match ...)
+                     (eval #`(begin toexpand ...)))
+                    ...
+                    (_ (syntax-fail
+                            (string-append (symbol->string 'name)
+                                           ": bad syntax") stx)))))
+            (transformer (lambda (msg . args)
+                (unless (eq? msg 'apply)
+                    (syntax-fail 
+                        (string-append (symbol->string 'name)
+                                       ": bad syntax") #'unknown))
+                (apply stx-transformer args))))
+            transformer)))))

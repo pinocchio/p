@@ -6,6 +6,7 @@
     (letrec (
         (bindings '())
         (code (new-ast-list))
+        (contains? (lambda (var) (assoc var bindings)))
         (lookup (lambda (var)
             (let ((result (assoc var bindings)))
                 (if result
@@ -22,12 +23,13 @@
             (case msg
                 ((lookup) (apply lookup args))
                 ((bind) (apply bind args))
+                ((contains?) (apply contains? args))
                 ((addCode) (apply code (cons 'add args)))
                 (else (error "Environment does not understand: "
                             msg args))))))
         self))
 
-(define (new-lambda syntax args body)
+(define (new-lambda syntax args . body)
     (letrec (
         (self (lambda (msg . args)
             (case msg
