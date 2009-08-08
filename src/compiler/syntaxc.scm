@@ -14,7 +14,7 @@
                 (number->string (+ (syntax-column stx) 1)))))
 
 (define (transform-apply self parser scope stx args)
-    (let* ((args (if (syntax? args) (msyntax->datum args) args))
+    (let* ((args (if (syntax? args) (syntax-e args) args))
            (args (map (lambda (arg)
                     (parser 'expression scope arg))
                 args)))
@@ -25,7 +25,13 @@
         (sources (new-collection))
 
         (parse-literal (lambda (scope stx literal)
-            (cond ((number? literal) (new-number literal))
+            (cond ((number? literal)
+                    (display "Found number: ") (display stx) (display " at: ")
+                    (display (syntax-line stx)) (display ":") (display
+                    (syntax-column stx)) (display " in ") (display
+(syntax-source stx)) (display " value: ") (display (syntax-e stx)) (display " ")
+(display literal) (newline)
+                    (new-number literal))
                   ((string? literal) (new-string literal))
                   (else (let ((transformer (scope 'lookup literal)))
                             (if transformer transformer
@@ -38,13 +44,12 @@
         (parse-application (lambda (scope stx application)
             (if (null? application)
                 (scope 'addCode ast-null)
-                (let ((o (parse-expression scope (car application))))
-                    (o 'apply parser scope stx (cdr application))))))
-                
+                (let ((o (parse-expression scope (car (syntax-e stx)))))
+                    (o 'apply parser scope stx (cdr (syntax-e stx)))))))
         
         (parse-expression (lambda (scope stx)
             (let ((exp (msyntax->datum stx)))
-                (if (list? exp)
+                (if (pair? exp)
                     (parse-application scope stx exp)
                     (if (pair? exp)
                         (syntax-fail "Unexpected pair syntax" stx)
@@ -114,7 +119,9 @@
 (syntax-transformer let:transformer (parser scope stx)
     ((((variable value) ...) e ...)
         (parser 'expression scope
-            #'((lambda (variable ...) e ...) value ...))))
+            (datum->syntax #'stx
+                `((lambda (,#'variable ...) ,#'e ...) ,#'value ...)
+                #'stx))))
 
 (define (setup-transformers scope)
     (scope 'bind 'load load:transformer)
