@@ -41,6 +41,17 @@
                 (else (error "Lambda does not understand: " msg args))))))
         self))
 
+(define (new-method syntax args . body)
+    (letrec (
+        (self (lambda (msg . args)
+            (case msg
+                ((toCode) (error "TODO"))
+                ((constant?) #f)
+                ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
+                (else (error "Method does not understand: " msg args))))))
+        self))
+
 (define (new-variable syntax name)
     (letrec (
         (self (lambda (msg . args)

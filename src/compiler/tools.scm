@@ -1,5 +1,20 @@
 (require mzlib/pregexp)
 
+(define (if-path->string p)
+    (if (path? p)
+        (path->string p)
+        p))
+
+(define (syntax-fail msg stx)
+    (error (string-append msg " in \""
+                (if-path->string (syntax-source stx))
+                "\" Line: "
+                (number->string (syntax-line stx))
+                " Column: "
+                (number->string (+ (syntax-column stx) 1))
+                "  --- ")
+            (msyntax->datum stx)))
+
 (define (string->code s)
     (set! s (pregexp-replace* "_" s "_u_"))
     (set! s (pregexp-replace* "<" s "_lt_"))
