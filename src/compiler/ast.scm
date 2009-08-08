@@ -5,7 +5,7 @@
         (set! parent (car parent)))
     (letrec (
         (bindings '())
-        (code (new-ast-list))
+        (code (new-ast-list '()))
         (contains? (lambda (var) (assoc var bindings)))
         (lookup (lambda (var)
             (let ((result (assoc var bindings)))
@@ -85,7 +85,7 @@
                 (else (error "List does not understand: " msg args))))))
         self))
 
-(define (new-ast-list . exps)
+(define (new-ast-list exps)
     (letrec (
         (expressions (apply new-collection exps))
         (self (lambda (msg . args)
@@ -148,6 +148,7 @@
             (case msg
                 ((toCode) (error "TODO"))
                 ((assignable?) #f)
+                ((apply) (apply transform-apply (cons self args)))
                 (else (error "Application does not understand: " msg args))))))
     self))
 

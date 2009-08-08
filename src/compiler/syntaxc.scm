@@ -79,13 +79,6 @@
         (setup-transformers globals)
         compiler)) 
 
-(syntax-transformer load:transformer (parser scope stx)
-    ((file)
-        (begin 
-        (unless (string? file)
-            (syntax-fail "String expected" file))
-        (parser 'parse scope file))))
-
 (define (expand-parameter scope parameter)
     (let ((name (syntax-e parameter))) 
         (unless (symbol? name)
@@ -95,31 +88,6 @@
             (let ((var (new-variable parameter name)))
                 (scope 'bind name var)
                 var))))
-
-(syntax-transformer lambda:transformer (parser scope stx)
-    (((parameter ...) first next ...)
-        (let ((child (new-environment scope)))
-            (new-lambda #'stx
-                (list (expand-parameter child #'parameter) ...)
-                (parser 'expression child #'first)
-                (parser 'expression child #'next) ...))))
-
-(syntax-transformer let:transformer (parser scope stx)
-    ((((variable value) ...) e ...)
-        (parser 'expression scope
-            (datum->syntax #'stx
-                `((lambda (,#'variable ...) ,#'e ...) ,#'value ...)
-                #'stx))))
-
-(syntax-transformer letrec:transformer (parser scope stx)
-    ((((variable value) ...) e ...)
-        (parser 'expression scope
-            (datum->syntax #'stx
-                `((lambda (,#'variable ...)
-                        (set! ,#'variable ,#'value) ...
-                        ,#'e ...)
-                    ,@(map (lambda (var) 'null) '(value ...)))
-                #'stx))))
 
 (define (lookup-variable variable scope)
     (let ((var (msyntax->datum variable)))
@@ -133,16 +101,81 @@
                                 (symbol->string var)
                                 "'") variable)))))
 
-(syntax-transformer set!:transformer (parser scope stx)
-    ((variable value)
-        (new-assign #'stx
-            (lookup-variable #'variable scope)
-            (parser 'expression scope #'value))))
-
 (define (setup-transformers scope)
-    (scope 'bind 'load load:transformer)
-    (scope 'bind 'lambda lambda:transformer)
-    (scope 'bind 'let let:transformer)
-    (scope 'bind 'letrec letrec:transformer)
-    (scope 'bind 'set! set!:transformer)
+    (syntax-transformer p:load (parser scope stx)
+        ((file)
+            (unless (string? file)
+                (syntax-fail "String expected" file))
+            (parser 'parse scope file)))
+    
+    (syntax-transformer p:lambda (parser scope stx)
+        (((parameter ...) first next ...)
+            (let ((child (new-environment scope)))
+                (new-lambda #'stx
+                    (list (expand-parameter child #'parameter) ...)
+                    (parser 'expression child #'first)
+                    (parser 'expression child #'next) ...))))
+    
+    (syntax-transformer p:let (parser scope stx)
+        ((((variable value) ...) e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `((lambda (,#'variable ...) ,#'e ...) ,#'value ...)
+                    #'stx)))
+        ; named let
+        ((name ((variable value) ...) e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `(letrec ((name (lambda (,#'variable ...) ,#'e ...)))
+                        (name ,#'value ...))
+                    #'stx))))
+    
+    (syntax-transformer p:letrec (parser scope stx)
+        ((((variable value) ...) e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `((lambda (,#'variable ...)
+                            (set! ,#'variable ,#'value) ...
+                            ,#'e ...)
+                        ,@(map (lambda (var) 'null) '(value ...)))
+                    #'stx))))
+    
+    (syntax-transformer p:set! (parser scope stx)
+        ((variable value)
+            (new-assign #'stx
+                (lookup-variable #'variable scope)
+                (parser 'expression scope #'value))))
+
+    (syntax-transformer p:if (parser scope stx)
+        ((test true false)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `(,#'test ,#'true ,#'false)
+                    #'stx))))
+
+    (syntax-transformer p:begin (parser scope stx)
+        ((exp ...)
+            (new-ast-list
+                (map (lambda (s)
+                        (parser 'expression scope s))
+                    (list #'exp ...)))))
+
+    (syntax-transformer p:quote (parser scope stx)
+        ((e)
+            (cond
+                ((number? 'e) (new-number 'e))
+                ((symbol? 'e) (symbol 'new 'e))
+                ((string? 'e) (new-string 'e))
+                ((char?   'e) (new-char   'e))
+                (else
+                    (syntax-fail "Quote format not (yet) supported" stx)))))
+
+    (scope 'bind 'load      p:load)
+    (scope 'bind 'lambda    p:lambda)
+    (scope 'bind 'let       p:let)
+    (scope 'bind 'letrec    p:letrec)
+    (scope 'bind 'set!      p:set!)
+    (scope 'bind 'if        p:if)
+    (scope 'bind 'begin     p:begin)
+    (scope 'bind 'quote     p:quote)
 )
