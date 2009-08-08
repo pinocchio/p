@@ -27,13 +27,7 @@
         (parse-literal (lambda (scope stx literal)
             (cond ((number? literal) (new-number literal))
                   ((string? literal) (new-string literal))
-                  (else (let ((transformer (scope 'lookup literal)))
-                            (if transformer transformer
-                                (syntax-fail
-                                    (string-append "Unbound variable '"
-                                                   (symbol->string literal)
-                                                   "'")
-                                    stx)))))))
+                  (else (lookup-variable stx scope)))))
         
         (parse-application (lambda (scope stx application)
             (if (null? application)
@@ -117,8 +111,38 @@
                 `((lambda (,#'variable ...) ,#'e ...) ,#'value ...)
                 #'stx))))
 
+(syntax-transformer letrec:transformer (parser scope stx)
+    ((((variable value) ...) e ...)
+        (parser 'expression scope
+            (datum->syntax #'stx
+                `((lambda (,#'variable ...)
+                        (set! ,#'variable ,#'value) ...
+                        ,#'e ...)
+                    ,@(map (lambda (var) 'null) '(value ...)))
+                #'stx))))
+
+(define (lookup-variable variable scope)
+    (let ((var (msyntax->datum variable)))
+        (unless (symbol? var)
+            (syntax-fail "Expected variable name" variable))
+        (let ((result (scope 'lookup var)))
+            (if result
+                result
+                (syntax-fail (string-append
+                                "Unbound identifier '"
+                                (symbol->string var)
+                                "'") variable)))))
+
+(syntax-transformer set!:transformer (parser scope stx)
+    ((variable value)
+        (new-assign #'stx
+            (lookup-variable #'variable scope)
+            (parser 'expression scope #'value))))
+
 (define (setup-transformers scope)
     (scope 'bind 'load load:transformer)
     (scope 'bind 'lambda lambda:transformer)
     (scope 'bind 'let let:transformer)
+    (scope 'bind 'letrec letrec:transformer)
+    (scope 'bind 'set! set!:transformer)
 )

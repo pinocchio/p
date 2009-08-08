@@ -75,7 +75,13 @@
                                       (scope scope)
                                       (stx stx))
                             (eval #`(begin toexpand ...))))
-                     ...)))
+                     ...
+                    ((_ (... ...))
+                        (syntax-fail
+                            (string-append "Invalid "
+                                           (symbol->string 'name)
+                                           " syntax")
+                            stx)))))
             (transformer (lambda (msg . args)
                 (unless (eq? msg 'apply)
                     (syntax-fail 
