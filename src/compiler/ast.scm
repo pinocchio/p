@@ -24,6 +24,7 @@
                 ((lookup) (apply lookup args))
                 ((bind) (apply bind args))
                 ((contains?) (apply contains? args))
+                ((bindings) bindings)
                 ((addCode) (apply code (cons 'add args)))
                 (else (error "Environment does not understand: "
                             msg args))))))

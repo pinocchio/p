@@ -1,16 +1,23 @@
 (include "ast.scm")
 
+(define (if-path->string p)
+    (if (path? p)
+        (path->string p)
+        p))
+
 (define (syntax-fail msg stx)
     (error (string-append msg " in \""
-                (syntax-source stx)
+                (if-path->string (syntax-source stx))
                 "\" Line: "
                 (number->string (syntax-line stx))
                 " Column: "
                 (number->string (+ (syntax-column stx) 1)))))
 
 (define (transform-apply self parser scope stx args)
-    (let ((args (map (lambda (arg)
-            (parser 'expression scope arg)) args)))
+    (let* ((args (if (syntax? args) (msyntax->datum args) args))
+           (args (map (lambda (arg)
+                    (parser 'expression scope arg))
+                args)))
         (new-application stx self args)))
 
 (define (new-parser)
@@ -36,10 +43,12 @@
                 
         
         (parse-expression (lambda (scope stx)
-            (let ((exp (syntax-e stx)))
+            (let ((exp (msyntax->datum stx)))
                 (if (list? exp)
                     (parse-application scope stx exp)
-                    (parse-literal scope stx exp)))))
+                    (if (pair? exp)
+                        (syntax-fail "Unexpected pair syntax" stx)
+                        (parse-literal scope stx exp))))))
 
         (parse (lambda (scope file)
             (let ((fp (open-input-file file)))
@@ -55,7 +64,8 @@
         (parser (lambda (msg . args)
             (case msg
                 ((parse) (apply parse args))
-                ((expression) (apply parse-expression args))
+                ((expression)
+                    (apply parse-expression args))
                 (else (error "Parser DNU: " msg args))))))
         parser))
 
@@ -78,9 +88,10 @@
 
 (syntax-transformer load:transformer (parser scope stx)
     ((file)
+        (begin 
         (unless (string? file)
-            (syntax-fail "String expected" #'file))
-        (#,parser 'parse #,scope file)))
+            (syntax-fail "String expected" file))
+        (parser 'parse scope file))))
 
 (define (expand-parameter scope parameter)
     (let ((name (syntax-e parameter))) 
@@ -94,42 +105,19 @@
 
 (syntax-transformer lambda:transformer (parser scope stx)
     (((parameter ...) first next ...)
-        (let ((scope (new-environment #,scope)))
-            (new-lambda #'#,stx
-                (list (expand-parameter scope #'parameter) ...)
-                (#,parser 'expression scope #'first)
-                (#,parser 'expression scope #'next) ...))))
+        (let ((child (new-environment scope)))
+            (new-lambda #'stx
+                (list (expand-parameter child #'parameter) ...)
+                (parser 'expression child #'first)
+                (parser 'expression child #'next) ...))))
 
-;(define (parameter-transformer scope param)
-;    (let ((parameter (syntax-e param)))
-;        (unless (symbol? parameter)
-;            (syntax-fail "Invalid parameter syntax" param))
-;        (let ((var (new-variable param parameter)))
-;            (scope 'bind parameter var))))
-;
-;(define (lambda-transformer msg . args)
-;    (unless (eq? msg 'apply)
-;        (syntax-fail "Invalid lambda usage" stx))
-;    (apply (lambda (parser scope stx args)
-;        (if (or (null? args) (< (length args) 2))
-;            (syntax-fail "Invalid lambda syntax" stx)
-;            (let ((params (syntax-e (car args)))
-;                  (body (cdr args))
-;                  (scope (new-environment scope)))
-;                (new-lambda stx
-;                    (if (list? params)
-;                        (map (lambda (param)
-;                                (parameter-transformer scope param)) params)
-;                        (syntax-fail "Unsupported lambda format" stx))
-;                    (map (lambda (exp) (parser 'expression scope exp))
-;                        body)))))
-;        args))
-;
-;(define (let-transformer msg . args)
-;
+(syntax-transformer let:transformer (parser scope stx)
+    ((((variable value) ...) e ...)
+        (parser 'expression scope
+            #'((lambda (variable ...) e ...) value ...))))
 
 (define (setup-transformers scope)
     (scope 'bind 'load load:transformer)
     (scope 'bind 'lambda lambda:transformer)
-    ;(scope 'bind 'let let:transformer)
+    (scope 'bind 'let let:transformer)
 )

@@ -55,11 +55,13 @@
                 (else "Collection DNU: " msg args)))))
         self))
 
-(define (syntax->datum stx)
-    (let ((current (syntax-e stx)))
-        (if (list? current)
-            (map syntax->datum current)
-            current)))
+(define (msyntax->datum stx)
+    (cond
+        ((syntax? stx) (msyntax->datum (syntax-e stx)))
+        ((pair? stx) (cons (msyntax->datum (car stx))
+                           (msyntax->datum (cdr stx))))
+        ((null? stx) stx)
+        (else stx)))
 
 (define-syntax syntax-transformer
     (syntax-rules ()
@@ -69,11 +71,11 @@
             (stx-transformer (lambda (parser scope stx input)
                 (syntax-case input ()
                     ((match ...)
-                     (eval #`(begin toexpand ...)))
-                    ...
-                    (_ (syntax-fail
-                            (string-append (symbol->string 'name)
-                                           ": bad syntax") stx)))))
+                        (with-syntax ((parser parser)
+                                      (scope scope)
+                                      (stx stx))
+                            (eval #`(begin toexpand ...))))
+                     ...)))
             (transformer (lambda (msg . args)
                 (unless (eq? msg 'apply)
                     (syntax-fail 
