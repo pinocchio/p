@@ -55,6 +55,7 @@ TODO! Fix tests
        (c (Const 'basicNew: 42))
        (v (Var 'basicNew: "iv"))
        (assign (Assign 'to:expression: v c)))
+    null
     ;(assert (eq? (var 'eval) null))
     ;TODO to be fixed
     ;(display assign)

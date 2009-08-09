@@ -127,7 +127,7 @@
           ; which will be installed in the Metaclass class' dictionary so that
           ; it can be called on Metaclass. It generates a new Class and its
           ; corresponding Metaclass.
-           (newclass
+           (newClass
                 (method (self super name supercls instlayout clslayout)
                     (let ((mclass (self 'new))
                           (class null)
@@ -181,7 +181,7 @@
         (Metaclass 'objectAt:put: 1 (Dictionary 'basicNew))
         (Metaclass 'objectAt:put: 2 (vector 'instance))
         (Metaclass 'objectAt:put: 3 (vector 'Metaclass))
-        (mcdict 'objectAt:put: 'class:super:instvars:classvars: newclass)
+        (mcdict 'objectAt:put: 'class:super:instvars:classvars: newClass)
 
 
         ; Install the accessor methods

@@ -12,8 +12,10 @@
         (sources (new-collection))
 
         (parse-literal (lambda (scope stx literal)
-            (cond ((number? literal) (new-number literal))
-                  ((string? literal) (new-string literal))
+            (cond ((number? literal)    (new-number literal))
+                  ((string? literal)    (new-string literal))
+                  ((boolean? literal)   (new-bool literal))
+                  ((char? literal)      (new-char literal))
                   (else (lookup-variable stx scope)))))
         
         (parse-application (lambda (scope stx application)
@@ -111,6 +113,14 @@
                     (parser 'expression child #'first)
                     (parser 'expression child #'next) ...))))
 
+    (syntax-transformer p:dispatch (parser scope stx)
+        (((parameter ...) first next ...)
+            (let ((child (new-environment scope)))
+                (new-dispatch #'stx
+                    (list (expand-parameter child #'parameter) ...)
+                    (parser 'expression child #'first)
+                    (parser 'expression child #'next) ...))))
+
     (syntax-transformer p:let (parser scope stx)
         ((((variable value) ...) e ...)
             (parser 'expression scope
@@ -133,6 +143,28 @@
                             (set! ,#'variable ,#'value) ...
                             ,#'e ...)
                         ,@(map (lambda (var) 'null) '(value ...)))
+                    #'stx))))
+
+    (syntax-transformer p:let* (parser scope stx)
+        ((((var1 val1) (var2 val2) (var3 val3) ...) e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `((lambda (,#'var1)
+                        (let* ((,#'var2 ,#'val2)
+                               (,#'var3 ,#'val3) ...)
+                            ,#'e ...))
+                        ,#'val1)
+                    #'stx)))
+        ((((var1 val1)) e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `((lambda (,#'var1)
+                        ,#'e ...) ,#'val1)
+                    #'stx)))
+        ((() e ...)
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `((lambda () ,#'e ...))
                     #'stx))))
     
     (syntax-transformer p:set! (parser scope stx)
@@ -170,12 +202,15 @@
         ((name super (ivar ...) (cvar ...)
                      ((imn imr ...) ...)
                      ((cmn cmr ...) ...))
+            (display "New class: ")
+            (display 'name)
+            (newline)
             (parser 'expression scope
                 (datum->syntax #'stx
                     `(let ((,#'name (,#'super 'subclass:instvars:classvars:
                                                 ',#'name
-                                                (vector (,#'ivar ...))
-                                                (vector (,#'cvar ...)))))
+                                                (vector ',#'ivar ...)
+                                                (vector ',#'cvar ...))))
                         ,(datum->syntax #'imn
                             `(,#'name 'store:method:
                                 ',#'imn (method ,#'imr ...))
@@ -187,9 +222,53 @@
                         ,#'name)
                     #'stx))))
 
+    (syntax-transformer p:vector (parser scope stx)
+        ((element ...)
+            (new-vector #'stx
+                (map (lambda (el)
+                        (parser 'expression scope el))
+                    (list #'element ...)))))
+
+    (syntax-transformer p:list (parser scope stx)
+        ((element ...)
+            (new-list #'stx
+                (map (lambda (el)
+                        (parser 'expression scope el))
+                    (list #'element ...)))))
+
+    (syntax-transformer p:bootstrapping-type (parser scope stx)
+        ((name package
+            ((ivar ivar_t) ...)
+            (imeth ...)
+            (cmeth ...)
+            (hfunc ...))
+          (parser 'expression scope
+              'null)))
+
+    ; TODO don't re-evaluate the var code multiple times!
+    (syntax-transformer p:case (parser scope stx)
+        ((var ((test) todo) (else otherwise))
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `(if (eq? ,#'var ',#'test)
+                         ,#'todo
+                         ,#'otherwise)
+                    #'stx)))
+        ((var ((test1) todo1) ((test2) todo2) ... (else otherwise))
+            (parser 'expression scope
+                (datum->syntax #'stx
+                    `(if (eq? ,#'var ',#'test1)
+                         ,#'todo1
+                        (case ,#'var
+                            ((,#'test2) ,#'todo2)
+                            ...
+                            (else ,#'otherwise)))
+                    #'stx))))
+
     (scope 'bind 'load      p:load)
     (scope 'bind 'lambda    p:lambda)
     (scope 'bind 'let       p:let)
+    (scope 'bind 'let*      p:let*)
     (scope 'bind 'letrec    p:letrec)
     (scope 'bind 'set!      p:set!)
     (scope 'bind 'if        p:if)
@@ -197,4 +276,9 @@
     (scope 'bind 'quote     p:quote)
     (scope 'bind 'newclass  p:newclass)
     (scope 'bind 'method    p:method)
+    (scope 'bind 'vector    p:vector)
+    (scope 'bind 'list      p:list)
+    (scope 'bind 'bootstrapping-type p:bootstrapping-type)
+    (scope 'bind 'dispatch  p:dispatch)
+    (scope 'bind 'case      p:case)
 )
