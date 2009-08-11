@@ -82,7 +82,7 @@
                  (skipWhitespace:   (self super new)
                     (self 'objectAt:put: 3 new))
                  (<& (self super child)
-                    (self 'children: (append(self 'children) (cons child)))
+                    (self 'children: (append(self 'children) (list child)))
                     self)
                  (initialize (self super)
                     (self 'omit: #f)
