@@ -35,7 +35,7 @@
                                     (self 'characterConstant)) '<=
                                     array)) 
                             '<& ((#\) 'asParser) 'omit: #t)))
-                (array 'semantics: (lambda (result) result))
+                (array 'semantics: (lambda (result) result)) ;TODO implement semantics
                 array))
         (initializeArrayConst (self super)
                 (((#\# 'asParser) 'omit: #t) '& (self 'array)))
