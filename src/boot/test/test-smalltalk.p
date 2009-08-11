@@ -27,7 +27,6 @@
     ;(display ((StringScanner 'match:in: string null)  'class))
 
     ;testArray
-    (set! parser (scparser 'array))
-    (set! string (StringScanner 'on: "(1)"))
-    (display ((parser 'match:in: string null) 'class))
+    ;(set! parser (scparser 'array))
+    ;(set! string (StringScanner 'on: "()"))
 )))
