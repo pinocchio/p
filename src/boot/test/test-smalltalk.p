@@ -28,4 +28,6 @@
 
     ;testArray
     (set! parser (scparser 'array))
+    (set! string (StringScanner 'on: "()"))
+    (display (parser 'match:in: string null))
 )))
