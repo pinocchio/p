@@ -307,7 +307,7 @@ AST_Send_dispatch(Object receiver, Object msg, int argc, Object argv[])
 
     if (msg == Symbol_eval_) { 
         assert(argc == 1);
-        // TODO restore old env afterwards.
+        /* TODO restore old env afterwards. */
         Env = argv[0];
         AST_Send_eval(self);
     }
@@ -324,15 +324,38 @@ Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
         } else {
             Object args[2] = { (Object)new_SmallInt(index), key };
 
-            // TODO
-            continue_eval();
+            /* TODO Schedule at:in: message send. */
+
+            return;
         }
     }
-    // TODO jump to error handler.
+    /* TODO jump to error handler. */
     assert(self->key == key);
     assert(index < self->values->size);
 
     push_EXP(self->values->values[index]);
+}
+
+void
+Runtime_Env_store(Runtime_Env * self, unsigned int index,
+                  Object key, Object value)
+{
+    while (self->key != key || self->parent == Null) {
+        if (HEADER(self->parent) == Env_Class) {
+            self = (Runtime_Env *)self->parent;
+        } else {
+            Object args[2] = { (Object)new_SmallInt(index), key };
+
+            /* TODO Schedule at:in: message send. */
+
+            return;
+        }
+    }
+    /* TODO jump to error handler. */
+    assert(self->key == key);
+    assert(index < self->values->size);
+
+    self->values->values[index] = value;
 }
 
 void

@@ -71,6 +71,11 @@ typedef struct AST_Send {
     Type_Array      *arguments;
 } AST_Send;
 
+typedef struct AST_Assign {
+    Object          variable;
+    Object          expression;
+} AST_Assign;
+
 typedef struct Type_Class {
     cdp             dispatch;
     Object          name;
