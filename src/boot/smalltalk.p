@@ -14,6 +14,8 @@
         ;in an infinit loop!
         (doesNotUnderstand:in:with: (self super message env args) 
             (let ((selector (("initialize" 'concat: (message 'capitalized)) 'asSymbol)))
+                ;(display selector) 
+                ;(display "\n")
                 ((self 'parsers) 'at:ifAbsentPut:
                                  message (lambda () (self selector)))
                 ))
@@ -37,7 +39,7 @@
                             '<& ((#\) 'asParser) 'omit: #t)))
                 (array 'semantics: (lambda (result) result)) ;TODO implement semantics
                 array))
-        (initializeArrayConst (self super)
+        (initializeArrayConstant (self super)
                 (((#\# 'asParser) 'omit: #t) '& (self 'array)))
         (initializeAssignmentExpressions (self super)
                 (((self 'variableName) '& (self 'assignmentOp )) 'times))
@@ -48,12 +50,13 @@
             ((self 'parsers) 'at:ifAbsentPut: 'binaryExpression 
                 (let ((p (Parser 'named: "BINARY-EXPRESSION")))
                     (p '<= (((self 'unaryObjectDescription) '& (self 'binarySelector))
-                            '<& (self 'binaryObjectDescription))
+                            '<& (self 'binaryObjectDescription)))
                     (p 'semantics: (lambda (result) result))
-                    p)))
+                    p))
             (self 'injectBinaryObjectDescription)
             (self 'binaryExpression)
             )
+
         (initializeBinaryMessageDefinition (self super)
             (let ((p (Parser 'named: "BINARY-ARGUMENT")))
                 (p '<= ((self 'binarySelector) '& (self 'parameterName)))
@@ -75,8 +78,8 @@
         (initializeBlock (self super)
             (let ((p (Parser 'named: "BLOCK")))
                 (p '<= ((((((#\[ 'asParser) 'omit: #t) '&
-                        (((self 'blockArguments) '& (self 'bar)) 'optional)) '<&
-                        ((self 'temporaries) 'optional)) '<&
+                        (((self 'blockArguments) '& (self 'bar)) '?)) '<&
+                        ((self 'temporaries) '?)) '<&
                         (self 'statements)) '<&
                         ((#\] 'asParser) 'omit: #t)))
                 (p 'semantics: (lambda (result) result))
@@ -125,9 +128,10 @@
                 (self 'preStoreMessageExpression)
                 (self 'preStoreCascadedMessageExpression)
                 ((self 'parsers) 'objectAt:put: 'expression 
-                    ((p '<= ((((self 'assignmentExpression) '& (self 'cascadedMessageExpression))
-                            '<= (self 'messageExpression))
-                            '<= (self 'primary)))
+                    (begin (p '<= ((self 'assignmentExpressions) 
+                            '& (((self 'cascadedMessageExpression)
+                            '\| (self 'messageExpression))
+                            '<= (self 'primary))))
                     (p 'semantics: (lambda (result) result))
                     p))
                 ;After having built the expression parser, we inject the parsers into their stubs.
@@ -183,7 +187,7 @@
         (initializeMethod (self super)
             (let ((p (Parser 'named: "METHOD")))
                 (p '<= (((((self 'messagePattern)
-                        '& ((self 'temporaries) 'optional))
+                        '& ((self 'temporaries) '?))
                         '<& ((self 'annotation) 'times))
                         '<& (self 'statements))
                         '<& (self 'separator)))
@@ -220,7 +224,7 @@
             ("+*/\\~<>=@%?!&`,'" 'asChoice))
         (initializeStatements (self super)
             (let ((p (Parser 'named: "STATEMENTS")))
-                (p '<= (((self 'subExpression) 'times) '& (((self 'return) '\| (self 'finalExpression)) 'optional)))
+                (p '<= (((self 'subExpression) 'times) '& (((self 'return) '\| (self 'finalExpression)) '?)))
                 (p 'semantics: (lambda (result) result))
                 p))
         (initializeString (self super)
@@ -259,7 +263,8 @@
                 p))
         (initializeTemporaries (self super)
             (let ((p (Parser 'named: "TEMPORARIES")))
-                (p '<= (((self 'bar) '& ((self 'variableName) 'times)) '<& (self 'bar))))) 
+                (p '<= (((self 'bar) '& ((self 'variableName) 'times)) '<& (self 'bar)))
+                p)) 
         (initializeUnaryAnnotation (self super)
             (let ((p (Parser 'named: "UNARY-ANNOTATION")))
                 (p '<= (self 'unarySelector))
@@ -317,7 +322,7 @@
                     '<= (self 'block))
                     '<= (self 'braceExpression))
                     '<= (self 'scopedExpression))))
-        (preStoreBinaryDescription (self super)
+        (preStoreBinaryObjectDescription (self super)
             ((self 'parsers) 'at:ifAbsentPut: 'binaryObjectDescription (lambda () (Parser 'named: "BINARY-OBJECT-DESCRIPTION"))))
         (preStoreCascadedMessageExpression (self super)
             ((self 'parsers) 'at:ifAbsentPut: 'cascadedMessageExpression (lambda () (Parser 'named: "CASCADED-MESSAGE-EXPRESSION"))))
