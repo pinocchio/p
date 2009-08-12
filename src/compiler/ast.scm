@@ -32,9 +32,10 @@
 
 (define (new-lambda syntax args . body)
     (letrec (
+        (name (symbol->string (gensym 'lambda)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -43,9 +44,10 @@
 
 (define (new-method syntax args . body)
     (letrec (
+        (name (symbol->string (gensym 'method)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -54,9 +56,10 @@
 
 (define (new-dispatch syntax args . body)
     (letrec (
+        (name (symbol->string (gensym 'dispatch)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -65,9 +68,10 @@
 
 (define (new-variable syntax name)
     (letrec (
+        (name (symbol->string (gensym 'variable)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #t)
                 ((apply) (apply transform-apply (cons self args)))
@@ -76,9 +80,10 @@
 
 (define (new-assign syntax variable expression)
     (letrec (
+        (name (symbol->string (gensym 'assign)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -87,9 +92,10 @@
 
 (define (new-vector syntax expressions)
     (letrec (
+        (name (symbol->string (gensym 'vector)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -98,9 +104,10 @@
 
 (define (new-list syntax expressions)
     (letrec (
+        (name (symbol->string (gensym 'list)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -109,10 +116,11 @@
 
 (define (new-ast-list exps)
     (letrec (
+        (name (symbol->string (gensym 'astlist)))
         (expressions (apply new-collection exps))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((add) (apply expressions (cons msg args)))
                 ((apply) (apply transform-apply (cons self args)))
                 ((constant?) #f)
@@ -122,9 +130,10 @@
 
 (define (new-string str)
     (letrec (
+        (name (symbol->string (gensym 'string)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #f)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -133,9 +142,10 @@
 
 (define (new-number num)
     (letrec (
+        (name (symbol->string (gensym 'number)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #t)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -144,9 +154,10 @@
 
 (define (new-char char)
     (letrec (
+        (name (symbol->string (gensym 'char)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #t)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -155,9 +166,10 @@
 
 (define (new-bool bool)
     (letrec (
+        (name (symbol->string (gensym 'bool)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((constant?) #t)
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
@@ -166,9 +178,10 @@
 
 (define (new-application syntax receiver arguments)
     (letrec (
+        (name (symbol->string (gensym 'application)))
         (self (lambda (msg . args)
             (case msg
-                ((toCode) (error "TODO"))
+                ((toCode) (apply toCode args))
                 ((assignable?) #f)
                 ((apply) (apply transform-apply (cons self args)))
                 (else (error "Application does not understand: " msg args))))))
@@ -178,9 +191,10 @@
     (let ((symbols '()))
         (define (make-symbol sym)
             (letrec (
+                (name (symbol->string (gensym 'symbol)))
                 (self (lambda (msg . args)
                     (case msg
-                        ((toCode) (error "TODO"))
+                        ((toCode) (apply toCode args))
                         ((constant?) #t)
                         ((assignable?) #f)
                         ((apply) (apply transform-apply (cons self args)))
@@ -203,7 +217,7 @@
     (let ((natives '()))
         (define (make-native symbol native)
             (letrec (
-                
+                (name (symbol->string (gensym 'native)))
                 (self (lambda (msg . args)
                     (case msg
                         ((toCode) native)
