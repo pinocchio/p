@@ -137,7 +137,8 @@ new_Array(int c, Object v[])
     Type_Array * result = NEW_ARRAYED(Type_Array *, Type_Array, c);
     HEADER(result) = Array_Class;
     result->size = c;
-    for (c--; c > 0; c--) {
+    while (0 < c) {
+        c--;
         result->values[c] = v[c];
     }
     return result;
