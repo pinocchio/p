@@ -199,7 +199,10 @@
             ))
        (NotPredicate
             (newclass NotPredicate OneOrMore (consume) ()
-                ()
+                ((consume (self super) (self 'objectAt: 4))
+                 (consume: (self super bool) ;if this does not return self, it does not run
+                    (self 'objectAt:put: 4 bool)
+                    self))
                 ()
             ))
        (Parser

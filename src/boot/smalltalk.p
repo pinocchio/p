@@ -14,8 +14,8 @@
         ;in an infinit loop!
         (doesNotUnderstand:in:with: (self super message env args) 
             (let ((selector (("initialize" 'concat: (message 'capitalized)) 'asSymbol)))
-                ;(display selector) 
-                ;(display "\n")
+                (display selector) 
+                (display "\n")
                 ((self 'parsers) 'at:ifAbsentPut:
                                  message (lambda () (self selector)))
                 ))
@@ -68,8 +68,8 @@
                 (p 'semantics: (lambda (result) result))
                 p))
         (initializeBinaryObjectDescription (self super)
-                ((self 'binaryExpression)
-                (self 'binaryObjectDescription)))
+                (self 'binaryExpression)
+                (self 'binaryObjectDescription))
         (initializeBinarySelector (self super)
             (let ((p (Parser 'named: "BINARY-SELECTOR")))
                 (p '<= ((((self 'specialCharacter) '\| #\-) 'strongAnd: ((self 'specialCharacter) 'strongTimes)) '\| #\|))
@@ -287,7 +287,7 @@
                 p))
         (initializeUnaryObjectDescription (self super)
                 ((self 'unaryExpression) '\| (self 'primary)))
-        (initializeUnarySelector (self super) ;TODO implement consume
+        (initializeUnarySelector (self super) 
             (let ((p (Parser 'named: "UNARY-SELECTOR")))
                 (p '<= ((self 'identifier) 'strongAnd: (((#\: 'asParser) 'not) 'consume: #f)))
                 (p 'semantics: (lambda (result) result))
