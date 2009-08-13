@@ -53,8 +53,6 @@ typedef struct Runtime_Env {
 typedef struct Context_Frame {
     Object          self;
     Object          message;
-    unsigned int    argc;
-    Object          argv[];
 } Context_Frame;
 
 typedef struct AST_Variable {
@@ -89,6 +87,7 @@ typedef struct Type_ObjectClass {
 
 typedef struct AST_Method {
     unsigned int    paramc;
+    Object          environment;
     Object          body;
 } AST_Method;
 

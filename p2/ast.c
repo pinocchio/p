@@ -20,7 +20,6 @@ unsigned int _CNT_;
 Object Env;
 Context_Frame * Stack_Bottom;
 Context_Frame * Stack_Pointer;
-Context_Frame * Stack_Return;
 
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
@@ -49,7 +48,7 @@ get_Context()
 Context_Frame *
 return_Context(Context_Frame * frame)
 {
-    return (Context_Frame *)(frame - frame->argc - sizeof(Context_Frame));
+    return (Context_Frame *)(frame - sizeof(Context_Frame));
 }
 
 #define push_EXP(value)         Double_Stack[_EXP_++] = ((Object)value);
@@ -83,16 +82,9 @@ claim_Stack(unsigned int size)
 }
 
 Context_Frame *
-new_Context_With(unsigned int size, Object fill)
+new_Context()
 {
-    Context_Frame * result = claim_Stack(sizeof(Context_Frame) + size);
-    result->argc = size;
-
-    while (0 < size) {
-        size--;
-        result->argv[size] = fill;
-    }
-
+    Context_Frame * result = claim_Stack(sizeof(Context_Frame));
     return result;
 }
 
@@ -102,7 +94,6 @@ void init_Stack(unsigned int size)
     _CNT_           = STACK_SIZE - 1;
     Stack_Bottom    = NEW_ARRAYED(Context_Frame *, Object, size);
     Stack_Pointer   = Stack_Bottom;
-    Stack_Return    = new_Context_With(0, Null);
 }
 
 void init_Thread()
@@ -268,11 +259,8 @@ void AST_Constant_dispatch(Object self, Object msg, int argc, Object argv[])
 
 void AST_Send_send()
 {
+    /* todo */
     assert(NULL);
-    Send(get_Context()->self,
-         get_Context()->message,
-         get_Context()->argc,
-         get_Context()->argv);
 }
 
 void send_Eval()
@@ -284,16 +272,21 @@ void send_Eval()
 
 void store_argument()
 {
+    Object env = current_env();
     Object value = pop_EXP();
     Object index = pop_EXP();
     assert(HEADER(index) == SmallInt_Class);
     unsigned int idx = ((Type_SmallInt *)index)->value;
-    get_Context()->argv[idx] = value;
+
+    // TODO also allow other kinds of envs?
+    assert(HEADER(env) == Env_Class);
+    assert(idx < ((Runtime_Env *)env)->values->size);
+    ((Runtime_Env *)env)->values->values[idx] = value;
 }
 
 void AST_Send_eval(AST_Send * self)
 {
-    Context_Frame * context = new_Context_With(self->arguments->size, Null);
+    Context_Frame * context = new_Context();
     context->message = self->message;
 
     push_CNT(AST_Send_send);
@@ -386,6 +379,8 @@ void Runtime_Env_dispatch(Object receiver, Object msg, int argc, Object argv[])
         unsigned int index = ((Type_SmallInt *)argv[0])->value;
         return Runtime_Env_lookup(self, index, argv[1]);
     }
+
+    return FallbackSend(receiver, msg, argc, argv);
 }
 
 void AST_Variable_eval(AST_Variable * self)
@@ -435,7 +430,7 @@ void AST_Variable_dispatch(Object receiver, Object msg, int argc, Object argv[])
     return FallbackSend(receiver, msg, argc, argv);
 }
 
-void assign_assign()
+void ast_assign_assign()
 {
     zap_CNT();
     Object value = pop_EXP();
@@ -452,7 +447,7 @@ void assign_assign()
 
 void AST_Assign_eval(AST_Assign * self)
 {
-    push_CNT(assign_assign);
+    push_CNT(ast_assign_assign);
     push_EXP(self->variable);
     push_CNT(send_Eval);
     push_EXP(self->expression);
@@ -478,18 +473,23 @@ void AST_Assign_dispatch(Object receiver, Object msg, int argc, Object argv[])
     return FallbackSend(receiver, msg, argc, argv);
 }
 
-void AST_Method_Apply(AST_Method * self, int argc, Object argv[])
+void AST_Method_apply(AST_Method * self, int argc, Object argv[])
 {
     assert(self->paramc == argc);
-    new_Context_With(argc, Null);
-    
+
+    push_CNT(restore_env);
+    poke_EXP(1, current_env());
+
+    Env = new_Env(self->environment, (Object)self, argc);
 }
 
 void AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
 {
     AST_Method * self = (AST_Method *)receiver;
+
     if (msg == Symbol_apply_) {
         assert(argc == 1);
+
         assert(HEADER(argv[0]) == Array_Class);
         Type_Array * args = (Type_Array *)argv[0];
         Object arguments[args->size];
@@ -497,7 +497,8 @@ void AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
         for (i = 0; i < args->size; i++) {
             arguments[i] = args->values[i];
         }
-        return AST_Method_Apply(self, args->size, arguments);
+
+        return AST_Method_apply(self, args->size, arguments);
     }
 
     return FallbackSend(receiver, msg, argc, argv);
