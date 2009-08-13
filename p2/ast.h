@@ -52,11 +52,6 @@ typedef struct Runtime_Env {
     Object          values[];
 } Runtime_Env;
 
-typedef struct Context_Frame {
-    Object          self;
-    Object          message;
-} Context_Frame;
-
 typedef struct AST_Variable {
     unsigned int    index;
     Object          key;

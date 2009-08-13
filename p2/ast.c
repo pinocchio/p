@@ -18,8 +18,6 @@ Object  * _EXP_;
 cont    * _CNT_;
 
 Object Env;
-Context_Frame * Stack_Bottom;
-Context_Frame * Stack_Pointer;
 
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
@@ -37,18 +35,6 @@ static void Expand_Stack()
 {
     // TODO.
     exit(-1);
-}
-
-Context_Frame *
-get_Context()
-{
-    return Stack_Pointer;
-}
-
-Context_Frame *
-return_Context(Context_Frame * frame)
-{
-    return (Context_Frame *)(frame - sizeof(Context_Frame));
 }
 
 #define push_EXP(value)         (*(_EXP_++) = ((Object)value));
@@ -71,29 +57,10 @@ void restore_env()
     poke_EXP(1, result);
 }
 
-Context_Frame *
-claim_Stack(unsigned int size)
-{
-    if (STACK_SIZE - (Stack_Pointer - Stack_Bottom) < size) {
-        Expand_Stack();
-    }
-    Stack_Pointer += size;
-    return Stack_Pointer;
-}
-
-Context_Frame *
-new_Context()
-{
-    Context_Frame * result = claim_Stack(sizeof(Context_Frame));
-    return result;
-}
-
 void init_Stack(unsigned int size)
 {
     _EXP_           = (Object *)&Double_Stack[0];
     _CNT_           = (cont *)&Double_Stack[STACK_SIZE - 1];
-    Stack_Bottom    = NEW_ARRAYED(Context_Frame, Context_Frame[size-1]);
-    Stack_Pointer   = Stack_Bottom;
 }
 
 void init_Thread()
@@ -286,9 +253,6 @@ void store_argument()
 
 void AST_Send_eval(AST_Send * self)
 {
-    Context_Frame * context = new_Context();
-    context->message = self->message;
-
     push_CNT(AST_Send_send);
     push_EXP(self);
     
