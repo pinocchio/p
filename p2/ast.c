@@ -25,6 +25,10 @@ Context_Frame * Stack_Return;
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
 
+/* 
+ * Avoid longjmps as much as possible since they impose a large
+ * performance penalty!
+ */
 void continue_eval()
 {
     longjmp(Eval_Continue, 1);
@@ -51,22 +55,21 @@ return_Context(Context_Frame * frame)
 #define push_EXP(value)         Double_Stack[_EXP_++] = ((Object)value);
 #define pop_EXP()               Double_Stack[--_EXP_]
 #define peek_EXP(depth)         Double_Stack[_EXP_ - depth]
-#define poke_EXP(value, depth)  Double_Stack[_EXP_ - depth] = ((Object)value);
+#define poke_EXP(depth, value)  Double_Stack[_EXP_ - depth] = ((Object)value);
 #define zap_EXP()               _EXP_--;
 
 #define push_CNT(value)         Double_Stack[_CNT_--] = ((Object)value);
 #define pop_CNT()               ((cont)(Double_Stack[++_CNT_]))
 #define peek_CNT(depth)         ((cont)(Double_Stack[_CNT_ + depth]))
-#define poke_CNT(value, depth)  Double_Stack[_CNT_ + depth] = ((Object)value);
+#define poke_CNT(depth, value)  Double_Stack[_CNT_ + depth] = ((Object)value);
 #define zap_CNT()               _CNT_++;
 
-void
-return_from(Context_Frame * context, Object value)
+void restore_env()
 {
-    _CNT_ = get_Context()->return_cnt;
-    _EXP_ = get_Context()->return_exp;
-    Stack_Pointer = return_Context(context);
-    push_EXP(value);
+    zap_CNT();
+    Object result = pop_EXP();
+    Env = peek_EXP(1);
+    poke_EXP(1, result);
 }
 
 Context_Frame *
@@ -84,8 +87,6 @@ new_Context_With(unsigned int size, Object fill)
 {
     Context_Frame * result = claim_Stack(sizeof(Context_Frame) + size);
     result->argc = size;
-    result->return_exp = _EXP_;
-    result->return_cnt = _CNT_;
 
     while (0 < size) {
         size--;
@@ -109,11 +110,7 @@ void init_Thread()
     init_Stack(STACK_SIZE);
 }
 
-Object
-current_env()
-{
-    return Env;
-}
+Object current_env() { return Env; }
 
 #define Send(self, msg, argc, argv)\
     ((cdp)*HEADER((Object)self))((Object)self, msg, argc, argv);
@@ -175,6 +172,19 @@ new_Variable(const wchar_t* name)
 {
     AST_Variable * result   = NEW(AST_Variable);
     HEADER(result)          = Variable_Class;
+    /* TODO add name */
+    return result;
+}
+
+Object Assign_Class;
+
+AST_Assign *
+new_Assign(Object variable, Object expression)
+{
+    AST_Assign * result = NEW(AST_Assign);
+    HEADER(result)      = Assign_Class;
+    result->variable    = variable;
+    result->expression  = expression;
     return result;
 }
 
@@ -194,12 +204,11 @@ new_Send(Object receiver, Object msg, Type_Array * arguments)
 Object Method_Class;
 
 AST_Method *
-new_Method(unsigned int paramc, bool has_rest, Object body)
+new_Method(unsigned int paramc, Object body)
 {
     AST_Method * result = NEW(AST_Method);
     HEADER(result)      = Method_Class;
     result->paramc      = paramc;
-    result->has_rest    = has_rest;
     result->body        = body;
     return result;
 }
@@ -223,12 +232,14 @@ FallbackSend(Object self, Object msg, int argc, Object argv[])
     Object cls = HEADER(self);
     Object marg[1] = { msg };
     // TODO!
+    assert(NULL);
 }
 
 void Type_SmallInt_dispatch(Object self, Object msg, int argc, Object argv[])
 {
     if (msg == Symbol_eval || msg == Symbol_eval_) { 
-        return return_from(get_Context(), self);
+        /* Self is still on the stack */
+        return;
     } 
 
     return FallbackSend(self, msg, argc, argv);
@@ -237,7 +248,8 @@ void Type_SmallInt_dispatch(Object self, Object msg, int argc, Object argv[])
 void Type_Array_dispatch(Object self, Object msg, int argc, Object argv[])
 {
     if (msg == Symbol_eval || msg == Symbol_eval_) { 
-        return return_from(get_Context(), self);
+        /* Self is still on the stack */
+        return;
     }
 
     return FallbackSend(self, msg, argc, argv);
@@ -246,7 +258,9 @@ void Type_Array_dispatch(Object self, Object msg, int argc, Object argv[])
 void AST_Constant_dispatch(Object self, Object msg, int argc, Object argv[])
 {
     if (msg == Symbol_eval || msg == Symbol_eval_) { 
-        return return_from(get_Context(), self);
+        /* Self is still on the stack */
+        poke_EXP(1, ((AST_Constant *)self)->constant);
+        return;
     }
 
     return FallbackSend(self, msg, argc, argv);
@@ -254,6 +268,7 @@ void AST_Constant_dispatch(Object self, Object msg, int argc, Object argv[])
 
 void AST_Send_send()
 {
+    assert(NULL);
     Send(get_Context()->self,
          get_Context()->message,
          get_Context()->argc,
@@ -263,7 +278,7 @@ void AST_Send_send()
 void send_Eval()
 {
     zap_CNT();
-    Object exp = pop_EXP();
+    Object exp = peek_EXP(1);
     Send(exp, Symbol_eval, 0, _empty_);
 }
 
@@ -282,8 +297,9 @@ void AST_Send_eval(AST_Send * self)
     context->message = self->message;
 
     push_CNT(AST_Send_send);
-    push_CNT(send_Eval);
     push_EXP(self);
+    
+    push_CNT(send_Eval);
     push_EXP(self->receiver);
 
     int i;
@@ -295,20 +311,21 @@ void AST_Send_eval(AST_Send * self)
     }
 }
 
-void
-AST_Send_dispatch(Object receiver, Object msg, int argc, Object argv[])
+void AST_Send_dispatch(Object receiver, Object msg, int argc, Object argv[])
 {
 
     AST_Send * self = (AST_Send *)receiver;    
 
     if (msg == Symbol_eval) {
         assert(argc == 0);
+        pop_EXP();
         AST_Send_eval(self);
     }
 
     if (msg == Symbol_eval_) { 
         assert(argc == 1);
-        /* TODO restore old env afterwards. */
+        poke_EXP(1, Env);    
+        push_CNT(restore_env);
         Env = argv[0];
         AST_Send_eval(self);
     }
@@ -316,17 +333,17 @@ AST_Send_dispatch(Object receiver, Object msg, int argc, Object argv[])
     return FallbackSend(receiver, msg, argc, argv);
 }
 
-void
-Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
+void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Null) {
         if (HEADER(self->parent) == Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
-            Object args[2] = { (Object)new_SmallInt(index), key };
 
             /* TODO Schedule at:in: message send. */
+            assert(NULL);
 
+            //Object args[2] = { (Object)new_SmallInt(index), key };
             return;
         }
     }
@@ -337,18 +354,17 @@ Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     push_EXP(self->values->values[index]);
 }
 
-void
-Runtime_Env_store(Runtime_Env * self, unsigned int index,
-                  Object key, Object value)
+void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
+                        Object key, Object value)
 {
     while (self->key != key || self->parent == Null) {
         if (HEADER(self->parent) == Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
-            Object args[2] = { (Object)new_SmallInt(index), key };
-
             /* TODO Schedule at:in: message send. */
+            assert(NULL);
 
+            // Object args[2] = { (Object)new_SmallInt(index), key };
             return;
         }
     }
@@ -359,8 +375,7 @@ Runtime_Env_store(Runtime_Env * self, unsigned int index,
     self->values->values[index] = value;
 }
 
-void
-Runtime_Env_dispatch(Object receiver, Object msg, int argc, Object argv[])
+void Runtime_Env_dispatch(Object receiver, Object msg, int argc, Object argv[])
 {
     Runtime_Env * self = (Runtime_Env *)receiver;
 
@@ -373,52 +388,104 @@ Runtime_Env_dispatch(Object receiver, Object msg, int argc, Object argv[])
     }
 }
 
-void
-AST_Variable_dispatch(Object receiver, Object msg, int argc, Object argv[])
+void AST_Variable_eval(AST_Variable * self)
+{
+    Object env = current_env();
+
+    if (HEADER(env) == Env_Class) {
+        return Runtime_Env_lookup(
+                (Runtime_Env *)env, self->index, self->key);
+    } else {
+        // TODO
+        assert(NULL);
+        Object args[2] = { (Object)new_SmallInt(self->index), self->key };
+        return Send(env, Symbol_at_in_, 2, args);
+    }
+}
+
+void AST_Variable_assign(AST_Variable * self, Object value)
+{
+    Object env = current_env();
+
+    if (HEADER(env) == Env_Class) {
+        return Runtime_Env_assign(
+            (Runtime_Env *)env, self->index, self->key, value);
+    }
+    // TODO
+    assert(NULL);
+}
+
+void AST_Variable_dispatch(Object receiver, Object msg, int argc, Object argv[])
 {
     AST_Variable * self = (AST_Variable *)receiver;
 
     if (msg == Symbol_eval) {
         assert(argc == 0);
-
-        Object env = current_env();
-
-        if (HEADER(env) == Env_Class) {
-            return Runtime_Env_lookup(
-                    (Runtime_Env *)env, self->index, self->key);
-        } else {
-            Object args[2] = { (Object)new_SmallInt(self->index), self->key };
-            return Send(env, Symbol_at_in_, 2, args);
-        }
+        pop_EXP();
+        return AST_Variable_eval(self);
     }
     if (msg == Symbol_eval_) {
         assert(argc == 1);
+        poke_EXP(1, Env);    
+        push_CNT(restore_env);
         Object env = argv[0];
-
-        if (HEADER(env) == Env_Class) {
-            return Runtime_Env_lookup(
-                    (Runtime_Env *)env, self->index, self->key);
-        } else {
-            Object args[2] = { (Object)new_SmallInt(self->index), self->key };
-            return Send(env, Symbol_at_in_, 2, args);
-        }
+        return AST_Variable_eval(self);
     }
 
     return FallbackSend(receiver, msg, argc, argv);
 }
 
-void
-AST_Method_Apply(AST_Method * self, int argc, Object argv[])
+void assign_assign()
 {
-    if (self->has_rest) {
-        assert(self->paramc <= argc);
-    } else {
-        assert(self->paramc == argc);
+    zap_CNT();
+    Object value = pop_EXP();
+    Object var   = peek_EXP(1);
+    /* result of evaluating expression is result of assignment */
+    poke_EXP(1, value);
+
+    if (HEADER(var) == Variable_Class) {
+        return AST_Variable_assign((AST_Variable *)var, value);
     }
+    // TODO send assign: to self->variable.
+    assert(NULL);
 }
 
-void
-AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
+void AST_Assign_eval(AST_Assign * self)
+{
+    push_CNT(assign_assign);
+    push_EXP(self->variable);
+    push_CNT(send_Eval);
+    push_EXP(self->expression);
+}
+
+void AST_Assign_dispatch(Object receiver, Object msg, int argc, Object argv[])
+{
+    AST_Assign * self = (AST_Assign *)receiver;
+
+    if (msg == Symbol_eval) {
+        assert(argc == 0);
+        pop_EXP();
+        return AST_Assign_eval(self);
+    }
+    if (msg == Symbol_eval_) {
+        assert(argc == 1);
+        poke_EXP(1, Env);    
+        push_CNT(restore_env);
+        Env = argv[0];    
+        return AST_Assign_eval(self);
+    }
+    
+    return FallbackSend(receiver, msg, argc, argv);
+}
+
+void AST_Method_Apply(AST_Method * self, int argc, Object argv[])
+{
+    assert(self->paramc == argc);
+    new_Context_With(argc, Null);
+    
+}
+
+void AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
 {
     AST_Method * self = (AST_Method *)receiver;
     if (msg == Symbol_apply_) {
@@ -440,8 +507,8 @@ AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
     name = (Object)NEW(Type_Class);\
     ((Type_Class *)name)->dispatch = &type##_##dispatch;
 
-void
-end_eval() {
+void end_eval()
+{
     longjmp(Eval_Exit, 1);
 }
 
@@ -483,21 +550,25 @@ int main()
     init_class(Variable_Class,  AST_Variable);
     init_class(Send_Class,      AST_Send);
     init_class(Method_Class,    AST_Method);
+    init_class(Assign_Class,    AST_Assign);
     init_Thread();
 
     Env = new_Env(Null, Null, 0);
 
     Object i = (Object)new_SmallInt(10); 
 
-    AST_Variable * var = (AST_Variable *)new_Variable(L"test");
+    AST_Variable * var = new_Variable(L"test");
     var->index = 0;
     var->key   = (Object)new_SmallInt(10);
 
     Env = new_Env(current_env(), var->key, 1);
     Env = new_Env(current_env(), Null, 0);
 
+    Object test = (Object)new_SmallInt(10);
+    AST_Assign * assign = new_Assign((Object)var, test);
+
     int idx;
     for (idx = 0; idx < 100000000; idx++) {   
-        Eval((Object)var);
+        Eval((Object)assign);
     }
 }
