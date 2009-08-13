@@ -173,7 +173,7 @@ new_Method(unsigned int paramc, Object body)
 
 Object Env_Class;
 
-Object
+Runtime_Env *
 new_Env(Object parent, Object key, unsigned int size)
 {
     Runtime_Env * result    = NEW_ARRAYED(Runtime_Env, Object[size]);
@@ -181,7 +181,7 @@ new_Env(Object parent, Object key, unsigned int size)
     result->parent          = parent;
     result->key             = key;
     result->size            = size;
-    return (Object)result;
+    return result;
 }
 
 void
@@ -224,12 +224,6 @@ void AST_Constant_dispatch(Object self, Object msg, int argc, Object argv[])
     return FallbackSend(self, msg, argc, argv);
 }
 
-void AST_Send_send()
-{
-    /* todo */
-    assert(NULL);
-}
-
 void send_Eval()
 {
     zap_CNT();
@@ -237,13 +231,43 @@ void send_Eval()
     Send(exp, Symbol_eval, 0, _empty_);
 }
 
+void AST_Send_send()
+{
+    zap_CNT();
+
+    Object env = pop_EXP();
+    Object receiver = pop_EXP();
+
+    AST_Send * self = (AST_Send *)peek_EXP(1);
+    poke_EXP(1, receiver);
+
+    assert(HEADER(env) == Env_Class);
+
+    Send(receiver, self->message, self->argc, ((Runtime_Env *)env)->values);
+}
+
+void store_receiver()
+{
+    zap_CNT();
+    Object env = current_env();
+    Object receiver = pop_EXP();
+    assert(HEADER(env) == Env_Class);
+    assert(0 < ((Runtime_Env *)env)->size);
+    ((Runtime_Env *)env)->values[0] = receiver;
+}
+
 void store_argument()
 {
-    Object env = current_env();
+    zap_CNT();
+
     Object value = pop_EXP();
     Object index = pop_EXP();
+    Object env = pop_EXP();
+
     assert(HEADER(index) == SmallInt_Class);
     unsigned int idx = ((Type_SmallInt *)index)->value;
+    /* Skip receiver */
+    idx++;
 
     // TODO also allow other kinds of envs?
     assert(HEADER(env) == Env_Class);
@@ -253,8 +277,12 @@ void store_argument()
 
 void AST_Send_eval(AST_Send * self)
 {
+    Runtime_Env * env = new_Env(Null, Null, self->argc);
+
     push_CNT(AST_Send_send);
     push_EXP(self);
+
+    push_EXP((Object)env);
     
     push_CNT(send_Eval);
     push_EXP(self->receiver);
@@ -262,6 +290,7 @@ void AST_Send_eval(AST_Send * self)
     int i;
     for (i = 0; i < self->arguments->size; i++) {
         push_CNT(store_argument);
+        push_EXP((Object)env);
         push_EXP(new_SmallInt(i));
         push_CNT(send_Eval);
         push_EXP(self->arguments->values[i]);
@@ -444,7 +473,7 @@ void AST_Method_apply(AST_Method * self, int argc, Object argv[])
     push_CNT(restore_env);
     poke_EXP(1, current_env());
 
-    Env = new_Env(self->environment, (Object)self, argc);
+    Env = (Object)new_Env(self->environment, (Object)self, argc);
 }
 
 void AST_Method_dispatch(Object receiver, Object msg, int argc, Object argv[])
@@ -518,7 +547,7 @@ int main()
     init_class(Assign_Class,    AST_Assign);
     init_Thread();
 
-    Env = new_Env(Null, Null, 0);
+    Env = (Object)new_Env(Null, Null, 0);
 
     Object i = (Object)new_SmallInt(10); 
 
@@ -526,8 +555,8 @@ int main()
     var->index = 0;
     var->key   = (Object)new_SmallInt(10);
 
-    Env = new_Env(current_env(), var->key, 1);
-    Env = new_Env(current_env(), Null, 0);
+    Env = (Object)new_Env(current_env(), var->key, 1);
+    Env = (Object)new_Env(current_env(), Null, 0);
 
     Object test = (Object)new_SmallInt(10);
     AST_Assign * assign = new_Assign((Object)var, test);

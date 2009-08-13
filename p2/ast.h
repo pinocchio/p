@@ -61,6 +61,7 @@ typedef struct AST_Variable {
 typedef struct AST_Send {
     Object          receiver;
     Object          message;
+    unsigned int    argc;
     Type_Array      *arguments;
 } AST_Send;
 
