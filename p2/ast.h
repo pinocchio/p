@@ -8,11 +8,12 @@
 #define POINTER_INC(p) (((Object) p) + 1) 
 #define POINTER_DEC(p) (((Object) p) - 1)
 
-#define NEW(layout) NEW_ARRAYED(layout*, layout, 1)
+#define NEW(layout)\
+    NEW_ARRAYED(layout, Object[0])
 
-#define NEW_ARRAYED(type, layout, size) \
-            (type)(\
-               POINTER_INC(PALLOC(HEADER_SIZE + sizeof(layout[size]))))
+#define NEW_ARRAYED(base, end) \
+   (base *)(POINTER_INC(PALLOC(HEADER_SIZE +\
+            sizeof(base) + sizeof(end))))
 
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
 
@@ -47,7 +48,8 @@ typedef struct Type_Array {
 typedef struct Runtime_Env {
     Object          parent;
     Object          key;
-    Type_Array      *values;
+    unsigned int    size;
+    Object          values[];
 } Runtime_Env;
 
 typedef struct Context_Frame {

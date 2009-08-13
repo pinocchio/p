@@ -92,7 +92,7 @@ void init_Stack(unsigned int size)
 {
     _EXP_           = (Object *)&Double_Stack[0];
     _CNT_           = (cont *)&Double_Stack[STACK_SIZE - 1];
-    Stack_Bottom    = NEW_ARRAYED(Context_Frame *, Object, size);
+    Stack_Bottom    = NEW_ARRAYED(Context_Frame, Context_Frame[size-1]);
     Stack_Pointer   = Stack_Bottom;
 }
 
@@ -122,7 +122,7 @@ Object Array_Class;
 Type_Array *
 new_Array(int c, Object v[])
 {
-    Type_Array * result = NEW_ARRAYED(Type_Array *, Type_Array, c);
+    Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result) = Array_Class;
     result->size = c;
     while (0 < c) {
@@ -135,7 +135,7 @@ new_Array(int c, Object v[])
 Type_Array *
 new_Array_With(int c, Object init)
 {
-    Type_Array * result = NEW_ARRAYED(Type_Array *, Type_Array, c);
+    Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result) = Array_Class;
     result->size = c;
     while (0 < c) {
@@ -209,11 +209,11 @@ Object Env_Class;
 Object
 new_Env(Object parent, Object key, unsigned int size)
 {
-    Runtime_Env * result    = NEW(Runtime_Env);
+    Runtime_Env * result    = NEW_ARRAYED(Runtime_Env, Object[size]);
     HEADER(result)          = Env_Class;
     result->parent          = parent;
     result->key             = key;
-    result->values          = new_Array_With(size, Null);
+    result->size            = size;
     return (Object)result;
 }
 
@@ -280,8 +280,8 @@ void store_argument()
 
     // TODO also allow other kinds of envs?
     assert(HEADER(env) == Env_Class);
-    assert(idx < ((Runtime_Env *)env)->values->size);
-    ((Runtime_Env *)env)->values->values[idx] = value;
+    assert(idx < ((Runtime_Env *)env)->size);
+    ((Runtime_Env *)env)->values[idx] = value;
 }
 
 void AST_Send_eval(AST_Send * self)
@@ -311,7 +311,7 @@ void AST_Send_dispatch(Object receiver, Object msg, int argc, Object argv[])
 
     if (msg == Symbol_eval) {
         assert(argc == 0);
-        pop_EXP();
+        zap_EXP();
         AST_Send_eval(self);
     }
 
@@ -342,9 +342,9 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    assert(index < self->values->size);
+    assert(index < self->size);
 
-    push_EXP(self->values->values[index]);
+    push_EXP(self->values[index]);
 }
 
 void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
@@ -363,9 +363,9 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    assert(index < self->values->size);
+    assert(index < self->size);
 
-    self->values->values[index] = value;
+    self->values[index] = value;
 }
 
 void Runtime_Env_dispatch(Object receiver, Object msg, int argc, Object argv[])
@@ -416,7 +416,7 @@ void AST_Variable_dispatch(Object receiver, Object msg, int argc, Object argv[])
 
     if (msg == Symbol_eval) {
         assert(argc == 0);
-        pop_EXP();
+        zap_EXP();
         return AST_Variable_eval(self);
     }
     if (msg == Symbol_eval_) {
@@ -459,7 +459,7 @@ void AST_Assign_dispatch(Object receiver, Object msg, int argc, Object argv[])
 
     if (msg == Symbol_eval) {
         assert(argc == 0);
-        pop_EXP();
+        zap_EXP();
         return AST_Assign_eval(self);
     }
     if (msg == Symbol_eval_) {
@@ -569,7 +569,7 @@ int main()
     AST_Assign * assign = new_Assign((Object)var, test);
 
     int idx;
-    for (idx = 0; idx < 100000000; idx++) {   
+    for (idx = 0; idx < 10000000; idx++) {   
         Eval((Object)assign);
     }
 }
