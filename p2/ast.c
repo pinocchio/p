@@ -14,8 +14,8 @@ Object Null;
 Object _empty_[0];
 
 Object Double_Stack[STACK_SIZE];
-unsigned int _EXP_;
-unsigned int _CNT_;
+Object  * _EXP_;
+cont    * _CNT_;
 
 Object Env;
 Context_Frame * Stack_Bottom;
@@ -51,17 +51,17 @@ return_Context(Context_Frame * frame)
     return (Context_Frame *)(frame - sizeof(Context_Frame));
 }
 
-#define push_EXP(value)         Double_Stack[_EXP_++] = ((Object)value);
-#define pop_EXP()               Double_Stack[--_EXP_]
-#define peek_EXP(depth)         Double_Stack[_EXP_ - depth]
-#define poke_EXP(depth, value)  Double_Stack[_EXP_ - depth] = ((Object)value);
-#define zap_EXP()               _EXP_--;
+#define push_EXP(value)         (*(_EXP_++) = ((Object)value));
+#define pop_EXP()               (*(--_EXP_))
+#define peek_EXP(depth)         (*(_EXP_ - depth))
+#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
+#define zap_EXP()               (_EXP_--);
 
-#define push_CNT(value)         Double_Stack[_CNT_--] = ((Object)value);
-#define pop_CNT()               ((cont)(Double_Stack[++_CNT_]))
-#define peek_CNT(depth)         ((cont)(Double_Stack[_CNT_ + depth]))
-#define poke_CNT(depth, value)  Double_Stack[_CNT_ + depth] = ((Object)value);
-#define zap_CNT()               _CNT_++;
+#define push_CNT(value)         (*(_CNT_--) = ((cont)value));
+#define pop_CNT()               (*(++_CNT_))
+#define peek_CNT(depth)         (*(_CNT_ + depth))
+#define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
+#define zap_CNT()               (_CNT_++);
 
 void restore_env()
 {
@@ -90,8 +90,8 @@ new_Context()
 
 void init_Stack(unsigned int size)
 {
-    _EXP_           = 0;
-    _CNT_           = STACK_SIZE - 1;
+    _EXP_           = (Object *)&Double_Stack[0];
+    _CNT_           = (cont *)&Double_Stack[STACK_SIZE - 1];
     Stack_Bottom    = NEW_ARRAYED(Context_Frame *, Object, size);
     Stack_Pointer   = Stack_Bottom;
 }
