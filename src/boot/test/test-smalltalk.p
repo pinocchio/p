@@ -21,6 +21,18 @@
     (assert ((parser 'match:in: string null) '= "P"))
     (set! string (StringScanner 'on: "&"))
     (assert ((parser 'match:in: string null) '= "&"))
+    ;testCharacterConstant
+    (set! parser (scparser 'characterConstant))
+    (set! string (StringScanner 'on: "a"))
+    (assert (eq? (parser 'match:in: string null) null))
+    ;(set! string (StringScanner 'on: "$_")) ;this fails somewhere in Sequence?
+    
+    ;testKeyword
+    ;(set! parser (scparser 'keyword))
+    ;(set! string (StringScanner 'on: "abcd: "))
+    ;(assert ((parser 'match:in: string null) '= "abcd"))
+
+
     ;testAnnotation
     ;(set! parser (scparser 'annotation))
     ;(set! string (StringScanner 'on: "<abc: 1 def: (2 + 3) ghi : (3 b)>"))
