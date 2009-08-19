@@ -337,9 +337,9 @@ void Method_invoke(Object method, Object self,
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    if (class == sender->type) {
+    /*if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
-    }
+    }*/
 
     Object method = NULL;    
 
@@ -355,8 +355,9 @@ void Class_dispatch(AST_Send * sender, Object self, Object class,
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
-            sender->type = class;
+            /*sender->type = class;
             sender->method = method;
+            */
             return Method_invoke(method, self, class, args);
         }
     }
