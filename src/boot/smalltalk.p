@@ -114,7 +114,7 @@
         (initializeCharacterConstant (self super)
             (let ((p (Parser 'named: "CHARACTER-CONSTANT")))
                 (p '<= (((#\$ 'asParser) 'omit: #t) 'strongAnd: (self 'character)))
-                (p 'semantics: (lambda (result) result))
+                (p 'semantics: (lambda (scope match) match))
                 p))
         (initializeCommentFormat (self super)
             (let ((commentBorder (#\" 'asParser)))

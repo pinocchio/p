@@ -48,6 +48,7 @@
              (omit: (self super new)
                 (self 'objectAt:put: 1 new)
                 self)
+             (initialize (self super) (self 'omit: #f))
              (plus (self super) (OneOrMore 'for: self))
              (times (self super) (ZeroOrMore 'for: self))
              (and (self super) (AndPredicate 'for: self))

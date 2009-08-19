@@ -25,7 +25,8 @@
     (set! parser (scparser 'characterConstant))
     (set! string (StringScanner 'on: "a"))
     (assert (eq? (parser 'match:in: string null) null))
-    ;(set! string (StringScanner 'on: "$_")) ;this fails somewhere in Sequence?
+    (set! string (StringScanner 'on: "$_"))
+    (assert ((parser 'match:in: string null) '= "_"))
     
     ;testKeyword
     ;(set! parser (scparser 'keyword))
