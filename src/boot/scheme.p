@@ -15,7 +15,11 @@
             (if (eq? l null)
                 r
                 (cons (car l) (append (cdr l) r)))))
-        (list->string (lambda (list)
+         (map (lambda (f l)
+                (if (eq? l null)
+                    null
+                    (cons (f (car l)) (map f (cdr l))))))
+         (list->string (lambda (list)
             (let ((result (String 'basicNew: (length list))))
                 (let loop ((todo list)
                            (idx 0))

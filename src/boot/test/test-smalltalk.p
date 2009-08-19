@@ -27,7 +27,12 @@
     (assert (eq? (parser 'match:in: string null) null))
     (set! string (StringScanner 'on: "$_"))
     (assert ((parser 'match:in: string null) '= "_"))
-    
+   
+    ;testIdentifier
+    (set! parser (scparser 'identifier))
+    (set! string (StringScanner 'on: "abcd "))
+    (assert ((parser 'match:in: string null) '= "abcd"))
+
     ;testKeyword
     ;(set! parser (scparser 'keyword))
     ;(set! string (StringScanner 'on: "abcd: "))

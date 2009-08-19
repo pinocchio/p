@@ -148,7 +148,8 @@
                  (skipWhitespace: (self super new)
                     (self 'objectAt:put: 3 new))
                  (initialize (self super)
-                     (self 'skipWhitespace: #t)
+                    (self 'omit: #f) ;XXX should probably call super 'initialize instead?
+                    (self 'skipWhitespace: #t)
                      self)
                  (privateMatch:in: (self super input scope)
                     (let ((child (self 'child)))
