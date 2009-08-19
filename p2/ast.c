@@ -234,16 +234,6 @@ Object new_Class(Object superclass) {
     return (Object)result;
 }
 
-void
-FallbackSend(Object self, Object msg, int argc, Object argv[])
-{
-    exit(-1);
-    assert(NULL);
-    Object cls = HEADER(self);
-    Object marg[1] = { msg };
-    // TODO!
-}
-
 void AST_Constant_eval(AST_Constant * self)
 {
     poke_EXP(1, self->constant);
@@ -344,9 +334,13 @@ void Method_invoke(Object method, Object self,
     assert(NULL);
 }
 
-void Class_dispatch_from(Object self, Object class,
+void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
+    if (class == sender->type) {
+        return Method_invoke(sender->method, self, class, args);
+    }
+
     Object method = NULL;    
 
     while (class != Null) {
@@ -361,6 +355,8 @@ void Class_dispatch_from(Object self, Object class,
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
+            sender->type = class;
+            sender->method = method;
             return Method_invoke(method, self, class, args);
         }
     }
@@ -368,11 +364,6 @@ void Class_dispatch_from(Object self, Object class,
     // TODO send DNU;
     assert(NULL);
 
-}
-
-void Class_dispatch(Object self, Object msg, Type_Array * args)
-{
-    Class_dispatch_from(self, HEADER(self), msg, args);
 }
 
 void AST_Send_send()
@@ -385,7 +376,8 @@ void AST_Send_send()
     AST_Send * self = (AST_Send *)peek_EXP(1);
     poke_EXP(1, receiver);
 
-    Class_dispatch(receiver, self->message, args);
+    Class_dispatch(self, receiver, HEADER(receiver),
+                   self->message, args);
 }
 
 void store_argument()
