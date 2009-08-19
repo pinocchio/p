@@ -55,7 +55,6 @@ typedef struct AST_Send {
     Object          message;
     Object          type;
     Object          method;
-    unsigned int    argc;
     Type_Array      *arguments;
 } AST_Send;
 

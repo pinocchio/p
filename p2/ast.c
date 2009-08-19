@@ -11,7 +11,7 @@ Object Symbol_apply_;
 Object Symbol_at_in_;
 
 Object Null;
-Object _empty_[0];
+Type_Array * Empty_Array;
 
 Object Double_Stack[STACK_SIZE];
 Object  * _EXP_;
@@ -89,6 +89,7 @@ Object Array_Class;
 Type_Array *
 new_Raw_Array(int c)
 {
+    if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result) = Array_Class;
     return result;
@@ -97,6 +98,7 @@ new_Raw_Array(int c)
 Type_Array *
 new_Array(int c, Object v[])
 {
+    if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result) = Array_Class;
     result->size = c;
@@ -110,6 +112,7 @@ new_Array(int c, Object v[])
 Type_Array *
 new_Array_With(int c, Object init)
 {
+    if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result) = Array_Class;
     result->size = c;
@@ -259,7 +262,8 @@ void send_Eval()
         return AST_Send_eval((AST_Send *)exp);
     }
 
-    // Send(exp, Symbol_eval, 0, _empty_);
+    assert(NULL);
+
 }
 
 void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
@@ -337,9 +341,9 @@ void Method_invoke(Object method, Object self,
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    /*if (class == sender->type) {
+    if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
-    }*/
+    }
 
     Object method = NULL;    
 
@@ -355,9 +359,8 @@ void Class_dispatch(AST_Send * sender, Object self, Object class,
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
-            /*sender->type = class;
+            sender->type = class;
             sender->method = method;
-            */
             return Method_invoke(method, self, class, args);
         }
     }
@@ -395,7 +398,7 @@ void store_argument()
 
 void AST_Send_eval(AST_Send * self)
 {
-    Type_Array * args = new_Raw_Array(self->argc);
+    Type_Array * args = new_Raw_Array(self->arguments->size);
 
     push_CNT(AST_Send_send);
     push_EXP(args);
@@ -529,7 +532,7 @@ Eval(Object code)
 {
     push_EXP(code);
     push_CNT(end_eval);
-    push_CNT(send_Eval);
+    //push_CNT(send_Eval);
 
     if (!setjmp(Eval_Exit)) {
         setjmp(Eval_Continue);
@@ -567,9 +570,13 @@ int main()
     Method_Class        = new_Class(Null);
     Native_Method_Class = new_Class(Null);
 
+    Empty_Array = NEW(Type_Array);
+    Empty_Array->size = 0;
+    HEADER(Empty_Array) = Array_Class;
+
     init_Thread();
 
-    Env = (Object)new_Env(Null, Null, 0);
+    Env = (Object)new_Env_Sized(Null, Null, 0);
 
     Object i = (Object)new_SmallInt(10); 
 
