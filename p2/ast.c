@@ -532,7 +532,7 @@ Eval(Object code)
 {
     push_EXP(code);
     push_CNT(end_eval);
-    //push_CNT(send_Eval);
+    push_CNT(send_Eval);
 
     if (!setjmp(Eval_Exit)) {
         setjmp(Eval_Continue);
