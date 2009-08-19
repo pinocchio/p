@@ -25,7 +25,6 @@ typedef unsigned int    bool;
 struct Type_SmallInt;
 struct Type_Object;
 
-typedef void(*cdp)(Object self, Object msg, int argc, Object argv[]);
 typedef void(*cont)();
 
 typedef struct Type_SmallInt {
@@ -45,13 +44,6 @@ typedef struct Type_Array {
     Object          values[];
 } Type_Array;
 
-typedef struct Runtime_Env {
-    Object          parent;
-    Object          key;
-    unsigned int    size;
-    Object          values[];
-} Runtime_Env;
-
 typedef struct AST_Variable {
     unsigned int    index;
     Object          key;
@@ -70,12 +62,15 @@ typedef struct AST_Assign {
     Object          expression;
 } AST_Assign;
 
+typedef struct Type_Dictionary {
+    Type_Array     *layout;
+} Type_Dictionary;
+
 typedef struct Type_Class {
-    cdp             dispatch;
-    Object          name;
-    Object          super;
-    Object          methods;
-    Object          cvals[0];
+    Object              name;
+    Object              super;
+    Type_Dictionary    *methods;
+    Object              cvars[];
 } Type_Class;
 
 typedef struct Type_ObjectClass {
@@ -83,10 +78,31 @@ typedef struct Type_ObjectClass {
     unsigned int    size;
 } Type_ObjectClass;
 
+typedef void(*native)(Object self, Object class, Type_Array * args);
+
+typedef struct AST_Native_Method {
+    native          code;
+} AST_Native_Method;
+
 typedef struct AST_Method {
     unsigned int    paramc;
     Object          environment;
-    Object          body;
+    Type_Array     *body;
 } AST_Method;
+
+typedef struct Runtime_Env {
+    Object          self;
+    Object          class;
+    AST_Method      *method;
+    unsigned int    pc;
+    Object          parent;
+    Object          key;
+    Type_Array     *values;
+} Runtime_Env;
+
+extern void AST_Constant_eval();
+extern void AST_Variable_eval();
+extern void AST_Assign_eval();
+extern void AST_Send_eval();
 
 #endif // AST_H
