@@ -321,13 +321,14 @@
                           (isSymbol (self super) #f))
                         ()))
                 (load "boot/type/symbol.p")
+				; TODO create these definitions from within bootstrapping-type
                 ; inject class in the incomplete_type_classes
                 ;            incomplete class  super class  class name
                 (store_empty SmallInteger     Integer       'SmallInteger)
                 (store_empty Character        Magnitude     'Character)
                 (store_empty Array            ArCol         'Array)
                 (store_empty UndefinedObject  Object        'UndefinedObject)
-                (store_empty Scoped           Object         'Scoped)
+                (store_empty Scoped           Object        'Scoped)
                 (store_empty List             Evaluatable   'List)
                 (store_empty Call             Evaluatable   'Call)
                 (store_empty Const            Evaluatable   'Const)
@@ -336,15 +337,18 @@
                 (store_empty Capture          Evaluatable   'Capture)
                 (store_empty Dictionary       Object        'Dictionary)
                 (store_empty Cons             Object        'Cons)
-
-                ((Array 'class) 'store:method:
+			    
+                
+                ; TODO create these definitions from within bootstrapping-type
+                ; TODO store the methods directly in the type definition files
+				((Array 'class) 'store:method:
                     'basicNew (method (self super) (self 'basicNew: 0)))
                 ((Array 'class) 'store:method:
                     'basicNew: (method (self super size) (Array 'basicNew: size)))
-                ((String 'class) 'store:method:
-                    'basicNew (method (self super) (self 'basicNew: 0)))
-                ((String 'class) 'store:method:
-                    'basicNew: (method (self super size) (String 'basicNew: size)))
+                ;((String 'class) 'store:method:
+                ;    'basicNew (method (self super) (self 'basicNew: 0)))
+                ;((String 'class) 'store:method:
+                ;    'basicNew: (method (self super size) (String 'basicNew: size)))
                 ((Symbol 'class) 'store:method:
                     'basicNew: (method (self super size) (Symbol 'basicNew: size)))
                 (Dictionary 'store:method:

@@ -38,7 +38,7 @@
     ("void ast_call_invoke_env()"
         "
         context_object context = get_context();
-        call_object ast_call = context->self.ast_call;
+        call_object ast_call   = context->self.ast_call;
 
         object env          = context->env;
         object self         = argument_at(context, 1);

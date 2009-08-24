@@ -28,6 +28,7 @@ TODO! Fix tests
 
 |#
 
+; test_env_lookup
 (let* ((e1k "env1 identifier")
        (e2k "env2 indetifier")
        (v1 "v1")
@@ -51,18 +52,30 @@ TODO! Fix tests
     (assert (eq? (env2 'fetch:from: 0 e2k) v2))
     (assert (eq? (env2 'fetch:from: 0 e1k) v3)))
 
+; test_ast_assign_var and test_var_read
+; TODO check for const and smallint misinterpretation from test.c
 (let* ((env1 (Env 'scopeId:size: null 1))
        (c (Const 'basicNew: 42))
        (v (Var 'basicNew: "iv"))
        (assign (Assign 'to:expression: v c)))
     null
-    ;(assert (eq? (var 'eval) null))
+    ;(assert (eq? (v 'eval) null))
     ;TODO to be fixed
     ;(display assign)
     ;((Capture 'eval) 'parent: env)
     ;(display (assign 'eval))
     ;(assert (= (v 'eval) c))
     )
+
+; test_new_scoped
+;(let* ((env0 (Env 'scopeId:size: null 0))
+;       (constant ())
+;       (c (Const 'basicNew: 5))
+;       (v (Var 'basicNew: "iv"))
+;       (assign (Assign 'to:expression: v c)))
+;    (constant 'new:size: c 0)
+;    )
+
 
 ))
 

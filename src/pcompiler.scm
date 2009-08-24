@@ -499,6 +499,7 @@
     (string-append  "scheme_string_append")
     (symbolp        "scheme_symbolp")
     ; Classes built in the system
+	; TODO create these definitions from within bootstrapping-type
     (Array          "Array")
     (Character      "Character")
     (CharacterTable "CharacterTable")

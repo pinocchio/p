@@ -2,7 +2,7 @@
    ((eval ()
         "    
         assign_object self = context->self.ast_assign;
-        object env = context->env;
+        object env         = context->env;
 
         pop_context();
         "

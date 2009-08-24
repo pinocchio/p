@@ -1,6 +1,12 @@
 (require (lib "mzlib/string"))
 (load "pcompiler.scm")
 
+(define (filter-verbatim-c-method method)
+    (> (length method) 2))
+
+(define (filter-scheme-method method)
+    (= (length method) 2))
+
 (define (fname type name)
     (let ((result
         (string-append "gen_" type "_" (string->code (symbol->string name)))))
@@ -61,8 +67,10 @@
     (string-uppercase! hname)
     (string-lowercase! sname)
     (string-uppercase! package)
-    (let ((tr-inst (map (lambda (el) (transform-c-method el sname)) f-inst))
-          (tr-class (map (lambda (el) (transform-c-method el sname)) f-class))
+    (let ((tr-inst (map (lambda (el) (transform-c-method el sname))
+                        (filter (lambda (el) (filter-verbatim-c-method el)) f-inst)))
+          (tr-class (map (lambda (el) (transform-c-method el sname)) 
+                        (filter (lambda (el) (filter-verbatim-c-method el)) f-class)))
           (hof (build-path location (string-append sname ".h")))
           (cof (build-path location (string-append sname ".c"))))
       (let ((header `(("#ifndef SYSTEM_" ,package "_" ,hname "_H")

@@ -30,12 +30,26 @@
     (size ()
         "
         return_from_context(context, (object)context->self.string->size);
-        "))
+        ")
+     (concat: ((self super aString)
+                   (let* ((size (+ (self 'size) (aString 'size)))
+                          (result (String 'basicNew: size))) 
+                     (let loop ((idx 0))
+                       (if (= idx size)
+                           result
+                           (begin
+                           (if (< idx (self 'size))
+                               (result 'objectAt:put: idx (self 'objectAt: idx))
+                               (result 'objectAt:put: idx (aString 'objectAt: (- idx (self 'size)))))
+                           (loop (+ idx 1)))))))))
+; class methods        
    ((basicNew: (w_size)
         "
         cast(size, w_size, smallint);
         return_from_context(context, (object)make_string_sized(size->value));
-        "))
+        ")
+    (basicNew ((self super) (self 'basicNew: 0))))
+; helper methods        
    (("int inline string_equals(string_object string1, string_object string2)"
         "
         return symbol_equals((symbol_object) string1, (symbol_object) string2);
