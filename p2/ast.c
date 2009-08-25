@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <setjmp.h>
+#include <string.h>
 
 Object Symbol_eval;
 Object Symbol_eval_;
@@ -90,13 +91,13 @@ Object Dictionary_Class;
 
 /* ======================================================================== */
 
-Object
+Type_SmallInt *
 new_SmallInt(int value)
 {
     Type_SmallInt * result = NEW(Type_SmallInt);
     HEADER(result)         = SmallInt_Class;
     result->value          = value;
-    return (Object)result;
+    return result;
 }
 
 /* ======================================================================== */
@@ -207,13 +208,13 @@ new_Assign(Object variable, Object expression)
 
 void AST_Assign_eval(AST_Assign * self)
 {
-    push_CNT(ast_assign_assign);
+    push_CNT(AST_Assign_assign);
     poke_EXP(1, self->variable);
     push_CNT(send_Eval);
     push_EXP(self->expression);
 }
 
-void ast_assign_assign()
+void AST_Assign_assign()
 {
     zap_CNT();
     Object value = pop_EXP();
@@ -289,14 +290,14 @@ new_Method(unsigned int paramc, Type_Array * body)
     return result;
 }
 
-void ast_method_continue()
+void AST_Method_continue()
 {
     Runtime_Env * env = (Runtime_Env *)current_env();
     push_EXP(env->method->body->values[env->pc]);
 
     env->pc++;
     if (env->pc < env->method->body->size) {
-        push_CNT(ast_method_continue);
+        push_CNT(AST_Method_continue);
     }
 
     push_CNT(send_Eval);
@@ -317,7 +318,7 @@ void AST_Method_invoke(AST_Method * method, Object self,
     Env = (Object)env;
 
     if (1 < method->body->size) {
-        push_CNT(ast_method_continue);
+        push_CNT(AST_Method_continue);
     }
 
     push_EXP(method->body->values[0]);
@@ -372,6 +373,47 @@ new_Env_Sized(Object parent, Object key, int size)
     result->values          = new_Array_With(size, Null);
     return result;
 }
+void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
+{
+    while (self->key != key || self->parent == Null) {
+        if (HEADER(self->parent) == Env_Class) {
+            self = (Runtime_Env *)self->parent;
+        } else {
+
+            /* TODO Schedule at:in: message send. */
+            assert(NULL);
+
+            //Object args[2] = { (Object)new_SmallInt(index), key };
+            return;
+        }
+    }
+    /* TODO jump to error handler. */
+    assert(self->key == key);
+    assert(index < self->values->size);
+
+    push_EXP(self->values->values[index]);
+}
+
+void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
+                        Object key, Object value)
+{
+    while (self->key != key || self->parent == Null) {
+        if (HEADER(self->parent) == Env_Class) {
+            self = (Runtime_Env *)self->parent;
+        } else {
+            /* TODO Schedule at:in: message send. */
+            assert(NULL);
+
+            // Object args[2] = { (Object)new_SmallInt(index), key };
+            return;
+        }
+    }
+    /* TODO jump to error handler. */
+    assert(self->key == key);
+    assert(index < self->values->size);
+
+    self->values->values[index] = value;
+}
 
 /* ======================================================================== */
 
@@ -395,14 +437,46 @@ Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
     }
     return NULL;
 }
+
+Object Type_Dictionary_store_At_(Type_Dictionary * self, Object key, Object value)
+{
+    /* just store at the first empty location */
+    int i;
+    for (i = 0; i < self->layout->size; i=i+2) {
+        if (!self->layout->values[i]) {
+            self->layout->values[i] = key;
+            self->layout->values[i+1] = value;
+            return NULL;
+        }
+    }
+    return NULL;
+}
+
 /* ======================================================================== */
-
-
-Object new_Class(Object superclass) {
+    
+Object new_Class(Object superclass)
+{
     Type_Class * result = NEW(Type_Class);
     result->methods     = new_Dictionary();
     HEADER(result)      = Class_Class;
     return (Object)result;
+}
+
+Object new_Named_Class(Object superclass, const char* name)
+{
+    Type_Class * result = (Type_Class *) new_Class(superclass);
+    Type_String * string = NEW(Type_String);
+    string->value = strdup(name);
+    result->name = (Object) string;
+    return (Object)result;
+}
+
+void store_method(Object self, Object symbol, Object method)
+{
+    // XXX breaks encapsulation need type check here
+    Type_Class * class = (Type_Class *) HEADER(self);
+    Type_Dictionary * dict = class->methods;
+    Type_Dictionary_store_At_(dict, method, symbol);
 }
 
 /* ======================================================================== */
@@ -428,7 +502,6 @@ void send_Eval()
     }
 
     assert(NULL);
-
 }
 
 void push_restore_env()
@@ -498,48 +571,6 @@ void store_argument()
     args->values[idx] = value;
 }
 
-void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
-{
-    while (self->key != key || self->parent == Null) {
-        if (HEADER(self->parent) == Env_Class) {
-            self = (Runtime_Env *)self->parent;
-        } else {
-
-            /* TODO Schedule at:in: message send. */
-            assert(NULL);
-
-            //Object args[2] = { (Object)new_SmallInt(index), key };
-            return;
-        }
-    }
-    /* TODO jump to error handler. */
-    assert(self->key == key);
-    assert(index < self->values->size);
-
-    push_EXP(self->values->values[index]);
-}
-
-void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
-                        Object key, Object value)
-{
-    while (self->key != key || self->parent == Null) {
-        if (HEADER(self->parent) == Env_Class) {
-            self = (Runtime_Env *)self->parent;
-        } else {
-            /* TODO Schedule at:in: message send. */
-            assert(NULL);
-
-            // Object args[2] = { (Object)new_SmallInt(index), key };
-            return;
-        }
-    }
-    /* TODO jump to error handler. */
-    assert(self->key == key);
-    assert(index < self->values->size);
-
-    self->values->values[index] = value;
-}
-
 void end_eval()
 {
     longjmp(Eval_Exit, 1);
@@ -573,12 +604,11 @@ void NM_self(Object self, Object class, Type_Array * args)
     //printf("In NMSelf\n");
 }
 
-void store_method(Object self, Object symbol, Object method)
-{
-    // XXX breaks encapsulation need type check here
-    Type_Class * class = (Type_Class *) HEADER(self);
-    Type_Dictionary * dict = class->methods;
-    /* Type_Dictionary_store_At_(dict, method, symbol); */
+void SmallInt_plus(Object self, Object class, Type_Array * args) {
+    // XXX breaks encapsulation
+    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    Type_SmallInt * number = ((Type_SmallInt *) self);
+    number->value += ((Type_SmallInt *) args->values[0])->value;
 }
 
 int main()
@@ -592,14 +622,15 @@ int main()
 
     Class_Class         = new_Class(Null);
     HEADER(Class_Class) = Class_Class;
-    SmallInt_Class      = new_Class(Null);
-    Array_Class         = new_Class(Null);
-    Constant_Class      = new_Class(Null);
-    Variable_Class      = new_Class(Null);
-    Send_Class          = new_Class(Null);
-    Assign_Class        = new_Class(Null);
-    Method_Class        = new_Class(Null);
-    Native_Method_Class = new_Class(Null);
+    SmallInt_Class      = new_Named_Class(Null, "SmallInt");
+    Array_Class         = new_Named_Class(Null, "Array");
+    Constant_Class      = new_Named_Class(Null, "Constant");
+    Variable_Class      = new_Named_Class(Null, "Variable");
+    Send_Class          = new_Named_Class(Null, "Send");
+    Assign_Class        = new_Named_Class(Null, "Assign");
+    Method_Class        = new_Named_Class(Null, "Method");
+    Native_Method_Class = new_Named_Class(Null, "NativeMethod");
+    Dictionary_Class    = new_Named_Class(Null, "Dictionary");
 
     Empty_Array         = NEW(Type_Array);
     Empty_Array->size   = 0;
@@ -618,23 +649,30 @@ int main()
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
 
-    Object nmself           = new_Native_Method(NM_self);
+    Object nmself           = new_Native_Method(SmallInt_plus);
     Object Symbol_plus_     = (Object)new_SmallInt(100);
     Type_Dictionary * dict  = ((Type_Class *)SmallInt_Class)->methods;
     dict->layout->values[0] = Symbol_plus_;
     dict->layout->values[1] = nmself;
+    
+    //store_method(SmallInt_Class, Symbol_plus_, nmself);
 
-    Object constant = (Object)new_SmallInt(10);
-    Object test     = (Object)new_Constant(constant);
-
-    AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
+    Type_SmallInt * constant = new_SmallInt(0);
+    Object test     = (Object)new_Constant((Object)constant);
+    Object add     = (Object)new_Constant((Object)new_SmallInt(1));
+    
+    //AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
+    AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
 
     //AST_Assign * assign = new_Assign((Object)var, test);
 
     int idx;
-    for (idx = 0; idx < 10000000; idx++) {   
+    int count = 10000000;
+    count = 1000;
+    for (idx = 0; idx < count; idx++) {   
     //    Eval((Object)assign);
         Eval((Object)send);
     }
+    assert(constant->value == count);
 
 }

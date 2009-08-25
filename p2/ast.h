@@ -1,8 +1,8 @@
 #ifndef AST_H
 #define AST_H
 
-#include <gc/gc.h>
-#define PALLOC GC_MALLOC
+/* #include <gc/gc.h>
+#define PALLOC GC_MALLOC */
 
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) p) + 1) 
@@ -12,7 +12,7 @@
     NEW_ARRAYED(layout, Object[0])
 
 #define NEW_ARRAYED(base, end) \
-   (base *)(POINTER_INC(PALLOC(HEADER_SIZE +\
+   (base *)(POINTER_INC(malloc(HEADER_SIZE +\
             sizeof(base) + sizeof(end))))
 
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
@@ -34,6 +34,11 @@ typedef struct Type_SmallInt {
 typedef struct Type_Object {
     Object          ivals[0]; 
 } Type_Object;
+
+
+typedef struct Type_String { 
+    char * value;  
+} Type_String;
 
 typedef struct AST_Constant {
     Object          constant;
@@ -116,7 +121,7 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
                         
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
 
-void ast_assign_assign();
+void AST_Assign_assign();
 void push_restore_env();
 void send_Eval();
 void store_argument();
