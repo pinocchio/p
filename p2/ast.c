@@ -247,29 +247,53 @@ new_Send(Object receiver, Object msg, Type_Array * arguments)
 void AST_Send_send()
 {
     zap_CNT();
-
     Object receiver = pop_EXP();
     // XXX Breaks encapsulation, need type check here
     Type_Array * args = (Type_Array *)pop_EXP();
 
     // XXX Breaks encapsulation, need type check here
+    // ignore the original args on the stack
     AST_Send * self = (AST_Send *)peek_EXP(1);
+    // insert the receiver at the old ast_send position
     poke_EXP(1, receiver);
 
     Class_dispatch(self, receiver, HEADER(receiver),
                    self->message, args);
 }
 
+void send_Eval()
+{
+    zap_CNT();
+    Object exp = peek_EXP(1);
+
+    Object class = HEADER(exp);
+    // TODO get rid of this switch and do a "double dispatch"
+    if (class == Constant_Class) {
+        return AST_Constant_eval((AST_Constant *)exp);
+    }
+    if (class == Variable_Class) {
+        return AST_Variable_eval((AST_Variable *)exp);
+    }
+    if (class == Assign_Class) {
+        return AST_Assign_eval((AST_Assign *)exp);
+    }
+    if (class == Send_Class) {
+        return AST_Send_eval((AST_Send *)exp);
+    }
+
+    assert(NULL);
+}
+
 void AST_Send_eval(AST_Send * self)
 {
     Type_Array * args = new_Raw_Array(self->arguments->size);
-
+    // execute the method
     push_CNT(AST_Send_send);
     push_EXP(args);
-    
+    // evaluate the receiver
     push_CNT(send_Eval);
     push_EXP(self->receiver);
-
+    // evaluate the arguments
     int i;
     for (i = 0; i < self->arguments->size; i++) {
         push_CNT(store_argument);
@@ -335,6 +359,21 @@ void AST_Method_apply(AST_Method * self, int argc, Object argv[])
 
     Env = (Object)new_Env_Sized(self->environment, (Object)self, argc);
 }
+
+void Method_invoke(Object method, Object self,
+                   Object class, Type_Array * args)
+{
+    if (HEADER(method) == Method_Class) {
+        return AST_Method_invoke((AST_Method *)method, self, class, args);
+    }
+    if (HEADER(method) == Native_Method_Class) {
+        return AST_Native_Method_invoke((AST_Native_Method *)method, self,
+                                        class, args);
+    }
+    // Only AST_Method supported for now
+    assert(NULL);
+}
+
 /* ======================================================================== */
 
 Object
@@ -494,52 +533,6 @@ void store_method(Type_Class * class, Object symbol, Object method)
     Type_Dictionary_store_(dict, symbol, method);
 }
 
-/* ======================================================================== */
-
-void send_Eval()
-{
-    zap_CNT();
-    Object exp = peek_EXP(1);
-
-    Object class = HEADER(exp);
-
-    if (class == Constant_Class) {
-        return AST_Constant_eval((AST_Constant *)exp);
-    }
-    if (class == Variable_Class) {
-        return AST_Variable_eval((AST_Variable *)exp);
-    }
-    if (class == Assign_Class) {
-        return AST_Assign_eval((AST_Assign *)exp);
-    }
-    if (class == Send_Class) {
-        return AST_Send_eval((AST_Send *)exp);
-    }
-
-    assert(NULL);
-}
-
-void push_restore_env()
-{
-    push_CNT(restore_env);
-    poke_EXP(1, current_env());
-}
-
-
-void Method_invoke(Object method, Object self,
-                   Object class, Type_Array * args)
-{
-    if (HEADER(method) == Method_Class) {
-        return AST_Method_invoke((AST_Method *)method, self, class, args);
-    }
-    if (HEADER(method) == Native_Method_Class) {
-        return AST_Native_Method_invoke((AST_Native_Method *)method, self,
-                                        class, args);
-    }
-    // Only AST_Method supported for now
-    assert(NULL);
-}
-
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
@@ -571,6 +564,15 @@ void Class_dispatch(AST_Send * sender, Object self, Object class,
     assert(NULL);
 
 }
+
+/* ======================================================================== */
+
+void push_restore_env()
+{
+    push_CNT(restore_env);
+    poke_EXP(1, current_env());
+}
+
 
 void store_argument()
 {
