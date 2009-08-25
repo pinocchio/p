@@ -59,8 +59,9 @@ void restore_env()
 
 void init_Stack(unsigned int size)
 {
-    _EXP_           = (Object *)&Double_Stack[0];
-    _CNT_           = (cont *)&Double_Stack[STACK_SIZE - 1];
+    // TODO allocate the stack with the giben size
+    _EXP_ = (Object *)&Double_Stack[0];
+    _CNT_ = (cont *)&Double_Stack[STACK_SIZE - 1];
 }
 
 void init_Thread()
@@ -73,25 +74,40 @@ Object current_env() { return Env; }
 //#define Send(self, msg, argc, argv)\
 //    ((cdp)*HEADER((Object)self))((Object)self, msg, argc, argv);
 
+/* ======================================================================== */
+
+Object Constant_Class;
+Object Array_Class;
+Object Send_Class;
+Object Assign_Class;
+Object Variable_Class;
 Object SmallInt_Class;
+Object Method_Class;
+Object Native_Method_Class;
+Object Env_Class;
+Object Class_Class;
+Object Dictionary_Class;
+
+/* ======================================================================== */
 
 Object
 new_SmallInt(int value)
 {
     Type_SmallInt * result = NEW(Type_SmallInt);
-    HEADER(result) = SmallInt_Class;
-    result->value = value;
+    HEADER(result)         = SmallInt_Class;
+    result->value          = value;
     return (Object)result;
 }
 
-Object Array_Class;
+/* ======================================================================== */
+
 
 Type_Array *
 new_Raw_Array(int c)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result) = Array_Class;
+    HEADER(result)      = Array_Class;
     return result;
 }
 
@@ -123,29 +139,61 @@ new_Array_With(int c, Object init)
     return result;
 }
 
-Object Constant_Class;
+/* ======================================================================== */
 
 AST_Constant *
 new_Constant(Object constant)
 {
     AST_Constant * result = NEW(AST_Constant);
-    HEADER(result) = Constant_Class;
-    result->constant = constant;
+    HEADER(result)        = Constant_Class;
+    result->constant      = constant;
     return result;
 }
 
-Object Variable_Class;
+
+void AST_Constant_eval(AST_Constant * self)
+{
+    poke_EXP(1, self->constant);
+}
+
+/* ======================================================================== */
 
 AST_Variable *
 new_Variable(const wchar_t* name)
 {
-    AST_Variable * result   = NEW(AST_Variable);
-    HEADER(result)          = Variable_Class;
+    AST_Variable * result = NEW(AST_Variable);
+    HEADER(result)        = Variable_Class;
     /* TODO add name */
     return result;
 }
 
-Object Assign_Class;
+void AST_Variable_eval(AST_Variable * self)
+{
+    Object env = current_env();
+
+    if (HEADER(env) == Env_Class) {
+        return Runtime_Env_lookup(
+                (Runtime_Env *)env, self->index, self->key);
+    } else {
+        // TODO
+        assert(NULL);
+        Object args[2] = { (Object)new_SmallInt(self->index), self->key };
+        // return Send(env, Symbol_at_in_, 2, args);
+    }
+}
+
+void AST_Variable_assign(AST_Variable * self, Object value)
+{
+    Object env = current_env();
+
+    if (HEADER(env) == Env_Class) {
+        return Runtime_Env_assign(
+            (Runtime_Env *)env, self->index, self->key, value);
+    }
+    // TODO
+    assert(NULL);
+}
+/* ======================================================================== */
 
 AST_Assign *
 new_Assign(Object variable, Object expression)
@@ -157,20 +205,79 @@ new_Assign(Object variable, Object expression)
     return result;
 }
 
-Object Send_Class;
+void AST_Assign_eval(AST_Assign * self)
+{
+    push_CNT(ast_assign_assign);
+    poke_EXP(1, self->variable);
+    push_CNT(send_Eval);
+    push_EXP(self->expression);
+}
+
+void ast_assign_assign()
+{
+    zap_CNT();
+    Object value = pop_EXP();
+    Object var   = peek_EXP(1);
+    /* result of evaluating expression is result of assignment */
+    poke_EXP(1, value);
+
+    if (HEADER(var) == Variable_Class) {
+        return AST_Variable_assign((AST_Variable *)var, value);
+    }
+    // TODO send assign: to self->variable.
+    assert(NULL);
+}
+
+/* ======================================================================== */
 
 AST_Send *
 new_Send(Object receiver, Object msg, Type_Array * arguments)
 {
-    AST_Send * result   = NEW(AST_Send);
-    HEADER(result)      = Send_Class;
-    result->receiver    = receiver;
-    result->message     = msg;
-    result->arguments   = arguments;
+    AST_Send * result = NEW(AST_Send);
+    HEADER(result)    = Send_Class;
+    result->receiver  = receiver;
+    result->message   = msg;
+    result->arguments = arguments;
     return result;
 }
 
-Object Method_Class;
+void AST_Send_send()
+{
+    zap_CNT();
+
+    Object receiver = pop_EXP();
+    // XXX Breaks encapsulation, need type check here
+    Type_Array * args = (Type_Array *)pop_EXP();
+
+    // XXX Breaks encapsulation, need type check here
+    AST_Send * self = (AST_Send *)peek_EXP(1);
+    poke_EXP(1, receiver);
+
+    Class_dispatch(self, receiver, HEADER(receiver),
+                   self->message, args);
+}
+
+void AST_Send_eval(AST_Send * self)
+{
+    Type_Array * args = new_Raw_Array(self->arguments->size);
+
+    push_CNT(AST_Send_send);
+    push_EXP(args);
+    
+    push_CNT(send_Eval);
+    push_EXP(self->receiver);
+
+    int i;
+    for (i = 0; i < self->arguments->size; i++) {
+        push_CNT(store_argument);
+        push_EXP(args);
+        push_EXP(new_SmallInt(i));
+        push_CNT(send_Eval);
+        push_EXP(self->arguments->values[i]);
+    }
+}
+
+/* ======================================================================== */
 
 AST_Method *
 new_Method(unsigned int paramc, Type_Array * body)
@@ -182,18 +289,67 @@ new_Method(unsigned int paramc, Type_Array * body)
     return result;
 }
 
-Object Native_Method_Class;
+void ast_method_continue()
+{
+    Runtime_Env * env = (Runtime_Env *)current_env();
+    push_EXP(env->method->body->values[env->pc]);
+
+    env->pc++;
+    if (env->pc < env->method->body->size) {
+        push_CNT(ast_method_continue);
+    }
+
+    push_CNT(send_Eval);
+}
+
+void AST_Method_invoke(AST_Method * method, Object self,
+                       Object class, Type_Array * args)
+{
+    push_restore_env();
+
+    Runtime_Env * env = new_Env(method->environment, (Object)method, args);
+
+    env->self   = self;
+    env->class  = class;
+    env->method = method;
+    env->pc     = 1;
+
+    Env = (Object)env;
+
+    if (1 < method->body->size) {
+        push_CNT(ast_method_continue);
+    }
+
+    push_EXP(method->body->values[0]);
+    push_CNT(send_Eval);
+}
+
+void AST_Method_apply(AST_Method * self, int argc, Object argv[])
+{
+    assert(self->paramc == argc);
+
+    push_restore_env();
+
+    Env = (Object)new_Env_Sized(self->environment, (Object)self, argc);
+}
+/* ======================================================================== */
 
 Object
 new_Native_Method(native code)
 {
     AST_Native_Method * result = NEW(AST_Native_Method);
-    HEADER(result)  = Native_Method_Class;
-    result->code    = code;
+    HEADER(result)             = Native_Method_Class;
+    result->code               = code;
     return (Object)result;
 }
 
-Object Env_Class;
+void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
+                              Object class, Type_Array * args)
+{
+    method->code(self, class, args);
+}
+
+/* ======================================================================== */
 
 Runtime_Env *
 new_Env(Object parent, Object key, Type_Array * values)
@@ -217,18 +373,30 @@ new_Env_Sized(Object parent, Object key, int size)
     return result;
 }
 
-Object Dictionary_Class;
+/* ======================================================================== */
 
 Type_Dictionary *
 new_Dictionary()
 {
     Type_Dictionary * result = NEW(Type_Dictionary);
-    HEADER(result)  = Dictionary_Class;
-    result->layout  = new_Array_With(2, Null);
+    HEADER(result)           = Dictionary_Class;
+    result->layout           = new_Array_With(2, Null);
     return result;
 }
 
-Object Class_Class;
+
+Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
+{
+    int i;
+    for (i = 0; i < self->layout->size; i=i+2) {
+        if (self->layout->values[i] == key) {
+            return self->layout->values[i+1];
+        }
+    }
+    return NULL;
+}
+/* ======================================================================== */
+
 
 Object new_Class(Object superclass) {
     Type_Class * result = NEW(Type_Class);
@@ -237,10 +405,7 @@ Object new_Class(Object superclass) {
     return (Object)result;
 }
 
-void AST_Constant_eval(AST_Constant * self)
-{
-    poke_EXP(1, self->constant);
-}
+/* ======================================================================== */
 
 void send_Eval()
 {
@@ -266,63 +431,12 @@ void send_Eval()
 
 }
 
-void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
-                              Object class, Type_Array * args)
-{
-    method->code(self, class, args);
-}
-
-Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
-{
-    int i;
-    for (i = 0; i < self->layout->size; i=i+2) {
-        if (self->layout->values[i] == key) {
-            return self->layout->values[i+1];
-        }
-    }
-    return NULL;
-}
-
-void ast_method_continue()
-{
-    Runtime_Env * env = (Runtime_Env *)current_env();
-    push_EXP(env->method->body->values[env->pc]);
-
-    env->pc++;
-    if (env->pc < env->method->body->size) {
-        push_CNT(ast_method_continue);
-    }
-
-    push_CNT(send_Eval);
-}
-
 void push_restore_env()
 {
     push_CNT(restore_env);
     poke_EXP(1, current_env());
 }
 
-void AST_Method_invoke(AST_Method * method, Object self,
-                       Object class, Type_Array * args)
-{
-    push_restore_env();
-
-    Runtime_Env * env = new_Env(method->environment, (Object)method, args);
-
-    env->self = self;
-    env->class = class;
-    env->method = method;
-    env->pc = 1;
-
-    Env = (Object)env;
-
-    if (1 < method->body->size) {
-        push_CNT(ast_method_continue);
-    }
-
-    push_EXP(method->body->values[0]);
-    push_CNT(send_Eval);
-}
 
 void Method_invoke(Object method, Object self,
                    Object class, Type_Array * args)
@@ -370,50 +484,18 @@ void Class_dispatch(AST_Send * sender, Object self, Object class,
 
 }
 
-void AST_Send_send()
-{
-    zap_CNT();
-
-    Object receiver = pop_EXP();
-    Type_Array * args = (Type_Array *)pop_EXP();
-
-    AST_Send * self = (AST_Send *)peek_EXP(1);
-    poke_EXP(1, receiver);
-
-    Class_dispatch(self, receiver, HEADER(receiver),
-                   self->message, args);
-}
-
 void store_argument()
 {
     zap_CNT();
 
     Object value = pop_EXP();
+    // XXX Breaks encapsulation, need type check here
     Object index = pop_EXP();
+    // XXX Breaks encapsulation, need type check here
     Type_Array * args = (Type_Array *)pop_EXP();
 
     unsigned int idx = ((Type_SmallInt *)index)->value;
     args->values[idx] = value;
-}
-
-void AST_Send_eval(AST_Send * self)
-{
-    Type_Array * args = new_Raw_Array(self->arguments->size);
-
-    push_CNT(AST_Send_send);
-    push_EXP(args);
-    
-    push_CNT(send_Eval);
-    push_EXP(self->receiver);
-
-    int i;
-    for (i = 0; i < self->arguments->size; i++) {
-        push_CNT(store_argument);
-        push_EXP(args);
-        push_EXP(new_SmallInt(i));
-        push_CNT(send_Eval);
-        push_EXP(self->arguments->values[i]);
-    }
 }
 
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
@@ -458,65 +540,6 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
     self->values->values[index] = value;
 }
 
-void AST_Variable_eval(AST_Variable * self)
-{
-    Object env = current_env();
-
-    if (HEADER(env) == Env_Class) {
-        return Runtime_Env_lookup(
-                (Runtime_Env *)env, self->index, self->key);
-    } else {
-        // TODO
-        assert(NULL);
-        Object args[2] = { (Object)new_SmallInt(self->index), self->key };
-        // return Send(env, Symbol_at_in_, 2, args);
-    }
-}
-
-void AST_Variable_assign(AST_Variable * self, Object value)
-{
-    Object env = current_env();
-
-    if (HEADER(env) == Env_Class) {
-        return Runtime_Env_assign(
-            (Runtime_Env *)env, self->index, self->key, value);
-    }
-    // TODO
-    assert(NULL);
-}
-
-void ast_assign_assign()
-{
-    zap_CNT();
-    Object value = pop_EXP();
-    Object var   = peek_EXP(1);
-    /* result of evaluating expression is result of assignment */
-    poke_EXP(1, value);
-
-    if (HEADER(var) == Variable_Class) {
-        return AST_Variable_assign((AST_Variable *)var, value);
-    }
-    // TODO send assign: to self->variable.
-    assert(NULL);
-}
-
-void AST_Assign_eval(AST_Assign * self)
-{
-    push_CNT(ast_assign_assign);
-    poke_EXP(1, self->variable);
-    push_CNT(send_Eval);
-    push_EXP(self->expression);
-}
-
-void AST_Method_apply(AST_Method * self, int argc, Object argv[])
-{
-    assert(self->paramc == argc);
-
-    push_restore_env();
-
-    Env = (Object)new_Env_Sized(self->environment, (Object)self, argc);
-}
-
 void end_eval()
 {
     longjmp(Eval_Exit, 1);
@@ -550,6 +573,14 @@ void NM_self(Object self, Object class, Type_Array * args)
     //printf("In NMSelf\n");
 }
 
+void store_method(Object self, Object symbol, Object method)
+{
+    // XXX breaks encapsulation need type check here
+    Type_Class * class = (Type_Class *) HEADER(self);
+    Type_Dictionary * dict = class->methods;
+    /* Type_Dictionary_store_At_(dict, method, symbol); */
+}
+
 int main()
 {
     Symbol_eval     = (Object)new_SmallInt(0);
@@ -570,8 +601,8 @@ int main()
     Method_Class        = new_Class(Null);
     Native_Method_Class = new_Class(Null);
 
-    Empty_Array = NEW(Type_Array);
-    Empty_Array->size = 0;
+    Empty_Array         = NEW(Type_Array);
+    Empty_Array->size   = 0;
     HEADER(Empty_Array) = Array_Class;
 
     init_Thread();
@@ -581,20 +612,20 @@ int main()
     Object i = (Object)new_SmallInt(10); 
 
     AST_Variable * var = new_Variable(L"test");
-    var->index = 0;
-    var->key   = (Object)new_SmallInt(10);
+    var->index         = 0;
+    var->key           = (Object)new_SmallInt(10);
 
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
 
-    Object nmself = new_Native_Method(NM_self);
-    Object Symbol_plus_    = (Object)new_SmallInt(100);
-    Type_Dictionary * dict = ((Type_Class *)SmallInt_Class)->methods;
+    Object nmself           = new_Native_Method(NM_self);
+    Object Symbol_plus_     = (Object)new_SmallInt(100);
+    Type_Dictionary * dict  = ((Type_Class *)SmallInt_Class)->methods;
     dict->layout->values[0] = Symbol_plus_;
     dict->layout->values[1] = nmself;
 
     Object constant = (Object)new_SmallInt(10);
-    Object test = (Object)new_Constant(constant);
+    Object test     = (Object)new_Constant(constant);
 
     AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
 

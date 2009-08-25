@@ -101,9 +101,28 @@ typedef struct Runtime_Env {
     Type_Array     *values;
 } Runtime_Env;
 
+
+
 extern void AST_Constant_eval();
 extern void AST_Variable_eval();
 extern void AST_Assign_eval();
 extern void AST_Send_eval();
+
+Runtime_Env * new_Env(Object parent, Object key, Type_Array * values);
+Runtime_Env * new_Env_Sized(Object parent, Object key, int size);
+
+void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
+                        Object key, Object value);
+                        
+void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
+
+void ast_assign_assign();
+void push_restore_env();
+void send_Eval();
+void store_argument();
+
+void Class_dispatch(AST_Send * sender, Object self, Object class,
+                         Object msg, Type_Array * args);
+
 
 #endif // AST_H
