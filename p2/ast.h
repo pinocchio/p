@@ -35,7 +35,6 @@ typedef struct Type_Object {
     Object          ivals[0]; 
 } Type_Object;
 
-
 typedef struct Type_String { 
     char * value;  
 } Type_String;

@@ -84,6 +84,8 @@ Object Assign_Class;
 Object Variable_Class;
 Object SmallInt_Class;
 Object Method_Class;
+Object True_Class;
+Object False_Class;
 Object Native_Method_Class;
 Object Env_Class;
 Object Class_Class;
@@ -117,8 +119,8 @@ new_Array(int c, Object v[])
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result) = Array_Class;
-    result->size = c;
+    HEADER(result)      = Array_Class;
+    result->size        = c;
     while (0 < c) {
         c--;
         result->values[c] = v[c];
@@ -131,8 +133,8 @@ new_Array_With(int c, Object init)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result) = Array_Class;
-    result->size = c;
+    HEADER(result)      = Array_Class;
+    result->size        = c;
     while (0 < c) {
         c--;
         result->values[c] = init;
@@ -438,15 +440,22 @@ Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
     return NULL;
 }
 
-Object Type_Dictionary_store_At_(Type_Dictionary * self, Object key, Object value)
+Object Type_Dictionary_store_at_(Type_Dictionary * self, Object key, Object value, int index)
+{
+    /* just store at the first empty location */
+    self->layout->values[index*2] = key;
+    self->layout->values[(index*2) +1] = value;
+    return value;
+}
+
+Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 {
     /* just store at the first empty location */
     int i;
     for (i = 0; i < self->layout->size; i=i+2) {
         if (!self->layout->values[i]) {
-            self->layout->values[i] = key;
-            self->layout->values[i+1] = value;
-            return NULL;
+            Type_Dictionary_store_at_(self, key, value, i/2);
+            return value;
         }
     }
     return NULL;
@@ -471,12 +480,18 @@ Object new_Named_Class(Object superclass, const char* name)
     return (Object)result;
 }
 
-void store_method(Object self, Object symbol, Object method)
+void store_method_at(Type_Class * class, Object symbol, Object method, int index)
 {
     // XXX breaks encapsulation need type check here
-    Type_Class * class = (Type_Class *) HEADER(self);
     Type_Dictionary * dict = class->methods;
-    Type_Dictionary_store_At_(dict, method, symbol);
+    Type_Dictionary_store_at_(dict, symbol, method, index);
+}
+
+void store_method(Type_Class * class, Object symbol, Object method)
+{
+    // XXX breaks encapsulation need type check here
+    Type_Dictionary * dict = class->methods;
+    Type_Dictionary_store_(dict, symbol, method);
 }
 
 /* ======================================================================== */
@@ -651,15 +666,15 @@ int main()
 
     Object nmself           = new_Native_Method(SmallInt_plus);
     Object Symbol_plus_     = (Object)new_SmallInt(100);
-    Type_Dictionary * dict  = ((Type_Class *)SmallInt_Class)->methods;
-    dict->layout->values[0] = Symbol_plus_;
-    dict->layout->values[1] = nmself;
+    //Type_Dictionary * dict  = ((Type_Class *)SmallInt_Class)->methods;
+    //dict->layout->values[0] = Symbol_plus_;
+    //dict->layout->values[1] = nmself;
     
-    //store_method(SmallInt_Class, Symbol_plus_, nmself);
+    store_method_at((Type_Class *)SmallInt_Class, Symbol_plus_, nmself, 0);
 
     Type_SmallInt * constant = new_SmallInt(0);
     Object test     = (Object)new_Constant((Object)constant);
-    Object add     = (Object)new_Constant((Object)new_SmallInt(1));
+    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
     
     //AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
     AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
