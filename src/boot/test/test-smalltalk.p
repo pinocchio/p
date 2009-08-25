@@ -34,10 +34,26 @@
     (assert ((parser 'match:in: string null) '= "abcd"))
 
     ;testKeyword
-    ;(set! parser (scparser 'keyword))
-    ;(set! string (StringScanner 'on: "abcd: "))
-    ;(assert ((parser 'match:in: string null) '= "abcd"))
+    (set! parser (scparser 'keyword))
+    (set! string (StringScanner 'on: "abcd: "))
+    (assert ((parser 'match:in: string null) '= "abcd"))
 
+    ;testString
+    ;XXX results in an Out of bounds in peg.p Terminal>>privateMatch:in: 
+    (set! parser (scparser 'string))
+    (set! string (StringScanner 'on: ""))
+    (assert (eq? (parser 'match:in: string null) null))
+    (assert (= (string 'pos) 0))
+    (set! string (StringScanner 'on: "'abc'"))
+    (assert ((parser 'match:in: string null) '= "abc"))
+    (assert (= (string 'pos) 5))
+    ;(set! string (StringScanner 'on: "'abc''"))
+    ;(assert ((parser 'match:in: string null) '= "abc"))
+    ;(assert (= (string 'pos) 5))
+    ;(set! string (StringScanner 'on: "'abc''d'"))
+    ;(display (parser 'match:in: string null))
+    ;(assert ((parser 'match:in: string null) '= "abc'd"))
+    ;(assert (= (string 'pos) 8))
 
     ;testAnnotation
     ;(set! parser (scparser 'annotation))

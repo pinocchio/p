@@ -30,12 +30,12 @@
         (initializeArray (self super) 
             (let ((array (Parser 'named: "ARRAY")))
                 (array '<= ((((#\( 'asParser) 'omit: #t) '&
-                            (((((   (self 'numberConstant) '\|
+                            ((((((   (self 'numberConstant) '\|
                                     (self 'stringConstant)) '<=
                                     (self 'symbolInArray)) '<=
                                     (self 'symbolConstant)) '<=
                                     (self 'characterConstant)) '<=
-                                    array)) 
+                                    array) 'times)) 
                             '<& ((#\) 'asParser) 'omit: #t)))
                 (array 'semantics: (lambda (scope match) match)) ;TODO implement semantics
                 array))
@@ -232,7 +232,8 @@
             (let ((stringBorder (("'" 'asParser) 'omit: #t)))
             (let ((p (Parser 'named: "STRING")))
                 (p '<= (((stringBorder 'strongAnd: ((stringBorder 'not) 'strongTimes)) '<& stringBorder) 'strongPlus))
-                (p 'semantics: (lambda (scope match) match))
+                (p 'semantics: (lambda (scope match) ;does not handle escaped '' yet 
+                    (list->string (map (lambda (s) (s 'objectAt: 0)) (car match) ))))
                 p)))
         (initializeStringConstant (self super)
             (let ((p (Parser 'named: "STRING-CONSTANT")))

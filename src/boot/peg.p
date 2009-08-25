@@ -206,7 +206,19 @@
                 ((consume (self super) (self 'objectAt: 4))
                  (consume: (self super bool) ;if this does not return self, it does not run
                     (self 'objectAt:put: 4 bool)
-                    self))
+                    self)
+                 (initialize (self super) (self 'consume: #t))
+                 (privateMatch:in: (self super input scope)
+                    (let*   ((child (self 'child))
+                             (match (child 'match:in: input scope)))
+                        (if (eq? null match)
+                            (if (self 'consume)
+                                (let ((next (input 'next)))
+                                    (if (eq? null next)
+                                        null
+                                        (next 'asString)))
+                                #t)
+                            null))))
                 ()
             ))
        (Parser
