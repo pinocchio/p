@@ -48,14 +48,35 @@ typedef struct Type_Symbol {
 
 typedef Type_Symbol Type_String;
 
-typedef struct AST_Constant {
-    Object          constant;
-} AST_Constant;
+typedef struct Type_Boolean {
+    char value;
+} Type_Boolean;
 
 typedef struct Type_Array {
     unsigned int    size;
     Object          values[];
 } Type_Array;
+
+typedef struct Type_Dictionary {
+    Type_Array     *layout;
+} Type_Dictionary;
+
+typedef struct Type_Class {
+    Object              name;
+    Object              super;
+    Type_Dictionary    *methods;
+    Object              cvars[];
+} Type_Class;
+
+typedef struct Type_ObjectClass {
+    Type_Class      clspart;
+    unsigned int    size;
+} Type_ObjectClass;
+
+typedef struct AST_Constant {
+    Object          constant;
+} AST_Constant;
+
 
 typedef struct AST_Variable {
     unsigned int    index;
@@ -75,22 +96,6 @@ typedef struct AST_Assign {
     Object          variable;
     Object          expression;
 } AST_Assign;
-
-typedef struct Type_Dictionary {
-    Type_Array     *layout;
-} Type_Dictionary;
-
-typedef struct Type_Class {
-    Object              name;
-    Object              super;
-    Type_Dictionary    *methods;
-    Object              cvars[];
-} Type_Class;
-
-typedef struct Type_ObjectClass {
-    Type_Class      clspart;
-    unsigned int    size;
-} Type_ObjectClass;
 
 typedef void(*native)(Object self, Object class, Type_Array * args);
 

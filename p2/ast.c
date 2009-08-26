@@ -12,7 +12,6 @@ Object Symbol_apply_;
 Object Symbol_at_in_;
 
 Object Null;
-Type_Array * Empty_Array;
 
 Object Double_Stack[STACK_SIZE];
 Object  * _EXP_;
@@ -79,6 +78,7 @@ Object current_env() { return Env; }
 
 Object Array_Class;
 Object Assign_Class;
+Object Boolean_Class;
 Object Class_Class;
 Object Constant_Class;
 Object Dictionary_Class;
@@ -156,6 +156,12 @@ new_String(const wchar_t* str)
 
 /* ======================================================================== */
 
+Type_Boolean * True;
+Type_Boolean * False;
+
+/* ======================================================================== */
+
+Type_Array * Empty_Array;
 
 Type_Array *
 new_Raw_Array(int c)
@@ -688,6 +694,18 @@ int main()
     Symbol_Class        = new_Named_Class(Null, L"Symbol");
     String_Class        = new_Named_Class(Symbol_Class, L"String");   
     Variable_Class      = new_Named_Class(Null, L"Variable");
+
+    Boolean_Class      = new_Named_Class(Null, L"Boolean");
+    True_Class         = new_Named_Class(Boolean_Class, L"True");
+    False_Class        = new_Named_Class(Boolean_Class, L"False");
+    
+    True = NEW(Type_Boolean);
+    HEADER(True) = True_Class;
+    True->value = 1;
+    
+    False = NEW(Type_Boolean);
+    HEADER(False) = False_Class;
+    False->value = 0;
 
     Empty_Array         = NEW(Type_Array);
     Empty_Array->size   = 0;
