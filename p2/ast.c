@@ -112,9 +112,16 @@ Object current_env() { return Env; }
 
 /* ========================================================================== */
 
+Type_SmallInt * SmallInt_Zero;
+Type_SmallInt * SmallInt_One;
+Type_SmallInt * SmallInt_Two;
+
 Type_SmallInt *
 new_SmallInt(int value)
 {
+    //if (value == 0) { return SmallInt_Zero; }
+    //if (value == 1) { return SmallInt_One; }
+    //if (value == 2) { return SmallInt_Two; }
     Type_SmallInt * result = NEW(Type_SmallInt);
     HEADER(result)         = (Object) SmallInt_Class;
     result->value          = value;
@@ -124,17 +131,18 @@ new_SmallInt(int value)
 
 void SmallInt_plus(Object self, Object class, Type_Array * args) 
 {
-    // TODO assert args size
-    //assert(args->size == 1);
-    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
+    assert(HEADER(self) == (Object)SmallInt_Class);
+    assert(args->size == 1);
+    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
     number->value += ((Type_SmallInt *) args->values[0])->value;
 }
 
 void SmallInt_minus(Object self, Object class, Type_Array * args) 
 {
-    // TODO assert args size
-    //assert(args->size == 1);
+    assert(HEADER(self) == (Object)SmallInt_Class);
+    assert(args->size == 1);
+    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
     if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
     Type_SmallInt * number = ((Type_SmallInt *) self);
     number->value -= ((Type_SmallInt *) args->values[0])->value;
@@ -142,9 +150,9 @@ void SmallInt_minus(Object self, Object class, Type_Array * args)
 
 void SmallInt_equals(Object self, Object class, Type_Array * args) 
 {
-    // TODO assert args size
-    //assert(args->size == 1);
-    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
+    assert(HEADER(self) == (Object)SmallInt_Class);
+    assert(args->size == 1);
+    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
     if (number->value == ((Type_SmallInt *) args->values[0])->value) {
         push_EXP(True_Const);        
@@ -155,7 +163,17 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
 
 void pre_initialize_Type_SmallInt() 
 {
-    SmallInt_Class      = new_Named_Class((Object)Object_Class, L"SmallInt");
+    SmallInt_Class          = new_Named_Class((Object)Object_Class, L"SmallInt");
+    
+    SmallInt_Zero           = NEW(Type_SmallInt);
+    SmallInt_Zero->value    = 0;
+    HEADER(SmallInt_Zero)   = (Object)SmallInt_Class;
+    SmallInt_One            = NEW(Type_SmallInt);
+    SmallInt_One->value     = 1;
+    HEADER(SmallInt_One)    = (Object)SmallInt_Class;
+    SmallInt_Two            = NEW(Type_SmallInt);
+    SmallInt_Two->value     = 2;
+    HEADER(SmallInt_Two)    = (Object)SmallInt_Class;
 }
 
 void post_initialize_Type_SmallInt()
@@ -254,6 +272,7 @@ new_Raw_Array(int c)
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result)      = (Object)Array_Class;
+    result->size = c;
     return result;
 }
 
@@ -896,7 +915,6 @@ int main()
     
     int idx;
     int count = 10000000;
-    count = 1000;
     for (idx = 0; idx < count; idx++) {   
         //    Eval((Object)assign);
         Eval((Object)send);

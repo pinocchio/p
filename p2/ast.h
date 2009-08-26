@@ -7,7 +7,6 @@
 #else 
 #define PALLOC malloc
 #endif
-#define PALLOC malloc
 
 
 #define HEADER_SIZE (sizeof(Object))
