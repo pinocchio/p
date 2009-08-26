@@ -40,11 +40,13 @@ typedef struct Type_Object {
     Object          ivals[0]; 
 } Type_Object;
 
-typedef struct Type_String { 
+typedef struct Type_Symbol { 
     Type_SmallInt * hash;
     Type_SmallInt * size;
     wchar_t * value;
-} Type_String;
+} Type_Symbol;
+
+typedef Type_Symbol Type_String;
 
 typedef struct AST_Constant {
     Object          constant;

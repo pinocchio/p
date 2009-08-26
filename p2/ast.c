@@ -89,6 +89,7 @@ Object Native_Method_Class;
 Object Send_Class;
 Object SmallInt_Class;
 Object String_Class;
+Object Symbol_Class;
 Object True_Class;
 Object Variable_Class;
 
@@ -130,17 +131,28 @@ wchar_t* wcsdup(const wchar_t* input) {
    return output;
 }
 
+Type_Symbol *
+new_Symbol(const wchar_t* name)
+{
+    Type_Symbol * symbol = NEW(Type_Symbol);
+    HEADER(symbol)       = Symbol_Class;
+    symbol->hash         = NULL;
+    symbol->value        = wcsdup(name);
+    symbol->size         = new_SmallInt(wcslen(name));
+    return symbol;
+}
+
+
+/* ======================================================================== */
+
 Type_String *
 new_String(const wchar_t* str)
 {
-    Type_String *string = NEW(Type_String);
+    Type_String * string = (Type_String *) new_Symbol(str);
     HEADER(string)      = String_Class;
-    string->hash        = NULL;
-    string->value       = wcsdup(str);
-    string->size        = new_SmallInt(wcslen(str));
     return string;
-}
 
+}
 
 /* ======================================================================== */
 
@@ -673,7 +685,8 @@ int main()
     Native_Method_Class = new_Named_Class(Null, L"NativeMethod");
     Send_Class          = new_Named_Class(Null, L"Send");
     SmallInt_Class      = new_Named_Class(Null, L"SmallInt");
-    String_Class        = new_Named_Class(Null, L"String");
+    Symbol_Class        = new_Named_Class(Null, L"Symbol");
+    String_Class        = new_Named_Class(Symbol_Class, L"String");   
     Variable_Class      = new_Named_Class(Null, L"Variable");
 
     Empty_Array         = NEW(Type_Array);
