@@ -1,9 +1,9 @@
-#include <ast.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
 #include <setjmp.h>
-#include <string.h>
+#include <wchar.h>
+#include <ast.h>
 
 Object Symbol_eval;
 Object Symbol_eval_;
@@ -77,19 +77,20 @@ Object current_env() { return Env; }
 
 /* ======================================================================== */
 
-Object Constant_Class;
 Object Array_Class;
-Object Send_Class;
 Object Assign_Class;
-Object Variable_Class;
-Object SmallInt_Class;
-Object Method_Class;
-Object True_Class;
-Object False_Class;
-Object Native_Method_Class;
-Object Env_Class;
 Object Class_Class;
+Object Constant_Class;
 Object Dictionary_Class;
+Object Env_Class;
+Object False_Class;
+Object Method_Class;
+Object Native_Method_Class;
+Object Send_Class;
+Object SmallInt_Class;
+Object String_Class;
+Object True_Class;
+Object Variable_Class;
 
 /* ======================================================================== */
 
@@ -101,6 +102,45 @@ new_SmallInt(int value)
     result->value          = value;
     return result;
 }
+
+
+void SmallInt_plus(Object self, Object class, Type_Array * args) {
+    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    Type_SmallInt * number = ((Type_SmallInt *) self);
+    number->value += ((Type_SmallInt *) args->values[0])->value;
+}
+
+
+void SmallInt_minus(Object self, Object class, Type_Array * args) {
+    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    Type_SmallInt * number = ((Type_SmallInt *) self);
+    number->value -= ((Type_SmallInt *) args->values[0])->value;
+}
+
+/* ======================================================================== */
+
+
+wchar_t* wcsdup(const wchar_t* input) {
+   int len         = wcslen(input) + 1;
+   wchar_t* output = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
+   int i           = 0;
+   for (; i < len; i++) {
+       output[i] = input[i];
+   }
+   return output;
+}
+
+Type_String *
+new_String(const wchar_t* str)
+{
+    Type_String *string = NEW(Type_String);
+    HEADER(string)      = String_Class;
+    string->hash        = NULL;
+    string->value       = wcsdup(str);
+    string->size        = new_SmallInt(wcslen(str));
+    return string;
+}
+
 
 /* ======================================================================== */
 
@@ -510,12 +550,10 @@ Object new_Class(Object superclass)
     return (Object)result;
 }
 
-Object new_Named_Class(Object superclass, const char* name)
+Object new_Named_Class(Object superclass, const wchar_t* name)
 {
     Type_Class * result = (Type_Class *) new_Class(superclass);
-    Type_String * string = NEW(Type_String);
-    string->value = strdup(name);
-    result->name = (Object) string;
+    result->name = (Object) new_String(name);
     return (Object)result;
 }
 
@@ -616,18 +654,6 @@ Eval(Object code)
     return result;
 }
 
-void NM_self(Object self, Object class, Type_Array * args)
-{
-    //printf("In NMSelf\n");
-}
-
-void SmallInt_plus(Object self, Object class, Type_Array * args) {
-    // XXX breaks encapsulation
-    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
-    Type_SmallInt * number = ((Type_SmallInt *) self);
-    number->value += ((Type_SmallInt *) args->values[0])->value;
-}
-
 int main()
 {
     Symbol_eval     = (Object)new_SmallInt(0);
@@ -639,15 +665,16 @@ int main()
 
     Class_Class         = new_Class(Null);
     HEADER(Class_Class) = Class_Class;
-    SmallInt_Class      = new_Named_Class(Null, "SmallInt");
-    Array_Class         = new_Named_Class(Null, "Array");
-    Constant_Class      = new_Named_Class(Null, "Constant");
-    Variable_Class      = new_Named_Class(Null, "Variable");
-    Send_Class          = new_Named_Class(Null, "Send");
-    Assign_Class        = new_Named_Class(Null, "Assign");
-    Method_Class        = new_Named_Class(Null, "Method");
-    Native_Method_Class = new_Named_Class(Null, "NativeMethod");
-    Dictionary_Class    = new_Named_Class(Null, "Dictionary");
+    Array_Class         = new_Named_Class(Null, L"Array");
+    Assign_Class        = new_Named_Class(Null, L"Assign");
+    Constant_Class      = new_Named_Class(Null, L"Constant");
+    Dictionary_Class    = new_Named_Class(Null, L"Dictionary");
+    Method_Class        = new_Named_Class(Null, L"Method");
+    Native_Method_Class = new_Named_Class(Null, L"NativeMethod");
+    Send_Class          = new_Named_Class(Null, L"Send");
+    SmallInt_Class      = new_Named_Class(Null, L"SmallInt");
+    String_Class        = new_Named_Class(Null, L"String");
+    Variable_Class      = new_Named_Class(Null, L"Variable");
 
     Empty_Array         = NEW(Type_Array);
     Empty_Array->size   = 0;

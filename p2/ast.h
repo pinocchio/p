@@ -1,8 +1,13 @@
 #ifndef AST_H
 #define AST_H
 
-/* #include <gc/gc.h>
-#define PALLOC GC_MALLOC */
+#include <gc/gc.h>
+#ifdef GC_MALLOC
+#define PALLOC GC_MALLOC
+#else 
+#define PALLOC malloc
+#endif
+
 
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) p) + 1) 
@@ -12,7 +17,7 @@
     NEW_ARRAYED(layout, Object[0])
 
 #define NEW_ARRAYED(base, end) \
-   (base *)(POINTER_INC(malloc(HEADER_SIZE +\
+   (base *)(POINTER_INC(PALLOC(HEADER_SIZE +\
             sizeof(base) + sizeof(end))))
 
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
@@ -36,7 +41,9 @@ typedef struct Type_Object {
 } Type_Object;
 
 typedef struct Type_String { 
-    char * value;  
+    Type_SmallInt * hash;
+    Type_SmallInt * size;
+    wchar_t * value;
 } Type_String;
 
 typedef struct AST_Constant {
@@ -119,6 +126,9 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
                         Object key, Object value);
                         
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
+
+void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
+                              Object class, Type_Array * args);
 
 void AST_Assign_assign();
 void push_restore_env();
