@@ -119,7 +119,7 @@ typedef struct Runtime_Env {
     Type_Array     *values;
 } Runtime_Env;
 
-
+AST_Constant * new_Constant(Object constant);
 
 extern void AST_Constant_eval();
 extern void AST_Variable_eval();
@@ -144,6 +144,9 @@ void store_argument();
 
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args);
+
+Object new_Named_Class(Object superclass, const wchar_t* name);
+void store_native_method_at(Type_Class * class, Object symbol, native code, int index);
 
 
 #endif // AST_H
