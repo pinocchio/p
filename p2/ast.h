@@ -7,6 +7,7 @@
 #else 
 #define PALLOC malloc
 #endif
+#define PALLOC malloc
 
 
 #define HEADER_SIZE (sizeof(Object))
@@ -49,7 +50,7 @@ typedef struct Type_Symbol {
 typedef Type_Symbol Type_String;
 
 typedef struct Type_Boolean {
-    char value;
+    char            value;
 } Type_Boolean;
 
 typedef struct Type_Array {
@@ -62,10 +63,10 @@ typedef struct Type_Dictionary {
 } Type_Dictionary;
 
 typedef struct Type_Class {
-    Object              name;
-    Object              super;
-    Type_Dictionary    *methods;
-    Object              cvars[];
+    Type_String    *name;
+    Object          super;
+    Type_Dictionary*methods;
+    Object          cvars[];
 } Type_Class;
 
 typedef struct Type_ObjectClass {
@@ -137,6 +138,8 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
 void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
                               Object class, Type_Array * args);
 
+Object Type_Dictionary_lookup(Type_Dictionary * self, Object key);
+
 void AST_Assign_assign();
 void push_restore_env();
 void send_Eval();
@@ -145,7 +148,7 @@ void store_argument();
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args);
 
-Object new_Named_Class(Object superclass, const wchar_t* name);
+Type_Class* new_Named_Class(Object superclass, const wchar_t* name);
 void store_native_method_at(Type_Class * class, Object symbol, native code, int index);
 
 

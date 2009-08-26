@@ -20,22 +20,23 @@ Object Null;
 
 /* ======================================================================== */
 
-Object Array_Class;
-Object Assign_Class;
-Object Boolean_Class;
-Object Class_Class;
-Object Constant_Class;
-Object Dictionary_Class;
-Object Env_Class;
-Object False_Class;
-Object Method_Class;
-Object Native_Method_Class;
-Object Send_Class;
-Object SmallInt_Class;
-Object String_Class;
-Object Symbol_Class;
-Object True_Class;
-Object Variable_Class;
+Type_Class * Array_Class;
+Type_Class * Assign_Class;
+Type_Class * Boolean_Class;
+Type_Class * Class_Class;
+Type_Class * Constant_Class;
+Type_Class * Dictionary_Class;
+Type_Class * Env_Class;
+Type_Class * False_Class;
+Type_Class * Method_Class;
+Type_Class * Native_Method_Class;
+Type_Class * Object_Class;
+Type_Class * Send_Class;
+Type_Class * SmallInt_Class;
+Type_Class * String_Class;
+Type_Class * Symbol_Class;
+Type_Class * True_Class;
+Type_Class * Variable_Class;
 
 /* ======================================================================== */
 
@@ -109,13 +110,13 @@ Object current_env() { return Env; }
 //    ((cdp)*HEADER((Object)self))((Object)self, msg, argc, argv);
 
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 Type_SmallInt *
 new_SmallInt(int value)
 {
     Type_SmallInt * result = NEW(Type_SmallInt);
-    HEADER(result)         = SmallInt_Class;
+    HEADER(result)         = (Object) SmallInt_Class;
     result->value          = value;
     return result;
 }
@@ -125,7 +126,7 @@ void SmallInt_plus(Object self, Object class, Type_Array * args)
 {
     // TODO assert args size
     //assert(args->size == 1);
-    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
     Type_SmallInt * number = ((Type_SmallInt *) self);
     number->value += ((Type_SmallInt *) args->values[0])->value;
 }
@@ -134,15 +135,16 @@ void SmallInt_minus(Object self, Object class, Type_Array * args)
 {
     // TODO assert args size
     //assert(args->size == 1);
-    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
     Type_SmallInt * number = ((Type_SmallInt *) self);
     number->value -= ((Type_SmallInt *) args->values[0])->value;
 }
 
 void SmallInt_equals(Object self, Object class, Type_Array * args) 
 {
-    assert(args->size == 1);
-    if (HEADER(args->values[0]) != SmallInt_Class) { assert(NULL); }
+    // TODO assert args size
+    //assert(args->size == 1);
+    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
     Type_SmallInt * number = ((Type_SmallInt *) self);
     if (number->value == ((Type_SmallInt *) args->values[0])->value) {
         push_EXP(True_Const);        
@@ -151,15 +153,23 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
     }
 }
 
-void initialize_Type_SmallInt() 
+void pre_initialize_Type_SmallInt() 
 {
-    SmallInt_Class      = new_Named_Class(Null, L"SmallInt");
+    SmallInt_Class      = new_Named_Class((Object)Object_Class, L"SmallInt");
+}
+
+void post_initialize_Type_SmallInt()
+{
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_plus_, SmallInt_plus, 0);
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_minus_, SmallInt_minus, 1);
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_equals_, SmallInt_equals, 2);
+    
+    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_plus_));
+    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_minus_));
+    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_equals_));
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 
 wchar_t* wcsdup(const wchar_t* input)
@@ -177,7 +187,7 @@ Type_Symbol *
 new_Symbol(const wchar_t* name)
 {
     Type_Symbol * symbol = NEW(Type_Symbol);
-    HEADER(symbol)       = Symbol_Class;
+    HEADER(symbol)       = (Object)Symbol_Class;
     symbol->hash         = NULL;
     symbol->value        = wcsdup(name);
     symbol->size         = new_SmallInt(wcslen(name));
@@ -185,25 +195,25 @@ new_Symbol(const wchar_t* name)
 }
 
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 Type_String *
 new_String(const wchar_t* str)
 {
     Type_String * string = (Type_String *) new_Symbol(str);
-    HEADER(string)      = String_Class;
+    HEADER(string)       = (Object)String_Class;
     return string;
 
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 
-void initialize_True() {
-    True_Class = new_Named_Class(Boolean_Class, L"True");
+void pre_initialize_True() {
+    True_Class = new_Named_Class((Object)Boolean_Class, L"True");
 
     True = NEW(Type_Boolean);
-    HEADER(True) = True_Class;
+    HEADER(True) = (Object)True_Class;
     True->value = 1;
 
     True_Const = new_Constant((Object) True);
@@ -213,23 +223,28 @@ AST_Constant * get_bool_const(bool value) {
     return value ? True_Const : False_Const;
 }
 
-void initialize_False() {
-    False_Class = new_Named_Class(Boolean_Class, L"False");
+void pre_initialize_False() {
+    False_Class = new_Named_Class((Object)Boolean_Class, L"False");
     
     False = NEW(Type_Boolean);
-    HEADER(False) = False_Class;
+    HEADER(False) = (Object)False_Class;
     False->value = 0;
 
     False_Const = new_Constant((Object) False);
 }
 
-void initialize_Type_Boolean() {
-    Boolean_Class = new_Named_Class(Null, L"Boolean");     
-    initialize_True();
-    initialize_False();
+void pre_initialize_Type_Boolean() {
+    Boolean_Class = new_Named_Class((Object)Object_Class, L"Boolean");     
+    pre_initialize_True();
+    pre_initialize_False();
 }
 
-/* ======================================================================== */
+void post_initialize_Type_Boolean()
+{
+    
+}
+
+/* ========================================================================== */
 
 Type_Array * Empty_Array;
 
@@ -238,7 +253,7 @@ new_Raw_Array(int c)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result)      = Array_Class;
+    HEADER(result)      = (Object)Array_Class;
     return result;
 }
 
@@ -247,7 +262,7 @@ new_Array(int c, Object v[])
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result)      = Array_Class;
+    HEADER(result)      = (Object)Array_Class;
     result->size        = c;
     while (0 < c) {
         c--;
@@ -261,7 +276,7 @@ new_Array_With(int c, Object init)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result)      = Array_Class;
+    HEADER(result)      = (Object)Array_Class;
     result->size        = c;
     while (0 < c) {
         c--;
@@ -270,13 +285,27 @@ new_Array_With(int c, Object init)
     return result;
 }
 
-/* ======================================================================== */
+void pre_initialize_Array() 
+{
+    Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
+    
+    Empty_Array         = NEW(Type_Array);
+    Empty_Array->size   = 0;
+    HEADER(Empty_Array) = (Object)Array_Class;
+}
+
+void post_initialize_Array()
+{
+    
+}
+
+/* ========================================================================== */
 
 AST_Constant *
 new_Constant(Object constant)
 {
     AST_Constant * result = NEW(AST_Constant);
-    HEADER(result)        = Constant_Class;
+    HEADER(result)        = (Object)Constant_Class;
     result->constant      = constant;
     return result;
 }
@@ -287,13 +316,13 @@ void AST_Constant_eval(AST_Constant * self)
     poke_EXP(1, self->constant);
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 AST_Variable *
 new_Variable(const wchar_t* name)
 {
     AST_Variable * result = NEW(AST_Variable);
-    HEADER(result)        = Variable_Class;
+    HEADER(result)        = (Object)Variable_Class;
     /* TODO add name */
     return result;
 }
@@ -302,7 +331,7 @@ void AST_Variable_eval(AST_Variable * self)
 {
     Object env = current_env();
 
-    if (HEADER(env) == Env_Class) {
+    if (HEADER(env) == (Object)Env_Class) {
         return Runtime_Env_lookup(
                 (Runtime_Env *)env, self->index, self->key);
     } else {
@@ -317,20 +346,20 @@ void AST_Variable_assign(AST_Variable * self, Object value)
 {
     Object env = current_env();
 
-    if (HEADER(env) == Env_Class) {
+    if (HEADER(env) == (Object)Env_Class) {
         return Runtime_Env_assign(
             (Runtime_Env *)env, self->index, self->key, value);
     }
     // TODO
     assert(NULL);
 }
-/* ======================================================================== */
+/* ========================================================================== */
 
 AST_Assign *
 new_Assign(Object variable, Object expression)
 {
     AST_Assign * result = NEW(AST_Assign);
-    HEADER(result)      = Assign_Class;
+    HEADER(result)      = (Object)Assign_Class;
     result->variable    = variable;
     result->expression  = expression;
     return result;
@@ -352,20 +381,20 @@ void AST_Assign_assign()
     /* result of evaluating expression is result of assignment */
     poke_EXP(1, value);
 
-    if (HEADER(var) == Variable_Class) {
+    if (HEADER(var) == (Object)Variable_Class) {
         return AST_Variable_assign((AST_Variable *)var, value);
     }
     // TODO send assign: to self->variable.
     assert(NULL);
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 AST_Send *
 new_Send(Object receiver, Object msg, Type_Array * arguments)
 {
     AST_Send * result = NEW(AST_Send);
-    HEADER(result)    = Send_Class;
+    HEADER(result)    = (Object)Send_Class;
     result->receiver  = receiver;
     result->message   = msg;
     result->arguments = arguments;
@@ -394,7 +423,7 @@ void send_Eval()
     zap_CNT();
     Object exp = peek_EXP(1);
 
-    Object class = HEADER(exp);
+    Type_Class * class = (Type_Class *)HEADER(exp);
     // TODO get rid of this switch and do a "double dispatch"
     if (class == Constant_Class) {
         return AST_Constant_eval((AST_Constant *)exp);
@@ -432,13 +461,13 @@ void AST_Send_eval(AST_Send * self)
     }
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 AST_Method *
 new_Method(unsigned int paramc, Type_Array * body)
 {
     AST_Method * result = NEW(AST_Method);
-    HEADER(result)      = Method_Class;
+    HEADER(result)      = (Object)Method_Class;
     result->paramc      = paramc;
     result->body        = body;
     return result;
@@ -491,24 +520,30 @@ void AST_Method_apply(AST_Method * self, int argc, Object argv[])
 void Method_invoke(Object method, Object self,
                    Object class, Type_Array * args)
 {
-    if (HEADER(method) == Method_Class) {
+    Type_Class * type = (Type_Class *)HEADER(method);
+    if (type == Method_Class) {
         return AST_Method_invoke((AST_Method *)method, self, class, args);
     }
-    if (HEADER(method) == Native_Method_Class) {
+    if (type == Native_Method_Class) {
         return AST_Native_Method_invoke((AST_Native_Method *)method, self,
                                         class, args);
     }
     // Only AST_Method supported for now
+    if (!type) {
+        printf("Expected Method NULL given");
+    } else {
+        printf("Expected Method got %ls\n", ((Type_Class *)type)->name->value);
+    }
     assert(NULL);
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 Object
 new_Native_Method(native code)
 {
     AST_Native_Method * result = NEW(AST_Native_Method);
-    HEADER(result)             = Native_Method_Class;
+    HEADER(result)             = (Object)Native_Method_Class;
     result->code               = code;
     return (Object)result;
 }
@@ -519,13 +554,13 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
     method->code(self, class, args);
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 Runtime_Env *
 new_Env(Object parent, Object key, Type_Array * values)
 {
     Runtime_Env * result    = NEW(Runtime_Env);
-    HEADER(result)          = Env_Class;
+    HEADER(result)          = (Object)Env_Class;
     result->parent          = parent;
     result->key             = key;
     result->values          = values;
@@ -536,22 +571,21 @@ Runtime_Env *
 new_Env_Sized(Object parent, Object key, int size)
 {
     Runtime_Env * result    = NEW(Runtime_Env);
-    HEADER(result)          = Env_Class;
+    HEADER(result)          = (Object)Env_Class;
     result->parent          = parent;
     result->key             = key;
     result->values          = new_Array_With(size, Null);
     return result;
 }
+
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Null) {
-        if (HEADER(self->parent) == Env_Class) {
+        if (HEADER(self->parent) == (Object)Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
-
             /* TODO Schedule at:in: message send. */
             assert(NULL);
-
             //Object args[2] = { (Object)new_SmallInt(index), key };
             return;
         }
@@ -567,12 +601,11 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Null) {
-        if (HEADER(self->parent) == Env_Class) {
+        if (HEADER(self->parent) == (Object)Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
             assert(NULL);
-
             // Object args[2] = { (Object)new_SmallInt(index), key };
             return;
         }
@@ -584,13 +617,13 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
     self->values->values[index] = value;
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
 
 Type_Dictionary *
 new_Dictionary()
 {
     Type_Dictionary * result = NEW(Type_Dictionary);
-    HEADER(result)           = Dictionary_Class;
+    HEADER(result)           = (Object)Dictionary_Class;
     result->layout           = new_Array_With(2, Null);
     return result;
 }
@@ -607,17 +640,46 @@ Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
     return NULL;
 }
 
-Object Type_Dictionary_store_at_(Type_Dictionary * self, Object key, Object value, int index)
+void Type_Dictionary_grow(Type_Dictionary *self)
 {
-    /* just store at the first empty location */
-    self->layout->values[index*2] = key;
-    self->layout->values[(index*2) +1] = value;
+    Type_Array *old_layout = self->layout;
+    self->layout = new_Array_With(old_layout->size*2, Null);
+    int i;
+    for(i=0; i<old_layout->size; i++) {
+        self->layout->values[i] = old_layout->values[i];
+    }
+}
+
+void Type_Dictionary_ensure_size_(Type_Dictionary * self, unsigned int size)
+{
+    if (self->layout->size <= (size*2)) {
+        Type_Dictionary_grow(self);
+    }
+}
+
+void Type_Dictionary_ensure_size(Type_Dictionary * self)
+{
+    int i;
+    for (i = 0; i < self->layout->size; i=i+2) {
+        if (!self->layout->values[i]) {
+            return Type_Dictionary_grow(self);
+        }
+    }
+}
+
+Object Type_Dictionary_store_at_(Type_Dictionary * self, Object key, 
+                                 Object value, int index)
+{
+    Type_Dictionary_ensure_size_(self, index);
+    self->layout->values[index*2]     = key;
+    self->layout->values[(index*2)+1] = value;
     return value;
 }
 
 Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 {
     /* just store at the first empty location */
+    Type_Dictionary_ensure_size(self);
     int i;
     for (i = 0; i < self->layout->size; i=i+2) {
         if (!self->layout->values[i]) {
@@ -628,21 +690,22 @@ Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
     return NULL;
 }
 
-/* ======================================================================== */
+/* ========================================================================== */
     
-Object new_Class(Object superclass)
+Type_Class* new_Class(Object superclass)
 {
     Type_Class * result = NEW(Type_Class);
     result->methods     = new_Dictionary();
-    HEADER(result)      = Class_Class;
-    return (Object)result;
+    HEADER(result)      = (Object) Class_Class;
+    result->super       = superclass;
+    return result;
 }
 
-Object new_Named_Class(Object superclass, const wchar_t* name)
+Type_Class* new_Named_Class(Object superclass, const wchar_t* name)
 {
     Type_Class * result = (Type_Class *) new_Class(superclass);
-    result->name = (Object) new_String(name);
-    return (Object)result;
+    result->name = new_String(name);
+    return result;
 }
 
 void store_method_at(Type_Class * class, Object symbol, Object method, int index)
@@ -666,26 +729,24 @@ void store_method(Type_Class * class, Object symbol, Object method)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
+    // TODO add comment here
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
     }
     Object method = NULL;    
     while (class != Null) {
-        if (HEADER(class) != Class_Class) {
-            // TODO for now we only allow classes.
-            //assert(NULL);
-        }
         Type_Dictionary * mdict = ((Type_Class *) class)->methods;
         method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
-            sender->type = class;
+            sender->type   = class;
             sender->method = method;
             return Method_invoke(method, self, class, args);
         }
     }
     // TODO send DNU;
+    printf("Does not understand\n");
     assert(NULL);
 }
 
@@ -694,14 +755,22 @@ void Object_equals(Object self, Object class, Type_Array * args)
     push_EXP(get_bool_const(self == args->values[0]));
 }
 
-void initialize_Object() {
-    Class_Class         = new_Class(Null);
-    HEADER(Class_Class) = Class_Class;
-    store_native_method_at((Type_Class *)Class_Class, Symbol_equals_, 
-                           Object_equals, 0);
-
+void pre_initialize_Object() 
+{
+    Class_Class         = new_Named_Class(Null, L"Class");
+    HEADER(Class_Class) = (Object)Class_Class;
+    
+    Object_Class        = new_Named_Class(Null, L"Object");
 }
-/* ======================================================================== */
+
+void post_initialize_Object()
+{
+    store_native_method_at((Type_Class *)Object_Class, Symbol_equals_, Object_equals, 0);
+    assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
+    assert(HEADER((AST_Native_Method*)Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
+    assert(!Type_Dictionary_lookup(Object_Class->methods, Null));
+}
+/* ========================================================================== */
 
 void push_restore_env()
 {
@@ -709,15 +778,12 @@ void push_restore_env()
     poke_EXP(1, current_env());
 }
 
-
 void store_argument()
 {
     zap_CNT();
 
     Object value = pop_EXP();
-    // XXX Breaks encapsulation, need type check here
     Object index = pop_EXP();
-    // XXX Breaks encapsulation, need type check here
     Type_Array * args = (Type_Array *)pop_EXP();
 
     unsigned int idx = ((Type_SmallInt *)index)->value;
@@ -754,37 +820,38 @@ Eval(Object code)
 
 int main()
 {
-    int id = 0;
-    Symbol_apply_   = (Object)new_SmallInt(++id);
-    Symbol_at_in_   = (Object)new_SmallInt(++id);
-    Symbol_equals_  = (Object)new_SmallInt(++id);
-    Symbol_eval     = (Object)new_SmallInt(++id);
-    Symbol_eval_    = (Object)new_SmallInt(++id);
-    Symbol_lookup_  = (Object)new_SmallInt(++id);
-    Symbol_minus_  = (Object)new_SmallInt(++id);
-    Symbol_plus_    = (Object)new_SmallInt(++id);
+    Symbol_apply_   = (Object)new_Symbol(L"apply:");
+    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
+    Symbol_equals_  = (Object)new_Symbol(L"equals:");
+    Symbol_eval     = (Object)new_Symbol(L"eval");
+    Symbol_eval_    = (Object)new_Symbol(L"eval:");
+    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
+    Symbol_minus_   = (Object)new_Symbol(L"minus:");
+    Symbol_plus_    = (Object)new_Symbol(L"plus:");
     
-    Null            = (Object)new_SmallInt(++id);
+    Null            = (Object)new_Symbol(L"Null");
 
-    initialize_Object();
-    Array_Class         = new_Named_Class(Null, L"Array");
-    Assign_Class        = new_Named_Class(Null, L"Assign");
-    Constant_Class      = new_Named_Class(Null, L"Constant");
-    Dictionary_Class    = new_Named_Class(Null, L"Dictionary");
-    Method_Class        = new_Named_Class(Null, L"Method");
-    Native_Method_Class = new_Named_Class(Null, L"NativeMethod");
-    Send_Class          = new_Named_Class(Null, L"Send");
-    Symbol_Class        = new_Named_Class(Null, L"Symbol");
-    String_Class        = new_Named_Class(Symbol_Class, L"String");   
-    Variable_Class      = new_Named_Class(Null, L"Variable");
+    pre_initialize_Object();
+    pre_initialize_Array();
     
-    initialize_Type_SmallInt();
-    initialize_Type_Boolean();
-
-    Empty_Array         = NEW(Type_Array);
-    Empty_Array->size   = 0;
-    HEADER(Empty_Array) = Array_Class;
-
+    Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
+    Constant_Class      = new_Named_Class((Object)Object_Class, L"Constant");
+    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
+    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
+    Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
+    Send_Class          = new_Named_Class((Object)Object_Class, L"Send");
+    Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
+    String_Class        = new_Named_Class((Object)Symbol_Class, L"String");   
+    Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
+    
+    pre_initialize_Type_SmallInt();
+    pre_initialize_Type_Boolean();
+    
+    post_initialize_Object();
+    post_initialize_Array();
+    post_initialize_Type_SmallInt();
+    post_initialize_Type_Boolean();
+    
     init_Thread();
 
     Env = (Object)new_Env_Sized(Null, Null, 0);
@@ -798,22 +865,41 @@ int main()
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
 
-    Type_SmallInt * constant = new_SmallInt(0);
-    Object test     = (Object)new_Constant((Object)constant);
+    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
     Object add      = (Object)new_Constant((Object)new_SmallInt(1));
     
     //AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
     AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
 
-    //AST_Assign * assign = new_Assign((Object)var, test);
 
+    // Testing Booleans
+    Object result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, add)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, test)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)True_Const)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+   
+    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)False_Const)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+   
+    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)True_Const)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)False_Const)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+
+    
+    //AST_Assign * assign = new_Assign((Object)var, test);
+    
     int idx;
     int count = 10000000;
     count = 1000;
     for (idx = 0; idx < count; idx++) {   
-    //    Eval((Object)assign);
+        //    Eval((Object)assign);
         Eval((Object)send);
     }
-    assert(constant->value == count);
-
+    assert(((Type_SmallInt *)((AST_Constant *)test)->constant)->value == count);
 }
