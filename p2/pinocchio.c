@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <setjmp.h>
 #include <wchar.h>
-#include <ast.h>
+#include <pinocchio.h>
 
 /* ======================================================================== */
 
