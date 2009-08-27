@@ -23,6 +23,8 @@
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
 
 #define STACK_SIZE 1024*1024
+#define INT_CACHE_LOWER -1
+#define INT_CACHE_UPPER 127
 
 typedef void**          Object;
 typedef unsigned int    bool;

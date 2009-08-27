@@ -107,7 +107,7 @@ Type_SmallInt ** SmallInt_cache;
 Type_SmallInt *
 new_SmallInt(int value)
 {
-    if (0 <= value && value < 100) {
+    if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
     }
     Type_SmallInt * result = NEW(Type_SmallInt);
@@ -152,12 +152,13 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
 
 void pre_initialize_Type_SmallInt() 
 {
-    SmallInt_Class          = new_Named_Class((Object)Object_Class, L"SmallInt");
+    SmallInt_Class = new_Named_Class((Object)Object_Class, L"SmallInt");
 
-    SmallInt_cache = PALLOC(sizeof(Type_SmallInt*[128]));
+    SmallInt_cache = PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    SmallInt_cache -= INT_CACHE_LOWER;
 
     int i;
-    for (i = 0; i < 128; i++) {
+    for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
         Type_SmallInt * o = NEW(Type_SmallInt);
         o->value = i;
         HEADER(o) = (Object)SmallInt_Class;
@@ -452,11 +453,8 @@ void AST_Send_send()
 {
     zap_CNT();
     Object receiver = pop_EXP();
-    // XXX Breaks encapsulation, need type check here
     Type_Array * args = (Type_Array *)pop_EXP();
 
-    // XXX Breaks encapsulation, need type check here
-    // ignore the original args on the stack
     AST_Send * self = (AST_Send *)peek_EXP(1);
     // insert the receiver at the old ast_send position
     poke_EXP(1, receiver);
@@ -811,7 +809,7 @@ void store_method(Type_Class * class, Object symbol, Object method)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    // Monomorphic inline cache
+    /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
     }
@@ -902,17 +900,7 @@ Eval(Object code)
 
 int main()
 {
-    Symbol_apply_   = (Object)new_Symbol(L"apply:");
-    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
-    Symbol_equals_  = (Object)new_Symbol(L"equals:");
-    Symbol_eval     = (Object)new_Symbol(L"eval");
-    Symbol_eval_    = (Object)new_Symbol(L"eval:");
-    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
-    Symbol_minus_   = (Object)new_Symbol(L"minus:");
-    Symbol_plus_    = (Object)new_Symbol(L"plus:");
-    
-    Null            = (Object)new_Symbol(L"Null");
-
+    pre_initialize_Type_SmallInt();
     pre_initialize_Object();
     pre_initialize_Array();
     pre_initialize_Assign();
@@ -924,9 +912,7 @@ int main()
     pre_initialize_Symbol();
     pre_initialize_String();
     pre_initialize_Variable();
-    pre_initialize_Type_SmallInt();
     pre_initialize_Type_Boolean();
-    
     
     post_initialize_Object();
     post_initialize_Array();
@@ -942,6 +928,17 @@ int main()
     post_initialize_Type_SmallInt();
     post_initialize_Type_Boolean();
     
+    Symbol_apply_   = (Object)new_Symbol(L"apply:");
+    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
+    Symbol_equals_  = (Object)new_Symbol(L"equals:");
+    Symbol_eval     = (Object)new_Symbol(L"eval");
+    Symbol_eval_    = (Object)new_Symbol(L"eval:");
+    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
+    Symbol_minus_   = (Object)new_Symbol(L"minus:");
+    Symbol_plus_    = (Object)new_Symbol(L"plus:");
+    
+    Null            = (Object)new_Symbol(L"Null");
+
     init_Thread();
 
     Env = (Object)new_Env_Sized(Null, Null, 0);
@@ -956,7 +953,7 @@ int main()
     Object test     = (Object)new_Constant((Object)new_SmallInt(0));
     Object add      = (Object)new_Constant((Object)new_SmallInt(1));
     
-    //AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
+    // AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
     AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
 
 
@@ -980,7 +977,7 @@ int main()
     assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
 
     
-    //AST_Assign * assign = new_Assign((Object)var, test);
+    // AST_Assign * assign = new_Assign((Object)var, test);
     
     int idx;
     int count = 10000000;
