@@ -66,12 +66,6 @@ void continue_eval()
     longjmp(Eval_Continue, 1);
 }
 
-static void Expand_Stack()
-{
-    // TODO.
-    exit(-1);
-}
-
 #define push_EXP(value)         (*(_EXP_++) = ((Object)value));
 #define pop_EXP()               (*(--_EXP_))
 #define peek_EXP(depth)         (*(_EXP_ - depth))
@@ -106,10 +100,6 @@ void init_Thread()
 
 Object current_env() { return Env; }
 
-//#define Send(self, msg, argc, argv)\
-//    ((cdp)*HEADER((Object)self))((Object)self, msg, argc, argv);
-
-
 /* ========================================================================== */
 
 Type_SmallInt ** SmallInt_cache;
@@ -117,7 +107,6 @@ Type_SmallInt ** SmallInt_cache;
 Type_SmallInt *
 new_SmallInt(int value)
 {
-    assert(NULL);
     if (0 <= value && value < 100) {
         return SmallInt_cache[value];
     }
@@ -135,7 +124,7 @@ void SmallInt_plus(Object self, Object class, Type_Array * args)
     Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
     assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
-    poke_EXP(1, new_SmallInt(arg->value + ((Type_SmallInt *)self)->value));
+    poke_EXP(1, new_SmallInt(arg->value + number->value));
 }
 
 void SmallInt_minus(Object self, Object class, Type_Array * args) 
@@ -145,7 +134,7 @@ void SmallInt_minus(Object self, Object class, Type_Array * args)
     Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
     assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
-    poke_EXP(1, new_SmallInt(arg->value - ((Type_SmallInt *)self)->value));
+    poke_EXP(1, new_SmallInt(arg->value - number->value));
 }
 
 void SmallInt_equals(Object self, Object class, Type_Array * args) 
@@ -379,7 +368,7 @@ void AST_Variable_eval(AST_Variable * self)
     } else {
         // TODO
         assert(NULL);
-        Object args[2] = { (Object)new_SmallInt(self->index), self->key };
+        // Object args[2] = { (Object)new_SmallInt(self->index), self->key };
         // return Send(env, Symbol_at_in_, 2, args);
     }
 }
@@ -956,8 +945,6 @@ int main()
     init_Thread();
 
     Env = (Object)new_Env_Sized(Null, Null, 0);
-
-    Object i = (Object)new_SmallInt(10); 
 
     AST_Variable * var = new_Variable(L"test");
     var->index         = 0;
