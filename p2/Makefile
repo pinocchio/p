@@ -16,9 +16,14 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -rf $(OBJECTS) $(TARGET)
+	rm -rf $(OBJECTS) $(TARGET) make.depend
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
 	./$(TARGET)
 	gprof --flat-profile $(TARGET)
+
+include make.depend
+
+make.depend: $(SOURCES)
+	gcc -M -I. $(CFILES) > $@

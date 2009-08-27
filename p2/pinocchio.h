@@ -8,9 +8,6 @@
 #define PALLOC malloc
 #endif
  
-//#define PALLOC malloc
-
-
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) p) + 1) 
 #define POINTER_DEC(p) (((Object) p) - 1)
@@ -83,6 +80,7 @@ typedef struct AST_Constant {
     Object          constant;
 } AST_Constant;
 
+typedef struct AST_Self {} AST_Self;
 
 typedef struct AST_Variable {
     unsigned int    index;
@@ -90,12 +88,22 @@ typedef struct AST_Variable {
     Object          name;
 } AST_Variable;
 
-typedef struct AST_Send {
-    Object          receiver;
-    Object          message;
+typedef struct InlineCache {
     Object          type;
     Object          method;
-    Type_Array      *arguments;
+} InlineCache;
+    
+typedef struct AST_Super {
+    InlineCache     cache;
+    Object          message; 
+    Type_Array     *arguments;
+} AST_Super;
+
+typedef struct AST_Send {
+    InlineCache     cache;
+    Object          receiver;
+    Object          message;
+    Type_Array     *arguments;
 } AST_Send;
 
 typedef struct AST_Assign {
@@ -145,12 +153,13 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
 
 Object Type_Dictionary_lookup(Type_Dictionary * self, Object key);
 
+void type_class_super();
 void AST_Assign_assign();
 void push_restore_env();
 void send_Eval();
 void store_argument();
 
-void Class_dispatch(AST_Send * sender, Object self, Object class,
+void Class_dispatch(InlineCache * sender, Object self, Object class,
                          Object msg, Type_Array * args);
 
 Type_Class* new_Named_Class(Object superclass, const wchar_t* name);

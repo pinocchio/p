@@ -372,7 +372,7 @@ new_Super(Object message, Type_Array * arguments)
     return result;
 }
 
-void AST_Super_send() 
+void ast_super_send() 
 {
     zap_CNT();
     Object class = pop_EXP();
@@ -401,7 +401,7 @@ void AST_Super_eval(AST_Super * super)
 {
     Type_Array * args = new_Raw_Array(super->arguments->size);
     // execute the method
-    push_CNT(AST_Super_send);
+    push_CNT(ast_super_send);
     push_CNT(type_class_super);
     push_CNT(push_env_class);
     push_CNT(ast_self_eval);
