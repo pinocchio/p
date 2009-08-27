@@ -424,6 +424,7 @@ void AST_Assign_assign()
     if (HEADER(var) == (Object)Variable_Class) {
         return AST_Variable_assign((AST_Variable *)var, value);
     }
+    
     // TODO send assign: to self->variable.
     assert(NULL);
 }
@@ -529,12 +530,12 @@ new_Method(unsigned int paramc, Type_Array * body)
 void AST_Method_continue()
 {
     Runtime_Env * env = (Runtime_Env *)current_env();
-    push_EXP(env->method->body->values[env->pc]);
+    poke_EXP(1, env->method->body->values[env->pc]);
 
     env->pc++;
-    if (env->pc < env->method->body->size) {
-        push_CNT(AST_Method_continue);
-    }
+    if (env->method->body->size <= env->pc) {
+        zap_CNT();
+    } 
 
     push_CNT(send_Eval);
 }
@@ -552,12 +553,14 @@ void AST_Method_invoke(AST_Method * method, Object self,
     env->pc     = 1;
 
     Env = (Object)env;
-
+    
+    if (method->body->size == 0 ) { return; }
+    
     if (1 < method->body->size) {
         push_CNT(AST_Method_continue);
     }
-
-    push_EXP(method->body->values[0]);
+    
+    poke_EXP(1, method->body->values[0]);
     push_CNT(send_Eval);
 }
 
@@ -905,7 +908,7 @@ Eval(Object code)
 
 int main()
 {
-    Null            = NEW(Type_Null);
+    Null            = (Object) NEW(Type_Null);
     
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();
