@@ -393,6 +393,7 @@ void pre_initialize_Variable()
 }
 
 void post_initialize_Variable(){}
+
 /* ========================================================================== */
 
 AST_Assign *
@@ -488,6 +489,18 @@ void send_Eval()
     assert(NULL);
 }
 
+void store_argument()
+{
+    zap_CNT();
+    
+    Object value = pop_EXP();
+    Object index = pop_EXP();
+    Type_Array * args = (Type_Array *)pop_EXP();
+    
+    unsigned int idx = ((Type_SmallInt *)index)->value;
+    args->values[idx] = value;
+}
+
 void AST_Send_eval(AST_Send * self)
 {
     Type_Array * args = new_Raw_Array(self->arguments->size);
@@ -536,7 +549,6 @@ void AST_Method_continue()
     if (env->method->body->size <= env->pc) {
         zap_CNT();
     } 
-
     push_CNT(send_Eval);
 }
 
@@ -682,6 +694,13 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
 
     self->values->values[index] = value;
 }
+
+void push_restore_env()
+{
+    push_CNT(restore_env);
+    poke_EXP(1, current_env());
+}
+
 
 void pre_initialize_Env()
 {
@@ -829,23 +848,6 @@ void post_initialize_Object()
 
 /* ========================================================================== */
 
-void push_restore_env()
-{
-    push_CNT(restore_env);
-    poke_EXP(1, current_env());
-}
-
-void store_argument()
-{
-    zap_CNT();
-
-    Object value = pop_EXP();
-    Object index = pop_EXP();
-    Type_Array * args = (Type_Array *)pop_EXP();
-
-    unsigned int idx = ((Type_SmallInt *)index)->value;
-    args->values[idx] = value;
-}
 
 void end_eval()
 {
@@ -875,6 +877,7 @@ Eval(Object code)
     return result;
 }
 
+/* ========================================================================== */
 
 void test_method_invocation()
 {
@@ -908,14 +911,14 @@ void test_method_invocation()
     
     // with 3 body element
     Type_SmallInt * integer7 = new_SmallInt(7);
-    AST_Constant * integer7_const = new_Constant((Object)integer6);
+    AST_Constant * integer7_const = new_Constant((Object)integer7);
     body = new_Array_With(3, (Object)integer5_const);
     body->values[1] = (Object)integer6_const;
     body->values[2] = (Object)integer7_const;
     method = new_Method(0, body);
     store_method(SmallInt_Class, (Object)test, (Object)method);
     result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer6);
+    assert(result == (Object)integer7);
 }
 
 
