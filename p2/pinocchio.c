@@ -879,6 +879,31 @@ Eval(Object code)
 
 /* ========================================================================== */
 
+void test_boolean_equals()
+{
+    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
+    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
+    
+    Object result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, add)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, test)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)True_Const)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)False_Const)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)True_Const)));
+    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    
+    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)False_Const)));
+    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+}
+
+
 void test_method_invocation()
 {
     Type_Array * body = new_Raw_Array(0);
@@ -921,6 +946,23 @@ void test_method_invocation()
     assert(result == (Object)integer7);
 }
 
+void test_method_invocation_with_arguments()
+{
+    AST_Variable * var = new_Variable(L"myVar");
+    Type_Array * body = new_Array_With(1, (Object)var);
+    AST_Method * method = new_Method(0, body);
+    var->key = (Object)method;
+    var->index = 0;
+    
+    Type_Symbol * test = new_Symbol(L"test");
+    Type_SmallInt * integer = new_SmallInt(120);
+    AST_Constant * integer_const = new_Constant((Object)integer);
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    Type_Array * args = new_Array_With(1, (Object)integer_const);
+    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, args));
+    assert(result == (Object)integer);
+    
+}
 
 void test_thread_stress()
 {
@@ -937,7 +979,9 @@ void test_thread_stress()
         Eval((Object)send);
     }
 }
-              
+
+/* ========================================================================== */
+
 int main()
 {
     Null            = (Object) NEW(Type_Null);
@@ -992,32 +1036,11 @@ int main()
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
     
-    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
-    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
     
-
-
-    // Testing Booleans Equals
-    Object result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, add)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
+    test_boolean_equals();
     
-    result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, test)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)True_Const)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-   
-    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)False_Const)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-   
-    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)True_Const)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)False_Const)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-
-    // Testing Method invokation
     test_method_invocation();
+    test_method_invocation_with_arguments();
     
     //test_thread_stress();
 
