@@ -7,6 +7,8 @@
 #else 
 #define PALLOC malloc
 #endif
+ 
+//#define PALLOC malloc
 
 
 #define HEADER_SIZE (sizeof(Object))
@@ -33,6 +35,8 @@ struct Type_SmallInt;
 struct Type_Object;
 
 typedef void(*cont)();
+
+typedef struct Type_Null {} Type_Null;
 
 typedef struct Type_SmallInt {
     int             value;

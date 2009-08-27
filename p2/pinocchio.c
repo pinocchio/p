@@ -687,6 +687,7 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
 
 void pre_initialize_Env()
 {
+    Env_Class = new_Named_Class((Object)Object_Class, L"Env");
 }
 
 void post_initialize_Env(){}
@@ -810,6 +811,7 @@ void store_method(Type_Class * class, Object symbol, Object method)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
+    //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
     /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
@@ -851,8 +853,8 @@ void post_initialize_Object()
     store_native_method_at((Type_Class *)Object_Class, Symbol_equals_, Object_equals, 0);
     assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
     assert(HEADER((AST_Native_Method*)Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
-    assert(!Type_Dictionary_lookup(Object_Class->methods, Null));
 }
+
 /* ========================================================================== */
 
 void push_restore_env()
@@ -903,6 +905,8 @@ Eval(Object code)
 
 int main()
 {
+    Null            = NEW(Type_Null);
+    
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();
     pre_initialize_Array();
@@ -916,6 +920,15 @@ int main()
     pre_initialize_String();
     pre_initialize_Variable();
     pre_initialize_Type_Boolean();
+    
+    Symbol_apply_   = (Object)new_Symbol(L"apply:");
+    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
+    Symbol_equals_  = (Object)new_Symbol(L"equals:");
+    Symbol_eval     = (Object)new_Symbol(L"eval");
+    Symbol_eval_    = (Object)new_Symbol(L"eval:");
+    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
+    Symbol_minus_   = (Object)new_Symbol(L"minus:");
+    Symbol_plus_    = (Object)new_Symbol(L"plus:");
     
     post_initialize_Object();
     post_initialize_Array();
@@ -931,16 +944,7 @@ int main()
     post_initialize_Type_SmallInt();
     post_initialize_Type_Boolean();
     
-    Symbol_apply_   = (Object)new_Symbol(L"apply:");
-    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
-    Symbol_equals_  = (Object)new_Symbol(L"equals:");
-    Symbol_eval     = (Object)new_Symbol(L"eval");
-    Symbol_eval_    = (Object)new_Symbol(L"eval:");
-    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
-    Symbol_minus_   = (Object)new_Symbol(L"minus:");
-    Symbol_plus_    = (Object)new_Symbol(L"plus:");
     
-    Null            = (Object)new_Symbol(L"Null");
 
     init_Thread();
 
