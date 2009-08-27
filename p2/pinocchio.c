@@ -454,10 +454,10 @@ new_Send(Object receiver, Object msg, Type_Array * arguments)
 void AST_Send_send()
 {
     zap_CNT();
-    Object receiver = pop_EXP();
+    Object receiver   = pop_EXP();
     Type_Array * args = (Type_Array *)pop_EXP();
 
-    AST_Send * self = (AST_Send *)peek_EXP(1);
+    AST_Send * self   = (AST_Send *)peek_EXP(1);
     // insert the receiver at the old ast_send position
     poke_EXP(1, receiver);
 
@@ -554,24 +554,19 @@ void AST_Method_invoke(AST_Method * method, Object self,
 
     Env = (Object)env;
     
-    if (method->body->size == 0 ) { return; }
+    if (method->body->size == 0 ) { 
+        push_EXP(self);
+        return; 
+    }
     
     if (1 < method->body->size) {
         push_CNT(AST_Method_continue);
     }
     
-    poke_EXP(1, method->body->values[0]);
+    push_EXP(method->body->values[0]);
     push_CNT(send_Eval);
 }
 
-void AST_Method_apply(AST_Method * self, int argc, Object argv[])
-{
-    assert(self->paramc == argc);
-
-    push_restore_env();
-
-    Env = (Object)new_Env_Sized(self->environment, (Object)self, argc);
-}
 
 void Method_invoke(Object method, Object self,
                    Object class, Type_Array * args)
@@ -786,7 +781,9 @@ void store_native_method(Type_Class * class, Object symbol, native code)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
+    printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
+    printf("%i\n", ((Type_SmallInt*)self)->value);
+    printf("%i\n", ((Type_SmallInt*)peek_EXP(1))->value);
     /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
@@ -884,11 +881,30 @@ void test_method_invocation()
     Type_Array * body = new_Raw_Array(0);
     AST_Method * method = new_Method(0, body);
     Type_Symbol * test = new_Symbol(L"test");
-    Type_SmallInt * integer = new_SmallInt(0);
+    Type_SmallInt * integer = new_SmallInt(120);
     AST_Constant * integer_const = new_Constant((Object)integer);
     store_method(SmallInt_Class, (Object)test, (Object)method);
     Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
     assert(result == (Object)integer);
+    
+    // with one body element
+}
+
+
+void test_thread_stress()
+{
+    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
+    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
+    
+    // AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
+    AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
+    
+    int idx;
+    int count = 10000000;
+    for (idx = 0; idx < count; idx++) {   
+        //    Eval((Object)assign);
+        Eval((Object)send);
+    }
 }
               
 int main()
@@ -944,12 +960,10 @@ int main()
 
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
-
+    
     Object test     = (Object)new_Constant((Object)new_SmallInt(0));
     Object add      = (Object)new_Constant((Object)new_SmallInt(1));
     
-    // AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
-    AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
 
 
     // Testing Booleans Equals
@@ -974,13 +988,7 @@ int main()
     // Testing Method invokation
     test_method_invocation();
     
-    
-    int idx;
-    int count = 10000000;
-    for (idx = 0; idx < count; idx++) {   
-        //    Eval((Object)assign);
-        Eval((Object)send);
-    }
+    //test_thread_stress();
 
     return EXIT_SUCCESS;
 }
