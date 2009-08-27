@@ -152,9 +152,9 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
 
 void pre_initialize_Type_SmallInt() 
 {
-    SmallInt_Class = new_Named_Class((Object)Object_Class, L"SmallInt");
+    SmallInt_Class = new_Class((Object)Object_Class);
 
-    SmallInt_cache = PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    SmallInt_cache = (Type_SmallInt **)PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     SmallInt_cache -= INT_CACHE_LOWER;
 
     int i;
@@ -168,6 +168,7 @@ void pre_initialize_Type_SmallInt()
 
 void post_initialize_Type_SmallInt()
 {
+    SmallInt_Class->name = new_String(L"SmallInt");
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_plus_, SmallInt_plus, 0);
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_minus_, SmallInt_minus, 1);
     store_native_method_at((Type_Class *)SmallInt_Class, Symbol_equals_, SmallInt_equals, 2);
@@ -215,7 +216,7 @@ void post_initialize_Symbol()
 /* ========================================================================== */
 
 Type_String *
-new_String(const wchar_t* str)
+new_String(const wchar_t * str)
 {
     Type_String * string = (Type_String *) new_Symbol(str);
     HEADER(string)       = (Object)String_Class;
@@ -837,14 +838,16 @@ void Object_equals(Object self, Object class, Type_Array * args)
 
 void pre_initialize_Object() 
 {
-    Class_Class         = new_Named_Class(Null, L"Class");
+    Class_Class         = new_Class(Null);
     HEADER(Class_Class) = (Object)Class_Class;
     
-    Object_Class        = new_Named_Class(Null, L"Object");
+    Object_Class        = new_Class(Null);
 }
 
 void post_initialize_Object()
 {
+    Class_Class->name = new_String(L"Class");
+    Object_Class->name = new_String(L"Object");
     store_native_method_at((Type_Class *)Object_Class, Symbol_equals_, Object_equals, 0);
     assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
     assert(HEADER((AST_Native_Method*)Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
@@ -900,8 +903,8 @@ Eval(Object code)
 
 int main()
 {
-    pre_initialize_Type_SmallInt();
     pre_initialize_Object();
+    pre_initialize_Type_SmallInt();
     pre_initialize_Array();
     pre_initialize_Assign();
     pre_initialize_Constant();
