@@ -17,3 +17,5 @@ clean:
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
+	./$(TARGET)
+	gprof --flat-profile $(TARGET)

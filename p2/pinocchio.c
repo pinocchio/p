@@ -916,4 +916,6 @@ int main()
         //    Eval((Object)assign);
         Eval((Object)send);
     }
+
+    return EXIT_SUCCESS;
 }
