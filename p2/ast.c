@@ -141,10 +141,10 @@ void SmallInt_minus(Object self, Object class, Type_Array * args)
 {
     assert(HEADER(self) == (Object)SmallInt_Class);
     assert(args->size == 1);
-    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
-    if (HEADER(args->values[0]) != (Object)SmallInt_Class) { assert(NULL); }
+    Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
+    assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
-    number->value -= ((Type_SmallInt *) args->values[0])->value;
+    poke_EXP(1, new_SmallInt(arg->value - ((Type_SmallInt *)self)->value));
 }
 
 void SmallInt_equals(Object self, Object class, Type_Array * args) 
