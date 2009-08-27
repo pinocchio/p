@@ -745,7 +745,7 @@ void store_method(Type_Class * class, Object symbol, Object method)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    // TODO add comment here
+    // Monomorphic inline cache
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
     }
