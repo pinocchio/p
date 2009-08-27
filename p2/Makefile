@@ -3,7 +3,7 @@ TARGET=pinocchio
 CFILES=$(TARGET).c
 HFILES=$(TARGET).h
 
-CFLAGS+=-I. -O3 -lgc
+CFLAGS+=-I. -O3 -lgc -Wall
 LDFLAGS+=-lgc
 
 SOURCES=$(CFILES) $(HFILES)
@@ -11,6 +11,9 @@ OBJECTS=$(CFILES:%.c=%.o)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
+
+run: $(TARGET)
+	./$(TARGET)
 
 clean:
 	rm -rf $(OBJECTS) $(TARGET)

@@ -112,11 +112,12 @@ Object current_env() { return Env; }
 
 /* ========================================================================== */
 
-Type_SmallInt * SmallInt_cache[100];
+Type_SmallInt ** SmallInt_cache;
 
 Type_SmallInt *
 new_SmallInt(int value)
 {
+    assert(NULL);
     if (0 <= value && value < 100) {
         return SmallInt_cache[value];
     }
@@ -164,8 +165,10 @@ void pre_initialize_Type_SmallInt()
 {
     SmallInt_Class          = new_Named_Class((Object)Object_Class, L"SmallInt");
 
+    SmallInt_cache = PALLOC(sizeof(Type_SmallInt*[128]));
+
     int i;
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < 128; i++) {
         Type_SmallInt * o = NEW(Type_SmallInt);
         o->value = i;
         HEADER(o) = (Object)SmallInt_Class;
