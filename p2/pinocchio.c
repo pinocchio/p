@@ -888,6 +888,14 @@ void test_method_invocation()
     assert(result == (Object)integer);
     
     // with one body element
+    
+    Type_SmallInt * integer5 = new_SmallInt(5);
+    AST_Constant * integer5_const = new_Constant((Object)integer5);
+    body = new_Array_With(1, integer5_const);
+    method = new_Method(0, body);
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer5);
 }
 
 
