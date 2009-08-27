@@ -209,6 +209,15 @@ new_Symbol(const wchar_t* name)
     return symbol;
 }
 
+void pre_initialize_Symbol()
+{
+    Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
+}
+
+void post_initialize_Symbol()
+{
+    String_Class        = new_Named_Class((Object)Symbol_Class, L"String");   
+}
 
 /* ========================================================================== */
 
@@ -218,7 +227,14 @@ new_String(const wchar_t* str)
     Type_String * string = (Type_String *) new_Symbol(str);
     HEADER(string)       = (Object)String_Class;
     return string;
+}
 
+void pre_initialize_String()
+{
+}
+
+void post_initialize_String()
+{
 }
 
 /* ========================================================================== */
@@ -332,6 +348,13 @@ void AST_Constant_eval(AST_Constant * self)
     poke_EXP(1, self->constant);
 }
 
+void pre_initialize_Constant()
+{
+    Constant_Class      = new_Named_Class((Object)Object_Class, L"Constant");
+}
+
+void post_initialize_Constant(){}
+
 /* ========================================================================== */
 
 AST_Variable *
@@ -369,6 +392,13 @@ void AST_Variable_assign(AST_Variable * self, Object value)
     // TODO
     assert(NULL);
 }
+
+void pre_initialize_Variable()
+{
+    Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
+}
+
+void post_initialize_Variable(){}
 /* ========================================================================== */
 
 AST_Assign *
@@ -402,6 +432,15 @@ void AST_Assign_assign()
     }
     // TODO send assign: to self->variable.
     assert(NULL);
+}
+
+void pre_initialize_Assign()
+{
+    Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
+}
+
+void post_initialize_Assign()
+{
 }
 
 /* ========================================================================== */
@@ -476,6 +515,13 @@ void AST_Send_eval(AST_Send * self)
         push_EXP(self->arguments->values[i]);
     }
 }
+
+void pre_initialize_Send()
+{
+    Send_Class          = new_Named_Class((Object)Object_Class, L"Send");
+}
+
+void post_initialize_Send(){}
 
 /* ========================================================================== */
 
@@ -553,6 +599,14 @@ void Method_invoke(Object method, Object self,
     assert(NULL);
 }
 
+void pre_initialize_Method()
+{
+    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
+}
+
+void post_initialize_Method()
+{
+}
 /* ========================================================================== */
 
 Object
@@ -569,6 +623,13 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
 {
     method->code(self, class, args);
 }
+
+void pre_initialize_Native_Method()
+{
+    Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
+}
+
+void post_initialize_Native_Method(){};
 
 /* ========================================================================== */
 
@@ -632,6 +693,12 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
 
     self->values->values[index] = value;
 }
+
+void pre_initialize_Env()
+{
+}
+
+void post_initialize_Env(){}
 
 /* ========================================================================== */
 
@@ -705,6 +772,13 @@ Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
     }
     return NULL;
 }
+
+void pre_initialize_Dictionary()
+{
+    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
+}
+
+void post_initialize_Dictionary(){}
 
 /* ========================================================================== */
     
@@ -849,22 +923,30 @@ int main()
 
     pre_initialize_Object();
     pre_initialize_Array();
-    
-    Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
-    Constant_Class      = new_Named_Class((Object)Object_Class, L"Constant");
-    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
-    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
-    Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
-    Send_Class          = new_Named_Class((Object)Object_Class, L"Send");
-    Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
-    String_Class        = new_Named_Class((Object)Symbol_Class, L"String");   
-    Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
-    
+    pre_initialize_Assign();
+    pre_initialize_Constant();
+    pre_initialize_Dictionary();
+    pre_initialize_Method();
+    pre_initialize_Native_Method();
+    pre_initialize_Send();
+    pre_initialize_Symbol();
+    pre_initialize_String();
+    pre_initialize_Variable();
     pre_initialize_Type_SmallInt();
     pre_initialize_Type_Boolean();
     
+    
     post_initialize_Object();
     post_initialize_Array();
+    post_initialize_Assign();
+    post_initialize_Constant();
+    post_initialize_Dictionary();
+    post_initialize_Method();
+    post_initialize_Native_Method();
+    post_initialize_Send();
+    post_initialize_Symbol();
+    post_initialize_String();
+    post_initialize_Variable();
     post_initialize_Type_SmallInt();
     post_initialize_Type_Boolean();
     
