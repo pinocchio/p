@@ -112,16 +112,14 @@ Object current_env() { return Env; }
 
 /* ========================================================================== */
 
-Type_SmallInt * SmallInt_Zero;
-Type_SmallInt * SmallInt_One;
-Type_SmallInt * SmallInt_Two;
+Type_SmallInt * SmallInt_cache[100];
 
 Type_SmallInt *
 new_SmallInt(int value)
 {
-    //if (value == 0) { return SmallInt_Zero; }
-    //if (value == 1) { return SmallInt_One; }
-    //if (value == 2) { return SmallInt_Two; }
+    if (0 <= value && value < 100) {
+        return SmallInt_cache[value];
+    }
     Type_SmallInt * result = NEW(Type_SmallInt);
     HEADER(result)         = (Object) SmallInt_Class;
     result->value          = value;
@@ -133,9 +131,10 @@ void SmallInt_plus(Object self, Object class, Type_Array * args)
 {
     assert(HEADER(self) == (Object)SmallInt_Class);
     assert(args->size == 1);
-    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
+    Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
+    assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
-    number->value += ((Type_SmallInt *) args->values[0])->value;
+    poke_EXP(1, new_SmallInt(arg->value + ((Type_SmallInt *)self)->value));
 }
 
 void SmallInt_minus(Object self, Object class, Type_Array * args) 
@@ -164,16 +163,14 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
 void pre_initialize_Type_SmallInt() 
 {
     SmallInt_Class          = new_Named_Class((Object)Object_Class, L"SmallInt");
-    
-    SmallInt_Zero           = NEW(Type_SmallInt);
-    SmallInt_Zero->value    = 0;
-    HEADER(SmallInt_Zero)   = (Object)SmallInt_Class;
-    SmallInt_One            = NEW(Type_SmallInt);
-    SmallInt_One->value     = 1;
-    HEADER(SmallInt_One)    = (Object)SmallInt_Class;
-    SmallInt_Two            = NEW(Type_SmallInt);
-    SmallInt_Two->value     = 2;
-    HEADER(SmallInt_Two)    = (Object)SmallInt_Class;
+
+    int i;
+    for (i = 0; i < 100; i++) {
+        Type_SmallInt * o = NEW(Type_SmallInt);
+        o->value = i;
+        HEADER(o) = (Object)SmallInt_Class;
+        SmallInt_cache[i] = o;
+    }
 }
 
 void post_initialize_Type_SmallInt()
@@ -919,5 +916,4 @@ int main()
         //    Eval((Object)assign);
         Eval((Object)send);
     }
-    assert(((Type_SmallInt *)((AST_Constant *)test)->constant)->value == count);
 }
