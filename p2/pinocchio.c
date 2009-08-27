@@ -887,15 +887,35 @@ void test_method_invocation()
     Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
     assert(result == (Object)integer);
     
-    // with one body element
-    
+    // with 1 body element
     Type_SmallInt * integer5 = new_SmallInt(5);
     AST_Constant * integer5_const = new_Constant((Object)integer5);
-    body = new_Array_With(1, integer5_const);
+    body = new_Array_With(1, (Object)integer5_const);
     method = new_Method(0, body);
     store_method(SmallInt_Class, (Object)test, (Object)method);
-    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
     assert(result == (Object)integer5);
+    
+    // with 2 body element
+    Type_SmallInt * integer6 = new_SmallInt(6);
+    AST_Constant * integer6_const = new_Constant((Object)integer6);
+    body = new_Array_With(2, (Object)integer5_const);
+    body->values[1] = (Object)integer6_const;
+    method = new_Method(0, body);
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer6);
+    
+    // with 3 body element
+    Type_SmallInt * integer7 = new_SmallInt(7);
+    AST_Constant * integer7_const = new_Constant((Object)integer6);
+    body = new_Array_With(3, (Object)integer5_const);
+    body->values[1] = (Object)integer6_const;
+    body->values[2] = (Object)integer7_const;
+    method = new_Method(0, body);
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer6);
 }
 
 
