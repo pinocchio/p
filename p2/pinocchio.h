@@ -156,7 +156,7 @@ void Class_dispatch(AST_Send * sender, Object self, Object class,
 Type_Class* new_Named_Class(Object superclass, const wchar_t* name);
 Type_Class* new_Class(Object superclass);
 Type_String * new_String(const wchar_t * str);
-void store_native_method_at(Type_Class * class, Object symbol, native code, int index);
+void store_native_method(Type_Class * class, Object symbol, native code);
 
 
 #endif // AST_H

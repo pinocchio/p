@@ -169,9 +169,9 @@ void pre_initialize_Type_SmallInt()
 void post_initialize_Type_SmallInt()
 {
     SmallInt_Class->name = new_String(L"SmallInt");
-    store_native_method_at((Type_Class *)SmallInt_Class, Symbol_plus_, SmallInt_plus, 0);
-    store_native_method_at((Type_Class *)SmallInt_Class, Symbol_minus_, SmallInt_minus, 1);
-    store_native_method_at((Type_Class *)SmallInt_Class, Symbol_equals_, SmallInt_equals, 2);
+    store_native_method((Type_Class *)SmallInt_Class, Symbol_plus_, SmallInt_plus);
+    store_native_method((Type_Class *)SmallInt_Class, Symbol_minus_, SmallInt_minus);
+    store_native_method((Type_Class *)SmallInt_Class, Symbol_equals_, SmallInt_equals);
     
     assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_plus_));
     assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_minus_));
@@ -720,7 +720,7 @@ Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
 
 void Type_Dictionary_grow(Type_Dictionary *self)
 {
-    Type_Array *old_layout = self->layout;
+    Type_Array * old_layout = self->layout;
     self->layout = new_Array_With(old_layout->size*2, Null);
     int i;
     for(i=0; i<old_layout->size; i++) {
@@ -728,43 +728,29 @@ void Type_Dictionary_grow(Type_Dictionary *self)
     }
 }
 
-void Type_Dictionary_ensure_size_(Type_Dictionary * self, unsigned int size)
+void Type_Dictionary_ensure_size(Type_Dictionary * self, unsigned int size)
 {
     if (self->layout->size <= (size*2)) {
         Type_Dictionary_grow(self);
     }
 }
 
-void Type_Dictionary_ensure_size(Type_Dictionary * self)
-{
-    int i;
-    for (i = 0; i < self->layout->size; i=i+2) {
-        if (!self->layout->values[i]) {
-            return Type_Dictionary_grow(self);
-        }
-    }
-}
-
-Object Type_Dictionary_store_at_(Type_Dictionary * self, Object key, 
-                                 Object value, int index)
-{
-    Type_Dictionary_ensure_size_(self, index);
-    self->layout->values[index*2]     = key;
-    self->layout->values[(index*2)+1] = value;
-    return value;
-}
 
 Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 {
     /* just store at the first empty location */
-    Type_Dictionary_ensure_size(self);
     int i;
     for (i = 0; i < self->layout->size; i=i+2) {
-        if (!self->layout->values[i]) {
-            Type_Dictionary_store_at_(self, key, value, i/2);
+        if (self->layout->values[i] == Null || self->layout->values[i] == key) {
+            self->layout->values[i]   = key;
+            self->layout->values[i+1] = value;
             return value;
         }
     }
+    Type_Dictionary_grow(self);
+    self->layout->values[i]   = key;
+    self->layout->values[i+1] = value;
+
     return NULL;
 }
 
@@ -793,28 +779,22 @@ Type_Class* new_Named_Class(Object superclass, const wchar_t* name)
     return result;
 }
 
-void store_method_at(Type_Class * class, Object symbol, Object method, int index)
-{
-    Type_Dictionary * dict = class->methods;
-    Type_Dictionary_store_at_(dict, symbol, method, index);
-}
-
-void store_native_method_at(Type_Class * class, Object symbol, native code, int index)
-{
-    Object native_method = new_Native_Method(code);
-    store_method_at(class, symbol, native_method, index);
-}
-
 void store_method(Type_Class * class, Object symbol, Object method)
 {
     Type_Dictionary * dict = class->methods;
     Type_Dictionary_store_(dict, symbol, method);
 }
 
+void store_native_method(Type_Class * class, Object symbol, native code)
+{
+    Object native_method = new_Native_Method(code);
+    store_method(class, symbol, native_method);
+}
+
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
+    printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
     /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
@@ -853,7 +833,7 @@ void post_initialize_Object()
 {
     Class_Class->name = new_String(L"Class");
     Object_Class->name = new_String(L"Object");
-    store_native_method_at((Type_Class *)Object_Class, Symbol_equals_, Object_equals, 0);
+    store_native_method((Type_Class *)Object_Class, Symbol_equals_, Object_equals);
     assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
     assert(HEADER((AST_Native_Method*)Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
 }
@@ -906,6 +886,18 @@ Eval(Object code)
     return result;
 }
 
+
+void test_method_invocation()
+{
+    Type_Array * body = new_Raw_Array(0);
+    AST_Method * method = new_Method(0, body);
+    Type_Symbol * test = new_Symbol(L"test");
+    Type_SmallInt * integer = new_SmallInt(0);
+    AST_Constant * integer_const = new_Constant((Object)integer);
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+}
+              
 int main()
 {
     Null            = (Object) NEW(Type_Null);
@@ -967,7 +959,7 @@ int main()
     AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
 
 
-    // Testing Booleans
+    // Testing Booleans Equals
     Object result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, add)));
     assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
     
@@ -986,8 +978,9 @@ int main()
     result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)False_Const)));
     assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
 
+    // Testing Method invokation
+    test_method_invocation();
     
-    // AST_Assign * assign = new_Assign((Object)var, test);
     
     int idx;
     int count = 10000000;
