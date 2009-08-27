@@ -11,3 +11,6 @@ OBJECTS=$(SOURCES:%.c=%.o)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
+
+clean:
+	rm -rf $(OBJECTS) $(TARGET)
