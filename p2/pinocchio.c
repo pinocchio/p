@@ -728,14 +728,6 @@ void Type_Dictionary_grow(Type_Dictionary *self)
     }
 }
 
-void Type_Dictionary_ensure_size(Type_Dictionary * self, unsigned int size)
-{
-    if (self->layout->size <= (size*2)) {
-        Type_Dictionary_grow(self);
-    }
-}
-
-
 Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 {
     /* just store at the first empty location */
@@ -794,7 +786,7 @@ void store_native_method(Type_Class * class, Object symbol, native code)
 void Class_dispatch(AST_Send * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
+    //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
     /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
@@ -896,6 +888,7 @@ void test_method_invocation()
     AST_Constant * integer_const = new_Constant((Object)integer);
     store_method(SmallInt_Class, (Object)test, (Object)method);
     Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer);
 }
               
 int main()
