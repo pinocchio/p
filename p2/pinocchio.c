@@ -37,8 +37,14 @@ Type_Class * String_Class;
 Type_Class * Symbol_Class;
 Type_Class * True_Class;
 Type_Class * Variable_Class;
+Type_Class * Self_Class;
+Type_Class * Super_Class;
 
 /* ======================================================================== */
+
+Object Env;
+
+Object Self;
 
 Type_Boolean * True;
 AST_Constant * True_Const;
@@ -51,8 +57,6 @@ AST_Constant * False_Const;
 Object Double_Stack[STACK_SIZE];
 Object  * _EXP_;
 cont    * _CNT_;
-
-Object Env;
 
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
@@ -225,6 +229,7 @@ new_String(const wchar_t * str)
 
 void pre_initialize_String()
 {
+    String_Class = new_Named_Class((Object)Symbol_Class, L"String");
 }
 
 void post_initialize_String()
@@ -327,6 +332,102 @@ void post_initialize_Array()
 
 /* ========================================================================== */
 
+void AST_Self_eval()
+{
+    Object env = current_env();
+    if (HEADER(env) != (Object)Env_Class) {
+        assert(NULL);
+    }
+    poke_EXP(1, ((Runtime_Env *)env)->self);
+}
+
+void ast_self_eval()
+{
+    zap_CNT();
+    // Push to allow poke in Self_eval
+    push_EXP(Null);
+    AST_Self_eval();
+}
+
+void pre_initialize_Self()
+{
+    Self_Class = new_Named_Class((Object)Object_Class, L"Self");
+    Self       = (Object) NEW(AST_Self);
+    HEADER(Self) = (Object) Self_Class;
+}
+
+void post_initialize_Self()
+{
+}
+
+/* ========================================================================== */
+
+AST_Super *
+new_Super(Object message, Type_Array * arguments)
+{
+    AST_Super * result = NEW(AST_Super);
+    HEADER(result)     = (Object)Super_Class;
+    result->message    = message;
+    result->arguments  = arguments;
+    return result;
+}
+
+void AST_Super_send() 
+{
+    zap_CNT();
+    Object class = pop_EXP();
+    Object receiver = pop_EXP();
+    Type_Array * args = (Type_Array *)pop_EXP();
+    
+    AST_Super * super   = (AST_Super *)peek_EXP(1);
+    // insert the receiver at the old ast_super position
+    poke_EXP(1, receiver);
+    
+    Class_dispatch(&super->cache, receiver, class,
+                   super->message, args);
+}
+
+void push_env_class()
+{
+    zap_CNT();
+    Object env = current_env();
+    if (HEADER(env) != (Object)Env_Class) {
+        assert(NULL);
+    }
+    push_EXP(((Runtime_Env *)env)->class);
+}
+
+void AST_Super_eval(AST_Super * super)
+{
+    Type_Array * args = new_Raw_Array(super->arguments->size);
+    // execute the method
+    push_CNT(AST_Super_send);
+    push_CNT(type_class_super);
+    push_CNT(push_env_class);
+    push_CNT(ast_self_eval);
+    push_EXP(args);
+    // evaluate the arguments
+    int i;
+    for (i = 0; i < super->arguments->size; i++) {
+        push_CNT(store_argument);
+        push_EXP(args);
+        push_EXP(new_SmallInt(i));
+        push_CNT(send_Eval);
+        push_EXP(super->arguments->values[i]);
+    }
+}
+
+void pre_initialize_Super()
+{
+    Super_Class = new_Named_Class((Object)Object_Class, L"Super");
+}
+
+void post_initialize_Super()
+{
+}
+
+/* ========================================================================== */
+
 AST_Constant *
 new_Constant(Object constant)
 {
@@ -344,7 +445,7 @@ void AST_Constant_eval(AST_Constant * self)
 
 void pre_initialize_Constant()
 {
-    Constant_Class      = new_Named_Class((Object)Object_Class, L"Constant");
+    Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
 }
 
 void post_initialize_Constant(){}
@@ -462,7 +563,7 @@ void AST_Send_send()
     // insert the receiver at the old ast_send position
     poke_EXP(1, receiver);
 
-    Class_dispatch(self, receiver, HEADER(receiver),
+    Class_dispatch(&self->cache, receiver, HEADER(receiver),
                    self->message, args);
 }
 
@@ -484,6 +585,12 @@ void send_Eval()
     }
     if (class == Send_Class) {
         return AST_Send_eval((AST_Send *)exp);
+    }
+    if (class == Self_Class) {
+        return AST_Self_eval();
+    }
+    if (class == Super_Class) {
+        return AST_Super_eval((AST_Super *)exp);
     }
 
     assert(NULL);
@@ -785,6 +892,19 @@ Type_Class* new_Named_Class(Object superclass, const wchar_t* name)
     return result;
 }
 
+void type_class_super()
+{
+    zap_CNT();
+    Object class = peek_EXP(1);
+    if (HEADER(class) == (Object)Class_Class) {
+        poke_EXP(1, ((Type_Class *)class)->super);
+        return;
+    }
+    
+    // TODO queue "super" send.
+    assert(NULL);
+}
+
 void store_method(Type_Class * class, Object symbol, Object method)
 {
     Type_Dictionary * dict = class->methods;
@@ -797,12 +917,12 @@ void store_native_method(Type_Class * class, Object symbol, native code)
     store_method(class, symbol, native_method);
 }
 
-void Class_dispatch(AST_Send * sender, Object self, Object class,
+void Class_dispatch(InlineCache * sender, Object self, Object class,
                          Object msg, Type_Array * args)
 {
-    printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)sender->message)->value);
-    printf("%i\n", ((Type_SmallInt*)self)->value);
-    printf("%i\n", ((Type_SmallInt*)peek_EXP(1))->value);
+    //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)msg)->value);
+    //printf("%i\n", ((Type_SmallInt*)self)->value);
+    //printf("%i\n", ((Type_SmallInt*)peek_EXP(1))->value);
     /* Monomorphic inline cache */
     if (class == sender->type) {
         return Method_invoke(sender->method, self, class, args);
@@ -878,6 +998,17 @@ Eval(Object code)
 }
 
 /* ========================================================================== */
+
+void test_variable_lookup()
+{
+    // TODO complete test
+    AST_Variable * var = new_Variable(L"test");
+    var->index         = 0;
+    var->key           = (Object)new_SmallInt(10);
+    
+    Env = (Object)new_Env_Sized(current_env(), var->key, 1);
+    Env = (Object)new_Env_Sized(current_env(), Null, 0);
+}
 
 void test_boolean_equals()
 {
@@ -964,6 +1095,44 @@ void test_method_invocation_with_arguments()
     
 }
 
+void test_self()
+{
+    Type_SmallInt * integer = new_SmallInt(70);
+    Type_SmallInt * integer7 = new_SmallInt(7);
+    AST_Constant * integer_const = new_Constant((Object)integer);
+    AST_Constant * integer7_const = new_Constant((Object)integer7);
+    Type_Array * body = new_Array_With(3, (Object)integer7_const);
+    body->values[2] = Self;
+    AST_Method * method = new_Method(0, body);
+    Type_Symbol * test = new_Symbol(L"test");
+    store_method(SmallInt_Class, (Object)test, (Object)method);
+    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer);
+}
+
+void test_super()
+{
+    
+    Type_SmallInt * integer = new_SmallInt(70);
+    Type_SmallInt * integer7 = new_SmallInt(7);
+    AST_Constant * integer_const = new_Constant((Object)integer);
+    AST_Constant * integer7_const = new_Constant((Object)integer7);
+    
+    Type_Symbol * test = new_Symbol(L"test");
+    Type_Array * body = new_Array_With(3, (Object)integer7_const);
+    body->values[2] = (Object)new_Super((Object)test, new_Raw_Array(0));
+    AST_Method * method = new_Method(0, body);
+    store_method(True_Class, (Object)test, (Object)method);
+    
+    body = new_Array_With(3, (Object)integer7_const);
+    body->values[2] = (Object)integer_const;
+    method = new_Method(0, body);
+    store_method(Boolean_Class, (Object)test, (Object)method);
+    
+    Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer);
+}
+
 void test_thread_stress()
 {
     Object test     = (Object)new_Constant((Object)new_SmallInt(0));
@@ -999,6 +1168,8 @@ int main()
     pre_initialize_String();
     pre_initialize_Variable();
     pre_initialize_Type_Boolean();
+    pre_initialize_Self();
+    pre_initialize_Super();
     
     Symbol_apply_   = (Object)new_Symbol(L"apply:");
     Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
@@ -1022,25 +1193,22 @@ int main()
     post_initialize_Variable();
     post_initialize_Type_SmallInt();
     post_initialize_Type_Boolean();
+    post_initialize_Self();
+    post_initialize_Super();
     
     
 
     init_Thread();
 
     Env = (Object)new_Env_Sized(Null, Null, 0);
-
-    AST_Variable * var = new_Variable(L"test");
-    var->index         = 0;
-    var->key           = (Object)new_SmallInt(10);
-
-    Env = (Object)new_Env_Sized(current_env(), var->key, 1);
-    Env = (Object)new_Env_Sized(current_env(), Null, 0);
-    
-    
+        
+    test_variable_lookup();
     test_boolean_equals();
     
     test_method_invocation();
     test_method_invocation_with_arguments();
+    test_self();
+    test_super();
     
     //test_thread_stress();
 
