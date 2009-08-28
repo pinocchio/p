@@ -97,7 +97,7 @@ void init_Stack(unsigned int size)
     _CNT_ = (cont *)&Double_Stack[STACK_SIZE - 1];
 }
 
-void init_Thread()
+void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
 }
@@ -210,6 +210,18 @@ new_Symbol(const wchar_t* name)
 void pre_initialize_Symbol()
 {
     Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
+}
+
+void initialize_Symbol()
+{
+    Symbol_apply_   = (Object)new_Symbol(L"apply:");
+    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
+    Symbol_equals_  = (Object)new_Symbol(L"equals:");
+    Symbol_eval     = (Object)new_Symbol(L"eval");
+    Symbol_eval_    = (Object)new_Symbol(L"eval:");
+    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
+    Symbol_minus_   = (Object)new_Symbol(L"minus:");
+    Symbol_plus_    = (Object)new_Symbol(L"plus:");
 }
 
 void post_initialize_Symbol()
@@ -814,7 +826,10 @@ void pre_initialize_Env()
     Env_Class = new_Named_Class((Object)Object_Class, L"Env");
 }
 
-void post_initialize_Env(){}
+void post_initialize_Env()
+{
+    Env = (Object)new_Env_Sized(Null, Null, 0);
+}
 
 /* ========================================================================== */
 
@@ -1170,17 +1185,12 @@ int main()
     pre_initialize_Type_Boolean();
     pre_initialize_Self();
     pre_initialize_Super();
-    
-    Symbol_apply_   = (Object)new_Symbol(L"apply:");
-    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
-    Symbol_equals_  = (Object)new_Symbol(L"equals:");
-    Symbol_eval     = (Object)new_Symbol(L"eval");
-    Symbol_eval_    = (Object)new_Symbol(L"eval:");
-    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
-    Symbol_minus_   = (Object)new_Symbol(L"minus:");
-    Symbol_plus_    = (Object)new_Symbol(L"plus:");
+
+    initialize_Symbol();
+    initialize_Thread();
     
     post_initialize_Object();
+    post_initialize_Env();
     post_initialize_Array();
     post_initialize_Assign();
     post_initialize_Constant();
@@ -1198,10 +1208,6 @@ int main()
     
     
 
-    init_Thread();
-
-    Env = (Object)new_Env_Sized(Null, Null, 0);
-        
     test_variable_lookup();
     test_boolean_equals();
     
