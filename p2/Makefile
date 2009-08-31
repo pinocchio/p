@@ -26,4 +26,4 @@ profile:
 include make.depend
 
 make.depend: $(SOURCES)
-	gcc -M -I. $(CFILES) > $@
+	$(CC) -M -I. $(CFILES) > $@

@@ -39,6 +39,8 @@ Type_Class * True_Class;
 Type_Class * Variable_Class;
 Type_Class * Self_Class;
 Type_Class * Super_Class;
+Type_Class * Continue_Class;
+Type_Class * Callec_Class;
 
 /* ======================================================================== */
 
@@ -251,7 +253,8 @@ void post_initialize_String()
 /* ========================================================================== */
 
 
-void pre_initialize_True() {
+void pre_initialize_True()
+{
     True_Class = new_Named_Class((Object)Boolean_Class, L"True");
 
     True = NEW(Type_Boolean);
@@ -261,8 +264,14 @@ void pre_initialize_True() {
     True_Const = new_Constant((Object) True);
 }
 
-AST_Constant * get_bool_const(bool value) {
+AST_Constant * get_bool_const(bool value)
+{
     return value ? True_Const : False_Const;
+}
+
+Type_Boolean * get_bool(bool value)
+{
+    return value ? True : False;
 }
 
 void pre_initialize_False() {
@@ -275,7 +284,8 @@ void pre_initialize_False() {
     False_Const = new_Constant((Object) False);
 }
 
-void pre_initialize_Type_Boolean() {
+void pre_initialize_Type_Boolean()
+{
     Boolean_Class = new_Named_Class((Object)Object_Class, L"Boolean");     
     pre_initialize_True();
     pre_initialize_False();
@@ -579,35 +589,6 @@ void AST_Send_send()
                    self->message, args);
 }
 
-void send_Eval()
-{
-    zap_CNT();
-    Object exp = peek_EXP(1);
-
-    Type_Class * class = (Type_Class *)HEADER(exp);
-    // TODO get rid of this switch and do a "double dispatch"
-    if (class == Constant_Class) {
-        return AST_Constant_eval((AST_Constant *)exp);
-    }
-    if (class == Variable_Class) {
-        return AST_Variable_eval((AST_Variable *)exp);
-    }
-    if (class == Assign_Class) {
-        return AST_Assign_eval((AST_Assign *)exp);
-    }
-    if (class == Send_Class) {
-        return AST_Send_eval((AST_Send *)exp);
-    }
-    if (class == Self_Class) {
-        return AST_Self_eval();
-    }
-    if (class == Super_Class) {
-        return AST_Super_eval((AST_Super *)exp);
-    }
-
-    assert(NULL);
-}
-
 void store_argument()
 {
     zap_CNT();
@@ -698,6 +679,10 @@ void AST_Method_invoke(AST_Method * method, Object self,
     push_CNT(send_Eval);
 }
 
+void AST_Method_eval(Object self, Object class, Type_Array * args)
+{
+    AST_Method_invoke((AST_Method *) self, self, class, args);
+}
 
 void Method_invoke(Object method, Object self,
                    Object class, Type_Array * args)
@@ -719,6 +704,7 @@ void Method_invoke(Object method, Object self,
     assert(NULL);
 }
 
+
 void pre_initialize_Method()
 {
     Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
@@ -726,7 +712,9 @@ void pre_initialize_Method()
 
 void post_initialize_Method()
 {
+    store_native_method((Type_Class *)Method_Class, Symbol_eval, AST_Method_eval);
 }
+
 /* ========================================================================== */
 
 Object
@@ -744,12 +732,22 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
     method->code(self, class, args);
 }
 
+void AST_Native_Method_eval(Object self, Object class, Type_Array * args)
+{
+    
+   AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
+}
+
+
 void pre_initialize_Native_Method()
 {
     Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
 }
 
-void post_initialize_Native_Method(){};
+void post_initialize_Native_Method()
+{
+    store_native_method((Type_Class *)Native_Method_Class, Symbol_eval, AST_Native_Method_eval);
+};
 
 /* ========================================================================== */
 
@@ -932,16 +930,18 @@ void store_native_method(Type_Class * class, Object symbol, native code)
     store_method(class, symbol, native_method);
 }
 
-void Class_dispatch(InlineCache * sender, Object self, Object class,
+void Class_dispatch(InlineCache * cache, Object self, Object class,
                          Object msg, Type_Array * args)
 {
     //printf("%ls>>%ls\n", ((Type_Class*)class)->name->value, ((Type_Symbol*)msg)->value);
     //printf("%i\n", ((Type_SmallInt*)self)->value);
     //printf("%i\n", ((Type_SmallInt*)peek_EXP(1))->value);
+    
     /* Monomorphic inline cache */
-    if (class == sender->type) {
-        return Method_invoke(sender->method, self, class, args);
+    if (class == cache->type) {
+        return Method_invoke(cache->method, self, class, args);
     }
+    
     Object method = NULL;    
     while (class != Null) {
         Type_Dictionary * mdict = ((Type_Class *) class)->methods;
@@ -949,13 +949,16 @@ void Class_dispatch(InlineCache * sender, Object self, Object class,
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
-            sender->type   = class;
-            sender->method = method;
+            cache->type   = class;
+            cache->method = method;
             return Method_invoke(method, self, class, args);
         }
     }
+    
     // TODO send DNU;
-    printf("Does not understand\n");
+    printf("\"%ls\" does not understand \"%ls\"\n", 
+            ((Type_Class*)HEADER(self))->name->value,
+            ((Type_Symbol*)msg)->value);
     assert(NULL);
 }
 
@@ -964,8 +967,15 @@ void Object_equals(Object self, Object class, Type_Array * args)
     push_EXP(get_bool_const(self == args->values[0]));
 }
 
+wchar_t * Object_classname(Object self) 
+{
+    return ((Type_String *)((Type_Class *)HEADER(self))->name)->value;
+}
+
 void pre_initialize_Object() 
 {
+    // explicitely use new_Class not new_Named_Class! to avoid early use
+    // of symbols.
     Class_Class         = new_Class(Null);
     HEADER(Class_Class) = (Object)Class_Class;
     
@@ -974,7 +984,8 @@ void pre_initialize_Object()
 
 void post_initialize_Object()
 {
-    Class_Class->name = new_String(L"Class");
+    // put the names here, now after the Symbols_Class is initialized
+    Class_Class->name  = new_String(L"Class");
     Object_Class->name = new_String(L"Object");
     store_native_method((Type_Class *)Object_Class, Symbol_equals_, Object_equals);
     assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
@@ -982,6 +993,100 @@ void post_initialize_Object()
 }
 
 /* ========================================================================== */
+
+
+AST_Continue * new_Continue(Object target)
+{
+    AST_Continue * result = NEW(AST_Continue);
+    HEADER(result)        = (Object)Continue_Class;
+    result->target        = target;
+    return result;
+}
+
+
+void AST_Continue_eval(AST_Continue * self)
+{
+    // clear the stack
+
+    // insert the continuation
+}
+
+void pre_initialize_Continue()
+{
+    Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");}
+
+void post_initialize_Continue()
+{
+
+}
+
+/* ========================================================================== */
+
+AST_Callec * new_Callec()
+{
+    AST_Callec * result = NEW(AST_Callec);
+    HEADER(result)      = (Object)Callec_Class;
+    result->cont        = new_Continue((Object)result);
+    return result;
+}
+
+void AST_Callec_eval(AST_Callec * self)
+{
+    
+}
+
+void pre_initialize_Callec()
+{
+    Callec_Class = new_Named_Class((Object)Object_Class, L"Callec");
+}
+
+void post_initialize_Callec()
+{
+    
+}
+
+/* ========================================================================== */
+
+void send_Eval()
+{
+    zap_CNT();
+    Object exp = peek_EXP(1);
+
+    Type_Class * class = (Type_Class *)HEADER(exp);
+    // TODO get rid of this switch and do a "double dispatch"
+    if (class == Constant_Class) {
+        return AST_Constant_eval((AST_Constant *)exp);
+    }
+    if (class == Variable_Class) {
+        return AST_Variable_eval((AST_Variable *)exp);
+    }
+    if (class == Assign_Class) {
+        return AST_Assign_eval((AST_Assign *)exp);
+    }
+    if (class == Send_Class) {
+        return AST_Send_eval((AST_Send *)exp);
+    }
+    if (class == Self_Class) {
+        return AST_Self_eval();
+    }
+    if (class == Super_Class) {
+        return AST_Super_eval((AST_Super *)exp);
+    }
+    if (class == Continue_Class) {
+        return AST_Continue_eval((AST_Continue *)exp);
+    }
+    if (class == Callec_Class) {
+        return AST_Callec_eval((AST_Callec *)exp);
+    }
+    if (class == Method_Class) {
+        //return AST_Method_eval((AST_Method *)exp);
+    }
+    if (class == Native_Method_Class) {
+        //return AST_Native_Method_eval((AST_Native_Method *)exp);
+    }
+
+    assert(NULL);
+}
 
 
 void end_eval()
@@ -1007,6 +1112,7 @@ Eval(Object code)
             peek_CNT(1)();
         }
     }
+    
     zap_CNT();
     Object result = pop_EXP();
     return result;
@@ -1049,6 +1155,24 @@ void test_boolean_equals()
     assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
 }
 
+void test_method_evaluation()
+{
+    Type_Array * body       = new_Raw_Array(0);
+    AST_Method * method     = new_Method(0, body);
+    Object method_const     = (Object)new_Constant((Object)method);
+    Type_SmallInt * integer = new_SmallInt(120);
+    Object integer_const    = (Object)new_Constant((Object)integer);
+    
+    Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
+    printf("%ls\n", Object_classname(result));
+    assert(result == (Object)method);
+
+    // with one body element
+    method->body = new_Array_With(1, integer_const);
+    result       = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
+    printf("%ls\n", Object_classname(result));
+    assert(result == (Object)integer);
+}
 
 void test_method_invocation()
 {
@@ -1094,32 +1218,32 @@ void test_method_invocation()
 
 void test_method_invocation_with_arguments()
 {
-    AST_Variable * var = new_Variable(L"myVar");
-    Type_Array * body = new_Array_With(1, (Object)var);
+    AST_Variable * var  = new_Variable(L"myVar");
+    Type_Array * body   = new_Array_With(1, (Object)var);
     AST_Method * method = new_Method(0, body);
     var->key = (Object)method;
     var->index = 0;
     
-    Type_Symbol * test = new_Symbol(L"test");
-    Type_SmallInt * integer = new_SmallInt(120);
+    Type_Symbol * test           = new_Symbol(L"test");
+    Type_SmallInt * integer      = new_SmallInt(120);
     AST_Constant * integer_const = new_Constant((Object)integer);
     store_method(SmallInt_Class, (Object)test, (Object)method);
     Type_Array * args = new_Array_With(1, (Object)integer_const);
-    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, args));
+    Object result     = Eval((Object)new_Send((Object)integer_const, (Object)test, args));
     assert(result == (Object)integer);
     
 }
 
 void test_self()
 {
-    Type_SmallInt * integer = new_SmallInt(70);
-    Type_SmallInt * integer7 = new_SmallInt(7);
-    AST_Constant * integer_const = new_Constant((Object)integer);
+    Type_SmallInt * integer       = new_SmallInt(70);
+    Type_SmallInt * integer7      = new_SmallInt(7);
+    AST_Constant * integer_const  = new_Constant((Object)integer);
     AST_Constant * integer7_const = new_Constant((Object)integer7);
-    Type_Array * body = new_Array_With(3, (Object)integer7_const);
-    body->values[2] = Self;
+    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
+    body->values[2]     = Self;
     AST_Method * method = new_Method(0, body);
-    Type_Symbol * test = new_Symbol(L"test");
+    Type_Symbol * test  = new_Symbol(L"test");
     store_method(SmallInt_Class, (Object)test, (Object)method);
     Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
     assert(result == (Object)integer);
@@ -1127,24 +1251,49 @@ void test_self()
 
 void test_super()
 {
-    
-    Type_SmallInt * integer = new_SmallInt(70);
-    Type_SmallInt * integer7 = new_SmallInt(7);
-    AST_Constant * integer_const = new_Constant((Object)integer);
+    Type_SmallInt * integer       = new_SmallInt(70);
+    Type_SmallInt * integer7      = new_SmallInt(7);
+    AST_Constant * integer_const  = new_Constant((Object)integer);
     AST_Constant * integer7_const = new_Constant((Object)integer7);
     
-    Type_Symbol * test = new_Symbol(L"test");
-    Type_Array * body = new_Array_With(3, (Object)integer7_const);
-    body->values[2] = (Object)new_Super((Object)test, new_Raw_Array(0));
+    Type_Symbol * test  = new_Symbol(L"test");
+    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
+    body->values[2]     = (Object)new_Super((Object)test, new_Raw_Array(0));
     AST_Method * method = new_Method(0, body);
     store_method(True_Class, (Object)test, (Object)method);
     
-    body = new_Array_With(3, (Object)integer7_const);
-    body->values[2] = (Object)integer_const;
+    body             = new_Array_With(3, (Object)integer7_const);
+    body->values[2]  = (Object)integer_const;
     method = new_Method(0, body);
     store_method(Boolean_Class, (Object)test, (Object)method);
     
     Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Array(0)));
+    assert(result == (Object)integer);
+}
+
+
+void test_ast_continue()
+{
+    Type_SmallInt * integer       = new_SmallInt(70);
+    Type_SmallInt * integer7      = new_SmallInt(7);
+    AST_Constant * integer_const  = new_Constant((Object)integer);
+    AST_Constant * integer7_const = new_Constant((Object)integer7);
+    
+    //(assert (= 70
+    //     (callec (lambda (cont)
+    //                 (cont 70)
+    //                 7))))
+    //
+    AST_Callec *callec = new_Callec();    
+    Type_Symbol * test  = new_Symbol(L"test");
+    AST_Send * send     = new_Send((Object)True_Const, (Object)test, new_Raw_Array(0));
+    callec->send        = (Object)send;
+
+    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
+    body->values[2]     = (Object)new_Send((Object)callec->cont, Symbol_eval, 
+                                            new_Array_With(1, Symbol_eval));
+
+    Object result = Eval((Object)callec);
     assert(result == (Object)integer);
 }
 
@@ -1172,6 +1321,8 @@ int main()
     
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();
+    pre_initialize_Continue();
+    pre_initialize_Callec();
     pre_initialize_Array();
     pre_initialize_Assign();
     pre_initialize_Constant();
@@ -1191,6 +1342,8 @@ int main()
     
     post_initialize_Object();
     post_initialize_Env();
+    post_initialize_Continue();
+    post_initialize_Callec();
     post_initialize_Array();
     post_initialize_Assign();
     post_initialize_Constant();
@@ -1211,6 +1364,7 @@ int main()
     test_variable_lookup();
     test_boolean_equals();
     
+    test_method_evaluation();
     test_method_invocation();
     test_method_invocation_with_arguments();
     test_self();

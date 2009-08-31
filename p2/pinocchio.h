@@ -7,6 +7,8 @@
 #else 
 #define PALLOC malloc
 #endif
+#undef PALLOC
+#define PALLOC malloc
  
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) p) + 1) 
@@ -82,23 +84,33 @@ typedef struct AST_Constant {
 
 typedef struct AST_Self {} AST_Self;
 
-typedef struct AST_Variable {
-    unsigned int    index;
-    Object          key;
-    Object          name;
-} AST_Variable;
-
 typedef struct InlineCache {
     Object          type;
     Object          method;
 } InlineCache;
-    
+
 typedef struct AST_Super {
     InlineCache     cache;
     Object          message; 
     Type_Array     *arguments;
 } AST_Super;
 
+typedef struct AST_Continue {
+    Object          target;
+} AST_Continue;
+
+typedef struct AST_Callec {
+    AST_Continue   *cont;
+    Object          send;
+} AST_Callec;
+
+typedef struct AST_Variable {
+    unsigned int    index;
+    Object          key;
+    Object          name;
+} AST_Variable;
+
+    
 typedef struct AST_Send {
     InlineCache     cache;
     Object          receiver;
