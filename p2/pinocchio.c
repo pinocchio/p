@@ -717,13 +717,13 @@ void post_initialize_Method()
 
 /* ========================================================================== */
 
-Object
+AST_Native_Method *
 new_Native_Method(native code)
 {
     AST_Native_Method * result = NEW(AST_Native_Method);
     HEADER(result)             = (Object)Native_Method_Class;
     result->code               = code;
-    return (Object)result;
+    return result;
 }
 
 void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
@@ -926,8 +926,8 @@ void store_method(Type_Class * class, Object symbol, Object method)
 
 void store_native_method(Type_Class * class, Object symbol, native code)
 {
-    Object native_method = new_Native_Method(code);
-    store_method(class, symbol, native_method);
+    AST_Native_Method * native_method = new_Native_Method(code);
+    store_method(class, symbol, (Object)native_method);
 }
 
 void Class_dispatch(InlineCache * cache, Object self, Object class,
@@ -1078,12 +1078,6 @@ void send_Eval()
     if (class == Callec_Class) {
         return AST_Callec_eval((AST_Callec *)exp);
     }
-    if (class == Method_Class) {
-        //return AST_Method_eval((AST_Method *)exp);
-    }
-    if (class == Native_Method_Class) {
-        //return AST_Native_Method_eval((AST_Native_Method *)exp);
-    }
 
     assert(NULL);
 }
@@ -1172,6 +1166,22 @@ void test_method_evaluation()
     result       = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
     printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
+}
+
+int test_native_method_evaluation_testmethod_called = 0;
+void test_native_method_evaluation_testmethod(Object self, Object class, Type_Array * args) {
+    test_native_method_evaluation_testmethod_called++;
+}
+
+void test_native_method_evaluation()
+{
+    AST_Native_Method * method = new_Native_Method(test_native_method_evaluation_testmethod);
+    Object method_const        = (Object)new_Constant((Object)method);
+    
+    Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
+    printf("%ls\n", Object_classname(result));
+    assert(result == (Object)method);
+    assert(test_native_method_evaluation_testmethod_called == 1);
 }
 
 void test_method_invocation()
@@ -1365,6 +1375,8 @@ int main()
     test_boolean_equals();
     
     test_method_evaluation();
+    test_native_method_evaluation();
+    
     test_method_invocation();
     test_method_invocation_with_arguments();
     test_self();
