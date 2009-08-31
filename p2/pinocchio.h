@@ -27,6 +27,13 @@
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
+#define DEBUG
+#ifdef DEBUG
+#define LOG printf
+#else
+#define LOG
+#endif
+
 typedef void**          Object;
 typedef unsigned int    bool;
 

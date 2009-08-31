@@ -186,7 +186,6 @@ void post_initialize_Type_SmallInt()
 
 /* ========================================================================== */
 
-
 wchar_t* wcsdup(const wchar_t* input)
 {
    int len         = wcslen(input) + 1;
@@ -251,7 +250,6 @@ void post_initialize_String()
 }
 
 /* ========================================================================== */
-
 
 void pre_initialize_True()
 {
@@ -684,6 +682,11 @@ void AST_Method_eval(Object self, Object class, Type_Array * args)
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
 
+void AST_Method_eval_(Object self, Object class, Type_Array * args)
+{
+    AST_Method_invoke((AST_Method *) self, self, class, args);
+}
+
 void Method_invoke(Object method, Object self,
                    Object class, Type_Array * args)
 {
@@ -713,6 +716,8 @@ void pre_initialize_Method()
 void post_initialize_Method()
 {
     store_native_method((Type_Class *)Method_Class, Symbol_eval, AST_Method_eval);
+    // TODO for now accecpt any number of arguments
+    store_native_method((Type_Class *)Method_Class, Symbol_eval_, AST_Method_eval_);
 }
 
 /* ========================================================================== */
@@ -734,8 +739,13 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
 
 void AST_Native_Method_eval(Object self, Object class, Type_Array * args)
 {
-    
    AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
+}
+
+void AST_Native_Method_eval_(Object self, Object class, Type_Array * args)
+{
+    // TODO for now accecpt any number of arguments
+    AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
 }
 
 
@@ -747,6 +757,8 @@ void pre_initialize_Native_Method()
 void post_initialize_Native_Method()
 {
     store_native_method((Type_Class *)Native_Method_Class, Symbol_eval, AST_Native_Method_eval);
+    // TODO for now accecpt any number of arguments
+    store_native_method((Type_Class *)Native_Method_Class, Symbol_eval_, AST_Native_Method_eval_);
 };
 
 /* ========================================================================== */
@@ -787,7 +799,10 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    assert(index < self->values->size);
+    if (index >= self->values->size) {
+        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size);
+        assert(index < self->values->size);
+    }
 
     push_EXP(self->values->values[index]);
 }
@@ -807,7 +822,10 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    assert(index < self->values->size);
+    if (index >= self->values->size) {
+        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size);
+        assert(index < self->values->size);
+    }
 
     self->values->values[index] = value;
 }
@@ -939,8 +957,16 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
     
     /* Monomorphic inline cache */
     if (class == cache->type) {
+        LOG("Cached dispatch \"%ls\" on \"%ls\"\n",  
+            ((Type_Symbol*)msg)->value,
+            ((Type_Class*)HEADER(self))->name->value);
         return Method_invoke(cache->method, self, class, args);
     }
+    assert(HEADER(class) == (Object)Class_Class);
+    LOG("Dispatching on \"%ls\"\n",  ((Type_Class*)class)->name->value);
+    //LOG("Dispatching \"%ls\" on \"%ls\"\n",  
+    //        ((Type_Symbol*)msg)->value,
+    //        ((Type_Class*)HEADER(self))->name->value);
     
     Object method = NULL;    
     while (class != Null) {
@@ -994,7 +1020,6 @@ void post_initialize_Object()
 
 /* ========================================================================== */
 
-
 AST_Continue * new_Continue(Object target)
 {
     AST_Continue * result = NEW(AST_Continue);
@@ -1032,7 +1057,8 @@ AST_Callec * new_Callec()
 
 void AST_Callec_eval(AST_Callec * self)
 {
-    
+    push_EXP(self->send);
+    push_CNT(send_Eval);
 }
 
 void pre_initialize_Callec()
@@ -1042,7 +1068,6 @@ void pre_initialize_Callec()
 
 void post_initialize_Callec()
 {
-    
 }
 
 /* ========================================================================== */
@@ -1078,7 +1103,9 @@ void send_Eval()
     if (class == Callec_Class) {
         return AST_Callec_eval((AST_Callec *)exp);
     }
-
+    
+    printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a Constant?\n", 
+           ((Type_Class*)class)->name->value);
     assert(NULL);
 }
 
@@ -1152,19 +1179,33 @@ void test_boolean_equals()
 void test_method_evaluation()
 {
     Type_Array * body       = new_Raw_Array(0);
-    AST_Method * method     = new_Method(0, body);
+    AST_Method * method     = new_Method(1, body);
     Object method_const     = (Object)new_Constant((Object)method);
     Type_SmallInt * integer = new_SmallInt(120);
     Object integer_const    = (Object)new_Constant((Object)integer);
+    Type_SmallInt * integer7 = new_SmallInt(7);
+    Object integer7_const    = (Object)new_Constant((Object)integer7);
     
     Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
-    printf("%ls\n", Object_classname(result));
     assert(result == (Object)method);
 
-    // with one body element
+    // with one body element ---------------------------------------------------
     method->body = new_Array_With(1, integer_const);
     result       = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
-    printf("%ls\n", Object_classname(result));
+    //printf("%ls\n", Object_classname(result));
+    assert(result == (Object)integer);
+    
+    // with one argument -------------------------------------------------------
+    AST_Variable * var      = new_Variable(L"myVar");
+    method->body            = new_Array_With(3, integer7_const);
+    method->body->values[2] = (Object)var;
+    
+    var->key = (Object)method;
+    var->index = 0;
+    
+    result       = Eval((Object)new_Send(method_const, Symbol_eval_, 
+                                         new_Array_With(1, (Object)integer_const)));
+    //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
 }
 
@@ -1284,27 +1325,45 @@ void test_super()
 
 void test_ast_continue()
 {
-    Type_SmallInt * integer       = new_SmallInt(70);
+    Type_SmallInt * integer1      = new_SmallInt(1);
     Type_SmallInt * integer7      = new_SmallInt(7);
-    AST_Constant * integer_const  = new_Constant((Object)integer);
+    AST_Constant * integer1_const = new_Constant((Object)integer1);
     AST_Constant * integer7_const = new_Constant((Object)integer7);
     
-    //(assert (= 70
+    AST_Callec * callec = new_Callec();
+    callec->send = (Object)integer7_const;
+    Object result = Eval((Object)callec);
+    //printf("%ls\n", Object_classname(result));
+    assert(result == (Object)integer7);
+    
+    
+    Type_Array * body   = new_Array_With(2, (Object)integer7_const);
+    AST_Method * send   = new_Method(1, body);
+    AST_Constant* send_const = new_Constant((Object)send);
+    callec->send        = (Object)new_Send((Object)send_const, 
+                                           (Object)Symbol_eval_, 
+                                           new_Array_With(1, (Object)new_Constant((Object)callec->cont)));
+    
+    //(assert (= 1
     //     (callec (lambda (cont)
-    //                 (cont 70)
+    //                 7
     //                 7))))
     //
-    AST_Callec *callec = new_Callec();    
-    Type_Symbol * test  = new_Symbol(L"test");
-    AST_Send * send     = new_Send((Object)True_Const, (Object)test, new_Raw_Array(0));
-    callec->send        = (Object)send;
+    result = Eval((Object)callec);
+    //printf("%ls\n", Object_classname(result));
+    assert(result == (Object)integer7);
+    
+    //(assert (= 1
+    //     (callec (lambda (cont)
+    //                 (cont 1)
+    //                 7))))
+    //
+    body->values[2]    = (Object)new_Send((Object)callec->cont, Symbol_eval, 
+                                          new_Array_With(1, (Object)integer1_const));
 
-    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
-    body->values[2]     = (Object)new_Send((Object)callec->cont, Symbol_eval, 
-                                            new_Array_With(1, Symbol_eval));
-
-    Object result = Eval((Object)callec);
-    assert(result == (Object)integer);
+    result = Eval((Object)callec);
+    printf("%ls\n", Object_classname(result));
+    assert(result == (Object)integer1);
 }
 
 void test_thread_stress()
@@ -1379,8 +1438,11 @@ int main()
     
     test_method_invocation();
     test_method_invocation_with_arguments();
+    
     test_self();
     test_super();
+    
+    test_ast_continue();
     
     //test_thread_stress();
 
