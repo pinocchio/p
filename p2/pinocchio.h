@@ -60,6 +60,10 @@ typedef struct Type_Symbol {
 
 typedef Type_Symbol Type_String;
 
+typedef struct Type_Character {
+    wchar_t value;
+} Type_Character;
+
 typedef struct Type_Boolean {
     char            value;
 } Type_Boolean;

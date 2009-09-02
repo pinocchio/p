@@ -23,11 +23,13 @@ Object Null;
 Type_Class * Array_Class;
 Type_Class * Assign_Class;
 Type_Class * Boolean_Class;
+Type_Class * Character_Class;
 Type_Class * Class_Class;
 Type_Class * Constant_Class;
 Type_Class * Dictionary_Class;
 Type_Class * Env_Class;
 Type_Class * False_Class;
+Type_Class * File_Class;
 Type_Class * Method_Class;
 Type_Class * Native_Method_Class;
 Type_Class * Object_Class;
@@ -186,6 +188,44 @@ void post_initialize_Type_SmallInt()
 
 /* ========================================================================== */
 
+Type_Character * new_Character(wchar_t value)
+{
+    Type_Character * result = NEW(Type_Character);
+    HEADER(result) = Character_Class;
+    result->value = value;
+    // TODO add character table here for caching
+    return result;
+}
+
+
+void Character_toString()
+{
+    // TODO implement
+}
+
+void Character_toSymbol()
+{
+    // TODO implement
+}
+
+void Character_toSmallInt()
+{
+    // TODO implement
+}
+
+
+void pre_initialize_Character()
+{
+    Character_Class = new_Name_Class(Object_Class, L"Character");
+}
+
+void post_initialize_Character()
+{
+   // TODO install methods 
+}
+
+/* ========================================================================== */
+
 wchar_t* wcsdup(const wchar_t* input)
 {
    int len         = wcslen(input) + 1;
@@ -208,6 +248,42 @@ new_Symbol(const wchar_t* name)
     return symbol;
 }
 
+
+void Symbol_charAt_() 
+{
+    // TODO implement
+}
+
+void Symbol_toString()
+{
+    // TODO implement
+}
+
+void Symbol_toCharacterArray()
+{
+    // TODO implement
+}
+
+void Symbol_concat()
+{
+    // TODO implement
+}
+
+void Symbol_sub()
+{
+    // TODO implement
+}
+
+void Symbol_indexOf()
+{
+    // TODO implement
+}
+
+void Symbol_lastIndexOf()
+{
+    // TODO implement
+}
+
 void pre_initialize_Symbol()
 {
     Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
@@ -227,7 +303,7 @@ void initialize_Symbol()
 
 void post_initialize_Symbol()
 {
-    String_Class        = new_Named_Class((Object)Symbol_Class, L"String");   
+   // TODO install methods 
 }
 
 /* ========================================================================== */
@@ -240,6 +316,21 @@ new_String(const wchar_t * str)
     return string;
 }
 
+void String_sub() 
+{
+    // TODO implement
+}
+
+void String_concat()
+{
+    // TODO implement
+}
+
+void String_toSymbol()
+{
+    // TODO implement
+}
+
 void pre_initialize_String()
 {
     String_Class = new_Named_Class((Object)Symbol_Class, L"String");
@@ -247,9 +338,20 @@ void pre_initialize_String()
 
 void post_initialize_String()
 {
+   // TODO install methods 
 }
 
 /* ========================================================================== */
+
+void Boolean_toString()
+{
+    // TODO implement
+}
+
+void Boolean_toSmallInt()
+{
+    // TODO implement
+}
 
 void pre_initialize_True()
 {
@@ -291,7 +393,7 @@ void pre_initialize_Type_Boolean()
 
 void post_initialize_Type_Boolean()
 {
-    
+   // TODO install methods 
 }
 
 /* ========================================================================== */
@@ -347,7 +449,31 @@ void pre_initialize_Array()
 
 void post_initialize_Array()
 {
-    
+   // TODO install methods 
+}
+
+/* ========================================================================== */
+
+
+File_Class * new_file()
+{
+    // TODO implement
+}
+
+File_Class * new_File_FromPath(wchar_t* path)
+{
+    // TODO implement
+}
+
+
+void pre_initialize_File()
+{
+    File_Class = new_Named_Class(Object_Class, L"File");
+}
+
+void post_initialize_File()
+{
+   // TODO install methods 
 }
 
 /* ========================================================================== */
@@ -1350,6 +1476,7 @@ void test_ast_continue()
     //                 7))))
     //
     result = Eval((Object)callec);
+    // XXX Fail
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer7);
     
@@ -1390,43 +1517,49 @@ int main()
     
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();
-    pre_initialize_Continue();
-    pre_initialize_Callec();
+    pre_initialize_Symbol();
+    
     pre_initialize_Array();
     pre_initialize_Assign();
+    pre_initialize_Callec();
+    pre_initialize_Character();
     pre_initialize_Constant();
+    pre_initialize_Continue();
     pre_initialize_Dictionary();
+    pre_initialize_File();
     pre_initialize_Method();
     pre_initialize_Native_Method();
-    pre_initialize_Send();
-    pre_initialize_Symbol();
-    pre_initialize_String();
-    pre_initialize_Variable();
-    pre_initialize_Type_Boolean();
     pre_initialize_Self();
+    pre_initialize_Send();
+    pre_initialize_String();
     pre_initialize_Super();
+    pre_initialize_Type_Boolean();
+    pre_initialize_Variable();
 
     initialize_Symbol();
     initialize_Thread();
     
     post_initialize_Object();
-    post_initialize_Env();
-    post_initialize_Continue();
-    post_initialize_Callec();
+    
     post_initialize_Array();
     post_initialize_Assign();
+    post_initialize_Callec();
+    post_initialize_Character();
     post_initialize_Constant();
+    post_initialize_Continue();
     post_initialize_Dictionary();
+    post_initialize_Env();
+    post_initialize_File();
     post_initialize_Method();
     post_initialize_Native_Method();
-    post_initialize_Send();
-    post_initialize_Symbol();
-    post_initialize_String();
-    post_initialize_Variable();
-    post_initialize_Type_SmallInt();
-    post_initialize_Type_Boolean();
     post_initialize_Self();
+    post_initialize_Send();
+    post_initialize_String();
     post_initialize_Super();
+    post_initialize_Symbol();
+    post_initialize_Type_Boolean();
+    post_initialize_Type_SmallInt();
+    post_initialize_Variable();
     
     
 
