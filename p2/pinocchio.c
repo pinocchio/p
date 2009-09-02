@@ -191,8 +191,8 @@ void post_initialize_Type_SmallInt()
 Type_Character * new_Character(wchar_t value)
 {
     Type_Character * result = NEW(Type_Character);
-    HEADER(result) = Character_Class;
-    result->value = value;
+    HEADER(result)          = (Object)Character_Class;
+    result->value           = value;
     // TODO add character table here for caching
     return result;
 }
@@ -216,7 +216,7 @@ void Character_toSmallInt()
 
 void pre_initialize_Character()
 {
-    Character_Class = new_Name_Class(Object_Class, L"Character");
+    Character_Class = new_Named_Class((Object)Object_Class, L"Character");
 }
 
 void post_initialize_Character()
@@ -458,17 +458,19 @@ void post_initialize_Array()
 File_Class * new_file()
 {
     // TODO implement
+    return NULL;
 }
 
 File_Class * new_File_FromPath(wchar_t* path)
 {
     // TODO implement
+    return NULL;
 }
 
 
 void pre_initialize_File()
 {
-    File_Class = new_Named_Class(Object_Class, L"File");
+    File_Class = new_Named_Class((Object)Object_Class, L"File");
 }
 
 void post_initialize_File()
