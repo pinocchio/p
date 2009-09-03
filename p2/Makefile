@@ -1,7 +1,12 @@
 TARGET=pinocchio
 
-CFILES=$(TARGET).c
-HFILES=$(TARGET).h
+CFILES=$(wildcard *.c \
+            system/*c \
+            system/ast/*.c \
+            system/type/*.c \
+            system/runtime/*.c)
+
+HFILES=$(CFILES:%.c=%.h)
 
 CFLAGS+=-I. -O3 -lgc -Wall
 LDFLAGS+=-lgc
@@ -11,6 +16,9 @@ OBJECTS=$(CFILES:%.c=%.o)
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
+
+%.o : %.c
+	$(CC) -c $(CFLAGS) $< -o $@
 
 run: $(TARGET)
 	./$(TARGET)
@@ -27,3 +35,5 @@ include make.depend
 
 make.depend: $(SOURCES)
 	$(CC) -M -I. $(CFILES) > $@
+	#makedepend $(INCLUDES) $^
+

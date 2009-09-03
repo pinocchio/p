@@ -34,8 +34,12 @@
 #define LOG
 #endif
 
+/* ======================================================================== */
+
 typedef void**          Object;
 typedef unsigned int    bool;
+
+/* ======================================================================== */
 
 struct Type_SmallInt;
 struct Type_Object;
@@ -59,10 +63,6 @@ typedef struct Type_Symbol {
 } Type_Symbol;
 
 typedef Type_Symbol Type_String;
-
-typedef struct Type_Character {
-    wchar_t value;
-} Type_Character;
 
 typedef struct Type_Boolean {
     char            value;
@@ -159,6 +159,13 @@ typedef struct Runtime_Env {
     Object          key;
     Type_Array     *values;
 } Runtime_Env;
+
+/* ======================================================================== */
+
+extern Object Null;
+extern Type_Class * Object_Class;
+
+/* ======================================================================== */
 
 AST_Constant * new_Constant(Object constant);
 
