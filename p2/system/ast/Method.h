@@ -11,5 +11,4 @@ void Method_invoke(Object method, Object self, Object class, Type_Array * args);
 
 /* ========================================================================= */
 
-void pre_initialize_Method();
-void post_initialize_Method();
+CREATE_INITIALIZERS(Method);

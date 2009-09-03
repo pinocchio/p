@@ -1,0 +1,1 @@
+CREATE_INITIALIZERS(Object);

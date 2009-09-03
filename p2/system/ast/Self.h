@@ -1,6 +1,3 @@
-#ifndef AST_SELF
-#define AST_SELF
-
 /* ========================================================================== */
 
 extern Type_Class * Self_Class;
@@ -13,9 +10,6 @@ extern void ast_self_eval();
 
 /* ========================================================================== */
 
-extern void pre_initialize_Self();
-extern void post_initialize_Self();
+CREATE_INITIALIZERS(Self);
 
 /* ========================================================================== */
-
-#endif  AST_SELF
