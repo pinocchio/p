@@ -93,6 +93,7 @@ void test_method_invocation()
     assert(result == (Object)integer7);
 }
 
+/* ======================================================================== */
 
 void test_Method()
 {

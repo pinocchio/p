@@ -17,6 +17,7 @@ void test_ast_native_method_evaluation()
 }
 
 
+/* ======================================================================== */
 
 void test_NativeMethod()
 {

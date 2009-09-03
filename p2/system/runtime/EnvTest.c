@@ -9,6 +9,8 @@ void test_variable_lookup()
     Env = (Object)new_Env_Sized(current_env(), Null, 0);
 }
 
+/* ======================================================================== */
+
 void test_Env()
 {
     test_variable_lookup();

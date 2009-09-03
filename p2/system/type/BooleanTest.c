@@ -23,6 +23,8 @@ void test_boolean_equals()
 }
 
 
+/* ======================================================================== */
+
 void test_Boolean()
 {
     test_boolean_equals();

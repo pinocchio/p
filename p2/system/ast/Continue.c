@@ -17,7 +17,8 @@ void AST_Continue_eval(AST_Continue * self)
 
 void pre_initialize_Continue()
 {
-Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");}
+    Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");
+}
 
 void post_initialize_Continue()
 {
