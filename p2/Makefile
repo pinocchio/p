@@ -1,10 +1,8 @@
 TARGET=pinocchio
 
-CFILES=$(wildcard *.c \
-            system/*c \
-            system/ast/*.c \
-            system/type/*.c \
-            system/runtime/*.c)
+CFILES=$(wildcard *.c)
+
+TEST_CFILES=$(filter %Test.c,$(CFILES))
 
 HFILES=$(CFILES:%.c=%.h)
 

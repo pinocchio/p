@@ -1,17 +1,6 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <setjmp.h>
-#include <wchar.h>
-#include <pinocchio.h>
-#include <system/type/Character.h>
 
-Type_Class * Character_Class;
 
-/* ========================================================================== */
-
-Type_Character * 
-new_Character(wchar_t value)
+Type_Character * new_Character(wchar_t value)
 {
     Type_Character * result = NEW(Type_Character);
     HEADER(result)          = (Object)Character_Class;

@@ -48,6 +48,10 @@ typedef void(*cont)();
 
 typedef struct Type_Null {} Type_Null;
 
+typedef struct Type_Character {
+    wchar_t value;
+} Type_Character;
+
 typedef struct Type_SmallInt {
     int             value;
 } Type_SmallInt;
@@ -192,14 +196,15 @@ void AST_Assign_assign();
 void push_restore_env();
 void send_Eval();
 void store_argument();
+Type_SmallInt * new_SmallInt(int value);
 
 void Class_dispatch(InlineCache * sender, Object self, Object class,
                          Object msg, Type_Array * args);
-
+void Method_invoke(Object method, Object self, Object class, Type_Array * args);
 Type_Class* new_Named_Class(Object superclass, const wchar_t* name);
 Type_Class* new_Class(Object superclass);
 Type_String * new_String(const wchar_t * str);
 void store_native_method(Type_Class * class, Object symbol, native code);
-
+AST_Native_Method * new_Native_Method(native code);
 
 #endif // AST_H
