@@ -3,8 +3,6 @@
 
 /* ========================================================================== */
 
-typedef struct AST_Self {} AST_Self;
-
 extern Type_Class * Self_Class;
 extern Object Self;
 

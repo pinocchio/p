@@ -171,6 +171,31 @@ extern Type_Class * Object_Class;
 
 /* ======================================================================== */
 
+#include <system/type/Character.h>
+#include <system/type/String.h>
+#include <system/type/Boolean.h>
+#include <system/type/Array.h>
+#include <system/type/Dictionary.h>
+#include <system/type/Class.h>
+#include <system/type/Object.h>
+#include <system/type/SmallInt.h>
+
+#include <system/io/File.h>
+
+#include <system/ast/Self.h>
+#include <system/ast/Super.h>
+#include <system/ast/Constant.h>
+#include <system/ast/Variable.h>
+#include <system/ast/Assign.h>
+#include <system/ast/Send.h>
+#include <system/ast/Method.h>
+#include <system/ast/NativeMethod.h>
+#include <system/ast/Continue.h>
+#include <system/ast/Callec.h>
+
+#include <system/runtime/Env.h>
+
+
 AST_Constant * new_Constant(Object constant);
 
 extern void AST_Constant_eval();

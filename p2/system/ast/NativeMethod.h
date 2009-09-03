@@ -1,11 +1,6 @@
 
 /* ======================================================================== */
 
-typedef struct AST_Native_Method {
-    native          code;
-} AST_Native_Method;
-
-
 extern AST_Native_Method * new_Native_Method(native code);
 
 /* ======================================================================== */

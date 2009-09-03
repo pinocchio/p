@@ -1,14 +1,6 @@
 
 /* ========================================================================= */
 
-typedef struct AST_Method {
-    unsigned int    paramc;
-    Object          environment;
-    Type_Array     *body;
-} AST_Method;
-
-/* ========================================================================= */
-
 AST_Method * new_Method(unsigned int paramc, Type_Array * body);
 void AST_Method_invoke(AST_Method * method, Object self,Object class, Type_Array * args);
 
