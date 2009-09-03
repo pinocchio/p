@@ -14,7 +14,7 @@ new_SmallInt(int value)
 }
 
 
-void SmallInt_plus(Object self, Object class, Type_Array * args) 
+NATIVE(SmallInt_plus) 
 {
     assert(HEADER(self) == (Object)SmallInt_Class);
     assert(args->size == 1);
@@ -24,7 +24,7 @@ void SmallInt_plus(Object self, Object class, Type_Array * args)
     poke_EXP(1, new_SmallInt(arg->value + number->value));
 }
 
-void SmallInt_minus(Object self, Object class, Type_Array * args) 
+NATIVE(SmallInt_minus) 
 {
     assert(HEADER(self) == (Object)SmallInt_Class);
     assert(args->size == 1);
@@ -34,7 +34,7 @@ void SmallInt_minus(Object self, Object class, Type_Array * args)
     poke_EXP(1, new_SmallInt(arg->value - number->value));
 }
 
-void SmallInt_equals(Object self, Object class, Type_Array * args) 
+NATIVE(SmallInt_equals) 
 {
     assert(HEADER(self) == (Object)SmallInt_Class);
     assert(args->size == 1);
@@ -46,6 +46,8 @@ void SmallInt_equals(Object self, Object class, Type_Array * args)
         push_EXP(False_Const);
     }
 }
+
+/* =========================================================================*/
 
 void pre_initialize_Type_SmallInt() 
 {

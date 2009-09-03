@@ -48,12 +48,12 @@ void AST_Method_invoke(AST_Method * method, Object self,
     push_CNT(send_Eval);
 }
 
-void AST_Method_eval(Object self, Object class, Type_Array * args)
+NATIVE(AST_Method_eval)
 {
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
 
-void AST_Method_eval_(Object self, Object class, Type_Array * args)
+NATIVE(AST_Method_eval_)
 {
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }

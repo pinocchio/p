@@ -32,6 +32,12 @@
 #define CREATE_INITIALIZERS(class) void pre_initialize##_##class();\
 void pre_initialize##_##class();
 
+#define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
+    if(args->size < size_value || args->size > size_value) {\
+        printf("Invalid argument size! Expected %i but was %i", size_value, args->size);\
+        assert(args->size < size_value || args->size > size_value);\
+    }
+
 /* ======================================================================== */
 
 #define push_EXP(value)         (*(_EXP_++) = ((Object)value));
@@ -171,6 +177,7 @@ typedef struct AST_Assign {
 } AST_Assign;
 
 typedef void(*native)(Object self, Object class, Type_Array * args);
+#define NATIVE(name) void name(Object self, Object class, Type_Array * args)
 
 typedef struct AST_Native_Method {
     native          code;
@@ -257,7 +264,9 @@ void Method_invoke(Object method, Object self, Object class, Type_Array * args);
 Type_Class* new_Named_Class(Object superclass, const wchar_t* name);
 Type_Class* new_Class(Object superclass);
 Type_String * new_String(const wchar_t * str);
+
 void store_native_method(Type_Class * class, Object symbol, native code);
+
 AST_Native_Method * new_Native_Method(native code);
 
 #endif // AST_H

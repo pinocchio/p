@@ -15,6 +15,9 @@ Object Symbol_eval_;
 Object Symbol_lookup_;
 Object Symbol_plus_;
 Object Symbol_minus_;
+Object Symbol_objectAt_;
+Object Symbol_objectAt_put_;
+Object Symbol_objectAt_putIfAbsent_;
 
 Object Null;
 
@@ -178,6 +181,9 @@ void initialize_Symbol()
     Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
     Symbol_minus_   = (Object)new_Symbol(L"minus:");
     Symbol_plus_    = (Object)new_Symbol(L"plus:");
+    Symbol_objectAt_ = (Object)new_Symbol(L"objectAt:");
+    Symbol_objectAt_put_ = (Object)new_Symbol(L"objectAt:put:");
+    Symbol_objectAt_putIfAbsent_ = (Object)new_Symbol(L"objectAt:putIfAbsent:");
 }
 
 void post_initialize_Symbol()
@@ -185,7 +191,6 @@ void post_initialize_Symbol()
    // TODO install methods 
 }
 
-/* ========================================================================== */
 /* ========================================================================== */
 
 #include <system/type/SmallInt.c>
@@ -281,6 +286,17 @@ Eval(Object code)
     return result;
 }
 
+Object EvalSendConst(AST_Constant * self, Object symbol, Type_Array * args) 
+{
+    return Eval((Object)new_Send((Object)self, symbol, args));
+}
+
+
+Object EvalSend(Object self, Object symbol, Type_Array * args) 
+{
+    AST_Constant * self_const = new_Constant(self);
+    return EvalSendConst(self_const, symbol, args);
+}
 
 /* ========================================================================== */
 

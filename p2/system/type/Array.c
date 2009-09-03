@@ -38,13 +38,28 @@ new_Array_With(int c, Object init)
     return result;
 }
 
-void Array_objectAt()
+Object Array_ObjectAt(Type_Array * array, unsigned int index)
 {
+    assert(index < array->size);
+    return array->values[index];
+}
+
+NATIVE(Array_objectAt_)
+{
+    ASSERT_ARG_SIZE(1);
+    int index = ((Type_SmallInt *) args->values[0])->value;
+    push_EXP(((Type_Array *)self)->values[index]);
+}
+
+NATIVE(Array_objectAt_put_)
+{
+    ASSERT_ARG_SIZE(2);
     // TODO implement
 }
 
-void Array_size()
+NATIVE(Array_size)
 {
+    ASSERT_ARG_SIZE(0);
     // TODO implement
 }
 
@@ -59,5 +74,6 @@ void pre_initialize_Array()
 
 void post_initialize_Array()
 {
-    // TODO install methods 
+    store_native_method(Array_Class, Symbol_objectAt_, Array_objectAt_);
+    store_native_method(Array_Class, Symbol_objectAt_put_, Array_objectAt_put_);
 }

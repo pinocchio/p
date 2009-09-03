@@ -13,17 +13,19 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
     method->code(self, class, args);
 }
 
-void AST_Native_Method_eval(Object self, Object class, Type_Array * args)
+NATIVE(AST_Native_Method_eval)
 {
     AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
 }
 
-void AST_Native_Method_eval_(Object self, Object class, Type_Array * args)
+NATIVE(AST_Native_Method_eval_)
 {
     // TODO for now accecpt any number of arguments
     AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
 }
 
+
+/* ======================================================================== */
 
 void pre_initialize_Native_Method()
 {

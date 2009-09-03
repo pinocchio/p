@@ -20,5 +20,8 @@ void pre_initialize_Constant()
     Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
 }
 
-void post_initialize_Constant(){}
+void post_initialize_Constant()
+{
+
+}
 
