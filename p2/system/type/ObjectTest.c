@@ -1,0 +1,3 @@
+void test_Object()
+{
+}

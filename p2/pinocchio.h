@@ -1,6 +1,8 @@
 #ifndef AST_H
 #define AST_H
 
+/* ======================================================================== */
+
 #include <gc/gc.h>
 #ifdef GC_MALLOC
 #define PALLOC GC_MALLOC
@@ -9,7 +11,9 @@
 #endif
 #undef PALLOC
 #define PALLOC malloc
- 
+
+/* ======================================================================== */
+
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) p) + 1) 
 #define POINTER_DEC(p) (((Object) p) - 1)
@@ -23,9 +27,26 @@
 
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
 
-#define STACK_SIZE 1024*1024
-#define INT_CACHE_LOWER -1
-#define INT_CACHE_UPPER 127
+/* ======================================================================== */
+
+#define CREATE_INITIALIZERS(class) void pre_initialize##_##class();\
+void pre_initialize##_##class();
+
+/* ======================================================================== */
+
+#define push_EXP(value)         (*(_EXP_++) = ((Object)value));
+#define pop_EXP()               (*(--_EXP_))
+#define peek_EXP(depth)         (*(_EXP_ - depth))
+#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
+#define zap_EXP()               (_EXP_--);
+
+#define push_CNT(value)         (*(_CNT_--) = ((cont)value));
+#define pop_CNT()               (*(++_CNT_))
+#define peek_CNT(depth)         (*(_CNT_ + depth))
+#define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
+#define zap_CNT()               (_CNT_++);
+
+/* ======================================================================== */
 
 #define DEBUG
 #ifdef DEBUG
@@ -33,6 +54,13 @@
 #else
 #define LOG
 #endif
+
+
+/* ======================================================================== */
+
+#define STACK_SIZE 1024*1024
+#define INT_CACHE_LOWER -1
+#define INT_CACHE_UPPER 127
 
 /* ======================================================================== */
 

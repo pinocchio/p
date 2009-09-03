@@ -74,17 +74,6 @@ void continue_eval()
     longjmp(Eval_Continue, 1);
 }
 
-#define push_EXP(value)         (*(_EXP_++) = ((Object)value));
-#define pop_EXP()               (*(--_EXP_))
-#define peek_EXP(depth)         (*(_EXP_ - depth))
-#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
-#define zap_EXP()               (_EXP_--);
-
-#define push_CNT(value)         (*(_CNT_--) = ((cont)value));
-#define pop_CNT()               (*(++_CNT_))
-#define peek_CNT(depth)         (*(_CNT_ + depth))
-#define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
-#define zap_CNT()               (_CNT_++);
 
 void restore_env()
 {
@@ -295,246 +284,50 @@ Eval(Object code)
 
 /* ========================================================================== */
 
-void test_variable_lookup()
+#include <system/ast/AssignTest.c>
+#include <system/ast/CallecTest.c>
+#include <system/ast/ConstantTest.c>
+#include <system/ast/ContinueTest.c>
+#include <system/ast/MethodTest.c>
+#include <system/ast/NativeMethodTest.c>
+#include <system/ast/SelfTest.c>
+#include <system/ast/SendTest.c>
+#include <system/ast/SuperTest.c>
+#include <system/ast/VariableTest.c>
+#include <system/io/FileTest.c>
+#include <system/runtime/EnvTest.c>
+#include <system/runtime/ThreadTest.c>
+#include <system/type/ArrayTest.c>
+#include <system/type/BooleanTest.c>
+#include <system/type/CharacterTest.c>
+#include <system/type/ClassTest.c>
+#include <system/type/DictionaryTest.c>
+#include <system/type/ObjectTest.c>
+#include <system/type/SmallIntTest.c>
+#include <system/type/StringTest.c>
+
+void run_tests()
 {
-    // TODO complete test
-    AST_Variable * var = new_Variable(L"test");
-    var->index         = 0;
-    var->key           = (Object)new_SmallInt(10);
-    
-    Env = (Object)new_Env_Sized(current_env(), var->key, 1);
-    Env = (Object)new_Env_Sized(current_env(), Null, 0);
-}
-
-void test_boolean_equals()
-{
-    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
-    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
-    
-    Object result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, add)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send(test,  Symbol_equals_, new_Array_With(1, test)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)True_Const)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)True_Const,  Symbol_equals_, new_Array_With(1, (Object)False_Const)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)True_Const)));
-    assert(!((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-    
-    result = Eval((Object)new_Send((Object)False_Const, Symbol_equals_, new_Array_With(1, (Object)False_Const)));
-    assert(((Type_Boolean*)((AST_Constant*) result)->constant)->value);
-}
-
-void test_method_evaluation()
-{
-    Type_Array * body       = new_Raw_Array(0);
-    AST_Method * method     = new_Method(1, body);
-    Object method_const     = (Object)new_Constant((Object)method);
-    Type_SmallInt * integer = new_SmallInt(120);
-    Object integer_const    = (Object)new_Constant((Object)integer);
-    Type_SmallInt * integer7 = new_SmallInt(7);
-    Object integer7_const    = (Object)new_Constant((Object)integer7);
-    
-    Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
-    assert(result == (Object)method);
-
-    // with one body element ---------------------------------------------------
-    method->body = new_Array_With(1, integer_const);
-    result       = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
-    //printf("%ls\n", Object_classname(result));
-    assert(result == (Object)integer);
-    
-    // with one argument -------------------------------------------------------
-    AST_Variable * var      = new_Variable(L"myVar");
-    method->body            = new_Array_With(3, integer7_const);
-    method->body->values[2] = (Object)var;
-    
-    var->key = (Object)method;
-    var->index = 0;
-    
-    result       = Eval((Object)new_Send(method_const, Symbol_eval_, 
-                                         new_Array_With(1, (Object)integer_const)));
-    //printf("%ls\n", Object_classname(result));
-    assert(result == (Object)integer);
-}
-
-int test_native_method_evaluation_testmethod_called = 0;
-void test_native_method_evaluation_testmethod(Object self, Object class, Type_Array * args) {
-    test_native_method_evaluation_testmethod_called++;
-}
-
-void test_native_method_evaluation()
-{
-    AST_Native_Method * method = new_Native_Method(test_native_method_evaluation_testmethod);
-    Object method_const        = (Object)new_Constant((Object)method);
-    
-    Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
-    printf("%ls\n", Object_classname(result));
-    assert(result == (Object)method);
-    assert(test_native_method_evaluation_testmethod_called == 1);
-}
-
-void test_method_invocation()
-{
-    Type_Array * body = new_Raw_Array(0);
-    AST_Method * method = new_Method(0, body);
-    Type_Symbol * test = new_Symbol(L"test");
-    Type_SmallInt * integer = new_SmallInt(120);
-    AST_Constant * integer_const = new_Constant((Object)integer);
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer);
-    
-    // with 1 body element
-    Type_SmallInt * integer5 = new_SmallInt(5);
-    AST_Constant * integer5_const = new_Constant((Object)integer5);
-    body = new_Array_With(1, (Object)integer5_const);
-    method = new_Method(0, body);
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer5);
-    
-    // with 2 body element
-    Type_SmallInt * integer6 = new_SmallInt(6);
-    AST_Constant * integer6_const = new_Constant((Object)integer6);
-    body = new_Array_With(2, (Object)integer5_const);
-    body->values[1] = (Object)integer6_const;
-    method = new_Method(0, body);
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer6);
-    
-    // with 3 body element
-    Type_SmallInt * integer7 = new_SmallInt(7);
-    AST_Constant * integer7_const = new_Constant((Object)integer7);
-    body = new_Array_With(3, (Object)integer5_const);
-    body->values[1] = (Object)integer6_const;
-    body->values[2] = (Object)integer7_const;
-    method = new_Method(0, body);
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer7);
-}
-
-void test_method_invocation_with_arguments()
-{
-    AST_Variable * var  = new_Variable(L"myVar");
-    Type_Array * body   = new_Array_With(1, (Object)var);
-    AST_Method * method = new_Method(0, body);
-    var->key = (Object)method;
-    var->index = 0;
-    
-    Type_Symbol * test           = new_Symbol(L"test");
-    Type_SmallInt * integer      = new_SmallInt(120);
-    AST_Constant * integer_const = new_Constant((Object)integer);
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    Type_Array * args = new_Array_With(1, (Object)integer_const);
-    Object result     = Eval((Object)new_Send((Object)integer_const, (Object)test, args));
-    assert(result == (Object)integer);
-    
-}
-
-void test_self()
-{
-    Type_SmallInt * integer       = new_SmallInt(70);
-    Type_SmallInt * integer7      = new_SmallInt(7);
-    AST_Constant * integer_const  = new_Constant((Object)integer);
-    AST_Constant * integer7_const = new_Constant((Object)integer7);
-    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
-    body->values[2]     = Self;
-    AST_Method * method = new_Method(0, body);
-    Type_Symbol * test  = new_Symbol(L"test");
-    store_method(SmallInt_Class, (Object)test, (Object)method);
-    Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer);
-}
-
-void test_super()
-{
-    Type_SmallInt * integer       = new_SmallInt(70);
-    Type_SmallInt * integer7      = new_SmallInt(7);
-    AST_Constant * integer_const  = new_Constant((Object)integer);
-    AST_Constant * integer7_const = new_Constant((Object)integer7);
-    
-    Type_Symbol * test  = new_Symbol(L"test");
-    Type_Array * body   = new_Array_With(3, (Object)integer7_const);
-    body->values[2]     = (Object)new_Super((Object)test, new_Raw_Array(0));
-    AST_Method * method = new_Method(0, body);
-    store_method(True_Class, (Object)test, (Object)method);
-    
-    body             = new_Array_With(3, (Object)integer7_const);
-    body->values[2]  = (Object)integer_const;
-    method = new_Method(0, body);
-    store_method(Boolean_Class, (Object)test, (Object)method);
-    
-    Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Array(0)));
-    assert(result == (Object)integer);
-}
-
-
-void test_ast_continue()
-{
-    Type_SmallInt * integer1      = new_SmallInt(1);
-    Type_SmallInt * integer7      = new_SmallInt(7);
-    AST_Constant * integer1_const = new_Constant((Object)integer1);
-    AST_Constant * integer7_const = new_Constant((Object)integer7);
-    
-    AST_Callec * callec = new_Callec();
-    callec->send = (Object)integer7_const;
-    Object result = Eval((Object)callec);
-    //printf("%ls\n", Object_classname(result));
-    assert(result == (Object)integer7);
-    
-    
-    Type_Array * body   = new_Array_With(2, (Object)integer7_const);
-    AST_Method * send   = new_Method(1, body);
-    AST_Constant* send_const = new_Constant((Object)send);
-    callec->send        = (Object)new_Send((Object)send_const, 
-                                           (Object)Symbol_eval_, 
-                                           new_Array_With(1, (Object)new_Constant((Object)callec->cont)));
-    
-    //(assert (= 1
-    //     (callec (lambda (cont)
-    //                 7
-    //                 7))))
-    //
-    result = Eval((Object)callec);
-    // XXX Fail
-    //printf("%ls\n", Object_classname(result));
-    assert(result == (Object)integer7);
-    
-    //(assert (= 1
-    //     (callec (lambda (cont)
-    //                 (cont 1)
-    //                 7))))
-    //
-    body->values[2]    = (Object)new_Send((Object)callec->cont, Symbol_eval, 
-                                          new_Array_With(1, (Object)integer1_const));
-
-    result = Eval((Object)callec);
-    printf("%ls\n", Object_classname(result));
-    assert(result == (Object)integer1);
-}
-
-void test_thread_stress()
-{
-    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
-    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
-    
-    // AST_Send * send = new_Send(test, Symbol_plus_, new_Raw_Array(0));
-    AST_Send * send = new_Send(test, Symbol_plus_, new_Array_With(1, add));
-    
-    int idx;
-    int count = 10000000;
-    for (idx = 0; idx < count; idx++) {   
-        //    Eval((Object)assign);
-        Eval((Object)send);
-    }
+    test_Assign();
+    test_Callec();
+    test_Constant();
+    test_Continue();
+    test_Method();
+    test_NativeMethod();
+    test_Self();
+    test_Super();
+    test_Send();
+    test_Variable();
+    test_File();
+    test_Array();
+    test_Boolean();
+    test_Character();
+    test_Class();
+    test_Dictionary();
+    test_Object();
+    test_SmallInt();
+    test_String();
+    test_Thread();
 }
 
 /* ========================================================================== */
@@ -589,21 +382,7 @@ int main()
     post_initialize_Type_SmallInt();
     post_initialize_Variable();
     
-    
-
-    test_variable_lookup();
-    test_boolean_equals();
-    
-    test_method_evaluation();
-    test_native_method_evaluation();
-    
-    test_method_invocation();
-    test_method_invocation_with_arguments();
-    
-    test_self();
-    test_super();
-    
-    test_ast_continue();
+    run_tests();
     
     //test_thread_stress();
 
