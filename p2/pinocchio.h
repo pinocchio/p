@@ -84,6 +84,10 @@ typedef struct Type_Class {
     Object          cvars[];
 } Type_Class;
 
+typedef struct Type_File {
+} Type_File;
+
+
 typedef struct Type_ObjectClass {
     Type_Class      clspart;
     unsigned int    size;
@@ -174,7 +178,7 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
 void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
                               Object class, Type_Array * args);
 
-Object Type_Dictionary_lookup(Type_Dictionary * self, Object key);
+Object Dictionary_lookup(Type_Dictionary * self, Object key);
 
 void type_class_super();
 void AST_Assign_assign();

@@ -181,14 +181,15 @@ void post_initialize_Type_SmallInt()
     store_native_method((Type_Class *)SmallInt_Class, Symbol_minus_, SmallInt_minus);
     store_native_method((Type_Class *)SmallInt_Class, Symbol_equals_, SmallInt_equals);
     
-    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_plus_));
-    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_minus_));
-    assert(Type_Dictionary_lookup(SmallInt_Class->methods, Symbol_equals_));
+    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_plus_));
+    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_minus_));
+    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_equals_));
 }
 
 /* ========================================================================== */
 
-Type_Character * new_Character(wchar_t value)
+Type_Character * 
+new_Character(wchar_t value)
 {
     Type_Character * result = NEW(Type_Character);
     HEADER(result)          = (Object)Character_Class;
@@ -284,6 +285,10 @@ void Symbol_lastIndexOf()
     // TODO implement
 }
 
+void Symbol_size()
+{
+    // TODO implement
+}
 void pre_initialize_Symbol()
 {
     Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
@@ -438,6 +443,16 @@ new_Array_With(int c, Object init)
     return result;
 }
 
+void Array_objectAt()
+{
+    // TODO implement
+}
+
+void Array_size()
+{
+    // TODO implement
+}
+
 void pre_initialize_Array() 
 {
     Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
@@ -454,14 +469,19 @@ void post_initialize_Array()
 
 /* ========================================================================== */
 
+Type_File * StandardIn;
+Type_File * StandardOut;
+Type_File * NullStream;
 
-File_Class * new_file()
+Type_File * 
+new_File()
 {
     // TODO implement
     return NULL;
 }
 
-File_Class * new_File_FromPath(wchar_t* path)
+Type_File * 
+new_File_FromPath(wchar_t * path)
 {
     // TODO implement
     return NULL;
@@ -987,7 +1007,7 @@ new_Dictionary()
 }
 
 
-Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
+Object Dictionary_lookup(Type_Dictionary * self, Object key)
 {
     int i;
     for (i = 0; i < self->layout->size; i=i+2) {
@@ -998,7 +1018,7 @@ Object Type_Dictionary_lookup(Type_Dictionary * self, Object key)
     return NULL;
 }
 
-void Type_Dictionary_grow(Type_Dictionary *self)
+void Dictionary_grow(Type_Dictionary *self)
 {
     Type_Array * old_layout = self->layout;
     self->layout = new_Array_With(old_layout->size*2, Null);
@@ -1008,7 +1028,7 @@ void Type_Dictionary_grow(Type_Dictionary *self)
     }
 }
 
-Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
+Object Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 {
     /* just store at the first empty location */
     int i;
@@ -1019,7 +1039,7 @@ Object Type_Dictionary_store_(Type_Dictionary * self, Object key, Object value)
             return value;
         }
     }
-    Type_Dictionary_grow(self);
+    Dictionary_grow(self);
     self->layout->values[i]   = key;
     self->layout->values[i+1] = value;
 
@@ -1067,7 +1087,7 @@ void type_class_super()
 void store_method(Type_Class * class, Object symbol, Object method)
 {
     Type_Dictionary * dict = class->methods;
-    Type_Dictionary_store_(dict, symbol, method);
+    Dictionary_store_(dict, symbol, method);
 }
 
 void store_native_method(Type_Class * class, Object symbol, native code)
@@ -1099,7 +1119,7 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
     Object method = NULL;    
     while (class != Null) {
         Type_Dictionary * mdict = ((Type_Class *) class)->methods;
-        method = Type_Dictionary_lookup(mdict, msg);
+        method = Dictionary_lookup(mdict, msg);
         if (!method) {
             class = ((Type_Class *) class)->super;
         } else {
@@ -1142,8 +1162,8 @@ void post_initialize_Object()
     Class_Class->name  = new_String(L"Class");
     Object_Class->name = new_String(L"Object");
     store_native_method((Type_Class *)Object_Class, Symbol_equals_, Object_equals);
-    assert(Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_));
-    assert(HEADER((AST_Native_Method*)Type_Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
+    assert(Dictionary_lookup(Object_Class->methods, Symbol_equals_));
+    assert(HEADER((AST_Native_Method*)Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
 }
 
 /* ========================================================================== */
