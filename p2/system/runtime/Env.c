@@ -17,13 +17,13 @@ new_Env_Sized(Object parent, Object key, int size)
     HEADER(result)          = (Object)Env_Class;
     result->parent          = parent;
     result->key             = key;
-    result->values          = new_Array_With(size, Null);
+    result->values          = new_Array_With(size, Nil);
     return result;
 }
 
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 {
-    while (self->key != key || self->parent == Null) {
+    while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
@@ -46,7 +46,7 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
                         Object key, Object value)
 {
-    while (self->key != key || self->parent == Null) {
+    while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
             self = (Runtime_Env *)self->parent;
         } else {
@@ -80,5 +80,5 @@ void pre_initialize_Env()
 
 void post_initialize_Env()
 {
-    Env = (Object)new_Env_Sized(Null, Null, 0);
+    Env = (Object)new_Env_Sized(Nil, Nil, 0);
 }

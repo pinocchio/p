@@ -14,7 +14,7 @@ void ast_self_eval()
     LOGFUN;
     zap_CNT();
     // Push to allow poke in Self_eval
-    push_EXP(Null);
+    push_EXP(Nil);
     AST_Self_eval();
 }
 

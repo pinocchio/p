@@ -53,7 +53,7 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
             ((Type_Class*)HEADER(self))->name->value);
     
     Object method = NULL;    
-    while (class != Null) {
+    while (class != Nil) {
         Type_Dictionary * mdict = ((Type_Class *) class)->methods;
         method = Dictionary_lookup(mdict, msg);
         if (!method) {

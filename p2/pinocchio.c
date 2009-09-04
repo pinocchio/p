@@ -20,7 +20,7 @@ Object Symbol_objectAt_put_;
 Object Symbol_objectAt_putIfAbsent_;
 Object Symbol_size;
 
-Object Null;
+Object Nil;
 
 /* ======================================================================== */
 
@@ -317,7 +317,7 @@ Object EvalSend(Object self, Object symbol, Type_Array * args)
 
 int main()
 {
-    Null            = (Object) NEW(Type_Null);
+    Nil            = (Object) NEW(Type_Nil);
     
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();

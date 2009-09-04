@@ -6,7 +6,7 @@ void test_variable_lookup()
     var->key           = (Object)new_SmallInt(10);
     
     Env = (Object)new_Env_Sized(current_env(), var->key, 1);
-    Env = (Object)new_Env_Sized(current_env(), Null, 0);
+    Env = (Object)new_Env_Sized(current_env(), Nil, 0);
 }
 
 /* ======================================================================== */

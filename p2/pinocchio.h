@@ -84,7 +84,7 @@ struct Type_Object;
 
 typedef void(*cont)();
 
-typedef struct Type_Null {} Type_Null;
+typedef struct Type_Nil {} Type_Nil;
 
 typedef struct Type_Character {
     wchar_t value;
@@ -207,7 +207,7 @@ typedef struct Runtime_Env {
 
 /* ======================================================================== */
 
-extern Object Null;
+extern Object Nil;
 extern Type_Class * Object_Class;
 
 /* ======================================================================== */

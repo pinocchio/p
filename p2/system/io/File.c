@@ -1,6 +1,6 @@
 Type_File * StandardIn;
 Type_File * StandardOut;
-Type_File * NullStream;
+Type_File * NilStream;
 
 Type_File * 
 new_File()

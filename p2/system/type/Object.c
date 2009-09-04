@@ -14,10 +14,10 @@ void pre_initialize_Object()
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
-    Class_Class         = new_Class(Null);
+    Class_Class         = new_Class(Nil);
     HEADER(Class_Class) = (Object)Class_Class;
     
-    Object_Class        = new_Class(Null);
+    Object_Class        = new_Class(Nil);
 }
 
 void post_initialize_Object()
