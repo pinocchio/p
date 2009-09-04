@@ -9,16 +9,36 @@ void test_Array_ObjectAt_()
     int i; 
     for (i=0; i<array->size; i++) {
         if (i==4) { continue; }
-        args->values[0] = (Object)new_Constant(new_SmallInt(i)); 
+        args->values[0] = (Object)new_SmallInt(i); 
         assert(EvalSend((Object)array, Symbol_objectAt_, args) == integer);
         assert(array->values[i] == integer);
     }
-    args->values[0] = (Object)new_Constant(new_SmallInt(4)); 
+    args->values[0] = (Object)new_SmallInt(4); 
     assert(EvalSend((Object)array, Symbol_objectAt_, args) == integer2);
 }
+
+void test_Array_size()
+{
+    Object integer     = (Object)new_SmallInt(10);
+    Type_Array * array = new_Array_With(10, integer);
+    Object result      = EvalSend((Object)array, Symbol_size, Empty_Array);
+    assert(((Type_SmallInt *) result)->value == 10);
+    
+    result = EvalSend(integer, Symbol_equals_, new_Array_With(1, result));
+    //printf("%ls\n", ((Type_String *)((Type_Class *)HEADER(result))->name)->value);
+    assert( result == (Object)True);
+}
+
+void test_Array_ObjectAt_put()
+{
+    
+}
+
 
 /* ======================================================================== */
 
 void test_Array() {
     test_Array_ObjectAt_();
+    test_Array_size();
+    test_Array_ObjectAt_put();
 }

@@ -11,6 +11,7 @@ new_Assign(Object variable, Object expression)
 
 void AST_Assign_eval(AST_Assign * self)
 {
+    LOGFUN;
     push_CNT(AST_Assign_assign);
     poke_EXP(1, self->variable);
     push_CNT(send_Eval);
@@ -19,6 +20,7 @@ void AST_Assign_eval(AST_Assign * self)
 
 void AST_Assign_assign()
 {
+    LOGFUN;
     zap_CNT();
     Object value = pop_EXP();
     Object var   = peek_EXP(1);

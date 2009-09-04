@@ -56,9 +56,11 @@ void pre_initialize##_##class();
 
 #define DEBUG
 #ifdef DEBUG
+#define LOGFUN LOG(__FUNCTION__); printf("\n");
 #define LOG printf
 #else
 #define LOG
+#define LOGFUN printf
 #endif
 
 
@@ -149,12 +151,14 @@ typedef struct AST_Super {
 } AST_Super;
 
 typedef struct AST_Continue {
+    Object         *EXP;
+    cont           *CNT;
     Object          target;
 } AST_Continue;
 
 typedef struct AST_Callec {
     AST_Continue   *cont;
-    Object          send;
+    Object          target;
 } AST_Callec;
 
 typedef struct AST_Variable {

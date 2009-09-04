@@ -9,7 +9,10 @@ AST_Callec * new_Callec()
 
 void AST_Callec_eval(AST_Callec * self)
 {
-    push_EXP(self->send);
+    LOGFUN;
+    self->cont->EXP = _EXP_;
+    self->cont->CNT = _CNT_;
+    push_EXP(self->target);
     push_CNT(send_Eval);
 }
 

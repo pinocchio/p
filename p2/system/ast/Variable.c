@@ -10,6 +10,7 @@ new_Variable(const wchar_t* name)
 
 void AST_Variable_eval(AST_Variable * self)
 {
+    LOGFUN;
     Object env = current_env();
     
     if (HEADER(env) == (Object)Env_Class) {

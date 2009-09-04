@@ -48,12 +48,12 @@ void AST_Method_invoke(AST_Method * method, Object self,
     push_CNT(send_Eval);
 }
 
-NATIVE(AST_Method_eval)
+NATIVE(NM_AST_Method_eval)
 {
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
 
-NATIVE(AST_Method_eval_)
+NATIVE(NM_AST_Method_eval_)
 {
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
@@ -86,7 +86,7 @@ void pre_initialize_Method()
 
 void post_initialize_Method()
 {
-    store_native_method((Type_Class *)Method_Class, Symbol_eval, AST_Method_eval);
+    store_native_method((Type_Class *)Method_Class, Symbol_eval, NM_AST_Method_eval);
     // TODO for now accecpt any number of arguments
-    store_native_method((Type_Class *)Method_Class, Symbol_eval_, AST_Method_eval_);
+    store_native_method((Type_Class *)Method_Class, Symbol_eval_, NM_AST_Method_eval_);
 }

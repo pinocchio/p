@@ -44,23 +44,23 @@ Object Array_ObjectAt(Type_Array * array, unsigned int index)
     return array->values[index];
 }
 
-NATIVE(Array_objectAt_)
+NATIVE(NM_Array_objectAt_)
 {
     ASSERT_ARG_SIZE(1);
     int index = ((Type_SmallInt *) args->values[0])->value;
     push_EXP(((Type_Array *)self)->values[index]);
 }
 
-NATIVE(Array_objectAt_put_)
+NATIVE(NM_Array_objectAt_put_)
 {
     ASSERT_ARG_SIZE(2);
     // TODO implement
 }
 
-NATIVE(Array_size)
+NATIVE(NM_Array_size)
 {
     ASSERT_ARG_SIZE(0);
-    // TODO implement
+    push_EXP(new_SmallInt(((Type_Array *)self)->size));
 }
 
 void pre_initialize_Array() 
@@ -74,6 +74,7 @@ void pre_initialize_Array()
 
 void post_initialize_Array()
 {
-    store_native_method(Array_Class, Symbol_objectAt_, Array_objectAt_);
-    store_native_method(Array_Class, Symbol_objectAt_put_, Array_objectAt_put_);
+    store_native_method(Array_Class, Symbol_objectAt_,     NM_Array_objectAt_);
+    store_native_method(Array_Class, Symbol_objectAt_put_, NM_Array_objectAt_put_);
+    store_native_method(Array_Class, Symbol_size,          NM_Array_size);
 }

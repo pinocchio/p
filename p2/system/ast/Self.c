@@ -1,6 +1,7 @@
 
 void AST_Self_eval()
 {
+    LOGFUN;
     Object env = current_env();
     if (HEADER(env) != (Object)Env_Class) {
         assert(NULL);
@@ -10,6 +11,7 @@ void AST_Self_eval()
 
 void ast_self_eval()
 {
+    LOGFUN;
     zap_CNT();
     // Push to allow poke in Self_eval
     push_EXP(Null);

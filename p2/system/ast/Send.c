@@ -38,6 +38,7 @@ void store_argument()
 
 void AST_Send_eval(AST_Send * self)
 {
+    LOGFUN;
     Type_Array * args = new_Raw_Array(self->arguments->size);
     // execute the method
     push_CNT(AST_Send_send);

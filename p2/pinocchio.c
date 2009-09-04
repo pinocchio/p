@@ -18,6 +18,7 @@ Object Symbol_minus_;
 Object Symbol_objectAt_;
 Object Symbol_objectAt_put_;
 Object Symbol_objectAt_putIfAbsent_;
+Object Symbol_size;
 
 Object Null;
 
@@ -62,8 +63,8 @@ AST_Constant * False_Const;
 /* ======================================================================== */
 
 Object Double_Stack[STACK_SIZE];
-Object  * _EXP_;
-cont    * _CNT_;
+Object * _EXP_;
+cont   * _CNT_;
 
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
@@ -98,10 +99,10 @@ void initialize_Thread()
     init_Stack(STACK_SIZE);
 }
 
+
 Object current_env() { return Env; }
 
 /* ========================================================================== */
-
 
 
 wchar_t* wcsdup(const wchar_t* input)
@@ -162,10 +163,11 @@ void Symbol_lastIndexOf()
     // TODO implement
 }
 
-void Symbol_size()
+/*void Symbol_size()
 {
     // TODO implement
-}
+}*/
+
 void pre_initialize_Symbol()
 {
     Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
@@ -184,6 +186,7 @@ void initialize_Symbol()
     Symbol_objectAt_ = (Object)new_Symbol(L"objectAt:");
     Symbol_objectAt_put_ = (Object)new_Symbol(L"objectAt:put:");
     Symbol_objectAt_putIfAbsent_ = (Object)new_Symbol(L"objectAt:putIfAbsent:");
+    Symbol_size     = (Object)new_Symbol(L"size");
 }
 
 void post_initialize_Symbol()
@@ -219,6 +222,10 @@ void post_initialize_Symbol()
 
 /* ========================================================================== */
 
+#include <pinocchio_helper.c>
+
+/* ========================================================================== */
+
 void send_Eval()
 {
     zap_CNT();
@@ -244,9 +251,9 @@ void send_Eval()
     if (class == Super_Class) {
         return AST_Super_eval((AST_Super *)exp);
     }
-    if (class == Continue_Class) {
-        return AST_Continue_eval((AST_Continue *)exp);
-    }
+    /*if (class == Continue_Class) {
+        //return AST_Continue_eval((AST_Continue *)exp);
+    }*/
     if (class == Callec_Class) {
         return AST_Callec_eval((AST_Callec *)exp);
     }
@@ -286,7 +293,7 @@ Eval(Object code)
     return result;
 }
 
-Object EvalSendConst(AST_Constant * self, Object symbol, Type_Array * args) 
+Object EvalSendConst(Object self, Object symbol, Type_Array * args) 
 {
     return Eval((Object)new_Send((Object)self, symbol, args));
 }
@@ -295,7 +302,11 @@ Object EvalSendConst(AST_Constant * self, Object symbol, Type_Array * args)
 Object EvalSend(Object self, Object symbol, Type_Array * args) 
 {
     AST_Constant * self_const = new_Constant(self);
-    return EvalSendConst(self_const, symbol, args);
+    int i;
+    for (i=0; i<args->size; i++) {
+        args->values[i] = (Object)new_Constant(args->values[i]);
+    }
+    return EvalSendConst((Object)self_const, symbol, args);
 }
 
 /* ========================================================================== */
