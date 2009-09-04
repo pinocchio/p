@@ -6,7 +6,7 @@ new_Raw_Array(int c)
     if (c == 0) { return Empty_Array; }
     Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
     HEADER(result)      = (Object)Array_Class;
-    result->size = c;
+    result->size        = new_SmallInt(c);
     return result;
 }
 
@@ -14,9 +14,7 @@ Type_Array *
 new_Array(int c, Object v[])
 {
     if (c == 0) { return Empty_Array; }
-    Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result)      = (Object)Array_Class;
-    result->size        = c;
+    Type_Array * result = new_Raw_Array(c);
     while (0 < c) {
         c--;
         result->values[c] = v[c];
@@ -28,9 +26,7 @@ Type_Array *
 new_Array_With(int c, Object init)
 {
     if (c == 0) { return Empty_Array; }
-    Type_Array * result = NEW_ARRAYED(Type_Array, Object[c]);
-    HEADER(result)      = (Object)Array_Class;
-    result->size        = c;
+    Type_Array * result = new_Raw_Array(c);
     while (0 < c) {
         c--;
         result->values[c] = init;
@@ -43,7 +39,6 @@ void pre_initialize_Array()
     Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
     
     Empty_Array         = NEW(Type_Array);
-    Empty_Array->size   = 0;
     HEADER(Empty_Array) = (Object)Array_Class;
 }
 
@@ -51,7 +46,7 @@ void pre_initialize_Array()
 
 Object Array_ObjectAt(Type_Array * array, unsigned int index)
 {
-    assert(index < array->size);
+    assert(index < array->size->value);
     return array->values[index];
 }
 
@@ -75,11 +70,13 @@ NATIVE(NM_Array_objectAt_put_)
 NATIVE(NM_Array_size)
 {
     ASSERT_ARG_SIZE(0);
-    push_EXP(new_SmallInt(((Type_Array *)self)->size));
+    push_EXP(new_SmallInt(((Type_Array *)self)->size->value));
 }
 
 void post_initialize_Array()
 {
+    Empty_Array->size   = new_SmallInt(0);
+    
     store_native_method(Array_Class, Symbol_objectAt_,     NM_Array_objectAt_);
     store_native_method(Array_Class, Symbol_objectAt_put_, NM_Array_objectAt_put_);
     store_native_method(Array_Class, Symbol_size,          NM_Array_size);

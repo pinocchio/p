@@ -7,7 +7,7 @@ void test_Array_ObjectAt_()
     Type_Array * args    = new_Raw_Array(1);
     array->values[4]  = integer2;
     int i; 
-    for (i=0; i<array->size; i++) {
+    for (i=0; i<array->size->value; i++) {
         if (i==4) { continue; }
         args->values[0] = (Object)new_SmallInt(i); 
         assert(EvalSend((Object)array, Symbol_objectAt_, args) == integer);

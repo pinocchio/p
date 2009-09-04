@@ -19,6 +19,7 @@ Object Symbol_objectAt_;
 Object Symbol_objectAt_put_;
 Object Symbol_objectAt_putIfAbsent_;
 Object Symbol_size;
+Object Symbol_asString;
 
 Object Nil;
 
@@ -106,98 +107,7 @@ Object current_env() { return Env; }
 
 /* ========================================================================== */
 
-
-wchar_t* wcsdup(const wchar_t* input)
-{
-   int len         = wcslen(input) + 1;
-   wchar_t* output = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
-   int i           = 0;
-   for (; i < len; i++) {
-       output[i] = input[i];
-   }
-   return output;
-}
-
-Type_Symbol *
-new_Symbol(const wchar_t* name)
-{
-    Type_Symbol * symbol = NEW(Type_Symbol);
-    HEADER(symbol)       = (Object)Symbol_Class;
-    symbol->hash         = NULL;
-    symbol->value        = wcsdup(name);
-    symbol->size         = new_SmallInt(wcslen(name));
-    return symbol;
-}
-
-
-void Symbol_charAt_() 
-{
-    // TODO implement
-}
-
-void Symbol_toString()
-{
-    // TODO implement
-}
-
-void Symbol_toCharacterArray()
-{
-    // TODO implement
-}
-
-void Symbol_concat()
-{
-    // TODO implement
-}
-
-void Symbol_sub()
-{
-    // TODO implement
-}
-
-void Symbol_indexOf()
-{
-    // TODO implement
-}
-
-void Symbol_lastIndexOf()
-{
-    // TODO implement
-}
-
-/*void Symbol_size()
-{
-    // TODO implement
-}*/
-
-void pre_initialize_Symbol()
-{
-    Symbol_Class        = new_Named_Class((Object)Object_Class, L"Symbol");
-}
-
-void initialize_Symbol()
-{
-    Symbol_apply_   = (Object)new_Symbol(L"apply:");
-    Symbol_at_in_   = (Object)new_Symbol(L"at:in:");
-    Symbol_equals_  = (Object)new_Symbol(L"equals:");
-    Symbol_eval     = (Object)new_Symbol(L"eval");
-    Symbol_eval_    = (Object)new_Symbol(L"eval:");
-    Symbol_lookup_  = (Object)new_Symbol(L"lookup:");
-    Symbol_minus_   = (Object)new_Symbol(L"minus:");
-    Symbol_plus_    = (Object)new_Symbol(L"plus:");
-    Symbol_objectAt_ = (Object)new_Symbol(L"objectAt:");
-    Symbol_objectAt_put_ = (Object)new_Symbol(L"objectAt:put:");
-    Symbol_objectAt_putIfAbsent_ = (Object)new_Symbol(L"objectAt:putIfAbsent:");
-    Symbol_size     = (Object)new_Symbol(L"size");
-}
-
-void post_initialize_Symbol()
-{
-   // TODO install methods 
-}
-
-/* ========================================================================== */
-
+#include <system/type/Symbol.c>
 #include <system/type/SmallInt.c>
 #include <system/type/Character.c>
 #include <system/type/Boolean.c>
@@ -305,7 +215,7 @@ Object EvalSend(Object self, Object symbol, Type_Array * args)
 {
     AST_Constant * self_const = new_Constant(self);
     int i;
-    for (i=0; i<args->size; i++) {
+    for (i=0; i<args->size->value; i++) {
         args->values[i] = (Object)new_Constant(args->values[i]);
     }
     return EvalSendConst((Object)self_const, symbol, args);

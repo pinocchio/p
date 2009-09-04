@@ -33,6 +33,6 @@ void String_toSymbol()
 
 void post_initialize_String()
 {
-    // TODO install methods 
+    // TODO implement
 }
 

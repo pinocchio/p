@@ -22,7 +22,9 @@ new_SmallInt(int value)
 
 void pre_initialize_Type_SmallInt() 
 {
-    SmallInt_Class = new_Class((Object)Object_Class);
+    SmallInt_Class         = NEW(Type_Class);
+    HEADER(SmallInt_Class) = (Object)Class_Class;
+    SmallInt_Class->super  = (Object)Object_Class;
     
     SmallInt_cache = (Type_SmallInt **)PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     SmallInt_cache -= INT_CACHE_LOWER;
@@ -73,7 +75,9 @@ NATIVE(NM_SmallInt_equals)
 
 void post_initialize_Type_SmallInt()
 {
-    SmallInt_Class->name = new_String(L"SmallInt");
+    SmallInt_Class->name    = new_String(L"SmallInt");
+    SmallInt_Class->methods = new_Dictionary();
+    
     store_native_method((Type_Class *)SmallInt_Class, Symbol_plus_, NM_SmallInt_plus);
     store_native_method((Type_Class *)SmallInt_Class, Symbol_minus_, NM_SmallInt_minus);
     store_native_method((Type_Class *)SmallInt_Class, Symbol_equals_, NM_SmallInt_equals);

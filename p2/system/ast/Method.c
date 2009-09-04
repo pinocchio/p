@@ -22,7 +22,7 @@ void AST_Method_continue()
     poke_EXP(1, env->method->body->values[env->pc]);
     
     env->pc++;
-    if (env->method->body->size <= env->pc) {
+    if (env->method->body->size->value <= env->pc) {
         zap_CNT();
     } 
     push_CNT(send_Eval);
@@ -42,12 +42,12 @@ void AST_Method_invoke(AST_Method * method, Object self,
     
     Env = (Object)env;
     
-    if (method->body->size == 0 ) { 
+    if (method->body->size->value == 0 ) { 
         push_EXP(self);
         return; 
     }
     
-    if (1 < method->body->size) {
+    if (1 < method->body->size->value) {
         push_CNT(AST_Method_continue);
     }
     

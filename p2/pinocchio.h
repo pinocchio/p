@@ -33,9 +33,9 @@
 void pre_initialize##_##class();
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
-    if(args->size < size_value || args->size > size_value) {\
-        printf("Invalid argument size! Expected %i but was %i", size_value, args->size);\
-        assert(args->size > size_value && args->size < size_value);\
+    if(args->size->value < size_value || args->size->value > size_value) {\
+        printf("Invalid argument size! Expected %i but was %i", size_value, args->size->value);\
+        assert(args->size->value > size_value && args->size->value < size_value);\
     }
 
 #define ASSERT_TYPE(expression, type) assert(HEADER(expression)==((Object)(type)));
@@ -111,7 +111,7 @@ typedef struct Type_Boolean {
 } Type_Boolean;
 
 typedef struct Type_Array {
-    unsigned int    size;
+    Type_SmallInt * size;
     Object          values[];
 } Type_Array;
 

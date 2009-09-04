@@ -46,7 +46,7 @@ void push_env_class()
 void AST_Super_eval(AST_Super * super)
 {
     LOGFUN;
-    Type_Array * args = new_Raw_Array(super->arguments->size);
+    Type_Array * args = new_Raw_Array(super->arguments->size->value);
     // execute the method
     push_CNT(ast_super_send);
     push_CNT(type_class_super);
@@ -55,7 +55,7 @@ void AST_Super_eval(AST_Super * super)
     push_EXP(args);
     // evaluate the arguments
     int i;
-    for (i = 0; i < super->arguments->size; i++) {
+    for (i = 0; i < super->arguments->size->value; i++) {
         push_CNT(store_argument);
         push_EXP(args);
         push_EXP(new_SmallInt(i));

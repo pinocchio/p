@@ -42,9 +42,9 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    if (index >= self->values->size) {
-        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size);
-        assert(index < self->values->size);
+    if (index >= self->values->size->value) {
+        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value);
+        assert(index < self->values->size->value);
     }
     
     push_EXP(self->values->values[index]);
@@ -65,9 +65,9 @@ void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
     }
     /* TODO jump to error handler. */
     assert(self->key == key);
-    if (index >= self->values->size) {
-        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size);
-        assert(index < self->values->size);
+    if (index >= self->values->size->value) {
+        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value);
+        assert(index < self->values->size->value);
     }
     
     self->values->values[index] = value;

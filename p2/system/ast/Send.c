@@ -46,7 +46,7 @@ void store_argument()
 void AST_Send_eval(AST_Send * self)
 {
     LOGFUN;
-    Type_Array * args = new_Raw_Array(self->arguments->size);
+    Type_Array * args = new_Raw_Array(self->arguments->size->value);
     // execute the method
     push_CNT(AST_Send_send);
     push_EXP(args);
@@ -55,7 +55,7 @@ void AST_Send_eval(AST_Send * self)
     push_EXP(self->receiver);
     // evaluate the arguments
     int i;
-    for (i = 0; i < self->arguments->size; i++) {
+    for (i = 0; i < self->arguments->size->value; i++) {
         push_CNT(store_argument);
         push_EXP(args);
         push_EXP(new_SmallInt(i));
