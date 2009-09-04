@@ -9,6 +9,8 @@ void test_Dictionary_ObjectAt_()
         Object key = (Object)new_SmallInt(i);
         Dictionary_store_(dict, key, integer);
     }
+    Dictionary_store_(dict, (Object)new_SmallInt(4), integer2);
+    
     Type_Array * args      = new_Raw_Array(1);
     for (i=0; i<100; i++) {
         if (i==4) { continue; }
@@ -23,7 +25,7 @@ void test_Dictionary_ObjectAt_()
 
 void test_Dictionary_size()
 {
-    // TODO
+    // TODO implement
 }
 
 void test_Dictionary_ObjectAt_put()
@@ -45,7 +47,7 @@ void test_Dictionary_ObjectAt_put()
     
     result = EvalSend((Object)dict, Symbol_objectAt_put_, args);
     assert(result == integer1);
-    assert(Dictionary_lookup(dict, integer0) == integer);
+    assert(Dictionary_lookup(dict, integer0) == integer1);
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
@@ -53,6 +55,7 @@ void test_Dictionary_ObjectAt_put()
     assert(result == integer1);
     assert(Dictionary_lookup(dict, integer2) == integer1);
     // check that all the other places aren't changed
+    args  = new_Array_With(1, (Object)integer1);
     for (i=0; i<100; i++) {
         if (i==0 || i==2) { continue; }
         Object key = (Object)new_SmallInt(i);

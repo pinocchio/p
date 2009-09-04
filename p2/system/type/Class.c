@@ -8,12 +8,30 @@ Type_Class* new_Class(Object superclass)
     return result;
 }
 
+Type_Class * new_named_MetaClass(Object superclass, const wchar_t* name)
+{
+    Type_Class * result = (Type_Class *) new_Class(superclass);
+    result->name        = new_String(name);
+    HEADER(result)      = (Object)MetaClass_Class;
+    return result;
+}
+
 Type_Class* new_Named_Class(Object superclass, const wchar_t* name)
 {
     Type_Class * result = (Type_Class *) new_Class(superclass);
-    result->name = new_String(name);
+    result->name        = new_String(name);
+    //HEADER(result)      = (Object)new_named_MetaClass(superclass, name);
     return result;
 }
+
+void pre_initialize_Class()
+{
+    // explicitely use new_Class not new_Named_Class! to avoid early use
+    // of symbols.
+    MetaClass_Class = new_Class(Nil);
+}
+
+/* ======================================================================== */
 
 void type_class_super()
 {
@@ -74,3 +92,8 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
 
 
 /* ======================================================================== */
+
+void post_initialize_Class()
+{
+    // put the names here, now after the Symbols_Class is initialized
+}

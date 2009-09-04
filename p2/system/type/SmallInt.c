@@ -2,15 +2,22 @@
 Type_SmallInt ** SmallInt_cache;
 
 Type_SmallInt *
+new_raw_SmallInt(int value)
+{
+    Type_SmallInt * result = NEW(Type_SmallInt);
+    HEADER(result)         = (Object) SmallInt_Class;
+    result->value          = value;
+    return result;
+}
+
+
+Type_SmallInt *
 new_SmallInt(int value)
 {
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
     }
-    Type_SmallInt * result = NEW(Type_SmallInt);
-    HEADER(result)         = (Object) SmallInt_Class;
-    result->value          = value;
-    return result;
+    return new_raw_SmallInt(value);
 }
 
 void pre_initialize_Type_SmallInt() 
@@ -22,10 +29,7 @@ void pre_initialize_Type_SmallInt()
     
     int i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        Type_SmallInt * o = NEW(Type_SmallInt);
-        o->value = i;
-        HEADER(o) = (Object)SmallInt_Class;
-        SmallInt_cache[i] = o;
+        SmallInt_cache[i] = new_raw_SmallInt(i);
     }
 }
 

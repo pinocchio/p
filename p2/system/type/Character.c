@@ -1,6 +1,7 @@
+Type_Character ** Character_cache;
 
-
-Type_Character * new_Character(wchar_t value)
+Type_Character * 
+new_raw_Character(wchar_t value)
 {
     Type_Character * result = NEW(Type_Character);
     HEADER(result)          = (Object)Character_Class;
@@ -9,9 +10,25 @@ Type_Character * new_Character(wchar_t value)
     return result;
 }
 
-void post_initialize_Character()
+
+Type_Character * 
+new_Character(wchar_t value)
 {
-    // TODO install methods 
+    if (value < CHARACTER_CACHE_SIZE) {
+        return Character_cache[value];
+    }
+    return new_raw_Character(value);
+}
+    
+
+void post_initialize_Character()
+{ 
+    Character_cache = (Type_Character **)PALLOC(sizeof(Type_Character*[CHARACTER_CACHE_SIZE]));
+    
+    int i;
+    for (i = 0; i < CHARACTER_CACHE_SIZE; i++) {
+        Character_cache[i] = new_raw_Character(i);
+    }
 }
 
 /* ======================================================================== */

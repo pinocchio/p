@@ -24,11 +24,14 @@ Object Nil;
 
 /* ======================================================================== */
 
+Type_Class * MetaClass_Class;
+Type_Class * Class_Class;
+Type_Class * Object_Class;
+
 Type_Class * Array_Class;
 Type_Class * Assign_Class;
 Type_Class * Boolean_Class;
 Type_Class * Character_Class;
-Type_Class * Class_Class;
 Type_Class * Constant_Class;
 Type_Class * Dictionary_Class;
 Type_Class * Env_Class;
@@ -36,7 +39,6 @@ Type_Class * False_Class;
 Type_Class * File_Class;
 Type_Class * Method_Class;
 Type_Class * Native_Method_Class;
-Type_Class * Object_Class;
 Type_Class * Send_Class;
 Type_Class * SmallInt_Class;
 Type_Class * String_Class;

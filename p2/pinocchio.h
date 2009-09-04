@@ -35,7 +35,7 @@ void pre_initialize##_##class();
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size < size_value || args->size > size_value) {\
         printf("Invalid argument size! Expected %i but was %i", size_value, args->size);\
-        assert(args->size < size_value || args->size > size_value);\
+        assert(args->size > size_value && args->size < size_value);\
     }
 
 #define ASSERT_TYPE(expression, type) assert(HEADER(expression)==((Object)(type)));
