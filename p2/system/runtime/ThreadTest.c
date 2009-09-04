@@ -19,5 +19,5 @@ void test_thread_stress()
 
 void test_Thread()
 {
-    test_thread_stress();
+    //test_thread_stress();
 }

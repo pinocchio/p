@@ -1,7 +1,7 @@
 
 NATIVE(NM_Object_equals)
 {
-    push_EXP(get_bool_const(self == args->values[0]));
+    push_EXP(get_bool(self == args->values[0]));
 }
 
 wchar_t * Object_classname(Object self) 
