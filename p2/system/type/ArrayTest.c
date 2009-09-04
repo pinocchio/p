@@ -37,7 +37,7 @@ void test_Array_ObjectAt_put()
     Object integer1    = (Object)new_SmallInt(1);
     Object integer2    = (Object)new_SmallInt(2);
     Type_Array * array = new_Array_With(10, integer);
-    Type_Array * args  = new_Array_With(1, (Object)integer1);
+    Type_Array * args  = new_Array_With(2, (Object)integer1);
     args->values[0] = integer0; 
     
     result = EvalSend((Object)array, Symbol_objectAt_put_, args);

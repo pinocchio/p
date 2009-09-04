@@ -58,6 +58,7 @@ NATIVE(NM_Array_objectAt_put_)
     ASSERT_TYPE(args->values[0], SmallInt_Class)
     unsigned int index = ((Type_SmallInt *)args->values[0])->value;
     ((Type_Array *)self)->values[index] = args->values[1];
+    push_EXP(args->values[1]);
 }
 
 NATIVE(NM_Array_size)
