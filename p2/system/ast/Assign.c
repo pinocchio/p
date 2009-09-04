@@ -9,6 +9,13 @@ new_Assign(Object variable, Object expression)
     return result;
 }
 
+void pre_initialize_Assign()
+{
+    Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
+}
+
+/* ======================================================================== */
+
 void AST_Assign_eval(AST_Assign * self)
 {
     LOGFUN;
@@ -35,10 +42,7 @@ void AST_Assign_assign()
     assert(NULL);
 }
 
-void pre_initialize_Assign()
-{
-    Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
-}
+/* ======================================================================== */
 
 void post_initialize_Assign()
 {

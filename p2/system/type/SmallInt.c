@@ -13,6 +13,22 @@ new_SmallInt(int value)
     return result;
 }
 
+void pre_initialize_Type_SmallInt() 
+{
+    SmallInt_Class = new_Class((Object)Object_Class);
+    
+    SmallInt_cache = (Type_SmallInt **)PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    SmallInt_cache -= INT_CACHE_LOWER;
+    
+    int i;
+    for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
+        Type_SmallInt * o = NEW(Type_SmallInt);
+        o->value = i;
+        HEADER(o) = (Object)SmallInt_Class;
+        SmallInt_cache[i] = o;
+    }
+}
+
 /* =========================================================================*/
 
 NATIVE(NM_SmallInt_plus) 
@@ -50,22 +66,6 @@ NATIVE(NM_SmallInt_equals)
 }
 
 /* =========================================================================*/
-
-void pre_initialize_Type_SmallInt() 
-{
-    SmallInt_Class = new_Class((Object)Object_Class);
-    
-    SmallInt_cache = (Type_SmallInt **)PALLOC(sizeof(Type_SmallInt*[INT_CACHE_UPPER-INT_CACHE_LOWER]));
-    SmallInt_cache -= INT_CACHE_LOWER;
-    
-    int i;
-    for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        Type_SmallInt * o = NEW(Type_SmallInt);
-        o->value = i;
-        HEADER(o) = (Object)SmallInt_Class;
-        SmallInt_cache[i] = o;
-    }
-}
 
 void post_initialize_Type_SmallInt()
 {

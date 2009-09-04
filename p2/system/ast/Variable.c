@@ -8,6 +8,13 @@ new_Variable(const wchar_t* name)
     return result;
 }
 
+void pre_initialize_Variable()
+{
+    Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
+}
+
+/* =========================================================================*/
+
 void AST_Variable_eval(AST_Variable * self)
 {
     LOGFUN;
@@ -36,10 +43,7 @@ void AST_Variable_assign(AST_Variable * self, Object value)
     assert(NULL);
 }
 
-void pre_initialize_Variable()
-{
-    Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
-}
+/* =========================================================================*/
 
 void post_initialize_Variable(){}
 

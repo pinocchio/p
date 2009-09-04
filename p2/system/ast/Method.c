@@ -9,6 +9,13 @@ new_Method(unsigned int paramc, Type_Array * body)
     return result;
 }
 
+void pre_initialize_Method()
+{
+    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
+}
+
+/* ======================================================================== */
+
 void AST_Method_continue()
 {
     Runtime_Env * env = (Runtime_Env *)current_env();
@@ -78,11 +85,7 @@ void Method_invoke(Object method, Object self,
     assert(NULL);
 }
 
-
-void pre_initialize_Method()
-{
-    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
-}
+/* ======================================================================== */
 
 void post_initialize_Method()
 {

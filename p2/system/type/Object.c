@@ -1,15 +1,4 @@
 
-NATIVE(NM_Object_equals)
-{
-    ASSERT_ARG_SIZE(1);
-    push_EXP(get_bool(self == args->values[0]));
-}
-
-wchar_t * Object_classname(Object self) 
-{
-    return ((Type_String *)((Type_Class *)HEADER(self))->name)->value;
-}
-
 void pre_initialize_Object() 
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
@@ -19,6 +8,16 @@ void pre_initialize_Object()
     
     Object_Class        = new_Class(Nil);
 }
+
+/* ======================================================================== */
+
+NATIVE(NM_Object_equals)
+{
+    ASSERT_ARG_SIZE(1);
+    push_EXP(get_bool(self == args->values[0]));
+}
+
+/* ======================================================================== */
 
 void post_initialize_Object()
 {

@@ -9,16 +9,20 @@ new_Constant(Object constant)
     return result;
 }
 
+void pre_initialize_Constant()
+{
+    Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
+}
+
+/* ======================================================================== */
 
 void AST_Constant_eval(AST_Constant * self)
 {
     poke_EXP(1, self->constant);
 }
 
-void pre_initialize_Constant()
-{
-    Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
-}
+/* ======================================================================== */
+
 
 void post_initialize_Constant()
 {

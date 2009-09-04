@@ -1,11 +1,18 @@
 
-AST_Continue * new_Continue(Object target)
+AST_Continue * 
+new_Continue(Object target)
 {
     AST_Continue * result = NEW(AST_Continue);
     HEADER(result)        = (Object)Continue_Class;
     return result;
 }
 
+void pre_initialize_Continue()
+{
+    Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");
+}
+
+/* ======================================================================== */
 
 NATIVE(NM_AST_Continue_eval)
 {
@@ -22,10 +29,7 @@ NATIVE(NM_AST_Continue_eval)
     //push_CNT(send_Eval);
 }
 
-void pre_initialize_Continue()
-{
-    Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");
-}
+/* ======================================================================== */
 
 void post_initialize_Continue()
 {

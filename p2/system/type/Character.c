@@ -9,6 +9,12 @@ Type_Character * new_Character(wchar_t value)
     return result;
 }
 
+void post_initialize_Character()
+{
+    // TODO install methods 
+}
+
+/* ======================================================================== */
 
 void Character_toString()
 {
@@ -25,13 +31,9 @@ void Character_toSmallInt()
     // TODO implement
 }
 
+/* ======================================================================== */
 
 void pre_initialize_Character()
 {
     Character_Class = new_Named_Class((Object)Object_Class, L"Character");
-}
-
-void post_initialize_Character()
-{
-    // TODO install methods 
 }

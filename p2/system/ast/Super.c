@@ -10,6 +10,13 @@ new_Super(Object message, Type_Array * arguments)
     return result;
 }
 
+void pre_initialize_Super()
+{
+    Super_Class = new_Named_Class((Object)Object_Class, L"Super");
+}
+
+/* =========================================================================*/
+
 void ast_super_send() 
 {
     LOGFUN;
@@ -57,10 +64,7 @@ void AST_Super_eval(AST_Super * super)
     }
 }
 
-void pre_initialize_Super()
-{
-    Super_Class = new_Named_Class((Object)Object_Class, L"Super");
-}
+/* =========================================================================*/
 
 void post_initialize_Super()
 {

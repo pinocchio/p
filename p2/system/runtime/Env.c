@@ -21,6 +21,13 @@ new_Env_Sized(Object parent, Object key, int size)
     return result;
 }
 
+void pre_initialize_Env()
+{
+    Env_Class = new_Named_Class((Object)Object_Class, L"Env");
+}
+
+/* =========================================================================*/
+
 void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
@@ -73,10 +80,7 @@ void push_restore_env()
 }
 
 
-void pre_initialize_Env()
-{
-    Env_Class = new_Named_Class((Object)Object_Class, L"Env");
-}
+/* =========================================================================*/
 
 void post_initialize_Env()
 {

@@ -7,6 +7,13 @@ AST_Callec * new_Callec()
     return result;
 }
 
+void pre_initialize_Callec()
+{
+    Callec_Class = new_Named_Class((Object)Object_Class, L"Callec");
+}
+
+/* ======================================================================== */
+
 void AST_Callec_eval(AST_Callec * self)
 {
     LOGFUN;
@@ -16,10 +23,7 @@ void AST_Callec_eval(AST_Callec * self)
     push_CNT(send_Eval);
 }
 
-void pre_initialize_Callec()
-{
-    Callec_Class = new_Named_Class((Object)Object_Class, L"Callec");
-}
+/* ======================================================================== */
 
 void post_initialize_Callec()
 {

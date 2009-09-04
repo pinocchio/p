@@ -8,6 +8,11 @@ new_Dictionary()
     return result;
 }
 
+void pre_initialize_Dictionary()
+{
+    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
+}
+
 /* ======================================================================== */
 
 Object Dictionary_lookup(Type_Dictionary * self, Object key)
@@ -68,13 +73,7 @@ NATIVE(NM_Dictionary_objectAt_put_)
     push_EXP(args->values[1]);
 }
 
-
 /* ======================================================================== */
-
-void pre_initialize_Dictionary()
-{
-    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
-}
 
 void post_initialize_Dictionary()
 {

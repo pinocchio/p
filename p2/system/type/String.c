@@ -7,6 +7,13 @@ new_String(const wchar_t * str)
     return string;
 }
 
+void pre_initialize_String()
+{
+    String_Class = new_Named_Class((Object)Symbol_Class, L"String");
+}
+
+/* =========================================================================*/
+
 void String_sub() 
 {
     // TODO implement
@@ -22,10 +29,7 @@ void String_toSymbol()
     // TODO implement
 }
 
-void pre_initialize_String()
-{
-    String_Class = new_Named_Class((Object)Symbol_Class, L"String");
-}
+/* =========================================================================*/
 
 void post_initialize_String()
 {

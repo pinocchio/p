@@ -7,6 +7,13 @@ new_Native_Method(native code)
     return result;
 }
 
+void pre_initialize_Native_Method()
+{
+    Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
+}
+
+/* ======================================================================== */
+
 void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
                               Object class, Type_Array * args)
 {
@@ -26,11 +33,6 @@ NATIVE(NM_AST_Native_Method_eval_)
 
 
 /* ======================================================================== */
-
-void pre_initialize_Native_Method()
-{
-    Native_Method_Class = new_Named_Class((Object)Object_Class, L"NativeMethod");
-}
 
 void post_initialize_Native_Method()
 {
