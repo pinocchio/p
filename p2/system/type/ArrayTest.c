@@ -31,7 +31,24 @@ void test_Array_size()
 
 void test_Array_ObjectAt_put()
 {
+    Object result;
+    Object integer     = (Object)new_SmallInt(10);
+    Object integer0    = (Object)new_SmallInt(0);
+    Object integer1    = (Object)new_SmallInt(1);
+    Object integer2    = (Object)new_SmallInt(2);
+    Type_Array * array = new_Array_With(10, integer);
+    Type_Array * args  = new_Array_With(1, (Object)integer1);
+    args->values[0] = integer0; 
     
+    result = EvalSend((Object)array, Symbol_objectAt_put_, args);
+    assert(result == integer1);
+    assert(array->values[0] == integer1);
+    
+    args->values[0] = integer2; 
+    args->values[1] = integer1;
+    result = EvalSend((Object)array, Symbol_objectAt_put_, args);
+    assert(result == integer1);
+    assert(array->values[2] == integer1);
 }
 
 

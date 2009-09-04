@@ -1,6 +1,7 @@
 
 NATIVE(NM_Object_equals)
 {
+    ASSERT_ARG_SIZE(1);
     push_EXP(get_bool(self == args->values[0]));
 }
 

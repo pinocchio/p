@@ -17,20 +17,20 @@ new_SmallInt(int value)
 
 NATIVE(NM_SmallInt_plus) 
 {
-    //assert(HEADER(self) == (Object)SmallInt_Class);
     ASSERT_ARG_SIZE(1);
+    ASSERT_TYPE(args->values[0], SmallInt_Class);
+    
     Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
-    assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
     poke_EXP(1, new_SmallInt(arg->value + number->value));
 }
 
 NATIVE(NM_SmallInt_minus) 
 {
-    //assert(HEADER(self) == (Object)SmallInt_Class);
     ASSERT_ARG_SIZE(1);
+    ASSERT_TYPE(args->values[0], SmallInt_Class);
+    
     Type_SmallInt * arg = (Type_SmallInt *)args->values[0];
-    assert(HEADER(arg) == (Object)SmallInt_Class);
     Type_SmallInt * number = ((Type_SmallInt *) self);
     poke_EXP(1, new_SmallInt(arg->value - number->value));
 }
@@ -39,7 +39,8 @@ NATIVE(NM_SmallInt_equals)
 {
     //assert(HEADER(self) == (Object)SmallInt_Class);
     ASSERT_ARG_SIZE(1);
-    assert(HEADER(args->values[0]) == (Object)SmallInt_Class);
+    ASSERT_TYPE(args->values[0], SmallInt_Class);
+    
     Type_SmallInt * number = ((Type_SmallInt *) self);
     if (number->value == ((Type_SmallInt *) args->values[0])->value) {
         push_EXP(True);        

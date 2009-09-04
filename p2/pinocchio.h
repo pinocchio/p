@@ -15,8 +15,8 @@
 /* ======================================================================== */
 
 #define HEADER_SIZE (sizeof(Object))
-#define POINTER_INC(p) (((Object) p) + 1) 
-#define POINTER_DEC(p) (((Object) p) - 1)
+#define POINTER_INC(p) (((Object) (p)) + 1) 
+#define POINTER_DEC(p) (((Object) (p)) - 1)
 
 #define NEW(layout)\
     NEW_ARRAYED(layout, Object[0])
@@ -37,6 +37,8 @@ void pre_initialize##_##class();
         printf("Invalid argument size! Expected %i but was %i", size_value, args->size);\
         assert(args->size < size_value || args->size > size_value);\
     }
+
+#define ASSERT_TYPE(expression, type) assert(HEADER(expression)==((Object)(type)));
 
 /* ======================================================================== */
 

@@ -46,15 +46,18 @@ Object Array_ObjectAt(Type_Array * array, unsigned int index)
 
 NATIVE(NM_Array_objectAt_)
 {
-    ASSERT_ARG_SIZE(1);
+    ASSERT_ARG_SIZE(1)
+    ASSERT_TYPE(args->values[0], SmallInt_Class)
     int index = ((Type_SmallInt *) args->values[0])->value;
     push_EXP(((Type_Array *)self)->values[index]);
 }
 
 NATIVE(NM_Array_objectAt_put_)
 {
-    ASSERT_ARG_SIZE(2);
-    // TODO implement
+    ASSERT_ARG_SIZE(2)
+    ASSERT_TYPE(args->values[0], SmallInt_Class)
+    unsigned int index = ((Type_SmallInt *)args->values[0])->value;
+    ((Type_Array *)self)->values[index] = args->values[1];
 }
 
 NATIVE(NM_Array_size)
