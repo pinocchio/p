@@ -56,12 +56,10 @@ void AST_Method_invoke(AST_Method * method, Object self,
 }
 
 NATIVE(NM_AST_Method_eval)
-{
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
 
 NATIVE(NM_AST_Method_eval_)
-{
     AST_Method_invoke((AST_Method *) self, self, class, args);
 }
 

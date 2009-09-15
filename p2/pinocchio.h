@@ -38,7 +38,11 @@ void pre_initialize##_##class();
         assert(args->size->value > size_value && args->size->value < size_value);\
     }
 
-#define ASSERT_TYPE(expression, type) assert(HEADER(expression)==((Object)(type)));
+// TODO make sure we do a proper class lookup here
+#define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)));
+
+#define ASSERT_EQUALS(exp1, exp2) \
+assert(EvalSend((Object)(exp1), Symbol_equals_, new_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ======================================================================== */
 
@@ -56,6 +60,14 @@ void pre_initialize##_##class();
 
 /* ======================================================================== */
 
+#define NATIVE(name) void name(Object self, Object class, Type_Array * args) {
+#define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
+#define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
+#define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
+#define NATIVE3(name)  NATIVE(name) ASSERT_ARG_SIZE(3);
+
+/* ======================================================================== */
+
 #define DEBUG
 #ifdef DEBUG
 #define LOGFUN LOG(__FUNCTION__); printf("\n");
@@ -64,7 +76,6 @@ void pre_initialize##_##class();
 #define LOG
 #define LOGFUN printf
 #endif
-
 
 /* ======================================================================== */
 
@@ -183,7 +194,6 @@ typedef struct AST_Assign {
 } AST_Assign;
 
 typedef void(*native)(Object self, Object class, Type_Array * args);
-#define NATIVE(name) void name(Object self, Object class, Type_Array * args)
 
 typedef struct AST_Native_Method {
     native          code;

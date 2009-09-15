@@ -56,9 +56,7 @@ Object Dictionary_store_(Type_Dictionary * self, Object key, Object value)
 
 /* ======================================================================== */
 
-NATIVE(NM_Dictionary_objectAt_)
-{
-    ASSERT_ARG_SIZE(1)
+NATIVE1(NM_Dictionary_objectAt_)
     Object result = Dictionary_lookup((Type_Dictionary *)self, args->values[0]);
     if(!result) {
         result = Nil;
@@ -66,9 +64,7 @@ NATIVE(NM_Dictionary_objectAt_)
     push_EXP(result);
 }
 
-NATIVE(NM_Dictionary_objectAt_put_)
-{
-    ASSERT_ARG_SIZE(2)
+NATIVE2(NM_Dictionary_objectAt_put_)
     Dictionary_store_((Type_Dictionary *)self, args->values[0], args->values[1]);
     push_EXP(args->values[1]);
 }

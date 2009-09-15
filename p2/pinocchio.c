@@ -20,6 +20,12 @@ Object Symbol_objectAt_put_;
 Object Symbol_objectAt_putIfAbsent_;
 Object Symbol_size;
 Object Symbol_asString;
+Object Symbol_asSmallInt;
+Object Symbol_asSymbol;
+Object Symbol_asArray;
+Object Symbol_indexOf_;
+Object Symbol_lastIndexOf_;
+Object Symbol_concat_;
 
 Object Nil;
 
@@ -219,6 +225,16 @@ Object EvalSend(Object self, Object symbol, Type_Array * args)
         args->values[i] = (Object)new_Constant(args->values[i]);
     }
     return EvalSendConst((Object)self_const, symbol, args);
+}
+
+Object EvalSend0(Object self, Object symbol)
+{
+    return EvalSend(self, symbol, Empty_Array);
+}
+
+Object EvalSend1(Object self, Object symbol, Object arg)
+{
+    return EvalSend(self, symbol, new_Array_With(1, arg));
 }
 
 /* ========================================================================== */

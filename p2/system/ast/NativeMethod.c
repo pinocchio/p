@@ -21,13 +21,11 @@ void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
 }
 
 NATIVE(NM_AST_Native_Method_eval)
-{
     AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
 }
 
 NATIVE(NM_AST_Native_Method_eval_)
-{
-    // TODO for now accecpt any number of arguments
+    // FIXME for now accecpt any number of arguments
     AST_Native_Method_invoke((AST_Native_Method *)self, self, class, args);
 }
 

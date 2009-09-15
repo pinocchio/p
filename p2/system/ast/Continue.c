@@ -14,10 +14,8 @@ void pre_initialize_Continue()
 
 /* ======================================================================== */
 
-NATIVE(NM_AST_Continue_eval)
-{
+NATIVE1(NM_AST_Continue_eval)
     LOGFUN;
-    ASSERT_ARG_SIZE(1);
     AST_Continue * ast_cont = (AST_Continue *) self;
     // restore the stack
     _EXP_ = ast_cont->EXP;

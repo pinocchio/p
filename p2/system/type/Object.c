@@ -15,10 +15,12 @@ void pre_initialize_Object()
 
 /* ======================================================================== */
 
-NATIVE(NM_Object_equals)
-{
-    ASSERT_ARG_SIZE(1);
+NATIVE1(NM_Object_equals)
     push_EXP(get_bool(self == args->values[0]));
+}
+
+NATIVE0(NM_Object_asString)
+    // TODO
 }
 
 /* ======================================================================== */

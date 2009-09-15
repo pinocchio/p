@@ -20,6 +20,7 @@
 #include <system/type/ObjectTest.c>
 #include <system/type/SmallIntTest.c>
 #include <system/type/StringTest.c>
+#include <system/type/SymbolTest.c>
 
 /* ========================================================================== */
 
@@ -27,22 +28,23 @@ void run_tests()
 {
     test_Array();
     test_Assign();
-    test_Callec();
-    test_Constant();
-    test_Continue();
-    test_Method();
-    test_NativeMethod();
-    test_Self();
-    test_Super();
-    test_Send();
-    test_Variable();
-    test_File();
     test_Boolean();
+    test_Callec();
     test_Character();
     test_Class();
+    test_Constant();
+    test_Continue();
     test_Dictionary();
+    test_File();
+    test_Method();
+    test_NativeMethod();
     test_Object();
+    test_Self();
+    test_Send();
     test_SmallInt();
     test_String();
+    test_Super();
+    test_Symbol();
     test_Thread();
+    test_Variable();
 }

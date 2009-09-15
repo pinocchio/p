@@ -1,6 +1,8 @@
 TARGET=pinocchio
 
-CFILES=$(wildcard *.c)
+#CFILES=$(wildcard *.c)
+
+CFILES=pinocchio.c
 
 TEST_CFILES=$(filter %Test.c,$(CFILES))
 

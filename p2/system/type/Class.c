@@ -41,7 +41,6 @@ void type_class_super()
         poke_EXP(1, ((Type_Class *)class)->super);
         return;
     }
-    
     // TODO queue "super" send.
     assert(NULL);
 }
