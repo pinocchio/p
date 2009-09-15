@@ -71,7 +71,7 @@ void post_initialize_Array()
 {
     Empty_Array->size   = new_SmallInt(0);
     
-    store_native_method(Array_Class, Symbol_objectAt_,     NM_Array_objectAt_);
-    store_native_method(Array_Class, Symbol_objectAt_put_, NM_Array_objectAt_put_);
-    store_native_method(Array_Class, Symbol_size,          NM_Array_size);
+    store_native_method(Array_Class,SMB_objectAt_,     NM_Array_objectAt_);
+    store_native_method(Array_Class,SMB_objectAt_put_, NM_Array_objectAt_put_);
+    store_native_method(Array_Class,SMB_size,          NM_Array_size);
 }

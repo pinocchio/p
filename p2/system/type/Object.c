@@ -33,8 +33,8 @@ void post_initialize_Object()
     Object_Class->name = new_String(L"Object");
     Object_Class->methods = new_Dictionary();
     
-    store_native_method((Type_Class *)Object_Class, Symbol_equals_, NM_Object_equals);
+    store_native_method((Type_Class *)Object_Class,SMB_equals_, NM_Object_equals);
     
-    assert(Dictionary_lookup(Object_Class->methods, Symbol_equals_));
-    assert(HEADER((AST_Native_Method*)Dictionary_lookup(Object_Class->methods, Symbol_equals_)) == (Object)Native_Method_Class);
+    assert(Dictionary_lookup(Object_Class->methods,SMB_equals_));
+    assert(HEADER((AST_Native_Method*)Dictionary_lookup(Object_Class->methods,SMB_equals_)) == (Object)Native_Method_Class);
 }

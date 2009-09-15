@@ -61,7 +61,7 @@ void initialize_Character_Cache()
 void post_initialize_Character()
 { 
     initialize_Character_Cache();
-    store_native_method(Character_Class, Symbol_asString,   NM_Character_asString);
-    store_native_method(Character_Class, Symbol_asSymbol,   NM_Character_asSymbol);
-    store_native_method(Character_Class, Symbol_asSmallInt, NM_Character_asSmallInt);
+    store_native_method(Character_Class,SMB_asString,   NM_Character_asString);
+    store_native_method(Character_Class,SMB_asSymbol,   NM_Character_asSymbol);
+    store_native_method(Character_Class,SMB_asSmallInt, NM_Character_asSmallInt);
 }

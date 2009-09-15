@@ -73,7 +73,7 @@ NATIVE2(NM_Dictionary_objectAt_put_)
 
 void post_initialize_Dictionary()
 {
-    store_native_method(Dictionary_Class, Symbol_objectAt_, NM_Dictionary_objectAt_);
-    store_native_method(Dictionary_Class, Symbol_objectAt_put_, NM_Dictionary_objectAt_put_);
+    store_native_method(Dictionary_Class,SMB_objectAt_, NM_Dictionary_objectAt_);
+    store_native_method(Dictionary_Class,SMB_objectAt_put_, NM_Dictionary_objectAt_put_);
 }
 

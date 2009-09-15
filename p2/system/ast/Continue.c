@@ -31,5 +31,5 @@ NATIVE1(NM_AST_Continue_eval)
 
 void post_initialize_Continue()
 {
-    store_native_method(Continue_Class, Symbol_eval, NM_AST_Continue_eval);
+    store_native_method(Continue_Class,SMB_eval, NM_AST_Continue_eval);
 }

@@ -16,11 +16,11 @@ void test_Dictionary_ObjectAt_()
         if (i==4) { continue; }
         Object key = (Object)new_SmallInt(i);
         args->values[0] = key;
-        assert(EvalSend((Object)dict, Symbol_objectAt_, args) == integer);
+        assert(EvalSend((Object)dict,SMB_objectAt_, args) == integer);
         assert(Dictionary_lookup(dict, key) == integer);
     }
     args->values[0] = (Object)new_SmallInt(4); 
-    assert(EvalSend((Object)dict, Symbol_objectAt_, args) == integer2);
+    assert(EvalSend((Object)dict,SMB_objectAt_, args) == integer2);
 }
 
 void test_Dictionary_size()
@@ -45,13 +45,13 @@ void test_Dictionary_ObjectAt_put()
     Type_Array * args  = new_Array_With(2, (Object)integer1);
     args->values[0] = integer0; 
     
-    result = EvalSend((Object)dict, Symbol_objectAt_put_, args);
+    result = EvalSend((Object)dict,SMB_objectAt_put_, args);
     assert(result == integer1);
     assert(Dictionary_lookup(dict, integer0) == integer1);
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
-    result = EvalSend((Object)dict, Symbol_objectAt_put_, args);
+    result = EvalSend((Object)dict,SMB_objectAt_put_, args);
     assert(result == integer1);
     assert(Dictionary_lookup(dict, integer2) == integer1);
     // check that all the other places aren't changed
@@ -60,7 +60,7 @@ void test_Dictionary_ObjectAt_put()
         if (i==0 || i==2) { continue; }
         Object key = (Object)new_SmallInt(i);
         args->values[0] = key;
-        assert(EvalSend((Object)dict, Symbol_objectAt_, args) == integer);
+        assert(EvalSend((Object)dict,SMB_objectAt_, args) == integer);
         assert(Dictionary_lookup(dict, key) == integer);
     }
 }

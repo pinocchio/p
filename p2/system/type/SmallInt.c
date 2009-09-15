@@ -71,11 +71,11 @@ void post_initialize_Type_SmallInt()
     SmallInt_Class->name    = new_String(L"SmallInt");
     SmallInt_Class->methods = new_Dictionary();
     
-    store_native_method((Type_Class *)SmallInt_Class, Symbol_plus_, NM_SmallInt_plus);
-    store_native_method((Type_Class *)SmallInt_Class, Symbol_minus_, NM_SmallInt_minus);
-    store_native_method((Type_Class *)SmallInt_Class, Symbol_equals_, NM_SmallInt_equals);
+    store_native_method((Type_Class *)SmallInt_Class,SMB_plus_, NM_SmallInt_plus);
+    store_native_method((Type_Class *)SmallInt_Class,SMB_minus_, NM_SmallInt_minus);
+    store_native_method((Type_Class *)SmallInt_Class,SMB_equals_, NM_SmallInt_equals);
     
-    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_plus_));
-    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_minus_));
-    assert(Dictionary_lookup(SmallInt_Class->methods, Symbol_equals_));
+    assert(Dictionary_lookup(SmallInt_Class->methods,SMB_plus_));
+    assert(Dictionary_lookup(SmallInt_Class->methods,SMB_minus_));
+    assert(Dictionary_lookup(SmallInt_Class->methods,SMB_equals_));
 }

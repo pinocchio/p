@@ -42,7 +42,7 @@ void pre_initialize##_##class();
 #define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)));
 
 #define ASSERT_EQUALS(exp1, exp2) \
-assert(EvalSend((Object)(exp1), Symbol_equals_, new_Array_With(1, (Object)(exp2))) == (Object)True);
+assert(EvalSend((Object)(exp1),SMB_equals_, new_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ======================================================================== */
 
@@ -284,5 +284,13 @@ Type_String * new_String(const wchar_t * str);
 void store_native_method(Type_Class * class, Object symbol, native code);
 
 AST_Native_Method * new_Native_Method(native code);
+
+
+/* ========================================================================== */
+
+Object EvalSendConst(Object self, Object symbol, Type_Array * args);
+Object EvalSend(Object self, Object symbol, Type_Array * args);
+Object EvalSend0(Object self, Object symbol);
+Object EvalSend1(Object self, Object symbol, Object arg);
 
 #endif // AST_H

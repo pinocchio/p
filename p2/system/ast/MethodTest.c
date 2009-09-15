@@ -8,12 +8,12 @@ void test_method_evaluation()
     Type_SmallInt * integer7 = new_SmallInt(7);
     Object integer7_const    = (Object)new_Constant((Object)integer7);
     
-    Object result = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
+    Object result = Eval((Object)new_Send(method_const,SMB_eval, new_Raw_Array(0)));
     assert(result == (Object)method);
     
     // with one body element ---------------------------------------------------
     method->body = new_Array_With(1, integer_const);
-    result       = Eval((Object)new_Send(method_const, Symbol_eval, new_Raw_Array(0)));
+    result       = Eval((Object)new_Send(method_const,SMB_eval, new_Raw_Array(0)));
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
     
@@ -25,7 +25,7 @@ void test_method_evaluation()
     var->key = (Object)method;
     var->index = 0;
     
-    result       = Eval((Object)new_Send(method_const, Symbol_eval_, 
+    result       = Eval((Object)new_Send(method_const,SMB_eval_, 
                                          new_Array_With(1, (Object)integer_const)));
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);

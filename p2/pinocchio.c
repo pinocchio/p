@@ -7,25 +7,25 @@
 
 /* ======================================================================== */
 
-Object Symbol_apply_;
-Object Symbol_at_in_;
-Object Symbol_equals_;
-Object Symbol_eval;
-Object Symbol_eval_;
-Object Symbol_lookup_;
-Object Symbol_plus_;
-Object Symbol_minus_;
-Object Symbol_objectAt_;
-Object Symbol_objectAt_put_;
-Object Symbol_objectAt_putIfAbsent_;
-Object Symbol_size;
-Object Symbol_asString;
-Object Symbol_asSmallInt;
-Object Symbol_asSymbol;
-Object Symbol_asArray;
-Object Symbol_indexOf_;
-Object Symbol_lastIndexOf_;
-Object Symbol_concat_;
+Object SMB_apply_;
+Object SMB_at_in_;
+Object SMB_equals_;
+Object SMB_eval;
+Object SMB_eval_;
+Object SMB_lookup_;
+Object SMB_plus_;
+Object SMB_minus_;
+Object SMB_objectAt_;
+Object SMB_objectAt_put_;
+Object SMB_objectAt_putIfAbsent_;
+Object SMB_size;
+Object SMB_asString;
+Object SMB_asSmallInt;
+Object SMB_asSymbol;
+Object SMB_asArray;
+Object SMB_indexOf_;
+Object SMB_lastIndexOf_;
+Object SMB_concat_;
 
 Object Nil;
 
