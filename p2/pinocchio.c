@@ -7,26 +7,6 @@
 
 /* ======================================================================== */
 
-Object SMB_apply_;
-Object SMB_at_in_;
-Object SMB_equals_;
-Object SMB_eval;
-Object SMB_eval_;
-Object SMB_lookup_;
-Object SMB_plus_;
-Object SMB_minus_;
-Object SMB_objectAt_;
-Object SMB_objectAt_put_;
-Object SMB_objectAt_putIfAbsent_;
-Object SMB_size;
-Object SMB_asString;
-Object SMB_asSmallInt;
-Object SMB_asSymbol;
-Object SMB_asArray;
-Object SMB_indexOf_;
-Object SMB_lastIndexOf_;
-Object SMB_concat_;
-
 Object Nil;
 
 /* ======================================================================== */
@@ -34,40 +14,6 @@ Object Nil;
 Type_Class * MetaClass_Class;
 Type_Class * Class_Class;
 Type_Class * Object_Class;
-
-Type_Class * Array_Class;
-Type_Class * Assign_Class;
-Type_Class * Boolean_Class;
-Type_Class * Character_Class;
-Type_Class * Constant_Class;
-Type_Class * Dictionary_Class;
-Type_Class * Env_Class;
-Type_Class * False_Class;
-Type_Class * File_Class;
-Type_Class * Method_Class;
-Type_Class * Native_Method_Class;
-Type_Class * Send_Class;
-Type_Class * SmallInt_Class;
-Type_Class * String_Class;
-Type_Class * Symbol_Class;
-Type_Class * True_Class;
-Type_Class * Variable_Class;
-Type_Class * Self_Class;
-Type_Class * Super_Class;
-Type_Class * Continue_Class;
-Type_Class * Callec_Class;
-
-/* ======================================================================== */
-
-Object Env;
-
-Object Self;
-
-Type_Boolean * True;
-AST_Constant * True_Const;
-
-Type_Boolean * False;
-AST_Constant * False_Const;
 
 /* ======================================================================== */
 

@@ -29,8 +29,10 @@
 
 /* ======================================================================== */
 
-#define CREATE_INITIALIZERS(class) void pre_initialize##_##class();\
-void pre_initialize##_##class();
+#define CREATE_INITIALIZERS(class) \
+void pre_initialize##_##class(); \
+void pre_initialize##_##class(); \
+Type_Class * class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size->value < size_value || args->size->value > size_value) {\
@@ -230,6 +232,7 @@ extern Type_Class * Object_Class;
 #include <system/type/Class.h>
 #include <system/type/Object.h>
 #include <system/type/SmallInt.h>
+#include <system/type/Symbol.h>
 
 #include <system/io/File.h>
 

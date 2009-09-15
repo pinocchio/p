@@ -1,4 +1,8 @@
 
+Object Self;
+
+/* ========================================================================== */
+
 void pre_initialize_Self()
 {
     Self_Class = new_Named_Class((Object)Object_Class, L"Self");

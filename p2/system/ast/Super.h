@@ -1,3 +1,6 @@
+
+CREATE_INITIALIZERS(Super);
+
 /* ========================================================================== */
 
 extern Type_Class * Super_Class;
@@ -10,4 +13,3 @@ extern void AST_Super_eval(AST_Super * self);
 
 /* ========================================================================== */
 
-CREATE_INITIALIZERS(Super);
