@@ -1,4 +1,4 @@
-CREATE_INITIALIZERS(Self);
+CREATE_INITIALIZERS(Self)
 
 Object Self;
 

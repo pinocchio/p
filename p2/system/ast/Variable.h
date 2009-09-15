@@ -1,4 +1,4 @@
 
-CREATE_INITIALIZERS(Variable);
+CREATE_INITIALIZERS(Variable)
 
 /* ========================================================================= */

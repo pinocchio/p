@@ -4,6 +4,6 @@ AST_Constant * new_Constant(Object constant);
 
 /* ========================================================================== */
 
-CREATE_INITIALIZERS(Constant);
+CREATE_INITIALIZERS(Constant)
 
 /* ========================================================================== */

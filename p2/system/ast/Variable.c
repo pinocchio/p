@@ -21,7 +21,7 @@ void AST_Variable_eval(AST_Variable * self)
     Object env = current_env();
     
     if (HEADER(env) == (Object)Env_Class) {
-        return Runtime_Env_lookup(
+        return Env_lookup(
                                   (Runtime_Env *)env, self->index, self->key);
     } else {
         // TODO
@@ -36,7 +36,7 @@ void AST_Variable_assign(AST_Variable * self, Object value)
     Object env = current_env();
     
     if (HEADER(env) == (Object)Env_Class) {
-        return Runtime_Env_assign(
+        return Env_assign(
                                   (Runtime_Env *)env, self->index, self->key, value);
     }
     // TODO

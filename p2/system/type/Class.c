@@ -1,4 +1,9 @@
 
+//Type_Class * Class_Class
+//Type_Class * MetaClass_Class;
+
+/* ======================================================================== */
+
 Type_Class* new_Class(Object superclass)
 {
     Type_Class * result = NEW(Type_Class);
@@ -33,7 +38,7 @@ void pre_initialize_Class()
 
 /* ======================================================================== */
 
-void type_class_super()
+void Class_super()
 {
     zap_CNT();
     Object class = peek_EXP(1);

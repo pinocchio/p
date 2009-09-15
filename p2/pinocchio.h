@@ -1,5 +1,5 @@
-#ifndef AST_H
-#define AST_H
+#ifndef PINOCCHIO_H
+#define PINOCCHIO_H
 
 /* ======================================================================== */
 
@@ -29,10 +29,7 @@
 
 /* ======================================================================== */
 
-#define CREATE_INITIALIZERS(class) \
-void pre_initialize##_##class(); \
-void pre_initialize##_##class(); \
-Type_Class * class##_Class;
+#define CREATE_INITIALIZERS(class) void pre_initialize##_##class(); void post_initialize##_##class(); Type_Class * class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size->value < size_value || args->size->value > size_value) {\
@@ -59,14 +56,6 @@ assert(EvalSend((Object)(exp1),SMB_equals_, new_Array_With(1, (Object)(exp2))) =
 #define peek_CNT(depth)         (*(_CNT_ + depth))
 #define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
 #define zap_CNT()               (_CNT_++);
-
-/* ======================================================================== */
-
-#define NATIVE(name) void name(Object self, Object class, Type_Array * args) {
-#define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
-#define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
-#define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
-#define NATIVE3(name)  NATIVE(name) ASSERT_ARG_SIZE(3);
 
 /* ======================================================================== */
 
@@ -249,45 +238,14 @@ extern Type_Class * Object_Class;
 
 #include <system/runtime/Env.h>
 
+/* ========================================================================== */
 
-AST_Constant * new_Constant(Object constant);
-
-extern void AST_Constant_eval();
-extern void AST_Variable_eval();
-extern void AST_Assign_eval();
-extern void AST_Send_eval();
-
-Runtime_Env * new_Env(Object parent, Object key, Type_Array * values);
-Runtime_Env * new_Env_Sized(Object parent, Object key, int size);
-
-void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
-                        Object key, Object value);
-                        
-void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key);
-
-void AST_Native_Method_invoke(AST_Native_Method * method, Object self,
-                              Object class, Type_Array * args);
-
-Object Dictionary_lookup(Type_Dictionary * self, Object key);
-
-void type_class_super();
-void AST_Assign_assign();
+void Class_super();
 void push_restore_env();
 void send_Eval();
 void store_argument();
-Type_SmallInt * new_SmallInt(int value);
-
-void Class_dispatch(InlineCache * sender, Object self, Object class,
-                         Object msg, Type_Array * args);
-void Method_invoke(Object method, Object self, Object class, Type_Array * args);
-Type_Class* new_Named_Class(Object superclass, const wchar_t* name);
-Type_Class* new_Class(Object superclass);
-Type_String * new_String(const wchar_t * str);
 
 void store_native_method(Type_Class * class, Object symbol, native code);
-
-AST_Native_Method * new_Native_Method(native code);
-
 
 /* ========================================================================== */
 
@@ -296,4 +254,4 @@ Object EvalSend(Object self, Object symbol, Type_Array * args);
 Object EvalSend0(Object self, Object symbol);
 Object EvalSend1(Object self, Object symbol, Object arg);
 
-#endif // AST_H
+#endif // PINOCCHIO_H

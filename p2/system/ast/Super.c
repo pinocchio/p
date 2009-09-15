@@ -49,7 +49,7 @@ void AST_Super_eval(AST_Super * super)
     Type_Array * args = new_Raw_Array(super->arguments->size->value);
     // execute the method
     push_CNT(ast_super_send);
-    push_CNT(type_class_super);
+    push_CNT(Class_super);
     push_CNT(push_env_class);
     push_CNT(ast_self_eval);
     push_EXP(args);

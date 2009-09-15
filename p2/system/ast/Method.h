@@ -1,5 +1,5 @@
 
-CREATE_INITIALIZERS(Method);
+CREATE_INITIALIZERS(Method)
 
 /* ========================================================================= */
 

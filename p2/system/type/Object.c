@@ -1,4 +1,8 @@
 
+Type_Class * Object_Class;
+
+/* ======================================================================== */
+
 void pre_initialize_Object() 
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use

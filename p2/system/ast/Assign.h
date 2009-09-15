@@ -1,2 +1,4 @@
 
-CREATE_INITIALIZERS(Assign);
+CREATE_INITIALIZERS(Assign)
+
+void AST_Assign_assign();

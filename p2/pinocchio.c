@@ -11,15 +11,11 @@ Object Nil;
 
 /* ======================================================================== */
 
-Type_Class * MetaClass_Class;
-Type_Class * Class_Class;
-Type_Class * Object_Class;
-
-/* ======================================================================== */
-
 Object Double_Stack[STACK_SIZE];
 Object * _EXP_;
 cont   * _CNT_;
+
+/* ======================================================================== */
 
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;

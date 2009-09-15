@@ -4,4 +4,4 @@
 
 Type_SmallInt * new_SmallInt(int value);
 
-CREATE_INITIALIZERS(SmallInt);
+CREATE_INITIALIZERS(SmallInt)

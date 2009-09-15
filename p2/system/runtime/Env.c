@@ -28,7 +28,7 @@ void pre_initialize_Env()
 
 /* =========================================================================*/
 
-void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
+void Env_lookup(Runtime_Env * self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
@@ -50,7 +50,7 @@ void Runtime_Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     push_EXP(self->values->values[index]);
 }
 
-void Runtime_Env_assign(Runtime_Env * self, unsigned int index,
+void Env_assign(Runtime_Env * self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Nil) {

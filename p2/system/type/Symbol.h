@@ -1,5 +1,5 @@
 
-CREATE_INITIALIZERS(Symbol);
+CREATE_INITIALIZERS(Symbol)
 
 Object SMB_apply_;
 Object SMB_at_in_;
