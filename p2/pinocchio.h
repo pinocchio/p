@@ -39,6 +39,7 @@
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)));
+#define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)));
 
 #define ASSERT_EQUALS(exp1, exp2) \
 assert(EvalSend((Object)(exp1),SMB_equals_, new_Array_With(1, (Object)(exp2))) == (Object)True);

@@ -52,14 +52,19 @@ void initialize_Symbol()
     SMB_objectAt_putIfAbsent_ = (Object)new_Symbol(L"objectAt:putIfAbsent:");
     SMB_objectAt_put_ = (Object)new_Symbol(L"objectAt:put:");
     SMB_plus_         = (Object)new_Symbol(L"plus:");
-    SMB_size          = (Object)new_Symbol(L"size");
+    SMB_size        = (Object)new_Symbol(L"size");
+    SMB_divide_     = (Object)new_Symbol(L"divide:");
+    SMB_shiftLeft_  = (Object)new_Symbol(L"shiftLeft:");
+    SMB_shiftRight_ = (Object)new_Symbol(L"shiftRight:");
+    SMB_times_      = (Object)new_Symbol(L"times:");
+    
 }
 
 /* ========================================================================== */
 
 
 NATIVE1(NM_Symbol_objectAt_)
-    ASSERT_TYPE(args->values[0], SmallInt_Class);
+    ASSERT_ARG_TYPE(0, SmallInt_Class);
     Type_SmallInt *index = (Type_SmallInt *)args->values[0];
     push_EXP(new_Character(((Type_Symbol *) self)->value[index->value]));
 }
