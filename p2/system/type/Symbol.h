@@ -27,6 +27,7 @@ Object SMB_asSmallInt;
 Object SMB_asString;
 Object SMB_asSymbol;
 Object SMB_at_in_;
+Object SMB_and_;
 Object SMB_concat_;
 Object SMB_divide_;
 Object SMB_equals_;
@@ -47,6 +48,7 @@ Object SMB_times_;
 Object SMB_ifFalse_;
 Object SMB_ifTrue_;
 Object SMB_not;
+Object SMB_or_;
 
 /* ========================================================================== */
 

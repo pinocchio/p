@@ -55,8 +55,10 @@ SMALLINT_BINARY_OPERATION(NM_SmallInt_plus_,       +);
 SMALLINT_BINARY_OPERATION(NM_SmallInt_minus_,      -);
 SMALLINT_BINARY_OPERATION(NM_SmallInt_times_,      *);
 SMALLINT_BINARY_OPERATION(NM_SmallInt_divide_,     /);
-SMALLINT_BINARY_OPERATION(NM_SmallInt_shiftRight_, >>);
-SMALLINT_BINARY_OPERATION(NM_SmallInt_shiftLeft_,  <<);
+SMALLINT_BINARY_OPERATION(NM_SmallInt_shiftRight_,>>);
+SMALLINT_BINARY_OPERATION(NM_SmallInt_shiftLeft_, <<);
+SMALLINT_BINARY_OPERATION(NM_SmallInt_and_,        &);
+SMALLINT_BINARY_OPERATION(NM_SmallInt_or_,         |);
 
 
 NATIVE1(NM_SmallInt_equals_)
@@ -84,6 +86,8 @@ void post_initialize_Type_SmallInt()
     store_native_method((Type_Class)SmallInt_Class, SMB_divide_,     NM_SmallInt_divide_);
     store_native_method((Type_Class)SmallInt_Class, SMB_shiftLeft_,  NM_SmallInt_shiftLeft_);
     store_native_method((Type_Class)SmallInt_Class, SMB_shiftRight_, NM_SmallInt_shiftRight_);
+    store_native_method((Type_Class)SmallInt_Class, SMB_and_,        NM_SmallInt_and_);
+    store_native_method((Type_Class)SmallInt_Class, SMB_or_,         NM_SmallInt_or_);
     
     assert(Dictionary_lookup(SmallInt_Class->methods, SMB_plus_));
     assert(Dictionary_lookup(SmallInt_Class->methods, SMB_minus_));

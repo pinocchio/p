@@ -48,6 +48,7 @@ void initialize_Symbol()
     SMB_asString        = (Object)new_Symbol(L"asString");
     SMB_asSymbol        = (Object)new_Symbol(L"asSymbol");
     SMB_at_in_          = (Object)new_Symbol(L"at:in:");
+    SMB_and_            = (Object)new_Symbol(L"and:");
     SMB_equals_         = (Object)new_Symbol(L"equals:");
     SMB_eval            = (Object)new_Symbol(L"eval");
     SMB_eval_           = (Object)new_Symbol(L"eval:");
@@ -65,6 +66,7 @@ void initialize_Symbol()
     SMB_ifFalse_        = (Object)new_Symbol(L"ifFalse:");
     SMB_ifTrue_         = (Object)new_Symbol(L"ifTrue:");
     SMB_not             = (Object)new_Symbol(L"not");
+    SMB_or_             = (Object)new_Symbol(L"or:");
     
 }
 

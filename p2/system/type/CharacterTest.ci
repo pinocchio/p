@@ -29,7 +29,6 @@ void test_Character_asString()
     assert(((Type_String)result)->value[0] == chr->value);
 }
 
-
 /* ========================================================================== */
 
 void test_Character()

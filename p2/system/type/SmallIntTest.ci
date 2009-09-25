@@ -41,10 +41,16 @@ SMALLINT_BINOP_TEST(times,      *)
 SMALLINT_BINOP_TEST(divide,     /)
 }
 
-SMALLINT_BINOP_TEST(shiftRight, >>)
+SMALLINT_BINOP_TEST(shiftRight,>>)
 }
 
-SMALLINT_BINOP_TEST(shiftLeft,  <<)
+SMALLINT_BINOP_TEST(shiftLeft, <<)
+}
+
+SMALLINT_BINOP_TEST(and,        &)
+}
+
+SMALLINT_BINOP_TEST(or,         |)
 }
 
 /* ======================================================================== */
