@@ -5,6 +5,10 @@
 
 /* ======================================================================== */
 
+Type_Class Continue_Class;
+
+/* ======================================================================== */
+
 extern AST_Continue new_Continue(Object target)
 {
     AST_Continue result = NEW_t(AST_Continue);

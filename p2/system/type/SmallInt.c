@@ -5,7 +5,11 @@
 
 /* ======================================================================== */
 
+Type_Class SmallInt_Class;
+
 Type_SmallInt* SmallInt_cache;
+
+/* ======================================================================== */
 
 Type_SmallInt new_raw_SmallInt(int value)
 {

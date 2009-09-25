@@ -5,7 +5,11 @@
 
 /* ======================================================================== */
 
-extern void pre_initialize_Object() 
+Type_Class Object_Class;
+
+/* ======================================================================== */
+
+void pre_initialize_Object() 
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
@@ -31,7 +35,7 @@ NATIVE0(NM_Object_asString)
 
 /* ======================================================================== */
 
-extern void post_initialize_Object()
+void post_initialize_Object()
 {
     // put the names here, now after the Symbols_Class is initialized
     Class_Class->name   = new_String(L"Class");

@@ -5,6 +5,10 @@
 
 /* ======================================================================== */
 
+Type_Class Character_Class;
+
+/* ======================================================================== */
+
 Type_Character * Character_cache;
 
 Type_Character new_raw_Character(wchar_t value)

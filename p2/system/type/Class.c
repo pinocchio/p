@@ -6,8 +6,8 @@
 
 /* ======================================================================== */
 
-//Type_Class Class_Class
-//Type_Class MetaClass_Class;
+Type_Class Class_Class;
+Type_Class MetaClass_Class;
 
 /* ======================================================================== */
 

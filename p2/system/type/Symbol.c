@@ -6,6 +6,7 @@
 
 /* ========================================================================== */
 
+Type_Class Symbol_Class;
 Type_Dictionary SMB_Table;
 
 /* ========================================================================== */
@@ -105,6 +106,7 @@ int Symbol_hash(const wchar_t* symbol_string)
     }
     return hash;
 }
+
 NATIVE0(NM_Symbol_hash)
     push_EXP(new_SmallInt(Symbol_hash(((Type_Symbol)self)->value)));
 }
@@ -128,6 +130,7 @@ Type_Symbol Symbol_concat_(Type_Symbol symbol, Type_Symbol string)
     } 
     return new_Symbol(concated);
 }
+
 NATIVE1(NM_Symbol_concat_)
     // TODO ooptimization possible
     Type_String string = (Type_String)EvalSend0(args->values[0], SMB_asString);

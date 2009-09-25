@@ -7,6 +7,10 @@
 
 /* ======================================================================== */
 
+Type_Class Method_Class;
+
+/* ======================================================================== */
+
 extern AST_Method new_Method(unsigned int paramc, Type_Array body)
 {
     AST_Method result = NEW_t(AST_Method);

@@ -6,6 +6,10 @@
 
 /* ======================================================================== */
 
+Type_Class Variable_Class;
+
+/* ======================================================================== */
+
 extern AST_Variable new_Variable(const wchar_t* name)
 {
     AST_Variable result = NEW_t(AST_Variable);

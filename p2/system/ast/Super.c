@@ -7,6 +7,10 @@
 
 /* ======================================================================== */
 
+Type_Class Super_Class;
+
+/* ======================================================================== */
+
 extern AST_Super new_Super(Object message, Type_Array arguments)
 {
     AST_Super result = NEW_t(AST_Super);

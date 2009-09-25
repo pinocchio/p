@@ -6,6 +6,10 @@
 
 /* ======================================================================== */
 
+Type_Class Assign_Class;
+
+/* ======================================================================== */
+
 extern AST_Assign new_Assign(Object variable, Object expression)
 {
     AST_Assign result  = NEW_t(AST_Assign);

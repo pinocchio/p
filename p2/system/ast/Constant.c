@@ -5,6 +5,10 @@
 
 /* ======================================================================== */
 
+Type_Class Constant_Class;
+
+/* ======================================================================== */
+
 extern AST_Constant new_Constant(Object constant)
 {
     AST_Constant   result = NEW_t(AST_Constant);

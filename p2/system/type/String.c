@@ -7,6 +7,10 @@
 
 /* =========================================================================*/
 
+Type_Class String_Class;
+
+/* =========================================================================*/
+
 Type_String new_String(const wchar_t * str)
 {
     Type_String string = (Type_String) new_Symbol(str);

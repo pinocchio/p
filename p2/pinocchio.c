@@ -150,7 +150,9 @@ Object EvalSend1(Object self, Object symbol, Object arg)
 
 /* ========================================================================== */
 
-// #include <pinocchioTest.c>
+#ifdef TEST
+#include <pinocchioTest.h>
+#endif // TEST
 
 /* ========================================================================== */
 
