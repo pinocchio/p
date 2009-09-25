@@ -43,7 +43,7 @@ NATIVE0(NM_Character_asSymbol)
 
 NATIVE0(NM_Character_asSmallInt)
     // TODO add \0 at the end
-    push_EXP(new_SmallInt(&((Type_Character *)self)->value));
+    push_EXP(new_SmallInt(((Type_Character *)self)->value));
 }
 
 /* ======================================================================== */

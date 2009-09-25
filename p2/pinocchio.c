@@ -40,7 +40,7 @@ void restore_env()
 
 void init_Stack(unsigned int size)
 {
-    // TODO allocate the stack with the giben size
+    // TODO allocate the stack with the given size
     _EXP_ = (Object *)&Double_Stack[0];
     _CNT_ = (cont *)&Double_Stack[STACK_SIZE - 1];
 }
@@ -118,6 +118,8 @@ void send_Eval()
         return AST_Callec_eval((AST_Callec *)exp);
     }
     
+    /* TODO fallback by actually sending the eval message */
+
     printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a Constant?\n", 
            ((Type_Class*)class)->name->value);
     assert(NULL);

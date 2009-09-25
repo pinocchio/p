@@ -93,7 +93,7 @@ int Symbol_hash(const wchar_t* symbol_string)
     // http://www.cse.yorku.ca/~oz/hash.html
     unsigned int hash = 0;
     int c;
-    while (c = *symbol_string++) {
+    while ((c = *symbol_string++)) {
         hash = c + (hash << 6) + (hash << 16) - hash;
     }
     return hash;
