@@ -1,10 +1,11 @@
 TARGET=pinocchio
 TEST=pinnocchio_test
 
-CFILES=$(wildcard *.c)
+TCFILES=$(wildcard *.c) $(wildcard system/*/*.c)
 #CFILES=pinocchio.c
 
-TEST_CFILES=$(filter %Test.c,$(CFILES))
+TEST_CFILES=$(filter %Test.c,$(TCFILES))
+CFILES=$(filter-out %Test.c,$(TCFILES))
 
 HFILES=$(CFILES:%.c=%.h)
 
@@ -16,12 +17,8 @@ OBJECTS=$(CFILES:%.c=%.o)
 
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^
-
-
-%.o : %.c
-	$(CC) -c $(CFLAGS) $< -o $@
-
+	echo "$(CFILES)"
+	# $(CC) $(LDFLAGS) -o $@ $^
 
 run: $(TARGET)
 	./$(TARGET)
@@ -41,6 +38,8 @@ profile:
 	./$(TARGET)
 	gprof --flat-profile $(TARGET)
 
+tags: $(SOURCES)
+	ctags -R .
 
 include make.depend
 
