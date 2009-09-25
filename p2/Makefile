@@ -3,7 +3,7 @@ TARGET=pinocchio
 RAW_CFILES=$(wildcard *.c) $(wildcard system/*/*.c)
 
 TEST_CFILES=$(filter %Test.c,$(RAW_CFILES)) pinocchioTest.c
-CFILES=$(filter-out %Test.c,$(RAW_CFILES))
+CFILES=$(filter-out %Test.c,$(RAW_CFILES)) pinocchioTest.c
 
 HFILES=$(CFILES:%.c=%.h)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
@@ -22,8 +22,7 @@ run: $(TARGET)
 	./$(TARGET)
 
 test:
-	TARGET=$(TEST) make $(TEST) 
-	./$(TEST)
+	CFLAGS="-DTEST=1" make run
 
 clean:
 	rm -rf $(OBJECTS) $(TARGET) make.depend

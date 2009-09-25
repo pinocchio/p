@@ -1,5 +1,3 @@
-#define TEST
-
 #include <pinocchio.h>
 
 #include <system/ast/AssignTest.c>
@@ -27,7 +25,7 @@
 
 /* ========================================================================== */
 
-extern void run_tests()
+void run_tests()
 {
     test_Array();
     test_Assign();

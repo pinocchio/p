@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/Env.h>
+#include <pinocchio.h>
 
 /* ======================================================================== */
 
