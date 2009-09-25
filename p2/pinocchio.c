@@ -4,6 +4,7 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
+#include <pinocchioTest.h>
 
 /* ======================================================================== */
 
