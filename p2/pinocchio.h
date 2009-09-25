@@ -12,8 +12,8 @@
 #else 
 #define PALLOC malloc
 #endif
-// #undef PALLOC
-// #define PALLOC malloc
+#undef PALLOC
+#define PALLOC malloc
 
 /* ======================================================================== */
 
@@ -165,7 +165,6 @@ extern Type_Class Object_Class;
 /* ======================================================================== */
 
 extern void CNT_send_Eval();
-extern void CNT_restore_env();
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
 

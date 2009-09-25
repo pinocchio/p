@@ -10,7 +10,7 @@ Object Nil;
 
 /* =========================================================================*/
 
-extern void pre_initialize_Nil() 
+void pre_initialize_Nil() 
 {
     Nil = (Object) NEW_t(Type_Nil);
 }

@@ -17,7 +17,7 @@ Type_Boolean True;
 
 /* ======================================================================== */
 
-extern void pre_initialize_Type_False() {
+void pre_initialize_Type_False() {
     False_Class = new_Named_Class((Object)Boolean_Class, L"False");
     
     False = NEW_t(Type_Boolean);
@@ -25,7 +25,7 @@ extern void pre_initialize_Type_False() {
     False_Const = new_Constant((Object) False);
 }
 
-extern void pre_initialize_Type_True()
+void pre_initialize_Type_True()
 {
     True_Class = new_Named_Class((Object)Boolean_Class, L"True");
     
@@ -34,7 +34,7 @@ extern void pre_initialize_Type_True()
     True_Const = new_Constant((Object) True);
 }
 
-extern void pre_initialize_Type_Boolean()
+void pre_initialize_Type_Boolean()
 {
     Boolean_Class = new_Named_Class((Object)Object_Class, L"Boolean");     
     pre_initialize_Type_True();
@@ -43,12 +43,12 @@ extern void pre_initialize_Type_Boolean()
 
 /* ========================================================================== */
 
-extern AST_Constant get_bool_const(bool value)
+AST_Constant get_bool_const(bool value)
 {
     return value ? True_Const : False_Const;
 }
 
-extern Type_Boolean get_bool(bool value)
+Type_Boolean get_bool(bool value)
 {
     return value ? True : False;
 }
@@ -95,7 +95,7 @@ NATIVE(False_not)
 
 /* ========================================================================== */
 
-extern void post_initialize_Type_True()
+void post_initialize_Type_True()
 {
     store_native_method(True_Class, SMB_ifTrue_,    True_ifTrue_);
     store_native_method(True_Class, SMB_ifFalse_,   True_ifFalse_);
@@ -104,7 +104,7 @@ extern void post_initialize_Type_True()
     store_native_method(True_Class, SMB_asSmallInt, True_asSmallInt);
 }
 
-extern void post_initialize_Type_False()
+void post_initialize_Type_False()
 {
     store_native_method(False_Class, SMB_ifTrue_,    False_ifTrue_);
     store_native_method(False_Class, SMB_ifFalse_,   False_ifFalse_);
@@ -113,7 +113,7 @@ extern void post_initialize_Type_False()
     store_native_method(False_Class, SMB_asSmallInt, False_asSmallInt);
 }
 
-extern void post_initialize_Type_Boolean()
+void post_initialize_Type_Boolean()
 {
     post_initialize_Type_True();
     post_initialize_Type_False();

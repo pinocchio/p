@@ -9,7 +9,7 @@ Type_Class Send_Class;
 
 /* ======================================================================== */
 
-extern AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
+AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
 {
     AST_Send result = NEW_t(AST_Send);
     HEADER(result)    = (Object)Send_Class;
@@ -19,14 +19,14 @@ extern AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
     return result;
 }
 
-extern void pre_initialize_Send()
+void pre_initialize_Send()
 {
     Send_Class          = new_Named_Class((Object)Object_Class, L"Send");
 }
 
 /* =========================================================================*/
 
-extern void AST_Send_send()
+void AST_Send_send()
 {
     zap_CNT();
     Object receiver   = pop_EXP();
@@ -40,7 +40,7 @@ extern void AST_Send_send()
                    self->message, args);
 }
 
-extern void CNT_store_argument()
+void CNT_store_argument()
 {
     zap_CNT();
     
@@ -52,7 +52,7 @@ extern void CNT_store_argument()
     args->values[idx] = value;
 }
 
-extern void AST_Send_eval(AST_Send self)
+void AST_Send_eval(AST_Send self)
 {
     LOGFUN;
     Type_Array args = new_Raw_Array(self->arguments->size->value);
@@ -75,5 +75,5 @@ extern void AST_Send_eval(AST_Send self)
 
 /* =========================================================================*/
 
-extern void post_initialize_Send(){}
+void post_initialize_Send(){}
 

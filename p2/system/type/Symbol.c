@@ -23,23 +23,23 @@ wchar_t* wcsdup(const wchar_t* input)
 }
 
 
-extern Type_Symbol new_Symbol(const wchar_t* name)
+Type_Symbol new_Symbol(const wchar_t* name)
 {
     Type_Symbol symbol  = NEW_t(Type_Symbol);
-    HEADER(symbol)       = (Object)Symbol_Class;
-    symbol->hash         = NULL;
-    symbol->value        = wcsdup(name);
-    symbol->size         = new_SmallInt(wcslen(name));
+    HEADER(symbol)      = (Object)Symbol_Class;
+    symbol->hash        = NULL;
+    symbol->value       = wcsdup(name);
+    symbol->size        = new_SmallInt(wcslen(name));
     return symbol;
 }
 
 
-extern void pre_initialize_Symbol()
+void pre_initialize_Symbol()
 {
     Symbol_Class = new_Named_Class((Object)Object_Class, L"Symbol");
 }
 
-extern void initialize_Symbol()
+void initialize_Symbol()
 {
     // TODO put this method in a separate file
     SMB_apply_          = (Object)new_Symbol(L"apply:");
@@ -153,7 +153,7 @@ void initialize_Symbol_Table()
     SMB_Table = new_Dictionary();
 }
 
-extern void post_initialize_Symbol()
+void post_initialize_Symbol()
 {
     initialize_Symbol_Table();
     store_native_method(Symbol_Class, SMB_objectAt_, NM_Symbol_objectAt_);

@@ -10,7 +10,7 @@ Object Self;
 
 /* =========================================================================*/
 
-extern void pre_initialize_Self()
+void pre_initialize_Self()
 {
     Self_Class = new_Named_Class((Object)Object_Class, L"Self");
     Self       = (Object) NEW_t(AST_Self);
@@ -19,7 +19,7 @@ extern void pre_initialize_Self()
 
 /* =========================================================================*/
 
-extern void AST_Self_eval()
+void AST_Self_eval()
 {
     LOGFUN;
     Object env = (Object)current_env();
@@ -29,7 +29,7 @@ extern void AST_Self_eval()
     poke_EXP(1, ((Runtime_Env)env)->self);
 }
 
-extern void CNT_AST_Self_eval()
+void CNT_AST_Self_eval()
 {
     LOGFUN;
     zap_CNT();
@@ -40,7 +40,7 @@ extern void CNT_AST_Self_eval()
 
 /* =========================================================================*/
 
-extern void post_initialize_Self()
+void post_initialize_Self()
 {
 }
 

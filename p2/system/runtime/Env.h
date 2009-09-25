@@ -31,6 +31,7 @@ extern void Env_assign(Runtime_Env self, unsigned int index, Object key, Object 
 
 extern Runtime_Env current_env();
 extern void push_restore_env();
+extern void CNT_restore_env();
 extern void restore_env();
 
 /* =========================================================================*/

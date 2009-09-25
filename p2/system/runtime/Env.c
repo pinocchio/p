@@ -11,7 +11,7 @@ Object Env;
 
 /* ======================================================================== */
 
-extern Runtime_Env new_Env(Object parent, Object key, Type_Array values)
+Runtime_Env new_Env(Object parent, Object key, Type_Array values)
 {
     Runtime_Env result    = NEW_t(Runtime_Env);
     HEADER(result)          = (Object)Env_Class;
@@ -21,7 +21,7 @@ extern Runtime_Env new_Env(Object parent, Object key, Type_Array values)
     return result;
 }
 
-extern Runtime_Env new_Env_Sized(Object parent, Object key, int size)
+Runtime_Env new_Env_Sized(Object parent, Object key, int size)
 {
     Runtime_Env result    = NEW_t(Runtime_Env);
     HEADER(result)          = (Object)Env_Class;
@@ -31,14 +31,19 @@ extern Runtime_Env new_Env_Sized(Object parent, Object key, int size)
     return result;
 }
 
-extern void pre_initialize_Env()
+Runtime_Env current_env()
+{
+    return (Runtime_Env) Env;
+}
+
+void pre_initialize_Env()
 {
     Env_Class = new_Named_Class((Object)Object_Class, L"Env");
 }
 
 /* =========================================================================*/
 
-extern void Env_lookup(Runtime_Env self, unsigned int index, Object key)
+void Env_lookup(Runtime_Env self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
@@ -60,7 +65,7 @@ extern void Env_lookup(Runtime_Env self, unsigned int index, Object key)
     push_EXP(self->values->values[index]);
 }
 
-extern void Env_assign(Runtime_Env self, unsigned int index,
+void Env_assign(Runtime_Env self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Nil) {
@@ -83,20 +88,24 @@ extern void Env_assign(Runtime_Env self, unsigned int index,
     self->values->values[index] = value;
 }
 
-extern void push_restore_env()
+
+void push_restore_env()
 {
     push_CNT(CNT_restore_env);
     poke_EXP(1, current_env());
 }
 
-extern Runtime_Env current_env()
+void CNT_restore_env()
 {
-    return (Runtime_Env) Env;
+    zap_CNT();
+    Object result = pop_EXP();
+    Env = peek_EXP(1);
+    poke_EXP(1, result);
 }
 
 /* =========================================================================*/
 
-extern void post_initialize_Env()
+void post_initialize_Env()
 {
     Env = (Object)new_Env_Sized(Nil, Nil, 0);
 }

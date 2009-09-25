@@ -10,7 +10,7 @@ Type_Class Assign_Class;
 
 /* ======================================================================== */
 
-extern AST_Assign new_Assign(Object variable, Object expression)
+AST_Assign new_Assign(Object variable, Object expression)
 {
     AST_Assign result  = NEW_t(AST_Assign);
     HEADER(result)     = (Object)Assign_Class;
@@ -19,14 +19,14 @@ extern AST_Assign new_Assign(Object variable, Object expression)
     return result;
 }
 
-extern void pre_initialize_Assign()
+void pre_initialize_Assign()
 {
     Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
 }
 
 /* ======================================================================== */
 
-extern void AST_Assign_eval(AST_Assign self)
+void AST_Assign_eval(AST_Assign self)
 {
     LOGFUN;
     push_CNT(CNT_AST_Assign_assign);
@@ -35,7 +35,7 @@ extern void AST_Assign_eval(AST_Assign self)
     push_EXP(self->expression);
 }
 
-extern void CNT_AST_Assign_assign()
+void CNT_AST_Assign_assign()
 {
     LOGFUN;
     zap_CNT();
@@ -54,6 +54,6 @@ extern void CNT_AST_Assign_assign()
 
 /* ======================================================================== */
 
-extern void post_initialize_Assign()
+void post_initialize_Assign()
 {
 }

@@ -19,7 +19,7 @@ Type_SmallInt new_raw_SmallInt(int value)
     return result;
 }
 
-extern Type_SmallInt new_SmallInt(int value)
+Type_SmallInt new_SmallInt(int value)
 {
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
@@ -27,7 +27,7 @@ extern Type_SmallInt new_SmallInt(int value)
     return new_raw_SmallInt(value);
 }
 
-extern void pre_initialize_Type_SmallInt() 
+void pre_initialize_Type_SmallInt() 
 {
     SmallInt_Class         = NEW_t(Type_Class);
     HEADER(SmallInt_Class) = (Object)Class_Class;
@@ -72,7 +72,7 @@ NATIVE1(NM_SmallInt_equals_)
 
 /* =========================================================================*/
 
-extern void post_initialize_Type_SmallInt()
+void post_initialize_Type_SmallInt()
 {
     SmallInt_Class->name    = new_String(L"SmallInt");
     SmallInt_Class->methods = new_Dictionary();

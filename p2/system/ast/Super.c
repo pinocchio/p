@@ -11,7 +11,7 @@ Type_Class Super_Class;
 
 /* ======================================================================== */
 
-extern AST_Super new_Super(Object message, Type_Array arguments)
+AST_Super new_Super(Object message, Type_Array arguments)
 {
     AST_Super result = NEW_t(AST_Super);
     HEADER(result)     = (Object)Super_Class;
@@ -20,7 +20,7 @@ extern AST_Super new_Super(Object message, Type_Array arguments)
     return result;
 }
 
-extern void pre_initialize_Super()
+void pre_initialize_Super()
 {
     Super_Class = new_Named_Class((Object)Object_Class, L"Super");
 }
@@ -53,7 +53,7 @@ void CNT_push_env_class()
     push_EXP(((Runtime_Env)env)->class);
 }
 
-extern void AST_Super_eval(AST_Super super)
+void AST_Super_eval(AST_Super super)
 {
     LOGFUN;
     Type_Array args = new_Raw_Array(super->arguments->size->value);
@@ -76,6 +76,6 @@ extern void AST_Super_eval(AST_Super super)
 
 /* =========================================================================*/
 
-extern void post_initialize_Super()
+void post_initialize_Super()
 {
 }

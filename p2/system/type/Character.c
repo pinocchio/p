@@ -30,7 +30,7 @@ Type_Character new_Character(wchar_t value)
 }
     
 
-extern void pre_initialize_Character()
+void pre_initialize_Character()
 {
     Character_Class = new_Named_Class((Object)Object_Class, L"Character");
 }
@@ -67,7 +67,7 @@ void initialize_Character_Cache()
     }
 }
 
-extern void post_initialize_Character()
+void post_initialize_Character()
 { 
     initialize_Character_Cache();
     store_native_method(Character_Class,SMB_asString,   NM_Character_asString);

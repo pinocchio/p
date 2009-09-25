@@ -10,7 +10,7 @@ Type_Class Variable_Class;
 
 /* ======================================================================== */
 
-extern AST_Variable new_Variable(const wchar_t* name)
+AST_Variable new_Variable(const wchar_t* name)
 {
     AST_Variable result = NEW_t(AST_Variable);
     HEADER(result)        = (Object)Variable_Class;
@@ -18,14 +18,14 @@ extern AST_Variable new_Variable(const wchar_t* name)
     return result;
 }
 
-extern void pre_initialize_Variable()
+void pre_initialize_Variable()
 {
     Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
 }
 
 /* =========================================================================*/
 
-extern void AST_Variable_eval(AST_Variable self)
+void AST_Variable_eval(AST_Variable self)
 {
     LOGFUN;
     Object env = (Object)current_env();
@@ -41,7 +41,7 @@ extern void AST_Variable_eval(AST_Variable self)
     }
 }
 
-extern void AST_Variable_assign(AST_Variable self, Object value)
+void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
     if (HEADER(env) == (Object)Env_Class) {
@@ -53,5 +53,5 @@ extern void AST_Variable_assign(AST_Variable self, Object value)
 
 /* =========================================================================*/
 
-extern void post_initialize_Variable(){}
+void post_initialize_Variable(){}
 

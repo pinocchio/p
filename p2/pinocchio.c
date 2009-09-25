@@ -26,15 +26,6 @@ void continue_eval()
     longjmp(Eval_Continue, 1);
 }
 
-
-void CNT_restore_env()
-{
-    zap_CNT();
-    Object result = pop_EXP();
-    Env = peek_EXP(1);
-    poke_EXP(1, result);
-}
-
 void init_Stack(unsigned int size)
 {
     // TODO allocate the stack with the given size

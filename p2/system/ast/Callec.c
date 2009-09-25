@@ -11,7 +11,7 @@ Type_Class Callec_Class;
 
 /* ======================================================================== */
 
-extern AST_Callec new_Callec()
+AST_Callec new_Callec()
 {
     AST_Callec result = NEW_t(AST_Callec);
     HEADER(result)    = (Object)Callec_Class;
@@ -19,14 +19,14 @@ extern AST_Callec new_Callec()
     return result;
 }
 
-extern void pre_initialize_Callec()
+void pre_initialize_Callec()
 {
     Callec_Class = new_Named_Class((Object)Object_Class, L"Callec");
 }
 
 /* ======================================================================== */
 
-extern void AST_Callec_eval(AST_Callec self)
+void AST_Callec_eval(AST_Callec self)
 {
     LOGFUN;
     self->cont->EXP = _EXP_;
@@ -37,6 +37,6 @@ extern void AST_Callec_eval(AST_Callec self)
 
 /* ======================================================================== */
 
-extern void post_initialize_Callec()
+void post_initialize_Callec()
 {
 }

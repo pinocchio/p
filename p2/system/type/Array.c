@@ -11,7 +11,7 @@ Type_Array Empty_Array;
 
 /* ======================================================================== */
 
-extern Type_Array new_Raw_Array(int c)
+Type_Array new_Raw_Array(int c)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
@@ -20,7 +20,7 @@ extern Type_Array new_Raw_Array(int c)
     return result;
 }
 
-extern Type_Array new_Array(int c, Object v[])
+Type_Array new_Array(int c, Object v[])
 {
     if (c == 0) { return Empty_Array; }
     Type_Array result = new_Raw_Array(c);
@@ -31,7 +31,7 @@ extern Type_Array new_Array(int c, Object v[])
     return result;
 }
 
-extern Type_Array new_Array_With(int c, Object init)
+Type_Array new_Array_With(int c, Object init)
 {
     if (c == 0) { return Empty_Array; }
     Type_Array result = new_Raw_Array(c);
@@ -42,7 +42,7 @@ extern Type_Array new_Array_With(int c, Object init)
     return result;
 }
 
-extern void pre_initialize_Array() 
+void pre_initialize_Array() 
 {
     Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
     
@@ -75,7 +75,7 @@ NATIVE0(NM_Array_size)
     push_EXP(new_SmallInt(((Type_Array)self)->size->value));
 }
 
-extern void post_initialize_Array()
+void post_initialize_Array()
 {
     Empty_Array->size   = new_SmallInt(0);
     

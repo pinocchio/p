@@ -11,7 +11,7 @@ Type_Class MetaClass_Class;
 
 /* ======================================================================== */
 
-extern Type_Class new_Class(Object superclass)
+Type_Class new_Class(Object superclass)
 {
     Type_Class result   = NEW_t(Type_Class);
     result->methods     = new_Dictionary();
@@ -20,7 +20,7 @@ extern Type_Class new_Class(Object superclass)
     return result;
 }
 
-extern Type_Class new_named_MetaClass(Object superclass, const wchar_t* name)
+Type_Class new_named_MetaClass(Object superclass, const wchar_t* name)
 {
     Type_Class result = (Type_Class) new_Class(superclass);
     result->name      = new_String(name);
@@ -28,7 +28,7 @@ extern Type_Class new_named_MetaClass(Object superclass, const wchar_t* name)
     return result;
 }
 
-extern Type_Class new_Named_Class(Object superclass, const wchar_t* name)
+Type_Class new_Named_Class(Object superclass, const wchar_t* name)
 {
     Type_Class result = (Type_Class) new_Class(superclass);
     result->name      = new_String(name);
@@ -36,7 +36,7 @@ extern Type_Class new_Named_Class(Object superclass, const wchar_t* name)
     return result;
 }
 
-extern void pre_initialize_Class()
+void pre_initialize_Class()
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
@@ -45,7 +45,7 @@ extern void pre_initialize_Class()
 
 /* ======================================================================== */
 
-extern void CNT_Class_super()
+void CNT_Class_super()
 {
     zap_CNT();
     Object class = peek_EXP(1);
@@ -58,7 +58,7 @@ extern void CNT_Class_super()
 }
 
 
-extern void Class_dispatch(InlineCache * cache, Object self, Object class,
+void Class_dispatch(InlineCache * cache, Object self, Object class,
                     Object msg, Type_Array args)
 {
     //printf("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
@@ -103,7 +103,7 @@ extern void Class_dispatch(InlineCache * cache, Object self, Object class,
 
 /* ======================================================================== */
 
-extern void post_initialize_Class()
+void post_initialize_Class()
 {
     // put the names here, now after the Symbols_Class is initialized
 }
