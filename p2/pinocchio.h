@@ -1,6 +1,9 @@
 #ifndef PINOCCHIO_H
 #define PINOCCHIO_H
 
+#include <stdlib.h>
+#include <setjmp.h>
+
 /* ======================================================================== */
 
 #include <gc/gc.h>
@@ -21,15 +24,16 @@
 #define NEW(layout)\
     NEW_ARRAYED(layout, Object[0])
 
+#define NEW_t(name) NEW(struct name##_##t)
+
 #define NEW_ARRAYED(base, end) \
-   (base *)(POINTER_INC(PALLOC(HEADER_SIZE +\
-            sizeof(base) + sizeof(end))))
+   (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
 #define HEADER(o) (*(Object*)POINTER_DEC(o))
 
 /* ======================================================================== */
 
-#define CREATE_INITIALIZERS(class) void pre_initialize##_##class(); void post_initialize##_##class(); Type_Class * class##_Class;
+#define CREATE_INITIALIZERS(class) extern void pre_initialize##_##class(); void post_initialize##_##class(); Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size->value < size_value || args->size->value > size_value) {\
@@ -71,157 +75,72 @@ assert(EvalSend((Object)(exp1),SMB_equals_, new_Array_With(1, (Object)(exp2))) =
 
 /* ======================================================================== */
 
+typedef void**          Object;
+typedef unsigned int    bool;
+typedef void(*cont)();
+typedef struct Type_Nil{} Type_Nil;   
+
+/* ======================================================================== */
+
 #define STACK_SIZE 1024*1024
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
+extern Object Double_Stack[STACK_SIZE];
+extern Object * _EXP_;
+extern cont   * _CNT_;
+
+extern jmp_buf Eval_Exit;
+extern jmp_buf Eval_Continue;
+
 /* ======================================================================== */
 
-typedef void**          Object;
-typedef unsigned int    bool;
+#define TYPE(name) typedef struct name##_##t * name;
 
-/* ======================================================================== */
-
-struct Type_SmallInt;
-struct Type_Object;
-
-typedef void(*cont)();
-
-typedef struct Type_Nil {} Type_Nil;
-
-typedef struct Type_Character {
-    wchar_t value;
-} Type_Character;
-
-typedef struct Type_SmallInt {
-    int             value;
-} Type_SmallInt;
-
-typedef struct Type_Object {
-    Object          ivals[0]; 
-} Type_Object;
-
-typedef struct Type_Symbol { 
-    Type_SmallInt * hash;
-    Type_SmallInt * size;
-    wchar_t * value;
-} Type_Symbol;
-
+TYPE(Type_Character);
+TYPE(Type_SmallInt);
+TYPE(Type_Object);
+TYPE(Type_Symbol);
 typedef Type_Symbol Type_String;
-
-typedef struct Type_Boolean {
-    char            value;
-} Type_Boolean;
-
-typedef struct Type_Array {
-    Type_SmallInt * size;
-    Object          values[];
-} Type_Array;
-
-typedef struct Type_Dictionary {
-    Type_Array     *layout;
-} Type_Dictionary;
-
-typedef struct Type_Class {
-    Type_String    *name;
-    Object          super;
-    Type_Dictionary*methods;
-    Object          cvars[];
-} Type_Class;
-
-typedef struct Type_File {
-} Type_File;
-
-
-typedef struct Type_ObjectClass {
-    Type_Class      clspart;
-    unsigned int    size;
-} Type_ObjectClass;
-
-typedef struct AST_Constant {
-    Object          constant;
-} AST_Constant;
-
-typedef struct AST_Self {} AST_Self;
+TYPE(Type_Boolean);
+TYPE(Type_Array);
+TYPE(Type_Dictionary);
+TYPE(Type_Class);
+TYPE(Type_File);
+TYPE(AST_Constant);
+TYPE(AST_Self);
+TYPE(AST_Super);
+TYPE(AST_Continue);
+TYPE(AST_Callec);
+TYPE(AST_Variable);
+TYPE(AST_Send);
+TYPE(AST_Assign);
+typedef void(*native)(Object self, Object class, Type_Array args);
+TYPE(AST_Native_Method);
+TYPE(AST_Method);
+TYPE(Runtime_Env);
 
 typedef struct InlineCache {
     Object          type;
     Object          method;
 } InlineCache;
 
-typedef struct AST_Super {
-    InlineCache     cache;
-    Object          message; 
-    Type_Array     *arguments;
-} AST_Super;
+/* ======================================================================== */
 
-typedef struct AST_Continue {
-    Object         *EXP;
-    cont           *CNT;
-    Object          target;
-} AST_Continue;
-
-typedef struct AST_Callec {
-    AST_Continue   *cont;
-    Object          target;
-} AST_Callec;
-
-typedef struct AST_Variable {
-    unsigned int    index;
-    Object          key;
-    Object          name;
-} AST_Variable;
-
-    
-typedef struct AST_Send {
-    InlineCache     cache;
-    Object          receiver;
-    Object          message;
-    Type_Array     *arguments;
-} AST_Send;
-
-typedef struct AST_Assign {
-    Object          variable;
-    Object          expression;
-} AST_Assign;
-
-typedef void(*native)(Object self, Object class, Type_Array * args);
-
-typedef struct AST_Native_Method {
-    native          code;
-} AST_Native_Method;
-
-typedef struct AST_Method {
-    unsigned int    paramc;
-    Object          environment;
-    Type_Array     *body;
-} AST_Method;
-
-typedef struct Runtime_Env {
-    Object          self;
-    Object          class;
-    AST_Method      *method;
-    unsigned int    pc;
-    Object          parent;
-    Object          key;
-    Type_Array     *values;
-} Runtime_Env;
+extern Type_Class Object_Class;
 
 /* ======================================================================== */
 
-extern Object Nil;
-extern Type_Class * Object_Class;
-
-/* ======================================================================== */
+#include <system/type/Nil.h>
 
 #include <system/type/Character.h>
 #include <system/type/String.h>
-#include <system/type/Boolean.h>
 #include <system/type/Array.h>
 #include <system/type/Dictionary.h>
 #include <system/type/Class.h>
 #include <system/type/Object.h>
 #include <system/type/SmallInt.h>
+#include <system/type/Boolean.h>
 #include <system/type/Symbol.h>
 
 #include <system/io/File.h>
@@ -241,18 +160,16 @@ extern Type_Class * Object_Class;
 
 /* ========================================================================== */
 
-void Class_super();
-void push_restore_env();
-void send_Eval();
-void store_argument();
+extern void CNT_send_Eval();
 
-void store_native_method(Type_Class * class, Object symbol, native code);
+extern void store_native_method(Type_Class class, Object symbol, native code);
 
 /* ========================================================================== */
 
-Object EvalSendConst(Object self, Object symbol, Type_Array * args);
-Object EvalSend(Object self, Object symbol, Type_Array * args);
-Object EvalSend0(Object self, Object symbol);
-Object EvalSend1(Object self, Object symbol, Object arg);
+extern Object EvalSendConst(Object self, Object symbol, Type_Array args);
+extern Object EvalSend(Object self, Object symbol, Type_Array args);
+extern Object EvalSend0(Object self, Object symbol);
+extern Object EvalSend1(Object self, Object symbol, Object arg);
 
+/* ========================================================================== */
 #endif // PINOCCHIO_H

@@ -1,28 +1,34 @@
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <system/ast/Self.h>
+
+/* =========================================================================*/
+
 Object Self;
 
-/* ========================================================================== */
+/* =========================================================================*/
 
-void pre_initialize_Self()
+extern void pre_initialize_Self()
 {
     Self_Class = new_Named_Class((Object)Object_Class, L"Self");
-    Self       = (Object) NEW(AST_Self);
+    Self       = (Object) NEW_t(AST_Self);
     HEADER(Self) = (Object) Self_Class;
 }
 
 /* =========================================================================*/
 
-void AST_Self_eval()
+extern void AST_Self_eval()
 {
     LOGFUN;
-    Object env = current_env();
+    Object env = (Object)current_env();
     if (HEADER(env) != (Object)Env_Class) {
         assert(NULL);
     }
-    poke_EXP(1, ((Runtime_Env *)env)->self);
+    poke_EXP(1, ((Runtime_Env)env)->self);
 }
 
-void ast_self_eval()
+extern void CNT_AST_Self_eval()
 {
     LOGFUN;
     zap_CNT();
@@ -33,7 +39,7 @@ void ast_self_eval()
 
 /* =========================================================================*/
 
-void post_initialize_Self()
+extern void post_initialize_Self()
 {
 }
 

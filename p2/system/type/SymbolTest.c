@@ -1,15 +1,15 @@
 
 
 #define SYMBOL_TEST_SETUP \
-Type_Symbol * symbol = new_Symbol(L"symbol"); \
+Type_Symbol symbol = new_Symbol(L"symbol"); \
 Object result;
 
 /* ======================================================================== */
 
 void test_Symbol_equals_()
 {
-    Type_Symbol * symbol = new_Symbol(L"symbol"); 
-    Type_Symbol * symbol2 = new_Symbol(L"symbol");
+//  Type_Symbol symbol = new_Symbol(L"symbol"); 
+//    Type_Symbol symbol2 = new_Symbol(L"symbol");
     // Symbols should use a symbol table
     // TODO create SymbolTable
     //ASSERT_EQUALS(symbol,  symbol2);
@@ -21,7 +21,7 @@ void test_Symbol_size()
     SYMBOL_TEST_SETUP;
     result = EvalSend0((Object)symbol,SMB_size);
     ASSERT_TYPE(result, SmallInt_Class);
-    assert(((Type_SmallInt *)result)->value == 6);
+    assert(((Type_SmallInt)result)->value == 6);
     
 }
 
@@ -54,7 +54,7 @@ void test_Symbol_objectAt_()
     for (i= 0; i<symbol->size->value; ++i) {
         result = EvalSend1((Object)symbol,SMB_objectAt_, (Object)new_SmallInt(i));
         ASSERT_TYPE(result, Character_Class);
-        assert(((Type_Character *) result)->value == symbol->value[i]);
+        assert(((Type_Character) result)->value == symbol->value[i]);
     }
 }
 
@@ -66,9 +66,9 @@ void test_Symbol_asArray()
     int i;
     Object item;
     for (i= 0; i<symbol->size->value; ++i) {
-        item = ((Type_Array *) result)->values[i];
+        item = ((Type_Array) result)->values[i];
         ASSERT_TYPE(item, Character_Class);
-        assert(((Type_Character *) item)->value == symbol->value[i]);
+        assert(((Type_Character) item)->value == symbol->value[i]);
     }
 }
 

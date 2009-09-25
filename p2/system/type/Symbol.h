@@ -1,6 +1,24 @@
+#ifndef SYMBOL_H
+#define SYMBOL_H
+
+#include <pinocchio.h>
+
+/* ========================================================================== */
+
+struct Type_Symbol_t { 
+    Type_SmallInt hash;
+    Type_SmallInt size;
+    wchar_t       * value;
+};
 
 CREATE_INITIALIZERS(Symbol)
+extern Type_Symbol new_Symbol(const wchar_t* name);
 
+/* ========================================================================== */
+
+extern void initialize_Symbol();
+
+/* ========================================================================== */
 
 Object SMB_apply_;
 Object SMB_asArray;
@@ -25,3 +43,10 @@ Object SMB_shiftLeft_;
 Object SMB_shiftRight_;
 Object SMB_size;
 Object SMB_times_;
+Object SMB_ifFalse_;
+Object SMB_ifTrue_;
+Object SMB_not;
+
+/* ========================================================================== */
+
+#endif // SYMBOL_H

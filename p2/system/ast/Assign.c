@@ -1,31 +1,37 @@
 
-AST_Assign *
-new_Assign(Object variable, Object expression)
+#include <stdlib.h>
+#include <stdio.h>
+#include <system/ast/Variable.h>
+#include <system/ast/Assign.h>
+
+/* ======================================================================== */
+
+extern AST_Assign new_Assign(Object variable, Object expression)
 {
-    AST_Assign * result = NEW(AST_Assign);
-    HEADER(result)      = (Object)Assign_Class;
-    result->variable    = variable;
-    result->expression  = expression;
+    AST_Assign result  = NEW_t(AST_Assign);
+    HEADER(result)     = (Object)Assign_Class;
+    result->variable   = variable;
+    result->expression = expression;
     return result;
 }
 
-void pre_initialize_Assign()
+extern void pre_initialize_Assign()
 {
     Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
 }
 
 /* ======================================================================== */
 
-void AST_Assign_eval(AST_Assign * self)
+extern void AST_Assign_eval(AST_Assign self)
 {
     LOGFUN;
-    push_CNT(AST_Assign_assign);
+    push_CNT(CNT_AST_Assign_assign);
     poke_EXP(1, self->variable);
-    push_CNT(send_Eval);
+    push_CNT(CNT_send_Eval);
     push_EXP(self->expression);
 }
 
-void AST_Assign_assign()
+extern void CNT_AST_Assign_assign()
 {
     LOGFUN;
     zap_CNT();
@@ -35,7 +41,7 @@ void AST_Assign_assign()
     poke_EXP(1, value);
     
     if (HEADER(var) == (Object)Variable_Class) {
-        return AST_Variable_assign((AST_Variable *)var, value);
+        return AST_Variable_assign((AST_Variable)var, value);
     }
     
     // TODO send assign: to self->variable.
@@ -44,6 +50,6 @@ void AST_Assign_assign()
 
 /* ======================================================================== */
 
-void post_initialize_Assign()
+extern void post_initialize_Assign()
 {
 }

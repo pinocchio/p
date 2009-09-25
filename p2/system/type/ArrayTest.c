@@ -3,8 +3,8 @@ void test_Array_ObjectAt_()
 {
     Object integer       = (Object)new_SmallInt(10);
     Object integer2      = (Object)new_SmallInt(2);
-    Type_Array * array   = new_Array_With(10, integer);
-    Type_Array * args    = new_Raw_Array(1);
+    Type_Array array   = new_Array_With(10, integer);
+    Type_Array args    = new_Raw_Array(1);
     array->values[4]  = integer2;
     int i; 
     for (i=0; i<array->size->value; i++) {
@@ -20,12 +20,12 @@ void test_Array_ObjectAt_()
 void test_Array_size()
 {
     Object integer     = (Object)new_SmallInt(10);
-    Type_Array * array = new_Array_With(10, integer);
+    Type_Array array = new_Array_With(10, integer);
     Object result      = EvalSend((Object)array,SMB_size, Empty_Array);
-    assert(((Type_SmallInt *) result)->value == 10);
+    assert(((Type_SmallInt) result)->value == 10);
     
     result = EvalSend(integer,SMB_equals_, new_Array_With(1, result));
-    //printf("%ls\n", ((Type_String *)((Type_Class *)HEADER(result))->name)->value);
+    //printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value);
     assert( result == (Object)True);
 }
 
@@ -36,8 +36,8 @@ void test_Array_ObjectAt_put()
     Object integer0    = (Object)new_SmallInt(0);
     Object integer1    = (Object)new_SmallInt(1);
     Object integer2    = (Object)new_SmallInt(2);
-    Type_Array * array = new_Array_With(10, integer);
-    Type_Array * args  = new_Array_With(2, (Object)integer1);
+    Type_Array array = new_Array_With(10, integer);
+    Type_Array args  = new_Array_With(2, (Object)integer1);
     args->values[0] = integer0; 
     
     result = EvalSend((Object)array,SMB_objectAt_put_, args);

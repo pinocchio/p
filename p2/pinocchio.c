@@ -7,18 +7,15 @@
 
 /* ======================================================================== */
 
-Object Nil;
-
-/* ======================================================================== */
-
 Object Double_Stack[STACK_SIZE];
 Object * _EXP_;
 cont   * _CNT_;
 
-/* ======================================================================== */
-
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
+
+
+/* ======================================================================== */
 
 /* 
  * Avoid longjmps as much as possible since they impose a large
@@ -42,7 +39,7 @@ void init_Stack(unsigned int size)
 {
     // TODO allocate the stack with the given size
     _EXP_ = (Object *)&Double_Stack[0];
-    _CNT_ = (cont *)&Double_Stack[STACK_SIZE - 1];
+    _CNT_ = (cont *)  &Double_Stack[STACK_SIZE - 1];
 }
 
 void initialize_Thread()
@@ -50,83 +47,53 @@ void initialize_Thread()
     init_Stack(STACK_SIZE);
 }
 
-
-Object current_env() { return Env; }
-
-/* ========================================================================== */
-
-#include <system/type/Symbol.c>
-#include <system/type/SmallInt.c>
-#include <system/type/Character.c>
-#include <system/type/Boolean.c>
-#include <system/type/String.c>
-#include <system/type/Array.c>
-#include <system/type/Dictionary.c>
-#include <system/type/Object.c>
-#include <system/type/Class.c>
-
-#include <system/io/File.c>
-
-#include <system/ast/Self.c>
-#include <system/ast/Super.c>
-#include <system/ast/Constant.c>
-#include <system/ast/Variable.c>
-#include <system/ast/Assign.c>
-#include <system/ast/Send.c>
-#include <system/ast/Method.c>
-#include <system/ast/NativeMethod.c>
-#include <system/ast/Continue.c>
-#include <system/ast/Callec.c>
-
-#include <system/runtime/Env.c>
-
 /* ========================================================================== */
 
 #include <pinocchio_helper.c>
 
 /* ========================================================================== */
 
-void send_Eval()
+void CNT_send_Eval()
 {
     zap_CNT();
     Object exp = peek_EXP(1);
 
-    Type_Class * class = (Type_Class *)HEADER(exp);
+    Type_Class class = (Type_Class)HEADER(exp);
     // TODO get rid of this switch and do a "double dispatch"
     if (class == Constant_Class) {
-        return AST_Constant_eval((AST_Constant *)exp);
+        return AST_Constant_eval((AST_Constant)exp);
     }
     if (class == Variable_Class) {
-        return AST_Variable_eval((AST_Variable *)exp);
+        return AST_Variable_eval((AST_Variable)exp);
     }
     if (class == Assign_Class) {
-        return AST_Assign_eval((AST_Assign *)exp);
+        return AST_Assign_eval((AST_Assign)exp);
     }
     if (class == Send_Class) {
-        return AST_Send_eval((AST_Send *)exp);
+        return AST_Send_eval((AST_Send)exp);
     }
     if (class == Self_Class) {
         return AST_Self_eval();
     }
     if (class == Super_Class) {
-        return AST_Super_eval((AST_Super *)exp);
+        return AST_Super_eval((AST_Super)exp);
     }
     /*if (class == Continue_Class) {
-        //return AST_Continue_eval((AST_Continue *)exp);
+        //return AST_Continue_eval((AST_Continue)exp);
     }*/
     if (class == Callec_Class) {
-        return AST_Callec_eval((AST_Callec *)exp);
+        return AST_Callec_eval((AST_Callec)exp);
     }
     
     /* TODO fallback by actually sending the eval message */
 
     printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a Constant?\n", 
-           ((Type_Class*)class)->name->value);
+           ((Type_Class)class)->name->value);
     assert(NULL);
 }
 
 
-void end_eval()
+void CNT_end_eval()
 {
     longjmp(Eval_Exit, 1);
 }
@@ -136,12 +103,11 @@ void end_eval()
  * we are at the end of the stack. It's only expensive for starting new
  * threads, and the boosts performance for longer living threads.
  */
-Object
-Eval(Object code)
+Object Eval(Object code)
 {
     push_EXP(code);
-    push_CNT(end_eval);
-    push_CNT(send_Eval);
+    push_CNT(CNT_end_eval);
+    push_CNT(CNT_send_Eval);
 
     if (!setjmp(Eval_Exit)) {
         setjmp(Eval_Continue);
@@ -155,15 +121,15 @@ Eval(Object code)
     return result;
 }
 
-Object EvalSendConst(Object self, Object symbol, Type_Array * args) 
+Object EvalSendConst(Object self, Object symbol, Type_Array args) 
 {
     return Eval((Object)new_Send((Object)self, symbol, args));
 }
 
 
-Object EvalSend(Object self, Object symbol, Type_Array * args) 
+Object EvalSend(Object self, Object symbol, Type_Array args) 
 {
-    AST_Constant * self_const = new_Constant(self);
+    AST_Constant self_const = new_Constant(self);
     int i;
     for (i=0; i<args->size->value; i++) {
         args->values[i] = (Object)new_Constant(args->values[i]);
@@ -183,13 +149,18 @@ Object EvalSend1(Object self, Object symbol, Object arg)
 
 /* ========================================================================== */
 
-#include <pinocchioTest.c>
+// #include <pinocchioTest.c>
 
 /* ========================================================================== */
 
+void pre_initialize_Type_SmallInt();
+void pre_initialize_Type_Boolean();
+void post_initialize_Type_Boolean();
+void post_initialize_Type_SmallInt();
+
 int main()
 {
-    Nil            = (Object) NEW(Type_Nil);
+    pre_initialize_Nil();
     
     pre_initialize_Object();
     pre_initialize_Type_SmallInt();
@@ -237,7 +208,9 @@ int main()
     post_initialize_Type_SmallInt();
     post_initialize_Variable();
     
+#ifdef TEST
     run_tests();
-
+#endif
+    
     return EXIT_SUCCESS;
 }

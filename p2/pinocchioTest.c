@@ -1,3 +1,6 @@
+#define TEST
+
+#include <pinocchio.c>
 
 #include <system/ast/AssignTest.c>
 #include <system/ast/CallecTest.c>

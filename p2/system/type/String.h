@@ -1,9 +1,15 @@
-extern Type_Class * String_Class;
+#ifndef STRING_H
+#define STRING_H
 
-extern Type_String * new_String(const wchar_t * str);
-
-/* ========================================================================== */
+#include <pinocchio.h>
 
 /* ========================================================================== */
 
 CREATE_INITIALIZERS(String)
+
+Type_String new_String(const wchar_t * str);
+
+/* ========================================================================== */
+
+
+#endif // STRING_H

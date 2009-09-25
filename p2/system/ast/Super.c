@@ -1,31 +1,37 @@
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <system/runtime/Env.h>
+#include <system/ast/Super.h>
 
-AST_Super *
-new_Super(Object message, Type_Array * arguments)
+/* ======================================================================== */
+
+extern AST_Super new_Super(Object message, Type_Array arguments)
 {
-    AST_Super * result = NEW(AST_Super);
+    AST_Super result = NEW_t(AST_Super);
     HEADER(result)     = (Object)Super_Class;
     result->message    = message;
     result->arguments  = arguments;
     return result;
 }
 
-void pre_initialize_Super()
+extern void pre_initialize_Super()
 {
     Super_Class = new_Named_Class((Object)Object_Class, L"Super");
 }
 
 /* =========================================================================*/
 
-void ast_super_send() 
+void CNT_AST_Super_send() 
 {
     LOGFUN;
     zap_CNT();
     Object class = pop_EXP();
     Object receiver = pop_EXP();
-    Type_Array * args = (Type_Array *)pop_EXP();
+    Type_Array args = (Type_Array)pop_EXP();
     
-    AST_Super * super   = (AST_Super *)peek_EXP(1);
+    AST_Super super   = (AST_Super)peek_EXP(1);
     // insert the receiver at the old ast_super position
     poke_EXP(1, receiver);
     
@@ -33,39 +39,39 @@ void ast_super_send()
                    super->message, args);
 }
 
-void push_env_class()
+void CNT_push_env_class()
 {
     zap_CNT();
-    Object env = current_env();
+    Object env = (Object)current_env();
     if (HEADER(env) != (Object)Env_Class) {
         assert(NULL);
     }
-    push_EXP(((Runtime_Env *)env)->class);
+    push_EXP(((Runtime_Env)env)->class);
 }
 
-void AST_Super_eval(AST_Super * super)
+extern void AST_Super_eval(AST_Super super)
 {
     LOGFUN;
-    Type_Array * args = new_Raw_Array(super->arguments->size->value);
+    Type_Array args = new_Raw_Array(super->arguments->size->value);
     // execute the method
-    push_CNT(ast_super_send);
-    push_CNT(Class_super);
-    push_CNT(push_env_class);
-    push_CNT(ast_self_eval);
+    push_CNT(CNT_AST_Super_send);
+    push_CNT(CNT_Class_super);
+    push_CNT(CNT_push_env_class);
+    push_CNT(CNT_AST_Self_eval);
     push_EXP(args);
     // evaluate the arguments
     int i;
     for (i = 0; i < super->arguments->size->value; i++) {
-        push_CNT(store_argument);
+        push_CNT(CNT_store_argument);
         push_EXP(args);
         push_EXP(new_SmallInt(i));
-        push_CNT(send_Eval);
+        push_CNT(CNT_send_Eval);
         push_EXP(super->arguments->values[i]);
     }
 }
 
 /* =========================================================================*/
 
-void post_initialize_Super()
+extern void post_initialize_Super()
 {
 }

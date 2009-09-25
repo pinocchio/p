@@ -1,8 +1,17 @@
 
-Runtime_Env *
-new_Env(Object parent, Object key, Type_Array * values)
+#include <stdlib.h>
+#include <stdio.h>
+#include <system/runtime/Env.h>
+
+/* ======================================================================== */
+
+Object Env;
+
+/* ======================================================================== */
+
+extern Runtime_Env new_Env(Object parent, Object key, Type_Array values)
 {
-    Runtime_Env * result    = NEW(Runtime_Env);
+    Runtime_Env result    = NEW_t(Runtime_Env);
     HEADER(result)          = (Object)Env_Class;
     result->parent          = parent;
     result->key             = key;
@@ -10,10 +19,9 @@ new_Env(Object parent, Object key, Type_Array * values)
     return result;
 }
 
-Runtime_Env *
-new_Env_Sized(Object parent, Object key, int size)
+extern Runtime_Env new_Env_Sized(Object parent, Object key, int size)
 {
-    Runtime_Env * result    = NEW(Runtime_Env);
+    Runtime_Env result    = NEW_t(Runtime_Env);
     HEADER(result)          = (Object)Env_Class;
     result->parent          = parent;
     result->key             = key;
@@ -21,18 +29,18 @@ new_Env_Sized(Object parent, Object key, int size)
     return result;
 }
 
-void pre_initialize_Env()
+extern void pre_initialize_Env()
 {
     Env_Class = new_Named_Class((Object)Object_Class, L"Env");
 }
 
 /* =========================================================================*/
 
-void Env_lookup(Runtime_Env * self, unsigned int index, Object key)
+extern void Env_lookup(Runtime_Env self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
-            self = (Runtime_Env *)self->parent;
+            self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
             assert(NULL);
@@ -50,12 +58,12 @@ void Env_lookup(Runtime_Env * self, unsigned int index, Object key)
     push_EXP(self->values->values[index]);
 }
 
-void Env_assign(Runtime_Env * self, unsigned int index,
+extern void Env_assign(Runtime_Env self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Env_Class) {
-            self = (Runtime_Env *)self->parent;
+            self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
             assert(NULL);
@@ -73,16 +81,20 @@ void Env_assign(Runtime_Env * self, unsigned int index,
     self->values->values[index] = value;
 }
 
-void push_restore_env()
+extern void push_restore_env()
 {
     push_CNT(restore_env);
     poke_EXP(1, current_env());
 }
 
+extern Runtime_Env current_env()
+{
+    return (Runtime_Env) Env;
+}
 
 /* =========================================================================*/
 
-void post_initialize_Env()
+extern void post_initialize_Env()
 {
     Env = (Object)new_Env_Sized(Nil, Nil, 0);
 }

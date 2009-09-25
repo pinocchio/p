@@ -20,13 +20,13 @@ void test_SmallInt_equals_()
 #define SMALLINT_BINOP_TEST(name, op) \
 void test_SmallInt_##name##_() \
 { \
-    Type_SmallInt * int4 = new_SmallInt(4); \
-    Type_SmallInt * int8 = new_SmallInt(8); \
+    Type_SmallInt int4 = new_SmallInt(4); \
+    Type_SmallInt int8 = new_SmallInt(8); \
     Object result; \
     result = EvalSend1((Object)int4, SMB_##name##_, (Object)int8); \
     ASSERT_TYPE(result, SmallInt_Class); \
-    printf("%i\n", ((Type_SmallInt *)result)->value); \
-    assert(((Type_SmallInt *)result)->value == (int4->value op int8->value)); \
+    printf("%i\n", ((Type_SmallInt)result)->value); \
+    assert(((Type_SmallInt)result)->value == (int4->value op int8->value)); \
 
 
 SMALLINT_BINOP_TEST(plus,       +)

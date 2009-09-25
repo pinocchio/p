@@ -1,22 +1,28 @@
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <system/ast/Constant.h>
 
-AST_Constant *
-new_Constant(Object constant)
+/* ========================================================================== */
+
+/* ======================================================================== */
+
+extern AST_Constant new_Constant(Object constant)
 {
-    AST_Constant * result = NEW(AST_Constant);
+    AST_Constant   result = NEW_t(AST_Constant);
     HEADER(result)        = (Object)Constant_Class;
     result->constant      = constant;
     return result;
 }
 
-void pre_initialize_Constant()
+extern void pre_initialize_Constant()
 {
     Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
 }
 
 /* ======================================================================== */
 
-void AST_Constant_eval(AST_Constant * self)
+extern void AST_Constant_eval(AST_Constant self)
 {
     poke_EXP(1, self->constant);
 }
@@ -24,7 +30,7 @@ void AST_Constant_eval(AST_Constant * self)
 /* ======================================================================== */
 
 
-void post_initialize_Constant()
+extern void post_initialize_Constant()
 {
 
 }

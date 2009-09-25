@@ -2,7 +2,7 @@ void test_Dictionary_ObjectAt_()
 {
     Object integer         = (Object)new_SmallInt(10);
     Object integer2        = (Object)new_SmallInt(2);
-    Type_Dictionary * dict = new_Dictionary();
+    Type_Dictionary dict = new_Dictionary();
     // fill the dictionary
     int i=0;
     for (i=0; i<100; ++i) {
@@ -11,7 +11,7 @@ void test_Dictionary_ObjectAt_()
     }
     Dictionary_store_(dict, (Object)new_SmallInt(4), integer2);
     
-    Type_Array * args      = new_Raw_Array(1);
+    Type_Array args      = new_Raw_Array(1);
     for (i=0; i<100; i++) {
         if (i==4) { continue; }
         Object key = (Object)new_SmallInt(i);
@@ -35,14 +35,14 @@ void test_Dictionary_ObjectAt_put()
     Object integer0        = (Object)new_SmallInt(0);
     Object integer1        = (Object)new_SmallInt(1);
     Object integer2        = (Object)new_SmallInt(2);
-    Type_Dictionary * dict = new_Dictionary();
+    Type_Dictionary dict = new_Dictionary();
     // fill the dictionary
     int i=0;
     for (i=0; i<100; ++i) {
         Object key = (Object)new_SmallInt(i);
         Dictionary_store_(dict, key, integer);
     }
-    Type_Array * args  = new_Array_With(2, (Object)integer1);
+    Type_Array args  = new_Array_With(2, (Object)integer1);
     args->values[0] = integer0; 
     
     result = EvalSend((Object)dict,SMB_objectAt_put_, args);
