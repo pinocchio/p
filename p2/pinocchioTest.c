@@ -27,7 +27,7 @@
 
 /* ========================================================================== */
 
-void run_tests()
+extern void run_tests()
 {
     test_Array();
     test_Assign();

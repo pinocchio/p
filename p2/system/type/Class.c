@@ -9,7 +9,6 @@
 //Type_Class Class_Class
 //Type_Class MetaClass_Class;
 
-
 /* ======================================================================== */
 
 extern Type_Class new_Class(Object superclass)
@@ -101,7 +100,6 @@ extern void Class_dispatch(InlineCache * cache, Object self, Object class,
            ((Type_Symbol)msg)->value);
     assert(NULL);
 }
-
 
 /* ======================================================================== */
 

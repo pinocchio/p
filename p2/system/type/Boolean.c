@@ -4,11 +4,14 @@
 #include <system/type/Boolean.h>
 
 /* ======================================================================== */
+
 AST_Constant False_Const;
 Type_Boolean False;
 
 AST_Constant True_Const;
 Type_Boolean True;
+
+/* ======================================================================== */
 
 extern void pre_initialize_Type_False() {
     False_Class = new_Named_Class((Object)Boolean_Class, L"False");

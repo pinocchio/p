@@ -5,8 +5,6 @@
 
 /* ======================================================================== */
 
-/* ======================================================================== */
-
 extern AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
 {
     AST_Send result = NEW_t(AST_Send);

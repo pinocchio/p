@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <system/ast/Constant.h>
 
-/* ========================================================================== */
-
 /* ======================================================================== */
 
 extern AST_Constant new_Constant(Object constant)

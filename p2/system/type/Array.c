@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include <system/type/Array.h>
+
 /* ======================================================================== */
 
 Type_Array Empty_Array;

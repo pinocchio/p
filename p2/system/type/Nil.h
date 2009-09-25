@@ -11,4 +11,5 @@ extern Object Nil;
 CREATE_INITIALIZERS(Nil)
 
 /* ========================================================================== */
+
 #endif // NIL_H

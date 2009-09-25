@@ -100,6 +100,7 @@ extern jmp_buf Eval_Continue;
 
 #define TYPE(name) typedef struct name##_##t * name;
 
+// TODO move these definitions into the files
 TYPE(Type_Character);
 TYPE(Type_SmallInt);
 TYPE(Type_Object);
@@ -161,18 +162,19 @@ extern Type_Class Object_Class;
 
 #include <system/runtime/Env.h>
 
-/* ========================================================================== */
+/* ======================================================================== */
 
 extern void CNT_send_Eval();
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
 
-/* ========================================================================== */
+/* ======================================================================== */
 
 extern Object EvalSendConst(Object self, Object symbol, Type_Array args);
 extern Object EvalSend(Object self, Object symbol, Type_Array args);
 extern Object EvalSend0(Object self, Object symbol);
 extern Object EvalSend1(Object self, Object symbol, Object arg);
 
-/* ========================================================================== */
+/* ======================================================================== */
+
 #endif // PINOCCHIO_H

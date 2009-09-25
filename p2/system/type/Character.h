@@ -20,6 +20,4 @@ Type_Character new_Character(wchar_t value);
 
 /* ========================================================================== */
 
-
-
 #endif // CHARACTER_H
