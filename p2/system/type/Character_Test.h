@@ -1,6 +1,0 @@
-#ifndef CHARACTER_TEST_H
-#define CHARACTER_TEST_H
-
-
-
-#endif // CHARACTER_TEST_H
