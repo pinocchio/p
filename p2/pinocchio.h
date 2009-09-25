@@ -33,7 +33,10 @@
 
 /* ======================================================================== */
 
-#define CREATE_INITIALIZERS(class) extern void pre_initialize##_##class(); void post_initialize##_##class(); Type_Class class##_Class;
+#define CREATE_INITIALIZERS(class) \
+extern void pre_initialize##_##class(); \
+extern void post_initialize##_##class(); \
+extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size->value < size_value || args->size->value > size_value) {\
