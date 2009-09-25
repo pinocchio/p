@@ -6,6 +6,8 @@
 /* ======================================================================== */
 
 Type_Class Boolean_Class;
+Type_Class True_Class;
+Type_Class False_Class;
 
 AST_Constant False_Const;
 Type_Boolean False;
