@@ -1,4 +1,5 @@
 #include <pinocchio.h>
+#include <pinocchioTest.h>
 
 #include <system/ast/AssignTest.ci>
 #include <system/ast/CallecTest.ci>

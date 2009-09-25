@@ -13,6 +13,7 @@ struct Type_Symbol_t {
 
 CREATE_INITIALIZERS(Symbol)
 extern Type_Symbol new_Symbol(const wchar_t* name);
+extern void install_symbol_methods(Type_Class class);
 
 /* ========================================================================== */
 

@@ -18,8 +18,9 @@ Type_String new_String(const wchar_t * str)
     return string;
 }
 
-extern void pre_initialize_String()
+void pre_initialize_String()
 {
+    // TODO fix inheritence bug here
     String_Class = new_Named_Class((Object)Symbol_Class, L"String");
 }
 
@@ -42,8 +43,8 @@ void String_toSymbol()
 
 /* =========================================================================*/
 
-extern void post_initialize_String()
+void post_initialize_String()
 {
-    // TODO implement
+    install_symbol_methods(String_Class);
 }
 

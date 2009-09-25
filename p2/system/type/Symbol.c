@@ -156,8 +156,13 @@ void initialize_Symbol_Table()
 void post_initialize_Symbol()
 {
     initialize_Symbol_Table();
-    store_native_method(Symbol_Class, SMB_objectAt_, NM_Symbol_objectAt_);
-    store_native_method(Symbol_Class, SMB_asString,  NM_Symbol_asString);
-    store_native_method(Symbol_Class, SMB_size,      NM_Symbol_size);
-    store_native_method(Symbol_Class, SMB_asArray,   NM_Symbol_asArray);
+    install_symbol_methods(Symbol_Class);
+}
+
+void install_symbol_methods(Type_Class class)
+{
+    store_native_method(class, SMB_objectAt_, NM_Symbol_objectAt_);
+    store_native_method(class, SMB_asString,  NM_Symbol_asString);
+    store_native_method(class, SMB_size,      NM_Symbol_size);
+    store_native_method(class, SMB_asArray,   NM_Symbol_asArray);
 }
