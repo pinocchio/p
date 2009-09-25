@@ -1,27 +1,27 @@
 #include <pinocchio.h>
 
-#include <system/ast/AssignTest.c>
-#include <system/ast/CallecTest.c>
-#include <system/ast/ConstantTest.c>
-#include <system/ast/ContinueTest.c>
-#include <system/ast/MethodTest.c>
-#include <system/ast/NativeMethodTest.c>
-#include <system/ast/SelfTest.c>
-#include <system/ast/SendTest.c>
-#include <system/ast/SuperTest.c>
-#include <system/ast/VariableTest.c>
-#include <system/io/FileTest.c>
-#include <system/runtime/EnvTest.c>
-#include <system/runtime/ThreadTest.c>
-#include <system/type/ArrayTest.c>
-#include <system/type/BooleanTest.c>
-#include <system/type/CharacterTest.c>
-#include <system/type/ClassTest.c>
-#include <system/type/DictionaryTest.c>
-#include <system/type/ObjectTest.c>
-#include <system/type/SmallIntTest.c>
-#include <system/type/StringTest.c>
-#include <system/type/SymbolTest.c>
+#include <system/ast/AssignTest.ci>
+#include <system/ast/CallecTest.ci>
+#include <system/ast/ConstantTest.ci>
+#include <system/ast/ContinueTest.ci>
+#include <system/ast/MethodTest.ci>
+#include <system/ast/NativeMethodTest.ci>
+#include <system/ast/SelfTest.ci>
+#include <system/ast/SendTest.ci>
+#include <system/ast/SuperTest.ci>
+#include <system/ast/VariableTest.ci>
+#include <system/io/FileTest.ci>
+#include <system/runtime/EnvTest.ci>
+#include <system/runtime/ThreadTest.ci>
+#include <system/type/ArrayTest.ci>
+#include <system/type/BooleanTest.ci>
+#include <system/type/CharacterTest.ci>
+#include <system/type/ClassTest.ci>
+#include <system/type/DictionaryTest.ci>
+#include <system/type/ObjectTest.ci>
+#include <system/type/SmallIntTest.ci>
+#include <system/type/StringTest.ci>
+#include <system/type/SymbolTest.ci>
 
 /* ========================================================================== */
 
