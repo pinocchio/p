@@ -84,7 +84,7 @@ extern void Env_assign(Runtime_Env self, unsigned int index,
 
 extern void push_restore_env()
 {
-    push_CNT(restore_env);
+    push_CNT(CNT_restore_env);
     poke_EXP(1, current_env());
 }
 

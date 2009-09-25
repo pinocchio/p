@@ -28,7 +28,7 @@ void continue_eval()
 }
 
 
-void restore_env()
+void CNT_restore_env()
 {
     zap_CNT();
     Object result = pop_EXP();
