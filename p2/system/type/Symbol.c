@@ -135,6 +135,7 @@ Type_Symbol Symbol_concat_(Type_Symbol symbol, Type_Symbol string)
 
 NATIVE1(NM_Symbol_concat_)
     // TODO ooptimization possible
+    // TODO Don't use EvalSend as currently implemented!
     Type_String string = (Type_String)EvalSend0(args->values[0], SMB_asString);
     ASSERT_TYPE(string, String_Class);
     push_EXP(Symbol_concat_((Type_Symbol)self, (Type_Symbol)string));

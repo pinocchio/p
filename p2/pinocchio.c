@@ -94,21 +94,30 @@ void CNT_end_eval()
  * we are at the end of the stack. It's only expensive for starting new
  * threads, and the boosts performance for longer living threads.
  */
+int IN_EVAL = 0;
+
 Object Eval(Object code)
 {
+    if (IN_EVAL) {
+        printf("Re-entering evaluation thread!\n");
+        assert(NULL);
+    }
+
     push_EXP(code);
     push_CNT(CNT_end_eval);
     push_CNT(CNT_send_Eval);
 
     if (!setjmp(Eval_Exit)) {
+        IN_EVAL = 1;
         setjmp(Eval_Continue);
         for (;;) {
             peek_CNT(1)();
         }
     }
-    
+
     zap_CNT();
     Object result = pop_EXP();
+    IN_EVAL = 0;
     return result;
 }
 
