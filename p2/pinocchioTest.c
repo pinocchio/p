@@ -26,6 +26,34 @@
 
 /* ========================================================================== */
 
+Object EvalSendConst(Object self, Object symbol, Type_Array args) 
+{
+    return Eval((Object)new_Send((Object)self, symbol, args));
+}
+
+
+Object EvalSend(Object self, Object symbol, Type_Array args) 
+{
+    AST_Constant self_const = new_Constant(self);
+    int i;
+    for (i=0; i<args->size->value; i++) {
+        args->values[i] = (Object)new_Constant(args->values[i]);
+    }
+    return EvalSendConst((Object)self_const, symbol, args);
+}
+
+Object EvalSend0(Object self, Object symbol)
+{
+    return EvalSend(self, symbol, Empty_Array);
+}
+
+Object EvalSend1(Object self, Object symbol, Object arg)
+{
+    return EvalSend(self, symbol, new_Array_With(1, arg));
+}
+
+/* ========================================================================== */
+
 void run_tests()
 {
     test_Array();

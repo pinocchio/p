@@ -26,10 +26,10 @@ void pre_initialize_Send()
 
 /* =========================================================================*/
 
-void AST_Send_send()
+void CNT_AST_Send_send()
 {
     zap_CNT();
-    Object receiver   = pop_EXP();
+    Object receiver = pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
     
     AST_Send self   = (AST_Send)peek_EXP(1);
@@ -37,7 +37,7 @@ void AST_Send_send()
     poke_EXP(1, receiver);
     
     Class_dispatch(&self->cache, receiver, HEADER(receiver),
-                   self->message, args);
+                    self->message, args);
 }
 
 void CNT_store_argument()
@@ -57,7 +57,7 @@ void AST_Send_eval(AST_Send self)
     LOGFUN;
     Type_Array args = new_Raw_Array(self->arguments->size->value);
     // execute the method
-    push_CNT(AST_Send_send);
+    push_CNT(CNT_AST_Send_send);
     push_EXP(args);
     // evaluate the receiver
     push_CNT(CNT_send_Eval);

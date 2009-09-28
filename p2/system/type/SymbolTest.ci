@@ -32,11 +32,6 @@ void test_Symbol_asString()
     ASSERT_TYPE(result, String_Class);
 }
 
-void test_Symbol_concat()
-{
-    //SYMBOL_TEST_SETUP;
-}
-
 void test_Symbol_indexOf()
 {
     //SYMBOL_TEST_SETUP;

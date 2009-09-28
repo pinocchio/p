@@ -49,6 +49,7 @@ void initialize_Symbol()
     SMB_asSymbol        = (Object)new_Symbol(L"asSymbol");
     SMB_at_in_          = (Object)new_Symbol(L"at:in:");
     SMB_and_            = (Object)new_Symbol(L"and:");
+    SMB_concat_         = (Object)new_Symbol(L"concat:");
     SMB_equals_         = (Object)new_Symbol(L"equals:");
     SMB_eval            = (Object)new_Symbol(L"eval");
     SMB_eval_           = (Object)new_Symbol(L"eval:");
@@ -116,29 +117,6 @@ NATIVE0(NM_Symbol_hash)
 
 NATIVE0(NM_Symbol_size)
     push_EXP(((Type_Symbol)self)->size);
-}
-
-
-Type_Symbol Symbol_concat_(Type_Symbol symbol, Type_Symbol string)
-{
-    int len = symbol->size->value + string->size->value;
-    wchar_t* concated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
-    int i, j;
-    for (i=0; i<symbol->size->value; i++) {
-        concated[i] = symbol->value[i];
-    }
-    for (j=0; i<string->size->value; j++) {
-        concated[i+j] = string->value[i];
-    } 
-    return new_Symbol(concated);
-}
-
-NATIVE1(NM_Symbol_concat_)
-    // TODO ooptimization possible
-    // TODO Don't use EvalSend as currently implemented!
-    Type_String string = (Type_String)EvalSend0(args->values[0], SMB_asString);
-    ASSERT_TYPE(string, String_Class);
-    push_EXP(Symbol_concat_((Type_Symbol)self, (Type_Symbol)string));
 }
 
 NATIVE1(NM_Symbol_indexOf_)

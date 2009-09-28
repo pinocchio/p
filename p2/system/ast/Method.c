@@ -40,7 +40,7 @@ void CNT_AST_Method_continue()
 }
 
 void AST_Method_invoke(AST_Method method, Object self,
-                              Object class, Type_Array args)
+                       Object class, Type_Array args)
 {
     push_restore_env();
     
