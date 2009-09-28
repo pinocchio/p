@@ -115,6 +115,7 @@ TYPE(AST_Constant);
 TYPE(AST_Self);
 TYPE(AST_Super);
 TYPE(AST_Continue);
+TYPE(AST_Block);
 TYPE(AST_Callec);
 TYPE(AST_Variable);
 TYPE(AST_Send);
@@ -155,6 +156,7 @@ extern Type_Class Object_Class;
 #include <system/ast/Variable.h>
 #include <system/ast/Assign.h>
 #include <system/ast/Send.h>
+#include <system/ast/Block.h>
 #include <system/ast/Method.h>
 #include <system/ast/NativeMethod.h>
 #include <system/ast/Continue.h>
@@ -167,6 +169,7 @@ extern Type_Class Object_Class;
 extern void CNT_send_Eval();
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
+extern void store_method(Type_Class class, Object symbol, Object method);
 
 /* ======================================================================== */
 

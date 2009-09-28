@@ -89,7 +89,7 @@ void CNT_end_eval()
     longjmp(Eval_Exit, 1);
 }
 
-/*
+/**
  * setjmp and longjmp have an overhead but they allow us to avoid testing if
  * we are at the end of the stack. It's only expensive for starting new
  * threads, and the boosts performance for longer living threads.

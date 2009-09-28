@@ -67,6 +67,7 @@ void AST_Method_invoke(AST_Method method, Object self,
 }
 
 NATIVE(NM_AST_Method_eval)
+    /* FIXME self should be bound to the block */
     AST_Method_invoke((AST_Method) self, self, class, args);
 }
 
