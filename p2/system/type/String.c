@@ -57,7 +57,7 @@ NATIVE1(NM_String_concat_)
 }
 
 NATIVE0(NM_String_asString)
-    push_EXP(self);
+    // self is per default on the stack
 }
 
 NATIVE0(NM_String_asSymbol)
