@@ -121,6 +121,7 @@ Object Eval(Object code)
     return result;
 }
 
+/* FIXME fix these functions! They shouldn't call Eval! */
 Object EvalSendConst(Object self, Object symbol, Type_Array args) 
 {
     return Eval((Object)new_Send((Object)self, symbol, args));
