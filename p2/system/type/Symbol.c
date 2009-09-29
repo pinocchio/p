@@ -39,6 +39,7 @@ Type_Symbol new_Symbol(const wchar_t* name)
 void pre_initialize_Symbol()
 {
     Symbol_Class = new_Named_Class((Object)Object_Class, L"Symbol");
+    initialize_Symbol();
 }
 
 /* ========================================================================== */
@@ -112,7 +113,6 @@ void initialize_Symbol()
 
 void post_initialize_Symbol()
 {
-    initialize_Symbol();
     initialize_Symbol_Table();
     install_symbol_methods(Symbol_Class);
 }
