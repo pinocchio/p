@@ -44,19 +44,19 @@ Object EvalSend(Object self, Object symbol, Type_Array args)
 
 Object EvalSend0(Object self, Object symbol)
 {
-    return EvalSend(self, symbol, Empty_Array);
+    return EvalSend(self, symbol, Empty_Type_Array);
 }
 
 Object EvalSend1(Object self, Object symbol, Object arg)
 {
-    return EvalSend(self, symbol, new_Array_With(1, arg));
+    return EvalSend(self, symbol, new_Type_Array_With(1, arg));
 }
 
 /* ========================================================================== */
 
 void run_tests()
 {
-    test_Array();
+    test_Type_Array();
     test_Assign();
     test_Type_Boolean();
     test_Callec();

@@ -56,7 +56,7 @@ void CNT_push_env_class()
 void AST_Super_eval(AST_Super super)
 {
     LOGFUN;
-    Type_Array args = new_Raw_Array(super->arguments->size->value);
+    Type_Array args = new_Raw_Type_Array(super->arguments->size->value);
     // execute the method
     push_CNT(CNT_AST_Super_send);
     push_CNT(CNT_Type_Class_super);

@@ -1,5 +1,5 @@
 Object SMB_apply_;
-Object SMB_asArray;
+Object SMB_asType_Array;
 Object SMB_asType_SmallInt;
 Object SMB_asString;
 Object SMB_asSymbol;

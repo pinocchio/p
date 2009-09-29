@@ -52,7 +52,7 @@ NATIVE1(NM_Type_String_concat_)
     push_CNT(CNT_Type_String_concat_);
     push_CNT(CNT_send_Eval);
     // TODO create a expanded send  
-    push_EXP(new_Send((Object)new_Constant(args->values[0]), SMB_asString, Empty_Array));
+    push_EXP(new_Send((Object)new_Constant(args->values[0]), SMB_asString, Empty_Type_Array));
 }
 
 NATIVE0(NM_Type_String_asString)

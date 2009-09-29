@@ -27,7 +27,7 @@ Runtime_Env new_Env_Sized(Object parent, Object key, int size)
     HEADER(result)          = (Object)Env_Type_Class;
     result->parent          = parent;
     result->key             = key;
-    result->values          = new_Array_With(size, Nil);
+    result->values          = new_Type_Array_With(size, Nil);
     return result;
 }
 

@@ -7,17 +7,17 @@ void test_ast_super()
     AST_Constant integer7_const = new_Constant((Object)integer7);
     
     Type_Symbol test  = new_Type_Symbol(L"test");
-    Type_Array body   = new_Array_With(3, (Object)integer7_const);
-    body->values[2]     = (Object)new_Super((Object)test, new_Raw_Array(0));
+    Type_Array body   = new_Type_Array_With(3, (Object)integer7_const);
+    body->values[2]     = (Object)new_Super((Object)test, new_Raw_Type_Array(0));
     AST_Method method = new_Method(0, body);
     store_method(True_Type_Class, (Object)test, (Object)method);
     
-    body             = new_Array_With(3, (Object)integer7_const);
+    body             = new_Type_Array_With(3, (Object)integer7_const);
     body->values[2]  = (Object)integer_const;
     method = new_Method(0, body);
     store_method(Type_Boolean_Type_Class, (Object)test, (Object)method);
     
-    Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Array(0)));
+    Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Type_Array(0)));
     assert(result == (Object)integer);
 }
 

@@ -53,11 +53,11 @@ void test_Type_Symbol_Type_ObjectAt_()
     }
 }
 
-void test_Type_Symbol_asArray()
+void test_Type_Symbol_asType_Array()
 {
     SYMBOL_TEST_SETUP;
-    result = EvalSend0((Object)symbol,SMB_asArray);
-    ASSERT_TYPE(result, Array_Type_Class);
+    result = EvalSend0((Object)symbol,SMB_asType_Array);
+    ASSERT_TYPE(result, Type_Array_Type_Class);
     int i;
     Object item;
     for (i= 0; i<symbol->size->value; ++i) {
@@ -75,5 +75,5 @@ void test_Type_Symbol()
     test_Type_Symbol_size();
     test_Type_Symbol_asString();
     test_Type_Symbol_Type_ObjectAt_();
-    test_Type_Symbol_asArray();
+    test_Type_Symbol_asType_Array();
 }

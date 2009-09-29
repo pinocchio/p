@@ -62,10 +62,10 @@ NATIVE0(NM_Type_Symbol_asString)
     push_EXP(new_Type_String(((Type_Symbol)self)->value));
 }
 
-Type_Array Type_Symbol_asArray(Type_Symbol symbol)
+Type_Array Type_Symbol_asType_Array(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
-    Type_Array array = new_Raw_Array(self_symbol->size->value);
+    Type_Array array = new_Raw_Type_Array(self_symbol->size->value);
     int i;
     for (i=0; i<self_symbol->size->value; i++) {
         array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
@@ -73,8 +73,8 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
     return array;
 }
 
-NATIVE0(NM_Type_Symbol_asArray)
-    push_EXP(Type_Symbol_asArray((Type_Symbol)self));
+NATIVE0(NM_Type_Symbol_asType_Array)
+    push_EXP(Type_Symbol_asType_Array((Type_Symbol)self));
 }
 
 
@@ -125,5 +125,5 @@ void install_symbol_methods(Type_Class class)
     store_native_method(class, SMB_Type_ObjectAt_, NM_Type_Symbol_Type_ObjectAt_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
-    store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
+    store_native_method(class, SMB_asType_Array,   NM_Type_Symbol_asType_Array);
 }
