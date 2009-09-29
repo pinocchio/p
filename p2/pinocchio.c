@@ -117,8 +117,8 @@ Object Eval(Object code)
 
 int main()
 {
-	#include <pinocchioPreInitializer.ci>
-	#include <pinocchioPostInitializer.ci>
+	#include <pinocchioPreInit.ci>
+	#include <pinocchioPostInit.ci>
 
     initialize_Thread();
     
