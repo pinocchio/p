@@ -8,12 +8,12 @@ void test_method_evaluation()
     Type_SmallInt integer7 = new_Type_SmallInt(7);
     Object integer7_const    = (Object)new_AST_Constant((Object)integer7);
     
-    Object result = Eval((Object)new_AST_Send(method_const, SMB_eval, Empty_Type_Array));
+    Object result = Eval_AST_Send0(method_const, SMB_eval);
     assert(result == (Object)method);
     
     // with one body element ---------------------------------------------------
     method->body = new_Type_Array_With(1, integer_const);
-    result       = Eval((Object)new_AST_Send(method_const, SMB_eval, Empty_Type_Array));
+    result       = Eval_AST_Send0(method_const, SMB_eval);
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
     
@@ -25,7 +25,7 @@ void test_method_evaluation()
     var->key = (Object)method;
     var->index = 0;
     
-    result       = Eval_AST_Send(method_const, SMB_eval_, integer_const);
+    result       = Eval_AST_Send1(method_const, SMB_eval_, integer_const);
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
 }
@@ -43,8 +43,7 @@ void test_method_invocation_with_arguments()
     Type_SmallInt integer      = new_Type_SmallInt(120);
     AST_Constant integer_const = new_AST_Constant((Object)integer);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Type_Array args = new_Type_Array_With(1, (Object)integer_const);
-    Object result     = Eval((Object)new_AST_Send((Object)integer_const, (Object)test, args));
+    Object result     = Eval_AST_Send1((Object)integer_const, (Object)test, integer_const);
     assert(result == (Object)integer);
 }
 

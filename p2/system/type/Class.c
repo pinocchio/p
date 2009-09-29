@@ -86,8 +86,15 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
         Type_Dictionary mdict = ((Type_Class) class)->methods;
         method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
-            class = ((Type_Class) class)->super;
-			LOG("Parent Lookup continueing in  \"%ls\"\n", ((Type_Class)class)->name->value);
+            Type_Class super = ((Type_Class) class)->super;
+			if (class == super) {
+				printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
+							((Type_Class)class)->name->value,
+							((Type_Symbol)msg)->value);
+				assert(class != super);
+			}
+			class = super;
+			LOG("Parent Lookup continueing in \"%ls\"\n", ((Type_Class)class)->name->value);
         } else {
             cache->type   = class;
             cache->method = method;
