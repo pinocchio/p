@@ -9,14 +9,13 @@ Type_Class Character_Class;
 
 /* ======================================================================== */
 
-Type_Character * Character_table;
+Type_CharacterTable Character_table;
 
 Type_Character new_raw_Character(wchar_t value)
 {
     Type_Character result = NEW_t(Type_Character);
     HEADER(result)        = (Object)Character_Class;
     result->value         = value;
-    // TODO add character table here for caching
     return result;
 }
 
@@ -24,7 +23,7 @@ Type_Character new_raw_Character(wchar_t value)
 Type_Character new_Character(wchar_t value)
 {
     if (value < CHARACTER_TABLE_SIZE) {
-        return Character_table[value];
+        return Character_table->chars[value];
     }
     return new_raw_Character(value);
 }
@@ -60,10 +59,12 @@ NATIVE0(NM_Character_asSmallInt)
 
 void initialize_Character_Table()
 {
-    Character_table = (Type_Character *)PALLOC(sizeof(struct Type_Character_t[CHARACTER_TABLE_SIZE]));
+    Character_table = NEW_ARRAYED(
+            struct Type_CharacterTable_t,
+            Type_Character[CHARACTER_TABLE_SIZE]);
     int i;
     for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
-        Character_table[i] = new_raw_Character(i);
+        Character_table->chars[i] = new_raw_Character(i);
     }
 }
 

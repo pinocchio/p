@@ -20,3 +20,4 @@ TYPE(AST_Native_Method);
 TYPE(AST_Method);
 TYPE(AST_Info);
 TYPE(Runtime_Env);
+TYPE(Type_CharacterTable);
