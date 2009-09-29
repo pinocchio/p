@@ -99,7 +99,7 @@ void Method_invoke(Object method, Object self,
 
 void post_init_Method()
 {
-    store_native_method((Type_Class)Method_Class,SMB_eval, NM_AST_Method_eval);
+    store_native_method((Type_Class)Method_Class, SMB_eval, NM_AST_Method_eval);
     // TODO for now accecpt any number of arguments
-    store_native_method((Type_Class)Method_Class,SMB_eval_, NM_AST_Method_eval_);
+    store_native_method((Type_Class)Method_Class, SMB_eval_, NM_AST_Method_eval_);
 }

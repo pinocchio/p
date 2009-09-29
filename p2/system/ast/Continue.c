@@ -40,5 +40,5 @@ NATIVE1(NM_AST_Continue_eval)
 
 void post_init_AST_Continue()
 {
-    store_native_method(AST_Continue_Class,SMB_eval, NM_AST_Continue_eval);
+    store_native_method(AST_Continue_Class, SMB_eval, NM_AST_Continue_eval);
 }

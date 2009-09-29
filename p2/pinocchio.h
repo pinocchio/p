@@ -49,7 +49,7 @@ extern Type_Class class##_Class;
 #define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)));
 
 #define ASSERT_EQUALS(exp1, exp2) \
-assert(Eval_AST_Send((Object)(exp1),SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
+assert(Eval_AST_Send((Object)(exp1), SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ======================================================================== */
 

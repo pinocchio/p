@@ -25,8 +25,7 @@ void test_method_evaluation()
     var->key = (Object)method;
     var->index = 0;
     
-    result       = Eval((Object)new_AST_Send(method_const,SMB_eval_, 
-                                         new_Type_Array_With(1, (Object)integer_const)));
+    result       = Eval_AST_Send(method_const, SMB_eval_, integer_const);
     //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
 }

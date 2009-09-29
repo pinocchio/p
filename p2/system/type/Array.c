@@ -79,7 +79,7 @@ void post_init_Type_Array()
 {
     Empty_Type_Array->size   = new_Type_SmallInt(0);
     
-    store_native_method(Type_Array_Class,SMB_Type_ObjectAt_,     NM_Type_Array_Type_ObjectAt_);
-    store_native_method(Type_Array_Class,SMB_Type_ObjectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
-    store_native_method(Type_Array_Class,SMB_size,          NM_Type_Array_size);
+    store_native_method(Type_Array_Class, SMB_Type_ObjectAt_,     NM_Type_Array_Type_ObjectAt_);
+    store_native_method(Type_Array_Class, SMB_Type_ObjectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
+    store_native_method(Type_Array_Class, SMB_size,          NM_Type_Array_size);
 }

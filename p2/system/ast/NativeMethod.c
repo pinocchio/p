@@ -46,8 +46,8 @@ NATIVE(NM_AST_Native_Method_eval_)
 
 void post_init_AST_Native_Method()
 {
-    store_native_method((Type_Class)AST_Native_Method_Class,SMB_eval, NM_AST_Native_Method_eval);
+    store_native_method((Type_Class)AST_Native_Method_Class, SMB_eval, NM_AST_Native_Method_eval);
     // TODO for now accecpt any number of arguments
-    store_native_method((Type_Class)AST_Native_Method_Class,SMB_eval_, NM_AST_Native_Method_eval_);
+    store_native_method((Type_Class)AST_Native_Method_Class, SMB_eval_, NM_AST_Native_Method_eval_);
 };
 

@@ -2,16 +2,16 @@ void test_boolean_equals()
 {
     Object result;
     
-    result = Eval_AST_Send((Object)True,SMB_equals_, new_Type_Array_With(1, (Object)True));
+    result = Eval_AST_Send((Object)True, SMB_equals_, new_Type_Array_With(1, (Object)True));
     assert(result == (Object)True);
     
-    result = Eval_AST_Send((Object)True,SMB_equals_, new_Type_Array_With(1, (Object)False));
+    result = Eval_AST_Send((Object)True, SMB_equals_, new_Type_Array_With(1, (Object)False));
     assert(result == (Object)False);
     
-    result = Eval_AST_Send((Object)False,SMB_equals_, new_Type_Array_With(1, (Object)True));
+    result = Eval_AST_Send((Object)False, SMB_equals_, new_Type_Array_With(1, (Object)True));
     assert(result == (Object)False);
     
-    result = Eval_AST_Send((Object)False,SMB_equals_, new_Type_Array_With(1, (Object)False));
+    result = Eval_AST_Send((Object)False, SMB_equals_, new_Type_Array_With(1, (Object)False));
     assert(result == (Object)True);
 }
 
