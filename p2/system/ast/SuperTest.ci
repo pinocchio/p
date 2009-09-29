@@ -26,5 +26,5 @@ void test_ast_super()
 
 void test_AST_Super()
 {
-    test_ast_super();
+    RUN_TEST(ast_super);
 }

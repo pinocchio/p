@@ -17,6 +17,5 @@ void test_ast_self()
 
 void test_AST_Self()
 {
-    LOG(" SELF TEST ---------------------------------------------------");
-    test_ast_self();
+    RUN_TEST(ast_self);
 }

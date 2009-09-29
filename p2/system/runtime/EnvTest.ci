@@ -13,5 +13,5 @@ void test_variable_lookup()
 
 void test_Runtime_Env()
 {
-    test_variable_lookup();
+    RUN_TEST(variable_lookup);
 }
