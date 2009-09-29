@@ -126,4 +126,8 @@ extern void store_method(Type_Class class, Object symbol, Object method);
 
 /* ======================================================================== */
 
+#include <pinocchioHelper.hi>
+
+/* ======================================================================== */
+
 #endif // PINOCCHIO_H

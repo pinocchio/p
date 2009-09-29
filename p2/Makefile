@@ -11,10 +11,11 @@ CFLAGS+=-I. -O3 -lgc -Wall
 LDFLAGS+=-lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
-Type_ObjectS=$(CFILES:%.c=%.o)
+OBJECTS=$(CFILES:%.c=%.o)
+ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 
-$(TARGET): $(Type_ObjectS)
+$(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 run: $(TARGET)
@@ -24,7 +25,7 @@ test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 	CFLAGS="-DTEST=1" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make run
 
 clean:
-	rm -rf $(Type_ObjectS) $(TARGET) make.depend
+	rm -rf $(ALLOBJECTS) $(TARGET) make.depend
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
