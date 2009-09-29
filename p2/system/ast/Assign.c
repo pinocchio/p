@@ -6,22 +6,22 @@
 
 /* ======================================================================== */
 
-Type_Class Assign_Type_Class;
+Type_Class AST_Assign_Class;
 
 /* ======================================================================== */
 
-AST_Assign new_Assign(Object variable, Object expression)
+AST_Assign new_AST_Assign(Object variable, Object expression)
 {
     AST_Assign result  = NEW_t(AST_Assign);
-    HEADER(result)     = (Object)Assign_Type_Class;
+    HEADER(result)     = (Object)AST_Assign_Class;
     result->variable   = variable;
     result->expression = expression;
     return result;
 }
 
-void pre_init_Assign()
+void pre_init_AST_Assign()
 {
-    Assign_Type_Class        = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Assign");
+    AST_Assign_Class        = new_Named_Class((Object)Type_Object_Class, L"AST_Assign");
 }
 
 /* ======================================================================== */
@@ -44,7 +44,7 @@ void CNT_AST_Assign_assign()
     /* result of evaluating expression is result of assignment */
     poke_EXP(1, value);
     
-    if (HEADER(var) == (Object)Variable_Type_Class) {
+    if (HEADER(var) == (Object)AST_Variable_Class) {
         return AST_Variable_assign((AST_Variable)var, value);
     }
     
@@ -54,6 +54,6 @@ void CNT_AST_Assign_assign()
 
 /* ======================================================================== */
 
-void post_init_Assign()
+void post_init_AST_Assign()
 {
 }

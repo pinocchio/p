@@ -7,7 +7,7 @@
 
 struct AST_Self_t {};
 
-CREATE_INITIALIZERS(Self)
+CREATE_INITIALIZERS(AST_Self)
 
 extern Object Self;
 

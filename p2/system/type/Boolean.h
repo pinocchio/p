@@ -3,7 +3,7 @@
 
 #include <pinocchio.h>
 
-AST_Constant new_Constant(Object value);
+AST_Constant new_AST_Constant(Object value);
 
 /* ========================================================================== */
 

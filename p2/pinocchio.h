@@ -36,7 +36,7 @@
 #define CREATE_INITIALIZERS(class) \
 extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
-extern Type_Class class##_Type_Class;
+extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
     if(args->size->value < size_value || args->size->value > size_value) {\
@@ -49,7 +49,7 @@ extern Type_Class class##_Type_Class;
 #define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)));
 
 #define ASSERT_EQUALS(exp1, exp2) \
-assert(EvalSend((Object)(exp1),SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
+assert(EvalAST_Send((Object)(exp1),SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ======================================================================== */
 
@@ -94,7 +94,7 @@ extern Object * _EXP_;
 extern cont   * _CNT_;
 
 extern jmp_buf Eval_Exit;
-extern jmp_buf Eval_Continue;
+extern jmp_buf Eval_AST_Continue;
 
 /* ======================================================================== */
 
@@ -111,7 +111,7 @@ typedef struct InlineCache {
 
 /* ======================================================================== */
 
-extern Type_Class Type_Object_Type_Class;
+extern Type_Class Type_Object_Class;
 
 /* ======================================================================== */
 

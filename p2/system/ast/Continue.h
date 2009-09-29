@@ -11,8 +11,8 @@ struct AST_Continue_t {
     Object          target;
 };
 
-CREATE_INITIALIZERS(Continue)
-extern AST_Continue new_Continue(Object target);
+CREATE_INITIALIZERS(AST_Continue)
+extern AST_Continue new_AST_Continue(Object target);
 
 /* ========================================================================= */
 

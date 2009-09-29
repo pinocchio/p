@@ -12,9 +12,9 @@ struct AST_Native_Method_t {
     native          code;
 };
 
-CREATE_INITIALIZERS(Native_Method)
+CREATE_INITIALIZERS(AST_Native_Method)
 
-extern AST_Native_Method new_Native_Method(native code);
+extern AST_Native_Method new_AST_Native_Method(native code);
 
 /* ======================================================================== */
 

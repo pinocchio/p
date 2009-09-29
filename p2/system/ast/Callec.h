@@ -10,9 +10,9 @@ struct AST_Callec_t {
     Object         target;
 };
 
-CREATE_INITIALIZERS(Callec)
+CREATE_INITIALIZERS(AST_Callec)
 
-extern AST_Callec new_Callec();
+extern AST_Callec new_AST_Callec();
 
 /* ========================================================================== */
 

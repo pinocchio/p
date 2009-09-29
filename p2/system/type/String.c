@@ -7,20 +7,20 @@
 
 /* =========================================================================*/
 
-Type_Class Type_String_Type_Class;
+Type_Class Type_String_Class;
 
 /* =========================================================================*/
 
 Type_String new_Type_String(const wchar_t * str)
 {
     Type_String string = (Type_String) new_Type_Symbol(str);
-    HEADER(string)       = (Object)Type_String_Type_Class;
+    HEADER(string)       = (Object)Type_String_Class;
     return string;
 }
 
 void pre_init_Type_String()
 {
-    Type_String_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"String");
+    Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
 }
 
 /* =========================================================================*/
@@ -52,7 +52,7 @@ NATIVE1(NM_Type_String_concat_)
     push_CNT(CNT_Type_String_concat_);
     push_CNT(CNT_send_Eval);
     // TODO create a expanded send  
-    push_EXP(new_Send((Object)new_Constant(args->values[0]), SMB_asString, Empty_Type_Array));
+    push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), SMB_asString, Empty_Type_Array));
 }
 
 NATIVE0(NM_Type_String_asString)
@@ -67,9 +67,9 @@ NATIVE0(NM_Type_String_asSymbol)
 
 void post_init_Type_String()
 {
-    install_symbol_methods(Type_String_Type_Class);
-    store_native_method(Type_String_Type_Class, SMB_concat_,  NM_Type_String_concat_);
-    store_native_method(Type_String_Type_Class, SMB_asString, NM_Type_String_asString);
-    store_native_method(Type_String_Type_Class, SMB_asSymbol, NM_Type_String_asSymbol);
+    install_symbol_methods(Type_String_Class);
+    store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);
+    store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
+    store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
 }
 

@@ -5,13 +5,13 @@
 
 /* ======================================================================== */
 
-Type_Class Info_Type_Class;
+Type_Class AST_Info_Class;
 
 /* ======================================================================== */
 
-void pre_init_Info()
+void pre_init_AST_Info()
 {
-    Info_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Info");
+    AST_Info_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Info");
 }
 
 /* ======================================================================== */
@@ -20,7 +20,7 @@ void pre_init_Info()
 
 /* ======================================================================== */
 
-void post_init_Info()
+void post_init_AST_Info()
 {
 
 }

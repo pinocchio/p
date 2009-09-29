@@ -51,13 +51,13 @@ def createCHSourcesAt(path)
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
-    sourceC.puts "Type_Class #{fullName}_Type_Class;"
+    sourceC.puts "Type_Class #{fullName}_Class;"
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
     sourceC.puts "void pre_init_#{fullName}()"
     sourceC.puts "{"
-    sourceC.puts "    #{fullName}_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L\"#{fullName}\");"
+    sourceC.puts "    #{fullName}_Class = new_Named_Class((Object)Type_Object_Class, L\"#{fullName}\");"
     sourceC.puts "}"
     sourceC.puts 
     sourceC.puts separator

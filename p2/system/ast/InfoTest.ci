@@ -1,6 +1,6 @@
 
 #define INFO_TEST_SETUP \
-    Type_Info Info = new_Info(); \
+    Type_AST_Info AST_Info = new_AST_Info(); \
     Object result;
 
 /* ======================================================================== */
@@ -8,7 +8,7 @@
 
 /* ======================================================================== */
 
-void test_Info()
+void test_AST_Info()
 {
 
 }

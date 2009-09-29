@@ -6,7 +6,7 @@
 
 /* ======================================================================== */
 
-Type_Class Type_Array_Type_Class;
+Type_Class Type_Array_Class;
 Type_Array Empty_Type_Array;
 
 /* ======================================================================== */
@@ -15,7 +15,7 @@ Type_Array new_Raw_Type_Array(int c)
 {
     if (c == 0) { return Empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Type_Object[c]);
-    HEADER(result)      = (Object)Type_Array_Type_Class;
+    HEADER(result)      = (Object)Type_Array_Class;
     result->size        = new_Type_SmallInt(c);
     return result;
 }
@@ -44,10 +44,10 @@ Type_Array new_Type_Array_With(int c, Object init)
 
 void pre_init_Type_Array() 
 {
-    Type_Array_Type_Class         = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Type_Array");
+    Type_Array_Class         = new_Named_Class((Object)Type_Object_Class, L"Type_Array");
     
     Empty_Type_Array         = NEW_t(Type_Array);
-    HEADER(Empty_Type_Array) = (Object)Type_Array_Type_Class;
+    HEADER(Empty_Type_Array) = (Object)Type_Array_Class;
 }
 
 /* ======================================================================== */
@@ -59,13 +59,13 @@ Object Type_Array_Type_ObjectAt(Type_Array array, unsigned int index)
 }
 
 NATIVE1(NM_Type_Array_Type_ObjectAt_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class)
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     int index = ((Type_SmallInt) args->values[0])->value;
     push_EXP(((Type_Array)self)->values[index]);
 }
 
 NATIVE2(NM_Type_Array_Type_ObjectAt_put_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class)
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     unsigned int index = ((Type_SmallInt)args->values[0])->value;
     ((Type_Array)self)->values[index] = args->values[1];
     push_EXP(args->values[1]);
@@ -79,7 +79,7 @@ void post_init_Type_Array()
 {
     Empty_Type_Array->size   = new_Type_SmallInt(0);
     
-    store_native_method(Type_Array_Type_Class,SMB_Type_ObjectAt_,     NM_Type_Array_Type_ObjectAt_);
-    store_native_method(Type_Array_Type_Class,SMB_Type_ObjectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
-    store_native_method(Type_Array_Type_Class,SMB_size,          NM_Type_Array_size);
+    store_native_method(Type_Array_Class,SMB_Type_ObjectAt_,     NM_Type_Array_Type_ObjectAt_);
+    store_native_method(Type_Array_Class,SMB_Type_ObjectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
+    store_native_method(Type_Array_Class,SMB_size,          NM_Type_Array_size);
 }

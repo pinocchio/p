@@ -12,7 +12,7 @@ Object * _EXP_;
 cont   * _CNT_;
 
 jmp_buf Eval_Exit;
-jmp_buf Eval_Continue;
+jmp_buf Eval_AST_Continue;
 
 /* ======================================================================== */
 
@@ -22,7 +22,7 @@ jmp_buf Eval_Continue;
  */
 void continue_eval()
 {
-    longjmp(Eval_Continue, 1);
+    longjmp(Eval_AST_Continue, 1);
 }
 
 void init_Stack(unsigned int size)
@@ -44,8 +44,8 @@ void initialize_Thread()
 /* ========================================================================== */
 
 #define EVAL_IF(name) \
-    if (class == name##_Type_Class) { \
-        return AST_##name##_eval((AST_##name)exp); \
+    if (class == name##_Class) { \
+        return name##_eval((name)exp); \
     }
 
 
@@ -55,16 +55,16 @@ void CNT_send_Eval()
     Object exp = peek_EXP(1);
 
     Type_Class class = (Type_Class)HEADER(exp);
-    EVAL_IF(Constant)
-    EVAL_IF(Variable)
-    EVAL_IF(Assign)
-    EVAL_IF(Send)
-    EVAL_IF(Super)
-    EVAL_IF(Self)
-    EVAL_IF(Callec)
+    EVAL_IF(AST_Constant)
+    EVAL_IF(AST_Variable)
+    EVAL_IF(AST_Assign)
+    EVAL_IF(AST_Send)
+    EVAL_IF(AST_Super)
+    EVAL_IF(AST_Self)
+    EVAL_IF(AST_Callec)
     
     /* TODO fallback by actually sending the eval message */
-    printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a Constant?\n", 
+    printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
            ((Type_Class)class)->name->value);
     assert(NULL);
 }
@@ -95,7 +95,7 @@ Object Eval(Object code)
 
     if (!setjmp(Eval_Exit)) {
         IN_EVAL = 1;
-        setjmp(Eval_Continue);
+        setjmp(Eval_AST_Continue);
         for (;;) {
             peek_CNT(1)();
         }

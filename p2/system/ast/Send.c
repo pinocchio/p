@@ -5,23 +5,23 @@
 
 /* ======================================================================== */
 
-Type_Class Send_Type_Class;
+Type_Class AST_Send_Class;
 
 /* ======================================================================== */
 
-AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
+AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments)
 {
     AST_Send result = NEW_t(AST_Send);
-    HEADER(result)    = (Object)Send_Type_Class;
+    HEADER(result)    = (Object)AST_Send_Class;
     result->receiver  = receiver;
     result->message   = msg;
     result->arguments = arguments;
     return result;
 }
 
-void pre_init_Send()
+void pre_init_AST_Send()
 {
-    Send_Type_Class          = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Send");
+    AST_Send_Class          = new_Named_Class((Object)Type_Object_Class, L"AST_Send");
 }
 
 /* =========================================================================*/
@@ -75,5 +75,5 @@ void AST_Send_eval(AST_Send self)
 
 /* =========================================================================*/
 
-void post_init_Send(){}
+void post_init_AST_Send(){}
 

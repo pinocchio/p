@@ -1,17 +1,17 @@
 void test_variable_lookup()
 {
     // TODO complete test
-    AST_Variable var = new_Variable(L"test");
+    AST_Variable var = new_AST_Variable(L"test");
     var->index         = 0;
     var->key           = (Object)new_Type_SmallInt(10);
     
-    Type_Runtime_Env = (Object)new_Type_Runtime_Env_Sized((Object)current_env(), var->key, 1);
-    Type_Runtime_Env = (Object)new_Type_Runtime_Env_Sized((Object)current_env(), Nil, 0);
+    Env = (Object)new_Runtime_Env_Sized((Object)current_env(), var->key, 1);
+    Env = (Object)new_Runtime_Env_Sized((Object)current_env(), Nil, 0);
 }
 
 /* ======================================================================== */
 
-void test_Type_Runtime_Env()
+void test_Runtime_Env()
 {
     test_variable_lookup();
 }

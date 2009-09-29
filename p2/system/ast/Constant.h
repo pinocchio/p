@@ -9,9 +9,9 @@ struct AST_Constant_t {
     Object          constant;
 };
 
-CREATE_INITIALIZERS(Constant)
+CREATE_INITIALIZERS(AST_Constant)
 
-extern AST_Constant new_Constant(Object constant);
+extern AST_Constant new_AST_Constant(Object constant);
 
 /* ========================================================================== */
 

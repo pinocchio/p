@@ -11,8 +11,8 @@ struct AST_Super_t {
     Type_Array arguments;
 };
 
-CREATE_INITIALIZERS(Super)
-extern AST_Super new_Super(Object message, Type_Array arguments);
+CREATE_INITIALIZERS(AST_Super)
+extern AST_Super new_AST_Super(Object message, Type_Array arguments);
 
 /* ========================================================================== */
 

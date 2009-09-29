@@ -5,7 +5,7 @@
 
 /* ======================================================================== */
 
-Type_Class IO_File_Type_Class;
+Type_Class IO_File_Class;
 
 /* ======================================================================== */
 
@@ -27,7 +27,7 @@ IO_File new_IO_File_FromPath(wchar_t * path)
 
 void pre_init_IO_File()
 {
-    IO_File_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"IO_File");
+    IO_File_Class = new_Named_Class((Object)Type_Object_Class, L"IO_File");
 }
 
 /* =========================================================================*/

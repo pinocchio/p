@@ -11,9 +11,9 @@ struct AST_Variable_t {
     Object          name;
 };
 
-CREATE_INITIALIZERS(Variable)
+CREATE_INITIALIZERS(AST_Variable)
 
-extern AST_Variable new_Variable(const wchar_t* name);
+extern AST_Variable new_AST_Variable(const wchar_t* name);
 
 /* ========================================================================= */
 

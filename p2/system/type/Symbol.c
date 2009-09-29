@@ -6,7 +6,7 @@
 
 /* ========================================================================== */
 
-Type_Class Type_Symbol_Type_Class;
+Type_Class Type_Symbol_Class;
 Type_Dictionary SMB_Table;
 
 #include <system/type/SymbolDefinition.ci>
@@ -28,7 +28,7 @@ wchar_t* wcsdup(const wchar_t* input)
 Type_Symbol new_Type_Symbol(const wchar_t* name)
 {
     Type_Symbol symbol  = NEW_t(Type_Symbol);
-    HEADER(symbol)      = (Object)Type_Symbol_Type_Class;
+    HEADER(symbol)      = (Object)Type_Symbol_Class;
     symbol->hash        = NULL;
     symbol->value       = wcsdup(name);
     symbol->size        = new_Type_SmallInt(wcslen(name));
@@ -38,7 +38,7 @@ Type_Symbol new_Type_Symbol(const wchar_t* name)
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Symbol");
+    Type_Symbol_Class = new_Named_Class((Object)Type_Object_Class, L"Symbol");
     initialize_Symbol();
 }
 /*
@@ -53,7 +53,7 @@ void initialize_Symbol()
 
 
 NATIVE1(NM_Type_Symbol_Type_ObjectAt_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class);
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
     push_EXP(new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
@@ -117,7 +117,7 @@ void initialize_Type_Symbol_Table()
 void post_init_Type_Symbol()
 {
     initialize_Type_Symbol_Table();
-    install_symbol_methods(Type_Symbol_Type_Class);
+    install_symbol_methods(Type_Symbol_Class);
 }
 
 void install_symbol_methods(Type_Class class)

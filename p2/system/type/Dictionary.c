@@ -6,21 +6,21 @@
 
 /* ======================================================================== */
 
-Type_Class Type_Dictionary_Type_Class;
+Type_Class Type_Dictionary_Class;
 
 /* ======================================================================== */
 
 Type_Dictionary new_Type_Dictionary()
 {
     Type_Dictionary result = NEW_t(Type_Dictionary);
-    HEADER(result)           = (Object)Type_Dictionary_Type_Class;
+    HEADER(result)           = (Object)Type_Dictionary_Class;
     result->layout           = new_Type_Array_With(2, Nil);
     return result;
 }
 
 void pre_init_Type_Dictionary()
 {
-    Type_Dictionary_Type_Class    = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Type_Dictionary");
+    Type_Dictionary_Class    = new_Named_Class((Object)Type_Object_Class, L"Type_Dictionary");
 }
 
 /* ======================================================================== */
@@ -83,7 +83,7 @@ NATIVE2(NM_Type_Dictionary_Type_ObjectAt_put_)
 
 void post_init_Type_Dictionary()
 {
-    store_native_method(Type_Dictionary_Type_Class, SMB_Type_ObjectAt_, NM_Type_Dictionary_Type_ObjectAt_);
-    store_native_method(Type_Dictionary_Type_Class, SMB_Type_ObjectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
+    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_, NM_Type_Dictionary_Type_ObjectAt_);
+    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
 }
 

@@ -3,10 +3,10 @@ void test_ast_continue()
 {
     Type_SmallInt integer1      = new_Type_SmallInt(1);
     Type_SmallInt integer7      = new_Type_SmallInt(7);
-    AST_Constant integer1_const = new_Constant((Object)integer1);
-    AST_Constant integer7_const = new_Constant((Object)integer7);
+    AST_Constant integer1_const = new_AST_Constant((Object)integer1);
+    AST_Constant integer7_const = new_AST_Constant((Object)integer7);
     
-    AST_Callec callec = new_Callec();
+    AST_Callec callec = new_AST_Callec();
     callec->target = (Object)integer7_const;
     Object result = Eval((Object)callec);
     //printf("%ls\n", Type_Object_classname(result));
@@ -15,9 +15,9 @@ void test_ast_continue()
     
     Type_Array body = new_Type_Array_With(2, (Object)integer7_const);
     AST_Method send = new_Method(1, body);
-    AST_Constant send_const = new_Constant((Object)send);
-    callec->target    = (Object)new_Send((Object)send_const, SMB_eval_, 
-                                           new_Type_Array_With(1, (Object)new_Constant((Object)callec->cont)));
+    AST_Constant send_const = new_AST_Constant((Object)send);
+    callec->target    = (Object)new_AST_Send((Object)send_const, SMB_eval_, 
+                                           new_Type_Array_With(1, (Object)new_AST_Constant((Object)callec->cont)));
     
     //(assert (= 1
     //     (callec (lambda (cont)
@@ -37,7 +37,7 @@ void test_ast_continue()
     //                 (cont 1)
     //                 7))))
     //
-    body->values[0]    = (Object)new_Send((Object)new_Constant((Object)callec->cont), 
+    body->values[0]    = (Object)new_AST_Send((Object)new_AST_Constant((Object)callec->cont), 
                                           SMB_eval, 
                                           new_Type_Array_With(1, (Object)integer1_const));
     
@@ -49,7 +49,7 @@ void test_ast_continue()
 
 /* ========================================================================== */
 
-void test_Continue()
+void test_AST_Continue()
 {
     test_ast_continue();
 }

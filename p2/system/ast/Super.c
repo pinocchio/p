@@ -7,22 +7,22 @@
 
 /* ======================================================================== */
 
-Type_Class Super_Type_Class;
+Type_Class AST_Super_Class;
 
 /* ======================================================================== */
 
-AST_Super new_Super(Object message, Type_Array arguments)
+AST_Super new_AST_Super(Object message, Type_Array arguments)
 {
     AST_Super result = NEW_t(AST_Super);
-    HEADER(result)     = (Object)Super_Type_Class;
+    HEADER(result)     = (Object)AST_Super_Class;
     result->message    = message;
     result->arguments  = arguments;
     return result;
 }
 
-void pre_init_Super()
+void pre_init_AST_Super()
 {
-    Super_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Super");
+    AST_Super_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Super");
 }
 
 /* =========================================================================*/
@@ -47,7 +47,7 @@ void CNT_push_env_class()
 {
     zap_CNT();
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Type_Runtime_Env_Type_Class) {
+    if (HEADER(env) != (Object)Runtime_Env_Class) {
         assert(NULL);
     }
     push_EXP(((Runtime_Env)env)->class);
@@ -59,7 +59,7 @@ void AST_Super_eval(AST_Super super)
     Type_Array args = new_Raw_Type_Array(super->arguments->size->value);
     // execute the method
     push_CNT(CNT_AST_Super_send);
-    push_CNT(CNT_Type_Class_super);
+    push_CNT(CNT_Class_super);
     push_CNT(CNT_push_env_class);
     push_CNT(CNT_AST_Self_eval);
     push_EXP(args);
@@ -76,6 +76,6 @@ void AST_Super_eval(AST_Super super)
 
 /* =========================================================================*/
 
-void post_init_Super()
+void post_init_AST_Super()
 {
 }
