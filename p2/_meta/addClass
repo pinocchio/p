@@ -15,6 +15,8 @@ def createCHSourcesAt(path)
     sourceC = File.open("#{path}.c", File::WRONLY|File::EXCL|File::CREAT)
     pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi", File::WRONLY|File::EXCL|File::APPEND)
     
+    sourceT = File.open(path+"Test.ci", File::WRONLY|File::EXCL|File::CREAT)
+    
     sourceH.puts "#ifndef #{guard}"
     sourceH.puts "#define #{guard}"
     sourceH.puts
@@ -70,7 +72,6 @@ def createCHSourcesAt(path)
     sourceC.puts "}"
     sourceC.close
 
-    sourceT = File.open(path+"Test.ci", File::WRONLY|File::EXCL|File::CREAT)
     sourceT.puts 
     sourceT.puts "#define #{name.upcase}_TEST_SETUP \\" 
     sourceT.puts "    Type_#{name} #{name} = new_#{name}(); \\"
