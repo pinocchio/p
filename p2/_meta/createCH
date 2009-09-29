@@ -10,7 +10,7 @@ def createCHSourcesAt(path)
     guard = "#{name.upcase}_H"
 
     # create the file only if it doesn't exist yet
-    sourceH = File.open(path+".h", File::WRONLY|File::EXCL|File::CREAT)
+    sourceH = File.open("#{path}.h", File::WRONLY|File::EXCL|File::CREAT)
     sourceH.puts "#ifndef #{guard}"
     sourceH.puts "#define #{guard}"
     sourceH.puts
@@ -33,14 +33,18 @@ def createCHSourcesAt(path)
     sourceH.close
 
     pinocchioTypeHI = File.open("pinocchioType.hi", File::WRONLY|File::EXCL|File::APPEND)
-    pinocchioTypeHI.puts "TYPE(#{name});"
+    pinocchioTypeHI.puts "TYPE(#{fullName});"
     pinocchioTypeHI.close
 
-    sourceC = File.open(path+".c", File::WRONLY|File::EXCL|File::CREAT)
+    pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi", File::WRONLY|File::EXCL|File::APPEND)
+    pinocchioTypeIncludeHI.puts "#include <#{path}.h>"
+    pinocchioTypeIncludeHI.close
+
+    sourceC = File.open("#{path}.c", File::WRONLY|File::EXCL|File::CREAT)
     sourceC.puts
     sourceC.puts "#include <stdlib.h>"
     sourceC.puts "#include <stdio.h>"
-    sourceC.puts "#include <#{dir}/#{name}.h>"
+    sourceC.puts "#include <#{path}.h>"
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
@@ -82,7 +86,7 @@ def createCHSourcesAt(path)
     sourceT.puts "}"
     sourceT.puts 
 
-    puts "Successfully created #{name}"
+    puts "Successfully created #{fullName}"
 
 end
 
