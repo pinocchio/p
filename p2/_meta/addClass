@@ -88,11 +88,11 @@ def createCHSourcesAt(path)
     sourceT.puts "}"
     sourceT.puts 
 
-    File.open("pinocchioPreInitializer.ci", "a+") do |file|
+    File.open("pinocchioPreInitializer.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
         file.puts "pre_initialize_#{name}();"
     end
 
-    File.open("pinocchioPostInitializer.ci", "a+") do |file|
+    File.open("pinocchioPostInitializer.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
         file.puts "post_initialize_#{name}();"
     end
 
