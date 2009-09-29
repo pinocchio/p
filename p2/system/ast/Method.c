@@ -44,14 +44,14 @@ void AST_Method_invoke(AST_Method method, Object self,
 {
     push_restore_env();
     
-    Runtime_Env env = new_Env(method->environment, (Object)method, args);
+    Runtime_Env env = new_Type_Runtime_Env(method->environment, (Object)method, args);
     
     env->self   = self;
     env->class  = class;
     env->method = method;
     env->pc     = 1;
     
-    Env = (Object)env;
+    Type_Runtime_Env = (Object)env;
     
     if (method->body->size->value == 0 ) { 
         push_EXP(self);

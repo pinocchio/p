@@ -5,13 +5,13 @@ void test_variable_lookup()
     var->index         = 0;
     var->key           = (Object)new_Type_SmallInt(10);
     
-    Env = (Object)new_Env_Sized((Object)current_env(), var->key, 1);
-    Env = (Object)new_Env_Sized((Object)current_env(), Nil, 0);
+    Type_Runtime_Env = (Object)new_Type_Runtime_Env_Sized((Object)current_env(), var->key, 1);
+    Type_Runtime_Env = (Object)new_Type_Runtime_Env_Sized((Object)current_env(), Nil, 0);
 }
 
 /* ======================================================================== */
 
-void test_Env()
+void test_Type_Runtime_Env()
 {
     test_variable_lookup();
 }

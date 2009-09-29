@@ -15,17 +15,17 @@ struct Runtime_Env_t {
     Type_Array values;
 };
 
-extern Object Env;
+extern Object Type_Runtime_Env;
 
-CREATE_INITIALIZERS(Env)
+CREATE_INITIALIZERS(Type_Runtime_Env)
 
-extern Runtime_Env new_Env(Object parent, Object key, Type_Array values);
-extern Runtime_Env new_Env_Sized(Object parent, Object key, int size);
+extern Runtime_Env new_Type_Runtime_Env(Object parent, Object key, Type_Array values);
+extern Runtime_Env new_Type_Runtime_Env_Sized(Object parent, Object key, int size);
 
 /* =========================================================================*/
 
-extern void Env_lookup(Runtime_Env self, unsigned int index, Object key);
-extern void Env_assign(Runtime_Env self, unsigned int index, Object key, Object value);
+extern void Type_Runtime_Env_lookup(Runtime_Env self, unsigned int index, Object key);
+extern void Type_Runtime_Env_assign(Runtime_Env self, unsigned int index, Object key, Object value);
 
 /* =========================================================================*/
 

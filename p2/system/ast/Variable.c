@@ -30,8 +30,8 @@ void AST_Variable_eval(AST_Variable self)
     LOGFUN;
     Object env = (Object)current_env();
     
-    if (HEADER(env) == (Object)Env_Type_Class) {
-        return Env_lookup(
+    if (HEADER(env) == (Object)Type_Runtime_Env_Type_Class) {
+        return Type_Runtime_Env_lookup(
                                   (Runtime_Env)env, self->index, self->key);
     } else {
         // TODO
@@ -44,8 +44,8 @@ void AST_Variable_eval(AST_Variable self)
 void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
-    if (HEADER(env) == (Object)Env_Type_Class) {
-        return Env_assign((Runtime_Env)env, self->index, self->key, value);
+    if (HEADER(env) == (Object)Type_Runtime_Env_Type_Class) {
+        return Type_Runtime_Env_assign((Runtime_Env)env, self->index, self->key, value);
     }
     // TODO
     assert(NULL);

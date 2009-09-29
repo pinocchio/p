@@ -23,7 +23,7 @@ void AST_Self_eval()
 {
     LOGFUN;
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Env_Type_Class) {
+    if (HEADER(env) != (Object)Type_Runtime_Env_Type_Class) {
         assert(NULL);
     }
     poke_EXP(1, ((Runtime_Env)env)->self);

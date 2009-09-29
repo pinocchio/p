@@ -47,7 +47,7 @@ void CNT_push_env_class()
 {
     zap_CNT();
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Env_Type_Class) {
+    if (HEADER(env) != (Object)Type_Runtime_Env_Type_Class) {
         assert(NULL);
     }
     push_EXP(((Runtime_Env)env)->class);
