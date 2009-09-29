@@ -11,5 +11,5 @@ cd gc-7.1
 ./configure --disable-threads
 make
 sudo make install
-rm boehm.tar.gz
+rm ../boehm.tar.gz
 rm -rf ../gc-7.1
