@@ -63,9 +63,9 @@ NEW_TEST(test_Type_Symbol_asType_Array)
 /* ======================================================================== */
 
 NEW_CLASS_TEST(test_Type_Symbol)
-    test_Type_Symbol_equals_();
-    test_Type_Symbol_size();
-    test_Type_Symbol_asString();
-    test_Type_Symbol_Type_ObjectAt_();
-    test_Type_Symbol_asType_Array();
+    RUN_TEST(Type_Symbol_equals_);
+    RUN_TEST(Type_Symbol_size);
+    RUN_TEST(Type_Symbol_asString);
+    RUN_TEST(Type_Symbol_Type_ObjectAt_);
+    RUN_TEST(Type_Symbol_asType_Array);
 }

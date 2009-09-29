@@ -33,7 +33,7 @@ void test_Type_Character_asString()
 
 void test_Type_Character()
 {
-    test_Type_Character_asType_SmallInt();
-    test_Type_Character_asSymbol();
-    test_Type_Character_asString();
+    RUN_TEST(Type_Character_asType_SmallInt);
+    RUN_TEST(Type_Character_asSymbol);
+    RUN_TEST(Type_Character_asString);
 }

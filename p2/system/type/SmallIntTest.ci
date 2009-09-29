@@ -67,12 +67,12 @@ void test_Type_SmallInt_hash()
 
 void test_Type_SmallInt()
 {
-    test_Type_SmallInt_equals_();
-    test_Type_SmallInt_plus_();
-    test_Type_SmallInt_minus_();
-    test_Type_SmallInt_divide_();
-    test_Type_SmallInt_times_();
-    test_Type_SmallInt_shiftLeft_();
-    test_Type_SmallInt_shiftRight_();
-    test_Type_SmallInt_hash();
+    RUN_TEST(Type_SmallInt_equals_);
+    RUN_TEST(Type_SmallInt_plus_);
+    RUN_TEST(Type_SmallInt_minus_);
+    RUN_TEST(Type_SmallInt_divide_);
+    RUN_TEST(Type_SmallInt_times_);
+    RUN_TEST(Type_SmallInt_shiftLeft_);
+    RUN_TEST(Type_SmallInt_shiftRight_);
+    RUN_TEST(Type_SmallInt_hash);
 }

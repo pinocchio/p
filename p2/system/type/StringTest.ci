@@ -38,7 +38,7 @@ NEW_TEST(test_Type_String_concat_)
 
 void test_Type_String()
 {
-    test_Type_String_asString();
-    test_Type_String_asSymbol();
-    test_Type_String_concat_();
+    RUN_TEST(Type_String_asString);
+    RUN_TEST(Type_String_asSymbol);
+    RUN_TEST(Type_String_concat_);
 }
