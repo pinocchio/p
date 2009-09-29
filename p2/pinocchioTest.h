@@ -1,9 +1,11 @@
 #ifndef PINOCCHIOTEST_H
 #define PINOCCHIOTEST_H
 
-#include <pinocchio.h>
-
 /* ========================================================================== */
+
+#include <pinocchio.h>
+#include <signal.h>
+#include <setjmp.h>
 
 #define NEW_TEST(name) void name() {\
 	LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__);
@@ -13,9 +15,17 @@ LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"); \
 LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__); \
 LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
+extern void run_tests();
+
 /* ========================================================================== */
 
-extern void run_tests();
+extern jmp_buf __test_continue__;
+#define RUN_TEST(f)\
+    if (!setjmp(__test_continue__)) {\
+        RESET_LOG();\
+        LOG("Running test_"#f"\n");\
+        test##_##f();\
+    }
 
 /* ========================================================================== */
 

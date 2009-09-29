@@ -41,7 +41,7 @@ extern Type_Class class##_Class;
 #define ASSERT_ARG_SIZE(raw_size) \
 	int size_value = (raw_size); \
     assert((args->size->value > size_value && args->size->value < size_value), \
-		printf("Invalid argument size! Expected %i but was %i", size_value, args->size->value));
+		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size->value));
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) assert1(HEADER(expression)==((Object)(class)),  "Invalid type of arguments given");
@@ -74,6 +74,8 @@ assert(Eval_AST_Send((Object)(exp1), SMB_equals_, new_Type_Array_With(1, (Object
 #define LOG
 #define LOGFUN printf
 #endif
+
+#define RESET_LOG() printf("\n");
 
 /* ======================================================================== */
 

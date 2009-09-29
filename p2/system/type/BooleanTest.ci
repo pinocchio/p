@@ -20,5 +20,5 @@ void test_boolean_equals()
 
 void test_Type_Boolean()
 {
-    test_boolean_equals();
+    RUN_TEST(boolean_equals);
 }
