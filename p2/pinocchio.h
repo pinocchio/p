@@ -112,8 +112,6 @@ typedef struct InlineCache {
 
 /* ======================================================================== */
 
-extern Type_Class Type_Object_Class;
-
 /* ======================================================================== */
 
 #include <pinocchioTypeInclude.hi>

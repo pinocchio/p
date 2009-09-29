@@ -30,8 +30,8 @@ jmp_buf __test_continue__;
 
 void phandler(int signum)
 {
-    //fprintf(stderr, "Continue\n");
-    longjmp(__test_continue__, 1);
+    fprintf(stderr, "Continue\n");
+    siglongjmp(__test_continue__, 1);
 }
 
 /* ========================================================================== */
