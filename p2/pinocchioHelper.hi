@@ -6,26 +6,20 @@
 if (!(test)) {\
 	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
 	message; \
-    printf("RAISING!\n");\
 	raise(SIGFAIL); \
-    printf("AFTER RAISE!\n");\
 }
 
 #define assert0(test)\
 if (!(test)) {\
 	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
-    printf("RAISING!\n");\
 	raise(SIGFAIL); \
-    printf("AFTER RAISE!\n");\
 }
 
 #define assert1(test, message)  \
 if (!(test)) { \
 	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
 	printf(message); \
-    printf("RAISING!\n");\
 	raise(SIGFAIL); \
-    printf("AFTER RAISE!\n");\
 }
 
 /* ========================================================================== */
