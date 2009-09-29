@@ -98,7 +98,20 @@ extern jmp_buf Eval_Continue;
 
 /* ======================================================================== */
 
+#define TYPE(name) typedef struct name##_##t * name;
+
 #include <pinocchioType.hi>
+
+typedef Type_Symbol Type_String;
+typedef void(*native)(Object self, Object class, Type_Array args);
+typedef struct InlineCache {
+    Object          type;
+    Object          method;
+} InlineCache;
+
+/* ======================================================================== */
+
+extern Type_Class Object_Class;
 
 /* ======================================================================== */
 
