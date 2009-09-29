@@ -39,12 +39,12 @@ void post_init_Type_Object()
 {
     // put the names here, now after the Symbols_Class is initialized
     Class_Class->name   = new_Type_String(L"Class");
-    Class_Class->methods = new_Dictionary();
+    Class_Class->methods = new_Type_Dictionary();
     Type_Object_Class->name = new_Type_String(L"Type_Object");
-    Type_Object_Class->methods = new_Dictionary();
+    Type_Object_Class->methods = new_Type_Dictionary();
     
     store_native_method((Type_Class)Type_Object_Class,SMB_equals_, NM_Type_Object_equals);
     
-    assert(Dictionary_lookup(Type_Object_Class->methods,SMB_equals_));
-    assert(HEADER((AST_Native_Method)Dictionary_lookup(Type_Object_Class->methods,SMB_equals_)) == (Object)Native_Method_Class);
+    assert(Type_Dictionary_lookup(Type_Object_Class->methods,SMB_equals_));
+    assert(HEADER((AST_Native_Method)Type_Dictionary_lookup(Type_Object_Class->methods,SMB_equals_)) == (Object)Native_Method_Class);
 }

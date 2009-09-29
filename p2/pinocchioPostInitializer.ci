@@ -5,7 +5,7 @@ post_init_Callec();
 post_init_Character();
 post_init_Constant();
 post_init_Continue();
-post_init_Dictionary();
+post_init_Type_Dictionary();
 post_init_Env();
 post_init_File();
 post_init_Method();

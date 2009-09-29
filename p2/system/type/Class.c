@@ -14,7 +14,7 @@ Type_Class MetaClass_Class;
 Type_Class new_Class(Object superclass)
 {
     Type_Class result   = NEW_t(Type_Class);
-    result->methods     = new_Dictionary();
+    result->methods     = new_Type_Dictionary();
     HEADER(result)      = (Object) Class_Class;
     result->super       = superclass;
     return result;
@@ -84,7 +84,7 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
     Object method = NULL;    
     while (class != Nil) {
         Type_Dictionary mdict = ((Type_Class) class)->methods;
-        method = Dictionary_lookup(mdict, msg);
+        method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             class = ((Type_Class) class)->super;
 			LOG("Parent Lookup continueing in  \"%ls\"\n", ((Type_Class)class)->name->value);

@@ -1,5 +1,5 @@
-#ifndef NIL_H
-#define NIL_H
+#ifndef TYPE_NIL_H
+#define TYPE_NIL_H
 
 #include <pinocchio.h>
 
@@ -8,8 +8,8 @@
 struct Type_Nil_t{};
 
 extern Object Nil;
-CREATE_INITIALIZERS(Nil)
+CREATE_INITIALIZERS(Type_Nil)
 
 /* ========================================================================== */
 
-#endif // NIL_H
+#endif // TYPE_NIL_H

@@ -110,7 +110,7 @@ NATIVE1(NM_Type_Symbol_lastIndexOf_)
 
 void initialize_Type_Symbol_Table()
 {
-    SMB_Table = new_Dictionary();
+    SMB_Table = new_Type_Dictionary();
 }
 
 

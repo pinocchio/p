@@ -6,26 +6,26 @@
 
 /* ======================================================================== */
 
-Type_Class Dictionary_Class;
+Type_Class Type_Dictionary_Class;
 
 /* ======================================================================== */
 
-Type_Dictionary new_Dictionary()
+Type_Dictionary new_Type_Dictionary()
 {
     Type_Dictionary result = NEW_t(Type_Dictionary);
-    HEADER(result)           = (Object)Dictionary_Class;
+    HEADER(result)           = (Object)Type_Dictionary_Class;
     result->layout           = new_Array_With(2, Nil);
     return result;
 }
 
-void pre_init_Dictionary()
+void pre_init_Type_Dictionary()
 {
-    Dictionary_Class    = new_Named_Class((Object)Type_Object_Class, L"Dictionary");
+    Type_Dictionary_Class    = new_Named_Class((Object)Type_Object_Class, L"Type_Dictionary");
 }
 
 /* ======================================================================== */
 
-Object Dictionary_lookup(Type_Dictionary self, Object key)
+Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 {
     int i;
     for (i = 0; i < self->layout->size->value; i=i+2) {
@@ -36,7 +36,7 @@ Object Dictionary_lookup(Type_Dictionary self, Object key)
     return NULL;
 }
 
-void Dictionary_grow(Type_Dictionary self)
+void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old_layout = self->layout;
     self->layout            = new_Array_With(old_layout->size->value*2, Nil);
@@ -46,7 +46,7 @@ void Dictionary_grow(Type_Dictionary self)
     }
 }
 
-Object Dictionary_store_(Type_Dictionary self, Object key, Object value)
+Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 {
     /* just store at the first empty location */
     int i;
@@ -57,7 +57,7 @@ Object Dictionary_store_(Type_Dictionary self, Object key, Object value)
             return value;
         }
     }
-    Dictionary_grow(self);
+    Type_Dictionary_grow(self);
     self->layout->values[i]   = key;
     self->layout->values[i+1] = value;
     
@@ -66,24 +66,24 @@ Object Dictionary_store_(Type_Dictionary self, Object key, Object value)
 
 /* ======================================================================== */
 
-NATIVE1(NM_Dictionary_Type_ObjectAt_)
-    Object result = Dictionary_lookup((Type_Dictionary)self, args->values[0]);
+NATIVE1(NM_Type_Dictionary_Type_ObjectAt_)
+    Object result = Type_Dictionary_lookup((Type_Dictionary)self, args->values[0]);
     if(!result) {
         result = Nil;
     }
     push_EXP(result);
 }
 
-NATIVE2(NM_Dictionary_Type_ObjectAt_put_)
-    Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
+NATIVE2(NM_Type_Dictionary_Type_ObjectAt_put_)
+    Type_Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
     push_EXP(args->values[1]);
 }
 
 /* ======================================================================== */
 
-void post_init_Dictionary()
+void post_init_Type_Dictionary()
 {
-    store_native_method(Dictionary_Class, SMB_Type_ObjectAt_, NM_Dictionary_Type_ObjectAt_);
-    store_native_method(Dictionary_Class, SMB_Type_ObjectAt_put_, NM_Dictionary_Type_ObjectAt_put_);
+    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_, NM_Type_Dictionary_Type_ObjectAt_);
+    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
 }
 

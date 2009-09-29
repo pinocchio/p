@@ -1,4 +1,4 @@
-pre_init_Nil();
+pre_init_Type_Nil();
 pre_init_Type_Object();
 pre_init_Type_SmallInt();
 pre_init_Type_Symbol();
@@ -8,7 +8,7 @@ pre_init_Callec();
 pre_init_Character();
 pre_init_Constant();
 pre_init_Continue();
-pre_init_Dictionary();
+pre_init_Type_Dictionary();
 pre_init_File();
 pre_init_Method();
 pre_init_Native_Method();
