@@ -5,6 +5,12 @@
 #include <wchar.h>
 #include <pinocchio.h>
 
+#include <pinocchioHelper.ci>
+#ifdef TEST
+#include <pinocchioTest.h>
+#endif // TEST
+
+
 /* ======================================================================== */
 
 Object Double_Stack[STACK_SIZE];
@@ -36,10 +42,6 @@ void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
 }
-
-/* ========================================================================== */
-
-#include <pinocchioHelper.ci>
 
 /* ========================================================================== */
 
@@ -106,12 +108,6 @@ Object Eval(Object code)
     IN_EVAL = 0;
     return result;
 }
-
-/* ========================================================================== */
-
-#ifdef TEST
-#include <pinocchioTest.h>
-#endif // TEST
 
 /* ========================================================================== */
 
