@@ -1,6 +1,6 @@
 
 #define CHARACTERTABLE_TEST_SETUP \
-    Type_CharacterTable CharacterTable = new_CharacterTable(); \
+    Type_CharacterTable Type_CharacterTable = new_Type_CharacterTable(); \
     Object result;
 
 /* ======================================================================== */
@@ -8,7 +8,7 @@
 
 /* ======================================================================== */
 
-void test_CharacterTable()
+void test_Type_CharacterTable()
 {
 
 }

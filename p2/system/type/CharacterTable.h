@@ -9,12 +9,12 @@ struct Type_CharacterTable_t {
     Type_Character chars[0];
 };
 
-CREATE_INITIALIZERS(CharacterTable)
-extern Type_CharacterTable new_CharacterTable();
+CREATE_INITIALIZERS(Type_CharacterTable)
+extern Type_CharacterTable new_Type_CharacterTable();
 
 /* ======================================================================== */
 
-extern Type_CharacterTable Character_table;
+extern Type_CharacterTable Type_Character_table;
 
 /* ======================================================================== */
 

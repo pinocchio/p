@@ -5,49 +5,49 @@
 
 /* ======================================================================== */
 
-Type_Class Character_Type_Class;
+Type_Class Type_Character_Type_Class;
 
 /* ======================================================================== */
 
-Type_Character new_raw_Character(wchar_t value)
+Type_Character new_raw_Type_Character(wchar_t value)
 {
     Type_Character result = NEW_t(Type_Character);
-    HEADER(result)        = (Object)Character_Type_Class;
+    HEADER(result)        = (Object)Type_Character_Type_Class;
     result->value         = value;
     return result;
 }
 
 
-Type_Character new_Character(wchar_t value)
+Type_Character new_Type_Character(wchar_t value)
 {
     if (value < CHARACTER_TABLE_SIZE) {
-        return Character_table->chars[value];
+        return Type_Character_table->chars[value];
     }
-    return new_raw_Character(value);
+    return new_raw_Type_Character(value);
 }
     
 
-void pre_init_Character()
+void pre_init_Type_Character()
 {
-    Character_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Character");
+    Type_Character_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Type_Character");
 }
 
 /* ======================================================================== */
 
-NATIVE1(NM_Character_equals_)
+NATIVE1(NM_Type_Character_equals_)
 }
 
-NATIVE0(NM_Character_asString)
+NATIVE0(NM_Type_Character_asString)
     // TODO add \0 at the end
     push_EXP(new_Type_String(&((Type_Character)self)->value));
 }
 
-NATIVE0(NM_Character_asSymbol)
+NATIVE0(NM_Type_Character_asSymbol)
     // TODO add \0 at the end
     push_EXP(new_Type_Symbol(&((Type_Character)self)->value));
 }
 
-NATIVE0(NM_Character_asType_SmallInt)
+NATIVE0(NM_Type_Character_asType_SmallInt)
     // TODO add \0 at the end
     push_EXP(new_Type_SmallInt(((Type_Character)self)->value));
 }
@@ -55,9 +55,9 @@ NATIVE0(NM_Character_asType_SmallInt)
 /* ======================================================================== */
 
 
-void post_init_Character()
+void post_init_Type_Character()
 { 
-    store_native_method(Character_Type_Class, SMB_asString,   NM_Character_asString);
-    store_native_method(Character_Type_Class, SMB_asSymbol,   NM_Character_asSymbol);
-    store_native_method(Character_Type_Class, SMB_asType_SmallInt, NM_Character_asType_SmallInt);
+    store_native_method(Type_Character_Type_Class, SMB_asString,   NM_Type_Character_asString);
+    store_native_method(Type_Character_Type_Class, SMB_asSymbol,   NM_Type_Character_asSymbol);
+    store_native_method(Type_Character_Type_Class, SMB_asType_SmallInt, NM_Type_Character_asType_SmallInt);
 }

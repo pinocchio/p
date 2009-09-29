@@ -55,7 +55,7 @@ void initialize_Symbol()
 NATIVE1(NM_Type_Symbol_Type_ObjectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
-    push_EXP(new_Character(((Type_Symbol) self)->value[index->value]));
+    push_EXP(new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
 NATIVE0(NM_Type_Symbol_asString)
@@ -68,7 +68,7 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
     Type_Array array = new_Raw_Array(self_symbol->size->value);
     int i;
     for (i=0; i<self_symbol->size->value; i++) {
-        array->values[i] = (Object)new_Character(self_symbol->value[i]);
+        array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
     }
     return array;
 }

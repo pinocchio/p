@@ -5,7 +5,7 @@ pre_init_Type_Symbol();
 pre_init_Array();
 pre_init_Assign();
 pre_init_Callec();
-pre_init_Character();
+pre_init_Type_Character();
 pre_init_Constant();
 pre_init_Continue();
 pre_init_Type_Dictionary();

@@ -2,7 +2,7 @@ post_init_Type_Object();
 post_init_Array();
 post_init_Assign();
 post_init_Callec();
-post_init_Character();
+post_init_Type_Character();
 post_init_Constant();
 post_init_Continue();
 post_init_Type_Dictionary();
@@ -18,5 +18,5 @@ post_init_Type_Symbol();
 post_init_Type_Boolean();
 post_init_Type_SmallInt();
 post_init_Variable();
-post_init_CharacterTable();
+post_init_Type_CharacterTable();
     

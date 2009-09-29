@@ -60,7 +60,7 @@ void run_tests()
     test_Assign();
     test_Boolean();
     test_Callec();
-    test_Character();
+    test_Type_Character();
     test_Type_Class();
     test_Constant();
     test_Continue();

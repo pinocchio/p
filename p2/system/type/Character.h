@@ -9,15 +9,15 @@ struct Type_Character_t {
     wchar_t value;
 };
 
-CREATE_INITIALIZERS(Character)
+CREATE_INITIALIZERS(Type_Character)
 
-Type_Character new_Character(wchar_t value);
+Type_Character new_Type_Character(wchar_t value);
 
 #define CHARACTER_TABLE_SIZE 128
 
 /* ========================================================================== */
 
-extern Type_Character new_raw_Character(wchar_t value);
+extern Type_Character new_raw_Type_Character(wchar_t value);
 
 /* ========================================================================== */
 
