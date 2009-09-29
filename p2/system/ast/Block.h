@@ -7,6 +7,8 @@
 /* ========================================================================== */
 
 struct AST_Block_t {
+    Runtime_Env scope;
+    
 };
 
 CREATE_INITIALIZERS(Block)
