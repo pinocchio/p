@@ -9,10 +9,6 @@ struct Type_Character_t {
     wchar_t value;
 };
 
-struct Type_CharacterTable_t {
-    Type_Character chars[0];
-};
-
 CREATE_INITIALIZERS(Character)
 
 Type_Character new_Character(wchar_t value);
@@ -21,6 +17,7 @@ Type_Character new_Character(wchar_t value);
 
 /* ========================================================================== */
 
+extern Type_Character new_raw_Character(wchar_t value);
 
 /* ========================================================================== */
 

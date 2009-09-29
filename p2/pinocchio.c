@@ -145,6 +145,7 @@ int main()
     pre_initialize_Super();
     pre_initialize_Type_Boolean();
     pre_initialize_Variable();
+    pre_initialize_CharacterTable();
 
     initialize_Symbol();
     initialize_Thread();
@@ -170,6 +171,7 @@ int main()
     post_initialize_Type_Boolean();
     post_initialize_Type_SmallInt();
     post_initialize_Variable();
+    post_initialize_CharacterTable();
     
 #ifdef TEST
     run_tests();

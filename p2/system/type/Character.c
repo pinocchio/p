@@ -9,8 +9,6 @@ Type_Class Character_Class;
 
 /* ======================================================================== */
 
-Type_CharacterTable Character_table;
-
 Type_Character new_raw_Character(wchar_t value)
 {
     Type_Character result = NEW_t(Type_Character);
@@ -57,21 +55,9 @@ NATIVE0(NM_Character_asSmallInt)
 /* ======================================================================== */
 
 
-void initialize_Character_Table()
-{
-    Character_table = NEW_ARRAYED(
-            struct Type_CharacterTable_t,
-            Type_Character[CHARACTER_TABLE_SIZE]);
-    int i;
-    for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
-        Character_table->chars[i] = new_raw_Character(i);
-    }
-}
-
 void post_initialize_Character()
 { 
-    initialize_Character_Table();
-    store_native_method(Character_Class,SMB_asString,   NM_Character_asString);
-    store_native_method(Character_Class,SMB_asSymbol,   NM_Character_asSymbol);
-    store_native_method(Character_Class,SMB_asSmallInt, NM_Character_asSmallInt);
+    store_native_method(Character_Class, SMB_asString,   NM_Character_asString);
+    store_native_method(Character_Class, SMB_asSymbol,   NM_Character_asSymbol);
+    store_native_method(Character_Class, SMB_asSmallInt, NM_Character_asSmallInt);
 }

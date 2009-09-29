@@ -25,3 +25,4 @@
 #include <system/ast/Callec.h>
 
 #include <system/runtime/Env.h>
+#include <system/type/CharacterTable.h>

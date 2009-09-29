@@ -1,0 +1,15 @@
+
+#define CHARACTERTABLE_TEST_SETUP \
+    Type_CharacterTable CharacterTable = new_CharacterTable(); \
+    Object result;
+
+/* ======================================================================== */
+
+
+/* ======================================================================== */
+
+void test_CharacterTable()
+{
+
+}
+
