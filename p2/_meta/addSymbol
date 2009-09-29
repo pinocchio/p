@@ -9,7 +9,7 @@ def addSymbol(symbol)
         f.puts "Object SMB_#{symbol_name};"
     end
     File.open("system/type/SymbolInitialization.ci", "a+") do |f|
-        f.puts "SMB_#{symbol_name} = (Object)new_Symbol(L\"#{symbol}\");"
+        f.puts "SMB_#{symbol_name} = (Object)new_Type_Symbol(L\"#{symbol}\");"
     end
 end
 

@@ -36,7 +36,7 @@ Runtime_Env current_env()
     return (Runtime_Env) Env;
 }
 
-void pre_initialize_Env()
+void pre_init_Env()
 {
     Env_Class = new_Named_Class((Object)Object_Class, L"Env");
 }
@@ -105,7 +105,7 @@ void CNT_restore_env()
 
 /* =========================================================================*/
 
-void post_initialize_Env()
+void post_init_Env()
 {
     Env = (Object)new_Env_Sized(Nil, Nil, 0);
 }

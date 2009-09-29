@@ -20,7 +20,7 @@ AST_Method new_Method(unsigned int paramc, Type_Array body)
     return result;
 }
 
-void pre_initialize_Method()
+void pre_init_Method()
 {
     Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
 }
@@ -97,7 +97,7 @@ void Method_invoke(Object method, Object self,
 
 /* ======================================================================== */
 
-void post_initialize_Method()
+void post_init_Method()
 {
     store_native_method((Type_Class)Method_Class,SMB_eval, NM_AST_Method_eval);
     // TODO for now accecpt any number of arguments

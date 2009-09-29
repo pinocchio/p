@@ -9,7 +9,7 @@ Type_Class Info_Class;
 
 /* ======================================================================== */
 
-void pre_initialize_Info()
+void pre_init_Info()
 {
     Info_Class = new_Named_Class((Object)Object_Class, L"Info");
 }
@@ -20,7 +20,7 @@ void pre_initialize_Info()
 
 /* ======================================================================== */
 
-void post_initialize_Info()
+void post_init_Info()
 {
 
 }

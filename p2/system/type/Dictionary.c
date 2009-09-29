@@ -18,7 +18,7 @@ Type_Dictionary new_Dictionary()
     return result;
 }
 
-void pre_initialize_Dictionary()
+void pre_init_Dictionary()
 {
     Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
 }
@@ -81,7 +81,7 @@ NATIVE2(NM_Dictionary_objectAt_put_)
 
 /* ======================================================================== */
 
-void post_initialize_Dictionary()
+void post_init_Dictionary()
 {
     store_native_method(Dictionary_Class, SMB_objectAt_, NM_Dictionary_objectAt_);
     store_native_method(Dictionary_Class, SMB_objectAt_put_, NM_Dictionary_objectAt_put_);

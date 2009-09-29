@@ -19,7 +19,7 @@ AST_Assign new_Assign(Object variable, Object expression)
     return result;
 }
 
-void pre_initialize_Assign()
+void pre_init_Assign()
 {
     Assign_Class        = new_Named_Class((Object)Object_Class, L"Assign");
 }
@@ -54,6 +54,6 @@ void CNT_AST_Assign_assign()
 
 /* ======================================================================== */
 
-void post_initialize_Assign()
+void post_init_Assign()
 {
 }

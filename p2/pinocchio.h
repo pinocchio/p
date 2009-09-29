@@ -34,8 +34,8 @@
 /* ======================================================================== */
 
 #define CREATE_INITIALIZERS(class) \
-extern void pre_initialize##_##class(); \
-extern void post_initialize##_##class(); \
+extern void pre_init##_##class(); \
+extern void post_init##_##class(); \
 extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\

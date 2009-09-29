@@ -42,7 +42,7 @@ Type_Array new_Array_With(int c, Object init)
     return result;
 }
 
-void pre_initialize_Array() 
+void pre_init_Array() 
 {
     Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
     
@@ -75,7 +75,7 @@ NATIVE0(NM_Array_size)
     push_EXP(new_SmallInt(((Type_Array)self)->size->value));
 }
 
-void post_initialize_Array()
+void post_init_Array()
 {
     Empty_Array->size   = new_SmallInt(0);
     

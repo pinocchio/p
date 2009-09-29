@@ -10,7 +10,7 @@ Object Self;
 
 /* =========================================================================*/
 
-void pre_initialize_Self()
+void pre_init_Self()
 {
     Self_Class = new_Named_Class((Object)Object_Class, L"Self");
     Self       = (Object) NEW_t(AST_Self);
@@ -40,7 +40,7 @@ void CNT_AST_Self_eval()
 
 /* =========================================================================*/
 
-void post_initialize_Self()
+void post_init_Self()
 {
 }
 

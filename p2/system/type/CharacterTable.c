@@ -13,7 +13,7 @@ Type_CharacterTable Character_table;
 
 /* ======================================================================== */
 
-void pre_initialize_CharacterTable()
+void pre_init_CharacterTable()
 {
     CharacterTable_Class = new_Named_Class((Object)Object_Class, L"CharacterTable");
 }
@@ -24,7 +24,7 @@ void pre_initialize_CharacterTable()
 
 /* ======================================================================== */
 
-void post_initialize_CharacterTable()
+void post_init_CharacterTable()
 {
     Character_table = NEW_ARRAYED(
             struct Type_CharacterTable_t,

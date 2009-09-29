@@ -20,7 +20,7 @@ AST_Super new_Super(Object message, Type_Array arguments)
     return result;
 }
 
-void pre_initialize_Super()
+void pre_init_Super()
 {
     Super_Class = new_Named_Class((Object)Object_Class, L"Super");
 }
@@ -76,6 +76,6 @@ void AST_Super_eval(AST_Super super)
 
 /* =========================================================================*/
 
-void post_initialize_Super()
+void post_init_Super()
 {
 }

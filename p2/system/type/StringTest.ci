@@ -2,46 +2,46 @@
 #include <wchar.h>
 
 #define STRING_TEST_SETUP \
-Type_String string = new_String(L"string"); \
+Type_String string = new_Type_String(L"string"); \
 Object result;
 
 /* ======================================================================== */
 
-void test_String_asString()
+void test_Type_String_asString()
 {
     STRING_TEST_SETUP;
     result = EvalSend0((Object)string, SMB_asString);
     assert(result == (Object)string);
 }
 
-void test_String_asSymbol()
+void test_Type_String_asSymbol()
 {
     STRING_TEST_SETUP;
     result = EvalSend0((Object)string, SMB_asSymbol);
-    ASSERT_TYPE(result, Symbol_Class);
+    ASSERT_TYPE(result, Type_Symbol_Class);
     assert(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
 }
 
-void test_String_concat_()
+void test_Type_String_concat_()
 {
     STRING_TEST_SETUP;
-    Type_String string2 = new_String(L"string2");
+    Type_String string2 = new_Type_String(L"string2");
     
-    Type_String string_result = String_concat_(string, string2);
-    ASSERT_TYPE(string_result, String_Class);
+    Type_String string_result = Type_String_concat_(string, string2);
+    ASSERT_TYPE(string_result, Type_String_Class);
     assert(string_result->size->value == (string->size->value + string2->size->value));
 
     result = EvalSend1((Object)string, SMB_concat_, (Object)string2);
-    ASSERT_TYPE(result, String_Class);
+    ASSERT_TYPE(result, Type_String_Class);
     assert(((Type_String) result)->size->value == (string->size->value + string2->size->value));
 }
 
 
 /* ======================================================================== */
 
-void test_String()
+void test_Type_String()
 {
-    test_String_asString();
-    test_String_asSymbol();
-    test_String_concat_();
+    test_Type_String_asString();
+    test_Type_String_asSymbol();
+    test_Type_String_concat_();
 }

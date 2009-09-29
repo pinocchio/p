@@ -6,7 +6,7 @@ void test_ast_self()
     Type_Array body   = new_Array_With(3, (Object)integer7_const);
     body->values[2]     = Self;
     AST_Method method = new_Method(0, body);
-    Type_Symbol test  = new_Symbol(L"test");
+    Type_Symbol test  = new_Type_Symbol(L"test");
     store_method(SmallInt_Class, (Object)test, (Object)method);
     Object result = EvalSend((Object)integer, (Object)test, Empty_Array);
     assert(result == (Object)integer);

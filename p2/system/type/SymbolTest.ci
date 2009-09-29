@@ -1,22 +1,22 @@
 
 
 #define SYMBOL_TEST_SETUP \
-Type_Symbol symbol = new_Symbol(L"symbol"); \
+Type_Symbol symbol = new_Type_Symbol(L"symbol"); \
 Object result;
 
 /* ======================================================================== */
 
-void test_Symbol_equals_()
+void test_Type_Symbol_equals_()
 {
-//  Type_Symbol symbol = new_Symbol(L"symbol"); 
-//    Type_Symbol symbol2 = new_Symbol(L"symbol");
+//  Type_Symbol symbol = new_Type_Symbol(L"symbol"); 
+//    Type_Symbol symbol2 = new_Type_Symbol(L"symbol");
     // Symbols should use a symbol table
     // TODO create SymbolTable
     //ASSERT_EQUALS(symbol,  symbol2);
     //ASSERT_EQUALS(symbol2, symbol);
 }
 
-void test_Symbol_size()
+void test_Type_Symbol_size()
 {
     SYMBOL_TEST_SETUP;
     result = EvalSend0((Object)symbol,SMB_size);
@@ -25,24 +25,24 @@ void test_Symbol_size()
     
 }
 
-void test_Symbol_asString()
+void test_Type_Symbol_asString()
 {
     SYMBOL_TEST_SETUP;
     result = EvalSend0((Object)symbol,SMB_asString);
-    ASSERT_TYPE(result, String_Class);
+    ASSERT_TYPE(result, Type_String_Class);
 }
 
-void test_Symbol_indexOf()
+void test_Type_Symbol_indexOf()
 {
     //SYMBOL_TEST_SETUP;
 }
 
-void test_Symbol_lastIndexOf()
+void test_Type_Symbol_lastIndexOf()
 {
     //SYMBOL_TEST_SETUP;
 }
 
-void test_Symbol_objectAt_()
+void test_Type_Symbol_objectAt_()
 {
     SYMBOL_TEST_SETUP;
     int i;
@@ -53,7 +53,7 @@ void test_Symbol_objectAt_()
     }
 }
 
-void test_Symbol_asArray()
+void test_Type_Symbol_asArray()
 {
     SYMBOL_TEST_SETUP;
     result = EvalSend0((Object)symbol,SMB_asArray);
@@ -69,11 +69,11 @@ void test_Symbol_asArray()
 
 /* ======================================================================== */
 
-void test_Symbol()
+void test_Type_Symbol()
 {
-    test_Symbol_equals_();
-    test_Symbol_size();
-    test_Symbol_asString();
-    test_Symbol_objectAt_();
-    test_Symbol_asArray();
+    test_Type_Symbol_equals_();
+    test_Type_Symbol_size();
+    test_Type_Symbol_asString();
+    test_Type_Symbol_objectAt_();
+    test_Type_Symbol_asArray();
 }

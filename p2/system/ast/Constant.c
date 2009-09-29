@@ -17,7 +17,7 @@ AST_Constant new_Constant(Object constant)
     return result;
 }
 
-void pre_initialize_Constant()
+void pre_init_Constant()
 {
     Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
 }
@@ -32,7 +32,7 @@ void AST_Constant_eval(AST_Constant self)
 /* ======================================================================== */
 
 
-void post_initialize_Constant()
+void post_init_Constant()
 {
 
 }

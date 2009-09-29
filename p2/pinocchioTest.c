@@ -72,9 +72,9 @@ void run_tests()
     test_Self();
     test_Send();
     test_SmallInt();
-    test_String();
+    test_Type_String();
     test_Super();
-    test_Symbol();
+    test_Type_Symbol();
     test_Thread();
     test_Variable();
 }

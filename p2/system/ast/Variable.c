@@ -18,7 +18,7 @@ AST_Variable new_Variable(const wchar_t* name)
     return result;
 }
 
-void pre_initialize_Variable()
+void pre_init_Variable()
 {
     Variable_Class      = new_Named_Class((Object)Object_Class, L"Variable");
 }
@@ -53,5 +53,5 @@ void AST_Variable_assign(AST_Variable self, Object value)
 
 /* =========================================================================*/
 
-void post_initialize_Variable(){}
+void post_init_Variable(){}
 

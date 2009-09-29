@@ -9,7 +9,7 @@ Type_Class Object_Class;
 
 /* ======================================================================== */
 
-void pre_initialize_Object() 
+void pre_init_Object() 
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
@@ -35,12 +35,12 @@ NATIVE0(NM_Object_asString)
 
 /* ======================================================================== */
 
-void post_initialize_Object()
+void post_init_Object()
 {
     // put the names here, now after the Symbols_Class is initialized
-    Class_Class->name   = new_String(L"Class");
+    Class_Class->name   = new_Type_String(L"Class");
     Class_Class->methods = new_Dictionary();
-    Object_Class->name = new_String(L"Object");
+    Object_Class->name = new_Type_String(L"Object");
     Object_Class->methods = new_Dictionary();
     
     store_native_method((Type_Class)Object_Class,SMB_equals_, NM_Object_equals);

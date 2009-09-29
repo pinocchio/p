@@ -27,7 +27,7 @@ new_File_FromPath(wchar_t * path)
     return NULL;
 }
 
-void pre_initialize_File()
+void pre_init_File()
 {
     File_Class = new_Named_Class((Object)Object_Class, L"File");
 }
@@ -37,7 +37,7 @@ void pre_initialize_File()
 
 /* =========================================================================*/
 
-void post_initialize_File()
+void post_init_File()
 {
     // TODO install methods 
 }

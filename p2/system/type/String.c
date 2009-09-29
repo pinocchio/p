@@ -7,27 +7,26 @@
 
 /* =========================================================================*/
 
-Type_Class String_Class;
+Type_Class Type_String_Class;
 
 /* =========================================================================*/
 
-Type_String new_String(const wchar_t * str)
+Type_String new_Type_String(const wchar_t * str)
 {
-    Type_String string = (Type_String) new_Symbol(str);
-    HEADER(string)       = (Object)String_Class;
+    Type_String string = (Type_String) new_Type_Symbol(str);
+    HEADER(string)       = (Object)Type_String_Class;
     return string;
 }
 
-void pre_initialize_String()
+void pre_init_Type_String()
 {
-    // TODO fix inheritence bug here
-    String_Class = new_Named_Class((Object)Object_Class, L"String");
+    Type_String_Class = new_Named_Class((Object)Object_Class, L"String");
 }
 
 /* =========================================================================*/
 
 
-Type_String String_concat_(Type_String str1, Type_String str2)
+Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {
     int len = str1->size->value + str2->size->value;
     wchar_t* concated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
@@ -38,39 +37,39 @@ Type_String String_concat_(Type_String str1, Type_String str2)
     for (j=0; j<str2->size->value; j++) {
         concated[i+j] = str2->value[j];
     } 
-    return new_String(concated);
+    return new_Type_String(concated);
 }
 
-void CNT_String_concat_()
+void CNT_Type_String_concat_()
 {
     zap_CNT();
     Object string = pop_EXP();
     Object self = pop_EXP();
-    push_EXP(String_concat_((Type_String)self, (Type_String)string));
+    push_EXP(Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
-NATIVE1(NM_String_concat_)
-    push_CNT(CNT_String_concat_);
+NATIVE1(NM_Type_String_concat_)
+    push_CNT(CNT_Type_String_concat_);
     push_CNT(CNT_send_Eval);
     // TODO create a expanded send  
     push_EXP(new_Send((Object)new_Constant(args->values[0]), SMB_asString, Empty_Array));
 }
 
-NATIVE0(NM_String_asString)
+NATIVE0(NM_Type_String_asString)
     // self is per default on the stack
 }
 
-NATIVE0(NM_String_asSymbol)
-    push_EXP(new_Symbol(((Type_String)self)->value));
+NATIVE0(NM_Type_String_asSymbol)
+    push_EXP(new_Type_Symbol(((Type_String)self)->value));
 }
 
 /* =========================================================================*/
 
-void post_initialize_String()
+void post_init_Type_String()
 {
-    install_symbol_methods(String_Class);
-    store_native_method(String_Class, SMB_concat_, NM_String_concat_);
-    store_native_method(String_Class, SMB_asString, NM_String_asString);
-    store_native_method(String_Class, SMB_asSymbol, NM_String_asSymbol);
+    install_symbol_methods(Type_String_Class);
+    store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);
+    store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
+    store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
 }
 

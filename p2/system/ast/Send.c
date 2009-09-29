@@ -19,7 +19,7 @@ AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
     return result;
 }
 
-void pre_initialize_Send()
+void pre_init_Send()
 {
     Send_Class          = new_Named_Class((Object)Object_Class, L"Send");
 }
@@ -75,5 +75,5 @@ void AST_Send_eval(AST_Send self)
 
 /* =========================================================================*/
 
-void post_initialize_Send(){}
+void post_init_Send(){}
 

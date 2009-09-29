@@ -9,12 +9,12 @@ Type_Class Block_Class;
 
 /* ========================================================================== */
 
-void pre_initialize_Block()
+void pre_init_Block()
 {
 }
 
 /* ========================================================================== */
 
-void post_initialize_Block()
+void post_init_Block()
 {
 }

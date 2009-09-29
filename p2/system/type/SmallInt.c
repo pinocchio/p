@@ -27,7 +27,7 @@ Type_SmallInt new_SmallInt(int value)
     return new_raw_SmallInt(value);
 }
 
-void pre_initialize_Type_SmallInt() 
+void pre_init_Type_SmallInt() 
 {
     SmallInt_Class         = NEW_t(Type_Class);
     HEADER(SmallInt_Class) = (Object)Class_Class;
@@ -78,9 +78,9 @@ NATIVE0(NM_SmallInt_hash)
 
 /* =========================================================================*/
 
-void post_initialize_Type_SmallInt()
+void post_init_Type_SmallInt()
 {
-    SmallInt_Class->name    = new_String(L"SmallInt");
+    SmallInt_Class->name    = new_Type_String(L"SmallInt");
     SmallInt_Class->methods = new_Dictionary();
     
     store_native_method((Type_Class)SmallInt_Class, SMB_equals_,     NM_SmallInt_equals_);

@@ -40,7 +40,7 @@ void test_method_invocation_with_arguments()
     var->key = (Object)method;
     var->index = 0;
     
-    Type_Symbol test           = new_Symbol(L"test");
+    Type_Symbol test           = new_Type_Symbol(L"test");
     Type_SmallInt integer      = new_SmallInt(120);
     AST_Constant integer_const = new_Constant((Object)integer);
     store_method(SmallInt_Class, (Object)test, (Object)method);
@@ -54,7 +54,7 @@ void test_method_invocation()
 {
     Type_Array body = Empty_Array;
     AST_Method method = new_Method(0, body);
-    Type_Symbol test = new_Symbol(L"test");
+    Type_Symbol test = new_Type_Symbol(L"test");
     Type_SmallInt integer = new_SmallInt(120);
     AST_Constant integer_const = new_Constant((Object)integer);
     store_method(SmallInt_Class, (Object)test, (Object)method);

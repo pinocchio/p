@@ -28,8 +28,8 @@ def createCHSourcesAt(path)
     sourceH.puts "    #error \"TODO fill out struct\""
     sourceH.puts "};"
     sourceH.puts
-    sourceH.puts "CREATE_INITIALIZERS(#{name})"
-    sourceH.puts "extern #{fullName} new_#{name}();"
+    sourceH.puts "CREATE_INITIALIZERS(#{fullName})"
+    sourceH.puts "extern #{fullName} new_#{fullName}();"
     sourceH.puts
     sourceH.puts separator
     sourceH.puts
@@ -51,13 +51,13 @@ def createCHSourcesAt(path)
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
-    sourceC.puts "Type_Class #{name}_Class;"
+    sourceC.puts "Type_Class #{fullName}_Class;"
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
-    sourceC.puts "void pre_initialize_#{name}()"
+    sourceC.puts "void pre_init_#{fullName}()"
     sourceC.puts "{"
-    sourceC.puts "    #{name}_Class = new_Named_Class((Object)Object_Class, L\"#{name}\");"
+    sourceC.puts "    #{fullName}_Class = new_Named_Class((Object)Object_Class, L\"#{fullName}\");"
     sourceC.puts "}"
     sourceC.puts 
     sourceC.puts separator
@@ -66,7 +66,7 @@ def createCHSourcesAt(path)
     sourceC.puts 
     sourceC.puts separator
     sourceC.puts 
-    sourceC.puts "void post_initialize_#{name}()"
+    sourceC.puts "void post_init_#{fullName}()"
     sourceC.puts "{"
     sourceC.puts
     sourceC.puts "}"
@@ -74,7 +74,7 @@ def createCHSourcesAt(path)
 
     sourceT.puts 
     sourceT.puts "#define #{name.upcase}_TEST_SETUP \\" 
-    sourceT.puts "    Type_#{name} #{name} = new_#{name}(); \\"
+    sourceT.puts "    #{fullName} #{name} = new_#{fullName}(); \\"
     sourceT.puts "    Object result;"
     sourceT.puts 
     sourceT.puts separator 
@@ -82,26 +82,26 @@ def createCHSourcesAt(path)
     sourceT.puts 
     sourceT.puts separator
     sourceT.puts 
-    sourceT.puts "void test_#{name}()" 
+    sourceT.puts "void test_#{fullName}()" 
     sourceT.puts "{" 
     sourceT.puts 
     sourceT.puts "}"
     sourceT.puts 
 
-    File.open("pinocchioPreInitializer.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
-        file.puts "pre_initialize_#{name}();"
+    File.open("pinocchioPreInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
+        file.puts "pre_init_#{fullName}();"
     end
 
-    File.open("pinocchioPostInitializer.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
-        file.puts "post_initialize_#{name}();"
+    File.open("pinocchioPostInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
+        file.puts "post_init_#{fullName}();"
     end
-
+    
+    puts "Successfully created #{fullName}"
 end
 
 
 if $0 == __FILE__:
     $*.each { |path|
         createCHSourcesAt path  
-        puts "Successfully created #{fullName}"
     }
 end
