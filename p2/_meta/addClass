@@ -7,7 +7,7 @@ def createCHSourcesAt(path)
     name = IO_File.basename path
     dirname = IO_File.basename dir
     fullName = "#{dirname.capitalize}_#{name}"
-    guard = "#{name.upcase}_H"
+    guard = "#{dirname.upcase}_#{name.upcase}_H"
 
     # create the file only if it doesn't exist yet
     sourceH = IO_File.open("#{path}.h", IO_File::WRONLY|IO_File::EXCL|IO_File::CREAT)
