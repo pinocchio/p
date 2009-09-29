@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+
+
+def createCHSourcesAt(path)
+    separator = "/* ======================================================================== */"
+    dir = File.dirname path
+    name = File.basename path
+    dirname = File.basename dir
+    fullName = "#{dirname.upcase}_#{name}"
+    guard = "#{name.upcase}_H"
+
+    # create the file only if it doesn't exist yet
+    sourceH = File.open(path+".h", File::WRONLY|File::EXCL|File::CREAT)
+    sourceH.puts "#ifndef #{guard}"
+    sourceH.puts "#define #{guard}"
+    sourceH.puts
+    sourceH.puts "#include <pinocchio.h>" 
+    sourceH.puts
+    sourceH.puts separator
+    sourceH.puts
+    sourceH.puts "struct #{fullName}_t {"
+    sourceH.puts
+    sourceH.puts "};"
+    sourceH.puts
+    sourceH.puts "CREATE_INITIALIZERS(#{name})"
+    sourceH.puts "extern #{fullName} new_#{name}();"
+    sourceH.puts
+    sourceH.puts separator
+    sourceH.puts
+    sourceH.puts separator
+    sourceH.puts
+    sourceH.puts "#endif // #{guard}"
+    sourceH.close
+
+    sourceC = File.open(path+".c", File::WRONLY|File::EXCL|File::CREAT)
+    sourceC.puts
+    sourceC.puts "#include <stdlib.h>"
+    sourceC.puts "#include <stdio.h>"
+    sourceC.puts "#include <#{dir}/#{name}.h>"
+    sourceC.puts 
+    sourceC.puts separator
+    sourceC.puts 
+    sourceC.puts "Type_Class #{name}_Class;"
+    sourceC.puts 
+    sourceC.puts separator
+    sourceC.puts 
+    sourceC.puts "void pre_initialize_#{name}()"
+    sourceC.puts "{"
+    sourceC.puts "    #{name}_Class = new_Named_Class((Object)Object_Class, L\"#{name}\");"
+    sourceC.puts "}"
+    sourceC.puts 
+    sourceC.puts separator
+    sourceC.puts 
+    sourceC.puts 
+    sourceC.puts 
+    sourceC.puts separator
+    sourceC.puts 
+    sourceC.puts "void post_initialize_#{name}()"
+    sourceC.puts "{"
+    sourceC.puts
+    sourceC.puts "}"
+    sourceC.close
+
+    sourceT = File.open(path+"Test.ci", File::WRONLY|File::EXCL|File::CREAT)
+    sourceT.puts 
+    sourceT.puts "#define #{name.upcase}_TEST_SETUP \\" 
+    sourceT.puts "    Type_#{name} #{name} = new_#{name}(); \\"
+    sourceT.puts "    Object result;"
+    sourceT.puts 
+    sourceT.puts separator 
+    sourceT.puts 
+    sourceT.puts 
+    sourceT.puts separator
+    sourceT.puts 
+    sourceT.puts "void test_#{name}()" 
+    sourceT.puts "{" 
+    sourceT.puts 
+    sourceT.puts "}"
+    sourceT.puts 
+
+
+end
+
+
+if $0 == __FILE__:
+    $*.each { |path|
+        createCHSourcesAt path     
+    }
+end
