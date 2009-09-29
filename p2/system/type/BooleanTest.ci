@@ -1,5 +1,4 @@
-void test_boolean_equals()
-{
+NEW_TEST(test_boolean_equals)
     Object result;
     
     result = Eval_AST_Send((Object)True, SMB_equals_, new_Type_Array_With(1, (Object)True));

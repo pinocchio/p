@@ -1,6 +1,5 @@
 
-void test_Type_Array_Type_ObjectAt_()
-{
+NEW_TEST(test_Type_Array_Type_ObjectAt_)
     Object integer       = (Object)new_Type_SmallInt(10);
     Object integer2      = (Object)new_Type_SmallInt(2);
     Type_Array array   = new_Type_Array_With(10, integer);
@@ -17,8 +16,7 @@ void test_Type_Array_Type_ObjectAt_()
     assert0(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer2);
 }
 
-void test_Type_Array_size()
-{
+NEW_TEST(test_Type_Array_size)
     Object integer     = (Object)new_Type_SmallInt(10);
     Type_Array array = new_Type_Array_With(10, integer);
     Object result      = Eval_AST_Send((Object)array, SMB_size, Empty_Type_Array);
@@ -29,8 +27,7 @@ void test_Type_Array_size()
 		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
 }
 
-void test_Type_Array_Type_ObjectAt_put()
-{
+NEW_TEST(test_Type_Array_Type_ObjectAt_put)
     Object result;
     Object integer     = (Object)new_Type_SmallInt(10);
     Object integer0    = (Object)new_Type_SmallInt(0);

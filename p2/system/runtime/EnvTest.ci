@@ -1,5 +1,4 @@
-void test_variable_lookup()
-{
+NEW_TEST(test_variable_lookup)
     // TODO complete test
     AST_Variable var = new_AST_Variable(L"test");
     var->index         = 0;

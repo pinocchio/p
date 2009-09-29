@@ -5,24 +5,21 @@ Object result;
 
 /* ========================================================================== */
 
-void test_Type_Character_asType_SmallInt()
-{
+NEW_TEST(test_Type_Character_asType_SmallInt)
     CHARACTER_TEST_SETUP;
     result = Eval_AST_Send0((Object)chr, SMB_asType_SmallInt);
     ASSERT_TYPE(result, Type_SmallInt_Class);
 }
 
 
-void test_Type_Character_asSymbol()
-{
+NEW_TEST(test_Type_Character_asSymbol)
     CHARACTER_TEST_SETUP;
     result = Eval_AST_Send0((Object)chr, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert0(((Type_String)result)->value[0] == chr->value);
 }
 
-void test_Type_Character_asString()
-{
+NEW_TEST(test_Type_Character_asString)
     CHARACTER_TEST_SETUP;
     result = Eval_AST_Send0((Object)chr, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);

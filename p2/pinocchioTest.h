@@ -20,6 +20,7 @@ extern void run_tests();
 /* ========================================================================== */
 
 extern jmp_buf __test_continue__;
+
 #define RUN_TEST(f)\
     if (!sigsetjmp(__test_continue__, 1)) {\
         RESET_LOG();\
