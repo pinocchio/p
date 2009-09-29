@@ -61,7 +61,7 @@ void run_tests()
     test_Boolean();
     test_Callec();
     test_Character();
-    test_Class();
+    test_Type_Class();
     test_Constant();
     test_Continue();
     test_Type_Dictionary();

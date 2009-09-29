@@ -5,20 +5,20 @@
 
 /* ======================================================================== */
 
-Type_Class Continue_Class;
+Type_Class Continue_Type_Class;
 
 /* ======================================================================== */
 
 AST_Continue new_Continue(Object target)
 {
     AST_Continue result = NEW_t(AST_Continue);
-    HEADER(result)        = (Object)Continue_Class;
+    HEADER(result)        = (Object)Continue_Type_Class;
     return result;
 }
 
 void pre_init_Continue()
 {
-    Continue_Class = new_Named_Class((Object)Type_Object_Class, L"Continue");
+    Continue_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Continue");
 }
 
 /* ======================================================================== */
@@ -40,5 +40,5 @@ NATIVE1(NM_AST_Continue_eval)
 
 void post_init_Continue()
 {
-    store_native_method(Continue_Class,SMB_eval, NM_AST_Continue_eval);
+    store_native_method(Continue_Type_Class,SMB_eval, NM_AST_Continue_eval);
 }

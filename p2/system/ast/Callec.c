@@ -7,21 +7,21 @@
 
 /* ======================================================================== */
 
-Type_Class Callec_Class;
+Type_Class Callec_Type_Class;
 
 /* ======================================================================== */
 
 AST_Callec new_Callec()
 {
     AST_Callec result = NEW_t(AST_Callec);
-    HEADER(result)    = (Object)Callec_Class;
+    HEADER(result)    = (Object)Callec_Type_Class;
     result->cont      = new_Continue((Object)result);
     return result;
 }
 
 void pre_init_Callec()
 {
-    Callec_Class = new_Named_Class((Object)Type_Object_Class, L"Callec");
+    Callec_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Callec");
 }
 
 /* ======================================================================== */

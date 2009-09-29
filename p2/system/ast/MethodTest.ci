@@ -43,7 +43,7 @@ void test_method_invocation_with_arguments()
     Type_Symbol test           = new_Type_Symbol(L"test");
     Type_SmallInt integer      = new_Type_SmallInt(120);
     AST_Constant integer_const = new_Constant((Object)integer);
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
+    store_method(Type_SmallInt_Type_Class, (Object)test, (Object)method);
     Type_Array args = new_Array_With(1, (Object)integer_const);
     Object result     = Eval((Object)new_Send((Object)integer_const, (Object)test, args));
     assert(result == (Object)integer);
@@ -57,7 +57,7 @@ void test_method_invocation()
     Type_Symbol test = new_Type_Symbol(L"test");
     Type_SmallInt integer = new_Type_SmallInt(120);
     AST_Constant integer_const = new_Constant((Object)integer);
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
+    store_method(Type_SmallInt_Type_Class, (Object)test, (Object)method);
     Object result = Eval((Object)new_Send((Object)integer_const, (Object)test, Empty_Array));
     assert(result == (Object)integer);
     
@@ -66,7 +66,7 @@ void test_method_invocation()
     AST_Constant integer5_const = new_Constant((Object)integer5);
     body = new_Array_With(1, (Object)integer5_const);
     method = new_Method(0, body);
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
+    store_method(Type_SmallInt_Type_Class, (Object)test, (Object)method);
     result = Eval((Object)new_Send((Object)integer_const, (Object)test, Empty_Array));
     assert(result == (Object)integer5);
     
@@ -76,7 +76,7 @@ void test_method_invocation()
     body = new_Array_With(2, (Object)integer5_const);
     body->values[1] = (Object)integer6_const;
     method = new_Method(0, body);
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
+    store_method(Type_SmallInt_Type_Class, (Object)test, (Object)method);
     result = Eval((Object)new_Send((Object)integer_const, (Object)test, Empty_Array));
     assert(result == (Object)integer6);
     
@@ -87,7 +87,7 @@ void test_method_invocation()
     body->values[1] = (Object)integer6_const;
     body->values[2] = (Object)integer7_const;
     method = new_Method(0, body);
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
+    store_method(Type_SmallInt_Type_Class, (Object)test, (Object)method);
     result = Eval((Object)new_Send((Object)integer_const, (Object)test, Empty_Array));
     assert(result == (Object)integer7);
 }

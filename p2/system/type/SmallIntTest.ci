@@ -24,7 +24,7 @@ void test_Type_SmallInt_##name##_() \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
     result = EvalSend1((Object)int4, SMB_##name##_, (Object)int8); \
-    ASSERT_TYPE(result, Type_SmallInt_Class); \
+    ASSERT_TYPE(result, Type_SmallInt_Type_Class); \
     printf("%i\n", ((Type_SmallInt)result)->value); \
     assert(((Type_SmallInt)result)->value == (int4->value op int8->value)); \
 
@@ -57,7 +57,7 @@ void test_Type_SmallInt_hash()
 {
     Type_SmallInt number = new_Type_SmallInt(10);
     Object result = EvalSend0((Object)number, (Object)SMB_hash);
-    ASSERT_TYPE(result, Type_SmallInt_Class);
+    ASSERT_TYPE(result, Type_SmallInt_Type_Class);
     assert(((Type_SmallInt)result)->value == number->value);
 }
 

@@ -7,20 +7,20 @@
 
 /* =========================================================================*/
 
-Type_Class Type_String_Class;
+Type_Class Type_String_Type_Class;
 
 /* =========================================================================*/
 
 Type_String new_Type_String(const wchar_t * str)
 {
     Type_String string = (Type_String) new_Type_Symbol(str);
-    HEADER(string)       = (Object)Type_String_Class;
+    HEADER(string)       = (Object)Type_String_Type_Class;
     return string;
 }
 
 void pre_init_Type_String()
 {
-    Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
+    Type_String_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"String");
 }
 
 /* =========================================================================*/
@@ -67,9 +67,9 @@ NATIVE0(NM_Type_String_asSymbol)
 
 void post_init_Type_String()
 {
-    install_symbol_methods(Type_String_Class);
-    store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);
-    store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
-    store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
+    install_symbol_methods(Type_String_Type_Class);
+    store_native_method(Type_String_Type_Class, SMB_concat_,  NM_Type_String_concat_);
+    store_native_method(Type_String_Type_Class, SMB_asString, NM_Type_String_asString);
+    store_native_method(Type_String_Type_Class, SMB_asSymbol, NM_Type_String_asSymbol);
 }
 

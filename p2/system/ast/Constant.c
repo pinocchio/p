@@ -5,21 +5,21 @@
 
 /* ======================================================================== */
 
-Type_Class Constant_Class;
+Type_Class Constant_Type_Class;
 
 /* ======================================================================== */
 
 AST_Constant new_Constant(Object constant)
 {
     AST_Constant   result = NEW_t(AST_Constant);
-    HEADER(result)        = (Object)Constant_Class;
+    HEADER(result)        = (Object)Constant_Type_Class;
     result->constant      = constant;
     return result;
 }
 
 void pre_init_Constant()
 {
-    Constant_Class = new_Named_Class((Object)Type_Object_Class, L"Constant");
+    Constant_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Constant");
 }
 
 /* ======================================================================== */

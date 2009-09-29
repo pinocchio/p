@@ -12,21 +12,21 @@ struct Type_Class_t {
     Object          cvars[];
 };
 
-CREATE_INITIALIZERS(Class)
+CREATE_INITIALIZERS(Type_Class)
 
-Type_Class MetaClass_Class;
-
-/* ======================================================================== */
-
-extern Type_Class new_Class(Object superclass);
-extern Type_Class new_named_MetaClass(Object superclass, const wchar_t* name);
-extern Type_Class new_Named_Class(Object superclass, const wchar_t* name);
+Type_Class MetaType_Class_Type_Class;
 
 /* ======================================================================== */
 
-extern void Class_dispatch(InlineCache * sender, Object self, Object class,
+extern Type_Class new_Type_Class(Object superclass);
+extern Type_Class new_named_MetaType_Class(Object superclass, const wchar_t* name);
+extern Type_Class new_Named_Type_Class(Object superclass, const wchar_t* name);
+
+/* ======================================================================== */
+
+extern void Type_Class_dispatch(InlineCache * sender, Object self, Object class,
                     Object msg, Type_Array args);
 
-extern void CNT_Class_super();
+extern void CNT_Type_Class_super();
 
 #endif // CLASS_H

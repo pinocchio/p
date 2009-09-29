@@ -45,7 +45,7 @@ void initialize_Thread()
 /* ========================================================================== */
 
 #define EVAL_IF(name) \
-    if (class == name##_Class) { \
+    if (class == name##_Type_Class) { \
         return AST_##name##_eval((AST_##name)exp); \
     }
 

@@ -5,7 +5,7 @@
 
 /* ======================================================================== */
 
-Type_Class Type_SmallInt_Class;
+Type_Class Type_SmallInt_Type_Class;
 
 Type_SmallInt* Type_SmallInt_cache;
 
@@ -14,7 +14,7 @@ Type_SmallInt* Type_SmallInt_cache;
 Type_SmallInt new_raw_Type_SmallInt(int value)
 {
     Type_SmallInt result = NEW_t(Type_SmallInt);
-    HEADER(result)         = (Object) Type_SmallInt_Class;
+    HEADER(result)         = (Object) Type_SmallInt_Type_Class;
     result->value          = value;
     return result;
 }
@@ -29,9 +29,9 @@ Type_SmallInt new_Type_SmallInt(int value)
 
 void pre_init_Type_SmallInt() 
 {
-    Type_SmallInt_Class         = NEW_t(Type_Class);
-    HEADER(Type_SmallInt_Class) = (Object)Class_Class;
-    Type_SmallInt_Class->super  = (Object)Type_Object_Class;
+    Type_SmallInt_Type_Class         = NEW_t(Type_Class);
+    HEADER(Type_SmallInt_Type_Class) = (Object)Type_Class_Type_Class;
+    Type_SmallInt_Type_Class->super  = (Object)Type_Object_Type_Class;
     
     Type_SmallInt_cache = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Type_SmallInt_cache -= INT_CACHE_LOWER;
@@ -46,7 +46,7 @@ void pre_init_Type_SmallInt()
 
 #define Type_SmallInt_BINARY_OPERATION(Name, op)\
 NATIVE1(Name)\
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);\
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class);\
     Type_SmallInt arg = (Type_SmallInt)args->values[0];\
     poke_EXP(1, new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
 }
@@ -62,7 +62,7 @@ Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_or_,         |);
 
 
 NATIVE1(NM_Type_SmallInt_equals_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Type_Class);
     
     Type_SmallInt number = ((Type_SmallInt) self);
     if (number->value == ((Type_SmallInt) args->values[0])->value) {
@@ -80,21 +80,21 @@ NATIVE0(NM_Type_SmallInt_hash)
 
 void post_init_Type_SmallInt()
 {
-    Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
-    Type_SmallInt_Class->methods = new_Type_Dictionary();
+    Type_SmallInt_Type_Class->name    = new_Type_String(L"Type_SmallInt");
+    Type_SmallInt_Type_Class->methods = new_Type_Dictionary();
     
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_equals_,     NM_Type_SmallInt_equals_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_plus_,       NM_Type_SmallInt_plus_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_minus_,      NM_Type_SmallInt_minus_);   
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_times_,      NM_Type_SmallInt_times_); 
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_divide_,     NM_Type_SmallInt_divide_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_shiftLeft_,  NM_Type_SmallInt_shiftLeft_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_shiftRight_, NM_Type_SmallInt_shiftRight_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_and_,        NM_Type_SmallInt_and_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_or_,         NM_Type_SmallInt_or_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash, NM_Type_SmallInt_hash);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_equals_,     NM_Type_SmallInt_equals_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_plus_,       NM_Type_SmallInt_plus_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_minus_,      NM_Type_SmallInt_minus_);   
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_times_,      NM_Type_SmallInt_times_); 
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_divide_,     NM_Type_SmallInt_divide_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_shiftLeft_,  NM_Type_SmallInt_shiftLeft_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_shiftRight_, NM_Type_SmallInt_shiftRight_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_and_,        NM_Type_SmallInt_and_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_or_,         NM_Type_SmallInt_or_);
+    store_native_method((Type_Class)Type_SmallInt_Type_Class, SMB_hash, NM_Type_SmallInt_hash);
     
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_plus_));
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_minus_));
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_equals_));
+    assert(Type_Dictionary_lookup(Type_SmallInt_Type_Class->methods, SMB_plus_));
+    assert(Type_Dictionary_lookup(Type_SmallInt_Type_Class->methods, SMB_minus_));
+    assert(Type_Dictionary_lookup(Type_SmallInt_Type_Class->methods, SMB_equals_));
 }

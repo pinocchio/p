@@ -6,7 +6,7 @@
 
 /* ======================================================================== */
 
-Type_Class Env_Class;
+Type_Class Env_Type_Class;
 Object Env;
 
 /* ======================================================================== */
@@ -14,7 +14,7 @@ Object Env;
 Runtime_Env new_Env(Object parent, Object key, Type_Array values)
 {
     Runtime_Env result    = NEW_t(Runtime_Env);
-    HEADER(result)          = (Object)Env_Class;
+    HEADER(result)          = (Object)Env_Type_Class;
     result->parent          = parent;
     result->key             = key;
     result->values          = values;
@@ -24,7 +24,7 @@ Runtime_Env new_Env(Object parent, Object key, Type_Array values)
 Runtime_Env new_Env_Sized(Object parent, Object key, int size)
 {
     Runtime_Env result    = NEW_t(Runtime_Env);
-    HEADER(result)          = (Object)Env_Class;
+    HEADER(result)          = (Object)Env_Type_Class;
     result->parent          = parent;
     result->key             = key;
     result->values          = new_Array_With(size, Nil);
@@ -38,7 +38,7 @@ Runtime_Env current_env()
 
 void pre_init_Env()
 {
-    Env_Class = new_Named_Class((Object)Type_Object_Class, L"Env");
+    Env_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Env");
 }
 
 /* =========================================================================*/
@@ -46,7 +46,7 @@ void pre_init_Env()
 void Env_lookup(Runtime_Env self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Env_Class) {
+        if (HEADER(self->parent) == (Object)Env_Type_Class) {
             self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
@@ -69,7 +69,7 @@ void Env_assign(Runtime_Env self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Env_Class) {
+        if (HEADER(self->parent) == (Object)Env_Type_Class) {
             self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */

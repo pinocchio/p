@@ -6,21 +6,21 @@
 
 /* ======================================================================== */
 
-Type_Class Variable_Class;
+Type_Class Variable_Type_Class;
 
 /* ======================================================================== */
 
 AST_Variable new_Variable(const wchar_t* name)
 {
     AST_Variable result = NEW_t(AST_Variable);
-    HEADER(result)        = (Object)Variable_Class;
+    HEADER(result)        = (Object)Variable_Type_Class;
     /* TODO add name */
     return result;
 }
 
 void pre_init_Variable()
 {
-    Variable_Class      = new_Named_Class((Object)Type_Object_Class, L"Variable");
+    Variable_Type_Class      = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Variable");
 }
 
 /* =========================================================================*/
@@ -30,7 +30,7 @@ void AST_Variable_eval(AST_Variable self)
     LOGFUN;
     Object env = (Object)current_env();
     
-    if (HEADER(env) == (Object)Env_Class) {
+    if (HEADER(env) == (Object)Env_Type_Class) {
         return Env_lookup(
                                   (Runtime_Env)env, self->index, self->key);
     } else {
@@ -44,7 +44,7 @@ void AST_Variable_eval(AST_Variable self)
 void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
-    if (HEADER(env) == (Object)Env_Class) {
+    if (HEADER(env) == (Object)Env_Type_Class) {
         return Env_assign((Runtime_Env)env, self->index, self->key, value);
     }
     // TODO

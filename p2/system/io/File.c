@@ -5,7 +5,7 @@
 
 /* ======================================================================== */
 
-Type_Class File_Class;
+Type_Class File_Type_Class;
 
 /* ======================================================================== */
 
@@ -29,7 +29,7 @@ new_File_FromPath(wchar_t * path)
 
 void pre_init_File()
 {
-    File_Class = new_Named_Class((Object)Type_Object_Class, L"File");
+    File_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"File");
 }
 
 /* =========================================================================*/

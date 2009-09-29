@@ -5,14 +5,14 @@
 
 /* ======================================================================== */
 
-Type_Class Send_Class;
+Type_Class Send_Type_Class;
 
 /* ======================================================================== */
 
 AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
 {
     AST_Send result = NEW_t(AST_Send);
-    HEADER(result)    = (Object)Send_Class;
+    HEADER(result)    = (Object)Send_Type_Class;
     result->receiver  = receiver;
     result->message   = msg;
     result->arguments = arguments;
@@ -21,7 +21,7 @@ AST_Send new_Send(Object receiver, Object msg, Type_Array arguments)
 
 void pre_init_Send()
 {
-    Send_Class          = new_Named_Class((Object)Type_Object_Class, L"Send");
+    Send_Type_Class          = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Send");
 }
 
 /* =========================================================================*/
@@ -36,7 +36,7 @@ void CNT_AST_Send_send()
     // insert the receiver at the old ast_send position
     poke_EXP(1, receiver);
     
-    Class_dispatch(&self->cache, receiver, HEADER(receiver),
+    Type_Class_dispatch(&self->cache, receiver, HEADER(receiver),
                     self->message, args);
 }
 

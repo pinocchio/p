@@ -6,50 +6,50 @@
 
 /* ======================================================================== */
 
-Type_Class Class_Class;
-Type_Class MetaClass_Class;
+Type_Class Type_Class_Type_Class;
+Type_Class MetaType_Class_Type_Class;
 
 /* ======================================================================== */
 
-Type_Class new_Class(Object superclass)
+Type_Class new_Type_Class(Object superclass)
 {
     Type_Class result   = NEW_t(Type_Class);
     result->methods     = new_Type_Dictionary();
-    HEADER(result)      = (Object) Class_Class;
+    HEADER(result)      = (Object) Type_Class_Type_Class;
     result->super       = superclass;
     return result;
 }
 
-Type_Class new_named_MetaClass(Object superclass, const wchar_t* name)
+Type_Class new_named_MetaType_Class(Object superclass, const wchar_t* name)
 {
-    Type_Class result = (Type_Class) new_Class(superclass);
+    Type_Class result = (Type_Class) new_Type_Class(superclass);
     result->name      = new_Type_String(name);
-    HEADER(result)    = (Object)MetaClass_Class;
+    HEADER(result)    = (Object)MetaType_Class_Type_Class;
     return result;
 }
 
-Type_Class new_Named_Class(Object superclass, const wchar_t* name)
+Type_Class new_Named_Type_Class(Object superclass, const wchar_t* name)
 {
-    Type_Class result = (Type_Class) new_Class(superclass);
+    Type_Class result = (Type_Class) new_Type_Class(superclass);
     result->name      = new_Type_String(name);
-    //HEADER(result)  = (Object)new_named_MetaClass(superclass, name);
+    //HEADER(result)  = (Object)new_named_MetaType_Class(superclass, name);
     return result;
 }
 
-void pre_init_Class()
+void pre_init_Type_Class()
 {
-    // explicitely use new_Class not new_Named_Class! to avoid early use
+    // explicitely use new_Type_Class not new_Named_Type_Class! to avoid early use
     // of symbols.
-    MetaClass_Class = new_Class(Nil);
+    MetaType_Class_Type_Class = new_Type_Class(Nil);
 }
 
 /* ======================================================================== */
 
-void CNT_Class_super()
+void CNT_Type_Class_super()
 {
     zap_CNT();
     Object class = peek_EXP(1);
-    if (HEADER(class) == (Object)Class_Class) {
+    if (HEADER(class) == (Object)Type_Class_Type_Class) {
         poke_EXP(1, ((Type_Class)class)->super);
         return;
     }
@@ -58,7 +58,7 @@ void CNT_Class_super()
 }
 
 
-void Class_dispatch(InlineCache * cache, Object self, Object class,
+void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
                     Object msg, Type_Array args)
 {
     //printf("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
@@ -72,9 +72,9 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
             ((Type_Class)HEADER(self))->name->value);
         return Method_invoke(cache->method, self, class, args);
     }
-    if (HEADER(class) != (Object)Class_Class) {
-        LOG("Wrong meta class not of type Class_Class\n");
-        assert(HEADER(class) == (Object)Class_Class);
+    if (HEADER(class) != (Object)Type_Class_Type_Class) {
+        LOG("Wrong meta class not of type Type_Class_Type_Class\n");
+        assert(HEADER(class) == (Object)Type_Class_Type_Class);
     }
     //LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
     LOG("Dispatching \"%ls\" on \"%ls\"\n",  
@@ -104,7 +104,7 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
 
 /* ======================================================================== */
 
-void post_init_Class()
+void post_init_Type_Class()
 {
-    // put the names here, now after the Symbols_Class is initialized
+    // put the names here, now after the Symbols_Type_Class is initialized
 }

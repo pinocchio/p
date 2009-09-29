@@ -5,16 +5,16 @@
 
 /* =========================================================================*/
 
-Type_Class Self_Class;
+Type_Class Self_Type_Class;
 Object Self;
 
 /* =========================================================================*/
 
 void pre_init_Self()
 {
-    Self_Class = new_Named_Class((Object)Type_Object_Class, L"Self");
+    Self_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Self");
     Self       = (Object) NEW_t(AST_Self);
-    HEADER(Self) = (Object) Self_Class;
+    HEADER(Self) = (Object) Self_Type_Class;
 }
 
 /* =========================================================================*/
@@ -23,7 +23,7 @@ void AST_Self_eval()
 {
     LOGFUN;
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Env_Class) {
+    if (HEADER(env) != (Object)Env_Type_Class) {
         assert(NULL);
     }
     poke_EXP(1, ((Runtime_Env)env)->self);
