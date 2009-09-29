@@ -6,13 +6,13 @@
 /* ======================================================================== */
 
 struct AST_Info_t {
-    wchar_t *   sourceFile;
+    wchar_t *   sourceIO_File;
     int         line;
     int         column;
 };
 
 CREATE_INITIALIZERS(Info);
-extern AST_Info new_Info(wchar_t * sourceFile, int line, int column);
+extern AST_Info new_Info(wchar_t * sourceIO_File, int line, int column);
 
 /* ======================================================================== */
 

@@ -6,7 +6,7 @@ TYPE(Type_Boolean);
 TYPE(Type_Array);
 TYPE(Type_Dictionary);
 TYPE(Type_Class);
-TYPE(Type_File);
+TYPE(IO_File);
 TYPE(AST_Constant);
 TYPE(AST_Self);
 TYPE(AST_Super);

@@ -7,7 +7,7 @@ post_init_Constant();
 post_init_Continue();
 post_init_Type_Dictionary();
 post_init_Type_Runtime_Env();
-post_init_File();
+post_init_IO_File();
 post_init_Method();
 post_init_Native_Method();
 post_init_Self();

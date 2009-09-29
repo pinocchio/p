@@ -9,7 +9,7 @@ pre_init_Type_Character();
 pre_init_Constant();
 pre_init_Continue();
 pre_init_Type_Dictionary();
-pre_init_File();
+pre_init_IO_File();
 pre_init_Method();
 pre_init_Native_Method();
 pre_init_Self();

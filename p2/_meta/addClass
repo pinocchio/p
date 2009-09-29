@@ -3,19 +3,19 @@
 
 def createCHSourcesAt(path)
     separator = "/* ======================================================================== */"
-    dir = File.dirname path
-    name = File.basename path
-    dirname = File.basename dir
+    dir = IO_File.dirname path
+    name = IO_File.basename path
+    dirname = IO_File.basename dir
     fullName = "#{dirname.capitalize}_#{name}"
     guard = "#{name.upcase}_H"
 
     # create the file only if it doesn't exist yet
-    sourceH = File.open("#{path}.h", File::WRONLY|File::EXCL|File::CREAT)
-    pinocchioTypeHI = File.open("pinocchioType.hi", File::WRONLY|File::EXCL|File::APPEND)
-    sourceC = File.open("#{path}.c", File::WRONLY|File::EXCL|File::CREAT)
-    pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi", File::WRONLY|File::EXCL|File::APPEND)
+    sourceH = IO_File.open("#{path}.h", IO_File::WRONLY|IO_File::EXCL|IO_File::CREAT)
+    pinocchioTypeHI = IO_File.open("pinocchioType.hi", IO_File::WRONLY|IO_File::EXCL|IO_File::APPEND)
+    sourceC = IO_File.open("#{path}.c", IO_File::WRONLY|IO_File::EXCL|IO_File::CREAT)
+    pinocchioTypeIncludeHI = IO_File.open("pinocchioTypeInclude.hi", IO_File::WRONLY|IO_File::EXCL|IO_File::APPEND)
     
-    sourceT = File.open(path+"Test.ci", File::WRONLY|File::EXCL|File::CREAT)
+    sourceT = IO_File.open(path+"Test.ci", IO_File::WRONLY|IO_File::EXCL|IO_File::CREAT)
     
     sourceH.puts "#ifndef #{guard}"
     sourceH.puts "#define #{guard}"
@@ -88,11 +88,11 @@ def createCHSourcesAt(path)
     sourceT.puts "}"
     sourceT.puts 
 
-    File.open("pinocchioPreInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
+    IO_File.open("pinocchioPreInit.ci", IO_File::WRONLY|IO_File::EXCL|IO_File::APPEND) do |file|
         file.puts "pre_init_#{fullName}();"
     end
 
-    File.open("pinocchioPostInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
+    IO_File.open("pinocchioPostInit.ci", IO_File::WRONLY|IO_File::EXCL|IO_File::APPEND) do |file|
         file.puts "post_init_#{fullName}();"
     end
     

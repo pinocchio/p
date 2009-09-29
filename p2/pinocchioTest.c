@@ -65,7 +65,7 @@ void run_tests()
     test_Constant();
     test_Continue();
     test_Type_Dictionary();
-    test_File();
+    test_IO_File();
     test_Method();
     test_NativeMethod();
     test_Type_Object();

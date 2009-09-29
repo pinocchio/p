@@ -5,31 +5,29 @@
 
 /* ======================================================================== */
 
-Type_Class File_Type_Class;
+Type_Class IO_File_Type_Class;
 
 /* ======================================================================== */
 
-Type_File StandardIn;
-Type_File StandardOut;
-Type_File NilStream;
+IO_File StandardIn;
+IO_File StandardOut;
+IO_File NilStream;
 
-Type_File 
-new_File()
+IO_File  new_IO_File()
 {
     // TODO implement
     return NULL;
 }
 
-Type_File 
-new_File_FromPath(wchar_t * path)
+IO_File new_IO_File_FromPath(wchar_t * path)
 {
     // TODO implement
     return NULL;
 }
 
-void pre_init_File()
+void pre_init_IO_File()
 {
-    File_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"File");
+    IO_File_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"IO_File");
 }
 
 /* =========================================================================*/
@@ -37,7 +35,7 @@ void pre_init_File()
 
 /* =========================================================================*/
 
-void post_init_File()
+void post_init_IO_File()
 {
     // TODO install methods 
 }
