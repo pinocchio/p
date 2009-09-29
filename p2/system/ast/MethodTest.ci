@@ -14,7 +14,7 @@ void test_method_evaluation()
     // with one body element ---------------------------------------------------
     method->body = new_Type_Array_With(1, integer_const);
     result       = Eval((Object)new_AST_Send(method_const, SMB_eval, Empty_Type_Array));
-    //printf("%ls\n", Type_Object_classname(result));
+    //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
     
     // with one argument -------------------------------------------------------
@@ -27,7 +27,7 @@ void test_method_evaluation()
     
     result       = Eval((Object)new_AST_Send(method_const,SMB_eval_, 
                                          new_Type_Array_With(1, (Object)integer_const)));
-    //printf("%ls\n", Type_Object_classname(result));
+    //printf("%ls\n", Object_classname(result));
     assert(result == (Object)integer);
 }
 

@@ -4,12 +4,11 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
-
 #include <pinocchioHelper.ci>
+
 #ifdef TEST
 #include <pinocchioTest.h>
 #endif // TEST
-
 
 /* ======================================================================== */
 
