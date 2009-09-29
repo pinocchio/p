@@ -26,7 +26,7 @@ jmp_buf Eval_AST_Continue;
  */
 void continue_eval()
 {
-    longjmp(Eval_AST_Continue, 1);
+    siglongjmp(Eval_AST_Continue, 1);
 }
 
 void init_Stack(unsigned int size)
@@ -72,7 +72,7 @@ void CNT_send_Eval()
 
 void CNT_end_eval()
 {
-    longjmp(Eval_Exit, 1);
+    siglongjmp(Eval_Exit, 1);
 }
 
 /**
@@ -92,9 +92,9 @@ Object Eval(Object code)
     push_CNT(CNT_end_eval);
     push_CNT(CNT_send_Eval);
 
-    if (!setjmp(Eval_Exit)) {
+    if (!sigsetjmp(Eval_Exit, 1)) {
         IN_EVAL = 1;
-        setjmp(Eval_AST_Continue);
+        sigsetjmp(Eval_AST_Continue, 1);
         for (;;) {
             peek_CNT(1)();
         }
