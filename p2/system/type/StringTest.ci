@@ -7,23 +7,20 @@ Object result;
 
 /* ======================================================================== */
 
-void test_Type_String_asString()
-{
+NEW_TEST(test_Type_String_asString)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asString);
     assert(result == (Object)string);
 }
 
-void test_Type_String_asSymbol()
-{
+NEW_TEST(test_Type_String_asSymbol)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
 }
 
-void test_Type_String_concat_()
-{
+NEW_TEST(test_Type_String_concat_)
     STRING_TEST_SETUP;
     Type_String string2 = new_Type_String(L"string2");
     

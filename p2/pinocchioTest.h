@@ -5,8 +5,13 @@
 
 #include <pinocchio.h>
 
-#define test(name) void name##_test() {\
-LOG("testing for name");
+#define NEW_TEST(name) void name() {\
+	LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__);
+
+#define NEW_CLASS_TEST(name) void name() {\
+LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"); \
+LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__); \
+LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
 extern void run_tests();
 
