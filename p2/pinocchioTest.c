@@ -31,6 +31,7 @@ jmp_buf __test_continue__;
 void phandler(int signum)
 {
     fprintf(stderr, "Continue\n");
+    IN_EVAL = 0;
     siglongjmp(__test_continue__, 1);
 }
 
