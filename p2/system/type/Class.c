@@ -94,7 +94,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 				assert(class != super);
 			}
 			class = super;
-			LOG("Parent Lookup continueing in \"%ls\"\n", ((Type_Class)class)->name->value);
+			LOG("Parent Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
         } else {
             cache->type   = class;
             cache->method = method;
