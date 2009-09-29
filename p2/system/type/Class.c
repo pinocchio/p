@@ -83,6 +83,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
     
     Object method = NULL;    
     while (class != Nil) {
+        LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
         Type_Dictionary mdict = ((Type_Class) class)->methods;
         method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
@@ -94,7 +95,6 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 				assert(class != super);
 			}
 			class = super;
-			LOG("Parent Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
         } else {
             cache->type   = class;
             cache->method = method;
