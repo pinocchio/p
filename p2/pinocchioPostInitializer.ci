@@ -14,7 +14,7 @@ post_init_Self();
 post_init_Send();
 post_init_Type_String();
 post_init_Super();
-post_init_Symbol();
+post_init_Type_Symbol();
 post_init_Type_Boolean();
 post_init_Type_SmallInt();
 post_init_Variable();
