@@ -44,8 +44,8 @@ extern Type_Class class##_Class;
 		printf("Invalid argument size! Expected %i but was %i", size_value, args->size->value));
 
 // TODO make sure we do a proper class lookup here
-#define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)),  "Invalid type of arguments given");
-#define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)), "Invalid number of arguments given");
+#define ASSERT_TYPE(expression, class) assert1(HEADER(expression)==((Object)(class)),  "Invalid type of arguments given");
+#define ASSERT_ARG_TYPE(index, class) assert1(HEADER(args->values[index])==((Object)(class)), "Invalid number of arguments given");
 
 #define ASSERT_EQUALS(exp1, exp2) \
 assert(Eval_AST_Send((Object)(exp1), SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);

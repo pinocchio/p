@@ -10,8 +10,7 @@ Type_Class AST_Native_Method_Class;
 
 /* ======================================================================== */
 
-AST_Native_Method
-new_AST_Native_Method(native code)
+AST_Native_Method new_AST_Native_Method(native code)
 {
     AST_Native_Method result = NEW_t(AST_Native_Method);
     HEADER(result)             = (Object)AST_Native_Method_Class;
