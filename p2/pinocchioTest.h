@@ -6,7 +6,7 @@
 #include <pinocchio.h>
 
 #define test(name) void name##_test() {\
-LOG("name");\
+LOG("testing for name");
 
 extern void run_tests();
 

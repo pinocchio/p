@@ -28,7 +28,7 @@
 
 Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
 {
-    return Eval((Object)new_AST_Send((Object)self, symbol, args));
+    return (Object)Eval((Object)new_AST_Send((Object)self, symbol, args));
 }
 
 
