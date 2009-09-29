@@ -19,7 +19,7 @@ def createCHSourcesAt(path)
     sourceH.puts separator
     sourceH.puts
     sourceH.puts "struct #{fullName}_t {"
-    sourceH.puts "    #error \"TODO add TYPE(#{name}); to pinocchioType.ci\""
+    sourceH.puts "    #error \"TODO fill out struct\""
     sourceH.puts "};"
     sourceH.puts
     sourceH.puts "CREATE_INITIALIZERS(#{name})"
@@ -31,6 +31,10 @@ def createCHSourcesAt(path)
     sourceH.puts
     sourceH.puts "#endif // #{guard}"
     sourceH.close
+
+    pinocchioTypeHI = File.open("pinocchioType.hi", File::WRONLY|File::EXCL|File::APPEND)
+    pinocchioTypeHI.puts "TYPE(#{name});"
+    pinocchioTypeHI.close
 
     sourceC = File.open(path+".c", File::WRONLY|File::EXCL|File::CREAT)
     sourceC.puts
@@ -78,6 +82,7 @@ def createCHSourcesAt(path)
     sourceT.puts "}"
     sourceT.puts 
 
+    puts "Successfully created #{name}"
 
 end
 
