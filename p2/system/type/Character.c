@@ -9,7 +9,7 @@ Type_Class Character_Class;
 
 /* ======================================================================== */
 
-Type_Character * Character_cache;
+Type_Character * Character_table;
 
 Type_Character new_raw_Character(wchar_t value)
 {
@@ -23,8 +23,8 @@ Type_Character new_raw_Character(wchar_t value)
 
 Type_Character new_Character(wchar_t value)
 {
-    if (value < CHARACTER_CACHE_SIZE) {
-        return Character_cache[value];
+    if (value < CHARACTER_TABLE_SIZE) {
+        return Character_table[value];
     }
     return new_raw_Character(value);
 }
@@ -58,18 +58,18 @@ NATIVE0(NM_Character_asSmallInt)
 /* ======================================================================== */
 
 
-void initialize_Character_Cache()
+void initialize_Character_Table()
 {
-    Character_cache = (Type_Character *)PALLOC(sizeof(struct Type_Character_t[CHARACTER_CACHE_SIZE]));
+    Character_table = (Type_Character *)PALLOC(sizeof(struct Type_Character_t[CHARACTER_TABLE_SIZE]));
     int i;
-    for (i = 0; i < CHARACTER_CACHE_SIZE; i++) {
-        Character_cache[i] = new_raw_Character(i);
+    for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
+        Character_table[i] = new_raw_Character(i);
     }
 }
 
 void post_initialize_Character()
 { 
-    initialize_Character_Cache();
+    initialize_Character_Table();
     store_native_method(Character_Class,SMB_asString,   NM_Character_asString);
     store_native_method(Character_Class,SMB_asSymbol,   NM_Character_asSymbol);
     store_native_method(Character_Class,SMB_asSmallInt, NM_Character_asSmallInt);
