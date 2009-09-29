@@ -67,7 +67,7 @@ void AST_Send_eval(AST_Send self)
     for (i = 0; i < self->arguments->size->value; i++) {
         push_CNT(CNT_store_argument);
         push_EXP(args);
-        push_EXP(new_SmallInt(i));
+        push_EXP(new_Type_SmallInt(i));
         push_CNT(CNT_send_Eval);
         push_EXP(self->arguments->values[i]);
     }

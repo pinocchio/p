@@ -31,7 +31,7 @@ Type_Symbol new_Type_Symbol(const wchar_t* name)
     HEADER(symbol)      = (Object)Type_Symbol_Class;
     symbol->hash        = NULL;
     symbol->value       = wcsdup(name);
-    symbol->size        = new_SmallInt(wcslen(name));
+    symbol->size        = new_Type_SmallInt(wcslen(name));
     return symbol;
 }
 
@@ -53,7 +53,7 @@ void initialize_Symbol()
 
 
 NATIVE1(NM_Type_Symbol_objectAt_)
-    ASSERT_ARG_TYPE(0, SmallInt_Class);
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
     push_EXP(new_Character(((Type_Symbol) self)->value[index->value]));
 }
@@ -90,7 +90,7 @@ int Type_Symbol_hash(const wchar_t* symbol_string)
 }
 
 NATIVE0(NM_Type_Symbol_hash)
-    push_EXP(new_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
+    push_EXP(new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
 }
 
 

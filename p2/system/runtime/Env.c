@@ -51,7 +51,7 @@ void Env_lookup(Runtime_Env self, unsigned int index, Object key)
         } else {
             /* TODO Schedule at:in: message send. */
             assert(NULL);
-            //Object args[2] = { (Object)new_SmallInt(index), key };
+            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return;
         }
     }
@@ -74,7 +74,7 @@ void Env_assign(Runtime_Env self, unsigned int index,
         } else {
             /* TODO Schedule at:in: message send. */
             assert(NULL);
-            // Object args[2] = { (Object)new_SmallInt(index), key };
+            // Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return;
         }
     }

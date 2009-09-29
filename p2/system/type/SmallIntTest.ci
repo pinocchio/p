@@ -1,8 +1,8 @@
 
-void test_SmallInt_equals_()
+void test_Type_SmallInt_equals_()
 {
-    Object int0     = (Object)new_SmallInt(0);
-    Object int2     = (Object)new_SmallInt(2);
+    Object int0     = (Object)new_Type_SmallInt(0);
+    Object int2     = (Object)new_Type_SmallInt(2);
     Object result;
     
     result = EvalSend1(int0, SMB_equals_, int2);
@@ -17,60 +17,60 @@ void test_SmallInt_equals_()
     assert(result == (Object)True);
 }
 
-#define SMALLINT_BINOP_TEST(name, op) \
-void test_SmallInt_##name##_() \
+#define Type_SmallInt_BINOP_TEST(name, op) \
+void test_Type_SmallInt_##name##_() \
 { \
-    Type_SmallInt int4 = new_SmallInt(4); \
-    Type_SmallInt int8 = new_SmallInt(8); \
+    Type_SmallInt int4 = new_Type_SmallInt(4); \
+    Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
     result = EvalSend1((Object)int4, SMB_##name##_, (Object)int8); \
-    ASSERT_TYPE(result, SmallInt_Class); \
+    ASSERT_TYPE(result, Type_SmallInt_Class); \
     printf("%i\n", ((Type_SmallInt)result)->value); \
     assert(((Type_SmallInt)result)->value == (int4->value op int8->value)); \
 
 
-SMALLINT_BINOP_TEST(plus,       +)
+Type_SmallInt_BINOP_TEST(plus,       +)
 }
 
-SMALLINT_BINOP_TEST(minus,      -)
+Type_SmallInt_BINOP_TEST(minus,      -)
 }
 
-SMALLINT_BINOP_TEST(times,      *)
+Type_SmallInt_BINOP_TEST(times,      *)
 }
 
-SMALLINT_BINOP_TEST(divide,     /)
+Type_SmallInt_BINOP_TEST(divide,     /)
 }
 
-SMALLINT_BINOP_TEST(shiftRight,>>)
+Type_SmallInt_BINOP_TEST(shiftRight,>>)
 }
 
-SMALLINT_BINOP_TEST(shiftLeft, <<)
+Type_SmallInt_BINOP_TEST(shiftLeft, <<)
 }
 
-SMALLINT_BINOP_TEST(and,        &)
+Type_SmallInt_BINOP_TEST(and,        &)
 }
 
-SMALLINT_BINOP_TEST(or,         |)
+Type_SmallInt_BINOP_TEST(or,         |)
 }
 
-void test_SmallInt_hash()
+void test_Type_SmallInt_hash()
 {
-    Type_SmallInt number = new_SmallInt(10);
+    Type_SmallInt number = new_Type_SmallInt(10);
     Object result = EvalSend0((Object)number, (Object)SMB_hash);
-    ASSERT_TYPE(result, SmallInt_Class);
+    ASSERT_TYPE(result, Type_SmallInt_Class);
     assert(((Type_SmallInt)result)->value == number->value);
 }
 
 /* ======================================================================== */
 
-void test_SmallInt()
+void test_Type_SmallInt()
 {
-    test_SmallInt_equals_();
-    test_SmallInt_plus_();
-    test_SmallInt_minus_();
-    test_SmallInt_divide_();
-    test_SmallInt_times_();
-    test_SmallInt_shiftLeft_();
-    test_SmallInt_shiftRight_();
-    test_SmallInt_hash();
+    test_Type_SmallInt_equals_();
+    test_Type_SmallInt_plus_();
+    test_Type_SmallInt_minus_();
+    test_Type_SmallInt_divide_();
+    test_Type_SmallInt_times_();
+    test_Type_SmallInt_shiftLeft_();
+    test_Type_SmallInt_shiftRight_();
+    test_Type_SmallInt_hash();
 }

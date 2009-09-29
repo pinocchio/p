@@ -1,5 +1,5 @@
-#ifndef SMALLINT_H
-#define SMALLINT_H
+#ifndef TYPE_SMALLINT_H
+#define TYPE_SMALLINT_H
 
 #include <pinocchio.h>
 
@@ -14,9 +14,9 @@ struct Type_SmallInt_t {
     int value;
 };
 
-CREATE_INITIALIZERS(SmallInt)
-extern Type_SmallInt new_SmallInt(int value);
+CREATE_INITIALIZERS(Type_SmallInt)
+extern Type_SmallInt new_Type_SmallInt(int value);
 
 /* ======================================================================== */
 
-#endif // SMALLINT_H
+#endif // TYPE_SMALLINT_H

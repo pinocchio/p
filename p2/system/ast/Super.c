@@ -68,7 +68,7 @@ void AST_Super_eval(AST_Super super)
     for (i = 0; i < super->arguments->size->value; i++) {
         push_CNT(CNT_store_argument);
         push_EXP(args);
-        push_EXP(new_SmallInt(i));
+        push_EXP(new_Type_SmallInt(i));
         push_CNT(CNT_send_Eval);
         push_EXP(super->arguments->values[i]);
     }

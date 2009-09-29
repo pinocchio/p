@@ -1,6 +1,6 @@
 SMB_apply_          = (Object)new_Type_Symbol(L"apply:");
 SMB_asArray         = (Object)new_Type_Symbol(L"asArray");
-SMB_asSmallInt      = (Object)new_Type_Symbol(L"asSmallInt");
+SMB_asType_SmallInt      = (Object)new_Type_Symbol(L"asType_SmallInt");
 SMB_asString        = (Object)new_Type_Symbol(L"asString");
 SMB_asSymbol        = (Object)new_Type_Symbol(L"asSymbol");
 SMB_at_in_          = (Object)new_Type_Symbol(L"at:in:");

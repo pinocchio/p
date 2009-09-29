@@ -1,8 +1,8 @@
 
 void test_ast_continue()
 {
-    Type_SmallInt integer1      = new_SmallInt(1);
-    Type_SmallInt integer7      = new_SmallInt(7);
+    Type_SmallInt integer1      = new_Type_SmallInt(1);
+    Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer1_const = new_Constant((Object)integer1);
     AST_Constant integer7_const = new_Constant((Object)integer7);
     

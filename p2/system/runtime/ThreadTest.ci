@@ -1,8 +1,8 @@
 
 void test_thread_stress()
 {
-    Object test     = (Object)new_Constant((Object)new_SmallInt(0));
-    Object add      = (Object)new_Constant((Object)new_SmallInt(1));
+    Object test     = (Object)new_Constant((Object)new_Type_SmallInt(0));
+    Object add      = (Object)new_Constant((Object)new_Type_SmallInt(1));
     
     // AST_Send send = new_Send(test,SMB_plus_, new_Raw_Array(0));
     AST_Send send = new_Send(test,SMB_plus_, new_Array_With(1, add));

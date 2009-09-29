@@ -5,11 +5,11 @@ Object result;
 
 /* ========================================================================== */
 
-void test_Character_asSmallint()
+void test_Character_asType_SmallInt()
 {
     CHARACTER_TEST_SETUP;
-    result = EvalSend0((Object)chr,SMB_asSmallInt);
-    ASSERT_TYPE(result, SmallInt_Class);
+    result = EvalSend0((Object)chr,SMB_asType_SmallInt);
+    ASSERT_TYPE(result, Type_SmallInt_Class);
 }
 
 
@@ -33,7 +33,7 @@ void test_Character_asString()
 
 void test_Character()
 {
-    test_Character_asSmallint();
+    test_Character_asType_SmallInt();
     test_Character_asSymbol();
     test_Character_asString();
 }

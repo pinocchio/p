@@ -71,7 +71,7 @@ void run_tests()
     test_Object();
     test_Self();
     test_Send();
-    test_SmallInt();
+    test_Type_SmallInt();
     test_Type_String();
     test_Super();
     test_Type_Symbol();
