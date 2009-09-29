@@ -58,7 +58,7 @@ void run_tests()
 {
     test_Array();
     test_Assign();
-    test_Boolean();
+    test_Type_Boolean();
     test_Callec();
     test_Type_Character();
     test_Type_Class();

@@ -15,7 +15,7 @@ void test_ast_super()
     body             = new_Array_With(3, (Object)integer7_const);
     body->values[2]  = (Object)integer_const;
     method = new_Method(0, body);
-    store_method(Boolean_Type_Class, (Object)test, (Object)method);
+    store_method(Type_Boolean_Type_Class, (Object)test, (Object)method);
     
     Object result = Eval((Object)new_Send((Object)True_Const, (Object)test, new_Raw_Array(0)));
     assert(result == (Object)integer);

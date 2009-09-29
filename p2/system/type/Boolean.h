@@ -12,7 +12,7 @@ struct Type_Boolean_t {
     wchar_t       * string;
 };
 
-CREATE_INITIALIZERS(Boolean)
+CREATE_INITIALIZERS(Type_Boolean)
 
 /* ========================================================================= */
 

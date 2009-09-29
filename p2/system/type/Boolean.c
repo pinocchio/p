@@ -5,7 +5,7 @@
 
 /* ======================================================================== */
 
-Type_Class Boolean_Type_Class;
+Type_Class Type_Boolean_Type_Class;
 Type_Class True_Type_Class;
 Type_Class False_Type_Class;
 
@@ -18,7 +18,7 @@ Type_Boolean True;
 /* ======================================================================== */
 
 void pre_init_Type_False() {
-    False_Type_Class = new_Named_Type_Class((Object)Boolean_Type_Class, L"False");
+    False_Type_Class = new_Named_Type_Class((Object)Type_Boolean_Type_Class, L"False");
     
     False = NEW_t(Type_Boolean);
     HEADER(False) = (Object)False_Type_Class;
@@ -27,7 +27,7 @@ void pre_init_Type_False() {
 
 void pre_init_Type_True()
 {
-    True_Type_Class = new_Named_Type_Class((Object)Boolean_Type_Class, L"True");
+    True_Type_Class = new_Named_Type_Class((Object)Type_Boolean_Type_Class, L"True");
     
     True = NEW_t(Type_Boolean);
     HEADER(True) = (Object)True_Type_Class;
@@ -36,7 +36,7 @@ void pre_init_Type_True()
 
 void pre_init_Type_Boolean()
 {
-    Boolean_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Boolean");     
+    Type_Boolean_Type_Class = new_Named_Type_Class((Object)Type_Object_Type_Class, L"Type_Boolean");     
     pre_init_Type_True();
     pre_init_Type_False();
 }
