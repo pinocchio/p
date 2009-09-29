@@ -1,3 +1,31 @@
+#include <signal.h>
+
+#define SIGFAIL 66
+
+#define assert(test, message) \
+if (!(test)) {\
+	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+	message; \
+	raise(SIGFAIL); \
+}
+
+#define assert0(test)\
+if (!(test)) {\
+	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+	raise(SIGFAIL); \
+}
+
+#define assert1(test, message)  \
+if (!(test)) { \
+	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+	printf(message); \
+	raise(SIGFAIL); \
+}
+
+/* ========================================================================== */
+
 extern void store_method(Type_Class class, Object symbol, Object method);
 extern void store_native_method(Type_Class class, Object symbol, native code);
 extern wchar_t * Object_classname(Object self);
+
+

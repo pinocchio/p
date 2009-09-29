@@ -1,7 +1,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <system/runtime/Env.h>
 #include <system/ast/Super.h>
 
@@ -48,7 +47,7 @@ void CNT_push_env_class()
     zap_CNT();
     Object env = (Object)current_env();
     if (HEADER(env) != (Object)Runtime_Env_Class) {
-        assert(NULL);
+        assert0(NULL);
     }
     push_EXP(((Runtime_Env)env)->class);
 }

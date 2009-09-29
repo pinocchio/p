@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
@@ -65,9 +64,9 @@ void CNT_send_Eval()
     EVAL_IF(AST_Callec)
     
     /* TODO fallback by actually sending the eval message */
-    printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
-           ((Type_Class)class)->name->value);
-    assert(NULL);
+    assert(NULL,
+		   printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
+				  ((Type_Class)class)->name->value));
 }
 
 
@@ -86,8 +85,7 @@ int IN_EVAL = 0;
 Object Eval(Object code)
 {
     if (IN_EVAL) {
-        printf("Re-entering evaluation thread!\n");
-        assert(NULL);
+        assert(NULL, printf("Re-entering evaluation thread!\n"));
     }
 
     push_EXP(code);

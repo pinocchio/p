@@ -1,7 +1,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <system/type/Array.h>
 
 /* ======================================================================== */
@@ -54,7 +53,7 @@ void pre_init_Type_Array()
 
 Object Type_Array_Type_ObjectAt(Type_Array array, unsigned int index)
 {
-    assert(index < array->size->value);
+    assert(index < array->size->value, printf("Inxex %u out of bounds %u", index, array->size->value));
     return array->values[index];
 }
 

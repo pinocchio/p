@@ -94,7 +94,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_or_,         NM_Type_SmallInt_or_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash, NM_Type_SmallInt_hash);
     
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_plus_));
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_minus_));
-    assert(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_equals_));
+    assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_plus_));
+    assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_minus_));
+    assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, SMB_equals_));
 }

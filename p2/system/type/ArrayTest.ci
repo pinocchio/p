@@ -10,11 +10,11 @@ void test_Type_Array_Type_ObjectAt_()
     for (i=0; i<array->size->value; i++) {
         if (i==4) { continue; }
         args->values[0] = (Object)new_Type_SmallInt(i); 
-        assert(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer);
-        assert(array->values[i] == integer);
+        assert0(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer);
+        assert0(array->values[i] == integer);
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
-    assert(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer2);
+    assert0(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer2);
 }
 
 void test_Type_Array_size()
@@ -22,11 +22,11 @@ void test_Type_Array_size()
     Object integer     = (Object)new_Type_SmallInt(10);
     Type_Array array = new_Type_Array_With(10, integer);
     Object result      = Eval_AST_Send((Object)array, SMB_size, Empty_Type_Array);
-    assert(((Type_SmallInt) result)->value == 10);
+    assert0(((Type_SmallInt) result)->value == 10);
     
     result = Eval_AST_Send(integer, SMB_equals_, new_Type_Array_With(1, result));
-    //printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value);
-    assert( result == (Object)True);
+    assert(result == (Object)True,
+		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
 }
 
 void test_Type_Array_Type_ObjectAt_put()
@@ -41,14 +41,14 @@ void test_Type_Array_Type_ObjectAt_put()
     args->values[0] = integer0; 
     
     result = Eval_AST_Send((Object)array, SMB_Type_ObjectAt_put_, args);
-    assert(result == integer1);
-    assert(array->values[0] == integer1);
+    assert0(result == integer1);
+    assert0(array->values[0] == integer1);
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
     result = Eval_AST_Send((Object)array, SMB_Type_ObjectAt_put_, args);
-    assert(result == integer1);
-    assert(array->values[2] == integer1);
+    assert0(result == integer1);
+    assert0(array->values[2] == integer1);
 }
 
 

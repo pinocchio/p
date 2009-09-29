@@ -18,7 +18,7 @@ void test_Type_Character_asSymbol()
     CHARACTER_TEST_SETUP;
     result = Eval_AST_Send0((Object)chr, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
-    assert(((Type_String)result)->value[0] == chr->value);
+    assert0(((Type_String)result)->value[0] == chr->value);
 }
 
 void test_Type_Character_asString()
@@ -26,7 +26,7 @@ void test_Type_Character_asString()
     CHARACTER_TEST_SETUP;
     result = Eval_AST_Send0((Object)chr, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
-    assert(((Type_String)result)->value[0] == chr->value);
+    assert0(((Type_String)result)->value[0] == chr->value);
 }
 
 /* ========================================================================== */

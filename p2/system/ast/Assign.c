@@ -49,7 +49,7 @@ void CNT_AST_Assign_assign()
     }
     
     // TODO send assign: to self->variable.
-    assert(NULL);
+    assert1(NULL, "TODO send assign: to self->variable");
 }
 
 /* ======================================================================== */

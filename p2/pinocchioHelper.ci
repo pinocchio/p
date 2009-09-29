@@ -1,4 +1,5 @@
 
+
 void store_method(Type_Class class, Object symbol, Object method)
 {
     Type_Dictionary dict = class->methods;

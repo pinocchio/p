@@ -6,15 +6,15 @@ void test_Type_SmallInt_equals_()
     Object result;
     
     result = Eval_AST_Send1(int0, SMB_equals_, int2);
-    assert(result == (Object)False);
+    assert0(result == (Object)False);
     result = Eval_AST_Send1(int2, SMB_equals_, int0);
-    assert(result == (Object)False);
+    assert0(result == (Object)False);
     
     result = Eval_AST_Send1(int0, SMB_equals_, int0);
-    assert(result == (Object)True);
+    assert0(result == (Object)True);
     
     result = Eval_AST_Send1(int2, SMB_equals_, int2);
-    assert(result == (Object)True);
+    assert0(result == (Object)True);
 }
 
 #define Type_SmallInt_BINOP_TEST(name, op) \
@@ -25,8 +25,10 @@ void test_Type_SmallInt_##name##_() \
     Object result; \
     result = Eval_AST_Send1((Object)int4, SMB_##name##_, (Object)int8); \
     ASSERT_TYPE(result, Type_SmallInt_Class); \
-    printf("%i\n", ((Type_SmallInt)result)->value); \
-    assert(((Type_SmallInt)result)->value == (int4->value op int8->value)); \
+   \
+    assert(((Type_SmallInt)result)->value == (int4->value op int8->value), \
+		  printf("expected %i but got %i\n", (int4->value op int8->value), \
+											 ((Type_SmallInt)result)->value)); \
 
 
 Type_SmallInt_BINOP_TEST(plus,       +)
@@ -58,7 +60,7 @@ void test_Type_SmallInt_hash()
     Type_SmallInt number = new_Type_SmallInt(10);
     Object result = Eval_AST_Send0((Object)number, (Object)SMB_hash);
     ASSERT_TYPE(result, Type_SmallInt_Class);
-    assert(((Type_SmallInt)result)->value == number->value);
+    assert0(((Type_SmallInt)result)->value == number->value);
 }
 
 /* ======================================================================== */

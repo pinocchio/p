@@ -35,7 +35,7 @@ void AST_Variable_eval(AST_Variable self)
                                   (Runtime_Env)env, self->index, self->key);
     } else {
         // TODO
-        assert(NULL);
+        assert0(NULL);
         // Object args[2] = { (Object)new_Type_SmallInt(self->index), self->key };
         // return AST_Send(env, SMB_at_in_, 2, args);
     }
@@ -48,7 +48,7 @@ void AST_Variable_assign(AST_Variable self, Object value)
         return Runtime_Env_assign((Runtime_Env)env, self->index, self->key, value);
     }
     // TODO
-    assert(NULL);
+    assert0(NULL);
 }
 
 /* =========================================================================*/

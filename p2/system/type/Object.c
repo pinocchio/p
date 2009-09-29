@@ -45,6 +45,4 @@ void post_init_Type_Object()
     
     store_native_method((Type_Class)Type_Object_Class, SMB_equals_, NM_Type_Object_equals);
     
-    assert(Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_));
-    assert(HEADER((AST_Native_Method)Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_)) == (Object)AST_Native_Method_Class);
 }

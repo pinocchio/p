@@ -9,7 +9,7 @@ void test_ast_self()
     Type_Symbol test  = new_Type_Symbol(L"test");
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
     Object result = Eval_AST_Send((Object)integer, (Object)test, Empty_Type_Array);
-    assert(result == (Object)integer);
+    assert0(result == (Object)integer);
 }
 
 

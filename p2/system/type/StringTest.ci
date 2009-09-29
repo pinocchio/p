@@ -10,14 +10,14 @@ Object result;
 NEW_TEST(test_Type_String_asString)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asString);
-    assert(result == (Object)string);
+    assert0(result == (Object)string);
 }
 
 NEW_TEST(test_Type_String_asSymbol)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
-    assert(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
+    assert0(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
 }
 
 NEW_TEST(test_Type_String_concat_)
@@ -26,11 +26,11 @@ NEW_TEST(test_Type_String_concat_)
     
     Type_String string_result = Type_String_concat_(string, string2);
     ASSERT_TYPE(string_result, Type_String_Class);
-    assert(string_result->size->value == (string->size->value + string2->size->value));
+    assert0(string_result->size->value == (string->size->value + string2->size->value));
 
     result = Eval_AST_Send1((Object)string, SMB_concat_, (Object)string2);
     ASSERT_TYPE(result, Type_String_Class);
-    assert(((Type_String) result)->size->value == (string->size->value + string2->size->value));
+    assert0(((Type_String) result)->size->value == (string->size->value + string2->size->value));
 }
 
 

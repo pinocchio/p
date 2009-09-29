@@ -50,17 +50,15 @@ void Runtime_Env_lookup(Runtime_Env self, unsigned int index, Object key)
             self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
-            assert(NULL);
+            assert1(NULL, "TODO Schedule at:in: message send");
             //Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return;
         }
     }
     /* TODO jump to error handler. */
-    assert(self->key == key);
-    if (index >= self->values->size->value) {
-        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value);
-        assert(index < self->values->size->value);
-    }
+    assert1(self->key == key, "TODO jump to error handler");
+    assert(index < self->values->size->value,
+		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
     
     push_EXP(self->values->values[index]);
 }
@@ -73,17 +71,15 @@ void Runtime_Env_assign(Runtime_Env self, unsigned int index,
             self = (Runtime_Env)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
-            assert(NULL);
+            assert0(NULL);
             // Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return;
         }
     }
     /* TODO jump to error handler. */
-    assert(self->key == key);
-    if (index >= self->values->size->value) {
-        printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value);
-        assert(index < self->values->size->value);
-    }
+    assert0(self->key == key);
+    assert(index < self->values->size->value,
+		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
     
     self->values->values[index] = value;
 }

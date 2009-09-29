@@ -18,7 +18,7 @@ void test_ast_super()
     store_method(Type_Boolean_Class, (Object)test, (Object)method);
     
     Object result = Eval_AST_Send0((Object)True_Const, (Object)test);
-    assert(result == (Object)integer);
+    assert0(result == (Object)integer);
 }
 
 

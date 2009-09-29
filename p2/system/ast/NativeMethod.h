@@ -1,7 +1,6 @@
 #ifndef NATIVEMETHOD_H
 #define NATIVEMETHOD_H
 
-#include <assert.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <pinocchio.h>

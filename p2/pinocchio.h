@@ -38,15 +38,14 @@ extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
 extern Type_Class class##_Class;
 
-#define ASSERT_ARG_SIZE(raw_size) int size_value = (raw_size);\
-    if(args->size->value < size_value || args->size->value > size_value) {\
-        printf("Invalid argument size! Expected %i but was %i", size_value, args->size->value);\
-        assert(args->size->value > size_value && args->size->value < size_value);\
-    }
+#define ASSERT_ARG_SIZE(raw_size) \
+	int size_value = (raw_size); \
+    assert((args->size->value > size_value && args->size->value < size_value), \
+		printf("Invalid argument size! Expected %i but was %i", size_value, args->size->value));
 
 // TODO make sure we do a proper class lookup here
-#define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)));
-#define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)));
+#define ASSERT_TYPE(expression, class) assert(HEADER(expression)==((Object)(class)),  "Invalid type of arguments given");
+#define ASSERT_ARG_TYPE(index, class) assert(HEADER(args->values[index])==((Object)(class)), "Invalid number of arguments given");
 
 #define ASSERT_EQUALS(exp1, exp2) \
 assert(Eval_AST_Send((Object)(exp1), SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);

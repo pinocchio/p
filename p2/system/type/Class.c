@@ -1,7 +1,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <system/type/Class.h>
 
 /* ======================================================================== */
@@ -53,8 +52,7 @@ void CNT_Class_super()
         poke_EXP(1, ((Type_Class)class)->super);
         return;
     }
-    // TODO queue "super" send.
-    assert(NULL);
+    assert1(NULL, "TODO queue \"super\" send");
 }
 
 
@@ -72,10 +70,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
             ((Type_Class)HEADER(self))->name->value);
         return Method_invoke(cache->method, self, class, args);
     }
-    if (HEADER(class) != (Object)Type_Class_Class) {
-        LOG("Wrong meta class not of type Type_Class_Class\n");
-        assert(HEADER(class) == (Object)Type_Class_Class);
-    }
+	assert1(HEADER(class) == (Object)Type_Class_Class, "Wrong meta class not of type Type_Class_Class");
     //LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
     LOG("Dispatching \"%ls\" on \"%ls\"\n",  
             ((Type_Symbol)msg)->value,
@@ -88,12 +83,9 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
         method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             Object super = ((Type_Class) class)->super;
-			if (class == super) {
-				printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
+			assert((class != super), printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
 							((Type_Class)class)->name->value,
-							((Type_Symbol)msg)->value);
-				assert(class != super);
-			}
+							((Type_Symbol)msg)->value));
 			class = super;
         } else {
             cache->type   = class;
@@ -103,10 +95,9 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
     }
     
     // TODO send DNU;
-    printf("\"%ls\" does not understand \"%ls\"\n", 
+    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
            ((Type_Class)HEADER(self))->name->value,
-           ((Type_Symbol)msg)->value);
-    assert(NULL);
+           ((Type_Symbol)msg)->value));
 }
 
 /* ======================================================================== */

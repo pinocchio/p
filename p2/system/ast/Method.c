@@ -87,12 +87,12 @@ void Method_invoke(Object method, Object self,
                                         class, args);
     }
     // Only AST_Method supported for now
-    if (!type) {
-        printf("Expected Method NULL given");
-    } else {
-        printf("Expected Method got %ls\n", ((Type_Class)type)->name->value);
-    }
-    assert(NULL);
+    assert(NULL, 
+		   if (!type) {
+				printf("Expected Method NULL given");
+		   } else {
+				printf("Expected Method got %ls\n", ((Type_Class)type)->name->value);
+		   });
 }
 
 /* ======================================================================== */

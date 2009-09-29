@@ -15,11 +15,11 @@ NEW_TEST(test_Type_Dictionary_Type_ObjectAt_)
         if (i==4) { continue; }
         Object key = (Object)new_Type_SmallInt(i);
         args->values[0] = key;
-        assert(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer);
-        assert(Type_Dictionary_lookup(dict, key) == integer);
+        assert0(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer);
+        assert0(Type_Dictionary_lookup(dict, key) == integer);
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
-    assert(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer2);
+    assert0(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer2);
 }
 
 NEW_TEST(test_Type_Dictionary_size)
@@ -43,22 +43,22 @@ NEW_TEST(test_Type_Dictionary_Type_ObjectAt_put)
     args->values[0] = integer0; 
     
     result = Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_put_, args);
-    assert(result == integer1);
-    assert(Type_Dictionary_lookup(dict, integer0) == integer1);
+    assert0(result == integer1);
+    assert0(Type_Dictionary_lookup(dict, integer0) == integer1);
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
     result = Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_put_, args);
-    assert(result == integer1);
-    assert(Type_Dictionary_lookup(dict, integer2) == integer1);
+    assert0(result == integer1);
+    assert0(Type_Dictionary_lookup(dict, integer2) == integer1);
     // check that all the other places aren't changed
     args  = new_Type_Array_With(1, (Object)integer1);
     for (i=0; i<100; i++) {
         if (i==0 || i==2) { continue; }
         Object key = (Object)new_Type_SmallInt(i);
         args->values[0] = key;
-        assert(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer);
-        assert(Type_Dictionary_lookup(dict, key) == integer);
+        assert0(Eval_AST_Send((Object)dict, SMB_Type_ObjectAt_, args) == integer);
+        assert0(Type_Dictionary_lookup(dict, key) == integer);
     }
 }
 
