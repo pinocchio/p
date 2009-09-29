@@ -1,17 +1,16 @@
 TARGET=pinocchio
 
-RAW_CFILES=$(wildcard *.c) $(wildcard system/*/*.c)
+CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
+HFILES+=$(CFILES:%.c=%.h)
 
-TEST_CFILES=$(filter %Test.c,$(RAW_CFILES)) pinocchioTest.c
-CFILES=$(filter-out %Test.c,$(RAW_CFILES)) pinocchioTest.c
-
-HFILES=$(CFILES:%.c=%.h)
+TEST_CIFILES=$(wildcard system/*/*Test.ci)
+TEST_CFILES=pinocchioTest.c
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
 CFLAGS+=-I. -O3 -lgc -Wall
 LDFLAGS+=-lgc
 
-SOURCES=$(CFILES) $(HFILES)
+SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 Type_ObjectS=$(CFILES:%.c=%.o)
 
 
@@ -21,8 +20,8 @@ $(TARGET): $(Type_ObjectS)
 run: $(TARGET)
 	./$(TARGET)
 
-test:
-	CFLAGS="-DTEST=1" make run
+test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
+	CFLAGS="-DTEST=1" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make run
 
 clean:
 	rm -rf $(Type_ObjectS) $(TARGET) make.depend
