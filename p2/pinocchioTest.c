@@ -26,30 +26,30 @@
 
 /* ========================================================================== */
 
-Object EvalAST_SendConst(Object self, Object symbol, Type_Array args) 
+Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
 {
     return Eval((Object)new_AST_Send((Object)self, symbol, args));
 }
 
 
-Object EvalAST_Send(Object self, Object symbol, Type_Array args) 
+Object Eval_AST_Send(Object self, Object symbol, Type_Array args) 
 {
     AST_Constant self_const = new_AST_Constant(self);
     int i;
     for (i=0; i<args->size->value; i++) {
         args->values[i] = (Object)new_AST_Constant(args->values[i]);
     }
-    return EvalAST_SendConst((Object)self_const, symbol, args);
+    return Eval_AST_SendConst((Object)self_const, symbol, args);
 }
 
-Object EvalAST_Send0(Object self, Object symbol)
+Object Eval_AST_Send0(Object self, Object symbol)
 {
-    return EvalAST_Send(self, symbol, Empty_Type_Array);
+    return Eval_AST_Send(self, symbol, Empty_Type_Array);
 }
 
-Object EvalAST_Send1(Object self, Object symbol, Object arg)
+Object Eval_AST_Send1(Object self, Object symbol, Object arg)
 {
-    return EvalAST_Send(self, symbol, new_Type_Array_With(1, arg));
+    return Eval_AST_Send(self, symbol, new_Type_Array_With(1, arg));
 }
 
 /* ========================================================================== */

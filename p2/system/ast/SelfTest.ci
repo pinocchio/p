@@ -8,7 +8,7 @@ void test_ast_self()
     AST_Method method = new_Method(0, body);
     Type_Symbol test  = new_Type_Symbol(L"test");
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Object result = EvalAST_Send((Object)integer, (Object)test, Empty_Type_Array);
+    Object result = Eval_AST_Send((Object)integer, (Object)test, Empty_Type_Array);
     assert(result == (Object)integer);
 }
 
