@@ -1,4 +1,4 @@
-post_init_Object();
+post_init_Type_Object();
 post_init_Array();
 post_init_Assign();
 post_init_Callec();

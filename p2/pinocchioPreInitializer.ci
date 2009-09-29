@@ -1,5 +1,5 @@
 pre_init_Nil();
-pre_init_Object();
+pre_init_Type_Object();
 pre_init_Type_SmallInt();
 pre_init_Type_Symbol();
 pre_init_Array();

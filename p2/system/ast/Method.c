@@ -22,7 +22,7 @@ AST_Method new_Method(unsigned int paramc, Type_Array body)
 
 void pre_init_Method()
 {
-    Method_Class        = new_Named_Class((Object)Object_Class, L"Method");
+    Method_Class        = new_Named_Class((Object)Type_Object_Class, L"Method");
 }
 
 /* ======================================================================== */

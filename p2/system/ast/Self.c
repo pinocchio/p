@@ -12,7 +12,7 @@ Object Self;
 
 void pre_init_Self()
 {
-    Self_Class = new_Named_Class((Object)Object_Class, L"Self");
+    Self_Class = new_Named_Class((Object)Type_Object_Class, L"Self");
     Self       = (Object) NEW_t(AST_Self);
     HEADER(Self) = (Object) Self_Class;
 }

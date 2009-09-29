@@ -19,7 +19,7 @@ AST_Constant new_Constant(Object constant)
 
 void pre_init_Constant()
 {
-    Constant_Class = new_Named_Class((Object)Object_Class, L"Constant");
+    Constant_Class = new_Named_Class((Object)Type_Object_Class, L"Constant");
 }
 
 /* ======================================================================== */

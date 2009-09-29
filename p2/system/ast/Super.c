@@ -22,7 +22,7 @@ AST_Super new_Super(Object message, Type_Array arguments)
 
 void pre_init_Super()
 {
-    Super_Class = new_Named_Class((Object)Object_Class, L"Super");
+    Super_Class = new_Named_Class((Object)Type_Object_Class, L"Super");
 }
 
 /* =========================================================================*/

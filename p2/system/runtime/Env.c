@@ -38,7 +38,7 @@ Runtime_Env current_env()
 
 void pre_init_Env()
 {
-    Env_Class = new_Named_Class((Object)Object_Class, L"Env");
+    Env_Class = new_Named_Class((Object)Type_Object_Class, L"Env");
 }
 
 /* =========================================================================*/

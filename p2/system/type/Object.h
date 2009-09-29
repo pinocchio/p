@@ -1,5 +1,5 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#ifndef TYPE_OBJECT_H
+#define TYPE_OBJECT_H
 
 #include <pinocchio.h>
 
@@ -9,8 +9,8 @@ struct Type_Object_t {
     Object ivals[0]; 
 };
 
-CREATE_INITIALIZERS(Object)
+CREATE_INITIALIZERS(Type_Object)
 
 /* ======================================================================== */
 
-#endif // OBJECT_H
+#endif // TYPE_OBJECT_H

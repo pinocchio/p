@@ -38,7 +38,7 @@ Type_Symbol new_Type_Symbol(const wchar_t* name)
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Named_Class((Object)Object_Class, L"Symbol");
+    Type_Symbol_Class = new_Named_Class((Object)Type_Object_Class, L"Symbol");
     initialize_Symbol();
 }
 /*
@@ -52,7 +52,7 @@ void initialize_Symbol()
 /* ========================================================================== */
 
 
-NATIVE1(NM_Type_Symbol_objectAt_)
+NATIVE1(NM_Type_Symbol_Type_ObjectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
     push_EXP(new_Character(((Type_Symbol) self)->value[index->value]));
@@ -122,7 +122,7 @@ void post_init_Type_Symbol()
 
 void install_symbol_methods(Type_Class class)
 {
-    store_native_method(class, SMB_objectAt_, NM_Type_Symbol_objectAt_);
+    store_native_method(class, SMB_Type_ObjectAt_, NM_Type_Symbol_Type_ObjectAt_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);

@@ -20,7 +20,7 @@ Type_String new_Type_String(const wchar_t * str)
 
 void pre_init_Type_String()
 {
-    Type_String_Class = new_Named_Class((Object)Object_Class, L"String");
+    Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
 }
 
 /* =========================================================================*/

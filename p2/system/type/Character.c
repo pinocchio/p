@@ -29,7 +29,7 @@ Type_Character new_Character(wchar_t value)
 
 void pre_init_Character()
 {
-    Character_Class = new_Named_Class((Object)Object_Class, L"Character");
+    Character_Class = new_Named_Class((Object)Type_Object_Class, L"Character");
 }
 
 /* ======================================================================== */

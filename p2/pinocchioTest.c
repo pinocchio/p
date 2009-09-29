@@ -68,7 +68,7 @@ void run_tests()
     test_File();
     test_Method();
     test_NativeMethod();
-    test_Object();
+    test_Type_Object();
     test_Self();
     test_Send();
     test_Type_SmallInt();

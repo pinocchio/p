@@ -9,7 +9,7 @@ void test_ast_continue()
     AST_Callec callec = new_Callec();
     callec->target = (Object)integer7_const;
     Object result = Eval((Object)callec);
-    //printf("%ls\n", Object_classname(result));
+    //printf("%ls\n", Type_Object_classname(result));
     assert(result == (Object)integer7);
     
     
@@ -25,11 +25,11 @@ void test_ast_continue()
     //                 7))))
     //
     result = Eval((Object)callec);
-    //printf("%ls\n", Object_classname(result));
+    //printf("%ls\n", Type_Object_classname(result));
     assert(result == (Object)integer7);
     
     result = Eval((Object)callec);
-    // printf("%ls\n", Object_classname(result));
+    // printf("%ls\n", Type_Object_classname(result));
     assert(result == (Object)integer7);
     
     //(assert (= 1
@@ -42,7 +42,7 @@ void test_ast_continue()
                                           new_Array_With(1, (Object)integer1_const));
     
     result = Eval((Object)callec);
-    printf("%ls\n", Object_classname(result));
+    printf("%ls\n", Type_Object_classname(result));
     assert(result == (Object)integer1);
 }
 

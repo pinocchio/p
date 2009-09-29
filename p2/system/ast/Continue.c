@@ -18,7 +18,7 @@ AST_Continue new_Continue(Object target)
 
 void pre_init_Continue()
 {
-    Continue_Class = new_Named_Class((Object)Object_Class, L"Continue");
+    Continue_Class = new_Named_Class((Object)Type_Object_Class, L"Continue");
 }
 
 /* ======================================================================== */

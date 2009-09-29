@@ -21,7 +21,7 @@ AST_Callec new_Callec()
 
 void pre_init_Callec()
 {
-    Callec_Class = new_Named_Class((Object)Object_Class, L"Callec");
+    Callec_Class = new_Named_Class((Object)Type_Object_Class, L"Callec");
 }
 
 /* ======================================================================== */

@@ -11,7 +11,7 @@ Type_Class Info_Class;
 
 void pre_init_Info()
 {
-    Info_Class = new_Named_Class((Object)Object_Class, L"Info");
+    Info_Class = new_Named_Class((Object)Type_Object_Class, L"Info");
 }
 
 /* ======================================================================== */

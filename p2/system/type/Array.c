@@ -14,7 +14,7 @@ Type_Array Empty_Array;
 Type_Array new_Raw_Array(int c)
 {
     if (c == 0) { return Empty_Array; }
-    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
+    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Type_Object[c]);
     HEADER(result)      = (Object)Array_Class;
     result->size        = new_Type_SmallInt(c);
     return result;
@@ -44,7 +44,7 @@ Type_Array new_Array_With(int c, Object init)
 
 void pre_init_Array() 
 {
-    Array_Class         = new_Named_Class((Object)Object_Class, L"Array");
+    Array_Class         = new_Named_Class((Object)Type_Object_Class, L"Array");
     
     Empty_Array         = NEW_t(Type_Array);
     HEADER(Empty_Array) = (Object)Array_Class;
@@ -52,19 +52,19 @@ void pre_init_Array()
 
 /* ======================================================================== */
 
-Object Array_ObjectAt(Type_Array array, unsigned int index)
+Object Array_Type_ObjectAt(Type_Array array, unsigned int index)
 {
     assert(index < array->size->value);
     return array->values[index];
 }
 
-NATIVE1(NM_Array_objectAt_)
+NATIVE1(NM_Array_Type_ObjectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     int index = ((Type_SmallInt) args->values[0])->value;
     push_EXP(((Type_Array)self)->values[index]);
 }
 
-NATIVE2(NM_Array_objectAt_put_)
+NATIVE2(NM_Array_Type_ObjectAt_put_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     unsigned int index = ((Type_SmallInt)args->values[0])->value;
     ((Type_Array)self)->values[index] = args->values[1];
@@ -79,7 +79,7 @@ void post_init_Array()
 {
     Empty_Array->size   = new_Type_SmallInt(0);
     
-    store_native_method(Array_Class,SMB_objectAt_,     NM_Array_objectAt_);
-    store_native_method(Array_Class,SMB_objectAt_put_, NM_Array_objectAt_put_);
+    store_native_method(Array_Class,SMB_Type_ObjectAt_,     NM_Array_Type_ObjectAt_);
+    store_native_method(Array_Class,SMB_Type_ObjectAt_put_, NM_Array_Type_ObjectAt_put_);
     store_native_method(Array_Class,SMB_size,          NM_Array_size);
 }

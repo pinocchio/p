@@ -20,7 +20,7 @@ Type_Dictionary new_Dictionary()
 
 void pre_init_Dictionary()
 {
-    Dictionary_Class    = new_Named_Class((Object)Object_Class, L"Dictionary");
+    Dictionary_Class    = new_Named_Class((Object)Type_Object_Class, L"Dictionary");
 }
 
 /* ======================================================================== */
@@ -66,7 +66,7 @@ Object Dictionary_store_(Type_Dictionary self, Object key, Object value)
 
 /* ======================================================================== */
 
-NATIVE1(NM_Dictionary_objectAt_)
+NATIVE1(NM_Dictionary_Type_ObjectAt_)
     Object result = Dictionary_lookup((Type_Dictionary)self, args->values[0]);
     if(!result) {
         result = Nil;
@@ -74,7 +74,7 @@ NATIVE1(NM_Dictionary_objectAt_)
     push_EXP(result);
 }
 
-NATIVE2(NM_Dictionary_objectAt_put_)
+NATIVE2(NM_Dictionary_Type_ObjectAt_put_)
     Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
     push_EXP(args->values[1]);
 }
@@ -83,7 +83,7 @@ NATIVE2(NM_Dictionary_objectAt_put_)
 
 void post_init_Dictionary()
 {
-    store_native_method(Dictionary_Class, SMB_objectAt_, NM_Dictionary_objectAt_);
-    store_native_method(Dictionary_Class, SMB_objectAt_put_, NM_Dictionary_objectAt_put_);
+    store_native_method(Dictionary_Class, SMB_Type_ObjectAt_, NM_Dictionary_Type_ObjectAt_);
+    store_native_method(Dictionary_Class, SMB_Type_ObjectAt_put_, NM_Dictionary_Type_ObjectAt_put_);
 }
 

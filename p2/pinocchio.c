@@ -116,11 +116,6 @@ Object Eval(Object code)
 
 /* ========================================================================== */
 
-void pre_init_Type_SmallInt();
-void pre_init_Type_Boolean();
-void post_init_Type_Boolean();
-void post_init_Type_SmallInt();
-
 int main()
 {
 	#include <pinocchioPreInitializer.ci>

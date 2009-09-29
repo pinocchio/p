@@ -31,7 +31,7 @@ void pre_init_Type_SmallInt()
 {
     Type_SmallInt_Class         = NEW_t(Type_Class);
     HEADER(Type_SmallInt_Class) = (Object)Class_Class;
-    Type_SmallInt_Class->super  = (Object)Object_Class;
+    Type_SmallInt_Class->super  = (Object)Type_Object_Class;
     
     Type_SmallInt_cache = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Type_SmallInt_cache -= INT_CACHE_LOWER;

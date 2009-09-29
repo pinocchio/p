@@ -36,7 +36,7 @@ void pre_init_Type_True()
 
 void pre_init_Type_Boolean()
 {
-    Boolean_Class = new_Named_Class((Object)Object_Class, L"Boolean");     
+    Boolean_Class = new_Named_Class((Object)Type_Object_Class, L"Boolean");     
     pre_init_Type_True();
     pre_init_Type_False();
 }
