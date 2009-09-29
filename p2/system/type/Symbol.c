@@ -112,6 +112,7 @@ void post_initialize_Symbol()
 {
     initialize_Symbol_Table();
     install_symbol_methods(Symbol_Class);
+#include <system/type/SymbolDefinition.ci>
 }
 
 void install_symbol_methods(Type_Class class)
