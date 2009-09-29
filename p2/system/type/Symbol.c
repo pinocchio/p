@@ -67,6 +67,7 @@ Type_Array Symbol_asArray(Type_Symbol symbol)
     }
     return array;
 }
+
 NATIVE0(NM_Symbol_asArray)
     push_EXP(Symbol_asArray((Type_Symbol)self));
 }

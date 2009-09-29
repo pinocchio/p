@@ -72,6 +72,10 @@ NATIVE1(NM_SmallInt_equals_)
     }
 }
 
+NATIVE0(NM_SmallInt_hash)
+    // just return self
+}
+
 /* =========================================================================*/
 
 void post_initialize_Type_SmallInt()
@@ -88,6 +92,7 @@ void post_initialize_Type_SmallInt()
     store_native_method((Type_Class)SmallInt_Class, SMB_shiftRight_, NM_SmallInt_shiftRight_);
     store_native_method((Type_Class)SmallInt_Class, SMB_and_,        NM_SmallInt_and_);
     store_native_method((Type_Class)SmallInt_Class, SMB_or_,         NM_SmallInt_or_);
+    store_native_method((Type_Class)SmallInt_Class, SMB_hash, NM_SmallInt_hash);
     
     assert(Dictionary_lookup(SmallInt_Class->methods, SMB_plus_));
     assert(Dictionary_lookup(SmallInt_Class->methods, SMB_minus_));

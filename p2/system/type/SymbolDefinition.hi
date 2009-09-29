@@ -27,3 +27,4 @@ extern Object SMB_ifTrue_;
 extern Object SMB_not;
 extern Object SMB_or_;
 extern Object SMB_value_;
+extern Object SMB_hash;

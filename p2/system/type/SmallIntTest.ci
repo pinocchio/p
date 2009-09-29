@@ -53,6 +53,14 @@ SMALLINT_BINOP_TEST(and,        &)
 SMALLINT_BINOP_TEST(or,         |)
 }
 
+void test_SmallInt_hash()
+{
+    Type_SmallInt number = new_SmallInt(10);
+    Object result = EvalSend0((Object)number, (Object)SMB_hash);
+    ASSERT_TYPE(result, SmallInt_Class);
+    assert(((Type_SmallInt)result)->value == number->value);
+}
+
 /* ======================================================================== */
 
 void test_SmallInt()
@@ -64,4 +72,5 @@ void test_SmallInt()
     test_SmallInt_times_();
     test_SmallInt_shiftLeft_();
     test_SmallInt_shiftRight_();
+    test_SmallInt_hash();
 }

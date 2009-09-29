@@ -25,3 +25,4 @@ SMB_ifTrue_         = (Object)new_Symbol(L"ifTrue:");
 SMB_not             = (Object)new_Symbol(L"not");
 SMB_or_             = (Object)new_Symbol(L"or:");
 SMB_value_ = (Object)new_Symbol(L"value:");
+SMB_hash = (Object)new_Symbol(L"hash");
