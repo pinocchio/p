@@ -8,7 +8,7 @@
 struct AST_Method_t {
     unsigned int    paramc;
     Object          environment;
-    Type_Array      body;
+    Type_Array          body;
 };
 
 CREATE_INITIALIZERS(Method)

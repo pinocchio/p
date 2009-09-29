@@ -98,41 +98,7 @@ extern jmp_buf Eval_Continue;
 
 /* ======================================================================== */
 
-#define TYPE(name) typedef struct name##_##t * name;
-
-// TODO move these definitions into the files
-TYPE(Type_Character);
-TYPE(Type_SmallInt);
-TYPE(Type_Object);
-TYPE(Type_Symbol);
-typedef Type_Symbol Type_String;
-TYPE(Type_Boolean);
-TYPE(Type_Array);
-TYPE(Type_Dictionary);
-TYPE(Type_Class);
-TYPE(Type_File);
-TYPE(AST_Constant);
-TYPE(AST_Self);
-TYPE(AST_Super);
-TYPE(AST_Continue);
-TYPE(AST_Block);
-TYPE(AST_Callec);
-TYPE(AST_Variable);
-TYPE(AST_Send);
-TYPE(AST_Assign);
-typedef void(*native)(Object self, Object class, Type_Array args);
-TYPE(AST_Native_Method);
-TYPE(AST_Method);
-TYPE(Runtime_Env);
-
-typedef struct InlineCache {
-    Object          type;
-    Object          method;
-} InlineCache;
-
-/* ======================================================================== */
-
-extern Type_Class Object_Class;
+#include <pinocchioTypes.ci>
 
 /* ======================================================================== */
 
@@ -170,13 +136,6 @@ extern void CNT_send_Eval();
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
 extern void store_method(Type_Class class, Object symbol, Object method);
-
-/* ======================================================================== */
-
-extern Object EvalSendConst(Object self, Object symbol, Type_Array args);
-extern Object EvalSend(Object self, Object symbol, Type_Array args);
-extern Object EvalSend0(Object self, Object symbol);
-extern Object EvalSend1(Object self, Object symbol, Object arg);
 
 /* ======================================================================== */
 
