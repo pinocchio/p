@@ -30,7 +30,7 @@ jmp_buf __test_continue__;
 
 void phandler(int signum)
 {
-    fprintf(stderr, "Continue\n");
+    //fprintf(stderr, "Continue\n");
     longjmp(__test_continue__, 1);
 }
 

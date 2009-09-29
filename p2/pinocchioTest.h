@@ -23,7 +23,6 @@ extern jmp_buf __test_continue__;
 #define RUN_TEST(f)\
     if (!setjmp(__test_continue__)) {\
         RESET_LOG();\
-        LOG("Running test_"#f"\n");\
         test##_##f();\
     }
 
