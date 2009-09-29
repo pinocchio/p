@@ -19,7 +19,7 @@ def createCHSourcesAt(path)
     sourceH.puts separator
     sourceH.puts
     sourceH.puts "struct #{fullName}_t {"
-    sourceH.puts "    //TODO add TYPE(#{name}); to pinocchioType.ci"
+    sourceH.puts "    #error \"TODO add TYPE(#{name}); to pinocchioType.ci\""
     sourceH.puts "};"
     sourceH.puts
     sourceH.puts "CREATE_INITIALIZERS(#{name})"
