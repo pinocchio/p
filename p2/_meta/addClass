@@ -6,7 +6,7 @@ def createCHSourcesAt(path)
     dir = File.dirname path
     name = File.basename path
     dirname = File.basename dir
-    fullName = "#{dirname.upcase}_#{name}"
+    fullName = "#{dirname.capitalize}_#{name}"
     guard = "#{name.upcase}_H"
 
     # create the file only if it doesn't exist yet
@@ -88,13 +88,20 @@ def createCHSourcesAt(path)
     sourceT.puts "}"
     sourceT.puts 
 
-    puts "Successfully created #{fullName}"
+    File.open("pinocchioPreInitializer.ci", "a+") do |file|
+        file.puts "pre_initialize_#{name}();"
+    end
+
+    File.open("pinocchioPostInitializer.ci", "a+") do |file|
+        file.puts "post_initialize_#{name}();"
+    end
 
 end
 
 
 if $0 == __FILE__:
     $*.each { |path|
-        createCHSourcesAt path     
+        createCHSourcesAt path  
+        puts "Successfully created #{fullName}"
     }
 end

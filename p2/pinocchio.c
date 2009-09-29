@@ -123,59 +123,14 @@ void post_initialize_Type_SmallInt();
 
 int main()
 {
-    pre_initialize_Nil();
-    
-    pre_initialize_Object();
-    pre_initialize_Type_SmallInt();
-    pre_initialize_Symbol();
-    
-    pre_initialize_Array();
-    pre_initialize_Assign();
-    pre_initialize_Callec();
-    pre_initialize_Character();
-    pre_initialize_Constant();
-    pre_initialize_Continue();
-    pre_initialize_Dictionary();
-    pre_initialize_File();
-    pre_initialize_Method();
-    pre_initialize_Native_Method();
-    pre_initialize_Self();
-    pre_initialize_Send();
-    pre_initialize_String();
-    pre_initialize_Super();
-    pre_initialize_Type_Boolean();
-    pre_initialize_Variable();
-    pre_initialize_CharacterTable();
+	#include <pinocchioPreInitializer.ci>
+	#include <pinocchioPostInitializer.ci>
 
-    initialize_Symbol();
     initialize_Thread();
     
-    post_initialize_Object();
-    
-    post_initialize_Array();
-    post_initialize_Assign();
-    post_initialize_Callec();
-    post_initialize_Character();
-    post_initialize_Constant();
-    post_initialize_Continue();
-    post_initialize_Dictionary();
-    post_initialize_Env();
-    post_initialize_File();
-    post_initialize_Method();
-    post_initialize_Native_Method();
-    post_initialize_Self();
-    post_initialize_Send();
-    post_initialize_String();
-    post_initialize_Super();
-    post_initialize_Symbol();
-    post_initialize_Type_Boolean();
-    post_initialize_Type_SmallInt();
-    post_initialize_Variable();
-    post_initialize_CharacterTable();
-    
-#ifdef TEST
+	#ifdef TEST
     run_tests();
-#endif
+	#endif
     
     return EXIT_SUCCESS;
 }
