@@ -1,6 +1,7 @@
 TARGET=pinocchio
 
 CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
+CIFILES=$(wildcard *.ci)
 HFILES+=$(CFILES:%.c=%.h)
 
 TEST_CIFILES=$(wildcard system/*/*Test.ci)
@@ -10,7 +11,7 @@ TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 CFLAGS+=-I. -O3 -lgc -Wall
 LDFLAGS+=-lgc
 
-SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
+SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
 OBJECTS=$(CFILES:%.c=%.o)
 ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
