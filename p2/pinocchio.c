@@ -44,40 +44,27 @@ void initialize_Thread()
 
 /* ========================================================================== */
 
+#define EVAL_IF(name) \
+    if (class == name##_Class) { \
+        return AST_##name##_eval((AST_##name)exp); \
+    }
+
+
 void CNT_send_Eval()
 {
     zap_CNT();
     Object exp = peek_EXP(1);
 
     Type_Class class = (Type_Class)HEADER(exp);
-    // TODO get rid of this switch and do a "double dispatch"
-    if (class == Constant_Class) {
-        return AST_Constant_eval((AST_Constant)exp);
-    }
-    if (class == Variable_Class) {
-        return AST_Variable_eval((AST_Variable)exp);
-    }
-    if (class == Assign_Class) {
-        return AST_Assign_eval((AST_Assign)exp);
-    }
-    if (class == Send_Class) {
-        return AST_Send_eval((AST_Send)exp);
-    }
-    if (class == Self_Class) {
-        return AST_Self_eval();
-    }
-    if (class == Super_Class) {
-        return AST_Super_eval((AST_Super)exp);
-    }
-    /*if (class == Continue_Class) {
-        //return AST_Continue_eval((AST_Continue)exp);
-    }*/
-    if (class == Callec_Class) {
-        return AST_Callec_eval((AST_Callec)exp);
-    }
+    EVAL_IF(Constant)
+    EVAL_IF(Variable)
+    EVAL_IF(Assign)
+    EVAL_IF(Send)
+    EVAL_IF(Super)
+    EVAL_IF(Self)
+    EVAL_IF(Callec)
     
     /* TODO fallback by actually sending the eval message */
-
     printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a Constant?\n", 
            ((Type_Class)class)->name->value);
     assert(NULL);
