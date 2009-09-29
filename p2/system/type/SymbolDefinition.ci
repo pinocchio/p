@@ -24,3 +24,4 @@ SMB_ifFalse_        = (Object)new_Symbol(L"ifFalse:");
 SMB_ifTrue_         = (Object)new_Symbol(L"ifTrue:");
 SMB_not             = (Object)new_Symbol(L"not");
 SMB_or_             = (Object)new_Symbol(L"or:");
+SMB_value_ = (Object)new_Symbol(L"value:");

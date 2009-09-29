@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+def addSymbol(symbol)
+    symbol_name = symbol.gsub(':', "_") 
+    File.open("system/type/SymbolDefinition.hi", "a+") do |f|
+        f.puts "extern Object SMB_#{symbol_name};"
+    end
+    File.open("system/type/SymbolDefinition.ci", "a+") do |f|
+        f.puts "SMB_#{symbol_name} = (Object)new_Symbol(L\"#{symbol}\");"
+    end
+end
+
+def ensureSymbol(name)
+    File.readlines("system/type/SymbolDefinition.ci").
+         grep(Regexp.new("\"#{name}\"")).length > 0
+end
+
+if $0 == __FILE__
+    $*.each {|symbol|
+        if not ensureSymbol(symbol)
+            addSymbol(symbol)
+            puts "Symbol \"#{symbol}\" added"
+        else
+            puts "Symbol \"#{symbol}\" exists already"
+        end
+    }
+end
