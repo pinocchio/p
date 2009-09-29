@@ -87,6 +87,7 @@ void Class_dispatch(InlineCache * cache, Object self, Object class,
         method = Dictionary_lookup(mdict, msg);
         if (!method) {
             class = ((Type_Class) class)->super;
+			LOG("Parent Lookup continueing in  \"%ls\"\n", ((Type_Class)class)->name->value);
         } else {
             cache->type   = class;
             cache->method = method;

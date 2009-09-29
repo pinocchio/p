@@ -41,6 +41,13 @@ void pre_initialize_Symbol()
     Symbol_Class = new_Named_Class((Object)Object_Class, L"Symbol");
     initialize_Symbol();
 }
+/*
+ * Initialize Symbols before installing methods.
+ */
+void initialize_Symbol()
+{
+#include <system/type/SymbolInitialization.ci> 
+}
 
 /* ========================================================================== */
 
@@ -106,10 +113,6 @@ void initialize_Symbol_Table()
     SMB_Table = new_Dictionary();
 }
 
-void initialize_Symbol()
-{
-    #include <system/type/SymbolInitialization.ci> 
-}
 
 void post_initialize_Symbol()
 {
