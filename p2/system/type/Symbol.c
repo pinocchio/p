@@ -9,6 +9,8 @@
 Type_Class Symbol_Class;
 Type_Dictionary SMB_Table;
 
+#include <system/type/SymbolDefinition.ci>
+
 /* ========================================================================== */
 
 wchar_t* wcsdup(const wchar_t* input)
@@ -112,7 +114,7 @@ void post_initialize_Symbol()
 {
     initialize_Symbol_Table();
     install_symbol_methods(Symbol_Class);
-#include <system/type/SymbolDefinition.ci>
+#include <system/type/SymbolInitialization.ci>
 }
 
 void install_symbol_methods(Type_Class class)
