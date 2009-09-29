@@ -1,0 +1,3 @@
+extern void store_method(Type_Class class, Object symbol, Object method);
+extern void store_native_method(Type_Class class, Object symbol, native code);
+extern wchar_t * Object_classname(Object self);
