@@ -11,7 +11,7 @@
 
 /* ======================================================================== */
 
-Object Double_Stack[STACK_SIZE];
+Object * Double_Stack;
 Object * _EXP_;
 cont   * _CNT_;
 
@@ -26,14 +26,15 @@ jmp_buf Eval_AST_Continue;
  */
 void continue_eval()
 {
-    siglongjmp(Eval_AST_Continue, 1);
+    longjmp(Eval_AST_Continue, 1);
 }
 
 void init_Stack(unsigned int size)
 {
     // TODO allocate the stack with the given size
+    Double_Stack = (Object *)PALLOC(sizeof(Object[STACK_SIZE]));
     _EXP_ = (Object *)&Double_Stack[0];
-    _CNT_ = (cont *)  &Double_Stack[STACK_SIZE - 1];
+    _CNT_ = (cont *)  &Double_Stack[size - 1];
 }
 
 void initialize_Thread()
@@ -72,7 +73,7 @@ void CNT_send_Eval()
 
 void CNT_end_eval()
 {
-    siglongjmp(Eval_Exit, 1);
+    longjmp(Eval_Exit, 1);
 }
 
 /**
@@ -92,9 +93,9 @@ Object Eval(Object code)
     push_CNT(CNT_end_eval);
     push_CNT(CNT_send_Eval);
 
-    if (!sigsetjmp(Eval_Exit, 1)) {
+    if (!setjmp(Eval_Exit)) {
         IN_EVAL = 1;
-        sigsetjmp(Eval_AST_Continue, 1);
+        setjmp(Eval_AST_Continue);
         for (;;) {
             peek_CNT(1)();
         }

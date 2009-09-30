@@ -90,7 +90,7 @@ typedef struct Type_Nil{} Type_Nil;
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
-extern Object Double_Stack[STACK_SIZE];
+extern Object * Double_Stack;
 extern Object * _EXP_;
 extern cont   * _CNT_;
 
