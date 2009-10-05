@@ -54,7 +54,7 @@ void CNT_store_argument()
 
 void AST_Send_eval(AST_Send self)
 {
-    LOGFUN;
+    // LOGFUN;
     
     Type_Array args = new_Raw_Type_Array(self->arguments->size->value);
     // execute the method

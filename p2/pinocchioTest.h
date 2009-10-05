@@ -10,7 +10,8 @@
 #define NEW_TEST(name) void name() {\
 	LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__);
 
-#define SKIP_TEST printf("Test skipped: %s %s:%u\n", __FUNCTION__, __FILE__, __LINE__); return;
+#define SKIP_TEST printf("Test skipped: %s %s:%u\n",\
+    __FUNCTION__, __FILE__, __LINE__); return;
 
 #define NEW_CLASS_TEST(name) void name() {\
 LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"); \

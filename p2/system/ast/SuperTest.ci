@@ -1,4 +1,3 @@
-
 NEW_TEST(test_ast_super)
     Type_SmallInt integer       = new_Type_SmallInt(70);
     Type_SmallInt integer7      = new_Type_SmallInt(7);
@@ -16,7 +15,7 @@ NEW_TEST(test_ast_super)
     method = new_Method(0, body);
     store_method(Type_Boolean_Class, (Object)test, (Object)method);
     
-    Object result = Eval_AST_Send0((Object)True_Const, (Object)test);
+    Object result = Eval_AST_Send0((Object)True, (Object)test);
     assert0(result == (Object)integer);
 }
 
