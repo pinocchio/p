@@ -1,4 +1,5 @@
 NEW_TEST(test_method_evaluation)
+    SKIP_TEST;
     Type_Array body       = Empty_Type_Array;
     AST_Method method     = new_Method(1, body);
     Object method_const     = (Object)new_AST_Constant((Object)method);
