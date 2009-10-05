@@ -40,7 +40,7 @@ extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) \
 	int size_value = (raw_size); \
-    assert((args->size->value > size_value && args->size->value < size_value), \
+    assert((args->size->value < 0 || args->size->value >= size_value), \
 		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size->value));
 
 // TODO make sure we do a proper class lookup here
@@ -94,8 +94,9 @@ extern Object * Double_Stack;
 extern Object * _EXP_;
 extern cont   * _CNT_;
 
-extern jmp_buf Eval_Exit;
-extern jmp_buf Eval_AST_Continue;
+extern void CNT_continue_eval();
+extern void CNT_abort_eval();
+extern void CNT_exit_eval();
 
 /* ======================================================================== */
 

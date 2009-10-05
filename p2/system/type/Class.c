@@ -72,13 +72,13 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
     }
 	assert1(HEADER(class) == (Object)Type_Class_Class, "Wrong meta class not of type Type_Class_Class");
     //LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
-    LOG("Dispatching \"%ls\" on \"%ls\"\n",  
-            ((Type_Symbol)msg)->value,
-            ((Type_Class)HEADER(self))->name->value);
+    //LOG("Dispatching \"%ls\" on \"%ls\"\n",  
+    //        ((Type_Symbol)msg)->value,
+    //        ((Type_Class)HEADER(self))->name->value);
     
     Object method = NULL;    
     while (class != Nil) {
-        LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
+        // LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
         Type_Dictionary mdict = ((Type_Class) class)->methods;
         method = Type_Dictionary_lookup(mdict, msg);
         if (!method) {

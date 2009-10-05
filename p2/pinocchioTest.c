@@ -26,22 +26,10 @@
 
 /* ========================================================================== */
 
-jmp_buf __test_continue__;
-
-void phandler(int signum)
-{
-    fprintf(stderr, "Continue\n");
-    IN_EVAL = 0;
-    siglongjmp(__test_continue__, 1);
-}
-
-/* ========================================================================== */
-
 Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
 {
     return (Object)Eval((Object)new_AST_Send((Object)self, symbol, args));
 }
-
 
 Object Eval_AST_Send(Object self, Object symbol, Type_Array args) 
 {
@@ -67,7 +55,6 @@ Object Eval_AST_Send1(Object self, Object symbol, Object arg)
 
 void run_tests()
 {
-    signal(SIGFAIL, phandler);
     test_Type_Array();
     test_AST_Assign();
     test_Type_Boolean();

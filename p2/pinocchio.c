@@ -15,19 +15,32 @@ Object * Double_Stack;
 Object * _EXP_;
 cont   * _CNT_;
 
-jmp_buf Eval_Exit;
-jmp_buf Eval_AST_Continue;
-
 /* ======================================================================== */
+
+jmp_buf Eval_Exit;
+jmp_buf Eval_Continue;
+jmp_buf Eval_Abort;
 
 /* 
  * Avoid longjmps as much as possible since they impose a large
  * performance penalty!
  */
-void continue_eval()
+void CNT_continue_eval()
 {
-    longjmp(Eval_AST_Continue, 1);
+    longjmp(Eval_Continue, 1);
 }
+
+void CNT_abort_eval()
+{
+    longjmp(Eval_Abort, 1);
+}
+
+void CNT_exit_eval()
+{
+    longjmp(Eval_Exit, 1);
+}
+
+/* ======================================================================== */
 
 void init_Stack(unsigned int size)
 {
@@ -70,12 +83,6 @@ void CNT_send_Eval()
 				  ((Type_Class)class)->name->value));
 }
 
-
-void CNT_end_eval()
-{
-    longjmp(Eval_Exit, 1);
-}
-
 /**
  * setjmp and longjmp have an overhead but they allow us to avoid testing if
  * we are at the end of the stack. It's only expensive for starting new
@@ -90,12 +97,12 @@ Object Eval(Object code)
     }
 
     push_EXP(code);
-    push_CNT(CNT_end_eval);
+    push_CNT(CNT_exit_eval);
     push_CNT(CNT_send_Eval);
 
     if (!setjmp(Eval_Exit)) {
         IN_EVAL = 1;
-        setjmp(Eval_AST_Continue);
+        setjmp(Eval_Continue);
         for (;;) {
             peek_CNT(1)();
         }
@@ -114,11 +121,15 @@ int main()
 	#include <pinocchioPreInit.ci>
 	#include <pinocchioPostInit.ci>
 
+    if (!setjmp(Eval_Abort)) {
+
     initialize_Thread();
     
 	#ifdef TEST
     run_tests();
 	#endif
+
+    }
     
     return EXIT_SUCCESS;
 }

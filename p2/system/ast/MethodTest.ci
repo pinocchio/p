@@ -37,9 +37,8 @@ NEW_TEST(test_method_invocation_with_arguments)
     
     Type_Symbol test           = new_Type_Symbol(L"test");
     Type_SmallInt integer      = new_Type_SmallInt(120);
-    AST_Constant integer_const = new_AST_Constant((Object)integer);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Object result     = Eval_AST_Send1((Object)integer_const, (Object)test, (Object)integer_const);
+    Object result     = Eval_AST_Send1(integer, (Object)test, (Object)integer);
     assert0(result == (Object)integer);
 }
 
@@ -49,9 +48,8 @@ NEW_TEST(test_method_invocation)
     AST_Method method = new_Method(0, body);
     Type_Symbol test = new_Type_Symbol(L"test");
     Type_SmallInt integer = new_Type_SmallInt(120);
-    AST_Constant integer_const = new_AST_Constant((Object)integer);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Object result = Eval_AST_Send0((Object)integer_const, (Object)test);
+    Object result = Eval_AST_Send0((Object)integer, (Object)test);
     assert0(result == (Object)integer);
     
     // with 1 body element
@@ -60,7 +58,7 @@ NEW_TEST(test_method_invocation)
     body = new_Type_Array_With(1, (Object)integer5_const);
     method = new_Method(0, body);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    result = Eval_AST_Send0((Object)integer_const, (Object)test);
+    result = Eval_AST_Send0((Object)integer, (Object)test);
     assert0(result == (Object)integer5);
     
     // with 2 body element
@@ -70,7 +68,7 @@ NEW_TEST(test_method_invocation)
     body->values[1] = (Object)integer6_const;
     method = new_Method(0, body);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    result = Eval_AST_Send0((Object)integer_const, (Object)test);
+    result = Eval_AST_Send0((Object)integer, (Object)test);
     assert0(result == (Object)integer6);
     
     // with 3 body element
@@ -81,7 +79,7 @@ NEW_TEST(test_method_invocation)
     body->values[2] = (Object)integer7_const;
     method = new_Method(0, body);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    result = Eval_AST_Send0((Object)integer_const, (Object)test);
+    result = Eval_AST_Send0((Object)integer, (Object)test);
     assert0(result == (Object)integer7);
 }
 
