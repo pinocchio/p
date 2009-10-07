@@ -21,3 +21,5 @@ TYPE(AST_Method);
 TYPE(AST_Info);
 TYPE(Runtime_Env);
 TYPE(Type_CharacterTable);
+TYPE(Io_Stream);
+TYPE(IO_Stream);

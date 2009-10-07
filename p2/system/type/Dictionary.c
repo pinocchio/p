@@ -82,7 +82,7 @@ NATIVE2(NM_Type_Dictionary_Type_ObjectAt_put_)
 
 void post_init_Type_Dictionary()
 {
-    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_, NM_Type_Dictionary_Type_ObjectAt_);
-    store_native_method(Type_Dictionary_Class, SMB_Type_ObjectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
+    store_native_method(Type_Dictionary_Class, SMB_objectAt_, NM_Type_Dictionary_Type_ObjectAt_);
+    store_native_method(Type_Dictionary_Class, SMB_objectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
 }
 

@@ -5,9 +5,12 @@
 
 /* ========================================================================== */
 
+typedef Type_Symbol Type_String;
+
 CREATE_INITIALIZERS(Type_String)
 
 Type_String new_Type_String(const wchar_t * str);
+Type_String new_Type_String_sized(unsigned int size);
 
 /* ========================================================================== */
 

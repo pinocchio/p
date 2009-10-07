@@ -44,7 +44,6 @@ Type_Array new_Type_Array_With(int c, Object init)
 void pre_init_Type_Array() 
 {
     Type_Array_Class         = new_Named_Class((Object)Type_Object_Class, L"Type_Array");
-    
     Empty_Type_Array         = NEW_t(Type_Array);
     HEADER(Empty_Type_Array) = (Object)Type_Array_Class;
 }
@@ -53,7 +52,8 @@ void pre_init_Type_Array()
 
 Object Type_Array_Type_ObjectAt(Type_Array array, unsigned int index)
 {
-    assert(index < array->size->value, printf("Inxex %u out of bounds %u", index, array->size->value));
+    assert(index < array->size->value, 
+        printf("Index %u out of bounds %u", index, array->size->value));
     return array->values[index];
 }
 
@@ -74,11 +74,13 @@ NATIVE0(NM_Type_Array_size)
     push_EXP(new_Type_SmallInt(((Type_Array)self)->size->value));
 }
 
+/* ======================================================================== */
+
 void post_init_Type_Array()
 {
     Empty_Type_Array->size   = new_Type_SmallInt(0);
     
-    store_native_method(Type_Array_Class, SMB_Type_ObjectAt_,     NM_Type_Array_Type_ObjectAt_);
-    store_native_method(Type_Array_Class, SMB_Type_ObjectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
+    store_native_method(Type_Array_Class, SMB_objectAt_,     NM_Type_Array_Type_ObjectAt_);
+    store_native_method(Type_Array_Class, SMB_objectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
     store_native_method(Type_Array_Class, SMB_size,          NM_Type_Array_size);
 }

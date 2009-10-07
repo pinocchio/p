@@ -18,6 +18,12 @@ Type_String new_Type_String(const wchar_t * str)
     return string;
 }
 
+Type_String new_Type_String_sized(unsigned int size)
+{
+    wchar_t * string = (wchar_t *)PALLOC(sizeof(wchar_t)*(size+1));
+    return new_Type_String(string);
+}
+
 void pre_init_Type_String()
 {
     Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
@@ -28,6 +34,8 @@ void pre_init_Type_String()
 
 Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {
+    assert1(str1 && str1->value, "Invalid Argument for String concat:");
+    assert1(str2 && str2->value, "Invalid Argument for String concat:");
     int len = str1->size->value + str2->size->value;
     wchar_t* concated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
     int i, j;

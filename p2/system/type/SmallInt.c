@@ -62,13 +62,15 @@ Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_or_,         |);
 
 
 NATIVE1(NM_Type_SmallInt_equals_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
-    
-    Type_SmallInt number = ((Type_SmallInt) self);
-    if (number->value == ((Type_SmallInt) args->values[0])->value) {
-        push_EXP(True);        
+    if (HEADER(args->values[0]) == (Object)Type_SmallInt_Class) {
+        Type_SmallInt number = ((Type_SmallInt) self);
+        if (number->value == ((Type_SmallInt) args->values[0])->value) {
+            push_EXP(True);        
+        } else {
+            push_EXP(False);
+        }
     } else {
-        push_EXP(False);
+        NM_Type_Object_equals(self, class, args);
     }
 }
 

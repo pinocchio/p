@@ -59,5 +59,5 @@ void post_init_Type_Character()
 { 
     store_native_method(Type_Character_Class, SMB_asString,   NM_Type_Character_asString);
     store_native_method(Type_Character_Class, SMB_asSymbol,   NM_Type_Character_asSymbol);
-    store_native_method(Type_Character_Class, SMB_asType_SmallInt, NM_Type_Character_asType_SmallInt);
+    store_native_method(Type_Character_Class, SMB_asSmallInt, NM_Type_Character_asType_SmallInt);
 }

@@ -9,11 +9,11 @@ NEW_TEST(test_Type_Array_Type_ObjectAt_)
     for (i=0; i<array->size->value; i++) {
         if (i==4) { continue; }
         args->values[0] = (Object)new_Type_SmallInt(i); 
-        assert0(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer);
+        assert0(Eval_AST_Send((Object)array, SMB_objectAt_, args) == integer);
         assert0(array->values[i] == integer);
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
-    assert0(Eval_AST_Send((Object)array, SMB_Type_ObjectAt_, args) == integer2);
+    assert0(Eval_AST_Send((Object)array, SMB_objectAt_, args) == integer2);
 }
 
 NEW_TEST(test_Type_Array_size)
@@ -37,13 +37,13 @@ NEW_TEST(test_Type_Array_Type_ObjectAt_put)
     Type_Array args  = new_Type_Array_With(2, (Object)integer1);
     args->values[0] = integer0; 
     
-    result = Eval_AST_Send((Object)array, SMB_Type_ObjectAt_put_, args);
+    result = Eval_AST_Send((Object)array, SMB_objectAt_put_, args);
     assert0(result == integer1);
     assert0(array->values[0] == integer1);
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
-    result = Eval_AST_Send((Object)array, SMB_Type_ObjectAt_put_, args);
+    result = Eval_AST_Send((Object)array, SMB_objectAt_put_, args);
     assert0(result == integer1);
     assert0(array->values[2] == integer1);
 }

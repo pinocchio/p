@@ -11,6 +11,10 @@ struct Type_Object_t {
 
 CREATE_INITIALIZERS(Type_Object)
 
-/* ======================================================================== */
+/* ========================================================================== */
+
+extern void NM_Type_Object_equals(Object self, Object class, Type_Array args);
+
+/* ========================================================================== */
 
 #endif // TYPE_OBJECT_H

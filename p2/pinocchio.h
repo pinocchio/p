@@ -40,15 +40,24 @@ extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) \
 	int size_value = (raw_size); \
-    assert((args->size->value < 0 || args->size->value >= size_value), \
+    assert((args->size->value <= size_value && args->size->value >= 0), \
 		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size->value));
 
 // TODO make sure we do a proper class lookup here
-#define ASSERT_TYPE(expression, class) assert1(HEADER(expression)==((Object)(class)),  "Invalid type of arguments given");
-#define ASSERT_ARG_TYPE(index, class) assert1(HEADER(args->values[index])==((Object)(class)), "Invalid number of arguments given");
+#define ASSERT_TYPE(expression, class) \
+    assert(HEADER(expression)==((Object)(class)), \
+        printf("Invalid type of arguments given"));
+        
+#define ASSERT_ARG_TYPE(index, class) \
+    assert(HEADER(args->values[index])==((Object)(class)), \
+        printf("Invalid argument given at %i, exptected \"%ls\" but got \"%ls\"", \
+               index, ((Type_Class)HEADER(args->values[index]))->name->value, \
+               ((Type_Class)(class))->name->value));
 
+// TODO make sure this is not done via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-assert(Eval_AST_Send((Object)(exp1), SMB_equals_, new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
+    assert(Eval_AST_Send((Object)(exp1), SMB_equals_, \
+        new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ======================================================================== */
 
@@ -104,7 +113,6 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef Type_Symbol Type_String;
 typedef void(*native)(Object self, Object class, Type_Array args);
 typedef struct InlineCache {
     Object          type;
@@ -122,6 +130,7 @@ extern int IN_EVAL;
 /* ======================================================================== */
 
 extern void CNT_send_Eval();
+extern Object Eval(Object code);
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
 extern void store_method(Type_Class class, Object symbol, Object method);

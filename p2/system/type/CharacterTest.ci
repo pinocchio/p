@@ -7,7 +7,7 @@ Object result;
 
 NEW_TEST(test_Type_Character_asType_SmallInt)
     CHARACTER_TEST_SETUP;
-    result = Eval_AST_Send0((Object)chr, SMB_asType_SmallInt);
+    result = Eval_AST_Send0((Object)chr, SMB_asSmallInt);
     ASSERT_TYPE(result, Type_SmallInt_Class);
 }
 

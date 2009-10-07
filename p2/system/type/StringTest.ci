@@ -33,6 +33,17 @@ NEW_TEST(test_Type_String_concat_)
     assert0(((Type_String) result)->size->value == (string->size->value + string2->size->value));
 }
 
+NEW_TEST(test_Type_String_asArray)
+    STRING_TEST_SETUP;
+    result = Eval_AST_Send0((Object)string, (Object)SMB_asArray);
+    ASSERT_TYPE(result, Type_Array_Class);
+    assert0(((Type_Array)result)->size->value == string->size->value);
+    int i=0;
+    for (i=0; i<string->size->value; i++) {
+       assert0(((Type_Character)((Type_Array)result)->values[i])->value == string->value[i]);
+    }
+}
+
 
 /* ======================================================================== */
 
@@ -41,4 +52,5 @@ void test_Type_String()
     RUN_TEST(Type_String_asString);
     RUN_TEST(Type_String_asSymbol);
     RUN_TEST(Type_String_concat_);
+    RUN_TEST(Type_String_asArray);
 }

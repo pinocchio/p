@@ -26,3 +26,5 @@
 
 #include <system/runtime/Env.h>
 #include <system/type/CharacterTable.h>
+#include <system/io/Stream.h>
+#include <system/io/Stream.h>

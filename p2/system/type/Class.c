@@ -64,13 +64,16 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
     //printf("%i\n", ((Type_SmallInt)peek_EXP(1))->value);
     
     /* Monomorphic inline cache */
+    // TODO put that directly on the sender side
+    // TODO create Polymorphic inline cache
     if (class == cache->type) {
         LOG("Cached dispatch \"%ls\" on \"%ls\"\n",  
             ((Type_Symbol)msg)->value,
             ((Type_Class)HEADER(self))->name->value);
         return Method_invoke(cache->method, self, class, args);
     }
-	assert1(HEADER(class) == (Object)Type_Class_Class, "Wrong meta class not of type Type_Class_Class");
+	assert1(HEADER(class) == (Object)Type_Class_Class, 
+        "Wrong meta class not of type Type_Class_Class");
     //LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
     //LOG("Dispatching \"%ls\" on \"%ls\"\n",  
     //        ((Type_Symbol)msg)->value,
@@ -88,6 +91,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 							((Type_Symbol)msg)->value));
 			class = super;
         } else {
+            //TODO create second level  cache to directly store the misses
             cache->type   = class;
             cache->method = method;
             return Method_invoke(method, self, class, args);
