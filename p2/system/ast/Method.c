@@ -85,6 +85,9 @@ void Method_invoke(Object method, Object self,
         return AST_Native_Method_invoke((AST_Native_Method)method, self,
                                         class, args);
     }
+    if (type == AST_Block_Class) {
+        return AST_Block_invoke((AST_Block)method, self, class, args);
+    }
     // Only AST_Method supported for now
     assert(NULL, 
 		   if (!type) {
