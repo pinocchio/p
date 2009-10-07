@@ -122,13 +122,11 @@ int main()
 	#include <pinocchioPostInit.ci>
 
     if (!setjmp(Eval_Abort)) {
-
-    initialize_Thread();
+        initialize_Thread();
     
-	#ifdef TEST
-    run_tests();
-	#endif
-
+        #ifdef TEST
+        run_tests();
+        #endif
     }
     
     return EXIT_SUCCESS;

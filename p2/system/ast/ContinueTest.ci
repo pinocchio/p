@@ -1,5 +1,5 @@
 
-NEW_TEST(test_ast_continue)
+NEW_TEST(ast_continue)
     Type_SmallInt integer1      = new_Type_SmallInt(1);
     Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer1_const = new_AST_Constant((Object)integer1);

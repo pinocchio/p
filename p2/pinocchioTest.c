@@ -26,13 +26,34 @@
 
 /* ========================================================================== */
 
-void test_suite_begin()
+jmp_buf Test_Continue;
+int TEST_CASE_FAILED;
+
+void test_suite_begin(char * suiteName)
 {
+    TEST_CASE_FAILED = 0;
+    printf("Starting \"%s\"", suiteName);
 }
 
 
-void test_suite_end()
+void test_suite_end(char * suiteName)
 {
+    if (TEST_CASE_FAILED) {
+        printf("\033[100D\033[60C[\033[31mERROR\033[0m]\n");
+    } else {
+        printf("\033[100D\033[60C[\033[32mDONE\033[0m]\n");
+    }
+}
+
+void init_Exception_Handling()
+{
+    if(!setjmp(Assert_Fail)) {
+        printf("Exception Handler Initialized");
+    } else {
+        printf("Exception Failed\n");
+        TEST_CASE_FAILED = 1;
+        longjmp(Test_Continue, 1);
+    }
 }
 
 
@@ -67,6 +88,7 @@ Object Eval_AST_Send1(Object self, Object symbol, Object arg)
 
 void run_tests()
 {
+    init_Exception_Handling();
     test_Type_Array();
     test_AST_Assign();
     test_Type_Boolean();

@@ -6,7 +6,7 @@ Object result;
 
 /* ======================================================================== */
 
-NEW_TEST(test_Type_Symbol_equals_)
+NEW_TEST(Type_Symbol_equals_)
 //  Type_Symbol symbol = new_Type_Symbol(L"symbol"); 
 //    Type_Symbol symbol2 = new_Type_Symbol(L"symbol");
     // Symbols should use a symbol table
@@ -15,7 +15,7 @@ NEW_TEST(test_Type_Symbol_equals_)
     //ASSERT_EQUALS(symbol2, symbol);
 }
 
-NEW_TEST(test_Type_Symbol_size)
+NEW_TEST(Type_Symbol_size)
     SYMBOL_TEST_SETUP;
     result = Eval_AST_Send0((Object)symbol, SMB_size);
     ASSERT_TYPE(result, Type_SmallInt_Class);
@@ -23,21 +23,21 @@ NEW_TEST(test_Type_Symbol_size)
     
 }
 
-NEW_TEST(test_Type_Symbol_asString)
+NEW_TEST(Type_Symbol_asString)
     SYMBOL_TEST_SETUP;
     result = Eval_AST_Send0((Object)symbol, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
 }
 
-NEW_TEST(test_Type_Symbol_indexOf)
+NEW_TEST(Type_Symbol_indexOf)
     //SYMBOL_TEST_SETUP;
 }
 
-NEW_TEST(test_Type_Symbol_lastIndexOf)
+NEW_TEST(Type_Symbol_lastIndexOf)
     //SYMBOL_TEST_SETUP;
 }
 
-NEW_TEST(test_Type_Symbol_Type_ObjectAt_)
+NEW_TEST(Type_Symbol_Type_ObjectAt_)
     SYMBOL_TEST_SETUP;
     int i;
     for (i= 0; i<symbol->size->value; ++i) {
@@ -47,7 +47,7 @@ NEW_TEST(test_Type_Symbol_Type_ObjectAt_)
     }
 }
 
-NEW_TEST(test_Type_Symbol_asType_Array)
+NEW_TEST(Type_Symbol_asType_Array)
     SYMBOL_TEST_SETUP;
     result = Eval_AST_Send0((Object)symbol, SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);

@@ -1,4 +1,4 @@
-
+jmp_buf Assert_Fail;
 
 void store_method(Type_Class class, Object symbol, Object method)
 {

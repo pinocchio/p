@@ -5,7 +5,7 @@ void test_native_method_evaluation_testmethod(Object self, Object class, Type_Ar
     test_native_method_evaluation_testmethod_called++;
 }
 
-NEW_TEST(test_ast_native_method_evaluation)
+NEW_TEST(ast_native_method_evaluation)
     SKIP_TEST;
     test_native_method_evaluation_testmethod_called = 0;
     AST_Native_Method method = new_AST_Native_Method(test_native_method_evaluation_testmethod);

@@ -1,5 +1,5 @@
 
-NEW_TEST(test_Type_SmallInt_equals_)
+NEW_TEST(Type_SmallInt_equals_)
     Object int0     = (Object)new_Type_SmallInt(0);
     Object int2     = (Object)new_Type_SmallInt(2);
     Object result;
@@ -17,7 +17,7 @@ NEW_TEST(test_Type_SmallInt_equals_)
 }
 
 #define Type_SmallInt_BINOP_TEST(name, op) \
-NEW_TEST(test_Type_SmallInt_##name##_) \
+NEW_TEST(Type_SmallInt_##name##_) \
     Type_SmallInt int4 = new_Type_SmallInt(4); \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
@@ -53,7 +53,7 @@ Type_SmallInt_BINOP_TEST(and,        &)
 Type_SmallInt_BINOP_TEST(or,         |)
 }
 
-NEW_TEST(test_Type_SmallInt_hash)
+NEW_TEST(Type_SmallInt_hash)
     Type_SmallInt number = new_Type_SmallInt(10);
     Object result = Eval_AST_Send0((Object)number, (Object)SMB_hash);
     ASSERT_TYPE(result, Type_SmallInt_Class);

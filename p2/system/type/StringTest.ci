@@ -7,20 +7,20 @@ Object result;
 
 /* ======================================================================== */
 
-NEW_TEST(test_Type_String_asString)
+NEW_TEST(Type_String_asString)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asString);
     assert0(result == (Object)string);
 }
 
-NEW_TEST(test_Type_String_asSymbol)
+NEW_TEST(Type_String_asSymbol)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert0(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
 }
 
-NEW_TEST(test_Type_String_concat_)
+NEW_TEST(Type_String_concat_)
     STRING_TEST_SETUP;
     Type_String string2 = new_Type_String(L"string2");
     
@@ -33,7 +33,7 @@ NEW_TEST(test_Type_String_concat_)
     assert0(((Type_String) result)->size->value == (string->size->value + string2->size->value));
 }
 
-NEW_TEST(test_Type_String_asArray)
+NEW_TEST(Type_String_asArray)
     STRING_TEST_SETUP;
     result = Eval_AST_Send0((Object)string, (Object)SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);

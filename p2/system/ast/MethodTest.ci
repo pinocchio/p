@@ -1,4 +1,4 @@
-NEW_TEST(test_method_evaluation)
+NEW_TEST(method_evaluation)
     SKIP_TEST;
     Type_Array body       = Empty_Type_Array;
     AST_Method method     = new_Method(1, body);
@@ -29,7 +29,7 @@ NEW_TEST(test_method_evaluation)
 }
 
 
-NEW_TEST(test_method_invocation_with_arguments)
+NEW_TEST(method_invocation_with_arguments)
     AST_Variable var  = new_AST_Variable(L"myVar");
     Type_Array body   = new_Type_Array_With(1, (Object)var);
     AST_Method method = new_Method(0, body);
@@ -44,7 +44,7 @@ NEW_TEST(test_method_invocation_with_arguments)
 }
 
 
-NEW_TEST(test_method_invocation)
+NEW_TEST(method_invocation)
     Type_Array body = Empty_Type_Array;
     AST_Method method = new_Method(0, body);
     Type_Symbol test = new_Type_Symbol(L"test");

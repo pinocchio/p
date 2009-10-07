@@ -1,4 +1,4 @@
-NEW_TEST(test_variable_lookup)
+NEW_TEST(variable_lookup)
     // TODO complete test
     AST_Variable var = new_AST_Variable(L"test");
     var->index         = 0;
@@ -10,7 +10,7 @@ NEW_TEST(test_variable_lookup)
 
 /* ======================================================================== */
 
-void test_Runtime_Env()
+TEST_SUITE(Runtime_Env,
 {
     RUN_TEST(variable_lookup);
-}
+})

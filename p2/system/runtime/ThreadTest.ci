@@ -1,5 +1,5 @@
 
-NEW_TEST(test_thread_stress)
+NEW_TEST(thread_stress)
     Object test     = (Object)new_AST_Constant((Object)new_Type_SmallInt(0));
     Object add      = (Object)new_AST_Constant((Object)new_Type_SmallInt(1));
     
@@ -16,7 +16,7 @@ NEW_TEST(test_thread_stress)
 
 /* ======================================================================== */
 
-void test_Thread()
+TEST_SUITE(Thread,
 {
-    //test_thread_stress();
-}
+    //RUN_TEST(thread_stress);
+})
