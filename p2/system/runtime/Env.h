@@ -8,7 +8,8 @@
 struct Runtime_Env_t {
     Object          self;
     Object          class;
-    AST_Method method;
+    AST_Method      method;
+    AST_Block       block;
     unsigned int    pc;
     Object          parent;
     Object          key;
