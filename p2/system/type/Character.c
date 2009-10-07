@@ -47,7 +47,7 @@ NATIVE0(Type_Character_asSymbol)
     push_EXP(new_Type_Symbol(&((Type_Character)self)->value));
 }
 
-NATIVE0(Type_Character_asType_SmallInt)
+NATIVE0(Type_Character_asSmallInt)
     // TODO add \0 at the end
     push_EXP(new_Type_SmallInt(((Type_Character)self)->value));
 }
@@ -59,5 +59,5 @@ void post_init_Type_Character()
 { 
     store_native_method(Type_Character_Class, SMB_asString,   NM_Type_Character_asString);
     store_native_method(Type_Character_Class, SMB_asSymbol,   NM_Type_Character_asSymbol);
-    store_native_method(Type_Character_Class, SMB_asSmallInt, NM_Type_Character_asType_SmallInt);
+    store_native_method(Type_Character_Class, SMB_asSmallInt, NM_Type_Character_asSmallInt);
 }

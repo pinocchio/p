@@ -26,6 +26,18 @@
 
 /* ========================================================================== */
 
+void test_suite_begin()
+{
+}
+
+
+void test_suite_end()
+{
+}
+
+
+/* ========================================================================== */
+
 Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
 {
     return (Object)Eval((Object)new_AST_Send((Object)self, symbol, args));

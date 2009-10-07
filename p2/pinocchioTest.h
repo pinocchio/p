@@ -18,9 +18,18 @@ LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"); \
 LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__); \
 LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
+extern void test_suite_begin();
+extern void test_suite_end();
+
 extern void run_tests();
 
-#define RUN_TEST(f) test##_##f();
+#define TEST_SUITE(name, tests) void test_##name() {\
+    test_suite_begin();\
+    tests\
+    test_suite_end();\
+}
+
+#define RUN_TEST(f) test_##f();
 
 /* ========================================================================== */
 

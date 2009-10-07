@@ -28,9 +28,9 @@ NEW_TEST(test_Type_Character_asString)
 
 /* ========================================================================== */
 
-void test_Type_Character()
+TEST_SUITE(Type_Character,
 {
     RUN_TEST(Type_Character_asType_SmallInt);
     RUN_TEST(Type_Character_asSymbol);
     RUN_TEST(Type_Character_asString);
-}
+})
