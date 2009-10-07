@@ -66,8 +66,8 @@ NEW_TEST(test_Type_Dictionary_Type_ObjectAt_put)
 
 /* ======================================================================== */
 
-void test_Type_Dictionary()
+TEST_SUITE(Type_Dictionary,
 {  
     RUN_TEST(Type_Dictionary_Type_ObjectAt_);
     RUN_TEST(Type_Dictionary_Type_ObjectAt_put);
-}
+})

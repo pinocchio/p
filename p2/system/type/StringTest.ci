@@ -47,10 +47,10 @@ NEW_TEST(test_Type_String_asArray)
 
 /* ======================================================================== */
 
-void test_Type_String()
+TEST_SUITE(Type_String,
 {
     RUN_TEST(Type_String_asString);
     RUN_TEST(Type_String_asSymbol);
     RUN_TEST(Type_String_concat_);
     RUN_TEST(Type_String_asArray);
-}
+})

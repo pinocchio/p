@@ -86,9 +86,9 @@ NEW_TEST(test_method_invocation)
 
 /* ======================================================================== */
 
-void test_Method()
+TEST_SUITE(Method,
 {
     test_method_invocation_with_arguments();
     test_method_invocation();
     test_method_evaluation();
-}
+})

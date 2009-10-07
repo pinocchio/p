@@ -79,19 +79,22 @@ def createCHSourcesAt(path)
     sourceC.close
 
     sourceT.puts 
-    sourceT.puts "#define #{name.upcase}_TEST_SETUP \\" 
-    sourceT.puts "    #{fullName} #{name} = new_#{fullName}(); \\"
+    sourceT.puts "#define #{fullName.upcase}_TEST_SETUP \\" 
+    sourceT.puts "    #{fullName} #{name.downcase} = new_#{fullName}(); \\"
     sourceT.puts "    Object result;"
     sourceT.puts 
     sourceT.puts separator 
     sourceT.puts 
+    sourceT.puts "void test_#{fullName.upcase}_example() {"
+    sourceT.puts " #error Fill the tests"
+    sourceT.puts "}"
     sourceT.puts 
     sourceT.puts separator
     sourceT.puts 
-    sourceT.puts "void test_#{fullName}()" 
+    sourceT.puts "TEST_SUITE(#{fullName}," 
     sourceT.puts "{" 
-    sourceT.puts 
-    sourceT.puts "}"
+    sourceT.puts "   RUN_TEST(#{fullName.upcase}_example);"
+    sourceT.puts "})"
     sourceT.puts 
 
     File.open("pinocchioPreInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|

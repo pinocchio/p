@@ -62,7 +62,7 @@ NEW_TEST(test_Type_SmallInt_hash)
 
 /* ======================================================================== */
 
-void test_Type_SmallInt()
+TEST_SUITE(Type_SmallInt,
 {
     RUN_TEST(Type_SmallInt_equals_);
     RUN_TEST(Type_SmallInt_plus_);
@@ -72,4 +72,4 @@ void test_Type_SmallInt()
     RUN_TEST(Type_SmallInt_shiftLeft_);
     RUN_TEST(Type_SmallInt_shiftRight_);
     RUN_TEST(Type_SmallInt_hash);
-}
+})

@@ -19,7 +19,7 @@ NEW_TEST(test_ast_native_method_evaluation)
 
 /* ======================================================================== */
 
-void test_NativeMethod()
+TEST_SUITE(NativeMethod,
 {
     RUN_TEST(ast_native_method_evaluation);
-}
+})

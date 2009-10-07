@@ -1,8 +1,8 @@
 
 /* ======================================================================== */
 
-void test_Type_Object()
+TEST_SUITE(Type_Object,
 {
     assert0(Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_));
     assert0(HEADER((AST_Native_Method)Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_)) == (Object)AST_Native_Method_Class);
-}
+})

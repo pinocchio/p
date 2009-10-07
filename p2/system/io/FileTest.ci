@@ -1,5 +1,5 @@
 
-void test_stdout()
+void test_IO_File_stdout()
 {
     Object result;
     result = Eval_AST_Send1((Object)StandardOut, SMB_writeAll_, (Object)new_Type_String(L"Hello World\n"));
@@ -9,7 +9,7 @@ void test_stdout()
 
 /* ======================================================================== */
 
-void test_IO_File()
+TEST_SUITE(IO_File,
 {
-    test_stdout();
-}
+    RUN_TEST(IO_File_stdout);
+})

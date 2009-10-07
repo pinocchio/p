@@ -14,7 +14,7 @@ NEW_TEST(test_ast_self)
 
 /* ======================================================================== */
 
-void test_AST_Self()
+TEST_SUITE(AST_Self,
 {
     RUN_TEST(ast_self);
-}
+})

@@ -22,7 +22,7 @@ NEW_TEST(test_ast_super)
 
 /* ======================================================================== */
 
-void test_AST_Super()
+TEST_SUITE(AST_Super,
 {
     RUN_TEST(ast_super);
-}
+})

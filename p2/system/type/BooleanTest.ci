@@ -17,7 +17,7 @@ NEW_TEST(test_boolean_equals)
 
 /* ======================================================================== */
 
-void test_Type_Boolean()
+TEST_SUITE(Type_Boolean,
 {
     RUN_TEST(boolean_equals);
-}
+})

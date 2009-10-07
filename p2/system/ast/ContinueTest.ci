@@ -44,7 +44,7 @@ NEW_TEST(test_ast_continue)
 
 /* ========================================================================== */
 
-void test_AST_Continue()
+TEST_SUITE(AST_Continue,
 {
     RUN_TEST(ast_continue);
-}
+})

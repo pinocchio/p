@@ -8,8 +8,8 @@
 
 /* ======================================================================== */
 
-void test_Type_CharacterTable()
+TEST_SUITE(Type_CharacterTable,
 {
 
-}
+})
 
