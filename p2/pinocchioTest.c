@@ -73,6 +73,7 @@ void init_Exception_Handling()
     if(setjmp(Assert_Fail)) {
         printf("Test Failed\n");
         TEST_CASE_FAILED = 1;
+        IN_EVAL = 0;
         longjmp(Test_Continue, 1);
     }
 }
