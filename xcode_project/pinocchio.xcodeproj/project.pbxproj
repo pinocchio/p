@@ -7,61 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3696689410727354008C5C0F /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 3696681C10727354008C5C0F /* Makefile */; };
+		3653AD56107A94A200F0350E /* Stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 3653AD53107A94A200F0350E /* Stream.c */; };
 		3696689510727354008C5C0F /* pinocchio.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696681E10727354008C5C0F /* pinocchio.c */; };
-		3696689610727354008C5C0F /* pinocchio.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696682010727354008C5C0F /* pinocchio.o */; };
 		3696689710727354008C5C0F /* pinocchioTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696682410727354008C5C0F /* pinocchioTest.c */; };
-		3696689810727354008C5C0F /* pinocchioTest.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696682610727354008C5C0F /* pinocchioTest.o */; };
 		3696689910727354008C5C0F /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696682B10727354008C5C0F /* Assign.c */; };
-		3696689A10727354008C5C0F /* Assign.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696682D10727354008C5C0F /* Assign.o */; };
 		3696689B10727354008C5C0F /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696682F10727354008C5C0F /* Block.c */; };
-		3696689C10727354008C5C0F /* Block.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696683110727354008C5C0F /* Block.o */; };
 		3696689D10727354008C5C0F /* Callec.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696683210727354008C5C0F /* Callec.c */; };
-		3696689E10727354008C5C0F /* Callec.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696683410727354008C5C0F /* Callec.o */; };
 		3696689F10727354008C5C0F /* Constant.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696683610727354008C5C0F /* Constant.c */; };
-		369668A010727354008C5C0F /* Constant.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696683810727354008C5C0F /* Constant.o */; };
 		369668A110727354008C5C0F /* Continue.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696683A10727354008C5C0F /* Continue.c */; };
-		369668A210727354008C5C0F /* Continue.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696683C10727354008C5C0F /* Continue.o */; };
 		369668A310727354008C5C0F /* Info.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696683E10727354008C5C0F /* Info.c */; };
-		369668A410727354008C5C0F /* Info.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696684010727354008C5C0F /* Info.o */; };
 		369668A510727354008C5C0F /* Method.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696684210727354008C5C0F /* Method.c */; };
-		369668A610727354008C5C0F /* Method.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696684410727354008C5C0F /* Method.o */; };
 		369668A710727354008C5C0F /* NativeMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696684610727354008C5C0F /* NativeMethod.c */; };
-		369668A810727354008C5C0F /* NativeMethod.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696684810727354008C5C0F /* NativeMethod.o */; };
 		369668A910727354008C5C0F /* Self.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696684A10727354008C5C0F /* Self.c */; };
-		369668AA10727354008C5C0F /* Self.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696684C10727354008C5C0F /* Self.o */; };
 		369668AB10727354008C5C0F /* Send.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696684E10727354008C5C0F /* Send.c */; };
-		369668AC10727354008C5C0F /* Send.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696685010727354008C5C0F /* Send.o */; };
 		369668AD10727354008C5C0F /* Super.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696685210727354008C5C0F /* Super.c */; };
-		369668AE10727354008C5C0F /* Super.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696685410727354008C5C0F /* Super.o */; };
 		369668AF10727354008C5C0F /* Variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696685610727354008C5C0F /* Variable.c */; };
-		369668B010727354008C5C0F /* Variable.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696685810727354008C5C0F /* Variable.o */; };
 		369668B110727354008C5C0F /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696685B10727354008C5C0F /* File.c */; };
-		369668B210727354008C5C0F /* File.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696685D10727354008C5C0F /* File.o */; };
 		369668B310727354008C5C0F /* Env.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696686010727354008C5C0F /* Env.c */; };
-		369668B410727354008C5C0F /* Env.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696686210727354008C5C0F /* Env.o */; };
 		369668B510727354008C5C0F /* Array.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696686610727354008C5C0F /* Array.c */; };
-		369668B610727354008C5C0F /* Array.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696686810727354008C5C0F /* Array.o */; };
 		369668B710727354008C5C0F /* Boolean.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696686A10727354008C5C0F /* Boolean.c */; };
-		369668B810727354008C5C0F /* Boolean.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696686C10727354008C5C0F /* Boolean.o */; };
 		369668B910727354008C5C0F /* Character.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696686E10727354008C5C0F /* Character.c */; };
-		369668BA10727354008C5C0F /* Character.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696687010727354008C5C0F /* Character.o */; };
 		369668BB10727354008C5C0F /* CharacterTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696687110727354008C5C0F /* CharacterTable.c */; };
-		369668BC10727354008C5C0F /* CharacterTable.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696687310727354008C5C0F /* CharacterTable.o */; };
 		369668BD10727354008C5C0F /* Class.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696687610727354008C5C0F /* Class.c */; };
-		369668BE10727354008C5C0F /* Class.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696687810727354008C5C0F /* Class.o */; };
 		369668BF10727354008C5C0F /* Dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696687A10727354008C5C0F /* Dictionary.c */; };
-		369668C010727354008C5C0F /* Dictionary.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696687C10727354008C5C0F /* Dictionary.o */; };
 		369668C110727354008C5C0F /* Nil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696687E10727354008C5C0F /* Nil.c */; };
-		369668C210727354008C5C0F /* Nil.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696688010727354008C5C0F /* Nil.o */; };
 		369668C310727354008C5C0F /* Object.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696688110727354008C5C0F /* Object.c */; };
-		369668C410727354008C5C0F /* Object.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696688310727354008C5C0F /* Object.o */; };
 		369668C510727354008C5C0F /* SmallInt.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696688510727354008C5C0F /* SmallInt.c */; };
-		369668C610727354008C5C0F /* SmallInt.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696688710727354008C5C0F /* SmallInt.o */; };
 		369668C710727354008C5C0F /* String.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696688910727354008C5C0F /* String.c */; };
-		369668C810727354008C5C0F /* String.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696688B10727354008C5C0F /* String.o */; };
 		369668C910727354008C5C0F /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 3696688D10727354008C5C0F /* Symbol.c */; };
-		369668CA10727354008C5C0F /* Symbol.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696688F10727354008C5C0F /* Symbol.o */; };
 		8DD76FB00486AB0100D96B5E /* pinocchio.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6A0FF2C0290799A04C91782 /* pinocchio.1 */; };
 /* End PBXBuildFile section */
 
@@ -79,121 +52,95 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3653AD53107A94A200F0350E /* Stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stream.c; sourceTree = "<group>"; };
+		3653AD54107A94A200F0350E /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
+		3653AD55107A94A200F0350E /* StreamTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StreamTest.ci; sourceTree = "<group>"; };
 		3696681810727354008C5C0F /* addClass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addClass; sourceTree = "<group>"; };
 		3696681910727354008C5C0F /* addSymbol */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addSymbol; sourceTree = "<group>"; };
 		3696681A10727354008C5C0F /* mac_install_boehm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mac_install_boehm; sourceTree = "<group>"; };
-		3696681B10727354008C5C0F /* make.depend */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = make.depend; path = ../p2/make.depend; sourceTree = SOURCE_ROOT; };
 		3696681C10727354008C5C0F /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../p2/Makefile; sourceTree = SOURCE_ROOT; };
-		3696681D10727354008C5C0F /* pinocchio */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = pinocchio; path = ../p2/pinocchio; sourceTree = SOURCE_ROOT; };
 		3696681E10727354008C5C0F /* pinocchio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pinocchio.c; path = ../p2/pinocchio.c; sourceTree = SOURCE_ROOT; };
 		3696681F10727354008C5C0F /* pinocchio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pinocchio.h; path = ../p2/pinocchio.h; sourceTree = SOURCE_ROOT; };
-		3696682010727354008C5C0F /* pinocchio.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = pinocchio.o; path = ../p2/pinocchio.o; sourceTree = SOURCE_ROOT; };
 		3696682110727354008C5C0F /* pinocchioHelper.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pinocchioHelper.ci; path = ../p2/pinocchioHelper.ci; sourceTree = SOURCE_ROOT; };
 		3696682210727354008C5C0F /* pinocchioPostInit.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pinocchioPostInit.ci; path = ../p2/pinocchioPostInit.ci; sourceTree = SOURCE_ROOT; };
 		3696682310727354008C5C0F /* pinocchioPreInit.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pinocchioPreInit.ci; path = ../p2/pinocchioPreInit.ci; sourceTree = SOURCE_ROOT; };
 		3696682410727354008C5C0F /* pinocchioTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = pinocchioTest.c; path = ../p2/pinocchioTest.c; sourceTree = SOURCE_ROOT; };
 		3696682510727354008C5C0F /* pinocchioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pinocchioTest.h; path = ../p2/pinocchioTest.h; sourceTree = SOURCE_ROOT; };
-		3696682610727354008C5C0F /* pinocchioTest.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = pinocchioTest.o; path = ../p2/pinocchioTest.o; sourceTree = SOURCE_ROOT; };
 		3696682710727354008C5C0F /* pinocchioType.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pinocchioType.hi; path = ../p2/pinocchioType.hi; sourceTree = SOURCE_ROOT; };
 		3696682810727354008C5C0F /* pinocchioTypeInclude.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = pinocchioTypeInclude.hi; path = ../p2/pinocchioTypeInclude.hi; sourceTree = SOURCE_ROOT; };
 		3696682B10727354008C5C0F /* Assign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Assign.c; sourceTree = "<group>"; };
 		3696682C10727354008C5C0F /* Assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assign.h; sourceTree = "<group>"; };
-		3696682D10727354008C5C0F /* Assign.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Assign.o; sourceTree = "<group>"; };
 		3696682E10727354008C5C0F /* AssignTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AssignTest.ci; sourceTree = "<group>"; };
 		3696682F10727354008C5C0F /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		3696683010727354008C5C0F /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		3696683110727354008C5C0F /* Block.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Block.o; sourceTree = "<group>"; };
 		3696683210727354008C5C0F /* Callec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Callec.c; sourceTree = "<group>"; };
 		3696683310727354008C5C0F /* Callec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Callec.h; sourceTree = "<group>"; };
-		3696683410727354008C5C0F /* Callec.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Callec.o; sourceTree = "<group>"; };
 		3696683510727354008C5C0F /* CallecTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CallecTest.ci; sourceTree = "<group>"; };
 		3696683610727354008C5C0F /* Constant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Constant.c; sourceTree = "<group>"; };
 		3696683710727354008C5C0F /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		3696683810727354008C5C0F /* Constant.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Constant.o; sourceTree = "<group>"; };
 		3696683910727354008C5C0F /* ConstantTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ConstantTest.ci; sourceTree = "<group>"; };
 		3696683A10727354008C5C0F /* Continue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continue.c; sourceTree = "<group>"; };
 		3696683B10727354008C5C0F /* Continue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continue.h; sourceTree = "<group>"; };
-		3696683C10727354008C5C0F /* Continue.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Continue.o; sourceTree = "<group>"; };
 		3696683D10727354008C5C0F /* ContinueTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ContinueTest.ci; sourceTree = "<group>"; };
 		3696683E10727354008C5C0F /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		3696683F10727354008C5C0F /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
-		3696684010727354008C5C0F /* Info.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Info.o; sourceTree = "<group>"; };
 		3696684110727354008C5C0F /* InfoTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InfoTest.ci; sourceTree = "<group>"; };
 		3696684210727354008C5C0F /* Method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Method.c; sourceTree = "<group>"; };
 		3696684310727354008C5C0F /* Method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Method.h; sourceTree = "<group>"; };
-		3696684410727354008C5C0F /* Method.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Method.o; sourceTree = "<group>"; };
 		3696684510727354008C5C0F /* MethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MethodTest.ci; sourceTree = "<group>"; };
 		3696684610727354008C5C0F /* NativeMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeMethod.c; sourceTree = "<group>"; };
 		3696684710727354008C5C0F /* NativeMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMethod.h; sourceTree = "<group>"; };
-		3696684810727354008C5C0F /* NativeMethod.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = NativeMethod.o; sourceTree = "<group>"; };
 		3696684910727354008C5C0F /* NativeMethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NativeMethodTest.ci; sourceTree = "<group>"; };
 		3696684A10727354008C5C0F /* Self.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Self.c; sourceTree = "<group>"; };
 		3696684B10727354008C5C0F /* Self.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Self.h; sourceTree = "<group>"; };
-		3696684C10727354008C5C0F /* Self.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Self.o; sourceTree = "<group>"; };
 		3696684D10727354008C5C0F /* SelfTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SelfTest.ci; sourceTree = "<group>"; };
 		3696684E10727354008C5C0F /* Send.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Send.c; sourceTree = "<group>"; };
 		3696684F10727354008C5C0F /* Send.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Send.h; sourceTree = "<group>"; };
-		3696685010727354008C5C0F /* Send.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Send.o; sourceTree = "<group>"; };
 		3696685110727354008C5C0F /* SendTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SendTest.ci; sourceTree = "<group>"; };
 		3696685210727354008C5C0F /* Super.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Super.c; sourceTree = "<group>"; };
 		3696685310727354008C5C0F /* Super.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Super.h; sourceTree = "<group>"; };
-		3696685410727354008C5C0F /* Super.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Super.o; sourceTree = "<group>"; };
 		3696685510727354008C5C0F /* SuperTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuperTest.ci; sourceTree = "<group>"; };
 		3696685610727354008C5C0F /* Variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Variable.c; sourceTree = "<group>"; };
 		3696685710727354008C5C0F /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
-		3696685810727354008C5C0F /* Variable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Variable.o; sourceTree = "<group>"; };
 		3696685910727354008C5C0F /* VariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VariableTest.ci; sourceTree = "<group>"; };
 		3696685B10727354008C5C0F /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
 		3696685C10727354008C5C0F /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
-		3696685D10727354008C5C0F /* File.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = File.o; sourceTree = "<group>"; };
 		3696685E10727354008C5C0F /* FileTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FileTest.ci; sourceTree = "<group>"; };
 		3696686010727354008C5C0F /* Env.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Env.c; sourceTree = "<group>"; };
 		3696686110727354008C5C0F /* Env.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Env.h; sourceTree = "<group>"; };
-		3696686210727354008C5C0F /* Env.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Env.o; sourceTree = "<group>"; };
 		3696686310727354008C5C0F /* EnvTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EnvTest.ci; sourceTree = "<group>"; };
 		3696686410727354008C5C0F /* ThreadTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ThreadTest.ci; sourceTree = "<group>"; };
 		3696686610727354008C5C0F /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
 		3696686710727354008C5C0F /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		3696686810727354008C5C0F /* Array.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Array.o; sourceTree = "<group>"; };
 		3696686910727354008C5C0F /* ArrayTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ArrayTest.ci; sourceTree = "<group>"; };
 		3696686A10727354008C5C0F /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
 		3696686B10727354008C5C0F /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
-		3696686C10727354008C5C0F /* Boolean.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Boolean.o; sourceTree = "<group>"; };
 		3696686D10727354008C5C0F /* BooleanTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BooleanTest.ci; sourceTree = "<group>"; };
 		3696686E10727354008C5C0F /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
 		3696686F10727354008C5C0F /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		3696687010727354008C5C0F /* Character.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Character.o; sourceTree = "<group>"; };
 		3696687110727354008C5C0F /* CharacterTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CharacterTable.c; sourceTree = "<group>"; };
 		3696687210727354008C5C0F /* CharacterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterTable.h; sourceTree = "<group>"; };
-		3696687310727354008C5C0F /* CharacterTable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = CharacterTable.o; sourceTree = "<group>"; };
 		3696687410727354008C5C0F /* CharacterTableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CharacterTableTest.ci; sourceTree = "<group>"; };
 		3696687510727354008C5C0F /* CharacterTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CharacterTest.ci; sourceTree = "<group>"; };
 		3696687610727354008C5C0F /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
 		3696687710727354008C5C0F /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
-		3696687810727354008C5C0F /* Class.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Class.o; sourceTree = "<group>"; };
 		3696687910727354008C5C0F /* ClassTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClassTest.ci; sourceTree = "<group>"; };
 		3696687A10727354008C5C0F /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
 		3696687B10727354008C5C0F /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
-		3696687C10727354008C5C0F /* Dictionary.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Dictionary.o; sourceTree = "<group>"; };
 		3696687D10727354008C5C0F /* DictionaryTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DictionaryTest.ci; sourceTree = "<group>"; };
 		3696687E10727354008C5C0F /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
 		3696687F10727354008C5C0F /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
-		3696688010727354008C5C0F /* Nil.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Nil.o; sourceTree = "<group>"; };
 		3696688110727354008C5C0F /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
 		3696688210727354008C5C0F /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
-		3696688310727354008C5C0F /* Object.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Object.o; sourceTree = "<group>"; };
 		3696688410727354008C5C0F /* ObjectTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ObjectTest.ci; sourceTree = "<group>"; };
 		3696688510727354008C5C0F /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
 		3696688610727354008C5C0F /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
-		3696688710727354008C5C0F /* SmallInt.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = SmallInt.o; sourceTree = "<group>"; };
 		3696688810727354008C5C0F /* SmallIntTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SmallIntTest.ci; sourceTree = "<group>"; };
 		3696688910727354008C5C0F /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
 		3696688A10727354008C5C0F /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
-		3696688B10727354008C5C0F /* String.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = String.o; sourceTree = "<group>"; };
 		3696688C10727354008C5C0F /* StringTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StringTest.ci; sourceTree = "<group>"; };
 		3696688D10727354008C5C0F /* Symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Symbol.c; sourceTree = "<group>"; };
 		3696688E10727354008C5C0F /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
-		3696688F10727354008C5C0F /* Symbol.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Symbol.o; sourceTree = "<group>"; };
 		3696689010727354008C5C0F /* SymbolDefinition.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SymbolDefinition.ci; sourceTree = "<group>"; };
 		3696689110727354008C5C0F /* SymbolDefinition.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SymbolDefinition.hi; sourceTree = "<group>"; };
 		3696689210727354008C5C0F /* SymbolInitialization.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SymbolInitialization.ci; sourceTree = "<group>"; };
@@ -207,33 +154,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3696689610727354008C5C0F /* pinocchio.o in Frameworks */,
-				3696689810727354008C5C0F /* pinocchioTest.o in Frameworks */,
-				3696689A10727354008C5C0F /* Assign.o in Frameworks */,
-				3696689C10727354008C5C0F /* Block.o in Frameworks */,
-				3696689E10727354008C5C0F /* Callec.o in Frameworks */,
-				369668A010727354008C5C0F /* Constant.o in Frameworks */,
-				369668A210727354008C5C0F /* Continue.o in Frameworks */,
-				369668A410727354008C5C0F /* Info.o in Frameworks */,
-				369668A610727354008C5C0F /* Method.o in Frameworks */,
-				369668A810727354008C5C0F /* NativeMethod.o in Frameworks */,
-				369668AA10727354008C5C0F /* Self.o in Frameworks */,
-				369668AC10727354008C5C0F /* Send.o in Frameworks */,
-				369668AE10727354008C5C0F /* Super.o in Frameworks */,
-				369668B010727354008C5C0F /* Variable.o in Frameworks */,
-				369668B210727354008C5C0F /* File.o in Frameworks */,
-				369668B410727354008C5C0F /* Env.o in Frameworks */,
-				369668B610727354008C5C0F /* Array.o in Frameworks */,
-				369668B810727354008C5C0F /* Boolean.o in Frameworks */,
-				369668BA10727354008C5C0F /* Character.o in Frameworks */,
-				369668BC10727354008C5C0F /* CharacterTable.o in Frameworks */,
-				369668BE10727354008C5C0F /* Class.o in Frameworks */,
-				369668C010727354008C5C0F /* Dictionary.o in Frameworks */,
-				369668C210727354008C5C0F /* Nil.o in Frameworks */,
-				369668C410727354008C5C0F /* Object.o in Frameworks */,
-				369668C610727354008C5C0F /* SmallInt.o in Frameworks */,
-				369668C810727354008C5C0F /* String.o in Frameworks */,
-				369668CA10727354008C5C0F /* Symbol.o in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,18 +174,14 @@
 			isa = PBXGroup;
 			children = (
 				3696681710727354008C5C0F /* _meta */,
-				3696681B10727354008C5C0F /* make.depend */,
 				3696681C10727354008C5C0F /* Makefile */,
-				3696681D10727354008C5C0F /* pinocchio */,
 				3696681E10727354008C5C0F /* pinocchio.c */,
 				3696681F10727354008C5C0F /* pinocchio.h */,
-				3696682010727354008C5C0F /* pinocchio.o */,
 				3696682110727354008C5C0F /* pinocchioHelper.ci */,
 				3696682210727354008C5C0F /* pinocchioPostInit.ci */,
 				3696682310727354008C5C0F /* pinocchioPreInit.ci */,
 				3696682410727354008C5C0F /* pinocchioTest.c */,
 				3696682510727354008C5C0F /* pinocchioTest.h */,
-				3696682610727354008C5C0F /* pinocchioTest.o */,
 				3696682710727354008C5C0F /* pinocchioType.hi */,
 				3696682810727354008C5C0F /* pinocchioTypeInclude.hi */,
 				3696682910727354008C5C0F /* system */,
@@ -309,50 +225,38 @@
 			children = (
 				3696682B10727354008C5C0F /* Assign.c */,
 				3696682C10727354008C5C0F /* Assign.h */,
-				3696682D10727354008C5C0F /* Assign.o */,
 				3696682E10727354008C5C0F /* AssignTest.ci */,
 				3696682F10727354008C5C0F /* Block.c */,
 				3696683010727354008C5C0F /* Block.h */,
-				3696683110727354008C5C0F /* Block.o */,
 				3696683210727354008C5C0F /* Callec.c */,
 				3696683310727354008C5C0F /* Callec.h */,
-				3696683410727354008C5C0F /* Callec.o */,
 				3696683510727354008C5C0F /* CallecTest.ci */,
 				3696683610727354008C5C0F /* Constant.c */,
 				3696683710727354008C5C0F /* Constant.h */,
-				3696683810727354008C5C0F /* Constant.o */,
 				3696683910727354008C5C0F /* ConstantTest.ci */,
 				3696683A10727354008C5C0F /* Continue.c */,
 				3696683B10727354008C5C0F /* Continue.h */,
-				3696683C10727354008C5C0F /* Continue.o */,
 				3696683D10727354008C5C0F /* ContinueTest.ci */,
 				3696683E10727354008C5C0F /* Info.c */,
 				3696683F10727354008C5C0F /* Info.h */,
-				3696684010727354008C5C0F /* Info.o */,
 				3696684110727354008C5C0F /* InfoTest.ci */,
 				3696684210727354008C5C0F /* Method.c */,
 				3696684310727354008C5C0F /* Method.h */,
-				3696684410727354008C5C0F /* Method.o */,
 				3696684510727354008C5C0F /* MethodTest.ci */,
 				3696684610727354008C5C0F /* NativeMethod.c */,
 				3696684710727354008C5C0F /* NativeMethod.h */,
-				3696684810727354008C5C0F /* NativeMethod.o */,
 				3696684910727354008C5C0F /* NativeMethodTest.ci */,
 				3696684A10727354008C5C0F /* Self.c */,
 				3696684B10727354008C5C0F /* Self.h */,
-				3696684C10727354008C5C0F /* Self.o */,
 				3696684D10727354008C5C0F /* SelfTest.ci */,
 				3696684E10727354008C5C0F /* Send.c */,
 				3696684F10727354008C5C0F /* Send.h */,
-				3696685010727354008C5C0F /* Send.o */,
 				3696685110727354008C5C0F /* SendTest.ci */,
 				3696685210727354008C5C0F /* Super.c */,
 				3696685310727354008C5C0F /* Super.h */,
-				3696685410727354008C5C0F /* Super.o */,
 				3696685510727354008C5C0F /* SuperTest.ci */,
 				3696685610727354008C5C0F /* Variable.c */,
 				3696685710727354008C5C0F /* Variable.h */,
-				3696685810727354008C5C0F /* Variable.o */,
 				3696685910727354008C5C0F /* VariableTest.ci */,
 			);
 			path = ast;
@@ -361,9 +265,11 @@
 		3696685A10727354008C5C0F /* io */ = {
 			isa = PBXGroup;
 			children = (
+				3653AD53107A94A200F0350E /* Stream.c */,
+				3653AD54107A94A200F0350E /* Stream.h */,
+				3653AD55107A94A200F0350E /* StreamTest.ci */,
 				3696685B10727354008C5C0F /* File.c */,
 				3696685C10727354008C5C0F /* File.h */,
-				3696685D10727354008C5C0F /* File.o */,
 				3696685E10727354008C5C0F /* FileTest.ci */,
 			);
 			path = io;
@@ -374,7 +280,6 @@
 			children = (
 				3696686010727354008C5C0F /* Env.c */,
 				3696686110727354008C5C0F /* Env.h */,
-				3696686210727354008C5C0F /* Env.o */,
 				3696686310727354008C5C0F /* EnvTest.ci */,
 				3696686410727354008C5C0F /* ThreadTest.ci */,
 			);
@@ -386,50 +291,39 @@
 			children = (
 				3696686610727354008C5C0F /* Array.c */,
 				3696686710727354008C5C0F /* Array.h */,
-				3696686810727354008C5C0F /* Array.o */,
 				3696686910727354008C5C0F /* ArrayTest.ci */,
 				3696686A10727354008C5C0F /* Boolean.c */,
 				3696686B10727354008C5C0F /* Boolean.h */,
-				3696686C10727354008C5C0F /* Boolean.o */,
 				3696686D10727354008C5C0F /* BooleanTest.ci */,
 				3696686E10727354008C5C0F /* Character.c */,
 				3696686F10727354008C5C0F /* Character.h */,
-				3696687010727354008C5C0F /* Character.o */,
 				3696687110727354008C5C0F /* CharacterTable.c */,
 				3696687210727354008C5C0F /* CharacterTable.h */,
-				3696687310727354008C5C0F /* CharacterTable.o */,
 				3696687410727354008C5C0F /* CharacterTableTest.ci */,
 				3696687510727354008C5C0F /* CharacterTest.ci */,
 				3696687610727354008C5C0F /* Class.c */,
 				3696687710727354008C5C0F /* Class.h */,
-				3696687810727354008C5C0F /* Class.o */,
 				3696687910727354008C5C0F /* ClassTest.ci */,
 				3696687A10727354008C5C0F /* Dictionary.c */,
 				3696687B10727354008C5C0F /* Dictionary.h */,
-				3696687C10727354008C5C0F /* Dictionary.o */,
 				3696687D10727354008C5C0F /* DictionaryTest.ci */,
 				3696687E10727354008C5C0F /* Nil.c */,
 				3696687F10727354008C5C0F /* Nil.h */,
-				3696688010727354008C5C0F /* Nil.o */,
 				3696688110727354008C5C0F /* Object.c */,
 				3696688210727354008C5C0F /* Object.h */,
-				3696688310727354008C5C0F /* Object.o */,
 				3696688410727354008C5C0F /* ObjectTest.ci */,
 				3696688510727354008C5C0F /* SmallInt.c */,
 				3696688610727354008C5C0F /* SmallInt.h */,
-				3696688710727354008C5C0F /* SmallInt.o */,
 				3696688810727354008C5C0F /* SmallIntTest.ci */,
 				3696688910727354008C5C0F /* String.c */,
 				3696688A10727354008C5C0F /* String.h */,
-				3696688B10727354008C5C0F /* String.o */,
 				3696688C10727354008C5C0F /* StringTest.ci */,
 				3696688D10727354008C5C0F /* Symbol.c */,
 				3696688E10727354008C5C0F /* Symbol.h */,
-				3696688F10727354008C5C0F /* Symbol.o */,
+				3696689310727354008C5C0F /* SymbolTest.ci */,
 				3696689010727354008C5C0F /* SymbolDefinition.ci */,
 				3696689110727354008C5C0F /* SymbolDefinition.hi */,
 				3696689210727354008C5C0F /* SymbolInitialization.ci */,
-				3696689310727354008C5C0F /* SymbolTest.ci */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -485,7 +379,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3696689410727354008C5C0F /* Makefile in Sources */,
 				3696689510727354008C5C0F /* pinocchio.c in Sources */,
 				3696689710727354008C5C0F /* pinocchioTest.c in Sources */,
 				3696689910727354008C5C0F /* Assign.c in Sources */,
@@ -513,6 +406,7 @@
 				369668C510727354008C5C0F /* SmallInt.c in Sources */,
 				369668C710727354008C5C0F /* String.c in Sources */,
 				369668C910727354008C5C0F /* Symbol.c in Sources */,
+				3653AD56107A94A200F0350E /* Stream.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,11 +417,35 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				GCC_ALTIVEC_EXTENSIONS = YES;
+				GCC_AUTO_VECTORIZATION = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
+				GCC_INPUT_FILETYPE = sourcecode.c.c;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_ONE_BYTE_BOOL = YES;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_PFE_FILE_C_DIALECTS = c;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_UNROLL_LOOPS = YES;
+				GCC_WARN_CHECK_SWITCH_STATEMENTS = YES;
+				GCC_WARN_MISSING_PARENTHESES = YES;
+				GCC_WARN_PEDANTIC = NO;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					"\"$(SRCROOT)/../p2\"",
@@ -535,11 +453,14 @@
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = /usr/local/include;
 				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
 				OTHER_CFLAGS = (
 					"-lgc",
 					"-DTEST",
 				);
 				PRODUCT_NAME = pinocchio;
+				SDKROOT = macosx10.4;
+				VALID_ARCHS = "i386 ppc ppc64 x86_64";
 			};
 			name = Debug;
 		};
@@ -558,10 +479,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				BUILD_VARIANTS = (
+					profile,
+					debug,
+					normal,
+				);
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_FEEDBACK_DIRECTED_OPTIMIZATION = GenerateProfile;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PROFILING_CODE = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
