@@ -22,8 +22,7 @@ IO_File NullStream;
 
 IO_File new_IO_File()
 {
-    IO_File result = NEW_t(IO_File);
-    HEADER(result) = (Object)IO_File_Class;
+    NEW_OBJECT(IO_File);
     return result;
 }
 

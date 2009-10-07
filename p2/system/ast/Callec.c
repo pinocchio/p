@@ -13,8 +13,7 @@ Type_Class AST_Callec_Class;
 
 AST_Callec new_AST_Callec()
 {
-    AST_Callec result = NEW_t(AST_Callec);
-    HEADER(result)    = (Object)AST_Callec_Class;
+    NEW_OBJECT(AST_Callec);
     result->cont      = new_AST_Continue((Object)result);
     return result;
 }

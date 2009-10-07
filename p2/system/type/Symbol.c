@@ -27,12 +27,11 @@ wchar_t* wcsdup(const wchar_t* input)
 
 Type_Symbol new_Type_Symbol(const wchar_t* name)
 {
-    Type_Symbol symbol  = NEW_t(Type_Symbol);
-    HEADER(symbol)      = (Object)Type_Symbol_Class;
-    symbol->hash        = NULL;
-    symbol->value       = wcsdup(name);
-    symbol->size        = new_Type_SmallInt(wcslen(name));
-    return symbol;
+    NEW_OBJECT(Type_Symbol);
+    result->hash        = NULL;
+    result->value       = wcsdup(name);
+    result->size        = new_Type_SmallInt(wcslen(name));
+    return result;
 }
 
 

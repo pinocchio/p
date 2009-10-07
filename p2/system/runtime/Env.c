@@ -13,8 +13,7 @@ Object Env;
 
 Runtime_Env new_Runtime_Env(Object parent, Object key, Type_Array values)
 {
-    Runtime_Env result    = NEW_t(Runtime_Env);
-    HEADER(result)          = (Object)Runtime_Env_Class;
+    NEW_OBJECT(Runtime_Env);
     result->parent          = parent;
     result->key             = key;
     result->values          = values;
@@ -23,8 +22,7 @@ Runtime_Env new_Runtime_Env(Object parent, Object key, Type_Array values)
 
 Runtime_Env new_Runtime_Env_Sized(Object parent, Object key, int size)
 {
-    Runtime_Env result    = NEW_t(Runtime_Env);
-    HEADER(result)          = (Object)Runtime_Env_Class;
+    NEW_OBJECT(Runtime_Env);
     result->parent          = parent;
     result->key             = key;
     result->values          = new_Type_Array_With(size, Nil);

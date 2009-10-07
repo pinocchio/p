@@ -11,8 +11,7 @@ Type_Class Type_Dictionary_Class;
 
 Type_Dictionary new_Type_Dictionary()
 {
-    Type_Dictionary result = NEW_t(Type_Dictionary);
-    HEADER(result)           = (Object)Type_Dictionary_Class;
+    NEW_OBJECT(Type_Dictionary);
     result->layout           = new_Type_Array_With(2, Nil);
     return result;
 }

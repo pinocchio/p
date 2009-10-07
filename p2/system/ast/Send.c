@@ -11,8 +11,7 @@ Type_Class AST_Send_Class;
 
 AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments)
 {
-    AST_Send result = NEW_t(AST_Send);
-    HEADER(result)    = (Object)AST_Send_Class;
+    NEW_OBJECT(AST_Send);
     result->receiver  = receiver;
     result->message   = msg;
     result->arguments = arguments;

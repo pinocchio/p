@@ -28,7 +28,11 @@
 #define NEW(layout)\
     NEW_ARRAYED(layout, Object[0])
 
-#define NEW_t(name) NEW(struct name##_##t)
+#define NEW_t(name) NEW(struct name##_t)
+
+#define NEW_OBJECT(class) \
+    class result = NEW_t(class);\
+    HEADER(result) = (Object)class##_Class;
 
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))

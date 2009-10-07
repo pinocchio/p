@@ -12,9 +12,8 @@ Type_Class MetaType_Class_Class;
 
 Type_Class new_Class(Object superclass)
 {
-    Type_Class result   = NEW_t(Type_Class);
+    NEW_OBJECT(Type_Class);
     result->methods     = new_Type_Dictionary();
-    HEADER(result)      = (Object) Type_Class_Class;
     result->super       = superclass;
     return result;
 }

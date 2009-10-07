@@ -6,11 +6,13 @@
 /* ======================================================================== */
 
 struct AST_Block_t {
-    Runtime_Env env;
+    Type_SmallInt   paramCount;
+    Runtime_Env     environment;
+    Type_Array      body;
 };
 
 CREATE_INITIALIZERS(AST_Block)
-extern AST_Block new_AST_Block();
+extern AST_Block new_AST_Block(unsigned int paramCount, Type_Array body);
 
 /* ======================================================================== */
 

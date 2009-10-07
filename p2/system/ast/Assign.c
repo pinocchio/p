@@ -12,8 +12,7 @@ Type_Class AST_Assign_Class;
 
 AST_Assign new_AST_Assign(Object variable, Object expression)
 {
-    AST_Assign result  = NEW_t(AST_Assign);
-    HEADER(result)     = (Object)AST_Assign_Class;
+    NEW_OBJECT(AST_Assign);
     result->variable   = variable;
     result->expression = expression;
     return result;

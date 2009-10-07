@@ -11,8 +11,7 @@ Type_Class AST_Continue_Class;
 
 AST_Continue new_AST_Continue(Object target)
 {
-    AST_Continue result = NEW_t(AST_Continue);
-    HEADER(result)        = (Object)AST_Continue_Class;
+    NEW_OBJECT(AST_Continue);
     return result;
 }
 

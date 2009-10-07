@@ -12,8 +12,7 @@ Type_Class AST_Super_Class;
 
 AST_Super new_AST_Super(Object message, Type_Array arguments)
 {
-    AST_Super result = NEW_t(AST_Super);
-    HEADER(result)     = (Object)AST_Super_Class;
+    NEW_OBJECT(AST_Super);
     result->message    = message;
     result->arguments  = arguments;
     return result;

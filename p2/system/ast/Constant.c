@@ -11,8 +11,7 @@ Type_Class AST_Constant_Class;
 
 AST_Constant new_AST_Constant(Object constant)
 {
-    AST_Constant   result = NEW_t(AST_Constant);
-    HEADER(result)        = (Object)AST_Constant_Class;
+    NEW_OBJECT(AST_Constant);
     result->constant      = constant;
     return result;
 }

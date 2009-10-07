@@ -12,8 +12,7 @@ Type_Class AST_Variable_Class;
 
 AST_Variable new_AST_Variable(const wchar_t* name)
 {
-    AST_Variable result = NEW_t(AST_Variable);
-    HEADER(result)        = (Object)AST_Variable_Class;
+    NEW_OBJECT(AST_Variable);
     /* TODO add name */
     return result;
 }

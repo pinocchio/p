@@ -11,8 +11,7 @@ Type_Class Type_Character_Class;
 
 Type_Character new_raw_Type_Character(wchar_t value)
 {
-    Type_Character result = NEW_t(Type_Character);
-    HEADER(result)        = (Object)Type_Character_Class;
+    NEW_OBJECT(Type_Character);
     result->value         = value;
     return result;
 }

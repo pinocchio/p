@@ -13,8 +13,7 @@ Type_SmallInt* Type_SmallInt_cache;
 
 Type_SmallInt new_raw_Type_SmallInt(int value)
 {
-    Type_SmallInt result = NEW_t(Type_SmallInt);
-    HEADER(result)         = (Object) Type_SmallInt_Class;
+    NEW_OBJECT(Type_SmallInt);
     result->value          = value;
     return result;
 }

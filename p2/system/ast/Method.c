@@ -7,14 +7,13 @@
 
 /* ======================================================================== */
 
-Type_Class Method_Class;
+Type_Class AST_Method_Class;
 
 /* ======================================================================== */
 
 AST_Method new_Method(unsigned int paramc, Type_Array body)
 {
-    AST_Method result = NEW_t(AST_Method);
-    HEADER(result)      = (Object)Method_Class;
+    NEW_OBJECT(AST_Method);
     result->paramc      = paramc;
     result->body        = body;
     return result;
@@ -22,7 +21,7 @@ AST_Method new_Method(unsigned int paramc, Type_Array body)
 
 void pre_init_Method()
 {
-    Method_Class        = new_Named_Class((Object)Type_Object_Class, L"Method");
+    AST_Method_Class        = new_Named_Class((Object)Type_Object_Class, L"Method");
 }
 
 /* ======================================================================== */
@@ -79,7 +78,7 @@ void Method_invoke(Object method, Object self,
                           Object class, Type_Array args)
 {
     Type_Class type = (Type_Class)HEADER(method);
-    if (type == Method_Class) {
+    if (type == AST_Method_Class) {
         return AST_Method_invoke((AST_Method)method, self, class, args);
     }
     if (type == AST_Native_Method_Class) {
@@ -99,7 +98,7 @@ void Method_invoke(Object method, Object self,
 
 void post_init_Method()
 {
-    store_native_method((Type_Class)Method_Class, SMB_eval, NM_AST_Method_eval);
+    store_native_method((Type_Class)AST_Method_Class, SMB_eval, NM_AST_Method_eval);
     // TODO for now accecpt any number of arguments
-    store_native_method((Type_Class)Method_Class, SMB_eval_, NM_AST_Method_eval_);
+    store_native_method((Type_Class)AST_Method_Class, SMB_eval_, NM_AST_Method_eval_);
 }
