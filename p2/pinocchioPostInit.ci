@@ -21,3 +21,4 @@ post_init_AST_Variable();
 post_init_Type_CharacterTable();
 post_init_IO_Stream();
 post_init_IO_Stream();
+post_init_AST_Block();

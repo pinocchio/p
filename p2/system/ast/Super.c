@@ -26,10 +26,7 @@ void pre_init_AST_Super()
 
 /* =========================================================================*/
 
-void CNT_AST_Super_send() 
-{
-    LOGFUN;
-    zap_CNT();
+CNT(AST_Super_send) 
     Object class = pop_EXP();
     Object receiver = pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
@@ -42,9 +39,7 @@ void CNT_AST_Super_send()
                    super->message, args);
 }
 
-void CNT_push_env_class()
-{
-    zap_CNT();
+CNT(push_env_class)
     Object env = (Object)current_env();
     if (HEADER(env) != (Object)Runtime_Env_Class) {
         assert0(NULL);
@@ -57,18 +52,18 @@ void AST_Super_eval(AST_Super super)
     LOGFUN;
     Type_Array args = new_Raw_Type_Array(super->arguments->size->value);
     // execute the method
-    push_CNT(CNT_AST_Super_send);
-    push_CNT(CNT_Class_super);
-    push_CNT(CNT_push_env_class);
-    push_CNT(CNT_AST_Self_eval);
+    push_CNT(AST_Super_send);
+    push_CNT(Class_super);
+    push_CNT(push_env_class);
+    push_CNT(AST_Self_eval);
     push_EXP(args);
     // evaluate the arguments
     int i;
     for (i = 0; i < super->arguments->size->value; i++) {
-        push_CNT(CNT_store_argument);
+        push_CNT(store_argument);
         push_EXP(args);
         push_EXP(new_Type_SmallInt(i));
-        push_CNT(CNT_send_Eval);
+        push_CNT(send_Eval);
         push_EXP(super->arguments->values[i]);
     }
 }

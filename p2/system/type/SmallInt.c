@@ -44,24 +44,24 @@ void pre_init_Type_SmallInt()
 
 /* =========================================================================*/
 
-#define Type_SmallInt_BINARY_OPERATION(Name, op)\
-NATIVE1(Name)\
+#define Type_SmallInt_BINARY_OPERATION(name, op)\
+NATIVE1(Type_SmallInt_##name)\
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);\
     Type_SmallInt arg = (Type_SmallInt)args->values[0];\
     poke_EXP(1, new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
 }
 
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_plus_,       +);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_minus_,      -);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_times_,      *);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_divide_,     /);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_shiftRight_,>>);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_shiftLeft_, <<);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_and_,        &);
-Type_SmallInt_BINARY_OPERATION(NM_Type_SmallInt_or_,         |);
+Type_SmallInt_BINARY_OPERATION(plus_,       +);
+Type_SmallInt_BINARY_OPERATION(minus_,      -);
+Type_SmallInt_BINARY_OPERATION(times_,      *);
+Type_SmallInt_BINARY_OPERATION(divide_,     /);
+Type_SmallInt_BINARY_OPERATION(shiftRight_, >>);
+Type_SmallInt_BINARY_OPERATION(shiftLeft_,  <<);
+Type_SmallInt_BINARY_OPERATION(and_,        &);
+Type_SmallInt_BINARY_OPERATION(or_,         |);
 
 
-NATIVE1(NM_Type_SmallInt_equals_)
+NATIVE1(Type_SmallInt_equals_)
     if (HEADER(args->values[0]) == (Object)Type_SmallInt_Class) {
         Type_SmallInt number = ((Type_SmallInt) self);
         if (number->value == ((Type_SmallInt) args->values[0])->value) {
@@ -74,7 +74,7 @@ NATIVE1(NM_Type_SmallInt_equals_)
     }
 }
 
-NATIVE0(NM_Type_SmallInt_hash)
+NATIVE0(Type_SmallInt_hash)
     // just return self
 }
 

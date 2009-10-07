@@ -29,3 +29,4 @@
 #include <system/io/Stream.h>
 #include <system/io/Stream.h>
 #include <system/io/Stream.h>
+#include <system/ast/Block.h>

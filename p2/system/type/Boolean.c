@@ -101,25 +101,25 @@ NATIVE(False_not)
 
 void post_init_Type_True()
 {
-    store_native_method(True_Class, SMB_ifTrue_,    True_ifTrue_);
-    store_native_method(True_Class, SMB_ifFalse_,   True_ifFalse_);
-    store_native_method(True_Class, SMB_not,        True_not);
-    store_native_method(True_Class, SMB_asString,   True_asString);
-    store_native_method(True_Class, SMB_asSmallInt, True_asType_SmallInt);
+    store_native_method(True_Class, SMB_ifTrue_,    NM_True_ifTrue_);
+    store_native_method(True_Class, SMB_ifFalse_,   NM_True_ifFalse_);
+    store_native_method(True_Class, SMB_not,        NM_True_not);
+    store_native_method(True_Class, SMB_asString,   NM_True_asString);
+    store_native_method(True_Class, SMB_asSmallInt, NM_True_asType_SmallInt);
 }
 
 void post_init_Type_False()
 {
-    store_native_method(False_Class, SMB_ifTrue_,    False_ifTrue_);
-    store_native_method(False_Class, SMB_ifFalse_,   False_ifFalse_);
-    store_native_method(False_Class, SMB_not,        False_not);
-    store_native_method(False_Class, SMB_asString,   False_asString);
-    store_native_method(False_Class, SMB_asSmallInt, False_asType_SmallInt);
+    store_native_method(False_Class, SMB_ifTrue_,    NM_False_ifTrue_);
+    store_native_method(False_Class, SMB_ifFalse_,   NM_False_ifFalse_);
+    store_native_method(False_Class, SMB_not,        NM_False_not);
+    store_native_method(False_Class, SMB_asString,   NM_False_asString);
+    store_native_method(False_Class, SMB_asSmallInt, NM_False_asType_SmallInt);
 }
 
 void post_init_Type_Boolean()
 {
-    store_native_method(Type_Boolean_Class, SMB_asBoolean, Type_Boolean_asBoolean);
+    store_native_method(Type_Boolean_Class, SMB_asBoolean, NM_Type_Boolean_asBoolean);
     post_init_Type_True();
     post_init_Type_False();
 }

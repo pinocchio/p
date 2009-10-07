@@ -52,13 +52,13 @@ void initialize_Symbol()
 /* ========================================================================== */
 
 
-NATIVE1(NM_Type_Symbol_objectAt_)
+NATIVE1(Type_Symbol_objectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
     push_EXP(new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
-NATIVE0(NM_Type_Symbol_asString)
+NATIVE0(Type_Symbol_asString)
     push_EXP(new_Type_String(((Type_Symbol)self)->value));
 }
 
@@ -73,7 +73,7 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
     return array;
 }
 
-NATIVE0(NM_Type_Symbol_asArray)
+NATIVE0(Type_Symbol_asArray)
     push_EXP(Type_Symbol_asArray((Type_Symbol)self));
 }
 
@@ -89,20 +89,20 @@ int Type_Symbol_hash(const wchar_t* symbol_string)
     return hash;
 }
 
-NATIVE0(NM_Type_Symbol_hash)
+NATIVE0(Type_Symbol_hash)
     push_EXP(new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
 }
 
 
-NATIVE0(NM_Type_Symbol_size)
+NATIVE0(Type_Symbol_size)
     push_EXP(((Type_Symbol)self)->size);
 }
 
-NATIVE1(NM_Type_Symbol_indexOf_)
+NATIVE1(Type_Symbol_indexOf_)
     // TODO implement
 }
 
-NATIVE1(NM_Type_Symbol_lastIndexOf_)
+NATIVE1(Type_Symbol_lastIndexOf_)
     // TODO implement
 }
 

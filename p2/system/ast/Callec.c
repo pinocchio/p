@@ -32,7 +32,7 @@ void AST_Callec_eval(AST_Callec self)
     self->cont->EXP = _EXP_;
     self->cont->CNT = _CNT_;
     push_EXP(self->target);
-    push_CNT(CNT_send_Eval);
+    push_CNT(send_Eval);
 }
 
 /* ======================================================================== */

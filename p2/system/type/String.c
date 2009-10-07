@@ -48,26 +48,24 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     return new_Type_String(concated);
 }
 
-void CNT_Type_String_concat_()
-{
-    zap_CNT();
+CNT(Type_String_concat_)
     Object string = pop_EXP();
     Object self = pop_EXP();
     push_EXP(Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
-NATIVE1(NM_Type_String_concat_)
-    push_CNT(CNT_Type_String_concat_);
-    push_CNT(CNT_send_Eval);
+NATIVE1(Type_String_concat_)
+    push_CNT(Type_String_concat_);
+    push_CNT(send_Eval);
     // TODO create a expanded send  
     push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), SMB_asString, Empty_Type_Array));
 }
 
-NATIVE0(NM_Type_String_asString)
+NATIVE0(Type_String_asString)
     // self is per default on the stack
 }
 
-NATIVE0(NM_Type_String_asSymbol)
+NATIVE0(Type_String_asSymbol)
     push_EXP(new_Type_Symbol(((Type_String)self)->value));
 }
 

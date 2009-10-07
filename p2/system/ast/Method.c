@@ -36,7 +36,7 @@ void CNT_AST_Method_continue()
     if (env->method->body->size->value <= env->pc) {
         zap_CNT();
     } 
-    push_CNT(CNT_send_Eval);
+    push_CNT(send_Eval);
 }
 
 void AST_Method_invoke(AST_Method method, Object self,
@@ -59,19 +59,19 @@ void AST_Method_invoke(AST_Method method, Object self,
     }
     
     if (1 < method->body->size->value) {
-        push_CNT(CNT_AST_Method_continue);
+        push_CNT(AST_Method_continue);
     }
     
     push_EXP(method->body->values[0]);
-    push_CNT(CNT_send_Eval);
+    push_CNT(send_Eval);
 }
 
-NATIVE(NM_AST_Method_eval)
+NATIVE(AST_Method_eval)
     /* FIXME self should be bound to the block */
     AST_Method_invoke((AST_Method) self, self, class, args);
 }
 
-NATIVE(NM_AST_Method_eval_)
+NATIVE(AST_Method_eval_)
     AST_Method_invoke((AST_Method) self, self, class, args);
 }
 

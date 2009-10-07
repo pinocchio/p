@@ -17,7 +17,7 @@ void pre_init_Type_Nil()
 
 /* =========================================================================*/
 
-NATIVE(NM_Type_Nil_asString)
+NATIVE(Type_Nil_asString)
     push_EXP(new_Type_String(L"NIL"));
 }
 

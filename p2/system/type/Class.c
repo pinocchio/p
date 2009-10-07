@@ -44,9 +44,7 @@ void pre_init_Class()
 
 /* ======================================================================== */
 
-void CNT_Class_super()
-{
-    zap_CNT();
+CNT(Class_super)
     Object class = peek_EXP(1);
     if (HEADER(class) == (Object)Type_Class_Class) {
         poke_EXP(1, ((Type_Class)class)->super);

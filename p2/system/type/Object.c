@@ -25,11 +25,11 @@ void pre_init_Type_Object()
 
 /* ======================================================================== */
 
-NATIVE1(NM_Type_Object_equals)
+NATIVE1(Type_Object_equals)
     push_EXP(get_bool(self == args->values[0]));
 }
 
-NATIVE0(NM_Type_Object_asString)
+NATIVE0(Type_Object_asString)
     // TODO
 }
 

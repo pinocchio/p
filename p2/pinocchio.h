@@ -21,6 +21,10 @@
 #define POINTER_INC(p) (((Object) (p)) + 1) 
 #define POINTER_DEC(p) (((Object) (p)) - 1)
 
+#define HEADER(o) (*(Object*)POINTER_DEC(o))
+
+/* ======================================================================== */
+
 #define NEW(layout)\
     NEW_ARRAYED(layout, Object[0])
 
@@ -29,14 +33,13 @@
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
-#define HEADER(o) (*(Object*)POINTER_DEC(o))
-
-/* ======================================================================== */
 
 #define CREATE_INITIALIZERS(class) \
 extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
 extern Type_Class class##_Class;
+
+/* ======================================================================== */
 
 #define ASSERT_ARG_SIZE(raw_size) \
 	int size_value = (raw_size); \
@@ -67,11 +70,15 @@ extern Type_Class class##_Class;
 #define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
 #define zap_EXP()               (_EXP_--);
 
-#define push_CNT(value)         (*(_CNT_--) = ((cont)value));
+#define push_CNT(value)         (*(_CNT_--) = ((cont)CNT_##value));
 #define pop_CNT()               (*(++_CNT_))
 #define peek_CNT(depth)         (*(_CNT_ + depth))
 #define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
 #define zap_CNT()               (_CNT_++);
+
+#define CNT(name) void CNT_##name() {\
+    LOGFUN;\
+    zap_CNT();
 
 /* ======================================================================== */
 

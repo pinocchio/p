@@ -26,9 +26,7 @@ void pre_init_AST_Send()
 
 /* =========================================================================*/
 
-void CNT_AST_Send_send()
-{
-    zap_CNT();
+CNT(AST_Send_send)
     Object receiver = pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
     
@@ -40,10 +38,7 @@ void CNT_AST_Send_send()
                     self->message, args);
 }
 
-void CNT_store_argument()
-{
-    zap_CNT();
-    
+CNT(store_argument)
     Object value = pop_EXP();
     Object index = pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
@@ -58,18 +53,18 @@ void AST_Send_eval(AST_Send self)
     
     Type_Array args = new_Raw_Type_Array(self->arguments->size->value);
     // execute the method
-    push_CNT(CNT_AST_Send_send);
+    push_CNT(AST_Send_send);
     push_EXP(args);
     // evaluate the receiver
-    push_CNT(CNT_send_Eval);
+    push_CNT(send_Eval);
     push_EXP(self->receiver);
     // evaluate the arguments
     int i;
     for (i = 0; i < self->arguments->size->value; i++) {
-        push_CNT(CNT_store_argument);
+        push_CNT(store_argument);
         push_EXP(args);
         push_EXP(new_Type_SmallInt(i));
-        push_CNT(CNT_send_Eval);
+        push_CNT(send_Eval);
         push_EXP(self->arguments->values[i]);
     }
 }

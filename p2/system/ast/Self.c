@@ -29,10 +29,7 @@ void AST_Self_eval()
     poke_EXP(1, ((Runtime_Env)env)->self);
 }
 
-void CNT_AST_Self_eval()
-{
-    LOGFUN;
-    zap_CNT();
+CNT(AST_Self_eval)
     // Push to allow poke in AST_Self_eval
     push_EXP(Nil);
     AST_Self_eval();

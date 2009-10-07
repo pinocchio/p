@@ -6,7 +6,7 @@
 /* ======================================================================== */
 
 struct IO_Stream_t {
-    #error "TODO fill out struct"
+    FILE *file;
 };
 
 CREATE_INITIALIZERS(IO_Stream)

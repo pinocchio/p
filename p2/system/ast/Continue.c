@@ -23,7 +23,7 @@ void pre_init_AST_Continue()
 
 /* ======================================================================== */
 
-NATIVE1(NM_AST_Continue_eval)
+NATIVE1(AST_Continue_eval)
     LOGFUN;
     AST_Continue ast_cont = (AST_Continue) self;
     // restore the stack
@@ -33,7 +33,7 @@ NATIVE1(NM_AST_Continue_eval)
     
     // insert the continuation
     push_EXP(args->values[0]);
-    //push_CNT(CNT_send_Eval);
+    //push_CNT(send_Eval);
 }
 
 /* ======================================================================== */

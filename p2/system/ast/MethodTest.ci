@@ -39,7 +39,7 @@ NEW_TEST(test_method_invocation_with_arguments)
     Type_Symbol test           = new_Type_Symbol(L"test");
     Type_SmallInt integer      = new_Type_SmallInt(120);
     store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Object result     = Eval_AST_Send1(integer, (Object)test, (Object)integer);
+    Object result     = Eval_AST_Send1((Object)integer, (Object)test, (Object)integer);
     assert0(result == (Object)integer);
 }
 

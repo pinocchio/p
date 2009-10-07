@@ -87,13 +87,11 @@ void Runtime_Env_assign(Runtime_Env self, unsigned int index,
 
 void push_restore_env()
 {
-    push_CNT(CNT_restore_env);
+    push_CNT(restore_env);
     poke_EXP(1, current_env());
 }
 
-void CNT_restore_env()
-{
-    zap_CNT();
+CNT(restore_env)
     Object result = pop_EXP();
     Env = peek_EXP(1);
     poke_EXP(1, result);

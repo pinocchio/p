@@ -97,8 +97,8 @@ Object Eval(Object code)
     }
 
     push_EXP(code);
-    push_CNT(CNT_exit_eval);
-    push_CNT(CNT_send_Eval);
+    push_CNT(exit_eval);
+    push_CNT(send_Eval);
 
     if (!setjmp(Eval_Exit)) {
         IN_EVAL = 1;

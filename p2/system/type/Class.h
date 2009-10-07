@@ -29,4 +29,6 @@ extern void Type_Class_dispatch(InlineCache * sender, Object self, Object class,
 
 extern void CNT_Class_super();
 
+/* ======================================================================== */
+
 #endif // CLASS_H

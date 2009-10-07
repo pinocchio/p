@@ -57,20 +57,20 @@ Object Type_Array_Type_ObjectAt(Type_Array array, unsigned int index)
     return array->values[index];
 }
 
-NATIVE1(NM_Type_Array_Type_ObjectAt_)
+NATIVE1(Type_Array_Type_ObjectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     int index = ((Type_SmallInt) args->values[0])->value;
     push_EXP(((Type_Array)self)->values[index]);
 }
 
-NATIVE2(NM_Type_Array_Type_ObjectAt_put_)
+NATIVE2(Type_Array_Type_ObjectAt_put_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
     unsigned int index = ((Type_SmallInt)args->values[0])->value;
     ((Type_Array)self)->values[index] = args->values[1];
     push_EXP(args->values[1]);
 }
 
-NATIVE0(NM_Type_Array_size)
+NATIVE0(Type_Array_size)
     push_EXP(new_Type_SmallInt(((Type_Array)self)->size->value));
 }
 

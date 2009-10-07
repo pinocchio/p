@@ -65,7 +65,7 @@ Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 
 /* ======================================================================== */
 
-NATIVE1(NM_Type_Dictionary_Type_ObjectAt_)
+NATIVE1(Type_Dictionary_Type_ObjectAt_)
     Object result = Type_Dictionary_lookup((Type_Dictionary)self, args->values[0]);
     if(!result) {
         result = Nil;
@@ -73,7 +73,7 @@ NATIVE1(NM_Type_Dictionary_Type_ObjectAt_)
     push_EXP(result);
 }
 
-NATIVE2(NM_Type_Dictionary_Type_ObjectAt_put_)
+NATIVE2(Type_Dictionary_Type_ObjectAt_put_)
     Type_Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
     push_EXP(args->values[1]);
 }

@@ -34,20 +34,20 @@ void pre_init_Type_Character()
 
 /* ======================================================================== */
 
-NATIVE1(NM_Type_Character_equals_)
+NATIVE1(Type_Character_equals_)
 }
 
-NATIVE0(NM_Type_Character_asString)
+NATIVE0(Type_Character_asString)
     // TODO add \0 at the end
     push_EXP(new_Type_String(&((Type_Character)self)->value));
 }
 
-NATIVE0(NM_Type_Character_asSymbol)
+NATIVE0(Type_Character_asSymbol)
     // TODO add \0 at the end
     push_EXP(new_Type_Symbol(&((Type_Character)self)->value));
 }
 
-NATIVE0(NM_Type_Character_asType_SmallInt)
+NATIVE0(Type_Character_asType_SmallInt)
     // TODO add \0 at the end
     push_EXP(new_Type_SmallInt(((Type_Character)self)->value));
 }
