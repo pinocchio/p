@@ -1,4 +1,5 @@
 #include <pinocchio.h>
+#include <unistd.h> 
 #include <pinocchioTest.h>
 
 #include <system/ast/AssignTest.ci>
@@ -29,28 +30,47 @@
 jmp_buf Test_Continue;
 int TEST_CASE_FAILED;
 
+#define ERROR_BUFFER_LEN 1024*1024
+char error_buffer[ERROR_BUFFER_LEN] = {0};
+int out_pipe[2];
+int saved_stdout;
+
 void test_suite_begin(char * suiteName)
 {
     TEST_CASE_FAILED = 0;
-    printf("Starting \"%s\"", suiteName);
+    printf("%s", suiteName);
+    fflush(stdout);
+    // redirect stdout
+    if(pipe(out_pipe) != 0) {
+        exit(1);
+    }
+    dup2(out_pipe[1], STDOUT_FILENO);
+    close(out_pipe[1]);
 }
 
 
 void test_suite_end(char * suiteName)
 {
+    fflush(stdout);
     if (TEST_CASE_FAILED) {
-        printf("\033[100D\033[60C[\033[31mERROR\033[0m]\n");
+        read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
+        dup2(saved_stdout, STDOUT_FILENO);
+        printf("\033[100D\033[60C[\033[31mERROR");
+        printf("\n\n%s\n\n", error_buffer);
+        printf("=========================================================\033[0m]\n");
     } else {
+        dup2(saved_stdout, STDOUT_FILENO);
         printf("\033[100D\033[60C[\033[32mDONE\033[0m]\n");
     }
 }
 
 void init_Exception_Handling()
 {
-    if(!setjmp(Assert_Fail)) {
-        printf("Exception Handler Initialized");
-    } else {
-        printf("Exception Failed\n");
+    // save the default stdout
+    saved_stdout = dup(STDOUT_FILENO);
+    
+    if(setjmp(Assert_Fail)) {
+        printf("Test Failed\n");
         TEST_CASE_FAILED = 1;
         longjmp(Test_Continue, 1);
     }

@@ -4,12 +4,7 @@
 #define SIGFAIL SIGABRT
 extern jmp_buf Assert_Fail;
 
-#define ASSERT_HANDLER \
-    if (Assert_Fail) { \
-        longjmp(Assert_Fail, 1); \
-    } else { \
-        raise(SIGFAIL); \
-    }
+#define ASSERT_HANDLER longjmp(Assert_Fail, 1);
     
 #define assert(test, message) \
 if (!(test)) {\
