@@ -19,3 +19,4 @@ pre_init_AST_Super();
 pre_init_Type_Boolean();
 pre_init_AST_Variable();
 pre_init_IO_Stream();
+pre_init_IO_Stream();
