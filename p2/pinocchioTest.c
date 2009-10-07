@@ -38,7 +38,6 @@ int saved_stdout;
 void test_suite_begin(char * suiteName)
 {
     TEST_CASE_FAILED = 0;
-    printf("%s", suiteName);
     fflush(stdout);
     // redirect stdout
     if(pipe(out_pipe) != 0) {
@@ -55,12 +54,14 @@ void test_suite_end(char * suiteName)
     if (TEST_CASE_FAILED) {
         read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
         dup2(saved_stdout, STDOUT_FILENO);
-        printf("\033[100D\033[60C[\033[31mERROR");
-        printf("\n\n%s\n\n", error_buffer);
-        printf("=========================================================\033[0m]\n");
+        printf("\033[31m===================================================================\033[0m\n");
+        printf(">>> \033[31m%s\033[0m \033[100D\033[60C[\033[31mERROR\033[0m]\n", suiteName);
+        printf("%s", error_buffer);
+        printf("<<< \033[31m%s\033[0m\n", suiteName);
+        printf("\033[31m===================================================================\033[0m\n");
     } else {
         dup2(saved_stdout, STDOUT_FILENO);
-        printf("\033[100D\033[60C[\033[32mDONE\033[0m]\n");
+        printf("%s \033[100D\033[60C[\033[32mDONE\033[0m]\n", suiteName);
     }
 }
 

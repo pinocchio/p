@@ -9,7 +9,8 @@
 /* ========================================================================== */
 
 #define NEW_TEST(name) void test_##name() {\
-	LOG("+++++++ %s %s:%u \n", #name, __FILE__, __LINE__);
+	LOG("\n\033[33m++\033[0m %s() \033[100D\033[60C\033[33m++\033[0m\n", __FUNCTION__);\
+    LOG("\033[33m++\033[0m     %s:%u \033[100D\033[60C\033[33m++\033[0m\n", __FILE__, __LINE__);
 
 
 #define NEW_CLASS_TEST(name) void name() {\
@@ -33,6 +34,7 @@ extern void run_tests();
 #define RUN_TEST(f) \
     if (!setjmp(Test_Continue)) { \
         test_##f();\
+        printf("\n"); \
     }
 
 #define SKIP_TEST printf("Test skipped: %s %s:%u\n",\
