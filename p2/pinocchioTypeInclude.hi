@@ -19,7 +19,6 @@
 #include <system/ast/Assign.h>
 #include <system/ast/Send.h>
 #include <system/ast/Block.h>
-#include <system/ast/Method.h>
 #include <system/ast/NativeMethod.h>
 #include <system/ast/Continue.h>
 #include <system/ast/Callec.h>
