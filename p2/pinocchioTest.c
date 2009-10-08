@@ -1,7 +1,10 @@
 #include <pinocchio.h>
 #include <unistd.h> 
-#include <stdio_ext.h>
 #include <pinocchioTest.h>
+
+#ifndef __APPLE__
+#include <stdio_ext.h>
+#endif // __APPLE__
 
 #include <system/ast/AssignTest.ci>
 #include <system/ast/CallecTest.ci>
@@ -52,7 +55,11 @@ void test_suite_begin(char * suiteName)
 
 void test_suite_end(char * suiteName)
 {
-    __fpurge(stdout);
+    #ifndef __APPLE__
+        __fpurge(stdout);
+    #else
+        fpurge(stdout);
+    #endif
     if (TEST_CASE_FAILED) {
         /* reads out contents of pipe to the error_buffer */
         read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
