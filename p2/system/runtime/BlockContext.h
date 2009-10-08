@@ -2,7 +2,6 @@
 #define RUNTIME_BLOCKCONTEXT_H
 
 #include <pinocchio.h>
-#include <system/runtime/Closure.h>
 
 /* ========================================================================== */
 

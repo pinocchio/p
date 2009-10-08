@@ -23,3 +23,4 @@ TYPE(Type_CharacterTable);
 TYPE(IO_Stream);
 TYPE(AST_Block);
 TYPE(Runtime_MethodContext);
+TYPE(Runtime_Closure);

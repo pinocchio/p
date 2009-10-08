@@ -11,7 +11,8 @@ Object Env;
 
 /* ======================================================================== */
 
-Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, Type_Array values)
+Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, 
+                                              Type_Array values)
 {
     NEW_OBJECT(Runtime_BlockContext);
     result->parent          = parent;
@@ -20,7 +21,8 @@ Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, Type_Ar
     return result;
 }
 
-Runtime_BlockContext new_Runtime_BlockContext_Sized(Object parent, Object key, int size)
+Runtime_BlockContext new_Runtime_BlockContext_Sized(Object parent, Object key, 
+                                                    int size)
 {
     NEW_OBJECT(Runtime_BlockContext);
     result->parent          = parent;
