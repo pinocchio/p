@@ -54,8 +54,11 @@ CNT(Class_super)
 
 
 void Method_invoke(Object method, Object self, Object class, Type_Array args) {
-
-    
+    if (HEADER(method) == (Object)AST_Native_Method_Class) {
+        AST_Native_Method_invoke((AST_Native_Method)method, self, class, args);
+    } else if (HEADER(method) == (Object)Runtime_Closure_Class) {
+        Runtime_Closure_invoke((Runtime_Closure)method, self, class, args);
+    }
 }
 
 void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
