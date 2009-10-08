@@ -22,6 +22,7 @@
 #include <system/type/SmallIntTest.ci>
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
+#include <system/runtime/ClosureTest.ci>
 
 /* ========================================================================== */
 
@@ -130,4 +131,5 @@ void run_tests()
     test_Type_Symbol();
     test_Thread();
     test_AST_Variable();
+    test_Runtime_Closure();
 }

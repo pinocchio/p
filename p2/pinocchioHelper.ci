@@ -6,6 +6,10 @@ void store_method(Type_Class class, Object symbol, Object method)
     Type_Dictionary_store_(dict, symbol, method);
 }
 
+void store_closure(Type_Class class, Type_Symbol symbol, Runtime_Closure closure) {
+    store_method(class, (Object)symbol, (Object)closure);
+}
+
 void store_native_method(Type_Class class, Object symbol, native code)
 {
     AST_Native_Method native_method = new_AST_Native_Method(code);

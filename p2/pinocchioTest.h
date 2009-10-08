@@ -38,7 +38,8 @@ extern void run_tests();
     }
 
 #define SKIP_TEST printf("Test skipped: %s %s:%u\n",\
-    __FUNCTION__, __FILE__, __LINE__); return;
+                         __FUNCTION__, __FILE__, __LINE__); \
+    return;
 
 /* ========================================================================== */
 

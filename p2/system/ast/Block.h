@@ -6,9 +6,9 @@
 /* ======================================================================== */
 
 struct AST_Block_t {
-    Type_SmallInt   paramCount;
-    Runtime_BlockContext     environment;
-    Type_Array      body;
+    Type_SmallInt           paramCount;
+    Runtime_BlockContext    environment;
+    Type_Array              body;
 };
 
 CREATE_INITIALIZERS(AST_Block)

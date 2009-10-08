@@ -144,7 +144,7 @@ extern void CNT_send_Eval();
 extern Object Eval(Object code);
 
 extern void store_native_method(Type_Class class, Object symbol, native code);
-extern void store_method(Type_Class class, Object symbol, Object method);
+extern void store_closure(Type_Class class, Type_Symbol symbol, Runtime_Closure closure);
 
 /* ======================================================================== */
 

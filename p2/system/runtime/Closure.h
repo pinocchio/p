@@ -11,8 +11,8 @@ struct Runtime_Closure_t {
 };
 
 CREATE_INITIALIZERS(Runtime_Closure)
-extern Runtime_Closure new_Runtime_Closure(Object self, Object class,
-                                           Object env, AST_Block code);
+extern Runtime_Closure new_Runtime_Closure(AST_Block code,
+                                           Runtime_BlockContext context);
 
 /* ======================================================================== */
 
