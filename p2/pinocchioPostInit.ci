@@ -22,3 +22,4 @@ post_init_Type_CharacterTable();
 post_init_IO_Stream();
 post_init_IO_Stream();
 post_init_AST_Block();
+post_init_Runtime_MethodContext();

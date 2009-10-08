@@ -22,3 +22,4 @@ TYPE(Runtime_BlockContext);
 TYPE(Type_CharacterTable);
 TYPE(IO_Stream);
 TYPE(AST_Block);
+TYPE(Runtime_MethodContext);

@@ -21,3 +21,4 @@ pre_init_AST_Variable();
 pre_init_IO_Stream();
 pre_init_IO_Stream();
 pre_init_AST_Block();
+pre_init_Runtime_MethodContext();
