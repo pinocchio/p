@@ -29,9 +29,10 @@ void AST_Variable_eval(AST_Variable self)
     LOGFUN;
     Object env = (Object)current_env();
     
-    if (HEADER(env) == (Object)Runtime_BlockContext_Class) {
-        return Runtime_BlockContext_lookup(
-                                  (Runtime_BlockContext)env, self->index, self->key);
+    if (HEADER(env) == (Object)Runtime_BlockContext_Class ||
+        HEADER(env) == (Object)Runtime_MethodContext_Class) {
+            return Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
+                                                self->index, self->key);
     } else {
         // TODO
         assert0(NULL);

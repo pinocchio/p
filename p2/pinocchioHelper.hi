@@ -4,8 +4,12 @@
 #define SIGFAIL SIGABRT
 extern jmp_buf Assert_Fail;
 
-#define ASSERT_HANDLER longjmp(Assert_Fail, 1);
-    
+#ifdef ASSERT_FAIL
+    #define ASSERT_HANDLER raise(SIGFAIL);
+#else // ASSERT_FAIL
+    #define ASSERT_HANDLER longjmp(Assert_Fail, 1);
+#endif // ASSERT_FAIL
+
 #define assert(test, message) \
 if (!(test)) {\
 	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
