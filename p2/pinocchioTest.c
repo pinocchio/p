@@ -27,6 +27,7 @@
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/ClosureTest.ci>
+#include <system/ast/BlockTest.ci>
 
 /* ========================================================================= */
 
@@ -145,4 +146,5 @@ void run_tests()
     test_Thread();
     test_AST_Variable();
     test_Runtime_Closure();
+    test_AST_Block();
 }
