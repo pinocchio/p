@@ -15,7 +15,10 @@ struct Runtime_MethodContext_t {
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)
-extern Runtime_MethodContext new_Runtime_MethodContext();
+extern Runtime_MethodContext new_Runtime_MethodContext(Runtime_Closure closure,
+                                            Object self, Object class,
+                                            Runtime_MethodContext home_context, 
+                                            Type_Array values);
 
 /* ======================================================================== */
 

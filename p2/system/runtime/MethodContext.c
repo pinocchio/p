@@ -16,6 +16,18 @@ void pre_init_Runtime_MethodContext()
 
 /* ======================================================================== */
 
+Runtime_MethodContext new_Runtime_MethodContext(Runtime_Closure closure,
+                                            Object self, Object class,
+                                            Runtime_MethodContext home_context, 
+                                            Type_Array values) {
+    NEW_OBJECT(Runtime_MethodContext);
+    result->closure         = closure;
+    result->pc              = 0;
+    result->values          = values;
+    result->home_context    = home_context;
+    result->class           = class;
+    return result;
+}
 
 
 /* ======================================================================== */
