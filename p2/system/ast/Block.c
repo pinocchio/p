@@ -37,6 +37,11 @@ void CNT_AST_Block_continue()
     push_CNT(send_Eval);
 }
 
+void AST_Block_eval(AST_Block self)
+{
+    push_EXP(new_Runtime_Closure(self, current_env()));
+}
+
 /* ========================================================================= */
 
 void post_init_AST_Block()

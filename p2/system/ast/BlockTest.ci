@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-NEW_TEST(AST_Block_eval1)
+NEW_TEST(AST_Block_eval)
     AST_BLOCK_TEST_SETUP;
     Type_SmallInt int1     = new_Type_SmallInt(1);
     AST_Constant int1Const = new_AST_Constant((Object)int1);
@@ -17,13 +17,12 @@ NEW_TEST(AST_Block_eval1)
     assert0(HEADER(result) == (Object)Runtime_Closure_Class);
     Runtime_Closure closure = (Runtime_Closure) result;
     assert0(closure->code == block);
-    
 }
 
 /* ========================================================================= */
 
 TEST_SUITE(AST_Block,
 {
-    RUN_TEST(AST_Block_eval1);
+    RUN_TEST(AST_Block_eval);
 })
 

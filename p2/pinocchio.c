@@ -76,6 +76,7 @@ void CNT_send_Eval()
     EVAL_IF(AST_Super)
     EVAL_IF(AST_Self)
     EVAL_IF(AST_Callec)
+    EVAL_IF(AST_Block)
     
     /* TODO fallback by actually sending the eval message */
     assert(NULL,
