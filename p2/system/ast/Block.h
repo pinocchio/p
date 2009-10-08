@@ -16,9 +16,6 @@ extern AST_Block new_AST_Block(unsigned int paramCount, Type_Array body);
 
 /* ======================================================================== */
 
-extern void AST_Block_invoke(AST_Block block, Object self,
-                      Object class, Type_Array args);
-                      
 /* ======================================================================== */
 
 #endif // AST_BLOCK_H

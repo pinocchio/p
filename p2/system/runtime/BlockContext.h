@@ -6,7 +6,7 @@
 /* ========================================================================== */
 
 struct Runtime_BlockContext_t {
-    Runtime_Closure block;
+    Runtime_Closure closure;
     unsigned int    pc;
     Type_Array      values;
 };

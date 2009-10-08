@@ -17,6 +17,31 @@ void pre_init_Runtime_Closure()
 /* ======================================================================== */
 
 
+void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
+                            Object class, Type_Array args)
+{
+    push_restore_env();
+    
+    Runtime_MethodContext env =
+        new_Runtime_MethodContext(closure, self, class, args);
+
+    closure->home_context = env;
+    
+    Env = (Object)env;
+    
+    if (closure->code->body->size->value == 0) { 
+        push_EXP(self);
+        return; 
+    }
+    
+    if (1 < closure->code->body->size->value) {
+        push_CNT(AST_Block_continue);
+    }
+    
+    push_EXP(closure->code->body->values[0]);
+    push_CNT(send_Eval);
+}
+
 
 /* ======================================================================== */
 
