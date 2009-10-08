@@ -7,7 +7,7 @@
 
 struct AST_Block_t {
     Type_SmallInt   paramCount;
-    Runtime_Env     environment;
+    Runtime_BlockContext     environment;
     Type_Array      body;
 };
 

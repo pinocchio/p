@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Env.h>
+#include <system/runtime/BlockContext.h>
 #include <system/ast/Method.h>
 #include <pinocchio.h>
 
@@ -28,7 +28,7 @@ void pre_init_Method()
 
 void CNT_AST_Method_continue()
 {
-    Runtime_Env env = (Runtime_Env)current_env();
+    Runtime_BlockContext env = (Runtime_BlockContext)current_env();
     poke_EXP(1, env->method->body->values[env->pc]);
     
     env->pc++;
@@ -43,7 +43,7 @@ void AST_Method_invoke(AST_Method method, Object self,
 {
     push_restore_env();
     
-    Runtime_Env env = new_Runtime_Env(method->environment, (Object)method, args);
+    Runtime_BlockContext env = new_Runtime_BlockContext(method->environment, (Object)method, args);
     
     env->self   = self;
     env->class  = class;

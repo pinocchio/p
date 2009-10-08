@@ -4,13 +4,13 @@ NEW_TEST(variable_lookup)
     var->index         = 0;
     var->key           = (Object)new_Type_SmallInt(10);
     
-    Env = (Object)new_Runtime_Env_Sized((Object)current_env(), var->key, 1);
-    Env = (Object)new_Runtime_Env_Sized((Object)current_env(), Nil, 0);
+    Env = (Object)new_Runtime_BlockContext_Sized((Object)current_env(), var->key, 1);
+    Env = (Object)new_Runtime_BlockContext_Sized((Object)current_env(), Nil, 0);
 }
 
 /* ======================================================================== */
 
-TEST_SUITE(Runtime_Env,
+TEST_SUITE(Runtime_BlockContext,
 {
     RUN_TEST(variable_lookup);
 })

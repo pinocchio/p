@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Env.h>
+#include <system/runtime/BlockContext.h>
 #include <system/ast/Variable.h>
 
 /* ======================================================================== */
@@ -29,9 +29,9 @@ void AST_Variable_eval(AST_Variable self)
     LOGFUN;
     Object env = (Object)current_env();
     
-    if (HEADER(env) == (Object)Runtime_Env_Class) {
-        return Runtime_Env_lookup(
-                                  (Runtime_Env)env, self->index, self->key);
+    if (HEADER(env) == (Object)Runtime_BlockContext_Class) {
+        return Runtime_BlockContext_lookup(
+                                  (Runtime_BlockContext)env, self->index, self->key);
     } else {
         // TODO
         assert0(NULL);
@@ -43,8 +43,8 @@ void AST_Variable_eval(AST_Variable self)
 void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
-    if (HEADER(env) == (Object)Runtime_Env_Class) {
-        return Runtime_Env_assign((Runtime_Env)env, self->index, self->key, value);
+    if (HEADER(env) == (Object)Runtime_BlockContext_Class) {
+        return Runtime_BlockContext_assign((Runtime_BlockContext)env, self->index, self->key, value);
     }
     // TODO
     assert0(NULL);

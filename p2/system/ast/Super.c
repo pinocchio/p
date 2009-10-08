@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Env.h>
+#include <system/runtime/BlockContext.h>
 #include <system/ast/Super.h>
 
 /* ======================================================================== */
@@ -40,10 +40,10 @@ CNT(AST_Super_send)
 
 CNT(push_env_class)
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Runtime_Env_Class) {
+    if (HEADER(env) != (Object)Runtime_BlockContext_Class) {
         assert0(NULL);
     }
-    push_EXP(((Runtime_Env)env)->class);
+    push_EXP(((Runtime_BlockContext)env)->class);
 }
 
 void AST_Super_eval(AST_Super super)

@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Env.h>
+#include <system/runtime/BlockContext.h>
 #include <system/ast/Block.h>
 
 /* ======================================================================== */
@@ -27,7 +27,7 @@ void pre_init_AST_Block()
 
 void CNT_AST_Block_continue()
 {
-    Runtime_Env env = (Runtime_Env)current_env();
+    Runtime_BlockContext env = (Runtime_BlockContext)current_env();
     poke_EXP(1, env->method->body->values[env->pc]);
     
     env->pc++;
@@ -42,7 +42,7 @@ void AST_Block_invoke(AST_Block block, Object self,
 {
     push_restore_env();
     
-    Runtime_Env env = new_Runtime_Env((Object)block->environment, 
+    Runtime_BlockContext env = new_Runtime_BlockContext((Object)block->environment, 
                                       (Object)block, args);
     
     env->self   = self;
