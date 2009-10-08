@@ -8,7 +8,7 @@ def create_dirname(name)
 end
 
 def createCHSourcesAt(path)
-    separator = "/* ======================================================================== */"
+    separator = "/* ========================================================================= */"
     dir = File.dirname path
     name = File.basename path
     dirname = File.basename dir

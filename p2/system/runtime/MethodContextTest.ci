@@ -3,13 +3,13 @@
     Runtime_MethodContext methodcontext = new_Runtime_MethodContext(); \
     Object result;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 void test_RUNTIME_METHODCONTEXT_example() {
  #error Fill the tests
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 TEST_SUITE(Runtime_MethodContext,
 {

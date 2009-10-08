@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <system/type/Boolean.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Class Type_Boolean_Class;
 Type_Class True_Class;
@@ -15,7 +15,7 @@ Type_Boolean False;
 AST_Constant True_Const;
 Type_Boolean True;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 void pre_init_Type_False() {
     False_Class = new_Named_Class((Object)Type_Boolean_Class, L"False");

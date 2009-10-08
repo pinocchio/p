@@ -3,7 +3,7 @@
 
 #include <pinocchio.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 struct Runtime_Closure_t {
     AST_Block code;
@@ -14,11 +14,11 @@ CREATE_INITIALIZERS(Runtime_Closure)
 extern Runtime_Closure new_Runtime_Closure(AST_Block code,
                                            Runtime_BlockContext context);
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                                    Object class, Type_Array args);
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 #endif // RUNTIME_CLOSURE_H

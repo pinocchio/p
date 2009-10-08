@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <system/type/Dictionary.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Class Type_Dictionary_Class;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Dictionary new_Type_Dictionary()
 {
@@ -21,7 +21,7 @@ void pre_init_Type_Dictionary()
     Type_Dictionary_Class    = new_Named_Class((Object)Type_Object_Class, L"Type_Dictionary");
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 {
@@ -62,7 +62,7 @@ Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
     return NULL;
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 NATIVE1(Type_Dictionary_Type_ObjectAt_)
     Object result = Type_Dictionary_lookup((Type_Dictionary)self, args->values[0]);
@@ -77,7 +77,7 @@ NATIVE2(Type_Dictionary_Type_ObjectAt_put_)
     push_EXP(args->values[1]);
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 void post_init_Type_Dictionary()
 {

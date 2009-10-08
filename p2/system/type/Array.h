@@ -18,6 +18,6 @@ extern Type_Array new_Raw_Type_Array(int c);
 extern Type_Array new_Type_Array(int c, Object v[]);
 extern Type_Array new_Type_Array_With(int c, Object init);
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 #endif // ARRAY_H

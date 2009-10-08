@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <system/type/Character.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Class Type_Character_Class;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Character new_raw_Type_Character(wchar_t value)
 {
@@ -31,7 +31,7 @@ void pre_init_Type_Character()
     Type_Character_Class = new_Named_Class((Object)Type_Object_Class, L"Type_Character");
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 NATIVE1(Type_Character_equals_)
 }
@@ -51,7 +51,7 @@ NATIVE0(Type_Character_asSmallInt)
     push_EXP(new_Type_SmallInt(((Type_Character)self)->value));
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 
 void post_init_Type_Character()

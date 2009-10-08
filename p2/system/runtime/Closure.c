@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <system/runtime/Closure.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Class Runtime_Closure_Class;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 
 Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context) {
@@ -22,7 +22,7 @@ void pre_init_Runtime_Closure()
     Runtime_Closure_Class = new_Named_Class((Object)Type_Object_Class, L"Runtime_Closure");
 }
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
@@ -51,7 +51,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 }
 
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 void post_init_Runtime_Closure()
 {

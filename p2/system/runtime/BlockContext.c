@@ -4,12 +4,12 @@
 #include <system/runtime/BlockContext.h>
 #include <pinocchio.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Type_Class Runtime_BlockContext_Class;
 Object Env;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure closure,
                                               Type_Array values)

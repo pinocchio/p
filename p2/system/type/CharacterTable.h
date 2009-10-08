@@ -3,7 +3,7 @@
 
 #include <pinocchio.h>
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 struct Type_CharacterTable_t {
     Type_Character chars[0];
@@ -12,10 +12,10 @@ struct Type_CharacterTable_t {
 CREATE_INITIALIZERS(Type_CharacterTable)
 extern Type_CharacterTable new_Type_CharacterTable();
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 extern Type_CharacterTable Type_Character_table;
 
-/* ======================================================================== */
+/* ========================================================================= */
 
 #endif // CHARACTERTABLE_H
