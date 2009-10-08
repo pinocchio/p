@@ -26,6 +26,7 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_Closure closure,
     result->values          = values;
     result->home_context    = home_context;
     result->class           = class;
+    result->self            = self;
     return result;
 }
 

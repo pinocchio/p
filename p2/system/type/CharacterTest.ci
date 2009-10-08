@@ -3,7 +3,7 @@
 Type_Character chr = new_Type_Character(L'a'); \
 Object result;
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 NEW_TEST(Type_Character_asType_SmallInt)
     CHARACTER_TEST_SETUP;
@@ -26,7 +26,7 @@ NEW_TEST(Type_Character_asString)
     assert0(((Type_String)result)->value[0] == chr->value);
 }
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 TEST_SUITE(Type_Character,
 {

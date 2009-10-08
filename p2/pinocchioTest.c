@@ -24,7 +24,7 @@
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/ClosureTest.ci>
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 jmp_buf Test_Continue;
 int TEST_CASE_FAILED;
@@ -83,7 +83,7 @@ void init_Exception_Handling()
 }
 
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
 {
@@ -110,7 +110,7 @@ Object Eval_AST_Send1(Object self, Object symbol, Object arg)
     return Eval_AST_Send(self, symbol, new_Type_Array_With(1, arg));
 }
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 void run_tests()
 {

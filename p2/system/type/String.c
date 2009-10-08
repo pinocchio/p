@@ -5,11 +5,11 @@
 #include <system/type/Symbol.h>
 #include <system/type/String.h>
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 Type_Class Type_String_Class;
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 Type_String new_Type_String(const wchar_t * str)
 {
@@ -29,7 +29,7 @@ void pre_init_Type_String()
     Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 
 Type_String Type_String_concat_(Type_String str1, Type_String str2)
@@ -69,7 +69,7 @@ NATIVE0(Type_String_asSymbol)
     push_EXP(new_Type_Symbol(((Type_String)self)->value));
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 void post_init_Type_String()
 {

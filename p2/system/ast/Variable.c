@@ -22,15 +22,14 @@ void pre_init_AST_Variable()
     AST_Variable_Class      = new_Named_Class((Object)Type_Object_Class, L"AST_Variable");
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 void AST_Variable_eval(AST_Variable self)
 {
     LOGFUN;
     Object env = (Object)current_env();
     
-    if (HEADER(env) == (Object)Runtime_BlockContext_Class ||
-        HEADER(env) == (Object)Runtime_MethodContext_Class) {
+    if (IS_CONTEXT(env)) {
             return Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
                                                 self->index, self->key);
     } else {
@@ -51,7 +50,7 @@ void AST_Variable_assign(AST_Variable self, Object value)
     assert0(NULL);
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 void post_init_AST_Variable(){}
 

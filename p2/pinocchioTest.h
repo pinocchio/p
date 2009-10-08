@@ -6,7 +6,7 @@
 #include <signal.h>
 #include <setjmp.h>
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 #define NEW_TEST(name) void test_##name() {\
 	LOG("\n\033[33m++\033[0m %s() \033[100D\033[60C\033[33m++\033[0m\n", __FUNCTION__);\
@@ -41,13 +41,13 @@ extern void run_tests();
                          __FUNCTION__, __FILE__, __LINE__); \
     return;
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 extern Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args);
 extern Object Eval_AST_Send(Object self, Object symbol, Type_Array args);
 extern Object Eval_AST_Send0(Object self, Object symbol);
 extern Object Eval_AST_Send1(Object self, Object symbol, Object arg);
 
-/* ========================================================================== */
+/* ========================================================================= */
 
 #endif // PINOCCHIOTEST_H

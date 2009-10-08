@@ -23,7 +23,7 @@ void pre_init_AST_Super()
     AST_Super_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Super");
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 CNT(AST_Super_send) 
     Object class = pop_EXP();
@@ -40,9 +40,7 @@ CNT(AST_Super_send)
 
 CNT(push_env_class)
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Runtime_BlockContext_Class) {
-        assert0(NULL);
-    }
+    assert0(IS_CONTEXT(env));
     push_EXP(((Runtime_BlockContext)env)->home_context->class);
 }
 
@@ -67,7 +65,7 @@ void AST_Super_eval(AST_Super super)
     }
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 void post_init_AST_Super()
 {

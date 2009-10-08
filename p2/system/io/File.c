@@ -48,7 +48,7 @@ void pre_init_IO_File()
     IO_File_Class = new_Named_Class((Object)Type_Object_Class, L"IO_File");
 }
 
-/* =========================================================================*/
+/* ========================================================================= */
 
 char* unicode_to_ascii(const wchar_t* str) {
     int len        = wcslen(str);
@@ -171,7 +171,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
 NATIVE1(IO_File_writeAll_)
     IO_File_writeAll_((IO_File)self, (Type_String)args->values[0]);
 }
-/* =========================================================================*/
+/* ========================================================================= */
 
 void create_standard_files()
 {
