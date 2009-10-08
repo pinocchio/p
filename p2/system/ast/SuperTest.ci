@@ -1,3 +1,4 @@
+
 NEW_TEST(ast_super)
     Type_SmallInt integer       = new_Type_SmallInt(70);
     Type_SmallInt integer7      = new_Type_SmallInt(7);
