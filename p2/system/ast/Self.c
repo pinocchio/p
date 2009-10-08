@@ -23,9 +23,9 @@ void AST_Self_eval()
 {
     LOGFUN;
     Object env = (Object)current_env();
-    if (HEADER(env) != (Object)Runtime_BlockContext_Class) {
-        assert0(NULL);
-    }
+    assert0(HEADER(env) == (Object)Runtime_BlockContext_Class ||
+            HEADER(env) == (Object)Runtime_MethodContext_Class);
+    // replace the current element (an AST_Self) with the Object's self 
     poke_EXP(1, ((Runtime_BlockContext)env)->home_context->self);
 }
 

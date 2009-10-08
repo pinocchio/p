@@ -2,12 +2,12 @@ NEW_TEST(ast_self)
     Type_SmallInt integer       = new_Type_SmallInt(70);
     Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
-    Type_Array body   = new_Type_Array_With(3, (Object)integer7_const);
-    body->values[2]     = Self;
-    AST_Method method = new_Method(0, body);
-    Type_Symbol test  = new_Type_Symbol(L"test");
-    store_method(Type_SmallInt_Class, (Object)test, (Object)method);
-    Object result = Eval_AST_Send((Object)integer, (Object)test, Empty_Type_Array);
+    Type_Array body             = new_Type_Array_With(3, (Object)integer7_const);
+    body->values[2]             = Self;    
+    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
+    Type_Symbol test            = new_Type_Symbol(L"test");
+    store_closure(Type_SmallInt_Class, test, closure);
+    Object result               = Eval_AST_Send0((Object)integer, (Object)test);
     assert0(result == (Object)integer);
 }
 

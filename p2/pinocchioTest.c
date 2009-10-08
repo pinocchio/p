@@ -7,9 +7,9 @@
 #include <system/ast/ConstantTest.ci>
 //#include <system/ast/ContinueTest.ci>
 #include <system/ast/NativeMethodTest.ci>
-//#include <system/ast/SelfTest.ci>
+#include <system/ast/SelfTest.ci>
 #include <system/ast/SendTest.ci>
-//#include <system/ast/SuperTest.ci>
+#include <system/ast/SuperTest.ci>
 #include <system/ast/VariableTest.ci>
 #include <system/io/FileTest.ci>
 #include <system/runtime/ThreadTest.ci>
@@ -37,6 +37,7 @@ int saved_stdout;
 void test_suite_begin(char * suiteName)
 {
     TEST_CASE_FAILED = 0;
+    #ifndef TEST_FAIL
     fflush(stdout);
     // redirect stdout
     if(pipe(out_pipe) != 0) {
@@ -44,6 +45,7 @@ void test_suite_begin(char * suiteName)
     }
     dup2(out_pipe[1], STDOUT_FILENO);
     close(out_pipe[1]);
+    #endif // TEST_FAIL
 }
 
 
@@ -70,12 +72,14 @@ void init_Exception_Handling()
     // save the default stdout
     saved_stdout = dup(STDOUT_FILENO);
     
+    #ifndef TEST_FAIL
     if(setjmp(Assert_Fail)) {
         printf("Test Failed\n");
         TEST_CASE_FAILED = 1;
         IN_EVAL = 0;
         longjmp(Test_Continue, 1);
     }
+    #endif // TEST_FAIL
 }
 
 
@@ -123,11 +127,11 @@ void run_tests()
     test_IO_File();
     test_NativeMethod();
     test_Type_Object();
-    //test_AST_Self();
+    test_AST_Self();
     test_AST_Send();
     test_Type_SmallInt();
     test_Type_String();
-    //test_AST_Super();
+    test_AST_Super();
     test_Type_Symbol();
     test_Thread();
     test_AST_Variable();

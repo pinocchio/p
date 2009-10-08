@@ -7,8 +7,8 @@
 
 NEW_TEST(closure_evaluation)
     SKIP_TEST;
-    Type_Array body       = Empty_Type_Array;
-    Runtime_Closure closure     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
+    Type_Array body         = Empty_Type_Array;
+    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     Object closure_const    = (Object)new_AST_Constant((Object)closure);
     Type_SmallInt integer   = new_Type_SmallInt(120);
     Object integer_const    = (Object)new_AST_Constant((Object)integer);
