@@ -28,10 +28,10 @@ void pre_init_AST_Block()
 void CNT_AST_Block_continue()
 {
     Runtime_BlockContext env = (Runtime_BlockContext)current_env();
-    poke_EXP(1, env->method->body->values[env->pc]);
+    poke_EXP(1, env->block->code->body->values[env->pc]);
     
     env->pc++;
-    if (env->method->body->size->value <= env->pc) {
+    if (env->block->code->body->size->value <= env->pc) {
         zap_CNT();
     } 
     push_CNT(send_Eval);

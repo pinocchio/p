@@ -43,7 +43,7 @@ CNT(push_env_class)
     if (HEADER(env) != (Object)Runtime_BlockContext_Class) {
         assert0(NULL);
     }
-    push_EXP(((Runtime_BlockContext)env)->class);
+    push_EXP(((Runtime_BlockContext)env)->block->class);
 }
 
 void AST_Super_eval(AST_Super super)

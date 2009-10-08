@@ -11,23 +11,22 @@ Object Env;
 
 /* ======================================================================== */
 
-Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, 
+Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block,
                                               Type_Array values)
 {
     NEW_OBJECT(Runtime_BlockContext);
-    result->parent          = parent;
-    result->key             = key;
-    result->values          = values;
+    result->block          = block;
+    result->pc             = 0;
+    result->values         = values;
     return result;
 }
 
-Runtime_BlockContext new_Runtime_BlockContext_Sized(Object parent, Object key, 
-                                                    int size)
+Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure block, int size)
 {
     NEW_OBJECT(Runtime_BlockContext);
-    result->parent          = parent;
-    result->key             = key;
-    result->values          = new_Type_Array_With(size, Nil);
+    result->block          = block;
+    result->pc             = 0;
+    result->values         = new_Type_Array_With(size, Nil);
     return result;
 }
 
@@ -43,7 +42,8 @@ void pre_init_Runtime_BlockContext()
 
 /* =========================================================================*/
 
-void Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key)
+void Runtime_BlockContext_lookup(Runtime_BlockContext self, 
+                                 unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
         if (HEADER(self->parent) == (Object)Runtime_BlockContext_Class) {
