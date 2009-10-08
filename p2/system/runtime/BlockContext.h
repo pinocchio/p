@@ -1,11 +1,11 @@
-#ifndef ENV_H
-#define ENV_H
+#ifndef RUNTIME_BLOCKCONTEXT_H
+#define RUNTIME_BLOCKCONTEXT_H
 
 #include <pinocchio.h>
 
 /* ========================================================================== */
 
-struct Runtime_Env_t {
+struct Runtime_BlockContext_t {
     Object          self;
     Object          class;
     AST_Method      method;
@@ -18,23 +18,23 @@ struct Runtime_Env_t {
 
 extern Object Env;
 
-CREATE_INITIALIZERS(Runtime_Env)
+CREATE_INITIALIZERS(Runtime_BlockContext)
 
-extern Runtime_Env new_Runtime_Env(Object parent, Object key, Type_Array values);
-extern Runtime_Env new_Runtime_Env_Sized(Object parent, Object key, int size);
-
-/* =========================================================================*/
-
-extern void Runtime_Env_lookup(Runtime_Env self, unsigned int index, Object key);
-extern void Runtime_Env_assign(Runtime_Env self, unsigned int index, Object key, Object value);
+extern Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, Type_Array values);
+extern Runtime_BlockContext new_Runtime_BlockContext_Sized(Object parent, Object key, int size);
 
 /* =========================================================================*/
 
-extern Runtime_Env current_env();
+extern void Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key);
+extern void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index, Object key, Object value);
+
+/* =========================================================================*/
+
+extern Runtime_BlockContext current_env();
 extern void push_restore_env();
 extern void CNT_restore_env();
 extern void restore_env();
 
 /* =========================================================================*/
 
-#endif // ENV_H
+#endif // RUNTIME_BLOCKCONTEXT_H

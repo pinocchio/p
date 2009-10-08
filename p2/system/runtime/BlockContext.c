@@ -1,51 +1,51 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Env.h>
+#include <system/runtime/BlockContext.h>
 #include <pinocchio.h>
 
 /* ======================================================================== */
 
-Type_Class Runtime_Env_Class;
+Type_Class Runtime_BlockContext_Class;
 Object Env;
 
 /* ======================================================================== */
 
-Runtime_Env new_Runtime_Env(Object parent, Object key, Type_Array values)
+Runtime_BlockContext new_Runtime_BlockContext(Object parent, Object key, Type_Array values)
 {
-    NEW_OBJECT(Runtime_Env);
+    NEW_OBJECT(Runtime_BlockContext);
     result->parent          = parent;
     result->key             = key;
     result->values          = values;
     return result;
 }
 
-Runtime_Env new_Runtime_Env_Sized(Object parent, Object key, int size)
+Runtime_BlockContext new_Runtime_BlockContext_Sized(Object parent, Object key, int size)
 {
-    NEW_OBJECT(Runtime_Env);
+    NEW_OBJECT(Runtime_BlockContext);
     result->parent          = parent;
     result->key             = key;
     result->values          = new_Type_Array_With(size, Nil);
     return result;
 }
 
-Runtime_Env current_env()
+Runtime_BlockContext current_env()
 {
-    return (Runtime_Env) Env;
+    return (Runtime_BlockContext) Env;
 }
 
-void pre_init_Runtime_Env()
+void pre_init_Runtime_BlockContext()
 {
-    Runtime_Env_Class = new_Named_Class((Object)Type_Object_Class, L"Runtime_Env");
+    Runtime_BlockContext_Class = new_Named_Class((Object)Type_Object_Class, L"Runtime_BlockContext");
 }
 
 /* =========================================================================*/
 
-void Runtime_Env_lookup(Runtime_Env self, unsigned int index, Object key)
+void Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key)
 {
     while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Runtime_Env_Class) {
-            self = (Runtime_Env)self->parent;
+        if (HEADER(self->parent) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
@@ -61,12 +61,12 @@ void Runtime_Env_lookup(Runtime_Env self, unsigned int index, Object key)
     push_EXP(self->values->values[index]);
 }
 
-void Runtime_Env_assign(Runtime_Env self, unsigned int index,
+void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
                         Object key, Object value)
 {
     while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Runtime_Env_Class) {
-            self = (Runtime_Env)self->parent;
+        if (HEADER(self->parent) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->parent;
         } else {
             /* TODO Schedule at:in: message send. */
             assert0(NULL);
@@ -97,7 +97,7 @@ CNT(restore_env)
 
 /* =========================================================================*/
 
-void post_init_Runtime_Env()
+void post_init_Runtime_BlockContext()
 {
-    Env = (Object)new_Runtime_Env_Sized(Nil, Nil, 0);
+    Env = (Object)new_Runtime_BlockContext_Sized(Nil, Nil, 0);
 }
