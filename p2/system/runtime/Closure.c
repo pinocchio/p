@@ -23,7 +23,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     push_restore_env();
     
     Runtime_MethodContext env =
-        new_Runtime_MethodContext(closure, self, class, env, args);
+        new_Runtime_MethodContext(closure, self, class, NULL, args);
 
     env->home_context = env;
     
