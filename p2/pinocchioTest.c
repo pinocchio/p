@@ -2,9 +2,9 @@
 #include <unistd.h> 
 #include <pinocchioTest.h>
 
-#ifndef __APPLE__
+#ifdef __linux
 #include <stdio_ext.h>
-#endif // __APPLE__
+#endif
 
 #include <system/ast/AssignTest.ci>
 #include <system/ast/CallecTest.ci>
@@ -55,9 +55,10 @@ void test_suite_begin(char * suiteName)
 
 void test_suite_end(char * suiteName)
 {
-    #ifndef __APPLE__
+    #ifdef __linux
         __fpurge(stdout);
-    #else
+    #endif
+    #ifdef __APPLE__
         fpurge(stdout);
     #endif
     if (TEST_CASE_FAILED) {
