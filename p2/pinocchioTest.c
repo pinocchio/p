@@ -1,5 +1,6 @@
 #include <pinocchio.h>
 #include <unistd.h> 
+#include <stdio_ext.h>
 #include <pinocchioTest.h>
 
 #include <system/ast/AssignTest.ci>
@@ -51,7 +52,7 @@ void test_suite_begin(char * suiteName)
 
 void test_suite_end(char * suiteName)
 {
-    fpurge(stdout);
+    __fpurge(stdout);
     if (TEST_CASE_FAILED) {
         /* reads out contents of pipe to the error_buffer */
         read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
