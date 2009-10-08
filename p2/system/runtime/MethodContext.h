@@ -6,9 +6,10 @@
 /* ======================================================================== */
 
 struct Runtime_MethodContext_t {
-    Runtime_Closure block;
+    Runtime_Closure closure;
     unsigned int    pc;
     Type_Array      values;
+    Runtime_MethodContext home_context;
     Object          self;
     Object          class;
 };

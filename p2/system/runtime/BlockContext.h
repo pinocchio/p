@@ -9,6 +9,7 @@ struct Runtime_BlockContext_t {
     Runtime_Closure closure;
     unsigned int    pc;
     Type_Array      values;
+    Runtime_MethodContext home_context;
 };
 
 extern Object Env;

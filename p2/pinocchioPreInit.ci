@@ -10,7 +10,6 @@ pre_init_AST_Constant();
 pre_init_AST_Continue();
 pre_init_Type_Dictionary();
 pre_init_IO_File();
-pre_init_Method();
 pre_init_AST_Native_Method();
 pre_init_AST_Self();
 pre_init_AST_Send();

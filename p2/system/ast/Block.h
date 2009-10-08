@@ -16,6 +16,8 @@ extern AST_Block new_AST_Block(unsigned int paramCount, Type_Array body);
 
 /* ======================================================================== */
 
+extern void CNT_AST_Block_continue();
+
 /* ======================================================================== */
 
 #endif // AST_BLOCK_H

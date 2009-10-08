@@ -11,22 +11,23 @@ Object Env;
 
 /* ======================================================================== */
 
-Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block,
+Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure closure,
                                               Type_Array values)
 {
     NEW_OBJECT(Runtime_BlockContext);
-    result->block          = block;
-    result->pc             = 0;
+    result->closure        = closure;
     result->values         = values;
+    result->pc             = 0;
     return result;
 }
 
-Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure block, int size)
+Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure closure, 
+                                                    int size)
 {
     NEW_OBJECT(Runtime_BlockContext);
-    result->block          = block;
-    result->pc             = 0;
+    result->closure        = closure;
     result->values         = new_Type_Array_With(size, Nil);
+    result->pc             = 0;
     return result;
 }
 
@@ -44,10 +45,10 @@ void pre_init_Runtime_BlockContext()
 
 void Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                  unsigned int index, Object key)
-{
-    while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Runtime_BlockContext_Class) {
-            self = (Runtime_BlockContext)self->parent;
+{    
+    while ((Object)self->closure->code != key || (Object)self->closure->context == Nil) {
+        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->closure->context;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
@@ -56,7 +57,7 @@ void Runtime_BlockContext_lookup(Runtime_BlockContext self,
         }
     }
     /* TODO jump to error handler. */
-    assert1(self->key == key, "TODO jump to error handler");
+    assert1((Object)self->closure->code == key, "TODO jump to error handler");
     assert(index < self->values->size->value,
 		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
     
@@ -66,18 +67,18 @@ void Runtime_BlockContext_lookup(Runtime_BlockContext self,
 void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
                         Object key, Object value)
 {
-    while (self->key != key || self->parent == Nil) {
-        if (HEADER(self->parent) == (Object)Runtime_BlockContext_Class) {
-            self = (Runtime_BlockContext)self->parent;
+    while ((Object)self->closure->code != key || (Object)self->closure->context == Nil) {
+        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->closure->context;
         } else {
             /* TODO Schedule at:in: message send. */
-            assert0(NULL);
-            // Object args[2] = { (Object)new_Type_SmallInt(index), key };
+            assert1(NULL, "TODO Schedule at:in: message send");
+            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return;
         }
     }
     /* TODO jump to error handler. */
-    assert0(self->key == key);
+    assert1((Object)self->closure->code == key, "TODO jump to error handler");
     assert(index < self->values->size->value,
 		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
     
@@ -101,5 +102,4 @@ CNT(restore_env)
 
 void post_init_Runtime_BlockContext()
 {
-    Env = (Object)new_Runtime_BlockContext_Sized(Nil, Nil, 0);
 }

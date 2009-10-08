@@ -25,7 +25,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     Runtime_MethodContext env =
         new_Runtime_MethodContext(closure, self, class, args);
 
-    closure->home_context = env;
+    env->home_context = env;
     
     Env = (Object)env;
     
