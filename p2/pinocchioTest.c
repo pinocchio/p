@@ -13,7 +13,6 @@
 #include <system/ast/SuperTest.ci>
 #include <system/ast/VariableTest.ci>
 #include <system/io/FileTest.ci>
-#include <system/runtime/EnvTest.ci>
 #include <system/runtime/ThreadTest.ci>
 #include <system/type/ArrayTest.ci>
 #include <system/type/BooleanTest.ci>
@@ -52,6 +51,7 @@ void test_suite_end(char * suiteName)
 {
     fflush(stdout);
     if (TEST_CASE_FAILED) {
+        /* reads out contents of pipe to the error_buffer */
         read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
         dup2(saved_stdout, STDOUT_FILENO);
         printf("\033[31m===================================================================\033[0m\n");

@@ -6,7 +6,11 @@
 /* ======================================================================== */
 
 struct Runtime_MethodContext_t {
-    #error "TODO fill out struct"
+    Runtime_Closure block;
+    unsigned int    pc;
+    Type_Array      values;
+    Object          self;
+    Object          class;
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)

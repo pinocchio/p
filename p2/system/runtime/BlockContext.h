@@ -2,18 +2,14 @@
 #define RUNTIME_BLOCKCONTEXT_H
 
 #include <pinocchio.h>
+#include <system/runtime/Closure.h>
 
 /* ========================================================================== */
 
 struct Runtime_BlockContext_t {
-    Object          self;
-    Object          class;
-    AST_Method      method;
-    AST_Block       block;
+    Runtime_Closure block;
     unsigned int    pc;
-    Object          parent;
-    Object          key;
-    Type_Array values;
+    Type_Array      values;
 };
 
 extern Object Env;

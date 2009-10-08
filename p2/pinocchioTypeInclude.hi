@@ -24,6 +24,7 @@
 #include <system/ast/Continue.h>
 #include <system/ast/Callec.h>
 
+#include <system/runtime/Closure.h>
 #include <system/runtime/BlockContext.h>
 #include <system/type/CharacterTable.h>
 #include <system/io/Stream.h>
