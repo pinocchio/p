@@ -23,12 +23,16 @@ extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 
 /* ========================================================================= */
 
-#define METHOD(name, paramCount, numStatements)\
-Object name() {\
+#define METHOD(fName, paramCount, numStatements)\
+Object fName() {\
     Type_Array statements  = new_Type_Array_With(numStatements, Nil);\
     AST_Block body         = new_AST_Block(paramCount, statements);\
     Runtime_Closure method = new_Runtime_Closure(body,\
                                                 (Runtime_BlockContext)Nil);\
+    method->info           = new_raw_AST_Info();\
+    method->info->sourceFile = char2Type_String(__FILE__);\
+    method->info->name       = char2Type_String(__FUNCTION__);\
+    method->info->line       = new_Type_SmallInt(__LINE__);\
     unsigned int _st_count = 0;
 
 #define ADD_STATEMENT(value)\

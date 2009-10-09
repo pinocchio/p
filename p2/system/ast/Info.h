@@ -22,6 +22,8 @@ extern AST_Info new_AST_Info(Type_String sourceFile, Type_String name,
 
 /* ========================================================================= */
 
+extern void print_AST_Info(AST_Info info);
+
 /* ========================================================================= */
 
 #endif // INFO_H

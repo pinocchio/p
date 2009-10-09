@@ -99,11 +99,13 @@ extern Type_Class class##_Class;
 
 #define DEBUG
 #ifdef DEBUG
-#define LOGFUN LOG(__FUNCTION__); printf("\n");
-#define LOG printf
+    #define LOGFUN LOG(__FUNCTION__); printf("\n");
+    #define LOG printf
+    #define LOG_AST_INFO(print, info) printf(print); print_AST_Info(info); printf("\n");
 #else
-#define LOG
-#define LOGFUN printf
+    #define LOGFUN printf
+    #define LOG
+    #define LOG_AST_INFO(print, info)
 #endif
 
 #define RESET_LOG() printf("\n");

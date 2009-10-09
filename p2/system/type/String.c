@@ -1,6 +1,7 @@
 
 #include <wchar.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <system/type/Symbol.h>
 #include <system/type/String.h>
@@ -33,6 +34,16 @@ void pre_init_Type_String()
 
 /* ========================================================================= */
 
+Type_String char2Type_String(const char * input)
+{
+    // TODO
+    int size             = strlen(input);
+    wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
+    swprintf(wchar_copy, size, L"%s", input);
+    Type_String result   =  new_Type_String(wchar_copy);
+    free(wchar_copy);
+    return result;
+}
 
 Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {

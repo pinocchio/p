@@ -29,7 +29,7 @@ void pre_init_Runtime_Closure()
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                             Object class, Type_Array args)
 {
-    LOG("Closure Invoke \n");
+    LOG_AST_INFO("Closure Invoke: ", closure->info);
     push_restore_env();
     
     Runtime_MethodContext env =

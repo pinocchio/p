@@ -13,6 +13,10 @@ AST_Info empty_AST_Info;
 AST_Info new_raw_AST_Info()
 {
     NEW_OBJECT(AST_Info);
+    result->name       = empty_Type_String;
+    result->sourceFile = empty_Type_String;
+    result->line       = new_Type_SmallInt(-1);
+    result->column     = new_Type_SmallInt(-1);
     return result;
 }
 
@@ -29,12 +33,26 @@ AST_Info new_AST_Info(Type_String sourceFile, Type_String name,
 
 void pre_init_AST_Info()
 {
-    AST_Info_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Info");
-    empty_AST_Info = NEW_t(AST_Info);
+    AST_Info_Class         = new_Named_Class((Object)Type_Object_Class, L"AST_Info");
+    empty_AST_Info         = NEW_t(AST_Info);
+    HEADER(empty_AST_Info) = (Object)AST_Info_Class;
 }
 
 /* ========================================================================= */
 
+void print_AST_Info(AST_Info info)
+{
+    if (info == NULL || (Object)info == Nil) {
+        printf("Wrong info for print_AST_Info");
+    }
+    if (info == empty_AST_Info) {
+        printf("[ NO SOURCE INFO GIVEN ]");
+    } else {
+        printf("[%ls]", info->name->value); 
+                          //info->sourceFile->value,
+                          //info->line->value);
+    }
+}
 
 
 /* ========================================================================= */

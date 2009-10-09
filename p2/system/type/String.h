@@ -17,6 +17,7 @@ Type_String new_Type_String_sized(unsigned int size);
 /* ========================================================================= */
 
 extern Type_String Type_String_concat_(Type_String str1, Type_String str2);
+extern Type_String char2Type_String(const char * input);
 
 /* ========================================================================= */
 
