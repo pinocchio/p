@@ -14,28 +14,36 @@ NEW_TEST(boolean_equals)
     assert0(result == (Object)True);
 }
 
-NEW_TEST(true_ifTrue)
-    Object result;
-
-    Type_SmallInt integer   = new_Type_SmallInt(120);
-    Object integer_const    = (Object)new_AST_Constant((Object)integer);
-    Type_Array body         = new_Type_Array_With(1, integer_const);
-    Runtime_Closure arg = new_Runtime_Closure(new_AST_Block(0, body),
+#define TYPE_BOOLEAN_TEST_SETUP \
+    Object result; \
+    Type_SmallInt integer   = new_Type_SmallInt(120); \
+    Object integer_const    = (Object)new_AST_Constant((Object)integer); \
+    Type_Array body         = new_Type_Array_With(1, integer_const); \
+    Runtime_Closure arg = new_Runtime_Closure(new_AST_Block(0, body), \
                                               (Runtime_BlockContext)Nil);
+
+NEW_TEST(true_ifTrue)
+    TYPE_BOOLEAN_TEST_SETUP;
     result = Eval_Send1((Object)True, SMB_ifTrue_, (Object)arg);
     assert0(result == integer);
 }
 
 NEW_TEST(true_ifFalse)
-    Object result;
-
-    Type_SmallInt integer   = new_Type_SmallInt(120);
-    Object integer_const    = (Object)new_AST_Constant((Object)integer);
-    Type_Array body         = new_Type_Array_With(1, integer_const);
-    Runtime_Closure arg = new_Runtime_Closure(new_AST_Block(0, body),
-                                              (Runtime_BlockContext)Nil);
+    TYPE_BOOLEAN_TEST_SETUP;
     result = Eval_Send1((Object)True, SMB_ifFalse_, (Object)arg);
     assert0(result == Nil);
+}
+
+NEW_TEST(false_ifTrue)
+    TYPE_BOOLEAN_TEST_SETUP;
+    result = Eval_Send1((Object)False, SMB_ifTrue_, (Object)arg);
+    assert0(result == Nil);
+}
+
+NEW_TEST(false_ifFalse)
+    TYPE_BOOLEAN_TEST_SETUP;
+    result = Eval_Send1((Object)False, SMB_ifFalse_, (Object)arg);
+    assert0(result == integer);
 }
 
 /* ========================================================================= */
@@ -45,4 +53,6 @@ TEST_SUITE(Type_Boolean,
     RUN_TEST(boolean_equals);
     RUN_TEST(true_ifTrue);
     RUN_TEST(true_ifFalse);
+    RUN_TEST(false_ifTrue);
+    RUN_TEST(false_ifFalse);
 })
