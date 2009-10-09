@@ -6,7 +6,7 @@
 #include <pinocchioHelper.ci>
 
 #ifdef TEST
-#include <pinocchioTest.h>
+#include <test/pinocchioTest.h>
 #endif // TEST
 
 /* ========================================================================= */

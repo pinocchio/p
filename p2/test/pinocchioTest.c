@@ -1,6 +1,6 @@
 #include <pinocchio.h>
 #include <unistd.h> 
-#include <pinocchioTest.h>
+#include <test/pinocchioTest.h>
 
 #ifdef __linux
 #include <stdio_ext.h>
