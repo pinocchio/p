@@ -134,4 +134,5 @@ test_AST_Variable();
 test_Runtime_Closure();
 test_AST_Block();
 test_Type_Nil();
+test_Fib();
 }
