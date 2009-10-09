@@ -9,13 +9,13 @@ Object result;
 
 NEW_TEST(Type_String_asString)
     STRING_TEST_SETUP;
-    result = Eval_AST_Send0((Object)string, SMB_asString);
+    result = Eval_Send0((Object)string, SMB_asString);
     assert0(result == (Object)string);
 }
 
 NEW_TEST(Type_String_asSymbol)
     STRING_TEST_SETUP;
-    result = Eval_AST_Send0((Object)string, SMB_asSymbol);
+    result = Eval_Send0((Object)string, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert0(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
 }
@@ -28,14 +28,14 @@ NEW_TEST(Type_String_concat_)
     ASSERT_TYPE(string_result, Type_String_Class);
     assert0(string_result->size->value == (string->size->value + string2->size->value));
 
-    result = Eval_AST_Send1((Object)string, SMB_concat_, (Object)string2);
+    result = Eval_Send1((Object)string, SMB_concat_, (Object)string2);
     ASSERT_TYPE(result, Type_String_Class);
     assert0(((Type_String) result)->size->value == (string->size->value + string2->size->value));
 }
 
 NEW_TEST(Type_String_asArray)
     STRING_TEST_SETUP;
-    result = Eval_AST_Send0((Object)string, (Object)SMB_asArray);
+    result = Eval_Send0((Object)string, SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);
     assert0(((Type_Array)result)->size->value == string->size->value);
     int i=0;

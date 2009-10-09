@@ -12,7 +12,7 @@ NEW_TEST(ast_native_method_evaluation)
     AST_Native_Method method = new_AST_Native_Method(test_native_method_evaluation_testmethod);
     Object method_const      = (Object)new_AST_Constant((Object)method);
     
-    Object result = Eval_AST_Send0(method_const, SMB_eval);
+    Object result = Eval_Send0(method_const, SMB_eval);
     assert(result == (Object)method, printf("%ls\n", Object_classname(result)));
     assert0(test_native_method_evaluation_testmethod_called == 1);
 }

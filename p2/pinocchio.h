@@ -63,7 +63,7 @@ extern Type_Class class##_Class;
 
 // TODO make sure this is not done via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-    assert(Eval_AST_Send((Object)(exp1), SMB_equals_, \
+    assert(Eval_Send((Object)(exp1), SMB_equals_, \
         new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
 
 /* ========================================================================= */
@@ -143,8 +143,6 @@ extern int IN_EVAL;
 extern void CNT_send_Eval();
 extern Object Eval(Object code);
 
-extern void store_native_method(Type_Class class, Object symbol, native code);
-extern void store_closure(Type_Class class, Type_Symbol symbol, Runtime_Closure closure);
 
 /* ========================================================================= */
 

@@ -1,8 +1,20 @@
 
+NEW_TEST(Type_Object_methods)
+    assert0(Type_Dictionary_lookup(Type_Object_Class->methods, (Object)SMB_equals_));
+    assert0(HEADER((AST_Native_Method)Type_Dictionary_lookup(Type_Object_Class->methods, (Object)SMB_equals_)) == (Object)AST_Native_Method_Class);
+}
+
+NEW_TEST(Type_Object_isNil)
+    // just check on an Object
+    Object o = (Object)Type_Class_Class;
+    Object result = Eval_Send0(o, SMB_isNil);
+    assert0(result == (Object)False);
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(Type_Object,
 {
-    assert0(Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_));
-    assert0(HEADER((AST_Native_Method)Type_Dictionary_lookup(Type_Object_Class->methods, SMB_equals_)) == (Object)AST_Native_Method_Class);
+    RUN_TEST(Type_Object_methods);
+    RUN_TEST(Type_Object_isNil);
 })

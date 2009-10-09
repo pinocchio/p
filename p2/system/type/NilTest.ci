@@ -1,0 +1,15 @@
+
+
+NEW_TEST(Type_Nil_isNil)
+    // just check on an Object
+    Object o = (Object)Type_Class_Class;
+    Object result = Eval_Send0(o, SMB_isNil);
+    assert0(result == (Object)False);
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(Type_Nil,
+{
+    RUN_TEST(Type_Nil_isNil);
+})

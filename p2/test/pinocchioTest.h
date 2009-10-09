@@ -43,10 +43,10 @@ extern void run_tests();
 
 /* ========================================================================= */
 
-extern Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args);
-extern Object Eval_AST_Send(Object self, Object symbol, Type_Array args);
-extern Object Eval_AST_Send0(Object self, Object symbol);
-extern Object Eval_AST_Send1(Object self, Object symbol, Object arg);
+extern Object Eval_SendConst(Object self, Type_Symbol symbol, Type_Array args);
+extern Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args);
+extern Object Eval_Send0(Object self, Type_Symbol symbol);
+extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
 
 /* ========================================================================= */
 

@@ -16,7 +16,7 @@ NEW_TEST(ast_super)
     closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     store_closure(Type_Boolean_Class, test, closure);
     
-    Object result = Eval_AST_Send0((Object)True, (Object)test);
+    Object result = Eval_Send0((Object)True, test);
     assert0(result == (Object)integer);
 }
 

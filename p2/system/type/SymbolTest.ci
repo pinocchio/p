@@ -17,7 +17,7 @@ NEW_TEST(Type_Symbol_equals_)
 
 NEW_TEST(Type_Symbol_size)
     SYMBOL_TEST_SETUP;
-    result = Eval_AST_Send0((Object)symbol, SMB_size);
+    result = Eval_Send0((Object)symbol, SMB_size);
     ASSERT_TYPE(result, Type_SmallInt_Class);
     assert0(((Type_SmallInt)result)->value == 6);
     
@@ -25,7 +25,7 @@ NEW_TEST(Type_Symbol_size)
 
 NEW_TEST(Type_Symbol_asString)
     SYMBOL_TEST_SETUP;
-    result = Eval_AST_Send0((Object)symbol, SMB_asString);
+    result = Eval_Send0((Object)symbol, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
 }
 
@@ -41,7 +41,7 @@ NEW_TEST(Type_Symbol_Type_ObjectAt_)
     SYMBOL_TEST_SETUP;
     int i;
     for (i= 0; i<symbol->size->value; ++i) {
-        result = Eval_AST_Send1((Object)symbol, SMB_objectAt_, (Object)new_Type_SmallInt(i));
+        result = Eval_Send1((Object)symbol, SMB_objectAt_, (Object)new_Type_SmallInt(i));
         ASSERT_TYPE(result, Type_Character_Class);
         assert0(((Type_Character) result)->value == symbol->value[i]);
     }
@@ -49,7 +49,7 @@ NEW_TEST(Type_Symbol_Type_ObjectAt_)
 
 NEW_TEST(Type_Symbol_asType_Array)
     SYMBOL_TEST_SETUP;
-    result = Eval_AST_Send0((Object)symbol, SMB_asArray);
+    result = Eval_Send0((Object)symbol, SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);
     int i;
     Object item;

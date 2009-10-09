@@ -28,6 +28,7 @@
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/ClosureTest.ci>
 #include <system/ast/BlockTest.ci>
+#include <system/type/NilTest.ci>
 
 /* ========================================================================= */
 
@@ -95,29 +96,29 @@ void init_Exception_Handling()
 
 /* ========================================================================= */
 
-Object Eval_AST_SendConst(Object self, Object symbol, Type_Array args) 
+Object Eval_SendConst(Object self, Type_Symbol symbol, Type_Array args) 
 {
-    return (Object)Eval((Object)new_AST_Send((Object)self, symbol, args));
+    return (Object)Eval((Object)new_AST_Send((Object)self, (Object)symbol, args));
 }
 
-Object Eval_AST_Send(Object self, Object symbol, Type_Array args) 
+Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args) 
 {
     AST_Constant self_const = new_AST_Constant(self);
     int i;
     for (i=0; i<args->size->value; i++) {
         args->values[i] = (Object)new_AST_Constant(args->values[i]);
     }
-    return Eval_AST_SendConst((Object)self_const, symbol, args);
+    return Eval_SendConst((Object)self_const, symbol, args);
 }
 
-Object Eval_AST_Send0(Object self, Object symbol)
+Object Eval_Send0(Object self, Type_Symbol symbol)
 {
-    return Eval_AST_Send(self, symbol, Empty_Type_Array);
+    return Eval_Send(self, symbol, Empty_Type_Array);
 }
 
-Object Eval_AST_Send1(Object self, Object symbol, Object arg)
+Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
 {
-    return Eval_AST_Send(self, symbol, new_Type_Array_With(1, arg));
+    return Eval_Send(self, symbol, new_Type_Array_With(1, arg));
 }
 
 /* ========================================================================= */
@@ -147,4 +148,5 @@ void run_tests()
     test_AST_Variable();
     test_Runtime_Closure();
     test_AST_Block();
+    test_Type_Nil();
 }

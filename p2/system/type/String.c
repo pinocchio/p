@@ -58,7 +58,9 @@ NATIVE1(Type_String_concat_)
     push_CNT(Type_String_concat_);
     push_CNT(send_Eval);
     // TODO create a expanded send  
-    push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), SMB_asString, Empty_Type_Array));
+    push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), 
+                                                  (Object)SMB_asString, 
+                                                  Empty_Type_Array));
 }
 
 NATIVE0(Type_String_asString)

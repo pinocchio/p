@@ -4,15 +4,15 @@ NEW_TEST(Type_SmallInt_equals_)
     Object int2     = (Object)new_Type_SmallInt(2);
     Object result;
     
-    result = Eval_AST_Send1(int0, SMB_equals_, int2);
+    result = Eval_Send1(int0, SMB_equals_, int2);
     assert0(result == (Object)False);
-    result = Eval_AST_Send1(int2, SMB_equals_, int0);
+    result = Eval_Send1(int2, SMB_equals_, int0);
     assert0(result == (Object)False);
     
-    result = Eval_AST_Send1(int0, SMB_equals_, int0);
+    result = Eval_Send1(int0, SMB_equals_, int0);
     assert0(result == (Object)True);
     
-    result = Eval_AST_Send1(int2, SMB_equals_, int2);
+    result = Eval_Send1(int2, SMB_equals_, int2);
     assert0(result == (Object)True);
 }
 
@@ -21,7 +21,7 @@ NEW_TEST(Type_SmallInt_##name##_) \
     Type_SmallInt int4 = new_Type_SmallInt(4); \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
-    result = Eval_AST_Send1((Object)int4, SMB_##name##_, (Object)int8); \
+    result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
     ASSERT_TYPE(result, Type_SmallInt_Class); \
    \
     assert(((Type_SmallInt)result)->value == (int4->value op int8->value), \
@@ -55,7 +55,7 @@ Type_SmallInt_BINOP_TEST(or,         |)
 
 NEW_TEST(Type_SmallInt_hash)
     Type_SmallInt number = new_Type_SmallInt(10);
-    Object result = Eval_AST_Send0((Object)number, (Object)SMB_hash);
+    Object result        = Eval_Send0((Object)number, SMB_hash);
     ASSERT_TYPE(result, Type_SmallInt_Class);
     assert0(((Type_SmallInt)result)->value == number->value);
 }

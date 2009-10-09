@@ -12,7 +12,7 @@ NEW_TEST(ast_self)
     
     store_closure(Type_SmallInt_Class, test, closure);
     
-    Object result               = Eval_AST_Send0((Object)integer, (Object)test);
+    Object result               = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer);
 }
 
