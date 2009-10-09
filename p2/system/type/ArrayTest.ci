@@ -22,7 +22,7 @@ NEW_TEST(Type_Array_size)
     Object result      = Eval_Send((Object)array, SMB_size, Empty_Type_Array);
     assert0(((Type_SmallInt) result)->value == 10);
     
-    result = Eval_Send(integer, SMB_equals_, new_Type_Array_With(1, result));
+    result = Eval_Send1(integer, SMB_equals_, result);
     assert(result == (Object)True,
 		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
 }

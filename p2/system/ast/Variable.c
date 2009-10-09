@@ -28,12 +28,10 @@ void AST_Variable_eval(AST_Variable self)
 {
     LOGFUN;
     Object env = (Object)current_env();
-
-    zap_EXP();
     
     if (IS_CONTEXT(env)) {
-            return Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
-                                                self->index, self->key);
+            poke_EXP(1, Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
+                                                self->index, self->key));
     } else {
         // TODO
         assert0(NULL);

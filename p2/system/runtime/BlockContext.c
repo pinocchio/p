@@ -43,7 +43,7 @@ void pre_init_Runtime_BlockContext()
 
 /* ========================================================================= */
 
-void Runtime_BlockContext_lookup(Runtime_BlockContext self, 
+Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                  unsigned int index, Object key)
 {    
     while ((Object)self->closure->code != key && (Object)self->closure->context != Nil) {
@@ -53,15 +53,16 @@ void Runtime_BlockContext_lookup(Runtime_BlockContext self,
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
             //Object args[2] = { (Object)new_Type_SmallInt(index), key };
-            return;
+            return NULL;
         }
     }
     /* TODO jump to error handler. */
     assert1((Object)self->closure->code == key, "TODO jump to error handler");
     assert(index < self->values->size->value,
-		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
+		   printf("Lookup failed, index \"%i\" out of range [0:%i]", 
+                 index, self->values->size->value));
     
-    push_EXP(self->values->values[index]);
+    return self->values->values[index];
 }
 
 void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,

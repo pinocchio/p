@@ -26,7 +26,7 @@ extern Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure block
 
 /* ========================================================================= */
 
-extern void Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key);
+extern Object Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key);
 extern void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index, Object key, Object value);
 
 /* ========================================================================= */
