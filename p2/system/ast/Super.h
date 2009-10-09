@@ -8,7 +8,8 @@
 struct AST_Super_t {
     InlineCache     cache;
     Object          message; 
-    Type_Array arguments;
+    Type_Array      arguments;
+    AST_Info        info;   
 };
 
 CREATE_INITIALIZERS(AST_Super)

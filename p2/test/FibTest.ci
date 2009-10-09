@@ -23,7 +23,7 @@ METHOD(fib_method, 0, 1)
                     new_Type_Array_With(1, 
                         (Object)new_AST_Constant((Object)new_Type_SmallInt(1)))),
                 (Object)SMB_fib,
-                Empty_Type_Array),
+                empty_Type_Array),
             (Object)SMB_plus_, 
             new_Type_Array_With(1,
                 (Object)new_AST_Send(
@@ -31,7 +31,7 @@ METHOD(fib_method, 0, 1)
                         new_Type_Array_With(1, 
                             (Object)new_AST_Constant((Object)new_Type_SmallInt(2)))),
                 (Object)SMB_fib,
-                Empty_Type_Array)));
+                empty_Type_Array)));
                 
     AST_Block return_code = new_AST_Block(0, new_Type_Array_With(1, (Object)return_send));
     

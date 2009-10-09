@@ -92,7 +92,8 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
         method                = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             Object super = ((Type_Class) class)->super;
-			assert((class != super), printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
+			assert((class != super), 
+                printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
 							((Type_Class)class)->name->value,
 							((Type_Symbol)msg)->value));
 			class = super;

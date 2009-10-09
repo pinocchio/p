@@ -13,8 +13,9 @@ Type_Class AST_Block_Class;
 AST_Block new_AST_Block(unsigned int paramCount, Type_Array body)
 {
     NEW_OBJECT(AST_Block);
-    result->body = body;
+    result->body       = body;
     result->paramCount = new_Type_SmallInt(paramCount);
+    result->info       = empty_AST_Info;
     return result;
 }
 

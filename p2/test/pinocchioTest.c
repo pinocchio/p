@@ -90,7 +90,7 @@ Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args)
 
 Object Eval_Send0(Object self, Type_Symbol symbol)
 {
-    return Eval_Send(self, symbol, Empty_Type_Array);
+    return Eval_Send(self, symbol, empty_Type_Array);
 }
 
 Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)

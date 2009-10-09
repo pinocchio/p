@@ -7,6 +7,8 @@
 
 typedef Type_Symbol Type_String;
 
+extern Type_String empty_Type_String;
+
 CREATE_INITIALIZERS(Type_String)
 
 Type_String new_Type_String(const wchar_t * str);

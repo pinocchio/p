@@ -8,6 +8,7 @@
 /* ========================================================================= */
 
 struct AST_Native_Method_t {
+    AST_Info        info;
     native          code;
 };
 

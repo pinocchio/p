@@ -10,7 +10,7 @@ struct Type_Array_t {
     Object          values[];
 };
 
-extern Type_Array Empty_Type_Array;
+extern Type_Array empty_Type_Array;
 
 CREATE_INITIALIZERS(Type_Array)
 

@@ -12,6 +12,7 @@
 
 #include <system/io/File.h>
 
+#include <system/ast/Info.h>
 #include <system/ast/Self.h>
 #include <system/ast/Super.h>
 #include <system/ast/Constant.h>

@@ -10,6 +10,7 @@ struct AST_Send_t {
     Object          receiver;
     Object          message;
     Type_Array      arguments;
+    AST_Info        info;
 };
 
 CREATE_INITIALIZERS(AST_Send)

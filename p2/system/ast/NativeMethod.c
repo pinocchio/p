@@ -13,7 +13,8 @@ Type_Class AST_Native_Method_Class;
 AST_Native_Method new_AST_Native_Method(native code)
 {
     NEW_OBJECT(AST_Native_Method);
-    result->code               = code;
+    result->code = code;
+    result->info = empty_AST_Info;
     return result;
 }
 
@@ -27,6 +28,7 @@ void pre_init_AST_Native_Method()
 void AST_Native_Method_invoke(AST_Native_Method method, Object self,
                               Object class, Type_Array args)
 {
+    LOG("Native Method invoke");
     method->code(self, class, args);
 }
 

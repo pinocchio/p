@@ -15,6 +15,7 @@ AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments)
     result->receiver  = receiver;
     result->message   = msg;
     result->arguments = arguments;
+    result->info      = empty_AST_Info;
     return result;
 }
 

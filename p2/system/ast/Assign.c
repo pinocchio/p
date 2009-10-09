@@ -15,6 +15,7 @@ AST_Assign new_AST_Assign(Object variable, Object expression)
     NEW_OBJECT(AST_Assign);
     result->variable   = variable;
     result->expression = expression;
+    result->info       = empty_AST_Info;
     return result;
 }
 

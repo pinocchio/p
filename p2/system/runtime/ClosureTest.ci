@@ -7,7 +7,7 @@
 
 NEW_TEST(Runtime_Closure_evaluation)
     SKIP_TEST;
-    Type_Array body         = Empty_Type_Array;
+    Type_Array body         = empty_Type_Array;
     Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     Object closure_const    = (Object)new_AST_Constant((Object)closure);
     Type_SmallInt integer   = new_Type_SmallInt(120);
@@ -52,7 +52,7 @@ NEW_TEST(Runtime_Closure_invocation_with_arguments)
 
 
 NEW_TEST(Runtime_Closure_invocation)
-    Type_Array body         = Empty_Type_Array;
+    Type_Array body         = empty_Type_Array;
     Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     Type_Symbol test        = new_Type_Symbol(L"test");
     Type_SmallInt integer   = new_Type_SmallInt(120);
@@ -94,7 +94,7 @@ NEW_TEST(Runtime_Closure_invocation)
 
 NEW_TEST(Runtime_Closure_apply)
     // without any body element
-    Type_Array body         = Empty_Type_Array;
+    Type_Array body         = empty_Type_Array;
     Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     Object result           = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == Nil);

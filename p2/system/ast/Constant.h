@@ -7,6 +7,7 @@
 
 struct AST_Constant_t {
     Object          constant;
+    AST_Info        info;
 };
 
 CREATE_INITIALIZERS(AST_Constant)

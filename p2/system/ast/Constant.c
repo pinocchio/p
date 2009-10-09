@@ -12,7 +12,8 @@ Type_Class AST_Constant_Class;
 AST_Constant new_AST_Constant(Object constant)
 {
     NEW_OBJECT(AST_Constant);
-    result->constant      = constant;
+    result->constant = constant;
+    result->info     = empty_AST_Info;
     return result;
 }
 

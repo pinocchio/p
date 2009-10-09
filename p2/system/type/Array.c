@@ -6,13 +6,13 @@
 /* ========================================================================= */
 
 Type_Class Type_Array_Class;
-Type_Array Empty_Type_Array;
+Type_Array empty_Type_Array;
 
 /* ========================================================================= */
 
 Type_Array new_Raw_Type_Array(int c)
 {
-    if (c == 0) { return Empty_Type_Array; }
+    if (c == 0) { return empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Type_Object[c]);
     HEADER(result)      = (Object)Type_Array_Class;
     result->size        = new_Type_SmallInt(c);
@@ -21,7 +21,7 @@ Type_Array new_Raw_Type_Array(int c)
 
 Type_Array new_Type_Array(int c, Object v[])
 {
-    if (c == 0) { return Empty_Type_Array; }
+    if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
     while (0 < c) {
         c--;
@@ -32,7 +32,7 @@ Type_Array new_Type_Array(int c, Object v[])
 
 Type_Array new_Type_Array_With(int c, Object init)
 {
-    if (c == 0) { return Empty_Type_Array; }
+    if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
     while (0 < c) {
         c--;
@@ -44,8 +44,8 @@ Type_Array new_Type_Array_With(int c, Object init)
 void pre_init_Type_Array() 
 {
     Type_Array_Class         = new_Named_Class((Object)Type_Object_Class, L"Type_Array");
-    Empty_Type_Array         = NEW_t(Type_Array);
-    HEADER(Empty_Type_Array) = (Object)Type_Array_Class;
+    empty_Type_Array         = NEW_t(Type_Array);
+    HEADER(empty_Type_Array) = (Object)Type_Array_Class;
 }
 
 /* ========================================================================= */
@@ -78,7 +78,7 @@ NATIVE0(Type_Array_size)
 
 void post_init_Type_Array()
 {
-    Empty_Type_Array->size   = new_Type_SmallInt(0);
+    empty_Type_Array->size   = new_Type_SmallInt(0);
     
     store_native_method(Type_Array_Class, SMB_objectAt_,     NM_Type_Array_Type_ObjectAt_);
     store_native_method(Type_Array_Class, SMB_objectAt_put_, NM_Type_Array_Type_ObjectAt_put_);

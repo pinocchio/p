@@ -14,6 +14,7 @@ Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context
     NEW_OBJECT(Runtime_Closure);
     result->code    = code;
     result->context = context;
+    result->info    = empty_AST_Info; 
     return result;
 }
 
@@ -28,6 +29,7 @@ void pre_init_Runtime_Closure()
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                             Object class, Type_Array args)
 {
+    LOG("Closure Invoke \n");
     push_restore_env();
     
     Runtime_MethodContext env =
@@ -51,6 +53,8 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 
 
 NATIVE(Runtime_Closure_apply_)
+    LOG("Closure Apply \n");
+    
     push_restore_env();
     Runtime_Closure closure = (Runtime_Closure)self;
     ASSERT_ARG_SIZE(closure->code->paramCount->value);

@@ -8,6 +8,7 @@
 struct AST_Assign_t {
     Object          variable;
     Object          expression;
+    AST_Info        info;
 };
 
 

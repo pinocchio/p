@@ -14,6 +14,7 @@ AST_Variable new_AST_Variable(const wchar_t* name)
 {
     NEW_OBJECT(AST_Variable);
     result->name = (Object)new_Type_String(name);
+    result->info = empty_AST_Info;
     return result;
 }
 

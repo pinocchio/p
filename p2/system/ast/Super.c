@@ -15,6 +15,7 @@ AST_Super new_AST_Super(Object message, Type_Array arguments)
     NEW_OBJECT(AST_Super);
     result->message    = message;
     result->arguments  = arguments;
+    result->info       = empty_AST_Info;
     return result;
 }
 

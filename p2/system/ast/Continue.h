@@ -9,6 +9,7 @@ struct AST_Continue_t {
     Object         *EXP;
     cont           *CNT;
     Object          target;
+    AST_Info        info;
 };
 
 CREATE_INITIALIZERS(AST_Continue)

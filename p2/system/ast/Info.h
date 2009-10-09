@@ -6,13 +6,19 @@
 /* ========================================================================= */
 
 struct AST_Info_t {
-    wchar_t *   sourceIO_File;
-    int         line;
-    int         column;
+    Type_String   sourceFile;
+    Type_String   name;
+    Type_SmallInt line;
+    Type_SmallInt column;
 };
 
+extern AST_Info empty_AST_Info;
+
 CREATE_INITIALIZERS(AST_Info);
-extern AST_Info new_AST_Info(wchar_t * sourceIO_File, int line, int column);
+
+extern AST_Info new_raw_AST_Info();
+extern AST_Info new_AST_Info(Type_String sourceFile, Type_String name, 
+                      Type_SmallInt line, Type_SmallInt column);
 
 /* ========================================================================= */
 

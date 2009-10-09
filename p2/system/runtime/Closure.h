@@ -6,8 +6,9 @@
 /* ========================================================================= */
 
 struct Runtime_Closure_t {
-    AST_Block code;
+    AST_Block            code;
     Runtime_BlockContext context;
+    AST_Info             info;
 };
 
 CREATE_INITIALIZERS(Runtime_Closure)
@@ -24,10 +25,10 @@ extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 
 #define METHOD(name, paramCount, numStatements)\
 Object name() {\
-    Type_Array statements = new_Type_Array_With(numStatements, Nil);\
-    AST_Block body = new_AST_Block(paramCount, statements);\
+    Type_Array statements  = new_Type_Array_With(numStatements, Nil);\
+    AST_Block body         = new_AST_Block(paramCount, statements);\
     Runtime_Closure method = new_Runtime_Closure(body,\
-            (Runtime_BlockContext)Nil);\
+                                                (Runtime_BlockContext)Nil);\
     unsigned int _st_count = 0;
 
 #define ADD_STATEMENT(value)\

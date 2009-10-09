@@ -9,6 +9,7 @@ struct AST_Variable_t {
     unsigned int    index;
     Object          key;
     Object          name;
+    AST_Info        info;
 };
 
 CREATE_INITIALIZERS(AST_Variable)

@@ -8,13 +8,14 @@
 /* ========================================================================= */
 
 Type_Class Type_String_Class;
+Type_String empty_Type_String;
 
 /* ========================================================================= */
 
 Type_String new_Type_String(const wchar_t * str)
 {
     Type_String string = (Type_String) new_Type_Symbol(str);
-    HEADER(string)       = (Object)Type_String_Class;
+    HEADER(string)     = (Object)Type_String_Class;
     return string;
 }
 
@@ -26,7 +27,8 @@ Type_String new_Type_String_sized(unsigned int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class = new_Named_Class((Object)Type_Object_Class, L"String");
+    Type_String_Class    = new_Named_Class((Object)Type_Object_Class, L"String");
+    empty_Type_String         = new_Type_String(L"");
 }
 
 /* ========================================================================= */
@@ -60,7 +62,7 @@ NATIVE1(Type_String_concat_)
     // TODO create a expanded send  
     push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), 
                                                   (Object)SMB_asString, 
-                                                  Empty_Type_Array));
+                                                  empty_Type_Array));
 }
 
 NATIVE0(Type_String_asString)

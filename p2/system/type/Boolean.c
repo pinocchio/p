@@ -74,7 +74,7 @@ METHOD(True_ifTrue_, 1, 1)
     AST_Variable arg = new_AST_Variable(L"ifTrue");
     arg->key = (Object)body;
     arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, Empty_Type_Array);
+    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return (Object)method;
 }
@@ -84,7 +84,7 @@ METHOD(True_ifTrue_ifFalse_, 2, 1)
     AST_Variable arg = new_AST_Variable(L"ifTrue");
     arg->key = (Object)body;
     arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, Empty_Type_Array);
+    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return (Object)method;
 }
@@ -124,7 +124,7 @@ METHOD(False_ifFalse_, 1, 1)
     AST_Variable arg = new_AST_Variable(L"ifFalse");
     arg->key = (Object)body;
     arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, Empty_Type_Array);
+    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return (Object)method;
 }
@@ -134,7 +134,7 @@ METHOD(False_ifTrue_ifFalse_, 2, 1)
     AST_Variable arg = new_AST_Variable(L"ifFalse");
     arg->key = (Object)body;
     arg->index = 1;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, Empty_Type_Array);
+    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return (Object)method;
 }
