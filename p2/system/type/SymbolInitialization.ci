@@ -29,6 +29,7 @@ SMB_lookup_               = new_Type_Symbol(L"lookup:");
 SMB_lt_                   = new_Type_Symbol(L"<");
 SMB_minus_                = new_Type_Symbol(L"minus:");
 SMB_not                   = new_Type_Symbol(L"not");
+SMB_notEquals_            = new_Type_Symbol(L"notEquals:");
 SMB_objectAt_             = new_Type_Symbol(L"objectAt:");
 SMB_objectAt_putIfAbsent_ = new_Type_Symbol(L"objectAt:putIfAbsent:");
 SMB_objectAt_put_         = new_Type_Symbol(L"objectAt:put:");

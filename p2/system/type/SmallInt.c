@@ -77,6 +77,7 @@ NATIVE1(Type_SmallInt##_##name)\
 Type_SmallInt_COMPARE_OPERATION(equals_, ==);
 Type_SmallInt_COMPARE_OPERATION(lt_, <);
 Type_SmallInt_COMPARE_OPERATION(gt_, >);
+Type_SmallInt_COMPARE_OPERATION(notEquals_, !=);
 
 NATIVE0(Type_SmallInt_hash)
     // just return self
@@ -100,6 +101,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_or_,         NM_Type_SmallInt_or_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_lt_,         NM_Type_SmallInt_lt_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_gt_,         NM_Type_SmallInt_gt_);
+    store_native_method((Type_Class)Type_SmallInt_Class, SMB_notEquals_,  NM_Type_SmallInt_notEquals_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash, NM_Type_SmallInt_hash);
     
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_plus_));

@@ -50,3 +50,4 @@ extern Type_Symbol SMB_isNil;
 extern Type_Symbol SMB_isNotNil;
 extern Type_Symbol SMB_lt_;
 extern Type_Symbol SMB_gt_;
+extern Type_Symbol SMB_notEquals_;

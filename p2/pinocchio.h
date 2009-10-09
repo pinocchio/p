@@ -53,12 +53,16 @@ extern Type_Class class##_Class;
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) \
     assert(HEADER(expression)==((Object)(class)), \
-        printf("Invalid type of arguments given"));
+        printf("Invalid type of arguments given.\n");\
+        printf("Expected %ls but got %ls.", \
+                ((Type_Class)HEADER(expression))->name->value, \
+                ((Type_Class)(class))->name->value));
         
 #define ASSERT_ARG_TYPE(index, class) \
     assert(HEADER(args->values[index])==((Object)(class)), \
-        printf("Invalid argument given at %i, exptected \"%ls\" but got \"%ls\"", \
-               index, ((Type_Class)HEADER(args->values[index]))->name->value, \
+        printf("Invalid argument given at %i.\n", index);\
+        printf("Expected \"%ls\" but got \"%ls\"", \
+               ((Type_Class)HEADER(args->values[index]))->name->value, \
                ((Type_Class)(class))->name->value));
 
 // TODO make sure this is not done via c stack
