@@ -42,3 +42,8 @@ extern Object SMB_delete_;
 extern Object SMB_update;
 extern Object SMB_ifTrue_else_;
 extern Object SMB_ifFalse_else_;extern Object SMB_apply;
+extern Object SMB_ifTrue_ifFalse_;
+extern Object SMB_whileTrue_;
+extern Object SMB_whileFalse_;
+extern Object SMB_whileNil_;
+extern Object SMB_isNil;

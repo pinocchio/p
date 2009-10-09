@@ -33,6 +33,10 @@ NATIVE0(Type_Object_asString)
     // TODO
 }
 
+NATIVE(Type_Object_isNil)
+    push_EXP(False);
+}
+
 /* ========================================================================= */
 
 void post_init_Type_Object()
@@ -44,5 +48,6 @@ void post_init_Type_Object()
     Type_Object_Class->methods = new_Type_Dictionary();
     
     store_native_method((Type_Class)Type_Object_Class, SMB_equals_, NM_Type_Object_equals);
+    store_native_method((Type_Class)Type_Object_Class, SMB_isNil,   NM_Type_Object_isNil);
     
 }

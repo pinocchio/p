@@ -53,12 +53,6 @@ Type_Boolean get_bool(bool value)
 
 /* ========================================================================= */
 
-NATIVE0(Type_Boolean_asBoolean)
-    // just push myself
-}
-
-/* ========================================================================= */
-
 NATIVE0(True_asString)
     push_EXP(new_Type_String(L"#True"));
 }
@@ -67,15 +61,36 @@ NATIVE0(True_asSmallInt)
     push_EXP(new_Type_SmallInt(1));
 }
 
-NATIVE1(True_ifFalse_)}
-
-NATIVE1(True_ifTrue_)
-
-}
-
 NATIVE(True_not)
     push_EXP(False);
 }
+
+NATIVE1(True_ifFalse_)
+    push_EXP(Nil);
+}
+
+NATIVE1(True_ifTrue_)
+    push_EXP(args->values[0]);
+    push_CNT(send_Eval);
+}
+
+NATIVE2(True_ifTrue_ifFalse_)
+    push_EXP(args->values[0]);
+    push_CNT(send_Eval);
+}
+
+/* ========================================================================= */
+
+void post_init_Type_True()
+{
+    store_native_method(True_Class, SMB_ifTrue_,            NM_True_ifTrue_);
+    store_native_method(True_Class, SMB_ifFalse_,           NM_True_ifFalse_);
+    store_native_method(True_Class, SMB_ifTrue_ifFalse_,    NM_True_ifTrue_ifFalse_);
+    store_native_method(True_Class, SMB_not,                NM_True_not);
+    store_native_method(True_Class, SMB_asString,           NM_True_asString);
+    store_native_method(True_Class, SMB_asSmallInt,         NM_True_asSmallInt);
+}
+
 
 /* ========================================================================= */
 
@@ -87,35 +102,45 @@ NATIVE0(False_asSmallInt)
     push_EXP(new_Type_SmallInt(0));
 }
 
-NATIVE1(False_ifTrue_)}
-
-NATIVE1(False_ifFalse_)
-
-}
-
 NATIVE(False_not)
     push_EXP(True);
 }
 
-/* ========================================================================= */
-
-void post_init_Type_True()
-{
-    store_native_method(True_Class, SMB_ifTrue_,    NM_True_ifTrue_);
-    store_native_method(True_Class, SMB_ifFalse_,   NM_True_ifFalse_);
-    store_native_method(True_Class, SMB_not,        NM_True_not);
-    store_native_method(True_Class, SMB_asString,   NM_True_asString);
-    store_native_method(True_Class, SMB_asSmallInt, NM_True_asSmallInt);
+NATIVE1(False_ifTrue_)
+    push_EXP(Nil);
 }
+
+NATIVE1(False_ifFalse_)
+    push_EXP(args->values[0]);
+    push_CNT(send_Eval);
+}
+
+NATIVE2(False_ifTrue_ifFalse_)
+    push_EXP(args->values[1]);
+    push_CNT(send_Eval);
+}
+
+/* ========================================================================= */
 
 void post_init_Type_False()
 {
-    store_native_method(False_Class, SMB_ifTrue_,    NM_False_ifTrue_);
-    store_native_method(False_Class, SMB_ifFalse_,   NM_False_ifFalse_);
-    store_native_method(False_Class, SMB_not,        NM_False_not);
-    store_native_method(False_Class, SMB_asString,   NM_False_asString);
-    store_native_method(False_Class, SMB_asSmallInt, NM_False_asSmallInt);
+    store_native_method(False_Class, SMB_ifTrue_,           NM_False_ifTrue_);
+    store_native_method(False_Class, SMB_ifFalse_,          NM_False_ifFalse_);
+    store_native_method(False_Class, SMB_ifTrue_ifFalse_,   NM_False_ifTrue_ifFalse_);
+    store_native_method(False_Class, SMB_not,               NM_False_not);
+    store_native_method(False_Class, SMB_asString,          NM_False_asString);
+    store_native_method(False_Class, SMB_asSmallInt,        NM_False_asSmallInt);
 }
+
+
+/* ========================================================================= */
+
+NATIVE0(Type_Boolean_asBoolean)
+    // just push myself
+}
+
+/* ========================================================================= */
+
 
 void post_init_Type_Boolean()
 {

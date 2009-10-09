@@ -127,6 +127,7 @@ NEW_TEST(Runtime_Closure_apply)
     assert0(result == (Object)integer7);
 }
 
+
 /* ========================================================================= */
 
 TEST_SUITE(Runtime_Closure,

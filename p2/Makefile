@@ -4,8 +4,8 @@ CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
 CIFILES=$(wildcard *.ci)
 HFILES+=$(CFILES:%.c=%.h)
 
-TEST_CIFILES=$(wildcard system/*/*Test.ci)
-TEST_CFILES=pinocchioTest.c
+TEST_CIFILES=$(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
+TEST_CFILES=test/pinocchioTest.c
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
 CFLAGS+=-I. -O3 -lgc -Wall
