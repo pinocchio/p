@@ -13,7 +13,7 @@ Type_Class AST_Variable_Class;
 AST_Variable new_AST_Variable(const wchar_t* name)
 {
     NEW_OBJECT(AST_Variable);
-    /* TODO add name */
+    result->name = (Object)new_Type_String(name);
     return result;
 }
 
