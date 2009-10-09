@@ -23,7 +23,11 @@ run: $(TARGET)
 	./$(TARGET)
 
 test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
+	CFLAGS="-DTEST" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make run
+
+vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 	CFLAGS="-DTEST -DTEST_FAIL" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make run
+
 
 clean:
 	rm -rf $(ALLOBJECTS) $(TARGET) make.depend
@@ -37,7 +41,7 @@ tags: $(SOURCES)
 	ctags -R .
 
 
-.PHONY: test
+.PHONY: test vtest run clean profile
 
 include make.depend
 

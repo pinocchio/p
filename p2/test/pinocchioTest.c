@@ -98,9 +98,9 @@ Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
     return Eval_Send(self, symbol, new_Type_Array_With(1, arg));
 }
 
-Object Eval_Send2(Object self, Type_Symbol symbol, Object arg,  Object arg2)
+Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 {
-    Type_Array args = new_Type_Array_With(2, arg);
+    Type_Array args = new_Type_Array_With(2, arg1);
     args->values[1] = arg2;
     return Eval_Send(self, symbol, args);
 }

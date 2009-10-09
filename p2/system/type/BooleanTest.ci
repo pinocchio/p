@@ -44,7 +44,7 @@ NEW_TEST(Type_Boolean_True_ifFalse)
 NEW_TEST(Type_Boolean_True_ifTrue_ifFalse)
     TYPE_BOOLEAN_TEST_SETUP;
     TYPE_BOOLEAN_IFTRUE_IFFALSE_TEST_SETUP;
-    result = Eval_Send2((Object)False, SMB_ifTrue_ifFalse_, (Object)arg, (Object)arg2);
+    result = Eval_Send2((Object)True, SMB_ifTrue_ifFalse_, (Object)arg, (Object)arg2);
     assert0(result == (Object)integer);
 }
 

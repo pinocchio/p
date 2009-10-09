@@ -101,7 +101,6 @@ void post_init_Type_True()
     store_native_method(True_Class, SMB_asSmallInt,         NM_True_asSmallInt);
 }
 
-
 /* ========================================================================= */
 
 NATIVE0(False_asString)
