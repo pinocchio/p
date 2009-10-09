@@ -1,7 +1,7 @@
 
 NEW_TEST(Type_Nil_init)
     ASSERT_TYPE(Nil, Type_Nil_Class);
-
+    assert0(HEADER(Nil) == (Object)Type_Nil_Class);
 }
 
 NEW_TEST(Type_Nil_isNil)
