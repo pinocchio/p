@@ -13,12 +13,13 @@ void pre_init_Type_Object()
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
-    // do manually instanciate since we canno use dict yet
+    // do manually instanciate since we cannot use dict yet
     Type_Class_Class          = NEW_t(Type_Class);
+    Type_Object_Class         = NEW_t(Type_Class);
+    
     HEADER(Type_Class_Class)  = (Object)Type_Class_Class;
     Type_Class_Class->super   = (Object)Type_Object_Class;
     
-    Type_Object_Class         = NEW_t(Type_Class);
     HEADER(Type_Object_Class) = (Object) Type_Class_Class;
     Type_Object_Class->super  = Nil;
 }

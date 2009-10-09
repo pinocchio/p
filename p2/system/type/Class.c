@@ -64,7 +64,7 @@ void Method_invoke(Object method, Object self, Object class, Type_Array args) {
 void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
                     Object msg, Type_Array args)
 {
-    //printf("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
+    LOG("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
     //printf("%i\n", ((Type_SmallInt)self)->value);
     //printf("%i\n", ((Type_SmallInt)peek_EXP(1))->value);
     
@@ -88,7 +88,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
     while (class != Nil) {
         LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
         Type_Dictionary mdict = ((Type_Class) class)->methods;
-        method = Type_Dictionary_lookup(mdict, msg);
+        method                = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             Object super = ((Type_Class) class)->super;
 			assert((class != super), printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
@@ -96,7 +96,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 							((Type_Symbol)msg)->value));
 			class = super;
         } else {
-            //TODO create second level  cache to directly store the misses
+            //TODO create second level cache to directly store the misses
             cache->type   = class;
             cache->method = method;
             return Method_invoke(method, self, class, args);
