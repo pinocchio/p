@@ -48,3 +48,5 @@ extern Type_Symbol SMB_whileFalse_;
 extern Type_Symbol SMB_whileNil_;
 extern Type_Symbol SMB_isNil;
 extern Type_Symbol SMB_isNotNil;
+extern Type_Symbol SMB_lt_;
+extern Type_Symbol SMB_gt_;

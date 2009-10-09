@@ -49,3 +49,5 @@ Type_Symbol SMB_whileFalse_;
 Type_Symbol SMB_whileNil_;
 Type_Symbol SMB_isNil;
 Type_Symbol SMB_isNotNil;
+Type_Symbol SMB_lt_;
+Type_Symbol SMB_gt_;
