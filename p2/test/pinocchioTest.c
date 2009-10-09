@@ -42,7 +42,7 @@ void test_suite_end(char * suiteName)
     #endif
     if (TEST_CASE_FAILED) {
         /* reads out contents of pipe to the error_buffer */
-        read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
+        //read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
         dup2(saved_stdout, STDOUT_FILENO);
         printf("\033[31m===================================================================\033[0m\n");
         printf(">>> \033[31m%s\033[0m \033[100D\033[60C[\033[31mERROR\033[0m]\n", suiteName);

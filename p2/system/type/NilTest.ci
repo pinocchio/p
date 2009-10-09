@@ -11,7 +11,7 @@ NEW_TEST(Type_Nil_isNil)
 
 NEW_TEST(Type_Nil_isNotNil)
     Object result = Eval_Send0(Nil, SMB_isNotNil);
-    assert0(result == (Object)True);
+    assert0(result == (Object)False);
 }
 
 NEW_TEST(Type_Nil_asString)
