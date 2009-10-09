@@ -23,6 +23,7 @@ SMB_ifTrue_               = new_Type_Symbol(L"ifTrue:");
 SMB_ifTrue_else_          = new_Type_Symbol(L"ifTrue:else:");
 SMB_ifTrue_ifFalse_       = new_Type_Symbol(L"ifTrue:ifFalse:");
 SMB_isNil                 = new_Type_Symbol(L"isNil");
+SMB_isNotNil              = new_Type_Symbol(L"isNotNil");
 SMB_lookup_               = new_Type_Symbol(L"lookup:");
 SMB_minus_                = new_Type_Symbol(L"minus:");
 SMB_not                   = new_Type_Symbol(L"not");

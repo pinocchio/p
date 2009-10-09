@@ -25,10 +25,15 @@ NATIVE(Type_Nil_isNil)
     push_EXP(True);
 }
 
+NATIVE(Type_Nil_isNotNil)
+    push_EXP(False);
+}
+
 /* ========================================================================= */
 
 void post_init_Type_Nil()
 {
     store_native_method(Nil_Class, SMB_asString, NM_Type_Nil_asString);
     store_native_method(Nil_Class, SMB_isNil,    NM_Type_Nil_isNil);
+    store_native_method(Nil_Class, SMB_isNotNil, NM_Type_Nil_isNotNil);
 }

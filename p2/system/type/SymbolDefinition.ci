@@ -48,3 +48,4 @@ Type_Symbol SMB_whileTrue_;
 Type_Symbol SMB_whileFalse_;
 Type_Symbol SMB_whileNil_;
 Type_Symbol SMB_isNil;
+Type_Symbol SMB_isNotNil;
