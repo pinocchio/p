@@ -36,6 +36,9 @@ profile:
 tags: $(SOURCES)
 	ctags -R .
 
+
+.PHONY: test
+
 include make.depend
 
 make.depend: $(SOURCES)
