@@ -57,7 +57,14 @@ extern Type_Class class##_Class;
         printf("Expected %ls but got %ls.", \
                 ((Type_Class)HEADER(expression))->name->value, \
                 ((Type_Class)(class))->name->value));
-        
+
+#define ASSERT_INSTANCE_OF(expression, class)\
+    assert(isInstance((expression), (Object)(class)), \
+        printf("Invalid argument type.\n"); \
+        printf("Expected %ls but got %ls.", \
+                ((Type_Class)HEADER(expression))->name->value, \
+                ((Type_Class)(class))->name->value));
+    
 #define ASSERT_ARG_TYPE(index, class) \
     assert(HEADER(args->values[index])==((Object)(class)), \
         printf("Invalid argument given at %i.\n", index);\

@@ -1,6 +1,16 @@
 
+NEW_TEST(Type_Class_instanceOf)
+    Type_SmallInt int1 = new_Type_SmallInt(1);
+    assert0(isInstance((Object)int1, (Object)Type_SmallInt_Class));
+    
+    assert0(isInstance((Object)False, (Object)False_Class));
+    assert0(isInstance((Object)False, (Object)Type_Boolean_Class));
+}
+
+
 /* ========================================================================= */
 
 TEST_SUITE(Type_Class,
 {
+    RUN_TEST(Type_Class_instanceOf)
 })

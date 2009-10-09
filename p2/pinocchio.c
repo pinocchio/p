@@ -117,6 +117,22 @@ Object Eval(Object code)
 
 /* ========================================================================= */
 
+bool isInstance(Object object, Object class) 
+{
+    // TODO check for MetaClass stuff
+    ASSERT_TYPE(class, Type_Class_Class);
+    Object type = HEADER(object);
+    while (type != Nil) {
+        if ((Object)type == class) {
+            return 1;
+        }
+        type = ((Type_Class) type)->super;
+    }
+    return 0;
+}
+
+/* ========================================================================= */
+
 int main()
 {
 	#include <pinocchioPreInit.ci>

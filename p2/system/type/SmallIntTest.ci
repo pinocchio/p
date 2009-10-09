@@ -59,7 +59,7 @@ NEW_TEST(Type_SmallInt_##name##_) \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
     result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
-    ASSERT_TYPE(result, Type_Boolean_Class); \
+    ASSERT_INSTANCE_OF(result, Type_Boolean_Class); \
    \
     printf("%ls\n", ((Type_Boolean)result)->value ? L"True" : L"False"); \
     assert(((Type_Boolean)result) == get_bool(int4->value op int8->value), \

@@ -64,13 +64,15 @@ Type_SmallInt_BINARY_OPERATION(or_,         |);
 NATIVE1(Type_SmallInt##_##name)\
     if (HEADER(args->values[0]) == (Object)Type_SmallInt_Class) {\
         Type_SmallInt number = ((Type_SmallInt) self);\
-        if (number->value op ((Type_SmallInt) args->values[0])->value) {\
+        Type_SmallInt otherNumber = (Type_SmallInt) args->values[0]; \
+        LOG("%i %s %i", number->value, #op, otherNumber->value); \
+        if (number->value op otherNumber->value) {\
             push_EXP(True);\
         } else {\
             push_EXP(False);\
         }\
     } else {\
-        NM_Type_Object_equals(self, class, args);\
+        assert1(NULL, "Invalid Type for SmallInt Boolean BinOP\n"); \
     }\
 }
 

@@ -21,3 +21,4 @@ wchar_t * Object_classname(Object self)
     return ((Type_String)((Type_Class)HEADER(self))->name)->value;
 }
 
+
