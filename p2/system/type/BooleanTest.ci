@@ -23,6 +23,7 @@ NEW_TEST(true_ifTrue)
     Runtime_Closure arg = new_Runtime_Closure(new_AST_Block(0, body),
                                               (Runtime_BlockContext)Nil);
     result = Eval_Send1((Object)True, SMB_ifTrue_, (Object)arg);
+    assert0(result == integer);
 }
 
 /* ========================================================================= */
