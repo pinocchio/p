@@ -50,6 +50,8 @@ extern Object Eval_SendConst(Object self, Type_Symbol symbol, Type_Array args);
 extern Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args);
 extern Object Eval_Send0(Object self, Type_Symbol symbol);
 extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
+extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg,  Object arg2);
+
 
 /* ========================================================================= */
 
