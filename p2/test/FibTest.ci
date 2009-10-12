@@ -47,7 +47,7 @@ METHOD(fib_method, 0, 1)
     AST_Send ifElse = new_AST_Send((Object)test, (Object)SMB_ifTrue_ifFalse_, ifElse_args);
     ADD_STATEMENT(ifElse);
     
-    return (Object)method;
+    return method;
 }
 
 int cfib (int a) {
@@ -60,7 +60,7 @@ int cfib (int a) {
 TEST_SUITE(Fib, 
 {
     SMB_fib = new_Type_Symbol(L"fib:");
-    store_method(Type_SmallInt_Class, SMB_fib, fib_method());
+    store_closure(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
     result = Eval_Send0((Object)new_Type_SmallInt(1), SMB_fib);
     assert0(((Type_SmallInt)result)->value == cfib(1));

@@ -24,7 +24,7 @@ extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 /* ========================================================================= */
 
 #define METHOD(fName, paramCount, numStatements)\
-Object fName() {\
+Runtime_Closure fName() {\
     Type_Array statements  = new_Type_Array_With(numStatements, Nil);\
     AST_Block body         = new_AST_Block(paramCount, statements);\
     Runtime_Closure method = new_Runtime_Closure(body,\

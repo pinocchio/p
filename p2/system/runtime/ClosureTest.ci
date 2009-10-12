@@ -128,6 +128,17 @@ NEW_TEST(Runtime_Closure_apply)
 }
 
 
+METHOD(Runtime_Closure_MACRO_method,0,1)
+    ADD_STATEMENT(Self);
+    return method;
+}
+
+NEW_TEST(Runtime_Closure_MACRO)
+    Runtime_Closure closure = Runtime_Closure_MACRO_method();
+    assert0(closure->code->body->size->value == 1);
+    assert0(closure->code->body->values[0] == Self);
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(Runtime_Closure,
@@ -136,5 +147,6 @@ TEST_SUITE(Runtime_Closure,
     RUN_TEST(Runtime_Closure_invocation);
     RUN_TEST(Runtime_Closure_evaluation);
     RUN_TEST(Runtime_Closure_apply);
+    RUN_TEST(Runtime_Closure_MACRO);
 })
 
