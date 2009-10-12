@@ -45,7 +45,7 @@ void pre_init_Runtime_BlockContext()
 
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                  unsigned int index, Object key)
-{    
+{
     while ((Object)self->closure->code != key && (Object)self->closure->context != Nil) {
         if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
             self = (Runtime_BlockContext)self->closure->context;

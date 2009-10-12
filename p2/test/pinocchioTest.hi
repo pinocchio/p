@@ -22,5 +22,3 @@
 #include <system/ast/BlockTest.ci>
 #include <system/type/NilTest.ci>
 #include <system/ast/InfoTest.ci>
-
-#include <test/FibTest.ci>

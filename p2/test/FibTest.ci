@@ -1,4 +1,3 @@
-
 Type_Symbol SMB_fib;
 
 METHOD(fib_method, 0, 1)
@@ -53,12 +52,18 @@ int cfib (int a) {
     return cfib(a-1) + cfib(a-2);
 }
 
-TEST_SUITE(Fib, 
+void run_FibTest() 
 {
     SMB_fib = new_Type_Symbol(L"fib:");
     store_closure(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
-    result = Eval_Send0((Object)new_Type_SmallInt(4), SMB_fib);
-    assert0(((Type_SmallInt)result)->value == cfib(4));
     
-});
+    int i = 30;
+    //scanf("%i", &i);
+    result = (Object)Eval(
+                (Object)new_AST_Send(
+                    (Object)new_AST_Constant((Object)new_Type_SmallInt(i)), 
+                    (Object)SMB_fib, empty_Type_Array));
+    assert0(((Type_SmallInt)result)->value == cfib(i));
+    printf("%i\n", ((Type_SmallInt)result)->value);
+}

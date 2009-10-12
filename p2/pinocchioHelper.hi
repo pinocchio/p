@@ -12,21 +12,21 @@ extern jmp_buf Assert_Fail;
 
 #define assert(test, message) \
 if (!(test)) {\
-	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
-	message; \
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    message; \
     ASSERT_HANDLER;\
 }
 
 #define assert0(test)\
 if (!(test)) {\
-	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     ASSERT_HANDLER; \
 }
 
 #define assert1(test, message)  \
 if (!(test)) { \
-	printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
-	printf(message); \
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    printf(message); \
     ASSERT_HANDLER;\
 }
 

@@ -133,6 +133,10 @@ bool isInstance(Object object, Object class)
 
 /* ========================================================================= */
 
+#include <test/FibTest.ci>
+
+/* ========================================================================= */
+
 int main()
 {
 	#include <pinocchioPreInit.ci>
@@ -144,6 +148,7 @@ int main()
         #ifdef TEST
         run_tests();
         #endif
+        run_FibTest();
     }
     
     return EXIT_SUCCESS;
