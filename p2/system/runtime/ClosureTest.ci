@@ -137,6 +137,9 @@ NEW_TEST(Runtime_Closure_MACRO)
     Runtime_Closure closure = Runtime_Closure_MACRO_method();
     assert0(closure->code->body->size->value == 1);
     assert0(closure->code->body->values[0] == Self);
+    printf("%ls", closure->info->name->value);
+    assert(wcscmp(closure->info->name->value, L"Runtime_Closure_MACRO_method")==0, 
+        printf("%ls", closure->info->name->value));
 }
 
 /* ========================================================================= */

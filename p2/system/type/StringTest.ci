@@ -45,6 +45,12 @@ NEW_TEST(Type_String_asArray)
 }
 
 
+NEW_TEST(Type_String_char2Type_String)
+    Type_String string = char2Type_String("abc");
+    assert(string->size->value == 3,          printf("%i", string->size->value));
+    assert(wcscmp(string->value, L"abc") == 0,printf("%ls", string->value));
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(Type_String,
@@ -53,4 +59,5 @@ TEST_SUITE(Type_String,
     RUN_TEST(Type_String_asSymbol);
     RUN_TEST(Type_String_concat_);
     RUN_TEST(Type_String_asArray);
+    RUN_TEST(Type_String_char2Type_String);
 })

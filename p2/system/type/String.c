@@ -37,7 +37,7 @@ void pre_init_Type_String()
 Type_String char2Type_String(const char * input)
 {
     // TODO
-    int size             = strlen(input);
+    int size             = strlen(input)+1;
     wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
     swprintf(wchar_copy, size, L"%s", input);
     Type_String result   =  new_Type_String(wchar_copy);
