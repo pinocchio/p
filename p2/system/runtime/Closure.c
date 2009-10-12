@@ -32,7 +32,13 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                             Object class, Type_Array args)
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
-    push_restore_env();
+     
+    if (closure->code->body->size->value == 0) { 
+        poke_EXP(1, self);
+        return; 
+    }
+    
+    push_restore_env(); // pokes EXP
     
     Runtime_MethodContext env =
         new_Runtime_MethodContext(closure, self, class, NULL, args);
@@ -40,10 +46,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     env->home_context = env;
     
     Env = (Object)env;
-    if (closure->code->body->size->value == 0) { 
-        push_EXP(self);
-        return; 
-    }
+
     
     if (1 < closure->code->body->size->value) {
         push_CNT(AST_Block_continue);
@@ -57,19 +60,19 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 NATIVE(Runtime_Closure_apply_)
     LOG("Closure Apply \n");
     
-    push_restore_env();
     Runtime_Closure closure = (Runtime_Closure)self;
+    if (closure->code->body->size->value == 0) { 
+        poke_EXP(1, Nil);
+        return; 
+    }
+    
+    push_restore_env();  // pokes EXP
     ASSERT_ARG_SIZE(closure->code->paramCount->value);
     
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
     env->home_context = closure->context->home_context;
     
     Env = (Object)env;
-    
-    if (closure->code->body->size->value == 0) { 
-        push_EXP(Nil);
-        return; 
-    }
     
     if (1 < closure->code->body->size->value) {
         push_CNT(AST_Block_continue);

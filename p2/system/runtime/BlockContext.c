@@ -95,7 +95,7 @@ void push_restore_env()
 
 CNT(restore_env)
     Object result = pop_EXP();
-    Env = peek_EXP(1);
+    Env           = peek_EXP(1);
     poke_EXP(1, result);
 }
 

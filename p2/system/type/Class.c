@@ -115,6 +115,14 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 
 void print_Class(Object obj)
 {
+    if (obj == NULL) {
+        printf("NULL");
+        return;
+    }
+    if (obj == Nil) {
+        printf("Nil");
+        return;
+    }
     Type_Class class = (Type_Class)HEADER(obj);
     assert0(class != NULL || (Object)class != Nil);
     printf("Class: %ls\n", class->name->value);

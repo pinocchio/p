@@ -27,7 +27,7 @@ void pre_init_AST_Super()
 /* ========================================================================= */
 
 CNT(AST_Super_send) 
-    Object class = pop_EXP();
+    Object class    = pop_EXP();
     Object receiver = pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
     
@@ -40,6 +40,7 @@ CNT(AST_Super_send)
 }
 
 CNT(push_env_class)
+    // TODO directly inline it
     Object env = (Object)current_env();
     assert0(IS_CONTEXT(env));
     push_EXP(((Runtime_BlockContext)env)->home_context->class);

@@ -18,15 +18,15 @@ void pre_init_Type_Nil()
 /* ========================================================================= */
 
 NATIVE(Type_Nil_asString)
-    push_EXP(new_Type_String(L"Nil"));
+    poke_EXP(1, new_Type_String(L"Nil"));
 }
 
 NATIVE(Type_Nil_isNil)
-    push_EXP(True);
+    poke_EXP(1, True);
 }
 
 NATIVE(Type_Nil_isNotNil)
-    push_EXP(False);
+    poke_EXP(1, False);
 }
 
 /* ========================================================================= */

@@ -31,9 +31,6 @@ CNT(AST_Send_send)
     Type_Array args = (Type_Array)pop_EXP();
     
     AST_Send self   = (AST_Send)peek_EXP(1);
-    // insert the receiver at the old ast_send position
-    poke_EXP(1, receiver);
-
     Type_Class_dispatch(&self->cache, receiver, HEADER(receiver),
                     self->message, args);
 }

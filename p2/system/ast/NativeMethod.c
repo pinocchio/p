@@ -28,7 +28,7 @@ void pre_init_AST_Native_Method()
 void AST_Native_Method_invoke(AST_Native_Method method, Object self,
                               Object class, Type_Array args)
 {
-    LOG("Native Method invoke");
+    LOG("Native Method invoke\n");
     method->code(self, class, args);
 }
 

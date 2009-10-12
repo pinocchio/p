@@ -54,11 +54,11 @@ void initialize_Symbol()
 NATIVE1(Type_Symbol_objectAt_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
-    push_EXP(new_Type_Character(((Type_Symbol) self)->value[index->value]));
+    poke_EXP(1, new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
 NATIVE0(Type_Symbol_asString)
-    push_EXP(new_Type_String(((Type_Symbol)self)->value));
+    poke_EXP(1, new_Type_String(((Type_Symbol)self)->value));
 }
 
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
@@ -73,7 +73,7 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 }
 
 NATIVE0(Type_Symbol_asArray)
-    push_EXP(Type_Symbol_asArray((Type_Symbol)self));
+    poke_EXP(1, Type_Symbol_asArray((Type_Symbol)self));
 }
 
 
@@ -89,12 +89,12 @@ int Type_Symbol_hash(const wchar_t* symbol_string)
 }
 
 NATIVE0(Type_Symbol_hash)
-    push_EXP(new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
+    poke_EXP(1, new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
 }
 
 
 NATIVE0(Type_Symbol_size)
-    push_EXP(((Type_Symbol)self)->size);
+    poke_EXP(1, ((Type_Symbol)self)->size);
 }
 
 NATIVE1(Type_Symbol_indexOf_)

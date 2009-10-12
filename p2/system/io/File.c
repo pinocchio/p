@@ -73,7 +73,7 @@ int IO_File_size(IO_File file) {
 }
 
 NATIVE0(IO_File_size)
-    push_EXP(new_Type_SmallInt(IO_File_size((IO_File)self)));
+    poke_EXP(1, new_Type_SmallInt(IO_File_size((IO_File)self)));
 }
 
 void IO_File_readCharacter(IO_File file, wchar_t* result) {
@@ -119,7 +119,7 @@ int IO_File_atEnd(IO_File file) {
 }
 
 NATIVE0(IO_File_atEnd)
-    push_EXP(get_bool(IO_File_atEnd((IO_File)self)));
+    poke_EXP(1, get_bool(IO_File_atEnd((IO_File)self)));
 }
 
 Type_String IO_File_readAll(IO_File file) {
@@ -134,7 +134,7 @@ Type_String IO_File_readAll(IO_File file) {
 }
 
 NATIVE0(IO_File_readAll)
-    push_EXP(IO_File_readAll((IO_File)self));
+    poke_EXP(1, IO_File_readAll((IO_File)self));
 }
 
 Type_Character IO_File_read(IO_File file) {
@@ -145,7 +145,7 @@ Type_Character IO_File_read(IO_File file) {
 }
              
 NATIVE0(IO_File_read)
-   push_EXP(IO_File_read((IO_File)self));
+   poke_EXP(1, IO_File_read((IO_File)self));
 }
                       
 void IO_File_write_(IO_File file, Type_Character chr) {
@@ -157,6 +157,7 @@ void IO_File_write_(IO_File file, Type_Character chr) {
 NATIVE1(IO_File_write_)
     ASSERT_ARG_TYPE(1, Type_Character_Class);
     IO_File_write_((IO_File)self, (Type_Character)args->values[0]);
+    poke_EXP(1, self);
 }
 
 void IO_File_writeAll_(IO_File file, Type_String string) {
@@ -170,6 +171,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
             
 NATIVE1(IO_File_writeAll_)
     IO_File_writeAll_((IO_File)self, (Type_String)args->values[0]);
+    poke_EXP(1, self);
 }
 /* ========================================================================= */
 

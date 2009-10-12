@@ -67,9 +67,9 @@ NATIVE1(Type_SmallInt##_##name)\
         Type_SmallInt otherNumber = (Type_SmallInt) args->values[0]; \
         LOG("%i %s %i", number->value, #op, otherNumber->value); \
         if (number->value op otherNumber->value) {\
-            push_EXP(True);\
+            poke_EXP(1, True);\
         } else {\
-            push_EXP(False);\
+            poke_EXP(1, False);\
         }\
     } else {\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP\n"); \
@@ -82,7 +82,7 @@ Type_SmallInt_COMPARE_OPERATION(gt_, >);
 Type_SmallInt_COMPARE_OPERATION(notEquals_, !=);
 
 NATIVE0(Type_SmallInt_hash)
-    // just return self
+    poke_EXP(1, self); 
 }
 
 /* ========================================================================= */
@@ -104,7 +104,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_lt_,         NM_Type_SmallInt_lt_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_gt_,         NM_Type_SmallInt_gt_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_notEquals_,  NM_Type_SmallInt_notEquals_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash, NM_Type_SmallInt_hash);
+    store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash,        NM_Type_SmallInt_hash);
     
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_plus_));
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_minus_));

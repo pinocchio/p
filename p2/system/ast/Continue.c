@@ -31,7 +31,7 @@ NATIVE1(AST_Continue_eval)
     // TODO restore the env
     
     // insert the continuation
-    push_EXP(args->values[0]);
+    poke_EXP(1, args->values[0]);
     //push_CNT(send_Eval);
 }
 

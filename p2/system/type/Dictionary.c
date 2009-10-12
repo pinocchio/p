@@ -69,12 +69,12 @@ NATIVE1(Type_Dictionary_Type_ObjectAt_)
     if(!result) {
         result = Nil;
     }
-    push_EXP(result);
+    poke_EXP(1, result);
 }
 
 NATIVE2(Type_Dictionary_Type_ObjectAt_put_)
     Type_Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
-    push_EXP(args->values[1]);
+    poke_EXP(1, args->values[1]);
 }
 
 /* ========================================================================= */

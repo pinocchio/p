@@ -54,19 +54,19 @@ Type_Boolean get_bool(bool value)
 /* ========================================================================= */
 
 NATIVE0(True_asString)
-    push_EXP(new_Type_String(L"#True"));
+    poke_EXP(1, new_Type_String(L"#True"));
 }
 
 NATIVE0(True_asSmallInt)
-    push_EXP(new_Type_SmallInt(1));
+    poke_EXP(1, new_Type_SmallInt(1));
 }
 
 NATIVE(True_not)
-    push_EXP(False);
+    poke_EXP(1, False);
 }
 
 NATIVE1(True_ifFalse_)
-    push_EXP(Nil);
+    poke_EXP(1, Nil);
 }
 
 METHOD(True_ifTrue_, 1, 1)
@@ -104,19 +104,19 @@ void post_init_Type_True()
 /* ========================================================================= */
 
 NATIVE0(False_asString)
-    push_EXP(new_Type_String(L"#False"));
+    poke_EXP(1, new_Type_String(L"#False"));
 }
 
 NATIVE0(False_asSmallInt)
-    push_EXP(new_Type_SmallInt(0));
+    poke_EXP(1, new_Type_SmallInt(0));
 }
 
 NATIVE(False_not)
-    push_EXP(True);
+    poke_EXP(1, True);
 }
 
 NATIVE1(False_ifTrue_)
-    push_EXP(Nil);
+    poke_EXP(1, Nil);
 }
 
 METHOD(False_ifFalse_, 1, 1)
@@ -155,7 +155,7 @@ void post_init_Type_False()
 /* ========================================================================= */
 
 NATIVE0(Type_Boolean_asBoolean)
-    // just push myself
+    poke_EXP(1, self);
 }
 
 /* ========================================================================= */

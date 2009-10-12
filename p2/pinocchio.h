@@ -80,10 +80,18 @@ extern Type_Class class##_Class;
 /* ========================================================================= */
 
 #define push_EXP(value)         (*(_EXP_++) = ((Object)value)); \
-                                printf("Pushing Object with ");(print_Class((Object)value));
-#define pop_EXP()               (*(--_EXP_))
+                                printf("    Pushing[%i] Object with ", (_EXP_-Double_Stack));\
+                                (print_Class((Object)value));
+                                
+#define pop_EXP()               (*(--_EXP_)); \
+                                printf("    Popping[%i] Object with ", (_EXP_-Double_Stack));\
+                                print_Class(*_EXP_);
+                                
 #define peek_EXP(depth)         (*(_EXP_ - depth))
-#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
+#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value)); \
+                                printf("    Peeking[%i] Object with ", (_EXP_-Double_Stack-depth));\
+                                (print_Class((Object)value));
+                                
 #define zap_EXP()               (_EXP_--);
 
 #define push_CNT(value)         (*(_CNT_--) = ((cont)CNT_##value));

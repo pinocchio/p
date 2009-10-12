@@ -13,8 +13,8 @@
 
 #define NEW_TEST(name) void test_##name() {\
 	LOG("\n\033[33m++\033[0m %s() \033[100D\033[60C\033[33m++\033[0m\n", __FUNCTION__);\
-    LOG("\033[33m++\033[0m     %s:%u \033[100D\033[60C\033[33m++\033[0m\n", __FILE__, __LINE__);
-
+    LOG("\033[33m++\033[0m     %s:%u \033[100D\033[60C\033[33m++\033[0m\n", __FILE__, __LINE__);\
+    ASSERT_EMPTY_STACK;
 
 #define NEW_CLASS_TEST(name) void name() {\
 LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"); \
@@ -47,8 +47,8 @@ extern void run_tests();
 
 #define ASSERT_EMPTY_STACK \
     assert(_EXP_ == &Double_Stack[0], {\
-           printf("Stack should be empty but found Object at %li with ", (_EXP_-Double_Stack));\
-           print_Class(*_EXP_);\
+           printf("Stack should be empty but found Object at %i with \n    ", (_EXP_-Double_Stack));\
+           print_Class(peek_EXP(1));\
            }); \
     assert0(_CNT_ == (cont *)  &Double_Stack[STACK_SIZE - 1]);
 

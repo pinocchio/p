@@ -27,7 +27,7 @@ void pre_init_Type_Object()
 /* ========================================================================= */
 
 NATIVE1(Type_Object_equals)
-    push_EXP(get_bool(self == args->values[0]));
+    poke_EXP(1, get_bool(self == args->values[0]));
 }
 
 NATIVE0(Type_Object_asString)
@@ -35,7 +35,7 @@ NATIVE0(Type_Object_asString)
 }
 
 NATIVE(Type_Object_isNil)
-    push_EXP(False);
+    poke_EXP(1, False);
 }
 
 /* ========================================================================= */

@@ -58,30 +58,32 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     for (j=0; j<str2->size->value; j++) {
         concated[i+j] = str2->value[j];
     } 
-    return new_Type_String(concated);
+    Type_String string =  new_Type_String(concated);
+    free(concated);
+    return string;
 }
 
 CNT(Type_String_concat_)
     Object string = pop_EXP();
-    Object self = pop_EXP();
-    push_EXP(Type_String_concat_((Type_String)self, (Type_String)string));
+    Object self   = peek_EXP(1);
+    poke_EXP(1, Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
 NATIVE1(Type_String_concat_)
     push_CNT(Type_String_concat_);
     push_CNT(send_Eval);
-    // TODO create a expanded send  
+    poke_EXP(1, self); 
     push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), 
                                                   (Object)SMB_asString, 
                                                   empty_Type_Array));
 }
 
 NATIVE0(Type_String_asString)
-    // self is per default on the stack
+    poke_EXP(1, self);
 }
 
 NATIVE0(Type_String_asSymbol)
-    push_EXP(new_Type_Symbol(((Type_String)self)->value));
+    poke_EXP(1, new_Type_Symbol(((Type_String)self)->value));
 }
 
 /* ========================================================================= */
