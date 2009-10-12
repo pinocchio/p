@@ -91,6 +91,8 @@ void CNT_send_Eval()
  */
 int IN_EVAL = 0;
 
+#define NOJMP
+#ifndef NOJMP
 Object Eval(Object code)
 {
     if (IN_EVAL) {
@@ -114,6 +116,26 @@ Object Eval(Object code)
     IN_EVAL = 0;
     return result;
 }
+#else // NOJMP
+Object Eval(Object code)
+{
+    if (IN_EVAL) {
+        assert(NULL, printf("Re-entering evaluation thread!\n"));
+    }
+
+    push_EXP(code);
+    push_CNT(send_Eval);
+
+    IN_EVAL = 1;
+    while (_CNT_ != &(Double_Stack[STACK_SIZE-1])) {
+        peek_CNT(1)();
+    }
+
+    Object result = pop_EXP();
+    IN_EVAL = 0;
+    return result;
+}
+#endif // NOJMP
 
 /* ========================================================================= */
 
