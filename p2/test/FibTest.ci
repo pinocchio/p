@@ -2,11 +2,7 @@
 Type_Symbol SMB_fib;
 
 METHOD(fib_method, 0, 1)
-    AST_Variable var = new_AST_Variable(L"a");
-    var->key   = (Object)method;
-    var->index = 0;
-    
-    AST_Send test = new_AST_Send((Object)var, (Object)SMB_lt_, 
+    AST_Send test = new_AST_Send(Self, (Object)SMB_lt_, 
                                 new_Type_Array_With(1,
                                     (Object)new_AST_Constant(
                                                 (Object)new_Type_SmallInt(2))));
@@ -62,7 +58,7 @@ TEST_SUITE(Fib,
     SMB_fib = new_Type_Symbol(L"fib:");
     store_closure(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
-    result = Eval_Send0((Object)new_Type_SmallInt(1), SMB_fib);
-    assert0(((Type_SmallInt)result)->value == cfib(1));
+    result = Eval_Send0((Object)new_Type_SmallInt(4), SMB_fib);
+    assert0(((Type_SmallInt)result)->value == cfib(4));
     
 });
