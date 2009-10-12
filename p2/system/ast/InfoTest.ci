@@ -7,7 +7,8 @@
 
 NEW_TEST(AST_Info_init)
 
-    
+    assert0(empty_AST_Info != NULL);
+    assert0((Object)empty_AST_Info != Nil);
 }
 
 /* ========================================================================= */

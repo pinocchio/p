@@ -142,6 +142,15 @@ NEW_TEST(Runtime_Closure_MACRO)
         printf("%ls", closure->info->name->value));
 }
 
+NEW_TEST(Runtime_Closure_new_Runtime_Closure)
+    AST_Block code               = new_AST_Block(0, empty_Type_Array);
+    Runtime_BlockContext context = new_Runtime_BlockContext(NULL, NULL);
+    Runtime_Closure closure      = new_Runtime_Closure(code, context);
+    assert0(closure->code == code);
+    assert0(closure->context == context);
+    assert0(closure->info == empty_AST_Info);
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(Runtime_Closure,
@@ -151,5 +160,6 @@ TEST_SUITE(Runtime_Closure,
     RUN_TEST(Runtime_Closure_evaluation);
     RUN_TEST(Runtime_Closure_apply);
     RUN_TEST(Runtime_Closure_MACRO);
+    RUN_TEST(Runtime_Closure_new_Runtime_Closure);
 })
 

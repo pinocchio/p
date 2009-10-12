@@ -3,6 +3,8 @@ pre_init_Type_Object();
 pre_init_Type_SmallInt();
 pre_init_Type_Symbol();
 pre_init_Type_Array();
+pre_init_AST_Info();
+
 pre_init_AST_Assign();
 pre_init_AST_Callec();
 pre_init_Type_Character();

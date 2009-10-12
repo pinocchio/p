@@ -14,7 +14,9 @@ Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context
     NEW_OBJECT(Runtime_Closure);
     result->code    = code;
     result->context = context;
-    result->info    = empty_AST_Info; 
+    result->info    = empty_AST_Info;
+    assert0(empty_AST_Info != NULL);
+    assert0(result->info != NULL);
     return result;
 }
 
