@@ -111,6 +111,15 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
            ((Type_Symbol)msg)->value));
 }
 
+
+
+void print_Class(Object obj)
+{
+    Type_Class class = (Type_Class)HEADER(obj);
+    assert0(class != NULL || (Object)class != Nil);
+    printf("Class: %ls\n", class->name->value);
+
+}
 /* ========================================================================= */
 
 void post_init_Class()

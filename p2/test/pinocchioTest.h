@@ -43,6 +43,11 @@ extern void run_tests();
 #define SKIP_TEST printf("Test skipped: %s %s:%u\n",\
                          __FUNCTION__, __FILE__, __LINE__); \
     return;
+    
+
+#define ASSERT_EMPTY_STACK \
+    assert0(_EXP_ == &Double_Stack[0]); \
+    assert0(_CNT_ == (cont *)  &Double_Stack[STACK_SIZE - 1]);
 
 /* ========================================================================= */
 

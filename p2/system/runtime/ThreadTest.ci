@@ -12,6 +12,7 @@ NEW_TEST(thread_stress)
         //    Eval((Object)assign);
         Eval((Object)send);
     }
+    ASSERT_EMPTY_STACK;
 }
 
 /* ========================================================================= */

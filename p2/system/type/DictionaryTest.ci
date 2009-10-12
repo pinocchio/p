@@ -17,9 +17,11 @@ NEW_TEST(Type_Dictionary_Type_ObjectAt_)
         args->values[0] = key;
         assert0(Eval_Send((Object)dict, SMB_objectAt_, args) == integer);
         assert0(Type_Dictionary_lookup(dict, key) == integer);
+        ASSERT_EMPTY_STACK;
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
     assert0(Eval_Send((Object)dict, SMB_objectAt_, args) == integer2);
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_Dictionary_size)
@@ -45,6 +47,7 @@ NEW_TEST(Type_Dictionary_Type_ObjectAt_put)
     result = Eval_Send((Object)dict, SMB_objectAt_put_, args);
     assert0(result == integer1);
     assert0(Type_Dictionary_lookup(dict, integer0) == integer1);
+    ASSERT_EMPTY_STACK;
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
@@ -59,6 +62,7 @@ NEW_TEST(Type_Dictionary_Type_ObjectAt_put)
         args->values[0] = key;
         assert0(Eval_Send((Object)dict, SMB_objectAt_, args) == integer);
         assert0(Type_Dictionary_lookup(dict, key) == integer);
+        ASSERT_EMPTY_STACK;
     }
 }
 

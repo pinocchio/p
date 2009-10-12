@@ -33,6 +33,7 @@ NEW_TEST(Runtime_Closure_evaluation)
     
     result       = Eval_Send1(closure_const, SMB_eval_, integer_const);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
+    ASSERT_EMPTY_STACK;
 }
 
 
@@ -48,6 +49,7 @@ NEW_TEST(Runtime_Closure_invocation_with_arguments)
     store_closure(Type_SmallInt_Class, test, closure);
     Object result     = Eval_Send1((Object)integer, test, (Object)integer);
     assert0(result == (Object)integer);
+    ASSERT_EMPTY_STACK;
 }
 
 
@@ -59,6 +61,7 @@ NEW_TEST(Runtime_Closure_invocation)
     store_closure(Type_SmallInt_Class, test, closure);
     Object result           = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer);
+    ASSERT_EMPTY_STACK;
     
     // with 1 body element
     Type_SmallInt integer5      = new_Type_SmallInt(5);
@@ -68,6 +71,7 @@ NEW_TEST(Runtime_Closure_invocation)
     store_closure(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer5);
+    ASSERT_EMPTY_STACK;
     
     // with 2 body element
     Type_SmallInt integer6      = new_Type_SmallInt(6);
@@ -78,6 +82,7 @@ NEW_TEST(Runtime_Closure_invocation)
     store_closure(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer6);
+    ASSERT_EMPTY_STACK;
     
     // with 3 body element
     Type_SmallInt integer7      = new_Type_SmallInt(7);
@@ -89,6 +94,7 @@ NEW_TEST(Runtime_Closure_invocation)
     store_closure(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer7);
+    ASSERT_EMPTY_STACK;
 }
 
 
@@ -98,6 +104,7 @@ NEW_TEST(Runtime_Closure_apply)
     Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     Object result           = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == Nil);
+    ASSERT_EMPTY_STACK;
     
     // with 1 body element
     Type_SmallInt integer5      = new_Type_SmallInt(5);
@@ -106,6 +113,7 @@ NEW_TEST(Runtime_Closure_apply)
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer5);
+    ASSERT_EMPTY_STACK;
     
     // with 2 body element
     Type_SmallInt integer6      = new_Type_SmallInt(6);
@@ -115,6 +123,7 @@ NEW_TEST(Runtime_Closure_apply)
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer6);
+    ASSERT_EMPTY_STACK;
     
     // with 3 body element
     Type_SmallInt integer7      = new_Type_SmallInt(7);
@@ -125,6 +134,7 @@ NEW_TEST(Runtime_Closure_apply)
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer7);
+    ASSERT_EMPTY_STACK;
 }
 
 

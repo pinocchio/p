@@ -17,6 +17,7 @@ NEW_TEST(AST_Block_eval)
     assert0(HEADER(result) == (Object)Runtime_Closure_Class);
     Runtime_Closure closure = (Runtime_Closure) result;
     assert0(closure->code == block);
+    ASSERT_EMPTY_STACK;
 }
 
 /* ========================================================================= */

@@ -9,6 +9,7 @@ NEW_TEST(Type_Character_asType_SmallInt)
     CHARACTER_TEST_SETUP;
     result = Eval_Send0((Object)chr, SMB_asSmallInt);
     ASSERT_TYPE(result, Type_SmallInt_Class);
+    ASSERT_EMPTY_STACK;
 }
 
 
@@ -17,6 +18,7 @@ NEW_TEST(Type_Character_asSymbol)
     result = Eval_Send0((Object)chr, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert0(((Type_String)result)->value[0] == chr->value);
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_Character_asString)
@@ -24,6 +26,7 @@ NEW_TEST(Type_Character_asString)
     result = Eval_Send0((Object)chr, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
     assert0(((Type_String)result)->value[0] == chr->value);
+    ASSERT_EMPTY_STACK;
 }
 
 /* ========================================================================= */

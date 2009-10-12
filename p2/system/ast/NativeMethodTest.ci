@@ -15,6 +15,7 @@ NEW_TEST(ast_native_method_evaluation)
     Object result = Eval_Send0(method_const, SMB_eval);
     assert(result == (Object)method, printf("%ls\n", Object_classname(result)));
     assert0(test_native_method_evaluation_testmethod_called == 1);
+    ASSERT_EMPTY_STACK;
 }
 
 

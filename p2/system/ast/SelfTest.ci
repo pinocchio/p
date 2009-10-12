@@ -16,6 +16,7 @@ NEW_TEST(ast_self)
     
     Object result               = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer);
+    ASSERT_EMPTY_STACK;
 }
 
 

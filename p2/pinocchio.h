@@ -79,7 +79,8 @@ extern Type_Class class##_Class;
 
 /* ========================================================================= */
 
-#define push_EXP(value)         (*(_EXP_++) = ((Object)value));
+#define push_EXP(value)         (*(_EXP_++) = ((Object)value)); \
+                                printf("Pushing Object with ");(print_Class((Object)value));
 #define pop_EXP()               (*(--_EXP_))
 #define peek_EXP(depth)         (*(_EXP_ - depth))
 #define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));

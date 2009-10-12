@@ -18,6 +18,7 @@ NEW_TEST(ast_super)
     
     Object result = Eval_Send0((Object)True, test);
     assert0(result == (Object)integer);
+    ASSERT_EMPTY_STACK;
 }
 
 

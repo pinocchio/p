@@ -18,6 +18,7 @@ NEW_TEST(Type_String_asSymbol)
     result = Eval_Send0((Object)string, SMB_asSymbol);
     ASSERT_TYPE(result, Type_Symbol_Class);
     assert0(wcscmp(string->value, ((Type_Symbol)result)->value) == 0);
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_String_concat_)
@@ -27,10 +28,12 @@ NEW_TEST(Type_String_concat_)
     Type_String string_result = Type_String_concat_(string, string2);
     ASSERT_TYPE(string_result, Type_String_Class);
     assert0(string_result->size->value == (string->size->value + string2->size->value));
+    ASSERT_EMPTY_STACK;
 
     result = Eval_Send1((Object)string, SMB_concat_, (Object)string2);
     ASSERT_TYPE(result, Type_String_Class);
     assert0(((Type_String) result)->size->value == (string->size->value + string2->size->value));
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_String_asArray)
@@ -38,6 +41,7 @@ NEW_TEST(Type_String_asArray)
     result = Eval_Send0((Object)string, SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);
     assert0(((Type_Array)result)->size->value == string->size->value);
+    ASSERT_EMPTY_STACK;
     int i=0;
     for (i=0; i<string->size->value; i++) {
        assert0(((Type_Character)((Type_Array)result)->values[i])->value == string->value[i]);

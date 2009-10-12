@@ -11,9 +11,11 @@ NEW_TEST(Type_Array_Type_ObjectAt_)
         args->values[0] = (Object)new_Type_SmallInt(i); 
         assert0(Eval_Send((Object)array, SMB_objectAt_, args) == integer);
         assert0(array->values[i] == integer);
+        ASSERT_EMPTY_STACK;
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
     assert0(Eval_Send((Object)array, SMB_objectAt_, args) == integer2);
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_Array_size)
@@ -25,6 +27,7 @@ NEW_TEST(Type_Array_size)
     result = Eval_Send1(integer, SMB_equals_, result);
     assert(result == (Object)True,
 		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
+    ASSERT_EMPTY_STACK;
 }
 
 NEW_TEST(Type_Array_Type_ObjectAt_put)
@@ -40,6 +43,7 @@ NEW_TEST(Type_Array_Type_ObjectAt_put)
     result = Eval_Send((Object)array, SMB_objectAt_put_, args);
     assert0(result == integer1);
     assert0(array->values[0] == integer1);
+    ASSERT_EMPTY_STACK;
     
     args->values[0] = integer2; 
     args->values[1] = integer1;

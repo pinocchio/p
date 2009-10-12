@@ -6,14 +6,18 @@ NEW_TEST(Type_SmallInt_equals_manualTest)
     
     result = Eval_Send1(int0, SMB_equals_, int2);
     assert0(result == (Object)False);
+    ASSERT_EMPTY_STACK;
     result = Eval_Send1(int2, SMB_equals_, int0);
     assert0(result == (Object)False);
+    ASSERT_EMPTY_STACK;
     
     result = Eval_Send1(int0, SMB_equals_, int0);
     assert0(result == (Object)True);
+    ASSERT_EMPTY_STACK;
     
     result = Eval_Send1(int2, SMB_equals_, int2);
     assert0(result == (Object)True);
+    ASSERT_EMPTY_STACK;
 }
 
 #define Type_SmallInt_BINOP_TEST(name, op) \
@@ -23,6 +27,7 @@ NEW_TEST(Type_SmallInt_##name##_) \
     Object result; \
     result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
     ASSERT_TYPE(result, Type_SmallInt_Class); \
+    ASSERT_EMPTY_STACK;\
    \
     assert(((Type_SmallInt)result)->value == (int4->value op int8->value), \
 		  printf("expected %i but got %i\n", (int4->value op int8->value), \
@@ -60,6 +65,7 @@ NEW_TEST(Type_SmallInt_##name##_) \
     Object result; \
     result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
     ASSERT_INSTANCE_OF(result, Type_Boolean_Class); \
+    ASSERT_EMPTY_STACK;\
    \
     printf("%ls\n", ((Type_Boolean)result)->value ? L"True" : L"False"); \
     assert(((Type_Boolean)result) == get_bool(int4->value op int8->value), \
