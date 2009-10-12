@@ -114,7 +114,7 @@ extern Type_Class class##_Class;
     #define LOG printf
     #define LOG_AST_INFO(print, info) printf(print); print_AST_Info(info); printf("\n");
 #else
-    #define LOGFUN printf
+    #define LOGFUN
     #define LOG
     #define LOG_AST_INFO(print, info)
 #endif

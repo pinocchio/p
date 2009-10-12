@@ -65,29 +65,33 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
                     Object msg, Type_Array args)
 {
     assert0(msg != Nil);
+    #ifdef DEBUG
     LOG("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
-    //printf("%i\n", ((Type_SmallInt)self)->value);
-    //printf("%i\n", ((Type_SmallInt)peek_EXP(1))->value);
+    #endif // DEBUG
     
     /* Monomorphic inline cache */
     // TODO put that directly on the sender side
     // TODO create Polymorphic inline cache
     if (class == cache->type) {
+        #ifdef DEBUG
         LOG("Cached dispatch \"%ls\" on \"%ls\"\n",  
             ((Type_Symbol)msg)->value,
             ((Type_Class)HEADER(self))->name->value);
+        #endif // DEBUG
         return Method_invoke(cache->method, self, class, args);
     }
 	assert1(HEADER(class) == (Object)Type_Class_Class, 
         "Wrong meta class not of type Type_Class_Class");
+
+    #ifdef DEBUG
     LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
-    //LOG("Dispatching \"%ls\" on \"%ls\"\n",  
-    //        ((Type_Symbol)msg)->value,
-    //        ((Type_Class)HEADER(self))->name->value);
+    #endif // DEBUG
     
     Object method = NULL;    
     while (class != Nil) {
+        #ifdef DEBUG
         LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
+        #endif // DEBUG
         Type_Dictionary mdict = ((Type_Class) class)->methods;
         method                = Type_Dictionary_lookup(mdict, msg);
         if (!method) {

@@ -65,21 +65,20 @@ NATIVE1(Type_SmallInt##_##name)\
     if (HEADER(args->values[0]) == (Object)Type_SmallInt_Class) {\
         Type_SmallInt number = ((Type_SmallInt) self);\
         Type_SmallInt otherNumber = (Type_SmallInt) args->values[0]; \
-        LOG("%i %s %i", number->value, #op, otherNumber->value); \
         if (number->value op otherNumber->value) {\
             poke_EXP(1, True);\
         } else {\
             poke_EXP(1, False);\
         }\
     } else {\
-        assert1(NULL, "Invalid Type for SmallInt Boolean BinOP\n"); \
+        assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \
     }\
 }
 
-Type_SmallInt_COMPARE_OPERATION(equals_, ==);
-Type_SmallInt_COMPARE_OPERATION(lt_, <);
-Type_SmallInt_COMPARE_OPERATION(gt_, >);
-Type_SmallInt_COMPARE_OPERATION(notEquals_, !=);
+Type_SmallInt_COMPARE_OPERATION(equals_, ==)
+Type_SmallInt_COMPARE_OPERATION(lt_, <)
+Type_SmallInt_COMPARE_OPERATION(gt_, >)
+Type_SmallInt_COMPARE_OPERATION(notEquals_, !=)
 
 NATIVE0(Type_SmallInt_hash)
     poke_EXP(1, self); 

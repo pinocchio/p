@@ -91,7 +91,6 @@ void CNT_send_Eval()
  */
 int IN_EVAL = 0;
 
-#define NOJMP
 #ifndef NOJMP
 Object Eval(Object code)
 {

@@ -58,7 +58,9 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 
 
 NATIVE(Runtime_Closure_apply_)
+    #ifdef DEBUG
     LOG("Closure Apply \n");
+    #endif // DEBUG
     
     Runtime_Closure closure = (Runtime_Closure)self;
     if (closure->code->body->size->value == 0) { 
