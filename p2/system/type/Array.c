@@ -81,6 +81,7 @@ NATIVE0(Type_Array_size)
 void post_init_Type_Array()
 {
     empty_Type_Array->size   = new_Type_SmallInt(0);
+    Type_Array_Class->methods = new_Type_Dictionary();
     
     store_native_method(Type_Array_Class, SMB_objectAt_,     NM_Type_Array_Type_ObjectAt_);
     store_native_method(Type_Array_Class, SMB_objectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
