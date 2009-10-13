@@ -169,8 +169,8 @@ int main()
         #ifdef TEST
         run_tests();
         #endif
-        run_FibTest();
+        //run_FibTest();
     }
-    
+
     return EXIT_SUCCESS;
 }

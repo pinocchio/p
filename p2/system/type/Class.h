@@ -5,7 +5,18 @@
 
 /* ========================================================================= */
 
+typedef enum Type_Tag {
+    ARRAY   = 0,
+    BYTES   = 1,
+    CHAR    = 2,
+    INT     = 3,
+    LONG    = 4,
+    OBJECT  = 5,
+    WORDS   = 6,
+} Type_Tag;
+
 struct Type_Class_t {
+    Object          type;
     Type_String     name;
     Object          super;
     Type_Dictionary methods;

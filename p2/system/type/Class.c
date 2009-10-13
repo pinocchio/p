@@ -10,11 +10,42 @@ Type_Class MetaType_Class_Class;
 
 /* ========================================================================= */
 
+Object create_type(unsigned int size, Type_Tag tag)
+{
+    unsigned long int type = (unsigned long int)size;
+    type = type << 3;
+    type = type | (tag & 7);
+    return (Object)type;
+}
+
+Type_Tag gettag(Object type)
+{
+    return (Type_Tag)((unsigned long int)type) & 7;
+}
+
+unsigned int getsize(Object type)
+{
+    return ((unsigned long int)type) >> 3;
+}
+
+/* ========================================================================= */
+
 Type_Class new_Class(Object superclass)
 {
     NEW_OBJECT(Type_Class);
     result->methods     = new_Type_Dictionary();
     result->super       = superclass;
+    assert0(superclass != Nil);
+    result->type        = ((Type_Class)superclass)->type;
+    return result;
+}
+
+Type_Class new_Class_Typed(Object superclass, int size, Type_Tag tag)
+{
+    NEW_OBJECT(Type_Class);
+    result->methods     = new_Type_Dictionary();
+    result->super       = superclass;
+    result->type        = create_type(size, tag);
     return result;
 }
 
