@@ -33,7 +33,9 @@ AST_Info new_AST_Info(Type_String sourceFile, Type_String name,
 
 void pre_init_AST_Info()
 {
-    AST_Info_Class         = new_Named_Class((Object)Type_Object_Class, L"AST_Info");
+    AST_Info_Class         = new_Named_Class((Object)Type_Object_Class,
+                                             L"AST_Info",
+                                             create_type(4, OBJECT));
     empty_AST_Info         = NEW_t(AST_Info);
     HEADER(empty_AST_Info) = (Object)AST_Info_Class;
 }

@@ -33,7 +33,9 @@ NATIVE(Type_Nil_isNotNil)
 
 void post_init_Type_Nil()
 {
-    Type_Nil_Class = new_Named_Class((Object)Type_Object_Class, L"Type_Nil");
+    Type_Nil_Class = new_Named_Class((Object)Type_Object_Class,
+                                     L"Type_Nil",
+                                     create_type(0, OBJECT));
     HEADER(Nil) = (Object)Type_Nil_Class;
     
     store_native_method(Type_Nil_Class, SMB_asString, NM_Type_Nil_asString);

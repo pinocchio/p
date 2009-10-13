@@ -6,7 +6,8 @@
 /* ========================================================================= */
 
 struct Type_CharacterTable_t {
-    Type_Character chars[0];
+    Type_SmallInt   size;
+    Type_Character  chars[0];
 };
 
 CREATE_INITIALIZERS(Type_CharacterTable)

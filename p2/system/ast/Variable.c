@@ -20,7 +20,9 @@ AST_Variable new_AST_Variable(const wchar_t* name)
 
 void pre_init_AST_Variable()
 {
-    AST_Variable_Class      = new_Named_Class((Object)Type_Object_Class, L"AST_Variable");
+    AST_Variable_Class = new_Named_Class((Object)Type_Object_Class,
+                                         L"AST_Variable",
+                                         create_type(4, OBJECT));
 }
 
 /* ========================================================================= */

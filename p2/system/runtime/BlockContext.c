@@ -38,7 +38,9 @@ Runtime_BlockContext current_env()
 
 void pre_init_Runtime_BlockContext()
 {
-    Runtime_BlockContext_Class = new_Named_Class((Object)Type_Object_Class, L"Runtime_BlockContext");
+    Runtime_BlockContext_Class = new_Named_Class((Object)Type_Object_Class,
+                                                 L"Runtime_BlockContext",
+                                                 create_type(4, OBJECT));
 }
 
 /* ========================================================================= */

@@ -16,9 +16,11 @@ void pre_init_Type_Object()
     // do manually instanciate since we cannot use dict yet
     Type_Class_Class          = NEW_t(Type_Class);
     Type_Object_Class         = NEW_t(Type_Class);
+    Type_Object_Class->type   = create_type(0, OBJECT);
     
     HEADER(Type_Class_Class)  = (Object)Type_Class_Class;
     Type_Class_Class->super   = (Object)Type_Object_Class;
+    Type_Object_Class->type   = create_type(4, OBJECT);
     
     HEADER(Type_Object_Class) = (Object) Type_Class_Class;
     Type_Object_Class->super  = Nil;

@@ -21,7 +21,9 @@ AST_Block new_AST_Block(unsigned int paramCount, Type_Array body)
 
 void pre_init_AST_Block()
 {
-    AST_Block_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Block");
+    AST_Block_Class = new_Named_Class((Object)Type_Object_Class,
+                                      L"AST_Block",
+                                      create_type(4, OBJECT));
 }
 
 /* ========================================================================= */

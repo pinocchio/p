@@ -21,7 +21,9 @@ AST_Assign new_AST_Assign(Object variable, Object expression)
 
 void pre_init_AST_Assign()
 {
-    AST_Assign_Class        = new_Named_Class((Object)Type_Object_Class, L"AST_Assign");
+    AST_Assign_Class        = new_Named_Class((Object)Type_Object_Class,
+                                              L"AST_Assign",
+                                              create_type(3, OBJECT));
 }
 
 /* ========================================================================= */

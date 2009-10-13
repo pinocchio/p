@@ -6,12 +6,12 @@
 /* ========================================================================= */
 
 struct Runtime_MethodContext_t {
-    Runtime_Closure closure;
-    unsigned int    pc;
-    Type_Array      values;
-    Runtime_MethodContext home_context;
-    Object          self;
-    Object          class;
+    Runtime_Closure         closure;
+    unsigned long int       pc;
+    Type_Array              values;
+    Runtime_MethodContext   home_context;
+    Object                  self;
+    Object                  class;
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)

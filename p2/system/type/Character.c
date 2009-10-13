@@ -28,7 +28,9 @@ Type_Character new_Type_Character(wchar_t value)
 
 void pre_init_Type_Character()
 {
-    Type_Character_Class = new_Named_Class((Object)Type_Object_Class, L"Type_Character");
+    Type_Character_Class = new_Named_Class((Object)Type_Object_Class,
+                                           L"Type_Character",
+                                           create_type(0, CHAR));
 }
 
 /* ========================================================================= */

@@ -7,7 +7,7 @@
 
 struct Type_Array_t {
     Type_SmallInt size;
-    Object          values[];
+    Object        values[];
 };
 
 extern Type_Array empty_Type_Array;

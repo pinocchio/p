@@ -17,9 +17,9 @@ typedef enum Type_Tag {
 
 struct Type_Class_t {
     Object          type;
-    Type_String     name;
     Object          super;
     Type_Dictionary methods;
+    Type_String     name;
     Object          cvars[];
 };
 
@@ -29,9 +29,9 @@ Type_Class MetaType_Class_Class;
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Object superclass);
-extern Type_Class new_named_MetaType_Class(Object superclass, const wchar_t* name);
-extern Type_Class new_Named_Class(Object superclass, const wchar_t* name);
+extern Type_Class new_Class(Object superclass, Object type);
+extern Type_Class new_Named_Class(Object superclass, const wchar_t* name,
+                                  Object type);
 
 /* ========================================================================= */
 
@@ -41,6 +41,8 @@ extern void Type_Class_dispatch(InlineCache * sender, Object self, Object class,
 extern void CNT_Class_super();
 
 extern void print_Class(Object obj);
+
+extern Object create_type(unsigned int size, Type_Tag tag);
 
 /* ========================================================================= */
 

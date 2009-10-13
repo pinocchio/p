@@ -21,7 +21,9 @@ AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments)
 
 void pre_init_AST_Send()
 {
-    AST_Send_Class          = new_Named_Class((Object)Type_Object_Class, L"AST_Send");
+    AST_Send_Class = new_Named_Class((Object)Type_Object_Class,
+                                     L"AST_Send",
+                                     create_type(5, OBJECT));
 }
 
 /* ========================================================================= */

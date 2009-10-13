@@ -30,7 +30,9 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Named_Class((Object)Type_Object_Class, L"Symbol");
+    Type_Symbol_Class = new_Named_Class((Object)Type_Object_Class,
+                                        L"Symbol",
+                                        create_type(0, WORDS));
     initialize_Symbol();
 }
 /*

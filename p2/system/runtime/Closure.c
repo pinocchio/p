@@ -22,7 +22,9 @@ Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context
 
 void pre_init_Runtime_Closure()
 {
-    Runtime_Closure_Class = new_Named_Class((Object)Type_Object_Class, L"Runtime_Closure");
+    Runtime_Closure_Class = new_Named_Class((Object)Type_Object_Class,
+                                            L"Runtime_Closure",
+                                            create_type(3, OBJECT));
 }
 
 /* ========================================================================= */

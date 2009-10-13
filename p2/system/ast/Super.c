@@ -21,7 +21,9 @@ AST_Super new_AST_Super(Object message, Type_Array arguments)
 
 void pre_init_AST_Super()
 {
-    AST_Super_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Super");
+    AST_Super_Class = new_Named_Class((Object)Type_Object_Class,
+                                      L"AST_Super",
+                                      create_type(4, OBJECT));
 }
 
 /* ========================================================================= */

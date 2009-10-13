@@ -30,36 +30,27 @@ unsigned int getsize(Object type)
 
 /* ========================================================================= */
 
-Type_Class new_Class(Object superclass)
+Type_Class new_Class(Object superclass, Object type)
 {
     NEW_OBJECT(Type_Class);
     result->methods     = new_Type_Dictionary();
     result->super       = superclass;
-    assert0(superclass != Nil);
-    result->type        = ((Type_Class)superclass)->type;
-    return result;
-}
-
-Type_Class new_Class_Typed(Object superclass, int size, Type_Tag tag)
-{
-    NEW_OBJECT(Type_Class);
-    result->methods     = new_Type_Dictionary();
-    result->super       = superclass;
-    result->type        = create_type(size, tag);
+    result->type        = type;
     return result;
 }
 
 Type_Class new_named_MetaType_Class(Object superclass, const wchar_t* name)
 {
-    Type_Class result = (Type_Class) new_Class(superclass);
+    // TODO...
+    Type_Class result = (Type_Class) new_Class(superclass, 0);
     result->name      = new_Type_String(name);
     HEADER(result)    = (Object)MetaType_Class_Class;
     return result;
 }
 
-Type_Class new_Named_Class(Object superclass, const wchar_t* name)
+Type_Class new_Named_Class(Object superclass, const wchar_t* name, Object type)
 {
-    Type_Class result = (Type_Class) new_Class(superclass);
+    Type_Class result = (Type_Class) new_Class(superclass, type);
     result->name      = new_Type_String(name);
     //HEADER(result)  = (Object)new_named_MetaType_Class(superclass, name);
     return result;
@@ -69,7 +60,7 @@ void pre_init_Class()
 {
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
-    MetaType_Class_Class = new_Class(Nil);
+    // MetaType_Class_Class = new_Class(Nil);
 }
 
 /* ========================================================================= */

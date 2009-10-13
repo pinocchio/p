@@ -43,7 +43,9 @@ Type_Array new_Type_Array_With(int c, Object init)
 
 void pre_init_Type_Array() 
 {
-    Type_Array_Class         = new_Named_Class((Object)Type_Object_Class, L"Type_Array");
+    Type_Array_Class         = new_Named_Class((Object)Type_Object_Class,
+                                               L"Type_Array",
+                                               create_type(0, ARRAY));
     empty_Type_Array         = NEW_t(Type_Array);
     HEADER(empty_Type_Array) = (Object)Type_Array_Class;
 }

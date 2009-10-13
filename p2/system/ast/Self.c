@@ -12,7 +12,9 @@ Object Self;
 
 void pre_init_AST_Self()
 {
-    AST_Self_Class = new_Named_Class((Object)Type_Object_Class, L"AST_Self");
+    AST_Self_Class = new_Named_Class((Object)Type_Object_Class,
+                                     L"AST_Self",
+                                     create_type(0, OBJECT));
     Self       = (Object) NEW_t(AST_Self);
     HEADER(Self) = (Object) AST_Self_Class;
 }

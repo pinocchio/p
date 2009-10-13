@@ -20,7 +20,9 @@ AST_Native_Method new_AST_Native_Method(native code)
 
 void pre_init_AST_Native_Method()
 {
-    AST_Native_Method_Class = new_Named_Class((Object)Type_Object_Class, L"NativeMethod");
+    AST_Native_Method_Class = new_Named_Class((Object)Type_Object_Class,
+                                              L"NativeMethod",
+                                              create_type(2, OBJECT));
 }
 
 /* ========================================================================= */

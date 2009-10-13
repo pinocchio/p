@@ -18,7 +18,9 @@ Type_Boolean True;
 /* ========================================================================= */
 
 void pre_init_Type_False() {
-    False_Class = new_Named_Class((Object)Type_Boolean_Class, L"False");
+    False_Class = new_Named_Class((Object)Type_Boolean_Class,
+                                  L"False",
+                                  create_type(1, OBJECT));
     False = NEW_t(Type_Boolean);
     HEADER(False) = (Object)False_Class;
     False_Const = new_AST_Constant((Object) False);
@@ -26,7 +28,9 @@ void pre_init_Type_False() {
 
 void pre_init_Type_True()
 {
-    True_Class = new_Named_Class((Object)Type_Boolean_Class, L"True");
+    True_Class = new_Named_Class((Object)Type_Boolean_Class,
+                                 L"True",
+                                 create_type(1, OBJECT));
     True = NEW_t(Type_Boolean);
     HEADER(True) = (Object)True_Class;
     True_Const = new_AST_Constant((Object) True);
@@ -34,7 +38,9 @@ void pre_init_Type_True()
 
 void pre_init_Type_Boolean()
 {
-    Type_Boolean_Class = new_Named_Class((Object)Type_Object_Class, L"Type_Boolean");     
+    Type_Boolean_Class = new_Named_Class((Object)Type_Object_Class,
+                                         L"Type_Boolean",
+                                         create_type(1, OBJECT));     
     pre_init_Type_True();
     pre_init_Type_False();
 }
