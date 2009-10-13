@@ -39,7 +39,7 @@ CNT(AST_Send_send)
 
 CNT(store_argument)
     Object value = pop_EXP();
-    unsigned long int idx = (unsigned long int)pop_EXP();
+    uns_int idx = (uns_int)pop_EXP();
     Type_Array args = (Type_Array)pop_EXP();
     
     args->values[idx] = value;
@@ -61,7 +61,7 @@ void AST_Send_eval(AST_Send self)
     for (i = 0; i < self->arguments->size->value; i++) {
         push_CNT(store_argument);
         push_EXP(args);
-        push_EXP((Object)(unsigned long int)i);
+        push_EXP((Object)(uns_int)i);
         push_CNT(send_Eval);
         push_EXP(self->arguments->values[i]);
     }

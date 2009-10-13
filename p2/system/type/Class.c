@@ -12,7 +12,7 @@ Type_Class MetaType_Class_Class;
 
 Object create_type(unsigned int size, Type_Tag tag)
 {
-    unsigned long int type = (unsigned long int)size;
+    uns_int type = (uns_int)size;
     type = type << 3;
     type = type | (tag & 7);
     return (Object)type;
@@ -20,12 +20,12 @@ Object create_type(unsigned int size, Type_Tag tag)
 
 Type_Tag gettag(Object type)
 {
-    return (Type_Tag)((unsigned long int)type) & 7;
+    return (Type_Tag)((uns_int)type) & 7;
 }
 
 unsigned int getsize(Object type)
 {
-    return ((unsigned long int)type) >> 3;
+    return (unsigned int)(((uns_int)type) >> 3);
 }
 
 /* ========================================================================= */

@@ -17,6 +17,12 @@
 
 /* ========================================================================= */
 
+#ifdef M32
+#endif 
+typedef unsigned long int uns_int;
+
+/* ========================================================================= */
+
 #define HEADER_SIZE (sizeof(Object))
 #define POINTER_INC(p) (((Object) (p)) + 1) 
 #define POINTER_DEC(p) (((Object) (p)) - 1)
