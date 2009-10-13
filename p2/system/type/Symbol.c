@@ -13,24 +13,17 @@ Type_Dictionary SMB_Table;
 
 /* ========================================================================= */
 
-wchar_t* wcsdup(const wchar_t* input)
+Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
-    int len         = wcslen(input) + 1;
-    wchar_t* output = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
-    int i           = 0;
-    for (; i < len; i++) {
-        output[i] = input[i];
-    }
-    return output;
-}
-
-
-Type_Symbol new_Type_Symbol(const wchar_t* name)
-{
-    NEW_OBJECT(Type_Symbol);
+    int size = wcslen(input) + 1;
+    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
+    HEADER(result)      = (Object)Type_Symbol_Class;
     result->hash        = NULL;
-    result->value       = wcsdup(name);
-    result->size        = new_Type_SmallInt(wcslen(name));
+    int i = 0;
+    for (; i < size; i++) {
+        result->value[i] = input[i];
+    }
+    result->size        = new_Type_SmallInt(size - 1);
     return result;
 }
 

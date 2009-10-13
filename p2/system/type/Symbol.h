@@ -8,7 +8,7 @@
 struct Type_Symbol_t { 
     Type_SmallInt hash;
     Type_SmallInt size;
-    wchar_t       * value;
+    wchar_t       value[];
 };
 
 CREATE_INITIALIZERS(Type_Symbol)
