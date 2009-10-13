@@ -162,6 +162,7 @@ int main()
 {
 	#include <pinocchioPreInit.ci>
 	#include <pinocchioPostInit.ci>
+    init_class_hierarchy();
 
     if (!setjmp(Eval_Abort)) {
         initialize_Thread();

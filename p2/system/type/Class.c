@@ -18,15 +18,85 @@ Object create_type(unsigned int size, Type_Tag tag)
     return (Object)type;
 }
 
-Type_Tag gettag(Object type)
+Type_Tag gettag(Type_Class class)
 {
-    return (Type_Tag)((uns_int)type) & 7;
+    return (Type_Tag)((uns_int)class->type) & 7;
 }
 
-unsigned int getsize(Object type)
+unsigned int getsize(Type_Class class)
 {
-    return (unsigned int)(((uns_int)type) >> 3);
+    return (unsigned int)(((uns_int)class->type) >> 3);
 }
+
+/* ========================================================================= */
+
+Object instantiate_ARRAY(unsigned int size)
+{
+    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
+    result->size = new_Type_SmallInt(size);
+    return (Object)result;
+}
+
+Object instantiate_BYTES(unsigned int size)
+{
+    assert1(NULL, "Not implemented yet!\n");
+    /*
+    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
+    result->size = new_Type_SmallInt(size);
+    return (Object)result;
+    */
+}
+
+Object instantiate_CHAR(unsigned int size)
+{
+    assert1(NULL, "Should not instantiate chars!\n");
+}
+
+Object instantiate_INT(unsigned int size)
+{
+    assert1(NULL, "Should not instantiate ints!\n");
+}
+
+Object instantiate_LONG(unsigned int size)
+{
+    assert1(NULL, "Should not instantiate long!\n");
+}
+
+Object instantiate_OBJECT(unsigned int size)
+{
+    return (Object)NEW_ARRAYED(struct Type_Object_t, Object[size]);
+}
+
+Object instantiate_WORDS(unsigned int size)
+{
+    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, Object[size]);
+    result->size = new_Type_SmallInt(size);
+    return (Object)result;
+}
+
+#define INSTANTIATE(type)\
+    if (tag == type) {\
+        result = instantiate##_##type(getsize(class));\
+        HEADER(result) = (Object)class;\
+        return result;\
+    }
+
+Object instantiate(Type_Class class)
+{
+    Type_Tag tag = gettag(class);
+    Object result = NULL;
+
+    INSTANTIATE(ARRAY);
+    INSTANTIATE(BYTES);
+    INSTANTIATE(CHAR);
+    INSTANTIATE(INT);
+    INSTANTIATE(LONG);
+    INSTANTIATE(OBJECT);
+    INSTANTIATE(WORDS);
+
+    assert(NULL, printf("Unknown object format: %i\n", tag));
+}
+
 
 /* ========================================================================= */
 
@@ -142,21 +212,30 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 void print_Class(Object obj)
 {
     if (obj == NULL) {
-        printf("NULL");
+        printf("NULL\n");
         return;
     }
     if (obj == Nil) {
-        printf("Nil");
+        printf("Nil\n");
         return;
     }
     Type_Class class = (Type_Class)HEADER(obj);
-    assert0(class != NULL || (Object)class != Nil);
+    assert0(class != NULL);
+    assert0((Object)class != Nil);
     printf("Class: %ls\n", class->name->value);
 
 }
+
 /* ========================================================================= */
 
 void post_init_Class()
 {
     // put the names here, now after the Symbols_Class is initialized
+}
+
+/* ========================================================================= */
+
+void init_class_hierarchy()
+{
+    
 }

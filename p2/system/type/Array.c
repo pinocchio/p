@@ -13,7 +13,7 @@ Type_Array empty_Type_Array;
 Type_Array new_Raw_Type_Array(int c)
 {
     if (c == 0) { return empty_Type_Array; }
-    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Type_Object[c]);
+    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
     HEADER(result)      = (Object)Type_Array_Class;
     result->size        = new_Type_SmallInt(c);
     return result;
