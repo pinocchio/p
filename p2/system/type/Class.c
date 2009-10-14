@@ -5,8 +5,9 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Class_Class;
-Type_Class MetaType_Class_Class;
+Type_Class Metaclass;
+Type_Class Class;
+Type_Class Behaviour;
 
 /* ========================================================================= */
 
@@ -32,6 +33,7 @@ unsigned int getsize(Type_Class class)
 
 Object instantiate_ARRAY(unsigned int size)
 {
+    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
     result->size = new_Type_SmallInt(size);
     return (Object)result;
@@ -39,7 +41,7 @@ Object instantiate_ARRAY(unsigned int size)
 
 Object instantiate_BYTES(unsigned int size)
 {
-    assert1(NULL, "Not implemented yet!\n");
+    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
     /*
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
     result->size = new_Type_SmallInt(size);
@@ -69,6 +71,7 @@ Object instantiate_OBJECT(unsigned int size)
 
 Object instantiate_WORDS(unsigned int size)
 {
+    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, Object[size]);
     result->size = new_Type_SmallInt(size);
     return (Object)result;
@@ -102,19 +105,14 @@ Object instantiate(Type_Class class)
 
 Type_Class new_Class(Object superclass, Object type)
 {
-    NEW_OBJECT(Type_Class);
-    result->methods     = new_Type_Dictionary();
-    result->super       = superclass;
-    result->type        = type;
-    return result;
-}
-
-Type_Class new_named_MetaType_Class(Object superclass, const wchar_t* name)
-{
-    // TODO...
-    Type_Class result = (Type_Class) new_Class(superclass, 0);
-    result->name      = new_Type_String(name);
-    HEADER(result)    = (Object)MetaType_Class_Class;
+    Type_Class metaclass    = (Type_Class)instantiate(Metaclass);
+    metaclass->type         = ((Type_Class)HEADER(superclass))->type;
+    metaclass->super        = HEADER(superclass);
+    metaclass->methods      = new_Type_Dictionary();
+    Type_Class result       = (Type_Class)instantiate(metaclass);
+    result->methods         = new_Type_Dictionary();
+    result->super           = superclass;
+    result->type            = type;
     return result;
 }
 
@@ -122,28 +120,43 @@ Type_Class new_Named_Class(Object superclass, const wchar_t* name, Object type)
 {
     Type_Class result = (Type_Class) new_Class(superclass, type);
     result->name      = new_Type_String(name);
-    //HEADER(result)  = (Object)new_named_MetaType_Class(superclass, name);
     return result;
 }
 
-void pre_init_Class()
+void pre_init_Type_Class()
 {
-    // explicitely use new_Class not new_Named_Class! to avoid early use
-    // of symbols.
-    // MetaType_Class_Class = new_Class(Nil);
+    Metaclass                 = NEW_t(Type_Class);
+    Metaclass->type           = create_type(3, OBJECT);
+    Object Metaclass_mclass   = instantiate(Metaclass);
+    HEADER(Metaclass)         = Metaclass_mclass;
 }
 
 /* ========================================================================= */
 
-CNT(Class_super)
-    Object class = peek_EXP(1);
-    if (HEADER(class) == (Object)Type_Class_Class) {
-        poke_EXP(1, ((Type_Class)class)->super);
-        return;
-    }
-    assert1(NULL, "TODO queue \"super\" send");
+void assert_class(Object class)
+{
+    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
 }
 
+CNT(Class_super)
+    Object class = peek_EXP(1);
+    assert_class(class);
+    //if (HEADER(class) == (Object)Type_Class_Class) {
+        poke_EXP(1, ((Type_Class)class)->super);
+    //    return;
+    //}
+    //assert1(NULL, "TODO queue \"super\" send");
+}
+
+wchar_t * classname(Object class)
+{
+    if (HEADER(class) == (Object)Metaclass) {
+        return L"Metaclass";
+    } else {
+        return ((Type_Class)class)->name->value;
+    }
+}
 
 void Method_invoke(Object method, Object self, Object class, Type_Array args) {
     if (HEADER(method) == (Object)AST_Native_Method_Class) {
@@ -158,7 +171,12 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
 {
     assert0(msg != Nil);
     #ifdef DEBUG
-    LOG("%ls>>%ls\n", ((Type_Class)class)->name->value, ((Type_Symbol)msg)->value);
+    wchar_t * clsname = classname(class);
+    if (HEADER(class) != (Object)Metaclass) {
+        LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
+    } else {
+        LOG("a Metaclass>>%ls\n", ((Type_Symbol)msg)->value);
+    }
     #endif // DEBUG
     
     /* Monomorphic inline cache */
@@ -168,31 +186,35 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
         #ifdef DEBUG
         LOG("Cached dispatch \"%ls\" on \"%ls\"\n",  
             ((Type_Symbol)msg)->value,
-            ((Type_Class)HEADER(self))->name->value);
+            clsname);
         #endif // DEBUG
         return Method_invoke(cache->method, self, class, args);
     }
-	assert1(HEADER(class) == (Object)Type_Class_Class, 
-        "Wrong meta class not of type Type_Class_Class");
+    assert_class(class);
 
     #ifdef DEBUG
-    LOG("Dispatching on \"%ls\"\n",  ((Type_Class)class)->name->value);
+    LOG("Dispatching on \"%ls\"\n",  clsname);
     #endif // DEBUG
     
     Object method = NULL;    
     while (class != Nil) {
         #ifdef DEBUG
-        LOG("Lookup continuing in \"%ls\"\n", ((Type_Class)class)->name->value);
+        LOG("Lookup continuing in \"%ls\"\n", clsname);
         #endif // DEBUG
         Type_Dictionary mdict = ((Type_Class) class)->methods;
         method                = Type_Dictionary_lookup(mdict, msg);
         if (!method) {
             Object super = ((Type_Class) class)->super;
+            #ifndef DEBUG
+            wchar_t * clsname = classname(class);
+            #endif
+            printf("lookup failed: %p\n", super);
 			assert((class != super), 
                 printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
-							((Type_Class)class)->name->value,
+							clsname,
 							((Type_Symbol)msg)->value));
 			class = super;
+            clsname = classname(class);
         } else {
             //TODO create second level cache to directly store the misses
             cache->type   = class;
@@ -228,9 +250,19 @@ void print_Class(Object obj)
 
 /* ========================================================================= */
 
-void post_init_Class()
+void post_init_Type_Class()
 {
-    // put the names here, now after the Symbols_Class is initialized
+    ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
+    Metaclass->methods  = new_Type_Dictionary();
+    Metaclass->name     = new_Type_String(L"Metaclass");
+    Behaviour = new_Named_Class((Object)Type_Object_Class,
+                                L"Behaviour",
+                                create_type(3, OBJECT));
+    Class = new_Named_Class((Object)Behaviour,
+                            L"Class",
+                            create_type(4, OBJECT));
+    Metaclass->super = (Object)Behaviour;
+    ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
 }
 
 /* ========================================================================= */

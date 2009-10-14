@@ -141,7 +141,7 @@ Object Eval(Object code)
 bool isInstance(Object object, Object class) 
 {
     // TODO check for MetaClass stuff
-    ASSERT_TYPE(class, Type_Class_Class);
+    assert_class(class);
     Object type = HEADER(object);
     while (type != Nil) {
         if ((Object)type == class) {
@@ -162,7 +162,6 @@ int main()
 {
 	#include <pinocchioPreInit.ci>
 	#include <pinocchioPostInit.ci>
-    init_class_hierarchy();
 
     if (!setjmp(Eval_Abort)) {
         initialize_Thread();

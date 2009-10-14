@@ -1,4 +1,5 @@
 pre_init_Type_Nil();
+pre_init_Type_Class();
 pre_init_Type_Object();
 pre_init_Type_SmallInt();
 pre_init_Type_Array();

@@ -5,6 +5,10 @@
 
 /* ========================================================================= */
 
+extern Type_Class Metaclass;
+
+/* ========================================================================= */
+
 typedef enum Type_Tag {
     ARRAY   = 0,
     BYTES   = 1,
@@ -25,8 +29,6 @@ struct Type_Class_t {
 
 CREATE_INITIALIZERS(Type_Class)
 
-Type_Class MetaType_Class_Class;
-
 /* ========================================================================= */
 
 extern Type_Class new_Class(Object superclass, Object type);
@@ -43,6 +45,14 @@ extern void CNT_Class_super();
 extern void print_Class(Object obj);
 
 extern Object create_type(unsigned int size, Type_Tag tag);
+
+/* ========================================================================= */
+
+extern Object instantiate(Type_Class class);
+
+/* ========================================================================= */
+
+extern void assert_class(Object class);
 
 /* ========================================================================= */
 

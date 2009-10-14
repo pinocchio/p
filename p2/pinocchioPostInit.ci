@@ -1,4 +1,5 @@
 post_init_Type_Nil();
+post_init_Type_Class();
 post_init_Type_Object();
 post_init_Type_Array();
 post_init_AST_Assign();
