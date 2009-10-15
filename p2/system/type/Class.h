@@ -45,6 +45,8 @@ extern void CNT_Class_super();
 extern void print_Class(Object obj);
 
 extern Object create_type(unsigned int size, Type_Tag tag);
+extern Type_Tag gettag(Type_Class class);
+extern unsigned int getsize(Type_Class class);
 
 /* ========================================================================= */
 

@@ -113,3 +113,15 @@ void post_init_Type_SmallInt()
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_minus_));
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_equals_));
 }
+
+/* ========================================================================= */
+
+int unwrap_int(Object integer)
+{
+    // TODO do more stuff in case we are not an int.
+    Type_Class class = (Type_Class)HEADER(integer);
+    if (gettag(class) == INT) {
+        return ((Type_SmallInt)integer)->value;
+    }
+    assert1(NULL, "Only SmallInts supported for now\n");
+}

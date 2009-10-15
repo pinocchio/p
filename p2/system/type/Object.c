@@ -47,6 +47,24 @@ NATIVE(Type_Object_isNil)
     poke_EXP(1, False);
 }
 
+NATIVE1(Type_Object_at_)
+    int index = unwrap_int(args->values[0]);
+    Type_Class cls = (Type_Class)HEADER(self);
+    assert0(gettag(cls) == OBJECT);
+    assert0(getsize(cls) > index);
+    assert0(0 <= index);
+    poke_EXP(1, ((Type_Object)self)->ivals[index]);
+}
+
+NATIVE1(Type_Object_at_put_)
+    int index = unwrap_int(args->values[0]);
+    Type_Class cls = (Type_Class)HEADER(self);
+    assert0(gettag(cls) == OBJECT);
+    assert0(getsize(cls) > index);
+    assert0(0 <= index);
+    ((Type_Object)self)->ivals[index] = args->values[1];
+}
+
 /* ========================================================================= */
 
 void post_init_Type_Object()
