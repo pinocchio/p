@@ -69,9 +69,9 @@ NATIVE1(Type_Array_at_)
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
-    assert0(getsize(cls) + as->size > index);
+    assert0(as->size > index);
     assert0(0 <= index);
-    poke_EXP(1, as->values[index]);
+    poke_EXP(1, as->values[getsize(cls) + index]);
 }
 
 NATIVE2(Type_Array_at_put_)
@@ -79,9 +79,30 @@ NATIVE2(Type_Array_at_put_)
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
-    assert0(getsize(cls) + as->size > index);
+    assert0(as->size > index);
     assert0(0 <= index);
-    as->values[index] = args->values[1];
+    as->values[index + getsize(cls)] = args->values[1];
+    poke_EXP(1, self);
+}
+
+NATIVE1(Type_Array_instVarAt_)
+    int index = unwrap_int(args->values[0]);
+    Type_Class cls = (Type_Class)HEADER(self);
+    Type_Tag tag = gettag(cls);
+    assert0(tag == ARRAY);
+    assert0(getsize(cls) > index);
+    assert0(0 <= index);
+    poke_EXP(1, ((Type_Array)self)->values[index]);
+}
+
+NATIVE2(Type_Array_instVarAt_put_)
+    int index = unwrap_int(args->values[0]);
+    Type_Class cls = (Type_Class)HEADER(self);
+    Type_Tag tag = gettag(cls);
+    assert0(tag == ARRAY);
+    assert0(getsize(cls) > index);
+    assert0(0 <= index);
+    ((Type_Array)self)->values[index] = args->values[1];
     poke_EXP(1, self);
 }
 
@@ -94,5 +115,7 @@ void post_init_Type_Array()
     
     store_native_method(Type_Array_Class, SMB_at_,     NM_Type_Array_at_);
     store_native_method(Type_Array_Class, SMB_at_put_, NM_Type_Array_at_put_);
+    store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);
+    store_native_method(Type_Array_Class, SMB_instVarAt_put_, NM_Type_Array_instVarAt_put_);
     store_native_method(Type_Array_Class, SMB_size,    NM_Type_Array_size);
 }
