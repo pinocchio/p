@@ -35,7 +35,7 @@ void pre_init_Type_SmallInt()
     Type_SmallInt_Class->type   = create_type(0, INT);
     Type_SmallInt_Class->super  = (Object)Type_Object_Class;
     
-    Type_SmallInt_cache = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    Type_SmallInt_cache  = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Type_SmallInt_cache -= INT_CACHE_LOWER;
     
     int i;
@@ -124,4 +124,5 @@ int unwrap_int(Object integer)
         return ((Type_SmallInt)integer)->value;
     }
     assert1(NULL, "Only SmallInts supported for now\n");
+    return 0;
 }

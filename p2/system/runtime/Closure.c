@@ -9,7 +9,6 @@ Type_Class Runtime_Closure_Class;
 
 /* ========================================================================= */
 
-
 Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context) {
     NEW_OBJECT(Runtime_Closure);
     result->code    = code;
@@ -28,7 +27,6 @@ void pre_init_Runtime_Closure()
 }
 
 /* ========================================================================= */
-
 
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                             Object class, Type_Array args)
@@ -60,9 +58,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 
 
 NATIVE(Runtime_Closure_apply_)
-    #ifdef DEBUG
     LOG("Closure Apply \n");
-    #endif // DEBUG
     
     Runtime_Closure closure = (Runtime_Closure)self;
     if (closure->code->body->size == 0) { 
@@ -86,11 +82,10 @@ NATIVE(Runtime_Closure_apply_)
     push_CNT(send_Eval);
 }
 
-
 /* ========================================================================= */
 
 void post_init_Runtime_Closure()
 {
     store_native_method(Runtime_Closure_Class, SMB_apply_, NM_Runtime_Closure_apply_);
-    store_native_method(Runtime_Closure_Class, SMB_apply, NM_Runtime_Closure_apply_);
+    store_native_method(Runtime_Closure_Class, SMB_apply,  NM_Runtime_Closure_apply_);
 }

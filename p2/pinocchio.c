@@ -9,6 +9,10 @@
 #include <test/pinocchioTest.h>
 #endif // TEST
 
+void printf0(const char * string, ...) {
+
+}
+
 /* ========================================================================= */
 
 Object * Double_Stack;
