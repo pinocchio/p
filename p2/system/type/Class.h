@@ -56,4 +56,9 @@ extern void assert_class(Object class);
 
 /* ========================================================================= */
 
+extern Type_Class Behaviour;
+extern Type_Class Class;
+
+/* ========================================================================= */
+
 #endif // CLASS_H

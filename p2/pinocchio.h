@@ -119,6 +119,10 @@ extern Type_Class class##_Class;
 
 /* ========================================================================= */
 
+#if TEST
+#define DEBUG
+#endif
+
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");
     #define LOG printf

@@ -263,11 +263,5 @@ void post_init_Type_Class()
                             create_type(4, OBJECT));
     Metaclass->super = (Object)Behaviour;
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
-}
-
-/* ========================================================================= */
-
-void init_class_hierarchy()
-{
-    
+    ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);
 }
