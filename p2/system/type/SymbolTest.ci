@@ -39,7 +39,7 @@ NEW_TEST(Type_Symbol_lastIndexOf)
     //SYMBOL_TEST_SETUP;
 }
 
-NEW_TEST(Type_Symbol_Type_ObjectAt_)
+NEW_TEST(Type_Symbol_at_)
     SYMBOL_TEST_SETUP;
     int i;
     for (i= 0; i<symbol->size; ++i) {
@@ -71,6 +71,6 @@ TEST_SUITE(Type_Symbol,
     RUN_TEST(Type_Symbol_equals_);
     RUN_TEST(Type_Symbol_size);
     RUN_TEST(Type_Symbol_asString);
-    RUN_TEST(Type_Symbol_Type_ObjectAt_);
+    RUN_TEST(Type_Symbol_at_);
     RUN_TEST(Type_Symbol_asType_Array);
 })
