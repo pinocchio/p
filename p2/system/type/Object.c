@@ -37,7 +37,7 @@ void pre_init_Type_Object()
 
 NATIVE0(Type_Object_basicNew)
     assert_class(self);
-    Object result = instantiate((Type_Class)class);
+    Object result = instantiate((Type_Class)self);
     poke_EXP(1, result);
 }
 
@@ -87,7 +87,7 @@ void post_init_Type_Object()
     Type_Object_Class->name = new_Type_String(L"Object");
     Type_Object_Class->methods = new_Type_Dictionary();
     
-    store_native_method((Type_Class)Type_Object_Class, SMB_basicNew, NM_Type_Object_basicNew);
+    store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew, NM_Type_Object_basicNew);
     store_native_method((Type_Class)Type_Object_Class, SMB_equals_, NM_Type_Object_equals);
     store_native_method((Type_Class)Type_Object_Class, SMB_isNil,   NM_Type_Object_isNil);
     store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_, NM_Type_Object_instVarAt_);

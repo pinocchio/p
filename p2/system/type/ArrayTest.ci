@@ -32,7 +32,6 @@ NEW_TEST(Type_Array_at_)
 }
 
 NEW_TEST(Type_Array_at_put_)
-    SKIP_TEST;
     Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
                                      L"TestClass",
                                      create_type(2, ARRAY));
@@ -41,9 +40,45 @@ NEW_TEST(Type_Array_at_put_)
                                (Object)new_Type_SmallInt(0),
                                (Object)True);
     assert0(result == o);
+    Object integer = (Object)new_Type_SmallInt(100);
+    Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(0), integer);
     Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
-    assert0(((Type_Array)o)->values[0] == (Object)True);
+    assert0(((Type_Array)o)->values[0] == integer);
+    assert0(((Type_Array)o)->values[1] == Nil);
+    assert0(((Type_Array)o)->values[2] == (Object)True);
+    assert0(((Type_Array)o)->values[3] == (Object)False);
+    assert0(((Type_Array)o)->values[4] == Nil);
+}
+
+NEW_TEST(Type_Array_basicNew_)
+    Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
+                                     L"TestClass",
+                                     create_type(2, ARRAY));
+    Object o = Eval_Send1((Object)cls, SMB_basicNew_, (Object)new_Type_SmallInt(3));
+    ((Type_Array)o)->values[0] = (Object)True;
+    ((Type_Array)o)->values[1] = (Object)False;
+    Object integer = (Object)new_Type_SmallInt(100);
+    ((Type_Array)o)->values[2] = integer;
+    Object result;
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(0));
+    assert0(result == (Object)True);
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(1));
+    assert0(result == (Object)False);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(0));
+    assert0(result == integer);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(1));
+    assert0(result == Nil);
+    result = Eval_Send2(o, SMB_at_put_,
+                               (Object)new_Type_SmallInt(0),
+                               (Object)True);
+    assert0(result == o);
+    Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(0), integer);
+    Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
+    assert0(((Type_Array)o)->values[0] == integer);
     assert0(((Type_Array)o)->values[1] == (Object)False);
+    assert0(((Type_Array)o)->values[2] == (Object)True);
+    assert0(((Type_Array)o)->values[3] == (Object)False);
+    assert0(((Type_Array)o)->values[4] == Nil);
 }
 
 
@@ -54,4 +89,5 @@ TEST_SUITE(Type_Array,
     RUN_TEST(Type_Array_size);
     RUN_TEST(Type_Array_at_);
     RUN_TEST(Type_Array_at_put_);
+    RUN_TEST(Type_Array_basicNew_);
 })

@@ -57,7 +57,7 @@ NATIVE1(Type_Array_basicNew_)
     assert_class(self);
     int size = unwrap_int(args->values[0]);
     assert0(size >= 0);
-    Object result = instantiate_sized((Type_Class)class, (unsigned int)size);
+    Object result = instantiate_sized((Type_Class)self, (unsigned int)size);
     poke_EXP(1, result);
 }
 
@@ -114,7 +114,7 @@ void post_init_Type_Array()
     empty_Type_Array->size   = 0;
     Type_Array_Class->methods = new_Type_Dictionary();
     
-    store_native_method(Type_Array_Class, SMB_basicNew_, NM_Type_Array_basicNew_);
+    store_native_method((Type_Class)HEADER(Type_Array_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
     store_native_method(Type_Array_Class, SMB_at_,     NM_Type_Array_at_);
     store_native_method(Type_Array_Class, SMB_at_put_, NM_Type_Array_at_put_);
     store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);
