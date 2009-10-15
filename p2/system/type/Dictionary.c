@@ -66,7 +66,7 @@ Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 
 /* ========================================================================= */
 
-NATIVE1(Type_Dictionary_Type_ObjectAt_)
+NATIVE1(Type_Dictionary_at_)
     Object result = Type_Dictionary_lookup((Type_Dictionary)self, args->values[0]);
     if(!result) {
         result = Nil;
@@ -74,7 +74,7 @@ NATIVE1(Type_Dictionary_Type_ObjectAt_)
     poke_EXP(1, result);
 }
 
-NATIVE2(Type_Dictionary_Type_ObjectAt_put_)
+NATIVE2(Type_Dictionary_at_put_)
     Type_Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
     poke_EXP(1, args->values[1]);
 }
@@ -83,7 +83,7 @@ NATIVE2(Type_Dictionary_Type_ObjectAt_put_)
 
 void post_init_Type_Dictionary()
 {
-    store_native_method(Type_Dictionary_Class, SMB_objectAt_, NM_Type_Dictionary_Type_ObjectAt_);
-    store_native_method(Type_Dictionary_Class, SMB_objectAt_put_, NM_Type_Dictionary_Type_ObjectAt_put_);
+    store_native_method(Type_Dictionary_Class, SMB_at_, NM_Type_Dictionary_at_);
+    store_native_method(Type_Dictionary_Class, SMB_at_put_, NM_Type_Dictionary_at_put_);
 }
 

@@ -60,24 +60,10 @@ Object Type_Array_Type_ObjectAt(Type_Array array, unsigned int index)
     return array->values[index];
 }
 
-NATIVE1(Type_Array_Type_ObjectAt_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
-    int index = ((Type_SmallInt) args->values[0])->value;
-    poke_EXP(1, ((Type_Array)self)->values[index]);
-}
-
-NATIVE2(Type_Array_Type_ObjectAt_put_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class)
-    unsigned int index = ((Type_SmallInt)args->values[0])->value;
-    ((Type_Array)self)->values[index] = args->values[1];
-    poke_EXP(1, args->values[1]);
-}
-
 NATIVE0(Type_Array_size)
     poke_EXP(1, new_Type_SmallInt(((Type_Array)self)->size));
 }
 
-/*
 NATIVE1(Type_Array_at_)
     int index = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
@@ -85,19 +71,20 @@ NATIVE1(Type_Array_at_)
     assert0(gettag(cls) == ARRAY);
     assert0(getsize(cls) + as->size > index);
     assert0(0 <= index);
-    poke_EXP(1, ((Type_Object)self)->ivals[index]);
+    poke_EXP(1, as->values[index]);
 }
 
 NATIVE2(Type_Array_at_put_)
     int index = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
+    Type_Array as = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
-    assert0(getsize(cls) > index);
+    assert0(getsize(cls) + as->size > index);
     assert0(0 <= index);
-    ((Type_Object)self)->ivals[index] = args->values[1];
+    as->values[index] = args->values[1];
     poke_EXP(1, self);
 }
-*/
+
 /* ========================================================================= */
 
 void post_init_Type_Array()
@@ -105,7 +92,7 @@ void post_init_Type_Array()
     empty_Type_Array->size   = 0;
     Type_Array_Class->methods = new_Type_Dictionary();
     
-    store_native_method(Type_Array_Class, SMB_objectAt_,     NM_Type_Array_Type_ObjectAt_);
-    store_native_method(Type_Array_Class, SMB_objectAt_put_, NM_Type_Array_Type_ObjectAt_put_);
-    store_native_method(Type_Array_Class, SMB_size,          NM_Type_Array_size);
+    store_native_method(Type_Array_Class, SMB_at_,     NM_Type_Array_at_);
+    store_native_method(Type_Array_Class, SMB_at_put_, NM_Type_Array_at_put_);
+    store_native_method(Type_Array_Class, SMB_size,    NM_Type_Array_size);
 }

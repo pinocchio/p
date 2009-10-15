@@ -46,7 +46,7 @@ void initialize_Symbol()
 /* ========================================================================= */
 
 
-NATIVE1(Type_Symbol_objectAt_)
+NATIVE1(Type_Symbol_at_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
     poke_EXP(1, new_Type_Character(((Type_Symbol) self)->value[index->value]));
@@ -116,7 +116,7 @@ void post_init_Type_Symbol()
 
 void install_symbol_methods(Type_Class class)
 {
-    store_native_method(class, SMB_objectAt_, NM_Type_Symbol_objectAt_);
+    store_native_method(class, SMB_at_,       NM_Type_Symbol_at_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
