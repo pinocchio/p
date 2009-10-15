@@ -31,75 +31,7 @@ unsigned int getsize(Type_Class class)
 
 /* ========================================================================= */
 
-Object instantiate_ARRAY(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
-    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
-    result->size = new_Type_SmallInt(size);
-    return (Object)result;
-}
-
-Object instantiate_BYTES(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
-    /*
-    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
-    result->size = new_Type_SmallInt(size);
-    return (Object)result;
-    */
-}
-
-Object instantiate_CHAR(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate chars!\n");
-}
-
-Object instantiate_INT(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate ints!\n");
-}
-
-Object instantiate_LONG(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate long!\n");
-}
-
-Object instantiate_OBJECT(unsigned int size)
-{
-    return (Object)NEW_ARRAYED(struct Type_Object_t, Object[size]);
-}
-
-Object instantiate_WORDS(unsigned int size)
-{
-    assert1(NULL, "Should not instantiate ARRAY without size arg!\n");
-    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, Object[size]);
-    result->size = new_Type_SmallInt(size);
-    return (Object)result;
-}
-
-#define INSTANTIATE(type)\
-    if (tag == type) {\
-        result = instantiate##_##type(getsize(class));\
-        HEADER(result) = (Object)class;\
-        return result;\
-    }
-
-Object instantiate(Type_Class class)
-{
-    Type_Tag tag = gettag(class);
-    Object result = NULL;
-
-    INSTANTIATE(ARRAY);
-    INSTANTIATE(BYTES);
-    INSTANTIATE(CHAR);
-    INSTANTIATE(INT);
-    INSTANTIATE(LONG);
-    INSTANTIATE(OBJECT);
-    INSTANTIATE(WORDS);
-
-    assert(NULL, printf("Unknown object format: %i\n", tag));
-}
-
+#include <system/type/Instantiate.ci>
 
 /* ========================================================================= */
 

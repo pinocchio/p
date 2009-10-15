@@ -1,0 +1,59 @@
+Object instantiate_ARRAY(unsigned int base, unsigned int extra)
+{
+    return (Object)NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
+}
+
+Object instantiate_BYTES(unsigned int base, unsigned int extra)
+{
+    assert1(NULL, "Bytes are not supported yet.\n");
+}
+
+Object instantiate_WORDS(unsigned int base, unsigned int extra)
+{
+    return (Object)NEW_ARRAYED(struct Type_Symbol_t, wchar_t[base+extra]);
+}
+
+Object instantiate_OBJECT(unsigned int size)
+{
+    return (Object)NEW_ARRAYED(struct Type_Object_t, Object[size]);
+}
+
+/* ========================================================================= */
+
+#define INSTANTIATE(type)\
+    if (tag == type) {\
+        result = instantiate##_##type(getsize(class));\
+        HEADER(result) = (Object)class;\
+        return result;\
+    }
+
+#define INSTANTIATE_SIZED(type)\
+    if (tag == type) {\
+        result = instantiate##_##type(getsize(class), size);\
+        HEADER(result) = (Object)class;\
+        return result;\
+    }
+
+/* ========================================================================= */
+
+Object instantiate(Type_Class class)
+{
+    Type_Tag tag = gettag(class);
+    Object result = NULL;
+
+    INSTANTIATE(OBJECT);
+
+    assert(NULL, printf("Not a fixed-sized object type: %i\n", tag));
+}
+
+Object instantiate_sized(Type_Class class, unsigned int size)
+{
+    Type_Tag tag = gettag(class);
+    Object result = NULL;
+
+    INSTANTIATE_SIZED(ARRAY);
+    INSTANTIATE_SIZED(BYTES);
+    INSTANTIATE_SIZED(WORDS);
+
+    assert(NULL, printf("Not a arrayed object type: %i\n", tag));
+}

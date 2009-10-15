@@ -49,6 +49,7 @@ extern Object create_type(unsigned int size, Type_Tag tag);
 /* ========================================================================= */
 
 extern Object instantiate(Type_Class class);
+extern Object instantiate_sized(Type_Class class, unsigned int size);
 
 /* ========================================================================= */
 
