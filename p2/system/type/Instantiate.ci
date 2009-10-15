@@ -1,6 +1,11 @@
 Object instantiate_ARRAY(unsigned int base, unsigned int extra)
 {
-    return (Object)NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
+    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
+    int i;
+    for (i = 0; i < base+extra; i++) {
+        result->values[i] = Nil;
+    }
+    return (Object)result;
 }
 
 Object instantiate_BYTES(unsigned int base, unsigned int extra)
@@ -15,7 +20,12 @@ Object instantiate_WORDS(unsigned int base, unsigned int extra)
 
 Object instantiate_OBJECT(unsigned int size)
 {
-    return (Object)NEW_ARRAYED(struct Type_Object_t, Object[size]);
+    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
+    int i;
+    for (i = 0; i < size; i++) {
+        result->ivals[i] = Nil;
+    }
+    return (Object)result;
 }
 
 /* ========================================================================= */

@@ -51,3 +51,5 @@ extern Type_Symbol SMB_isNotNil;
 extern Type_Symbol SMB_lt_;
 extern Type_Symbol SMB_gt_;
 extern Type_Symbol SMB_notEquals_;
+extern Type_Symbol SMB_at_;
+extern Type_Symbol SMB_at_put_;

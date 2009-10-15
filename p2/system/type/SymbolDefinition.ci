@@ -52,3 +52,5 @@ Type_Symbol SMB_isNotNil;
 Type_Symbol SMB_lt_;
 Type_Symbol SMB_gt_;
 Type_Symbol SMB_notEquals_;
+Type_Symbol SMB_at_;
+Type_Symbol SMB_at_put_;

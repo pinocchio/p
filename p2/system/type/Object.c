@@ -80,4 +80,6 @@ void post_init_Type_Object()
     
     store_native_method((Type_Class)Type_Object_Class, SMB_equals_, NM_Type_Object_equals);
     store_native_method((Type_Class)Type_Object_Class, SMB_isNil,   NM_Type_Object_isNil);
+    store_native_method((Type_Class)Type_Object_Class, SMB_at_,     NM_Type_Object_at_);
+    store_native_method((Type_Class)Type_Object_Class, SMB_at_put_, NM_Type_Object_at_put_);
 }
