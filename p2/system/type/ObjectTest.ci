@@ -28,6 +28,19 @@ NEW_TEST(Type_Object_at_)
     assert0(result == Nil);
 }
 
+NEW_TEST(Type_Object_at_put_)
+    Type_Class cls = new_Named_Class((Object)Type_Object_Class, 
+                                     L"TestClass",
+                                     create_type(3, OBJECT));
+    Object o = instantiate(cls);
+    Object result = Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(0),
+                               (Object)True);
+    assert0(result == o);
+    Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
+    assert0(((Type_Object)o)->ivals[0] == (Object)True);
+    assert0(((Type_Object)o)->ivals[1] == (Object)False);
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(Type_Object,
@@ -35,4 +48,5 @@ TEST_SUITE(Type_Object,
     RUN_TEST(Type_Object_methods);
     RUN_TEST(Type_Object_isNil);
     RUN_TEST(Type_Object_at_);
+    RUN_TEST(Type_Object_at_put_);
 })

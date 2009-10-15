@@ -56,13 +56,14 @@ NATIVE1(Type_Object_at_)
     poke_EXP(1, ((Type_Object)self)->ivals[index]);
 }
 
-NATIVE1(Type_Object_at_put_)
+NATIVE2(Type_Object_at_put_)
     int index = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
     assert0(gettag(cls) == OBJECT);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
     ((Type_Object)self)->ivals[index] = args->values[1];
+    poke_EXP(1, self);
 }
 
 /* ========================================================================= */
