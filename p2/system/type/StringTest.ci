@@ -27,12 +27,12 @@ NEW_TEST(Type_String_concat_)
     
     Type_String string_result = Type_String_concat_(string, string2);
     ASSERT_TYPE(string_result, Type_String_Class);
-    assert0(string_result->size->value == (string->size->value + string2->size->value));
+    assert0(string_result->size == (string->size + string2->size));
 
     result = Eval_Send1((Object)string, SMB_concat_, (Object)string2);
     Type_String resultString = (Type_String)resultString;
     ASSERT_TYPE(result, Type_String_Class);
-    assert((((Type_String) result)->size->value == (string->size->value + string2->size->value)),
+    assert((((Type_String) result)->size == (string->size + string2->size)),
         printf("%ls\n", resultString->value));
     ASSERT_EMPTY_STACK;
 }
@@ -41,10 +41,10 @@ NEW_TEST(Type_String_asArray)
     STRING_TEST_SETUP;
     result = Eval_Send0((Object)string, SMB_asArray);
     ASSERT_TYPE(result, Type_Array_Class);
-    assert0(((Type_Array)result)->size->value == string->size->value);
+    assert0(((Type_Array)result)->size == string->size);
     ASSERT_EMPTY_STACK;
     int i=0;
-    for (i=0; i<string->size->value; i++) {
+    for (i=0; i<string->size; i++) {
        assert0(((Type_Character)((Type_Array)result)->values[i])->value == string->value[i]);
     }
 }
@@ -52,7 +52,7 @@ NEW_TEST(Type_String_asArray)
 
 NEW_TEST(Type_String_char2Type_String)
     Type_String string = char2Type_String("abc");
-    assert(string->size->value == 3,          printf("%i", string->size->value));
+    assert(string->size == 3,          printf("%i", string->size));
     assert(wcscmp(string->value, L"abc") == 0,printf("%ls", string->value));
 }
 

@@ -57,8 +57,8 @@ extern Type_Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) \
 	int size_value = (raw_size); \
-    assert((args->size->value <= size_value && args->size->value >= 0), \
-		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size->value));
+    assert((args->size <= size_value && args->size >= 0), \
+		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size));
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) \

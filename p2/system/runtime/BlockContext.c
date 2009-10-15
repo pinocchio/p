@@ -60,9 +60,9 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
     }
     /* TODO jump to error handler. */
     assert1((Object)self->closure->code == key, "TODO jump to error handler");
-    assert(index < self->values->size->value,
+    assert(index < self->values->size,
 		   printf("Lookup failed, index \"%i\" out of range [0:%i]", 
-                 index, self->values->size->value));
+                 index, self->values->size));
     
     return self->values->values[index];
 }
@@ -82,8 +82,8 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
     }
     /* TODO jump to error handler. */
     assert1((Object)self->closure->code == key, "TODO jump to error handler");
-    assert(index < self->values->size->value,
-		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size->value));
+    assert(index < self->values->size,
+		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size));
     
     self->values->values[index] = value;
 }

@@ -167,7 +167,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
     assert1(file != NULL, "Invalid Argument");
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
     int i;
-    for (i =0; i<string->size->value; i++) { 
+    for (i =0; i<string->size; i++) { 
         putwc(string->value[i], file->file);
     }
 }

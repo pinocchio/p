@@ -33,7 +33,8 @@ NEW_TEST(Type_Object_at_put_)
                                      L"TestClass",
                                      create_type(3, OBJECT));
     Object o = instantiate(cls);
-    Object result = Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(0),
+    Object result = Eval_Send2(o, SMB_at_put_,
+                               (Object)new_Type_SmallInt(0),
                                (Object)True);
     assert0(result == o);
     Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);

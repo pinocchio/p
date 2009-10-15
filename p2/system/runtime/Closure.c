@@ -35,7 +35,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
      
-    if (closure->code->body->size->value == 0) { 
+    if (closure->code->body->size == 0) { 
         poke_EXP(1, self);
         return; 
     }
@@ -50,7 +50,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     Env = (Object)env;
 
     
-    if (1 < closure->code->body->size->value) {
+    if (1 < closure->code->body->size) {
         push_CNT(AST_Block_continue);
     }
     
@@ -65,7 +65,7 @@ NATIVE(Runtime_Closure_apply_)
     #endif // DEBUG
     
     Runtime_Closure closure = (Runtime_Closure)self;
-    if (closure->code->body->size->value == 0) { 
+    if (closure->code->body->size == 0) { 
         poke_EXP(1, Nil);
         return; 
     }
@@ -78,7 +78,7 @@ NATIVE(Runtime_Closure_apply_)
     
     Env = (Object)env;
     
-    if (1 < closure->code->body->size->value) {
+    if (1 < closure->code->body->size) {
         push_CNT(AST_Block_continue);
     }
     

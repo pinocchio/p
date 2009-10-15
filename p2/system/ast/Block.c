@@ -34,7 +34,7 @@ void CNT_AST_Block_continue()
     poke_EXP(1, env->closure->code->body->values[env->pc]);
     
     env->pc++;
-    if (env->closure->code->body->size->value <= env->pc) {
+    if (env->closure->code->body->size <= env->pc) {
         zap_CNT();
     } 
     push_CNT(send_Eval);

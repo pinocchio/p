@@ -6,7 +6,7 @@ NEW_TEST(Type_Array_Type_ObjectAt_)
     Type_Array args    = new_Raw_Type_Array(1);
     array->values[4]  = integer2;
     int i; 
-    for (i=0; i<array->size->value; i++) {
+    for (i=0; i<array->size; i++) {
         if (i==4) { continue; }
         args->values[0] = (Object)new_Type_SmallInt(i); 
         assert0(Eval_Send((Object)array, SMB_objectAt_, args) == integer);

@@ -51,13 +51,13 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
-    int len = str1->size->value + str2->size->value;
+    int len = str1->size + str2->size;
     wchar_t* concated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
     int i, j;
-    for (i=0; i<str1->size->value; i++) {
+    for (i=0; i<str1->size; i++) {
         concated[i] = str1->value[i];
     }
-    for (j=0; j<str2->size->value; j++) {
+    for (j=0; j<str2->size; j++) {
         concated[i+j] = str2->value[j];
     } 
     Type_String string =  new_Type_String(concated);

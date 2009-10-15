@@ -15,15 +15,15 @@ Type_Dictionary SMB_Table;
 
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
-    int size = wcslen(input) + 1;
+    unsigned int size = wcslen(input) + 1;
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
     HEADER(result)      = (Object)Type_Symbol_Class;
     result->hash        = NULL;
-    int i = 0;
+    unsigned int i = 0;
     for (; i < size; i++) {
         result->value[i] = input[i];
     }
-    result->size        = new_Type_SmallInt(size - 1);
+    result->size        = size - 1;
     return result;
 }
 
@@ -59,9 +59,9 @@ NATIVE0(Type_Symbol_asString)
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
-    Type_Array array = new_Raw_Type_Array(self_symbol->size->value);
+    Type_Array array = new_Raw_Type_Array(self_symbol->size);
     int i;
-    for (i=0; i<self_symbol->size->value; i++) {
+    for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
     }
     return array;
@@ -89,7 +89,7 @@ NATIVE0(Type_Symbol_hash)
 
 
 NATIVE0(Type_Symbol_size)
-    poke_EXP(1, ((Type_Symbol)self)->size);
+    poke_EXP(1, (Object)new_Type_SmallInt(((Type_Symbol)self)->size));
 }
 
 NATIVE1(Type_Symbol_indexOf_)
