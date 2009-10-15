@@ -20,11 +20,11 @@ NEW_TEST(Type_Object_at_)
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;
     Object result;
-    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(0));
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(0));
     assert0(result == (Object)True);
-    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(1));
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(1));
     assert0(result == (Object)False);
-    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(2));
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(2));
     assert0(result == Nil);
 }
 
@@ -33,11 +33,11 @@ NEW_TEST(Type_Object_at_put_)
                                      L"TestClass",
                                      create_type(3, OBJECT));
     Object o = instantiate(cls);
-    Object result = Eval_Send2(o, SMB_at_put_,
+    Object result = Eval_Send2(o, SMB_instVarAt_put_,
                                (Object)new_Type_SmallInt(0),
                                (Object)True);
     assert0(result == o);
-    Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
+    Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(1), (Object)False);
     assert0(((Type_Object)o)->ivals[0] == (Object)True);
     assert0(((Type_Object)o)->ivals[1] == (Object)False);
 }

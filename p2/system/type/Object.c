@@ -47,19 +47,21 @@ NATIVE(Type_Object_isNil)
     poke_EXP(1, False);
 }
 
-NATIVE1(Type_Object_at_)
+NATIVE1(Type_Object_instVarAt_)
     int index = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    assert0(gettag(cls) == OBJECT);
+    Type_Tag tag = gettag(cls);
+    assert0(tag == OBJECT || tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
     poke_EXP(1, ((Type_Object)self)->ivals[index]);
 }
 
-NATIVE2(Type_Object_at_put_)
+NATIVE2(Type_Object_instVarAt_put_)
     int index = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    assert0(gettag(cls) == OBJECT);
+    Type_Tag tag = gettag(cls);
+    assert0(tag == OBJECT || tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
     ((Type_Object)self)->ivals[index] = args->values[1];
@@ -81,6 +83,6 @@ void post_init_Type_Object()
     
     store_native_method((Type_Class)Type_Object_Class, SMB_equals_, NM_Type_Object_equals);
     store_native_method((Type_Class)Type_Object_Class, SMB_isNil,   NM_Type_Object_isNil);
-    store_native_method((Type_Class)Type_Object_Class, SMB_at_,     NM_Type_Object_at_);
-    store_native_method((Type_Class)Type_Object_Class, SMB_at_put_, NM_Type_Object_at_put_);
+    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_, NM_Type_Object_instVarAt_);
+    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_put_, NM_Type_Object_instVarAt_put_);
 }
