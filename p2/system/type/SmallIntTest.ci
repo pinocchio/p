@@ -88,23 +88,6 @@ NEW_TEST(Type_SmallInt_hash)
     assert0(((Type_SmallInt)result)->value == number->value);
 }
 
-NEW_TEST(Type_SmallInt_basicNew_)
-    Type_Class cls = new_Named_Class((Object)Type_Object_Class,
-                                     L"Test Class",
-                                     create_type(0, INT));
-    Object o1 = instantiate_int(cls, 45);
-    Object o2 = instantiate_int(cls, -7001);
-    Object o3 = instantiate_int(cls, 0);
-    // The limit of int values?!?
-    Object o4 = instantiate_int(cls, -32768);
-    Object o5 = instantiate_int(cls, 32767);
-    assert0(((Type_SmallInt)o1)->value == 45);
-    assert0(((Type_SmallInt)o2)->value == -7001);
-    assert0(((Type_SmallInt)o3)->value == 0);
-    assert0(((Type_SmallInt)o4)->value == -32768);
-    assert0(((Type_SmallInt)o5)->value == 32767);
-}
-
 /* ========================================================================= */
 
 TEST_SUITE(Type_SmallInt,
@@ -121,5 +104,4 @@ TEST_SUITE(Type_SmallInt,
     RUN_TEST(Type_SmallInt_gt_);
     RUN_TEST(Type_SmallInt_notEquals_);
     RUN_TEST(Type_SmallInt_hash);
-    RUN_TEST(Type_SmallInt_basicNew_);
 })

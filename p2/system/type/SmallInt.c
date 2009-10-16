@@ -46,13 +46,6 @@ void pre_init_Type_SmallInt()
 
 /* ========================================================================= */
 
-NATIVE1(Type_SmallInt_basicNew_)
-    assert_class(self);
-    int value = unwrap_int(args->values[0]);
-    Object result = instantiate_int((Type_Class)self, value);
-    poke_EXP(1, result);
-}
-
 #define Type_SmallInt_BINARY_OPERATION(name, op)\
 NATIVE1(Type_SmallInt_##name)\
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);\
@@ -102,7 +95,6 @@ void post_init_Type_SmallInt()
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
     Type_SmallInt_Class->methods = new_Type_Dictionary();
     
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_basicNew_,   NM_Type_SmallInt_basicNew_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_equals_,     NM_Type_SmallInt_equals_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_plus_,       NM_Type_SmallInt_plus_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_minus_,      NM_Type_SmallInt_minus_);   
