@@ -22,6 +22,13 @@ Object instantiate_WORDS(unsigned int base, unsigned int extra)
     return (Object)result;
 }
 
+Object instantiate_INT(int value)
+{
+    NEW_OBJECT(Type_SmallInt);
+    result->value = value;
+    return (Object)result;
+}
+
 Object instantiate_OBJECT(unsigned int size)
 {
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
@@ -37,6 +44,13 @@ Object instantiate_OBJECT(unsigned int size)
 #define INSTANTIATE(type)\
     if (tag == type) {\
         result = instantiate##_##type(getsize(class));\
+        HEADER(result) = (Object)class;\
+        return result;\
+    }
+
+#define INSTANTIATE_INT(type)\
+    if (tag == type) {\
+        result = instantiate##_##type(value);\
         HEADER(result) = (Object)class;\
         return result;\
     }
@@ -60,6 +74,18 @@ Object instantiate(Type_Class class)
     assert(NULL, printf("Not a fixed-sized object type: %i\n", tag));
     return NULL;
 }
+
+Object instantiate_int(Type_Class class, int value)
+{
+    Type_Tag tag = gettag(class);
+    Object result = NULL;
+
+    INSTANTIATE_INT(INT);
+
+    assert(NULL, printf("Not an int object type: %i\n", tag));
+    return NULL;
+}
+
 
 Object instantiate_sized(Type_Class class, unsigned int size)
 {

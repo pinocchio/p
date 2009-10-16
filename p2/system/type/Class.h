@@ -51,6 +51,7 @@ extern unsigned int getsize(Type_Class class);
 /* ========================================================================= */
 
 extern Object instantiate(Type_Class class);
+extern Object instantiate_int(Type_Class class, int value);
 extern Object instantiate_sized(Type_Class class, unsigned int size);
 
 /* ========================================================================= */
