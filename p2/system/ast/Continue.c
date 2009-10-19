@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/ast/Continue.h>
@@ -24,7 +23,7 @@ void pre_init_AST_Continue()
 
 /* ========================================================================= */
 
-NATIVE1(AST_Continue_eval)
+NATIVE1(AST_Continue_escape_)
     LOGFUN;
     AST_Continue ast_cont = (AST_Continue)self;
     // restore the stack
@@ -39,5 +38,5 @@ NATIVE1(AST_Continue_eval)
 
 void post_init_AST_Continue()
 {
-    store_native_method(AST_Continue_Class, SMB_eval, NM_AST_Continue_eval);
+    store_native_method(AST_Continue_Class, SMB_escape_, NM_AST_Continue_escape_);
 }

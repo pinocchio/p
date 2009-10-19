@@ -22,10 +22,29 @@ NEW_TEST(ast_callec_returned)
     assert0(((AST_Continue)result)->Env == Env);
 }
 
+
+NEW_TEST(ast_callec_escape)
+    Object i = (Object)new_Type_SmallInt(100);
+    Object j = (Object)new_Type_SmallInt(200);
+    AST_Variable cnt = new_AST_Variable(L"Continue");
+    AST_Send s = new_AST_Send((Object)cnt, (Object)SMB_escape_,
+                          new_Type_Array_With(1, (Object)new_AST_Constant(i)));
+    Type_Array body = new_Type_Array_With(2, (Object)s);
+    body->values[1] = (Object)new_AST_Constant(j);
+    AST_Block block = new_AST_Block(1, body);
+    cnt->key = (Object)block;
+    cnt->index = 0;
+    Type_Array args = new_Type_Array_With(1, (Object)block);
+    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
+                                   SMB_on_, args);
+    assert0(result == i);
+}
+
 /* ========================================================================= */
 
 TEST_SUITE(AST_Callec,
 {
     RUN_TEST(ast_callec_unused);
     RUN_TEST(ast_callec_returned);
+    RUN_TEST(ast_callec_escape);
 })
