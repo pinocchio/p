@@ -55,3 +55,4 @@ Type_Symbol SMB_instVarAt_;
 Type_Symbol SMB_instVarAt_put_;
 Type_Symbol SMB_basicNew;
 Type_Symbol SMB_basicNew_;
+Type_Symbol SMB_on_;

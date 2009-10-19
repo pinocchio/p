@@ -59,7 +59,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
 void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
 {
     #ifdef DEBUG
-    LOG("Closure Apply \n");
+    LOG("Closure Apply\n");
     #endif // DEBUG
     
     ASSERT_ARG_SIZE(closure->code->paramCount->value);
@@ -69,9 +69,10 @@ void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
         return; 
     }
     
+    // TODO check if we call closure from source location. if so just pop
+    // env-frame.
     push_restore_env();  // pokes EXP
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
-    env->home_context = closure->context->home_context;
     
     Env = (Object)env;
     

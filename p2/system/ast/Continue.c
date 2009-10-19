@@ -31,11 +31,8 @@ NATIVE1(AST_Continue_eval)
     _EXP_ = ast_cont->exp_offset + &(Double_Stack[0]);
     _CNT_ = (cont*)(&(Double_Stack[STACK_SIZE]) - ast_cont->cnt_offset);
     Env   = ast_cont->Env;
-    // TODO restore the env
-    
-    // insert the continuation
+
     poke_EXP(1, args->values[0]);
-    //push_CNT(send_Eval);
 }
 
 /* ========================================================================= */

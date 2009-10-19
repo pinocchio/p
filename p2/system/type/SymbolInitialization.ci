@@ -37,6 +37,7 @@ SMB_lt_                   = new_Type_Symbol(L"<");
 SMB_minus_                = new_Type_Symbol(L"minus:");
 SMB_not                   = new_Type_Symbol(L"not");
 SMB_notEquals_            = new_Type_Symbol(L"notEquals:");
+SMB_on_                   = new_Type_Symbol(L"on:");
 SMB_or_                   = new_Type_Symbol(L"or:");
 SMB_plus_                 = new_Type_Symbol(L"plus:");
 SMB_read                  = new_Type_Symbol(L"read");

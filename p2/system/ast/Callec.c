@@ -30,11 +30,12 @@ void pre_init_AST_Callec()
 void apply(Object closure, Type_Array args)
 {
     // TODO in the alternative case, send "apply" message.
+    printf("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
     assert0(HEADER(closure) == (Object)Runtime_Closure_Class);
     Runtime_Closure_apply((Runtime_Closure)closure, args);
 }
 
-NATIVE1(AST_Callec_eval)
+NATIVE1(AST_Callec_on_)
     LOGFUN;
     AST_Continue cont   = new_AST_Continue();
     cont->exp_offset    = (_EXP_ - &(Double_Stack[0]));
@@ -42,12 +43,15 @@ NATIVE1(AST_Callec_eval)
     cont->Env = Env;
     // optimization, reuse array object.
     // make sure to undo when introducing others
+    Object closure = args->values[0];
     args->values[0] = (Object)cont;
-    apply(args->values[0], args);
+    apply(closure, args);
 }
 
 /* ========================================================================= */
 
 void post_init_AST_Callec()
 {
+    store_native_method((Type_Class)HEADER(AST_Callec_Class),
+                        SMB_on_, NM_AST_Callec_on_);
 }

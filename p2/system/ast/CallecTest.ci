@@ -1,7 +1,31 @@
+NEW_TEST(ast_callec_unused)
+    Object i = (Object)new_Type_SmallInt(100);
+    Object exp = (Object)new_AST_Constant((Object)i);
+    Type_Array body = new_Type_Array_With(1, exp);
+    AST_Block block = new_AST_Block(1, body);
+    Type_Array args = new_Type_Array_With(1, (Object)block);
+    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
+                                   SMB_on_, args);
+    assert0(result == i);
+}
+
+NEW_TEST(ast_callec_returned)
+    AST_Variable cnt = new_AST_Variable(L"Continue");
+    Type_Array body = new_Type_Array_With(1, (Object)cnt);
+    AST_Block block = new_AST_Block(1, body);
+    cnt->key = (Object)block;
+    cnt->index = 0;
+    Type_Array args = new_Type_Array_With(1, (Object)block);
+    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
+                                   SMB_on_, args);
+    assert0(HEADER(result) == (Object)AST_Continue_Class);
+    assert0(((AST_Continue)result)->Env == Env);
+}
 
 /* ========================================================================= */
 
 TEST_SUITE(AST_Callec,
 {
-
+    RUN_TEST(ast_callec_unused);
+    RUN_TEST(ast_callec_returned);
 })

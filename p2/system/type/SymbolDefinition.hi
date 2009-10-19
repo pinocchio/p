@@ -54,3 +54,4 @@ extern Type_Symbol SMB_instVarAt_;
 extern Type_Symbol SMB_instVarAt_put_;
 extern Type_Symbol SMB_basicNew;
 extern Type_Symbol SMB_basicNew_;
+extern Type_Symbol SMB_on_;
