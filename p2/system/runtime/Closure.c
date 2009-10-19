@@ -56,21 +56,20 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     push_CNT(send_Eval);
 }
 
-
-NATIVE(Runtime_Closure_apply_)
+void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
+{
     #ifdef DEBUG
     LOG("Closure Apply \n");
     #endif // DEBUG
     
-    Runtime_Closure closure = (Runtime_Closure)self;
+    ASSERT_ARG_SIZE(closure->code->paramCount->value);
+
     if (closure->code->body->size == 0) { 
         poke_EXP(1, Nil);
         return; 
     }
     
     push_restore_env();  // pokes EXP
-    ASSERT_ARG_SIZE(closure->code->paramCount->value);
-    
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
     env->home_context = closure->context->home_context;
     
@@ -82,6 +81,11 @@ NATIVE(Runtime_Closure_apply_)
     
     push_EXP(closure->code->body->values[0]);
     push_CNT(send_Eval);
+}
+
+NATIVE(Runtime_Closure_apply_)
+    Runtime_Closure closure = (Runtime_Closure)self;
+    Runtime_Closure_apply(closure, args);
 }
 
 /* ========================================================================= */

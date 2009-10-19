@@ -6,9 +6,8 @@
 /* ========================================================================= */
 
 struct AST_Callec_t {
-    AST_Continue   cont;
     Object         target;
-    AST_Info        info;
+    AST_Info       info;
 };
 
 CREATE_INITIALIZERS(AST_Callec)

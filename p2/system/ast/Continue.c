@@ -9,7 +9,7 @@ Type_Class AST_Continue_Class;
 
 /* ========================================================================= */
 
-AST_Continue new_AST_Continue(Object target)
+AST_Continue new_AST_Continue()
 {
     NEW_OBJECT(AST_Continue);
     return result;
@@ -26,10 +26,11 @@ void pre_init_AST_Continue()
 
 NATIVE1(AST_Continue_eval)
     LOGFUN;
-    AST_Continue ast_cont = (AST_Continue) self;
+    AST_Continue ast_cont = (AST_Continue)self;
     // restore the stack
-    _EXP_ = ast_cont->EXP;
-    _CNT_ = ast_cont->CNT;
+    _EXP_ = ast_cont->exp_offset + &(Double_Stack[0]);
+    _CNT_ = (cont*)(&(Double_Stack[STACK_SIZE]) - ast_cont->cnt_offset);
+    Env   = ast_cont->Env;
     // TODO restore the env
     
     // insert the continuation

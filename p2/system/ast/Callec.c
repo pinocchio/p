@@ -11,10 +11,10 @@ Type_Class AST_Callec_Class;
 
 /* ========================================================================= */
 
-AST_Callec new_AST_Callec()
+AST_Callec new_AST_Callec(Object target)
 {
     NEW_OBJECT(AST_Callec);
-    result->cont      = new_AST_Continue((Object)result);
+    result->target = target;
     return result;
 }
 
@@ -27,13 +27,23 @@ void pre_init_AST_Callec()
 
 /* ========================================================================= */
 
-void AST_Callec_eval(AST_Callec self)
+void apply(Object closure, Type_Array args)
 {
+    // TODO in the alternative case, send "apply" message.
+    assert0(HEADER(closure) == (Object)Runtime_Closure_Class);
+    Runtime_Closure_apply((Runtime_Closure)closure, args);
+}
+
+NATIVE1(AST_Callec_eval)
     LOGFUN;
-    self->cont->EXP = _EXP_;
-    self->cont->CNT = _CNT_;
-    push_EXP(self->target);
-    push_CNT(send_Eval);
+    AST_Continue cont   = new_AST_Continue();
+    cont->exp_offset    = (_EXP_ - &(Double_Stack[0]));
+    cont->cnt_offset    = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
+    cont->Env = Env;
+    // optimization, reuse array object.
+    // make sure to undo when introducing others
+    args->values[0] = (Object)cont;
+    apply(args->values[0], args);
 }
 
 /* ========================================================================= */

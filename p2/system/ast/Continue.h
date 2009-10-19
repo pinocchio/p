@@ -6,14 +6,15 @@
 /* ========================================================================= */
 
 struct AST_Continue_t {
-    Object         *EXP;
-    cont           *CNT;
-    Object          target;
-    AST_Info        info;
+    uns_int     exp_offset;
+    uns_int     cnt_offset;
+    Object      Env;
+    Object      target;
+    AST_Info    info;
 };
 
 CREATE_INITIALIZERS(AST_Continue)
-extern AST_Continue new_AST_Continue(Object target);
+extern AST_Continue new_AST_Continue();
 
 /* ========================================================================= */
 

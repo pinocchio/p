@@ -19,6 +19,7 @@ extern Runtime_Closure new_Runtime_Closure(AST_Block code,
 
 extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                                    Object class, Type_Array args);
+extern void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args);
 
 
 /* ========================================================================= */
