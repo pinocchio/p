@@ -8,7 +8,7 @@ TEST_CIFILES=$(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
 TEST_CFILES=test/pinocchioTest.c
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-I. -O3 -lgc -Wall
+CFLAGS+=-I. -O3 -Wall 
 LDFLAGS+=-lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
@@ -39,6 +39,9 @@ profile:
 
 tags: $(SOURCES)
 	ctags -R .
+
+mac:
+	CFLAGS="-arch i386 -arch x86_64 -arch ppc" LDFLAGS="-arch i386 -arch x86_64 -arch ppc" make
 
 
 .PHONY: test vtest run clean profile
