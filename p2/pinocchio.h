@@ -123,13 +123,15 @@ extern Type_Class class##_Class;
 #define DEBUG
 #endif
 
+void printf0(const char * string, ...);
+
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");
     #define LOG printf
     #define LOG_AST_INFO(print, info) printf(print); print_AST_Info(info); printf("\n");
 #else
     #define LOGFUN
-    #define LOG
+    #define LOG printf0
     #define LOG_AST_INFO(print, info)
 #endif
 

@@ -1,4 +1,4 @@
-Object instantiate_ARRAY(unsigned int base, unsigned int extra)
+Object instantiate_ARRAY(Type_Class class, unsigned int base, unsigned int extra)
 {
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
     result->size = extra;
@@ -6,29 +6,33 @@ Object instantiate_ARRAY(unsigned int base, unsigned int extra)
     for (i = 0; i < base+extra; i++) {
         result->values[i] = Nil;
     }
+    HEADER(result) = (Object)class;
     return (Object)result;
 }
 
-Object instantiate_BYTES(unsigned int base, unsigned int extra)
+Object instantiate_BYTES(Type_Class class, unsigned int base, unsigned int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
+    //HEADER(result) = (Object)class;
     return NULL;
 }
 
-Object instantiate_WORDS(unsigned int base, unsigned int extra)
+Object instantiate_WORDS(Type_Class class, unsigned int base, unsigned int extra)
 {
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[base+extra]);
     result->size = extra;
+    HEADER(result) = (Object)class;
     return (Object)result;
 }
 
-Object instantiate_OBJECT(unsigned int size)
+Object instantiate_OBJECT(Type_Class class, unsigned int size)
 {
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = Nil;
     }
+    HEADER(result) = (Object)class;
     return (Object)result;
 }
 
@@ -36,24 +40,20 @@ Object instantiate_OBJECT(unsigned int size)
 
 #define INSTANTIATE(type)\
     if (tag == type) {\
-        result = instantiate##_##type(getsize(class));\
-        HEADER(result) = (Object)class;\
-        return result;\
+        return instantiate##_##type(class, getsize(class));\
     }
 
 #define INSTANTIATE_SIZED(type)\
     if (tag == type) {\
-        result = instantiate##_##type(getsize(class), size);\
-        HEADER(result) = (Object)class;\
-        return result;\
+        return instantiate##_##type(class, getsize(class), size);\
     }
 
 /* ========================================================================= */
 
+
 Object instantiate(Type_Class class)
 {
     Type_Tag tag = gettag(class);
-    Object result = NULL;
 
     INSTANTIATE(OBJECT);
 
@@ -64,7 +64,6 @@ Object instantiate(Type_Class class)
 Object instantiate_sized(Type_Class class, unsigned int size)
 {
     Type_Tag tag = gettag(class);
-    Object result = NULL;
 
     INSTANTIATE_SIZED(ARRAY);
     INSTANTIATE_SIZED(BYTES);

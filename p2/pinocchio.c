@@ -95,14 +95,16 @@ void CNT_send_Eval()
  */
 int IN_EVAL = 0;
 
-#ifndef NOJMP
 Object Eval(Object code)
 {
     if (IN_EVAL) {
         assert(NULL, printf("Re-entering evaluation thread!\n"));
     }
-
+    
     push_EXP(code);
+
+#ifndef NOJMP // ---------------------------------------------------------------
+
     push_CNT(exit_eval);
     push_CNT(send_Eval);
 
@@ -115,18 +117,9 @@ Object Eval(Object code)
     }
 
     zap_CNT();
-    Object result = pop_EXP();
-    IN_EVAL = 0;
-    return result;
-}
+    
 #else // NOJMP
-Object Eval(Object code)
-{
-    if (IN_EVAL) {
-        assert(NULL, printf("Re-entering evaluation thread!\n"));
-    }
 
-    push_EXP(code);
     push_CNT(send_Eval);
 
     IN_EVAL = 1;
@@ -134,11 +127,12 @@ Object Eval(Object code)
         peek_CNT(1)();
     }
 
+#endif // NOJMP ----------------------------------------------------------------
+
     Object result = pop_EXP();
     IN_EVAL = 0;
     return result;
 }
-#endif // NOJMP
 
 /* ========================================================================= */
 
@@ -173,7 +167,7 @@ int main()
         #ifdef TEST
         run_tests();
         #endif
-        //run_FibTest();
+        run_FibTest();
     }
 
     return EXIT_SUCCESS;

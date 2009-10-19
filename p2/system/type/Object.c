@@ -14,10 +14,8 @@ void pre_init_Type_Object()
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
     // do manually instanciate since we cannot use dict yet
-    Type_Class Object_mclass  = (Type_Class)instantiate(Metaclass);
-    Object_mclass->type       = create_type(4, OBJECT);
-    Type_Object_Class         = (Type_Class)instantiate(Object_mclass);
-    Type_Object_Class->type   = create_type(0, OBJECT);
+    Type_Class Object_mclass  = (Type_Class)instantiate_OBJECT(Metaclass, METACLASS_SIZE);
+    Type_Object_Class         = (Type_Class)instantiate_OBJECT(Object_mclass, CLASS_SIZE);
     Type_Object_Class->super  = Nil;
 
     /*
@@ -31,6 +29,12 @@ void pre_init_Type_Object()
     HEADER(Type_Object_Class) = (Object) Type_Class_Class;
     Type_Object_Class->super  = Nil;
     */
+}
+
+void inter_init_Type_Object() 
+{
+    ((Type_Class)HEADER(Type_Object_Class))->type       = create_type(CLASS_SIZE, OBJECT);
+    Type_Object_Class->type   = create_type(OBJECT_SIZE, OBJECT); 
 }
 
 /* ========================================================================= */

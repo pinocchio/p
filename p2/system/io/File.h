@@ -11,11 +11,6 @@ struct IO_File_t {
     FILE *file;
 };
 
-extern IO_File StandardIn;
-extern IO_File StandardOut;
-extern IO_File StandardError;
-extern IO_File NullStream;
-
 
 CREATE_INITIALIZERS(IO_File)
 

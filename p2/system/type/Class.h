@@ -6,6 +6,9 @@
 /* ========================================================================= */
 
 extern Type_Class Metaclass;
+#define BEHAVIOUR_SIZE 3
+#define METACLASS_SIZE 3
+#define CLASS_SIZE 4
 
 /* ========================================================================= */
 
@@ -28,6 +31,7 @@ struct Type_Class_t {
 };
 
 CREATE_INITIALIZERS(Type_Class)
+extern void inter_init_Type_Class();
 
 /* ========================================================================= */
 
@@ -52,6 +56,7 @@ extern unsigned int getsize(Type_Class class);
 
 extern Object instantiate(Type_Class class);
 extern Object instantiate_sized(Type_Class class, unsigned int size);
+extern Object instantiate_OBJECT(Type_Class class, unsigned int size);
 
 /* ========================================================================= */
 

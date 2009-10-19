@@ -13,20 +13,20 @@ Type_Class Behaviour;
 
 Object create_type(unsigned int size, Type_Tag tag)
 {
-    uns_int type = (uns_int)size;
+    int type = (int)size;
     type = type << 3;
     type = type | (tag & 7);
-    return (Object)type;
+    return (Object) new_Type_SmallInt(type);
 }
 
 Type_Tag gettag(Type_Class class)
 {
-    return (Type_Tag)((uns_int)class->type) & 7;
+    return (Type_Tag)((Type_SmallInt)class->type)->value & 7;
 }
 
 unsigned int getsize(Type_Class class)
 {
-    return (unsigned int)(((uns_int)class->type) >> 3);
+    return (unsigned int)(((Type_SmallInt)class->type)->value >> 3);
 }
 
 /* ========================================================================= */
@@ -58,11 +58,14 @@ Type_Class new_Named_Class(Object superclass, const wchar_t* name, Object type)
 void pre_init_Type_Class()
 {
     Metaclass                 = NEW_t(Type_Class);
-    Metaclass->type           = create_type(3, OBJECT);
-    Object Metaclass_mclass   = instantiate(Metaclass);
+    Object Metaclass_mclass   = instantiate_OBJECT(Metaclass, METACLASS_SIZE);
     HEADER(Metaclass)         = Metaclass_mclass;
 }
 
+void inter_init_Type_Class()
+{
+    Metaclass->type           = create_type(METACLASS_SIZE, OBJECT);
+}
 /* ========================================================================= */
 
 void assert_class(Object class)
@@ -140,7 +143,7 @@ void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
             #ifndef DEBUG
             wchar_t * clsname = classname(class);
             #endif
-            printf("lookup failed: %p\n", super);
+            LOG("lookup failed: %p\n", super);
 			assert((class != super), 
                 printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
 							clsname,
@@ -189,10 +192,10 @@ void post_init_Type_Class()
     Metaclass->name     = new_Type_String(L"Metaclass");
     Behaviour = new_Named_Class((Object)Type_Object_Class,
                                 L"Behaviour",
-                                create_type(3, OBJECT));
+                                create_type(BEHAVIOUR_SIZE, OBJECT));
     Class = new_Named_Class((Object)Behaviour,
                             L"Class",
-                            create_type(4, OBJECT));
+                            create_type(CLASS_SIZE, OBJECT));
     Metaclass->super = (Object)Behaviour;
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
     ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);

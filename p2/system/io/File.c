@@ -12,10 +12,6 @@
 
 Type_Class IO_File_Class;
 
-IO_File StandardIn;
-IO_File StandardOut;
-IO_File StandardError;
-IO_File NullStream;
 
 /* ========================================================================= */
 
@@ -180,10 +176,6 @@ NATIVE1(IO_File_writeAll_)
 
 void create_standard_files()
 {
-    StandardIn  = new_IO_File_fromFile(stdin);
-    StandardOut = new_IO_File_fromFile(stdout);
-    StandardError = new_IO_File_fromFile(stderr);
-    NullStream  = new_IO_File();
 }
 
 void post_init_IO_File()

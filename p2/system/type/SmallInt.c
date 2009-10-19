@@ -28,11 +28,9 @@ Type_SmallInt new_Type_SmallInt(int value)
 
 void pre_init_Type_SmallInt() 
 {
-    Type_Class smc              = (Type_Class)instantiate(Metaclass);
-    smc->type                   = create_type(4, OBJECT);
+    Type_Class smc              = (Type_Class)instantiate_OBJECT(Metaclass, METACLASS_SIZE);
     smc->super                  = HEADER(Type_Object_Class);
-    Type_SmallInt_Class         = (Type_Class)instantiate(smc);
-    Type_SmallInt_Class->type   = create_type(0, INT);
+    Type_SmallInt_Class         = (Type_Class)instantiate_OBJECT(smc, CLASS_SIZE);
     Type_SmallInt_Class->super  = (Object)Type_Object_Class;
     
     Type_SmallInt_cache  = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
@@ -91,7 +89,11 @@ NATIVE0(Type_SmallInt_hash)
 
 void post_init_Type_SmallInt()
 {
+    
     ((Type_Class)HEADER(Type_SmallInt_Class))->methods = new_Type_Dictionary();
+    ((Type_Class)HEADER(Type_SmallInt_Class))->type    = create_type(CLASS_SIZE, OBJECT);
+    
+    Type_SmallInt_Class->type    = create_type(0, INT);
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
     Type_SmallInt_Class->methods = new_Type_Dictionary();
     
