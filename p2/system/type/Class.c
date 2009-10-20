@@ -119,7 +119,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     if (HEADER(class) != (Object)Metaclass) {
         LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
     } else {
-        LOG("a Metaclass>>%ls\n", ((Type_Symbol)msg)->value);
+        LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
     }
     #endif // DEBUG
     
