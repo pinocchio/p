@@ -25,7 +25,7 @@ NEW_TEST(Runtime_Closure_evaluation)
     
     // with one argument -------------------------------------------------------
     AST_Variable var      = new_AST_Variable(L"myVar");
-    closure->code->body   = new_Type_Array_With(3, integer7_const);
+    closure->code->body   = new_Type_Array_With_All(3, integer7_const);
     closure->code->body->values[2] = (Object)var;
     
     var->key = (Object)closure;
@@ -76,7 +76,7 @@ NEW_TEST(Runtime_Closure_invocation)
     // with 2 body element
     Type_SmallInt integer6      = new_Type_SmallInt(6);
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
-    body                        = new_Type_Array_With(2, (Object)integer5_const);
+    body                        = new_Type_Array_With_All(2, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     store_closure(Type_SmallInt_Class, test, closure);
@@ -87,7 +87,7 @@ NEW_TEST(Runtime_Closure_invocation)
     // with 3 body element
     Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
-    body                        = new_Type_Array_With(3, (Object)integer5_const);
+    body                        = new_Type_Array_With_All(3, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     body->values[2]             = (Object)integer7_const;
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
@@ -118,7 +118,7 @@ NEW_TEST(Runtime_Closure_apply)
     // with 2 body element
     Type_SmallInt integer6      = new_Type_SmallInt(6);
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
-    body                        = new_Type_Array_With(2, (Object)integer5_const);
+    body                        = new_Type_Array_With_All(2, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
@@ -128,7 +128,7 @@ NEW_TEST(Runtime_Closure_apply)
     // with 3 body element
     Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
-    body                        = new_Type_Array_With(3, (Object)integer5_const);
+    body                        = new_Type_Array_With_All(3, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     body->values[2]             = (Object)integer7_const;
     closure                     = new_Runtime_Closure(new_AST_Block(0, body), (Runtime_BlockContext)Nil);

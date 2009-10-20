@@ -36,7 +36,7 @@ METHOD(fib_method, 0, 1)
                 
     AST_Block return_code = new_AST_Block(0, new_Type_Array_With(1, (Object)return_send));
     
-    Type_Array ifElse_args = new_Type_Array_With(2, (Object)break_code);
+    Type_Array ifElse_args = new_Type_Array_With_All(2, (Object)break_code);
     ifElse_args->values[1] = (Object) return_code;
     
     AST_Send ifElse = new_AST_Send((Object)test, (Object)SMB_ifTrue_ifFalse_, ifElse_args);

@@ -16,7 +16,8 @@ CREATE_INITIALIZERS(Type_Array)
 
 extern Type_Array new_Raw_Type_Array(unsigned int c);
 extern Type_Array new_Type_Array(unsigned int c, Object v[]);
-extern Type_Array new_Type_Array_With(unsigned int c, Object init);
+extern Type_Array new_Type_Array_With(unsigned int c, ...);
+extern Type_Array new_Type_Array_With_All(unsigned int c, Object element);
 
 /* ========================================================================= */
 

@@ -12,7 +12,7 @@ Type_Class Type_Dictionary_Class;
 Type_Dictionary new_Type_Dictionary()
 {
     NEW_OBJECT(Type_Dictionary);
-    result->layout           = new_Type_Array_With(2, Nil);
+    result->layout           = new_Type_Array_With_All(2, Nil);
     return result;
 }
 
@@ -39,7 +39,7 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old_layout = self->layout;
-    self->layout            = new_Type_Array_With(old_layout->size*2, Nil);
+    self->layout            = new_Type_Array_With_All(old_layout->size*2, Nil);
     int i;
     for(i=0; i<old_layout->size; i++) {
         self->layout->values[i] = old_layout->values[i];

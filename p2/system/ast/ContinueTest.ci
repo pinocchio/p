@@ -11,7 +11,7 @@ NEW_TEST(ast_continue)
     assert(result == (Object)integer7, printf("%ls\n", Object_classname(result)));
     
     
-    Type_Array body = new_Type_Array_With(2, (Object)integer7_const);
+    Type_Array body = new_Type_Array_With_All(2, (Object)integer7_const);
     AST_Method send = new_Method(1, body);
     AST_Constant send_const = new_AST_Constant((Object)send);
     callec->target    = (Object)new_AST_Send((Object)send_const, SMB_eval_, 

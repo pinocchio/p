@@ -41,7 +41,7 @@ NEW_TEST(Type_Dictionary_at_put_)
         Object key = (Object)new_Type_SmallInt(i);
         Type_Dictionary_store_(dict, key, integer);
     }
-    Type_Array args  = new_Type_Array_With(2, (Object)integer1);
+    Type_Array args  = new_Type_Array_With_All(2, (Object)integer1);
     args->values[0] = integer0; 
     
     result = Eval_Send((Object)dict, SMB_at_put_, args);

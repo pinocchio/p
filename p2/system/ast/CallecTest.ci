@@ -29,7 +29,7 @@ NEW_TEST(ast_callec_escape)
     AST_Variable cnt = new_AST_Variable(L"Continue");
     AST_Send s = new_AST_Send((Object)cnt, (Object)SMB_escape_,
                           new_Type_Array_With(1, (Object)new_AST_Constant(i)));
-    Type_Array body = new_Type_Array_With(2, (Object)s);
+    Type_Array body = new_Type_Array_With_All(2, (Object)s);
     body->values[1] = (Object)new_AST_Constant(j);
     AST_Block block = new_AST_Block(1, body);
     cnt->key = (Object)block;

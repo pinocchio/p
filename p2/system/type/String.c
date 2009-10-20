@@ -50,13 +50,13 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
-    int len = str1->size + str2->size;
+    int len               = str1->size + str2->size;
     wchar_t* concatenated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
-    concatenated = wcsncpy(concatenated, str1->value, str1->size);
+    concatenated          = wcsncpy(concatenated, str1->value, str1->size);
     assert0(concatenated!=NULL);
-    concatenated = wcsncat(concatenated, str2->value, str2->size);
+    concatenated          = wcsncat(concatenated, str2->value, str2->size);
     assert0(concatenated!=NULL);
-    Type_String string =  new_Type_String(concatenated);
+    Type_String string    =  new_Type_String(concatenated);
     free(concatenated);
     return string;
 }
@@ -84,6 +84,16 @@ NATIVE0(Type_String_asSymbol)
     poke_EXP(1, new_Type_Symbol(((Type_String)self)->value));
 }
 
+
+NATIVE2(Type_String_at_put_)
+    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
+    ASSERT_ARG_TYPE(1, Type_Character_Class);
+    Type_SmallInt pos = (Type_SmallInt) args->values[0];
+    assert(pos->value <= ((Type_String)self)->size,
+        printf("%i is out of Bounds[%i]", pos->value, ((Type_String)self)->size));
+    ((Type_String)self)->value[pos->value] = ((Type_Character) args->values[1])->value;
+}
+
 /* ========================================================================= */
 
 void post_init_Type_String()
@@ -92,5 +102,6 @@ void post_init_Type_String()
     store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);
     store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
     store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
+    store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
 }
 

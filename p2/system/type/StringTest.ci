@@ -52,7 +52,20 @@ NEW_TEST(Type_String_asArray)
 NEW_TEST(Type_String_char2Type_String)
     Type_String string = char2Type_String("abc");
     assert(string->size == 3,          printf("%i", string->size));
-    assert(wcscmp(string->value, L"abc") == 0,printf("%ls", string->value));
+    assert(wcscmp(string->value, L"abc") == 0, printf("%ls", string->value));
+}
+
+NEW_TEST(Type_String_at_put_)
+    Type_String string = new_Type_String(L"tpyo");
+    Eval_Send2((Object) string, SMB_at_put_, 
+            (Object)new_Type_SmallInt(1), (Object)new_Type_Character(L'y'));
+    ASSERT_EMPTY_STACK;
+    Eval_Send2((Object) string, SMB_at_put_, 
+            (Object)new_Type_SmallInt(2), (Object)new_Type_Character(L'p'));
+    ASSERT_EMPTY_STACK;
+    assert(wcscmp(string->value, L"typo") == 0,
+        printf("%ls \n", string->value));
+    
 }
 
 /* ========================================================================= */

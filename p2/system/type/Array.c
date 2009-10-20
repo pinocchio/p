@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <system/type/Array.h>
 
 /* ========================================================================= */
@@ -30,16 +31,31 @@ Type_Array new_Type_Array(unsigned int c, Object v[])
     return result;
 }
 
-Type_Array new_Type_Array_With(unsigned int c, Object init)
+Type_Array new_Type_Array_With(unsigned int c, ...)
+{
+    if (c == 0) { return empty_Type_Array; }
+    Type_Array result = new_Raw_Type_Array(c);
+    va_list args;
+    va_start(args, c);
+    while (0 < c) {
+        c--;
+        result->values[c] = va_arg(args, Object);
+    }
+    va_end(args);
+    return result;
+}
+
+Type_Array new_Type_Array_With_All(unsigned int c, Object element)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
     while (0 < c) {
         c--;
-        result->values[c] = init;
+        result->values[c] = element;
     }
     return result;
 }
+
 
 void pre_init_Type_Array() 
 {
@@ -66,9 +82,9 @@ NATIVE0(Type_Array_size)
 }
 
 NATIVE1(Type_Array_at_)
-    int index = unwrap_int(args->values[0]);
+    int index      = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Array as = (Type_Array)self;
+    Type_Array as  = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
     assert0(as->size > index);
     assert0(0 <= index);
@@ -76,9 +92,9 @@ NATIVE1(Type_Array_at_)
 }
 
 NATIVE2(Type_Array_at_put_)
-    int index = unwrap_int(args->values[0]);
+    int index      = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Array as = (Type_Array)self;
+    Type_Array as  = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
     assert0(as->size > index);
     assert0(0 <= index);
@@ -87,9 +103,9 @@ NATIVE2(Type_Array_at_put_)
 }
 
 NATIVE1(Type_Array_instVarAt_)
-    int index = unwrap_int(args->values[0]);
+    int index      = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag = gettag(cls);
+    Type_Tag tag   = gettag(cls);
     assert0(tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
@@ -97,9 +113,9 @@ NATIVE1(Type_Array_instVarAt_)
 }
 
 NATIVE2(Type_Array_instVarAt_put_)
-    int index = unwrap_int(args->values[0]);
+    int index      = unwrap_int(args->values[0]);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag = gettag(cls);
+    Type_Tag tag   = gettag(cls);
     assert0(tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);

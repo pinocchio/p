@@ -103,19 +103,22 @@ NEW_TEST(Type_SmallInt_asString)
     Type_SmallInt number = new_Type_SmallInt(0);
     Object result = Eval_Send0((Object)number, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
-    assert0(wcscmp(((Type_String)result)->value, L"0"));
+    assert(wcscmp(((Type_String)result)->value, L"0") == 0, 
+        printf("%ls \n", ((Type_String)result)->value));
     ASSERT_EMPTY_STACK;
     
     number = new_Type_SmallInt(-199);
     result = Eval_Send0((Object)number, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
-    assert0(wcscmp(((Type_String)result)->value, L"-199"));
+    assert(wcscmp(((Type_String)result)->value, L"-199") == 0, 
+        printf("%ls \n", ((Type_String)result)->value));
     ASSERT_EMPTY_STACK;
     
     number = new_Type_SmallInt(1999);
     result = Eval_Send0((Object)number, SMB_asString);
     ASSERT_TYPE(result, Type_String_Class);
-    assert0(wcscmp(((Type_String)result)->value, L"1999"));
+    assert(wcscmp(((Type_String)result)->value, L"1999") == 0, 
+        printf("%ls \n", ((Type_String)result)->value));
     ASSERT_EMPTY_STACK;
     
 }

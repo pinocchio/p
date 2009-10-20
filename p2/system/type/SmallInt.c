@@ -96,10 +96,10 @@ Type_String Type_SmallInt_asString(Type_SmallInt self, unsigned int base)
         size = 1+(int)floor(log10(abs(self->value)));
     }
     if (self->value < 0) { size += 1; };
+    size += 1;
     wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
     swprintf(wchar_copy, size, L"%i", self->value);
     Type_String result   =  new_Type_String(wchar_copy);
-    free(wchar_copy);
     return result;
 }
 
