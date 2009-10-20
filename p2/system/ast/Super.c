@@ -31,8 +31,7 @@ void pre_init_AST_Super()
 CNT(AST_Super_send) 
     Object class    = pop_EXP();
     Object receiver = pop_EXP();
-    printf("Super Receiver: %p\n", receiver);
-    
+
     uns_int argc = (uns_int)pop_EXP();
     poke_EXP(argc + 1, receiver); // args + 1 for peek
     
@@ -49,8 +48,6 @@ CNT(push_env_class)
 void AST_Super_eval(AST_Super super)
 {
     LOGFUN;
-
-    printf("Super object: %p\n", super);
 
     // execute the method
     push_CNT(AST_Super_send);
