@@ -46,6 +46,7 @@ static void CNT_store_argument();
 
 void eval_store(uns_int idx)
 {
+    printf("Eval store\n");
     if (idx == 2) { return; }
     push_CNT(store_argument);
     push_CNT(send_Eval);

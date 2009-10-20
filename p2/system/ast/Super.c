@@ -31,11 +31,14 @@ void pre_init_AST_Super()
 CNT(AST_Super_send) 
     Object class    = pop_EXP();
     Object receiver = pop_EXP();
-    Type_Array args = (Type_Array)pop_EXP();
     
+    zap_EXP(); // counter
+    uns_int argc = (uns_int)pop_EXP();
+    Type_Array args = new_Raw_Type_Array(argc);
+    while (argc > 0) {
+        args->values[--argc] = pop_EXP();
+    }
     AST_Super super   = (AST_Super)peek_EXP(1);
-    // insert the receiver at the old ast_super position
-    poke_EXP(1, receiver);
     
     Type_Class_dispatch(&super->cache, receiver, class,
                    super->message, args);
@@ -50,25 +53,25 @@ CNT(push_env_class)
 
 void AST_Super_eval(AST_Super super)
 {
-    /*
     LOGFUN;
-    Type_Array args = new_Raw_Type_Array(super->arguments->size);
     // execute the method
     push_CNT(AST_Super_send);
     push_CNT(Class_super);
     push_CNT(push_env_class);
     push_CNT(AST_Self_eval);
-    push_EXP(args);
+
     // evaluate the arguments
     int i;
     for (i = 0; i < super->arguments->size; i++) {
-        push_CNT(store_argument);
-        push_EXP(args);
-        push_EXP(new_Type_SmallInt(i));
-        push_CNT(send_Eval);
         push_EXP(super->arguments->values[i]);
     }
-    */
+    
+    uns_int size = (uns_int)super->arguments->size + 2; // 2 * size
+    // total
+    push_EXP((Object)(uns_int)super->arguments->size);
+    // todo
+    push_EXP((Object)size);
+    eval_store(size);
 }
 
 /* ========================================================================= */
