@@ -31,9 +31,10 @@ void AST_Self_eval()
 }
 
 CNT(AST_Self_eval)
-    // Push to allow poke in AST_Self_eval
-    push_EXP(Nil);
-    AST_Self_eval();
+    Object env = (Object)current_env();
+    assert0(IS_CONTEXT(env));
+    // replace the current element (an AST_Self) with the Object's self
+    push_EXP(((Runtime_BlockContext)env)->home_context->self);
 }
 
 /* ========================================================================= */

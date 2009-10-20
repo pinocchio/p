@@ -46,7 +46,6 @@ static void CNT_store_argument();
 
 void eval_store(uns_int idx)
 {
-    printf("Eval store\n");
     if (idx == 2) { return; }
     push_CNT(store_argument);
     push_CNT(send_Eval);
@@ -65,7 +64,7 @@ static CNT(store_argument)
 
 void AST_Send_eval(AST_Send self)
 {
-    // LOGFUN;
+    LOGFUN;
     
     // evaluate the receiver
     push_EXP(self->receiver);

@@ -15,6 +15,7 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure closure,
                                               Type_Array values)
 {
     NEW_OBJECT(Runtime_BlockContext);
+    result->home_context   = closure->context->home_context;
     result->closure        = closure;
     result->values         = values;
     result->pc             = 0;
@@ -25,6 +26,7 @@ Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure closure,
                                                     int size)
 {
     NEW_OBJECT(Runtime_BlockContext);
+    result->home_context   = closure->context->home_context;
     result->closure        = closure;
     result->values         = new_Type_Array_With(size, Nil);
     result->pc             = 0;
