@@ -24,6 +24,16 @@ Type_Character new_Type_Character(wchar_t value)
     }
     return new_raw_Type_Character(value);
 }
+
+Type_Character new_Type_Character_WithInt(int value)
+{
+    wchar_t casted = (wchar_t)value;
+    assert(((int)casted == value), 
+        printf("Unicode Character \"%lc\" %i out of Range [%li Byte]", 
+                casted, value, sizeof(wchar_t)));
+    
+    return new_Type_Character(casted);
+}
     
 
 void pre_init_Type_Character()

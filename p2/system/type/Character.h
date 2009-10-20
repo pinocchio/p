@@ -18,6 +18,7 @@ Type_Character new_Type_Character(wchar_t value);
 /* ========================================================================= */
 
 extern Type_Character new_raw_Type_Character(wchar_t value);
+extern Type_Character new_Type_Character_WithInt(int value);
 
 /* ========================================================================= */
 

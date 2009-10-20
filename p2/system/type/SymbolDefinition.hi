@@ -56,3 +56,4 @@ extern Type_Symbol SMB_basicNew;
 extern Type_Symbol SMB_basicNew_;
 extern Type_Symbol SMB_on_;
 extern Type_Symbol SMB_escape_;
+extern Type_Symbol SMB_asCharacter;

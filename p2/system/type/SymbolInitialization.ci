@@ -4,6 +4,7 @@ SMB_apply                 = new_Type_Symbol(L"apply");
 SMB_apply_                = new_Type_Symbol(L"apply:");
 SMB_asArray               = new_Type_Symbol(L"asArray");
 SMB_asBoolean             = new_Type_Symbol(L"asBoolean");
+SMB_asCharacter           = new_Type_Symbol(L"asCharacter");
 SMB_asSmallInt            = new_Type_Symbol(L"asSmallInt");
 SMB_asString              = new_Type_Symbol(L"asString");
 SMB_asSymbol              = new_Type_Symbol(L"asSymbol");

@@ -87,25 +87,30 @@ NATIVE0(Type_SmallInt_hash)
     poke_EXP(1, self); 
 }
 
-Type_String Type_SmallInt_asString(Type_SmallInt self, unsigned int base)
+Type_String Type_SmallInt_asString(int self, unsigned int base)
 {
     int size = 1;
-    if (self->value == 0) { 
+    if (self == 0) { 
         size = 1; 
     } else {
-        size = 1+(int)floor(log10(abs(self->value)));
+        size = 1+(int)floor(log10(abs(self)));
     }
-    if (self->value < 0) { size += 1; };
+    if (self < 0) { size += 1; };
     size += 1;
     wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
-    swprintf(wchar_copy, size, L"%i", self->value);
+    swprintf(wchar_copy, size, L"%i", self);
     Type_String result   =  new_Type_String(wchar_copy);
     return result;
 }
 
 NATIVE0(Type_SmallInt_asString)
-    poke_EXP(1, Type_SmallInt_asString((Type_SmallInt)self, 10));
+    poke_EXP(1, Type_SmallInt_asString(unwrap_int(self), 10));
 }
+
+NATIVE0(Type_SmallInt_asCharacter)
+    poke_EXP(1, new_Type_Character_WithInt(unwrap_int(self)));
+}
+
 
 /* ========================================================================= */
 
@@ -133,6 +138,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_notEquals_,  NM_Type_SmallInt_notEquals_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash,        NM_Type_SmallInt_hash);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_asString,    NM_Type_SmallInt_asString);
+    store_native_method((Type_Class)Type_SmallInt_Class, SMB_asCharacter, NM_Type_SmallInt_asCharacter);
     
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_plus_));
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_minus_));
