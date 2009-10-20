@@ -29,7 +29,6 @@ void pre_init_AST_Send()
 /* ========================================================================= */
 
 static CNT(AST_Send_send)
-    zap_EXP(); // counter
     uns_int argc = (uns_int)pop_EXP();
     Type_Array args = new_Raw_Type_Array(argc);
     while (argc > 0) {
@@ -46,7 +45,10 @@ static void CNT_store_argument();
 
 void eval_store(uns_int idx)
 {
-    if (idx == 2) { return; }
+    if (idx == 2) {
+        zap_EXP(); // zap counter
+        return;
+    }
     push_CNT(store_argument);
     push_CNT(send_Eval);
     Object next = peek_EXP(idx);
@@ -66,21 +68,22 @@ void AST_Send_eval(AST_Send self)
 {
     LOGFUN;
     
+    push_CNT(AST_Send_send);
+
     // evaluate the receiver
     push_EXP(self->receiver);
 
     // evaluate the arguments
     int i;
-    for (i = 0; i < self->arguments->size; i++) {
+    int argc = self->arguments->size;
+    for (i = 0; i < argc; i++) {
         push_EXP(self->arguments->values[i]);
     }
-
-    uns_int size = (uns_int)self->arguments->size + 3; // 2 * size + receiver
+    uns_int size = (uns_int)argc + 3; // 2 * size + receiver
     // total
-    push_EXP((Object)(uns_int)self->arguments->size);
+    push_EXP((Object)(uns_int)argc);
     // todo
     push_EXP((Object)size);
-    push_CNT(AST_Send_send);
     eval_store(size);
 }
 

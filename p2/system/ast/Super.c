@@ -32,7 +32,6 @@ CNT(AST_Super_send)
     Object class    = pop_EXP();
     Object receiver = pop_EXP();
     
-    zap_EXP(); // counter
     uns_int argc = (uns_int)pop_EXP();
     Type_Array args = new_Raw_Type_Array(argc);
     while (argc > 0) {

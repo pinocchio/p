@@ -163,11 +163,11 @@ NEW_TEST(Runtime_Closure_MACRO)
 }
 
 NEW_TEST(Runtime_Closure_new_Runtime_Closure)
-    AST_Block code               = new_AST_Block(0, 0, empty_Type_Array);
-    Runtime_BlockContext context = new_Runtime_BlockContext(NULL, NULL);
-    Runtime_Closure closure      = new_Runtime_Closure(code, context);
+    AST_Block code                = new_AST_Block(0, 0, empty_Type_Array);
+    Runtime_MethodContext context = new_Runtime_MethodContext(NULL, NULL, NULL, NULL, NULL);
+    Runtime_Closure closure       = new_Runtime_Closure(code, (Runtime_BlockContext)context);
     assert0(closure->code == code);
-    assert0(closure->context == context);
+    assert0(closure->context == (Runtime_BlockContext)context);
     assert0(closure->info == empty_AST_Info);
 }
 
