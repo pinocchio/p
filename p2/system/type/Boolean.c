@@ -75,7 +75,7 @@ NATIVE1(True_ifFalse_)
     poke_EXP(1, Nil);
 }
 
-METHOD(True_ifTrue_, 1, 1)
+METHOD(True_ifTrue_, 1, 0, 1)
     /* TODO look at making this native */
     AST_Variable arg = new_AST_Variable(L"ifTrue");
     arg->key = (Object)body;
@@ -85,7 +85,7 @@ METHOD(True_ifTrue_, 1, 1)
     return method;
 }
 
-METHOD(True_ifTrue_ifFalse_, 2, 1)
+METHOD(True_ifTrue_ifFalse_, 2, 0, 1)
     /* TODO look at making this native */
     AST_Variable arg = new_AST_Variable(L"ifTrue");
     arg->key = (Object)body;
@@ -125,7 +125,7 @@ NATIVE1(False_ifTrue_)
     poke_EXP(1, Nil);
 }
 
-METHOD(False_ifFalse_, 1, 1)
+METHOD(False_ifFalse_, 1, 0, 1)
     /* TODO look at making this native */
     AST_Variable arg = new_AST_Variable(L"ifFalse");
     arg->key = (Object)body;
@@ -135,7 +135,7 @@ METHOD(False_ifFalse_, 1, 1)
     return method;
 }
 
-METHOD(False_ifTrue_ifFalse_, 2, 1)
+METHOD(False_ifTrue_ifFalse_, 2, 0, 1)
     /* TODO look at making this native */
     AST_Variable arg = new_AST_Variable(L"ifFalse");
     arg->key = (Object)body;

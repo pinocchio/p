@@ -7,7 +7,7 @@ NEW_TEST(ast_self)
     Type_Array body             = new_Type_Array_With_All(3, (Object)integer7_const);
     body->values[2]             = Self;    
     
-    Runtime_Closure closure     = new_Runtime_Closure(new_AST_Block(0, body), 
+    Runtime_Closure closure     = new_Runtime_Closure(new_AST_Block(0, 0, body), 
                                                       (Runtime_BlockContext)Nil);
     assert0(closure->info == empty_AST_Info);
     Type_Symbol test            = new_Type_Symbol(L"test");

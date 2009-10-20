@@ -1,6 +1,6 @@
 
 #define AST_BLOCK_TEST_SETUP \
-    AST_Block block = new_AST_Block(0, NULL); \
+    AST_Block block = new_AST_Block(0, 0, NULL); \
     Object result;
 
 /* ========================================================================= */

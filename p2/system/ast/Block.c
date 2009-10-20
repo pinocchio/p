@@ -10,11 +10,14 @@ Type_Class AST_Block_Class;
 
 /* ========================================================================= */
 
-AST_Block new_AST_Block(unsigned int paramCount, Type_Array body)
+AST_Block new_AST_Block(unsigned int paramCount,
+                        unsigned int localCount,
+                        Type_Array body)
 {
     NEW_OBJECT(AST_Block);
     result->body       = body;
     result->paramCount = new_Type_SmallInt(paramCount);
+    result->localCount = new_Type_SmallInt(localCount);
     result->info       = empty_AST_Info;
     return result;
 }
@@ -23,7 +26,7 @@ void pre_init_AST_Block()
 {
     AST_Block_Class = new_Named_Class((Object)Type_Object_Class,
                                       L"AST_Block",
-                                      create_type(4, OBJECT));
+                                      create_type(AST_BLOCK_SIZE, OBJECT));
 }
 
 /* ========================================================================= */

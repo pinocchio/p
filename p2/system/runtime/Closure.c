@@ -56,6 +56,21 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     push_CNT(send_Eval);
 }
 
+Type_Array expand_for_locals(Type_Array args, int locals)
+{
+    if (locals == 0) { return args; }
+
+    Type_Array scope = new_Raw_Type_Array(locals + args->size);
+    int i;
+    for (i = 0; i < args->size; i++) {
+        scope->values[i] = args->values[i];
+    }
+    for (; i < args->size + locals; i++) {
+        scope->values[i] = Nil;
+    }
+    return scope;
+}
+
 void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
 {
     #ifdef DEBUG
@@ -72,6 +87,7 @@ void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
     // TODO check if we call closure from source location. if so just pop
     // env-frame.
     push_restore_env();  // pokes EXP
+    args = expand_for_locals(args, closure->code->localCount->value);
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
     
     Env = (Object)env;

@@ -9,7 +9,7 @@ TEST_CFILES=test/pinocchioTest.c
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
 CFLAGS+=-I. -O3 -Wall 
-LDFLAGS+=-lgc
+LDFLAGS+=-lm -lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
 OBJECTS=$(CFILES:%.c=%.o)

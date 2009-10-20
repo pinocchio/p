@@ -1,13 +1,13 @@
 Type_Symbol SMB_fib;
 
-METHOD(fib_method, 0, 1)
+METHOD(fib_method, 0, 0, 1)
     AST_Send test = new_AST_Send(Self, (Object)SMB_lt_, 
                                 new_Type_Array_With(1,
                                     (Object)new_AST_Constant(
                                                 (Object)new_Type_SmallInt(2))));
                                     
     
-    AST_Block break_code = new_AST_Block(0, 
+    AST_Block break_code = new_AST_Block(0, 0,
                                         new_Type_Array_With(1,
                                             (Object)new_AST_Constant(
                                                 (Object)new_Type_SmallInt(1))));
@@ -34,7 +34,7 @@ METHOD(fib_method, 0, 1)
                     (Object)SMB_fib,
                     empty_Type_Array)));
                 
-    AST_Block return_code = new_AST_Block(0, new_Type_Array_With(1, (Object)return_send));
+    AST_Block return_code = new_AST_Block(0, 0, new_Type_Array_With(1, (Object)return_send));
     
     Type_Array ifElse_args = new_Type_Array_With_All(2, (Object)break_code);
     ifElse_args->values[1] = (Object) return_code;

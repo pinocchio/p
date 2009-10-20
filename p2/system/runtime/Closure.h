@@ -24,10 +24,10 @@ extern void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args);
 
 /* ========================================================================= */
 
-#define METHOD(fName, paramCount, numStatements)\
+#define METHOD(fName, paramCount, localCount, numStatements)\
 Runtime_Closure fName() {\
     Type_Array statements    = new_Type_Array_With(numStatements, Nil);\
-    AST_Block body           = new_AST_Block(paramCount, statements);\
+    AST_Block body           = new_AST_Block(paramCount, localCount, statements);\
     Runtime_Closure method   = new_Runtime_Closure(body,\
                                                 (Runtime_BlockContext)Nil);\
     method->info             = new_raw_AST_Info();\
