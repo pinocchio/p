@@ -97,14 +97,8 @@ void Method_invoke(Object method, Object self, Object class, Type_Array args) {
     }
 }
 
-void Type_Class_dispatch(Object class, uns_int argc)
+void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
-    AST_Send send = (AST_Send)peek_EXP(argc + 2);
-    InlineCache * cache = &send->cache;
-    Object msg = send->message;
-
-    assert0(msg != Nil);
-
     Type_Array args = new_Raw_Type_Array(argc);
 
     while (0 != argc) {
@@ -112,7 +106,13 @@ void Type_Class_dispatch(Object class, uns_int argc)
         args->values[argc] = pop_EXP();
     }
 
-    Object self = pop_EXP();
+    zap_EXP(); // self
+
+    AST_Send send = (AST_Send)peek_EXP(1);
+    InlineCache * cache = &send->cache;
+    Object msg = send->message;
+
+    assert0(msg != Nil);
 
     #ifdef DEBUG
     wchar_t * clsname = classname(class);

@@ -31,7 +31,7 @@ void pre_init_AST_Send()
 static CNT(AST_Send_send)
     uns_int argc = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc + 1); // args + 1 for peek
-    Type_Class_dispatch(HEADER(receiver), argc);
+    Type_Class_dispatch(receiver, HEADER(receiver), argc);
 }
 
 static void CNT_store_argument();

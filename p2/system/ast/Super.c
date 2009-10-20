@@ -33,9 +33,9 @@ CNT(AST_Super_send)
     Object receiver = pop_EXP();
 
     uns_int argc = (uns_int)pop_EXP();
-    poke_EXP(argc + 1, receiver); // args + 1 for peek
+    // poke_EXP(argc + 1, receiver); // args + 1 for peek
     
-    Type_Class_dispatch(class, argc);
+    Type_Class_dispatch(receiver, class, argc);
 }
 
 CNT(push_env_class)
