@@ -89,7 +89,7 @@ extern Type_Class class##_Class;
 
 /* ========================================================================= */
 
-#define push_EXP(value)         (*(_EXP_++) = ((Object)value));
+#define push_EXP(value)         (*(_EXP_++) = ((Object)(value)));
 /*                               printf("    Pushing[%li] Object with ", (_EXP_-Double_Stack));\
                                (print_Class((Object)value));
 */
@@ -100,17 +100,17 @@ extern Type_Class class##_Class;
 */
                                 
 #define peek_EXP(depth)         (*(_EXP_ - depth))
-#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)value));
+#define poke_EXP(depth, value)  (*(_EXP_ - depth) = ((Object)(value)));
 /*                               printf("    Peeking[%li] Object with ", (_EXP_-Double_Stack-depth));\
                                (print_Class((Object)value));
 */
                                 
 #define zap_EXP()               (_EXP_--);
 
-#define push_CNT(value)         (*(_CNT_--) = ((cont)CNT_##value));
+#define push_CNT(value)         (*(_CNT_--) = ((cont)(CNT_##value)));
 #define pop_CNT()               (*(++_CNT_))
 #define peek_CNT(depth)         (*(_CNT_ + depth))
-#define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)value));
+#define poke_CNT(depth, value)  (*(_CNT_ + depth) = ((cont)(value)));
 #define zap_CNT()               (_CNT_++);
 
 #define CNT(name) void CNT_##name() {\

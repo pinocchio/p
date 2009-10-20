@@ -19,8 +19,6 @@ extern AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments);
 
 /* ========================================================================= */
 
-extern void AST_Send_send();
-extern void CNT_store_argument();
 extern void AST_Send_eval(AST_Send self);
 
 /* ========================================================================= */

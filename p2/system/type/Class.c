@@ -77,11 +77,7 @@ void assert_class(Object class)
 CNT(Class_super)
     Object class = peek_EXP(1);
     assert_class(class);
-    //if (HEADER(class) == (Object)Type_Class_Class) {
-        poke_EXP(1, ((Type_Class)class)->super);
-    //    return;
-    //}
-    //assert1(NULL, "TODO queue \"super\" send");
+    poke_EXP(1, ((Type_Class)class)->super);
 }
 
 wchar_t * classname(Object class)

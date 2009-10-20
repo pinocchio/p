@@ -28,43 +28,60 @@ void pre_init_AST_Send()
 
 /* ========================================================================= */
 
-CNT(AST_Send_send)
+static CNT(AST_Send_send)
+    zap_EXP(); // counter
+    uns_int argc = (uns_int)pop_EXP();
+    Type_Array args = new_Raw_Type_Array(argc);
+    while (argc > 0) {
+        args->values[--argc] = pop_EXP();
+    }
     Object receiver = pop_EXP();
-    Type_Array args = (Type_Array)pop_EXP();
     
     AST_Send self   = (AST_Send)peek_EXP(1);
     Type_Class_dispatch(&self->cache, receiver, HEADER(receiver),
-                    self->message, args);
+                        self->message, args);
 }
 
-CNT(store_argument)
-    Object value = pop_EXP();
-    uns_int idx = (uns_int)pop_EXP();
-    Type_Array args = (Type_Array)pop_EXP();
-    
-    args->values[idx] = value;
+static void CNT_store_argument();
+
+void eval_store(uns_int idx)
+{
+    if (idx == 2) { return; }
+    push_CNT(store_argument);
+    push_CNT(send_Eval);
+    Object next = peek_EXP(idx);
+    push_EXP(next);
+}
+
+static CNT(store_argument)
+    Object arg = pop_EXP();
+    uns_int idx = (uns_int)peek_EXP(1);
+    poke_EXP(idx, arg);
+    idx--;
+    poke_EXP(1, idx);
+    eval_store(idx);
 }
 
 void AST_Send_eval(AST_Send self)
 {
     // LOGFUN;
     
-    Type_Array args = new_Raw_Type_Array(self->arguments->size);
-    // execute the method
-    push_CNT(AST_Send_send);
-    push_EXP(args);
     // evaluate the receiver
-    push_CNT(send_Eval);
     push_EXP(self->receiver);
+
     // evaluate the arguments
     int i;
     for (i = 0; i < self->arguments->size; i++) {
-        push_CNT(store_argument);
-        push_EXP(args);
-        push_EXP((Object)(uns_int)i);
-        push_CNT(send_Eval);
         push_EXP(self->arguments->values[i]);
     }
+
+    uns_int size = (uns_int)self->arguments->size + 3; // 2 * size + receiver
+    // total
+    push_EXP((Object)(uns_int)self->arguments->size);
+    // todo
+    push_EXP((Object)size);
+    push_CNT(AST_Send_send);
+    eval_store(size);
 }
 
 /* ========================================================================= */
