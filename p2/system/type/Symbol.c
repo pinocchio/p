@@ -15,14 +15,11 @@ Type_Dictionary SMB_Table;
 
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
-    unsigned int size = wcslen(input) + 1;
+    unsigned int size  = wcslen(input) + 1;
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
-    HEADER(result)      = (Object)Type_Symbol_Class;
-    result->hash        = NULL;
-    unsigned int i = 0;
-    for (; i < size; i++) {
-        result->value[i] = input[i];
-    }
+    HEADER(result)     = (Object)Type_Symbol_Class;
+    result->hash       = NULL;
+    wcsncpy(result->value, input, size);
     result->size        = size - 1;
     return result;
 }
@@ -49,6 +46,7 @@ void initialize_Symbol()
 NATIVE1(Type_Symbol_at_)
     ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)args->values[0];
+    printf("%s %i\n", __FUNCTION__, index->value);
     poke_EXP(1, new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
@@ -56,10 +54,15 @@ NATIVE0(Type_Symbol_asString)
     poke_EXP(1, new_Type_String(((Type_Symbol)self)->value));
 }
 
+NATIVE0(Type_Symbol_asSymbol)
+    poke_EXP(1, self);
+}
+
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
-    Type_Array array = new_Raw_Type_Array(self_symbol->size);
+    Type_Array array        = new_Raw_Type_Array(self_symbol->size);
+    printf("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
@@ -118,6 +121,7 @@ void install_symbol_methods(Type_Class class)
 {
     store_native_method(class, SMB_at_,       NM_Type_Symbol_at_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
+    store_native_method(class, SMB_asSymbol,  NM_Type_Symbol_asSymbol);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
 }

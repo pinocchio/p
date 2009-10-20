@@ -1,6 +1,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
+#include <math.h>
 #include <system/type/SmallInt.h>
 
 /* ========================================================================= */
@@ -85,6 +87,26 @@ NATIVE0(Type_SmallInt_hash)
     poke_EXP(1, self); 
 }
 
+Type_String Type_SmallInt_asString(Type_SmallInt self, unsigned int base)
+{
+    int size = 1;
+    if (self->value == 0) { 
+        size = 1; 
+    } else {
+        size = 1+(int)floor(log10(abs(self->value)));
+    }
+    if (self->value < 0) { size += 1; };
+    wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
+    swprintf(wchar_copy, size, L"%i", self->value);
+    Type_String result   =  new_Type_String(wchar_copy);
+    free(wchar_copy);
+    return result;
+}
+
+NATIVE0(Type_SmallInt_asString)
+    poke_EXP(1, Type_SmallInt_asString((Type_SmallInt)self, 10));
+}
+
 /* ========================================================================= */
 
 void post_init_Type_SmallInt()
@@ -110,6 +132,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_gt_,         NM_Type_SmallInt_gt_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_notEquals_,  NM_Type_SmallInt_notEquals_);
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash,        NM_Type_SmallInt_hash);
+    store_native_method((Type_Class)Type_SmallInt_Class, SMB_asString,    NM_Type_SmallInt_asString);
     
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_plus_));
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_minus_));

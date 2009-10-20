@@ -1,3 +1,13 @@
+#include <wchar.h>
+#include <math.h>
+
+
+NEW_TEST(Type_SmallInt_values)
+    int i;
+    for (i=INT_CACHE_LOWER-100; i<INT_CACHE_UPPER+100; i++) {
+        assert0(new_Type_SmallInt(i)->value == i);
+    }
+}
 
 NEW_TEST(Type_SmallInt_equals_manualTest)
     Object int0     = (Object)new_Type_SmallInt(0);
@@ -86,8 +96,29 @@ NEW_TEST(Type_SmallInt_hash)
     Object result        = Eval_Send0((Object)number, SMB_hash);
     ASSERT_TYPE(result, Type_SmallInt_Class);
     assert0(((Type_SmallInt)result)->value == number->value);
+    ASSERT_EMPTY_STACK;
 }
 
+NEW_TEST(Type_SmallInt_asString)
+    Type_SmallInt number = new_Type_SmallInt(0);
+    Object result = Eval_Send0((Object)number, SMB_asString);
+    ASSERT_TYPE(result, Type_String_Class);
+    assert0(wcscmp(((Type_String)result)->value, L"0"));
+    ASSERT_EMPTY_STACK;
+    
+    number = new_Type_SmallInt(-199);
+    result = Eval_Send0((Object)number, SMB_asString);
+    ASSERT_TYPE(result, Type_String_Class);
+    assert0(wcscmp(((Type_String)result)->value, L"-199"));
+    ASSERT_EMPTY_STACK;
+    
+    number = new_Type_SmallInt(1999);
+    result = Eval_Send0((Object)number, SMB_asString);
+    ASSERT_TYPE(result, Type_String_Class);
+    assert0(wcscmp(((Type_String)result)->value, L"1999"));
+    ASSERT_EMPTY_STACK;
+    
+}
 /* ========================================================================= */
 
 TEST_SUITE(Type_SmallInt,
@@ -104,4 +135,8 @@ TEST_SUITE(Type_SmallInt,
     RUN_TEST(Type_SmallInt_gt_);
     RUN_TEST(Type_SmallInt_notEquals_);
     RUN_TEST(Type_SmallInt_hash);
+    RUN_TEST(Type_SmallInt_asString);
+    // make sure this test is always the last one
+    // it assures that the SmallInts int the cache haven't been alteredw
+    RUN_TEST(Type_SmallInt_values);
 })

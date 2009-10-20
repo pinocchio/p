@@ -37,14 +37,14 @@ void apply(Object closure, Type_Array args)
 
 NATIVE1(AST_Callec_on_)
     LOGFUN;
-    AST_Continue cont   = new_AST_Continue();
-    cont->exp_offset    = (_EXP_ - &(Double_Stack[0]));
-    cont->cnt_offset    = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
-    cont->Env = Env;
+    AST_Continue contnue   = new_AST_Continue();
+    contnue->exp_offset    = (_EXP_ - &(Double_Stack[0]));
+    contnue->cnt_offset    = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
+    contnue->Env = Env;
     // optimization, reuse array object.
     // make sure to undo when introducing others
     Object closure = args->values[0];
-    args->values[0] = (Object)cont;
+    args->values[0] = (Object)contnue;
     apply(closure, args);
 }
 

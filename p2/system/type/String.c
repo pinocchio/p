@@ -38,7 +38,6 @@ void pre_init_Type_String()
 
 Type_String char2Type_String(const char * input)
 {
-    // TODO
     int size             = strlen(input)+1;
     wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
     swprintf(wchar_copy, size, L"%s", input);
@@ -52,16 +51,13 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
     int len = str1->size + str2->size;
-    wchar_t* concated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
-    int i, j;
-    for (i=0; i<str1->size; i++) {
-        concated[i] = str1->value[i];
-    }
-    for (j=0; j<str2->size; j++) {
-        concated[i+j] = str2->value[j];
-    } 
-    Type_String string =  new_Type_String(concated);
-    free(concated);
+    wchar_t* concatenated = (wchar_t*)PALLOC(sizeof(wchar_t) * len);
+    concatenated = wcsncpy(concatenated, str1->value, str1->size);
+    assert0(concatenated!=NULL);
+    concatenated = wcsncat(concatenated, str2->value, str2->size);
+    assert0(concatenated!=NULL);
+    Type_String string =  new_Type_String(concatenated);
+    free(concatenated);
     return string;
 }
 

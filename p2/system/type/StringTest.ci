@@ -49,7 +49,6 @@ NEW_TEST(Type_String_asArray)
     }
 }
 
-
 NEW_TEST(Type_String_char2Type_String)
     Type_String string = char2Type_String("abc");
     assert(string->size == 3,          printf("%i", string->size));
