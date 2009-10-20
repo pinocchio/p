@@ -37,10 +37,11 @@ CNT(AST_Super_send)
     while (argc > 0) {
         args->values[--argc] = pop_EXP();
     }
+    zap_EXP(); // Location of receiver
     AST_Super super   = (AST_Super)peek_EXP(1);
     
     Type_Class_dispatch(&super->cache, receiver, class,
-                   super->message, args);
+                        super->message, args);
 }
 
 CNT(push_env_class)
@@ -58,6 +59,8 @@ void AST_Super_eval(AST_Super super)
     push_CNT(Class_super);
     push_CNT(push_env_class);
     push_CNT(AST_Self_eval);
+
+    push_EXP(Nil); // Location of receiver
 
     // evaluate the arguments
     int i;

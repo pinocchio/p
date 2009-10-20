@@ -98,7 +98,7 @@ void Method_invoke(Object method, Object self, Object class, Type_Array args) {
 }
 
 void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
-                    Object msg, Type_Array args)
+                         Object msg, Type_Array args)
 {
     assert0(msg != Nil);
     #ifdef DEBUG
