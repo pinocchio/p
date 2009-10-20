@@ -41,8 +41,7 @@ extern Type_Class new_Named_Class(Object superclass, const wchar_t* name,
 
 /* ========================================================================= */
 
-extern void Type_Class_dispatch(InlineCache * sender, Object self, Object class,
-                    Object msg, Type_Array args);
+extern void Type_Class_dispatch(Object class, uns_int argc);
 
 extern void CNT_Class_super();
 

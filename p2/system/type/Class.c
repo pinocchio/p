@@ -97,10 +97,26 @@ void Method_invoke(Object method, Object self, Object class, Type_Array args) {
     }
 }
 
-void Type_Class_dispatch(InlineCache * cache, Object self, Object class,
-                         Object msg, Type_Array args)
+void Type_Class_dispatch(Object class, uns_int argc)
 {
+    printf("Going to dispatch\n");
+    AST_Send send = (AST_Send)peek_EXP(argc + 2);
+    printf("Send object: %p\n", send);
+    InlineCache * cache = &send->cache;
+    Object msg = send->message;
+
     assert0(msg != Nil);
+
+    Type_Array args = new_Raw_Type_Array(argc);
+
+    while (0 != argc) {
+        argc--;
+        printf("Storing arg: %lu\n", argc);
+        args->values[argc] = pop_EXP();
+    }
+
+    Object self = pop_EXP();
+
     #ifdef DEBUG
     wchar_t * clsname = classname(class);
     if (HEADER(class) != (Object)Metaclass) {

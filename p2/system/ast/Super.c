@@ -31,17 +31,12 @@ void pre_init_AST_Super()
 CNT(AST_Super_send) 
     Object class    = pop_EXP();
     Object receiver = pop_EXP();
+    printf("Super Receiver: %p\n", receiver);
     
     uns_int argc = (uns_int)pop_EXP();
-    Type_Array args = new_Raw_Type_Array(argc);
-    while (argc > 0) {
-        args->values[--argc] = pop_EXP();
-    }
-    zap_EXP(); // Location of receiver
-    AST_Super super   = (AST_Super)peek_EXP(1);
+    poke_EXP(argc + 1, receiver); // args + 1 for peek
     
-    Type_Class_dispatch(&super->cache, receiver, class,
-                        super->message, args);
+    Type_Class_dispatch(class, argc);
 }
 
 CNT(push_env_class)
@@ -54,6 +49,9 @@ CNT(push_env_class)
 void AST_Super_eval(AST_Super super)
 {
     LOGFUN;
+
+    printf("Super object: %p\n", super);
+
     // execute the method
     push_CNT(AST_Super_send);
     push_CNT(Class_super);

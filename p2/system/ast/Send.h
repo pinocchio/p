@@ -7,10 +7,10 @@
 
 struct AST_Send_t {
     InlineCache     cache;
-    Object          receiver;
     Object          message;
     Type_Array      arguments;
     AST_Info        info;
+    Object          receiver;
 };
 
 CREATE_INITIALIZERS(AST_Send)

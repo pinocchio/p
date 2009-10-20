@@ -30,15 +30,9 @@ void pre_init_AST_Send()
 
 static CNT(AST_Send_send)
     uns_int argc = (uns_int)pop_EXP();
-    Type_Array args = new_Raw_Type_Array(argc);
-    while (argc > 0) {
-        args->values[--argc] = pop_EXP();
-    }
-    Object receiver = pop_EXP();
-    
-    AST_Send self   = (AST_Send)peek_EXP(1);
-    Type_Class_dispatch(&self->cache, receiver, HEADER(receiver),
-                        self->message, args);
+    Object receiver = peek_EXP(argc + 1); // args + 1 for peek
+    printf("Send receiver: %p\n", receiver);
+    Type_Class_dispatch(HEADER(receiver), argc);
 }
 
 static void CNT_store_argument();
