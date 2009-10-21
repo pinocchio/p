@@ -29,7 +29,7 @@ Type_Character new_Type_Character_WithInt(int value)
 {
     wchar_t casted = (wchar_t)value;
     assert(((int)casted == value), 
-        printf("Unicode Character \"%lc\" %i out of Range ["F_I" Byte]", 
+        printf("Unicode Character \"%lc\" %i out of Range [%"F_I"i Byte]", 
                 casted, value, sizeof(wchar_t)));
     
     return new_Type_Character(casted);
