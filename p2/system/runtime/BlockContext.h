@@ -22,7 +22,6 @@ extern Object Env;
 CREATE_INITIALIZERS(Runtime_BlockContext)
 
 extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block, Type_Array values);
-extern Runtime_BlockContext new_Runtime_BlockContext_Sized(Runtime_Closure block, int size);
 
 /* ========================================================================= */
 

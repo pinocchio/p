@@ -77,11 +77,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     
     Type_Array args = activation_from_native(argc, closure);
 
-    Runtime_MethodContext env =
-        new_Runtime_MethodContext(closure, self, class, args);
-
-    env->home_context = env;
-    Env = (Object)env;
+    Env = (Object)new_Runtime_MethodContext(closure, self, class, args);
 
     start_eval(body);
 }
@@ -103,8 +99,7 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
     // env-frame.
     Type_Array args = activation_from_native(argc, closure);
 
-    Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
-    Env = (Object)env;
+    Env = (Object)new_Runtime_BlockContext(closure, args);
 
     start_eval(body);
 }
