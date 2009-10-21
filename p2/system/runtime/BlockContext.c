@@ -7,7 +7,7 @@
 /* ========================================================================= */
 
 Type_Class Runtime_BlockContext_Class;
-Object Env;
+static Object _Env_;
 
 /* ========================================================================= */
 
@@ -24,7 +24,12 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure closure,
 
 Runtime_BlockContext current_env()
 {
-    return (Runtime_BlockContext) Env;
+    return (Runtime_BlockContext)_Env_;
+}
+
+void set_env(Object env)
+{
+    _Env_ = env;
 }
 
 void pre_init_Runtime_BlockContext()
@@ -79,17 +84,16 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
     self->values->values[index] = value;
 }
 
+static CNT(restore_env)
+    Object result = pop_EXP();
+    set_env(peek_EXP(1));
+    poke_EXP(1, result);
+}
 
 void push_restore_env()
 {
     push_CNT(restore_env);
     poke_EXP(1, current_env());
-}
-
-CNT(restore_env)
-    Object result = pop_EXP();
-    Env           = peek_EXP(1);
-    poke_EXP(1, result);
 }
 
 /* ========================================================================= */

@@ -33,7 +33,7 @@ void pre_init_AST_Block()
 
 void CNT_AST_Block_continue()
 {
-    Runtime_BlockContext env = (Runtime_BlockContext)current_env();
+    Runtime_BlockContext env = current_env();
     Type_Array body = env->closure->code->body;
     poke_EXP(1, body->values[env->pc]);
     

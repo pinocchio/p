@@ -17,23 +17,22 @@ struct Runtime_BlockContext_t {
     Runtime_MethodContext   home_context;
 };
 
-extern Object Env;
-
 CREATE_INITIALIZERS(Runtime_BlockContext)
 
 extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block, Type_Array values);
 
 /* ========================================================================= */
 
-extern Object Runtime_BlockContext_lookup(Runtime_BlockContext self, unsigned int index, Object key);
-extern void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index, Object key, Object value);
+extern Object Runtime_BlockContext_lookup(
+    Runtime_BlockContext self, unsigned int index, Object key);
+extern void Runtime_BlockContext_assign(
+    Runtime_BlockContext self, unsigned int index, Object key, Object value);
 
 /* ========================================================================= */
 
 extern Runtime_BlockContext current_env();
+extern void set_env(Object env);
 extern void push_restore_env();
-extern void CNT_restore_env();
-extern void restore_env();
 
 /* ========================================================================= */
 

@@ -39,7 +39,7 @@ NATIVE1(AST_Callec_on_)
     AST_Continue cont   = new_AST_Continue();
     cont->exp_offset = (_EXP_ - &(Double_Stack[0]) - (argc + 1));
     cont->cnt_offset = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
-    cont->Env = Env;
+    cont->Env = (Object)current_env();
     // optimization, reuse array object.
     // make sure to undo when introducing others
     // TODO do this more cleanly!

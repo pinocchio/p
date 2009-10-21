@@ -33,6 +33,7 @@ static Type_Array activation_from_native(uns_int argc, Runtime_Closure closure)
     AST_Block block = closure->code;
     int paramc = unwrap_int((Object)block->paramCount);
     int localc = unwrap_int((Object)block->localCount);
+
     assert1(argc == paramc, "Catch-all arguments not supported yet!");
     Type_Array args = new_Raw_Type_Array(argc + localc);
     while (argc > 0) {
@@ -77,7 +78,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     
     Type_Array args = activation_from_native(argc, closure);
 
-    Env = (Object)new_Runtime_MethodContext(closure, self, class, args);
+    set_env((Object)new_Runtime_MethodContext(closure, self, class, args));
 
     start_eval(body);
 }
@@ -99,7 +100,7 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
     // env-frame.
     Type_Array args = activation_from_native(argc, closure);
 
-    Env = (Object)new_Runtime_BlockContext(closure, args);
+    set_env((Object)new_Runtime_BlockContext(closure, args));
 
     start_eval(body);
 }
