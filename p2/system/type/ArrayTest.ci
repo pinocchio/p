@@ -23,7 +23,7 @@ NEW_TEST(Type_Array_size)
     Type_Array array = new_Type_Array_With_All(10, integer);
     Object result      = Eval_Send((Object)array, SMB_size, empty_Type_Array);
     assert0(((Type_SmallInt) result)->value == 10);
-    
+
     result = Eval_Send1(integer, SMB_equals_, result);
     assert(result == (Object)True,
 		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
@@ -73,7 +73,8 @@ NEW_TEST(Type_Array_basicNew_)
     Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
                                      L"TestClass",
                                      create_type(2, ARRAY));
-    Object o = Eval_Send1((Object)cls, SMB_basicNew_, (Object)new_Type_SmallInt(3));
+    Object w_s = (Object)new_Type_SmallInt(3);
+    Object o = Eval_Send1((Object)cls, SMB_basicNew_, w_s);
     ((Type_Array)o)->values[0] = (Object)True;
     ((Type_Array)o)->values[1] = (Object)False;
     Object integer = (Object)new_Type_SmallInt(100);

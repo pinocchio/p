@@ -1,8 +1,9 @@
 
 
 int test_native_method_evaluation_testmethod_called;
-void test_native_method_evaluation_testmethod(Object self, Object class, Type_Array args) {
+void test_native_method_evaluation_testmethod(Object self, Object class, uns_int argc) {
     test_native_method_evaluation_testmethod_called++;
+    RETURN_FROM_NATIVE(self);
 }
 
 NEW_TEST(ast_native_method_evaluation)

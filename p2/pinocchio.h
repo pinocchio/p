@@ -56,9 +56,9 @@ extern Type_Class class##_Class;
 /* ========================================================================= */
 
 #define ASSERT_ARG_SIZE(raw_size) \
-	int size_value = (raw_size); \
-    assert((args->size <= size_value && args->size >= 0), \
-		printf("Invalid argument size! Expected %i but was %i\n", size_value, args->size));
+	uns_int size_value = (raw_size); \
+    assert((argc <= size_value && argc >= 0), \
+		printf("Invalid argument size! Expected %lu but was %lu\n", size_value, argc));
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) \
@@ -75,13 +75,6 @@ extern Type_Class class##_Class;
                 ((Type_Class)HEADER(expression))->name->value, \
                 ((Type_Class)(class))->name->value));
     
-#define ASSERT_ARG_TYPE(index, class) \
-    assert(HEADER(args->values[index])==((Object)(class)), \
-        printf("Invalid argument given at %i.\n", index);\
-        printf("Expected \"%ls\" but got \"%ls\"", \
-               ((Type_Class)HEADER(args->values[index]))->name->value, \
-               ((Type_Class)(class))->name->value));
-
 // TODO make sure this is not done via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
     assert(Eval_Send((Object)(exp1), SMB_equals_, \
@@ -106,12 +99,14 @@ extern Type_Class class##_Class;
 */
                                 
 #define zap_EXP()               (_EXP_--);
+#define zapn_EXP(n)             (_EXP_-=n);
 
 #define push_CNT(value)         (*(_CNT_--) = ((cont)(CNT_##value)));
 #define pop_CNT()               (*(++_CNT_))
 #define peek_CNT(depth)         (*(_CNT_ + (depth)))
 #define poke_CNT(depth, value)  (*(_CNT_ + (depth)) = ((cont)(value)));
 #define zap_CNT()               (_CNT_++);
+#define zapn_CNT(n)             (_CNT_+=n);
 
 #define CNT(name) void CNT_##name() {\
     LOGFUN;\
@@ -164,7 +159,7 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef void(*native)(Object self, Object class, Type_Array args);
+typedef void(*native)(Object self, Object class, uns_int argc);
 typedef struct InlineCache {
     Object          type;
     Object          method;

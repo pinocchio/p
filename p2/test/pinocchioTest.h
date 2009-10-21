@@ -39,6 +39,7 @@ extern void run_tests();
         Env = (Object)new_Runtime_MethodContext(NULL, NULL, NULL, NULL, NULL);\
         test_##f();\
         printf("\n"); \
+        ASSERT_EMPTY_STACK;\
     }
 
 #define SKIP_TEST printf("Test skipped: %s %s:%u\n",\

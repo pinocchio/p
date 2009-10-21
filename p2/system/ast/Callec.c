@@ -26,25 +26,26 @@ void pre_init_AST_Callec()
 
 /* ========================================================================= */
 
-void apply(Object closure, Type_Array args)
+void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
     printf("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
     assert0(HEADER(closure) == (Object)Runtime_Closure_Class);
-    Runtime_Closure_apply((Runtime_Closure)closure, args);
+    Runtime_Closure_apply((Runtime_Closure)closure, argc);
 }
 
 NATIVE1(AST_Callec_on_)
     LOGFUN;
-    AST_Continue contnue   = new_AST_Continue();
-    contnue->exp_offset    = (_EXP_ - &(Double_Stack[0]));
-    contnue->cnt_offset    = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
-    contnue->Env = Env;
+    AST_Continue cont   = new_AST_Continue();
+    cont->exp_offset = (_EXP_ - &(Double_Stack[0]) - (argc + 1));
+    cont->cnt_offset = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
+    cont->Env = Env;
     // optimization, reuse array object.
     // make sure to undo when introducing others
-    Object closure = args->values[0];
-    args->values[0] = (Object)contnue;
-    apply(closure, args);
+    // TODO do this more cleanly!
+    Object closure = NATIVE_ARG(0);
+    poke_EXP(1, cont);
+    apply(closure, 1);
 }
 
 /* ========================================================================= */

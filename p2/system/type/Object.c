@@ -42,40 +42,44 @@ void inter_init_Type_Object()
 NATIVE0(Type_Object_basicNew)
     assert_class(self);
     Object result = instantiate((Type_Class)self);
-    poke_EXP(1, result);
+    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE1(Type_Object_equals)
-    poke_EXP(1, get_bool(self == args->values[0]));
+    Object arg = NATIVE_ARG(0);
+    RETURN_FROM_NATIVE(get_bool(self == arg));
 }
 
 NATIVE0(Type_Object_asString)
     // TODO
+    assert1(NULL, "NYI");
 }
 
 NATIVE(Type_Object_isNil)
-    poke_EXP(1, False);
+    RETURN_FROM_NATIVE(False);
 }
 
 NATIVE1(Type_Object_instVarAt_)
-    int index = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Tag tag = gettag(cls);
     assert0(tag == OBJECT);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
-    poke_EXP(1, ((Type_Object)self)->ivals[index]);
+    RETURN_FROM_NATIVE(((Type_Object)self)->ivals[index]);
 }
 
 NATIVE2(Type_Object_instVarAt_put_)
-    int index = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Tag tag = gettag(cls);
     assert0(tag == OBJECT);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
-    ((Type_Object)self)->ivals[index] = args->values[1];
-    poke_EXP(1, self);
+    ((Type_Object)self)->ivals[index] = NATIVE_ARG(1);
+    RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */

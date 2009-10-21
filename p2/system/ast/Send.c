@@ -52,6 +52,8 @@ static CNT(store_argument)
     Object arg = pop_EXP();
     uns_int idx = (uns_int)peek_EXP(1);
     poke_EXP(idx, arg);
+    printf("Evaluated arg to: %p\n", arg);
+    print_Class(arg);
     idx--;
     poke_EXP(1, idx);
     eval_store(idx);

@@ -67,16 +67,19 @@ Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 /* ========================================================================= */
 
 NATIVE1(Type_Dictionary_at_)
-    Object result = Type_Dictionary_lookup((Type_Dictionary)self, args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    Object result = Type_Dictionary_lookup((Type_Dictionary)self, w_index);
     if(!result) {
         result = Nil;
     }
-    poke_EXP(1, result);
+    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE2(Type_Dictionary_at_put_)
-    Type_Dictionary_store_((Type_Dictionary)self, args->values[0], args->values[1]);
-    poke_EXP(1, args->values[1]);
+    Object w_index = NATIVE_ARG(0);
+    Object new = NATIVE_ARG(1);
+    Type_Dictionary_store_((Type_Dictionary)self, w_index, new);
+    RETURN_FROM_NATIVE(new);
 }
 
 /* ========================================================================= */

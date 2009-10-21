@@ -29,19 +29,30 @@ void pre_init_Runtime_Closure()
 /* ========================================================================= */
 
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
-                            Object class, Type_Array args)
+                            Object class, uns_int argc)
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
      
     Type_Array body = closure->code->body;
 
     if (body->size == 0) { 
+        zapn_EXP(argc + 1); // args + self
         poke_EXP(1, self);
         return; 
     }
     
+    // Get args from stack into array
+    Type_Array args = new_Raw_Type_Array(argc);
+    while (argc > 0) {
+        argc--;
+        args->values[argc] = pop_EXP();
+        print_Class(args->values[argc]);
+    }
+    zap_EXP(); // remove self
+
+    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     push_restore_env(); // pokes EXP
-    
+
     Runtime_MethodContext env =
         new_Runtime_MethodContext(closure, self, class, NULL, args);
 
@@ -58,19 +69,30 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     push_CNT(send_Eval);
 }
 
-void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
+void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
 {
     #ifdef DEBUG
     LOG("Closure Apply\n");
     #endif // DEBUG
-    
+
     ASSERT_ARG_SIZE(closure->code->paramCount->value);
 
     if (closure->code->body->size == 0) { 
+        zapn_EXP(argc + 1); // args + self
         poke_EXP(1, Nil);
         return; 
     }
     
+    // Get args from stack into array
+    Type_Array args = new_Raw_Type_Array(argc);
+    while (argc > 0) {
+        argc--;
+        args->values[argc] = pop_EXP();
+        print_Class(args->values[argc]);
+    }
+    zap_EXP(); // remove self
+
+    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     // TODO check if we call closure from source location. if so just pop
     // env-frame.
     push_restore_env();  // pokes EXP
@@ -88,7 +110,7 @@ void Runtime_Closure_apply(Runtime_Closure closure, Type_Array args)
 
 NATIVE(Runtime_Closure_apply_)
     Runtime_Closure closure = (Runtime_Closure)self;
-    Runtime_Closure_apply(closure, args);
+    Runtime_Closure_apply(closure, argc);
 }
 
 /* ========================================================================= */

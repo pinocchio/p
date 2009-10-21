@@ -83,7 +83,8 @@ Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args)
     AST_Constant self_const = new_AST_Constant(self);
     int i;
     for (i=0; i<args->size; i++) {
-        args->values[i] = (Object)new_AST_Constant(args->values[i]);
+        Object c = (Object)new_AST_Constant(args->values[i]);
+        args->values[i] = c;
     }
     return Eval_SendConst((Object)self_const, symbol, args);
 }

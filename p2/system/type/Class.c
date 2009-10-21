@@ -89,26 +89,17 @@ wchar_t * classname(Object class)
     }
 }
 
-void Method_invoke(Object method, Object self, Object class, Type_Array args) {
+void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     if (HEADER(method) == (Object)AST_Native_Method_Class) {
-        AST_Native_Method_invoke((AST_Native_Method)method, self, class, args);
+        AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
     } else if (HEADER(method) == (Object)Runtime_Closure_Class) {
-        Runtime_Closure_invoke((Runtime_Closure)method, self, class, args);
+        Runtime_Closure_invoke((Runtime_Closure)method, self, class, argc);
     }
 }
 
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
-    Type_Array args = new_Raw_Type_Array(argc);
-
-    while (0 != argc) {
-        argc--;
-        args->values[argc] = pop_EXP();
-    }
-
-    zap_EXP(); // self
-
-    AST_Send send = (AST_Send)peek_EXP(1);
+    AST_Send send = (AST_Send)peek_EXP(argc + 2); // + self + 1 for peek
     InlineCache * cache = &send->cache;
     Object msg = send->message;
 
@@ -132,7 +123,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
             ((Type_Symbol)msg)->value,
             clsname);
         #endif // DEBUG
-        return Method_invoke(cache->method, self, class, args);
+        return Method_invoke(cache->method, self, class, argc);
     }
     assert_class(class);
 
@@ -163,7 +154,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
             //TODO create second level cache to directly store the misses
             cache->type   = class;
             cache->method = method;
-            return Method_invoke(method, self, class, args);
+            return Method_invoke(method, self, class, argc);
         }
     }
     
@@ -188,6 +179,10 @@ void print_Class(Object obj)
     Type_Class class = (Type_Class)HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
+    if (HEADER(class) == Metaclass) {
+        printf("Class class: %ls\n", ((Type_Class)obj)->name->value);
+        return;
+    }
     printf("Class: %ls\n", class->name->value);
 
 }

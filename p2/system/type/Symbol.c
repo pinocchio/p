@@ -44,10 +44,11 @@ void initialize_Symbol()
 
 
 NATIVE1(Type_Symbol_at_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
-    Type_SmallInt index = (Type_SmallInt)args->values[0];
+    Object w_arg0 = NATIVE_ARG(0);
+    ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
+    Type_SmallInt index = (Type_SmallInt)w_arg0;
     printf("%s %i\n", __FUNCTION__, index->value);
-    poke_EXP(1, new_Type_Character(((Type_Symbol) self)->value[index->value]));
+    RETURN_FROM_NATIVE(new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
 NATIVE0(Type_Symbol_asString)

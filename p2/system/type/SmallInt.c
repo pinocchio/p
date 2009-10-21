@@ -48,8 +48,9 @@ void pre_init_Type_SmallInt()
 
 #define Type_SmallInt_BINARY_OPERATION(name, op)\
 NATIVE1(Type_SmallInt_##name)\
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);\
-    Type_SmallInt arg = (Type_SmallInt)args->values[0];\
+    Object w_arg = NATIVE_ARG(0);\
+    ASSERT_INSTANCE_OF(w_arg, Type_SmallInt_Class);\
+    Type_SmallInt arg = (Type_SmallInt)arg;\
     poke_EXP(1, new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
 }
 
@@ -63,15 +64,17 @@ Type_SmallInt_BINARY_OPERATION(and_,        &);
 Type_SmallInt_BINARY_OPERATION(or_,         |);
 
 
+// TODO fix this damn typecheck!
 #define Type_SmallInt_COMPARE_OPERATION(name, op)\
 NATIVE1(Type_SmallInt##_##name)\
-    if (HEADER(args->values[0]) == (Object)Type_SmallInt_Class) {\
+    Object w_arg = NATIVE_ARG(0);\
+    if (HEADER(w_arg) == (Object)Type_SmallInt_Class) {\
         Type_SmallInt number = ((Type_SmallInt) self);\
-        Type_SmallInt otherNumber = (Type_SmallInt) args->values[0]; \
+        Type_SmallInt otherNumber = (Type_SmallInt)w_arg; \
         if (number->value op otherNumber->value) {\
-            poke_EXP(1, True);\
+            RETURN_FROM_NATIVE(True);\
         } else {\
-            poke_EXP(1, False);\
+            RETURN_FROM_NATIVE(False);\
         }\
     } else {\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \

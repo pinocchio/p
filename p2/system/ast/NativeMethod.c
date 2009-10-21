@@ -28,21 +28,24 @@ void pre_init_AST_Native_Method()
 /* ========================================================================= */
 
 void AST_Native_Method_invoke(AST_Native_Method method, Object self,
-                              Object class, Type_Array args)
+                              Object class, uns_int argc)
 {
     #ifdef DEBUG
     LOG("Native Method invoke\n");
     #endif // DEBUG
-    method->code(self, class, args);
+    method->code(self, class, argc);
 }
 
 NATIVE(AST_Native_Method_eval)
-    AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
+    assert1(NULL, "NYI\n");
+    // AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
 }
 
 NATIVE(AST_Native_Method_eval_)
-    // FIXME for now accecpt any number of arguments
-    AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
+
+    assert1(NULL, "NYI\n");
+    // FIXME for now accept any number of arguments
+    // AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
 }
 
 

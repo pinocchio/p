@@ -71,56 +71,62 @@ void pre_init_Type_Array()
 
 NATIVE1(Type_Array_basicNew_)
     assert_class(self);
-    int size = unwrap_int(args->values[0]);
+    Object w_size = NATIVE_ARG(0);
+    int size = unwrap_int(w_size);
     assert0(size >= 0);
     Object result = instantiate_sized((Type_Class)self, (unsigned int)size);
-    poke_EXP(1, result);
+    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE0(Type_Array_size)
-    poke_EXP(1, new_Type_SmallInt(((Type_Array)self)->size));
+    Type_SmallInt result = new_Type_SmallInt(((Type_Array)self)->size);
+    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE1(Type_Array_at_)
-    int index      = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
     assert0(as->size > index);
     assert0(0 <= index);
-    poke_EXP(1, as->values[getsize(cls) + index]);
+    RETURN_FROM_NATIVE(as->values[getsize(cls) + index]);
 }
 
 NATIVE2(Type_Array_at_put_)
-    int index      = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
     assert0(gettag(cls) == ARRAY);
     assert0(as->size > index);
     assert0(0 <= index);
-    as->values[index + getsize(cls)] = args->values[1];
-    poke_EXP(1, self);
+    as->values[index + getsize(cls)] = NATIVE_ARG(1);
+    RETURN_FROM_NATIVE(self);
 }
 
 NATIVE1(Type_Array_instVarAt_)
-    int index      = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Tag tag   = gettag(cls);
     assert0(tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
-    poke_EXP(1, ((Type_Array)self)->values[index]);
+    RETURN_FROM_NATIVE(((Type_Array)self)->values[index]);
 }
 
 NATIVE2(Type_Array_instVarAt_put_)
-    int index      = unwrap_int(args->values[0]);
+    Object w_index = NATIVE_ARG(0);
+    int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Tag tag   = gettag(cls);
     assert0(tag == ARRAY);
     assert0(getsize(cls) > index);
     assert0(0 <= index);
-    ((Type_Array)self)->values[index] = args->values[1];
-    poke_EXP(1, self);
+    ((Type_Array)self)->values[index] = NATIVE_ARG(1);
+    RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */

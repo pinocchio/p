@@ -68,10 +68,11 @@ CNT(Type_String_concat_)
 }
 
 NATIVE1(Type_String_concat_)
+    Object w_arg = NATIVE_ARG(0);
     push_CNT(Type_String_concat_);
     push_CNT(send_Eval);
-    poke_EXP(1, self); 
-    push_EXP(new_AST_Send((Object)new_AST_Constant(args->values[0]), 
+    RETURN_FROM_NATIVE(self); 
+    push_EXP(new_AST_Send((Object)new_AST_Constant(w_arg),
                                                   (Object)SMB_asString, 
                                                   empty_Type_Array));
 }
@@ -84,14 +85,17 @@ NATIVE0(Type_String_asSymbol)
     poke_EXP(1, new_Type_Symbol(((Type_String)self)->value));
 }
 
-
+// TODO check types not classes!
 NATIVE2(Type_String_at_put_)
-    ASSERT_ARG_TYPE(0, Type_SmallInt_Class);
-    ASSERT_ARG_TYPE(1, Type_Character_Class);
-    Type_SmallInt pos = (Type_SmallInt) args->values[0];
+    Object w_arg0 = NATIVE_ARG(0);
+    Object w_arg1 = NATIVE_ARG(1);
+    ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
+    ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
+    Type_SmallInt pos = (Type_SmallInt)w_arg0;
     assert(pos->value <= ((Type_String)self)->size,
         printf("%i is out of Bounds[%i]", pos->value, ((Type_String)self)->size));
-    ((Type_String)self)->value[pos->value] = ((Type_Character) args->values[1])->value;
+    ((Type_String)self)->value[pos->value] = ((Type_Character)w_arg1)->value;
+    RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */

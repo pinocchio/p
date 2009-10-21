@@ -26,12 +26,13 @@ void pre_init_AST_Continue()
 NATIVE1(AST_Continue_escape_)
     LOGFUN;
     AST_Continue ast_cont = (AST_Continue)self;
+    Object arg = NATIVE_ARG(0);
     // restore the stack
     _EXP_ = ast_cont->exp_offset + &(Double_Stack[0]);
     _CNT_ = (cont*)(&(Double_Stack[STACK_SIZE]) - ast_cont->cnt_offset);
     Env   = ast_cont->Env;
-
-    poke_EXP(1, args->values[0]);
+    // Overwrite the top of stack that created the continue.
+    poke_EXP(1, arg);
 }
 
 /* ========================================================================= */
