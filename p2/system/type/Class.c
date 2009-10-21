@@ -179,7 +179,7 @@ void print_Class(Object obj)
     Type_Class class = (Type_Class)HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
-    if (HEADER(class) == Metaclass) {
+    if (HEADER(class) == (Object)Metaclass) {
         printf("Class class: %ls\n", ((Type_Class)obj)->name->value);
         return;
     }
