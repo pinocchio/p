@@ -28,14 +28,25 @@ void pre_init_Runtime_Closure()
 
 /* ========================================================================= */
 
-static Type_Array pop_args_from_stack(uns_int argc)
+static Type_Array activation_from_native(uns_int argc, Runtime_Closure closure)
 {
-    Type_Array args = new_Raw_Type_Array(argc);
+    AST_Block block = closure->code;
+    int paramc = unwrap_int((Object)block->paramCount);
+    int localc = unwrap_int((Object)block->localCount);
+    assert1(argc == paramc, "Catch-all arguments not supported yet!");
+    Type_Array args = new_Raw_Type_Array(argc + localc);
     while (argc > 0) {
         argc--;
         args->values[argc] = pop_EXP();
     }
     zap_EXP(); // remove self
+
+    argc = paramc;
+    // Set locals to nil.
+    while (argc < paramc + localc) {
+        args->values[argc] = Nil;
+    }
+
     return args;
 }
 
@@ -61,7 +72,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
         return;
     }
     
-    Type_Array args = pop_args_from_stack(argc);
+    Type_Array args = activation_from_native(argc, closure);
 
     // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     push_restore_env(); // pokes EXP
@@ -81,8 +92,6 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
     LOG("Closure Apply\n");
     #endif // DEBUG
 
-    ASSERT_ARG_SIZE(closure->code->paramCount->value);
-
     Type_Array body = closure->code->body;
 
     if (body->size == 0) { 
@@ -90,7 +99,7 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
         return; 
     }
     
-    Type_Array args = pop_args_from_stack(argc);
+    Type_Array args = activation_from_native(argc, closure);
 
     // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     // TODO check if we call closure from source location. if so just pop
