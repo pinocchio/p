@@ -5,14 +5,13 @@
 
 /* ========================================================================= */
 
-#define AST_BLOCK_SIZE 5
+#define AST_BLOCK_SIZE 4
 
 /* ========================================================================= */
 
 struct AST_Block_t {
     Type_SmallInt           paramCount;
     Type_SmallInt           localCount;
-    Runtime_BlockContext    environment;
     Type_Array              body;
     AST_Info                info;
 };
