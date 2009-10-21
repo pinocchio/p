@@ -46,7 +46,6 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     while (argc > 0) {
         argc--;
         args->values[argc] = pop_EXP();
-        print_Class(args->values[argc]);
     }
     zap_EXP(); // remove self
 
