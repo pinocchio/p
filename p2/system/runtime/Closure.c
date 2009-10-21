@@ -28,6 +28,27 @@ void pre_init_Runtime_Closure()
 
 /* ========================================================================= */
 
+static Type_Array pop_args_from_stack(uns_int argc)
+{
+    Type_Array args = new_Raw_Type_Array(argc);
+    while (argc > 0) {
+        argc--;
+        args->values[argc] = pop_EXP();
+    }
+    zap_EXP(); // remove self
+    return args;
+}
+
+static void start_eval(Type_Array body)
+{
+    if (1 < body->size) {
+        push_CNT(AST_Block_continue);
+    }
+    
+    push_EXP(body->values[0]);
+    push_CNT(send_Eval);
+}
+
 void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
                             Object class, uns_int argc)
 {
@@ -36,18 +57,11 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     Type_Array body = closure->code->body;
 
     if (body->size == 0) { 
-        zapn_EXP(argc + 1); // args + self
-        poke_EXP(1, self);
-        return; 
+        RETURN_FROM_NATIVE(self);
+        return;
     }
     
-    // Get args from stack into array
-    Type_Array args = new_Raw_Type_Array(argc);
-    while (argc > 0) {
-        argc--;
-        args->values[argc] = pop_EXP();
-    }
-    zap_EXP(); // remove self
+    Type_Array args = pop_args_from_stack(argc);
 
     // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     push_restore_env(); // pokes EXP
@@ -56,16 +70,9 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
         new_Runtime_MethodContext(closure, self, class, NULL, args);
 
     env->home_context = env;
-    
     Env = (Object)env;
 
-    
-    if (1 < body->size) {
-        push_CNT(AST_Block_continue);
-    }
-    
-    push_EXP(body->values[0]);
-    push_CNT(send_Eval);
+    start_eval(body);
 }
 
 void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
@@ -76,35 +83,24 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
 
     ASSERT_ARG_SIZE(closure->code->paramCount->value);
 
-    if (closure->code->body->size == 0) { 
-        zapn_EXP(argc + 1); // args + self
-        poke_EXP(1, Nil);
+    Type_Array body = closure->code->body;
+
+    if (body->size == 0) { 
+        RETURN_FROM_NATIVE(Nil);
         return; 
     }
     
-    // Get args from stack into array
-    Type_Array args = new_Raw_Type_Array(argc);
-    while (argc > 0) {
-        argc--;
-        args->values[argc] = pop_EXP();
-        print_Class(args->values[argc]);
-    }
-    zap_EXP(); // remove self
+    Type_Array args = pop_args_from_stack(argc);
 
     // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     // TODO check if we call closure from source location. if so just pop
     // env-frame.
     push_restore_env();  // pokes EXP
+
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
-    
     Env = (Object)env;
-    
-    if (1 < closure->code->body->size) {
-        push_CNT(AST_Block_continue);
-    }
-    
-    push_EXP(closure->code->body->values[0]);
-    push_CNT(send_Eval);
+
+    start_eval(body);
 }
 
 NATIVE(Runtime_Closure_apply_)

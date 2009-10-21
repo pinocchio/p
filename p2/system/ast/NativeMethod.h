@@ -26,8 +26,8 @@ void NM_##name(Object self, Object class, uns_int argc) {
 #define NATIVE3(name)  NATIVE(name) ASSERT_ARG_SIZE(3);
 
 #define RETURN_FROM_NATIVE(exp)\
-    poke_EXP(argc + 2, exp);\
-    zapn_EXP(argc + 1);
+    zapn_EXP(argc + 1);\
+    poke_EXP(1, exp);
 
 #define NATIVE_ARG(idx) peek_EXP(argc - idx);
 
