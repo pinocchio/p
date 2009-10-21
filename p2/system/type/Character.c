@@ -46,21 +46,22 @@ void pre_init_Type_Character()
 /* ========================================================================= */
 
 NATIVE1(Type_Character_equals_)
+    assert1(NULL, "NYI!");
 }
 
 NATIVE0(Type_Character_asString)
     // TODO add \0 at the end
-    poke_EXP(1, new_Type_String(&((Type_Character)self)->value));
+    RETURN_FROM_NATIVE(new_Type_String(&((Type_Character)self)->value));
 }
 
 NATIVE0(Type_Character_asSymbol)
     // TODO add \0 at the end
-    poke_EXP(1, new_Type_Symbol(&((Type_Character)self)->value));
+    RETURN_FROM_NATIVE(new_Type_Symbol(&((Type_Character)self)->value));
 }
 
 NATIVE0(Type_Character_asSmallInt)
     // TODO add \0 at the end
-    poke_EXP(1, new_Type_SmallInt(((Type_Character)self)->value));
+    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_Character)self)->value));
 }
 
 /* ========================================================================= */

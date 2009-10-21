@@ -78,11 +78,11 @@ NATIVE1(Type_String_concat_)
 }
 
 NATIVE0(Type_String_asString)
-    poke_EXP(1, self);
+    RETURN_FROM_NATIVE(self);
 }
 
 NATIVE0(Type_String_asSymbol)
-    poke_EXP(1, new_Type_Symbol(((Type_String)self)->value));
+    RETURN_FROM_NATIVE(new_Type_Symbol(((Type_String)self)->value));
 }
 
 // TODO check types not classes!

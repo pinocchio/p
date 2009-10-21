@@ -50,8 +50,8 @@ void pre_init_Type_SmallInt()
 NATIVE1(Type_SmallInt_##name)\
     Object w_arg = NATIVE_ARG(0);\
     ASSERT_INSTANCE_OF(w_arg, Type_SmallInt_Class);\
-    Type_SmallInt arg = (Type_SmallInt)arg;\
-    poke_EXP(1, new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
+    Type_SmallInt arg = (Type_SmallInt)w_arg;\
+    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
 }
 
 Type_SmallInt_BINARY_OPERATION(plus_,       +);
@@ -87,7 +87,7 @@ Type_SmallInt_COMPARE_OPERATION(gt_, >)
 Type_SmallInt_COMPARE_OPERATION(notEquals_, !=)
 
 NATIVE0(Type_SmallInt_hash)
-    poke_EXP(1, self); 
+    RETURN_FROM_NATIVE(self); 
 }
 
 Type_String Type_SmallInt_asString(int self, unsigned int base)
@@ -107,11 +107,11 @@ Type_String Type_SmallInt_asString(int self, unsigned int base)
 }
 
 NATIVE0(Type_SmallInt_asString)
-    poke_EXP(1, Type_SmallInt_asString(unwrap_int(self), 10));
+    RETURN_FROM_NATIVE(Type_SmallInt_asString(unwrap_int(self), 10));
 }
 
 NATIVE0(Type_SmallInt_asCharacter)
-    poke_EXP(1, new_Type_Character_WithInt(unwrap_int(self)));
+    RETURN_FROM_NATIVE(new_Type_Character_WithInt(unwrap_int(self)));
 }
 
 

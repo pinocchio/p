@@ -52,11 +52,11 @@ NATIVE1(Type_Symbol_at_)
 }
 
 NATIVE0(Type_Symbol_asString)
-    poke_EXP(1, new_Type_String(((Type_Symbol)self)->value));
+    RETURN_FROM_NATIVE(new_Type_String(((Type_Symbol)self)->value));
 }
 
 NATIVE0(Type_Symbol_asSymbol)
-    poke_EXP(1, self);
+    RETURN_FROM_NATIVE(self);
 }
 
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
@@ -72,7 +72,7 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 }
 
 NATIVE0(Type_Symbol_asArray)
-    poke_EXP(1, Type_Symbol_asArray((Type_Symbol)self));
+    RETURN_FROM_NATIVE(Type_Symbol_asArray((Type_Symbol)self));
 }
 
 
@@ -88,12 +88,12 @@ int Type_Symbol_hash(const wchar_t* symbol_string)
 }
 
 NATIVE0(Type_Symbol_hash)
-    poke_EXP(1, new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
+    RETURN_FROM_NATIVE(new_Type_SmallInt(Type_Symbol_hash(((Type_Symbol)self)->value)));
 }
 
 
 NATIVE0(Type_Symbol_size)
-    poke_EXP(1, (Object)new_Type_SmallInt(((Type_Symbol)self)->size));
+    RETURN_FROM_NATIVE((Object)new_Type_SmallInt(((Type_Symbol)self)->size));
 }
 
 NATIVE1(Type_Symbol_indexOf_)
