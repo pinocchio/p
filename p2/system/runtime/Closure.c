@@ -41,6 +41,9 @@ static Type_Array activation_from_native(uns_int argc, Runtime_Closure closure)
     }
     zap_EXP(); // remove self
 
+    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
+    push_restore_env(); // pokes EXP
+
     argc = paramc;
     // Set locals to nil.
     while (argc < paramc + localc) {
@@ -74,11 +77,8 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     
     Type_Array args = activation_from_native(argc, closure);
 
-    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
-    push_restore_env(); // pokes EXP
-
     Runtime_MethodContext env =
-        new_Runtime_MethodContext(closure, self, class, NULL, args);
+        new_Runtime_MethodContext(closure, self, class, args);
 
     env->home_context = env;
     Env = (Object)env;
@@ -99,12 +99,9 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
         return; 
     }
     
-    Type_Array args = activation_from_native(argc, closure);
-
-    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
     // TODO check if we call closure from source location. if so just pop
     // env-frame.
-    push_restore_env();  // pokes EXP
+    Type_Array args = activation_from_native(argc, closure);
 
     Runtime_BlockContext env = new_Runtime_BlockContext(closure, args);
     Env = (Object)env;

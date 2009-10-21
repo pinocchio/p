@@ -41,7 +41,7 @@ NEW_TEST(Runtime_Closure_evaluation)
 NEW_TEST(Runtime_Closure_invocation_with_arguments)
     AST_Variable var        = new_AST_Variable(L"myVar");
     Type_Array body         = new_Type_Array_With(1, (Object)var);
-    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, 0, body),
+    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(1, 0, body),
                                                   (Runtime_BlockContext)Nil);
     var->key = (Object)closure->code;
     var->index = 0;
@@ -164,7 +164,7 @@ NEW_TEST(Runtime_Closure_MACRO)
 
 NEW_TEST(Runtime_Closure_new_Runtime_Closure)
     AST_Block code                = new_AST_Block(0, 0, empty_Type_Array);
-    Runtime_MethodContext context = new_Runtime_MethodContext(NULL, NULL, NULL, NULL, NULL);
+    Runtime_MethodContext context = new_Runtime_MethodContext(NULL, NULL, NULL, NULL);
     Runtime_Closure closure       = new_Runtime_Closure(code, (Runtime_BlockContext)context);
     assert0(closure->code == code);
     assert0(closure->context == (Runtime_BlockContext)context);
