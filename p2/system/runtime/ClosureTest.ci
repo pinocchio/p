@@ -19,18 +19,16 @@ NEW_TEST(Runtime_Closure_evaluation)
     assert0(result == (Object)closure);
     
     // with one body element ---------------------------------------------------
-    closure->code->body = new_Type_Array_With(1, integer_const);
-    closure->code->paramCount = new_Type_SmallInt(1);
+    closure = new_Runtime_Closure(
+        new_AST_Block(1, 0, new_Type_Array_With(1, integer_const)),
+        (Runtime_BlockContext)Nil);
     result       = Eval_Send1((Object)closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
 
     // with one argument -------------------------------------------------------
-    AST_Variable var      = new_AST_Variable(L"myVar");
-    closure->code->body   = new_Type_Array_With_All(3, integer7_const);
-    closure->code->body->values[2] = (Object)var;
     
-    var->key = (Object)closure->code;
-    var->index = 0;
+    closure->code->body   = new_Type_Array_With_All(3, integer7_const);
+    closure->code->body->values[2] = (Object)BLOCK_PARAM(closure->code, 0);
     
     result       = Eval_Send1((Object)closure, SMB_apply_, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
@@ -39,12 +37,10 @@ NEW_TEST(Runtime_Closure_evaluation)
 
 
 NEW_TEST(Runtime_Closure_invocation_with_arguments)
-    AST_Variable var        = new_AST_Variable(L"myVar");
-    Type_Array body         = new_Type_Array_With(1, (Object)var);
-    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(1, 0, body),
+    Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(1, 0, NULL),
                                                   (Runtime_BlockContext)Nil);
-    var->key = (Object)closure->code;
-    var->index = 0;
+    Type_Array body = new_Type_Array_With(1, (Object)BLOCK_PARAM(closure->code, 0));
+    closure->code->body = body;
     
     Type_Symbol test           = new_Type_Symbol(L"test");
     Type_SmallInt integer      = new_Type_SmallInt(120);
