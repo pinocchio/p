@@ -47,7 +47,7 @@ void CNT_AST_Block_continue()
 {
     Runtime_BlockContext env = current_env();
     Type_Array body = env->closure->code->body;
-    poke_EXP(1, body->values[env->pc]);
+    poke_EXP(0, body->values[env->pc]);
     
     env->pc++;
     if (body->size <= env->pc) {
@@ -58,7 +58,7 @@ void CNT_AST_Block_continue()
 
 void AST_Block_eval(AST_Block self)
 {
-    poke_EXP(1, new_Runtime_Closure(self, current_env()));
+    poke_EXP(0, new_Runtime_Closure(self, current_env()));
 }
 
 /* ========================================================================= */

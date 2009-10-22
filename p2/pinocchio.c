@@ -50,8 +50,8 @@ void init_Stack(unsigned int size)
 {
     // TODO allocate the stack with the given size
     Double_Stack = (Object *)PALLOC(sizeof(Object[STACK_SIZE]));
-    _EXP_ = (Object *)&Double_Stack[0];
-    _CNT_ = (cont *)  &Double_Stack[size - 1];
+    _EXP_ = (Object *)&Double_Stack[-1];
+    _CNT_ = (cont *)  &Double_Stack[size];
 }
 
 void initialize_Thread()
@@ -70,7 +70,7 @@ void initialize_Thread()
 void CNT_send_Eval()
 {
     zap_CNT();
-    Object exp = peek_EXP(1);
+    Object exp = peek_EXP(0);
 
     Type_Class class = (Type_Class)HEADER(exp);
     EVAL_IF(AST_Constant)
@@ -112,7 +112,7 @@ Object Eval(Object code)
         IN_EVAL = 1;
         setjmp(Eval_Continue);
         for (;;) {
-            peek_CNT(1)();
+            peek_CNT()();
         }
     }
 
@@ -123,8 +123,8 @@ Object Eval(Object code)
     push_CNT(send_Eval);
 
     IN_EVAL = 1;
-    while (_CNT_ != &(Double_Stack[STACK_SIZE-1])) {
-        peek_CNT(1)();
+    while (!empty_CNT()) {
+        peek_CNT()();
     }
 
 #endif // NOJMP ----------------------------------------------------------------

@@ -63,8 +63,8 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
 
 CNT(Type_String_concat_)
     Object string = pop_EXP();
-    Object self   = peek_EXP(1);
-    poke_EXP(1, Type_String_concat_((Type_String)self, (Type_String)string));
+    Object self   = peek_EXP(0);
+    poke_EXP(0, Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
 NATIVE1(Type_String_concat_)

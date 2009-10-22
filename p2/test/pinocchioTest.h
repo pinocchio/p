@@ -48,11 +48,11 @@ extern void run_tests();
     
 
 #define ASSERT_EMPTY_STACK \
-    assert(_EXP_ == &Double_Stack[0], {\
+    assert(empty_EXP(), {\
            printf("Stack should be empty but found Object at %li with \n    ", (long int)(_EXP_-Double_Stack));\
-           print_Class(peek_EXP(1));\
+           print_Class(peek_EXP(0));\
            }); \
-    assert0(_CNT_ == (cont *)  &Double_Stack[STACK_SIZE - 1]);
+    assert0(empty_CNT());
 
 /* ========================================================================= */
 

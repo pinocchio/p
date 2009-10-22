@@ -63,7 +63,7 @@ void AST_Super_eval(AST_Super super)
         push_EXP(super->arguments->values[i]);
     }
     
-    uns_int size = (uns_int)super->arguments->size + 2; // 2 * size
+    uns_int size = (uns_int)super->arguments->size + 1; // 2 * size
     // total
     push_EXP((Object)(uns_int)super->arguments->size);
     // todo

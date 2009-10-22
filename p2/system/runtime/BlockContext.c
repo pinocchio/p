@@ -86,14 +86,14 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
 
 static CNT(restore_env)
     Object result = pop_EXP();
-    set_env(peek_EXP(1));
-    poke_EXP(1, result);
+    set_env(peek_EXP(0));
+    poke_EXP(0, result);
 }
 
 void push_restore_env()
 {
     push_CNT(restore_env);
-    poke_EXP(1, current_env());
+    poke_EXP(0, current_env());
 }
 
 /* ========================================================================= */

@@ -75,9 +75,9 @@ void assert_class(Object class)
 }
 
 CNT(Class_super)
-    Object class = peek_EXP(1);
+    Object class = peek_EXP(0);
     assert_class(class);
-    poke_EXP(1, ((Type_Class)class)->super);
+    poke_EXP(0, ((Type_Class)class)->super);
 }
 
 wchar_t * classname(Object class)
@@ -99,7 +99,7 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
 
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
-    AST_Send send = (AST_Send)peek_EXP(argc + 2); // + self + 1 for peek
+    AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
     InlineCache * cache = &send->cache;
     Object msg = send->message;
 

@@ -32,16 +32,16 @@ void AST_Assign_eval(AST_Assign self)
 {
     LOGFUN;
     push_CNT(AST_Assign_assign);
-    poke_EXP(1, self->variable);
+    poke_EXP(0, self->variable);
     push_CNT(send_Eval);
     push_EXP(self->expression);
 }
 
 CNT(AST_Assign_assign)
     Object value = pop_EXP();
-    Object var   = peek_EXP(1);
+    Object var   = peek_EXP(0);
     /* result of evaluating expression is result of assignment */
-    poke_EXP(1, value);
+    poke_EXP(0, value);
     
     if (HEADER(var) == (Object)AST_Variable_Class) {
         return AST_Variable_assign((AST_Variable)var, value);

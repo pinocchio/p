@@ -29,7 +29,7 @@ void pre_init_AST_Constant()
 void AST_Constant_eval(AST_Constant self)
 {
     // replace self with the constant
-    poke_EXP(1, self->constant);
+    poke_EXP(0, self->constant);
 }
 
 /* ========================================================================= */

@@ -30,7 +30,7 @@ void pre_init_AST_Send()
 
 static CNT(AST_Send_send)
     uns_int argc = (uns_int)pop_EXP();
-    Object receiver = peek_EXP(argc + 1); // args + 1 for peek
+    Object receiver = peek_EXP(argc);
     Type_Class_dispatch(receiver, HEADER(receiver), argc);
 }
 
@@ -38,7 +38,7 @@ static void CNT_store_argument();
 
 void eval_store(uns_int idx)
 {
-    if (idx == 2) {
+    if (idx == 1) {
         zap_EXP(); // zap counter
         return;
     }
@@ -50,10 +50,10 @@ void eval_store(uns_int idx)
 
 static CNT(store_argument)
     Object arg = pop_EXP();
-    uns_int idx = (uns_int)peek_EXP(1);
+    uns_int idx = (uns_int)peek_EXP(0);
     poke_EXP(idx, arg);
     idx--;
-    poke_EXP(1, idx);
+    poke_EXP(0, idx);
     eval_store(idx);
 }
 
@@ -72,7 +72,7 @@ void AST_Send_eval(AST_Send self)
     for (i = 0; i < argc; i++) {
         push_EXP(self->arguments->values[i]);
     }
-    uns_int size = (uns_int)argc + 3; // 2 * size + receiver
+    uns_int size = (uns_int)argc + 2; // 2 * size
     // total
     push_EXP((Object)(uns_int)argc);
     // todo

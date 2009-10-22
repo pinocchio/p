@@ -44,7 +44,7 @@ NATIVE1(AST_Callec_on_)
     // make sure to undo when introducing others
     // TODO do this more cleanly!
     Object closure = NATIVE_ARG(0);
-    poke_EXP(1, cont);
+    poke_EXP(0, cont);
     apply(closure, 1);
 }
 

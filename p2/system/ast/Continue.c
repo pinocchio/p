@@ -32,7 +32,7 @@ NATIVE1(AST_Continue_escape_)
     _CNT_ = (cont*)(&(Double_Stack[STACK_SIZE]) - ast_cont->cnt_offset);
     set_env(ast_cont->Env);
     // Overwrite the top of stack that created the continue.
-    poke_EXP(1, arg);
+    poke_EXP(0, arg);
 }
 
 /* ========================================================================= */
