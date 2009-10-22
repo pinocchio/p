@@ -99,10 +99,10 @@ extern Type_Class class##_Class;
 /*                               printf("    Peeking[%li] Object with ", (_EXP_-Double_Stack-depth));\
                                (print_Class((Object)value));
 */
-#define empty_EXP()             (_EXP_ == &(Double_Stack[-1]))
                                 
 #define zap_EXP()               (_EXP_--);
 #define zapn_EXP(n)             (_EXP_-=n);
+#define empty_EXP()             (_EXP_ == &(Double_Stack[-1]))
 
 #define push_CNT(value)         (*(--_CNT_) = ((cont)(CNT_##value)));
 #define pop_CNT()               (*(_CNT_++))
@@ -120,7 +120,7 @@ extern Type_Class class##_Class;
 #define DEBUG
 #endif
 
-void printf0(const char * string, ...);
+extern void printf0(const char * string, ...);
 
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");

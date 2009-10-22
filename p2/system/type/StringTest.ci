@@ -50,7 +50,7 @@ NEW_TEST(Type_String_asArray)
 }
 
 NEW_TEST(Type_String_char2Type_String)
-    Type_String string = char2Type_String("abc");
+    Type_String string = new_Type_String_from_charp("abc");
     assert(string->size == 3,          printf("%i", string->size));
     assert(wcscmp(string->value, L"abc") == 0, printf("%ls", string->value));
 }

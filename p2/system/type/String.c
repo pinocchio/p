@@ -36,7 +36,7 @@ void pre_init_Type_String()
 
 /* ========================================================================= */
 
-Type_String char2Type_String(const char * input)
+Type_String new_Type_String_from_charp(const char * input)
 {
     int size             = strlen(input)+1;
     wchar_t cp[size];

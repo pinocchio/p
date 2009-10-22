@@ -31,8 +31,8 @@ Runtime_Closure fName() {\
     Runtime_Closure method   = new_Runtime_Closure(body,\
                                                 (Runtime_BlockContext)Nil);\
     method->info             = new_raw_AST_Info();\
-    method->info->sourceFile = char2Type_String(__FILE__);\
-    method->info->name       = char2Type_String(__FUNCTION__);\
+    method->info->sourceFile = new_Type_String_from_charp(__FILE__);\
+    method->info->name       = new_Type_String_from_charp(__FUNCTION__);\
     method->info->line       = new_Type_SmallInt(__LINE__);\
     unsigned int _st_count   = 0;
 
