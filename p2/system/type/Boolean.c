@@ -77,20 +77,16 @@ NATIVE1(True_ifFalse_)
 
 METHOD(True_ifTrue_, 1, 0, 1)
     /* TODO look at making this native */
-    AST_Variable arg = new_AST_Variable(L"ifTrue");
-    arg->key = (Object)body;
-    arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
+    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifTrue");
+    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return method;
 }
 
 METHOD(True_ifTrue_ifFalse_, 2, 0, 1)
     /* TODO look at making this native */
-    AST_Variable arg = new_AST_Variable(L"ifTrue");
-    arg->key = (Object)body;
-    arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
+    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifTrue");
+    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return method;
 }
@@ -127,20 +123,16 @@ NATIVE1(False_ifTrue_)
 
 METHOD(False_ifFalse_, 1, 0, 1)
     /* TODO look at making this native */
-    AST_Variable arg = new_AST_Variable(L"ifFalse");
-    arg->key = (Object)body;
-    arg->index = 0;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
+    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifFalse");
+    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return method;
 }
 
 METHOD(False_ifTrue_ifFalse_, 2, 0, 1)
     /* TODO look at making this native */
-    AST_Variable arg = new_AST_Variable(L"ifFalse");
-    arg->key = (Object)body;
-    arg->index = 1;
-    AST_Send send = new_AST_Send((Object)arg, (Object)SMB_apply, empty_Type_Array);
+    BLOCK_PARAM(body, 1)->name = (Object)new_Type_Symbol(L"ifFalse");
+    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 1), (Object)SMB_apply, empty_Type_Array);
     ADD_STATEMENT(send); 
     return method;
 }

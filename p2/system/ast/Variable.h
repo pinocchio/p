@@ -6,15 +6,16 @@
 /* ========================================================================= */
 
 struct AST_Variable_t {
-    unsigned long int   index;
-    Object              key;
-    Object              name;
-    AST_Info            info;
+    uns_int     index;
+    Object      key;
+    Object      name;
+    AST_Info    info;
 };
 
 CREATE_INITIALIZERS(AST_Variable)
 
-extern AST_Variable new_AST_Variable(const wchar_t* name);
+extern AST_Variable new_AST_Variable_named(const wchar_t* name);
+extern AST_Variable new_AST_Variable(Object key, uns_int index);
 
 /* ========================================================================= */
 

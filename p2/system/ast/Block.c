@@ -16,8 +16,18 @@ AST_Block new_AST_Block(unsigned int paramCount,
 {
     NEW_OBJECT(AST_Block);
     result->body       = body;
-    result->paramCount = new_Type_SmallInt(paramCount);
-    result->localCount = new_Type_SmallInt(localCount);
+    result->params     = new_Raw_Type_Array(paramCount);
+    result->locals     = new_Raw_Type_Array(localCount);
+    int i;
+    uns_int j = 0;
+    for (i = 0; i < paramCount; i++) {
+        result->params->values[i] = (Object)new_AST_Variable((Object)result, j);
+        j++;
+    }
+    for (i = 0; i < localCount; i++) {
+        result->locals->values[i] = (Object)new_AST_Variable((Object)result, j);
+        j++;
+    }
     result->info       = empty_AST_Info;
     return result;
 }

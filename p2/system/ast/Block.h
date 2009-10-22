@@ -10,16 +10,23 @@
 /* ========================================================================= */
 
 struct AST_Block_t {
-    Type_SmallInt           paramCount;
-    Type_SmallInt           localCount;
-    Type_Array              body;
-    AST_Info                info;
+    Type_Array  params;
+    Type_Array  locals;
+    Type_Array  body;
+    AST_Info    info;
 };
 
 CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(unsigned int paramCount,
                                unsigned int localCount,
                                Type_Array body);
+
+/* ========================================================================= */
+
+#define BLOCK_PARAM(block, param)\
+    ((AST_Variable)((AST_Block)block)->params->values[param])
+#define BLOCK_LOCAL(block, local)\
+    ((AST_Variable)((AST_Block)block)->locals->values[local])
 
 /* ========================================================================= */
 

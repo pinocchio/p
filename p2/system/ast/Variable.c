@@ -10,11 +10,21 @@ Type_Class AST_Variable_Class;
 
 /* ========================================================================= */
 
-AST_Variable new_AST_Variable(const wchar_t* name)
+AST_Variable new_AST_Variable_named(const wchar_t* name)
 {
     NEW_OBJECT(AST_Variable);
     result->name = (Object)new_Type_String(name);
     result->info = empty_AST_Info;
+    return result;
+}
+
+AST_Variable new_AST_Variable(Object key, uns_int index)
+{
+    NEW_OBJECT(AST_Variable);
+    result->index   = index;
+    result->key     = key;
+    result->name    = Nil;
+    result->info    = empty_AST_Info;
     return result;
 }
 

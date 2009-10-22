@@ -31,8 +31,8 @@ void pre_init_Runtime_Closure()
 static Type_Array activation_from_native(uns_int argc, Runtime_Closure closure)
 {
     AST_Block block = closure->code;
-    int paramc = unwrap_int((Object)block->paramCount);
-    int localc = unwrap_int((Object)block->localCount);
+    uns_int paramc = block->params->size;
+    uns_int localc = block->locals->size;
 
     assert1(argc == paramc, "Catch-all arguments not supported yet!");
     Type_Array args = new_Raw_Type_Array(argc + localc);
