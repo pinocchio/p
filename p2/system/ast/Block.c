@@ -10,6 +10,16 @@ Type_Class AST_Block_Class;
 
 /* ========================================================================= */
 
+static void init_variable_array(Type_Array array, Object key, int size, int idx)
+{
+    uns_int i;
+    
+    for (i = 0; i < size; i++) {
+        array->values[i] = (Object)new_AST_Variable(key, idx);
+        idx++;
+    }
+}
+
 AST_Block new_AST_Block(unsigned int paramCount,
                         unsigned int localCount,
                         Type_Array body)
@@ -18,16 +28,8 @@ AST_Block new_AST_Block(unsigned int paramCount,
     result->body       = body;
     result->params     = new_Raw_Type_Array(paramCount);
     result->locals     = new_Raw_Type_Array(localCount);
-    int i;
-    uns_int j = 0;
-    for (i = 0; i < paramCount; i++) {
-        result->params->values[i] = (Object)new_AST_Variable((Object)result, j);
-        j++;
-    }
-    for (i = 0; i < localCount; i++) {
-        result->locals->values[i] = (Object)new_AST_Variable((Object)result, j);
-        j++;
-    }
+    init_variable_array(result->params, (Object)result, paramCount, 0);
+    init_variable_array(result->locals, (Object)result, localCount, paramCount);
     result->info       = empty_AST_Info;
     return result;
 }
