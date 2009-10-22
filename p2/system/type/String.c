@@ -39,11 +39,11 @@ void pre_init_Type_String()
 Type_String char2Type_String(const char * input)
 {
     int size             = strlen(input)+1;
-    wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
-    swprintf(wchar_copy, size, L"%s", input);
-    Type_String result   =  new_Type_String(wchar_copy);
-    free(wchar_copy);
-    return result;
+    wchar_t cp[size];
+    cp[size - 1] = L'\0';
+    wchar_t * copy = &cp[0];
+    swprintf(copy, size, L"%s", input);
+    return new_Type_String(copy);
 }
 
 Type_String Type_String_concat_(Type_String str1, Type_String str2)
@@ -58,8 +58,7 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     assert0(concatenated!=NULL);
     wchar_t * rc = wcsncpy(concatenated + str1->size, str2->value, str2->size);
     assert0(rc!=NULL);
-    Type_String string    =  new_Type_String(concatenated);
-    return string;
+    return new_Type_String(concatenated);
 }
 
 CNT(Type_String_concat_)
