@@ -6,7 +6,6 @@
 /* ========================================================================= */
 
 NEW_TEST(Runtime_Closure_evaluation)
-    SKIP_TEST;
     Type_Array body         = empty_Type_Array;
     Runtime_Closure closure = new_Runtime_Closure(new_AST_Block(0, 0, body),
                                                   (Runtime_BlockContext)Nil);
@@ -16,23 +15,24 @@ NEW_TEST(Runtime_Closure_evaluation)
     Type_SmallInt integer7  = new_Type_SmallInt(7);
     Object integer7_const   = (Object)new_AST_Constant((Object)integer7);
     
-    Object result = Eval_Send0(closure_const, SMB_eval);
+    Object result = Eval(closure_const);
     assert0(result == (Object)closure);
     
     // with one body element ---------------------------------------------------
     closure->code->body = new_Type_Array_With(1, integer_const);
-    result       = Eval_Send0(closure_const, SMB_eval);
+    closure->code->paramCount = new_Type_SmallInt(1);
+    result       = Eval_Send1((Object)closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
-    
+
     // with one argument -------------------------------------------------------
     AST_Variable var      = new_AST_Variable(L"myVar");
     closure->code->body   = new_Type_Array_With_All(3, integer7_const);
     closure->code->body->values[2] = (Object)var;
     
-    var->key = (Object)closure;
+    var->key = (Object)closure->code;
     var->index = 0;
     
-    result       = Eval_Send1(closure_const, SMB_eval_, integer_const);
+    result       = Eval_Send1((Object)closure, SMB_apply_, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
     ASSERT_EMPTY_STACK;
 }
@@ -175,6 +175,7 @@ NEW_TEST(Runtime_Closure_new_Runtime_Closure)
 
 TEST_SUITE(Runtime_Closure,
 {
+    RUN_TEST(Runtime_Closure_invocation_with_arguments);
     RUN_TEST(Runtime_Closure_invocation_with_arguments);
     RUN_TEST(Runtime_Closure_invocation);
     RUN_TEST(Runtime_Closure_evaluation);

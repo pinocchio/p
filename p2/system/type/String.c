@@ -22,8 +22,8 @@ Type_String new_Type_String(const wchar_t * str)
 
 Type_String new_Type_String_sized(unsigned int size)
 {
-    wchar_t * string = (wchar_t *)PALLOC(sizeof(wchar_t)*(size+1));
-    return new_Type_String(string);
+    wchar_t str[size+1];
+    return new_Type_String(&str[0]);
 }
 
 void pre_init_Type_String()
