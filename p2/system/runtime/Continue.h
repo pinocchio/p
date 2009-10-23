@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-struct AST_Continue_t {
+struct Runtime_Continue_t {
     uns_int     exp_offset;
     uns_int     cnt_offset;
     Object      Env;
@@ -13,8 +13,8 @@ struct AST_Continue_t {
     AST_Info    info;
 };
 
-CREATE_INITIALIZERS(AST_Continue)
-extern AST_Continue new_AST_Continue();
+CREATE_INITIALIZERS(Runtime_Continue)
+extern Runtime_Continue new_Runtime_Continue();
 
 /* ========================================================================= */
 

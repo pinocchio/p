@@ -1,31 +1,31 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/ast/Continue.h>
+#include <system/runtime/Continue.h>
 
 /* ========================================================================= */
 
-Type_Class AST_Continue_Class;
+Type_Class Runtime_Continue_Class;
 
 /* ========================================================================= */
 
-AST_Continue new_AST_Continue()
+Runtime_Continue new_Runtime_Continue()
 {
-    NEW_OBJECT(AST_Continue);
+    NEW_OBJECT(Runtime_Continue);
     return result;
 }
 
-void pre_init_AST_Continue()
+void pre_init_Runtime_Continue()
 {
-    AST_Continue_Class = new_Named_Class((Object)Type_Object_Class,
-                                         L"AST_Continue",
+    Runtime_Continue_Class = new_Named_Class((Object)Type_Object_Class,
+                                         L"Runtime_Continue",
                                          create_type(4, OBJECT));
 }
 
 /* ========================================================================= */
 
-NATIVE1(AST_Continue_escape_)
+NATIVE1(Runtime_Continue_escape_)
     LOGFUN;
-    AST_Continue ast_cont = (AST_Continue)self;
+    Runtime_Continue ast_cont = (Runtime_Continue)self;
     Object arg = NATIVE_ARG(0);
     // restore the stack
     _EXP_ = ast_cont->exp_offset + &(Double_Stack[0]);
@@ -37,7 +37,7 @@ NATIVE1(AST_Continue_escape_)
 
 /* ========================================================================= */
 
-void post_init_AST_Continue()
+void post_init_Runtime_Continue()
 {
-    store_native_method(AST_Continue_Class, SMB_escape_, NM_AST_Continue_escape_);
+    store_native_method(Runtime_Continue_Class, SMB_escape_, NM_Runtime_Continue_escape_);
 }

@@ -18,7 +18,8 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
     unsigned int size  = wcslen(input) + 1;
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
     HEADER(result)     = (Object)Type_Symbol_Class;
-    result->hash       = NULL;
+    // TODO fix this.
+    result->hash       = new_Type_SmallInt(0);
     wcsncpy(result->value, input, size);
     result->size        = size - 1;
     return result;
@@ -47,7 +48,7 @@ NATIVE1(Type_Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
     Type_SmallInt index = (Type_SmallInt)w_arg0;
-    printf("%s %i\n", __FUNCTION__, index->value);
+    LOG("%s %i\n", __FUNCTION__, index->value);
     RETURN_FROM_NATIVE(new_Type_Character(((Type_Symbol) self)->value[index->value]));
 }
 
@@ -63,7 +64,7 @@ Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
     Type_Array array        = new_Raw_Type_Array(self_symbol->size);
-    printf("%ls\n", symbol->value); 
+    LOG("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
@@ -97,11 +98,11 @@ NATIVE0(Type_Symbol_size)
 }
 
 NATIVE1(Type_Symbol_indexOf_)
-    // TODO implement
+    NYI;
 }
 
 NATIVE1(Type_Symbol_lastIndexOf_)
-    // TODO implement
+    NYI;
 }
 
 /* ========================================================================= */

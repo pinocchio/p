@@ -46,7 +46,7 @@ void pre_init_Type_Character()
 /* ========================================================================= */
 
 NATIVE1(Type_Character_equals_)
-    assert1(NULL, "NYI!");
+    NYI;
 }
 
 NATIVE0(Type_Character_asString)

@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pinocchio.h>
-#include <system/ast/Continue.h>
-#include <system/ast/Callec.h>
 
 /* ========================================================================= */
 
@@ -36,7 +34,7 @@ void apply(Object closure, uns_int argc)
 
 NATIVE1(AST_Callec_on_)
     LOGFUN;
-    AST_Continue cont   = new_AST_Continue();
+    Runtime_Continue cont   = new_Runtime_Continue();
     cont->exp_offset = (_EXP_ - &(Double_Stack[0]) - (argc + 1));
     cont->cnt_offset = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);
     cont->Env = (Object)current_env();

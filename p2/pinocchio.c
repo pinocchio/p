@@ -49,7 +49,7 @@ void CNT_exit_eval()
 void init_Stack(unsigned int size)
 {
     // TODO allocate the stack with the given size
-    Double_Stack = (Object *)PALLOC(sizeof(Object[STACK_SIZE]));
+    Double_Stack = (Object *)PALLOC(sizeof(Object[size]));
     _EXP_ = (Object *)&Double_Stack[-1];
     _CNT_ = (cont *)  &Double_Stack[size];
 }
@@ -79,7 +79,6 @@ void CNT_send_Eval()
     EVAL_IF(AST_Send)
     EVAL_IF(AST_Super)
     EVAL_IF(AST_Self)
-//    EVAL_IF(AST_Callec)
     EVAL_IF(AST_Block)
     
     /* TODO fallback by actually sending the eval message */

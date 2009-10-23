@@ -4,6 +4,8 @@
 #define SIGFAIL SIGABRT
 extern jmp_buf Assert_Fail;
 
+#define NYI assert1(NULL, "NYI");
+
 #ifdef ASSERT_FAIL
     #define ASSERT_HANDLER raise(SIGFAIL);
 #else // ASSERT_FAIL

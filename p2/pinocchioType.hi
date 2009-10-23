@@ -10,7 +10,7 @@ TYPE(IO_File);
 TYPE(AST_Constant);
 TYPE(AST_Self);
 TYPE(AST_Super);
-TYPE(AST_Continue);
+TYPE(Runtime_Continue);
 TYPE(AST_Callec);
 TYPE(AST_Variable);
 TYPE(AST_Send);
