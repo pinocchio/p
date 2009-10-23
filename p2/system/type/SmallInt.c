@@ -90,7 +90,7 @@ NATIVE0(Type_SmallInt_hash)
     RETURN_FROM_NATIVE(self); 
 }
 
-Type_String Type_SmallInt_asString(int self, unsigned int base)
+Type_String Type_SmallInt_asString(int self, uns_int base)
 {
     int size = 1;
     if (self == 0) { 

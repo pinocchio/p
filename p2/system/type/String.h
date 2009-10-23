@@ -12,7 +12,7 @@ extern Type_String empty_Type_String;
 CREATE_INITIALIZERS(Type_String)
 
 Type_String new_Type_String(const wchar_t * str);
-Type_String new_Type_String_sized(unsigned int size);
+Type_String new_Type_String_sized(uns_int size);
 
 /* ========================================================================= */
 

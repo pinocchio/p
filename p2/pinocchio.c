@@ -46,7 +46,7 @@ void CNT_exit_eval()
 
 /* ========================================================================= */
 
-void init_Stack(unsigned int size)
+void init_Stack(uns_int size)
 {
     // TODO allocate the stack with the given size
     Double_Stack = (Object *)PALLOC(sizeof(Object[size]));

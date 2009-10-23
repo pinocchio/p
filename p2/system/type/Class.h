@@ -48,15 +48,15 @@ extern void CNT_Class_super();
 
 extern void print_Class(Object obj);
 
-extern Object create_type(unsigned int size, Type_Tag tag);
+extern Object create_type(uns_int size, Type_Tag tag);
 extern Type_Tag gettag(Type_Class class);
-extern unsigned int getsize(Type_Class class);
+extern uns_int getsize(Type_Class class);
 
 /* ========================================================================= */
 
 extern Object instantiate(Type_Class class);
-extern Object instantiate_sized(Type_Class class, unsigned int size);
-extern Object instantiate_OBJECT(Type_Class class, unsigned int size);
+extern Object instantiate_sized(Type_Class class, uns_int size);
+extern Object instantiate_OBJECT(Type_Class class, uns_int size);
 
 /* ========================================================================= */
 

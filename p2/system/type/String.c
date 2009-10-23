@@ -20,7 +20,7 @@ Type_String new_Type_String(const wchar_t * str)
     return string;
 }
 
-Type_String new_Type_String_sized(unsigned int size)
+Type_String new_Type_String_sized(uns_int size)
 {
     wchar_t str[size+1];
     return new_Type_String(&str[0]);
@@ -92,8 +92,8 @@ NATIVE2(Type_String_at_put_)
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
     Type_SmallInt pos = (Type_SmallInt)w_arg0;
-    assert(pos->value <= ((Type_String)self)->size,
-        printf("%i is out of Bounds[%i]", pos->value, ((Type_String)self)->size));
+    assert((uns_int)pos->value <= ((Type_String)self)->size,
+        printf("%"F_I"u is out of Bounds[%"F_I"u]", (uns_int)pos->value, ((Type_String)self)->size));
     ((Type_String)self)->value[pos->value] = ((Type_Character)w_arg1)->value;
     RETURN_FROM_NATIVE(self);
 }

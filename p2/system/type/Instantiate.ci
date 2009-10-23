@@ -1,4 +1,4 @@
-Object instantiate_ARRAY(Type_Class class, unsigned int base, unsigned int extra)
+Object instantiate_ARRAY(Type_Class class, uns_int base, uns_int extra)
 {
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
     result->size = extra;
@@ -10,14 +10,14 @@ Object instantiate_ARRAY(Type_Class class, unsigned int base, unsigned int extra
     return (Object)result;
 }
 
-Object instantiate_BYTES(Type_Class class, unsigned int base, unsigned int extra)
+Object instantiate_BYTES(Type_Class class, uns_int base, uns_int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
     //HEADER(result) = (Object)class;
     return NULL;
 }
 
-Object instantiate_WORDS(Type_Class class, unsigned int base, unsigned int extra)
+Object instantiate_WORDS(Type_Class class, uns_int base, uns_int extra)
 {
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[base+extra]);
     result->size = extra;
@@ -25,7 +25,7 @@ Object instantiate_WORDS(Type_Class class, unsigned int base, unsigned int extra
     return (Object)result;
 }
 
-Object instantiate_OBJECT(Type_Class class, unsigned int size)
+Object instantiate_OBJECT(Type_Class class, uns_int size)
 {
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     int i;
@@ -61,7 +61,7 @@ Object instantiate(Type_Class class)
     return NULL;
 }
 
-Object instantiate_sized(Type_Class class, unsigned int size)
+Object instantiate_sized(Type_Class class, uns_int size)
 {
     Type_Tag tag = gettag(class);
 

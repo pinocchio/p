@@ -1,7 +1,6 @@
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/type/Class.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 
@@ -11,9 +10,10 @@ Type_Class Behaviour;
 
 /* ========================================================================= */
 
-Object create_type(unsigned int size, Type_Tag tag)
+Object create_type(uns_int size, Type_Tag tag)
 {
     int type = (int)size;
+    assert1((uns_int)type == size, "Larger objects not supported yet!\n");
     type = type << 3;
     type = type | (tag & 7);
     return (Object) new_Type_SmallInt(type);
@@ -24,9 +24,9 @@ Type_Tag gettag(Type_Class class)
     return (Type_Tag)((Type_SmallInt)class->type)->value & 7;
 }
 
-unsigned int getsize(Type_Class class)
+uns_int getsize(Type_Class class)
 {
-    return (unsigned int)(((Type_SmallInt)class->type)->value >> 3);
+    return (uns_int)(((Type_SmallInt)class->type)->value >> 3);
 }
 
 /* ========================================================================= */

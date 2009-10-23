@@ -7,7 +7,7 @@
 
 struct Type_Symbol_t { 
     Type_SmallInt hash;
-    unsigned int  size;
+    uns_int  size;
     wchar_t       value[];
 };
 

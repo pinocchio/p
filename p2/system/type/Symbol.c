@@ -15,7 +15,7 @@ Type_Dictionary SMB_Table;
 
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
-    unsigned int size  = wcslen(input) + 1;
+    uns_int size  = wcslen(input) + 1;
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
     HEADER(result)     = (Object)Type_Symbol_Class;
     // TODO fix this.
@@ -80,7 +80,7 @@ NATIVE0(Type_Symbol_asArray)
 int Type_Symbol_hash(const wchar_t* symbol_string)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
-    unsigned int hash = 0;
+    uns_int hash = 0;
     int c;
     while ((c = *symbol_string++)) {
         hash = c + (hash << 6) + (hash << 16) - hash;
