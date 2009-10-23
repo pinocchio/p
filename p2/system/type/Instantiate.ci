@@ -2,8 +2,8 @@ Object instantiate_ARRAY(Type_Class class, uns_int base, uns_int extra)
 {
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
     result->size = extra;
-    int i;
-    for (i = 0; i < base+extra; i++) {
+    uns_int i;
+    for (i = 0; i < base + extra; i++) {
         result->values[i] = Nil;
     }
     HEADER(result) = (Object)class;
@@ -28,7 +28,7 @@ Object instantiate_WORDS(Type_Class class, uns_int base, uns_int extra)
 Object instantiate_OBJECT(Type_Class class, uns_int size)
 {
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
-    int i;
+    uns_int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = Nil;
     }
