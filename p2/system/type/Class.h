@@ -13,13 +13,14 @@ extern Type_Class Metaclass;
 /* ========================================================================= */
 
 typedef enum Type_Tag {
-    ARRAY   = 0,
-    BYTES   = 1,
-    CHAR    = 2,
-    INT     = 3,
-    LONG    = 4,
-    OBJECT  = 5,
-    WORDS   = 6,
+    ARRAY,
+    OBJECT,
+    CHAR,
+    WORDS,
+    INT,
+    BYTES,
+    LONG,
+    FILETAG,
 } Type_Tag;
 
 struct Type_Class_t {

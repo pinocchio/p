@@ -11,7 +11,7 @@ Type_Array empty_Type_Array;
 
 /* ========================================================================= */
 
-Type_Array new_Raw_Type_Array(unsigned int c)
+Type_Array new_Raw_Type_Array(uns_int c)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
@@ -20,7 +20,7 @@ Type_Array new_Raw_Type_Array(unsigned int c)
     return result;
 }
 
-Type_Array new_Type_Array(unsigned int c, Object v[])
+Type_Array new_Type_Array(uns_int c, Object v[])
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
@@ -31,7 +31,7 @@ Type_Array new_Type_Array(unsigned int c, Object v[])
     return result;
 }
 
-Type_Array new_Type_Array_With(unsigned int c, ...)
+Type_Array new_Type_Array_With(uns_int c, ...)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
@@ -45,7 +45,7 @@ Type_Array new_Type_Array_With(unsigned int c, ...)
     return result;
 }
 
-Type_Array new_Type_Array_With_All(unsigned int c, Object element)
+Type_Array new_Type_Array_With_All(uns_int c, Object element)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = new_Raw_Type_Array(c);
@@ -74,7 +74,7 @@ NATIVE1(Type_Array_basicNew_)
     Object w_size = NATIVE_ARG(0);
     int size = unwrap_int(w_size);
     assert0(size >= 0);
-    Object result = instantiate_sized((Type_Class)self, (unsigned int)size);
+    Object result = instantiate_sized((Type_Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
 }
 

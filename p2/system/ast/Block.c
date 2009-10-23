@@ -20,8 +20,8 @@ static void init_variable_array(Type_Array array, Object key, int size, int idx)
     }
 }
 
-AST_Block new_AST_Block(unsigned int paramCount,
-                        unsigned int localCount,
+AST_Block new_AST_Block(uns_int paramCount,
+                        uns_int localCount,
                         Type_Array body)
 {
     NEW_OBJECT(AST_Block);

@@ -7,8 +7,8 @@
 /* ========================================================================= */
 
 struct IO_File_t {
-    Type_SmallInt size;
     FILE *file;
+    Type_SmallInt size;
 };
 
 

@@ -17,8 +17,8 @@ struct AST_Block_t {
 };
 
 CREATE_INITIALIZERS(AST_Block)
-extern AST_Block new_AST_Block(unsigned int paramCount,
-                               unsigned int localCount,
+extern AST_Block new_AST_Block(uns_int paramCount,
+                               uns_int localCount,
                                Type_Array body);
 
 /* ========================================================================= */

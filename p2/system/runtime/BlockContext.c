@@ -42,7 +42,7 @@ void pre_init_Runtime_BlockContext()
 /* ========================================================================= */
 
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
-                                 unsigned int index, Object key)
+                                 uns_int index, Object key)
 {
     while ((Object)self->closure->code != key && (Object)self->closure->context != Nil) {
         if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
@@ -57,13 +57,13 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
     /* TODO jump to error handler. */
     assert1((Object)self->closure->code == key, "TODO jump to error handler");
     assert(index < self->values->size,
-		   printf("Lookup failed, index \"%i\" out of range [0:%i]", 
+		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
                  index, self->values->size));
     
     return self->values->values[index];
 }
 
-void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
+void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int index,
                         Object key, Object value)
 {
     while ((Object)self->closure->code != key || (Object)self->closure->context == Nil) {
@@ -79,7 +79,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, unsigned int index,
     /* TODO jump to error handler. */
     assert1((Object)self->closure->code == key, "TODO jump to error handler");
     assert(index < self->values->size,
-		   printf("Lookup failed, index \"%i\" out of range [0:%i]", index, self->values->size));
+		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", index, self->values->size));
     
     self->values->values[index] = value;
 }

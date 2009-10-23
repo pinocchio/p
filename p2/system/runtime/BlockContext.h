@@ -24,9 +24,9 @@ extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block, Type
 /* ========================================================================= */
 
 extern Object Runtime_BlockContext_lookup(
-    Runtime_BlockContext self, unsigned int index, Object key);
+    Runtime_BlockContext self, uns_int index, Object key);
 extern void Runtime_BlockContext_assign(
-    Runtime_BlockContext self, unsigned int index, Object key, Object value);
+    Runtime_BlockContext self, uns_int index, Object key, Object value);
 
 /* ========================================================================= */
 
