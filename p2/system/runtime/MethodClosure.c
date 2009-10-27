@@ -19,7 +19,15 @@ void pre_init_Runtime_MethodClosure()
 
 /* ========================================================================= */
 
-
+Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code) 
+{
+    NEW_OBJECT(Runtime_MethodClosure); 
+    result->code        = code;
+    result->info        = empty_AST_Info;
+    result->selector    = (Object)Nil;
+    result->class       = (Type_Class)Nil;
+    return result;
+}
 
 /* ========================================================================= */
 

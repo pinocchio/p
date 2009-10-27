@@ -35,4 +35,8 @@ extern void AST_Block_eval(AST_Block self);
 
 /* ========================================================================= */
 
+void init_variable_array(Type_Array array, Object key, int size, int idx);
+
+/* ========================================================================= */
+
 #endif // AST_BLOCK_H

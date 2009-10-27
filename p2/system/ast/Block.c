@@ -1,7 +1,5 @@
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/BlockContext.h>
 #include <system/ast/Block.h>
 
 /* ========================================================================= */
@@ -10,7 +8,7 @@ Type_Class AST_Block_Class;
 
 /* ========================================================================= */
 
-static void init_variable_array(Type_Array array, Object key, int size, int idx)
+void init_variable_array(Type_Array array, Object key, int size, int idx)
 {
     uns_int i;
     
