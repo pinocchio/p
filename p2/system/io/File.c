@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <wchar.h>
 #include <system/io/File.h>
 #include <system/type/Boolean.h>
@@ -8,10 +9,12 @@
 #include <system/type/SmallInt.h>
 #include <system/type/Character.h>
 
+
+char * TMP_FILE = "/tmp/tmpfile.XXXXXX";
+
 /* ========================================================================= */
 
 Type_Class IO_File_Class;
-
 
 /* ========================================================================= */
 
@@ -19,15 +22,7 @@ Type_Class IO_File_Class;
 IO_File new_IO_File()
 {
     NEW_OBJECT(IO_File);
-    return result;
-}
-
-IO_File new_IO_File_fromPath(const wchar_t * path)
-{
-    IO_File result = new_IO_File();
-    result->file = fopen(unicode_to_ascii(path), "r");
-    assert(result->file != NULL, 
-        printf("Could not create File for path \"%ls\"", path));
+    result->path = empty_Type_String;
     return result;
 }
 
@@ -36,6 +31,25 @@ IO_File new_IO_File_fromFile(FILE* file)
     IO_File result = new_IO_File();
     assert1(file != NULL, "Cannot create a new File from NULL.");
     result->file = file;
+    return result;
+}
+
+
+IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
+{
+    IO_File result = new_IO_File();
+    result->file = fopen(unicode_to_ascii(path), mode);
+    result->path = new_Type_String(path);
+    assert(result->file != NULL, 
+        printf("Could not create File for path \"%ls\"", path));
+    return result;
+}
+
+IO_File new_Temp_IO_File(char * mode)
+{
+    IO_File result = new_IO_File_fromFile(fdopen(mkstemp(TMP_FILE), mode));
+    assert(result->file != NULL, 
+        printf("Could not create File temporary files"));
     return result;
 }
 

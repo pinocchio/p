@@ -5,30 +5,30 @@
 
 /* ========================================================================= */
 
-struct Runtime_Closure_t {
+struct Runtime_Block_Closure_t {
     AST_Block            code;
     Runtime_BlockContext context;
     AST_Info             info;
 };
 
-CREATE_INITIALIZERS(Runtime_Closure)
-extern Runtime_Closure new_Runtime_Closure(AST_Block code,
+CREATE_INITIALIZERS(Runtime_Block_Closure)
+extern Runtime_Block_Closure new_Runtime_Block_Closure(AST_Block code,
                                            Runtime_BlockContext context);
 
 /* ========================================================================= */
 
-extern void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
+extern void Runtime_Block_Closure_invoke(Runtime_Block_Closure closure, Object self,
                                    Object class, uns_int argc);
-extern void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc);
+extern void Runtime_Block_Closure_apply(Runtime_Block_Closure closure, uns_int argc);
 
 
 /* ========================================================================= */
 
 #define METHOD(fName, paramCount, localCount, numStatements)\
-Runtime_Closure fName() {\
+Runtime_Block_Closure fName() {\
     Type_Array statements    = new_Type_Array_With(numStatements, Nil);\
     AST_Block body           = new_AST_Block(paramCount, localCount, statements);\
-    Runtime_Closure method   = new_Runtime_Closure(body,\
+    Runtime_Block_Closure method   = new_Runtime_Block_Closure(body,\
                                                 (Runtime_BlockContext)Nil);\
     method->info             = new_raw_AST_Info();\
     method->info->sourceFile = new_Type_String_from_charp(__FILE__);\

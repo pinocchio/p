@@ -18,7 +18,7 @@
 #include <system/type/SmallIntTest.ci>
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
-#include <system/runtime/ClosureTest.ci>
+#include <system/runtime/BlockClosureTest.ci>
 #include <system/ast/BlockTest.ci>
 #include <system/type/NilTest.ci>
 #include <system/ast/InfoTest.ci>

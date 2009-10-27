@@ -12,14 +12,14 @@
 
 struct Runtime_BlockContext_t {
     unsigned long int       pc;
-    Runtime_Closure         closure;
+    Runtime_Block_Closure         closure;
     Type_Array              values;
     Runtime_MethodContext   home_context;
 };
 
 CREATE_INITIALIZERS(Runtime_BlockContext)
 
-extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure block, Type_Array values);
+extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_Block_Closure block, Type_Array values);
 
 /* ========================================================================= */
 

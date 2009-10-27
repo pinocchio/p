@@ -1,16 +1,16 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/Closure.h>
+#include <system/runtime/BlockClosure.h>
 
 /* ========================================================================= */
 
-Type_Class Runtime_Closure_Class;
+Type_Class Runtime_Block_Closure_Class;
 
 /* ========================================================================= */
 
-Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context) {
-    NEW_OBJECT(Runtime_Closure);
+Runtime_Block_Closure new_Runtime_Block_Closure(AST_Block code, Runtime_BlockContext context) {
+    NEW_OBJECT(Runtime_Block_Closure);
     result->code    = code;
     result->context = context;
     result->info    = empty_AST_Info;
@@ -19,16 +19,16 @@ Runtime_Closure new_Runtime_Closure(AST_Block code, Runtime_BlockContext context
     return result;
 }
 
-void pre_init_Runtime_Closure()
+void pre_init_Runtime_Block_Closure()
 {
-    Runtime_Closure_Class = new_Named_Class((Object)Type_Object_Class,
-                                            L"Runtime_Closure",
+    Runtime_Block_Closure_Class = new_Named_Class((Object)Type_Object_Class,
+                                            L"Runtime_Block_Closure",
                                             create_type(3, OBJECT));
 }
 
 /* ========================================================================= */
 
-static Type_Array activation_from_native(uns_int argc, Runtime_Closure closure)
+static Type_Array activation_from_native(uns_int argc, Runtime_Block_Closure closure)
 {
     AST_Block block = closure->code;
     uns_int paramc = block->params->size;
@@ -64,7 +64,7 @@ static void start_eval(Type_Array body)
     push_CNT(send_Eval);
 }
 
-void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
+void Runtime_Block_Closure_invoke(Runtime_Block_Closure closure, Object self,
                             Object class, uns_int argc)
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
@@ -83,7 +83,7 @@ void Runtime_Closure_invoke(Runtime_Closure closure, Object self,
     start_eval(body);
 }
 
-void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
+void Runtime_Block_Closure_apply(Runtime_Block_Closure closure, uns_int argc)
 {
     #ifdef DEBUG
     LOG("Closure Apply\n");
@@ -105,15 +105,15 @@ void Runtime_Closure_apply(Runtime_Closure closure, uns_int argc)
     start_eval(body);
 }
 
-NATIVE(Runtime_Closure_apply_)
-    Runtime_Closure closure = (Runtime_Closure)self;
-    Runtime_Closure_apply(closure, argc);
+NATIVE(Runtime_Block_Closure_apply_)
+    Runtime_Block_Closure closure = (Runtime_Block_Closure)self;
+    Runtime_Block_Closure_apply(closure, argc);
 }
 
 /* ========================================================================= */
 
-void post_init_Runtime_Closure()
+void post_init_Runtime_Block_Closure()
 {
-    store_native_method(Runtime_Closure_Class, SMB_apply_, NM_Runtime_Closure_apply_);
-    store_native_method(Runtime_Closure_Class, SMB_apply,  NM_Runtime_Closure_apply_);
+    store_native_method(Runtime_Block_Closure_Class, SMB_apply_, NM_Runtime_Block_Closure_apply_);
+    store_native_method(Runtime_Block_Closure_Class, SMB_apply,  NM_Runtime_Block_Closure_apply_);
 }

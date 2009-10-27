@@ -11,7 +11,7 @@ static Object _Env_;
 
 /* ========================================================================= */
 
-Runtime_BlockContext new_Runtime_BlockContext(Runtime_Closure closure,
+Runtime_BlockContext new_Runtime_BlockContext(Runtime_Block_Closure closure,
                                               Type_Array values)
 {
     NEW_OBJECT(Runtime_BlockContext);

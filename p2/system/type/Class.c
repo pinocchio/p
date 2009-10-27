@@ -92,8 +92,8 @@ wchar_t * classname(Object class)
 void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     if (HEADER(method) == (Object)AST_Native_Method_Class) {
         AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
-    } else if (HEADER(method) == (Object)Runtime_Closure_Class) {
-        Runtime_Closure_invoke((Runtime_Closure)method, self, class, argc);
+    } else if (HEADER(method) == (Object)Runtime_Block_Closure_Class) {
+        Runtime_Block_Closure_invoke((Runtime_Block_Closure)method, self, class, argc);
     }
 }
 
