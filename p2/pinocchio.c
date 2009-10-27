@@ -157,8 +157,8 @@ bool isInstance(Object object, Object class)
 
 int main()
 {
-	#include <pinocchioPreInit.ci>
-	#include <pinocchioPostInit.ci>
+    #include <pinocchioPreInit.ci>
+    #include <pinocchioPostInit.ci>
 
     if (!setjmp(Eval_Abort)) {
         initialize_Thread();

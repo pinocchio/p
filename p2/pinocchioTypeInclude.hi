@@ -32,3 +32,5 @@
 #include <system/io/Stream.h>
 #include <system/ast/Block.h>
 #include <system/runtime/MethodContext.h>
+#include <system/ast/Method.h>
+#include <system/runtime/MethodClosure.h>

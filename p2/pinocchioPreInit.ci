@@ -29,3 +29,5 @@ pre_init_IO_Stream();
 pre_init_Runtime_BlockContext();
 pre_init_Runtime_Closure();
 pre_init_Runtime_MethodContext();
+pre_init_AST_Method();
+pre_init_Runtime_MethodClosure();

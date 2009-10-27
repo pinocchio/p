@@ -28,6 +28,7 @@ struct Type_Class_t {
     Object          super;
     Type_Dictionary methods;
     Type_String     name;
+    Object          package;
     Object          cvars[];
 };
 

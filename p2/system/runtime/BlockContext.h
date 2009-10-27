@@ -11,8 +11,8 @@
 /* ========================================================================= */
 
 struct Runtime_BlockContext_t {
-    Runtime_Closure         closure;
     unsigned long int       pc;
+    Runtime_Closure         closure;
     Type_Array              values;
     Runtime_MethodContext   home_context;
 };

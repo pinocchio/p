@@ -6,8 +6,8 @@
 /* ========================================================================= */
 
 struct Runtime_MethodContext_t {
-    Runtime_Closure         closure;
     unsigned long int       pc;
+    Runtime_Closure         closure;
     Type_Array              values;
     Runtime_MethodContext   home_context;
     Object                  self;

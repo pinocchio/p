@@ -1,0 +1,18 @@
+
+#define AST_METHOD_TEST_SETUP \
+    AST_Method method = new_AST_Method(); \
+    Object result;
+
+/* ========================================================================= */
+
+void test_AST_METHOD_example() {
+ #error Fill the tests
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(AST_Method,
+{
+   RUN_TEST(AST_METHOD_example);
+})
+

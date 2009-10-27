@@ -25,3 +25,5 @@ post_init_IO_Stream();
 post_init_AST_Block();
 post_init_Runtime_MethodContext();
 post_init_Runtime_Closure();
+post_init_AST_Method();
+post_init_Runtime_MethodClosure();
