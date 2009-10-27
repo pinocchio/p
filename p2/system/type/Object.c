@@ -14,8 +14,8 @@ void pre_init_Type_Object()
     // explicitely use new_Class not new_Named_Class! to avoid early use
     // of symbols.
     // do manually instanciate since we cannot use dict yet
-    Type_Class Object_mclass  = (Type_Class)instantiate_OBJECT(Metaclass, METACLASS_SIZE);
-    Type_Object_Class         = (Type_Class)instantiate_OBJECT(Object_mclass, CLASS_SIZE);
+    Type_Class Object_mclass  = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    Type_Object_Class         = (Type_Class)basic_instantiate_Object(Object_mclass, CLASS_SIZE);
     Type_Object_Class->super  = Nil;
 
     /*
@@ -63,10 +63,9 @@ NATIVE1(Type_Object_instVarAt_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag = gettag(cls);
-    assert0(tag == OBJECT);
-    assert0(getsize(cls) > index);
-    assert0(0 <= index);
+    Object tag = gettag(cls);
+    assertTagType(tag, Object);
+    assertTagSize(tag, index);
     RETURN_FROM_NATIVE(((Type_Object)self)->ivals[index]);
 }
 
@@ -74,10 +73,9 @@ NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag = gettag(cls);
-    assert0(tag == OBJECT);
-    assert0(getsize(cls) > index);
-    assert0(0 <= index);
+    Object tag = gettag(cls);
+    assertTagType(tag, Object);
+    assertTagSize(tag, index);
     ((Type_Object)self)->ivals[index] = NATIVE_ARG(1);
     RETURN_FROM_NATIVE(self);
 }

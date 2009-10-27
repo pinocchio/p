@@ -27,3 +27,5 @@ post_init_Runtime_MethodContext();
 post_init_Runtime_BlockClosure();
 post_init_AST_Method();
 post_init_Runtime_MethodClosure();
+post_init_Type_Layout();
+post_init_AST_InstVariable();

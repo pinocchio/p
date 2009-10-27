@@ -1,5 +1,6 @@
-Object instantiate_ARRAY(Type_Class class, uns_int base, uns_int extra)
+Object instantiate_Array(Type_Class class, Type_Array ivars, uns_int extra)
 {
+    uns_int base = ivars->size;
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
     result->size = extra;
     uns_int i;
@@ -10,23 +11,32 @@ Object instantiate_ARRAY(Type_Class class, uns_int base, uns_int extra)
     return (Object)result;
 }
 
-Object instantiate_BYTES(Type_Class class, uns_int base, uns_int extra)
+Object instantiate_Bytes(Type_Class class, Type_Array ivars, uns_int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
-    //HEADER(result) = (Object)class;
     return NULL;
 }
 
-Object instantiate_WORDS(Type_Class class, uns_int base, uns_int extra)
+Object instantiate_Words(Type_Class class, Type_Array ivars, uns_int extra)
 {
-    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[base+extra]);
-    result->size = extra;
+    assert1(NULL, "Words are not supported yet.\n");
+    return NULL;
+}
+
+Object basic_instantiate_Object(Type_Class class, uns_int size)
+{
+    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
+    uns_int i;
+    for (i = 0; i < size; i++) {
+        result->ivals[i] = Nil;
+    }
     HEADER(result) = (Object)class;
     return (Object)result;
 }
 
-Object instantiate_OBJECT(Type_Class class, uns_int size)
+static Object instantiate_Object(Type_Class class, Type_Array ivars)
 {
+    uns_int size = ivars->size;
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
@@ -39,13 +49,13 @@ Object instantiate_OBJECT(Type_Class class, uns_int size)
 /* ========================================================================= */
 
 #define INSTANTIATE(type)\
-    if (tag == type) {\
-        return instantiate##_##type(class, getsize(class));\
+    if (HEADER(tag) == (Object)Type_##type##Layout) {\
+        return instantiate##_##type(class, (Type_Array)tag);\
     }
 
 #define INSTANTIATE_SIZED(type)\
-    if (tag == type) {\
-        return instantiate##_##type(class, getsize(class), size);\
+    if (HEADER(tag) == (Object)Type_##type##Layout) {\
+        return instantiate##_##type(class, (Type_Array)tag, size);\
     }
 
 /* ========================================================================= */
@@ -53,22 +63,22 @@ Object instantiate_OBJECT(Type_Class class, uns_int size)
 
 Object instantiate(Type_Class class)
 {
-    Type_Tag tag = gettag(class);
+    Object tag = class->type;
 
-    INSTANTIATE(OBJECT);
+    INSTANTIATE(Object);
 
-    assert(NULL, printf("Not a fixed-sized object type: %i\n", tag));
+    assert(NULL, printf("Not a fixed-sized object type: %p\n", tag));
     return NULL;
 }
 
 Object instantiate_sized(Type_Class class, uns_int size)
 {
-    Type_Tag tag = gettag(class);
+    Object tag = class->type;
 
-    INSTANTIATE_SIZED(ARRAY);
-    INSTANTIATE_SIZED(BYTES);
-    INSTANTIATE_SIZED(WORDS);
+    INSTANTIATE_SIZED(Array);
+    INSTANTIATE_SIZED(Bytes);
+    INSTANTIATE_SIZED(Words);
 
-    assert(NULL, printf("Not a arrayed object type: %i\n", tag));
+    assert(NULL, printf("Not a arrayed object type: %p\n", tag));
     return NULL;
 }

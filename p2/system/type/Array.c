@@ -88,10 +88,13 @@ NATIVE1(Type_Array_at_)
     int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
-    assert0(gettag(cls) == ARRAY);
+
+    Object tag = gettag(cls);    
+    assertTagType(tag, Array);
+
     assert0(as->size > index);
     assert0(0 <= index);
-    RETURN_FROM_NATIVE(as->values[getsize(cls) + index]);
+    RETURN_FROM_NATIVE(as->values[tagsize(tag) + index]);
 }
 
 NATIVE2(Type_Array_at_put_)
@@ -99,21 +102,22 @@ NATIVE2(Type_Array_at_put_)
     int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
-    assert0(gettag(cls) == ARRAY);
+   
+    Object tag = gettag(cls);
+    assertTagType(tag, Array); 
     assert0(as->size > index);
     assert0(0 <= index);
-    as->values[index + getsize(cls)] = NATIVE_ARG(1);
+    as->values[index + tagsize(tag)] = NATIVE_ARG(1);
     RETURN_FROM_NATIVE(self);
 }
 
 NATIVE1(Type_Array_instVarAt_)
-    Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag   = gettag(cls);
-    assert0(tag == ARRAY);
-    assert0(getsize(cls) > index);
-    assert0(0 <= index);
+    Object w_index  = NATIVE_ARG(0);
+    int index       = unwrap_int(w_index);
+    Type_Class cls  = (Type_Class)HEADER(self);
+    Object tag      = gettag(cls);
+    assertTagType(tag, Array);
+    assertTagSize(tag, index);
     RETURN_FROM_NATIVE(((Type_Array)self)->values[index]);
 }
 
@@ -121,10 +125,9 @@ NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
     Type_Class cls = (Type_Class)HEADER(self);
-    Type_Tag tag   = gettag(cls);
-    assert0(tag == ARRAY);
-    assert0(getsize(cls) > index);
-    assert0(0 <= index);
+    Object tag   = gettag(cls);
+    assertTagType(tag, Array);
+    assertTagSize(tag, index);
     ((Type_Array)self)->values[index] = NATIVE_ARG(1);
     RETURN_FROM_NATIVE(self);
 }

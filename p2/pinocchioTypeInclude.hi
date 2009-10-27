@@ -34,3 +34,5 @@
 #include <system/runtime/MethodContext.h>
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
+#include <system/type/Layout.h>
+#include <system/ast/InstVariable.h>

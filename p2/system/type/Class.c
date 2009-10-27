@@ -8,40 +8,20 @@ Type_Class Metaclass;
 Type_Class Class;
 Type_Class Behaviour;
 
-Type_Class ObjectLayout;
-Type_Class ArrayLayout;
-Type_Class CharacterLayout;
-Type_Class WordsLayout;
-Type_Class IntLayout;
-Type_Class BytesLayout;
-Type_Class FileLayout;
-
-/* ========================================================================= */
-
-Object create_type(uns_int size, Type_Tag tag)
-{
-    int type = (int)size;
-    assert1((uns_int)type == size, "Larger objects not supported yet!\n");
-    type = type << 3;
-    type = type | (tag & 7);
-    return (Object) new_Type_SmallInt(type);
-}
-
-Type_Tag gettag(Type_Class class)
-{
-    return (Type_Tag)((Type_SmallInt)class->type)->value & 7;
-}
-
-uns_int getsize(Type_Class class)
-{
-    return (uns_int)(((Type_SmallInt)class->type)->value >> 3);
-}
-
 /* ========================================================================= */
 
 #include <system/type/Instantiate.ci>
 
 /* ========================================================================= */
+
+Type_Class new_Bootstrapping_Class(Object superclass)
+{
+    Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    mcls->super = HEADER(superclass);
+    Type_Class cls = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
+    cls->super = superclass;
+    return cls;
+}
 
 Type_Class new_Class(Object superclass, Object type)
 {
@@ -66,7 +46,7 @@ Type_Class new_Named_Class(Object superclass, const wchar_t* name, Object type)
 void pre_init_Type_Class()
 {
     Metaclass                 = NEW_t(Type_Class);
-    Object Metaclass_mclass   = instantiate_OBJECT(Metaclass, METACLASS_SIZE);
+    Object Metaclass_mclass   = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     HEADER(Metaclass)         = Metaclass_mclass;
 }
 

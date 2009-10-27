@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <wchar.h>
@@ -30,10 +29,7 @@ Type_SmallInt new_Type_SmallInt(int value)
 
 void pre_init_Type_SmallInt() 
 {
-    Type_Class smc              = (Type_Class)instantiate_OBJECT(Metaclass, METACLASS_SIZE);
-    smc->super                  = HEADER(Type_Object_Class);
-    Type_SmallInt_Class         = (Type_Class)instantiate_OBJECT(smc, CLASS_SIZE);
-    Type_SmallInt_Class->super  = (Object)Type_Object_Class;
+    Type_SmallInt_Class = new_Bootstrapping_Class((Object)Type_Object_Class);
     
     Type_SmallInt_cache  = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Type_SmallInt_cache -= INT_CACHE_LOWER;
@@ -154,9 +150,10 @@ int unwrap_int(Object integer)
 {
     // TODO do more stuff in case we are not an int.
     Type_Class class = (Type_Class)HEADER(integer);
-    if (gettag(class) == INT) {
+    assertTagType(gettag(class), Int);
+    //if (gettag(class) == INT) {
         return ((Type_SmallInt)integer)->value;
-    }
-    assert1(NULL, "Only SmallInts supported for now\n");
-    return 0;
+    //}
+    //assert1(NULL, "Only SmallInts supported for now\n");
+    //return 0;
 }

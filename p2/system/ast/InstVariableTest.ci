@@ -1,0 +1,18 @@
+
+#define AST_INSTVARIABLE_TEST_SETUP \
+    AST_InstVariable instvariable = new_AST_InstVariable(); \
+    Object result;
+
+/* ========================================================================= */
+
+void test_AST_INSTVARIABLE_example() {
+ #error Fill the tests
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(AST_InstVariable,
+{
+   RUN_TEST(AST_INSTVARIABLE_example);
+})
+
