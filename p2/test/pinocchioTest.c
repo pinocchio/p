@@ -136,4 +136,6 @@ test_Runtime_BlockClosure();
 test_AST_Block();
 test_Type_Nil();
 test_AST_Info();
+test_Runtime_MethodClosure();
+test_AST_Method();
 }

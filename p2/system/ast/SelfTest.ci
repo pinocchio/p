@@ -7,12 +7,12 @@ NEW_TEST(ast_self)
     Type_Array body             = new_Type_Array_With_All(3, (Object)integer7_const);
     body->values[2]             = Self;    
     
-    Runtime_BlockClosure closure     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body), 
-                                                      (Runtime_BlockContext)Nil);
+    Runtime_MethodClosure closure = new_Runtime_MethodClosure(
+                                        new_AST_Method(0, 0, body));
     assert0(closure->info == empty_AST_Info);
     Type_Symbol test            = new_Type_Symbol(L"test");
     
-    store_closure(Type_SmallInt_Class, test, closure);
+    store_method(Type_SmallInt_Class, test, closure);
     
     Object result               = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer);

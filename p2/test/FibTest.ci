@@ -54,7 +54,7 @@ int cfib (int a) {
 
 void run_FibTest() 
 {
-    SMB_fib = new_Type_Symbol(L"fib:");
+    SMB_fib = new_Type_Symbol(L"fib");
     store_method(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
     

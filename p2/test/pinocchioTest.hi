@@ -22,3 +22,5 @@
 #include <system/ast/BlockTest.ci>
 #include <system/type/NilTest.ci>
 #include <system/ast/InfoTest.ci>
+#include <system/ast/MethodTest.ci>
+#include <system/runtime/MethodClosureTest.ci>
