@@ -8,6 +8,14 @@ Type_Class Metaclass;
 Type_Class Class;
 Type_Class Behaviour;
 
+Type_Class ObjectLayout;
+Type_Class ArrayLayout;
+Type_Class CharacterLayout;
+Type_Class WordsLayout;
+Type_Class IntLayout;
+Type_Class BytesLayout;
+Type_Class FileLayout;
+
 /* ========================================================================= */
 
 Object create_type(uns_int size, Type_Tag tag)
@@ -92,9 +100,10 @@ wchar_t * classname(Object class)
 void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     if (HEADER(method) == (Object)AST_Native_Method_Class) {
         AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
-    } else if (HEADER(method) == (Object)Runtime_Block_Closure_Class) {
-        Runtime_Block_Closure_invoke((Runtime_Block_Closure)method, self, class, argc);
+    } else if (HEADER(method) == (Object)Runtime_MethodClosure_Class) {
+        Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
     }
+    assert1(NULL, "Unknown type of method");
 }
 
 void Type_Class_dispatch(Object self, Object class, uns_int argc)

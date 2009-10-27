@@ -8,7 +8,7 @@
 extern Type_Class Metaclass;
 #define BEHAVIOUR_SIZE 3
 #define METACLASS_SIZE 3
-#define CLASS_SIZE 4
+#define CLASS_SIZE 5
 
 /* ========================================================================= */
 

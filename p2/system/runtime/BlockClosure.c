@@ -64,7 +64,7 @@ static void start_eval(Type_Array body)
     push_CNT(send_Eval);
 }
 
-void Runtime_Block_Closure_invoke(Runtime_Block_Closure closure, Object self,
+void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                             Object class, uns_int argc)
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
@@ -76,7 +76,7 @@ void Runtime_Block_Closure_invoke(Runtime_Block_Closure closure, Object self,
         return;
     }
     
-    Type_Array args = activation_from_native(argc, closure);
+    Type_Array args = activation_from_native(argc, (Runtime_Block_Closure)closure);
 
     set_env((Object)new_Runtime_MethodContext(closure, self, class, args));
 

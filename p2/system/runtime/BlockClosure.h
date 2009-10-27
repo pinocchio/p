@@ -17,7 +17,7 @@ extern Runtime_Block_Closure new_Runtime_Block_Closure(AST_Block code,
 
 /* ========================================================================= */
 
-extern void Runtime_Block_Closure_invoke(Runtime_Block_Closure closure, Object self,
+extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                                    Object class, uns_int argc);
 extern void Runtime_Block_Closure_apply(Runtime_Block_Closure closure, uns_int argc);
 

@@ -17,7 +17,7 @@ void pre_init_Runtime_MethodContext()
 
 /* ========================================================================= */
 
-Runtime_MethodContext new_Runtime_MethodContext(Runtime_Block_Closure closure,
+Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
                                             Object self, Object class,
                                             Type_Array values) {
     NEW_OBJECT(Runtime_MethodContext);
