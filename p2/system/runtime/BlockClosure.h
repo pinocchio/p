@@ -17,10 +17,7 @@ extern Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
 
 /* ========================================================================= */
 
-extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                                   Object class, uns_int argc);
 extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc);
-
 
 /* ========================================================================= */
 
@@ -37,6 +34,11 @@ Runtime_MethodClosure fName() {\
 
 #define ADD_STATEMENT(value)\
     statements->values[_st_count++] = (Object)(value);
+
+/* ========================================================================= */
+
+void start_eval(Type_Array body);
+Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure);
 
 /* ========================================================================= */
 

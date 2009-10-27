@@ -21,6 +21,9 @@ extern Runtime_MethodClosure new_Runtime_MethodClosure();
 
 /* ========================================================================= */
 
+extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
+                                   Object class, uns_int argc);
+
 /* ========================================================================= */
 
 #endif // RUNTIME_METHODCLOSURE_H

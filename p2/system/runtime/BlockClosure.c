@@ -28,7 +28,7 @@ void pre_init_Runtime_BlockClosure()
 
 /* ========================================================================= */
 
-static Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure)
+Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure)
 {
     AST_Block block = closure->code;
     uns_int paramc = block->params->size;
@@ -54,7 +54,7 @@ static Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure clos
     return args;
 }
 
-static void start_eval(Type_Array body)
+void start_eval(Type_Array body)
 {
     if (1 < body->size) {
         push_CNT(AST_Block_continue);
@@ -62,25 +62,6 @@ static void start_eval(Type_Array body)
     
     push_EXP(body->values[0]);
     push_CNT(send_Eval);
-}
-
-void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                            Object class, uns_int argc)
-{
-    LOG_AST_INFO("Closure Invoke: ", closure->info);
-     
-    Type_Array body = closure->code->body;
-
-    if (body->size == 0) { 
-        RETURN_FROM_NATIVE(self);
-        return;
-    }
-    
-    Type_Array args = activation_from_native(argc, (Runtime_BlockClosure)closure);
-
-    set_env((Object)new_Runtime_MethodContext(closure, self, class, args));
-
-    start_eval(body);
 }
 
 void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)

@@ -31,6 +31,27 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code)
 
 /* ========================================================================= */
 
+void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
+                            Object class, uns_int argc)
+{
+    LOG_AST_INFO("Closure Invoke: ", closure->info);
+     
+    Type_Array body = closure->code->body;
+
+    if (body->size == 0) { 
+        RETURN_FROM_NATIVE(self);
+        return;
+    }
+    
+    Type_Array args = activation_from_native(argc, (Runtime_BlockClosure)closure);
+
+    set_env((Object)new_Runtime_MethodContext(closure, self, class, args));
+
+    start_eval(body);
+}
+
+/* ========================================================================= */
+
 void post_init_Runtime_MethodClosure()
 {
 
