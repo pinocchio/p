@@ -8,6 +8,8 @@ void store_method_object(Type_Class class, Type_Symbol symbol, Object method)
 
 void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method)
 {
+    method->selector    = (Object)symbol;
+    method->class       = class;
     store_method_object(class, symbol, (Object)method);
 }
 
