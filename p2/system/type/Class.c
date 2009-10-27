@@ -102,8 +102,9 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
         AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
     } else if (HEADER(method) == (Object)Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
+    } else {
+        assert1(NULL, "Unknown type of method");
     }
-    assert1(NULL, "Unknown type of method");
 }
 
 void Type_Class_dispatch(Object self, Object class, uns_int argc)

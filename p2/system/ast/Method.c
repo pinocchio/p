@@ -19,8 +19,8 @@ void pre_init_AST_Method()
 /* ========================================================================= */
 
 AST_Method new_AST_Method(uns_int paramCount,
-                            uns_int localCount,
-                            Type_Array body)
+                          uns_int localCount,
+                          Type_Array body)
 {
     NEW_OBJECT(AST_Method);
     result->body       = body;
