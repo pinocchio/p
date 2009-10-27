@@ -12,9 +12,10 @@
 
 struct Runtime_BlockContext_t {
     unsigned long int       pc;
-    Runtime_BlockClosure         closure;
+    Runtime_BlockClosure    closure;
     Type_Array              values;
     Runtime_MethodContext   home_context;
+    Runtime_BlockContext    parent;
 };
 
 CREATE_INITIALIZERS(Runtime_BlockContext)
@@ -32,7 +33,6 @@ extern void Runtime_BlockContext_assign(
 
 extern Runtime_BlockContext current_env();
 extern void set_env(Object env);
-extern void push_restore_env();
 
 /* ========================================================================= */
 

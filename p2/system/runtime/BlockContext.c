@@ -19,6 +19,7 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure,
     result->closure        = closure;
     result->values         = values;
     result->pc             = 0;
+    result->parent         = current_env();
     return result;
 }
 
@@ -82,18 +83,6 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int index,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", index, self->values->size));
     
     self->values->values[index] = value;
-}
-
-static CNT(restore_env)
-    Object result = pop_EXP();
-    set_env(peek_EXP(0));
-    poke_EXP(0, result);
-}
-
-void push_restore_env()
-{
-    push_CNT(restore_env);
-    poke_EXP(0, current_env());
 }
 
 /* ========================================================================= */

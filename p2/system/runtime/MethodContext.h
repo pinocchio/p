@@ -10,6 +10,7 @@ struct Runtime_MethodContext_t {
     Runtime_MethodClosure   closure;
     Type_Array              values;
     Runtime_MethodContext   home_context;
+    Runtime_BlockContext    parent;
     Object                  self;
     Object                  class;
 };

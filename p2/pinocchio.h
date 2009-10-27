@@ -108,6 +108,7 @@ extern Type_Class class##_Class;
 #define pop_CNT()               (*(_CNT_++))
 #define peek_CNT()              (*(_CNT_))
 #define zap_CNT()               (_CNT_++);
+#define poke_CNT(value)         (*(_CNT_) = ((cont)(CNT_##value)));
 #define empty_CNT()             ((Object*)_CNT_ == &(Double_Stack[STACK_SIZE]))
 
 #define CNT(name) void CNT_##name() {\

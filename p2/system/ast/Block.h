@@ -30,7 +30,6 @@ extern AST_Block new_AST_Block(uns_int paramCount,
 
 /* ========================================================================= */
 
-extern void CNT_AST_Block_continue();
 extern void AST_Block_eval(AST_Block self);
 
 /* ========================================================================= */

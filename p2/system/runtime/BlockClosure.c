@@ -42,9 +42,6 @@ Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure)
     }
     zap_EXP(); // remove self
 
-    // MAKE SURE TO DO THIS AFTER GETTING THE ARGS!
-    push_restore_env(); // pokes EXP
-
     argc = paramc;
     // Set locals to nil.
     while (argc < paramc + localc) {
@@ -54,13 +51,32 @@ Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure)
     return args;
 }
 
+static CNT(restore_env)
+    set_env((Object)current_env()->parent);
+}
+
+static void CNT_AST_Block_continue()
+{
+    Runtime_BlockContext env = current_env();
+    Type_Array body = env->closure->code->body;
+    poke_EXP(0, body->values[env->pc]);
+    
+    env->pc++;
+    if (body->size <= env->pc) {
+        poke_CNT(restore_env); 
+    } 
+    push_CNT(send_Eval);
+}
+
 void start_eval(Type_Array body)
 {
     if (1 < body->size) {
         push_CNT(AST_Block_continue);
+    } else {
+        push_CNT(restore_env);
     }
     
-    push_EXP(body->values[0]);
+    poke_EXP(0, body->values[0]);
     push_CNT(send_Eval);
 }
 

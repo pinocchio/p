@@ -41,19 +41,6 @@ void pre_init_AST_Block()
 
 /* ========================================================================= */
 
-void CNT_AST_Block_continue()
-{
-    Runtime_BlockContext env = current_env();
-    Type_Array body = env->closure->code->body;
-    poke_EXP(0, body->values[env->pc]);
-    
-    env->pc++;
-    if (body->size <= env->pc) {
-        zap_CNT();
-    } 
-    push_CNT(send_Eval);
-}
-
 void AST_Block_eval(AST_Block self)
 {
     poke_EXP(0, new_Runtime_BlockClosure(self, current_env()));
