@@ -14,8 +14,8 @@ NEW_TEST(AST_Block_eval)
     block->body = body;
     
     result = Eval((Object)block);
-    assert0(HEADER(result) == (Object)Runtime_Block_Closure_Class);
-    Runtime_Block_Closure closure = (Runtime_Block_Closure) result;
+    assert0(HEADER(result) == (Object)Runtime_BlockClosure_Class);
+    Runtime_BlockClosure closure = (Runtime_BlockClosure) result;
     assert0(closure->code == block);
     ASSERT_EMPTY_STACK;
 }

@@ -56,7 +56,7 @@ void CNT_AST_Block_continue()
 
 void AST_Block_eval(AST_Block self)
 {
-    poke_EXP(0, new_Runtime_Block_Closure(self, current_env()));
+    poke_EXP(0, new_Runtime_BlockClosure(self, current_env()));
 }
 
 /* ========================================================================= */

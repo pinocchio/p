@@ -11,7 +11,7 @@ void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure me
     store_method_object(class, symbol, (Object)method);
 }
 
-void store_closure(Type_Class class, Type_Symbol symbol, Runtime_Block_Closure closure) {
+void store_closure(Type_Class class, Type_Symbol symbol, Runtime_BlockClosure closure) {
     store_method_object(class, symbol, (Object)closure);
 }
 

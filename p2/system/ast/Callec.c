@@ -28,8 +28,8 @@ void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
     printf("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
-    assert0(HEADER(closure) == (Object)Runtime_Block_Closure_Class);
-    Runtime_Block_Closure_apply((Runtime_Block_Closure)closure, argc);
+    assert0(HEADER(closure) == (Object)Runtime_BlockClosure_Class);
+    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
 
 NATIVE1(AST_Callec_on_)

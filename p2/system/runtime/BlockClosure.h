@@ -5,21 +5,21 @@
 
 /* ========================================================================= */
 
-struct Runtime_Block_Closure_t {
+struct Runtime_BlockClosure_t {
     AST_Block            code;
     Runtime_BlockContext context;
     AST_Info             info;
 };
 
-CREATE_INITIALIZERS(Runtime_Block_Closure)
-extern Runtime_Block_Closure new_Runtime_Block_Closure(AST_Block code,
+CREATE_INITIALIZERS(Runtime_BlockClosure)
+extern Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
                                            Runtime_BlockContext context);
 
 /* ========================================================================= */
 
 extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                                    Object class, uns_int argc);
-extern void Runtime_Block_Closure_apply(Runtime_Block_Closure closure, uns_int argc);
+extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc);
 
 
 /* ========================================================================= */

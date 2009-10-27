@@ -8,13 +8,13 @@ NEW_TEST(ast_super)
     Type_Symbol test  = new_Type_Symbol(L"test");
     Type_Array body   = new_Type_Array_With_All(3, (Object)integer7_const);
     body->values[2]   = (Object)new_AST_Super((Object)test, new_Raw_Type_Array(0));    
-    Runtime_Block_Closure closure = new_Runtime_Block_Closure(new_AST_Block(0, 0, body),
+    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                   (Runtime_BlockContext)Nil);
     store_closure(True_Class, test, closure);
     
     body             = new_Type_Array_With_All(3, (Object)integer7_const);
     body->values[2]  = (Object)integer_const;    
-    closure = new_Runtime_Block_Closure(new_AST_Block(0, 0, body),
+    closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                   (Runtime_BlockContext)Nil);
     store_closure(Type_Boolean_Class, test, closure);
     

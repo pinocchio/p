@@ -132,7 +132,7 @@ test_AST_Super();
 test_Type_Symbol();
 test_Thread();
 test_AST_Variable();
-test_Runtime_Block_Closure();
+test_Runtime_BlockClosure();
 test_AST_Block();
 test_Type_Nil();
 test_AST_Info();
