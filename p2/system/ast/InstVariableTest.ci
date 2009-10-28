@@ -1,18 +1,28 @@
 
 #define AST_INSTVARIABLE_TEST_SETUP \
-    AST_InstVariable instvariable = new_AST_InstVariable(); \
+    AST_InstVariable instvariable = new_AST_InstVariable(0); \
     Object result;
 
 /* ========================================================================= */
 
-void test_AST_INSTVARIABLE_example() {
- #error Fill the tests
+NEW_TEST(AST_InstVariable_eval)
+    AST_INSTVARIABLE_TEST_SETUP;
+    
+    Type_Class cls = new_Named_Class((Object)Type_Object_Class, 
+                                     L"TestClass",
+                                     create_type(3, OBJECT));
+    Object o = instantiate(cls);
+    ((Type_Object)o)->ivals[0] = (Object)True;
+    ((Type_Object)o)->ivals[1] = (Object)False;
+    current_env()->home_context->self = o;
+    result = Eval((Object)instvariable);
+    assert0(result == (Object)True);
 }
 
 /* ========================================================================= */
 
 TEST_SUITE(AST_InstVariable,
 {
-   RUN_TEST(AST_INSTVARIABLE_example);
+    RUN_TEST(AST_InstVariable_eval);
 })
 

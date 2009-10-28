@@ -24,3 +24,4 @@
 #include <system/ast/InfoTest.ci>
 #include <system/ast/MethodTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
+#include <system/ast/InstVariableTest.ci>

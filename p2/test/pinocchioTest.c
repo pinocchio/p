@@ -138,4 +138,5 @@ test_Type_Nil();
 test_AST_Info();
 test_Runtime_MethodClosure();
 test_AST_Method();
+test_AST_InstVariable();
 }
