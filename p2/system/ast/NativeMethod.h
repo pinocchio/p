@@ -29,7 +29,7 @@ void NM_##name(Object self, Object class, uns_int argc) {
     zapn_EXP(argc + 1);\
     poke_EXP(0, exp);
 
-#define NATIVE_ARG(idx) peek_EXP(argc - idx - 1);
+#define NATIVE_ARG(idx) peek_EXP(argc - idx - 1)
 
 /* ========================================================================= */
 

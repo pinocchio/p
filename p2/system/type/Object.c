@@ -59,24 +59,33 @@ NATIVE(Type_Object_isNil)
     RETURN_FROM_NATIVE(False);
 }
 
+Object raw_Type_Object_at(Type_Object o, Object tag, uns_int index)
+{
+    assertTagSize(tag, index);
+    return o->ivals[index];
+}
+
 NATIVE1(Type_Object_instVarAt_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
-    Object tag = gettag(cls);
+    Object tag = gettag(self);
     assertTagType(tag, Object);
+    RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index));
+}
+
+void raw_Type_Object_at_put(Type_Object o, Object tag,
+                            uns_int index, Object value)
+{
     assertTagSize(tag, index);
-    RETURN_FROM_NATIVE(((Type_Object)self)->ivals[index]);
+    o->ivals[index] = value;
 }
 
 NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
-    Object tag = gettag(cls);
+    Object tag = gettag(self);
     assertTagType(tag, Object);
-    assertTagSize(tag, index);
-    ((Type_Object)self)->ivals[index] = NATIVE_ARG(1);
+    raw_Type_Object_at_put((Type_Object)self, tag, index, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
 

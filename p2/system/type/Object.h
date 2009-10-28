@@ -22,4 +22,10 @@ extern void NM_Type_Object_equals(Object self, Object class, uns_int argc);
 
 /* ========================================================================= */
 
+Object raw_Type_Object_at(Type_Object o, Object tag, uns_int index);
+void raw_Type_Object_at_put(Type_Object o, Object tag,
+                            uns_int index, Object value);
+
+/* ========================================================================= */
+
 #endif // TYPE_OBJECT_H

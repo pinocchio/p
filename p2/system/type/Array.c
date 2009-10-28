@@ -101,6 +101,14 @@ NATIVE1(Type_Array_at_)
     RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index));
 }
 
+void raw_Type_Array_at_put(Type_Array array, Object tag,
+                           uns_int index, Object value)
+{
+    assert0(array->size > index);
+    assert0(0 <= index);
+    array->values[tagsize(tag) + index] = value;
+}
+
 NATIVE2(Type_Array_at_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
@@ -108,9 +116,7 @@ NATIVE2(Type_Array_at_put_)
    
     Object tag = gettag(as);
     assertTagType(tag, Array); 
-    assert0(as->size > index);
-    assert0(0 <= index);
-    as->values[index + tagsize(tag)] = NATIVE_ARG(1);
+    raw_Type_Array_at_put(as, tag, index, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
 
