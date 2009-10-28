@@ -97,13 +97,6 @@ Object create_type(uns_int size, Type_Tag tag)
 
 /* ========================================================================= */
 
-Object gettag(Type_Class class)
-{
-    return class->type;
-}
-
-/* ========================================================================= */
-
 void post_init_Type_Layout()
 {
 

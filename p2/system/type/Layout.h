@@ -14,8 +14,11 @@ extern Type_Class Type_FileLayout;
 
 /* ========================================================================= */
 
+#define tagIsType(tag, type)\
+    (HEADER(tag) == (Object)Type_##type##Layout)
+
 #define assertTagType(tag, type)\
-    assert0(HEADER(tag) == (Object)Type_##type##Layout);
+    assert0(tagIsType(tag, type));
 
 #define tagsize(tag)\
     (((Type_Array)tag)->size)
@@ -24,7 +27,8 @@ extern Type_Class Type_FileLayout;
     assert0(0 <= size);\
     assert0(tagsize(tag) > size);
 
-extern Object gettag(Type_Class class);
+#define gettag(o)\
+    ((Type_Class)HEADER(o))->type
 
 /* ========================================================================= */
 

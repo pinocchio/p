@@ -83,27 +83,30 @@ NATIVE0(Type_Array_size)
     RETURN_FROM_NATIVE(result);
 }
 
+Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index)
+{
+    assert0(array->size > index);
+    assert0(0 <= index);
+    return array->values[tagsize(tag) + index];
+}
+
 NATIVE1(Type_Array_at_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
 
-    Object tag = gettag(cls);    
+    Object tag = gettag(as);    
     assertTagType(tag, Array);
 
-    assert0(as->size > index);
-    assert0(0 <= index);
-    RETURN_FROM_NATIVE(as->values[tagsize(tag) + index]);
+    RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index));
 }
 
 NATIVE2(Type_Array_at_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
     Type_Array as  = (Type_Array)self;
    
-    Object tag = gettag(cls);
+    Object tag = gettag(as);
     assertTagType(tag, Array); 
     assert0(as->size > index);
     assert0(0 <= index);
@@ -114,8 +117,7 @@ NATIVE2(Type_Array_at_put_)
 NATIVE1(Type_Array_instVarAt_)
     Object w_index  = NATIVE_ARG(0);
     int index       = unwrap_int(w_index);
-    Type_Class cls  = (Type_Class)HEADER(self);
-    Object tag      = gettag(cls);
+    Object tag      = gettag(self);
     assertTagType(tag, Array);
     assertTagSize(tag, index);
     RETURN_FROM_NATIVE(((Type_Array)self)->values[index]);
@@ -124,8 +126,7 @@ NATIVE1(Type_Array_instVarAt_)
 NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
-    Type_Class cls = (Type_Class)HEADER(self);
-    Object tag   = gettag(cls);
+    Object tag   = gettag(self);
     assertTagType(tag, Array);
     assertTagSize(tag, index);
     ((Type_Array)self)->values[index] = NATIVE_ARG(1);

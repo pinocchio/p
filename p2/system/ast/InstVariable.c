@@ -27,7 +27,19 @@ void pre_init_AST_InstVariable()
 
 /* ========================================================================= */
 
+void AST_InstVariable_eval(AST_InstVariable var)
+{
+    LOGFUN;
+    Object self = current_env()->home_context->self;
 
+    Object tag = gettag(self);
+    if (tagIsType(tag, Object)) {
+    } else if (tagIsType(tag, Array)) {
+        
+    } else {
+        assert1(NULL, "Trying to access object without instvars");
+    }
+}
 
 /* ========================================================================= */
 

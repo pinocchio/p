@@ -20,6 +20,8 @@ extern AST_InstVariable new_AST_InstVariable(uns_int index);
 
 /* ========================================================================= */
 
+extern void AST_InstVariable_eval(AST_InstVariable self);
+
 /* ========================================================================= */
 
 #endif // AST_INSTVARIABLE_H
