@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define AST_INFO_SIZE 4
+#define AST_INFO_VARS L"sourceFile", L"name", L"line", L"column"
+
 struct AST_Info_t {
     Type_String   sourceFile;
     Type_String   name;

@@ -23,7 +23,7 @@ void pre_init_AST_Super()
 {
     AST_Super_Class = new_Named_Class((Object)Type_Object_Class,
                                       L"AST_Super",
-                                      create_type(4, OBJECT));
+                                      create_object_tag(AST_SUPER));
 }
 
 /* ========================================================================= */

@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define AST_SEND_SIZE 5
+#define AST_SEND_VARS L"cache", L"message", L"arguments", L"info", L"receiver"
+
 struct AST_Send_t {
     InlineCache     cache;
     Object          message;

@@ -3,6 +3,9 @@
 
 #include <pinocchio.h>
 
+#define BOOL_SIZE 1
+#define BOOL_VARS L"value"
+
 AST_Constant new_AST_Constant(Object value);
 
 /* ========================================================================= */

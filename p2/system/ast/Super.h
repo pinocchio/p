@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define AST_SUPER_SIZE 4
+#define AST_SUPER_VARS L"cache", L"message", L"arguments", L"info"
+
 struct AST_Super_t {
     InlineCache     cache;
     Object          message; 

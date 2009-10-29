@@ -12,7 +12,7 @@ void pre_init_Runtime_MethodContext()
 {
     Runtime_MethodContext_Class = new_Named_Class((Object)Type_Object_Class,
                                                   L"Runtime_MethodContext",
-                                                  create_type(6, OBJECT));
+                                                  create_object_tag(RUNTIME_METHODCONTEXT));
 }
 
 /* ========================================================================= */

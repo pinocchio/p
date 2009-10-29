@@ -19,7 +19,7 @@ void pre_init_AST_Callec()
 {
     AST_Callec_Class = new_Named_Class((Object)Type_Object_Class,
                                        L"AST_Callec",
-                                       create_type(3, OBJECT));
+                                       create_object_tag(AST_CALLEC));
 }
 
 /* ========================================================================= */

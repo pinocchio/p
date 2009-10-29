@@ -30,10 +30,16 @@ extern Type_Class Type_FileLayout;
 #define gettag(o)\
     ((Type_Class)HEADER(o))->type
 
+#define create_object_tag(name) create_type(name##_SIZE, OBJECT, name##_VARS)
+
 /* ========================================================================= */
 
 void pre_init_Type_Layout();
 void post_init_Type_Layout();
+
+/* ========================================================================= */
+
+extern Object create_type(uns_int size, Type_Tag tag, ...);
 
 /* ========================================================================= */
 

@@ -1,7 +1,5 @@
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/runtime/BlockContext.h>
 #include <pinocchio.h>
 
 /* ========================================================================= */
@@ -37,7 +35,7 @@ void pre_init_Runtime_BlockContext()
 {
     Runtime_BlockContext_Class = new_Named_Class((Object)Type_Object_Class,
                                                  L"Runtime_BlockContext",
-                                                 create_type(4, OBJECT));
+                                                 create_object_tag(RUNTIME_BLOCKCONTEXT));
 }
 
 /* ========================================================================= */

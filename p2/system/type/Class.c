@@ -52,7 +52,7 @@ void pre_init_Type_Class()
 
 void inter_init_Type_Class()
 {
-    Metaclass->type           = create_type(METACLASS_SIZE, OBJECT);
+    Metaclass->type = create_type(METACLASS_SIZE, OBJECT, METACLASS_VARS);
 }
 /* ========================================================================= */
 
@@ -186,10 +186,10 @@ void post_init_Type_Class()
     Metaclass->name     = new_Type_String(L"Metaclass");
     Behaviour = new_Named_Class((Object)Type_Object_Class,
                                 L"Behaviour",
-                                create_type(BEHAVIOUR_SIZE, OBJECT));
+                                create_type(BEHAVIOUR_SIZE, OBJECT, BEHAVIOUR_VARS));
     Class = new_Named_Class((Object)Behaviour,
                             L"Class",
-                            create_type(CLASS_SIZE, OBJECT));
+                            create_type(CLASS_SIZE, OBJECT, CLASS_VARS));
     Metaclass->super = (Object)Behaviour;
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
     ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);

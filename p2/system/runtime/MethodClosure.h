@@ -6,6 +6,7 @@
 /* ========================================================================= */
 
 #define RUNTIME_METHODCLOSURE_SIZE 4
+#define RUNTIME_METHODCLOSURE_VARS L"code", L"class", L"info", L"selector"
 
 /* ========================================================================= */
 

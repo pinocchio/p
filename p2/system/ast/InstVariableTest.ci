@@ -7,7 +7,7 @@
 
 NEW_TEST(AST_InstVariable_eval)
     AST_INSTVARIABLE_TEST_SETUP;
-    
+
     Type_Class cls = new_Named_Class((Object)Type_Object_Class, 
                                      L"TestClass",
                                      create_type(3, OBJECT));

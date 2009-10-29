@@ -23,7 +23,7 @@ void pre_init_Runtime_BlockClosure()
 {
     Runtime_BlockClosure_Class = new_Named_Class((Object)Type_Object_Class,
                                             L"Runtime_BlockClosure",
-                                            create_type(3, OBJECT));
+                                            create_object_tag(RUNTIME_BLOCKCLOSURE));
 }
 
 /* ========================================================================= */

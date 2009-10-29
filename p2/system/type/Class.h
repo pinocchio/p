@@ -7,8 +7,11 @@
 
 extern Type_Class Metaclass;
 #define BEHAVIOUR_SIZE 3
+#define BEHAVIOUR_VARS L"type", L"super", L"methods"
 #define METACLASS_SIZE 3
+#define METACLASS_VARS BEHAVIOUR_VARS
 #define CLASS_SIZE 5
+#define CLASS_VARS BEHAVIOUR_VARS, L"name", L"package"
 
 /* ========================================================================= */
 
@@ -49,8 +52,6 @@ extern void Type_Class_dispatch(Object receiver, Object class, uns_int argc);
 extern void CNT_Class_super();
 
 extern void print_Class(Object obj);
-
-extern Object create_type(uns_int size, Type_Tag tag);
 
 /* ========================================================================= */
 

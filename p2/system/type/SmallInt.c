@@ -117,7 +117,7 @@ void post_init_Type_SmallInt()
 {
     
     ((Type_Class)HEADER(Type_SmallInt_Class))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Type_SmallInt_Class))->type    = create_type(CLASS_SIZE, OBJECT);
+    ((Type_Class)HEADER(Type_SmallInt_Class))->type = create_object_tag(CLASS);
     
     Type_SmallInt_Class->type    = create_type(0, INT);
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");

@@ -6,6 +6,7 @@
 /* ========================================================================= */
 
 #define AST_INSTVARIABLE_SIZE 3
+#define AST_INSTVARIABLE_VARS L"index", L"name", L"package"
 
 /* ========================================================================= */
 
@@ -16,7 +17,7 @@ struct AST_InstVariable_t {
 };
 
 CREATE_INITIALIZERS(AST_InstVariable)
-extern AST_InstVariable new_AST_InstVariable(uns_int index);
+extern AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 

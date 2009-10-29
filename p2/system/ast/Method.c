@@ -13,7 +13,7 @@ void pre_init_AST_Method()
 {
     AST_Method_Class = new_Named_Class((Object)Type_Object_Class,
                                        L"AST_Method",
-                                       create_type(AST_METHOD_SIZE, OBJECT));
+                                       create_object_tag(AST_METHOD));
 }
 
 /* ========================================================================= */

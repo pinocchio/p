@@ -33,7 +33,7 @@ void pre_init_Type_Object()
 
 void inter_init_Type_Object() 
 {
-    ((Type_Class)HEADER(Type_Object_Class))->type       = create_type(CLASS_SIZE, OBJECT);
+    ((Type_Class)HEADER(Type_Object_Class))->type = create_type(CLASS_SIZE, OBJECT, CLASS_VARS);
     Type_Object_Class->type   = create_type(OBJECT_SIZE, OBJECT); 
 }
 

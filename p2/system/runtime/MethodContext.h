@@ -5,6 +5,11 @@
 
 /* ========================================================================= */
 
+#define RUNTIME_METHODCONTEXT_SIZE 7
+#define RUNTIME_METHODCONTEXT_VARS\
+            L"pc", L"closure", L"values",\
+            L"home_context", L"parent", L"self", L"class"
+
 struct Runtime_MethodContext_t {
     unsigned long int       pc;
     Runtime_MethodClosure   closure;

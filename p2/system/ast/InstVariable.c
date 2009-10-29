@@ -8,11 +8,11 @@ Type_Class AST_InstVariable_Class;
 
 /* ========================================================================= */
 
-AST_InstVariable new_AST_InstVariable(uns_int index) 
+AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name) 
 {
     NEW_OBJECT(AST_InstVariable);
     result->index   = new_Type_SmallInt(index);
-    result->name    = (Object)Nil;
+    result->name    = (Object)new_Type_Symbol(name);
     result->package = (Object)Nil;
     return result;
 }
@@ -22,7 +22,7 @@ void pre_init_AST_InstVariable()
     AST_InstVariable_Class =
         new_Named_Class((Object)Type_Object_Class,
                         L"AST_InstVariable",
-                        create_type(AST_INSTVARIABLE_SIZE, OBJECT));
+                        create_object_tag(AST_INSTVARIABLE));
 }
 
 /* ========================================================================= */

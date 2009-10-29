@@ -23,7 +23,7 @@ void pre_init_AST_Assign()
 {
     AST_Assign_Class        = new_Named_Class((Object)Type_Object_Class,
                                               L"AST_Assign",
-                                              create_type(3, OBJECT));
+                                              create_object_tag(AST_ASSIGN));
 }
 
 /* ========================================================================= */

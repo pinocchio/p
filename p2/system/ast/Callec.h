@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define AST_CALLEC_SIZE 2
+#define AST_CALLEC_VARS L"target", L"info"
+
 struct AST_Callec_t {
     Object         target;
     AST_Info       info;

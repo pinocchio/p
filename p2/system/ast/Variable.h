@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define AST_VARIABLE_SIZE 4
+#define AST_VARIABLE_VARS L"index", L"key", L"name", L"info"
+
 struct AST_Variable_t {
     uns_int     index;
     Object      key;

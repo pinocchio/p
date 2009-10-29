@@ -10,6 +10,10 @@
 
 /* ========================================================================= */
 
+#define RUNTIME_BLOCKCONTEXT_SIZE 5
+#define RUNTIME_BLOCKCONTEXT_VARS\
+    L"pc", L"closure", L"values", L"homeContext", L"parent"
+
 struct Runtime_BlockContext_t {
     unsigned long int       pc;
     Runtime_BlockClosure    closure;

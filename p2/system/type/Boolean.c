@@ -20,7 +20,7 @@ Type_Boolean True;
 void pre_init_Type_False() {
     False_Class = new_Named_Class((Object)Type_Boolean_Class,
                                   L"False",
-                                  create_type(1, OBJECT));
+                                  create_type(BOOL_SIZE, OBJECT, BOOL_VARS));
     False = NEW_t(Type_Boolean);
     HEADER(False) = (Object)False_Class;
     False_Const = new_AST_Constant((Object) False);
@@ -30,7 +30,7 @@ void pre_init_Type_True()
 {
     True_Class = new_Named_Class((Object)Type_Boolean_Class,
                                  L"True",
-                                 create_type(1, OBJECT));
+                                 create_type(BOOL_SIZE, OBJECT, BOOL_VARS));
     True = NEW_t(Type_Boolean);
     HEADER(True) = (Object)True_Class;
     True_Const = new_AST_Constant((Object) True);

@@ -32,7 +32,7 @@ void pre_init_AST_Variable()
 {
     AST_Variable_Class = new_Named_Class((Object)Type_Object_Class,
                                          L"AST_Variable",
-                                         create_type(4, OBJECT));
+                                         create_object_tag(AST_VARIABLE));
 }
 
 /* ========================================================================= */
