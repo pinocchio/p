@@ -96,8 +96,8 @@ Type_String Type_SmallInt_asString(int self, uns_int base)
     }
     if (self < 0) { size += 1; };
     size += 1;
-    wchar_t * wchar_copy = malloc(sizeof(wchar_t)*(size));
-    swprintf(wchar_copy, size, L"%i", self);
+    wchar_t wchar_copy[size];
+    swprintf(&wchar_copy[0], size, L"%i", self);
     Type_String result   =  new_Type_String(wchar_copy);
     return result;
 }

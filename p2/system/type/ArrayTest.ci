@@ -33,7 +33,7 @@ NEW_TEST(Type_Array_size)
 NEW_TEST(Type_Array_at_)
     Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
                                      L"TestClass",
-                                     create_type(2, ARRAY));
+                                     create_type(2, ARRAY, L"a", L"b"));
     Object o = instantiate_sized(cls, 3);
     ((Type_Array)o)->values[0] = (Object)True;
     ((Type_Array)o)->values[1] = (Object)False;
@@ -53,7 +53,7 @@ NEW_TEST(Type_Array_at_)
 NEW_TEST(Type_Array_at_put_)
     Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
                                      L"TestClass",
-                                     create_type(2, ARRAY));
+                                     create_type(2, ARRAY, L"a", L"b"));
     Object o = instantiate_sized(cls, 3);
     Object result = Eval_Send2(o, SMB_at_put_,
                                (Object)new_Type_SmallInt(0),
@@ -72,7 +72,7 @@ NEW_TEST(Type_Array_at_put_)
 NEW_TEST(Type_Array_basicNew_)
     Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
                                      L"TestClass",
-                                     create_type(2, ARRAY));
+                                     create_type(2, ARRAY, L"a", L"b"));
     Object w_s = (Object)new_Type_SmallInt(3);
     Object o = Eval_Send1((Object)cls, SMB_basicNew_, w_s);
     ((Type_Array)o)->values[0] = (Object)True;

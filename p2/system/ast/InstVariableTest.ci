@@ -1,6 +1,6 @@
 
 #define AST_INSTVARIABLE_TEST_SETUP \
-    AST_InstVariable instvariable = new_AST_InstVariable(0); \
+    AST_InstVariable instvariable = new_AST_InstVariable(0, L"aVar"); \
     Object result;
 
 /* ========================================================================= */
@@ -10,7 +10,7 @@ NEW_TEST(AST_InstVariable_eval)
 
     Type_Class cls = new_Named_Class((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT));
+                                     create_type(3, OBJECT, L"aVar", L"bVar", L"cVar"));
     Object o = instantiate(cls);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;
