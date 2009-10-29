@@ -33,3 +33,4 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_AST_InstVariable();
+pre_init_Organization_ClassReference();

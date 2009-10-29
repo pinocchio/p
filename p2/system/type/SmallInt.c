@@ -15,7 +15,7 @@ Type_SmallInt* Type_SmallInt_cache;
 Type_SmallInt new_raw_Type_SmallInt(int value)
 {
     NEW_OBJECT(Type_SmallInt);
-    result->value          = value;
+    result->value = value;
     return result;
 }
 

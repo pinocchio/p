@@ -36,3 +36,4 @@
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>
 #include <system/ast/InstVariable.h>
+#include <system/organization/ClassReference.h>

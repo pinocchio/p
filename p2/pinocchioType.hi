@@ -26,3 +26,4 @@ TYPE(Runtime_MethodContext);
 TYPE(Runtime_BlockClosure);
 TYPE(Runtime_MethodClosure);
 TYPE(AST_InstVariable);
+TYPE(Organization_ClassReference);
