@@ -18,6 +18,8 @@ extern Organization_ClassReference new_Organization_ClassReference();
 
 /* ========================================================================= */
 
+extern void Organization_ClassReference_eval();
+
 /* ========================================================================= */
 
 #endif // ORGANIZATION_CLASSREFERENCE_H

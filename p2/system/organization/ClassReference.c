@@ -19,7 +19,11 @@ void pre_init_Organization_ClassReference()
 
 /* ========================================================================= */
 
-
+void Organization_ClassReference_eval(Organization_ClassReference self)
+{
+    assert0(self->class != (Object)Nil);
+    poke_EXP(0, self->class);
+}
 
 /* ========================================================================= */
 
