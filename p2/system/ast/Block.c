@@ -47,8 +47,8 @@ AST_Block new_AST_Block_With(Type_Array params, Type_Array locals,
     NEW_OBJECT(AST_Block);
     result->body       = body;
     result->params     = params;
-    init_variable_array(result->params, (Object)result, 0);
     result->locals     = locals;
+    init_variable_array(result->params, (Object)result, 0);
     init_variable_array(result->locals, (Object)result, result->params->size);
     result->info       = empty_AST_Info;
     return result;
