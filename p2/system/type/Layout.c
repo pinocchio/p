@@ -105,6 +105,7 @@ Object create_type(uns_int size, Type_Tag tag, ...)
     if (tag == CHAR)    { return character_layout; }
     if (tag == FILETAG) { return file_layout; }
     assert1(NULL, "Should not happen!");
+    return NULL;
 }
 
 /* ========================================================================= */

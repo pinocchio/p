@@ -21,6 +21,8 @@ CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int localCount,
                                Type_Array body);
+extern AST_Block new_AST_Block_With(Type_Array params, Type_Array locals,
+                               Type_Array body);
 
 /* ========================================================================= */
 
@@ -35,7 +37,9 @@ extern void AST_Block_eval(AST_Block self);
 
 /* ========================================================================= */
 
-void init_variable_array(Type_Array array, Object key, int size, int idx);
+void init_raw_variable_array(Type_Array array, Object key, int size, int idx);
+void init_variable_array(Type_Array array, Object key, int index);
+
 
 /* ========================================================================= */
 
