@@ -20,7 +20,7 @@ void pre_init_Type_Dictionary()
 {
     Type_Dictionary_Class    = new_Named_Class((Object)Type_Object_Class,
                                                L"Type_Dictionary",
-                                               create_type(2, OBJECT));
+                                               create_object_tag(TYPE_DICTIONARY));
 }
 
 /* ========================================================================= */

@@ -22,7 +22,7 @@ void pre_init_AST_Native_Method()
 {
     AST_Native_Method_Class = new_Named_Class((Object)Type_Object_Class,
                                               L"NativeMethod",
-                                              create_type(2, OBJECT));
+                                              create_object_tag(AST_NATIVE_METHOD));
 }
 
 /* ========================================================================= */

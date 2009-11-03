@@ -36,9 +36,10 @@ Type_Array new_Type_Array_With(uns_int c, ...)
     Type_Array result = new_Raw_Type_Array(c);
     va_list args;
     va_start(args, c);
-    while (0 < c) {
-        c--;
-        result->values[c] = va_arg(args, Object);
+    int index = 0;
+    while (index < c) {
+        result->values[index] = va_arg(args, Object);
+        index++;
     }
     va_end(args);
     return result;

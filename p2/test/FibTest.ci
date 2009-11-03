@@ -36,8 +36,7 @@ METHOD(fib_method, 0, 0, 1)
                 
     AST_Block return_code = new_AST_Block(0, 0, new_Type_Array_With(1, (Object)return_send));
     
-    Type_Array ifElse_args = new_Type_Array_With_All(2, (Object)break_code);
-    ifElse_args->values[1] = (Object) return_code;
+    Type_Array ifElse_args = new_Type_Array_With(2, (Object)break_code, (Object)return_code);
     
     AST_Send ifElse = new_AST_Send((Object)test, (Object)SMB_ifTrue_ifFalse_, ifElse_args);
     ADD_STATEMENT(ifElse);
@@ -54,42 +53,44 @@ int cfib (int a) {
 
 void run_otherFibTest() {
 Object symbol4 = (Object)SMB_lt_;
-Object smallint601 = (Object)new_Type_SmallInt(2);
-Object constant1253 = (Object)new_AST_Constant(smallint601);
-Object array542 = (Object)new_Type_Array_With(1, constant1253);
-Object send275 = (Object)new_AST_Send(Self, symbol4, (Type_Array)array542);
+Object smallint892 = (Object)new_Type_SmallInt(2);
+Object constant1724 = (Object)new_AST_Constant(smallint892);
+Object array941 = (Object)new_Type_Array_With(1, constant1724);
+Object send500 = (Object)new_AST_Send(Self, symbol4, (Type_Array)array941);
 Object symbol5 = (Object)SMB_ifTrue_ifFalse_;
-Object smallint602 = (Object)new_Type_SmallInt(1);
-Object constant1254 = (Object)new_AST_Constant(smallint602);
-Object array543 = (Object)new_Type_Array_With(1, constant1254);
-Object block228 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array543);
+Object smallint893 = (Object)new_Type_SmallInt(1);
+Object constant1725 = (Object)new_AST_Constant(smallint893);
+Object array942 = (Object)new_Type_Array_With(1, constant1725);
+Object block371 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array942);
 Object symbol6 = (Object)SMB_minus_;
-Object smallint603 = (Object)new_Type_SmallInt(1);
-Object constant1255 = (Object)new_AST_Constant(smallint603);
+Object smallint894 = (Object)new_Type_SmallInt(1);
+Object constant1726 = (Object)new_AST_Constant(smallint894);
+Object array943 = (Object)new_Type_Array_With(1, constant1726);
+Object send501 = (Object)new_AST_Send(Self, symbol6, (Type_Array)array943);
 Object symbol7 = (Object)new_Type_Symbol(L"fib");
-Object send276 = (Object)new_AST_Send(constant1255, symbol7, (Type_Array)empty_Type_Array);
-Object array544 = (Object)new_Type_Array_With(1, send276);
-Object send277 = (Object)new_AST_Send(Self, symbol6, (Type_Array)array544);
-Object symbol8 = (Object)(Object)SMB_plus_;
-Object array545 = (Object)new_Type_Array_With(1, Self);
-Object send278 = (Object)new_AST_Send(send277, symbol8, (Type_Array)array545);
-Object smallint604 = (Object)new_Type_SmallInt(2);
-Object constant1256 = (Object)new_AST_Constant(smallint604);
-Object send279 = (Object)new_AST_Send(constant1256, symbol7, (Type_Array)empty_Type_Array);
-Object array546 = (Object)new_Type_Array_With(1, send279);
-Object send280 = (Object)new_AST_Send(send278, symbol6, (Type_Array)array546);
-Object array547 = (Object)new_Type_Array_With(1, send280);
-Object block229 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array547);
-Object array548 = (Object)new_Type_Array_With(2, block228, block229);
-Object send281 = (Object)new_AST_Send(send275, symbol5, (Type_Array)array548);
-Object array549 = (Object)new_Type_Array_With(1, send281);
-Object method7 = (Object)new_AST_Method_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array549);
+Object send502 = (Object)new_AST_Send(send501, symbol7, (Type_Array)empty_Type_Array);
+Object symbol8 = (Object)SMB_plus_;
+Object smallint895 = (Object)new_Type_SmallInt(2);
+Object constant1727 = (Object)new_AST_Constant(smallint895);
+Object array944 = (Object)new_Type_Array_With(1, constant1727);
+Object send503 = (Object)new_AST_Send(Self, symbol6, (Type_Array)array944);
+Object send504 = (Object)new_AST_Send(send503, symbol7, (Type_Array)empty_Type_Array);
+Object array945 = (Object)new_Type_Array_With(1, send504);
+Object send505 = (Object)new_AST_Send(send502, symbol8, (Type_Array)array945);
+Object array946 = (Object)new_Type_Array_With(1, send505);
+Object block372 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array946);
+
+Object array947 = (Object)new_Type_Array_With(2, block371, block372);
+Object send506 = (Object)new_AST_Send(send500, symbol5, (Type_Array)array947);
+Object array948 = (Object)new_Type_Array_With(1, send506);
+Object method31 = (Object)new_AST_Method_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array948);
 
 
-    store_method(Type_SmallInt_Class, (Type_Symbol)symbol7,  new_Runtime_MethodClosure((AST_Method)method7));
+
+    store_method(Type_SmallInt_Class, (Type_Symbol)symbol7,  new_Runtime_MethodClosure((AST_Method)method31));
     Object result;
     
-    int i = 3;
+    int i = 30;
     //scanf("%i", &i);
     result = (Object)Eval(
                 (Object)new_AST_Send(
@@ -102,7 +103,6 @@ Object method7 = (Object)new_AST_Method_With((Type_Array)empty_Type_Array, (Type
 
 void run_FibTest() 
 {
-    //run_otherFibTest();
     
     SMB_fib = new_Type_Symbol(L"fib");
     store_method(Type_SmallInt_Class, SMB_fib, fib_method());
@@ -116,5 +116,7 @@ void run_FibTest()
                     (Object)SMB_fib, empty_Type_Array));
     assert0(((Type_SmallInt)result)->value == cfib(i));
     printf("%i\n", ((Type_SmallInt)result)->value);
+    
+    run_otherFibTest();
     
 }

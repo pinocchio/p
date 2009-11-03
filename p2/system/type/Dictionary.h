@@ -5,6 +5,9 @@
 
 /* ========================================================================= */
 
+#define TYPE_DICTIONARY_SIZE 1
+#define TYPE_DICTIONARY_VARS L"layout"
+
 struct Type_Dictionary_t {
     Type_Array layout;
 };

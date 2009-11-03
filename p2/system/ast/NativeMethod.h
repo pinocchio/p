@@ -7,6 +7,9 @@
 
 /* ========================================================================= */
 
+#define AST_NATIVE_METHOD_SIZE 2
+#define AST_NATIVE_METHOD_VARS L"info", L"code"
+
 struct AST_Native_Method_t {
     AST_Info        info;
     native          code;
