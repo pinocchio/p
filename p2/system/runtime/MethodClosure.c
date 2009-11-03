@@ -43,9 +43,8 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
         return;
     }
     
-    Type_Array args = activation_from_native(argc, (Runtime_BlockClosure)closure);
-
-    set_env((Object)new_Runtime_MethodContext(closure, self, class, args));
+    set_env((Object)new_Runtime_MethodContext(closure, self, class));
+    activation_from_native(argc);
 
     start_eval(body);
 }

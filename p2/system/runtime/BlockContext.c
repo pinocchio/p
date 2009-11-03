@@ -9,15 +9,17 @@ static Object _Env_;
 
 /* ========================================================================= */
 
-Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure,
-                                              Type_Array values)
+Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
-    NEW_OBJECT(Runtime_BlockContext);
-    result->home_context   = closure->context->home_context;
-    result->closure        = closure;
-    result->values         = values;
-    result->pc             = 0;
-    result->parent         = current_env();
+    uns_int size = closure->code->params->size + closure->code->locals->size;
+    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
+    result->home_context    = closure->context->home_context;
+    result->closure         = closure;
+    result->values          = (Type_Array)&result->isize;
+    result->pc              = 0;
+    result->parent          = current_env();
+    result->isize           = size;
+    
     return result;
 }
 

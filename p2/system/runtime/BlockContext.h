@@ -15,16 +15,18 @@
     L"pc", L"closure", L"values", L"homeContext", L"parent"
 
 struct Runtime_BlockContext_t {
-    unsigned long int       pc;
-    Runtime_BlockClosure    closure;
+    uns_int                 pc;
     Type_Array              values;
+    Runtime_BlockClosure    closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent;
+    uns_int                 isize;
+    Object                  ivalues[];
 };
 
 CREATE_INITIALIZERS(Runtime_BlockContext)
 
-extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block, Type_Array values);
+extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block);
 
 /* ========================================================================= */
 

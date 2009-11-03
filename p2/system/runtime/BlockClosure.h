@@ -41,7 +41,7 @@ Runtime_MethodClosure fName() {\
 /* ========================================================================= */
 
 void start_eval(Type_Array body);
-Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure);
+Type_Array activation_from_native(uns_int argc);
 
 /* ========================================================================= */
 

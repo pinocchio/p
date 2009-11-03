@@ -18,19 +18,28 @@ void pre_init_Runtime_MethodContext()
 /* ========================================================================= */
 
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                            Object self, Object class,
-                                            Type_Array values) {
-    NEW_OBJECT(Runtime_MethodContext);
+                                            Object self, Object class)
+{
+    uns_int size = closure->code->params->size + closure->code->locals->size;
+    NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);
     result->closure         = closure;
     result->pc              = 0;
-    result->values          = values;
+    result->values          = (Type_Array)&result->isize;
     result->home_context    = result;
     result->parent          = current_env();
     result->class           = class;
     result->self            = self;
+    result->isize           = size;
     return result;
 }
 
+Runtime_MethodContext new_Empty_Runtime_MethodContext()
+{
+    NEW_OBJECT(Runtime_MethodContext);
+    result->home_context    = result;
+    result->isize           = 0;
+    return result;
+}
 
 /* ========================================================================= */
 

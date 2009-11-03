@@ -28,14 +28,17 @@ void pre_init_Runtime_BlockClosure()
 
 /* ========================================================================= */
 
-Type_Array activation_from_native(uns_int argc, Runtime_BlockClosure closure)
+Type_Array activation_from_native(uns_int argc)
 {
+    Runtime_BlockClosure closure = current_env()->closure;
     AST_Block block = closure->code;
     uns_int paramc = block->params->size;
     uns_int localc = block->locals->size;
 
     assert1(argc == paramc, "Catch-all arguments not supported yet!");
-    Type_Array args = new_Raw_Type_Array(argc + localc);
+
+    Type_Array args = current_env()->values;
+
     while (argc > 0) {
         argc--;
         args->values[argc] = pop_EXP();
@@ -93,11 +96,8 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
         return; 
     }
     
-    // TODO check if we call closure from source location. if so just pop
-    // env-frame.
-    Type_Array args = activation_from_native(argc, closure);
-
-    set_env((Object)new_Runtime_BlockContext(closure, args));
+    set_env((Object)new_Runtime_BlockContext(closure));
+    activation_from_native(argc);
 
     start_eval(body);
 }

@@ -36,7 +36,7 @@ extern void run_tests();
 
 #define RUN_TEST(f) \
     if (!setjmp(Test_Continue)) { \
-        set_env((Object)new_Runtime_MethodContext(NULL, NULL, NULL, NULL));\
+        set_env((Object)new_Empty_Runtime_MethodContext());\
         test_##f();\
         printf("\n"); \
         ASSERT_EMPTY_STACK;\

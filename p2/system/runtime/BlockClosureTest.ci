@@ -82,7 +82,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
 
 NEW_TEST(Runtime_BlockClosure_new_Runtime_BlockClosure)
     AST_Block code                = new_AST_Block(0, 0, empty_Type_Array);
-    Runtime_MethodContext context = new_Runtime_MethodContext(NULL, NULL, NULL, NULL);
+    Runtime_MethodContext context = new_Empty_Runtime_MethodContext();
     Runtime_BlockClosure closure       = new_Runtime_BlockClosure(code, (Runtime_BlockContext)context);
     assert0(closure->code == code);
     assert0(closure->context == (Runtime_BlockContext)context);

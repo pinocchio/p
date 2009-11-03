@@ -11,19 +11,22 @@
             L"home_context", L"parent", L"self", L"class"
 
 struct Runtime_MethodContext_t {
-    unsigned long int       pc;
-    Runtime_MethodClosure   closure;
+    uns_int                 pc;
     Type_Array              values;
+    Runtime_MethodClosure   closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent;
     Object                  self;
     Object                  class;
+    uns_int                 isize;
+    Object                  ivalues[];
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)
 extern Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                            Object self, Object class,
-                                            Type_Array values);
+                                            Object self, Object class);
+
+extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
 
 /* ========================================================================= */
 

@@ -46,6 +46,10 @@ typedef unsigned long int uns_int;
     class result = NEW_t(class);\
     HEADER(result) = (Object)class##_Class;
 
+#define NEW_ARRAY_OBJECT(class, extra) \
+    class result = NEW_ARRAYED(struct class##_t, extra);\
+    HEADER(result) = (Object)class##_Class;
+
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
