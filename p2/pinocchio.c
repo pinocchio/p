@@ -167,6 +167,7 @@ int main()
     
         #ifdef TEST
         run_tests();
+        run_FibTest();
         #else
         run_FibTest();
         #endif

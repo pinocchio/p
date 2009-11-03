@@ -32,15 +32,15 @@ AST_Method new_AST_Method(uns_int paramCount,
     return result;
 }
 
-AST_Method new_AST_Method(Type_Array params,
+AST_Method new_AST_Method_With(Type_Array params,
                           Type_Array locals,
                           Type_Array body)
 {
 
     NEW_OBJECT(AST_Method);
     result->body       = body;
-    result->params     = new_Raw_Type_Array(paramCount);
-    result->locals     = new_Raw_Type_Array(localCount);
+    result->params     = params;
+    result->locals     = locals;
     init_variable_array(result->params, (Object)result, 0);
     init_variable_array(result->locals, (Object)result, result->params->size);
     result->info       = empty_AST_Info;
