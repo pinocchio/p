@@ -12,8 +12,6 @@
 #else 
 #define PALLOC malloc
 #endif
-#undef PALLOC
-#define PALLOC malloc
 
 /* ========================================================================= */
 
