@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+SMB_init = "system/type/SymbolInitialization.ci"
+
+if $0 == __FILE__
+    puts 'symbolDefintion'
+    puts '    "Auto generated Symbol definition from system/type/SymbolInitialization.ci'
+    puts '     Use the script at _meta/extractSymbols to generate this method"'
+    puts
+    puts '    ^ #('
+    File.read(SMB_init).each {|l|
+        if /(SMB_.*?)\s+= new_Type_Symbol\(L"(.*?)"\);/ =~ l
+            puts "        ('#{$2}' '#{$1}')"
+        end
+    }
+    puts '    )'
+end
+
