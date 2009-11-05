@@ -18,6 +18,7 @@ extern void install_symbol_methods(Type_Class class);
 /* ========================================================================= */
 
 extern void initialize_Symbol();
+extern uns_int Type_Symbol_hash(Type_Symbol symbol_string);
 
 /* ========================================================================= */
 

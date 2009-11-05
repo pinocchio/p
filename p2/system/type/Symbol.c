@@ -77,8 +77,9 @@ NATIVE0(Type_Symbol_asArray)
 }
 
 
-int Type_Symbol_hash(const wchar_t* symbol_string)
+uns_int Type_Symbol_hash(Type_Symbol symbol)
 {
+    const wchar_t * symbol_string = symbol->value;
     // http://www.cse.yorku.ca/~oz/hash.html
     uns_int hash = 0;
     int c;

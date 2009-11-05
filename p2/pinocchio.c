@@ -166,7 +166,6 @@ int main()
         initialize_Thread();
     
         #ifdef TEST
-        run_FibTest();
         run_tests();
         #else
         run_FibTest();

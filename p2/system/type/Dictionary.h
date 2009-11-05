@@ -9,12 +9,18 @@
 #define TYPE_DICTIONARY_VARS L"layout"
 
 struct Type_Dictionary_t {
-    Type_Array layout;
+    uns_int     size;
+    Type_Array  layout;
 };
 
 CREATE_INITIALIZERS(Type_Dictionary)
 
 Type_Dictionary new_Type_Dictionary();
+
+/* ========================================================================= */
+
+#define DICTIONARY_SIZE 1 << 2
+#define DICTIONARY_BUCKET_SIZE 2
 
 /* ========================================================================= */
 
