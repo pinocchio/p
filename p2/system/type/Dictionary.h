@@ -19,7 +19,7 @@ Type_Dictionary new_Type_Dictionary();
 
 /* ========================================================================= */
 
-#define DICTIONARY_SIZE 1 << 2
+#define DICTIONARY_SIZE 1 << 3
 #define DICTIONARY_BUCKET_SIZE 2
 
 /* ========================================================================= */
