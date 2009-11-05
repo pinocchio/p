@@ -18,8 +18,7 @@ struct Runtime_MethodContext_t {
     Runtime_BlockContext    parent;
     Object                  self;
     Object                  class;
-    uns_int                 isize;
-    Object                  ivalues[];
+    struct Type_Array_t     locals;
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)

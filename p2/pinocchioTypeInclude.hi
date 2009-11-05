@@ -3,6 +3,8 @@
 #include <system/type/Character.h>
 #include <system/type/String.h>
 #include <system/type/Array.h>
+#include <system/runtime/MethodContext.h>
+#include <system/runtime/BlockContext.h>
 #include <system/type/Dictionary.h>
 #include <system/type/Class.h>
 #include <system/type/Object.h>
@@ -25,13 +27,11 @@
 
 #include <system/runtime/Continue.h>
 #include <system/runtime/BlockClosure.h>
-#include <system/runtime/BlockContext.h>
 #include <system/type/CharacterTable.h>
 #include <system/io/Stream.h>
 #include <system/io/Stream.h>
 #include <system/io/Stream.h>
 #include <system/ast/Block.h>
-#include <system/runtime/MethodContext.h>
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>

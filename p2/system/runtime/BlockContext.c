@@ -15,10 +15,10 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
-    result->values          = (Type_Array)&result->isize;
+    result->values          = &result->locals;
     result->pc              = 0;
     result->parent          = current_env();
-    result->isize           = size;
+    result->values->size    = size;
     
     return result;
 }

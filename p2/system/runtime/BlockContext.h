@@ -20,8 +20,7 @@ struct Runtime_BlockContext_t {
     Runtime_BlockClosure    closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent;
-    uns_int                 isize;
-    Object                  ivalues[];
+    struct Type_Array_t     locals;
 };
 
 CREATE_INITIALIZERS(Runtime_BlockContext)
