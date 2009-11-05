@@ -10,6 +10,7 @@
 
 struct Type_Dictionary_t {
     uns_int     size;
+    float       ratio;
     Type_Array  layout;
 };
 

@@ -13,6 +13,7 @@ Type_Dictionary new_Type_Dictionary()
 {
     NEW_OBJECT(Type_Dictionary);
     result->size    = 0;
+    result->ratio   = 0.6;
     result->layout  = new_Type_Array_With_All(DICTIONARY_SIZE, Nil);
     return result;
 }
@@ -48,32 +49,30 @@ void Bucket_grow(Type_Array * bucketp)
     *bucketp = new_bucket;
 }
 
-Object Bucket_store_(Type_Array * bucketp, Object key, Object value)
+int Bucket_store_(Type_Array * bucketp, Object key, Object value)
 {
     /* just store at the first empty location */
     int i;
     Type_Array bucket = *bucketp;
     for (i = 0; i < bucket->size; i=i+2) {
         if (bucket->values[i] == Nil || bucket->values[i] == key) {
+            int result = bucket->values[i] == Nil;
             bucket->values[i]   = key;
             bucket->values[i+1] = value;
-            return value;
+            return result;
         }
     }
     Bucket_grow(bucketp);
     bucket = *bucketp;
     bucket->values[i]   = key;
     bucket->values[i+1] = value;
-    
-    return NULL;
+    return 1;
 }
 
 Type_Array new_bucket()
 {
     return new_Type_Array_With_All(DICTIONARY_BUCKET_SIZE * 2, Nil);
 }
-
-/* ========================================================================= */
 
 int get_hash(Type_Dictionary self, Object key)
 {
@@ -90,6 +89,31 @@ int get_hash(Type_Dictionary self, Object key)
     return hash;
 }
 
+/* ========================================================================= */
+
+void Type_Dictionary_grow(Type_Dictionary self)
+{
+    Type_Array old = self->layout;
+    self->layout = new_Type_Array_With_All(old->size << 1, (Object)Nil);
+    self->size = 0;
+    
+    int todo = old->size;
+    printf("Growing to: %"F_I"u\n", old->size);
+    while (todo--) {
+        if (old->values[todo] != (Object)Nil) {
+            Type_Array bucket = (Type_Array)old->values[todo];
+            uns_int i;
+            for (i = 0; i < bucket->size; i+=2) {
+                Object key = bucket->values[i];
+                if (key == (Object)Nil) {
+                    break;
+                }
+                Type_Dictionary_store_(self, key, bucket->values[i+1]);
+            }
+        }
+    }
+}
+
 Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 {
     int hash = get_hash(self, key);
@@ -102,12 +126,26 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 
 Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 {
+    float amount = self->size;
+    float size = self->layout->size;
+    if (amount / size > self->ratio) {
+        printf("%f > %f\n", amount / size, self->ratio); 
+        Type_Dictionary_grow(self);
+        printf("End grow\n");
+    }
     int hash = get_hash(self, key);
     Type_Array * bucketp = (Type_Array *)&self->layout->values[hash];
     if (*bucketp == (Type_Array)Nil) { 
         *bucketp = new_bucket();
+    } else {
+        if (tagIsType(gettag(key), Words)) {
+            printf("Collision: %ls, %i\n", ((Type_Symbol)key)->value, hash);
+        } else {
+            printf("Collision: %i!\n", ((Type_SmallInt)key)->value, hash);
+        }
     }
-    return Bucket_store_(bucketp, key, value);
+    self->size += Bucket_store_(bucketp, key, value);
+    return value;
 }
 
 /* ========================================================================= */

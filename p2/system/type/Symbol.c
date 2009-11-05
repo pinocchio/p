@@ -81,10 +81,10 @@ int Type_Symbol_hash(Type_Symbol symbol)
 {
     const wchar_t * symbol_string = symbol->value;
     // http://www.cse.yorku.ca/~oz/hash.html
-    int hash = 5381;
+    int hash = 0;
     uns_int size = symbol->size;
-    while (--size) {
-        hash = ((hash << 5) + hash) ^ *symbol_string++;
+    while (size--) {
+        hash += (hash << 5) + *symbol_string++;
     }
     return hash;
 }
