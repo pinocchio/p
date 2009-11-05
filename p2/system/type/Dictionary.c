@@ -75,12 +75,24 @@ Type_Array new_bucket()
 
 /* ========================================================================= */
 
+int get_hash(Type_Dictionary self, Object key)
+{
+    int hash;
+    Object tag = gettag(key);
+    if (tagIsType(tag, Words)) {
+        hash = Type_Symbol_hash((Type_Symbol)key);
+    } else if (tagIsType(tag, Int)) { 
+        hash = ((Type_SmallInt)key)->value;
+    } else {
+        assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
+    }
+    hash &= self->layout->size - 1;
+    return hash;
+}
+
 Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 {
-    // Dictionary only allows Strings as key
-    assertTagType(gettag(key), Words);
-    uns_int hash = Type_Symbol_hash((Type_Symbol)key);
-    hash &= self->layout->size - 1;
+    int hash = get_hash(self, key);
     Type_Array bucket = (Type_Array) self->layout->values[hash];
     if (bucket == (Type_Array)Nil) {
         return NULL;
@@ -90,10 +102,7 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 
 Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 {
-    // Dictionary only allows Strings as key
-    assertTagType(gettag(key), Words);
-    uns_int hash = Type_Symbol_hash((Type_Symbol)key);
-    hash &= self->layout->size - 1;
+    int hash = get_hash(self, key);
     Type_Array * bucketp = (Type_Array *)&self->layout->values[hash];
     if (*bucketp == (Type_Array)Nil) { 
         *bucketp = new_bucket();
