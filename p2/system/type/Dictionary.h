@@ -26,7 +26,7 @@ Type_Dictionary new_Type_Dictionary();
 /* ========================================================================= */
 
 Object Type_Dictionary_lookup(Type_Dictionary self, Object key);
-Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value);
+void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value);
 
 /* ========================================================================= */
 

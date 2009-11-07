@@ -20,9 +20,9 @@ Type_Dictionary new_Type_Dictionary()
 
 void pre_init_Type_Dictionary()
 {
-    Type_Dictionary_Class    = new_Named_Class((Object)Type_Object_Class,
-                                               L"Type_Dictionary",
-                                               create_object_tag(TYPE_DICTIONARY));
+    Type_Dictionary_Class = new_Named_Class((Object)Type_Object_Class,
+                                            L"Type_Dictionary",
+                                            create_object_tag(TYPE_DICTIONARY));
 }
 
 /* ========================================================================= */
@@ -124,15 +124,8 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
     return Bucket_lookup(bucket, key);
 }
 
-Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
+void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 {
-    float amount = self->size;
-    float size = self->layout->size;
-    if (amount / size > self->ratio) {
-        printf("%f > %f\n", amount / size, self->ratio); 
-        Type_Dictionary_grow(self);
-        printf("End grow\n");
-    }
     int hash = get_hash(self, key);
     Type_Array * bucketp = (Type_Array *)&self->layout->values[hash];
     if (*bucketp == (Type_Array)Nil) { 
@@ -144,8 +137,17 @@ Object Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
             printf("Collision: %i!\n", ((Type_SmallInt)key)->value, hash);
         }
     }
-    self->size += Bucket_store_(bucketp, key, value);
-    return value;
+
+    if (Bucket_store_(bucketp, key, value)) {
+        self->size += 1;
+        float amount = self->size;
+        float size = self->layout->size;
+        if (amount / size > self->ratio) {
+            printf("%f > %f\n", amount / size, self->ratio); 
+            Type_Dictionary_grow(self);
+            printf("End grow\n");
+        }
+    }
 }
 
 /* ========================================================================= */
