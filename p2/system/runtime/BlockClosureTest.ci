@@ -20,14 +20,14 @@ NEW_TEST(Runtime_BlockClosure_evaluation)
     
     // with one body element ---------------------------------------------------
     closure = new_Runtime_BlockClosure(
-        new_AST_Block(1, 0, new_Type_Array_With(1, integer_const)),
+        new_AST_Block(1, 0, new_Type_Array_with(1, integer_const)),
         (Runtime_BlockContext)Nil);
     result       = Eval_Send1((Object)closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
 
     // with one argument -------------------------------------------------------
     
-    closure->code->body   = new_Type_Array_With_All(3, integer7_const);
+    closure->code->body   = new_Type_Array_withAll(3, integer7_const);
     closure->code->body->values[2] = (Object)BLOCK_PARAM(closure->code, 0);
     
     result       = Eval_Send1((Object)closure, SMB_apply_, (Object)integer);
@@ -48,7 +48,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     // with 1 body element
     Type_SmallInt integer5      = new_Type_SmallInt(5);
     AST_Constant integer5_const = new_AST_Constant((Object)integer5);
-    body                        = new_Type_Array_With(1, (Object)integer5_const);
+    body                        = new_Type_Array_with(1, (Object)integer5_const);
     closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                       (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
@@ -58,7 +58,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     // with 2 body element
     Type_SmallInt integer6      = new_Type_SmallInt(6);
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
-    body                        = new_Type_Array_With_All(2, (Object)integer5_const);
+    body                        = new_Type_Array_withAll(2, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                       (Runtime_BlockContext)Nil);
@@ -69,7 +69,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     // with 3 body element
     Type_SmallInt integer7      = new_Type_SmallInt(7);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
-    body                        = new_Type_Array_With_All(3, (Object)integer5_const);
+    body                        = new_Type_Array_withAll(3, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     body->values[2]             = (Object)integer7_const;
     closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),

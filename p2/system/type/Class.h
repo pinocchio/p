@@ -41,7 +41,7 @@ extern void inter_init_Type_Class();
 /* ========================================================================= */
 
 extern Type_Class new_Class(Object superclass, Object type);
-extern Type_Class new_Named_Class(Object superclass, const wchar_t* name,
+extern Type_Class new_Class_named(Object superclass, const wchar_t* name,
                                   Object type);
 extern Type_Class new_Bootstrapping_Class(Object superclass);
 

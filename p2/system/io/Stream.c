@@ -16,7 +16,7 @@ IO_Stream NullStream;
 
 void pre_init_IO_Stream()
 {
-    IO_Stream_Class = new_Named_Class((Object)Type_Object_Class,
+    IO_Stream_Class = new_Class_named((Object)Type_Object_Class,
                                       L"IO_Stream",
                                       create_type(1, OBJECT));
 }

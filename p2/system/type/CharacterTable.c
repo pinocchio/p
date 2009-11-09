@@ -15,7 +15,7 @@ Type_CharacterTable Type_Character_table;
 
 void pre_init_Type_CharacterTable()
 {
-    Type_CharacterTable_Class = new_Named_Class((Object)Type_Object_Class,
+    Type_CharacterTable_Class = new_Class_named((Object)Type_Object_Class,
                                                 L"Type_CharacterTable",
                                                 create_type(0, ARRAY));
 }

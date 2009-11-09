@@ -11,9 +11,9 @@ Type_Class AST_Method_Class;
 
 void pre_init_AST_Method()
 {
-    AST_Method_Class = new_Named_Class((Object)Type_Object_Class,
+    AST_Method_Class = new_Class_named((Object)Type_Object_Class,
                                        L"AST_Method",
-                                       create_object_tag(AST_METHOD));
+                                       CREATE_OBJECT_TAG(AST_METHOD));
 }
 
 /* ========================================================================= */
@@ -24,8 +24,8 @@ AST_Method new_AST_Method(uns_int paramCount,
 {
     NEW_OBJECT(AST_Method);
     result->body       = body;
-    result->params     = new_Raw_Type_Array(paramCount);
-    result->locals     = new_Raw_Type_Array(localCount);
+    result->params     = new_Type_Array_raw(paramCount);
+    result->locals     = new_Type_Array_raw(localCount);
     init_raw_variable_array(result->params, (Object)result, paramCount, 0);
     init_raw_variable_array(result->locals, (Object)result, localCount, paramCount);
     result->info       = empty_AST_Info;

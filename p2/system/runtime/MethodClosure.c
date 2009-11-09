@@ -12,9 +12,9 @@ Type_Class Runtime_MethodClosure_Class;
 void pre_init_Runtime_MethodClosure()
 {
     Runtime_MethodClosure_Class = 
-        new_Named_Class((Object)Type_Object_Class,
+        new_Class_named((Object)Type_Object_Class,
                         L"Runtime_MethodClosure",
-                        create_object_tag(RUNTIME_METHODCLOSURE));
+                        CREATE_OBJECT_TAG(RUNTIME_METHODCLOSURE));
 }
 
 /* ========================================================================= */

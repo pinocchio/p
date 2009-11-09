@@ -36,7 +36,7 @@ Type_Class new_Class(Object superclass, Object type)
     return result;
 }
 
-Type_Class new_Named_Class(Object superclass, const wchar_t* name, Object type)
+Type_Class new_Class_named(Object superclass, const wchar_t* name, Object type)
 {
     Type_Class result = (Type_Class) new_Class(superclass, type);
     result->name      = new_Type_String(name);
@@ -184,10 +184,10 @@ void post_init_Type_Class()
     ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
-    Behaviour = new_Named_Class((Object)Type_Object_Class,
+    Behaviour = new_Class_named((Object)Type_Object_Class,
                                 L"Behaviour",
                                 create_type(BEHAVIOUR_SIZE, OBJECT, BEHAVIOUR_VARS));
-    Class = new_Named_Class((Object)Behaviour,
+    Class = new_Class_named((Object)Behaviour,
                             L"Class",
                             create_type(CLASS_SIZE, OBJECT, CLASS_VARS));
     Metaclass->super = (Object)Behaviour;

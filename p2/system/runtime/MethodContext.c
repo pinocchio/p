@@ -10,9 +10,9 @@ Type_Class Runtime_MethodContext_Class;
 
 void pre_init_Runtime_MethodContext()
 {
-    Runtime_MethodContext_Class = new_Named_Class((Object)Type_Object_Class,
+    Runtime_MethodContext_Class = new_Class_named((Object)Type_Object_Class,
                                                   L"Runtime_MethodContext",
-                                                  create_object_tag(RUNTIME_METHODCONTEXT));
+                                                  CREATE_OBJECT_TAG(RUNTIME_METHODCONTEXT));
 }
 
 /* ========================================================================= */

@@ -8,9 +8,13 @@
 
 #include <gc/gc.h>
 #ifdef GC_MALLOC
-#define PALLOC GC_MALLOC
+    #define PALLOC GC_MALLOC
 #else 
-#define PALLOC malloc
+    #define PALLOC malloc
+#endif
+#ifdef NOGC
+    #undef PALLOC
+    #define PALLOC malloc
 #endif
 
 /* ========================================================================= */
@@ -79,10 +83,14 @@ extern Type_Class class##_Class;
                 ((Type_Class)HEADER(expression))->name->value, \
                 ((Type_Class)(class))->name->value));
     
-// TODO make sure this is not done via c stack
+// TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-    assert(Eval_Send((Object)(exp1), SMB_equals_, \
-        new_Type_Array_With(1, (Object)(exp2))) == (Object)True);
+    assert0(Eval_Send((Object)(exp1), SMB_equals_, \
+        new_Type_Array_with(1, (Object)(exp2))) == (Object)True);
+        
+#define ASSERT_NOT_EQUALS(exp1, exp2) \
+    assert0(Eval_Send((Object)(exp1), SMB_equals_, \
+        new_Type_Array_with(1, (Object)(exp2))) == (Object)False);
 
 /* ========================================================================= */
 

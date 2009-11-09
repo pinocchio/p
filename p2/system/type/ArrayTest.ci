@@ -1,17 +1,17 @@
 
 
-NEW_TEST(Type_Array_new_Type_Array_With)
+NEW_TEST(Type_Array_new_Type_Array_with)
     Type_Array array;
     
-    array = new_Type_Array_With(0);
+    array = new_Type_Array_with(0);
     assert0(array->size == 0);
     assert0(array == empty_Type_Array);
     
-    array = new_Type_Array_With(1, Nil);
+    array = new_Type_Array_with(1, Nil);
     assert0(array->size == 1);
     assert0(array->values[0] == Nil);
     
-    array = new_Type_Array_With(3, Nil, NULL, Nil);
+    array = new_Type_Array_with(3, Nil, NULL, Nil);
     assert0(array->size == 3);
     assert0(array->values[0] == Nil);
     assert0(array->values[1] == NULL);
@@ -20,7 +20,7 @@ NEW_TEST(Type_Array_new_Type_Array_With)
 
 NEW_TEST(Type_Array_size)
     Object integer     = (Object)new_Type_SmallInt(10);
-    Type_Array array = new_Type_Array_With_All(10, integer);
+    Type_Array array = new_Type_Array_withAll(10, integer);
     Object result      = Eval_Send((Object)array, SMB_size, empty_Type_Array);
     assert0(((Type_SmallInt) result)->value == 10);
 
@@ -31,7 +31,7 @@ NEW_TEST(Type_Array_size)
 }
 
 NEW_TEST(Type_Array_at_)
-    Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
                                      L"TestClass",
                                      create_type(2, ARRAY, L"a", L"b"));
     Object o = instantiate_sized(cls, 3);
@@ -51,7 +51,7 @@ NEW_TEST(Type_Array_at_)
 }
 
 NEW_TEST(Type_Array_at_put_)
-    Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
                                      L"TestClass",
                                      create_type(2, ARRAY, L"a", L"b"));
     Object o = instantiate_sized(cls, 3);
@@ -70,7 +70,7 @@ NEW_TEST(Type_Array_at_put_)
 }
 
 NEW_TEST(Type_Array_basicNew_)
-    Type_Class cls = new_Named_Class((Object)Type_Array_Class, 
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
                                      L"TestClass",
                                      create_type(2, ARRAY, L"a", L"b"));
     Object w_s = (Object)new_Type_SmallInt(3);
@@ -106,7 +106,7 @@ NEW_TEST(Type_Array_basicNew_)
 
 TEST_SUITE(Type_Array, 
 {
-    RUN_TEST(Type_Array_new_Type_Array_With);
+    RUN_TEST(Type_Array_new_Type_Array_with);
     RUN_TEST(Type_Array_size);
     RUN_TEST(Type_Array_at_);
     RUN_TEST(Type_Array_at_put_);

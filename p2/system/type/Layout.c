@@ -104,7 +104,7 @@ Object create_type(uns_int size, Type_Tag tag, ...)
     if (tag == LONG)    { return long_layout; }
     if (tag == CHAR)    { return character_layout; }
     if (tag == FILETAG) { return file_layout; }
-    assert1(NULL, "Should not happen!");
+    assert1(NULL, "Unknown type, should never happen!");
     return NULL;
 }
 

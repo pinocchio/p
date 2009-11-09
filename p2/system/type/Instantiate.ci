@@ -77,6 +77,7 @@ Object instantiate_sized(Type_Class class, uns_int size)
 
     INSTANTIATE_SIZED(Array);
     INSTANTIATE_SIZED(Bytes);
+    // TODO add to String and Symbols
     INSTANTIATE_SIZED(Words);
 
     assert(NULL, printf("Not a arrayed object type: %p\n", tag));

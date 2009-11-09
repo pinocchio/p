@@ -10,7 +10,7 @@ Type_Array empty_Type_Array;
 
 /* ========================================================================= */
 
-Type_Array new_Raw_Type_Array(uns_int c)
+Type_Array new_Type_Array_raw(uns_int c)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
@@ -22,7 +22,7 @@ Type_Array new_Raw_Type_Array(uns_int c)
 Type_Array new_Type_Array(uns_int c, Object v[])
 {
     if (c == 0) { return empty_Type_Array; }
-    Type_Array result = new_Raw_Type_Array(c);
+    Type_Array result = new_Type_Array_raw(c);
     while (0 < c) {
         c--;
         result->values[c] = v[c];
@@ -30,10 +30,10 @@ Type_Array new_Type_Array(uns_int c, Object v[])
     return result;
 }
 
-Type_Array new_Type_Array_With(uns_int c, ...)
+Type_Array new_Type_Array_with(uns_int c, ...)
 {
     if (c == 0) { return empty_Type_Array; }
-    Type_Array result = new_Raw_Type_Array(c);
+    Type_Array result = new_Type_Array_raw(c);
     va_list args;
     va_start(args, c);
     int index = 0;
@@ -45,10 +45,10 @@ Type_Array new_Type_Array_With(uns_int c, ...)
     return result;
 }
 
-Type_Array new_Type_Array_With_All(uns_int c, Object element)
+Type_Array new_Type_Array_withAll(uns_int c, Object element)
 {
     if (c == 0) { return empty_Type_Array; }
-    Type_Array result = new_Raw_Type_Array(c);
+    Type_Array result = new_Type_Array_raw(c);
     while (0 < c) {
         c--;
         result->values[c] = element;
@@ -59,7 +59,7 @@ Type_Array new_Type_Array_With_All(uns_int c, Object element)
 
 void pre_init_Type_Array() 
 {
-    Type_Array_Class         = new_Named_Class((Object)Type_Object_Class,
+    Type_Array_Class         = new_Class_named((Object)Type_Object_Class,
                                                L"Array",
                                                create_type(0, ARRAY));
     
@@ -87,7 +87,7 @@ Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index)
 {
     assert0(array->size > index);
     assert0(0 <= index);
-    return array->values[tagsize(tag) + index];
+    return array->values[TAG_SIZE(tag) + index];
 }
 
 NATIVE1(Type_Array_at_)
@@ -95,8 +95,8 @@ NATIVE1(Type_Array_at_)
     int index      = unwrap_int(w_index);
     Type_Array as  = (Type_Array)self;
 
-    Object tag = gettag(as);    
-    assertTagType(tag, Array);
+    Object tag = GETTAG(as);    
+    ASSERT_TAG_TYPE(tag, Array);
 
     RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index));
 }
@@ -106,7 +106,7 @@ void raw_Type_Array_at_put(Type_Array array, Object tag,
 {
     assert0(array->size > index);
     assert0(0 <= index);
-    array->values[tagsize(tag) + index] = value;
+    array->values[TAG_SIZE(tag) + index] = value;
 }
 
 NATIVE2(Type_Array_at_put_)
@@ -114,8 +114,8 @@ NATIVE2(Type_Array_at_put_)
     int index      = unwrap_int(w_index);
     Type_Array as  = (Type_Array)self;
    
-    Object tag = gettag(as);
-    assertTagType(tag, Array); 
+    Object tag = GETTAG(as);
+    ASSERT_TAG_TYPE(tag, Array); 
     raw_Type_Array_at_put(as, tag, index, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
@@ -123,18 +123,18 @@ NATIVE2(Type_Array_at_put_)
 NATIVE1(Type_Array_instVarAt_)
     Object w_index  = NATIVE_ARG(0);
     int index       = unwrap_int(w_index);
-    Object tag      = gettag(self);
-    assertTagType(tag, Array);
-    assertTagSize(tag, index);
+    Object tag      = GETTAG(self);
+    ASSERT_TAG_TYPE(tag, Array);
+    ASSERT_TAG_SIZE(tag, index);
     RETURN_FROM_NATIVE(((Type_Array)self)->values[index]);
 }
 
 NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
-    Object tag   = gettag(self);
-    assertTagType(tag, Array);
-    assertTagSize(tag, index);
+    Object tag   = GETTAG(self);
+    ASSERT_TAG_TYPE(tag, Array);
+    ASSERT_TAG_SIZE(tag, index);
     ((Type_Array)self)->values[index] = NATIVE_ARG(1);
     RETURN_FROM_NATIVE(self);
 }

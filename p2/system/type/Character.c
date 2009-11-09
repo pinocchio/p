@@ -38,7 +38,7 @@ Type_Character new_Type_Character_WithInt(int value)
 
 void pre_init_Type_Character()
 {
-    Type_Character_Class = new_Named_Class((Object)Type_Object_Class,
+    Type_Character_Class = new_Class_named((Object)Type_Object_Class,
                                            L"Type_Character",
                                            create_type(0, CHAR));
 }

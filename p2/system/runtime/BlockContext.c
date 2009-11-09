@@ -35,9 +35,9 @@ void set_env(Object env)
 
 void pre_init_Runtime_BlockContext()
 {
-    Runtime_BlockContext_Class = new_Named_Class((Object)Type_Object_Class,
+    Runtime_BlockContext_Class = new_Class_named((Object)Type_Object_Class,
                                                  L"Runtime_BlockContext",
-                                                 create_object_tag(RUNTIME_BLOCKCONTEXT));
+                                                 CREATE_OBJECT_TAG(RUNTIME_BLOCKCONTEXT));
 }
 
 /* ========================================================================= */

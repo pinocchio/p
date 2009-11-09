@@ -117,7 +117,7 @@ void post_init_Type_SmallInt()
 {
     
     ((Type_Class)HEADER(Type_SmallInt_Class))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Type_SmallInt_Class))->type = create_object_tag(CLASS);
+    ((Type_Class)HEADER(Type_SmallInt_Class))->type = CREATE_OBJECT_TAG(CLASS);
     
     Type_SmallInt_Class->type    = create_type(0, INT);
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
@@ -149,8 +149,8 @@ void post_init_Type_SmallInt()
 int unwrap_int(Object integer)
 {
     // TODO do more stuff in case we are not an int.
-    assertTagType(gettag(integer), Int);
-    //if (gettag(class) == INT) {
+    ASSERT_TAG_TYPE(GETTAG(integer), Int);
+    //if (GETTAG(class) == INT) {
         return ((Type_SmallInt)integer)->value;
     //}
     //assert1(NULL, "Only SmallInts supported for now\n");

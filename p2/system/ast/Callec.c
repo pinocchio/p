@@ -17,9 +17,9 @@ AST_Callec new_AST_Callec(Object target)
 
 void pre_init_AST_Callec()
 {
-    AST_Callec_Class = new_Named_Class((Object)Type_Object_Class,
+    AST_Callec_Class = new_Class_named((Object)Type_Object_Class,
                                        L"AST_Callec",
-                                       create_object_tag(AST_CALLEC));
+                                       CREATE_OBJECT_TAG(AST_CALLEC));
 }
 
 /* ========================================================================= */

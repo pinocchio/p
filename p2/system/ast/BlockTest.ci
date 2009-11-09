@@ -10,7 +10,7 @@ NEW_TEST(AST_Block_eval)
     Type_SmallInt int1     = new_Type_SmallInt(1);
     AST_Constant int1Const = new_AST_Constant((Object)int1);
     
-    Type_Array body = new_Type_Array_With(1, (Object)int1Const);
+    Type_Array body = new_Type_Array_with(1, (Object)int1Const);
     block->body = body;
     
     result = Eval((Object)block);

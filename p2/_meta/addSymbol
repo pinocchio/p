@@ -11,7 +11,7 @@ def addSymbol(symbol)
         f.puts "Type_Symbol SMB_#{symbol_name};"
     end
     File.open(SMB_init, "a+") do |f|
-        f.puts "SMB_#{symbol_name} = new_Type_Symbol(L\"#{symbol}\");"
+        f.puts "SMB_#{symbol_name} = new_Type_Symbol_cached(L\"#{symbol}\");"
     end
 end
 

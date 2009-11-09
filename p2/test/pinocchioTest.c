@@ -96,12 +96,12 @@ Object Eval_Send0(Object self, Type_Symbol symbol)
 
 Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
 {
-    return Eval_Send(self, symbol, new_Type_Array_With(1, arg));
+    return Eval_Send(self, symbol, new_Type_Array_with(1, arg));
 }
 
 Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 {
-    Type_Array args = new_Type_Array_With_All(2, arg1);
+    Type_Array args = new_Type_Array_withAll(2, arg1);
     args->values[1] = arg2;
     return Eval_Send(self, symbol, args);
 }

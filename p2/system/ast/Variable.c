@@ -30,9 +30,9 @@ AST_Variable new_AST_Variable(Object key, uns_int index)
 
 void pre_init_AST_Variable()
 {
-    AST_Variable_Class = new_Named_Class((Object)Type_Object_Class,
+    AST_Variable_Class = new_Class_named((Object)Type_Object_Class,
                                          L"AST_Variable",
-                                         create_object_tag(AST_VARIABLE));
+                                         CREATE_OBJECT_TAG(AST_VARIABLE));
 }
 
 /* ========================================================================= */

@@ -14,23 +14,23 @@ extern Type_Class Type_FileLayout;
 
 /* ========================================================================= */
 
-#define tagIsType(tag, type)\
+#define TAG_IS_TYPE(tag, type)\
     (HEADER(tag) == (Object)Type_##type##Layout)
 
-#define assertTagType(tag, type)\
-    assert0(tagIsType(tag, type));
+#define ASSERT_TAG_TYPE(tag, type)\
+    assert0(TAG_IS_TYPE(tag, type));
 
-#define tagsize(tag)\
+#define TAG_SIZE(tag)\
     (((Type_Array)tag)->size)
 
-#define assertTagSize(tag, size)\
+#define ASSERT_TAG_SIZE(tag, size)\
     assert0(0 <= size);\
-    assert0(tagsize(tag) > size);
+    assert0(TAG_SIZE(tag) > size);
 
-#define gettag(o)\
+#define GETTAG(o)\
     ((Type_Class)HEADER(o))->type
 
-#define create_object_tag(name) create_type(name##_SIZE, OBJECT, name##_VARS)
+#define CREATE_OBJECT_TAG(name) create_type(name##_SIZE, OBJECT, name##_VARS)
 
 /* ========================================================================= */
 

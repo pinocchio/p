@@ -11,7 +11,7 @@ Type_Class Type_Object_Class;
 
 void pre_init_Type_Object() 
 {
-    // explicitely use new_Class not new_Named_Class! to avoid early use
+    // explicitely use new_Class not new_Class_named! to avoid early use
     // of symbols.
     // do manually instanciate since we cannot use dict yet
     Type_Class Object_mclass  = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
@@ -61,30 +61,30 @@ NATIVE(Type_Object_isNil)
 
 Object raw_Type_Object_at(Type_Object o, Object tag, uns_int index)
 {
-    assertTagSize(tag, index);
+    ASSERT_TAG_SIZE(tag, index);
     return o->ivals[index];
 }
 
 NATIVE1(Type_Object_instVarAt_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
-    Object tag = gettag(self);
-    assertTagType(tag, Object);
+    Object tag = GETTAG(self);
+    ASSERT_TAG_TYPE(tag, Object);
     RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index));
 }
 
 void raw_Type_Object_at_put(Type_Object o, Object tag,
                             uns_int index, Object value)
 {
-    assertTagSize(tag, index);
+    ASSERT_TAG_SIZE(tag, index);
     o->ivals[index] = value;
 }
 
 NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index = unwrap_int(w_index);
-    Object tag = gettag(self);
-    assertTagType(tag, Object);
+    Object tag = GETTAG(self);
+    ASSERT_TAG_TYPE(tag, Object);
     raw_Type_Object_at_put((Type_Object)self, tag, index, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }

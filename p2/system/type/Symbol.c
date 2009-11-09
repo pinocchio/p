@@ -7,19 +7,30 @@
 /* ========================================================================= */
 
 Type_Class Type_Symbol_Class;
-Type_Dictionary SMB_Table;
+Type_Dictionary Symbol_Table;
 
 #include <system/type/SymbolDefinition.ci>
 
 /* ========================================================================= */
 
+Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
+{
+    Type_Symbol result  = new_Type_Symbol(input);
+    Object cachedSymbol = Type_Dictionary_lookup(Symbol_Table, (Object)result);
+    if (cachedSymbol != NULL) {
+        return (Type_Symbol)cachedSymbol;
+    }
+    Type_Dictionary_store_(Symbol_Table, (Object)result, (Object)result);
+    return result;
+}
+
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
-    uns_int size  = wcslen(input) + 1;
-    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
-    HEADER(result)     = (Object)Type_Symbol_Class;
-    // TODO fix this.
-    result->hash       = new_Type_SmallInt(0);
+    uns_int size        = wcslen(input) + 1;
+    Type_SmallInt hash  = wchar_hash(input, size);
+    Type_Symbol result  = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
+    HEADER(result)      = (Object)Type_Symbol_Class;
+    result->hash        = hash;
     wcsncpy(result->value, input, size);
     result->size        = size - 1;
     return result;
@@ -28,18 +39,19 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Named_Class((Object)Type_Object_Class,
+    Type_Symbol_Class = new_Class_named((Object)Type_Object_Class,
                                         L"Symbol",
                                         create_type(0, WORDS));
-    initialize_Symbol();
 }
 /*
  * Initialize Symbols before installing methods.
  */
 void initialize_Symbol()
 {
-#include <system/type/SymbolInitialization.ci> 
+    Symbol_Table = new_Type_Dictionary();
+    #include <system/type/SymbolInitialization.ci> 
 }
+
 
 /* ========================================================================= */
 
@@ -63,7 +75,7 @@ NATIVE0(Type_Symbol_asSymbol)
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
-    Type_Array array        = new_Raw_Type_Array(self_symbol->size);
+    Type_Array array        = new_Type_Array_raw(self_symbol->size);
     LOG("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
@@ -77,20 +89,23 @@ NATIVE0(Type_Symbol_asArray)
 }
 
 
-int Type_Symbol_hash(Type_Symbol symbol)
+Type_SmallInt wchar_hash(const wchar_t * string, int size)
 {
-    const wchar_t * symbol_string = symbol->value;
     // http://www.cse.yorku.ca/~oz/hash.html
     int hash = 5381;
-    uns_int size = symbol->size;
     while (size--) {
-        hash += (hash << 5) + *symbol_string++;
+        hash += (hash << 5) + *string++;
     }
-    return hash;
+    return new_Type_SmallInt(hash);
+}
+
+Type_SmallInt Type_Symbol_hash(Type_Symbol symbol)
+{
+    return wchar_hash(symbol->value, symbol->size);
 }
 
 NATIVE0(Type_Symbol_hash)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(Type_Symbol_hash((Type_Symbol)self)));
+    RETURN_FROM_NATIVE(Type_Symbol_hash((Type_Symbol)self));
 }
 
 
@@ -108,15 +123,9 @@ NATIVE1(Type_Symbol_lastIndexOf_)
 
 /* ========================================================================= */
 
-void initialize_Type_Symbol_Table()
-{
-    SMB_Table = new_Type_Dictionary();
-}
-
 
 void post_init_Type_Symbol()
 {
-    initialize_Type_Symbol_Table();
     install_symbol_methods(Type_Symbol_Class);
 }
 

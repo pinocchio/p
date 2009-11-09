@@ -11,9 +11,9 @@ Type_Class Organization_ClassReference_Class;
 void pre_init_Organization_ClassReference()
 {
     Organization_ClassReference_Class =
-        new_Named_Class((Object)Type_Object_Class,
+        new_Class_named((Object)Type_Object_Class,
                         L"Organization_ClassReference",
-                        create_object_tag(ORGANIZATION_CLASSREFERENCE));
+                        CREATE_OBJECT_TAG(ORGANIZATION_CLASSREFERENCE));
 }
 
 /* ========================================================================= */

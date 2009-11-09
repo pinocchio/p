@@ -28,7 +28,7 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class    = new_Named_Class((Object)Type_Object_Class,
+    Type_String_Class    = new_Class_named((Object)Type_Object_Class,
                                            L"String",
                                            create_type(0, WORDS));
     empty_Type_String         = new_Type_String(L"");

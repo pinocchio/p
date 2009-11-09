@@ -20,9 +20,9 @@ AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name)
 void pre_init_AST_InstVariable()
 {
     AST_InstVariable_Class =
-        new_Named_Class((Object)Type_Object_Class,
+        new_Class_named((Object)Type_Object_Class,
                         L"AST_InstVariable",
-                        create_object_tag(AST_INSTVARIABLE));
+                        CREATE_OBJECT_TAG(AST_INSTVARIABLE));
 }
 
 /* ========================================================================= */
@@ -33,10 +33,10 @@ void AST_InstVariable_eval(AST_InstVariable var)
     Object self = current_env()->home_context->self;
     int index = unwrap_int((Object)var->index);
 
-    Object tag = gettag(self);
-    if (tagIsType(tag, Object)) {
+    Object tag = GETTAG(self);
+    if (TAG_IS_TYPE(tag, Object)) {
         poke_EXP(0, raw_Type_Object_at((Type_Object)self, tag, index));
-    } else if (tagIsType(tag, Array)) {
+    } else if (TAG_IS_TYPE(tag, Array)) {
         poke_EXP(0, raw_Type_Array_at((Type_Array)self, tag, index));
     } else {
         assert1(NULL, "Trying to access object without instvars");
@@ -49,10 +49,10 @@ void AST_InstVariable_assign(AST_InstVariable var, Object value)
     Object self = current_env()->home_context->self;
     int index = unwrap_int((Object)var->index);
 
-    Object tag = gettag(self);
-    if (tagIsType(tag, Object)) {
+    Object tag = GETTAG(self);
+    if (TAG_IS_TYPE(tag, Object)) {
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
-    } else if (tagIsType(tag, Array)) {
+    } else if (TAG_IS_TYPE(tag, Array)) {
         raw_Type_Array_at_put((Type_Array)self, tag, index, value);
     } else {
         assert1(NULL, "Trying to access object without instvars");

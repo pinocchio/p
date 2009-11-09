@@ -7,12 +7,19 @@ Object result;
 /* ========================================================================= */
 
 NEW_TEST(Type_Symbol_equals_)
-//  Type_Symbol symbol = new_Type_Symbol(L"symbol"); 
-//    Type_Symbol symbol2 = new_Type_Symbol(L"symbol");
+    Type_Symbol symbol = new_Type_Symbol_cached(L"symbol"); 
+    Type_Symbol symbol2 = new_Type_Symbol_cached(L"symbol");
     // Symbols should use a symbol table
-    // TODO create SymbolTable
-    //ASSERT_EQUALS(symbol,  symbol2);
-    //ASSERT_EQUALS(symbol2, symbol);
+    ASSERT_EQUALS(symbol,  symbol2);
+    ASSERT_EQUALS(symbol2, symbol);
+    assert0(symbol == symbol2);
+    
+    symbol = new_Type_Symbol(L"symbol"); 
+    symbol2 = new_Type_Symbol(L"symbol");
+    // Symbols should use a symbol table
+    ASSERT_NOT_EQUALS(symbol,  symbol2);
+    ASSERT_NOT_EQUALS(symbol2, symbol);
+    assert0(symbol != symbol2);
 }
 
 NEW_TEST(Type_Symbol_size)

@@ -33,8 +33,8 @@ AST_Block new_AST_Block(uns_int paramCount,
 {
     NEW_OBJECT(AST_Block);
     result->body       = body;
-    result->params     = new_Raw_Type_Array(paramCount);
-    result->locals     = new_Raw_Type_Array(localCount);
+    result->params     = new_Type_Array_raw(paramCount);
+    result->locals     = new_Type_Array_raw(localCount);
     init_raw_variable_array(result->params, (Object)result, paramCount, 0);
     init_raw_variable_array(result->locals, (Object)result, localCount, paramCount);
     result->info       = empty_AST_Info;
@@ -56,9 +56,9 @@ AST_Block new_AST_Block_With(Type_Array params, Type_Array locals,
 
 void pre_init_AST_Block()
 {
-    AST_Block_Class = new_Named_Class((Object)Type_Object_Class,
+    AST_Block_Class = new_Class_named((Object)Type_Object_Class,
                                       L"AST_Block",
-                                      create_object_tag(AST_BLOCK));
+                                      CREATE_OBJECT_TAG(AST_BLOCK));
 }
 
 /* ========================================================================= */

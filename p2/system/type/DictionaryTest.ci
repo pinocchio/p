@@ -10,7 +10,7 @@ NEW_TEST(Type_Dictionary_at_)
     }
     Type_Dictionary_store_(dict, (Object)new_Type_SmallInt(4), integer2);
     
-    Type_Array args      = new_Raw_Type_Array(1);
+    Type_Array args      = new_Type_Array_raw(1);
     for (i=0; i<100; i++) {
         if (i==4) { continue; }
         Object key = (Object)new_Type_SmallInt(i);
@@ -41,7 +41,7 @@ NEW_TEST(Type_Dictionary_at_put_)
         Object key = (Object)new_Type_SmallInt(i);
         Type_Dictionary_store_(dict, key, integer);
     }
-    Type_Array args  = new_Type_Array_With_All(2, (Object)integer1);
+    Type_Array args  = new_Type_Array_withAll(2, (Object)integer1);
     args->values[0] = integer0; 
     
     result = Eval_Send((Object)dict, SMB_at_put_, args);
@@ -55,7 +55,7 @@ NEW_TEST(Type_Dictionary_at_put_)
     assert0(result == integer1);
     assert0(Type_Dictionary_lookup(dict, integer2) == integer1);
     // check that all the other places aren't changed
-    args  = new_Type_Array_With(1, (Object)integer1);
+    args  = new_Type_Array_with(1, (Object)integer1);
     for (i=0; i<100; i++) {
         if (i==0 || i==2) { continue; }
         Object key = (Object)new_Type_SmallInt(i);

@@ -26,7 +26,7 @@ extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int arg
 
 #define METHOD(fName, paramCount, localCount, numStatements)\
 Runtime_MethodClosure fName() {\
-    Type_Array statements     = new_Type_Array_With(numStatements, Nil);\
+    Type_Array statements     = new_Type_Array_with(numStatements, Nil);\
     AST_Method body           = new_AST_Method(paramCount, localCount, statements);\
     Runtime_MethodClosure method = new_Runtime_MethodClosure(body);\
     method->info             = new_raw_AST_Info();\

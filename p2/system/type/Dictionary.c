@@ -14,15 +14,15 @@ Type_Dictionary new_Type_Dictionary()
     NEW_OBJECT(Type_Dictionary);
     result->size    = 0;
     result->ratio   = 0.6;
-    result->layout  = new_Type_Array_With_All(DICTIONARY_SIZE, Nil);
+    result->layout  = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 
 void pre_init_Type_Dictionary()
 {
-    Type_Dictionary_Class = new_Named_Class((Object)Type_Object_Class,
+    Type_Dictionary_Class = new_Class_named((Object)Type_Object_Class,
                                             L"Type_Dictionary",
-                                            create_object_tag(TYPE_DICTIONARY));
+                                            CREATE_OBJECT_TAG(TYPE_DICTIONARY));
 }
 
 /* ========================================================================= */
@@ -41,7 +41,7 @@ Object Bucket_lookup(Type_Array bucket, Object key)
 void Bucket_grow(Type_Array * bucketp)
 {
     Type_Array old_bucket = *bucketp;
-    Type_Array new_bucket = new_Type_Array_With_All(old_bucket->size << 1, Nil);
+    Type_Array new_bucket = new_Type_Array_withAll(old_bucket->size << 1, Nil);
     int i;
     for(i=0; i<old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
@@ -71,16 +71,16 @@ int Bucket_store_(Type_Array * bucketp, Object key, Object value)
 
 Type_Array new_bucket()
 {
-    return new_Type_Array_With_All(DICTIONARY_BUCKET_SIZE * 2, Nil);
+    return new_Type_Array_withAll(DICTIONARY_BUCKET_SIZE * 2, Nil);
 }
 
 int get_hash(Type_Dictionary self, Object key)
 {
     int hash;
-    Object tag = gettag(key);
-    if (tagIsType(tag, Words)) {
-        hash = Type_Symbol_hash((Type_Symbol)key);
-    } else if (tagIsType(tag, Int)) { 
+    Object tag = GETTAG(key);
+    if (TAG_IS_TYPE(tag, Words)) {
+        hash = Type_Symbol_hash((Type_Symbol)key)->value;
+    } else if (TAG_IS_TYPE(tag, Int)) { 
         hash = ((Type_SmallInt)key)->value;
     } else {
         assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
@@ -94,7 +94,7 @@ int get_hash(Type_Dictionary self, Object key)
 void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old = self->layout;
-    self->layout = new_Type_Array_With_All(old->size << 1, (Object)Nil);
+    self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
     self->size = 0;
     
     int todo = old->size;
@@ -131,10 +131,10 @@ void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
     if (*bucketp == (Type_Array)Nil) { 
         *bucketp = new_bucket();
     } else {
-        if (tagIsType(gettag(key), Words)) {
-            printf("Collision: %ls, %i\n", ((Type_Symbol)key)->value, hash);
+        if (TAG_IS_TYPE(GETTAG(key), Words)) {
+            LOG("Collision: %ls, %i\n", ((Type_Symbol)key)->value, hash);
         } else {
-            printf("Collision: %i!\n", ((Type_SmallInt)key)->value, hash);
+            LOG("Collision: %i!\n", ((Type_SmallInt)key)->value, hash);
         }
     }
 
@@ -143,9 +143,9 @@ void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
         float amount = self->size;
         float size = self->layout->size;
         if (amount / size > self->ratio) {
-            printf("%f > %f\n", amount / size, self->ratio); 
+            LOG("%f > %f\n", amount / size, self->ratio); 
             Type_Dictionary_grow(self);
-            printf("End grow\n");
+            LOG("End grow\n");
         }
     }
 }
@@ -168,6 +168,7 @@ NATIVE2(Type_Dictionary_at_put_)
     RETURN_FROM_NATIVE(new);
 }
 
+// TODO create at ifAbsent put
 /* ========================================================================= */
 
 void post_init_Type_Dictionary()

@@ -160,6 +160,7 @@ bool isInstance(Object object, Object class)
 int main()
 {
     #include <pinocchioPreInit.ci>
+    initialize_Symbol();
     #include <pinocchioPostInit.ci>
 
     if (!setjmp(Eval_Abort)) {
