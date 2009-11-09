@@ -10,9 +10,9 @@ NEW_TEST(Type_Symbol_equals_)
     Type_Symbol symbol = new_Type_Symbol_cached(L"symbol"); 
     Type_Symbol symbol2 = new_Type_Symbol_cached(L"symbol");
     // Symbols should use a symbol table
+    assert0(symbol == symbol2);
     ASSERT_EQUALS(symbol,  symbol2);
     ASSERT_EQUALS(symbol2, symbol);
-    assert0(symbol == symbol2);
     
     symbol = new_Type_Symbol(L"symbol"); 
     symbol2 = new_Type_Symbol(L"symbol");

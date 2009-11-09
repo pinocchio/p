@@ -36,7 +36,6 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
     return result;
 }
 
-
 void pre_init_Type_Symbol()
 {
     Type_Symbol_Class = new_Class_named((Object)Type_Object_Class,
@@ -52,9 +51,7 @@ void initialize_Symbol()
     #include <system/type/SymbolInitialization.ci> 
 }
 
-
 /* ========================================================================= */
-
 
 NATIVE1(Type_Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
@@ -88,7 +85,6 @@ NATIVE0(Type_Symbol_asArray)
     RETURN_FROM_NATIVE(Type_Symbol_asArray((Type_Symbol)self));
 }
 
-
 Type_SmallInt wchar_hash(const wchar_t * string, int size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
@@ -111,14 +107,6 @@ NATIVE0(Type_Symbol_hash)
 
 NATIVE0(Type_Symbol_size)
     RETURN_FROM_NATIVE((Object)new_Type_SmallInt(((Type_Symbol)self)->size));
-}
-
-NATIVE1(Type_Symbol_indexOf_)
-    NYI;
-}
-
-NATIVE1(Type_Symbol_lastIndexOf_)
-    NYI;
 }
 
 /* ========================================================================= */
