@@ -6,16 +6,17 @@
 
 /* ========================================================================= */
 
-#include <gc/gc.h>
-#ifdef GC_MALLOC
-    #define PALLOC GC_MALLOC
-#else 
-    #define PALLOC malloc
-#endif
 #ifdef NOGC
     #undef PALLOC
     #define PALLOC malloc
-#endif
+#else
+    #include <gc/gc.h>
+    #ifdef GC_MALLOC
+        #define PALLOC GC_MALLOC
+    #else 
+        #define PALLOC malloc
+    #endif // GC_MALLOC
+#endif // NOGC
 
 /* ========================================================================= */
 

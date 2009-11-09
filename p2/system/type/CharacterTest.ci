@@ -9,7 +9,7 @@ Object result;
 NEW_TEST(Type_Character_new_Character_With_int)
     int i;
     for (i=0; i<16000; ++i) {
-        Type_Character chr = new_Type_Character_WithInt(i);
+        Type_Character chr = new_Type_Character_fromInt(i);
         wprintf(L"%lc \n", chr->value);
     }
 }

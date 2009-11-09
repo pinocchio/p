@@ -12,7 +12,7 @@ Type_SmallInt* Type_SmallInt_cache;
 
 /* ========================================================================= */
 
-Type_SmallInt new_raw_Type_SmallInt(int value)
+Type_SmallInt new_Type_SmallInt_raw(int value)
 {
     NEW_OBJECT(Type_SmallInt);
     result->value = value;
@@ -24,7 +24,7 @@ Type_SmallInt new_Type_SmallInt(int value)
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return Type_SmallInt_cache[value];
     }
-    return new_raw_Type_SmallInt(value);
+    return new_Type_SmallInt_raw(value);
 }
 
 void pre_init_Type_SmallInt() 
@@ -36,7 +36,7 @@ void pre_init_Type_SmallInt()
     
     int i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        Type_SmallInt_cache[i] = new_raw_Type_SmallInt(i);
+        Type_SmallInt_cache[i] = new_Type_SmallInt_raw(i);
     }
 }
 
@@ -107,7 +107,7 @@ NATIVE0(Type_SmallInt_asString)
 }
 
 NATIVE0(Type_SmallInt_asCharacter)
-    RETURN_FROM_NATIVE(new_Type_Character_WithInt(unwrap_int(self)));
+    RETURN_FROM_NATIVE(new_Type_Character_fromInt(unwrap_int(self)));
 }
 
 

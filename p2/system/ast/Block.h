@@ -21,7 +21,7 @@ CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int localCount,
                                Type_Array body);
-extern AST_Block new_AST_Block_With(Type_Array params, Type_Array locals,
+extern AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
                                Type_Array body);
 
 /* ========================================================================= */

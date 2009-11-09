@@ -35,6 +35,6 @@ void post_init_Type_CharacterTable()
     Type_Character_table->size = new_Type_SmallInt(CHARACTER_TABLE_SIZE);
     int i;
     for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
-        Type_Character_table->chars[i] = new_raw_Type_Character(i);
+        Type_Character_table->chars[i] = new_Type_Character_raw(i);
     }
 }

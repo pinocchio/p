@@ -9,7 +9,7 @@ Type_Class Type_Character_Class;
 
 /* ========================================================================= */
 
-Type_Character new_raw_Type_Character(wchar_t value)
+Type_Character new_Type_Character_raw(wchar_t value)
 {
     NEW_OBJECT(Type_Character);
     result->value         = value;
@@ -22,10 +22,10 @@ Type_Character new_Type_Character(wchar_t value)
     if (value < CHARACTER_TABLE_SIZE) {
         return Type_Character_table->chars[value];
     }
-    return new_raw_Type_Character(value);
+    return new_Type_Character_raw(value);
 }
 
-Type_Character new_Type_Character_WithInt(int value)
+Type_Character new_Type_Character_fromInt(int value)
 {
     wchar_t casted = (wchar_t)value;
     assert(((int)casted == value), 

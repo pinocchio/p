@@ -61,7 +61,7 @@ Object symbol5 = (Object)SMB_ifTrue_ifFalse_;
 Object smallint893 = (Object)new_Type_SmallInt(1);
 Object constant1725 = (Object)new_AST_Constant(smallint893);
 Object array942 = (Object)new_Type_Array_with(1, constant1725);
-Object block371 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array942);
+Object block371 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array942);
 Object symbol6 = (Object)SMB_minus_;
 Object smallint894 = (Object)new_Type_SmallInt(1);
 Object constant1726 = (Object)new_AST_Constant(smallint894);
@@ -78,12 +78,12 @@ Object send504 = (Object)new_AST_Send(send503, symbol7, (Type_Array)empty_Type_A
 Object array945 = (Object)new_Type_Array_with(1, send504);
 Object send505 = (Object)new_AST_Send(send502, symbol8, (Type_Array)array945);
 Object array946 = (Object)new_Type_Array_with(1, send505);
-Object block372 = (Object)new_AST_Block_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array946);
+Object block372 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array946);
 
 Object array947 = (Object)new_Type_Array_with(2, block371, block372);
 Object send506 = (Object)new_AST_Send(send500, symbol5, (Type_Array)array947);
 Object array948 = (Object)new_Type_Array_with(1, send506);
-Object method31 = (Object)new_AST_Method_With((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array948);
+Object method31 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array948);
 
 
 

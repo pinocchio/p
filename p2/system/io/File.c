@@ -44,7 +44,7 @@ IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
     return result;
 }
 
-IO_File new_Temp_IO_File(char * mode)
+IO_File new_IO_File_temp(char * mode)
 {
     IO_File result = new_IO_File_fromFile(fdopen(mkstemp(TMP_FILE), mode));
     assert(result->file != NULL, 

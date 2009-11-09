@@ -98,7 +98,7 @@ void Type_Dictionary_grow(Type_Dictionary self)
     self->size = 0;
     
     int todo = old->size;
-    printf("Growing to: %"F_I"u\n", old->size);
+    LOG("Growing to: %"F_I"u\n", old->size);
     while (todo--) {
         if (old->values[todo] != (Object)Nil) {
             Type_Array bucket = (Type_Array)old->values[todo];

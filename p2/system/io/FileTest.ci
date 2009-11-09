@@ -3,8 +3,8 @@ void test_IO_File_stdout()
 {
 }
 
-NEW_TEST(IO_File_new_Temp_IO_File)
-    //IO_File tmp_file = new_Temp_IO_File("rw+");
+NEW_TEST(IO_File_new_IO_File_temp)
+    //IO_File tmp_file = new_IO_File_temp("rw+");
 }
 
 /* ========================================================================= */
@@ -12,5 +12,5 @@ NEW_TEST(IO_File_new_Temp_IO_File)
 TEST_SUITE(IO_File,
 {
     RUN_TEST(IO_File_stdout);
-    RUN_TEST(IO_File_new_Temp_IO_File);
+    RUN_TEST(IO_File_new_IO_File_temp);
 })

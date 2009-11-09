@@ -41,7 +41,7 @@ AST_Block new_AST_Block(uns_int paramCount,
     return result;
 }
 
-AST_Block new_AST_Block_With(Type_Array params, Type_Array locals,
+AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
                                Type_Array body)
 {
     NEW_OBJECT(AST_Block);

@@ -32,7 +32,7 @@ AST_Method new_AST_Method(uns_int paramCount,
     return result;
 }
 
-AST_Method new_AST_Method_With(Type_Array params,
+AST_Method new_AST_Method_with(Type_Array params,
                           Type_Array locals,
                           Type_Array body)
 {
