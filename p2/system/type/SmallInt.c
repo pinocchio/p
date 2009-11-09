@@ -140,6 +140,7 @@ void post_init_Type_SmallInt()
     store_native_method((Type_Class)Type_SmallInt_Class, SMB_asCharacter, NM_Type_SmallInt_asCharacter);
     
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_plus_));
+    printf("Trying to find: %p\n", SMB_minus_);
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_minus_));
     assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB_equals_));
 }

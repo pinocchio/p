@@ -44,6 +44,7 @@ NEW_TEST(Type_Dictionary_at_put_)
     Type_Array args  = new_Type_Array_withAll(2, (Object)integer1);
     args->values[0] = integer0; 
     
+    printf("Going to at:put:\n");
     result = Eval_Send((Object)dict, SMB_at_put_, args);
     assert0(result == integer1);
     assert0(Type_Dictionary_lookup(dict, integer0) == integer1);
@@ -51,6 +52,7 @@ NEW_TEST(Type_Dictionary_at_put_)
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
+    printf("Going to at:put:\n");
     result = Eval_Send((Object)dict, SMB_at_put_, args);
     assert0(result == integer1);
     assert0(Type_Dictionary_lookup(dict, integer2) == integer1);

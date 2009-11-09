@@ -3,7 +3,6 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
-#include <pinocchioHelper.ci>
 
 #ifdef TEST
 #include <test/pinocchioTest.h>
@@ -96,6 +95,23 @@ void CNT_send_Eval()
  */
 int IN_EVAL = 0;
 
+void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
+{
+    int hash = get_hash(self, key);
+
+    push_CNT(exit_eval);
+    if (!setjmp(Eval_Exit)) {
+        IN_EVAL = 1;
+        Type_Dictionary_direct_store(self, hash, key, value);
+        for (;;) {
+            peek_CNT()();
+        }
+    }
+    zap_CNT();
+    IN_EVAL = 0;
+    ASSERT_EMPTY_STACK;
+}
+
 Object Eval(Object code)
 {
     if (IN_EVAL) {
@@ -153,6 +169,7 @@ bool isInstance(Object object, Object class)
 
 /* ========================================================================= */
 
+#include <pinocchioHelper.ci>
 #include <test/FibTest.ci>
 
 /* ========================================================================= */
@@ -160,18 +177,15 @@ bool isInstance(Object object, Object class)
 int main()
 {
     #include <pinocchioPreInit.ci>
+    initialize_Thread();
     initialize_Symbol();
     #include <pinocchioPostInit.ci>
 
-    if (!setjmp(Eval_Abort)) {
-        initialize_Thread();
-    
-        #ifdef TEST
-        run_tests();
-        #else
-        run_FibTest();
-        #endif
-    }
+    #ifdef TEST
+    run_tests();
+    #else
+    run_FibTest();
+    #endif
 
     return EXIT_SUCCESS;
 }
