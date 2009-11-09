@@ -245,8 +245,9 @@ NATIVE1(Type_Dictionary_at_)
 NATIVE2(Type_Dictionary_at_put_)
     Object w_index = NATIVE_ARG(0);
     Object new = NATIVE_ARG(1);
-    zapn_EXP(argc+1);
-    poke_EXP(0, new);
+
+    // Return before starting direct_store which manipulates the stack!
+    RETURN_FROM_NATIVE(new);
     
     int hash = get_hash((Type_Dictionary)self, w_index);
     Type_Dictionary_direct_store((Type_Dictionary)self, hash, w_index, new);
