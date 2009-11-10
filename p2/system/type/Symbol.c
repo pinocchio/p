@@ -15,7 +15,7 @@ Type_Dictionary Symbol_Table;
 
 Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
 {
-    Type_Symbol result  = new_Type_Symbol(input);
+    Type_Symbol result  = new_Type_String(input);
     Object cachedSymbol = Type_Dictionary_lookup(Symbol_Table, (Object)result);
     if (cachedSymbol != NULL) {
         return (Type_Symbol)cachedSymbol;

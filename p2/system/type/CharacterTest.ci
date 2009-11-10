@@ -10,7 +10,8 @@ NEW_TEST(Type_Character_new_Character_With_int)
     int i;
     for (i=0; i<16000; ++i) {
         Type_Character chr = new_Type_Character_fromInt(i);
-        printf(L"%lc \n", chr->value);
+        wchar_t wchr[1] = { chr->value };
+        wprintf(L"%lc \n", wchr);
     }
 }
 

@@ -149,27 +149,55 @@ int get_hash(Type_Dictionary self, Object key)
 
 /* ========================================================================= */
 
+void CNT_bucket_rehash()
+{
+    uns_int idx = (uns_int)peek_EXP(0);
+    Type_Array bucket = (Type_Array)peek_EXP(1);
+    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
+    if (idx < bucket->size) {
+        // TODO do get_hash in tail-position
+        Object key = bucket->values[idx];
+        if (key != (Object)Nil) {
+            poke_EXP(0, idx + 2);
+            int hash = get_hash(dict, key);
+            return Type_Dictionary_direct_store(dict, hash, key, bucket->values[idx+1]);
+        }
+    }
+    zapn_EXP(2);
+    zap_CNT();
+}
+
+CNT(dict_grow_end)
+    zapn_EXP(3);
+}
+
+void CNT_dict_grow()
+{
+    uns_int idx = (uns_int)peek_EXP(1);
+    Type_Array old = (Type_Array)peek_EXP(2);
+    Object bucket = old->values[idx];
+    if (idx == 0) {
+        poke_CNT(dict_grow_end);
+    } else {
+        poke_EXP(1, idx - 1);
+    }
+    if (bucket != (Object)Nil) {
+        push_EXP(bucket);
+        push_EXP(0);
+        push_CNT(bucket_rehash);
+    }
+}
+
 void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old = self->layout;
     self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
     self->size = 0;
     
-    int todo = old->size;
-    while (todo--) {
-        if (old->values[todo] != (Object)Nil) {
-            Type_Array bucket = (Type_Array)old->values[todo];
-            uns_int i;
-            for (i = 0; i < bucket->size; i+=2) {
-                Object key = bucket->values[i];
-                if (key == (Object)Nil) {
-                    break;
-                }
-                int hash = get_hash(self, key);
-                Type_Dictionary_direct_store(self, hash, key, bucket->values[i+1]);
-            }
-        }
-    }
+    push_CNT(dict_grow);
+    push_EXP(old);
+    push_EXP(old->size - 1);
+    push_EXP(self);
 }
 
 Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
