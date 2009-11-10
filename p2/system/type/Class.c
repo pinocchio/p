@@ -96,7 +96,7 @@ void CNT_Class_lookup_check_result()
     if (method == NULL) {
         zap_EXP();
         poke_EXP(0, class->super);
-        // TODO check if class!
+        assert_class(class->super);
         return Class_lookup((Type_Class)class->super, peek_EXP(3));
     }
     Object self = peek_EXP(2);
