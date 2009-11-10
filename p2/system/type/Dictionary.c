@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/type/Dictionary.h>
@@ -70,7 +69,6 @@ static void bucket_store_new(Type_Array bucket, uns_int idx, Object key)
 
 static void Bucket_compare_key(Object key1, Object key2)
 {
-    Type_Array * bucketp = (Type_Array *)peek_EXP(0);
     if (key1 == key2) {
         push_EXP(True);
     } else {

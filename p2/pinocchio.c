@@ -109,7 +109,6 @@ void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
     }
     zap_CNT();
     IN_EVAL = 0;
-    ASSERT_EMPTY_STACK;
 }
 
 Object Eval(Object code)

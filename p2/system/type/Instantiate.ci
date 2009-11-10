@@ -21,7 +21,7 @@ Object instantiate_Words(Type_Class class, Type_Array ivars, uns_int extra)
 {
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[extra]);
     HEADER(result) = (Object)class;
-    return result;
+    return (Object)result;
 }
 
 Object basic_instantiate_Object(Type_Class class, uns_int size)
