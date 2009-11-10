@@ -95,6 +95,25 @@ void CNT_send_Eval()
  */
 int IN_EVAL = 0;
 
+Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
+{
+    int hash = get_hash(self, key);
+
+    push_CNT(exit_eval);
+    if (!setjmp(Eval_Exit)) {
+        IN_EVAL = 1;
+        Type_Dictionary_direct_lookup(self, hash, key);
+        for (;;) {
+            peek_CNT()();
+        }
+    }
+    zap_CNT();
+    Object result = pop_EXP();
+    IN_EVAL = 0;
+    ASSERT_EMPTY_STACK;
+    return result;
+}
+
 void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
 {
     int hash = get_hash(self, key);

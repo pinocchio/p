@@ -26,15 +26,48 @@ void pre_init_Type_Dictionary()
 
 /* ========================================================================= */
 
-Object Bucket_lookup(Type_Array bucket, Object key)
+static void Bucket_compare_key(Object key1, Object key2)
 {
-    int i;
-    for (i = 0; i < bucket->size; i=i+2) {
-        if (bucket->values[i] == key) {
-            return bucket->values[i+1];
-        }
+    if (key1 == key2) {
+        push_EXP(True);
+    } else {
+        push_EXP(False);
+        //printf("WARNING: Other types of equality not supported yet\n");
     }
-    return NULL;
+}
+
+void CNT_bucket_lookup()
+{
+    Object boolean = pop_EXP();
+    Type_Array bucket = (Type_Array)peek_EXP(0);
+    uns_int idx = (uns_int)peek_EXP(1);
+    
+    if (boolean == (Object)True) {
+        zapn_EXP(2);
+        poke_EXP(0, bucket->values[idx + 1]);
+        zap_CNT();
+        return;
+    }    
+
+    if (bucket->values[idx] == (Object)Nil) {
+        zapn_EXP(2);
+        poke_EXP(0, NULL);
+        zap_CNT();
+        return;
+    }
+
+    idx += 2;
+
+    if (idx >= bucket->size) {
+        zapn_EXP(2);
+        poke_EXP(0, NULL);
+        zap_CNT();
+        return;
+    }
+
+    Object key = peek_EXP(2);
+    poke_EXP(1, idx);
+    Bucket_compare_key(key, bucket->values[idx]);
 }
 
 void Bucket_grow(Type_Array * bucketp)
@@ -65,16 +98,6 @@ static void bucket_store_new(Type_Array bucket, uns_int idx, Object key)
 {
     bucket->values[idx] = key;
     bucket_do_store(bucket, idx, 1); 
-}
-
-static void Bucket_compare_key(Object key1, Object key2)
-{
-    if (key1 == key2) {
-        push_EXP(True);
-    } else {
-        push_EXP(False);
-        //printf("WARNING: Other types of equality not supported yet\n");
-    }
 }
 
 static void CNT_Bucket_store()
@@ -149,16 +172,51 @@ int get_hash(Type_Dictionary self, Object key)
 
 /* ========================================================================= */
 
-void CNT_bucket_rehash()
+static Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
+{
+    return (Type_Array *)&dictionary->layout->values[hash];
+}
+
+static void Bucket_lookup(Type_Array bucket, Object key)
+{
+    if (bucket->values[0] == (Object)Nil) {
+        push_EXP(NULL);
+        return;
+    }
+
+    push_EXP(key);
+    push_EXP(0);
+    push_EXP(bucket);
+    push_CNT(bucket_lookup);
+    Bucket_compare_key(key, bucket->values[0]);
+}
+
+void Type_Dictionary_direct_lookup(Type_Dictionary self, int hash, Object key)
+{
+    Type_Array * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Type_Array)Nil) {
+        push_EXP(NULL);
+        return;
+    }
+    Bucket_lookup(*bucketp, key);
+}
+
+void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
+{
+    int hash = get_hash(self, key);
+    Type_Dictionary_direct_lookup(self, hash, key);
+}
+
+static void CNT_bucket_rehash()
 {
     uns_int idx = (uns_int)peek_EXP(0);
     Type_Array bucket = (Type_Array)peek_EXP(1);
-    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
     if (idx < bucket->size) {
         // TODO do get_hash in tail-position
-        Object key = bucket->values[idx];
+        Object key           = bucket->values[idx];
         if (key != (Object)Nil) {
             poke_EXP(0, idx + 2);
+            Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
             int hash = get_hash(dict, key);
             return Type_Dictionary_direct_store(dict, hash, key, bucket->values[idx+1]);
         }
@@ -167,11 +225,11 @@ void CNT_bucket_rehash()
     zap_CNT();
 }
 
-CNT(dict_grow_end)
+static CNT(dict_grow_end)
     zapn_EXP(3);
 }
 
-void CNT_dict_grow()
+static void CNT_dict_grow()
 {
     uns_int idx = (uns_int)peek_EXP(1);
     Type_Array old = (Type_Array)peek_EXP(2);
@@ -188,7 +246,7 @@ void CNT_dict_grow()
     }
 }
 
-void Type_Dictionary_grow(Type_Dictionary self)
+static void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old = self->layout;
     self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
@@ -200,31 +258,6 @@ void Type_Dictionary_grow(Type_Dictionary self)
     push_EXP(self);
 }
 
-Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
-{
-    return (Type_Array *)&dictionary->layout->values[hash];
-}
-
-Object Type_Dictionary_direct_lookup(Type_Dictionary self, int hash, Object key)
-{
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) {
-        return NULL;
-    }
-    return Bucket_lookup(*bucketp, key);
-}
-
-Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
-{
-    int hash = get_hash(self, key);
-    return Type_Dictionary_direct_lookup(self, hash, key);
-}
-
-void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
-{
-    Object result = Type_Dictionary_lookup(self, key);
-    push_EXP(result);
-}
 
 static void Type_Dictionary_check_grow(Type_Dictionary self)
 {
@@ -266,13 +299,17 @@ void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
 
 /* ========================================================================= */
 
+CNT(fix_dictionary_result)
+    if (peek_EXP(0) == NULL) {
+        poke_EXP(0, Nil);
+    }
+}
+
 NATIVE1(Type_Dictionary_at_)
     Object w_index = NATIVE_ARG(0);
-    Object result = Type_Dictionary_lookup((Type_Dictionary)self, w_index);
-    if(!result) {
-        result = Nil;
-    }
-    RETURN_FROM_NATIVE(result);
+    zapn_EXP(3);
+    push_CNT(fix_dictionary_result);
+    Type_Dictionary_lookup_push((Type_Dictionary)self, w_index);
 }
 
 NATIVE2(Type_Dictionary_at_put_)

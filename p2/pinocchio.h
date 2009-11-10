@@ -114,6 +114,7 @@ extern Type_Class class##_Class;
 #define zap_EXP()               (_EXP_--)
 #define zapn_EXP(n)             (_EXP_-=n)
 #define empty_EXP()             (_EXP_ == &(Double_Stack[-1]))
+#define EXP_size()             (_EXP_ - &(Double_Stack[-1]))
 
 #define push_CNT(value)         (*(--_CNT_) = ((cont)(CNT_##value)))
 #define pop_CNT()               (*(_CNT_++))
