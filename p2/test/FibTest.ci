@@ -103,8 +103,7 @@ Object method31 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Typ
 
 void run_FibTest() 
 {
-    
-    SMB_fib = new_Type_Symbol(L"fib");
+    /*SMB_fib = new_Type_Symbol(L"fib");
     store_method(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
     
@@ -116,7 +115,7 @@ void run_FibTest()
                     (Object)SMB_fib, empty_Type_Array));
     assert0(((Type_SmallInt)result)->value == cfib(i));
     printf("%i\n", ((Type_SmallInt)result)->value);
-    
+    */
     run_otherFibTest();
     
 }

@@ -103,7 +103,6 @@ void CNT_Class_lookup_check_result()
     uns_int argc = (uns_int)peek_EXP(3);
     zapn_EXP(5);
     zap_CNT();
-    print_Class(method);
     Method_invoke(method, self, (Object)class, argc);
 }
 
