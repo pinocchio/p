@@ -107,22 +107,26 @@ void CNT_Class_lookup_check_result()
     Method_invoke(method, self, (Object)class, argc);
 }
 
-void Class_lookup(Type_Class class, Object msg)
-{
-    // TODO pass along the hash value
-    if (class == (Type_Class)Nil) {
-        assert1(NULL, "Does not understand!\n");
-    }
-    Type_Dictionary mdict = class->methods;
-    Type_Dictionary_lookup_push(mdict, msg);
-}
-
-void does_not_understand(Object self, Object msg, uns_int argc)
+void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
     // TODO send DNU;
     assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
            ((Type_Class)HEADER(self))->name->value,
            ((Type_Symbol)msg)->value));
+}
+
+void Class_lookup(Type_Class class, Object msg)
+{
+    // TODO pass along the hash value
+    if (class == (Type_Class)Nil) {
+        Object self = peek_EXP(1);
+        class = (Type_Class)peek_EXP(0);
+        uns_int argc = (uns_int)peek_EXP(2);
+        zapn_EXP(4);
+        return does_not_understand(self, (Object)class, msg, argc);
+    }
+    Type_Dictionary mdict = class->methods;
+    Type_Dictionary_lookup_push(mdict, msg);
 }
 
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
@@ -159,7 +163,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
         return Class_lookup((Type_Class)class, msg);
     }
     
-    does_not_understand(self, msg, argc);
+    does_not_understand(self, class, msg, argc);
 }
 
 
