@@ -26,14 +26,44 @@ void pre_init_Type_Dictionary()
 
 /* ========================================================================= */
 
+static int compare_key_as_words(Object key1, Object key2)
+{
+    if (HEADER(key1) == (Object)Type_String_Class) {
+        if (TAG_IS_TYPE(GETTAG(key2), Words)) {
+            if (Words_compare((Type_Symbol)key1, (Type_Symbol)key2)) {
+                push_EXP(True);
+            } else {
+                push_EXP(False);
+            }
+            return 1;
+        }
+    }
+    return 0;
+}
 static void Bucket_compare_key(Object key1, Object key2)
 {
-    if (key1 == key2) {
-        push_EXP(True);
-    } else {
-        push_EXP(False);
-        //printf("WARNING: Other types of equality not supported yet\n");
+    if (HEADER(key1) == (Object)Type_Symbol_Class
+        && HEADER(key2) == (Object)Type_Symbol_Class) {
+        if (key1 == key2) {
+            push_EXP(True);
+        } else {
+            push_EXP(False);
+        }
+        return;
     }
+    if (HEADER(key1) == (Object)Type_SmallInt_Class
+        && HEADER(key2) == (Object)Type_SmallInt_Class) {
+        if (((Type_SmallInt)key1)->value == ((Type_SmallInt)key2)->value) {
+            push_EXP(True);
+        } else {
+            push_EXP(False);
+        }
+        return;
+    }
+    if (compare_key_as_words(key1, key2)) { return; }
+    if (compare_key_as_words(key2, key1)) { return; }
+    printf("WARNING: Other types of equality not supported yet\n");
+    assert0(NULL);
 }
 
 void CNT_bucket_lookup()
@@ -49,16 +79,16 @@ void CNT_bucket_lookup()
         return;
     }    
 
-    if (bucket->values[idx] == (Object)Nil) {
+    idx += 2;
+
+    if (idx >= bucket->size) {
         zapn_EXP(2);
         poke_EXP(0, NULL);
         zap_CNT();
         return;
     }
 
-    idx += 2;
-
-    if (idx >= bucket->size) {
+    if (bucket->values[idx] == (Object)Nil) {
         zapn_EXP(2);
         poke_EXP(0, NULL);
         zap_CNT();

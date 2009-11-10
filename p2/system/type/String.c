@@ -61,6 +61,14 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     return new_Type_String(concatenated);
 }
 
+int Words_compare(Type_Symbol s1, Type_Symbol s2)
+{
+    if (s1->size != s2->size) {
+        return 0;
+    }
+    return !wcsncmp(s1->value, s2->value, s1->size);
+}
+
 CNT(Type_String_concat_)
     Object string = pop_EXP();
     Object self   = peek_EXP(0);

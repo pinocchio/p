@@ -18,6 +18,7 @@ Type_String new_Type_String_sized(uns_int size);
 
 extern Type_String Type_String_concat_(Type_String str1, Type_String str2);
 extern Type_String new_Type_String_from_charp(const char * input);
+extern int Words_compare(Type_Symbol s1, Type_Symbol s2);
 
 /* ========================================================================= */
 
