@@ -140,6 +140,7 @@ int get_hash(Type_Dictionary self, Object key)
         hash = ((Type_SmallInt)key)->value;
     } else {
         printf("Got key: %p\n", key);
+        print_Class(key);
         assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
     }
     hash %= self->layout->size;
@@ -189,6 +190,12 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
 {
     int hash = get_hash(self, key);
     return Type_Dictionary_direct_lookup(self, hash, key);
+}
+
+void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
+{
+    Object result = Type_Dictionary_lookup(self, key);
+    push_EXP(result);
 }
 
 static void Type_Dictionary_check_grow(Type_Dictionary self)

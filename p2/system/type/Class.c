@@ -87,6 +87,44 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     }
 }
 
+void Class_lookup(Type_Class class, Object msg);
+
+void CNT_Class_lookup_check_result()
+{
+    Object method = peek_EXP(0);
+    Type_Class class = (Type_Class)peek_EXP(1);
+    if (method == NULL) {
+        zap_EXP();
+        poke_EXP(0, class->super);
+        // TODO check if class!
+        return Class_lookup((Type_Class)class->super, peek_EXP(3));
+    }
+    Object self = peek_EXP(2);
+    uns_int argc = (uns_int)peek_EXP(3);
+    zapn_EXP(5);
+    zap_CNT();
+    print_Class(method);
+    Method_invoke(method, self, (Object)class, argc);
+}
+
+void Class_lookup(Type_Class class, Object msg)
+{
+    // TODO pass along the hash value
+    if (class == (Type_Class)Nil) {
+        assert1(NULL, "Does not understand!\n");
+    }
+    Type_Dictionary mdict = class->methods;
+    Type_Dictionary_lookup_push(mdict, msg);
+}
+
+void does_not_understand(Object self, Object msg, uns_int argc)
+{
+    // TODO send DNU;
+    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
+           ((Type_Class)HEADER(self))->name->value,
+           ((Type_Symbol)msg)->value));
+}
+
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
     AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
@@ -108,50 +146,20 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     // TODO put that directly on the sender side
     // TODO create Polymorphic inline cache
     if (class == cache->type) {
-        #ifdef DEBUG
-        LOG("Cached dispatch \"%ls\" on \"%ls\"\n",  
-            ((Type_Symbol)msg)->value,
-            clsname);
-        #endif // DEBUG
         return Method_invoke(cache->method, self, class, argc);
     }
     assert_class(class);
-
-    #ifdef DEBUG
-    LOG("Dispatching on \"%ls\"\n",  clsname);
-    #endif // DEBUG
     
-    Object method = NULL;    
-    while (class != Nil) {
-        #ifdef DEBUG
-        LOG("Lookup continuing in \"%ls\"\n", clsname);
-        #endif // DEBUG
-        Type_Dictionary mdict = ((Type_Class) class)->methods;
-        method                = Type_Dictionary_lookup(mdict, msg);
-        if (!method) {
-            Object super = ((Type_Class) class)->super;
-            #ifndef DEBUG
-            wchar_t * clsname = classname(class);
-            #endif
-            LOG("lookup failed: %p\n", super);
-			assert((class != super), 
-                printf("Infinite Lookup in \"%ls\" for \"%ls\"\n", 
-							clsname,
-							((Type_Symbol)msg)->value));
-			class = super;
-            clsname = classname(class);
-        } else {
-            //TODO create second level cache to directly store the misses
-            cache->type   = class;
-            cache->method = method;
-            return Method_invoke(method, self, class, argc);
-        }
+    if (class != Nil) {
+        push_EXP(msg);
+        push_EXP(argc);
+        push_EXP(self);
+        push_EXP(class);
+        push_CNT(Class_lookup_check_result);
+        return Class_lookup((Type_Class)class, msg);
     }
     
-    // TODO send DNU;
-    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
-           ((Type_Class)HEADER(self))->name->value,
-           ((Type_Symbol)msg)->value));
+    does_not_understand(self, msg, argc);
 }
 
 

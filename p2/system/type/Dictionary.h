@@ -30,7 +30,8 @@ extern void Type_Dictionary_store_(Type_Dictionary self, Object key, Object valu
 
 extern void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
                                          Object key, Object value);
-extern int get_hash(Type_Dictionary self, Object key);
+extern int  get_hash(Type_Dictionary self, Object key);
+extern void Type_Dictionary_lookup_push();
 
 /* ========================================================================= */
 
