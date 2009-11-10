@@ -42,5 +42,5 @@ TEST_SUITE(AST_Callec,
 {
     RUN_TEST(ast_callec_unused);
     RUN_TEST(ast_callec_returned);
-    RUN_TEST(ast_callec_escape);
+    RUN_TEST(ast_callec_escape); 
 })

@@ -50,17 +50,16 @@ NATIVE1(Type_Character_equals_)
 }
 
 NATIVE0(Type_Character_asString)
-    // TODO add \0 at the end
-    RETURN_FROM_NATIVE(new_Type_String(&((Type_Character)self)->value));
+    const wchar_t str[2] = { ((Type_Character)self)->value, '\0' };
+    RETURN_FROM_NATIVE(new_Type_String(str));
 }
 
 NATIVE0(Type_Character_asSymbol)
-    // TODO add \0 at the end
-    RETURN_FROM_NATIVE(new_Type_Symbol(&((Type_Character)self)->value));
+    const wchar_t str[2] = { ((Type_Character)self)->value, '\0' };
+    RETURN_FROM_NATIVE(new_Type_Symbol(str));
 }
 
 NATIVE0(Type_Character_asSmallInt)
-    // TODO add \0 at the end
     RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_Character)self)->value));
 }
 
