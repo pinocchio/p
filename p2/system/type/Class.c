@@ -101,8 +101,13 @@ void CNT_Class_lookup_check_result()
     }
     Object self = peek_EXP(2);
     uns_int argc = (uns_int)peek_EXP(3);
-    zapn_EXP(5);
+    Object dispatch_type = peek_EXP(5);
+    zapn_EXP(6);
     zap_CNT();
+    AST_Send send = (AST_Send)peek_EXP(argc + 1);
+    InlineCache * cache = &send->cache;
+    cache->type     = dispatch_type;
+    cache->method   = method;
     Method_invoke(method, self, (Object)class, argc);
 }
 
@@ -119,9 +124,9 @@ void Class_lookup(Type_Class class, Object msg)
     // TODO pass along the hash value
     if (class == (Type_Class)Nil) {
         Object self = peek_EXP(1);
-        class = (Type_Class)peek_EXP(0);
+        class = (Type_Class)peek_EXP(4);
         uns_int argc = (uns_int)peek_EXP(2);
-        zapn_EXP(4);
+        zapn_EXP(5);
         return does_not_understand(self, (Object)class, msg, argc);
     }
     Type_Dictionary mdict = class->methods;
@@ -154,6 +159,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     assert_class(class);
     
     if (class != Nil) {
+        push_EXP(class);
         push_EXP(msg);
         push_EXP(argc);
         push_EXP(self);
@@ -164,8 +170,6 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     
     does_not_understand(self, class, msg, argc);
 }
-
-
 
 void print_Class(Object obj)
 {
