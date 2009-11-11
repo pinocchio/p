@@ -26,42 +26,43 @@ void pre_init_Type_Dictionary()
 
 /* ========================================================================= */
 
-static int compare_key_as_words(Object key1, Object key2)
+static void Bucket_compare_key(Object inkey, Object dictkey)
 {
-    if (HEADER(key1) == (Object)Type_String_Class) {
-        if (TAG_IS_TYPE(GETTAG(key2), Words)) {
-            if (Words_compare((Type_Symbol)key1, (Type_Symbol)key2)) {
+    if (HEADER(inkey) == (Object)Type_Symbol_Class) {
+        if (inkey == dictkey) {
+            push_EXP(True);
+        } else {
+            push_EXP(False);
+        }
+        return;
+    }
+
+    if (HEADER(inkey) == (Object)Type_SmallInt_Class) {
+        if (HEADER(dictkey) == (Object)Type_SmallInt_Class) {
+            if (((Type_SmallInt)inkey)->value == ((Type_SmallInt)dictkey)->value) {
                 push_EXP(True);
             } else {
                 push_EXP(False);
             }
-            return 1;
-        }
-    }
-    return 0;
-}
-static void Bucket_compare_key(Object key1, Object key2)
-{
-    if (HEADER(key1) == (Object)Type_Symbol_Class
-        && HEADER(key2) == (Object)Type_Symbol_Class) {
-        if (key1 == key2) {
-            push_EXP(True);
         } else {
             push_EXP(False);
         }
         return;
     }
-    if (HEADER(key1) == (Object)Type_SmallInt_Class
-        && HEADER(key2) == (Object)Type_SmallInt_Class) {
-        if (((Type_SmallInt)key1)->value == ((Type_SmallInt)key2)->value) {
-            push_EXP(True);
+
+    if (HEADER(inkey) == (Object)Type_String_Class) {
+        if (TAG_IS_TYPE(GETTAG(dictkey), Words)) {
+            if (Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey)) {
+                push_EXP(True);
+            } else {
+                push_EXP(False);
+            }
         } else {
             push_EXP(False);
         }
         return;
     }
-    if (compare_key_as_words(key1, key2)) { return; }
-    if (compare_key_as_words(key2, key1)) { return; }
+
     printf("WARNING: Other types of equality not supported yet\n");
     assert0(NULL);
 }
