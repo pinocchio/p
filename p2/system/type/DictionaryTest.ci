@@ -6,9 +6,9 @@ NEW_TEST(Type_Dictionary_at_)
     int i=0;
     for (i=0; i<100; ++i) {
         Object key = (Object)new_Type_SmallInt(i);
-        Type_Dictionary_store_(dict, key, integer);
+        Type_Dictionary_quick_store(dict, key, integer);
     }
-    Type_Dictionary_store_(dict, (Object)new_Type_SmallInt(4), integer2);
+    Type_Dictionary_quick_store(dict, (Object)new_Type_SmallInt(4), integer2);
     
     Type_Array args      = new_Type_Array_raw(1);
     for (i=0; i<100; i++) {
@@ -39,7 +39,7 @@ NEW_TEST(Type_Dictionary_at_put_)
     int i=0;
     for (i=0; i<100; ++i) {
         Object key = (Object)new_Type_SmallInt(i);
-        Type_Dictionary_store_(dict, key, integer);
+        Type_Dictionary_quick_store(dict, key, integer);
     }
     Type_Array args  = new_Type_Array_withAll(2, (Object)integer1);
     args->values[0] = integer0; 

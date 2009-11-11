@@ -26,35 +26,38 @@ void pre_init_Type_Dictionary()
 
 /* ========================================================================= */
 
-static void Bucket_compare_key(Object inkey, Object dictkey)
+static int Bucket_quick_compare_key(Object inkey, Object dictkey)
 {
     if (HEADER(inkey) == (Object)Type_Symbol_Class) {
-        push_EXP(get_bool(inkey == dictkey));
-        return;
+        return inkey == dictkey;
     }
 
     if (HEADER(inkey) == (Object)Type_SmallInt_Class) {
         if (HEADER(dictkey) == (Object)Type_SmallInt_Class) {
-            push_EXP(get_bool(((Type_SmallInt)inkey)->value ==
-                              ((Type_SmallInt)dictkey)->value));
+            return ((Type_SmallInt)inkey)->value ==
+                   ((Type_SmallInt)dictkey)->value;
         } else {
-            push_EXP(False);
+            return 0;
         }
-        return;
     }
 
     if (HEADER(inkey) == (Object)Type_String_Class) {
         if (TAG_IS_TYPE(GETTAG(dictkey), Words)) {
-            push_EXP(get_bool(Words_compare((Type_Symbol)inkey,
-                                            (Type_Symbol)dictkey)));
+            return Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey);
         } else {
-            push_EXP(False);
+            return 0;
         }
-        return;
     }
-
-    printf("WARNING: Other types of equality not supported yet\n");
-    assert0(NULL);
+    return -1;
+}
+static void Bucket_compare_key(Object inkey, Object dictkey)
+{
+    int result = Bucket_quick_compare_key(inkey, dictkey);
+    if (result == -1) {
+        printf("WARNING: Other types of equality not supported yet\n");
+        assert0(NULL);
+    }
+    push_EXP(get_bool(result));
 }
 
 void CNT_bucket_lookup()
@@ -234,7 +237,7 @@ static void CNT_bucket_rehash()
     Type_Array bucket = (Type_Array)peek_EXP(1);
     if (idx < bucket->size) {
         // TODO do get_hash in tail-position
-        Object key           = bucket->values[idx];
+        Object key = bucket->values[idx];
         if (key != (Object)Nil) {
             poke_EXP(0, idx + 2);
             Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
@@ -279,13 +282,17 @@ static void Type_Dictionary_grow(Type_Dictionary self)
     push_EXP(self);
 }
 
-
-static void Type_Dictionary_check_grow(Type_Dictionary self)
+static int Type_Dictionary_grow_check(Type_Dictionary self)
 {
     self->size += 1;
     float amount = self->size;
     float size = self->layout->size;
-    if (amount / size > self->ratio) {
+    return amount / size > self->ratio;
+}
+
+static void Type_Dictionary_check_grow(Type_Dictionary self)
+{
+    if (Type_Dictionary_grow_check(self)) {
         Type_Dictionary_grow(self);
     }
 }
@@ -315,6 +322,65 @@ void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
         push_EXP((Object)self);
         push_CNT(Type_Dictionary_check_grow);
         Bucket_store_(bucketp, key, value);
+    }
+}
+
+static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
+{
+    int i;
+    Type_Array bucket = *bucketp;
+    for (i = 0; i < bucket->size; i=i+2) {
+        if (bucket->values[i] == (Object)Nil) {
+            bucket->values[i]   = key;
+            bucket->values[i+1] = value;
+            return 1;
+        } else if (Bucket_quick_compare_key(key, bucket->values[i])) {
+            bucket->values[i+1] = value;
+            return 0;
+        }
+    }
+    Bucket_grow(bucketp);
+    bucket = *bucketp;
+    bucket->values[i]   = key;
+    bucket->values[i+1] = value;
+    return 1;
+}
+
+static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
+{
+    if (Type_Dictionary_grow_check(self)) {
+        Type_Array old = self->layout;
+        self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+        self->size = 0;
+        int i;
+        for (i = 0; i < old->size; i++) {
+            Type_Array bucket = (Type_Array)old->values[i];
+            if (bucket != (Type_Array)Nil) {
+                int j;
+                for (j = 0; j < bucket->size; j=j+2) {
+                    Object key = bucket->values[j];
+                    if (key == (Object)Nil) { break; }
+                    Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
+                }
+            }
+        }
+    }
+}
+
+void Type_Dictionary_quick_store(Type_Dictionary self,
+                                 Object key, Object value)
+{
+    int hash = get_hash(self, key);
+    Type_Array * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Type_Array)Nil) {
+        *bucketp = new_bucket();
+        Type_Array bucket = *bucketp;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        return Type_Dictionary_quick_check_grow(self);
+    }
+    if (Bucket_quick_store(bucketp, key, value)) {
+        Type_Dictionary_quick_check_grow(self);
     }
 }
 

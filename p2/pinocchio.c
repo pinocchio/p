@@ -113,22 +113,6 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
     return result;
 }
 
-void Type_Dictionary_store_(Type_Dictionary self, Object key, Object value)
-{
-    int hash = get_hash(self, key);
-
-    push_CNT(exit_eval);
-    if (!setjmp(Eval_Exit)) {
-        IN_EVAL = 1;
-        Type_Dictionary_direct_store(self, hash, key, value);
-        for (;;) {
-            peek_CNT()();
-        }
-    }
-    zap_CNT();
-    IN_EVAL = 0;
-}
-
 Object Eval(Object code)
 {
     if (IN_EVAL) {

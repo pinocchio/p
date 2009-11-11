@@ -20,7 +20,7 @@ Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
     if (cachedSymbol != NULL) {
         return (Type_Symbol)cachedSymbol;
     }
-    Type_Dictionary_store_(Symbol_Table, (Object)result, (Object)result);
+    Type_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
     return result;
 }
 
