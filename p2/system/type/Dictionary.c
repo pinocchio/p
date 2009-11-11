@@ -334,9 +334,14 @@ static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
             bucket->values[i]   = key;
             bucket->values[i+1] = value;
             return 1;
-        } else if (Bucket_quick_compare_key(key, bucket->values[i])) {
-            bucket->values[i+1] = value;
-            return 0;
+        } else {
+            switch (Bucket_quick_compare_key(key, bucket->values[i]))
+            {
+                case -1: assert1(NULL, "Invalid key for quickstore!\n");
+                case 1:
+                    bucket->values[i+1] = value;
+                    return 0;
+            }
         }
     }
     Bucket_grow(bucketp);
@@ -384,6 +389,25 @@ void Type_Dictionary_quick_store(Type_Dictionary self,
     }
 }
 
+Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key)
+{
+    int hash = get_hash(self, key);
+    Type_Array * bucketp = get_bucketp(self, hash);
+    Type_Array bucket = *bucketp;
+    if (bucket == (Type_Array)Nil) {
+        return NULL;
+    }
+    int i;
+    for (i = 0; i < bucket->size; i=i+2) {
+        if (bucket->values[i] == (Object)Nil) {
+            return NULL;
+        }
+        if (Bucket_quick_compare_key(key, bucket->values[i])) {
+            return bucket->values[i+1];
+        }
+    }
+    return NULL;
+}
 /* ========================================================================= */
 
 CNT(fix_dictionary_result)

@@ -25,7 +25,7 @@ Type_Dictionary new_Type_Dictionary();
 
 /* ========================================================================= */
 
-extern Object Type_Dictionary_lookup(Type_Dictionary self, Object key);
+extern Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key);
 extern void Type_Dictionary_quick_store(Type_Dictionary self,
                                         Object key, Object value);
 

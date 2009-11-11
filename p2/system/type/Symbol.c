@@ -16,10 +16,11 @@ Type_Dictionary Symbol_Table;
 Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
 {
     Type_Symbol result  = new_Type_String(input);
-    Object cachedSymbol = Type_Dictionary_lookup(Symbol_Table, (Object)result);
+    Object cachedSymbol = Type_Dictionary_quick_lookup(Symbol_Table, (Object)result);
     if (cachedSymbol != NULL) {
         return (Type_Symbol)cachedSymbol;
     }
+    HEADER(result) = (Object)Type_Symbol_Class;
     Type_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
     return result;
 }

@@ -16,7 +16,7 @@ NEW_TEST(Type_Dictionary_at_)
         Object key = (Object)new_Type_SmallInt(i);
         args->values[0] = key;
         assert0(Eval_Send((Object)dict, SMB_at_, args) == integer);
-        assert0(Type_Dictionary_lookup(dict, key) == integer);
+        assert0(Type_Dictionary_quick_lookup(dict, key) == integer);
         ASSERT_EMPTY_STACK;
     }
     args->values[0] = (Object)new_Type_SmallInt(4); 
@@ -46,14 +46,14 @@ NEW_TEST(Type_Dictionary_at_put_)
     
     result = Eval_Send((Object)dict, SMB_at_put_, args);
     assert0(result == integer1);
-    assert0(Type_Dictionary_lookup(dict, integer0) == integer1);
+    assert0(Type_Dictionary_quick_lookup(dict, integer0) == integer1);
     ASSERT_EMPTY_STACK;
     
     args->values[0] = integer2; 
     args->values[1] = integer1;
     result = Eval_Send((Object)dict, SMB_at_put_, args);
     assert0(result == integer1);
-    assert0(Type_Dictionary_lookup(dict, integer2) == integer1);
+    assert0(Type_Dictionary_quick_lookup(dict, integer2) == integer1);
     // check that all the other places aren't changed
     args  = new_Type_Array_with(1, (Object)integer1);
     for (i=0; i<100; i++) {
@@ -61,7 +61,7 @@ NEW_TEST(Type_Dictionary_at_put_)
         Object key = (Object)new_Type_SmallInt(i);
         args->values[0] = key;
         assert0(Eval_Send((Object)dict, SMB_at_, args) == integer);
-        assert0(Type_Dictionary_lookup(dict, key) == integer);
+        assert0(Type_Dictionary_quick_lookup(dict, key) == integer);
         ASSERT_EMPTY_STACK;
     }
 }
