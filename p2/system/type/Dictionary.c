@@ -29,21 +29,14 @@ void pre_init_Type_Dictionary()
 static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     if (HEADER(inkey) == (Object)Type_Symbol_Class) {
-        if (inkey == dictkey) {
-            push_EXP(True);
-        } else {
-            push_EXP(False);
-        }
+        push_EXP(get_bool(inkey == dictkey));
         return;
     }
 
     if (HEADER(inkey) == (Object)Type_SmallInt_Class) {
         if (HEADER(dictkey) == (Object)Type_SmallInt_Class) {
-            if (((Type_SmallInt)inkey)->value == ((Type_SmallInt)dictkey)->value) {
-                push_EXP(True);
-            } else {
-                push_EXP(False);
-            }
+            push_EXP(get_bool(((Type_SmallInt)inkey)->value ==
+                              ((Type_SmallInt)dictkey)->value));
         } else {
             push_EXP(False);
         }
@@ -52,11 +45,8 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 
     if (HEADER(inkey) == (Object)Type_String_Class) {
         if (TAG_IS_TYPE(GETTAG(dictkey), Words)) {
-            if (Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey)) {
-                push_EXP(True);
-            } else {
-                push_EXP(False);
-            }
+            push_EXP(get_bool(Words_compare((Type_Symbol)inkey,
+                                            (Type_Symbol)dictkey)));
         } else {
             push_EXP(False);
         }

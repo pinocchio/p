@@ -110,7 +110,6 @@ Object Type_Dictionary_lookup(Type_Dictionary self, Object key)
     zap_CNT();
     Object result = pop_EXP();
     IN_EVAL = 0;
-    ASSERT_EMPTY_STACK;
     return result;
 }
 
