@@ -26,6 +26,52 @@ void pre_init_Type_Dictionary()
 
 /* ========================================================================= */
 
+int get_hash(Type_Dictionary self, Object key)
+{
+    int hash;
+    Object tag = GETTAG(key);
+    if (TAG_IS_TYPE(tag, Words)) {
+        hash = Type_Symbol_hash((Type_Symbol)key)->value;
+    } else if (TAG_IS_TYPE(tag, Int)) { 
+        hash = ((Type_SmallInt)key)->value;
+    } else {
+        printf("Got key: %p\n", key);
+        print_Class(key);
+        assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
+    }
+    hash %= self->layout->size;
+    return hash;
+}
+
+/* ========================================================================= *
+ * Bucket functions                                                          *
+ * ========================================================================= */
+
+static Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
+{
+    return (Type_Array *)&dictionary->layout->values[hash];
+}
+
+static Type_Array new_bucket()
+{
+    return new_Type_Array_withAll(DICTIONARY_BUCKET_SIZE * 2, Nil);
+}
+
+static void Bucket_grow(Type_Array * bucketp)
+{
+    Type_Array old_bucket = *bucketp;
+    Type_Array new_bucket = new_Type_Array_raw(old_bucket->size << 1);
+    int i;
+    for(i=0; i < old_bucket->size; i++) {
+        new_bucket->values[i] = old_bucket->values[i];
+    }
+    for(; i < new_bucket->size; i++) {
+        new_bucket->values[i] = (Object)Nil;
+    }
+
+    *bucketp = new_bucket;
+}
+
 static int Bucket_quick_compare_key(Object inkey, Object dictkey)
 {
     if (HEADER(inkey) == (Object)Type_Symbol_Class) {
@@ -50,6 +96,108 @@ static int Bucket_quick_compare_key(Object inkey, Object dictkey)
     }
     return -1;
 }
+
+static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
+{
+    int i;
+    Type_Array bucket = *bucketp;
+    for (i = 0; i < bucket->size; i=i+2) {
+        if (bucket->values[i] == (Object)Nil) {
+            bucket->values[i]   = key;
+            bucket->values[i+1] = value;
+            return 1;
+        } else {
+            switch (Bucket_quick_compare_key(key, bucket->values[i]))
+            {
+                case -1: assert1(NULL, "Invalid key for quickstore!\n");
+                case 1:
+                    bucket->values[i+1] = value;
+                    return 0;
+            }
+        }
+    }
+    Bucket_grow(bucketp);
+    bucket = *bucketp;
+    bucket->values[i]   = key;
+    bucket->values[i+1] = value;
+    return 1;
+}
+
+/* ========================================================================= *
+ * Quick dictionary functions. Only for bootstrapping.                       *
+ * ========================================================================= */
+
+static int Type_Dictionary_grow_check(Type_Dictionary self)
+{
+    self->size += 1;
+    float amount = self->size;
+    float size = self->layout->size;
+    return amount / size > self->ratio;
+}
+
+static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
+{
+    if (Type_Dictionary_grow_check(self)) {
+        Type_Array old = self->layout;
+        self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+        self->size = 0;
+        int i;
+        for (i = 0; i < old->size; i++) {
+            Type_Array bucket = (Type_Array)old->values[i];
+            if (bucket != (Type_Array)Nil) {
+                int j;
+                for (j = 0; j < bucket->size; j=j+2) {
+                    Object key = bucket->values[j];
+                    if (key == (Object)Nil) { break; }
+                    Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
+                }
+            }
+        }
+    }
+}
+
+void Type_Dictionary_quick_store(Type_Dictionary self,
+                                 Object key, Object value)
+{
+    int hash = get_hash(self, key);
+    Type_Array * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Type_Array)Nil) {
+        *bucketp = new_bucket();
+        Type_Array bucket = *bucketp;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        return Type_Dictionary_quick_check_grow(self);
+    }
+    if (Bucket_quick_store(bucketp, key, value)) {
+        Type_Dictionary_quick_check_grow(self);
+    }
+}
+
+Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key)
+{
+    int hash = get_hash(self, key);
+    Type_Array * bucketp = get_bucketp(self, hash);
+    Type_Array bucket = *bucketp;
+    if (bucket == (Type_Array)Nil) {
+        return NULL;
+    }
+    int i;
+    for (i = 0; i < bucket->size; i=i+2) {
+        if (bucket->values[i] == (Object)Nil) {
+            return NULL;
+        }
+        switch (Bucket_quick_compare_key(key, bucket->values[i]))
+        {
+            case -1: assert1(NULL, "Invalid key for quickstore!\n");
+            case 1:
+                return bucket->values[i+1];
+        }
+    }
+    return NULL;
+}
+
+/* ========================================================================= */
+
 static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
@@ -92,21 +240,6 @@ void CNT_bucket_lookup()
     Object key = peek_EXP(2);
     poke_EXP(1, idx);
     Bucket_compare_key(key, bucket->values[idx]);
-}
-
-void Bucket_grow(Type_Array * bucketp)
-{
-    Type_Array old_bucket = *bucketp;
-    Type_Array new_bucket = new_Type_Array_raw(old_bucket->size << 1);
-    int i;
-    for(i=0; i < old_bucket->size; i++) {
-        new_bucket->values[i] = old_bucket->values[i];
-    }
-    for(; i < new_bucket->size; i++) {
-        new_bucket->values[i] = (Object)Nil;
-    }
-
-    *bucketp = new_bucket;
 }
 
 static void bucket_do_store(Type_Array bucket, uns_int idx, uns_int addition)
@@ -172,35 +305,6 @@ void Bucket_store_(Type_Array * bucketp, Object key, Object value)
     Bucket_compare_key(key, bucket->values[0]);
 }
 
-Type_Array new_bucket()
-{
-    return new_Type_Array_withAll(DICTIONARY_BUCKET_SIZE * 2, Nil);
-}
-
-int get_hash(Type_Dictionary self, Object key)
-{
-    int hash;
-    Object tag = GETTAG(key);
-    if (TAG_IS_TYPE(tag, Words)) {
-        hash = Type_Symbol_hash((Type_Symbol)key)->value;
-    } else if (TAG_IS_TYPE(tag, Int)) { 
-        hash = ((Type_SmallInt)key)->value;
-    } else {
-        printf("Got key: %p\n", key);
-        print_Class(key);
-        assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
-    }
-    hash %= self->layout->size;
-    return hash;
-}
-
-/* ========================================================================= */
-
-static Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
-{
-    return (Type_Array *)&dictionary->layout->values[hash];
-}
-
 static void Bucket_lookup(Type_Array bucket, Object key)
 {
     if (bucket->values[0] == (Object)Nil) {
@@ -213,22 +317,6 @@ static void Bucket_lookup(Type_Array bucket, Object key)
     push_EXP(bucket);
     push_CNT(bucket_lookup);
     Bucket_compare_key(key, bucket->values[0]);
-}
-
-void Type_Dictionary_direct_lookup(Type_Dictionary self, int hash, Object key)
-{
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) {
-        push_EXP(NULL);
-        return;
-    }
-    Bucket_lookup(*bucketp, key);
-}
-
-void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
-{
-    int hash = get_hash(self, key);
-    Type_Dictionary_direct_lookup(self, hash, key);
 }
 
 static void CNT_bucket_rehash()
@@ -247,6 +335,19 @@ static void CNT_bucket_rehash()
     }
     zapn_EXP(2);
     zap_CNT();
+}
+
+/* ========================================================================= */
+
+void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
+{
+    int hash = get_hash(self, key);
+    Type_Array * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Type_Array)Nil) {
+        push_EXP(NULL);
+        return;
+    }
+    Bucket_lookup(*bucketp, key);
 }
 
 static CNT(dict_grow_end)
@@ -280,14 +381,6 @@ static void Type_Dictionary_grow(Type_Dictionary self)
     push_EXP(old);
     push_EXP(old->size - 1);
     push_EXP(self);
-}
-
-static int Type_Dictionary_grow_check(Type_Dictionary self)
-{
-    self->size += 1;
-    float amount = self->size;
-    float size = self->layout->size;
-    return amount / size > self->ratio;
 }
 
 static void Type_Dictionary_check_grow(Type_Dictionary self)
@@ -325,92 +418,6 @@ void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
     }
 }
 
-static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
-{
-    int i;
-    Type_Array bucket = *bucketp;
-    for (i = 0; i < bucket->size; i=i+2) {
-        if (bucket->values[i] == (Object)Nil) {
-            bucket->values[i]   = key;
-            bucket->values[i+1] = value;
-            return 1;
-        } else {
-            switch (Bucket_quick_compare_key(key, bucket->values[i]))
-            {
-                case -1: assert1(NULL, "Invalid key for quickstore!\n");
-                case 1:
-                    bucket->values[i+1] = value;
-                    return 0;
-            }
-        }
-    }
-    Bucket_grow(bucketp);
-    bucket = *bucketp;
-    bucket->values[i]   = key;
-    bucket->values[i+1] = value;
-    return 1;
-}
-
-static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
-{
-    if (Type_Dictionary_grow_check(self)) {
-        Type_Array old = self->layout;
-        self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
-        self->size = 0;
-        int i;
-        for (i = 0; i < old->size; i++) {
-            Type_Array bucket = (Type_Array)old->values[i];
-            if (bucket != (Type_Array)Nil) {
-                int j;
-                for (j = 0; j < bucket->size; j=j+2) {
-                    Object key = bucket->values[j];
-                    if (key == (Object)Nil) { break; }
-                    Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
-                }
-            }
-        }
-    }
-}
-
-void Type_Dictionary_quick_store(Type_Dictionary self,
-                                 Object key, Object value)
-{
-    int hash = get_hash(self, key);
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) {
-        *bucketp = new_bucket();
-        Type_Array bucket = *bucketp;
-        bucket->values[0] = key;
-        bucket->values[1] = value;
-        return Type_Dictionary_quick_check_grow(self);
-    }
-    if (Bucket_quick_store(bucketp, key, value)) {
-        Type_Dictionary_quick_check_grow(self);
-    }
-}
-
-Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key)
-{
-    int hash = get_hash(self, key);
-    Type_Array * bucketp = get_bucketp(self, hash);
-    Type_Array bucket = *bucketp;
-    if (bucket == (Type_Array)Nil) {
-        return NULL;
-    }
-    int i;
-    for (i = 0; i < bucket->size; i=i+2) {
-        if (bucket->values[i] == (Object)Nil) {
-            return NULL;
-        }
-        switch (Bucket_quick_compare_key(key, bucket->values[i]))
-        {
-            case -1: assert1(NULL, "Invalid key for quickstore!\n");
-            case 1:
-                return bucket->values[i+1];
-        }
-    }
-    return NULL;
-}
 /* ========================================================================= */
 
 CNT(fix_dictionary_result)
