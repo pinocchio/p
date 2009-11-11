@@ -402,8 +402,11 @@ Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key)
         if (bucket->values[i] == (Object)Nil) {
             return NULL;
         }
-        if (Bucket_quick_compare_key(key, bucket->values[i])) {
-            return bucket->values[i+1];
+        switch (Bucket_quick_compare_key(key, bucket->values[i]))
+        {
+            case -1: assert1(NULL, "Invalid key for quickstore!\n");
+            case 1:
+                return bucket->values[i+1];
         }
     }
     return NULL;
