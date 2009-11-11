@@ -202,7 +202,7 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
     if (result == -1) {
-        printf("WARNING: Other types of equality not supported yet\n");
+        printf("ERROR: Other types of equality not supported yet\n");
         assert0(NULL);
     }
     push_EXP(get_bool(result));

@@ -89,6 +89,14 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
 
 void Class_lookup(Type_Class class, Object msg);
 
+void does_not_understand(Object self, Object class, Object msg, uns_int argc)
+{
+    // TODO send DNU;
+    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
+           ((Type_Class)HEADER(self))->name->value,
+           ((Type_Symbol)msg)->value));
+}
+
 void CNT_Class_lookup_check_result()
 {
     Object method = peek_EXP(0);
@@ -109,14 +117,6 @@ void CNT_Class_lookup_check_result()
     cache->type     = dispatch_type;
     cache->method   = method;
     Method_invoke(method, self, (Object)class, argc);
-}
-
-void does_not_understand(Object self, Object class, Object msg, uns_int argc)
-{
-    // TODO send DNU;
-    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
-           ((Type_Class)HEADER(self))->name->value,
-           ((Type_Symbol)msg)->value));
 }
 
 void Class_lookup(Type_Class class, Object msg)
