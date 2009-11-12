@@ -68,6 +68,7 @@ void AST_Super_eval(AST_Super super)
     push_EXP((Object)(uns_int)super->arguments->size);
     // todo
     push_EXP((Object)size);
+    push_CNT(store_argument);
     eval_store(size);
 }
 

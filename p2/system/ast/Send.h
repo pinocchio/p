@@ -24,6 +24,7 @@ extern AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments);
 
 extern void AST_Send_eval(AST_Send self);
 extern void eval_store(uns_int idx);
+extern void CNT_store_argument();
 
 /* ========================================================================= */
 
