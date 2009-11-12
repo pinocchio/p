@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <pinocchio.h>
 
 /* ========================================================================= */
@@ -157,6 +158,30 @@ static void Class_lookup(Type_Class class, Object msg)
     Type_Dictionary_lookup_push(mdict, msg);
 }
 
+static void Class_direct_dispatch(Object self, Object class,
+                                  Object msg, uns_int argc)
+{
+    push_EXP(class);
+    push_EXP(msg);
+    push_EXP(argc);
+    push_EXP(self);
+    push_EXP(class);
+    return Class_lookup((Type_Class)class, msg);
+}
+
+void Type_Class_direct_dispatch(Object self, Object class, Object msg,
+                                uns_int argc, ...)
+{
+    va_list args;
+    va_start(args, argc);
+    int index;
+    for (index = 0; index < argc; index++) {
+        push_EXP(va_arg(args, Object));
+    }
+    va_end(args);
+    Class_direct_dispatch(self, class, msg, argc);
+}
+
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
     AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
@@ -183,13 +208,8 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     assert_class(class);
     
     if (class != Nil) {
-        push_EXP(class);
-        push_EXP(msg);
-        push_EXP(argc);
-        push_EXP(self);
-        push_EXP(class);
         push_CNT(Class_lookup_cache_invoke);
-        return Class_lookup((Type_Class)class, msg);
+        return Class_direct_dispatch(self, class, msg, argc);
     }
     
     does_not_understand(self, class, msg, argc);
