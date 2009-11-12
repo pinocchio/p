@@ -87,8 +87,6 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     }
 }
 
-void Class_lookup(Type_Class class, Object msg);
-
 void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
     // TODO send DNU;
@@ -97,7 +95,41 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
            ((Type_Symbol)msg)->value));
 }
 
-void CNT_Class_lookup_check_result()
+static void Class_lookup(Type_Class class, Object msg);
+static void Class_next_lookup(Type_Class class)
+{
+    zap_EXP();
+    poke_EXP(0, class->super);
+    assert_class(class->super);
+    return Class_lookup((Type_Class)class->super, peek_EXP(3));
+}
+
+static void Class_invoke_do(Type_Class class, Object method, uns_int argc)
+{
+    Object self = peek_EXP(2);
+    zapn_EXP(6);
+    zap_CNT();
+    Method_invoke(method, self, (Object)class, argc);
+}
+
+static void CNT_Class_lookup_cache_invoke()
+{
+    Object method = peek_EXP(0);
+    Type_Class class = (Type_Class)peek_EXP(1);
+    if (method == NULL) {
+        return Class_next_lookup(class);
+    }
+    uns_int argc = (uns_int)peek_EXP(3);
+    AST_Send send = (AST_Send)peek_EXP(argc + 7);
+    Object dispatch_type = peek_EXP(5);
+    InlineCache * cache = &send->cache;
+    cache->type     = dispatch_type;
+    cache->method   = method;
+
+    Class_invoke_do(class, method, argc);
+}
+
+static void CNT_Class_lookup_invoke()
 {
     Object method = peek_EXP(0);
     Type_Class class = (Type_Class)peek_EXP(1);
@@ -107,19 +139,11 @@ void CNT_Class_lookup_check_result()
         assert_class(class->super);
         return Class_lookup((Type_Class)class->super, peek_EXP(3));
     }
-    Object self = peek_EXP(2);
     uns_int argc = (uns_int)peek_EXP(3);
-    Object dispatch_type = peek_EXP(5);
-    zapn_EXP(6);
-    zap_CNT();
-    AST_Send send = (AST_Send)peek_EXP(argc + 1);
-    InlineCache * cache = &send->cache;
-    cache->type     = dispatch_type;
-    cache->method   = method;
-    Method_invoke(method, self, (Object)class, argc);
+    Class_invoke_do(class, method, argc);
 }
 
-void Class_lookup(Type_Class class, Object msg)
+static void Class_lookup(Type_Class class, Object msg)
 {
     // TODO pass along the hash value
     if (class == (Type_Class)Nil) {
@@ -164,7 +188,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
         push_EXP(argc);
         push_EXP(self);
         push_EXP(class);
-        push_CNT(Class_lookup_check_result);
+        push_CNT(Class_lookup_cache_invoke);
         return Class_lookup((Type_Class)class, msg);
     }
     
