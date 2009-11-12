@@ -179,6 +179,7 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
         push_EXP(va_arg(args, Object));
     }
     va_end(args);
+    push_CNT(Class_lookup_invoke);
     Class_direct_dispatch(self, class, msg, argc);
 }
 
@@ -233,7 +234,6 @@ void print_Class(Object obj)
         return;
     }
     printf("Class: %ls\n", class->name->value);
-
 }
 
 /* ========================================================================= */
