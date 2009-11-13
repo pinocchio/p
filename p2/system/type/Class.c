@@ -135,10 +135,7 @@ static void CNT_Class_lookup_invoke()
     Object method = peek_EXP(0);
     Type_Class class = (Type_Class)peek_EXP(1);
     if (method == NULL) {
-        zap_EXP();
-        poke_EXP(0, class->super);
-        assert_class(class->super);
-        return Class_lookup((Type_Class)class->super, peek_EXP(3));
+        return Class_next_lookup(class);
     }
     uns_int argc = (uns_int)peek_EXP(3);
     Class_invoke_do(class, method, argc);

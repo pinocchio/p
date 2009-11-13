@@ -63,7 +63,7 @@ void pre_init_IO_File()
 /* ========================================================================= */
 
 char* unicode_to_ascii(const wchar_t* str) {
-    int len        = wcslen(str);
+    int len = wcslen(str);
     char* charname = (char*)PALLOC(sizeof(char[len]));
     assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
     return charname;
@@ -122,7 +122,7 @@ void IO_File_readCharacter(IO_File file, wchar_t* result) {
 
 int IO_File_atEnd(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
-    int c      = fgetc(file->file);
+    int c = fgetc(file->file);
     int result = c == EOF;
     if (!result) {
         ungetc(c, file->file);
@@ -136,7 +136,7 @@ NATIVE0(IO_File_atEnd)
 
 Type_String IO_File_readAll(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
-    int size           = IO_File_size(file);
+    int size = IO_File_size(file);
     Type_String result = new_Type_String_sized(size);
     int idx;
     for (idx = 0; idx < size; idx++) {
@@ -155,15 +155,15 @@ Type_Character IO_File_read(IO_File file) {
     IO_File_readCharacter(file, &chr);
     return new_Type_Character(chr);
 }
-             
+
 NATIVE0(IO_File_read)
    RETURN_FROM_NATIVE(IO_File_read((IO_File)self));
 }
-                      
+
 void IO_File_write_(IO_File file, Type_Character chr) {
     assert1(file != NULL, "Invalid Argument");
     assert1(chr != NULL, "Invalid Argument");
-    putwc(chr->value, file->file);
+    fputwc(chr->value, file->file);
 }
 
 NATIVE1(IO_File_write_)
@@ -179,20 +179,16 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
     int i;
     for (i =0; i<string->size; i++) { 
-        putwc(string->value[i], file->file);
+        fputwc(string->value[i], file->file);
     }
 }
-            
+
 NATIVE1(IO_File_writeAll_)
     Type_String str = (Type_String)NATIVE_ARG(0);
     IO_File_writeAll_((IO_File)self, str);
     RETURN_FROM_NATIVE(self);
 }
 /* ========================================================================= */
-
-void create_standard_files()
-{
-}
 
 void post_init_IO_File()
 {
@@ -202,5 +198,4 @@ void post_init_IO_File()
     store_native_method(IO_File_Class, SMB_writeAll_, NM_IO_File_writeAll_);
     store_native_method(IO_File_Class, SMB_read,      NM_IO_File_read);
     store_native_method(IO_File_Class, SMB_readAll,   NM_IO_File_readAll);
-    create_standard_files();
 }
