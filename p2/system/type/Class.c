@@ -172,6 +172,8 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
     va_list args;
     va_start(args, argc);
     int index;
+    push_EXP(Nil); // Send object
+    push_EXP(self);
     for (index = 0; index < argc; index++) {
         push_EXP(va_arg(args, Object));
     }

@@ -73,39 +73,31 @@ void init_Exception_Handling()
 
 /* ========================================================================= */
 
-Object Eval_SendConst(Object self, Type_Symbol symbol, Type_Array args) 
+Object finish_eval()
 {
-    return (Object)Eval((Object)new_AST_Send((Object)self, (Object)symbol, args));
-}
-
-Object Eval_Send(Object self, Type_Symbol symbol, Type_Array args) 
-{
-    AST_Constant self_const = new_AST_Constant(self);
-    int i;
-    for (i=0; i<args->size; i++) {
-        Object c = (Object)new_AST_Constant(args->values[i]);
-        args->values[i] = c;
+    while (!empty_CNT()) {
+        peek_CNT()();
     }
-    return Eval_SendConst((Object)self_const, symbol, args);
+    return pop_EXP();
 }
 
 Object Eval_Send0(Object self, Type_Symbol symbol)
 {
-    return Eval_Send(self, symbol, empty_Type_Array);
+    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
+    return finish_eval();
 }
 
 Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
 {
-    return Eval_Send(self, symbol, new_Type_Array_with(1, arg));
+    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
+    return finish_eval();
 }
 
 Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 {
-    Type_Array args = new_Type_Array_withAll(2, arg1);
-    args->values[1] = arg2;
-    return Eval_Send(self, symbol, args);
+    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
+    return finish_eval();
 }
-
 
 /* ========================================================================= */
 

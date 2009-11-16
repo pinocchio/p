@@ -18,6 +18,7 @@ NEW_TEST(Type_Character_new_Character_With_int)
 NEW_TEST(Type_Character_asType_SmallInt)
     CHARACTER_TEST_SETUP;
     result = Eval_Send0((Object)chr, SMB_asSmallInt);
+    print_Class(result);
     ASSERT_TYPE(result, Type_SmallInt_Class);
     //TODO
     ASSERT_EMPTY_STACK; 
