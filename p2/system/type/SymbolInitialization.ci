@@ -18,6 +18,7 @@ SMB_class                 = new_Type_Symbol_cached(L"class");
 SMB_concat_               = new_Type_Symbol_cached(L"concat:");
 SMB_delete_               = new_Type_Symbol_cached(L"delete:");
 SMB_divide_               = new_Type_Symbol_cached(L"/");
+SMB_doesNotUnderstand_    = new_Type_Symbol_cached(L"doesNotUnderstand:");
 SMB_equals_               = new_Type_Symbol_cached(L"equals:");
 SMB_escape_               = new_Type_Symbol_cached(L"escape:");
 SMB_eval                  = new_Type_Symbol_cached(L"eval");

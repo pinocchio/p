@@ -37,7 +37,8 @@ int get_hash(Type_Dictionary self, Object key)
     } else {
         printf("Got key: %p\n", key);
         print_Class(key);
-        assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
+        assert1(NULL, "Dictionary currently only supports"
+                      " SmallInt and Symbol as key\n");
     }
     hash %= self->layout->size;
     return hash;
@@ -62,7 +63,7 @@ static void Bucket_grow(Type_Array * bucketp)
     Type_Array old_bucket = *bucketp;
     Type_Array new_bucket = new_Type_Array_raw(old_bucket->size << 1);
     int i;
-    for(i=0; i < old_bucket->size; i++) {
+    for(i = 0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
     }
     for(; i < new_bucket->size; i++) {
@@ -101,7 +102,7 @@ static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
 {
     int i;
     Type_Array bucket = *bucketp;
-    for (i = 0; i < bucket->size; i=i+2) {
+    for (i = 0; i < bucket->size; i = i+2) {
         if (bucket->values[i] == (Object)Nil) {
             bucket->values[i]   = key;
             bucket->values[i+1] = value;
@@ -202,8 +203,8 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
     if (result == -1) {
-        printf("ERROR: Other types of equality not supported yet\n");
-        assert0(NULL);
+        return Type_Class_direct_dispatch(inkey, HEADER(inkey),
+                                          (Object)SMB_equals_, 1, dictkey);
     }
     push_EXP(get_bool(result));
 }
