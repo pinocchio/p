@@ -7,7 +7,7 @@
 
 NEW_TEST(Runtime_BlockClosure_evaluation)
     Type_Array body         = empty_Type_Array;
-    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
+    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                   (Runtime_BlockContext)Nil);
     Object closure_const    = (Object)new_AST_Constant((Object)closure);
     Type_SmallInt integer   = new_Type_SmallInt(120);
@@ -20,7 +20,7 @@ NEW_TEST(Runtime_BlockClosure_evaluation)
     
     // with one body element ---------------------------------------------------
     closure = new_Runtime_BlockClosure(
-        new_AST_Block(1, 0, 1, new_Type_Array_with(1, integer_const)),
+        new_AST_Block(1, 0, new_Type_Array_with(1, integer_const)),
         (Runtime_BlockContext)Nil);
     result       = Eval_Send1((Object)closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
@@ -39,7 +39,7 @@ NEW_TEST(Runtime_BlockClosure_evaluation)
 NEW_TEST(Runtime_BlockClosure_apply)
     // without any body element
     Type_Array body         = empty_Type_Array;
-    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
+    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                   (Runtime_BlockContext)Nil);
     Object result           = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == Nil);
@@ -49,7 +49,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     Type_SmallInt integer5      = new_Type_SmallInt(5);
     AST_Constant integer5_const = new_AST_Constant((Object)integer5);
     body                        = new_Type_Array_with(1, (Object)integer5_const);
-    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
+    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                       (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer5);
@@ -60,7 +60,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
     body                        = new_Type_Array_withAll(2, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
-    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
+    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                       (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer6);
@@ -72,7 +72,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     body                        = new_Type_Array_withAll(3, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
     body->values[2]             = (Object)integer7_const;
-    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
+    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, body),
                                                       (Runtime_BlockContext)Nil);
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer7);
@@ -81,7 +81,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
 
 
 NEW_TEST(Runtime_BlockClosure_new_Runtime_BlockClosure)
-    AST_Block code                = new_AST_Block(0, 0, 1, empty_Type_Array);
+    AST_Block code                = new_AST_Block(0, 0, empty_Type_Array);
     Runtime_MethodContext context = new_Empty_Runtime_MethodContext();
     Runtime_BlockClosure closure       = new_Runtime_BlockClosure(code, (Runtime_BlockContext)context);
     assert0(closure->code == code);

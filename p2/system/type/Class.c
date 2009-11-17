@@ -57,6 +57,12 @@ void inter_init_Type_Class()
 }
 /* ========================================================================= */
 
+void assert_class(Object class)
+{
+    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
+}
+
 CNT(Class_super)
     Object class = peek_EXP(0);
     assert_class(class);

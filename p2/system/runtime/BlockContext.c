@@ -17,23 +17,13 @@ Type_Array context_locals(Runtime_BlockContext context)
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
-    Runtime_BlockContext parent = current_env();
-    uns_int scope_id        = context_locals(parent)->size;
-    uns_int context_size    = scope_id + (size == 0 ? 0 : 1);
-    NEW_CONTEXT(Block, context_size);
+    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
     result->pc              = 0;
-    result->parent          = parent;
-    Type_Array locals       = context_locals(result);
-
-    int i;
-    for (i = 0; i < scope_id; i++) {
-        locals->values[i] = context_locals(parent)->values[i];
-    }
-    if (size > 0) {
-        locals->values[scope_id] = (Object)new_Type_Array_withAll(size, Nil);
-    }
+    result->parent          = current_env();
+    result->scope_id        = result->parent->scope_id + 1;
+    context_locals(result)->size = size;
     
     return result;
 }
@@ -60,30 +50,45 @@ void pre_init_Runtime_BlockContext()
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
-    Type_Array scopes = context_locals(self);
-    assert1(scope_id < scopes->size, "Invalid scope identifier");
-    Type_Array locals = (Type_Array)scopes->values[scope_id];
-
-    assert(local_id < locals->size,
+    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
+        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->closure->context;
+        } else {
+            /* TODO Schedule at:in: message send. */
+            assert1(NULL, "TODO Schedule at:in: message send");
+            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
+            return NULL;
+        }
+    }
+    /* TODO jump to error handler. */
+    assert1(scope_id == self->scope_id, "TODO jump to error handler");
+    assert(local_id < context_locals(self)->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
                  local_id, context_locals(self)->size));
     
-    return locals->values[local_id];
+    return context_locals(self)->values[local_id];
 }
 
 void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
-
-    Type_Array scopes = context_locals(self);
-    assert1(scope_id < scopes->size, "Invalid scope identifier");
-    Type_Array locals = (Type_Array)scopes->values[scope_id];
-
-    assert(local_id < locals->size,
+    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
+        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->closure->context;
+        } else {
+            /* TODO Schedule at:in: message send. */
+            assert1(NULL, "TODO Schedule at:in: message send");
+            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
+            return;
+        }
+    }
+    /* TODO jump to error handler. */
+    assert1(scope_id == scope_id, "TODO jump to error handler");
+    assert(local_id < context_locals(self)->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
-                 local_id, context_locals(self)->size));
+                  local_id, context_locals(self)->size));
     
-    locals->values[local_id] = value;
+    context_locals(self)->values[local_id] = value;
 }
 
 /* ========================================================================= */
