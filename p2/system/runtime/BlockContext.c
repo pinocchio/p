@@ -17,13 +17,17 @@ Type_Array context_locals(Runtime_BlockContext context)
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
-    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
+    Runtime_BlockContext parent = current_env();
+    uns_int context_size    = context_locals(parent)->size + 1;
+    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[context_size]);
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
     result->pc              = 0;
-    result->parent          = current_env();
-    result->scope_id        = result->parent->scope_id + 1;
-    context_locals(result)->size = size;
+    result->parent          = parent;
+    Type_Array locals       = context_locals(result);
+    locals->size            = context_size;
+    // TODO copy over the other scopes
+    locals->values[context_size - 1] = (Object)new_Type_Array_withAll(size, Nil);
     
     return result;
 }
@@ -50,10 +54,13 @@ void pre_init_Runtime_BlockContext()
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
-    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
-        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
-            self = (Runtime_BlockContext)self->closure->context;
+    while (scope_id != context_locals(self)->size-1 && (Object)self->closure->context != Nil) {
+        Runtime_BlockContext next_context = self->closure->context;
+        Object next_class = HEADER(next_context);
+        if (next_class == (Object)Runtime_BlockContext_Class) {
+            self = next_context;
         } else {
+            print_Class((Object)next_context);
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
             //Object args[2] = { (Object)new_Type_SmallInt(index), key };
@@ -61,20 +68,25 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
         }
     }
     /* TODO jump to error handler. */
-    assert1(scope_id == self->scope_id, "TODO jump to error handler");
-    assert(local_id < context_locals(self)->size,
+    assert1(scope_id == context_locals(self)->size-1, "TODO jump to error handler");
+
+    Type_Array locals = (Type_Array)context_locals(self)->values[scope_id];
+
+    assert(local_id < locals->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
                  local_id, context_locals(self)->size));
     
-    return context_locals(self)->values[local_id];
+    return locals->values[local_id];
 }
 
 void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
-    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
-        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
-            self = (Runtime_BlockContext)self->closure->context;
+    while (scope_id != context_locals(self)->size - 1 && (Object)self->closure->context != Nil) {
+        Runtime_BlockContext next_context = self->closure->context;
+        Object next_class = HEADER(next_context);
+        if (next_class == (Object)Runtime_BlockContext_Class) {
+            self = next_context;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
@@ -82,13 +94,16 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
             return;
         }
     }
-    /* TODO jump to error handler. */
-    assert1(scope_id == scope_id, "TODO jump to error handler");
-    assert(local_id < context_locals(self)->size,
+    /* TODO1jump to error handler. */
+    assert1(scope_id == context_locals(self)->size - 1, "TODO jump to error handler");
+
+    Type_Array locals = (Type_Array)context_locals(self)->values[scope_id];
+
+    assert(local_id < locals->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
                   local_id, context_locals(self)->size));
     
-    context_locals(self)->values[local_id] = value;
+    locals->values[local_id] = value;
 }
 
 /* ========================================================================= */

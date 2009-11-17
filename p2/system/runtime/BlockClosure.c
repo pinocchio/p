@@ -37,7 +37,9 @@ Type_Array activation_from_native(uns_int argc)
 
     assert1(argc == paramc, "Catch-all arguments not supported yet!");
 
-    Type_Array args = context_locals(current_env());
+    Runtime_BlockContext context = current_env();
+    Type_Array scopes = context_locals(context);
+    Type_Array args = (Type_Array)scopes->values[scopes->size - 1];
 
     while (argc > 0) {
         argc--;

@@ -63,7 +63,9 @@ extern Object basic_instantiate_Object(Type_Class class, uns_int size);
 
 /* ========================================================================= */
 
-extern void assert_class(Object class);
+#define assert_class(class)\
+    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */\
+            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
 
 /* ========================================================================= */
 
