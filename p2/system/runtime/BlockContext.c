@@ -21,7 +21,12 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
     result->pc              = 0;
-    result->parent          = current_env();
+    Runtime_BlockContext parent = current_env();
+    while (parent != (Runtime_BlockContext)Nil &&
+           !context_locals(parent)->size) {
+        parent = parent->parent;
+    }
+    result->parent          = parent;
     result->scope_id        = result->parent->scope_id + 1;
     context_locals(result)->size = size;
     
