@@ -55,7 +55,7 @@ Type_Array activation_from_native(uns_int argc)
 }
 
 static CNT(restore_env)
-    set_env((Object)current_env()->parent);
+    set_env((Object)current_env()->parent_frame);
 }
 
 static void CNT_AST_Block_continue()

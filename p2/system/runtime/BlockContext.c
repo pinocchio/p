@@ -21,13 +21,13 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
     result->pc              = 0;
+    result->parent_frame    = current_env();
     Runtime_BlockContext parent = current_env();
-    while (parent != (Runtime_BlockContext)Nil &&
-           !context_locals(parent)->size) {
-        parent = parent->parent;
+    result->scope_id = parent->scope_id + 1;
+    if (!context_locals(parent)->size) {
+        parent = parent->parent_scope;
     }
-    result->parent          = parent;
-    result->scope_id        = result->parent->scope_id + 1;
+    result->parent_scope = parent;
     context_locals(result)->size = size;
     
     return result;
@@ -45,9 +45,10 @@ void set_env(Object env)
 
 void pre_init_Runtime_BlockContext()
 {
-    Runtime_BlockContext_Class = new_Class_named((Object)Type_Object_Class,
-                                                 L"Runtime_BlockContext",
-                                                 CREATE_OBJECT_TAG(RUNTIME_BLOCKCONTEXT));
+    Runtime_BlockContext_Class =
+        new_Class_named((Object)Type_Object_Class,
+                        L"Runtime_BlockContext",
+                        CREATE_OBJECT_TAG(RUNTIME_BLOCKCONTEXT));
 }
 
 /* ========================================================================= */
@@ -55,9 +56,9 @@ void pre_init_Runtime_BlockContext()
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
-    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
-        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
-            self = (Runtime_BlockContext)self->closure->context;
+    while (scope_id != self->scope_id && (Object)self->parent_scope != Nil) {
+        if (HEADER(self->parent_scope) == (Object)Runtime_BlockContext_Class) {
+            self = (Runtime_BlockContext)self->parent_scope;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");

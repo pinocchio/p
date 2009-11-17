@@ -19,9 +19,9 @@ struct Runtime_BlockContext_t {
     uns_int                 scope_id;
     Runtime_BlockClosure    closure;
     Runtime_MethodContext   home_context;
-    Runtime_BlockContext    parent;
-    Object                  unused1;
-    Object                  unused2;
+    Runtime_BlockContext    parent_frame;
+    Runtime_BlockContext    parent_scope;
+    Object                  unused;
     struct Type_Array_t     locals;
 };
 
