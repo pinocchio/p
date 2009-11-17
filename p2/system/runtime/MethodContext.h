@@ -15,7 +15,7 @@ struct Runtime_MethodContext_t {
     uns_int                 scope_id;
     Runtime_MethodClosure   closure;
     Runtime_MethodContext   home_context;
-    Runtime_BlockContext    parent;
+    Runtime_BlockContext    parent_frame;
     Object                  self;
     Object                  class;
     struct Type_Array_t     locals;

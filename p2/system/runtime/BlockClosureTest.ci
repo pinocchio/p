@@ -7,30 +7,25 @@
 
 NEW_TEST(Runtime_BlockClosure_evaluation)
     Type_Array body         = empty_Type_Array;
-    Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
-                                                  (Runtime_BlockContext)Nil);
-    Object closure_const    = (Object)new_AST_Constant((Object)closure);
+    Object closure          = Eval((Object)new_AST_Block(0, 0, 1, body));
     Type_SmallInt integer   = new_Type_SmallInt(120);
     Object integer_const    = (Object)new_AST_Constant((Object)integer);
     Type_SmallInt integer7  = new_Type_SmallInt(7);
     Object integer7_const   = (Object)new_AST_Constant((Object)integer7);
     
-    Object result = Eval(closure_const);
-    assert0(result == (Object)closure);
-    
     // with one body element ---------------------------------------------------
-    closure = new_Runtime_BlockClosure(
-        new_AST_Block(1, 0, 1, new_Type_Array_with(1, integer_const)),
-        (Runtime_BlockContext)Nil);
-    result       = Eval_Send1((Object)closure, SMB_apply, (Object)integer);
+    closure = Eval((Object)
+        new_AST_Block(1, 0, 1, new_Type_Array_with(1, integer_const)));
+    Object result = Eval_Send1(closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
 
     // with one argument -------------------------------------------------------
     
-    closure->code->body   = new_Type_Array_withAll(3, integer7_const);
-    closure->code->body->values[2] = (Object)BLOCK_PARAM(closure->code, 0);
+    Runtime_BlockClosure clos = (Runtime_BlockClosure)closure;
+    clos->code->body   = new_Type_Array_withAll(3, integer7_const);
+    clos->code->body->values[2] = (Object)BLOCK_PARAM(clos->code, 0);
     
-    result       = Eval_Send1((Object)closure, SMB_apply_, (Object)integer);
+    result       = Eval_Send1(closure, SMB_apply_, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
     ASSERT_EMPTY_STACK;
 }
@@ -40,7 +35,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     // without any body element
     Type_Array body         = empty_Type_Array;
     Runtime_BlockClosure closure = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
-                                                  (Runtime_BlockContext)Nil);
+                                                            current_env());
     Object result           = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == Nil);
     ASSERT_EMPTY_STACK;
@@ -50,7 +45,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     AST_Constant integer5_const = new_AST_Constant((Object)integer5);
     body                        = new_Type_Array_with(1, (Object)integer5_const);
     closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
-                                                      (Runtime_BlockContext)Nil);
+                                                           current_env());
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer5);
     ASSERT_EMPTY_STACK;
@@ -60,8 +55,8 @@ NEW_TEST(Runtime_BlockClosure_apply)
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
     body                        = new_Type_Array_withAll(2, (Object)integer5_const);
     body->values[1]             = (Object)integer6_const;
-    closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
-                                                      (Runtime_BlockContext)Nil);
+    closure                     = (Runtime_BlockClosure)
+                                    Eval((Object)new_AST_Block(0, 0, 1, body));
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer6);
     ASSERT_EMPTY_STACK;
@@ -73,7 +68,7 @@ NEW_TEST(Runtime_BlockClosure_apply)
     body->values[1]             = (Object)integer6_const;
     body->values[2]             = (Object)integer7_const;
     closure                     = new_Runtime_BlockClosure(new_AST_Block(0, 0, 1, body),
-                                                      (Runtime_BlockContext)Nil);
+                                                           current_env());
     result                      = Eval_Send0((Object)closure, SMB_apply);
     assert0(result == (Object)integer7);
     ASSERT_EMPTY_STACK;

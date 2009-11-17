@@ -30,10 +30,9 @@ void pre_init_AST_Super()
 
 CNT(AST_Super_send) 
     Object class    = pop_EXP();
-    Object receiver = pop_EXP();
 
     uns_int argc = (uns_int)pop_EXP();
-    // poke_EXP(argc + 1, receiver); // args + 1 for peek
+    Object receiver = peek_EXP(argc);
     
     Type_Class_dispatch(receiver, class, argc);
 }
@@ -53,23 +52,11 @@ void AST_Super_eval(AST_Super super)
     push_CNT(AST_Super_send);
     push_CNT(Class_super);
     push_CNT(push_env_class);
-    push_CNT(AST_Self_eval);
 
-    push_EXP(Nil); // Location of receiver
+    push_EXP(0);
 
-    // evaluate the arguments
-    int i;
-    for (i = 0; i < super->arguments->size; i++) {
-        push_EXP(super->arguments->values[i]);
-    }
-    
-    uns_int size = (uns_int)super->arguments->size + 1; // 2 * size
-    // total
-    push_EXP((Object)(uns_int)super->arguments->size);
-    // todo
-    push_EXP((Object)size);
     push_CNT(store_argument);
-    eval_store(size);
+    push_CNT(AST_Self_eval);
 }
 
 /* ========================================================================= */
