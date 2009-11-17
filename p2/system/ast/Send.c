@@ -39,14 +39,13 @@ void CNT_store_argument()
     Object arg = peek_EXP(0);
     uns_int idx = (uns_int)peek_EXP(1);
     AST_Send send = (AST_Send)peek_EXP(idx + 2);
+    poke_EXP(1, arg);
     if (idx < send->arguments->size) {
         poke_EXP(0, idx+1);
-        poke_EXP(1, arg);
         push_EXP(send->arguments->values[idx]);
         push_CNT(send_Eval);
     } else {
-        poke_EXP(0, idx++);
-        poke_EXP(1, arg);
+        poke_EXP(0, idx);
         zap_CNT();
     }
 }
