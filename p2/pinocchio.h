@@ -56,6 +56,10 @@ typedef unsigned long int uns_int;
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
+#define NEW_CONTEXT(type, siz) \
+    NEW_ARRAY_OBJECT(Runtime_##type##Context, siz);\
+    context_locals((Runtime_BlockContext)result)->size = siz;
+
 
 #define CREATE_INITIALIZERS(class) \
 extern void pre_init##_##class(); \

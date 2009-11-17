@@ -21,7 +21,8 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
                                                 Object self, Object class)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
-    NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[1]);
+    uns_int context_size    = (size == 0 ? 0 : 1);
+    NEW_CONTEXT(Method, context_size);
     result->closure         = closure;
     result->pc              = 0;
     result->home_context    = result;
@@ -29,8 +30,9 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
     result->class           = class;
     result->self            = self;
     Type_Array locals       = context_locals((Runtime_BlockContext)result);
-    locals->size            = 1;
-    locals->values[0]       = (Object)new_Type_Array_withAll(size, Nil);
+    if (size > 0) {
+        locals->values[0]   = (Object)new_Type_Array_withAll(size, Nil);
+    }
     return result;
 }
 

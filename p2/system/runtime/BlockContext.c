@@ -20,14 +20,13 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     Runtime_BlockContext parent = current_env();
     uns_int scope_id        = context_locals(parent)->size;
     uns_int context_size    = scope_id + (size == 0 ? 0 : 1);
-    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[context_size]);
+    NEW_CONTEXT(Block, context_size);
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
     result->pc              = 0;
     result->parent          = parent;
     Type_Array locals       = context_locals(result);
-    locals->size            = context_size;
-    // TODO copy over the other scopes
+
     int i;
     for (i = 0; i < scope_id; i++) {
         locals->values[i] = context_locals(parent)->values[i];
