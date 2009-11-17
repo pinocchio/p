@@ -16,10 +16,12 @@
 
 struct Runtime_BlockContext_t {
     uns_int                 pc;
-    Type_Array              values;
+    uns_int                 scope_id;
     Runtime_BlockClosure    closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent;
+    Object                  unused1;
+    Object                  unused2;
     struct Type_Array_t     locals;
 };
 
@@ -30,12 +32,13 @@ extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block)
 /* ========================================================================= */
 
 extern Object Runtime_BlockContext_lookup(
-    Runtime_BlockContext self, uns_int index, Object key);
+    Runtime_BlockContext self, uns_int local_id, uns_int scope_id);
 extern void Runtime_BlockContext_assign(
-    Runtime_BlockContext self, uns_int index, Object key, Object value);
+    Runtime_BlockContext self, uns_int local_id, uns_int scope_id, Object value);
 
 /* ========================================================================= */
 
+extern Type_Array context_locals(Runtime_BlockContext context);
 extern Runtime_BlockContext current_env();
 extern void set_env(Object env);
 

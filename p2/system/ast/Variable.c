@@ -18,11 +18,11 @@ AST_Variable new_AST_Variable_named(const wchar_t* name)
     return result;
 }
 
-AST_Variable new_AST_Variable(Object key, uns_int index)
+AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
 {
     NEW_OBJECT(AST_Variable);
-    result->index   = index;
-    result->key     = key;
+    result->local_id = local_id;
+    result->scope_id = scope_id;
     result->name    = Nil;
     result->info    = empty_AST_Info;
     return result;
@@ -44,7 +44,8 @@ void AST_Variable_eval(AST_Variable self)
     
     if (IS_CONTEXT(env)) {
             poke_EXP(0, Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
-                                                self->index, self->key));
+                                                    self->local_id,
+                                                    self->scope_id));
     } else {
         // TODO
         assert0(NULL);
@@ -57,7 +58,9 @@ void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
     if (HEADER(env) == (Object)Runtime_BlockContext_Class) {
-        return Runtime_BlockContext_assign((Runtime_BlockContext)env, self->index, self->key, value);
+        return Runtime_BlockContext_assign((Runtime_BlockContext)env,
+                                           self->local_id, self->scope_id,
+                                           value);
     }
     // TODO
     assert0(NULL);

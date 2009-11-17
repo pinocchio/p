@@ -7,7 +7,7 @@ METHOD(fib_method, 0, 0, 1)
                                                 (Object)new_Type_SmallInt(2))));
                                     
     
-    AST_Block break_code = new_AST_Block(0, 0,
+    AST_Block break_code = new_AST_Block(0, 0, 1,
                                         new_Type_Array_with(1,
                                             (Object)new_AST_Constant(
                                                 (Object)new_Type_SmallInt(1))));
@@ -34,7 +34,7 @@ METHOD(fib_method, 0, 0, 1)
                     (Object)SMB_fib,
                     empty_Type_Array)));
                 
-    AST_Block return_code = new_AST_Block(0, 0, new_Type_Array_with(1, (Object)return_send));
+    AST_Block return_code = new_AST_Block(0, 0, 1, new_Type_Array_with(1, (Object)return_send));
     
     Type_Array ifElse_args = new_Type_Array_with(2, (Object)break_code, (Object)return_code);
     
@@ -51,59 +51,9 @@ int cfib (int a) {
     return cfib(a-1) + cfib(a-2);
 }
 
-void run_otherFibTest() {
-Object symbol4 = (Object)SMB_lt_;
-Object smallint892 = (Object)new_Type_SmallInt(2);
-Object constant1724 = (Object)new_AST_Constant(smallint892);
-Object array941 = (Object)new_Type_Array_with(1, constant1724);
-Object send500 = (Object)new_AST_Send(Self, symbol4, (Type_Array)array941);
-Object symbol5 = (Object)SMB_ifTrue_ifFalse_;
-Object smallint893 = (Object)new_Type_SmallInt(1);
-Object constant1725 = (Object)new_AST_Constant(smallint893);
-Object array942 = (Object)new_Type_Array_with(1, constant1725);
-Object block371 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array942);
-Object symbol6 = (Object)SMB_minus_;
-Object smallint894 = (Object)new_Type_SmallInt(1);
-Object constant1726 = (Object)new_AST_Constant(smallint894);
-Object array943 = (Object)new_Type_Array_with(1, constant1726);
-Object send501 = (Object)new_AST_Send(Self, symbol6, (Type_Array)array943);
-Object symbol7 = (Object)new_Type_Symbol(L"fib");
-Object send502 = (Object)new_AST_Send(send501, symbol7, (Type_Array)empty_Type_Array);
-Object symbol8 = (Object)SMB_plus_;
-Object smallint895 = (Object)new_Type_SmallInt(2);
-Object constant1727 = (Object)new_AST_Constant(smallint895);
-Object array944 = (Object)new_Type_Array_with(1, constant1727);
-Object send503 = (Object)new_AST_Send(Self, symbol6, (Type_Array)array944);
-Object send504 = (Object)new_AST_Send(send503, symbol7, (Type_Array)empty_Type_Array);
-Object array945 = (Object)new_Type_Array_with(1, send504);
-Object send505 = (Object)new_AST_Send(send502, symbol8, (Type_Array)array945);
-Object array946 = (Object)new_Type_Array_with(1, send505);
-Object block372 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array946);
-
-Object array947 = (Object)new_Type_Array_with(2, block371, block372);
-Object send506 = (Object)new_AST_Send(send500, symbol5, (Type_Array)array947);
-Object array948 = (Object)new_Type_Array_with(1, send506);
-Object method31 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array948);
-
-
-
-    store_method(Type_SmallInt_Class, (Type_Symbol)symbol7,  new_Runtime_MethodClosure((AST_Method)method31));
-    Object result;
-    
-    int i = 30;
-    //scanf("%i", &i);
-    result = (Object)Eval(
-                (Object)new_AST_Send(
-                    (Object)new_AST_Constant((Object)new_Type_SmallInt(i)), 
-                    (Object)symbol7, empty_Type_Array));
-    assert0(((Type_SmallInt)result)->value == cfib(i));
-    printf("%i\n", ((Type_SmallInt)result)->value);
-
-}
-
 void run_FibTest() 
 {
-    /*SMB_fib = new_Type_Symbol(L"fib");
+    SMB_fib = new_Type_Symbol(L"fib");
     store_method(Type_SmallInt_Class, SMB_fib, fib_method());
     Object result;
     
@@ -115,7 +65,5 @@ void run_FibTest()
                     (Object)SMB_fib, empty_Type_Array));
     assert0(((Type_SmallInt)result)->value == cfib(i));
     printf("%i\n", ((Type_SmallInt)result)->value);
-    */
-    run_otherFibTest();
-    
+
 }

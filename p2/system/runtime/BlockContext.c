@@ -9,16 +9,21 @@ static Object _Env_;
 
 /* ========================================================================= */
 
+Type_Array context_locals(Runtime_BlockContext context)
+{
+    return &context->locals;
+}
+
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
     NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
     result->home_context    = closure->context->home_context;
     result->closure         = closure;
-    result->values          = &result->locals;
     result->pc              = 0;
     result->parent          = current_env();
-    result->values->size    = size;
+    result->scope_id        = result->parent->scope_id + 1;
+    context_locals(result)->size = size;
     
     return result;
 }
@@ -43,9 +48,9 @@ void pre_init_Runtime_BlockContext()
 /* ========================================================================= */
 
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
-                                 uns_int index, Object key)
+                                   uns_int local_id, uns_int scope_id)
 {
-    while ((Object)self->closure->code != key && (Object)self->closure->context != Nil) {
+    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
         if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
             self = (Runtime_BlockContext)self->closure->context;
         } else {
@@ -56,18 +61,18 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
         }
     }
     /* TODO jump to error handler. */
-    assert1((Object)self->closure->code == key, "TODO jump to error handler");
-    assert(index < self->values->size,
+    assert1(scope_id == self->scope_id, "TODO jump to error handler");
+    assert(local_id < context_locals(self)->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
-                 index, self->values->size));
+                 local_id, context_locals(self)->size));
     
-    return self->values->values[index];
+    return context_locals(self)->values[local_id];
 }
 
-void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int index,
-                        Object key, Object value)
+void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
+                                 uns_int scope_id, Object value)
 {
-    while ((Object)self->closure->code != key || (Object)self->closure->context == Nil) {
+    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
         if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
             self = (Runtime_BlockContext)self->closure->context;
         } else {
@@ -78,11 +83,12 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int index,
         }
     }
     /* TODO jump to error handler. */
-    assert1((Object)self->closure->code == key, "TODO jump to error handler");
-    assert(index < self->values->size,
-		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", index, self->values->size));
+    assert1(scope_id == scope_id, "TODO jump to error handler");
+    assert(local_id < context_locals(self)->size,
+		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
+                  local_id, context_locals(self)->size));
     
-    self->values->values[index] = value;
+    context_locals(self)->values[local_id] = value;
 }
 
 /* ========================================================================= */

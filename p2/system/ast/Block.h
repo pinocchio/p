@@ -20,9 +20,12 @@ struct AST_Block_t {
 CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int localCount,
+                               uns_int depth,
                                Type_Array body);
-extern AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
-                               Type_Array body);
+extern AST_Block new_AST_Block_with(Type_Array params,
+                                    Type_Array locals,
+                                    uns_int depth,
+                                    Type_Array body);
 
 /* ========================================================================= */
 
@@ -33,13 +36,14 @@ extern AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
 
 /* ========================================================================= */
 
-extern void AST_Block_eval(AST_Block self);
+extern void init_raw_variable_array(Type_Array array, uns_int scope_id,
+                                    uns_int size, uns_int local_id);
+extern void init_variable_array(Type_Array array, uns_int scope_id,
+                                uns_int local_id);
 
 /* ========================================================================= */
 
-void init_raw_variable_array(Type_Array array, Object key, int size, int idx);
-void init_variable_array(Type_Array array, Object key, int index);
-
+extern void AST_Block_eval(AST_Block self);
 
 /* ========================================================================= */
 

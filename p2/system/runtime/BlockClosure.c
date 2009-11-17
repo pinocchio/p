@@ -37,7 +37,7 @@ Type_Array activation_from_native(uns_int argc)
 
     assert1(argc == paramc, "Catch-all arguments not supported yet!");
 
-    Type_Array args = current_env()->values;
+    Type_Array args = context_locals(current_env());
 
     while (argc > 0) {
         argc--;

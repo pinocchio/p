@@ -26,8 +26,8 @@ AST_Method new_AST_Method(uns_int paramCount,
     result->body       = body;
     result->params     = new_Type_Array_raw(paramCount);
     result->locals     = new_Type_Array_raw(localCount);
-    init_raw_variable_array(result->params, (Object)result, paramCount, 0);
-    init_raw_variable_array(result->locals, (Object)result, localCount, paramCount);
+    init_raw_variable_array(result->params, 0, paramCount, 0);
+    init_raw_variable_array(result->locals, 0, localCount, paramCount);
     result->info       = empty_AST_Info;
     return result;
 }
@@ -41,8 +41,8 @@ AST_Method new_AST_Method_with(Type_Array params,
     result->body       = body;
     result->params     = params;
     result->locals     = locals;
-    init_variable_array(result->params, (Object)result, 0);
-    init_variable_array(result->locals, (Object)result, result->params->size);
+    init_variable_array(result->params, 0, 0);
+    init_variable_array(result->locals, 0, result->params->size);
     result->info       = empty_AST_Info;
     return result;
 }

@@ -24,12 +24,12 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
     NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);
     result->closure         = closure;
     result->pc              = 0;
-    result->values          = &result->locals;
+    result->scope_id        = 0;
     result->home_context    = result;
     result->parent          = current_env();
     result->class           = class;
     result->self            = self;
-    result->values->size    = size;
+    context_locals((Runtime_BlockContext)result)->size = size;
     return result;
 }
 
@@ -37,8 +37,8 @@ Runtime_MethodContext new_Empty_Runtime_MethodContext()
 {
     NEW_OBJECT(Runtime_MethodContext);
     result->home_context    = result;
-    result->values          = &result->locals;
-    result->values->size    = 0;
+    context_locals((Runtime_BlockContext)result)->size = 0;
+    result->scope_id        = 0;
     return result;
 }
 

@@ -8,48 +8,51 @@ Type_Class AST_Block_Class;
 
 /* ========================================================================= */
 
-void init_raw_variable_array(Type_Array array, Object key, int size, int index)
+void init_raw_variable_array(Type_Array array, uns_int scope_id,
+                             uns_int size, uns_int local_id)
 {
     uns_int i;
     for (i = 0; i < size; i++) {
-        array->values[i] = (Object)new_AST_Variable(key, index);
-        index++;
-    }
-}
-
-void init_variable_array(Type_Array array, Object key, int index)
-{
-    uns_int i;
-    for (i = 0; i < array->size; i++) {
-        ((AST_Variable)array->values[i])->key = key;
-        ((AST_Variable)array->values[i])->index = index;
-        index++;
+        array->values[i] = (Object)new_AST_Variable(scope_id, local_id);
+        local_id++;
     }
 }
 
 AST_Block new_AST_Block(uns_int paramCount,
                         uns_int localCount,
+                        uns_int depth,
                         Type_Array body)
 {
     NEW_OBJECT(AST_Block);
     result->body       = body;
     result->params     = new_Type_Array_raw(paramCount);
     result->locals     = new_Type_Array_raw(localCount);
-    init_raw_variable_array(result->params, (Object)result, paramCount, 0);
-    init_raw_variable_array(result->locals, (Object)result, localCount, paramCount);
+    init_raw_variable_array(result->params, depth, paramCount, 0);
+    init_raw_variable_array(result->locals, depth, localCount, paramCount);
     result->info       = empty_AST_Info;
     return result;
 }
 
+void init_variable_array(Type_Array array, uns_int scope_id,
+                         uns_int local_id)
+{
+    uns_int i;
+    for (i = 0; i < array->size; i++) {
+        ((AST_Variable)array->values[i])->scope_id = scope_id;
+        ((AST_Variable)array->values[i])->local_id = local_id;
+        local_id++;
+    }
+}
+
 AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
-                               Type_Array body)
+                             uns_int depth, Type_Array body)
 {
     NEW_OBJECT(AST_Block);
     result->body       = body;
     result->params     = params;
     result->locals     = locals;
-    init_variable_array(result->params, (Object)result, 0);
-    init_variable_array(result->locals, (Object)result, result->params->size);
+    init_variable_array(result->params, depth, 0);
+    init_variable_array(result->locals, depth, result->params->size);
     result->info       = empty_AST_Info;
     return result;
 }
