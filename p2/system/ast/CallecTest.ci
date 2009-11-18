@@ -24,7 +24,7 @@ NEW_TEST(ast_callec_escape)
     Object j = (Object)new_Type_SmallInt(200);
     AST_Block block = new_AST_Block(1, 0, 1, NULL);
     AST_Send s = new_AST_Send((Object)BLOCK_PARAM(block, 0), (Object)SMB_escape_,
-                          new_Type_Array_with(1, (Object)new_AST_Constant(i)));
+                              1, (Object)new_AST_Constant(i));
     Type_Array body = new_Type_Array_withAll(2, (Object)s);
     block->body = body;
     body->values[1] = (Object)new_AST_Constant(j);

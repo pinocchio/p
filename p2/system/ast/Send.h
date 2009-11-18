@@ -18,7 +18,7 @@ struct AST_Send_t {
 
 CREATE_INITIALIZERS(AST_Send)
 
-extern AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments);
+extern AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...);
 
 /* ========================================================================= */
 

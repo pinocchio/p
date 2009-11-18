@@ -1,4 +1,4 @@
-
+#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/ast/Send.h>
@@ -9,11 +9,20 @@ Type_Class AST_Send_Class;
 
 /* ========================================================================= */
 
-AST_Send new_AST_Send(Object receiver, Object msg, Type_Array arguments)
+AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
 {
     NEW_OBJECT(AST_Send);
     result->receiver  = receiver;
     result->message   = msg;
+
+    va_list args;
+    va_start(args, argc);
+    Type_Array arguments = new_Type_Array_raw(argc);
+    int idx;
+    for (idx = 0; idx < argc; idx++) {
+        arguments->values[idx] = va_arg(args, Object);
+    }
+    va_end(args);
     result->arguments = arguments;
     result->info      = empty_AST_Info;
     return result;

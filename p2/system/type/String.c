@@ -82,7 +82,7 @@ NATIVE1(Type_String_concat_)
     RETURN_FROM_NATIVE(self); 
     push_EXP(new_AST_Send((Object)new_AST_Constant(w_arg),
                                                   (Object)SMB_asString, 
-                                                  empty_Type_Array));
+                                                  0));
 }
 
 NATIVE0(Type_String_asString)

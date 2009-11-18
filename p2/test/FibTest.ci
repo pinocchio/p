@@ -2,9 +2,9 @@ Type_Symbol SMB_fib;
 
 METHOD(fib_method, 0, 0, 1)
     AST_Send test = new_AST_Send(Self, (Object)SMB_lt_, 
-                                new_Type_Array_with(1,
-                                    (Object)new_AST_Constant(
-                                                (Object)new_Type_SmallInt(2))));
+                                 1,
+                                 (Object)new_AST_Constant(
+                                             (Object)new_Type_SmallInt(2)));
                                     
     
     AST_Block break_code = new_AST_Block(0, 0, 1,
@@ -17,28 +17,28 @@ METHOD(fib_method, 0, 0, 1)
                 (Object)new_AST_Send(
                     Self, 
                     (Object)SMB_minus_, 
-                    new_Type_Array_with(1, 
-                        (Object)new_AST_Constant(
-                                (Object)new_Type_SmallInt(1)))),
+                    1, 
+                    (Object)new_AST_Constant(
+                                (Object)new_Type_SmallInt(1))),
                 (Object)SMB_fib,
-                empty_Type_Array),
+                0),
             (Object)SMB_plus_, 
-            new_Type_Array_with(1,
+            1,
+            (Object)new_AST_Send(
                 (Object)new_AST_Send(
-                    (Object)new_AST_Send(
-                        Self, 
-                        (Object)SMB_minus_, 
-                        new_Type_Array_with(1, 
-                            (Object)new_AST_Constant(
-                                    (Object)new_Type_SmallInt(2)))),
-                    (Object)SMB_fib,
-                    empty_Type_Array)));
+                    Self, 
+                    (Object)SMB_minus_, 
+                    1, 
+                    (Object)new_AST_Constant(
+                    (Object)new_Type_SmallInt(2))),
+                (Object)SMB_fib,
+                0));
                 
     AST_Block return_code = new_AST_Block(0, 0, 1, new_Type_Array_with(1, (Object)return_send));
     
-    Type_Array ifElse_args = new_Type_Array_with(2, (Object)break_code, (Object)return_code);
-    
-    AST_Send ifElse = new_AST_Send((Object)test, (Object)SMB_ifTrue_ifFalse_, ifElse_args);
+    AST_Send ifElse = new_AST_Send((Object)test,
+                                   (Object)SMB_ifTrue_ifFalse_, 2,
+                                   (Object)break_code, (Object)return_code);
     ADD_STATEMENT(ifElse);
     
     return method;
@@ -62,7 +62,7 @@ void run_FibTest()
     result = (Object)Eval(
                 (Object)new_AST_Send(
                     (Object)new_AST_Constant((Object)new_Type_SmallInt(i)), 
-                    (Object)SMB_fib, empty_Type_Array));
+                    (Object)SMB_fib, 0));
     assert0(((Type_SmallInt)result)->value == cfib(i));
     printf("%i\n", ((Type_SmallInt)result)->value);
 
