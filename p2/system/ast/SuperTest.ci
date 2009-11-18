@@ -7,7 +7,7 @@ NEW_TEST(ast_super)
     
     Type_Symbol test  = new_Type_Symbol(L"test");
     Type_Array body   = new_Type_Array_withAll(3, (Object)integer7_const);
-    body->values[2]   = (Object)new_AST_Super((Object)test, new_Type_Array_raw(0));    
+    body->values[2]   = (Object)new_AST_Super((Object)test, 0);    
     Runtime_MethodClosure closure = new_Runtime_MethodClosure(new_AST_Method(0, 0, body));
     store_method(True_Class, test, closure);
     

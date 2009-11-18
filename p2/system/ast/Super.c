@@ -1,4 +1,4 @@
-
+#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/BlockContext.h>
@@ -10,10 +10,18 @@ Type_Class AST_Super_Class;
 
 /* ========================================================================= */
 
-AST_Super new_AST_Super(Object message, Type_Array arguments)
+AST_Super new_AST_Super(Object message, uns_int argc, ...)
 {
     NEW_OBJECT(AST_Super);
     result->message    = message;
+    va_list args;
+    va_start(args, argc);
+    Type_Array arguments = new_Type_Array_raw(argc);
+    int idx;
+    for (idx = 0; idx < argc; idx++) {
+        arguments->values[idx] = va_arg(args, Object);
+    }
+    va_end(args);
     result->arguments  = arguments;
     result->info       = empty_AST_Info;
     return result;
