@@ -10,20 +10,26 @@ Type_Class AST_Super_Class;
 
 /* ========================================================================= */
 
+Type_Array AST_Super_args(AST_Super super)
+{
+    return &super->arguments;
+}
+
 AST_Super new_AST_Super(Object message, uns_int argc, ...)
 {
-    NEW_OBJECT(AST_Super);
-    result->message    = message;
+    NEW_ARRAY_OBJECT(AST_Super, Object[argc]);
+    result->message              = message;
+    result->info                 = empty_AST_Info;
+
+    AST_Super_args(result)->size = argc;
     va_list args;
     va_start(args, argc);
-    Type_Array arguments = new_Type_Array_raw(argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        arguments->values[idx] = va_arg(args, Object);
+        AST_Super_args(result)->values[idx] = va_arg(args, Object);
     }
     va_end(args);
-    result->arguments  = arguments;
-    result->info       = empty_AST_Info;
+
     return result;
 }
 

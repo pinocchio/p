@@ -9,10 +9,11 @@
 #define AST_SUPER_VARS L"cache", L"message", L"arguments", L"info"
 
 struct AST_Super_t {
-    InlineCache     cache;
-    Object          message; 
-    Type_Array      arguments;
-    AST_Info        info;   
+    InlineCache         cache;
+    Object              message; 
+    AST_Info            info;   
+    Object              unused;
+    struct Type_Array_t arguments;
 };
 
 CREATE_INITIALIZERS(AST_Super)
