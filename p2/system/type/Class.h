@@ -30,7 +30,7 @@ struct Type_Class_t {
     Object          type;
     Object          super;
     Type_Dictionary methods;
-    Type_String     name;
+    Type_Symbol     name;
     Object          package;
     Object          cvars[];
 };

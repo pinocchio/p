@@ -40,7 +40,7 @@ Type_Class new_Class(Object superclass, Object type)
 Type_Class new_Class_named(Object superclass, const wchar_t* name, Object type)
 {
     Type_Class result = (Type_Class) new_Class(superclass, type);
-    result->name      = new_Type_String(name);
+    result->name      = new_Type_Symbol_cached(name);
     return result;
 }
 
@@ -90,12 +90,10 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
 
 void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
-    if (msg == (Object)SMB_doesNotUnderstand_) {
-        assert(NULL, printf("\"%ls\" recursive does not understand \"%"F_I"u\"\n", 
+    // TODO send DNU;
+    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
            ((Type_Class)HEADER(self))->name->value,
-           argc));
-    }
-    Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
+           ((Type_Symbol)msg)->value));
 }
 
 static void Class_lookup(Type_Class class, Object msg);
@@ -173,11 +171,8 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
 {
     va_list args;
     va_start(args, argc);
-    int idx;
-    /* Send obj. TODO update Send>>eval to be able to remove this */
-    push_EXP(Nil);
-    push_EXP(self);
-    for (idx = 0; idx < argc; idx++) {
+    int index;
+    for (index = 0; index < argc; index++) {
         push_EXP(va_arg(args, Object));
     }
     va_end(args);

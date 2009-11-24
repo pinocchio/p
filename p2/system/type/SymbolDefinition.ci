@@ -58,4 +58,3 @@ Type_Symbol SMB_basicNew_;
 Type_Symbol SMB_on_;
 Type_Symbol SMB_escape_;
 Type_Symbol SMB_asCharacter;
-Type_Symbol SMB_doesNotUnderstand_;

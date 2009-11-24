@@ -28,10 +28,8 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class    = new_Class_named((Object)Type_Object_Class,
-                                           L"String",
-                                           create_type(0, WORDS));
-    empty_Type_String         = new_Type_String(L"");
+    Type_String_Class = new_Class((Object)Type_Object_Class, create_type(0, WORDS));
+    empty_Type_String = new_Type_String(L"");
 }
 
 /* ========================================================================= */
@@ -109,7 +107,8 @@ NATIVE2(Type_String_at_put_)
 /* ========================================================================= */
 
 void post_init_Type_String()
-{
+{   
+    Type_String_Class->name = new_Type_Symbol_cached(L"String");
     install_symbol_methods(Type_String_Class);
     store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);
     store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);

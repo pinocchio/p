@@ -157,6 +157,11 @@ bool isInstance(Object object, Object class)
 
 /* ========================================================================= */
 
+void include() {
+    
+// #include <parser/outTest.c>
+}
+
 int main()
 {
     #include <pinocchioPreInit.ci>
@@ -169,6 +174,7 @@ int main()
     #else
     run_FibTest();
     #endif
-
+    
+    include();
     return EXIT_SUCCESS;
 }

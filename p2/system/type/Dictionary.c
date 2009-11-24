@@ -19,8 +19,8 @@ Type_Dictionary new_Type_Dictionary()
 
 void pre_init_Type_Dictionary()
 {
-    Type_Dictionary_Class = new_Class_named((Object)Type_Object_Class,
-                                            L"Type_Dictionary",
+    // cannot use new_Class_named here, since SymbolDict is not available yet
+    Type_Dictionary_Class = new_Class((Object)Type_Object_Class,
                                             CREATE_OBJECT_TAG(TYPE_DICTIONARY));
 }
 
@@ -37,8 +37,7 @@ int get_hash(Type_Dictionary self, Object key)
     } else {
         printf("Got key: %p\n", key);
         print_Class(key);
-        assert1(NULL, "Dictionary currently only supports"
-                      " SmallInt and Symbol as key\n");
+        assert1(NULL, "Dictionary only supports SmallInt and Symbol as key\n");
     }
     hash %= self->layout->size;
     return hash;
@@ -53,7 +52,7 @@ static Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
     return (Type_Array *)&dictionary->layout->values[hash];
 }
 
-static Type_Array new_bucket()
+static Type_Array new_dict_bucket()
 {
     return new_Type_Array_withAll(DICTIONARY_BUCKET_SIZE * 2, Nil);
 }
@@ -63,7 +62,7 @@ static void Bucket_grow(Type_Array * bucketp)
     Type_Array old_bucket = *bucketp;
     Type_Array new_bucket = new_Type_Array_raw(old_bucket->size << 1);
     int i;
-    for(i = 0; i < old_bucket->size; i++) {
+    for(i=0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
     }
     for(; i < new_bucket->size; i++) {
@@ -102,7 +101,7 @@ static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
 {
     int i;
     Type_Array bucket = *bucketp;
-    for (i = 0; i < bucket->size; i = i+2) {
+    for (i = 0; i < bucket->size; i=i+2) {
         if (bucket->values[i] == (Object)Nil) {
             bucket->values[i]   = key;
             bucket->values[i+1] = value;
@@ -163,7 +162,7 @@ void Type_Dictionary_quick_store(Type_Dictionary self,
     int hash = get_hash(self, key);
     Type_Array * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Type_Array)Nil) {
-        *bucketp = new_bucket();
+        *bucketp = new_dict_bucket();
         Type_Array bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
@@ -203,8 +202,8 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
     if (result == -1) {
-        return Type_Class_direct_dispatch(inkey, HEADER(inkey),
-                                          (Object)SMB_equals_, 1, dictkey);
+        printf("ERROR: Other types of equality not supported yet\n");
+        assert0(NULL);
     }
     push_EXP(get_bool(result));
 }
@@ -407,7 +406,7 @@ void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
 {
     Type_Array * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Type_Array)Nil) { 
-        *bucketp = new_bucket();
+        *bucketp = new_dict_bucket();
         Type_Array bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
@@ -450,6 +449,7 @@ NATIVE2(Type_Dictionary_at_put_)
 
 void post_init_Type_Dictionary()
 {
+    Type_Dictionary_Class->name = new_Type_Symbol_cached(L"Type_Dictionary");
     store_native_method(Type_Dictionary_Class, SMB_at_,     NM_Type_Dictionary_at_);
     store_native_method(Type_Dictionary_Class, SMB_at_put_, NM_Type_Dictionary_at_put_);
 }

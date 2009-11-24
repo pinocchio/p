@@ -25,3 +25,5 @@
 #include <system/ast/MethodTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
 #include <system/ast/InstVariableTest.ci>
+
+//#include <parser/test.ci>

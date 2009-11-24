@@ -18,7 +18,7 @@ void pre_init_Runtime_MethodContext()
 /* ========================================================================= */
 
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                                Object self, Object class)
+                                            Object self, Object class)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
     NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);

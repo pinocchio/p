@@ -18,9 +18,11 @@ struct AST_Send_t {
 
 CREATE_INITIALIZERS(AST_Send)
 
+extern AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc);
 extern AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...);
 
 /* ========================================================================= */
+extern Type_Array AST_Send_args(AST_Send send);
 
 extern void AST_Send_eval(AST_Send self);
 extern void eval_store(uns_int idx);

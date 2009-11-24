@@ -167,8 +167,9 @@ void IO_File_write_(IO_File file, Type_Character chr) {
 }
 
 NATIVE1(IO_File_write_)
+    // TODO assert layout, not class
     Object chr = NATIVE_ARG(0);
-    ASSERT_TAG_TYPE(GETTAG(chr), Character);
+    ASSERT_INSTANCE_OF(chr, Type_Character_Class);
     IO_File_write_((IO_File)self, (Type_Character)chr);
     RETURN_FROM_NATIVE(self);
 }

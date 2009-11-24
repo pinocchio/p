@@ -58,9 +58,8 @@ Type_Array new_Type_Array_withAll(uns_int c, Object element)
 
 void pre_init_Type_Array() 
 {
-    Type_Array_Class         = new_Class_named((Object)Type_Object_Class,
-                                               L"Array",
-                                               create_type(0, ARRAY));
+    // cannot use new_Class_name here since Symbol_Dict is not available yet
+    Type_Array_Class = new_Class((Object)Type_Object_Class, create_type(0, ARRAY));
     
     empty_Type_Array         = NEW_t(Type_Array);
     HEADER(empty_Type_Array) = (Object)Type_Array_Class;
@@ -142,8 +141,9 @@ NATIVE2(Type_Array_instVarAt_put_)
 
 void post_init_Type_Array()
 {
-    empty_Type_Array->size   = 0;
+    Type_Array_Class->name    = new_Type_Symbol_cached(L"Array"); 
     Type_Array_Class->methods = new_Type_Dictionary();
+    empty_Type_Array->size    = 0;
     
     store_native_method((Type_Class)HEADER(Type_Array_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
     store_native_method(Type_Array_Class, SMB_at_,     NM_Type_Array_at_);

@@ -11,10 +11,13 @@
 struct Organization_ClassReference_t {
     Object class;
     Object package;
+    Object name;
 };
 
 CREATE_INITIALIZERS(Organization_ClassReference)
 extern Organization_ClassReference new_Organization_ClassReference();
+extern Organization_ClassReference new_Organization_ClassReference(Object class, Object package);
+extern Organization_ClassReference new_Organization_ClassReference_named(Object class, Object package, const wchar_t* name);
 
 /* ========================================================================= */
 
