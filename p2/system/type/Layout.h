@@ -39,6 +39,9 @@ extern Object file_layout;
 #define GETTAG(o)\
     ((Type_Class)HEADER(o))->type
 
+#define OBJECT_OF_TYPE(o, type)\
+    TAG_IS_TYPE(GETTAG(o), type)
+
 #define CREATE_OBJECT_TAG(name) create_type(name##_SIZE, OBJECT, name##_VARS)
 
 /* ========================================================================= */
