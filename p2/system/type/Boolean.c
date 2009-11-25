@@ -39,7 +39,7 @@ void pre_init_Type_Boolean()
 {
     Type_Boolean_Class = new_Class_named((Object)Type_Object_Class,
                                          L"Type_Boolean",
-                                         create_type(1, OBJECT));     
+                                         create_type(BOOL_SIZE, OBJECT, BOOL_VARS));     
     pre_init_Type_True();
     pre_init_Type_False();
 }

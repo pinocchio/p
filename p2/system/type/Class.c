@@ -207,12 +207,8 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     }
     assert_class(class);
     
-    if (class != Nil) {
-        push_CNT(Class_lookup_cache_invoke);
-        return Class_direct_dispatch(self, class, msg, argc);
-    }
-    
-    does_not_understand(self, class, msg, argc);
+    push_CNT(Class_lookup_cache_invoke);
+    return Class_direct_dispatch(self, class, msg, argc);
 }
 
 void print_Class(Object obj)
