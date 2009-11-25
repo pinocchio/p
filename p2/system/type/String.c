@@ -73,6 +73,12 @@ CNT(Type_String_concat_)
     poke_EXP(0, Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
+NATIVE1(Type_String_equals_)
+    Object w_arg = NATIVE_ARG(0);
+    assert0(OBJECT_OF_TYPE(w_arg, Words));
+    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self, (Type_Symbol)w_arg)));
+}
+
 NATIVE1(Type_String_concat_)
     Object w_arg = NATIVE_ARG(0);
     push_CNT(Type_String_concat_);
@@ -114,5 +120,6 @@ void post_init_Type_String()
     store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
     store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
     store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
+    store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);
 }
 

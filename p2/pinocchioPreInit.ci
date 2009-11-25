@@ -11,12 +11,12 @@ pre_init_Type_Dictionary();
 pre_init_Type_Symbol();
 pre_init_Type_String();
 pre_init_Type_Character();
-pre_init_Type_Boolean();
 
 pre_init_AST_Assign();
 pre_init_AST_Block();
 pre_init_AST_Callec();
 pre_init_AST_Constant();
+pre_init_Type_Boolean();
 pre_init_Runtime_Continue();
 pre_init_AST_Info();
 pre_init_AST_Native_Method();

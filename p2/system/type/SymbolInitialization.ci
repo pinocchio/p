@@ -1,4 +1,6 @@
 //SMB_objectAt_putIfAbsent_ = new_Type_Symbol_cached(L"objectAt:putIfAbsent:");
+SMB__equal                = new_Type_Symbol_cached(L"=");
+SMB__pequal               = new_Type_Symbol_cached(L"==");
 SMB_and_                  = new_Type_Symbol_cached(L"and:");
 SMB_apply                 = new_Type_Symbol_cached(L"apply");
 SMB_apply_                = new_Type_Symbol_cached(L"apply:");

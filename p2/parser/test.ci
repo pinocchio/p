@@ -1,0 +1,267 @@
+// Auto generated Tests from PinocchioCDumperTest
+
+// Test Object to put test methods in
+Type_Class Test_Class;
+Object test_Class_Instance;
+// Test Method symbol
+Type_Symbol SMB_runTestCase;
+
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmBooleanEquals)
+Object symbol14 = (Object)new_Type_Symbol_cached(L"=");
+Object send643 = (Object)new_AST_Send((Object)True_Const, (Object)symbol14, 1, True_Const);
+Object symbol13 = (Object)new_Type_Symbol_cached(L"tmBooleanEquals");
+
+// nil>>tmBooleanEquals
+Object array833 = (Object)new_Type_Array_with(1, send643);
+Object method342 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array833);
+Object methodclosure100 = (Object)new_Runtime_MethodClosure(method342);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol13, (Runtime_MethodClosure)methodclosure100);
+
+Object send644 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol13, 0);
+Object result = (Object)Eval((Object)send644);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmBooleanFalse)
+Object symbol18 = (Object)new_Type_Symbol_cached(L"tmBooleanFalse");
+
+// nil>>tmBooleanFalse
+Object array834 = (Object)new_Type_Array_with(1, False_Const);
+Object method343 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array834);
+Object methodclosure101 = (Object)new_Runtime_MethodClosure(method343);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol18, (Runtime_MethodClosure)methodclosure101);
+
+Object send645 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol18, 0);
+Object result = (Object)Eval((Object)send645);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)False);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmBooleanTrue)
+Object symbol19 = (Object)new_Type_Symbol_cached(L"tmBooleanTrue");
+
+// nil>>tmBooleanTrue
+Object array835 = (Object)new_Type_Array_with(1, True_Const);
+Object method344 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array835);
+Object methodclosure102 = (Object)new_Runtime_MethodClosure(method344);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol19, (Runtime_MethodClosure)methodclosure102);
+
+Object send646 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol19, 0);
+Object result = (Object)Eval((Object)send646);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumber)
+Object smallint166 = (Object)new_Type_SmallInt(1);
+Object constant271 = (Object)new_AST_Constant(smallint166);
+Object symbol20 = (Object)new_Type_Symbol_cached(L"tmNumber");
+
+// nil>>tmNumber
+Object array836 = (Object)new_Type_Array_with(1, constant271);
+Object method345 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array836);
+Object methodclosure103 = (Object)new_Runtime_MethodClosure(method345);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol20, (Runtime_MethodClosure)methodclosure103);
+
+Object send647 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol20, 0);
+Object result = (Object)Eval((Object)send647);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 1);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumberAdd)
+Object smallint167 = (Object)new_Type_SmallInt(1);
+Object constant272 = (Object)new_AST_Constant(smallint167);
+Object smallint168 = (Object)new_Type_SmallInt(1);
+Object constant273 = (Object)new_AST_Constant(smallint168);
+Object send648 = (Object)new_AST_Send((Object)constant272, (Object)SMB_plus_, 1, constant273);
+Object symbol21 = (Object)new_Type_Symbol_cached(L"tmNumberAdd");
+
+// nil>>tmNumberAdd
+Object array837 = (Object)new_Type_Array_with(1, send648);
+Object method346 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array837);
+Object methodclosure104 = (Object)new_Runtime_MethodClosure(method346);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol21, (Runtime_MethodClosure)methodclosure104);
+
+Object send649 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol21, 0);
+Object result = (Object)Eval((Object)send649);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 2);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumberDiv)
+Object smallint169 = (Object)new_Type_SmallInt(4);
+Object constant274 = (Object)new_AST_Constant(smallint169);
+Object smallint170 = (Object)new_Type_SmallInt(2);
+Object constant275 = (Object)new_AST_Constant(smallint170);
+Object send650 = (Object)new_AST_Send((Object)constant274, (Object)SMB_divide_, 1, constant275);
+Object symbol22 = (Object)new_Type_Symbol_cached(L"tmNumberDiv");
+
+// nil>>tmNumberDiv
+Object array838 = (Object)new_Type_Array_with(1, send650);
+Object method347 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array838);
+Object methodclosure105 = (Object)new_Runtime_MethodClosure(method347);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol22, (Runtime_MethodClosure)methodclosure105);
+
+Object send651 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol22, 0);
+Object result = (Object)Eval((Object)send651);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 2);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumberEquals)
+Object smallint171 = (Object)new_Type_SmallInt(1);
+Object constant276 = (Object)new_AST_Constant(smallint171);
+Object symbol14 = (Object)new_Type_Symbol_cached(L"=");
+Object smallint172 = (Object)new_Type_SmallInt(1);
+Object constant277 = (Object)new_AST_Constant(smallint172);
+Object send652 = (Object)new_AST_Send((Object)constant276, (Object)symbol14, 1, constant277);
+Object symbol23 = (Object)new_Type_Symbol_cached(L"tmNumberEquals");
+
+// nil>>tmNumberEquals
+Object array839 = (Object)new_Type_Array_with(1, send652);
+Object method348 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array839);
+Object methodclosure106 = (Object)new_Runtime_MethodClosure(method348);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol23, (Runtime_MethodClosure)methodclosure106);
+
+Object send653 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol23, 0);
+Object result = (Object)Eval((Object)send653);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumberMult)
+Object smallint173 = (Object)new_Type_SmallInt(2);
+Object constant278 = (Object)new_AST_Constant(smallint173);
+Object smallint174 = (Object)new_Type_SmallInt(3);
+Object constant279 = (Object)new_AST_Constant(smallint174);
+Object send654 = (Object)new_AST_Send((Object)constant278, (Object)SMB_times_, 1, constant279);
+Object symbol24 = (Object)new_Type_Symbol_cached(L"tmNumberMult");
+
+// nil>>tmNumberMult
+Object array840 = (Object)new_Type_Array_with(1, send654);
+Object method349 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array840);
+Object methodclosure107 = (Object)new_Runtime_MethodClosure(method349);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol24, (Runtime_MethodClosure)methodclosure107);
+
+Object send655 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol24, 0);
+Object result = (Object)Eval((Object)send655);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 6);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmNumberSubtract)
+Object smallint175 = (Object)new_Type_SmallInt(2);
+Object constant280 = (Object)new_AST_Constant(smallint175);
+Object smallint176 = (Object)new_Type_SmallInt(1);
+Object constant281 = (Object)new_AST_Constant(smallint176);
+Object send656 = (Object)new_AST_Send((Object)constant280, (Object)SMB_minus_, 1, constant281);
+Object symbol25 = (Object)new_Type_Symbol_cached(L"tmNumberSubtract");
+
+// nil>>tmNumberSubtract
+Object array841 = (Object)new_Type_Array_with(1, send656);
+Object method350 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array841);
+Object methodclosure108 = (Object)new_Runtime_MethodClosure(method350);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol25, (Runtime_MethodClosure)methodclosure108);
+
+Object send657 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol25, 0);
+Object result = (Object)Eval((Object)send657);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 1);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmString)
+Object string90 = (Object)new_Type_String(L"String");
+Object constant282 = (Object)new_AST_Constant(string90);
+Object symbol16 = (Object)new_Type_Symbol_cached(L"tmString");
+
+// nil>>tmString
+Object array842 = (Object)new_Type_Array_with(1, constant282);
+Object method351 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array842);
+Object methodclosure109 = (Object)new_Runtime_MethodClosure(method351);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol16, (Runtime_MethodClosure)methodclosure109);
+
+Object send658 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol16, 0);
+Object result = (Object)Eval((Object)send658);
+ASSERT_EMPTY_STACK
+Object string91 = (Object)new_Type_String(L"String");
+result = Eval_Send1(result, SMB_equals_,string91);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmStringEquals)
+Object string92 = (Object)new_Type_String(L"String");
+Object constant283 = (Object)new_AST_Constant(string92);
+Object symbol14 = (Object)new_Type_Symbol_cached(L"=");
+Object string93 = (Object)new_Type_String(L"String");
+Object constant284 = (Object)new_AST_Constant(string93);
+Object send659 = (Object)new_AST_Send((Object)constant283, (Object)symbol14, 1, constant284);
+Object symbol26 = (Object)new_Type_Symbol_cached(L"tmStringEquals");
+
+// nil>>tmStringEquals
+Object array843 = (Object)new_Type_Array_with(1, send659);
+Object method352 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, (Type_Array)array843);
+Object methodclosure110 = (Object)new_Runtime_MethodClosure(method352);
+store_method((Type_Class)Test_Class, (Type_Symbol)symbol26, (Runtime_MethodClosure)methodclosure110);
+
+Object send660 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol26, 0);
+Object result = (Object)Eval((Object)send660);
+ASSERT_EMPTY_STACK
+assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(AutoGenTest,
+{
+    Test_Class = new_Class_named((Object)Type_Object_Class, L"Test_Object", Type_Object_Class->type);
+    test_Class_Instance = (Object)new_AST_Constant((Object)instantiate((Type_Class)Test_Class));
+
+    RUN_TEST(AutoGenTest_tmNumberAdd);
+    RUN_TEST(AutoGenTest_tmBooleanEquals);
+    RUN_TEST(AutoGenTest_tmNumberMult);
+    RUN_TEST(AutoGenTest_tmNumber);
+    RUN_TEST(AutoGenTest_tmStringEquals);
+    RUN_TEST(AutoGenTest_tmBooleanFalse);
+    RUN_TEST(AutoGenTest_tmNumberDiv);
+    RUN_TEST(AutoGenTest_tmString);
+    RUN_TEST(AutoGenTest_tmNumberEquals);
+    RUN_TEST(AutoGenTest_tmBooleanTrue);
+    RUN_TEST(AutoGenTest_tmNumberSubtract);
+})
