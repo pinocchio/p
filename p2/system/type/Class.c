@@ -59,8 +59,8 @@ void inter_init_Type_Class()
 
 void assert_class(Object class)
 {
-    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
-            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
+    assert(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == (Object)Metaclass, print_Class(class)); /* if class */
 }
 
 CNT(Class_super)
@@ -101,7 +101,6 @@ static void Class_next_lookup(Type_Class class)
 {
     zap_EXP();
     poke_EXP(0, class->super);
-    assert_class(class->super);
     return Class_lookup((Type_Class)class->super, peek_EXP(3));
 }
 
@@ -151,6 +150,7 @@ static void Class_lookup(Type_Class class, Object msg)
         zapn_EXP(5);
         return does_not_understand(self, (Object)class, msg, argc);
     }
+    assert_class((Object)class);
     Type_Dictionary mdict = class->methods;
     Type_Dictionary_lookup_push(mdict, msg);
 }
