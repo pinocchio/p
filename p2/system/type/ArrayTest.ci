@@ -21,7 +21,7 @@ NEW_TEST(Type_Array_new_Type_Array_with)
 NEW_TEST(Type_Array_size)
     Object integer     = (Object)new_Type_SmallInt(10);
     Type_Array array = new_Type_Array_withAll(10, integer);
-    Object result      = Eval_Send((Object)array, SMB_size, empty_Type_Array);
+    Object result      = Eval_Send0((Object)array, SMB_size);
     ASSERT_EMPTY_STACK;
     assert0(((Type_SmallInt) result)->value == 10);
 

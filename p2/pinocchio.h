@@ -86,12 +86,13 @@ extern Type_Class class##_Class;
     
 // TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send((Object)(exp1), SMB_equals_, \
-        new_Type_Array_with(1, (Object)(exp2))) == (Object)True);
+    assert0(Eval_Send1((Object)(exp1), SMB_equals_, \
+        (Object)(exp2)) == (Object)True);
         
 #define ASSERT_NOT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send((Object)(exp1), SMB_equals_, \
-        new_Type_Array_with(1, (Object)(exp2))) == (Object)False);
+    assert0(Eval_Send1((Object)(exp1), SMB_equals_, \
+        (Object)(exp2)) == (Object)False);
+
 
 /* ========================================================================= */
 

@@ -3,19 +3,17 @@ NEW_TEST(ast_callec_unused)
     Object exp = (Object)new_AST_Constant((Object)i);
     Type_Array body = new_Type_Array_with(1, exp);
     AST_Block block = new_AST_Block(1, 0, 1, body);
-    Type_Array args = new_Type_Array_with(1, (Object)block);
-    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
-                                   SMB_on_, args);
+    Object closure = Eval((Object)block);
+    Object result = Eval_Send1((Object)AST_Callec_Class, SMB_on_, closure);
     assert0(result == i);
 }
 
 NEW_TEST(ast_callec_returned)
-    AST_Block block = new_AST_Block(1, 0, 0, NULL);
+    AST_Block block = new_AST_Block(1, 0, 1, NULL);
     Type_Array body = new_Type_Array_with(1, BLOCK_PARAM(block, 0));
     block->body = body;
-    Type_Array args = new_Type_Array_with(1, (Object)block);
-    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
-                                   SMB_on_, args);
+    Object closure = Eval((Object)block);
+    Object result = Eval_Send1((Object)AST_Callec_Class, SMB_on_, closure);
     assert0(HEADER(result) == (Object)Runtime_Continue_Class);
     assert0(((Runtime_Continue)result)->Env == (Object)current_env());
 }
@@ -24,15 +22,14 @@ NEW_TEST(ast_callec_returned)
 NEW_TEST(ast_callec_escape)
     Object i = (Object)new_Type_SmallInt(100);
     Object j = (Object)new_Type_SmallInt(200);
-    AST_Block block = new_AST_Block(1, 0, 0, NULL);
+    AST_Block block = new_AST_Block(1, 0, 1, NULL);
     AST_Send s = new_AST_Send((Object)BLOCK_PARAM(block, 0), (Object)SMB_escape_,
                               1, (Object)new_AST_Constant(i));
     Type_Array body = new_Type_Array_withAll(2, (Object)s);
     block->body = body;
     body->values[1] = (Object)new_AST_Constant(j);
-    Type_Array args = new_Type_Array_with(1, (Object)block);
-    Object result = Eval_SendConst((Object)new_AST_Constant((Object)AST_Callec_Class),
-                                   SMB_on_, args);
+    Object closure = Eval((Object)block);
+    Object result = Eval_Send1((Object)AST_Callec_Class, SMB_on_, closure);
     assert0(result == i);
 }
 
