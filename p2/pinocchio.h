@@ -60,7 +60,15 @@ typedef unsigned long int uns_int;
 #define CREATE_INITIALIZERS(class) \
 extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
-extern Type_Class class##_Class;
+extern Type_Class class##_Class;\
+extern Organization_ClassReference class##_Reference;
+
+#define DECLARE_CLASS(class)\
+Type_Class class##_Class;\
+Organization_ClassReference class##_Reference;
+
+#define REFER_TO(class)\
+class##_Reference = new_Organization_ClassReference(class##_Class);
 
 /* ========================================================================= */
 

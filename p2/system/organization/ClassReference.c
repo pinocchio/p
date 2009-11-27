@@ -9,12 +9,12 @@ Type_Class Organization_ClassReference_Class;
 /* ========================================================================= */
 
 Organization_ClassReference
-    new_Organization_ClassReference(Object class, Object package)
+    new_Organization_ClassReference(Type_Class class)
 {
     
     NEW_OBJECT(Organization_ClassReference);
-    result->class = class;
-    result->package = package;
+    result->class = (Object)class;
+    result->package = Nil;
     // result->name = Nil;
     return result;
 }

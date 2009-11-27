@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Callec_Class;
+DECLARE_CLASS(AST_Callec)
 
 /* ========================================================================= */
 
@@ -20,6 +20,7 @@ void pre_init_AST_Callec()
     AST_Callec_Class = new_Class_named((Object)Type_Object_Class,
                                        L"AST_Callec",
                                        CREATE_OBJECT_TAG(AST_CALLEC));
+    REFER_TO(AST_Callec);
 }
 
 /* ========================================================================= */
