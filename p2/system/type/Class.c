@@ -90,10 +90,17 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
 
 void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
-    // TODO send DNU;
-    assert(NULL, printf("\"%ls\" does not understand \"%ls\"\n", 
-           ((Type_Class)HEADER(self))->name->value,
-           ((Type_Symbol)msg)->value));
+    if (msg == (Object)SMB_doesNotUnderstand_) {
+        msg = pop_EXP();
+        assert(NULL, printf("\"%ls\" recursive does not understand"
+                            "\"%ls\" (%"F_I"u)\n",
+                ((Type_Class)HEADER(self))->name->value,
+                ((Type_Symbol)msg)->value,
+                argc));
+    }
+    zapn_EXP(argc + 2);
+    Type_Class_direct_dispatch(
+            self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
 }
 
 static void Class_lookup(Type_Class class, Object msg);

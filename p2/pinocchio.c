@@ -158,8 +158,7 @@ bool isInstance(Object object, Object class)
 /* ========================================================================= */
 
 void include() {
-    
-// #include <parser/outTest.c>
+#include <parser/test.ci>
 }
 
 int main()
