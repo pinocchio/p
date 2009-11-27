@@ -246,6 +246,8 @@ void print_Class(Object obj)
 void post_init_Type_Class()
 {
     ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
+    ((Type_Class)HEADER(Metaclass))->type =
+        create_type(CLASS_SIZE, OBJECT, CLASS_VARS);
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
     Behaviour = new_Class_named((Object)Type_Object_Class,
