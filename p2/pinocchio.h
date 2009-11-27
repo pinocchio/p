@@ -56,20 +56,30 @@ typedef unsigned long int uns_int;
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
+#define EXPORT_REFERENCE(class)\
+extern Organization_ClassReference class##_Reference;
+
+#define EXPORT_CLASS(class)\
+extern Type_Class class##_Class;\
 
 #define CREATE_INITIALIZERS(class) \
 extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
-extern Type_Class class##_Class;\
-extern Organization_ClassReference class##_Reference;
+EXPORT_CLASS(class);\
+EXPORT_REFERENCE(class);\
+
+#define DECLARE_REFERENCE(class)\
+Organization_ClassReference class##_Reference;
 
 #define DECLARE_CLASS(class)\
 Type_Class class##_Class;\
-Organization_ClassReference class##_Reference;
+DECLARE_REFERENCE(class);
 
 #define REFER_TO(class)\
 class##_Reference = new_Organization_ClassReference(class##_Class);
 
+#define REFER_DIRECT_TO(class)\
+class##_Reference = new_Organization_ClassReference(class);
 /* ========================================================================= */
 
 #define ASSERT_ARG_SIZE(raw_size) \

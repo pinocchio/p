@@ -6,8 +6,11 @@
 /* ========================================================================= */
 
 Type_Class Metaclass;
+DECLARE_REFERENCE(Metaclass);
 Type_Class Class;
+DECLARE_REFERENCE(Class);
 Type_Class Behaviour;
+DECLARE_REFERENCE(Behaviour);
 
 /* ========================================================================= */
 
@@ -254,4 +257,8 @@ void post_init_Type_Class()
     Metaclass->super = (Object)Behaviour;
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
     ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);
+
+    Metaclass_Reference = new_Organization_ClassReference(Metaclass);
+    Class_Reference     = new_Organization_ClassReference(Class);
+    Behaviour_Reference = new_Organization_ClassReference(Behaviour);
 }

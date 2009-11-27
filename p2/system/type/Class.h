@@ -3,9 +3,13 @@
 
 #include <pinocchio.h>
 
+extern Type_Class Metaclass;
+EXPORT_REFERENCE(Metaclass);
+EXPORT_REFERENCE(Class);
+EXPORT_REFERENCE(Behaviour);
+
 /* ========================================================================= */
 
-extern Type_Class Metaclass;
 #define BEHAVIOUR_SIZE 3
 #define BEHAVIOUR_VARS L"type", L"super", L"methods"
 #define METACLASS_SIZE 3

@@ -5,8 +5,8 @@
 /* ========================================================================= */
 
 Type_Class Type_Boolean_Class;
-Type_Class True_Class;
-Type_Class False_Class;
+DECLARE_CLASS(True);
+DECLARE_CLASS(False);
 
 AST_Constant False_Const;
 Type_Boolean False;
@@ -20,6 +20,7 @@ void pre_init_Type_False() {
     False_Class = new_Class_named((Object)Type_Boolean_Class,
                                   L"False",
                                   CREATE_OBJECT_TAG(BOOL));
+    REFER_TO(False);
     False = NEW_t(Type_Boolean);
     HEADER(False) = (Object)False_Class;
     False_Const = new_AST_Constant((Object) False);
@@ -30,6 +31,7 @@ void pre_init_Type_True()
     True_Class = new_Class_named((Object)Type_Boolean_Class,
                                  L"True",
                                  CREATE_OBJECT_TAG(BOOL));
+    REFER_TO(True);
     True = NEW_t(Type_Boolean);
     HEADER(True) = (Object)True_Class;
     True_Const = new_AST_Constant((Object) True);
