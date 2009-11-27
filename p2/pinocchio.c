@@ -165,7 +165,6 @@ int main()
 {
     #include <pinocchioPreInit.ci>
     initialize_Thread();
-    initialize_Symbol();
     #include <pinocchioPostInit.ci>
 
     #ifdef TEST

@@ -25,6 +25,14 @@ NEW_TEST(Class_Hierarchy)
     assert0(((Type_Class)HEADER(Type_Symbol_Class))->super == HEADER(Type_Object_Class));
 }
 
+/*
+NEW_TEST(Class_dnu)
+    Type_SmallInt int1 = new_Type_SmallInt(1);
+    store_method(
+    Type_Class_direct_dispatch(int1, HEADER(int1), SMB_bla, 0);
+}
+*/
+
 
 /* ========================================================================= */
 

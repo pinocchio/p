@@ -40,7 +40,7 @@ Type_Class new_Class(Object superclass, Object type)
 Type_Class new_Class_named(Object superclass, const wchar_t* name, Object type)
 {
     Type_Class result = (Type_Class) new_Class(superclass, type);
-    result->name      = new_Type_Symbol_cached(name);
+    result->name            = new_Type_Symbol_cached(name); 
     return result;
 }
 
@@ -59,8 +59,8 @@ void inter_init_Type_Class()
 
 void assert_class(Object class)
 {
-    assert(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
-            HEADER(HEADER(class)) == (Object)Metaclass, print_Class(class)); /* if class */
+    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
 }
 
 CNT(Class_super)
@@ -92,15 +92,13 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
     if (msg == (Object)SMB_doesNotUnderstand_) {
         msg = pop_EXP();
-        assert(NULL, printf("\"%ls\" recursive does not understand"
-                            "\"%ls\" (%"F_I"u)\n",
-                ((Type_Class)HEADER(self))->name->value,
-                ((Type_Symbol)msg)->value,
-                argc));
+        assert(NULL, printf("\"%ls\" recursive does not understand \"%ls\" (\"%"F_I"u\")\n", 
+            ((Type_Class)HEADER(self))->name->value,
+            ((Type_Symbol)msg)->value,
+            argc));
     }
     zapn_EXP(argc + 2);
-    Type_Class_direct_dispatch(
-            self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
+    Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
 }
 
 static void Class_lookup(Type_Class class, Object msg);
@@ -178,10 +176,11 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
 {
     va_list args;
     va_start(args, argc);
-    int index;
+    int idx;
+    /* Send obj. TODO update Send>>eval to be able to remove this */
     push_EXP(Nil);
     push_EXP(self);
-    for (index = 0; index < argc; index++) {
+    for (idx = 0; idx < argc; idx++) {
         push_EXP(va_arg(args, Object));
     }
     va_end(args);

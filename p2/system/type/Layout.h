@@ -12,16 +12,10 @@ extern Type_Class Type_Type_LongLayout;
 extern Type_Class Type_BytesLayout;
 extern Type_Class Type_FileLayout;
 
-extern Object empty_object_layout;
-extern Object empty_array_layout;
-extern Object words_layout;
-extern Object bytes_layout;
-extern Object int_layout;
-extern Object long_layout;
-extern Object character_layout;
-extern Object file_layout;
-
 /* ========================================================================= */
+
+#define OBJECT_OF_TYPE(o, type)\
+    TAG_IS_TYPE(GETTAG(o), type)
 
 #define TAG_IS_TYPE(tag, type)\
     (HEADER(tag) == (Object)Type_##type##Layout)
@@ -52,7 +46,6 @@ void post_init_Type_Layout();
 /* ========================================================================= */
 
 extern Object create_type(uns_int size, Type_Tag tag, ...);
-extern Type_Array create_type_with_vars(Type_Class type, uns_int size);
 
 /* ========================================================================= */
 

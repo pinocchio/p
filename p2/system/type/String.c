@@ -28,8 +28,9 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class = new_Class((Object)Type_Object_Class, create_type(0, WORDS));
-    empty_Type_String = new_Type_String(L"");
+    Type_String_Class    = new_Class((Object)Type_Object_Class,
+                                     create_type(0, WORDS));
+    empty_Type_String         = new_Type_String(L"");
 }
 
 /* ========================================================================= */
@@ -73,12 +74,6 @@ CNT(Type_String_concat_)
     poke_EXP(0, Type_String_concat_((Type_String)self, (Type_String)string));
 }
 
-NATIVE1(Type_String_equals_)
-    Object w_arg = NATIVE_ARG(0);
-    assert0(OBJECT_OF_TYPE(w_arg, Words));
-    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self, (Type_Symbol)w_arg)));
-}
-
 NATIVE1(Type_String_concat_)
     Object w_arg = NATIVE_ARG(0);
     push_CNT(Type_String_concat_);
@@ -97,6 +92,13 @@ NATIVE0(Type_String_asSymbol)
     RETURN_FROM_NATIVE(new_Type_Symbol(((Type_String)self)->value));
 }
 
+NATIVE1(Type_String_equals_)
+    Object w_arg = NATIVE_ARG(0);
+    assert0(OBJECT_OF_TYPE(w_arg, Words));
+    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self,
+    (Type_Symbol)w_arg)));
+}
+
 // TODO check types not classes!
 NATIVE2(Type_String_at_put_)
     Object w_arg0 = NATIVE_ARG(0);
@@ -113,7 +115,7 @@ NATIVE2(Type_String_at_put_)
 /* ========================================================================= */
 
 void post_init_Type_String()
-{   
+{
     Type_String_Class->name = new_Type_Symbol_cached(L"String");
     install_symbol_methods(Type_String_Class);
     store_native_method(Type_String_Class, SMB_concat_,  NM_Type_String_concat_);

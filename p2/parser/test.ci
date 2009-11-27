@@ -4,8 +4,6 @@
 Type_Class Test_Class;
 Object test_Class_Instance;
 // Test Method symbol
-Type_Symbol SMB_runTestCase;
-
 
 /* ========================================================================= */
 

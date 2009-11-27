@@ -15,14 +15,14 @@ Type_Class Type_LongLayout;
 Type_Class Type_BytesLayout;
 Type_Class Type_FileLayout;
 
-Object empty_object_layout;
-Object empty_array_layout;
-Object words_layout;
-Object bytes_layout;
-Object int_layout;
-Object long_layout;
-Object character_layout;
-Object file_layout;
+static Object empty_object_layout;
+static Object empty_array_layout;
+static Object words_layout;
+static Object bytes_layout;
+static Object int_layout;
+static Object long_layout;
+static Object character_layout;
+static Object file_layout;
 
 /* ========================================================================= */
 

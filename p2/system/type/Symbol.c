@@ -37,20 +37,20 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
     return result;
 }
 
-void pre_init_Type_Symbol()
-{
-    Symbol_Table = new_Type_Dictionary();
-    Type_Symbol_Class = new_Class((Object)Type_Object_Class,
-                                        create_type(0, WORDS));
-}
 /*
  * Initialize Symbols before installing methods.
  */
 void initialize_Symbol()
 {
+    Symbol_Table = new_Type_Dictionary();
     #include <system/type/SymbolInitialization.ci> 
 }
 
+void pre_init_Type_Symbol()
+{
+    Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_type(0, WORDS));
+    initialize_Symbol();
+}
 /* ========================================================================= */
 
 NATIVE1(Type_Symbol_at_)
@@ -114,8 +114,8 @@ NATIVE0(Type_Symbol_size)
 
 void post_init_Type_Symbol()
 {
-    Type_Symbol_Class->name = new_Type_Symbol_cached(L"Symbol");
     install_symbol_methods(Type_Symbol_Class);
+    Type_Symbol_Class->name = new_Type_Symbol_cached(L"Symbol");
 }
 
 void install_symbol_methods(Type_Class class)
