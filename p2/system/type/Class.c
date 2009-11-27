@@ -221,6 +221,11 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     return Class_direct_dispatch(self, class, msg, argc);
 }
 
+METHOD(Class_name,0,0,1)
+    ADD_STATEMENT(TAG_VAR(Class->type, 3))
+    return method;
+}
+
 void print_Class(Object obj)
 {
     if (obj == NULL) {
@@ -263,4 +268,6 @@ void post_init_Type_Class()
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);
     Behaviour_Reference = new_Organization_ClassReference(Behaviour);
+
+    store_method(Class, SMB_name, Class_name());
 }

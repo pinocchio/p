@@ -26,6 +26,9 @@ extern Type_Class Type_FileLayout;
 #define TAG_SIZE(tag)\
     (((Type_Array)tag)->size)
 
+#define TAG_VAR(tag, index)\
+    (((Type_Array)tag)->values[index])
+
 #define ASSERT_TAG_SIZE(tag, size)\
     assert0(0 <= size);\
     assert0(TAG_SIZE(tag) > size);

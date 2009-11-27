@@ -61,3 +61,4 @@ Type_Symbol SMB_escape_;
 Type_Symbol SMB_asCharacter;
 Type_Symbol SMB_equals_;
 Type_Symbol SMB_doesNotUnderstand_;
+Type_Symbol SMB_name;

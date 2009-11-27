@@ -40,6 +40,7 @@ SMB_isNotNil              = new_Type_Symbol_cached(L"isNotNil");
 SMB_lookup_               = new_Type_Symbol_cached(L"lookup:");
 SMB_lt_                   = new_Type_Symbol_cached(L"<");
 SMB_minus_                = new_Type_Symbol_cached(L"-");
+SMB_name                  = new_Type_Symbol_cached(L"name");
 SMB_not                   = new_Type_Symbol_cached(L"not");
 SMB_notEquals_            = new_Type_Symbol_cached(L"notEquals:");
 SMB_on_                   = new_Type_Symbol_cached(L"on:");
