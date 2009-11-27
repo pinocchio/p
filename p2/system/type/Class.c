@@ -97,6 +97,7 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
             ((Type_Symbol)msg)->value,
             argc));
     }
+    printf("DNU!\n");
     zapn_EXP(argc + 2);
     Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
 }

@@ -83,6 +83,7 @@ void CNT_send_Eval()
     EVAL_IF(Organization_ClassReference)
     
     /* TODO fallback by actually sending the eval message */
+    print_Class(exp);
     assert(NULL,
 		   printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
 				  ((Type_Class)class)->name->value));
