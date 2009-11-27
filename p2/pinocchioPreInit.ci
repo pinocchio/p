@@ -11,8 +11,8 @@ pre_init_Type_Dictionary();
 pre_init_Type_String();
 pre_init_Type_Symbol();
 
+pre_init_Organization_ClassReference();
 pre_init_Type_Character();
-
 pre_init_AST_Assign();
 pre_init_AST_Block();
 pre_init_AST_Callec();
@@ -34,4 +34,3 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_AST_InstVariable();
-pre_init_Organization_ClassReference();
