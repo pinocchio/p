@@ -3,9 +3,6 @@
 #include <test/pinocchioTest.h>
 #include <test/pinocchioTest.hi>
 
-#ifdef __linux
-#include <stdio_ext.h>
-#endif
 
 /* ========================================================================= */
 

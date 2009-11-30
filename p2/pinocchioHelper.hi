@@ -13,6 +13,7 @@ extern jmp_buf Assert_Fail;
 #endif // ASSERT_FAIL
 
 #ifdef __linux
+    #include <stdio_ext.h>
     #define FLUSH_STDOUT __fpurge(stdout);
 #endif
 #ifdef __APPLE__
