@@ -12,16 +12,26 @@ extern jmp_buf Assert_Fail;
     #define ASSERT_HANDLER longjmp(Assert_Fail, 1);
 #endif // ASSERT_FAIL
 
+#ifdef __linux
+    #define FLUSH_STDOUT __fpurge(stdout);
+#endif
+#ifdef __APPLE__
+    #define FLUSH_STDOUT fpurge(stdout);
+#endif
+
+
 #define assert(test, message) \
 if (!(test)) {\
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     message; \
+    FLUSH_STDOUT; \
     ASSERT_HANDLER;\
 }
 
 #define assert0(test)\
 if (!(test)) {\
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    FLUSH_STDOUT; \
     ASSERT_HANDLER; \
 }
 
@@ -29,6 +39,7 @@ if (!(test)) {\
 if (!(test)) { \
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     printf(message); \
+    FLUSH_STDOUT; \
     ASSERT_HANDLER;\
 }
 

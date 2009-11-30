@@ -34,12 +34,7 @@ void test_suite_begin(char * suiteName)
 
 void test_suite_end(char * suiteName)
 {
-    #ifdef __linux
-        __fpurge(stdout);
-    #endif
-    #ifdef __APPLE__
-        fpurge(stdout);
-    #endif
+    FLUSH_STDOUT
     if (TEST_CASE_FAILED) {
         /* reads out contents of pipe to the error_buffer */
         //read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
