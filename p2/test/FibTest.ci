@@ -1,7 +1,7 @@
 Type_Symbol SMB_fib;
 
 METHOD(fib_method, 0, 0, 1)
-    AST_Send test = new_AST_Send(Self, (Object)SMB_lt_, 
+    AST_Send test = new_AST_Send(Self, (Object)SMB__lt, 
                                  1,
                                  (Object)new_AST_Constant(
                                              (Object)new_Type_SmallInt(2)));
@@ -16,18 +16,18 @@ METHOD(fib_method, 0, 0, 1)
             (Object)new_AST_Send(
                 (Object)new_AST_Send(
                     Self, 
-                    (Object)SMB_minus_, 
+                    (Object)SMB__minus, 
                     1, 
                     (Object)new_AST_Constant(
                                 (Object)new_Type_SmallInt(1))),
                 (Object)SMB_fib,
                 0),
-            (Object)SMB_plus_, 
+            (Object)SMB__plus, 
             1,
             (Object)new_AST_Send(
                 (Object)new_AST_Send(
                     Self, 
-                    (Object)SMB_minus_, 
+                    (Object)SMB__minus, 
                     1, 
                     (Object)new_AST_Constant(
                     (Object)new_Type_SmallInt(2))),

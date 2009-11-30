@@ -104,11 +104,11 @@ class##_Reference = new_Organization_ClassReference(class);
     
 // TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send1((Object)(exp1), SMB_equals_, \
+    assert0(Eval_Send1((Object)(exp1), SMB__equal, \
         (Object)(exp2)) == (Object)True);
         
 #define ASSERT_NOT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send1((Object)(exp1), SMB_equals_, \
+    assert0(Eval_Send1((Object)(exp1), SMB__equal, \
         (Object)(exp2)) == (Object)False);
 
 

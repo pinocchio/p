@@ -203,7 +203,7 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
     int result = Bucket_quick_compare_key(inkey, dictkey);
     if (result == -1) {
         return Type_Class_direct_dispatch(inkey, HEADER(inkey),
-                                          (Object)SMB_equals_, 1, dictkey);
+                                          (Object)SMB__equal, 1, dictkey);
     }
     push_EXP(get_bool(result));
 }

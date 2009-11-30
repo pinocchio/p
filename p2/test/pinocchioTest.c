@@ -107,8 +107,7 @@ void run_tests()
 test_Type_Array();
 test_AST_Assign();
 test_Type_Boolean();
-test_AST_Callec();
-test_Type_Character();
+ test_Type_Character();
 test_Type_Class();
 test_AST_Constant();
 //test_AST_Continue();

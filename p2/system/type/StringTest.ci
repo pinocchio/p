@@ -29,7 +29,7 @@ NEW_TEST(Type_String_concat_)
     ASSERT_TYPE(string_result, Type_String_Class);
     assert0(string_result->size == (string->size + string2->size));
 
-    result = Eval_Send1((Object)string, SMB_concat_, (Object)string2);
+    result = Eval_Send1((Object)string, SMB__concat, (Object)string2);
     Type_String resultString = (Type_String)resultString;
     ASSERT_TYPE(result, Type_String_Class);
     assert((((Type_String) result)->size == (string->size + string2->size)),

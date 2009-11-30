@@ -14,28 +14,28 @@ NEW_TEST(Type_SmallInt_equals_manualTest)
     Object int2     = (Object)new_Type_SmallInt(2);
     Object result;
     
-    result = Eval_Send1(int0, SMB_equals_, int2);
+    result = Eval_Send1(int0, SMB__equal, int2);
     assert0(result == (Object)False);
     ASSERT_EMPTY_STACK;
-    result = Eval_Send1(int2, SMB_equals_, int0);
+    result = Eval_Send1(int2, SMB__equal, int0);
     assert0(result == (Object)False);
     ASSERT_EMPTY_STACK;
     
-    result = Eval_Send1(int0, SMB_equals_, int0);
+    result = Eval_Send1(int0, SMB__equal, int0);
     assert0(result == (Object)True);
     ASSERT_EMPTY_STACK;
     
-    result = Eval_Send1(int2, SMB_equals_, int2);
+    result = Eval_Send1(int2, SMB__equal, int2);
     assert0(result == (Object)True);
     ASSERT_EMPTY_STACK;
 }
 
 #define Type_SmallInt_BINOP_TEST(name, op) \
-NEW_TEST(Type_SmallInt_##name##_) \
+NEW_TEST(Type_SmallInt__##name) \
     Type_SmallInt int4 = new_Type_SmallInt(4); \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
-    result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
+    result = Eval_Send1((Object)int4, SMB__##name, (Object)int8); \
     ASSERT_TYPE(result, Type_SmallInt_Class); \
     ASSERT_EMPTY_STACK;\
    \
@@ -69,11 +69,11 @@ Type_SmallInt_BINOP_TEST(or,         |)
 }
 
 #define Type_SmallInt_BOOLEAN_BINOP_TEST(name, op) \
-NEW_TEST(Type_SmallInt_##name##_) \
+NEW_TEST(Type_SmallInt__##name) \
     Type_SmallInt int4 = new_Type_SmallInt(4); \
     Type_SmallInt int8 = new_Type_SmallInt(8); \
     Object result; \
-    result = Eval_Send1((Object)int4, SMB_##name##_, (Object)int8); \
+    result = Eval_Send1((Object)int4, SMB__##name, (Object)int8); \
     ASSERT_INSTANCE_OF(result, Type_Boolean_Class); \
     ASSERT_EMPTY_STACK;\
    \
@@ -82,9 +82,9 @@ NEW_TEST(Type_SmallInt_##name##_) \
 		  printf("expected %i but got %i\n", (int4->value op int8->value), \
 											 ((Type_Boolean)result)->value)); \
                                              
-Type_SmallInt_BOOLEAN_BINOP_TEST(equals, ==)
+Type_SmallInt_BOOLEAN_BINOP_TEST(equal, ==)
 }
-Type_SmallInt_BOOLEAN_BINOP_TEST(notEquals, !=)
+Type_SmallInt_BOOLEAN_BINOP_TEST(notEqual, !=)
 }
 Type_SmallInt_BOOLEAN_BINOP_TEST(lt,     <)
 }
@@ -127,16 +127,16 @@ NEW_TEST(Type_SmallInt_asString)
 TEST_SUITE(Type_SmallInt,
 {
     RUN_TEST(Type_SmallInt_equals_manualTest);
-    RUN_TEST(Type_SmallInt_plus_);
-    RUN_TEST(Type_SmallInt_minus_);
-    RUN_TEST(Type_SmallInt_divide_);
-    RUN_TEST(Type_SmallInt_times_);
-    RUN_TEST(Type_SmallInt_shiftLeft_);
-    RUN_TEST(Type_SmallInt_shiftRight_);
-    RUN_TEST(Type_SmallInt_equals_);
-    RUN_TEST(Type_SmallInt_lt_);
-    RUN_TEST(Type_SmallInt_gt_);
-    RUN_TEST(Type_SmallInt_notEquals_);
+    RUN_TEST(Type_SmallInt__plus);
+    RUN_TEST(Type_SmallInt__minus);
+    RUN_TEST(Type_SmallInt__divide);
+    RUN_TEST(Type_SmallInt__times);
+    RUN_TEST(Type_SmallInt__shiftLeft);
+    RUN_TEST(Type_SmallInt__shiftRight);
+    RUN_TEST(Type_SmallInt__equal);
+    RUN_TEST(Type_SmallInt__lt);
+    RUN_TEST(Type_SmallInt__gt);
+    RUN_TEST(Type_SmallInt__notEqual);
     RUN_TEST(Type_SmallInt_hash);
     RUN_TEST(Type_SmallInt_asString);
     // make sure this test is always the last one

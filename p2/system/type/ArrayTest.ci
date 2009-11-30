@@ -25,7 +25,7 @@ NEW_TEST(Type_Array_size)
     ASSERT_EMPTY_STACK;
     assert0(((Type_SmallInt) result)->value == 10);
 
-    result = Eval_Send1(integer, SMB_equals_, result);
+    result = Eval_Send1(integer, SMB__equal, result);
     assert(result == (Object)True,
 		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
     ASSERT_EMPTY_STACK;

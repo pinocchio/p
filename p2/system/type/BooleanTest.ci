@@ -1,19 +1,19 @@
 NEW_TEST(boolean_equals)
     Object result;
     
-    result = Eval_Send1((Object)True, SMB_equals_, (Object)True);
+    result = Eval_Send1((Object)True, SMB__equal, (Object)True);
     assert0(result == (Object)True);
     ASSERT_EMPTY_STACK;
     
-    result = Eval_Send1((Object)True, SMB_equals_, (Object)False);
+    result = Eval_Send1((Object)True, SMB__equal, (Object)False);
     assert0(result == (Object)False);
     ASSERT_EMPTY_STACK;
     
-    result = Eval_Send1((Object)False, SMB_equals_, (Object)True);
+    result = Eval_Send1((Object)False, SMB__equal, (Object)True);
     assert0(result == (Object)False);
     ASSERT_EMPTY_STACK;
     
-    result = Eval_Send1((Object)False, SMB_equals_, (Object)False);
+    result = Eval_Send1((Object)False, SMB__equal, (Object)False);
     assert0(result == (Object)True);
     ASSERT_EMPTY_STACK;
 }
