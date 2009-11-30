@@ -9,11 +9,12 @@
 #define AST_SEND_VARS L"cache", L"message", L"arguments", L"info", L"receiver"
 
 struct AST_Send_t {
+    uns_int             size;
     Runtime_InlineCache cache;
     Object              message;
     AST_Info            info;
     Object              receiver;
-    struct Type_Array_t arguments;
+    Object              arguments[];
 };
 
 CREATE_INITIALIZERS(AST_Send)

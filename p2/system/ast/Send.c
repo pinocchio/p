@@ -9,10 +9,7 @@ Type_Class AST_Send_Class;
 
 /* ========================================================================= */
 
-Type_Array AST_Send_args(AST_Send send)
-{
-    return &send->arguments;
-}
+#define AST_Send_args(send) send->arguments
 
 AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
     NEW_ARRAY_OBJECT(AST_Send, Object[argc]);
@@ -21,7 +18,7 @@ AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
     result->info                = empty_AST_Info;
     result->cache               = new_Runtime_InlineCache();
 
-    AST_Send_args(result)->size = argc;
+    result->size                = argc;
     return result;
 }
 
@@ -32,7 +29,7 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
     va_start(args, argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        AST_Send_args(result)->values[idx] = va_arg(args, Object);
+        AST_Send_args(result)[idx] = va_arg(args, Object);
     }
     va_end(args);
 
@@ -60,9 +57,9 @@ void CNT_store_argument()
     uns_int idx = (uns_int)peek_EXP(1);
     AST_Send send = (AST_Send)peek_EXP(idx + 2);
     poke_EXP(1, arg);
-    if (idx < AST_Send_args(send)->size) {
+    if (idx < send->size) {
         poke_EXP(0, idx+1);
-        push_EXP(AST_Send_args(send)->values[idx]);
+        push_EXP(AST_Send_args(send)[idx]);
         push_CNT(send_Eval);
     } else {
         poke_EXP(0, idx);
