@@ -18,8 +18,9 @@ Type_Array AST_Super_args(AST_Super super)
 AST_Super new_AST_Super(Object message, uns_int argc, ...)
 {
     NEW_ARRAY_OBJECT(AST_Super, Object[argc]);
-    result->message              = message;
-    result->info                 = empty_AST_Info;
+    result->message             = message;
+    result->info                = empty_AST_Info;
+    result->cache               = new_Runtime_InlineCache();
 
     AST_Super_args(result)->size = argc;
     va_list args;

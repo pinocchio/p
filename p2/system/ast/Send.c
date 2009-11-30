@@ -19,6 +19,7 @@ AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
     result->receiver            = receiver;
     result->message             = msg;
     result->info                = empty_AST_Info;
+    result->cache               = new_Runtime_InlineCache();
 
     AST_Send_args(result)->size = argc;
     return result;

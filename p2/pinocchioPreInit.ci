@@ -11,6 +11,7 @@ pre_init_Type_Dictionary();
 pre_init_Type_String();
 pre_init_Type_Symbol();
 
+pre_init_Runtime_InlineCache();
 pre_init_Organization_ClassReference();
 pre_init_Type_Character();
 pre_init_AST_Assign();

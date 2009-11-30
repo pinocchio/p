@@ -37,3 +37,4 @@
 #include <system/type/Layout.h>
 #include <system/ast/InstVariable.h>
 #include <system/organization/ClassReference.h>
+#include <system/runtime/InlineCache.h>

@@ -131,8 +131,8 @@ static void CNT_Class_lookup_cache_invoke()
     uns_int argc = (uns_int)peek_EXP(3);
     AST_Send send = (AST_Send)peek_EXP(argc + 7);
     Object dispatch_type = peek_EXP(5);
-    InlineCache * cache = &send->cache;
-    cache->type     = dispatch_type;
+    Runtime_InlineCache cache = send->cache;
+    cache->class    = dispatch_type;
     cache->method   = method;
 
     Class_invoke_do(class, method, argc);
@@ -195,7 +195,7 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
     AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
-    InlineCache * cache = &send->cache;
+    Runtime_InlineCache cache = send->cache;
     Object msg = send->message;
 
     assert0(msg != Nil);
@@ -212,7 +212,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     /* Monomorphic inline cache */
     // TODO put that directly on the sender side
     // TODO create Polymorphic inline cache
-    if (class == cache->type) {
+    if (class == cache->class) {
         return Method_invoke(cache->method, self, class, argc);
     }
     assert_class(class);

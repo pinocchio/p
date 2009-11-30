@@ -9,7 +9,7 @@
 #define AST_SUPER_VARS L"cache", L"message", L"arguments", L"info"
 
 struct AST_Super_t {
-    InlineCache         cache;
+    Runtime_InlineCache cache;
     Object              message; 
     AST_Info            info;   
     Object              unused;

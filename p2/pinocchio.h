@@ -193,10 +193,6 @@ extern void CNT_exit_eval();
 #include <pinocchioType.hi>
 
 typedef void(*native)(Object self, Object class, uns_int argc);
-typedef struct InlineCache {
-    Object          type;
-    Object          method;
-} InlineCache;
 
 /* ========================================================================= */
 

@@ -9,7 +9,7 @@
 #define AST_SEND_VARS L"cache", L"message", L"arguments", L"info", L"receiver"
 
 struct AST_Send_t {
-    InlineCache         cache;
+    Runtime_InlineCache cache;
     Object              message;
     AST_Info            info;
     Object              receiver;

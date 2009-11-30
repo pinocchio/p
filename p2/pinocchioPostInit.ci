@@ -30,3 +30,4 @@ post_init_Runtime_MethodClosure();
 post_init_Type_Layout();
 post_init_AST_InstVariable();
 post_init_Organization_ClassReference();
+post_init_Runtime_InlineCache();
