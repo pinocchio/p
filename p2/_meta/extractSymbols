@@ -9,7 +9,7 @@ if $0 == __FILE__
     puts
     puts '    ^ #('
     File.read(SMB_init).each {|l|
-        if /(SMB_.*?)\s+= new_Type_Symbol\(L"(.*?)"\);/ =~ l
+        if /(SMB_.*?)\s+= new_Type_Symbol_cached\(L"(.*?)"\);/ =~ l
             puts "        ('#{$2}' '#{$1}')"
         end
     }
