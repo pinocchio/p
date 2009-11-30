@@ -10,10 +10,7 @@ Type_Class AST_Super_Class;
 
 /* ========================================================================= */
 
-Type_Array AST_Super_args(AST_Super super)
-{
-    return &super->arguments;
-}
+#define AST_Super_args(super) super->arguments
 
 AST_Super new_AST_Super(Object message, uns_int argc, ...)
 {
@@ -21,13 +18,13 @@ AST_Super new_AST_Super(Object message, uns_int argc, ...)
     result->message             = message;
     result->info                = empty_AST_Info;
     result->cache               = new_Runtime_InlineCache();
+    result->size                = argc;
 
-    AST_Super_args(result)->size = argc;
     va_list args;
     va_start(args, argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        AST_Super_args(result)->values[idx] = va_arg(args, Object);
+        AST_Super_args(result)[idx] = va_arg(args, Object);
     }
     va_end(args);
 
