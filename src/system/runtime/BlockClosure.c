@@ -47,8 +47,9 @@ Type_Array activation_from_native(uns_int argc)
 
     argc = paramc;
     // Set locals to nil.
-    while (argc++ < paramc + localc) {
+    while (argc < paramc + localc) {
         args->values[argc] = Nil;
+        argc++;
     }
 
     return args;

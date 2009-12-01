@@ -41,7 +41,6 @@ void init_variable_array(Type_Array array, uns_int scope_id,
 {
     uns_int i;
     for (i = 0; i < array->size; i++) {
-        printf("Init: %p %lu %lu\n", array->values[i], scope_id, local_id);
         ((AST_Variable)array->values[i])->scope_id = scope_id;
         ((AST_Variable)array->values[i])->local_id = local_id;
         local_id++;
