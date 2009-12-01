@@ -341,17 +341,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateExpansionKey</key>
 							<array>
 								<string>08FB7794FE84155DC02AAC07</string>
-								<string>36F31AE210B2BAD00002A4DA</string>
-								<string>08FB7795FE84155DC02AAC07</string>
-								<string>3696681710727354008C5C0F</string>
-								<string>365E1270107F3F2F0013F237</string>
-								<string>3696682910727354008C5C0F</string>
-								<string>36B94112109F411000242037</string>
-								<string>3696682A10727354008C5C0F</string>
-								<string>3696685A10727354008C5C0F</string>
-								<string>3696685F10727354008C5C0F</string>
-								<string>3696686510727354008C5C0F</string>
-								<string>C6A0FF2B0290797F04C91782</string>
 								<string>1AB674ADFE9D54B511CA2CBB</string>
 								<string>1C37FBAC04509CD000000102</string>
 								<string>1C37FAAC04509CD000000102</string>
@@ -361,8 +350,6 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>2</integer>
-									<integer>1</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -404,7 +391,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>test.ci</string>
+								<string>Variable.c</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -412,11 +399,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>test.ci</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>36C814D110C555D000D9476C</string>
+										<string>Variable.c</string>
 										<key>history</key>
 										<array>
 											<string>3653AE44107AA88000F0350E</string>
@@ -526,11 +509,6 @@
 											<string>364307EF10C411F4002AA7A7</string>
 											<string>364307FD10C41274002AA7A7</string>
 											<string>3643080910C412A7002AA7A7</string>
-											<string>36C814C410C5559600D9476C</string>
-											<string>36C814C610C5559600D9476C</string>
-											<string>36C814C710C5559600D9476C</string>
-											<string>36C814CD10C555B800D9476C</string>
-											<string>36C814C510C5559600D9476C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -711,7 +689,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>281368016.72545397</real>
+	<real>281371245.279127</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>2</integer>
 	<key>ToolbarIsVisible</key>
@@ -752,7 +730,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>test.ci</string>
+								<string>&lt;No Editor&gt;</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
