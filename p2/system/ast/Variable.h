@@ -17,7 +17,7 @@ struct AST_Variable_t {
 
 CREATE_INITIALIZERS(AST_Variable)
 
-extern AST_Variable new_AST_Variable_named(const wchar_t* name);
+extern AST_Variable new_AST_Variable_named(uns_int scope_id, uns_int local_id, const wchar_t* name);
 extern AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id);
 
 /* ========================================================================= */
