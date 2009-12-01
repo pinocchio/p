@@ -51,11 +51,12 @@ AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
                              uns_int depth, uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_Block, Object[statementCount]);
-    result->params     = params;
-    result->locals     = locals;
+    result->params  = params;
+    result->locals  = locals;
     init_variable_array(result->params, depth, 0);
     init_variable_array(result->locals, depth, result->params->size);
-    result->info       = empty_AST_Info;
+    result->info    = empty_AST_Info;
+    result->size    = statementCount;
     COPY_ARGS(statementCount, result->body);
     return result;
 }
