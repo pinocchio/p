@@ -1,0 +1,94 @@
+
+
+#define SYMBOL_TEST_SETUP \
+Type_Symbol symbol = new_Type_Symbol(L"symbol"); \
+Object result;
+
+/* ========================================================================= */
+
+NEW_TEST(Type_Symbol_equals_)
+    Type_Symbol symbol = new_Type_Symbol_cached(L"symbol"); 
+    Type_Symbol symbol2 = new_Type_Symbol_cached(L"symbol");
+    // Symbols should use a symbol table
+    ASSERT_EQUALS(symbol,  symbol2);
+    ASSERT_EQUALS(symbol2, symbol);
+    assert0(symbol == symbol2);
+    
+    symbol = new_Type_Symbol(L"symbol"); 
+    symbol2 = new_Type_Symbol(L"symbol");
+    // Symbols should use a symbol table
+    ASSERT_NOT_EQUALS(symbol,  symbol2);
+    ASSERT_NOT_EQUALS(symbol2, symbol);
+    assert0(symbol != symbol2);
+}
+
+NEW_TEST(Type_Symbol_size)
+    SYMBOL_TEST_SETUP;
+    result = Eval_Send0((Object)symbol, SMB_size);
+    ASSERT_TYPE(result, Type_SmallInt_Class);
+    assert0(((Type_SmallInt)result)->value == 6);
+    ASSERT_EMPTY_STACK;
+    
+}
+
+NEW_TEST(Type_Symbol_asString)
+    SYMBOL_TEST_SETUP;
+    result = Eval_Send0((Object)symbol, SMB_asString);
+    ASSERT_TYPE(result, Type_String_Class);
+    ASSERT_EMPTY_STACK;
+}
+
+NEW_TEST(Type_Symbol_asSymbol)
+    SYMBOL_TEST_SETUP;
+    result = Eval_Send0((Object)symbol, SMB_asSymbol);
+    assert0(result == (Object)symbol);
+    ASSERT_EMPTY_STACK;
+}
+
+NEW_TEST(Type_Symbol_indexOf)
+    //SYMBOL_TEST_SETUP;
+}
+
+NEW_TEST(Type_Symbol_lastIndexOf)
+    //SYMBOL_TEST_SETUP;
+}
+
+NEW_TEST(Type_Symbol_at_)
+    SYMBOL_TEST_SETUP;
+    int i;
+    for (i= 0; i<symbol->size; ++i) {
+        Type_SmallInt index = new_Type_SmallInt(i);
+        assert0(index->value == i);
+        result = Eval_Send1((Object)symbol, SMB_at_, (Object)index);
+        ASSERT_EMPTY_STACK;
+        ASSERT_TYPE(result, Type_Character_Class); 
+        assert(((Type_Character) result)->value == symbol->value[i],
+            printf("%ls [%i] = %lc \n", symbol->value, i, symbol->value[0]));
+    }
+}
+
+NEW_TEST(Type_Symbol_asType_Array)
+    SYMBOL_TEST_SETUP;
+    result = Eval_Send0((Object)symbol, SMB_asArray);
+    ASSERT_TYPE(result, Type_Array_Class);
+    int i;
+    Object item;
+    for (i= 0; i<symbol->size; ++i) {
+        item = ((Type_Array) result)->values[i];
+        ASSERT_TYPE(item, Type_Character_Class);
+        assert0(((Type_Character) item)->value == symbol->value[i]);
+        ASSERT_EMPTY_STACK;
+    }
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(Type_Symbol,
+{
+    RUN_TEST(Type_Symbol_equals_);
+    RUN_TEST(Type_Symbol_size);
+    RUN_TEST(Type_Symbol_asString);
+    RUN_TEST(Type_Symbol_asSymbol);
+    RUN_TEST(Type_Symbol_at_);
+    RUN_TEST(Type_Symbol_asType_Array);
+})

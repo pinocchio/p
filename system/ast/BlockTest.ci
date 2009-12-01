@@ -1,0 +1,28 @@
+
+#define AST_BLOCK_TEST_SETUP \
+    AST_Block block = new_AST_Block(0, 0, 0, 1, NULL); \
+    Object result;
+
+/* ========================================================================= */
+
+NEW_TEST(AST_Block_eval)
+    AST_BLOCK_TEST_SETUP;
+    Type_SmallInt int1     = new_Type_SmallInt(1);
+    AST_Constant int1Const = new_AST_Constant((Object)int1);
+    
+    block->body[0] = (Object)int1Const;
+    
+    result = Eval((Object)block);
+    assert0(HEADER(result) == (Object)Runtime_BlockClosure_Class);
+    Runtime_BlockClosure closure = (Runtime_BlockClosure) result;
+    assert0(closure->code == block);
+    ASSERT_EMPTY_STACK;
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(AST_Block,
+{
+    RUN_TEST(AST_Block_eval);
+})
+

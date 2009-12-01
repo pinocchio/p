@@ -1,0 +1,115 @@
+
+
+NEW_TEST(Type_Array_new_Type_Array_with)
+    Type_Array array;
+    
+    array = new_Type_Array_with(0);
+    assert0(array->size == 0);
+    assert0(array == empty_Type_Array);
+    
+    array = new_Type_Array_with(1, Nil);
+    assert0(array->size == 1);
+    assert0(array->values[0] == Nil);
+    
+    array = new_Type_Array_with(3, Nil, NULL, Nil);
+    assert0(array->size == 3);
+    assert0(array->values[0] == Nil);
+    assert0(array->values[1] == NULL);
+    assert0(array->values[2] == Nil);
+}
+
+NEW_TEST(Type_Array_size)
+    Object integer     = (Object)new_Type_SmallInt(10);
+    Type_Array array = new_Type_Array_withAll(10, integer);
+    Object result      = Eval_Send0((Object)array, SMB_size);
+    ASSERT_EMPTY_STACK;
+    assert0(((Type_SmallInt) result)->value == 10);
+
+    result = Eval_Send1(integer, SMB__equal, result);
+    assert(result == (Object)True,
+		   printf("%ls\n", ((Type_String)((Type_Class)HEADER(result))->name)->value));
+    ASSERT_EMPTY_STACK;
+}
+
+NEW_TEST(Type_Array_at_)
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
+                                     L"TestClass",
+                                     create_type(2, ARRAY, L"a", L"b"));
+    Object o = instantiate_sized(cls, 3);
+    ((Type_Array)o)->values[0] = (Object)True;
+    ((Type_Array)o)->values[1] = (Object)False;
+    Object integer = (Object)new_Type_SmallInt(100);
+    ((Type_Array)o)->values[2] = integer;
+    Object result;
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(0));
+    assert0(result == (Object)True);
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(1));
+    assert0(result == (Object)False);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(0));
+    assert0(result == integer);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(1));
+    assert0(result == Nil);
+}
+
+NEW_TEST(Type_Array_at_put_)
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
+                                     L"TestClass",
+                                     create_type(2, ARRAY, L"a", L"b"));
+    Object o = instantiate_sized(cls, 3);
+    Object result = Eval_Send2(o, SMB_at_put_,
+                               (Object)new_Type_SmallInt(0),
+                               (Object)True);
+    assert0(result == o);
+    Object integer = (Object)new_Type_SmallInt(100);
+    Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(0), integer);
+    Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
+    assert0(((Type_Array)o)->values[0] == integer);
+    assert0(((Type_Array)o)->values[1] == Nil);
+    assert0(((Type_Array)o)->values[2] == (Object)True);
+    assert0(((Type_Array)o)->values[3] == (Object)False);
+    assert0(((Type_Array)o)->values[4] == Nil);
+}
+
+NEW_TEST(Type_Array_basicNew_)
+    Type_Class cls = new_Class_named((Object)Type_Array_Class, 
+                                     L"TestClass",
+                                     create_type(2, ARRAY, L"a", L"b"));
+    Object w_s = (Object)new_Type_SmallInt(3);
+    Object o = Eval_Send1((Object)cls, SMB_basicNew_, w_s);
+    ((Type_Array)o)->values[0] = (Object)True;
+    ((Type_Array)o)->values[1] = (Object)False;
+    Object integer = (Object)new_Type_SmallInt(100);
+    ((Type_Array)o)->values[2] = integer;
+    Object result;
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(0));
+    assert0(result == (Object)True);
+    result = Eval_Send1(o, SMB_instVarAt_, (Object)new_Type_SmallInt(1));
+    assert0(result == (Object)False);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(0));
+    assert0(result == integer);
+    result = Eval_Send1(o, SMB_at_, (Object)new_Type_SmallInt(1));
+    assert0(result == Nil);
+    result = Eval_Send2(o, SMB_at_put_,
+                               (Object)new_Type_SmallInt(0),
+                               (Object)True);
+    assert0(result == o);
+    Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(0), integer);
+    Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(1), (Object)False);
+    assert0(((Type_Array)o)->values[0] == integer);
+    assert0(((Type_Array)o)->values[1] == (Object)False);
+    assert0(((Type_Array)o)->values[2] == (Object)True);
+    assert0(((Type_Array)o)->values[3] == (Object)False);
+    assert0(((Type_Array)o)->values[4] == Nil);
+}
+
+
+/* ========================================================================= */
+
+TEST_SUITE(Type_Array, 
+{
+    RUN_TEST(Type_Array_new_Type_Array_with);
+    RUN_TEST(Type_Array_size);
+    RUN_TEST(Type_Array_at_);
+    RUN_TEST(Type_Array_at_put_);
+    RUN_TEST(Type_Array_basicNew_);
+})

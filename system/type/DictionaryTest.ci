@@ -1,0 +1,67 @@
+NEW_TEST(Type_Dictionary_at_)
+    Object integer         = (Object)new_Type_SmallInt(10);
+    Object integer2        = (Object)new_Type_SmallInt(2);
+    Type_Dictionary dict = new_Type_Dictionary();
+    // fill the dictionary
+    int i=0;
+    for (i=0; i<100; ++i) {
+        Object key = (Object)new_Type_SmallInt(i);
+        Type_Dictionary_quick_store(dict, key, integer);
+    }
+    Type_Dictionary_quick_store(dict, (Object)new_Type_SmallInt(4), integer2);
+    
+    for (i=0; i<100; i++) {
+        if (i==4) { continue; }
+        Object key = (Object)new_Type_SmallInt(i);
+        assert0(Eval_Send1((Object)dict, SMB_at_, key) == integer);
+        assert0(Type_Dictionary_quick_lookup(dict, key) == integer);
+        ASSERT_EMPTY_STACK;
+    }
+    assert0(Eval_Send1((Object)dict, SMB_at_, (Object)new_Type_SmallInt(4)) == integer2);
+    ASSERT_EMPTY_STACK;
+}
+
+NEW_TEST(Type_Dictionary_size)
+    // TODO implement
+}
+
+NEW_TEST(Type_Dictionary_at_put_)
+    Object result;
+    Object integer         = (Object)new_Type_SmallInt(10);
+    Object integer0        = (Object)new_Type_SmallInt(0);
+    Object integer1        = (Object)new_Type_SmallInt(1);
+    Object integer2        = (Object)new_Type_SmallInt(2);
+    Type_Dictionary dict = new_Type_Dictionary();
+    // fill the dictionary
+    int i=0;
+    for (i=0; i<100; ++i) {
+        Object key = (Object)new_Type_SmallInt(i);
+        Type_Dictionary_quick_store(dict, key, integer);
+    }
+    result = Eval_Send2((Object)dict, SMB_at_put_, integer0, integer1);
+    assert0(result == integer1);
+    assert0(Type_Dictionary_quick_lookup(dict, integer0) == integer1);
+    ASSERT_EMPTY_STACK;
+    
+    result = Eval_Send2((Object)dict, SMB_at_put_, integer2, integer1);
+    assert0(result == integer1);
+    assert0(Type_Dictionary_quick_lookup(dict, integer2) == integer1);
+    // check that all the other places aren't changed
+    for (i=0; i<100; i++) {
+        if (i==0 || i==2) { continue; }
+        Object key = (Object)new_Type_SmallInt(i);
+        assert0(Eval_Send1((Object)dict, SMB_at_, key) == integer);
+        assert0(Type_Dictionary_quick_lookup(dict, key) == integer);
+        ASSERT_EMPTY_STACK;
+    }
+}
+
+
+
+/* ========================================================================= */
+
+TEST_SUITE(Type_Dictionary,
+{  
+    RUN_TEST(Type_Dictionary_at_);
+    RUN_TEST(Type_Dictionary_at_put_);
+})

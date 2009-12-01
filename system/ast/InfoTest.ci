@@ -1,0 +1,20 @@
+
+#define INFO_TEST_SETUP \
+    Type_AST_Info AST_Info = new_AST_Info(); \
+    Object result;
+
+/* ========================================================================= */
+
+NEW_TEST(AST_Info_init)
+
+    assert0(empty_AST_Info != NULL);
+    assert0((Object)empty_AST_Info != Nil);
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(AST_Info,
+{
+    RUN_TEST(AST_Info_init);
+})
+

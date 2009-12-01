@@ -1,0 +1,25 @@
+
+NEW_TEST(ast_self)
+    Type_SmallInt integer       = new_Type_SmallInt(70);
+    Type_SmallInt integer7      = new_Type_SmallInt(7);
+    AST_Constant integer7_const = new_AST_Constant((Object)integer7);
+    
+    Runtime_MethodClosure closure = new_Runtime_MethodClosure(
+                                        new_AST_Method_withAll(0, 0, 3, integer7_const, integer7_const, Self));
+    assert0(closure->info == empty_AST_Info);
+    Type_Symbol test            = new_Type_Symbol(L"test");
+    
+    store_method(Type_SmallInt_Class, test, closure);
+    
+    Object result               = Eval_Send0((Object)integer, test);
+    assert0(result == (Object)integer);
+    ASSERT_EMPTY_STACK;
+}
+
+
+/* ========================================================================= */
+
+TEST_SUITE(AST_Self,
+{
+    RUN_TEST(ast_self);
+})
