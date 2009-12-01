@@ -43,9 +43,9 @@ void AST_Variable_eval(AST_Variable self)
     Object env = (Object)current_env();
     
     if (IS_CONTEXT(env)) {
-            poke_EXP(0, Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
-                                                    self->local_id,
-                                                    self->scope_id));
+        poke_EXP(0, Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
+                                                self->local_id,
+                                                self->scope_id));
     } else {
         // TODO
         assert0(NULL);

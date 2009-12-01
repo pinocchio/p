@@ -50,13 +50,13 @@ Object send3443 = (Object)new_AST_Send((Object)constant740, (Object)SMB__gt, 1, 
 Object smallint338 = (Object)new_Type_SmallInt(1);
 Object constant742 = (Object)new_AST_Constant(smallint338);
 Object send3444 = (Object)new_AST_Send((Object)variable600, (Object)SMB_escape_, 1, constant742);
-Object block951 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, 1, send3444);
+Object block951 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 2, 1, send3444);
 Object smallint339 = (Object)new_Type_SmallInt(2);
 Object constant743 = (Object)new_AST_Constant(smallint339);
 Object send3445 = (Object)new_AST_Send((Object)variable600, (Object)SMB_escape_, 1, constant743);
 Object block952 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 2, 1, send3445);
 Object send3442 = (Object)new_AST_Send((Object)send3443, (Object)SMB_ifTrue_ifFalse_, 2, block951, block952);
-Object block950 = (Object)new_AST_Block_with((Type_Array)array3013, (Type_Array)empty_Type_Array, 0, 2, send3442, Self);
+Object block950 = (Object)new_AST_Block_with((Type_Array)array3013, (Type_Array)empty_Type_Array, 1, 2, send3442, Self);
 Object send3441 = (Object)new_AST_Send((Object)AST_Callec_Reference, (Object)SMB_on_, 1, block950);
 Object symbol491 = (Object)new_Type_Symbol_cached(L"tmExtendedReturn");
 
