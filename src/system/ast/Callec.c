@@ -25,7 +25,7 @@ void pre_init_AST_Callec()
 
 /* ========================================================================= */
 
-void apply(Object closure, uns_int argc)
+static void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
     printf("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
