@@ -28,7 +28,7 @@ void pre_init_AST_Callec()
 static void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
-    printf("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
+    LOG("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
     assert0(HEADER(closure) == (Object)Runtime_BlockClosure_Class);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
