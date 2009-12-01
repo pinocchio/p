@@ -1,0 +1,31 @@
+jmp_buf Assert_Fail;
+
+void store_method_object(Type_Class class, Type_Symbol symbol, Object method)
+{
+    Type_Dictionary dict = class->methods;
+    Type_Dictionary_quick_store(dict, (Object)symbol, method);
+}
+
+void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method)
+{
+    method->selector    = (Object)symbol;
+    method->class       = class;
+    store_method_object(class, symbol, (Object)method);
+}
+
+void store_closure(Type_Class class, Type_Symbol symbol, Runtime_BlockClosure closure) {
+    store_method_object(class, symbol, (Object)closure);
+}
+
+void store_native_method(Type_Class class, Type_Symbol symbol, native code)
+{
+    AST_Native_Method native_method = new_AST_Native_Method(code);
+    store_method_object(class, symbol, (Object)native_method);
+}
+
+wchar_t * Object_classname(Object self) 
+{
+    return ((Type_String)((Type_Class)HEADER(self))->name)->value;
+}
+
+
