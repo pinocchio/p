@@ -32,6 +32,15 @@ AST_Method new_AST_Method(uns_int paramCount,
     return result;
 }
 
+AST_Method new_AST_Method_withAll(uns_int paramCount,
+                                  uns_int localCount,
+                                  uns_int statementCount, ...)
+{
+    AST_Method result = new_AST_Method(paramCount, localCount, statementCount);
+    COPY_ARGS(statementCount, result->body);
+    return result;
+}
+
 AST_Method new_AST_Method_with(Type_Array params,
                                Type_Array locals,
                                uns_int statementCount, ...)

@@ -6,14 +6,13 @@ NEW_TEST(ast_super)
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
     
     Type_Symbol test  = new_Type_Symbol(L"test");
-    Type_Array body   = new_Type_Array_withAll(3, (Object)integer7_const);
-    body->values[2]   = (Object)new_AST_Super((Object)test, 0);    
-    Runtime_MethodClosure closure = new_Runtime_MethodClosure(new_AST_Method(0, 0, body));
+    Runtime_MethodClosure closure = new_Runtime_MethodClosure(
+        new_AST_Method_withAll(0, 0, 3,
+            integer7_const, integer7_const, new_AST_Super((Object)test, 0)));
     store_method(True_Class, test, closure);
     
-    body             = new_Type_Array_withAll(3, (Object)integer7_const);
-    body->values[2]  = (Object)integer_const;    
-    closure = new_Runtime_MethodClosure(new_AST_Method(0, 0, body));
+    closure = new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 3,
+        integer7_const, integer7_const, integer_const));
     store_method(Type_Boolean_Class, test, closure);
     
     Object result = Eval_Send0((Object)True, test);

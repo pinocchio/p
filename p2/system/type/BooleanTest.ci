@@ -22,15 +22,13 @@ NEW_TEST(boolean_equals)
     Object result; \
     Type_SmallInt integer   = new_Type_SmallInt(120); \
     Object integer_const    = (Object)new_AST_Constant((Object)integer); \
-    Type_Array body         = new_Type_Array_with(1, integer_const); \
-    Runtime_BlockClosure arg = new_Runtime_BlockClosure(new_AST_Block(0, 0, 0, body), \
+    Runtime_BlockClosure arg = new_Runtime_BlockClosure(new_AST_Block(0, 0, 0, 1, integer_const), \
                                               (Runtime_BlockContext)Nil);
                                               
 #define TYPE_BOOLEAN_IFTRUE_IFFALSE_TEST_SETUP \
     Type_SmallInt integer2   = new_Type_SmallInt(2); \
     Object integer_const2    = (Object)new_AST_Constant((Object)integer2); \
-    Type_Array body2         = new_Type_Array_with(1, integer_const2); \
-    Runtime_BlockClosure arg2 = new_Runtime_BlockClosure(new_AST_Block(0, 0, 0, body2), \
+    Runtime_BlockClosure arg2 = new_Runtime_BlockClosure(new_AST_Block(0, 0, 0, 1, integer_const2), \
                                               (Runtime_BlockContext)Nil);
 
 NEW_TEST(Type_Boolean_True_ifTrue)

@@ -6,26 +6,26 @@
 /* ========================================================================= */
 
 NEW_TEST(Runtime_BlockClosure_evaluation)
-    Type_Array body         = empty_Type_Array;
-    Object closure          = Eval((Object)new_AST_Block(0, 0, 1, body));
+    Object closure          = Eval((Object)new_AST_Block(0, 0, 1, 0));
     Type_SmallInt integer   = new_Type_SmallInt(120);
     Object integer_const    = (Object)new_AST_Constant((Object)integer);
     Type_SmallInt integer7  = new_Type_SmallInt(7);
     Object integer7_const   = (Object)new_AST_Constant((Object)integer7);
     
     // with one body element ---------------------------------------------------
-    closure = Eval((Object)
-        new_AST_Block(1, 0, 1, new_Type_Array_with(1, integer_const)));
+    closure = Eval((Object)new_AST_Block(1, 0, 1, 1, integer_const));
     Object result = Eval_Send1(closure, SMB_apply, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
 
     // with one argument -------------------------------------------------------
     
-    Runtime_BlockClosure clos = (Runtime_BlockClosure)closure;
-    clos->code->body   = new_Type_Array_withAll(3, integer7_const);
-    clos->code->body->values[2] = (Object)BLOCK_PARAM(clos->code, 0);
+    Runtime_BlockClosure clos = (Runtime_BlockClosure)
+        Eval((Object)new_AST_Block(1, 0, 1, 1,
+            integer7_const,
+            integer7_const,
+            BLOCK_PARAM(clos->code, 0)));
     
-    result       = Eval_Send1(closure, SMB_apply_, (Object)integer);
+    result       = Eval_Send1((Object)clos, SMB_apply_, (Object)integer);
     assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
     ASSERT_EMPTY_STACK;
 }
