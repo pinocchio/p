@@ -100,6 +100,18 @@ Type_SmallInt Type_Symbol_hash(Type_Symbol symbol)
     return wchar_hash(symbol->value, symbol->size);
 }
 
+NATIVE1(Type_Symbol__equal)
+    // TODO think about this! Are Symbols = Strings?
+    Object w_arg = NATIVE_ARG(0);
+    if (w_arg == self) {
+        RETURN_FROM_NATIVE(True);
+        return;
+    }
+    assert0(OBJECT_OF_TYPE(w_arg, Words));
+    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self,
+    (Type_Symbol)w_arg)));
+}
+
 NATIVE0(Type_Symbol_hash)
     RETURN_FROM_NATIVE(Type_Symbol_hash((Type_Symbol)self));
 }
@@ -123,6 +135,7 @@ void install_symbol_methods(Type_Class class)
     store_native_method(class, SMB_at_,       NM_Type_Symbol_at_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
     store_native_method(class, SMB_asSymbol,  NM_Type_Symbol_asSymbol);
+    store_native_method(class, SMB__equal,    NM_Type_Symbol__equal);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
 }
