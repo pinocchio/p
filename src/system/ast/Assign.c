@@ -35,7 +35,6 @@ void AST_Assign_eval(AST_Assign self)
     poke_EXP(0, self->variable);
     push_CNT(send_Eval);
     push_EXP(self->expression);
-    LOG("Assign Eval\n");
 }
 
 CNT(AST_Assign_assign)
@@ -45,7 +44,6 @@ CNT(AST_Assign_assign)
     poke_EXP(0, value);
     
     if (HEADER(var) == (Object)AST_Variable_Class) {
-        LOG("Assign to var\n");
         return AST_Variable_assign((AST_Variable)var, value);
     } else if (HEADER(var) == (Object)AST_InstVariable_Class) {
         return AST_InstVariable_assign((AST_InstVariable)var, value);

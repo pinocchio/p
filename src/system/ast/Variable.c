@@ -57,7 +57,7 @@ void AST_Variable_eval(AST_Variable self)
 void AST_Variable_assign(AST_Variable self, Object value)
 {
     Object env = (Object)current_env();
-    if (HEADER(env) == (Object)Runtime_BlockContext_Class) {
+    if (IS_CONTEXT(env)) {
         return Runtime_BlockContext_assign((Runtime_BlockContext)env,
                                            self->local_id, self->scope_id,
                                            value);
