@@ -111,6 +111,17 @@ class##_Reference = new_Organization_ClassReference(class);
     assert0(Eval_Send1((Object)(exp1), SMB__equal, \
         (Object)(exp2)) == (Object)False);
 
+#define COPY_ARGS(source, target)\
+{\
+    int i;\
+    va_list args;\
+    va_start(args, source);\
+    for (i = 0; i < source; i++) {\
+        target[i] = va_arg(args, Object);\
+    }\
+    va_end(args);\
+}
+
 
 /* ========================================================================= */
 

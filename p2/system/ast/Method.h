@@ -11,20 +11,21 @@
 /* ========================================================================= */
 
 struct AST_Method_t {
+    uns_int     size;
     Type_Array  params;
     Type_Array  locals;
-    Type_Array  body;
     AST_Info    info;
     Object      package;
+    Object      body[];
 };
 
 CREATE_INITIALIZERS(AST_Method)
 extern AST_Method new_AST_Method(uns_int paramCount,
-                               uns_int localCount,
-                               Type_Array body);
+                                 uns_int localCount,
+                                 uns_int statementCount);
 extern AST_Method new_AST_Method_with(Type_Array params,
-                               Type_Array locals,
-                               Type_Array body);
+                                      Type_Array locals,
+                                      uns_int statementCount, ...);
 
 /* ========================================================================= */
 

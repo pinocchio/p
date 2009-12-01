@@ -31,14 +31,39 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code)
 
 /* ========================================================================= */
 
+static void CNT_AST_Method_continue()
+{
+    Runtime_MethodContext env = (Runtime_MethodContext)current_env();
+    AST_Method code = env->closure->code;
+    poke_EXP(0, code->body[env->pc]);
+    
+    env->pc++;
+    if (code->size <= env->pc) {
+        poke_CNT(restore_env); 
+    } 
+    push_CNT(send_Eval);
+}
+
+static void start_eval(AST_Method method)
+{
+    if (1 < method->size) {
+        push_CNT(AST_Method_continue);
+    } else {
+        push_CNT(restore_env);
+    }
+    
+    poke_EXP(0, method->body[0]);
+    push_CNT(send_Eval);
+}
+
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                             Object class, uns_int argc)
 {
     LOG_AST_INFO("Closure Invoke: ", closure->info);
      
-    Type_Array body = closure->code->body;
+    AST_Method method = closure->code;
 
-    if (body->size == 0) { 
+    if (method->size == 0) { 
         RETURN_FROM_NATIVE(self);
         return;
     }
@@ -46,7 +71,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     set_env((Object)new_Runtime_MethodContext(closure, self, class));
     activation_from_native(argc);
 
-    start_eval(body);
+    start_eval(method);
 }
 
 /* ========================================================================= */

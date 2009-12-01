@@ -54,32 +54,32 @@ Type_Array activation_from_native(uns_int argc)
     return args;
 }
 
-static CNT(restore_env)
+CNT(restore_env)
     set_env((Object)current_env()->parent_frame);
 }
 
 static void CNT_AST_Block_continue()
 {
     Runtime_BlockContext env = current_env();
-    Type_Array body = env->closure->code->body;
-    poke_EXP(0, body->values[env->pc]);
+    AST_Block code = env->closure->code;
+    poke_EXP(0, code->body[env->pc]);
     
     env->pc++;
-    if (body->size <= env->pc) {
+    if (code->size <= env->pc) {
         poke_CNT(restore_env); 
     } 
     push_CNT(send_Eval);
 }
 
-void start_eval(Type_Array body)
+static void start_eval(AST_Block block)
 {
-    if (1 < body->size) {
+    if (1 < block->size) {
         push_CNT(AST_Block_continue);
     } else {
         push_CNT(restore_env);
     }
     
-    poke_EXP(0, body->values[0]);
+    poke_EXP(0, block->body[0]);
     push_CNT(send_Eval);
 }
 
@@ -89,9 +89,9 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     LOG("Closure Apply\n");
     #endif // DEBUG
 
-    Type_Array body = closure->code->body;
+    AST_Block block = closure->code;
 
-    if (body->size == 0) { 
+    if (block->size == 0) { 
         RETURN_FROM_NATIVE(Nil);
         return; 
     }
@@ -99,7 +99,7 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     set_env((Object)new_Runtime_BlockContext(closure));
     activation_from_native(argc);
 
-    start_eval(body);
+    start_eval(block);
 }
 
 NATIVE(Runtime_BlockClosure_apply_)

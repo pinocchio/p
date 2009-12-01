@@ -11,21 +11,25 @@
 /* ========================================================================= */
 
 struct AST_Block_t {
+    uns_int     size;
     Type_Array  params;
     Type_Array  locals;
-    Type_Array  body;
     AST_Info    info;
+    Object      body[];
 };
 
 CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int localCount,
                                uns_int depth,
-                               Type_Array body);
+                               uns_int statementCount,
+                               ...);
+
 extern AST_Block new_AST_Block_with(Type_Array params,
                                     Type_Array locals,
                                     uns_int depth,
-                                    Type_Array body);
+                                    uns_int statementCount,
+                                    ...);
 
 /* ========================================================================= */
 

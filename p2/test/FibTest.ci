@@ -7,10 +7,9 @@ METHOD(fib_method, 0, 0, 1)
                                              (Object)new_Type_SmallInt(2)));
                                     
     
-    AST_Block break_code = new_AST_Block(0, 0, 1,
-                                        new_Type_Array_with(1,
-                                            (Object)new_AST_Constant(
-                                                (Object)new_Type_SmallInt(1))));
+    AST_Block break_code = new_AST_Block(0, 0, 1, 1,
+                                         (Object)new_AST_Constant(
+                                             (Object)new_Type_SmallInt(1)));
     
     AST_Send return_send = new_AST_Send(
             (Object)new_AST_Send(
@@ -34,7 +33,7 @@ METHOD(fib_method, 0, 0, 1)
                 (Object)SMB_fib,
                 0));
                 
-    AST_Block return_code = new_AST_Block(0, 0, 1, new_Type_Array_with(1, (Object)return_send));
+    AST_Block return_code = new_AST_Block(0, 0, 1, 1, (Object)return_send);
     
     AST_Send ifElse = new_AST_Send((Object)test,
                                    (Object)SMB_ifTrue_ifFalse_, 2,
