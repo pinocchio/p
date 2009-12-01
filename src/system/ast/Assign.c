@@ -21,9 +21,9 @@ AST_Assign new_AST_Assign(Object variable, Object expression)
 
 void pre_init_AST_Assign()
 {
-    AST_Assign_Class        = new_Class_named((Object)Type_Object_Class,
-                                              L"AST_Assign",
-                                              CREATE_OBJECT_TAG(AST_ASSIGN));
+    AST_Assign_Class = new_Class_named((Object)Type_Object_Class,
+                                       L"AST_Assign",
+                                       CREATE_OBJECT_TAG(AST_ASSIGN));
 }
 
 /* ========================================================================= */
@@ -35,6 +35,7 @@ void AST_Assign_eval(AST_Assign self)
     poke_EXP(0, self->variable);
     push_CNT(send_Eval);
     push_EXP(self->expression);
+    LOG("Assign Eval\n");
 }
 
 CNT(AST_Assign_assign)
@@ -44,6 +45,7 @@ CNT(AST_Assign_assign)
     poke_EXP(0, value);
     
     if (HEADER(var) == (Object)AST_Variable_Class) {
+        LOG("Assign to var\n");
         return AST_Variable_assign((AST_Variable)var, value);
     } else if (HEADER(var) == (Object)AST_InstVariable_Class) {
         return AST_InstVariable_assign((AST_InstVariable)var, value);

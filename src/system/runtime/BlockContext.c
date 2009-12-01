@@ -56,6 +56,7 @@ void pre_init_Runtime_BlockContext()
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
+    printf("Lookup %lu %lu start: %lu\n", local_id, scope_id, self->scope_id);
     while (scope_id != self->scope_id && (Object)self->parent_scope != Nil) {
         Object parent_class = HEADER(self->parent_scope);
         if (parent_class == (Object)Runtime_BlockContext_Class) {
@@ -79,6 +80,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
 void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
+    printf("Lookup %lu %lu start: %lu\n", local_id, scope_id, self->scope_id);
     while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
         if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
             self = (Runtime_BlockContext)self->closure->context;
