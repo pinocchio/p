@@ -40,7 +40,7 @@ void pre_init_AST_Send()
 {
     AST_Send_Class = new_Class_named((Object)Type_Object_Class,
                                      L"AST_Send",
-                                     CREATE_OBJECT_TAG(AST_SEND));
+                                     CREATE_ARRAY_TAG(AST_SEND));
 }
 
 /* ========================================================================= */

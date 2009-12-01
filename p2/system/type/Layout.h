@@ -40,6 +40,7 @@ extern Type_Class Type_FileLayout;
     TAG_IS_TYPE(GETTAG(o), type)
 
 #define CREATE_OBJECT_TAG(name) create_type(name##_SIZE, OBJECT, name##_VARS)
+#define CREATE_ARRAY_TAG(name) create_type(name##_SIZE, ARRAY, name##_VARS)
 
 /* ========================================================================= */
 
