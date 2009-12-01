@@ -41,6 +41,7 @@
 		364E670410C562DE00AD4616 /* String.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668810C562DE00AD4616 /* String.c */; };
 		364E670710C562DE00AD4616 /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668C10C562DE00AD4616 /* Symbol.c */; };
 		364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E669610C562DE00AD4616 /* pinocchioTest.c */; };
+		3654964710C57D0E00D0C56F /* BlockContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E664910C562DE00AD4616 /* BlockContext.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,328 +58,6 @@
 
 /* Begin PBXFileReference section */
 		364E64B510C562DD00AD4616 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		364E64B710C562DD00AD4616 /* AutoGenTests.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = AutoGenTests.ci; sourceTree = "<group>"; };
-		364E64B810C562DD00AD4616 /* Collection-niConfiguration.st */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Collection-niConfiguration.st"; sourceTree = "<group>"; };
-		364E64B910C562DD00AD4616 /* installScript.st */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = installScript.st; sourceTree = "<group>"; };
-		364E64BA10C562DD00AD4616 /* my.prefs */ = {isa = PBXFileReference; lastKnownFileType = file; path = my.prefs; sourceTree = "<group>"; };
-		364E64BB10C562DD00AD4616 /* NI-Inspector-variableObject.st */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "NI-Inspector-variableObject.st"; sourceTree = "<group>"; };
-		364E64BC10C562DD00AD4616 /* OSProcessV436.sar */ = {isa = PBXFileReference; lastKnownFileType = file; path = OSProcessV436.sar; sourceTree = "<group>"; };
-		364E64BD10C562DD00AD4616 /* outTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = outTest.c; sourceTree = "<group>"; };
-		364E64BF10C562DD00AD4616 /* -134.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "-134.mcz"; sourceTree = "<group>"; };
-		364E64C010C562DD00AD4616 /* adding assignemnt expressionSpyCam-DavidGurtner.77.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "adding assignemnt expressionSpyCam-DavidGurtner.77.mcz"; sourceTree = "<group>"; };
-		364E64C110C562DD00AD4616 /* adding assignemnt expressionSpyCam-TestRunner.76.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "adding assignemnt expressionSpyCam-TestRunner.76.mcz"; sourceTree = "<group>"; };
-		364E64C210C562DD00AD4616 /* adding assignemnt expressionSpyCam-TestRunner.78.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "adding assignemnt expressionSpyCam-TestRunner.78.mcz"; sourceTree = "<group>"; };
-		364E64C310C562DD00AD4616 /* Algernon-EstebanLorenzano.19.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Algernon-EstebanLorenzano.19.mcz"; sourceTree = "<group>"; };
-		364E64C410C562DD00AD4616 /* AST-Core-lr.32.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AST-Core-lr.32.mcz"; sourceTree = "<group>"; };
-		364E64C510C562DD00AD4616 /* CamisAddons-TestRunner.1.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CamisAddons-TestRunner.1.mcz"; sourceTree = "<group>"; };
-		364E64C610C562DD00AD4616 /* CamisAddons-TestRunner.2.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CamisAddons-TestRunner.2.mcz"; sourceTree = "<group>"; };
-		364E64C710C562DD00AD4616 /* CamisAddons-TestRunner.3.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CamisAddons-TestRunner.3.mcz"; sourceTree = "<group>"; };
-		364E64C810C562DD00AD4616 /* CamisAddons-TestRunner.4.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CamisAddons-TestRunner.4.mcz"; sourceTree = "<group>"; };
-		364E64C910C562DD00AD4616 /* Collections-Abstract-MarcusDenker.37.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Abstract-MarcusDenker.37.mcz"; sourceTree = "<group>"; };
-		364E64CA10C562DD00AD4616 /* Collections-Abstract-StephaneDucasse.33.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Abstract-StephaneDucasse.33.mcz"; sourceTree = "<group>"; };
-		364E64CB10C562DD00AD4616 /* Collections-Abstract-StephaneDucasse.36.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Abstract-StephaneDucasse.36.mcz"; sourceTree = "<group>"; };
-		364E64CC10C562DD00AD4616 /* Collections-Sequenceable-AdrianLienhard.39.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Sequenceable-AdrianLienhard.39.mcz"; sourceTree = "<group>"; };
-		364E64CD10C562DD00AD4616 /* Collections-Sequenceable-StephaneDucasse.44.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Sequenceable-StephaneDucasse.44.mcz"; sourceTree = "<group>"; };
-		364E64CE10C562DD00AD4616 /* Collections-Sequenceable-StephaneDucasse.45.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Sequenceable-StephaneDucasse.45.mcz"; sourceTree = "<group>"; };
-		364E64CF10C562DD00AD4616 /* Collections-Strings-MiscFixes.43.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Strings-MiscFixes.43.mcz"; sourceTree = "<group>"; };
-		364E64D010C562DD00AD4616 /* Collections-Strings-StephaneDucasse.44.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Strings-StephaneDucasse.44.mcz"; sourceTree = "<group>"; };
-		364E64D110C562DD00AD4616 /* Collections-Strings-StephaneDucasse.46.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Strings-StephaneDucasse.46.mcz"; sourceTree = "<group>"; };
-		364E64D210C562DD00AD4616 /* Collections-Strings-StephaneDucasse.57.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Strings-StephaneDucasse.57.mcz"; sourceTree = "<group>"; };
-		364E64D310C562DD00AD4616 /* Collections-Support-StephaneDucasse.18.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Support-StephaneDucasse.18.mcz"; sourceTree = "<group>"; };
-		364E64D410C562DD00AD4616 /* Collections-Text-StephaneDucasse.20.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Text-StephaneDucasse.20.mcz"; sourceTree = "<group>"; };
-		364E64D510C562DD00AD4616 /* Collections-Traits-StephaneDucasse.1.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Traits-StephaneDucasse.1.mcz"; sourceTree = "<group>"; };
-		364E64D610C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.45.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Unordered-StephaneDucasse.45.mcz"; sourceTree = "<group>"; };
-		364E64D710C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.46.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Unordered-StephaneDucasse.46.mcz"; sourceTree = "<group>"; };
-		364E64D810C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.47.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Collections-Unordered-StephaneDucasse.47.mcz"; sourceTree = "<group>"; };
-		364E64D910C562DD00AD4616 /* CollectionsTests-MarcusDenker.411.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CollectionsTests-MarcusDenker.411.mcz"; sourceTree = "<group>"; };
-		364E64DA10C562DD00AD4616 /* CollectionsTests-MiscFixes.395.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CollectionsTests-MiscFixes.395.mcz"; sourceTree = "<group>"; };
-		364E64DB10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.398.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CollectionsTests-StephaneDucasse.398.mcz"; sourceTree = "<group>"; };
-		364E64DC10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.399.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CollectionsTests-StephaneDucasse.399.mcz"; sourceTree = "<group>"; };
-		364E64DD10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.410.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CollectionsTests-StephaneDucasse.410.mcz"; sourceTree = "<group>"; };
-		364E64DE10C562DD00AD4616 /* Compiler-MarcusDenker.145.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Compiler-MarcusDenker.145.mcz"; sourceTree = "<group>"; };
-		364E64DF10C562DD00AD4616 /* Compiler-StephaneDucasse.140.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Compiler-StephaneDucasse.140.mcz"; sourceTree = "<group>"; };
-		364E64E010C562DD00AD4616 /* ConfigurationOfGlamour-tg.6.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ConfigurationOfGlamour-tg.6.mcz"; sourceTree = "<group>"; };
-		364E64E110C562DD00AD4616 /* ConfigurationOfMondrian-simon_denier.4.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ConfigurationOfMondrian-simon_denier.4.mcz"; sourceTree = "<group>"; };
-		364E64E210C562DD00AD4616 /* FreeType-StephaneDucasse.471.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeType-StephaneDucasse.471.mcz"; sourceTree = "<group>"; };
-		364E64E310C562DD00AD4616 /* FreeType-SystemSettings-StephaneDucasse.5.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FreeType-SystemSettings-StephaneDucasse.5.mcz"; sourceTree = "<group>"; };
-		364E64E410C562DD00AD4616 /* Glamour-Browsers-tg.12.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Browsers-tg.12.mcz"; sourceTree = "<group>"; };
-		364E64E510C562DD00AD4616 /* Glamour-Core-JorgeRessia.42.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Core-JorgeRessia.42.mcz"; sourceTree = "<group>"; };
-		364E64E610C562DD00AD4616 /* Glamour-Examples-tg.68.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Examples-tg.68.mcz"; sourceTree = "<group>"; };
-		364E64E710C562DD00AD4616 /* Glamour-Helpers-tg.11.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Helpers-tg.11.mcz"; sourceTree = "<group>"; };
-		364E64E810C562DD00AD4616 /* Glamour-Morphic-tg.160.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Morphic-tg.160.mcz"; sourceTree = "<group>"; };
-		364E64E910C562DD00AD4616 /* Glamour-Presentations-JorgeRessia.37.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Presentations-JorgeRessia.37.mcz"; sourceTree = "<group>"; };
-		364E64EA10C562DD00AD4616 /* Glamour-Scripting-tg.35.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Scripting-tg.35.mcz"; sourceTree = "<group>"; };
-		364E64EB10C562DD00AD4616 /* Glamour-Squeak-tg.7.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Squeak-tg.7.mcz"; sourceTree = "<group>"; };
-		364E64EC10C562DD00AD4616 /* Glamour-Tests-JorgeRessia.38.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Glamour-Tests-JorgeRessia.38.mcz"; sourceTree = "<group>"; };
-		364E64ED10C562DD00AD4616 /* Gofer-AdrianLienhard.79.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gofer-AdrianLienhard.79.mcz"; sourceTree = "<group>"; };
-		364E64EE10C562DD00AD4616 /* Gofer-lr.76.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gofer-lr.76.mcz"; sourceTree = "<group>"; };
-		364E64EF10C562DD00AD4616 /* Graphics-StephaneDucasse.140.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphics-StephaneDucasse.140.mcz"; sourceTree = "<group>"; };
-		364E64F010C562DD00AD4616 /* Kernel-AdrianLienhard.438.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-AdrianLienhard.438.mcz"; sourceTree = "<group>"; };
-		364E64F110C562DD00AD4616 /* Kernel-JorgeRessia.427.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-JorgeRessia.427.mcz"; sourceTree = "<group>"; };
-		364E64F210C562DD00AD4616 /* Kernel-MarcusDenker.478.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-MarcusDenker.478.mcz"; sourceTree = "<group>"; };
-		364E64F310C562DD00AD4616 /* Kernel-MarcusDenker.479.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-MarcusDenker.479.mcz"; sourceTree = "<group>"; };
-		364E64F410C562DD00AD4616 /* Kernel-MiscFixes.439.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-MiscFixes.439.mcz"; sourceTree = "<group>"; };
-		364E64F510C562DD00AD4616 /* Kernel-StephaneDucasse.445.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.445.mcz"; sourceTree = "<group>"; };
-		364E64F610C562DD00AD4616 /* Kernel-StephaneDucasse.446.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.446.mcz"; sourceTree = "<group>"; };
-		364E64F710C562DD00AD4616 /* Kernel-StephaneDucasse.447.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.447.mcz"; sourceTree = "<group>"; };
-		364E64F810C562DD00AD4616 /* Kernel-StephaneDucasse.448.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.448.mcz"; sourceTree = "<group>"; };
-		364E64F910C562DD00AD4616 /* Kernel-StephaneDucasse.449.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.449.mcz"; sourceTree = "<group>"; };
-		364E64FA10C562DD00AD4616 /* Kernel-StephaneDucasse.450.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.450.mcz"; sourceTree = "<group>"; };
-		364E64FB10C562DD00AD4616 /* Kernel-StephaneDucasse.476.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.476.mcz"; sourceTree = "<group>"; };
-		364E64FC10C562DD00AD4616 /* Kernel-StephaneDucasse.477.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-StephaneDucasse.477.mcz"; sourceTree = "<group>"; };
-		364E64FD10C562DD00AD4616 /* Kernel-TestRunner.439.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Kernel-TestRunner.439.mcz"; sourceTree = "<group>"; };
-		364E64FE10C562DD00AD4616 /* KernelTests-AdrianLienhard.161.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-AdrianLienhard.161.mcz"; sourceTree = "<group>"; };
-		364E64FF10C562DD00AD4616 /* KernelTests-AdrianLienhard.162.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-AdrianLienhard.162.mcz"; sourceTree = "<group>"; };
-		364E650010C562DD00AD4616 /* KernelTests-MarcusDenker.172.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-MarcusDenker.172.mcz"; sourceTree = "<group>"; };
-		364E650110C562DD00AD4616 /* KernelTests-StephaneDucasse.165.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-StephaneDucasse.165.mcz"; sourceTree = "<group>"; };
-		364E650210C562DD00AD4616 /* KernelTests-StephaneDucasse.171.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-StephaneDucasse.171.mcz"; sourceTree = "<group>"; };
-		364E650310C562DD00AD4616 /* KernelTests-TestRunner.162.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KernelTests-TestRunner.162.mcz"; sourceTree = "<group>"; };
-		364E650410C562DD00AD4616 /* KeyBinder-cdlm.18.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KeyBinder-cdlm.18.mcz"; sourceTree = "<group>"; };
-		364E650510C562DD00AD4616 /* Metacello-Configuration-dkh.95.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-Configuration-dkh.95.mcz"; sourceTree = "<group>"; };
-		364E650610C562DD00AD4616 /* Metacello-Core-dkh.273.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-Core-dkh.273.mcz"; sourceTree = "<group>"; };
-		364E650710C562DD00AD4616 /* Metacello-Core-dkh.294.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-Core-dkh.294.mcz"; sourceTree = "<group>"; };
-		364E650810C562DD00AD4616 /* Metacello-MC-dkh.205.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-MC-dkh.205.mcz"; sourceTree = "<group>"; };
-		364E650910C562DD00AD4616 /* Metacello-MC-dkh.239.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-MC-dkh.239.mcz"; sourceTree = "<group>"; };
-		364E650A10C562DD00AD4616 /* Metacello-Platform.pharo-dkh.7.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Metacello-Platform.pharo-dkh.7.mcz"; sourceTree = "<group>"; };
-		364E650B10C562DD00AD4616 /* Momo-AlainPlantec.16.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Momo-AlainPlantec.16.mcz"; sourceTree = "<group>"; };
-		364E650C10C562DD00AD4616 /* Mondrian-simon_denier.289.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mondrian-simon_denier.289.mcz"; sourceTree = "<group>"; };
-		364E650D10C562DD00AD4616 /* MondrianPaintings-tg.18.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MondrianPaintings-tg.18.mcz"; sourceTree = "<group>"; };
-		364E650E10C562DD00AD4616 /* Monticello-StephaneDucasse.400.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Monticello-StephaneDucasse.400.mcz"; sourceTree = "<group>"; };
-		364E650F10C562DD00AD4616 /* MonticelloGUI-AdrianLienhard.21.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MonticelloGUI-AdrianLienhard.21.mcz"; sourceTree = "<group>"; };
-		364E651010C562DD00AD4616 /* MonticelloGUI-StephaneDucasse.26.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MonticelloGUI-StephaneDucasse.26.mcz"; sourceTree = "<group>"; };
-		364E651110C562DD00AD4616 /* MooseAlgos-tg.3.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MooseAlgos-tg.3.mcz"; sourceTree = "<group>"; };
-		364E651210C562DD00AD4616 /* Morphic-AdrianLienhard.388.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-AdrianLienhard.388.mcz"; sourceTree = "<group>"; };
-		364E651310C562DD00AD4616 /* Morphic-MarcusDenker.415.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-MarcusDenker.415.mcz"; sourceTree = "<group>"; };
-		364E651410C562DD00AD4616 /* Morphic-MarcusDenker.416.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-MarcusDenker.416.mcz"; sourceTree = "<group>"; };
-		364E651510C562DD00AD4616 /* Morphic-MarcusDenker.417.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-MarcusDenker.417.mcz"; sourceTree = "<group>"; };
-		364E651610C562DD00AD4616 /* Morphic-MarcusDenker.422.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-MarcusDenker.422.mcz"; sourceTree = "<group>"; };
-		364E651710C562DD00AD4616 /* Morphic-MiscFixes.389.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-MiscFixes.389.mcz"; sourceTree = "<group>"; };
-		364E651810C562DD00AD4616 /* Morphic-StephaneDucasse.397.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-StephaneDucasse.397.mcz"; sourceTree = "<group>"; };
-		364E651910C562DD00AD4616 /* Morphic-StephaneDucasse.398.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-StephaneDucasse.398.mcz"; sourceTree = "<group>"; };
-		364E651A10C562DD00AD4616 /* Morphic-StephaneDucasse.414.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-StephaneDucasse.414.mcz"; sourceTree = "<group>"; };
-		364E651B10C562DD00AD4616 /* Morphic-StephaneDucasse.418.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-StephaneDucasse.418.mcz"; sourceTree = "<group>"; };
-		364E651C10C562DD00AD4616 /* Morphic-StephaneDucasse.421.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-StephaneDucasse.421.mcz"; sourceTree = "<group>"; };
-		364E651D10C562DD00AD4616 /* Morphic-TestRunner.389.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-TestRunner.389.mcz"; sourceTree = "<group>"; };
-		364E651E10C562DD00AD4616 /* Morphic-TestRunner.390.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Morphic-TestRunner.390.mcz"; sourceTree = "<group>"; };
-		364E651F10C562DD00AD4616 /* Multilingual-MarcusDenker.100.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Multilingual-MarcusDenker.100.mcz"; sourceTree = "<group>"; };
-		364E652010C562DD00AD4616 /* Multilingual-StephaneDucasse.91.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Multilingual-StephaneDucasse.91.mcz"; sourceTree = "<group>"; };
-		364E652110C562DD00AD4616 /* Multilingual-StephaneDucasse.99.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Multilingual-StephaneDucasse.99.mcz"; sourceTree = "<group>"; };
-		364E652210C562DD00AD4616 /* MultilingualTests-StephaneDucasse.denker.7.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MultilingualTests-StephaneDucasse.denker.7.mcz"; sourceTree = "<group>"; };
-		364E652310C562DD00AD4616 /* O2-Morphic-TestRunner.6.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "O2-Morphic-TestRunner.6.mcz"; sourceTree = "<group>"; };
-		364E652410C562DD00AD4616 /* O2-Refactory-TestRunner.6.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "O2-Refactory-TestRunner.6.mcz"; sourceTree = "<group>"; };
-		364E652510C562DD00AD4616 /* O2-Standard-TestRunner.5.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "O2-Standard-TestRunner.5.mcz"; sourceTree = "<group>"; };
-		364E652610C562DD00AD4616 /* O2-Standard-TestRunner.6.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "O2-Standard-TestRunner.6.mcz"; sourceTree = "<group>"; };
-		364E652710C562DD00AD4616 /* OB-Metacello-dkh.32.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Metacello-dkh.32.mcz"; sourceTree = "<group>"; };
-		364E652810C562DD00AD4616 /* OB-Morphic-TestRunner.105.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Morphic-TestRunner.105.mcz"; sourceTree = "<group>"; };
-		364E652910C562DD00AD4616 /* OB-Refactory-lr.161.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Refactory-lr.161.mcz"; sourceTree = "<group>"; };
-		364E652A10C562DD00AD4616 /* OB-Refactory-TestRunner.162.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Refactory-TestRunner.162.mcz"; sourceTree = "<group>"; };
-		364E652B10C562DD00AD4616 /* OB-Standard-DavidRoethlisberger.434.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Standard-DavidRoethlisberger.434.mcz"; sourceTree = "<group>"; };
-		364E652C10C562DD00AD4616 /* OB-Standard-TestRunner.435.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Standard-TestRunner.435.mcz"; sourceTree = "<group>"; };
-		364E652D10C562DD00AD4616 /* OB-Standard-TestRunner.436.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Standard-TestRunner.436.mcz"; sourceTree = "<group>"; };
-		364E652E10C562DD00AD4616 /* OB-Web-TestRunner.62.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Web-TestRunner.62.mcz"; sourceTree = "<group>"; };
-		364E652F10C562DD00AD4616 /* OB-Web-TestRunner.63.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OB-Web-TestRunner.63.mcz"; sourceTree = "<group>"; };
-		364E653010C562DD00AD4616 /* ObjectFinder-PF.58.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ObjectFinder-PF.58.mcz"; sourceTree = "<group>"; };
-		364E653110C562DD00AD4616 /* ObjectMetaTools-StephaneDucasse.2.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ObjectMetaTools-StephaneDucasse.2.mcz"; sourceTree = "<group>"; };
-		364E653210C562DD00AD4616 /* Ocompletion-RomainRobbes.35.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ocompletion-RomainRobbes.35.mcz"; sourceTree = "<group>"; };
-		364E653310C562DD00AD4616 /* Ocompletion-RomainRobbes.36.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ocompletion-RomainRobbes.36.mcz"; sourceTree = "<group>"; };
-		364E653410C562DD00AD4616 /* Ocompletion-RomainRobbes.37.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ocompletion-RomainRobbes.37.mcz"; sourceTree = "<group>"; };
-		364E653510C562DD00AD4616 /* Ocompletion-TestRunner.38.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ocompletion-TestRunner.38.mcz"; sourceTree = "<group>"; };
-		364E653610C562DD00AD4616 /* OmniBrowser-TestRunner.454.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OmniBrowser-TestRunner.454.mcz"; sourceTree = "<group>"; };
-		364E653710C562DD00AD4616 /* OmniBrowser-TestRunner.455.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OmniBrowser-TestRunner.455.mcz"; sourceTree = "<group>"; };
-		364E653810C562DD00AD4616 /* OmniBrowser-TestRunner.456.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OmniBrowser-TestRunner.456.mcz"; sourceTree = "<group>"; };
-		364E653910C562DD00AD4616 /* OmniBrowser2-TestRunner.4.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OmniBrowser2-TestRunner.4.mcz"; sourceTree = "<group>"; };
-		364E653A10C562DD00AD4616 /* OSProcess-dtl.42.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OSProcess-dtl.42.mcz"; sourceTree = "<group>"; };
-		364E653B10C562DD00AD4616 /* PackageInfo-StephaneDucasse.38.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PackageInfo-StephaneDucasse.38.mcz"; sourceTree = "<group>"; };
-		364E653C10C562DD00AD4616 /* Phex-Glamour-NikoSchwarz.1.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phex-Glamour-NikoSchwarz.1.mcz"; sourceTree = "<group>"; };
-		364E653D10C562DD00AD4616 /* Phexample-AdrianKuhn.44.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-AdrianKuhn.44.mcz"; sourceTree = "<group>"; };
-		364E653E10C562DD00AD4616 /* Phexample-AdrianNiko.1.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-AdrianNiko.1.mcz"; sourceTree = "<group>"; };
-		364E653F10C562DD00AD4616 /* Phexample-JoeExample.14.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeExample.14.mcz"; sourceTree = "<group>"; };
-		364E654010C562DD00AD4616 /* Phexample-JoeExample.4.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeExample.4.mcz"; sourceTree = "<group>"; };
-		364E654110C562DD00AD4616 /* Phexample-JoeExample.5.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeExample.5.mcz"; sourceTree = "<group>"; };
-		364E654210C562DD00AD4616 /* Phexample-JoeExample.6.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeExample.6.mcz"; sourceTree = "<group>"; };
-		364E654310C562DD00AD4616 /* Phexample-JoeExample.9.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeExample.9.mcz"; sourceTree = "<group>"; };
-		364E654410C562DD00AD4616 /* Phexample-JoeXample.10.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeXample.10.mcz"; sourceTree = "<group>"; };
-		364E654510C562DD00AD4616 /* Phexample-JoeXample.11.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-JoeXample.11.mcz"; sourceTree = "<group>"; };
-		364E654610C562DD00AD4616 /* Phexample-NikoSchwary.7.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-NikoSchwary.7.mcz"; sourceTree = "<group>"; };
-		364E654710C562DD00AD4616 /* Phexample-NikoSchwarz.27.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-NikoSchwarz.27.mcz"; sourceTree = "<group>"; };
-		364E654810C562DD00AD4616 /* Phexample-SneakPeek.8.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Phexample-SneakPeek.8.mcz"; sourceTree = "<group>"; };
-		364E654910C562DD00AD4616 /* Polymorph-ToolBuilder-StephaneDucasse.18.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-ToolBuilder-StephaneDucasse.18.mcz"; sourceTree = "<group>"; };
-		364E654A10C562DD00AD4616 /* Polymorph-Widgets-MarcusDenker.123.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-MarcusDenker.123.mcz"; sourceTree = "<group>"; };
-		364E654B10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.103.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.103.mcz"; sourceTree = "<group>"; };
-		364E654C10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.111.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.111.mcz"; sourceTree = "<group>"; };
-		364E654D10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.116.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.116.mcz"; sourceTree = "<group>"; };
-		364E654E10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.117.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.117.mcz"; sourceTree = "<group>"; };
-		364E654F10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.119.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.119.mcz"; sourceTree = "<group>"; };
-		364E655010C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.122.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-StephaneDucasse.122.mcz"; sourceTree = "<group>"; };
-		364E655110C562DD00AD4616 /* Polymorph-Widgets-TestRunner.104.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Polymorph-Widgets-TestRunner.104.mcz"; sourceTree = "<group>"; };
-		364E655210C562DD00AD4616 /* PreferenceBrowser-MarcusDenker.48.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PreferenceBrowser-MarcusDenker.48.mcz"; sourceTree = "<group>"; };
-		364E655310C562DD00AD4616 /* Refactoring-Core-lr.81.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Refactoring-Core-lr.81.mcz"; sourceTree = "<group>"; };
-		364E655410C562DD00AD4616 /* Refactoring-Spelling-lr.9.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Refactoring-Spelling-lr.9.mcz"; sourceTree = "<group>"; };
-		364E655510C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1130.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-AdrianLienhard.1130.mcz"; sourceTree = "<group>"; };
-		364E655610C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1131.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-AdrianLienhard.1131.mcz"; sourceTree = "<group>"; };
-		364E655710C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1132.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-AdrianLienhard.1132.mcz"; sourceTree = "<group>"; };
-		364E655810C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1133.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-AdrianLienhard.1133.mcz"; sourceTree = "<group>"; };
-		364E655910C562DD00AD4616 /* ScriptLoader-MarcusDenker.1135.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-MarcusDenker.1135.mcz"; sourceTree = "<group>"; };
-		364E655A10C562DD00AD4616 /* ScriptLoader-MiscFixes.1137.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader-MiscFixes.1137.mcz"; sourceTree = "<group>"; };
-		364E655B10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.70.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-MarcusDenker.70.mcz"; sourceTree = "<group>"; };
-		364E655C10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.71.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-MarcusDenker.71.mcz"; sourceTree = "<group>"; };
-		364E655D10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.72.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-MarcusDenker.72.mcz"; sourceTree = "<group>"; };
-		364E655E10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.75.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-MarcusDenker.75.mcz"; sourceTree = "<group>"; };
-		364E655F10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.76.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-MarcusDenker.76.mcz"; sourceTree = "<group>"; };
-		364E656010C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.15.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.15.mcz"; sourceTree = "<group>"; };
-		364E656110C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.16.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.16.mcz"; sourceTree = "<group>"; };
-		364E656210C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.17.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.17.mcz"; sourceTree = "<group>"; };
-		364E656310C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.18.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.18.mcz"; sourceTree = "<group>"; };
-		364E656410C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.20.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.20.mcz"; sourceTree = "<group>"; };
-		364E656510C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.21.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.21.mcz"; sourceTree = "<group>"; };
-		364E656610C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.22.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.22.mcz"; sourceTree = "<group>"; };
-		364E656710C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.23.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.23.mcz"; sourceTree = "<group>"; };
-		364E656810C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.66.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.66.mcz"; sourceTree = "<group>"; };
-		364E656910C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.67.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.67.mcz"; sourceTree = "<group>"; };
-		364E656A10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.68.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.68.mcz"; sourceTree = "<group>"; };
-		364E656B10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.69.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.69.mcz"; sourceTree = "<group>"; };
-		364E656C10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.73.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.73.mcz"; sourceTree = "<group>"; };
-		364E656D10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.74.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ScriptLoader11-StephaneDucasse.74.mcz"; sourceTree = "<group>"; };
-		364E656E10C562DD00AD4616 /* Shout.3.15-damiencassou.73.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Shout.3.15-damiencassou.73.mcz"; sourceTree = "<group>"; };
-		364E656F10C562DD00AD4616 /* SpyCam-Arny.157.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Arny.157.mcz"; sourceTree = "<group>"; };
-		364E657010C562DD00AD4616 /* SpyCam-BitPutter.110.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-BitPutter.110.mcz"; sourceTree = "<group>"; };
-		364E657110C562DD00AD4616 /* SpyCam-BladeRunner.85.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-BladeRunner.85.mcz"; sourceTree = "<group>"; };
-		364E657210C562DD00AD4616 /* SpyCam-BlockBouncer.106.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-BlockBouncer.106.mcz"; sourceTree = "<group>"; };
-		364E657310C562DD00AD4616 /* SpyCam-Blumb.112.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Blumb.112.mcz"; sourceTree = "<group>"; };
-		364E657410C562DD00AD4616 /* SpyCam-CamilloBruni.120.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.120.mcz"; sourceTree = "<group>"; };
-		364E657510C562DD00AD4616 /* SpyCam-CamilloBruni.121.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.121.mcz"; sourceTree = "<group>"; };
-		364E657610C562DD00AD4616 /* SpyCam-CamilloBruni.125.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.125.mcz"; sourceTree = "<group>"; };
-		364E657710C562DD00AD4616 /* SpyCam-CamilloBruni.126.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.126.mcz"; sourceTree = "<group>"; };
-		364E657810C562DD00AD4616 /* SpyCam-CamilloBruni.127.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.127.mcz"; sourceTree = "<group>"; };
-		364E657910C562DD00AD4616 /* SpyCam-CamilloBruni.128.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.128.mcz"; sourceTree = "<group>"; };
-		364E657A10C562DD00AD4616 /* SpyCam-CamilloBruni.63.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.63.mcz"; sourceTree = "<group>"; };
-		364E657B10C562DD00AD4616 /* SpyCam-CamilloBruni.65.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.65.mcz"; sourceTree = "<group>"; };
-		364E657C10C562DD00AD4616 /* SpyCam-CamilloBruni.66.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.66.mcz"; sourceTree = "<group>"; };
-		364E657D10C562DD00AD4616 /* SpyCam-CamilloBruni.67.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.67.mcz"; sourceTree = "<group>"; };
-		364E657E10C562DD00AD4616 /* SpyCam-CamilloBruni.68.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloBruni.68.mcz"; sourceTree = "<group>"; };
-		364E657F10C562DD00AD4616 /* SpyCam-CamilloNurb.87.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CamilloNurb.87.mcz"; sourceTree = "<group>"; };
-		364E658010C562DD00AD4616 /* SpyCam-CanKiller.108.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CanKiller.108.mcz"; sourceTree = "<group>"; };
-		364E658110C562DD00AD4616 /* SpyCam-CaptainBumpHead.136.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CaptainBumpHead.136.mcz"; sourceTree = "<group>"; };
-		364E658210C562DD00AD4616 /* SpyCam-CaptainJack.139.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CaptainJack.139.mcz"; sourceTree = "<group>"; };
-		364E658310C562DD00AD4616 /* SpyCam-CodeCatcher.105.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-CodeCatcher.105.mcz"; sourceTree = "<group>"; };
-		364E658410C562DD00AD4616 /* SpyCam-DaeWoZueluegt.129.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DaeWoZueluegt.129.mcz"; sourceTree = "<group>"; };
-		364E658510C562DD00AD4616 /* SpyCam-DavidGurtner.102.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.102.mcz"; sourceTree = "<group>"; };
-		364E658610C562DD00AD4616 /* SpyCam-DavidGurtner.103.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.103.mcz"; sourceTree = "<group>"; };
-		364E658710C562DD00AD4616 /* SpyCam-DavidGurtner.69.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.69.mcz"; sourceTree = "<group>"; };
-		364E658810C562DD00AD4616 /* SpyCam-DavidGurtner.73.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.73.mcz"; sourceTree = "<group>"; };
-		364E658910C562DD00AD4616 /* SpyCam-DavidGurtner.75.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.75.mcz"; sourceTree = "<group>"; };
-		364E658A10C562DD00AD4616 /* SpyCam-DavidGurtner.82.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.82.mcz"; sourceTree = "<group>"; };
-		364E658B10C562DD00AD4616 /* SpyCam-DavidGurtner.83.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.83.mcz"; sourceTree = "<group>"; };
-		364E658C10C562DD00AD4616 /* SpyCam-DavidGurtner.84.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.84.mcz"; sourceTree = "<group>"; };
-		364E658D10C562DD00AD4616 /* SpyCam-DavidGurtner.86.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.86.mcz"; sourceTree = "<group>"; };
-		364E658E10C562DD00AD4616 /* SpyCam-DavidGurtner.89.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.89.mcz"; sourceTree = "<group>"; };
-		364E658F10C562DD00AD4616 /* SpyCam-DavidGurtner.98.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.98.mcz"; sourceTree = "<group>"; };
-		364E659010C562DD00AD4616 /* SpyCam-DavidGurtner.99.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DavidGurtner.99.mcz"; sourceTree = "<group>"; };
-		364E659110C562DD00AD4616 /* SpyCam-DumperBoy.148.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-DumperBoy.148.mcz"; sourceTree = "<group>"; };
-		364E659210C562DD00AD4616 /* SpyCam-EscapePete.140.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-EscapePete.140.mcz"; sourceTree = "<group>"; };
-		364E659310C562DD00AD4616 /* SpyCam-Fish.141.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Fish.141.mcz"; sourceTree = "<group>"; };
-		364E659410C562DD00AD4616 /* SpyCam-GoodKarma.131.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-GoodKarma.131.mcz"; sourceTree = "<group>"; };
-		364E659510C562DD00AD4616 /* SpyCam-HanspiMuelller.97.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-HanspiMuelller.97.mcz"; sourceTree = "<group>"; };
-		364E659610C562DD00AD4616 /* SpyCam-HansueliMüller.111.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-HansueliMüller.111.mcz"; sourceTree = "<group>"; };
-		364E659710C562DD00AD4616 /* SpyCam-HithikerJack.107.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-HithikerJack.107.mcz"; sourceTree = "<group>"; };
-		364E659810C562DD00AD4616 /* SpyCam-Housi.90.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Housi.90.mcz"; sourceTree = "<group>"; };
-		364E659910C562DD00AD4616 /* SpyCam-IsABigProject.138.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-IsABigProject.138.mcz"; sourceTree = "<group>"; };
-		364E659A10C562DD00AD4616 /* SpyCam-JamesBond.79.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-JamesBond.79.mcz"; sourceTree = "<group>"; };
-		364E659B10C562DD00AD4616 /* SpyCam-JJ.153.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-JJ.153.mcz"; sourceTree = "<group>"; };
-		364E659C10C562DD00AD4616 /* SpyCam-JoeXample.95.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-JoeXample.95.mcz"; sourceTree = "<group>"; };
-		364E659D10C562DD00AD4616 /* SpyCam-KillBunny.109.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-KillBunny.109.mcz"; sourceTree = "<group>"; };
-		364E659E10C562DD00AD4616 /* SpyCam-KimYongUnsFriend.122.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-KimYongUnsFriend.122.mcz"; sourceTree = "<group>"; };
-		364E659F10C562DD00AD4616 /* SpyCam-KumbajaSuicide.154.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-KumbajaSuicide.154.mcz"; sourceTree = "<group>"; };
-		364E65A010C562DD00AD4616 /* SpyCam-Lacie.123.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Lacie.123.mcz"; sourceTree = "<group>"; };
-		364E65A110C562DD00AD4616 /* SpyCam-LavaLava.155.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-LavaLava.155.mcz"; sourceTree = "<group>"; };
-		364E65A210C562DD00AD4616 /* SpyCam-MegaMike.151.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-MegaMike.151.mcz"; sourceTree = "<group>"; };
-		364E65A310C562DD00AD4616 /* SpyCam-MightyPowerGhost.143.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-MightyPowerGhost.143.mcz"; sourceTree = "<group>"; };
-		364E65A410C562DD00AD4616 /* SpyCam-Mog.165(Gonzo.159).mcd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Mog.165(Gonzo.159).mcd"; sourceTree = "<group>"; };
-		364E65A510C562DD00AD4616 /* SpyCam-Mog.165(SamuelSchuerch.164).mcd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Mog.165(SamuelSchuerch.164).mcd"; sourceTree = "<group>"; };
-		364E65A610C562DD00AD4616 /* SpyCam-Mog.165.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Mog.165.mcz"; sourceTree = "<group>"; };
-		364E65A710C562DD00AD4616 /* SpyCam-MrOrange.119.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-MrOrange.119.mcz"; sourceTree = "<group>"; };
-		364E65A810C562DD00AD4616 /* SpyCam-NeverMan.142.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-NeverMan.142.mcz"; sourceTree = "<group>"; };
-		364E65A910C562DD00AD4616 /* SpyCam-NewTomorrow.133.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-NewTomorrow.133.mcz"; sourceTree = "<group>"; };
-		364E65AA10C562DD00AD4616 /* SpyCam-Pesche.88.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Pesche.88.mcz"; sourceTree = "<group>"; };
-		364E65AB10C562DD00AD4616 /* SpyCam-PhumPhum.150.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-PhumPhum.150.mcz"; sourceTree = "<group>"; };
-		364E65AC10C562DD00AD4616 /* SpyCam-QuinczMacLane.113.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-QuinczMacLane.113.mcz"; sourceTree = "<group>"; };
-		364E65AD10C562DD00AD4616 /* SpyCam-RennurTset.144.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-RennurTset.144.mcz"; sourceTree = "<group>"; };
-		364E65AE10C562DD00AD4616 /* SpyCam-RennurTset.145.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-RennurTset.145.mcz"; sourceTree = "<group>"; };
-		364E65AF10C562DD00AD4616 /* SpyCam-RennurTset.146.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-RennurTset.146.mcz"; sourceTree = "<group>"; };
-		364E65B010C562DD00AD4616 /* SpyCam-RennurTsetNur.147.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-RennurTsetNur.147.mcz"; sourceTree = "<group>"; };
-		364E65B110C562DD00AD4616 /* SpyCam-RenTier.93.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-RenTier.93.mcz"; sourceTree = "<group>"; };
-		364E65B210C562DD00AD4616 /* SpyCam-SmackBlatter.152.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-SmackBlatter.152.mcz"; sourceTree = "<group>"; };
-		364E65B310C562DD00AD4616 /* SpyCam-SmallCocker.130.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-SmallCocker.130.mcz"; sourceTree = "<group>"; };
-		364E65B410C562DD00AD4616 /* SpyCam-SmallList.135.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-SmallList.135.mcz"; sourceTree = "<group>"; };
-		364E65B510C562DD00AD4616 /* SpyCam-Sorry.132.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Sorry.132.mcz"; sourceTree = "<group>"; };
-		364E65B610C562DD00AD4616 /* SpyCam-Terminador.124.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-Terminador.124.mcz"; sourceTree = "<group>"; };
-		364E65B710C562DD00AD4616 /* SpyCam-TestHunterDeer.91.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestHunterDeer.91.mcz"; sourceTree = "<group>"; };
-		364E65B810C562DD00AD4616 /* SpyCam-TestRunner.100.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.100.mcz"; sourceTree = "<group>"; };
-		364E65B910C562DD00AD4616 /* SpyCam-TestRunner.104.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.104.mcz"; sourceTree = "<group>"; };
-		364E65BA10C562DD00AD4616 /* SpyCam-TestRunner.130.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.130.mcz"; sourceTree = "<group>"; };
-		364E65BB10C562DD00AD4616 /* SpyCam-TestRunner.70.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.70.mcz"; sourceTree = "<group>"; };
-		364E65BC10C562DD00AD4616 /* SpyCam-TestRunner.71.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.71.mcz"; sourceTree = "<group>"; };
-		364E65BD10C562DD00AD4616 /* SpyCam-TestRunner.72.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.72.mcz"; sourceTree = "<group>"; };
-		364E65BE10C562DD00AD4616 /* SpyCam-TestRunner.74.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.74.mcz"; sourceTree = "<group>"; };
-		364E65BF10C562DD00AD4616 /* SpyCam-TestRunner.80.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.80.mcz"; sourceTree = "<group>"; };
-		364E65C010C562DD00AD4616 /* SpyCam-TestRunner.81.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.81.mcz"; sourceTree = "<group>"; };
-		364E65C110C562DD00AD4616 /* SpyCam-TestRunner.92.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.92.mcz"; sourceTree = "<group>"; };
-		364E65C210C562DD00AD4616 /* SpyCam-TestRunner.96.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TestRunner.96.mcz"; sourceTree = "<group>"; };
-		364E65C310C562DD00AD4616 /* SpyCam-TimRunner.94.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TimRunner.94.mcz"; sourceTree = "<group>"; };
-		364E65C410C562DD00AD4616 /* SpyCam-ToonVerwaest.114.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-ToonVerwaest.114.mcz"; sourceTree = "<group>"; };
-		364E65C510C562DD00AD4616 /* SpyCam-TserNNrer.149.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TserNNrer.149.mcz"; sourceTree = "<group>"; };
-		364E65C610C562DD00AD4616 /* SpyCam-TTime.156.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpyCam-TTime.156.mcz"; sourceTree = "<group>"; };
-		364E65C710C562DD00AD4616 /* ST80-AdrianLienhard.82.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ST80-AdrianLienhard.82.mcz"; sourceTree = "<group>"; };
-		364E65C810C562DD00AD4616 /* ST80-StephaneDucasse.85.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ST80-StephaneDucasse.85.mcz"; sourceTree = "<group>"; };
-		364E65C910C562DD00AD4616 /* ST80-TestRunner.83.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ST80-TestRunner.83.mcz"; sourceTree = "<group>"; };
-		364E65CA10C562DD00AD4616 /* SUnit-AdrianLienhard.83.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUnit-AdrianLienhard.83.mcz"; sourceTree = "<group>"; };
-		364E65CB10C562DD00AD4616 /* SUnitGUI-AdrianLienhard.43.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUnitGUI-AdrianLienhard.43.mcz"; sourceTree = "<group>"; };
-		364E65CC10C562DD00AD4616 /* System-Changes-StephaneDucasse.21.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Changes-StephaneDucasse.21.mcz"; sourceTree = "<group>"; };
-		364E65CD10C562DD00AD4616 /* System-Download-MarcusDenker.15.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Download-MarcusDenker.15.mcz"; sourceTree = "<group>"; };
-		364E65CE10C562DD00AD4616 /* System-Download-MarcusDenker.16.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Download-MarcusDenker.16.mcz"; sourceTree = "<group>"; };
-		364E65CF10C562DD00AD4616 /* System-FilePackage-AdrianLienhard.14.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-FilePackage-AdrianLienhard.14.mcz"; sourceTree = "<group>"; };
-		364E65D010C562DD00AD4616 /* System-FilePackage-StephaneDucasse.16.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-FilePackage-StephaneDucasse.16.mcz"; sourceTree = "<group>"; };
-		364E65D110C562DD00AD4616 /* System-Settings-StephaneDucasse.110.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Settings-StephaneDucasse.110.mcz"; sourceTree = "<group>"; };
-		364E65D210C562DD00AD4616 /* System-Support-AdrianLienhard.104.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-AdrianLienhard.104.mcz"; sourceTree = "<group>"; };
-		364E65D310C562DD00AD4616 /* System-Support-MarcusDenker.122.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-MarcusDenker.122.mcz"; sourceTree = "<group>"; };
-		364E65D410C562DD00AD4616 /* System-Support-MarcusDenker.124.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-MarcusDenker.124.mcz"; sourceTree = "<group>"; };
-		364E65D510C562DD00AD4616 /* System-Support-MarcusDenker.125.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-MarcusDenker.125.mcz"; sourceTree = "<group>"; };
-		364E65D610C562DD00AD4616 /* System-Support-MarcusDenker.126.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-MarcusDenker.126.mcz"; sourceTree = "<group>"; };
-		364E65D710C562DD00AD4616 /* System-Support-StephaneDucasse.111.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-StephaneDucasse.111.mcz"; sourceTree = "<group>"; };
-		364E65D810C562DD00AD4616 /* System-Support-StephaneDucasse.121.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Support-StephaneDucasse.121.mcz"; sourceTree = "<group>"; };
-		364E65D910C562DD00AD4616 /* System-Tools-StephaneDucasse.14.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "System-Tools-StephaneDucasse.14.mcz"; sourceTree = "<group>"; };
-		364E65DA10C562DD00AD4616 /* Tests-AdrianLienhard.38.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-AdrianLienhard.38.mcz"; sourceTree = "<group>"; };
-		364E65DB10C562DD00AD4616 /* Tests-AdrianLienhard.39.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-AdrianLienhard.39.mcz"; sourceTree = "<group>"; };
-		364E65DC10C562DD00AD4616 /* Tests-StephaneDucasse.39.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-StephaneDucasse.39.mcz"; sourceTree = "<group>"; };
-		364E65DD10C562DD00AD4616 /* Tests-StephaneDucasse.40.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-StephaneDucasse.40.mcz"; sourceTree = "<group>"; };
-		364E65DE10C562DD00AD4616 /* Tests-StephaneDucasse.42.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-StephaneDucasse.42.mcz"; sourceTree = "<group>"; };
-		364E65DF10C562DE00AD4616 /* Tests-StephaneDucasse.45.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tests-StephaneDucasse.45.mcz"; sourceTree = "<group>"; };
-		364E65E010C562DE00AD4616 /* ToolBuilder-Kernel-StephaneDucasse.33.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ToolBuilder-Kernel-StephaneDucasse.33.mcz"; sourceTree = "<group>"; };
-		364E65E110C562DE00AD4616 /* ToolBuilder-Kernel-StephaneDucasse.35.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ToolBuilder-Kernel-StephaneDucasse.35.mcz"; sourceTree = "<group>"; };
-		364E65E210C562DE00AD4616 /* Tools-AlainPlantec.231.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-AlainPlantec.231.mcz"; sourceTree = "<group>"; };
-		364E65E310C562DE00AD4616 /* Tools-CamilloBruni.232.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-CamilloBruni.232.mcz"; sourceTree = "<group>"; };
-		364E65E410C562DE00AD4616 /* Tools-MarcusDenker.244.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-MarcusDenker.244.mcz"; sourceTree = "<group>"; };
-		364E65E510C562DE00AD4616 /* Tools-MiscFixes.222.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-MiscFixes.222.mcz"; sourceTree = "<group>"; };
-		364E65E610C562DE00AD4616 /* Tools-StephaneDucasse.221.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.221.mcz"; sourceTree = "<group>"; };
-		364E65E710C562DE00AD4616 /* Tools-StephaneDucasse.228.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.228.mcz"; sourceTree = "<group>"; };
-		364E65E810C562DE00AD4616 /* Tools-StephaneDucasse.229.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.229.mcz"; sourceTree = "<group>"; };
-		364E65E910C562DE00AD4616 /* Tools-StephaneDucasse.237.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.237.mcz"; sourceTree = "<group>"; };
-		364E65EA10C562DE00AD4616 /* Tools-StephaneDucasse.238.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.238.mcz"; sourceTree = "<group>"; };
-		364E65EB10C562DE00AD4616 /* Tools-StephaneDucasse.240.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.240.mcz"; sourceTree = "<group>"; };
-		364E65EC10C562DE00AD4616 /* Tools-StephaneDucasse.243.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-StephaneDucasse.243.mcz"; sourceTree = "<group>"; };
-		364E65ED10C562DE00AD4616 /* Tools-SystemSettings-StephaneDucasse.5.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-SystemSettings-StephaneDucasse.5.mcz"; sourceTree = "<group>"; };
-		364E65EE10C562DE00AD4616 /* Tools-TestRunner.233.mcz */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Tools-TestRunner.233.mcz"; sourceTree = "<group>"; };
-		364E65EF10C562DE00AD4616 /* packages.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = packages.txt; sourceTree = "<group>"; };
-		364E65F010C562DE00AD4616 /* parserExported.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parserExported.c; sourceTree = "<group>"; };
-		364E65F110C562DE00AD4616 /* pharo1.0-10491-rc1dev09.10.101.changes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pharo1.0-10491-rc1dev09.10.101.changes"; sourceTree = "<group>"; };
-		364E65F210C562DE00AD4616 /* pharo1.0-10491-rc1dev09.10.101.image */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pharo1.0-10491-rc1dev09.10.101.image"; sourceTree = "<group>"; };
-		364E65F310C562DE00AD4616 /* pharo1.0-10496-rc1dev09.11.4.changes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pharo1.0-10496-rc1dev09.11.4.changes"; sourceTree = "<group>"; };
-		364E65F410C562DE00AD4616 /* pharo1.0-10496-rc1dev09.11.4.image */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pharo1.0-10496-rc1dev09.11.4.image"; sourceTree = "<group>"; };
-		364E65F510C562DE00AD4616 /* PharoCore-1.1-11053-ALPHA.changes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "PharoCore-1.1-11053-ALPHA.changes"; sourceTree = "<group>"; };
-		364E65F610C562DE00AD4616 /* PharoCore-1.1-11053-ALPHA.image */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PharoCore-1.1-11053-ALPHA.image"; sourceTree = "<group>"; };
-		364E65F710C562DE00AD4616 /* PharoDebug.log */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PharoDebug.log; sourceTree = "<group>"; };
-		364E65F810C562DE00AD4616 /* PharoV10.sources */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PharoV10.sources; sourceTree = "<group>"; };
-		364E65F910C562DE00AD4616 /* SqueakSVN.sar */ = {isa = PBXFileReference; lastKnownFileType = file; path = SqueakSVN.sar; sourceTree = "<group>"; };
 		364E65FA10C562DE00AD4616 /* test.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = test.ci; sourceTree = "<group>"; };
 		364E65FB10C562DE00AD4616 /* pinocchio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinocchio.c; sourceTree = "<group>"; };
 		364E65FC10C562DE00AD4616 /* pinocchio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinocchio.h; sourceTree = "<group>"; };
@@ -390,52 +69,40 @@
 		364E660210C562DE00AD4616 /* pinocchioTypeInclude.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pinocchioTypeInclude.hi; sourceTree = "<group>"; };
 		364E660510C562DE00AD4616 /* Assign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Assign.c; sourceTree = "<group>"; };
 		364E660610C562DE00AD4616 /* Assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assign.h; sourceTree = "<group>"; };
-		364E660710C562DE00AD4616 /* Assign.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Assign.o; sourceTree = "<group>"; };
 		364E660810C562DE00AD4616 /* AssignTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = AssignTest.ci; sourceTree = "<group>"; };
 		364E660910C562DE00AD4616 /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		364E660A10C562DE00AD4616 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		364E660B10C562DE00AD4616 /* Block.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Block.o; sourceTree = "<group>"; };
 		364E660C10C562DE00AD4616 /* BlockTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlockTest.ci; sourceTree = "<group>"; };
 		364E660D10C562DE00AD4616 /* Callec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Callec.c; sourceTree = "<group>"; };
 		364E660E10C562DE00AD4616 /* Callec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Callec.h; sourceTree = "<group>"; };
-		364E660F10C562DE00AD4616 /* Callec.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Callec.o; sourceTree = "<group>"; };
 		364E661010C562DE00AD4616 /* CallecTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CallecTest.ci; sourceTree = "<group>"; };
 		364E661110C562DE00AD4616 /* Constant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Constant.c; sourceTree = "<group>"; };
 		364E661210C562DE00AD4616 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		364E661310C562DE00AD4616 /* Constant.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Constant.o; sourceTree = "<group>"; };
 		364E661410C562DE00AD4616 /* ConstantTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ConstantTest.ci; sourceTree = "<group>"; };
 		364E661510C562DE00AD4616 /* Continue.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Continue.o; sourceTree = "<group>"; };
 		364E661610C562DE00AD4616 /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		364E661710C562DE00AD4616 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
-		364E661810C562DE00AD4616 /* Info.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Info.o; sourceTree = "<group>"; };
 		364E661910C562DE00AD4616 /* InfoTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InfoTest.ci; sourceTree = "<group>"; };
 		364E661A10C562DE00AD4616 /* InstVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstVariable.c; sourceTree = "<group>"; };
 		364E661B10C562DE00AD4616 /* InstVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstVariable.h; sourceTree = "<group>"; };
-		364E661C10C562DE00AD4616 /* InstVariable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = InstVariable.o; sourceTree = "<group>"; };
 		364E661D10C562DE00AD4616 /* InstVariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InstVariableTest.ci; sourceTree = "<group>"; };
 		364E661E10C562DE00AD4616 /* Method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Method.c; sourceTree = "<group>"; };
 		364E661F10C562DE00AD4616 /* Method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Method.h; sourceTree = "<group>"; };
-		364E662010C562DE00AD4616 /* Method.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Method.o; sourceTree = "<group>"; };
 		364E662110C562DE00AD4616 /* MethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodTest.ci; sourceTree = "<group>"; };
 		364E662210C562DE00AD4616 /* NativeMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeMethod.c; sourceTree = "<group>"; };
 		364E662310C562DE00AD4616 /* NativeMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMethod.h; sourceTree = "<group>"; };
-		364E662410C562DE00AD4616 /* NativeMethod.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = NativeMethod.o; sourceTree = "<group>"; };
 		364E662510C562DE00AD4616 /* NativeMethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NativeMethodTest.ci; sourceTree = "<group>"; };
 		364E662610C562DE00AD4616 /* Self.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Self.c; sourceTree = "<group>"; };
 		364E662710C562DE00AD4616 /* Self.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Self.h; sourceTree = "<group>"; };
-		364E662810C562DE00AD4616 /* Self.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Self.o; sourceTree = "<group>"; };
 		364E662910C562DE00AD4616 /* SelfTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SelfTest.ci; sourceTree = "<group>"; };
 		364E662A10C562DE00AD4616 /* Send.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Send.c; sourceTree = "<group>"; };
 		364E662B10C562DE00AD4616 /* Send.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Send.h; sourceTree = "<group>"; };
-		364E662C10C562DE00AD4616 /* Send.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Send.o; sourceTree = "<group>"; };
 		364E662D10C562DE00AD4616 /* SendTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SendTest.ci; sourceTree = "<group>"; };
 		364E662E10C562DE00AD4616 /* Super.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Super.c; sourceTree = "<group>"; };
 		364E662F10C562DE00AD4616 /* Super.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Super.h; sourceTree = "<group>"; };
-		364E663010C562DE00AD4616 /* Super.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Super.o; sourceTree = "<group>"; };
 		364E663110C562DE00AD4616 /* SuperTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SuperTest.ci; sourceTree = "<group>"; };
 		364E663210C562DE00AD4616 /* Variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Variable.c; sourceTree = "<group>"; };
 		364E663310C562DE00AD4616 /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
-		364E663410C562DE00AD4616 /* Variable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Variable.o; sourceTree = "<group>"; };
 		364E663510C562DE00AD4616 /* VariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VariableTest.ci; sourceTree = "<group>"; };
 		364E663710C562DE00AD4616 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
 		364E663810C562DE00AD4616 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
@@ -531,7 +198,6 @@
 		364E669710C562DE00AD4616 /* pinocchioTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pinocchioTest.ci; sourceTree = "<group>"; };
 		364E669810C562DE00AD4616 /* pinocchioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinocchioTest.h; sourceTree = "<group>"; };
 		364E669910C562DE00AD4616 /* pinocchioTest.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pinocchioTest.hi; sourceTree = "<group>"; };
-		364E669A10C562DE00AD4616 /* pinocchioTest.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = pinocchioTest.o; sourceTree = "<group>"; };
 		364E671210C562EB00AD4616 /* addClass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addClass; sourceTree = "<group>"; };
 		364E671310C562EB00AD4616 /* addSymbol */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = addSymbol; sourceTree = "<group>"; };
 		364E671410C562EB00AD4616 /* extractSymbols */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extractSymbols; sourceTree = "<group>"; };
@@ -594,339 +260,9 @@
 		364E64B610C562DD00AD4616 /* parser */ = {
 			isa = PBXGroup;
 			children = (
-				364E64B710C562DD00AD4616 /* AutoGenTests.ci */,
-				364E64B810C562DD00AD4616 /* Collection-niConfiguration.st */,
-				364E64B910C562DD00AD4616 /* installScript.st */,
-				364E64BA10C562DD00AD4616 /* my.prefs */,
-				364E64BB10C562DD00AD4616 /* NI-Inspector-variableObject.st */,
-				364E64BC10C562DD00AD4616 /* OSProcessV436.sar */,
-				364E64BD10C562DD00AD4616 /* outTest.c */,
-				364E64BE10C562DD00AD4616 /* package-cache */,
-				364E65EF10C562DE00AD4616 /* packages.txt */,
-				364E65F010C562DE00AD4616 /* parserExported.c */,
-				364E65F110C562DE00AD4616 /* pharo1.0-10491-rc1dev09.10.101.changes */,
-				364E65F210C562DE00AD4616 /* pharo1.0-10491-rc1dev09.10.101.image */,
-				364E65F310C562DE00AD4616 /* pharo1.0-10496-rc1dev09.11.4.changes */,
-				364E65F410C562DE00AD4616 /* pharo1.0-10496-rc1dev09.11.4.image */,
-				364E65F510C562DE00AD4616 /* PharoCore-1.1-11053-ALPHA.changes */,
-				364E65F610C562DE00AD4616 /* PharoCore-1.1-11053-ALPHA.image */,
-				364E65F710C562DE00AD4616 /* PharoDebug.log */,
-				364E65F810C562DE00AD4616 /* PharoV10.sources */,
-				364E65F910C562DE00AD4616 /* SqueakSVN.sar */,
 				364E65FA10C562DE00AD4616 /* test.ci */,
 			);
 			path = parser;
-			sourceTree = "<group>";
-		};
-		364E64BE10C562DD00AD4616 /* package-cache */ = {
-			isa = PBXGroup;
-			children = (
-				364E64BF10C562DD00AD4616 /* -134.mcz */,
-				364E64C010C562DD00AD4616 /* adding assignemnt expressionSpyCam-DavidGurtner.77.mcz */,
-				364E64C110C562DD00AD4616 /* adding assignemnt expressionSpyCam-TestRunner.76.mcz */,
-				364E64C210C562DD00AD4616 /* adding assignemnt expressionSpyCam-TestRunner.78.mcz */,
-				364E64C310C562DD00AD4616 /* Algernon-EstebanLorenzano.19.mcz */,
-				364E64C410C562DD00AD4616 /* AST-Core-lr.32.mcz */,
-				364E64C510C562DD00AD4616 /* CamisAddons-TestRunner.1.mcz */,
-				364E64C610C562DD00AD4616 /* CamisAddons-TestRunner.2.mcz */,
-				364E64C710C562DD00AD4616 /* CamisAddons-TestRunner.3.mcz */,
-				364E64C810C562DD00AD4616 /* CamisAddons-TestRunner.4.mcz */,
-				364E64C910C562DD00AD4616 /* Collections-Abstract-MarcusDenker.37.mcz */,
-				364E64CA10C562DD00AD4616 /* Collections-Abstract-StephaneDucasse.33.mcz */,
-				364E64CB10C562DD00AD4616 /* Collections-Abstract-StephaneDucasse.36.mcz */,
-				364E64CC10C562DD00AD4616 /* Collections-Sequenceable-AdrianLienhard.39.mcz */,
-				364E64CD10C562DD00AD4616 /* Collections-Sequenceable-StephaneDucasse.44.mcz */,
-				364E64CE10C562DD00AD4616 /* Collections-Sequenceable-StephaneDucasse.45.mcz */,
-				364E64CF10C562DD00AD4616 /* Collections-Strings-MiscFixes.43.mcz */,
-				364E64D010C562DD00AD4616 /* Collections-Strings-StephaneDucasse.44.mcz */,
-				364E64D110C562DD00AD4616 /* Collections-Strings-StephaneDucasse.46.mcz */,
-				364E64D210C562DD00AD4616 /* Collections-Strings-StephaneDucasse.57.mcz */,
-				364E64D310C562DD00AD4616 /* Collections-Support-StephaneDucasse.18.mcz */,
-				364E64D410C562DD00AD4616 /* Collections-Text-StephaneDucasse.20.mcz */,
-				364E64D510C562DD00AD4616 /* Collections-Traits-StephaneDucasse.1.mcz */,
-				364E64D610C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.45.mcz */,
-				364E64D710C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.46.mcz */,
-				364E64D810C562DD00AD4616 /* Collections-Unordered-StephaneDucasse.47.mcz */,
-				364E64D910C562DD00AD4616 /* CollectionsTests-MarcusDenker.411.mcz */,
-				364E64DA10C562DD00AD4616 /* CollectionsTests-MiscFixes.395.mcz */,
-				364E64DB10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.398.mcz */,
-				364E64DC10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.399.mcz */,
-				364E64DD10C562DD00AD4616 /* CollectionsTests-StephaneDucasse.410.mcz */,
-				364E64DE10C562DD00AD4616 /* Compiler-MarcusDenker.145.mcz */,
-				364E64DF10C562DD00AD4616 /* Compiler-StephaneDucasse.140.mcz */,
-				364E64E010C562DD00AD4616 /* ConfigurationOfGlamour-tg.6.mcz */,
-				364E64E110C562DD00AD4616 /* ConfigurationOfMondrian-simon_denier.4.mcz */,
-				364E64E210C562DD00AD4616 /* FreeType-StephaneDucasse.471.mcz */,
-				364E64E310C562DD00AD4616 /* FreeType-SystemSettings-StephaneDucasse.5.mcz */,
-				364E64E410C562DD00AD4616 /* Glamour-Browsers-tg.12.mcz */,
-				364E64E510C562DD00AD4616 /* Glamour-Core-JorgeRessia.42.mcz */,
-				364E64E610C562DD00AD4616 /* Glamour-Examples-tg.68.mcz */,
-				364E64E710C562DD00AD4616 /* Glamour-Helpers-tg.11.mcz */,
-				364E64E810C562DD00AD4616 /* Glamour-Morphic-tg.160.mcz */,
-				364E64E910C562DD00AD4616 /* Glamour-Presentations-JorgeRessia.37.mcz */,
-				364E64EA10C562DD00AD4616 /* Glamour-Scripting-tg.35.mcz */,
-				364E64EB10C562DD00AD4616 /* Glamour-Squeak-tg.7.mcz */,
-				364E64EC10C562DD00AD4616 /* Glamour-Tests-JorgeRessia.38.mcz */,
-				364E64ED10C562DD00AD4616 /* Gofer-AdrianLienhard.79.mcz */,
-				364E64EE10C562DD00AD4616 /* Gofer-lr.76.mcz */,
-				364E64EF10C562DD00AD4616 /* Graphics-StephaneDucasse.140.mcz */,
-				364E64F010C562DD00AD4616 /* Kernel-AdrianLienhard.438.mcz */,
-				364E64F110C562DD00AD4616 /* Kernel-JorgeRessia.427.mcz */,
-				364E64F210C562DD00AD4616 /* Kernel-MarcusDenker.478.mcz */,
-				364E64F310C562DD00AD4616 /* Kernel-MarcusDenker.479.mcz */,
-				364E64F410C562DD00AD4616 /* Kernel-MiscFixes.439.mcz */,
-				364E64F510C562DD00AD4616 /* Kernel-StephaneDucasse.445.mcz */,
-				364E64F610C562DD00AD4616 /* Kernel-StephaneDucasse.446.mcz */,
-				364E64F710C562DD00AD4616 /* Kernel-StephaneDucasse.447.mcz */,
-				364E64F810C562DD00AD4616 /* Kernel-StephaneDucasse.448.mcz */,
-				364E64F910C562DD00AD4616 /* Kernel-StephaneDucasse.449.mcz */,
-				364E64FA10C562DD00AD4616 /* Kernel-StephaneDucasse.450.mcz */,
-				364E64FB10C562DD00AD4616 /* Kernel-StephaneDucasse.476.mcz */,
-				364E64FC10C562DD00AD4616 /* Kernel-StephaneDucasse.477.mcz */,
-				364E64FD10C562DD00AD4616 /* Kernel-TestRunner.439.mcz */,
-				364E64FE10C562DD00AD4616 /* KernelTests-AdrianLienhard.161.mcz */,
-				364E64FF10C562DD00AD4616 /* KernelTests-AdrianLienhard.162.mcz */,
-				364E650010C562DD00AD4616 /* KernelTests-MarcusDenker.172.mcz */,
-				364E650110C562DD00AD4616 /* KernelTests-StephaneDucasse.165.mcz */,
-				364E650210C562DD00AD4616 /* KernelTests-StephaneDucasse.171.mcz */,
-				364E650310C562DD00AD4616 /* KernelTests-TestRunner.162.mcz */,
-				364E650410C562DD00AD4616 /* KeyBinder-cdlm.18.mcz */,
-				364E650510C562DD00AD4616 /* Metacello-Configuration-dkh.95.mcz */,
-				364E650610C562DD00AD4616 /* Metacello-Core-dkh.273.mcz */,
-				364E650710C562DD00AD4616 /* Metacello-Core-dkh.294.mcz */,
-				364E650810C562DD00AD4616 /* Metacello-MC-dkh.205.mcz */,
-				364E650910C562DD00AD4616 /* Metacello-MC-dkh.239.mcz */,
-				364E650A10C562DD00AD4616 /* Metacello-Platform.pharo-dkh.7.mcz */,
-				364E650B10C562DD00AD4616 /* Momo-AlainPlantec.16.mcz */,
-				364E650C10C562DD00AD4616 /* Mondrian-simon_denier.289.mcz */,
-				364E650D10C562DD00AD4616 /* MondrianPaintings-tg.18.mcz */,
-				364E650E10C562DD00AD4616 /* Monticello-StephaneDucasse.400.mcz */,
-				364E650F10C562DD00AD4616 /* MonticelloGUI-AdrianLienhard.21.mcz */,
-				364E651010C562DD00AD4616 /* MonticelloGUI-StephaneDucasse.26.mcz */,
-				364E651110C562DD00AD4616 /* MooseAlgos-tg.3.mcz */,
-				364E651210C562DD00AD4616 /* Morphic-AdrianLienhard.388.mcz */,
-				364E651310C562DD00AD4616 /* Morphic-MarcusDenker.415.mcz */,
-				364E651410C562DD00AD4616 /* Morphic-MarcusDenker.416.mcz */,
-				364E651510C562DD00AD4616 /* Morphic-MarcusDenker.417.mcz */,
-				364E651610C562DD00AD4616 /* Morphic-MarcusDenker.422.mcz */,
-				364E651710C562DD00AD4616 /* Morphic-MiscFixes.389.mcz */,
-				364E651810C562DD00AD4616 /* Morphic-StephaneDucasse.397.mcz */,
-				364E651910C562DD00AD4616 /* Morphic-StephaneDucasse.398.mcz */,
-				364E651A10C562DD00AD4616 /* Morphic-StephaneDucasse.414.mcz */,
-				364E651B10C562DD00AD4616 /* Morphic-StephaneDucasse.418.mcz */,
-				364E651C10C562DD00AD4616 /* Morphic-StephaneDucasse.421.mcz */,
-				364E651D10C562DD00AD4616 /* Morphic-TestRunner.389.mcz */,
-				364E651E10C562DD00AD4616 /* Morphic-TestRunner.390.mcz */,
-				364E651F10C562DD00AD4616 /* Multilingual-MarcusDenker.100.mcz */,
-				364E652010C562DD00AD4616 /* Multilingual-StephaneDucasse.91.mcz */,
-				364E652110C562DD00AD4616 /* Multilingual-StephaneDucasse.99.mcz */,
-				364E652210C562DD00AD4616 /* MultilingualTests-StephaneDucasse.denker.7.mcz */,
-				364E652310C562DD00AD4616 /* O2-Morphic-TestRunner.6.mcz */,
-				364E652410C562DD00AD4616 /* O2-Refactory-TestRunner.6.mcz */,
-				364E652510C562DD00AD4616 /* O2-Standard-TestRunner.5.mcz */,
-				364E652610C562DD00AD4616 /* O2-Standard-TestRunner.6.mcz */,
-				364E652710C562DD00AD4616 /* OB-Metacello-dkh.32.mcz */,
-				364E652810C562DD00AD4616 /* OB-Morphic-TestRunner.105.mcz */,
-				364E652910C562DD00AD4616 /* OB-Refactory-lr.161.mcz */,
-				364E652A10C562DD00AD4616 /* OB-Refactory-TestRunner.162.mcz */,
-				364E652B10C562DD00AD4616 /* OB-Standard-DavidRoethlisberger.434.mcz */,
-				364E652C10C562DD00AD4616 /* OB-Standard-TestRunner.435.mcz */,
-				364E652D10C562DD00AD4616 /* OB-Standard-TestRunner.436.mcz */,
-				364E652E10C562DD00AD4616 /* OB-Web-TestRunner.62.mcz */,
-				364E652F10C562DD00AD4616 /* OB-Web-TestRunner.63.mcz */,
-				364E653010C562DD00AD4616 /* ObjectFinder-PF.58.mcz */,
-				364E653110C562DD00AD4616 /* ObjectMetaTools-StephaneDucasse.2.mcz */,
-				364E653210C562DD00AD4616 /* Ocompletion-RomainRobbes.35.mcz */,
-				364E653310C562DD00AD4616 /* Ocompletion-RomainRobbes.36.mcz */,
-				364E653410C562DD00AD4616 /* Ocompletion-RomainRobbes.37.mcz */,
-				364E653510C562DD00AD4616 /* Ocompletion-TestRunner.38.mcz */,
-				364E653610C562DD00AD4616 /* OmniBrowser-TestRunner.454.mcz */,
-				364E653710C562DD00AD4616 /* OmniBrowser-TestRunner.455.mcz */,
-				364E653810C562DD00AD4616 /* OmniBrowser-TestRunner.456.mcz */,
-				364E653910C562DD00AD4616 /* OmniBrowser2-TestRunner.4.mcz */,
-				364E653A10C562DD00AD4616 /* OSProcess-dtl.42.mcz */,
-				364E653B10C562DD00AD4616 /* PackageInfo-StephaneDucasse.38.mcz */,
-				364E653C10C562DD00AD4616 /* Phex-Glamour-NikoSchwarz.1.mcz */,
-				364E653D10C562DD00AD4616 /* Phexample-AdrianKuhn.44.mcz */,
-				364E653E10C562DD00AD4616 /* Phexample-AdrianNiko.1.mcz */,
-				364E653F10C562DD00AD4616 /* Phexample-JoeExample.14.mcz */,
-				364E654010C562DD00AD4616 /* Phexample-JoeExample.4.mcz */,
-				364E654110C562DD00AD4616 /* Phexample-JoeExample.5.mcz */,
-				364E654210C562DD00AD4616 /* Phexample-JoeExample.6.mcz */,
-				364E654310C562DD00AD4616 /* Phexample-JoeExample.9.mcz */,
-				364E654410C562DD00AD4616 /* Phexample-JoeXample.10.mcz */,
-				364E654510C562DD00AD4616 /* Phexample-JoeXample.11.mcz */,
-				364E654610C562DD00AD4616 /* Phexample-NikoSchwary.7.mcz */,
-				364E654710C562DD00AD4616 /* Phexample-NikoSchwarz.27.mcz */,
-				364E654810C562DD00AD4616 /* Phexample-SneakPeek.8.mcz */,
-				364E654910C562DD00AD4616 /* Polymorph-ToolBuilder-StephaneDucasse.18.mcz */,
-				364E654A10C562DD00AD4616 /* Polymorph-Widgets-MarcusDenker.123.mcz */,
-				364E654B10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.103.mcz */,
-				364E654C10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.111.mcz */,
-				364E654D10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.116.mcz */,
-				364E654E10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.117.mcz */,
-				364E654F10C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.119.mcz */,
-				364E655010C562DD00AD4616 /* Polymorph-Widgets-StephaneDucasse.122.mcz */,
-				364E655110C562DD00AD4616 /* Polymorph-Widgets-TestRunner.104.mcz */,
-				364E655210C562DD00AD4616 /* PreferenceBrowser-MarcusDenker.48.mcz */,
-				364E655310C562DD00AD4616 /* Refactoring-Core-lr.81.mcz */,
-				364E655410C562DD00AD4616 /* Refactoring-Spelling-lr.9.mcz */,
-				364E655510C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1130.mcz */,
-				364E655610C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1131.mcz */,
-				364E655710C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1132.mcz */,
-				364E655810C562DD00AD4616 /* ScriptLoader-AdrianLienhard.1133.mcz */,
-				364E655910C562DD00AD4616 /* ScriptLoader-MarcusDenker.1135.mcz */,
-				364E655A10C562DD00AD4616 /* ScriptLoader-MiscFixes.1137.mcz */,
-				364E655B10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.70.mcz */,
-				364E655C10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.71.mcz */,
-				364E655D10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.72.mcz */,
-				364E655E10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.75.mcz */,
-				364E655F10C562DD00AD4616 /* ScriptLoader11-MarcusDenker.76.mcz */,
-				364E656010C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.15.mcz */,
-				364E656110C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.16.mcz */,
-				364E656210C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.17.mcz */,
-				364E656310C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.18.mcz */,
-				364E656410C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.20.mcz */,
-				364E656510C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.21.mcz */,
-				364E656610C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.22.mcz */,
-				364E656710C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.23.mcz */,
-				364E656810C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.66.mcz */,
-				364E656910C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.67.mcz */,
-				364E656A10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.68.mcz */,
-				364E656B10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.69.mcz */,
-				364E656C10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.73.mcz */,
-				364E656D10C562DD00AD4616 /* ScriptLoader11-StephaneDucasse.74.mcz */,
-				364E656E10C562DD00AD4616 /* Shout.3.15-damiencassou.73.mcz */,
-				364E656F10C562DD00AD4616 /* SpyCam-Arny.157.mcz */,
-				364E657010C562DD00AD4616 /* SpyCam-BitPutter.110.mcz */,
-				364E657110C562DD00AD4616 /* SpyCam-BladeRunner.85.mcz */,
-				364E657210C562DD00AD4616 /* SpyCam-BlockBouncer.106.mcz */,
-				364E657310C562DD00AD4616 /* SpyCam-Blumb.112.mcz */,
-				364E657410C562DD00AD4616 /* SpyCam-CamilloBruni.120.mcz */,
-				364E657510C562DD00AD4616 /* SpyCam-CamilloBruni.121.mcz */,
-				364E657610C562DD00AD4616 /* SpyCam-CamilloBruni.125.mcz */,
-				364E657710C562DD00AD4616 /* SpyCam-CamilloBruni.126.mcz */,
-				364E657810C562DD00AD4616 /* SpyCam-CamilloBruni.127.mcz */,
-				364E657910C562DD00AD4616 /* SpyCam-CamilloBruni.128.mcz */,
-				364E657A10C562DD00AD4616 /* SpyCam-CamilloBruni.63.mcz */,
-				364E657B10C562DD00AD4616 /* SpyCam-CamilloBruni.65.mcz */,
-				364E657C10C562DD00AD4616 /* SpyCam-CamilloBruni.66.mcz */,
-				364E657D10C562DD00AD4616 /* SpyCam-CamilloBruni.67.mcz */,
-				364E657E10C562DD00AD4616 /* SpyCam-CamilloBruni.68.mcz */,
-				364E657F10C562DD00AD4616 /* SpyCam-CamilloNurb.87.mcz */,
-				364E658010C562DD00AD4616 /* SpyCam-CanKiller.108.mcz */,
-				364E658110C562DD00AD4616 /* SpyCam-CaptainBumpHead.136.mcz */,
-				364E658210C562DD00AD4616 /* SpyCam-CaptainJack.139.mcz */,
-				364E658310C562DD00AD4616 /* SpyCam-CodeCatcher.105.mcz */,
-				364E658410C562DD00AD4616 /* SpyCam-DaeWoZueluegt.129.mcz */,
-				364E658510C562DD00AD4616 /* SpyCam-DavidGurtner.102.mcz */,
-				364E658610C562DD00AD4616 /* SpyCam-DavidGurtner.103.mcz */,
-				364E658710C562DD00AD4616 /* SpyCam-DavidGurtner.69.mcz */,
-				364E658810C562DD00AD4616 /* SpyCam-DavidGurtner.73.mcz */,
-				364E658910C562DD00AD4616 /* SpyCam-DavidGurtner.75.mcz */,
-				364E658A10C562DD00AD4616 /* SpyCam-DavidGurtner.82.mcz */,
-				364E658B10C562DD00AD4616 /* SpyCam-DavidGurtner.83.mcz */,
-				364E658C10C562DD00AD4616 /* SpyCam-DavidGurtner.84.mcz */,
-				364E658D10C562DD00AD4616 /* SpyCam-DavidGurtner.86.mcz */,
-				364E658E10C562DD00AD4616 /* SpyCam-DavidGurtner.89.mcz */,
-				364E658F10C562DD00AD4616 /* SpyCam-DavidGurtner.98.mcz */,
-				364E659010C562DD00AD4616 /* SpyCam-DavidGurtner.99.mcz */,
-				364E659110C562DD00AD4616 /* SpyCam-DumperBoy.148.mcz */,
-				364E659210C562DD00AD4616 /* SpyCam-EscapePete.140.mcz */,
-				364E659310C562DD00AD4616 /* SpyCam-Fish.141.mcz */,
-				364E659410C562DD00AD4616 /* SpyCam-GoodKarma.131.mcz */,
-				364E659510C562DD00AD4616 /* SpyCam-HanspiMuelller.97.mcz */,
-				364E659610C562DD00AD4616 /* SpyCam-HansueliMüller.111.mcz */,
-				364E659710C562DD00AD4616 /* SpyCam-HithikerJack.107.mcz */,
-				364E659810C562DD00AD4616 /* SpyCam-Housi.90.mcz */,
-				364E659910C562DD00AD4616 /* SpyCam-IsABigProject.138.mcz */,
-				364E659A10C562DD00AD4616 /* SpyCam-JamesBond.79.mcz */,
-				364E659B10C562DD00AD4616 /* SpyCam-JJ.153.mcz */,
-				364E659C10C562DD00AD4616 /* SpyCam-JoeXample.95.mcz */,
-				364E659D10C562DD00AD4616 /* SpyCam-KillBunny.109.mcz */,
-				364E659E10C562DD00AD4616 /* SpyCam-KimYongUnsFriend.122.mcz */,
-				364E659F10C562DD00AD4616 /* SpyCam-KumbajaSuicide.154.mcz */,
-				364E65A010C562DD00AD4616 /* SpyCam-Lacie.123.mcz */,
-				364E65A110C562DD00AD4616 /* SpyCam-LavaLava.155.mcz */,
-				364E65A210C562DD00AD4616 /* SpyCam-MegaMike.151.mcz */,
-				364E65A310C562DD00AD4616 /* SpyCam-MightyPowerGhost.143.mcz */,
-				364E65A410C562DD00AD4616 /* SpyCam-Mog.165(Gonzo.159).mcd */,
-				364E65A510C562DD00AD4616 /* SpyCam-Mog.165(SamuelSchuerch.164).mcd */,
-				364E65A610C562DD00AD4616 /* SpyCam-Mog.165.mcz */,
-				364E65A710C562DD00AD4616 /* SpyCam-MrOrange.119.mcz */,
-				364E65A810C562DD00AD4616 /* SpyCam-NeverMan.142.mcz */,
-				364E65A910C562DD00AD4616 /* SpyCam-NewTomorrow.133.mcz */,
-				364E65AA10C562DD00AD4616 /* SpyCam-Pesche.88.mcz */,
-				364E65AB10C562DD00AD4616 /* SpyCam-PhumPhum.150.mcz */,
-				364E65AC10C562DD00AD4616 /* SpyCam-QuinczMacLane.113.mcz */,
-				364E65AD10C562DD00AD4616 /* SpyCam-RennurTset.144.mcz */,
-				364E65AE10C562DD00AD4616 /* SpyCam-RennurTset.145.mcz */,
-				364E65AF10C562DD00AD4616 /* SpyCam-RennurTset.146.mcz */,
-				364E65B010C562DD00AD4616 /* SpyCam-RennurTsetNur.147.mcz */,
-				364E65B110C562DD00AD4616 /* SpyCam-RenTier.93.mcz */,
-				364E65B210C562DD00AD4616 /* SpyCam-SmackBlatter.152.mcz */,
-				364E65B310C562DD00AD4616 /* SpyCam-SmallCocker.130.mcz */,
-				364E65B410C562DD00AD4616 /* SpyCam-SmallList.135.mcz */,
-				364E65B510C562DD00AD4616 /* SpyCam-Sorry.132.mcz */,
-				364E65B610C562DD00AD4616 /* SpyCam-Terminador.124.mcz */,
-				364E65B710C562DD00AD4616 /* SpyCam-TestHunterDeer.91.mcz */,
-				364E65B810C562DD00AD4616 /* SpyCam-TestRunner.100.mcz */,
-				364E65B910C562DD00AD4616 /* SpyCam-TestRunner.104.mcz */,
-				364E65BA10C562DD00AD4616 /* SpyCam-TestRunner.130.mcz */,
-				364E65BB10C562DD00AD4616 /* SpyCam-TestRunner.70.mcz */,
-				364E65BC10C562DD00AD4616 /* SpyCam-TestRunner.71.mcz */,
-				364E65BD10C562DD00AD4616 /* SpyCam-TestRunner.72.mcz */,
-				364E65BE10C562DD00AD4616 /* SpyCam-TestRunner.74.mcz */,
-				364E65BF10C562DD00AD4616 /* SpyCam-TestRunner.80.mcz */,
-				364E65C010C562DD00AD4616 /* SpyCam-TestRunner.81.mcz */,
-				364E65C110C562DD00AD4616 /* SpyCam-TestRunner.92.mcz */,
-				364E65C210C562DD00AD4616 /* SpyCam-TestRunner.96.mcz */,
-				364E65C310C562DD00AD4616 /* SpyCam-TimRunner.94.mcz */,
-				364E65C410C562DD00AD4616 /* SpyCam-ToonVerwaest.114.mcz */,
-				364E65C510C562DD00AD4616 /* SpyCam-TserNNrer.149.mcz */,
-				364E65C610C562DD00AD4616 /* SpyCam-TTime.156.mcz */,
-				364E65C710C562DD00AD4616 /* ST80-AdrianLienhard.82.mcz */,
-				364E65C810C562DD00AD4616 /* ST80-StephaneDucasse.85.mcz */,
-				364E65C910C562DD00AD4616 /* ST80-TestRunner.83.mcz */,
-				364E65CA10C562DD00AD4616 /* SUnit-AdrianLienhard.83.mcz */,
-				364E65CB10C562DD00AD4616 /* SUnitGUI-AdrianLienhard.43.mcz */,
-				364E65CC10C562DD00AD4616 /* System-Changes-StephaneDucasse.21.mcz */,
-				364E65CD10C562DD00AD4616 /* System-Download-MarcusDenker.15.mcz */,
-				364E65CE10C562DD00AD4616 /* System-Download-MarcusDenker.16.mcz */,
-				364E65CF10C562DD00AD4616 /* System-FilePackage-AdrianLienhard.14.mcz */,
-				364E65D010C562DD00AD4616 /* System-FilePackage-StephaneDucasse.16.mcz */,
-				364E65D110C562DD00AD4616 /* System-Settings-StephaneDucasse.110.mcz */,
-				364E65D210C562DD00AD4616 /* System-Support-AdrianLienhard.104.mcz */,
-				364E65D310C562DD00AD4616 /* System-Support-MarcusDenker.122.mcz */,
-				364E65D410C562DD00AD4616 /* System-Support-MarcusDenker.124.mcz */,
-				364E65D510C562DD00AD4616 /* System-Support-MarcusDenker.125.mcz */,
-				364E65D610C562DD00AD4616 /* System-Support-MarcusDenker.126.mcz */,
-				364E65D710C562DD00AD4616 /* System-Support-StephaneDucasse.111.mcz */,
-				364E65D810C562DD00AD4616 /* System-Support-StephaneDucasse.121.mcz */,
-				364E65D910C562DD00AD4616 /* System-Tools-StephaneDucasse.14.mcz */,
-				364E65DA10C562DD00AD4616 /* Tests-AdrianLienhard.38.mcz */,
-				364E65DB10C562DD00AD4616 /* Tests-AdrianLienhard.39.mcz */,
-				364E65DC10C562DD00AD4616 /* Tests-StephaneDucasse.39.mcz */,
-				364E65DD10C562DD00AD4616 /* Tests-StephaneDucasse.40.mcz */,
-				364E65DE10C562DD00AD4616 /* Tests-StephaneDucasse.42.mcz */,
-				364E65DF10C562DE00AD4616 /* Tests-StephaneDucasse.45.mcz */,
-				364E65E010C562DE00AD4616 /* ToolBuilder-Kernel-StephaneDucasse.33.mcz */,
-				364E65E110C562DE00AD4616 /* ToolBuilder-Kernel-StephaneDucasse.35.mcz */,
-				364E65E210C562DE00AD4616 /* Tools-AlainPlantec.231.mcz */,
-				364E65E310C562DE00AD4616 /* Tools-CamilloBruni.232.mcz */,
-				364E65E410C562DE00AD4616 /* Tools-MarcusDenker.244.mcz */,
-				364E65E510C562DE00AD4616 /* Tools-MiscFixes.222.mcz */,
-				364E65E610C562DE00AD4616 /* Tools-StephaneDucasse.221.mcz */,
-				364E65E710C562DE00AD4616 /* Tools-StephaneDucasse.228.mcz */,
-				364E65E810C562DE00AD4616 /* Tools-StephaneDucasse.229.mcz */,
-				364E65E910C562DE00AD4616 /* Tools-StephaneDucasse.237.mcz */,
-				364E65EA10C562DE00AD4616 /* Tools-StephaneDucasse.238.mcz */,
-				364E65EB10C562DE00AD4616 /* Tools-StephaneDucasse.240.mcz */,
-				364E65EC10C562DE00AD4616 /* Tools-StephaneDucasse.243.mcz */,
-				364E65ED10C562DE00AD4616 /* Tools-SystemSettings-StephaneDucasse.5.mcz */,
-				364E65EE10C562DE00AD4616 /* Tools-TestRunner.233.mcz */,
-			);
-			path = "package-cache";
 			sourceTree = "<group>";
 		};
 		364E660310C562DE00AD4616 /* system */ = {
@@ -946,52 +282,40 @@
 			children = (
 				364E660510C562DE00AD4616 /* Assign.c */,
 				364E660610C562DE00AD4616 /* Assign.h */,
-				364E660710C562DE00AD4616 /* Assign.o */,
 				364E660810C562DE00AD4616 /* AssignTest.ci */,
 				364E660910C562DE00AD4616 /* Block.c */,
 				364E660A10C562DE00AD4616 /* Block.h */,
-				364E660B10C562DE00AD4616 /* Block.o */,
 				364E660C10C562DE00AD4616 /* BlockTest.ci */,
 				364E660D10C562DE00AD4616 /* Callec.c */,
 				364E660E10C562DE00AD4616 /* Callec.h */,
-				364E660F10C562DE00AD4616 /* Callec.o */,
 				364E661010C562DE00AD4616 /* CallecTest.ci */,
 				364E661110C562DE00AD4616 /* Constant.c */,
 				364E661210C562DE00AD4616 /* Constant.h */,
-				364E661310C562DE00AD4616 /* Constant.o */,
 				364E661410C562DE00AD4616 /* ConstantTest.ci */,
 				364E661510C562DE00AD4616 /* Continue.o */,
 				364E661610C562DE00AD4616 /* Info.c */,
 				364E661710C562DE00AD4616 /* Info.h */,
-				364E661810C562DE00AD4616 /* Info.o */,
 				364E661910C562DE00AD4616 /* InfoTest.ci */,
 				364E661A10C562DE00AD4616 /* InstVariable.c */,
 				364E661B10C562DE00AD4616 /* InstVariable.h */,
-				364E661C10C562DE00AD4616 /* InstVariable.o */,
 				364E661D10C562DE00AD4616 /* InstVariableTest.ci */,
 				364E661E10C562DE00AD4616 /* Method.c */,
 				364E661F10C562DE00AD4616 /* Method.h */,
-				364E662010C562DE00AD4616 /* Method.o */,
 				364E662110C562DE00AD4616 /* MethodTest.ci */,
 				364E662210C562DE00AD4616 /* NativeMethod.c */,
 				364E662310C562DE00AD4616 /* NativeMethod.h */,
-				364E662410C562DE00AD4616 /* NativeMethod.o */,
 				364E662510C562DE00AD4616 /* NativeMethodTest.ci */,
 				364E662610C562DE00AD4616 /* Self.c */,
 				364E662710C562DE00AD4616 /* Self.h */,
-				364E662810C562DE00AD4616 /* Self.o */,
 				364E662910C562DE00AD4616 /* SelfTest.ci */,
 				364E662A10C562DE00AD4616 /* Send.c */,
 				364E662B10C562DE00AD4616 /* Send.h */,
-				364E662C10C562DE00AD4616 /* Send.o */,
 				364E662D10C562DE00AD4616 /* SendTest.ci */,
 				364E662E10C562DE00AD4616 /* Super.c */,
 				364E662F10C562DE00AD4616 /* Super.h */,
-				364E663010C562DE00AD4616 /* Super.o */,
 				364E663110C562DE00AD4616 /* SuperTest.ci */,
 				364E663210C562DE00AD4616 /* Variable.c */,
 				364E663310C562DE00AD4616 /* Variable.h */,
-				364E663410C562DE00AD4616 /* Variable.o */,
 				364E663510C562DE00AD4616 /* VariableTest.ci */,
 			);
 			path = ast;
@@ -1123,7 +447,6 @@
 				364E669710C562DE00AD4616 /* pinocchioTest.ci */,
 				364E669810C562DE00AD4616 /* pinocchioTest.h */,
 				364E669910C562DE00AD4616 /* pinocchioTest.hi */,
-				364E669A10C562DE00AD4616 /* pinocchioTest.o */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -1193,7 +516,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				364E66A010C562DE00AD4616 /* pinocchio.c in Sources */,
 				364E66A410C562DE00AD4616 /* Assign.c in Sources */,
 				364E66A710C562DE00AD4616 /* Block.c in Sources */,
 				364E66AA10C562DE00AD4616 /* Callec.c in Sources */,
@@ -1210,10 +532,7 @@
 				364E66CC10C562DE00AD4616 /* Stream.c in Sources */,
 				364E66CF10C562DE00AD4616 /* ClassReference.c in Sources */,
 				364E66D210C562DE00AD4616 /* BlockClosure.c in Sources */,
-				364E66D710C562DE00AD4616 /* Continue.c in Sources */,
-				364E66DB10C562DE00AD4616 /* InlineCache.c in Sources */,
-				364E66DE10C562DE00AD4616 /* MethodClosure.c in Sources */,
-				364E66E110C562DE00AD4616 /* MethodContext.c in Sources */,
+				3654964710C57D0E00D0C56F /* BlockContext.c in Sources */,
 				364E66E510C562DE00AD4616 /* Array.c in Sources */,
 				364E66E810C562DE00AD4616 /* Boolean.c in Sources */,
 				364E66EB10C562DE00AD4616 /* Character.c in Sources */,
@@ -1226,6 +545,11 @@
 				364E670110C562DE00AD4616 /* SmallInt.c in Sources */,
 				364E670410C562DE00AD4616 /* String.c in Sources */,
 				364E670710C562DE00AD4616 /* Symbol.c in Sources */,
+				364E66D710C562DE00AD4616 /* Continue.c in Sources */,
+				364E66DB10C562DE00AD4616 /* InlineCache.c in Sources */,
+				364E66DE10C562DE00AD4616 /* MethodClosure.c in Sources */,
+				364E66E110C562DE00AD4616 /* MethodContext.c in Sources */,
+				364E66A010C562DE00AD4616 /* pinocchio.c in Sources */,
 				364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1413,7 +737,7 @@
 				GENERATE_PROFILING_CODE = NO;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
-					"\"$(SRCROOT)/../p2\"",
+					"\"$(SRCROOT)/../../src\"",
 				);
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = /usr/local/include;
@@ -1427,7 +751,7 @@
 					"-DASSERT_FAIL",
 				);
 				PRODUCT_NAME = pinocchio;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 ppc ppc64 x86_64";
 			};
