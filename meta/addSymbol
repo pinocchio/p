@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-SMB_init = "system/type/SymbolInitialization.ci"
+SMB_init = "src/system/type/SymbolInitialization.ci"
 
 def addSymbol(symbol)
     symbol_name = symbol.gsub(':', "_") 
