@@ -799,6 +799,12 @@
 		vrLoc = 0;
 	};
 	364DE6DA10972BE700AF1442 /* MethodClosure.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = MethodClosure.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/MethodClosure.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 765}}";
 			sepNavSelRange = "{980, 78}";
@@ -806,17 +812,16 @@
 		};
 	};
 	364DE6DB10972BE700AF1442 /* MethodClosure.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MethodClosure.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/MethodClosure.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 749}";
-		};
-	};
-	364DE6DC10972BE700AF1442 /* MethodClosureTest.ci */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {642, 1209}}";
-			sepNavSelRange = "{810, 25}";
-			sepNavVisRange = "{292, 1100}";
 		};
 	};
 	364DE6DF10972C0300AF1442 /* PBXTextBookmark */ = {
@@ -850,6 +855,12 @@
 		vrLoc = 0;
 	};
 	364DE6E510972C2B00AF1442 /* Method.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Method.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Method.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1209, 1004}}";
 			sepNavSelRange = "{1476, 127}";
@@ -857,17 +868,16 @@
 		};
 	};
 	364DE6E610972C2B00AF1442 /* Method.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Method.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Method.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {623, 688}}";
 			sepNavSelRange = "{417, 4}";
 			sepNavVisRange = "{0, 1001}";
-		};
-	};
-	364DE6E710972C2B00AF1442 /* MethodTest.ci */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1092, 760}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 288}";
 		};
 	};
 	364DE704109734CA00AF1442 /* PBXTextBookmark */ = {
@@ -928,6 +938,12 @@
 		vrLoc = 0;
 	};
 	3653AD53107A94A200F0350E /* Stream.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Stream.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/Stream.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{720, 0}";
@@ -935,6 +951,12 @@
 		};
 	};
 	3653AD54107A94A200F0350E /* Stream.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Stream.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/Stream.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{695, 0}";
@@ -942,6 +964,12 @@
 		};
 	};
 	3653AD55107A94A200F0350E /* StreamTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = StreamTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/StreamTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{590, 0}";
@@ -978,21 +1006,13 @@
 		vrLen = 402;
 		vrLoc = 1284;
 	};
-	365C447F1095B11B00AC7CF5 /* Continue.c */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {781, 572}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 1223}";
-		};
-	};
-	365C44801095B11B00AC7CF5 /* Continue.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 488}";
-		};
-	};
 	365C44811095B11B00AC7CF5 /* ContinueTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = ContinueTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/ContinueTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
@@ -1000,6 +1020,12 @@
 		};
 	};
 	365E0E5D107E12270013F237 /* MethodContext.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = MethodContext.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/MethodContext.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{158, 0}";
@@ -1007,6 +1033,12 @@
 		};
 	};
 	365E0E5E107E12270013F237 /* MethodContext.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = MethodContext.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/MethodContext.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
@@ -1014,6 +1046,12 @@
 		};
 	};
 	365E0E5F107E12270013F237 /* MethodContextTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = MethodContextTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/MethodContextTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
@@ -1021,6 +1059,12 @@
 		};
 	};
 	365E0E64107E125F0013F237 /* BlockClosure.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = BlockClosure.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/BlockClosure.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {663, 1560}}";
 			sepNavSelRange = "{1786, 0}";
@@ -1029,6 +1073,12 @@
 		};
 	};
 	365E0E65107E125F0013F237 /* BlockClosure.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = BlockClosure.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/BlockClosure.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {600, 1065}}";
 			sepNavSelRange = "{119, 0}";
@@ -1037,6 +1087,12 @@
 		};
 	};
 	365E0E66107E125F0013F237 /* BlockClosureTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = BlockClosureTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/BlockClosureTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {733, 1209}}";
 			sepNavSelRange = "{1045, 0}";
@@ -1055,6 +1111,12 @@
 		vrLoc = 0;
 	};
 	365E1271107F3F2F0013F237 /* pinocchioTest.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = pinocchioTest.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/test/pinocchioTest.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {733, 1573}}";
 			sepNavSelRange = "{1669, 13}";
@@ -1062,6 +1124,12 @@
 		};
 	};
 	365E1272107F3F2F0013F237 /* pinocchioTest.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = pinocchioTest.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/test/pinocchioTest.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {796, 871}}";
 			sepNavSelRange = "{1403, 29}";
@@ -1070,6 +1138,12 @@
 		};
 	};
 	365E1277107F3F710013F237 /* pinocchioTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = pinocchioTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/test/pinocchioTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1065}}";
 			sepNavSelRange = "{0, 0}";
@@ -1077,6 +1151,12 @@
 		};
 	};
 	365E1278107F3F720013F237 /* pinocchioTest.hi */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioTest.hi;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/test/pinocchioTest.hi;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {623, 688}}";
 			sepNavSelRange = "{1024, 0}";
@@ -1084,6 +1164,12 @@
 		};
 	};
 	365E1291107F41CD0013F237 /* NilTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = NilTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/NilTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1163, 765}}";
 			sepNavSelRange = "{471, 10}";
@@ -1121,6 +1207,12 @@
 		vrLoc = 18;
 	};
 	365E15AC107F8B4E0013F237 /* FibTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = FibTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/test/FibTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 819}}";
 			sepNavSelRange = "{104, 0}";
@@ -1433,6 +1525,12 @@
 		vrLoc = 0;
 	};
 	368EBD951087906D00E345F9 /* Instantiate.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = Instantiate.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Instantiate.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 1131}}";
 			sepNavSelRange = "{1821, 0}";
@@ -1440,6 +1538,12 @@
 		};
 	};
 	368EBDAE1087930800E345F9 /* pinocchioHelper.hi */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioHelper.hi;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioHelper.hi;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {670, 728}}";
 			sepNavSelRange = "{286, 0}";
@@ -1447,6 +1551,12 @@
 		};
 	};
 	3696681810727354008C5C0F /* addClass */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = addClass;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/_meta/addClass;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1469}}";
 			sepNavSelRange = "{0, 0}";
@@ -1454,27 +1564,25 @@
 		};
 	};
 	3696681910727354008C5C0F /* addSymbol */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = addSymbol;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/_meta/addSymbol;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1572, 778}}";
 			sepNavSelRange = "{230, 0}";
 			sepNavVisRange = "{0, 1354}";
 		};
 	};
-	3696681A10727354008C5C0F /* mac_install_boehm */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
-			sepNavSelRange = "{0, 0}";
-			sepNavVisRange = "{0, 275}";
-		};
-	};
-	3696681C10727354008C5C0F /* Makefile */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
-			sepNavSelRange = "{963, 0}";
-			sepNavVisRange = "{0, 1236}";
-		};
-	};
 	3696681E10727354008C5C0F /* pinocchio.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = pinocchio.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchio.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {740, 2275}}";
 			sepNavSelRange = "{3469, 0}";
@@ -1482,6 +1590,12 @@
 		};
 	};
 	3696681F10727354008C5C0F /* pinocchio.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = pinocchio.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchio.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {726, 2782}}";
 			sepNavSelRange = "{3125, 7}";
@@ -1489,6 +1603,12 @@
 		};
 	};
 	3696682110727354008C5C0F /* pinocchioHelper.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioHelper.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioHelper.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {628, 688}}";
 			sepNavSelRange = "{905, 0}";
@@ -1496,6 +1616,12 @@
 		};
 	};
 	3696682210727354008C5C0F /* pinocchioPostInit.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioPostInit.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioPostInit.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1572, 558}}";
 			sepNavSelRange = "{698, 0}";
@@ -1503,6 +1629,12 @@
 		};
 	};
 	3696682310727354008C5C0F /* pinocchioPreInit.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioPreInit.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioPreInit.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 486}}";
 			sepNavSelRange = "{269, 0}";
@@ -1510,6 +1642,12 @@
 		};
 	};
 	3696682710727354008C5C0F /* pinocchioType.hi */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioType.hi;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioType.hi;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1006, 765}}";
 			sepNavSelRange = "{81, 18}";
@@ -1518,28 +1656,25 @@
 		};
 	};
 	3696682810727354008C5C0F /* pinocchioTypeInclude.hi */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = pinocchioTypeInclude.hi;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/pinocchioTypeInclude.hi;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1572, 520}}";
 			sepNavSelRange = "{731, 14}";
 			sepNavVisRange = "{0, 1021}";
 		};
 	};
-	3696682B10727354008C5C0F /* Assign.c */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {781, 767}}";
-			sepNavSelRange = "{423, 0}";
-			sepNavVisRange = "{0, 765}";
-			sepNavWindowFrame = "{{38, 274}, {985, 878}}";
-		};
-	};
-	3696682C10727354008C5C0F /* Assign.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {781, 364}}";
-			sepNavSelRange = "{527, 0}";
-			sepNavVisRange = "{0, 611}";
-		};
-	};
 	3696682E10727354008C5C0F /* AssignTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = AssignTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/AssignTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1163, 765}}";
 			sepNavSelRange = "{111, 0}";
@@ -1547,6 +1682,12 @@
 		};
 	};
 	3696683210727354008C5C0F /* Callec.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Callec.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Callec.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1006, 765}}";
 			sepNavSelRange = "{695, 0}";
@@ -1554,6 +1695,12 @@
 		};
 	};
 	3696683310727354008C5C0F /* Callec.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Callec.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Callec.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1006, 765}}";
 			sepNavSelRange = "{239, 0}";
@@ -1561,6 +1708,12 @@
 		};
 	};
 	3696683510727354008C5C0F /* CallecTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = CallecTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/CallecTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1065}}";
 			sepNavSelRange = "{831, 0}";
@@ -1568,6 +1721,12 @@
 		};
 	};
 	3696683610727354008C5C0F /* Constant.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Constant.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Constant.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 760}}";
 			sepNavSelRange = "{149, 0}";
@@ -1575,6 +1734,12 @@
 		};
 	};
 	3696683710727354008C5C0F /* Constant.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Constant.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Constant.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{197, 26}";
@@ -1582,6 +1747,12 @@
 		};
 	};
 	3696683910727354008C5C0F /* ConstantTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = ConstantTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/ConstantTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{111, 0}";
@@ -1589,6 +1760,12 @@
 		};
 	};
 	3696683E10727354008C5C0F /* Info.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Info.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Info.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 884}}";
 			sepNavSelRange = "{1546, 0}";
@@ -1596,6 +1773,12 @@
 		};
 	};
 	3696683F10727354008C5C0F /* Info.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Info.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Info.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{341, 0}";
@@ -1603,6 +1786,12 @@
 		};
 	};
 	3696684110727354008C5C0F /* InfoTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = InfoTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/InfoTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{421, 0}";
@@ -1610,6 +1799,12 @@
 		};
 	};
 	3696684610727354008C5C0F /* NativeMethod.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = NativeMethod.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/NativeMethod.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 793}}";
 			sepNavSelRange = "{1193, 0}";
@@ -1617,6 +1812,12 @@
 		};
 	};
 	3696684710727354008C5C0F /* NativeMethod.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = NativeMethod.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/NativeMethod.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {592, 637}}";
 			sepNavSelRange = "{1470, 0}";
@@ -1625,20 +1826,25 @@
 		};
 	};
 	3696684910727354008C5C0F /* NativeMethodTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = NativeMethodTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/NativeMethodTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{639, 6}";
 			sepNavVisRange = "{0, 960}";
 		};
 	};
-	3696684A10727354008C5C0F /* Self.c */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1092, 761}}";
-			sepNavSelRange = "{893, 0}";
-			sepNavVisRange = "{0, 1232}";
-		};
-	};
 	3696684B10727354008C5C0F /* Self.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Self.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Self.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 761}}";
 			sepNavSelRange = "{0, 0}";
@@ -1646,6 +1852,12 @@
 		};
 	};
 	3696684D10727354008C5C0F /* SelfTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SelfTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/SelfTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1643, 1065}}";
 			sepNavSelRange = "{757, 18}";
@@ -1653,6 +1865,12 @@
 		};
 	};
 	3696684E10727354008C5C0F /* Send.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Send.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Send.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 1131}}";
 			sepNavSelRange = "{662, 0}";
@@ -1660,6 +1878,12 @@
 		};
 	};
 	3696684F10727354008C5C0F /* Send.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Send.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Send.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1643, 1065}}";
 			sepNavSelRange = "{712, 13}";
@@ -1668,6 +1892,12 @@
 		};
 	};
 	3696685110727354008C5C0F /* SendTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SendTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/SendTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{82, 0}";
@@ -1675,6 +1905,12 @@
 		};
 	};
 	3696685210727354008C5C0F /* Super.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Super.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Super.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 1014}}";
 			sepNavSelRange = "{313, 13}";
@@ -1682,6 +1918,12 @@
 		};
 	};
 	3696685310727354008C5C0F /* Super.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Super.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Super.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1643, 1065}}";
 			sepNavSelRange = "{382, 35}";
@@ -1689,6 +1931,12 @@
 		};
 	};
 	3696685510727354008C5C0F /* SuperTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SuperTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/SuperTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {833, 526}}";
 			sepNavSelRange = "{1042, 0}";
@@ -1696,6 +1944,12 @@
 		};
 	};
 	3696685610727354008C5C0F /* Variable.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Variable.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Variable.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {965, 975}}";
 			sepNavSelRange = "{467, 0}";
@@ -1703,6 +1957,12 @@
 		};
 	};
 	3696685710727354008C5C0F /* Variable.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Variable.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Variable.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {965, 403}}";
 			sepNavSelRange = "{413, 22}";
@@ -1710,6 +1970,12 @@
 		};
 	};
 	3696685910727354008C5C0F /* VariableTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = VariableTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/VariableTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1153, 924}}";
 			sepNavSelRange = "{106, 0}";
@@ -1717,6 +1983,12 @@
 		};
 	};
 	3696685B10727354008C5C0F /* File.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = File.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/File.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 2795}}";
 			sepNavSelRange = "{1121, 0}";
@@ -1724,6 +1996,12 @@
 		};
 	};
 	3696685C10727354008C5C0F /* File.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = File.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/File.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{235, 0}";
@@ -1731,6 +2009,12 @@
 		};
 	};
 	3696685E10727354008C5C0F /* FileTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = FileTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/io/FileTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 761}}";
 			sepNavSelRange = "{33, 8}";
@@ -1739,6 +2023,12 @@
 		};
 	};
 	3696686010727354008C5C0F /* BlockContext.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = BlockContext.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/BlockContext.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 1352}}";
 			sepNavSelRange = "{1973, 0}";
@@ -1746,6 +2036,12 @@
 		};
 	};
 	3696686110727354008C5C0F /* BlockContext.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = BlockContext.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/BlockContext.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{921, 0}";
@@ -1753,6 +2049,12 @@
 		};
 	};
 	3696686410727354008C5C0F /* ThreadTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = ThreadTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/runtime/ThreadTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {833, 526}}";
 			sepNavSelRange = "{544, 0}";
@@ -1760,6 +2062,12 @@
 		};
 	};
 	3696686610727354008C5C0F /* Array.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Array.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Array.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1643, 2119}}";
 			sepNavSelRange = "{1501, 0}";
@@ -1768,6 +2076,12 @@
 		};
 	};
 	3696686710727354008C5C0F /* Array.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Array.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Array.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1643, 1065}}";
 			sepNavSelRange = "{138, 22}";
@@ -1775,6 +2089,12 @@
 		};
 	};
 	3696686910727354008C5C0F /* ArrayTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = ArrayTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/ArrayTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 1586}}";
 			sepNavSelRange = "{661, 10}";
@@ -1782,6 +2102,12 @@
 		};
 	};
 	3696686A10727354008C5C0F /* Boolean.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Boolean.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Boolean.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1006, 2301}}";
 			sepNavSelRange = "{185, 13}";
@@ -1789,6 +2115,12 @@
 		};
 	};
 	3696686B10727354008C5C0F /* Boolean.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Boolean.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Boolean.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
@@ -1796,21 +2128,25 @@
 		};
 	};
 	3696686D10727354008C5C0F /* BooleanTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = BooleanTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/BooleanTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 1157}}";
 			sepNavSelRange = "{1381, 0}";
 			sepNavVisRange = "{152, 1669}";
 		};
 	};
-	3696686E10727354008C5C0F /* Character.c */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {899, 1027}}";
-			sepNavSelRange = "{949, 0}";
-			sepNavVisRange = "{468, 1106}";
-			sepNavWindowFrame = "{{15, 4}, {985, 874}}";
-		};
-	};
 	3696686F10727354008C5C0F /* Character.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Character.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Character.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 760}}";
 			sepNavSelRange = "{141, 0}";
@@ -1818,20 +2154,25 @@
 		};
 	};
 	3696687110727354008C5C0F /* CharacterTable.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = CharacterTable.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/CharacterTable.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 1282}";
 		};
 	};
-	3696687210727354008C5C0F /* CharacterTable.h */ = {
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
-			sepNavSelRange = "{431, 20}";
-			sepNavVisRange = "{0, 582}";
-		};
-	};
 	3696687410727354008C5C0F /* CharacterTableTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = CharacterTableTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/CharacterTableTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 806}}";
 			sepNavSelRange = "{41, 20}";
@@ -1839,6 +2180,12 @@
 		};
 	};
 	3696687510727354008C5C0F /* CharacterTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = CharacterTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/CharacterTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{244, 0}";
@@ -1846,6 +2193,12 @@
 		};
 	};
 	3696687610727354008C5C0F /* Class.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Class.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Class.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {614, 3588}}";
 			sepNavSelRange = "{8435, 0}";
@@ -1854,6 +2207,12 @@
 		};
 	};
 	3696687710727354008C5C0F /* Class.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Class.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Class.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1572, 988}}";
 			sepNavSelRange = "{607, 0}";
@@ -1861,6 +2220,12 @@
 		};
 	};
 	3696687910727354008C5C0F /* ClassTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = ClassTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/ClassTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1572, 739}}";
 			sepNavSelRange = "{165, 10}";
@@ -1868,6 +2233,12 @@
 		};
 	};
 	3696687A10727354008C5C0F /* Dictionary.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Dictionary.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Dictionary.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 5655}}";
 			sepNavSelRange = "{1639, 0}";
@@ -1875,6 +2246,12 @@
 		};
 	};
 	3696687B10727354008C5C0F /* Dictionary.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Dictionary.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Dictionary.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1035}}";
 			sepNavSelRange = "{217, 0}";
@@ -1883,6 +2260,12 @@
 		};
 	};
 	3696687D10727354008C5C0F /* DictionaryTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = DictionaryTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/DictionaryTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 884}}";
 			sepNavSelRange = "{2362, 0}";
@@ -1890,6 +2273,12 @@
 		};
 	};
 	3696687E10727354008C5C0F /* Nil.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Nil.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Nil.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1163, 765}}";
 			sepNavSelRange = "{162, 14}";
@@ -1897,6 +2286,12 @@
 		};
 	};
 	3696687F10727354008C5C0F /* Nil.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Nil.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Nil.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {833, 415}}";
 			sepNavSelRange = "{214, 0}";
@@ -1904,6 +2299,12 @@
 		};
 	};
 	3696688110727354008C5C0F /* Object.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Object.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Object.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1163, 1560}}";
 			sepNavSelRange = "{493, 24}";
@@ -1912,6 +2313,12 @@
 		};
 	};
 	3696688210727354008C5C0F /* Object.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Object.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Object.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 770}}";
 			sepNavSelRange = "{150, 22}";
@@ -1920,6 +2327,12 @@
 		};
 	};
 	3696688410727354008C5C0F /* ObjectTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = ObjectTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/ObjectTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1163, 975}}";
 			sepNavSelRange = "{865, 69}";
@@ -1927,6 +2340,12 @@
 		};
 	};
 	3696688510727354008C5C0F /* SmallInt.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = SmallInt.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SmallInt.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 1911}}";
 			sepNavSelRange = "{5537, 0}";
@@ -1934,6 +2353,12 @@
 		};
 	};
 	3696688610727354008C5C0F /* SmallInt.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = SmallInt.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SmallInt.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1012}}";
 			sepNavSelRange = "{0, 0}";
@@ -1941,6 +2366,12 @@
 		};
 	};
 	3696688810727354008C5C0F /* SmallIntTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SmallIntTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SmallIntTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 2002}}";
 			sepNavSelRange = "{903, 0}";
@@ -1949,6 +2380,12 @@
 		};
 	};
 	3696688910727354008C5C0F /* String.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = String.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/String.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1664}}";
 			sepNavSelRange = "{2120, 12}";
@@ -1956,6 +2393,12 @@
 		};
 	};
 	3696688A10727354008C5C0F /* String.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = String.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/String.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1040, 325}}";
 			sepNavSelRange = "{647, 0}";
@@ -1963,6 +2406,12 @@
 		};
 	};
 	3696688C10727354008C5C0F /* StringTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = StringTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/StringTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {841, 1053}}";
 			sepNavSelRange = "{1298, 0}";
@@ -1970,6 +2419,12 @@
 		};
 	};
 	3696688D10727354008C5C0F /* Symbol.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Symbol.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Symbol.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 1625}}";
 			sepNavSelRange = "{1471, 0}";
@@ -1978,6 +2433,12 @@
 		};
 	};
 	3696688E10727354008C5C0F /* Symbol.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Symbol.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Symbol.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 751}}";
 			sepNavSelRange = "{818, 0}";
@@ -1986,6 +2447,12 @@
 		};
 	};
 	3696689010727354008C5C0F /* SymbolDefinition.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SymbolDefinition.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SymbolDefinition.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1040}}";
 			sepNavSelRange = "{600, 0}";
@@ -1993,6 +2460,12 @@
 		};
 	};
 	3696689110727354008C5C0F /* SymbolDefinition.hi */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SymbolDefinition.hi;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SymbolDefinition.hi;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1040}}";
 			sepNavSelRange = "{1986, 0}";
@@ -2000,6 +2473,12 @@
 		};
 	};
 	3696689210727354008C5C0F /* SymbolInitialization.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SymbolInitialization.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SymbolInitialization.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1486, 1040}}";
 			sepNavSelRange = "{3405, 0}";
@@ -2007,6 +2486,12 @@
 		};
 	};
 	3696689310727354008C5C0F /* SymbolTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = text;
+		name = SymbolTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/SymbolTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 1235}}";
 			sepNavSelRange = "{375, 13}";
@@ -2094,6 +2579,12 @@
 		vrLoc = 762;
 	};
 	36B94109109F40E700242037 /* Layout.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Layout.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Layout.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {592, 1430}}";
 			sepNavSelRange = "{1788, 17}";
@@ -2101,6 +2592,12 @@
 		};
 	};
 	36B9410A109F40E800242037 /* Layout.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Layout.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/Layout.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {899, 741}}";
 			sepNavSelRange = "{990, 19}";
@@ -2108,6 +2605,12 @@
 		};
 	};
 	36B9410B109F40E800242037 /* LayoutTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = LayoutTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/type/LayoutTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1153, 924}}";
 			sepNavSelRange = "{0, 0}";
@@ -2115,6 +2618,12 @@
 		};
 	};
 	36B94113109F411C00242037 /* ClassReference.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = ClassReference.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/organization/ClassReference.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {623, 754}}";
 			sepNavSelRange = "{676, 31}";
@@ -2122,6 +2631,12 @@
 		};
 	};
 	36B94114109F411C00242037 /* ClassReference.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = ClassReference.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/organization/ClassReference.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {926, 774}}";
 			sepNavSelRange = "{369, 6}";
@@ -2130,6 +2645,12 @@
 		};
 	};
 	36B94115109F411C00242037 /* ClassReferenceTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = ClassReferenceTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/organization/ClassReferenceTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {607, 356}}";
 			sepNavSelRange = "{99, 31}";
@@ -2137,6 +2658,12 @@
 		};
 	};
 	36B9411A109F414300242037 /* InstVariable.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = InstVariable.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/InstVariable.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 845}}";
 			sepNavSelRange = "{292, 20}";
@@ -2144,6 +2671,12 @@
 		};
 	};
 	36B9411B109F414300242037 /* InstVariable.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = InstVariable.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/InstVariable.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1092, 765}}";
 			sepNavSelRange = "{0, 0}";
@@ -2151,6 +2684,12 @@
 		};
 	};
 	36B9411C109F414300242037 /* InstVariableTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = InstVariableTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/InstVariableTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {628, 598}}";
 			sepNavSelRange = "{956, 11}";
@@ -2367,6 +2906,12 @@
 		vrLoc = 12639;
 	};
 	36CA9FB7107C96B5008AB6C0 /* Block.c */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.c;
+		name = Block.c;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Block.c;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1209, 1066}}";
 			sepNavSelRange = "{898, 0}";
@@ -2374,6 +2919,12 @@
 		};
 	};
 	36CA9FB8107C96B5008AB6C0 /* Block.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = Block.h;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/Block.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1209, 1004}}";
 			sepNavSelRange = "{965, 11}";
@@ -2381,6 +2932,12 @@
 		};
 	};
 	36CA9FB9107C96B5008AB6C0 /* BlockTest.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = BlockTest.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/system/ast/BlockTest.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {781, 522}}";
 			sepNavSelRange = "{212, 0}";
@@ -2398,10 +2955,16 @@
 		vrLoc = 0;
 	};
 	36E4969A10BC347400F365B1 /* test.ci */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.glsl;
+		name = test.ci;
+		path = /Users/cami/Ausbildung/master/programming/pinocchio/p2/parser/test.ci;
+		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1209, 5096}}";
+			sepNavIntBoundsRect = "{{0, 0}, {873, 4758}}";
 			sepNavSelRange = "{15568, 0}";
-			sepNavVisRange = "{12639, 2929}";
+			sepNavVisRange = "{1395, 1845}";
 		};
 	};
 	36F1077B1072384F00EC9BF7 /* PBXBookmarkGroup */ = {
