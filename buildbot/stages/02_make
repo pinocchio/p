@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd $1
-make clean  > /dev/null
-make run    > /dev/null
-make test   > /dev/null
