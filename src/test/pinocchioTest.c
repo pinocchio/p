@@ -96,7 +96,7 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 void run_tests()
 {
    init_Exception_Handling();
-   /*
+   
 test_Type_Array();
 test_AST_Assign();
 test_Type_Boolean();
@@ -122,7 +122,7 @@ test_Type_Nil();
 test_AST_Info();
 test_Runtime_MethodClosure();
 test_AST_Method();
-test_AST_InstVariable();*/
+test_AST_InstVariable();
 
 test_AutoGenTest();
 }

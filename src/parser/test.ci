@@ -46,7 +46,7 @@ Object smallint336 = (Object)new_Type_SmallInt(1);
 Object constant740 = (Object)new_AST_Constant(smallint336);
 Object smallint337 = (Object)new_Type_SmallInt(2);
 Object constant741 = (Object)new_AST_Constant(smallint337);
-Object send3443 = (Object)new_AST_Send((Object)constant740, (Object)SMB__gt, 1, constant741);
+Object send3443 = (Object)new_AST_Send((Object)constant740, (Object)SMB__lt, 1, constant741);
 Object smallint338 = (Object)new_Type_SmallInt(1);
 Object constant742 = (Object)new_AST_Constant(smallint338);
 Object send3444 = (Object)new_AST_Send((Object)variable600, (Object)SMB_escape_, 1, constant742);
@@ -68,6 +68,7 @@ store_method((Type_Class)Test_Class, (Type_Symbol)symbol491, (Runtime_MethodClos
 Object send3446 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol491, 0);
 Object result = (Object)Eval((Object)send3446);
 ASSERT_EMPTY_STACK
+print_Class(result);
 assert0(((Type_SmallInt)result)->value == 2);
 ASSERT_EMPTY_STACK
 }
