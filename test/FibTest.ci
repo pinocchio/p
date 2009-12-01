@@ -1,0 +1,68 @@
+Type_Symbol SMB_fib;
+
+METHOD(fib_method, 0, 0, 1)
+    AST_Send test = new_AST_Send(Self, (Object)SMB__lt, 
+                                 1,
+                                 (Object)new_AST_Constant(
+                                             (Object)new_Type_SmallInt(2)));
+                                    
+    
+    AST_Block break_code = new_AST_Block(0, 0, 1, 1,
+                                         (Object)new_AST_Constant(
+                                             (Object)new_Type_SmallInt(1)));
+    
+    AST_Send return_send = new_AST_Send(
+            (Object)new_AST_Send(
+                (Object)new_AST_Send(
+                    Self, 
+                    (Object)SMB__minus, 
+                    1, 
+                    (Object)new_AST_Constant(
+                                (Object)new_Type_SmallInt(1))),
+                (Object)SMB_fib,
+                0),
+            (Object)SMB__plus, 
+            1,
+            (Object)new_AST_Send(
+                (Object)new_AST_Send(
+                    Self, 
+                    (Object)SMB__minus, 
+                    1, 
+                    (Object)new_AST_Constant(
+                    (Object)new_Type_SmallInt(2))),
+                (Object)SMB_fib,
+                0));
+                
+    AST_Block return_code = new_AST_Block(0, 0, 1, 1, (Object)return_send);
+    
+    AST_Send ifElse = new_AST_Send((Object)test,
+                                   (Object)SMB_ifTrue_ifFalse_, 2,
+                                   (Object)break_code, (Object)return_code);
+    ADD_STATEMENT(ifElse);
+    
+    return method;
+}
+
+int cfib (int a) {
+    if (a < 2) {
+        return 1;
+    }
+    return cfib(a-1) + cfib(a-2);
+}
+
+void run_FibTest() 
+{
+    SMB_fib = new_Type_Symbol(L"fib");
+    store_method(Type_SmallInt_Class, SMB_fib, fib_method());
+    Object result;
+    
+    int i = 30;
+    //scanf("%i", &i);
+    result = (Object)Eval(
+                (Object)new_AST_Send(
+                    (Object)new_AST_Constant((Object)new_Type_SmallInt(i)), 
+                    (Object)SMB_fib, 0));
+    assert0(((Type_SmallInt)result)->value == cfib(i));
+    printf("%i\n", ((Type_SmallInt)result)->value);
+
+}
