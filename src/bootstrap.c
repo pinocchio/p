@@ -25,12 +25,12 @@ void bootstrap()
     create_RootPackage();
 }
 
-Object new_Organization_Package(Object parent, Object name)
+Object new_Organization_Package(Object parent, const wchar_t * name)
 {
     Type_Object result = (Type_Object)instantiate(Organization_Package_Class);
     result->ivals[0] = (Object)new_Type_Dictionary();
     result->ivals[1] = parent;
-    result->ivals[2] = name;
+    result->ivals[2] = (Object)new_Type_Symbol_cached(name);
     Object pmembers = raw_Type_Object_at((Type_Object)parent, GETTAG(parent), 0);
     Type_Dictionary_quick_store((Type_Dictionary)pmembers, name, (Object)result);
     return (Object)result;

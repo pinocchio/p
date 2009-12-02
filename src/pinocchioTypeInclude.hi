@@ -29,12 +29,11 @@
 #include <system/runtime/BlockClosure.h>
 #include <system/type/CharacterTable.h>
 #include <system/io/Stream.h>
-#include <system/io/Stream.h>
-#include <system/io/Stream.h>
-#include <system/ast/Block.h>
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>
 #include <system/ast/InstVariable.h>
 #include <system/organization/ClassReference.h>
 #include <system/runtime/InlineCache.h>
+
+#include <bootstrap.h>

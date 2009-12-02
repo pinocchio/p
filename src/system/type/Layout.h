@@ -61,6 +61,7 @@ void post_init_Type_Layout();
 /* ========================================================================= */
 
 extern Object create_type(uns_int size, Type_Tag tag, ...);
+extern Type_Array create_type_with_vars(Type_Class type, uns_int size);
 
 /* ========================================================================= */
 

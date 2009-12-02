@@ -17,6 +17,6 @@ EXPORT_REFERENCE(Organization_Package);
 extern Object RootPackage;
 
 extern void bootstrap();
-extern Object new_Organization_Package(Object parent, Object name);
+extern Object new_Organization_Package(Object parent, const wchar_t * name);
 
 #endif // BOOTSTRAP_H
