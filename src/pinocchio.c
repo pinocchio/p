@@ -3,6 +3,7 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
+#include <bootstrap.h>
 
 #ifdef TEST
 #include <test/pinocchioTest.h>
@@ -163,6 +164,7 @@ int main()
     #include <pinocchioPreInit.ci>
     initialize_Thread();
     #include <pinocchioPostInit.ci>
+    bootstrap();
 
     #ifdef TEST
     run_tests();

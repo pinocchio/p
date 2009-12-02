@@ -12,6 +12,17 @@ extern Type_Class Type_Type_LongLayout;
 extern Type_Class Type_BytesLayout;
 extern Type_Class Type_FileLayout;
 
+extern Object empty_object_layout;
+extern Object empty_array_layout;
+extern Object words_layout;
+extern Object bytes_layout;
+extern Object int_layout;
+extern Object long_layout;
+extern Object character_layout;
+extern Object file_layout;
+
+
+
 /* ========================================================================= */
 
 #define OBJECT_OF_TYPE(o, type)\
