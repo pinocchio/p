@@ -98,7 +98,10 @@ NATIVE1(Type_String_equals_)
         RETURN_FROM_NATIVE(True);
         return;
     }
-    assert0(OBJECT_OF_TYPE(w_arg, Words));
+    if (!OBJECT_OF_TYPE(w_arg, Words)) {
+        RETURN_FROM_NATIVE(False);
+        return;
+    }
     RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self,
     (Type_Symbol)w_arg)));
 }
