@@ -24,22 +24,26 @@ LOG("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 extern jmp_buf Test_Continue;
 
 extern void test_suite_begin(char * suiteName);
-extern void test_suite_end(char * suiteName);
+extern void test_suite_end(char * suiteName, uns_int numtests, uns_int numrun);
 
 extern void run_tests();
 
 #define TEST_SUITE(name, tests) void test_##name() {\
     test_suite_begin(#name);\
+    uns_int __ft__ = 0;\
+    uns_int __tc__ = 0;\
     tests\
-    test_suite_end(#name);\
+    test_suite_end(#name, __ft__, __tc__);\
 }
 
 #define RUN_TEST(f) \
     if (!setjmp(Test_Continue)) { \
+        __ft__++;\
         set_env((Object)new_Empty_Runtime_MethodContext());\
         test_##f();\
         printf("\n"); \
         ASSERT_EMPTY_STACK;\
+        __tc__++;\
     }
 
 #define SKIP_TEST printf("Test skipped: %s %s:%u\n",\

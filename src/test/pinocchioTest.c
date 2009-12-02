@@ -10,7 +10,7 @@ jmp_buf Test_Continue;
 int TEST_CASE_FAILED;
 
 #define ERROR_BUFFER_LEN 1024*1024
-char error_buffer[ERROR_BUFFER_LEN] = {0};
+char error_buffer[ERROR_BUFFER_LEN];
 int out_pipe[2];
 int saved_stdout;
 
@@ -29,21 +29,23 @@ void test_suite_begin(char * suiteName)
 }
 
 
-void test_suite_end(char * suiteName)
+void test_suite_end(char * suiteName, uns_int numtests, uns_int numrun)
 {
     FLUSH_STDOUT
     if (TEST_CASE_FAILED) {
         /* reads out contents of pipe to the error_buffer */
-        //read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
         dup2(saved_stdout, STDOUT_FILENO);
+        ssize_t nr = read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
+        error_buffer[nr] = '\0';
         printf("\033[31m===================================================================\033[0m\n");
         printf(">>> \033[31m%s\033[0m \033[100D\033[60C[\033[31mERROR\033[0m]\n", suiteName);
         printf("%s", error_buffer);
-        printf("<<< \033[31m%s\033[0m\n", suiteName);
+        printf("<<< \033[31m%s\033[0m %"F_I"u/%"F_I"u\n", suiteName, numrun, numtests);
         printf("\033[31m===================================================================\033[0m\n");
     } else {
         dup2(saved_stdout, STDOUT_FILENO);
-        printf("%s \033[100D\033[60C[\033[32mDONE\033[0m]\n", suiteName);
+        printf("%s \033[100D\033[60C[\033[32mDONE\033[0m %"F_I"u/%"F_I"u]\n",
+               suiteName, numrun, numtests);
     }
 }
 
