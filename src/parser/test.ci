@@ -1286,6 +1286,7 @@ TEST_SUITE(AutoGenTest,
 {
     create_ast();
     Test_Class = new_Class_named((Object)Type_Object_Class, L"Test_Object", Type_Object_Class->type);
+    printf("TYPE: %p\n", Type_Object_Class->type);
     test_Class_Instance = (Object)new_AST_Constant((Object)instantiate((Type_Class)Test_Class));
 
     RUN_TEST(AutoGenTest_tmSimpleReturn);
