@@ -412,7 +412,8 @@ arraylayout18 = (Object)create_type_with_vars(Type_ArrayLayout, 3);
 instancevariable103 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)arraylayout18)->values[0] = instancevariable103;instancevariable104 = (Object)new_AST_InstVariable(1, L"b");
 ((Type_Array)arraylayout18)->values[1] = instancevariable104;instancevariable105 = (Object)new_AST_InstVariable(2, L"c");
-((Type_Array)arraylayout18)->values[2] = instancevariable105;class88 = (Object)new_Class(class87, arraylayout18);
+((Type_Array)arraylayout18)->values[2] = instancevariable105;class88 =
+(Object)new_Class(Type_Object_Class, arraylayout18);
 ((Type_Class)class88)->name = (Type_Symbol)symbol20;
 
 // StandardVariableTestClass>>c
@@ -468,7 +469,7 @@ instancevariable107 = (Object)new_AST_InstVariable(1, L"b");
 ((Type_Array)objectlayout69)->values[1] = instancevariable107;
 instancevariable108 = (Object)new_AST_InstVariable(2, L"c");
 ((Type_Array)objectlayout69)->values[2] = instancevariable108;
-class89 = (Object)new_Class(class87, objectlayout69);
+class89 = (Object)new_Class(Type_Object_Class, objectlayout69);
 ((Type_Class)class89)->name = (Type_Symbol)symbol27;
 
 // StandardTestClass>>c
@@ -511,7 +512,7 @@ methodclosure658 = (Object)new_Runtime_MethodClosure(method658);
 store_method((Type_Class)class89, (Type_Symbol)symbol46, (Runtime_MethodClosure)methodclosure658);
 classreference89 = (Object)new_Organization_ClassReference((Type_Class)class89);
 symbol5 = (Object)new_Type_Symbol_cached(L"BridgeTest");
-class90 = (Object)new_Class(class87, empty_object_layout);
+class90 = (Object)new_Class(Type_Object_Class, empty_object_layout);
 ((Type_Class)class90)->name = (Type_Symbol)symbol5;
 
 // BridgeTest>>tmNumberEquals

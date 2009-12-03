@@ -23,7 +23,7 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
     uns_int size = closure->code->params->size + closure->code->locals->size;
     NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);
     result->closure         = closure;
-    result->pc              = 0;
+    result->pc              = 1;
     result->scope_id        = 0;
     result->home_context    = result;
     result->parent_frame    = current_env();

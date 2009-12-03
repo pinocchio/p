@@ -38,6 +38,7 @@ static void CNT_AST_Method_continue()
     poke_EXP(0, code->body[env->pc]);
     
     env->pc++;
+
     if (code->size <= env->pc) {
         poke_CNT(restore_env); 
     } 
