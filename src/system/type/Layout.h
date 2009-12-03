@@ -8,7 +8,7 @@ extern Type_Class Type_ArrayLayout;
 extern Type_Class Type_CharacterLayout;
 extern Type_Class Type_WordsLayout;
 extern Type_Class Type_IntLayout;
-extern Type_Class Type_Type_LongLayout;
+extern Type_Class Type_LongLayout;
 extern Type_Class Type_BytesLayout;
 extern Type_Class Type_FileLayout;
 
