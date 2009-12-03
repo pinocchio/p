@@ -2,6 +2,7 @@ Object instantiate_Array(Type_Class class, Type_Array ivars, uns_int extra)
 {
     uns_int base = ivars->size;
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[base+extra]);
+    printf("Making variable sized object of size: %lu %lu\n", base, extra);
     result->size = extra;
     uns_int i;
     for (i = 0; i < base + extra; i++) {
@@ -71,6 +72,8 @@ Object instantiate(Type_Class class)
     Object tag = class->type;
 
     INSTANTIATE(Object);
+    uns_int size = 0;
+    INSTANTIATE_SIZED(Array);
 
     assert(NULL, printf("Not a fixed-sized object type: %p\n", tag));
     return NULL;

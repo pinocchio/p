@@ -37,7 +37,7 @@ void AST_InstVariable_eval(AST_InstVariable var)
     if (TAG_IS_TYPE(tag, Object)) {
         poke_EXP(0, raw_Type_Object_at((Type_Object)self, tag, index));
     } else if (TAG_IS_TYPE(tag, Array)) {
-        poke_EXP(0, raw_Type_Array_at((Type_Array)self, tag, index));
+        poke_EXP(0, raw_Type_Array_instAt((Type_Array)self, tag, index));
     } else {
         assert1(NULL, "Trying to access object without instvars");
     }
@@ -53,7 +53,7 @@ void AST_InstVariable_assign(AST_InstVariable var, Object value)
     if (TAG_IS_TYPE(tag, Object)) {
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
     } else if (TAG_IS_TYPE(tag, Array)) {
-        raw_Type_Array_at_put((Type_Array)self, tag, index, value);
+        raw_Type_Array_instAt_put((Type_Array)self, tag, index, value);
     } else {
         assert1(NULL, "Trying to access object without instvars");
     }

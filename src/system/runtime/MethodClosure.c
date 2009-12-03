@@ -35,7 +35,6 @@ static void CNT_AST_Method_continue()
 {
     Runtime_MethodContext env = (Runtime_MethodContext)current_env();
     AST_Method code = env->closure->code;
-    printf("method continue at: %lu\n", env->pc);
     poke_EXP(0, code->body[env->pc]);
     
     env->pc++;

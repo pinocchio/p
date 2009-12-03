@@ -21,7 +21,9 @@ extern Type_Array new_Type_Array_withAll(uns_int c, Object element);
 extern Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index);
 extern void raw_Type_Array_at_put(Type_Array array, Object tag,
                                   uns_int index, Object value);
-
+extern Object raw_Type_Array_instAt(Type_Array array, Object tag, uns_int index);
+extern void raw_Type_Array_instAt_put(Type_Array array, Object tag,
+                                      uns_int index, Object value);
 /* ========================================================================= */
 
 #endif // ARRAY_H

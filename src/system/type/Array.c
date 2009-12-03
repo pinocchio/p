@@ -81,6 +81,19 @@ NATIVE0(Type_Array_size)
     RETURN_FROM_NATIVE(result);
 }
 
+Object raw_Type_Array_instAt(Type_Array o, Object tag, uns_int index)
+{
+    ASSERT_TAG_SIZE(tag, index);
+    return o->values[index];
+}
+
+void raw_Type_Array_instAt_put(Type_Array o, Object tag,
+                               uns_int index, Object value)
+{
+    ASSERT_TAG_SIZE(tag, index);
+    o->values[index] = value;
+}
+
 Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index)
 {
     assert0(array->size > index);
