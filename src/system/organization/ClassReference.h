@@ -15,6 +15,7 @@ struct Organization_ClassReference_t {
 
 CREATE_INITIALIZERS(Organization_ClassReference)
 extern Organization_ClassReference new_Organization_ClassReference(Type_Class class);
+extern Organization_ClassReference new_Organization_ClassReference_empty();
 
 
 /* ========================================================================= */

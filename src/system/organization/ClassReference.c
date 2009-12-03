@@ -19,6 +19,16 @@ Organization_ClassReference
     return result;
 }
 
+Organization_ClassReference new_Organization_ClassReference_empty()
+{
+    
+    NEW_OBJECT(Organization_ClassReference);
+    result->class = Nil;
+    result->package = Nil;
+    // result->name = Nil;
+    return result;
+}
+
 /*
 Organization_ClassReference
     new_Organization_ClassReference_named(Object class,

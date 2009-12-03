@@ -5,923 +5,913 @@ Type_Class Test_Class;
 Object test_Class_Instance;
 // Test Method symbol
 Type_Symbol SMB_runTestCase;
-Object symbol28;
-Object symbol33;
-Object class28;
-Object symbol32;
-Object classreference31;
-Object symbol34;
-Object classreference32;
-Object symbol31;
-Object class27;
-Object symbol27;
-Object class26;
-Object smallint345;
-Object constant479;
-Object method235;
 Object symbol11;
-Object methodclosure223;
-Object localvariable108;
-Object array103;
-Object smallint346;
-Object constant480;
-Object send675;
-Object method236;
-Object symbol39;
-Object methodclosure224;
-Object symbol19;
-Object constant481;
-Object method237;
-Object symbol20;
-Object methodclosure225;
-Object smallint347;
-Object constant482;
-Object smallint348;
-Object constant483;
-Object send676;
-Object method238;
-Object symbol12;
-Object methodclosure226;
-Object variable10;
-Object array104;
-Object smallint349;
-Object constant484;
-Object smallint350;
-Object constant485;
-Object send679;
-Object smallint351;
-Object constant486;
-Object send680;
-Object block68;
-Object smallint352;
-Object constant487;
-Object send681;
-Object block69;
-Object send678;
-Object block67;
-Object send677;
-Object method239;
-Object symbol40;
-Object methodclosure227;
-Object send682;
-Object method240;
-Object symbol5;
-Object methodclosure228;
-Object constant488;
-Object constant489;
-Object send683;
-Object method241;
-Object symbol21;
-Object methodclosure229;
-Object smallint353;
-Object constant490;
-Object smallint354;
-Object constant491;
-Object send684;
-Object method242;
-Object symbol13;
-Object methodclosure230;
-Object method243;
-Object symbol41;
-Object methodclosure231;
-Object method244;
-Object symbol6;
-Object methodclosure232;
-Object smallint355;
-Object constant492;
-Object smallint356;
-Object constant493;
-Object send685;
-Object method245;
-Object symbol14;
-Object methodclosure233;
-Object method246;
-Object symbol7;
-Object methodclosure234;
-Object smallint357;
-Object constant494;
-Object smallint358;
-Object constant495;
-Object send686;
-Object method247;
-Object symbol15;
-Object methodclosure235;
-Object localvariable109;
-Object array105;
-Object symbol42;
-Object arraylayout6;
-Object instancevariable31;
-Object instancevariable32;
-Object instancevariable33;
-Object class29;
-Object method249;
-Object symbol50;
-Object methodclosure236;
-Object method250;
-Object symbol47;
-Object methodclosure237;
-Object localvariable110;
-Object array106;
-Object assign62;
-Object method251;
-Object symbol49;
-Object methodclosure238;
-Object localvariable111;
-Object array107;
-Object assign63;
-Object method252;
-Object symbol2;
-Object methodclosure239;
-Object method253;
-Object symbol51;
-Object methodclosure240;
-Object localvariable112;
-Object array108;
-Object assign64;
-Object method254;
-Object symbol48;
-Object methodclosure241;
-Object classreference33;
-Object symbol52;
-Object smallint359;
-Object constant496;
-Object send687;
-Object assign61;
-Object smallint360;
-Object constant497;
-Object smallint361;
-Object constant498;
-Object send688;
-Object smallint362;
-Object constant499;
-Object smallint363;
-Object constant500;
-Object send689;
-Object symbol53;
-Object smallint364;
-Object constant501;
-Object send692;
-Object smallint365;
-Object constant502;
-Object send691;
-Object send690;
-Object smallint366;
-Object constant503;
-Object send695;
-Object smallint367;
-Object constant504;
-Object send694;
-Object send693;
-Object localvariable113;
-Object array109;
-Object smallint368;
-Object constant505;
-Object send697;
-Object smallint369;
-Object constant506;
-Object send698;
-Object block70;
-Object symbol54;
-Object smallint370;
-Object constant507;
-Object send699;
-Object send696;
-Object send702;
-Object smallint371;
-Object constant508;
-Object send701;
-Object send700;
-Object send705;
-Object smallint372;
-Object constant509;
-Object send704;
-Object send703;
-Object send708;
-Object smallint373;
-Object constant510;
-Object send707;
-Object send706;
-Object send711;
-Object send713;
-Object send715;
-Object smallint374;
-Object constant511;
-Object send716;
-Object send714;
-Object send712;
-Object send710;
-Object smallint375;
-Object constant512;
-Object send717;
-Object send709;
-Object method248;
-Object symbol43;
-Object methodclosure242;
-Object character46;
-Object constant513;
-Object method255;
-Object symbol8;
-Object methodclosure243;
-Object localvariable114;
-Object localvariable115;
-Object localvariable116;
-Object array110;
-Object send719;
-Object send718;
-Object method256;
-Object symbol35;
-Object methodclosure244;
-Object smallint376;
-Object constant514;
-Object smallint377;
-Object constant515;
-Object send720;
-Object method257;
-Object symbol16;
-Object methodclosure245;
-Object smallint378;
-Object constant516;
-Object method258;
-Object symbol36;
-Object methodclosure246;
-Object character47;
-Object constant517;
-Object character48;
-Object constant518;
-Object send721;
-Object method259;
+Object class86;
+Object classreference86;
 Object symbol9;
-Object methodclosure247;
-Object string77;
-Object constant519;
-Object method260;
-Object symbol17;
-Object methodclosure248;
-Object localvariable117;
-Object array111;
-Object symbol44;
-Object objectlayout24;
-Object instancevariable34;
-Object instancevariable35;
-Object instancevariable36;
-Object class30;
-Object method262;
-Object methodclosure249;
-Object method263;
-Object methodclosure250;
-Object localvariable118;
-Object array112;
-Object assign66;
-Object method264;
-Object methodclosure251;
-Object localvariable119;
-Object array113;
-Object assign67;
-Object method265;
-Object methodclosure252;
-Object method266;
-Object methodclosure253;
-Object localvariable120;
-Object array114;
-Object assign68;
-Object method267;
-Object methodclosure254;
-Object classreference34;
-Object symbol55;
-Object send722;
-Object assign65;
-Object localvariable121;
-Object array115;
-Object smallint379;
-Object constant520;
-Object send724;
-Object smallint380;
-Object constant521;
-Object send725;
-Object block71;
-Object smallint381;
-Object constant522;
-Object send726;
-Object send723;
-Object send729;
-Object smallint382;
-Object constant523;
-Object send728;
-Object send727;
-Object send732;
-Object smallint383;
-Object constant524;
-Object send731;
-Object send730;
-Object send735;
-Object smallint384;
-Object constant525;
-Object send734;
-Object send733;
-Object send738;
-Object send739;
-Object send737;
-Object send740;
-Object send736;
-Object method261;
+Object class87;
+Object classreference87;
+Object symbol20;
+Object arraylayout18;
+Object instancevariable103;
+Object instancevariable104;
+Object instancevariable105;
+Object class88;
+Object method647;
 Object symbol45;
-Object methodclosure255;
-Object smallint385;
-Object constant526;
-Object smallint386;
-Object constant527;
-Object send743;
-Object smallint387;
-Object constant528;
-Object send742;
-Object smallint388;
-Object constant529;
-Object send741;
-Object method268;
-Object symbol37;
-Object methodclosure256;
-Object string78;
-Object constant530;
-Object string79;
-Object constant531;
-Object send744;
-Object method269;
-Object symbol18;
-Object methodclosure257;
-Object localvariable122;
-Object array116;
-Object send745;
-Object assign69;
-Object localvariable123;
-Object array117;
-Object smallint389;
-Object smallint390;
-Object constant532;
-Object send747;
-Object constant533;
-Object send748;
-Object block72;
-Object smallint391;
-Object constant534;
-Object send749;
-Object send746;
-Object send752;
-Object smallint392;
-Object constant535;
-Object send751;
-Object send750;
-Object send755;
-Object smallint393;
-Object constant536;
-Object send754;
-Object send753;
-Object send758;
-Object smallint394;
-Object constant537;
-Object send757;
-Object send756;
-Object send761;
-Object send762;
-Object send760;
-Object send763;
-Object send759;
-Object method270;
+Object methodclosure647;
+Object localvariable290;
+Object array273;
+Object assign171;
+Object method648;
+Object symbol41;
+Object methodclosure648;
+Object localvariable291;
+Object array274;
+Object assign172;
+Object method649;
+Object symbol43;
+Object methodclosure649;
+Object method650;
+Object symbol44;
+Object methodclosure650;
+Object localvariable292;
+Object array275;
+Object assign173;
+Object method651;
+Object symbol42;
+Object methodclosure651;
+Object method652;
 Object symbol46;
-Object methodclosure258;
-Object send764;
-Object method271;
+Object methodclosure652;
+Object classreference88;
+Object symbol27;
+Object objectlayout69;
+Object instancevariable106;
+Object instancevariable107;
+Object instancevariable108;
+Object class89;
+Object method653;
+Object methodclosure653;
+Object localvariable293;
+Object array276;
+Object assign174;
+Object method654;
+Object methodclosure654;
+Object localvariable294;
+Object array277;
+Object assign175;
+Object method655;
+Object methodclosure655;
+Object method656;
+Object methodclosure656;
+Object localvariable295;
+Object array278;
+Object assign176;
+Object method657;
+Object methodclosure657;
+Object method658;
+Object methodclosure658;
+Object classreference89;
+Object symbol5;
+Object class90;
+Object smallint887;
+Object constant1089;
+Object smallint888;
+Object constant1090;
+Object send1973;
+Object method659;
+Object symbol19;
+Object methodclosure659;
+Object smallint889;
+Object constant1091;
+Object smallint890;
+Object constant1092;
+Object send1974;
+Object method660;
+Object symbol31;
+Object methodclosure660;
+Object send1975;
+Object method661;
+Object symbol39;
+Object methodclosure661;
+Object localvariable296;
+Object array279;
+Object send1976;
+Object assign177;
+Object localvariable297;
+Object array280;
+Object smallint891;
+Object constant1093;
+Object send1977;
+Object smallint892;
+Object constant1094;
+Object send1978;
+Object block103;
+Object symbol48;
+Object smallint893;
+Object constant1095;
+Object send1979;
+Object send1980;
+Object symbol49;
+Object send1981;
+Object smallint894;
+Object constant1096;
+Object send1982;
+Object send1983;
+Object send1984;
+Object smallint895;
+Object constant1097;
+Object send1985;
+Object send1986;
+Object send1987;
+Object smallint896;
+Object constant1098;
+Object send1988;
+Object send1989;
+Object send1990;
+Object send1991;
+Object send1992;
+Object send1993;
+Object send1994;
+Object method662;
+Object symbol28;
+Object methodclosure662;
+Object smallint897;
+Object constant1099;
+Object method663;
+Object symbol40;
+Object methodclosure663;
+Object localvariable298;
+Object array281;
+Object smallint898;
+Object constant1100;
+Object send1995;
+Object assign178;
+Object smallint899;
+Object constant1101;
+Object smallint900;
+Object constant1102;
+Object send1996;
+Object smallint901;
+Object constant1103;
+Object smallint902;
+Object constant1104;
+Object send1997;
+Object smallint903;
+Object constant1105;
+Object send1998;
+Object smallint904;
+Object constant1106;
+Object send1999;
+Object send2000;
+Object smallint905;
+Object constant1107;
+Object send2001;
+Object smallint906;
+Object constant1108;
+Object send2002;
+Object send2003;
+Object localvariable299;
+Object array282;
+Object smallint907;
+Object constant1109;
+Object send2004;
+Object smallint908;
+Object constant1110;
+Object send2005;
+Object block104;
+Object smallint909;
+Object constant1111;
+Object send2006;
+Object send2007;
+Object send2008;
+Object smallint910;
+Object constant1112;
+Object send2009;
+Object send2010;
+Object send2011;
+Object smallint911;
+Object constant1113;
+Object send2012;
+Object send2013;
+Object send2014;
+Object smallint912;
+Object constant1114;
+Object send2015;
+Object send2016;
+Object send2017;
+Object send2018;
+Object send2019;
+Object smallint913;
+Object constant1115;
+Object send2020;
+Object send2021;
+Object send2022;
+Object send2023;
+Object smallint914;
+Object constant1116;
+Object send2024;
+Object send2025;
+Object method664;
+Object symbol32;
+Object methodclosure664;
+Object localvariable300;
+Object array283;
+Object send2026;
+Object assign179;
+Object localvariable301;
+Object array284;
+Object smallint915;
+Object constant1117;
+Object send2027;
+Object smallint916;
+Object constant1118;
+Object send2028;
+Object block105;
+Object smallint917;
+Object constant1119;
+Object send2029;
+Object send2030;
+Object send2031;
+Object smallint918;
+Object constant1120;
+Object send2032;
+Object send2033;
+Object send2034;
+Object smallint919;
+Object constant1121;
+Object send2035;
+Object send2036;
+Object send2037;
+Object smallint920;
+Object constant1122;
+Object send2038;
+Object send2039;
+Object send2040;
+Object send2041;
+Object send2042;
+Object send2043;
+Object send2044;
+Object method665;
+Object symbol21;
+Object methodclosure665;
+Object symbol51;
+Object constant1123;
+Object constant1124;
+Object send2045;
+Object method666;
+Object symbol13;
+Object methodclosure666;
+Object variable18;
+Object array285;
+Object smallint921;
+Object constant1125;
+Object smallint922;
+Object constant1126;
+Object send2046;
+Object smallint923;
+Object constant1127;
+Object send2047;
+Object block106;
+Object smallint924;
+Object constant1128;
+Object send2048;
+Object block107;
+Object send2049;
+Object block108;
+Object send2050;
+Object method667;
+Object symbol29;
+Object methodclosure667;
+Object smallint925;
+Object constant1129;
+Object smallint926;
+Object constant1130;
+Object send2051;
+Object method668;
+Object symbol33;
+Object methodclosure668;
+Object localvariable302;
+Object array286;
+Object smallint927;
+Object constant1131;
+Object assign180;
+Object method669;
+Object symbol22;
+Object methodclosure669;
+Object method670;
+Object symbol14;
+Object methodclosure670;
+Object smallint928;
+Object constant1132;
+Object smallint929;
+Object constant1133;
+Object send2052;
+Object method671;
+Object symbol34;
+Object methodclosure671;
+Object send2053;
+Object method672;
+Object symbol23;
+Object methodclosure672;
+Object character52;
+Object constant1134;
+Object method673;
+Object symbol15;
+Object methodclosure673;
+Object method674;
+Object symbol35;
+Object methodclosure674;
+Object string137;
+Object constant1135;
+Object string138;
+Object constant1136;
+Object send2054;
+Object method675;
+Object symbol24;
+Object methodclosure675;
+Object method676;
+Object symbol16;
+Object methodclosure676;
+Object localvariable303;
+Object localvariable304;
+Object localvariable305;
+Object array287;
+Object send2055;
+Object send2056;
+Object method677;
+Object symbol36;
+Object methodclosure677;
+Object localvariable306;
+Object array288;
+Object smallint930;
+Object constant1137;
+Object send2057;
+Object method678;
+Object symbol25;
+Object methodclosure678;
+Object smallint931;
+Object constant1138;
+Object smallint932;
+Object constant1139;
+Object send2058;
+Object smallint933;
+Object constant1140;
+Object send2059;
+Object smallint934;
+Object constant1141;
+Object send2060;
+Object method679;
+Object symbol17;
+Object methodclosure679;
+Object smallint935;
+Object constant1142;
+Object method680;
+Object symbol37;
+Object methodclosure680;
+Object string139;
+Object constant1143;
+Object method681;
+Object symbol26;
+Object methodclosure681;
+Object character53;
+Object constant1144;
+Object character54;
+Object constant1145;
+Object send2061;
+Object method682;
+Object symbol18;
+Object methodclosure682;
+Object smallint936;
+Object constant1146;
+Object smallint937;
+Object constant1147;
+Object send2062;
+Object method683;
+Object symbol30;
+Object methodclosure683;
+Object constant1148;
+Object method684;
 Object symbol38;
-Object methodclosure259;
-Object localvariable124;
-Object array118;
-Object smallint395;
-Object constant538;
-Object assign70;
-Object method272;
-Object symbol10;
-Object methodclosure260;
-Object classreference30;
+Object methodclosure684;
+Object classreference90;
 
 
 void create_ast() {
-symbol28 = (Object)new_Type_Symbol_cached(L"BridgeTest");
-symbol33 = (Object)new_Type_Symbol_cached(L"ProtoObject");
-class28 = (Object)new_Class(Nil, empty_object_layout);
-((Type_Class)class28)->name = (Type_Symbol)symbol33;
-symbol32 = (Object)new_Type_Symbol_cached(L"Object");
-classreference31 = (Object)new_Organization_ClassReference((Type_Class)class27);
-symbol34 = (Object)new_Type_Symbol_cached(L"ProtoObject");
-classreference32 = (Object)new_Organization_ClassReference((Type_Class)class28);
-symbol31 = (Object)new_Type_Symbol_cached(L"Object");
-class27 = (Object)new_Class(class28, empty_object_layout);
-((Type_Class)class27)->name = (Type_Symbol)symbol31;
-symbol27 = (Object)new_Type_Symbol_cached(L"BridgeTest");
-class26 = (Object)new_Class(class27, empty_object_layout);
-((Type_Class)class26)->name = (Type_Symbol)symbol27;
-
-// BridgeTest>>tmNumber
-smallint345 = (Object)new_Type_SmallInt(1);
-constant479 = (Object)new_AST_Constant(smallint345);
-method235 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant479);
-symbol11 = (Object)new_Type_Symbol_cached(L"tmNumber");
-methodclosure223 = (Object)new_Runtime_MethodClosure(method235);
-store_method((Type_Class)class26, (Type_Symbol)symbol11, (Runtime_MethodClosure)methodclosure223);
-
-// BridgeTest>>tmMethodArgument:
-localvariable108 = (Object)new_AST_Variable_named(L"arg");
-array103 = (Object)new_Type_Array_with(1, localvariable108);
-smallint346 = (Object)new_Type_SmallInt(1);
-constant480 = (Object)new_AST_Constant(smallint346);
-send675 = (Object)new_AST_Send((Object)localvariable108, (Object)SMB__plus, 1, constant480);
-method236 = (Object)new_AST_Method_with((Type_Array)array103, (Type_Array)empty_Type_Array, 1, send675);
-symbol39 = (Object)new_Type_Symbol_cached(L"tmMethodArgument:");
-methodclosure224 = (Object)new_Runtime_MethodClosure(method236);
-store_method((Type_Class)class26, (Type_Symbol)symbol39, (Runtime_MethodClosure)methodclosure224);
-
-// BridgeTest>>tmSymbol
-symbol19 = (Object)new_Type_Symbol_cached(L"Symbol");
-constant481 = (Object)new_AST_Constant(symbol19);
-method237 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant481);
-symbol20 = (Object)new_Type_Symbol_cached(L"tmSymbol");
-methodclosure225 = (Object)new_Runtime_MethodClosure(method237);
-store_method((Type_Class)class26, (Type_Symbol)symbol20, (Runtime_MethodClosure)methodclosure225);
-
-// BridgeTest>>tmNumberAdd
-smallint347 = (Object)new_Type_SmallInt(1);
-constant482 = (Object)new_AST_Constant(smallint347);
-smallint348 = (Object)new_Type_SmallInt(1);
-constant483 = (Object)new_AST_Constant(smallint348);
-send676 = (Object)new_AST_Send((Object)constant482, (Object)SMB__plus, 1, constant483);
-method238 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send676);
-symbol12 = (Object)new_Type_Symbol_cached(L"tmNumberAdd");
-methodclosure226 = (Object)new_Runtime_MethodClosure(method238);
-store_method((Type_Class)class26, (Type_Symbol)symbol12, (Runtime_MethodClosure)methodclosure226);
-
-// BridgeTest>>tmExtendedReturn
-variable10 = (Object)new_AST_Variable_named(L"return");
-array104 = (Object)new_Type_Array_with(1, variable10);
-smallint349 = (Object)new_Type_SmallInt(1);
-constant484 = (Object)new_AST_Constant(smallint349);
-smallint350 = (Object)new_Type_SmallInt(2);
-constant485 = (Object)new_AST_Constant(smallint350);
-send679 = (Object)new_AST_Send((Object)constant484, (Object)SMB__gt, 1, constant485);
-smallint351 = (Object)new_Type_SmallInt(1);
-constant486 = (Object)new_AST_Constant(smallint351);
-send680 = (Object)new_AST_Send((Object)variable10, (Object)SMB_escape_, 1, constant486);
-block68 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 3, 1, send680);
-smallint352 = (Object)new_Type_SmallInt(2);
-constant487 = (Object)new_AST_Constant(smallint352);
-send681 = (Object)new_AST_Send((Object)variable10, (Object)SMB_escape_, 1, constant487);
-block69 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 3, 1, send681);
-send678 = (Object)new_AST_Send((Object)send679, (Object)SMB_ifTrue_ifFalse_, 2, block68, block69);
-block67 = (Object)new_AST_Block_with((Type_Array)array104, (Type_Array)empty_Type_Array, 2, 2, send678, Self);
-send677 = (Object)new_AST_Send((Object)AST_Callec_Reference, (Object)SMB_on_, 1, block67);
-method239 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send677);
-symbol40 = (Object)new_Type_Symbol_cached(L"tmExtendedReturn");
-methodclosure227 = (Object)new_Runtime_MethodClosure(method239);
-store_method((Type_Class)class26, (Type_Symbol)symbol40, (Runtime_MethodClosure)methodclosure227);
-
-// BridgeTest>>tmBooleanEquals
-send682 = (Object)new_AST_Send((Object)True_Const, (Object)SMB__equal, 1, True_Const);
-method240 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send682);
-symbol5 = (Object)new_Type_Symbol_cached(L"tmBooleanEquals");
-methodclosure228 = (Object)new_Runtime_MethodClosure(method240);
-store_method((Type_Class)class26, (Type_Symbol)symbol5, (Runtime_MethodClosure)methodclosure228);
-
-// BridgeTest>>tmSymbolEquals
-constant488 = (Object)new_AST_Constant(symbol19);
-constant489 = (Object)new_AST_Constant(symbol19);
-send683 = (Object)new_AST_Send((Object)constant488, (Object)SMB__equal, 1, constant489);
-method241 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send683);
-symbol21 = (Object)new_Type_Symbol_cached(L"tmSymbolEquals");
-methodclosure229 = (Object)new_Runtime_MethodClosure(method241);
-store_method((Type_Class)class26, (Type_Symbol)symbol21, (Runtime_MethodClosure)methodclosure229);
-
-// BridgeTest>>tmNumberDiv
-smallint353 = (Object)new_Type_SmallInt(4);
-constant490 = (Object)new_AST_Constant(smallint353);
-smallint354 = (Object)new_Type_SmallInt(2);
-constant491 = (Object)new_AST_Constant(smallint354);
-send684 = (Object)new_AST_Send((Object)constant490, (Object)SMB__divide, 1, constant491);
-method242 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send684);
-symbol13 = (Object)new_Type_Symbol_cached(L"tmNumberDiv");
-methodclosure230 = (Object)new_Runtime_MethodClosure(method242);
-store_method((Type_Class)class26, (Type_Symbol)symbol13, (Runtime_MethodClosure)methodclosure230);
-
-// BridgeTest>>tmFibonacci
-method243 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, Self);
-symbol41 = (Object)new_Type_Symbol_cached(L"tmFibonacci");
-methodclosure231 = (Object)new_Runtime_MethodClosure(method243);
-store_method((Type_Class)class26, (Type_Symbol)symbol41, (Runtime_MethodClosure)methodclosure231);
-
-// BridgeTest>>tmBooleanFalse
-method244 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, False_Const);
-symbol6 = (Object)new_Type_Symbol_cached(L"tmBooleanFalse");
-methodclosure232 = (Object)new_Runtime_MethodClosure(method244);
-store_method((Type_Class)class26, (Type_Symbol)symbol6, (Runtime_MethodClosure)methodclosure232);
-
-// BridgeTest>>tmNumberEquals
-smallint355 = (Object)new_Type_SmallInt(1);
-constant492 = (Object)new_AST_Constant(smallint355);
-smallint356 = (Object)new_Type_SmallInt(1);
-constant493 = (Object)new_AST_Constant(smallint356);
-send685 = (Object)new_AST_Send((Object)constant492, (Object)SMB__equal, 1, constant493);
-method245 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send685);
-symbol14 = (Object)new_Type_Symbol_cached(L"tmNumberEquals");
-methodclosure233 = (Object)new_Runtime_MethodClosure(method245);
-store_method((Type_Class)class26, (Type_Symbol)symbol14, (Runtime_MethodClosure)methodclosure233);
-
-// BridgeTest>>tmBooleanTrue
-method246 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, True_Const);
-symbol7 = (Object)new_Type_Symbol_cached(L"tmBooleanTrue");
-methodclosure234 = (Object)new_Runtime_MethodClosure(method246);
-store_method((Type_Class)class26, (Type_Symbol)symbol7, (Runtime_MethodClosure)methodclosure234);
-
-// BridgeTest>>tmNumberMult
-smallint357 = (Object)new_Type_SmallInt(2);
-constant494 = (Object)new_AST_Constant(smallint357);
-smallint358 = (Object)new_Type_SmallInt(3);
-constant495 = (Object)new_AST_Constant(smallint358);
-send686 = (Object)new_AST_Send((Object)constant494, (Object)SMB__times, 1, constant495);
-method247 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send686);
-symbol15 = (Object)new_Type_Symbol_cached(L"tmNumberMult");
-methodclosure235 = (Object)new_Runtime_MethodClosure(method247);
-store_method((Type_Class)class26, (Type_Symbol)symbol15, (Runtime_MethodClosure)methodclosure235);
-
-// BridgeTest>>tmVariableInstanceCreationSized
-localvariable109 = (Object)new_AST_Variable_named(L"instance");
-array105 = (Object)new_Type_Array_with(1, localvariable109);
-symbol42 = (Object)new_Type_Symbol_cached(L"StandardVariableTestClass");
-arraylayout6 = (Object)create_type_with_vars(Type_ArrayLayout, 3);
-instancevariable31 = (Object)new_AST_InstVariable(0, L"a");
-((Type_Array)arraylayout6)->values[0] = instancevariable31;instancevariable32 = (Object)new_AST_InstVariable(1, L"b");
-((Type_Array)arraylayout6)->values[1] = instancevariable32;instancevariable33 = (Object)new_AST_InstVariable(2, L"c");
-((Type_Array)arraylayout6)->values[2] = instancevariable33;class29 = (Object)new_Class(class27, arraylayout6);
-((Type_Class)class29)->name = (Type_Symbol)symbol42;
+symbol11 = (Object)new_Type_Symbol_cached(L"ProtoObject");
+class86 = (Object)new_Class(Nil, empty_object_layout);
+((Type_Class)class86)->name = (Type_Symbol)symbol11;
+classreference86 = (Object)new_Organization_ClassReference((Type_Class)class86);
+symbol9 = (Object)new_Type_Symbol_cached(L"Object");
+class87 = (Object)new_Class(class86, empty_object_layout);
+((Type_Class)class87)->name = (Type_Symbol)symbol9;
+classreference87 = (Object)new_Organization_ClassReference((Type_Class)class87);
+symbol20 = (Object)new_Type_Symbol_cached(L"StandardVariableTestClass");
+arraylayout18 = (Object)create_type_with_vars(Type_ArrayLayout, 3);
+instancevariable103 = (Object)new_AST_InstVariable(0, L"a");
+((Type_Array)arraylayout18)->values[0] = instancevariable103;instancevariable104 = (Object)new_AST_InstVariable(1, L"b");
+((Type_Array)arraylayout18)->values[1] = instancevariable104;instancevariable105 = (Object)new_AST_InstVariable(2, L"c");
+((Type_Array)arraylayout18)->values[2] = instancevariable105;class88 = (Object)new_Class(class87, arraylayout18);
+((Type_Class)class88)->name = (Type_Symbol)symbol20;
 
 // StandardVariableTestClass>>c
-method249 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable33);
-symbol50 = (Object)new_Type_Symbol_cached(L"c");
-methodclosure236 = (Object)new_Runtime_MethodClosure(method249);
-store_method((Type_Class)class29, (Type_Symbol)symbol50, (Runtime_MethodClosure)methodclosure236);
-
-// StandardVariableTestClass>>b
-method250 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable32);
-symbol47 = (Object)new_Type_Symbol_cached(L"b");
-methodclosure237 = (Object)new_Runtime_MethodClosure(method250);
-store_method((Type_Class)class29, (Type_Symbol)symbol47, (Runtime_MethodClosure)methodclosure237);
+method647 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable105);
+symbol45 = (Object)new_Type_Symbol_cached(L"c");
+methodclosure647 = (Object)new_Runtime_MethodClosure(method647);
+store_method((Type_Class)class88, (Type_Symbol)symbol45, (Runtime_MethodClosure)methodclosure647);
 
 // StandardVariableTestClass>>c:
-localvariable110 = (Object)new_AST_Variable_named(L"anObject");
-array106 = (Object)new_Type_Array_with(1, localvariable110);
-assign62 = (Object)new_AST_Assign((Object)instancevariable33, (Object)localvariable110);
-method251 = (Object)new_AST_Method_with((Type_Array)array106, (Type_Array)empty_Type_Array, 2, assign62, Self);
-symbol49 = (Object)new_Type_Symbol_cached(L"c:");
-methodclosure238 = (Object)new_Runtime_MethodClosure(method251);
-store_method((Type_Class)class29, (Type_Symbol)symbol49, (Runtime_MethodClosure)methodclosure238);
+localvariable290 = (Object)new_AST_Variable_named(L"anObject");
+array273 = (Object)new_Type_Array_with(1, localvariable290);
+assign171 = (Object)new_AST_Assign((Object)instancevariable105, (Object)localvariable290);
+method648 = (Object)new_AST_Method_with((Type_Array)array273, (Type_Array)empty_Type_Array, 2, assign171, Self);
+symbol41 = (Object)new_Type_Symbol_cached(L"c:");
+methodclosure648 = (Object)new_Runtime_MethodClosure(method648);
+store_method((Type_Class)class88, (Type_Symbol)symbol41, (Runtime_MethodClosure)methodclosure648);
 
 // StandardVariableTestClass>>a:
-localvariable111 = (Object)new_AST_Variable_named(L"anObject");
-array107 = (Object)new_Type_Array_with(1, localvariable111);
-assign63 = (Object)new_AST_Assign((Object)instancevariable31, (Object)localvariable111);
-method252 = (Object)new_AST_Method_with((Type_Array)array107, (Type_Array)empty_Type_Array, 2, assign63, Self);
-symbol2 = (Object)new_Type_Symbol_cached(L"a:");
-methodclosure239 = (Object)new_Runtime_MethodClosure(method252);
-store_method((Type_Class)class29, (Type_Symbol)symbol2, (Runtime_MethodClosure)methodclosure239);
+localvariable291 = (Object)new_AST_Variable_named(L"anObject");
+array274 = (Object)new_Type_Array_with(1, localvariable291);
+assign172 = (Object)new_AST_Assign((Object)instancevariable103, (Object)localvariable291);
+method649 = (Object)new_AST_Method_with((Type_Array)array274, (Type_Array)empty_Type_Array, 2, assign172, Self);
+symbol43 = (Object)new_Type_Symbol_cached(L"a:");
+methodclosure649 = (Object)new_Runtime_MethodClosure(method649);
+store_method((Type_Class)class88, (Type_Symbol)symbol43, (Runtime_MethodClosure)methodclosure649);
 
-// StandardVariableTestClass>>a
-method253 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable31);
-symbol51 = (Object)new_Type_Symbol_cached(L"a");
-methodclosure240 = (Object)new_Runtime_MethodClosure(method253);
-store_method((Type_Class)class29, (Type_Symbol)symbol51, (Runtime_MethodClosure)methodclosure240);
+// StandardVariableTestClass>>b
+method650 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable104);
+symbol44 = (Object)new_Type_Symbol_cached(L"b");
+methodclosure650 = (Object)new_Runtime_MethodClosure(method650);
+store_method((Type_Class)class88, (Type_Symbol)symbol44, (Runtime_MethodClosure)methodclosure650);
 
 // StandardVariableTestClass>>b:
-localvariable112 = (Object)new_AST_Variable_named(L"anObject");
-array108 = (Object)new_Type_Array_with(1, localvariable112);
-assign64 = (Object)new_AST_Assign((Object)instancevariable32, (Object)localvariable112);
-method254 = (Object)new_AST_Method_with((Type_Array)array108, (Type_Array)empty_Type_Array, 2, assign64, Self);
-symbol48 = (Object)new_Type_Symbol_cached(L"b:");
-methodclosure241 = (Object)new_Runtime_MethodClosure(method254);
-store_method((Type_Class)class29, (Type_Symbol)symbol48, (Runtime_MethodClosure)methodclosure241);
-classreference33 = (Object)new_Organization_ClassReference((Type_Class)class29);
-symbol52 = (Object)new_Type_Symbol_cached(L"new:");
-smallint359 = (Object)new_Type_SmallInt(100);
-constant496 = (Object)new_AST_Constant(smallint359);
-send687 = (Object)new_AST_Send((Object)classreference33, (Object)symbol52, 1, constant496);
-assign61 = (Object)new_AST_Assign((Object)localvariable109, (Object)send687);
-smallint360 = (Object)new_Type_SmallInt(1);
-constant497 = (Object)new_AST_Constant(smallint360);
-smallint361 = (Object)new_Type_SmallInt(1);
-constant498 = (Object)new_AST_Constant(smallint361);
-send688 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_put_, 2, constant497, constant498);
-smallint362 = (Object)new_Type_SmallInt(100);
-constant499 = (Object)new_AST_Constant(smallint362);
-smallint363 = (Object)new_Type_SmallInt(100);
-constant500 = (Object)new_AST_Constant(smallint363);
-send689 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_put_, 2, constant499, constant500);
-symbol53 = (Object)new_Type_Symbol_cached(L"assert:");
-smallint364 = (Object)new_Type_SmallInt(1);
-constant501 = (Object)new_AST_Constant(smallint364);
-send692 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_, 1, constant501);
-smallint365 = (Object)new_Type_SmallInt(1);
-constant502 = (Object)new_AST_Constant(smallint365);
-send691 = (Object)new_AST_Send((Object)send692, (Object)SMB__equal, 1, constant502);
-send690 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send691);
-smallint366 = (Object)new_Type_SmallInt(100);
-constant503 = (Object)new_AST_Constant(smallint366);
-send695 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_, 1, constant503);
-smallint367 = (Object)new_Type_SmallInt(100);
-constant504 = (Object)new_AST_Constant(smallint367);
-send694 = (Object)new_AST_Send((Object)send695, (Object)SMB__equal, 1, constant504);
-send693 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send694);
-localvariable113 = (Object)new_AST_Variable_named(L"receiver");
-array109 = (Object)new_Type_Array_with(1, localvariable113);
-smallint368 = (Object)new_Type_SmallInt(2);
-constant505 = (Object)new_AST_Constant(smallint368);
-send697 = (Object)new_AST_Send((Object)localvariable113, (Object)symbol48, 1, constant505);
-smallint369 = (Object)new_Type_SmallInt(3);
-constant506 = (Object)new_AST_Constant(smallint369);
-send698 = (Object)new_AST_Send((Object)localvariable113, (Object)symbol49, 1, constant506);
-block70 = (Object)new_AST_Block_with((Type_Array)array109, (Type_Array)empty_Type_Array, 2, 2, send697, send698);
-symbol54 = (Object)new_Type_Symbol_cached(L"nil");
-smallint370 = (Object)new_Type_SmallInt(1);
-constant507 = (Object)new_AST_Constant(smallint370);
-send699 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol2, 1, constant507);
-send696 = (Object)new_AST_Send((Object)block70, (Object)symbol54, 1, send699);
-send702 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol51, 0);
-smallint371 = (Object)new_Type_SmallInt(1);
-constant508 = (Object)new_AST_Constant(smallint371);
-send701 = (Object)new_AST_Send((Object)send702, (Object)SMB__equal, 1, constant508);
-send700 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send701);
-send705 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol47, 0);
-smallint372 = (Object)new_Type_SmallInt(2);
-constant509 = (Object)new_AST_Constant(smallint372);
-send704 = (Object)new_AST_Send((Object)send705, (Object)SMB__equal, 1, constant509);
-send703 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send704);
-send708 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol50, 0);
-smallint373 = (Object)new_Type_SmallInt(3);
-constant510 = (Object)new_AST_Constant(smallint373);
-send707 = (Object)new_AST_Send((Object)send708, (Object)SMB__equal, 1, constant510);
-send706 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send707);
-send711 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol51, 0);
-send713 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol47, 0);
-send715 = (Object)new_AST_Send((Object)localvariable109, (Object)symbol50, 0);
-smallint374 = (Object)new_Type_SmallInt(1);
-constant511 = (Object)new_AST_Constant(smallint374);
-send716 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_, 1, constant511);
-send714 = (Object)new_AST_Send((Object)send715, (Object)SMB__plus, 1, send716);
-send712 = (Object)new_AST_Send((Object)send713, (Object)SMB__plus, 1, send714);
-send710 = (Object)new_AST_Send((Object)send711, (Object)SMB__plus, 1, send712);
-smallint375 = (Object)new_Type_SmallInt(100);
-constant512 = (Object)new_AST_Constant(smallint375);
-send717 = (Object)new_AST_Send((Object)localvariable109, (Object)SMB_at_, 1, constant512);
-send709 = (Object)new_AST_Send((Object)send710, (Object)SMB__plus, 1, send717);
-method248 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array105, 10, assign61, send688, send689, send690, send693, send696, send700, send703, send706, send709);
-symbol43 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreationSized");
-methodclosure242 = (Object)new_Runtime_MethodClosure(method248);
-store_method((Type_Class)class29, (Type_Symbol)symbol43, (Runtime_MethodClosure)methodclosure242);
+localvariable292 = (Object)new_AST_Variable_named(L"anObject");
+array275 = (Object)new_Type_Array_with(1, localvariable292);
+assign173 = (Object)new_AST_Assign((Object)instancevariable104, (Object)localvariable292);
+method651 = (Object)new_AST_Method_with((Type_Array)array275, (Type_Array)empty_Type_Array, 2, assign173, Self);
+symbol42 = (Object)new_Type_Symbol_cached(L"b:");
+methodclosure651 = (Object)new_Runtime_MethodClosure(method651);
+store_method((Type_Class)class88, (Type_Symbol)symbol42, (Runtime_MethodClosure)methodclosure651);
 
-// StandardVariableTestClass>>tmCharacter
-character46 = (Object)new_Type_Character(L'C');
-constant513 = (Object)new_AST_Constant(character46);
-method255 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant513);
-symbol8 = (Object)new_Type_Symbol_cached(L"tmCharacter");
-methodclosure243 = (Object)new_Runtime_MethodClosure(method255);
-store_method((Type_Class)class29, (Type_Symbol)symbol8, (Runtime_MethodClosure)methodclosure243);
-
-// StandardVariableTestClass>>tmMethodArguments:with:with:
-localvariable114 = (Object)new_AST_Variable_named(L"arg1");
-localvariable115 = (Object)new_AST_Variable_named(L"arg2");
-localvariable116 = (Object)new_AST_Variable_named(L"arg3");
-array110 = (Object)new_Type_Array_with(3, localvariable114, localvariable115, localvariable116);
-send719 = (Object)new_AST_Send((Object)localvariable114, (Object)SMB__concat, 1, localvariable115);
-send718 = (Object)new_AST_Send((Object)send719, (Object)SMB__concat, 1, localvariable116);
-method256 = (Object)new_AST_Method_with((Type_Array)array110, (Type_Array)empty_Type_Array, 1, send718);
-symbol35 = (Object)new_Type_Symbol_cached(L"tmMethodArguments:with:with:");
-methodclosure244 = (Object)new_Runtime_MethodClosure(method256);
-store_method((Type_Class)class29, (Type_Symbol)symbol35, (Runtime_MethodClosure)methodclosure244);
-
-// StandardVariableTestClass>>tmNumberSubtract
-smallint376 = (Object)new_Type_SmallInt(2);
-constant514 = (Object)new_AST_Constant(smallint376);
-smallint377 = (Object)new_Type_SmallInt(1);
-constant515 = (Object)new_AST_Constant(smallint377);
-send720 = (Object)new_AST_Send((Object)constant514, (Object)SMB__minus, 1, constant515);
-method257 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send720);
-symbol16 = (Object)new_Type_Symbol_cached(L"tmNumberSubtract");
-methodclosure245 = (Object)new_Runtime_MethodClosure(method257);
-store_method((Type_Class)class29, (Type_Symbol)symbol16, (Runtime_MethodClosure)methodclosure245);
-
-// StandardVariableTestClass>>tmSimpleReturn
-smallint378 = (Object)new_Type_SmallInt(1);
-constant516 = (Object)new_AST_Constant(smallint378);
-method258 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant516);
-symbol36 = (Object)new_Type_Symbol_cached(L"tmSimpleReturn");
-methodclosure246 = (Object)new_Runtime_MethodClosure(method258);
-store_method((Type_Class)class29, (Type_Symbol)symbol36, (Runtime_MethodClosure)methodclosure246);
-
-// StandardVariableTestClass>>tmCharacterEquals
-character47 = (Object)new_Type_Character(L'C');
-constant517 = (Object)new_AST_Constant(character47);
-character48 = (Object)new_Type_Character(L'C');
-constant518 = (Object)new_AST_Constant(character48);
-send721 = (Object)new_AST_Send((Object)constant517, (Object)SMB__equal, 1, constant518);
-method259 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send721);
-symbol9 = (Object)new_Type_Symbol_cached(L"tmCharacterEquals");
-methodclosure247 = (Object)new_Runtime_MethodClosure(method259);
-store_method((Type_Class)class29, (Type_Symbol)symbol9, (Runtime_MethodClosure)methodclosure247);
-
-// StandardVariableTestClass>>tmString
-string77 = (Object)new_Type_String(L"String");
-constant519 = (Object)new_AST_Constant(string77);
-method260 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant519);
-symbol17 = (Object)new_Type_Symbol_cached(L"tmString");
-methodclosure248 = (Object)new_Runtime_MethodClosure(method260);
-store_method((Type_Class)class29, (Type_Symbol)symbol17, (Runtime_MethodClosure)methodclosure248);
-
-// StandardVariableTestClass>>tmSimpleInstanceCreation
-localvariable117 = (Object)new_AST_Variable_named(L"instance");
-array111 = (Object)new_Type_Array_with(1, localvariable117);
-symbol44 = (Object)new_Type_Symbol_cached(L"StandardTestClass");
-objectlayout24 = (Object)create_type_with_vars(Type_ObjectLayout, 3);
-instancevariable34 = (Object)new_AST_InstVariable(0, L"a");
-((Type_Array)objectlayout24)->values[0] = instancevariable34;
-instancevariable35 = (Object)new_AST_InstVariable(1, L"b");
-((Type_Array)objectlayout24)->values[1] = instancevariable35;
-instancevariable36 = (Object)new_AST_InstVariable(2, L"c");
-((Type_Array)objectlayout24)->values[2] = instancevariable36;
-class30 = (Object)new_Class(class27, objectlayout24);
-((Type_Class)class30)->name = (Type_Symbol)symbol44;
+// StandardVariableTestClass>>a
+method652 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable103);
+symbol46 = (Object)new_Type_Symbol_cached(L"a");
+methodclosure652 = (Object)new_Runtime_MethodClosure(method652);
+store_method((Type_Class)class88, (Type_Symbol)symbol46, (Runtime_MethodClosure)methodclosure652);
+classreference88 = (Object)new_Organization_ClassReference((Type_Class)class88);
+symbol27 = (Object)new_Type_Symbol_cached(L"StandardTestClass");
+objectlayout69 = (Object)create_type_with_vars(Type_ObjectLayout, 3);
+instancevariable106 = (Object)new_AST_InstVariable(0, L"a");
+((Type_Array)objectlayout69)->values[0] = instancevariable106;
+instancevariable107 = (Object)new_AST_InstVariable(1, L"b");
+((Type_Array)objectlayout69)->values[1] = instancevariable107;
+instancevariable108 = (Object)new_AST_InstVariable(2, L"c");
+((Type_Array)objectlayout69)->values[2] = instancevariable108;
+class89 = (Object)new_Class(class87, objectlayout69);
+((Type_Class)class89)->name = (Type_Symbol)symbol27;
 
 // StandardTestClass>>c
-method262 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable36);
-methodclosure249 = (Object)new_Runtime_MethodClosure(method262);
-store_method((Type_Class)class30, (Type_Symbol)symbol50, (Runtime_MethodClosure)methodclosure249);
-
-// StandardTestClass>>b
-method263 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable35);
-methodclosure250 = (Object)new_Runtime_MethodClosure(method263);
-store_method((Type_Class)class30, (Type_Symbol)symbol47, (Runtime_MethodClosure)methodclosure250);
+method653 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable108);
+methodclosure653 = (Object)new_Runtime_MethodClosure(method653);
+store_method((Type_Class)class89, (Type_Symbol)symbol45, (Runtime_MethodClosure)methodclosure653);
 
 // StandardTestClass>>c:
-localvariable118 = (Object)new_AST_Variable_named(L"anObject");
-array112 = (Object)new_Type_Array_with(1, localvariable118);
-assign66 = (Object)new_AST_Assign((Object)instancevariable36, (Object)localvariable118);
-method264 = (Object)new_AST_Method_with((Type_Array)array112, (Type_Array)empty_Type_Array, 2, assign66, Self);
-methodclosure251 = (Object)new_Runtime_MethodClosure(method264);
-store_method((Type_Class)class30, (Type_Symbol)symbol49, (Runtime_MethodClosure)methodclosure251);
+localvariable293 = (Object)new_AST_Variable_named(L"anObject");
+array276 = (Object)new_Type_Array_with(1, localvariable293);
+assign174 = (Object)new_AST_Assign((Object)instancevariable108, (Object)localvariable293);
+method654 = (Object)new_AST_Method_with((Type_Array)array276, (Type_Array)empty_Type_Array, 2, assign174, Self);
+methodclosure654 = (Object)new_Runtime_MethodClosure(method654);
+store_method((Type_Class)class89, (Type_Symbol)symbol41, (Runtime_MethodClosure)methodclosure654);
 
 // StandardTestClass>>a:
-localvariable119 = (Object)new_AST_Variable_named(L"anObject");
-array113 = (Object)new_Type_Array_with(1, localvariable119);
-assign67 = (Object)new_AST_Assign((Object)instancevariable34, (Object)localvariable119);
-method265 = (Object)new_AST_Method_with((Type_Array)array113, (Type_Array)empty_Type_Array, 2, assign67, Self);
-methodclosure252 = (Object)new_Runtime_MethodClosure(method265);
-store_method((Type_Class)class30, (Type_Symbol)symbol2, (Runtime_MethodClosure)methodclosure252);
+localvariable294 = (Object)new_AST_Variable_named(L"anObject");
+array277 = (Object)new_Type_Array_with(1, localvariable294);
+assign175 = (Object)new_AST_Assign((Object)instancevariable106, (Object)localvariable294);
+method655 = (Object)new_AST_Method_with((Type_Array)array277, (Type_Array)empty_Type_Array, 2, assign175, Self);
+methodclosure655 = (Object)new_Runtime_MethodClosure(method655);
+store_method((Type_Class)class89, (Type_Symbol)symbol43, (Runtime_MethodClosure)methodclosure655);
 
-// StandardTestClass>>a
-method266 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable34);
-methodclosure253 = (Object)new_Runtime_MethodClosure(method266);
-store_method((Type_Class)class30, (Type_Symbol)symbol51, (Runtime_MethodClosure)methodclosure253);
+// StandardTestClass>>b
+method656 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable107);
+methodclosure656 = (Object)new_Runtime_MethodClosure(method656);
+store_method((Type_Class)class89, (Type_Symbol)symbol44, (Runtime_MethodClosure)methodclosure656);
 
 // StandardTestClass>>b:
-localvariable120 = (Object)new_AST_Variable_named(L"anObject");
-array114 = (Object)new_Type_Array_with(1, localvariable120);
-assign68 = (Object)new_AST_Assign((Object)instancevariable35, (Object)localvariable120);
-method267 = (Object)new_AST_Method_with((Type_Array)array114, (Type_Array)empty_Type_Array, 2, assign68, Self);
-methodclosure254 = (Object)new_Runtime_MethodClosure(method267);
-store_method((Type_Class)class30, (Type_Symbol)symbol48, (Runtime_MethodClosure)methodclosure254);
-classreference34 = (Object)new_Organization_ClassReference((Type_Class)class30);
-symbol55 = (Object)new_Type_Symbol_cached(L"new");
-send722 = (Object)new_AST_Send((Object)classreference34, (Object)symbol55, 0);
-assign65 = (Object)new_AST_Assign((Object)localvariable117, (Object)send722);
-localvariable121 = (Object)new_AST_Variable_named(L"receiver");
-array115 = (Object)new_Type_Array_with(1, localvariable121);
-smallint379 = (Object)new_Type_SmallInt(2);
-constant520 = (Object)new_AST_Constant(smallint379);
-send724 = (Object)new_AST_Send((Object)localvariable121, (Object)symbol48, 1, constant520);
-smallint380 = (Object)new_Type_SmallInt(3);
-constant521 = (Object)new_AST_Constant(smallint380);
-send725 = (Object)new_AST_Send((Object)localvariable121, (Object)symbol49, 1, constant521);
-block71 = (Object)new_AST_Block_with((Type_Array)array115, (Type_Array)empty_Type_Array, 2, 2, send724, send725);
-smallint381 = (Object)new_Type_SmallInt(1);
-constant522 = (Object)new_AST_Constant(smallint381);
-send726 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol2, 1, constant522);
-send723 = (Object)new_AST_Send((Object)block71, (Object)symbol54, 1, send726);
-send729 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol51, 0);
-smallint382 = (Object)new_Type_SmallInt(1);
-constant523 = (Object)new_AST_Constant(smallint382);
-send728 = (Object)new_AST_Send((Object)send729, (Object)SMB__equal, 1, constant523);
-send727 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send728);
-send732 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol47, 0);
-smallint383 = (Object)new_Type_SmallInt(2);
-constant524 = (Object)new_AST_Constant(smallint383);
-send731 = (Object)new_AST_Send((Object)send732, (Object)SMB__equal, 1, constant524);
-send730 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send731);
-send735 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol50, 0);
-smallint384 = (Object)new_Type_SmallInt(3);
-constant525 = (Object)new_AST_Constant(smallint384);
-send734 = (Object)new_AST_Send((Object)send735, (Object)SMB__equal, 1, constant525);
-send733 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send734);
-send738 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol51, 0);
-send739 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol47, 0);
-send737 = (Object)new_AST_Send((Object)send738, (Object)SMB__plus, 1, send739);
-send740 = (Object)new_AST_Send((Object)localvariable117, (Object)symbol50, 0);
-send736 = (Object)new_AST_Send((Object)send737, (Object)SMB__plus, 1, send740);
-method261 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array111, 6, assign65, send723, send727, send730, send733, send736);
-symbol45 = (Object)new_Type_Symbol_cached(L"tmSimpleInstanceCreation");
-methodclosure255 = (Object)new_Runtime_MethodClosure(method261);
-store_method((Type_Class)class30, (Type_Symbol)symbol45, (Runtime_MethodClosure)methodclosure255);
+localvariable295 = (Object)new_AST_Variable_named(L"anObject");
+array278 = (Object)new_Type_Array_with(1, localvariable295);
+assign176 = (Object)new_AST_Assign((Object)instancevariable107, (Object)localvariable295);
+method657 = (Object)new_AST_Method_with((Type_Array)array278, (Type_Array)empty_Type_Array, 2, assign176, Self);
+methodclosure657 = (Object)new_Runtime_MethodClosure(method657);
+store_method((Type_Class)class89, (Type_Symbol)symbol42, (Runtime_MethodClosure)methodclosure657);
 
-// StandardTestClass>>tmSimpleBasicArithmetik
-smallint385 = (Object)new_Type_SmallInt(1);
-constant526 = (Object)new_AST_Constant(smallint385);
-smallint386 = (Object)new_Type_SmallInt(2);
-constant527 = (Object)new_AST_Constant(smallint386);
-send743 = (Object)new_AST_Send((Object)constant526, (Object)SMB__plus, 1, constant527);
-smallint387 = (Object)new_Type_SmallInt(2);
-constant528 = (Object)new_AST_Constant(smallint387);
-send742 = (Object)new_AST_Send((Object)send743, (Object)SMB__plus, 1, constant528);
-smallint388 = (Object)new_Type_SmallInt(5);
-constant529 = (Object)new_AST_Constant(smallint388);
-send741 = (Object)new_AST_Send((Object)send742, (Object)SMB__times, 1, constant529);
-method268 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send741);
-symbol37 = (Object)new_Type_Symbol_cached(L"tmSimpleBasicArithmetik");
-methodclosure256 = (Object)new_Runtime_MethodClosure(method268);
-store_method((Type_Class)class30, (Type_Symbol)symbol37, (Runtime_MethodClosure)methodclosure256);
+// StandardTestClass>>a
+method658 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable106);
+methodclosure658 = (Object)new_Runtime_MethodClosure(method658);
+store_method((Type_Class)class89, (Type_Symbol)symbol46, (Runtime_MethodClosure)methodclosure658);
+classreference89 = (Object)new_Organization_ClassReference((Type_Class)class89);
+symbol5 = (Object)new_Type_Symbol_cached(L"BridgeTest");
+class90 = (Object)new_Class(class87, empty_object_layout);
+((Type_Class)class90)->name = (Type_Symbol)symbol5;
 
-// StandardTestClass>>tmStringEquals
-string78 = (Object)new_Type_String(L"String");
-constant530 = (Object)new_AST_Constant(string78);
-string79 = (Object)new_Type_String(L"String");
-constant531 = (Object)new_AST_Constant(string79);
-send744 = (Object)new_AST_Send((Object)constant530, (Object)SMB__equal, 1, constant531);
-method269 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send744);
-symbol18 = (Object)new_Type_Symbol_cached(L"tmStringEquals");
-methodclosure257 = (Object)new_Runtime_MethodClosure(method269);
-store_method((Type_Class)class30, (Type_Symbol)symbol18, (Runtime_MethodClosure)methodclosure257);
+// BridgeTest>>tmNumberEquals
+smallint887 = (Object)new_Type_SmallInt(1);
+constant1089 = (Object)new_AST_Constant(smallint887);
+smallint888 = (Object)new_Type_SmallInt(1);
+constant1090 = (Object)new_AST_Constant(smallint888);
+send1973 = (Object)new_AST_Send((Object)constant1089, (Object)SMB__equal, 1, constant1090);
+method659 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send1973);
+symbol19 = (Object)new_Type_Symbol_cached(L"tmNumberEquals");
+methodclosure659 = (Object)new_Runtime_MethodClosure(method659);
+store_method((Type_Class)class90, (Type_Symbol)symbol19, (Runtime_MethodClosure)methodclosure659);
 
-// StandardTestClass>>tmVariableInstanceCreation
-localvariable122 = (Object)new_AST_Variable_named(L"instance");
-array116 = (Object)new_Type_Array_with(1, localvariable122);
-send745 = (Object)new_AST_Send((Object)classreference33, (Object)symbol55, 0);
-assign69 = (Object)new_AST_Assign((Object)localvariable122, (Object)send745);
-localvariable123 = (Object)new_AST_Variable_named(L"receiver");
-array117 = (Object)new_Type_Array_with(1, localvariable123);
-smallint389 = (Object)new_Type_SmallInt(2);
-smallint390 = (Object)new_Type_SmallInt(2);
-constant532 = (Object)new_AST_Constant(smallint389);
-send747 = (Object)new_AST_Send((Object)localvariable123, (Object)symbol48, 1, constant532);
-constant533 = (Object)new_AST_Constant(smallint390);
-send748 = (Object)new_AST_Send((Object)localvariable123, (Object)symbol49, 1, constant533);
-block72 = (Object)new_AST_Block_with((Type_Array)array117, (Type_Array)empty_Type_Array, 2, 2, send747, send748);
-smallint391 = (Object)new_Type_SmallInt(1);
-constant534 = (Object)new_AST_Constant(smallint391);
-send749 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol2, 1, constant534);
-send746 = (Object)new_AST_Send((Object)block72, (Object)symbol54, 1, send749);
-send752 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol51, 0);
-smallint392 = (Object)new_Type_SmallInt(1);
-constant535 = (Object)new_AST_Constant(smallint392);
-send751 = (Object)new_AST_Send((Object)send752, (Object)SMB__equal, 1, constant535);
-send750 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send751);
-send755 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol47, 0);
-smallint393 = (Object)new_Type_SmallInt(2);
-constant536 = (Object)new_AST_Constant(smallint393);
-send754 = (Object)new_AST_Send((Object)send755, (Object)SMB__equal, 1, constant536);
-send753 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send754);
-send758 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol50, 0);
-smallint394 = (Object)new_Type_SmallInt(3);
-constant537 = (Object)new_AST_Constant(smallint394);
-send757 = (Object)new_AST_Send((Object)send758, (Object)SMB__equal, 1, constant537);
-send756 = (Object)new_AST_Send((Object)Self, (Object)symbol53, 1, send757);
-send761 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol51, 0);
-send762 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol47, 0);
-send760 = (Object)new_AST_Send((Object)send761, (Object)SMB__plus, 1, send762);
-send763 = (Object)new_AST_Send((Object)localvariable122, (Object)symbol50, 0);
-send759 = (Object)new_AST_Send((Object)send760, (Object)SMB__plus, 1, send763);
-method270 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array116, 6, assign69, send746, send750, send753, send756, send759);
-symbol46 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreation");
-methodclosure258 = (Object)new_Runtime_MethodClosure(method270);
-store_method((Type_Class)class30, (Type_Symbol)symbol46, (Runtime_MethodClosure)methodclosure258);
+// BridgeTest>>tmNumberMult
+smallint889 = (Object)new_Type_SmallInt(2);
+constant1091 = (Object)new_AST_Constant(smallint889);
+smallint890 = (Object)new_Type_SmallInt(3);
+constant1092 = (Object)new_AST_Constant(smallint890);
+send1974 = (Object)new_AST_Send((Object)constant1091, (Object)SMB__times, 1, constant1092);
+method660 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send1974);
+symbol31 = (Object)new_Type_Symbol_cached(L"tmNumberMult");
+methodclosure660 = (Object)new_Runtime_MethodClosure(method660);
+store_method((Type_Class)class90, (Type_Symbol)symbol31, (Runtime_MethodClosure)methodclosure660);
 
-// StandardTestClass>>tmClassReferenceReturn
-send764 = (Object)new_AST_Send((Object)Metaclass_Reference, (Object)SMB_name, 0);
-method271 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send764);
-symbol38 = (Object)new_Type_Symbol_cached(L"tmClassReferenceReturn");
-methodclosure259 = (Object)new_Runtime_MethodClosure(method271);
-store_method((Type_Class)class30, (Type_Symbol)symbol38, (Runtime_MethodClosure)methodclosure259);
+// BridgeTest>>tmClassReferenceReturn
+send1975 = (Object)new_AST_Send((Object)Metaclass_Reference, (Object)SMB_name, 0);
+method661 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send1975);
+symbol39 = (Object)new_Type_Symbol_cached(L"tmClassReferenceReturn");
+methodclosure661 = (Object)new_Runtime_MethodClosure(method661);
+store_method((Type_Class)class90, (Type_Symbol)symbol39, (Runtime_MethodClosure)methodclosure661);
 
-// StandardTestClass>>tmLocalVariable
-localvariable124 = (Object)new_AST_Variable_named(L"a");
-array118 = (Object)new_Type_Array_with(1, localvariable124);
-smallint395 = (Object)new_Type_SmallInt(1);
-constant538 = (Object)new_AST_Constant(smallint395);
-assign70 = (Object)new_AST_Assign((Object)localvariable124, (Object)constant538);
-method272 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array118, 2, assign70, localvariable124);
-symbol10 = (Object)new_Type_Symbol_cached(L"tmLocalVariable");
-methodclosure260 = (Object)new_Runtime_MethodClosure(method272);
-store_method((Type_Class)class30, (Type_Symbol)symbol10, (Runtime_MethodClosure)methodclosure260);
-classreference30 = (Object)new_Organization_ClassReference((Type_Class)class26);
+// BridgeTest>>tmSimpleInstanceCreation
+localvariable296 = (Object)new_AST_Variable_named(L"instance");
+array279 = (Object)new_Type_Array_with(1, localvariable296);
+send1976 = (Object)new_AST_Send((Object)classreference89, (Object)SMB_basicNew, 0);
+assign177 = (Object)new_AST_Assign((Object)localvariable296, (Object)send1976);
+localvariable297 = (Object)new_AST_Variable_named(L"receiver");
+array280 = (Object)new_Type_Array_with(1, localvariable297);
+smallint891 = (Object)new_Type_SmallInt(2);
+constant1093 = (Object)new_AST_Constant(smallint891);
+send1977 = (Object)new_AST_Send((Object)localvariable297, (Object)symbol42, 1, constant1093);
+smallint892 = (Object)new_Type_SmallInt(3);
+constant1094 = (Object)new_AST_Constant(smallint892);
+send1978 = (Object)new_AST_Send((Object)localvariable297, (Object)symbol41, 1, constant1094);
+block103 = (Object)new_AST_Block_with((Type_Array)array280, (Type_Array)empty_Type_Array, 2, 2, send1977, send1978);
+symbol48 = (Object)new_Type_Symbol_cached(L"nil");
+smallint893 = (Object)new_Type_SmallInt(1);
+constant1095 = (Object)new_AST_Constant(smallint893);
+send1979 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol43, 1, constant1095);
+send1980 = (Object)new_AST_Send((Object)block103, (Object)symbol48, 1, send1979);
+symbol49 = (Object)new_Type_Symbol_cached(L"assert:");
+send1981 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol46, 0);
+smallint894 = (Object)new_Type_SmallInt(1);
+constant1096 = (Object)new_AST_Constant(smallint894);
+send1982 = (Object)new_AST_Send((Object)send1981, (Object)SMB__equal, 1, constant1096);
+send1983 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send1982);
+send1984 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol44, 0);
+smallint895 = (Object)new_Type_SmallInt(2);
+constant1097 = (Object)new_AST_Constant(smallint895);
+send1985 = (Object)new_AST_Send((Object)send1984, (Object)SMB__equal, 1, constant1097);
+send1986 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send1985);
+send1987 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol45, 0);
+smallint896 = (Object)new_Type_SmallInt(3);
+constant1098 = (Object)new_AST_Constant(smallint896);
+send1988 = (Object)new_AST_Send((Object)send1987, (Object)SMB__equal, 1, constant1098);
+send1989 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send1988);
+send1990 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol46, 0);
+send1991 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol44, 0);
+send1992 = (Object)new_AST_Send((Object)send1990, (Object)SMB__plus, 1, send1991);
+send1993 = (Object)new_AST_Send((Object)localvariable296, (Object)symbol45, 0);
+send1994 = (Object)new_AST_Send((Object)send1992, (Object)SMB__plus, 1, send1993);
+method662 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array279, 6, assign177, send1980, send1983, send1986, send1989, send1994);
+symbol28 = (Object)new_Type_Symbol_cached(L"tmSimpleInstanceCreation");
+methodclosure662 = (Object)new_Runtime_MethodClosure(method662);
+store_method((Type_Class)class90, (Type_Symbol)symbol28, (Runtime_MethodClosure)methodclosure662);
+
+// BridgeTest>>tmNumber
+smallint897 = (Object)new_Type_SmallInt(1);
+constant1099 = (Object)new_AST_Constant(smallint897);
+method663 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant1099);
+symbol40 = (Object)new_Type_Symbol_cached(L"tmNumber");
+methodclosure663 = (Object)new_Runtime_MethodClosure(method663);
+store_method((Type_Class)class90, (Type_Symbol)symbol40, (Runtime_MethodClosure)methodclosure663);
+
+// BridgeTest>>tmVariableInstanceCreationSized
+localvariable298 = (Object)new_AST_Variable_named(L"instance");
+array281 = (Object)new_Type_Array_with(1, localvariable298);
+smallint898 = (Object)new_Type_SmallInt(100);
+constant1100 = (Object)new_AST_Constant(smallint898);
+send1995 = (Object)new_AST_Send((Object)classreference88, (Object)SMB_basicNew_, 1, constant1100);
+assign178 = (Object)new_AST_Assign((Object)localvariable298, (Object)send1995);
+smallint899 = (Object)new_Type_SmallInt(1);
+constant1101 = (Object)new_AST_Constant(smallint899);
+smallint900 = (Object)new_Type_SmallInt(1);
+constant1102 = (Object)new_AST_Constant(smallint900);
+send1996 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_put_, 2, constant1101, constant1102);
+smallint901 = (Object)new_Type_SmallInt(100);
+constant1103 = (Object)new_AST_Constant(smallint901);
+smallint902 = (Object)new_Type_SmallInt(100);
+constant1104 = (Object)new_AST_Constant(smallint902);
+send1997 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_put_, 2, constant1103, constant1104);
+smallint903 = (Object)new_Type_SmallInt(1);
+constant1105 = (Object)new_AST_Constant(smallint903);
+send1998 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_, 1, constant1105);
+smallint904 = (Object)new_Type_SmallInt(1);
+constant1106 = (Object)new_AST_Constant(smallint904);
+send1999 = (Object)new_AST_Send((Object)send1998, (Object)SMB__equal, 1, constant1106);
+send2000 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send1999);
+smallint905 = (Object)new_Type_SmallInt(100);
+constant1107 = (Object)new_AST_Constant(smallint905);
+send2001 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_, 1, constant1107);
+smallint906 = (Object)new_Type_SmallInt(100);
+constant1108 = (Object)new_AST_Constant(smallint906);
+send2002 = (Object)new_AST_Send((Object)send2001, (Object)SMB__equal, 1, constant1108);
+send2003 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2002);
+localvariable299 = (Object)new_AST_Variable_named(L"receiver");
+array282 = (Object)new_Type_Array_with(1, localvariable299);
+smallint907 = (Object)new_Type_SmallInt(2);
+constant1109 = (Object)new_AST_Constant(smallint907);
+send2004 = (Object)new_AST_Send((Object)localvariable299, (Object)symbol42, 1, constant1109);
+smallint908 = (Object)new_Type_SmallInt(3);
+constant1110 = (Object)new_AST_Constant(smallint908);
+send2005 = (Object)new_AST_Send((Object)localvariable299, (Object)symbol41, 1, constant1110);
+block104 = (Object)new_AST_Block_with((Type_Array)array282, (Type_Array)empty_Type_Array, 2, 2, send2004, send2005);
+smallint909 = (Object)new_Type_SmallInt(1);
+constant1111 = (Object)new_AST_Constant(smallint909);
+send2006 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol43, 1, constant1111);
+send2007 = (Object)new_AST_Send((Object)block104, (Object)symbol48, 1, send2006);
+send2008 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol46, 0);
+smallint910 = (Object)new_Type_SmallInt(1);
+constant1112 = (Object)new_AST_Constant(smallint910);
+send2009 = (Object)new_AST_Send((Object)send2008, (Object)SMB__equal, 1, constant1112);
+send2010 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2009);
+send2011 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol44, 0);
+smallint911 = (Object)new_Type_SmallInt(2);
+constant1113 = (Object)new_AST_Constant(smallint911);
+send2012 = (Object)new_AST_Send((Object)send2011, (Object)SMB__equal, 1, constant1113);
+send2013 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2012);
+send2014 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol45, 0);
+smallint912 = (Object)new_Type_SmallInt(3);
+constant1114 = (Object)new_AST_Constant(smallint912);
+send2015 = (Object)new_AST_Send((Object)send2014, (Object)SMB__equal, 1, constant1114);
+send2016 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2015);
+send2017 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol46, 0);
+send2018 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol44, 0);
+send2019 = (Object)new_AST_Send((Object)localvariable298, (Object)symbol45, 0);
+smallint913 = (Object)new_Type_SmallInt(1);
+constant1115 = (Object)new_AST_Constant(smallint913);
+send2020 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_, 1, constant1115);
+send2021 = (Object)new_AST_Send((Object)send2019, (Object)SMB__plus, 1, send2020);
+send2022 = (Object)new_AST_Send((Object)send2018, (Object)SMB__plus, 1, send2021);
+send2023 = (Object)new_AST_Send((Object)send2017, (Object)SMB__plus, 1, send2022);
+smallint914 = (Object)new_Type_SmallInt(100);
+constant1116 = (Object)new_AST_Constant(smallint914);
+send2024 = (Object)new_AST_Send((Object)localvariable298, (Object)SMB_at_, 1, constant1116);
+send2025 = (Object)new_AST_Send((Object)send2023, (Object)SMB__plus, 1, send2024);
+method664 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array281, 10, assign178, send1996, send1997, send2000, send2003, send2007, send2010, send2013, send2016, send2025);
+symbol32 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreationSized");
+methodclosure664 = (Object)new_Runtime_MethodClosure(method664);
+store_method((Type_Class)class90, (Type_Symbol)symbol32, (Runtime_MethodClosure)methodclosure664);
+
+// BridgeTest>>tmVariableInstanceCreation
+localvariable300 = (Object)new_AST_Variable_named(L"instance");
+array283 = (Object)new_Type_Array_with(1, localvariable300);
+send2026 = (Object)new_AST_Send((Object)classreference88, (Object)SMB_basicNew, 0);
+assign179 = (Object)new_AST_Assign((Object)localvariable300, (Object)send2026);
+localvariable301 = (Object)new_AST_Variable_named(L"receiver");
+array284 = (Object)new_Type_Array_with(1, localvariable301);
+smallint915 = (Object)new_Type_SmallInt(2);
+constant1117 = (Object)new_AST_Constant(smallint915);
+send2027 = (Object)new_AST_Send((Object)localvariable301, (Object)symbol42, 1, constant1117);
+smallint916 = (Object)new_Type_SmallInt(3);
+constant1118 = (Object)new_AST_Constant(smallint916);
+send2028 = (Object)new_AST_Send((Object)localvariable301, (Object)symbol41, 1, constant1118);
+block105 = (Object)new_AST_Block_with((Type_Array)array284, (Type_Array)empty_Type_Array, 2, 2, send2027, send2028);
+smallint917 = (Object)new_Type_SmallInt(1);
+constant1119 = (Object)new_AST_Constant(smallint917);
+send2029 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol43, 1, constant1119);
+send2030 = (Object)new_AST_Send((Object)block105, (Object)symbol48, 1, send2029);
+send2031 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol46, 0);
+smallint918 = (Object)new_Type_SmallInt(1);
+constant1120 = (Object)new_AST_Constant(smallint918);
+send2032 = (Object)new_AST_Send((Object)send2031, (Object)SMB__equal, 1, constant1120);
+send2033 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2032);
+send2034 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol44, 0);
+smallint919 = (Object)new_Type_SmallInt(2);
+constant1121 = (Object)new_AST_Constant(smallint919);
+send2035 = (Object)new_AST_Send((Object)send2034, (Object)SMB__equal, 1, constant1121);
+send2036 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2035);
+send2037 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol45, 0);
+smallint920 = (Object)new_Type_SmallInt(3);
+constant1122 = (Object)new_AST_Constant(smallint920);
+send2038 = (Object)new_AST_Send((Object)send2037, (Object)SMB__equal, 1, constant1122);
+send2039 = (Object)new_AST_Send((Object)Self, (Object)symbol49, 1, send2038);
+send2040 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol46, 0);
+send2041 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol44, 0);
+send2042 = (Object)new_AST_Send((Object)send2040, (Object)SMB__plus, 1, send2041);
+send2043 = (Object)new_AST_Send((Object)localvariable300, (Object)symbol45, 0);
+send2044 = (Object)new_AST_Send((Object)send2042, (Object)SMB__plus, 1, send2043);
+method665 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array283, 6, assign179, send2030, send2033, send2036, send2039, send2044);
+symbol21 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreation");
+methodclosure665 = (Object)new_Runtime_MethodClosure(method665);
+store_method((Type_Class)class90, (Type_Symbol)symbol21, (Runtime_MethodClosure)methodclosure665);
+
+// BridgeTest>>tmSymbolEquals
+symbol51 = (Object)new_Type_Symbol_cached(L"Symbol");
+constant1123 = (Object)new_AST_Constant(symbol51);
+constant1124 = (Object)new_AST_Constant(symbol51);
+send2045 = (Object)new_AST_Send((Object)constant1123, (Object)SMB__equal, 1, constant1124);
+method666 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2045);
+symbol13 = (Object)new_Type_Symbol_cached(L"tmSymbolEquals");
+methodclosure666 = (Object)new_Runtime_MethodClosure(method666);
+store_method((Type_Class)class90, (Type_Symbol)symbol13, (Runtime_MethodClosure)methodclosure666);
+
+// BridgeTest>>tmExtendedReturn
+variable18 = (Object)new_AST_Variable_named(L"return");
+array285 = (Object)new_Type_Array_with(1, variable18);
+smallint921 = (Object)new_Type_SmallInt(1);
+constant1125 = (Object)new_AST_Constant(smallint921);
+smallint922 = (Object)new_Type_SmallInt(2);
+constant1126 = (Object)new_AST_Constant(smallint922);
+send2046 = (Object)new_AST_Send((Object)constant1125, (Object)SMB__gt, 1, constant1126);
+smallint923 = (Object)new_Type_SmallInt(1);
+constant1127 = (Object)new_AST_Constant(smallint923);
+send2047 = (Object)new_AST_Send((Object)variable18, (Object)SMB_escape_, 1, constant1127);
+block106 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 3, 1, send2047);
+smallint924 = (Object)new_Type_SmallInt(2);
+constant1128 = (Object)new_AST_Constant(smallint924);
+send2048 = (Object)new_AST_Send((Object)variable18, (Object)SMB_escape_, 1, constant1128);
+block107 = (Object)new_AST_Block_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 3, 1, send2048);
+send2049 = (Object)new_AST_Send((Object)send2046, (Object)SMB_ifTrue_ifFalse_, 2, block106, block107);
+block108 = (Object)new_AST_Block_with((Type_Array)array285, (Type_Array)empty_Type_Array, 2, 2, send2049, Self);
+send2050 = (Object)new_AST_Send((Object)AST_Callec_Reference, (Object)SMB_on_, 1, block108);
+method667 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2050);
+symbol29 = (Object)new_Type_Symbol_cached(L"tmExtendedReturn");
+methodclosure667 = (Object)new_Runtime_MethodClosure(method667);
+store_method((Type_Class)class90, (Type_Symbol)symbol29, (Runtime_MethodClosure)methodclosure667);
+
+// BridgeTest>>tmNumberAdd
+smallint925 = (Object)new_Type_SmallInt(1);
+constant1129 = (Object)new_AST_Constant(smallint925);
+smallint926 = (Object)new_Type_SmallInt(1);
+constant1130 = (Object)new_AST_Constant(smallint926);
+send2051 = (Object)new_AST_Send((Object)constant1129, (Object)SMB__plus, 1, constant1130);
+method668 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2051);
+symbol33 = (Object)new_Type_Symbol_cached(L"tmNumberAdd");
+methodclosure668 = (Object)new_Runtime_MethodClosure(method668);
+store_method((Type_Class)class90, (Type_Symbol)symbol33, (Runtime_MethodClosure)methodclosure668);
+
+// BridgeTest>>tmLocalVariable
+localvariable302 = (Object)new_AST_Variable_named(L"a");
+array286 = (Object)new_Type_Array_with(1, localvariable302);
+smallint927 = (Object)new_Type_SmallInt(1);
+constant1131 = (Object)new_AST_Constant(smallint927);
+assign180 = (Object)new_AST_Assign((Object)localvariable302, (Object)constant1131);
+method669 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)array286, 2, assign180, localvariable302);
+symbol22 = (Object)new_Type_Symbol_cached(L"tmLocalVariable");
+methodclosure669 = (Object)new_Runtime_MethodClosure(method669);
+store_method((Type_Class)class90, (Type_Symbol)symbol22, (Runtime_MethodClosure)methodclosure669);
+
+// BridgeTest>>tmBooleanFalse
+method670 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, False_Const);
+symbol14 = (Object)new_Type_Symbol_cached(L"tmBooleanFalse");
+methodclosure670 = (Object)new_Runtime_MethodClosure(method670);
+store_method((Type_Class)class90, (Type_Symbol)symbol14, (Runtime_MethodClosure)methodclosure670);
+
+// BridgeTest>>tmNumberSubtract
+smallint928 = (Object)new_Type_SmallInt(2);
+constant1132 = (Object)new_AST_Constant(smallint928);
+smallint929 = (Object)new_Type_SmallInt(1);
+constant1133 = (Object)new_AST_Constant(smallint929);
+send2052 = (Object)new_AST_Send((Object)constant1132, (Object)SMB__minus, 1, constant1133);
+method671 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2052);
+symbol34 = (Object)new_Type_Symbol_cached(L"tmNumberSubtract");
+methodclosure671 = (Object)new_Runtime_MethodClosure(method671);
+store_method((Type_Class)class90, (Type_Symbol)symbol34, (Runtime_MethodClosure)methodclosure671);
+
+// BridgeTest>>tmBooleanEquals
+send2053 = (Object)new_AST_Send((Object)True_Const, (Object)SMB__equal, 1, True_Const);
+method672 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2053);
+symbol23 = (Object)new_Type_Symbol_cached(L"tmBooleanEquals");
+methodclosure672 = (Object)new_Runtime_MethodClosure(method672);
+store_method((Type_Class)class90, (Type_Symbol)symbol23, (Runtime_MethodClosure)methodclosure672);
+
+// BridgeTest>>tmCharacter
+character52 = (Object)new_Type_Character(L'C');
+constant1134 = (Object)new_AST_Constant(character52);
+method673 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant1134);
+symbol15 = (Object)new_Type_Symbol_cached(L"tmCharacter");
+methodclosure673 = (Object)new_Runtime_MethodClosure(method673);
+store_method((Type_Class)class90, (Type_Symbol)symbol15, (Runtime_MethodClosure)methodclosure673);
+
+// BridgeTest>>tmBooleanTrue
+method674 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, True_Const);
+symbol35 = (Object)new_Type_Symbol_cached(L"tmBooleanTrue");
+methodclosure674 = (Object)new_Runtime_MethodClosure(method674);
+store_method((Type_Class)class90, (Type_Symbol)symbol35, (Runtime_MethodClosure)methodclosure674);
+
+// BridgeTest>>tmStringEquals
+string137 = (Object)new_Type_String(L"String");
+constant1135 = (Object)new_AST_Constant(string137);
+string138 = (Object)new_Type_String(L"String");
+constant1136 = (Object)new_AST_Constant(string138);
+send2054 = (Object)new_AST_Send((Object)constant1135, (Object)SMB__equal, 1, constant1136);
+method675 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2054);
+symbol24 = (Object)new_Type_Symbol_cached(L"tmStringEquals");
+methodclosure675 = (Object)new_Runtime_MethodClosure(method675);
+store_method((Type_Class)class90, (Type_Symbol)symbol24, (Runtime_MethodClosure)methodclosure675);
+
+// BridgeTest>>tmFibonacci
+method676 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, Self);
+symbol16 = (Object)new_Type_Symbol_cached(L"tmFibonacci");
+methodclosure676 = (Object)new_Runtime_MethodClosure(method676);
+store_method((Type_Class)class90, (Type_Symbol)symbol16, (Runtime_MethodClosure)methodclosure676);
+
+// BridgeTest>>tmMethodArguments:with:with:
+localvariable303 = (Object)new_AST_Variable_named(L"arg1");
+localvariable304 = (Object)new_AST_Variable_named(L"arg2");
+localvariable305 = (Object)new_AST_Variable_named(L"arg3");
+array287 = (Object)new_Type_Array_with(3, localvariable303, localvariable304, localvariable305);
+send2055 = (Object)new_AST_Send((Object)localvariable303, (Object)SMB__concat, 1, localvariable304);
+send2056 = (Object)new_AST_Send((Object)send2055, (Object)SMB__concat, 1, localvariable305);
+method677 = (Object)new_AST_Method_with((Type_Array)array287, (Type_Array)empty_Type_Array, 1, send2056);
+symbol36 = (Object)new_Type_Symbol_cached(L"tmMethodArguments:with:with:");
+methodclosure677 = (Object)new_Runtime_MethodClosure(method677);
+store_method((Type_Class)class90, (Type_Symbol)symbol36, (Runtime_MethodClosure)methodclosure677);
+
+// BridgeTest>>tmMethodArgument:
+localvariable306 = (Object)new_AST_Variable_named(L"arg");
+array288 = (Object)new_Type_Array_with(1, localvariable306);
+smallint930 = (Object)new_Type_SmallInt(1);
+constant1137 = (Object)new_AST_Constant(smallint930);
+send2057 = (Object)new_AST_Send((Object)localvariable306, (Object)SMB__plus, 1, constant1137);
+method678 = (Object)new_AST_Method_with((Type_Array)array288, (Type_Array)empty_Type_Array, 1, send2057);
+symbol25 = (Object)new_Type_Symbol_cached(L"tmMethodArgument:");
+methodclosure678 = (Object)new_Runtime_MethodClosure(method678);
+store_method((Type_Class)class90, (Type_Symbol)symbol25, (Runtime_MethodClosure)methodclosure678);
+
+// BridgeTest>>tmSimpleBasicArithmetik
+smallint931 = (Object)new_Type_SmallInt(1);
+constant1138 = (Object)new_AST_Constant(smallint931);
+smallint932 = (Object)new_Type_SmallInt(2);
+constant1139 = (Object)new_AST_Constant(smallint932);
+send2058 = (Object)new_AST_Send((Object)constant1138, (Object)SMB__plus, 1, constant1139);
+smallint933 = (Object)new_Type_SmallInt(2);
+constant1140 = (Object)new_AST_Constant(smallint933);
+send2059 = (Object)new_AST_Send((Object)send2058, (Object)SMB__plus, 1, constant1140);
+smallint934 = (Object)new_Type_SmallInt(5);
+constant1141 = (Object)new_AST_Constant(smallint934);
+send2060 = (Object)new_AST_Send((Object)send2059, (Object)SMB__times, 1, constant1141);
+method679 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2060);
+symbol17 = (Object)new_Type_Symbol_cached(L"tmSimpleBasicArithmetik");
+methodclosure679 = (Object)new_Runtime_MethodClosure(method679);
+store_method((Type_Class)class90, (Type_Symbol)symbol17, (Runtime_MethodClosure)methodclosure679);
+
+// BridgeTest>>tmSimpleReturn
+smallint935 = (Object)new_Type_SmallInt(1);
+constant1142 = (Object)new_AST_Constant(smallint935);
+method680 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant1142);
+symbol37 = (Object)new_Type_Symbol_cached(L"tmSimpleReturn");
+methodclosure680 = (Object)new_Runtime_MethodClosure(method680);
+store_method((Type_Class)class90, (Type_Symbol)symbol37, (Runtime_MethodClosure)methodclosure680);
+
+// BridgeTest>>tmString
+string139 = (Object)new_Type_String(L"String");
+constant1143 = (Object)new_AST_Constant(string139);
+method681 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant1143);
+symbol26 = (Object)new_Type_Symbol_cached(L"tmString");
+methodclosure681 = (Object)new_Runtime_MethodClosure(method681);
+store_method((Type_Class)class90, (Type_Symbol)symbol26, (Runtime_MethodClosure)methodclosure681);
+
+// BridgeTest>>tmCharacterEquals
+character53 = (Object)new_Type_Character(L'C');
+constant1144 = (Object)new_AST_Constant(character53);
+character54 = (Object)new_Type_Character(L'C');
+constant1145 = (Object)new_AST_Constant(character54);
+send2061 = (Object)new_AST_Send((Object)constant1144, (Object)SMB__equal, 1, constant1145);
+method682 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2061);
+symbol18 = (Object)new_Type_Symbol_cached(L"tmCharacterEquals");
+methodclosure682 = (Object)new_Runtime_MethodClosure(method682);
+store_method((Type_Class)class90, (Type_Symbol)symbol18, (Runtime_MethodClosure)methodclosure682);
+
+// BridgeTest>>tmNumberDiv
+smallint936 = (Object)new_Type_SmallInt(4);
+constant1146 = (Object)new_AST_Constant(smallint936);
+smallint937 = (Object)new_Type_SmallInt(2);
+constant1147 = (Object)new_AST_Constant(smallint937);
+send2062 = (Object)new_AST_Send((Object)constant1146, (Object)SMB__divide, 1, constant1147);
+method683 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send2062);
+symbol30 = (Object)new_Type_Symbol_cached(L"tmNumberDiv");
+methodclosure683 = (Object)new_Runtime_MethodClosure(method683);
+store_method((Type_Class)class90, (Type_Symbol)symbol30, (Runtime_MethodClosure)methodclosure683);
+
+// BridgeTest>>tmSymbol
+constant1148 = (Object)new_AST_Constant(symbol51);
+method684 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, constant1148);
+symbol38 = (Object)new_Type_Symbol_cached(L"tmSymbol");
+methodclosure684 = (Object)new_Runtime_MethodClosure(method684);
+store_method((Type_Class)class90, (Type_Symbol)symbol38, (Runtime_MethodClosure)methodclosure684);
+classreference90 = (Object)new_Organization_ClassReference((Type_Class)class90);
 }
 
 
@@ -932,9 +922,9 @@ NEW_TEST(AutoGenTest_tmBooleanEquals)
 tmBooleanEquals
 	^ true = true
 */
-Object symbol5 = (Object)new_Type_Symbol_cached(L"tmBooleanEquals");
-Object send765 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol5, 0);
-Object result = (Object)Eval((Object)send765);
+Object symbol23 = (Object)new_Type_Symbol_cached(L"tmBooleanEquals");
+Object send2063 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol23, 0);
+Object result = (Object)Eval((Object)send2063);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -947,9 +937,9 @@ NEW_TEST(AutoGenTest_tmBooleanFalse)
 tmBooleanFalse
 	^ false
 */
-Object symbol6 = (Object)new_Type_Symbol_cached(L"tmBooleanFalse");
-Object send766 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol6, 0);
-Object result = (Object)Eval((Object)send766);
+Object symbol14 = (Object)new_Type_Symbol_cached(L"tmBooleanFalse");
+Object send2064 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol14, 0);
+Object result = (Object)Eval((Object)send2064);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)False);
 ASSERT_EMPTY_STACK
@@ -962,9 +952,9 @@ NEW_TEST(AutoGenTest_tmBooleanTrue)
 tmBooleanTrue
 	^ true
 */
-Object symbol7 = (Object)new_Type_Symbol_cached(L"tmBooleanTrue");
-Object send767 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol7, 0);
-Object result = (Object)Eval((Object)send767);
+Object symbol35 = (Object)new_Type_Symbol_cached(L"tmBooleanTrue");
+Object send2065 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol35, 0);
+Object result = (Object)Eval((Object)send2065);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -977,9 +967,9 @@ NEW_TEST(AutoGenTest_tmCharacter)
 tmCharacter
 	^ $C
 */
-Object symbol8 = (Object)new_Type_Symbol_cached(L"tmCharacter");
-Object send768 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol8, 0);
-Object result = (Object)Eval((Object)send768);
+Object symbol15 = (Object)new_Type_Symbol_cached(L"tmCharacter");
+Object send2066 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol15, 0);
+Object result = (Object)Eval((Object)send2066);
 ASSERT_EMPTY_STACK
 assert0(((Type_Character)result)->value == 'C');
 ASSERT_EMPTY_STACK
@@ -992,9 +982,9 @@ NEW_TEST(AutoGenTest_tmCharacterEquals)
 tmCharacterEquals
 	^ $C = $C
 */
-Object symbol9 = (Object)new_Type_Symbol_cached(L"tmCharacterEquals");
-Object send769 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol9, 0);
-Object result = (Object)Eval((Object)send769);
+Object symbol18 = (Object)new_Type_Symbol_cached(L"tmCharacterEquals");
+Object send2067 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol18, 0);
+Object result = (Object)Eval((Object)send2067);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1007,12 +997,12 @@ NEW_TEST(AutoGenTest_tmClassReferenceReturn)
 tmClassReferenceReturn
 	^ Metaclass name.
 */
-Object symbol38 = (Object)new_Type_Symbol_cached(L"tmClassReferenceReturn");
-Object send770 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol38, 0);
-Object result = (Object)Eval((Object)send770);
+Object symbol39 = (Object)new_Type_Symbol_cached(L"tmClassReferenceReturn");
+Object send2068 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol39, 0);
+Object result = (Object)Eval((Object)send2068);
 ASSERT_EMPTY_STACK
-Object symbol56 = (Object)new_Type_Symbol_cached(L"Metaclass");
-result = Eval_Send1(result, SMB__equal, symbol56);
+Object symbol52 = (Object)new_Type_Symbol_cached(L"Metaclass");
+result = Eval_Send1(result, SMB__equal, symbol52);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1026,9 +1016,9 @@ tmExtendedReturn
 	1 > 2 ifTrue: [ ^ 1 ]
 		ifFalse: [ ^ 2].
 */
-Object symbol40 = (Object)new_Type_Symbol_cached(L"tmExtendedReturn");
-Object send771 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol40, 0);
-Object result = (Object)Eval((Object)send771);
+Object symbol29 = (Object)new_Type_Symbol_cached(L"tmExtendedReturn");
+Object send2069 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol29, 0);
+Object result = (Object)Eval((Object)send2069);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 2);
 ASSERT_EMPTY_STACK
@@ -1043,9 +1033,9 @@ tmLocalVariable
 	a := 1.
 	^ a
 */
-Object symbol10 = (Object)new_Type_Symbol_cached(L"tmLocalVariable");
-Object send772 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol10, 0);
-Object result = (Object)Eval((Object)send772);
+Object symbol22 = (Object)new_Type_Symbol_cached(L"tmLocalVariable");
+Object send2070 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol22, 0);
+Object result = (Object)Eval((Object)send2070);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 1);
 ASSERT_EMPTY_STACK
@@ -1059,11 +1049,11 @@ tmMethodArgument: arg
 	<arg1: 1>
 	^ arg + 1
 */
-Object symbol39 = (Object)new_Type_Symbol_cached(L"tmMethodArgument:");
-Object smallint396 = (Object)new_Type_SmallInt(1);
-Object constant539 = (Object)new_AST_Constant(smallint396);
-Object send773 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol39, 1, constant539);
-Object result = (Object)Eval((Object)send773);
+Object symbol25 = (Object)new_Type_Symbol_cached(L"tmMethodArgument:");
+Object smallint938 = (Object)new_Type_SmallInt(1);
+Object constant1149 = (Object)new_AST_Constant(smallint938);
+Object send2071 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol25, 1, constant1149);
+Object result = (Object)Eval((Object)send2071);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 2);
 ASSERT_EMPTY_STACK
@@ -1077,18 +1067,18 @@ tmMethodArguments: arg1 with: arg2 with: arg3
 	<arg1: 'asdf' arg2: 'asdf' arg3: 'df'>
 	^ arg1 , arg2 , arg3
 */
-Object symbol35 = (Object)new_Type_Symbol_cached(L"tmMethodArguments:with:with:");
-Object string80 = (Object)new_Type_String(L"asdf");
-Object constant540 = (Object)new_AST_Constant(string80);
-Object string81 = (Object)new_Type_String(L"asdf");
-Object constant541 = (Object)new_AST_Constant(string81);
-Object string82 = (Object)new_Type_String(L"df");
-Object constant542 = (Object)new_AST_Constant(string82);
-Object send774 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol35, 3, constant540, constant541, constant542);
-Object result = (Object)Eval((Object)send774);
+Object symbol36 = (Object)new_Type_Symbol_cached(L"tmMethodArguments:with:with:");
+Object string140 = (Object)new_Type_String(L"asdf");
+Object constant1150 = (Object)new_AST_Constant(string140);
+Object string141 = (Object)new_Type_String(L"asdf");
+Object constant1151 = (Object)new_AST_Constant(string141);
+Object string142 = (Object)new_Type_String(L"df");
+Object constant1152 = (Object)new_AST_Constant(string142);
+Object send2072 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol36, 3, constant1150, constant1151, constant1152);
+Object result = (Object)Eval((Object)send2072);
 ASSERT_EMPTY_STACK
-Object string83 = (Object)new_Type_String(L"asdfasdfdf");
-result = Eval_Send1(result, SMB__equal, string83);
+Object string143 = (Object)new_Type_String(L"asdfasdfdf");
+result = Eval_Send1(result, SMB__equal, string143);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1101,9 +1091,9 @@ NEW_TEST(AutoGenTest_tmNumber)
 tmNumber
 	^ 1
 */
-Object symbol11 = (Object)new_Type_Symbol_cached(L"tmNumber");
-Object send775 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol11, 0);
-Object result = (Object)Eval((Object)send775);
+Object symbol40 = (Object)new_Type_Symbol_cached(L"tmNumber");
+Object send2073 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol40, 0);
+Object result = (Object)Eval((Object)send2073);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 1);
 ASSERT_EMPTY_STACK
@@ -1116,9 +1106,9 @@ NEW_TEST(AutoGenTest_tmNumberAdd)
 tmNumberAdd
 	^ 1 + 1
 */
-Object symbol12 = (Object)new_Type_Symbol_cached(L"tmNumberAdd");
-Object send776 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol12, 0);
-Object result = (Object)Eval((Object)send776);
+Object symbol33 = (Object)new_Type_Symbol_cached(L"tmNumberAdd");
+Object send2074 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol33, 0);
+Object result = (Object)Eval((Object)send2074);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 2);
 ASSERT_EMPTY_STACK
@@ -1131,9 +1121,9 @@ NEW_TEST(AutoGenTest_tmNumberDiv)
 tmNumberDiv
 	^ 4 / 2
 */
-Object symbol13 = (Object)new_Type_Symbol_cached(L"tmNumberDiv");
-Object send777 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol13, 0);
-Object result = (Object)Eval((Object)send777);
+Object symbol30 = (Object)new_Type_Symbol_cached(L"tmNumberDiv");
+Object send2075 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol30, 0);
+Object result = (Object)Eval((Object)send2075);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 2);
 ASSERT_EMPTY_STACK
@@ -1146,9 +1136,9 @@ NEW_TEST(AutoGenTest_tmNumberEquals)
 tmNumberEquals
 	^ 1 = 1
 */
-Object symbol14 = (Object)new_Type_Symbol_cached(L"tmNumberEquals");
-Object send778 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol14, 0);
-Object result = (Object)Eval((Object)send778);
+Object symbol19 = (Object)new_Type_Symbol_cached(L"tmNumberEquals");
+Object send2076 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol19, 0);
+Object result = (Object)Eval((Object)send2076);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1161,9 +1151,9 @@ NEW_TEST(AutoGenTest_tmNumberMult)
 tmNumberMult
 	^ 2 * 3
 */
-Object symbol15 = (Object)new_Type_Symbol_cached(L"tmNumberMult");
-Object send779 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol15, 0);
-Object result = (Object)Eval((Object)send779);
+Object symbol31 = (Object)new_Type_Symbol_cached(L"tmNumberMult");
+Object send2077 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol31, 0);
+Object result = (Object)Eval((Object)send2077);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 6);
 ASSERT_EMPTY_STACK
@@ -1176,9 +1166,9 @@ NEW_TEST(AutoGenTest_tmNumberSubtract)
 tmNumberSubtract
 	^ 2 - 1
 */
-Object symbol16 = (Object)new_Type_Symbol_cached(L"tmNumberSubtract");
-Object send780 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol16, 0);
-Object result = (Object)Eval((Object)send780);
+Object symbol34 = (Object)new_Type_Symbol_cached(L"tmNumberSubtract");
+Object send2078 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol34, 0);
+Object result = (Object)Eval((Object)send2078);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 1);
 ASSERT_EMPTY_STACK
@@ -1191,9 +1181,9 @@ NEW_TEST(AutoGenTest_tmSimpleBasicArithmetik)
 tmSimpleBasicArithmetik
 	^ (1 + 2) + 2 * 5
 */
-Object symbol37 = (Object)new_Type_Symbol_cached(L"tmSimpleBasicArithmetik");
-Object send781 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol37, 0);
-Object result = (Object)Eval((Object)send781);
+Object symbol17 = (Object)new_Type_Symbol_cached(L"tmSimpleBasicArithmetik");
+Object send2079 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol17, 0);
+Object result = (Object)Eval((Object)send2079);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 25);
 ASSERT_EMPTY_STACK
@@ -1206,9 +1196,9 @@ NEW_TEST(AutoGenTest_tmSimpleReturn)
 tmSimpleReturn
 	^ 1
 */
-Object symbol36 = (Object)new_Type_Symbol_cached(L"tmSimpleReturn");
-Object send782 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol36, 0);
-Object result = (Object)Eval((Object)send782);
+Object symbol37 = (Object)new_Type_Symbol_cached(L"tmSimpleReturn");
+Object send2080 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol37, 0);
+Object result = (Object)Eval((Object)send2080);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 1);
 ASSERT_EMPTY_STACK
@@ -1221,12 +1211,12 @@ NEW_TEST(AutoGenTest_tmString)
 tmString
 	^ 'String'
 */
-Object symbol17 = (Object)new_Type_Symbol_cached(L"tmString");
-Object send783 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol17, 0);
-Object result = (Object)Eval((Object)send783);
+Object symbol26 = (Object)new_Type_Symbol_cached(L"tmString");
+Object send2081 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol26, 0);
+Object result = (Object)Eval((Object)send2081);
 ASSERT_EMPTY_STACK
-Object string84 = (Object)new_Type_String(L"String");
-result = Eval_Send1(result, SMB__equal, string84);
+Object string144 = (Object)new_Type_String(L"String");
+result = Eval_Send1(result, SMB__equal, string144);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1239,9 +1229,9 @@ NEW_TEST(AutoGenTest_tmStringEquals)
 tmStringEquals
 	^ 'String' = 'String'
 */
-Object symbol18 = (Object)new_Type_Symbol_cached(L"tmStringEquals");
-Object send784 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol18, 0);
-Object result = (Object)Eval((Object)send784);
+Object symbol24 = (Object)new_Type_Symbol_cached(L"tmStringEquals");
+Object send2082 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol24, 0);
+Object result = (Object)Eval((Object)send2082);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1254,12 +1244,12 @@ NEW_TEST(AutoGenTest_tmSymbol)
 tmSymbol
 	^ #Symbol
 */
-Object symbol20 = (Object)new_Type_Symbol_cached(L"tmSymbol");
-Object send785 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol20, 0);
-Object result = (Object)Eval((Object)send785);
+Object symbol38 = (Object)new_Type_Symbol_cached(L"tmSymbol");
+Object send2083 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol38, 0);
+Object result = (Object)Eval((Object)send2083);
 ASSERT_EMPTY_STACK
-Object symbol19 = (Object)new_Type_Symbol_cached(L"Symbol");
-result = Eval_Send1(result, SMB__equal, symbol19);
+Object symbol51 = (Object)new_Type_Symbol_cached(L"Symbol");
+result = Eval_Send1(result, SMB__equal, symbol51);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
 ASSERT_EMPTY_STACK
@@ -1272,11 +1262,98 @@ NEW_TEST(AutoGenTest_tmSymbolEquals)
 tmSymbolEquals
 	^ #Symbol = #Symbol
 */
-Object symbol21 = (Object)new_Type_Symbol_cached(L"tmSymbolEquals");
-Object send786 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol21, 0);
-Object result = (Object)Eval((Object)send786);
+Object symbol13 = (Object)new_Type_Symbol_cached(L"tmSymbolEquals");
+Object send2084 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol13, 0);
+Object result = (Object)Eval((Object)send2084);
 ASSERT_EMPTY_STACK
 assert0(result == (Object)True);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmFibonacci)
+/*
+tmFibonacci
+	
+*/
+Object symbol16 = (Object)new_Type_Symbol_cached(L"tmFibonacci");
+Object send2085 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol16, 0);
+Object result = (Object)Eval((Object)send2085);
+ASSERT_EMPTY_STACK
+assert0(result == test_Class_Instance);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmSimpleInstanceCreation)
+/*
+tmSimpleInstanceCreation
+	| instance |
+	instance := StandardTestClass basicNew.
+	instance a: 1; b: 2; c: 3.
+	self assert: instance a = 1.
+	self assert: instance b = 2.
+	self assert: instance c = 3.
+	^ instance a + instance b  + instance c
+	
+*/
+Object symbol28 = (Object)new_Type_Symbol_cached(L"tmSimpleInstanceCreation");
+Object send2086 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol28, 0);
+Object result = (Object)Eval((Object)send2086);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 6);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmVariableInstanceCreation)
+/*
+tmVariableInstanceCreation
+	| instance |
+	instance := StandardVariableTestClass basicNew.
+	instance a: 1; b: 2; c: 3.
+	self assert: instance a = 1.
+	self assert: instance b = 2.
+	self assert: instance c = 3.
+	^ instance a + instance b  + instance c
+	
+*/
+Object symbol21 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreation");
+Object send2087 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol21, 0);
+Object result = (Object)Eval((Object)send2087);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 6);
+ASSERT_EMPTY_STACK
+}
+
+/* ========================================================================= */
+
+NEW_TEST(AutoGenTest_tmVariableInstanceCreationSized)
+/*
+tmVariableInstanceCreationSized
+	| instance |
+	instance := StandardVariableTestClass basicNew: 100.
+	instance at: 1 put: 1.
+	instance at: 100 put: 100.
+	self assert: (instance at: 1) = 1.
+	
+	self assert: (instance at: 100) = 100.
+	instance a: 1; b: 2; c: 3.
+	self assert: instance a = 1.
+	self assert: instance b = 2.
+	self assert: instance c = 3.
+	
+	^ instance a + instance b + instance c + (instance at: 1) + (instance at: 100)
+	
+*/
+Object symbol32 = (Object)new_Type_Symbol_cached(L"tmVariableInstanceCreationSized");
+Object send2088 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol32, 0);
+Object result = (Object)Eval((Object)send2088);
+ASSERT_EMPTY_STACK
+assert0(((Type_SmallInt)result)->value == 107);
 ASSERT_EMPTY_STACK
 }
 
@@ -1285,8 +1362,7 @@ ASSERT_EMPTY_STACK
 TEST_SUITE(AutoGenTest,
 {
     create_ast();
-    Test_Class = new_Class_named((Object)Type_Object_Class, L"Test_Object", Type_Object_Class->type);
-    printf("TYPE: %p\n", Type_Object_Class->type);
+    Test_Class = (Type_Class)class90;
     test_Class_Instance = (Object)new_AST_Constant((Object)instantiate((Type_Class)Test_Class));
 
     RUN_TEST(AutoGenTest_tmSimpleReturn);
@@ -1296,11 +1372,13 @@ TEST_SUITE(AutoGenTest,
     RUN_TEST(AutoGenTest_tmBooleanFalse);
     RUN_TEST(AutoGenTest_tmString);
     RUN_TEST(AutoGenTest_tmLocalVariable);
+    RUN_TEST(AutoGenTest_tmSimpleInstanceCreation);
     RUN_TEST(AutoGenTest_tmMethodArgument_);
     RUN_TEST(AutoGenTest_tmNumberEquals);
     RUN_TEST(AutoGenTest_tmClassReferenceReturn);
     RUN_TEST(AutoGenTest_tmCharacterEquals);
     RUN_TEST(AutoGenTest_tmCharacter);
+    RUN_TEST(AutoGenTest_tmVariableInstanceCreation);
     RUN_TEST(AutoGenTest_tmBooleanTrue);
     RUN_TEST(AutoGenTest_tmNumberSubtract);
     RUN_TEST(AutoGenTest_tmNumberAdd);
@@ -1310,5 +1388,7 @@ TEST_SUITE(AutoGenTest,
     RUN_TEST(AutoGenTest_tmStringEquals);
     RUN_TEST(AutoGenTest_tmSymbolEquals);
     RUN_TEST(AutoGenTest_tmNumberDiv);
+    RUN_TEST(AutoGenTest_tmFibonacci);
+    RUN_TEST(AutoGenTest_tmVariableInstanceCreationSized);
     RUN_TEST(AutoGenTest_tmExtendedReturn);
 })
