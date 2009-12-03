@@ -32,7 +32,10 @@ Object new_Organization_Package(Object parent, const wchar_t * name)
     result->ivals[1] = parent;
     result->ivals[2] = (Object)new_Type_Symbol_cached(name);
     Object pmembers = raw_Type_Object_at((Type_Object)parent, GETTAG(parent), 0);
-    Type_Dictionary_quick_store((Type_Dictionary)pmembers, name, (Object)result);
+    Type_Dictionary_quick_store(
+        (Type_Dictionary)pmembers,
+        (Object)new_Type_Symbol_cached(name),
+        (Object)result);
     return (Object)result;
 }
 
