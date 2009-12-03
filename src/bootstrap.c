@@ -15,11 +15,11 @@ void bootstrap()
 {
     Organization_RootPackage_Class =
         new_Class_named((Object)Type_Object_Class,
-                        L"Organization_RootPackage",
+                        L"RootPackage",
                         CREATE_OBJECT_TAG(ORGANIZATION_ROOTPACKAGE));
     Organization_Package_Class =
         new_Class_named((Object)Organization_RootPackage_Class,
-                        L"Organization_Package",
+                        L"Package",
                         CREATE_OBJECT_TAG(ORGANIZATION_PACKAGE));
 
     create_RootPackage();
