@@ -72,8 +72,9 @@ Object create_object_type(uns_int size, va_list args)
     Type_Array result = create_type_with_vars(Type_ObjectLayout, size);
     while (0 < size) {
         size--;
-        result->values[size] = (Object)new_AST_InstVariable(size,
-                                                            va_arg(args, wchar_t *));
+        result->values[size] =
+            (Object)new_AST_InstVariable(size,
+                                         va_arg(args, wchar_t *));
     }
     va_end(args);
     return (Object)result;
