@@ -72,8 +72,6 @@ void CNT_send_Eval()
     zap_CNT();
     Object exp = peek_EXP(0);
 
-    printf("eval: %p\n", exp);
-
     Type_Class class = (Type_Class)HEADER(exp);
     EVAL_IF(AST_Constant)
     EVAL_IF(AST_Variable)

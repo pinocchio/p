@@ -95,7 +95,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
     assert(local_id < context_locals(self)->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
                   local_id, context_locals(self)->size));
-    
+
     context_locals(self)->values[local_id] = value;
 }
 

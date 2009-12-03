@@ -243,7 +243,7 @@ void print_Class(Object obj)
         printf("Class class: %ls\n", ((Type_Class)obj)->name->value);
         return;
     }
-    printf("Class: %ls\n", class->name->value);
+    printf("%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
 /* ========================================================================= */

@@ -113,7 +113,7 @@ class##_Reference = new_Organization_ClassReference(class);
 
 #define COPY_ARGS(source, target)\
 {\
-    int i;\
+    uns_int i;\
     va_list args;\
     va_start(args, source);\
     for (i = 0; i < source; i++) {\
