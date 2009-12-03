@@ -61,3 +61,4 @@ extern Type_Symbol SMB_escape_;
 extern Type_Symbol SMB_asCharacter;
 extern Type_Symbol SMB_doesNotUnderstand_;
 extern Type_Symbol SMB_name;
+extern Type_Symbol SMB_value;
