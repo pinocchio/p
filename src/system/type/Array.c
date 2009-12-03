@@ -67,15 +67,6 @@ void pre_init_Type_Array()
 
 /* ========================================================================= */
 
-NATIVE1(Type_Array_basicNew_)
-    assert_class(self);
-    Object w_size = NATIVE_ARG(0);
-    int size = unwrap_int(w_size);
-    assert0(size >= 0);
-    Object result = instantiate_sized((Type_Class)self, (uns_int)size);
-    RETURN_FROM_NATIVE(result);
-}
-
 NATIVE0(Type_Array_size)
     Type_SmallInt result = new_Type_SmallInt(((Type_Array)self)->size);
     RETURN_FROM_NATIVE(result);
@@ -92,43 +83,6 @@ void raw_Type_Array_instAt_put(Type_Array o, Object tag,
 {
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
-}
-
-Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index)
-{
-    assert0(array->size > index);
-    assert0(0 <= index);
-    return array->values[TAG_SIZE(tag) + index];
-}
-
-NATIVE1(Type_Array_at_)
-    Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
-    Type_Array as  = (Type_Array)self;
-
-    Object tag = GETTAG(as);    
-    ASSERT_TAG_TYPE(tag, Array);
-
-    RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index));
-}
-
-void raw_Type_Array_at_put(Type_Array array, Object tag,
-                           uns_int index, Object value)
-{
-    assert0(array->size > index);
-    assert0(0 <= index);
-    array->values[TAG_SIZE(tag) + index] = value;
-}
-
-NATIVE2(Type_Array_at_put_)
-    Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
-    Type_Array as  = (Type_Array)self;
-   
-    Object tag = GETTAG(as);
-    ASSERT_TAG_TYPE(tag, Array); 
-    raw_Type_Array_at_put(as, tag, index, NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
 }
 
 NATIVE1(Type_Array_instVarAt_)
@@ -158,9 +112,6 @@ void post_init_Type_Array()
     Type_Array_Class->methods = new_Type_Dictionary();
     empty_Type_Array->size    = 0;
     
-    store_native_method((Type_Class)HEADER(Type_Array_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
-    store_native_method(Type_Array_Class, SMB_at_,     NM_Type_Array_at_);
-    store_native_method(Type_Array_Class, SMB_at_put_, NM_Type_Array_at_put_);
     store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);
     store_native_method(Type_Array_Class, SMB_instVarAt_put_, NM_Type_Array_instVarAt_put_);
     store_native_method(Type_Array_Class, SMB_size,    NM_Type_Array_size);
