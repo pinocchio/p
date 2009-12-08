@@ -424,11 +424,11 @@ Object classreference121;
 
 void create_ast() {
 symbol727 = (Object)new_Type_Symbol_cached(L"ProtoObject");
-class96 = (Object)new_Class(Nil, empty_object_layout);
+class96 = (Object)new_Class((Object)Type_Object_Class, empty_object_layout);
 ((Type_Class)class96)->name = (Type_Symbol)symbol727;
 classreference115 = (Object)new_Organization_ClassReference((Type_Class)class96);
 symbol725 = (Object)new_Type_Symbol_cached(L"Object");
-class97 = (Object)new_Class(class96, empty_object_layout);
+class97 = (Object)new_Class((Object)Type_Object_Class, empty_object_layout);
 ((Type_Class)class97)->name = (Type_Symbol)symbol725;
 classreference116 = (Object)new_Organization_ClassReference((Type_Class)class97);
 symbol744 = (Object)new_Type_Symbol_cached(L"StandardTestClass");
@@ -439,7 +439,7 @@ instancevariable116 = (Object)new_AST_InstVariable(1, L"b");
 ((Type_Array)objectlayout44)->values[1] = instancevariable116;
 instancevariable117 = (Object)new_AST_InstVariable(2, L"c");
 ((Type_Array)objectlayout44)->values[2] = instancevariable117;
-class98 = (Object)new_Class(class97, objectlayout44);
+class98 = (Object)new_Class((Object)Type_Object_Class, objectlayout44);
 ((Type_Class)class98)->name = (Type_Symbol)symbol744;
 
 // StandardTestClass>>c
@@ -491,7 +491,7 @@ symbol764 = (Object)new_Type_Symbol_cached(L"SuperClassTestClass");
 objectlayout45 = (Object)create_type_with_vars(Type_ObjectLayout, 1);
 instancevariable118 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)objectlayout45)->values[0] = instancevariable118;
-class99 = (Object)new_Class(class97, objectlayout45);
+class99 = (Object)new_Class((Object)Type_Object_Class, objectlayout45);
 ((Type_Class)class99)->name = (Type_Symbol)symbol764;
 symbol736 = (Object)new_Type_Symbol_cached(L"ChildClassTestClass");
 objectlayout46 = (Object)create_type_with_vars(Type_ObjectLayout, 2);
@@ -507,7 +507,7 @@ arraylayout20 = (Object)create_type_with_vars(Type_ArrayLayout, 3);
 instancevariable120 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)arraylayout20)->values[0] = instancevariable120;instancevariable121 = (Object)new_AST_InstVariable(1, L"b");
 ((Type_Array)arraylayout20)->values[1] = instancevariable121;instancevariable122 = (Object)new_AST_InstVariable(2, L"c");
-((Type_Array)arraylayout20)->values[2] = instancevariable122;class101 = (Object)new_Class(class97, arraylayout20);
+((Type_Array)arraylayout20)->values[2] = instancevariable122;class101 = (Object)new_Class((Object)Type_Object_Class, arraylayout20);
 ((Type_Class)class101)->name = (Type_Symbol)symbol739;
 
 // StandardVariableTestClass>>c
@@ -550,7 +550,7 @@ methodclosure1151 = (Object)new_Runtime_MethodClosure(method1267);
 store_method((Type_Class)class101, (Type_Symbol)symbol767, (Runtime_MethodClosure)methodclosure1151);
 classreference120 = (Object)new_Organization_ClassReference((Type_Class)class101);
 symbol721 = (Object)new_Type_Symbol_cached(L"BridgeTest");
-class102 = (Object)new_Class(class97, empty_object_layout);
+class102 = (Object)new_Class((Object)Type_Object_Class, empty_object_layout);
 ((Type_Class)class102)->name = (Type_Symbol)symbol721;
 
 // BridgeTest>>tmBooleanTrue
