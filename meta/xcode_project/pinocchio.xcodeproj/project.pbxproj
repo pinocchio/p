@@ -79,7 +79,6 @@
 		364E661110C562DE00AD4616 /* Constant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Constant.c; sourceTree = "<group>"; };
 		364E661210C562DE00AD4616 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		364E661410C562DE00AD4616 /* ConstantTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ConstantTest.ci; sourceTree = "<group>"; };
-		364E661510C562DE00AD4616 /* Continue.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Continue.o; sourceTree = "<group>"; };
 		364E661610C562DE00AD4616 /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		364E661710C562DE00AD4616 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		364E661910C562DE00AD4616 /* InfoTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InfoTest.ci; sourceTree = "<group>"; };
@@ -250,8 +249,8 @@
 				364E660010C562DE00AD4616 /* pinocchioPreInit.ci */,
 				364E660110C562DE00AD4616 /* pinocchioType.hi */,
 				364E660210C562DE00AD4616 /* pinocchioTypeInclude.hi */,
-				364E660310C562DE00AD4616 /* system */,
 				364E669310C562DE00AD4616 /* test */,
+				364E660310C562DE00AD4616 /* system */,
 			);
 			name = src;
 			path = ../../src;
@@ -292,7 +291,6 @@
 				364E661110C562DE00AD4616 /* Constant.c */,
 				364E661210C562DE00AD4616 /* Constant.h */,
 				364E661410C562DE00AD4616 /* ConstantTest.ci */,
-				364E661510C562DE00AD4616 /* Continue.o */,
 				364E661610C562DE00AD4616 /* Info.c */,
 				364E661710C562DE00AD4616 /* Info.h */,
 				364E661910C562DE00AD4616 /* InfoTest.ci */,
