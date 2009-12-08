@@ -13,12 +13,12 @@ Type_Class AST_Send_Class;
 
 AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
     NEW_ARRAY_OBJECT(AST_Send, Object[argc]);
-    result->receiver            = receiver;
-    result->message             = msg;
-    result->info                = empty_AST_Info;
-    result->cache               = new_Runtime_InlineCache();
+    result->receiver = receiver;
+    result->message  = msg;
+    result->info     = empty_AST_Info;
+    result->cache    = new_Runtime_InlineCache();
 
-    result->size                = argc;
+    result->size     = argc;
     return result;
 }
 
@@ -32,7 +32,6 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
         AST_Send_args(result)[idx] = va_arg(args, Object);
     }
     va_end(args);
-
     return result;
 }
 

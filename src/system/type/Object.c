@@ -67,8 +67,8 @@ Object raw_Type_Object_at(Type_Object o, Object tag, uns_int index)
 
 NATIVE1(Type_Object_instVarAt_)
     Object w_index = NATIVE_ARG(0);
-    int index = unwrap_int(w_index);
-    Object tag = GETTAG(self);
+    int index      = unwrap_int(w_index);
+    Object tag     = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Object);
     RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index));
 }
@@ -82,8 +82,8 @@ void raw_Type_Object_at_put(Type_Object o, Object tag,
 
 NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
-    int index = unwrap_int(w_index);
-    Object tag = GETTAG(self);
+    int index      = unwrap_int(w_index);
+    Object tag     = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Object);
     raw_Type_Object_at_put((Type_Object)self, tag, index, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
@@ -92,7 +92,7 @@ NATIVE2(Type_Object_instVarAt_put_)
 NATIVE1(Type_Array_basicNew_)
     assert_class(self);
     Object w_size = NATIVE_ARG(0);
-    int size = unwrap_int(w_size);
+    int size      = unwrap_int(w_size);
     assert0(size >= 0);
     Object result = instantiate_sized((Type_Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
@@ -150,12 +150,12 @@ void post_init_Type_Object()
     
     store_native_method(Type_Object_Class, SMB_at_,     NM_Type_Array_at_);
     store_native_method(Type_Object_Class, SMB_at_put_, NM_Type_Array_at_put_);
-    store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew, NM_Type_Object_basicNew);
+    store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew,  NM_Type_Object_basicNew);
     store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
-    store_native_method((Type_Class)Type_Object_Class, SMB__pequal,         NM_Type_Object_equals);
-    store_native_method((Type_Class)Type_Object_Class, SMB__equal,         NM_Type_Object_equals);
-    store_native_method((Type_Class)Type_Object_Class, SMB__equal,          NM_Type_Object_equals);
-    store_native_method((Type_Class)Type_Object_Class, SMB_isNil,           NM_Type_Object_isNil);
-    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_,      NM_Type_Object_instVarAt_);
-    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_put_,  NM_Type_Object_instVarAt_put_);
+    store_native_method((Type_Class)Type_Object_Class, SMB__pequal,           NM_Type_Object_equals);
+    store_native_method((Type_Class)Type_Object_Class, SMB__equal,            NM_Type_Object_equals);
+    store_native_method((Type_Class)Type_Object_Class, SMB__equal,            NM_Type_Object_equals);
+    store_native_method((Type_Class)Type_Object_Class, SMB_isNil,             NM_Type_Object_isNil);
+    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_,        NM_Type_Object_instVarAt_);
+    store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_put_,    NM_Type_Object_instVarAt_put_);
 }

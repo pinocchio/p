@@ -15,10 +15,10 @@ Type_Class AST_Super_Class;
 AST_Super new_AST_Super(Object message, uns_int argc, ...)
 {
     NEW_ARRAY_OBJECT(AST_Super, Object[argc]);
-    result->message             = message;
-    result->info                = empty_AST_Info;
-    result->cache               = new_Runtime_InlineCache();
-    result->size                = argc;
+    result->message = message;
+    result->info    = empty_AST_Info;
+    result->cache   = new_Runtime_InlineCache();
+    result->size    = argc;
 
     va_list args;
     va_start(args, argc);
@@ -42,8 +42,7 @@ void pre_init_AST_Super()
 
 CNT(AST_Super_send) 
     Object class    = pop_EXP();
-
-    uns_int argc = (uns_int)pop_EXP();
+    uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
     
     Type_Class_dispatch(receiver, class, argc);
