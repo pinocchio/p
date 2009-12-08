@@ -21,6 +21,7 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
+
 compile_run: $(TARGET)
 	./$(TARGET)
 
