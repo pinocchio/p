@@ -10,7 +10,7 @@ TEST_CIFILES=$(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
 TEST_CFILES=test/pinocchioTest.c
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-I. -Wall -g 
+CFLAGS+=-I. -Wall -g
 LDFLAGS+=-lm -lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
