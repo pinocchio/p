@@ -112,10 +112,11 @@ NATIVE2(Type_String_at_put_)
     Object w_arg1 = NATIVE_ARG(1);
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
-    Type_SmallInt pos = (Type_SmallInt)w_arg0;
-    assert((uns_int)pos->value <= ((Type_String)self)->size,
-        printf("%"F_I"u is out of Bounds[%"F_I"u]", (uns_int)pos->value, ((Type_String)self)->size));
-    ((Type_String)self)->value[pos->value] = ((Type_Character)w_arg1)->value;
+    int index = unwrap_int(w_arg0) - 1;
+    assert(0 <= index, printf("Index below 0: %i", index));
+    assert(index < ((Type_String)self)->size,
+        printf("%i is out of Bounds[%"F_I"u]", index, ((Type_String)self)->size));
+    ((Type_String)self)->value[index] = ((Type_Character)w_arg1)->value;
     RETURN_FROM_NATIVE(self);
 }
 
