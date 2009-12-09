@@ -72,14 +72,14 @@ NATIVE0(Type_Array_size)
     RETURN_FROM_NATIVE(result);
 }
 
-Object raw_Type_Array_instAt(Type_Array o, Object tag, uns_int index)
+Object raw_Type_Array_instAt(Type_Array o, Object tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->values[index];
 }
 
 void raw_Type_Array_instAt_put(Type_Array o, Object tag,
-                               uns_int index, Object value)
+                               int index, Object value)
 {
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
@@ -87,7 +87,7 @@ void raw_Type_Array_instAt_put(Type_Array o, Object tag,
 
 NATIVE1(Type_Array_instVarAt_)
     Object w_index  = NATIVE_ARG(0);
-    int index       = unwrap_int(w_index);
+    int index       = unwrap_int(w_index) - 1;
     Object tag      = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
@@ -96,7 +96,7 @@ NATIVE1(Type_Array_instVarAt_)
 
 NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
+    int index      = unwrap_int(w_index) - 1;
     Object tag   = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Array);
     ASSERT_TAG_SIZE(tag, index);

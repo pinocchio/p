@@ -59,7 +59,7 @@ NATIVE(Type_Object_isNil)
     RETURN_FROM_NATIVE(False);
 }
 
-Object raw_Type_Object_at(Type_Object o, Object tag, uns_int index)
+Object raw_Type_Object_at(Type_Object o, Object tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->ivals[index];
@@ -70,11 +70,11 @@ NATIVE1(Type_Object_instVarAt_)
     int index      = unwrap_int(w_index);
     Object tag     = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Object);
-    RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index));
+    RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index - 1));
 }
 
 void raw_Type_Object_at_put(Type_Object o, Object tag,
-                            uns_int index, Object value)
+                            int index, Object value)
 {
     ASSERT_TAG_SIZE(tag, index);
     o->ivals[index] = value;
@@ -85,7 +85,7 @@ NATIVE2(Type_Object_instVarAt_put_)
     int index      = unwrap_int(w_index);
     Object tag     = GETTAG(self);
     ASSERT_TAG_TYPE(tag, Object);
-    raw_Type_Object_at_put((Type_Object)self, tag, index, NATIVE_ARG(1));
+    raw_Type_Object_at_put((Type_Object)self, tag, index - 1, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
 
@@ -98,7 +98,7 @@ NATIVE1(Type_Array_basicNew_)
     RETURN_FROM_NATIVE(result);
 }
 
-Object raw_Type_Array_at(Type_Array array, Object tag, uns_int index)
+Object raw_Type_Array_at(Type_Array array, Object tag, int index)
 {
     assert0(array->size > index);
     assert0(0 <= index);
@@ -113,11 +113,11 @@ NATIVE1(Type_Array_at_)
     Object tag = GETTAG(as);    
     ASSERT_TAG_TYPE(tag, Array);
 
-    RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index));
+    RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index - 1));
 }
 
 void raw_Type_Array_at_put(Type_Array array, Object tag,
-                           uns_int index, Object value)
+                           int index, Object value)
 {
     assert0(array->size > index);
     assert0(0 <= index);
@@ -131,7 +131,7 @@ NATIVE2(Type_Array_at_put_)
    
     Object tag = GETTAG(as);
     ASSERT_TAG_TYPE(tag, Array); 
-    raw_Type_Array_at_put(as, tag, index, NATIVE_ARG(1));
+    raw_Type_Array_at_put(as, tag, index - 1, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
 
