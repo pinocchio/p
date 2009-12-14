@@ -8,6 +8,7 @@
 struct Type_Nil_t{};
 
 extern Object Nil;
+extern AST_Constant Nil_Const;
 CREATE_INITIALIZERS(Type_Nil)
 
 /* ========================================================================= */
