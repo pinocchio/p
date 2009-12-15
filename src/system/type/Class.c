@@ -21,18 +21,19 @@ DECLARE_REFERENCE(Behaviour);
 Type_Class new_Bootstrapping_Class(Object superclass)
 {
     Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    mcls->super = HEADER(superclass);
-    Type_Class cls = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
-    cls->super = superclass;
+    mcls->super     = HEADER(superclass);
+    Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
+    cls->super      = superclass;
     return cls;
 }
 
-Type_Class new_Class(Object superclass, Object type)
-{
+Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
+{    
     Type_Class metaclass    = (Type_Class)instantiate(Metaclass);
-    metaclass->type         = ((Type_Class)HEADER(superclass))->type;
+    metaclass->type         = metaType;
     metaclass->super        = HEADER(superclass);
     metaclass->methods      = new_Type_Dictionary();
+    
     Type_Class result       = (Type_Class)instantiate(metaclass);
     result->methods         = new_Type_Dictionary();
     result->super           = superclass;
@@ -40,18 +41,24 @@ Type_Class new_Class(Object superclass, Object type)
     return result;
 }
 
+Type_Class new_Class(Object superclass, Object type)
+{
+    return new_Class_withMeta(superclass, type, ((Type_Class)HEADER(superclass))->type);
+}
+
+
 Type_Class new_Class_named(Object superclass, const wchar_t* name, Object type)
 {
     Type_Class result = (Type_Class) new_Class(superclass, type);
-    result->name            = new_Type_Symbol_cached(name); 
+    result->name      = new_Type_Symbol_cached(name); 
     return result;
 }
 
 void pre_init_Type_Class()
 {
-    Metaclass                 = NEW_t(Type_Class);
-    Object Metaclass_mclass   = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    HEADER(Metaclass)         = Metaclass_mclass;
+    Metaclass               = NEW_t(Type_Class);
+    Object Metaclass_mclass = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    HEADER(Metaclass)       = Metaclass_mclass;
 }
 
 void inter_init_Type_Class()
@@ -128,8 +135,8 @@ static void CNT_Class_lookup_cache_invoke()
     if (method == NULL) {
         return Class_next_lookup(class);
     }
-    uns_int argc = (uns_int)peek_EXP(3);
-    AST_Send send = (AST_Send)peek_EXP(argc + 7);
+    uns_int argc    = (uns_int)peek_EXP(3);
+    AST_Send send   = (AST_Send)peek_EXP(argc + 7);
     Object dispatch_type = peek_EXP(5);
     Runtime_InlineCache cache = send->cache;
     cache->class    = dispatch_type;

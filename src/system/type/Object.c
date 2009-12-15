@@ -45,6 +45,10 @@ NATIVE0(Type_Object_basicNew)
     RETURN_FROM_NATIVE(result);
 }
 
+NATIVE0(Type_Object_class)
+    RETURN_FROM_NATIVE(HEADER(self))
+}
+
 NATIVE1(Type_Object_equals)
     Object arg = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(get_bool(self == arg));
@@ -154,7 +158,7 @@ void post_init_Type_Object()
     store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
     store_native_method((Type_Class)Type_Object_Class, SMB__pequal,           NM_Type_Object_equals);
     store_native_method((Type_Class)Type_Object_Class, SMB__equal,            NM_Type_Object_equals);
-    store_native_method((Type_Class)Type_Object_Class, SMB__equal,            NM_Type_Object_equals);
+    store_native_method((Type_Class)Type_Object_Class, SMB_class,             NM_Type_Object_class);
     store_native_method((Type_Class)Type_Object_Class, SMB_isNil,             NM_Type_Object_isNil);
     store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_,        NM_Type_Object_instVarAt_);
     store_native_method((Type_Class)Type_Object_Class, SMB_instVarAt_put_,    NM_Type_Object_instVarAt_put_);
