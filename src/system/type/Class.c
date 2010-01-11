@@ -27,7 +27,6 @@ Type_Class new_Bootstrapping_Class(Object superclass)
     return cls;
 }
 
-<<<<<<< HEAD
 Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
 {    
     Type_Class metaclass    = (Type_Class)instantiate(Metaclass);
@@ -39,32 +38,6 @@ Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
     result->methods         = new_Type_Dictionary();
     result->super           = superclass;
     result->type            = type;
-=======
-Type_Class new_Class(Object superclass, Object type)
-{
-    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
-    metaclass->type      = ((Type_Class)HEADER(superclass))->type;
-    metaclass->super     = HEADER(superclass);
-    metaclass->methods   = new_Type_Dictionary();
-    Type_Class result    = (Type_Class)instantiate(metaclass);
-    result->methods      = new_Type_Dictionary();
-    result->super        = superclass;
-    result->type         = type;
-    return result;
-}
-
-
-Type_Class new_Class_withMeta(Object superclass, Object metatype, Object type)
-{
-    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
-    metaclass->type      = metatype;
-    metaclass->super     = HEADER(superclass);
-    metaclass->methods   = new_Type_Dictionary();
-    Type_Class result    = (Type_Class)instantiate(metaclass);
-    result->methods      = new_Type_Dictionary();
-    result->super        = superclass;
-    result->type         = type;
->>>>>>> fixing nil stuff
     return result;
 }
 
@@ -162,15 +135,9 @@ static void CNT_Class_lookup_cache_invoke()
     if (method == NULL) {
         return Class_next_lookup(class);
     }
-<<<<<<< HEAD
-    uns_int argc    = (uns_int)peek_EXP(3);
-    AST_Send send   = (AST_Send)peek_EXP(argc + 7);
-    Object dispatch_type = peek_EXP(5);
-=======
     uns_int argc              = (uns_int)peek_EXP(3);
     AST_Send send             = (AST_Send)peek_EXP(argc + 7);
     Object dispatch_type      = peek_EXP(5);
->>>>>>> fixing nil stuff
     Runtime_InlineCache cache = send->cache;
     cache->class              = dispatch_type;
     cache->method             = method;

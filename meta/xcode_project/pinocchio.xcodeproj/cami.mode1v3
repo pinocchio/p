@@ -302,8 +302,6 @@
 			<key>Layout</key>
 			<array>
 				<dict>
-					<key>BecomeActive</key>
-					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -357,18 +355,15 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-<<<<<<< HEAD
-=======
-									<integer>58</integer>
-									<integer>29</integer>
-									<integer>28</integer>
->>>>>>> fixing nil stuff
+									<integer>88</integer>
+									<integer>71</integer>
+									<integer>30</integer>
 									<integer>9</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 426}, {323, 825}}</string>
+							<string>{{0, 942}, {323, 784}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -380,7 +375,7 @@
 					<key>GeometryConfiguration</key>
 					<dict>
 						<key>Frame</key>
-						<string>{{0, 0}, {340, 843}}</string>
+						<string>{{0, 0}, {340, 802}}</string>
 						<key>GroupTreeTableConfiguration</key>
 						<array>
 							<string>SCMStatusColumn</string>
@@ -389,11 +384,7 @@
 							<real>301</real>
 						</array>
 						<key>RubberWindowFrame</key>
-<<<<<<< HEAD
 						<string>267 287 1440 843 0 0 1920 1178 </string>
-=======
-						<string>480 294 1414 884 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -404,16 +395,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-<<<<<<< HEAD
-								<string>bootstrap.h</string>
-=======
-								<string>Send.c</string>
->>>>>>> fixing nil stuff
+								<string>Class.c</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -421,19 +410,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-<<<<<<< HEAD
-										<string>bootstrap.h</string>
+										<string>Class.c</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>36DBE70810D7D30500D6052D</string>
-=======
-										<string>Send.c</string>
-										<key>_historyCapacity</key>
-										<integer>0</integer>
-										<key>bookmark</key>
-										<string>36A6C8EC10FB7E8700E681E9</string>
->>>>>>> fixing nil stuff
+										<string>364A19A810FB819000F8B22A</string>
 										<key>history</key>
 										<array>
 											<string>366CEEF110847C820083F744</string>
@@ -483,36 +464,24 @@
 											<string>36AFF1CF10CE6325006AD4AC</string>
 											<string>36AFF1D010CE6325006AD4AC</string>
 											<string>36AFF1D110CE6325006AD4AC</string>
+											<string>36AFF1D210CE6325006AD4AC</string>
 											<string>36AFF1D310CE6325006AD4AC</string>
 											<string>36AFF1D410CE6325006AD4AC</string>
 											<string>36AFF1D510CE6325006AD4AC</string>
 											<string>36AFF1D610CE6325006AD4AC</string>
 											<string>36AFF1D710CE6325006AD4AC</string>
 											<string>36AFF1E310CE8A2E006AD4AC</string>
-<<<<<<< HEAD
 											<string>363F026010D28E0000BEA343</string>
 											<string>36DBE6CC10D7B89600D6052D</string>
 											<string>36DBE6CD10D7B89600D6052D</string>
 											<string>36DBE6CE10D7B89600D6052D</string>
 											<string>36DBE6CF10D7B89600D6052D</string>
 											<string>36DBE6D310D7BAA700D6052D</string>
-											<string>36DBE6E410D7CB6C00D6052D</string>
 											<string>36DBE6E510D7CB6C00D6052D</string>
 											<string>36DBE70410D7D30500D6052D</string>
 											<string>36DBE70510D7D30500D6052D</string>
-											<string>36DBE70610D7D30500D6052D</string>
-=======
-											<string>36A6C8AD10FB71FF00E681E9</string>
-											<string>36A6C8C110FB79A400E681E9</string>
-											<string>36A6C8C210FB79A400E681E9</string>
-											<string>36A6C8C510FB7A2000E681E9</string>
-											<string>36A6C8D110FB7DBC00E681E9</string>
-											<string>36A6C8D210FB7DBC00E681E9</string>
-											<string>36A6C8D310FB7DBC00E681E9</string>
-											<string>36A6C8E910FB7E8700E681E9</string>
-											<string>36A6C8EA10FB7E8700E681E9</string>
-											<string>36A6C8EB10FB7E8700E681E9</string>
->>>>>>> fixing nil stuff
+											<string>364A19A710FB819000F8B22A</string>
+											<string>36DBE6E410D7CB6C00D6052D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -524,18 +493,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1069, 838}}</string>
+								<string>{{0, 0}, {1095, 797}}</string>
 								<key>RubberWindowFrame</key>
-<<<<<<< HEAD
 								<string>267 287 1440 843 0 0 1920 1178 </string>
-=======
-								<string>480 294 1414 884 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>838pt</string>
+							<string>797pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -548,13 +513,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 843}, {1069, 0}}</string>
+								<string>{{0, 802}, {1095, 0}}</string>
 								<key>RubberWindowFrame</key>
-<<<<<<< HEAD
 								<string>267 287 1440 843 0 0 1920 1178 </string>
-=======
-								<string>480 294 1414 884 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -563,7 +524,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>1069pt</string>
+					<string>1095pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -578,15 +539,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-<<<<<<< HEAD
-				<string>36DBE6DE10D7BD2200D6052D</string>
+				<string>364A19A910FB819000F8B22A</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>36DBE6DF10D7BD2200D6052D</string>
-=======
-				<string>36A6C8B010FB71FF00E681E9</string>
-				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>36A6C8B110FB71FF00E681E9</string>
->>>>>>> fixing nil stuff
+				<string>364A19AA10FB819000F8B22A</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -707,11 +662,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-<<<<<<< HEAD
-	<real>282579717.526245</real>
-=======
-	<real>284917383.54203999</real>
->>>>>>> fixing nil stuff
+	<real>284918160.59009099</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>2</integer>
 	<key>ToolbarIsVisible</key>
@@ -726,24 +677,12 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-<<<<<<< HEAD
-		<string>36DBE70910D7D30500D6052D</string>
-		<string>36DBE70A10D7D30500D6052D</string>
 		<string>36F1080D1072393800EC9BF7</string>
-		<string>/Users/cami/Ausbildung/master/programming/pinocchio/meta/xcode_project/pinocchio.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
-	</array>
-	<key>WindowString</key>
-	<string>267 287 1440 843 0 0 1920 1178 </string>
-=======
-		<string>1C530D57069F1CE1000CFCEE</string>
-		<string>36F1080D1072393800EC9BF7</string>
 		<string>/Volumes/data/education/master/p2/meta/xcode_project/pinocchio.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>480 294 1414 884 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
+	<string>267 287 1440 843 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -759,16 +698,14 @@
 					<key>Dock</key>
 					<array>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-<<<<<<< HEAD
-								<string></string>
-=======
-								<string>Dictionary.c</string>
->>>>>>> fixing nil stuff
+								<string>Class.c</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -777,11 +714,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1440, 539}}</string>
 								<key>RubberWindowFrame</key>
-<<<<<<< HEAD
 								<string>480 341 1440 824 0 0 1920 1178 </string>
-=======
-								<string>480 105 1440 824 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -789,8 +722,6 @@
 							<string>539pt</string>
 						</dict>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -807,11 +738,7 @@
 								<key>Frame</key>
 								<string>{{0, 544}, {1440, 239}}</string>
 								<key>RubberWindowFrame</key>
-<<<<<<< HEAD
 								<string>480 341 1440 824 0 0 1920 1178 </string>
-=======
-								<string>480 105 1440 824 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -834,26 +761,18 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>36F1080D1072393800EC9BF7</string>
-<<<<<<< HEAD
-				<string>36DBE6E010D7BD2200D6052D</string>
-=======
-				<string>36A6C8B210FB71FF00E681E9</string>
->>>>>>> fixing nil stuff
+				<string>364A198F10FB80AB00F8B22A</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.buildV3</string>
 			<key>WindowString</key>
-<<<<<<< HEAD
 			<string>480 341 1440 824 0 0 1920 1178 </string>
-=======
-			<string>480 105 1440 824 0 0 1920 1178 </string>
->>>>>>> fixing nil stuff
 			<key>WindowToolGUID</key>
 			<string>36F1080D1072393800EC9BF7</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -884,8 +803,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {474, 421}}</string>
-											<string>{{474, 0}, {486, 421}}</string>
+											<string>{{0, 0}, {474, 424}}</string>
+											<string>{{474, 0}, {486, 424}}</string>
 										</array>
 									</dict>
 									<key>VerticalSplitView</key>
@@ -900,8 +819,8 @@
 										<string>yes</string>
 										<key>sizes</key>
 										<array>
-											<string>{{0, 0}, {960, 421}}</string>
-											<string>{{0, 421}, {960, 384}}</string>
+											<string>{{0, 0}, {960, 424}}</string>
+											<string>{{0, 424}, {960, 381}}</string>
 										</array>
 									</dict>
 								</dict>
@@ -934,7 +853,7 @@
 										<real>164</real>
 									</array>
 									<key>Frame</key>
-									<string>{{474, 0}, {486, 421}}</string>
+									<string>{{474, 0}, {486, 424}}</string>
 									<key>RubberWindowFrame</key>
 									<string>0 332 960 846 0 0 1920 1178 </string>
 								</dict>
@@ -962,13 +881,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>36DBE6E810D7CB6C00D6052D</string>
+				<string>364A199010FB80AB00F8B22A</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>36DBE6E910D7CB6C00D6052D</string>
-				<string>36DBE6EA10D7CB6C00D6052D</string>
-				<string>36DBE6EB10D7CB6C00D6052D</string>
-				<string>36DBE6EC10D7CB6C00D6052D</string>
-				<string>36DBE6ED10D7CB6C00D6052D</string>
+				<string>364A199110FB80AB00F8B22A</string>
+				<string>364A199210FB80AB00F8B22A</string>
+				<string>364A199310FB80AB00F8B22A</string>
+				<string>364A199410FB80AB00F8B22A</string>
+				<string>364A199510FB80AB00F8B22A</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -977,7 +896,7 @@
 			<key>WindowToolGUID</key>
 			<string>1CD10A99069EF8BA00B06720</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
@@ -995,38 +914,34 @@
 							<key>Dock</key>
 							<array>
 								<dict>
-									<key>BecomeActive</key>
-									<true/>
 									<key>ContentConfiguration</key>
 									<dict>
 										<key>PBXProjectModuleGUID</key>
 										<string>1CDD528C0622207200134675</string>
 										<key>PBXProjectModuleLabel</key>
-<<<<<<< HEAD
 										<string>Class.h</string>
-=======
-										<string>test.ci</string>
->>>>>>> fixing nil stuff
 										<key>StatusBarVisibility</key>
 										<true/>
 									</dict>
 									<key>GeometryConfiguration</key>
 									<dict>
 										<key>Frame</key>
-										<string>{{0, 0}, {881, 368}}</string>
+										<string>{{0, 0}, {653, 388}}</string>
 										<key>RubberWindowFrame</key>
-										<string>622 324 881 854 0 0 1920 1178 </string>
+										<string>1267 304 653 874 0 0 1920 1178 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXNavigatorGroup</string>
 									<key>Proportion</key>
-									<string>881pt</string>
+									<string>653pt</string>
 								</dict>
 							</array>
 							<key>Proportion</key>
-							<string>368pt</string>
+							<string>388pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -1037,9 +952,9 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 373}, {881, 440}}</string>
+								<string>{{0, 393}, {653, 440}}</string>
 								<key>RubberWindowFrame</key>
-								<string>622 324 881 854 0 0 1920 1178 </string>
+								<string>1267 304 653 874 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXProjectFindModule</string>
@@ -1048,7 +963,7 @@
 						</dict>
 					</array>
 					<key>Proportion</key>
-					<string>813pt</string>
+					<string>833pt</string>
 				</dict>
 			</array>
 			<key>Name</key>
@@ -1062,18 +977,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C530D57069F1CE1000CFCEE</string>
-<<<<<<< HEAD
 				<string>36DBE6C910D7B89400D6052D</string>
 				<string>36DBE6CA10D7B89400D6052D</string>
-=======
-				<string>36A6C8BB10FB794600E681E9</string>
-				<string>36A6C8BC10FB794600E681E9</string>
->>>>>>> fixing nil stuff
 				<string>1CDD528C0622207200134675</string>
 				<string>1CD0528E0623707200166675</string>
 			</array>
 			<key>WindowString</key>
-			<string>622 324 881 854 0 0 1920 1178 </string>
+			<string>1267 304 653 874 0 0 1920 1178 </string>
 			<key>WindowToolGUID</key>
 			<string>1C530D57069F1CE1000CFCEE</string>
 			<key>WindowToolIsVisible</key>
