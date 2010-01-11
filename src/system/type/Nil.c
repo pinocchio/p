@@ -7,7 +7,11 @@
 
 Type_Class Type_Nil_Class;
 Object Nil;
+<<<<<<< HEAD
 AST_Constant Nil_Const;
+=======
+Object Nil_Const;
+>>>>>>> fixing nil stuff
 
 /* ========================================================================= */
 
@@ -38,8 +42,12 @@ void post_init_Type_Nil()
                                      L"Type_Nil",
                                      create_type(0, OBJECT));
     HEADER(Nil) = (Object)Type_Nil_Class;
+<<<<<<< HEAD
 
     Nil_Const = new_AST_Constant(Nil);
+=======
+    Nil_Const   = (Object)new_AST_Constant(Nil);
+>>>>>>> fixing nil stuff
     
     store_native_method(Type_Nil_Class, SMB_asString, NM_Type_Nil_asString);
     store_native_method(Type_Nil_Class, SMB_isNil,    NM_Type_Nil_isNil);

@@ -27,6 +27,7 @@ Type_Class new_Bootstrapping_Class(Object superclass)
     return cls;
 }
 
+<<<<<<< HEAD
 Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
 {    
     Type_Class metaclass    = (Type_Class)instantiate(Metaclass);
@@ -38,6 +39,32 @@ Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
     result->methods         = new_Type_Dictionary();
     result->super           = superclass;
     result->type            = type;
+=======
+Type_Class new_Class(Object superclass, Object type)
+{
+    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
+    metaclass->type      = ((Type_Class)HEADER(superclass))->type;
+    metaclass->super     = HEADER(superclass);
+    metaclass->methods   = new_Type_Dictionary();
+    Type_Class result    = (Type_Class)instantiate(metaclass);
+    result->methods      = new_Type_Dictionary();
+    result->super        = superclass;
+    result->type         = type;
+    return result;
+}
+
+
+Type_Class new_Class_withMeta(Object superclass, Object metatype, Object type)
+{
+    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
+    metaclass->type      = metatype;
+    metaclass->super     = HEADER(superclass);
+    metaclass->methods   = new_Type_Dictionary();
+    Type_Class result    = (Type_Class)instantiate(metaclass);
+    result->methods      = new_Type_Dictionary();
+    result->super        = superclass;
+    result->type         = type;
+>>>>>>> fixing nil stuff
     return result;
 }
 
@@ -107,7 +134,7 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
             ((Type_Symbol)msg)->value,
             argc));
     }
-    printf("DNU!\n");
+    printf("DNU: \"%ls\" \n", ((Type_Symbol)msg)->value);
     zapn_EXP(argc + 2);
     Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
 }
@@ -135,13 +162,19 @@ static void CNT_Class_lookup_cache_invoke()
     if (method == NULL) {
         return Class_next_lookup(class);
     }
+<<<<<<< HEAD
     uns_int argc    = (uns_int)peek_EXP(3);
     AST_Send send   = (AST_Send)peek_EXP(argc + 7);
     Object dispatch_type = peek_EXP(5);
+=======
+    uns_int argc              = (uns_int)peek_EXP(3);
+    AST_Send send             = (AST_Send)peek_EXP(argc + 7);
+    Object dispatch_type      = peek_EXP(5);
+>>>>>>> fixing nil stuff
     Runtime_InlineCache cache = send->cache;
-    cache->class    = dispatch_type;
-    cache->method   = method;
-
+    cache->class              = dispatch_type;
+    cache->method             = method;
+    
     Class_invoke_do(class, method, argc);
 }
 
@@ -160,8 +193,8 @@ static void Class_lookup(Type_Class class, Object msg)
 {
     // TODO pass along the hash value
     if (class == (Type_Class)Nil) {
-        Object self = peek_EXP(1);
-        class = (Type_Class)peek_EXP(4);
+        Object self  = peek_EXP(1);
+        class        = (Type_Class)peek_EXP(4);
         uns_int argc = (uns_int)peek_EXP(2);
         zapn_EXP(5);
         return does_not_understand(self, (Object)class, msg, argc);
