@@ -41,8 +41,8 @@ extern Object file_layout;
     (((Type_Array)tag)->values[index])
 
 #define ASSERT_TAG_SIZE(tag, size)\
-    assert0(0 <= size);\
-    assert0(TAG_SIZE(tag) > size);
+    assert(0 <= size, printf("Invalid tag size: %i\n", (int)size));\
+    assert(TAG_SIZE(tag) > size, printf("Invalid tag size was %i but expected < %i\n", (int)size, (int)TAG_SIZE(tag)));
 
 #define GETTAG(o)\
     ((Type_Class)HEADER(o))->type

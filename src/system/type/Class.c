@@ -29,15 +29,15 @@ Type_Class new_Bootstrapping_Class(Object superclass)
 
 Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
 {    
-    Type_Class metaclass    = (Type_Class)instantiate(Metaclass);
-    metaclass->type         = metaType;
-    metaclass->super        = HEADER(superclass);
-    metaclass->methods      = new_Type_Dictionary();
+    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
+    metaclass->type      = metaType;
+    metaclass->super     = HEADER(superclass);
+    metaclass->methods   = new_Type_Dictionary();
     
-    Type_Class result       = (Type_Class)instantiate(metaclass);
-    result->methods         = new_Type_Dictionary();
-    result->super           = superclass;
-    result->type            = type;
+    Type_Class result    = (Type_Class)instantiate(metaclass);
+    result->methods      = new_Type_Dictionary();
+    result->super        = superclass;
+    result->type         = type;
     return result;
 }
 
@@ -260,15 +260,17 @@ void post_init_Type_Class()
     ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
     ((Type_Class)HEADER(Metaclass))->type =
         create_type(CLASS_SIZE, OBJECT, CLASS_VARS);
+        
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
-    Behaviour = new_Class_named((Object)Type_Object_Class,
+    Behaviour           = new_Class_named((Object)Type_Object_Class,
                                 L"Behaviour",
                                 create_type(BEHAVIOUR_SIZE, OBJECT, BEHAVIOUR_VARS));
-    Class = new_Class_named((Object)Behaviour,
+    Class               = new_Class_named((Object)Behaviour,
                             L"Class",
                             create_type(CLASS_SIZE, OBJECT, CLASS_VARS));
-    Metaclass->super = (Object)Behaviour;
+    Metaclass->super    = (Object)Behaviour;
+    
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
     ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);
 
