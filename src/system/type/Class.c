@@ -9,8 +9,8 @@ Type_Class Metaclass;
 DECLARE_REFERENCE(Metaclass);
 Type_Class Class;
 DECLARE_REFERENCE(Class);
-Type_Class Behaviour;
-DECLARE_REFERENCE(Behaviour);
+Type_Class Behavior;
+DECLARE_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
@@ -263,20 +263,20 @@ void post_init_Type_Class()
         
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
-    Behaviour           = new_Class_named((Object)Type_Object_Class,
-                                L"Behaviour",
-                                create_type(BEHAVIOUR_SIZE, OBJECT, BEHAVIOUR_VARS));
-    Class               = new_Class_named((Object)Behaviour,
+    Behavior           = new_Class_named((Object)Type_Object_Class,
+                                L"Behavior",
+                                create_type(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
+    Class               = new_Class_named((Object)Behavior,
                             L"Class",
                             create_type(CLASS_SIZE, OBJECT, CLASS_VARS));
-    Metaclass->super    = (Object)Behaviour;
+    Metaclass->super    = (Object)Behavior;
     
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
-    ((Type_Class)HEADER(Metaclass))->super = HEADER(Behaviour);
+    ((Type_Class)HEADER(Metaclass))->super = HEADER(Behavior);
 
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);
-    Behaviour_Reference = new_Organization_ClassReference(Behaviour);
+    Behavior_Reference = new_Organization_ClassReference(Behavior);
 
     store_method(Class, SMB_name, Class_name());
 }

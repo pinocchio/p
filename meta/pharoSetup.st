@@ -60,6 +60,11 @@ World submorphs do: [ :each |
 "Set decent Preferences"
 Preferences enable: #scrollBarsNarrow.
 Preferences enable: #menuColorFromWorld.
+Preferences enable: #roundedWindowCorners.
+Preferences enable: #colorWhenPrittyPrinting.
+Preferences disable: #gradientMenu.
+Preferences disable: #gradientButtonLook.
+Preferences disable: #gradientScrollbarLook.
 Preferences disable: #scrollBarsWithoutMenuButton.
 Preferences disable: #useNewDiffToolsForMC.
 Preferences disable: #duplicateAllControlAndAltKeys.

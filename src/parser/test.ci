@@ -688,7 +688,7 @@ send7324 = (Object)new_AST_Send((Object)send7323, (Object)symbol3261, 0);
 method2478 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, send7324);
 symbol3202 = (Object)new_Type_Symbol_cached(L"new");
 methodclosure2430 = (Object)new_Runtime_MethodClosure(method2478);
-store_method((Type_Class)Behaviour, (Type_Symbol)symbol3202, (Runtime_MethodClosure)methodclosure2430);
+store_method((Type_Class)Behavior, (Type_Symbol)symbol3202, (Runtime_MethodClosure)methodclosure2430);
 
 // Behavior>>new:
 localvariable1049 = (Object)new_AST_Variable_named(L"sizeRequested");
@@ -698,8 +698,8 @@ send7326 = (Object)new_AST_Send((Object)send7325, (Object)symbol3261, 0);
 method2479 = (Object)new_AST_Method_with((Type_Array)array1025, (Type_Array)empty_Type_Array, 1, send7326);
 symbol3203 = (Object)new_Type_Symbol_cached(L"new:");
 methodclosure2431 = (Object)new_Runtime_MethodClosure(method2479);
-store_method((Type_Class)Behaviour, (Type_Symbol)symbol3203, (Runtime_MethodClosure)methodclosure2431);
-classreference309 = (Object)new_Organization_ClassReference((Type_Class)Behaviour);
+store_method((Type_Class)Behavior, (Type_Symbol)symbol3203, (Runtime_MethodClosure)methodclosure2431);
+classreference309 = (Object)new_Organization_ClassReference((Type_Class)Behavior);
 classreference310 = (Object)new_Organization_ClassReference((Type_Class)Metaclass);
 objectlayout373 = (Object)create_type_with_vars(Type_ObjectLayout, 5);
 instancevariable1271 = (Object)new_AST_InstVariable(0, L"type");
@@ -720,7 +720,7 @@ instancevariable1277 = (Object)new_AST_InstVariable(1, L"instanceVariables");
 ((Type_Array)objectlayout374)->values[1] = instancevariable1277;
 instancevariable1278 = (Object)new_AST_InstVariable(2, L"organization");
 ((Type_Array)objectlayout374)->values[2] = instancevariable1278;
-class245 = (Object)new_Class_withMeta((Object)Behaviour, objectlayout374, objectlayout373);
+class245 = (Object)new_Class_withMeta((Object)Behavior, objectlayout374, objectlayout373);
 ((Type_Class)class245)->name = (Type_Symbol)symbol3198;
 classclass193 = (Object)HEADER(class245);
 classreference311 = (Object)new_Organization_ClassReference((Type_Class)class245);

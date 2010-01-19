@@ -6,16 +6,16 @@
 extern Type_Class Metaclass;
 EXPORT_REFERENCE(Metaclass);
 EXPORT_REFERENCE(Class);
-EXPORT_REFERENCE(Behaviour);
+EXPORT_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
-#define BEHAVIOUR_SIZE 3
-#define BEHAVIOUR_VARS L"type", L"super", L"methods"
+#define BEHAVIOR_SIZE 3
+#define BEHAVIOR_VARS L"type", L"super", L"methods"
 #define METACLASS_SIZE 3
-#define METACLASS_VARS BEHAVIOUR_VARS
+#define METACLASS_VARS BEHAVIOR_VARS
 #define CLASS_SIZE 5
-#define CLASS_VARS BEHAVIOUR_VARS, L"name", L"package"
+#define CLASS_VARS BEHAVIOR_VARS, L"name", L"package"
 
 /* ========================================================================= */
 
@@ -72,7 +72,7 @@ extern void assert_class(Object class);
 
 /* ========================================================================= */
 
-extern Type_Class Behaviour;
+extern Type_Class Behavior;
 extern Type_Class Class;
 
 /* ========================================================================= */
