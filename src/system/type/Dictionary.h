@@ -11,7 +11,7 @@
 struct Type_Dictionary_t {
     uns_int     size;
     float       ratio;
-    Type_Array  layout;
+    Type_Array  data;
 };
 
 CREATE_INITIALIZERS(Type_Dictionary)

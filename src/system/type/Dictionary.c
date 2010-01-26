@@ -13,7 +13,7 @@ Type_Dictionary new_Type_Dictionary()
     NEW_OBJECT(Type_Dictionary);
     result->size    = 0;
     result->ratio   = 0.6;
-    result->layout  = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
+    result->data  = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 
@@ -39,7 +39,7 @@ int get_hash(Type_Dictionary self, Object key)
         assert1(NULL, "Dictionary currently only supports"
                       " SmallInt and Symbol as key\n");
     }
-    hash %= self->layout->size;
+    hash %= self->data->size;
     return hash;
 }
 
@@ -49,7 +49,7 @@ int get_hash(Type_Dictionary self, Object key)
 
 static Type_Array * get_bucketp(Type_Dictionary dictionary, int hash)
 {
-    return (Type_Array *)&dictionary->layout->values[hash];
+    return (Type_Array *)&dictionary->data->values[hash];
 }
 
 static Type_Array new_bucket()
@@ -131,15 +131,15 @@ static int Type_Dictionary_grow_check(Type_Dictionary self)
 {
     self->size += 1;
     float amount = self->size;
-    float size = self->layout->size;
+    float size = self->data->size;
     return amount / size > self->ratio;
 }
 
 static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
 {
     if (Type_Dictionary_grow_check(self)) {
-        Type_Array old = self->layout;
-        self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+        Type_Array old = self->data;
+        self->data = new_Type_Array_withAll(old->size << 1, (Object)Nil);
         self->size = 0;
         int i;
         for (i = 0; i < old->size; i++) {
@@ -373,8 +373,8 @@ static void CNT_dict_grow()
 
 static void Type_Dictionary_grow(Type_Dictionary self)
 {
-    Type_Array old = self->layout;
-    self->layout = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+    Type_Array old = self->data;
+    self->data = new_Type_Array_withAll(old->size << 1, (Object)Nil);
     self->size = 0;
     
     push_CNT(dict_grow);
