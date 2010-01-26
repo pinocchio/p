@@ -2091,7 +2091,9 @@ tmVariableInstanceCreation
 	^ instance a + instance b + instance c
 */
 Object send4911 = (Object)new_AST_Send((Object)test_Class_Instance, (Object)symbol1222, 0);
+printf("p: %p\n", ((Type_Class)class907)->methods->data);
 Object result = (Object)Eval((Object)send4911);
+printf("p: %p\n", ((Type_Class)class907)->methods->data);
 ASSERT_EMPTY_STACK
 assert0(((Type_SmallInt)result)->value == 6);
 }
