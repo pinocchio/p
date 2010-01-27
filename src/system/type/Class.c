@@ -120,7 +120,6 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 static void Class_lookup(Type_Class class, Object msg);
 static void Class_next_lookup(Type_Class class)
 {
-    printf("    next lookup...\n");
     zap_EXP();
     poke_EXP(0, class->super);
     return Class_lookup((Type_Class)class->super, peek_EXP(3));
