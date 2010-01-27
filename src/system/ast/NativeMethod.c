@@ -31,7 +31,7 @@ void AST_Native_Method_invoke(AST_Native_Method method, Object self,
                               Object class, uns_int argc)
 {
     #ifdef DEBUG
-    LOG("Native Method invoke\n");
+    LOG("Native Method invoke on %ls\n", ((Type_Class)class)->name->value);
     #endif // DEBUG
     method->code(self, class, argc);
 }
