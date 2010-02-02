@@ -59,7 +59,6 @@
 
 /* Begin PBXFileReference section */
 		364E64B510C562DD00AD4616 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		364E65FA10C562DE00AD4616 /* test.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = test.ci; sourceTree = "<group>"; };
 		364E65FB10C562DE00AD4616 /* pinocchio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinocchio.c; sourceTree = "<group>"; };
 		364E65FC10C562DE00AD4616 /* pinocchio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinocchio.h; sourceTree = "<group>"; };
 		364E65FD10C562DE00AD4616 /* pinocchioHelper.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = pinocchioHelper.ci; sourceTree = "<group>"; };
@@ -205,6 +204,8 @@
 		364E671610C562EB00AD4616 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		364E671710C562EB00AD4616 /* logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = logo.svg; sourceTree = "<group>"; };
 		364E671810C562EB00AD4616 /* mac_install_boehm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mac_install_boehm; sourceTree = "<group>"; };
+		36C6B064111100BB00A09C5D /* bridge-test.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "bridge-test.ci"; sourceTree = "<group>"; };
+		36C6B065111100BB00A09C5D /* scparser-test.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "scparser-test.ci"; sourceTree = "<group>"; };
 		36DBE6FA10D7D2DA00D6052D /* bootstrap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = bootstrap.c; sourceTree = "<group>"; };
 		36DBE6FB10D7D2DA00D6052D /* bootstrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bootstrap.h; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* pinocchio */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pinocchio; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,7 +265,8 @@
 		364E64B610C562DD00AD4616 /* parser */ = {
 			isa = PBXGroup;
 			children = (
-				364E65FA10C562DE00AD4616 /* test.ci */,
+				36C6B064111100BB00A09C5D /* bridge-test.ci */,
+				36C6B065111100BB00A09C5D /* scparser-test.ci */,
 			);
 			path = parser;
 			sourceTree = "<group>";

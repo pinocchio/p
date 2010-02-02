@@ -125,5 +125,5 @@ test_Runtime_MethodClosure();
 test_AST_Method();
 test_AST_InstVariable();
 
-test_AutoGenTest();
+test_BridgeTest();
 }
