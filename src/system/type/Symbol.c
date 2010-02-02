@@ -6,7 +6,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Symbol_Class;
+DECLARE_CLASS(Type_Symbol);
 Type_Dictionary Symbol_Table;
 
 #include <system/type/SymbolDefinition.ci>
@@ -49,6 +49,7 @@ void initialize_Symbol()
 void pre_init_Type_Symbol()
 {
     Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_type(0, WORDS));
+    REFER_TO(Type_Symbol);
     initialize_Symbol();
 }
 /* ========================================================================= */

@@ -8,7 +8,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_String_Class;
+DECLARE_CLASS(Type_String);
 Type_String empty_Type_String;
 
 /* ========================================================================= */
@@ -30,6 +30,7 @@ void pre_init_Type_String()
 {
     Type_String_Class    = new_Class((Object)Type_Object_Class,
                                      create_type(0, WORDS));
+    REFER_TO(Type_String);
     empty_Type_String         = new_Type_String(L"");
 }
 

@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Boolean_Class;
+DECLARE_CLASS(Type_Boolean);
 DECLARE_CLASS(True);
 DECLARE_CLASS(False);
 
@@ -42,6 +42,7 @@ void pre_init_Type_Boolean()
     Type_Boolean_Class = new_Class_named((Object)Type_Object_Class,
                                          L"Type_Boolean",
                                          CREATE_OBJECT_TAG(BOOL));
+    REFER_TO(Type_Boolean);
     pre_init_Type_True();
     pre_init_Type_False();
 }

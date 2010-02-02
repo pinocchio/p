@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Character_Class;
+DECLARE_CLASS(Type_Character);
 
 /* ========================================================================= */
 
@@ -41,6 +41,7 @@ void pre_init_Type_Character()
     Type_Character_Class = new_Class_named((Object)Type_Object_Class,
                                            L"Type_Character",
                                            create_type(0, CHAR));
+    REFER_TO(Type_Character);
 }
 
 /* ========================================================================= */

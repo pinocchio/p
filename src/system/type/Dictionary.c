@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Dictionary_Class;
+DECLARE_CLASS(Type_Dictionary);
 
 /* ========================================================================= */
 
@@ -21,6 +21,7 @@ void pre_init_Type_Dictionary()
 {
     Type_Dictionary_Class = new_Class((Object)Type_Object_Class,
                                       CREATE_OBJECT_TAG(TYPE_DICTIONARY));
+    REFER_TO(Type_Dictionary);
 }
 
 /* ========================================================================= */

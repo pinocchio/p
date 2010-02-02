@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_CharacterTable_Class;
+DECLARE_CLASS(Type_CharacterTable);
 
 /* ========================================================================= */
 
@@ -18,6 +18,7 @@ void pre_init_Type_CharacterTable()
     Type_CharacterTable_Class = new_Class_named((Object)Type_Object_Class,
                                                 L"Type_CharacterTable",
                                                 create_type(0, ARRAY));
+    REFER_TO(Type_CharacterTable);
 }
 
 /* ========================================================================= */

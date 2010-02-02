@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_Array_Class;
+DECLARE_CLASS(Type_Array);
 Type_Array empty_Type_Array;
 
 /* ========================================================================= */
@@ -60,7 +60,7 @@ void pre_init_Type_Array()
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
     Type_Array_Class = new_Class((Object)Type_Object_Class, create_type(0, ARRAY));
-    
+    REFER_TO(Type_Array);
     empty_Type_Array         = NEW_t(Type_Array);
     HEADER(empty_Type_Array) = (Object)Type_Array_Class;
 }

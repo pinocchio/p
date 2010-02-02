@@ -3,6 +3,7 @@
 
 #include <pinocchio.h>
 
+//TODO make use of EXPORT_CLASS
 extern Type_Class Type_ObjectLayout;
 extern Type_Class Type_ArrayLayout;
 extern Type_Class Type_CharacterLayout;

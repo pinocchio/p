@@ -281,7 +281,7 @@ void post_init_Type_Class()
 
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);
-    Behavior_Reference = new_Organization_ClassReference(Behavior);
+    Behavior_Reference  = new_Organization_ClassReference(Behavior);
 
     store_method(Class, SMB_name, Class_name());
 }

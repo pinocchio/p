@@ -6,7 +6,7 @@
 
 /* ========================================================================= */
 
-Type_Class Type_SmallInt_Class;
+DECLARE_CLASS(Type_SmallInt);
 
 Type_SmallInt* Type_SmallInt_cache;
 
@@ -30,6 +30,7 @@ Type_SmallInt new_Type_SmallInt(int value)
 void pre_init_Type_SmallInt() 
 {
     Type_SmallInt_Class = new_Bootstrapping_Class((Object)Type_Object_Class);
+    REFER_TO(Type_SmallInt);    
     
     Type_SmallInt_cache  = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Type_SmallInt_cache -= INT_CACHE_LOWER;

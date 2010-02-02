@@ -5,6 +5,7 @@
 
 /* ========================================================================= */
 
+DECLARE_CLASS(Type_Nil);
 Type_Class Type_Nil_Class;
 Object Nil;
 AST_Constant Nil_Const;
@@ -14,6 +15,7 @@ AST_Constant Nil_Const;
 void pre_init_Type_Nil() 
 {
     Nil = (Object) NEW_t(Type_Nil);
+    REFER_TO(Type_Nil);
 }
 
 /* ========================================================================= */
