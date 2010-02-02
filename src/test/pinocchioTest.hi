@@ -27,3 +27,4 @@
 #include <system/ast/InstVariableTest.ci>
 
 #include <parser/bridge-test.ci>
+#include <parser/scparser-test.ci>
