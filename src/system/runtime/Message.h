@@ -11,8 +11,8 @@
 /* ========================================================================= */
 
 struct Runtime_Message_t {
-    Object      selector;
     uns_int     size;
+    Object      selector;
     Object      arguments[];
 };
 
