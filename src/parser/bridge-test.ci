@@ -714,10 +714,10 @@ store_method((Type_Class)Class, (Type_Symbol)SMB_name, (Runtime_MethodClosure)me
 
 classreference10436 = (Object)new_Organization_ClassReference((Type_Class)Class);
 
-// Behavior>>type
-instancevariable12184 = (Object)new_AST_InstVariable(0, L"type");
+// Behavior>>layout
+instancevariable12184 = (Object)new_AST_InstVariable(0, L"layout");
 method25581 = (Object)new_AST_Method_with((Type_Array)empty_Type_Array, (Type_Array)empty_Type_Array, 1, instancevariable12184);
-symbol21699 = (Object)new_Type_Symbol_cached(L"type");
+symbol21699 = (Object)new_Type_Symbol_cached(L"layout");
 methodclosure25502 = (Object)new_Runtime_MethodClosure(method25581);
 store_method((Type_Class)Behavior, (Type_Symbol)symbol21699, (Runtime_MethodClosure)methodclosure25502);
 
@@ -776,8 +776,8 @@ methodclosure25508 = (Object)new_Runtime_MethodClosure(method25587);
 store_method((Type_Class)Type_Object_Class, (Type_Symbol)symbol21695, (Runtime_MethodClosure)methodclosure25508);
 
 classreference10438 = (Object)new_Organization_ClassReference((Type_Class)Type_Object_Class);
-objectlayout5998 = (Object)create_type_with_vars(Type_ObjectLayout, 5);
-instancevariable12186 = (Object)new_AST_InstVariable(0, L"type");
+objectlayout5998 = (Object)create_layout_with_vars(Type_ObjectLayout, 5);
+instancevariable12186 = (Object)new_AST_InstVariable(0, L"layout");
 ((Type_Array)objectlayout5998)->values[0] = instancevariable12186;
 instancevariable12187 = (Object)new_AST_InstVariable(1, L"superclass");
 ((Type_Array)objectlayout5998)->values[1] = instancevariable12187;
@@ -873,7 +873,7 @@ store_method((Type_Class)class4394, (Type_Symbol)symbol21718, (Runtime_MethodClo
 
 
 // BridgeTest>>tmClassSideSuperSend
-objectlayout5999 = (Object)create_type_with_vars(Type_ObjectLayout, 7);
+objectlayout5999 = (Object)create_layout_with_vars(Type_ObjectLayout, 7);
 ((Type_Array)objectlayout5999)->values[0] = instancevariable12186;
 ((Type_Array)objectlayout5999)->values[1] = instancevariable12187;
 ((Type_Array)objectlayout5999)->values[2] = instancevariable12188;
@@ -884,7 +884,7 @@ instancevariable12191 = (Object)new_AST_InstVariable(5, L"a");
 instancevariable12192 = (Object)new_AST_InstVariable(6, L"b");
 ((Type_Array)objectlayout5999)->values[6] = instancevariable12192;
 symbol21751 = (Object)new_Type_Symbol_cached(L"SuperClassTestClass");
-objectlayout6000 = (Object)create_type_with_vars(Type_ObjectLayout, 1);
+objectlayout6000 = (Object)create_layout_with_vars(Type_ObjectLayout, 1);
 instancevariable12193 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)objectlayout6000)->values[0] = instancevariable12193;
 class4395 = (Object)new_Class_withMeta((Object)Type_Object_Class, objectlayout6000, objectlayout5999);
@@ -948,7 +948,7 @@ method25601 = (Object)new_AST_Method_with((Type_Array)array13281, (Type_Array)em
 methodclosure25522 = (Object)new_Runtime_MethodClosure(method25601);
 store_method((Type_Class)class4395, (Type_Symbol)symbol21753, (Runtime_MethodClosure)methodclosure25522);
 
-objectlayout6001 = (Object)create_type_with_vars(Type_ObjectLayout, 8);
+objectlayout6001 = (Object)create_layout_with_vars(Type_ObjectLayout, 8);
 ((Type_Array)objectlayout6001)->values[0] = instancevariable12186;
 ((Type_Array)objectlayout6001)->values[1] = instancevariable12187;
 ((Type_Array)objectlayout6001)->values[2] = instancevariable12188;
@@ -959,7 +959,7 @@ objectlayout6001 = (Object)create_type_with_vars(Type_ObjectLayout, 8);
 instancevariable12194 = (Object)new_AST_InstVariable(7, L"c");
 ((Type_Array)objectlayout6001)->values[7] = instancevariable12194;
 symbol21707 = (Object)new_Type_Symbol_cached(L"ChildClassTestClass");
-objectlayout6002 = (Object)create_type_with_vars(Type_ObjectLayout, 2);
+objectlayout6002 = (Object)create_layout_with_vars(Type_ObjectLayout, 2);
 ((Type_Array)objectlayout6002)->values[0] = instancevariable12193;
 instancevariable12195 = (Object)new_AST_InstVariable(1, L"b");
 ((Type_Array)objectlayout6002)->values[1] = instancevariable12195;
@@ -1118,14 +1118,14 @@ store_method((Type_Class)class4394, (Type_Symbol)symbol21728, (Runtime_MethodClo
 // BridgeTest>>tmVariableInstanceCreation
 localvariable14527 = (Object)new_AST_Variable_named(L"instance");
 array13286 = (Object)new_Type_Array_with(1, (Object)localvariable14527);
-objectlayout6003 = (Object)create_type_with_vars(Type_ObjectLayout, 5);
+objectlayout6003 = (Object)create_layout_with_vars(Type_ObjectLayout, 5);
 ((Type_Array)objectlayout6003)->values[0] = instancevariable12186;
 ((Type_Array)objectlayout6003)->values[1] = instancevariable12187;
 ((Type_Array)objectlayout6003)->values[2] = instancevariable12188;
 ((Type_Array)objectlayout6003)->values[3] = instancevariable12189;
 ((Type_Array)objectlayout6003)->values[4] = instancevariable12190;
 symbol21712 = (Object)new_Type_Symbol_cached(L"StandardVariableTestClass");
-arraylayout62 = (Object)create_type_with_vars(Type_ArrayLayout, 3);
+arraylayout62 = (Object)create_layout_with_vars(Type_ArrayLayout, 3);
 instancevariable12196 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)arraylayout62)->values[0] = instancevariable12196;
 instancevariable12197 = (Object)new_AST_InstVariable(1, L"b");
@@ -1399,7 +1399,7 @@ store_method((Type_Class)class4394, (Type_Symbol)symbol21735, (Runtime_MethodClo
 // BridgeTest>>tmSimpleInstanceCreation
 localvariable14535 = (Object)new_AST_Variable_named(L"instance");
 array13294 = (Object)new_Type_Array_with(1, (Object)localvariable14535);
-objectlayout6004 = (Object)create_type_with_vars(Type_ObjectLayout, 7);
+objectlayout6004 = (Object)create_layout_with_vars(Type_ObjectLayout, 7);
 ((Type_Array)objectlayout6004)->values[0] = instancevariable12186;
 ((Type_Array)objectlayout6004)->values[1] = instancevariable12187;
 ((Type_Array)objectlayout6004)->values[2] = instancevariable12188;
@@ -1410,7 +1410,7 @@ instancevariable12199 = (Object)new_AST_InstVariable(5, L"classInstVar");
 instancevariable12200 = (Object)new_AST_InstVariable(6, L"instVar");
 ((Type_Array)objectlayout6004)->values[6] = instancevariable12200;
 symbol21709 = (Object)new_Type_Symbol_cached(L"StandardTestClass");
-objectlayout6005 = (Object)create_type_with_vars(Type_ObjectLayout, 3);
+objectlayout6005 = (Object)create_layout_with_vars(Type_ObjectLayout, 3);
 instancevariable12201 = (Object)new_AST_InstVariable(0, L"a");
 ((Type_Array)objectlayout6005)->values[0] = instancevariable12201;
 instancevariable12202 = (Object)new_AST_InstVariable(1, L"b");

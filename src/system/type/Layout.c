@@ -26,10 +26,10 @@ Object file_layout;
 
 /* ========================================================================= */
 
-Type_Array create_type_with_vars(Type_Class type, uns_int size)
+Type_Array create_layout_with_vars(Type_Class layout, uns_int size)
 {
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
-    HEADER(result) = (Object)type;
+    HEADER(result) = (Object)layout;
     result->size   = size;
     return result;
 }
@@ -46,8 +46,8 @@ void pre_init_Type_Layout()
     Type_BytesLayout        = new_Bootstrapping_Class((Object)Type_Layout); 
     Type_FileLayout         = new_Bootstrapping_Class((Object)Type_Layout); 
 
-    empty_array_layout      = (Object)create_type_with_vars(Type_ArrayLayout, 0);
-    empty_object_layout     = (Object)create_type_with_vars(Type_ObjectLayout, 0);
+    empty_array_layout      = (Object)create_layout_with_vars(Type_ArrayLayout, 0);
+    empty_object_layout     = (Object)create_layout_with_vars(Type_ObjectLayout, 0);
     words_layout            = basic_instantiate_Object(Type_WordsLayout, 0);
     bytes_layout            = basic_instantiate_Object(Type_BytesLayout, 0);
     int_layout              = basic_instantiate_Object(Type_IntLayout, 0);
@@ -55,21 +55,21 @@ void pre_init_Type_Layout()
     character_layout        = basic_instantiate_Object(Type_CharacterLayout, 0);
     file_layout             = basic_instantiate_Object(Type_FileLayout, 0);
 
-    Type_Layout->type           = empty_object_layout;
-    Type_ObjectLayout->type     = empty_array_layout;
-    Type_ArrayLayout->type      = empty_array_layout;
-    Type_CharacterLayout->type  = empty_object_layout;
-    Type_WordsLayout->type      = empty_object_layout;
-    Type_IntLayout->type        = empty_object_layout;
-    Type_LongLayout->type       = empty_object_layout;
-    Type_BytesLayout->type      = empty_object_layout;
-    Type_FileLayout->type       = empty_object_layout;
+    Type_Layout->layout           = empty_object_layout;
+    Type_ObjectLayout->layout     = empty_array_layout;
+    Type_ArrayLayout->layout      = empty_array_layout;
+    Type_CharacterLayout->layout  = empty_object_layout;
+    Type_WordsLayout->layout      = empty_object_layout;
+    Type_IntLayout->layout        = empty_object_layout;
+    Type_LongLayout->layout       = empty_object_layout;
+    Type_BytesLayout->layout      = empty_object_layout;
+    Type_FileLayout->layout       = empty_object_layout;
 }
 
-Object create_object_type(uns_int size, va_list args)
+Object create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
-    Type_Array result = create_type_with_vars(Type_ObjectLayout, size);
+    Type_Array result = create_layout_with_vars(Type_ObjectLayout, size);
     while (0 < size) {
         size--;
         result->values[size] =
@@ -80,10 +80,10 @@ Object create_object_type(uns_int size, va_list args)
     return (Object)result;
 }
 
-Object create_array_type(uns_int size, va_list args)
+Object create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
-    Type_Array result = create_type_with_vars(Type_ArrayLayout, size);
+    Type_Array result = create_layout_with_vars(Type_ArrayLayout, size);
     while (0 < size) {
         size--;
         result->values[size] = (Object)new_AST_InstVariable(size,
@@ -93,19 +93,19 @@ Object create_array_type(uns_int size, va_list args)
     return (Object)result;
 }
 
-Object create_type(uns_int size, Type_Tag tag, ...)
+Object create_layout(uns_int size, Type_Tag tag, ...)
 {
     va_list args;
     va_start(args, tag);
-    if (tag == OBJECT)  { return create_object_type(size, args); }
-    if (tag == ARRAY)   { return create_array_type(size, args); }
+    if (tag == OBJECT)  { return create_object_layout(size, args); }
+    if (tag == ARRAY)   { return create_array_layout(size, args); }
     if (tag == WORDS)   { return words_layout; }
     if (tag == BYTES)   { return bytes_layout; }
     if (tag == INT)     { return int_layout; }
     if (tag == LONG)    { return long_layout; }
     if (tag == CHAR)    { return character_layout; }
     if (tag == FILETAG) { return file_layout; }
-    assert1(NULL, "Unknown type, should never happen!");
+    assert1(NULL, "Unknown layout, should never happen!");
     return NULL;
 }
 

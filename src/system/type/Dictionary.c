@@ -30,9 +30,9 @@ int get_hash(Type_Dictionary self, Object key)
 {
     int hash;
     Object tag = GETTAG(key);
-    if (TAG_IS_TYPE(tag, Words)) {
+    if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Type_Symbol_hash((Type_Symbol)key)->value;
-    } else if (TAG_IS_TYPE(tag, Int)) { 
+    } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((Type_SmallInt)key)->value;
     } else {
         printf("Got key: %p\n", key);
@@ -89,7 +89,7 @@ static int Bucket_quick_compare_key(Object inkey, Object dictkey)
     }
 
     if (HEADER(inkey) == (Object)Type_String_Class) {
-        if (TAG_IS_TYPE(GETTAG(dictkey), Words)) {
+        if (TAG_IS_LAYOUT(GETTAG(dictkey), Words)) {
             return Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey);
         } else {
             return 0;

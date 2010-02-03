@@ -57,7 +57,7 @@ void pre_init_IO_File()
     // TODO check if this makes sense.
     IO_File_Class = new_Class_named((Object)Type_Object_Class,
                                     L"IO_File",
-                                    create_type(0, FILETAG));
+                                    create_layout(0, FILETAG));
 }
 
 /* ========================================================================= */

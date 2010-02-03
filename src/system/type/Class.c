@@ -27,34 +27,34 @@ Type_Class new_Bootstrapping_Class(Object superclass)
     return cls;
 }
 
-Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType)
+Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType)
 {    
     Type_Class metaclass = (Type_Class)instantiate(Metaclass);
 
     assert0(HEADER(metaType) == (Object)Type_ObjectLayout);
     assert0(((Type_Array)metaType)->size >= 3); // we need at least place for
-                                               // methods, super and type.  
+                                               // methods, super and layout.  
 
-    metaclass->type      = metaType;
+    metaclass->layout      = metaType;
     metaclass->super     = HEADER(superclass);
     metaclass->methods   = new_Type_Dictionary();
     
     Type_Class result    = (Type_Class)instantiate(metaclass);
     result->methods      = new_Type_Dictionary();
     result->super        = superclass;
-    result->type         = type;
+    result->layout       = layout;
     return result;
 }
 
-Type_Class new_Class(Object superclass, Object type)
+Type_Class new_Class(Object superclass, Object layout)
 {
-    return new_Class_withMeta(superclass, type, ((Type_Class)HEADER(superclass))->type);
+    return new_Class_withMeta(superclass, layout, ((Type_Class)HEADER(superclass))->layout);
 }
 
 
-Type_Class new_Class_named(Object superclass, const wchar_t* name, Object type)
+Type_Class new_Class_named(Object superclass, const wchar_t* name, Object layout)
 {
-    Type_Class result = (Type_Class) new_Class(superclass, type);
+    Type_Class result = (Type_Class) new_Class(superclass, layout);
     result->name      = new_Type_Symbol_cached(name); 
     return result;
 }
@@ -68,7 +68,7 @@ void pre_init_Type_Class()
 
 void inter_init_Type_Class()
 {
-    Metaclass->type = create_type(METACLASS_SIZE, OBJECT, METACLASS_VARS);
+    Metaclass->layout = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
 }
 /* ========================================================================= */
 
@@ -241,7 +241,7 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
 }
 
 METHOD(Class_name,0,0,1)
-    ADD_STATEMENT(TAG_VAR(Class->type, 3))
+    ADD_STATEMENT(TAG_VAR(Class->layout, 3))
     return method;
 }
 
@@ -270,17 +270,17 @@ void print_Class(Object obj)
 void post_init_Type_Class()
 {
     ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Metaclass))->type =
-        create_type(CLASS_SIZE, OBJECT, CLASS_VARS);
+    ((Type_Class)HEADER(Metaclass))->layout =
+        create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
         
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
     Behavior           = new_Class_named((Object)Type_Object_Class,
                                 L"Behavior",
-                                create_type(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
+                                create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
     Class               = new_Class_named((Object)Behavior,
                             L"Class",
-                            create_type(CLASS_SIZE, OBJECT, CLASS_VARS));
+                            create_layout(CLASS_SIZE, OBJECT, CLASS_VARS));
     Metaclass->super    = (Object)Behavior;
     
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;

@@ -20,11 +20,11 @@ void pre_init_Type_Object()
 
     /*
     Type_Class_Class          = NEW_t(Type_Class);
-    Type_Class_Class->type    = create_type(4, OBJECT);
+    Type_Class_Class->layout    = create_layout(4, OBJECT);
     
     HEADER(Type_Class_Class)  = (Object)Type_Class_Class;
     Type_Class_Class->super   = (Object)Type_Object_Class;
-    Type_Object_Class->type   = create_type(0, OBJECT);
+    Type_Object_Class->layout = create_layout(0, OBJECT);
     
     HEADER(Type_Object_Class) = (Object) Type_Class_Class;
     Type_Object_Class->super  = Nil;
@@ -33,8 +33,8 @@ void pre_init_Type_Object()
 
 void inter_init_Type_Object() 
 {
-    ((Type_Class)HEADER(Type_Object_Class))->type = create_type(CLASS_SIZE, OBJECT, CLASS_VARS);
-    Type_Object_Class->type   = create_type(OBJECT_SIZE, OBJECT); 
+    ((Type_Class)HEADER(Type_Object_Class))->layout = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
+    Type_Object_Class->layout   = create_layout(OBJECT_SIZE, OBJECT); 
     REFER_TO(Type_Object);
 }
 
@@ -74,7 +74,7 @@ NATIVE1(Type_Object_instVarAt_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
     Object tag     = GETTAG(self);
-    ASSERT_TAG_TYPE(tag, Object);
+    ASSERT_TAG_LAYOUT(tag, Object);
     RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index - 1));
 }
 
@@ -89,7 +89,7 @@ NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
     Object tag     = GETTAG(self);
-    ASSERT_TAG_TYPE(tag, Object);
+    ASSERT_TAG_LAYOUT(tag, Object);
     raw_Type_Object_at_put((Type_Object)self, tag, index - 1, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
@@ -116,7 +116,7 @@ NATIVE1(Type_Array_at_)
     Type_Array as  = (Type_Array)self;
 
     Object tag = GETTAG(as);    
-    ASSERT_TAG_TYPE(tag, Array);
+    ASSERT_TAG_LAYOUT(tag, Array);
 
     RETURN_FROM_NATIVE(raw_Type_Array_at(as, tag, index - 1));
 }
@@ -135,7 +135,7 @@ NATIVE2(Type_Array_at_put_)
     Type_Array as  = (Type_Array)self;
    
     Object tag = GETTAG(as);
-    ASSERT_TAG_TYPE(tag, Array); 
+    ASSERT_TAG_LAYOUT(tag, Array); 
     raw_Type_Array_at_put(as, tag, index - 1, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }

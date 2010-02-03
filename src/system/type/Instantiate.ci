@@ -53,14 +53,14 @@ static Object instantiate_Object(Type_Class class, Type_Array ivars)
 
 /* ========================================================================= */
 
-#define INSTANTIATE(type)\
-    if (HEADER(tag) == (Object)Type_##type##Layout) {\
-        return instantiate##_##type(class, (Type_Array)tag);\
+#define INSTANTIATE(layout)\
+    if (HEADER(tag) == (Object)Type_##layout##Layout) {\
+        return instantiate##_##layout(class, (Type_Array)tag);\
     }
 
-#define INSTANTIATE_SIZED(type)\
-    if (HEADER(tag) == (Object)Type_##type##Layout) {\
-        return instantiate##_##type(class, (Type_Array)tag, size);\
+#define INSTANTIATE_SIZED(layout)\
+    if (HEADER(tag) == (Object)Type_##layout##Layout) {\
+        return instantiate##_##layout(class, (Type_Array)tag, size);\
     }
 
 /* ========================================================================= */
@@ -68,25 +68,25 @@ static Object instantiate_Object(Type_Class class, Type_Array ivars)
 
 Object instantiate(Type_Class class)
 {
-    Object tag = class->type;
+    Object tag = class->layout;
 
     INSTANTIATE(Object);
     uns_int size = 0;
     INSTANTIATE_SIZED(Array);
 
-    assert(NULL, printf("Not a fixed-sized object type: %p\n", tag));
+    assert(NULL, printf("Not a fixed-sized object layout: %p\n", tag));
     return NULL;
 }
 
 Object instantiate_sized(Type_Class class, uns_int size)
 {
-    Object tag = class->type;
+    Object tag = class->layout;
 
     INSTANTIATE_SIZED(Array);
     INSTANTIATE_SIZED(Bytes);
     // TODO add to String and Symbols
     INSTANTIATE_SIZED(Words);
 
-    assert(NULL, printf("Not a arrayed object type: %p\n", tag));
+    assert(NULL, printf("Not a arrayed object layout: %p\n", tag));
     return NULL;
 }

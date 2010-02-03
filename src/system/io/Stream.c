@@ -18,7 +18,7 @@ void pre_init_IO_Stream()
 {
     IO_Stream_Class = new_Class_named((Object)Type_Object_Class,
                                       L"Stream",
-                                      create_type(1, OBJECT, "FILE"));
+                                      create_layout(1, OBJECT, "FILE"));
 } 
 
 /* ========================================================================= */

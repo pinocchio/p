@@ -48,7 +48,7 @@ void initialize_Symbol()
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_type(0, WORDS));
+    Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_layout(0, WORDS));
     REFER_TO(Type_Symbol);
     initialize_Symbol();
 }
@@ -110,7 +110,7 @@ NATIVE1(Type_Symbol__equal)
         RETURN_FROM_NATIVE(True);
         return;
     }
-    if (!OBJECT_OF_TYPE(w_arg, Words)) {
+    if (!OBJECT_OF_LAYOUT(w_arg, Words)) {
         RETURN_FROM_NATIVE(False);
         return;
     }

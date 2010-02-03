@@ -29,7 +29,7 @@ Type_String new_Type_String_sized(uns_int size)
 void pre_init_Type_String()
 {
     Type_String_Class    = new_Class((Object)Type_Object_Class,
-                                     create_type(0, WORDS));
+                                     create_layout(0, WORDS));
     REFER_TO(Type_String);
     empty_Type_String         = new_Type_String(L"");
 }
@@ -99,7 +99,7 @@ NATIVE1(Type_String_equals_)
         RETURN_FROM_NATIVE(True);
         return;
     }
-    if (!OBJECT_OF_TYPE(w_arg, Words)) {
+    if (!OBJECT_OF_LAYOUT(w_arg, Words)) {
         RETURN_FROM_NATIVE(False);
         return;
     }

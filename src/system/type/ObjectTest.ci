@@ -15,7 +15,7 @@ NEW_TEST(Type_Object_isNil)
 NEW_TEST(Type_Object_at_)
     Type_Class cls = new_Class_named((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT, L"a", L"b", L"c"));
+                                     create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = instantiate(cls);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;
@@ -31,7 +31,7 @@ NEW_TEST(Type_Object_at_)
 NEW_TEST(Type_Object_at_put_)
     Type_Class cls = new_Class_named((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT, L"a", L"b", L"c"));
+                                     create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = instantiate(cls);
     Object result = Eval_Send2(o, SMB_instVarAt_put_,
                                (Object)new_Type_SmallInt(1),
@@ -45,7 +45,7 @@ NEW_TEST(Type_Object_at_put_)
 NEW_TEST(Type_Object_basicNew)
     Type_Class cls = new_Class_named((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT, L"a", L"b", L"c"));
+                                     create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = Eval_Send0((Object)cls, SMB_basicNew);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;

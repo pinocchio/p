@@ -26,14 +26,14 @@ extern Object file_layout;
 
 /* ========================================================================= */
 
-#define OBJECT_OF_TYPE(o, type)\
-    TAG_IS_TYPE(GETTAG(o), type)
+#define OBJECT_OF_LAYOUT(o, layout)\
+    TAG_IS_LAYOUT(GETTAG(o), layout)
 
-#define TAG_IS_TYPE(tag, type)\
-    (HEADER(tag) == (Object)Type_##type##Layout)
+#define TAG_IS_LAYOUT(tag, layout)\
+    (HEADER(tag) == (Object)Type_##layout##Layout)
 
-#define ASSERT_TAG_TYPE(tag, type)\
-    assert0(TAG_IS_TYPE(tag, type));
+#define ASSERT_TAG_LAYOUT(tag, layout)\
+    assert0(TAG_IS_LAYOUT(tag, layout));
 
 #define TAG_SIZE(tag)\
     (((Type_Array)tag)->size)
@@ -46,13 +46,13 @@ extern Object file_layout;
     assert(TAG_SIZE(tag) > size, printf("Invalid tag size was %i but expected < %i\n", (int)size, (int)TAG_SIZE(tag)));
 
 #define GETTAG(o)\
-    ((Type_Class)HEADER(o))->type
+    ((Type_Class)HEADER(o))->layout
 
-#define OBJECT_OF_TYPE(o, type)\
-    TAG_IS_TYPE(GETTAG(o), type)
+#define OBJECT_OF_LAYOUT(o, layout)\
+    TAG_IS_LAYOUT(GETTAG(o), layout)
 
-#define CREATE_OBJECT_TAG(name) create_type(name##_SIZE, OBJECT, name##_VARS)
-#define CREATE_ARRAY_TAG(name) create_type(name##_SIZE, ARRAY, name##_VARS)
+#define CREATE_OBJECT_TAG(name) create_layout(name##_SIZE, OBJECT, name##_VARS)
+#define CREATE_ARRAY_TAG(name) create_layout(name##_SIZE, ARRAY, name##_VARS)
 
 /* ========================================================================= */
 
@@ -61,8 +61,8 @@ void post_init_Type_Layout();
 
 /* ========================================================================= */
 
-extern Object create_type(uns_int size, Type_Tag tag, ...);
-extern Type_Array create_type_with_vars(Type_Class type, uns_int size);
+extern Object create_layout(uns_int size, Type_Tag tag, ...);
+extern Type_Array create_layout_with_vars(Type_Class layout, uns_int size);
 
 /* ========================================================================= */
 

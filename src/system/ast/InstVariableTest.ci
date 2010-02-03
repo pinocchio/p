@@ -10,7 +10,7 @@ NEW_TEST(AST_InstVariable_eval)
 
     Type_Class cls = new_Class_named((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT, L"aVar", L"bVar", L"cVar"));
+                                     create_layout(3, OBJECT, L"aVar", L"bVar", L"cVar"));
     Object o = instantiate(cls);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;
@@ -24,7 +24,7 @@ NEW_TEST(AST_InstVariable_assign)
 
     Type_Class cls = new_Class_named((Object)Type_Object_Class, 
                                      L"TestClass",
-                                     create_type(3, OBJECT, L"aVar", L"bVar", L"cVar"));
+                                     create_layout(3, OBJECT, L"aVar", L"bVar", L"cVar"));
     Object o = instantiate(cls);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;

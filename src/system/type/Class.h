@@ -11,7 +11,7 @@ EXPORT_REFERENCE(Behavior);
 /* ========================================================================= */
 
 #define BEHAVIOR_SIZE 3
-#define BEHAVIOR_VARS L"type", L"super", L"methods"
+#define BEHAVIOR_VARS L"layout", L"super", L"methods"
 #define METACLASS_SIZE 3
 #define METACLASS_VARS BEHAVIOR_VARS
 #define CLASS_SIZE 5
@@ -31,7 +31,7 @@ typedef enum Type_Tag {
 } Type_Tag;
 
 struct Type_Class_t {
-    Object          type;
+    Object          layout;
     Object          super;
     Type_Dictionary methods;
     Type_Symbol     name;
@@ -44,10 +44,10 @@ extern void inter_init_Type_Class();
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Object superclass, Object type);
-extern Type_Class new_Class_withMeta(Object superclass, Object type, Object metaType);
+extern Type_Class new_Class(Object superclass, Object layout);
+extern Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType);
 extern Type_Class new_Class_named(Object superclass, const wchar_t* name,
-                                  Object type);
+                                  Object layout);
 extern Type_Class new_Bootstrapping_Class(Object superclass);
 
 /* ========================================================================= */

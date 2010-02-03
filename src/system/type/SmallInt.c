@@ -118,9 +118,9 @@ void post_init_Type_SmallInt()
 {
     
     ((Type_Class)HEADER(Type_SmallInt_Class))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Type_SmallInt_Class))->type = CREATE_OBJECT_TAG(CLASS);
+    ((Type_Class)HEADER(Type_SmallInt_Class))->layout  = CREATE_OBJECT_TAG(CLASS);
     
-    Type_SmallInt_Class->type    = create_type(0, INT);
+    Type_SmallInt_Class->layout  = create_layout(0, INT);
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
     Type_SmallInt_Class->methods = new_Type_Dictionary();
     
@@ -150,7 +150,7 @@ void post_init_Type_SmallInt()
 int unwrap_int(Object integer)
 {
     // TODO do more stuff in case we are not an int.
-    ASSERT_TAG_TYPE(GETTAG(integer), Int);
+    ASSERT_TAG_LAYOUT(GETTAG(integer), Int);
     //if (GETTAG(class) == INT) {
         return ((Type_SmallInt)integer)->value;
     //}

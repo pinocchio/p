@@ -59,7 +59,7 @@ Type_Array new_Type_Array_withAll(uns_int c, Object element)
 void pre_init_Type_Array() 
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
-    Type_Array_Class = new_Class((Object)Type_Object_Class, create_type(0, ARRAY));
+    Type_Array_Class = new_Class((Object)Type_Object_Class, create_layout(0, ARRAY));
     REFER_TO(Type_Array);
     empty_Type_Array         = NEW_t(Type_Array);
     HEADER(empty_Type_Array) = (Object)Type_Array_Class;
@@ -89,7 +89,7 @@ NATIVE1(Type_Array_instVarAt_)
     Object w_index  = NATIVE_ARG(0);
     int index       = unwrap_int(w_index) - 1;
     Object tag      = GETTAG(self);
-    ASSERT_TAG_TYPE(tag, Array);
+    ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     RETURN_FROM_NATIVE(((Type_Array)self)->values[index]);
 }
@@ -98,7 +98,7 @@ NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index) - 1;
     Object tag   = GETTAG(self);
-    ASSERT_TAG_TYPE(tag, Array);
+    ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     ((Type_Array)self)->values[index] = NATIVE_ARG(1);
     RETURN_FROM_NATIVE(self);
