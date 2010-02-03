@@ -29,3 +29,4 @@ TYPE(AST_InstVariable);
 TYPE(Organization_ClassReference);
 TYPE(AST_InlineCache);
 TYPE(Runtime_InlineCache);
+TYPE(Runtime_Message);

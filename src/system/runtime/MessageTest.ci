@@ -1,0 +1,18 @@
+
+#define RUNTIME_MESSAGE_TEST_SETUP \
+    Runtime_Message message = new_Runtime_Message(); \
+    Object result;
+
+/* ========================================================================= */
+
+void test_RUNTIME_MESSAGE_example() {
+ #error Fill the tests
+}
+
+/* ========================================================================= */
+
+TEST_SUITE(Runtime_Message,
+{
+   RUN_TEST(RUNTIME_MESSAGE_example);
+})
+
