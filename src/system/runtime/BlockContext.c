@@ -62,7 +62,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
             self = (Runtime_BlockContext)self->parent_scope;
         } else {
             /* TODO Schedule at:in: message send. */
-            assert1(NULL, "TODO Schedule at:in: message send");
+            assert1(NULL, "TODO Schedule at:in: message send.");
             //Object args[2] = { (Object)new_Type_SmallInt(index), key };
             return NULL;
         }
