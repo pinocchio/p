@@ -5,14 +5,15 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_MESSAGE_SIZE 2
-#define RUNTIME_MESSAGE_VARS L"selector", L"arguments"
+#define RUNTIME_MESSAGE_SIZE 1
+#define RUNTIME_MESSAGE_VARS L"selector"
 
 /* ========================================================================= */
 
 struct Runtime_Message_t {
     Object      selector;
-    Type_Array  arguments;
+    uns_int     size;
+    Object      arguments[];
 };
 
 CREATE_INITIALIZERS(Runtime_Message)

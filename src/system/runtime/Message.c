@@ -19,7 +19,13 @@ void pre_init_Runtime_Message()
 
 /* ========================================================================= */
 
-
+Runtime_Message new_Runtime_Message(Object selector, uns_int size)
+{
+    NEW_ARRAY_OBJECT(Runtime_Message, Object[size]);
+    result->size     = size;
+    result->selector = selector;
+    return result;
+}
 
 /* ========================================================================= */
 

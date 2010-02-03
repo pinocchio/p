@@ -106,15 +106,23 @@ void Method_invoke(Object method, Object self, Object class, uns_int argc) {
 void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
     if (msg == (Object)SMB_doesNotUnderstand_) {
-        msg = pop_EXP();
+        Runtime_Message message = (Runtime_Message)pop_EXP();
         assert(NULL, printf("\"%ls\" recursive does not understand \"%ls\" (\"%"F_I"u\")\n", 
             ((Type_Class)HEADER(self))->name->value,
-            ((Type_Symbol)msg)->value,
-            argc));
+            ((Type_Symbol)message->selector)->value,
+            message->size));
     }
     printf("DNU: \"%ls\" \n", ((Type_Symbol)msg)->value);
-    zapn_EXP(argc + 2);
-    Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, msg);
+
+	Runtime_Message message = new_Runtime_Message(msg, argc);
+
+	while (argc--) {
+		message->arguments[argc] = pop_EXP();
+	}
+
+    zapn_EXP(2);
+
+    Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
 }
 
 static void Class_lookup(Type_Class class, Object msg);
@@ -147,8 +155,7 @@ static void CNT_Class_lookup_cache_invoke()
     cache->class              = dispatch_type;
     cache->method             = method;
     
-    Class_invoke_do(class, method, argc);
-}
+    Class_invoke_do(class, method, argc); }
 
 static void CNT_Class_lookup_invoke()
 {
