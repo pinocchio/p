@@ -20,7 +20,7 @@
 
 /* ========================================================================= */
 
-#define M32
+#define M64
 #ifdef M32
 typedef unsigned int uns_int;
 #define F_I ""
