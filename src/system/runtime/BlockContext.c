@@ -58,7 +58,8 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
 {
     while (scope_id != self->scope_id && (Object)self->parent_scope != Nil) {
         Object parent_class = HEADER(self->parent_scope);
-        if (parent_class == (Object)Runtime_BlockContext_Class) {
+        if (parent_class == (Object)Runtime_BlockContext_Class ||
+            parent_class == (Object)Runtime_MethodContext_Class) {
             self = (Runtime_BlockContext)self->parent_scope;
         } else {
             /* TODO Schedule at:in: message send. */
@@ -80,7 +81,9 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
     while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
-        if (HEADER(self->closure->context) == (Object)Runtime_BlockContext_Class) {
+        Object parent_class = HEADER(self->closure->context);
+        if (parent_class == (Object)Runtime_BlockContext_Class ||
+            parent_class == (Object)Runtime_MethodContext_Class) {
             self = (Runtime_BlockContext)self->closure->context;
         } else {
             /* TODO Schedule at:in: message send. */
