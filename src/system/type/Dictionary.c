@@ -427,12 +427,32 @@ CNT(fix_dictionary_result)
     }
 }
 
+CNT(dictionary_check_absent)
+    Object result = pop_EXP();
+    if (result == NULL) {
+        Object block = pop_EXP();
+        Type_Class_direct_dispatch(block, HEADER(block), (Object)SMB_apply, 0); 
+        return;
+    }
+    poke_EXP(0, result);
+}
+
 NATIVE1(Type_Dictionary_at_)
     Object w_index = NATIVE_ARG(0);
     zapn_EXP(3);
     push_CNT(fix_dictionary_result);
     Type_Dictionary_lookup_push((Type_Dictionary)self, w_index);
 }
+
+NATIVE2(Type_Dictionary_at_ifAbsent_)
+    Object w_index = NATIVE_ARG(0);
+    Object w_block = NATIVE_ARG(1);
+    zapn_EXP(4);
+    push_EXP(w_block);
+    push_CNT(dictionary_check_absent);
+    Type_Dictionary_lookup_push((Type_Dictionary)self, w_index);
+}
+    
 
 NATIVE2(Type_Dictionary_at_put_)
     Object w_index = NATIVE_ARG(0);
@@ -445,12 +465,19 @@ NATIVE2(Type_Dictionary_at_put_)
     Type_Dictionary_direct_store((Type_Dictionary)self, hash, w_index, new);
 }
 
+NATIVE(Type_Dictionary_basicNew)
+    zap_EXP();
+    poke_EXP(0, new_Type_Dictionary());
+}
+
 // TODO create at ifAbsent put
 /* ========================================================================= */
 
 void post_init_Type_Dictionary()
 {
     Type_Dictionary_Class->name = new_Type_Symbol_cached(L"Dictionary");
-    store_native_method(Type_Dictionary_Class, SMB_at_,     NM_Type_Dictionary_at_);
-    store_native_method(Type_Dictionary_Class, SMB_at_put_, NM_Type_Dictionary_at_put_);
+    store_native_method(Type_Dictionary_Class, SMB_at_,              NM_Type_Dictionary_at_);
+    store_native_method(Type_Dictionary_Class, SMB_at_ifAbsent_,     NM_Type_Dictionary_at_ifAbsent_);
+    store_native_method(Type_Dictionary_Class, SMB_at_put_,          NM_Type_Dictionary_at_put_);
+    store_native_method((Type_Class)HEADER(Type_Dictionary_Class), SMB_basicNew, NM_Type_Dictionary_basicNew);
 }

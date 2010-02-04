@@ -63,3 +63,4 @@ Type_Symbol SMB_asCharacter;
 Type_Symbol SMB_doesNotUnderstand_;
 Type_Symbol SMB_name;
 Type_Symbol SMB_value;
+Type_Symbol SMB_at_ifAbsent_;

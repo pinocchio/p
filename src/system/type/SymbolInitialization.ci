@@ -24,6 +24,7 @@ SMB_asString              = new_Type_Symbol_cached(L"asString");
 SMB_asSymbol              = new_Type_Symbol_cached(L"asSymbol");
 SMB_atEnd                 = new_Type_Symbol_cached(L"atEnd");
 SMB_at_                   = new_Type_Symbol_cached(L"at:");
+SMB_at_ifAbsent_          = new_Type_Symbol_cached(L"at:ifAbsent:");
 SMB_at_in_                = new_Type_Symbol_cached(L"at:in:");
 SMB_at_put_               = new_Type_Symbol_cached(L"at:put:");
 SMB_basicNew              = new_Type_Symbol_cached(L"basicNew");

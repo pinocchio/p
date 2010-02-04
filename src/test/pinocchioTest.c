@@ -126,4 +126,5 @@ test_AST_Method();
 test_AST_InstVariable();
 
 test_BridgeTest();
+test_SCParserTest();
 }
