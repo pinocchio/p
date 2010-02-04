@@ -1,6 +1,4 @@
 #ifndef PINOCCHIO_H
-b
-a
 #define PINOCCHIO_H
 
 #include <stdlib.h>
