@@ -23,7 +23,7 @@ void pre_init_AST_Self()
 
 void AST_Self_eval()
 {
-    LOGFUN;
+    // LOGFUN;
     Object env = (Object)current_env();
     assert0(IS_CONTEXT(env));
     // replace the current element (an AST_Self) with the Object's self

@@ -28,13 +28,13 @@ void pre_init_AST_Callec()
 static void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
-    LOG("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
+    // LOG("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
     assert0(HEADER(closure) == (Object)Runtime_BlockClosure_Class);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
 
 NATIVE1(AST_Callec_on_)
-    LOGFUN;
+    // LOGFUN;
     Runtime_Continue runtimeContinue = new_Runtime_Continue();
     runtimeContinue->exp_offset = (_EXP_ - &(Double_Stack[0]) - (argc + 1));
     runtimeContinue->cnt_offset = (&(Double_Stack[STACK_SIZE]) - (Object*)_CNT_);

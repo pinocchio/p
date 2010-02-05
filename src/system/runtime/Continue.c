@@ -24,7 +24,7 @@ void pre_init_Runtime_Continue()
 /* ========================================================================= */
 
 NATIVE1(Runtime_Continue_escape_)
-    LOGFUN;
+    // LOGFUN;
     Runtime_Continue ast_cont = (Runtime_Continue)self;
     Object arg = NATIVE_ARG(0);
     // restore the stack

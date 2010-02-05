@@ -60,7 +60,7 @@ static void start_eval(AST_Method method)
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                             Object class, uns_int argc)
 {
-    LOG_AST_INFO("Closure Invoke: ", closure->info);
+    // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
     AST_Method method = closure->code;
 

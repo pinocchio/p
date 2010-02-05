@@ -87,7 +87,7 @@ static void start_eval(AST_Block block)
 void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 {
     #ifdef DEBUG
-    LOG("Closure Apply\n");
+    // LOG("Closure Apply\n");
     #endif // DEBUG
 
     AST_Block block = closure->code;

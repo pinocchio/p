@@ -39,7 +39,7 @@ void pre_init_AST_Variable()
 
 void AST_Variable_eval(AST_Variable self)
 {
-    LOGFUN;
+    // LOGFUN;
     Object env = (Object)current_env();
     
     if (IS_CONTEXT(env)) {

@@ -57,7 +57,7 @@ CNT(push_env_class)
 
 void AST_Super_eval(AST_Super super)
 {
-    LOGFUN;
+    // LOGFUN;
 
     // execute the method
     push_CNT(AST_Super_send);

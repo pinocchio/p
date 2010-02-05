@@ -29,7 +29,7 @@ void pre_init_AST_InstVariable()
 
 void AST_InstVariable_eval(AST_InstVariable var)
 {
-    LOGFUN;
+    // LOGFUN;
     Object self = current_env()->home_context->self;
     int index = unwrap_int((Object)var->index);
 
@@ -45,7 +45,7 @@ void AST_InstVariable_eval(AST_InstVariable var)
 
 void AST_InstVariable_assign(AST_InstVariable var, Object value)
 {
-    LOGFUN;
+    // LOGFUN;
     Object self = current_env()->home_context->self;
     int index = unwrap_int((Object)var->index);
 

@@ -68,7 +68,7 @@ void CNT_store_argument()
 
 void AST_Send_eval(AST_Send self)
 {
-    LOGFUN;
+    // LOGFUN;
 
     push_CNT(AST_Send_send);
 
