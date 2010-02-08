@@ -55,6 +55,10 @@ extern Type_Class new_Bootstrapping_Class(Object superclass);
 extern void Type_Class_dispatch(Object receiver, Object class, uns_int argc);
 extern void Type_Class_direct_dispatch(Object receiver, Object class,
                                        Object msg, uns_int argc, ...);
+extern void Type_Class_direct_dispatch_withArguments(Object receiver,
+                                                     Object class,
+                                                     Object msg,
+                                                     Type_Array args);
 
 extern void CNT_Class_super();
 

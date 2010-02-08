@@ -211,6 +211,21 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
     Class_direct_dispatch(self, class, msg, argc);
 }
 
+void Type_Class_direct_dispatch_withArguments(Object self, Object class,
+                                              Object msg, Type_Array args)
+{
+    /* Send obj. TODO update Send>>eval to be able to remove this */
+    push_EXP(Nil);
+    push_EXP(self);
+
+    int idx;
+    for (idx = 0; idx < args->size; idx++) {
+        push_EXP(args->values[idx]);
+    }
+    push_CNT(Class_lookup_invoke);
+    Class_direct_dispatch(self, class, msg, args->size);
+}
+
 void Type_Class_dispatch(Object self, Object class, uns_int argc)
 {
     AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self

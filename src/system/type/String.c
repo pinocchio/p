@@ -90,7 +90,7 @@ NATIVE0(Type_String_asString)
 }
 
 NATIVE0(Type_String_asSymbol)
-    RETURN_FROM_NATIVE(new_Type_Symbol(((Type_String)self)->value));
+    RETURN_FROM_NATIVE(new_Type_Symbol_cached(((Type_String)self)->value));
 }
 
 NATIVE1(Type_String_equals_)

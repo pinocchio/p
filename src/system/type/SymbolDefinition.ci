@@ -64,3 +64,5 @@ Type_Symbol SMB_doesNotUnderstand_;
 Type_Symbol SMB_name;
 Type_Symbol SMB_value;
 Type_Symbol SMB_at_ifAbsent_;
+Type_Symbol SMB_perform_withArguments_;
+Type_Symbol SMB_perform_;
