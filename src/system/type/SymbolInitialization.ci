@@ -2,7 +2,7 @@
 SMB__and                   = new_Type_Symbol_cached(L"&");
 SMB__concat                = new_Type_Symbol_cached(L",");
 SMB__concat                = new_Type_Symbol_cached(L"concat:");
-SMB__divide                = new_Type_Symbol_cached(L"/");
+SMB__divide                = new_Type_Symbol_cached(L"//");
 SMB__equal                 = new_Type_Symbol_cached(L"=");
 SMB__gt                    = new_Type_Symbol_cached(L">");
 SMB__lt                    = new_Type_Symbol_cached(L"<");

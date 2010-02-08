@@ -462,6 +462,11 @@ NATIVE2(Type_Dictionary_at_put_)
     Object w_index = NATIVE_ARG(0);
     Object new = NATIVE_ARG(1);
 
+    Object tag = GETTAG(w_index);
+    if(TAG_IS_LAYOUT(tag, Words)) {
+        printf("Storing at %ls\n", ((Type_Symbol)w_index)->value);
+    }
+
     // Return before starting direct_store which manipulates the stack!
     RETURN_FROM_NATIVE(new);
     
