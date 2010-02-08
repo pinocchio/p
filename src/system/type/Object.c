@@ -182,6 +182,6 @@ void post_init_Type_Object()
     store_native_method(Type_Object_Class, SMB_isNil,                   NM_Type_Object_isNil);
     store_native_method(Type_Object_Class, SMB_instVarAt_,              NM_Type_Object_instVarAt_);
     store_native_method(Type_Object_Class, SMB_instVarAt_put_,          NM_Type_Object_instVarAt_put_);
-    store_native_method(Type_Object_Class, SMB_perform_withArguments_,  NM_Type_Object_perform_withArguments_);
+    // store_native_method(Type_Object_Class, SMB_perform_withArguments_,  NM_Type_Object_perform_withArguments_);
     store_native_method(Type_Object_Class, SMB_perform_,                NM_Type_Object_perform_);
 }

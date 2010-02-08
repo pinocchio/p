@@ -176,6 +176,7 @@ static void Class_lookup(Type_Class class, Object msg)
         class        = (Type_Class)peek_EXP(4);
         uns_int argc = (uns_int)peek_EXP(2);
         zapn_EXP(5);
+        zap_CNT();
         return does_not_understand(self, (Object)class, msg, argc);
     }
     assert_class((Object)class);
