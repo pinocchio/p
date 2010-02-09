@@ -53,14 +53,14 @@ void init_Exception_Handling()
     // save the default stdout
     saved_stdout = dup(STDOUT_FILENO);
     
-    #ifndef TEST_FAIL
     if(setjmp(Assert_Fail)) {
+        #ifndef TEST_FAIL
         printf("Test Failed\n");
         TEST_CASE_FAILED = 1;
         IN_EVAL = 0;
         longjmp(Test_Continue, 1);
+        #endif // TEST_FAIL
     }
-    #endif // TEST_FAIL
 }
 
 

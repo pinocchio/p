@@ -8,8 +8,12 @@ extern jmp_buf Assert_Fail;
 
 #ifdef ASSERT_FAIL
     #define ASSERT_HANDLER raise(SIGFAIL);
-#else // ASSERT_FAIL
+#else
+#ifdef TEST_FAIL
+    #define ASSERT_HANDLER raise(SIGFAIL);
+#else
     #define ASSERT_HANDLER longjmp(Assert_Fail, 1);
+#endif // TEST_FAIL
 #endif // ASSERT_FAIL
 
 #ifdef __linux
