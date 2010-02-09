@@ -2,3 +2,11 @@
 tags
 make.depend
 pinocchio
+
+# XCODE noise
+*.pbxuser
+*.mode1v3
+
+#OSX noise
+.DS_Store
+
