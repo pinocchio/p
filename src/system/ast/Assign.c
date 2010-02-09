@@ -30,7 +30,7 @@ void pre_init_AST_Assign()
 
 void AST_Assign_eval(AST_Assign self)
 {
-    LOGFUN;
+    // LOGFUN;
     push_CNT(AST_Assign_assign);
     poke_EXP(0, self->variable);
     push_CNT(send_Eval);
