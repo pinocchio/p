@@ -13,6 +13,18 @@ void printf0(const char * string, ...) {
 
 }
 
+void _indent_(uns_int i)
+{
+    uns_int todo = 0;
+    while (todo++ != i) {
+        if (todo % 4) {
+            printf("  ");
+        } else {
+            printf("| ");
+        }
+    }
+}
+
 /* ========================================================================= */
 
 Object * Double_Stack;

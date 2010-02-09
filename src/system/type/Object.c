@@ -130,13 +130,14 @@ void raw_Type_Array_at_put(Type_Array array, Object tag,
 
 NATIVE2(Type_Array_at_put_)
     Object w_index = NATIVE_ARG(0);
+    Object w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index);
     Type_Array as  = (Type_Array)self;
    
     Object tag = GETTAG(as);
     ASSERT_TAG_LAYOUT(tag, Array); 
-    raw_Type_Array_at_put(as, tag, index - 1, NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
+    raw_Type_Array_at_put(as, tag, index - 1, w_arg);
+    RETURN_FROM_NATIVE(w_arg);
 }
 
 NATIVE2(Type_Object_perform_withArguments_)

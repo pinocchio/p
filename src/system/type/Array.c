@@ -96,12 +96,13 @@ NATIVE1(Type_Array_instVarAt_)
 
 NATIVE2(Type_Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
+    Object w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index) - 1;
     Object tag   = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
-    ((Type_Array)self)->values[index] = NATIVE_ARG(1);
-    RETURN_FROM_NATIVE(self);
+    ((Type_Array)self)->values[index] = w_arg;
+    RETURN_FROM_NATIVE(w_arg);
 }
 
 /* ========================================================================= */

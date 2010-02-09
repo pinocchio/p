@@ -59,7 +59,7 @@ NEW_TEST(Type_Array_at_put_)
     Object result = Eval_Send2(o, SMB_at_put_,
                                (Object)new_Type_SmallInt(1),
                                (Object)True);
-    assert0(result == o);
+    assert0(result == (Object)True);
     Object integer = (Object)new_Type_SmallInt(100);
     Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(1), integer);
     Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(2), (Object)False);
@@ -92,7 +92,7 @@ NEW_TEST(Type_Array_basicNew_)
     result = Eval_Send2(o, SMB_at_put_,
                                (Object)new_Type_SmallInt(1),
                                (Object)True);
-    assert0(result == o);
+    assert0(result == (Object)True);
     Eval_Send2(o, SMB_instVarAt_put_, (Object)new_Type_SmallInt(1), integer);
     Eval_Send2(o, SMB_at_put_, (Object)new_Type_SmallInt(2), (Object)False);
     assert0(((Type_Array)o)->values[0] == integer);
