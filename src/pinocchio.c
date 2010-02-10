@@ -34,6 +34,29 @@ void print_EXP()
     }
 }
 
+void print_Symbol(Object s)
+{
+    Object tag = GETTAG(s);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        printf("L\"%ls\"\n", ((Type_Symbol)s)->value);
+    } else {
+        printf("Not a symbol: %p\n", s);
+        print_Class(s);
+    }
+}
+
+void sends()
+{
+    uns_int size = EXP_size();
+    uns_int cur = 0;
+    while (cur < size) {
+        Object c = Double_Stack[cur++];
+        if (c && HEADER(c) == (Object)AST_Send_Class) {
+            print_Symbol(((AST_Send)c)->message);
+        }
+    }
+}
+
 /* ========================================================================= */
 
 Object * Double_Stack;
