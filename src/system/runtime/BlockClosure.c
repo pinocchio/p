@@ -120,5 +120,6 @@ void post_init_Runtime_BlockClosure()
     store_native_method(Runtime_BlockClosure_Class, SMB_value_,  NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_apply_,  NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_apply,   NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_valueWithArguments_,   NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
 }

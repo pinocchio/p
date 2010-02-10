@@ -60,6 +60,7 @@ SMB_set                    = new_Type_Symbol_cached(L"set");
 SMB_size                   = new_Type_Symbol_cached(L"size");
 SMB_update                 = new_Type_Symbol_cached(L"update");
 SMB_value                  = new_Type_Symbol_cached(L"value");
+SMB_valueWithArguments_    = new_Type_Symbol_cached(L"valueWithArguments:");
 SMB_value_                 = new_Type_Symbol_cached(L"value:");
 SMB_whileFalse_            = new_Type_Symbol_cached(L"whileFalse:");
 SMB_whileNil_              = new_Type_Symbol_cached(L"whileNil:");

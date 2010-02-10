@@ -67,3 +67,4 @@ Type_Symbol SMB_at_ifAbsent_;
 Type_Symbol SMB_perform_withArguments_;
 Type_Symbol SMB_perform_;
 Type_Symbol SMB_numArgs;
+Type_Symbol SMB_valueWithArguments_;
