@@ -63,7 +63,9 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
     AST_Method method = closure->code;
-
+    
+    assert1(argc == method->params->size, "Argument count mismatch");
+    
     if (method->size == 0) { 
         RETURN_FROM_NATIVE(self);
         return;
@@ -76,8 +78,22 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
 }
 
 
-NATIVE(Runtime_MethodClosure_numArgs) 
+NATIVE0(Runtime_MethodClosure_numArgs) 
     RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_MethodClosure)self)->code->params->size));
+}
+
+NATIVE1(Runtime_MethodClosure_valueWithArguments_)
+    Type_Array args = (Type_Array)pop_EXP();
+    ASSERT_TAG_LAYOUT(GETTAG(args), Array);
+    
+    int pos = args->size;
+    while(pos > 0) {
+        pos--;
+        push_EXP(args->values[pos]);
+    }
+    
+    Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
+    Runtime_BlockClosure_apply(closure, args->size);
 }
 
 /* ========================================================================= */
@@ -85,4 +101,5 @@ NATIVE(Runtime_MethodClosure_numArgs)
 void post_init_Runtime_MethodClosure()
 {
     store_native_method(Runtime_MethodClosure_Class, SMB_numArgs, NM_Runtime_MethodClosure_numArgs);
+    store_native_method(Runtime_MethodClosure_Class, SMB_valueWithArguments_,   NM_Runtime_MethodClosure_valueWithArguments_);
 }

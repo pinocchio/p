@@ -45,15 +45,15 @@ void pre_init_AST_Send()
 /* ========================================================================= */
 
 static CNT(AST_Send_send)
-    uns_int argc = (uns_int)pop_EXP();
+    uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
     Type_Class_dispatch(receiver, HEADER(receiver), argc);
 }
 
 void CNT_store_argument()
 {
-    Object arg = peek_EXP(0);
-    uns_int idx = (uns_int)peek_EXP(1);
+    Object arg    = peek_EXP(0);
+    uns_int idx   = (uns_int)peek_EXP(1);
     AST_Send send = (AST_Send)peek_EXP(idx + 2);
     poke_EXP(1, arg);
     if (idx < send->size) {

@@ -35,7 +35,7 @@ Type_Array activation_from_native(uns_int argc)
     uns_int paramc = block->params->size;
     uns_int localc = block->locals->size;
 
-    assert1(argc == paramc, "Catch-all arguments not supported yet!");
+    //assert1(argc == paramc, "Catch-all arguments not supported yet!");
 
     Type_Array args = context_locals(current_env());
 
@@ -91,7 +91,8 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     #endif // DEBUG
 
     AST_Block block = closure->code;
-
+    assert1(argc == block->params->size, "Argument count mismatch");
+    
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(Nil);
         return; 
@@ -108,8 +109,22 @@ NATIVE(Runtime_BlockClosure_apply_)
     Runtime_BlockClosure_apply(closure, argc);
 }
 
-NATIVE(Runtime_BlockClosure_numArgs) 
+NATIVE0(Runtime_BlockClosure_numArgs) 
     RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
+}
+
+NATIVE1(Runtime_BlockClosure_valueWithArguments_)
+    Type_Array args = (Type_Array)pop_EXP();
+    ASSERT_TAG_LAYOUT(GETTAG(args), Array);
+    
+    int pos = args->size;
+    while(pos > 0) {
+        pos--;
+        push_EXP(args->values[pos]);
+    }
+    
+    Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
+    Runtime_BlockClosure_apply(closure, args->size);
 }
 
 /* ========================================================================= */
@@ -120,6 +135,6 @@ void post_init_Runtime_BlockClosure()
     store_native_method(Runtime_BlockClosure_Class, SMB_value_,  NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_apply_,  NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_apply,   NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_valueWithArguments_,   NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_valueWithArguments_,   NM_Runtime_BlockClosure_valueWithArguments_);
     store_native_method(Runtime_BlockClosure_Class, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
 }

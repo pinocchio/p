@@ -7,6 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36061EFC11235EE200FD4FCD /* Array.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E5711235EE200FD4FCD /* Array.c */; };
+		36061EFE11235EE200FD4FCD /* ArrayedCollection.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E5A11235EE200FD4FCD /* ArrayedCollection.c */; };
+		36061F0011235EE200FD4FCD /* ASTNode.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E5D11235EE200FD4FCD /* ASTNode.c */; };
+		36061F0211235EE200FD4FCD /* Behavior.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6011235EE200FD4FCD /* Behavior.c */; };
+		36061F0411235EE200FD4FCD /* BlockClosure.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6311235EE200FD4FCD /* BlockClosure.c */; };
+		36061F0611235EE200FD4FCD /* Boolean.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6611235EE200FD4FCD /* Boolean.c */; };
+		36061F0811235EE200FD4FCD /* BridgeTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6911235EE200FD4FCD /* BridgeTest.c */; };
+		36061F0A11235EE200FD4FCD /* Character.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6C11235EE200FD4FCD /* Character.c */; };
+		36061F0C11235EE200FD4FCD /* ChildClassTestClass.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E6F11235EE200FD4FCD /* ChildClassTestClass.c */; };
+		36061F0E11235EE200FD4FCD /* Class.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E7211235EE200FD4FCD /* Class.c */; };
+		36061F1011235EE200FD4FCD /* Collection.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E7511235EE200FD4FCD /* Collection.c */; };
+		36061F1211235EE200FD4FCD /* Dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E7811235EE200FD4FCD /* Dictionary.c */; };
+		36061F1411235EE200FD4FCD /* False.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E7B11235EE200FD4FCD /* False.c */; };
+		36061F1611235EE200FD4FCD /* InstanceVariable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E7E11235EE200FD4FCD /* InstanceVariable.c */; };
+		36061F1811235EE200FD4FCD /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E8111235EE200FD4FCD /* Message.c */; };
+		36061F1A11235EE200FD4FCD /* Metaclass.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E8411235EE200FD4FCD /* Metaclass.c */; };
+		36061F1C11235EE200FD4FCD /* Nil.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E8711235EE200FD4FCD /* Nil.c */; };
+		36061F1E11235EE200FD4FCD /* Object.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E8A11235EE200FD4FCD /* Object.c */; };
+		36061F2011235EE200FD4FCD /* OrderedCollection.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E8D11235EE200FD4FCD /* OrderedCollection.c */; };
+		36061F2211235EE200FD4FCD /* PEGExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9011235EE200FD4FCD /* PEGExpression.c */; };
+		36061F2411235EE200FD4FCD /* PEGFailedOptionalResult.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9311235EE200FD4FCD /* PEGFailedOptionalResult.c */; };
+		36061F2611235EE200FD4FCD /* PEGNotExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9611235EE200FD4FCD /* PEGNotExpression.c */; };
+		36061F2811235EE200FD4FCD /* PEGOneOrMoreExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9911235EE200FD4FCD /* PEGOneOrMoreExpression.c */; };
+		36061F2A11235EE200FD4FCD /* PEGOptionalExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9C11235EE200FD4FCD /* PEGOptionalExpression.c */; };
+		36061F2C11235EE200FD4FCD /* PEGOptionalResult.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E9F11235EE200FD4FCD /* PEGOptionalResult.c */; };
+		36061F2E11235EE200FD4FCD /* PEGOrderedChoiceExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EA211235EE200FD4FCD /* PEGOrderedChoiceExpression.c */; };
+		36061F3011235EE200FD4FCD /* PEGParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EA511235EE200FD4FCD /* PEGParser.c */; };
+		36061F3211235EE200FD4FCD /* PEGRange.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EA811235EE200FD4FCD /* PEGRange.c */; };
+		36061F3411235EE200FD4FCD /* PEGSequenceExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EAB11235EE200FD4FCD /* PEGSequenceExpression.c */; };
+		36061F3611235EE200FD4FCD /* PEGStringScanner.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EAE11235EE200FD4FCD /* PEGStringScanner.c */; };
+		36061F3811235EE200FD4FCD /* PEGSucceededOptionalResult.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EB111235EE200FD4FCD /* PEGSucceededOptionalResult.c */; };
+		36061F3A11235EE200FD4FCD /* PEGTerminal.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EB411235EE200FD4FCD /* PEGTerminal.c */; };
+		36061F3C11235EE200FD4FCD /* PEGTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EB711235EE200FD4FCD /* PEGTest.c */; };
+		36061F3E11235EE200FD4FCD /* PEGZeroOrMoreExpression.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EBA11235EE200FD4FCD /* PEGZeroOrMoreExpression.c */; };
+		36061F4011235EE200FD4FCD /* PexMatcher.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EBD11235EE200FD4FCD /* PexMatcher.c */; };
+		36061F4211235EE200FD4FCD /* Point.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EC011235EE200FD4FCD /* Point.c */; };
+		36061F4411235EE200FD4FCD /* PositionableStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EC311235EE200FD4FCD /* PositionableStream.c */; };
+		36061F4611235EE200FD4FCD /* ReadStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EC611235EE200FD4FCD /* ReadStream.c */; };
+		36061F4811235EE200FD4FCD /* RuntimeObject.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EC911235EE200FD4FCD /* RuntimeObject.c */; };
+		36061F4A11235EE200FD4FCD /* SequenceableCollection.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061ECC11235EE200FD4FCD /* SequenceableCollection.c */; };
+		36061F4C11235EE200FD4FCD /* Set.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061ECF11235EE200FD4FCD /* Set.c */; };
+		36061F4E11235EE200FD4FCD /* SmallDictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061ED211235EE200FD4FCD /* SmallDictionary.c */; };
+		36061F5011235EE200FD4FCD /* SmallInt.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061ED511235EE200FD4FCD /* SmallInt.c */; };
+		36061F5211235EE200FD4FCD /* SortedCollection.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061ED811235EE200FD4FCD /* SortedCollection.c */; };
+		36061F5411235EE200FD4FCD /* StandardTestClass.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EDB11235EE200FD4FCD /* StandardTestClass.c */; };
+		36061F5611235EE200FD4FCD /* StandardVariableTestClass.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EDE11235EE200FD4FCD /* StandardVariableTestClass.c */; };
+		36061F5811235EE200FD4FCD /* Stream.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EE111235EE200FD4FCD /* Stream.c */; };
+		36061F5A11235EE200FD4FCD /* String.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EE411235EE200FD4FCD /* String.c */; };
+		36061F5C11235EE200FD4FCD /* SuperClassTestClass.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EE711235EE200FD4FCD /* SuperClassTestClass.c */; };
+		36061F5E11235EE200FD4FCD /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EEA11235EE200FD4FCD /* Symbol.c */; };
+		36061F6011235EE200FD4FCD /* TestCase.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EED11235EE200FD4FCD /* TestCase.c */; };
+		36061F6211235EE200FD4FCD /* True.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF011235EE200FD4FCD /* True.c */; };
+		36061F6411235EE200FD4FCD /* Type.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF311235EE200FD4FCD /* Type.c */; };
+		36061F6611235EE200FD4FCD /* Variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF611235EE200FD4FCD /* Variable.c */; };
+		36061F6811235EE200FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF911235EE200FD4FCD /* lib.c */; };
+		36061F6A11235EEB00FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E4B11235ED800FD4FCD /* lib.c */; };
+		36061F6B11235EEB00FD4FCD /* BridgeTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E4F11235ED800FD4FCD /* BridgeTest.c */; };
+		36061F6C11235EEB00FD4FCD /* PEGTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E5211235ED800FD4FCD /* PEGTest.c */; };
 		364E66A010C562DE00AD4616 /* pinocchio.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E65FB10C562DE00AD4616 /* pinocchio.c */; };
 		364E66A410C562DE00AD4616 /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660510C562DE00AD4616 /* Assign.c */; };
 		364E66A710C562DE00AD4616 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660910C562DE00AD4616 /* Block.c */; };
@@ -58,183 +116,122 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		36061C9C1122BBA700FD4FCD /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
-		36061C9D1122BBA700FD4FCD /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		36061C9F1122BBA800FD4FCD /* ArrayedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ArrayedCollection.c; sourceTree = "<group>"; };
-		36061CA01122BBA800FD4FCD /* ArrayedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayedCollection.h; sourceTree = "<group>"; };
-		36061CA21122BBA800FD4FCD /* ASTArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTArray.c; sourceTree = "<group>"; };
-		36061CA31122BBA800FD4FCD /* ASTArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTArray.h; sourceTree = "<group>"; };
-		36061CA51122BBA800FD4FCD /* ASTAssignmentExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTAssignmentExpression.c; sourceTree = "<group>"; };
-		36061CA61122BBA800FD4FCD /* ASTAssignmentExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTAssignmentExpression.h; sourceTree = "<group>"; };
-		36061CA81122BBA800FD4FCD /* ASTBinaryExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTBinaryExpression.c; sourceTree = "<group>"; };
-		36061CA91122BBA800FD4FCD /* ASTBinaryExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBinaryExpression.h; sourceTree = "<group>"; };
-		36061CAB1122BBA800FD4FCD /* ASTBinaryMessageDefinition.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTBinaryMessageDefinition.c; sourceTree = "<group>"; };
-		36061CAC1122BBA800FD4FCD /* ASTBinaryMessageDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBinaryMessageDefinition.h; sourceTree = "<group>"; };
-		36061CAE1122BBA800FD4FCD /* ASTBinarySelector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTBinarySelector.c; sourceTree = "<group>"; };
-		36061CAF1122BBA800FD4FCD /* ASTBinarySelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBinarySelector.h; sourceTree = "<group>"; };
-		36061CB11122BBA800FD4FCD /* ASTBlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTBlock.c; sourceTree = "<group>"; };
-		36061CB21122BBA800FD4FCD /* ASTBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBlock.h; sourceTree = "<group>"; };
-		36061CB41122BBA800FD4FCD /* ASTBraceExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTBraceExpression.c; sourceTree = "<group>"; };
-		36061CB51122BBA800FD4FCD /* ASTBraceExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTBraceExpression.h; sourceTree = "<group>"; };
-		36061CB71122BBA800FD4FCD /* ASTCharacter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTCharacter.c; sourceTree = "<group>"; };
-		36061CB81122BBA800FD4FCD /* ASTCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTCharacter.h; sourceTree = "<group>"; };
-		36061CBA1122BBA800FD4FCD /* ASTExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTExpression.c; sourceTree = "<group>"; };
-		36061CBB1122BBA800FD4FCD /* ASTExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTExpression.h; sourceTree = "<group>"; };
-		36061CBD1122BBA800FD4FCD /* ASTKeywordAnnotation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTKeywordAnnotation.c; sourceTree = "<group>"; };
-		36061CBE1122BBA800FD4FCD /* ASTKeywordAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTKeywordAnnotation.h; sourceTree = "<group>"; };
-		36061CC01122BBA800FD4FCD /* ASTKeywordMessageDefinition.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTKeywordMessageDefinition.c; sourceTree = "<group>"; };
-		36061CC11122BBA800FD4FCD /* ASTKeywordMessageDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTKeywordMessageDefinition.h; sourceTree = "<group>"; };
-		36061CC31122BBA800FD4FCD /* ASTKeywordSelector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTKeywordSelector.c; sourceTree = "<group>"; };
-		36061CC41122BBA800FD4FCD /* ASTKeywordSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTKeywordSelector.h; sourceTree = "<group>"; };
-		36061CC61122BBA800FD4FCD /* ASTLiteral.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTLiteral.c; sourceTree = "<group>"; };
-		36061CC71122BBA800FD4FCD /* ASTLiteral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTLiteral.h; sourceTree = "<group>"; };
-		36061CC91122BBA800FD4FCD /* ASTMessageCascadeExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTMessageCascadeExpression.c; sourceTree = "<group>"; };
-		36061CCA1122BBA800FD4FCD /* ASTMessageCascadeExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTMessageCascadeExpression.h; sourceTree = "<group>"; };
-		36061CCC1122BBA800FD4FCD /* ASTMessageExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTMessageExpression.c; sourceTree = "<group>"; };
-		36061CCD1122BBA800FD4FCD /* ASTMessageExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTMessageExpression.h; sourceTree = "<group>"; };
-		36061CCF1122BBA800FD4FCD /* ASTMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTMethod.c; sourceTree = "<group>"; };
-		36061CD01122BBA800FD4FCD /* ASTMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTMethod.h; sourceTree = "<group>"; };
-		36061CD21122BBA800FD4FCD /* ASTNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTNode.c; sourceTree = "<group>"; };
-		36061CD31122BBA800FD4FCD /* ASTNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTNode.h; sourceTree = "<group>"; };
-		36061CD51122BBA800FD4FCD /* ASTNumber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTNumber.c; sourceTree = "<group>"; };
-		36061CD61122BBA800FD4FCD /* ASTNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTNumber.h; sourceTree = "<group>"; };
-		36061CD81122BBA800FD4FCD /* ASTReturnExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTReturnExpression.c; sourceTree = "<group>"; };
-		36061CD91122BBA800FD4FCD /* ASTReturnExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTReturnExpression.h; sourceTree = "<group>"; };
-		36061CDB1122BBA800FD4FCD /* ASTSelector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTSelector.c; sourceTree = "<group>"; };
-		36061CDC1122BBA800FD4FCD /* ASTSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTSelector.h; sourceTree = "<group>"; };
-		36061CDE1122BBA800FD4FCD /* ASTSelf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTSelf.c; sourceTree = "<group>"; };
-		36061CDF1122BBA800FD4FCD /* ASTSelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTSelf.h; sourceTree = "<group>"; };
-		36061CE11122BBA800FD4FCD /* ASTString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTString.c; sourceTree = "<group>"; };
-		36061CE21122BBA800FD4FCD /* ASTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTString.h; sourceTree = "<group>"; };
-		36061CE41122BBA800FD4FCD /* ASTSuper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTSuper.c; sourceTree = "<group>"; };
-		36061CE51122BBA800FD4FCD /* ASTSuper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTSuper.h; sourceTree = "<group>"; };
-		36061CE71122BBA800FD4FCD /* ASTSymbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTSymbol.c; sourceTree = "<group>"; };
-		36061CE81122BBA800FD4FCD /* ASTSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTSymbol.h; sourceTree = "<group>"; };
-		36061CEA1122BBA800FD4FCD /* ASTUnaryAnnotation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTUnaryAnnotation.c; sourceTree = "<group>"; };
-		36061CEB1122BBA800FD4FCD /* ASTUnaryAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTUnaryAnnotation.h; sourceTree = "<group>"; };
-		36061CED1122BBA800FD4FCD /* ASTUnaryExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTUnaryExpression.c; sourceTree = "<group>"; };
-		36061CEE1122BBA800FD4FCD /* ASTUnaryExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTUnaryExpression.h; sourceTree = "<group>"; };
-		36061CF01122BBA800FD4FCD /* ASTUnaryMessageDefinition.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTUnaryMessageDefinition.c; sourceTree = "<group>"; };
-		36061CF11122BBA800FD4FCD /* ASTUnaryMessageDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTUnaryMessageDefinition.h; sourceTree = "<group>"; };
-		36061CF31122BBA800FD4FCD /* ASTUnarySelector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTUnarySelector.c; sourceTree = "<group>"; };
-		36061CF41122BBA800FD4FCD /* ASTUnarySelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTUnarySelector.h; sourceTree = "<group>"; };
-		36061CF61122BBA800FD4FCD /* ASTVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTVariable.c; sourceTree = "<group>"; };
-		36061CF71122BBA800FD4FCD /* ASTVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTVariable.h; sourceTree = "<group>"; };
-		36061CF91122BBA800FD4FCD /* Behavior.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Behavior.c; sourceTree = "<group>"; };
-		36061CFA1122BBA800FD4FCD /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Behavior.h; sourceTree = "<group>"; };
-		36061CFC1122BBA800FD4FCD /* BlockClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockClosure.c; sourceTree = "<group>"; };
-		36061CFD1122BBA800FD4FCD /* BlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockClosure.h; sourceTree = "<group>"; };
-		36061CFF1122BBA800FD4FCD /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
-		36061D001122BBA800FD4FCD /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
-		36061D021122BBA800FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
-		36061D031122BBA800FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
-		36061D051122BBA800FD4FCD /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
-		36061D061122BBA800FD4FCD /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		36061D081122BBA800FD4FCD /* ChildClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChildClassTestClass.c; sourceTree = "<group>"; };
-		36061D091122BBA800FD4FCD /* ChildClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildClassTestClass.h; sourceTree = "<group>"; };
-		36061D0B1122BBA800FD4FCD /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
-		36061D0C1122BBA800FD4FCD /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
-		36061D0E1122BBA800FD4FCD /* Collection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Collection.c; sourceTree = "<group>"; };
-		36061D0F1122BBA800FD4FCD /* Collection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collection.h; sourceTree = "<group>"; };
-		36061D111122BBA800FD4FCD /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
-		36061D121122BBA800FD4FCD /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
-		36061D141122BBA800FD4FCD /* False.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = False.c; sourceTree = "<group>"; };
-		36061D151122BBA800FD4FCD /* False.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = False.h; sourceTree = "<group>"; };
-		36061D171122BBA800FD4FCD /* InstanceVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstanceVariable.c; sourceTree = "<group>"; };
-		36061D181122BBA800FD4FCD /* InstanceVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceVariable.h; sourceTree = "<group>"; };
-		36061D1A1122BBA800FD4FCD /* LocalVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = LocalVariable.c; sourceTree = "<group>"; };
-		36061D1B1122BBA800FD4FCD /* LocalVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalVariable.h; sourceTree = "<group>"; };
-		36061D1C1122BBA800FD4FCD /* LocalVariable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = LocalVariable.o; sourceTree = "<group>"; };
-		36061D1D1122BBA800FD4FCD /* Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Message.c; sourceTree = "<group>"; };
-		36061D1E1122BBA800FD4FCD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		36061D201122BBA800FD4FCD /* Metaclass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Metaclass.c; sourceTree = "<group>"; };
-		36061D211122BBA800FD4FCD /* Metaclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metaclass.h; sourceTree = "<group>"; };
-		36061D231122BBA800FD4FCD /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
-		36061D241122BBA800FD4FCD /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
-		36061D261122BBA800FD4FCD /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
-		36061D271122BBA800FD4FCD /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
-		36061D291122BBA800FD4FCD /* OrderedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OrderedCollection.c; sourceTree = "<group>"; };
-		36061D2A1122BBA800FD4FCD /* OrderedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedCollection.h; sourceTree = "<group>"; };
-		36061D2C1122BBA800FD4FCD /* PEGExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGExpression.c; sourceTree = "<group>"; };
-		36061D2D1122BBA800FD4FCD /* PEGExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGExpression.h; sourceTree = "<group>"; };
-		36061D2F1122BBA800FD4FCD /* PEGFailedOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGFailedOptionalResult.c; sourceTree = "<group>"; };
-		36061D301122BBA800FD4FCD /* PEGFailedOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGFailedOptionalResult.h; sourceTree = "<group>"; };
-		36061D321122BBA800FD4FCD /* PEGNotExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGNotExpression.c; sourceTree = "<group>"; };
-		36061D331122BBA800FD4FCD /* PEGNotExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGNotExpression.h; sourceTree = "<group>"; };
-		36061D351122BBA800FD4FCD /* PEGOneOrMoreExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOneOrMoreExpression.c; sourceTree = "<group>"; };
-		36061D361122BBA800FD4FCD /* PEGOneOrMoreExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOneOrMoreExpression.h; sourceTree = "<group>"; };
-		36061D381122BBA800FD4FCD /* PEGOptionalExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOptionalExpression.c; sourceTree = "<group>"; };
-		36061D391122BBA800FD4FCD /* PEGOptionalExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOptionalExpression.h; sourceTree = "<group>"; };
-		36061D3B1122BBA800FD4FCD /* PEGOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOptionalResult.c; sourceTree = "<group>"; };
-		36061D3C1122BBA800FD4FCD /* PEGOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOptionalResult.h; sourceTree = "<group>"; };
-		36061D3E1122BBA800FD4FCD /* PEGOrderedChoiceExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOrderedChoiceExpression.c; sourceTree = "<group>"; };
-		36061D3F1122BBA800FD4FCD /* PEGOrderedChoiceExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOrderedChoiceExpression.h; sourceTree = "<group>"; };
-		36061D411122BBA800FD4FCD /* PEGParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGParser.c; sourceTree = "<group>"; };
-		36061D421122BBA800FD4FCD /* PEGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGParser.h; sourceTree = "<group>"; };
-		36061D441122BBA800FD4FCD /* PEGRange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGRange.c; sourceTree = "<group>"; };
-		36061D451122BBA800FD4FCD /* PEGRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGRange.h; sourceTree = "<group>"; };
-		36061D471122BBA800FD4FCD /* PEGSequenceExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGSequenceExpression.c; sourceTree = "<group>"; };
-		36061D481122BBA800FD4FCD /* PEGSequenceExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGSequenceExpression.h; sourceTree = "<group>"; };
-		36061D4A1122BBA800FD4FCD /* PEGStringScanner.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGStringScanner.c; sourceTree = "<group>"; };
-		36061D4B1122BBA800FD4FCD /* PEGStringScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGStringScanner.h; sourceTree = "<group>"; };
-		36061D4D1122BBA800FD4FCD /* PEGSucceededOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGSucceededOptionalResult.c; sourceTree = "<group>"; };
-		36061D4E1122BBA800FD4FCD /* PEGSucceededOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGSucceededOptionalResult.h; sourceTree = "<group>"; };
-		36061D501122BBA800FD4FCD /* PEGTerminal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTerminal.c; sourceTree = "<group>"; };
-		36061D511122BBA800FD4FCD /* PEGTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTerminal.h; sourceTree = "<group>"; };
-		36061D531122BBA800FD4FCD /* PEGZeroOrMoreExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGZeroOrMoreExpression.c; sourceTree = "<group>"; };
-		36061D541122BBA800FD4FCD /* PEGZeroOrMoreExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGZeroOrMoreExpression.h; sourceTree = "<group>"; };
-		36061D561122BBA800FD4FCD /* PexMatcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PexMatcher.c; sourceTree = "<group>"; };
-		36061D571122BBA800FD4FCD /* PexMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PexMatcher.h; sourceTree = "<group>"; };
-		36061D591122BBA800FD4FCD /* Point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Point.c; sourceTree = "<group>"; };
-		36061D5A1122BBA800FD4FCD /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
-		36061D5C1122BBA800FD4FCD /* PositionableStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PositionableStream.c; sourceTree = "<group>"; };
-		36061D5D1122BBA800FD4FCD /* PositionableStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionableStream.h; sourceTree = "<group>"; };
-		36061D5F1122BBA800FD4FCD /* ReadStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadStream.c; sourceTree = "<group>"; };
-		36061D601122BBA800FD4FCD /* ReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadStream.h; sourceTree = "<group>"; };
-		36061D621122BBA800FD4FCD /* RuntimeObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RuntimeObject.c; sourceTree = "<group>"; };
-		36061D631122BBA800FD4FCD /* RuntimeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObject.h; sourceTree = "<group>"; };
-		36061D651122BBA800FD4FCD /* SCParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCParser.c; sourceTree = "<group>"; };
-		36061D661122BBA800FD4FCD /* SCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCParser.h; sourceTree = "<group>"; };
-		36061D681122BBA800FD4FCD /* SCParserTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCParserTest.c; sourceTree = "<group>"; };
-		36061D691122BBA800FD4FCD /* SCParserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCParserTest.h; sourceTree = "<group>"; };
-		36061D6B1122BBA800FD4FCD /* SequenceableCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SequenceableCollection.c; sourceTree = "<group>"; };
-		36061D6C1122BBA800FD4FCD /* SequenceableCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequenceableCollection.h; sourceTree = "<group>"; };
-		36061D6E1122BBA800FD4FCD /* Set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Set.c; sourceTree = "<group>"; };
-		36061D6F1122BBA800FD4FCD /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
-		36061D711122BBA800FD4FCD /* SmallDictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallDictionary.c; sourceTree = "<group>"; };
-		36061D721122BBA800FD4FCD /* SmallDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallDictionary.h; sourceTree = "<group>"; };
-		36061D741122BBA800FD4FCD /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
-		36061D751122BBA800FD4FCD /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
-		36061D771122BBA800FD4FCD /* StandardTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardTestClass.c; sourceTree = "<group>"; };
-		36061D781122BBA800FD4FCD /* StandardTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTestClass.h; sourceTree = "<group>"; };
-		36061D7A1122BBA800FD4FCD /* StandardVariableTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardVariableTestClass.c; sourceTree = "<group>"; };
-		36061D7B1122BBA800FD4FCD /* StandardVariableTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardVariableTestClass.h; sourceTree = "<group>"; };
-		36061D7D1122BBA800FD4FCD /* Stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stream.c; sourceTree = "<group>"; };
-		36061D7E1122BBA800FD4FCD /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
-		36061D801122BBA800FD4FCD /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
-		36061D811122BBA800FD4FCD /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
-		36061D831122BBA800FD4FCD /* SuperClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SuperClassTestClass.c; sourceTree = "<group>"; };
-		36061D841122BBA800FD4FCD /* SuperClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperClassTestClass.h; sourceTree = "<group>"; };
-		36061D861122BBA800FD4FCD /* Symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Symbol.c; sourceTree = "<group>"; };
-		36061D871122BBA800FD4FCD /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
-		36061D891122BBA800FD4FCD /* TestCase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TestCase.c; sourceTree = "<group>"; };
-		36061D8A1122BBA800FD4FCD /* TestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCase.h; sourceTree = "<group>"; };
-		36061D8C1122BBA800FD4FCD /* True.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = True.c; sourceTree = "<group>"; };
-		36061D8D1122BBA800FD4FCD /* True.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = True.h; sourceTree = "<group>"; };
-		36061D8F1122BBA800FD4FCD /* Type.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Type.c; sourceTree = "<group>"; };
-		36061D901122BBA800FD4FCD /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
-		36061D921122BBA800FD4FCD /* Variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Variable.c; sourceTree = "<group>"; };
-		36061D931122BBA800FD4FCD /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
-		36061D951122BBA800FD4FCD /* Pharo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Pharo.c; sourceTree = "<group>"; };
-		36061D961122BBA800FD4FCD /* Pharo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pharo.h; sourceTree = "<group>"; };
-		36061D971122BBA800FD4FCD /* PharoTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PharoTest.c; sourceTree = "<group>"; };
-		36061D981122BBA800FD4FCD /* PharoTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PharoTest.h; sourceTree = "<group>"; };
-		36061D9A1122BBA800FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
-		36061D9B1122BBA800FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
-		36061D9D1122BBA800FD4FCD /* SCParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCParser.c; sourceTree = "<group>"; };
-		36061D9E1122BBA800FD4FCD /* SCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCParser.h; sourceTree = "<group>"; };
-		36061DA01122BBA800FD4FCD /* SCParserTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SCParserTest.c; sourceTree = "<group>"; };
-		36061DA11122BBA800FD4FCD /* SCParserTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCParserTest.h; sourceTree = "<group>"; };
+		36061E4B11235ED800FD4FCD /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
+		36061E4C11235ED800FD4FCD /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
+		36061E4F11235ED800FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
+		36061E5011235ED800FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
+		36061E5211235ED800FD4FCD /* PEGTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTest.c; sourceTree = "<group>"; };
+		36061E5311235ED800FD4FCD /* PEGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTest.h; sourceTree = "<group>"; };
+		36061E5711235EE200FD4FCD /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
+		36061E5811235EE200FD4FCD /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
+		36061E5A11235EE200FD4FCD /* ArrayedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ArrayedCollection.c; sourceTree = "<group>"; };
+		36061E5B11235EE200FD4FCD /* ArrayedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayedCollection.h; sourceTree = "<group>"; };
+		36061E5D11235EE200FD4FCD /* ASTNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTNode.c; sourceTree = "<group>"; };
+		36061E5E11235EE200FD4FCD /* ASTNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTNode.h; sourceTree = "<group>"; };
+		36061E6011235EE200FD4FCD /* Behavior.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Behavior.c; sourceTree = "<group>"; };
+		36061E6111235EE200FD4FCD /* Behavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Behavior.h; sourceTree = "<group>"; };
+		36061E6311235EE200FD4FCD /* BlockClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockClosure.c; sourceTree = "<group>"; };
+		36061E6411235EE200FD4FCD /* BlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockClosure.h; sourceTree = "<group>"; };
+		36061E6611235EE200FD4FCD /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
+		36061E6711235EE200FD4FCD /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
+		36061E6911235EE200FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
+		36061E6A11235EE200FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
+		36061E6C11235EE200FD4FCD /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
+		36061E6D11235EE200FD4FCD /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		36061E6F11235EE200FD4FCD /* ChildClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChildClassTestClass.c; sourceTree = "<group>"; };
+		36061E7011235EE200FD4FCD /* ChildClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildClassTestClass.h; sourceTree = "<group>"; };
+		36061E7211235EE200FD4FCD /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
+		36061E7311235EE200FD4FCD /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
+		36061E7511235EE200FD4FCD /* Collection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Collection.c; sourceTree = "<group>"; };
+		36061E7611235EE200FD4FCD /* Collection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Collection.h; sourceTree = "<group>"; };
+		36061E7811235EE200FD4FCD /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
+		36061E7911235EE200FD4FCD /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
+		36061E7B11235EE200FD4FCD /* False.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = False.c; sourceTree = "<group>"; };
+		36061E7C11235EE200FD4FCD /* False.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = False.h; sourceTree = "<group>"; };
+		36061E7E11235EE200FD4FCD /* InstanceVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstanceVariable.c; sourceTree = "<group>"; };
+		36061E7F11235EE200FD4FCD /* InstanceVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceVariable.h; sourceTree = "<group>"; };
+		36061E8111235EE200FD4FCD /* Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Message.c; sourceTree = "<group>"; };
+		36061E8211235EE200FD4FCD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		36061E8411235EE200FD4FCD /* Metaclass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Metaclass.c; sourceTree = "<group>"; };
+		36061E8511235EE200FD4FCD /* Metaclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metaclass.h; sourceTree = "<group>"; };
+		36061E8711235EE200FD4FCD /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
+		36061E8811235EE200FD4FCD /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
+		36061E8A11235EE200FD4FCD /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
+		36061E8B11235EE200FD4FCD /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		36061E8D11235EE200FD4FCD /* OrderedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = OrderedCollection.c; sourceTree = "<group>"; };
+		36061E8E11235EE200FD4FCD /* OrderedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedCollection.h; sourceTree = "<group>"; };
+		36061E9011235EE200FD4FCD /* PEGExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGExpression.c; sourceTree = "<group>"; };
+		36061E9111235EE200FD4FCD /* PEGExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGExpression.h; sourceTree = "<group>"; };
+		36061E9311235EE200FD4FCD /* PEGFailedOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGFailedOptionalResult.c; sourceTree = "<group>"; };
+		36061E9411235EE200FD4FCD /* PEGFailedOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGFailedOptionalResult.h; sourceTree = "<group>"; };
+		36061E9611235EE200FD4FCD /* PEGNotExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGNotExpression.c; sourceTree = "<group>"; };
+		36061E9711235EE200FD4FCD /* PEGNotExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGNotExpression.h; sourceTree = "<group>"; };
+		36061E9911235EE200FD4FCD /* PEGOneOrMoreExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOneOrMoreExpression.c; sourceTree = "<group>"; };
+		36061E9A11235EE200FD4FCD /* PEGOneOrMoreExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOneOrMoreExpression.h; sourceTree = "<group>"; };
+		36061E9C11235EE200FD4FCD /* PEGOptionalExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOptionalExpression.c; sourceTree = "<group>"; };
+		36061E9D11235EE200FD4FCD /* PEGOptionalExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOptionalExpression.h; sourceTree = "<group>"; };
+		36061E9F11235EE200FD4FCD /* PEGOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOptionalResult.c; sourceTree = "<group>"; };
+		36061EA011235EE200FD4FCD /* PEGOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOptionalResult.h; sourceTree = "<group>"; };
+		36061EA211235EE200FD4FCD /* PEGOrderedChoiceExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGOrderedChoiceExpression.c; sourceTree = "<group>"; };
+		36061EA311235EE200FD4FCD /* PEGOrderedChoiceExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGOrderedChoiceExpression.h; sourceTree = "<group>"; };
+		36061EA511235EE200FD4FCD /* PEGParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGParser.c; sourceTree = "<group>"; };
+		36061EA611235EE200FD4FCD /* PEGParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGParser.h; sourceTree = "<group>"; };
+		36061EA811235EE200FD4FCD /* PEGRange.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGRange.c; sourceTree = "<group>"; };
+		36061EA911235EE200FD4FCD /* PEGRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGRange.h; sourceTree = "<group>"; };
+		36061EAB11235EE200FD4FCD /* PEGSequenceExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGSequenceExpression.c; sourceTree = "<group>"; };
+		36061EAC11235EE200FD4FCD /* PEGSequenceExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGSequenceExpression.h; sourceTree = "<group>"; };
+		36061EAE11235EE200FD4FCD /* PEGStringScanner.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGStringScanner.c; sourceTree = "<group>"; };
+		36061EAF11235EE200FD4FCD /* PEGStringScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGStringScanner.h; sourceTree = "<group>"; };
+		36061EB111235EE200FD4FCD /* PEGSucceededOptionalResult.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGSucceededOptionalResult.c; sourceTree = "<group>"; };
+		36061EB211235EE200FD4FCD /* PEGSucceededOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGSucceededOptionalResult.h; sourceTree = "<group>"; };
+		36061EB411235EE200FD4FCD /* PEGTerminal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTerminal.c; sourceTree = "<group>"; };
+		36061EB511235EE200FD4FCD /* PEGTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTerminal.h; sourceTree = "<group>"; };
+		36061EB711235EE200FD4FCD /* PEGTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTest.c; sourceTree = "<group>"; };
+		36061EB811235EE200FD4FCD /* PEGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTest.h; sourceTree = "<group>"; };
+		36061EBA11235EE200FD4FCD /* PEGZeroOrMoreExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGZeroOrMoreExpression.c; sourceTree = "<group>"; };
+		36061EBB11235EE200FD4FCD /* PEGZeroOrMoreExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGZeroOrMoreExpression.h; sourceTree = "<group>"; };
+		36061EBD11235EE200FD4FCD /* PexMatcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PexMatcher.c; sourceTree = "<group>"; };
+		36061EBE11235EE200FD4FCD /* PexMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PexMatcher.h; sourceTree = "<group>"; };
+		36061EC011235EE200FD4FCD /* Point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Point.c; sourceTree = "<group>"; };
+		36061EC111235EE200FD4FCD /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		36061EC311235EE200FD4FCD /* PositionableStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PositionableStream.c; sourceTree = "<group>"; };
+		36061EC411235EE200FD4FCD /* PositionableStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionableStream.h; sourceTree = "<group>"; };
+		36061EC611235EE200FD4FCD /* ReadStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadStream.c; sourceTree = "<group>"; };
+		36061EC711235EE200FD4FCD /* ReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadStream.h; sourceTree = "<group>"; };
+		36061EC911235EE200FD4FCD /* RuntimeObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RuntimeObject.c; sourceTree = "<group>"; };
+		36061ECA11235EE200FD4FCD /* RuntimeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObject.h; sourceTree = "<group>"; };
+		36061ECC11235EE200FD4FCD /* SequenceableCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SequenceableCollection.c; sourceTree = "<group>"; };
+		36061ECD11235EE200FD4FCD /* SequenceableCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequenceableCollection.h; sourceTree = "<group>"; };
+		36061ECF11235EE200FD4FCD /* Set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Set.c; sourceTree = "<group>"; };
+		36061ED011235EE200FD4FCD /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
+		36061ED211235EE200FD4FCD /* SmallDictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallDictionary.c; sourceTree = "<group>"; };
+		36061ED311235EE200FD4FCD /* SmallDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallDictionary.h; sourceTree = "<group>"; };
+		36061ED511235EE200FD4FCD /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
+		36061ED611235EE200FD4FCD /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
+		36061ED811235EE200FD4FCD /* SortedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SortedCollection.c; sourceTree = "<group>"; };
+		36061ED911235EE200FD4FCD /* SortedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedCollection.h; sourceTree = "<group>"; };
+		36061EDB11235EE200FD4FCD /* StandardTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardTestClass.c; sourceTree = "<group>"; };
+		36061EDC11235EE200FD4FCD /* StandardTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTestClass.h; sourceTree = "<group>"; };
+		36061EDE11235EE200FD4FCD /* StandardVariableTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardVariableTestClass.c; sourceTree = "<group>"; };
+		36061EDF11235EE200FD4FCD /* StandardVariableTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardVariableTestClass.h; sourceTree = "<group>"; };
+		36061EE111235EE200FD4FCD /* Stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stream.c; sourceTree = "<group>"; };
+		36061EE211235EE200FD4FCD /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
+		36061EE411235EE200FD4FCD /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
+		36061EE511235EE200FD4FCD /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
+		36061EE711235EE200FD4FCD /* SuperClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SuperClassTestClass.c; sourceTree = "<group>"; };
+		36061EE811235EE200FD4FCD /* SuperClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperClassTestClass.h; sourceTree = "<group>"; };
+		36061EEA11235EE200FD4FCD /* Symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Symbol.c; sourceTree = "<group>"; };
+		36061EEB11235EE200FD4FCD /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
+		36061EED11235EE200FD4FCD /* TestCase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TestCase.c; sourceTree = "<group>"; };
+		36061EEE11235EE200FD4FCD /* TestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCase.h; sourceTree = "<group>"; };
+		36061EF011235EE200FD4FCD /* True.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = True.c; sourceTree = "<group>"; };
+		36061EF111235EE200FD4FCD /* True.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = True.h; sourceTree = "<group>"; };
+		36061EF311235EE200FD4FCD /* Type.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Type.c; sourceTree = "<group>"; };
+		36061EF411235EE200FD4FCD /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
+		36061EF611235EE200FD4FCD /* Variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Variable.c; sourceTree = "<group>"; };
+		36061EF711235EE200FD4FCD /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
+		36061EF911235EE200FD4FCD /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
+		36061EFA11235EE200FD4FCD /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
 		364E64B510C562DD00AD4616 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		364E65FB10C562DE00AD4616 /* pinocchio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinocchio.c; sourceTree = "<group>"; };
 		364E65FC10C562DE00AD4616 /* pinocchio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinocchio.h; sourceTree = "<group>"; };
@@ -290,31 +287,24 @@
 		364E663E10C562DE00AD4616 /* StreamTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = StreamTest.ci; sourceTree = "<group>"; };
 		364E664010C562DE00AD4616 /* ClassReference.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassReference.c; sourceTree = "<group>"; };
 		364E664110C562DE00AD4616 /* ClassReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassReference.h; sourceTree = "<group>"; };
-		364E664210C562DE00AD4616 /* ClassReference.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = ClassReference.o; sourceTree = "<group>"; };
 		364E664310C562DE00AD4616 /* ClassReferenceTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ClassReferenceTest.ci; sourceTree = "<group>"; };
 		364E664510C562DE00AD4616 /* BlockClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockClosure.c; sourceTree = "<group>"; };
 		364E664610C562DE00AD4616 /* BlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockClosure.h; sourceTree = "<group>"; };
-		364E664710C562DE00AD4616 /* BlockClosure.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = BlockClosure.o; sourceTree = "<group>"; };
 		364E664810C562DE00AD4616 /* BlockClosureTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlockClosureTest.ci; sourceTree = "<group>"; };
 		364E664910C562DE00AD4616 /* BlockContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockContext.c; sourceTree = "<group>"; };
 		364E664A10C562DE00AD4616 /* BlockContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockContext.h; sourceTree = "<group>"; };
-		364E664B10C562DE00AD4616 /* BlockContext.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = BlockContext.o; sourceTree = "<group>"; };
 		364E664C10C562DE00AD4616 /* Continue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continue.c; sourceTree = "<group>"; };
 		364E664D10C562DE00AD4616 /* Continue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continue.h; sourceTree = "<group>"; };
-		364E664E10C562DE00AD4616 /* Continue.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Continue.o; sourceTree = "<group>"; };
 		364E664F10C562DE00AD4616 /* ContinueTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ContinueTest.ci; sourceTree = "<group>"; };
 		364E665010C562DE00AD4616 /* Env.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Env.o; sourceTree = "<group>"; };
 		364E665110C562DE00AD4616 /* InlineCache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InlineCache.c; sourceTree = "<group>"; };
 		364E665210C562DE00AD4616 /* InlineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineCache.h; sourceTree = "<group>"; };
-		364E665310C562DE00AD4616 /* InlineCache.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = InlineCache.o; sourceTree = "<group>"; };
 		364E665410C562DE00AD4616 /* InlineCacheTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InlineCacheTest.ci; sourceTree = "<group>"; };
 		364E665510C562DE00AD4616 /* MethodClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodClosure.c; sourceTree = "<group>"; };
 		364E665610C562DE00AD4616 /* MethodClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodClosure.h; sourceTree = "<group>"; };
-		364E665710C562DE00AD4616 /* MethodClosure.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MethodClosure.o; sourceTree = "<group>"; };
 		364E665810C562DE00AD4616 /* MethodClosureTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodClosureTest.ci; sourceTree = "<group>"; };
 		364E665910C562DE00AD4616 /* MethodContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodContext.c; sourceTree = "<group>"; };
 		364E665A10C562DE00AD4616 /* MethodContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodContext.h; sourceTree = "<group>"; };
-		364E665B10C562DE00AD4616 /* MethodContext.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = MethodContext.o; sourceTree = "<group>"; };
 		364E665C10C562DE00AD4616 /* MethodContextTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodContextTest.ci; sourceTree = "<group>"; };
 		364E665D10C562DE00AD4616 /* ThreadTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ThreadTest.ci; sourceTree = "<group>"; };
 		364E665F10C562DE00AD4616 /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
@@ -413,200 +403,159 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		36061C9B1122BBA700FD4FCD /* class */ = {
+		36061E4A11235ED800FD4FCD /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				36061C9C1122BBA700FD4FCD /* Array.c */,
-				36061C9D1122BBA700FD4FCD /* Array.h */,
-				36061C9F1122BBA800FD4FCD /* ArrayedCollection.c */,
-				36061CA01122BBA800FD4FCD /* ArrayedCollection.h */,
-				36061CA21122BBA800FD4FCD /* ASTArray.c */,
-				36061CA31122BBA800FD4FCD /* ASTArray.h */,
-				36061CA51122BBA800FD4FCD /* ASTAssignmentExpression.c */,
-				36061CA61122BBA800FD4FCD /* ASTAssignmentExpression.h */,
-				36061CA81122BBA800FD4FCD /* ASTBinaryExpression.c */,
-				36061CA91122BBA800FD4FCD /* ASTBinaryExpression.h */,
-				36061CAB1122BBA800FD4FCD /* ASTBinaryMessageDefinition.c */,
-				36061CAC1122BBA800FD4FCD /* ASTBinaryMessageDefinition.h */,
-				36061CAE1122BBA800FD4FCD /* ASTBinarySelector.c */,
-				36061CAF1122BBA800FD4FCD /* ASTBinarySelector.h */,
-				36061CB11122BBA800FD4FCD /* ASTBlock.c */,
-				36061CB21122BBA800FD4FCD /* ASTBlock.h */,
-				36061CB41122BBA800FD4FCD /* ASTBraceExpression.c */,
-				36061CB51122BBA800FD4FCD /* ASTBraceExpression.h */,
-				36061CB71122BBA800FD4FCD /* ASTCharacter.c */,
-				36061CB81122BBA800FD4FCD /* ASTCharacter.h */,
-				36061CBA1122BBA800FD4FCD /* ASTExpression.c */,
-				36061CBB1122BBA800FD4FCD /* ASTExpression.h */,
-				36061CBD1122BBA800FD4FCD /* ASTKeywordAnnotation.c */,
-				36061CBE1122BBA800FD4FCD /* ASTKeywordAnnotation.h */,
-				36061CC01122BBA800FD4FCD /* ASTKeywordMessageDefinition.c */,
-				36061CC11122BBA800FD4FCD /* ASTKeywordMessageDefinition.h */,
-				36061CC31122BBA800FD4FCD /* ASTKeywordSelector.c */,
-				36061CC41122BBA800FD4FCD /* ASTKeywordSelector.h */,
-				36061CC61122BBA800FD4FCD /* ASTLiteral.c */,
-				36061CC71122BBA800FD4FCD /* ASTLiteral.h */,
-				36061CC91122BBA800FD4FCD /* ASTMessageCascadeExpression.c */,
-				36061CCA1122BBA800FD4FCD /* ASTMessageCascadeExpression.h */,
-				36061CCC1122BBA800FD4FCD /* ASTMessageExpression.c */,
-				36061CCD1122BBA800FD4FCD /* ASTMessageExpression.h */,
-				36061CCF1122BBA800FD4FCD /* ASTMethod.c */,
-				36061CD01122BBA800FD4FCD /* ASTMethod.h */,
-				36061CD21122BBA800FD4FCD /* ASTNode.c */,
-				36061CD31122BBA800FD4FCD /* ASTNode.h */,
-				36061CD51122BBA800FD4FCD /* ASTNumber.c */,
-				36061CD61122BBA800FD4FCD /* ASTNumber.h */,
-				36061CD81122BBA800FD4FCD /* ASTReturnExpression.c */,
-				36061CD91122BBA800FD4FCD /* ASTReturnExpression.h */,
-				36061CDB1122BBA800FD4FCD /* ASTSelector.c */,
-				36061CDC1122BBA800FD4FCD /* ASTSelector.h */,
-				36061CDE1122BBA800FD4FCD /* ASTSelf.c */,
-				36061CDF1122BBA800FD4FCD /* ASTSelf.h */,
-				36061CE11122BBA800FD4FCD /* ASTString.c */,
-				36061CE21122BBA800FD4FCD /* ASTString.h */,
-				36061CE41122BBA800FD4FCD /* ASTSuper.c */,
-				36061CE51122BBA800FD4FCD /* ASTSuper.h */,
-				36061CE71122BBA800FD4FCD /* ASTSymbol.c */,
-				36061CE81122BBA800FD4FCD /* ASTSymbol.h */,
-				36061CEA1122BBA800FD4FCD /* ASTUnaryAnnotation.c */,
-				36061CEB1122BBA800FD4FCD /* ASTUnaryAnnotation.h */,
-				36061CED1122BBA800FD4FCD /* ASTUnaryExpression.c */,
-				36061CEE1122BBA800FD4FCD /* ASTUnaryExpression.h */,
-				36061CF01122BBA800FD4FCD /* ASTUnaryMessageDefinition.c */,
-				36061CF11122BBA800FD4FCD /* ASTUnaryMessageDefinition.h */,
-				36061CF31122BBA800FD4FCD /* ASTUnarySelector.c */,
-				36061CF41122BBA800FD4FCD /* ASTUnarySelector.h */,
-				36061CF61122BBA800FD4FCD /* ASTVariable.c */,
-				36061CF71122BBA800FD4FCD /* ASTVariable.h */,
-				36061CF91122BBA800FD4FCD /* Behavior.c */,
-				36061CFA1122BBA800FD4FCD /* Behavior.h */,
-				36061CFC1122BBA800FD4FCD /* BlockClosure.c */,
-				36061CFD1122BBA800FD4FCD /* BlockClosure.h */,
-				36061CFF1122BBA800FD4FCD /* Boolean.c */,
-				36061D001122BBA800FD4FCD /* Boolean.h */,
-				36061D021122BBA800FD4FCD /* BridgeTest.c */,
-				36061D031122BBA800FD4FCD /* BridgeTest.h */,
-				36061D051122BBA800FD4FCD /* Character.c */,
-				36061D061122BBA800FD4FCD /* Character.h */,
-				36061D081122BBA800FD4FCD /* ChildClassTestClass.c */,
-				36061D091122BBA800FD4FCD /* ChildClassTestClass.h */,
-				36061D0B1122BBA800FD4FCD /* Class.c */,
-				36061D0C1122BBA800FD4FCD /* Class.h */,
-				36061D0E1122BBA800FD4FCD /* Collection.c */,
-				36061D0F1122BBA800FD4FCD /* Collection.h */,
-				36061D111122BBA800FD4FCD /* Dictionary.c */,
-				36061D121122BBA800FD4FCD /* Dictionary.h */,
-				36061D141122BBA800FD4FCD /* False.c */,
-				36061D151122BBA800FD4FCD /* False.h */,
-				36061D171122BBA800FD4FCD /* InstanceVariable.c */,
-				36061D181122BBA800FD4FCD /* InstanceVariable.h */,
-				36061D1A1122BBA800FD4FCD /* LocalVariable.c */,
-				36061D1B1122BBA800FD4FCD /* LocalVariable.h */,
-				36061D1C1122BBA800FD4FCD /* LocalVariable.o */,
-				36061D1D1122BBA800FD4FCD /* Message.c */,
-				36061D1E1122BBA800FD4FCD /* Message.h */,
-				36061D201122BBA800FD4FCD /* Metaclass.c */,
-				36061D211122BBA800FD4FCD /* Metaclass.h */,
-				36061D231122BBA800FD4FCD /* Nil.c */,
-				36061D241122BBA800FD4FCD /* Nil.h */,
-				36061D261122BBA800FD4FCD /* Object.c */,
-				36061D271122BBA800FD4FCD /* Object.h */,
-				36061D291122BBA800FD4FCD /* OrderedCollection.c */,
-				36061D2A1122BBA800FD4FCD /* OrderedCollection.h */,
-				36061D2C1122BBA800FD4FCD /* PEGExpression.c */,
-				36061D2D1122BBA800FD4FCD /* PEGExpression.h */,
-				36061D2F1122BBA800FD4FCD /* PEGFailedOptionalResult.c */,
-				36061D301122BBA800FD4FCD /* PEGFailedOptionalResult.h */,
-				36061D321122BBA800FD4FCD /* PEGNotExpression.c */,
-				36061D331122BBA800FD4FCD /* PEGNotExpression.h */,
-				36061D351122BBA800FD4FCD /* PEGOneOrMoreExpression.c */,
-				36061D361122BBA800FD4FCD /* PEGOneOrMoreExpression.h */,
-				36061D381122BBA800FD4FCD /* PEGOptionalExpression.c */,
-				36061D391122BBA800FD4FCD /* PEGOptionalExpression.h */,
-				36061D3B1122BBA800FD4FCD /* PEGOptionalResult.c */,
-				36061D3C1122BBA800FD4FCD /* PEGOptionalResult.h */,
-				36061D3E1122BBA800FD4FCD /* PEGOrderedChoiceExpression.c */,
-				36061D3F1122BBA800FD4FCD /* PEGOrderedChoiceExpression.h */,
-				36061D411122BBA800FD4FCD /* PEGParser.c */,
-				36061D421122BBA800FD4FCD /* PEGParser.h */,
-				36061D441122BBA800FD4FCD /* PEGRange.c */,
-				36061D451122BBA800FD4FCD /* PEGRange.h */,
-				36061D471122BBA800FD4FCD /* PEGSequenceExpression.c */,
-				36061D481122BBA800FD4FCD /* PEGSequenceExpression.h */,
-				36061D4A1122BBA800FD4FCD /* PEGStringScanner.c */,
-				36061D4B1122BBA800FD4FCD /* PEGStringScanner.h */,
-				36061D4D1122BBA800FD4FCD /* PEGSucceededOptionalResult.c */,
-				36061D4E1122BBA800FD4FCD /* PEGSucceededOptionalResult.h */,
-				36061D501122BBA800FD4FCD /* PEGTerminal.c */,
-				36061D511122BBA800FD4FCD /* PEGTerminal.h */,
-				36061D531122BBA800FD4FCD /* PEGZeroOrMoreExpression.c */,
-				36061D541122BBA800FD4FCD /* PEGZeroOrMoreExpression.h */,
-				36061D561122BBA800FD4FCD /* PexMatcher.c */,
-				36061D571122BBA800FD4FCD /* PexMatcher.h */,
-				36061D591122BBA800FD4FCD /* Point.c */,
-				36061D5A1122BBA800FD4FCD /* Point.h */,
-				36061D5C1122BBA800FD4FCD /* PositionableStream.c */,
-				36061D5D1122BBA800FD4FCD /* PositionableStream.h */,
-				36061D5F1122BBA800FD4FCD /* ReadStream.c */,
-				36061D601122BBA800FD4FCD /* ReadStream.h */,
-				36061D621122BBA800FD4FCD /* RuntimeObject.c */,
-				36061D631122BBA800FD4FCD /* RuntimeObject.h */,
-				36061D651122BBA800FD4FCD /* SCParser.c */,
-				36061D661122BBA800FD4FCD /* SCParser.h */,
-				36061D681122BBA800FD4FCD /* SCParserTest.c */,
-				36061D691122BBA800FD4FCD /* SCParserTest.h */,
-				36061D6B1122BBA800FD4FCD /* SequenceableCollection.c */,
-				36061D6C1122BBA800FD4FCD /* SequenceableCollection.h */,
-				36061D6E1122BBA800FD4FCD /* Set.c */,
-				36061D6F1122BBA800FD4FCD /* Set.h */,
-				36061D711122BBA800FD4FCD /* SmallDictionary.c */,
-				36061D721122BBA800FD4FCD /* SmallDictionary.h */,
-				36061D741122BBA800FD4FCD /* SmallInt.c */,
-				36061D751122BBA800FD4FCD /* SmallInt.h */,
-				36061D771122BBA800FD4FCD /* StandardTestClass.c */,
-				36061D781122BBA800FD4FCD /* StandardTestClass.h */,
-				36061D7A1122BBA800FD4FCD /* StandardVariableTestClass.c */,
-				36061D7B1122BBA800FD4FCD /* StandardVariableTestClass.h */,
-				36061D7D1122BBA800FD4FCD /* Stream.c */,
-				36061D7E1122BBA800FD4FCD /* Stream.h */,
-				36061D801122BBA800FD4FCD /* String.c */,
-				36061D811122BBA800FD4FCD /* String.h */,
-				36061D831122BBA800FD4FCD /* SuperClassTestClass.c */,
-				36061D841122BBA800FD4FCD /* SuperClassTestClass.h */,
-				36061D861122BBA800FD4FCD /* Symbol.c */,
-				36061D871122BBA800FD4FCD /* Symbol.h */,
-				36061D891122BBA800FD4FCD /* TestCase.c */,
-				36061D8A1122BBA800FD4FCD /* TestCase.h */,
-				36061D8C1122BBA800FD4FCD /* True.c */,
-				36061D8D1122BBA800FD4FCD /* True.h */,
-				36061D8F1122BBA800FD4FCD /* Type.c */,
-				36061D901122BBA800FD4FCD /* Type.h */,
-				36061D921122BBA800FD4FCD /* Variable.c */,
-				36061D931122BBA800FD4FCD /* Variable.h */,
+				36061E4B11235ED800FD4FCD /* lib.c */,
+				36061E4C11235ED800FD4FCD /* lib.h */,
+				36061E4E11235ED800FD4FCD /* test */,
 			);
-			path = class;
+			path = lib;
 			sourceTree = "<group>";
 		};
-		36061D991122BBA800FD4FCD /* test */ = {
+		36061E4E11235ED800FD4FCD /* test */ = {
 			isa = PBXGroup;
 			children = (
-				36061D9A1122BBA800FD4FCD /* BridgeTest.c */,
-				36061D9B1122BBA800FD4FCD /* BridgeTest.h */,
-				36061D9D1122BBA800FD4FCD /* SCParser.c */,
-				36061D9E1122BBA800FD4FCD /* SCParser.h */,
-				36061DA01122BBA800FD4FCD /* SCParserTest.c */,
-				36061DA11122BBA800FD4FCD /* SCParserTest.h */,
+				36061E4F11235ED800FD4FCD /* BridgeTest.c */,
+				36061E5011235ED800FD4FCD /* BridgeTest.h */,
+				36061E5211235ED800FD4FCD /* PEGTest.c */,
+				36061E5311235ED800FD4FCD /* PEGTest.h */,
 			);
 			path = test;
+			sourceTree = "<group>";
+		};
+		36061E5511235EE200FD4FCD /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				36061E5611235EE200FD4FCD /* class */,
+				36061EF911235EE200FD4FCD /* lib.c */,
+				36061EFA11235EE200FD4FCD /* lib.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		36061E5611235EE200FD4FCD /* class */ = {
+			isa = PBXGroup;
+			children = (
+				36061E5711235EE200FD4FCD /* Array.c */,
+				36061E5811235EE200FD4FCD /* Array.h */,
+				36061E5A11235EE200FD4FCD /* ArrayedCollection.c */,
+				36061E5B11235EE200FD4FCD /* ArrayedCollection.h */,
+				36061E5D11235EE200FD4FCD /* ASTNode.c */,
+				36061E5E11235EE200FD4FCD /* ASTNode.h */,
+				36061E6011235EE200FD4FCD /* Behavior.c */,
+				36061E6111235EE200FD4FCD /* Behavior.h */,
+				36061E6311235EE200FD4FCD /* BlockClosure.c */,
+				36061E6411235EE200FD4FCD /* BlockClosure.h */,
+				36061E6611235EE200FD4FCD /* Boolean.c */,
+				36061E6711235EE200FD4FCD /* Boolean.h */,
+				36061E6911235EE200FD4FCD /* BridgeTest.c */,
+				36061E6A11235EE200FD4FCD /* BridgeTest.h */,
+				36061E6C11235EE200FD4FCD /* Character.c */,
+				36061E6D11235EE200FD4FCD /* Character.h */,
+				36061E6F11235EE200FD4FCD /* ChildClassTestClass.c */,
+				36061E7011235EE200FD4FCD /* ChildClassTestClass.h */,
+				36061E7211235EE200FD4FCD /* Class.c */,
+				36061E7311235EE200FD4FCD /* Class.h */,
+				36061E7511235EE200FD4FCD /* Collection.c */,
+				36061E7611235EE200FD4FCD /* Collection.h */,
+				36061E7811235EE200FD4FCD /* Dictionary.c */,
+				36061E7911235EE200FD4FCD /* Dictionary.h */,
+				36061E7B11235EE200FD4FCD /* False.c */,
+				36061E7C11235EE200FD4FCD /* False.h */,
+				36061E7E11235EE200FD4FCD /* InstanceVariable.c */,
+				36061E7F11235EE200FD4FCD /* InstanceVariable.h */,
+				36061E8111235EE200FD4FCD /* Message.c */,
+				36061E8211235EE200FD4FCD /* Message.h */,
+				36061E8411235EE200FD4FCD /* Metaclass.c */,
+				36061E8511235EE200FD4FCD /* Metaclass.h */,
+				36061E8711235EE200FD4FCD /* Nil.c */,
+				36061E8811235EE200FD4FCD /* Nil.h */,
+				36061E8A11235EE200FD4FCD /* Object.c */,
+				36061E8B11235EE200FD4FCD /* Object.h */,
+				36061E8D11235EE200FD4FCD /* OrderedCollection.c */,
+				36061E8E11235EE200FD4FCD /* OrderedCollection.h */,
+				36061E9011235EE200FD4FCD /* PEGExpression.c */,
+				36061E9111235EE200FD4FCD /* PEGExpression.h */,
+				36061E9311235EE200FD4FCD /* PEGFailedOptionalResult.c */,
+				36061E9411235EE200FD4FCD /* PEGFailedOptionalResult.h */,
+				36061E9611235EE200FD4FCD /* PEGNotExpression.c */,
+				36061E9711235EE200FD4FCD /* PEGNotExpression.h */,
+				36061E9911235EE200FD4FCD /* PEGOneOrMoreExpression.c */,
+				36061E9A11235EE200FD4FCD /* PEGOneOrMoreExpression.h */,
+				36061E9C11235EE200FD4FCD /* PEGOptionalExpression.c */,
+				36061E9D11235EE200FD4FCD /* PEGOptionalExpression.h */,
+				36061E9F11235EE200FD4FCD /* PEGOptionalResult.c */,
+				36061EA011235EE200FD4FCD /* PEGOptionalResult.h */,
+				36061EA211235EE200FD4FCD /* PEGOrderedChoiceExpression.c */,
+				36061EA311235EE200FD4FCD /* PEGOrderedChoiceExpression.h */,
+				36061EA511235EE200FD4FCD /* PEGParser.c */,
+				36061EA611235EE200FD4FCD /* PEGParser.h */,
+				36061EA811235EE200FD4FCD /* PEGRange.c */,
+				36061EA911235EE200FD4FCD /* PEGRange.h */,
+				36061EAB11235EE200FD4FCD /* PEGSequenceExpression.c */,
+				36061EAC11235EE200FD4FCD /* PEGSequenceExpression.h */,
+				36061EAE11235EE200FD4FCD /* PEGStringScanner.c */,
+				36061EAF11235EE200FD4FCD /* PEGStringScanner.h */,
+				36061EB111235EE200FD4FCD /* PEGSucceededOptionalResult.c */,
+				36061EB211235EE200FD4FCD /* PEGSucceededOptionalResult.h */,
+				36061EB411235EE200FD4FCD /* PEGTerminal.c */,
+				36061EB511235EE200FD4FCD /* PEGTerminal.h */,
+				36061EB711235EE200FD4FCD /* PEGTest.c */,
+				36061EB811235EE200FD4FCD /* PEGTest.h */,
+				36061EBA11235EE200FD4FCD /* PEGZeroOrMoreExpression.c */,
+				36061EBB11235EE200FD4FCD /* PEGZeroOrMoreExpression.h */,
+				36061EBD11235EE200FD4FCD /* PexMatcher.c */,
+				36061EBE11235EE200FD4FCD /* PexMatcher.h */,
+				36061EC011235EE200FD4FCD /* Point.c */,
+				36061EC111235EE200FD4FCD /* Point.h */,
+				36061EC311235EE200FD4FCD /* PositionableStream.c */,
+				36061EC411235EE200FD4FCD /* PositionableStream.h */,
+				36061EC611235EE200FD4FCD /* ReadStream.c */,
+				36061EC711235EE200FD4FCD /* ReadStream.h */,
+				36061EC911235EE200FD4FCD /* RuntimeObject.c */,
+				36061ECA11235EE200FD4FCD /* RuntimeObject.h */,
+				36061ECC11235EE200FD4FCD /* SequenceableCollection.c */,
+				36061ECD11235EE200FD4FCD /* SequenceableCollection.h */,
+				36061ECF11235EE200FD4FCD /* Set.c */,
+				36061ED011235EE200FD4FCD /* Set.h */,
+				36061ED211235EE200FD4FCD /* SmallDictionary.c */,
+				36061ED311235EE200FD4FCD /* SmallDictionary.h */,
+				36061ED511235EE200FD4FCD /* SmallInt.c */,
+				36061ED611235EE200FD4FCD /* SmallInt.h */,
+				36061ED811235EE200FD4FCD /* SortedCollection.c */,
+				36061ED911235EE200FD4FCD /* SortedCollection.h */,
+				36061EDB11235EE200FD4FCD /* StandardTestClass.c */,
+				36061EDC11235EE200FD4FCD /* StandardTestClass.h */,
+				36061EDE11235EE200FD4FCD /* StandardVariableTestClass.c */,
+				36061EDF11235EE200FD4FCD /* StandardVariableTestClass.h */,
+				36061EE111235EE200FD4FCD /* Stream.c */,
+				36061EE211235EE200FD4FCD /* Stream.h */,
+				36061EE411235EE200FD4FCD /* String.c */,
+				36061EE511235EE200FD4FCD /* String.h */,
+				36061EE711235EE200FD4FCD /* SuperClassTestClass.c */,
+				36061EE811235EE200FD4FCD /* SuperClassTestClass.h */,
+				36061EEA11235EE200FD4FCD /* Symbol.c */,
+				36061EEB11235EE200FD4FCD /* Symbol.h */,
+				36061EED11235EE200FD4FCD /* TestCase.c */,
+				36061EEE11235EE200FD4FCD /* TestCase.h */,
+				36061EF011235EE200FD4FCD /* True.c */,
+				36061EF111235EE200FD4FCD /* True.h */,
+				36061EF311235EE200FD4FCD /* Type.c */,
+				36061EF411235EE200FD4FCD /* Type.h */,
+				36061EF611235EE200FD4FCD /* Variable.c */,
+				36061EF711235EE200FD4FCD /* Variable.h */,
+			);
+			path = class;
 			sourceTree = "<group>";
 		};
 		364E64B410C562DD00AD4616 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				36061E5511235EE200FD4FCD /* lib */,
 				36DBE6FA10D7D2DA00D6052D /* bootstrap.c */,
 				36DBE6FB10D7D2DA00D6052D /* bootstrap.h */,
 				364E64B510C562DD00AD4616 /* Makefile */,
-				364E64B610C562DD00AD4616 /* parser */,
 				364E65FB10C562DE00AD4616 /* pinocchio.c */,
 				364E65FC10C562DE00AD4616 /* pinocchio.h */,
 				364E65FD10C562DE00AD4616 /* pinocchioHelper.ci */,
@@ -621,19 +570,6 @@
 			name = src;
 			path = ../../src;
 			sourceTree = SOURCE_ROOT;
-		};
-		364E64B610C562DD00AD4616 /* parser */ = {
-			isa = PBXGroup;
-			children = (
-				36061C9B1122BBA700FD4FCD /* class */,
-				36061D951122BBA800FD4FCD /* Pharo.c */,
-				36061D961122BBA800FD4FCD /* Pharo.h */,
-				36061D971122BBA800FD4FCD /* PharoTest.c */,
-				36061D981122BBA800FD4FCD /* PharoTest.h */,
-				36061D991122BBA800FD4FCD /* test */,
-			);
-			path = parser;
-			sourceTree = "<group>";
 		};
 		364E660310C562DE00AD4616 /* system */ = {
 			isa = PBXGroup;
@@ -710,7 +646,6 @@
 			children = (
 				364E664010C562DE00AD4616 /* ClassReference.c */,
 				364E664110C562DE00AD4616 /* ClassReference.h */,
-				364E664210C562DE00AD4616 /* ClassReference.o */,
 				364E664310C562DE00AD4616 /* ClassReferenceTest.ci */,
 			);
 			path = organization;
@@ -721,27 +656,21 @@
 			children = (
 				364E664510C562DE00AD4616 /* BlockClosure.c */,
 				364E664610C562DE00AD4616 /* BlockClosure.h */,
-				364E664710C562DE00AD4616 /* BlockClosure.o */,
 				364E664810C562DE00AD4616 /* BlockClosureTest.ci */,
 				364E664910C562DE00AD4616 /* BlockContext.c */,
 				364E664A10C562DE00AD4616 /* BlockContext.h */,
-				364E664B10C562DE00AD4616 /* BlockContext.o */,
 				364E664C10C562DE00AD4616 /* Continue.c */,
 				364E664D10C562DE00AD4616 /* Continue.h */,
-				364E664E10C562DE00AD4616 /* Continue.o */,
 				364E664F10C562DE00AD4616 /* ContinueTest.ci */,
 				364E665010C562DE00AD4616 /* Env.o */,
 				364E665110C562DE00AD4616 /* InlineCache.c */,
 				364E665210C562DE00AD4616 /* InlineCache.h */,
-				364E665310C562DE00AD4616 /* InlineCache.o */,
 				364E665410C562DE00AD4616 /* InlineCacheTest.ci */,
 				364E665510C562DE00AD4616 /* MethodClosure.c */,
 				364E665610C562DE00AD4616 /* MethodClosure.h */,
-				364E665710C562DE00AD4616 /* MethodClosure.o */,
 				364E665810C562DE00AD4616 /* MethodClosureTest.ci */,
 				364E665910C562DE00AD4616 /* MethodContext.c */,
 				364E665A10C562DE00AD4616 /* MethodContext.h */,
-				364E665B10C562DE00AD4616 /* MethodContext.o */,
 				364E665C10C562DE00AD4616 /* MethodContextTest.ci */,
 				364E665D10C562DE00AD4616 /* ThreadTest.ci */,
 			);
@@ -810,6 +739,7 @@
 		364E669310C562DE00AD4616 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				36061E4A11235ED800FD4FCD /* lib */,
 				364E669410C562DE00AD4616 /* fib */,
 				364E669510C562DE00AD4616 /* FibTest.ci */,
 				364E669610C562DE00AD4616 /* pinocchioTest.c */,
@@ -895,11 +825,76 @@
 				364E66C010C562DE00AD4616 /* Send.c in Sources */,
 				364E66C310C562DE00AD4616 /* Super.c in Sources */,
 				364E66C610C562DE00AD4616 /* Variable.c in Sources */,
-				364E66C910C562DE00AD4616 /* File.c in Sources */,
-				364E66CC10C562DE00AD4616 /* Stream.c in Sources */,
 				364E66CF10C562DE00AD4616 /* ClassReference.c in Sources */,
 				364E66D210C562DE00AD4616 /* BlockClosure.c in Sources */,
 				3654964710C57D0E00D0C56F /* BlockContext.c in Sources */,
+				364E66D710C562DE00AD4616 /* Continue.c in Sources */,
+				364E66DB10C562DE00AD4616 /* InlineCache.c in Sources */,
+				364E66DE10C562DE00AD4616 /* MethodClosure.c in Sources */,
+				364E66E110C562DE00AD4616 /* MethodContext.c in Sources */,
+				36061EFC11235EE200FD4FCD /* Array.c in Sources */,
+				36061EFE11235EE200FD4FCD /* ArrayedCollection.c in Sources */,
+				36061F0011235EE200FD4FCD /* ASTNode.c in Sources */,
+				36061F0211235EE200FD4FCD /* Behavior.c in Sources */,
+				36061F0411235EE200FD4FCD /* BlockClosure.c in Sources */,
+				36061F0611235EE200FD4FCD /* Boolean.c in Sources */,
+				36061F0811235EE200FD4FCD /* BridgeTest.c in Sources */,
+				36061F0A11235EE200FD4FCD /* Character.c in Sources */,
+				36061F0C11235EE200FD4FCD /* ChildClassTestClass.c in Sources */,
+				36061F0E11235EE200FD4FCD /* Class.c in Sources */,
+				36061F1011235EE200FD4FCD /* Collection.c in Sources */,
+				36061F1211235EE200FD4FCD /* Dictionary.c in Sources */,
+				36061F1411235EE200FD4FCD /* False.c in Sources */,
+				36061F1611235EE200FD4FCD /* InstanceVariable.c in Sources */,
+				36061F1811235EE200FD4FCD /* Message.c in Sources */,
+				36061F1A11235EE200FD4FCD /* Metaclass.c in Sources */,
+				36061F1C11235EE200FD4FCD /* Nil.c in Sources */,
+				36061F1E11235EE200FD4FCD /* Object.c in Sources */,
+				36061F2011235EE200FD4FCD /* OrderedCollection.c in Sources */,
+				36061F2211235EE200FD4FCD /* PEGExpression.c in Sources */,
+				36061F2411235EE200FD4FCD /* PEGFailedOptionalResult.c in Sources */,
+				36061F2611235EE200FD4FCD /* PEGNotExpression.c in Sources */,
+				36061F2811235EE200FD4FCD /* PEGOneOrMoreExpression.c in Sources */,
+				36061F2A11235EE200FD4FCD /* PEGOptionalExpression.c in Sources */,
+				36061F2C11235EE200FD4FCD /* PEGOptionalResult.c in Sources */,
+				36061F2E11235EE200FD4FCD /* PEGOrderedChoiceExpression.c in Sources */,
+				36061F3011235EE200FD4FCD /* PEGParser.c in Sources */,
+				36061F3211235EE200FD4FCD /* PEGRange.c in Sources */,
+				36061F3411235EE200FD4FCD /* PEGSequenceExpression.c in Sources */,
+				36061F3611235EE200FD4FCD /* PEGStringScanner.c in Sources */,
+				36061F3811235EE200FD4FCD /* PEGSucceededOptionalResult.c in Sources */,
+				36061F3A11235EE200FD4FCD /* PEGTerminal.c in Sources */,
+				36061F3C11235EE200FD4FCD /* PEGTest.c in Sources */,
+				36061F3E11235EE200FD4FCD /* PEGZeroOrMoreExpression.c in Sources */,
+				36061F4011235EE200FD4FCD /* PexMatcher.c in Sources */,
+				36061F4211235EE200FD4FCD /* Point.c in Sources */,
+				36061F4411235EE200FD4FCD /* PositionableStream.c in Sources */,
+				36061F4611235EE200FD4FCD /* ReadStream.c in Sources */,
+				36061F4811235EE200FD4FCD /* RuntimeObject.c in Sources */,
+				36061F4A11235EE200FD4FCD /* SequenceableCollection.c in Sources */,
+				36061F4C11235EE200FD4FCD /* Set.c in Sources */,
+				36061F4E11235EE200FD4FCD /* SmallDictionary.c in Sources */,
+				36061F5011235EE200FD4FCD /* SmallInt.c in Sources */,
+				36061F5211235EE200FD4FCD /* SortedCollection.c in Sources */,
+				36061F5411235EE200FD4FCD /* StandardTestClass.c in Sources */,
+				36061F5611235EE200FD4FCD /* StandardVariableTestClass.c in Sources */,
+				36061F5811235EE200FD4FCD /* Stream.c in Sources */,
+				36061F5A11235EE200FD4FCD /* String.c in Sources */,
+				36061F5C11235EE200FD4FCD /* SuperClassTestClass.c in Sources */,
+				36061F5E11235EE200FD4FCD /* Symbol.c in Sources */,
+				36061F6011235EE200FD4FCD /* TestCase.c in Sources */,
+				36061F6211235EE200FD4FCD /* True.c in Sources */,
+				36061F6411235EE200FD4FCD /* Type.c in Sources */,
+				36061F6611235EE200FD4FCD /* Variable.c in Sources */,
+				36061F6811235EE200FD4FCD /* lib.c in Sources */,
+				36DBE6FC10D7D2DA00D6052D /* bootstrap.c in Sources */,
+				364E66A010C562DE00AD4616 /* pinocchio.c in Sources */,
+				36061F6A11235EEB00FD4FCD /* lib.c in Sources */,
+				36061F6B11235EEB00FD4FCD /* BridgeTest.c in Sources */,
+				36061F6C11235EEB00FD4FCD /* PEGTest.c in Sources */,
+				364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */,
+				364E66C910C562DE00AD4616 /* File.c in Sources */,
+				364E66CC10C562DE00AD4616 /* Stream.c in Sources */,
 				364E66E510C562DE00AD4616 /* Array.c in Sources */,
 				364E66E810C562DE00AD4616 /* Boolean.c in Sources */,
 				364E66EB10C562DE00AD4616 /* Character.c in Sources */,
@@ -912,13 +907,6 @@
 				364E670110C562DE00AD4616 /* SmallInt.c in Sources */,
 				364E670410C562DE00AD4616 /* String.c in Sources */,
 				364E670710C562DE00AD4616 /* Symbol.c in Sources */,
-				364E66D710C562DE00AD4616 /* Continue.c in Sources */,
-				364E66DB10C562DE00AD4616 /* InlineCache.c in Sources */,
-				364E66DE10C562DE00AD4616 /* MethodClosure.c in Sources */,
-				364E66E110C562DE00AD4616 /* MethodContext.c in Sources */,
-				364E66A010C562DE00AD4616 /* pinocchio.c in Sources */,
-				364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */,
-				36DBE6FC10D7D2DA00D6052D /* bootstrap.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
