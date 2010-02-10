@@ -25,6 +25,15 @@ void _indent_(uns_int i)
     }
 }
 
+void print_EXP()
+{
+    uns_int size = EXP_size();
+    uns_int cur = 0;
+    while (cur < size) {
+        print_Class(Double_Stack[cur++]);
+    }
+}
+
 /* ========================================================================= */
 
 Object * Double_Stack;

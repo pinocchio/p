@@ -165,6 +165,8 @@ class##_Reference = new_Organization_ClassReference(class);
 extern void printf0(const char * string, ...);
 extern void _indent_(uns_int i);
 
+extern void print_EXP();
+
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");
     #define LOG _indent_(EXP_size()); printf
