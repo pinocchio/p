@@ -68,3 +68,6 @@ Type_Symbol SMB_perform_withArguments_;
 Type_Symbol SMB_perform_;
 Type_Symbol SMB_numArgs;
 Type_Symbol SMB_valueWithArguments_;
+Type_Symbol SMB_value_value_;
+Type_Symbol SMB_value_value_value_;
+Type_Symbol SMB_value_value_value_value_;
