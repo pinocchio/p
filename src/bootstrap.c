@@ -24,7 +24,7 @@ void bootstrap()
 
     create_RootPackage();
     
-    initialize_libraries();
+    init_lib();
 }
 
 Object new_Organization_Package(Object parent, const wchar_t * name)

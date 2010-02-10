@@ -1,7 +1,7 @@
 #include <pinocchio.h>
 #include <unistd.h> 
 #include <test/pinocchioTest.h>
-#include <parser/PharoTest.h>
+#include <test/lib/lib.h>
 
 #include <system/ast/AssignTest.ci>
 #include <system/ast/CallecTest.ci>
@@ -151,6 +151,6 @@ test_AST_Info();
 test_Runtime_MethodClosure();
 test_AST_Method();
 test_AST_InstVariable();
+test_lib();
 
-pharo_test();
 }

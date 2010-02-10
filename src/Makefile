@@ -3,7 +3,9 @@ TARGET=pinocchio
 SHELL=/bin/bash
 
 CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
-CFILES+=$(wildcard parser/*.c) $(wildcard parser/*/*.c)
+CFILES+=$(wildcard lib/*.c) $(wildcard lib/*/*.c)
+CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
+
 CIFILES=$(wildcard *.ci)
 HFILES+=$(CFILES:%.c=%.h)
 

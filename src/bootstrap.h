@@ -1,6 +1,8 @@
 #ifndef BOOTSTRAP_H
 #define BOOTSTRAP_H
+
 #include <pinocchio.h>
+#include <lib/lib.h>
 
 #define ORGANIZATION_ROOTPACKAGE_SIZE 1
 #define ORGANIZATION_ROOTPACKAGE_VARS L"members" 
