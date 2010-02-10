@@ -62,6 +62,7 @@ Type_SmallInt_BINARY_OPERATION(or_,         |);
 
 
 // TODO fix this damn typecheck!
+// printf("%i "#op" %i\n", number->value, otherNumber->value);
 #define Type_SmallInt_COMPARE_OPERATION(name, op)\
 NATIVE1(Type_SmallInt##_##name)\
     Object w_arg = NATIVE_ARG(0);\
