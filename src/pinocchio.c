@@ -52,7 +52,9 @@ void sends()
     while (cur < size) {
         Object c = Double_Stack[cur++];
         if (c && HEADER(c) == (Object)AST_Send_Class) {
-            print_Symbol(((AST_Send)c)->message);
+            AST_Send send = (AST_Send)c;
+            print_AST_Info(send->info);
+            print_Symbol(send->message);
         }
     }
 }
