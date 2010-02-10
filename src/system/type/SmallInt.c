@@ -124,21 +124,21 @@ void post_init_Type_SmallInt()
     Type_SmallInt_Class->name    = new_Type_String(L"Type_SmallInt");
     Type_SmallInt_Class->methods = new_Type_Dictionary();
     
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__equal,     NM_Type_SmallInt_equals_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__plus,       NM_Type_SmallInt_plus_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__minus,      NM_Type_SmallInt_minus_);   
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__times,      NM_Type_SmallInt_times_); 
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__divide,     NM_Type_SmallInt_divide_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__shiftLeft,  NM_Type_SmallInt_shiftLeft_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__shiftRight, NM_Type_SmallInt_shiftRight_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__and,        NM_Type_SmallInt_and_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__or,         NM_Type_SmallInt_or_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__lt,         NM_Type_SmallInt_lt_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__gt,         NM_Type_SmallInt_gt_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB__notEqual,  NM_Type_SmallInt_notEqual_);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_hash,        NM_Type_SmallInt_hash);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_asString,    NM_Type_SmallInt_asString);
-    store_native_method((Type_Class)Type_SmallInt_Class, SMB_asCharacter, NM_Type_SmallInt_asCharacter);
+    store_native_method(Type_SmallInt_Class, SMB__equal,     NM_Type_SmallInt_equals_);
+    store_native_method(Type_SmallInt_Class, SMB__plus,       NM_Type_SmallInt_plus_);
+    store_native_method(Type_SmallInt_Class, SMB__minus,      NM_Type_SmallInt_minus_);   
+    store_native_method(Type_SmallInt_Class, SMB__times,      NM_Type_SmallInt_times_); 
+    store_native_method(Type_SmallInt_Class, SMB__divide,     NM_Type_SmallInt_divide_);
+    store_native_method(Type_SmallInt_Class, SMB__shiftLeft,  NM_Type_SmallInt_shiftLeft_);
+    store_native_method(Type_SmallInt_Class, SMB__shiftRight, NM_Type_SmallInt_shiftRight_);
+    store_native_method(Type_SmallInt_Class, SMB__and,        NM_Type_SmallInt_and_);
+    store_native_method(Type_SmallInt_Class, SMB__or,         NM_Type_SmallInt_or_);
+    store_native_method(Type_SmallInt_Class, SMB__lt,         NM_Type_SmallInt_lt_);
+    store_native_method(Type_SmallInt_Class, SMB__gt,         NM_Type_SmallInt_gt_);
+    store_native_method(Type_SmallInt_Class, SMB__notEqual,  NM_Type_SmallInt_notEqual_);
+    store_native_method(Type_SmallInt_Class, SMB_hash,        NM_Type_SmallInt_hash);
+    store_native_method(Type_SmallInt_Class, SMB_asString,    NM_Type_SmallInt_asString);
+    store_native_method(Type_SmallInt_Class, SMB_asCharacter, NM_Type_SmallInt_asCharacter);
     
     //assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__plus));
     //assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__minus));

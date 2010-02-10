@@ -65,3 +65,4 @@ extern Type_Symbol SMB_value;
 extern Type_Symbol SMB_at_ifAbsent_;
 extern Type_Symbol SMB_perform_withArguments_;
 extern Type_Symbol SMB_perform_;
+extern Type_Symbol SMB_numArgs;

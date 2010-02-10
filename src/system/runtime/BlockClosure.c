@@ -108,12 +108,17 @@ NATIVE(Runtime_BlockClosure_apply_)
     Runtime_BlockClosure_apply(closure, argc);
 }
 
+NATIVE(Runtime_BlockClosure_numArgs) 
+    RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
+}
+
 /* ========================================================================= */
 
 void post_init_Runtime_BlockClosure()
 {
-    store_native_method(Runtime_BlockClosure_Class, SMB_value,  NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_value_, NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_apply_, NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_apply,  NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_value,   NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_value_,  NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_apply_,  NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_apply,   NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
 }

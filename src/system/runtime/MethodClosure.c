@@ -75,9 +75,14 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     start_eval(method);
 }
 
+
+NATIVE(Runtime_MethodClosure_numArgs) 
+    RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_MethodClosure)self)->code->params->size));
+}
+
 /* ========================================================================= */
 
 void post_init_Runtime_MethodClosure()
 {
-
+    store_native_method(Runtime_MethodClosure_Class, SMB_numArgs, NM_Runtime_MethodClosure_numArgs);
 }

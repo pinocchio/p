@@ -23,6 +23,8 @@ void bootstrap()
                         CREATE_OBJECT_TAG(ORGANIZATION_PACKAGE));
 
     create_RootPackage();
+    
+    initialize_libraries();
 }
 
 Object new_Organization_Package(Object parent, const wchar_t * name)

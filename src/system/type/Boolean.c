@@ -61,101 +61,14 @@ Type_Boolean get_bool(bool value)
 
 /* ========================================================================= */
 
-NATIVE0(True_asString)
-    RETURN_FROM_NATIVE(new_Type_String(L"#True"));
-}
-
-NATIVE0(True_asSmallInt)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(1));
-}
-
-NATIVE(True_not)
-    RETURN_FROM_NATIVE(False);
-}
-
-NATIVE1(True_ifFalse_)
-    RETURN_FROM_NATIVE(Nil);
-}
-
-METHOD(True_ifTrue_, 1, 0, 1)
-    /* TODO look at making this native */
-    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifTrue");
-    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, 0);
-    ADD_STATEMENT(send); 
-    return method;
-}
-
-METHOD(True_ifTrue_ifFalse_, 2, 0, 1)
-    /* TODO look at making this native */
-    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifTrue");
-    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, 0);
-    ADD_STATEMENT(send); 
-    return method;
-}
-
-/* ========================================================================= */
-
 void post_init_Type_True()
 {
-    store_method(       True_Class, SMB_ifTrue_,            True_ifTrue_());
-    store_native_method(True_Class, SMB_ifFalse_,           NM_True_ifFalse_);
-    store_method(       True_Class, SMB_ifTrue_ifFalse_,    True_ifTrue_ifFalse_());
-    store_native_method(True_Class, SMB_not,                NM_True_not);
-    store_native_method(True_Class, SMB_asString,           NM_True_asString);
-    store_native_method(True_Class, SMB_asSmallInt,         NM_True_asSmallInt);
-}
-
-/* ========================================================================= */
-
-NATIVE0(False_asString)
-    RETURN_FROM_NATIVE(new_Type_String(L"#False"));
-}
-
-NATIVE0(False_asSmallInt)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(0));
-}
-
-NATIVE(False_not)
-    RETURN_FROM_NATIVE(True);
-}
-
-NATIVE1(False_ifTrue_)
-    RETURN_FROM_NATIVE(Nil);
-}
-
-METHOD(False_ifFalse_, 1, 0, 1)
-    /* TODO look at making this native */
-    BLOCK_PARAM(body, 0)->name = (Object)new_Type_Symbol(L"ifFalse");
-    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 0), (Object)SMB_apply, 0);
-    ADD_STATEMENT(send); 
-    return method;
-}
-
-METHOD(False_ifTrue_ifFalse_, 2, 0, 1)
-    /* TODO look at making this native */
-    BLOCK_PARAM(body, 1)->name = (Object)new_Type_Symbol(L"ifFalse");
-    AST_Send send = new_AST_Send((Object)BLOCK_PARAM(body, 1), (Object)SMB_apply, 0);
-    ADD_STATEMENT(send); 
-    return method;
 }
 
 /* ========================================================================= */
 
 void post_init_Type_False()
 {
-    store_native_method(False_Class, SMB_ifTrue_,           NM_False_ifTrue_);
-    store_method(       False_Class, SMB_ifFalse_,          False_ifFalse_());
-    store_method(       False_Class, SMB_ifTrue_ifFalse_,   False_ifTrue_ifFalse_());
-    store_native_method(False_Class, SMB_not,               NM_False_not);
-    store_native_method(False_Class, SMB_asString,          NM_False_asString);
-    store_native_method(False_Class, SMB_asSmallInt,        NM_False_asSmallInt);
-}
-
-
-/* ========================================================================= */
-
-NATIVE0(Type_Boolean_asBoolean)
-    poke_EXP(0, self);
 }
 
 /* ========================================================================= */
@@ -163,7 +76,6 @@ NATIVE0(Type_Boolean_asBoolean)
 
 void post_init_Type_Boolean()
 {
-    store_native_method(Type_Boolean_Class, SMB_asBoolean, NM_Type_Boolean_asBoolean);
     post_init_Type_True();
     post_init_Type_False();
 }
