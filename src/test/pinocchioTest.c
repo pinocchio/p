@@ -1,8 +1,35 @@
 #include <pinocchio.h>
 #include <unistd.h> 
 #include <test/pinocchioTest.h>
-#include <test/pinocchioTest.hi>
+#include <parser/PharoTest.h>
 
+#include <system/ast/AssignTest.ci>
+#include <system/ast/CallecTest.ci>
+#include <system/ast/ConstantTest.ci>
+//#include <system/ast/ContinueTest.ci>
+#include <system/ast/NativeMethodTest.ci>
+#include <system/ast/SelfTest.ci>
+#include <system/ast/SendTest.ci>
+#include <system/ast/SuperTest.ci>
+#include <system/ast/VariableTest.ci>
+#include <system/io/FileTest.ci>
+#include <system/runtime/ThreadTest.ci>
+#include <system/type/ArrayTest.ci>
+#include <system/type/BooleanTest.ci>
+#include <system/type/CharacterTest.ci>
+#include <system/type/ClassTest.ci>
+#include <system/type/DictionaryTest.ci>
+#include <system/type/ObjectTest.ci>
+#include <system/type/SmallIntTest.ci>
+#include <system/type/StringTest.ci>
+#include <system/type/SymbolTest.ci>
+#include <system/runtime/BlockClosureTest.ci>
+#include <system/ast/BlockTest.ci>
+#include <system/type/NilTest.ci>
+#include <system/ast/InfoTest.ci>
+#include <system/ast/MethodTest.ci>
+#include <system/runtime/MethodClosureTest.ci>
+#include <system/ast/InstVariableTest.ci>
 
 /* ========================================================================= */
 
@@ -125,6 +152,5 @@ test_Runtime_MethodClosure();
 test_AST_Method();
 test_AST_InstVariable();
 
-test_BridgeTest();
-test_SCParserTest();
+pharo_test();
 }

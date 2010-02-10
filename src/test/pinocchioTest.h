@@ -1,13 +1,9 @@
 #ifndef PINOCCHIOTEST_H
 #define PINOCCHIOTEST_H
 
-
 #include <pinocchio.h>
 #include <signal.h>
 #include <setjmp.h>
-
-/* ========================================================================= */
-
 
 /* ========================================================================= */
 
