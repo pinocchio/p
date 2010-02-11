@@ -116,11 +116,11 @@ NATIVE0(Runtime_BlockClosure_numArgs)
 NATIVE1(Runtime_BlockClosure_valueWithArguments_)
     Type_Array args = (Type_Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
-    
-    int pos = args->size;
-    while(pos > 0) {
-        pos--;
+
+    int pos = 0;
+    while(pos < args->size) {
         push_EXP(args->values[pos]);
+        pos++;
     }
     
     Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
@@ -136,8 +136,8 @@ void post_init_Runtime_BlockClosure()
     store_native_method(Runtime_BlockClosure_Class, SMB_value_value_,               NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_value_value_value_,         NM_Runtime_BlockClosure_apply_);
     store_native_method(Runtime_BlockClosure_Class, SMB_value_value_value_value_,   NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_apply_,  NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_apply,   NM_Runtime_BlockClosure_apply_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_valueWithArguments_,   NM_Runtime_BlockClosure_valueWithArguments_);
-    store_native_method(Runtime_BlockClosure_Class, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
+    store_native_method(Runtime_BlockClosure_Class, SMB_apply_,                     NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_apply,                      NM_Runtime_BlockClosure_apply_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_valueWithArguments_,        NM_Runtime_BlockClosure_valueWithArguments_);
+    store_native_method(Runtime_BlockClosure_Class, SMB_numArgs,                    NM_Runtime_BlockClosure_numArgs);
 }
