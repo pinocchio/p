@@ -22,8 +22,13 @@ Type_String new_Type_String(const wchar_t * str)
 
 Type_String new_Type_String_sized(uns_int size)
 {
-    wchar_t str[size+1];
-    return new_Type_String(&str[0]);
+    Type_String result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
+    HEADER(result)  = (Object)Type_String_Class;
+    result->size    = size;
+    while(size--) {
+        result->value[size] = '\0';
+    }
+    return result;
 }
 
 void pre_init_Type_String()
@@ -114,11 +119,21 @@ NATIVE2(Type_String_at_put_)
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
     int index = unwrap_int(w_arg0) - 1;
-    assert(0 <= index, printf("Index below 0: %i", index));
+    assert(0 <= index, printf("Index below 0: %i\n", index));
     assert(index < ((Type_String)self)->size,
-        printf("%i is out of Bounds[%"F_I"u]", index, ((Type_String)self)->size));
+        printf("%i is out of Bounds[%"F_I"u] %p\n",
+                    index,
+                    ((Type_String)self)->size,
+                    self));
     ((Type_String)self)->value[index] = ((Type_Character)w_arg1)->value;
     RETURN_FROM_NATIVE(self);
+}
+
+NATIVE1(Type_String_basicNew_)
+    Object w_size = NATIVE_ARG(0);
+    int size = unwrap_int(w_size);
+    Type_String result = new_Type_String_sized(size);
+    RETURN_FROM_NATIVE(result);
 }
 
 /* ========================================================================= */
@@ -132,5 +147,6 @@ void post_init_Type_String()
     store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
     store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
     store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);
+    store_native_method(HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
 }
 

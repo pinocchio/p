@@ -71,3 +71,5 @@ Type_Symbol SMB_valueWithArguments_;
 Type_Symbol SMB_value_value_;
 Type_Symbol SMB_value_value_value_;
 Type_Symbol SMB_value_value_value_value_;
+Type_Symbol SMB_stdout;
+Type_Symbol SMB_cr;

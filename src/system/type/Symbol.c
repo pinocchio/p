@@ -58,10 +58,10 @@ NATIVE1(Type_Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
     int index = unwrap_int(w_arg0) - 1;
-    printf("at: %i\n", index);
     assert(0 <= index, printf("Index below 0: %i", index));
     assert(index < ((Type_String)self)->size,
-        printf("%i is out of Bounds[%"F_I"u]", index, ((Type_String)self)->size));
+        printf("%i is out of Bounds[%"F_I"u]\n", index, ((Type_String)self)->size));
+    // printf("at: %i '%lc'\n", index, ((Type_Symbol)self)->value[index]);
     RETURN_FROM_NATIVE(new_Type_Character(((Type_Symbol) self)->value[index]));
 }
 
@@ -115,8 +115,11 @@ NATIVE1(Type_Symbol__equal)
         RETURN_FROM_NATIVE(False);
         return;
     }
-    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self,
-    (Type_Symbol)w_arg)));
+    RETURN_FROM_NATIVE(
+        get_bool(
+            Words_compare(
+                (Type_Symbol)self,
+                (Type_Symbol)w_arg)));
 }
 
 NATIVE0(Type_Symbol_hash)
@@ -126,6 +129,16 @@ NATIVE0(Type_Symbol_hash)
 
 NATIVE0(Type_Symbol_size)
     RETURN_FROM_NATIVE((Object)new_Type_SmallInt(((Type_Symbol)self)->size));
+}
+
+NATIVE0(Type_Symbol_stdout)
+    printf("%ls", ((Type_Symbol)self)->value);
+    RETURN_FROM_NATIVE(Nil);
+}
+
+NATIVE0(Type_Symbol_cr)
+    printf("\n");
+    RETURN_FROM_NATIVE(Nil);
 }
 
 /* ========================================================================= */
@@ -145,4 +158,6 @@ void install_symbol_methods(Type_Class class)
     store_native_method(class, SMB__equal,    NM_Type_Symbol__equal);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
+    store_native_method(class, SMB_stdout,    NM_Type_Symbol_stdout);
+    store_native_method(class, SMB_cr,        NM_Type_Symbol_cr);
 }

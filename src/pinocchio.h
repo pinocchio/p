@@ -164,12 +164,13 @@ class##_Reference = new_Organization_ClassReference(class);
 
 extern void printf0(const char * string, ...);
 extern void _indent_(uns_int i);
+extern uns_int nrsends();
 
 extern void print_EXP();
 
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");
-    #define LOG _indent_(EXP_size()); printf
+    #define LOG _indent_(nrsends()); printf
     #define LOG_AST_INFO(print, info) printf(print); print_AST_Info(info); printf("\n");
 #else
     #define LOGFUN
