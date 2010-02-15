@@ -154,11 +154,7 @@ NATIVE2(Type_Object_perform_withArguments_)
 
 NATIVE1(Type_Object_perform_)
     Object w_selector = NATIVE_ARG(0);
-
-    print_Symbol(w_selector);
-
     zapn_EXP(3);
-
     Type_Class_direct_dispatch(self, HEADER(self), w_selector, 0);
 }
 

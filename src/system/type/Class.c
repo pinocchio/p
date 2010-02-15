@@ -112,7 +112,7 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
             ((Type_Symbol)message->selector)->value,
             message->size));
     }
-    printf("DNU: \"%ls\" \n", ((Type_Symbol)msg)->value);
+    // printf("DNU: \"%ls\" \n", ((Type_Symbol)msg)->value);
 
 	Runtime_Message message = new_Runtime_Message(msg, argc);
 

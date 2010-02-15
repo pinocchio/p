@@ -447,10 +447,10 @@ NATIVE1(Type_Dictionary_at_)
 NATIVE2(Type_Dictionary_at_ifAbsent_)
     Object w_index = NATIVE_ARG(0);
     Object w_block = NATIVE_ARG(1);
-    Object tag = GETTAG(w_index);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        printf("Looking up %ls\n", ((Type_Symbol)w_index)->value);
-    }
+    // Object tag = GETTAG(w_index);
+    // if (TAG_IS_LAYOUT(tag, Words)) {
+    //    printf("Looking up %ls\n", ((Type_Symbol)w_index)->value);
+    // }
     zapn_EXP(4);
     push_EXP(w_block);
     push_CNT(dictionary_check_absent);
@@ -462,10 +462,10 @@ NATIVE2(Type_Dictionary_at_put_)
     Object w_index = NATIVE_ARG(0);
     Object new = NATIVE_ARG(1);
 
-    Object tag = GETTAG(w_index);
-    if(TAG_IS_LAYOUT(tag, Words)) {
-        printf("Storing at %ls\n", ((Type_Symbol)w_index)->value);
-    }
+    // Object tag = GETTAG(w_index);
+    // if(TAG_IS_LAYOUT(tag, Words)) {
+    //    printf("Storing at %ls\n", ((Type_Symbol)w_index)->value);
+    // }
 
     // Return before starting direct_store which manipulates the stack!
     RETURN_FROM_NATIVE(new);
