@@ -136,6 +136,77 @@ NATIVE1(Type_String_basicNew_)
     RETURN_FROM_NATIVE(result);
 }
 
+int wchar_withbase_to_number(uns_int base, const wchar_t * string, uns_int size)
+{
+    // TODO handle overflows!
+    int result = 0;
+    int sign;
+
+    if (*string == L'-') {
+        sign = -1;
+        string++;
+    } else {
+        sign = 1;
+    }
+
+    while (size--) {
+        uns_int chr = *string++ - 48;
+        // ensure it's within the 0-9 range
+        if (chr < 10) {
+            if (chr < base) {
+                result = (result * base) + chr;
+                continue;
+            }
+            break;
+        }
+        // shift from 0-9 to A-Z
+        chr = chr + 48 - 65 + 10;
+        if (chr < base) {
+            result = (result * base) + chr;
+            continue;
+        }
+        break;
+    }
+
+    return sign * result;
+}
+
+Object wchar_to_number(const wchar_t * string, uns_int size)
+{
+    // TODO make it accept other types ... or just use Pharo's version.
+    // TODO handle overflows!
+    // TODO handle floats!
+
+    int result = 0;
+    int sign;
+
+    if (*string == L'-') {
+        sign = -1;
+        string++;
+    } else {
+        sign = 1;
+    }
+
+    while (size--) {
+        uns_int chr = *string++ - 48;
+        if (chr < 10) {
+            result = (result * 10) + chr;
+            continue;
+        }
+        if (chr == L'r' - 48) {
+            assert0(result <= 36);
+            result = wchar_withbase_to_number(result, string, size);
+        }
+        break;
+    }
+    return (Object)new_Type_SmallInt(sign * result);
+}
+
+NATIVE0(Type_String_asNumber)
+    Type_Symbol o = (Type_Symbol)self;
+    RETURN_FROM_NATIVE(wchar_to_number(o->value, o->size));
+}
+
 /* ========================================================================= */
 
 void post_init_Type_String()
@@ -147,6 +218,7 @@ void post_init_Type_String()
     store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
     store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
     store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);
-    store_native_method(HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
+    store_native_method(Type_String_Class, SMB_asNumber, NM_Type_String_asNumber);
+    store_native_method((Type_Class)HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
 }
 

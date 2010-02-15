@@ -72,3 +72,4 @@ extern Type_Symbol SMB_value_value_value_;
 extern Type_Symbol SMB_value_value_value_value_;
 extern Type_Symbol SMB_stdout;
 extern Type_Symbol SMB_cr;
+extern Type_Symbol SMB_asNumber;
