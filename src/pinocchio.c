@@ -34,7 +34,7 @@ void print_EXP()
         if (c > (Object)10000) {
             print_Class(c);
         } else {
-            printf("%i\n", (int)c);
+            printf("%"F_I"i\n", (uns_int)c);
         }
     }
 }
