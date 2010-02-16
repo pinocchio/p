@@ -36,18 +36,15 @@ Gofer new
         package: 'ECompletionOmniBrowser';
         load.
 !
-"Phexample"
-Gofer new
-        squeaksource: 'phexample';
-        package: 'Phexample';
-	   load
-!
 "Pinocchio"
 Gofer new
-        squeaksource: 'SpyCam';
-        package: 'SpyCam';
-	   load
+        squeaksource: 'p';
+        package: 'Pinocchio';
+        package: 'PEG';
+        package: 'Phexample';
+	    load
 !
+
 "Select Tools"
 SystemBrowser default: OBSystemBrowserAdaptor.
 !
