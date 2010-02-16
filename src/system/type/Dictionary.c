@@ -44,7 +44,7 @@ int get_hash(Type_Dictionary self, Object key)
     return hash;
 }
 
-void push_hash(Object key, Object self)
+void push_hash(Type_Dictionary self, Object key)
 {
     int hash;
     Object tag = GETTAG(key);
@@ -53,9 +53,9 @@ void push_hash(Object key, Object self)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((Type_SmallInt)key)->value;
     } else {
-        return Type_Class_direct_dispatch(self, HEADER(self), (Object)SMB_hash, 0);
+        return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
-    push_EXP(new_Type_SmallInt(hash % ((Type_Dictionary)self)->data->size));
+    push_EXP(new_Type_SmallInt(hash % self->data->size));
 }
 
 
@@ -352,7 +352,7 @@ static void CNT_bucket_rehash_end()
 
     poke_CNT(bucket_rehash);
     poke_EXP(0, idx);
-    push_hash(key, dict);
+    push_hash(dict, key);
 }
 
 static void CNT_bucket_rehash()
@@ -391,7 +391,7 @@ void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
     push_CNT(lookup_push);
     push_EXP(self);
     push_EXP(key);
-    push_hash(key, self);
+    push_hash(self, key);
 }
 
 static CNT(dict_grow_end)
@@ -414,13 +414,13 @@ static void CNT_dict_grow()
     Object key = ((Type_Array)bucket)->values[0];
     if (key == (Object)Nil) { return; }
 
-    Object dict = peek_EXP(0);
+    Type_Dictionary dict = (Type_Dictionary)peek_EXP(0);
 
     push_CNT(bucket_rehash);
     push_EXP(bucket);
     push_EXP(0);
 
-    push_hash(key, dict);
+    push_hash(dict, key);
 }
 
 static void Type_Dictionary_grow(Type_Dictionary self)
@@ -517,7 +517,7 @@ CNT(Type_Dictionary_at_put_)
 
 NATIVE2(Type_Dictionary_at_put_)
     push_CNT(Type_Dictionary_at_put_);
-    push_hash(NATIVE_ARG(0), self);
+    push_hash((Type_Dictionary)self, NATIVE_ARG(0));
 }
 
 NATIVE(Type_Dictionary_basicNew)
