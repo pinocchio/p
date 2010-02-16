@@ -231,7 +231,7 @@ void CNT_bucket_lookup()
     uns_int idx = (uns_int)peek_EXP(1);
     
     if (boolean == (Object)True) {
-        zapn_EXP(2);
+        zapn_EXP(3);
         poke_EXP(0, bucket->values[idx + 1]);
         zap_CNT();
         return;
@@ -240,14 +240,14 @@ void CNT_bucket_lookup()
     idx += 2;
 
     if (idx >= bucket->size) {
-        zapn_EXP(2);
+        zapn_EXP(3);
         poke_EXP(0, NULL);
         zap_CNT();
         return;
     }
 
     if (bucket->values[idx] == (Object)Nil) {
-        zapn_EXP(2);
+        zapn_EXP(3);
         poke_EXP(0, NULL);
         zap_CNT();
         return;
@@ -324,7 +324,7 @@ void Bucket_store_(Type_Array * bucketp, Object key, Object value)
 static void Bucket_lookup(Type_Array bucket, Object key)
 {
     if (bucket->values[0] == (Object)Nil) {
-        push_EXP(NULL);
+        poke_EXP(0, NULL);
         return;
     }
 
@@ -357,9 +357,8 @@ static void CNT_bucket_rehash_end()
 
 static void CNT_bucket_rehash()
 {
-    Object w_hash        = peek_EXP(0);
+    Object w_hash        = pop_EXP();
     int hash             = unwrap_int(w_hash);
-    zap_EXP();
 
     uns_int idx          = (uns_int)peek_EXP(0);
     Type_Array bucket    = (Type_Array)peek_EXP(1);
@@ -372,15 +371,27 @@ static void CNT_bucket_rehash()
 
 /* ========================================================================= */
 
-void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
-{
-    int hash = get_hash(self, key);
+CNT(lookup_push)
+    Object w_hash = peek_EXP(0);
+    int hash = unwrap_int(w_hash);
+    Object key = peek_EXP(1);
+    Type_Dictionary self = (Type_Dictionary)peek_EXP(2);
+    zapn_EXP(2);
+
     Type_Array * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Type_Array)Nil) {
-        push_EXP(NULL);
+        poke_EXP(0, NULL);
         return;
     }
     Bucket_lookup(*bucketp, key);
+}
+
+void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
+{
+    push_CNT(lookup_push);
+    push_EXP(self);
+    push_EXP(key);
+    push_hash(key, self);
 }
 
 static CNT(dict_grow_end)
