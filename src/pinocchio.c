@@ -30,7 +30,12 @@ void print_EXP()
     uns_int size = EXP_size();
     uns_int cur = 0;
     while (cur < size) {
-        print_Class(Double_Stack[cur++]);
+        Object c = Double_Stack[cur++];
+        if (c > (Object)10000) {
+            print_Class(c);
+        } else {
+            printf("%i\n", (int)c);
+        }
     }
 }
 

@@ -44,6 +44,21 @@ int get_hash(Type_Dictionary self, Object key)
     return hash;
 }
 
+void push_hash(Object key, Object self)
+{
+    int hash;
+    Object tag = GETTAG(key);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        hash = Type_Symbol_hash((Type_Symbol)key)->value;
+    } else if (TAG_IS_LAYOUT(tag, Int)) { 
+        hash = ((Type_SmallInt)key)->value;
+    } else {
+        return Type_Class_direct_dispatch(self, HEADER(self), (Object)SMB_hash, 0);
+    }
+    push_EXP(new_Type_SmallInt(hash % ((Type_Dictionary)self)->data->size));
+}
+
+
 /* ========================================================================= *
  * Bucket functions                                                          *
  * ========================================================================= */
@@ -145,14 +160,14 @@ static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
         int i;
         for (i = 0; i < old->size; i++) {
             Type_Array bucket = (Type_Array)old->values[i];
-            if (bucket != (Type_Array)Nil) {
-                int j;
-                for (j = 0; j < bucket->size; j=j+2) {
-                    Object key = bucket->values[j];
-                    if (key == (Object)Nil) { break; }
-                    Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
-                }
+            if (bucket == (Type_Array)Nil) { continue; }
+            int j;
+            for (j = 0; j < bucket->size; j=j+2) {
+                Object key = bucket->values[j];
+                if (key == (Object)Nil) { break; }
+                Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
             }
+            
         }
     }
 }
@@ -320,22 +335,39 @@ static void Bucket_lookup(Type_Array bucket, Object key)
     Bucket_compare_key(key, bucket->values[0]);
 }
 
+static void CNT_bucket_rehash();
+static void CNT_bucket_rehash_end()
+{
+    uns_int idx          = (uns_int)peek_EXP(0);
+    Type_Array bucket    = (Type_Array)peek_EXP(1);
+    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
+    Object key           = bucket->values[idx];
+    idx += 2;
+
+    if (idx >= bucket->size || (key = bucket->values[idx]) == (Object)Nil) {
+        zap_CNT();
+        zapn_EXP(2);
+        return;
+    }
+
+    poke_CNT(bucket_rehash);
+    poke_EXP(0, idx);
+    push_hash(key, dict);
+}
+
 static void CNT_bucket_rehash()
 {
-    uns_int idx = (uns_int)peek_EXP(0);
-    Type_Array bucket = (Type_Array)peek_EXP(1);
-    if (idx < bucket->size) {
-        // TODO do get_hash in tail-position
-        Object key = bucket->values[idx];
-        if (key != (Object)Nil) {
-            poke_EXP(0, idx + 2);
-            Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
-            int hash = get_hash(dict, key);
-            return Type_Dictionary_direct_store(dict, hash, key, bucket->values[idx+1]);
-        }
-    }
-    zapn_EXP(2);
-    zap_CNT();
+    Object w_hash        = peek_EXP(0);
+    int hash             = unwrap_int(w_hash);
+    zap_EXP();
+
+    uns_int idx          = (uns_int)peek_EXP(0);
+    Type_Array bucket    = (Type_Array)peek_EXP(1);
+    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
+    Object key           = bucket->values[idx];
+
+    poke_CNT(bucket_rehash_end);
+    Type_Dictionary_direct_store(dict, hash, key, bucket->values[idx + 1]);
 }
 
 /* ========================================================================= */
@@ -365,11 +397,19 @@ static void CNT_dict_grow()
     } else {
         poke_EXP(1, idx - 1);
     }
-    if (bucket != (Object)Nil) {
-        push_EXP(bucket);
-        push_EXP(0);
-        push_CNT(bucket_rehash);
+    if (bucket == (Object)Nil || ((Type_Array)bucket)->size == 0) {
+        return;
     }
+    Object key = ((Type_Array)bucket)->values[0];
+    if (key == (Object)Nil) { return; }
+
+    Object dict = peek_EXP(0);
+
+    push_CNT(bucket_rehash);
+    push_EXP(bucket);
+    push_EXP(0);
+
+    push_hash(key, dict);
 }
 
 static void Type_Dictionary_grow(Type_Dictionary self)
@@ -447,40 +487,32 @@ NATIVE1(Type_Dictionary_at_)
 NATIVE2(Type_Dictionary_at_ifAbsent_)
     Object w_index = NATIVE_ARG(0);
     Object w_block = NATIVE_ARG(1);
-    // Object tag = GETTAG(w_index);
-    // if (TAG_IS_LAYOUT(tag, Words)) {
-    //    printf("Looking up %ls\n", ((Type_Symbol)w_index)->value);
-    // }
     zapn_EXP(4);
     push_EXP(w_block);
     push_CNT(dictionary_check_absent);
     Type_Dictionary_lookup_push((Type_Dictionary)self, w_index);
 }
-    
+
+CNT(Type_Dictionary_at_put_)
+    Object w_hash    = peek_EXP(0);   
+    int hash = unwrap_int(w_hash);
+    Object new     = peek_EXP(1);
+    Object w_index = peek_EXP(2);
+    Object self    = peek_EXP(3);
+    zapn_EXP(4);
+    poke_EXP(0, new);
+    Type_Dictionary_direct_store((Type_Dictionary)self, hash, w_index, new);
+}
 
 NATIVE2(Type_Dictionary_at_put_)
-    Object w_index = NATIVE_ARG(0);
-    Object new = NATIVE_ARG(1);
-
-    // Object tag = GETTAG(w_index);
-    // if(TAG_IS_LAYOUT(tag, Words)) {
-    //    printf("Storing at %ls\n", ((Type_Symbol)w_index)->value);
-    // }
-
-    // Return before starting direct_store which manipulates the stack!
-    RETURN_FROM_NATIVE(new);
-    
-    int hash = get_hash((Type_Dictionary)self, w_index);
-    Type_Dictionary_direct_store((Type_Dictionary)self, hash, w_index, new);
+    push_CNT(Type_Dictionary_at_put_);
+    push_hash(NATIVE_ARG(0), self);
 }
 
 NATIVE(Type_Dictionary_basicNew)
     zap_EXP();
     poke_EXP(0, new_Type_Dictionary());
 }
-
-// TODO create at ifAbsent put
-/* ========================================================================= */
 
 void post_init_Type_Dictionary()
 {
