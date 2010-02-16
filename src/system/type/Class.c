@@ -30,12 +30,11 @@ Type_Class new_Bootstrapping_Class(Object superclass)
 Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType)
 {    
     Type_Class metaclass = (Type_Class)instantiate(Metaclass);
-
-    assert0(HEADER(metaType) == (Object)Type_ObjectLayout);
+    ASSERT_TAG_LAYOUT(metaType, Object);
     assert0(((Type_Array)metaType)->size >= 3); // we need at least place for
                                                // methods, super and layout.  
 
-    metaclass->layout      = metaType;
+    metaclass->layout    = metaType;
     metaclass->super     = HEADER(superclass);
     metaclass->methods   = new_Type_Dictionary();
     
