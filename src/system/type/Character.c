@@ -39,7 +39,7 @@ Type_Character new_Type_Character_fromInt(int value)
 void pre_init_Type_Character()
 {
     Type_Character_Class = new_Class_named((Object)Type_Object_Class,
-                                           L"Type_Character",
+                                           L"Character",
                                            create_layout(0, CHAR));
     REFER_TO(Type_Character);
 }

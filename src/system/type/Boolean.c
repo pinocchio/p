@@ -40,7 +40,7 @@ void pre_init_Type_True()
 void pre_init_Type_Boolean()
 {
     Type_Boolean_Class = new_Class_named((Object)Type_Object_Class,
-                                         L"Type_Boolean",
+                                         L"Boolean",
                                          CREATE_OBJECT_TAG(BOOL));
     REFER_TO(Type_Boolean);
     pre_init_Type_True();

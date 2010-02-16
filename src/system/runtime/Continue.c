@@ -17,7 +17,7 @@ Runtime_Continue new_Runtime_Continue()
 void pre_init_Runtime_Continue()
 {
     Runtime_Continue_Class = new_Class_named((Object)Type_Object_Class,
-                                         L"Runtime_Continue",
+                                         L"Continue",
                                          CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
 }
 

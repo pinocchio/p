@@ -38,7 +38,7 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
 void pre_init_AST_Send()
 {
     AST_Send_Class = new_Class_named((Object)Type_Object_Class,
-                                     L"AST_Send",
+                                     L"Send",
                                      CREATE_ARRAY_TAG(AST_SEND));
 }
 

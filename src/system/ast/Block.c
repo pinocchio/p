@@ -64,7 +64,7 @@ AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
 void pre_init_AST_Block()
 {
     AST_Block_Class = new_Class_named((Object)Type_Object_Class,
-                                      L"AST_Block",
+                                      L"Block",
                                       CREATE_ARRAY_TAG(AST_BLOCK));
 }
 

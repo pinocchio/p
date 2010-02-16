@@ -13,7 +13,7 @@ void pre_init_Runtime_Message()
 {
     Runtime_Message_Class =
         new_Class_named((Object)Type_Object_Class,
-                        L"Runtime_Message",
+                        L"Message",
                         CREATE_ARRAY_TAG(RUNTIME_MESSAGE));
 }
 

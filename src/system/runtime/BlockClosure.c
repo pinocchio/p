@@ -22,7 +22,7 @@ Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, Runtime_BlockConte
 void pre_init_Runtime_BlockClosure()
 {
     Runtime_BlockClosure_Class = new_Class_named((Object)Type_Object_Class,
-                                            L"Runtime_BlockClosure",
+                                            L"BlockClosure",
                                             CREATE_OBJECT_TAG(RUNTIME_BLOCKCLOSURE));
 }
 

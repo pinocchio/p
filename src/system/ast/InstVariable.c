@@ -21,7 +21,7 @@ void pre_init_AST_InstVariable()
 {
     AST_InstVariable_Class =
         new_Class_named((Object)Type_Object_Class,
-                        L"AST_InstVariable",
+                        L"InstVariable",
                         CREATE_OBJECT_TAG(AST_INSTVARIABLE));
 }
 

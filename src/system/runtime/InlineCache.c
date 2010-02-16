@@ -12,7 +12,7 @@ void pre_init_Runtime_InlineCache()
 {
     Runtime_InlineCache_Class =
         new_Class_named((Object)Type_Object_Class,
-                        L"Runtime_InlineCache",
+                        L"InlineCache",
                         CREATE_OBJECT_TAG(RUNTIME_INLINECACHE));
     REFER_TO(Runtime_InlineCache);
 }

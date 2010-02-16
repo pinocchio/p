@@ -12,7 +12,7 @@ Type_Class AST_Method_Class;
 void pre_init_AST_Method()
 {
     AST_Method_Class = new_Class_named((Object)Type_Object_Class,
-                                       L"AST_Method",
+                                       L"Method",
                                        CREATE_ARRAY_TAG(AST_METHOD));
 }
 
