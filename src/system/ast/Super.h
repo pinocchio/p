@@ -10,9 +10,9 @@
 
 struct AST_Super_t {
     uns_int             size;
+    AST_Info            info;   
     Runtime_InlineCache cache;
     Object              message; 
-    AST_Info            info;   
     Object              unused;
     Object              arguments[];
 };

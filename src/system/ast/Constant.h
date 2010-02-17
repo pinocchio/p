@@ -9,8 +9,8 @@
 #define AST_CONSTANT_VARS L"constant", L"info"
 
 struct AST_Constant_t {
-    Object          constant;
     AST_Info        info;
+    Object          constant;
 };
 
 CREATE_INITIALIZERS(AST_Constant)

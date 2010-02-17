@@ -10,9 +10,9 @@
 
 struct AST_Send_t {
     uns_int             size;
+    AST_Info            info;
     Runtime_InlineCache cache;
     Object              message;
-    AST_Info            info;
     Object              receiver;
     Object              arguments[];
 };

@@ -106,10 +106,11 @@ void does_not_understand(Object self, Object class, Object msg, uns_int argc)
 {
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
-        assert(NULL, printf("\"%ls\" recursive does not understand \"%ls\" (\"%"F_I"u\")\n", 
-            ((Type_Class)HEADER(self))->name->value,
+        assert(NULL,
+            printf("Recursive does not understand \"%ls\" (\"%"F_I"u\") in \n", 
             ((Type_Symbol)message->selector)->value,
-            message->size));
+            message->size);
+            print_Class(self););
     }
     // printf("DNU: \"%ls\" \n", ((Type_Symbol)msg)->value);
 

@@ -9,9 +9,9 @@
 #define AST_ASSIGN_VARS L"variable", L"expression", L"info"
 
 struct AST_Assign_t {
+    AST_Info        info;
     Object          variable;
     Object          expression;
-    AST_Info        info;
 };
 
 
