@@ -90,10 +90,6 @@ NATIVE1(Type_String_concat_)
                                                   0));
 }
 
-NATIVE0(Type_String_asString)
-    RETURN_FROM_NATIVE(self);
-}
-
 NATIVE0(Type_String_asSymbol)
     RETURN_FROM_NATIVE(new_Type_Symbol_cached(((Type_String)self)->value));
 }
@@ -214,7 +210,6 @@ void post_init_Type_String()
     Type_String_Class->name = new_Type_Symbol_cached(L"String");
     install_symbol_methods(Type_String_Class);
     store_native_method(Type_String_Class, SMB__concat,  NM_Type_String_concat_);
-    store_native_method(Type_String_Class, SMB_asString, NM_Type_String_asString);
     store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
     store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
     store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);

@@ -41,7 +41,7 @@ void inter_init_Type_Object()
 /* ========================================================================= */
 
 NATIVE0(Type_Object_hash)
-    int hash = (int)self;
+    int hash = (int)(uns_int)self;
     RETURN_FROM_NATIVE(new_Type_SmallInt(hash));
 }
 
@@ -58,15 +58,6 @@ NATIVE0(Type_Object_class)
 NATIVE1(Type_Object_equals)
     Object arg = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(get_bool(self == arg));
-}
-
-NATIVE0(Type_Object_asString)
-    // TODO
-    assert1(NULL, "NYI");
-}
-
-NATIVE(Type_Object_isNil)
-    RETURN_FROM_NATIVE(False);
 }
 
 Object raw_Type_Object_at(Type_Object o, Object tag, int index)
@@ -184,7 +175,6 @@ void post_init_Type_Object()
     store_native_method(Type_Object_Class, SMB__equal,                  NM_Type_Object_equals);
     store_native_method(Type_Object_Class, SMB_class,                   NM_Type_Object_class);
     store_native_method(Type_Object_Class, SMB_hash,                    NM_Type_Object_hash);
-    store_native_method(Type_Object_Class, SMB_isNil,                   NM_Type_Object_isNil);
     store_native_method(Type_Object_Class, SMB_instVarAt_,              NM_Type_Object_instVarAt_);
     store_native_method(Type_Object_Class, SMB_instVarAt_put_,          NM_Type_Object_instVarAt_put_);
     // store_native_method(Type_Object_Class, SMB_perform_withArguments_,  NM_Type_Object_perform_withArguments_);

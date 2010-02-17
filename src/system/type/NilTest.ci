@@ -17,12 +17,6 @@ NEW_TEST(Type_Nil_isNotNil)
     ASSERT_EMPTY_STACK;
 }
 
-NEW_TEST(Type_Nil_asString)
-    Object result = Eval_Send0(Nil, SMB_asString);
-    ASSERT_TYPE(result, Type_String_Class);
-    ASSERT_EMPTY_STACK;
-}
-
 /* ========================================================================= */
 
 TEST_SUITE(Type_Nil,
@@ -30,5 +24,4 @@ TEST_SUITE(Type_Nil,
     RUN_TEST(Type_Nil_init);
     RUN_TEST(Type_Nil_isNil);
     RUN_TEST(Type_Nil_isNotNil);
-    RUN_TEST(Type_Nil_asString);
 })

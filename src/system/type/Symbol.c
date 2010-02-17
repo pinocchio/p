@@ -69,10 +69,6 @@ NATIVE0(Type_Symbol_asString)
     RETURN_FROM_NATIVE(new_Type_String(((Type_Symbol)self)->value));
 }
 
-NATIVE0(Type_Symbol_asSymbol)
-    RETURN_FROM_NATIVE(self);
-}
-
 Type_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
@@ -154,7 +150,6 @@ void install_symbol_methods(Type_Class class)
 {
     store_native_method(class, SMB_at_,       NM_Type_Symbol_at_);
     store_native_method(class, SMB_asString,  NM_Type_Symbol_asString);
-    store_native_method(class, SMB_asSymbol,  NM_Type_Symbol_asSymbol);
     store_native_method(class, SMB__equal,    NM_Type_Symbol__equal);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
