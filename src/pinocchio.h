@@ -127,21 +127,9 @@ class##_Reference = new_Organization_ClassReference(class);
 
 #define push_EXP(value)         (*(++_EXP_) = ((Object)(value)))
 #define claim_EXP(value)		(_EXP_+=(value))
-/*                               printf("    Pushing[%li] Object with ", (_EXP_-Double_Stack));\
-                               (print_Class((Object)value));
-*/
-                                
 #define pop_EXP()               (*(_EXP_--))
-/*                               printf("    Popping[%li] Object with ", (_EXP_-Double_Stack));\
-                               print_Class(*_EXP_);
-*/
-                                
 #define peek_EXP(depth)         (*(_EXP_ - (depth)))
 #define poke_EXP(depth, value)  (*(_EXP_ - (depth)) = ((Object)(value)))
-/*                               printf("    Peeking[%li] Object with ", (_EXP_-Double_Stack-depth));\
-                               (print_Class((Object)value));
-*/
-                                
 #define zap_EXP()               (_EXP_--)
 #define zapn_EXP(n)             (_EXP_-=n)
 #define empty_EXP()             (_EXP_ == &(Double_Stack[-1]))
