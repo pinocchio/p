@@ -44,7 +44,7 @@ int get_hash(Type_Dictionary self, Object key)
     return hash;
 }
 
-void push_hash(Type_Dictionary self, Object key)
+void push_hash(Object key)
 {
     int hash;
     Object tag = GETTAG(key);
@@ -55,7 +55,12 @@ void push_hash(Type_Dictionary self, Object key)
     } else {
         return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
-    push_EXP(new_Type_SmallInt(hash % self->data->size));
+    push_EXP(new_Type_SmallInt(hash));
+}
+
+int unwrap_hash(Type_Dictionary self, Object w_hash)
+{
+    return unwrap_int(w_hash) % self->data->size;
 }
 
 
@@ -226,12 +231,12 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 
 void CNT_bucket_lookup()
 {
-    Object boolean = pop_EXP();
-    Type_Array bucket = (Type_Array)peek_EXP(0);
-    uns_int idx = (uns_int)peek_EXP(1);
+    Object boolean = peek_EXP(0);
+    Type_Array bucket = (Type_Array)peek_EXP(1);
+    uns_int idx = (uns_int)peek_EXP(2);
     
     if (boolean == (Object)True) {
-        zapn_EXP(3);
+        zapn_EXP(4);
         poke_EXP(0, bucket->values[idx + 1]);
         zap_CNT();
         return;
@@ -239,19 +244,14 @@ void CNT_bucket_lookup()
 
     idx += 2;
 
-    if (idx >= bucket->size) {
-        zapn_EXP(3);
+    if (idx >= bucket->size || bucket->values[idx] == (Object)Nil) {
+        zapn_EXP(4);
         poke_EXP(0, NULL);
         zap_CNT();
         return;
     }
 
-    if (bucket->values[idx] == (Object)Nil) {
-        zapn_EXP(3);
-        poke_EXP(0, NULL);
-        zap_CNT();
-        return;
-    }
+    zap_EXP();
 
     Object key = peek_EXP(2);
     poke_EXP(1, idx);
@@ -340,7 +340,6 @@ static void CNT_bucket_rehash_end()
 {
     uns_int idx          = (uns_int)peek_EXP(0);
     Type_Array bucket    = (Type_Array)peek_EXP(1);
-    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
     Object key           = bucket->values[idx];
     idx += 2;
 
@@ -352,17 +351,17 @@ static void CNT_bucket_rehash_end()
 
     poke_CNT(bucket_rehash);
     poke_EXP(0, idx);
-    push_hash(dict, key);
+    push_hash(key);
 }
 
 static void CNT_bucket_rehash()
 {
     Object w_hash        = pop_EXP();
-    int hash             = unwrap_int(w_hash);
+    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
+    int hash             = unwrap_hash(dict, w_hash);
 
     uns_int idx          = (uns_int)peek_EXP(0);
     Type_Array bucket    = (Type_Array)peek_EXP(1);
-    Type_Dictionary dict = (Type_Dictionary)peek_EXP(2);
     Object key           = bucket->values[idx];
 
     poke_CNT(bucket_rehash_end);
@@ -372,10 +371,10 @@ static void CNT_bucket_rehash()
 /* ========================================================================= */
 
 CNT(lookup_push)
-    Object w_hash = peek_EXP(0);
-    int hash = unwrap_int(w_hash);
-    Object key = peek_EXP(1);
+    Object w_hash        = peek_EXP(0);
     Type_Dictionary self = (Type_Dictionary)peek_EXP(2);
+    int hash             = unwrap_hash(self, w_hash);
+    Object key           = peek_EXP(1);
     zapn_EXP(2);
 
     Type_Array * bucketp = get_bucketp(self, hash);
@@ -391,7 +390,7 @@ void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
     push_CNT(lookup_push);
     push_EXP(self);
     push_EXP(key);
-    push_hash(self, key);
+    push_hash(key);
 }
 
 static CNT(dict_grow_end)
@@ -414,13 +413,11 @@ static void CNT_dict_grow()
     Object key = ((Type_Array)bucket)->values[0];
     if (key == (Object)Nil) { return; }
 
-    Type_Dictionary dict = (Type_Dictionary)peek_EXP(0);
-
     push_CNT(bucket_rehash);
     push_EXP(bucket);
     push_EXP(0);
 
-    push_hash(dict, key);
+    push_hash(key);
 }
 
 static void Type_Dictionary_grow(Type_Dictionary self)
@@ -482,7 +479,7 @@ CNT(dictionary_check_absent)
     Object result = pop_EXP();
     if (result == NULL) {
         Object block = pop_EXP();
-        Type_Class_direct_dispatch(block, HEADER(block), (Object)SMB_apply, 0); 
+        Type_Class_direct_dispatch(block, HEADER(block), (Object)SMB_value, 0); 
         return;
     }
     poke_EXP(0, result);
@@ -505,11 +502,11 @@ NATIVE2(Type_Dictionary_at_ifAbsent_)
 }
 
 CNT(Type_Dictionary_at_put_)
-    Object w_hash    = peek_EXP(0);   
-    int hash = unwrap_int(w_hash);
-    Object new     = peek_EXP(1);
-    Object w_index = peek_EXP(2);
-    Object self    = peek_EXP(3);
+    Object w_hash        = peek_EXP(0);
+    Type_Dictionary self = (Type_Dictionary)peek_EXP(3);
+    int hash             = unwrap_hash(self, w_hash);
+    Object new           = peek_EXP(1);
+    Object w_index       = peek_EXP(2);
     zapn_EXP(4);
     poke_EXP(0, new);
     Type_Dictionary_direct_store((Type_Dictionary)self, hash, w_index, new);
@@ -517,7 +514,7 @@ CNT(Type_Dictionary_at_put_)
 
 NATIVE2(Type_Dictionary_at_put_)
     push_CNT(Type_Dictionary_at_put_);
-    push_hash((Type_Dictionary)self, NATIVE_ARG(0));
+    push_hash(NATIVE_ARG(0));
 }
 
 NATIVE(Type_Dictionary_basicNew)

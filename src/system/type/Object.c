@@ -40,6 +40,11 @@ void inter_init_Type_Object()
 
 /* ========================================================================= */
 
+NATIVE0(Type_Object_hash)
+    int hash = (int)self;
+    RETURN_FROM_NATIVE(new_Type_SmallInt(hash));
+}
+
 NATIVE0(Type_Object_basicNew)
     assert_class(self);
     Object result = instantiate((Type_Class)self);
@@ -178,6 +183,7 @@ void post_init_Type_Object()
     store_native_method(Type_Object_Class, SMB__pequal,                 NM_Type_Object_equals);
     store_native_method(Type_Object_Class, SMB__equal,                  NM_Type_Object_equals);
     store_native_method(Type_Object_Class, SMB_class,                   NM_Type_Object_class);
+    store_native_method(Type_Object_Class, SMB_hash,                    NM_Type_Object_hash);
     store_native_method(Type_Object_Class, SMB_isNil,                   NM_Type_Object_isNil);
     store_native_method(Type_Object_Class, SMB_instVarAt_,              NM_Type_Object_instVarAt_);
     store_native_method(Type_Object_Class, SMB_instVarAt_put_,          NM_Type_Object_instVarAt_put_);
