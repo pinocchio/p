@@ -126,6 +126,7 @@ class##_Reference = new_Organization_ClassReference(class);
 /* ========================================================================= */
 
 #define push_EXP(value)         (*(++_EXP_) = ((Object)(value)))
+#define claim_EXP(value)		(_EXP_+=(value))
 /*                               printf("    Pushing[%li] Object with ", (_EXP_-Double_Stack));\
                                (print_Class((Object)value));
 */

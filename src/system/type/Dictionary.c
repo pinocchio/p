@@ -312,10 +312,11 @@ void Bucket_store_(Type_Array * bucketp, Object key, Object value)
         return;
     }
 
-    push_EXP(value);
-    push_EXP(key);
-    push_EXP((Object)0);
-    push_EXP((Object)bucketp);
+    claim_EXP(4);
+    poke_EXP(3, value);
+    poke_EXP(2, key);
+    poke_EXP(1, 0);
+    poke_EXP(0, bucketp);
     push_CNT(Bucket_store);
 
     Bucket_compare_key(key, bucket->values[0]);
@@ -328,9 +329,10 @@ static void Bucket_lookup(Type_Array bucket, Object key)
         return;
     }
 
-    push_EXP(key);
-    push_EXP(0);
-    push_EXP(bucket);
+    claim_EXP(3);
+    poke_EXP(2, key);
+    poke_EXP(1, 0);
+    poke_EXP(0, bucket);
     push_CNT(bucket_lookup);
     Bucket_compare_key(key, bucket->values[0]);
 }
@@ -388,8 +390,9 @@ CNT(lookup_push)
 void Type_Dictionary_lookup_push(Type_Dictionary self, Object key)
 {
     push_CNT(lookup_push);
-    push_EXP(self);
-    push_EXP(key);
+    claim_EXP(2);
+    poke_EXP(1, self);
+    poke_EXP(0, key);
     push_hash(key);
 }
 
@@ -414,8 +417,9 @@ static void CNT_dict_grow()
     if (key == (Object)Nil) { return; }
 
     push_CNT(bucket_rehash);
-    push_EXP(bucket);
-    push_EXP(0);
+    claim_EXP(2);
+    poke_EXP(1, bucket);
+    poke_EXP(0, 0);
 
     push_hash(key);
 }
@@ -427,9 +431,10 @@ static void Type_Dictionary_grow(Type_Dictionary self)
     self->size = 0;
     
     push_CNT(dict_grow);
-    push_EXP(old);
-    push_EXP(old->size - 1);
-    push_EXP(self);
+    claim_EXP(3);
+    poke_EXP(2, old);
+    poke_EXP(1, old->size - 1);
+    poke_EXP(0, self);
 }
 
 static void Type_Dictionary_check_grow(Type_Dictionary self)
