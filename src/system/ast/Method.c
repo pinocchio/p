@@ -57,13 +57,8 @@ AST_Method new_AST_Method_with(Type_Array params,
     return result;
 }
 
-NATIVE(AST_Method_numArgs) 
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((AST_Method) self)->params->size));
-}
-
 /* ========================================================================= */
 
 void post_init_AST_Method()
 {
-    store_native_method(AST_Method_Class, SMB_numArgs, NM_AST_Method_numArgs); 
 }

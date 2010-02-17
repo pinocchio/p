@@ -77,13 +77,6 @@ void AST_Block_eval(AST_Block self)
 
 /* ========================================================================= */
 
-NATIVE(AST_Block_numArgs) 
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((AST_Block) self)->params->size));
-}
-
-/* ========================================================================= */
-
 void post_init_AST_Block()
 {
-    store_native_method(AST_Block_Class, SMB_numArgs, NM_AST_Block_numArgs); 
 }

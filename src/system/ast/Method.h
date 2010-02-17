@@ -12,9 +12,9 @@
 
 struct AST_Method_t {
     uns_int     size;
+    AST_Info    info;
     Type_Array  params;
     Type_Array  locals;
-    AST_Info    info;
     Object      package;
     Object      body[];
 };
