@@ -6,13 +6,13 @@
 /* ========================================================================= */
 
 #define AST_VARIABLE_SIZE 4
-#define AST_VARIABLE_VARS L"index", L"key", L"name", L"info"
+#define AST_VARIABLE_VARS L"info", L"index", L"key", L"name"
 
 struct AST_Variable_t {
+    AST_Info    info;
     uns_int     local_id;
     uns_int     scope_id;
     Object      name;
-    AST_Info    info;
 };
 
 CREATE_INITIALIZERS(AST_Variable)
