@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 #define AST_ASSIGN_SIZE 3
-#define AST_ASSIGN_VARS L"variable", L"expression", L"info"
+#define AST_ASSIGN_VARS L"info", L"variable", L"expression"
 
 struct AST_Assign_t {
     AST_Info        info;

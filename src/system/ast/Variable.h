@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 #define AST_VARIABLE_SIZE 4
-#define AST_VARIABLE_VARS L"info", L"index", L"key", L"name"
+#define AST_VARIABLE_VARS L"info", L"index", L"scope", L"name"
 
 struct AST_Variable_t {
     AST_Info    info;

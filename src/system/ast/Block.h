@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define AST_BLOCK_SIZE 4
-#define AST_BLOCK_VARS L"params", L"locals", L"body", L"info"
+#define AST_BLOCK_SIZE 3
+#define AST_BLOCK_VARS L"info", L"params", L"locals"
 
 /* ========================================================================= */
 

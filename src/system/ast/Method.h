@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define AST_METHOD_SIZE 5
-#define AST_METHOD_VARS L"params", L"locals", L"body", L"info", L"package"
+#define AST_METHOD_SIZE 4
+#define AST_METHOD_VARS L"info", L"params", L"locals", L"package"
 
 /* ========================================================================= */
 

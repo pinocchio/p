@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 #define AST_CONSTANT_SIZE 2
-#define AST_CONSTANT_VARS L"constant", L"info"
+#define AST_CONSTANT_VARS L"info", L"constant"
 
 struct AST_Constant_t {
     AST_Info        info;
