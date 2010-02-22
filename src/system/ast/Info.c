@@ -44,9 +44,7 @@ void pre_init_AST_Info()
 
 void print_AST_Info(AST_Info info)
 {
-    assert1((info != NULL && (Object)info != Nil), 
-        "Wrong info for print_AST_Info");
-    if (info == empty_AST_Info) {
+    if (info == NULL || (Object)info != Nil || info == empty_AST_Info) {
         printf("[ NO SOURCE INFO GIVEN ]");
     } else {
         printf("[%ls %i]", info->name->value, 
