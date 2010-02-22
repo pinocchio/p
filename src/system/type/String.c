@@ -35,7 +35,6 @@ void pre_init_Type_String()
 {
     Type_String_Class    = new_Class((Object)Type_Object_Class,
                                      create_layout(0, WORDS));
-    REFER_TO(Type_String);
     empty_Type_String         = new_Type_String(L"");
 }
 
@@ -207,6 +206,7 @@ NATIVE0(Type_String_asNumber)
 
 void post_init_Type_String()
 {
+    REFER_TO(Type_String);
     Type_String_Class->name = new_Type_Symbol_cached(L"String");
     install_symbol_methods(Type_String_Class);
     store_native_method(Type_String_Class, SMB__concat,  NM_Type_String_concat_);

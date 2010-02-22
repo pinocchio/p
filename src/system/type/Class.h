@@ -12,9 +12,9 @@ EXPORT_REFERENCE(Behavior);
 
 #define BEHAVIOR_SIZE 3
 #define BEHAVIOR_VARS L"layout", L"super", L"methods"
-#define METACLASS_SIZE 3
+#define METACLASS_SIZE BEHAVIOR_SIZE
 #define METACLASS_VARS BEHAVIOR_VARS
-#define CLASS_SIZE 5
+#define CLASS_SIZE (METACLASS_SIZE + 2)
 #define CLASS_VARS BEHAVIOR_VARS, L"name", L"package"
 
 /* ========================================================================= */

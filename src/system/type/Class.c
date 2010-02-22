@@ -236,12 +236,12 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     assert0(msg != Nil);
 
     #ifdef DEBUG
-    // wchar_t * clsname = classname(class);
-    // if (HEADER(class) != (Object)Metaclass) {
-    //    LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
-    // } else {
-    //    LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
-    // }
+    //wchar_t * clsname = classname(class);
+    //if (HEADER(class) != (Object)Metaclass) {
+    //   LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
+    //} else {
+    //   LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
+    //}
     #endif // DEBUG
     
     /* Monomorphic inline cache */
@@ -286,7 +286,7 @@ void post_init_Type_Class()
         
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
-    Behavior           = new_Class_named((Object)Type_Object_Class,
+    Behavior            = new_Class_named((Object)Type_Object_Class,
                                 L"Behavior",
                                 create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
     Class               = new_Class_named((Object)Behavior,
@@ -295,7 +295,7 @@ void post_init_Type_Class()
     Metaclass->super    = (Object)Behavior;
     
     ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
-    ((Type_Class)HEADER(Metaclass))->super = HEADER(Behavior);
+    ((Type_Class)HEADER(Metaclass))->super         = HEADER(Behavior);
 
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);

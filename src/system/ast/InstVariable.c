@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_InstVariable_Class;
+DECLARE_CLASS(AST_InstVariable);
 
 /* ========================================================================= */
 
@@ -63,5 +63,5 @@ void AST_InstVariable_assign(AST_InstVariable var, Object value)
 
 void post_init_AST_InstVariable()
 {
-
+    REFER_TO(AST_InstVariable);
 }

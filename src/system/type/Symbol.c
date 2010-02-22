@@ -49,7 +49,6 @@ void initialize_Symbol()
 void pre_init_Type_Symbol()
 {
     Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_layout(0, WORDS));
-    REFER_TO(Type_Symbol);
     initialize_Symbol();
 }
 /* ========================================================================= */
@@ -142,6 +141,7 @@ NATIVE0(Type_Symbol_cr)
 
 void post_init_Type_Symbol()
 {
+    REFER_TO(Type_Symbol);
     install_symbol_methods(Type_Symbol_Class);
     Type_Symbol_Class->name = new_Type_Symbol_cached(L"Symbol");
 }
