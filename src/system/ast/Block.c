@@ -36,25 +36,23 @@ AST_Block new_AST_Block(uns_int paramCount,
     return result;
 }
 
-void init_variable_array(Type_Array array, uns_int scope_id,
-                         uns_int local_id)
+void init_variable_array(Type_Array array, uns_int local_id)
 {
     uns_int i;
     for (i = 0; i < array->size; i++) {
-        ((AST_Variable)array->values[i])->scope_id = scope_id;
         ((AST_Variable)array->values[i])->local_id = local_id;
         local_id++;
     }
 }
 
 AST_Block new_AST_Block_with(Type_Array params, Type_Array locals,
-                             uns_int depth, uns_int statementCount, ...)
+                             uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_Block, Object[statementCount]);
     result->params  = params;
     result->locals  = locals;
-    init_variable_array(result->params, depth, 0);
-    init_variable_array(result->locals, depth, result->params->size);
+    init_variable_array(result->params, 0);
+    init_variable_array(result->locals, result->params->size);
     result->info    = empty_AST_Info;
     result->size    = statementCount;
     COPY_ARGS(statementCount, result->body);

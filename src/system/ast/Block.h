@@ -27,7 +27,6 @@ extern AST_Block new_AST_Block(uns_int paramCount,
 
 extern AST_Block new_AST_Block_with(Type_Array params,
                                     Type_Array locals,
-                                    uns_int depth,
                                     uns_int statementCount,
                                     ...);
 
@@ -42,8 +41,7 @@ extern AST_Block new_AST_Block_with(Type_Array params,
 
 extern void init_raw_variable_array(Type_Array array, uns_int scope_id,
                                     uns_int size, uns_int local_id);
-extern void init_variable_array(Type_Array array, uns_int scope_id,
-                                uns_int local_id);
+extern void init_variable_array(Type_Array array, uns_int local_id);
 
 /* ========================================================================= */
 

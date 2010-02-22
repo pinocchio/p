@@ -10,11 +10,12 @@ Type_Class AST_Variable_Class;
 
 /* ========================================================================= */
 
-AST_Variable new_AST_Variable_named(const wchar_t* name)
+AST_Variable new_AST_Variable_named(const wchar_t* name, uns_int scope_id)
 {
     NEW_OBJECT(AST_Variable);
-    result->name = (Object)new_Type_String(name);
-    result->info = empty_AST_Info;
+    result->name     = (Object)new_Type_String(name);
+    result->info     = empty_AST_Info;
+    result->scope_id = scope_id;
     return result;
 }
 
@@ -23,8 +24,8 @@ AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
     NEW_OBJECT(AST_Variable);
     result->local_id = local_id;
     result->scope_id = scope_id;
-    result->name    = Nil;
-    result->info    = empty_AST_Info;
+    result->name     = Nil;
+    result->info     = empty_AST_Info;
     return result;
 }
 

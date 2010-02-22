@@ -48,8 +48,8 @@ AST_Method new_AST_Method_with(Type_Array params,
     NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);
     result->params = params;
     result->locals = locals;
-    init_variable_array(result->params, 0, 0);
-    init_variable_array(result->locals, 0, result->params->size);
+    init_variable_array(result->params, 0);
+    init_variable_array(result->locals, result->params->size);
     result->info   = empty_AST_Info;
     result->size   = statementCount;
     COPY_ARGS(statementCount, result->body);

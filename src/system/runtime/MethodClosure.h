@@ -11,14 +11,14 @@
 /* ========================================================================= */
 
 struct Runtime_MethodClosure_t {
+    AST_Info            info;
     AST_Method          code;
     Type_Class          class;
-    AST_Info            info;
     Object              selector;
 };
 
 CREATE_INITIALIZERS(Runtime_MethodClosure)
-extern Runtime_MethodClosure new_Runtime_MethodClosure();
+extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code);
 
 /* ========================================================================= */
 

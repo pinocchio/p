@@ -9,9 +9,9 @@
 #define RUNTIME_BLOCKCLOSURE_VARS L"code", L"context", L"info"
 
 struct Runtime_BlockClosure_t {
+    AST_Info             info;
     AST_Block            code;
     Runtime_BlockContext context;
-    AST_Info             info;
 };
 
 CREATE_INITIALIZERS(Runtime_BlockClosure)
