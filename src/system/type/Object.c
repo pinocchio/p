@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
 #include <system/type/Object.h>
 
 /* ========================================================================= */
@@ -244,11 +245,39 @@ void inspect(Object o)
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
-            printf("%i:\t", i-size+1);
+            printf("%"F_I"u:\t", i-size+1);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         return;
     }
+}
+
+Object object_atn(Object o, wchar_t * s)
+{
+    Object tag = GETTAG(o);
+    if (TAG_IS_LAYOUT(tag, Object)) {
+        int i;
+        uns_int size = ((Type_Array)tag)->size;
+        for (i = 0; i < size; i++) {
+            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            Type_Symbol sym = (Type_Symbol)v->name;
+            if (!wcsncmp(sym->value, s, sym->size)) { continue; }
+            return ((Type_Object)o)->ivals[i];
+        }
+        assert(NULL, printf("Var not found: %ls\n", s););
+    }
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        uns_int size = ((Type_Array)tag)->size;
+        int i;
+        for (i = 0; i < size; i++) {
+            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            Type_Symbol sym = (Type_Symbol)v->name;
+            if (!wcsncmp(sym->value, s, sym->size)) { continue; }
+            return ((Type_Array)o)->values[i];
+        }
+        assert(NULL, printf("Var not found: %ls\n", s););
+    }
+    assert(NULL, printf("Non-indexable object\n"););
 }
 
 Object object_at(Object o, uns_int i)
