@@ -67,11 +67,6 @@ void pre_init_Type_Array()
 
 /* ========================================================================= */
 
-NATIVE0(Type_Array_size)
-    Type_SmallInt result = new_Type_SmallInt(((Type_Array)self)->size);
-    RETURN_FROM_NATIVE(result);
-}
-
 Object raw_Type_Array_instAt(Type_Array o, Object tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
@@ -115,5 +110,4 @@ void post_init_Type_Array()
     
     store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);
     store_native_method(Type_Array_Class, SMB_instVarAt_put_, NM_Type_Array_instVarAt_put_);
-    store_native_method(Type_Array_Class, SMB_size,    NM_Type_Array_size);
 }

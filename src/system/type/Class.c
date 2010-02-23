@@ -243,12 +243,12 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     assert0(msg != Nil);
 
     #ifdef DEBUG
-    wchar_t * clsname = classname(class);
-    if (HEADER(class) != (Object)Metaclass) {
-       LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
-    } else {
-       LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
-    }
+    // wchar_t * clsname = classname(class);
+    // if (HEADER(class) != (Object)Metaclass) {
+    //    LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
+    // } else {
+    //    LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
+    // }
     #endif // DEBUG
     
     /* Monomorphic inline cache */

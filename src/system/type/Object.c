@@ -98,6 +98,20 @@ NATIVE1(Type_Array_basicNew_)
     RETURN_FROM_NATIVE(result);
 }
 
+NATIVE0(Type_Object_size)
+    Object tag = GETTAG(self);
+    uns_int size;
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        size = ((Type_Array)self)->size;
+    } else if (TAG_IS_LAYOUT(tag, Words)) {
+        size = ((Type_Symbol)self)->size;
+    } else {
+        assert(NULL, printf("Not indexable\n"););
+    }
+    Type_SmallInt result = new_Type_SmallInt(size);
+    RETURN_FROM_NATIVE(result);
+}
+
 Object raw_Type_Array_at(Type_Array array, Object tag, int index)
 {
     assert0(array->size > index);
@@ -167,6 +181,7 @@ void post_init_Type_Object()
     Type_Object_Class->name = new_Type_String(L"Object");
     Type_Object_Class->methods = new_Type_Dictionary();
     
+    store_native_method(Type_Object_Class, SMB_size,                    NM_Type_Object_size);
     store_native_method(Type_Object_Class, SMB_at_,                     NM_Type_Array_at_);
     store_native_method(Type_Object_Class, SMB_at_put_,                 NM_Type_Array_at_put_);
     store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew,  NM_Type_Object_basicNew);

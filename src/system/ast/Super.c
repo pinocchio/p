@@ -35,7 +35,7 @@ void pre_init_AST_Super()
 {
     AST_Super_Class = new_Class_named((Object)Type_Object_Class,
                                       L"Super",
-                                      CREATE_OBJECT_TAG(AST_SUPER));
+                                      CREATE_ARRAY_TAG(AST_SUPER));
 }
 
 /* ========================================================================= */
