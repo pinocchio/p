@@ -243,16 +243,13 @@
 		364E660210C562DE00AD4616 /* pinocchioTypeInclude.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pinocchioTypeInclude.hi; sourceTree = "<group>"; };
 		364E660510C562DE00AD4616 /* Assign.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Assign.c; sourceTree = "<group>"; };
 		364E660610C562DE00AD4616 /* Assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assign.h; sourceTree = "<group>"; };
-		364E660810C562DE00AD4616 /* AssignTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = AssignTest.ci; sourceTree = "<group>"; };
 		364E660910C562DE00AD4616 /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		364E660A10C562DE00AD4616 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		364E660C10C562DE00AD4616 /* BlockTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlockTest.ci; sourceTree = "<group>"; };
 		364E660D10C562DE00AD4616 /* Callec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Callec.c; sourceTree = "<group>"; };
 		364E660E10C562DE00AD4616 /* Callec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Callec.h; sourceTree = "<group>"; };
 		364E661010C562DE00AD4616 /* CallecTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CallecTest.ci; sourceTree = "<group>"; };
 		364E661110C562DE00AD4616 /* Constant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Constant.c; sourceTree = "<group>"; };
 		364E661210C562DE00AD4616 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
-		364E661410C562DE00AD4616 /* ConstantTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ConstantTest.ci; sourceTree = "<group>"; };
 		364E661610C562DE00AD4616 /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		364E661710C562DE00AD4616 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		364E661910C562DE00AD4616 /* InfoTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InfoTest.ci; sourceTree = "<group>"; };
@@ -261,7 +258,6 @@
 		364E661D10C562DE00AD4616 /* InstVariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InstVariableTest.ci; sourceTree = "<group>"; };
 		364E661E10C562DE00AD4616 /* Method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Method.c; sourceTree = "<group>"; };
 		364E661F10C562DE00AD4616 /* Method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Method.h; sourceTree = "<group>"; };
-		364E662110C562DE00AD4616 /* MethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodTest.ci; sourceTree = "<group>"; };
 		364E662210C562DE00AD4616 /* NativeMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeMethod.c; sourceTree = "<group>"; };
 		364E662310C562DE00AD4616 /* NativeMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMethod.h; sourceTree = "<group>"; };
 		364E662510C562DE00AD4616 /* NativeMethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NativeMethodTest.ci; sourceTree = "<group>"; };
@@ -270,7 +266,6 @@
 		364E662910C562DE00AD4616 /* SelfTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SelfTest.ci; sourceTree = "<group>"; };
 		364E662A10C562DE00AD4616 /* Send.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Send.c; sourceTree = "<group>"; };
 		364E662B10C562DE00AD4616 /* Send.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Send.h; sourceTree = "<group>"; };
-		364E662D10C562DE00AD4616 /* SendTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SendTest.ci; sourceTree = "<group>"; };
 		364E662E10C562DE00AD4616 /* Super.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Super.c; sourceTree = "<group>"; };
 		364E662F10C562DE00AD4616 /* Super.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Super.h; sourceTree = "<group>"; };
 		364E663110C562DE00AD4616 /* SuperTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SuperTest.ci; sourceTree = "<group>"; };
@@ -309,52 +304,37 @@
 		364E665D10C562DE00AD4616 /* ThreadTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ThreadTest.ci; sourceTree = "<group>"; };
 		364E665F10C562DE00AD4616 /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
 		364E666010C562DE00AD4616 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		364E666110C562DE00AD4616 /* Array.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Array.o; sourceTree = "<group>"; };
-		364E666210C562DE00AD4616 /* ArrayTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ArrayTest.ci; sourceTree = "<group>"; };
 		364E666310C562DE00AD4616 /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
 		364E666410C562DE00AD4616 /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
-		364E666510C562DE00AD4616 /* Boolean.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Boolean.o; sourceTree = "<group>"; };
-		364E666610C562DE00AD4616 /* BooleanTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BooleanTest.ci; sourceTree = "<group>"; };
 		364E666710C562DE00AD4616 /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
 		364E666810C562DE00AD4616 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		364E666910C562DE00AD4616 /* Character.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Character.o; sourceTree = "<group>"; };
 		364E666A10C562DE00AD4616 /* CharacterTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CharacterTable.c; sourceTree = "<group>"; };
 		364E666B10C562DE00AD4616 /* CharacterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterTable.h; sourceTree = "<group>"; };
-		364E666C10C562DE00AD4616 /* CharacterTable.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = CharacterTable.o; sourceTree = "<group>"; };
-		364E666D10C562DE00AD4616 /* CharacterTableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CharacterTableTest.ci; sourceTree = "<group>"; };
 		364E666E10C562DE00AD4616 /* CharacterTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CharacterTest.ci; sourceTree = "<group>"; };
 		364E666F10C562DE00AD4616 /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
 		364E667010C562DE00AD4616 /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
-		364E667110C562DE00AD4616 /* Class.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Class.o; sourceTree = "<group>"; };
 		364E667210C562DE00AD4616 /* ClassTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ClassTest.ci; sourceTree = "<group>"; };
 		364E667310C562DE00AD4616 /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
 		364E667410C562DE00AD4616 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
-		364E667510C562DE00AD4616 /* Dictionary.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Dictionary.o; sourceTree = "<group>"; };
 		364E667610C562DE00AD4616 /* DictionaryTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DictionaryTest.ci; sourceTree = "<group>"; };
 		364E667710C562DE00AD4616 /* Instantiate.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Instantiate.ci; sourceTree = "<group>"; };
 		364E667810C562DE00AD4616 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		364E667910C562DE00AD4616 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
-		364E667A10C562DE00AD4616 /* Layout.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Layout.o; sourceTree = "<group>"; };
 		364E667B10C562DE00AD4616 /* LayoutTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LayoutTest.ci; sourceTree = "<group>"; };
 		364E667C10C562DE00AD4616 /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
 		364E667D10C562DE00AD4616 /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
-		364E667E10C562DE00AD4616 /* Nil.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Nil.o; sourceTree = "<group>"; };
 		364E667F10C562DE00AD4616 /* NilTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NilTest.ci; sourceTree = "<group>"; };
 		364E668010C562DE00AD4616 /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
 		364E668110C562DE00AD4616 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
-		364E668210C562DE00AD4616 /* Object.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Object.o; sourceTree = "<group>"; };
 		364E668310C562DE00AD4616 /* ObjectTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ObjectTest.ci; sourceTree = "<group>"; };
 		364E668410C562DE00AD4616 /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
 		364E668510C562DE00AD4616 /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
-		364E668610C562DE00AD4616 /* SmallInt.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = SmallInt.o; sourceTree = "<group>"; };
 		364E668710C562DE00AD4616 /* SmallIntTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SmallIntTest.ci; sourceTree = "<group>"; };
 		364E668810C562DE00AD4616 /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
 		364E668910C562DE00AD4616 /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
-		364E668A10C562DE00AD4616 /* String.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = String.o; sourceTree = "<group>"; };
 		364E668B10C562DE00AD4616 /* StringTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = StringTest.ci; sourceTree = "<group>"; };
 		364E668C10C562DE00AD4616 /* Symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Symbol.c; sourceTree = "<group>"; };
 		364E668D10C562DE00AD4616 /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
-		364E668E10C562DE00AD4616 /* Symbol.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Symbol.o; sourceTree = "<group>"; };
 		364E668F10C562DE00AD4616 /* SymbolDefinition.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SymbolDefinition.ci; sourceTree = "<group>"; };
 		364E669010C562DE00AD4616 /* SymbolDefinition.hi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SymbolDefinition.hi; sourceTree = "<group>"; };
 		364E669110C562DE00AD4616 /* SymbolInitialization.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SymbolInitialization.ci; sourceTree = "<group>"; };
@@ -588,16 +568,13 @@
 			children = (
 				364E660510C562DE00AD4616 /* Assign.c */,
 				364E660610C562DE00AD4616 /* Assign.h */,
-				364E660810C562DE00AD4616 /* AssignTest.ci */,
 				364E660910C562DE00AD4616 /* Block.c */,
 				364E660A10C562DE00AD4616 /* Block.h */,
-				364E660C10C562DE00AD4616 /* BlockTest.ci */,
 				364E660D10C562DE00AD4616 /* Callec.c */,
 				364E660E10C562DE00AD4616 /* Callec.h */,
 				364E661010C562DE00AD4616 /* CallecTest.ci */,
 				364E661110C562DE00AD4616 /* Constant.c */,
 				364E661210C562DE00AD4616 /* Constant.h */,
-				364E661410C562DE00AD4616 /* ConstantTest.ci */,
 				364E661610C562DE00AD4616 /* Info.c */,
 				364E661710C562DE00AD4616 /* Info.h */,
 				364E661910C562DE00AD4616 /* InfoTest.ci */,
@@ -606,7 +583,6 @@
 				364E661D10C562DE00AD4616 /* InstVariableTest.ci */,
 				364E661E10C562DE00AD4616 /* Method.c */,
 				364E661F10C562DE00AD4616 /* Method.h */,
-				364E662110C562DE00AD4616 /* MethodTest.ci */,
 				364E662210C562DE00AD4616 /* NativeMethod.c */,
 				364E662310C562DE00AD4616 /* NativeMethod.h */,
 				364E662510C562DE00AD4616 /* NativeMethodTest.ci */,
@@ -615,7 +591,6 @@
 				364E662910C562DE00AD4616 /* SelfTest.ci */,
 				364E662A10C562DE00AD4616 /* Send.c */,
 				364E662B10C562DE00AD4616 /* Send.h */,
-				364E662D10C562DE00AD4616 /* SendTest.ci */,
 				364E662E10C562DE00AD4616 /* Super.c */,
 				364E662F10C562DE00AD4616 /* Super.h */,
 				364E663110C562DE00AD4616 /* SuperTest.ci */,
@@ -682,52 +657,37 @@
 			children = (
 				364E665F10C562DE00AD4616 /* Array.c */,
 				364E666010C562DE00AD4616 /* Array.h */,
-				364E666110C562DE00AD4616 /* Array.o */,
-				364E666210C562DE00AD4616 /* ArrayTest.ci */,
 				364E666310C562DE00AD4616 /* Boolean.c */,
 				364E666410C562DE00AD4616 /* Boolean.h */,
-				364E666510C562DE00AD4616 /* Boolean.o */,
-				364E666610C562DE00AD4616 /* BooleanTest.ci */,
 				364E666710C562DE00AD4616 /* Character.c */,
 				364E666810C562DE00AD4616 /* Character.h */,
-				364E666910C562DE00AD4616 /* Character.o */,
 				364E666A10C562DE00AD4616 /* CharacterTable.c */,
 				364E666B10C562DE00AD4616 /* CharacterTable.h */,
-				364E666C10C562DE00AD4616 /* CharacterTable.o */,
-				364E666D10C562DE00AD4616 /* CharacterTableTest.ci */,
 				364E666E10C562DE00AD4616 /* CharacterTest.ci */,
 				364E666F10C562DE00AD4616 /* Class.c */,
 				364E667010C562DE00AD4616 /* Class.h */,
-				364E667110C562DE00AD4616 /* Class.o */,
 				364E667210C562DE00AD4616 /* ClassTest.ci */,
 				364E667310C562DE00AD4616 /* Dictionary.c */,
 				364E667410C562DE00AD4616 /* Dictionary.h */,
-				364E667510C562DE00AD4616 /* Dictionary.o */,
 				364E667610C562DE00AD4616 /* DictionaryTest.ci */,
 				364E667710C562DE00AD4616 /* Instantiate.ci */,
 				364E667810C562DE00AD4616 /* Layout.c */,
 				364E667910C562DE00AD4616 /* Layout.h */,
-				364E667A10C562DE00AD4616 /* Layout.o */,
 				364E667B10C562DE00AD4616 /* LayoutTest.ci */,
 				364E667C10C562DE00AD4616 /* Nil.c */,
 				364E667D10C562DE00AD4616 /* Nil.h */,
-				364E667E10C562DE00AD4616 /* Nil.o */,
 				364E667F10C562DE00AD4616 /* NilTest.ci */,
 				364E668010C562DE00AD4616 /* Object.c */,
 				364E668110C562DE00AD4616 /* Object.h */,
-				364E668210C562DE00AD4616 /* Object.o */,
 				364E668310C562DE00AD4616 /* ObjectTest.ci */,
 				364E668410C562DE00AD4616 /* SmallInt.c */,
 				364E668510C562DE00AD4616 /* SmallInt.h */,
-				364E668610C562DE00AD4616 /* SmallInt.o */,
 				364E668710C562DE00AD4616 /* SmallIntTest.ci */,
 				364E668810C562DE00AD4616 /* String.c */,
 				364E668910C562DE00AD4616 /* String.h */,
-				364E668A10C562DE00AD4616 /* String.o */,
 				364E668B10C562DE00AD4616 /* StringTest.ci */,
 				364E668C10C562DE00AD4616 /* Symbol.c */,
 				364E668D10C562DE00AD4616 /* Symbol.h */,
-				364E668E10C562DE00AD4616 /* Symbol.o */,
 				364E668F10C562DE00AD4616 /* SymbolDefinition.ci */,
 				364E669010C562DE00AD4616 /* SymbolDefinition.hi */,
 				364E669110C562DE00AD4616 /* SymbolInitialization.ci */,

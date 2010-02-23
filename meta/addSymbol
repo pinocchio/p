@@ -31,18 +31,20 @@ def cleanUpSymbolInitialization()
     end
 end
 
-if $0 == __FILE__
-    addedSymbol = false
-    $*.each {|symbol|
-        if not ensureSymbol(symbol)
-            addSymbol(symbol)
-            puts "Symbol \"#{symbol}\" added"
-            addedSymbol = true
-        else
-            puts "Symbol \"#{symbol}\" exists already!"
-        end
-    }
-    if addedSymbol or true
-        cleanUpSymbolInitialization()
+
+
+Dir.chdir(File.dirname($0) + '/../src/')
+
+addedSymbol = false
+$*.each {|symbol|
+    if not ensureSymbol(symbol)
+        addSymbol(symbol)
+        puts "Symbol \"#{symbol}\" added"
+        addedSymbol = true
+    else
+        puts "Symbol \"#{symbol}\" exists already!"
     end
+}
+if addedSymbol or true
+    cleanUpSymbolInitialization()
 end
