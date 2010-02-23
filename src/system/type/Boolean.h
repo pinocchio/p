@@ -3,16 +3,14 @@
 
 #include <pinocchio.h>
 
-#define BOOL_SIZE 1
-#define BOOL_VARS L"value"
+#define BOOL_SIZE 0
+#define BOOL_VARS 
 
 AST_Constant new_AST_Constant(Object value);
 
 /* ========================================================================= */
 
-struct Type_Boolean_t {
-    int             value;
-};
+struct Type_Boolean_t { };
 
 CREATE_INITIALIZERS(Type_Boolean)
 

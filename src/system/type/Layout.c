@@ -70,10 +70,10 @@ Object create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
     Type_Array result = create_layout_with_vars(Type_ObjectLayout, size);
-    while (0 < size) {
-        size--;
-        result->values[size] =
-            (Object)new_AST_InstVariable(size,
+    int i;
+    for (i = 0; i < size; i++) {
+        result->values[i] =
+            (Object)new_AST_InstVariable(i,
                                          va_arg(args, wchar_t *));
     }
     va_end(args);
@@ -84,10 +84,9 @@ Object create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
     Type_Array result = create_layout_with_vars(Type_ArrayLayout, size);
-    while (0 < size) {
-        size--;
-        result->values[size] = (Object)new_AST_InstVariable(size,
-                                                            va_arg(args, wchar_t *));
+    int i;
+    for (i = 0; i < size; i++) {
+        result->values[i] = (Object)new_AST_InstVariable(i, va_arg(args, wchar_t *));
     }
     va_end(args);
     return (Object)result;
@@ -113,5 +112,9 @@ Object create_layout(uns_int size, Type_Tag tag, ...)
 
 void post_init_Type_Layout()
 {
+    Type_ObjectLayout->name = new_Type_Symbol(L"ObjectLayout");
+    Type_ArrayLayout->name  = new_Type_Symbol(L"ArrayLayout");
+    Type_IntLayout->name    = new_Type_Symbol(L"IntLayout");
+    Type_WordsLayout->name  = new_Type_Symbol(L"WordsLayout");
     // TODO fill in the bootstrapping classes
 }

@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define TYPE_DICTIONARY_SIZE 1
-#define TYPE_DICTIONARY_VARS L"layout"
+#define TYPE_DICTIONARY_SIZE 3
+#define TYPE_DICTIONARY_VARS L"layout", L"ratio", L"data"
 
 struct Type_Dictionary_t {
     uns_int     size;

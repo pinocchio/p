@@ -19,7 +19,7 @@ Type_Boolean True;
 void pre_init_Type_False() {
     False_Class = new_Class_named((Object)Type_Boolean_Class,
                                   L"False",
-                                  CREATE_OBJECT_TAG(BOOL));
+                                  create_layout(0, OBJECT));
     REFER_TO(False);
     False = NEW_t(Type_Boolean);
     HEADER(False) = (Object)False_Class;
@@ -30,7 +30,7 @@ void pre_init_Type_True()
 {
     True_Class = new_Class_named((Object)Type_Boolean_Class,
                                  L"True",
-                                 CREATE_OBJECT_TAG(BOOL));
+                                 create_layout(0, OBJECT));
     REFER_TO(True);
     True = NEW_t(Type_Boolean);
     HEADER(True) = (Object)True_Class;
@@ -41,7 +41,7 @@ void pre_init_Type_Boolean()
 {
     Type_Boolean_Class = new_Class_named((Object)Type_Object_Class,
                                          L"Boolean",
-                                         CREATE_OBJECT_TAG(BOOL));
+                                         create_layout(0, OBJECT));
     REFER_TO(Type_Boolean);
     pre_init_Type_True();
     pre_init_Type_False();

@@ -77,10 +77,10 @@ NEW_TEST(Type_SmallInt__##name) \
     ASSERT_INSTANCE_OF(result, Type_Boolean_Class); \
     ASSERT_EMPTY_STACK;\
    \
-    printf("%ls\n", ((Type_Boolean)result)->value ? L"True" : L"False"); \
+    printf("%ls\n", (Type_Boolean)result == True ? L"True" : L"False"); \
     assert(((Type_Boolean)result) == get_bool(int4->value op int8->value), \
 		  printf("expected %i but got %i\n", (int4->value op int8->value), \
-											 ((Type_Boolean)result)->value)); \
+											 (Type_Boolean)result == True)); \
                                              
 Type_SmallInt_BOOLEAN_BINOP_TEST(equal, ==)
 }

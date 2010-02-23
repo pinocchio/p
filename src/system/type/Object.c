@@ -170,6 +170,89 @@ NATIVE1(Type_Object_perform_)
 
 /* ========================================================================= */
 
+void shallow_inspect(Object o)
+{
+    if (o == NULL) {
+        printf("NULL object\n");
+        return;
+    }
+    if (o < (Object)100000) {
+        printf("Object probably uns_int: %"F_I"u\n", (uns_int)o);
+        return;
+    } 
+    if (HEADER(o) == NULL) {
+        printf("Object with NULL class\n");
+        return;
+    }
+    if (o == Nil) {
+        printf("nil\n");
+        return;
+    }
+    if (o == (Object)True) {
+        printf("true\n");
+        return;
+    }
+    if (o == (Object)False) {
+        printf("false\n");
+        return;
+    }
+    Object cls = HEADER(o);
+
+    if (HEADER(cls) == (Object)Metaclass) {
+        printf("%ls", ((Type_Class)o)->name->value);
+    } else {
+        printf("Instance of %ls", ((Type_Class)cls)->name->value);
+    }
+
+    Object tag = GETTAG(o);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        printf(": %ls\n", ((Type_Symbol)o)->value);
+        return;
+    }
+    if (TAG_IS_LAYOUT(tag, Int)) {
+        printf(": %i\n", ((Type_SmallInt)o)->value);
+        return;
+    }
+    printf("\n");
+}
+
+void inspect(Object o)
+{
+    shallow_inspect(o);
+    if (o == NULL || HEADER(o) == NULL) {
+        return;
+    }
+    Object tag = GETTAG(o);
+    if (TAG_IS_LAYOUT(tag, Object)) {
+        uns_int size = ((Type_Array)tag)->size;
+        int i;
+        for (i = 0; i < size; i++) {
+            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            printf("%15ls:\t", ((Type_Symbol)v->name)->value);
+            shallow_inspect(((Type_Object)o)->ivals[i]);
+        }
+        return;
+    }
+
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        uns_int size = ((Type_Array)tag)->size;
+        uns_int isize = ((Type_Array)o)->size;
+        int i;
+        for (i = 0; i < size; i++) {
+            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            printf("%15ls:\t", ((Type_Symbol)v->name)->value);
+            shallow_inspect(((Type_Array)o)->values[i]);
+        }
+        for (; i < size + isize; i++) {
+            printf("%i:\t", i-size+1);
+            shallow_inspect(((Type_Array)o)->values[i]);
+        }
+        return;
+    }
+}
+
+/* ========================================================================= */
+
 void post_init_Type_Object()
 {
     // put the names here, now after the Symbols_Class is initialized
