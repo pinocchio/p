@@ -63,8 +63,6 @@
 		36061F6611235EE200FD4FCD /* Variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF611235EE200FD4FCD /* Variable.c */; };
 		36061F6811235EE200FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF911235EE200FD4FCD /* lib.c */; };
 		36061F6A11235EEB00FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E4B11235ED800FD4FCD /* lib.c */; };
-		36061F6B11235EEB00FD4FCD /* BridgeTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E4F11235ED800FD4FCD /* BridgeTest.c */; };
-		36061F6C11235EEB00FD4FCD /* PEGTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E5211235ED800FD4FCD /* PEGTest.c */; };
 		364E66A010C562DE00AD4616 /* pinocchio.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E65FB10C562DE00AD4616 /* pinocchio.c */; };
 		364E66A410C562DE00AD4616 /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660510C562DE00AD4616 /* Assign.c */; };
 		364E66A710C562DE00AD4616 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660910C562DE00AD4616 /* Block.c */; };
@@ -118,10 +116,6 @@
 /* Begin PBXFileReference section */
 		36061E4B11235ED800FD4FCD /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
 		36061E4C11235ED800FD4FCD /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
-		36061E4F11235ED800FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
-		36061E5011235ED800FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
-		36061E5211235ED800FD4FCD /* PEGTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTest.c; sourceTree = "<group>"; };
-		36061E5311235ED800FD4FCD /* PEGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTest.h; sourceTree = "<group>"; };
 		36061E5711235EE200FD4FCD /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
 		36061E5811235EE200FD4FCD /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
 		36061E5A11235EE200FD4FCD /* ArrayedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ArrayedCollection.c; sourceTree = "<group>"; };
@@ -396,10 +390,6 @@
 		36061E4E11235ED800FD4FCD /* test */ = {
 			isa = PBXGroup;
 			children = (
-				36061E4F11235ED800FD4FCD /* BridgeTest.c */,
-				36061E5011235ED800FD4FCD /* BridgeTest.h */,
-				36061E5211235ED800FD4FCD /* PEGTest.c */,
-				36061E5311235ED800FD4FCD /* PEGTest.h */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -850,8 +840,6 @@
 				36DBE6FC10D7D2DA00D6052D /* bootstrap.c in Sources */,
 				364E66A010C562DE00AD4616 /* pinocchio.c in Sources */,
 				36061F6A11235EEB00FD4FCD /* lib.c in Sources */,
-				36061F6B11235EEB00FD4FCD /* BridgeTest.c in Sources */,
-				36061F6C11235EEB00FD4FCD /* PEGTest.c in Sources */,
 				364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */,
 				364E66C910C562DE00AD4616 /* File.c in Sources */,
 				364E66CC10C562DE00AD4616 /* Stream.c in Sources */,

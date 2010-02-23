@@ -210,7 +210,9 @@ extern int IN_EVAL;
 
 extern void CNT_send_Eval();
 extern Object Eval(Object code);
-
+extern Object Eval_Send0(Object self, Type_Symbol symbol);
+extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
+extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
 
 /* ========================================================================= */
 

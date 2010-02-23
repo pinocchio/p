@@ -2,6 +2,8 @@ TARGET=pinocchio
 
 SHELL=/bin/bash
 
+MAKEOPTS=-j3
+
 CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
 CFILES+=$(wildcard lib/*.c) $(wildcard lib/*/*.c)
 CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)

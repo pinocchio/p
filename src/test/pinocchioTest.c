@@ -83,33 +83,6 @@ void init_Exception_Handling()
 }
 
 
-/* ========================================================================= */
-Object finish_eval()
-{
-    while (!empty_CNT()) {
-        peek_CNT()();
-    }
-    return pop_EXP();
-}
-
-Object Eval_Send0(Object self, Type_Symbol symbol)
-{
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
-    return finish_eval();
-}
-
-Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
-{
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
-    return finish_eval();
-}
-
-Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
-{
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
-    return finish_eval();
-}
-
 
 /* ========================================================================= */
 

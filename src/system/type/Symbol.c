@@ -128,12 +128,12 @@ NATIVE0(Type_Symbol_size)
 
 NATIVE0(Type_Symbol_stdout)
     printf("%ls", ((Type_Symbol)self)->value);
-    RETURN_FROM_NATIVE(Nil);
+    RETURN_FROM_NATIVE(self);
 }
 
 NATIVE0(Type_Symbol_cr)
     printf("\n");
-    RETURN_FROM_NATIVE(Nil);
+    RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */
