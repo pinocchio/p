@@ -206,7 +206,7 @@ void shallow_inspect(Object o)
 
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        printf(": %ls\n", ((Type_Symbol)o)->value);
+        printf(": '%ls'\n", ((Type_Symbol)o)->value);
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
@@ -249,6 +249,23 @@ void inspect(Object o)
         }
         return;
     }
+}
+
+Object object_at(Object o, uns_int i)
+{
+    Object tag = GETTAG(o);
+    if (TAG_IS_LAYOUT(tag, Object)) {
+        uns_int size = ((Type_Array)tag)->size;
+        assert0(i < size);
+        return ((Type_Object)o)->ivals[i];
+    }
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        uns_int size = ((Type_Array)tag)->size;
+        uns_int isize = ((Type_Array)o)->size;
+        assert0(i < size + isize);
+        return ((Type_Array)o)->values[i];
+    }
+    assert(NULL, printf("Non-indexable object\n"););
 }
 
 /* ========================================================================= */
