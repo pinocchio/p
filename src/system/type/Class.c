@@ -35,12 +35,11 @@ Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType)
                                                // methods, super and layout.  
 
     metaclass->layout    = metaType;
-    metaclass->super     = HEADER(superclass);
     metaclass->methods   = new_Type_Dictionary();
     
     Type_Class result    = (Type_Class)instantiate(metaclass);
     result->methods      = new_Type_Dictionary();
-    result->super        = superclass;
+    Type_Class_set_superclass(result, superclass);
     result->layout       = layout;
     return result;
 }
@@ -69,6 +68,14 @@ void inter_init_Type_Class()
 {
     Metaclass->layout = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
 }
+
+void Type_Class_set_superclass(Type_Class cls, Object superclass)
+{
+    Type_Class metaclass = (Type_Class)HEADER(cls);
+    cls->super           = superclass;
+    metaclass->super     = HEADER(superclass);
+}
+
 /* ========================================================================= */
 
 void assert_class(Object class)

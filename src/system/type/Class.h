@@ -60,6 +60,8 @@ extern void Type_Class_direct_dispatch_withArguments(Object receiver,
                                                      Object msg,
                                                      Type_Array args);
 
+extern void Type_Class_set_superclass(Type_Class cls, Object super);
+
 extern void CNT_Class_super();
 
 extern void print_Class(Object obj);
