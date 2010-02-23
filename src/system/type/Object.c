@@ -261,7 +261,7 @@ Object object_atn(Object o, wchar_t * s)
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
             Type_Symbol sym = (Type_Symbol)v->name;
-            if (!wcsncmp(sym->value, s, sym->size)) { continue; }
+            if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
         }
         assert(NULL, printf("Var not found: %ls\n", s););
@@ -272,7 +272,7 @@ Object object_atn(Object o, wchar_t * s)
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
             Type_Symbol sym = (Type_Symbol)v->name;
-            if (!wcsncmp(sym->value, s, sym->size)) { continue; }
+            if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Array)o)->values[i];
         }
         assert(NULL, printf("Var not found: %ls\n", s););
