@@ -285,7 +285,6 @@
 		364E664C10C562DE00AD4616 /* Continue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continue.c; sourceTree = "<group>"; };
 		364E664D10C562DE00AD4616 /* Continue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continue.h; sourceTree = "<group>"; };
 		364E664F10C562DE00AD4616 /* ContinueTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ContinueTest.ci; sourceTree = "<group>"; };
-		364E665010C562DE00AD4616 /* Env.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Env.o; sourceTree = "<group>"; };
 		364E665110C562DE00AD4616 /* InlineCache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InlineCache.c; sourceTree = "<group>"; };
 		364E665210C562DE00AD4616 /* InlineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineCache.h; sourceTree = "<group>"; };
 		364E665410C562DE00AD4616 /* InlineCacheTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InlineCacheTest.ci; sourceTree = "<group>"; };
@@ -627,7 +626,6 @@
 				364E664C10C562DE00AD4616 /* Continue.c */,
 				364E664D10C562DE00AD4616 /* Continue.h */,
 				364E664F10C562DE00AD4616 /* ContinueTest.ci */,
-				364E665010C562DE00AD4616 /* Env.o */,
 				364E665110C562DE00AD4616 /* InlineCache.c */,
 				364E665210C562DE00AD4616 /* InlineCache.h */,
 				364E665410C562DE00AD4616 /* InlineCacheTest.ci */,
