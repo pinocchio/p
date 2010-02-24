@@ -303,20 +303,17 @@
 		364E666810C562DE00AD4616 /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
 		364E666A10C562DE00AD4616 /* CharacterTable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CharacterTable.c; sourceTree = "<group>"; };
 		364E666B10C562DE00AD4616 /* CharacterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterTable.h; sourceTree = "<group>"; };
-		364E666E10C562DE00AD4616 /* CharacterTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CharacterTest.ci; sourceTree = "<group>"; };
 		364E666F10C562DE00AD4616 /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
 		364E667010C562DE00AD4616 /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
 		364E667210C562DE00AD4616 /* ClassTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ClassTest.ci; sourceTree = "<group>"; };
 		364E667310C562DE00AD4616 /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
 		364E667410C562DE00AD4616 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
-		364E667610C562DE00AD4616 /* DictionaryTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = DictionaryTest.ci; sourceTree = "<group>"; };
 		364E667710C562DE00AD4616 /* Instantiate.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Instantiate.ci; sourceTree = "<group>"; };
 		364E667810C562DE00AD4616 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		364E667910C562DE00AD4616 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		364E667B10C562DE00AD4616 /* LayoutTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = LayoutTest.ci; sourceTree = "<group>"; };
 		364E667C10C562DE00AD4616 /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
 		364E667D10C562DE00AD4616 /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
-		364E667F10C562DE00AD4616 /* NilTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NilTest.ci; sourceTree = "<group>"; };
 		364E668010C562DE00AD4616 /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
 		364E668110C562DE00AD4616 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		364E668310C562DE00AD4616 /* ObjectTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ObjectTest.ci; sourceTree = "<group>"; };
@@ -651,20 +648,17 @@
 				364E666810C562DE00AD4616 /* Character.h */,
 				364E666A10C562DE00AD4616 /* CharacterTable.c */,
 				364E666B10C562DE00AD4616 /* CharacterTable.h */,
-				364E666E10C562DE00AD4616 /* CharacterTest.ci */,
 				364E666F10C562DE00AD4616 /* Class.c */,
 				364E667010C562DE00AD4616 /* Class.h */,
 				364E667210C562DE00AD4616 /* ClassTest.ci */,
 				364E667310C562DE00AD4616 /* Dictionary.c */,
 				364E667410C562DE00AD4616 /* Dictionary.h */,
-				364E667610C562DE00AD4616 /* DictionaryTest.ci */,
 				364E667710C562DE00AD4616 /* Instantiate.ci */,
 				364E667810C562DE00AD4616 /* Layout.c */,
 				364E667910C562DE00AD4616 /* Layout.h */,
 				364E667B10C562DE00AD4616 /* LayoutTest.ci */,
 				364E667C10C562DE00AD4616 /* Nil.c */,
 				364E667D10C562DE00AD4616 /* Nil.h */,
-				364E667F10C562DE00AD4616 /* NilTest.ci */,
 				364E668010C562DE00AD4616 /* Object.c */,
 				364E668110C562DE00AD4616 /* Object.h */,
 				364E668310C562DE00AD4616 /* ObjectTest.ci */,

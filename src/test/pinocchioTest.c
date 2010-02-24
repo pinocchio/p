@@ -10,15 +10,12 @@
 #include <system/ast/VariableTest.ci>
 #include <system/io/FileTest.ci>
 #include <system/runtime/ThreadTest.ci>
-#include <system/type/CharacterTest.ci>
 #include <system/type/ClassTest.ci>
-#include <system/type/DictionaryTest.ci>
 #include <system/type/ObjectTest.ci>
 #include <system/type/SmallIntTest.ci>
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/BlockClosureTest.ci>
-#include <system/type/NilTest.ci>
 #include <system/ast/InfoTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
 #include <system/ast/InstVariableTest.ci>
@@ -90,10 +87,7 @@ void run_tests()
 {
    init_Exception_Handling();
    
-test_Type_Character();
 test_Type_Class();
-//test_AST_Continue();
-test_Type_Dictionary();
 test_IO_File();
 test_NativeMethod();
 test_Type_Object();
@@ -105,7 +99,6 @@ test_Type_Symbol();
 test_Thread();
 test_AST_Variable();
 test_Runtime_BlockClosure();
-test_Type_Nil();
 test_AST_Info();
 test_Runtime_MethodClosure();
 test_AST_InstVariable();
