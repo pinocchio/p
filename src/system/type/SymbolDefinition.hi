@@ -76,3 +76,6 @@ extern Type_Symbol SMB_cr;
 extern Type_Symbol SMB_asNumber;
 extern Type_Symbol SMB_initialize;
 extern Type_Symbol SMB_ifNil_;
+extern Type_Symbol SMB_named_in_;
+extern Type_Symbol SMB_new;
+extern Type_Symbol SMB_package_;
