@@ -9,8 +9,6 @@
 #include <system/type/Character.h>
 
 
-char * TMP_FILE = "/tmp/tmpfile.XXXXXX";
-
 /* ========================================================================= */
 
 Type_Class IO_File_Class;
@@ -41,14 +39,6 @@ IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
     result->path = new_Type_String(path);
     assert(result->file != NULL, 
         printf("Could not create File for path \"%ls\"", path));
-    return result;
-}
-
-IO_File new_IO_File_temp(char * mode)
-{
-    IO_File result = new_IO_File_fromFile(fdopen(mkstemp(TMP_FILE), mode));
-    assert(result->file != NULL, 
-        printf("Could not create File temporary files"));
     return result;
 }
 

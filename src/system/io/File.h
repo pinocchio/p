@@ -17,7 +17,6 @@ CREATE_INITIALIZERS(IO_File);
 IO_File new_IO_File();
 IO_File new_IO_File_fromFile(FILE* file);
 IO_File new_IO_File_fromPath(const wchar_t * path, char * mode);
-IO_File new_IO_File_temp(char * mode);
 
 /* ========================================================================= */
 
