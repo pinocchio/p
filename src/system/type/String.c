@@ -15,7 +15,7 @@ Type_String empty_Type_String;
 
 Type_String new_Type_String(const wchar_t * str)
 {
-    Type_String string = (Type_String) new_Type_Symbol(str);
+    Type_String string = (Type_String)new_Type_Symbol(str);
     HEADER(string)     = (Object)Type_String_Class;
     return string;
 }

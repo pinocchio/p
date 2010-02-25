@@ -90,14 +90,6 @@ CNT(Class_super)
     poke_EXP(0, ((Type_Class)class)->super);
 }
 
-wchar_t * classname(Object class)
-{
-    if (HEADER(class) == (Object)Metaclass) {
-        return L"Metaclass";
-    } else {
-        return ((Type_Class)class)->name->value;
-    }
-}
 
 void Method_invoke(Object method, Object self, Object class, uns_int argc) {
     if (HEADER(method) == (Object)AST_Native_Method_Class) {
@@ -243,12 +235,17 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     assert0(msg != Nil);
 
     #ifdef DEBUG
-    // wchar_t * clsname = classname(class);
+    // Type_Symbol clsname;
     // if (HEADER(class) != (Object)Metaclass) {
-    //    LOG("%ls>>%ls\n", clsname, ((Type_Symbol)msg)->value);
+    //     clsname = Type_String_concat_(((Type_Class)class)->name,
+    //                                   new_Type_String(L">>"));
     // } else {
-    //    LOG("%ls class>>%ls\n", classname(self), ((Type_Symbol)msg)->value);
+    //     clsname = Type_String_concat_(((Type_Class)self)->name,
+    //                                   new_Type_String(L" class>>"));
     // }
+    // Type_Symbol msgname = (Type_Symbol)msg;
+    // Type_Symbol method = Type_String_concat_(clsname, msgname);
+    // LOG("%ls\n", method->value);
     #endif // DEBUG
     
     /* Monomorphic inline cache */
