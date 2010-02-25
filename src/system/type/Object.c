@@ -217,10 +217,32 @@ void shallow_inspect(Object o)
     printf("\n");
 }
 
+void inspect_dict(Object o)
+{
+    Type_Dictionary dict = (Type_Dictionary)o;
+    uns_int ds = dict->data->size;
+    uns_int i;
+    for (i = 0; i < ds; i++) {
+        Type_Array bucket = (Type_Array)dict->data->values[i];
+        if (bucket == (Type_Array)Nil) { continue; }
+        uns_int j;
+        for (j = 0; j < bucket->size; j+=2) {
+            Type_Symbol key = (Type_Symbol)bucket->values[j];
+            if (key == (Type_Symbol)Nil) { break; }
+            printf("%25ls -> ", key->value);
+            shallow_inspect(bucket->values[j+1]);
+        }
+    }
+}
+
 void inspect(Object o)
 {
     shallow_inspect(o);
     if (o == NULL || HEADER(o) == NULL) {
+        return;
+    }
+    if (HEADER(o) == (Object)Type_Dictionary_Class) {
+        inspect_dict(o);
         return;
     }
     Object tag = GETTAG(o);
@@ -278,6 +300,7 @@ Object object_atn(Object o, wchar_t * s)
         assert(NULL, printf("Var not found: %ls\n", s););
     }
     assert(NULL, printf("Non-indexable object\n"););
+    return NULL;
 }
 
 Object object_at(Object o, uns_int i)
@@ -295,6 +318,7 @@ Object object_at(Object o, uns_int i)
         return ((Type_Array)o)->values[i];
     }
     assert(NULL, printf("Non-indexable object\n"););
+    return NULL;
 }
 
 /* ========================================================================= */
