@@ -35,5 +35,4 @@
 #include <system/organization/ClassReference.h>
 #include <system/runtime/InlineCache.h>
 
-#include <bootstrap.h>
 #include <system/runtime/Message.h>

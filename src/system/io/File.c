@@ -185,8 +185,8 @@ NATIVE0(IO_File_read)
 void IO_File_write_(IO_File file, Type_Character chr) {
     assert1(file != NULL, "Invalid Argument");
     assert1(chr != NULL, "Invalid Argument");
-    printf("Printing char: %i\n", (int)chr->value);
-    fputwc(chr->value, file->file);
+    // printf("Printing char: %i: %lc\n", (int)chr->value, chr->value);
+    putwc(chr->value, file->file);
 }
 
 NATIVE1(IO_File_write_)

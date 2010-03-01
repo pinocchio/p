@@ -3,7 +3,7 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
-#include <bootstrap.h>
+#include <locale.h>
 
 #ifdef TEST
 #include <test/pinocchioTest.h>
@@ -254,10 +254,11 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 
 int main()
 {
+    setlocale(LC_ALL, "");
     #include <pinocchioPreInit.ci>
     initialize_Thread();
     #include <pinocchioPostInit.ci>
-    bootstrap();
+    init_lib();
 
     #ifdef TEST
     run_tests();
