@@ -185,6 +185,7 @@ NATIVE0(IO_File_read)
 void IO_File_write_(IO_File file, Type_Character chr) {
     assert1(file != NULL, "Invalid Argument");
     assert1(chr != NULL, "Invalid Argument");
+    printf("Printing char: %i\n", (int)chr->value);
     fputwc(chr->value, file->file);
 }
 
@@ -245,12 +246,19 @@ NATIVE0(IO_File_stderr)
 
 void post_init_IO_File()
 {
+    
+    store_native_method(HEADER(IO_File_Class)      , SMB_stdin       , NM_IO_File_stdin);
+    store_native_method(HEADER(IO_File_Class)      , SMB_stdout      , NM_IO_File_stdout);
+    store_native_method(HEADER(IO_File_Class)      , SMB_stderr      , NM_IO_File_stderr);
+
     store_native_method(IO_ReadFile_Class          , SMB_size      , NM_IO_File_size);
     store_native_method(IO_ReadFile_Class          , SMB_atEnd     , NM_IO_File_atEnd);
     store_native_method(IO_ReadFile_Class          , SMB_read      , NM_IO_File_read);
     store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
+    
     store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
     store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
+
     store_native_method(HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
     store_native_method(HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
 
