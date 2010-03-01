@@ -20,8 +20,6 @@ post_init_Type_Boolean();
 post_init_Type_SmallInt();
 post_init_AST_Variable();
 post_init_Type_CharacterTable();
-post_init_IO_Stream();
-post_init_IO_Stream();
 post_init_AST_Block();
 post_init_Runtime_MethodContext();
 post_init_Runtime_BlockClosure();

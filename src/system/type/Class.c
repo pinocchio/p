@@ -18,7 +18,7 @@ DECLARE_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
-Type_Class new_Bootstrapping_Class(Object superclass)
+Type_Class new_Bootstrapping_Class(Type_Class superclass)
 {
     Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     mcls->super     = HEADER(superclass);
@@ -27,7 +27,7 @@ Type_Class new_Bootstrapping_Class(Object superclass)
     return cls;
 }
 
-Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType)
+Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaType)
 {    
     Type_Class metaclass = (Type_Class)instantiate(Metaclass);
     ASSERT_TAG_LAYOUT(metaType, Object);
@@ -44,15 +44,15 @@ Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType)
     return result;
 }
 
-Type_Class new_Class(Object superclass, Object layout)
+Type_Class new_Class(Type_Class superclass, Object layout)
 {
-    return new_Class_withMeta(superclass, layout, ((Type_Class)HEADER(superclass))->layout);
+    return new_Class_withMeta(superclass, layout, HEADER(superclass)->layout);
 }
 
 
-Type_Class new_Class_named(Object superclass, const wchar_t* name, Object layout)
+Type_Class new_Class_named(Type_Class superclass, const wchar_t* name, Object layout)
 {
-    Type_Class result = (Type_Class) new_Class(superclass, layout);
+    Type_Class result = new_Class(superclass, layout);
     result->name      = new_Type_Symbol_cached(name); 
     return result;
 }
@@ -61,7 +61,7 @@ void pre_init_Type_Class()
 {
     Metaclass               = NEW_t(Type_Class);
     Object Metaclass_mclass = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    HEADER(Metaclass)       = Metaclass_mclass;
+    HEADER(Metaclass)       = (Type_Class)Metaclass_mclass;
 }
 
 void inter_init_Type_Class()
@@ -69,9 +69,9 @@ void inter_init_Type_Class()
     Metaclass->layout = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
 }
 
-void Type_Class_set_superclass(Type_Class cls, Object superclass)
+void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
 {
-    Type_Class metaclass = (Type_Class)HEADER(cls);
+    Type_Class metaclass = HEADER(cls);
     cls->super           = superclass;
     metaclass->super     = HEADER(superclass);
 }
@@ -80,8 +80,8 @@ void Type_Class_set_superclass(Type_Class cls, Object superclass)
 
 void assert_class(Object class)
 {
-    assert0(HEADER(class) == (Object)Metaclass ||        /* if metaclass */
-            HEADER(HEADER(class)) == (Object)Metaclass); /* if class */
+    assert0(HEADER(class) == Metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == Metaclass); /* if class */
 }
 
 CNT(Class_super)
@@ -91,17 +91,17 @@ CNT(Class_super)
 }
 
 
-void Method_invoke(Object method, Object self, Object class, uns_int argc) {
-    if (HEADER(method) == (Object)AST_Native_Method_Class) {
+void Method_invoke(Object method, Object self, Type_Class class, uns_int argc) {
+    if (HEADER(method) == AST_Native_Method_Class) {
         AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
-    } else if (HEADER(method) == (Object)Runtime_MethodClosure_Class) {
+    } else if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
     } else {
         assert1(NULL, "Unknown type of method");
     }
 }
 
-void does_not_understand(Object self, Object class, Object msg, uns_int argc)
+void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc)
 {
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
@@ -129,7 +129,7 @@ static void Class_next_lookup(Type_Class class)
 {
     zap_EXP();
     poke_EXP(0, class->super);
-    return Class_lookup((Type_Class)class->super, peek_EXP(3));
+    return Class_lookup(class->super, peek_EXP(3));
 }
 
 static void Class_invoke_do(Type_Class class, Object method, uns_int argc)
@@ -137,7 +137,7 @@ static void Class_invoke_do(Type_Class class, Object method, uns_int argc)
     Object self = peek_EXP(2);
     zapn_EXP(6);
     zap_CNT();
-    Method_invoke(method, self, (Object)class, argc);
+    Method_invoke(method, self, class, argc);
 }
 
 static void CNT_Class_lookup_cache_invoke()
@@ -176,14 +176,14 @@ static void Class_lookup(Type_Class class, Object msg)
         uns_int argc = (uns_int)peek_EXP(2);
         zapn_EXP(5);
         zap_CNT();
-        return does_not_understand(self, (Object)class, msg, argc);
+        return does_not_understand(self, class, msg, argc);
     }
     assert_class((Object)class);
     Type_Dictionary mdict = class->methods;
     Type_Dictionary_lookup_push(mdict, msg);
 }
 
-static void Class_direct_dispatch(Object self, Object class,
+static void Class_direct_dispatch(Object self, Type_Class class,
                                   Object msg, uns_int argc)
 {
     push_EXP(class);
@@ -191,10 +191,10 @@ static void Class_direct_dispatch(Object self, Object class,
     push_EXP(argc);
     push_EXP(self);
     push_EXP(class);
-    return Class_lookup((Type_Class)class, msg);
+    return Class_lookup(class, msg);
 }
 
-void Type_Class_direct_dispatch(Object self, Object class, Object msg,
+void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
                                 uns_int argc, ...)
 {
     va_list args;
@@ -211,7 +211,7 @@ void Type_Class_direct_dispatch(Object self, Object class, Object msg,
     Class_direct_dispatch(self, class, msg, argc);
 }
 
-void Type_Class_direct_dispatch_withArguments(Object self, Object class,
+void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
                                               Object msg, Type_Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -226,7 +226,7 @@ void Type_Class_direct_dispatch_withArguments(Object self, Object class,
     Class_direct_dispatch(self, class, msg, args->size);
 }
 
-void Type_Class_dispatch(Object self, Object class, uns_int argc)
+void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 {
     AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
     Runtime_InlineCache cache = send->cache;
@@ -251,10 +251,10 @@ void Type_Class_dispatch(Object self, Object class, uns_int argc)
     /* Monomorphic inline cache */
     // TODO put that directly on the sender side
     // TODO create Polymorphic inline cache
-    if (class == cache->class) {
+    if (class == (Type_Class)cache->class) {
         return Method_invoke(cache->method, self, class, argc);
     }
-    assert_class(class);
+    assert_class((Object)class);
     
     push_CNT(Class_lookup_cache_invoke);
     return Class_direct_dispatch(self, class, msg, argc);
@@ -270,10 +270,10 @@ void print_Class(Object obj)
         printf("Nil\n");
         return;
     }
-    Type_Class class = (Type_Class)HEADER(obj);
+    Type_Class class = HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
-    if (HEADER(class) == (Object)Metaclass) {
+    if (HEADER(class) == Metaclass) {
         printf("Class class: %ls\n", ((Type_Class)obj)->name->value);
         return;
     }
@@ -284,22 +284,22 @@ void print_Class(Object obj)
 
 void post_init_Type_Class()
 {
-    ((Type_Class)HEADER(Metaclass))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Metaclass))->layout =
+    HEADER(Metaclass)->methods = new_Type_Dictionary();
+    HEADER(Metaclass)->layout =
         create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
         
     Metaclass->methods  = new_Type_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
-    Behavior            = new_Class_named((Object)Type_Object_Class,
+    Behavior            = new_Class_named(Type_Object_Class,
                                 L"Behavior",
                                 create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
-    Class               = new_Class_named((Object)Behavior,
+    Class               = new_Class_named(Behavior,
                             L"Class",
                             create_layout(CLASS_SIZE, OBJECT, CLASS_VARS));
-    Metaclass->super    = (Object)Behavior;
+    Metaclass->super    = Behavior;
     
-    ((Type_Class)HEADER(Type_Object_Class))->super = (Object)Class;
-    ((Type_Class)HEADER(Metaclass))->super         = HEADER(Behavior);
+    HEADER(Type_Object_Class)->super = Class;
+    HEADER(Metaclass)->super         = HEADER(Behavior);
 
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);

@@ -30,7 +30,7 @@ extern Object file_layout;
     TAG_IS_LAYOUT(GETTAG(o), layout)
 
 #define TAG_IS_LAYOUT(tag, layout)\
-    (HEADER(tag) == (Object)Type_##layout##Layout)
+    (HEADER(tag) == Type_##layout##Layout)
 
 #define ASSERT_TAG_LAYOUT(tag, layout)\
     assert0(TAG_IS_LAYOUT(tag, layout));

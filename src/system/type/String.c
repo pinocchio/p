@@ -16,14 +16,14 @@ Type_String empty_Type_String;
 Type_String new_Type_String(const wchar_t * str)
 {
     Type_String string = (Type_String)new_Type_Symbol(str);
-    HEADER(string)     = (Object)Type_String_Class;
+    HEADER(string)     = Type_String_Class;
     return string;
 }
 
 Type_String new_Type_String_sized(uns_int size)
 {
     Type_String result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
-    HEADER(result)  = (Object)Type_String_Class;
+    HEADER(result)  = Type_String_Class;
     result->size    = size;
     while(size--) {
         result->value[size] = '\0';
@@ -33,7 +33,7 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class    = new_Class((Object)Type_Object_Class,
+    Type_String_Class    = new_Class(Type_Object_Class,
                                      create_layout(0, WORDS));
     empty_Type_String         = new_Type_String(L"");
 }

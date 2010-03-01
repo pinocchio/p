@@ -20,7 +20,7 @@ AST_Native_Method new_AST_Native_Method(native code)
 
 void pre_init_AST_Native_Method()
 {
-    AST_Native_Method_Class = new_Class_named((Object)Type_Object_Class,
+    AST_Native_Method_Class = new_Class_named(Type_Object_Class,
                                               L"NativeMethod",
                                               CREATE_OBJECT_TAG(AST_NATIVE_METHOD));
 }
@@ -28,7 +28,7 @@ void pre_init_AST_Native_Method()
 /* ========================================================================= */
 
 void AST_Native_Method_invoke(AST_Native_Method method, Object self,
-                              Object class, uns_int argc)
+                              Type_Class class, uns_int argc)
 {
     #ifdef DEBUG
     //LOG("Native Method invoke on %ls\n", ((Type_Class)class)->name->value);

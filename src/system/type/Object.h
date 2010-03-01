@@ -19,7 +19,7 @@ extern void inter_init_Type_Object();
 
 /* ========================================================================= */
 
-extern void NM_Type_Object_equals(Object self, Object class, uns_int argc);
+extern void NM_Type_Object_equals(Object self, Type_Class class, uns_int argc);
 
 /* ========================================================================= */
 

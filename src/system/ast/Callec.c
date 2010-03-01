@@ -17,7 +17,7 @@ AST_Callec new_AST_Callec(Object target)
 
 void pre_init_AST_Callec()
 {
-    AST_Callec_Class = new_Class_named((Object)Type_Object_Class,
+    AST_Callec_Class = new_Class_named(Type_Object_Class,
                                        L"Callec",
                                        CREATE_OBJECT_TAG(AST_CALLEC));
     REFER_TO(AST_Callec);
@@ -29,7 +29,7 @@ static void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
     // LOG("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
-    assert0(HEADER(closure) == (Object)Runtime_BlockClosure_Class);
+    assert0(HEADER(closure) == Runtime_BlockClosure_Class);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
 

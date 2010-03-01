@@ -33,7 +33,7 @@ AST_Super new_AST_Super(Object message, uns_int argc, ...)
 
 void pre_init_AST_Super()
 {
-    AST_Super_Class = new_Class_named((Object)Type_Object_Class,
+    AST_Super_Class = new_Class_named(Type_Object_Class,
                                       L"Super",
                                       CREATE_ARRAY_TAG(AST_SUPER));
 }
@@ -45,7 +45,7 @@ CNT(AST_Super_send)
     uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
     
-    Type_Class_dispatch(receiver, class, argc);
+    Type_Class_dispatch(receiver, (Type_Class)class, argc);
 }
 
 CNT(push_env_class)

@@ -23,7 +23,7 @@ struct Runtime_MethodContext_t {
 
 CREATE_INITIALIZERS(Runtime_MethodContext)
 extern Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                                       Object self, Object class);
+                                                       Object self, Type_Class class);
 
 extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
 

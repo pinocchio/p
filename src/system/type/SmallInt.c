@@ -29,7 +29,7 @@ Type_SmallInt new_Type_SmallInt(int value)
 
 void pre_init_Type_SmallInt() 
 {
-    Type_SmallInt_Class = new_Bootstrapping_Class((Object)Type_Object_Class);
+    Type_SmallInt_Class = new_Bootstrapping_Class(Type_Object_Class);
     REFER_TO(Type_SmallInt);    
     
     Type_SmallInt_cache  = (Type_SmallInt*)PALLOC(sizeof(Type_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
@@ -66,7 +66,7 @@ Type_SmallInt_BINARY_OPERATION(or_,         |);
 #define Type_SmallInt_COMPARE_OPERATION(name, op)\
 NATIVE1(Type_SmallInt##_##name)\
     Object w_arg = NATIVE_ARG(0);\
-    if (HEADER(w_arg) == (Object)Type_SmallInt_Class) {\
+    if (HEADER(w_arg) == Type_SmallInt_Class) {\
         Type_SmallInt number = ((Type_SmallInt) self);\
         Type_SmallInt otherNumber = (Type_SmallInt)w_arg; \
         if (number->value op otherNumber->value) {\

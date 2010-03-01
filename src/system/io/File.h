@@ -23,8 +23,4 @@ IO_File new_IO_File_fromPath(const wchar_t * path, char * mode);
 
 /* ========================================================================= */
 
-extern char* unicode_to_ascii(const wchar_t* str);
-
-/* ========================================================================= */
-
 #endif // FILE_H

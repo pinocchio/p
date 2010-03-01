@@ -19,7 +19,7 @@ Type_Dictionary new_Type_Dictionary()
 
 void pre_init_Type_Dictionary()
 {
-    Type_Dictionary_Class = new_Class((Object)Type_Object_Class,
+    Type_Dictionary_Class = new_Class(Type_Object_Class,
                                       CREATE_OBJECT_TAG(TYPE_DICTIONARY));
     REFER_TO(Type_Dictionary);
 }
@@ -95,12 +95,12 @@ static void Bucket_grow(Type_Array * bucketp)
 
 static int Bucket_quick_compare_key(Object inkey, Object dictkey)
 {
-    if (HEADER(inkey) == (Object)Type_Symbol_Class) {
+    if (HEADER(inkey) == Type_Symbol_Class) {
         return inkey == dictkey;
     }
 
-    if (HEADER(inkey) == (Object)Type_SmallInt_Class) {
-        if (HEADER(dictkey) == (Object)Type_SmallInt_Class) {
+    if (HEADER(inkey) == Type_SmallInt_Class) {
+        if (HEADER(dictkey) == Type_SmallInt_Class) {
             return ((Type_SmallInt)inkey)->value ==
                    ((Type_SmallInt)dictkey)->value;
         } else {
@@ -108,7 +108,7 @@ static int Bucket_quick_compare_key(Object inkey, Object dictkey)
         }
     }
 
-    if (HEADER(inkey) == (Object)Type_String_Class) {
+    if (HEADER(inkey) == Type_String_Class) {
         if (TAG_IS_LAYOUT(GETTAG(dictkey), Words)) {
             return Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey);
         } else {

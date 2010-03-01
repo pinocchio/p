@@ -11,44 +11,13 @@
 
 /* ========================================================================= */
 
-Type_Class IO_File_Class;
+DECLARE_CLASS(IO_File);
+DECLARE_CLASS(IO_ReadFile);
+DECLARE_CLASS(IO_WriteFile);
 
-/* ========================================================================= */
-
-
-IO_File new_IO_File()
-{
-    NEW_OBJECT(IO_File);
-    result->path = empty_Type_String;
-    return result;
-}
-
-IO_File new_IO_File_fromFile(FILE* file)
-{
-    IO_File result = new_IO_File();
-    assert1(file != NULL, "Cannot create a new File from NULL.");
-    result->file = file;
-    return result;
-}
-
-
-IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
-{
-    IO_File result = new_IO_File();
-    result->file = fopen(unicode_to_ascii(path), mode);
-    result->path = new_Type_String(path);
-    assert(result->file != NULL, 
-        printf("Could not create File for path \"%ls\"", path));
-    return result;
-}
-
-void pre_init_IO_File()
-{
-    // TODO check if this makes sense.
-    IO_File_Class = new_Class_named((Object)Type_Object_Class,
-                                    L"File",
-                                    CREATE_OBJECT_TAG(IO_FILE));
-}
+IO_File StandardIn;
+IO_File StandardOut;
+IO_File StandardError;
 
 /* ========================================================================= */
 
@@ -58,6 +27,69 @@ char* unicode_to_ascii(const wchar_t* str) {
     assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
     return charname;
 }
+
+/* ========================================================================= */
+
+IO_File new_IO_ReadFile()
+{
+    NEW_OBJECT(IO_File);
+    HEADER(result) = IO_ReadFile_Class;
+    result->path = empty_Type_String;
+    return result;
+}
+
+IO_File new_IO_WriteFile()
+{
+    NEW_OBJECT(IO_File);
+    HEADER(result) = IO_WriteFile_Class;
+    result->path = empty_Type_String;
+    return result;
+}
+
+IO_File new_IO_ReadFile_from(FILE* file)
+{
+    IO_File result = new_IO_ReadFile();
+    assert1(file != NULL, "Cannot create a new File from NULL.");
+    result->file = file;
+    return result;
+}
+
+IO_File new_IO_WriteFile_from(FILE* file)
+{
+    IO_File result = new_IO_WriteFile();
+    assert1(file != NULL, "Cannot create a new File from NULL.");
+    result->file = file;
+    return result;
+}
+
+// IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
+// {
+//     IO_File result = new_IO_File();
+//     result->file = fopen(unicode_to_ascii(path), mode);
+//     result->path = new_Type_String(path);
+//     assert(result->file != NULL, 
+//         printf("Could not create File for path \"%ls\"", path));
+//     return result;
+// }
+
+void pre_init_IO_File()
+{
+    // TODO check if this makes sense.
+    IO_File_Class = new_Class_named(Type_Object_Class,
+                                    L"File",
+                                    CREATE_OBJECT_TAG(IO_FILE));
+    IO_ReadFile_Class = new_Class_named(IO_File_Class,
+                                        L"ReadFile",
+                                        CREATE_OBJECT_TAG(IO_FILE));
+    IO_WriteFile_Class = new_Class_named(IO_File_Class,
+                                         L"WriteFile",
+                                         CREATE_OBJECT_TAG(IO_FILE));
+    REFER_TO(IO_File);
+    REFER_TO(IO_ReadFile);
+    REFER_TO(IO_WriteFile);
+}
+
+/* ========================================================================= */
 
 int IO_File_size(IO_File file) {
     assert1(file->file != NULL, "Trying to get size from invalid file.");
@@ -179,18 +211,50 @@ NATIVE1(IO_File_writeAll_)
     RETURN_FROM_NATIVE(self);
 }
 
-NATIVE1(IO_File_open_)
-    
+FILE * open_file(Object path, char * mode)
+{
+    Object tag = GETTAG(path);
+    if (!TAG_IS_LAYOUT(tag, Words)) { assert1(NULL, "Invalid path-type"); }    
+
+    return fopen(unicode_to_ascii(((Type_Symbol)path)->value), mode);
+}
+
+NATIVE1(IO_WriteFile_open_)
+    FILE * file = open_file(NATIVE_ARG(0), "w");
+    RETURN_FROM_NATIVE(new_IO_WriteFile_from(file));
+}
+
+NATIVE1(IO_ReadFile_open_)
+    FILE * file = open_file(NATIVE_ARG(0), "r");
+    RETURN_FROM_NATIVE(new_IO_WriteFile_from(file));
+}
+
+NATIVE0(IO_File_stdin)
+    RETURN_FROM_NATIVE(StandardIn);
+}
+
+NATIVE0(IO_File_stdout)
+    RETURN_FROM_NATIVE(StandardOut);
+}
+
+NATIVE0(IO_File_stderr)
+    RETURN_FROM_NATIVE(StandardError);
 }
 
 /* ========================================================================= */
 
 void post_init_IO_File()
 {
-    store_native_method(IO_File_Class, SMB_size,      NM_IO_File_size);
-    store_native_method(IO_File_Class, SMB_atEnd,     NM_IO_File_atEnd);
-    store_native_method(IO_File_Class, SMB_write_,    NM_IO_File_write_);
-    store_native_method(IO_File_Class, SMB_writeAll_, NM_IO_File_writeAll_);
-    store_native_method(IO_File_Class, SMB_read,      NM_IO_File_read);
-    store_native_method(IO_File_Class, SMB_readAll,   NM_IO_File_readAll);
+    store_native_method(IO_ReadFile_Class          , SMB_size      , NM_IO_File_size);
+    store_native_method(IO_ReadFile_Class          , SMB_atEnd     , NM_IO_File_atEnd);
+    store_native_method(IO_ReadFile_Class          , SMB_read      , NM_IO_File_read);
+    store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
+    store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
+    store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
+    store_native_method((Type_Class)HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
+    store_native_method((Type_Class)HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
+
+    StandardIn    = new_IO_ReadFile_from(stdin);
+    StandardOut   = new_IO_WriteFile_from(stdout);
+    StandardError = new_IO_WriteFile_from(stderr);
 }

@@ -12,7 +12,7 @@ DECLARE_CLASS(Runtime_MethodClosure);
 void pre_init_Runtime_MethodClosure()
 {
     Runtime_MethodClosure_Class = 
-        new_Class_named((Object)Type_Object_Class,
+        new_Class_named(Type_Object_Class,
                         L"MethodClosure",
                         CREATE_OBJECT_TAG(RUNTIME_METHODCLOSURE));
 }
@@ -58,7 +58,7 @@ static void start_eval(AST_Method method)
 }
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                            Object class, uns_int argc)
+                                  Type_Class class, uns_int argc)
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      

@@ -29,22 +29,22 @@ Object file_layout;
 Type_Array create_layout_with_vars(Type_Class layout, uns_int size)
 {
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
-    HEADER(result) = (Object)layout;
+    HEADER(result) = layout;
     result->size   = size;
     return result;
 }
 
 void pre_init_Type_Layout()
 {
-    Type_Layout             = new_Bootstrapping_Class((Object)Type_Object_Class); 
-    Type_ObjectLayout       = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_ArrayLayout        = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_CharacterLayout    = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_WordsLayout        = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_IntLayout          = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_LongLayout         = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_BytesLayout        = new_Bootstrapping_Class((Object)Type_Layout); 
-    Type_FileLayout         = new_Bootstrapping_Class((Object)Type_Layout); 
+    Type_Layout             = new_Bootstrapping_Class(Type_Object_Class); 
+    Type_ObjectLayout       = new_Bootstrapping_Class(Type_Layout); 
+    Type_ArrayLayout        = new_Bootstrapping_Class(Type_Layout); 
+    Type_CharacterLayout    = new_Bootstrapping_Class(Type_Layout); 
+    Type_WordsLayout        = new_Bootstrapping_Class(Type_Layout); 
+    Type_IntLayout          = new_Bootstrapping_Class(Type_Layout); 
+    Type_LongLayout         = new_Bootstrapping_Class(Type_Layout); 
+    Type_BytesLayout        = new_Bootstrapping_Class(Type_Layout); 
+    Type_FileLayout         = new_Bootstrapping_Class(Type_Layout); 
 
     empty_array_layout      = (Object)create_layout_with_vars(Type_ArrayLayout, 0);
     empty_object_layout     = (Object)create_layout_with_vars(Type_ObjectLayout, 0);

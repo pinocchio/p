@@ -33,11 +33,11 @@ AST_Info new_AST_Info(Type_String sourceFile, Type_String name,
 
 void pre_init_AST_Info()
 {
-    AST_Info_Class         = new_Class_named((Object)Type_Object_Class,
+    AST_Info_Class         = new_Class_named(Type_Object_Class,
                                              L"Info",
                                              CREATE_OBJECT_TAG(AST_INFO));
     empty_AST_Info         = NEW_t(AST_Info);
-    HEADER(empty_AST_Info) = (Object)AST_Info_Class;
+    HEADER(empty_AST_Info) = AST_Info_Class;
 }
 
 /* ========================================================================= */

@@ -46,7 +46,7 @@ void set_env(Object env)
 void pre_init_Runtime_BlockContext()
 {
     Runtime_BlockContext_Class =
-        new_Class_named((Object)Type_Object_Class,
+        new_Class_named(Type_Object_Class,
                         L"Runtime_BlockContext",
                         CREATE_OBJECT_TAG(RUNTIME_BLOCKCONTEXT));
 }
@@ -57,9 +57,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
                                    uns_int local_id, uns_int scope_id)
 {
     while (scope_id != self->scope_id && (Object)self->parent_scope != Nil) {
-        Object parent_class = HEADER(self->parent_scope);
-        if (parent_class == (Object)Runtime_BlockContext_Class ||
-            parent_class == (Object)Runtime_MethodContext_Class) {
+        if (IS_CONTEXT(self->parent_scope)) {
             self = (Runtime_BlockContext)self->parent_scope;
         } else {
             /* TODO Schedule at:in: message send. */
@@ -81,9 +79,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
     while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
-        Object parent_class = HEADER(self->closure->context);
-        if (parent_class == (Object)Runtime_BlockContext_Class ||
-            parent_class == (Object)Runtime_MethodContext_Class) {
+        if (IS_CONTEXT(self->closure->context)) {
             self = (Runtime_BlockContext)self->closure->context;
         } else {
             /* TODO Schedule at:in: message send. */

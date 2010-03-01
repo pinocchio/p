@@ -36,7 +36,7 @@ typedef unsigned long int uns_int;
 #define POINTER_INC(p) (((Object) (p)) + 1) 
 #define POINTER_DEC(p) (((Object) (p)) - 1)
 
-#define HEADER(o) (*(Object*)POINTER_DEC(o))
+#define HEADER(o) (*(Type_Class*)POINTER_DEC(o))
 
 /* ========================================================================= */
 
@@ -47,11 +47,11 @@ typedef unsigned long int uns_int;
 
 #define NEW_OBJECT(class) \
     class result = NEW_t(class);\
-    HEADER(result) = (Object)class##_Class;
+    HEADER(result) = class##_Class;
 
 #define NEW_ARRAY_OBJECT(class, extra) \
     class result = NEW_ARRAYED(struct class##_t, extra);\
-    HEADER(result) = (Object)class##_Class;
+    HEADER(result) = class##_Class;
 
 #define NEW_ARRAYED(base, end) \
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
@@ -196,7 +196,7 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef void(*native)(Object self, Object class, uns_int argc);
+typedef void(*native)(Object self, Type_Class class, uns_int argc);
 
 /* ========================================================================= */
 

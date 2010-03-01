@@ -10,7 +10,7 @@ Type_Class Runtime_MethodContext_Class;
 
 void pre_init_Runtime_MethodContext()
 {
-    Runtime_MethodContext_Class = new_Class_named((Object)Type_Object_Class,
+    Runtime_MethodContext_Class = new_Class_named(Type_Object_Class,
                                                   L"MethodContext",
                                                   CREATE_OBJECT_TAG(RUNTIME_METHODCONTEXT));
 }
@@ -18,7 +18,7 @@ void pre_init_Runtime_MethodContext()
 /* ========================================================================= */
 
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                            Object self, Object class)
+                                                Object self, Type_Class class)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
     NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);
@@ -27,7 +27,7 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
     result->scope_id        = 0;
     result->home_context    = result;
     result->parent_frame    = current_env();
-    result->class           = class;
+    result->class           = (Object)class;
     result->self            = self;
     context_locals((Runtime_BlockContext)result)->size = size;
     return result;

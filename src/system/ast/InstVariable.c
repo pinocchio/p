@@ -20,7 +20,7 @@ AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name)
 void pre_init_AST_InstVariable()
 {
     AST_InstVariable_Class =
-        new_Class_named((Object)Type_Object_Class,
+        new_Class_named(Type_Object_Class,
                         L"InstVariable",
                         CREATE_OBJECT_TAG(AST_INSTVARIABLE));
 }

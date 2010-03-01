@@ -14,7 +14,7 @@ Type_Array new_Type_Array_raw(uns_int c)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
-    HEADER(result)      = (Object)Type_Array_Class;
+    HEADER(result)      = Type_Array_Class;
     result->size        = c;
     return result;
 }
@@ -59,10 +59,10 @@ Type_Array new_Type_Array_withAll(uns_int c, Object element)
 void pre_init_Type_Array() 
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
-    Type_Array_Class = new_Class((Object)Type_Object_Class, create_layout(0, ARRAY));
+    Type_Array_Class = new_Class(Type_Object_Class, create_layout(0, ARRAY));
     REFER_TO(Type_Array);
     empty_Type_Array         = NEW_t(Type_Array);
-    HEADER(empty_Type_Array) = (Object)Type_Array_Class;
+    HEADER(empty_Type_Array) = Type_Array_Class;
 }
 
 /* ========================================================================= */

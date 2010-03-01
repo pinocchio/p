@@ -17,29 +17,29 @@ Type_Boolean True;
 /* ========================================================================= */
 
 void pre_init_Type_False() {
-    False_Class = new_Class_named((Object)Type_Boolean_Class,
+    False_Class = new_Class_named(Type_Boolean_Class,
                                   L"False",
                                   create_layout(0, OBJECT));
     REFER_TO(False);
     False = NEW_t(Type_Boolean);
-    HEADER(False) = (Object)False_Class;
+    HEADER(False) = False_Class;
     False_Const = new_AST_Constant((Object) False);
 }
 
 void pre_init_Type_True()
 {
-    True_Class = new_Class_named((Object)Type_Boolean_Class,
+    True_Class = new_Class_named(Type_Boolean_Class,
                                  L"True",
                                  create_layout(0, OBJECT));
     REFER_TO(True);
     True = NEW_t(Type_Boolean);
-    HEADER(True) = (Object)True_Class;
+    HEADER(True) = True_Class;
     True_Const = new_AST_Constant((Object) True);
 }
 
 void pre_init_Type_Boolean()
 {
-    Type_Boolean_Class = new_Class_named((Object)Type_Object_Class,
+    Type_Boolean_Class = new_Class_named(Type_Object_Class,
                                          L"Boolean",
                                          create_layout(0, OBJECT));
     REFER_TO(Type_Boolean);

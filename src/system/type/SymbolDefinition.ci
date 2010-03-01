@@ -79,3 +79,6 @@ Type_Symbol SMB_ifNil_;
 Type_Symbol SMB_named_in_;
 Type_Symbol SMB_new;
 Type_Symbol SMB_package_;
+Type_Symbol SMB_open_;
+Type_Symbol SMB_stdin;
+Type_Symbol SMB_stderr;

@@ -22,7 +22,7 @@ extern AST_Native_Method new_AST_Native_Method(native code);
 /* ========================================================================= */
 
 #define NATIVE(name)\
-void NM_##name(Object self, Object class, uns_int argc) {
+void NM_##name(Object self, Type_Class class, uns_int argc) {
 #define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
@@ -37,11 +37,11 @@ void NM_##name(Object self, Object class, uns_int argc) {
 /* ========================================================================= */
 
 extern void AST_Native_Method_invoke(AST_Native_Method method, Object self,
-                                     Object class, uns_int argc);
+                                     Type_Class class, uns_int argc);
 
-extern void AST_Native_Method_eval(Object self, Object class, Type_Array args);
+extern void AST_Native_Method_eval(Object self, Type_Class class, Type_Array args);
 
-extern void AST_Native_Method_eval_(Object self, Object class, Type_Array args);
+extern void AST_Native_Method_eval_(Object self, Type_Class class, Type_Array args);
 
 /* ========================================================================= */
 

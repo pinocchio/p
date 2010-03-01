@@ -11,7 +11,7 @@ DECLARE_CLASS(Runtime_InlineCache);
 void pre_init_Runtime_InlineCache()
 {
     Runtime_InlineCache_Class =
-        new_Class_named((Object)Type_Object_Class,
+        new_Class_named(Type_Object_Class,
                         L"InlineCache",
                         CREATE_OBJECT_TAG(RUNTIME_INLINECACHE));
     REFER_TO(Runtime_InlineCache);

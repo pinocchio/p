@@ -7,8 +7,8 @@ Object instantiate_Array(Type_Class class, Type_Array ivars, uns_int extra)
     for (i = 0; i < base + extra; i++) {
         result->values[i] = Nil;
     }
-    HEADER(result) = (Object)class;
-    assert0(HEADER(result) != (Object)Nil);
+    HEADER(result) = class;
+    assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;
 }
 
@@ -21,8 +21,8 @@ Object instantiate_Bytes(Type_Class class, Type_Array ivars, uns_int extra)
 Object instantiate_Words(Type_Class class, Type_Array ivars, uns_int extra)
 {
     Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[extra]);
-    HEADER(result) = (Object)class;
-    assert0(HEADER(result) != (Object)Nil);
+    HEADER(result) = class;
+    assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;
 }
 
@@ -33,8 +33,8 @@ Object basic_instantiate_Object(Type_Class class, uns_int size)
     for (i = 0; i < size; i++) {
         result->ivals[i] = Nil;
     }
-    HEADER(result) = (Object)class;
-    assert0(HEADER(result) != (Object)Nil);
+    HEADER(result) = class;
+    assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;
 }
 
@@ -46,20 +46,20 @@ static Object instantiate_Object(Type_Class class, Type_Array ivars)
     for (i = 0; i < size; i++) {
         result->ivals[i] = Nil;
     }
-    HEADER(result) = (Object)class;
-    assert0(HEADER(result) != (Object)Nil);
+    HEADER(result) = class;
+    assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;
 }
 
 /* ========================================================================= */
 
 #define INSTANTIATE(layout)\
-    if (HEADER(tag) == (Object)Type_##layout##Layout) {\
+    if (HEADER(tag) == Type_##layout##Layout) {\
         return instantiate##_##layout(class, (Type_Array)tag);\
     }
 
 #define INSTANTIATE_SIZED(layout)\
-    if (HEADER(tag) == (Object)Type_##layout##Layout) {\
+    if (HEADER(tag) == Type_##layout##Layout) {\
         return instantiate##_##layout(class, (Type_Array)tag, size);\
     }
 

@@ -28,7 +28,6 @@
 #include <system/runtime/Continue.h>
 #include <system/runtime/BlockClosure.h>
 #include <system/type/CharacterTable.h>
-#include <system/io/Stream.h>
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>

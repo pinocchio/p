@@ -57,7 +57,7 @@ uns_int nrsends()
     uns_int nr = 0;
     while (cur < size) {
         Object c = Double_Stack[cur++];
-        if (c > (Object)10000 && HEADER(c) == (Object)AST_Send_Class) {
+        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
             nr++;
         }
     }
@@ -70,7 +70,7 @@ void sends()
     uns_int cur = 0;
     while (cur < size) {
         Object c = Double_Stack[cur++];
-        if (c > (Object)10000 && HEADER(c) == (Object)AST_Send_Class) {
+        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
             AST_Send send = (AST_Send)c;
             print_AST_Info(send->info);
             print_Symbol(send->message);
@@ -137,7 +137,7 @@ void CNT_send_Eval()
     zap_CNT();
     Object exp = peek_EXP(0);
 
-    Type_Class class = (Type_Class)HEADER(exp);
+    Type_Class class = HEADER(exp);
     EVAL_IF(AST_Constant)
     EVAL_IF(AST_Variable)
     EVAL_IF(AST_Assign)
@@ -207,12 +207,12 @@ bool isInstance(Object object, Object class)
 {
     // TODO check for MetaClass stuff
     assert_class(class);
-    Object type = HEADER(object);
-    while (type != Nil) {
+    Type_Class type = HEADER(object);
+    while ((Object)type != Nil) {
         if ((Object)type == class) {
             return 1;
         }
-        type = ((Type_Class) type)->super;
+        type = type->super;
     }
     return 0;
 }

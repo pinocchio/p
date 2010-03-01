@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define IS_CONTEXT(env) (HEADER(env) == (Object)Runtime_BlockContext_Class || \
-                         HEADER(env) == (Object)Runtime_MethodContext_Class)
+#define IS_CONTEXT(env) (HEADER(env) == Runtime_BlockContext_Class || \
+                         HEADER(env) == Runtime_MethodContext_Class)
 
 /* ========================================================================= */
 

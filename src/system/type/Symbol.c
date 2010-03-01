@@ -20,7 +20,7 @@ Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
     if (cachedSymbol != NULL) {
         return (Type_Symbol)cachedSymbol;
     }
-    HEADER(result) = (Object)Type_Symbol_Class;
+    HEADER(result) = Type_Symbol_Class;
     Type_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
     return result;
 }
@@ -30,7 +30,7 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
     uns_int size        = wcslen(input) + 1;
     Type_SmallInt hash  = wchar_hash(input, size);
     Type_Symbol result  = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
-    HEADER(result)      = (Object)Type_Symbol_Class;
+    HEADER(result)      = Type_Symbol_Class;
     result->hash        = hash;
     wcsncpy(result->value, input, size);
     result->size        = size - 1;
@@ -48,7 +48,7 @@ void initialize_Symbol()
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Class((Object)Type_Object_Class, create_layout(0, WORDS));
+    Type_Symbol_Class = new_Class(Type_Object_Class, create_layout(0, WORDS));
     initialize_Symbol();
 }
 /* ========================================================================= */

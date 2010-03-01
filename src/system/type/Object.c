@@ -17,7 +17,7 @@ void pre_init_Type_Object()
     // do manually instanciate since we cannot use dict yet
     Type_Class Object_mclass  = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     Type_Object_Class         = (Type_Class)basic_instantiate_Object(Object_mclass, CLASS_SIZE);
-    Type_Object_Class->super  = Nil;
+    Type_Object_Class->super  = (Type_Class)Nil;
 
     /*
     Type_Class_Class          = NEW_t(Type_Class);
@@ -34,7 +34,7 @@ void pre_init_Type_Object()
 
 void inter_init_Type_Object() 
 {
-    ((Type_Class)HEADER(Type_Object_Class))->layout = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
+    HEADER(Type_Object_Class)->layout = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
     Type_Object_Class->layout   = create_layout(OBJECT_SIZE, OBJECT); 
     REFER_TO(Type_Object);
 }
@@ -155,7 +155,7 @@ NATIVE2(Type_Object_perform_withArguments_)
     Object w_selector   = NATIVE_ARG(0);
     Object w_args       = NATIVE_ARG(1);
 
-    assert0(HEADER(w_args) == (Object)Type_Array_Class);
+    assert0(HEADER(w_args) == Type_Array_Class);
 
     zapn_EXP(4);    
 
@@ -197,12 +197,12 @@ void shallow_inspect(Object o)
         printf("false\n");
         return;
     }
-    Object cls = HEADER(o);
+    Type_Class cls = HEADER(o);
 
-    if (HEADER(cls) == (Object)Metaclass) {
+    if (HEADER(cls) == Metaclass) {
         printf("%ls", ((Type_Class)o)->name->value);
     } else {
-        printf("Instance of %ls", ((Type_Class)cls)->name->value);
+        printf("Instance of %ls", cls->name->value);
     }
 
     Object tag = GETTAG(o);
@@ -241,7 +241,7 @@ void inspect(Object o)
     if (o == NULL || HEADER(o) == NULL) {
         return;
     }
-    if (HEADER(o) == (Object)Type_Dictionary_Class) {
+    if (HEADER(o) == Type_Dictionary_Class) {
         inspect_dict(o);
         return;
     }
@@ -330,15 +330,15 @@ void post_init_Type_Object()
     Type_Class_Class->name   = new_Type_String(L"Type_Class");
     Type_Class_Class->methods = new_Type_Dictionary();
     */
-    ((Type_Class)HEADER(Type_Object_Class))->methods = new_Type_Dictionary();
+    HEADER(Type_Object_Class)->methods = new_Type_Dictionary();
     Type_Object_Class->name = new_Type_String(L"Object");
     Type_Object_Class->methods = new_Type_Dictionary();
     
     store_native_method(Type_Object_Class, SMB_size,                    NM_Type_Object_size);
     store_native_method(Type_Object_Class, SMB_at_,                     NM_Type_Array_at_);
     store_native_method(Type_Object_Class, SMB_at_put_,                 NM_Type_Array_at_put_);
-    store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew,  NM_Type_Object_basicNew);
-    store_native_method((Type_Class)HEADER(Type_Object_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
+    store_native_method(HEADER(Type_Object_Class), SMB_basicNew,  NM_Type_Object_basicNew);
+    store_native_method(HEADER(Type_Object_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
     store_native_method(Type_Object_Class, SMB__pequal,                 NM_Type_Object_equals);
     store_native_method(Type_Object_Class, SMB__equal,                  NM_Type_Object_equals);
     store_native_method(Type_Object_Class, SMB_class,                   NM_Type_Object_class);

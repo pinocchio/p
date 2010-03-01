@@ -23,7 +23,7 @@ extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code);
 /* ========================================================================= */
 
 extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                                   Object class, uns_int argc);
+                                         Type_Class class, uns_int argc);
 
 /* ========================================================================= */
 

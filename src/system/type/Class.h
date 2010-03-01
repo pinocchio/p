@@ -32,7 +32,7 @@ typedef enum Type_Tag {
 
 struct Type_Class_t {
     Object          layout;
-    Object          super;
+    Type_Class      super;
     Type_Dictionary methods;
     Type_Symbol     name;
     Object          package;
@@ -44,23 +44,23 @@ extern void inter_init_Type_Class();
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Object superclass, Object layout);
-extern Type_Class new_Class_withMeta(Object superclass, Object layout, Object metaType);
-extern Type_Class new_Class_named(Object superclass, const wchar_t* name,
+extern Type_Class new_Class(Type_Class superclass, Object layout);
+extern Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaType);
+extern Type_Class new_Class_named(Type_Class superclass, const wchar_t* name,
                                   Object layout);
-extern Type_Class new_Bootstrapping_Class(Object superclass);
+extern Type_Class new_Bootstrapping_Class(Type_Class superclass);
 
 /* ========================================================================= */
 
-extern void Type_Class_dispatch(Object receiver, Object class, uns_int argc);
-extern void Type_Class_direct_dispatch(Object receiver, Object class,
+extern void Type_Class_dispatch(Object receiver, Type_Class class, uns_int argc);
+extern void Type_Class_direct_dispatch(Object receiver, Type_Class class,
                                        Object msg, uns_int argc, ...);
 extern void Type_Class_direct_dispatch_withArguments(Object receiver,
-                                                     Object class,
+                                                     Type_Class class,
                                                      Object msg,
                                                      Type_Array args);
 
-extern void Type_Class_set_superclass(Type_Class cls, Object super);
+extern void Type_Class_set_superclass(Type_Class cls, Type_Class super);
 
 extern void CNT_Class_super();
 
