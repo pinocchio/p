@@ -196,6 +196,11 @@ NATIVE1(IO_File_write_)
     RETURN_FROM_NATIVE(self);
 }
 
+NATIVE0(IO_File_cr)
+    fputwc(L'\n', ((IO_File)self)->file);
+    RETURN_FROM_NATIVE(self);
+}
+
 void IO_File_writeAll_(IO_File file, Type_String string) {
     assert1(file != NULL, "Invalid Argument");
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
@@ -268,6 +273,7 @@ void post_init_IO_File()
     store_native_method(IO_ReadFile_Class          , SMB_read      , NM_IO_File_read);
     store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
     
+    store_native_method(IO_WriteFile_Class         , SMB_cr        , NM_IO_File_cr);
     store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
     store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
 

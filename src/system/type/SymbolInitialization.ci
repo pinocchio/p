@@ -34,6 +34,7 @@ SMB_close                    = new_Type_Symbol_cached(L"close");
 SMB_cr                       = new_Type_Symbol_cached(L"cr");
 SMB_delete_                  = new_Type_Symbol_cached(L"delete:");
 SMB_doesNotUnderstand_       = new_Type_Symbol_cached(L"doesNotUnderstand:");
+SMB_ensurePackageNamed_      = new_Type_Symbol_cached(L"ensurePackageNamed:");
 SMB_escape_                  = new_Type_Symbol_cached(L"escape:");
 SMB_eval                     = new_Type_Symbol_cached(L"eval");
 SMB_eval_                    = new_Type_Symbol_cached(L"eval:");
