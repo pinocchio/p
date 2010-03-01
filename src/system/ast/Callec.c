@@ -28,7 +28,7 @@ void pre_init_AST_Callec()
 static void apply(Object closure, uns_int argc)
 {
     // TODO in the alternative case, send "apply" message.
-    // LOG("cls: %ls\n", ((Type_Class)HEADER(closure))->name->value);
+    // LOG("cls: %ls\n", HEADER(closure)->name->value);
     assert0(HEADER(closure) == Runtime_BlockClosure_Class);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
@@ -51,6 +51,6 @@ NATIVE1(AST_Callec_on_)
 
 void post_init_AST_Callec()
 {
-    store_native_method((Type_Class)HEADER(AST_Callec_Class),
+    store_native_method(HEADER(AST_Callec_Class),
                         SMB_on_, NM_AST_Callec_on_);
 }

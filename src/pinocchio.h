@@ -92,14 +92,14 @@ class##_Reference = new_Organization_ClassReference(class);
     assert(HEADER(expression)==(class), \
         printf("Invalid type of arguments given.\n");\
         printf("Expected %ls but got %ls.", \
-                ((Type_Class)HEADER(expression))->name->value, \
+                HEADER(expression)->name->value, \
                 ((Type_Class)(class))->name->value));
 
 #define ASSERT_INSTANCE_OF(expression, class)\
     assert(isInstance((expression), (Object)(class)), \
         printf("Invalid argument type.\n"); \
         printf("Expected %ls but got %ls.", \
-                ((Type_Class)HEADER(expression))->name->value, \
+                HEADER(expression)->name->value, \
                 ((Type_Class)(class))->name->value));
     
 // TODO make sure this is not via c stack

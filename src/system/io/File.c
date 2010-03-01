@@ -251,8 +251,8 @@ void post_init_IO_File()
     store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
     store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
     store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
-    store_native_method((Type_Class)HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
-    store_native_method((Type_Class)HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
+    store_native_method(HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
+    store_native_method(HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);

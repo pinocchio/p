@@ -119,8 +119,8 @@ NATIVE0(Type_SmallInt_asCharacter)
 void post_init_Type_SmallInt()
 {
     
-    ((Type_Class)HEADER(Type_SmallInt_Class))->methods = new_Type_Dictionary();
-    ((Type_Class)HEADER(Type_SmallInt_Class))->layout  = CREATE_OBJECT_TAG(CLASS);
+    HEADER(Type_SmallInt_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_SmallInt_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
     
     Type_SmallInt_Class->layout  = create_layout(0, INT);
     Type_SmallInt_Class->name    = new_Type_String(L"SmallInt");

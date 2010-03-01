@@ -46,7 +46,7 @@ extern Object file_layout;
     assert(TAG_SIZE(tag) > size, printf("Invalid tag size was %i but expected < %i\n", (int)size, (int)TAG_SIZE(tag)));
 
 #define GETTAG(o)\
-    ((Type_Class)HEADER(o))->layout
+    HEADER(o)->layout
 
 #define OBJECT_OF_LAYOUT(o, layout)\
     TAG_IS_LAYOUT(GETTAG(o), layout)

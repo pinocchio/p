@@ -533,5 +533,5 @@ void post_init_Type_Dictionary()
     store_native_method(Type_Dictionary_Class, SMB_at_,              NM_Type_Dictionary_at_);
     store_native_method(Type_Dictionary_Class, SMB_at_ifAbsent_,     NM_Type_Dictionary_at_ifAbsent_);
     store_native_method(Type_Dictionary_Class, SMB_at_put_,          NM_Type_Dictionary_at_put_);
-    store_native_method((Type_Class)HEADER(Type_Dictionary_Class), SMB_basicNew, NM_Type_Dictionary_basicNew);
+    store_native_method(HEADER(Type_Dictionary_Class), SMB_basicNew, NM_Type_Dictionary_basicNew);
 }

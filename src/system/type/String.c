@@ -214,6 +214,6 @@ void post_init_Type_String()
     store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
     store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);
     store_native_method(Type_String_Class, SMB_asNumber, NM_Type_String_asNumber);
-    store_native_method((Type_Class)HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
+    store_native_method(HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
 }
 
