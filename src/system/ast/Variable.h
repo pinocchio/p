@@ -10,8 +10,8 @@
 
 struct AST_Variable_t {
     AST_Info    info;
-    uns_int     local_id;
-    uns_int     scope_id;
+    Object      local_id;
+    Object      scope_id;
     Object      name;
 };
 

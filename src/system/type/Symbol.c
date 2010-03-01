@@ -126,16 +126,6 @@ NATIVE0(Type_Symbol_size)
     RETURN_FROM_NATIVE((Object)new_Type_SmallInt(((Type_Symbol)self)->size));
 }
 
-NATIVE0(Type_Symbol_stdout)
-    printf("%ls", ((Type_Symbol)self)->value);
-    RETURN_FROM_NATIVE(self);
-}
-
-NATIVE0(Type_Symbol_cr)
-    printf("\n");
-    RETURN_FROM_NATIVE(self);
-}
-
 /* ========================================================================= */
 
 
@@ -153,6 +143,4 @@ void install_symbol_methods(Type_Class class)
     store_native_method(class, SMB__equal,    NM_Type_Symbol__equal);
     store_native_method(class, SMB_size,      NM_Type_Symbol_size);
     store_native_method(class, SMB_asArray,   NM_Type_Symbol_asArray);
-    store_native_method(class, SMB_stdout,    NM_Type_Symbol_stdout);
-    store_native_method(class, SMB_cr,        NM_Type_Symbol_cr);
 }

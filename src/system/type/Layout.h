@@ -3,15 +3,15 @@
 
 #include <pinocchio.h>
 
-//TODO make use of EXPORT_CLASS
-extern Type_Class Type_ObjectLayout;
-extern Type_Class Type_ArrayLayout;
-extern Type_Class Type_CharacterLayout;
-extern Type_Class Type_WordsLayout;
-extern Type_Class Type_IntLayout;
-extern Type_Class Type_LongLayout;
-extern Type_Class Type_BytesLayout;
-extern Type_Class Type_FileLayout;
+EXPORT_CLASS(Type_Layout);
+EXPORT_CLASS(Type_ObjectLayout);
+EXPORT_CLASS(Type_ArrayLayout);
+EXPORT_CLASS(Type_CharacterLayout);
+EXPORT_CLASS(Type_WordsLayout);
+EXPORT_CLASS(Type_IntLayout);
+EXPORT_CLASS(Type_LongLayout);
+EXPORT_CLASS(Type_BytesLayout);
+EXPORT_CLASS(Type_FileLayout);
 
 extern Object empty_object_layout;
 extern Object empty_array_layout;
@@ -30,7 +30,7 @@ extern Object file_layout;
     TAG_IS_LAYOUT(GETTAG(o), layout)
 
 #define TAG_IS_LAYOUT(tag, layout)\
-    (HEADER(tag) == Type_##layout##Layout)
+    (HEADER(tag) == Type_##layout##Layout##_Class)
 
 #define ASSERT_TAG_LAYOUT(tag, layout)\
     assert0(TAG_IS_LAYOUT(tag, layout));

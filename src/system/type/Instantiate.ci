@@ -54,12 +54,12 @@ static Object instantiate_Object(Type_Class class, Type_Array ivars)
 /* ========================================================================= */
 
 #define INSTANTIATE(layout)\
-    if (HEADER(tag) == Type_##layout##Layout) {\
+    if (HEADER(tag) == Type_##layout##Layout##_Class) {\
         return instantiate##_##layout(class, (Type_Array)tag);\
     }
 
 #define INSTANTIATE_SIZED(layout)\
-    if (HEADER(tag) == Type_##layout##Layout) {\
+    if (HEADER(tag) == Type_##layout##Layout##_Class) {\
         return instantiate##_##layout(class, (Type_Array)tag, size);\
     }
 

@@ -40,7 +40,8 @@ void init_variable_array(Type_Array array, uns_int local_id)
 {
     uns_int i;
     for (i = 0; i < array->size; i++) {
-        ((AST_Variable)array->values[i])->local_id = local_id;
+        ((AST_Variable)array->values[i])->local_id =
+            (Object)new_Type_SmallInt(local_id);
         local_id++;
     }
 }
