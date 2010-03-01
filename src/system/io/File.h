@@ -6,10 +6,13 @@
 
 /* ========================================================================= */
 
+#define IO_FILE_SIZE 3
+#define IO_FILE_VARS L"pointer", L"size", L"path"
+
 struct IO_File_t {
     FILE *file;
-    Type_SmallInt size;
-    Type_String path;
+    Type_SmallInt   size;
+    Type_String     path;
 };
 
 

@@ -47,7 +47,7 @@ void pre_init_IO_File()
     // TODO check if this makes sense.
     IO_File_Class = new_Class_named((Object)Type_Object_Class,
                                     L"File",
-                                    create_layout(0, FILETAG));
+                                    CREATE_OBJECT_TAG(IO_FILE));
 }
 
 /* ========================================================================= */
@@ -178,6 +178,11 @@ NATIVE1(IO_File_writeAll_)
     IO_File_writeAll_((IO_File)self, str);
     RETURN_FROM_NATIVE(self);
 }
+
+NATIVE1(IO_File_open_)
+    
+}
+
 /* ========================================================================= */
 
 void post_init_IO_File()
