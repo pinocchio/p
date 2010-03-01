@@ -9,20 +9,20 @@ NEW_TEST(Type_Class_instanceOf)
 
 NEW_TEST(Class_Hierarchy)
 
-    assert0(HEADER(HEADER(Metaclass)) == (Object)Metaclass);
-    assert0(HEADER(HEADER(Type_Object_Class)) == (Object)Metaclass);
-    assert0(((Type_Class)Behavior)->super ==(Object) Type_Object_Class);
-    assert0(((Type_Class)HEADER(Behavior))->super == HEADER(Type_Object_Class));
-    assert0(((Type_Class)Class)->super == (Object)Behavior);
-    assert0(((Type_Class)HEADER(Class))->super == HEADER(Behavior));
-    assert0(((Type_Class)Metaclass)->super == (Object)Behavior);
-    assert0(((Type_Class)HEADER(Metaclass))->super == HEADER(Behavior));
-    assert0(((Type_Class)HEADER(Type_Object_Class))->super == (Object)Class);
-    assert0(HEADER(HEADER(Behavior)) == (Object)Metaclass);
-    assert0(HEADER(HEADER(Class)) == (Object)Metaclass);
+    assert0(HEADER(HEADER(Metaclass)) == Metaclass);
+    assert0(HEADER(HEADER(Type_Object_Class)) == Metaclass);
+    assert0(Behavior->super == Type_Object_Class);
+    assert0(HEADER(Behavior)->super == HEADER(Type_Object_Class));
+    assert0(Class->super == Behavior);
+    assert0(HEADER(Class)->super == HEADER(Behavior));
+    assert0(Metaclass->super == Behavior);
+    assert0(HEADER(Metaclass)->super == HEADER(Behavior));
+    assert0(HEADER(Type_Object_Class)->super == Class);
+    assert0(HEADER(HEADER(Behavior)) == Metaclass);
+    assert0(HEADER(HEADER(Class)) == Metaclass);
     
-    assert0(((Type_Class)Type_Symbol_Class)->super == (Object)Type_Object_Class);
-    assert0(((Type_Class)HEADER(Type_Symbol_Class))->super == HEADER(Type_Object_Class));
+    assert0(Type_Symbol_Class->super == Type_Object_Class);
+    assert0(HEADER(Type_Symbol_Class)->super == HEADER(Type_Object_Class));
 }
 
 /*

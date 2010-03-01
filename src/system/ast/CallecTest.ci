@@ -12,7 +12,7 @@ NEW_TEST(ast_callec_returned)
     block->body[0]  = (Object)BLOCK_PARAM(block, 0);
     Object closure  = Eval((Object)block);
     Object result   = Eval_Send1((Object)AST_Callec_Class, SMB_on_, closure);
-    assert0(HEADER(result) == (Object)Runtime_Continue_Class);
+    assert0(HEADER(result) == Runtime_Continue_Class);
     assert0(((Runtime_Continue)result)->Env == (Object)current_env());
 }
 

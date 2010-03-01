@@ -1,7 +1,7 @@
 
 NEW_TEST(Type_Object_methods)
     assert0(Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal));
-    assert0(HEADER((AST_Native_Method)Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == (Object)AST_Native_Method_Class);
+    assert0(HEADER((AST_Native_Method)Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == AST_Native_Method_Class);
 }
 
 NEW_TEST(Type_Object_isNil)
@@ -13,7 +13,7 @@ NEW_TEST(Type_Object_isNil)
 }
 
 NEW_TEST(Type_Object_at_)
-    Type_Class cls = new_Class_named((Object)Type_Object_Class, 
+    Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
                                      create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = instantiate(cls);
@@ -29,7 +29,7 @@ NEW_TEST(Type_Object_at_)
 }
 
 NEW_TEST(Type_Object_at_put_)
-    Type_Class cls = new_Class_named((Object)Type_Object_Class, 
+    Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
                                      create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = instantiate(cls);
@@ -43,7 +43,7 @@ NEW_TEST(Type_Object_at_put_)
 }
 
 NEW_TEST(Type_Object_basicNew)
-    Type_Class cls = new_Class_named((Object)Type_Object_Class, 
+    Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
                                      create_layout(3, OBJECT, L"a", L"b", L"c"));
     Object o = Eval_Send0((Object)cls, SMB_basicNew);

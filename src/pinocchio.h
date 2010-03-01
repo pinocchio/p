@@ -89,7 +89,7 @@ class##_Reference = new_Organization_ClassReference(class);
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) \
-    assert(HEADER(expression)==((Object)(class)), \
+    assert(HEADER(expression)==(class), \
         printf("Invalid type of arguments given.\n");\
         printf("Expected %ls but got %ls.", \
                 ((Type_Class)HEADER(expression))->name->value, \
