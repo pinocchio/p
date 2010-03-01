@@ -4,6 +4,7 @@
 #include <wchar.h>
 #include <pinocchio.h>
 #include <locale.h>
+#include <lib/lib.h>
 
 #ifdef TEST
 #include <test/pinocchioTest.h>

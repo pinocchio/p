@@ -208,7 +208,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
 NATIVE1(IO_File_writeAll_)
     Type_String str = (Type_String)NATIVE_ARG(0);
     Object tag = GETTAG(str);
-    assert(TAG_IS_LAYOUT(tag, Words), "Words-object expected!");
+    assert1(TAG_IS_LAYOUT(tag, Words), "Words-object expected!");
     IO_File_writeAll_((IO_File)self, str);
     RETURN_FROM_NATIVE(self);
 }
@@ -218,7 +218,11 @@ FILE * open_file(Object path, char * mode)
     Object tag = GETTAG(path);
     assert1(TAG_IS_LAYOUT(tag, Words), "Invalid path-type");    
 
-    return fopen(unicode_to_ascii(((Type_Symbol)path)->value), mode);
+    char * fn = unicode_to_ascii(((Type_Symbol)path)->value);
+    FILE * file = fopen(fn, mode);
+    assert(file,
+        printf("Failed to open '%s' (mode '%s', errno: %i)\n", fn, mode, errno););
+    return file;
 }
 
 NATIVE1(IO_WriteFile_open_)
@@ -228,7 +232,7 @@ NATIVE1(IO_WriteFile_open_)
 
 NATIVE1(IO_ReadFile_open_)
     FILE * file = open_file(NATIVE_ARG(0), "r");
-    RETURN_FROM_NATIVE(new_IO_WriteFile_from(file));
+    RETURN_FROM_NATIVE(new_IO_ReadFile_from(file));
 }
 
 NATIVE0(IO_File_stdin)
@@ -243,14 +247,21 @@ NATIVE0(IO_File_stderr)
     RETURN_FROM_NATIVE(StandardError);
 }
 
+NATIVE0(IO_File_close)
+    int result = fclose(((IO_File)self)->file);
+    assert(result == 0, printf("Failed to close file: %i\n", errno););
+    RETURN_FROM_NATIVE(self);
+}
+
 /* ========================================================================= */
 
 void post_init_IO_File()
 {
     
-    store_native_method(HEADER(IO_File_Class)      , SMB_stdin       , NM_IO_File_stdin);
-    store_native_method(HEADER(IO_File_Class)      , SMB_stdout      , NM_IO_File_stdout);
-    store_native_method(HEADER(IO_File_Class)      , SMB_stderr      , NM_IO_File_stderr);
+    store_native_method(HEADER(IO_File_Class) , SMB_stdin  , NM_IO_File_stdin);
+    store_native_method(HEADER(IO_File_Class) , SMB_stdout , NM_IO_File_stdout);
+    store_native_method(HEADER(IO_File_Class) , SMB_stderr , NM_IO_File_stderr);
+    store_native_method(IO_File_Class         , SMB_close  , NM_IO_File_close);
 
     store_native_method(IO_ReadFile_Class          , SMB_size      , NM_IO_File_size);
     store_native_method(IO_ReadFile_Class          , SMB_atEnd     , NM_IO_File_atEnd);
@@ -262,6 +273,7 @@ void post_init_IO_File()
 
     store_native_method(HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
     store_native_method(HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
+
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);
