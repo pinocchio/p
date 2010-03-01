@@ -74,7 +74,6 @@ NEW_TEST(Runtime_BlockClosure_new_Runtime_BlockClosure)
     Runtime_BlockClosure closure       = new_Runtime_BlockClosure(code, (Runtime_BlockContext)context);
     assert0(closure->code == code);
     assert0(closure->context == (Runtime_BlockContext)context);
-    assert0(closure->info == empty_AST_Info);
 }
 
 /* ========================================================================= */

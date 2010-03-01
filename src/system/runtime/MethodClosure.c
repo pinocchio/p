@@ -25,7 +25,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code)
     result->code        = code;
     result->info        = empty_AST_Info;
     result->selector    = (Object)Nil;
-    result->class       = (Type_Class)Nil;
+    result->host        = (Type_Class)Nil;
     return result;
 }
 
@@ -64,7 +64,9 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
      
     AST_Method method = closure->code;
     
-    assert1(argc == method->params->size, "Argument count mismatch");
+    assert(argc == method->params->size,
+        printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
+                    method->params->size, argc););
     
     if (method->size == 0) { 
         RETURN_FROM_NATIVE(self);

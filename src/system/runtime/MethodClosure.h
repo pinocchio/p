@@ -6,15 +6,15 @@
 /* ========================================================================= */
 
 #define RUNTIME_METHODCLOSURE_SIZE 4
-#define RUNTIME_METHODCLOSURE_VARS L"code", L"class", L"info", L"selector"
+#define RUNTIME_METHODCLOSURE_VARS L"code", L"info", L"selector", L"host"
 
 /* ========================================================================= */
 
 struct Runtime_MethodClosure_t {
-    AST_Info            info;
     AST_Method          code;
-    Type_Class          class;
+    AST_Info            info;
     Object              selector;
+    Type_Class          host;
 };
 
 CREATE_INITIALIZERS(Runtime_MethodClosure)
