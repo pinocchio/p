@@ -185,8 +185,7 @@ NATIVE0(IO_File_read)
 void IO_File_write_(IO_File file, Type_Character chr) {
     assert1(file != NULL, "Invalid Argument");
     assert1(chr != NULL, "Invalid Argument");
-    // printf("Printing char: %i: %lc\n", (int)chr->value, chr->value);
-    putwc(chr->value, file->file);
+    fputwc(chr->value, file->file);
 }
 
 NATIVE1(IO_File_write_)
@@ -201,13 +200,15 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
     assert1(file != NULL, "Invalid Argument");
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
     int i;
-    for (i =0; i<string->size; i++) { 
-        putwc(string->value[i], file->file);
+    for (i =0; i < string->size; i++) { 
+        fputwc(string->value[i], file->file);
     }
 }
 
 NATIVE1(IO_File_writeAll_)
     Type_String str = (Type_String)NATIVE_ARG(0);
+    Object tag = GETTAG(str);
+    assert(TAG_IS_LAYOUT(tag, Words), "Words-object expected!");
     IO_File_writeAll_((IO_File)self, str);
     RETURN_FROM_NATIVE(self);
 }
@@ -215,7 +216,7 @@ NATIVE1(IO_File_writeAll_)
 FILE * open_file(Object path, char * mode)
 {
     Object tag = GETTAG(path);
-    if (!TAG_IS_LAYOUT(tag, Words)) { assert1(NULL, "Invalid path-type"); }    
+    assert1(TAG_IS_LAYOUT(tag, Words), "Invalid path-type");    
 
     return fopen(unicode_to_ascii(((Type_Symbol)path)->value), mode);
 }
