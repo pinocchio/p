@@ -18,12 +18,10 @@ DECLARE_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
-Type_Class new_Bootstrapping_Class(Type_Class superclass)
+Type_Class new_Bootstrapping_Class()
 {
     Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    mcls->super     = HEADER(superclass);
     Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
-    cls->super      = superclass;
     return cls;
 }
 

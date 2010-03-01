@@ -48,7 +48,7 @@ extern Type_Class new_Class(Type_Class superclass, Object layout);
 extern Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaType);
 extern Type_Class new_Class_named(Type_Class superclass, const wchar_t* name,
                                   Object layout);
-extern Type_Class new_Bootstrapping_Class(Type_Class superclass);
+extern Type_Class new_Bootstrapping_Class();
 
 /* ========================================================================= */
 

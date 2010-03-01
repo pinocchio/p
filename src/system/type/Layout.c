@@ -5,7 +5,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_Layout);
 DECLARE_CLASS(Type_ObjectLayout);
 DECLARE_CLASS(Type_ArrayLayout);
 DECLARE_CLASS(Type_CharacterLayout);
@@ -36,15 +35,14 @@ Type_Array create_layout_with_vars(Type_Class layout, uns_int size)
 
 void pre_init_Type_Layout()
 {
-    Type_Layout_Class          = new_Bootstrapping_Class(Type_Object_Class);
-    Type_ObjectLayout_Class    = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_ArrayLayout_Class     = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_CharacterLayout_Class = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_WordsLayout_Class     = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_IntLayout_Class       = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_LongLayout_Class      = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_BytesLayout_Class     = new_Bootstrapping_Class(Type_Layout_Class);
-    Type_FileLayout_Class      = new_Bootstrapping_Class(Type_Layout_Class);
+    Type_ObjectLayout_Class    = new_Bootstrapping_Class();
+    Type_ArrayLayout_Class     = new_Bootstrapping_Class();
+    Type_CharacterLayout_Class = new_Bootstrapping_Class();
+    Type_WordsLayout_Class     = new_Bootstrapping_Class();
+    Type_IntLayout_Class       = new_Bootstrapping_Class();
+    Type_LongLayout_Class      = new_Bootstrapping_Class();
+    Type_BytesLayout_Class     = new_Bootstrapping_Class();
+    Type_FileLayout_Class      = new_Bootstrapping_Class();
 
     empty_array_layout      = (Object)create_layout_with_vars(Type_ArrayLayout_Class, 0);
     empty_object_layout     = (Object)create_layout_with_vars(Type_ObjectLayout_Class, 0);
@@ -55,7 +53,6 @@ void pre_init_Type_Layout()
     character_layout        = basic_instantiate_Object(Type_CharacterLayout_Class, 0);
     file_layout             = basic_instantiate_Object(Type_FileLayout_Class, 0);
 
-    Type_Layout_Class->layout           = empty_object_layout;
     Type_ObjectLayout_Class->layout     = empty_array_layout;
     Type_ArrayLayout_Class->layout      = empty_array_layout;
     Type_CharacterLayout_Class->layout  = empty_object_layout;
@@ -115,14 +112,18 @@ void post_init_Type_Layout()
     Type_ObjectLayout_Class->name            = new_Type_Symbol(L"ObjectLayout");
     Type_ObjectLayout_Class->methods         = new_Type_Dictionary();
     HEADER(Type_ObjectLayout_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_ObjectLayout_Class)->layout  = HEADER(Type_Object_Class)->layout;
     Type_ArrayLayout_Class->name             = new_Type_Symbol(L"ArrayLayout");
     Type_ArrayLayout_Class->methods          = new_Type_Dictionary();
     HEADER(Type_ArrayLayout_Class)->methods  = new_Type_Dictionary();
+    HEADER(Type_ArrayLayout_Class)->layout   = HEADER(Type_Object_Class)->layout;
     Type_IntLayout_Class->name               = new_Type_Symbol(L"IntLayout");
     Type_IntLayout_Class->methods            = new_Type_Dictionary();
     HEADER(Type_IntLayout_Class)->methods    = new_Type_Dictionary();
+    HEADER(Type_IntLayout_Class)->layout     = HEADER(Type_Object_Class)->layout;
     Type_WordsLayout_Class->name             = new_Type_Symbol(L"WordsLayout");
     Type_WordsLayout_Class->methods          = new_Type_Dictionary();
     HEADER(Type_WordsLayout_Class)->methods  = new_Type_Dictionary();
+    HEADER(Type_WordsLayout_Class)->layout   = HEADER(Type_Object_Class)->layout;
     // TODO fill in the bootstrapping classes
 }

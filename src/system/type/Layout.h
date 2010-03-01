@@ -3,7 +3,6 @@
 
 #include <pinocchio.h>
 
-EXPORT_CLASS(Type_Layout);
 EXPORT_CLASS(Type_ObjectLayout);
 EXPORT_CLASS(Type_ArrayLayout);
 EXPORT_CLASS(Type_CharacterLayout);
