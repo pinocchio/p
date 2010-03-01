@@ -10,7 +10,6 @@
 #endif // TEST
 
 void printf0(const char * string, ...) {
-
 }
 
 void _indent_(uns_int i)

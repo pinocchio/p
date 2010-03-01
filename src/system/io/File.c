@@ -202,7 +202,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
     int i;
     for (i =0; i<string->size; i++) { 
-        fputwc(string->value[i], file->file);
+        putwc(string->value[i], file->file);
     }
 }
 
