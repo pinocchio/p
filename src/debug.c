@@ -3,16 +3,16 @@
 
 
 void help() {
+    printf("    class           (Object)           \n");
     printf("    inspect         (Object)           \n");
     printf("    inspect_at      (Object, uns_int)  \n");
     printf("    inspect_atn     (Object, wchar_t *)\n");
-    printf("    inspect_dict    (Object)           \n");
-    printf("    object_at       (Object, uns_int)  \n");
-    printf("    object_atn      (Object, wchar_t *)\n");
-    printf("    shallow_inspect (Object)           \n");
+    printf("    methods         (Object)           \n");
+    printf("    at              (Object, uns_int)  \n");
+    printf("    atn             (Object, wchar_t *)\n");
 }
 
-Object object_atn(Object o, wchar_t * s)
+Object atn(Object o, wchar_t * s)
 {
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
@@ -41,7 +41,7 @@ Object object_atn(Object o, wchar_t * s)
     return NULL;
 }
 
-Object object_at(Object o, uns_int i)
+Object at(Object o, uns_int i)
 {
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
@@ -162,11 +162,22 @@ void inspect(Object o)
     }
 }
 
-
-void inspect_at(Object o, uns_int i) {
-    inspect(object_at(o, i));
+void inspect_at(Object o, uns_int i)
+{
+    inspect(at(o, i));
 }
 
-void inspect_atn(Object o, wchar_t * s) {
-    inspect(object_atn(o, s));
+void inspect_atn(Object o, wchar_t * s)
+{
+    inspect(atn(o, s));
+}
+
+Type_Class class(Object o)
+{
+    return HEADER(o);
+}
+
+void methods(Object o) {
+    Type_Class class = HEADER(o);
+    inspect(class->methods);
 }
