@@ -3,6 +3,7 @@
 #include <setjmp.h>
 #include <wchar.h>
 #include <pinocchio.h>
+#include <debug.h>
 #include <locale.h>
 #include <lib/lib.h>
 
