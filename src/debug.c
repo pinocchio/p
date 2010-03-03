@@ -1,15 +1,84 @@
+#include <stdarg.h>
+#include <wchar.h>
 #include <pinocchio.h>
 #include <debug.h>
 
 
 void help() {
-    printf("    class           (Object)           \n");
-    printf("    inspect         (Object)           \n");
-    printf("    inspect_at      (Object, uns_int)  \n");
-    printf("    inspect_atn     (Object, wchar_t *)\n");
-    printf("    methods         (Object)           \n");
-    printf("    at              (Object, uns_int)  \n");
-    printf("    atn             (Object, wchar_t *)\n");
+    printf("    at              (Object, uns_int)      \n");
+    printf("    atn             (Object, wchar_t *)    \n");
+    printf("    atX             (Object, count, idx...)\n");
+    printf("    class           (Object)               \n");
+    printf("    inspect         (Object)               \n");
+    printf("    inspect_at      (Object, uns_int)      \n");
+    printf("    inspect_atn     (Object, wchar_t *)    \n");
+    printf("    methods         (Object)               \n");
+}
+
+
+void _indent_(uns_int i)
+{
+    uns_int todo = 0;
+    while (todo++ != i) {
+        if (todo % 4) {
+            printf("  ");
+        } else {
+            printf("| ");
+        }
+    }
+}
+
+void print_EXP()
+{
+    uns_int size = EXP_size();
+    uns_int cur = 0;
+    while (cur < size) {
+        Object c = Double_Stack[cur++];
+        if (c > (Object)10000) {
+            print_Class(c);
+        } else {
+            printf("%"F_I"i\n", (uns_int)c);
+        }
+    }
+}
+
+void print_Symbol(Object s)
+{
+    Object tag = GETTAG(s);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        printf("L\"%ls\"\n", ((Type_Symbol)s)->value);
+    } else {
+        printf("Not a symbol: %p\n", s);
+        print_Class(s);
+    }
+}
+
+uns_int nrsends()
+{
+    uns_int size = EXP_size();
+    uns_int cur = 0;
+    uns_int nr = 0;
+    while (cur < size) {
+        Object c = Double_Stack[cur++];
+        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
+            nr++;
+        }
+    }
+    return nr;
+}
+
+void sends()
+{
+    uns_int size = EXP_size();
+    uns_int cur = 0;
+    while (cur < size) {
+        Object c = Double_Stack[cur++];
+        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
+            AST_Send send = (AST_Send)c;
+            print_AST_Info(send->info);
+            print_Symbol(send->message);
+        }
+    }
 }
 
 Object atn(Object o, wchar_t * s)
@@ -41,8 +110,32 @@ Object atn(Object o, wchar_t * s)
     return NULL;
 }
 
+Object dict_at(Object o, uns_int at)
+{
+    Type_Dictionary dict = (Type_Dictionary)o;
+    uns_int ds = dict->data->size;
+    uns_int i;
+    uns_int idx = 0;
+    for (i = 0; i < ds; i++) {
+        Type_Array bucket = (Type_Array)dict->data->values[i];
+        if (bucket == (Type_Array)Nil) { continue; }
+        uns_int j;
+        for (j = 0; j < bucket->size; j+=2) {
+            if (bucket->values[j] == Nil) { break; }
+            if (idx == at) {
+                return bucket->values[j+1];
+            }
+            idx++;
+        }
+    }
+    return NULL;
+}
+
 Object at(Object o, uns_int i)
 {
+    if (HEADER(o) == Type_Dictionary_Class) {
+        return dict_at(o, i);
+    }
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
         uns_int size = ((Type_Array)tag)->size;
@@ -57,6 +150,18 @@ Object at(Object o, uns_int i)
     }
     assert(NULL, printf("Non-indexable object\n"););
     return NULL;
+}
+
+Object atx(Object o, uns_int argc, ...)
+{
+    va_list args;
+    va_start(args, argc);
+    int index;
+    for (index = 0; index < argc; index++) {
+        o = at(o, va_arg(args, uns_int));
+    }
+    va_end(args);
+    return o;
 }
 
 void shallow_inspect(Object o)
@@ -110,6 +215,7 @@ void inspect_dict(Object o)
     Type_Dictionary dict = (Type_Dictionary)o;
     uns_int ds = dict->data->size;
     uns_int i;
+    uns_int idx = 0;
     for (i = 0; i < ds; i++) {
         Type_Array bucket = (Type_Array)dict->data->values[i];
         if (bucket == (Type_Array)Nil) { continue; }
@@ -117,7 +223,7 @@ void inspect_dict(Object o)
         for (j = 0; j < bucket->size; j+=2) {
             Type_Symbol key = (Type_Symbol)bucket->values[j];
             if (key == (Type_Symbol)Nil) { break; }
-            printf("%25ls -> ", key->value);
+            printf("%"F_I"u %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }
     }
@@ -139,7 +245,7 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
-            printf("%15ls:\t", ((Type_Symbol)v->name)->value);
+            printf("%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
         return;
@@ -151,16 +257,22 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
-            printf("%15ls:\t", ((Type_Symbol)v->name)->value);
+            printf("%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
-            printf("%"F_I"u:\t", i-size+1);
+            printf("%i:\t", i);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         return;
     }
 }
+
+void i(Object o) 
+{
+    inspect(o);
+}
+
 
 void inspect_at(Object o, uns_int i)
 {
@@ -177,7 +289,7 @@ Type_Class class(Object o)
     return HEADER(o);
 }
 
-void methods(Object o) {
+Object methods(Object o) {
     Type_Class class = HEADER(o);
-    inspect(class->methods);
+    return (Object)class->methods;
 }

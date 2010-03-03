@@ -84,3 +84,4 @@ extern Type_Symbol SMB_stderr;
 extern Type_Symbol SMB_close;
 extern Type_Symbol SMB_ensurePackageNamed_;
 extern Type_Symbol SMB_named_in_;
+extern Type_Symbol SMB_ensureClassReferenceFor_;

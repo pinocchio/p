@@ -5,12 +5,13 @@
 
 /* ========================================================================= */
 
-#define ORGANIZATION_CLASSREFERENCE_SIZE 2
-#define ORGANIZATION_CLASSREFERENCE_VARS L"class", L"package"
+#define ORGANIZATION_CLASSREFERENCE_SIZE 3
+#define ORGANIZATION_CLASSREFERENCE_VARS L"referenceName", L"package", L"class"
 
 struct Organization_ClassReference_t {
-    Object class;
+    Object referenceName;
     Object package;
+    Object class;
 };
 
 CREATE_INITIALIZERS(Organization_ClassReference)

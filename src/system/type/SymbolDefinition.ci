@@ -84,3 +84,4 @@ Type_Symbol SMB_stderr;
 Type_Symbol SMB_close;
 Type_Symbol SMB_ensurePackageNamed_;
 Type_Symbol SMB_named_in_;
+Type_Symbol SMB_ensureClassReferenceFor_;
