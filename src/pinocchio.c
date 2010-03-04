@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <setjmp.h>
 #include <wchar.h>
+#include <string.h>
 #include <pinocchio.h>
 #include <debug.h>
 #include <locale.h>
@@ -187,8 +188,23 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 #include <test/FibTest.ci>
 
 /* ========================================================================= */
-
-int main()
+Type_Array get_args(int argc, const char ** argv)
+{
+    Type_Array args = new_Type_Array_raw(argc - 1);
+    int i;
+    argv++;
+    for (i = 1; i < argc; i++) {
+        char * arg = * argv++;
+        int length = strlen(arg);
+        wchar_t warg[length + 1];
+        assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
+        Type_Symbol sarg = new_Type_Symbol_cached(warg);
+        args->values[i-1] = (Object)sarg;
+    }
+    return args;
+}
+ 
+int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
     #include <pinocchioPreInit.ci>
@@ -198,9 +214,10 @@ int main()
 
     #ifdef TEST
     run_tests();
-    #else
     run_FibTest();
     #endif
+
+    Eval_Send1(Interpretation_Interpreter_Class, SMB_main_, (Object)get_args(argc, argv));
     
     return EXIT_SUCCESS;
 }
