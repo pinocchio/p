@@ -66,6 +66,7 @@ SMB_perform_                 = new_Type_Symbol_cached(L"perform:");
 SMB_perform_withArguments_   = new_Type_Symbol_cached(L"perform:withArguments:");
 SMB_read                     = new_Type_Symbol_cached(L"read");
 SMB_readAll                  = new_Type_Symbol_cached(L"readAll");
+SMB_readLine                 = new_Type_Symbol_cached(L"readLine");
 SMB_rewind                   = new_Type_Symbol_cached(L"rewind");
 SMB_set                      = new_Type_Symbol_cached(L"set");
 SMB_size                     = new_Type_Symbol_cached(L"size");

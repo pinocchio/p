@@ -171,6 +171,24 @@ NATIVE0(IO_File_readAll)
     RETURN_FROM_NATIVE(IO_File_readAll((IO_File)self));
 }
 
+Type_String IO_File_readLine(IO_File file) {
+    assert1(file != NULL, "Invalid Argument");
+    wchar_t chr[100];
+    int i;
+// TODO implement growing of chr
+    for (i = 0; i < 100; i++) {
+        IO_File_readCharacter(file, &chr[i]);
+        if (chr[i] == L'\n') {
+            Type_String result = new_Type_String(chr);
+            return result;
+        }
+    }
+}
+
+NATIVE0(IO_File_readLine)
+    RETURN_FROM_NATIVE(IO_File_readLine((IO_File)self));
+}
+
 Type_Character IO_File_read(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
     wchar_t chr;
@@ -271,6 +289,7 @@ void post_init_IO_File()
     store_native_method(IO_ReadFile_Class          , SMB_size      , NM_IO_File_size);
     store_native_method(IO_ReadFile_Class          , SMB_atEnd     , NM_IO_File_atEnd);
     store_native_method(IO_ReadFile_Class          , SMB_read      , NM_IO_File_read);
+    store_native_method(IO_ReadFile_Class          , SMB_readLine  , NM_IO_File_readLine);
     store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
     
     store_native_method(IO_WriteFile_Class         , SMB_cr        , NM_IO_File_cr);
