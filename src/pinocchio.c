@@ -92,52 +92,6 @@ void CNT_send_Eval()
 				  ((Type_Class)class)->name->value));
 }
 
-/**
- * setjmp and longjmp have an overhead but they allow us to avoid testing if
- * we are at the end of the stack. It's only expensive for starting new
- * threads, and the boosts performance for longer living threads.
- */
-int IN_EVAL = 0;
-
-Object Eval(Object code)
-{
-    if (IN_EVAL) {
-        assert(NULL, printf("Re-entering evaluation thread!\n"));
-    }
-    
-    push_EXP(code);
-
-#ifndef NOJMP // ---------------------------------------------------------------
-
-    push_CNT(exit_eval);
-    push_CNT(send_Eval);
-
-    if (!setjmp(Eval_Exit)) {
-        IN_EVAL = 1;
-        setjmp(Eval_Continue);
-        for (;;) {
-            peek_CNT()();
-        }
-    }
-
-    zap_CNT();
-    
-#else // NOJMP
-
-    push_CNT(send_Eval);
-
-    IN_EVAL = 1;
-    while (!empty_CNT()) {
-        peek_CNT()();
-    }
-
-#endif // NOJMP ----------------------------------------------------------------
-
-    Object result = pop_EXP();
-    IN_EVAL = 0;
-    return result;
-}
-
 /* ========================================================================= */
 
 bool isInstance(Object object, Object class) 
@@ -156,28 +110,79 @@ bool isInstance(Object object, Object class)
 
 /* ========================================================================= */
 
+/**
+ * setjmp and longjmp have an overhead but they allow us to avoid testing if
+ * we are at the end of the stack. It's only expensive for starting new
+ * threads, and the boosts performance for longer living threads.
+ */
+int IN_EVAL = 0;
+
+void start_eval()
+{
+    if (IN_EVAL) {
+        assert(NULL, printf("Re-entering evaluation thread!\n"));
+    }
+
+    IN_EVAL = 1;
+
+    #ifndef NOJMP
+    push_CNT(exit_eval);
+    #endif
+}
+
 Object finish_eval()
 {
+    #ifndef NOJMP
+
+    if (!setjmp(Eval_Exit)) {
+        setjmp(Eval_Continue);
+        for (;;) {
+            peek_CNT()();
+        }
+    }
+
+    zap_CNT();
+
+    #else // NOJMP
+
     while (!empty_CNT()) {
         peek_CNT()();
     }
-    return pop_EXP();
+
+    #endif // NOJMP
+    
+    Object result = pop_EXP();
+    IN_EVAL = 0;
+    return result;
+}
+
+Object Eval(Object code)
+{
+    start_eval();
+    
+    push_EXP(code);
+    push_CNT(send_Eval);
+
+    return finish_eval();
 }
 
 Object Eval_Send0(Object self, Type_Symbol symbol)
 {
+    start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
     return finish_eval();
 }
 
 Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
 {
+    start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
     return finish_eval();
 }
 
 Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 {
+    start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
     return finish_eval();
 }
@@ -194,7 +199,7 @@ Type_Array get_args(int argc, const char ** argv)
     int i;
     argv++;
     for (i = 1; i < argc; i++) {
-        char * arg = * argv++;
+        const char * arg = *argv++;
         int length = strlen(arg);
         wchar_t warg[length + 1];
         assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");

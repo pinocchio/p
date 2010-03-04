@@ -250,7 +250,7 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     // TODO put that directly on the sender side
     // TODO create Polymorphic inline cache
     // TODO properly initialize the inlinecache when creating new sends
-    if (cache != Nil) {
+    if ((Object)cache != Nil) {
     if (class == (Type_Class)cache->class) {
         return Method_invoke(cache->method, self, class, argc);
     }

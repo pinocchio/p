@@ -6,16 +6,16 @@ MAKEOPTS=-j3
 
 CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
 CFILES+=$(wildcard lib/*.c) $(wildcard lib/*/*.c)
-CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 
 CIFILES=$(wildcard *.ci)
 HFILES+=$(CFILES:%.c=%.h)
 
 TEST_CIFILES=$(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
 TEST_CFILES=test/pinocchioTest.c
+TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-I. -Wall -g
+CFLAGS+=-O3 -DASSERT_FAIL -I. -Wall -g
 LDFLAGS+=-lm -lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
@@ -26,24 +26,21 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-compile_run: $(TARGET)
+run: $(TARGET)
 	./$(TARGET)
 
-run: $(TEST_HFILES) $(TEST_CIFILES)
-	CFLAGS="-O3" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make compile_run
-
 test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
-	CFLAGS="-DTEST" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make compile_run
+	CFLAGS="-DTEST" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
 
 vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
-	CFLAGS="-DTEST -DTEST_FAIL" CFILES=$(TEST_CFILES) HFILES=$(TEST_HFILES) make compile_run
+	CFLAGS="-DTEST -DTEST_FAIL" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
 
 
 clean:
 	rm -rf $(ALLOBJECTS) $(TARGET) make.depend
 
 profile:
-	LDFLAGS="-pg" CFLAGS="-pg -O3" make $(TARGET)
+	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
 	./$(TARGET)
 	gprof --flat-profile $(TARGET)
 
