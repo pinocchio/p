@@ -55,6 +55,7 @@ Type_SmallInt_BINARY_OPERATION(plus_,       +);
 Type_SmallInt_BINARY_OPERATION(minus_,      -);
 Type_SmallInt_BINARY_OPERATION(times_,      *);
 Type_SmallInt_BINARY_OPERATION(divide_,     /);
+Type_SmallInt_BINARY_OPERATION(modulo_,     %);
 Type_SmallInt_BINARY_OPERATION(shiftRight_, >>);
 Type_SmallInt_BINARY_OPERATION(shiftLeft_,  <<);
 Type_SmallInt_BINARY_OPERATION(and_,        &);
@@ -130,6 +131,7 @@ void post_init_Type_SmallInt()
     store_native_method(Type_SmallInt_Class, SMB__minus,      NM_Type_SmallInt_minus_);   
     store_native_method(Type_SmallInt_Class, SMB__times,      NM_Type_SmallInt_times_); 
     store_native_method(Type_SmallInt_Class, SMB__divide,     NM_Type_SmallInt_divide_);
+    store_native_method(Type_SmallInt_Class, SMB__modulo,     NM_Type_SmallInt_modulo_);
     store_native_method(Type_SmallInt_Class, SMB__shiftLeft,  NM_Type_SmallInt_shiftLeft_);
     store_native_method(Type_SmallInt_Class, SMB__shiftRight, NM_Type_SmallInt_shiftRight_);
     store_native_method(Type_SmallInt_Class, SMB__and,        NM_Type_SmallInt_and_);

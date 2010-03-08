@@ -6,6 +6,7 @@ SMB__equal                   = new_Type_Symbol_cached(L"=");
 SMB__gt                      = new_Type_Symbol_cached(L">");
 SMB__lt                      = new_Type_Symbol_cached(L"<");
 SMB__minus                   = new_Type_Symbol_cached(L"-");
+SMB__modulo                  = new_Type_Symbol_cached(L"\\\\");
 SMB__notEqual                = new_Type_Symbol_cached(L"!=");
 SMB__or                      = new_Type_Symbol_cached(L"|");
 SMB__pequal                  = new_Type_Symbol_cached(L"==");

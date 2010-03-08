@@ -17,12 +17,22 @@ AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name)
     return result;
 }
 
+void fix_layout(Type_Array layout)
+{
+    uns_int size = layout->size;
+    while(size--) {
+        HEADER(layout->values[size]) = AST_InstVariable_Class;
+    }
+}
+
 void pre_init_AST_InstVariable()
 {
     AST_InstVariable_Class =
         new_Class_named(Type_Object_Class,
                         L"InstVariable",
                         CREATE_OBJECT_TAG(AST_INSTVARIABLE));
+    fix_layout(Type_Dictionary_Class->layout);
+    fix_layout(Metaclass->layout);
 }
 
 /* ========================================================================= */
