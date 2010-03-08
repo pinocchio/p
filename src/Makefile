@@ -37,7 +37,7 @@ vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 
 
 clean:
-	rm -rf $(ALLOBJECTS) $(TARGET) make.depend
+	@rm -rf $(ALLOBJECTS) $(TARGET) make.depend
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)

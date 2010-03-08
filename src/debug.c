@@ -9,10 +9,16 @@ void help() {
     printf("    atn             (Object, wchar_t *)    \n");
     printf("    atX             (Object, count, idx...)\n");
     printf("    class           (Object)               \n");
-    printf("    inspect         (Object)               \n");
+    printf("    i,inspect       (Object)               \n");
     printf("    inspect_at      (Object, uns_int)      \n");
     printf("    inspect_atn     (Object, wchar_t *)    \n");
     printf("    methods         (Object)               \n");
+    printf("    print_EXP                              \n");
+    printf("    sends                                  \n");
+}
+
+void h() {
+    return help();
 }
 
 
@@ -80,6 +86,7 @@ void sends()
         }
     }
 }
+
 
 Object atn(Object o, wchar_t * s)
 {
@@ -279,9 +286,18 @@ void inspect_at(Object o, uns_int i)
     inspect(at(o, i));
 }
 
+void i_at(Object o, uns_int i) {
+    return inspect_at(o, i);
+}
+
+
 void inspect_atn(Object o, wchar_t * s)
 {
     inspect(atn(o, s));
+}
+
+void i_atn(Object o, wchar_t * s) {
+    return inspect_at(o, s);
 }
 
 Type_Class class(Object o)
