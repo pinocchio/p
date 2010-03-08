@@ -88,3 +88,4 @@ extern Type_Symbol SMB_ensureClassReferenceFor_;
 extern Type_Symbol SMB_main_;
 extern Type_Symbol SMB_readLine;
 extern Type_Symbol SMB_remove_;
+extern Type_Symbol SMB_lf;

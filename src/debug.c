@@ -297,7 +297,7 @@ void inspect_atn(Object o, wchar_t * s)
 }
 
 void i_atn(Object o, wchar_t * s) {
-    return inspect_at(o, s);
+    return inspect_atn(o, s);
 }
 
 Type_Class class(Object o)

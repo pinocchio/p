@@ -179,10 +179,12 @@ Type_String IO_File_readLine(IO_File file) {
     for (i = 0; i < 100; i++) {
         IO_File_readCharacter(file, &chr[i]);
         if (chr[i] == L'\n') {
-            Type_String result = new_Type_String(chr);
-            return result;
+            break;
         }
     }
+    chr[i] = L'\0';
+    Type_String result = new_Type_String(chr);
+    return result;
 }
 
 NATIVE0(IO_File_readLine)
@@ -214,7 +216,7 @@ NATIVE1(IO_File_write_)
     RETURN_FROM_NATIVE(self);
 }
 
-NATIVE0(IO_File_cr)
+NATIVE0(IO_File_lf)
     fputwc(L'\n', ((IO_File)self)->file);
     RETURN_FROM_NATIVE(self);
 }
@@ -292,7 +294,7 @@ void post_init_IO_File()
     store_native_method(IO_ReadFile_Class          , SMB_readLine  , NM_IO_File_readLine);
     store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
     
-    store_native_method(IO_WriteFile_Class         , SMB_cr        , NM_IO_File_cr);
+    store_native_method(IO_WriteFile_Class         , SMB_lf        , NM_IO_File_lf);
     store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
     store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
 

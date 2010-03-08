@@ -39,6 +39,8 @@ int get_hash(Type_Dictionary self, Object key)
         print_Class(key);
         assert1(NULL, "Dictionary currently only supports"
                       " SmallInt and Symbol as key\n");
+        // make the compiler happy :)
+        return 0;
     }
     hash %= self->data->size;
     return hash;
@@ -322,49 +324,6 @@ void Bucket_store_(Type_Array * bucketp, Object key, Object value)
     Bucket_compare_key(key, bucket->values[0]);
 }
 
-static void bucket_do_remove(Type_Array bucket, uns_int idx, uns_int addition)
-{
-    bucket->values[idx]   = Nil;
-    bucket->values[idx+1] = Nil;
-    zapn_EXP(2);
-    poke_EXP(0, (Object)addition);
-    zap_CNT();
-}
-
-static void CNT_Bucket_remove()
-{
-    Object boolean       = pop_EXP();
-    Type_Array * bucketp = (Type_Array *)peek_EXP(0);
-    Type_Array bucket    = *bucketp;
-    uns_int idx          = (uns_int)peek_EXP(1);
-
-    if (boolean == (Object)True) {
-        return bucket_do_remove(bucket, idx, 0);
-    }
-
-    Object key = peek_EXP(2);
-    idx += 2;
-
-    if (idx >= bucket->size) {
-        assert0(0, "wrong key providede for remove")
-    }
-
-    poke_EXP(1, (Object)idx);
-    Bucket_compare_key(key, bucket->values[idx]);
-}
-
-void Bucket_remove_(Type_Array * bucketp, Object key)
-{
-    Type_Array bucket = *bucketp;
-    claim_EXP(3);
-    poke_EXP(2, key);
-    poke_EXP(1, 0);
-    poke_EXP(0, bucketp);
-    push_CNT(Bucket_remove);
-
-    Bucket_compare_key(key, bucket->values[0]);
-}
-
 static void Bucket_lookup(Type_Array bucket, Object key)
 {
     if (bucket->values[0] == (Object)Nil) {
@@ -562,22 +521,6 @@ CNT(Type_Dictionary_at_put_)
 
 NATIVE2(Type_Dictionary_at_put_)
     push_CNT(Type_Dictionary_at_put_);
-    push_hash(NATIVE_ARG(0));
-}
-
-CNT(Type_Dictionary_removeKey_)
-    Object w_hash        = peek_EXP(0);
-    Type_Dictionary self = (Type_Dictionary)peek_EXP(2);
-    int hash             = unwrap_hash(self, w_hash);
-    Object new           = peek_EXP(1);
-    Object w_index       = peek_EXP(2);
-    zapn_EXP(3);
-    poke_EXP(0, new);
-    Type_Dictionary_direct_removeKey((Type_Dictionary)self, hash, w_index);
-}
-
-NATIVE1(Type_Dictionary_removeKey_)
-    push_CNT(Type_Dictionary_removeKey_);
     push_hash(NATIVE_ARG(0));
 }
 

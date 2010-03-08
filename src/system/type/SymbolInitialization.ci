@@ -52,6 +52,7 @@ SMB_instVarAt_               = new_Type_Symbol_cached(L"instVarAt:");
 SMB_instVarAt_put_           = new_Type_Symbol_cached(L"instVarAt:put:");
 SMB_isNil                    = new_Type_Symbol_cached(L"isNil");
 SMB_isNotNil                 = new_Type_Symbol_cached(L"isNotNil");
+SMB_lf                       = new_Type_Symbol_cached(L"lf");
 SMB_lookup_                  = new_Type_Symbol_cached(L"lookup:");
 SMB_main_                    = new_Type_Symbol_cached(L"main:");
 SMB_name                     = new_Type_Symbol_cached(L"name");

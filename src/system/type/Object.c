@@ -107,7 +107,9 @@ NATIVE0(Type_Object_size)
     } else if (TAG_IS_LAYOUT(tag, Words)) {
         size = ((Type_Symbol)self)->size;
     } else {
-        assert(NULL, printf("Not indexable\n"););
+        assert(NULL, printf("Not indexable\n"););       
+        // make the compiler happy :)
+        return;
     }
     Type_SmallInt result = new_Type_SmallInt(size);
     RETURN_FROM_NATIVE(result);
