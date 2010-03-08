@@ -177,6 +177,8 @@
 		36AC4B2211451F3900DE61E1 /* PSymbolTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B1611451F3900DE61E1 /* PSymbolTest.c */; };
 		36AC4B2811451F6300DE61E1 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B2511451F6300DE61E1 /* Message.c */; };
 		36AC4B2911451F6300DE61E1 /* MessageTest.ci in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B2711451F6300DE61E1 /* MessageTest.ci */; };
+		36AC4B53114528BC00DE61E1 /* PDictionaryTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */; };
+		36AC4B60114528E500DE61E1 /* PDictionaryTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */; };
 		36D2D482113E60940020E7B1 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 36D2D480113E60940020E7B1 /* debug.c */; };
 /* End PBXBuildFile section */
 
@@ -597,6 +599,10 @@
 		36AC4B2511451F6300DE61E1 /* Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Message.c; sourceTree = "<group>"; };
 		36AC4B2611451F6300DE61E1 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		36AC4B2711451F6300DE61E1 /* MessageTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MessageTest.ci; sourceTree = "<group>"; };
+		36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PDictionaryTest.c; sourceTree = "<group>"; };
+		36AC4B52114528BC00DE61E1 /* PDictionaryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDictionaryTest.h; sourceTree = "<group>"; };
+		36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PDictionaryTest.c; sourceTree = "<group>"; };
+		36AC4B5F114528E500DE61E1 /* PDictionaryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDictionaryTest.h; sourceTree = "<group>"; };
 		36D2D480113E60940020E7B1 /* debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = debug.c; sourceTree = "<group>"; };
 		36D2D481113E60940020E7B1 /* debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* pinocchio */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pinocchio; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -644,6 +650,8 @@
 		36061E4E11235ED800FD4FCD /* test */ = {
 			isa = PBXGroup;
 			children = (
+				36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */,
+				36AC4B52114528BC00DE61E1 /* PDictionaryTest.h */,
 				36AC4B0211451F3900DE61E1 /* PArrayTest.c */,
 				36AC4B0311451F3900DE61E1 /* PArrayTest.h */,
 				36AC4B0411451F3900DE61E1 /* PBlockTest.c */,
@@ -683,6 +691,8 @@
 		36061E5611235EE200FD4FCD /* class */ = {
 			isa = PBXGroup;
 			children = (
+				36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */,
+				36AC4B5F114528E500DE61E1 /* PDictionaryTest.h */,
 				36AC4A0F11451D3300DE61E1 /* Annotation.c */,
 				36AC4A1011451D3300DE61E1 /* Annotation.h */,
 				36AC4A1111451D3300DE61E1 /* ArrayLayout.c */,
@@ -1363,6 +1373,8 @@
 				36AC4B2211451F3900DE61E1 /* PSymbolTest.c in Sources */,
 				36AC4B2811451F6300DE61E1 /* Message.c in Sources */,
 				36AC4B2911451F6300DE61E1 /* MessageTest.ci in Sources */,
+				36AC4B53114528BC00DE61E1 /* PDictionaryTest.c in Sources */,
+				36AC4B60114528E500DE61E1 /* PDictionaryTest.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
