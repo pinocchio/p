@@ -1,0 +1,14 @@
+extern void h();
+extern void help();
+extern void inspect(Object o);
+extern void i(Object o);
+extern void sends();
+extern void print_EXP();
+extern Object atn(Object o, const wchar_t * s);
+extern Object at(Object o, uns_int i);
+extern Object atx(Object o, uns_int argc, ...);
+extern void inspect_at(Object o, uns_int i);
+extern void i_at(Object o, uns_int i);
+extern void i_atn(Object o, const wchar_t * s);
+extern void inspect_atn(Object o, const wchar_t * s);
+extern Object methods(Object o);

@@ -104,7 +104,7 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         assert(NULL,
-            printf("Recursive does not understand \"%ls\" (\"%"F_I"u\") in \n", 
+            fprintf(stderr, "Recursive does not understand \"%ls\" (\"%"F_I"u\") in \n", 
             ((Type_Symbol)message->selector)->value,
             message->size);
             print_Class(self););
@@ -266,21 +266,21 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 void print_Class(Object obj)
 {
     if (obj == NULL) {
-        printf("NULL\n");
+        fprintf(stderr, "NULL\n");
         return;
     }
     if (obj == Nil) {
-        printf("Nil\n");
+        fprintf(stderr, "Nil\n");
         return;
     }
     Type_Class class = HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
     if (HEADER(class) == Metaclass) {
-        printf("Class class: %ls\n", ((Type_Class)obj)->name->value);
+        fprintf(stderr, "Class class: %ls\n", ((Type_Class)obj)->name->value);
         return;
     }
-    printf("%p Class: %p %ls\n", obj, class, class->name->value);
+    fprintf(stderr, "%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
 /* ========================================================================= */

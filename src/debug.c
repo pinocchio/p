@@ -5,16 +5,16 @@
 
 
 void help() {
-    printf("    at              (Object, uns_int)      \n");
-    printf("    atn             (Object, wchar_t *)    \n");
-    printf("    atX             (Object, count, idx...)\n");
-    printf("    class           (Object)               \n");
-    printf("    i,inspect       (Object)               \n");
-    printf("    inspect_at      (Object, uns_int)      \n");
-    printf("    inspect_atn     (Object, wchar_t *)    \n");
-    printf("    methods         (Object)               \n");
-    printf("    print_EXP                              \n");
-    printf("    sends                                  \n");
+    fprintf(stderr, "    at              (Object, uns_int)      \n");
+    fprintf(stderr, "    atn             (Object, wchar_t *)    \n");
+    fprintf(stderr, "    atX             (Object, count, idx...)\n");
+    fprintf(stderr, "    class           (Object)               \n");
+    fprintf(stderr, "    i,inspect       (Object)               \n");
+    fprintf(stderr, "    inspect_at      (Object, uns_int)      \n");
+    fprintf(stderr, "    inspect_atn     (Object, wchar_t *)    \n");
+    fprintf(stderr, "    methods         (Object)               \n");
+    fprintf(stderr, "    print_EXP                              \n");
+    fprintf(stderr, "    sends                                  \n");
 }
 
 void h() {
@@ -27,9 +27,9 @@ void _indent_(uns_int i)
     uns_int todo = 0;
     while (todo++ != i) {
         if (todo % 4) {
-            printf("  ");
+            fprintf(stderr, "  ");
         } else {
-            printf("| ");
+            fprintf(stderr, "| ");
         }
     }
 }
@@ -43,7 +43,7 @@ void print_EXP()
         if (c > (Object)10000) {
             print_Class(c);
         } else {
-            printf("%"F_I"i\n", (uns_int)c);
+            fprintf(stderr, "%"F_I"i\n", (uns_int)c);
         }
     }
 }
@@ -52,9 +52,9 @@ void print_Symbol(Object s)
 {
     Object tag = GETTAG(s);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        printf("L\"%ls\"\n", ((Type_Symbol)s)->value);
+        fprintf(stderr, "L\"%ls\"\n", ((Type_Symbol)s)->value);
     } else {
-        printf("Not a symbol: %p\n", s);
+        fprintf(stderr, "Not a symbol: %p\n", s);
         print_Class(s);
     }
 }
@@ -88,7 +88,7 @@ void sends()
 }
 
 
-Object atn(Object o, wchar_t * s)
+Object atn(Object o, const wchar_t * s)
 {
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
@@ -100,7 +100,7 @@ Object atn(Object o, wchar_t * s)
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
         }
-        assert(NULL, printf("Var not found: %ls\n", s););
+        assert(NULL, fprintf(stderr, "Var not found: %ls\n", s););
     }
     if (TAG_IS_LAYOUT(tag, Array)) {
         uns_int size = ((Type_Array)tag)->size;
@@ -111,9 +111,9 @@ Object atn(Object o, wchar_t * s)
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Array)o)->values[i];
         }
-        assert(NULL, printf("Var not found: %ls\n", s););
+        assert(NULL, fprintf(stderr, "Var not found: %ls\n", s););
     }
-    assert(NULL, printf("Non-indexable object\n"););
+    assert(NULL, fprintf(stderr, "Non-indexable object\n"););
     return NULL;
 }
 
@@ -155,7 +155,7 @@ Object at(Object o, uns_int i)
         assert0(i < size + isize);
         return ((Type_Array)o)->values[i];
     }
-    assert(NULL, printf("Non-indexable object\n"););
+    assert(NULL, fprintf(stderr, "Non-indexable object\n"););
     return NULL;
 }
 
@@ -174,47 +174,47 @@ Object atx(Object o, uns_int argc, ...)
 void shallow_inspect(Object o)
 {
     if (o == NULL) {
-        printf("NULL object\n");
+        fprintf(stderr, "NULL object\n");
         return;
     }
     if (o < (Object)100000) {
-        printf("Object probably uns_int: %"F_I"u\n", (uns_int)o);
+        fprintf(stderr, "Object probably uns_int: %"F_I"u\n", (uns_int)o);
         return;
     } 
     if (HEADER(o) == NULL) {
-        printf("Object with NULL class\n");
+        fprintf(stderr, "Object with NULL class\n");
         return;
     }
     if (o == Nil) {
-        printf("nil\n");
+        fprintf(stderr, "nil\n");
         return;
     }
     if (o == (Object)True) {
-        printf("true\n");
+        fprintf(stderr, "true\n");
         return;
     }
     if (o == (Object)False) {
-        printf("false\n");
+        fprintf(stderr, "false\n");
         return;
     }
     Type_Class cls = HEADER(o);
 
     if (HEADER(cls) == Metaclass) {
-        printf("%ls", ((Type_Class)o)->name->value);
+        fprintf(stderr, "%ls", ((Type_Class)o)->name->value);
     } else {
-        printf("Instance of %ls", cls->name->value);
+        fprintf(stderr, "Instance of %ls", cls->name->value);
     }
 
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        printf(": '%ls'\n", ((Type_Symbol)o)->value);
+        fprintf(stderr, ": '%ls'\n", ((Type_Symbol)o)->value);
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
-        printf(": %i\n", ((Type_SmallInt)o)->value);
+        fprintf(stderr, ": %i\n", ((Type_SmallInt)o)->value);
         return;
     }
-    printf("\n");
+    fprintf(stderr, "\n");
 }
 
 void inspect_dict(Object o)
@@ -230,7 +230,7 @@ void inspect_dict(Object o)
         for (j = 0; j < bucket->size; j+=2) {
             Type_Symbol key = (Type_Symbol)bucket->values[j];
             if (key == (Type_Symbol)Nil) { break; }
-            printf("%"F_I"u %25ls -> ", idx++, key->value);
+            fprintf(stderr, "%"F_I"u %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }
     }
@@ -252,7 +252,7 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
-            printf("%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fprintf(stderr, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
         return;
@@ -264,11 +264,11 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
-            printf("%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fprintf(stderr, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
-            printf("%i:\t", i);
+            fprintf(stderr, "%i:\t", i);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         return;
@@ -291,12 +291,12 @@ void i_at(Object o, uns_int i) {
 }
 
 
-void inspect_atn(Object o, wchar_t * s)
+void inspect_atn(Object o, const wchar_t * s)
 {
     inspect(atn(o, s));
 }
 
-void i_atn(Object o, wchar_t * s) {
+void i_atn(Object o, const wchar_t * s) {
     return inspect_atn(o, s);
 }
 
