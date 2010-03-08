@@ -173,10 +173,10 @@ NATIVE0(IO_File_readAll)
 
 Type_String IO_File_readLine(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
-    wchar_t chr[100];
+    wchar_t chr[1024];
     int i;
-// TODO implement growing of chr
-    for (i = 0; i < 100; i++) {
+    // TODO implement growing of chr
+    for (i = 0; i < 1024; i++) {
         IO_File_readCharacter(file, &chr[i]);
         if (chr[i] == L'\n') {
             break;
