@@ -61,6 +61,8 @@ void pre_init_Type_Layout()
     Type_LongLayout_Class->layout       = empty_object_layout;
     Type_BytesLayout_Class->layout      = empty_object_layout;
     Type_FileLayout_Class->layout       = empty_object_layout;
+
+    Type_SmallInt_Class->layout  = create_layout(0, INT);
 }
 
 Object create_object_layout(uns_int size, va_list args)

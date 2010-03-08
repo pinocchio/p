@@ -11,8 +11,8 @@ DECLARE_CLASS(Type_Dictionary);
 Type_Dictionary new_Type_Dictionary()
 {
     NEW_OBJECT(Type_Dictionary);
-    result->size    = 0;
-    result->ratio   = 0.6;
+    result->size  = new_Type_SmallInt(0);
+    result->ratio = 0.6;
     result->data  = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
@@ -140,7 +140,7 @@ static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
         }
     }
     Bucket_grow(bucketp);
-    bucket = *bucketp;
+    bucket              = *bucketp;
     bucket->values[i]   = key;
     bucket->values[i+1] = value;
     return 1;
@@ -152,37 +152,38 @@ static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
 
 static int Type_Dictionary_grow_check(Type_Dictionary self)
 {
-    self->size += 1;
-    float amount = self->size;
-    float size = self->data->size;
+    uns_int self_size = unwrap_int((Object)self->size);
+    self->size        = new_Type_SmallInt(self_size + 1);
+    float amount      = self_size + 1;
+    float size        = self->data->size;
     return amount / size > self->ratio;
 }
 
 static void Type_Dictionary_quick_check_grow(Type_Dictionary self)
 {
-    if (Type_Dictionary_grow_check(self)) {
-        Type_Array old = self->data;
-        self->data = new_Type_Array_withAll(old->size << 1, (Object)Nil);
-        self->size = 0;
-        int i;
-        for (i = 0; i < old->size; i++) {
-            Type_Array bucket = (Type_Array)old->values[i];
-            if (bucket == (Type_Array)Nil) { continue; }
-            int j;
-            for (j = 0; j < bucket->size; j=j+2) {
-                Object key = bucket->values[j];
-                if (key == (Object)Nil) { break; }
-                Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
-            }
-            
+    if (!Type_Dictionary_grow_check(self)) { return; }
+
+    Type_Array old = self->data;
+    self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+    self->size     = new_Type_SmallInt(0);
+    int i;
+    for (i = 0; i < old->size; i++) {
+        Type_Array bucket = (Type_Array)old->values[i];
+        if (bucket == (Type_Array)Nil) { continue; }
+        int j;
+        for (j = 0; j < bucket->size; j=j+2) {
+            Object key = bucket->values[j];
+            if (key == (Object)Nil) { break; }
+            Type_Dictionary_quick_store(self, key, bucket->values[j+1]);
         }
+        
     }
 }
 
 void Type_Dictionary_quick_store(Type_Dictionary self,
                                  Object key, Object value)
 {
-    int hash = get_hash(self, key);
+    int hash             = get_hash(self, key);
     Type_Array * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Type_Array)Nil) {
         *bucketp = new_bucket();
@@ -233,9 +234,9 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 
 void CNT_bucket_lookup()
 {
-    Object boolean = peek_EXP(0);
+    Object boolean    = peek_EXP(0);
     Type_Array bucket = (Type_Array)peek_EXP(1);
-    uns_int idx = (uns_int)peek_EXP(2);
+    uns_int idx       = (uns_int)peek_EXP(2);
     
     if (boolean == (Object)True) {
         zapn_EXP(4);
@@ -262,7 +263,7 @@ void CNT_bucket_lookup()
 
 static void bucket_do_store(Type_Array bucket, uns_int idx, uns_int addition)
 {
-    Object value = peek_EXP(3);
+    Object value          = peek_EXP(3);
     bucket->values[idx+1] = value;
     zapn_EXP(3);
     poke_EXP(0, (Object)addition);
@@ -342,9 +343,9 @@ static void Bucket_lookup(Type_Array bucket, Object key)
 static void CNT_bucket_rehash();
 static void CNT_bucket_rehash_end()
 {
-    uns_int idx          = (uns_int)peek_EXP(0);
-    Type_Array bucket    = (Type_Array)peek_EXP(1);
-    Object key           = bucket->values[idx];
+    uns_int idx       = (uns_int)peek_EXP(0);
+    Type_Array bucket = (Type_Array)peek_EXP(1);
+    Object key        = bucket->values[idx];
     idx += 2;
 
     if (idx >= bucket->size || (key = bucket->values[idx]) == (Object)Nil) {
@@ -404,9 +405,9 @@ static CNT(dict_grow_end)
 
 static void CNT_dict_grow()
 {
-    uns_int idx = (uns_int)peek_EXP(1);
+    uns_int idx    = (uns_int)peek_EXP(1);
     Type_Array old = (Type_Array)peek_EXP(2);
-    Object bucket = old->values[idx];
+    Object bucket  = old->values[idx];
     if (idx == 0) {
         poke_CNT(dict_grow_end);
     } else {
@@ -429,8 +430,8 @@ static void CNT_dict_grow()
 static void Type_Dictionary_grow(Type_Dictionary self)
 {
     Type_Array old = self->data;
-    self->data = new_Type_Array_withAll(old->size << 1, (Object)Nil);
-    self->size = 0;
+    self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
+    self->size     = new_Type_SmallInt(0);
     
     push_CNT(dict_grow);
     claim_EXP(3);

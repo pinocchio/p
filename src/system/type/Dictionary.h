@@ -9,9 +9,9 @@
 #define TYPE_DICTIONARY_VARS L"layout", L"ratio", L"data"
 
 struct Type_Dictionary_t {
-    uns_int     size;
-    float       ratio;
-    Type_Array  data;
+    Type_SmallInt size;
+    Type_Array    data;
+    float         ratio;
 };
 
 CREATE_INITIALIZERS(Type_Dictionary)

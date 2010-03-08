@@ -219,10 +219,10 @@ int main(int argc, const char ** argv)
 
     #ifdef TEST
     run_tests();
-    run_FibTest();
-    #endif
-
+    //run_FibTest();
+    #else // TEST
     Eval_Send1(Interpretation_Interpreter_Class, SMB_main_, (Object)get_args(argc, argv));
+    #endif // TEST
     
     return EXIT_SUCCESS;
 }
