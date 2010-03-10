@@ -21,82 +21,81 @@ def createCHSourcesAt(path)
     sourceC = File.open("#{path}.c", File::WRONLY|File::EXCL|File::CREAT)
     pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi", File::WRONLY|File::EXCL|File::APPEND)
     
-    sourceT = File.open(path+"Test.ci", File::WRONLY|File::EXCL|File::CREAT)
+    # ========================================================================
     
-    sourceH.puts "#ifndef #{guard}"
-    sourceH.puts "#define #{guard}"
-    sourceH.puts
-    sourceH.puts "#include <pinocchio.h>" 
-    sourceH.puts
-    sourceH.puts separator
-    sourceH.puts
-    sourceH.puts "struct #{fullName}_t {"
-    sourceH.puts "    #error \"TODO fill out struct\""
-    sourceH.puts "};"
-    sourceH.puts
-    sourceH.puts "CREATE_INITIALIZERS(#{fullName})"
-    sourceH.puts "extern #{fullName} new_#{fullName}();"
-    sourceH.puts
-    sourceH.puts separator
-    sourceH.puts
-    sourceH.puts separator
-    sourceH.puts
-    sourceH.puts "#endif // #{guard}"
-    sourceH.close
+    sourceH puts <<HEADER
+#ifndef #{guard}
+#define #{guard}
 
+#include <pinocchio.h> 
+
+#{separator}
+
+define #{fullName.upcase}_SIZE 
+define #{fullName.upcase}_VARS 
+
+struct #{fullName}_t {
+    #error "TODO fill out struct"
+};"
+
+CREATE_INITIALIZERS(#{fullName})
+extern #{fullName} new_#{fullName}();
+
+#{separator}
+
+#{separator}
+
+#endif // #{guard}"
+HEADER
+    sourceH.close
+    
+    # ========================================================================
+
+    sourceC.puts <<CSOURCE
+#include <stdlib.h>
+#include <stdio.h>
+#include <#{path}.h>
+
+#{separator}
+
+DECLARE_CLASS(#{fullName});
+
+#{separator}
+
+#{fullName} new_#{fullName}()
+{
+    #error "TODO fill in default C constructor"
+}
+
+void pre_init_#{fullName}()
+{
+    #{fullName}_Class = new_Class_named((Object)Type_Object_Class, L"#{fullName}");
+    REFER_TO(#{fullName});
+}
+
+#{separator}
+
+// NATIVES GO HERE
+
+#{separator}
+
+void post_init_#{fullName}()
+{
+
+}
+CSOURCE
+    sourceC.close
+    
+    # ========================================================================
+    
     pinocchioTypeHI.puts "TYPE(#{fullName});"
     pinocchioTypeHI.close
 
     pinocchioTypeIncludeHI.puts "#include <#{path}.h>"
     pinocchioTypeIncludeHI.close
 
-    sourceC.puts
-    sourceC.puts "#include <stdlib.h>"
-    sourceC.puts "#include <stdio.h>"
-    sourceC.puts "#include <#{path}.h>"
-    sourceC.puts 
-    sourceC.puts separator
-    sourceC.puts 
-    sourceC.puts "Type_Class #{fullName}_Class;"
-    sourceC.puts 
-    sourceC.puts separator
-    sourceC.puts 
-    sourceC.puts "void pre_init_#{fullName}()"
-    sourceC.puts "{"
-    sourceC.puts "    #{fullName}_Class = new_Class_named((Object)Type_Object_Class, L\"#{fullName}\");"
-    sourceC.puts "}"
-    sourceC.puts 
-    sourceC.puts separator
-    sourceC.puts 
-    sourceC.puts 
-    sourceC.puts 
-    sourceC.puts separator
-    sourceC.puts 
-    sourceC.puts "void post_init_#{fullName}()"
-    sourceC.puts "{"
-    sourceC.puts
-    sourceC.puts "}"
-    sourceC.close
-
-    sourceT.puts 
-    sourceT.puts "#define #{fullName.upcase}_TEST_SETUP \\" 
-    sourceT.puts "    #{fullName} #{name.downcase} = new_#{fullName}(); \\"
-    sourceT.puts "    Object result;"
-    sourceT.puts 
-    sourceT.puts separator 
-    sourceT.puts 
-    sourceT.puts "void test_#{fullName.upcase}_example() {"
-    sourceT.puts " #error Fill the tests"
-    sourceT.puts "}"
-    sourceT.puts 
-    sourceT.puts separator
-    sourceT.puts 
-    sourceT.puts "TEST_SUITE(#{fullName}," 
-    sourceT.puts "{" 
-    sourceT.puts "   RUN_TEST(#{fullName.upcase}_example);"
-    sourceT.puts "})"
-    sourceT.puts 
-
+    # ========================================================================
+    
     File.open("pinocchioPreInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
         file.puts "pre_init_#{fullName}();"
     end

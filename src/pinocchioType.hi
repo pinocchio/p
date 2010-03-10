@@ -30,3 +30,4 @@ TYPE(Organization_ClassReference);
 TYPE(AST_InlineCache);
 TYPE(Runtime_InlineCache);
 TYPE(Runtime_Message);
+TYPE(._Type_Float);
