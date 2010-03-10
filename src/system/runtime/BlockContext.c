@@ -22,6 +22,7 @@ static Runtime_BlockContext make_context(uns_int size)
     NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
     return result;
 }
+
 Runtime_BlockContext optain_context(uns_int size)
 {
     if (size >= context_cache->size) { return make_context(size); }
@@ -34,14 +35,14 @@ Runtime_BlockContext optain_context(uns_int size)
 
 void free_context(Runtime_BlockContext context)
 {
-    uns_int size = context_locals(context)->size;
+    uns_int size          = context_locals(context)->size;
     if (size >= context_cache->size) { return; }
-    Object next = context_cache->values[size];
-    context->closure = (Runtime_BlockClosure)Nil;
+    Object next           = context_cache->values[size];
+    context->closure      = (Runtime_BlockClosure)Nil;
     context->home_context = (Runtime_MethodContext)Nil;
     context->parent_frame = (Runtime_BlockContext)next;
     context->parent_scope = (Runtime_BlockContext)Nil;
-    context->unused  = Nil;
+    context->unused       = Nil;
     int i;
     for (i = 0; i < size; i++) {
         context_locals(context)->values[i] = Nil;
