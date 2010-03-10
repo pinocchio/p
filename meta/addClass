@@ -8,50 +8,54 @@ def create_dirname(name)
 end
 
 def createCHSourcesAt(path)
-    separator = "/* ========================================================================= */"
-    dir = File.dirname path
-    name = File.basename path
-    dirname = File.basename dir
+    separator = "/* #{'=' * (79-6) } */"
+    dir      = File.dirname path
+    name     = File.basename path
+    dirname  = File.basename dir
     fullName = "#{create_dirname(dirname)}_#{name}"
-    guard = "#{dirname.upcase}_#{name.upcase}_H"
+    guard    = "#{dirname.upcase}_#{name.upcase}_H"
 
     # create the file only if it doesn't exist yet
-    sourceH = File.open("#{path}.h", File::WRONLY|File::EXCL|File::CREAT)
-    pinocchioTypeHI = File.open("pinocchioType.hi", File::WRONLY|File::EXCL|File::APPEND)
-    sourceC = File.open("#{path}.c", File::WRONLY|File::EXCL|File::CREAT)
-    pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi", File::WRONLY|File::EXCL|File::APPEND)
+    sourceH                = File.open("#{path}.h",
+                                       File::WRONLY|File::EXCL|File::CREAT)
+    pinocchioTypeHI        = File.open("pinocchioType.hi",
+                                       File::WRONLY|File::EXCL|File::APPEND)
+    sourceC                = File.open("#{path}.c",
+                                       File::WRONLY|File::EXCL|File::CREAT)
+    pinocchioTypeIncludeHI = File.open("pinocchioTypeInclude.hi",
+                                       File::WRONLY|File::EXCL|File::APPEND)
     
     # ========================================================================
     
-    sourceH puts <<HEADER
+    sourceH.puts <<CHEADER
 #ifndef #{guard}
 #define #{guard}
 
-#include <pinocchio.h> 
+#include <pinocchio.h>
 
 #{separator}
 
-define #{fullName.upcase}_SIZE 
-define #{fullName.upcase}_VARS 
+define #{fullName.upcase}_SIZE
+define #{fullName.upcase}_VARS
 
 struct #{fullName}_t {
     #error "TODO fill out struct"
-};"
+};
 
-CREATE_INITIALIZERS(#{fullName})
+CREATE_INITIALIZERS(#{fullName});
 extern #{fullName} new_#{fullName}();
 
 #{separator}
 
 #{separator}
 
-#endif // #{guard}"
-HEADER
+#endif // #{guard}
+CHEADER
     sourceH.close
     
     # ========================================================================
 
-    sourceC.puts <<CSOURCE
+    sourceC.puts <<-CSOURCE
 #include <stdlib.h>
 #include <stdio.h>
 #include <#{path}.h>

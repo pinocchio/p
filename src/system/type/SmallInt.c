@@ -68,7 +68,7 @@ Type_SmallInt_BINARY_OPERATION(or_,         |);
 NATIVE1(Type_SmallInt##_##name)\
     Object w_arg = NATIVE_ARG(0);\
     if (HEADER(w_arg) == Type_SmallInt_Class) {\
-        Type_SmallInt number = ((Type_SmallInt) self);\
+        Type_SmallInt number      = ((Type_SmallInt) self);\
         Type_SmallInt otherNumber = (Type_SmallInt)w_arg; \
         if (number->value op otherNumber->value) {\
             RETURN_FROM_NATIVE(True);\

@@ -21,14 +21,6 @@ IO_File StandardError;
 
 /* ========================================================================= */
 
-char* unicode_to_ascii(const wchar_t* str) {
-    int len = wcslen(str);
-    char* charname = (char*)PALLOC(sizeof(char[len]));
-    assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
-    return charname;
-}
-
-/* ========================================================================= */
 
 IO_File new_IO_ReadFile()
 {

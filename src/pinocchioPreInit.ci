@@ -35,3 +35,4 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_Runtime_Message();
+pre_init_Type_Float();
