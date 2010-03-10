@@ -25,6 +25,7 @@ typedef enum Type_Tag {
     CHAR,
     WORDS,
     INT,
+    FLOAT,
     BYTES,
     LONG,
     FILETAG,

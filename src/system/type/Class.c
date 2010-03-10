@@ -233,17 +233,17 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     assert0(msg != Nil);
 
     #ifdef DEBUG
-    Type_Symbol clsname;
-    if (HEADER(class) != (Object)Metaclass) {
-        clsname = Type_String_concat_(((Type_Class)class)->name,
-                                      new_Type_String(L">>"));
-    } else {
-        clsname = Type_String_concat_(((Type_Class)self)->name,
-                                      new_Type_String(L" class>>"));
-    }
-    Type_Symbol msgname = (Type_Symbol)msg;
-    Type_Symbol method = Type_String_concat_(clsname, msgname);
-    LOG("%ls\n", method->value);
+    // Type_Symbol clsname;
+    // if (HEADER(class) != Metaclass) {
+    //     clsname = Type_String_concat_(((Type_Class)class)->name,
+    //                                   new_Type_String(L">>"));
+    // } else {
+    //     clsname = Type_String_concat_(((Type_Class)self)->name,
+    //                                   new_Type_String(L" class>>"));
+    // }
+    // Type_Symbol msgname = (Type_Symbol)msg;
+    // Type_Symbol method = Type_String_concat_(clsname, msgname);
+    // LOG("%ls\n", method->value);
     #endif // DEBUG
     
     /* Monomorphic inline cache */

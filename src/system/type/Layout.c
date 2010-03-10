@@ -42,7 +42,7 @@ void pre_init_Type_Layout()
     Type_CharacterLayout_Class = new_Bootstrapping_Class();
     Type_WordsLayout_Class     = new_Bootstrapping_Class();
     Type_IntLayout_Class       = new_Bootstrapping_Class();
-    Type_FloatLayout_Class       = new_Bootstrapping_Class();
+    Type_FloatLayout_Class     = new_Bootstrapping_Class();
     Type_LongLayout_Class      = new_Bootstrapping_Class();
     Type_BytesLayout_Class     = new_Bootstrapping_Class();
     Type_FileLayout_Class      = new_Bootstrapping_Class();
@@ -67,7 +67,7 @@ void pre_init_Type_Layout()
     Type_BytesLayout_Class->layout      = empty_object_layout;
     Type_FileLayout_Class->layout       = empty_object_layout;
 
-    Type_SmallInt_Class->layout  = create_layout(0, INT);
+    Type_SmallInt_Class->layout  = int_layout;
 }
 
 Object create_object_layout(uns_int size, va_list args)
@@ -115,38 +115,20 @@ Object create_layout(uns_int size, Type_Tag tag, ...)
 
 /* ========================================================================= */
 
-#define INIT_TYPE_LAYOUT(name)\
-    Type##_##name##Layout_Class->name            = new_Type_Symbol(L#name"Layout");\
-    Type##_##name##Layout_Class->methods         = new_Type_Dictionary();\
-    HEADER(Type##_##name##Layout_Class)->methods = new_Type_Dictionary();\
-    HEADER(Type##_##name##Layout_Class)->layout  = HEADER(Type_Object_Class)->layout;
+#define INIT_TYPE_LAYOUT(layout_name)\
+    Type_##layout_name##Layout_Class->name            = new_Type_Symbol(L""#layout_name"Layout");\
+    Type_##layout_name##Layout_Class->methods         = new_Type_Dictionary();\
+    HEADER(Type_##layout_name##Layout_Class)->methods = new_Type_Dictionary();\
+    HEADER(Type_##layout_name##Layout_Class)->layout  = HEADER(Type_Object_Class)->layout;
 
 
 void post_init_Type_Layout()
-{
-    Type_ObjectLayout_Class->name            = new_Type_Symbol(L"ObjectLayout");
-    Type_ObjectLayout_Class->methods         = new_Type_Dictionary();
-    HEADER(Type_ObjectLayout_Class)->methods = new_Type_Dictionary();
-    HEADER(Type_ObjectLayout_Class)->layout  = HEADER(Type_Object_Class)->layout;
-    
-    Type_ArrayLayout_Class->name             = new_Type_Symbol(L"ArrayLayout");
-    Type_ArrayLayout_Class->methods          = new_Type_Dictionary();
-    HEADER(Type_ArrayLayout_Class)->methods  = new_Type_Dictionary();
-    HEADER(Type_ArrayLayout_Class)->layout   = HEADER(Type_Object_Class)->layout;
-    
-    Type_IntLayout_Class->name               = new_Type_Symbol(L"IntLayout");
-    Type_IntLayout_Class->methods            = new_Type_Dictionary();
-    HEADER(Type_IntLayout_Class)->methods    = new_Type_Dictionary();
-    HEADER(Type_IntLayout_Class)->layout     = HEADER(Type_Object_Class)->layout;
-    
-    Type_FloatLayout_Class->name             = new_Type_Symbol(L"FloatLayout");
-    Type_FloatLayout_Class->methods          = new_Type_Dictionary();
-    HEADER(Type_FloatLayout_Class)->methods  = new_Type_Dictionary();
-    HEADER(Type_FloatLayout_Class)->layout   = HEADER(Type_Object_Class)->layout;
-    
-    Type_WordsLayout_Class->name             = new_Type_Symbol(L"WordsLayout");
-    Type_WordsLayout_Class->methods          = new_Type_Dictionary();
-    HEADER(Type_WordsLayout_Class)->methods  = new_Type_Dictionary();
-    HEADER(Type_WordsLayout_Class)->layout   = HEADER(Type_Object_Class)->layout;
+{   
+    INIT_TYPE_LAYOUT(Object);
+    INIT_TYPE_LAYOUT(Int);
+    INIT_TYPE_LAYOUT(Float);
+    INIT_TYPE_LAYOUT(Words);
+    INIT_TYPE_LAYOUT(Character);
+    INIT_TYPE_LAYOUT(Array);
     // TODO fill in the bootstrapping classes
 }
