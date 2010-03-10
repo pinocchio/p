@@ -4,11 +4,11 @@
 
 /* ========================================================================= */
 
-#define CONTEXT_CACHE_SIZE 124
+#define CONTEXT_CACHE_SIZE 128
 
 Type_Class Runtime_BlockContext_Class;
 static Object _Env_;
-static Type_Array context_cache;
+static Type_Array unused_contexts;
 
 /* ========================================================================= */
 
@@ -27,11 +27,17 @@ Runtime_BlockContext optain_context(uns_int size)
 {
     return make_context(size);
     /*
-    if (size >= context_cache->size) { return make_context(size); }
+    if (size >= unused_cache->size) { return make_context(size); }
     Runtime_BlockContext context =
-        (Runtime_BlockContext)context_cache->values[size];
-    if ((Object)context == Nil) { return make_context(size); }
-    context_cache->values[size] = (Object)context->parent_frame;
+        (Runtime_BlockContext)unused_cache->values[size];
+    if ((Object)context == Nil) {
+        gc();
+        context = (Runtime_BlockContext)unused_cache->values[size];
+        if ((Object)context == Nil) {
+            return make_context(size);
+        }
+    }
+    unused_cache->values[size] = (Object)context->parent_frame;
     return context;
     */
 }
@@ -39,18 +45,10 @@ Runtime_BlockContext optain_context(uns_int size)
 void free_context(Runtime_BlockContext context)
 {
     uns_int size          = context_locals(context)->size;
-    if (size >= context_cache->size) { return; }
-    Object next           = context_cache->values[size];
-    context->closure      = (Runtime_BlockClosure)Nil;
-    context->home_context = (Runtime_MethodContext)Nil;
+    if (size >= unused_contexts->size) { return; }
+    Object next           = unused_contexts->values[size];
     context->parent_frame = (Runtime_BlockContext)next;
-    context->parent_scope = (Runtime_BlockContext)Nil;
-    context->unused       = Nil;
-    int i;
-    for (i = 0; i < size; i++) {
-        context_locals(context)->values[i] = Nil;
-    }
-    context_cache->values[size] = (Object)context;
+    unused_contexts->values[size] = (Object)context;
 }
 
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
@@ -141,5 +139,5 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
 
 void post_init_Runtime_BlockContext()
 {
-    context_cache = new_Type_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
+    unused_contexts = new_Type_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
 }
