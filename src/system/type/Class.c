@@ -104,7 +104,7 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         assert(NULL,
-            fprintf(stderr, "Recursive does not understand \"%ls\" (\"%"F_I"u\") in \n", 
+            fprintf(stderr, "\033[31mRecursive does not understand \"%ls\" (\"%"F_I"u\") in \033[0m\n", 
             ((Type_Symbol)message->selector)->value,
             message->size);
             print_Class(self););
