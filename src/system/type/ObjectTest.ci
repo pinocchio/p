@@ -1,7 +1,7 @@
 
 NEW_TEST(Type_Object_methods)
     assert0(Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal));
-    assert0(HEADER((AST_Native_Method)Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == AST_Native_Method_Class);
+    assert0(HEADER((AST_NativeMethod)Type_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == AST_NativeMethod_Class);
 }
 
 NEW_TEST(Type_Object_isNil)

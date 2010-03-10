@@ -7,17 +7,34 @@
 
 /* ========================================================================= */
 
-#define AST_NATIVE_METHOD_SIZE 2
-#define AST_NATIVE_METHOD_VARS L"info", L"code"
+#define AST_NATIVEMETHOD_SIZE 6
+#define AST_NATIVEMETHOD_VARS L"info", L"params", L"locals", L"package", L"annotations", L"code"
 
-struct AST_Native_Method_t {
+struct AST_NativeMethod_t {
+    uns_int         size;
     AST_Info        info;
+    Type_Array      params;
+    Type_Array      locals;
+    Object          package;
+    Type_Array      annotations;
     native          code;
+    Object          body[];
 };
 
-CREATE_INITIALIZERS(AST_Native_Method)
+CREATE_INITIALIZERS(AST_NativeMethod)
 
-extern AST_Native_Method new_AST_Native_Method(native code);
+//TODO remove once done
+extern AST_NativeMethod new_AST_NativeMethod_from(native code);
+
+extern AST_NativeMethod new_AST_NativeMethod(uns_int paramCount,
+                                 uns_int localCount,
+                                 uns_int statementCount);
+extern AST_NativeMethod new_AST_NativeMethod_withAll(uns_int paramCount,
+                                         uns_int localCount,
+                                         uns_int statementCount, ...);
+extern AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
+                                      Type_Array locals,
+                                      uns_int statementCount, ...);
 
 /* ========================================================================= */
 
@@ -36,12 +53,12 @@ void NM_##name(Object self, Type_Class class, uns_int argc) {
 
 /* ========================================================================= */
 
-extern void AST_Native_Method_invoke(AST_Native_Method method, Object self,
+extern void AST_NativeMethod_invoke(AST_NativeMethod method, Object self,
                                      Type_Class class, uns_int argc);
 
-extern void AST_Native_Method_eval(Object self, Type_Class class, Type_Array args);
+extern void AST_NativeMethod_eval(Object self, Type_Class class, Type_Array args);
 
-extern void AST_Native_Method_eval_(Object self, Type_Class class, Type_Array args);
+extern void AST_NativeMethod_eval_(Object self, Type_Class class, Type_Array args);
 
 /* ========================================================================= */
 

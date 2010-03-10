@@ -90,8 +90,8 @@ CNT(Class_super)
 
 
 void Method_invoke(Object method, Object self, Type_Class class, uns_int argc) {
-    if (HEADER(method) == AST_Native_Method_Class) {
-        AST_Native_Method_invoke((AST_Native_Method)method, self, class, argc);
+    if (HEADER(method) == AST_NativeMethod_Class) {
+        AST_NativeMethod_invoke((AST_NativeMethod)method, self, class, argc);
     } else if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
     } else {

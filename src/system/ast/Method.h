@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define AST_METHOD_SIZE 5
-#define AST_METHOD_VARS L"info", L"params", L"locals", L"package", L"annotations"
+#define AST_METHOD_SIZE 6
+#define AST_METHOD_VARS L"info", L"params", L"locals", L"package", L"annotations", L"unused"
 
 /* ========================================================================= */
 
@@ -17,6 +17,7 @@ struct AST_Method_t {
     Type_Array  locals;
     Object      package;
     Type_Array  annotations;
+    Object      unused;
     Object      body[];
 };
 

@@ -15,7 +15,7 @@ TYPE(AST_Callec);
 TYPE(AST_Variable);
 TYPE(AST_Send);
 TYPE(AST_Assign);
-TYPE(AST_Native_Method);
+TYPE(AST_NativeMethod);
 TYPE(AST_Method);
 TYPE(AST_Info);
 TYPE(Runtime_BlockContext);
