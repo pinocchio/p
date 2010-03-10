@@ -25,12 +25,15 @@ static Runtime_BlockContext make_context(uns_int size)
 
 Runtime_BlockContext optain_context(uns_int size)
 {
+    return make_context(size);
+    /*
     if (size >= context_cache->size) { return make_context(size); }
     Runtime_BlockContext context =
         (Runtime_BlockContext)context_cache->values[size];
     if ((Object)context == Nil) { return make_context(size); }
     context_cache->values[size] = (Object)context->parent_frame;
     return context;
+    */
 }
 
 void free_context(Runtime_BlockContext context)
@@ -54,6 +57,7 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
     uns_int size                = closure->code->params->size + closure->code->locals->size;
     Runtime_BlockContext result = optain_context(size);
+	HEADER(result)              = Runtime_BlockContext_Class;
     result->home_context        = closure->context->home_context;
     result->closure             = closure;
     result->pc                  = 1;

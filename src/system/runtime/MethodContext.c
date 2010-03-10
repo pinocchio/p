@@ -22,14 +22,14 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
 	Runtime_MethodContext result = (Runtime_MethodContext)optain_context(size);
-	HEADER(result) = Runtime_MethodContext_Class;
-    result->closure         = closure;
-    result->pc              = 1;
-    result->scope_id        = 0;
-    result->home_context    = result;
-    result->parent_frame    = current_env();
-    result->class           = (Object)class;
-    result->self            = self;
+	HEADER(result)       = Runtime_MethodContext_Class;
+	result->closure      = closure;
+	result->pc           = 1;
+	result->scope_id     = 0;
+	result->home_context = result;
+	result->parent_frame = current_env();
+	result->class        = (Object)class;
+	result->self         = self;
     context_locals((Runtime_BlockContext)result)->size = size;
     return result;
 }
