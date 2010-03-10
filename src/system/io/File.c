@@ -77,8 +77,8 @@ int IO_File_size(IO_File file) {
     assert1(file->file != NULL, "Trying to get size from invalid file.");
     long pos = ftell(file->file);
     rewind(file->file);
-    char cur;
     int size = 0;
+    char cur;
     while ((cur = fgetwc(file->file)) != WEOF) { size++; }
     fseek(file->file, pos, SEEK_SET);
     return size;
