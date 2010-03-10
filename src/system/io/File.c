@@ -54,16 +54,6 @@ IO_File new_IO_WriteFile_from(FILE* file)
     return result;
 }
 
-// IO_File new_IO_File_fromPath(const wchar_t * path, char * mode)
-// {
-//     IO_File result = new_IO_File();
-//     result->file = fopen(unicode_to_ascii(path), mode);
-//     result->path = new_Type_String(path);
-//     assert(result->file != NULL, 
-//         printf("Could not create File for path \"%ls\"", path));
-//     return result;
-// }
-
 void pre_init_IO_File()
 {
     // TODO check if this makes sense.
@@ -89,11 +79,7 @@ int IO_File_size(IO_File file) {
     rewind(file->file);
     char cur;
     int size = 0;
-    while ((cur = fgetc(file->file)) != EOF) {
-        if (!(cur & 1<<7) || (cur & 1<<6)) {
-            size++;
-        }
-    }
+    while ((cur = fgetwc(file->file)) != WEOF) { size++; }
     fseek(file->file, pos, SEEK_SET);
     return size;
 }
@@ -103,34 +89,7 @@ NATIVE0(IO_File_size)
 }
 
 void IO_File_readCharacter(IO_File file, wchar_t* result) {
-    assert1(file->file != NULL, "Trying to read UTF8 char from invalid file.")
-    int first;
-    assert1((first = fgetc(file->file)) != EOF, "Reading at end of file.")
-    *result = first;
-    if (first & 1<<7) {
-        assert1(first & 1<<6, "Non UTF-8 character found.");
-        int i;
-        // we can only grok UTF8 up to wchar_t/byte bytes
-        for (i = 0; i < sizeof(wchar_t) - 1; i++) {
-            if (first & 1<<(6-i)) {
-                *result <<= 6;
-                int next = fgetc(file->file);
-                assert1((next & 1<<7) && !(next & 1<<6),
-                        "Invalid follow-up byte in UTF-8 character.");
-                *result += (next ^ 1<<7);
-                continue;
-            }
-            goto finally;
-        }
-        /* In case we read sizeof(wchar_t) bytes, we check if the next one
-         * should be part of the current unicode character. If so, we fail.
-         */
-        assert1(!(first & 1<<(6-1)),
-                   "Non UTF-8 character or too big for system's Unicode.") 
-        /* If not, just continue. */
-    finally:
-        *result &= (1<<((i+1)*6-i)) - 1;
-    }
+    *result = fgetwc(file->file);
 }
 
 
