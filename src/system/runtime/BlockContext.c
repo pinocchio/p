@@ -4,6 +4,8 @@
 
 /* ========================================================================= */
 
+#define CONTEXT_CACHE_SIZE 124
+
 Type_Class Runtime_BlockContext_Class;
 static Object _Env_;
 static Type_Array context_cache;
@@ -15,14 +17,17 @@ Type_Array context_locals(Runtime_BlockContext context)
     return &context->locals;
 }
 
+static Runtime_BlockContext make_context(uns_int size)
+{
+    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
+    return result;
+}
 Runtime_BlockContext optain_context(uns_int size)
 {
+    if (size >= context_cache->size) { return make_context(size); }
     Runtime_BlockContext context =
         (Runtime_BlockContext)context_cache->values[size];
-    if ((Object)context == Nil) {
-        NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
-        return result;
-    }
+    if ((Object)context == Nil) { return make_context(size); }
     context_cache->values[size] = (Object)context->parent_frame;
     return context;
 }
@@ -30,6 +35,7 @@ Runtime_BlockContext optain_context(uns_int size)
 void free_context(Runtime_BlockContext context)
 {
     uns_int size = context_locals(context)->size;
+    if (size >= context_cache->size) { return; }
     Object next = context_cache->values[size];
     context->closure = (Runtime_BlockClosure)Nil;
     context->home_context = (Runtime_MethodContext)Nil;
@@ -130,5 +136,5 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
 
 void post_init_Runtime_BlockContext()
 {
-    context_cache = new_Type_Array_withAll(1024, Nil);
+    context_cache = new_Type_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
 }
