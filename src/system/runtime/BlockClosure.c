@@ -53,7 +53,9 @@ Type_Array activation_from_native(uns_int argc)
 }
 
 CNT(restore_env)
-    set_env((Object)current_env()->parent_frame);
+	Runtime_BlockContext current = current_env();
+    set_env((Object)current->parent_frame);
+	free_context(current);
 }
 
 static void CNT_AST_Block_continue()

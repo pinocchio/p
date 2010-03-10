@@ -35,6 +35,8 @@ extern Object Runtime_BlockContext_lookup(
     Runtime_BlockContext self, uns_int local_id, uns_int scope_id);
 extern void Runtime_BlockContext_assign(
     Runtime_BlockContext self, uns_int local_id, uns_int scope_id, Object value);
+extern Runtime_BlockContext optain_context(uns_int size);
+extern void free_context(Runtime_BlockContext context);
 
 /* ========================================================================= */
 

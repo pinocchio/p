@@ -6,6 +6,7 @@
 
 Type_Class Runtime_BlockContext_Class;
 static Object _Env_;
+static Type_Array context_cache;
 
 /* ========================================================================= */
 
@@ -14,16 +15,44 @@ Type_Array context_locals(Runtime_BlockContext context)
     return &context->locals;
 }
 
+Runtime_BlockContext optain_context(uns_int size)
+{
+    Runtime_BlockContext context =
+        (Runtime_BlockContext)context_cache->values[size];
+    if ((Object)context == Nil) {
+        NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
+        return result;
+    }
+    context_cache->values[size] = (Object)context->parent_frame;
+    return context;
+}
+
+void free_context(Runtime_BlockContext context)
+{
+    uns_int size = context_locals(context)->size;
+    Object next = context_cache->values[size];
+    context->closure = (Runtime_BlockClosure)Nil;
+    context->home_context = (Runtime_MethodContext)Nil;
+    context->parent_frame = (Runtime_BlockContext)next;
+    context->parent_scope = (Runtime_BlockContext)Nil;
+    context->unused  = Nil;
+    int i;
+    for (i = 0; i < size; i++) {
+        context_locals(context)->values[i] = Nil;
+    }
+    context_cache->values[size] = (Object)context;
+}
+
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {
-    uns_int size = closure->code->params->size + closure->code->locals->size;
-    NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
-    result->home_context    = closure->context->home_context;
-    result->closure         = closure;
-    result->pc              = 1;
-    result->parent_frame    = current_env();
+    uns_int size                = closure->code->params->size + closure->code->locals->size;
+    Runtime_BlockContext result = optain_context(size);
+    result->home_context        = closure->context->home_context;
+    result->closure             = closure;
+    result->pc                  = 1;
+    result->parent_frame        = current_env();
     Runtime_BlockContext parent = closure->context;
-    result->scope_id = parent->scope_id + 1;
+    result->scope_id            = parent->scope_id + 1;
     if (!context_locals(parent)->size) {
         parent = parent->parent_scope;
     }
@@ -101,4 +130,5 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
 
 void post_init_Runtime_BlockContext()
 {
+    context_cache = new_Type_Array_withAll(1024, Nil);
 }

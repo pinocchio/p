@@ -21,7 +21,8 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
                                                 Object self, Type_Class class)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
-    NEW_ARRAY_OBJECT(Runtime_MethodContext, Object[size]);
+	Runtime_MethodContext result = optain_context(size);
+	HEADER(result) = Runtime_MethodContext_Class;
     result->closure         = closure;
     result->pc              = 1;
     result->scope_id        = 0;
