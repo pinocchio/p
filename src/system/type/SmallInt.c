@@ -123,8 +123,8 @@ void post_init_Type_SmallInt()
     HEADER(Type_SmallInt_Class)->methods = new_Type_Dictionary();
     HEADER(Type_SmallInt_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
     
-    Type_SmallInt_Class->name    = new_Type_String(L"SmallInt");
-    Type_SmallInt_Class->methods = new_Type_Dictionary();
+    Type_SmallInt_Class->name            = new_Type_String(L"SmallInt");
+    Type_SmallInt_Class->methods         = new_Type_Dictionary();
     
     store_native_method(Type_SmallInt_Class, SMB__equal,     NM_Type_SmallInt_equals_);
     store_native_method(Type_SmallInt_Class, SMB__plus,       NM_Type_SmallInt_plus_);

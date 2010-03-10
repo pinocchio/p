@@ -5,7 +5,7 @@
 #include <system/type/Array.h>
 #include <system/runtime/MethodContext.h>
 #include <system/runtime/BlockContext.h>
-#include <system/type/Dictionary.h>
+#include <system/collection/Dictionary.h>
 #include <system/type/Class.h>
 #include <system/type/Object.h>
 #include <system/type/SmallInt.h>

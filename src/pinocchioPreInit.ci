@@ -2,6 +2,7 @@ pre_init_Type_Nil();
 pre_init_Type_Class();
 pre_init_Type_Object();
 pre_init_Type_SmallInt();
+pre_init_Type_Float();
 pre_init_Type_Layout();
 
 inter_init_Type_Class();
@@ -35,4 +36,3 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_Runtime_Message();
-pre_init_Type_Float();

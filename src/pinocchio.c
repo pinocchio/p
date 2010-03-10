@@ -218,7 +218,7 @@ int main(int argc, const char ** argv)
     init_lib();
 
     #ifdef TEST
-    //run_tests();
+    run_tests();
     run_FibTest();
     #else // TEST
     Eval_Send1(Interpretation_Interpreter_Class, SMB_main_, (Object)get_args(argc, argv));

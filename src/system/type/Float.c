@@ -18,7 +18,7 @@ Type_Float new_Type_Float(float value)
 
 void pre_init_Type_Float()
 {
-    Type_Float_Class = new_Class_named(Type_Object_Class, L"Type_Float", float_layout);
+    Type_Float_Class = new_Bootstrapping_Class();
     REFER_TO(Type_Float);
 }
 
@@ -88,6 +88,12 @@ NATIVE0(Type_Float_asString)
 
 void post_init_Type_Float()
 {
+    HEADER(Type_Float_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_Float_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
+    
+    Type_Float_Class->name            = new_Type_String(L"Float");
+    Type_Float_Class->methods         = new_Type_Dictionary();
+
     store_native_method(Type_Float_Class, SMB__equal,      NM_Type_Float_equals_);
     store_native_method(Type_Float_Class, SMB__plus,       NM_Type_Float_plus_);
     store_native_method(Type_Float_Class, SMB__minus,      NM_Type_Float_minus_);   
