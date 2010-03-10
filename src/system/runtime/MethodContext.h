@@ -13,6 +13,7 @@
 struct Runtime_MethodContext_t {
     uns_int                 pc;
     uns_int                 scope_id;
+	uns_int					captured;
     Runtime_MethodClosure   closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;

@@ -20,28 +20,45 @@ Type_Array context_locals(Runtime_BlockContext context)
 static Runtime_BlockContext make_context(uns_int size)
 {
     NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
+    result->captured = 0;
     return result;
 }
 
 Runtime_BlockContext optain_context(uns_int size)
 {
-    return make_context(size);
-    /*
-    if (size >= unused_cache->size) { return make_context(size); }
+    if (size >= unused_contexts->size) { return make_context(size); }
     Runtime_BlockContext context =
-        (Runtime_BlockContext)unused_cache->values[size];
+        (Runtime_BlockContext)unused_contexts->values[size];
     if ((Object)context == Nil) {
-        gc();
-        context = (Runtime_BlockContext)unused_cache->values[size];
+        /*gc();
+        context = (Runtime_BlockContext)unused_contexts->values[size];
         if ((Object)context == Nil) {
-            return make_context(size);
-        }
+        */
+        return make_context(size);
+        /*}*/
     }
-    unused_cache->values[size] = (Object)context->parent_frame;
+    unused_contexts->values[size] = (Object)context->parent_frame;
     return context;
-    */
 }
 
+void free_context(Runtime_BlockContext context)
+{
+    if (context->captured) { return; }
+    uns_int size = context_locals(context)->size;
+    Object next = unused_contexts->values[size];
+    context->closure = (Runtime_BlockClosure)Nil;
+    context->home_context = (Runtime_MethodContext)Nil;
+    context->parent_frame = (Runtime_BlockContext)next;
+    context->parent_scope = (Runtime_BlockContext)Nil;
+    context->unused  = Nil;
+    int i;
+    for (i = 0; i < size; i++) {
+        context_locals(context)->values[i] = Nil;
+    }
+    unused_contexts->values[size] = (Object)context;
+}
+
+/*
 void free_context(Runtime_BlockContext context)
 {
     uns_int size          = context_locals(context)->size;
@@ -50,6 +67,7 @@ void free_context(Runtime_BlockContext context)
     context->parent_frame = (Runtime_BlockContext)next;
     unused_contexts->values[size] = (Object)context;
 }
+*/
 
 Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 {

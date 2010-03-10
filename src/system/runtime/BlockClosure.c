@@ -11,8 +11,9 @@ Type_Class Runtime_BlockClosure_Class;
 
 Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, Runtime_BlockContext context) {
     NEW_OBJECT(Runtime_BlockClosure);
-    result->code    = code;
-    result->context = context;
+    result->code      = code;
+    result->context   = context;
+    context->captured = 1;
     return result;
 }
 
@@ -55,6 +56,7 @@ Type_Array activation_from_native(uns_int argc)
 CNT(restore_env)
 	Runtime_BlockContext current = current_env();
     set_env((Object)current->parent_frame);
+	free_context(current);
 }
 
 static void CNT_AST_Block_continue()
