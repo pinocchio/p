@@ -6,12 +6,12 @@
 /* ========================================================================= */
 
 #define TYPE_DICTIONARY_SIZE 3
-#define TYPE_DICTIONARY_VARS L"tally", L"data", L"maxLinear", L"ratio" 
+#define TYPE_DICTIONARY_VARS L"size", L"maxLinear", L"data", L"ratio"
 
 struct Type_Dictionary_t {
     Type_SmallInt size;
-    Type_Array    data;
     Type_SmallInt maxLinear;
+    Type_Array    data;
     float         ratio;
 };
 
