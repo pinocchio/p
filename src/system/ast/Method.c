@@ -52,7 +52,6 @@ AST_Method new_AST_Method_with(Type_Array params,
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    init_variable_array(result->annotations, result->params->size + result->locals->size);
     result->info   = empty_AST_Info;
     result->size   = statementCount;
     COPY_ARGS(statementCount, result->body);

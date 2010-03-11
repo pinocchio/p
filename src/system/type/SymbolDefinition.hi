@@ -90,3 +90,4 @@ extern Type_Symbol SMB_whileNil_;
 extern Type_Symbol SMB_whileTrue_;
 extern Type_Symbol SMB_writeAll_;
 extern Type_Symbol SMB_write_;
+extern Type_Symbol SMB_pinocchioPrimitive_module_;

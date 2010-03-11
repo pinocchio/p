@@ -57,13 +57,9 @@ static void start_eval(AST_Method method)
     push_CNT(send_Eval);
 }
 
-void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                                  Type_Class class, uns_int argc)
+void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
+                           Object self, Type_Class class, uns_int argc)
 {
-    // LOG_AST_INFO("Closure Invoke: ", closure->info);
-     
-    AST_Method method = closure->code;
-    
     assert(argc == method->params->size,
         printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
                     method->params->size, argc););
@@ -77,6 +73,22 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     activation_from_native(argc);
 
     start_eval(method);
+}
+
+void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
+                                  Type_Class class, uns_int argc)
+{
+    // LOG_AST_INFO("Closure Invoke: ", closure->info);
+     
+    AST_Method method = closure->code;
+
+    if (HEADER(method) == AST_NativeMethod_Class) {
+        return AST_NativeMethod_invoke((AST_NativeMethod)method, self, class, argc);
+    } else if (HEADER(method) == AST_Method_Class) {
+        AST_Method_invoke(closure, method, self, class, argc);
+    } else {
+        assert1(NULL, "Unknown type of method");
+    }
 }
 
 

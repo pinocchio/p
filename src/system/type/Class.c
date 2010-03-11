@@ -95,7 +95,7 @@ void Method_invoke(Object method, Object self, Type_Class class, uns_int argc) {
     } else if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
     } else {
-        assert1(NULL, "Unknown type of method");
+        assert1(NULL, "Unknown type of method installation");
     }
 }
 

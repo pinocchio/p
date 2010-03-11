@@ -23,6 +23,10 @@ cont   * _CNT_;
 
 /* ========================================================================= */
 
+Collection_Dictionary _NATIVES_;
+
+/* ========================================================================= */
+
 jmp_buf Eval_Exit;
 jmp_buf Eval_Continue;
 jmp_buf Eval_Abort;
@@ -59,6 +63,11 @@ void init_Stack(uns_int size)
 void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
+}
+
+void initialize_Natives()
+{
+    _NATIVES_ = new_Collection_Dictionary();
 }
 
 /* ========================================================================= */
@@ -214,6 +223,7 @@ int main(int argc, const char ** argv)
     setlocale(LC_ALL, "");
     #include <pinocchioPreInit.ci>
     initialize_Thread();
+    initialize_Natives();
     #include <pinocchioPostInit.ci>
     init_lib();
 

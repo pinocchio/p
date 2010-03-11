@@ -302,11 +302,24 @@ NATIVE(Collection_Dictionary_basicNew)
     poke_EXP(0, new_Collection_Dictionary());
 }
 
+Collection_Dictionary add_plugin(const wchar_t * name)
+{
+    Collection_Dictionary natives = new_Collection_Dictionary();
+    Collection_Dictionary_quick_store(_NATIVES_, new_Type_Symbol_cached(name), natives);
+    return natives;
+}
+
+void store_native(Collection_Dictionary dict, Object selector, native code)
+{
+    Collection_Dictionary_quick_store(dict, selector, (Object)code);
+}
+
 void post_init_Collection_Dictionary()
 {
     Collection_Dictionary_Class->name = new_Type_Symbol_cached(L"Dictionary");
     store_native_method(Collection_Dictionary_Class, SMB_at_,              NM_Collection_Dictionary_at_);
     store_native_method(Collection_Dictionary_Class, SMB_at_ifAbsent_,     NM_Collection_Dictionary_at_ifAbsent_);
-    store_native_method(Collection_Dictionary_Class, SMB_at_put_,          NM_Collection_Dictionary_at_put_);
     store_native_method(HEADER(Collection_Dictionary_Class), SMB_basicNew, NM_Collection_Dictionary_basicNew);
+    Collection_Dictionary natives = add_plugin(L"Dictionary");
+    store_native(natives, SMB_at_put_, NM_Collection_Dictionary_at_put_);
 }

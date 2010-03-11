@@ -90,3 +90,4 @@ Type_Symbol SMB_whileNil_;
 Type_Symbol SMB_whileTrue_;
 Type_Symbol SMB_writeAll_;
 Type_Symbol SMB_write_;
+Type_Symbol SMB_pinocchioPrimitive_module_;
