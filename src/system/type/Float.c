@@ -1,7 +1,9 @@
-#include <stdlib.h>
+#define _GNU_SOURCE
 #include <stdio.h>
+#include <stdlib.h>
 #include <system/type/Float.h>
 #include <system/type/String.h>
+
 
 /* ========================================================================= */
 
@@ -74,8 +76,10 @@ NATIVE0(Type_Float_hash)
 Type_String Type_Float_asString(float self, uns_int base)
 {
     char *chrs;
-    asprintf(&chrs, "%f", self);
+    int size = asprintf(&chrs, "%f", self);
+    assert1(size != -1, "Unable to convert float to string");
     Type_String result = new_Type_String(ascii_to_unicode(chrs));
+    free(chrs);
     return result;
 }
 
