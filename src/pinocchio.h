@@ -183,9 +183,9 @@ typedef struct Type_Nil{} Type_Nil;
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
-extern __thread Object * Double_Stack;
-extern __thread Object * _EXP_;
-extern __thread cont   * _CNT_;
+extern Object * Double_Stack;
+extern Object * _EXP_;
+extern cont   * _CNT_;
 
 extern void CNT_continue_eval();
 extern void CNT_abort_eval();

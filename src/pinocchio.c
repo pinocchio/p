@@ -17,9 +17,9 @@ void printf0(const char * string, ...) {
 
 /* ========================================================================= */
 
-__thread Object * Double_Stack;
-__thread Object * _EXP_;
-__thread cont   * _CNT_;
+Object * Double_Stack;
+Object * _EXP_;
+cont   * _CNT_;
 
 /* ========================================================================= */
 
