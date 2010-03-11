@@ -26,14 +26,9 @@ CREATE_INITIALIZERS(AST_NativeMethod)
 //TODO remove once done
 extern AST_NativeMethod new_AST_NativeMethod_from(native code);
 
-extern AST_NativeMethod new_AST_NativeMethod(uns_int paramCount,
-                                 uns_int localCount,
-                                 uns_int statementCount);
-extern AST_NativeMethod new_AST_NativeMethod_withAll(uns_int paramCount,
-                                         uns_int localCount,
-                                         uns_int statementCount, ...);
 extern AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
                                       Type_Array locals,
+                                      Type_Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */

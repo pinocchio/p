@@ -17,6 +17,7 @@ TYPE(AST_Send);
 TYPE(AST_Assign);
 TYPE(AST_NativeMethod);
 TYPE(AST_Method);
+TYPE(AST_Annotation);
 TYPE(AST_Info);
 TYPE(Runtime_BlockContext);
 TYPE(Type_CharacterTable);

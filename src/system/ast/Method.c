@@ -43,13 +43,16 @@ AST_Method new_AST_Method_withAll(uns_int paramCount,
 
 AST_Method new_AST_Method_with(Type_Array params,
                                Type_Array locals,
+                               Type_Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);
     result->params = params;
     result->locals = locals;
+    result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
+    init_variable_array(result->annotations, result->params->size + result->locals->size);
     result->info   = empty_AST_Info;
     result->size   = statementCount;
     COPY_ARGS(statementCount, result->body);

@@ -18,32 +18,15 @@ AST_NativeMethod new_AST_NativeMethod_from(native code)
     return result;
 }
 
-
-AST_NativeMethod new_AST_NativeMethod(uns_int paramCount,
-                          uns_int localCount,
-                          uns_int statementCount)
-{
-    AST_NativeMethod result =  (AST_NativeMethod) new_AST_Method(paramCount, localCount, statementCount);
-    HEADER(result) = AST_NativeMethod_Class;
-    return result;
-}
-
-AST_NativeMethod new_AST_NativeMethod_withAll(uns_int paramCount,
-                                  uns_int localCount,
-                                  uns_int statementCount, ...)
-{
-    AST_NativeMethod result = new_AST_NativeMethod(paramCount, localCount, statementCount);
-    COPY_ARGS(statementCount, result->body);
-    return result;
-}
-
 AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
                                Type_Array locals,
+                               Type_Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_NativeMethod, Object[statementCount]);
     result->params = params;
     result->locals = locals;
+    result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
     result->info   = empty_AST_Info;

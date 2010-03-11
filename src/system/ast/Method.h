@@ -30,6 +30,7 @@ extern AST_Method new_AST_Method_withAll(uns_int paramCount,
                                          uns_int statementCount, ...);
 extern AST_Method new_AST_Method_with(Type_Array params,
                                       Type_Array locals,
+                                      Type_Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */
