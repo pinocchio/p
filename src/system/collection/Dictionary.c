@@ -88,6 +88,7 @@ static void Bucket_grow(Collection_DictBucket * bucketp)
     for(i = 0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
     }
+    new_bucket->tally = new_Type_SmallInt(i);
     for(; i < new_bucket->size; i++) {
         new_bucket->values[i] = (Object)Nil;
     }
@@ -124,25 +125,24 @@ static int Bucket_quick_store(Collection_DictBucket * bucketp, Object key, Objec
 {
     int i;
     Collection_DictBucket bucket = *bucketp;
-    for (i = 0; i < bucket->size; i = i+2) {
-        if (bucket->values[i] == (Object)Nil) {
-            bucket->values[i]   = key;
-            bucket->values[i+1] = value;
-            return 1;
-        } else {
-            switch (Bucket_quick_compare_key(key, bucket->values[i]))
-            {
-                case -1: assert1(NULL, "Invalid key for quickstore!\n");
-                case 1:
-                    bucket->values[i+1] = value;
-                    return 0;
-            }
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    for (i = 0; i < tally; i = i+2) {
+        switch (Bucket_quick_compare_key(key, bucket->values[i]))
+        {
+            case -1: assert1(NULL, "Invalid key for quickstore!\n");
+            case 1:
+                bucket->values[i+1] = value;
+                return 0;
         }
     }
-    Bucket_grow(bucketp);
-    bucket              = *bucketp;
-    bucket->values[i]   = key;
-    bucket->values[i+1] = value;
+    if (tally == bucket->size) {
+        Bucket_grow(bucketp);
+        bucket = *bucketp;
+    }
+    bucket->values[tally]   = key;
+    bucket->values[tally+1] = value;
+    bucket->tally = new_Type_SmallInt(tally+2);
+    
     return 1;
 }
 
@@ -171,9 +171,9 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
         Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
         if (bucket == (Collection_DictBucket)Nil) { continue; }
         int j;
-        for (j = 0; j < bucket->size; j=j+2) {
+        uns_int tally = unwrap_int((Object)bucket->tally);
+        for (j = 0; j < tally; j=j+2) {
             Object key = bucket->values[j];
-            if (key == (Object)Nil) { break; }
             Collection_Dictionary_quick_store(self, key, bucket->values[j+1]);
         }
         
@@ -186,10 +186,11 @@ void Collection_Dictionary_quick_store(Collection_Dictionary self,
     int hash = get_hash(self, key);
     Collection_DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Collection_DictBucket)Nil) {
-        *bucketp = new_bucket();
+        *bucketp                     = new_bucket();
         Collection_DictBucket bucket = *bucketp;
-        bucket->values[0] = key;
-        bucket->values[1] = value;
+        bucket->values[0]            = key;
+        bucket->values[1]            = value;
+        bucket->tally                = new_Type_SmallInt(2);
         return Collection_Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
@@ -206,10 +207,8 @@ Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key
         return NULL;
     }
     int i;
-    for (i = 0; i < bucket->size; i=i+2) {
-        if (bucket->values[i] == (Object)Nil) {
-            return NULL;
-        }
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    for (i = 0; i < tally; i=i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
         {
             case -1: assert1(NULL, "Invalid key for quickstore!\n");
@@ -247,7 +246,8 @@ void CNT_bucket_lookup()
 
     idx += 2;
 
-    if (idx >= bucket->size || bucket->values[idx] == (Object)Nil) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (idx >= tally) {
         zapn_EXP(4);
         poke_EXP(0, NULL);
         zap_CNT();
@@ -265,6 +265,7 @@ static void bucket_do_store(Collection_DictBucket bucket, uns_int idx, uns_int a
 {
     Object value          = peek_EXP(3);
     bucket->values[idx+1] = value;
+    bucket->tally         = new_Type_SmallInt(idx+2);
     zapn_EXP(3);
     poke_EXP(0, (Object)addition);
     zap_CNT();
@@ -290,7 +291,8 @@ static void CNT_Bucket_store()
     Object key = peek_EXP(2);
     idx += 2;
 
-    if (idx >= bucket->size) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (idx >= tally) {
         Bucket_grow(bucketp);
         return bucket_store_new(*bucketp, idx, key);
     }
@@ -327,7 +329,8 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
 
 static void Bucket_lookup(Collection_DictBucket bucket, Object key)
 {
-    if (bucket->values[0] == (Object)Nil) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (tally == 0) {
         poke_EXP(0, NULL);
         return;
     }
@@ -376,10 +379,10 @@ static void CNT_bucket_rehash()
 /* ========================================================================= */
 
 CNT(lookup_push)
-    Object w_hash        = peek_EXP(0);
+    Object w_hash              = peek_EXP(0);
     Collection_Dictionary self = (Collection_Dictionary)peek_EXP(2);
-    int hash             = unwrap_hash(self, w_hash);
-    Object key           = peek_EXP(1);
+    int hash                   = unwrap_hash(self, w_hash);
+    Object key                 = peek_EXP(1);
     zapn_EXP(2);
 
     Collection_DictBucket * bucketp = get_bucketp(self, hash);
@@ -463,10 +466,11 @@ void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
 {
     Collection_DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Collection_DictBucket)Nil) { 
-        *bucketp = new_bucket();
+        *bucketp                     = new_bucket();
         Collection_DictBucket bucket = *bucketp;
-        bucket->values[0] = key;
-        bucket->values[1] = value;
+        bucket->values[0]            = key;
+        bucket->values[1]            = value;
+        bucket->tally                = new_Type_SmallInt(2);
         Collection_Dictionary_check_grow(self);
     } else {
         push_EXP((Object)self);
@@ -510,11 +514,11 @@ NATIVE2(Collection_Dictionary_at_ifAbsent_)
 }
 
 CNT(Collection_Dictionary_at_put_)
-    Object w_hash        = peek_EXP(0);
+    Object w_hash              = peek_EXP(0);
     Collection_Dictionary self = (Collection_Dictionary)peek_EXP(3);
-    int hash             = unwrap_hash(self, w_hash);
-    Object new           = peek_EXP(1);
-    Object w_index       = peek_EXP(2);
+    int hash                   = unwrap_hash(self, w_hash);
+    Object new                 = peek_EXP(1);
+    Object w_index             = peek_EXP(2);
     zapn_EXP(4);
     poke_EXP(0, new);
     Collection_Dictionary_direct_store((Collection_Dictionary)self, hash, w_index, new);
