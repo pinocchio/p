@@ -1,4 +1,5 @@
 *.o
+*.*.swp
 tags
 make.depend
 pinocchio
