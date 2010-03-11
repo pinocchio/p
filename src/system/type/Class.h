@@ -32,12 +32,12 @@ typedef enum Type_Tag {
 } Type_Tag;
 
 struct Type_Class_t {
-    Object          layout;
-    Type_Class      super;
-    Type_Dictionary methods;
-    Type_Symbol     name;
-    Object          package;
-    Object          cvars[];
+    Object                layout;
+    Type_Class            super;
+    Collection_Dictionary methods;
+    Type_Symbol           name;
+    Object                package;
+    Object                cvars[];
 };
 
 CREATE_INITIALIZERS(Type_Class)

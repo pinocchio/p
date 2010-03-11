@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-extern Type_Dictionary Symbol_Table;
+extern Collection_Dictionary Symbol_Table;
 
 struct Type_Symbol_t { 
     Type_SmallInt hash;

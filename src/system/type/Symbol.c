@@ -7,7 +7,7 @@
 /* ========================================================================= */
 
 DECLARE_CLASS(Type_Symbol);
-Type_Dictionary Symbol_Table;
+Collection_Dictionary Symbol_Table;
 
 #include <system/type/SymbolDefinition.ci>
 
@@ -16,12 +16,12 @@ Type_Dictionary Symbol_Table;
 Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
 {
     Type_Symbol result  = new_Type_String(input);
-    Object cachedSymbol = Type_Dictionary_quick_lookup(Symbol_Table, (Object)result);
+    Object cachedSymbol = Collection_Dictionary_quick_lookup(Symbol_Table, (Object)result);
     if (cachedSymbol != NULL) {
         return (Type_Symbol)cachedSymbol;
     }
     HEADER(result) = Type_Symbol_Class;
-    Type_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
+    Collection_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
     return result;
 }
 
@@ -42,7 +42,7 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
  */
 void initialize_Symbol()
 {
-    Symbol_Table = new_Type_Dictionary();
+    Symbol_Table = new_Collection_Dictionary();
     #include <system/type/SymbolInitialization.ci> 
 }
 

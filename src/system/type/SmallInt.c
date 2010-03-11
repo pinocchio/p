@@ -120,11 +120,11 @@ NATIVE0(Type_SmallInt_asCharacter)
 void post_init_Type_SmallInt()
 {
     
-    HEADER(Type_SmallInt_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_SmallInt_Class)->methods = new_Collection_Dictionary();
     HEADER(Type_SmallInt_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
     
     Type_SmallInt_Class->name            = new_Type_String(L"SmallInt");
-    Type_SmallInt_Class->methods         = new_Type_Dictionary();
+    Type_SmallInt_Class->methods         = new_Collection_Dictionary();
     
     store_native_method(Type_SmallInt_Class, SMB__equal,     NM_Type_SmallInt_equals_);
     store_native_method(Type_SmallInt_Class, SMB__plus,       NM_Type_SmallInt_plus_);
@@ -143,9 +143,9 @@ void post_init_Type_SmallInt()
     store_native_method(Type_SmallInt_Class, SMB_asString,    NM_Type_SmallInt_asString);
     store_native_method(Type_SmallInt_Class, SMB_asCharacter, NM_Type_SmallInt_asCharacter);
     
-    //assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__plus));
-    //assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__minus));
-    //assert0(Type_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__equal));
+    //assert0(Collection_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__plus));
+    //assert0(Collection_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__minus));
+    //assert0(Collection_Dictionary_lookup(Type_SmallInt_Class->methods, (Object)SMB__equal));
 }
 
 /* ========================================================================= */

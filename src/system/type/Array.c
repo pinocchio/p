@@ -14,8 +14,8 @@ Type_Array new_Type_Array_raw(uns_int c)
 {
     if (c == 0) { return empty_Type_Array; }
     Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[c]);
-    HEADER(result)      = Type_Array_Class;
-    result->size        = c;
+    HEADER(result)    = Type_Array_Class;
+    result->size      = c;
     return result;
 }
 
@@ -105,7 +105,7 @@ NATIVE2(Type_Array_instVarAt_put_)
 void post_init_Type_Array()
 {
     Type_Array_Class->name    = new_Type_Symbol_cached(L"Array"); 
-    Type_Array_Class->methods = new_Type_Dictionary();
+    Type_Array_Class->methods = new_Collection_Dictionary();
     empty_Type_Array->size    = 0;
     
     store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);

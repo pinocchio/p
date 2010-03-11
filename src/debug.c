@@ -119,7 +119,7 @@ Object atn(Object o, const wchar_t * s)
 
 Object dict_at(Object o, uns_int at)
 {
-    Type_Dictionary dict = (Type_Dictionary)o;
+    Collection_Dictionary dict = (Collection_Dictionary)o;
     uns_int ds = dict->data->size;
     uns_int i;
     uns_int idx = 0;
@@ -140,7 +140,7 @@ Object dict_at(Object o, uns_int at)
 
 Object at(Object o, uns_int i)
 {
-    if (HEADER(o) == Type_Dictionary_Class) {
+    if (HEADER(o) == Collection_Dictionary_Class) {
         return dict_at(o, i);
     }
     Object tag = GETTAG(o);
@@ -219,7 +219,7 @@ void shallow_inspect(Object o)
 
 void inspect_dict(Object o)
 {
-    Type_Dictionary dict = (Type_Dictionary)o;
+    Collection_Dictionary dict = (Collection_Dictionary)o;
     uns_int ds = dict->data->size;
     uns_int i;
     uns_int idx = 0;
@@ -242,7 +242,7 @@ void inspect(Object o)
     if (o == NULL || HEADER(o) == NULL) {
         return;
     }
-    if (HEADER(o) == Type_Dictionary_Class) {
+    if (HEADER(o) == Collection_Dictionary_Class) {
         inspect_dict(o);
         return;
     }

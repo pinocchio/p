@@ -9,7 +9,7 @@ inter_init_Type_Class();
 inter_init_Type_Object();
 
 pre_init_Type_Array();
-pre_init_Type_Dictionary();
+pre_init_Collection_Dictionary();
 pre_init_Type_String();
 pre_init_Type_Symbol();
 pre_init_AST_InstVariable();
@@ -36,3 +36,4 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_Runtime_Message();
+pre_init_Collection_Set();

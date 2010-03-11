@@ -5,19 +5,19 @@
 
 /* ========================================================================= */
 
-#define TYPE_DICTIONARY_SIZE 3
-#define TYPE_DICTIONARY_VARS L"size", L"maxLinear", L"data", L"ratio"
+#define COLLECTION_DICTIONARY_SIZE 3
+#define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"data", L"ratio"
 
-struct Type_Dictionary_t {
+struct Collection_Dictionary_t {
     Type_SmallInt size;
     Type_SmallInt maxLinear;
     Type_Array    data;
     Type_Float    ratio;
 };
 
-CREATE_INITIALIZERS(Type_Dictionary)
+CREATE_INITIALIZERS(Collection_Dictionary);
 
-Type_Dictionary new_Type_Dictionary();
+extern Collection_Dictionary new_Collection_Dictionary();
 
 /* ========================================================================= */
 
@@ -26,13 +26,13 @@ Type_Dictionary new_Type_Dictionary();
 
 /* ========================================================================= */
 
-extern Object Type_Dictionary_quick_lookup(Type_Dictionary self, Object key);
-extern void Type_Dictionary_quick_store(Type_Dictionary self,
+extern Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key);
+extern void Collection_Dictionary_quick_store(Collection_Dictionary self,
                                         Object key, Object value);
 
-extern void Type_Dictionary_direct_store(Type_Dictionary self, int hash,
+extern void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
                                          Object key, Object value);
-extern void Type_Dictionary_lookup_push();
+extern void Collection_Dictionary_lookup_push();
 
 /* ========================================================================= */
 

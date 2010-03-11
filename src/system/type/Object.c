@@ -179,11 +179,11 @@ void post_init_Type_Object()
     // put the names here, now after the Symbols_Class is initialized
     /* 
     Type_Class_Class->name   = new_Type_String(L"Type_Class");
-    Type_Class_Class->methods = new_Type_Dictionary();
+    Type_Class_Class->methods = new_Collection_Dictionary();
     */
-    HEADER(Type_Object_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_Object_Class)->methods = new_Collection_Dictionary();
     Type_Object_Class->name = new_Type_String(L"Object");
-    Type_Object_Class->methods = new_Type_Dictionary();
+    Type_Object_Class->methods = new_Collection_Dictionary();
     
     store_native_method(Type_Object_Class, SMB_size,                    NM_Type_Object_size);
     store_native_method(Type_Object_Class, SMB_at_,                     NM_Type_Array_at_);

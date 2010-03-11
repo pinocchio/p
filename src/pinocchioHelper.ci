@@ -2,8 +2,8 @@ jmp_buf Assert_Fail;
 
 void store_method_object(Type_Class class, Type_Symbol symbol, Object method)
 {
-    Type_Dictionary dict = class->methods;
-    Type_Dictionary_quick_store(dict, (Object)symbol, method);
+    Collection_Dictionary dict = class->methods;
+    Collection_Dictionary_quick_store(dict, (Object)symbol, method);
 }
 
 void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method)

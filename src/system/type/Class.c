@@ -33,10 +33,10 @@ Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaT
                                                // methods, super and layout.  
 
     metaclass->layout    = metaType;
-    metaclass->methods   = new_Type_Dictionary();
+    metaclass->methods   = new_Collection_Dictionary();
     
     Type_Class result    = (Type_Class)instantiate(metaclass);
-    result->methods      = new_Type_Dictionary();
+    result->methods      = new_Collection_Dictionary();
     Type_Class_set_superclass(result, superclass);
     result->layout       = layout;
     return result;
@@ -177,8 +177,8 @@ static void Class_lookup(Type_Class class, Object msg)
         return does_not_understand(self, class, msg, argc);
     }
     assert_class((Object)class);
-    Type_Dictionary mdict = class->methods;
-    Type_Dictionary_lookup_push(mdict, msg);
+    Collection_Dictionary mdict = class->methods;
+    Collection_Dictionary_lookup_push(mdict, msg);
 }
 
 static void Class_direct_dispatch(Object self, Type_Class class,
@@ -287,11 +287,11 @@ void print_Class(Object obj)
 
 void post_init_Type_Class()
 {
-    HEADER(Metaclass)->methods = new_Type_Dictionary();
+    HEADER(Metaclass)->methods = new_Collection_Dictionary();
     HEADER(Metaclass)->layout =
         create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
         
-    Metaclass->methods  = new_Type_Dictionary();
+    Metaclass->methods  = new_Collection_Dictionary();
     Metaclass->name     = new_Type_String(L"Metaclass");
     Behavior            = new_Class_named(Type_Object_Class,
                                 L"Behavior",

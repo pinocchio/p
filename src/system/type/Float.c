@@ -88,11 +88,11 @@ NATIVE0(Type_Float_asString)
 
 void post_init_Type_Float()
 {
-    HEADER(Type_Float_Class)->methods = new_Type_Dictionary();
+    HEADER(Type_Float_Class)->methods = new_Collection_Dictionary();
     HEADER(Type_Float_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
     
     Type_Float_Class->name            = new_Type_String(L"Float");
-    Type_Float_Class->methods         = new_Type_Dictionary();
+    Type_Float_Class->methods         = new_Collection_Dictionary();
 
     store_native_method(Type_Float_Class, SMB__equal,      NM_Type_Float_equals_);
     store_native_method(Type_Float_Class, SMB__plus,       NM_Type_Float_plus_);

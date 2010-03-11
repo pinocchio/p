@@ -118,8 +118,8 @@ Object create_layout(uns_int size, Type_Tag tag, ...)
 
 #define INIT_TYPE_LAYOUT(layout_name)\
     Type_##layout_name##Layout_Class->name            = new_Type_Symbol(L""#layout_name"Layout");\
-    Type_##layout_name##Layout_Class->methods         = new_Type_Dictionary();\
-    HEADER(Type_##layout_name##Layout_Class)->methods = new_Type_Dictionary();\
+    Type_##layout_name##Layout_Class->methods         = new_Collection_Dictionary();\
+    HEADER(Type_##layout_name##Layout_Class)->methods = new_Collection_Dictionary();\
     HEADER(Type_##layout_name##Layout_Class)->layout  = HEADER(Type_Object_Class)->layout;
 
 
