@@ -15,7 +15,7 @@ struct Collection_SetBucket_t {
 };
 
 CREATE_INITIALIZERS(Collection_SetBucket);
-extern Collection_SetBucket new_Collection_SetBucket();
+extern Collection_SetBucket new_Collection_SetBucket(uns_int size);
 
 /* ========================================================================= */
 

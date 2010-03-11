@@ -10,7 +10,7 @@ DECLARE_CLASS(Collection_SetBucket);
 
 Collection_SetBucket new_Collection_SetBucket(uns_int size)
 {
-    NEW_ARRAY_OBJECT(Collection_SetBucket, size);
+    NEW_ARRAY_OBJECT(Collection_SetBucket, Object[size]);
     result->size  = size;
     result->tally = new_Type_SmallInt(0);
     while (0 != size--) {

@@ -8,13 +8,20 @@ DECLARE_CLASS(Collection_DictBucket);
 
 /* ========================================================================= */
 
-Collection_DictBucket new_Collection_DictBucket(uns_int size)
+Collection_DictBucket new_Collection_DictBucket_raw(uns_int size)
 {
-    NEW_ARRAY_OBJECT(Collection_DictBucket, size);
+    NEW_ARRAY_OBJECT(Collection_DictBucket, Object[size]);
     result->size  = size;
     result->tally = new_Type_SmallInt(0);
-    while (0 != size--) {
-        result->values[size] = Nil;
+    return result;
+}
+
+Collection_DictBucket new_Collection_DictBucket(uns_int size)
+{
+    Collection_DictBucket result = new_Collection_DictBucket_raw(size);
+    int i;
+    for (i = 0; i < size; i++) {
+        result->values[i] = Nil;
     }
     return result;
 }

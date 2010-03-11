@@ -70,20 +70,20 @@ int unwrap_hash(Collection_Dictionary self, Object w_hash)
  * Bucket functions                                                          *
  * ========================================================================= */
 
-static Type_Array * get_bucketp(Collection_Dictionary dictionary, int hash)
+static Collection_DictBucket * get_bucketp(Collection_Dictionary dictionary, int hash)
 {
-    return (Type_Array *)&dictionary->data->values[hash];
+    return (Collection_DictBucket *)&dictionary->data->values[hash];
 }
 
-static Type_Array new_bucket()
+static Collection_DictBucket new_bucket()
 {
-    return new_Type_Array_withAll(DICTIONARY_BUCKET_SIZE * 2, Nil);
+    return new_Collection_DictBucket(DICTIONARY_BUCKET_SIZE * 2);
 }
 
-static void Bucket_grow(Type_Array * bucketp)
+static void Bucket_grow(Collection_DictBucket * bucketp)
 {
-    Type_Array old_bucket = *bucketp;
-    Type_Array new_bucket = new_Type_Array_raw(old_bucket->size << 1);
+    Collection_DictBucket old_bucket = *bucketp;
+    Collection_DictBucket new_bucket = new_Collection_DictBucket_raw(old_bucket->size << 1);
     int i;
     for(i = 0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
@@ -120,10 +120,10 @@ static int Bucket_quick_compare_key(Object inkey, Object dictkey)
     return -1;
 }
 
-static int Bucket_quick_store(Type_Array * bucketp, Object key, Object value)
+static int Bucket_quick_store(Collection_DictBucket * bucketp, Object key, Object value)
 {
     int i;
-    Type_Array bucket = *bucketp;
+    Collection_DictBucket bucket = *bucketp;
     for (i = 0; i < bucket->size; i = i+2) {
         if (bucket->values[i] == (Object)Nil) {
             bucket->values[i]   = key;
@@ -168,8 +168,8 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
     self->size     = new_Type_SmallInt(0);
     int i;
     for (i = 0; i < old->size; i++) {
-        Type_Array bucket = (Type_Array)old->values[i];
-        if (bucket == (Type_Array)Nil) { continue; }
+        Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
+        if (bucket == (Collection_DictBucket)Nil) { continue; }
         int j;
         for (j = 0; j < bucket->size; j=j+2) {
             Object key = bucket->values[j];
@@ -183,11 +183,11 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
 void Collection_Dictionary_quick_store(Collection_Dictionary self,
                                  Object key, Object value)
 {
-    int hash             = get_hash(self, key);
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) {
+    int hash = get_hash(self, key);
+    Collection_DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Collection_DictBucket)Nil) {
         *bucketp = new_bucket();
-        Type_Array bucket = *bucketp;
+        Collection_DictBucket bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
         return Collection_Dictionary_quick_check_grow(self);
@@ -200,9 +200,9 @@ void Collection_Dictionary_quick_store(Collection_Dictionary self,
 Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key)
 {
     int hash = get_hash(self, key);
-    Type_Array * bucketp = get_bucketp(self, hash);
-    Type_Array bucket = *bucketp;
-    if (bucket == (Type_Array)Nil) {
+    Collection_DictBucket * bucketp = get_bucketp(self, hash);
+    Collection_DictBucket bucket = *bucketp;
+    if (bucket == (Collection_DictBucket)Nil) {
         return NULL;
     }
     int i;
@@ -235,7 +235,7 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 void CNT_bucket_lookup()
 {
     Object boolean    = peek_EXP(0);
-    Type_Array bucket = (Type_Array)peek_EXP(1);
+    Collection_DictBucket bucket = (Collection_DictBucket)peek_EXP(1);
     uns_int idx       = (uns_int)peek_EXP(2);
     
     if (boolean == (Object)True) {
@@ -261,7 +261,7 @@ void CNT_bucket_lookup()
     Bucket_compare_key(key, bucket->values[idx]);
 }
 
-static void bucket_do_store(Type_Array bucket, uns_int idx, uns_int addition)
+static void bucket_do_store(Collection_DictBucket bucket, uns_int idx, uns_int addition)
 {
     Object value          = peek_EXP(3);
     bucket->values[idx+1] = value;
@@ -270,7 +270,7 @@ static void bucket_do_store(Type_Array bucket, uns_int idx, uns_int addition)
     zap_CNT();
 }
 
-static void bucket_store_new(Type_Array bucket, uns_int idx, Object key)
+static void bucket_store_new(Collection_DictBucket bucket, uns_int idx, Object key)
 {
     bucket->values[idx] = key;
     bucket_do_store(bucket, idx, 1); 
@@ -279,8 +279,8 @@ static void bucket_store_new(Type_Array bucket, uns_int idx, Object key)
 static void CNT_Bucket_store()
 {
     Object boolean       = pop_EXP();
-    Type_Array * bucketp = (Type_Array *)peek_EXP(0);
-    Type_Array bucket    = *bucketp;
+    Collection_DictBucket * bucketp = (Collection_DictBucket *)peek_EXP(0);
+    Collection_DictBucket bucket    = *bucketp;
     uns_int idx          = (uns_int)peek_EXP(1);
 
     if (boolean == (Object)True) {
@@ -303,10 +303,10 @@ static void CNT_Bucket_store()
     Bucket_compare_key(key, bucket->values[idx]);
 }
 
-void Bucket_store_(Type_Array * bucketp, Object key, Object value)
+void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
 {
     /* just store at the first empty location */
-    Type_Array bucket = *bucketp;
+    Collection_DictBucket bucket = *bucketp;
 
     if (bucket->values[0] == Nil) {
         bucket->values[0] = key;
@@ -325,7 +325,7 @@ void Bucket_store_(Type_Array * bucketp, Object key, Object value)
     Bucket_compare_key(key, bucket->values[0]);
 }
 
-static void Bucket_lookup(Type_Array bucket, Object key)
+static void Bucket_lookup(Collection_DictBucket bucket, Object key)
 {
     if (bucket->values[0] == (Object)Nil) {
         poke_EXP(0, NULL);
@@ -344,7 +344,7 @@ static void CNT_bucket_rehash();
 static void CNT_bucket_rehash_end()
 {
     uns_int idx       = (uns_int)peek_EXP(0);
-    Type_Array bucket = (Type_Array)peek_EXP(1);
+    Collection_DictBucket bucket = (Collection_DictBucket)peek_EXP(1);
     Object key        = bucket->values[idx];
     idx += 2;
 
@@ -366,7 +366,7 @@ static void CNT_bucket_rehash()
     int hash             = unwrap_hash(dict, w_hash);
 
     uns_int idx          = (uns_int)peek_EXP(0);
-    Type_Array bucket    = (Type_Array)peek_EXP(1);
+    Collection_DictBucket bucket    = (Collection_DictBucket)peek_EXP(1);
     Object key           = bucket->values[idx];
 
     poke_CNT(bucket_rehash_end);
@@ -382,8 +382,8 @@ CNT(lookup_push)
     Object key           = peek_EXP(1);
     zapn_EXP(2);
 
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) {
+    Collection_DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Collection_DictBucket)Nil) {
         poke_EXP(0, NULL);
         return;
     }
@@ -407,16 +407,16 @@ static void CNT_dict_grow()
 {
     uns_int idx    = (uns_int)peek_EXP(1);
     Type_Array old = (Type_Array)peek_EXP(2);
-    Object bucket  = old->values[idx];
+    Collection_DictBucket bucket  = (Collection_DictBucket)old->values[idx];
     if (idx == 0) {
         poke_CNT(dict_grow_end);
     } else {
         poke_EXP(1, idx - 1);
     }
-    if (bucket == (Object)Nil || ((Type_Array)bucket)->size == 0) {
+    if (bucket == (Collection_DictBucket)Nil || bucket->size == 0) {
         return;
     }
-    Object key = ((Type_Array)bucket)->values[0];
+    Object key = bucket->values[0];
     if (key == (Object)Nil) { return; }
 
     push_CNT(bucket_rehash);
@@ -461,10 +461,10 @@ static CNT(Collection_Dictionary_check_grow)
 void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
                                   Object key, Object value) 
 {
-    Type_Array * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Type_Array)Nil) { 
+    Collection_DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (Collection_DictBucket)Nil) { 
         *bucketp = new_bucket();
-        Type_Array bucket = *bucketp;
+        Collection_DictBucket bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
         Collection_Dictionary_check_grow(self);

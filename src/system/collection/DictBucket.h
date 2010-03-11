@@ -15,7 +15,8 @@ struct Collection_DictBucket_t {
 };
 
 CREATE_INITIALIZERS(Collection_DictBucket);
-extern Collection_DictBucket new_Collection_DictBucket();
+extern Collection_DictBucket new_Collection_DictBucket_raw(uns_int size);
+extern Collection_DictBucket new_Collection_DictBucket(uns_int size);
 
 /* ========================================================================= */
 
