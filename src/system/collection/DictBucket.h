@@ -9,7 +9,9 @@
 #define COLLECTION_DICTBUCKET_VARS L"tally"
 
 struct Collection_DictBucket_t {
-    Type_SmallInt tally;
+    uns_int 		size;
+    Type_SmallInt 	tally;
+    Object  	    values[];
 };
 
 CREATE_INITIALIZERS(Collection_DictBucket);

@@ -9,7 +9,9 @@
 #define COLLECTION_SETBUCKET_VARS L"tally"
 
 struct Collection_SetBucket_t {
-    Type_SmallInt tally;
+    uns_int 		size;
+    Type_SmallInt 	tally;
+    Object  	    values[];
 };
 
 CREATE_INITIALIZERS(Collection_SetBucket);
