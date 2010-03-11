@@ -26,7 +26,7 @@ void pre_init_Collection_Dictionary()
 
 /* ========================================================================= */
 
-int get_hash(Collection_Dictionary self, Object key)
+static int get_hash(Collection_Dictionary self, Object key)
 {
     int hash;
     Object tag = GETTAG(key);
@@ -146,7 +146,7 @@ Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key
 
 /* ========================================================================= */
 
-CNT(lookup_push)
+static CNT(lookup_push)
     Object w_hash              = peek_EXP(0);
     Collection_Dictionary self = (Collection_Dictionary)peek_EXP(2);
     int hash                   = unwrap_hash(self, w_hash);
@@ -249,13 +249,13 @@ void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
 
 /* ========================================================================= */
 
-CNT(fix_dictionary_result)
+static CNT(fix_dictionary_result)
     if (peek_EXP(0) == NULL) {
         poke_EXP(0, Nil);
     }
 }
 
-CNT(dictionary_check_absent)
+static CNT(dictionary_check_absent)
     Object result = pop_EXP();
     if (result == NULL) {
         Object block = pop_EXP();

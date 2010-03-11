@@ -180,13 +180,13 @@ static void CNT_Bucket_store()
     Object key = peek_EXP(2);
     idx += 2;
 
-    uns_int tally = unwrap_int((Object)bucket->tally);
-    if (idx >= tally) {
+    if (idx >= bucket->size) {
         Bucket_grow(bucketp);
         return bucket_store_new(*bucketp, idx, key);
     }
 
-    if (bucket->values[idx] == Nil) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (idx >= tally) {
         return bucket_store_new(bucket, idx, key); 
     }
 
@@ -199,9 +199,11 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
     /* just store at the first empty location */
     Collection_DictBucket bucket = *bucketp;
 
-    if (bucket->values[0] == Nil) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (tally == 0) {
         bucket->values[0] = key;
         bucket->values[1] = value;
+        bucket->tally = new_Type_SmallInt(2);
         push_EXP((Object)0);
         return;
     }
@@ -239,12 +241,14 @@ static void CNT_bucket_rehash_end()
     Object key        = bucket->values[idx];
     idx += 2;
 
-    if (idx >= bucket->size || (key = bucket->values[idx]) == (Object)Nil) {
+    uns_int tally = unwrap_int((Object)bucket->tally);
+    if (idx >= tally) {
         zap_CNT();
         zapn_EXP(2);
         return;
     }
-
+    
+    key = bucket->values[idx];
     poke_CNT(bucket_rehash);
     poke_EXP(0, idx);
     push_hash(key);
