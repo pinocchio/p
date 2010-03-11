@@ -36,4 +36,9 @@ extern void Collection_Dictionary_lookup_push();
 
 /* ========================================================================= */
 
+extern void push_hash(Object key);
+extern int unwrap_hash(Collection_Dictionary self, Object w_hash);
+
+/* ========================================================================= */
+
 #endif // DICTIONARY_H

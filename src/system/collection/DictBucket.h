@@ -20,6 +20,14 @@ extern Collection_DictBucket new_Collection_DictBucket(uns_int size);
 
 /* ========================================================================= */
 
+extern Collection_DictBucket new_bucket();
+extern void Bucket_lookup(Collection_DictBucket bucket, Object key);
+extern void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value);
+extern int Bucket_quick_store(Collection_DictBucket * bucketp, Object key,
+                              Object value);
+extern void CNT_bucket_rehash();
+extern int Bucket_quick_compare_key(Object inkey, Object dictkey);
+
 /* ========================================================================= */
 
 #endif // COLLECTION_DICTBUCKET_H
