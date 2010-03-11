@@ -52,6 +52,7 @@ extern #{fullName} new_#{fullName}();
 #endif // #{guard}
 CHEADER
     sourceH.close
+    puts "    created header file"
     
     # ========================================================================
 
@@ -89,6 +90,7 @@ void post_init_#{fullName}()
 }
 CSOURCE
     sourceC.close
+    puts "    create source file"
     
     # ========================================================================
     
@@ -103,10 +105,13 @@ CSOURCE
     File.open("pinocchioPreInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
         file.puts "pre_init_#{fullName}();"
     end
+    puts "    updated pinocchioPreInit.ci"
 
     File.open("pinocchioPostInit.ci", File::WRONLY|File::EXCL|File::APPEND) do |file|
         file.puts "post_init_#{fullName}();"
     end
+    puts "    updated pinocchioPostInit.ci"
+
     
     puts "Successfully created #{fullName}"
 end
