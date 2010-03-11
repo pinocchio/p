@@ -32,3 +32,5 @@ TYPE(Runtime_InlineCache);
 TYPE(Runtime_Message);
 TYPE(Type_Float);
 TYPE(Collection_Set);
+TYPE(Collection_SetBucket);
+TYPE(Collection_DictBucket);
