@@ -64,39 +64,42 @@ void AST_NativeMethod_invoke(AST_NativeMethod method, Object self,
             Object primitive_name = annotation->arguments[0];
             Object module_name    = annotation->arguments[1];
             Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
-            assert(module, fprintf(stderr, "\033[31mUnfound plugin: %ls\033[0m\n",
-                                            ((Type_Symbol)module_name)->value););
+            if (module == NULL) { method->code = (native)-1; break; }
             Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
-            assert(primitive, fprintf(stderr, "\033[31mUnfound primitive: %ls>>%ls\033[0m\n",
-                                              ((Type_Symbol)module_name)->value,
-                                              ((Type_Symbol)primitive_name)->value););
+            if (primitive == NULL) { method->code = (native)-1; break; }
             method->code = (native)primitive;
             break;
         }
         assert(method->code, fprintf(stderr, "Invalid Native Method\n"));
     }
+    if (method->code == (native)-1) {
+        // TODO start evaluating the fallback method.
+        Type_Array annotations = method->annotations;
+        int i;
+        for (i = 0; i < annotations->size; i++) {
+            AST_Annotation annotation = (AST_Annotation)annotations->values[i];
+            if (HEADER(annotation) != AST_Annotation_Class) { continue; }
+            if (annotation->selector != (Object)SMB_pinocchioPrimitive_module_) {
+                continue;
+            }
+            Object primitive_name = annotation->arguments[0];
+            Object module_name    = annotation->arguments[1];
+            Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
+            assert(module, fprintf(stderr, "\033[31mUnfound plugin: %ls\033[0m\n",
+                                           ((Type_Symbol)module_name)->value););
+            Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
+            assert(primitive, fprintf(stderr, "\033[31mUnfound primitive: %ls>>%ls\033[0m\n",
+                                              ((Type_Symbol)module_name)->value,
+                                              ((Type_Symbol)primitive_name)->value););
+        }
+    }
     method->code(self, class, argc);
 }
-
-NATIVE(AST_NativeMethod_eval)
-    assert1(NULL, "NYI\n");
-    // AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
-}
-
-NATIVE(AST_NativeMethod_eval_)
-
-    assert1(NULL, "NYI\n");
-    // FIXME for now accept any number of arguments
-    // AST_Native_Method_invoke((AST_Native_Method)self, self, class, args);
-}
-
 
 /* ========================================================================= */
 
 void post_init_AST_NativeMethod()
 {
-    store_native_method(AST_NativeMethod_Class, SMB_eval, NM_AST_NativeMethod_eval);
-    // TODO for now accept any number of arguments
-    store_native_method(AST_NativeMethod_Class, SMB_eval_, NM_AST_NativeMethod_eval_);
+    // Collection_Dictionary natives = add_plugin(L"AST.NativeMethod");
 };
 

@@ -222,6 +222,7 @@ extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object a
 /* ========================================================================= */
 
 #include <pinocchioHelper.hi>
+#include <plugin.h>
 
 /* ========================================================================= */
 

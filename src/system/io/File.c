@@ -242,24 +242,24 @@ NATIVE0(IO_File_close)
 
 void post_init_IO_File()
 {
-    
-    store_native_method(HEADER(IO_File_Class) , SMB_stdin  , NM_IO_File_stdin);
-    store_native_method(HEADER(IO_File_Class) , SMB_stdout , NM_IO_File_stdout);
-    store_native_method(HEADER(IO_File_Class) , SMB_stderr , NM_IO_File_stderr);
-    store_native_method(IO_File_Class         , SMB_close  , NM_IO_File_close);
+    Collection_Dictionary natives = add_plugin(L"IO.File");
+    store_native(natives, SMB_stdin  , NM_IO_File_stdin);
+    store_native(natives, SMB_stdout , NM_IO_File_stdout);
+    store_native(natives, SMB_stderr , NM_IO_File_stderr);
+    store_native(natives, SMB_close  , NM_IO_File_close);
 
-    store_native_method(IO_ReadFile_Class          , SMB_size      , NM_IO_File_size);
-    store_native_method(IO_ReadFile_Class          , SMB_atEnd     , NM_IO_File_atEnd);
-    store_native_method(IO_ReadFile_Class          , SMB_read      , NM_IO_File_read);
-    store_native_method(IO_ReadFile_Class          , SMB_readLine  , NM_IO_File_readLine);
-    store_native_method(IO_ReadFile_Class          , SMB_readAll   , NM_IO_File_readAll);
+    store_native(natives, SMB_size      , NM_IO_File_size);
+    store_native(natives, SMB_atEnd     , NM_IO_File_atEnd);
+    store_native(natives, SMB_read      , NM_IO_File_read);
+    store_native(natives, SMB_readLine  , NM_IO_File_readLine);
+    store_native(natives, SMB_readAll   , NM_IO_File_readAll);
     
-    store_native_method(IO_WriteFile_Class         , SMB_lf        , NM_IO_File_lf);
-    store_native_method(IO_WriteFile_Class         , SMB_write_    , NM_IO_File_write_);
-    store_native_method(IO_WriteFile_Class         , SMB_writeAll_ , NM_IO_File_writeAll_);
+    store_native(natives, SMB_lf        , NM_IO_File_lf);
+    store_native(natives, SMB_write_    , NM_IO_File_write_);
+    store_native(natives, SMB_writeAll_ , NM_IO_File_writeAll_);
 
-    store_native_method(HEADER(IO_ReadFile_Class)  , SMB_open_     , NM_IO_ReadFile_open_);
-    store_native_method(HEADER(IO_WriteFile_Class) , SMB_open_     , NM_IO_WriteFile_open_);
+    store_native(natives, SMB_readOpen_  , NM_IO_ReadFile_open_);
+    store_native(natives, SMB_writeOpen_ , NM_IO_WriteFile_open_);
 
 
     StandardIn    = new_IO_ReadFile_from(stdin);

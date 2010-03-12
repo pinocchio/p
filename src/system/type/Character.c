@@ -69,7 +69,8 @@ NATIVE0(Type_Character_asSmallInt)
 
 void post_init_Type_Character()
 { 
-    store_native_method(Type_Character_Class, SMB_asString,   NM_Type_Character_asString);
-    store_native_method(Type_Character_Class, SMB_asSymbol,   NM_Type_Character_asSymbol);
-    store_native_method(Type_Character_Class, SMB_asSmallInt, NM_Type_Character_asSmallInt);
+    Collection_Dictionary natives = add_plugin(L"Type.Character");
+    store_native(natives, SMB_asString,   NM_Type_Character_asString);
+    store_native(natives, SMB_asSymbol,   NM_Type_Character_asSymbol);
+    store_native(natives, SMB_asSmallInt, NM_Type_Character_asSmallInt);
 }

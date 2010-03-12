@@ -51,6 +51,6 @@ NATIVE1(AST_Callec_on_)
 
 void post_init_AST_Callec()
 {
-    store_native_method(HEADER(AST_Callec_Class),
-                        SMB_on_, NM_AST_Callec_on_);
+    Collection_Dictionary natives = add_plugin(L"AST.Callec");
+    store_native(natives, SMB_on_, NM_AST_Callec_on_);
 }

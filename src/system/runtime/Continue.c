@@ -39,5 +39,6 @@ NATIVE1(Runtime_Continue_escape_)
 
 void post_init_Runtime_Continue()
 {
-    store_native_method(Runtime_Continue_Class, SMB_escape_, NM_Runtime_Continue_escape_);
+    Collection_Dictionary natives = add_plugin(L"Runtime.Continue");
+    store_native(natives, SMB_escape_, NM_Runtime_Continue_escape_);
 }

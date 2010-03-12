@@ -302,26 +302,24 @@ NATIVE(Collection_Dictionary_basicNew)
     poke_EXP(0, new_Collection_Dictionary());
 }
 
-Collection_Dictionary add_plugin(const wchar_t * name)
-{
-    Collection_Dictionary natives = new_Collection_Dictionary();
-    Collection_Dictionary_quick_store(_NATIVES_,
-                                      (Object)new_Type_Symbol_cached(name),
-                                      (Object)natives);
-    return natives;
+static CNT(native_grow_end)
+    Object self = pop_EXP();
+    poke_EXP(0, self);
 }
 
-void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
-{
-    Collection_Dictionary_quick_store(dict, (Object)selector, (Object)code);
+NATIVE(Collection_Dictionary_grow)
+    push_CNT(native_grow_end);
+    push_EXP(self);
+    Collection_Dictionary_grow((Collection_Dictionary)self);
 }
 
 void post_init_Collection_Dictionary()
 {
     Collection_Dictionary_Class->name = new_Type_Symbol_cached(L"Dictionary");
-    store_native_method(Collection_Dictionary_Class, SMB_at_,              NM_Collection_Dictionary_at_);
-    store_native_method(Collection_Dictionary_Class, SMB_at_ifAbsent_,     NM_Collection_Dictionary_at_ifAbsent_);
-    store_native_method(HEADER(Collection_Dictionary_Class), SMB_basicNew, NM_Collection_Dictionary_basicNew);
-    Collection_Dictionary natives = add_plugin(L"Dictionary");
-    store_native(natives, SMB_at_put_, NM_Collection_Dictionary_at_put_);
+    Collection_Dictionary natives = add_plugin(L"Collection.Dictionary");
+    store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
+    store_native(natives, SMB_at_,          NM_Collection_Dictionary_at_);
+    store_native(natives, SMB_at_ifAbsent_, NM_Collection_Dictionary_at_ifAbsent_);
+    store_native(natives, SMB_basicNew,     NM_Collection_Dictionary_basicNew);
+    store_native(natives, SMB_grow,         NM_Collection_Dictionary_grow);
 }

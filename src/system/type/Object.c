@@ -184,18 +184,20 @@ void post_init_Type_Object()
     HEADER(Type_Object_Class)->methods = new_Collection_Dictionary();
     Type_Object_Class->name = new_Type_String(L"Object");
     Type_Object_Class->methods = new_Collection_Dictionary();
+
+    Collection_Dictionary natives = add_plugin(L"Type.Object");
     
-    store_native_method(Type_Object_Class, SMB_size,                    NM_Type_Object_size);
-    store_native_method(Type_Object_Class, SMB_at_,                     NM_Type_Array_at_);
-    store_native_method(Type_Object_Class, SMB_at_put_,                 NM_Type_Array_at_put_);
-    store_native_method(HEADER(Type_Object_Class), SMB_basicNew,  NM_Type_Object_basicNew);
-    store_native_method(HEADER(Type_Object_Class), SMB_basicNew_, NM_Type_Array_basicNew_);
-    store_native_method(Type_Object_Class, SMB__pequal,                 NM_Type_Object_equals);
-    store_native_method(Type_Object_Class, SMB__equal,                  NM_Type_Object_equals);
-    store_native_method(Type_Object_Class, SMB_class,                   NM_Type_Object_class);
-    store_native_method(Type_Object_Class, SMB_hash,                    NM_Type_Object_hash);
-    store_native_method(Type_Object_Class, SMB_instVarAt_,              NM_Type_Object_instVarAt_);
-    store_native_method(Type_Object_Class, SMB_instVarAt_put_,          NM_Type_Object_instVarAt_put_);
-    store_native_method(Type_Object_Class, SMB_perform_withArguments_,  NM_Type_Object_perform_withArguments_);
-    store_native_method(Type_Object_Class, SMB_perform_,                NM_Type_Object_perform_);
+    store_native(natives, SMB_size,                   NM_Type_Object_size);
+    store_native(natives, SMB_at_,                    NM_Type_Array_at_);
+    store_native(natives, SMB_at_put_,                NM_Type_Array_at_put_);
+    store_native(natives, SMB_basicNew,               NM_Type_Object_basicNew);
+    store_native(natives, SMB_basicNew_,              NM_Type_Array_basicNew_);
+    store_native(natives, SMB__pequal,                NM_Type_Object_equals);
+    store_native(natives, SMB__equal,                 NM_Type_Object_equals);
+    store_native(natives, SMB_class,                  NM_Type_Object_class);
+    store_native(natives, SMB_hash,                   NM_Type_Object_hash);
+    store_native(natives, SMB_instVarAt_,             NM_Type_Object_instVarAt_);
+    store_native(natives, SMB_instVarAt_put_,         NM_Type_Object_instVarAt_put_);
+    store_native(natives, SMB_perform_withArguments_, NM_Type_Object_perform_withArguments_);
+    store_native(natives, SMB_perform_,               NM_Type_Object_perform_);
 }

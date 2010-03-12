@@ -70,7 +70,8 @@ Type_Float_COMPARE_OPERATION(gt_, >)
 Type_Float_COMPARE_OPERATION(notEqual_, !=)
 
 NATIVE0(Type_Float_hash)
-    RETURN_FROM_NATIVE(self); 
+    float f = unwrap_float(self);
+    RETURN_FROM_NATIVE(new_Type_SmallInt((uns_int)f)); 
 }
 
 Type_String Type_Float_asString(float self, uns_int base)
@@ -98,21 +99,23 @@ void post_init_Type_Float()
     Type_Float_Class->name            = new_Type_String(L"Float");
     Type_Float_Class->methods         = new_Collection_Dictionary();
 
-    store_native_method(Type_Float_Class, SMB__equal,      NM_Type_Float_equals_);
-    store_native_method(Type_Float_Class, SMB__plus,       NM_Type_Float_plus_);
-    store_native_method(Type_Float_Class, SMB__minus,      NM_Type_Float_minus_);   
-    store_native_method(Type_Float_Class, SMB__times,      NM_Type_Float_times_); 
-    store_native_method(Type_Float_Class, SMB__divide,     NM_Type_Float_divide_);
-    store_native_method(Type_Float_Class, SMB__modulo,     NM_Type_Float_modulo_);
-    store_native_method(Type_Float_Class, SMB__shiftLeft,  NM_Type_Float_shiftLeft_);
-    store_native_method(Type_Float_Class, SMB__shiftRight, NM_Type_Float_shiftRight_);
-    store_native_method(Type_Float_Class, SMB__and,        NM_Type_Float_and_);
-    store_native_method(Type_Float_Class, SMB__or,         NM_Type_Float_or_);
-    store_native_method(Type_Float_Class, SMB__lt,         NM_Type_Float_lt_);
-    store_native_method(Type_Float_Class, SMB__gt,         NM_Type_Float_gt_);
-    store_native_method(Type_Float_Class, SMB__notEqual,   NM_Type_Float_notEqual_);
-    store_native_method(Type_Float_Class, SMB_hash,        NM_Type_Float_hash);
-    store_native_method(Type_Float_Class, SMB_asString,    NM_Type_Float_asString);
+    Collection_Dictionary natives = add_plugin(L"Type.Float");
+
+    store_native(natives, SMB__equal,      NM_Type_Float_equals_);
+    store_native(natives, SMB__plus,       NM_Type_Float_plus_);
+    store_native(natives, SMB__minus,      NM_Type_Float_minus_);   
+    store_native(natives, SMB__times,      NM_Type_Float_times_); 
+    store_native(natives, SMB__divide,     NM_Type_Float_divide_);
+    store_native(natives, SMB__modulo,     NM_Type_Float_modulo_);
+    store_native(natives, SMB__shiftLeft,  NM_Type_Float_shiftLeft_);
+    store_native(natives, SMB__shiftRight, NM_Type_Float_shiftRight_);
+    store_native(natives, SMB__and,        NM_Type_Float_and_);
+    store_native(natives, SMB__or,         NM_Type_Float_or_);
+    store_native(natives, SMB__lt,         NM_Type_Float_lt_);
+    store_native(natives, SMB__gt,         NM_Type_Float_gt_);
+    store_native(natives, SMB__notEqual,   NM_Type_Float_notEqual_);
+    store_native(natives, SMB_hash,        NM_Type_Float_hash);
+    store_native(natives, SMB_asString,    NM_Type_Float_asString);
 }
 
 /* ========================================================================= */

@@ -108,6 +108,9 @@ void post_init_Type_Array()
     Type_Array_Class->methods = new_Collection_Dictionary();
     empty_Type_Array->size    = 0;
     
-    store_native_method(Type_Array_Class, SMB_instVarAt_, NM_Type_Array_instVarAt_);
-    store_native_method(Type_Array_Class, SMB_instVarAt_put_, NM_Type_Array_instVarAt_put_);
+    // TODO move Array to Collection
+    Collection_Dictionary natives = add_plugin(L"Collection.Array");
+
+    store_native(natives, SMB_instVarAt_,     NM_Type_Array_instVarAt_);
+    store_native(natives, SMB_instVarAt_put_, NM_Type_Array_instVarAt_put_);
 }

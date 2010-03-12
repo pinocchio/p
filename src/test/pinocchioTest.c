@@ -4,7 +4,6 @@
 #include <test/lib/lib.h>
 
 #include <system/ast/CallecTest.ci>
-#include <system/ast/NativeMethodTest.ci>
 #include <system/ast/SelfTest.ci>
 #include <system/ast/SuperTest.ci>
 #include <system/ast/VariableTest.ci>
@@ -89,7 +88,6 @@ void run_tests()
    
 test_Type_Class();
 test_IO_File();
-test_NativeMethod();
 test_Type_Object();
 test_AST_Self();
 test_Type_SmallInt();

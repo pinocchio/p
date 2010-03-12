@@ -1,7 +1,7 @@
 
 NEW_TEST(Type_Object_methods)
     assert0(Collection_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal));
-    assert0(HEADER((AST_NativeMethod)Collection_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == AST_NativeMethod_Class);
+    assert0(HEADER(Collection_Dictionary_quick_lookup(Type_Object_Class->methods, (Object)SMB__equal)) == Runtime_MethodClosure_Class);
 }
 
 NEW_TEST(Type_Object_isNil)

@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/MethodClosure.h>
@@ -114,6 +113,8 @@ NATIVE1(Runtime_MethodClosure_valueWithArguments_)
 
 void post_init_Runtime_MethodClosure()
 {
-    store_native_method(Runtime_MethodClosure_Class, SMB_numArgs, NM_Runtime_MethodClosure_numArgs);
-    store_native_method(Runtime_MethodClosure_Class, SMB_valueWithArguments_,   NM_Runtime_MethodClosure_valueWithArguments_);
+    // TODO move the whole class to AST
+    Collection_Dictionary natives = add_plugin(L"AST.MethodClosure");
+    store_native(natives, SMB_numArgs,             NM_Runtime_MethodClosure_numArgs);
+    store_native(natives, SMB_valueWithArguments_, NM_Runtime_MethodClosure_valueWithArguments_);
 }
