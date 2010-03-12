@@ -58,16 +58,19 @@ void AST_NativeMethod_invoke(AST_NativeMethod method, Object self,
         for (i = 0; i < annotations->size; i++) {
             AST_Annotation annotation = (AST_Annotation)annotations->values[i];
             if (HEADER(annotation) != AST_Annotation_Class) { continue; }
-            if (annotation->selector != SMB_pinocchioPrimitive_module_) { continue; }
+            if (annotation->selector != (Object)SMB_pinocchioPrimitive_module_) {
+                continue;
+            }
             Object primitive_name = annotation->arguments[0];
             Object module_name    = annotation->arguments[1];
             Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
-            if (module != NULL) {
-                Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
-                if (primitive != NULL) {
-                    method->code = (native)primitive;
-                }
-            }
+            assert(module, fprintf(stderr, "\033[31mUnfound plugin: %ls\033[0m\n",
+                                            ((Type_Symbol)module_name)->value););
+            Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
+            assert(primitive, fprintf(stderr, "\033[31mUnfound primitive: %ls>>%ls\033[0m\n",
+                                              ((Type_Symbol)module_name)->value,
+                                              ((Type_Symbol)primitive_name)->value););
+            method->code = (native)primitive;
             break;
         }
         assert(method->code, fprintf(stderr, "Invalid Native Method\n"));
