@@ -93,20 +93,6 @@ NATIVE0(Type_String_asSymbol)
     RETURN_FROM_NATIVE(new_Type_Symbol_cached(((Type_String)self)->value));
 }
 
-NATIVE1(Type_String_equals_)
-    Object w_arg = NATIVE_ARG(0);
-    if (w_arg == self) {
-        RETURN_FROM_NATIVE(True);
-        return;
-    }
-    if (!OBJECT_OF_LAYOUT(w_arg, Words)) {
-        RETURN_FROM_NATIVE(False);
-        return;
-    }
-    RETURN_FROM_NATIVE(get_bool(Words_compare((Type_Symbol)self,
-    (Type_Symbol)w_arg)));
-}
-
 // TODO check types not classes!
 NATIVE2(Type_String_at_put_)
     Object w_arg0 = NATIVE_ARG(0);
@@ -224,12 +210,11 @@ void post_init_Type_String()
 {
     REFER_TO(Type_String);
     Type_String_Class->name = new_Type_Symbol_cached(L"String");
-    install_symbol_methods(Type_String_Class);
-    store_native_method(Type_String_Class, SMB__concat,  NM_Type_String_concat_);
-    store_native_method(Type_String_Class, SMB_asSymbol, NM_Type_String_asSymbol);
-    store_native_method(Type_String_Class, SMB_at_put_,  NM_Type_String_at_put_);
-    store_native_method(Type_String_Class, SMB__equal,   NM_Type_String_equals_);
-    store_native_method(Type_String_Class, SMB_asNumber, NM_Type_String_asNumber);
-    store_native_method(HEADER(Type_String_Class), SMB_basicNew_, NM_Type_String_basicNew_);
+    Collection_Dictionary natives = add_plugin(L"Type.String");
+    store_native(natives, SMB__concat,   NM_Type_String_concat_);
+    store_native(natives, SMB_asSymbol,  NM_Type_String_asSymbol);
+    store_native(natives, SMB_at_put_,   NM_Type_String_at_put_);
+    store_native(natives, SMB_asNumber,  NM_Type_String_asNumber);
+    store_native(natives, SMB_basicNew_, NM_Type_String_basicNew_);
 }
 
