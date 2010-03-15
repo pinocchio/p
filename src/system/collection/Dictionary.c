@@ -11,9 +11,10 @@ DECLARE_CLASS(Collection_Dictionary);
 Collection_Dictionary new_Collection_Dictionary()
 {
     NEW_OBJECT(Collection_Dictionary);
-    result->size  = new_Type_SmallInt(0);
-    result->ratio = new_Type_Float(0.6);
-    result->data  = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
+    result->size      = new_Type_SmallInt(0);
+    result->ratio     = new_Type_Float(0.6);
+    result->maxLinear = new_Type_SmallInt(20);
+    result->data      = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 

@@ -305,6 +305,11 @@ void i_atn(Object o, const wchar_t * s) {
     return inspect_atn(o, s);
 }
 
+void i_atx(Object o, uns_int argc, ...) {
+    return inspect(atx(o, argc));
+}
+
+
 Type_Class class(Object o)
 {
     return HEADER(o);

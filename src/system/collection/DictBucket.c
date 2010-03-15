@@ -50,11 +50,10 @@ static void Bucket_grow(Collection_DictBucket * bucketp)
     for(i = 0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
     }
-    new_bucket->tally = new_Type_SmallInt(i);
+    new_bucket->tally = old_bucket->tally;
     for(; i < new_bucket->size; i++) {
         new_bucket->values[i] = (Object)Nil;
     }
-
     *bucketp = new_bucket;
 }
 
