@@ -13,7 +13,7 @@ void help() {
     fprintf(stderr, "    inspect_at      (Object, uns_int)      \n");
     fprintf(stderr, "    inspect_atn     (Object, wchar_t *)    \n");
     fprintf(stderr, "    methods         (Object)               \n");
-    fprintf(stderr, "    print_EXP                              \n");
+    fprintf(stderr, "    exps                                   \n");
     fprintf(stderr, "    sends                                  \n");
 }
 
@@ -47,6 +47,11 @@ void print_EXP()
         }
     }
 }
+
+void exps() {
+    print_EXP();
+}
+
 
 void print_Symbol(Object s)
 {
