@@ -15,7 +15,7 @@ NEW_TEST(Runtime_BlockClosure_evaluation)
     // with one body element ---------------------------------------------------
     closure = Eval((Object)new_AST_Block(1, 0, 1, 1, integer_const));
     Object result = Eval_Send1(closure, SMB_value, (Object)integer);
-    assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
+    assert0(result == (Object)integer);
 
     // with one argument -------------------------------------------------------
     
@@ -27,7 +27,7 @@ NEW_TEST(Runtime_BlockClosure_evaluation)
     Runtime_BlockClosure clos = (Runtime_BlockClosure)Eval((Object)code);
 
     result       = Eval_Send1((Object)clos, SMB_value, (Object)integer);
-    assert(result == (Object)integer, printf("%ls\n", Object_classname(result)));
+    assert0(result == (Object)integer);
     ASSERT_EMPTY_STACK;
 }
 
