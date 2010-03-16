@@ -29,7 +29,7 @@ NATIVE1(Runtime_Continue_escape_)
     Object arg = NATIVE_ARG(0);
     // restore the stack
     tset(_EXP_, ast_cont->exp_offset + &(tget(Double_Stack)[0]));
-    _CNT_ = (cont*)(&(tget(Double_Stack)[STACK_SIZE]) - ast_cont->cnt_offset);
+    tset(_CNT_, (cont*)(&(tget(Double_Stack)[STACK_SIZE]) - ast_cont->cnt_offset));
     set_env(ast_cont->Env);
     // Overwrite the top of stack that created the continue.
     poke_EXP(0, arg);

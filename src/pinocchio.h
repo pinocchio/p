@@ -127,6 +127,7 @@ class##_Reference = new_Organization_ClassReference(class);
 /* ========================================================================= */
 
 typedef void** Object;
+typedef void(*cont)();
 #include <thread.h>
 
 #define CNT(name) void CNT_##name() {\
@@ -159,7 +160,6 @@ extern void print_EXP();
 /* ========================================================================= */
 
 typedef unsigned int    bool;
-typedef void(*cont)();
 typedef struct Type_Nil{} Type_Nil;   
 
 /* ========================================================================= */
@@ -170,7 +170,7 @@ typedef struct Type_Nil{} Type_Nil;
 
 extern pthread_key_t Double_Stack;
 extern pthread_key_t _EXP_;
-extern cont   * _CNT_;
+extern pthread_key_t _CNT_;
 
 extern void CNT_continue_eval();
 extern void CNT_abort_eval();

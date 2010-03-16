@@ -11,20 +11,12 @@ void printf0(const char * string, ...) {
 
 /* ========================================================================= */
 
-pthread_key_t Double_Stack;
-pthread_key_t _EXP_;
-cont   * _CNT_;
-
 void init_pthread_keys()
 {
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
-    // tkey(_CNT_, NULL);
+    tkey(_CNT_,         NULL);
 }
-
-// Object * Double_Stack;
-// Object * _EXP_;
-// cont   * _CNT_;
 
 /* ========================================================================= */
 

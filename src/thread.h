@@ -10,8 +10,6 @@
 
 extern void _push_EXP(Object e);
 extern Object pop_EXP();
-extern void pinocchio_main(int argc, const char ** argv);
-
 #define push_EXP(e)             _push_EXP((Object)e);
 #define claim_EXP(value)		tset(_EXP_, tget(_EXP_)+(value))
 #define peek_EXP(depth)         (*(tget(_EXP_) - (depth)))
@@ -21,11 +19,14 @@ extern void pinocchio_main(int argc, const char ** argv);
 #define EXP_size()              (tget(_EXP_) - &tget(Double_Stack)[-1])
 #define empty_EXP()             (EXP_size() == 0) 
 
-#define push_CNT(value)         (*(--_CNT_) = ((cont)(CNT_##value)))
-#define pop_CNT()               (*(_CNT_++))
-#define peek_CNT()              (*(_CNT_))
-#define zap_CNT()               (_CNT_++);
-#define poke_CNT(value)         (*(_CNT_) = ((cont)(CNT_##value)))
-#define empty_CNT()             ((Object*)_CNT_ == &(tget(Double_Stack)[STACK_SIZE]))
+extern void _push_CNT(cont e);
+#define push_CNT(value)         _push_CNT((cont)(CNT_##value))
+//#define push_CNT(value)         (*(--_CNT_) = ((cont)(CNT_##value)))
+#define peek_CNT()              (*(cont*)tget(_CNT_))
+#define zap_CNT()               tset(_CNT_, ((cont*)tget(_CNT_))+1)
+#define poke_CNT(value)         (*(cont*)tget(_CNT_) = ((cont)(CNT_##value)))
+#define empty_CNT()             ((Object*)tget(_CNT_) == &(tget(Double_Stack)[STACK_SIZE]))
+
+extern void pinocchio_main(int argc, const char ** argv);
 
 #endif // THREAD_H

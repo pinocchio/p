@@ -2,6 +2,27 @@
 #include <lib/lib.h>
 #include <string.h>
 
+pthread_key_t Double_Stack;
+pthread_key_t _EXP_;
+pthread_key_t _CNT_;
+
+/* ========================================================================= */
+
+void init_Stack(uns_int size)
+{
+    // TODO allocate the stack with the given size
+    tset(Double_Stack, PALLOC(sizeof(Object[size])));
+    tset(_EXP_, &tget(Double_Stack)[-1]);
+    tset(_CNT_, &tget(Double_Stack)[size]);
+}
+
+void initialize_Thread()
+{
+    init_Stack(STACK_SIZE);
+}
+
+/* ========================================================================= */
+
 Object pop_EXP()
 {
     Object * p = tget(_EXP_);
@@ -16,19 +37,11 @@ void _push_EXP(Object e)
     *p = e;
 }
 
-/* ========================================================================= */
-
-void init_Stack(uns_int size)
+void _push_CNT(cont e)
 {
-    // TODO allocate the stack with the given size
-    tset(Double_Stack, PALLOC(sizeof(Object[size])));
-    tset(_EXP_, &tget(Double_Stack)[-1]);
-    _CNT_ = (cont *)&tget(Double_Stack)[size];
-}
-
-void initialize_Thread()
-{
-    init_Stack(STACK_SIZE);
+    cont * p = (cont*)tget(_CNT_) - 1;
+    tset(_CNT_, p);
+    *p = e;
 }
 
 /* ========================================================================= */
