@@ -5,14 +5,14 @@
 
 /* ========================================================================= */
 
-#define COLLECTION_DICTIONARY_SIZE 3
+#define COLLECTION_DICTIONARY_SIZE 4
 #define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"data", L"ratio"
 
 struct Collection_Dictionary_t {
     Type_SmallInt size;
     Type_SmallInt maxLinear;
     Type_Array    data;
-    Type_Float    ratio;
+    Type_SmallInt ratio;
 };
 
 CREATE_INITIALIZERS(Collection_Dictionary);

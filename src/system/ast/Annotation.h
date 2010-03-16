@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-#define AST_ANNOTATION_SIZE 2
+#define AST_ANNOTATION_SIZE 1
 #define AST_ANNOTATION_VARS L"selector"
 
 struct AST_Annotation_t {

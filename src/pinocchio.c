@@ -2,24 +2,29 @@
 #include <stdio.h>
 #include <setjmp.h>
 #include <wchar.h>
-#include <string.h>
 #include <pinocchio.h>
 #include <debug.h>
 #include <locale.h>
-#include <lib/lib.h>
-
-#ifdef TEST
-#include <test/pinocchioTest.h>
-#endif // TEST
 
 void printf0(const char * string, ...) {
 }
 
 /* ========================================================================= */
 
-Object * Double_Stack;
-Object * _EXP_;
+pthread_key_t Double_Stack;
+pthread_key_t _EXP_;
 cont   * _CNT_;
+
+void init_pthread_keys()
+{
+    tkey(Double_Stack,  NULL);
+    tkey(_EXP_,         NULL);
+    // tkey(_CNT_, NULL);
+}
+
+// Object * Double_Stack;
+// Object * _EXP_;
+// cont   * _CNT_;
 
 /* ========================================================================= */
 
@@ -48,21 +53,6 @@ void CNT_abort_eval()
 void CNT_exit_eval()
 {
     longjmp(Eval_Exit, 1);
-}
-
-/* ========================================================================= */
-
-void init_Stack(uns_int size)
-{
-    // TODO allocate the stack with the given size
-    Double_Stack = (Object *)PALLOC(sizeof(Object[size]));
-    _EXP_ = (Object *)&Double_Stack[-1];
-    _CNT_ = (cont *)  &Double_Stack[size];
-}
-
-void initialize_Thread()
-{
-    init_Stack(STACK_SIZE);
 }
 
 void initialize_Natives()
@@ -199,40 +189,16 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 /* ========================================================================= */
 
 #include <pinocchioHelper.ci>
-#include <test/FibTest.ci>
 
-/* ========================================================================= */
-Type_Array get_args(int argc, const char ** argv)
-{
-    Type_Array args = new_Type_Array_raw(argc - 1);
-    int i;
-    argv++;
-    for (i = 1; i < argc; i++) {
-        const char * arg = *argv++;
-        int length = strlen(arg);
-        wchar_t warg[length + 1];
-        assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
-        Type_Symbol sarg = new_Type_Symbol_cached(warg);
-        args->values[i-1] = (Object)sarg;
-    }
-    return args;
-}
- 
 int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
     #include <pinocchioPreInit.ci>
-    initialize_Thread();
     initialize_Natives();
     #include <pinocchioPostInit.ci>
-    init_lib();
 
-    #ifdef TEST
-    run_tests();
-    run_FibTest();
-    #else // TEST
-    Eval_Send1(Interpretation_Interpreter_Class, SMB_main_, (Object)get_args(argc, argv));
-    #endif // TEST
-    
+    init_pthread_keys();
+
+    pinocchio_main(argc, argv);
     return EXIT_SUCCESS;
 }

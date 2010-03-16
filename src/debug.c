@@ -39,7 +39,7 @@ void print_EXP()
     uns_int size = EXP_size();
     uns_int cur = 0;
     while (cur < size) {
-        Object c = Double_Stack[cur++];
+        Object c = tget(Double_Stack)[cur++];
         if (c > (Object)10000) {
             print_Class(c);
         } else {
@@ -70,7 +70,7 @@ uns_int nrsends()
     uns_int cur = 0;
     uns_int nr = 0;
     while (cur < size) {
-        Object c = Double_Stack[cur++];
+        Object c = tget(Double_Stack)[cur++];
         if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
             nr++;
         }
@@ -83,7 +83,7 @@ void sends()
     uns_int size = EXP_size();
     uns_int cur = 0;
     while (cur < size) {
-        Object c = Double_Stack[cur++];
+        Object c = tget(Double_Stack)[cur++];
         if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
             AST_Send send = (AST_Send)c;
             print_AST_Info(send->info);

@@ -126,22 +126,8 @@ class##_Reference = new_Organization_ClassReference(class);
 
 /* ========================================================================= */
 
-#define push_EXP(value)         (*(++_EXP_) = ((Object)(value)))
-#define claim_EXP(value)		(_EXP_+=(value))
-#define pop_EXP()               (*(_EXP_--))
-#define peek_EXP(depth)         (*(_EXP_ - (depth)))
-#define poke_EXP(depth, value)  (*(_EXP_ - (depth)) = ((Object)(value)))
-#define zap_EXP()               (_EXP_--)
-#define zapn_EXP(n)             (_EXP_-=n)
-#define empty_EXP()             (_EXP_ == &(Double_Stack[-1]))
-#define EXP_size()              (_EXP_ - &(Double_Stack[-1]))
-
-#define push_CNT(value)         (*(--_CNT_) = ((cont)(CNT_##value)))
-#define pop_CNT()               (*(_CNT_++))
-#define peek_CNT()              (*(_CNT_))
-#define zap_CNT()               (_CNT_++);
-#define poke_CNT(value)         (*(_CNT_) = ((cont)(CNT_##value)))
-#define empty_CNT()             ((Object*)_CNT_ == &(Double_Stack[STACK_SIZE]))
+typedef void** Object;
+#include <thread.h>
 
 #define CNT(name) void CNT_##name() {\
     zap_CNT();
@@ -172,7 +158,6 @@ extern void print_EXP();
 
 /* ========================================================================= */
 
-typedef void**          Object;
 typedef unsigned int    bool;
 typedef void(*cont)();
 typedef struct Type_Nil{} Type_Nil;   
@@ -183,8 +168,8 @@ typedef struct Type_Nil{} Type_Nil;
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
-extern Object * Double_Stack;
-extern Object * _EXP_;
+extern pthread_key_t Double_Stack;
+extern pthread_key_t _EXP_;
 extern cont   * _CNT_;
 
 extern void CNT_continue_eval();

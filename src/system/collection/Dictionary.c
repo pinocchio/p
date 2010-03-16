@@ -12,7 +12,7 @@ Collection_Dictionary new_Collection_Dictionary()
 {
     NEW_OBJECT(Collection_Dictionary);
     result->size      = new_Type_SmallInt(0);
-    result->ratio     = new_Type_Float(0.6);
+    result->ratio     = new_Type_SmallInt(500);
     result->maxLinear = new_Type_SmallInt(20);
     result->data      = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
@@ -49,16 +49,16 @@ static int get_hash(Collection_Dictionary self, Object key)
 
 void push_hash(Object key)
 {
-    int hash;
+    Type_SmallInt hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Type_Symbol_hash((Type_Symbol)key)->value;
+        hash = Type_Symbol_hash((Type_Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = ((Type_SmallInt)key)->value;
+        hash = (Type_SmallInt)key;
     } else {
         return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
-    push_EXP(new_Type_SmallInt(hash));
+    push_EXP(hash);
 }
 
 int unwrap_hash(Collection_Dictionary self, Object w_hash)
@@ -78,11 +78,10 @@ static Collection_DictBucket * get_bucketp(Collection_Dictionary dictionary, int
 
 static int Collection_Dictionary_grow_check(Collection_Dictionary self)
 {
-    uns_int self_size = unwrap_int((Object)self->size);
-    self->size        = new_Type_SmallInt(self_size + 1);
-    float amount      = self_size + 1;
-    float size        = self->data->size;
-    return amount / size > unwrap_float((Object)self->ratio);
+    uns_int amount = unwrap_int((Object)self->size) + 1;
+    self->size     = new_Type_SmallInt(amount);
+    uns_int size   = self->data->size;
+    return (100 * amount) / size > unwrap_int((Object)self->ratio);
 }
 
 static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
