@@ -144,4 +144,5 @@ void install_symbol_methods(Type_Class class)
     store_native(natives, SMB__equal,    NM_Type_Symbol__equal);
     store_native(natives, SMB_size,      NM_Type_Symbol_size);
     store_native(natives, SMB_asArray,   NM_Type_Symbol_asArray);
+    store_native(natives, SMB_hash,      NM_Type_Symbol_hash);
 }
