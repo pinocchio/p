@@ -31,6 +31,4 @@ post_init_AST_InstVariable();
 post_init_Organization_ClassReference();
 post_init_Runtime_InlineCache();
 post_init_Runtime_Message();
-post_init_Collection_Set();
-post_init_Collection_SetBucket();
 post_init_Collection_DictBucket();

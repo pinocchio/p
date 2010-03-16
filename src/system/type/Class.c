@@ -230,7 +230,7 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 
     assert0(msg != Nil);
 
-    #ifdef DEBUG
+    #ifdef PRINT_DISPATCH_TRACE
     Type_Symbol clsname;
     if (HEADER(class) != Metaclass) {
         clsname = Type_String_concat_(((Type_Class)class)->name,
@@ -240,9 +240,9 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
                                       new_Type_String(L" class>>"));
     }
     Type_Symbol msgname = (Type_Symbol)msg;
-    Type_Symbol method = Type_String_concat_(clsname, msgname);
+    Type_Symbol method  = Type_String_concat_(clsname, msgname);
     LOG("%ls\n", method->value);
-    #endif // DEBUG
+    #endif // PRINT_DISPATCH_TRACE
     
     /* Monomorphic inline cache */
     // TODO put that directly on the sender side

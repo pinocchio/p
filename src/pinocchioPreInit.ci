@@ -37,6 +37,4 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_Runtime_Message();
-pre_init_Collection_Set();
-pre_init_Collection_SetBucket();
 pre_init_Collection_DictBucket();

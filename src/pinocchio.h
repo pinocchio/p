@@ -7,6 +7,10 @@
 
 /* ========================================================================= */
 
+#if TEST
+#define DEBUG
+#endif
+
 #ifdef NOGC
     #undef PALLOC
     #define PALLOC malloc
@@ -18,8 +22,6 @@
         #define PALLOC malloc
     #endif // GC_MALLOC
 #endif // NOGC
-
-/* ========================================================================= */
 
 #define M64
 #ifdef M32
@@ -135,9 +137,6 @@ typedef void(*cont)();
 
 /* ========================================================================= */
 
-#if TEST
-#define DEBUG
-#endif
 
 extern void printf0(const char * string, ...);
 extern void _indent_(uns_int i);
