@@ -16,6 +16,9 @@ void init_pthread_keys()
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
     tkey(_CNT_,         NULL);
+    tkey(Eval_Exit,     NULL);
+    tkey(Eval_Continue, NULL);
+    tkey(Eval_Abort,    NULL);
 }
 
 /* ========================================================================= */
@@ -24,27 +27,23 @@ Collection_Dictionary _NATIVES_;
 
 /* ========================================================================= */
 
-jmp_buf Eval_Exit;
-jmp_buf Eval_Continue;
-jmp_buf Eval_Abort;
-
 /* 
  * Avoid longjmps as much as possible since they impose a large
  * performance penalty!
  */
 void CNT_continue_eval()
 {
-    longjmp(Eval_Continue, 1);
+    longjmp(tget_buf(Eval_Continue), 1);
 }
 
 void CNT_abort_eval()
 {
-    longjmp(Eval_Abort, 1);
+    longjmp(tget_buf(Eval_Abort), 1);
 }
 
 void CNT_exit_eval()
 {
-    longjmp(Eval_Exit, 1);
+    longjmp(tget_buf(Eval_Exit), 1);
 }
 
 void initialize_Natives()
@@ -125,8 +124,8 @@ Object finish_eval()
 {
     #ifndef NOJMP
 
-    if (!setjmp(Eval_Exit)) {
-        setjmp(Eval_Continue);
+    if (!setjmp(tget_buf(Eval_Exit))) {
+        setjmp(tget_buf(Eval_Continue));
         for (;;) {
             peek_CNT()();
         }

@@ -168,10 +168,6 @@ typedef struct Type_Nil{} Type_Nil;
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
 
-extern pthread_key_t Double_Stack;
-extern pthread_key_t _EXP_;
-extern pthread_key_t _CNT_;
-
 extern void CNT_continue_eval();
 extern void CNT_abort_eval();
 extern void CNT_exit_eval();
