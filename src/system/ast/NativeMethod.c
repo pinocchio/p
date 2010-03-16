@@ -40,7 +40,7 @@ void pre_init_AST_NativeMethod()
 {
     AST_NativeMethod_Class = new_Class_named(Type_Object_Class,
                                               L"NativeMethod",
-                                              CREATE_OBJECT_TAG(AST_NATIVEMETHOD));
+                                              CREATE_ARRAY_TAG(AST_NATIVEMETHOD));
 }
 
 /* ========================================================================= */

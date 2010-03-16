@@ -200,7 +200,6 @@ static void CNT_dict_grow()
 
 static void Collection_Dictionary_grow(Collection_Dictionary self)
 {
-    printf("Growing!\n");
     Type_Array old = self->data;
     self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
     self->size     = new_Type_SmallInt(0);
