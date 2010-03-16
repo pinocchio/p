@@ -15,7 +15,7 @@ TEST_CFILES=test/pinocchioTest.c
 TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-O3 -DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g
+CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g
 LDFLAGS+=-lpthread -lm -lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
@@ -27,7 +27,7 @@ $(TARGET): $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 run: $(TARGET)
-	CFLAGS="-O3" ./$(TARGET)
+	./$(TARGET)
 
 test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 	CFLAGS="-O0 -DTEST" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
