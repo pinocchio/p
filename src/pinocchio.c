@@ -184,6 +184,7 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
+
     #include <pinocchioPreInit.ci>
     initialize_Natives();
     #include <pinocchioPostInit.ci>

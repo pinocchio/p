@@ -203,7 +203,7 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
         bucket->values[0] = key;
         bucket->values[1] = value;
         bucket->tally = new_Type_SmallInt(2);
-        push_EXP((Object)0);
+        push_EXP((Object)1);
         return;
     }
 

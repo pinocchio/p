@@ -200,6 +200,7 @@ static void CNT_dict_grow()
 
 static void Collection_Dictionary_grow(Collection_Dictionary self)
 {
+    printf("Growing!\n");
     Type_Array old = self->data;
     self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
     self->size     = new_Type_SmallInt(0);
@@ -320,6 +321,6 @@ void post_init_Collection_Dictionary()
     store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
     store_native(natives, SMB_at_,          NM_Collection_Dictionary_at_);
     store_native(natives, SMB_at_ifAbsent_, NM_Collection_Dictionary_at_ifAbsent_);
-    store_native(natives, SMB_basicNew,     NM_Collection_Dictionary_basicNew);
+    // store_native(natives, SMB_basicNew,     NM_Collection_Dictionary_basicNew);
     store_native(natives, SMB_grow,         NM_Collection_Dictionary_grow);
 }
