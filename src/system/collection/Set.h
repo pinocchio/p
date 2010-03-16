@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 #define COLLECTION_SET_SIZE 3
-#define COLLECTION_SET_VARS L"size", L"maxLinear", L"data", L"ratio"
+#define COLLECTION_SET_VARS L"size", L"maxLinear", L"buckets", L"ratio"
 
 struct Collection_Set_t {
     Type_SmallInt size;

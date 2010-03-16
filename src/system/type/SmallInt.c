@@ -45,10 +45,8 @@ void pre_init_Type_SmallInt()
 
 #define Type_SmallInt_BINARY_OPERATION(name, op)\
 NATIVE1(Type_SmallInt_##name)\
-    Object w_arg = NATIVE_ARG(0);\
-    ASSERT_INSTANCE_OF(w_arg, Type_SmallInt_Class);\
-    Type_SmallInt arg = (Type_SmallInt)w_arg;\
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_SmallInt) self)->value op arg->value));\
+    int value = unwrap_int(NATIVE_ARG(0)); \
+    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_SmallInt) self)->value op value));\
 }
 
 Type_SmallInt_BINARY_OPERATION(plus_,       +);
