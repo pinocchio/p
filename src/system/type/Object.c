@@ -117,8 +117,10 @@ NATIVE0(Type_Object_size)
 
 Object raw_Type_Array_at(Type_Array array, Object tag, int index)
 {
-    assert0(array->size > index);
-    assert0(0 <= index);
+    assert(array->size > index,
+        printf("Array at: %i out of bounds %u\n" , index, array->size));
+    assert(0 <= index, 
+        printf("Array at: %i should be positive\n", index));
     return array->values[TAG_SIZE(tag) + index];
 }
 

@@ -154,7 +154,7 @@ static void CNT_Class_lookup_cache_invoke()
 
 static void CNT_Class_lookup_invoke()
 {
-    Object method = peek_EXP(0);
+    Object method    = peek_EXP(0);
     Type_Class class = (Type_Class)peek_EXP(1);
     if (method == NULL) {
         return Class_next_lookup(class);
@@ -224,10 +224,9 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
 
 void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 {
-    AST_Send send = (AST_Send)peek_EXP(argc + 1); // + self
+    AST_Send send             = (AST_Send)peek_EXP(argc + 1); // + self
     Runtime_InlineCache cache = send->cache;
-    Object msg = send->message;
-
+    Object msg                = send->message;
     assert0(msg != Nil);
 
     #ifdef PRINT_DISPATCH_TRACE
@@ -249,9 +248,9 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     // TODO create Polymorphic inline cache
     // TODO properly initialize the inlinecache when creating new sends
     if ((Object)cache != Nil) {
-    if (class == (Type_Class)cache->class) {
-        return Method_invoke(cache->method, self, class, argc);
-    }
+        if (class == (Type_Class)cache->class) {
+            return Method_invoke(cache->method, self, class, argc);
+        }
     } else {
         send->cache = new_Runtime_InlineCache();
     }
