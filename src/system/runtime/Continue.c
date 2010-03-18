@@ -35,10 +35,33 @@ NATIVE1(Runtime_Continue_escape_)
     poke_EXP(0, arg);
 }
 
+static void apply(Object closure, uns_int argc)
+{
+    // TODO in the alternative case, send "apply" message.
+    // LOG("cls: %ls\n", HEADER(closure)->name->value);
+    assert0(HEADER(closure) == Runtime_BlockClosure_Class);
+    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
+}
+
+NATIVE1(Runtime_Continue_on_)
+    // LOGFUN;
+    Runtime_Continue runtimeContinue = new_Runtime_Continue();
+    runtimeContinue->exp_offset      = (tget(_EXP_) - &(tget(Double_Stack)[0]) - (argc + 1));
+    runtimeContinue->cnt_offset      = (&(tget(Double_Stack)[STACK_SIZE]) - (Object*)tget(_CNT_));
+    runtimeContinue->Env             = (Object)current_env();
+    // optimization, reuse array object.
+    // make sure to undo when introducing others
+    // TODO do this more cleanly!
+    Object closure = NATIVE_ARG(0);
+    poke_EXP(0, runtimeContinue);
+    apply(closure, 1);
+}
+
 /* ========================================================================= */
 
 void post_init_Runtime_Continue()
 {
     Collection_Dictionary natives = add_plugin(L"Runtime.Continue");
     store_native(natives, SMB_escape_, NM_Runtime_Continue_escape_);
+    store_native(natives, SMB_on_,     NM_Runtime_Continue_on_);
 }

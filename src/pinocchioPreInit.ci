@@ -19,7 +19,6 @@ pre_init_Organization_ClassReference();
 pre_init_Type_Character();
 pre_init_AST_Assign();
 pre_init_AST_Block();
-pre_init_AST_Callec();
 pre_init_AST_Constant();
 pre_init_Type_Boolean();
 pre_init_Runtime_Continue();

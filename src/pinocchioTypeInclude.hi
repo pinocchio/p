@@ -24,7 +24,6 @@
 #include <system/ast/Send.h>
 #include <system/ast/Block.h>
 #include <system/ast/NativeMethod.h>
-#include <system/ast/Callec.h>
 
 #include <system/runtime/Continue.h>
 #include <system/runtime/BlockClosure.h>

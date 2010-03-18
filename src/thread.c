@@ -90,7 +90,7 @@ void * pinocchio_main_thread(void * argc)
     run_FibTest();
     #else // TEST
     Type_Array args = get_args((int)(uns_int)argc, cargv);
-    Eval_Send1(Interpretation_Interpreter_Class, SMB_main_, (Object)args);
+    Eval_Send1(Interpretation_MainInterpreter_Class, SMB_main_, (Object)args);
     #endif // TEST
 
     return EXIT_SUCCESS;
@@ -99,9 +99,9 @@ void * pinocchio_main_thread(void * argc)
 void pinocchio_main(int argc, const char ** argv)
 {
     cargv = argv;
-    // pthread_t main_thread;
-    // pthread_create(&main_thread, NULL, &pinocchio_main_thread, (void*)(uns_int)argc);
-    // pthread_join(main_thread, NULL);
+    //pthread_t main_thread;
+    //pthread_create(&main_thread, NULL, &pinocchio_main_thread, (void*)(uns_int)argc);
+    //pthread_join(main_thread, NULL);
     pinocchio_main_thread((void*)(uns_int)argc);
 }
  

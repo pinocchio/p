@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_BLOCKCLOSURE_SIZE 3
-#define RUNTIME_BLOCKCLOSURE_VARS L"code", L"context", L"info"
+#define RUNTIME_BLOCKCLOSURE_SIZE 2
+#define RUNTIME_BLOCKCLOSURE_VARS L"code", L"context"
 
 struct Runtime_BlockClosure_t {
     AST_Block            code;
