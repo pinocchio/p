@@ -19,10 +19,6 @@ extern void inter_init_Type_Object();
 
 /* ========================================================================= */
 
-extern void NM_Type_Object_equals(Object self, Type_Class class, uns_int argc);
-
-/* ========================================================================= */
-
 Object raw_Type_Object_at(Type_Object o, Object tag, int index);
 void raw_Type_Object_at_put(Type_Object o, Object tag,
                             int index, Object value);

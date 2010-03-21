@@ -10,9 +10,10 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_BLOCKCONTEXT_SIZE 5
+#define RUNTIME_BLOCKCONTEXT_SIZE 8
 #define RUNTIME_BLOCKCONTEXT_VARS\
-    L"pc", L"closure", L"values", L"homeContext", L"parent"
+    L"pc", L"scopeId", L"captured", L"closure", L"homeContext",\
+    L"returnContext", L"outerScope", L"unused"
 
 struct Runtime_BlockContext_t {
     uns_int                 pc;

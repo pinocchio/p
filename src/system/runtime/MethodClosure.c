@@ -82,7 +82,8 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     AST_Method method = closure->code;
 
     if (HEADER(method) == AST_NativeMethod_Class) {
-        return AST_NativeMethod_invoke((AST_NativeMethod)method, self, class, argc);
+        return AST_NativeMethod_invoke(NULL, (AST_NativeMethod)method,
+                                       self, class, argc);
     } else if (HEADER(method) == AST_Method_Class) {
         AST_Method_invoke(closure, method, self, class, argc);
     } else {

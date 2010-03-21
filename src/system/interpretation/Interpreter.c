@@ -5,13 +5,13 @@ NATIVE4(Interpreter_invokeNative)
     Object receiver               = NATIVE_ARG(1);
     Type_Class mclass             = (Type_Class)NATIVE_ARG(2);
     Runtime_Message message       = (Runtime_Message)NATIVE_ARG(3);
-    zapn_EXP(4);
-    claim_EXP(message->size);
+    claim_EXP(message->size - 4);
     int i;
     for (i = 0; i < message->size; i++) {
         poke_EXP(message->size - i - 1, message->arguments[i]);
     }
     AST_NativeMethod_invoke(
+            self,
             (AST_NativeMethod)closure->code,
             receiver,
             mclass,

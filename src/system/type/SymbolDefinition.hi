@@ -93,3 +93,4 @@ extern Type_Symbol SMB_grow;
 extern Type_Symbol SMB_readOpen_;
 extern Type_Symbol SMB_writeOpen_;
 extern Type_Symbol SMB_invokeNativeMethod_on_class_message_;
+extern Type_Symbol SMB_applyBlock_to_;

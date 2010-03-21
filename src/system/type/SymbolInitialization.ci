@@ -15,6 +15,7 @@ SMB__shiftLeft                           = new_Type_Symbol_cached(L"<<");
 SMB__shiftRight                          = new_Type_Symbol_cached(L">>");
 SMB__times                               = new_Type_Symbol_cached(L"*");
 SMB_apply                                = new_Type_Symbol_cached(L"apply");
+SMB_applyBlock_to_                       = new_Type_Symbol_cached(L"applyBlock:to:");
 SMB_apply_                               = new_Type_Symbol_cached(L"apply:");
 SMB_asArray                              = new_Type_Symbol_cached(L"asArray");
 SMB_asBoolean                            = new_Type_Symbol_cached(L"asBoolean");

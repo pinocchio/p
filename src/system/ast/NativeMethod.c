@@ -45,8 +45,8 @@ void pre_init_AST_NativeMethod()
 
 /* ========================================================================= */
 
-void AST_NativeMethod_invoke(AST_NativeMethod method, Object self,
-                              Type_Class class, uns_int argc)
+void AST_NativeMethod_invoke(Object interpreter, AST_NativeMethod method,
+                             Object self, Type_Class class, uns_int argc)
 {
     #ifdef DEBUG
     //LOG("Native Method invoke on %ls\n", ((Type_Class)class)->name->value);
@@ -93,7 +93,7 @@ void AST_NativeMethod_invoke(AST_NativeMethod method, Object self,
                                               ((Type_Symbol)primitive_name)->value););
         }
     }
-    method->code(self, class, argc);
+    method->code(interpreter, self, class, argc);
 }
 
 /* ========================================================================= */
