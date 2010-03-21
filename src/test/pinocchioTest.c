@@ -3,7 +3,6 @@
 #include <test/pinocchioTest.h>
 #include <test/lib/lib.h>
 
-#include <system/ast/CallecTest.ci>
 #include <system/ast/SelfTest.ci>
 #include <system/ast/SuperTest.ci>
 #include <system/ast/VariableTest.ci>

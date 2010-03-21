@@ -5,10 +5,10 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_METHODCONTEXT_SIZE 7
+#define RUNTIME_METHODCONTEXT_SIZE 8
 #define RUNTIME_METHODCONTEXT_VARS\
-            L"pc", L"closure", L"values",\
-            L"home_context", L"parent", L"self", L"class"
+            L"pc", L"scopeId", L"captured", L"closure",\
+            L"homeContext", L"parent", L"receiver", L"methodClass"
 
 struct Runtime_MethodContext_t {
     uns_int                 pc;
@@ -27,8 +27,6 @@ extern Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure clo
                                                        Object self, Type_Class class);
 
 extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
-
-/* ========================================================================= */
 
 /* ========================================================================= */
 
