@@ -39,6 +39,7 @@ void NM_##name(Object self, Type_Class class, uns_int argc) {
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
 #define NATIVE3(name)  NATIVE(name) ASSERT_ARG_SIZE(3);
+#define NATIVE4(name)  NATIVE(name) ASSERT_ARG_SIZE(4);
 
 #define RETURN_FROM_NATIVE(exp)\
     zapn_EXP(argc + 1);\

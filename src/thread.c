@@ -87,7 +87,7 @@ void * pinocchio_main_thread(void * argc)
 
     #ifdef TEST
     run_tests();
-    run_FibTest();
+    // run_FibTest();
     #else // TEST
     Type_Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1(Interpretation_MainInterpreter_Class, SMB_main_, (Object)args);

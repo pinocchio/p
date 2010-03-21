@@ -29,5 +29,4 @@ Runtime_InlineCache new_Runtime_InlineCache()
 
 void post_init_Runtime_InlineCache()
 {
-
 }
