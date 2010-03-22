@@ -104,7 +104,7 @@ void pre_init_Runtime_BlockContext()
     Runtime_BlockContext_Class =
         new_Class_named(Type_Object_Class,
                         L"Runtime_BlockContext",
-                        CREATE_OBJECT_TAG(RUNTIME_BLOCKCONTEXT));
+                        CREATE_ARRAY_TAG(RUNTIME_BLOCKCONTEXT));
 }
 
 /* ========================================================================= */
