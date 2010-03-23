@@ -25,7 +25,7 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
 
 run: $(TARGET)
 	./$(TARGET)

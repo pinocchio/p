@@ -4,19 +4,21 @@ MAKEOPTS=-j3
 
 CFILES=$(wildcard *.c)
 HFILES=$(CFILES:%.c=%.h)
-OBJECTS=$(CFILES:%.c=%.o)
+OFILES=$(CFILES:%.c=%.o)
 SOFILES=$(CFILES:%.c=%.so)
+LOFILES=$(CFILES:%.c=%.lo)
 
 CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -fPIC -c -I../ -Wall
-LDFLAGS+=-lpthread -lm -lgc -lc -shared
+LDFLAGS+=-lpthread -lm -lgc -shared
 
 plugin: $(SOFILES)
-
+	
 %.so: %.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS)  -o $@ $^  
+    
 
 clean:
-	@rm -rf $(OBJECTS) $(DLS) make.depend
+	@rm -rf $(OFILES) $(SOFILES) $(LOFILES) make.depend
 
 tags: $(SOURCES)
 	@cd ..; make tags

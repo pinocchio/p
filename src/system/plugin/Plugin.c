@@ -23,29 +23,14 @@ void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
 
 typedef void (*plugin_init_ftype)();
 
-BOOL load_plugin_from_path(const char * file_path)
+void * load_plugin_from_path(const char * file_path)
 {
     // clear possible previous errors
     dlerror();
     // resolve symbols now to see if there are any problems
     void * plugin = dlopen(file_path, RTLD_NOW);
     
-    if(plugin == NULL) {
-        return FALSE;
-    }
-    
-    // clear the error
-    dlerror();
-    char * error;
-    void * initializer = dlsym(plugin,"init_plugin");
-    if((error = dlerror()) != NULL) {
-        return FALSE;
-    }
-    
-    // call the initializer
-    plugin_init_ftype init = (plugin_init_ftype)initializer;
-    init();
-    return TRUE;
+    return plugin;
 }
 
 NATIVE1(loadPluginFromPath_)
@@ -73,9 +58,7 @@ void init_plugin()
     Collection_Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_loadPluginFromPath_, NM_loadPluginFromPath_);
     store_native(natives, SMB_unloadPlugin_,       NM_unloadPlugin_);
-    if (load_plugin_from_path("plugin/Test.so")) {
-        exit(0);
-    } else {
+    if (!load_plugin_from_path("plugin/Test.so")) {
         printf("%s\n", dlerror());
         exit(1);
     }
