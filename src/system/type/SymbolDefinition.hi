@@ -101,3 +101,5 @@ extern Type_Symbol SMB_instVarAt_put_on_;
 extern Type_Symbol SMB_unload_;
 extern Type_Symbol SMB_loadFromPath_;
 extern Type_Symbol SMB_hasPlugin_;
+extern Type_Symbol SMB_load_;
+extern Type_Symbol SMB_unload;

@@ -5,6 +5,7 @@
 
 /* ========================================================================= */
 
+extern Collection_Dictionary create_plugin();
 extern Collection_Dictionary add_plugin(const wchar_t * name);
 extern void store_native(Collection_Dictionary plugin, Type_Symbol selector, native code);
 
