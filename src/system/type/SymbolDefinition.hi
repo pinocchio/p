@@ -98,3 +98,6 @@ extern Type_Symbol SMB_loadPluginFrom_;
 extern Type_Symbol SMB_unloadPlugin_;
 extern Type_Symbol SMB_loadPluginFromPath_;
 extern Type_Symbol SMB_instVarAt_put_on_;
+extern Type_Symbol SMB_unload_;
+extern Type_Symbol SMB_loadFromPath_;
+extern Type_Symbol SMB_hasPlugin_;

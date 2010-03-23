@@ -2,8 +2,7 @@ SHELL=/bin/bash
 
 MAKEOPTS=-j3
 
-CFILES=$(wildcard *.c)
-HFILES=$(CFILES:%.c=%.h)
+CFILES=$(wildcard */*.c)
 OFILES=$(CFILES:%.c=%.o)
 SOFILES=$(CFILES:%.c=%.so)
 LOFILES=$(CFILES:%.c=%.lo)

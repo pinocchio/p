@@ -33,22 +33,24 @@ void * load_plugin_from_path(const char * file_path)
     return plugin;
 }
 
-NATIVE1(loadPluginFromPath_)
-    Object path = NATIVE_ARG(0);
-    assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
+NATIVE1(Plugin_loadFromPath_)
+    Object w_path = NATIVE_ARG(0);
+    assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
      
-    char * file_path = unicode_to_ascii(((Type_Symbol)path)->value);
-    if (load_plugin_from_path(file_path)) {
+    char * path = unicode_to_ascii(((Type_Symbol)w_path)->value);
+    if (load_plugin_from_path(path)) {
         RETURN_FROM_NATIVE(True);
     } else {
         RETURN_FROM_NATIVE(False);
     }
-    free(file_path);
+    free(path);
 }
 
-NATIVE1(unloadPlugin_)
-    //TODO typecheck
-    
+NATIVE0(Plugin_unload)
+    Object w_path = NATIVE_ARG(0);
+    assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
+    //unload_plugin();     
+    free(path);
 }
 
 /* ========================================================================= */
@@ -56,11 +58,8 @@ NATIVE1(unloadPlugin_)
 void init_plugin()
 {
     Collection_Dictionary natives = add_plugin(L"Plugin.Plugin");
-    store_native(natives, SMB_loadPluginFromPath_, NM_loadPluginFromPath_);
-    store_native(natives, SMB_unloadPlugin_,       NM_unloadPlugin_);
-    if (!load_plugin_from_path("plugin/Test.so")) {
-        printf("%s\n", dlerror());
-        exit(1);
-    }
+    store_native(natives, SMB_loadFromPath_, NM_Plugin_loadPluginFromPath_);
+    store_native(natives, SMB_unload_,       NM_Plugin_unload_);
+    Plugin_Plugin_Class->cvars[0] = _NATIVES_;
 }
 
