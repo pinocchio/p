@@ -13,7 +13,7 @@ LDFLAGS+=-lpthread -lm -lgc -shared
 plugin: $(SOFILES)
 	
 %.so: %.o
-	$(CC) $(LDFLAGS)  -o $@ $^  
+	$(CC) $(LDFLAGS) -o $@ $^  
     
 
 clean:

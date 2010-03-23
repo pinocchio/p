@@ -40,5 +40,4 @@ PLUGIN()
 
 void unload_plugin()
 {
-    
 }
