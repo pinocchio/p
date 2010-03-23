@@ -16,7 +16,7 @@ TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
 CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g
-LDFLAGS+=-lpthread -lm -lgc
+LDFLAGS+=-lpthread -lm -lgc -ldl
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
 OBJECTS=$(CFILES:%.c=%.o)

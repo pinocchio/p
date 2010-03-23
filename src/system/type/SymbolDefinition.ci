@@ -94,3 +94,6 @@ Type_Symbol SMB_readOpen_;
 Type_Symbol SMB_writeOpen_;
 Type_Symbol SMB_invokeNativeMethod_on_class_message_;
 Type_Symbol SMB_applyBlock_to_;
+Type_Symbol SMB_loadPluginFrom_;
+Type_Symbol SMB_unloadPlugin_;
+Type_Symbol SMB_loadPluginFromPath_;

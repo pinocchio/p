@@ -200,13 +200,13 @@ NATIVE1(IO_File_writeAll_)
 
 FILE * open_file(Object path, char * mode)
 {
-    Object tag = GETTAG(path);
-    assert1(TAG_IS_LAYOUT(tag, Words), "Invalid path-type");    
+    assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
 
-    char * fn = unicode_to_ascii(((Type_Symbol)path)->value);
-    FILE * file = fopen(fn, mode);
-    assert(file,
-        printf("Failed to open '%s' (mode '%s', errno: %i)\n", fn, mode, errno););
+    char * filePath = unicode_to_ascii(((Type_Symbol)path)->value);
+    FILE * file = fopen(filePath, mode);
+    assert(file, printf("Failed to open '%s' (mode '%s', errno: %i)\n", 
+                            filePath, mode, errno););
+    free(filePath);
     return file;
 }
 
