@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <pinocchio.h>
+#include <lib/lib.h>
 #include <system/ast/NativeMethod.h>
 
 /* ========================================================================= */
@@ -65,6 +66,9 @@ void AST_NativeMethod_invoke(Object interpreter, AST_NativeMethod method,
             Object module_name    = annotation->arguments[1];
             Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
             if (module == NULL) { method->code = (native)-1; break; }
+            if (HEADER(module) == Plugin_Plugin_Class) {
+                module = ((Type_Object)module)->ivals[2]; 
+            }
             Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
             if (primitive == NULL) { method->code = (native)-1; break; }
             method->code = (native)primitive;
