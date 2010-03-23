@@ -21,38 +21,44 @@ void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
 
 /* ========================================================================= */
 
+typedef void (*plugin_init_ftype)();
+
+BOOL load_plugin_from_path(const char * file_path)
+{
+    // clear possible previous errors
+    dlerror();
+    // resolve symbols now to see if there are any problems
+    void * plugin = dlopen(file_path, RTLD_NOW);
+    
+    if(plugin == NULL) {
+        return FALSE;
+    }
+    
+    // clear the error
+    dlerror();
+    char * error;
+    void * initializer = dlsym(plugin,"init_plugin");
+    if((error = dlerror()) != NULL) {
+        return FALSE;
+    }
+    
+    // call the initializer
+    plugin_init_ftype init = (plugin_init_ftype)initializer;
+    init();
+    return TRUE;
+}
+
 NATIVE1(loadPluginFromPath_)
     Object path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
      
-    char * filePath = unicode_to_ascii(((Type_Symbol)path)->value);
-    // clear the error
-    dlerror();
-    // resolve symbols now to see if there are any problems
-    void * plugin = dlopen(filePath, RTLD_NOW);
-    free(filePath);
-    
-    if(plugin == NULL) {
-        RETURN_FROM_NATIVE(False);
-        return;
-    }
-
-    // clear the error
-    dlerror();
-    char *error;
-    void* initializer = dlsym(plugin,"init_plugin");
-    if((error = dlerror()) != NULL) {
+    char * file_path = unicode_to_ascii(((Type_Symbol)path)->value);
+    if (load_plugin_from_path(file_path)) {
+        RETURN_FROM_NATIVE(True);
+    } else {
         RETURN_FROM_NATIVE(False);
     }
-    // magic to make the compilers happy with the non valid conversion
-    // of the void pointer returned by dlsym
-    typedef void (*plugin_init_ftype)(void);
-    //union { plugin_init_function_type func; void * obj; } alias;
-    //alias.obj = initializer;
-    //plugin_init_function_type plugin_init_func = alias.func
-    plugin_init_ftype init = (plugin_init_ftype)initializer;
-    (*init)();
-    RETURN_FROM_NATIVE(True);
+    free(file_path);
 }
 
 NATIVE1(unloadPlugin_)
@@ -67,5 +73,11 @@ void init_plugin()
     Collection_Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_loadPluginFromPath_, NM_loadPluginFromPath_);
     store_native(natives, SMB_unloadPlugin_,       NM_unloadPlugin_);
+    if (load_plugin_from_path("plugin/Test.so")) {
+        exit(0);
+    } else {
+        printf("%s\n", dlerror());
+        exit(1);
+    }
 }
 

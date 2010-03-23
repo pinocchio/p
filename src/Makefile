@@ -15,7 +15,8 @@ TEST_CFILES=test/pinocchioTest.c
 TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g
+CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g 
+#CFLAGS+=-Wl,-rpath,./plugin/
 LDFLAGS+=-lpthread -lm -lgc -ldl
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
@@ -24,7 +25,7 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^
+	$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 run: $(TARGET)
 	./$(TARGET)
@@ -35,9 +36,12 @@ test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 	CFLAGS="-O0 -DTEST -DTEST_FAIL -DPRINT_DISPATCH_TRACE" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
 
+plugin:
+	cd plugin; make;
 
 clean:
 	@rm -rf $(ALLOBJECTS) $(TARGET) make.depend
+	cd plugin; ${MAKE} clean;
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)
@@ -51,7 +55,7 @@ mac:
 	CFLAGS="-arch i386 -arch x86_64 -arch ppc" LDFLAGS="-arch i386 -arch x86_64 -arch ppc" make
 
 
-.PHONY: test vtest run clean profile
+.PHONY: test vtest run clean profile plugin
 
 include make.depend
 

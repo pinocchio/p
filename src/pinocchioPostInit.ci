@@ -32,4 +32,5 @@ post_init_Runtime_InlineCache();
 post_init_Runtime_Message();
 post_init_Collection_DictBucket();
 
+init_plugin();
 init_interpreter();

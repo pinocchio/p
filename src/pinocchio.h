@@ -128,6 +128,8 @@ class##_Reference = new_Organization_ClassReference(class);
 
 /* ========================================================================= */
 
+typedef enum BOOL { FALSE , TRUE } BOOL;
+
 typedef void** Object;
 typedef void(*cont)();
 #include <thread.h>

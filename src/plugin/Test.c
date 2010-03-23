@@ -1,6 +1,6 @@
 
 #include <stdlib.h>
-#include <system/plugin/Test.h>
+#include <plugin/Test.h>
 #include <dlfcn.h>
 
 /* ========================================================================= */
@@ -18,11 +18,14 @@ NATIVE0(test)
 
 void plugin_test_init()
 {
+    printf("1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
     natives = add_plugin(L"Plugin.Math");
     store_native(natives, new_Type_Symbol_cached(L"test"), NM_test);
+    printf("2XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
 }
 
 void plugin_test_fini()
 {
     //TODO
+    printf("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO\n");
 }

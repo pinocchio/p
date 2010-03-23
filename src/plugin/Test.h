@@ -7,8 +7,8 @@
 void __attribute__ ((constructor)) plugin_test_init(void);
 void __attribute__ ((destructor)) plugin_test_fini(void);
 
-void plugin_test_init();
-void plugin_test_fini();
+extern void plugin_test_init();
+extern void plugin_test_fini();
 
 /* ========================================================================= */
 #endif //PLUGIN_TEST_H
