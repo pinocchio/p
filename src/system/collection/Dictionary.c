@@ -297,11 +297,6 @@ NATIVE2(Collection_Dictionary_at_put_)
     push_hash(NATIVE_ARG(0));
 }
 
-NATIVE(Collection_Dictionary_basicNew)
-    zap_EXP();
-    poke_EXP(0, new_Collection_Dictionary());
-}
-
 static CNT(native_grow_end)
     Object self = pop_EXP();
     poke_EXP(0, self);
@@ -320,6 +315,5 @@ void post_init_Collection_Dictionary()
     store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
     store_native(natives, SMB_at_,          NM_Collection_Dictionary_at_);
     store_native(natives, SMB_at_ifAbsent_, NM_Collection_Dictionary_at_ifAbsent_);
-    // store_native(natives, SMB_basicNew,     NM_Collection_Dictionary_basicNew);
     store_native(natives, SMB_grow,         NM_Collection_Dictionary_grow);
 }

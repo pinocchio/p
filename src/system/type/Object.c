@@ -81,6 +81,31 @@ void raw_Type_Object_at_put(Type_Object o, Object tag,
     ASSERT_TAG_SIZE(tag, index); o->ivals[index] = value;
 }
 
+Object Object_instVarAt_(Object self, int index)
+{
+    Object tag = GETTAG(self);
+    if (TAG_IS_LAYOUT(tag, Object)) {
+        return raw_Type_Object_at((Type_Object)self, tag, index);
+    } else if (TAG_IS_LAYOUT(tag, Array)) {
+        return raw_Type_Array_instAt((Type_Array)self, tag, index);
+    } else {
+        assert1(NULL, "Trying to access object without instvars");
+		return NULL;
+    }
+}
+
+void Object_instVarAt_put_(Object self, int index, Object value)
+{
+    Object tag = GETTAG(self);
+    if (TAG_IS_LAYOUT(tag, Object)) {
+        raw_Type_Object_at_put((Type_Object)self, tag, index, value);
+    } else if (TAG_IS_LAYOUT(tag, Array)) {
+        raw_Type_Array_instAt_put((Type_Array)self, tag, index, value);
+    } else {
+        assert1(NULL, "Trying to access object without instvars");
+    }
+}
+
 NATIVE2(Type_Object_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
@@ -118,7 +143,7 @@ NATIVE0(Type_Object_size)
 Object raw_Type_Array_at(Type_Array array, Object tag, int index)
 {
     assert(array->size > index,
-        printf("Array at: %i out of bounds %u\n" , index, array->size));
+        printf("Array at: %i out of bounds %"F_I"u\n" , index, array->size));
     assert(0 <= index, 
         printf("Array at: %i should be positive\n", index));
     return array->values[TAG_SIZE(tag) + index];

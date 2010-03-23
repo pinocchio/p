@@ -19,9 +19,8 @@ extern void inter_init_Type_Object();
 
 /* ========================================================================= */
 
-Object raw_Type_Object_at(Type_Object o, Object tag, int index);
-void raw_Type_Object_at_put(Type_Object o, Object tag,
-                            int index, Object value);
+extern Object Object_instVarAt_(Object self, int index);
+extern void Object_instVarAt_put_(Object self, int index, Object value);
 
 /* ========================================================================= */
 

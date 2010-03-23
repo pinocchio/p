@@ -18,8 +18,17 @@ NATIVE4(Interpreter_invokeNative)
             message->size);
 }
 
+NATIVE3(Interpreter_instVarAt_put_on_)
+    Object w_index  = NATIVE_ARG(0);
+    Object value    = NATIVE_ARG(1);
+    Object instance = NATIVE_ARG(2);
+    Object_instVarAt_put_(instance, unwrap_int(w_index), value);
+    RETURN_FROM_NATIVE(value);
+}
+
 void init_interpreter() 
 {
     Collection_Dictionary natives = add_plugin(L"Interpretation.Interpreter");
     store_native(natives, SMB_invokeNativeMethod_on_class_message_, NM_Interpreter_invokeNative);
+    store_native(natives, SMB_instVarAt_put_on_, NM_Interpreter_instVarAt_put_on_);
 }

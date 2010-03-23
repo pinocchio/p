@@ -40,33 +40,16 @@ void pre_init_AST_InstVariable()
 void AST_InstVariable_eval(AST_InstVariable var)
 {
     // LOGFUN;
-    Object self = current_env()->home_context->self;
-    int index = unwrap_int((Object)var->index);
-
-    Object tag = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Object)) {
-        poke_EXP(0, raw_Type_Object_at((Type_Object)self, tag, index));
-    } else if (TAG_IS_LAYOUT(tag, Array)) {
-        poke_EXP(0, raw_Type_Array_instAt((Type_Array)self, tag, index));
-    } else {
-        assert1(NULL, "Trying to access object without instvars");
-    }
+    poke_EXP(0, Object_instVarAt_(current_env()->home_context->self,
+                                  unwrap_int((Object)var->index)));
 }
 
 void AST_InstVariable_assign(AST_InstVariable var, Object value)
 {
     // LOGFUN;
-    Object self = current_env()->home_context->self;
-    int index = unwrap_int((Object)var->index);
-
-    Object tag = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Object)) {
-        raw_Type_Object_at_put((Type_Object)self, tag, index, value);
-    } else if (TAG_IS_LAYOUT(tag, Array)) {
-        raw_Type_Array_instAt_put((Type_Array)self, tag, index, value);
-    } else {
-        assert1(NULL, "Trying to access object without instvars");
-    }
+	Object_instVarAt_put_(current_env()->home_context->self,
+						  unwrap_int((Object)var->index),
+						  value);
 }
 
 /* ========================================================================= */

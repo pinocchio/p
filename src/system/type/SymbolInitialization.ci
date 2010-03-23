@@ -51,6 +51,7 @@ SMB_ifTrue_ifFalse_                      = new_Type_Symbol_cached(L"ifTrue:ifFal
 SMB_initialize                           = new_Type_Symbol_cached(L"initialize");
 SMB_instVarAt_                           = new_Type_Symbol_cached(L"instVarAt:");
 SMB_instVarAt_put_                       = new_Type_Symbol_cached(L"instVarAt:put:");
+SMB_instVarAt_put_on_                    = new_Type_Symbol_cached(L"instVarAt:put:on:");
 SMB_invokeNativeMethod_on_class_message_ = new_Type_Symbol_cached(L"invokeNativeMethod:on:class:message:");
 SMB_isNil                                = new_Type_Symbol_cached(L"isNil");
 SMB_isNotNil                             = new_Type_Symbol_cached(L"isNotNil");

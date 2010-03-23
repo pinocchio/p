@@ -97,3 +97,4 @@ extern Type_Symbol SMB_applyBlock_to_;
 extern Type_Symbol SMB_loadPluginFrom_;
 extern Type_Symbol SMB_unloadPlugin_;
 extern Type_Symbol SMB_loadPluginFromPath_;
+extern Type_Symbol SMB_instVarAt_put_on_;
