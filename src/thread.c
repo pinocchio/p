@@ -84,7 +84,6 @@ void * pinocchio_main_thread(void * argc)
 {
     initialize_Thread();
     init_lib();
-    init_plugin();
 
     #ifdef TEST
     run_tests();

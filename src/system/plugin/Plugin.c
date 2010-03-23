@@ -29,28 +29,30 @@ void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
 
 typedef Object (*ftype)();
 
-Type_Object load_plugin(const char * file_path)
+int counter = 1;
+
+static Type_Object load_plugin(Object class, const char * file_path)
 {
     // resolve symbols now to see if there are any problems
-    void * handle       = dlopen(file_path, RTLD_NOW);
-    if (!handle) { return (Type_Object)Nil; }
-    
-    Type_Object plugin = (Type_Object)instantiate((Type_Class)Plugin_Plugin_Class);
-    
-    // extract the plugin name
-    ftype name_handle = (ftype)dlsym(handle, "plugin_name");
-    if (name_handle) {
-        plugin->ivals[1]  = (*name_handle)(); 
+    if (!counter--) {
+        assert0(NULL);
+    }
+
+    void * handle       = dlopen(file_path, RTLD_LAZY);
+    if (!handle) {
+        fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
+        return (Type_Object)Nil;
     }
     
-    Collection_Dictionary natives = (Collection_Dictionary)dlsym(handle, "natives");
+    Type_Object plugin = (Type_Object)instantiate((Type_Class)class);
+    
+    Object * natives = (Object *)dlsym(handle, "natives");
     if (natives) {
-        plugin->ivals[2] = (Object)(*name_handle)(); 
+        plugin->ivals[2] = *natives; 
     } else {
         plugin->ivals[2] = (Object)create_plugin();
     }
 
-    // plugin-ivals[2]  = (Object)plugin
     return plugin;
 }
 
@@ -59,10 +61,8 @@ NATIVE1(Plugin_load_)
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
      
     char * path = unicode_to_ascii(((Type_Symbol)w_path)->value);
-    Type_Object plugin = load_plugin(path);
-    plugin->ivals[0]    = w_path;
+    Type_Object plugin = load_plugin(self, path);
     RETURN_FROM_NATIVE(plugin);
-    free(path);
 }
 
 NATIVE0(Plugin_unload)

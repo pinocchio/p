@@ -26,9 +26,16 @@ NATIVE3(Interpreter_instVarAt_put_on_)
     RETURN_FROM_NATIVE(value);
 }
 
-PLUGIN(L"Interpretation.Interpreter")
+NATIVE2(Interpreter_instVarAt_from_)
+    Object w_index  = NATIVE_ARG(0);
+    Object instance = NATIVE_ARG(1);
+    RETURN_FROM_NATIVE(Object_instVarAt_(instance, unwrap_int(w_index)));
+}
+
+PLUGIN()
     EXPORT(SMB_invokeNativeMethod_on_class_message_, Interpreter_invokeNative);
     EXPORT(SMB_instVarAt_put_on_, Interpreter_instVarAt_put_on_);
+    EXPORT(SMB_instVarAt_from_, Interpreter_instVarAt_from_);
 }
 
 void unload_plugin()

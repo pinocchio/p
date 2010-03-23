@@ -206,7 +206,6 @@ FILE * open_file(Object path, char * mode)
     FILE * file = fopen(filePath, mode);
     assert(file, printf("Failed to open '%s' (mode '%s', errno: %i)\n", 
                             filePath, mode, errno););
-    free(filePath);
     return file;
 }
 
