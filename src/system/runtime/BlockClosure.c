@@ -114,6 +114,7 @@ NATIVE0(Runtime_BlockClosure_numArgs)
 }
 
 NATIVE1(Runtime_BlockClosure_valueWithArguments_)
+    REFLECT1(SMB_applyBlock_to_);
     Type_Array args = (Type_Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 

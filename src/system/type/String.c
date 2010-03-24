@@ -82,11 +82,8 @@ CNT(Type_String_concat_)
 NATIVE1(Type_String_concat_)
     Object w_arg = NATIVE_ARG(0);
     push_CNT(Type_String_concat_);
-    push_CNT(send_Eval);
     RETURN_FROM_NATIVE(self); 
-    push_EXP(new_AST_Send((Object)new_AST_Constant(w_arg),
-                                                  (Object)SMB_asString, 
-                                                  0));
+    Type_Class_direct_dispatch(w_arg, HEADER(w_arg), (Object)SMB_asString, 0);
 }
 
 NATIVE0(Type_String_asSymbol)
