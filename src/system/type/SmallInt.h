@@ -19,6 +19,7 @@ extern Type_SmallInt new_Type_SmallInt(int value);
 
 /* ========================================================================= */
 
+extern Object wrap_int(int value);
 extern int unwrap_int(Object integer);
 
 /* ========================================================================= */

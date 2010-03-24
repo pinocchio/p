@@ -26,6 +26,7 @@ TYPE(Runtime_MethodContext);
 TYPE(Runtime_BlockClosure);
 TYPE(Runtime_MethodClosure);
 TYPE(AST_InstVariable);
+TYPE(AST_UnsintInstVariable);
 TYPE(Organization_ClassReference);
 TYPE(AST_InlineCache);
 TYPE(Runtime_InlineCache);

@@ -16,6 +16,7 @@
     L"returnContext", L"outerScope", L"unused"
 
 struct Runtime_BlockContext_t {
+    uns_int                 size;
     uns_int                 pc;
     uns_int                 scope_id;
     uns_int                 captured;
@@ -24,7 +25,7 @@ struct Runtime_BlockContext_t {
     Runtime_BlockContext    parent_frame;
     Runtime_BlockContext    parent_scope;
     Object                  unused;
-    struct Type_Array_t     locals;
+    Object                  locals[];
 };
 
 CREATE_INITIALIZERS(Runtime_BlockContext)
@@ -42,7 +43,6 @@ extern void free_context(Runtime_BlockContext context);
 
 /* ========================================================================= */
 
-extern Type_Array context_locals(Runtime_BlockContext context);
 extern Runtime_BlockContext current_env();
 extern void set_env(Object env);
 

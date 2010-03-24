@@ -11,6 +11,7 @@
     L"homeContext", L"returnContext", L"receiver", L"methodClass"
 
 struct Runtime_MethodContext_t {
+    uns_int                 size;
     uns_int                 pc;
     uns_int                 scope_id;
 	uns_int					captured;
@@ -19,7 +20,7 @@ struct Runtime_MethodContext_t {
     Runtime_BlockContext    parent_frame;
     Object                  self;
     Object                  class;
-    struct Type_Array_t     locals;
+    Object                  locals[];
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)

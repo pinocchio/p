@@ -25,7 +25,7 @@ void pre_init_Runtime_BlockClosure()
 
 /* ========================================================================= */
 
-Type_Array activation_from_native(uns_int argc)
+Runtime_BlockContext activation_from_native(uns_int argc)
 {
     Runtime_BlockClosure closure = current_env()->closure;
     AST_Block block = closure->code;
@@ -34,22 +34,22 @@ Type_Array activation_from_native(uns_int argc)
 
     //assert1(argc == paramc, "Catch-all arguments not supported yet!");
 
-    Type_Array args = context_locals(current_env());
+    Runtime_BlockContext context = current_env();
 
     while (argc > 0) {
         argc--;
-        args->values[argc] = pop_EXP();
+        context->locals[argc] = pop_EXP();
     }
     zap_EXP(); // remove self
 
     argc = paramc;
     // Set locals to nil.
     while (argc < paramc + localc) {
-        args->values[argc] = Nil;
+        context->locals[argc] = Nil;
         argc++;
     }
 
-    return args;
+    return context;
 }
 
 CNT(restore_env)

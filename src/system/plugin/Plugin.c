@@ -29,15 +29,8 @@ void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
 
 typedef Object (*ftype)();
 
-int counter = 1;
-
 static Type_Object load_plugin(Object class, const char * file_path)
 {
-    // resolve symbols now to see if there are any problems
-    if (!counter--) {
-        assert0(NULL);
-    }
-
     void * handle       = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
@@ -45,6 +38,8 @@ static Type_Object load_plugin(Object class, const char * file_path)
     }
     
     Type_Object plugin = (Type_Object)instantiate((Type_Class)class);
+    // TODO
+    //plugin->ivals[3] = handle
     
     Object * natives = (Object *)dlsym(handle, "natives");
     if (natives) {

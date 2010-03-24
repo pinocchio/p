@@ -12,11 +12,6 @@ static Type_Array unused_contexts;
 
 /* ========================================================================= */
 
-Type_Array context_locals(Runtime_BlockContext context)
-{
-    return &context->locals;
-}
-
 static Runtime_BlockContext make_context(uns_int size)
 {
     NEW_ARRAY_OBJECT(Runtime_BlockContext, Object[size]);
@@ -44,7 +39,7 @@ Runtime_BlockContext optain_context(uns_int size)
 void free_context(Runtime_BlockContext context)
 {
     if (context->captured) { return; }
-    uns_int size = context_locals(context)->size;
+    uns_int size = context->size;
     Object next = unused_contexts->values[size];
     context->closure = (Runtime_BlockClosure)Nil;
     context->home_context = (Runtime_MethodContext)Nil;
@@ -53,7 +48,7 @@ void free_context(Runtime_BlockContext context)
     context->unused  = Nil;
     int i;
     for (i = 0; i < size; i++) {
-        context_locals(context)->values[i] = Nil;
+        context->locals[i] = Nil;
     }
     unused_contexts->values[size] = (Object)context;
 }
@@ -80,11 +75,11 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     result->parent_frame        = current_env();
     Runtime_BlockContext parent = closure->context;
     result->scope_id            = parent->scope_id + 1;
-    if (!context_locals(parent)->size) {
+    if (!parent->size) {
         parent = parent->parent_scope;
     }
     result->parent_scope = parent;
-    context_locals(result)->size = size;
+    result->size = size;
     
     return result;
 }
@@ -105,6 +100,11 @@ void pre_init_Runtime_BlockContext()
         new_Class_named(Type_Object_Class,
                         L"Runtime_BlockContext",
                         CREATE_ARRAY_TAG(RUNTIME_BLOCKCONTEXT));
+
+    Type_Array layout = (Type_Array)Runtime_BlockContext_Class->layout;
+    HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[2]) = AST_UnsintInstVariable_Class;
 }
 
 /* ========================================================================= */
@@ -124,11 +124,11 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
     }
     /* TODO jump to error handler. */
     assert1(scope_id == self->scope_id, "TODO jump to error handler");
-    assert(local_id < context_locals(self)->size,
+    assert(local_id < self->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
-                 local_id, context_locals(self)->size));
+                 local_id, self->size));
     
-    return context_locals(self)->values[local_id];
+    return self->locals[local_id];
 }
 
 void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
@@ -146,11 +146,11 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
     }
     /* TODO jump to error handler. */
     assert1(scope_id == scope_id, "TODO jump to error handler");
-    assert(local_id < context_locals(self)->size,
+    assert(local_id < self->size,
 		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
-                  local_id, context_locals(self)->size));
+                  local_id, self->size));
 
-    context_locals(self)->values[local_id] = value;
+    self->locals[local_id] = value;
 }
 
 /* ========================================================================= */

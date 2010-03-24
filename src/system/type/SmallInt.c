@@ -145,6 +145,11 @@ void post_init_Type_SmallInt()
 
 /* ========================================================================= */
 
+Object wrap_int(int value)
+{
+    return (Object)new_Type_SmallInt(value);
+}
+
 int unwrap_int(Object integer)
 {
     // TODO do more stuff in case we are not an int.

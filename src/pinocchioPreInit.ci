@@ -13,6 +13,7 @@ pre_init_Collection_Dictionary();
 pre_init_Type_String();
 pre_init_Type_Symbol();
 pre_init_AST_InstVariable();
+pre_init_AST_UnsintInstVariable();
 
 pre_init_Runtime_InlineCache();
 pre_init_Organization_ClassReference();

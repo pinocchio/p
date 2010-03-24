@@ -23,9 +23,12 @@ SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFI
 OBJECTS=$(CFILES:%.c=%.o)
 ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
+%.o: %.c
+	@echo Compiling: $@
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
+	@$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
 
 run: $(TARGET)
 	./$(TARGET)
@@ -37,11 +40,11 @@ vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 	CFLAGS="-O0 -DTEST -DTEST_FAIL -DPRINT_DISPATCH_TRACE" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
 
 plugin:
-	cd plugin; make;
+	@cd plugin; make;
 
 clean:
 	@rm -rf $(ALLOBJECTS) $(TARGET) make.depend
-	cd plugin; ${MAKE} clean;
+	@cd plugin; ${MAKE} clean;
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)

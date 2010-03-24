@@ -14,6 +14,10 @@ void pre_init_Runtime_MethodContext()
 		new_Class_named(Type_Object_Class,
                         L"MethodContext",
                         CREATE_ARRAY_TAG(RUNTIME_METHODCONTEXT));
+    Type_Array layout = (Type_Array)Runtime_MethodContext_Class->layout;
+    HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[2]) = AST_UnsintInstVariable_Class;
 }
 
 /* ========================================================================= */
@@ -31,7 +35,7 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
 	result->parent_frame = current_env();
 	result->class        = (Object)class;
 	result->self         = self;
-    context_locals((Runtime_BlockContext)result)->size = size;
+    ((Runtime_BlockContext)result)->size = size;
     return result;
 }
 
@@ -39,7 +43,7 @@ Runtime_MethodContext new_Empty_Runtime_MethodContext()
 {
     NEW_OBJECT(Runtime_MethodContext);
     result->home_context    = result;
-    context_locals((Runtime_BlockContext)result)->size = 0;
+    ((Runtime_BlockContext)result)->size = 0;
     result->scope_id        = 0;
     return result;
 }
