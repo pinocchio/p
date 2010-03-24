@@ -105,4 +105,4 @@ Type_Symbol SMB_load_;
 Type_Symbol SMB_unload;
 Type_Symbol SMB_instVarAt_from_;
 Type_Symbol SMB_continue_escape_;
-Type_Symbol SMB_continue_on_;
+Type_Symbol SMB_continueOn_;
