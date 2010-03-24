@@ -104,9 +104,10 @@ NATIVE2(Type_Array_instVarAt_put_)
 
 void post_init_Type_Array()
 {
-    Type_Array_Class->name    = new_Type_Symbol_cached(L"Array"); 
-    Type_Array_Class->methods = new_Collection_Dictionary();
-    empty_Type_Array->size    = 0;
+    Type_Array_Class->name            = new_Type_Symbol_cached(L"Array"); 
+    Type_Array_Class->methods         = new_Collection_Dictionary();
+    HEADER(Type_Array_Class)->methods = new_Collection_Dictionary();
+    empty_Type_Array->size            = 0;
     
     // TODO move Array to Collection
     Collection_Dictionary natives = add_plugin(L"Collection.Array");

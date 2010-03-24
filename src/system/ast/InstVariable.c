@@ -31,6 +31,7 @@ void pre_init_AST_InstVariable()
         new_Class_named(Type_Object_Class,
                         L"InstVariable",
                         CREATE_OBJECT_TAG(AST_INSTVARIABLE));
+    fix_layout((Type_Array)AST_InstVariable_Class->layout);
     fix_layout((Type_Array)Collection_Dictionary_Class->layout);
     fix_layout((Type_Array)Metaclass->layout);
     fix_layout((Type_Array)HEADER(Type_Object_Class)->layout);

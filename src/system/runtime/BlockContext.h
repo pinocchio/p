@@ -18,7 +18,7 @@
 struct Runtime_BlockContext_t {
     uns_int                 pc;
     uns_int                 scope_id;
-	uns_int					captured;
+    uns_int                 captured;
     Runtime_BlockClosure    closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;
