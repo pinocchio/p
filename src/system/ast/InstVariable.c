@@ -33,6 +33,7 @@ void pre_init_AST_InstVariable()
                         CREATE_OBJECT_TAG(AST_INSTVARIABLE));
     fix_layout((Type_Array)Collection_Dictionary_Class->layout);
     fix_layout((Type_Array)Metaclass->layout);
+    fix_layout((Type_Array)HEADER(Type_Object_Class)->layout);
 }
 
 /* ========================================================================= */

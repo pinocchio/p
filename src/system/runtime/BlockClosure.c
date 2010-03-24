@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/BlockClosure.h>
@@ -105,19 +104,7 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 }
 
 NATIVE(Runtime_BlockClosure_apply_)
-	if (interpreter != NULL) {
-		Runtime_Message message = new_Runtime_Message((Object)SMB_applyBlock_to_, argc);
-		int i;
-		for (i = 0; i < argc; i++) {
-			message->arguments[i] = peek_EXP(argc-i-1);
-		}
-		zapn_EXP(argc+2);
-		return Type_Class_direct_dispatch(
-					interpreter,
-					HEADER(interpreter),
-					(Object)SMB_applyBlock_to_,
-					2, self, message);
-	}
+    REFLECT(SMB_applyBlock_to_);
     Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
     Runtime_BlockClosure_apply(closure, argc);
 }

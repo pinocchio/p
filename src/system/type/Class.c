@@ -39,6 +39,7 @@ Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaT
     result->methods      = new_Collection_Dictionary();
     Type_Class_set_superclass(result, superclass);
     result->layout       = layout;
+    metaclass->name      = result;
     return result;
 }
 

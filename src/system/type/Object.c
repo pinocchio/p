@@ -35,7 +35,7 @@ void pre_init_Type_Object()
 void inter_init_Type_Object() 
 {
     HEADER(Type_Object_Class)->layout = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
-    Type_Object_Class->layout   = create_layout(OBJECT_SIZE, OBJECT); 
+    Type_Object_Class->layout         = create_layout(OBJECT_SIZE, OBJECT); 
     REFER_TO(Type_Object);
 }
 

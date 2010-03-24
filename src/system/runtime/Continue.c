@@ -16,15 +16,17 @@ Runtime_Continue new_Runtime_Continue()
 
 void pre_init_Runtime_Continue()
 {
-    Runtime_Continue_Class = new_Class_named(Type_Object_Class,
-                                         L"Continue",
-                                         CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
+    Runtime_Continue_Class =
+        new_Class_named(Type_Object_Class,
+                        L"Continue",
+                        CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
 }
 
 /* ========================================================================= */
 
 NATIVE1(Runtime_Continue_escape_)
     // LOGFUN;
+    REFLECT(SMB_continue_escape_);
     Runtime_Continue ast_cont = (Runtime_Continue)self;
     Object arg = NATIVE_ARG(0);
     // restore the stack
@@ -45,6 +47,7 @@ static void apply(Object closure, uns_int argc)
 
 NATIVE1(Runtime_Continue_on_)
     // LOGFUN;
+    REFLECT(SMB_continue_on_);
     Runtime_Continue runtimeContinue = new_Runtime_Continue();
     runtimeContinue->exp_offset      = (tget(_EXP_) - &(tget(Double_Stack)[0]) - (argc + 1));
     runtimeContinue->cnt_offset      = (&(tget(Double_Stack)[STACK_SIZE]) - (Object*)tget(_CNT_));
