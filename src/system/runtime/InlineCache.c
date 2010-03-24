@@ -22,6 +22,8 @@ void pre_init_Runtime_InlineCache()
 Runtime_InlineCache new_Runtime_InlineCache()
 {
     NEW_OBJECT(Runtime_InlineCache);
+    result->class  = Nil;
+    result->method = Nil;
     return result;
 }
 
