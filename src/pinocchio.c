@@ -73,6 +73,7 @@ void CNT_send_Eval()
     EVAL_IF(AST_Self)
     EVAL_IF(AST_Block)
     EVAL_IF(AST_InstVariable)
+    EVAL_IF(AST_UnsintInstVariable)
     EVAL_IF(Organization_ClassReference)
     
     /* TODO fallback by actually sending the eval message */

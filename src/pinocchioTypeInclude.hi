@@ -3,6 +3,7 @@
 #include <system/type/Character.h>
 #include <system/type/String.h>
 #include <system/type/Array.h>
+#include <system/runtime/Context.h>
 #include <system/runtime/MethodContext.h>
 #include <system/runtime/BlockContext.h>
 #include <system/collection/Dictionary.h>

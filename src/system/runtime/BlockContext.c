@@ -6,7 +6,7 @@
 
 #define CONTEXT_CACHE_SIZE 128
 
-Type_Class Runtime_BlockContext_Class;
+DECLARE_CLASS(Runtime_BlockContext);
 static Object _Env_;
 static Type_Array unused_contexts;
 
@@ -97,14 +97,15 @@ void set_env(Object env)
 void pre_init_Runtime_BlockContext()
 {
     Runtime_BlockContext_Class =
-        new_Class_named(Type_Object_Class,
-                        L"Runtime_BlockContext",
+        new_Class_named(Runtime_Context_Class,
+                        L"BlockContext",
                         CREATE_ARRAY_TAG(RUNTIME_BLOCKCONTEXT));
 
     Type_Array layout = (Type_Array)Runtime_BlockContext_Class->layout;
     HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
     HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
     HEADER(layout->values[2]) = AST_UnsintInstVariable_Class;
+    REFER_TO(Runtime_BlockContext);    
 }
 
 /* ========================================================================= */

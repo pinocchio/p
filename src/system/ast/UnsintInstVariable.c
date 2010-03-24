@@ -30,16 +30,20 @@ void pre_init_AST_UnsintInstVariable()
 void AST_UnsintInstVariable_eval(AST_UnsintInstVariable var)
 {
     // LOGFUN;
-    poke_EXP(0, wrap_int(Object_instVarAt_(current_env()->home_context->self,
-                                  unwrap_int((Object)var->index))));
+    poke_EXP(0,
+        wrap_int(
+            (uns_int)Object_instVarAt_(
+                current_env()->home_context->self,
+                unwrap_int((Object)var->index))));
 }
 
 void AST_UnsintInstVariable_assign(AST_UnsintInstVariable var, Object value)
 {
     // LOGFUN;
-	Object_instVarAt_put_(current_env()->home_context->self,
-						  unwrap_int((Object)var->index),
-						  unwrap_int(value));
+	Object_instVarAt_put_(
+        current_env()->home_context->self,
+        unwrap_int((Object)var->index),
+		(Object)(uns_int)unwrap_int(value));
 }
 
 /* ========================================================================= */

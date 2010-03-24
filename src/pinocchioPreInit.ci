@@ -31,6 +31,7 @@ pre_init_AST_Send();
 pre_init_AST_Super();
 pre_init_AST_Variable();
 pre_init_IO_File();
+pre_init_Runtime_Context();
 pre_init_Runtime_BlockContext();
 pre_init_Runtime_BlockClosure();
 pre_init_Runtime_MethodContext();

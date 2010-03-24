@@ -10,10 +10,8 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_BLOCKCONTEXT_SIZE 8
-#define RUNTIME_BLOCKCONTEXT_VARS\
-    L"pc", L"scopeId", L"captured", L"closure", L"homeContext",\
-    L"returnContext", L"outerScope", L"unused"
+#define RUNTIME_BLOCKCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 2)
+#define RUNTIME_BLOCKCONTEXT_VARS RUNTIME_CONTEXT_VARS, L"outerScope", L"unused"
 
 struct Runtime_BlockContext_t {
     uns_int                 size;

@@ -47,6 +47,9 @@ CNT(AST_Assign_assign)
         return AST_Variable_assign((AST_Variable)var, value);
     } else if (HEADER(var) == AST_InstVariable_Class) {
         return AST_InstVariable_assign((AST_InstVariable)var, value);
+    } else if (HEADER(var) == AST_UnsintInstVariable_Class) {
+        return AST_UnsintInstVariable_assign((AST_UnsintInstVariable)var,
+                                             value);
     }
     
     // TODO send assign: to self->variable.

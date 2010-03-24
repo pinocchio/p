@@ -5,10 +5,9 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_METHODCONTEXT_SIZE 8
-#define RUNTIME_METHODCONTEXT_VARS\
-    L"pc", L"scopeId", L"captured", L"closure",\
-    L"homeContext", L"returnContext", L"receiver", L"methodClass"
+#define RUNTIME_METHODCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 2)
+#define RUNTIME_METHODCONTEXT_VARS RUNTIME_CONTEXT_VARS,\
+                                   L"receiver", L"methodClass"
 
 struct Runtime_MethodContext_t {
     uns_int                 size;
