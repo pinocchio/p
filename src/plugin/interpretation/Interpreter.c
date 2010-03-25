@@ -3,9 +3,8 @@
 NATIVE4(Interpreter_invokeNative)
     Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
     Object receiver               = NATIVE_ARG(1);
-    Type_Class mclass             = (Type_Class)NATIVE_ARG(2);
-    Runtime_Message message       = (Runtime_Message)NATIVE_ARG(3);
-    claim_EXP(message->size - 4);
+    Runtime_Message message       = (Runtime_Message)NATIVE_ARG(2);
+    claim_EXP(message->size - 3);
     int i;
     for (i = 0; i < message->size; i++) {
         poke_EXP(message->size - i - 1, message->arguments[i]);
@@ -14,7 +13,7 @@ NATIVE4(Interpreter_invokeNative)
             self,
             (AST_NativeMethod)closure->code,
             receiver,
-            mclass,
+            closure->host,
             message->size);
 }
 
@@ -33,7 +32,7 @@ NATIVE2(Interpreter_instVarAt_from_)
 }
 
 PLUGIN()
-    EXPORT(SMB_invokeNativeMethod_on_class_message_, Interpreter_invokeNative);
+    EXPORT(SMB_invokeNativeMethod_on_message_, Interpreter_invokeNative);
     EXPORT(SMB_instVarAt_put_on_, Interpreter_instVarAt_put_on_);
     EXPORT(SMB_instVarAt_from_, Interpreter_instVarAt_from_);
 }
