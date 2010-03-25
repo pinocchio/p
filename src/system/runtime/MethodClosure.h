@@ -18,12 +18,13 @@ struct Runtime_MethodClosure_t {
 };
 
 CREATE_INITIALIZERS(Runtime_MethodClosure)
-extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code);
+extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code,
+                                                       Type_Class host);
 
 /* ========================================================================= */
 
 extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                                         Type_Class class, uns_int argc);
+                                         uns_int argc);
 
 /* ========================================================================= */
 

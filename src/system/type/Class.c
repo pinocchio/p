@@ -90,9 +90,9 @@ CNT(Class_super)
 }
 
 
-void Method_invoke(Object method, Object self, Type_Class class, uns_int argc) {
+void Method_invoke(Object method, Object self, uns_int argc) {
     if (HEADER(method) == Runtime_MethodClosure_Class) {
-        Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, class, argc);
+        Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, argc);
     } else {
         assert1(NULL, "Unknown type of method installation");
     }
@@ -129,12 +129,12 @@ static void Class_next_lookup(Type_Class class)
     return Class_lookup(class->super, peek_EXP(3));
 }
 
-static void Class_invoke_do(Type_Class class, Object method, uns_int argc)
+static void Class_invoke_do(Object method, uns_int argc)
 {
     Object self = peek_EXP(2);
     zapn_EXP(6);
     zap_CNT();
-    Method_invoke(method, self, class, argc);
+    Method_invoke(method, self, argc);
 }
 
 static void CNT_Class_lookup_cache_invoke()
@@ -151,7 +151,7 @@ static void CNT_Class_lookup_cache_invoke()
     cache->class              = dispatch_type;
     cache->method             = method;
     
-    Class_invoke_do(class, method, argc); }
+    Class_invoke_do(method, argc); }
 
 static void CNT_Class_lookup_invoke()
 {
@@ -161,7 +161,7 @@ static void CNT_Class_lookup_invoke()
         return Class_next_lookup(class);
     }
     uns_int argc = (uns_int)peek_EXP(3);
-    Class_invoke_do(class, method, argc);
+    Class_invoke_do(method, argc);
 }
 
 static void Class_lookup(Type_Class class, Object msg)
@@ -250,7 +250,7 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     // TODO properly initialize the inlinecache when creating new sends
     if ((Object)cache != Nil) {
         if (class == (Type_Class)cache->class) {
-            return Method_invoke(cache->method, self, class, argc);
+            return Method_invoke(cache->method, self, argc);
         }
     } else {
         send->cache = new_Runtime_InlineCache();

@@ -26,7 +26,7 @@ extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int arg
 #define METHOD(fName, paramCount, localCount, numStatements)\
 Runtime_MethodClosure fName() {\
     AST_Method body          = new_AST_Method(paramCount, localCount, numStatements);\
-    Runtime_MethodClosure method = new_Runtime_MethodClosure(body);\
+    Runtime_MethodClosure method = new_Runtime_MethodClosure(body, (Type_Class)Nil);\
     method->info             = new_raw_AST_Info();\
     method->info->sourceFile = new_Type_String_from_charp(__FILE__);\
     method->info->name       = new_Type_String_from_charp(__FUNCTION__);\

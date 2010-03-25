@@ -18,13 +18,13 @@ void pre_init_Runtime_MethodClosure()
 
 /* ========================================================================= */
 
-Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code) 
+Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host) 
 {
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
     result->info        = empty_AST_Info;
     result->selector    = (Object)Nil;
-    result->host        = (Type_Class)Nil;
+    result->host        = host;
     return result;
 }
 
@@ -75,11 +75,12 @@ void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
 }
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
-                                  Type_Class class, uns_int argc)
+                                  uns_int argc)
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
     AST_Method method = closure->code;
+    Type_Class class = closure->host;
 
     if (HEADER(method) == AST_NativeMethod_Class) {
         return AST_NativeMethod_invoke(NULL, (AST_NativeMethod)method,
