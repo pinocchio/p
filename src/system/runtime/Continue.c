@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class Runtime_Continue_Class;
+DECLARE_CLASS(Runtime_Continue);
 
 /* ========================================================================= */
 
@@ -20,6 +20,11 @@ void pre_init_Runtime_Continue()
         new_Class_named(Type_Object_Class,
                         L"Continue",
                         CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
+    
+    Type_Array layout = (Type_Array)Runtime_Continue_Class->layout;
+    HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
+    REFER_TO(Runtime_Continue);
 }
 
 /* ========================================================================= */
