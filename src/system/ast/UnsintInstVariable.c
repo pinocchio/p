@@ -23,32 +23,56 @@ void pre_init_AST_UnsintInstVariable()
         new_Class_named(Type_Object_Class,
                         L"UnsintInstVariable",
                         CREATE_OBJECT_TAG(AST_UNSINTINSTVARIABLE));
+    REFER_TO(AST_UnsintInstVariable);
 }
 
 /* ========================================================================= */
 
+
+static Object AST_UnsintInstVariable_readFrom_(AST_UnsintInstVariable var, Object self)
+{
+    return wrap_int((uns_int)Object_instVarAt_(
+						self,
+						unwrap_int((Object)var->index)));
+}
+
+static void AST_UnsintInstVariable_assign_on_(AST_UnsintInstVariable var,
+                                              Object value,
+                                              Object self)
+{
+    Object_instVarAt_put_(self,
+						  unwrap_int((Object)var->index),
+						  (Object)(uns_int)unwrap_int(value));
+}
 void AST_UnsintInstVariable_eval(AST_UnsintInstVariable var)
 {
-    // LOGFUN;
-    poke_EXP(0,
-        wrap_int(
-            (uns_int)Object_instVarAt_(
-                current_env()->home_context->self,
-                unwrap_int((Object)var->index))));
+    poke_EXP(0, AST_UnsintInstVariable_readFrom_(var,
+                    current_env()->home_context->self));
 }
 
 void AST_UnsintInstVariable_assign(AST_UnsintInstVariable var, Object value)
 {
-    // LOGFUN;
-	Object_instVarAt_put_(
-        current_env()->home_context->self,
-        unwrap_int((Object)var->index),
-		(Object)(uns_int)unwrap_int(value));
+    AST_UnsintInstVariable_assign_on_(var, value, current_env()->home_context->self);
+}
+
+/* ========================================================================= */
+
+NATIVE1(AST_UnsintInstVariable_readFrom_)
+    RETURN_FROM_NATIVE(
+        AST_UnsintInstVariable_readFrom_((AST_UnsintInstVariable)self, NATIVE_ARG(0)));
+}
+
+NATIVE2(AST_UnsintInstVariable_assign_on_)
+    AST_UnsintInstVariable_assign_on_((AST_UnsintInstVariable)self,
+                                NATIVE_ARG(0), NATIVE_ARG(1));
+    RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */
 
 void post_init_AST_UnsintInstVariable()
 {
-    REFER_TO(AST_UnsintInstVariable);
+    Collection_Dictionary natives = add_plugin(L"AST.UnsintInstVariable");
+    store_native(natives, SMB_assign_on_, NM_AST_UnsintInstVariable_assign_on_);
+    store_native(natives, SMB_readFrom_ , NM_AST_UnsintInstVariable_readFrom_);
 }

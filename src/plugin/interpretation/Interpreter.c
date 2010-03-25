@@ -10,7 +10,8 @@ NATIVE4(Interpreter_invokeNative)
         poke_EXP(message->size - i - 1, message->arguments[i]);
     }
     AST_NativeMethod_invoke(
-            self,
+            interpreter, /* meta-interpreter */
+            self,        /* interpreter */
             (AST_NativeMethod)closure->code,
             receiver,
             closure->host,

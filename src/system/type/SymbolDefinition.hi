@@ -106,3 +106,6 @@ extern Type_Symbol SMB_unload;
 extern Type_Symbol SMB_instVarAt_from_;
 extern Type_Symbol SMB_continue_escape_;
 extern Type_Symbol SMB_continueOn_;
+extern Type_Symbol SMB_send_to_;
+extern Type_Symbol SMB_readFrom_;
+extern Type_Symbol SMB_assign_on_;

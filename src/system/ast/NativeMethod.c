@@ -46,7 +46,7 @@ void pre_init_AST_NativeMethod()
 
 /* ========================================================================= */
 
-void AST_NativeMethod_invoke(Object interpreter, AST_NativeMethod method,
+void AST_NativeMethod_invoke(Object metainterp, Object interpreter, AST_NativeMethod method,
                              Object self, Type_Class class, uns_int argc)
 {
     #ifdef DEBUG
@@ -66,7 +66,7 @@ void AST_NativeMethod_invoke(Object interpreter, AST_NativeMethod method,
             Object module_name    = annotation->arguments[1];
             Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
             if (module == NULL) { method->code = (native)-1; break; }
-            if (HEADER(module) == Plugin_Plugin_Class) {
+            if (HEADER(module) == (Type_Class)Plugin_Plugin_Class) {
                 module = ((Type_Object)module)->ivals[2]; 
             }
             Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
@@ -97,7 +97,7 @@ void AST_NativeMethod_invoke(Object interpreter, AST_NativeMethod method,
                                               ((Type_Symbol)primitive_name)->value););
         }
     }
-    method->code(interpreter, self, class, argc);
+    method->code(metainterp, interpreter, self, class, argc);
 }
 
 /* ========================================================================= */

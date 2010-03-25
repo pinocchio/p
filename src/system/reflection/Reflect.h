@@ -10,11 +10,23 @@
 			message->arguments[i] = peek_EXP(argc-i-1);\
 		}\
 		zapn_EXP(argc+2);\
-		return Type_Class_direct_dispatch(\
-					interpreter,\
-					HEADER(interpreter),\
-					(Object)(selector),\
-					2, self, message);\
+        if (metainterp == NULL) {\
+		    return Type_Class_direct_dispatch(\
+				    	interpreter,\
+					    HEADER(interpreter),\
+					    (Object)(selector),\
+					    2, self, message);\
+        } else {\
+            Runtime_Message metamessage =\
+                new_Runtime_Message((Object)selector, 2);\
+            metamessage->arguments[0] = self;\
+            metamessage->arguments[1] = message;\
+            return Type_Class_direct_dispatch(\
+                        metainterp,\
+                        HEADER(metainterp),\
+                        (Object)SMB_send_to_,\
+                        2, metamessage, interpreter);\
+        }\
 	}
 
 #define REFLECT1(selector)\
