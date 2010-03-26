@@ -111,3 +111,7 @@ Type_Symbol SMB_readFrom_;
 Type_Symbol SMB_assign_on_;
 Type_Symbol SMB_pinocchioReflective_;
 Type_Symbol SMB_Reflection_Reflection;
+Type_Symbol SMB_blockclosureValue_message_;
+Type_Symbol SMB_blockclosureValueWithArguments_message_;
+Type_Symbol SMB_continueOn_message_;
+Type_Symbol SMB_continueEscape_message_;

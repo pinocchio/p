@@ -132,7 +132,9 @@ NATIVE1(Runtime_BlockClosure_valueWithArguments_)
 void post_init_Runtime_BlockClosure()
 {
     Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
-    store_native(natives, SMB_value,               NM_Runtime_BlockClosure_apply_);
-    store_native(natives, SMB_valueWithArguments_, NM_Runtime_BlockClosure_valueWithArguments_);
-    store_native(natives, SMB_numArgs,             NM_Runtime_BlockClosure_numArgs);
+    store_native(natives, SMB_blockclosureValue_message_, NM_Runtime_BlockClosure_apply_);
+    store_native(natives, SMB_blockclosureValueWithArguments_message_,
+                          NM_Runtime_BlockClosure_valueWithArguments_);
+    natives = add_plugin(L"Runtime.BlockClosure");
+    store_native(natives, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
 }

@@ -12,7 +12,7 @@
 
 struct Runtime_Message_t {
     uns_int     size;
-    Object      selector;
+    Type_Symbol selector;
     Object      arguments[];
 };
 

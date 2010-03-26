@@ -184,7 +184,8 @@ NATIVE2(Type_Object_perform_withArguments_)
     Object w_selector   = NATIVE_ARG(0);
     Object w_args       = NATIVE_ARG(1);
 
-    assert0(HEADER(w_args) == Type_Array_Class);
+    Object tag = GETTAG(w_args);
+    ASSERT_TAG_LAYOUT(tag, Array);
 
     zapn_EXP(4);    
 

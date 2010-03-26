@@ -68,6 +68,6 @@ NATIVE1(Runtime_Continue_on_)
 void post_init_Runtime_Continue()
 {
     Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
-    store_native(natives, SMB_escape_, NM_Runtime_Continue_escape_);
-    store_native(natives, SMB_on_,     NM_Runtime_Continue_on_);
+    store_native(natives, SMB_continueEscape_message_, NM_Runtime_Continue_escape_);
+    store_native(natives, SMB_continueOn_message_,     NM_Runtime_Continue_on_);
 }

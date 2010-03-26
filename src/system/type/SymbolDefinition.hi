@@ -111,3 +111,7 @@ extern Type_Symbol SMB_readFrom_;
 extern Type_Symbol SMB_assign_on_;
 extern Type_Symbol SMB_pinocchioReflective_;
 extern Type_Symbol SMB_Reflection_Reflection;
+extern Type_Symbol SMB_blockclosureValue_message_;
+extern Type_Symbol SMB_blockclosureValueWithArguments_message_;
+extern Type_Symbol SMB_continueOn_message_;
+extern Type_Symbol SMB_continueEscape_message_;
