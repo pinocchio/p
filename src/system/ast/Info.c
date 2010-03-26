@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Info_Class;
+DECLARE_CLASS(AST_Info);
 AST_Info empty_AST_Info;
 
 /* ========================================================================= */
@@ -38,6 +38,7 @@ void pre_init_AST_Info()
                                              CREATE_OBJECT_TAG(AST_INFO));
     empty_AST_Info         = NEW_t(AST_Info);
     HEADER(empty_AST_Info) = AST_Info_Class;
+    REFER_TO(AST_Info);
 }
 
 /* ========================================================================= */

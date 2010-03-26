@@ -3,7 +3,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Annotation_Class;
+DECLARE_CLASS(AST_Annotation);
 
 /* ========================================================================= */
 
@@ -32,9 +32,24 @@ void pre_init_AST_Annotation()
     AST_Annotation_Class = new_Class_named(Type_Object_Class,
                                      L"Annotation",
                                      CREATE_ARRAY_TAG(AST_ANNOTATION));
+    REFER_TO(AST_Annotation);
 }
 
 /* ========================================================================= */
+
+AST_Annotation lookup_annotation(Type_Array annotations, Object selector)
+{
+    assert1(HEADER(annotations) == Type_Array_Class, "Annotations should be an array");
+    int i;
+    for (i = 0; i < annotations->size; i++) {
+        AST_Annotation annotation = (AST_Annotation)annotations->values[i];
+        if (HEADER(annotation) != AST_Annotation_Class) { continue; }
+        if (annotation->selector == selector) {
+            return annotation;
+        }
+    }
+    return NULL;
+}
 
 /* ========================================================================= */
 

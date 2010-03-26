@@ -13,11 +13,17 @@ Collection_Dictionary create_plugin()
 
 Collection_Dictionary add_plugin(const wchar_t * name)
 {
-    Collection_Dictionary natives = new_Collection_Dictionary();
+    Object symbol = (Object)new_Type_Symbol_cached(name);
+    Collection_Dictionary plugin = 
+        (Collection_Dictionary)Collection_Dictionary_quick_lookup(_NATIVES_,
+                                                                  symbol);
+    if (plugin) { return plugin; }
+
+    plugin = new_Collection_Dictionary();
     Collection_Dictionary_quick_store(_NATIVES_,
                                       (Object)new_Type_Symbol_cached(name),
-                                      (Object)natives);
-    return natives;
+                                      (Object)plugin);
+    return plugin;
 }
 
 void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
@@ -73,6 +79,6 @@ void init_plugin()
     Collection_Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_load_,  NM_Plugin_load_);
     store_native(natives, SMB_unload, NM_Plugin_unload);
-    ((Type_Class)Plugin_Plugin_Class)->cvars[0] = _NATIVES_;
+    ((Type_Class)Plugin_Plugin_Class)->cvars[0] = (Object)_NATIVES_;
 }
 

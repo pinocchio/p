@@ -6,7 +6,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Super_Class;
+DECLARE_CLASS(AST_Super);
 
 /* ========================================================================= */
 
@@ -36,6 +36,7 @@ void pre_init_AST_Super()
     AST_Super_Class = new_Class_named(Type_Object_Class,
                                       L"Super",
                                       CREATE_ARRAY_TAG(AST_SUPER));
+    REFER_TO(AST_Super);
 }
 
 /* ========================================================================= */

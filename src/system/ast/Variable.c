@@ -6,7 +6,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Variable_Class;
+DECLARE_CLASS(AST_Variable);
 
 /* ========================================================================= */
 
@@ -35,6 +35,7 @@ void pre_init_AST_Variable()
     AST_Variable_Class = new_Class_named(Type_Object_Class,
                                          L"Variable",
                                          CREATE_OBJECT_TAG(AST_VARIABLE));
+    REFER_TO(AST_Variable);
 }
 
 /* ========================================================================= */

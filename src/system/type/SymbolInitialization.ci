@@ -1,4 +1,5 @@
 // SMB__concat                        = new_Type_Symbol_cached(L"concat:");
+SMB_Reflection_Reflection          = new_Type_Symbol_cached(L"Reflection.Reflection");
 SMB__and                           = new_Type_Symbol_cached(L"&");
 SMB__concat                        = new_Type_Symbol_cached(L",");
 SMB__divide                        = new_Type_Symbol_cached(L"//");
@@ -75,7 +76,7 @@ SMB_package_                       = new_Type_Symbol_cached(L"package:");
 SMB_perform_                       = new_Type_Symbol_cached(L"perform:");
 SMB_perform_withArguments_         = new_Type_Symbol_cached(L"perform:withArguments:");
 SMB_pinocchioPrimitive_module_     = new_Type_Symbol_cached(L"pinocchioPrimitive:module:");
-SMB_pinocchioReflective_module_    = new_Type_Symbol_cached(L"pinocchioReflective:module:");
+SMB_pinocchioReflective_           = new_Type_Symbol_cached(L"pinocchioReflective:");
 SMB_read                           = new_Type_Symbol_cached(L"read");
 SMB_readAll                        = new_Type_Symbol_cached(L"readAll");
 SMB_readFrom_                      = new_Type_Symbol_cached(L"readFrom:");

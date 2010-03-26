@@ -109,4 +109,5 @@ Type_Symbol SMB_continueOn_;
 Type_Symbol SMB_send_to_;
 Type_Symbol SMB_readFrom_;
 Type_Symbol SMB_assign_on_;
-Type_Symbol SMB_pinocchioReflective_module_;
+Type_Symbol SMB_pinocchioReflective_;
+Type_Symbol SMB_Reflection_Reflection;

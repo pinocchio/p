@@ -6,7 +6,6 @@
 /* ========================================================================= */
 
 DECLARE_CLASS(Type_Nil);
-Type_Class Type_Nil_Class;
 Object Nil;
 AST_Constant Nil_Const;
 

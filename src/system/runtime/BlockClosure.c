@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class Runtime_BlockClosure_Class;
+DECLARE_CLASS(Runtime_BlockClosure);
 
 /* ========================================================================= */
 
@@ -21,6 +21,7 @@ void pre_init_Runtime_BlockClosure()
     Runtime_BlockClosure_Class = new_Class_named(Type_Object_Class,
                                                  L"BlockClosure",
                                                  CREATE_OBJECT_TAG(RUNTIME_BLOCKCLOSURE));
+    REFER_TO(Runtime_BlockClosure);
 }
 
 /* ========================================================================= */
@@ -130,7 +131,7 @@ NATIVE1(Runtime_BlockClosure_valueWithArguments_)
 
 void post_init_Runtime_BlockClosure()
 {
-    Collection_Dictionary natives = add_plugin(L"Runtime.BlockClosure");
+    Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, SMB_value,               NM_Runtime_BlockClosure_apply_);
     store_native(natives, SMB_valueWithArguments_, NM_Runtime_BlockClosure_valueWithArguments_);
     store_native(natives, SMB_numArgs,             NM_Runtime_BlockClosure_numArgs);

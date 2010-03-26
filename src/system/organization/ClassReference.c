@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Type_Class Organization_ClassReference_Class;
+DECLARE_CLASS(Organization_ClassReference);
 
 /* ========================================================================= */
 
@@ -35,6 +35,7 @@ void pre_init_Organization_ClassReference()
         new_Class_named(Type_Object_Class,
                         L"ClassReference",
                         CREATE_OBJECT_TAG(ORGANIZATION_CLASSREFERENCE));
+    REFER_TO(Organization_ClassReference);
 }
 
 /* ========================================================================= */

@@ -48,7 +48,7 @@ static void NM_##name(Object self, Type_Class class, uns_int argc) {
 
 extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self,
                                     Type_Class class, uns_int argc);
-extern native lookup_native(Type_Array annotations, Object selector);
+extern native lookup_native(Object primitive_name, Object module_name);
 
 /* ========================================================================= */
 

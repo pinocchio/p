@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Block_Class;
+DECLARE_CLASS(AST_Block);
 
 /* ========================================================================= */
 
@@ -65,6 +65,7 @@ void pre_init_AST_Block()
     AST_Block_Class = new_Class_named(Type_Object_Class,
                                       L"Block",
                                       CREATE_ARRAY_TAG(AST_BLOCK));
+    REFER_TO(AST_Block);
 }
 
 /* ========================================================================= */

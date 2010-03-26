@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Type_Class AST_Send_Class;
+DECLARE_CLASS(AST_Send);
 
 /* ========================================================================= */
 
@@ -40,6 +40,7 @@ void pre_init_AST_Send()
     AST_Send_Class = new_Class_named(Type_Object_Class,
                                      L"Send",
                                      CREATE_ARRAY_TAG(AST_SEND));
+    REFER_TO(AST_Send);
 }
 
 /* ========================================================================= */
