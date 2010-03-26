@@ -10,6 +10,9 @@ DECLARE_CLASS(Runtime_BlockClosure);
 
 Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, Runtime_BlockContext context) {
     NEW_OBJECT(Runtime_BlockClosure);
+    assert1(HEADER(context) == Runtime_BlockContext_Class ||
+            HEADER(context) == Runtime_MethodContext_Class,
+            "Wrong type of context!");
     result->code      = code;
     result->context   = context;
     context->captured = 1;

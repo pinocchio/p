@@ -85,6 +85,7 @@ void run_tests()
 {
    init_Exception_Handling();
    
+/*
 test_Type_Class();
 test_IO_File();
 test_Type_Object();
@@ -99,6 +100,7 @@ test_Runtime_BlockClosure();
 test_AST_Info();
 test_Runtime_MethodClosure();
 test_AST_InstVariable();
+*/
 test_lib();
 
 }

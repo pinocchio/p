@@ -66,8 +66,9 @@ void AST_InstVariable_assign(AST_InstVariable var, Object value)
 /* ========================================================================= */
 
 NATIVE1(AST_InstVariable_readFrom_)
+    Object receiver = NATIVE_ARG(0); 
     RETURN_FROM_NATIVE(
-        AST_InstVariable_readFrom_((AST_InstVariable)self, NATIVE_ARG(0)));
+        AST_InstVariable_readFrom_((AST_InstVariable)self, receiver));
 }
 
 NATIVE2(AST_InstVariable_assign_on_)

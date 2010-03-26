@@ -58,8 +58,10 @@ void AST_UnsintInstVariable_assign(AST_UnsintInstVariable var, Object value)
 /* ========================================================================= */
 
 NATIVE1(AST_UnsintInstVariable_readFrom_)
+    Object receiver = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(
-        AST_UnsintInstVariable_readFrom_((AST_UnsintInstVariable)self, NATIVE_ARG(0)));
+        AST_UnsintInstVariable_readFrom_((AST_UnsintInstVariable)self,
+                                         receiver));
 }
 
 NATIVE2(AST_UnsintInstVariable_assign_on_)

@@ -310,7 +310,7 @@ void i_atx(Object o, uns_int argc, ...) {
 }
 
 
-Type_Class class(Object o)
+Type_Class pclass(Object o)
 {
     return HEADER(o);
 }

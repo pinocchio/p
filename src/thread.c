@@ -99,7 +99,7 @@ void * pinocchio_main_thread(void * argc)
 void pinocchio_main(int argc, const char ** argv)
 {
     cargv = argv;
-    //pthread_t main_thread;
+    pthread_t main_thread;
     //pthread_create(&main_thread, NULL, &pinocchio_main_thread, (void*)(uns_int)argc);
     //pthread_join(main_thread, NULL);
     pinocchio_main_thread((void*)(uns_int)argc);
