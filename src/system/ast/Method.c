@@ -61,6 +61,54 @@ AST_Method new_AST_Method_with(Type_Array params,
 
 /* ========================================================================= */
 
+static void CNT_AST_Method_continue()
+{
+    Runtime_MethodContext env = (Runtime_MethodContext)current_env();
+    AST_Method code = env->closure->code;
+    poke_EXP(0, code->body[env->pc]);
+    
+    env->pc++;
+
+    if (code->size <= env->pc) {
+        poke_CNT(restore_env); 
+    } 
+    push_CNT(send_Eval);
+}
+
+static void start_eval(AST_Method method)
+{
+    if (1 < method->size) {
+        push_CNT(AST_Method_continue);
+    } else {
+        push_CNT(restore_env);
+    }
+    
+    poke_EXP(0, method->body[0]);
+    push_CNT(send_Eval);
+}
+
+/* ========================================================================= */
+
+void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
+                           Object self, Type_Class class, uns_int argc)
+{
+    assert(argc == method->params->size,
+        printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
+                    method->params->size, argc););
+    
+    if (method->size == 0) { 
+        RETURN_FROM_NATIVE(self);
+        return;
+    }
+    
+    set_env((Object)new_Runtime_MethodContext(closure, self, class));
+    activation_from_native(argc);
+
+    start_eval(method);
+}
+
+/* ========================================================================= */
+
 void post_init_AST_Method()
 {
 }

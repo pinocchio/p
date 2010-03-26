@@ -109,3 +109,4 @@ extern Type_Symbol SMB_continueOn_;
 extern Type_Symbol SMB_send_to_;
 extern Type_Symbol SMB_readFrom_;
 extern Type_Symbol SMB_assign_on_;
+extern Type_Symbol SMB_pinocchioReflective_module_;

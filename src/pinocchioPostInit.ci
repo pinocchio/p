@@ -10,6 +10,7 @@ post_init_Collection_Dictionary();
 post_init_Runtime_BlockContext();
 post_init_IO_File();
 post_init_AST_NativeMethod();
+post_init_AST_ReflectionMethod();
 post_init_AST_Self();
 post_init_AST_Send();
 post_init_Type_String();

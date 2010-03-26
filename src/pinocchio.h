@@ -179,8 +179,7 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef void(*native)(Object metainterp, Object interpreter, Object self,
-                      Type_Class class, uns_int argc);
+typedef void(*native)(Object self, Type_Class class, uns_int argc);
 
 /* ========================================================================= */
 

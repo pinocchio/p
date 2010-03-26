@@ -23,9 +23,6 @@ struct AST_NativeMethod_t {
 
 CREATE_INITIALIZERS(AST_NativeMethod)
 
-//TODO remove once done
-extern AST_NativeMethod new_AST_NativeMethod_from(native code);
-
 extern AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
                                       Type_Array locals,
                                       Type_Array annotations,
@@ -34,8 +31,7 @@ extern AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
 /* ========================================================================= */
 
 #define NATIVE(name)\
-static void NM_##name(Object metainterp, Object interpreter, Object self,\
-                      Type_Class class, uns_int argc) {
+static void NM_##name(Object self, Type_Class class, uns_int argc) {
 #define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
@@ -50,13 +46,9 @@ static void NM_##name(Object metainterp, Object interpreter, Object self,\
 
 /* ========================================================================= */
 
-extern void AST_NativeMethod_invoke(Object metainterp, Object interpreter,
-                                    AST_NativeMethod method, Object self,
+extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self,
                                     Type_Class class, uns_int argc);
-
-extern void AST_NativeMethod_eval(Object self, Type_Class class, Type_Array args);
-
-extern void AST_NativeMethod_eval_(Object self, Type_Class class, Type_Array args);
+extern native lookup_native(Type_Array annotations, Object selector);
 
 /* ========================================================================= */
 

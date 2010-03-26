@@ -35,6 +35,9 @@ extern AST_Method new_AST_Method_with(Type_Array params,
 
 /* ========================================================================= */
 
+extern void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
+                              Object self, Type_Class class, uns_int argc);
+
 /* ========================================================================= */
 
 #endif // AST_METHOD_H

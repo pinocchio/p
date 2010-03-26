@@ -7,17 +7,9 @@
 
 /* ========================================================================= */
 
-Type_Class AST_NativeMethod_Class;
+DECLARE_CLASS(AST_NativeMethod);
 
 /* ========================================================================= */
-
-AST_NativeMethod new_AST_NativeMethod_from(native code)
-{
-    NEW_OBJECT(AST_NativeMethod);
-    result->code = code;
-    result->info = empty_AST_Info;
-    return result;
-}
 
 AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
                                Type_Array locals,
@@ -42,62 +34,48 @@ void pre_init_AST_NativeMethod()
     AST_NativeMethod_Class = new_Class_named(Type_Object_Class,
                                               L"NativeMethod",
                                               CREATE_ARRAY_TAG(AST_NATIVEMETHOD));
+    REFER_TO(AST_NativeMethod);
 }
 
 /* ========================================================================= */
 
-void AST_NativeMethod_invoke(Object metainterp, Object interpreter, AST_NativeMethod method,
-                             Object self, Type_Class class, uns_int argc)
+native lookup_native(Type_Array annotations, Object selector)
 {
-    #ifdef DEBUG
-    //LOG("Native Method invoke on %ls\n", ((Type_Class)class)->name->value);
-    #endif // DEBUG
-    if (method->code == NULL) {
-        Type_Array annotations = method->annotations;
-        assert1(HEADER(annotations) == Type_Array_Class, "Annotations should be an array");
-        int i;
-        for (i = 0; i < annotations->size; i++) {
-            AST_Annotation annotation = (AST_Annotation)annotations->values[i];
-            if (HEADER(annotation) != AST_Annotation_Class) { continue; }
-            if (annotation->selector != (Object)SMB_pinocchioPrimitive_module_) {
-                continue;
-            }
-            Object primitive_name = annotation->arguments[0];
-            Object module_name    = annotation->arguments[1];
-            Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
-            if (module == NULL) { method->code = (native)-1; break; }
-            if (HEADER(module) == (Type_Class)Plugin_Plugin_Class) {
-                module = ((Type_Object)module)->ivals[2]; 
-            }
-            Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
-            if (primitive == NULL) { method->code = (native)-1; break; }
-            method->code = (native)primitive;
-            break;
+    assert1(HEADER(annotations) == Type_Array_Class, "Annotations should be an array");
+    int i;
+    for (i = 0; i < annotations->size; i++) {
+        AST_Annotation annotation = (AST_Annotation)annotations->values[i];
+        if (HEADER(annotation) != AST_Annotation_Class) { continue; }
+        if (annotation->selector != selector) {
+            continue;
         }
-        assert(method->code, fprintf(stderr, "Invalid Native Method\n"));
+        Object primitive_name = annotation->arguments[0];
+        Object module_name    = annotation->arguments[1];
+        Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
+        if (module == NULL) { return (native)-1; }
+        if (HEADER(module) == (Type_Class)Plugin_Plugin_Class) {
+            module = ((Type_Object)module)->ivals[2]; 
+        }
+        Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
+        if (primitive == NULL) { return (native)-1; }
+        return (native)primitive;
+    }
+    return NULL;
+}
+
+void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Class class, uns_int argc)
+{
+    AST_NativeMethod method = (AST_NativeMethod)closure->code;
+    if (method->code == NULL) {
+        native code = lookup_native(method->annotations,
+                                    (Object)SMB_pinocchioPrimitive_module_);
+        assert(code, fprintf(stderr, "No primitive annotation found\n"));
+        method->code = code;
     }
     if (method->code == (native)-1) {
-        // TODO start evaluating the fallback method.
-        Type_Array annotations = method->annotations;
-        int i;
-        for (i = 0; i < annotations->size; i++) {
-            AST_Annotation annotation = (AST_Annotation)annotations->values[i];
-            if (HEADER(annotation) != AST_Annotation_Class) { continue; }
-            if (annotation->selector != (Object)SMB_pinocchioPrimitive_module_) {
-                continue;
-            }
-            Object primitive_name = annotation->arguments[0];
-            Object module_name    = annotation->arguments[1];
-            Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
-            assert(module, fprintf(stderr, "\033[31mUnfound plugin: %ls\033[0m\n",
-                                           ((Type_Symbol)module_name)->value););
-            Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
-            assert(primitive, fprintf(stderr, "\033[31mUnfound primitive: %ls>>%ls\033[0m\n",
-                                              ((Type_Symbol)module_name)->value,
-                                              ((Type_Symbol)primitive_name)->value););
-        }
+        return AST_Method_invoke(closure, (AST_Method)method, self, class, argc);
     }
-    method->code(metainterp, interpreter, self, class, argc);
+    method->code(self, class, argc);
 }
 
 /* ========================================================================= */

@@ -30,49 +30,6 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host
 
 /* ========================================================================= */
 
-static void CNT_AST_Method_continue()
-{
-    Runtime_MethodContext env = (Runtime_MethodContext)current_env();
-    AST_Method code = env->closure->code;
-    poke_EXP(0, code->body[env->pc]);
-    
-    env->pc++;
-
-    if (code->size <= env->pc) {
-        poke_CNT(restore_env); 
-    } 
-    push_CNT(send_Eval);
-}
-
-static void start_eval(AST_Method method)
-{
-    if (1 < method->size) {
-        push_CNT(AST_Method_continue);
-    } else {
-        push_CNT(restore_env);
-    }
-    
-    poke_EXP(0, method->body[0]);
-    push_CNT(send_Eval);
-}
-
-void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
-                           Object self, Type_Class class, uns_int argc)
-{
-    assert(argc == method->params->size,
-        printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
-                    method->params->size, argc););
-    
-    if (method->size == 0) { 
-        RETURN_FROM_NATIVE(self);
-        return;
-    }
-    
-    set_env((Object)new_Runtime_MethodContext(closure, self, class));
-    activation_from_native(argc);
-
-    start_eval(method);
-}
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                                   uns_int argc)
@@ -83,8 +40,9 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     Type_Class class = closure->host;
 
     if (HEADER(method) == AST_NativeMethod_Class) {
-        return AST_NativeMethod_invoke(NULL, NULL, (AST_NativeMethod)method,
-                                       self, class, argc);
+        return AST_NativeMethod_invoke(closure, self, class, argc);
+    } else if (HEADER(method) == AST_ReflectionMethod_Class) {
+        return AST_ReflectionMethod_invoke(closure, self, class, argc);
     } else if (HEADER(method) == AST_Method_Class) {
         return AST_Method_invoke(closure, method, self, class, argc);
     } else {
@@ -92,10 +50,6 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     }
 }
 
-
-NATIVE0(Runtime_MethodClosure_numArgs) 
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_MethodClosure)self)->code->params->size));
-}
 
 NATIVE1(Runtime_MethodClosure_valueWithArguments_)
     Type_Array args = (Type_Array)pop_EXP();
@@ -117,6 +71,5 @@ void post_init_Runtime_MethodClosure()
 {
     // TODO move the whole class to AST
     Collection_Dictionary natives = add_plugin(L"AST.MethodClosure");
-    store_native(natives, SMB_numArgs,             NM_Runtime_MethodClosure_numArgs);
     store_native(natives, SMB_valueWithArguments_, NM_Runtime_MethodClosure_valueWithArguments_);
 }

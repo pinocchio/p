@@ -104,7 +104,6 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 }
 
 NATIVE(Runtime_BlockClosure_apply_)
-    REFLECT(SMB_applyBlock_to_);
     Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
     Runtime_BlockClosure_apply(closure, argc);
 }
@@ -114,7 +113,6 @@ NATIVE0(Runtime_BlockClosure_numArgs)
 }
 
 NATIVE1(Runtime_BlockClosure_valueWithArguments_)
-    REFLECT1(SMB_applyBlock_to_);
     Type_Array args = (Type_Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
