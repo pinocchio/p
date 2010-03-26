@@ -1,6 +1,6 @@
 #include <plugin/Plugin.h>
 
-NATIVE4(Interpreter_invokeNative)
+NATIVE3(Interpreter_invokeNative)
     Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
     Object receiver               = NATIVE_ARG(1);
     Runtime_Message message       = (Runtime_Message)NATIVE_ARG(2);

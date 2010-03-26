@@ -50,14 +50,10 @@ static void apply(Object closure, uns_int argc)
 }
 
 NATIVE1(Runtime_Continue_on_)
-    // LOGFUN;
     Runtime_Continue runtimeContinue = new_Runtime_Continue();
     runtimeContinue->exp_offset      = (tget(_EXP_) - &(tget(Double_Stack)[0]) - (argc + 1));
     runtimeContinue->cnt_offset      = (&(tget(Double_Stack)[STACK_SIZE]) - (Object*)tget(_CNT_));
     runtimeContinue->Env             = (Object)current_env();
-    // optimization, reuse array object.
-    // make sure to undo when introducing others
-    // TODO do this more cleanly!
     Object closure = NATIVE_ARG(0);
     poke_EXP(0, runtimeContinue);
     apply(closure, 1);

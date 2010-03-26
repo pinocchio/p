@@ -241,7 +241,7 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     }
     Type_Symbol msgname = (Type_Symbol)msg;
     Type_Symbol method  = Type_String_concat_(clsname, msgname);
-    LOG("%ls\n", method->value);
+    LOG("%ls (%"F_I"u)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
     /* Monomorphic inline cache */
