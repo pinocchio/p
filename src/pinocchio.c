@@ -13,6 +13,7 @@ void printf0(const char * string, ...) {
 
 void init_pthread_keys()
 {
+    tkey(_ISS_,         NULL);
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
     tkey(_CNT_,         NULL);

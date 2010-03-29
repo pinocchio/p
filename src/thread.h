@@ -8,6 +8,7 @@ extern pthread_key_t Double_Stack;
 extern pthread_key_t _EXP_;
 extern pthread_key_t _CNT_;
 
+extern pthread_key_t _ISS_;
 extern pthread_key_t Eval_Exit;
 extern pthread_key_t Eval_Continue;
 extern pthread_key_t Eval_Abort;
