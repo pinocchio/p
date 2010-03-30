@@ -14,7 +14,6 @@ AST_Constant Nil_Const;
 void pre_init_Type_Nil() 
 {
     Nil = (Object) NEW_t(Type_Nil);
-    REFER_TO(Type_Nil);
 }
 
 /* ========================================================================= */
@@ -23,9 +22,10 @@ void pre_init_Type_Nil()
 
 void post_init_Type_Nil()
 {
-    Type_Nil_Class             = new_Class_named(Type_Object_Class,
-                                                 L"Nil",
-                                                 create_layout(0, OBJECT));
-    HEADER(Nil)                = Type_Nil_Class;
-    Nil_Const                  = new_AST_Constant(Nil);
+    Type_Nil_Class     = new_Class_named(Type_Object_Class,
+                                         L"Nil",
+                                         create_layout(0, OBJECT));
+    REFER_TO(Type_Nil);
+    HEADER(Nil)        = Type_Nil_Class;
+    Nil_Const          = new_AST_Constant(Nil);
 }

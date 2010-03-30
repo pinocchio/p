@@ -1,4 +1,3 @@
-post_init_Type_Nil();
 post_init_Type_Class();
 post_init_Type_Object();
 post_init_Type_Array();
@@ -33,4 +32,4 @@ post_init_Organization_ClassReference();
 post_init_Runtime_InlineCache();
 post_init_Runtime_Message();
 post_init_Collection_DictBucket();
-
+post_init_Type_Nil();

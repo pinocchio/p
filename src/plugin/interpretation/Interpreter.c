@@ -23,6 +23,8 @@ NATIVE3(Interpreter_invokeNative)
         claim_EXP(message->size - 3);
     } else {
         claim_EXP(message->size - 3 + 1);
+        //poke_EXP(message->size+0, receiver);    
+        //poke_EXP(message->size+1, Nil);    
         poke_EXP(message->size+2, tget(_ISS_));    
         push_CNT(restore_iss);
     }

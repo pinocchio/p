@@ -311,6 +311,8 @@ NATIVE(Collection_Dictionary_grow)
 void post_init_Collection_Dictionary()
 {
     Collection_Dictionary_Class->name = new_Type_Symbol_cached(L"Dictionary");
+    HEADER(Collection_Dictionary_Class->methods) = Collection_Dictionary_Class;
+    HEADER(HEADER(Collection_Dictionary_Class)->methods) = Collection_Dictionary_Class;
     Collection_Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
     store_native(natives, SMB_at_,          NM_Collection_Dictionary_at_);
