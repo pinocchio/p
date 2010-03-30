@@ -13,10 +13,10 @@ void printf0(const char * string, ...) {
 
 void init_pthread_keys()
 {
-    tkey(_ISS_,         NULL);
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
     tkey(_CNT_,         NULL);
+    tkey(_ISS_,         NULL);
     tkey(Eval_Exit,     NULL);
     tkey(Eval_Continue, NULL);
     tkey(Eval_Abort,    NULL);

@@ -115,3 +115,5 @@ Type_Symbol SMB_blockclosureValue_message_;
 Type_Symbol SMB_blockclosureValueWithArguments_message_;
 Type_Symbol SMB_continueOn_message_;
 Type_Symbol SMB_continueEscape_message_;
+Type_Symbol SMB_send_to_inInterpreterChain_;
+Type_Symbol SMB_send_to_class_inInterpreterChain_;

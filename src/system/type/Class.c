@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <pinocchio.h>
+#include <lib/lib.h>
 
 /* ========================================================================= */
 
@@ -191,6 +192,41 @@ static void Class_direct_dispatch(Object self, Type_Class class,
     return Class_lookup(class, msg);
 }
 
+CNT(restore_iss)
+    Object return_value = pop_EXP();
+    tset(_ISS_, peek_EXP(0));
+    poke_EXP(0, return_value);
+}
+
+void Type_Class_tower_dispatch(Object self, Object class,
+                               Type_Object iss, Runtime_Message message)
+{
+    tset(_ISS_, Nil);
+    push_EXP(iss);
+    push_CNT(restore_iss);
+    push_CNT(Class_lookup_invoke);
+    Type_Object tower = (Type_Object)Nil;
+    while (iss != (Type_Object)Nil) {
+        Type_Object newtower = (Type_Object)instantiate((Type_Class)Collection_Link_Class);
+        newtower->ivals[0] = iss->ivals[0];
+        newtower->ivals[1] = (Object)tower;
+        tower = newtower;
+        iss = (Type_Object)iss->ivals[1];
+    }
+    push_EXP(Nil);
+    push_EXP(tower->ivals[0]); // self, bottom interpreter
+    push_EXP(message);
+    push_EXP(self); // receiver
+    push_EXP(class);
+    push_EXP(tower->ivals[1]); // tower of interpreters
+    self = tower->ivals[0];
+    Class_direct_dispatch(
+        self,
+        HEADER(self),
+        (Object)SMB_send_to_class_inInterpreterChain_,
+        4);
+}
+
 void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
                                 uns_int argc, ...)
 {
@@ -198,29 +234,48 @@ void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
     va_start(args, argc);
     int idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */
-    push_EXP(Nil);
-    push_EXP(self);
-    for (idx = 0; idx < argc; idx++) {
-        push_EXP(va_arg(args, Object));
+    /* TODO optimize by claim + poke instead of push */
+    Type_Object iss = (Type_Object)tget(_ISS_);
+    if ((Object)iss == Nil) {
+        push_EXP(Nil);
+        push_EXP(self);
+        for (idx = 0; idx < argc; idx++) {
+            push_EXP(va_arg(args, Object));
+        }
+        va_end(args);
+        push_CNT(Class_lookup_invoke);
+        Class_direct_dispatch(self, class, msg, argc);
+    } else {
+        Runtime_Message message = new_Runtime_Message(msg, argc);
+        for (idx = 0; idx < argc; idx++) {
+            message->arguments[idx] = va_arg(args, Object);
+        }
+        va_end(args);
+        Type_Class_tower_dispatch(self, class, iss, message);
     }
-    va_end(args);
-    push_CNT(Class_lookup_invoke);
-    Class_direct_dispatch(self, class, msg, argc);
 }
 
 void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
                                               Object msg, Type_Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
-    push_EXP(Nil);
-    push_EXP(self);
-
     int idx;
-    for (idx = 0; idx < args->size; idx++) {
-        push_EXP(args->values[idx]);
+    Type_Object iss = (Type_Object)tget(_ISS_);
+    if ((Object)iss == Nil) {
+        push_EXP(Nil);
+        push_EXP(self);
+        for (idx = 0; idx < args->size; idx++) {
+            push_EXP(args->values[idx]);
+        }
+        push_CNT(Class_lookup_invoke);
+        Class_direct_dispatch(self, class, msg, args->size);
+    } else {
+        Runtime_Message message = new_Runtime_Message(msg, args->size);
+        for (idx = 0; idx < args->size; idx++) {
+            message->arguments[idx] = args->values[idx];
+        }
+        Type_Class_tower_dispatch(self, class, iss, message);
     }
-    push_CNT(Class_lookup_invoke);
-    Class_direct_dispatch(self, class, msg, args->size);
 }
 
 void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)

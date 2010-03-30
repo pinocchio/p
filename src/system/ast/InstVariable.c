@@ -72,9 +72,11 @@ NATIVE1(AST_InstVariable_readFrom_)
 }
 
 NATIVE2(AST_InstVariable_assign_on_)
+    Object value = NATIVE_ARG(0);
+    Object o = NATIVE_ARG(1);
     AST_InstVariable_assign_on_((AST_InstVariable)self,
-                                NATIVE_ARG(0), NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
+                                value, o);
+    RETURN_FROM_NATIVE(value);
 }
 
 /* ========================================================================= */
