@@ -118,3 +118,4 @@ extern Type_Symbol SMB_continueEscape_message_;
 extern Type_Symbol SMB_send_to_inInterpreterChain_;
 extern Type_Symbol SMB_send_to_class_inInterpreterChain_;
 extern Type_Symbol SMB_checkCached_;
+extern Type_Symbol SMB_cache_at_;
