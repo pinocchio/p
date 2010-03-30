@@ -35,6 +35,7 @@ SMB_basicNew                                = new_Type_Symbol_cached(L"basicNew"
 SMB_basicNew_                               = new_Type_Symbol_cached(L"basicNew:");
 SMB_blockclosureValueWithArguments_message_ = new_Type_Symbol_cached(L"blockclosureValueWithArguments:message:");
 SMB_blockclosureValue_message_              = new_Type_Symbol_cached(L"blockclosureValue:message:");
+SMB_checkCached_                            = new_Type_Symbol_cached(L"checkCached:");
 SMB_class                                   = new_Type_Symbol_cached(L"class");
 SMB_close                                   = new_Type_Symbol_cached(L"close");
 SMB_continueEscape_message_                 = new_Type_Symbol_cached(L"continueEscape:message:");

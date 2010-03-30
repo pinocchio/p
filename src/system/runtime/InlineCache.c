@@ -29,6 +29,14 @@ Runtime_InlineCache new_Runtime_InlineCache()
 
 /* ========================================================================= */
 
+NATIVE1(Runtime_InlineCache_checkCached_) 
+    RETURN_FROM_NATIVE(get_bool(((Runtime_InlineCache)self)->class == NATIVE_ARG(0)));
+}
+
+/* ========================================================================= */
+
 void post_init_Runtime_InlineCache()
 {
+    Collection_Dictionary natives = add_plugin(L"Runtime.InlineCache");
+    store_native(natives, SMB_checkCached_, NM_Runtime_InlineCache_checkCached_);
 }
