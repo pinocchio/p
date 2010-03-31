@@ -6,7 +6,8 @@
 /* ========================================================================= */
 
 #define RUNTIME_CONTINUATION_SIZE 4
-#define RUNTIME_CONTINUATION_VARS L"expOffset", L"cntOffset", L"env", L"target"
+#define RUNTIME_CONTINUATION_VARS\
+    L"expStack", L"cntStack", L"interpreterStack", L"context"
 
 struct Runtime_Continuation_t {
     Type_Array  exp_stack;

@@ -251,7 +251,7 @@ void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
             message->arguments[idx] = va_arg(args, Object);
         }
         va_end(args);
-        Type_Class_tower_dispatch(self, class, iss, message);
+        Type_Class_tower_dispatch(self, (Object)class, iss, message);
     }
 }
 
@@ -274,7 +274,7 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
         for (idx = 0; idx < args->size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
-        Type_Class_tower_dispatch(self, class, iss, message);
+        Type_Class_tower_dispatch(self, (Object)class, iss, message);
     }
 }
 

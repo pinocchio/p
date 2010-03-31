@@ -50,18 +50,19 @@ static void apply(Object closure, uns_int argc)
 }
 
 NATIVE1(Runtime_Continuation_on_)
-    Runtime_Continuation runtimeContinuation = new_Runtime_Continuation();
-    runtimeContinuation->exp_stack  = new_Type_Array(tget(_EXP_) - &(tget(Double_Stack)[0]) - (argc + 1), &(tget(Double_Stack)));
-    runtimeContinuation->cnt_stack  = new_Type_Array_raw(&(tget(Double_Stack)[STACK_SIZE]) - (Object*)tget(_CNT_));
+    Object * ds = tget(Double_Stack);
+    Runtime_Continuation cont = new_Runtime_Continuation();
+    cont->exp_stack = new_Type_Array(EXP_size() - (argc + 1), ds);
+    cont->cnt_stack = new_Type_Array_raw((&ds[STACK_SIZE]) - (Object*)tget(_CNT_));
     int c = 0;
-    while (c < runtimeContinuation->cnt_stack->size) {
-        runtimeContinuation->cnt_stack->values[c] = (Object)&(tget(Double_Stack)[STACK_SIZE - c - 1]);
+    while (c < cont->cnt_stack->size) {
+        cont->cnt_stack->values[c] = ds[STACK_SIZE - c - 1];
         c++;
     }
-    runtimeContinuation->ISS        = (Object)tget(_ISS_);
-    runtimeContinuation->Env        = (Object)current_env();
+    cont->ISS = (Object)tget(_ISS_);
+    cont->Env = (Object)current_env();
     Object closure = NATIVE_ARG(0);
-    poke_EXP(0, runtimeContinuation);
+    poke_EXP(0, cont);
     apply(closure, 1);
 }
 

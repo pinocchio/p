@@ -35,6 +35,7 @@ extern void _push_CNT(cont e);
 #define zap_CNT()               tset(_CNT_, ((cont*)tget(_CNT_))+1)
 #define poke_CNT(value)         (*(cont*)tget(_CNT_) = ((cont)(CNT_##value)))
 #define empty_CNT()             ((Object*)tget(_CNT_) == &(tget(Double_Stack)[STACK_SIZE]))
+#define CNT_size()              ((&tget(Double_Stack)[STACK_SIZE]) - tget(_CNT_))
 
 extern void pinocchio_main(int argc, const char ** argv);
 

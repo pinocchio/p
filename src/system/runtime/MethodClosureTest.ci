@@ -21,7 +21,7 @@ NEW_TEST(Runtime_MethodClosure_MACRO)
 
 NEW_TEST(Runtime_MethodClosure_invocation_with_arguments)
     Runtime_MethodClosure closure =
-new_Runtime_MethodClosure(new_AST_Method(1, 0, 1), (Object)Nil);
+new_Runtime_MethodClosure(new_AST_Method(1, 0, 1), (Type_Class)Nil);
     closure->code->body[0] = (Object)BLOCK_PARAM(closure->code, 0);
     
     Type_Symbol test           = new_Type_Symbol(L"test");
@@ -35,7 +35,7 @@ new_Runtime_MethodClosure(new_AST_Method(1, 0, 1), (Object)Nil);
 
 NEW_TEST(Runtime_MethodClosure_invocation)
     Runtime_MethodClosure closure =
-new_Runtime_MethodClosure(new_AST_Method(0, 0, 0), (Object)Nil);
+new_Runtime_MethodClosure(new_AST_Method(0, 0, 0), (Type_Class)Nil);
     Type_Symbol test        = new_Type_Symbol(L"test");
     Type_SmallInt integer   = new_Type_SmallInt(120);
     store_method(Type_SmallInt_Class, test, closure);
@@ -48,7 +48,7 @@ new_Runtime_MethodClosure(new_AST_Method(0, 0, 0), (Object)Nil);
     AST_Constant integer5_const = new_AST_Constant((Object)integer5);
     closure                     =
 new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 1, integer5_const),
-(Object)Nil);
+(Type_Class)Nil);
     store_method(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer5);
@@ -59,7 +59,7 @@ new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 1, integer5_const),
     AST_Constant integer6_const = new_AST_Constant((Object)integer6);
     closure                     =
 new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 2, integer5_const,
-integer6_const), (Object)Nil);
+integer6_const), (Type_Class)Nil);
     store_method(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer6);
@@ -70,7 +70,7 @@ integer6_const), (Object)Nil);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
     closure                     =
 new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 3, integer5_const,
-integer6_const, integer7_const), (Object)Nil);
+integer6_const, integer7_const), (Type_Class)Nil);
     store_method(Type_SmallInt_Class, test, closure);
     result                      = Eval_Send0((Object)integer, test);
     assert0(result == (Object)integer7);

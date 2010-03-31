@@ -6,7 +6,7 @@ NEW_TEST(ast_self)
     
     Runtime_MethodClosure closure = new_Runtime_MethodClosure(
                                         new_AST_Method_withAll(0, 0, 3,
-integer7_const, integer7_const, Self), (Object)Nil);
+integer7_const, integer7_const, Self), (Type_Class)Nil);
     assert0(closure->info == empty_AST_Info);
     Type_Symbol test            = new_Type_Symbol(L"test");
     

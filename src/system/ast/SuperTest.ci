@@ -9,11 +9,11 @@ NEW_TEST(ast_super)
     Runtime_MethodClosure closure = new_Runtime_MethodClosure(
         new_AST_Method_withAll(0, 0, 3,
             integer7_const, integer7_const, new_AST_Super((Object)test, 0)),
-(Object)Nil);
+(Type_Class)Nil);
     store_method(True_Class, test, closure);
     
     closure = new_Runtime_MethodClosure(new_AST_Method_withAll(0, 0, 3,
-        integer7_const, integer7_const, integer_const), (Object)Nil);
+        integer7_const, integer7_const, integer_const), (Type_Class)Nil);
     store_method(Type_Boolean_Class, test, closure);
     
     Object result = Eval_Send0((Object)True, test);
