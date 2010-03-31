@@ -119,3 +119,5 @@ Type_Symbol SMB_send_to_inInterpreterChain_;
 Type_Symbol SMB_send_to_class_inInterpreterChain_;
 Type_Symbol SMB_checkCached_;
 Type_Symbol SMB_cache_at_;
+Type_Symbol SMB_continuationContinue_message_;
+Type_Symbol SMB_continuationOn_message_;

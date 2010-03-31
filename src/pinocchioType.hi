@@ -11,6 +11,7 @@ TYPE(AST_Constant);
 TYPE(AST_Self);
 TYPE(AST_Super);
 TYPE(Runtime_Continue);
+TYPE(Runtime_Continuation);
 TYPE(AST_Variable);
 TYPE(AST_Send);
 TYPE(AST_Assign);

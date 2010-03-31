@@ -28,6 +28,7 @@
 #include <system/ast/ReflectionMethod.h>
 
 #include <system/runtime/Continue.h>
+#include <system/runtime/Continuation.h>
 #include <system/runtime/BlockClosure.h>
 #include <system/type/CharacterTable.h>
 #include <system/ast/Method.h>

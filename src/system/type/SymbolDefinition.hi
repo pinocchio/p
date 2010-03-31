@@ -119,3 +119,5 @@ extern Type_Symbol SMB_send_to_inInterpreterChain_;
 extern Type_Symbol SMB_send_to_class_inInterpreterChain_;
 extern Type_Symbol SMB_checkCached_;
 extern Type_Symbol SMB_cache_at_;
+extern Type_Symbol SMB_continuationContinue_message_;
+extern Type_Symbol SMB_continuationOn_message_;
