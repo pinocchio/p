@@ -59,6 +59,9 @@ Runtime_BlockContext activation_from_native(uns_int argc)
 CNT(restore_env)
 	Runtime_BlockContext current = current_env();
     set_env((Object)current->parent_frame);
+    Object result = peek_EXP(0);
+    zap_EXP();
+    poke_EXP(0, result);
 	free_context(current);
 }
 
@@ -66,10 +69,11 @@ static void CNT_AST_Block_continue()
 {
     Runtime_BlockContext env = current_env();
     AST_Block code = env->closure->code;
-    poke_EXP(0, code->body[env->pc]);
+    uns_int pc = (uns_int)peek_EXP(1);
+    poke_EXP(0, code->body[pc]);
+    poke_EXP(1, ++pc);
     
-    env->pc++;
-    if (code->size <= env->pc) {
+    if (code->size <= pc) {
         poke_CNT(restore_env); 
     } 
     push_CNT(send_Eval);
@@ -83,7 +87,8 @@ static void start_eval(AST_Block block)
         push_CNT(restore_env);
     }
     
-    poke_EXP(0, block->body[0]);
+    poke_EXP(0, 1);
+    push_EXP(block->body[0]);
     push_CNT(send_Eval);
 }
 

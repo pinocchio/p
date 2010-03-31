@@ -66,13 +66,14 @@ static void CNT_AST_Method_continue()
 {
     Runtime_MethodContext env = (Runtime_MethodContext)current_env();
     AST_Method code = env->closure->code;
-    poke_EXP(0, code->body[env->pc]);
+    uns_int pc = (uns_int)peek_EXP(1);
+    poke_EXP(0, code->body[pc]);
+    poke_EXP(1, ++pc);
     
-    env->pc++;
-
-    if (code->size <= env->pc) {
+    if (code->size <= pc) {
         poke_CNT(restore_env); 
     } 
+
     push_CNT(send_Eval);
 }
 
@@ -84,7 +85,8 @@ static void start_eval(AST_Method method)
         push_CNT(restore_env);
     }
     
-    poke_EXP(0, method->body[0]);
+    poke_EXP(0, 1); // pc
+    push_EXP(method->body[0]);
     push_CNT(send_Eval);
 }
 

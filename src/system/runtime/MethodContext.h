@@ -11,7 +11,6 @@
 
 struct Runtime_MethodContext_t {
     uns_int                 size;
-    uns_int                 pc;
     uns_int                 scope_id;
 	uns_int					captured;
     Runtime_MethodClosure   closure;

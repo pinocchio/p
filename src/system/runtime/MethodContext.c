@@ -17,7 +17,6 @@ void pre_init_Runtime_MethodContext()
     Type_Array layout = (Type_Array)Runtime_MethodContext_Class->layout;
     HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
     HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
-    HEADER(layout->values[2]) = AST_UnsintInstVariable_Class;
     REFER_TO(Runtime_MethodContext);
 }
 
@@ -30,7 +29,6 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
 	Runtime_MethodContext result = (Runtime_MethodContext)optain_context(size);
 	HEADER(result)       = Runtime_MethodContext_Class;
 	result->closure      = closure;
-	result->pc           = 1;
 	result->scope_id     = 0;
 	result->home_context = result;
 	result->parent_frame = current_env();
