@@ -12,8 +12,8 @@
 struct Runtime_Continuation_t {
     Type_Array  exp_stack;
     Type_Array  cnt_stack;
-    Object      ISS;
-    Object      Env;
+    Object      iss;
+    Object      env;
 };
 
 CREATE_INITIALIZERS(Runtime_Continuation)

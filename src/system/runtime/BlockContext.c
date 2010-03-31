@@ -7,7 +7,6 @@
 #define CONTEXT_CACHE_SIZE 128
 
 DECLARE_CLASS(Runtime_BlockContext);
-static Object _Env_;
 static Type_Array unused_contexts;
 
 /* ========================================================================= */
@@ -85,12 +84,12 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
 
 Runtime_BlockContext current_env()
 {
-    return (Runtime_BlockContext)_Env_;
+    return (Runtime_BlockContext)tget(_ENV_);
 }
 
 void set_env(Object env)
 {
-    _Env_ = env;
+    tset(_ENV_, env);
 }
 
 void pre_init_Runtime_BlockContext()

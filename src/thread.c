@@ -5,6 +5,7 @@
 pthread_key_t Double_Stack;
 pthread_key_t _ISS_;
 pthread_key_t _EXP_;
+pthread_key_t _ENV_;
 pthread_key_t _CNT_;
 
 pthread_key_t Eval_Exit;
@@ -25,6 +26,7 @@ void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
     tset(_ISS_, Nil); 
+    tset(_ENV_, Nil);
     tset(Eval_Exit,     PALLOC(sizeof(jmp_buf)));
     tset(Eval_Continue, PALLOC(sizeof(jmp_buf)));
     tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));

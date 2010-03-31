@@ -26,17 +26,18 @@ void pre_init_Runtime_Continuation()
 
 /* ========================================================================= */
 
-NATIVE1(Runtime_Continuation_escape_)
+NATIVE1(Runtime_Continuation_continue_)
     // LOGFUN;
-    Runtime_Continuation ast_cont = (Runtime_Continuation)self;
+    Runtime_Continuation cont = (Runtime_Continuation)self;
     Object arg = NATIVE_ARG(0);
     // restore the stack
-    tset(_EXP_, ast_cont->exp_stack->size + &(tget(Double_Stack)[0]));
+    tset(_EXP_, cont->exp_stack->size + (&tget(Double_Stack)[-1]));
     // TODO copy back all the EXP values!
-    tset(_CNT_, (cont*)(&(tget(Double_Stack)[STACK_SIZE]) - ast_cont->cnt_stack->size));
+    tset(_CNT_, (&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_stack->size);
     // TODO copy back all the CNT values!
     // TODO copy back ISS
-    set_env(ast_cont->Env);
+    set_env(cont->env);
+    tset(_ISS_, cont->iss);
     // Overwrite the top of stack that created the continuation.
     poke_EXP(0, arg);
 }
@@ -59,8 +60,8 @@ NATIVE1(Runtime_Continuation_on_)
         cont->cnt_stack->values[c] = ds[STACK_SIZE - c - 1];
         c++;
     }
-    cont->ISS = (Object)tget(_ISS_);
-    cont->Env = (Object)current_env();
+    cont->iss = (Object)tget(_ISS_);
+    cont->env = (Object)current_env();
     Object closure = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);
@@ -71,6 +72,6 @@ NATIVE1(Runtime_Continuation_on_)
 void post_init_Runtime_Continuation()
 {
     Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
-    store_native(natives, SMB_continuationContinue_message_, NM_Runtime_Continuation_escape_);
-    store_native(natives, SMB_continuationOn_message_,     NM_Runtime_Continuation_on_);
+    store_native(natives, SMB_continuationContinue_message_, NM_Runtime_Continuation_continue_);
+    store_native(natives, SMB_continuationOn_message_,       NM_Runtime_Continuation_on_);
 }
