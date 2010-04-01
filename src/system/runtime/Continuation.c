@@ -29,12 +29,23 @@ void pre_init_Runtime_Continuation()
 NATIVE1(Runtime_Continuation_continue_)
     // LOGFUN;
     Runtime_Continuation cont = (Runtime_Continuation)self;
+    Object * ds = tget(Double_Stack);
     Object arg = NATIVE_ARG(0);
     // restore the stack
-    tset(_EXP_, cont->exp_stack->size + (&tget(Double_Stack)[-1]));
-    // TODO copy back all the EXP values!
-    tset(_CNT_, (&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_stack->size);
-    // TODO copy back all the CNT values!
+    tset(_EXP_, cont->exp_stack->size + (&ds[-1]));
+    tset(_CNT_, (&ds[STACK_SIZE]) - cont->cnt_stack->size);
+
+    int i;
+    for (i = 0; i < cont->exp_stack->size; i++) {
+        ds[i] = cont->exp_stack->values[i];
+    }
+
+    ds = tget(_CNT_);
+    
+    for (i = 0; i < cont->cnt_stack->size; i++) {
+        ds[i] = cont->cnt_stack->values[i];
+    }
+
     // TODO copy back ISS
     set_env(cont->env);
     tset(_ISS_, cont->iss);
@@ -51,15 +62,10 @@ static void apply(Object closure, uns_int argc)
 }
 
 NATIVE1(Runtime_Continuation_on_)
-    Object * ds = tget(Double_Stack);
     Runtime_Continuation cont = new_Runtime_Continuation();
-    cont->exp_stack = new_Type_Array(EXP_size() - (argc + 1), ds);
-    cont->cnt_stack = new_Type_Array_raw((&ds[STACK_SIZE]) - (Object*)tget(_CNT_));
-    int c = 0;
-    while (c < cont->cnt_stack->size) {
-        cont->cnt_stack->values[c] = ds[STACK_SIZE - c - 1];
-        c++;
-    }
+    cont->exp_stack = new_Type_Array(EXP_size() - (argc + 1),
+                                     tget(Double_Stack));
+    cont->cnt_stack = new_Type_Array(CNT_size(), tget(_CNT_));
     cont->iss = (Object)tget(_ISS_);
     cont->env = (Object)current_env();
     Object closure = NATIVE_ARG(0);
