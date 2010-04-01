@@ -46,7 +46,6 @@ NATIVE1(Runtime_Continuation_continue_)
         ds[i] = cont->cnt_stack->values[i];
     }
 
-    // TODO copy back ISS
     set_env(cont->env);
     tset(_ISS_, cont->iss);
     // Overwrite the top of stack that created the continuation.
