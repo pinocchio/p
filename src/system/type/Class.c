@@ -104,7 +104,7 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         assert(NULL,
-            fprintf(stderr, "\033[31mRecursive does not understand \"%ls\" (\"%"F_I"u\") in \033[0m\n", 
+            fprintf(StandardError->file, "\033[31mRecursive does not understand \"%ls\" (\"%"F_I"u\") in \033[0m\n", 
             ((Type_Symbol)message->selector)->value,
             message->size);
             print_Class(self););
@@ -122,46 +122,41 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
 }
 
-static void Class_lookup(Type_Class class, Object msg);
-static void Class_next_lookup(Type_Class class)
-{
-    zap_EXP();
-    poke_EXP(0, class->super);
-    return Class_lookup(class->super, peek_EXP(3));
-}
-
 static void Class_invoke_do(Object method, uns_int argc)
 {
     Object self = peek_EXP(2);
-    zapn_EXP(6);
-    zap_CNT();
+    zapn_EXP(5);
     Method_invoke(method, self, argc);
 }
 
-static void CNT_Class_lookup_cache_invoke()
-{
-    Object method = peek_EXP(0);
-    Type_Class class = (Type_Class)peek_EXP(1);
+static CNT(Class_lookup_cache_invoke)
+    Object method    = peek_EXP(0);
+    uns_int argc     = (uns_int)peek_EXP(3);
+    Type_Class class = (Type_Class)peek_EXP(4);
+    Object msg       = peek_EXP(1);
     if (method == NULL) {
-        return Class_next_lookup(class);
+        Object self  = peek_EXP(2);
+        zapn_EXP(5);
+        return does_not_understand(self, class, msg, argc);
     }
-    uns_int argc              = (uns_int)peek_EXP(3);
-    AST_Send send             = (AST_Send)peek_EXP(argc + 7);
-    Object dispatch_type      = peek_EXP(5);
+    AST_Send send             = (AST_Send)peek_EXP(argc + 6);
     Runtime_InlineCache cache = send->cache;
-    cache->class              = dispatch_type;
+    cache->class              = (Object)class;
     cache->method             = method;
     
-    Class_invoke_do(method, argc); }
+    Class_invoke_do(method, argc);
+}
 
-static void CNT_Class_lookup_invoke()
-{
-    Object method    = peek_EXP(0);
-    Type_Class class = (Type_Class)peek_EXP(1);
+static CNT(Class_lookup_invoke)
+    Object method = peek_EXP(0);
+    uns_int argc  = (uns_int)peek_EXP(3);
+    Object msg       = peek_EXP(1);
     if (method == NULL) {
-        return Class_next_lookup(class);
+        Type_Class class = (Type_Class)peek_EXP(4);
+        Object self      = peek_EXP(2);
+        zapn_EXP(5);
+        return does_not_understand(self, class, msg, argc);
     }
-    uns_int argc = (uns_int)peek_EXP(3);
     Class_invoke_do(method, argc);
 }
 
@@ -169,26 +164,42 @@ static void Class_lookup(Type_Class class, Object msg)
 {
     // TODO pass along the hash value
     if (class == (Type_Class)Nil) {
-        Object self  = peek_EXP(1);
-        class        = (Type_Class)peek_EXP(4);
-        uns_int argc = (uns_int)peek_EXP(2);
-        zapn_EXP(5);
+        poke_EXP(0, NULL);
         zap_CNT();
-        return does_not_understand(self, class, msg, argc);
+        return;
     }
     assert_class((Object)class);
     Collection_Dictionary mdict = class->methods;
     Collection_Dictionary_lookup_push(mdict, msg);
 }
 
+static void CNT_next_lookup()
+{
+    Object method = peek_EXP(0);
+    if (method != NULL) {
+        zap_EXP();
+        zap_CNT();
+        poke_EXP(0, method);
+        return;
+    }
+    zap_EXP();
+    Type_Class class = (Type_Class)peek_EXP(0);
+    Object msg       = peek_EXP(1);
+    Type_Class next  = class->super;
+    poke_EXP(0, next);
+    return Class_lookup(next, msg);
+}
+
 static void Class_direct_dispatch(Object self, Type_Class class,
                                   Object msg, uns_int argc)
 {
     push_EXP(class);
-    push_EXP(msg);
     push_EXP(argc);
     push_EXP(self);
+
+    push_EXP(msg);
     push_EXP(class);
+    push_CNT(next_lookup);
     return Class_lookup(class, msg);
 }
 
