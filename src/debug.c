@@ -27,9 +27,9 @@ void _indent_(uns_int i)
     uns_int todo = 0;
     while (todo++ != i) {
         if (todo % 4) {
-            fprintf(stderr, "  ");
+            printf("  ");
         } else {
-            fprintf(stderr, "| ");
+            printf("| ");
         }
     }
 }
