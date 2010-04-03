@@ -28,6 +28,10 @@ IO_File new_IO_ReadFile_from(FILE* file);
 IO_File new_IO_WriteFile_from(FILE* file);
 IO_File new_IO_File_fromPath(const wchar_t * path, char * mode);
 
+extern IO_File StandardIn;
+extern IO_File StandardOut;
+extern IO_File StandardError;
+
 /* ========================================================================= */
 
 #endif // FILE_H

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <wchar.h>
+#include <string.h>
 #include <system/io/File.h>
 #include <system/type/Boolean.h>
 #include <system/type/String.h>
@@ -204,8 +205,10 @@ FILE * open_file(Object path, char * mode)
 
     char * filePath = unicode_to_ascii(((Type_Symbol)path)->value);
     FILE * file = fopen(filePath, mode);
-    assert(file, printf("Failed to open '%s' (mode '%s', errno: %i)\n", 
-                            filePath, mode, errno););
+    assert(file,
+        fprintf(StandardError->file,
+            "%s (file: '%s', mode '%s')\n", 
+            strerror(errno), filePath, mode););
     return file;
 }
 
@@ -233,7 +236,8 @@ NATIVE0(IO_File_stderr)
 
 NATIVE0(IO_File_close)
     int result = fclose(((IO_File)self)->file);
-    assert(result == 0, printf("Failed to close file: %i\n", errno););
+    assert(result == 0,
+        fprintf(StandardError->file, "%s\n", strerror(errno)););
     RETURN_FROM_NATIVE(self);
 }
 
