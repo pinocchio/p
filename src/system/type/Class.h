@@ -64,6 +64,8 @@ extern void Type_Class_direct_dispatch_withArguments(Object receiver,
 extern void Type_Class_set_superclass(Type_Class cls, Type_Class super);
 
 extern void CNT_Class_super();
+extern void CNT_Class_lookup_loop();
+extern void Class_lookup(Type_Class class, Object msg);
 
 extern void print_Class(Object obj);
 

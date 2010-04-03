@@ -41,8 +41,30 @@ NATIVE3(Interpreter_invokeNative)
             message->size);
 }
 
+static CNT(fix_lookup_result)
+	Object result = peek_EXP(0);
+	zapn_EXP(3);
+	if (result == NULL) {
+		poke_EXP(0, Nil);
+	} else {
+		poke_EXP(0, result);
+	}
+}
+
+NATIVE2(Interpreter_lookupSelector_in_)
+    fprintf(StandardError->file, "BLABLABLA\n");
+	Object selector   = NATIVE_ARG(0);
+	Type_Class target = (Type_Class)NATIVE_ARG(1);
+	push_CNT(fix_lookup_result);
+    push_CNT(Class_lookup_loop);
+    Class_lookup(target, selector);
+}
+
 PLUGIN()
-    EXPORT(SMB_invokeNativeMethod_on_message_, Interpreter_invokeNative);
+    EXPORT(new_Type_Symbol_cached(L"invokeNativeMethod:on:message:"),
+		   Interpreter_invokeNative);
+	EXPORT(new_Type_Symbol_cached(L"lookupSelector:in:"),
+           Interpreter_lookupSelector_in_);
 }
 
 void unload_plugin()

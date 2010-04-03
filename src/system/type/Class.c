@@ -122,45 +122,40 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
 }
 
-static void Class_invoke_do(Object method, uns_int argc)
-{
-    Object self = peek_EXP(2);
-    zapn_EXP(5);
-    Method_invoke(method, self, argc);
-}
-
 static CNT(Class_lookup_cache_invoke)
     Object method    = peek_EXP(0);
     uns_int argc     = (uns_int)peek_EXP(3);
     Type_Class class = (Type_Class)peek_EXP(4);
-    Object msg       = peek_EXP(1);
+    Object self      = peek_EXP(2);
     if (method == NULL) {
-        Object self  = peek_EXP(2);
+        Object msg  = peek_EXP(1);
         zapn_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
-    AST_Send send             = (AST_Send)peek_EXP(argc + 6);
+    zapn_EXP(5);
+    AST_Send send             = (AST_Send)peek_EXP(argc + 1);
     Runtime_InlineCache cache = send->cache;
     cache->class              = (Object)class;
     cache->method             = method;
     
-    Class_invoke_do(method, argc);
+    Method_invoke(method, self, argc);
 }
 
 static CNT(Class_lookup_invoke)
     Object method = peek_EXP(0);
     uns_int argc  = (uns_int)peek_EXP(3);
-    Object msg       = peek_EXP(1);
+    Object self   = peek_EXP(2);
     if (method == NULL) {
         Type_Class class = (Type_Class)peek_EXP(4);
-        Object self      = peek_EXP(2);
+        Object msg       = peek_EXP(1);
         zapn_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
-    Class_invoke_do(method, argc);
+    zapn_EXP(5);
+    Method_invoke(method, self, argc);
 }
 
-static void Class_lookup(Type_Class class, Object msg)
+void Class_lookup(Type_Class class, Object msg)
 {
     // TODO pass along the hash value
     if (class == (Type_Class)Nil) {
@@ -173,7 +168,7 @@ static void Class_lookup(Type_Class class, Object msg)
     Collection_Dictionary_lookup_push(mdict, msg);
 }
 
-static void CNT_next_lookup()
+void CNT_Class_lookup_loop()
 {
     Object method = peek_EXP(0);
     if (method != NULL) {
@@ -199,8 +194,8 @@ static void Class_direct_dispatch(Object self, Type_Class class,
 
     push_EXP(msg);
     push_EXP(class);
-    push_CNT(next_lookup);
-    return Class_lookup(class, msg);
+    push_CNT(Class_lookup_loop);
+    Class_lookup(class, msg);
 }
 
 CNT(restore_iss)
