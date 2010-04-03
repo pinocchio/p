@@ -8,12 +8,12 @@ NATIVE0(Process_popen)
     char * command      = unicode_to_ascii(((Type_String)process->ivals[0])->value);
     char * mode         = unicode_to_ascii(((Type_String)process->ivals[1])->value);
     FILE * stream       = popen(command, mode);
-    if (stream == NULL) {
-        fprintf(StandardError->file, "%s\n", strerror(errno));
-    } else {
-        process->ivals[2]   = (Object)new_IO_WriteFile_from(stream);
-        process->ivals[3]   = (Object)new_IO_ReadFile_from(stream);
-    }
+    assert(stream,
+        fprintf(StandardError->file,
+            "%s (program: '%s', mode: '%s')\n",
+            strerror(errno), command, mode););
+    process->ivals[2]   = (Object)new_IO_ReadFile_from(stream);
+    process->ivals[3]   = (Object)new_IO_WriteFile_from(stream);
     RETURN_FROM_NATIVE(self);
 }
 
