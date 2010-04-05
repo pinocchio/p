@@ -94,10 +94,6 @@ static void start_eval(AST_Block block)
 
 void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 {
-    #ifdef DEBUG
-    // LOG("Closure Apply\n");
-    #endif // DEBUG
-
     AST_Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
     
@@ -111,6 +107,16 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 
     start_eval(block);
 }
+
+void apply(Object closure, uns_int argc)
+{
+    // TODO in the alternative case, send "value:*" message.
+    // LOG("cls: %ls\n", HEADER(closure)->name->value);
+    assert0(HEADER(closure) == Runtime_BlockClosure_Class);
+    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
+}
+
+/* ========================================================================= */
 
 NATIVE(Runtime_BlockClosure_apply_)
     Runtime_BlockClosure closure = (Runtime_BlockClosure)self;

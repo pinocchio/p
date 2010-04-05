@@ -20,6 +20,7 @@ extern Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
 /* ========================================================================= */
 
 extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc);
+extern void apply(Object closure, uns_int argc);
 
 /* ========================================================================= */
 

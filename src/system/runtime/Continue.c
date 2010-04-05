@@ -42,14 +42,6 @@ NATIVE1(Runtime_Continue_escape_)
     poke_EXP(0, arg);
 }
 
-static void apply(Object closure, uns_int argc)
-{
-    // TODO in the alternative case, send "apply" message.
-    // LOG("cls: %ls\n", HEADER(closure)->name->value);
-    assert0(HEADER(closure) == Runtime_BlockClosure_Class);
-    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
-}
-
 NATIVE1(Runtime_Continue_on_)
     Runtime_Continue cont = new_Runtime_Continue();
     cont->exp_offset      = EXP_size() - (argc + 1);

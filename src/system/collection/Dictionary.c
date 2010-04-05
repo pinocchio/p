@@ -38,8 +38,7 @@ static int get_hash(Collection_Dictionary self, Object key)
     } else {
         printf("Got key: %p\n", key);
         print_Class(key);
-        assert1(NULL, "Dictionary currently only supports"
-                      " SmallInt and Symbol as key\n");
+        assert1(NULL, "Quick dictionaries only support ints and strings!");
         // make the compiler happy :)
         return 0;
     }
