@@ -11,10 +11,14 @@ CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -fPIC -c -I../ -Wall
 LDFLAGS+=-lpthread -lm -lgc -shared
 
 plugin: $(SOFILES)
-	
+
+
+%.o: %.c
+	@echo Compiling: $@
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+
 %.so: %.o
-	$(CC) $(LDFLAGS) -o $@ $^  
-    
+	@$(CC) $(LDFLAGS) -o $@ $^  
 
 clean:
 	@rm -rf $(OFILES) $(SOFILES) $(LOFILES) make.depend

@@ -74,11 +74,12 @@ NATIVE1(Type_SmallInt##_##name)\
             RETURN_FROM_NATIVE(False);\
         }\
     } else {\
+        /* TODO return false here? */ \
         print_Class(w_arg);\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \
     }\
 }
-
+//TODO return false on == and != if wrong type given
 Type_SmallInt_COMPARE_OPERATION(equals_, ==)
 Type_SmallInt_COMPARE_OPERATION(lt_, <)
 Type_SmallInt_COMPARE_OPERATION(gt_, >)
