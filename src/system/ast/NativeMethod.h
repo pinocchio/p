@@ -44,6 +44,7 @@ static void NM_##name(Object self, Type_Class class, uns_int argc) {
 
 #define NATIVE_ARG(idx) peek_EXP(argc - idx - 1)
 
+#define SELF ((Type_Object) self)
 /* ========================================================================= */
 
 extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self,

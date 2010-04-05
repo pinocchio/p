@@ -4,7 +4,7 @@ MAKEOPTS=-j3
 
 CFILES=$(wildcard */*.c)
 OFILES=$(CFILES:%.c=%.o)
-SOFILES=$(CFILES:%.c=%.so)
+SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES=$(CFILES:%.c=%.lo)
 
 CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -fPIC -c -I../ -Wall
@@ -21,6 +21,7 @@ plugin: $(SOFILES)
 	@$(CC) $(LDFLAGS) -o $@ $^  
 
 clean:
+	echo $(SOFILES) 
 	@rm -rf $(OFILES) $(SOFILES) $(LOFILES) make.depend
 
 tags: $(SOURCES)
