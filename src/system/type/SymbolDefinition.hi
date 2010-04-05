@@ -121,3 +121,4 @@ extern Type_Symbol SMB_checkCached_;
 extern Type_Symbol SMB_cache_at_;
 extern Type_Symbol SMB_continuationContinue_message_;
 extern Type_Symbol SMB_continuationOn_message_;
+extern Type_Symbol SMB_pPrimitive_plugin_;

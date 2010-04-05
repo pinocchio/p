@@ -80,6 +80,7 @@ SMB_not                                     = new_Type_Symbol_cached(L"not");
 SMB_numArgs                                 = new_Type_Symbol_cached(L"numArgs");
 SMB_on_                                     = new_Type_Symbol_cached(L"on:");
 SMB_open_                                   = new_Type_Symbol_cached(L"open:");
+SMB_pPrimitive_plugin_                      = new_Type_Symbol_cached(L"pPrimitive:plugin:");
 SMB_package_                                = new_Type_Symbol_cached(L"package:");
 SMB_perform_                                = new_Type_Symbol_cached(L"perform:");
 SMB_perform_withArguments_                  = new_Type_Symbol_cached(L"perform:withArguments:");

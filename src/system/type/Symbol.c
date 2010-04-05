@@ -56,7 +56,7 @@ void pre_init_Type_Symbol()
 NATIVE1(Type_Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
-    int index = unwrap_int(w_arg0) - 1;
+    int index     = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i", index));
     assert(index < ((Type_String)self)->size,
         printf("%i is out of Bounds[%"F_I"u]\n", index, ((Type_String)self)->size));

@@ -57,7 +57,7 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Cl
     if (method->code == NULL) {
         AST_Annotation annotation =
             lookup_annotation(method->annotations, 
-                              (Object)SMB_pinocchioPrimitive_module_);
+                              (Object)SMB_pPrimitive_plugin_);
         assert1(annotation, "No primitive annotation found");
         assert1(annotation->size == 2, "Invalid annotation format");
         method->code = lookup_native(annotation->arguments[0],
