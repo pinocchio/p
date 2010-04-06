@@ -93,7 +93,7 @@ static void start_eval(AST_Method method)
 /* ========================================================================= */
 
 void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
-                           Object self, Type_Class class, uns_int argc)
+                           Object self, uns_int argc)
 {
     assert(argc == method->params->size,
         printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
@@ -104,7 +104,7 @@ void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
         return;
     }
     
-    set_env((Object)new_Runtime_MethodContext(closure, self, class));
+    set_env((Object)new_Runtime_MethodContext(closure, self));
     activation_from_native(argc);
 
     start_eval(method);

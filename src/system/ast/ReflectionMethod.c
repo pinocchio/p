@@ -57,7 +57,7 @@ void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure, Object self, Typ
                                   (Object)SMB_Reflection_Reflection);
     }
     if (method->cache == (Object)-1) {
-        return AST_Method_invoke(closure, (AST_Method)method, self, class, argc);
+        return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
     ((native)method->cache)(self, class, argc);
 }

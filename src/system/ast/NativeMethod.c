@@ -64,7 +64,7 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Cl
                                      annotation->arguments[1]);
     }
     if (method->code == (native)-1) {
-        return AST_Method_invoke(closure, (AST_Method)method, self, class, argc);
+        return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
     method->code(self, class, argc);
 }

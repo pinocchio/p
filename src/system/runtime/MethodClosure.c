@@ -44,7 +44,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     } else if (HEADER(method) == AST_ReflectionMethod_Class) {
         return AST_ReflectionMethod_invoke(closure, self, class, argc);
     } else if (HEADER(method) == AST_Method_Class) {
-        return AST_Method_invoke(closure, method, self, class, argc);
+        return AST_Method_invoke(closure, method, self, argc);
     } else {
         assert1(NULL, "Unknown type of method");
     }
