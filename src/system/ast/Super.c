@@ -53,7 +53,7 @@ CNT(push_env_class)
     // TODO directly inline it
     Object env = (Object)current_env();
     assert0(IS_CONTEXT(env));
-    push_EXP(((Runtime_BlockContext)env)->home_context->class);
+    push_EXP(((Runtime_BlockContext)env)->home_context->closure->host);
 }
 
 void AST_Super_eval(AST_Super super)

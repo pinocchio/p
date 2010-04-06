@@ -44,7 +44,6 @@ void free_context(Runtime_BlockContext context)
     context->home_context = (Runtime_MethodContext)Nil;
     context->parent_frame = (Runtime_BlockContext)next;
     context->parent_scope = (Runtime_BlockContext)Nil;
-    context->unused  = Nil;
     int i;
     for (i = 0; i < size; i++) {
         context->locals[i] = Nil;

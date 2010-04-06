@@ -5,9 +5,9 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_METHODCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 2)
+#define RUNTIME_METHODCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 1)
 #define RUNTIME_METHODCONTEXT_VARS RUNTIME_CONTEXT_VARS,\
-                                   L"receiver", L"methodClass"
+                                   L"receiver"
 
 struct Runtime_MethodContext_t {
     uns_int                 size;
@@ -17,13 +17,12 @@ struct Runtime_MethodContext_t {
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;
     Object                  self;
-    Object                  class;
     Object                  locals[];
 };
 
 CREATE_INITIALIZERS(Runtime_MethodContext)
 extern Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                                       Object self, Type_Class class);
+                                                       Object self);
 
 extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
 

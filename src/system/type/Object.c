@@ -67,14 +67,6 @@ Object raw_Type_Object_at(Type_Object o, Object tag, int index)
     return o->ivals[index];
 }
 
-NATIVE1(Type_Object_instVarAt_)
-    Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
-    Object tag     = GETTAG(self);
-    ASSERT_TAG_LAYOUT(tag, Object);
-    RETURN_FROM_NATIVE(raw_Type_Object_at((Type_Object)self, tag, index - 1));
-}
-
 void raw_Type_Object_at_put(Type_Object o, Object tag,
                             int index, Object value)
 {
@@ -104,15 +96,6 @@ void Object_instVarAt_put_(Object self, int index, Object value)
     } else {
         assert1(NULL, "Trying to access object without instvars");
     }
-}
-
-NATIVE2(Type_Object_instVarAt_put_)
-    Object w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
-    Object tag     = GETTAG(self);
-    ASSERT_TAG_LAYOUT(tag, Object);
-    raw_Type_Object_at_put((Type_Object)self, tag, index - 1, NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
 }
 
 NATIVE1(Type_Array_basicNew_)
@@ -224,8 +207,6 @@ void post_init_Type_Object()
     store_native(natives, SMB__equal,                 NM_Type_Object_equals);
     store_native(natives, SMB_class,                  NM_Type_Object_class);
     store_native(natives, SMB_hash,                   NM_Type_Object_hash);
-    store_native(natives, SMB_instVarAt_,             NM_Type_Object_instVarAt_);
-    store_native(natives, SMB_instVarAt_put_,         NM_Type_Object_instVarAt_put_);
     store_native(natives, SMB_perform_withArguments_, NM_Type_Object_perform_withArguments_);
     store_native(natives, SMB_perform_,               NM_Type_Object_perform_);
 }

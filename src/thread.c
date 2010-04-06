@@ -108,4 +108,3 @@ void pinocchio_main(int argc, const char ** argv)
     pthread_join(main_thread, NULL);
     // pinocchio_main_thread((void*)(uns_int)argc);
 }
- 

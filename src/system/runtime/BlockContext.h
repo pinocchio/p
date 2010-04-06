@@ -10,8 +10,8 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_BLOCKCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 2)
-#define RUNTIME_BLOCKCONTEXT_VARS RUNTIME_CONTEXT_VARS, L"outerScope", L"unused"
+#define RUNTIME_BLOCKCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 1)
+#define RUNTIME_BLOCKCONTEXT_VARS RUNTIME_CONTEXT_VARS, L"outerScope"
 
 struct Runtime_BlockContext_t {
     uns_int                 size;
@@ -21,7 +21,6 @@ struct Runtime_BlockContext_t {
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;
     Runtime_BlockContext    parent_scope;
-    Object                  unused;
     Object                  locals[];
 };
 

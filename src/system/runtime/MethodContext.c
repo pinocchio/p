@@ -23,7 +23,7 @@ void pre_init_Runtime_MethodContext()
 /* ========================================================================= */
 
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                                Object self, Type_Class class)
+                                                Object self)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
 	Runtime_MethodContext result = (Runtime_MethodContext)optain_context(size);
@@ -32,7 +32,6 @@ Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
 	result->scope_id     = 0;
 	result->home_context = result;
 	result->parent_frame = current_env();
-	result->class        = (Object)class;
 	result->self         = self;
     ((Runtime_BlockContext)result)->size = size;
     return result;
