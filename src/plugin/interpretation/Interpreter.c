@@ -15,14 +15,14 @@ void extend_ISS(Object self)
 }
 
 
-NATIVE3(Interpreter_invokeNative)
+NATIVE4(Interpreter_invokeNative)
     Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
     Object receiver               = NATIVE_ARG(1);
     Runtime_Message message       = (Runtime_Message)NATIVE_ARG(2);
     if (peek_CNT() == &CNT_restore_iss) {
-        claim_EXP(message->size - 3);
+        claim_EXP(message->size - 4);
     } else {
-        claim_EXP(message->size - 3 + 1);
+        claim_EXP(message->size - 4 + 1);
         //poke_EXP(message->size+0, receiver);    
         //poke_EXP(message->size+1, Nil);    
         poke_EXP(message->size+2, tget(_ISS_));    
@@ -52,7 +52,6 @@ static CNT(fix_lookup_result)
 }
 
 NATIVE2(Interpreter_lookupSelector_in_)
-    fprintf(StandardError->file, "BLABLABLA\n");
 	Object selector   = NATIVE_ARG(0);
 	Type_Class target = (Type_Class)NATIVE_ARG(1);
 	push_CNT(fix_lookup_result);
@@ -61,7 +60,7 @@ NATIVE2(Interpreter_lookupSelector_in_)
 }
 
 PLUGIN()
-    EXPORT(new_Type_Symbol_cached(L"invokeNativeMethod:on:message:"),
+    EXPORT(new_Type_Symbol_cached(L"invokeNativeMethod:on:message:alternative:"),
 		   Interpreter_invokeNative);
 	EXPORT(new_Type_Symbol_cached(L"lookupSelector:in:"),
            Interpreter_lookupSelector_in_);
