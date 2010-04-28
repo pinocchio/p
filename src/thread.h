@@ -1,23 +1,36 @@
 #ifndef THREAD_H
 #define THREAD_H
 
-#include <pthread.h>
 #include <pinocchio.h>
 
-extern pthread_key_t Double_Stack;
-extern pthread_key_t _EXP_;
-extern pthread_key_t _CNT_;
+#ifdef THREAD
+    #include <pthread.h>
+    typedef pthread_key_t THREAD_OBJECT;
+#else // THREAD
+    typedef Object * THREAD_OBJECT;
+#endif // THREAD
 
-extern pthread_key_t _ENV_;
-extern pthread_key_t _ISS_;
-extern pthread_key_t Eval_Exit;
-extern pthread_key_t Eval_Continue;
-extern pthread_key_t Eval_Abort;
+extern THREAD_OBJECT Double_Stack;
+extern THREAD_OBJECT _EXP_;
+extern THREAD_OBJECT _CNT_;
+
+extern THREAD_OBJECT _ENV_;
+extern THREAD_OBJECT _ISS_;
+extern THREAD_OBJECT Eval_Exit;
+extern THREAD_OBJECT Eval_Continue;
+extern THREAD_OBJECT Eval_Abort;
 
 #define tget_buf(key) *(jmp_buf*)tget(key)
-#define tget(key) ((Object *)pthread_getspecific((key)))
-#define tset(key, value) pthread_setspecific((key), (value))
-#define tkey(key_t, deconstructor) pthread_key_create(&key_t, deconstructor)
+
+#ifdef THREAD
+    #define tget(key) ((Object *)pthread_getspecific((key)))
+    #define tset(key, value) pthread_setspecific((key), (value))
+    #define tkey(key_t, deconstructor) pthread_key_create(&key_t, deconstructor)
+#else // THREAD    
+    #define tget(key) (key)
+    #define tset(key, value) (key) = (THREAD_OBJECT)(value)
+    #define tkey(key_t, deconstructor) 
+#endif // THREAD
 
 extern void _push_EXP(Object e);
 extern Object pop_EXP();

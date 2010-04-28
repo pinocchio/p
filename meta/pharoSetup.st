@@ -63,7 +63,7 @@ Preferences disable: #gradientMenu.
 Preferences disable: #gradientButtonLook.
 Preferences disable: #gradientScrollbarLook.
 Preferences disable: #scrollBarsWithoutMenuButton.
-Preferences disable: #useNewDiffToolsForMC.
+Preferences enable: #useNewDiffToolsForMC.
 Preferences disable: #duplicateAllControlAndAltKeys.
 Preferences disable: #fadedBackgroundWindows.
 Preferences disable: #windowAnimation.

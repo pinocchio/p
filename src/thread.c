@@ -2,15 +2,15 @@
 #include <lib/lib.h>
 #include <string.h>
 
-pthread_key_t Double_Stack;
-pthread_key_t _ISS_;
-pthread_key_t _EXP_;
-pthread_key_t _ENV_;
-pthread_key_t _CNT_;
+THREAD_OBJECT Double_Stack;
+THREAD_OBJECT _ISS_;
+THREAD_OBJECT _EXP_;
+THREAD_OBJECT _ENV_;
+THREAD_OBJECT _CNT_;
 
-pthread_key_t Eval_Exit;
-pthread_key_t Eval_Continue;
-pthread_key_t Eval_Abort;
+THREAD_OBJECT Eval_Exit;
+THREAD_OBJECT Eval_Continue;
+THREAD_OBJECT Eval_Abort;
 
 /* ========================================================================= */
 
@@ -89,13 +89,13 @@ void * pinocchio_main_thread(void * argc)
     initialize_Thread();
     init_lib();
 
-    #ifdef TEST
+#ifdef TEST
     run_tests();
     // run_FibTest();
-    #else // TEST
+#else // TEST
     Type_Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1(Interpretation_MainInterpreter_Class, SMB_main_, (Object)args);
-    #endif // TEST
+#endif // TEST
 
     return EXIT_SUCCESS;
 }
@@ -103,8 +103,11 @@ void * pinocchio_main_thread(void * argc)
 void pinocchio_main(int argc, const char ** argv)
 {
     cargv = argv;
+#ifdef THREAD
     pthread_t main_thread;
     pthread_create(&main_thread, NULL, &pinocchio_main_thread, (void*)(uns_int)argc);
     pthread_join(main_thread, NULL);
-    // pinocchio_main_thread((void*)(uns_int)argc);
+#else //THREAD
+     pinocchio_main_thread((void*)(uns_int)argc);
+#endif //THREAD
 }
