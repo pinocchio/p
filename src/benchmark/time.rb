@@ -51,7 +51,7 @@ count.times {
     #time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
     #time += a.match(/([0-9]+)m/)[1].to_f * 60
     #probes.push(time)
-    probes.push(Benchmark.realtime { system(cmd)})
+    probes.push(Benchmark.realtime { `#{cmd} >> /dev/null` })
 }
 
 # =============================================================================

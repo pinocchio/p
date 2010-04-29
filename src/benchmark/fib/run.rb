@@ -26,7 +26,7 @@ def benchmarks(f, list)
     }
     list.each { |l|
         f.pprint "#{l[0].ljust maxNameLength} "
-        f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 10 #{l[2]}`.chomp
+        f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 50 #{l[2]}`.chomp
 
     }
 end
