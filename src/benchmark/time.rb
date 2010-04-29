@@ -39,10 +39,11 @@ end
 # =============================================================================
 
 count = ARGV[0].to_i
-cmd = ARGV[1]
+cmd = ARGV[1..-1].join(' ')
 
 probes = []
 
+#puts "time -p #{cmd}"
 #`(time -p #{cmd})`
 count.times {
     a = `(time -p #{cmd}) 2>&1 | grep real`
