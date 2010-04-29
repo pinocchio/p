@@ -8,20 +8,21 @@ SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.so))
 #SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.la))
 LOFILES=$(CFILES:%.c=%.lo)
 
-CFLAGS+=-DASSERT_FAIL -c -I../ -Wall
-LDFLAGS+=-lm -lgc
+CFLAGS+=-DASSERT_FAIL -fPIC -c -I../ -Wall
+LDFLAGS+=-lm -lgc -shared
 
 plugin: $(SOFILES)
 
 %.o: %.c
 	@echo Compiling: $@
-	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+#	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 #%.la: %.o
 #	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^  
 
 %.so: %.o
- 	@$(CC) $(LDFLAGS) -o $@ $^  
+	@$(CC) $(LDFLAGS) -o $@ $^  
 
 clean:
 	echo $(SOFILES) 
