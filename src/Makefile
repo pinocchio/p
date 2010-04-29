@@ -17,7 +17,7 @@ TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
 CFLAGS+=-DASSERT_FAIL -I. -Wall -g
 #CFLAGS+=-Wl,-rpath,./plugin/
-LDFLAGS+=-lm -lgc
+LDFLAGS+=-lm -lgc -ldl
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
 OBJECTS=$(CFILES:%.c=%.o)
@@ -25,12 +25,14 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 %.o: %.c
 	@echo Compiling: $@
-	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+#	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
-	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^; 
-	make plugin
+	@$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
+#	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^; 
+#	make plugin
 
 run: $(TARGET)
 	./$(TARGET)
