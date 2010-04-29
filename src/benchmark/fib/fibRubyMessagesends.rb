@@ -1,3 +1,5 @@
+#! /usr/bin/env ruby
+#
 class TrueClass
    def ifTrueIfFalse(ifTrue, ifFalse)
        ifTrue.call()
