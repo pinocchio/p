@@ -15,9 +15,9 @@ TEST_CFILES=test/pinocchioTest.c
 TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES=$(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -I. -Wall -g 
+CFLAGS+=-DASSERT_FAIL -I. -Wall -g
 #CFLAGS+=-Wl,-rpath,./plugin/
-LDFLAGS+=-lpthread -lm -lgc -ldl
+LDFLAGS+=-lm -lgc
 
 SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
 OBJECTS=$(CFILES:%.c=%.o)
@@ -25,10 +25,12 @@ ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 %.o: %.c
 	@echo Compiling: $@
-	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
-	@$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
+	@echo Linking $@
+	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^; 
+	make plugin
 
 run: $(TARGET)
 	./$(TARGET)

@@ -4,21 +4,21 @@ MAKEOPTS=-j3
 
 CFILES=$(wildcard */*.c)
 OFILES=$(CFILES:%.c=%.o)
-SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.so))
+SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.la))
 LOFILES=$(CFILES:%.c=%.lo)
 
-CFLAGS+=-DGC_PTHREADS -DASSERT_FAIL -fPIC -c -I../ -Wall
-LDFLAGS+=-lpthread -lm -lgc -shared
+CFLAGS+=-DASSERT_FAIL -c -I../ -Wall
+LDFLAGS+=-lm -lgc
 
 plugin: $(SOFILES)
 
 
 %.o: %.c
 	@echo Compiling: $@
-	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
-%.so: %.o
-	@$(CC) $(LDFLAGS) -o $@ $^  
+%.la: %.o
+	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^  
 
 clean:
 	echo $(SOFILES) 
