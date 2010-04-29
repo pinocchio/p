@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+require 'benchmark'
 
 class Array
     def sum
@@ -46,10 +47,11 @@ probes = []
 #puts "time -p #{cmd}"
 #`(time -p #{cmd})`
 count.times {
-    a = `(time -p #{cmd}) 2>&1 | grep real`
-    time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
+    #a = `(time -p #{cmd}) 2>&1 | grep real`
+    #time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
     #time += a.match(/([0-9]+)m/)[1].to_f * 60
-    probes.push(time)
+    #probes.push(time)
+    probes.push(Benchmark.realtime { system(cmd)})
 }
 
 # =============================================================================
