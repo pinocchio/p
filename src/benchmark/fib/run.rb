@@ -12,6 +12,7 @@ class File
 end
 
 def header(f)
+    f.puts
     f.pputs "="*79
     f.pputs `date`.chomp + " | " + `uname -srpi`
     f.pputs "="*79
@@ -27,23 +28,28 @@ def benchmarks(f, list)
     list.each { |l|
         f.pprint "#{l[0].ljust maxNameLength} "
         f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 100 #{l[2]}`.chomp
-
     }
 end
 
 BENCHMARKS = [
     ['Python 2.6 Parse', 'python2.6 fibPythonParse.py'],
     ['Python 2.6',       'python2.6 fibPython.py'],
+
     ['Python 3.0 Parse', 'python3.0 fibPythonParse.py'],
     ['Python 3.0',       'python3.0 fibPython.py'],
+
     ['Python 3.1 Parse', 'python3.1 fibPythonParse.py'],
     ['Python 3.1',       'python3.1 fibPython.py'],
+
     ['Ruby Parse',       './fibRubyParse.rb'],
     ['Ruby',             './fibRuby.rb'],
+
     ['Ruby 1.9 Parse',   'ruby1.9 ./fibRubyParse.rb'],
     ['Ruby 1.9',         'ruby1.9 ./fibRuby.rb'],
+
     ['Ruby 1.9.1 Parse', 'ruby1.9.1 ./fibRubyParse.rb'],
     ['Ruby 1.9.1',       'ruby1.9.1 ./fibRuby.rb'],
+
     ['Pinocchio Parse', '../../', 
         './pinocchio benchmark/fib/fibParse.p'],
     ['Pinocchio', '../../', 
