@@ -26,12 +26,15 @@ def benchmarks(f, list)
     }
     list.each { |l|
         f.pprint "#{l[0].ljust maxNameLength} "
-        f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 50 #{l[2]}`.chomp
+        f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 100 #{l[2]}`.chomp
 
     }
 end
 
 BENCHMARKS = [
+    ['Python 2.6', 'python2.6 fibPython.py'],
+    ['Python 3.0', 'python3.0 fibPython.py'],
+    ['Python 3.1', 'python3.1 fibPython.py'],
     ['Ruby', './fibRuby.rb'],
     ['Ruby 1.9', 'ruby1.9 ./fibRuby.rb'],
     ['Ruby 1.9.1', 'ruby1.9.1 ./fibRuby.rb'],
