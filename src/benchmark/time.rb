@@ -57,5 +57,5 @@ count.times {
 # =============================================================================
 stdev = probes.stdev
 format = "%.#{stdev.precision}f"
-value = sprintf(format+" ±"+format, probes.mean, stdev)
-puts "#{count} #{value}"
+value = sprintf(format+"    ±   "+format, probes.mean, stdev)
+puts "#{count}  #{value}"
