@@ -1,6 +1,7 @@
 SHELL     = /bin/bash
 
 MAKEOPTS  = -j3
+OS           = $(shell uname)
 
 # ============================================================================
 CFILES    = $(wildcard */*.c)
@@ -8,12 +9,12 @@ OFILES    = $(CFILES:%.c=%.o)
 SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES   = $(CFILES:%.c=%.lo)
 # ============================================================================
-ifeq (,$(findstring Darwin,$$(uname)))
+ifeq ($(findstring Darwin,$(OS)),Darwin)
+    CFLAGS   += -DASSERT_FAIL -fno-common -DPIC -c -I../ -Wall
+    LDFLAGS  += -lm -lgc -dynamiclib  -undefined dynamic_lookup
+else
     CFLAGS  += -DASSERT_FAIL -fPIC -c -I../ -Wall
     LDFLAGS += -lm -lgc -shared
-else
-    CFLAGS   += -DASSERT_FAIL -fno-common -DPIC -c -I../ -Wall
-    LDFLAGS  += -lm -lgc -dynamiclib # -undefined dynamic_lookup
 endif
 # ============================================================================
 plugin: $(SOFILES)

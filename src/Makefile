@@ -1,6 +1,7 @@
 SHELL        = /bin/bash
 
 MAKEOPTS     = -j3
+OS           = $(shell uname)
 
 # ============================================================================
 TARGET       = pinocchio
@@ -22,10 +23,10 @@ ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -DASSERT_FAIL -I. -Wall -g
 
-ifeq (,$(findstring Darwin,$$(uname)))
-    LDFLAGS += -lm -lgc -ldl -export-dynamic
+ifeq ($(findstring Darwin,$(OS)),Darwin)
+    LDFLAGS += -lm -lgc -ldl 
 else
-    LDFLAGS += -lm -lgc -ldl
+    LDFLAGS += -lm -lgc -ldl -export-dynamic
 endif
 # ============================================================================
 %.o: %.c
