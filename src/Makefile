@@ -23,9 +23,9 @@ ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 CFLAGS  += -DASSERT_FAIL -I. -Wall -g
 
 ifeq (,$(findstring Darwin,$$(uname)))
-    LDFLAGS += -lm -lgc -ldl
-else
     LDFLAGS += -lm -lgc -ldl -export-dynamic
+else
+    LDFLAGS += -lm -lgc -ldl
 endif
 # ============================================================================
 %.o: %.c
