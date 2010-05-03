@@ -1,8 +1,9 @@
-TARGET       = pinocchio
-
 SHELL        = /bin/bash
 
 MAKEOPTS     = -j3
+
+# ============================================================================
+TARGET       = pinocchio
 
 CFILES      += $(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
 CFILES      += $(wildcard lib/*.c) $(wildcard lib/*/*.c)
@@ -15,6 +16,10 @@ TEST_CFILES  = test/pinocchioTest.c
 TEST_CFILES += $(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
 TEST_HFILES  = $(TEST_CFILES:%.c=%.h)
 
+SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
+OBJECTS      = $(CFILES:%.c=%.o)
+ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
+# ============================================================================
 CFLAGS  += -DASSERT_FAIL -I. -Wall -g
 
 ifeq (,$(findstring Darwin,$$(uname)))
@@ -22,18 +27,14 @@ ifeq (,$(findstring Darwin,$$(uname)))
 else
     LDFLAGS += -lm -lgc -ldl -export-dynamic
 endif
-
-SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
-OBJECTS      = $(CFILES:%.c=%.o)
-ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
-
+# ============================================================================
 %.o: %.c
 	@echo Compiling: $@
-	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
-	$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 run: $(TARGET)
 	./$(TARGET)
