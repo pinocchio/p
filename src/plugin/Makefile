@@ -13,7 +13,7 @@ ifeq (,$(findstring Darwin,$$(uname)))
     LDFLAGS  += -lm -lgc -dynamiclib -undefined dynamic_lookup
 else
     CFLAGS  += -DASSERT_FAIL -fPIC -c -I../ -Wall
-    LDFLAGS += -lm -lgc
+    LDFLAGS += -lm -lgc -shared
 endif
 # ============================================================================
 plugin: $(SOFILES)
