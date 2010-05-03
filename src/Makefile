@@ -1,38 +1,39 @@
-TARGET=pinocchio
+TARGET       = pinocchio
 
-SHELL=/bin/bash
+SHELL        = /bin/bash
 
-MAKEOPTS=-j3
+MAKEOPTS     = -j3
 
-CFILES+=$(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
-CFILES+=$(wildcard lib/*.c) $(wildcard lib/*/*.c)
+CFILES      += $(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/*/*.c)
+CFILES      += $(wildcard lib/*.c) $(wildcard lib/*/*.c)
 
-CIFILES=$(wildcard *.ci)
-HFILES+=$(CFILES:%.c=%.h)
+CIFILES      = $(wildcard *.ci)
+HFILES      += $(CFILES:%.c=%.h)
 
-TEST_CIFILES=$(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
-TEST_CFILES=test/pinocchioTest.c
-TEST_CFILES+=$(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
-TEST_HFILES=$(TEST_CFILES:%.c=%.h)
+TEST_CIFILES = $(wildcard system/*/*Test.ci) $(wildcard test/*.ci)
+TEST_CFILES  = test/pinocchioTest.c
+TEST_CFILES += $(wildcard test/lib/*.c) $(wildcard test/lib/*/*.c)
+TEST_HFILES  = $(TEST_CFILES:%.c=%.h)
 
-CFLAGS+=-DASSERT_FAIL -I. -Wall -g
-#CFLAGS+=-Wl,-rpath,./plugin/
-LDFLAGS+=-lm -lgc -ldl
+CFLAGS  += -DASSERT_FAIL -I. -Wall -g
 
-SOURCES=$(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
-OBJECTS=$(CFILES:%.c=%.o)
-ALLOBJECTS=$(OBJECTS) $(TEST_CFILES:%.c=%.o)
+ifeq (,$(findstring Darwin,$$(uname)))
+    LDFLAGS += -lm -lgc -ldl
+else
+    LDFLAGS += -lm -lgc -ldl -export-dynamic
+endif
+
+SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(CIFILES)
+OBJECTS      = $(CFILES:%.c=%.o)
+ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 
 %.o: %.c
 	@echo Compiling: $@
-	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
-#	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
-	@$(CC) $(LDFLAGS) -export-dynamic -o $@ $^; make plugin
-#	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^; 
-#	make plugin
+	$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 run: $(TARGET)
 	./$(TARGET)

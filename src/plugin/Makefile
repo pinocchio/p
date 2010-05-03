@@ -1,25 +1,25 @@
-SHELL=/bin/bash
+SHELL     = /bin/bash
 
-MAKEOPTS=-j3
+MAKEOPTS  = -j3
 
-CFILES=$(wildcard */*.c)
-OFILES=$(CFILES:%.c=%.o)
-SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.so))
-#SOFILES=$(filter-out %Helper.c,$(CFILES:%.c=%.la))
-LOFILES=$(CFILES:%.c=%.lo)
+CFILES    = $(wildcard */*.c)
+OFILES    = $(CFILES:%.c=%.o)
+SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
+LOFILES   = $(CFILES:%.c=%.lo)
 
-CFLAGS+=-DASSERT_FAIL -fPIC -c -I../ -Wall
-LDFLAGS+=-lm -lgc -shared
+ifeq (,$(findstring Darwin,$$(uname)))
+    CFLAGS   += -DASSERT_FAIL -fno-common -DPIC -c -I../ -Wall
+    LDFLAGS  += -lm -lgc -dynamiclib -undefined dynamic_lookup
+else
+    CFLAGS  += -DASSERT_FAIL -fPIC -c -I../ -Wall
+    LDFLAGS += -lm -lgc
+endif
 
 plugin: $(SOFILES)
 
 %.o: %.c
 	@echo Compiling: $@
 	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
-#	@glibtool --mode=compile --tag CC $(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
-
-#%.la: %.o
-#	@glibtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^  
 
 %.so: %.o
 	@$(CC) $(LDFLAGS) -o $@ $^  
