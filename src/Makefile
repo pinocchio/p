@@ -22,11 +22,12 @@ OBJECTS      = $(CFILES:%.c=%.o)
 ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -DASSERT_FAIL -I. -Wall -g
-
+LDFLAGS += -lm -lgc -ldl 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
-    LDFLAGS += -lm -lgc -ldl 
+#	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
+#	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 else
-    LDFLAGS += -lm -lgc -ldl -export-dynamic
+    LDFLAGS +=  -export-dynamic
 endif
 # ============================================================================
 %.o: %.c
@@ -61,12 +62,9 @@ profile:
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
 
-mac:
-	CFLAGS="-arch i386 -arch x86_64 -arch ppc" LDFLAGS="-arch i386 -arch x86_64 -arch ppc" make
-
-
+# ============================================================================
 .PHONY: test vtest run clean profile plugin
-
+# ============================================================================
 include make.depend
 
 make.depend: $(SOURCES)

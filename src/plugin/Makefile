@@ -1,7 +1,7 @@
 SHELL     = /bin/bash
 
 MAKEOPTS  = -j3
-OS           = $(shell uname)
+OS        = $(shell uname)
 
 # ============================================================================
 CFILES    = $(wildcard */*.c)
@@ -9,12 +9,16 @@ OFILES    = $(CFILES:%.c=%.o)
 SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES   = $(CFILES:%.c=%.lo)
 # ============================================================================
+CFLAGS  += -DASSERT_FAIL -c -I../ -Wall
+LDFLAGS += -lm -lgc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
-    CFLAGS   += -DASSERT_FAIL -fno-common -DPIC -c -I../ -Wall
-    LDFLAGS  += -lm -lgc -dynamiclib  -undefined dynamic_lookup
+    CFLAGS  += -fno-common -DPIC 
+    LDFLAGS += -dynamiclib -undefined dynamic_lookup
+#	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
+#	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 else
-    CFLAGS  += -DASSERT_FAIL -fPIC -c -I../ -Wall
-    LDFLAGS += -lm -lgc -shared
+    CFLAGS  += -fPIC
+    LDFLAGS += -shared
 endif
 # ============================================================================
 plugin: $(SOFILES)
@@ -32,8 +36,5 @@ clean:
 
 tags: $(SOURCES)
 	@cd ..; make tags
-
-mac:
-	CFLAGS="-arch i386 -arch x86_64 -arch ppc" LDFLAGS="-arch i386 -arch x86_64 -arch ppc" make
-
+# ============================================================================
 .PHONY: plugin tags clean tags
