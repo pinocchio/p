@@ -2,7 +2,6 @@ SHELL     = /bin/bash
 
 MAKEOPTS  = -j3
 OS        = $(shell uname)
-
 # ============================================================================
 CFILES    = $(wildcard */*.c)
 OFILES    = $(CFILES:%.c=%.o)

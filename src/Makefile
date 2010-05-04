@@ -2,7 +2,6 @@ SHELL        = /bin/bash
 
 MAKEOPTS     = -j3
 OS           = $(shell uname)
-
 # ============================================================================
 TARGET       = pinocchio
 
