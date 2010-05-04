@@ -22,8 +22,8 @@ void pre_init_Runtime_Continue()
                         CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
     
     Type_Array layout = (Type_Array)Runtime_Continue_Class->layout;
-    HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
-    HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[0]) = AST_UIntSlot_Class;
+    HEADER(layout->values[1]) = AST_UIntSlot_Class;
     REFER_TO(Runtime_Continue);
 }
 

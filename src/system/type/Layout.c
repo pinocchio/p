@@ -78,7 +78,7 @@ Object create_object_layout(uns_int size, va_list args)
     int i;
     for (i = 0; i < size; i++) {
         result->values[i] =
-            (Object)new_AST_InstVariable(i,
+            (Object)new_AST_Slot(i,
                                          va_arg(args, wchar_t *));
     }
     va_end(args);
@@ -91,7 +91,7 @@ Object create_array_layout(uns_int size, va_list args)
     Type_Array result = create_layout_with_vars(Type_ArrayLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_AST_InstVariable(i, va_arg(args, wchar_t*));
+        result->values[i] = (Object)new_AST_Slot(i, va_arg(args, wchar_t*));
     }
     va_end(args);
     return (Object)result;

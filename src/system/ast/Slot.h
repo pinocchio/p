@@ -10,19 +10,19 @@
 
 /* ========================================================================= */
 
-struct AST_InstVariable_t {
+struct AST_Slot_t {
     Type_SmallInt   index;
     Object          name;
     Object          package;
 };
 
-CREATE_INITIALIZERS(AST_InstVariable)
-extern AST_InstVariable new_AST_InstVariable(uns_int index, const wchar_t * name);
+CREATE_INITIALIZERS(AST_Slot)
+extern AST_Slot new_AST_Slot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 
-extern void AST_InstVariable_eval(AST_InstVariable var);
-extern void AST_InstVariable_assign(AST_InstVariable var, Object value);
+extern void AST_Slot_eval(AST_Slot var);
+extern void AST_Slot_assign(AST_Slot var, Object value);
 
 /* ========================================================================= */
 

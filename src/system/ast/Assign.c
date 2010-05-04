@@ -45,10 +45,10 @@ CNT(AST_Assign_assign)
     
     if (HEADER(var) == AST_Variable_Class) {
         return AST_Variable_assign((AST_Variable)var, value);
-    } else if (HEADER(var) == AST_InstVariable_Class) {
-        return AST_InstVariable_assign((AST_InstVariable)var, value);
-    } else if (HEADER(var) == AST_UnsintInstVariable_Class) {
-        return AST_UnsintInstVariable_assign((AST_UnsintInstVariable)var,
+    } else if (HEADER(var) == AST_Slot_Class) {
+        return AST_Slot_assign((AST_Slot)var, value);
+    } else if (HEADER(var) == AST_UIntSlot_Class) {
+        return AST_UIntSlot_assign((AST_UIntSlot)var,
                                              value);
     }
     

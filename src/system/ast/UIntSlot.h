@@ -10,19 +10,19 @@
 
 /* ========================================================================= */
 
-struct AST_UnsintInstVariable_t {
+struct AST_UIntSlot_t {
     Type_SmallInt   index;
     Object          name;
     Object          package;
 };
 
-CREATE_INITIALIZERS(AST_UnsintInstVariable)
-extern AST_UnsintInstVariable new_AST_UnsintInstVariable(uns_int index, const wchar_t * name);
+CREATE_INITIALIZERS(AST_UIntSlot)
+extern AST_UIntSlot new_AST_UIntSlot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 
-extern void AST_UnsintInstVariable_eval(AST_UnsintInstVariable var);
-extern void AST_UnsintInstVariable_assign(AST_UnsintInstVariable var, Object value);
+extern void AST_UIntSlot_eval(AST_UIntSlot var);
+extern void AST_UIntSlot_assign(AST_UIntSlot var, Object value);
 
 /* ========================================================================= */
 

@@ -16,7 +16,7 @@
 #include <system/runtime/BlockClosureTest.ci>
 #include <system/ast/InfoTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
-#include <system/ast/InstVariableTest.ci>
+#include <system/ast/SlotTest.ci>
 
 /* ========================================================================= */
 
@@ -99,7 +99,7 @@ test_AST_Variable();
 test_Runtime_BlockClosure();
 test_AST_Info();
 test_Runtime_MethodClosure();
-test_AST_InstVariable();
+test_AST_Slot();
 */
 test_lib();
 

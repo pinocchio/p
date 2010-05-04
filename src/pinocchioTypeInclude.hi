@@ -34,8 +34,8 @@
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>
-#include <system/ast/InstVariable.h>
-#include <system/ast/UnsintInstVariable.h>
+#include <system/ast/Slot.h>
+#include <system/ast/UIntSlot.h>
 #include <system/organization/ClassReference.h>
 #include <system/runtime/InlineCache.h>
 

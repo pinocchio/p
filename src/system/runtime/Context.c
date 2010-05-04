@@ -15,8 +15,8 @@ void pre_init_Runtime_Context()
                         L"Context",
                         CREATE_ARRAY_TAG(RUNTIME_CONTEXT));
     Type_Array layout = (Type_Array)Runtime_Context_Class->layout;
-    HEADER(layout->values[0]) = AST_UnsintInstVariable_Class;
-    HEADER(layout->values[1]) = AST_UnsintInstVariable_Class;
+    HEADER(layout->values[0]) = AST_UIntSlot_Class;
+    HEADER(layout->values[1]) = AST_UIntSlot_Class;
     REFER_TO(Runtime_Context);
 }
 

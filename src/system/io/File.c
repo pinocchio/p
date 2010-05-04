@@ -246,9 +246,9 @@ NATIVE0(IO_File_close)
 void post_init_IO_File()
 {
     /*
-    HEADER(((Type_Array)IO_File_Class->layout)->values[0]) = AST_UnsintInstVariable_Class;
-    HEADER(((Type_Array)IO_ReadFile_Class->layout)->values[0]) = AST_UnsintInstVariable_Class;
-    HEADER(((Type_Array)IO_WriteFile_Class->layout)->values[0]) = AST_UnsintInstVariable_Class;
+    HEADER(((Type_Array)IO_File_Class->layout)->values[0]) = AST_UIntSlot_Class;
+    HEADER(((Type_Array)IO_ReadFile_Class->layout)->values[0]) = AST_UIntSlot_Class;
+    HEADER(((Type_Array)IO_WriteFile_Class->layout)->values[0]) = AST_UIntSlot_Class;
     */
     Collection_Dictionary natives = add_plugin(L"IO.File");
     store_native(natives, SMB_stdin  , NM_IO_File_stdin);

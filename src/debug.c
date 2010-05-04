@@ -100,7 +100,7 @@ Object atn(Object o, const wchar_t * s)
         int i;
         uns_int size = ((Type_Array)tag)->size;
         for (i = 0; i < size; i++) {
-            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
             Type_Symbol sym = (Type_Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
@@ -111,7 +111,7 @@ Object atn(Object o, const wchar_t * s)
         uns_int size = ((Type_Array)tag)->size;
         int i;
         for (i = 0; i < size; i++) {
-            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
             Type_Symbol sym = (Type_Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Array)o)->values[i];
@@ -256,7 +256,7 @@ void inspect(Object o)
         uns_int size = ((Type_Array)tag)->size;
         int i;
         for (i = 0; i < size; i++) {
-            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
             fprintf(StandardError->file, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
@@ -268,7 +268,7 @@ void inspect(Object o)
         uns_int isize = ((Type_Array)o)->size;
         int i;
         for (i = 0; i < size; i++) {
-            AST_InstVariable v = (AST_InstVariable)((Type_Array)tag)->values[i];
+            AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
             fprintf(StandardError->file, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
