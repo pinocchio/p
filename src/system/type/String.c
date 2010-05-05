@@ -108,6 +108,7 @@ NATIVE2(Type_String_at_put_)
 }
 
 NATIVE1(Type_String_basicNew_)
+    // TODO check type
     Object w_size = NATIVE_ARG(0);
     int size = unwrap_int(w_size);
     Type_String result = new_Type_String_sized(size);
