@@ -38,8 +38,6 @@ void initialize_Thread()
     tset(Eval_Exit,     PALLOC(sizeof(jmp_buf)));
     tset(Eval_Continue, PALLOC(sizeof(jmp_buf)));
     tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));
-    
-    init_Error_Handler();
 }
 
 /* ========================================================================= */

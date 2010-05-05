@@ -36,19 +36,20 @@ Collection_Dictionary _NATIVES_;
  * Avoid longjmps as much as possible since they impose a large
  * performance penalty!
  */
-void CNT_continue_eval()
-{
+CNT(continue_eval)
     longjmp(tget_buf(Eval_Continue), 1);
 }
 
-void CNT_abort_eval()
-{
+CNT(abort_eval)
     longjmp(tget_buf(Eval_Abort), 1);
 }
 
-void CNT_exit_eval()
-{
+CNT(exit_eval)
     longjmp(tget_buf(Eval_Exit), 1);
+}
+
+CNT(exit_error)
+    exit(1);
 }
 
 void initialize_Natives()
@@ -88,6 +89,17 @@ void CNT_send_Eval()
 				  ((Type_Class)class)->name->value));
 }
 
+void handle_error()
+{
+    if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
+        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler), Nil);
+    } else {
+        printf("Not supported yet!\n");
+        exit(1); 
+    }
+    longjmp(tget_buf(Eval_Continue), 1);
+}
+
 /* ========================================================================= */
 
 bool isInstance(Object object, Object class) 
@@ -119,6 +131,11 @@ void start_eval()
         assert(NULL, printf("Re-entering evaluation thread!\n"));
     }
     IN_EVAL = 1;
+// TODO make this work for the NOJMP version as well.
+    #ifndef NOJMP
+    push_CNT(exit_error);
+    #endif
+    init_Error_Handler();
     #ifndef NOJMP
     push_CNT(exit_eval);
     #endif

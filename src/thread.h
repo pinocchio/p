@@ -55,5 +55,6 @@ extern void _push_CNT(cont e);
 #define CNT_size()              ((&tget(Double_Stack)[STACK_SIZE]) - tget(_CNT_))
 
 extern void pinocchio_main(int argc, const char ** argv);
+extern void init_Error_Handler();
 
 #endif // THREAD_H

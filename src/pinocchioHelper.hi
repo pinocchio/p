@@ -6,7 +6,7 @@ extern jmp_buf Assert_Fail;
 
 #define NYI assert1(NULL, "NYI");
 
-#define ERROR_HANDLER longjmp(tget_buf(Eval_Continue), 1);
+#define ERROR_HANDLER handle_error();
 
 #ifdef __linux
     #include <stdio_ext.h>
@@ -47,3 +47,4 @@ if (!(test)) { \
 
 extern void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method);
 extern bool isInstance(Object object, Object class);
+extern void handle_error();
