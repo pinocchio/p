@@ -12,6 +12,8 @@ THREAD_OBJECT Eval_Exit;
 THREAD_OBJECT Eval_Continue;
 THREAD_OBJECT Eval_Abort;
 
+THREAD_OBJECT Error_Handler;
+
 /* ========================================================================= */
 
 void init_Stack(uns_int size)
@@ -22,14 +24,22 @@ void init_Stack(uns_int size)
     tset(_CNT_, &tget(Double_Stack)[size]);
 }
 
+void init_Error_Handler()
+{
+    tset(Error_Handler, new_Runtime_Continue_offset(0));
+}
+
 void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
     tset(_ISS_, Nil); 
     tset(_ENV_, Nil);
+
     tset(Eval_Exit,     PALLOC(sizeof(jmp_buf)));
     tset(Eval_Continue, PALLOC(sizeof(jmp_buf)));
     tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));
+    
+    init_Error_Handler();
 }
 
 /* ========================================================================= */

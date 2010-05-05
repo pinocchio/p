@@ -18,9 +18,12 @@ void init_pthread_keys()
     tkey(_CNT_,         NULL);
     tkey(_ENV_,         NULL);
     tkey(_ISS_,         NULL);
+ 
     tkey(Eval_Exit,     NULL);
     tkey(Eval_Continue, NULL);
     tkey(Eval_Abort,    NULL);
+ 
+    tkey(Error_Handler, NULL);
 }
 
 /* ========================================================================= */

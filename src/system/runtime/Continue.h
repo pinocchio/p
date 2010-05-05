@@ -17,7 +17,8 @@ struct Runtime_Continue_t {
 
 CREATE_INITIALIZERS(Runtime_Continue)
 extern Runtime_Continue new_Runtime_Continue();
-
+extern Runtime_Continue new_Runtime_Continue_offset(int offset);
+extern void Runtime_Continue_escape(Runtime_Continue cont, Object return_value);
 /* ========================================================================= */
 
 #endif // CONTINUE_H

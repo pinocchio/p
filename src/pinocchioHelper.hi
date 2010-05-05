@@ -6,15 +6,7 @@ extern jmp_buf Assert_Fail;
 
 #define NYI assert1(NULL, "NYI");
 
-#ifdef ASSERT_FAIL
-    #define ASSERT_HANDLER raise(SIGFAIL);
-#else
-#ifdef TEST_FAIL
-    #define ASSERT_HANDLER raise(SIGFAIL);
-#else
-    #define ASSERT_HANDLER longjmp(Assert_Fail, 1);
-#endif // TEST_FAIL
-#endif // ASSERT_FAIL
+#define ERROR_HANDLER longjmp(tget(Eval_Continue), 1);
 
 #ifdef __linux
     #include <stdio_ext.h>
@@ -30,14 +22,16 @@ if (!(test)) {\
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     message; \
     FLUSH_STDOUT; \
-    ASSERT_HANDLER;\
+    Runtime_Continue_escape(tget(Error_Handler), new_Type_String(L"error"));\
+    ERROR_HANDLER;\
 }
 
 #define assert0(test)\
 if (!(test)) {\
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     FLUSH_STDOUT; \
-    ASSERT_HANDLER; \
+    Runtime_Continue_escape(tget(Error_Handler), new_Type_String(L"error"));\
+    ERROR_HANDLER;\
 }
 
 #define assert1(test, message)  \
@@ -45,7 +39,8 @@ if (!(test)) { \
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
     printf(message); \
     FLUSH_STDOUT; \
-    ASSERT_HANDLER;\
+    Runtime_Continue_escape(tget(Error_Handler), new_Type_String(L"error"));\
+    ERROR_HANDLER;\
 }
 
 /* ========================================================================== */

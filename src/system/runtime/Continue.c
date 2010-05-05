@@ -14,6 +14,16 @@ Runtime_Continue new_Runtime_Continue()
     return result;
 }
 
+Runtime_Continue new_Runtime_Continue_offset(int offset)
+{
+    Runtime_Continue cont = new_Runtime_Continue();
+    cont->exp_offset      = EXP_size() - offset;
+    cont->cnt_offset      = CNT_size();
+    cont->iss             = (Object)tget(_ISS_);
+    cont->env             = (Object)current_env();
+    return cont;
+}
+
 void pre_init_Runtime_Continue()
 {
     Runtime_Continue_Class =
@@ -29,25 +39,23 @@ void pre_init_Runtime_Continue()
 
 /* ========================================================================= */
 
-NATIVE1(Runtime_Continue_escape_)
-    // LOGFUN;
-    Runtime_Continue cont = (Runtime_Continue)self;
-    Object arg = NATIVE_ARG(0);
+void Runtime_Continue_escape(Runtime_Continue cont, Object return_value)
+{
     // restore the stack
     tset(_EXP_, cont->exp_offset + &tget(Double_Stack)[-1]);
     tset(_CNT_, (&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_offset);
     tset(_ISS_, cont->iss);
     set_env(cont->env);
     // Overwrite the top of stack that created the continue.
-    poke_EXP(0, arg);
+    poke_EXP(0, return_value);
+}
+
+NATIVE1(Runtime_Continue_escape_)
+    Runtime_Continue_escape((Runtime_Continue)self, NATIVE_ARG(0));
 }
 
 NATIVE1(Runtime_Continue_on_)
-    Runtime_Continue cont = new_Runtime_Continue();
-    cont->exp_offset      = EXP_size() - (argc + 1);
-    cont->cnt_offset      = CNT_size();
-    cont->iss             = (Object)tget(_ISS_);
-    cont->env             = (Object)current_env();
+    Runtime_Continue cont = new_Runtime_Continue_offset(argc + 1);
     Object closure = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);
