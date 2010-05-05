@@ -118,9 +118,7 @@ void start_eval()
     if (IN_EVAL) {
         assert(NULL, printf("Re-entering evaluation thread!\n"));
     }
-
     IN_EVAL = 1;
-
     #ifndef NOJMP
     push_CNT(exit_eval);
     #endif

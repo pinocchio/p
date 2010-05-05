@@ -16,9 +16,12 @@ extern THREAD_OBJECT _CNT_;
 
 extern THREAD_OBJECT _ENV_;
 extern THREAD_OBJECT _ISS_;
+
 extern THREAD_OBJECT Eval_Exit;
 extern THREAD_OBJECT Eval_Continue;
 extern THREAD_OBJECT Eval_Abort;
+
+extern THREAD_OBJECT Error_Handler;
 
 #define tget_buf(key) *(jmp_buf*)tget(key)
 
