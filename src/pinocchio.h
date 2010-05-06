@@ -200,7 +200,7 @@ extern Object Eval(Object code);
 extern Object Eval_Send0(Object self, Type_Symbol symbol);
 extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
 extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
-extern void handle_error(const char * message);
+extern void handle_assert(const char * message);
 
 /* ========================================================================= */
 

@@ -89,24 +89,40 @@ CNT(send_Eval)
     /* TODO fallback by actually sending the eval message */
     print_Class(exp);
     assert(NULL,
-		   printf("\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
+		   wprintf(L"\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
 				  ((Type_Class)class)->name->value));
 }
 
 extern Object Exception_AssertionFailure_Class;
 
-void handle_error(const char * message)
+#include <stdarg.h>
+void fail(const Object class, uns_int argc, ...)
 {
-    Type_Object error = (Type_Object)instantiate((Type_Class)
-                            Exception_AssertionFailure_Class);
-    error->ivals[0] = new_Type_String_from_charp(message);
-    error->ivals[1] = current_env();
+    Type_Object error = (Type_Object)instantiate((Type_Class)class);
+    error->ivals[0] = (Object)current_env();
+
+    va_list args;
+    va_start(args, argc);
+    int idx;
+    for (idx = 1; idx <= argc; idx++) {
+        error->ivals[idx] = va_arg(args, Object);
+    }
+    va_end(args);
+
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
-        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler), error);
+        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),
+                                (Object)error);
     } else {
+        fwprintf(stderr, L"Unsupported type of error-handler installed.\n");
         exit(EXIT_FAILURE); 
     }
     longjmp(tget_buf(Eval_Continue), 1);
+}
+
+void handle_assert(const char * message)
+{
+    fail(Exception_AssertionFailure_Class, 1,
+         new_Type_String_from_charp(message));
 }
 
 /* ========================================================================= */

@@ -6,7 +6,7 @@ extern jmp_buf Assert_Fail;
 
 #define NYI assert1(NULL, "NYI");
 
-#define ERROR_HANDLER handle_error
+#define ERROR_HANDLER handle_assert
 
 #ifdef __linux
     #include <stdio_ext.h>
