@@ -45,11 +45,15 @@ CNT(abort_eval)
 }
 
 CNT(exit_eval)
+    #ifndef NOJMP
     longjmp(tget_buf(Eval_Exit), 1);
+    #else
+    zap_CNT();
+    #endif
 }
 
 CNT(exit_error)
-    exit(1);
+    exit(EXIT_FAILURE);
 }
 
 void initialize_Natives()
@@ -65,9 +69,7 @@ void initialize_Natives()
     }
 
 
-void CNT_send_Eval()
-{
-    zap_CNT();
+CNT(send_Eval)
     Object exp = peek_EXP(0);
 
     Type_Class class = HEADER(exp);
@@ -89,13 +91,13 @@ void CNT_send_Eval()
 				  ((Type_Class)class)->name->value));
 }
 
-void handle_error()
+void handle_error(const char * message)
 {
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
         Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler), Nil);
     } else {
         printf("Not supported yet!\n");
-        exit(1); 
+        exit(EXIT_FAILURE); 
     }
     longjmp(tget_buf(Eval_Continue), 1);
 }
@@ -131,14 +133,12 @@ void start_eval()
         assert(NULL, printf("Re-entering evaluation thread!\n"));
     }
     IN_EVAL = 1;
-// TODO make this work for the NOJMP version as well.
-    #ifndef NOJMP
+
     push_CNT(exit_error);
-    #endif
+
     init_Error_Handler();
-    #ifndef NOJMP
+
     push_CNT(exit_eval);
-    #endif
 }
 
 Object finish_eval()
