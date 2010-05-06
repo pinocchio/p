@@ -57,7 +57,7 @@ CNT(exit_error)
     Runtime_BlockContext env =
         (Runtime_BlockContext)((Type_Object)assertion)->ivals[0];
     
-    fwprintf(stderr, L"\n\033[031mUnrecoverable error occurred:\033[0m\n\n");
+    fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
     fwprintf(stderr, L"\n");
     while ((Object)env != Nil) {

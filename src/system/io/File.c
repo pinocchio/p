@@ -206,8 +206,8 @@ FILE * open_file(Object path, char * mode)
     char * filePath = unicode_to_ascii(((Type_Symbol)path)->value);
     FILE * file = fopen(filePath, mode);
     assert(file,
-        fprintf(StandardError->file,
-            "%s (file: '%s', mode '%s')\n", 
+        fwprintf(stderr,
+            L"%s (file: '%s', mode '%s')\n", 
             strerror(errno), filePath, mode););
     return file;
 }
@@ -237,7 +237,7 @@ NATIVE0(IO_File_stderr)
 NATIVE0(IO_File_close)
     int result = fclose(((IO_File)self)->file);
     assert(result == 0,
-        fprintf(StandardError->file, "%s\n", strerror(errno)););
+        fwprintf(stderr, L"%s\n", strerror(errno)););
     RETURN_FROM_NATIVE(self);
 }
 
