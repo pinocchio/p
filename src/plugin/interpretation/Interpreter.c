@@ -6,15 +6,6 @@ CNT(restore_iss)
     poke_EXP(0, return_value);
 }
 
-void extend_ISS(Object self)
-{
-    Type_Object link = (Type_Object)instantiate((Type_Class)Collection_Link_Class);
-    link->ivals[0] = self;
-    link->ivals[1] = (Object)tget(_ISS_);
-    tset(_ISS_, link);
-}
-
-
 NATIVE4(Interpreter_invokeNative)
     Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
     Object receiver               = NATIVE_ARG(1);
