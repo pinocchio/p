@@ -54,13 +54,16 @@ CNT(exit_eval)
 
 CNT(exit_error)
     Object assertion = pop_EXP();
-    inspect(assertion);
     Runtime_BlockContext env =
         (Runtime_BlockContext)((Type_Object)assertion)->ivals[0];
     
-    while (env != Nil) {
-        if (env->home_context == env) {
-            inspect(env->home_context->closure->selector);
+    fwprintf(stderr, L"\n\033[031mUnrecoverable error occurred:\033[0m\n\n");
+    inspect(assertion);
+    fwprintf(stderr, L"\n");
+    while ((Object)env != Nil) {
+        if (env->home_context == (Runtime_MethodContext)env) {
+            fwprintf(stderr, L"\t%ls\n",
+                ((Type_Symbol)env->home_context->closure->selector)->value);
         }
         env = env->parent_frame;
     }
