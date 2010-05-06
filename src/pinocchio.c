@@ -126,8 +126,8 @@ void fail(const Object class, uns_int argc, ...)
         Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),
                                 (Object)error);
     } else {
-        fwprintf(stderr, L"Unsupported type of error-handler installed.\n");
-        exit(EXIT_FAILURE); 
+        push_CNT(exit_error);
+        handle_assert("Unsupported type of error-handler installed.");
     }
     longjmp(tget_buf(Eval_Continue), 1);
 }
