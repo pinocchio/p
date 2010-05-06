@@ -59,7 +59,6 @@ NATIVE1(Type_Float##_##name)\
             RETURN_FROM_NATIVE(False);\
         }\
     } else {\
-        print_Class(w_arg);\
         assert1(NULL, "Invalid Type for Float Boolean BinOP "#name"\n"); \
     }\
 }

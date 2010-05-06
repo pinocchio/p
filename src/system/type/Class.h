@@ -67,8 +67,6 @@ extern void CNT_Class_super();
 extern void CNT_Class_lookup_loop();
 extern void Class_lookup(Type_Class class, Object msg);
 
-extern void print_Class(Object obj);
-
 /* ========================================================================= */
 
 extern Object instantiate(Type_Class class);

@@ -45,8 +45,8 @@ extern void run_tests();
 
 #define ASSERT_EMPTY_STACK \
     assert(empty_EXP(), {\
-           printf("Stack should be empty but found Object\n");\
-           print_Class(peek_EXP(0));\
+           fwprintf(stderr, "Stack should be empty but found Object\n");\
+           inspect(peek_EXP(0));\
            }); \
     assert0(empty_CNT());
 

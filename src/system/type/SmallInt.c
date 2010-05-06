@@ -74,8 +74,6 @@ NATIVE1(Type_SmallInt##_##name)\
             RETURN_FROM_NATIVE(False);\
         }\
     } else {\
-        /* TODO return false here? */ \
-        print_Class(w_arg);\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \
     }\
 }

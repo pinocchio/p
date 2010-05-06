@@ -36,8 +36,6 @@ static int get_hash(Collection_Dictionary self, Object key)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((Type_SmallInt)key)->value;
     } else {
-        printf("Got key: %p\n", key);
-        print_Class(key);
         assert1(NULL, "Quick dictionaries only support ints and strings!");
         // make the compiler happy :)
         return 0;

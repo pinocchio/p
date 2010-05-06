@@ -319,26 +319,6 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     return Class_direct_dispatch(self, class, msg, argc);
 }
 
-void print_Class(Object obj)
-{
-    if (obj == NULL) {
-        fwprintf(stderr, L"NULL\n");
-        return;
-    }
-    if (obj == Nil) {
-        fwprintf(stderr, L"Nil\n");
-        return;
-    }
-    Type_Class class = HEADER(obj);
-    assert0(class != NULL);
-    assert0((Object)class != Nil);
-    if (HEADER(class) == Metaclass) {
-        fwprintf(stderr, L"Class class: %ls\n", ((Type_Class)obj)->name->value);
-        return;
-    }
-    fwprintf(stderr, L"%p Class: %p %ls\n", obj, class, class->name->value);
-}
-
 /* ========================================================================= */
 
 void post_init_Type_Class()

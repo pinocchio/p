@@ -34,6 +34,26 @@ void _indent_(uns_int i)
     }
 }
 
+void print_Class(Object obj)
+{
+    if (obj == NULL) {
+        fwprintf(stderr, L"NULL\n");
+        return;
+    }
+    if (obj == Nil) {
+        fwprintf(stderr, L"Nil\n");
+        return;
+    }
+    Type_Class class = HEADER(obj);
+    assert0(class != NULL);
+    assert0((Object)class != Nil);
+    if (HEADER(class) == Metaclass) {
+        fwprintf(stderr, L"Class class: %ls\n", ((Type_Class)obj)->name->value);
+        return;
+    }
+    fwprintf(stderr, L"%p Class: %p %ls\n", obj, class, class->name->value);
+}
+
 void print_EXP()
 {
     uns_int size = EXP_size();
