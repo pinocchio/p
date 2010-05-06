@@ -106,38 +106,6 @@ CNT(send_Eval)
 				  ((Type_Class)class)->name->value));
 }
 
-extern Object Exception_AssertionFailure_Class;
-
-#include <stdarg.h>
-void fail(const Object class, uns_int argc, ...)
-{
-    Type_Object error = (Type_Object)instantiate((Type_Class)class);
-    error->ivals[0] = (Object)current_env();
-
-    va_list args;
-    va_start(args, argc);
-    int idx;
-    for (idx = 1; idx <= argc; idx++) {
-        error->ivals[idx] = va_arg(args, Object);
-    }
-    va_end(args);
-
-    if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
-        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),
-                                (Object)error);
-    } else {
-        push_CNT(exit_error);
-        handle_assert("Unsupported type of error-handler installed.");
-    }
-    longjmp(tget_buf(Eval_Continue), 1);
-}
-
-void handle_assert(const char * message)
-{
-    fail(Exception_AssertionFailure_Class, 1,
-         new_Type_String_from_charp(message));
-}
-
 /* ========================================================================= */
 
 bool isInstance(Object object, Object class) 

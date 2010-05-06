@@ -196,16 +196,17 @@ extern int IN_EVAL;
 /* ========================================================================= */
 
 extern void CNT_send_Eval();
+extern void CNT_exit_error();
 extern Object Eval(Object code);
 extern Object Eval_Send0(Object self, Type_Symbol symbol);
 extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
 extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
-extern void handle_assert(const char * message);
 
 /* ========================================================================= */
 
 #include <pinocchioHelper.hi>
 #include <system/plugin/Plugin.h>
+#include <system/runtime/Exception.h>
 
 /* ========================================================================= */
 
