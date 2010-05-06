@@ -5,16 +5,16 @@
 
 
 void help() {
-    fprintf(StandardError->file, "    at              (Object, uns_int)      \n");
-    fprintf(StandardError->file, "    atn             (Object, wchar_t *)    \n");
-    fprintf(StandardError->file, "    atX             (Object, count, idx...)\n");
-    fprintf(StandardError->file, "    class           (Object)               \n");
-    fprintf(StandardError->file, "    i,inspect       (Object)               \n");
-    fprintf(StandardError->file, "    inspect_at      (Object, uns_int)      \n");
-    fprintf(StandardError->file, "    inspect_atn     (Object, wchar_t *)    \n");
-    fprintf(StandardError->file, "    methods         (Object)               \n");
-    fprintf(StandardError->file, "    exps                                   \n");
-    fprintf(StandardError->file, "    sends                                  \n");
+    fwprintf(StandardError->file, L"    at              (Object, uns_int)      \n");
+    fwprintf(StandardError->file, L"    atn             (Object, wchar_t *)    \n");
+    fwprintf(StandardError->file, L"    atX             (Object, count, idx...)\n");
+    fwprintf(StandardError->file, L"    class           (Object)               \n");
+    fwprintf(StandardError->file, L"    i,inspect       (Object)               \n");
+    fwprintf(StandardError->file, L"    inspect_at      (Object, uns_int)      \n");
+    fwprintf(StandardError->file, L"    inspect_atn     (Object, wchar_t *)    \n");
+    fwprintf(StandardError->file, L"    methods         (Object)               \n");
+    fwprintf(StandardError->file, L"    exps                                   \n");
+    fwprintf(StandardError->file, L"    sends                                  \n");
 }
 
 void h() {
@@ -43,7 +43,7 @@ void print_EXP()
         if (c > (Object)10000) {
             print_Class(c);
         } else {
-            fprintf(StandardError->file, "%"F_I"i\n", (uns_int)c);
+            fwprintf(StandardError->file, L"%"F_I"i\n", (uns_int)c);
         }
     }
 }
@@ -57,9 +57,9 @@ void print_Symbol(Object s)
 {
     Object tag = GETTAG(s);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fprintf(StandardError->file, "L\"%ls\"\n", ((Type_Symbol)s)->value);
+        fwprintf(StandardError->file, L"\"%ls\"\n", ((Type_Symbol)s)->value);
     } else {
-        fprintf(StandardError->file, "Not a symbol: %p\n", s);
+        fwprintf(StandardError->file, L"Not a symbol: %p\n", s);
         print_Class(s);
     }
 }
@@ -105,7 +105,7 @@ Object atn(Object o, const wchar_t * s)
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
         }
-        assert(NULL, fprintf(StandardError->file, "Var not found: %ls\n", s););
+        assert(NULL, fwprintf(StandardError->file, L"Var not found: %ls\n", s););
     }
     if (TAG_IS_LAYOUT(tag, Array)) {
         uns_int size = ((Type_Array)tag)->size;
@@ -116,9 +116,9 @@ Object atn(Object o, const wchar_t * s)
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Array)o)->values[i];
         }
-        assert(NULL, fprintf(StandardError->file, "Var not found: %ls\n", s););
+        assert(NULL, fwprintf(StandardError->file, L"Var not found: %ls\n", s););
     }
-    assert(NULL, fprintf(StandardError->file, "Non-indexable object\n"););
+    assert(NULL, fwprintf(StandardError->file, L"Non-indexable object\n"););
     return NULL;
 }
 
@@ -160,7 +160,7 @@ Object at(Object o, uns_int i)
         assert0(i < size + isize);
         return ((Type_Array)o)->values[i];
     }
-    assert(NULL, fprintf(StandardError->file, "Non-indexable object\n"););
+    assert(NULL, fwprintf(StandardError->file, L"Non-indexable object\n"););
     return NULL;
 }
 
@@ -179,47 +179,47 @@ Object atx(Object o, uns_int argc, ...)
 void shallow_inspect(Object o)
 {
     if (o == NULL) {
-        fprintf(StandardError->file, "NULL object\n");
+        fwprintf(StandardError->file, L"NULL object\n");
         return;
     }
     if (o < (Object)100000) {
-        fprintf(StandardError->file, "Object probably uns_int: %"F_I"u\n", (uns_int)o);
+        fwprintf(StandardError->file, L"Object probably uns_int: %"F_I"u\n", (uns_int)o);
         return;
     } 
     if (HEADER(o) == NULL) {
-        fprintf(StandardError->file, "Object with NULL class\n");
+        fwprintf(StandardError->file, L"Object with NULL class\n");
         return;
     }
     if (o == Nil) {
-        fprintf(StandardError->file, "nil\n");
+        fwprintf(StandardError->file, L"nil\n");
         return;
     }
     if (o == (Object)True) {
-        fprintf(StandardError->file, "true\n");
+        fwprintf(StandardError->file, L"true\n");
         return;
     }
     if (o == (Object)False) {
-        fprintf(StandardError->file, "false\n");
+        fwprintf(StandardError->file, L"false\n");
         return;
     }
     Type_Class cls = HEADER(o);
 
     if (HEADER(cls) == Metaclass) {
-        fprintf(StandardError->file, "%ls", ((Type_Class)o)->name->value);
+        fwprintf(StandardError->file, L"%ls", ((Type_Class)o)->name->value);
     } else {
-        fprintf(StandardError->file, "Instance of %ls", cls->name->value);
+        fwprintf(StandardError->file, L"Instance of %ls", cls->name->value);
     }
 
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fprintf(StandardError->file, ": '%ls'\n", ((Type_Symbol)o)->value);
+        fwprintf(StandardError->file, L": '%ls'\n", ((Type_Symbol)o)->value);
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
-        fprintf(StandardError->file, ": %i\n", ((Type_SmallInt)o)->value);
+        fwprintf(StandardError->file, L": %i\n", ((Type_SmallInt)o)->value);
         return;
     }
-    fprintf(StandardError->file, "\n");
+    fwprintf(StandardError->file, L"\n");
 }
 
 void inspect_dict(Object o)
@@ -235,7 +235,7 @@ void inspect_dict(Object o)
         for (j = 0; j < bucket->size; j+=2) {
             Type_Symbol key = (Type_Symbol)bucket->values[j];
             if (key == (Type_Symbol)Nil) { break; }
-            fprintf(StandardError->file, "%"F_I"u %25ls -> ", idx++, key->value);
+            fwprintf(StandardError->file, L"%"F_I"u %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }
     }
@@ -257,7 +257,7 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
-            fprintf(StandardError->file, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fwprintf(StandardError->file, L"%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
         return;
@@ -269,11 +269,11 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             AST_Slot v = (AST_Slot)((Type_Array)tag)->values[i];
-            fprintf(StandardError->file, "%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fwprintf(StandardError->file, L"%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
-            fprintf(StandardError->file, "%i:\t", i);
+            fwprintf(StandardError->file, L"%i:\t", i);
             shallow_inspect(((Type_Array)o)->values[i]);
         }
         return;

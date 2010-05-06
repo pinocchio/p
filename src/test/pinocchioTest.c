@@ -35,7 +35,7 @@ void test_suite_begin(char * suiteName)
     fflush(stdout);
     // redirect stdout
     if(pipe(out_pipe) != 0) {
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     dup2(out_pipe[1], STDOUT_FILENO);
     close(out_pipe[1]);
@@ -51,14 +51,14 @@ void test_suite_end(char * suiteName)
         dup2(saved_stdout, STDOUT_FILENO);
         ssize_t nr = read(out_pipe[0], error_buffer, ERROR_BUFFER_LEN);
         error_buffer[nr] = '\0';
-        printf("\033[31m===================================================================\033[0m\n");
-        printf(">>> \033[31m%s\033[0m \033[100D\033[60C[\033[31mERROR\033[0m]\n", suiteName);
-        printf("%s", error_buffer);
-        printf("<<< \033[31m%s\033[0m\n", suiteName);
-        printf("\033[31m===================================================================\033[0m\n");
+        wprintf(L"\033[31m===================================================================\033[0m\n");
+        wprintf(L">>> \033[31m%s\033[0m \033[100D\033[60C[\033[31mERROR\033[0m]\n", suiteName);
+        wprintf(L"%s", error_buffer);
+        wprintf(L"<<< \033[31m%s\033[0m\n", suiteName);
+        wprintf(L"\033[31m===================================================================\033[0m\n");
     } else {
         dup2(saved_stdout, STDOUT_FILENO);
-        printf("%s \033[100D\033[60C[\033[32mDONE\033[0m]\n", suiteName);
+        wprintf(L"%s \033[100D\033[60C[\033[32mDONE\033[0m]\n", suiteName);
     }
 }
 
@@ -69,7 +69,7 @@ void init_Exception_Handling()
     
     if(setjmp(Assert_Fail)) {
         #ifndef TEST_FAIL
-        printf("Test Failed\n");
+        wprintf(L"Test Failed\n");
         TEST_CASE_FAILED = 1;
         IN_EVAL = 0;
         longjmp(Test_Continue, 1);

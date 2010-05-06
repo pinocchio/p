@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <wchar.h>
 #include <stdarg.h>
 #include <pinocchio.h>
 #include <lib/lib.h>
@@ -104,7 +105,7 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         assert(NULL,
-            fprintf(StandardError->file, "\033[31mRecursive does not understand \"%ls\" (\"%"F_I"u\") in \033[0m\n", 
+            fwprintf(StandardError->file, L"\033[31mRecursive does not understand \"%ls\" (\"%"F_I"u\") in \033[0m\n", 
             ((Type_Symbol)message->selector)->value,
             message->size);
             print_Class(self););
@@ -325,21 +326,21 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 void print_Class(Object obj)
 {
     if (obj == NULL) {
-        fprintf(stderr, "NULL\n");
+        fwprintf(stderr, L"NULL\n");
         return;
     }
     if (obj == Nil) {
-        fprintf(stderr, "Nil\n");
+        fwprintf(stderr, L"Nil\n");
         return;
     }
     Type_Class class = HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
     if (HEADER(class) == Metaclass) {
-        fprintf(stderr, "Class class: %ls\n", ((Type_Class)obj)->name->value);
+        fwprintf(stderr, L"Class class: %ls\n", ((Type_Class)obj)->name->value);
         return;
     }
-    fprintf(stderr, "%p Class: %p %ls\n", obj, class, class->name->value);
+    fwprintf(stderr, L"%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
 /* ========================================================================= */

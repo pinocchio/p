@@ -53,6 +53,8 @@ CNT(exit_eval)
 }
 
 CNT(exit_error)
+    Object assertion = pop_EXP();
+    fwprintf(StandardError->file, L"Assertion: %p\n", assertion);
     exit(EXIT_FAILURE);
 }
 
@@ -91,12 +93,17 @@ CNT(send_Eval)
 				  ((Type_Class)class)->name->value));
 }
 
+extern Object Exception_AssertionFailure_Class;
+
 void handle_error(const char * message)
 {
+    Type_Object error = (Type_Object)instantiate((Type_Class)
+                            Exception_AssertionFailure_Class);
+    error->ivals[0] = new_Type_String_from_charp(message);
+    error->ivals[1] = current_env();
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
-        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler), Nil);
+        Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler), error);
     } else {
-        printf("Not supported yet!\n");
         exit(EXIT_FAILURE); 
     }
     longjmp(tget_buf(Eval_Continue), 1);
@@ -135,7 +142,6 @@ void start_eval()
     IN_EVAL = 1;
 
     push_CNT(exit_error);
-
     init_Error_Handler();
 
     push_CNT(exit_eval);

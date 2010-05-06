@@ -20,7 +20,7 @@ SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
 OBJECTS      = $(CFILES:%.c=%.o)
 ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -DASSERT_FAIL -I. -Wall -g
+CFLAGS  += -DASSERT_FAIL -I. -Wall -g -std=c99
 LDFLAGS += -lm -lgc -ldl 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
