@@ -54,7 +54,7 @@ CNT(exit_eval)
 
 CNT(exit_error)
     Object assertion = pop_EXP();
-    fwprintf(StandardError->file, L"Assertion: %p\n", assertion);
+    inspect(assertion);
     exit(EXIT_FAILURE);
 }
 
