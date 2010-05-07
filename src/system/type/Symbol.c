@@ -28,10 +28,9 @@ Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
     uns_int size        = wcslen(input) + 1;
-    Type_SmallInt hash  = wchar_hash(input, size);
     Type_Symbol result  = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
     HEADER(result)      = Type_Symbol_Class;
-    result->hash        = hash;
+    result->hash        = wchar_hash(input, size);
     wcsncpy(result->value, input, size);
     result->size        = size - 1;
     return result;
@@ -118,7 +117,7 @@ NATIVE1(Type_Symbol__equal)
 }
 
 NATIVE0(Type_Symbol_hash)
-    RETURN_FROM_NATIVE(Type_Symbol_hash((Type_Symbol)self));
+    RETURN_FROM_NATIVE(((Type_Symbol)self)->hash);
 }
 
 

@@ -23,11 +23,12 @@ Type_String new_Type_String(const wchar_t * str)
 Type_String new_Type_String_sized(uns_int size)
 {
     Type_String result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
-    HEADER(result)  = Type_String_Class;
-    result->size    = size;
+    HEADER(result)     = Type_String_Class;
+    result->size       = size;
     while(size--) {
         result->value[size] = '\0';
     }
+    result->hash       = Type_Symbol_hash((Type_Symbol)result);
     return result;
 }
 
@@ -104,13 +105,14 @@ NATIVE2(Type_String_at_put_)
                     ((Type_String)self)->size,
                     self));
     ((Type_String)self)->value[index] = ((Type_Character)w_arg1)->value;
+    ((Type_String)self)->hash         = Type_Symbol_hash((Type_Symbol)self);
     RETURN_FROM_NATIVE(self);
 }
 
 NATIVE1(Type_String_basicNew_)
     // TODO check type
-    Object w_size = NATIVE_ARG(0);
-    int size = unwrap_int(w_size);
+    Object w_size      = NATIVE_ARG(0);
+    int size           = unwrap_int(w_size);
     Type_String result = new_Type_String_sized(size);
     RETURN_FROM_NATIVE(result);
 }
@@ -198,8 +200,8 @@ wchar_t * ascii_to_unicode(const char* str)
 }
 
 NATIVE0(Type_String_asNumber)
-    Type_Symbol o = (Type_Symbol)self;
-    RETURN_FROM_NATIVE(wchar_to_number(o->value, o->size));
+    Type_Symbol symbol = (Type_Symbol)self;
+    RETURN_FROM_NATIVE(wchar_to_number(symbol->value, symbol->size));
 }
 
 /* ========================================================================= */
