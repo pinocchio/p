@@ -21,7 +21,9 @@ void fix_layout(Type_Array layout)
 {
     uns_int size = layout->size;
     while(size--) {
-        HEADER(layout->values[size]) = AST_Slot_Class;
+        Object slot = layout->values[size];
+        HEADER(slot) = AST_Slot_Class;
+        HEADER(((AST_Slot)slot)->name) = Type_Symbol_Class;
     }
 }
 

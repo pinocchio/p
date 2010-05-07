@@ -22,7 +22,7 @@ void pre_init_Type_False() {
                                   create_layout(0, OBJECT));
     REFER_TO(False);
     False         = NEW_t(Type_Boolean);
-    False->hash   = Type_Object_hash(False);
+    False->hash   = Type_Object_hash((Type_Object)False);
     HEADER(False) = False_Class;
     False_Const   = new_AST_Constant((Object) False);
 }
@@ -34,7 +34,7 @@ void pre_init_Type_True()
                                  create_layout(0, OBJECT));
     REFER_TO(True);
     True         = NEW_t(Type_Boolean);
-    True->hash   = Type_Object_hash(True);
+    True->hash   = Type_Object_hash((Type_Object)True);
     HEADER(True) = True_Class;
     True_Const   = new_AST_Constant((Object) True);
 }
