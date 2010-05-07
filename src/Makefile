@@ -53,6 +53,9 @@ clean:
 	@rm -rf $(ALLOBJECTS) $(TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
+fast:
+	CFLAGS="-O3" make  $(TARGET)
+
 profile:
 	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)
 	./$(TARGET)
