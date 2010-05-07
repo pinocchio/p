@@ -22,7 +22,7 @@ void pre_init_AST_UIntSlot()
     AST_UIntSlot_Class =
         new_Class_named(Type_Object_Class,
                         L"UIntSlot",
-                        CREATE_OBJECT_TAG(AST_UNSINTINSTVARIABLE));
+                        CREATE_OBJECT_TAG(AST_UINTSLOT));
     REFER_TO(AST_UIntSlot);
 }
 

@@ -30,7 +30,7 @@ void pre_init_AST_Slot()
     AST_Slot_Class =
         new_Class_named(Type_Object_Class,
                         L"Slot",
-                        CREATE_OBJECT_TAG(AST_INSTVARIABLE));
+                        CREATE_OBJECT_TAG(AST_SLOT));
     fix_layout((Type_Array)AST_Slot_Class->layout);
     fix_layout((Type_Array)Collection_Dictionary_Class->layout);
     fix_layout((Type_Array)Metaclass->layout);

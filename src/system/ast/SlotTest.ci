@@ -1,12 +1,12 @@
 
-#define AST_INSTVARIABLE_TEST_SETUP \
+#define AST_SLOT_TEST_SETUP \
     AST_Slot instvariable = new_AST_Slot(0, L"aVar"); \
     Object result;
 
 /* ========================================================================= */
 
 NEW_TEST(AST_Slot_eval)
-    AST_INSTVARIABLE_TEST_SETUP;
+    AST_SLOT_TEST_SETUP;
 
     Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
@@ -20,7 +20,7 @@ NEW_TEST(AST_Slot_eval)
 }
 
 NEW_TEST(AST_Slot_assign)
-    AST_INSTVARIABLE_TEST_SETUP;
+    AST_SLOT_TEST_SETUP;
 
     Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",

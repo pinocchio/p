@@ -1,12 +1,12 @@
-#ifndef AST_INSTVARIABLE_H
-#define AST_INSTVARIABLE_H
+#ifndef AST_SLOT_H
+#define AST_SLOT_H
 
 #include <pinocchio.h>
 
 /* ========================================================================= */
 
-#define AST_INSTVARIABLE_SIZE 3
-#define AST_INSTVARIABLE_VARS L"index", L"name", L"package"
+#define AST_SLOT_SIZE 3
+#define AST_SLOT_VARS L"index", L"name", L"package"
 
 /* ========================================================================= */
 
@@ -26,4 +26,4 @@ extern void AST_Slot_assign(AST_Slot var, Object value);
 
 /* ========================================================================= */
 
-#endif // AST_INSTVARIABLE_H
+#endif // AST_SLOT_H

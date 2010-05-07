@@ -37,3 +37,4 @@ TYPE(Type_Float);
 TYPE(Collection_Set);
 TYPE(Collection_SetBucket);
 TYPE(Collection_DictBucket);
+TYPE(AST_PointerSlot);
