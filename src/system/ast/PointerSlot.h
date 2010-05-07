@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-#define AST_CSLOT_SIZE 3
-#define AST_CSLOT_VARS L"index", L"name", L"package"
+#define AST_POINTERSLOT_SIZE 3
+#define AST_POINTERSLOT_VARS L"index", L"name", L"package"
 
 /* ========================================================================= */
 
