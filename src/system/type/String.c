@@ -34,19 +34,19 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class    = new_Class(Type_Object_Class,
+    Type_String_Class = new_Class(Type_Object_Class,
                                      create_layout(0, WORDS));
-    empty_Type_String         = new_Type_String(L"");
+    empty_Type_String = new_Type_String(L"");
 }
 
 /* ========================================================================= */
 
 Type_String new_Type_String_from_charp(const char * input)
 {
-    int size             = strlen(input)+1;
+    int size          = strlen(input)+1;
     wchar_t cp[size];
-    cp[size - 1] = L'\0';
-    wchar_t * copy = &cp[0];
+    cp[size - 1]      = L'\0';
+    wchar_t * copy    = &cp[0];
     swprintf(copy, size, L"%s", input);
     return new_Type_String(copy);
 }
@@ -185,7 +185,7 @@ Object wchar_to_number(const wchar_t * string, uns_int size)
 
 char * unicode_to_ascii(const wchar_t* str)
 {
-    int len = wcslen(str);
+    int len        = wcslen(str);
     char* charname = (char*)PALLOC(sizeof(char[len]));
     assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
     return charname;
@@ -193,7 +193,7 @@ char * unicode_to_ascii(const wchar_t* str)
 
 wchar_t * ascii_to_unicode(const char* str)
 {
-    int len = strlen(str);
+    int len           = strlen(str);
     wchar_t* charname = (wchar_t*)PALLOC(sizeof(wchar_t[len]));
     assert1(mbstowcs(charname, str, len) == len, "String not UTF compatible.");
     return charname;
@@ -209,7 +209,7 @@ NATIVE0(Type_String_asNumber)
 void post_init_Type_String()
 {
     REFER_TO(Type_String);
-    Type_String_Class->name = new_Type_Symbol_cached(L"String");
+    Type_String_Class->name       = new_Type_Symbol_cached(L"String");
     Collection_Dictionary natives = add_plugin(L"Type.String");
     store_native(natives, SMB__concat,   NM_Type_String_concat_);
     store_native(natives, SMB_asSymbol,  NM_Type_String_asSymbol);
