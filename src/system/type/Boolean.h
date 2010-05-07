@@ -10,7 +10,9 @@ AST_Constant new_AST_Constant(Object value);
 
 /* ========================================================================= */
 
-struct Type_Boolean_t { };
+struct Type_Boolean_t {
+    Type_SmallInt hash;    
+};
 
 CREATE_INITIALIZERS(Type_Boolean)
 

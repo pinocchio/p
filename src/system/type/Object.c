@@ -41,9 +41,14 @@ void inter_init_Type_Object()
 
 /* ========================================================================= */
 
+Type_SmallInt Type_Object_hash(Type_Object object)
+{
+    int hash = (int)(uns_int)object;
+    return new_Type_SmallInt(hash);
+}
+
 NATIVE0(Type_Object_hash)
-    int hash = (int)(uns_int)self;
-    RETURN_FROM_NATIVE(new_Type_SmallInt(hash));
+    RETURN_FROM_NATIVE(Type_Object_hash((Type_Object)self));
 }
 
 NATIVE0(Type_Object_basicNew)

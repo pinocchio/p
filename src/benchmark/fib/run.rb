@@ -31,7 +31,7 @@ def benchmarks(f, list)
     }
 end
 
-BENCHMARKS = [
+B1 = [
     ['Python 2.6 Parse', 'python2.6 fibPythonParse.py'],
     ['Python 2.6',       'python2.6 fibPython.py'],
 
@@ -49,12 +49,16 @@ BENCHMARKS = [
 
     ['Ruby 1.9.1 Parse', 'ruby1.9.1 ./fibRubyParse.rb'],
     ['Ruby 1.9.1',       'ruby1.9.1 ./fibRuby.rb'],
+]
 
+BENCHMARKS = [
     ['Pinocchio Parse', '../../', 
         './pinocchio benchmark/fib/fibParse.p'],
     ['Pinocchio', '../../', 
         './pinocchio benchmark/fib/fib.p'],
-    
+]
+
+B2 = [
     ['Ruby MessageSends', './fibRubyMessageSends.rb'],
     ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibRubyMessageSends.rb'],
     ['Ruby 1.9.1MessageSends', 'ruby1.9.1 ./fibRubyMessageSends.rb'],
