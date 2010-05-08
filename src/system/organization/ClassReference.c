@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/organization/ClassReference.h>
+#include <lib/lib.h>
 
 /* ========================================================================= */
 
@@ -42,7 +43,9 @@ void pre_init_Organization_ClassReference()
 
 void Organization_ClassReference_eval(Organization_ClassReference self)
 {
-    assert0(self->class != (Object)Nil);
+    if (self->class == (Object)Nil) {
+        fail(Exception_UndefinedClassReference_Class, 1, self);
+    }
     poke_EXP(0, self->class);
 }
 
