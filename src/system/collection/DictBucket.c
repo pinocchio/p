@@ -67,8 +67,10 @@ int Bucket_quick_compare_key(Object inkey, Object dictkey)
         return 0;
     }
 
-    if (HEADER(inkey) == Type_Symbol_Class || HEADER(inkey) == Type_String_Class) {
-        if (HEADER(dictkey) == Type_Symbol_Class || HEADER(dictkey) == Type_String_Class) {
+    if (HEADER(inkey) == Type_Symbol_Class ||
+        HEADER(inkey) == Type_String_Class) {
+        if (HEADER(dictkey) == Type_Symbol_Class ||
+            HEADER(dictkey) == Type_String_Class) {
             return Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey);
         }
         return 0;
