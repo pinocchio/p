@@ -67,14 +67,17 @@ BENCHMARKS = [
     ['Ruby Parse',       './fibRubyParse.rb'],
     ['Ruby',             './fibRuby.rb'],
 
-    ['Ruby 1.9 Parse',   'ruby1.9 ./fibRubyParse.rb'],
-    ['Ruby 1.9',         'ruby1.9 ./fibRuby.rb'],
+    ['Ruby 1.9 Parse',        'ruby1.9 ./fibRubyParse.rb'],
+    ['Ruby 1.9',              'ruby1.9 ./fibRuby.rb'],
     ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibRubyMessageSends.rb'],
     
-    ['Ruby 1.9.1 Parse', 'ruby1.9.1 ./fibRubyParse.rb'],
-    ['Ruby 1.9.1',       'ruby1.9.1 ./fibRuby.rb'],
+    ['Ruby 1.9.1 Parse',        'ruby1.9.1 ./fibRubyParse.rb'],
+    ['Ruby 1.9.1',              'ruby1.9.1 ./fibRuby.rb'],
     ['Ruby 1.9.1 MessageSends', 'ruby1.9.1 ./fibRubyMessageSends.rb'],
     
+    ["#{`gst --version | grep version`} Parse", 'gst -f fibParse.gst' ],
+    [`gst --version | grep version`,            'gst -f fib.gst' ],
+
     ['Pinocchio Parse', '../../', 
         './pinocchio benchmark/fib/fibParse.p'],
     ['Pinocchio', '../../', 
