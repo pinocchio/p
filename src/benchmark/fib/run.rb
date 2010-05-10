@@ -1,5 +1,19 @@
 #! /usr/bin/env ruby
 
+
+def is_mac?
+    RUBY_PLATFORM.downcase.include?("darwin")
+end
+
+def is_windows?
+    RUBY_PLATFORM.downcase.include?("mswin")
+end
+
+def is_linux?
+    RUBY_PLATFORM.downcase.include?("linux")
+end
+
+
 class File
    def pputs(arg1, *rest)
         Kernel.puts(arg1, *rest)
@@ -16,7 +30,8 @@ def header(f)
     f.pputs "="*79
 #TODO branch for OSX uname
     f.pputs `date`
-    f.pputs `uname -srpi`
+    f.pputs `uname -srp` if is_mac?
+    f.pputs `uname -srpi` if is_linux?
     f.pputs `git svn info | grep Revision`
     f.pputs "="*79
 end
@@ -35,45 +50,45 @@ def benchmarks(f, list)
 end
 
 B1 = [
-    ['Python 2.6 Parse', 'python2.6 fibPythonParse.py'],
-    ['Python 2.6',       'python2.6 fibPython.py'],
+    ['Python 2.6 Parse', 'python2.6 fibParse.py'],
+    ['Python 2.6',       'python2.6 fib.py'],
 
-    ['Python 3.0 Parse', 'python3.0 fibPythonParse.py'],
-    ['Python 3.0',       'python3.0 fibPython.py'],
+    ['Python 3.0 Parse', 'python3.0 fibParse.py'],
+    ['Python 3.0',       'python3.0 fib.py'],
 
-    ['Python 3.1 Parse', 'python3.1 fibPythonParse.py'],
-    ['Python 3.1',       'python3.1 fibPython.py'],
+    ['Python 3.1 Parse', 'python3.1 fib.py'],
+    ['Python 3.1',       'python3.1 fib.py'],
 
-    ['Ruby Parse',       './fibRubyParse.rb'],
-    ['Ruby',             './fibRuby.rb'],
+    ['Ruby Parse',       './fibParse.rb'],
+    ['Ruby',             './fib.rb'],
 
-    ['Ruby 1.9 Parse',   'ruby1.9 ./fibRubyParse.rb'],
-    ['Ruby 1.9',         'ruby1.9 ./fibRuby.rb'],
+    ['Ruby 1.9 Parse',   'ruby1.9 ./fibParse.rb'],
+    ['Ruby 1.9',         'ruby1.9 ./fib.rb'],
 
-    ['Ruby 1.9.1 Parse', 'ruby1.9.1 ./fibRubyParse.rb'],
-    ['Ruby 1.9.1',       'ruby1.9.1 ./fibRuby.rb'],
+    ['Ruby 1.9.1 Parse', 'ruby1.9.1 ./fibParse.rb'],
+    ['Ruby 1.9.1',       'ruby1.9.1 ./fib.rb'],
 ]
 
 BENCHMARKS = [
-    ['Python 2.6 Parse', 'python2.6 fibPythonParse.py'],
-    ['Python 2.6',       'python2.6 fibPython.py'],
+    ['Python 2.6 Parse', 'python2.6 fibParse.py'],
+    ['Python 2.6',       'python2.6 fib.py'],
 
-    ['Python 3.0 Parse', 'python3.0 fibPythonParse.py'],
-    ['Python 3.0',       'python3.0 fibPython.py'],
+    ['Python 3.0 Parse', 'python3.0 fibParse.py'],
+    ['Python 3.0',       'python3.0 fib.py'],
 
-    ['Python 3.1 Parse', 'python3.1 fibPythonParse.py'],
-    ['Python 3.1',       'python3.1 fibPython.py'],
+    ['Python 3.1 Parse', 'python3.1 fibParse.py'],
+    ['Python 3.1',       'python3.1 fib.py'],
     
-    ['Ruby Parse',       './fibRubyParse.rb'],
-    ['Ruby',             './fibRuby.rb'],
+    ['Ruby Parse',       './fibParse.rb'],
+    ['Ruby',             './fib.rb'],
 
-    ['Ruby 1.9 Parse',        'ruby1.9 ./fibRubyParse.rb'],
-    ['Ruby 1.9',              'ruby1.9 ./fibRuby.rb'],
-    ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibRubyMessageSends.rb'],
+    ['Ruby 1.9 Parse',        'ruby1.9 ./fibParse.rb'],
+    ['Ruby 1.9',              'ruby1.9 ./fib.rb'],
+    ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibAll.rb'],
     
-    ['Ruby 1.9.1 Parse',        'ruby1.9.1 ./fibRubyParse.rb'],
-    ['Ruby 1.9.1',              'ruby1.9.1 ./fibRuby.rb'],
-    ['Ruby 1.9.1 MessageSends', 'ruby1.9.1 ./fibRubyMessageSends.rb'],
+    ['Ruby 1.9.1 Parse',        'ruby1.9.1 ./fibParse.rb'],
+    ['Ruby 1.9.1',              'ruby1.9.1 ./fib.rb'],
+    ['Ruby 1.9.1 MessageSends', 'ruby1.9.1 ./fibAll.rb'],
     
     ["#{`gst --version | grep version`} Parse", 'gst -f fibParse.gst' ],
     [`gst --version | grep version`,            'gst -f fib.gst' ],
@@ -85,9 +100,9 @@ BENCHMARKS = [
 ]
 
 B2 = [
-    ['Ruby MessageSends', './fibRubyMessageSends.rb'],
-    ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibRubyMessageSends.rb'],
-    ['Ruby 1.9.1MessageSends', 'ruby1.9.1 ./fibRubyMessageSends.rb'],
+    ['Ruby MessageSends', './fibAll.rb'],
+    ['Ruby 1.9 MessageSends', 'ruby1.9 ./fibAll.rb'],
+    ['Ruby 1.9.1MessageSends', 'ruby1.9.1 ./fibAll.rb'],
     ['Pinocchio metacircular', '../../', 
         './pinocchio benchmark/fib/fibMetaCircular.p'],
     
