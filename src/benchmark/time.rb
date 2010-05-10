@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require 'benchmark'
+require 'open3'
 
 class Array
     def sum
@@ -44,18 +44,21 @@ cmd = ARGV[1..-1].join(' ')
 
 probes = []
 
-#puts "time -p #{cmd}"
-#`(time -p #{cmd})`
 count.times {
-    #a = `(time -p #{cmd}) 2>&1 | grep user`
-    #time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
-    #time += a.match(/([0-9]+)m/)[1].to_f * 60
-    #probes.push(time)
-    probes.push(Benchmark.realtime { `#{cmd} >> /dev/null` })
+    a = `(time #{cmd}) 2>&1`
+    next unless $?.success?
+    a = a.grep(/user/).first
+    time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
+    time += $1.to_f * 60 if a.match(/([0-9]+)m/)
+    probes.push(time)
 }
 
 # =============================================================================
-stdev = probes.stdev
-format = "%.#{stdev.precision}f"
-value = sprintf(format+"    ±   "+format, probes.mean, stdev)
-puts "#{count}  #{value}"
+if not probes.empty?
+    stdev  = probes.stdev
+    format = "%.#{stdev.precision}f"
+    value  = sprintf(format+"    ±   "+format, probes.mean, stdev)
+    puts "#{probes.length}  #{value}" 
+else 
+    puts "#{probes.length}"
+end
