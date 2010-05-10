@@ -6,6 +6,7 @@
 #include <setjmp.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <debug.h>
 
 /* ========================================================================= */
 

@@ -59,25 +59,19 @@ static void Bucket_grow(Collection_DictBucket * bucketp)
 
 int Bucket_quick_compare_key(Object inkey, Object dictkey)
 {
-    if (HEADER(inkey) == Type_Symbol_Class) {
-        return inkey == dictkey;
-    }
-
     if (HEADER(inkey) == Type_SmallInt_Class) {
         if (HEADER(dictkey) == Type_SmallInt_Class) {
             return ((Type_SmallInt)inkey)->value ==
                    ((Type_SmallInt)dictkey)->value;
-        } else {
-            return 0;
         }
+        return 0;
     }
 
-    if (HEADER(inkey) == Type_String_Class) {
-        if (TAG_IS_LAYOUT(GETTAG(dictkey), Words)) {
+    if (HEADER(inkey) == Type_Symbol_Class || HEADER(inkey) == Type_String_Class) {
+        if (HEADER(dictkey) == Type_Symbol_Class || HEADER(dictkey) == Type_String_Class) {
             return Words_compare((Type_Symbol)inkey, (Type_Symbol)dictkey);
-        } else {
-            return 0;
         }
+        return 0;
     }
     return -1;
 }
@@ -112,6 +106,13 @@ int Bucket_quick_store(Collection_DictBucket * bucketp, Object key, Object value
 static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
+
+    // fwprintf(stderr, L"Comparing: ");
+    // fwprintf(stderr, L"\n");
+    // inspect(inkey);
+    // inspect(dictkey);
+    // fwprintf(stderr, L"\n");
+
     if (result == -1) {
         return Type_Class_direct_dispatch(inkey, HEADER(inkey),
                                           (Object)SMB__equal, 1, dictkey);
