@@ -3,6 +3,9 @@
 #include <test/pinocchioTest.h>
 #include <test/lib/lib.h>
 
+#include <stdio.h>
+#include <wchar.h>
+
 #include <system/ast/SelfTest.ci>
 #include <system/ast/SuperTest.ci>
 #include <system/ast/VariableTest.ci>

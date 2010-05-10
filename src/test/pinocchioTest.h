@@ -4,6 +4,8 @@
 #include <pinocchio.h>
 #include <signal.h>
 #include <setjmp.h>
+#include <stdio.h>
+#include <wchar.h>
 
 /* ========================================================================= */
 
@@ -45,7 +47,7 @@ extern void run_tests();
 
 #define ASSERT_EMPTY_STACK \
     assert(empty_EXP(), {\
-           fwprintf(stderr, "Stack should be empty but found Object\n");\
+           fwprintf(stderr, L"Stack should be empty but found Object\n");\
            inspect(peek_EXP(0));\
            }); \
     assert0(empty_CNT());
