@@ -30,8 +30,6 @@ TYPE(Runtime_MethodClosure);
 TYPE(AST_Slot);
 TYPE(AST_UIntSlot);
 TYPE(Organization_ClassReference);
-TYPE(AST_InlineCache);
-TYPE(Runtime_InlineCache);
 TYPE(Runtime_Message);
 TYPE(Type_Float);
 TYPE(Collection_Set);

@@ -1,37 +1,52 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/InlineCache.h>
+#include <lib/lib.h>
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_InlineCache);
-
-/* ========================================================================= */
-
-void pre_init_Runtime_InlineCache()
+Type_Array new_Runtime_InlineCache()
 {
-    Runtime_InlineCache_Class =
-        new_Class_named(Type_Object_Class,
-                        L"InlineCache",
-                        CREATE_OBJECT_TAG(RUNTIME_INLINECACHE));
-    REFER_TO(Runtime_InlineCache);
+    return (Type_Array)instantiate_sized((Type_Class)Runtime_InlineCache_Class,
+                                         DEFAULT_INLINECACHE_SIZE << 1);
 }
 
 /* ========================================================================= */
 
-Runtime_InlineCache new_Runtime_InlineCache()
+Object Runtime_InlineCache_lookup(Type_Array cache, Object class)
 {
-    NEW_OBJECT(Runtime_InlineCache);
-    result->class  = Nil;
-    result->method = Nil;
-    return result;
+    int i;
+    for (i = 0; i < cache->size; i += 2) {
+        if (cache->values[i] == class) {
+            return cache->values[i+1];
+        }
+    }
+    return NULL;
+}
+
+void Runtime_InlineCache_store(Type_Array cache, Object class, Object method)
+{
+    int i;
+    for (i = 0; i < cache->size; i += 2) {
+        if (cache->values[i] == class) {
+            cache->values[i+1]  = method;
+            return;
+        }
+        if (cache->values[i] == Nil) {
+            cache->values[i]    = class;
+            cache->values[i+1]  = method;
+            return;
+        }
+    }
 }
 
 /* ========================================================================= */
 
 NATIVE1(Runtime_InlineCache_checkCached_)
-    if (((Runtime_InlineCache)self)->class == NATIVE_ARG(0)) {
-        RETURN_FROM_NATIVE(((Runtime_InlineCache)self)->method);
+    Object key = NATIVE_ARG(0);
+    Object result = Runtime_InlineCache_lookup((Type_Array)self, key);
+    if (result) {
+        RETURN_FROM_NATIVE(result);
     } else {
         RETURN_FROM_NATIVE(Nil);
     }
@@ -39,9 +54,9 @@ NATIVE1(Runtime_InlineCache_checkCached_)
 
 
 NATIVE2(Runtime_InlineCache_cache_at_) 
-    //TODO typecheck here
-    ((Runtime_InlineCache)self)->method = NATIVE_ARG(0); 
-    ((Runtime_InlineCache)self)->class  = NATIVE_ARG(1); 
+    Object method   = NATIVE_ARG(0);
+    Object key      = NATIVE_ARG(1);
+    Runtime_InlineCache_store((Type_Array)self, key, method);
     RETURN_FROM_NATIVE(self);
 }
 
@@ -51,5 +66,5 @@ void post_init_Runtime_InlineCache()
 {
     Collection_Dictionary natives = add_plugin(L"Runtime.InlineCache");
     store_native(natives, SMB_checkCached_, NM_Runtime_InlineCache_checkCached_);
-    store_native(natives, SMB_cache_at_, NM_Runtime_InlineCache_cache_at_);
+    store_native(natives, SMB_cache_at_,    NM_Runtime_InlineCache_cache_at_);
 }

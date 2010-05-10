@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <pinocchio.h>
 #include <lib/lib.h>
+#include <system/runtime/InlineCache.h>
 
 /* ========================================================================= */
 
@@ -133,10 +134,9 @@ static CNT(Class_lookup_cache_invoke)
         return does_not_understand(self, class, msg, argc);
     }
     zapn_EXP(5);
-    AST_Send send             = (AST_Send)peek_EXP(argc + 1);
-    Runtime_InlineCache cache = send->cache;
-    cache->class              = (Object)class;
-    cache->method             = method;
+    AST_Send send       = (AST_Send)peek_EXP(argc + 1);
+    Type_Array cache    = send->cache;
+    Runtime_InlineCache_store(cache, (Object)class, method);
     
     Method_invoke(method, self, argc);
 }
@@ -286,9 +286,9 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
 
 void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 {
-    AST_Send send             = (AST_Send)peek_EXP(argc + 1); // + self
-    Runtime_InlineCache cache = send->cache;
-    Object msg                = send->message;
+    AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
+    Type_Array cache    = send->cache;
+    Object msg          = send->message;
     assert0(msg != Nil);
 
     #ifdef PRINT_DISPATCH_TRACE
@@ -310,8 +310,9 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     // TODO create Polymorphic inline cache
     // TODO properly initialize the inlinecache when creating new sends
     if ((Object)cache != Nil) {
-        if (class == (Type_Class)cache->class) {
-            return Method_invoke(cache->method, self, argc);
+        Object method = Runtime_InlineCache_lookup(cache, class);
+        if (method) {
+            return Method_invoke(method, self, argc);
         }
     } else {
         send->cache = new_Runtime_InlineCache();

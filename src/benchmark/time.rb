@@ -47,7 +47,7 @@ probes = []
 #puts "time -p #{cmd}"
 #`(time -p #{cmd})`
 count.times {
-    #a = `(time -p #{cmd}) 2>&1 | grep real`
+    #a = `(time -p #{cmd}) 2>&1 | grep user`
     #time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
     #time += a.match(/([0-9]+)m/)[1].to_f * 60
     #probes.push(time)

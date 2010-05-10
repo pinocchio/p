@@ -5,18 +5,11 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_INLINECACHE_SIZE 2
-#define RUNTIME_INLINECACHE_VARS L"class", L"method"
+#define DEFAULT_INLINECACHE_SIZE 4
 
-struct Runtime_InlineCache_t {
-    Object  class;
-    Object  method;
-};
-
-CREATE_INITIALIZERS(Runtime_InlineCache)
-extern Runtime_InlineCache new_Runtime_InlineCache();
-
-/* ========================================================================= */
+extern Type_Array new_Runtime_InlineCache();
+extern Object Runtime_InlineCache_lookup(Type_Array cache, Object class);
+extern void Runtime_InlineCache_store(Type_Array cache, Object class, Object method);
 
 /* ========================================================================= */
 
