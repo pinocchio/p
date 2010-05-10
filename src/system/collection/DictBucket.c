@@ -107,12 +107,6 @@ static void Bucket_compare_key(Object inkey, Object dictkey)
 {
     int result = Bucket_quick_compare_key(inkey, dictkey);
 
-    // fwprintf(stderr, L"Comparing: ");
-    // fwprintf(stderr, L"\n");
-    // inspect(inkey);
-    // inspect(dictkey);
-    // fwprintf(stderr, L"\n");
-
     if (result == -1) {
         return Type_Class_direct_dispatch(inkey, HEADER(inkey),
                                           (Object)SMB__equal, 1, dictkey);
