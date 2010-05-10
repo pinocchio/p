@@ -95,7 +95,7 @@ Type_SmallInt wchar_hash(const wchar_t * string, int size)
 
 Type_SmallInt Type_Symbol_hash(Type_Symbol symbol)
 {
-    return wchar_hash(symbol->value, symbol->size);
+    return symbol->hash;
 }
 
 NATIVE1(Type_Symbol__equal)
