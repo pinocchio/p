@@ -28,10 +28,6 @@ void Runtime_InlineCache_store(Type_Array cache, Object class, Object method)
 {
     int i;
     for (i = 0; i < cache->size; i += 2) {
-        if (cache->values[i] == class) {
-            cache->values[i+1]  = method;
-            return;
-        }
         if (cache->values[i] == Nil) {
             cache->values[i]    = class;
             cache->values[i+1]  = method;
