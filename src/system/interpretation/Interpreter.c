@@ -18,14 +18,6 @@ void restore_env()
 	free_context(current);
 }
 
-CNT(return_from_send)
-    return_from_send();
-}
-
-CNT(restore_env)
-    restore_env();
-}
-
 CNT(restore_return)
     restore_env();
     return_from_send();

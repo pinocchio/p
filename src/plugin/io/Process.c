@@ -1,5 +1,7 @@
 // Auto Generated. Do not change!.
 #include <plugin/Plugin.h>
+#include <wchar.h>
+#include <stdio.h>
 #include <plugin/io/ProcessHelper.c>
 
 #line 3 "Process >> popen"
