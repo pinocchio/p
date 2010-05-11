@@ -38,9 +38,9 @@ CNT(restore_return)
 
 void send_eval_rest(Object exp, Type_Class class)
 {
+    EVAL_IF(AST_Assign)
     EVAL_IF(AST_Constant)
     EVAL_IF(AST_Variable)
-    EVAL_IF(AST_Assign)
     EVAL_IF(AST_Self)
     EVAL_IF(AST_Block)
     EVAL_IF(AST_Slot)
@@ -75,9 +75,10 @@ void CNT_tail_send_Eval()
     Object exp = peek_EXP(0);
     Type_Class class = HEADER(exp);
 
-    TAIL_EVAL_IF(AST_Send)
-    TAIL_EVAL_IF(AST_Super)
-
     poke_CNT(restore_return);
+
+    EVAL_IF(AST_Send)
+    EVAL_IF(AST_Super)
+
     send_eval_rest(exp, class);
 }
