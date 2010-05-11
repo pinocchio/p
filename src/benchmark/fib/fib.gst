@@ -1,4 +1,4 @@
-#!/usr/bin/gst -f
+#!/usr/bin/env gst -f
 
 Number extend [
     fib [

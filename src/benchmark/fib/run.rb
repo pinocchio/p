@@ -44,7 +44,7 @@ def benchmarks(f, list)
         l.insert(1, '.') unless l.length == 3
     }
     list.each { |l|
-        f.pprint "#{l[0].ljust maxNameLength} "
+        f.pprint "#{l[0].chomp.ljust maxNameLength} "
         f.pputs `cd #{l[1]}; #{Dir.pwd}/../time.rb 10 #{l[2]}`.chomp
     }
 end
