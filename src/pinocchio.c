@@ -11,7 +11,7 @@ void printf0(const char * string, ...) {
 
 /* ========================================================================= */
 
-void init_pthread_keys()
+void init_thread_keys()
 {
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
@@ -74,36 +74,6 @@ CNT(exit_error)
 void initialize_Natives()
 {
     _NATIVES_ = new_Collection_Dictionary();
-}
-
-/* ========================================================================= */
-
-#define EVAL_IF(name) \
-    if (class == name##_Class) { \
-        return name##_eval((name)exp); \
-    }
-
-
-CNT(send_Eval)
-    Object exp = peek_EXP(0);
-
-    Type_Class class = HEADER(exp);
-    EVAL_IF(AST_Constant)
-    EVAL_IF(AST_Variable)
-    EVAL_IF(AST_Assign)
-    EVAL_IF(AST_Send)
-    EVAL_IF(AST_Super)
-    EVAL_IF(AST_Self)
-    EVAL_IF(AST_Block)
-    EVAL_IF(AST_Slot)
-    EVAL_IF(AST_UIntSlot)
-    EVAL_IF(Organization_ClassReference)
-    
-    /* TODO fallback by actually sending the eval message */
-    inspect(exp);
-    assert(NULL,
-		   wprintf(L"\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
-				  ((Type_Class)class)->name->value));
 }
 
 /* ========================================================================= */
@@ -213,7 +183,7 @@ int main(int argc, const char ** argv)
     initialize_Natives();
     #include <pinocchioPostInit.ci>
 
-    init_pthread_keys();
+    init_thread_keys();
 
     pinocchio_main(argc, argv);
     return EXIT_SUCCESS;

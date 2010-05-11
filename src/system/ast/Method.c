@@ -71,23 +71,24 @@ static void CNT_AST_Method_continue()
     poke_EXP(1, ++pc);
     
     if (code->size <= pc) {
-        poke_CNT(restore_env); 
-    } 
+        poke_CNT(tail_send_Eval); 
+    } else { 
+        push_CNT(send_Eval);
+    }
 
-    push_CNT(send_Eval);
 }
 
 static void start_eval(AST_Method method)
 {
     if (1 < method->size) {
         push_CNT(AST_Method_continue);
+        push_CNT(send_Eval);
     } else {
-        push_CNT(restore_env);
+        push_CNT(tail_send_Eval);
     }
     
     poke_EXP(0, 1); // pc
     push_EXP(method->body[0]);
-    push_CNT(send_Eval);
 }
 
 /* ========================================================================= */

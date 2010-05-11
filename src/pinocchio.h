@@ -191,11 +191,11 @@ extern int IN_EVAL;
 
 /* ========================================================================= */
 
+#include <system/interpretation/Interpreter.h>
 #include <pinocchioTypeInclude.hi>
 
 /* ========================================================================= */
 
-extern void CNT_send_Eval();
 extern void CNT_exit_error();
 extern Object Eval(Object code);
 extern Object Eval_Send0(Object self, Type_Symbol symbol);

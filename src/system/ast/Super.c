@@ -71,6 +71,23 @@ void AST_Super_eval(AST_Super super)
     push_CNT(AST_Self_eval);
 }
 
+void AST_Super_tail_eval(AST_Super super)
+{
+    // LOGFUN;
+
+    // execute the method
+    poke_CNT(return_from_send);
+    push_CNT(AST_Super_send);
+    push_CNT(restore_env);
+    push_CNT(Class_super);
+    push_CNT(push_env_class);
+
+    push_EXP(0);
+
+    push_CNT(store_argument);
+    push_CNT(AST_Self_eval);
+}
+
 /* ========================================================================= */
 
 void post_init_AST_Super()

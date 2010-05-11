@@ -40,7 +40,6 @@ Runtime_MethodClosure fName() {\
 /* ========================================================================= */
 
 Runtime_BlockContext  activation_from_native(uns_int argc);
-void CNT_restore_env();
 
 /* ========================================================================= */
 

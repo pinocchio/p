@@ -80,6 +80,21 @@ void AST_Send_eval(AST_Send self)
     push_CNT(send_Eval);
 }
 
+void AST_Send_tail_eval(AST_Send self)
+{
+    // LOGFUN;
+
+    poke_CNT(return_from_send);
+    push_CNT(AST_Send_send);
+    push_CNT(restore_env);
+
+    push_EXP(0);
+    push_EXP(self->receiver);
+
+    push_CNT(store_argument);
+    push_CNT(send_Eval);
+}
+
 /* ========================================================================= */
 
 void post_init_AST_Send(){}

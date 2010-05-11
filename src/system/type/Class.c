@@ -305,12 +305,9 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     LOG("%ls (%"F_I"u)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
-    /* Monomorphic inline cache */
-    // TODO put that directly on the sender side
-    // TODO create Polymorphic inline cache
     // TODO properly initialize the inlinecache when creating new sends
     if ((Object)cache != Nil) {
-        Object method = Runtime_InlineCache_lookup(cache, class);
+        Object method = Runtime_InlineCache_lookup(cache, (Object)class);
         if (method) {
             return Method_invoke(method, self, argc);
         }
