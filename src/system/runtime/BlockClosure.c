@@ -108,7 +108,45 @@ void apply(Object closure, uns_int argc)
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
 
+CNT(check_while_true)
+    Object boolean = peek_EXP(0);
+
+    if (boolean == (Object)True) {
+        Object closure = peek_EXP(1);
+        poke_EXP(0, Nil);
+        push_EXP(closure);
+        Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
+        return;
+    }
+
+    if (boolean == (Object)False) {
+        zap_CNT();
+        zapn_EXP(3);
+        poke_EXP(0, Nil);
+        return;
+    }
+    
+    assert1(NULL, "Non-boolean type receiver for truth");
+}
+
+void CNT_while_true()
+{
+    Object self = peek_EXP(2);
+    push_CNT(check_while_true);
+    poke_EXP(0, Nil);
+    push_EXP(self);
+    Runtime_BlockClosure_apply((Runtime_BlockClosure)self, 0);
+}
+
 /* ========================================================================= */
+
+NATIVE1(Runtime_BlockClosure_whileTrue_)
+    push_CNT(while_true);
+    push_CNT(check_while_true);
+    push_EXP(Nil);
+    push_EXP(self);
+    Runtime_BlockClosure_apply((Runtime_BlockClosure)self, 0);
+}
 
 NATIVE(Runtime_BlockClosure_apply_)
     Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
@@ -143,4 +181,5 @@ void post_init_Runtime_BlockClosure()
                           NM_Runtime_BlockClosure_valueWithArguments_);
     natives = add_plugin(L"Runtime.BlockClosure");
     store_native(natives, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
+    store_native(natives, new_Type_Symbol_cached(L"whileTrue:"), NM_Runtime_BlockClosure_whileTrue_);
 }
