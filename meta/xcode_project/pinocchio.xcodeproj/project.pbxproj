@@ -56,10 +56,8 @@
 		364E66A010C562DE00AD4616 /* pinocchio.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E65FB10C562DE00AD4616 /* pinocchio.c */; };
 		364E66A410C562DE00AD4616 /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660510C562DE00AD4616 /* Assign.c */; };
 		364E66A710C562DE00AD4616 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660910C562DE00AD4616 /* Block.c */; };
-		364E66AA10C562DE00AD4616 /* Callec.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660D10C562DE00AD4616 /* Callec.c */; };
 		364E66AD10C562DE00AD4616 /* Constant.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E661110C562DE00AD4616 /* Constant.c */; };
 		364E66B110C562DE00AD4616 /* Info.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E661610C562DE00AD4616 /* Info.c */; };
-		364E66B410C562DE00AD4616 /* InstVariable.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E661A10C562DE00AD4616 /* InstVariable.c */; };
 		364E66B710C562DE00AD4616 /* Method.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E661E10C562DE00AD4616 /* Method.c */; };
 		364E66BA10C562DE00AD4616 /* NativeMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E662210C562DE00AD4616 /* NativeMethod.c */; };
 		364E66BD10C562DE00AD4616 /* Self.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E662610C562DE00AD4616 /* Self.c */; };
@@ -78,7 +76,6 @@
 		364E66EB10C562DE00AD4616 /* Character.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666710C562DE00AD4616 /* Character.c */; };
 		364E66ED10C562DE00AD4616 /* CharacterTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666A10C562DE00AD4616 /* CharacterTable.c */; };
 		364E66F110C562DE00AD4616 /* Class.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666F10C562DE00AD4616 /* Class.c */; };
-		364E66F410C562DE00AD4616 /* Dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E667310C562DE00AD4616 /* Dictionary.c */; };
 		364E66F810C562DE00AD4616 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E667810C562DE00AD4616 /* Layout.c */; };
 		364E66FB10C562DE00AD4616 /* Nil.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E667C10C562DE00AD4616 /* Nil.c */; };
 		364E66FE10C562DE00AD4616 /* Object.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668010C562DE00AD4616 /* Object.c */; };
@@ -87,6 +84,61 @@
 		364E670710C562DE00AD4616 /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668C10C562DE00AD4616 /* Symbol.c */; };
 		364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E669610C562DE00AD4616 /* pinocchioTest.c */; };
 		3654964710C57D0E00D0C56F /* BlockContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E664910C562DE00AD4616 /* BlockContext.c */; };
+		36660054119AB89300DE1938 /* DictBucket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666004A119AB89300DE1938 /* DictBucket.c */; };
+		36660056119AB89300DE1938 /* Dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666004E119AB89300DE1938 /* Dictionary.c */; };
+		36660067119AB8F000DE1938 /* Context.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660061119AB8F000DE1938 /* Context.c */; };
+		36660068119AB8F000DE1938 /* Continuation.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660063119AB8F000DE1938 /* Continuation.c */; };
+		36660069119AB8F000DE1938 /* Exception.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660065119AB8F000DE1938 /* Exception.c */; };
+		36660074119AB90700DE1938 /* Annotation.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006A119AB90700DE1938 /* Annotation.c */; };
+		36660075119AB90700DE1938 /* PointerSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006C119AB90700DE1938 /* PointerSlot.c */; };
+		36660076119AB90700DE1938 /* ReflectionMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006E119AB90700DE1938 /* ReflectionMethod.c */; };
+		36660077119AB90700DE1938 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660070119AB90700DE1938 /* Slot.c */; };
+		36660078119AB90700DE1938 /* UIntSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660072119AB90700DE1938 /* UIntSlot.c */; };
+		3666007B119AB93D00DE1938 /* Float.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660079119AB93D00DE1938 /* Float.c */; };
+		366600BE119AB97400DE1938 /* AbstractMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666007E119AB97400DE1938 /* AbstractMethod.c */; };
+		366600BF119AB97400DE1938 /* AbstractSend.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660080119AB97400DE1938 /* AbstractSend.c */; };
+		366600C0119AB97400DE1938 /* AbstractSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660082119AB97400DE1938 /* AbstractSlot.c */; };
+		366600C1119AB97400DE1938 /* Alias.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660084119AB97400DE1938 /* Alias.c */; };
+		366600C2119AB97400DE1938 /* AllocationAlias.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660086119AB97400DE1938 /* AllocationAlias.c */; };
+		366600C3119AB97400DE1938 /* AssertionFailure.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660088119AB97400DE1938 /* AssertionFailure.c */; };
+		366600C4119AB97400DE1938 /* ASTFloat.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666008A119AB97400DE1938 /* ASTFloat.c */; };
+		366600C5119AB97400DE1938 /* BlockContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666008C119AB97400DE1938 /* BlockContext.c */; };
+		366600C6119AB97400DE1938 /* BuilderContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666008E119AB97400DE1938 /* BuilderContext.c */; };
+		366600C7119AB97400DE1938 /* ClassBuilder.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660090119AB97400DE1938 /* ClassBuilder.c */; };
+		366600C8119AB97400DE1938 /* Compiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660092119AB97400DE1938 /* Compiler.c */; };
+		366600C9119AB97400DE1938 /* Context.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660094119AB97400DE1938 /* Context.c */; };
+		366600CA119AB97400DE1938 /* Continuation.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660096119AB97400DE1938 /* Continuation.c */; };
+		366600CB119AB97400DE1938 /* Continue.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660098119AB97400DE1938 /* Continue.c */; };
+		366600CC119AB97400DE1938 /* CreationAlias.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666009A119AB97400DE1938 /* CreationAlias.c */; };
+		366600CD119AB97400DE1938 /* Debugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666009C119AB97400DE1938 /* Debugger.c */; };
+		366600CE119AB97400DE1938 /* DictBucket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666009E119AB97400DE1938 /* DictBucket.c */; };
+		366600CF119AB97400DE1938 /* Exception.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600A0119AB97400DE1938 /* Exception.c */; };
+		366600D0119AB97400DE1938 /* InlineCache.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600A2119AB97400DE1938 /* InlineCache.c */; };
+		366600D1119AB97400DE1938 /* Inspector.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600A4119AB97400DE1938 /* Inspector.c */; };
+		366600D2119AB97400DE1938 /* Link.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600A6119AB97400DE1938 /* Link.c */; };
+		366600D3119AB97400DE1938 /* MainInterpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600A8119AB97400DE1938 /* MainInterpreter.c */; };
+		366600D4119AB97400DE1938 /* MethodBuilder.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600AA119AB97400DE1938 /* MethodBuilder.c */; };
+		366600D5119AB97400DE1938 /* MethodContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600AC119AB97400DE1938 /* MethodContext.c */; };
+		366600D6119AB97400DE1938 /* NativeMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600AE119AB97400DE1938 /* NativeMethod.c */; };
+		366600D7119AB97400DE1938 /* ParallelDebugger.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600B0119AB97400DE1938 /* ParallelDebugger.c */; };
+		366600D8119AB97400DE1938 /* Plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600B2119AB97400DE1938 /* Plugin.c */; };
+		366600D9119AB97400DE1938 /* Process.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600B4119AB97400DE1938 /* Process.c */; };
+		366600DA119AB97400DE1938 /* PSetTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600B6119AB97400DE1938 /* PSetTest.c */; };
+		366600DB119AB97400DE1938 /* RecursiveDoesNotUnderstand.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600B8119AB97400DE1938 /* RecursiveDoesNotUnderstand.c */; };
+		366600DC119AB97400DE1938 /* ReflectionMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600BA119AB97400DE1938 /* ReflectionMethod.c */; };
+		366600DD119AB97400DE1938 /* Scope.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600BC119AB97400DE1938 /* Scope.c */; };
+		366600F4119AB9A000DE1938 /* SetBucket.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600DE119AB9A000DE1938 /* SetBucket.c */; };
+		366600F5119AB9A000DE1938 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600E0119AB9A000DE1938 /* Slot.c */; };
+		366600F6119AB9A000DE1938 /* SlotBuilder.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600E2119AB9A000DE1938 /* SlotBuilder.c */; };
+		366600F7119AB9A000DE1938 /* StatefulArray.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600E4119AB9A000DE1938 /* StatefulArray.c */; };
+		366600F8119AB9A000DE1938 /* StdInspector.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600E6119AB9A000DE1938 /* StdInspector.c */; };
+		366600F9119AB9A000DE1938 /* SteppingInterpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600E8119AB9A000DE1938 /* SteppingInterpreter.c */; };
+		366600FA119AB9A000DE1938 /* STVisitor.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600EA119AB9A000DE1938 /* STVisitor.c */; };
+		366600FB119AB9A000DE1938 /* Thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600EC119AB9A000DE1938 /* Thread.c */; };
+		366600FC119AB9A000DE1938 /* UIntSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600EE119AB9A000DE1938 /* UIntSlot.c */; };
+		366600FD119AB9A000DE1938 /* UndefinedClassReference.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600F0119AB9A000DE1938 /* UndefinedClassReference.c */; };
+		366600FE119AB9A000DE1938 /* VariablePlaceholder.c in Sources */ = {isa = PBXBuildFile; fileRef = 366600F2119AB9A000DE1938 /* VariablePlaceholder.c */; };
+		36660103119AB9BB00DE1938 /* thread.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660101119AB9BB00DE1938 /* thread.c */; };
 		36AC4AA911451D3300DE61E1 /* Annotation.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A0F11451D3300DE61E1 /* Annotation.c */; };
 		36AC4AAA11451D3300DE61E1 /* ArrayLayout.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A1111451D3300DE61E1 /* ArrayLayout.c */; };
 		36AC4AAB11451D3300DE61E1 /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A1311451D3300DE61E1 /* Assign.c */; };
@@ -119,17 +171,14 @@
 		36AC4AC611451D3300DE61E1 /* ASTUnaryMessageDefinition.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A4911451D3300DE61E1 /* ASTUnaryMessageDefinition.c */; };
 		36AC4AC711451D3300DE61E1 /* ASTUnarySelector.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A4B11451D3300DE61E1 /* ASTUnarySelector.c */; };
 		36AC4AC811451D3300DE61E1 /* ASTVariable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A4D11451D3300DE61E1 /* ASTVariable.c */; };
-		36AC4AC911451D3300DE61E1 /* ASTVisitor.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A4F11451D3300DE61E1 /* ASTVisitor.c */; };
 		36AC4ACA11451D3300DE61E1 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5111451D3300DE61E1 /* Block.c */; };
 		36AC4ACB11451D3300DE61E1 /* ByteString.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5311451D3300DE61E1 /* ByteString.c */; };
-		36AC4ACC11451D3300DE61E1 /* Callec.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5511451D3300DE61E1 /* Callec.c */; };
 		36AC4ACD11451D3300DE61E1 /* ClassReference.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5711451D3300DE61E1 /* ClassReference.c */; };
 		36AC4ACE11451D3300DE61E1 /* ClassScope.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5911451D3300DE61E1 /* ClassScope.c */; };
 		36AC4ACF11451D3300DE61E1 /* Closure.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5B11451D3300DE61E1 /* Closure.c */; };
 		36AC4AD011451D3300DE61E1 /* Constant.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5D11451D3300DE61E1 /* Constant.c */; };
 		36AC4AD111451D3300DE61E1 /* File.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A5F11451D3300DE61E1 /* File.c */; };
 		36AC4AD211451D3300DE61E1 /* Info.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6111451D3300DE61E1 /* Info.c */; };
-		36AC4AD311451D3300DE61E1 /* InstVariable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6311451D3300DE61E1 /* InstVariable.c */; };
 		36AC4AD411451D3300DE61E1 /* Interpreter.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6511451D3300DE61E1 /* Interpreter.c */; };
 		36AC4AD511451D3300DE61E1 /* IntLayout.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6711451D3300DE61E1 /* IntLayout.c */; };
 		36AC4AD611451D3300DE61E1 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6911451D3300DE61E1 /* Layout.c */; };
@@ -138,19 +187,10 @@
 		36AC4AD911451D3300DE61E1 /* Node.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A6F11451D3300DE61E1 /* Node.c */; };
 		36AC4ADA11451D3300DE61E1 /* ObjectLayout.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7111451D3300DE61E1 /* ObjectLayout.c */; };
 		36AC4ADB11451D3300DE61E1 /* Package.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7311451D3300DE61E1 /* Package.c */; };
-		36AC4ADC11451D3300DE61E1 /* PArrayTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7511451D3300DE61E1 /* PArrayTest.c */; };
-		36AC4ADD11451D3300DE61E1 /* PBlockTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7711451D3300DE61E1 /* PBlockTest.c */; };
-		36AC4ADE11451D3300DE61E1 /* PBooleanTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7911451D3300DE61E1 /* PBooleanTest.c */; };
-		36AC4ADF11451D3300DE61E1 /* PCharacterTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7B11451D3300DE61E1 /* PCharacterTest.c */; };
-		36AC4AE011451D3300DE61E1 /* PCompiler.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7D11451D3300DE61E1 /* PCompiler.c */; };
-		36AC4AE111451D3300DE61E1 /* PCompilerTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A7F11451D3300DE61E1 /* PCompilerTest.c */; };
-		36AC4AE211451D3300DE61E1 /* PFileTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8111451D3300DE61E1 /* PFileTest.c */; };
-		36AC4AE311451D3300DE61E1 /* PNilTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8311451D3300DE61E1 /* PNilTest.c */; };
 		36AC4AE411451D3300DE61E1 /* PObjectTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8511451D3300DE61E1 /* PObjectTest.c */; };
 		36AC4AE511451D3300DE61E1 /* PSmallIntTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8711451D3300DE61E1 /* PSmallIntTest.c */; };
 		36AC4AE611451D3300DE61E1 /* PStringTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8911451D3300DE61E1 /* PStringTest.c */; };
 		36AC4AE711451D3300DE61E1 /* PSymbolTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8B11451D3300DE61E1 /* PSymbolTest.c */; };
-		36AC4AE811451D3300DE61E1 /* PVisitorTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8D11451D3300DE61E1 /* PVisitorTest.c */; };
 		36AC4AE911451D3300DE61E1 /* ReadFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A8F11451D3300DE61E1 /* ReadFile.c */; };
 		36AC4AEA11451D3300DE61E1 /* RootPackage.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9111451D3300DE61E1 /* RootPackage.c */; };
 		36AC4AEB11451D3300DE61E1 /* RootScope.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9311451D3300DE61E1 /* RootScope.c */; };
@@ -159,24 +199,15 @@
 		36AC4AEE11451D3300DE61E1 /* Send.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9911451D3300DE61E1 /* Send.c */; };
 		36AC4AEF11451D3300DE61E1 /* SubScope.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9B11451D3300DE61E1 /* SubScope.c */; };
 		36AC4AF011451D3300DE61E1 /* Super.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9D11451D3300DE61E1 /* Super.c */; };
-		36AC4AF111451D3300DE61E1 /* VisitorTestWorld.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4A9F11451D3300DE61E1 /* VisitorTestWorld.c */; };
 		36AC4AF211451D3300DE61E1 /* WideString.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4AA111451D3300DE61E1 /* WideString.c */; };
 		36AC4AF311451D3300DE61E1 /* WordsLayout.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4AA311451D3300DE61E1 /* WordsLayout.c */; };
 		36AC4AF411451D3300DE61E1 /* WriteFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4AA511451D3300DE61E1 /* WriteFile.c */; };
 		36AC4AF511451D3300DE61E1 /* WriteStream.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4AA711451D3300DE61E1 /* WriteStream.c */; };
-		36AC4B1811451F3900DE61E1 /* PArrayTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0211451F3900DE61E1 /* PArrayTest.c */; };
-		36AC4B1911451F3900DE61E1 /* PBlockTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0411451F3900DE61E1 /* PBlockTest.c */; };
-		36AC4B1A11451F3900DE61E1 /* PBooleanTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0611451F3900DE61E1 /* PBooleanTest.c */; };
-		36AC4B1B11451F3900DE61E1 /* PCharacterTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0811451F3900DE61E1 /* PCharacterTest.c */; };
-		36AC4B1C11451F3900DE61E1 /* PCompilerTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0A11451F3900DE61E1 /* PCompilerTest.c */; };
-		36AC4B1D11451F3900DE61E1 /* PFileTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0C11451F3900DE61E1 /* PFileTest.c */; };
-		36AC4B1E11451F3900DE61E1 /* PNilTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B0E11451F3900DE61E1 /* PNilTest.c */; };
 		36AC4B1F11451F3900DE61E1 /* PObjectTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B1011451F3900DE61E1 /* PObjectTest.c */; };
 		36AC4B2011451F3900DE61E1 /* PSmallIntTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B1211451F3900DE61E1 /* PSmallIntTest.c */; };
 		36AC4B2111451F3900DE61E1 /* PStringTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B1411451F3900DE61E1 /* PStringTest.c */; };
 		36AC4B2211451F3900DE61E1 /* PSymbolTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B1611451F3900DE61E1 /* PSymbolTest.c */; };
 		36AC4B2811451F6300DE61E1 /* Message.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B2511451F6300DE61E1 /* Message.c */; };
-		36AC4B2911451F6300DE61E1 /* MessageTest.ci in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B2711451F6300DE61E1 /* MessageTest.ci */; };
 		36AC4B53114528BC00DE61E1 /* PDictionaryTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */; };
 		36AC4B60114528E500DE61E1 /* PDictionaryTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */; };
 		36D2D482113E60940020E7B1 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = 36D2D480113E60940020E7B1 /* debug.c */; };
@@ -199,8 +230,6 @@
 		36061E4C11235ED800FD4FCD /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
 		36061E5711235EE200FD4FCD /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
 		36061E5811235EE200FD4FCD /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
-		36061E5A11235EE200FD4FCD /* ArrayedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ArrayedCollection.c; sourceTree = "<group>"; };
-		36061E5B11235EE200FD4FCD /* ArrayedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayedCollection.h; sourceTree = "<group>"; };
 		36061E5D11235EE200FD4FCD /* ASTNode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTNode.c; sourceTree = "<group>"; };
 		36061E5E11235EE200FD4FCD /* ASTNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTNode.h; sourceTree = "<group>"; };
 		36061E6011235EE200FD4FCD /* Behavior.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Behavior.c; sourceTree = "<group>"; };
@@ -209,12 +238,8 @@
 		36061E6411235EE200FD4FCD /* BlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockClosure.h; sourceTree = "<group>"; };
 		36061E6611235EE200FD4FCD /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
 		36061E6711235EE200FD4FCD /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
-		36061E6911235EE200FD4FCD /* BridgeTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BridgeTest.c; sourceTree = "<group>"; };
-		36061E6A11235EE200FD4FCD /* BridgeTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeTest.h; sourceTree = "<group>"; };
 		36061E6C11235EE200FD4FCD /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
 		36061E6D11235EE200FD4FCD /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
-		36061E6F11235EE200FD4FCD /* ChildClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ChildClassTestClass.c; sourceTree = "<group>"; };
-		36061E7011235EE200FD4FCD /* ChildClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildClassTestClass.h; sourceTree = "<group>"; };
 		36061E7211235EE200FD4FCD /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
 		36061E7311235EE200FD4FCD /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
 		36061E7511235EE200FD4FCD /* Collection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Collection.c; sourceTree = "<group>"; };
@@ -223,8 +248,6 @@
 		36061E7911235EE200FD4FCD /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
 		36061E7B11235EE200FD4FCD /* False.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = False.c; sourceTree = "<group>"; };
 		36061E7C11235EE200FD4FCD /* False.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = False.h; sourceTree = "<group>"; };
-		36061E7E11235EE200FD4FCD /* InstanceVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstanceVariable.c; sourceTree = "<group>"; };
-		36061E7F11235EE200FD4FCD /* InstanceVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstanceVariable.h; sourceTree = "<group>"; };
 		36061E8111235EE200FD4FCD /* Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Message.c; sourceTree = "<group>"; };
 		36061E8211235EE200FD4FCD /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		36061E8411235EE200FD4FCD /* Metaclass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Metaclass.c; sourceTree = "<group>"; };
@@ -261,8 +284,6 @@
 		36061EB211235EE200FD4FCD /* PEGSucceededOptionalResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGSucceededOptionalResult.h; sourceTree = "<group>"; };
 		36061EB411235EE200FD4FCD /* PEGTerminal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTerminal.c; sourceTree = "<group>"; };
 		36061EB511235EE200FD4FCD /* PEGTerminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTerminal.h; sourceTree = "<group>"; };
-		36061EB711235EE200FD4FCD /* PEGTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGTest.c; sourceTree = "<group>"; };
-		36061EB811235EE200FD4FCD /* PEGTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGTest.h; sourceTree = "<group>"; };
 		36061EBA11235EE200FD4FCD /* PEGZeroOrMoreExpression.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PEGZeroOrMoreExpression.c; sourceTree = "<group>"; };
 		36061EBB11235EE200FD4FCD /* PEGZeroOrMoreExpression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PEGZeroOrMoreExpression.h; sourceTree = "<group>"; };
 		36061EBD11235EE200FD4FCD /* PexMatcher.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PexMatcher.c; sourceTree = "<group>"; };
@@ -273,8 +294,6 @@
 		36061EC411235EE200FD4FCD /* PositionableStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionableStream.h; sourceTree = "<group>"; };
 		36061EC611235EE200FD4FCD /* ReadStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadStream.c; sourceTree = "<group>"; };
 		36061EC711235EE200FD4FCD /* ReadStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadStream.h; sourceTree = "<group>"; };
-		36061EC911235EE200FD4FCD /* RuntimeObject.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RuntimeObject.c; sourceTree = "<group>"; };
-		36061ECA11235EE200FD4FCD /* RuntimeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObject.h; sourceTree = "<group>"; };
 		36061ECC11235EE200FD4FCD /* SequenceableCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SequenceableCollection.c; sourceTree = "<group>"; };
 		36061ECD11235EE200FD4FCD /* SequenceableCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SequenceableCollection.h; sourceTree = "<group>"; };
 		36061ECF11235EE200FD4FCD /* Set.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Set.c; sourceTree = "<group>"; };
@@ -285,24 +304,16 @@
 		36061ED611235EE200FD4FCD /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
 		36061ED811235EE200FD4FCD /* SortedCollection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SortedCollection.c; sourceTree = "<group>"; };
 		36061ED911235EE200FD4FCD /* SortedCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortedCollection.h; sourceTree = "<group>"; };
-		36061EDB11235EE200FD4FCD /* StandardTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardTestClass.c; sourceTree = "<group>"; };
-		36061EDC11235EE200FD4FCD /* StandardTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTestClass.h; sourceTree = "<group>"; };
-		36061EDE11235EE200FD4FCD /* StandardVariableTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StandardVariableTestClass.c; sourceTree = "<group>"; };
-		36061EDF11235EE200FD4FCD /* StandardVariableTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardVariableTestClass.h; sourceTree = "<group>"; };
 		36061EE111235EE200FD4FCD /* Stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stream.c; sourceTree = "<group>"; };
 		36061EE211235EE200FD4FCD /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
 		36061EE411235EE200FD4FCD /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
 		36061EE511235EE200FD4FCD /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
-		36061EE711235EE200FD4FCD /* SuperClassTestClass.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SuperClassTestClass.c; sourceTree = "<group>"; };
-		36061EE811235EE200FD4FCD /* SuperClassTestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuperClassTestClass.h; sourceTree = "<group>"; };
 		36061EEA11235EE200FD4FCD /* Symbol.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Symbol.c; sourceTree = "<group>"; };
 		36061EEB11235EE200FD4FCD /* Symbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Symbol.h; sourceTree = "<group>"; };
 		36061EED11235EE200FD4FCD /* TestCase.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TestCase.c; sourceTree = "<group>"; };
 		36061EEE11235EE200FD4FCD /* TestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCase.h; sourceTree = "<group>"; };
 		36061EF011235EE200FD4FCD /* True.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = True.c; sourceTree = "<group>"; };
 		36061EF111235EE200FD4FCD /* True.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = True.h; sourceTree = "<group>"; };
-		36061EF311235EE200FD4FCD /* Type.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Type.c; sourceTree = "<group>"; };
-		36061EF411235EE200FD4FCD /* Type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Type.h; sourceTree = "<group>"; };
 		36061EF611235EE200FD4FCD /* Variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Variable.c; sourceTree = "<group>"; };
 		36061EF711235EE200FD4FCD /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
 		36061EF911235EE200FD4FCD /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
@@ -320,22 +331,15 @@
 		364E660610C562DE00AD4616 /* Assign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assign.h; sourceTree = "<group>"; };
 		364E660910C562DE00AD4616 /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		364E660A10C562DE00AD4616 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		364E660D10C562DE00AD4616 /* Callec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Callec.c; sourceTree = "<group>"; };
-		364E660E10C562DE00AD4616 /* Callec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Callec.h; sourceTree = "<group>"; };
-		364E661010C562DE00AD4616 /* CallecTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = CallecTest.ci; sourceTree = "<group>"; };
 		364E661110C562DE00AD4616 /* Constant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Constant.c; sourceTree = "<group>"; };
 		364E661210C562DE00AD4616 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		364E661610C562DE00AD4616 /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		364E661710C562DE00AD4616 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
 		364E661910C562DE00AD4616 /* InfoTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InfoTest.ci; sourceTree = "<group>"; };
-		364E661A10C562DE00AD4616 /* InstVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstVariable.c; sourceTree = "<group>"; };
-		364E661B10C562DE00AD4616 /* InstVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstVariable.h; sourceTree = "<group>"; };
-		364E661D10C562DE00AD4616 /* InstVariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InstVariableTest.ci; sourceTree = "<group>"; };
 		364E661E10C562DE00AD4616 /* Method.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Method.c; sourceTree = "<group>"; };
 		364E661F10C562DE00AD4616 /* Method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Method.h; sourceTree = "<group>"; };
 		364E662210C562DE00AD4616 /* NativeMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeMethod.c; sourceTree = "<group>"; };
 		364E662310C562DE00AD4616 /* NativeMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMethod.h; sourceTree = "<group>"; };
-		364E662510C562DE00AD4616 /* NativeMethodTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NativeMethodTest.ci; sourceTree = "<group>"; };
 		364E662610C562DE00AD4616 /* Self.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Self.c; sourceTree = "<group>"; };
 		364E662710C562DE00AD4616 /* Self.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Self.h; sourceTree = "<group>"; };
 		364E662910C562DE00AD4616 /* SelfTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SelfTest.ci; sourceTree = "<group>"; };
@@ -351,31 +355,21 @@
 		364E663810C562DE00AD4616 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		364E663910C562DE00AD4616 /* File.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = File.o; sourceTree = "<group>"; };
 		364E663A10C562DE00AD4616 /* FileTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FileTest.ci; sourceTree = "<group>"; };
-		364E663B10C562DE00AD4616 /* Stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Stream.c; sourceTree = "<group>"; };
-		364E663C10C562DE00AD4616 /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stream.h; sourceTree = "<group>"; };
-		364E663D10C562DE00AD4616 /* Stream.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Stream.o; sourceTree = "<group>"; };
-		364E663E10C562DE00AD4616 /* StreamTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = StreamTest.ci; sourceTree = "<group>"; };
 		364E664010C562DE00AD4616 /* ClassReference.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassReference.c; sourceTree = "<group>"; };
 		364E664110C562DE00AD4616 /* ClassReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassReference.h; sourceTree = "<group>"; };
 		364E664310C562DE00AD4616 /* ClassReferenceTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ClassReferenceTest.ci; sourceTree = "<group>"; };
 		364E664510C562DE00AD4616 /* BlockClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockClosure.c; sourceTree = "<group>"; };
 		364E664610C562DE00AD4616 /* BlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockClosure.h; sourceTree = "<group>"; };
-		364E664810C562DE00AD4616 /* BlockClosureTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = BlockClosureTest.ci; sourceTree = "<group>"; };
 		364E664910C562DE00AD4616 /* BlockContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockContext.c; sourceTree = "<group>"; };
 		364E664A10C562DE00AD4616 /* BlockContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockContext.h; sourceTree = "<group>"; };
 		364E664C10C562DE00AD4616 /* Continue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continue.c; sourceTree = "<group>"; };
 		364E664D10C562DE00AD4616 /* Continue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continue.h; sourceTree = "<group>"; };
-		364E664F10C562DE00AD4616 /* ContinueTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ContinueTest.ci; sourceTree = "<group>"; };
 		364E665110C562DE00AD4616 /* InlineCache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InlineCache.c; sourceTree = "<group>"; };
 		364E665210C562DE00AD4616 /* InlineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineCache.h; sourceTree = "<group>"; };
-		364E665410C562DE00AD4616 /* InlineCacheTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = InlineCacheTest.ci; sourceTree = "<group>"; };
 		364E665510C562DE00AD4616 /* MethodClosure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodClosure.c; sourceTree = "<group>"; };
 		364E665610C562DE00AD4616 /* MethodClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodClosure.h; sourceTree = "<group>"; };
-		364E665810C562DE00AD4616 /* MethodClosureTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodClosureTest.ci; sourceTree = "<group>"; };
 		364E665910C562DE00AD4616 /* MethodContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodContext.c; sourceTree = "<group>"; };
 		364E665A10C562DE00AD4616 /* MethodContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodContext.h; sourceTree = "<group>"; };
-		364E665C10C562DE00AD4616 /* MethodContextTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MethodContextTest.ci; sourceTree = "<group>"; };
-		364E665D10C562DE00AD4616 /* ThreadTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ThreadTest.ci; sourceTree = "<group>"; };
 		364E665F10C562DE00AD4616 /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
 		364E666010C562DE00AD4616 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
 		364E666310C562DE00AD4616 /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
@@ -387,8 +381,6 @@
 		364E666F10C562DE00AD4616 /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
 		364E667010C562DE00AD4616 /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
 		364E667210C562DE00AD4616 /* ClassTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ClassTest.ci; sourceTree = "<group>"; };
-		364E667310C562DE00AD4616 /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
-		364E667410C562DE00AD4616 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
 		364E667710C562DE00AD4616 /* Instantiate.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Instantiate.ci; sourceTree = "<group>"; };
 		364E667810C562DE00AD4616 /* Layout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Layout.c; sourceTree = "<group>"; };
 		364E667910C562DE00AD4616 /* Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
@@ -420,6 +412,116 @@
 		364E671610C562EB00AD4616 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		364E671710C562EB00AD4616 /* logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = logo.svg; sourceTree = "<group>"; };
 		364E671810C562EB00AD4616 /* mac_install_boehm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mac_install_boehm; sourceTree = "<group>"; };
+		3666004A119AB89300DE1938 /* DictBucket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DictBucket.c; sourceTree = "<group>"; };
+		3666004B119AB89300DE1938 /* DictBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictBucket.h; sourceTree = "<group>"; };
+		3666004E119AB89300DE1938 /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
+		3666004F119AB89300DE1938 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
+		36660061119AB8F000DE1938 /* Context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Context.c; sourceTree = "<group>"; };
+		36660062119AB8F000DE1938 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		36660063119AB8F000DE1938 /* Continuation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continuation.c; sourceTree = "<group>"; };
+		36660064119AB8F000DE1938 /* Continuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continuation.h; sourceTree = "<group>"; };
+		36660065119AB8F000DE1938 /* Exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Exception.c; sourceTree = "<group>"; };
+		36660066119AB8F000DE1938 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		3666006A119AB90700DE1938 /* Annotation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Annotation.c; sourceTree = "<group>"; };
+		3666006B119AB90700DE1938 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
+		3666006C119AB90700DE1938 /* PointerSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointerSlot.c; sourceTree = "<group>"; };
+		3666006D119AB90700DE1938 /* PointerSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointerSlot.h; sourceTree = "<group>"; };
+		3666006E119AB90700DE1938 /* ReflectionMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReflectionMethod.c; sourceTree = "<group>"; };
+		3666006F119AB90700DE1938 /* ReflectionMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionMethod.h; sourceTree = "<group>"; };
+		36660070119AB90700DE1938 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
+		36660071119AB90700DE1938 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
+		36660072119AB90700DE1938 /* UIntSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIntSlot.c; sourceTree = "<group>"; };
+		36660073119AB90700DE1938 /* UIntSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIntSlot.h; sourceTree = "<group>"; };
+		36660079119AB93D00DE1938 /* Float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Float.c; sourceTree = "<group>"; };
+		3666007A119AB93D00DE1938 /* Float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Float.h; sourceTree = "<group>"; };
+		3666007E119AB97400DE1938 /* AbstractMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AbstractMethod.c; sourceTree = "<group>"; };
+		3666007F119AB97400DE1938 /* AbstractMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractMethod.h; sourceTree = "<group>"; };
+		36660080119AB97400DE1938 /* AbstractSend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AbstractSend.c; sourceTree = "<group>"; };
+		36660081119AB97400DE1938 /* AbstractSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractSend.h; sourceTree = "<group>"; };
+		36660082119AB97400DE1938 /* AbstractSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AbstractSlot.c; sourceTree = "<group>"; };
+		36660083119AB97400DE1938 /* AbstractSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractSlot.h; sourceTree = "<group>"; };
+		36660084119AB97400DE1938 /* Alias.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Alias.c; sourceTree = "<group>"; };
+		36660085119AB97400DE1938 /* Alias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alias.h; sourceTree = "<group>"; };
+		36660086119AB97400DE1938 /* AllocationAlias.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AllocationAlias.c; sourceTree = "<group>"; };
+		36660087119AB97400DE1938 /* AllocationAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllocationAlias.h; sourceTree = "<group>"; };
+		36660088119AB97400DE1938 /* AssertionFailure.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AssertionFailure.c; sourceTree = "<group>"; };
+		36660089119AB97400DE1938 /* AssertionFailure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssertionFailure.h; sourceTree = "<group>"; };
+		3666008A119AB97400DE1938 /* ASTFloat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTFloat.c; sourceTree = "<group>"; };
+		3666008B119AB97400DE1938 /* ASTFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTFloat.h; sourceTree = "<group>"; };
+		3666008C119AB97400DE1938 /* BlockContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BlockContext.c; sourceTree = "<group>"; };
+		3666008D119AB97400DE1938 /* BlockContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockContext.h; sourceTree = "<group>"; };
+		3666008E119AB97400DE1938 /* BuilderContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BuilderContext.c; sourceTree = "<group>"; };
+		3666008F119AB97400DE1938 /* BuilderContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuilderContext.h; sourceTree = "<group>"; };
+		36660090119AB97400DE1938 /* ClassBuilder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassBuilder.c; sourceTree = "<group>"; };
+		36660091119AB97400DE1938 /* ClassBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassBuilder.h; sourceTree = "<group>"; };
+		36660092119AB97400DE1938 /* Compiler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Compiler.c; sourceTree = "<group>"; };
+		36660093119AB97400DE1938 /* Compiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compiler.h; sourceTree = "<group>"; };
+		36660094119AB97400DE1938 /* Context.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Context.c; sourceTree = "<group>"; };
+		36660095119AB97400DE1938 /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Context.h; sourceTree = "<group>"; };
+		36660096119AB97400DE1938 /* Continuation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continuation.c; sourceTree = "<group>"; };
+		36660097119AB97400DE1938 /* Continuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continuation.h; sourceTree = "<group>"; };
+		36660098119AB97400DE1938 /* Continue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Continue.c; sourceTree = "<group>"; };
+		36660099119AB97400DE1938 /* Continue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Continue.h; sourceTree = "<group>"; };
+		3666009A119AB97400DE1938 /* CreationAlias.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CreationAlias.c; sourceTree = "<group>"; };
+		3666009B119AB97400DE1938 /* CreationAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreationAlias.h; sourceTree = "<group>"; };
+		3666009C119AB97400DE1938 /* Debugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Debugger.c; sourceTree = "<group>"; };
+		3666009D119AB97400DE1938 /* Debugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debugger.h; sourceTree = "<group>"; };
+		3666009E119AB97400DE1938 /* DictBucket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DictBucket.c; sourceTree = "<group>"; };
+		3666009F119AB97400DE1938 /* DictBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictBucket.h; sourceTree = "<group>"; };
+		366600A0119AB97400DE1938 /* Exception.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Exception.c; sourceTree = "<group>"; };
+		366600A1119AB97400DE1938 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
+		366600A2119AB97400DE1938 /* InlineCache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InlineCache.c; sourceTree = "<group>"; };
+		366600A3119AB97400DE1938 /* InlineCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InlineCache.h; sourceTree = "<group>"; };
+		366600A4119AB97400DE1938 /* Inspector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Inspector.c; sourceTree = "<group>"; };
+		366600A5119AB97400DE1938 /* Inspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspector.h; sourceTree = "<group>"; };
+		366600A6119AB97400DE1938 /* Link.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Link.c; sourceTree = "<group>"; };
+		366600A7119AB97400DE1938 /* Link.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Link.h; sourceTree = "<group>"; };
+		366600A8119AB97400DE1938 /* MainInterpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MainInterpreter.c; sourceTree = "<group>"; };
+		366600A9119AB97400DE1938 /* MainInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainInterpreter.h; sourceTree = "<group>"; };
+		366600AA119AB97400DE1938 /* MethodBuilder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodBuilder.c; sourceTree = "<group>"; };
+		366600AB119AB97400DE1938 /* MethodBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodBuilder.h; sourceTree = "<group>"; };
+		366600AC119AB97400DE1938 /* MethodContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodContext.c; sourceTree = "<group>"; };
+		366600AD119AB97400DE1938 /* MethodContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodContext.h; sourceTree = "<group>"; };
+		366600AE119AB97400DE1938 /* NativeMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = NativeMethod.c; sourceTree = "<group>"; };
+		366600AF119AB97400DE1938 /* NativeMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeMethod.h; sourceTree = "<group>"; };
+		366600B0119AB97400DE1938 /* ParallelDebugger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ParallelDebugger.c; sourceTree = "<group>"; };
+		366600B1119AB97400DE1938 /* ParallelDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallelDebugger.h; sourceTree = "<group>"; };
+		366600B2119AB97400DE1938 /* Plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Plugin.c; sourceTree = "<group>"; };
+		366600B3119AB97400DE1938 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		366600B4119AB97400DE1938 /* Process.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Process.c; sourceTree = "<group>"; };
+		366600B5119AB97400DE1938 /* Process.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Process.h; sourceTree = "<group>"; };
+		366600B6119AB97400DE1938 /* PSetTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PSetTest.c; sourceTree = "<group>"; };
+		366600B7119AB97400DE1938 /* PSetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSetTest.h; sourceTree = "<group>"; };
+		366600B8119AB97400DE1938 /* RecursiveDoesNotUnderstand.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RecursiveDoesNotUnderstand.c; sourceTree = "<group>"; };
+		366600B9119AB97400DE1938 /* RecursiveDoesNotUnderstand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecursiveDoesNotUnderstand.h; sourceTree = "<group>"; };
+		366600BA119AB97400DE1938 /* ReflectionMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReflectionMethod.c; sourceTree = "<group>"; };
+		366600BB119AB97400DE1938 /* ReflectionMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionMethod.h; sourceTree = "<group>"; };
+		366600BC119AB97400DE1938 /* Scope.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Scope.c; sourceTree = "<group>"; };
+		366600BD119AB97400DE1938 /* Scope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scope.h; sourceTree = "<group>"; };
+		366600DE119AB9A000DE1938 /* SetBucket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SetBucket.c; sourceTree = "<group>"; };
+		366600DF119AB9A000DE1938 /* SetBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetBucket.h; sourceTree = "<group>"; };
+		366600E0119AB9A000DE1938 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
+		366600E1119AB9A000DE1938 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
+		366600E2119AB9A000DE1938 /* SlotBuilder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SlotBuilder.c; sourceTree = "<group>"; };
+		366600E3119AB9A000DE1938 /* SlotBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlotBuilder.h; sourceTree = "<group>"; };
+		366600E4119AB9A000DE1938 /* StatefulArray.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StatefulArray.c; sourceTree = "<group>"; };
+		366600E5119AB9A000DE1938 /* StatefulArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatefulArray.h; sourceTree = "<group>"; };
+		366600E6119AB9A000DE1938 /* StdInspector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = StdInspector.c; sourceTree = "<group>"; };
+		366600E7119AB9A000DE1938 /* StdInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdInspector.h; sourceTree = "<group>"; };
+		366600E8119AB9A000DE1938 /* SteppingInterpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SteppingInterpreter.c; sourceTree = "<group>"; };
+		366600E9119AB9A000DE1938 /* SteppingInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SteppingInterpreter.h; sourceTree = "<group>"; };
+		366600EA119AB9A000DE1938 /* STVisitor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = STVisitor.c; sourceTree = "<group>"; };
+		366600EB119AB9A000DE1938 /* STVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STVisitor.h; sourceTree = "<group>"; };
+		366600EC119AB9A000DE1938 /* Thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Thread.c; sourceTree = "<group>"; };
+		366600ED119AB9A000DE1938 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		366600EE119AB9A000DE1938 /* UIntSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIntSlot.c; sourceTree = "<group>"; };
+		366600EF119AB9A000DE1938 /* UIntSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIntSlot.h; sourceTree = "<group>"; };
+		366600F0119AB9A000DE1938 /* UndefinedClassReference.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UndefinedClassReference.c; sourceTree = "<group>"; };
+		366600F1119AB9A000DE1938 /* UndefinedClassReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UndefinedClassReference.h; sourceTree = "<group>"; };
+		366600F2119AB9A000DE1938 /* VariablePlaceholder.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VariablePlaceholder.c; sourceTree = "<group>"; };
+		366600F3119AB9A000DE1938 /* VariablePlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariablePlaceholder.h; sourceTree = "<group>"; };
+		36660101119AB9BB00DE1938 /* thread.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = thread.c; sourceTree = "<group>"; };
+		36660102119AB9BB00DE1938 /* thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = thread.h; sourceTree = "<group>"; };
 		36AC4A0F11451D3300DE61E1 /* Annotation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Annotation.c; sourceTree = "<group>"; };
 		36AC4A1011451D3300DE61E1 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
 		36AC4A1111451D3300DE61E1 /* ArrayLayout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ArrayLayout.c; sourceTree = "<group>"; };
@@ -484,14 +586,10 @@
 		36AC4A4C11451D3300DE61E1 /* ASTUnarySelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTUnarySelector.h; sourceTree = "<group>"; };
 		36AC4A4D11451D3300DE61E1 /* ASTVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTVariable.c; sourceTree = "<group>"; };
 		36AC4A4E11451D3300DE61E1 /* ASTVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTVariable.h; sourceTree = "<group>"; };
-		36AC4A4F11451D3300DE61E1 /* ASTVisitor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ASTVisitor.c; sourceTree = "<group>"; };
-		36AC4A5011451D3300DE61E1 /* ASTVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTVisitor.h; sourceTree = "<group>"; };
 		36AC4A5111451D3300DE61E1 /* Block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		36AC4A5211451D3300DE61E1 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		36AC4A5311451D3300DE61E1 /* ByteString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ByteString.c; sourceTree = "<group>"; };
 		36AC4A5411451D3300DE61E1 /* ByteString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ByteString.h; sourceTree = "<group>"; };
-		36AC4A5511451D3300DE61E1 /* Callec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Callec.c; sourceTree = "<group>"; };
-		36AC4A5611451D3300DE61E1 /* Callec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Callec.h; sourceTree = "<group>"; };
 		36AC4A5711451D3300DE61E1 /* ClassReference.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassReference.c; sourceTree = "<group>"; };
 		36AC4A5811451D3300DE61E1 /* ClassReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassReference.h; sourceTree = "<group>"; };
 		36AC4A5911451D3300DE61E1 /* ClassScope.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassScope.c; sourceTree = "<group>"; };
@@ -504,8 +602,6 @@
 		36AC4A6011451D3300DE61E1 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		36AC4A6111451D3300DE61E1 /* Info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Info.c; sourceTree = "<group>"; };
 		36AC4A6211451D3300DE61E1 /* Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Info.h; sourceTree = "<group>"; };
-		36AC4A6311451D3300DE61E1 /* InstVariable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = InstVariable.c; sourceTree = "<group>"; };
-		36AC4A6411451D3300DE61E1 /* InstVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstVariable.h; sourceTree = "<group>"; };
 		36AC4A6511451D3300DE61E1 /* Interpreter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Interpreter.c; sourceTree = "<group>"; };
 		36AC4A6611451D3300DE61E1 /* Interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interpreter.h; sourceTree = "<group>"; };
 		36AC4A6711451D3300DE61E1 /* IntLayout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = IntLayout.c; sourceTree = "<group>"; };
@@ -522,22 +618,6 @@
 		36AC4A7211451D3300DE61E1 /* ObjectLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectLayout.h; sourceTree = "<group>"; };
 		36AC4A7311451D3300DE61E1 /* Package.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Package.c; sourceTree = "<group>"; };
 		36AC4A7411451D3300DE61E1 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
-		36AC4A7511451D3300DE61E1 /* PArrayTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PArrayTest.c; sourceTree = "<group>"; };
-		36AC4A7611451D3300DE61E1 /* PArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PArrayTest.h; sourceTree = "<group>"; };
-		36AC4A7711451D3300DE61E1 /* PBlockTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBlockTest.c; sourceTree = "<group>"; };
-		36AC4A7811451D3300DE61E1 /* PBlockTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBlockTest.h; sourceTree = "<group>"; };
-		36AC4A7911451D3300DE61E1 /* PBooleanTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBooleanTest.c; sourceTree = "<group>"; };
-		36AC4A7A11451D3300DE61E1 /* PBooleanTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBooleanTest.h; sourceTree = "<group>"; };
-		36AC4A7B11451D3300DE61E1 /* PCharacterTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PCharacterTest.c; sourceTree = "<group>"; };
-		36AC4A7C11451D3300DE61E1 /* PCharacterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCharacterTest.h; sourceTree = "<group>"; };
-		36AC4A7D11451D3300DE61E1 /* PCompiler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PCompiler.c; sourceTree = "<group>"; };
-		36AC4A7E11451D3300DE61E1 /* PCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCompiler.h; sourceTree = "<group>"; };
-		36AC4A7F11451D3300DE61E1 /* PCompilerTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PCompilerTest.c; sourceTree = "<group>"; };
-		36AC4A8011451D3300DE61E1 /* PCompilerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCompilerTest.h; sourceTree = "<group>"; };
-		36AC4A8111451D3300DE61E1 /* PFileTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PFileTest.c; sourceTree = "<group>"; };
-		36AC4A8211451D3300DE61E1 /* PFileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileTest.h; sourceTree = "<group>"; };
-		36AC4A8311451D3300DE61E1 /* PNilTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PNilTest.c; sourceTree = "<group>"; };
-		36AC4A8411451D3300DE61E1 /* PNilTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNilTest.h; sourceTree = "<group>"; };
 		36AC4A8511451D3300DE61E1 /* PObjectTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PObjectTest.c; sourceTree = "<group>"; };
 		36AC4A8611451D3300DE61E1 /* PObjectTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PObjectTest.h; sourceTree = "<group>"; };
 		36AC4A8711451D3300DE61E1 /* PSmallIntTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PSmallIntTest.c; sourceTree = "<group>"; };
@@ -546,8 +626,6 @@
 		36AC4A8A11451D3300DE61E1 /* PStringTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PStringTest.h; sourceTree = "<group>"; };
 		36AC4A8B11451D3300DE61E1 /* PSymbolTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PSymbolTest.c; sourceTree = "<group>"; };
 		36AC4A8C11451D3300DE61E1 /* PSymbolTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSymbolTest.h; sourceTree = "<group>"; };
-		36AC4A8D11451D3300DE61E1 /* PVisitorTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PVisitorTest.c; sourceTree = "<group>"; };
-		36AC4A8E11451D3300DE61E1 /* PVisitorTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PVisitorTest.h; sourceTree = "<group>"; };
 		36AC4A8F11451D3300DE61E1 /* ReadFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReadFile.c; sourceTree = "<group>"; };
 		36AC4A9011451D3300DE61E1 /* ReadFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadFile.h; sourceTree = "<group>"; };
 		36AC4A9111451D3300DE61E1 /* RootPackage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = RootPackage.c; sourceTree = "<group>"; };
@@ -564,8 +642,6 @@
 		36AC4A9C11451D3300DE61E1 /* SubScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubScope.h; sourceTree = "<group>"; };
 		36AC4A9D11451D3300DE61E1 /* Super.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Super.c; sourceTree = "<group>"; };
 		36AC4A9E11451D3300DE61E1 /* Super.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Super.h; sourceTree = "<group>"; };
-		36AC4A9F11451D3300DE61E1 /* VisitorTestWorld.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = VisitorTestWorld.c; sourceTree = "<group>"; };
-		36AC4AA011451D3300DE61E1 /* VisitorTestWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisitorTestWorld.h; sourceTree = "<group>"; };
 		36AC4AA111451D3300DE61E1 /* WideString.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = WideString.c; sourceTree = "<group>"; };
 		36AC4AA211451D3300DE61E1 /* WideString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WideString.h; sourceTree = "<group>"; };
 		36AC4AA311451D3300DE61E1 /* WordsLayout.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = WordsLayout.c; sourceTree = "<group>"; };
@@ -574,20 +650,6 @@
 		36AC4AA611451D3300DE61E1 /* WriteFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteFile.h; sourceTree = "<group>"; };
 		36AC4AA711451D3300DE61E1 /* WriteStream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = WriteStream.c; sourceTree = "<group>"; };
 		36AC4AA811451D3300DE61E1 /* WriteStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteStream.h; sourceTree = "<group>"; };
-		36AC4B0211451F3900DE61E1 /* PArrayTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PArrayTest.c; sourceTree = "<group>"; };
-		36AC4B0311451F3900DE61E1 /* PArrayTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PArrayTest.h; sourceTree = "<group>"; };
-		36AC4B0411451F3900DE61E1 /* PBlockTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBlockTest.c; sourceTree = "<group>"; };
-		36AC4B0511451F3900DE61E1 /* PBlockTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBlockTest.h; sourceTree = "<group>"; };
-		36AC4B0611451F3900DE61E1 /* PBooleanTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PBooleanTest.c; sourceTree = "<group>"; };
-		36AC4B0711451F3900DE61E1 /* PBooleanTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBooleanTest.h; sourceTree = "<group>"; };
-		36AC4B0811451F3900DE61E1 /* PCharacterTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PCharacterTest.c; sourceTree = "<group>"; };
-		36AC4B0911451F3900DE61E1 /* PCharacterTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCharacterTest.h; sourceTree = "<group>"; };
-		36AC4B0A11451F3900DE61E1 /* PCompilerTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PCompilerTest.c; sourceTree = "<group>"; };
-		36AC4B0B11451F3900DE61E1 /* PCompilerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCompilerTest.h; sourceTree = "<group>"; };
-		36AC4B0C11451F3900DE61E1 /* PFileTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PFileTest.c; sourceTree = "<group>"; };
-		36AC4B0D11451F3900DE61E1 /* PFileTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileTest.h; sourceTree = "<group>"; };
-		36AC4B0E11451F3900DE61E1 /* PNilTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PNilTest.c; sourceTree = "<group>"; };
-		36AC4B0F11451F3900DE61E1 /* PNilTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNilTest.h; sourceTree = "<group>"; };
 		36AC4B1011451F3900DE61E1 /* PObjectTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PObjectTest.c; sourceTree = "<group>"; };
 		36AC4B1111451F3900DE61E1 /* PObjectTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PObjectTest.h; sourceTree = "<group>"; };
 		36AC4B1211451F3900DE61E1 /* PSmallIntTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PSmallIntTest.c; sourceTree = "<group>"; };
@@ -598,7 +660,6 @@
 		36AC4B1711451F3900DE61E1 /* PSymbolTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSymbolTest.h; sourceTree = "<group>"; };
 		36AC4B2511451F6300DE61E1 /* Message.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Message.c; sourceTree = "<group>"; };
 		36AC4B2611451F6300DE61E1 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		36AC4B2711451F6300DE61E1 /* MessageTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = MessageTest.ci; sourceTree = "<group>"; };
 		36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PDictionaryTest.c; sourceTree = "<group>"; };
 		36AC4B52114528BC00DE61E1 /* PDictionaryTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDictionaryTest.h; sourceTree = "<group>"; };
 		36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PDictionaryTest.c; sourceTree = "<group>"; };
@@ -652,20 +713,6 @@
 			children = (
 				36AC4B51114528BC00DE61E1 /* PDictionaryTest.c */,
 				36AC4B52114528BC00DE61E1 /* PDictionaryTest.h */,
-				36AC4B0211451F3900DE61E1 /* PArrayTest.c */,
-				36AC4B0311451F3900DE61E1 /* PArrayTest.h */,
-				36AC4B0411451F3900DE61E1 /* PBlockTest.c */,
-				36AC4B0511451F3900DE61E1 /* PBlockTest.h */,
-				36AC4B0611451F3900DE61E1 /* PBooleanTest.c */,
-				36AC4B0711451F3900DE61E1 /* PBooleanTest.h */,
-				36AC4B0811451F3900DE61E1 /* PCharacterTest.c */,
-				36AC4B0911451F3900DE61E1 /* PCharacterTest.h */,
-				36AC4B0A11451F3900DE61E1 /* PCompilerTest.c */,
-				36AC4B0B11451F3900DE61E1 /* PCompilerTest.h */,
-				36AC4B0C11451F3900DE61E1 /* PFileTest.c */,
-				36AC4B0D11451F3900DE61E1 /* PFileTest.h */,
-				36AC4B0E11451F3900DE61E1 /* PNilTest.c */,
-				36AC4B0F11451F3900DE61E1 /* PNilTest.h */,
 				36AC4B1011451F3900DE61E1 /* PObjectTest.c */,
 				36AC4B1111451F3900DE61E1 /* PObjectTest.h */,
 				36AC4B1211451F3900DE61E1 /* PSmallIntTest.c */,
@@ -691,6 +738,92 @@
 		36061E5611235EE200FD4FCD /* class */ = {
 			isa = PBXGroup;
 			children = (
+				366600DE119AB9A000DE1938 /* SetBucket.c */,
+				366600DF119AB9A000DE1938 /* SetBucket.h */,
+				366600E0119AB9A000DE1938 /* Slot.c */,
+				366600E1119AB9A000DE1938 /* Slot.h */,
+				366600E2119AB9A000DE1938 /* SlotBuilder.c */,
+				366600E3119AB9A000DE1938 /* SlotBuilder.h */,
+				366600E4119AB9A000DE1938 /* StatefulArray.c */,
+				366600E5119AB9A000DE1938 /* StatefulArray.h */,
+				366600E6119AB9A000DE1938 /* StdInspector.c */,
+				366600E7119AB9A000DE1938 /* StdInspector.h */,
+				366600E8119AB9A000DE1938 /* SteppingInterpreter.c */,
+				366600E9119AB9A000DE1938 /* SteppingInterpreter.h */,
+				366600EA119AB9A000DE1938 /* STVisitor.c */,
+				366600EB119AB9A000DE1938 /* STVisitor.h */,
+				366600EC119AB9A000DE1938 /* Thread.c */,
+				366600ED119AB9A000DE1938 /* Thread.h */,
+				366600EE119AB9A000DE1938 /* UIntSlot.c */,
+				366600EF119AB9A000DE1938 /* UIntSlot.h */,
+				366600F0119AB9A000DE1938 /* UndefinedClassReference.c */,
+				366600F1119AB9A000DE1938 /* UndefinedClassReference.h */,
+				366600F2119AB9A000DE1938 /* VariablePlaceholder.c */,
+				366600F3119AB9A000DE1938 /* VariablePlaceholder.h */,
+				3666007E119AB97400DE1938 /* AbstractMethod.c */,
+				3666007F119AB97400DE1938 /* AbstractMethod.h */,
+				36660080119AB97400DE1938 /* AbstractSend.c */,
+				36660081119AB97400DE1938 /* AbstractSend.h */,
+				36660082119AB97400DE1938 /* AbstractSlot.c */,
+				36660083119AB97400DE1938 /* AbstractSlot.h */,
+				36660084119AB97400DE1938 /* Alias.c */,
+				36660085119AB97400DE1938 /* Alias.h */,
+				36660086119AB97400DE1938 /* AllocationAlias.c */,
+				36660087119AB97400DE1938 /* AllocationAlias.h */,
+				36660088119AB97400DE1938 /* AssertionFailure.c */,
+				36660089119AB97400DE1938 /* AssertionFailure.h */,
+				3666008A119AB97400DE1938 /* ASTFloat.c */,
+				3666008B119AB97400DE1938 /* ASTFloat.h */,
+				3666008C119AB97400DE1938 /* BlockContext.c */,
+				3666008D119AB97400DE1938 /* BlockContext.h */,
+				3666008E119AB97400DE1938 /* BuilderContext.c */,
+				3666008F119AB97400DE1938 /* BuilderContext.h */,
+				36660090119AB97400DE1938 /* ClassBuilder.c */,
+				36660091119AB97400DE1938 /* ClassBuilder.h */,
+				36660092119AB97400DE1938 /* Compiler.c */,
+				36660093119AB97400DE1938 /* Compiler.h */,
+				36660094119AB97400DE1938 /* Context.c */,
+				36660095119AB97400DE1938 /* Context.h */,
+				36660096119AB97400DE1938 /* Continuation.c */,
+				36660097119AB97400DE1938 /* Continuation.h */,
+				36660098119AB97400DE1938 /* Continue.c */,
+				36660099119AB97400DE1938 /* Continue.h */,
+				3666009A119AB97400DE1938 /* CreationAlias.c */,
+				3666009B119AB97400DE1938 /* CreationAlias.h */,
+				3666009C119AB97400DE1938 /* Debugger.c */,
+				3666009D119AB97400DE1938 /* Debugger.h */,
+				3666009E119AB97400DE1938 /* DictBucket.c */,
+				3666009F119AB97400DE1938 /* DictBucket.h */,
+				366600A0119AB97400DE1938 /* Exception.c */,
+				366600A1119AB97400DE1938 /* Exception.h */,
+				366600A2119AB97400DE1938 /* InlineCache.c */,
+				366600A3119AB97400DE1938 /* InlineCache.h */,
+				366600A4119AB97400DE1938 /* Inspector.c */,
+				366600A5119AB97400DE1938 /* Inspector.h */,
+				366600A6119AB97400DE1938 /* Link.c */,
+				366600A7119AB97400DE1938 /* Link.h */,
+				366600A8119AB97400DE1938 /* MainInterpreter.c */,
+				366600A9119AB97400DE1938 /* MainInterpreter.h */,
+				366600AA119AB97400DE1938 /* MethodBuilder.c */,
+				366600AB119AB97400DE1938 /* MethodBuilder.h */,
+				366600AC119AB97400DE1938 /* MethodContext.c */,
+				366600AD119AB97400DE1938 /* MethodContext.h */,
+				366600AE119AB97400DE1938 /* NativeMethod.c */,
+				366600AF119AB97400DE1938 /* NativeMethod.h */,
+				366600B0119AB97400DE1938 /* ParallelDebugger.c */,
+				366600B1119AB97400DE1938 /* ParallelDebugger.h */,
+				366600B2119AB97400DE1938 /* Plugin.c */,
+				366600B3119AB97400DE1938 /* Plugin.h */,
+				366600B4119AB97400DE1938 /* Process.c */,
+				366600B5119AB97400DE1938 /* Process.h */,
+				366600B6119AB97400DE1938 /* PSetTest.c */,
+				366600B7119AB97400DE1938 /* PSetTest.h */,
+				366600B8119AB97400DE1938 /* RecursiveDoesNotUnderstand.c */,
+				366600B9119AB97400DE1938 /* RecursiveDoesNotUnderstand.h */,
+				366600BA119AB97400DE1938 /* ReflectionMethod.c */,
+				366600BB119AB97400DE1938 /* ReflectionMethod.h */,
+				366600BC119AB97400DE1938 /* Scope.c */,
+				366600BD119AB97400DE1938 /* Scope.h */,
 				36AC4B5E114528E500DE61E1 /* PDictionaryTest.c */,
 				36AC4B5F114528E500DE61E1 /* PDictionaryTest.h */,
 				36AC4A0F11451D3300DE61E1 /* Annotation.c */,
@@ -757,14 +890,10 @@
 				36AC4A4C11451D3300DE61E1 /* ASTUnarySelector.h */,
 				36AC4A4D11451D3300DE61E1 /* ASTVariable.c */,
 				36AC4A4E11451D3300DE61E1 /* ASTVariable.h */,
-				36AC4A4F11451D3300DE61E1 /* ASTVisitor.c */,
-				36AC4A5011451D3300DE61E1 /* ASTVisitor.h */,
 				36AC4A5111451D3300DE61E1 /* Block.c */,
 				36AC4A5211451D3300DE61E1 /* Block.h */,
 				36AC4A5311451D3300DE61E1 /* ByteString.c */,
 				36AC4A5411451D3300DE61E1 /* ByteString.h */,
-				36AC4A5511451D3300DE61E1 /* Callec.c */,
-				36AC4A5611451D3300DE61E1 /* Callec.h */,
 				36AC4A5711451D3300DE61E1 /* ClassReference.c */,
 				36AC4A5811451D3300DE61E1 /* ClassReference.h */,
 				36AC4A5911451D3300DE61E1 /* ClassScope.c */,
@@ -777,8 +906,6 @@
 				36AC4A6011451D3300DE61E1 /* File.h */,
 				36AC4A6111451D3300DE61E1 /* Info.c */,
 				36AC4A6211451D3300DE61E1 /* Info.h */,
-				36AC4A6311451D3300DE61E1 /* InstVariable.c */,
-				36AC4A6411451D3300DE61E1 /* InstVariable.h */,
 				36AC4A6511451D3300DE61E1 /* Interpreter.c */,
 				36AC4A6611451D3300DE61E1 /* Interpreter.h */,
 				36AC4A6711451D3300DE61E1 /* IntLayout.c */,
@@ -795,22 +922,6 @@
 				36AC4A7211451D3300DE61E1 /* ObjectLayout.h */,
 				36AC4A7311451D3300DE61E1 /* Package.c */,
 				36AC4A7411451D3300DE61E1 /* Package.h */,
-				36AC4A7511451D3300DE61E1 /* PArrayTest.c */,
-				36AC4A7611451D3300DE61E1 /* PArrayTest.h */,
-				36AC4A7711451D3300DE61E1 /* PBlockTest.c */,
-				36AC4A7811451D3300DE61E1 /* PBlockTest.h */,
-				36AC4A7911451D3300DE61E1 /* PBooleanTest.c */,
-				36AC4A7A11451D3300DE61E1 /* PBooleanTest.h */,
-				36AC4A7B11451D3300DE61E1 /* PCharacterTest.c */,
-				36AC4A7C11451D3300DE61E1 /* PCharacterTest.h */,
-				36AC4A7D11451D3300DE61E1 /* PCompiler.c */,
-				36AC4A7E11451D3300DE61E1 /* PCompiler.h */,
-				36AC4A7F11451D3300DE61E1 /* PCompilerTest.c */,
-				36AC4A8011451D3300DE61E1 /* PCompilerTest.h */,
-				36AC4A8111451D3300DE61E1 /* PFileTest.c */,
-				36AC4A8211451D3300DE61E1 /* PFileTest.h */,
-				36AC4A8311451D3300DE61E1 /* PNilTest.c */,
-				36AC4A8411451D3300DE61E1 /* PNilTest.h */,
 				36AC4A8511451D3300DE61E1 /* PObjectTest.c */,
 				36AC4A8611451D3300DE61E1 /* PObjectTest.h */,
 				36AC4A8711451D3300DE61E1 /* PSmallIntTest.c */,
@@ -819,8 +930,6 @@
 				36AC4A8A11451D3300DE61E1 /* PStringTest.h */,
 				36AC4A8B11451D3300DE61E1 /* PSymbolTest.c */,
 				36AC4A8C11451D3300DE61E1 /* PSymbolTest.h */,
-				36AC4A8D11451D3300DE61E1 /* PVisitorTest.c */,
-				36AC4A8E11451D3300DE61E1 /* PVisitorTest.h */,
 				36AC4A8F11451D3300DE61E1 /* ReadFile.c */,
 				36AC4A9011451D3300DE61E1 /* ReadFile.h */,
 				36AC4A9111451D3300DE61E1 /* RootPackage.c */,
@@ -837,8 +946,6 @@
 				36AC4A9C11451D3300DE61E1 /* SubScope.h */,
 				36AC4A9D11451D3300DE61E1 /* Super.c */,
 				36AC4A9E11451D3300DE61E1 /* Super.h */,
-				36AC4A9F11451D3300DE61E1 /* VisitorTestWorld.c */,
-				36AC4AA011451D3300DE61E1 /* VisitorTestWorld.h */,
 				36AC4AA111451D3300DE61E1 /* WideString.c */,
 				36AC4AA211451D3300DE61E1 /* WideString.h */,
 				36AC4AA311451D3300DE61E1 /* WordsLayout.c */,
@@ -849,8 +956,6 @@
 				36AC4AA811451D3300DE61E1 /* WriteStream.h */,
 				36061E5711235EE200FD4FCD /* Array.c */,
 				36061E5811235EE200FD4FCD /* Array.h */,
-				36061E5A11235EE200FD4FCD /* ArrayedCollection.c */,
-				36061E5B11235EE200FD4FCD /* ArrayedCollection.h */,
 				36061E5D11235EE200FD4FCD /* ASTNode.c */,
 				36061E5E11235EE200FD4FCD /* ASTNode.h */,
 				36061E6011235EE200FD4FCD /* Behavior.c */,
@@ -859,12 +964,8 @@
 				36061E6411235EE200FD4FCD /* BlockClosure.h */,
 				36061E6611235EE200FD4FCD /* Boolean.c */,
 				36061E6711235EE200FD4FCD /* Boolean.h */,
-				36061E6911235EE200FD4FCD /* BridgeTest.c */,
-				36061E6A11235EE200FD4FCD /* BridgeTest.h */,
 				36061E6C11235EE200FD4FCD /* Character.c */,
 				36061E6D11235EE200FD4FCD /* Character.h */,
-				36061E6F11235EE200FD4FCD /* ChildClassTestClass.c */,
-				36061E7011235EE200FD4FCD /* ChildClassTestClass.h */,
 				36061E7211235EE200FD4FCD /* Class.c */,
 				36061E7311235EE200FD4FCD /* Class.h */,
 				36061E7511235EE200FD4FCD /* Collection.c */,
@@ -873,8 +974,6 @@
 				36061E7911235EE200FD4FCD /* Dictionary.h */,
 				36061E7B11235EE200FD4FCD /* False.c */,
 				36061E7C11235EE200FD4FCD /* False.h */,
-				36061E7E11235EE200FD4FCD /* InstanceVariable.c */,
-				36061E7F11235EE200FD4FCD /* InstanceVariable.h */,
 				36061E8111235EE200FD4FCD /* Message.c */,
 				36061E8211235EE200FD4FCD /* Message.h */,
 				36061E8411235EE200FD4FCD /* Metaclass.c */,
@@ -911,8 +1010,6 @@
 				36061EB211235EE200FD4FCD /* PEGSucceededOptionalResult.h */,
 				36061EB411235EE200FD4FCD /* PEGTerminal.c */,
 				36061EB511235EE200FD4FCD /* PEGTerminal.h */,
-				36061EB711235EE200FD4FCD /* PEGTest.c */,
-				36061EB811235EE200FD4FCD /* PEGTest.h */,
 				36061EBA11235EE200FD4FCD /* PEGZeroOrMoreExpression.c */,
 				36061EBB11235EE200FD4FCD /* PEGZeroOrMoreExpression.h */,
 				36061EBD11235EE200FD4FCD /* PexMatcher.c */,
@@ -923,8 +1020,6 @@
 				36061EC411235EE200FD4FCD /* PositionableStream.h */,
 				36061EC611235EE200FD4FCD /* ReadStream.c */,
 				36061EC711235EE200FD4FCD /* ReadStream.h */,
-				36061EC911235EE200FD4FCD /* RuntimeObject.c */,
-				36061ECA11235EE200FD4FCD /* RuntimeObject.h */,
 				36061ECC11235EE200FD4FCD /* SequenceableCollection.c */,
 				36061ECD11235EE200FD4FCD /* SequenceableCollection.h */,
 				36061ECF11235EE200FD4FCD /* Set.c */,
@@ -935,24 +1030,16 @@
 				36061ED611235EE200FD4FCD /* SmallInt.h */,
 				36061ED811235EE200FD4FCD /* SortedCollection.c */,
 				36061ED911235EE200FD4FCD /* SortedCollection.h */,
-				36061EDB11235EE200FD4FCD /* StandardTestClass.c */,
-				36061EDC11235EE200FD4FCD /* StandardTestClass.h */,
-				36061EDE11235EE200FD4FCD /* StandardVariableTestClass.c */,
-				36061EDF11235EE200FD4FCD /* StandardVariableTestClass.h */,
 				36061EE111235EE200FD4FCD /* Stream.c */,
 				36061EE211235EE200FD4FCD /* Stream.h */,
 				36061EE411235EE200FD4FCD /* String.c */,
 				36061EE511235EE200FD4FCD /* String.h */,
-				36061EE711235EE200FD4FCD /* SuperClassTestClass.c */,
-				36061EE811235EE200FD4FCD /* SuperClassTestClass.h */,
 				36061EEA11235EE200FD4FCD /* Symbol.c */,
 				36061EEB11235EE200FD4FCD /* Symbol.h */,
 				36061EED11235EE200FD4FCD /* TestCase.c */,
 				36061EEE11235EE200FD4FCD /* TestCase.h */,
 				36061EF011235EE200FD4FCD /* True.c */,
 				36061EF111235EE200FD4FCD /* True.h */,
-				36061EF311235EE200FD4FCD /* Type.c */,
-				36061EF411235EE200FD4FCD /* Type.h */,
 				36061EF611235EE200FD4FCD /* Variable.c */,
 				36061EF711235EE200FD4FCD /* Variable.h */,
 			);
@@ -962,6 +1049,8 @@
 		364E64B410C562DD00AD4616 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				36660101119AB9BB00DE1938 /* thread.c */,
+				36660102119AB9BB00DE1938 /* thread.h */,
 				36061E5511235EE200FD4FCD /* lib */,
 				364E64B510C562DD00AD4616 /* Makefile */,
 				364E65FB10C562DE00AD4616 /* pinocchio.c */,
@@ -984,6 +1073,7 @@
 		364E660310C562DE00AD4616 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				36660046119AB89200DE1938 /* collection */,
 				364E660410C562DE00AD4616 /* ast */,
 				364E663610C562DE00AD4616 /* io */,
 				364E663F10C562DE00AD4616 /* organization */,
@@ -996,26 +1086,29 @@
 		364E660410C562DE00AD4616 /* ast */ = {
 			isa = PBXGroup;
 			children = (
+				3666006A119AB90700DE1938 /* Annotation.c */,
+				3666006B119AB90700DE1938 /* Annotation.h */,
+				3666006C119AB90700DE1938 /* PointerSlot.c */,
+				3666006D119AB90700DE1938 /* PointerSlot.h */,
+				3666006E119AB90700DE1938 /* ReflectionMethod.c */,
+				3666006F119AB90700DE1938 /* ReflectionMethod.h */,
+				36660070119AB90700DE1938 /* Slot.c */,
+				36660071119AB90700DE1938 /* Slot.h */,
+				36660072119AB90700DE1938 /* UIntSlot.c */,
+				36660073119AB90700DE1938 /* UIntSlot.h */,
 				364E660510C562DE00AD4616 /* Assign.c */,
 				364E660610C562DE00AD4616 /* Assign.h */,
 				364E660910C562DE00AD4616 /* Block.c */,
 				364E660A10C562DE00AD4616 /* Block.h */,
-				364E660D10C562DE00AD4616 /* Callec.c */,
-				364E660E10C562DE00AD4616 /* Callec.h */,
-				364E661010C562DE00AD4616 /* CallecTest.ci */,
 				364E661110C562DE00AD4616 /* Constant.c */,
 				364E661210C562DE00AD4616 /* Constant.h */,
 				364E661610C562DE00AD4616 /* Info.c */,
 				364E661710C562DE00AD4616 /* Info.h */,
 				364E661910C562DE00AD4616 /* InfoTest.ci */,
-				364E661A10C562DE00AD4616 /* InstVariable.c */,
-				364E661B10C562DE00AD4616 /* InstVariable.h */,
-				364E661D10C562DE00AD4616 /* InstVariableTest.ci */,
 				364E661E10C562DE00AD4616 /* Method.c */,
 				364E661F10C562DE00AD4616 /* Method.h */,
 				364E662210C562DE00AD4616 /* NativeMethod.c */,
 				364E662310C562DE00AD4616 /* NativeMethod.h */,
-				364E662510C562DE00AD4616 /* NativeMethodTest.ci */,
 				364E662610C562DE00AD4616 /* Self.c */,
 				364E662710C562DE00AD4616 /* Self.h */,
 				364E662910C562DE00AD4616 /* SelfTest.ci */,
@@ -1038,10 +1131,6 @@
 				364E663810C562DE00AD4616 /* File.h */,
 				364E663910C562DE00AD4616 /* File.o */,
 				364E663A10C562DE00AD4616 /* FileTest.ci */,
-				364E663B10C562DE00AD4616 /* Stream.c */,
-				364E663C10C562DE00AD4616 /* Stream.h */,
-				364E663D10C562DE00AD4616 /* Stream.o */,
-				364E663E10C562DE00AD4616 /* StreamTest.ci */,
 			);
 			path = io;
 			sourceTree = "<group>";
@@ -1059,27 +1148,26 @@
 		364E664410C562DE00AD4616 /* runtime */ = {
 			isa = PBXGroup;
 			children = (
+				36660061119AB8F000DE1938 /* Context.c */,
+				36660062119AB8F000DE1938 /* Context.h */,
+				36660063119AB8F000DE1938 /* Continuation.c */,
+				36660064119AB8F000DE1938 /* Continuation.h */,
+				36660065119AB8F000DE1938 /* Exception.c */,
+				36660066119AB8F000DE1938 /* Exception.h */,
 				36AC4B2511451F6300DE61E1 /* Message.c */,
 				36AC4B2611451F6300DE61E1 /* Message.h */,
-				36AC4B2711451F6300DE61E1 /* MessageTest.ci */,
 				364E664510C562DE00AD4616 /* BlockClosure.c */,
 				364E664610C562DE00AD4616 /* BlockClosure.h */,
-				364E664810C562DE00AD4616 /* BlockClosureTest.ci */,
 				364E664910C562DE00AD4616 /* BlockContext.c */,
 				364E664A10C562DE00AD4616 /* BlockContext.h */,
 				364E664C10C562DE00AD4616 /* Continue.c */,
 				364E664D10C562DE00AD4616 /* Continue.h */,
-				364E664F10C562DE00AD4616 /* ContinueTest.ci */,
 				364E665110C562DE00AD4616 /* InlineCache.c */,
 				364E665210C562DE00AD4616 /* InlineCache.h */,
-				364E665410C562DE00AD4616 /* InlineCacheTest.ci */,
 				364E665510C562DE00AD4616 /* MethodClosure.c */,
 				364E665610C562DE00AD4616 /* MethodClosure.h */,
-				364E665810C562DE00AD4616 /* MethodClosureTest.ci */,
 				364E665910C562DE00AD4616 /* MethodContext.c */,
 				364E665A10C562DE00AD4616 /* MethodContext.h */,
-				364E665C10C562DE00AD4616 /* MethodContextTest.ci */,
-				364E665D10C562DE00AD4616 /* ThreadTest.ci */,
 			);
 			path = runtime;
 			sourceTree = "<group>";
@@ -1087,6 +1175,8 @@
 		364E665E10C562DE00AD4616 /* type */ = {
 			isa = PBXGroup;
 			children = (
+				36660079119AB93D00DE1938 /* Float.c */,
+				3666007A119AB93D00DE1938 /* Float.h */,
 				364E665F10C562DE00AD4616 /* Array.c */,
 				364E666010C562DE00AD4616 /* Array.h */,
 				364E666310C562DE00AD4616 /* Boolean.c */,
@@ -1098,8 +1188,6 @@
 				364E666F10C562DE00AD4616 /* Class.c */,
 				364E667010C562DE00AD4616 /* Class.h */,
 				364E667210C562DE00AD4616 /* ClassTest.ci */,
-				364E667310C562DE00AD4616 /* Dictionary.c */,
-				364E667410C562DE00AD4616 /* Dictionary.h */,
 				364E667710C562DE00AD4616 /* Instantiate.ci */,
 				364E667810C562DE00AD4616 /* Layout.c */,
 				364E667910C562DE00AD4616 /* Layout.h */,
@@ -1159,6 +1247,25 @@
 			path = ..;
 			sourceTree = SOURCE_ROOT;
 		};
+		36660046119AB89200DE1938 /* collection */ = {
+			isa = PBXGroup;
+			children = (
+				36660047119AB89200DE1938 /* .libs */,
+				3666004A119AB89300DE1938 /* DictBucket.c */,
+				3666004B119AB89300DE1938 /* DictBucket.h */,
+				3666004E119AB89300DE1938 /* Dictionary.c */,
+				3666004F119AB89300DE1938 /* Dictionary.h */,
+			);
+			path = collection;
+			sourceTree = "<group>";
+		};
+		36660047119AB89200DE1938 /* .libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = .libs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1204,10 +1311,8 @@
 			files = (
 				364E66A410C562DE00AD4616 /* Assign.c in Sources */,
 				364E66A710C562DE00AD4616 /* Block.c in Sources */,
-				364E66AA10C562DE00AD4616 /* Callec.c in Sources */,
 				364E66AD10C562DE00AD4616 /* Constant.c in Sources */,
 				364E66B110C562DE00AD4616 /* Info.c in Sources */,
-				364E66B410C562DE00AD4616 /* InstVariable.c in Sources */,
 				364E66B710C562DE00AD4616 /* Method.c in Sources */,
 				364E66BA10C562DE00AD4616 /* NativeMethod.c in Sources */,
 				364E66BD10C562DE00AD4616 /* Self.c in Sources */,
@@ -1275,7 +1380,6 @@
 				364E66EB10C562DE00AD4616 /* Character.c in Sources */,
 				364E66ED10C562DE00AD4616 /* CharacterTable.c in Sources */,
 				364E66F110C562DE00AD4616 /* Class.c in Sources */,
-				364E66F410C562DE00AD4616 /* Dictionary.c in Sources */,
 				364E66F810C562DE00AD4616 /* Layout.c in Sources */,
 				364E66FB10C562DE00AD4616 /* Nil.c in Sources */,
 				364E66FE10C562DE00AD4616 /* Object.c in Sources */,
@@ -1315,17 +1419,14 @@
 				36AC4AC611451D3300DE61E1 /* ASTUnaryMessageDefinition.c in Sources */,
 				36AC4AC711451D3300DE61E1 /* ASTUnarySelector.c in Sources */,
 				36AC4AC811451D3300DE61E1 /* ASTVariable.c in Sources */,
-				36AC4AC911451D3300DE61E1 /* ASTVisitor.c in Sources */,
 				36AC4ACA11451D3300DE61E1 /* Block.c in Sources */,
 				36AC4ACB11451D3300DE61E1 /* ByteString.c in Sources */,
-				36AC4ACC11451D3300DE61E1 /* Callec.c in Sources */,
 				36AC4ACD11451D3300DE61E1 /* ClassReference.c in Sources */,
 				36AC4ACE11451D3300DE61E1 /* ClassScope.c in Sources */,
 				36AC4ACF11451D3300DE61E1 /* Closure.c in Sources */,
 				36AC4AD011451D3300DE61E1 /* Constant.c in Sources */,
 				36AC4AD111451D3300DE61E1 /* File.c in Sources */,
 				36AC4AD211451D3300DE61E1 /* Info.c in Sources */,
-				36AC4AD311451D3300DE61E1 /* InstVariable.c in Sources */,
 				36AC4AD411451D3300DE61E1 /* Interpreter.c in Sources */,
 				36AC4AD511451D3300DE61E1 /* IntLayout.c in Sources */,
 				36AC4AD611451D3300DE61E1 /* Layout.c in Sources */,
@@ -1334,19 +1435,10 @@
 				36AC4AD911451D3300DE61E1 /* Node.c in Sources */,
 				36AC4ADA11451D3300DE61E1 /* ObjectLayout.c in Sources */,
 				36AC4ADB11451D3300DE61E1 /* Package.c in Sources */,
-				36AC4ADC11451D3300DE61E1 /* PArrayTest.c in Sources */,
-				36AC4ADD11451D3300DE61E1 /* PBlockTest.c in Sources */,
-				36AC4ADE11451D3300DE61E1 /* PBooleanTest.c in Sources */,
-				36AC4ADF11451D3300DE61E1 /* PCharacterTest.c in Sources */,
-				36AC4AE011451D3300DE61E1 /* PCompiler.c in Sources */,
-				36AC4AE111451D3300DE61E1 /* PCompilerTest.c in Sources */,
-				36AC4AE211451D3300DE61E1 /* PFileTest.c in Sources */,
-				36AC4AE311451D3300DE61E1 /* PNilTest.c in Sources */,
 				36AC4AE411451D3300DE61E1 /* PObjectTest.c in Sources */,
 				36AC4AE511451D3300DE61E1 /* PSmallIntTest.c in Sources */,
 				36AC4AE611451D3300DE61E1 /* PStringTest.c in Sources */,
 				36AC4AE711451D3300DE61E1 /* PSymbolTest.c in Sources */,
-				36AC4AE811451D3300DE61E1 /* PVisitorTest.c in Sources */,
 				36AC4AE911451D3300DE61E1 /* ReadFile.c in Sources */,
 				36AC4AEA11451D3300DE61E1 /* RootPackage.c in Sources */,
 				36AC4AEB11451D3300DE61E1 /* RootScope.c in Sources */,
@@ -1355,26 +1447,72 @@
 				36AC4AEE11451D3300DE61E1 /* Send.c in Sources */,
 				36AC4AEF11451D3300DE61E1 /* SubScope.c in Sources */,
 				36AC4AF011451D3300DE61E1 /* Super.c in Sources */,
-				36AC4AF111451D3300DE61E1 /* VisitorTestWorld.c in Sources */,
 				36AC4AF211451D3300DE61E1 /* WideString.c in Sources */,
 				36AC4AF311451D3300DE61E1 /* WordsLayout.c in Sources */,
 				36AC4AF411451D3300DE61E1 /* WriteFile.c in Sources */,
 				36AC4AF511451D3300DE61E1 /* WriteStream.c in Sources */,
-				36AC4B1811451F3900DE61E1 /* PArrayTest.c in Sources */,
-				36AC4B1911451F3900DE61E1 /* PBlockTest.c in Sources */,
-				36AC4B1A11451F3900DE61E1 /* PBooleanTest.c in Sources */,
-				36AC4B1B11451F3900DE61E1 /* PCharacterTest.c in Sources */,
-				36AC4B1C11451F3900DE61E1 /* PCompilerTest.c in Sources */,
-				36AC4B1D11451F3900DE61E1 /* PFileTest.c in Sources */,
-				36AC4B1E11451F3900DE61E1 /* PNilTest.c in Sources */,
 				36AC4B1F11451F3900DE61E1 /* PObjectTest.c in Sources */,
 				36AC4B2011451F3900DE61E1 /* PSmallIntTest.c in Sources */,
 				36AC4B2111451F3900DE61E1 /* PStringTest.c in Sources */,
 				36AC4B2211451F3900DE61E1 /* PSymbolTest.c in Sources */,
 				36AC4B2811451F6300DE61E1 /* Message.c in Sources */,
-				36AC4B2911451F6300DE61E1 /* MessageTest.ci in Sources */,
 				36AC4B53114528BC00DE61E1 /* PDictionaryTest.c in Sources */,
 				36AC4B60114528E500DE61E1 /* PDictionaryTest.c in Sources */,
+				36660054119AB89300DE1938 /* DictBucket.c in Sources */,
+				36660056119AB89300DE1938 /* Dictionary.c in Sources */,
+				36660067119AB8F000DE1938 /* Context.c in Sources */,
+				36660068119AB8F000DE1938 /* Continuation.c in Sources */,
+				36660069119AB8F000DE1938 /* Exception.c in Sources */,
+				36660074119AB90700DE1938 /* Annotation.c in Sources */,
+				36660075119AB90700DE1938 /* PointerSlot.c in Sources */,
+				36660076119AB90700DE1938 /* ReflectionMethod.c in Sources */,
+				36660077119AB90700DE1938 /* Slot.c in Sources */,
+				36660078119AB90700DE1938 /* UIntSlot.c in Sources */,
+				3666007B119AB93D00DE1938 /* Float.c in Sources */,
+				366600BE119AB97400DE1938 /* AbstractMethod.c in Sources */,
+				366600BF119AB97400DE1938 /* AbstractSend.c in Sources */,
+				366600C0119AB97400DE1938 /* AbstractSlot.c in Sources */,
+				366600C1119AB97400DE1938 /* Alias.c in Sources */,
+				366600C2119AB97400DE1938 /* AllocationAlias.c in Sources */,
+				366600C3119AB97400DE1938 /* AssertionFailure.c in Sources */,
+				366600C4119AB97400DE1938 /* ASTFloat.c in Sources */,
+				366600C5119AB97400DE1938 /* BlockContext.c in Sources */,
+				366600C6119AB97400DE1938 /* BuilderContext.c in Sources */,
+				366600C7119AB97400DE1938 /* ClassBuilder.c in Sources */,
+				366600C8119AB97400DE1938 /* Compiler.c in Sources */,
+				366600C9119AB97400DE1938 /* Context.c in Sources */,
+				366600CA119AB97400DE1938 /* Continuation.c in Sources */,
+				366600CB119AB97400DE1938 /* Continue.c in Sources */,
+				366600CC119AB97400DE1938 /* CreationAlias.c in Sources */,
+				366600CD119AB97400DE1938 /* Debugger.c in Sources */,
+				366600CE119AB97400DE1938 /* DictBucket.c in Sources */,
+				366600CF119AB97400DE1938 /* Exception.c in Sources */,
+				366600D0119AB97400DE1938 /* InlineCache.c in Sources */,
+				366600D1119AB97400DE1938 /* Inspector.c in Sources */,
+				366600D2119AB97400DE1938 /* Link.c in Sources */,
+				366600D3119AB97400DE1938 /* MainInterpreter.c in Sources */,
+				366600D4119AB97400DE1938 /* MethodBuilder.c in Sources */,
+				366600D5119AB97400DE1938 /* MethodContext.c in Sources */,
+				366600D6119AB97400DE1938 /* NativeMethod.c in Sources */,
+				366600D7119AB97400DE1938 /* ParallelDebugger.c in Sources */,
+				366600D8119AB97400DE1938 /* Plugin.c in Sources */,
+				366600D9119AB97400DE1938 /* Process.c in Sources */,
+				366600DA119AB97400DE1938 /* PSetTest.c in Sources */,
+				366600DB119AB97400DE1938 /* RecursiveDoesNotUnderstand.c in Sources */,
+				366600DC119AB97400DE1938 /* ReflectionMethod.c in Sources */,
+				366600DD119AB97400DE1938 /* Scope.c in Sources */,
+				366600F4119AB9A000DE1938 /* SetBucket.c in Sources */,
+				366600F5119AB9A000DE1938 /* Slot.c in Sources */,
+				366600F6119AB9A000DE1938 /* SlotBuilder.c in Sources */,
+				366600F7119AB9A000DE1938 /* StatefulArray.c in Sources */,
+				366600F8119AB9A000DE1938 /* StdInspector.c in Sources */,
+				366600F9119AB9A000DE1938 /* SteppingInterpreter.c in Sources */,
+				366600FA119AB9A000DE1938 /* STVisitor.c in Sources */,
+				366600FB119AB9A000DE1938 /* Thread.c in Sources */,
+				366600FC119AB9A000DE1938 /* UIntSlot.c in Sources */,
+				366600FD119AB9A000DE1938 /* UndefinedClassReference.c in Sources */,
+				366600FE119AB9A000DE1938 /* VariablePlaceholder.c in Sources */,
+				36660103119AB9BB00DE1938 /* thread.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1439,6 +1577,7 @@
 					"-DTEST",
 				);
 				PRODUCT_NAME = pinocchio;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 ppc ppc64 x86_64";
 			};
@@ -1449,6 +1588,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = "/usr/local/include/**";
@@ -1456,6 +1596,7 @@
 				LIBRARY_SEARCH_PATHS = "/usr/local/include/**";
 				OTHER_CFLAGS = "-DNOGC";
 				PRODUCT_NAME = pinocchio;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				USER_HEADER_SEARCH_PATHS = /usr/local/include/;
 			};
 			name = Release;
@@ -1582,7 +1723,7 @@
 					"-DASSERT_FAIL",
 				);
 				PRODUCT_NAME = pinocchio;
-				RUN_CLANG_STATIC_ANALYZER = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.6;
 				VALID_ARCHS = "i386 ppc ppc64 x86_64";
 			};

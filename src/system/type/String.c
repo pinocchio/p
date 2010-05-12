@@ -55,7 +55,7 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
 {
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
-    int len               = str1->size + str2->size + 1;
+    int len = str1->size + str2->size + 1;
     wchar_t conc[len];
     conc[len - 1] = L'\0';
     wchar_t * concatenated = &conc[0];

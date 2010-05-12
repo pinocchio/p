@@ -2,6 +2,8 @@
 
 require 'benchmark'
 
+# =============================================================================
+
 class Array
     def sum
         self.inject( nil ) { |sum,x| 
