@@ -4,5 +4,5 @@ fib
              ifFalse: [ (self - 1) fib + (self - 2) fib ].
 '.
 Interpreter.Interpreter interpret: [
-    IO.File stdout << 25 fib asString; lf.
+    IO.File stdout << 30 fib asString; lf.
 ]

@@ -8,4 +8,4 @@ Number extend [
     ]
 ]
 
-Transcript showCr: 25 fib printString.
+Transcript showCr: 30 fib printString.

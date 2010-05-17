@@ -20,4 +20,4 @@ class Fixnum
    end
 end
 
-puts 25.fib
+puts 30.fib
