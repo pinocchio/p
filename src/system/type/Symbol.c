@@ -86,9 +86,12 @@ NATIVE0(Type_Symbol_asArray)
 Number_SmallInt wchar_hash(const wchar_t * string, int size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
-    int hash = 5381;
+    unsigned int hash = 5381;
     while (size--) {
         hash += (hash << 5) + *string++;
+    }
+    if ((int)hash < 0) {
+        hash >>= 1;
     }
     return new_Number_SmallInt(hash);
 }

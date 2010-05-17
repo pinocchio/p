@@ -2,7 +2,7 @@ SHELL     = /bin/bash
 
 MAKEOPTS  = -j3
 OS        = $(shell uname)
-CC        = llvm-gcc
+CC        = gcc
 # ============================================================================
 CFILES    = $(wildcard */*.c)
 OFILES    = $(CFILES:%.c=%.o)
