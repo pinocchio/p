@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 #define COLLECTION_DICTIONARY_SIZE 4
-#define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"ratio", L"data"
+#define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"ratio", L"buckets"
 
 struct Collection_Dictionary_t {
     Number_SmallInt size;

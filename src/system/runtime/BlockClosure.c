@@ -84,15 +84,66 @@ static void start_eval(AST_Block block)
     push_EXP(block->body[0]);
 }
 
+static void CNT_AST_Block_inline_continue()
+{
+    AST_Block code = (AST_Block)peek_EXP(2); 
+    uns_int pc = (uns_int)peek_EXP(1);
+    Object exp = code->body[pc];
+    pc += 1;
+    
+    if (pc < code->size) {
+        poke_EXP(1, pc);
+        push_CNT(send_Eval);
+    } else { 
+        zapn_EXP(2);
+        poke_CNT(send_Eval);
+    }
+
+    poke_EXP(0, exp);
+}
+
+static void start_inline_eval(AST_Block block)
+{
+    if (1 < block->size) {
+        poke_EXP(0, block);
+        push_EXP(1);
+        push_CNT(AST_Block_inline_continue);
+        push_EXP(block->body[0]);
+    } else {
+        poke_EXP(0, block->body[0]);
+    }
+    push_CNT(send_Eval);
+}
+
+CNT(restore_pop_env)
+    set_env(peek_EXP(1));
+    Object result = pop_EXP();
+    poke_EXP(0, result);
+}
+
 void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 {
     AST_Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
-    
+
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(Nil);
         return; 
     }
+
+    /*
+    if (block->locals->size == 0 && argc == 0) {
+        Runtime_BlockContext env = current_env();
+        if (env != closure->context) {
+            poke_EXP(1, current_env());
+            push_CNT(restore_pop_env);
+            set_env(closure->context);
+        } else {
+            zap_EXP();
+        }
+        return start_inline_eval(block);
+    }
+    */
     
     set_env((Object)new_Runtime_BlockContext(closure));
     activation_from_native(argc);
