@@ -11,9 +11,9 @@ DECLARE_CLASS(AST_ReflectionMethod);
 
 /* ========================================================================= */
 
-AST_ReflectionMethod new_AST_ReflectionMethod_with(Type_Array params,
-                               Type_Array locals,
-                               Type_Array annotations,
+AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
+                               Collection_Array locals,
+                               Collection_Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_ReflectionMethod, Object[statementCount]);

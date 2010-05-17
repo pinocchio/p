@@ -1,7 +1,7 @@
 
 NEW_TEST(Type_Class_instanceOf)
-    Type_SmallInt int1 = new_Type_SmallInt(1);
-    assert0(isInstance((Object)int1, (Object)Type_SmallInt_Class));
+    Number_SmallInt int1 = new_Number_SmallInt(1);
+    assert0(isInstance((Object)int1, (Object)Number_SmallInt_Class));
     
     assert0(isInstance((Object)False, (Object)False_Class));
     assert0(isInstance((Object)False, (Object)Type_Boolean_Class));
@@ -27,7 +27,7 @@ NEW_TEST(Class_Hierarchy)
 
 /*
 NEW_TEST(Class_dnu)
-    Type_SmallInt int1 = new_Type_SmallInt(1);
+    Number_SmallInt int1 = new_Number_SmallInt(1);
     store_method(
     Type_Class_direct_dispatch(int1, HEADER(int1), SMB_bla, 0);
 }

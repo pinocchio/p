@@ -154,11 +154,11 @@ NATIVE(Runtime_BlockClosure_apply_)
 }
 
 NATIVE0(Runtime_BlockClosure_numArgs) 
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
+    RETURN_FROM_NATIVE(new_Number_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
 }
 
 NATIVE1(Runtime_BlockClosure_valueWithArguments_)
-    Type_Array args = (Type_Array)pop_EXP();
+    Collection_Array args = (Collection_Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
     int pos = 0;

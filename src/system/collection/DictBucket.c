@@ -12,7 +12,7 @@ Collection_DictBucket new_Collection_DictBucket_raw(uns_int size)
 {
     NEW_ARRAY_OBJECT(Collection_DictBucket, Object[size]);
     result->size  = size;
-    result->tally = new_Type_SmallInt(0);
+    result->tally = new_Number_SmallInt(0);
     return result;
 }
 
@@ -59,10 +59,10 @@ static void Bucket_grow(Collection_DictBucket * bucketp)
 
 int Bucket_quick_compare_key(Object inkey, Object dictkey)
 {
-    if (HEADER(inkey) == Type_SmallInt_Class) {
-        if (HEADER(dictkey) == Type_SmallInt_Class) {
-            return ((Type_SmallInt)inkey)->value ==
-                   ((Type_SmallInt)dictkey)->value;
+    if (HEADER(inkey) == Number_SmallInt_Class) {
+        if (HEADER(dictkey) == Number_SmallInt_Class) {
+            return ((Number_SmallInt)inkey)->value ==
+                   ((Number_SmallInt)dictkey)->value;
         }
         return 0;
     }
@@ -99,7 +99,7 @@ int Bucket_quick_store(Collection_DictBucket * bucketp, Object key,
     }
     bucket->values[tally]   = key;
     bucket->values[tally+1] = value;
-    bucket->tally           = new_Type_SmallInt(tally+2);
+    bucket->tally           = new_Number_SmallInt(tally+2);
     
     return 1;
 }
@@ -152,7 +152,7 @@ static void bucket_do_store(Collection_DictBucket bucket, uns_int idx,
 {
     Object value          = peek_EXP(3);
     bucket->values[idx+1] = value;
-    bucket->tally         = new_Type_SmallInt(idx+2);
+    bucket->tally         = new_Number_SmallInt(idx+2);
     zapn_EXP(3);
     poke_EXP(0, (Object)addition);
     zap_CNT();
@@ -202,7 +202,7 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
     if (tally == 0) {
         bucket->values[0] = key;
         bucket->values[1] = value;
-        bucket->tally     = new_Type_SmallInt(2);
+        bucket->tally     = new_Number_SmallInt(2);
         push_EXP((Object)1);
         return;
     }

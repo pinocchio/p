@@ -11,7 +11,7 @@
 
 struct IO_File_t {
     FILE *file;
-    Type_SmallInt   size;
+    Number_SmallInt   size;
     Type_String     path;
 };
 

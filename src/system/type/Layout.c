@@ -27,9 +27,9 @@ Object file_layout;
 
 /* ========================================================================= */
 
-Type_Array create_layout_with_vars(Type_Class layout, uns_int size)
+Collection_Array create_layout_with_vars(Type_Class layout, uns_int size)
 {
-    Type_Array result = NEW_ARRAYED(struct Type_Array_t, Object[size]);
+    Collection_Array result = NEW_ARRAYED(struct Collection_Array_t, Object[size]);
     HEADER(result) = layout;
     result->size   = size;
     return result;
@@ -67,18 +67,18 @@ void pre_init_Type_Layout()
     Type_BytesLayout_Class->layout     = empty_object_layout;
     Type_FileLayout_Class->layout      = empty_object_layout;
 
-    Type_SmallInt_Class->layout        = int_layout;
-    Type_Float_Class->layout           = float_layout;
+    Number_SmallInt_Class->layout        = int_layout;
+    Number_Float_Class->layout           = float_layout;
 }
 
 Object create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
-    Type_Array result = create_layout_with_vars(Type_ObjectLayout_Class, size);
+    Collection_Array result = create_layout_with_vars(Type_ObjectLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
         result->values[i] =
-            (Object)new_AST_Slot(i,
+            (Object)new_Slot_Slot(i,
                                          va_arg(args, wchar_t *));
     }
     va_end(args);
@@ -88,10 +88,10 @@ Object create_object_layout(uns_int size, va_list args)
 Object create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
-    Type_Array result = create_layout_with_vars(Type_ArrayLayout_Class, size);
+    Collection_Array result = create_layout_with_vars(Type_ArrayLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_AST_Slot(i, va_arg(args, wchar_t*));
+        result->values[i] = (Object)new_Slot_Slot(i, va_arg(args, wchar_t*));
     }
     va_end(args);
     return (Object)result;

@@ -31,7 +31,7 @@ Runtime_MethodClosure fName() {\
     method->info             = new_raw_AST_Info();\
     method->info->sourceFile = new_Type_String_from_charp(__FILE__);\
     method->info->name       = new_Type_String_from_charp(__FUNCTION__);\
-    method->info->line       = new_Type_SmallInt(__LINE__);\
+    method->info->line       = new_Number_SmallInt(__LINE__);\
     unsigned int _st_count   = 0;
 
 #define ADD_STATEMENT(value)\

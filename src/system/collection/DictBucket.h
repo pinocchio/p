@@ -10,7 +10,7 @@
 
 struct Collection_DictBucket_t {
     uns_int 		size;
-    Type_SmallInt 	tally;
+    Number_SmallInt 	tally;
     Object  	    values[];
 };
 

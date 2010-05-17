@@ -1,7 +1,7 @@
 
 NEW_TEST(thread_stress)
-    Object test      = (Object)new_AST_Constant((Object)new_Type_SmallInt(0));
-    Object add       = (Object)new_AST_Constant((Object)new_Type_SmallInt(1));
+    Object test      = (Object)new_AST_Constant((Object)new_Number_SmallInt(0));
+    Object add       = (Object)new_AST_Constant((Object)new_Number_SmallInt(1));
     
     // AST_Send send = new_AST_Send(test, (Object)SMB__plus, 0);
     AST_Send send    = new_AST_Send(test, (Object)SMB__plus, 1, add);

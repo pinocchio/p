@@ -2,14 +2,14 @@
 
 #include <system/type/Character.h>
 #include <system/type/String.h>
-#include <system/type/Array.h>
+#include <system/collection/Array.h>
 #include <system/runtime/Context.h>
 #include <system/runtime/MethodContext.h>
 #include <system/runtime/BlockContext.h>
 #include <system/collection/Dictionary.h>
 #include <system/type/Class.h>
 #include <system/type/Object.h>
-#include <system/type/SmallInt.h>
+#include <system/number/SmallInt.h>
 #include <system/type/Boolean.h>
 #include <system/type/Symbol.h>
 
@@ -34,12 +34,12 @@
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
 #include <system/type/Layout.h>
-#include <system/ast/Slot.h>
-#include <system/ast/UIntSlot.h>
+#include <system/slot/Slot.h>
+#include <system/slot/UIntSlot.h>
 #include <system/organization/ClassReference.h>
 #include <system/runtime/InlineCache.h>
 
 #include <system/runtime/Message.h>
-#include <system/type/Float.h>
+#include <system/number/Float.h>
 #include <system/collection/DictBucket.h>
-#include <system/ast/PointerSlot.h>
+#include <system/slot/PointerSlot.h>

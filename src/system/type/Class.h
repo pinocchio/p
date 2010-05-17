@@ -59,7 +59,7 @@ extern void Type_Class_direct_dispatch(Object receiver, Type_Class class,
 extern void Type_Class_direct_dispatch_withArguments(Object receiver,
                                                      Type_Class class,
                                                      Object msg,
-                                                     Type_Array args);
+                                                     Collection_Array args);
 
 extern void Type_Class_set_superclass(Type_Class cls, Type_Class super);
 

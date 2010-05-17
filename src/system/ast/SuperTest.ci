@@ -1,7 +1,7 @@
 
 NEW_TEST(ast_super)
-    Type_SmallInt integer       = new_Type_SmallInt(70);
-    Type_SmallInt integer7      = new_Type_SmallInt(7);
+    Number_SmallInt integer       = new_Number_SmallInt(70);
+    Number_SmallInt integer7      = new_Number_SmallInt(7);
     AST_Constant integer_const  = new_AST_Constant((Object)integer);
     AST_Constant integer7_const = new_AST_Constant((Object)integer7);
     

@@ -73,9 +73,9 @@ void _push_CNT(cont e)
 
 /* ========================================================================= */
 
-Type_Array get_args(int argc, const char ** argv)
+Collection_Array get_args(int argc, const char ** argv)
 {
-    Type_Array args = new_Type_Array_raw(argc - 1);
+    Collection_Array args = new_Collection_Array_raw(argc - 1);
     int i;
     argv++;
     for (i = 1; i < argc; i++) {
@@ -109,7 +109,7 @@ void * pinocchio_main_thread(void * argc)
     run_tests();
     // run_FibTest();
 #else // TEST
-    Type_Array args = get_args((int)(uns_int)argc, cargv);
+    Collection_Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1(Interpretation_MainInterpreter_Class, SMB_main_, (Object)args);
 #endif // TEST
 

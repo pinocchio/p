@@ -21,7 +21,7 @@ extern AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...);
 
 /* ========================================================================= */
 
-extern AST_Annotation lookup_annotation(Type_Array annotations,
+extern AST_Annotation lookup_annotation(Collection_Array annotations,
                                         Object selector);
 
 /* ========================================================================= */

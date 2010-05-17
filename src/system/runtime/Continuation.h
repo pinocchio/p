@@ -10,8 +10,8 @@
     L"expStack", L"cntStack", L"interpreterStack", L"context"
 
 struct Runtime_Continuation_t {
-    Type_Array  exp_stack;
-    Type_Array  cnt_stack;
+    Collection_Array  exp_stack;
+    Collection_Array  cnt_stack;
     Object      iss;
     Object      env;
 };

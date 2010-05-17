@@ -52,7 +52,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
 
 
 NATIVE1(Runtime_MethodClosure_valueWithArguments_)
-    Type_Array args = (Type_Array)pop_EXP();
+    Collection_Array args = (Collection_Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
     
     int pos = args->size;

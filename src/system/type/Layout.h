@@ -37,10 +37,10 @@ extern Object file_layout;
     assert0(TAG_IS_LAYOUT(tag, layout));
 
 #define TAG_SIZE(tag)\
-    (((Type_Array)tag)->size)
+    (((Collection_Array)tag)->size)
 
 #define TAG_VAR(tag, index)\
-    (((Type_Array)tag)->values[index])
+    (((Collection_Array)tag)->values[index])
 
 #define ASSERT_TAG_SIZE(tag, size)\
     assert(0 <= size, printf("Invalid tag size: %i\n", (int)size));\
@@ -63,7 +63,7 @@ void post_init_Type_Layout();
 /* ========================================================================= */
 
 extern Object create_layout(uns_int size, Type_Tag tag, ...);
-extern Type_Array create_layout_with_vars(Type_Class layout, uns_int size);
+extern Collection_Array create_layout_with_vars(Type_Class layout, uns_int size);
 
 /* ========================================================================= */
 

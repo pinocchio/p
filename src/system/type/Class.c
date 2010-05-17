@@ -32,7 +32,7 @@ Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaT
 {    
     Type_Class metaclass = (Type_Class)instantiate(Metaclass);
     ASSERT_TAG_LAYOUT(metaType, Object);
-    assert0(((Type_Array)metaType)->size >= 3); // we need at least place for
+    assert0(((Collection_Array)metaType)->size >= 3); // we need at least place for
                                                // methods, super and layout.  
 
     metaclass->layout    = metaType;
@@ -135,7 +135,7 @@ static CNT(Class_lookup_cache_invoke)
     }
     zapn_EXP(5);
     AST_Send send       = (AST_Send)peek_EXP(argc + 1);
-    Type_Array cache    = send->cache;
+    Collection_Array cache    = send->cache;
     Runtime_InlineCache_store(cache, (Object)class, method);
     
     Method_invoke(method, self, argc);
@@ -262,7 +262,7 @@ void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
 }
 
 void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
-                                              Object msg, Type_Array args)
+                                              Object msg, Collection_Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     int idx;
@@ -287,7 +287,7 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
 void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 {
     AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
-    Type_Array cache    = send->cache;
+    Collection_Array cache    = send->cache;
     Object msg          = send->message;
     assert0(msg != Nil);
 

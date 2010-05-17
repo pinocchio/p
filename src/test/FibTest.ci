@@ -4,12 +4,12 @@ METHOD(fib_method, 0, 0, 1)
     AST_Send test = new_AST_Send(Self, (Object)SMB__lt, 
                                  1,
                                  (Object)new_AST_Constant(
-                                             (Object)new_Type_SmallInt(2)));
+                                             (Object)new_Number_SmallInt(2)));
                                     
     
     AST_Block break_code = new_AST_Block(0, 0, 1, 1,
                                          (Object)new_AST_Constant(
-                                             (Object)new_Type_SmallInt(1)));
+                                             (Object)new_Number_SmallInt(1)));
     
     AST_Send return_send = new_AST_Send(
             (Object)new_AST_Send(
@@ -18,7 +18,7 @@ METHOD(fib_method, 0, 0, 1)
                     (Object)SMB__minus, 
                     1, 
                     (Object)new_AST_Constant(
-                                (Object)new_Type_SmallInt(1))),
+                                (Object)new_Number_SmallInt(1))),
                 (Object)SMB_fib,
                 0),
             (Object)SMB__plus, 
@@ -29,7 +29,7 @@ METHOD(fib_method, 0, 0, 1)
                     (Object)SMB__minus, 
                     1, 
                     (Object)new_AST_Constant(
-                    (Object)new_Type_SmallInt(2))),
+                    (Object)new_Number_SmallInt(2))),
                 (Object)SMB_fib,
                 0));
                 
@@ -53,16 +53,16 @@ int cfib (int a) {
 void run_FibTest() 
 {
     SMB_fib = new_Type_Symbol(L"fib");
-    store_method(Type_SmallInt_Class, SMB_fib, fib_method());
+    store_method(Number_SmallInt_Class, SMB_fib, fib_method());
     Object result;
     
     int i = 30;
     //scanf("%i", &i);
     result = (Object)Eval(
                 (Object)new_AST_Send(
-                    (Object)new_AST_Constant((Object)new_Type_SmallInt(i)), 
+                    (Object)new_AST_Constant((Object)new_Number_SmallInt(i)), 
                     (Object)SMB_fib, 0));
-    assert0(((Type_SmallInt)result)->value == cfib(i));
-    printf("%i\n", ((Type_SmallInt)result)->value);
+    assert0(((Number_SmallInt)result)->value == cfib(i));
+    printf("%i\n", ((Number_SmallInt)result)->value);
 
 }

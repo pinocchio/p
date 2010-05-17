@@ -13,13 +13,13 @@
 #include <system/runtime/ThreadTest.ci>
 #include <system/type/ClassTest.ci>
 #include <system/type/ObjectTest.ci>
-#include <system/type/SmallIntTest.ci>
+#include <system/number/SmallIntTest.ci>
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/BlockClosureTest.ci>
 #include <system/ast/InfoTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
-#include <system/ast/SlotTest.ci>
+#include <system/slot/SlotTest.ci>
 
 /* ========================================================================= */
 
@@ -93,7 +93,7 @@ test_Type_Class();
 test_IO_File();
 test_Type_Object();
 test_AST_Self();
-test_Type_SmallInt();
+test_Number_SmallInt();
 test_Type_String();
 test_AST_Super();
 test_Type_Symbol();

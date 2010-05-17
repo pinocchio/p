@@ -53,6 +53,13 @@
 		36061F6611235EE200FD4FCD /* Variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF611235EE200FD4FCD /* Variable.c */; };
 		36061F6811235EE200FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061EF911235EE200FD4FCD /* lib.c */; };
 		36061F6A11235EEB00FD4FCD /* lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 36061E4B11235ED800FD4FCD /* lib.c */; };
+		3643A4D7119AF98900B17165 /* Float.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4CB119AF98900B17165 /* Float.c */; };
+		3643A4D8119AF98900B17165 /* SmallInt.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4CD119AF98900B17165 /* SmallInt.c */; };
+		3643A4D9119AF98900B17165 /* SmallIntTest.ci in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4CF119AF98900B17165 /* SmallIntTest.ci */; };
+		3643A4DA119AF98900B17165 /* PointerSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4D1119AF98900B17165 /* PointerSlot.c */; };
+		3643A4DB119AF98900B17165 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4D3119AF98900B17165 /* Slot.c */; };
+		3643A4DC119AF98900B17165 /* UIntSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4D5119AF98900B17165 /* UIntSlot.c */; };
+		3643A4DF119AF99000B17165 /* Array.c in Sources */ = {isa = PBXBuildFile; fileRef = 3643A4DD119AF99000B17165 /* Array.c */; };
 		364E66A010C562DE00AD4616 /* pinocchio.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E65FB10C562DE00AD4616 /* pinocchio.c */; };
 		364E66A410C562DE00AD4616 /* Assign.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660510C562DE00AD4616 /* Assign.c */; };
 		364E66A710C562DE00AD4616 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E660910C562DE00AD4616 /* Block.c */; };
@@ -71,7 +78,6 @@
 		364E66DB10C562DE00AD4616 /* InlineCache.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E665110C562DE00AD4616 /* InlineCache.c */; };
 		364E66DE10C562DE00AD4616 /* MethodClosure.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E665510C562DE00AD4616 /* MethodClosure.c */; };
 		364E66E110C562DE00AD4616 /* MethodContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E665910C562DE00AD4616 /* MethodContext.c */; };
-		364E66E510C562DE00AD4616 /* Array.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E665F10C562DE00AD4616 /* Array.c */; };
 		364E66E810C562DE00AD4616 /* Boolean.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666310C562DE00AD4616 /* Boolean.c */; };
 		364E66EB10C562DE00AD4616 /* Character.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666710C562DE00AD4616 /* Character.c */; };
 		364E66ED10C562DE00AD4616 /* CharacterTable.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E666A10C562DE00AD4616 /* CharacterTable.c */; };
@@ -79,7 +85,6 @@
 		364E66F810C562DE00AD4616 /* Layout.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E667810C562DE00AD4616 /* Layout.c */; };
 		364E66FB10C562DE00AD4616 /* Nil.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E667C10C562DE00AD4616 /* Nil.c */; };
 		364E66FE10C562DE00AD4616 /* Object.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668010C562DE00AD4616 /* Object.c */; };
-		364E670110C562DE00AD4616 /* SmallInt.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668410C562DE00AD4616 /* SmallInt.c */; };
 		364E670410C562DE00AD4616 /* String.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668810C562DE00AD4616 /* String.c */; };
 		364E670710C562DE00AD4616 /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668C10C562DE00AD4616 /* Symbol.c */; };
 		364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E669610C562DE00AD4616 /* pinocchioTest.c */; };
@@ -90,11 +95,7 @@
 		36660068119AB8F000DE1938 /* Continuation.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660063119AB8F000DE1938 /* Continuation.c */; };
 		36660069119AB8F000DE1938 /* Exception.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660065119AB8F000DE1938 /* Exception.c */; };
 		36660074119AB90700DE1938 /* Annotation.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006A119AB90700DE1938 /* Annotation.c */; };
-		36660075119AB90700DE1938 /* PointerSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006C119AB90700DE1938 /* PointerSlot.c */; };
 		36660076119AB90700DE1938 /* ReflectionMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666006E119AB90700DE1938 /* ReflectionMethod.c */; };
-		36660077119AB90700DE1938 /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660070119AB90700DE1938 /* Slot.c */; };
-		36660078119AB90700DE1938 /* UIntSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660072119AB90700DE1938 /* UIntSlot.c */; };
-		3666007B119AB93D00DE1938 /* Float.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660079119AB93D00DE1938 /* Float.c */; };
 		366600BE119AB97400DE1938 /* AbstractMethod.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666007E119AB97400DE1938 /* AbstractMethod.c */; };
 		366600BF119AB97400DE1938 /* AbstractSend.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660080119AB97400DE1938 /* AbstractSend.c */; };
 		366600C0119AB97400DE1938 /* AbstractSlot.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660082119AB97400DE1938 /* AbstractSlot.c */; };
@@ -318,6 +319,19 @@
 		36061EF711235EE200FD4FCD /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
 		36061EF911235EE200FD4FCD /* lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lib.c; sourceTree = "<group>"; };
 		36061EFA11235EE200FD4FCD /* lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lib.h; sourceTree = "<group>"; };
+		3643A4CB119AF98900B17165 /* Float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Float.c; sourceTree = "<group>"; };
+		3643A4CC119AF98900B17165 /* Float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Float.h; sourceTree = "<group>"; };
+		3643A4CD119AF98900B17165 /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
+		3643A4CE119AF98900B17165 /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
+		3643A4CF119AF98900B17165 /* SmallIntTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SmallIntTest.ci; sourceTree = "<group>"; };
+		3643A4D1119AF98900B17165 /* PointerSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointerSlot.c; sourceTree = "<group>"; };
+		3643A4D2119AF98900B17165 /* PointerSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointerSlot.h; sourceTree = "<group>"; };
+		3643A4D3119AF98900B17165 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
+		3643A4D4119AF98900B17165 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
+		3643A4D5119AF98900B17165 /* UIntSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIntSlot.c; sourceTree = "<group>"; };
+		3643A4D6119AF98900B17165 /* UIntSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIntSlot.h; sourceTree = "<group>"; };
+		3643A4DD119AF99000B17165 /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
+		3643A4DE119AF99000B17165 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
 		364E64B510C562DD00AD4616 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		364E65FB10C562DE00AD4616 /* pinocchio.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinocchio.c; sourceTree = "<group>"; };
 		364E65FC10C562DE00AD4616 /* pinocchio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinocchio.h; sourceTree = "<group>"; };
@@ -353,7 +367,6 @@
 		364E663510C562DE00AD4616 /* VariableTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VariableTest.ci; sourceTree = "<group>"; };
 		364E663710C562DE00AD4616 /* File.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = File.c; sourceTree = "<group>"; };
 		364E663810C562DE00AD4616 /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
-		364E663910C562DE00AD4616 /* File.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = File.o; sourceTree = "<group>"; };
 		364E663A10C562DE00AD4616 /* FileTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FileTest.ci; sourceTree = "<group>"; };
 		364E664010C562DE00AD4616 /* ClassReference.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ClassReference.c; sourceTree = "<group>"; };
 		364E664110C562DE00AD4616 /* ClassReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassReference.h; sourceTree = "<group>"; };
@@ -370,8 +383,6 @@
 		364E665610C562DE00AD4616 /* MethodClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodClosure.h; sourceTree = "<group>"; };
 		364E665910C562DE00AD4616 /* MethodContext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MethodContext.c; sourceTree = "<group>"; };
 		364E665A10C562DE00AD4616 /* MethodContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MethodContext.h; sourceTree = "<group>"; };
-		364E665F10C562DE00AD4616 /* Array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Array.c; sourceTree = "<group>"; };
-		364E666010C562DE00AD4616 /* Array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Array.h; sourceTree = "<group>"; };
 		364E666310C562DE00AD4616 /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
 		364E666410C562DE00AD4616 /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
 		364E666710C562DE00AD4616 /* Character.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Character.c; sourceTree = "<group>"; };
@@ -390,9 +401,6 @@
 		364E668010C562DE00AD4616 /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
 		364E668110C562DE00AD4616 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		364E668310C562DE00AD4616 /* ObjectTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ObjectTest.ci; sourceTree = "<group>"; };
-		364E668410C562DE00AD4616 /* SmallInt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SmallInt.c; sourceTree = "<group>"; };
-		364E668510C562DE00AD4616 /* SmallInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmallInt.h; sourceTree = "<group>"; };
-		364E668710C562DE00AD4616 /* SmallIntTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = SmallIntTest.ci; sourceTree = "<group>"; };
 		364E668810C562DE00AD4616 /* String.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = String.c; sourceTree = "<group>"; };
 		364E668910C562DE00AD4616 /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = String.h; sourceTree = "<group>"; };
 		364E668B10C562DE00AD4616 /* StringTest.ci */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = StringTest.ci; sourceTree = "<group>"; };
@@ -424,16 +432,8 @@
 		36660066119AB8F000DE1938 /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		3666006A119AB90700DE1938 /* Annotation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Annotation.c; sourceTree = "<group>"; };
 		3666006B119AB90700DE1938 /* Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Annotation.h; sourceTree = "<group>"; };
-		3666006C119AB90700DE1938 /* PointerSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = PointerSlot.c; sourceTree = "<group>"; };
-		3666006D119AB90700DE1938 /* PointerSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointerSlot.h; sourceTree = "<group>"; };
 		3666006E119AB90700DE1938 /* ReflectionMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ReflectionMethod.c; sourceTree = "<group>"; };
 		3666006F119AB90700DE1938 /* ReflectionMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionMethod.h; sourceTree = "<group>"; };
-		36660070119AB90700DE1938 /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Slot.c; sourceTree = "<group>"; };
-		36660071119AB90700DE1938 /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slot.h; sourceTree = "<group>"; };
-		36660072119AB90700DE1938 /* UIntSlot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UIntSlot.c; sourceTree = "<group>"; };
-		36660073119AB90700DE1938 /* UIntSlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIntSlot.h; sourceTree = "<group>"; };
-		36660079119AB93D00DE1938 /* Float.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Float.c; sourceTree = "<group>"; };
-		3666007A119AB93D00DE1938 /* Float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Float.h; sourceTree = "<group>"; };
 		3666007E119AB97400DE1938 /* AbstractMethod.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AbstractMethod.c; sourceTree = "<group>"; };
 		3666007F119AB97400DE1938 /* AbstractMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractMethod.h; sourceTree = "<group>"; };
 		36660080119AB97400DE1938 /* AbstractSend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AbstractSend.c; sourceTree = "<group>"; };
@@ -1046,6 +1046,31 @@
 			path = class;
 			sourceTree = "<group>";
 		};
+		3643A4CA119AF98900B17165 /* number */ = {
+			isa = PBXGroup;
+			children = (
+				3643A4CB119AF98900B17165 /* Float.c */,
+				3643A4CC119AF98900B17165 /* Float.h */,
+				3643A4CD119AF98900B17165 /* SmallInt.c */,
+				3643A4CE119AF98900B17165 /* SmallInt.h */,
+				3643A4CF119AF98900B17165 /* SmallIntTest.ci */,
+			);
+			path = number;
+			sourceTree = "<group>";
+		};
+		3643A4D0119AF98900B17165 /* slot */ = {
+			isa = PBXGroup;
+			children = (
+				3643A4D1119AF98900B17165 /* PointerSlot.c */,
+				3643A4D2119AF98900B17165 /* PointerSlot.h */,
+				3643A4D3119AF98900B17165 /* Slot.c */,
+				3643A4D4119AF98900B17165 /* Slot.h */,
+				3643A4D5119AF98900B17165 /* UIntSlot.c */,
+				3643A4D6119AF98900B17165 /* UIntSlot.h */,
+			);
+			path = slot;
+			sourceTree = "<group>";
+		};
 		364E64B410C562DD00AD4616 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,6 +1098,8 @@
 		364E660310C562DE00AD4616 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				3643A4CA119AF98900B17165 /* number */,
+				3643A4D0119AF98900B17165 /* slot */,
 				36660046119AB89200DE1938 /* collection */,
 				364E660410C562DE00AD4616 /* ast */,
 				364E663610C562DE00AD4616 /* io */,
@@ -1088,14 +1115,8 @@
 			children = (
 				3666006A119AB90700DE1938 /* Annotation.c */,
 				3666006B119AB90700DE1938 /* Annotation.h */,
-				3666006C119AB90700DE1938 /* PointerSlot.c */,
-				3666006D119AB90700DE1938 /* PointerSlot.h */,
 				3666006E119AB90700DE1938 /* ReflectionMethod.c */,
 				3666006F119AB90700DE1938 /* ReflectionMethod.h */,
-				36660070119AB90700DE1938 /* Slot.c */,
-				36660071119AB90700DE1938 /* Slot.h */,
-				36660072119AB90700DE1938 /* UIntSlot.c */,
-				36660073119AB90700DE1938 /* UIntSlot.h */,
 				364E660510C562DE00AD4616 /* Assign.c */,
 				364E660610C562DE00AD4616 /* Assign.h */,
 				364E660910C562DE00AD4616 /* Block.c */,
@@ -1129,7 +1150,6 @@
 			children = (
 				364E663710C562DE00AD4616 /* File.c */,
 				364E663810C562DE00AD4616 /* File.h */,
-				364E663910C562DE00AD4616 /* File.o */,
 				364E663A10C562DE00AD4616 /* FileTest.ci */,
 			);
 			path = io;
@@ -1175,10 +1195,6 @@
 		364E665E10C562DE00AD4616 /* type */ = {
 			isa = PBXGroup;
 			children = (
-				36660079119AB93D00DE1938 /* Float.c */,
-				3666007A119AB93D00DE1938 /* Float.h */,
-				364E665F10C562DE00AD4616 /* Array.c */,
-				364E666010C562DE00AD4616 /* Array.h */,
 				364E666310C562DE00AD4616 /* Boolean.c */,
 				364E666410C562DE00AD4616 /* Boolean.h */,
 				364E666710C562DE00AD4616 /* Character.c */,
@@ -1197,9 +1213,6 @@
 				364E668010C562DE00AD4616 /* Object.c */,
 				364E668110C562DE00AD4616 /* Object.h */,
 				364E668310C562DE00AD4616 /* ObjectTest.ci */,
-				364E668410C562DE00AD4616 /* SmallInt.c */,
-				364E668510C562DE00AD4616 /* SmallInt.h */,
-				364E668710C562DE00AD4616 /* SmallIntTest.ci */,
 				364E668810C562DE00AD4616 /* String.c */,
 				364E668910C562DE00AD4616 /* String.h */,
 				364E668B10C562DE00AD4616 /* StringTest.ci */,
@@ -1250,6 +1263,8 @@
 		36660046119AB89200DE1938 /* collection */ = {
 			isa = PBXGroup;
 			children = (
+				3643A4DD119AF99000B17165 /* Array.c */,
+				3643A4DE119AF99000B17165 /* Array.h */,
 				36660047119AB89200DE1938 /* .libs */,
 				3666004A119AB89300DE1938 /* DictBucket.c */,
 				3666004B119AB89300DE1938 /* DictBucket.h */,
@@ -1375,7 +1390,6 @@
 				36061F6A11235EEB00FD4FCD /* lib.c in Sources */,
 				364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */,
 				364E66C910C562DE00AD4616 /* File.c in Sources */,
-				364E66E510C562DE00AD4616 /* Array.c in Sources */,
 				364E66E810C562DE00AD4616 /* Boolean.c in Sources */,
 				364E66EB10C562DE00AD4616 /* Character.c in Sources */,
 				364E66ED10C562DE00AD4616 /* CharacterTable.c in Sources */,
@@ -1383,7 +1397,6 @@
 				364E66F810C562DE00AD4616 /* Layout.c in Sources */,
 				364E66FB10C562DE00AD4616 /* Nil.c in Sources */,
 				364E66FE10C562DE00AD4616 /* Object.c in Sources */,
-				364E670110C562DE00AD4616 /* SmallInt.c in Sources */,
 				364E670410C562DE00AD4616 /* String.c in Sources */,
 				364E670710C562DE00AD4616 /* Symbol.c in Sources */,
 				36D2D482113E60940020E7B1 /* debug.c in Sources */,
@@ -1464,11 +1477,7 @@
 				36660068119AB8F000DE1938 /* Continuation.c in Sources */,
 				36660069119AB8F000DE1938 /* Exception.c in Sources */,
 				36660074119AB90700DE1938 /* Annotation.c in Sources */,
-				36660075119AB90700DE1938 /* PointerSlot.c in Sources */,
 				36660076119AB90700DE1938 /* ReflectionMethod.c in Sources */,
-				36660077119AB90700DE1938 /* Slot.c in Sources */,
-				36660078119AB90700DE1938 /* UIntSlot.c in Sources */,
-				3666007B119AB93D00DE1938 /* Float.c in Sources */,
 				366600BE119AB97400DE1938 /* AbstractMethod.c in Sources */,
 				366600BF119AB97400DE1938 /* AbstractSend.c in Sources */,
 				366600C0119AB97400DE1938 /* AbstractSlot.c in Sources */,
@@ -1513,6 +1522,13 @@
 				366600FD119AB9A000DE1938 /* UndefinedClassReference.c in Sources */,
 				366600FE119AB9A000DE1938 /* VariablePlaceholder.c in Sources */,
 				36660103119AB9BB00DE1938 /* thread.c in Sources */,
+				3643A4D7119AF98900B17165 /* Float.c in Sources */,
+				3643A4D8119AF98900B17165 /* SmallInt.c in Sources */,
+				3643A4D9119AF98900B17165 /* SmallIntTest.ci in Sources */,
+				3643A4DA119AF98900B17165 /* PointerSlot.c in Sources */,
+				3643A4DB119AF98900B17165 /* Slot.c in Sources */,
+				3643A4DC119AF98900B17165 /* UIntSlot.c in Sources */,
+				3643A4DF119AF99000B17165 /* Array.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

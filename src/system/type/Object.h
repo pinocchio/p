@@ -22,7 +22,7 @@ extern void inter_init_Type_Object();
 extern Object Object_instVarAt_(Object self, int index);
 extern void Object_instVarAt_put_(Object self, int index, Object value);
 
-extern Type_SmallInt Type_Object_hash(Type_Object object);
+extern Number_SmallInt Type_Object_hash(Type_Object object);
 /* ========================================================================= */
 
 #endif // TYPE_OBJECT_H

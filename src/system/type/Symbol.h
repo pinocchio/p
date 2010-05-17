@@ -8,7 +8,7 @@
 extern Collection_Dictionary Symbol_Table;
 
 struct Type_Symbol_t { 
-    Type_SmallInt hash;
+    Number_SmallInt hash;
     uns_int       size;
     wchar_t       value[];
 };
@@ -21,8 +21,8 @@ extern void install_symbol_methods(Type_Class class);
 /* ========================================================================= */
 
 extern void initialize_Symbol();
-extern Type_SmallInt wchar_hash(const wchar_t * string, int size);
-extern Type_SmallInt Type_Symbol_hash(Type_Symbol symbol_string);
+extern Number_SmallInt wchar_hash(const wchar_t * string, int size);
+extern Number_SmallInt Type_Symbol_hash(Type_Symbol symbol_string);
 
 /* ========================================================================= */
 

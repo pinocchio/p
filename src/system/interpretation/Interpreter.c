@@ -35,8 +35,8 @@ void send_eval_rest(Object exp, Type_Class class)
     EVAL_IF(AST_Variable)
     EVAL_IF(AST_Self)
     EVAL_IF(AST_Block)
-    EVAL_IF(AST_Slot)
-    EVAL_IF(AST_UIntSlot)
+    EVAL_IF(Slot_Slot)
+    EVAL_IF(Slot_UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
     /* TODO fallback by actually sending the eval message */

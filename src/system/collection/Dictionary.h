@@ -9,10 +9,10 @@
 #define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"ratio", L"data"
 
 struct Collection_Dictionary_t {
-    Type_SmallInt size;
-    Type_SmallInt maxLinear;
-    Type_SmallInt ratio;
-    Type_Array    data;
+    Number_SmallInt size;
+    Number_SmallInt maxLinear;
+    Number_SmallInt ratio;
+    Collection_Array    data;
 };
 
 CREATE_INITIALIZERS(Collection_Dictionary);

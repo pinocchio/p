@@ -11,10 +11,10 @@ DECLARE_CLASS(Collection_Dictionary);
 Collection_Dictionary new_Collection_Dictionary()
 {
     NEW_OBJECT(Collection_Dictionary);
-    result->size      = new_Type_SmallInt(0);
-    result->ratio     = new_Type_SmallInt(500);
-    result->maxLinear = new_Type_SmallInt(20);
-    result->data      = new_Type_Array_withAll(DICTIONARY_SIZE, Nil);
+    result->size      = new_Number_SmallInt(0);
+    result->ratio     = new_Number_SmallInt(500);
+    result->maxLinear = new_Number_SmallInt(20);
+    result->data      = new_Collection_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 
@@ -34,7 +34,7 @@ static int get_hash(Collection_Dictionary self, Object key)
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Type_Symbol_hash((Type_Symbol)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = ((Type_SmallInt)key)->value;
+        hash = ((Number_SmallInt)key)->value;
     } else {
         assert1(NULL, "Quick dictionaries only support ints and strings!");
         // make the compiler happy :)
@@ -46,12 +46,12 @@ static int get_hash(Collection_Dictionary self, Object key)
 
 void push_hash(Object key)
 {
-    Type_SmallInt hash;
+    Number_SmallInt hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Type_Symbol_hash((Type_Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (Type_SmallInt)key;
+        hash = (Number_SmallInt)key;
     } else {
         return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
@@ -76,7 +76,7 @@ static Collection_DictBucket * get_bucketp(Collection_Dictionary dictionary, int
 static int Collection_Dictionary_grow_check(Collection_Dictionary self)
 {
     uns_int amount = unwrap_int((Object)self->size) + 1;
-    self->size     = new_Type_SmallInt(amount);
+    self->size     = new_Number_SmallInt(amount);
     uns_int size   = self->data->size;
     return (100 * amount) / size > unwrap_int((Object)self->ratio);
 }
@@ -85,9 +85,9 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
 {
     if (!Collection_Dictionary_grow_check(self)) { return; }
 
-    Type_Array old = self->data;
-    self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
-    self->size     = new_Type_SmallInt(0);
+    Collection_Array old = self->data;
+    self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
+    self->size     = new_Number_SmallInt(0);
     int i;
     for (i = 0; i < old->size; i++) {
         Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
@@ -112,7 +112,7 @@ void Collection_Dictionary_quick_store(Collection_Dictionary self,
         Collection_DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
-        bucket->tally                = new_Type_SmallInt(2);
+        bucket->tally                = new_Number_SmallInt(2);
         return Collection_Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
@@ -174,7 +174,7 @@ static CNT(dict_grow_end)
 static void CNT_dict_grow()
 {
     uns_int idx    = (uns_int)peek_EXP(1);
-    Type_Array old = (Type_Array)peek_EXP(2);
+    Collection_Array old = (Collection_Array)peek_EXP(2);
     Collection_DictBucket bucket  = (Collection_DictBucket)old->values[idx];
     if (idx == 0) {
         poke_CNT(dict_grow_end);
@@ -197,9 +197,9 @@ static void CNT_dict_grow()
 
 static void Collection_Dictionary_grow(Collection_Dictionary self)
 {
-    Type_Array old = self->data;
-    self->data     = new_Type_Array_withAll(old->size << 1, (Object)Nil);
-    self->size     = new_Type_SmallInt(0);
+    Collection_Array old = self->data;
+    self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
+    self->size     = new_Number_SmallInt(0);
     
     push_CNT(dict_grow);
     claim_EXP(3);
@@ -235,7 +235,7 @@ void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
         Collection_DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
-        bucket->tally                = new_Type_SmallInt(2);
+        bucket->tally                = new_Number_SmallInt(2);
         Collection_Dictionary_check_grow(self);
     } else {
         push_EXP((Object)self);

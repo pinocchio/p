@@ -7,7 +7,7 @@
 #define CONTEXT_CACHE_SIZE 128
 
 DECLARE_CLASS(Runtime_BlockContext);
-static Type_Array unused_contexts;
+static Collection_Array unused_contexts;
 
 /* ========================================================================= */
 
@@ -98,9 +98,9 @@ void pre_init_Runtime_BlockContext()
                         L"BlockContext",
                         CREATE_ARRAY_TAG(RUNTIME_BLOCKCONTEXT));
 
-    Type_Array layout = (Type_Array)Runtime_BlockContext_Class->layout;
-    HEADER(layout->values[0]) = AST_UIntSlot_Class;
-    HEADER(layout->values[1]) = AST_UIntSlot_Class;
+    Collection_Array layout = (Collection_Array)Runtime_BlockContext_Class->layout;
+    HEADER(layout->values[0]) = Slot_UIntSlot_Class;
+    HEADER(layout->values[1]) = Slot_UIntSlot_Class;
     REFER_TO(Runtime_BlockContext);    
 }
 
@@ -115,7 +115,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send.");
-            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
+            //Object args[2] = { (Object)new_Number_SmallInt(index), key };
             return NULL;
         }
     }
@@ -137,7 +137,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
-            //Object args[2] = { (Object)new_Type_SmallInt(index), key };
+            //Object args[2] = { (Object)new_Number_SmallInt(index), key };
             return;
         }
     }
@@ -154,5 +154,5 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
 
 void post_init_Runtime_BlockContext()
 {
-    unused_contexts = new_Type_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
+    unused_contexts = new_Collection_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
 }

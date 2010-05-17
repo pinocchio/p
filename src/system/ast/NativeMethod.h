@@ -13,19 +13,19 @@
 struct AST_NativeMethod_t {
     uns_int         size;
     AST_Info        info;
-    Type_Array      params;
-    Type_Array      locals;
+    Collection_Array      params;
+    Collection_Array      locals;
     Object          package;
-    Type_Array      annotations;
+    Collection_Array      annotations;
     native          code;
     Object          body[];
 };
 
 CREATE_INITIALIZERS(AST_NativeMethod)
 
-extern AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
-                                      Type_Array locals,
-                                      Type_Array annotations,
+extern AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
+                                      Collection_Array locals,
+                                      Collection_Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */

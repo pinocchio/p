@@ -11,7 +11,7 @@
 struct AST_Super_t {
     uns_int         size;
     AST_Info        info;   
-    Type_Array      cache;
+    Collection_Array      cache;
     Object          message; 
     Object          unused;
     Object          arguments[];

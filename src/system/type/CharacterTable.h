@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Type_CharacterTable_t {
-    Type_SmallInt   size;
+    Number_SmallInt   size;
     Type_Character  chars[0];
 };
 

@@ -13,19 +13,19 @@
 struct AST_ReflectionMethod_t {
     uns_int         size;
     AST_Info        info;
-    Type_Array      params;
-    Type_Array      locals;
+    Collection_Array      params;
+    Collection_Array      locals;
     Object          package;
-    Type_Array      annotations;
+    Collection_Array      annotations;
     Object          cache;
     Object          body[];
 };
 
 CREATE_INITIALIZERS(AST_ReflectionMethod)
 
-extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Type_Array params,
-                                      Type_Array locals,
-                                      Type_Array annotations,
+extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
+                                      Collection_Array locals,
+                                      Collection_Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */

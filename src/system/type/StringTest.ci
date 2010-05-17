@@ -10,12 +10,12 @@ Object result;
 NEW_TEST(Type_String_asArray)
     STRING_TEST_SETUP;
     result = Eval_Send0((Object)string, SMB_asArray);
-    ASSERT_TYPE(result, Type_Array_Class);
-    assert0(((Type_Array)result)->size == string->size);
+    ASSERT_TYPE(result, Collection_Array_Class);
+    assert0(((Collection_Array)result)->size == string->size);
     ASSERT_EMPTY_STACK;
     int i=0;
     for (i=0; i<string->size; i++) {
-       assert0(((Type_Character)((Type_Array)result)->values[i])->value == string->value[i]);
+       assert0(((Type_Character)((Collection_Array)result)->values[i])->value == string->value[i]);
     }
 }
 

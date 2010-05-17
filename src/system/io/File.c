@@ -6,7 +6,7 @@
 #include <system/io/File.h>
 #include <system/type/Boolean.h>
 #include <system/type/String.h>
-#include <system/type/SmallInt.h>
+#include <system/number/SmallInt.h>
 #include <system/type/Character.h>
 
 
@@ -86,7 +86,7 @@ int IO_File_size(IO_File file) {
 }
 
 NATIVE0(IO_File_size)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(IO_File_size((IO_File)self)));
+    RETURN_FROM_NATIVE(new_Number_SmallInt(IO_File_size((IO_File)self)));
 }
 
 void IO_File_readCharacter(IO_File file, wchar_t* result) {
@@ -246,9 +246,9 @@ NATIVE0(IO_File_close)
 void post_init_IO_File()
 {
     /*
-    HEADER(((Type_Array)IO_File_Class->layout)->values[0]) = AST_UIntSlot_Class;
-    HEADER(((Type_Array)IO_ReadFile_Class->layout)->values[0]) = AST_UIntSlot_Class;
-    HEADER(((Type_Array)IO_WriteFile_Class->layout)->values[0]) = AST_UIntSlot_Class;
+    HEADER(((Collection_Array)IO_File_Class->layout)->values[0]) = Slot_UIntSlot_Class;
+    HEADER(((Collection_Array)IO_ReadFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;
+    HEADER(((Collection_Array)IO_WriteFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;
     */
     Collection_Dictionary natives = add_plugin(L"IO.File");
     store_native(natives, SMB_stdin  , NM_IO_File_stdin);

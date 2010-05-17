@@ -11,9 +11,9 @@ DECLARE_CLASS(AST_NativeMethod);
 
 /* ========================================================================= */
 
-AST_NativeMethod new_AST_NativeMethod_with(Type_Array params,
-                               Type_Array locals,
-                               Type_Array annotations,
+AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
+                               Collection_Array locals,
+                               Collection_Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_NativeMethod, Object[statementCount]);

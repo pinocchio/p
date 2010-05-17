@@ -7,14 +7,14 @@ Object result;
 /* ========================================================================= */
 
 
-NEW_TEST(Type_Symbol_asType_Array)
+NEW_TEST(Type_Symbol_asCollection_Array)
     SYMBOL_TEST_SETUP;
     result = Eval_Send0((Object)symbol, SMB_asArray);
-    ASSERT_TYPE(result, Type_Array_Class);
+    ASSERT_TYPE(result, Collection_Array_Class);
     int i;
     Object item;
     for (i= 0; i<symbol->size; ++i) {
-        item = ((Type_Array) result)->values[i];
+        item = ((Collection_Array) result)->values[i];
         ASSERT_TYPE(item, Type_Character_Class);
         assert0(((Type_Character) item)->value == symbol->value[i]);
         ASSERT_EMPTY_STACK;
@@ -25,5 +25,5 @@ NEW_TEST(Type_Symbol_asType_Array)
 
 TEST_SUITE(Type_Symbol,
 {
-    RUN_TEST(Type_Symbol_asType_Array);
+    RUN_TEST(Type_Symbol_asCollection_Array);
 })

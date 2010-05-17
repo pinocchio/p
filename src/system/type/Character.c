@@ -51,7 +51,7 @@ NATIVE1(Type_Character_equals_)
 }
 
 NATIVE0(Type_Character_hash)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_Character)self)->value));
+    RETURN_FROM_NATIVE(new_Number_SmallInt(((Type_Character)self)->value));
 }
 
 NATIVE0(Type_Character_asString)
@@ -65,7 +65,7 @@ NATIVE0(Type_Character_asSymbol)
 }
 
 NATIVE0(Type_Character_asSmallInt)
-    RETURN_FROM_NATIVE(new_Type_SmallInt(((Type_Character)self)->value));
+    RETURN_FROM_NATIVE(new_Number_SmallInt(((Type_Character)self)->value));
 }
 
 /* ========================================================================= */

@@ -24,8 +24,8 @@ AST_Method new_AST_Method(uns_int paramCount,
                           uns_int statementCount)
 {
     NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);
-    result->params = new_Type_Array_raw(paramCount);
-    result->locals = new_Type_Array_raw(localCount);
+    result->params = new_Collection_Array_raw(paramCount);
+    result->locals = new_Collection_Array_raw(localCount);
     init_raw_variable_array(result->params, 0, paramCount, 0);
     init_raw_variable_array(result->locals, 0, localCount, paramCount);
     result->info   = empty_AST_Info;
@@ -42,9 +42,9 @@ AST_Method new_AST_Method_withAll(uns_int paramCount,
     return result;
 }
 
-AST_Method new_AST_Method_with(Type_Array params,
-                               Type_Array locals,
-                               Type_Array annotations,
+AST_Method new_AST_Method_with(Collection_Array params,
+                               Collection_Array locals,
+                               Collection_Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);

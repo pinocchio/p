@@ -54,7 +54,7 @@ void pre_init_Type_Symbol()
 
 NATIVE1(Type_Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
-    ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
+    ASSERT_INSTANCE_OF(w_arg0, Number_SmallInt_Class);
     int index     = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i", index));
     assert(index < ((Type_String)self)->size,
@@ -67,10 +67,10 @@ NATIVE0(Type_Symbol_asString)
     RETURN_FROM_NATIVE(new_Type_String(((Type_Symbol)self)->value));
 }
 
-Type_Array Type_Symbol_asArray(Type_Symbol symbol)
+Collection_Array Type_Symbol_asArray(Type_Symbol symbol)
 {
     Type_Symbol self_symbol = (Type_Symbol)symbol;
-    Type_Array array        = new_Type_Array_raw(self_symbol->size);
+    Collection_Array array        = new_Collection_Array_raw(self_symbol->size);
     LOG("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
@@ -83,17 +83,17 @@ NATIVE0(Type_Symbol_asArray)
     RETURN_FROM_NATIVE(Type_Symbol_asArray((Type_Symbol)self));
 }
 
-Type_SmallInt wchar_hash(const wchar_t * string, int size)
+Number_SmallInt wchar_hash(const wchar_t * string, int size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
     int hash = 5381;
     while (size--) {
         hash += (hash << 5) + *string++;
     }
-    return new_Type_SmallInt(hash);
+    return new_Number_SmallInt(hash);
 }
 
-Type_SmallInt Type_Symbol_hash(Type_Symbol symbol)
+Number_SmallInt Type_Symbol_hash(Type_Symbol symbol)
 {
     return symbol->hash;
 }
@@ -122,7 +122,7 @@ NATIVE0(Type_Symbol_hash)
 
 
 NATIVE0(Type_Symbol_size)
-    RETURN_FROM_NATIVE((Object)new_Type_SmallInt(((Type_Symbol)self)->size));
+    RETURN_FROM_NATIVE((Object)new_Number_SmallInt(((Type_Symbol)self)->size));
 }
 
 /* ========================================================================= */

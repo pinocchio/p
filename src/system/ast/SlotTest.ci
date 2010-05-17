@@ -1,12 +1,12 @@
 
-#define AST_SLOT_TEST_SETUP \
-    AST_Slot instvariable = new_AST_Slot(0, L"aVar"); \
+#define SLOT_SLOT_TEST_SETUP \
+    Slot_Slot instvariable = new_Slot_Slot(0, L"aVar"); \
     Object result;
 
 /* ========================================================================= */
 
-NEW_TEST(AST_Slot_eval)
-    AST_SLOT_TEST_SETUP;
+NEW_TEST(Slot_Slot_eval)
+    SLOT_SLOT_TEST_SETUP;
 
     Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
@@ -19,8 +19,8 @@ NEW_TEST(AST_Slot_eval)
     assert0(result == (Object)True);
 }
 
-NEW_TEST(AST_Slot_assign)
-    AST_SLOT_TEST_SETUP;
+NEW_TEST(Slot_Slot_assign)
+    SLOT_SLOT_TEST_SETUP;
 
     Type_Class cls = new_Class_named(Type_Object_Class, 
                                      L"TestClass",
@@ -28,7 +28,7 @@ NEW_TEST(AST_Slot_assign)
     Object o = instantiate(cls);
     ((Type_Object)o)->ivals[0] = (Object)True;
     ((Type_Object)o)->ivals[1] = (Object)False;
-    Object i = (Object)new_Type_SmallInt(42);
+    Object i = (Object)new_Number_SmallInt(42);
     current_env()->home_context->self = o;
     Object assign = (Object)new_AST_Assign((Object)instvariable,
                                            (Object)new_AST_Constant(i));
@@ -40,9 +40,9 @@ NEW_TEST(AST_Slot_assign)
 
 /* ========================================================================= */
 
-TEST_SUITE(AST_Slot,
+TEST_SUITE(Slot_Slot,
 {
-    RUN_TEST(AST_Slot_eval);
-    RUN_TEST(AST_Slot_assign);
+    RUN_TEST(Slot_Slot_eval);
+    RUN_TEST(Slot_Slot_assign);
 })
 

@@ -30,7 +30,7 @@ NATIVE(Process_pclose)
         stream = (IO_File)SELF->ivals[3];	
     }
     int returnValue = pclose(stream->file);
-    RETURN_FROM_NATIVE(new_Type_SmallInt(returnValue));
+    RETURN_FROM_NATIVE(new_Number_SmallInt(returnValue));
  
 }
 

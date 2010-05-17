@@ -2,13 +2,14 @@ SHELL     = /bin/bash
 
 MAKEOPTS  = -j3
 OS        = $(shell uname)
+CC        = llvm-gcc
 # ============================================================================
 CFILES    = $(wildcard */*.c)
 OFILES    = $(CFILES:%.c=%.o)
 SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES   = $(CFILES:%.c=%.lo)
 # ============================================================================
-CFLAGS  += -DASSERT_FAIL -c -I../ -Wall
+CFLAGS  += -O3 -DASSERT_FAIL -c -I../ -Wall
 LDFLAGS += -lm -lgc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
     CFLAGS  += -fno-common -DPIC 

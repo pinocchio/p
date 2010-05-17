@@ -95,7 +95,7 @@ NATIVE0(Type_String_asSymbol)
 NATIVE2(Type_String_at_put_)
     Object w_arg0 = NATIVE_ARG(0);
     Object w_arg1 = NATIVE_ARG(1);
-    ASSERT_INSTANCE_OF(w_arg0, Type_SmallInt_Class);
+    ASSERT_INSTANCE_OF(w_arg0, Number_SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
     int index = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i\n", index));
@@ -180,7 +180,7 @@ Object wchar_to_number(const wchar_t * string, uns_int size)
         }
         break;
     }
-    return (Object)new_Type_SmallInt(sign * result);
+    return (Object)new_Number_SmallInt(sign * result);
 }
 
 char * unicode_to_ascii(const wchar_t* str)
