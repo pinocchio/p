@@ -35,6 +35,9 @@ extern THREAD_OBJECT Error_Handler;
     #define tkey(key_t, deconstructor) 
 #endif // THREAD
 
+
+extern void extend_ISS(Object self);
+
 extern void _push_EXP(Object e);
 extern Object pop_EXP();
 #define push_EXP(e)             _push_EXP((Object)e);

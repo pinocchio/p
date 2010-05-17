@@ -19,7 +19,6 @@
 #include <system/runtime/BlockClosureTest.ci>
 #include <system/ast/InfoTest.ci>
 #include <system/runtime/MethodClosureTest.ci>
-#include <system/slot/SlotTest.ci>
 
 /* ========================================================================= */
 
