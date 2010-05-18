@@ -28,7 +28,8 @@ void fail(const Object exception_class, uns_int argc, ...)
 
 void handle_assert(const char * message)
 {
-    fail(Exception_AssertionFailure_Class, 1,
-         new_Type_String_from_charp(message));
+    raise(SIGSEGV);
+    //fail(Exception_AssertionFailure_Class, 1,
+    //     new_Type_String_from_charp(message));
 }
 

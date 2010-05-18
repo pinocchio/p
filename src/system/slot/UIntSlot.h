@@ -11,7 +11,7 @@
 /* ========================================================================= */
 
 struct Slot_UIntSlot_t {
-    Number_SmallInt   index;
+    Number_SmallInt index;
     Object          name;
     Object          package;
 };

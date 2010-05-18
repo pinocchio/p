@@ -151,8 +151,8 @@ NATIVE1(Collection_Array_at_)
 void raw_Collection_Array_at_put(Collection_Array array, Object tag,
                            int index, Object value)
 {
-    assert0(array->size > index);
     assert0(0 <= index);
+    assert0(array->size > index);
     array->values[TAG_SIZE(tag) + index] = value;
 }
 

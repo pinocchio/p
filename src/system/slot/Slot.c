@@ -87,7 +87,7 @@ void post_init_Slot_Slot()
 {
     REFER_TO(Slot_Slot);
 
-    Collection_Dictionary natives = add_plugin(L"AST.Slot");
+    Collection_Dictionary natives = add_plugin(L"Slot.Slot");
     store_native(natives, SMB_assign_on_, NM_Slot_Slot_assign_on_);
     store_native(natives, SMB_readFrom_ , NM_Slot_Slot_readFrom_);
 }
