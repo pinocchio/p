@@ -69,7 +69,7 @@ class ScriptTest
     attr_reader :script, :probeCount, :min, :max, :mean, :stdev, :dir
     attr_writer :script, :probeCount, :dir
 
-    def initialize(script, probeCount=10, useUserTime=false)
+    def initialize(script, probeCount=1, useUserTime=false)
         @script      = script
         @probeCount  = probeCount
         @useUserTime = useUserTime
@@ -92,7 +92,6 @@ class ScriptTest
     
     def probe
         cdCMD, script = self.scriptLocation
-        puts "#{cdCMD}(time #{script}) 2>&1"
         timeCMD = 'time'
         if is_linux?
             timeCMD = "time --format='real %e\nuser %U\nsystem %S'"
@@ -109,7 +108,6 @@ class ScriptTest
             time += $1.to_f * 60 if result.match(/([0-9]+)m/)
             @probes.push(time)
         }
-        puts @probes
     end
 
     def scriptLocation
@@ -153,8 +151,8 @@ class Test
 
     # ------------------------------------------------------------------------
     attr_reader :executable, :testFile, :parseFile, :mean, :stdev, :min, :max,
-                :dir
-    attr_writer :dir
+                :dir, :name
+    attr_writer :dir, :name
 
     def initialize(executable, testFile, parseFile=nil, version=nil)
         @executable = executable
@@ -163,6 +161,7 @@ class Test
         @version    = version
         @dir        = Dir.pwd
         @version    = @version.strip unless @version.nil?
+		@name       = 
         self.version
     end
 
@@ -187,7 +186,8 @@ class Test
     def run
         self.reset
         if not self.executableExists?
-            @skipped = true
+            puts "Executable not found #{@executable}"
+			@skipped = true
             return
         end
         if @parseFile.nil?
@@ -233,6 +233,10 @@ class Test
         probe.run
         return probe
     end
+
+	def skipped?
+		@skipped
+	end
 
     def to_s
         return "--skipped--" if @skipped
