@@ -4,9 +4,15 @@ Object instantiate_Array(Type_Class class, Collection_Array ivars, uns_int extra
     Collection_Array result = NEW_ARRAYED(struct Collection_Array_t, Object[base+extra]);
     result->size = extra;
     uns_int i;
-    for (i = 0; i < base + extra; i++) {
+
+    for (i = base; i < base+extra; i++) {
         result->values[i] = Nil;
     }
+
+    for (i = 0; i < base; i++) {
+        result->values[i] = Nil;
+    }
+
     HEADER(result) = class;
     assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;

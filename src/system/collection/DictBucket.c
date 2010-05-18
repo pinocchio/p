@@ -30,7 +30,7 @@ void pre_init_Collection_DictBucket()
 {
     Collection_DictBucket_Class =
         new_Class_named(Type_Object_Class,
-                        L"Collection_DictBucket",
+                        L"DictBucket",
                         CREATE_ARRAY_TAG(COLLECTION_DICTBUCKET));
     REFER_TO(Collection_DictBucket);
 }
