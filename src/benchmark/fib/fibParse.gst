@@ -7,3 +7,5 @@ Number extend [
             ifFalse: [ (self - 1) fib + (self - 2) fib ].
     ]
 ]
+
+Transcript showCr: 30 printString.

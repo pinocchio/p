@@ -69,7 +69,7 @@ class ScriptTest
         @script      = script
         @probeCount  = probeCount
         @useUserTime = useUserTime
-        @dir         = Dir.pwd 
+        @dir         = Dir.pwd
     end
 
     def reset
@@ -87,20 +87,27 @@ class ScriptTest
     end
     
     def probe
-        puts "(time #{@script}) 2>&1"
-        #TODO check for the executable dir here
+        cd, script = self.scriptLocation
+        #puts "#{cd}(time #{script}) 2>&1"
         @probeCount.times {|i|
-            a     = `(time #{@script}) 2>&1`
+            result = `#{cd}(time #{script}) 2>&1`
             next unless $?.success?
             if @useUserTime
-                a = a.grep(/user/).first
+                result = result.grep(/user/).first
             else 
-                a = a.grep(/real/).first
+                result = result.grep(/real/).first
             end
-            time  = a.match(/([0-9]+\.[0-9]+)/)[1].to_f
-            time += $1.to_f * 60 if a.match(/([0-9]+)m/)
+            time  = result.match(/([0-9]+\.[0-9]+)/)[1].to_f
+            time += $1.to_f * 60 if result.match(/([0-9]+)m/)
             @probes.push(time)
         }
+    end
+
+    def scriptLocation
+        executable = @script.split.first
+        return '', @script unless executable.include? '/'
+        pos = executable.rindex '/'
+        return "cd #{@script[0..pos]}; ", "./#{@script[pos+1..-1]}"
     end
 
     def stats
@@ -146,14 +153,16 @@ class Test
         @parseFile  = parseFile
         @version    = version
         @dir        = Dir.pwd
-        @version    = @version.chomp unless @version.nil?
+        @version    = @version.strip unless @version.nil?
         self.version
     end
 
     def version
         return @version               unless @version.nil?
         return @executable.capitalize unless self.executableExists?
-        return `#{@executable} --version 2>&1`.chomp
+        version = `#{@executable} --version 2>&1`.strip
+        return version unless version.include? "\n"
+        return version.split.first.strip
     end
 
     def reset

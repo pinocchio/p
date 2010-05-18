@@ -7,5 +7,5 @@ function fib($n) {
     return fib($n - 1) + fib($n - 2);
 }
 
-echo fib(25);
+echo fib(30);
 ?>
