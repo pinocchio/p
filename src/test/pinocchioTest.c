@@ -13,7 +13,6 @@
 #include <system/runtime/ThreadTest.ci>
 #include <system/type/ClassTest.ci>
 #include <system/type/ObjectTest.ci>
-#include <system/number/SmallIntTest.ci>
 #include <system/type/StringTest.ci>
 #include <system/type/SymbolTest.ci>
 #include <system/runtime/BlockClosureTest.ci>
