@@ -49,8 +49,12 @@ class Array
 end
 
 class Float
+    def closeTo?(number)
+        (self - number).abs < 0.00000000001
+    end
+
     def precision
-        return 10 if self == 0
+        return 10 if self.closeTo? 0
         v = self.to_s
         precision = 0
         v.each_char { |c|
@@ -87,10 +91,14 @@ class ScriptTest
     end
     
     def probe
-        cd, script = self.scriptLocation
-        #puts "#{cd}(time #{script}) 2>&1"
+        cdCMD, script = self.scriptLocation
+        puts "#{cdCMD}(time #{script}) 2>&1"
+        timeCMD = 'time'
+        if is_linux?
+            timeCMD = "time --format='real %e\nuser %U\nsystem %S'"
+        end
         @probeCount.times {|i|
-            result = `#{cd}(time #{script}) 2>&1`
+            result = `#{cdCMD}(#{timeCMD} #{script}) 2>&1`
             next unless $?.success?
             if @useUserTime
                 result = result.grep(/user/).first
@@ -101,6 +109,7 @@ class ScriptTest
             time += $1.to_f * 60 if result.match(/([0-9]+)m/)
             @probes.push(time)
         }
+        puts @probes
     end
 
     def scriptLocation
@@ -195,6 +204,7 @@ class Test
     def runBoth
         self.runSingle
         @parseFileProbe = self.runScriptTest(@parseFile)
+        puts "(1)", @parseFileProbe
         if @parseFileProbe.empty?
             @skipped = true
         end
@@ -206,6 +216,7 @@ class Test
 
     def runSingle
         @testFileProbe = self.runScriptTest(@testFile)
+        puts "(0)", @testFileProbe
         if @testFileProbe.empty?
             @skipped = true
         end
