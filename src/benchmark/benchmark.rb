@@ -234,9 +234,9 @@ class Test
         return probe
     end
 
-	def skipped?
-		@skipped
-	end
+    def skipped?
+        @skipped
+    end
 
     def to_s
         return "--skipped--" if @skipped
