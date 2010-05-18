@@ -1,5 +1,5 @@
 SHELL        = /bin/bash
-VERSION      = `echo "LastChangedRevision: 1474" | awk '{print $2}'`
+VERSION      = `echo "$LastChangedRevision$" | awk '{print $2}'`
 
 MAKEOPTS     = -j3
 OS           = $(shell uname)
