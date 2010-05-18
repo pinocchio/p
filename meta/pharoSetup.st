@@ -36,6 +36,13 @@ Gofer new
         package: 'ECompletionOmniBrowser';
         load.
 !
+"OSProcess for Auto Exporting"
+Gofer new
+        squeaksource: 'OSProcess';
+        package: 'OSProcess';
+        package: 'Tests-OSProcess';
+        load.
+!
 "Pinocchio"
 Gofer new
         squeaksource: 'p';
@@ -44,7 +51,6 @@ Gofer new
         package: 'Phexample';
 	    load
 !
-
 "Select Tools"
 SystemBrowser default: OBSystemBrowserAdaptor.
 !
