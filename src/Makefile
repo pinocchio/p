@@ -1,5 +1,5 @@
 SHELL        = /bin/bash
-VERSION      = `echo "$LastChangedRevision$" | awk '{print $2}'`
+VERSION      = `echo "$LastChangedRevision: $" | awk '{print $2}'`
 
 MAKEOPTS     = -j3
 OS           = $(shell uname)
@@ -66,11 +66,13 @@ profile:
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
 
-package: $(SOURCES)
+dist: $(SOURCES) Makefile
 	tar -cvzf pinocchio_C_`date "+%Y-%m-%d_%H%M%S"`_.tar.gz $(SOURCES)
 
+package: dist
+
 # ============================================================================
-.PHONY: test vtest run clean profile plugin
+.PHONY: test vtest run clean profile plugin dist package
 # ============================================================================
 include make.depend
 
