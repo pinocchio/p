@@ -65,6 +65,10 @@ profile:
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
 
+package: $(SOURCES)
+	tar -cvzf pinocchio_`date "+%Y-%m-%d_%H%M%S"`_tar.gz $(SOURCES)
+	tar -cvzf pinocchio_`date "+%Y-%m-%d_%H%M%S"`_tar.gz $(SOURCES)
+
 # ============================================================================
 .PHONY: test vtest run clean profile plugin
 # ============================================================================
