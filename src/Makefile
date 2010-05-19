@@ -23,7 +23,7 @@ TEST_HFILES  = $(TEST_CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(HIFILES) $(CIFILES)
 PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(wildcard plugin/**/*.h) $(wildcard plugin/**/*.c)
-EXTRASOURCES = lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
+EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 # ============================================================================
