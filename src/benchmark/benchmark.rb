@@ -69,7 +69,7 @@ class ScriptTest
     attr_reader :script, :probeCount, :min, :max, :mean, :stdev, :dir
     attr_writer :script, :probeCount, :dir
 
-    def initialize(script, probeCount=1, useUserTime=false)
+    def initialize(script, probeCount=10, useUserTime=false)
         @script      = script
         @probeCount  = probeCount
         @useUserTime = useUserTime
@@ -151,8 +151,8 @@ class Test
 
     # ------------------------------------------------------------------------
     attr_reader :executable, :testFile, :parseFile, :mean, :stdev, :min, :max,
-                :dir, :name
-    attr_writer :dir, :name
+                :dir, :name, :probeCount
+    attr_writer :dir, :name, :probeCount
 
     def initialize(executable, testFile, parseFile=nil, version=nil)
         @executable = executable
@@ -161,8 +161,7 @@ class Test
         @version    = version
         @dir        = Dir.pwd
         @version    = @version.strip unless @version.nil?
-		@name       = 
-        self.version
+		@name       = self.version
     end
 
     def version

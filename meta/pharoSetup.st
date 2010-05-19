@@ -1,6 +1,6 @@
 "Update Pharo"
-Utilities updateFromServer.
-!
+"Utilities updateFromServer.
+"!
 "Update Gofer"
 [ Gofer gofer load ]
         on: Error
