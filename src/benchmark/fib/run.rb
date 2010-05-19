@@ -23,5 +23,9 @@ BENCHMARKS = [
 benchmark = Benchmark.createFrom BENCHMARKS
 
 if __FILE__ == $0
-    benchmark.run
+    if ARGV.empty?
+        benchmark.run
+    else
+        benchmark.run ARGV[0].to_i
+    end
 end

@@ -162,14 +162,16 @@ class Test
         @dir        = Dir.pwd
         @version    = @version.strip unless @version.nil?
 		@name       = self.version
+        @probeCount = 10
     end
 
     def version
         return @version               unless @version.nil?
         return @executable.capitalize unless self.executableExists?
         version = `#{@executable} --version 2>&1`.strip
+        version = `#{@executable} -v 2>&1` unless $?.success?
         return version unless version.include? "\n"
-        return version.split.first.strip
+        return version.split("\n").first.strip
     end
 
     def reset
@@ -182,7 +184,8 @@ class Test
         @max            = 0
     end
 
-    def run
+    def run(probeCount=nil)
+        probeCount = @probeCount if probeCount.nil?
         self.reset
         if not self.executableExists?
             puts "Executable not found #{@executable}"
@@ -190,9 +193,9 @@ class Test
             return
         end
         if @parseFile.nil?
-            self.runSingle      
+            self.runSingle probeCount
         else
-            self.runBoth
+            self.runBoth probeCount
         end
     end
 
@@ -200,9 +203,9 @@ class Test
         not `which #{@executable}`.chomp.empty?
     end
 
-    def runBoth
-        self.runSingle
-        @parseFileProbe = self.runScriptTest(@parseFile)
+    def runBoth(probeCount)
+        self.runSingle probeCount
+        @parseFileProbe = self.runScriptTest(@parseFile, probeCount)
         #puts "(1) #{@parseFileProbe}"
         if @parseFileProbe.empty?
             @skipped = true
@@ -213,8 +216,8 @@ class Test
         @max   -= @testFileProbe.max
     end
 
-    def runSingle
-        @testFileProbe = self.runScriptTest(@testFile)
+    def runSingle(probeCount)
+        @testFileProbe = self.runScriptTest(@testFile, probeCount)
         #puts "(0) #{@testFileProbe}"
         if @testFileProbe.empty?
             @skipped = true
@@ -225,10 +228,12 @@ class Test
         @max   = @testFileProbe.max
     end
         
-    def runScriptTest(script)
+    def runScriptTest(script, probeCount=nil)
+        probeCount = @probeCount if probeCount.nil?
         script    = "#{@dir}/#{script}" unless script[0] == '/'
         probe     = ScriptTest.new("#{@executable} #{script}")
-        probe.dir = @dir
+        probe.probeCount = probeCount
+        probe.dir        = @dir
         probe.run
         return probe
     end
@@ -256,7 +261,8 @@ class Benchmark
     # ------------------------------------------------------------------------
     def initialize(tests=[], dir=nil)
         @tests, @dir = tests, dir
-        @dir   = Dir.pwd if @dir.nil?
+        @dir         = Dir.pwd if @dir.nil?
+        @probeCount  = 10
     end
     
     def load(description)
@@ -298,14 +304,15 @@ class Benchmark
         @resultsFile.pputs "="*79
     end
 
-    def benchmarks
+    def benchmarks(probeCount=nil)
+        probeCount = @probeCount if probeCount.nil?
         maxVersionNameLength = 0
         @tests.each { |test|
             maxVersionNameLength = [maxVersionNameLength, test.version.length].max    
         }
         @tests.each { |test|
             @resultsFile.pprint "#{test.version.ljust maxVersionNameLength} "
-            test.run 
+            test.run probeCount
             @resultsFile.pputs test.to_s
         }
     end
@@ -321,12 +328,13 @@ class Benchmark
         Dir.chdir File.dirname dir 
     end
 
-    def run
+    def run(probeCount=nil)
+        probeCount = @probeCount if probeCount.nil?
         self.changeDir
         File.open("results/#{`uname -n`.chomp}.txt", 'a') { |f|
             @resultsFile = f
             self.header
-            self.benchmarks 
+            self.benchmarks probeCount
         }
     end
 end
