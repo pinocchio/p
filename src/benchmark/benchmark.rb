@@ -204,7 +204,7 @@ class Test
     def runBoth
         self.runSingle
         @parseFileProbe = self.runScriptTest(@parseFile)
-        puts "(1)", @parseFileProbe
+        #puts "(1) #{@parseFileProbe}"
         if @parseFileProbe.empty?
             @skipped = true
         end
@@ -216,7 +216,7 @@ class Test
 
     def runSingle
         @testFileProbe = self.runScriptTest(@testFile)
-        puts "(0)", @testFileProbe
+        #puts "(0) #{@testFileProbe}"
         if @testFileProbe.empty?
             @skipped = true
         end
