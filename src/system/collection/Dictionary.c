@@ -326,10 +326,7 @@ NATIVE(Collection_Dictionary_grow)
 
 void post_init_Collection_Dictionary()
 {
-    // TODO LAYOUT
-    // change_slot_type(Collection_Dictionary_Class, Slot_UIntSlot_Class, 3, 0,1,2);
-    HEADER(Collection_Dictionary_Class->methods) = Collection_Dictionary_Class;
-    HEADER(HEADER(Collection_Dictionary_Class)->methods) = Collection_Dictionary_Class;
+    change_slot_type(Collection_Dictionary_Class, Slot_UIntSlot_Class, 3, 0,1,2);
 
     Collection_Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
