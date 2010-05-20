@@ -35,26 +35,32 @@ Type_Class new_Bootstrapping_Class()
     return new_Bootstrapping_Class_sized(METACLASS_SIZE);
 }
 
-Type_Class new_Class_withMeta(Type_Class superclass, Object metaType)
-{    
+Type_Class new_Class_sized(Type_Class superclass, uns_int meta_size)
+{
     Type_Class metaclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    ASSERT_TAG_LAYOUT(metaType, Object);
-    assert0(((Collection_Array)metaType)->size >= 3); // we need at least place for
-                                               // methods, super and layout.  
-
-    metaclass->layout    = metaType;
     metaclass->methods   = new_Collection_Dictionary();
-    
-    Type_Class result    = (Type_Class)instantiate(metaclass);
+    Type_Class result    = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
     result->methods      = new_Collection_Dictionary();
+
     Type_Class_set_superclass(result, superclass);
     metaclass->name      = (Type_Symbol)result;
     return result;
 }
 
+Type_Class new_Class_withMeta(Type_Class superclass, Object metatype)
+{    
+    ASSERT_TAG_LAYOUT(metatype, Object);
+    uns_int meta_size = ((Collection_Array)metatype)->size;
+    assert0(meta_size >= 4); // we need at least place for
+                             // methods, super, layout and instance.
+    Type_Class result = new_Class_sized(superclass, meta_size);
+    HEADER(result)->layout = metatype;
+    return result;
+}
+
 Type_Class new_Class(Type_Class superclass)
 {
-    return new_Class_withMeta(superclass, HEADER(superclass)->layout);
+    return new_Class_sized(superclass, CLASS_SIZE);
 }
 
 void pre_init_Type_Class()

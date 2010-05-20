@@ -15,13 +15,6 @@ void pre_init_Type_Object()
     Type_Object_Class = new_Bootstrapping_Class();
 }
 
-void inter_init_Type_Object() 
-{
-    // TODO FIX THIS CRAP
-    HEADER(Type_Object_Class)->layout = create_layout(CLASS_SIZE, OBJECT, L"a",L"b",L"c",L"d",L"e");
-    REFER_TO(Type_Object);
-}
-
 /* ========================================================================= */
 
 Number_SmallInt Type_Object_hash(Type_Object object)

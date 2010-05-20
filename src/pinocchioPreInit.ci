@@ -16,9 +16,6 @@ pre_init_Collection_DictBucket();
 pre_init_Collection_Dictionary();
 init_SymbolTable();
 
-// Initialize the Object class and its metaclass
-inter_init_Type_Object();
-
 pre_init_Type_String();
 pre_init_Slot_UIntSlot();
 

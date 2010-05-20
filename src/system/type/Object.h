@@ -15,7 +15,6 @@ struct Type_Object_t {
 };
 
 CREATE_INITIALIZERS(Type_Object)
-extern void inter_init_Type_Object();
 
 /* ========================================================================= */
 
