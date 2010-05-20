@@ -68,8 +68,6 @@ NATIVE2(Slot_Slot_assign_on_)
 
 void post_init_Slot_Slot()
 {
-    INIT_CLASS(Slot_Slot);
-
     Collection_Dictionary natives = add_plugin(L"Slot.Slot");
     store_native(natives, SMB_assign_on_, NM_Slot_Slot_assign_on_);
     store_native(natives, SMB_readFrom_ , NM_Slot_Slot_readFrom_);

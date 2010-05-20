@@ -271,5 +271,4 @@ void CNT_bucket_rehash()
 
 void post_init_Collection_DictBucket()
 {
-    INIT_CLASS(Collection_DictBucket);
 }

@@ -1,12 +1,7 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/ast/Variable.h>
 #include <system/ast/Assign.h>
-
-/* ========================================================================= */
-
-Type_Class AST_Assign_Class;
 
 /* ========================================================================= */
 
@@ -17,11 +12,6 @@ AST_Assign new_AST_Assign(Object variable, Object expression)
     result->expression = expression;
     result->info       = empty_AST_Info;
     return result;
-}
-
-void pre_init_AST_Assign()
-{
-    AST_Assign_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -52,10 +42,4 @@ CNT(AST_Assign_assign)
     
     // TODO send assign: to self->variable.
     assert1(NULL, "TODO send assign: to self->variable");
-}
-
-/* ========================================================================= */
-
-void post_init_AST_Assign()
-{
 }

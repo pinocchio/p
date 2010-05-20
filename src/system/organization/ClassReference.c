@@ -5,12 +5,7 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Organization_ClassReference);
-
-/* ========================================================================= */
-
-Organization_ClassReference
-    new_Organization_ClassReference(Type_Class class)
+Organization_ClassReference new_Organization_ClassReference(Type_Class class)
 {
     
     NEW_OBJECT(Organization_ClassReference);
@@ -32,7 +27,6 @@ Organization_ClassReference new_Organization_ClassReference_empty()
 
 void pre_init_Organization_ClassReference()
 {
-    Organization_ClassReference_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -49,5 +43,4 @@ void Organization_ClassReference_eval(Organization_ClassReference self)
 
 void post_init_Organization_ClassReference()
 {
-
 }

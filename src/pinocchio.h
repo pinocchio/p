@@ -188,12 +188,14 @@ extern Object Eval(Object code);
 extern Object Eval_Send0(Object self, Type_Symbol symbol);
 extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
 extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
+extern void pinocchio_post_init();
 
 /* ========================================================================= */
 
 #include <pinocchioHelper.hi>
 #include <system/plugin/Plugin.h>
 #include <system/runtime/Exception.h>
+#include <lib/lib.h>
 
 /* ========================================================================= */
 

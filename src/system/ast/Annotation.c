@@ -3,10 +3,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Annotation);
-
-/* ========================================================================= */
-
 AST_Annotation new_AST_Annotation_raw(Object selector, uns_int argc) {
     NEW_ARRAY_OBJECT(AST_Annotation, Object[argc]);
     result->selector = selector;
@@ -27,11 +23,6 @@ AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...)
     return result;
 }
 
-void pre_init_AST_Annotation()
-{
-    AST_Annotation_Class = new_Class(Type_Object_Class);
-}
-
 /* ========================================================================= */
 
 AST_Annotation lookup_annotation(Collection_Array annotations, Object selector)
@@ -49,6 +40,3 @@ AST_Annotation lookup_annotation(Collection_Array annotations, Object selector)
 }
 
 /* ========================================================================= */
-
-void post_init_AST_Annotation(){}
-

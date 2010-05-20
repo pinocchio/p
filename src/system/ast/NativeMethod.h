@@ -18,8 +18,6 @@ struct AST_NativeMethod_t {
     Object          body[];
 };
 
-CREATE_INITIALIZERS(AST_NativeMethod)
-
 extern AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
                                       Collection_Array locals,
                                       Collection_Array annotations,

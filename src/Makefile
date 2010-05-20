@@ -78,7 +78,6 @@ tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
 
 dist: $(SOURCES) $(EXTRASOURCES)
-	@make svnversion
 	@mkdir -p $(EDGEPV)
 	@tar cf $(EDGEPV).tar $^
 	@mv $(EDGEPV).tar $(EDGEPV)

@@ -13,7 +13,6 @@ struct AST_Block_t {
     Object      body[];
 };
 
-CREATE_INITIALIZERS(AST_Block)
 extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int localCount,
                                uns_int depth,

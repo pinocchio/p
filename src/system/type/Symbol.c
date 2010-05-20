@@ -133,7 +133,6 @@ NATIVE0(Type_Symbol_size)
 
 void post_init_Type_Symbol()
 {
-    INIT_CLASS(Type_Symbol);
     Collection_Dictionary natives = add_plugin(L"Type.Symbol");
     store_native(natives, SMB_at_,       NM_Type_Symbol_at_);
     store_native(natives, SMB_asString,  NM_Type_Symbol_asString);

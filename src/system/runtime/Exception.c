@@ -3,9 +3,9 @@
 #include <stdarg.h>
 #include <lib/lib.h>
 
-void fail(const Object exception_class, uns_int argc, ...)
+void fail(const Type_Class exception_class, uns_int argc, ...)
 {
-    Type_Object error = (Type_Object)instantiate((Type_Class)exception_class);
+    Type_Object error = (Type_Object)instantiate(exception_class);
     error->ivals[0] = (Object)current_env();
 
     va_list args;
@@ -15,6 +15,8 @@ void fail(const Object exception_class, uns_int argc, ...)
         error->ivals[idx] = va_arg(args, Object);
     }
     va_end(args);
+
+    raise(SIGSEGV);
 
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
         Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),

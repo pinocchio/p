@@ -11,9 +11,6 @@ struct AST_Assign_t {
     Object          expression;
 };
 
-
-CREATE_INITIALIZERS(AST_Assign)
-
 extern AST_Assign new_AST_Assign(Object variable, Object expression);
 
 /* ========================================================================= */

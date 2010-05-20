@@ -7,10 +7,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_ReflectionMethod);
-
-/* ========================================================================= */
-
 AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
                                Collection_Array locals,
                                Collection_Array annotations,
@@ -33,11 +29,6 @@ AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
     return result;
 }
 
-void pre_init_AST_ReflectionMethod()
-{
-    AST_ReflectionMethod_Class = new_Class(Type_Object_Class);
-}
-
 /* ========================================================================= */
 
 void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Class class, uns_int argc)
@@ -58,10 +49,3 @@ void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure, Object self, Typ
     }
     ((native)method->cache)(self, class, argc);
 }
-
-/* ========================================================================= */
-
-void post_init_AST_ReflectionMethod()
-{
-}
-

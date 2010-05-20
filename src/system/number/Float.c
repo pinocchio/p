@@ -91,8 +91,6 @@ NATIVE0(Number_Float_asString)
 
 void post_init_Number_Float()
 {
-    INIT_CLASS(Number_Float);
-
     Collection_Dictionary natives = add_plugin(L"Type.Float");
 
     store_native(natives, SMB__equal,      NM_Number_Float_equals_);

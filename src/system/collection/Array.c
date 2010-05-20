@@ -60,7 +60,8 @@ void pre_init_Collection_Array()
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
     Collection_Array_Class = new_Bootstrapping_Class();
-    empty_Collection_Array         = NEW_t(Collection_Array);
+    empty_Collection_Array          = NEW_t(Collection_Array);
+    empty_Collection_Array->size    = 0;
     HEADER(empty_Collection_Array) = Collection_Array_Class;
 }
 
@@ -103,14 +104,7 @@ NATIVE2(Collection_Array_instVarAt_put_)
 
 void post_init_Collection_Array()
 {
-    Collection_Array_Class->name            = new_Type_Symbol_cached(L"Array"); 
-    Collection_Array_Class->methods         = new_Collection_Dictionary();
-    HEADER(Collection_Array_Class)->methods = new_Collection_Dictionary();
-    empty_Collection_Array->size            = 0;
-    
-    // TODO move Array to Collection
     Collection_Dictionary natives = add_plugin(L"Collection.Array");
-
     store_native(natives, SMB_instVarAt_,     NM_Collection_Array_instVarAt_);
     store_native(natives, SMB_instVarAt_put_, NM_Collection_Array_instVarAt_put_);
 }

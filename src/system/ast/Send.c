@@ -5,10 +5,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Send);
-
-/* ========================================================================= */
-
 #define AST_Send_args(send) send->arguments
 
 AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
@@ -33,11 +29,6 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
     }
     va_end(args);
     return result;
-}
-
-void pre_init_AST_Send()
-{
-    AST_Send_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -76,8 +67,3 @@ void AST_Send_eval(AST_Send self)
     push_CNT(store_argument);
     push_CNT(send_Eval);
 }
-
-/* ========================================================================= */
-
-void post_init_AST_Send(){}
-

@@ -18,8 +18,6 @@ struct AST_ReflectionMethod_t {
     Object          body[];
 };
 
-CREATE_INITIALIZERS(AST_ReflectionMethod)
-
 extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
                                       Collection_Array locals,
                                       Collection_Array annotations,

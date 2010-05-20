@@ -5,7 +5,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Info);
 AST_Info empty_AST_Info;
 
 /* ========================================================================= */
@@ -36,6 +35,11 @@ void pre_init_AST_Info()
     AST_Info_Class         = new_Class(Type_Object_Class);
     empty_AST_Info         = NEW_t(AST_Info);
     HEADER(empty_AST_Info) = AST_Info_Class;
+
+    empty_AST_Info->name       = empty_Type_String;
+    empty_AST_Info->sourceFile = empty_Type_String;
+    empty_AST_Info->line       = new_Number_SmallInt(-1);
+    empty_AST_Info->column     = new_Number_SmallInt(-1);
 }
 
 /* ========================================================================= */
@@ -49,15 +53,4 @@ void print_AST_Info(AST_Info info)
                           //info->sourceFile->value,
                           info->line->value);
     }
-}
-
-
-/* ========================================================================= */
-
-void post_init_AST_Info()
-{
-    empty_AST_Info->name       = empty_Type_String;
-    empty_AST_Info->sourceFile = empty_Type_String;
-    empty_AST_Info->line       = new_Number_SmallInt(-1);
-    empty_AST_Info->column     = new_Number_SmallInt(-1);
 }

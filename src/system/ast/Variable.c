@@ -1,12 +1,7 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/runtime/BlockContext.h>
 #include <system/ast/Variable.h>
-
-/* ========================================================================= */
-
-DECLARE_CLASS(AST_Variable);
 
 /* ========================================================================= */
 
@@ -28,11 +23,6 @@ AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
     result->name     = Nil;
     result->info     = empty_AST_Info;
     return result;
-}
-
-void pre_init_AST_Variable()
-{
-    AST_Variable_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -72,8 +62,3 @@ void AST_Variable_assign(AST_Variable self, Object value)
     // TODO
     assert0(NULL);
 }
-
-/* ========================================================================= */
-
-void post_init_AST_Variable(){}
-

@@ -21,7 +21,6 @@ void pre_init_Type_False() {
     False         = NEW_t(Type_Boolean);
     False->hash   = Type_Object_hash((Type_Object)False);
     HEADER(False) = False_Class;
-    False_Const   = new_AST_Constant((Object) False);
 }
 
 void pre_init_Type_True()
@@ -30,7 +29,6 @@ void pre_init_Type_True()
     True         = NEW_t(Type_Boolean);
     True->hash   = Type_Object_hash((Type_Object)True);
     HEADER(True) = True_Class;
-    True_Const   = new_AST_Constant((Object) True);
 }
 
 void pre_init_Type_Boolean()
@@ -53,16 +51,6 @@ Type_Boolean get_bool(bool value)
 }
 
 /* ========================================================================= */
-
-void post_init_Type_True()
-{
-}
-
-/* ========================================================================= */
-
-void post_init_Type_False()
-{
-}
 
 void CNT_loop_apply()
 {
@@ -101,8 +89,8 @@ NATIVE0(Type_Boolean_hash)
 
 void post_init_Type_Boolean()
 {
-    post_init_Type_True();
-    post_init_Type_False();
+    True_Const  = new_AST_Constant((Object)True);
+    False_Const = new_AST_Constant((Object)False);
     Collection_Dictionary natives = add_plugin(L"Type.Boolean");
     store_native(natives, SMB_hash,       NM_Type_Boolean_hash);
     

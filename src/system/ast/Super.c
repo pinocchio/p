@@ -6,10 +6,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Super);
-
-/* ========================================================================= */
-
 #define AST_Super_args(super) super->arguments
 
 AST_Super new_AST_Super(Object message, uns_int argc, ...)
@@ -29,11 +25,6 @@ AST_Super new_AST_Super(Object message, uns_int argc, ...)
     va_end(args);
 
     return result;
-}
-
-void pre_init_AST_Super()
-{
-    AST_Super_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -66,10 +57,4 @@ void AST_Super_eval(AST_Super super)
 
     push_CNT(store_argument);
     push_CNT(AST_Self_eval);
-}
-
-/* ========================================================================= */
-
-void post_init_AST_Super()
-{
 }

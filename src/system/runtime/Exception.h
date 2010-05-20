@@ -2,6 +2,6 @@
 #define RUNTIME_EXCEPTION_H
 
 extern void handle_assert(const char * message);
-extern void fail(Object exception_class, uns_int argc, ...);
+extern void fail(Type_Class exception_class, uns_int argc, ...);
 
 #endif // RUNTIME_EXCEPTION_H

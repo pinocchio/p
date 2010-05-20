@@ -111,8 +111,6 @@ NATIVE0(Number_SmallInt_asCharacter)
 
 void post_init_Number_SmallInt()
 {
-    INIT_CLASS(Number_SmallInt);
-
     Collection_Dictionary natives = add_plugin(L"Type.SmallInt");
     
     store_native(natives, SMB__equal,      NM_Number_SmallInt_equals_);

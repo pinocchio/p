@@ -21,6 +21,26 @@ Collection_Dictionary new_Collection_Dictionary()
 void pre_init_Collection_Dictionary()
 {
     Collection_Dictionary_Class = new_Bootstrapping_Class();
+    INIT_CLASS(Type_Object);
+
+    INIT_CLASS(Collection_Array);
+    INIT_CLASS(Collection_DictBucket);
+    INIT_CLASS(Collection_Dictionary);
+    INIT_CLASS(Number_SmallInt);
+    INIT_CLASS(Type_Symbol);
+    INIT_CLASS(Number_Float);
+
+    DIRECT_INIT_CLASS(Behavior);
+    DIRECT_INIT_CLASS(Class);
+    DIRECT_INIT_CLASS(Metaclass);
+
+    INIT_CLASS(Type_ObjectLayout);
+    INIT_CLASS(Type_IntLayout);
+    INIT_CLASS(Type_FloatLayout);
+    INIT_CLASS(Type_WordsLayout);
+    INIT_CLASS(Type_CharacterLayout);
+    INIT_CLASS(Type_ArrayLayout);
+    INIT_CLASS(Slot_Slot);
 }
 
 /* ========================================================================= */
@@ -306,7 +326,6 @@ NATIVE(Collection_Dictionary_grow)
 
 void post_init_Collection_Dictionary()
 {
-    INIT_CLASS(Collection_Dictionary);
     // TODO LAYOUT
     // change_slot_type(Collection_Dictionary_Class, Slot_UIntSlot_Class, 3, 0,1,2);
     HEADER(Collection_Dictionary_Class->methods) = Collection_Dictionary_Class;

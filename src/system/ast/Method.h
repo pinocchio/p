@@ -16,7 +16,6 @@ struct AST_Method_t {
     Object      body[];
 };
 
-CREATE_INITIALIZERS(AST_Method)
 extern AST_Method new_AST_Method(uns_int paramCount,
                                  uns_int localCount,
                                  uns_int statementCount);

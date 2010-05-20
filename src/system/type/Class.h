@@ -43,9 +43,11 @@ extern Type_Class new_Class_withMeta(Type_Class superclass, Object metaType);
 extern Type_Class new_Bootstrapping_Class();
 extern Type_Class new_Bootstrapping_Class_sized(uns_int size);
 
-#define INIT_CLASS(cls)\
-    cls##_Class->methods = new_Collection_Dictionary();\
-    HEADER(cls##_Class)->methods = new_Collection_Dictionary();
+#define DIRECT_INIT_CLASS(cls)\
+    cls->methods            = new_Collection_Dictionary();\
+    HEADER(cls)->methods    = new_Collection_Dictionary();
+
+#define INIT_CLASS(cls) DIRECT_INIT_CLASS(cls##_Class);
 
 /* ========================================================================= */
 

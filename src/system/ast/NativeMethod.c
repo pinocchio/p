@@ -7,10 +7,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_NativeMethod);
-
-/* ========================================================================= */
-
 AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
                                Collection_Array locals,
                                Collection_Array annotations,
@@ -27,11 +23,6 @@ AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
     result->code = NULL;
     COPY_ARGS(statementCount, result->body);
     return result;
-}
-
-void pre_init_AST_NativeMethod()
-{
-    AST_NativeMethod_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -64,10 +55,4 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Cl
         return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
     method->code(self, class, argc);
-}
-
-/* ========================================================================= */
-
-void post_init_AST_NativeMethod()
-{
 }

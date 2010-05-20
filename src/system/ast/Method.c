@@ -5,17 +5,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Method);
-
-/* ========================================================================= */
-
-void pre_init_AST_Method()
-{
-    AST_Method_Class = new_Class(Type_Object_Class);
-}
-
-/* ========================================================================= */
-
 AST_Method new_AST_Method(uns_int paramCount,
                           uns_int localCount,
                           uns_int statementCount)
@@ -106,10 +95,4 @@ void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
     activation_from_native(argc);
 
     start_eval(method);
-}
-
-/* ========================================================================= */
-
-void post_init_AST_Method()
-{
 }

@@ -5,10 +5,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(AST_Block);
-
-/* ========================================================================= */
-
 void init_raw_variable_array(Collection_Array array, uns_int scope_id,
                              uns_int size, uns_int local_id)
 {
@@ -60,11 +56,6 @@ AST_Block new_AST_Block_with(Collection_Array params, Collection_Array locals,
     return result;
 }
 
-void pre_init_AST_Block()
-{
-    AST_Block_Class = new_Class(Type_Object_Class);
-}
-
 /* ========================================================================= */
 
 void AST_Block_eval(AST_Block self)
@@ -73,7 +64,3 @@ void AST_Block_eval(AST_Block self)
 }
 
 /* ========================================================================= */
-
-void post_init_AST_Block()
-{
-}

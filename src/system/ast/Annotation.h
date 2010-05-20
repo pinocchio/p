@@ -11,8 +11,6 @@ struct AST_Annotation_t {
     Object  arguments[];
 };
 
-CREATE_INITIALIZERS(AST_Annotation);
-
 extern AST_Annotation new_AST_Annotation_raw(Object selector, uns_int argc);
 extern AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...);
 

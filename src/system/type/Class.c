@@ -62,9 +62,11 @@ Type_Class new_Class(Type_Class superclass)
 
 void pre_init_Type_Class()
 {
-    Metaclass               = NEW_t(Type_Class);
-    Object Metaclass_mclass = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    HEADER(Metaclass)       = (Type_Class)Metaclass_mclass;
+    Metaclass                   = NEW_t(Type_Class);
+    Object Metaclass_mclass     = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    HEADER(Metaclass)           = (Type_Class)Metaclass_mclass;
+    Behavior                    = new_Bootstrapping_Class();
+    Class                       = new_Bootstrapping_Class();
 }
 
 void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
@@ -323,19 +325,5 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 
 void post_init_Type_Class()
 {
-    HEADER(Metaclass)->methods = new_Collection_Dictionary();
-        
-    Metaclass->methods  = new_Collection_Dictionary();
-    Behavior            = new_Class(Type_Object_Class);
-    Class               = new_Class(Behavior);
-    Metaclass->super    = Behavior;
-    
     HEADER(Type_Object_Class)->super = Class;
-    HEADER(Metaclass)->super         = HEADER(Behavior);
-
-    //Class->layout               = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
-    // HEADER(Metaclass)->layout   = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
-    //Behavior->layout            = create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS);
-    //Metaclass->layout           = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
-    //inspect(pclass(Type_Object_Class));
 }

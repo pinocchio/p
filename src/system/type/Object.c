@@ -172,8 +172,6 @@ NATIVE1(Type_Object_perform_)
 
 void post_init_Type_Object()
 {
-    INIT_CLASS(Type_Object);
-
     Collection_Dictionary natives = add_plugin(L"Type.Object");
     
     store_native(natives, SMB_size,                   NM_Type_Object_size);
