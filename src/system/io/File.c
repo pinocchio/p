@@ -58,15 +58,9 @@ IO_File new_IO_WriteFile_from(FILE* file)
 void pre_init_IO_File()
 {
     // TODO check if this makes sense.
-    IO_File_Class = new_Class_named(Type_Object_Class,
-                                    L"File",
-                                    CREATE_OBJECT_TAG(IO_FILE));
-    IO_ReadFile_Class = new_Class_named(IO_File_Class,
-                                        L"ReadFile",
-                                        CREATE_OBJECT_TAG(IO_FILE));
-    IO_WriteFile_Class = new_Class_named(IO_File_Class,
-                                         L"WriteFile",
-                                         CREATE_OBJECT_TAG(IO_FILE));
+    IO_File_Class = new_Class(Type_Object_Class);
+    IO_ReadFile_Class = new_Class(IO_File_Class);
+    IO_WriteFile_Class = new_Class(IO_File_Class);
     REFER_TO(IO_File);
     REFER_TO(IO_ReadFile);
     REFER_TO(IO_WriteFile);
@@ -246,6 +240,7 @@ NATIVE0(IO_File_close)
 void post_init_IO_File()
 {
     /*
+    TODO LAYOUT
     HEADER(((Collection_Array)IO_File_Class->layout)->values[0]) = Slot_UIntSlot_Class;
     HEADER(((Collection_Array)IO_ReadFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;
     HEADER(((Collection_Array)IO_WriteFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;

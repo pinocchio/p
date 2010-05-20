@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define SLOT_UINTSLOT_SIZE 3
-#define SLOT_UINTSLOT_VARS L"index", L"name", L"package"
-
-/* ========================================================================= */
-
 struct Slot_UIntSlot_t {
     Number_SmallInt index;
     Object          name;

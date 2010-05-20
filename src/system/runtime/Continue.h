@@ -5,9 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_CONTINUE_SIZE 4
-#define RUNTIME_CONTINUE_VARS L"expOffset", L"cntOffset", L"interpreterStack", L"context"  
-
 struct Runtime_Continue_t {
     uns_int     exp_offset;
     uns_int     cnt_offset;

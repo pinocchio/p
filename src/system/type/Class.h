@@ -11,11 +11,8 @@ EXPORT_REFERENCE(Behavior);
 /* ========================================================================= */
 
 #define BEHAVIOR_SIZE 3
-#define BEHAVIOR_VARS L"layout", L"super", L"methods"
 #define METACLASS_SIZE (BEHAVIOR_SIZE + 1)
-#define METACLASS_VARS BEHAVIOR_VARS, L"instance"
 #define CLASS_SIZE (BEHAVIOR_SIZE + 2)
-#define CLASS_VARS BEHAVIOR_VARS, L"name", L"package"
 
 /* ========================================================================= */
 
@@ -45,11 +42,15 @@ extern void inter_init_Type_Class();
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Type_Class superclass, Object layout);
-extern Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaType);
-extern Type_Class new_Class_named(Type_Class superclass, const wchar_t* name,
-                                  Object layout);
+extern Type_Class new_Class(Type_Class superclass);
+extern Type_Class new_Class_withMeta(Type_Class superclass, Object metaType);
 extern Type_Class new_Bootstrapping_Class();
+extern Type_Class new_Bootstrapping_Class_sized(uns_int size);
+
+#define INIT_CLASS(cls)\
+    cls##_Class->methods = new_Collection_Dictionary();\
+    HEADER(cls##_Class)->methods = new_Collection_Dictionary();\
+    REFER_TO(cls);
 
 /* ========================================================================= */
 

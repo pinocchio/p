@@ -13,18 +13,6 @@ Collection_Dictionary Symbol_Table;
 
 /* ========================================================================= */
 
-Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
-{
-    Type_Symbol result  = new_Type_String(input);
-    Object cachedSymbol = Collection_Dictionary_quick_lookup(Symbol_Table, (Object)result);
-    if (cachedSymbol != NULL) {
-        return (Type_Symbol)cachedSymbol;
-    }
-    HEADER(result) = Type_Symbol_Class;
-    Collection_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
-    return result;
-}
-
 Type_Symbol new_Type_Symbol(const wchar_t* input)
 {
     uns_int size        = wcslen(input) + 1;
@@ -36,10 +24,22 @@ Type_Symbol new_Type_Symbol(const wchar_t* input)
     return result;
 }
 
+Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
+{
+    Type_Symbol result  = new_Type_Symbol(input);
+    Object cachedSymbol = Collection_Dictionary_quick_lookup(Symbol_Table, (Object)result);
+    if (cachedSymbol != NULL) {
+        return (Type_Symbol)cachedSymbol;
+    }
+    HEADER(result) = Type_Symbol_Class;
+    Collection_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
+    return result;
+}
+
 /*
  * Initialize Symbols before installing methods.
  */
-void initialize_Symbol()
+void init_SymbolTable()
 {
     Symbol_Table = new_Collection_Dictionary();
     #include <system/type/SymbolInitialization.ci> 
@@ -47,8 +47,8 @@ void initialize_Symbol()
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Class(Type_Object_Class, create_layout(0, WORDS));
-    initialize_Symbol();
+    Type_Symbol_Class = new_Bootstrapping_Class();
+    Type_Symbol_Class->layout = create_layout(0, WORDS);
 }
 /* ========================================================================= */
 
@@ -133,13 +133,7 @@ NATIVE0(Type_Symbol_size)
 
 void post_init_Type_Symbol()
 {
-    REFER_TO(Type_Symbol);
-    install_symbol_methods(Type_Symbol_Class);
-    Type_Symbol_Class->name = new_Type_Symbol_cached(L"Symbol");
-}
-
-void install_symbol_methods(Type_Class class)
-{
+    INIT_CLASS(Type_Symbol);
     Collection_Dictionary natives = add_plugin(L"Type.Symbol");
     store_native(natives, SMB_at_,       NM_Type_Symbol_at_);
     store_native(natives, SMB_asString,  NM_Type_Symbol_asString);

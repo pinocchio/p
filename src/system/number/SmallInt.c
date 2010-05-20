@@ -112,12 +112,7 @@ NATIVE0(Number_SmallInt_asCharacter)
 
 void post_init_Number_SmallInt()
 {
-    
-    HEADER(Number_SmallInt_Class)->methods = new_Collection_Dictionary();
-    HEADER(Number_SmallInt_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
-    
-    Number_SmallInt_Class->name            = new_Type_String(L"SmallInt");
-    Number_SmallInt_Class->methods         = new_Collection_Dictionary();
+    INIT_CLASS(Number_SmallInt);
 
     Collection_Dictionary natives = add_plugin(L"Type.SmallInt");
     

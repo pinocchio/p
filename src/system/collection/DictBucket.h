@@ -5,12 +5,9 @@
 
 /* ========================================================================= */
 
-#define COLLECTION_DICTBUCKET_SIZE 1
-#define COLLECTION_DICTBUCKET_VARS L"tally"
-
 struct Collection_DictBucket_t {
     uns_int 		size;
-    Number_SmallInt 	tally;
+    Number_SmallInt tally;
     Object  	    values[];
 };
 

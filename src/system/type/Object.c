@@ -12,30 +12,13 @@ DECLARE_CLASS(Type_Object);
 
 void pre_init_Type_Object() 
 {
-    // explicitely use new_Class not new_Class_named! to avoid early use
-    // of symbols.
-    // do manually instanciate since we cannot use dict yet
-    Type_Class Object_mclass  = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    Type_Object_Class         = (Type_Class)basic_instantiate_Object(Object_mclass, CLASS_SIZE);
-    Type_Object_Class->super  = (Type_Class)Nil;
-
-    /*
-    Type_Class_Class          = NEW_t(Type_Class);
-    Type_Class_Class->layout    = create_layout(4, OBJECT);
-    
-    HEADER(Type_Class_Class)  = (Object)Type_Class_Class;
-    Type_Class_Class->super   = (Object)Type_Object_Class;
-    Type_Object_Class->layout = create_layout(0, OBJECT);
-    
-    HEADER(Type_Object_Class) = (Object) Type_Class_Class;
-    Type_Object_Class->super  = Nil;
-    */
+    Type_Object_Class = new_Bootstrapping_Class();
 }
 
 void inter_init_Type_Object() 
 {
-    HEADER(Type_Object_Class)->layout = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
-    Type_Object_Class->layout         = create_layout(OBJECT_SIZE, OBJECT); 
+    // TODO FIX THIS CRAP
+    HEADER(Type_Object_Class)->layout = create_layout(CLASS_SIZE, OBJECT, L"a",L"b",L"c",L"d",L"e");
     REFER_TO(Type_Object);
 }
 
@@ -85,10 +68,12 @@ Object Object_instVarAt_(Object self, int index)
         return raw_Type_Object_at((Type_Object)self, tag, index);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         return raw_Collection_Array_instAt((Collection_Array)self, tag, index);
+    } else if (tag == Nil) {
+        assert1(NULL, "Trying to access object with Nil as layout");
     } else {
         assert1(NULL, "Trying to access object without instvars");
-		return NULL;
     }
+    return NULL;
 }
 
 void Object_instVarAt_put_(Object self, int index, Object value)
@@ -98,6 +83,8 @@ void Object_instVarAt_put_(Object self, int index, Object value)
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         raw_Collection_Array_instAt_put((Collection_Array)self, tag, index, value);
+    } else if (tag == Nil) {
+        assert1(NULL, "Trying to access object with Nil as layout");
     } else {
         assert1(NULL, "Trying to access object without instvars");
     }
@@ -192,14 +179,7 @@ NATIVE1(Type_Object_perform_)
 
 void post_init_Type_Object()
 {
-    // put the names here, now after the Symbols_Class is initialized
-    /* 
-    Type_Class_Class->name   = new_Type_String(L"Type_Class");
-    Type_Class_Class->methods = new_Collection_Dictionary();
-    */
-    HEADER(Type_Object_Class)->methods = new_Collection_Dictionary();
-    Type_Object_Class->name = new_Type_String(L"Object");
-    Type_Object_Class->methods = new_Collection_Dictionary();
+    INIT_CLASS(Type_Object);
 
     Collection_Dictionary natives = add_plugin(L"Type.Object");
     

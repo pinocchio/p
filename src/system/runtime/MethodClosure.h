@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_METHODCLOSURE_SIZE 4
-#define RUNTIME_METHODCLOSURE_VARS L"code", L"info", L"selector", L"host"
-
-/* ========================================================================= */
-
 struct Runtime_MethodClosure_t {
     AST_Method          code;
     AST_Info            info;

@@ -32,10 +32,7 @@ Organization_ClassReference new_Organization_ClassReference_empty()
 
 void pre_init_Organization_ClassReference()
 {
-    Organization_ClassReference_Class =
-        new_Class_named(Type_Object_Class,
-                        L"ClassReference",
-                        CREATE_OBJECT_TAG(ORGANIZATION_CLASSREFERENCE));
+    Organization_ClassReference_Class = new_Class(Type_Object_Class);
     REFER_TO(Organization_ClassReference);
 }
 

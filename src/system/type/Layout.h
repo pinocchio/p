@@ -52,9 +52,6 @@ extern Object file_layout;
 #define OBJECT_OF_LAYOUT(o, layout)\
     TAG_IS_LAYOUT(GETTAG(o), layout)
 
-#define CREATE_OBJECT_TAG(name) create_layout(name##_SIZE, OBJECT, name##_VARS)
-#define CREATE_ARRAY_TAG(name) create_layout(name##_SIZE, ARRAY, name##_VARS)
-
 /* ========================================================================= */
 
 void pre_init_Type_Layout();
@@ -64,6 +61,8 @@ void post_init_Type_Layout();
 
 extern Object create_layout(uns_int size, Type_Tag tag, ...);
 extern Collection_Array create_layout_with_vars(Type_Class layout, uns_int size);
+
+extern void change_slot_type(Type_Class class, Type_Class type, int counter, ...);
 
 /* ========================================================================= */
 

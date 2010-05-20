@@ -22,9 +22,7 @@ void pre_init_Type_Nil()
 
 void post_init_Type_Nil()
 {
-    Type_Nil_Class     = new_Class_named(Type_Object_Class,
-                                         L"Nil",
-                                         create_layout(0, OBJECT));
+    Type_Nil_Class     = new_Class(Type_Object_Class);
     REFER_TO(Type_Nil);
     HEADER(Nil)        = Type_Nil_Class;
     Nil_Const          = new_AST_Constant(Nil);

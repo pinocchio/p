@@ -5,9 +5,6 @@
 
 /* ========================================================================= */
 
-#define AST_SUPER_SIZE 4
-#define AST_SUPER_VARS L"info", L"cache", L"message", L"unused"
-
 struct AST_Super_t {
     uns_int         size;
     AST_Info        info;   

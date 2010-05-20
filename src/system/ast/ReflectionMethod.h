@@ -7,9 +7,6 @@
 
 /* ========================================================================= */
 
-#define AST_REFLECTIONMETHOD_SIZE 6
-#define AST_REFLECTIONMETHOD_VARS L"info", L"params", L"locals", L"package", L"annotations", L"cache"
-
 struct AST_ReflectionMethod_t {
     uns_int         size;
     AST_Info        info;

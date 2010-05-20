@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define AST_BLOCK_SIZE 3
-#define AST_BLOCK_VARS L"info", L"params", L"locals"
-
-/* ========================================================================= */
-
 struct AST_Block_t {
     uns_int     size;
     AST_Info    info;

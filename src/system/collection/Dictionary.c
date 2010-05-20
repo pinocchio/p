@@ -11,18 +11,16 @@ DECLARE_CLASS(Collection_Dictionary);
 Collection_Dictionary new_Collection_Dictionary()
 {
     NEW_OBJECT(Collection_Dictionary);
-    result->size      = new_Number_SmallInt(0);
-    result->ratio     = new_Number_SmallInt(500);
-    result->maxLinear = new_Number_SmallInt(20);
+    result->size      = 0;
+    result->ratio     = 500;
+    result->maxLinear = 20;
     result->data      = new_Collection_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 
 void pre_init_Collection_Dictionary()
 {
-    Collection_Dictionary_Class = new_Class(Type_Object_Class,
-                                      CREATE_OBJECT_TAG(COLLECTION_DICTIONARY));
-    REFER_TO(Collection_Dictionary);
+    Collection_Dictionary_Class = new_Bootstrapping_Class();
 }
 
 /* ========================================================================= */
@@ -75,10 +73,10 @@ static Collection_DictBucket * get_bucketp(Collection_Dictionary dictionary, int
 
 static int Collection_Dictionary_grow_check(Collection_Dictionary self)
 {
-    uns_int amount = unwrap_int((Object)self->size) + 1;
-    self->size     = new_Number_SmallInt(amount);
+    uns_int amount = self->size + 1;
+    self->size     = amount;
     uns_int size   = self->data->size;
-    return (100 * amount) / size > unwrap_int((Object)self->ratio);
+    return (100 * amount) / size > self->ratio;
 }
 
 static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
@@ -87,7 +85,7 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
 
     Collection_Array old = self->data;
     self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
-    self->size     = new_Number_SmallInt(0);
+    self->size     = 0;
     int i;
     for (i = 0; i < old->size; i++) {
         Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
@@ -105,6 +103,7 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
 void Collection_Dictionary_quick_store(Collection_Dictionary self,
                                  Object key, Object value)
 {
+    assert0(self != (Collection_Dictionary)Nil);
     int hash = get_hash(self, key);
     Collection_DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (Collection_DictBucket)Nil) {
@@ -199,7 +198,7 @@ static void Collection_Dictionary_grow(Collection_Dictionary self)
 {
     Collection_Array old = self->data;
     self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
-    self->size     = new_Number_SmallInt(0);
+    self->size     = 0;
     
     push_CNT(dict_grow);
     claim_EXP(3);
@@ -307,7 +306,9 @@ NATIVE(Collection_Dictionary_grow)
 
 void post_init_Collection_Dictionary()
 {
-    Collection_Dictionary_Class->name = new_Type_Symbol_cached(L"Dictionary");
+    INIT_CLASS(Collection_Dictionary);
+    // TODO LAYOUT
+    // change_slot_type(Collection_Dictionary_Class, Slot_UIntSlot_Class, 3, 0,1,2);
     HEADER(Collection_Dictionary_Class->methods) = Collection_Dictionary_Class;
     HEADER(HEADER(Collection_Dictionary_Class)->methods) = Collection_Dictionary_Class;
 

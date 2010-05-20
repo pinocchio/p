@@ -5,9 +5,6 @@
 
 /* ========================================================================= */
 
-#define ORGANIZATION_CLASSREFERENCE_SIZE 3
-#define ORGANIZATION_CLASSREFERENCE_VARS L"referenceName", L"package", L"class"
-
 struct Organization_ClassReference_t {
     Object referenceName;
     Object package;

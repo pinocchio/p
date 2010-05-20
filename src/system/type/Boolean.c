@@ -17,9 +17,7 @@ Type_Boolean True;
 /* ========================================================================= */
 
 void pre_init_Type_False() {
-    False_Class = new_Class_named(Type_Boolean_Class,
-                                  L"False",
-                                  create_layout(0, OBJECT));
+    False_Class = new_Class(Type_Boolean_Class);
     REFER_TO(False);
     False         = NEW_t(Type_Boolean);
     False->hash   = Type_Object_hash((Type_Object)False);
@@ -29,9 +27,7 @@ void pre_init_Type_False() {
 
 void pre_init_Type_True()
 {
-    True_Class = new_Class_named(Type_Boolean_Class,
-                                 L"True",
-                                 create_layout(0, OBJECT));
+    True_Class = new_Class(Type_Boolean_Class);
     REFER_TO(True);
     True         = NEW_t(Type_Boolean);
     True->hash   = Type_Object_hash((Type_Object)True);
@@ -41,9 +37,7 @@ void pre_init_Type_True()
 
 void pre_init_Type_Boolean()
 {
-    Type_Boolean_Class = new_Class_named(Type_Object_Class,
-                                         L"Boolean",
-                                         create_layout(0, OBJECT));
+    Type_Boolean_Class = new_Class(Type_Object_Class);
     REFER_TO(Type_Boolean);
     pre_init_Type_True();
     pre_init_Type_False();

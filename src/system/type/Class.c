@@ -21,16 +21,23 @@ DECLARE_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
-Type_Class new_Bootstrapping_Class()
+Type_Class new_Bootstrapping_Class_sized(uns_int size)
 {
-    Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, size);
     Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
+    // Name of metaclass is its instance pointer.
+    mcls->name = (Type_Symbol)cls;
     return cls;
 }
 
-Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaType)
+Type_Class new_Bootstrapping_Class()
+{
+    return new_Bootstrapping_Class_sized(METACLASS_SIZE);
+}
+
+Type_Class new_Class_withMeta(Type_Class superclass, Object metaType)
 {    
-    Type_Class metaclass = (Type_Class)instantiate(Metaclass);
+    Type_Class metaclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     ASSERT_TAG_LAYOUT(metaType, Object);
     assert0(((Collection_Array)metaType)->size >= 3); // we need at least place for
                                                // methods, super and layout.  
@@ -41,22 +48,13 @@ Type_Class new_Class_withMeta(Type_Class superclass, Object layout, Object metaT
     Type_Class result    = (Type_Class)instantiate(metaclass);
     result->methods      = new_Collection_Dictionary();
     Type_Class_set_superclass(result, superclass);
-    result->layout       = layout;
     metaclass->name      = (Type_Symbol)result;
     return result;
 }
 
-Type_Class new_Class(Type_Class superclass, Object layout)
+Type_Class new_Class(Type_Class superclass)
 {
-    return new_Class_withMeta(superclass, layout, HEADER(superclass)->layout);
-}
-
-
-Type_Class new_Class_named(Type_Class superclass, const wchar_t* name, Object layout)
-{
-    Type_Class result = new_Class(superclass, layout);
-    result->name      = new_Type_Symbol_cached(name); 
-    return result;
+    return new_Class_withMeta(superclass, HEADER(superclass)->layout);
 }
 
 void pre_init_Type_Class()
@@ -66,16 +64,13 @@ void pre_init_Type_Class()
     HEADER(Metaclass)       = (Type_Class)Metaclass_mclass;
 }
 
-void inter_init_Type_Class()
-{
-    Metaclass->layout = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
-}
-
 void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
 {
     Type_Class metaclass = HEADER(cls);
     cls->super           = superclass;
-    metaclass->super     = HEADER(superclass);
+    if (superclass != (Type_Class)Nil) {
+        metaclass->super = HEADER(superclass);
+    }
 }
 
 /* ========================================================================= */
@@ -97,7 +92,7 @@ void Method_invoke(Object method, Object self, uns_int argc) {
     if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, argc);
     } else {
-        inspect(method);
+        // inspect(method);
         assert1(NULL, "Unknown type of method installation");
     }
 }
@@ -326,17 +321,10 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 void post_init_Type_Class()
 {
     HEADER(Metaclass)->methods = new_Collection_Dictionary();
-    HEADER(Metaclass)->layout =
-        create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
         
     Metaclass->methods  = new_Collection_Dictionary();
-    Metaclass->name     = new_Type_String(L"Metaclass");
-    Behavior            = new_Class_named(Type_Object_Class,
-                                L"Behavior",
-                                create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS));
-    Class               = new_Class_named(Behavior,
-                            L"Class",
-                            create_layout(CLASS_SIZE, OBJECT, CLASS_VARS));
+    Behavior            = new_Class(Type_Object_Class);
+    Class               = new_Class(Behavior);
     Metaclass->super    = Behavior;
     
     HEADER(Type_Object_Class)->super = Class;
@@ -345,4 +333,10 @@ void post_init_Type_Class()
     Metaclass_Reference = new_Organization_ClassReference(Metaclass);
     Class_Reference     = new_Organization_ClassReference(Class);
     Behavior_Reference  = new_Organization_ClassReference(Behavior);
+
+    //Class->layout               = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
+    // HEADER(Metaclass)->layout   = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
+    //Behavior->layout            = create_layout(BEHAVIOR_SIZE, OBJECT, BEHAVIOR_VARS);
+    //Metaclass->layout           = create_layout(METACLASS_SIZE, OBJECT, METACLASS_VARS);
+    //inspect(pclass(Type_Object_Class));
 }

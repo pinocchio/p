@@ -7,9 +7,6 @@
 
 /* ========================================================================= */
 
-#define AST_NATIVEMETHOD_SIZE 6
-#define AST_NATIVEMETHOD_VARS L"info", L"params", L"locals", L"package", L"annotations", L"code"
-
 struct AST_NativeMethod_t {
     uns_int         size;
     AST_Info        info;

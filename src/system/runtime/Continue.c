@@ -26,14 +26,11 @@ Runtime_Continue new_Runtime_Continue_offset(int offset)
 
 void pre_init_Runtime_Continue()
 {
-    Runtime_Continue_Class =
-        new_Class_named(Type_Object_Class,
-                        L"Continue",
-                        CREATE_OBJECT_TAG(RUNTIME_CONTINUE));
-    
-    Collection_Array layout = (Collection_Array)Runtime_Continue_Class->layout;
-    HEADER(layout->values[0]) = Slot_UIntSlot_Class;
-    HEADER(layout->values[1]) = Slot_UIntSlot_Class;
+    Runtime_Continue_Class = new_Class(Type_Object_Class);
+    // LAYOUT TODO
+    // Collection_Array layout = (Collection_Array)Runtime_Continue_Class->layout;
+    // HEADER(layout->values[0]) = Slot_UIntSlot_Class;
+    // HEADER(layout->values[1]) = Slot_UIntSlot_Class;
     REFER_TO(Runtime_Continue);
 }
 

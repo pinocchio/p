@@ -93,14 +93,8 @@ void set_env(Object env)
 
 void pre_init_Runtime_BlockContext()
 {
-    Runtime_BlockContext_Class =
-        new_Class_named(Runtime_Context_Class,
-                        L"BlockContext",
-                        CREATE_ARRAY_TAG(RUNTIME_BLOCKCONTEXT));
+    Runtime_BlockContext_Class = new_Class(Runtime_Context_Class);
 
-    Collection_Array layout = (Collection_Array)Runtime_BlockContext_Class->layout;
-    HEADER(layout->values[0]) = Slot_UIntSlot_Class;
-    HEADER(layout->values[1]) = Slot_UIntSlot_Class;
     REFER_TO(Runtime_BlockContext);    
 }
 

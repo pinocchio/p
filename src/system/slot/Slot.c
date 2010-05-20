@@ -12,31 +12,14 @@ Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name)
 {
     NEW_OBJECT(Slot_Slot);
     result->index   = new_Number_SmallInt(index);
-    result->name    = (Object)new_Type_Symbol(name);
+    result->name    = (Object)new_Type_Symbol_cached(name);
     result->package = (Object)Nil;
     return result;
 }
 
-void fix_layout(Collection_Array layout)
-{
-    uns_int size = layout->size;
-    while(size--) {
-        Object slot = layout->values[size];
-        HEADER(slot) = Slot_Slot_Class;
-        HEADER(((Slot_Slot)slot)->name) = Type_Symbol_Class;
-    }
-}
-
 void pre_init_Slot_Slot()
 {
-    Slot_Slot_Class =
-        new_Class_named(Type_Object_Class,
-                        L"Slot",
-                        CREATE_OBJECT_TAG(SLOT_SLOT));
-    fix_layout((Collection_Array)Slot_Slot_Class->layout);
-    fix_layout((Collection_Array)Collection_Dictionary_Class->layout);
-    fix_layout((Collection_Array)Metaclass->layout);
-    fix_layout((Collection_Array)HEADER(Type_Object_Class)->layout);
+    Slot_Slot_Class = new_Bootstrapping_Class();
 }
 
 /* ========================================================================= */
@@ -85,7 +68,7 @@ NATIVE2(Slot_Slot_assign_on_)
 
 void post_init_Slot_Slot()
 {
-    REFER_TO(Slot_Slot);
+    INIT_CLASS(Slot_Slot);
 
     Collection_Dictionary natives = add_plugin(L"Slot.Slot");
     store_native(natives, SMB_assign_on_, NM_Slot_Slot_assign_on_);

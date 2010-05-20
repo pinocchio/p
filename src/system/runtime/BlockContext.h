@@ -10,9 +10,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_BLOCKCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 1)
-#define RUNTIME_BLOCKCONTEXT_VARS RUNTIME_CONTEXT_VARS, L"outerScope"
-
 struct Runtime_BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;

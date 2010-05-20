@@ -35,9 +35,7 @@ AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
 
 void pre_init_AST_ReflectionMethod()
 {
-    AST_ReflectionMethod_Class = new_Class_named(Type_Object_Class,
-                                                 L"ReflectionMethod",
-                                                 CREATE_ARRAY_TAG(AST_REFLECTIONMETHOD));
+    AST_ReflectionMethod_Class = new_Class(Type_Object_Class);
     REFER_TO(AST_ReflectionMethod);
 }
 
@@ -66,6 +64,5 @@ void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure, Object self, Typ
 
 void post_init_AST_ReflectionMethod()
 {
-    // Collection_Dictionary natives = add_plugin(L"AST.ReflectionMethod");
-};
+}
 

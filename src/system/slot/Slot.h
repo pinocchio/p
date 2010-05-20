@@ -5,15 +5,10 @@
 
 /* ========================================================================= */
 
-#define SLOT_SLOT_SIZE 3
-#define SLOT_SLOT_VARS L"index", L"name", L"package"
-
-/* ========================================================================= */
-
 struct Slot_Slot_t {
     Number_SmallInt index;
-    Object        name;
-    Object        package;
+    Object          name;
+    Object          package;
 };
 
 CREATE_INITIALIZERS(Slot_Slot);

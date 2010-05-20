@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_MESSAGE_SIZE 1
-#define RUNTIME_MESSAGE_VARS L"selector"
-
-/* ========================================================================= */
-
 struct Runtime_Message_t {
     uns_int     size;
     Type_Symbol selector;

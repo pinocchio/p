@@ -10,10 +10,7 @@ DECLARE_CLASS(Runtime_MethodClosure);
 
 void pre_init_Runtime_MethodClosure()
 {
-    Runtime_MethodClosure_Class = 
-        new_Class_named(Type_Object_Class,
-                        L"MethodClosure",
-                        CREATE_OBJECT_TAG(RUNTIME_METHODCLOSURE));
+    Runtime_MethodClosure_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
@@ -46,7 +43,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     } else if (HEADER(method) == AST_Method_Class) {
         return AST_Method_invoke(closure, method, self, argc);
     } else {
-        inspect(closure->code);
+        // inspect(closure->code);
         assert1(NULL, "Unknown type of method");
     }
 }

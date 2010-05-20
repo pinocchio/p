@@ -35,9 +35,6 @@ def createCHSourcesAt(path)
 
 #{separator}
 
-#define #{fullName.upcase}_SIZE -1 \\CHANGE!
-#define #{fullName.upcase}_VARS L"XXX" \\CHANGE!
-
 struct #{fullName}_t {
     #error "TODO fill out struct"
 };
@@ -74,7 +71,7 @@ DECLARE_CLASS(#{fullName});
 
 void pre_init_#{fullName}()
 {
-    #{fullName}_Class = new_Class_named(Type_Object_Class, L"#{fullName}");
+    #{fullName}_Class = new_Class(Type_Object_Class);
     REFER_TO(#{fullName});
 }
 

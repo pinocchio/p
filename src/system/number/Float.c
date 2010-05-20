@@ -92,11 +92,7 @@ NATIVE0(Number_Float_asString)
 
 void post_init_Number_Float()
 {
-    HEADER(Number_Float_Class)->methods = new_Collection_Dictionary();
-    HEADER(Number_Float_Class)->layout  = CREATE_OBJECT_TAG(CLASS);
-    
-    Number_Float_Class->name            = new_Type_String(L"Float");
-    Number_Float_Class->methods         = new_Collection_Dictionary();
+    INIT_CLASS(Number_Float);
 
     Collection_Dictionary natives = add_plugin(L"Type.Float");
 

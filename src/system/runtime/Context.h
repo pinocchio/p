@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_CONTEXT_SIZE 5
-#define RUNTIME_CONTEXT_VARS\
-    L"scopeId", L"captured", L"closure",\
-    L"homeContext", L"returnContext"
-
 CREATE_INITIALIZERS(Runtime_Context)
 
 /* ========================================================================= */

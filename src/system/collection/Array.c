@@ -59,8 +59,7 @@ Collection_Array new_Collection_Array_withAll(uns_int c, Object element)
 void pre_init_Collection_Array() 
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
-    Collection_Array_Class = new_Class(Type_Object_Class, create_layout(0, ARRAY));
-    REFER_TO(Collection_Array);
+    Collection_Array_Class = new_Bootstrapping_Class();
     empty_Collection_Array         = NEW_t(Collection_Array);
     HEADER(empty_Collection_Array) = Collection_Array_Class;
 }
@@ -104,6 +103,7 @@ NATIVE2(Collection_Array_instVarAt_put_)
 
 void post_init_Collection_Array()
 {
+    REFER_TO(Collection_Array);
     Collection_Array_Class->name            = new_Type_Symbol_cached(L"Array"); 
     Collection_Array_Class->methods         = new_Collection_Dictionary();
     HEADER(Collection_Array_Class)->methods = new_Collection_Dictionary();

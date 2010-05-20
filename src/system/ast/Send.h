@@ -5,9 +5,6 @@
 
 /* ========================================================================= */
 
-#define AST_SEND_SIZE 4
-#define AST_SEND_VARS L"info", L"cache", L"message", L"receiver"
-
 struct AST_Send_t {
     uns_int     size;
     AST_Info    info;

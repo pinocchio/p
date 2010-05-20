@@ -16,10 +16,7 @@ Runtime_Continuation new_Runtime_Continuation()
 
 void pre_init_Runtime_Continuation()
 {
-    Runtime_Continuation_Class =
-        new_Class_named(Type_Object_Class,
-                        L"Continuation",
-                        CREATE_OBJECT_TAG(RUNTIME_CONTINUATION));
+    Runtime_Continuation_Class = new_Class(Type_Object_Class);
     
     REFER_TO(Runtime_Continuation);
 }

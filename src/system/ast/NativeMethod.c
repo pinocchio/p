@@ -31,9 +31,7 @@ AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
 
 void pre_init_AST_NativeMethod()
 {
-    AST_NativeMethod_Class = new_Class_named(Type_Object_Class,
-                                             L"NativeMethod",
-                                             CREATE_ARRAY_TAG(AST_NATIVEMETHOD));
+    AST_NativeMethod_Class = new_Class(Type_Object_Class);
     REFER_TO(AST_NativeMethod);
 }
 
@@ -73,6 +71,4 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Cl
 
 void post_init_AST_NativeMethod()
 {
-    // Collection_Dictionary natives = add_plugin(L"AST.NativeMethod");
-};
-
+}

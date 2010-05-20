@@ -9,7 +9,7 @@ void help() {
     fwprintf(stderr, L"    at              (Object, uns_int)      \n");
     fwprintf(stderr, L"    atn             (Object, wchar_t *)    \n");
     fwprintf(stderr, L"    atX             (Object, count, idx...)\n");
-    fwprintf(stderr, L"    class           (Object)               \n");
+    fwprintf(stderr, L"    pclass          (Object)               \n");
     fwprintf(stderr, L"    i,inspect       (Object)               \n");
     fwprintf(stderr, L"    inspect_at      (Object, uns_int)      \n");
     fwprintf(stderr, L"    inspect_atn     (Object, wchar_t *)    \n");
@@ -227,8 +227,10 @@ void shallow_inspect(Object o)
 
     if (HEADER(cls) == Metaclass) {
         fwprintf(stderr, L"%ls", ((Type_Class)o)->name->value);
+        fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
     } else {
         fwprintf(stderr, L"Instance of %ls", cls->name->value);
+        fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
     }
 
     Object tag = GETTAG(o);

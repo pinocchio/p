@@ -5,13 +5,10 @@
 
 /* ========================================================================= */
 
-#define COLLECTION_DICTIONARY_SIZE 4
-#define COLLECTION_DICTIONARY_VARS L"size", L"maxLinear", L"ratio", L"buckets"
-
 struct Collection_Dictionary_t {
-    Number_SmallInt size;
-    Number_SmallInt maxLinear;
-    Number_SmallInt ratio;
+    uns_int             size;
+    uns_int             maxLinear;
+    uns_int             ratio;
     Collection_Array    data;
 };
 

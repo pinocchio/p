@@ -20,8 +20,7 @@ Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name)
 
 void pre_init_Slot_PointerSlot()
 {
-    Slot_PointerSlot_Class = new_Class_named(Type_Object_Class, L"PointerSlot",
-							    CREATE_OBJECT_TAG(SLOT_POINTERSLOT));
+    Slot_PointerSlot_Class = new_Class(Type_Object_Class);
     REFER_TO(Slot_PointerSlot);
 }
 

@@ -10,13 +10,7 @@ DECLARE_CLASS(Runtime_MethodContext);
 
 void pre_init_Runtime_MethodContext()
 {
-    Runtime_MethodContext_Class =
-		new_Class_named(Runtime_Context_Class,
-                        L"MethodContext",
-                        CREATE_ARRAY_TAG(RUNTIME_METHODCONTEXT));
-    Collection_Array layout = (Collection_Array)Runtime_MethodContext_Class->layout;
-    HEADER(layout->values[0]) = Slot_UIntSlot_Class;
-    HEADER(layout->values[1]) = Slot_UIntSlot_Class;
+    Runtime_MethodContext_Class = new_Class(Runtime_Context_Class);
     REFER_TO(Runtime_MethodContext);
 }
 

@@ -1,4 +1,3 @@
-
 #include <wchar.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,8 +33,8 @@ Type_String new_Type_String_sized(uns_int size)
 
 void pre_init_Type_String()
 {
-    Type_String_Class = new_Class(Type_Object_Class,
-                                     create_layout(0, WORDS));
+    Type_String_Class = new_Class(Type_Object_Class);
+    Type_String_Class->layout = create_layout(0, WORDS);
     empty_Type_String = new_Type_String(L"");
 }
 
@@ -209,7 +208,6 @@ NATIVE0(Type_String_asNumber)
 void post_init_Type_String()
 {
     REFER_TO(Type_String);
-    Type_String_Class->name       = new_Type_Symbol_cached(L"String");
     Collection_Dictionary natives = add_plugin(L"Type.String");
     store_native(natives, SMB__concat,   NM_Type_String_concat_);
     store_native(natives, SMB_asSymbol,  NM_Type_String_asSymbol);

@@ -5,9 +5,6 @@
 
 /* ========================================================================= */
 
-#define AST_ANNOTATION_SIZE 1
-#define AST_ANNOTATION_VARS L"selector"
-
 struct AST_Annotation_t {
     uns_int size;
     Object  selector;

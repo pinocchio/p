@@ -35,7 +35,7 @@ if (!(test)) {\
 #define assert1(test, message)  \
 if (!(test)) { \
     printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
-    printf(message); \
+    printf(message"\n"); \
     FLUSH_STDOUT; \
     ERROR_HANDLER(message);\
 }

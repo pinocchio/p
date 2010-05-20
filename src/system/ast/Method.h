@@ -5,11 +5,6 @@
 
 /* ========================================================================= */
 
-#define AST_METHOD_SIZE 6
-#define AST_METHOD_VARS L"info", L"params", L"locals", L"package", L"annotations", L"unused"
-
-/* ========================================================================= */
-
 struct AST_Method_t {
     uns_int     size;
     AST_Info    info;

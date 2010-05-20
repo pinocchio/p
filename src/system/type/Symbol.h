@@ -16,7 +16,7 @@ struct Type_Symbol_t {
 CREATE_INITIALIZERS(Type_Symbol)
 extern Type_Symbol new_Type_Symbol_cached(const wchar_t* name);
 extern Type_Symbol new_Type_Symbol(const wchar_t* name);
-extern void install_symbol_methods(Type_Class class);
+extern void init_SymbolTable();
 
 /* ========================================================================= */
 

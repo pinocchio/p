@@ -35,6 +35,18 @@ Collection_Array create_layout_with_vars(Type_Class layout, uns_int size)
     return result;
 }
 
+void change_slot_type(Type_Class class, Type_Class type, int counter, ...)
+{
+    Collection_Array layout = (Collection_Array)class->layout;
+    va_list args;
+    va_start(args, counter);
+    while (counter--) {
+        int idx = va_arg(args, int);
+        HEADER(layout->values[idx]) = type;
+    }
+    va_end(args);
+}
+
 void pre_init_Type_Layout()
 {
     Type_ObjectLayout_Class            = new_Bootstrapping_Class();
@@ -77,9 +89,7 @@ Object create_object_layout(uns_int size, va_list args)
     Collection_Array result = create_layout_with_vars(Type_ObjectLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] =
-            (Object)new_Slot_Slot(i,
-                                         va_arg(args, wchar_t *));
+        result->values[i] = (Object)new_Slot_Slot(i, va_arg(args, wchar_t *));
     }
     va_end(args);
     return (Object)result;

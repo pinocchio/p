@@ -13,12 +13,7 @@ Object Self;
 void pre_init_AST_Self()
 {
     // Manually create the class layout to support the #instance singleton
-    AST_Self_Class = new_Class_withMeta(Type_Object_Class,
-                                        create_layout(0, OBJECT),
-                                        create_layout(SELF_CLASS_SIZE, 
-                                                      OBJECT, SELF_CLASS_VARS));
-                                        
-    AST_Self_Class->name = new_Type_Symbol_cached(L"Self");
+    AST_Self_Class = new_Bootstrapping_Class_sized(CLASS_SIZE + 1);
     
     Self           = (Object) NEW_t(AST_Self);
     HEADER(Self)   = AST_Self_Class;
@@ -47,6 +42,7 @@ CNT(AST_Self_eval)
 
 void post_init_AST_Self()
 {
+    INIT_CLASS(AST_Self);
     AST_Self_Class->cvars[0] = Self;
 }
 

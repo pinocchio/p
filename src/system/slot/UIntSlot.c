@@ -19,10 +19,7 @@ Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name)
 
 void pre_init_Slot_UIntSlot()
 {
-    Slot_UIntSlot_Class =
-        new_Class_named(Type_Object_Class,
-                        L"UIntSlot",
-                        CREATE_OBJECT_TAG(SLOT_UINTSLOT));
+    Slot_UIntSlot_Class = new_Class(Type_Object_Class);
     REFER_TO(Slot_UIntSlot);
 }
 

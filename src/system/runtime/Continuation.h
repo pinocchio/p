@@ -5,10 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_CONTINUATION_SIZE 4
-#define RUNTIME_CONTINUATION_VARS\
-    L"expStack", L"cntStack", L"interpreterStack", L"context"
-
 struct Runtime_Continuation_t {
     Collection_Array  exp_stack;
     Collection_Array  cnt_stack;

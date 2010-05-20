@@ -1,18 +1,25 @@
 pre_init_Type_Nil();
 pre_init_Type_Class();
 pre_init_Type_Object();
+
+// Basic objects required for Layout, Slot, Slot names
 pre_init_Number_SmallInt();
 pre_init_Number_Float();
+// Layout needs to be initialized before the symbol's layout is created
 pre_init_Type_Layout();
-
-inter_init_Type_Class();
-inter_init_Type_Object();
-
-pre_init_Collection_Array();
-pre_init_Collection_Dictionary();
-pre_init_Type_String();
 pre_init_Type_Symbol();
 pre_init_Slot_Slot();
+
+// Symbol table for Slot names
+pre_init_Collection_Array();
+pre_init_Collection_DictBucket();
+pre_init_Collection_Dictionary();
+init_SymbolTable();
+
+// Initialize the Object class and its metaclass
+inter_init_Type_Object();
+
+pre_init_Type_String();
 pre_init_Slot_UIntSlot();
 
 pre_init_Organization_ClassReference();
@@ -39,5 +46,4 @@ pre_init_Runtime_MethodContext();
 pre_init_AST_Method();
 pre_init_Runtime_MethodClosure();
 pre_init_Runtime_Message();
-pre_init_Collection_DictBucket();
 pre_init_Slot_PointerSlot();

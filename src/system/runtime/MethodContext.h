@@ -5,10 +5,6 @@
 
 /* ========================================================================= */
 
-#define RUNTIME_METHODCONTEXT_SIZE (RUNTIME_CONTEXT_SIZE + 1)
-#define RUNTIME_METHODCONTEXT_VARS RUNTIME_CONTEXT_VARS,\
-                                   L"receiver"
-
 struct Runtime_MethodContext_t {
     uns_int                 size;
     uns_int                 scope_id;
