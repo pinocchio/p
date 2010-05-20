@@ -65,6 +65,7 @@ void pre_init_Type_Class()
     Metaclass                   = NEW_t(Type_Class);
     Object Metaclass_mclass     = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     HEADER(Metaclass)           = (Type_Class)Metaclass_mclass;
+    ((Type_Class)Metaclass_mclass)->name = Metaclass;
     Behavior                    = new_Bootstrapping_Class();
     Class                       = new_Bootstrapping_Class();
 }
