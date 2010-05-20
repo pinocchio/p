@@ -16,6 +16,8 @@ AST_Method new_AST_Method(uns_int paramCount,
     init_raw_variable_array(result->locals, 0, localCount, paramCount);
     result->info   = empty_AST_Info;
     result->size   = statementCount;
+    result->package = Nil;
+    result->unused = Nil;
     return result;
 }
 
@@ -41,6 +43,8 @@ AST_Method new_AST_Method_with(Collection_Array params,
     init_variable_array(result->locals, result->params->size);
     result->info   = empty_AST_Info;
     result->size   = statementCount;
+    result->package = Nil;
+    result->unused = Nil;
     COPY_ARGS(statementCount, result->body);
 
     return result;
