@@ -30,7 +30,6 @@ AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...)
 void pre_init_AST_Annotation()
 {
     AST_Annotation_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_Annotation);
 }
 
 /* ========================================================================= */

@@ -103,7 +103,6 @@ NATIVE2(Collection_Array_instVarAt_put_)
 
 void post_init_Collection_Array()
 {
-    REFER_TO(Collection_Array);
     Collection_Array_Class->name            = new_Type_Symbol_cached(L"Array"); 
     Collection_Array_Class->methods         = new_Collection_Dictionary();
     HEADER(Collection_Array_Class)->methods = new_Collection_Dictionary();

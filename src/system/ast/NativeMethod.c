@@ -32,7 +32,6 @@ AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
 void pre_init_AST_NativeMethod()
 {
     AST_NativeMethod_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_NativeMethod);
 }
 
 /* ========================================================================= */

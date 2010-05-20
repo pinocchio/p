@@ -18,7 +18,6 @@ Type_Boolean True;
 
 void pre_init_Type_False() {
     False_Class = new_Class(Type_Boolean_Class);
-    REFER_TO(False);
     False         = NEW_t(Type_Boolean);
     False->hash   = Type_Object_hash((Type_Object)False);
     HEADER(False) = False_Class;
@@ -28,7 +27,6 @@ void pre_init_Type_False() {
 void pre_init_Type_True()
 {
     True_Class = new_Class(Type_Boolean_Class);
-    REFER_TO(True);
     True         = NEW_t(Type_Boolean);
     True->hash   = Type_Object_hash((Type_Object)True);
     HEADER(True) = True_Class;
@@ -38,7 +36,6 @@ void pre_init_Type_True()
 void pre_init_Type_Boolean()
 {
     Type_Boolean_Class = new_Class(Type_Object_Class);
-    REFER_TO(Type_Boolean);
     pre_init_Type_True();
     pre_init_Type_False();
 }

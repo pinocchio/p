@@ -30,7 +30,6 @@ Number_SmallInt new_Number_SmallInt(int value)
 void pre_init_Number_SmallInt() 
 {
     Number_SmallInt_Class = new_Bootstrapping_Class();
-    REFER_TO(Number_SmallInt);    
     
     Number_SmallInt_cache  = (Number_SmallInt*)PALLOC(sizeof(Number_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Number_SmallInt_cache -= INT_CACHE_LOWER;

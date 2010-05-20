@@ -33,7 +33,6 @@ Organization_ClassReference new_Organization_ClassReference_empty()
 void pre_init_Organization_ClassReference()
 {
     Organization_ClassReference_Class = new_Class(Type_Object_Class);
-    REFER_TO(Organization_ClassReference);
 }
 
 /* ========================================================================= */

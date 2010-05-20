@@ -11,7 +11,6 @@ DECLARE_CLASS(Runtime_MethodContext);
 void pre_init_Runtime_MethodContext()
 {
     Runtime_MethodContext_Class = new_Class(Runtime_Context_Class);
-    REFER_TO(Runtime_MethodContext);
 }
 
 /* ========================================================================= */

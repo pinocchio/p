@@ -207,7 +207,6 @@ NATIVE0(Type_String_asNumber)
 
 void post_init_Type_String()
 {
-    REFER_TO(Type_String);
     Collection_Dictionary natives = add_plugin(L"Type.String");
     store_native(natives, SMB__concat,   NM_Type_String_concat_);
     store_native(natives, SMB_asSymbol,  NM_Type_String_asSymbol);

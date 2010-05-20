@@ -9,11 +9,8 @@
 /* ========================================================================= */
 
 Type_Class Metaclass;
-DECLARE_REFERENCE(Metaclass);
 Type_Class Class;
-DECLARE_REFERENCE(Class);
 Type_Class Behavior;
-DECLARE_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
@@ -38,12 +35,12 @@ Type_Class new_Bootstrapping_Class()
 Type_Class new_Class_sized(Type_Class superclass, uns_int meta_size)
 {
     Type_Class metaclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    metaclass->methods   = new_Collection_Dictionary();
     Type_Class result    = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
-    result->methods      = new_Collection_Dictionary();
-
-    Type_Class_set_superclass(result, superclass);
     metaclass->name      = (Type_Symbol)result;
+
+    result->methods      = new_Collection_Dictionary();
+    metaclass->methods   = new_Collection_Dictionary();
+    Type_Class_set_superclass(result, superclass);
     return result;
 }
 
@@ -335,10 +332,6 @@ void post_init_Type_Class()
     
     HEADER(Type_Object_Class)->super = Class;
     HEADER(Metaclass)->super         = HEADER(Behavior);
-
-    Metaclass_Reference = new_Organization_ClassReference(Metaclass);
-    Class_Reference     = new_Organization_ClassReference(Class);
-    Behavior_Reference  = new_Organization_ClassReference(Behavior);
 
     //Class->layout               = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);
     // HEADER(Metaclass)->layout   = create_layout(CLASS_SIZE, OBJECT, CLASS_VARS);

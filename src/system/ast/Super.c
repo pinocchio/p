@@ -34,7 +34,6 @@ AST_Super new_AST_Super(Object message, uns_int argc, ...)
 void pre_init_AST_Super()
 {
     AST_Super_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_Super);
 }
 
 /* ========================================================================= */

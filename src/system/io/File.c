@@ -61,9 +61,6 @@ void pre_init_IO_File()
     IO_File_Class = new_Class(Type_Object_Class);
     IO_ReadFile_Class = new_Class(IO_File_Class);
     IO_WriteFile_Class = new_Class(IO_File_Class);
-    REFER_TO(IO_File);
-    REFER_TO(IO_ReadFile);
-    REFER_TO(IO_WriteFile);
 }
 
 /* ========================================================================= */

@@ -94,8 +94,6 @@ void set_env(Object env)
 void pre_init_Runtime_BlockContext()
 {
     Runtime_BlockContext_Class = new_Class(Runtime_Context_Class);
-
-    REFER_TO(Runtime_BlockContext);    
 }
 
 /* ========================================================================= */

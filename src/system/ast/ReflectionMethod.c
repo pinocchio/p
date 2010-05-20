@@ -36,7 +36,6 @@ AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
 void pre_init_AST_ReflectionMethod()
 {
     AST_ReflectionMethod_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_ReflectionMethod);
 }
 
 /* ========================================================================= */

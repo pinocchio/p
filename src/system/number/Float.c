@@ -21,7 +21,6 @@ Number_Float new_Number_Float(float value)
 void pre_init_Number_Float()
 {
     Number_Float_Class = new_Bootstrapping_Class();
-    REFER_TO(Number_Float);
 }
 
 /* ========================================================================= */

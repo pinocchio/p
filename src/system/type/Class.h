@@ -4,9 +4,6 @@
 #include <pinocchio.h>
 
 extern Type_Class Metaclass;
-EXPORT_REFERENCE(Metaclass);
-EXPORT_REFERENCE(Class);
-EXPORT_REFERENCE(Behavior);
 
 /* ========================================================================= */
 
@@ -48,8 +45,7 @@ extern Type_Class new_Bootstrapping_Class_sized(uns_int size);
 
 #define INIT_CLASS(cls)\
     cls##_Class->methods = new_Collection_Dictionary();\
-    HEADER(cls##_Class)->methods = new_Collection_Dictionary();\
-    REFER_TO(cls);
+    HEADER(cls##_Class)->methods = new_Collection_Dictionary();
 
 /* ========================================================================= */
 

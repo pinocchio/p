@@ -16,7 +16,6 @@ Type_CharacterTable Type_Character_table;
 void pre_init_Type_CharacterTable()
 {
     Type_CharacterTable_Class = new_Class(Type_Object_Class);
-    REFER_TO(Type_CharacterTable);
 }
 
 /* ========================================================================= */

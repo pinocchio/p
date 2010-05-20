@@ -38,7 +38,6 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
 void pre_init_AST_Send()
 {
     AST_Send_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_Send);
 }
 
 /* ========================================================================= */

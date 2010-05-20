@@ -17,8 +17,6 @@ Runtime_Continuation new_Runtime_Continuation()
 void pre_init_Runtime_Continuation()
 {
     Runtime_Continuation_Class = new_Class(Type_Object_Class);
-    
-    REFER_TO(Runtime_Continuation);
 }
 
 /* ========================================================================= */

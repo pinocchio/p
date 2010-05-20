@@ -36,7 +36,6 @@ void pre_init_AST_Info()
     AST_Info_Class         = new_Class(Type_Object_Class);
     empty_AST_Info         = NEW_t(AST_Info);
     HEADER(empty_AST_Info) = AST_Info_Class;
-    REFER_TO(AST_Info);
 }
 
 /* ========================================================================= */

@@ -33,7 +33,6 @@ AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
 void pre_init_AST_Variable()
 {
     AST_Variable_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_Variable);
 }
 
 /* ========================================================================= */

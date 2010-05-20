@@ -17,7 +17,6 @@ void pre_init_AST_Self()
     
     Self           = (Object) NEW_t(AST_Self);
     HEADER(Self)   = AST_Self_Class;
-    REFER_TO(AST_Self);
 }
 
 /* ========================================================================= */

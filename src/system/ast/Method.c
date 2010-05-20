@@ -12,7 +12,6 @@ DECLARE_CLASS(AST_Method);
 void pre_init_AST_Method()
 {
     AST_Method_Class = new_Class(Type_Object_Class);
-    REFER_TO(AST_Method);
 }
 
 /* ========================================================================= */
