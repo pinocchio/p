@@ -21,7 +21,7 @@ struct Runtime_BlockContext_t {
     Object                  locals[];
 };
 
-CREATE_INITIALIZERS(Runtime_BlockContext)
+extern void post_init_Runtime_BlockContext();
 
 extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block);
 

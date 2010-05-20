@@ -91,11 +91,6 @@ void set_env(Object env)
     tset(_ENV_, env);
 }
 
-void pre_init_Runtime_BlockContext()
-{
-    Runtime_BlockContext_Class = new_Class(Runtime_Context_Class);
-}
-
 /* ========================================================================= */
 
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
@@ -144,6 +139,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
 
 /* ========================================================================= */
 
+void pre_init_Runtime_BlockContext() { }
 void post_init_Runtime_BlockContext()
 {
     unused_contexts = new_Collection_Array_withAll(CONTEXT_CACHE_SIZE, Nil);

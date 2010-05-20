@@ -4,17 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_MethodContext);
-
-/* ========================================================================= */
-
-void pre_init_Runtime_MethodContext()
-{
-    Runtime_MethodContext_Class = new_Class(Runtime_Context_Class);
-}
-
-/* ========================================================================= */
-
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
                                                 Object self)
 {
@@ -37,11 +26,4 @@ Runtime_MethodContext new_Empty_Runtime_MethodContext()
     ((Runtime_BlockContext)result)->size = 0;
     result->scope_id        = 0;
     return result;
-}
-
-/* ========================================================================= */
-
-void post_init_Runtime_MethodContext()
-{
-
 }
