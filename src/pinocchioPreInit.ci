@@ -25,8 +25,6 @@ pre_init_Type_CharacterTable();
 pre_init_Type_Boolean();
 pre_init_Runtime_Continue();
 pre_init_Runtime_Continuation();
-pre_init_AST_Info();
-pre_init_AST_Self();
 pre_init_IO_File();
 pre_init_Runtime_Context();
 pre_init_Runtime_BlockContext();

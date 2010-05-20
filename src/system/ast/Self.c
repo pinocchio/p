@@ -5,18 +5,11 @@
 /* ========================================================================= */
 
 Object Self;
-DECLARE_CLASS(AST_Self);
 
 /* ========================================================================= */
 
 void pre_init_AST_Self()
 {
-    // Manually create the class layout to support the #instance singleton
-    AST_Self_Class = new_Bootstrapping_Class_sized(CLASS_SIZE + 1);
-    INIT_CLASS(AST_Self);
-    
-    Self           = (Object) NEW_t(AST_Self);
-    HEADER(Self)   = AST_Self_Class;
 }
 
 /* ========================================================================= */
@@ -41,6 +34,7 @@ CNT(AST_Self_eval)
 
 void post_init_AST_Self()
 {
+    Self           = (Object) NEW_t(AST_Self);
+    HEADER(Self)   = AST_Self_Class;
     AST_Self_Class->cvars[0] = Self;
 }
-

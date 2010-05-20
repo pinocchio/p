@@ -14,7 +14,7 @@ struct AST_Info_t {
 
 extern AST_Info empty_AST_Info;
 
-extern void pre_init_AST_Info();
+extern void post_init_AST_Info();
 
 extern AST_Info new_raw_AST_Info();
 extern AST_Info new_AST_Info(Type_String sourceFile, Type_String name, 

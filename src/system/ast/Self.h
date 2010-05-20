@@ -7,9 +7,8 @@
 
 struct AST_Self_t {};
 
-CREATE_INITIALIZERS(AST_Self)
-
 extern Object Self;
+extern void post_init_AST_Self();
 
 /* ========================================================================= */
 
