@@ -38,7 +38,6 @@ struct Type_Class_t {
 };
 
 CREATE_INITIALIZERS(Type_Class)
-extern void inter_init_Type_Class();
 
 /* ========================================================================= */
 
