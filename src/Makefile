@@ -43,8 +43,8 @@ all: $(TARGET)
 	@echo Compiling: $@
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
-svnversion:
-	@(svn info 2>/dev/null||git svn info)|grep Revision|awk '{print $$2}'>SVNVERSION
+SVNVERSION:
+	@(svn info 2>/dev/null||git svn info)|grep Revision|awk '{print $$2}'>$@
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
@@ -88,7 +88,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist svnversion
+.PHONY: test vtest run clean profile plugin dist SVNVERSION
 # ============================================================================
 include make.depend
 

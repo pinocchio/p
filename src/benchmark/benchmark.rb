@@ -151,18 +151,19 @@ class Test
 
     # ------------------------------------------------------------------------
     attr_reader :executable, :testFile, :parseFile, :mean, :stdev, :min, :max,
-                :dir, :name, :probeCount
-    attr_writer :dir, :name, :probeCount
+                :dir, :name, :probeCount, :executableName
+    attr_writer :dir, :name, :probeCount, :executableName
 
     def initialize(executable, testFile, parseFile=nil, version=nil)
-        @executable = executable
-        @testFile   = testFile
-        @parseFile  = parseFile
-        @version    = version
-        @dir        = Dir.pwd
-        @version    = @version.strip unless @version.nil?
-		@name       = self.version
-        @probeCount = 10
+        @executable     = executable
+        @executableName = executable
+        @testFile       = testFile
+        @parseFile      = parseFile
+        @version        = version
+        @dir            = Dir.pwd
+        @version        = @version.strip unless @version.nil?
+        @name           = self.version
+        @probeCount     = 10
     end
 
     def version

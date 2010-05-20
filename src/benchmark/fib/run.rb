@@ -16,7 +16,8 @@ BENCHMARKS = [
     
     [`gst --version | grep version`, 'gst -f', 'fib.gst', 'fibParse.gst'],
 
-    ['Pinocchio', '../../pinocchio', 'fib.p', 'fibParse.p'],
+    ['Pinocchio',              '../../pinocchio', 'fib.p', 'fibParse.p'],
+    ['Pinocchio Metacircular', '../../pinocchio', 'fibMC.p', 'fibMCParse.p'],
 ]
 
 
