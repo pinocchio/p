@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'peach'
+
 # ============================================================================
 def is_mac?
     RUBY_PLATFORM.downcase.include?("darwin")
@@ -66,14 +69,15 @@ end
 
 # =============================================================================
 class ScriptTest
-    attr_reader :script, :probeCount, :min, :max, :mean, :stdev, :dir
-    attr_writer :script, :probeCount, :dir
+    attr_reader :script, :probeCount, :min, :max, :mean, :stdev, :dir, :threads
+    attr_writer :script, :probeCount, :dir, :threads
 
     def initialize(script, probeCount=10, useUserTime=false)
         @script      = script
         @probeCount  = probeCount
         @useUserTime = useUserTime
         @dir         = Dir.pwd
+	@threads     = 1
     end
 
     def reset
@@ -96,7 +100,7 @@ class ScriptTest
         if is_linux?
             timeCMD = "time --format='real %e\nuser %U\nsystem %S'"
         end
-        @probeCount.times {|i|
+        (1...@probeCount).to_a.peach(@threads) {|i|
             result = `#{cdCMD}(#{timeCMD} #{script}) 2>&1`
             next unless $?.success?
             if @useUserTime
@@ -151,8 +155,8 @@ class Test
 
     # ------------------------------------------------------------------------
     attr_reader :executable, :testFile, :parseFile, :mean, :stdev, :min, :max,
-                :dir, :name, :probeCount, :executableName
-    attr_writer :dir, :name, :probeCount, :executableName
+                :dir, :name, :probeCount, :executableName, :threads
+    attr_writer :dir, :name, :probeCount, :executableName, :threads
 
     def initialize(executable, testFile, parseFile=nil, version=nil)
         @executable     = executable
@@ -164,6 +168,7 @@ class Test
         @version        = @version.strip unless @version.nil?
         @name           = self.version
         @probeCount     = 10
+	@threads        = 1
     end
 
     def version
@@ -235,7 +240,8 @@ class Test
         probe     = ScriptTest.new("#{@executable} #{script}")
         probe.probeCount = probeCount
         probe.dir        = @dir
-        probe.run
+        probe.threads    = @threads
+	probe.run
         return probe
     end
 
