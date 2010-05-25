@@ -12,7 +12,7 @@ struct Runtime_Continue_t {
     Object      env;
 };
 
-CREATE_INITIALIZERS(Runtime_Continue)
+extern void post_init_Runtime_Continue();
 extern Runtime_Continue new_Runtime_Continue();
 extern Runtime_Continue new_Runtime_Continue_offset(int offset);
 extern void Runtime_Continue_escape(Runtime_Continue cont, Object return_value);

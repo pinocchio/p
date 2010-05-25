@@ -12,7 +12,7 @@ struct Runtime_Continuation_t {
     Object      env;
 };
 
-CREATE_INITIALIZERS(Runtime_Continuation)
+extern void post_init_Runtime_Continuation();
 extern Runtime_Continuation new_Runtime_Continuation();
 
 /* ========================================================================= */

@@ -17,6 +17,3 @@ pre_init_Collection_Dictionary();
 init_SymbolTable();
 
 pre_init_Type_Character();
-pre_init_Type_CharacterTable();
-pre_init_Runtime_Continue();
-pre_init_Runtime_Continuation();

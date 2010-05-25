@@ -1,38 +1,20 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/type/CharacterTable.h>
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_CharacterTable);
-
-/* ========================================================================= */
-
-Type_CharacterTable Type_Character_table;
-
-/* ========================================================================= */
-
-void pre_init_Type_CharacterTable()
-{
-    Type_CharacterTable_Class = new_Class(Type_Object_Class);
-    Type_Character_table = NEW_ARRAYED(
-            struct Type_CharacterTable_t,
-            Type_Character[CHARACTER_TABLE_SIZE]);
-    HEADER(Type_Character_table) = Type_CharacterTable_Class;
-    Type_Character_table->size = new_Number_SmallInt(CHARACTER_TABLE_SIZE);
-    int i;
-    for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
-        Type_Character_table->chars[i] = new_Type_Character_raw(i);
-    }
-}
-
-/* ========================================================================= */
-
-
+Collection_Array character_table;
 
 /* ========================================================================= */
 
 void post_init_Type_CharacterTable()
 {
+    character_table =
+        (Collection_Array)instantiate_sized(Type_CharacterTable_Class,
+                                            CHARACTER_TABLE_SIZE);
+    int i;
+    for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
+        character_table->values[i] = (Object)new_Type_Character_raw(i);
+    }
 }

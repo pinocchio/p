@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <system/type/Character.h>
@@ -12,7 +11,7 @@ DECLARE_CLASS(Type_Character);
 Type_Character new_Type_Character_raw(wchar_t value)
 {
     NEW_OBJECT(Type_Character);
-    result->value         = value;
+    result->value = value;
     return result;
 }
 
@@ -20,7 +19,7 @@ Type_Character new_Type_Character_raw(wchar_t value)
 Type_Character new_Type_Character(wchar_t value)
 {
     if (value < CHARACTER_TABLE_SIZE) {
-        return Type_Character_table->chars[value];
+        return (Type_Character)character_table->values[value];
     }
     return new_Type_Character_raw(value);
 }

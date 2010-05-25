@@ -5,17 +5,8 @@
 
 /* ========================================================================= */
 
-struct Type_CharacterTable_t {
-    Number_SmallInt   size;
-    Type_Character  chars[0];
-};
-
-CREATE_INITIALIZERS(Type_CharacterTable)
-extern Type_CharacterTable new_Type_CharacterTable();
-
-/* ========================================================================= */
-
-extern Type_CharacterTable Type_Character_table;
+extern Collection_Array character_table;
+extern void post_init_Type_CharacterTable();
 
 /* ========================================================================= */
 

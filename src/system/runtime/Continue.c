@@ -4,10 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_Continue);
-
-/* ========================================================================= */
-
 Runtime_Continue new_Runtime_Continue()
 {
     NEW_OBJECT(Runtime_Continue);
@@ -22,15 +18,6 @@ Runtime_Continue new_Runtime_Continue_offset(int offset)
     cont->iss             = (Object)tget(_ISS_);
     cont->env             = (Object)current_env();
     return cont;
-}
-
-void pre_init_Runtime_Continue()
-{
-    Runtime_Continue_Class = new_Class(Type_Object_Class);
-    // LAYOUT TODO
-    // Collection_Array layout = (Collection_Array)Runtime_Continue_Class->layout;
-    // HEADER(layout->values[0]) = Slot_UIntSlot_Class;
-    // HEADER(layout->values[1]) = Slot_UIntSlot_Class;
 }
 
 /* ========================================================================= */
@@ -61,6 +48,10 @@ NATIVE1(Runtime_Continue_on_)
 
 void post_init_Runtime_Continue()
 {
+    // LAYOUT TODO
+    // Collection_Array layout = (Collection_Array)Runtime_Continue_Class->layout;
+    // HEADER(layout->values[0]) = Slot_UIntSlot_Class;
+    // HEADER(layout->values[1]) = Slot_UIntSlot_Class;
     Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, SMB_continueEscape_message_, NM_Runtime_Continue_escape_);
     store_native(natives, SMB_continueOn_message_,     NM_Runtime_Continue_on_);

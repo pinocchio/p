@@ -1,6 +1,7 @@
 post_init_Type_Class();
 post_init_Type_Object();
 post_init_Collection_Array();
+post_init_Type_CharacterTable();
 post_init_Type_Character();
 post_init_Runtime_Continue();
 post_init_Runtime_Continuation();

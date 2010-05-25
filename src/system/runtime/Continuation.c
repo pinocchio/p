@@ -4,19 +4,10 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_Continuation);
-
-/* ========================================================================= */
-
 Runtime_Continuation new_Runtime_Continuation()
 {
     NEW_OBJECT(Runtime_Continuation);
     return result;
-}
-
-void pre_init_Runtime_Continuation()
-{
-    Runtime_Continuation_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */
