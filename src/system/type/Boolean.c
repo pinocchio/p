@@ -4,48 +4,14 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_Boolean);
-DECLARE_CLASS(True);
-DECLARE_CLASS(False);
-
+Object True;
+Object False;
 AST_Constant False_Const;
-Type_Boolean False;
-
 AST_Constant True_Const;
-Type_Boolean True;
 
 /* ========================================================================= */
 
-void pre_init_Type_False() {
-    False_Class = new_Class(Type_Boolean_Class);
-    False         = NEW_t(Type_Boolean);
-    False->hash   = Type_Object_hash((Type_Object)False);
-    HEADER(False) = False_Class;
-}
-
-void pre_init_Type_True()
-{
-    True_Class = new_Class(Type_Boolean_Class);
-    True         = NEW_t(Type_Boolean);
-    True->hash   = Type_Object_hash((Type_Object)True);
-    HEADER(True) = True_Class;
-}
-
-void pre_init_Type_Boolean()
-{
-    Type_Boolean_Class = new_Class(Type_Object_Class);
-    pre_init_Type_True();
-    pre_init_Type_False();
-}
-
-/* ========================================================================= */
-
-AST_Constant get_bool_const(bool value)
-{
-    return value ? True_Const : False_Const;
-}
-
-Type_Boolean get_bool(bool value)
+Object get_bool(bool value)
 {
     return value ? True : False;
 }
@@ -83,16 +49,17 @@ NATIVE2(Type_False_ifTrue_ifFalse_)
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
 }
 
-NATIVE0(Type_Boolean_hash)
-    RETURN_FROM_NATIVE(((Type_Boolean)self)->hash)
-}
+/* ========================================================================= */
 
 void post_init_Type_Boolean()
 {
-    True_Const  = new_AST_Constant((Object)True);
-    False_Const = new_AST_Constant((Object)False);
-    Collection_Dictionary natives = add_plugin(L"Type.Boolean");
-    store_native(natives, SMB_hash,       NM_Type_Boolean_hash);
+    True         = instantiate(Type_True_Class);
+    True_Const   = new_AST_Constant((Object)True);
+
+    False        = instantiate(Type_False_Class);
+    False_Const  = new_AST_Constant((Object)False);
+
+    Collection_Dictionary natives;
     
     natives = add_plugin(L"Type.True");
     store_native(natives, new_Type_Symbol_cached(L"whileTrue:"), NM_Type_True_whileTrue_);

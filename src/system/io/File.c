@@ -12,10 +12,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(IO_File);
-DECLARE_CLASS(IO_ReadFile);
-DECLARE_CLASS(IO_WriteFile);
-
 IO_File StandardIn;
 IO_File StandardOut;
 IO_File StandardError;
@@ -53,14 +49,6 @@ IO_File new_IO_WriteFile_from(FILE* file)
     assert1(file != NULL, "Cannot create a new File from NULL.");
     result->file = file;
     return result;
-}
-
-void pre_init_IO_File()
-{
-    // TODO check if this makes sense.
-    IO_File_Class = new_Class(Type_Object_Class);
-    IO_ReadFile_Class = new_Class(IO_File_Class);
-    IO_WriteFile_Class = new_Class(IO_File_Class);
 }
 
 /* ========================================================================= */
@@ -260,7 +248,6 @@ void post_init_IO_File()
 
     store_native(natives, SMB_readOpen_  , NM_IO_ReadFile_open_);
     store_native(natives, SMB_writeOpen_ , NM_IO_WriteFile_open_);
-
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);

@@ -11,11 +11,7 @@ struct Runtime_Message_t {
     Object      arguments[];
 };
 
-CREATE_INITIALIZERS(Runtime_Message)
 extern Runtime_Message new_Runtime_Message(Object selector, uns_int size);
-
-/* ========================================================================= */
-
 
 /* ========================================================================= */
 

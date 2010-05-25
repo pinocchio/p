@@ -20,8 +20,6 @@ post_init_Runtime_MethodClosure();
 post_init_Type_Layout();
 post_init_Slot_Slot();
 post_init_Slot_UIntSlot();
-post_init_Organization_ClassReference();
-post_init_Runtime_Message();
 post_init_Collection_DictBucket();
 post_init_Type_Nil();
 post_init_Slot_PointerSlot();

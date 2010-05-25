@@ -6,36 +6,17 @@
 #define BOOL_SIZE 0
 #define BOOL_VARS 
 
-AST_Constant new_AST_Constant(Object value);
+/* ========================================================================= */
+
+extern void post_init_Type_Boolean();
+extern Object get_bool(bool value);
 
 /* ========================================================================= */
 
-struct Type_Boolean_t {
-    Number_SmallInt hash;    
-};
-
-CREATE_INITIALIZERS(Type_Boolean)
-
-/* ========================================================================= */
-
-extern AST_Constant get_bool_const(bool value);
-extern Type_Boolean get_bool(bool value);
-
-/* ========================================================================= */
-
-typedef Type_Boolean Type_False;
-
-CREATE_INITIALIZERS(False)
-extern AST_Constant False_Const;
-extern Type_Boolean False;
-
-/* ========================================================================= */
-
-typedef Type_Boolean Type_True;
-
-CREATE_INITIALIZERS(True)
-extern Type_Boolean True;
+extern Object True;
+extern Object False;
 extern AST_Constant True_Const;
+extern AST_Constant False_Const;
 
 /* ========================================================================= */
 

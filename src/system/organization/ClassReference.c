@@ -25,22 +25,10 @@ Organization_ClassReference new_Organization_ClassReference_empty()
 
 /* ========================================================================= */
 
-void pre_init_Organization_ClassReference()
-{
-}
-
-/* ========================================================================= */
-
 void Organization_ClassReference_eval(Organization_ClassReference self)
 {
     if (self->class == (Object)Nil) {
         fail(Exception_UndefinedClassReference_Class, 1, self);
     }
     poke_EXP(0, self->class);
-}
-
-/* ========================================================================= */
-
-void post_init_Organization_ClassReference()
-{
 }

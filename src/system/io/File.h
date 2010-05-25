@@ -12,10 +12,7 @@ struct IO_File_t {
     Type_String     path;
 };
 
-CREATE_INITIALIZERS(IO_File);
-
-EXPORT_CLASS(IO_ReadFile);
-EXPORT_CLASS(IO_WriteFile);
+extern void post_init_IO_File();
 
 IO_File new_IO_File();
 IO_File new_IO_File_fromFile(FILE* file);

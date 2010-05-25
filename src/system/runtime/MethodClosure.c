@@ -4,17 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_MethodClosure);
-
-/* ========================================================================= */
-
-void pre_init_Runtime_MethodClosure()
-{
-    Runtime_MethodClosure_Class = new_Class(Type_Object_Class);
-}
-
-/* ========================================================================= */
-
 Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host) 
 {
     NEW_OBJECT(Runtime_MethodClosure); 

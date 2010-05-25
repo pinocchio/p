@@ -4,10 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Runtime_BlockClosure);
-
-/* ========================================================================= */
-
 Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, Runtime_BlockContext context) {
     NEW_OBJECT(Runtime_BlockClosure);
     assert1(HEADER(context) == Runtime_BlockContext_Class ||
@@ -17,11 +13,6 @@ Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, Runtime_BlockConte
     result->context   = context;
     context->captured = 1;
     return result;
-}
-
-void pre_init_Runtime_BlockClosure()
-{
-    Runtime_BlockClosure_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */

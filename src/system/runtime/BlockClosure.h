@@ -10,7 +10,7 @@ struct Runtime_BlockClosure_t {
     Runtime_BlockContext context;
 };
 
-CREATE_INITIALIZERS(Runtime_BlockClosure)
+extern void post_init_Runtime_BlockClosure();
 extern Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
                                            Runtime_BlockContext context);
 
