@@ -4,10 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_Character);
-
-/* ========================================================================= */
-
 Type_Character new_Type_Character_raw(wchar_t value)
 {
     NEW_OBJECT(Type_Character);
@@ -34,12 +30,6 @@ Type_Character new_Type_Character_fromInt(int value)
     return new_Type_Character(casted);
 }
     
-
-void pre_init_Type_Character()
-{
-    Type_Character_Class = new_Class(Type_Object_Class);
-}
-
 /* ========================================================================= */
 
 NATIVE1(Type_Character_equals_)

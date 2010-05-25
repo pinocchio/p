@@ -15,5 +15,3 @@ pre_init_Collection_Array();
 pre_init_Collection_DictBucket();
 pre_init_Collection_Dictionary();
 init_SymbolTable();
-
-pre_init_Type_Character();

@@ -11,10 +11,9 @@ struct Type_Character_t {
     wchar_t value;
 };
 
-CREATE_INITIALIZERS(Type_Character)
-
 Type_Character new_Type_Character(wchar_t value);
 
+extern void post_init_Type_Character();
 
 /* ========================================================================= */
 
