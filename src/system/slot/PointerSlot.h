@@ -11,7 +11,6 @@ struct Slot_PointerSlot_t {
     Object          package;
 };
 
-CREATE_INITIALIZERS(Slot_PointerSlot);
 extern Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */

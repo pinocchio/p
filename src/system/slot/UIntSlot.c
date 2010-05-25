@@ -4,10 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Slot_UIntSlot);
-
-/* ========================================================================= */
-
 Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name) 
 {
     NEW_OBJECT(Slot_UIntSlot);
@@ -15,11 +11,6 @@ Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name)
     result->name    = (Object)new_Type_Symbol(name);
     result->package = (Object)Nil;
     return result;
-}
-
-void pre_init_Slot_UIntSlot()
-{
-    Slot_UIntSlot_Class = new_Class(Type_Object_Class);
 }
 
 /* ========================================================================= */

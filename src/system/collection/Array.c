@@ -59,10 +59,10 @@ Collection_Array new_Collection_Array_withAll(uns_int c, Object element)
 void pre_init_Collection_Array() 
 {
     // cannot use new_Class_name here since Symbol_Dict is not available yet
-    Collection_Array_Class = new_Bootstrapping_Class();
+    Collection_Array_Class          = new_Bootstrapping_Class();
     empty_Collection_Array          = NEW_t(Collection_Array);
     empty_Collection_Array->size    = 0;
-    HEADER(empty_Collection_Array) = Collection_Array_Class;
+    HEADER(empty_Collection_Array)  = Collection_Array_Class;
 }
 
 /* ========================================================================= */

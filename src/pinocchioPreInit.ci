@@ -16,10 +16,7 @@ pre_init_Collection_DictBucket();
 pre_init_Collection_Dictionary();
 init_SymbolTable();
 
-pre_init_Slot_UIntSlot();
-
 pre_init_Type_Character();
 pre_init_Type_CharacterTable();
 pre_init_Runtime_Continue();
 pre_init_Runtime_Continuation();
-pre_init_Slot_PointerSlot();

@@ -4,10 +4,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Slot_PointerSlot);
-
-/* ========================================================================= */
-
 Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name) 
 {
     NEW_OBJECT(Slot_PointerSlot);
@@ -17,19 +13,4 @@ Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name)
     return result;
 }
 
-
-void pre_init_Slot_PointerSlot()
-{
-    Slot_PointerSlot_Class = new_Class(Type_Object_Class);
-}
-
 /* ========================================================================= */
-
-// NATIVES GO HERE
-
-/* ========================================================================= */
-
-void post_init_Slot_PointerSlot()
-{
-
-}
