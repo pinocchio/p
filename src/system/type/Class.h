@@ -38,10 +38,8 @@ CREATE_INITIALIZERS(Type_Class)
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Type_Class superclass);
-extern Type_Class new_Class_withMeta(Type_Class superclass, Object metaType);
+extern Type_Class new_Class(Type_Class superclass, Object metaType);
 extern Type_Class new_Bootstrapping_Class();
-extern Type_Class new_Bootstrapping_Class_sized(uns_int size);
 
 #define DIRECT_INIT_CLASS(cls)\
     cls->methods            = new_Collection_Dictionary();\

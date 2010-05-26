@@ -18,46 +18,33 @@ Type_Class Behavior;
 
 /* ========================================================================= */
 
-Type_Class new_Bootstrapping_Class_sized(uns_int size)
+Type_Class new_Bootstrapping_Class()
 {
-    Type_Class mcls = (Type_Class)basic_instantiate_Object(Metaclass, size);
+    Type_Class mcls =
+        (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
     // Name of metaclass is its instance pointer.
     mcls->name = (Type_Symbol)cls;
     return cls;
 }
 
-Type_Class new_Bootstrapping_Class()
-{
-    return new_Bootstrapping_Class_sized(METACLASS_SIZE);
-}
-
-Type_Class new_Class_sized(Type_Class superclass, uns_int meta_size)
-{
-    Type_Class metaclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    Type_Class result    = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
-    metaclass->name      = (Type_Symbol)result;
-
-    result->methods      = new_Collection_Dictionary();
-    metaclass->methods   = new_Collection_Dictionary();
-    Type_Class_set_superclass(result, superclass);
-    return result;
-}
-
-Type_Class new_Class_withMeta(Type_Class superclass, Object metatype)
+Type_Class new_Class(Type_Class superclass, Object metatype)
 {    
     ASSERT_TAG_LAYOUT(metatype, Object);
     uns_int meta_size = ((Collection_Array)metatype)->size;
     assert0(meta_size >= 4); // we need at least place for
                              // methods, super, layout and instance.
-    Type_Class result = new_Class_sized(superclass, meta_size);
-    HEADER(result)->layout = metatype;
-    return result;
-}
 
-Type_Class new_Class(Type_Class superclass)
-{
-    return new_Class_sized(superclass, CLASS_SIZE);
+    Type_Class metaclass    = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    metaclass->layout       = metatype;
+    Type_Class result       = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
+    metaclass->name         = (Type_Symbol)result;
+
+    result->methods         = new_Collection_Dictionary();
+    metaclass->methods      = new_Collection_Dictionary();
+    Type_Class_set_superclass(result, superclass);
+
+    return result;
 }
 
 void pre_init_Type_Class()
@@ -65,7 +52,7 @@ void pre_init_Type_Class()
     Metaclass                   = NEW_t(Type_Class);
     Object Metaclass_mclass     = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     HEADER(Metaclass)           = (Type_Class)Metaclass_mclass;
-    ((Type_Class)Metaclass_mclass)->name = Metaclass;
+    ((Type_Class)Metaclass_mclass)->name = (Type_String)Metaclass;
     Behavior                    = new_Bootstrapping_Class();
     Class                       = new_Bootstrapping_Class();
 }
