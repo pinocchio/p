@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct Slot_UIntSlot_t {
-    Number_SmallInt index;
-    Object          name;
-    Object          package;
+    uns_int index;
+    Object  name;
+    Object  package;
 };
 
 extern void post_init_Slot_UIntSlot();

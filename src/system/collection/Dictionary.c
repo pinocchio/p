@@ -86,7 +86,7 @@ static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
         Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
         if (bucket == (Collection_DictBucket)Nil) { continue; }
         int j;
-        uns_int tally = unwrap_int((Object)bucket->tally);
+        uns_int tally = bucket->tally;
         for (j = 0; j < tally; j=j+2) {
             Object key = bucket->values[j];
             Collection_Dictionary_quick_store(self, key, bucket->values[j+1]);
@@ -106,7 +106,7 @@ void Collection_Dictionary_quick_store(Collection_Dictionary self,
         Collection_DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
-        bucket->tally                = new_Number_SmallInt(2);
+        bucket->tally                = 2;
         return Collection_Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
@@ -123,7 +123,7 @@ Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key
         return NULL;
     }
     int i;
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     for (i = 0; i < tally; i=i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
         {
@@ -229,7 +229,7 @@ void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
         Collection_DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
-        bucket->tally                = new_Number_SmallInt(2);
+        bucket->tally                = 2;
         Collection_Dictionary_check_grow(self);
     } else {
         push_EXP((Object)self);

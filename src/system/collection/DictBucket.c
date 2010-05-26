@@ -12,7 +12,7 @@ Collection_DictBucket new_Collection_DictBucket_raw(uns_int size)
 {
     NEW_ARRAY_OBJECT(Collection_DictBucket, Object[size]);
     result->size  = size;
-    result->tally = new_Number_SmallInt(0);
+    result->tally = 0;
     return result;
 }
 
@@ -74,7 +74,7 @@ int Bucket_quick_store(Collection_DictBucket * bucketp, Object key,
 {
     int i;
     Collection_DictBucket bucket = *bucketp;
-    uns_int tally                = unwrap_int((Object)bucket->tally);
+    uns_int tally                = bucket->tally;
     for (i = 0; i < tally; i = i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
         {
@@ -90,7 +90,7 @@ int Bucket_quick_store(Collection_DictBucket * bucketp, Object key,
     }
     bucket->values[tally]   = key;
     bucket->values[tally+1] = value;
-    bucket->tally           = new_Number_SmallInt(tally+2);
+    bucket->tally           = tally+2;
     
     return 1;
 }
@@ -123,7 +123,7 @@ void CNT_bucket_lookup()
 
     idx += 2;
 
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     if (idx >= tally) {
         zapn_EXP(4);
         poke_EXP(0, NULL);
@@ -143,7 +143,7 @@ static void bucket_do_store(Collection_DictBucket bucket, uns_int idx,
 {
     Object value          = peek_EXP(3);
     bucket->values[idx+1] = value;
-    bucket->tally         = new_Number_SmallInt(idx+2);
+    bucket->tally         = idx+2;
     zapn_EXP(3);
     poke_EXP(0, (Object)addition);
     zap_CNT();
@@ -175,7 +175,7 @@ static void CNT_Bucket_store()
         return bucket_store_new(*bucketp, idx, key);
     }
 
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     if (idx >= tally) {
         return bucket_store_new(bucket, idx, key); 
     }
@@ -189,11 +189,11 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
     /* just store at the first empty location */
     Collection_DictBucket bucket = *bucketp;
 
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     if (tally == 0) {
         bucket->values[0] = key;
         bucket->values[1] = value;
-        bucket->tally     = new_Number_SmallInt(2);
+        bucket->tally     = 2;
         push_EXP((Object)1);
         return;
     }
@@ -210,7 +210,7 @@ void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value)
 
 void Bucket_lookup(Collection_DictBucket bucket, Object key)
 {
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     if (tally == 0) {
         poke_EXP(0, NULL);
         return;
@@ -231,7 +231,7 @@ static void CNT_bucket_rehash_end()
     Object key                   = bucket->values[idx];
     idx += 2;
 
-    uns_int tally = unwrap_int((Object)bucket->tally);
+    uns_int tally = bucket->tally;
     if (idx >= tally) {
         zap_CNT();
         zapn_EXP(2);
@@ -260,10 +260,7 @@ void CNT_bucket_rehash()
 
 /* ========================================================================= */
 
-// NATIVES GO HERE
-
-/* ========================================================================= */
-
 void post_init_Collection_DictBucket()
 {
+    change_slot_type(Collection_DictBucket_Class, Slot_UIntSlot_Class, 1, 0);
 }

@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct Slot_Slot_t {
-    Number_SmallInt index;
-    Object          name;
-    Object          package;
+    uns_int index;
+    Object  name;
+    Object  package;
 };
 
 CREATE_INITIALIZERS(Slot_Slot);

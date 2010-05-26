@@ -1,4 +1,4 @@
-post_init_Type_Class();
+post_init_Number_SmallInt();
 post_init_Type_Object();
 post_init_Collection_Array();
 post_init_Type_CharacterTable();
@@ -14,7 +14,6 @@ post_init_AST_Self();
 post_init_Type_String();
 post_init_Type_Symbol();
 post_init_Type_Boolean();
-post_init_Number_SmallInt();
 post_init_Number_Float();
 post_init_Runtime_BlockClosure();
 post_init_Runtime_MethodClosure();

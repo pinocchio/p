@@ -7,7 +7,7 @@
 Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name) 
 {
     NEW_OBJECT(Slot_UIntSlot);
-    result->index   = new_Number_SmallInt(index);
+    result->index   = index;
     result->name    = (Object)new_Type_Symbol(name);
     result->package = (Object)Nil;
     return result;
@@ -20,7 +20,7 @@ static Object Slot_UIntSlot_readFrom_(Slot_UIntSlot var, Object self)
 {
     return wrap_int((uns_int)Object_instVarAt_(
 						self,
-						unwrap_int((Object)var->index)));
+						var->index));
 }
 
 static void Slot_UIntSlot_assign_on_(Slot_UIntSlot var,
@@ -28,7 +28,7 @@ static void Slot_UIntSlot_assign_on_(Slot_UIntSlot var,
                                               Object self)
 {
     Object_instVarAt_put_(self,
-						  unwrap_int((Object)var->index),
+						  var->index,
 						  (Object)(uns_int)unwrap_int(value));
 }
 void Slot_UIntSlot_eval(Slot_UIntSlot var)

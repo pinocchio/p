@@ -63,7 +63,6 @@ typedef unsigned long int uns_int;
 extern Type_Class class##_Class;\
 
 #define CREATE_INITIALIZERS(class) \
-extern void pre_init##_##class(); \
 extern void post_init##_##class(); \
 EXPORT_CLASS(class);
 

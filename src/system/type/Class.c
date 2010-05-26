@@ -53,6 +53,8 @@ void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
     cls->super           = superclass;
     if (superclass != (Type_Class)Nil) {
         metaclass->super = HEADER(superclass);
+    } else {
+        metaclass->super = Class;
     }
 }
 
@@ -297,11 +299,4 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     
     push_CNT(Class_lookup_cache_invoke);
     return Class_direct_dispatch(self, class, msg, argc);
-}
-
-/* ========================================================================= */
-
-void post_init_Type_Class()
-{
-    HEADER(Type_Object_Class)->super = Class;
 }

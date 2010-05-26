@@ -11,7 +11,7 @@ DECLARE_CLASS(Slot_Slot);
 Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name) 
 {
     NEW_OBJECT(Slot_Slot);
-    result->index   = new_Number_SmallInt(index);
+    result->index   = index;
     result->name    = (Object)new_Type_Symbol_cached(name);
     result->package = (Object)Nil;
     return result;
@@ -21,14 +21,14 @@ Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name)
 
 static Object Slot_Slot_readFrom_(Slot_Slot var, Object self)
 {
-    return Object_instVarAt_(self, unwrap_int((Object)var->index));
+    return Object_instVarAt_(self, var->index);
 }
 
 static void Slot_Slot_assign_on_(Slot_Slot var, Object value,
                                         Object self)
 {
     Object_instVarAt_put_(self,
-						  unwrap_int((Object)var->index),
+						  var->index,
 						  value);
 }
 
@@ -63,6 +63,8 @@ NATIVE2(Slot_Slot_assign_on_)
 
 void post_init_Slot_Slot()
 {
+    change_slot_type(Slot_AbstractSlot_Class, Slot_UIntSlot_Class, 1, 0);
+
     Collection_Dictionary natives = add_plugin(L"Slot.Slot");
     store_native(natives, SMB_assign_on_, NM_Slot_Slot_assign_on_);
     store_native(natives, SMB_readFrom_ , NM_Slot_Slot_readFrom_);
