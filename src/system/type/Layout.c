@@ -47,42 +47,6 @@ void change_slot_type(Type_Class class, Type_Class type, int counter, ...)
     va_end(args);
 }
 
-void pre_init_Type_Layout()
-{
-    Type_ObjectLayout_Class             = new_Bootstrapping_Class();
-    Type_ArrayLayout_Class              = new_Bootstrapping_Class();
-    Type_CharacterLayout_Class          = new_Bootstrapping_Class();
-    Type_WordsLayout_Class              = new_Bootstrapping_Class();
-    Type_IntLayout_Class                = new_Bootstrapping_Class();
-    Type_FloatLayout_Class              = new_Bootstrapping_Class();
-    Type_LongLayout_Class               = new_Bootstrapping_Class();
-    Type_BytesLayout_Class              = new_Bootstrapping_Class();
-    Type_FileLayout_Class               = new_Bootstrapping_Class();
-
-    empty_array_layout                  = (Object)create_layout_with_vars(Type_ArrayLayout_Class, 0);
-    empty_object_layout                 = (Object)create_layout_with_vars(Type_ObjectLayout_Class, 0);
-    words_layout                        = basic_instantiate_Object(Type_WordsLayout_Class, 0);
-    bytes_layout                        = basic_instantiate_Object(Type_BytesLayout_Class, 0);
-    int_layout                          = basic_instantiate_Object(Type_IntLayout_Class, 0);
-    float_layout                        = basic_instantiate_Object(Type_FloatLayout_Class, 0);
-    long_layout                         = basic_instantiate_Object(Type_LongLayout_Class, 0);
-    character_layout                    = basic_instantiate_Object(Type_CharacterLayout_Class, 0);
-    file_layout                         = basic_instantiate_Object(Type_FileLayout_Class, 0);
-
-    Type_ObjectLayout_Class->layout     = empty_array_layout;
-    Type_ArrayLayout_Class->layout      = empty_array_layout;
-    Type_CharacterLayout_Class->layout  = empty_object_layout;
-    Type_WordsLayout_Class->layout      = empty_object_layout;
-    Type_IntLayout_Class->layout        = empty_object_layout;
-    Type_FloatLayout_Class->layout      = empty_object_layout;
-    Type_LongLayout_Class->layout       = empty_object_layout;
-    Type_BytesLayout_Class->layout      = empty_object_layout;
-    Type_FileLayout_Class->layout       = empty_object_layout;
-
-    Number_SmallInt_Class->layout       = int_layout;
-    Number_Float_Class->layout          = float_layout;
-}
-
 Object create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }

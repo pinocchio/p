@@ -16,6 +16,7 @@ struct Number_SmallInt_t {
 
 CREATE_INITIALIZERS(Number_SmallInt)
 extern Number_SmallInt new_Number_SmallInt(int value);
+extern void init_numbercache();
 
 /* ========================================================================= */
 

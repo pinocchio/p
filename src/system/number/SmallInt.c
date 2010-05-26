@@ -27,11 +27,11 @@ Number_SmallInt new_Number_SmallInt(int value)
     return new_Number_SmallInt_raw(value);
 }
 
-void pre_init_Number_SmallInt() 
+/* ========================================================================= */
+
+void init_numbercache()
 {
-    Number_SmallInt_Class = new_Bootstrapping_Class();
-    
-    Number_SmallInt_cache  = (Number_SmallInt*)PALLOC(sizeof(Number_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    Number_SmallInt_cache   = (Number_SmallInt*)PALLOC(sizeof(Number_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     Number_SmallInt_cache -= INT_CACHE_LOWER;
     
     int i;

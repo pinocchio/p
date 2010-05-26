@@ -17,11 +17,6 @@ Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name)
     return result;
 }
 
-void pre_init_Slot_Slot()
-{
-    Slot_Slot_Class = new_Bootstrapping_Class();
-}
-
 /* ========================================================================= */
 
 static Object Slot_Slot_readFrom_(Slot_Slot var, Object self)

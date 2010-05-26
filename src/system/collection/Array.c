@@ -55,16 +55,6 @@ Collection_Array new_Collection_Array_withAll(uns_int c, Object element)
     return result;
 }
 
-
-void pre_init_Collection_Array() 
-{
-    // cannot use new_Class_name here since Symbol_Dict is not available yet
-    Collection_Array_Class          = new_Bootstrapping_Class();
-    empty_Collection_Array          = NEW_t(Collection_Array);
-    empty_Collection_Array->size    = 0;
-    HEADER(empty_Collection_Array)  = Collection_Array_Class;
-}
-
 /* ========================================================================= */
 
 Object raw_Collection_Array_instAt(Collection_Array o, Object tag, int index)

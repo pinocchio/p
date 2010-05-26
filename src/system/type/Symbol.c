@@ -41,14 +41,10 @@ Type_Symbol new_Type_Symbol_cached(const wchar_t* input)
  */
 void init_SymbolTable()
 {
-    Symbol_Table = new_Collection_Dictionary();
-    #include <system/type/SymbolInitialization.ci> 
 }
 
 void pre_init_Type_Symbol()
 {
-    Type_Symbol_Class = new_Bootstrapping_Class();
-    Type_Symbol_Class->layout = create_layout(0, WORDS);
 }
 /* ========================================================================= */
 

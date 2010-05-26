@@ -26,11 +26,6 @@ Collection_DictBucket new_Collection_DictBucket(uns_int size)
     return result;
 }
 
-void pre_init_Collection_DictBucket()
-{
-    Collection_DictBucket_Class = new_Bootstrapping_Class();
-}
-
 /* ========================================================================= */
 
 Collection_DictBucket new_bucket()

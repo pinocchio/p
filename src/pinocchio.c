@@ -175,6 +175,84 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 
 #include <pinocchioHelper.ci>
 
+static void bootstrap()
+{
+    Nil = (Object) NEW_t(Type_Nil);
+
+    Metaclass                   = NEW_t(Type_Class);
+    Type_Class Metaclass_mclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
+    HEADER(Metaclass)           = Metaclass_mclass;
+    Metaclass_mclass->name      = (Type_String)Metaclass;
+
+    Behavior                    = new_Bootstrapping_Class();
+    Class                       = new_Bootstrapping_Class();
+    Type_Object_Class           = new_Bootstrapping_Class();
+    Number_SmallInt_Class       = new_Bootstrapping_Class();
+    Type_Symbol_Class           = new_Bootstrapping_Class();
+    Type_ObjectLayout_Class     = new_Bootstrapping_Class();
+    Type_ArrayLayout_Class      = new_Bootstrapping_Class();
+    Type_CharacterLayout_Class  = new_Bootstrapping_Class();
+    Type_WordsLayout_Class      = new_Bootstrapping_Class();
+    Type_IntLayout_Class        = new_Bootstrapping_Class();
+    Type_FloatLayout_Class      = new_Bootstrapping_Class();
+    Type_LongLayout_Class       = new_Bootstrapping_Class();
+    Type_BytesLayout_Class      = new_Bootstrapping_Class();
+    Type_FileLayout_Class       = new_Bootstrapping_Class();
+    Slot_Slot_Class             = new_Bootstrapping_Class();
+    Collection_Array_Class      = new_Bootstrapping_Class();
+    Collection_DictBucket_Class = new_Bootstrapping_Class();
+    Collection_Dictionary_Class = new_Bootstrapping_Class();
+
+    init_numbercache();
+
+    DIRECT_INIT_CLASS(Behavior);
+    DIRECT_INIT_CLASS(Class);
+    DIRECT_INIT_CLASS(Metaclass);
+    INIT_CLASS(Type_Object);
+    INIT_CLASS(Collection_Array);
+    INIT_CLASS(Collection_DictBucket);
+    INIT_CLASS(Collection_Dictionary);
+    INIT_CLASS(Number_SmallInt);
+    INIT_CLASS(Type_Symbol);
+    INIT_CLASS(Type_ObjectLayout);
+    INIT_CLASS(Type_IntLayout);
+    INIT_CLASS(Type_FloatLayout);
+    INIT_CLASS(Type_WordsLayout);
+    INIT_CLASS(Type_CharacterLayout);
+    INIT_CLASS(Type_ArrayLayout);
+    INIT_CLASS(Slot_Slot);
+
+    empty_Collection_Array          = NEW_t(Collection_Array);
+    empty_Collection_Array->size    = 0;
+    HEADER(empty_Collection_Array)  = Collection_Array_Class;
+
+    empty_array_layout                  = (Object)create_layout_with_vars(Type_ArrayLayout_Class, 0);
+    empty_object_layout                 = (Object)create_layout_with_vars(Type_ObjectLayout_Class, 0);
+    words_layout                        = basic_instantiate_Object(Type_WordsLayout_Class, 0);
+    bytes_layout                        = basic_instantiate_Object(Type_BytesLayout_Class, 0);
+    int_layout                          = basic_instantiate_Object(Type_IntLayout_Class, 0);
+    float_layout                        = basic_instantiate_Object(Type_FloatLayout_Class, 0);
+    long_layout                         = basic_instantiate_Object(Type_LongLayout_Class, 0);
+    character_layout                    = basic_instantiate_Object(Type_CharacterLayout_Class, 0);
+    file_layout                         = basic_instantiate_Object(Type_FileLayout_Class, 0);
+
+    Type_ObjectLayout_Class->layout     = empty_array_layout;
+    Type_ArrayLayout_Class->layout      = empty_array_layout;
+    Type_CharacterLayout_Class->layout  = empty_object_layout;
+    Type_WordsLayout_Class->layout      = empty_object_layout;
+    Type_IntLayout_Class->layout        = empty_object_layout;
+    Type_FloatLayout_Class->layout      = empty_object_layout;
+    Type_LongLayout_Class->layout       = empty_object_layout;
+    Type_BytesLayout_Class->layout      = empty_object_layout;
+    Type_FileLayout_Class->layout       = empty_object_layout;
+
+    Number_SmallInt_Class->layout       = int_layout;
+    Type_Symbol_Class->layout           = words_layout;
+
+    Symbol_Table = new_Collection_Dictionary();
+    #include <system/type/SymbolInitialization.ci> 
+}
+
 void pinocchio_post_init()
 {
     #include <pinocchioPostInit.ci>
@@ -184,7 +262,7 @@ int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
 
-    #include <pinocchioPreInit.ci>
+    bootstrap();
     initialize_Natives();
     init_thread_keys();
 

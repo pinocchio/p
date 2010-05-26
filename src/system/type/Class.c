@@ -47,16 +47,6 @@ Type_Class new_Class(Type_Class superclass, Object metatype)
     return result;
 }
 
-void pre_init_Type_Class()
-{
-    Metaclass                   = NEW_t(Type_Class);
-    Object Metaclass_mclass     = basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    HEADER(Metaclass)           = (Type_Class)Metaclass_mclass;
-    ((Type_Class)Metaclass_mclass)->name = (Type_String)Metaclass;
-    Behavior                    = new_Bootstrapping_Class();
-    Class                       = new_Bootstrapping_Class();
-}
-
 void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
 {
     Type_Class metaclass = HEADER(cls);

@@ -10,13 +10,6 @@ DECLARE_CLASS(Type_Object);
 
 /* ========================================================================= */
 
-void pre_init_Type_Object() 
-{
-    Type_Object_Class = new_Bootstrapping_Class();
-}
-
-/* ========================================================================= */
-
 Number_SmallInt Type_Object_hash(Type_Object object)
 {
     unsigned int hash = (unsigned int)(uns_int)object;

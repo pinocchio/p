@@ -18,11 +18,6 @@ Number_Float new_Number_Float(float value)
     return result;
 }
 
-void pre_init_Number_Float()
-{
-    Number_Float_Class = new_Bootstrapping_Class();
-}
-
 /* ========================================================================= */
 
 #define Number_Float_BINARY_OPERATION(name, op)\
