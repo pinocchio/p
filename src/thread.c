@@ -91,13 +91,6 @@ Collection_Array get_args(int argc, const char ** argv)
 
 /* ========================================================================= */
 
-#ifdef TEST
-#include <test/pinocchioTest.h>
-#include <test/FibTest.ci>
-#endif // TEST
-
-/* ========================================================================= */
-
 static const char ** cargv;
 
 void * pinocchio_main_thread(void * argc)
@@ -105,14 +98,9 @@ void * pinocchio_main_thread(void * argc)
     initialize_Thread();
     init_lib();
 
-#ifdef TEST
-    run_tests();
-    // run_FibTest();
-#else // TEST
     Collection_Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1((Object)Interpretation_MainInterpreter_Class,
                SMB_main_, (Object)args);
-#endif // TEST
 
     return EXIT_SUCCESS;
 }

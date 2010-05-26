@@ -9,23 +9,17 @@ OS           = $(shell uname)
 # ============================================================================
 TARGET       = pinocchio
 
-CFILES      += $(filter-out %Test.c, $(wildcard *.c)) $(wildcard system/**/*.c)
+CFILES      += $(wildcard *.c) $(wildcard system/**/*.c)
 CFILES      += $(wildcard lib/**/*.c) $(wildcard lib/*.c)
 
 CIFILES      = $(wildcard *.ci) $(wildcard system/**/*.ci)
 HIFILES      = $(wildcard *.hi) $(wildcard system/**/*.hi)
 HFILES      += $(CFILES:%.c=%.h)
 
-TEST_CIFILES = $(wildcard system/**/*Test.ci) $(wildcard test/**/*.ci)
-TEST_CFILES  = test/pinocchioTest.c
-TEST_CFILES += $(wildcard test/**/*.c)
-TEST_HFILES  = $(TEST_CFILES:%.c=%.h)
-
-SOURCES      = $(CFILES) $(HFILES) $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES) $(HIFILES) $(CIFILES)
+SOURCES      = $(CFILES) $(HFILES) $(HIFILES) $(CIFILES)
 PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(wildcard plugin/**/*.h) $(wildcard plugin/**/*.c)
 EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
-ALLOBJECTS   = $(OBJECTS) $(TEST_CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -DASSERT_FAIL -I. -Wall -g -std=c99
 LDFLAGS += -lm -lgc -ldl 
@@ -53,17 +47,11 @@ $(TARGET): $(OBJECTS)
 run: $(TARGET)
 	./$(TARGET)
 
-test: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
-	CFLAGS="-O0 -DTEST -DTEST_FAIL" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
-
-vtest: $(TEST_CFILES) $(TEST_HFILES) $(TEST_CIFILES)
-	CFLAGS="-O0 -DTEST -DTEST_FAIL -DPRINT_DISPATCH_TRACE" CFILES="$(TEST_CFILES)" HFILES="$(TEST_HFILES)" make run
-
 plugin:
 	@cd plugin; make;
 
 clean:
-	@rm -rf $(ALLOBJECTS) $(TARGET) make.depend
+	@rm -rf $(OBJECTS) $(TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
 fast:

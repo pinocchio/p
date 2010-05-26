@@ -7,10 +7,6 @@
 
 /* ========================================================================= */
 
-#if TEST
-#define DEBUG
-#endif
-
 #ifdef NOGC
     #undef PALLOC
     #define PALLOC malloc
