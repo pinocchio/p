@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct Slot_PointerSlot_t {
-    Number_SmallInt   index;
-    Object          name;
-    Object          package;
+    uns_int index;
+    Object  name;
+    Object  package;
 };
 
 extern Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name);
