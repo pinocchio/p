@@ -4,7 +4,6 @@
 #include <system/number/Float.h>
 #include <system/type/String.h>
 
-
 /* ========================================================================= */
 
 DECLARE_CLASS(Number_Float);
