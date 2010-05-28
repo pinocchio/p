@@ -173,7 +173,16 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
 
 /* ========================================================================= */
 
-#include <pinocchioHelper.ci>
+jmp_buf Assert_Fail;
+
+void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method)
+{
+    method->selector    = (Object)symbol;
+    method->host        = class;
+    Collection_Dictionary_quick_store(class->methods, (Object)symbol, (Object)method);
+}
+
+/* ========================================================================= */
 
 static void bootstrap()
 {

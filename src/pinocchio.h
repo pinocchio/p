@@ -184,10 +184,55 @@ extern Object Eval_Send0(Object self, Type_Symbol symbol);
 extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
 extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
 extern void pinocchio_post_init();
+extern bool isInstance(Object object, Object class);
+extern void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method);
 
 /* ========================================================================= */
 
-#include <pinocchioHelper.hi>
+#include <signal.h>
+#include <setjmp.h>
+
+#define SIGFAIL SIGABRT
+extern jmp_buf Assert_Fail;
+
+#define NYI assert1(NULL, "NYI");
+
+#define ERROR_HANDLER handle_assert
+
+#ifdef __linux
+    #include <stdio_ext.h>
+    #define FLUSH_STDOUT __fpurge(stdout);
+#endif
+#ifdef __APPLE__
+    #define FLUSH_STDOUT fpurge(stdout);
+#endif
+
+
+#define assert(test, message) \
+if (!(test)) {\
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    message; \
+    FLUSH_STDOUT; \
+    ERROR_HANDLER("Assertion failed: "#test);\
+}
+
+#define assert0(test)\
+if (!(test)) {\
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    FLUSH_STDOUT; \
+    ERROR_HANDLER("Assertion failed: "#test);\
+}
+
+#define assert1(test, message)  \
+if (!(test)) { \
+    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    printf(message"\n"); \
+    FLUSH_STDOUT; \
+    ERROR_HANDLER(message);\
+}
+
+/* ========================================================================== */
+
 #include <system/plugin/Plugin.h>
 #include <system/runtime/Exception.h>
 #include <lib/lib.h>
