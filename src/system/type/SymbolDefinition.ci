@@ -122,3 +122,5 @@ Type_Symbol SMB_cache_at_;
 Type_Symbol SMB_continuationContinue_message_;
 Type_Symbol SMB_continuationOn_message_;
 Type_Symbol SMB_pPrimitive_plugin_;
+Type_Symbol SMB_assignFor_to_;
+Type_Symbol SMB_accept_;

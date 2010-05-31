@@ -24,22 +24,23 @@ void AST_Assign_eval(AST_Assign self)
     push_EXP(self->expression);
 }
 
+#define ASSIGN_IF(name) \
+    if (class == name##_Class) {\
+        return name##_assign((name)var, value);\
+    }
+
 CNT(AST_Assign_assign)
     Object value    = pop_EXP();
     AST_Assign self = (AST_Assign)peek_EXP(0);
     Object var      = self->variable;
     /* result of evaluating expression is result of assignment */
     poke_EXP(0, value);
+
+    Type_Class class = HEADER(var);
     
-    if (HEADER(var) == AST_Variable_Class) {
-        return AST_Variable_assign((AST_Variable)var, value);
-    } else if (HEADER(var) == Slot_Slot_Class) {
-        return Slot_Slot_assign((Slot_Slot)var, value);
-    } else if (HEADER(var) == Slot_UIntSlot_Class) {
-        return Slot_UIntSlot_assign((Slot_UIntSlot)var,
-                                             value);
-    }
+    ASSIGN_IF(AST_Variable)
+    ASSIGN_IF(Slot_Slot)
+    ASSIGN_IF(Slot_UIntSlot)
     
-    // TODO send assign: to self->variable.
-    assert1(NULL, "TODO send assign: to self->variable");
+    Type_Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, Nil, value);
 }

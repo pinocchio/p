@@ -39,11 +39,7 @@ void send_eval_rest(Object exp, Type_Class class)
     EVAL_IF(Slot_UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
-    /* TODO fallback by actually sending the eval message */
-    inspect(exp);
-    assert(NULL,
-		   wprintf(L"\"%ls\" has no native eval function. Maybe you wanted wrap it in a AST_Constant?\n", 
-				  ((Type_Class)class)->name->value));
+    Type_Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, Nil);
 }
 
 CNT(send_Eval)
