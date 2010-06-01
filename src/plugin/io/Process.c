@@ -15,8 +15,8 @@ NATIVE(Process_popen)
         fwprintf(stderr,
             L"%s (program: '%s', mode: '%s')\n",
             strerror(errno), command, mode););
-    SELF->ivals[3]  = (Object)new_IO_ReadFile_from(stream);
-    SELF->ivals[2]   = (Object)new_IO_WriteFile_from(stream);
+    SELF->ivals[3] = (Object)new_IO_ReadFile_from(stream);
+    SELF->ivals[2] = (Object)new_IO_WriteFile_from(stream);
     RETURN_FROM_NATIVE(self);
  
 }
