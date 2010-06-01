@@ -50,10 +50,15 @@ extern Object pop_EXP();
 #define empty_EXP()             (EXP_size() == 0) 
 
 extern void _push_CNT(cont e);
-#define push_CNT(value)         _push_CNT((cont)(CNT_##value))
+#define push_CNT_raw(value)     _push_CNT((cont)(value))
+#define push_CNT(value)         push_CNT_raw((CNT_##value))
 #define peek_CNT()              (*(cont*)tget(_CNT_))
+#define peekn_CNT(depth)        (*(cont*)(tget(_CNT_) +(depth)))
 #define zap_CNT()               tset(_CNT_, ((cont*)tget(_CNT_))+1)
-#define poke_CNT(value)         (*(cont*)tget(_CNT_) = ((cont)(CNT_##value)))
+#define poke_CNT_raw(value)     (*(cont*)tget(_CNT_) = ((cont)(value)))
+#define poke_CNT(value)         poke_CNT_raw((CNT_##value))
+#define poken_CNT_raw(depth, value) ((*(cont*)tget(_CNT_) + (depth)) = ((cont)(value)))
+#define poken_CNT(depth, value) poken_CNT_raw((depth), (CNT_##value))
 #define empty_CNT()             ((Object*)tget(_CNT_) == &(tget(Double_Stack)[STACK_SIZE]))
 #define CNT_size()              ((&tget(Double_Stack)[STACK_SIZE]) - tget(_CNT_))
 

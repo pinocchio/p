@@ -171,6 +171,15 @@ Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
     return finish_eval();
 }
 
+void EvalThreaded(Collection_Array code) 
+{
+    start_eval();
+    push_CNT(code);
+    push_CNT(0);
+    push_CNT(eval_threaded);
+    return finish_eval();
+}
+
 /* ========================================================================= */
 
 jmp_buf Assert_Fail;

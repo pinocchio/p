@@ -16,25 +16,25 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host
 
 /* ========================================================================= */
 
+#define INVOKE_IF(name) if(method_class == name##_Class) {\
+        return name##_invoke(closure, self, class, argc);\
+    }
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
                                   uns_int argc)
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
-    AST_Method method = closure->code;
-    Type_Class class = closure->host;
+    AST_Method method       = closure->code;
+    Type_Class method_class = HEADER(method);
+    Type_Class class        = closure->host;
+    
+    INVOKE_IF(AST_NativeMethod)
+    INVOKE_IF(AST_ReflectionMethod)
+    INVOKE_IF(AST_Method)
+    INVOKE_IF(AST_ThreadedMethod)
 
-    if (HEADER(method) == AST_NativeMethod_Class) {
-        return AST_NativeMethod_invoke(closure, self, class, argc);
-    } else if (HEADER(method) == AST_ReflectionMethod_Class) {
-        return AST_ReflectionMethod_invoke(closure, self, class, argc);
-    } else if (HEADER(method) == AST_Method_Class) {
-        return AST_Method_invoke(closure, method, self, argc);
-    } else {
-        // inspect(closure->code);
-        assert1(NULL, "Unknown type of method");
-    }
+    assert1(NULL, "Unknown type of method");
 }
 
 

@@ -97,7 +97,7 @@ void * pinocchio_main_thread(void * argc)
 {
     initialize_Thread();
     init_lib();
-
+    
     Collection_Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1((Object)Interpretation_MainInterpreter_Class,
                SMB_main_, (Object)args);

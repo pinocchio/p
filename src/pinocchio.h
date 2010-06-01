@@ -174,6 +174,7 @@ extern int IN_EVAL;
 /* ========================================================================= */
 
 #include <system/interpretation/Interpreter.h>
+#include <system/interpretation/Threaded.h>
 #include <pinocchioTypeInclude.hi>
 
 /* ========================================================================= */
