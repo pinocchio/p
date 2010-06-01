@@ -27,7 +27,7 @@ void t_branch_gt(int pc)
 {
     int left = unwrap_int(pop_EXP());
     int right = unwrap_int(pop_EXP());
-    branch(pc, left >= right);
+    branch(pc, left > right);
 }
 
 void t_push_self(int pc)
