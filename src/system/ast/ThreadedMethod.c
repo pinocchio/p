@@ -3,6 +3,11 @@
 
 /* ========================================================================= */
 
+Collection_Array threaded_code()
+{
+    return (Collection_Array)peekn_CNT(2);
+}
+
 void set_pc(int pc)
 {
     poken_CNT_raw(1, (uns_int)pc);
@@ -15,21 +20,18 @@ void inc_pc(int pc)
 
 void branch(int pc, int condition)
 {
-    fwprintf(stderr, L"    branch: %i\n", condition);
     set_pc(pc + 1 + condition);
 }
 
 void t_branch_gt(int pc)
 {
-    fwprintf(stderr, L"Branch gt!\n");
     int left = unwrap_int(pop_EXP());
     int right = unwrap_int(pop_EXP());
-    branch(pc, left <= right);
+    branch(pc, left >= right);
 }
 
 void t_push_self(int pc)
 {
-    fwprintf(stderr, L"Pushing self!\n");
     inc_pc(pc);
     claim_EXP(1);
     AST_Self_eval();
@@ -42,7 +44,7 @@ void jump(int pc, int offset)
 
 void t_jump_1(int pc)
 {
-    jump(pc, 1);
+    jump(pc, 2);
 }
 
 void t_return(int pc)
@@ -85,12 +87,19 @@ void t_send_0(int pc)
     Type_Class_dispatch(self, HEADER(self), 0);
 }
 
+void t_push_next(int pc)
+{
+    Object v = threaded_code()->values[pc + 1];
+    set_pc(pc + 2);
+    push_EXP(v);
+}
+
 #define THREADED(name) RAW_THREADED(&t_##name);
 #define RAW_THREADED(o) code->values[pc++] = (Object)(o);
 
 Collection_Array create_fac_code()
 {
-    Collection_Array code = new_Collection_Array_raw(13);
+    Collection_Array code = new_Collection_Array_raw(14);
     int pc = 0;
     THREADED(push_self);
     THREADED(push_1);
@@ -98,6 +107,7 @@ Collection_Array create_fac_code()
     THREADED(jump_1);
     THREADED(return_1);
     THREADED(push_self);
+    THREADED(push_next);
     RAW_THREADED(new_AST_Send_raw(Nil, (Object)new_Type_Symbol(L"fac"), 0));
     THREADED(push_self);
     THREADED(push_1);
@@ -152,7 +162,7 @@ void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
 	push_CNT_raw(method->code);
 	push_CNT_raw(0);
 	push_CNT(eval_threaded);
-    zapn_EXP(2);
+    zap_EXP();
     CNT_eval_threaded();
 }
 
@@ -162,7 +172,6 @@ void CNT_eval_threaded()
 {
     int pc                = (int)(uns_int)peekn_CNT(1);
     Collection_Array code = (Collection_Array)peekn_CNT(2);
-    fwprintf(stderr, L"At pc: %i\n", pc);
     ((threaded)code->values[pc])(pc);
 }
 
