@@ -124,3 +124,5 @@ Type_Symbol SMB_continuationOn_message_;
 Type_Symbol SMB_pPrimitive_plugin_;
 Type_Symbol SMB_assignFor_to_;
 Type_Symbol SMB_accept_;
+Type_Symbol SMB_flush;
+Type_Symbol SMB_immediate;

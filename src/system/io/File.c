@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <wchar.h>
 #include <string.h>
+#include <termios.h>
 #include <system/io/File.h>
 #include <system/type/Boolean.h>
 #include <system/type/String.h>
@@ -87,7 +88,8 @@ NATIVE0(IO_File_atEnd)
     RETURN_FROM_NATIVE(get_bool(IO_File_atEnd((IO_File)self)));
 }
 
-Type_String IO_File_readAll(IO_File file) {
+Type_String IO_File_readAll(IO_File file) 
+{
     assert1(file != NULL, "Invalid Argument");
     int size = IO_File_size(file);
     Type_String result = new_Type_String_sized(size);
@@ -102,7 +104,24 @@ NATIVE0(IO_File_readAll)
     RETURN_FROM_NATIVE(IO_File_readAll((IO_File)self));
 }
 
-Type_String IO_File_readLine(IO_File file) {
+
+void IO_File_immediate(IO_File file) 
+{
+    /*TODO to be removed or updated using the 'exec stty raw' approach*/
+    struct termios termAttributes;
+    assert1(tcgetattr(file->file, &termAttributes) != 0, "Could not extract term attrs");
+    termAttributes.c_lflag &= ~(ICANON);
+    assert1(tcsetattr(file->file, TCSANOW, &termAttributes) != 0, "Could not set term attrs");
+}
+
+NATIVE1(IO_File_immediate)
+    IO_File_immediate((IO_File)self);
+    RETURN_FROM_NATIVE(self);
+}
+
+
+Type_String IO_File_readLine(IO_File file) 
+{
     assert1(file != NULL, "Invalid Argument");
     uns_int size = 1024;
     wchar_t * chr = (wchar_t *) PALLOC(sizeof(wchar_t)*size);
@@ -178,6 +197,11 @@ NATIVE1(IO_File_writeAll_)
     RETURN_FROM_NATIVE(self);
 }
 
+NATIVE1(IO_File_flush)
+    assert1(fflush(((IO_File)self)->file) == 0, "Could not flush stream");
+    RETURN_FROM_NATIVE(self);
+}
+
 FILE * open_file(Object path, char * mode)
 {
     assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
@@ -245,6 +269,9 @@ void post_init_IO_File()
     store_native(natives, SMB_lf        , NM_IO_File_lf);
     store_native(natives, SMB_write_    , NM_IO_File_write_);
     store_native(natives, SMB_writeAll_ , NM_IO_File_writeAll_);
+    store_native(natives, SMB_flush     , NM_IO_File_flush);
+    store_native(natives, SMB_immediate , NM_IO_File_immediate);
+
 
     store_native(natives, SMB_readOpen_  , NM_IO_ReadFile_open_);
     store_native(natives, SMB_writeOpen_ , NM_IO_WriteFile_open_);
