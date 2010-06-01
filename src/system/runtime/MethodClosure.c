@@ -17,7 +17,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host
 /* ========================================================================= */
 
 #define INVOKE_IF(name) if(method_class == name##_Class) {\
-        return name##_invoke(closure, self, class, argc);\
+        return name##_invoke(closure, method, self, argc);\
     }
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
@@ -27,7 +27,6 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
      
     AST_Method method       = closure->code;
     Type_Class method_class = HEADER(method);
-    Type_Class class        = closure->host;
     
     INVOKE_IF(AST_NativeMethod)
     INVOKE_IF(AST_ReflectionMethod)

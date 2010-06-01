@@ -8,14 +8,14 @@
 /* ========================================================================= */
 
 struct AST_NativeMethod_t {
-    uns_int         size;
-    AST_Info        info;
-    Collection_Array      params;
-    Collection_Array      locals;
-    Object          package;
-    Collection_Array      annotations;
-    native          code;
-    Object          body[];
+    uns_int          size;
+    AST_Info         info;
+    Collection_Array params;
+    Collection_Array locals;
+    Object           package;
+    Collection_Array annotations;
+    native           code;
+    Object           body[];
 };
 
 extern AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
@@ -42,8 +42,9 @@ static void NM_##name(Object self, Type_Class class, uns_int argc) {
 #define SELF ((Type_Object) self)
 /* ========================================================================= */
 
-extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self,
-                                    Type_Class class, uns_int argc);
+extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure,
+                                    AST_NativeMethod method,
+                                    Object self, uns_int argc);
 extern native lookup_native(Object primitive_name, Object module_name);
 
 /* ========================================================================= */

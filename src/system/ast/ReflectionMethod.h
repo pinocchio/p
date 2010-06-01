@@ -8,14 +8,14 @@
 /* ========================================================================= */
 
 struct AST_ReflectionMethod_t {
-    uns_int         size;
-    AST_Info        info;
-    Collection_Array      params;
-    Collection_Array      locals;
-    Object          package;
-    Collection_Array      annotations;
-    Object          cache;
-    Object          body[];
+    uns_int          size;
+    AST_Info         info;
+    Collection_Array params;
+    Collection_Array locals;
+    Object           package;
+    Collection_Array annotations;
+    native           cache;
+    Object           body[];
 };
 
 extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
@@ -25,8 +25,9 @@ extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array param
 
 /* ========================================================================= */
 
-extern void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure, Object self,
-                                        Type_Class class, uns_int argc);
+extern void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure,
+                                        AST_ReflectionMethod method, Object self,
+                                        uns_int argc);
 
 /* ========================================================================= */
 

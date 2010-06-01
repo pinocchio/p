@@ -17,17 +17,17 @@ void pre_init_AST_Self()
 void AST_Self_eval()
 {
     // LOGFUN;
-    Object env = (Object)current_env();
+    Runtime_BlockContext env = current_env();
     assert0(IS_CONTEXT(env));
     // replace the current element (an AST_Self) with the Object's self
-    poke_EXP(0, ((Runtime_BlockContext)env)->home_context->self);
+    poke_EXP(0, env->home_context->self);
 }
 
 CNT(AST_Self_eval)
-    Object env = (Object)current_env();
+    Runtime_BlockContext env = current_env();
     assert0(IS_CONTEXT(env));
     // replace the current element (an AST_Self) with the Object's self
-    push_EXP(((Runtime_BlockContext)env)->home_context->self);
+    push_EXP(env->home_context->self);
 }
 
 /* ========================================================================= */

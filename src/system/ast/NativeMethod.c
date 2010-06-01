@@ -39,9 +39,10 @@ native lookup_native(Object primitive_name, Object module_name)
     return (native)primitive;
 }
 
-void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Class class, uns_int argc)
+void AST_NativeMethod_invoke(Runtime_MethodClosure closure,
+                             AST_NativeMethod method,
+                             Object self, uns_int argc)
 {
-    AST_NativeMethod method = (AST_NativeMethod)closure->code;
     if (method->code == NULL) {
         AST_Annotation annotation =
             lookup_annotation(method->annotations, 
@@ -54,5 +55,5 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure, Object self, Type_Cl
     if (method->code == (native)-1) {
         return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
-    method->code(self, class, argc);
+    method->code(self, closure->host, argc);
 }
