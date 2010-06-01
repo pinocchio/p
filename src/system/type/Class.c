@@ -87,7 +87,8 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         // For now keep on printing the message.
-        fwprintf(stderr, L"\033[33mDNU: %ls\033[0m\n",
+        fwprintf(stderr, L"\033[33mDNU: %ls >> %ls\033[0m\n",
+                 class->name->value,
                  message->selector->value);
         fail(Exception_RecursiveDoesNotUnderstand_Class, 3,
              self, class, message);
