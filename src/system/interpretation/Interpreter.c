@@ -50,7 +50,6 @@ CNT(send_Eval)
     EVAL_IF(AST_Super)
 
     send_eval_rest(exp, class);
-
 }
 
 #define TAIL_EVAL_IF(name) \

@@ -43,8 +43,8 @@ NATIVE1(Runtime_Continuation_on_)
     cont->exp_stack = new_Collection_Array(EXP_size() - (argc + 1),
                                      tget(Double_Stack));
     cont->cnt_stack = new_Collection_Array(CNT_size(), tget(_CNT_));
-    cont->iss = (Object)tget(_ISS_);
-    cont->env = (Object)current_env();
+    cont->iss       = (Object)tget(_ISS_);
+    cont->env       = (Object)current_env();
     Object closure = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);

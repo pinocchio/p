@@ -16,7 +16,7 @@ void fail(const Type_Class exception_class, uns_int argc, ...)
     }
     va_end(args);
 
-    raise(SIGSEGV);
+    //raise(SIGSEGV);
 
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
         Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),

@@ -39,7 +39,7 @@ NATIVE1(Runtime_Continue_escape_)
 
 NATIVE1(Runtime_Continue_on_)
     Runtime_Continue cont = new_Runtime_Continue_offset(argc + 1);
-    Object closure = NATIVE_ARG(0);
+    Object closure        = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);
 }

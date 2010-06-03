@@ -62,12 +62,12 @@ CNT(exit_error)
     fwprintf(stderr, L"\n");
     while ((Object)env != Nil) {
         if (env->home_context == (Runtime_MethodContext)env) {
-            fwprintf(stderr, L"\t%ls\n",
+            fwprintf(stderr, L"\t%ls >> %ls\n",
+                (Type_Symbol)HEADER(env->home_context->self)->name->value,
                 ((Type_Symbol)env->home_context->closure->selector)->value);
         }
         env = env->parent_frame;
     }
-    
     exit(EXIT_FAILURE);
 }
 
@@ -184,11 +184,13 @@ Object EvalThreaded(Collection_Array code)
 
 jmp_buf Assert_Fail;
 
-void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method)
+void store_method(Type_Class class, Type_Symbol symbol, 
+                  Runtime_MethodClosure method)
 {
     method->selector    = (Object)symbol;
     method->host        = class;
-    Collection_Dictionary_quick_store(class->methods, (Object)symbol, (Object)method);
+    Collection_Dictionary_quick_store(class->methods, (Object)symbol, 
+                                      (Object)method);
 }
 
 /* ========================================================================= */
@@ -256,17 +258,17 @@ static void bootstrap()
     character_layout    = basic_instantiate_Object(Type_CharacterLayout_Class, 0);
     file_layout         = basic_instantiate_Object(Type_FileLayout_Class, 0);
 
-    Type_ObjectLayout_Class->layout     = empty_array_layout;
-    Type_ArrayLayout_Class->layout      = empty_array_layout;
-    Type_CharacterLayout_Class->layout  = empty_object_layout;
-    Type_WordsLayout_Class->layout      = empty_object_layout;
-    Type_IntLayout_Class->layout        = empty_object_layout;
-    Type_FloatLayout_Class->layout      = empty_object_layout;
-    Type_LongLayout_Class->layout       = empty_object_layout;
-    Type_BytesLayout_Class->layout      = empty_object_layout;
-    Type_FileLayout_Class->layout       = empty_object_layout;
+    Type_ObjectLayout_Class->layout    = empty_array_layout;
+    Type_ArrayLayout_Class->layout     = empty_array_layout;
+    Type_CharacterLayout_Class->layout = empty_object_layout;
+    Type_WordsLayout_Class->layout     = empty_object_layout;
+    Type_IntLayout_Class->layout       = empty_object_layout;
+    Type_FloatLayout_Class->layout     = empty_object_layout;
+    Type_LongLayout_Class->layout      = empty_object_layout;
+    Type_BytesLayout_Class->layout     = empty_object_layout;
+    Type_FileLayout_Class->layout      = empty_object_layout;
 
-    Type_Symbol_Class->layout           = words_layout;
+    Type_Symbol_Class->layout          = words_layout;
 
     Symbol_Table = new_Collection_Dictionary();
     #include <system/type/SymbolInitialization.ci> 
