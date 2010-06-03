@@ -45,7 +45,7 @@ $(TARGET): $(OBJECTS)
 	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 run: $(TARGET)
-	./$(TARGET)
+	rlwrap --file=completion.txt ./$(TARGET)
 
 plugin:
 	@cd plugin; make;
