@@ -8,10 +8,10 @@
 struct AST_Method_t {
     uns_int     size;
     AST_Info    info;
-    Collection_Array  params;
-    Collection_Array  locals;
+    Array  params;
+    Array  locals;
     Object      package;
-    Collection_Array  annotations;
+    Array  annotations;
     Object      unused;
     Object      body[];
 };
@@ -22,9 +22,9 @@ extern AST_Method new_AST_Method(uns_int paramCount,
 extern AST_Method new_AST_Method_withAll(uns_int paramCount,
                                          uns_int localCount,
                                          uns_int statementCount, ...);
-extern AST_Method new_AST_Method_with(Collection_Array params,
-                                      Collection_Array locals,
-                                      Collection_Array annotations,
+extern AST_Method new_AST_Method_with(Array params,
+                                      Array locals,
+                                      Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */

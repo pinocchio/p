@@ -165,7 +165,7 @@ typedef void(*native)(Object self, Type_Class class, uns_int argc);
 
 /* ========================================================================= */
 
-extern Collection_Dictionary _NATIVES_;
+extern Dictionary _NATIVES_;
 
 /* ========================================================================= */
 

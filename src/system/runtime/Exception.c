@@ -32,6 +32,6 @@ void handle_assert(const char * message)
 {
     raise(SIGSEGV);
     //fail(Exception_AssertionFailure_Class, 1,
-    //     new_Type_String_from_charp(message));
+    //     new_String_from_charp(message));
 }
 

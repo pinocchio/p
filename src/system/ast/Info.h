@@ -6,10 +6,10 @@
 /* ========================================================================= */
 
 struct AST_Info_t {
-    Type_String   sourceFile;
-    Type_String   name;
-    Number_SmallInt line;
-    Number_SmallInt column;
+    String   sourceFile;
+    String   name;
+    SmallInt line;
+    SmallInt column;
 };
 
 extern AST_Info empty_AST_Info;
@@ -17,8 +17,8 @@ extern AST_Info empty_AST_Info;
 extern void post_init_AST_Info();
 
 extern AST_Info new_raw_AST_Info();
-extern AST_Info new_AST_Info(Type_String sourceFile, Type_String name, 
-                      Number_SmallInt line, Number_SmallInt column);
+extern AST_Info new_AST_Info(String sourceFile, String name, 
+                      SmallInt line, SmallInt column);
 
 /* ========================================================================= */
 

@@ -1,7 +1,7 @@
-Object instantiate_Array(Type_Class class, Collection_Array ivars, uns_int extra)
+Object instantiate_Array(Type_Class class, Array ivars, uns_int extra)
 {
     uns_int base = ivars->size;
-    Collection_Array result = NEW_ARRAYED(struct Collection_Array_t, Object[base+extra]);
+    Array result = NEW_ARRAYED(struct Array_t, Object[base+extra]);
     result->size = extra;
     uns_int i;
 
@@ -18,13 +18,13 @@ Object instantiate_Array(Type_Class class, Collection_Array ivars, uns_int extra
     return (Object)result;
 }
 
-Object instantiate_Bytes(Type_Class class, Collection_Array ivars, uns_int extra)
+Object instantiate_Bytes(Type_Class class, Array ivars, uns_int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
     return NULL;
 }
 
-Object instantiate_Words(Type_Class class, Collection_Array ivars, uns_int extra)
+Object instantiate_Words(Type_Class class, Array ivars, uns_int extra)
 {
     Symbol result = NEW_ARRAYED(struct Symbol_t, wchar_t[extra]);
     HEADER(result) = class;
@@ -44,7 +44,7 @@ Object basic_instantiate_Object(Type_Class class, uns_int size)
     return (Object)result;
 }
 
-static Object instantiate_Object(Type_Class class, Collection_Array ivars)
+static Object instantiate_Object(Type_Class class, Array ivars)
 {
     uns_int size = ivars->size;
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
@@ -60,13 +60,13 @@ static Object instantiate_Object(Type_Class class, Collection_Array ivars)
 /* ========================================================================= */
 
 #define INSTANTIATE(layout)\
-    if (HEADER(tag) == Type_##layout##Layout##_Class) {\
-        return instantiate##_##layout(class, (Collection_Array)tag);\
+    if (HEADER(tag) == layout##Layout##_Class) {\
+        return instantiate##_##layout(class, (Array)tag);\
     }
 
 #define INSTANTIATE_SIZED(layout)\
-    if (HEADER(tag) == Type_##layout##Layout##_Class) {\
-        return instantiate##_##layout(class, (Collection_Array)tag, size);\
+    if (HEADER(tag) == layout##Layout##_Class) {\
+        return instantiate##_##layout(class, (Array)tag, size);\
     }
 
 /* ========================================================================= */

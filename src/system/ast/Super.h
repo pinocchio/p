@@ -8,7 +8,7 @@
 struct AST_Super_t {
     uns_int         size;
     AST_Info        info;   
-    Collection_Array      cache;
+    Array      cache;
     Object          message; 
     Object          unused;
     Object          arguments[];

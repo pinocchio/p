@@ -6,29 +6,29 @@
 
 /* ========================================================================= */
 
-Collection_Dictionary create_plugin()
+Dictionary create_plugin()
 {
-    return new_Collection_Dictionary();
+    return new_Dictionary();
 }
 
-Collection_Dictionary add_plugin(const wchar_t * name)
+Dictionary add_plugin(const wchar_t * name)
 {
     Object symbol = (Object)new_Symbol_cached(name);
-    Collection_Dictionary plugin = 
-        (Collection_Dictionary)Collection_Dictionary_quick_lookup(_NATIVES_,
+    Dictionary plugin = 
+        (Dictionary)Dictionary_quick_lookup(_NATIVES_,
                                                                   symbol);
     if (plugin) { return plugin; }
 
-    plugin = new_Collection_Dictionary();
-    Collection_Dictionary_quick_store(_NATIVES_,
+    plugin = new_Dictionary();
+    Dictionary_quick_store(_NATIVES_,
                                       (Object)new_Symbol_cached(name),
                                       (Object)plugin);
     return plugin;
 }
 
-void store_native(Collection_Dictionary dict, Symbol selector, native code)
+void store_native(Dictionary dict, Symbol selector, native code)
 {
-    Collection_Dictionary_quick_store(dict, (Object)selector, (Object)code);
+    Dictionary_quick_store(dict, (Object)selector, (Object)code);
 }
 
 /* ========================================================================= */
@@ -76,7 +76,7 @@ NATIVE0(Plugin_unload)
 
 void init_plugin()
 {
-    Collection_Dictionary natives = add_plugin(L"Plugin.Plugin");
+    Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_load_,  NM_Plugin_load_);
     store_native(natives, SMB_unload, NM_Plugin_unload);
     ((Type_Class)Plugin_Plugin_Class)->cvars[0] = (Object)_NATIVES_;

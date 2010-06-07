@@ -194,11 +194,11 @@ NATIVE(Runtime_BlockClosure_apply_)
 }
 
 NATIVE0(Runtime_BlockClosure_numArgs) 
-    RETURN_FROM_NATIVE(new_Number_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
+    RETURN_FROM_NATIVE(new_SmallInt(((Runtime_BlockClosure) self)->code->params->size));
 }
 
 NATIVE1(Runtime_BlockClosure_valueWithArguments_)
-    Collection_Array args = (Collection_Array)pop_EXP();
+    Array args = (Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
     int pos = 0;
@@ -215,7 +215,7 @@ NATIVE1(Runtime_BlockClosure_valueWithArguments_)
 
 void post_init_Runtime_BlockClosure()
 {
-    Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
+    Dictionary natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, SMB_blockclosureValue_message_, NM_Runtime_BlockClosure_apply_);
     store_native(natives, SMB_blockclosureValueWithArguments_message_,
                           NM_Runtime_BlockClosure_valueWithArguments_);

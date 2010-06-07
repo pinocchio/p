@@ -4,30 +4,30 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Collection_Dictionary);
+DECLARE_CLASS(Dictionary);
 
 /* ========================================================================= */
 
-Collection_Dictionary new_Collection_Dictionary()
+Dictionary new_Dictionary()
 {
-    NEW_OBJECT(Collection_Dictionary);
+    NEW_OBJECT(Dictionary);
     result->size      = 0;
     result->ratio     = 500;
     result->maxLinear = 20;
-    result->data      = new_Collection_Array_withAll(DICTIONARY_SIZE, Nil);
+    result->data      = new_Array_withAll(DICTIONARY_SIZE, Nil);
     return result;
 }
 
 /* ========================================================================= */
 
-static int get_hash(Collection_Dictionary self, Object key)
+static int get_hash(Dictionary self, Object key)
 {
     int hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = ((Number_SmallInt)key)->value;
+        hash = ((SmallInt)key)->value;
     } else {
         assert1(NULL, "Quick dictionaries only support ints and strings!");
         // make the compiler happy :)
@@ -39,34 +39,34 @@ static int get_hash(Collection_Dictionary self, Object key)
 
 void push_hash(Object key)
 {
-    Number_SmallInt hash;
+    SmallInt hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (Number_SmallInt)key;
+        hash = (SmallInt)key;
     } else {
         return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
     push_EXP(hash);
 }
 
-int unwrap_hash(Collection_Dictionary self, Object w_hash)
+int unwrap_hash(Dictionary self, Object w_hash)
 {
     return unwrap_int(w_hash) % self->data->size;
 }
 
 
-static Collection_DictBucket * get_bucketp(Collection_Dictionary dictionary, int hash)
+static DictBucket * get_bucketp(Dictionary dictionary, int hash)
 {
-    return (Collection_DictBucket *)&dictionary->data->values[hash];
+    return (DictBucket *)&dictionary->data->values[hash];
 }
 
 /* ========================================================================= *
  * Quick dictionary functions. Only for bootstrapping.                       *
  * ========================================================================= */
 
-static int Collection_Dictionary_grow_check(Collection_Dictionary self)
+static int Dictionary_grow_check(Dictionary self)
 {
     uns_int amount = self->size + 1;
     self->size     = amount;
@@ -74,52 +74,52 @@ static int Collection_Dictionary_grow_check(Collection_Dictionary self)
     return (100 * amount) / size > self->ratio;
 }
 
-static void Collection_Dictionary_quick_check_grow(Collection_Dictionary self)
+static void Dictionary_quick_check_grow(Dictionary self)
 {
-    if (!Collection_Dictionary_grow_check(self)) { return; }
+    if (!Dictionary_grow_check(self)) { return; }
 
-    Collection_Array old = self->data;
-    self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
+    Array old = self->data;
+    self->data     = new_Array_withAll(old->size << 1, (Object)Nil);
     self->size     = 0;
     int i;
     for (i = 0; i < old->size; i++) {
-        Collection_DictBucket bucket = (Collection_DictBucket)old->values[i];
-        if (bucket == (Collection_DictBucket)Nil) { continue; }
+        DictBucket bucket = (DictBucket)old->values[i];
+        if (bucket == (DictBucket)Nil) { continue; }
         int j;
         uns_int tally = bucket->tally;
         for (j = 0; j < tally; j=j+2) {
             Object key = bucket->values[j];
-            Collection_Dictionary_quick_store(self, key, bucket->values[j+1]);
+            Dictionary_quick_store(self, key, bucket->values[j+1]);
         }
         
     }
 }
 
-void Collection_Dictionary_quick_store(Collection_Dictionary self,
+void Dictionary_quick_store(Dictionary self,
                                  Object key, Object value)
 {
-    assert0(self != (Collection_Dictionary)Nil);
+    assert0(self != (Dictionary)Nil);
     int hash = get_hash(self, key);
-    Collection_DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Collection_DictBucket)Nil) {
+    DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (DictBucket)Nil) {
         *bucketp                     = new_bucket();
-        Collection_DictBucket bucket = *bucketp;
+        DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
         bucket->tally                = 2;
-        return Collection_Dictionary_quick_check_grow(self);
+        return Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
-        Collection_Dictionary_quick_check_grow(self);
+        Dictionary_quick_check_grow(self);
     }
 }
 
-Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key)
+Object Dictionary_quick_lookup(Dictionary self, Object key)
 {
     int hash = get_hash(self, key);
-    Collection_DictBucket * bucketp = get_bucketp(self, hash);
-    Collection_DictBucket bucket = *bucketp;
-    if (bucket == (Collection_DictBucket)Nil) {
+    DictBucket * bucketp = get_bucketp(self, hash);
+    DictBucket bucket = *bucketp;
+    if (bucket == (DictBucket)Nil) {
         return NULL;
     }
     int i;
@@ -139,20 +139,20 @@ Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key
 
 static CNT(lookup_push)
     Object w_hash              = peek_EXP(0);
-    Collection_Dictionary self = (Collection_Dictionary)peek_EXP(2);
+    Dictionary self = (Dictionary)peek_EXP(2);
     int hash                   = unwrap_hash(self, w_hash);
     Object key                 = peek_EXP(1);
     zapn_EXP(2);
 
-    Collection_DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Collection_DictBucket)Nil) {
+    DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (DictBucket)Nil) {
         poke_EXP(0, NULL);
         return;
     }
     Bucket_lookup(*bucketp, key);
 }
 
-void Collection_Dictionary_lookup_push(Collection_Dictionary self, Object key)
+void Dictionary_lookup_push(Dictionary self, Object key)
 {
     push_CNT(lookup_push);
     claim_EXP(2);
@@ -168,14 +168,14 @@ static CNT(dict_grow_end)
 static void CNT_dict_grow()
 {
     uns_int idx    = (uns_int)peek_EXP(1);
-    Collection_Array old = (Collection_Array)peek_EXP(2);
-    Collection_DictBucket bucket  = (Collection_DictBucket)old->values[idx];
+    Array old = (Array)peek_EXP(2);
+    DictBucket bucket  = (DictBucket)old->values[idx];
     if (idx == 0) {
         poke_CNT(dict_grow_end);
     } else {
         poke_EXP(1, idx - 1);
     }
-    if (bucket == (Collection_DictBucket)Nil || bucket->size == 0) {
+    if (bucket == (DictBucket)Nil || bucket->size == 0) {
         return;
     }
     Object key = bucket->values[0];
@@ -189,10 +189,10 @@ static void CNT_dict_grow()
     push_hash(key);
 }
 
-static void Collection_Dictionary_grow(Collection_Dictionary self)
+static void Dictionary_grow(Dictionary self)
 {
-    Collection_Array old = self->data;
-    self->data     = new_Collection_Array_withAll(old->size << 1, (Object)Nil);
+    Array old = self->data;
+    self->data     = new_Array_withAll(old->size << 1, (Object)Nil);
     self->size     = 0;
     
     push_CNT(dict_grow);
@@ -202,38 +202,38 @@ static void Collection_Dictionary_grow(Collection_Dictionary self)
     poke_EXP(0, self);
 }
 
-static void Collection_Dictionary_check_grow(Collection_Dictionary self)
+static void Dictionary_check_grow(Dictionary self)
 {
-    if (Collection_Dictionary_grow_check(self)) {
-        Collection_Dictionary_grow(self);
+    if (Dictionary_grow_check(self)) {
+        Dictionary_grow(self);
     }
 }
 
-static CNT(Collection_Dictionary_check_grow)
+static CNT(Dictionary_check_grow)
     // Check if new element
     Object test = pop_EXP();
     if (test) {
-        Collection_Dictionary self = (Collection_Dictionary)pop_EXP();
-        Collection_Dictionary_check_grow(self);
+        Dictionary self = (Dictionary)pop_EXP();
+        Dictionary_check_grow(self);
     } else {
         zap_EXP();
     }
 }
 
-void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
+void Dictionary_direct_store(Dictionary self, int hash,
                                   Object key, Object value) 
 {
-    Collection_DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (Collection_DictBucket)Nil) { 
+    DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (DictBucket)Nil) { 
         *bucketp                     = new_bucket();
-        Collection_DictBucket bucket = *bucketp;
+        DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
         bucket->values[1]            = value;
         bucket->tally                = 2;
-        Collection_Dictionary_check_grow(self);
+        Dictionary_check_grow(self);
     } else {
         push_EXP((Object)self);
-        push_CNT(Collection_Dictionary_check_grow);
+        push_CNT(Dictionary_check_grow);
         Bucket_store_(bucketp, key, value);
     }
 }
@@ -256,35 +256,35 @@ static CNT(dictionary_check_absent)
     poke_EXP(0, result);
 }
 
-NATIVE1(Collection_Dictionary_at_)
+NATIVE1(Dictionary_at_)
     Object w_index = NATIVE_ARG(0);
     zapn_EXP(3);
     push_CNT(fix_dictionary_result);
-    Collection_Dictionary_lookup_push((Collection_Dictionary)self, w_index);
+    Dictionary_lookup_push((Dictionary)self, w_index);
 }
 
-NATIVE2(Collection_Dictionary_at_ifAbsent_)
+NATIVE2(Dictionary_at_ifAbsent_)
     Object w_index = NATIVE_ARG(0);
     Object w_block = NATIVE_ARG(1);
     zapn_EXP(4);
     push_EXP(w_block);
     push_CNT(dictionary_check_absent);
-    Collection_Dictionary_lookup_push((Collection_Dictionary)self, w_index);
+    Dictionary_lookup_push((Dictionary)self, w_index);
 }
 
-CNT(Collection_Dictionary_at_put_)
+CNT(Dictionary_at_put_)
     Object w_hash              = peek_EXP(0);
-    Collection_Dictionary self = (Collection_Dictionary)peek_EXP(3);
+    Dictionary self = (Dictionary)peek_EXP(3);
     int hash                   = unwrap_hash(self, w_hash);
     Object new                 = peek_EXP(1);
     Object w_index             = peek_EXP(2);
     zapn_EXP(4);
     poke_EXP(0, new);
-    Collection_Dictionary_direct_store((Collection_Dictionary)self, hash, w_index, new);
+    Dictionary_direct_store((Dictionary)self, hash, w_index, new);
 }
 
-NATIVE2(Collection_Dictionary_at_put_)
-    push_CNT(Collection_Dictionary_at_put_);
+NATIVE2(Dictionary_at_put_)
+    push_CNT(Dictionary_at_put_);
     push_hash(NATIVE_ARG(0));
 }
 
@@ -293,19 +293,19 @@ static CNT(native_grow_end)
     poke_EXP(0, self);
 }
 
-NATIVE(Collection_Dictionary_grow)
+NATIVE(Dictionary_grow)
     push_CNT(native_grow_end);
     push_EXP(self);
-    Collection_Dictionary_grow((Collection_Dictionary)self);
+    Dictionary_grow((Dictionary)self);
 }
 
-void post_init_Collection_Dictionary()
+void post_init_Dictionary()
 {
-    change_slot_type(Collection_Dictionary_Class, Slot_UIntSlot_Class, 3, 0,1,2);
+    change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
 
-    Collection_Dictionary natives = add_plugin(L"Collection.Dictionary");
-    store_native(natives, SMB_at_put_,      NM_Collection_Dictionary_at_put_);
-    store_native(natives, SMB_at_,          NM_Collection_Dictionary_at_);
-    store_native(natives, SMB_at_ifAbsent_, NM_Collection_Dictionary_at_ifAbsent_);
-    store_native(natives, SMB_grow,         NM_Collection_Dictionary_grow);
+    Dictionary natives = add_plugin(L"Collection.Dictionary");
+    store_native(natives, SMB_at_put_,      NM_Dictionary_at_put_);
+    store_native(natives, SMB_at_,          NM_Dictionary_at_);
+    store_native(natives, SMB_at_ifAbsent_, NM_Dictionary_at_ifAbsent_);
+    store_native(natives, SMB_grow,         NM_Dictionary_grow);
 }

@@ -5,19 +5,19 @@
 
 /* ========================================================================= */
 
-typedef Symbol Type_String;
+typedef Symbol String;
 
-extern Type_String empty_Type_String;
+extern String empty_String;
 
-CREATE_INITIALIZERS(Type_String)
+CREATE_INITIALIZERS(String)
 
-extern Type_String new_Type_String(const wchar_t * str);
-extern Type_String new_Type_String_sized(uns_int size);
+extern String new_String(const wchar_t * str);
+extern String new_String_sized(uns_int size);
 
 /* ========================================================================= */
 
-extern Type_String Type_String_concat_(Type_String str1, Type_String str2);
-extern Type_String new_Type_String_from_charp(const char * input);
+extern String String_concat_(String str1, String str2);
+extern String new_String_from_charp(const char * input);
 extern int Words_compare(Symbol s1, Symbol s2);
 extern char* unicode_to_ascii(const wchar_t* str);
 extern wchar_t * ascii_to_unicode(const char* str);

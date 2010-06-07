@@ -5,8 +5,8 @@
 
 /* ========================================================================= */
 
-extern Collection_Array character_table;
-extern void post_init_Type_CharacterTable();
+extern Array character_table;
+extern void post_init_CharacterTable();
 
 /* ========================================================================= */
 

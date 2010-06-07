@@ -59,7 +59,7 @@ void post_init_Type_Boolean()
     False        = instantiate(Type_False_Class);
     False_Const  = new_AST_Constant((Object)False);
 
-    Collection_Dictionary natives;
+    Dictionary natives;
     
     natives = add_plugin(L"Type.True");
     store_native(natives, new_Symbol_cached(L"whileTrue:"), NM_Type_True_whileTrue_);

@@ -28,7 +28,7 @@ void init_thread_keys()
 
 /* ========================================================================= */
 
-Collection_Dictionary _NATIVES_;
+Dictionary _NATIVES_;
 
 /* ========================================================================= */
 
@@ -73,7 +73,7 @@ CNT(exit_error)
 
 void initialize_Natives()
 {
-    _NATIVES_ = new_Collection_Dictionary();
+    _NATIVES_ = new_Dictionary();
 }
 
 /* ========================================================================= */
@@ -171,7 +171,7 @@ Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2)
     return finish_eval();
 }
 
-Object EvalThreaded(Collection_Array code) 
+Object EvalThreaded(Array code) 
 {
     start_eval();
     push_CNT_raw(code);
@@ -189,7 +189,7 @@ void store_method(Type_Class class, Symbol symbol,
 {
     method->selector    = (Object)symbol;
     method->host        = class;
-    Collection_Dictionary_quick_store(class->methods, (Object)symbol, 
+    Dictionary_quick_store(class->methods, (Object)symbol, 
                                       (Object)method);
 }
 
@@ -202,75 +202,75 @@ static void bootstrap()
     Metaclass                   = NEW_t(Type_Class);
     Type_Class Metaclass_mclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     HEADER(Metaclass)           = Metaclass_mclass;
-    Metaclass_mclass->name      = (Type_String)Metaclass;
+    Metaclass_mclass->name      = (String)Metaclass;
 
     Behavior                    = new_Bootstrapping_Class();
     Class                       = new_Bootstrapping_Class();
     Type_Object_Class           = new_Bootstrapping_Class();
-    Collection_Array_Class      = new_Bootstrapping_Class();
-    Collection_DictBucket_Class = new_Bootstrapping_Class();
-    Collection_Dictionary_Class = new_Bootstrapping_Class();
+    Array_Class      = new_Bootstrapping_Class();
+    DictBucket_Class = new_Bootstrapping_Class();
+    Dictionary_Class = new_Bootstrapping_Class();
 
     DIRECT_INIT_CLASS(Metaclass);
     DIRECT_INIT_CLASS(Behavior);
     DIRECT_INIT_CLASS(Class);
     INIT_CLASS(Type_Object);
-    INIT_CLASS(Collection_Array);
-    INIT_CLASS(Collection_DictBucket);
-    INIT_CLASS(Collection_Dictionary);
+    INIT_CLASS(Array);
+    INIT_CLASS(DictBucket);
+    INIT_CLASS(Dictionary);
 
-    Slot_Slot_Class             = new_Bootstrapping_Class();
-    Number_SmallInt_Class       = new_Bootstrapping_Class();
+    Slot_Class             = new_Bootstrapping_Class();
+    SmallInt_Class       = new_Bootstrapping_Class();
     Symbol_Class           = new_Bootstrapping_Class();
 
-    INIT_CLASS(Slot_Slot);
+    INIT_CLASS(Slot);
     INIT_CLASS(Symbol);
-    INIT_CLASS(Number_SmallInt);
+    INIT_CLASS(SmallInt);
 
-    Type_ArrayLayout_Class      = new_Bootstrapping_Class();
-    Type_BytesLayout_Class      = new_Bootstrapping_Class();
-    Type_CharacterLayout_Class  = new_Bootstrapping_Class();
-    Type_FileLayout_Class       = new_Bootstrapping_Class();
-    Type_FloatLayout_Class      = new_Bootstrapping_Class();
-    Type_IntLayout_Class        = new_Bootstrapping_Class();
-    Type_LongLayout_Class       = new_Bootstrapping_Class();
-    Type_ObjectLayout_Class     = new_Bootstrapping_Class();
-    Type_WordsLayout_Class      = new_Bootstrapping_Class();
+    ArrayLayout_Class      = new_Bootstrapping_Class();
+    BytesLayout_Class      = new_Bootstrapping_Class();
+    CharacterLayout_Class  = new_Bootstrapping_Class();
+    FileLayout_Class       = new_Bootstrapping_Class();
+    FloatLayout_Class      = new_Bootstrapping_Class();
+    IntLayout_Class        = new_Bootstrapping_Class();
+    LongLayout_Class       = new_Bootstrapping_Class();
+    ObjectLayout_Class     = new_Bootstrapping_Class();
+    WordsLayout_Class      = new_Bootstrapping_Class();
 
-    INIT_CLASS(Type_ArrayLayout);
-    INIT_CLASS(Type_CharacterLayout);
-    INIT_CLASS(Type_FloatLayout);
-    INIT_CLASS(Type_IntLayout);
-    INIT_CLASS(Type_ObjectLayout);
-    INIT_CLASS(Type_WordsLayout);
+    INIT_CLASS(ArrayLayout);
+    INIT_CLASS(CharacterLayout);
+    INIT_CLASS(FloatLayout);
+    INIT_CLASS(IntLayout);
+    INIT_CLASS(ObjectLayout);
+    INIT_CLASS(WordsLayout);
 
-    empty_Collection_Array          = NEW_t(Collection_Array);
-    empty_Collection_Array->size    = 0;
-    HEADER(empty_Collection_Array)  = Collection_Array_Class;
+    empty_Array          = NEW_t(Array);
+    empty_Array->size    = 0;
+    HEADER(empty_Array)  = Array_Class;
 
-    empty_array_layout  = (Object)create_layout_with_vars(Type_ArrayLayout_Class, 0);
-    empty_object_layout = (Object)create_layout_with_vars(Type_ObjectLayout_Class, 0);
-    words_layout        = basic_instantiate_Object(Type_WordsLayout_Class, 0);
-    bytes_layout        = basic_instantiate_Object(Type_BytesLayout_Class, 0);
-    int_layout          = basic_instantiate_Object(Type_IntLayout_Class, 0);
-    float_layout        = basic_instantiate_Object(Type_FloatLayout_Class, 0);
-    long_layout         = basic_instantiate_Object(Type_LongLayout_Class, 0);
-    character_layout    = basic_instantiate_Object(Type_CharacterLayout_Class, 0);
-    file_layout         = basic_instantiate_Object(Type_FileLayout_Class, 0);
+    empty_array_layout  = (Object)create_layout_with_vars(ArrayLayout_Class, 0);
+    empty_object_layout = (Object)create_layout_with_vars(ObjectLayout_Class, 0);
+    words_layout        = basic_instantiate_Object(WordsLayout_Class, 0);
+    bytes_layout        = basic_instantiate_Object(BytesLayout_Class, 0);
+    int_layout          = basic_instantiate_Object(IntLayout_Class, 0);
+    float_layout        = basic_instantiate_Object(FloatLayout_Class, 0);
+    long_layout         = basic_instantiate_Object(LongLayout_Class, 0);
+    character_layout    = basic_instantiate_Object(CharacterLayout_Class, 0);
+    file_layout         = basic_instantiate_Object(FileLayout_Class, 0);
 
-    Type_ObjectLayout_Class->layout    = empty_array_layout;
-    Type_ArrayLayout_Class->layout     = empty_array_layout;
-    Type_CharacterLayout_Class->layout = empty_object_layout;
-    Type_WordsLayout_Class->layout     = empty_object_layout;
-    Type_IntLayout_Class->layout       = empty_object_layout;
-    Type_FloatLayout_Class->layout     = empty_object_layout;
-    Type_LongLayout_Class->layout      = empty_object_layout;
-    Type_BytesLayout_Class->layout     = empty_object_layout;
-    Type_FileLayout_Class->layout      = empty_object_layout;
+    ObjectLayout_Class->layout    = empty_array_layout;
+    ArrayLayout_Class->layout     = empty_array_layout;
+    CharacterLayout_Class->layout = empty_object_layout;
+    WordsLayout_Class->layout     = empty_object_layout;
+    IntLayout_Class->layout       = empty_object_layout;
+    FloatLayout_Class->layout     = empty_object_layout;
+    LongLayout_Class->layout      = empty_object_layout;
+    BytesLayout_Class->layout     = empty_object_layout;
+    FileLayout_Class->layout      = empty_object_layout;
 
     Symbol_Class->layout          = words_layout;
 
-    Symbol_Table = new_Collection_Dictionary();
+    Symbol_Table = new_Dictionary();
     #include <system/type/SymbolInitialization.ci> 
 }
 

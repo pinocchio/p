@@ -7,9 +7,9 @@
 
 /* ========================================================================= */
 
-AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
-                               Collection_Array locals,
-                               Collection_Array annotations,
+AST_NativeMethod new_AST_NativeMethod_with(Array params,
+                               Array locals,
+                               Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_NativeMethod, Object[statementCount]);
@@ -29,12 +29,12 @@ AST_NativeMethod new_AST_NativeMethod_with(Collection_Array params,
 
 native lookup_native(Object primitive_name, Object module_name)
 {
-    Object module = Collection_Dictionary_quick_lookup(_NATIVES_, module_name);
+    Object module = Dictionary_quick_lookup(_NATIVES_, module_name);
     if (module == NULL) { return (native)-1; }
     if (HEADER(module) == (Type_Class)Plugin_Plugin_Class) {
         module = ((Type_Object)module)->ivals[2]; 
     }
-    Object primitive = Collection_Dictionary_quick_lookup((Collection_Dictionary)module, primitive_name);
+    Object primitive = Dictionary_quick_lookup((Dictionary)module, primitive_name);
     if (primitive == NULL) { return (native)-1; }
     return (native)primitive;
 }

@@ -5,15 +5,15 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_ObjectLayout);
-DECLARE_CLASS(Type_ArrayLayout);
-DECLARE_CLASS(Type_CharacterLayout);
-DECLARE_CLASS(Type_WordsLayout);
-DECLARE_CLASS(Type_IntLayout);
-DECLARE_CLASS(Type_FloatLayout);
-DECLARE_CLASS(Type_LongLayout);
-DECLARE_CLASS(Type_BytesLayout);
-DECLARE_CLASS(Type_FileLayout);
+DECLARE_CLASS(ObjectLayout);
+DECLARE_CLASS(ArrayLayout);
+DECLARE_CLASS(CharacterLayout);
+DECLARE_CLASS(WordsLayout);
+DECLARE_CLASS(IntLayout);
+DECLARE_CLASS(FloatLayout);
+DECLARE_CLASS(LongLayout);
+DECLARE_CLASS(BytesLayout);
+DECLARE_CLASS(FileLayout);
 
 Object empty_object_layout;
 Object empty_array_layout;
@@ -27,9 +27,9 @@ Object file_layout;
 
 /* ========================================================================= */
 
-Collection_Array create_layout_with_vars(Type_Class layout, uns_int size)
+Array create_layout_with_vars(Type_Class layout, uns_int size)
 {
-    Collection_Array result = NEW_ARRAYED(struct Collection_Array_t, Object[size]);
+    Array result = NEW_ARRAYED(struct Array_t, Object[size]);
     HEADER(result) = layout;
     result->size   = size;
     return result;
@@ -37,7 +37,7 @@ Collection_Array create_layout_with_vars(Type_Class layout, uns_int size)
 
 void change_slot_type(Type_Class class, Type_Class type, int counter, ...)
 {
-    Collection_Array layout = (Collection_Array)class->layout;
+    Array layout = (Array)class->layout;
     va_list args;
     va_start(args, counter);
     while (counter--) {
@@ -50,10 +50,10 @@ void change_slot_type(Type_Class class, Type_Class type, int counter, ...)
 Object create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
-    Collection_Array result = create_layout_with_vars(Type_ObjectLayout_Class, size);
+    Array result = create_layout_with_vars(ObjectLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_Slot_Slot(i, va_arg(args, wchar_t *));
+        result->values[i] = (Object)new_Slot(i, va_arg(args, wchar_t *));
     }
     va_end(args);
     return (Object)result;
@@ -62,10 +62,10 @@ Object create_object_layout(uns_int size, va_list args)
 Object create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
-    Collection_Array result = create_layout_with_vars(Type_ArrayLayout_Class, size);
+    Array result = create_layout_with_vars(ArrayLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_Slot_Slot(i, va_arg(args, wchar_t*));
+        result->values[i] = (Object)new_Slot(i, va_arg(args, wchar_t*));
     }
     va_end(args);
     return (Object)result;

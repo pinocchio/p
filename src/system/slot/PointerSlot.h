@@ -5,13 +5,13 @@
 
 /* ========================================================================= */
 
-struct Slot_PointerSlot_t {
+struct PointerSlot_t {
     uns_int index;
     Object  name;
     Object  package;
 };
 
-extern Slot_PointerSlot new_Slot_PointerSlot(uns_int index, const wchar_t * name);
+extern PointerSlot new_PointerSlot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 

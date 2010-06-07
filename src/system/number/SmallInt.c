@@ -6,67 +6,67 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Number_SmallInt);
+DECLARE_CLASS(SmallInt);
 
-Number_SmallInt* Number_SmallInt_cache;
+SmallInt* SmallInt_cache;
 
 /* ========================================================================= */
 
-Number_SmallInt new_Number_SmallInt_raw(int value)
+SmallInt new_SmallInt_raw(int value)
 {
-    NEW_OBJECT(Number_SmallInt);
+    NEW_OBJECT(SmallInt);
     result->value = value;
     return result;
 }
 
-Number_SmallInt new_Number_SmallInt(int value)
+SmallInt new_SmallInt(int value)
 {
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
-        return Number_SmallInt_cache[value];
+        return SmallInt_cache[value];
     }
-    return new_Number_SmallInt_raw(value);
+    return new_SmallInt_raw(value);
 }
 
 /* ========================================================================= */
 
 void init_numbercache()
 {
-    Number_SmallInt_cache   = (Number_SmallInt*)PALLOC(sizeof(Number_SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
-    Number_SmallInt_cache -= INT_CACHE_LOWER;
+    SmallInt_cache   = (SmallInt*)PALLOC(sizeof(SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
+    SmallInt_cache -= INT_CACHE_LOWER;
     
     int i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        Number_SmallInt_cache[i] = new_Number_SmallInt_raw(i);
+        SmallInt_cache[i] = new_SmallInt_raw(i);
     }
 }
 
 /* ========================================================================= */
 
-#define Number_SmallInt_BINARY_OPERATION(name, op)\
-NATIVE1(Number_SmallInt_##name)\
+#define SmallInt_BINARY_OPERATION(name, op)\
+NATIVE1(SmallInt_##name)\
     int value = unwrap_int(NATIVE_ARG(0)); \
-    RETURN_FROM_NATIVE(new_Number_SmallInt(((Number_SmallInt) self)->value op value));\
+    RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op value));\
 }
 
-Number_SmallInt_BINARY_OPERATION(plus_,       +);
-Number_SmallInt_BINARY_OPERATION(minus_,      -);
-Number_SmallInt_BINARY_OPERATION(times_,      *);
-Number_SmallInt_BINARY_OPERATION(divide_,     /);
-Number_SmallInt_BINARY_OPERATION(modulo_,     %);
-Number_SmallInt_BINARY_OPERATION(shiftRight_, >>);
-Number_SmallInt_BINARY_OPERATION(shiftLeft_,  <<);
-Number_SmallInt_BINARY_OPERATION(and_,        &);
-Number_SmallInt_BINARY_OPERATION(or_,         |);
+SmallInt_BINARY_OPERATION(plus_,       +);
+SmallInt_BINARY_OPERATION(minus_,      -);
+SmallInt_BINARY_OPERATION(times_,      *);
+SmallInt_BINARY_OPERATION(divide_,     /);
+SmallInt_BINARY_OPERATION(modulo_,     %);
+SmallInt_BINARY_OPERATION(shiftRight_, >>);
+SmallInt_BINARY_OPERATION(shiftLeft_,  <<);
+SmallInt_BINARY_OPERATION(and_,        &);
+SmallInt_BINARY_OPERATION(or_,         |);
 
 
 // TODO fix this damn typecheck!
 // printf("%i "#op" %i\n", number->value, otherNumber->value);
-#define Number_SmallInt_COMPARE_OPERATION(name, op)\
-NATIVE1(Number_SmallInt##_##name)\
+#define SmallInt_COMPARE_OPERATION(name, op)\
+NATIVE1(SmallInt##_##name)\
     Object w_arg = NATIVE_ARG(0);\
-    if (HEADER(w_arg) == Number_SmallInt_Class) {\
-        Number_SmallInt number      = ((Number_SmallInt) self);\
-        Number_SmallInt otherNumber = (Number_SmallInt)w_arg; \
+    if (HEADER(w_arg) == SmallInt_Class) {\
+        SmallInt number      = ((SmallInt) self);\
+        SmallInt otherNumber = (SmallInt)w_arg; \
         if (number->value op otherNumber->value) {\
             RETURN_FROM_NATIVE(True);\
         } else {\
@@ -77,12 +77,12 @@ NATIVE1(Number_SmallInt##_##name)\
     }\
 }
 //TODO return false on == and != if wrong type given
-Number_SmallInt_COMPARE_OPERATION(equals_, ==)
-Number_SmallInt_COMPARE_OPERATION(lt_, <)
-Number_SmallInt_COMPARE_OPERATION(gt_, >)
-Number_SmallInt_COMPARE_OPERATION(notEqual_, !=)
+SmallInt_COMPARE_OPERATION(equals_, ==)
+SmallInt_COMPARE_OPERATION(lt_, <)
+SmallInt_COMPARE_OPERATION(gt_, >)
+SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
-Type_String Number_SmallInt_asString(int self, uns_int base)
+String SmallInt_asString(int self, uns_int base)
 {
     int size = 1;
     if (self == 0) { 
@@ -94,53 +94,53 @@ Type_String Number_SmallInt_asString(int self, uns_int base)
     size += 1;
     wchar_t wchar_copy[size];
     swprintf(&wchar_copy[0], size, L"%i", self);
-    Type_String result   =  new_Type_String(wchar_copy);
+    String result   =  new_String(wchar_copy);
     return result;
 }
 
-NATIVE0(Number_SmallInt_asString)
-    RETURN_FROM_NATIVE(Number_SmallInt_asString(unwrap_int(self), 10));
+NATIVE0(SmallInt_asString)
+    RETURN_FROM_NATIVE(SmallInt_asString(unwrap_int(self), 10));
 }
 
-NATIVE0(Number_SmallInt_asCharacter)
-    RETURN_FROM_NATIVE(new_Type_Character_fromInt(unwrap_int(self)));
+NATIVE0(SmallInt_asCharacter)
+    RETURN_FROM_NATIVE(new_Character_fromInt(unwrap_int(self)));
 }
 
 
 /* ========================================================================= */
 
-void post_init_Number_SmallInt()
+void post_init_SmallInt()
 {
-    Number_SmallInt_Class->layout = int_layout;
+    SmallInt_Class->layout = int_layout;
     init_numbercache();
-    Collection_Dictionary natives = add_plugin(L"Type.SmallInt");
+    Dictionary natives = add_plugin(L"Type.SmallInt");
     
-    store_native(natives, SMB__equal,      NM_Number_SmallInt_equals_);
-    store_native(natives, SMB__plus,       NM_Number_SmallInt_plus_);
-    store_native(natives, SMB__minus,      NM_Number_SmallInt_minus_);   
-    store_native(natives, SMB__times,      NM_Number_SmallInt_times_); 
-    store_native(natives, SMB__divide,     NM_Number_SmallInt_divide_);
-    store_native(natives, SMB__modulo,     NM_Number_SmallInt_modulo_);
-    store_native(natives, SMB__shiftLeft,  NM_Number_SmallInt_shiftLeft_);
-    store_native(natives, SMB__shiftRight, NM_Number_SmallInt_shiftRight_);
-    store_native(natives, SMB__and,        NM_Number_SmallInt_and_);
-    store_native(natives, SMB__or,         NM_Number_SmallInt_or_);
-    store_native(natives, SMB__lt,         NM_Number_SmallInt_lt_);
-    store_native(natives, SMB__gt,         NM_Number_SmallInt_gt_);
-    store_native(natives, SMB__notEqual,   NM_Number_SmallInt_notEqual_);
-    store_native(natives, SMB_asString,    NM_Number_SmallInt_asString);
-    store_native(natives, SMB_asCharacter, NM_Number_SmallInt_asCharacter);
+    store_native(natives, SMB__equal,      NM_SmallInt_equals_);
+    store_native(natives, SMB__plus,       NM_SmallInt_plus_);
+    store_native(natives, SMB__minus,      NM_SmallInt_minus_);   
+    store_native(natives, SMB__times,      NM_SmallInt_times_); 
+    store_native(natives, SMB__divide,     NM_SmallInt_divide_);
+    store_native(natives, SMB__modulo,     NM_SmallInt_modulo_);
+    store_native(natives, SMB__shiftLeft,  NM_SmallInt_shiftLeft_);
+    store_native(natives, SMB__shiftRight, NM_SmallInt_shiftRight_);
+    store_native(natives, SMB__and,        NM_SmallInt_and_);
+    store_native(natives, SMB__or,         NM_SmallInt_or_);
+    store_native(natives, SMB__lt,         NM_SmallInt_lt_);
+    store_native(natives, SMB__gt,         NM_SmallInt_gt_);
+    store_native(natives, SMB__notEqual,   NM_SmallInt_notEqual_);
+    store_native(natives, SMB_asString,    NM_SmallInt_asString);
+    store_native(natives, SMB_asCharacter, NM_SmallInt_asCharacter);
     
-    //assert0(Collection_Dictionary_lookup(Number_SmallInt_Class->methods, (Object)SMB__plus));
-    //assert0(Collection_Dictionary_lookup(Number_SmallInt_Class->methods, (Object)SMB__minus));
-    //assert0(Collection_Dictionary_lookup(Number_SmallInt_Class->methods, (Object)SMB__equal));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__plus));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__minus));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__equal));
 }
 
 /* ========================================================================= */
 
 Object wrap_int(int value)
 {
-    return (Object)new_Number_SmallInt(value);
+    return (Object)new_SmallInt(value);
 }
 
 int unwrap_int(Object integer)
@@ -148,7 +148,7 @@ int unwrap_int(Object integer)
     // TODO do more stuff in case we are not an int.
     ASSERT_TAG_LAYOUT(GETTAG(integer), Int);
     //if (GETTAG(class) == INT) {
-        return ((Number_SmallInt)integer)->value;
+        return ((SmallInt)integer)->value;
     //}
     //assert1(NULL, "Only SmallInts supported for now\n");
     //return 0;

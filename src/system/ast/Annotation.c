@@ -25,9 +25,9 @@ AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...)
 
 /* ========================================================================= */
 
-AST_Annotation lookup_annotation(Collection_Array annotations, Object selector)
+AST_Annotation lookup_annotation(Array annotations, Object selector)
 {
-    assert1(HEADER(annotations) == Collection_Array_Class, "Annotations should be an array");
+    assert1(HEADER(annotations) == Array_Class, "Annotations should be an array");
     int i;
     for (i = 0; i < annotations->size; i++) {
         AST_Annotation annotation = (AST_Annotation)annotations->values[i];

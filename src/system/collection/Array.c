@@ -5,24 +5,24 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Collection_Array);
-Collection_Array empty_Collection_Array;
+DECLARE_CLASS(Array);
+Array empty_Array;
 
 /* ========================================================================= */
 
-Collection_Array new_Collection_Array_raw(uns_int c)
+Array new_Array_raw(uns_int c)
 {
-    if (c == 0) { return empty_Collection_Array; }
-    Collection_Array result = NEW_ARRAYED(struct Collection_Array_t, Object[c]);
-    HEADER(result)    = Collection_Array_Class;
+    if (c == 0) { return empty_Array; }
+    Array result = NEW_ARRAYED(struct Array_t, Object[c]);
+    HEADER(result)    = Array_Class;
     result->size      = c;
     return result;
 }
 
-Collection_Array new_Collection_Array(uns_int c, Object v[])
+Array new_Array(uns_int c, Object v[])
 {
-    if (c == 0) { return empty_Collection_Array; }
-    Collection_Array result = new_Collection_Array_raw(c);
+    if (c == 0) { return empty_Array; }
+    Array result = new_Array_raw(c);
     while (0 < c) {
         c--;
         result->values[c] = v[c];
@@ -30,10 +30,10 @@ Collection_Array new_Collection_Array(uns_int c, Object v[])
     return result;
 }
 
-Collection_Array new_Collection_Array_with(uns_int c, ...)
+Array new_Array_with(uns_int c, ...)
 {
-    if (c == 0) { return empty_Collection_Array; }
-    Collection_Array result = new_Collection_Array_raw(c);
+    if (c == 0) { return empty_Array; }
+    Array result = new_Array_raw(c);
     va_list args;
     va_start(args, c);
     int index;
@@ -44,10 +44,10 @@ Collection_Array new_Collection_Array_with(uns_int c, ...)
     return result;
 }
 
-Collection_Array new_Collection_Array_withAll(uns_int c, Object element)
+Array new_Array_withAll(uns_int c, Object element)
 {
-    if (c == 0) { return empty_Collection_Array; }
-    Collection_Array result = new_Collection_Array_raw(c);
+    if (c == 0) { return empty_Array; }
+    Array result = new_Array_raw(c);
     while (0 < c) {
         c--;
         result->values[c] = element;
@@ -57,44 +57,44 @@ Collection_Array new_Collection_Array_withAll(uns_int c, Object element)
 
 /* ========================================================================= */
 
-Object raw_Collection_Array_instAt(Collection_Array o, Object tag, int index)
+Object raw_Array_instAt(Array o, Object tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->values[index];
 }
 
-void raw_Collection_Array_instAt_put(Collection_Array o, Object tag,
+void raw_Array_instAt_put(Array o, Object tag,
                                int index, Object value)
 {
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
 }
 
-NATIVE1(Collection_Array_instVarAt_)
+NATIVE1(Array_instVarAt_)
     Object w_index  = NATIVE_ARG(0);
     int index       = unwrap_int(w_index) - 1;
     Object tag      = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
-    RETURN_FROM_NATIVE(((Collection_Array)self)->values[index]);
+    RETURN_FROM_NATIVE(((Array)self)->values[index]);
 }
 
-NATIVE2(Collection_Array_instVarAt_put_)
+NATIVE2(Array_instVarAt_put_)
     Object w_index = NATIVE_ARG(0);
     Object w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index) - 1;
     Object tag   = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
-    ((Collection_Array)self)->values[index] = w_arg;
+    ((Array)self)->values[index] = w_arg;
     RETURN_FROM_NATIVE(w_arg);
 }
 
 /* ========================================================================= */
 
-void post_init_Collection_Array()
+void post_init_Array()
 {
-    Collection_Dictionary natives = add_plugin(L"Collection.Array");
-    store_native(natives, SMB_instVarAt_,     NM_Collection_Array_instVarAt_);
-    store_native(natives, SMB_instVarAt_put_, NM_Collection_Array_instVarAt_put_);
+    Dictionary natives = add_plugin(L"Collection.Array");
+    store_native(natives, SMB_instVarAt_,     NM_Array_instVarAt_);
+    store_native(natives, SMB_instVarAt_put_, NM_Array_instVarAt_put_);
 }

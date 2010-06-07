@@ -7,7 +7,7 @@
 /* ========================================================================= */
 
 DECLARE_CLASS(Symbol);
-Collection_Dictionary Symbol_Table;
+Dictionary Symbol_Table;
 
 #include <system/type/SymbolDefinition.ci>
 
@@ -27,12 +27,12 @@ Symbol new_Symbol(const wchar_t* input)
 Symbol new_Symbol_cached(const wchar_t* input)
 {
     Symbol result  = new_Symbol(input);
-    Object cachedSymbol = Collection_Dictionary_quick_lookup(Symbol_Table, (Object)result);
+    Object cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Object)result);
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;
     }
     HEADER(result) = Symbol_Class;
-    Collection_Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
+    Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
     return result;
 }
 
@@ -50,27 +50,27 @@ void pre_init_Symbol()
 
 NATIVE1(Symbol_at_)
     Object w_arg0 = NATIVE_ARG(0);
-    ASSERT_INSTANCE_OF(w_arg0, Number_SmallInt_Class);
+    ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
     int index     = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i", index));
-    assert(index < ((Type_String)self)->size,
-        printf("%i is out of Bounds[%"F_I"u]\n", index, ((Type_String)self)->size));
+    assert(index < ((String)self)->size,
+        printf("%i is out of Bounds[%"F_I"u]\n", index, ((String)self)->size));
     // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
-    RETURN_FROM_NATIVE(new_Type_Character(((Symbol) self)->value[index]));
+    RETURN_FROM_NATIVE(new_Character(((Symbol) self)->value[index]));
 }
 
 NATIVE0(Symbol_asString)
-    RETURN_FROM_NATIVE(new_Type_String(((Symbol)self)->value));
+    RETURN_FROM_NATIVE(new_String(((Symbol)self)->value));
 }
 
-Collection_Array Symbol_asArray(Symbol symbol)
+Array Symbol_asArray(Symbol symbol)
 {
     Symbol self_symbol = (Symbol)symbol;
-    Collection_Array array        = new_Collection_Array_raw(self_symbol->size);
+    Array array        = new_Array_raw(self_symbol->size);
     LOG("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
-        array->values[i] = (Object)new_Type_Character(self_symbol->value[i]);
+        array->values[i] = (Object)new_Character(self_symbol->value[i]);
     }
     return array;
 }
@@ -79,7 +79,7 @@ NATIVE0(Symbol_asArray)
     RETURN_FROM_NATIVE(Symbol_asArray((Symbol)self));
 }
 
-Number_SmallInt wchar_hash(const wchar_t * string, int size)
+SmallInt wchar_hash(const wchar_t * string, int size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
     unsigned int hash = 5381;
@@ -89,10 +89,10 @@ Number_SmallInt wchar_hash(const wchar_t * string, int size)
     if ((int)hash < 0) {
         hash >>= 1;
     }
-    return new_Number_SmallInt(hash);
+    return new_SmallInt(hash);
 }
 
-Number_SmallInt Symbol_hash(Symbol symbol)
+SmallInt Symbol_hash(Symbol symbol)
 {
     return symbol->hash;
 }
@@ -121,7 +121,7 @@ NATIVE0(Symbol_hash)
 
 
 NATIVE0(Symbol_size)
-    RETURN_FROM_NATIVE((Object)new_Number_SmallInt(((Symbol)self)->size));
+    RETURN_FROM_NATIVE((Object)new_SmallInt(((Symbol)self)->size));
 }
 
 /* ========================================================================= */
@@ -129,7 +129,7 @@ NATIVE0(Symbol_size)
 
 void post_init_Symbol()
 {
-    Collection_Dictionary natives = add_plugin(L"Type.Symbol");
+    Dictionary natives = add_plugin(L"Type.Symbol");
     store_native(natives, SMB_at_,       NM_Symbol_at_);
     store_native(natives, SMB_asString,  NM_Symbol_asString);
     store_native(natives, SMB__equal,    NM_Symbol__equal);

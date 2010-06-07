@@ -7,9 +7,9 @@
 
 #define DEFAULT_INLINECACHE_SIZE 4
 
-extern Collection_Array new_Runtime_InlineCache();
-extern Object Runtime_InlineCache_lookup(Collection_Array cache, Object class);
-extern void Runtime_InlineCache_store(Collection_Array cache, Object class, Object method);
+extern Array new_Runtime_InlineCache();
+extern Object Runtime_InlineCache_lookup(Array cache, Object class);
+extern void Runtime_InlineCache_store(Array cache, Object class, Object method);
 
 /* ========================================================================= */
 

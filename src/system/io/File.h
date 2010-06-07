@@ -8,8 +8,8 @@
 
 struct IO_File_t {
     FILE *file;
-    Number_SmallInt   size;
-    Type_String     path;
+    SmallInt   size;
+    String     path;
 };
 
 extern void post_init_IO_File();

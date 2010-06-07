@@ -6,46 +6,46 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Number_Float);
+DECLARE_CLASS(Float);
 
 /* ========================================================================= */
 
-Number_Float new_Number_Float(float value)
+Float new_Float(float value)
 {
-    NEW_OBJECT(Number_Float);
+    NEW_OBJECT(Float);
     result->value = value;
     return result;
 }
 
 /* ========================================================================= */
 
-#define Number_Float_BINARY_OPERATION(name, op)\
-NATIVE1(Number_Float_##name)\
+#define Float_BINARY_OPERATION(name, op)\
+NATIVE1(Float_##name)\
     Object w_arg = NATIVE_ARG(0);\
-    ASSERT_INSTANCE_OF(w_arg, Number_Float_Class);\
-    Number_SmallInt arg = (Number_SmallInt)w_arg;\
-    RETURN_FROM_NATIVE(new_Number_SmallInt(((Number_SmallInt) self)->value op arg->value));\
+    ASSERT_INSTANCE_OF(w_arg, Float_Class);\
+    SmallInt arg = (SmallInt)w_arg;\
+    RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op arg->value));\
 }
 
-Number_Float_BINARY_OPERATION(plus_,       +);
-Number_Float_BINARY_OPERATION(minus_,      -);
-Number_Float_BINARY_OPERATION(times_,      *);
-Number_Float_BINARY_OPERATION(divide_,     /);
-Number_Float_BINARY_OPERATION(modulo_,     %);
-Number_Float_BINARY_OPERATION(shiftRight_, >>);
-Number_Float_BINARY_OPERATION(shiftLeft_,  <<);
-Number_Float_BINARY_OPERATION(and_,        &);
-Number_Float_BINARY_OPERATION(or_,         |);
+Float_BINARY_OPERATION(plus_,       +);
+Float_BINARY_OPERATION(minus_,      -);
+Float_BINARY_OPERATION(times_,      *);
+Float_BINARY_OPERATION(divide_,     /);
+Float_BINARY_OPERATION(modulo_,     %);
+Float_BINARY_OPERATION(shiftRight_, >>);
+Float_BINARY_OPERATION(shiftLeft_,  <<);
+Float_BINARY_OPERATION(and_,        &);
+Float_BINARY_OPERATION(or_,         |);
 
 
 // TODO fix this damn typecheck!
 // printf("%i "#op" %i\n", number->value, otherNumber->value);
-#define Number_Float_COMPARE_OPERATION(name, op)\
-NATIVE1(Number_Float##_##name)\
+#define Float_COMPARE_OPERATION(name, op)\
+NATIVE1(Float##_##name)\
     Object w_arg = NATIVE_ARG(0);\
-    if (HEADER(w_arg) == Number_Float_Class) {\
-        Number_Float number      = ((Number_Float) self);\
-        Number_Float otherNumber = (Number_Float)w_arg; \
+    if (HEADER(w_arg) == Float_Class) {\
+        Float number      = ((Float) self);\
+        Float otherNumber = (Float)w_arg; \
         if (number->value op otherNumber->value) {\
             RETURN_FROM_NATIVE(True);\
         } else {\
@@ -56,52 +56,52 @@ NATIVE1(Number_Float##_##name)\
     }\
 }
 
-Number_Float_COMPARE_OPERATION(equals_, ==)
-Number_Float_COMPARE_OPERATION(lt_, <)
-Number_Float_COMPARE_OPERATION(gt_, >)
-Number_Float_COMPARE_OPERATION(notEqual_, !=)
+Float_COMPARE_OPERATION(equals_, ==)
+Float_COMPARE_OPERATION(lt_, <)
+Float_COMPARE_OPERATION(gt_, >)
+Float_COMPARE_OPERATION(notEqual_, !=)
 
-NATIVE0(Number_Float_hash)
+NATIVE0(Float_hash)
     float f = unwrap_float(self);
-    RETURN_FROM_NATIVE(new_Number_SmallInt((uns_int)f)); 
+    RETURN_FROM_NATIVE(new_SmallInt((uns_int)f)); 
 }
 
-Type_String Number_Float_asString(float self, uns_int base)
+String Float_asString(float self, uns_int base)
 {
     char *chrs;
     int size = asprintf(&chrs, "%f", self);
     assert1(size != -1, "Unable to convert float to string");
-    Type_String result = new_Type_String(ascii_to_unicode(chrs));
+    String result = new_String(ascii_to_unicode(chrs));
     free(chrs);
     return result;
 }
 
-NATIVE0(Number_Float_asString)
-    RETURN_FROM_NATIVE(Number_Float_asString(unwrap_int(self), 10));
+NATIVE0(Float_asString)
+    RETURN_FROM_NATIVE(Float_asString(unwrap_int(self), 10));
 }
 
 
 /* ========================================================================= */
 
-void post_init_Number_Float()
+void post_init_Float()
 {
-    Collection_Dictionary natives = add_plugin(L"Type.Float");
+    Dictionary natives = add_plugin(L"Type.Float");
 
-    store_native(natives, SMB__equal,      NM_Number_Float_equals_);
-    store_native(natives, SMB__plus,       NM_Number_Float_plus_);
-    store_native(natives, SMB__minus,      NM_Number_Float_minus_);   
-    store_native(natives, SMB__times,      NM_Number_Float_times_); 
-    store_native(natives, SMB__divide,     NM_Number_Float_divide_);
-    store_native(natives, SMB__modulo,     NM_Number_Float_modulo_);
-    store_native(natives, SMB__shiftLeft,  NM_Number_Float_shiftLeft_);
-    store_native(natives, SMB__shiftRight, NM_Number_Float_shiftRight_);
-    store_native(natives, SMB__and,        NM_Number_Float_and_);
-    store_native(natives, SMB__or,         NM_Number_Float_or_);
-    store_native(natives, SMB__lt,         NM_Number_Float_lt_);
-    store_native(natives, SMB__gt,         NM_Number_Float_gt_);
-    store_native(natives, SMB__notEqual,   NM_Number_Float_notEqual_);
-    store_native(natives, SMB_hash,        NM_Number_Float_hash);
-    store_native(natives, SMB_asString,    NM_Number_Float_asString);
+    store_native(natives, SMB__equal,      NM_Float_equals_);
+    store_native(natives, SMB__plus,       NM_Float_plus_);
+    store_native(natives, SMB__minus,      NM_Float_minus_);   
+    store_native(natives, SMB__times,      NM_Float_times_); 
+    store_native(natives, SMB__divide,     NM_Float_divide_);
+    store_native(natives, SMB__modulo,     NM_Float_modulo_);
+    store_native(natives, SMB__shiftLeft,  NM_Float_shiftLeft_);
+    store_native(natives, SMB__shiftRight, NM_Float_shiftRight_);
+    store_native(natives, SMB__and,        NM_Float_and_);
+    store_native(natives, SMB__or,         NM_Float_or_);
+    store_native(natives, SMB__lt,         NM_Float_lt_);
+    store_native(natives, SMB__gt,         NM_Float_gt_);
+    store_native(natives, SMB__notEqual,   NM_Float_notEqual_);
+    store_native(natives, SMB_hash,        NM_Float_hash);
+    store_native(natives, SMB_asString,    NM_Float_asString);
 }
 
 /* ========================================================================= */
@@ -111,7 +111,7 @@ float unwrap_float(Object floatValue)
     // TODO do more stuff in case we are not an float.
     ASSERT_TAG_LAYOUT(GETTAG(floatValue), Float);
     //if (GETTAG(class) == Float) {
-        return ((Number_Float)floatValue)->value;
+        return ((Float)floatValue)->value;
     //}
     //assert1(NULL, "Only Floats supported for now\n");
     //return 0;

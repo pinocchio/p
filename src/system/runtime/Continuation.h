@@ -6,8 +6,8 @@
 /* ========================================================================= */
 
 struct Runtime_Continuation_t {
-    Collection_Array  exp_stack;
-    Collection_Array  cnt_stack;
+    Array  exp_stack;
+    Array  cnt_stack;
     Object      iss;
     Object      env;
 };

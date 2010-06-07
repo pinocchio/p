@@ -12,15 +12,15 @@ AST_Info empty_AST_Info;
 AST_Info new_raw_AST_Info()
 {
     NEW_OBJECT(AST_Info);
-    result->name       = empty_Type_String;
-    result->sourceFile = empty_Type_String;
-    result->line       = new_Number_SmallInt(-1);
-    result->column     = new_Number_SmallInt(-1);
+    result->name       = empty_String;
+    result->sourceFile = empty_String;
+    result->line       = new_SmallInt(-1);
+    result->column     = new_SmallInt(-1);
     return result;
 }
 
-AST_Info new_AST_Info(Type_String sourceFile, Type_String name, 
-                      Number_SmallInt line, Number_SmallInt column)
+AST_Info new_AST_Info(String sourceFile, String name, 
+                      SmallInt line, SmallInt column)
 {
     AST_Info result     = new_raw_AST_Info();
     result->sourceFile  = sourceFile;
@@ -35,10 +35,10 @@ void post_init_AST_Info()
     empty_AST_Info         = NEW_t(AST_Info);
     HEADER(empty_AST_Info) = AST_Info_Class;
 
-    empty_AST_Info->name       = empty_Type_String;
-    empty_AST_Info->sourceFile = empty_Type_String;
-    empty_AST_Info->line       = new_Number_SmallInt(-1);
-    empty_AST_Info->column     = new_Number_SmallInt(-1);
+    empty_AST_Info->name       = empty_String;
+    empty_AST_Info->sourceFile = empty_String;
+    empty_AST_Info->line       = new_SmallInt(-1);
+    empty_AST_Info->column     = new_SmallInt(-1);
 }
 
 /* ========================================================================= */

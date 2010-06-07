@@ -31,7 +31,7 @@ Type_Class new_Bootstrapping_Class()
 Type_Class new_Class(Type_Class superclass, Object metatype)
 {    
     ASSERT_TAG_LAYOUT(metatype, Object);
-    uns_int meta_size = ((Collection_Array)metatype)->size;
+    uns_int meta_size = ((Array)metatype)->size;
     assert0(meta_size >= 4); // we need at least place for
                              // methods, super, layout and instance.
 
@@ -40,8 +40,8 @@ Type_Class new_Class(Type_Class superclass, Object metatype)
     Type_Class result       = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
     metaclass->name         = (Symbol)result;
 
-    result->methods         = new_Collection_Dictionary();
-    metaclass->methods      = new_Collection_Dictionary();
+    result->methods         = new_Dictionary();
+    metaclass->methods      = new_Dictionary();
     Type_Class_set_superclass(result, superclass);
 
     return result;
@@ -117,7 +117,7 @@ static CNT(Class_lookup_cache_invoke)
     }
     zapn_EXP(5);
     AST_Send send       = (AST_Send)peek_EXP(argc + 1);
-    Collection_Array cache    = send->cache;
+    Array cache    = send->cache;
     Runtime_InlineCache_store(cache, (Object)class, method);
     
     Method_invoke(method, self, argc);
@@ -146,8 +146,8 @@ void Class_lookup(Type_Class class, Object msg)
         return;
     }
     assert_class((Object)class);
-    Collection_Dictionary mdict = class->methods;
-    Collection_Dictionary_lookup_push(mdict, msg);
+    Dictionary mdict = class->methods;
+    Dictionary_lookup_push(mdict, msg);
 }
 
 void CNT_Class_lookup_loop()
@@ -244,7 +244,7 @@ void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
 }
 
 void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
-                                              Object msg, Collection_Array args)
+                                              Object msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     int idx;
@@ -269,21 +269,21 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
 void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 {
     AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
-    Collection_Array cache    = send->cache;
+    Array cache    = send->cache;
     Object msg          = send->message;
     assert0(msg != Nil);
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol clsname;
     if (HEADER(class) != Metaclass) {
-        clsname = Type_String_concat_(((Type_Class)class)->name,
-                                      new_Type_String(L">>"));
+        clsname = String_concat_(((Type_Class)class)->name,
+                                      new_String(L">>"));
     } else {
-        clsname = Type_String_concat_(((Type_Class)self)->name,
-                                      new_Type_String(L" class>>"));
+        clsname = String_concat_(((Type_Class)self)->name,
+                                      new_String(L" class>>"));
     }
     Symbol msgname = (Symbol)msg;
-    Symbol method  = Type_String_concat_(clsname, msgname);
+    Symbol method  = String_concat_(clsname, msgname);
     LOG("%ls (%"F_I"u)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     

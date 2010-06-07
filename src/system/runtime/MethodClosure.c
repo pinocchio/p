@@ -38,7 +38,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
 
 
 NATIVE1(Runtime_MethodClosure_valueWithArguments_)
-    Collection_Array args = (Collection_Array)pop_EXP();
+    Array args = (Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
     
     int pos = args->size;
@@ -56,6 +56,6 @@ NATIVE1(Runtime_MethodClosure_valueWithArguments_)
 void post_init_Runtime_MethodClosure()
 {
     // TODO move the whole class to AST
-    Collection_Dictionary natives = add_plugin(L"AST.MethodClosure");
+    Dictionary natives = add_plugin(L"AST.MethodClosure");
     store_native(natives, SMB_valueWithArguments_, NM_Runtime_MethodClosure_valueWithArguments_);
 }

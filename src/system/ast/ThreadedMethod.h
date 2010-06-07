@@ -10,17 +10,17 @@
 struct AST_ThreadedMethod_t {
     uns_int          size;
     AST_Info         info;
-    Collection_Array params;
-    Collection_Array locals;
+    Array params;
+    Array locals;
     Object           package;
-    Collection_Array annotations;
-    Collection_Array code;
+    Array annotations;
+    Array code;
     Object           body[];
 };
 
-extern AST_ThreadedMethod new_AST_ThreadedMethod_with(Collection_Array params,
-                                      Collection_Array locals,
-                                      Collection_Array annotations,
+extern AST_ThreadedMethod new_AST_ThreadedMethod_with(Array params,
+                                      Array locals,
+                                      Array annotations,
                                       uns_int statementCount, ...);
 
 extern void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,

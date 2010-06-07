@@ -4,9 +4,9 @@
 
 /* ========================================================================= */
 
-Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name) 
+UIntSlot new_UIntSlot(uns_int index, const wchar_t * name) 
 {
-    NEW_OBJECT(Slot_UIntSlot);
+    NEW_OBJECT(UIntSlot);
     result->index   = index;
     result->name    = (Object)new_Symbol(name);
     result->package = (Object)Nil;
@@ -16,14 +16,14 @@ Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name)
 /* ========================================================================= */
 
 
-static Object Slot_UIntSlot_readFrom_(Slot_UIntSlot var, Object self)
+static Object UIntSlot_readFrom_(UIntSlot var, Object self)
 {
     return wrap_int((uns_int)Object_instVarAt_(
 						self,
 						var->index));
 }
 
-static void Slot_UIntSlot_assign_on_(Slot_UIntSlot var,
+static void UIntSlot_assign_on_(UIntSlot var,
                                               Object value,
                                               Object self)
 {
@@ -31,39 +31,39 @@ static void Slot_UIntSlot_assign_on_(Slot_UIntSlot var,
 						  var->index,
 						  (Object)(uns_int)unwrap_int(value));
 }
-void Slot_UIntSlot_eval(Slot_UIntSlot var)
+void UIntSlot_eval(UIntSlot var)
 {
-    poke_EXP(0, Slot_UIntSlot_readFrom_(var,
+    poke_EXP(0, UIntSlot_readFrom_(var,
                     current_env()->home_context->self));
 }
 
-void Slot_UIntSlot_assign(Slot_UIntSlot var, Object value)
+void UIntSlot_assign(UIntSlot var, Object value)
 {
-    Slot_UIntSlot_assign_on_(var, value, current_env()->home_context->self);
+    UIntSlot_assign_on_(var, value, current_env()->home_context->self);
 }
 
 /* ========================================================================= */
 
-NATIVE1(Slot_UIntSlot_readFrom_)
+NATIVE1(UIntSlot_readFrom_)
     Object receiver = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(
-        Slot_UIntSlot_readFrom_((Slot_UIntSlot)self,
+        UIntSlot_readFrom_((UIntSlot)self,
                                          receiver));
 }
 
-NATIVE2(Slot_UIntSlot_assign_on_)
+NATIVE2(UIntSlot_assign_on_)
     Object value = NATIVE_ARG(0);
     Object o = NATIVE_ARG(1);
-    Slot_UIntSlot_assign_on_((Slot_UIntSlot)self,
+    UIntSlot_assign_on_((UIntSlot)self,
                                 value, o);
     RETURN_FROM_NATIVE(value);
 }
 
 /* ========================================================================= */
 
-void post_init_Slot_UIntSlot()
+void post_init_UIntSlot()
 {
-    Collection_Dictionary natives = add_plugin(L"Slot.UIntSlot");
-    store_native(natives, SMB_assign_on_, NM_Slot_UIntSlot_assign_on_);
-    store_native(natives, SMB_readFrom_ , NM_Slot_UIntSlot_readFrom_);
+    Dictionary natives = add_plugin(L"Slot.UIntSlot");
+    store_native(natives, SMB_assign_on_, NM_UIntSlot_assign_on_);
+    store_native(natives, SMB_readFrom_ , NM_UIntSlot_readFrom_);
 }

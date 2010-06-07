@@ -24,7 +24,7 @@ IO_File new_IO_ReadFile()
 {
     NEW_OBJECT(IO_File);
     HEADER(result) = IO_ReadFile_Class;
-    result->path = empty_Type_String;
+    result->path = empty_String;
     return result;
 }
 
@@ -32,7 +32,7 @@ IO_File new_IO_WriteFile()
 {
     NEW_OBJECT(IO_File);
     HEADER(result) = IO_WriteFile_Class;
-    result->path = empty_Type_String;
+    result->path = empty_String;
     return result;
 }
 
@@ -66,7 +66,7 @@ int IO_File_size(IO_File file) {
 }
 
 NATIVE0(IO_File_size)
-    RETURN_FROM_NATIVE(new_Number_SmallInt(IO_File_size((IO_File)self)));
+    RETURN_FROM_NATIVE(new_SmallInt(IO_File_size((IO_File)self)));
 }
 
 void IO_File_readCharacter(IO_File file, wchar_t* result) {
@@ -88,11 +88,11 @@ NATIVE0(IO_File_atEnd)
     RETURN_FROM_NATIVE(get_bool(IO_File_atEnd((IO_File)self)));
 }
 
-Type_String IO_File_readAll(IO_File file) 
+String IO_File_readAll(IO_File file) 
 {
     assert1(file != NULL, "Invalid Argument");
     int size = IO_File_size(file);
-    Type_String result = new_Type_String_sized(size);
+    String result = new_String_sized(size);
     int idx;
     for (idx = 0; idx < size; idx++) {
         IO_File_readCharacter(file, &result->value[idx]);
@@ -105,7 +105,7 @@ NATIVE0(IO_File_readAll)
 }
 
 
-Type_String IO_File_readLine(IO_File file) 
+String IO_File_readLine(IO_File file) 
 {
     assert1(file != NULL, "Invalid Argument");
     uns_int size = 1024;
@@ -127,7 +127,7 @@ Type_String IO_File_readLine(IO_File file)
         }
     }
     chr[i] = L'\0';
-    Type_String result = new_Type_String(chr);
+    String result = new_String(chr);
     return result;
 }
 
@@ -135,18 +135,18 @@ NATIVE0(IO_File_readLine)
     RETURN_FROM_NATIVE(IO_File_readLine((IO_File)self));
 }
 
-Type_Character IO_File_read(IO_File file) {
+Character IO_File_read(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
     wchar_t chr;
     IO_File_readCharacter(file, &chr);
-    return new_Type_Character(chr);
+    return new_Character(chr);
 }
 
 NATIVE0(IO_File_read)
    RETURN_FROM_NATIVE(IO_File_read((IO_File)self));
 }
 
-void IO_File_write_(IO_File file, Type_Character chr) {
+void IO_File_write_(IO_File file, Character chr) {
     assert1(file != NULL, "Invalid Argument");
     assert1(chr != NULL, "Invalid Argument");
     fputwc(chr->value, file->file);
@@ -155,8 +155,8 @@ void IO_File_write_(IO_File file, Type_Character chr) {
 NATIVE1(IO_File_write_)
     // TODO assert layout, not class
     Object chr = NATIVE_ARG(0);
-    ASSERT_INSTANCE_OF(chr, Type_Character_Class);
-    IO_File_write_((IO_File)self, (Type_Character)chr);
+    ASSERT_INSTANCE_OF(chr, Character_Class);
+    IO_File_write_((IO_File)self, (Character)chr);
     RETURN_FROM_NATIVE(self);
 }
 
@@ -165,7 +165,7 @@ NATIVE0(IO_File_lf)
     RETURN_FROM_NATIVE(self);
 }
 
-void IO_File_writeAll_(IO_File file, Type_String string) {
+void IO_File_writeAll_(IO_File file, String string) {
     assert1(file != NULL, "Invalid Argument");
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
     int i;
@@ -175,7 +175,7 @@ void IO_File_writeAll_(IO_File file, Type_String string) {
 }
 
 NATIVE1(IO_File_writeAll_)
-    Type_String str = (Type_String)NATIVE_ARG(0);
+    String str = (String)NATIVE_ARG(0);
     Object tag = GETTAG(str);
     assert1(TAG_IS_LAYOUT(tag, Words), "Words-object expected!");
     IO_File_writeAll_((IO_File)self, str);
@@ -235,11 +235,11 @@ void post_init_IO_File()
 {
     /*
     TODO LAYOUT
-    HEADER(((Collection_Array)IO_File_Class->layout)->values[0]) = Slot_UIntSlot_Class;
-    HEADER(((Collection_Array)IO_ReadFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;
-    HEADER(((Collection_Array)IO_WriteFile_Class->layout)->values[0]) = Slot_UIntSlot_Class;
+    HEADER(((Array)IO_File_Class->layout)->values[0]) = UIntSlot_Class;
+    HEADER(((Array)IO_ReadFile_Class->layout)->values[0]) = UIntSlot_Class;
+    HEADER(((Array)IO_WriteFile_Class->layout)->values[0]) = UIntSlot_Class;
     */
-    Collection_Dictionary natives = add_plugin(L"IO.File");
+    Dictionary natives = add_plugin(L"IO.File");
     store_native(natives, SMB_stdin  , NM_IO_File_stdin);
     store_native(natives, SMB_stdout , NM_IO_File_stdout);
     store_native(natives, SMB_stderr , NM_IO_File_stderr);

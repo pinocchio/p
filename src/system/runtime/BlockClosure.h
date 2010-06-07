@@ -26,9 +26,9 @@ Runtime_MethodClosure fName() {\
     AST_Method body          = new_AST_Method(paramCount, localCount, numStatements);\
     Runtime_MethodClosure method = new_Runtime_MethodClosure(body, (Type_Class)Nil);\
     method->info             = new_raw_AST_Info();\
-    method->info->sourceFile = new_Type_String_from_charp(__FILE__);\
-    method->info->name       = new_Type_String_from_charp(__FUNCTION__);\
-    method->info->line       = new_Number_SmallInt(__LINE__);\
+    method->info->sourceFile = new_String_from_charp(__FILE__);\
+    method->info->name       = new_String_from_charp(__FUNCTION__);\
+    method->info->line       = new_SmallInt(__LINE__);\
     unsigned int _st_count   = 0;
 
 #define ADD_STATEMENT(value)\

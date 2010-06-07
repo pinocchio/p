@@ -10,12 +10,12 @@
 
 /* ========================================================================= */
 
-struct Number_SmallInt_t {
+struct SmallInt_t {
     int value;
 };
 
-CREATE_INITIALIZERS(Number_SmallInt)
-extern Number_SmallInt new_Number_SmallInt(int value);
+CREATE_INITIALIZERS(SmallInt)
+extern SmallInt new_SmallInt(int value);
 extern void init_numbercache();
 
 /* ========================================================================= */

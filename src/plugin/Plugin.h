@@ -9,7 +9,7 @@ void __attribute__((destructor)) unload_plugin();
 
 
 #define PLUGIN() \
-    Collection_Dictionary natives; \
+    Dictionary natives; \
     void load_plugin() { \
         natives = create_plugin();
 

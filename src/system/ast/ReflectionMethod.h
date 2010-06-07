@@ -10,17 +10,17 @@
 struct AST_ReflectionMethod_t {
     uns_int          size;
     AST_Info         info;
-    Collection_Array params;
-    Collection_Array locals;
+    Array params;
+    Array locals;
     Object           package;
-    Collection_Array annotations;
+    Array annotations;
     native           cache;
     Object           body[];
 };
 
-extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
-                                      Collection_Array locals,
-                                      Collection_Array annotations,
+extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Array params,
+                                      Array locals,
+                                      Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */

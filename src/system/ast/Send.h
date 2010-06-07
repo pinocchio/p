@@ -8,7 +8,7 @@
 struct AST_Send_t {
     uns_int     size;
     AST_Info    info;
-    Collection_Array  cache;
+    Array  cache;
     Object      message;
     Object      receiver;
     Object      arguments[];
@@ -18,7 +18,7 @@ extern AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc);
 extern AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...);
 
 /* ========================================================================= */
-extern Collection_Array AST_Send_args(AST_Send send);
+extern Array AST_Send_args(AST_Send send);
 
 extern void AST_Send_eval(AST_Send self);
 extern void AST_Send_tail_eval(AST_Send self);

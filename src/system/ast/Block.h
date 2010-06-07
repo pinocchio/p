@@ -8,8 +8,8 @@
 struct AST_Block_t {
     uns_int     size;
     AST_Info    info;
-    Collection_Array  params;
-    Collection_Array  locals;
+    Array  params;
+    Array  locals;
     Object      body[];
 };
 
@@ -19,8 +19,8 @@ extern AST_Block new_AST_Block(uns_int paramCount,
                                uns_int statementCount,
                                ...);
 
-extern AST_Block new_AST_Block_with(Collection_Array params,
-                                    Collection_Array locals,
+extern AST_Block new_AST_Block_with(Array params,
+                                    Array locals,
                                     uns_int statementCount,
                                     ...);
 
@@ -33,9 +33,9 @@ extern AST_Block new_AST_Block_with(Collection_Array params,
 
 /* ========================================================================= */
 
-extern void init_raw_variable_array(Collection_Array array, uns_int scope_id,
+extern void init_raw_variable_array(Array array, uns_int scope_id,
                                     uns_int size, uns_int local_id);
-extern void init_variable_array(Collection_Array array, uns_int local_id);
+extern void init_variable_array(Array array, uns_int local_id);
 
 /* ========================================================================= */
 

@@ -7,18 +7,18 @@
 #define CHARACTER_TABLE_SIZE 256
 /* ========================================================================= */
 
-struct Type_Character_t {
+struct Character_t {
     wchar_t value;
 };
 
-Type_Character new_Type_Character(wchar_t value);
+Character new_Character(wchar_t value);
 
-extern void post_init_Type_Character();
+extern void post_init_Character();
 
 /* ========================================================================= */
 
-extern Type_Character new_Type_Character_raw(wchar_t value);
-extern Type_Character new_Type_Character_fromInt(int value);
+extern Character new_Character_raw(wchar_t value);
+extern Character new_Character_fromInt(int value);
 
 /* ========================================================================= */
 

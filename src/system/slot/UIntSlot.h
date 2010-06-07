@@ -5,19 +5,19 @@
 
 /* ========================================================================= */
 
-struct Slot_UIntSlot_t {
+struct UIntSlot_t {
     uns_int index;
     Object  name;
     Object  package;
 };
 
-extern void post_init_Slot_UIntSlot();
-extern Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name);
+extern void post_init_UIntSlot();
+extern UIntSlot new_UIntSlot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 
-extern void Slot_UIntSlot_eval(Slot_UIntSlot var);
-extern void Slot_UIntSlot_assign(Slot_UIntSlot var, Object value);
+extern void UIntSlot_eval(UIntSlot var);
+extern void UIntSlot_assign(UIntSlot var, Object value);
 
 /* ========================================================================= */
 

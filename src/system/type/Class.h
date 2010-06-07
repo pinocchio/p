@@ -28,7 +28,7 @@ typedef enum Type_Tag {
 struct Type_Class_t {
     Object                layout;
     Type_Class            super;
-    Collection_Dictionary methods;
+    Dictionary methods;
     Symbol           name;
     Object                package;
     Object                cvars[];
@@ -42,8 +42,8 @@ extern Type_Class new_Class(Type_Class superclass, Object metaType);
 extern Type_Class new_Bootstrapping_Class();
 
 #define DIRECT_INIT_CLASS(cls)\
-    cls->methods            = new_Collection_Dictionary();\
-    HEADER(cls)->methods    = new_Collection_Dictionary();
+    cls->methods            = new_Dictionary();\
+    HEADER(cls)->methods    = new_Dictionary();
 
 #define INIT_CLASS(cls) DIRECT_INIT_CLASS(cls##_Class);
 
@@ -55,7 +55,7 @@ extern void Type_Class_direct_dispatch(Object receiver, Type_Class class,
 extern void Type_Class_direct_dispatch_withArguments(Object receiver,
                                                      Type_Class class,
                                                      Object msg,
-                                                     Collection_Array args);
+                                                     Array args);
 
 extern void Type_Class_set_superclass(Type_Class cls, Type_Class super);
 

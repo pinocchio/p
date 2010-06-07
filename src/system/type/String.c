@@ -7,22 +7,22 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_String);
-Type_String empty_Type_String;
+DECLARE_CLASS(String);
+String empty_String;
 
 /* ========================================================================= */
 
-Type_String new_Type_String(const wchar_t * str)
+String new_String(const wchar_t * str)
 {
-    Type_String string = (Type_String)new_Symbol(str);
-    HEADER(string)     = Type_String_Class;
+    String string = (String)new_Symbol(str);
+    HEADER(string)     = String_Class;
     return string;
 }
 
-Type_String new_Type_String_sized(uns_int size)
+String new_String_sized(uns_int size)
 {
-    Type_String result = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
-    HEADER(result)     = Type_String_Class;
+    String result = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
+    HEADER(result)     = String_Class;
     result->size       = size;
     while(size--) {
         result->value[size] = '\0';
@@ -33,17 +33,17 @@ Type_String new_Type_String_sized(uns_int size)
 
 /* ========================================================================= */
 
-Type_String new_Type_String_from_charp(const char * input)
+String new_String_from_charp(const char * input)
 {
     int size          = strlen(input)+1;
     wchar_t cp[size];
     cp[size - 1]      = L'\0';
     wchar_t * copy    = &cp[0];
     swprintf(copy, size, L"%s", input);
-    return new_Type_String(copy);
+    return new_String(copy);
 }
 
-Type_String Type_String_concat_(Type_String str1, Type_String str2)
+String String_concat_(String str1, String str2)
 {
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
@@ -55,7 +55,7 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     assert0(concatenated!=NULL);
     wchar_t * rc = wcsncpy(concatenated + str1->size, str2->value, str2->size);
     assert0(rc!=NULL);
-    return new_Type_String(concatenated);
+    return new_String(concatenated);
 }
 
 int Words_compare(Symbol s1, Symbol s2)
@@ -66,46 +66,46 @@ int Words_compare(Symbol s1, Symbol s2)
     return !wcsncmp(s1->value, s2->value, s1->size);
 }
 
-CNT(Type_String_concat_)
+CNT(String_concat_)
     Object string = pop_EXP();
     Object self   = peek_EXP(0);
-    poke_EXP(0, Type_String_concat_((Type_String)self, (Type_String)string));
+    poke_EXP(0, String_concat_((String)self, (String)string));
 }
 
-NATIVE1(Type_String_concat_)
+NATIVE1(String_concat_)
     Object w_arg = NATIVE_ARG(0);
-    push_CNT(Type_String_concat_);
+    push_CNT(String_concat_);
     RETURN_FROM_NATIVE(self); 
     Type_Class_direct_dispatch(w_arg, HEADER(w_arg), (Object)SMB_asString, 0);
 }
 
-NATIVE0(Type_String_asSymbol)
-    RETURN_FROM_NATIVE(new_Symbol_cached(((Type_String)self)->value));
+NATIVE0(String_asSymbol)
+    RETURN_FROM_NATIVE(new_Symbol_cached(((String)self)->value));
 }
 
 // TODO check types not classes!
-NATIVE2(Type_String_at_put_)
+NATIVE2(String_at_put_)
     Object w_arg0 = NATIVE_ARG(0);
     Object w_arg1 = NATIVE_ARG(1);
-    ASSERT_INSTANCE_OF(w_arg0, Number_SmallInt_Class);
-    ASSERT_INSTANCE_OF(w_arg1, Type_Character_Class);
+    ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
+    ASSERT_INSTANCE_OF(w_arg1, Character_Class);
     int index = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i\n", index));
-    assert(index < ((Type_String)self)->size,
+    assert(index < ((String)self)->size,
         printf("%i is out of Bounds[%"F_I"u] %p\n",
                     index,
-                    ((Type_String)self)->size,
+                    ((String)self)->size,
                     self));
-    ((Type_String)self)->value[index] = ((Type_Character)w_arg1)->value;
-    ((Type_String)self)->hash         = Symbol_hash((Symbol)self);
+    ((String)self)->value[index] = ((Character)w_arg1)->value;
+    ((String)self)->hash         = Symbol_hash((Symbol)self);
     RETURN_FROM_NATIVE(self);
 }
 
-NATIVE1(Type_String_basicNew_)
+NATIVE1(String_basicNew_)
     // TODO check type
     Object w_size      = NATIVE_ARG(0);
     int size           = unwrap_int(w_size);
-    Type_String result = new_Type_String_sized(size);
+    String result = new_String_sized(size);
     RETURN_FROM_NATIVE(result);
 }
 
@@ -172,7 +172,7 @@ Object wchar_to_number(const wchar_t * string, uns_int size)
         }
         break;
     }
-    return (Object)new_Number_SmallInt(sign * result);
+    return (Object)new_SmallInt(sign * result);
 }
 
 char * unicode_to_ascii(const wchar_t* str)
@@ -191,22 +191,22 @@ wchar_t * ascii_to_unicode(const char* str)
     return charname;
 }
 
-NATIVE0(Type_String_asNumber)
+NATIVE0(String_asNumber)
     Symbol symbol = (Symbol)self;
     RETURN_FROM_NATIVE(wchar_to_number(symbol->value, symbol->size));
 }
 
 /* ========================================================================= */
 
-void post_init_Type_String()
+void post_init_String()
 {
-    Type_String_Class->layout = create_layout(0, WORDS);
-    empty_Type_String = new_Type_String(L"");
-    Collection_Dictionary natives = add_plugin(L"Type.String");
-    store_native(natives, SMB__concat,   NM_Type_String_concat_);
-    store_native(natives, SMB_asSymbol,  NM_Type_String_asSymbol);
-    store_native(natives, SMB_at_put_,   NM_Type_String_at_put_);
-    store_native(natives, SMB_asNumber,  NM_Type_String_asNumber);
-    store_native(natives, SMB_basicNew_, NM_Type_String_basicNew_);
+    String_Class->layout = create_layout(0, WORDS);
+    empty_String = new_String(L"");
+    Dictionary natives = add_plugin(L"Type.String");
+    store_native(natives, SMB__concat,   NM_String_concat_);
+    store_native(natives, SMB_asSymbol,  NM_String_asSymbol);
+    store_native(natives, SMB_at_put_,   NM_String_at_put_);
+    store_native(natives, SMB_asNumber,  NM_String_asNumber);
+    store_native(natives, SMB_basicNew_, NM_String_basicNew_);
 }
 

@@ -5,22 +5,22 @@
 
 /* ========================================================================= */
 
-struct Collection_DictBucket_t {
+struct DictBucket_t {
     uns_int size;
     uns_int tally;
     Object  values[];
 };
 
-CREATE_INITIALIZERS(Collection_DictBucket);
-extern Collection_DictBucket new_Collection_DictBucket_raw(uns_int size);
-extern Collection_DictBucket new_Collection_DictBucket(uns_int size);
+CREATE_INITIALIZERS(DictBucket);
+extern DictBucket new_DictBucket_raw(uns_int size);
+extern DictBucket new_DictBucket(uns_int size);
 
 /* ========================================================================= */
 
-extern Collection_DictBucket new_bucket();
-extern void Bucket_lookup(Collection_DictBucket bucket, Object key);
-extern void Bucket_store_(Collection_DictBucket * bucketp, Object key, Object value);
-extern int Bucket_quick_store(Collection_DictBucket * bucketp, Object key,
+extern DictBucket new_bucket();
+extern void Bucket_lookup(DictBucket bucket, Object key);
+extern void Bucket_store_(DictBucket * bucketp, Object key, Object value);
+extern int Bucket_quick_store(DictBucket * bucketp, Object key,
                               Object value);
 extern void CNT_bucket_rehash();
 extern int Bucket_quick_compare_key(Object inkey, Object dictkey);

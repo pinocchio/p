@@ -7,7 +7,7 @@
 #define CONTEXT_CACHE_SIZE 128
 
 DECLARE_CLASS(Runtime_BlockContext);
-static Collection_Array unused_contexts;
+static Array unused_contexts;
 
 /* ========================================================================= */
 
@@ -102,7 +102,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send.");
-            //Object args[2] = { (Object)new_Number_SmallInt(index), key };
+            //Object args[2] = { (Object)new_SmallInt(index), key };
             return NULL;
         }
     }
@@ -124,7 +124,7 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
-            //Object args[2] = { (Object)new_Number_SmallInt(index), key };
+            //Object args[2] = { (Object)new_SmallInt(index), key };
             return;
         }
     }
@@ -151,9 +151,9 @@ NATIVE1(Runtime_BlockContext_errorHandler_)
 void pre_init_Runtime_BlockContext() { }
 void post_init_Runtime_BlockContext()
 {
-    unused_contexts = new_Collection_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
+    unused_contexts = new_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
     
-    Collection_Dictionary natives = add_plugin(L"Runtime.BlockClosure");
+    Dictionary natives = add_plugin(L"Runtime.BlockClosure");
     store_native(natives, SMB_errorHandler, NM_Runtime_BlockContext_errorHandler);
     store_native(natives, SMB_errorHandler_, NM_Runtime_BlockContext_errorHandler_);
 }

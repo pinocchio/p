@@ -119,9 +119,9 @@ Object atn(Object o, const wchar_t * s)
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
         int i;
-        uns_int size = ((Collection_Array)tag)->size;
+        uns_int size = ((Array)tag)->size;
         for (i = 0; i < size; i++) {
-            Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
+            Slot v = (Slot)((Array)tag)->values[i];
             Symbol sym = (Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
@@ -129,13 +129,13 @@ Object atn(Object o, const wchar_t * s)
         assert(NULL, fwprintf(stderr, L"Var not found: %ls\n", s););
     }
     if (TAG_IS_LAYOUT(tag, Array)) {
-        uns_int size = ((Collection_Array)tag)->size;
+        uns_int size = ((Array)tag)->size;
         int i;
         for (i = 0; i < size; i++) {
-            Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
+            Slot v = (Slot)((Array)tag)->values[i];
             Symbol sym = (Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
-            return ((Collection_Array)o)->values[i];
+            return ((Array)o)->values[i];
         }
         assert(NULL, fwprintf(stderr, L"Var not found: %ls\n", s););
     }
@@ -145,13 +145,13 @@ Object atn(Object o, const wchar_t * s)
 
 Object dict_at(Object o, uns_int at)
 {
-    Collection_Dictionary dict = (Collection_Dictionary)o;
+    Dictionary dict = (Dictionary)o;
     uns_int ds = dict->data->size;
     uns_int i;
     uns_int idx = 0;
     for (i = 0; i < ds; i++) {
-        Collection_Array bucket = (Collection_Array)dict->data->values[i];
-        if (bucket == (Collection_Array)Nil) { continue; }
+        Array bucket = (Array)dict->data->values[i];
+        if (bucket == (Array)Nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
             if (bucket->values[j] == Nil) { break; }
@@ -166,20 +166,20 @@ Object dict_at(Object o, uns_int at)
 
 Object at(Object o, uns_int i)
 {
-    if (HEADER(o) == Collection_Dictionary_Class) {
+    if (HEADER(o) == Dictionary_Class) {
         return dict_at(o, i);
     }
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
-        uns_int size = ((Collection_Array)tag)->size;
+        uns_int size = ((Array)tag)->size;
         assert0(i < size);
         return ((Type_Object)o)->ivals[i];
     }
     if (TAG_IS_LAYOUT(tag, Array)) {
-        uns_int size = ((Collection_Array)tag)->size;
-        uns_int isize = ((Collection_Array)o)->size;
+        uns_int size = ((Array)tag)->size;
+        uns_int isize = ((Array)o)->size;
         assert0(i < size + isize);
-        return ((Collection_Array)o)->values[i];
+        return ((Array)o)->values[i];
     }
     assert(NULL, fwprintf(stderr, L"Non-indexable object\n"););
     return NULL;
@@ -239,7 +239,7 @@ void shallow_inspect(Object o)
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
-        fwprintf(stderr, L": %i\n", ((Number_SmallInt)o)->value);
+        fwprintf(stderr, L": %i\n", ((SmallInt)o)->value);
         return;
     }
     fwprintf(stderr, L"\n");
@@ -247,13 +247,13 @@ void shallow_inspect(Object o)
 
 void inspect_dict(Object o)
 {
-    Collection_Dictionary dict = (Collection_Dictionary)o;
+    Dictionary dict = (Dictionary)o;
     uns_int ds = dict->data->size;
     uns_int i;
     uns_int idx = 0;
     for (i = 0; i < ds; i++) {
-        Collection_Array bucket = (Collection_Array)dict->data->values[i];
-        if (bucket == (Collection_Array)Nil) { continue; }
+        Array bucket = (Array)dict->data->values[i];
+        if (bucket == (Array)Nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
             Symbol key = (Symbol)bucket->values[j];
@@ -270,16 +270,16 @@ void inspect(Object o)
     if (o == NULL || HEADER(o) == NULL) {
         return;
     }
-    if (HEADER(o) == Collection_Dictionary_Class) {
+    if (HEADER(o) == Dictionary_Class) {
         inspect_dict(o);
         return;
     }
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Object)) {
-        uns_int size = ((Collection_Array)tag)->size;
+        uns_int size = ((Array)tag)->size;
         int i;
         for (i = 0; i < size; i++) {
-            Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
+            Slot v = (Slot)((Array)tag)->values[i];
             fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
@@ -287,17 +287,17 @@ void inspect(Object o)
     }
 
     if (TAG_IS_LAYOUT(tag, Array)) {
-        uns_int size = ((Collection_Array)tag)->size;
-        uns_int isize = ((Collection_Array)o)->size;
+        uns_int size = ((Array)tag)->size;
+        uns_int isize = ((Array)o)->size;
         int i;
         for (i = 0; i < size; i++) {
-            Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
+            Slot v = (Slot)((Array)tag)->values[i];
             fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
-            shallow_inspect(((Collection_Array)o)->values[i]);
+            shallow_inspect(((Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
             fwprintf(stderr, L"%i:\t", i);
-            shallow_inspect(((Collection_Array)o)->values[i]);
+            shallow_inspect(((Array)o)->values[i]);
         }
         return;
     }

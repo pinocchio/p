@@ -5,10 +5,10 @@
 
 /* ========================================================================= */
 
-extern Collection_Dictionary Symbol_Table;
+extern Dictionary Symbol_Table;
 
 struct Symbol_t { 
-    Number_SmallInt hash;
+    SmallInt hash;
     uns_int       size;
     wchar_t       value[];
 };
@@ -21,8 +21,8 @@ extern void init_SymbolTable();
 /* ========================================================================= */
 
 extern void initialize_Symbol();
-extern Number_SmallInt wchar_hash(const wchar_t * string, int size);
-extern Number_SmallInt Symbol_hash(Symbol symbol_string);
+extern SmallInt wchar_hash(const wchar_t * string, int size);
+extern SmallInt Symbol_hash(Symbol symbol_string);
 
 /* ========================================================================= */
 

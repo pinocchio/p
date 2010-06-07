@@ -5,12 +5,12 @@
 
 /* ========================================================================= */
 
-struct Number_Float_t {
+struct Float_t {
     float value;
 };
 
-CREATE_INITIALIZERS(Number_Float);
-extern Number_Float new_Number_Float(float value);
+CREATE_INITIALIZERS(Float);
+extern Float new_Float(float value);
 
 /* ========================================================================= */
 

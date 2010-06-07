@@ -5,20 +5,20 @@
 
 /* ========================================================================= */
 
-struct Slot_Slot_t {
+struct Slot_t {
     uns_int index;
     Object  name;
     Object  package;
 };
 
-CREATE_INITIALIZERS(Slot_Slot);
+CREATE_INITIALIZERS(Slot);
 
-extern Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name);
+extern Slot new_Slot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 
-extern void Slot_Slot_eval(Slot_Slot var);
-extern void Slot_Slot_assign(Slot_Slot var, Object value);
+extern void Slot_eval(Slot var);
+extern void Slot_assign(Slot var, Object value);
 
 /* ========================================================================= */
 

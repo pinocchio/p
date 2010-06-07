@@ -35,8 +35,8 @@ void send_eval_rest(Object exp, Type_Class class)
     EVAL_IF(AST_Variable)
     EVAL_IF(AST_Self)
     EVAL_IF(AST_Block)
-    EVAL_IF(Slot_Slot)
-    EVAL_IF(Slot_UIntSlot)
+    EVAL_IF(Slot)
+    EVAL_IF(UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
     Type_Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, Nil);

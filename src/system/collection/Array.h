@@ -5,24 +5,24 @@
 
 /* ========================================================================= */
 
-struct Collection_Array_t {
+struct Array_t {
     uns_int size;
     Object  values[];
 };
 
-extern Collection_Array empty_Collection_Array;
+extern Array empty_Array;
 
-CREATE_INITIALIZERS(Collection_Array)
+CREATE_INITIALIZERS(Array)
 
-extern Collection_Array new_Collection_Array_raw(uns_int c);
-extern Collection_Array new_Collection_Array(uns_int c, Object v[]);
-extern Collection_Array new_Collection_Array_with(uns_int c, ...);
-extern Collection_Array new_Collection_Array_withAll(uns_int c, Object element);
-extern Object raw_Collection_Array_at(Collection_Array array, Object tag, int index);
-extern void raw_Collection_Array_at_put(Collection_Array array, Object tag,
+extern Array new_Array_raw(uns_int c);
+extern Array new_Array(uns_int c, Object v[]);
+extern Array new_Array_with(uns_int c, ...);
+extern Array new_Array_withAll(uns_int c, Object element);
+extern Object raw_Array_at(Array array, Object tag, int index);
+extern void raw_Array_at_put(Array array, Object tag,
                                   int index, Object value);
-extern Object raw_Collection_Array_instAt(Collection_Array array, Object tag, int index);
-extern void raw_Collection_Array_instAt_put(Collection_Array array, Object tag,
+extern Object raw_Array_instAt(Array array, Object tag, int index);
+extern void raw_Array_instAt_put(Array array, Object tag,
                                       int index, Object value);
 /* ========================================================================= */
 

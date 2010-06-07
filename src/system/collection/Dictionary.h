@@ -5,16 +5,16 @@
 
 /* ========================================================================= */
 
-struct Collection_Dictionary_t {
+struct Dictionary_t {
     uns_int             size;
     uns_int             maxLinear;
     uns_int             ratio;
-    Collection_Array    data;
+    Array    data;
 };
 
-CREATE_INITIALIZERS(Collection_Dictionary);
+CREATE_INITIALIZERS(Dictionary);
 
-extern Collection_Dictionary new_Collection_Dictionary();
+extern Dictionary new_Dictionary();
 
 /* ========================================================================= */
 
@@ -23,18 +23,18 @@ extern Collection_Dictionary new_Collection_Dictionary();
 
 /* ========================================================================= */
 
-extern Object Collection_Dictionary_quick_lookup(Collection_Dictionary self, Object key);
-extern void Collection_Dictionary_quick_store(Collection_Dictionary self,
+extern Object Dictionary_quick_lookup(Dictionary self, Object key);
+extern void Dictionary_quick_store(Dictionary self,
                                         Object key, Object value);
 
-extern void Collection_Dictionary_direct_store(Collection_Dictionary self, int hash,
+extern void Dictionary_direct_store(Dictionary self, int hash,
                                          Object key, Object value);
-extern void Collection_Dictionary_lookup_push();
+extern void Dictionary_lookup_push();
 
 /* ========================================================================= */
 
 extern void push_hash(Object key);
-extern int unwrap_hash(Collection_Dictionary self, Object w_hash);
+extern int unwrap_hash(Dictionary self, Object w_hash);
 
 /* ========================================================================= */
 

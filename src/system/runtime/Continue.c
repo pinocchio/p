@@ -49,10 +49,10 @@ NATIVE1(Runtime_Continue_on_)
 void post_init_Runtime_Continue()
 {
     // LAYOUT TODO
-    // Collection_Array layout = (Collection_Array)Runtime_Continue_Class->layout;
-    // HEADER(layout->values[0]) = Slot_UIntSlot_Class;
-    // HEADER(layout->values[1]) = Slot_UIntSlot_Class;
-    Collection_Dictionary natives = add_plugin(L"Reflection.Reflection");
+    // Array layout = (Array)Runtime_Continue_Class->layout;
+    // HEADER(layout->values[0]) = UIntSlot_Class;
+    // HEADER(layout->values[1]) = UIntSlot_Class;
+    Dictionary natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, SMB_continueEscape_message_, NM_Runtime_Continue_escape_);
     store_native(natives, SMB_continueOn_message_,     NM_Runtime_Continue_on_);
 }

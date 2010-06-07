@@ -10,10 +10,10 @@ DECLARE_CLASS(Type_Object);
 
 /* ========================================================================= */
 
-Number_SmallInt Type_Object_hash(Type_Object object)
+SmallInt Type_Object_hash(Type_Object object)
 {
     unsigned int hash = (unsigned int)(uns_int)object;
-    return new_Number_SmallInt(hash>>3);
+    return new_SmallInt(hash>>3);
 }
 
 NATIVE0(Type_Object_hash)
@@ -53,7 +53,7 @@ Object Object_instVarAt_(Object self, int index)
     if (TAG_IS_LAYOUT(tag, Object)) {
         return raw_Type_Object_at((Type_Object)self, tag, index);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
-        return raw_Collection_Array_instAt((Collection_Array)self, tag, index);
+        return raw_Array_instAt((Array)self, tag, index);
     } else if (tag == Nil) {
         assert1(NULL, "Trying to access object with Nil as layout");
     } else {
@@ -68,7 +68,7 @@ void Object_instVarAt_put_(Object self, int index, Object value)
     if (TAG_IS_LAYOUT(tag, Object)) {
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
-        raw_Collection_Array_instAt_put((Collection_Array)self, tag, index, value);
+        raw_Array_instAt_put((Array)self, tag, index, value);
     } else if (tag == Nil) {
         assert1(NULL, "Trying to access object with Nil as layout");
     } else {
@@ -76,7 +76,7 @@ void Object_instVarAt_put_(Object self, int index, Object value)
     }
 }
 
-NATIVE1(Collection_Array_basicNew_)
+NATIVE1(Array_basicNew_)
     assert_class(self);
     Object w_size = NATIVE_ARG(0);
     int size      = unwrap_int(w_size);
@@ -89,7 +89,7 @@ NATIVE0(Type_Object_size)
     Object tag = GETTAG(self);
     uns_int size;
     if (TAG_IS_LAYOUT(tag, Array)) {
-        size = ((Collection_Array)self)->size;
+        size = ((Array)self)->size;
     } else if (TAG_IS_LAYOUT(tag, Words)) {
         size = ((Symbol)self)->size;
     } else {
@@ -97,11 +97,11 @@ NATIVE0(Type_Object_size)
         // make the compiler happy :)
         return;
     }
-    Number_SmallInt result = new_Number_SmallInt(size);
+    SmallInt result = new_SmallInt(size);
     RETURN_FROM_NATIVE(result);
 }
 
-Object raw_Collection_Array_at(Collection_Array array, Object tag, int index)
+Object raw_Array_at(Array array, Object tag, int index)
 {
     assert(array->size > index,
         printf("Array at: %i out of bounds %"F_I"u\n" , index, array->size));
@@ -110,18 +110,18 @@ Object raw_Collection_Array_at(Collection_Array array, Object tag, int index)
     return array->values[TAG_SIZE(tag) + index];
 }
 
-NATIVE1(Collection_Array_at_)
+NATIVE1(Array_at_)
     Object w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
-    Collection_Array as  = (Collection_Array)self;
+    Array as  = (Array)self;
 
     Object tag = GETTAG(as);    
     ASSERT_TAG_LAYOUT(tag, Array);
 
-    RETURN_FROM_NATIVE(raw_Collection_Array_at(as, tag, index - 1));
+    RETURN_FROM_NATIVE(raw_Array_at(as, tag, index - 1));
 }
 
-void raw_Collection_Array_at_put(Collection_Array array, Object tag,
+void raw_Array_at_put(Array array, Object tag,
                            int index, Object value)
 {
     assert0(0 <= index);
@@ -129,15 +129,15 @@ void raw_Collection_Array_at_put(Collection_Array array, Object tag,
     array->values[TAG_SIZE(tag) + index] = value;
 }
 
-NATIVE2(Collection_Array_at_put_)
+NATIVE2(Array_at_put_)
     Object w_index = NATIVE_ARG(0);
     Object w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index);
-    Collection_Array as  = (Collection_Array)self;
+    Array as  = (Array)self;
    
     Object tag = GETTAG(as);
     ASSERT_TAG_LAYOUT(tag, Array); 
-    raw_Collection_Array_at_put(as, tag, index - 1, w_arg);
+    raw_Array_at_put(as, tag, index - 1, w_arg);
     RETURN_FROM_NATIVE(w_arg);
 }
 
@@ -151,7 +151,7 @@ NATIVE2(Type_Object_perform_withArguments_)
     zapn_EXP(4);    
 
     Type_Class_direct_dispatch_withArguments(self, HEADER(self),
-                                             w_selector, (Collection_Array)w_args);
+                                             w_selector, (Array)w_args);
 }
 
 NATIVE1(Type_Object_perform_)
@@ -165,12 +165,12 @@ NATIVE1(Type_Object_perform_)
 
 void post_init_Type_Object()
 {
-    Collection_Dictionary natives = add_plugin(L"Type.Object");
+    Dictionary natives = add_plugin(L"Type.Object");
     store_native(natives, SMB_size,                   NM_Type_Object_size);
-    store_native(natives, SMB_at_,                    NM_Collection_Array_at_);
-    store_native(natives, SMB_at_put_,                NM_Collection_Array_at_put_);
+    store_native(natives, SMB_at_,                    NM_Array_at_);
+    store_native(natives, SMB_at_put_,                NM_Array_at_put_);
     store_native(natives, SMB_basicNew,               NM_Type_Object_basicNew);
-    store_native(natives, SMB_basicNew_,              NM_Collection_Array_basicNew_);
+    store_native(natives, SMB_basicNew_,              NM_Array_basicNew_);
     store_native(natives, SMB__pequal,                NM_Type_Object_equals);
     store_native(natives, SMB__equal,                 NM_Type_Object_equals);
     store_native(natives, SMB_class,                  NM_Type_Object_class);

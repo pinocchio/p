@@ -3,9 +3,9 @@
 
 /* ========================================================================= */
 
-Collection_Array threaded_code()
+Array threaded_code()
 {
-    return (Collection_Array)peekn_CNT(2);
+    return (Array)peekn_CNT(2);
 }
 
 void set_pc(int pc)
@@ -54,14 +54,14 @@ void t_return(int pc)
 
 void t_return_1(int pc)
 {
-    push_EXP(new_Number_SmallInt(1));
+    push_EXP(new_SmallInt(1));
     t_return(pc);
 }
 
 void t_push_1(int pc)
 {
     inc_pc(pc);
-    push_EXP(new_Number_SmallInt(1));
+    push_EXP(new_SmallInt(1));
 }
 
 void t_minus(int pc)
@@ -69,7 +69,7 @@ void t_minus(int pc)
     inc_pc(pc);
     int right = unwrap_int(pop_EXP());
     int left = unwrap_int(peek_EXP(0));
-    poke_EXP(0, new_Number_SmallInt(left - right));
+    poke_EXP(0, new_SmallInt(left - right));
 }
 
 void t_times(int pc)
@@ -77,7 +77,7 @@ void t_times(int pc)
     inc_pc(pc);
     int right = unwrap_int(pop_EXP());
     int left = unwrap_int(peek_EXP(0));
-    poke_EXP(0, new_Number_SmallInt(left * right));
+    poke_EXP(0, new_SmallInt(left * right));
 }
 
 void t_send_0(int pc)
@@ -97,9 +97,9 @@ void t_push_next(int pc)
 #define THREADED(name) RAW_THREADED(&t_##name);
 #define RAW_THREADED(o) code->values[pc++] = (Object)(o);
 
-Collection_Array create_fac_code()
+Array create_fac_code()
 {
-    Collection_Array code = new_Collection_Array_raw(14);
+    Array code = new_Array_raw(14);
     int pc = 0;
     THREADED(push_self);
     THREADED(push_1);
@@ -118,9 +118,9 @@ Collection_Array create_fac_code()
     return code;
 }
 
-AST_ThreadedMethod new_AST_ThreadedMethod_with(Collection_Array params,
-                               Collection_Array locals,
-                               Collection_Array annotations,
+AST_ThreadedMethod new_AST_ThreadedMethod_with(Array params,
+                               Array locals,
+                               Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_ThreadedMethod, Object[statementCount]);
@@ -143,7 +143,7 @@ void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
                                AST_ThreadedMethod method,
                                Object self, uns_int argc)
 {
-    if (method->code == (Collection_Array)Nil) {
+    if (method->code == (Array)Nil) {
         return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
 
@@ -171,7 +171,7 @@ void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
 void CNT_eval_threaded()
 {
     int pc                = (int)(uns_int)peekn_CNT(1);
-    Collection_Array code = (Collection_Array)peekn_CNT(2);
+    Array code = (Array)peekn_CNT(2);
     ((threaded)code->values[pc])(pc);
 }
 

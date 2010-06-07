@@ -39,8 +39,8 @@ CNT(AST_Assign_assign)
     Type_Class class = HEADER(var);
     
     ASSIGN_IF(AST_Variable)
-    ASSIGN_IF(Slot_Slot)
-    ASSIGN_IF(Slot_UIntSlot)
+    ASSIGN_IF(Slot)
+    ASSIGN_IF(UIntSlot)
     
     Type_Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, Nil, value);
 }

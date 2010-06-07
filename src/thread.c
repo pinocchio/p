@@ -73,9 +73,9 @@ void _push_CNT(cont e)
 
 /* ========================================================================= */
 
-Collection_Array get_args(int argc, const char ** argv)
+Array get_args(int argc, const char ** argv)
 {
-    Collection_Array args = new_Collection_Array_raw(argc - 1);
+    Array args = new_Array_raw(argc - 1);
     int i;
     argv++;
     for (i = 1; i < argc; i++) {
@@ -98,7 +98,7 @@ void * pinocchio_main_thread(void * argc)
     initialize_Thread();
     init_lib();
     
-    Collection_Array args = get_args((int)(uns_int)argc, cargv);
+    Array args = get_args((int)(uns_int)argc, cargv);
     Eval_Send1((Object)Interpretation_MainInterpreter_Class,
                SMB_main_, (Object)args);
 

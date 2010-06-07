@@ -8,18 +8,18 @@
 AST_Variable new_AST_Variable_named(const wchar_t* name, uns_int scope_id)
 {
     NEW_OBJECT(AST_Variable);
-    result->name     = (Object)new_Type_String(name);
+    result->name     = (Object)new_String(name);
     result->info     = empty_AST_Info;
-    result->scope_id = (Object)new_Number_SmallInt(scope_id);
-    result->local_id = (Object)new_Number_SmallInt(0);
+    result->scope_id = (Object)new_SmallInt(scope_id);
+    result->local_id = (Object)new_SmallInt(0);
     return result;
 }
 
 AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
 {
     NEW_OBJECT(AST_Variable);
-    result->local_id = (Object)new_Number_SmallInt(local_id);
-    result->scope_id = (Object)new_Number_SmallInt(scope_id);
+    result->local_id = (Object)new_SmallInt(local_id);
+    result->scope_id = (Object)new_SmallInt(scope_id);
     result->name     = Nil;
     result->info     = empty_AST_Info;
     return result;
@@ -42,7 +42,7 @@ void AST_Variable_eval(AST_Variable self)
     } else {
         // TODO
         assert0(NULL);
-        // Object args[2] = { (Object)new_Number_SmallInt(self->index), self->key };
+        // Object args[2] = { (Object)new_SmallInt(self->index), self->key };
         // return AST_Send(env, SMB_at_in_, 2, args);
     }
 }

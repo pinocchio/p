@@ -7,9 +7,9 @@
 
 /* ========================================================================= */
 
-AST_ReflectionMethod new_AST_ReflectionMethod_with(Collection_Array params,
-                               Collection_Array locals,
-                               Collection_Array annotations,
+AST_ReflectionMethod new_AST_ReflectionMethod_with(Array params,
+                               Array locals,
+                               Array annotations,
                                uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(AST_ReflectionMethod, Object[statementCount]);
