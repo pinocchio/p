@@ -78,7 +78,7 @@ void print_Symbol(Object s)
 {
     Object tag = GETTAG(s);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fwprintf(stderr, L"\"%ls\"\n", ((Type_Symbol)s)->value);
+        fwprintf(stderr, L"\"%ls\"\n", ((Symbol)s)->value);
     } else {
         fwprintf(stderr, L"Not a symbol: %p\n", s);
         print_Class(s);
@@ -122,7 +122,7 @@ Object atn(Object o, const wchar_t * s)
         uns_int size = ((Collection_Array)tag)->size;
         for (i = 0; i < size; i++) {
             Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
-            Type_Symbol sym = (Type_Symbol)v->name;
+            Symbol sym = (Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Type_Object)o)->ivals[i];
         }
@@ -133,7 +133,7 @@ Object atn(Object o, const wchar_t * s)
         int i;
         for (i = 0; i < size; i++) {
             Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
-            Type_Symbol sym = (Type_Symbol)v->name;
+            Symbol sym = (Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
             return ((Collection_Array)o)->values[i];
         }
@@ -235,7 +235,7 @@ void shallow_inspect(Object o)
 
     Object tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fwprintf(stderr, L": '%ls'\n", ((Type_Symbol)o)->value);
+        fwprintf(stderr, L": '%ls'\n", ((Symbol)o)->value);
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
@@ -256,8 +256,8 @@ void inspect_dict(Object o)
         if (bucket == (Collection_Array)Nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
-            Type_Symbol key = (Type_Symbol)bucket->values[j];
-            if (key == (Type_Symbol)Nil) { break; }
+            Symbol key = (Symbol)bucket->values[j];
+            if (key == (Symbol)Nil) { break; }
             fwprintf(stderr, L"%"F_I"u %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }
@@ -280,7 +280,7 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
-            fwprintf(stderr, L"%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
             shallow_inspect(((Type_Object)o)->ivals[i]);
         }
         return;
@@ -292,7 +292,7 @@ void inspect(Object o)
         int i;
         for (i = 0; i < size; i++) {
             Slot_Slot v = (Slot_Slot)((Collection_Array)tag)->values[i];
-            fwprintf(stderr, L"%i %15ls:\t", i, ((Type_Symbol)v->name)->value);
+            fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
             shallow_inspect(((Collection_Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {

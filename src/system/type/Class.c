@@ -24,7 +24,7 @@ Type_Class new_Bootstrapping_Class()
         (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
     // Name of metaclass is its instance pointer.
-    mcls->name = (Type_Symbol)cls;
+    mcls->name = (Symbol)cls;
     return cls;
 }
 
@@ -38,7 +38,7 @@ Type_Class new_Class(Type_Class superclass, Object metatype)
     Type_Class metaclass    = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
     metaclass->layout       = metatype;
     Type_Class result       = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
-    metaclass->name         = (Type_Symbol)result;
+    metaclass->name         = (Symbol)result;
 
     result->methods         = new_Collection_Dictionary();
     metaclass->methods      = new_Collection_Dictionary();
@@ -274,7 +274,7 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     assert0(msg != Nil);
 
     #ifdef PRINT_DISPATCH_TRACE
-    Type_Symbol clsname;
+    Symbol clsname;
     if (HEADER(class) != Metaclass) {
         clsname = Type_String_concat_(((Type_Class)class)->name,
                                       new_Type_String(L">>"));
@@ -282,8 +282,8 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
         clsname = Type_String_concat_(((Type_Class)self)->name,
                                       new_Type_String(L" class>>"));
     }
-    Type_Symbol msgname = (Type_Symbol)msg;
-    Type_Symbol method  = Type_String_concat_(clsname, msgname);
+    Symbol msgname = (Symbol)msg;
+    Symbol method  = Type_String_concat_(clsname, msgname);
     LOG("%ls (%"F_I"u)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     

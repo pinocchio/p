@@ -62,11 +62,11 @@ void post_init_Type_Boolean()
     Collection_Dictionary natives;
     
     natives = add_plugin(L"Type.True");
-    store_native(natives, new_Type_Symbol_cached(L"whileTrue:"), NM_Type_True_whileTrue_);
-    store_native(natives, new_Type_Symbol_cached(L"ifTrue:ifFalse:"), NM_Type_True_ifTrue_ifFalse_);
+    store_native(natives, new_Symbol_cached(L"whileTrue:"), NM_Type_True_whileTrue_);
+    store_native(natives, new_Symbol_cached(L"ifTrue:ifFalse:"), NM_Type_True_ifTrue_ifFalse_);
 
     natives = add_plugin(L"Type.False");
-    store_native(natives, new_Type_Symbol_cached(L"whileFalse:"), NM_Type_False_whileFalse_);
-    store_native(natives, new_Type_Symbol_cached(L"ifTrue:ifFalse:"), NM_Type_False_ifTrue_ifFalse_);
+    store_native(natives, new_Symbol_cached(L"whileFalse:"), NM_Type_False_whileFalse_);
+    store_native(natives, new_Symbol_cached(L"ifTrue:ifFalse:"), NM_Type_False_ifTrue_ifFalse_);
 }
 

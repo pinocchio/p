@@ -25,7 +25,7 @@ static int get_hash(Collection_Dictionary self, Object key)
     int hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Type_Symbol_hash((Type_Symbol)key)->value;
+        hash = Symbol_hash((Symbol)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((Number_SmallInt)key)->value;
     } else {
@@ -42,7 +42,7 @@ void push_hash(Object key)
     Number_SmallInt hash;
     Object tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Type_Symbol_hash((Type_Symbol)key);
+        hash = Symbol_hash((Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (Number_SmallInt)key;
     } else {

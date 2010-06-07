@@ -35,5 +35,5 @@ TYPE(Type_Character);
 TYPE(Type_CharacterTable);
 TYPE(Type_Class);
 TYPE(Type_Object);
-TYPE(Type_Symbol);
+TYPE(Symbol);
 TYPE(AST_ThreadedMethod);

@@ -12,7 +12,7 @@ Slot_Slot new_Slot_Slot(uns_int index, const wchar_t * name)
 {
     NEW_OBJECT(Slot_Slot);
     result->index   = index;
-    result->name    = (Object)new_Type_Symbol_cached(name);
+    result->name    = (Object)new_Symbol_cached(name);
     result->package = (Object)Nil;
     return result;
 }

@@ -12,7 +12,7 @@ post_init_IO_File();
 post_init_AST_Info();
 post_init_AST_Self();
 post_init_Type_String();
-post_init_Type_Symbol();
+post_init_Symbol();
 post_init_Type_Boolean();
 post_init_Number_Float();
 post_init_Runtime_BlockClosure();

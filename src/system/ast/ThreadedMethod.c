@@ -108,7 +108,7 @@ Collection_Array create_fac_code()
     THREADED(return_1);
     THREADED(push_self);
     THREADED(push_next);
-    RAW_THREADED(new_AST_Send_raw(Nil, (Object)new_Type_Symbol(L"fac"), 0));
+    RAW_THREADED(new_AST_Send_raw(Nil, (Object)new_Symbol(L"fac"), 0));
     THREADED(push_self);
     THREADED(push_1);
     THREADED(minus);

@@ -51,9 +51,9 @@ NATIVE2(Interpreter_lookupSelector_in_)
 }
 
 PLUGIN()
-    EXPORT(new_Type_Symbol_cached(L"invokeNativeMethod:on:message:alternative:"),
+    EXPORT(new_Symbol_cached(L"invokeNativeMethod:on:message:alternative:"),
 		   Interpreter_invokeNative);
-	EXPORT(new_Type_Symbol_cached(L"lookupSelector:in:"),
+	EXPORT(new_Symbol_cached(L"lookupSelector:in:"),
            Interpreter_lookupSelector_in_);
 }
 

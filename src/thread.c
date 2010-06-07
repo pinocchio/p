@@ -83,7 +83,7 @@ Collection_Array get_args(int argc, const char ** argv)
         int length = strlen(arg);
         wchar_t warg[length + 1];
         assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
-        Type_Symbol sarg = new_Type_Symbol_cached(warg);
+        Symbol sarg = new_Symbol_cached(warg);
         args->values[i-1] = (Object)sarg;
     }
     return args;

@@ -221,5 +221,5 @@ void post_init_Runtime_BlockClosure()
                           NM_Runtime_BlockClosure_valueWithArguments_);
     natives = add_plugin(L"Runtime.BlockClosure");
     store_native(natives, SMB_numArgs, NM_Runtime_BlockClosure_numArgs);
-    store_native(natives, new_Type_Symbol_cached(L"whileTrue:"), NM_Runtime_BlockClosure_whileTrue_);
+    store_native(natives, new_Symbol_cached(L"whileTrue:"), NM_Runtime_BlockClosure_whileTrue_);
 }

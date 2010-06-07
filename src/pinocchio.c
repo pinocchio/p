@@ -63,8 +63,8 @@ CNT(exit_error)
     while ((Object)env != Nil) {
         if (env->home_context == (Runtime_MethodContext)env) {
             fwprintf(stderr, L"\t%ls >> %ls\n",
-                (Type_Symbol)HEADER(env->home_context->self)->name->value,
-                ((Type_Symbol)env->home_context->closure->selector)->value);
+                (Symbol)HEADER(env->home_context->self)->name->value,
+                ((Symbol)env->home_context->closure->selector)->value);
         }
         env = env->parent_frame;
     }
@@ -150,21 +150,21 @@ Object Eval(Object code)
     return finish_eval();
 }
 
-Object Eval_Send0(Object self, Type_Symbol symbol)
+Object Eval_Send0(Object self, Symbol symbol)
 {
     start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
     return finish_eval();
 }
 
-Object Eval_Send1(Object self, Type_Symbol symbol, Object arg)
+Object Eval_Send1(Object self, Symbol symbol, Object arg)
 {
     start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
     return finish_eval();
 }
 
-Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2)
+Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2)
 {
     start_eval();
     Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
@@ -184,7 +184,7 @@ Object EvalThreaded(Collection_Array code)
 
 jmp_buf Assert_Fail;
 
-void store_method(Type_Class class, Type_Symbol symbol, 
+void store_method(Type_Class class, Symbol symbol, 
                   Runtime_MethodClosure method)
 {
     method->selector    = (Object)symbol;
@@ -221,10 +221,10 @@ static void bootstrap()
 
     Slot_Slot_Class             = new_Bootstrapping_Class();
     Number_SmallInt_Class       = new_Bootstrapping_Class();
-    Type_Symbol_Class           = new_Bootstrapping_Class();
+    Symbol_Class           = new_Bootstrapping_Class();
 
     INIT_CLASS(Slot_Slot);
-    INIT_CLASS(Type_Symbol);
+    INIT_CLASS(Symbol);
     INIT_CLASS(Number_SmallInt);
 
     Type_ArrayLayout_Class      = new_Bootstrapping_Class();
@@ -268,7 +268,7 @@ static void bootstrap()
     Type_BytesLayout_Class->layout     = empty_object_layout;
     Type_FileLayout_Class->layout      = empty_object_layout;
 
-    Type_Symbol_Class->layout          = words_layout;
+    Symbol_Class->layout          = words_layout;
 
     Symbol_Table = new_Collection_Dictionary();
     #include <system/type/SymbolInitialization.ci> 

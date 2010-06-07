@@ -26,7 +26,7 @@ Object instantiate_Bytes(Type_Class class, Collection_Array ivars, uns_int extra
 
 Object instantiate_Words(Type_Class class, Collection_Array ivars, uns_int extra)
 {
-    Type_Symbol result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[extra]);
+    Symbol result = NEW_ARRAYED(struct Symbol_t, wchar_t[extra]);
     HEADER(result) = class;
     assert0(HEADER(result) != (Type_Class)Nil);
     return (Object)result;

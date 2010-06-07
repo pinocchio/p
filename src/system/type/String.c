@@ -14,20 +14,20 @@ Type_String empty_Type_String;
 
 Type_String new_Type_String(const wchar_t * str)
 {
-    Type_String string = (Type_String)new_Type_Symbol(str);
+    Type_String string = (Type_String)new_Symbol(str);
     HEADER(string)     = Type_String_Class;
     return string;
 }
 
 Type_String new_Type_String_sized(uns_int size)
 {
-    Type_String result = NEW_ARRAYED(struct Type_Symbol_t, wchar_t[size]);
+    Type_String result = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
     HEADER(result)     = Type_String_Class;
     result->size       = size;
     while(size--) {
         result->value[size] = '\0';
     }
-    result->hash       = Type_Symbol_hash((Type_Symbol)result);
+    result->hash       = Symbol_hash((Symbol)result);
     return result;
 }
 
@@ -58,7 +58,7 @@ Type_String Type_String_concat_(Type_String str1, Type_String str2)
     return new_Type_String(concatenated);
 }
 
-int Words_compare(Type_Symbol s1, Type_Symbol s2)
+int Words_compare(Symbol s1, Symbol s2)
 {
     if (s1->size != s2->size) {
         return 0;
@@ -80,7 +80,7 @@ NATIVE1(Type_String_concat_)
 }
 
 NATIVE0(Type_String_asSymbol)
-    RETURN_FROM_NATIVE(new_Type_Symbol_cached(((Type_String)self)->value));
+    RETURN_FROM_NATIVE(new_Symbol_cached(((Type_String)self)->value));
 }
 
 // TODO check types not classes!
@@ -97,7 +97,7 @@ NATIVE2(Type_String_at_put_)
                     ((Type_String)self)->size,
                     self));
     ((Type_String)self)->value[index] = ((Type_Character)w_arg1)->value;
-    ((Type_String)self)->hash         = Type_Symbol_hash((Type_Symbol)self);
+    ((Type_String)self)->hash         = Symbol_hash((Symbol)self);
     RETURN_FROM_NATIVE(self);
 }
 
@@ -192,7 +192,7 @@ wchar_t * ascii_to_unicode(const char* str)
 }
 
 NATIVE0(Type_String_asNumber)
-    Type_Symbol symbol = (Type_Symbol)self;
+    Symbol symbol = (Symbol)self;
     RETURN_FROM_NATIVE(wchar_to_number(symbol->value, symbol->size));
 }
 

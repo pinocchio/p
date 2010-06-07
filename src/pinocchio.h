@@ -180,12 +180,12 @@ extern int IN_EVAL;
 
 extern void CNT_exit_error();
 extern Object Eval(Object code);
-extern Object Eval_Send0(Object self, Type_Symbol symbol);
-extern Object Eval_Send1(Object self, Type_Symbol symbol, Object arg);
-extern Object Eval_Send2(Object self, Type_Symbol symbol, Object arg1,  Object arg2);
+extern Object Eval_Send0(Object self, Symbol symbol);
+extern Object Eval_Send1(Object self, Symbol symbol, Object arg);
+extern Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2);
 extern void pinocchio_post_init();
 extern bool isInstance(Object object, Object class);
-extern void store_method(Type_Class class, Type_Symbol symbol, Runtime_MethodClosure method);
+extern void store_method(Type_Class class, Symbol symbol, Runtime_MethodClosure method);
 
 /* ========================================================================= */
 

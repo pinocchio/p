@@ -8,7 +8,7 @@ Slot_UIntSlot new_Slot_UIntSlot(uns_int index, const wchar_t * name)
 {
     NEW_OBJECT(Slot_UIntSlot);
     result->index   = index;
-    result->name    = (Object)new_Type_Symbol(name);
+    result->name    = (Object)new_Symbol(name);
     result->package = (Object)Nil;
     return result;
 }

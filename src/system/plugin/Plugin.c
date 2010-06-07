@@ -13,7 +13,7 @@ Collection_Dictionary create_plugin()
 
 Collection_Dictionary add_plugin(const wchar_t * name)
 {
-    Object symbol = (Object)new_Type_Symbol_cached(name);
+    Object symbol = (Object)new_Symbol_cached(name);
     Collection_Dictionary plugin = 
         (Collection_Dictionary)Collection_Dictionary_quick_lookup(_NATIVES_,
                                                                   symbol);
@@ -21,12 +21,12 @@ Collection_Dictionary add_plugin(const wchar_t * name)
 
     plugin = new_Collection_Dictionary();
     Collection_Dictionary_quick_store(_NATIVES_,
-                                      (Object)new_Type_Symbol_cached(name),
+                                      (Object)new_Symbol_cached(name),
                                       (Object)plugin);
     return plugin;
 }
 
-void store_native(Collection_Dictionary dict, Type_Symbol selector, native code)
+void store_native(Collection_Dictionary dict, Symbol selector, native code)
 {
     Collection_Dictionary_quick_store(dict, (Object)selector, (Object)code);
 }
@@ -61,7 +61,7 @@ NATIVE1(Plugin_load_)
     Object w_path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
      
-    char * path = unicode_to_ascii(((Type_Symbol)w_path)->value);
+    char * path = unicode_to_ascii(((Symbol)w_path)->value);
     Type_Object plugin = load_plugin(self, path);
     RETURN_FROM_NATIVE(plugin);
 }

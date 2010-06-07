@@ -191,7 +191,7 @@ FILE * open_file(Object path, char * mode)
 {
     assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
 
-    char * filePath = unicode_to_ascii(((Type_Symbol)path)->value);
+    char * filePath = unicode_to_ascii(((Symbol)path)->value);
     FILE * file = fopen(filePath, mode);
     assert(file,
         fwprintf(stderr,

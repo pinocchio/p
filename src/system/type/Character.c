@@ -47,7 +47,7 @@ NATIVE0(Type_Character_asString)
 
 NATIVE0(Type_Character_asSymbol)
     const wchar_t str[2] = { ((Type_Character)self)->value, '\0' };
-    RETURN_FROM_NATIVE(new_Type_Symbol(str));
+    RETURN_FROM_NATIVE(new_Symbol(str));
 }
 
 NATIVE0(Type_Character_asSmallInt)

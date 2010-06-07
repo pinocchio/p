@@ -49,12 +49,12 @@ noecho();
 // ============================================================================
 
 PLUGIN()
-    EXPORT(new_Type_Symbol_cached(L"refresh"), NCurses_refresh);
-    EXPORT(new_Type_Symbol_cached(L"refresh"), NCurses_refresh);
-    EXPORT(new_Type_Symbol_cached(L"initscr"), NCurses_initscr);
-    EXPORT(new_Type_Symbol_cached(L"raw"), NCurses_raw);
-    EXPORT(new_Type_Symbol_cached(L"getch"), NCurses_getch);
-    EXPORT(new_Type_Symbol_cached(L"noecho"), NCurses_noecho);
+    EXPORT(new_Symbol_cached(L"refresh"), NCurses_refresh);
+    EXPORT(new_Symbol_cached(L"refresh"), NCurses_refresh);
+    EXPORT(new_Symbol_cached(L"initscr"), NCurses_initscr);
+    EXPORT(new_Symbol_cached(L"raw"), NCurses_raw);
+    EXPORT(new_Symbol_cached(L"getch"), NCurses_getch);
+    EXPORT(new_Symbol_cached(L"noecho"), NCurses_noecho);
 }
 
 void unload_plugin() {

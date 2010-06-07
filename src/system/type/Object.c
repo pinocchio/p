@@ -91,7 +91,7 @@ NATIVE0(Type_Object_size)
     if (TAG_IS_LAYOUT(tag, Array)) {
         size = ((Collection_Array)self)->size;
     } else if (TAG_IS_LAYOUT(tag, Words)) {
-        size = ((Type_Symbol)self)->size;
+        size = ((Symbol)self)->size;
     } else {
         assert(NULL, printf("Not indexable\n"););       
         // make the compiler happy :)

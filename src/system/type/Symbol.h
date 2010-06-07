@@ -7,22 +7,22 @@
 
 extern Collection_Dictionary Symbol_Table;
 
-struct Type_Symbol_t { 
+struct Symbol_t { 
     Number_SmallInt hash;
     uns_int       size;
     wchar_t       value[];
 };
 
-CREATE_INITIALIZERS(Type_Symbol)
-extern Type_Symbol new_Type_Symbol_cached(const wchar_t* name);
-extern Type_Symbol new_Type_Symbol(const wchar_t* name);
+CREATE_INITIALIZERS(Symbol)
+extern Symbol new_Symbol_cached(const wchar_t* name);
+extern Symbol new_Symbol(const wchar_t* name);
 extern void init_SymbolTable();
 
 /* ========================================================================= */
 
 extern void initialize_Symbol();
 extern Number_SmallInt wchar_hash(const wchar_t * string, int size);
-extern Number_SmallInt Type_Symbol_hash(Type_Symbol symbol_string);
+extern Number_SmallInt Symbol_hash(Symbol symbol_string);
 
 /* ========================================================================= */
 
