@@ -262,10 +262,12 @@ void post_init_IO_File()
 
 
     /* make stdin unbuffered */
-    struct termios settings;
-    tcgetattr(fileno(stdin), &settings);
-    settings.c_lflag &= ~(ICANON);
-    tcsetattr(fileno(stdin), TCSANOW, &settings);
+    //struct termios settings;
+    //tcgetattr(fileno(stdin), &settings);
+    //settings.c_lflag &= (~ICANON);
+    //settings.c_lflag &= (~ECHO); // don't echo the character
+    //settings.c_lflag &= (~ISIG); // don't automatically handle control-C
+    //tcsetattr(fileno(stdin), TCSANOW, &settings);
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);

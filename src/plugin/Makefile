@@ -4,7 +4,7 @@ MAKEOPTS  = -j3
 OS        = $(shell uname)
 CC        = gcc
 # ============================================================================
-CFILES    = $(wildcard */*.c)
+CFILES    = $(wildcard */*.c) $(wildcard */*/*.c)
 OFILES    = $(CFILES:%.c=%.o)
 SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES   = $(CFILES:%.c=%.lo)
