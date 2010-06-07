@@ -126,3 +126,5 @@ extern Type_Symbol SMB_assignFor_to_;
 extern Type_Symbol SMB_accept_;
 extern Type_Symbol SMB_flush;
 extern Type_Symbol SMB_immediate;
+extern Type_Symbol SMB_errorHandler;
+extern Type_Symbol SMB_errorHandler_;

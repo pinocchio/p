@@ -105,21 +105,6 @@ NATIVE0(IO_File_readAll)
 }
 
 
-void IO_File_immediate(IO_File file) 
-{
-    /*TODO to be removed or updated using the 'exec stty raw' approach*/
-    struct termios termAttributes;
-    assert1(tcgetattr(file->file, &termAttributes) != 0, "Could not extract term attrs");
-    termAttributes.c_lflag &= ~(ICANON);
-    assert1(tcsetattr(file->file, TCSANOW, &termAttributes) != 0, "Could not set term attrs");
-}
-
-NATIVE1(IO_File_immediate)
-    IO_File_immediate((IO_File)self);
-    RETURN_FROM_NATIVE(self);
-}
-
-
 Type_String IO_File_readLine(IO_File file) 
 {
     assert1(file != NULL, "Invalid Argument");
@@ -270,11 +255,17 @@ void post_init_IO_File()
     store_native(natives, SMB_write_    , NM_IO_File_write_);
     store_native(natives, SMB_writeAll_ , NM_IO_File_writeAll_);
     store_native(natives, SMB_flush     , NM_IO_File_flush);
-    store_native(natives, SMB_immediate , NM_IO_File_immediate);
 
 
     store_native(natives, SMB_readOpen_  , NM_IO_ReadFile_open_);
     store_native(natives, SMB_writeOpen_ , NM_IO_WriteFile_open_);
+
+
+    /* make stdin unbuffered */
+    struct termios settings;
+    tcgetattr(fileno(stdin), &settings);
+    settings.c_lflag &= ~(ICANON);
+    tcsetattr(fileno(stdin), TCSANOW, &settings);
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);

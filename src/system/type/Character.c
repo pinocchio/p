@@ -32,9 +32,9 @@ Type_Character new_Type_Character_fromInt(int value)
     
 /* ========================================================================= */
 
-NATIVE1(Type_Character_equals_)
+/*NATIVE1(Type_Character_equals_)
     NYI;
-}
+}*/
 
 NATIVE0(Type_Character_hash)
     RETURN_FROM_NATIVE(new_Number_SmallInt(((Type_Character)self)->value));

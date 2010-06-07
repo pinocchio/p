@@ -42,10 +42,10 @@ void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure,
         assert1(annotation, "No reflection annotation found");
         assert1(annotation->size == 1, "Invalid annotation format");
         method->cache =
-            (Object)lookup_native(annotation->arguments[0],
+            (native)lookup_native(annotation->arguments[0],
                                   (Object)SMB_Reflection_Reflection);
     }
-    if (method->cache == (Object)-1) {
+    if (method->cache == (native)-1) {
         return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
     method->cache(self, closure->host, argc);

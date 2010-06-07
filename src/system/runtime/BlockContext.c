@@ -137,10 +137,23 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
     self->locals[local_id] = value;
 }
 
+NATIVE(Runtime_BlockContext_errorHandler)
+    RETURN_FROM_NATIVE(tget(Error_Handler));
+}
+
+NATIVE1(Runtime_BlockContext_errorHandler_)
+    tset(Error_Handler, NATIVE_ARG(1));
+    RETURN_FROM_NATIVE(self);
+}
+
 /* ========================================================================= */
 
 void pre_init_Runtime_BlockContext() { }
 void post_init_Runtime_BlockContext()
 {
     unused_contexts = new_Collection_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
+    
+    Collection_Dictionary natives = add_plugin(L"Runtime.BlockClosure");
+    store_native(natives, SMB_errorHandler, NM_Runtime_BlockContext_errorHandler);
+    store_native(natives, SMB_errorHandler_, NM_Runtime_BlockContext_errorHandler_);
 }

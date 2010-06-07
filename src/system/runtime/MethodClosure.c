@@ -17,7 +17,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host
 /* ========================================================================= */
 
 #define INVOKE_IF(name) if(method_class == name##_Class) {\
-        return name##_invoke(closure, method, self, argc);\
+        return name##_invoke(closure, (name)method, self, argc);\
     }
 
 void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
