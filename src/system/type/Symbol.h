@@ -7,10 +7,10 @@
 
 extern Dictionary Symbol_Table;
 
-struct Symbol_t { 
-    SmallInt hash;
-    uns_int       size;
-    wchar_t       value[];
+struct Symbol_t {
+	SmallInt hash;
+	uns_int size;
+	wchar_t value[];
 };
 
 CREATE_INITIALIZERS(Symbol)

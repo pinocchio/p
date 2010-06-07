@@ -26,7 +26,7 @@ extern AST_NativeMethod new_AST_NativeMethod_with(Array params,
 /* ========================================================================= */
 
 #define NATIVE(name)\
-static void NM_##name(Object self, Type_Class class, uns_int argc) {
+static void NM_##name(Object self, Class class, uns_int argc) {
 #define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);

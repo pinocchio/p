@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Type_Class host) 
+Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Class host) 
 {
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
@@ -26,7 +26,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
     AST_Method method       = closure->code;
-    Type_Class method_class = HEADER(method);
+    Class method_class = HEADER(method);
     
     INVOKE_IF(AST_NativeMethod)
     INVOKE_IF(AST_ReflectionMethod)

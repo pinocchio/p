@@ -43,7 +43,7 @@ static Type_Object load_plugin(Object class, const char * file_path)
         return (Type_Object)Nil;
     }
     
-    Type_Object plugin = (Type_Object)instantiate((Type_Class)class);
+    Type_Object plugin = (Type_Object)instantiate((Class)class);
     // TODO
     //plugin->ivals[3] = handle
     
@@ -79,6 +79,6 @@ void init_plugin()
     Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_load_,  NM_Plugin_load_);
     store_native(natives, SMB_unload, NM_Plugin_unload);
-    ((Type_Class)Plugin_Plugin_Class)->cvars[0] = (Object)_NATIVES_;
+    ((Class)Plugin_Plugin_Class)->cvars[0] = (Object)_NATIVES_;
 }
 

@@ -12,7 +12,7 @@ refresh();
 }
 
 #line 3 "Curses >> endwin"
-NATIVE(NCurses_refresh)
+NATIVE(NCurses_endwin)
     ASSERT_ARG_SIZE(0);
 endwin();
     RETURN_FROM_NATIVE(self);
@@ -50,7 +50,7 @@ noecho();
 
 PLUGIN()
     EXPORT(new_Symbol_cached(L"refresh"), NCurses_refresh);
-    EXPORT(new_Symbol_cached(L"refresh"), NCurses_refresh);
+    EXPORT(new_Symbol_cached(L"endwin"), NCurses_endwin);
     EXPORT(new_Symbol_cached(L"initscr"), NCurses_initscr);
     EXPORT(new_Symbol_cached(L"raw"), NCurses_raw);
     EXPORT(new_Symbol_cached(L"getch"), NCurses_getch);

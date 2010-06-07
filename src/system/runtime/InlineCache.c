@@ -7,7 +7,7 @@
 
 Array new_Runtime_InlineCache()
 {
-    return (Array)instantiate_sized((Type_Class)Runtime_InlineCache_Class,
+    return (Array)instantiate_sized((Class)Runtime_InlineCache_Class,
                                          DEFAULT_INLINECACHE_SIZE << 1);
 }
 

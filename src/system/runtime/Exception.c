@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <lib/lib.h>
 
-void fail(const Type_Class exception_class, uns_int argc, ...)
+void fail(const Class exception_class, uns_int argc, ...)
 {
     Type_Object error = (Type_Object)instantiate(exception_class);
     error->ivals[0] = (Object)current_env();

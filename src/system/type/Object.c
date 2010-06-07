@@ -22,7 +22,7 @@ NATIVE0(Type_Object_hash)
 
 NATIVE0(Type_Object_basicNew)
     assert_class(self);
-    Object result = instantiate((Type_Class)self);
+    Object result = instantiate((Class)self);
     RETURN_FROM_NATIVE(result);
 }
 
@@ -81,7 +81,7 @@ NATIVE1(Array_basicNew_)
     Object w_size = NATIVE_ARG(0);
     int size      = unwrap_int(w_size);
     assert0(size >= 0);
-    Object result = instantiate_sized((Type_Class)self, (uns_int)size);
+    Object result = instantiate_sized((Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
 }
 
@@ -150,14 +150,14 @@ NATIVE2(Type_Object_perform_withArguments_)
 
     zapn_EXP(4);    
 
-    Type_Class_direct_dispatch_withArguments(self, HEADER(self),
+    Class_direct_dispatch_withArguments(self, HEADER(self),
                                              w_selector, (Array)w_args);
 }
 
 NATIVE1(Type_Object_perform_)
     Object w_selector = NATIVE_ARG(0);
     zapn_EXP(3);
-    Type_Class_direct_dispatch(self, HEADER(self), w_selector, 0);
+    Class_direct_dispatch(self, HEADER(self), w_selector, 0);
 }
 
 

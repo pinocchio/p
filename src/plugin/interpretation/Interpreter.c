@@ -44,7 +44,7 @@ static CNT(fix_lookup_result)
 
 NATIVE2(Interpreter_lookupSelector_in_)
 	Object selector   = NATIVE_ARG(0);
-	Type_Class target = (Type_Class)NATIVE_ARG(1);
+	Class target = (Class)NATIVE_ARG(1);
 	push_CNT(fix_lookup_result);
     push_CNT(Class_lookup_loop);
     Class_lookup(target, selector);

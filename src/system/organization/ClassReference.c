@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Organization_ClassReference new_Organization_ClassReference(Type_Class class)
+Organization_ClassReference new_Organization_ClassReference(Class class)
 {
     
     NEW_OBJECT(Organization_ClassReference);

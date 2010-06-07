@@ -82,7 +82,7 @@ bool isInstance(Object object, Object class)
 {
     // TODO check for MetaClass stuff
     assert_class(class);
-    Type_Class type = HEADER(object);
+    Class type = HEADER(object);
     while ((Object)type != Nil) {
         if ((Object)type == class) {
             return 1;
@@ -153,21 +153,21 @@ Object Eval(Object code)
 Object Eval_Send0(Object self, Symbol symbol)
 {
     start_eval();
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
+    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
     return finish_eval();
 }
 
 Object Eval_Send1(Object self, Symbol symbol, Object arg)
 {
     start_eval();
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
+    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
     return finish_eval();
 }
 
 Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2)
 {
     start_eval();
-    Type_Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
+    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
     return finish_eval();
 }
 
@@ -184,7 +184,7 @@ Object EvalThreaded(Array code)
 
 jmp_buf Assert_Fail;
 
-void store_method(Type_Class class, Symbol symbol, 
+void store_method(Class class, Symbol symbol, 
                   Runtime_MethodClosure method)
 {
     method->selector    = (Object)symbol;
@@ -199,21 +199,21 @@ static void bootstrap()
 {
     Nil = (Object) NEW_t(Type_Nil);
 
-    Metaclass                   = NEW_t(Type_Class);
-    Type_Class Metaclass_mclass = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    HEADER(Metaclass)           = Metaclass_mclass;
-    Metaclass_mclass->name      = (String)Metaclass;
+    metaclass                   = NEW_t(Class);
+    Class Metaclass_mclass = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
+    HEADER(metaclass)           = Metaclass_mclass;
+    Metaclass_mclass->name      = (String)metaclass;
 
-    Behavior                    = new_Bootstrapping_Class();
-    Class                       = new_Bootstrapping_Class();
+    behavior                    = new_Bootstrapping_Class();
+    class                       = new_Bootstrapping_Class();
     Type_Object_Class           = new_Bootstrapping_Class();
     Array_Class      = new_Bootstrapping_Class();
     DictBucket_Class = new_Bootstrapping_Class();
     Dictionary_Class = new_Bootstrapping_Class();
 
-    DIRECT_INIT_CLASS(Metaclass);
-    DIRECT_INIT_CLASS(Behavior);
-    DIRECT_INIT_CLASS(Class);
+    DIRECT_INIT_CLASS(metaclass);
+    DIRECT_INIT_CLASS(behavior);
+    DIRECT_INIT_CLASS(class);
     INIT_CLASS(Type_Object);
     INIT_CLASS(Array);
     INIT_CLASS(DictBucket);

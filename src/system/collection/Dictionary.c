@@ -46,7 +46,7 @@ void push_hash(Object key)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
-        return Type_Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
+        return Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
     }
     push_EXP(hash);
 }
@@ -250,7 +250,7 @@ static CNT(dictionary_check_absent)
     Object result = pop_EXP();
     if (result == NULL) {
         Object block = pop_EXP();
-        Type_Class_direct_dispatch(block, HEADER(block), (Object)SMB_value, 0); 
+        Class_direct_dispatch(block, HEADER(block), (Object)SMB_value, 0); 
         return;
     }
     poke_EXP(0, result);

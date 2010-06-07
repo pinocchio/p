@@ -11,7 +11,7 @@ struct Organization_ClassReference_t {
     Object class;
 };
 
-extern Organization_ClassReference new_Organization_ClassReference(Type_Class class);
+extern Organization_ClassReference new_Organization_ClassReference(Class class);
 extern Organization_ClassReference new_Organization_ClassReference_empty();
 
 

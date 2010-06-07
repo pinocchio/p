@@ -1,4 +1,4 @@
-Object instantiate_Array(Type_Class class, Array ivars, uns_int extra)
+Object instantiate_Array(Class class, Array ivars, uns_int extra)
 {
     uns_int base = ivars->size;
     Array result = NEW_ARRAYED(struct Array_t, Object[base+extra]);
@@ -14,25 +14,25 @@ Object instantiate_Array(Type_Class class, Array ivars, uns_int extra)
     }
 
     HEADER(result) = class;
-    assert0(HEADER(result) != (Type_Class)Nil);
+    assert0(HEADER(result) != (Class)Nil);
     return (Object)result;
 }
 
-Object instantiate_Bytes(Type_Class class, Array ivars, uns_int extra)
+Object instantiate_Bytes(Class class, Array ivars, uns_int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
     return NULL;
 }
 
-Object instantiate_Words(Type_Class class, Array ivars, uns_int extra)
+Object instantiate_Words(Class class, Array ivars, uns_int extra)
 {
     Symbol result = NEW_ARRAYED(struct Symbol_t, wchar_t[extra]);
     HEADER(result) = class;
-    assert0(HEADER(result) != (Type_Class)Nil);
+    assert0(HEADER(result) != (Class)Nil);
     return (Object)result;
 }
 
-Object basic_instantiate_Object(Type_Class class, uns_int size)
+Object basic_instantiate_Object(Class class, uns_int size)
 {
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     uns_int i;
@@ -40,11 +40,11 @@ Object basic_instantiate_Object(Type_Class class, uns_int size)
         result->ivals[i] = Nil;
     }
     HEADER(result) = class;
-    assert0(HEADER(result) != (Type_Class)Nil);
+    assert0(HEADER(result) != (Class)Nil);
     return (Object)result;
 }
 
-static Object instantiate_Object(Type_Class class, Array ivars)
+static Object instantiate_Object(Class class, Array ivars)
 {
     uns_int size = ivars->size;
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
@@ -53,7 +53,7 @@ static Object instantiate_Object(Type_Class class, Array ivars)
         result->ivals[i] = Nil;
     }
     HEADER(result) = class;
-    assert0(HEADER(result) != (Type_Class)Nil);
+    assert0(HEADER(result) != (Class)Nil);
     return (Object)result;
 }
 
@@ -72,7 +72,7 @@ static Object instantiate_Object(Type_Class class, Array ivars)
 /* ========================================================================= */
 
 
-Object instantiate(Type_Class class)
+Object instantiate(Class class)
 {
     Object tag = class->layout;
 
@@ -84,7 +84,7 @@ Object instantiate(Type_Class class)
     return NULL;
 }
 
-Object instantiate_sized(Type_Class class, uns_int size)
+Object instantiate_sized(Class class, uns_int size)
 {
     Object tag = class->layout;
 

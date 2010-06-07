@@ -42,7 +42,7 @@ void initialize_Thread()
 
 void extend_ISS(Object self)
 {
-    Type_Object link = (Type_Object)instantiate((Type_Class)Collection_Link_Class);
+    Type_Object link = (Type_Object)instantiate((Class)Collection_Link_Class);
     link->ivals[0]   = self;
     link->ivals[1]   = (Object)tget(_ISS_);
     tset(_ISS_, link);

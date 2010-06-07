@@ -76,7 +76,7 @@ NATIVE1(String_concat_)
     Object w_arg = NATIVE_ARG(0);
     push_CNT(String_concat_);
     RETURN_FROM_NATIVE(self); 
-    Type_Class_direct_dispatch(w_arg, HEADER(w_arg), (Object)SMB_asString, 0);
+    Class_direct_dispatch(w_arg, HEADER(w_arg), (Object)SMB_asString, 0);
 }
 
 NATIVE0(String_asSymbol)

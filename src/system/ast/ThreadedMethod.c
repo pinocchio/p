@@ -84,7 +84,7 @@ void t_send_0(int pc)
 {
     inc_pc(pc);
     Object self = peek_EXP(0);
-    Type_Class_dispatch(self, HEADER(self), 0);
+    Class_dispatch(self, HEADER(self), 0);
 }
 
 void t_push_next(int pc)

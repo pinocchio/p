@@ -45,11 +45,11 @@ void print_Class(Object obj)
         fwprintf(stderr, L"Nil\n");
         return;
     }
-    Type_Class class = HEADER(obj);
+    Class class = HEADER(obj);
     assert0(class != NULL);
     assert0((Object)class != Nil);
-    if (HEADER(class) == Metaclass) {
-        fwprintf(stderr, L"Class class: %ls\n", ((Type_Class)obj)->name->value);
+    if (HEADER(class) == metaclass) {
+        fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
         return;
     }
     fwprintf(stderr, L"%p Class: %p %ls\n", obj, class, class->name->value);
@@ -223,10 +223,10 @@ void shallow_inspect(Object o)
         fwprintf(stderr, L"false\n");
         return;
     }
-    Type_Class cls = HEADER(o);
+    Class cls = HEADER(o);
 
-    if (HEADER(cls) == Metaclass) {
-        fwprintf(stderr, L"%ls", ((Type_Class)o)->name->value);
+    if (HEADER(cls) == metaclass) {
+        fwprintf(stderr, L"%ls", ((Class)o)->name->value);
         fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
     } else {
         fwprintf(stderr, L"Instance of %ls", cls->name->value);
@@ -333,12 +333,12 @@ void i_atx(Object o, uns_int argc, ...) {
 }
 
 
-Type_Class pclass(Object o)
+Class pclass(Object o)
 {
     return HEADER(o);
 }
 
 Object methods(Object o) {
-    Type_Class class = HEADER(o);
+    Class class = HEADER(o);
     return (Object)class->methods;
 }

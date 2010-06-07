@@ -35,7 +35,7 @@ typedef unsigned long int uns_int;
 #define POINTER_INC(p) (((Object) (p)) + 1) 
 #define POINTER_DEC(p) (((Object) (p)) - 1)
 
-#define HEADER(o) (*(Type_Class*)POINTER_DEC(o))
+#define HEADER(o) (*(Class*)POINTER_DEC(o))
 
 /* ========================================================================= */
 
@@ -56,14 +56,14 @@ typedef unsigned long int uns_int;
    (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
 
 #define EXPORT_CLASS(class)\
-extern Type_Class class##_Class;\
+extern Class class##_Class;\
 
 #define CREATE_INITIALIZERS(class) \
 extern void post_init##_##class(); \
 EXPORT_CLASS(class);
 
 #define DECLARE_CLASS(class)\
-Type_Class class##_Class;
+Class class##_Class;
 
 /* ========================================================================= */
 
@@ -78,14 +78,14 @@ Type_Class class##_Class;
         printf("Invalid type of arguments given.\n");\
         printf("Expected %ls but got %ls.", \
                 HEADER(expression)->name->value, \
-                ((Type_Class)(class))->name->value));
+                ((Class)(class))->name->value));
 
 #define ASSERT_INSTANCE_OF(expression, class)\
     assert(isInstance((expression), (Object)(class)), \
         printf("Invalid argument type.\n"); \
         printf("Expected %ls but got %ls.", \
                 HEADER(expression)->name->value, \
-                ((Type_Class)(class))->name->value));
+                ((Class)(class))->name->value));
     
 // TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
@@ -161,7 +161,7 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef void(*native)(Object self, Type_Class class, uns_int argc);
+typedef void(*native)(Object self, Class class, uns_int argc);
 
 /* ========================================================================= */
 
@@ -185,7 +185,7 @@ extern Object Eval_Send1(Object self, Symbol symbol, Object arg);
 extern Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2);
 extern void pinocchio_post_init();
 extern bool isInstance(Object object, Object class);
-extern void store_method(Type_Class class, Symbol symbol, Runtime_MethodClosure method);
+extern void store_method(Class class, Symbol symbol, Runtime_MethodClosure method);
 
 /* ========================================================================= */
 

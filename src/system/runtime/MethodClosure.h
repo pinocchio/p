@@ -9,12 +9,12 @@ struct Runtime_MethodClosure_t {
     AST_Method          code;
     AST_Info            info;
     Object              selector;
-    Type_Class          host;
+    Class          host;
 };
 
 extern void post_init_Runtime_MethodClosure();
 extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code,
-                                                       Type_Class host);
+                                                       Class host);
 
 /* ========================================================================= */
 

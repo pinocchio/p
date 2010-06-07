@@ -33,7 +33,7 @@ TYPE(UIntSlot);
 TYPE(Type_Boolean);
 TYPE(Character);
 TYPE(CharacterTable);
-TYPE(Type_Class);
+TYPE(Class);
 TYPE(Type_Object);
 TYPE(Symbol);
 TYPE(AST_ThreadedMethod);

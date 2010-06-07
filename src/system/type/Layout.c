@@ -27,7 +27,7 @@ Object file_layout;
 
 /* ========================================================================= */
 
-Array create_layout_with_vars(Type_Class layout, uns_int size)
+Array create_layout_with_vars(Class layout, uns_int size)
 {
     Array result = NEW_ARRAYED(struct Array_t, Object[size]);
     HEADER(result) = layout;
@@ -35,7 +35,7 @@ Array create_layout_with_vars(Type_Class layout, uns_int size)
     return result;
 }
 
-void change_slot_type(Type_Class class, Type_Class type, int counter, ...)
+void change_slot_type(Class class, Class type, int counter, ...)
 {
     Array layout = (Array)class->layout;
     va_list args;

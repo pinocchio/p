@@ -3,7 +3,7 @@
 
 #include <pinocchio.h>
 
-extern Type_Class Metaclass;
+extern Class metaclass;
 
 /* ========================================================================= */
 
@@ -25,21 +25,21 @@ typedef enum Type_Tag {
     FILETAG,
 } Type_Tag;
 
-struct Type_Class_t {
-    Object                layout;
-    Type_Class            super;
+struct Class_t {
+    Object     layout;
+    Class      super;
     Dictionary methods;
-    Symbol           name;
-    Object                package;
-    Object                cvars[];
+    Symbol     name;
+    Object     package;
+    Object     cvars[];
 };
 
-CREATE_INITIALIZERS(Type_Class)
+CREATE_INITIALIZERS(Class)
 
 /* ========================================================================= */
 
-extern Type_Class new_Class(Type_Class superclass, Object metaType);
-extern Type_Class new_Bootstrapping_Class();
+extern Class new_Class(Class superclass, Object metaType);
+extern Class new_Bootstrapping_Class();
 
 #define DIRECT_INIT_CLASS(cls)\
     cls->methods            = new_Dictionary();\
@@ -49,25 +49,25 @@ extern Type_Class new_Bootstrapping_Class();
 
 /* ========================================================================= */
 
-extern void Type_Class_dispatch(Object receiver, Type_Class class, uns_int argc);
-extern void Type_Class_direct_dispatch(Object receiver, Type_Class class,
+extern void Class_dispatch(Object receiver, Class class, uns_int argc);
+extern void Class_direct_dispatch(Object receiver, Class class,
                                        Object msg, uns_int argc, ...);
-extern void Type_Class_direct_dispatch_withArguments(Object receiver,
-                                                     Type_Class class,
+extern void Class_direct_dispatch_withArguments(Object receiver,
+                                                     Class class,
                                                      Object msg,
                                                      Array args);
 
-extern void Type_Class_set_superclass(Type_Class cls, Type_Class super);
+extern void Class_set_superclass(Class cls, Class super);
 
 extern void CNT_Class_super();
 extern void CNT_Class_lookup_loop();
-extern void Class_lookup(Type_Class class, Object msg);
+extern void Class_lookup(Class class, Object msg);
 
 /* ========================================================================= */
 
-extern Object instantiate(Type_Class class);
-extern Object instantiate_sized(Type_Class class, uns_int size);
-extern Object basic_instantiate_Object(Type_Class class, uns_int size);
+extern Object instantiate(Class class);
+extern Object instantiate_sized(Class class, uns_int size);
+extern Object basic_instantiate_Object(Class class, uns_int size);
 
 /* ========================================================================= */
 
@@ -75,8 +75,8 @@ extern void assert_class(Object class);
 
 /* ========================================================================= */
 
-extern Type_Class Behavior;
-extern Type_Class Class;
+extern Class behavior;
+extern Class class;
 
 /* ========================================================================= */
 

@@ -28,7 +28,7 @@ CNT(restore_return)
         return name##_eval((name)exp); \
     }
 
-void send_eval_rest(Object exp, Type_Class class)
+void send_eval_rest(Object exp, Class class)
 {
     EVAL_IF(AST_Assign)
     EVAL_IF(AST_Constant)
@@ -39,12 +39,12 @@ void send_eval_rest(Object exp, Type_Class class)
     EVAL_IF(UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
-    Type_Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, Nil);
+    Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, Nil);
 }
 
 CNT(send_Eval)
     Object exp = peek_EXP(0);
-    Type_Class class = HEADER(exp);
+    Class class = HEADER(exp);
 
     EVAL_IF(AST_Send)
     EVAL_IF(AST_Super)
@@ -60,7 +60,7 @@ CNT(send_Eval)
 void CNT_tail_send_Eval()
 {
     Object exp = peek_EXP(0);
-    Type_Class class = HEADER(exp);
+    Class class = HEADER(exp);
 
     poke_CNT(restore_return);
 

@@ -60,9 +60,9 @@ void post_init_Type_Layout();
 /* ========================================================================= */
 
 extern Object create_layout(uns_int size, Type_Tag tag, ...);
-extern Array create_layout_with_vars(Type_Class layout, uns_int size);
+extern Array create_layout_with_vars(Class layout, uns_int size);
 
-extern void change_slot_type(Type_Class class, Type_Class type, int counter, ...);
+extern void change_slot_type(Class class, Class type, int counter, ...);
 
 /* ========================================================================= */
 

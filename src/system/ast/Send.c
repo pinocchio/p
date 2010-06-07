@@ -36,7 +36,7 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
 static CNT(AST_Send_send)
     uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
-    Type_Class_dispatch(receiver, HEADER(receiver), argc);
+    Class_dispatch(receiver, HEADER(receiver), argc);
 }
 
 void CNT_store_argument()

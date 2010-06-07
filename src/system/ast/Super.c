@@ -34,7 +34,7 @@ CNT(AST_Super_send)
     uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
     
-    Type_Class_dispatch(receiver, (Type_Class)class, argc);
+    Class_dispatch(receiver, (Class)class, argc);
 }
 
 CNT(push_env_class)

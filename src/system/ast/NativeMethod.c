@@ -31,7 +31,7 @@ native lookup_native(Object primitive_name, Object module_name)
 {
     Object module = Dictionary_quick_lookup(_NATIVES_, module_name);
     if (module == NULL) { return (native)-1; }
-    if (HEADER(module) == (Type_Class)Plugin_Plugin_Class) {
+    if (HEADER(module) == (Class)Plugin_Plugin_Class) {
         module = ((Type_Object)module)->ivals[2]; 
     }
     Object primitive = Dictionary_quick_lookup((Dictionary)module, primitive_name);

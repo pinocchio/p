@@ -36,11 +36,11 @@ CNT(AST_Assign_assign)
     /* result of evaluating expression is result of assignment */
     poke_EXP(0, value);
 
-    Type_Class class = HEADER(var);
+    Class class = HEADER(var);
     
     ASSIGN_IF(AST_Variable)
     ASSIGN_IF(Slot)
     ASSIGN_IF(UIntSlot)
     
-    Type_Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, Nil, value);
+    Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, Nil, value);
 }

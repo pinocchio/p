@@ -8,9 +8,9 @@
 
 /* ========================================================================= */
 
-Type_Class Metaclass;
-Type_Class Class;
-Type_Class Behavior;
+Class metaclass;
+Class class;
+Class behavior;
 
 /* ========================================================================= */
 
@@ -18,43 +18,43 @@ Type_Class Behavior;
 
 /* ========================================================================= */
 
-Type_Class new_Bootstrapping_Class()
+Class new_Bootstrapping_Class()
 {
-    Type_Class mcls =
-        (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    Type_Class cls  = (Type_Class)basic_instantiate_Object(mcls, CLASS_SIZE);
+    Class metacls =
+        (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
+    Class cls  = (Class)basic_instantiate_Object(metacls, CLASS_SIZE);
     // Name of metaclass is its instance pointer.
-    mcls->name = (Symbol)cls;
+    metacls->name = (Symbol)cls;
     return cls;
 }
 
-Type_Class new_Class(Type_Class superclass, Object metatype)
+Class new_Class(Class superclass, Object metatype)
 {    
     ASSERT_TAG_LAYOUT(metatype, Object);
     uns_int meta_size = ((Array)metatype)->size;
     assert0(meta_size >= 4); // we need at least place for
                              // methods, super, layout and instance.
 
-    Type_Class metaclass    = (Type_Class)basic_instantiate_Object(Metaclass, METACLASS_SIZE);
-    metaclass->layout       = metatype;
-    Type_Class result       = (Type_Class)basic_instantiate_Object(metaclass, meta_size);
-    metaclass->name         = (Symbol)result;
+    Class metacls    = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
+    metacls->layout       = metatype;
+    Class result       = (Class)basic_instantiate_Object(metacls, meta_size);
+    metacls->name         = (Symbol)result;
 
     result->methods         = new_Dictionary();
-    metaclass->methods      = new_Dictionary();
-    Type_Class_set_superclass(result, superclass);
+    metacls->methods      = new_Dictionary();
+    Class_set_superclass(result, superclass);
 
     return result;
 }
 
-void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
+void Class_set_superclass(Class cls, Class superclass)
 {
-    Type_Class metaclass = HEADER(cls);
+    Class metaclass = HEADER(cls);
     cls->super           = superclass;
-    if (superclass != (Type_Class)Nil) {
+    if (superclass != (Class)Nil) {
         metaclass->super = HEADER(superclass);
     } else {
-        metaclass->super = Class;
+        metaclass->super = class;
     }
 }
 
@@ -62,14 +62,14 @@ void Type_Class_set_superclass(Type_Class cls, Type_Class superclass)
 
 void assert_class(Object class)
 {
-    assert0(HEADER(class) == Metaclass ||        /* if metaclass */
-            HEADER(HEADER(class)) == Metaclass); /* if class */
+    assert0(HEADER(class) == metaclass ||        /* if metaclass */
+            HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
 CNT(Class_super)
     Object class = peek_EXP(0);
     assert_class(class);
-    poke_EXP(0, ((Type_Class)class)->super);
+    poke_EXP(0, ((Class)class)->super);
 }
 
 
@@ -82,7 +82,7 @@ void Method_invoke(Object method, Object self, uns_int argc) {
     }
 }
 
-void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc)
+void does_not_understand(Object self, Class class, Object msg, uns_int argc)
 {
     if (msg == (Object)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
@@ -102,13 +102,13 @@ void does_not_understand(Object self, Type_Class class, Object msg, uns_int argc
 
     zapn_EXP(2);
 
-    Type_Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
+    Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
 }
 
 static CNT(Class_lookup_cache_invoke)
     Object method    = peek_EXP(0);
     uns_int argc     = (uns_int)peek_EXP(3);
-    Type_Class class = (Type_Class)peek_EXP(4);
+    Class class = (Class)peek_EXP(4);
     Object self      = peek_EXP(2);
     if (method == NULL) {
         Object msg  = peek_EXP(1);
@@ -128,7 +128,7 @@ static CNT(Class_lookup_invoke)
     uns_int argc  = (uns_int)peek_EXP(3);
     Object self   = peek_EXP(2);
     if (method == NULL) {
-        Type_Class class = (Type_Class)peek_EXP(4);
+        Class class = (Class)peek_EXP(4);
         Object msg       = peek_EXP(1);
         zapn_EXP(5);
         return does_not_understand(self, class, msg, argc);
@@ -137,10 +137,10 @@ static CNT(Class_lookup_invoke)
     Method_invoke(method, self, argc);
 }
 
-void Class_lookup(Type_Class class, Object msg)
+void Class_lookup(Class class, Object msg)
 {
     // TODO pass along the hash value
-    if (class == (Type_Class)Nil) {
+    if (class == (Class)Nil) {
         poke_EXP(0, NULL);
         zap_CNT();
         return;
@@ -160,14 +160,14 @@ void CNT_Class_lookup_loop()
         return;
     }
     zap_EXP();
-    Type_Class class = (Type_Class)peek_EXP(0);
+    Class class = (Class)peek_EXP(0);
     Object msg       = peek_EXP(1);
-    Type_Class next  = class->super;
+    Class next  = class->super;
     poke_EXP(0, next);
     return Class_lookup(next, msg);
 }
 
-static void Class_direct_dispatch(Object self, Type_Class class,
+static void Class_direct_dispatch_inline(Object self, Class class,
                                   Object msg, uns_int argc)
 {
     push_EXP(class);
@@ -186,7 +186,7 @@ CNT(restore_iss)
     poke_EXP(0, return_value);
 }
 
-void Type_Class_tower_dispatch(Object self, Object class,
+void Class_tower_dispatch(Object self, Object class,
                                Type_Object iss, Runtime_Message message)
 {
     tset(_ISS_, Nil);
@@ -195,7 +195,7 @@ void Type_Class_tower_dispatch(Object self, Object class,
     push_CNT(Class_lookup_invoke);
     Type_Object tower = (Type_Object)Nil;
     while (iss != (Type_Object)Nil) {
-        Type_Object newtower = (Type_Object)instantiate((Type_Class)Collection_Link_Class);
+        Type_Object newtower = (Type_Object)instantiate((Class)Collection_Link_Class);
         newtower->ivals[0] = iss->ivals[0];
         newtower->ivals[1] = (Object)tower;
         tower = newtower;
@@ -208,14 +208,14 @@ void Type_Class_tower_dispatch(Object self, Object class,
     push_EXP(class);
     push_EXP(tower->ivals[1]); // tower of interpreters
     self = tower->ivals[0];
-    Class_direct_dispatch(
+    Class_direct_dispatch_inline(
         self,
         HEADER(self),
         (Object)SMB_send_to_class_inInterpreterChain_,
         4);
 }
 
-void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
+void Class_direct_dispatch(Object self, Class class, Object msg,
                                 uns_int argc, ...)
 {
     va_list args;
@@ -232,18 +232,18 @@ void Type_Class_direct_dispatch(Object self, Type_Class class, Object msg,
         }
         va_end(args);
         push_CNT(Class_lookup_invoke);
-        Class_direct_dispatch(self, class, msg, argc);
+        Class_direct_dispatch_inline(self, class, msg, argc);
     } else {
         Runtime_Message message = new_Runtime_Message(msg, argc);
         for (idx = 0; idx < argc; idx++) {
             message->arguments[idx] = va_arg(args, Object);
         }
         va_end(args);
-        Type_Class_tower_dispatch(self, (Object)class, iss, message);
+        Class_tower_dispatch(self, (Object)class, iss, message);
     }
 }
 
-void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
+void Class_direct_dispatch_withArguments(Object self, Class class,
                                               Object msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -256,17 +256,17 @@ void Type_Class_direct_dispatch_withArguments(Object self, Type_Class class,
             push_EXP(args->values[idx]);
         }
         push_CNT(Class_lookup_invoke);
-        Class_direct_dispatch(self, class, msg, args->size);
+        Class_direct_dispatch_inline(self, class, msg, args->size);
     } else {
         Runtime_Message message = new_Runtime_Message(msg, args->size);
         for (idx = 0; idx < args->size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
-        Type_Class_tower_dispatch(self, (Object)class, iss, message);
+        Class_tower_dispatch(self, (Object)class, iss, message);
     }
 }
 
-void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
+void Class_dispatch(Object self, Class class, uns_int argc)
 {
     AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
     Array cache    = send->cache;
@@ -275,11 +275,11 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol clsname;
-    if (HEADER(class) != Metaclass) {
-        clsname = String_concat_(((Type_Class)class)->name,
+    if (HEADER(class) != metaclass) {
+        clsname = String_concat_(((Class)class)->name,
                                       new_String(L">>"));
     } else {
-        clsname = String_concat_(((Type_Class)self)->name,
+        clsname = String_concat_(((Class)self)->name,
                                       new_String(L" class>>"));
     }
     Symbol msgname = (Symbol)msg;
@@ -299,5 +299,5 @@ void Type_Class_dispatch(Object self, Type_Class class, uns_int argc)
     assert_class((Object)class);
     
     push_CNT(Class_lookup_cache_invoke);
-    return Class_direct_dispatch(self, class, msg, argc);
+    return Class_direct_dispatch_inline(self, class, msg, argc);
 }
