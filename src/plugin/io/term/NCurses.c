@@ -35,7 +35,7 @@ raw();
 #line 3 "Curses >> getch"
 NATIVE(NCurses_getch)
     ASSERT_ARG_SIZE(0);
-RETURN_FROM_NATIVE(new_Type_Character((wchar_t)getch()));
+RETURN_FROM_NATIVE(new_Character((wchar_t)getch()));
     RETURN_FROM_NATIVE(self);
 }
 

@@ -10,7 +10,7 @@ SOFILES   = $(filter-out %Helper.c,$(CFILES:%.c=%.so))
 LOFILES   = $(CFILES:%.c=%.lo)
 # ============================================================================
 CFLAGS  += -O3 -DASSERT_FAIL -c -I../ -Wall
-LDFLAGS += -lm -lgc 
+LDFLAGS += -lm -lgc -lncurses 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
     CFLAGS  += -fno-common -DPIC 
     LDFLAGS += -dynamiclib -undefined dynamic_lookup
