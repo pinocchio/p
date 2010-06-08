@@ -124,7 +124,7 @@ Optr atn(Optr o, const wchar_t * s)
             Slot v = (Slot)((Array)tag)->values[i];
             Symbol sym = (Symbol)v->name;
             if (wcsncmp(sym->value, s, sym->size)) { continue; }
-            return ((Type_Object)o)->ivals[i];
+            return ((Object)o)->ivals[i];
         }
         assert(NULL, fwprintf(stderr, L"Var not found: %ls\n", s););
     }
@@ -173,7 +173,7 @@ Optr at(Optr o, uns_int i)
     if (TAG_IS_LAYOUT(tag, Object)) {
         uns_int size = ((Array)tag)->size;
         assert0(i < size);
-        return ((Type_Object)o)->ivals[i];
+        return ((Object)o)->ivals[i];
     }
     if (TAG_IS_LAYOUT(tag, Array)) {
         uns_int size = ((Array)tag)->size;
@@ -281,7 +281,7 @@ void inspect(Optr o)
         for (i = 0; i < size; i++) {
             Slot v = (Slot)((Array)tag)->values[i];
             fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
-            shallow_inspect(((Type_Object)o)->ivals[i]);
+            shallow_inspect(((Object)o)->ivals[i]);
         }
         return;
     }

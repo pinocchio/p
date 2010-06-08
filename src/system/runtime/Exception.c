@@ -5,7 +5,7 @@
 
 void fail(const Class exception_class, uns_int argc, ...)
 {
-    Type_Object error = (Type_Object)instantiate(exception_class);
+    Object error = (Object)instantiate(exception_class);
     error->ivals[0] = (Optr)current_env();
 
     va_list args;

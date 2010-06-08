@@ -35,15 +35,15 @@ void store_native(Dictionary dict, Symbol selector, native code)
 
 typedef Optr (*ftype)();
 
-static Type_Object load_plugin(Optr class, const char * file_path)
+static Object load_plugin(Optr class, const char * file_path)
 {
     void * handle       = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
-        return (Type_Object)nil;
+        return (Object)nil;
     }
     
-    Type_Object plugin = (Type_Object)instantiate((Class)class);
+    Object plugin = (Object)instantiate((Class)class);
     // TODO
     //plugin->ivals[3] = handle
     
@@ -62,7 +62,7 @@ NATIVE1(Plugin_load_)
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
      
     char * path = unicode_to_ascii(((Symbol)w_path)->value);
-    Type_Object plugin = load_plugin(self, path);
+    Object plugin = load_plugin(self, path);
     RETURN_FROM_NATIVE(plugin);
 }
 

@@ -6,42 +6,42 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(Type_Object);
+DECLARE_CLASS(Object);
 
 /* ========================================================================= */
 
-SmallInt Type_Object_hash(Type_Object object)
+SmallInt Object_hash(Object object)
 {
     unsigned int hash = (unsigned int)(uns_int)object;
     return new_SmallInt(hash>>3);
 }
 
-NATIVE0(Type_Object_hash)
-    RETURN_FROM_NATIVE(Type_Object_hash((Type_Object)self));
+NATIVE0(Object_hash)
+    RETURN_FROM_NATIVE(Object_hash((Object)self));
 }
 
-NATIVE0(Type_Object_basicNew)
+NATIVE0(Object_basicNew)
     assert_class(self);
     Optr result = instantiate((Class)self);
     RETURN_FROM_NATIVE(result);
 }
 
-NATIVE0(Type_Object_class)
+NATIVE0(Object_class)
     RETURN_FROM_NATIVE(HEADER(self))
 }
 
-NATIVE1(Type_Object_equals)
+NATIVE1(Object_equals)
     Optr arg = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(get_bool(self == arg));
 }
 
-Optr raw_Type_Object_at(Type_Object o, Optr tag, int index)
+Optr raw_Object_at(Object o, Optr tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->ivals[index];
 }
 
-void raw_Type_Object_at_put(Type_Object o, Optr tag,
+void raw_Object_at_put(Object o, Optr tag,
                             int index, Optr value)
 {
     ASSERT_TAG_SIZE(tag, index); o->ivals[index] = value;
@@ -51,7 +51,7 @@ Optr Object_instVarAt_(Optr self, int index)
 {
     Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
-        return raw_Type_Object_at((Type_Object)self, tag, index);
+        return raw_Object_at((Object)self, tag, index);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         return raw_Array_instAt((Array)self, tag, index);
     } else if (tag == nil) {
@@ -66,7 +66,7 @@ void Object_instVarAt_put_(Optr self, int index, Optr value)
 {
     Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
-        raw_Type_Object_at_put((Type_Object)self, tag, index, value);
+        raw_Object_at_put((Object)self, tag, index, value);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         raw_Array_instAt_put((Array)self, tag, index, value);
     } else if (tag == nil) {
@@ -85,7 +85,7 @@ NATIVE1(Array_basicNew_)
     RETURN_FROM_NATIVE(result);
 }
 
-NATIVE0(Type_Object_size)
+NATIVE0(Object_size)
     Optr tag = GETTAG(self);
     uns_int size;
     if (TAG_IS_LAYOUT(tag, Array)) {
@@ -141,7 +141,7 @@ NATIVE2(Array_at_put_)
     RETURN_FROM_NATIVE(w_arg);
 }
 
-NATIVE2(Type_Object_perform_withArguments_)
+NATIVE2(Object_perform_withArguments_)
     Optr w_selector   = NATIVE_ARG(0);
     Optr w_args       = NATIVE_ARG(1);
 
@@ -154,7 +154,7 @@ NATIVE2(Type_Object_perform_withArguments_)
                                              w_selector, (Array)w_args);
 }
 
-NATIVE1(Type_Object_perform_)
+NATIVE1(Object_perform_)
     Optr w_selector = NATIVE_ARG(0);
     zapn_EXP(3);
     Class_direct_dispatch(self, HEADER(self), w_selector, 0);
@@ -163,18 +163,18 @@ NATIVE1(Type_Object_perform_)
 
 /* ========================================================================= */
 
-void post_init_Type_Object()
+void post_init_Object()
 {
     Dictionary natives = add_plugin(L"Type.Object");
-    store_native(natives, SMB_size,                   NM_Type_Object_size);
+    store_native(natives, SMB_size,                   NM_Object_size);
     store_native(natives, SMB_at_,                    NM_Array_at_);
     store_native(natives, SMB_at_put_,                NM_Array_at_put_);
-    store_native(natives, SMB_basicNew,               NM_Type_Object_basicNew);
+    store_native(natives, SMB_basicNew,               NM_Object_basicNew);
     store_native(natives, SMB_basicNew_,              NM_Array_basicNew_);
-    store_native(natives, SMB__pequal,                NM_Type_Object_equals);
-    store_native(natives, SMB__equal,                 NM_Type_Object_equals);
-    store_native(natives, SMB_class,                  NM_Type_Object_class);
-    store_native(natives, SMB_hash,                   NM_Type_Object_hash);
-    store_native(natives, SMB_perform_withArguments_, NM_Type_Object_perform_withArguments_);
-    store_native(natives, SMB_perform_,               NM_Type_Object_perform_);
+    store_native(natives, SMB__pequal,                NM_Object_equals);
+    store_native(natives, SMB__equal,                 NM_Object_equals);
+    store_native(natives, SMB_class,                  NM_Object_class);
+    store_native(natives, SMB_hash,                   NM_Object_hash);
+    store_native(natives, SMB_perform_withArguments_, NM_Object_perform_withArguments_);
+    store_native(natives, SMB_perform_,               NM_Object_perform_);
 }

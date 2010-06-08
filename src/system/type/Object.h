@@ -10,18 +10,18 @@
 
 /* ========================================================================= */
 
-struct Type_Object_t {
+struct Object_t {
     Optr ivals[0]; 
 };
 
-CREATE_INITIALIZERS(Type_Object)
+CREATE_INITIALIZERS(Object)
 
 /* ========================================================================= */
 
 extern Optr Object_instVarAt_(Optr self, int index);
 extern void Object_instVarAt_put_(Optr self, int index, Optr value);
 
-extern SmallInt Type_Object_hash(Type_Object object);
+extern SmallInt Object_hash(Object object);
 /* ========================================================================= */
 
 #endif // TYPE_OBJECT_H

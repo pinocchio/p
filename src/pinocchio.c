@@ -55,7 +55,7 @@ CNT(exit_eval)
 CNT(exit_error)
     Optr assertion = pop_EXP();
     Runtime_BlockContext env =
-        (Runtime_BlockContext)((Type_Object)assertion)->ivals[0];
+        (Runtime_BlockContext)((Object)assertion)->ivals[0];
     
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
@@ -206,7 +206,7 @@ static void bootstrap()
 
     behavior                    = new_Bootstrapping_Class();
     class                       = new_Bootstrapping_Class();
-    Type_Object_Class           = new_Bootstrapping_Class();
+    Object_Class           = new_Bootstrapping_Class();
     Array_Class      = new_Bootstrapping_Class();
     DictBucket_Class = new_Bootstrapping_Class();
     Dictionary_Class = new_Bootstrapping_Class();
@@ -214,7 +214,7 @@ static void bootstrap()
     DIRECT_INIT_CLASS(metaclass);
     DIRECT_INIT_CLASS(behavior);
     DIRECT_INIT_CLASS(class);
-    INIT_CLASS(Type_Object);
+    INIT_CLASS(Object);
     INIT_CLASS(Array);
     INIT_CLASS(DictBucket);
     INIT_CLASS(Dictionary);

@@ -32,7 +32,7 @@ native lookup_native(Optr primitive_name, Optr module_name)
     Optr module = Dictionary_quick_lookup(_NATIVES_, module_name);
     if (module == NULL) { return (native)-1; }
     if (HEADER(module) == (Class)Plugin_Plugin_Class) {
-        module = ((Type_Object)module)->ivals[2]; 
+        module = ((Object)module)->ivals[2]; 
     }
     Optr primitive = Dictionary_quick_lookup((Dictionary)module, primitive_name);
     if (primitive == NULL) { return (native)-1; }

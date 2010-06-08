@@ -34,7 +34,7 @@ Optr instantiate_Words(Class class, Array ivars, uns_int extra)
 
 Optr basic_instantiate_Object(Class class, uns_int size)
 {
-    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Optr[size]);
+    Object result = NEW_ARRAYED(struct Object_t, Optr[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = nil;
@@ -47,7 +47,7 @@ Optr basic_instantiate_Object(Class class, uns_int size)
 static Optr instantiate_Object(Class class, Array ivars)
 {
     uns_int size = ivars->size;
-    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Optr[size]);
+    Object result = NEW_ARRAYED(struct Object_t, Optr[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = nil;

@@ -187,19 +187,19 @@ CNT(restore_iss)
 }
 
 void Class_tower_dispatch(Optr self, Optr class,
-                               Type_Object iss, Runtime_Message message)
+                               Object iss, Runtime_Message message)
 {
     tset(_ISS_, nil);
     push_EXP(iss);
     push_CNT(restore_iss);
     push_CNT(Class_lookup_invoke);
-    Type_Object tower = (Type_Object)nil;
-    while (iss != (Type_Object)nil) {
-        Type_Object newtower = (Type_Object)instantiate((Class)Collection_Link_Class);
+    Object tower = (Object)nil;
+    while (iss != (Object)nil) {
+        Object newtower = (Object)instantiate((Class)Collection_Link_Class);
         newtower->ivals[0] = iss->ivals[0];
         newtower->ivals[1] = (Optr)tower;
         tower = newtower;
-        iss = (Type_Object)iss->ivals[1];
+        iss = (Object)iss->ivals[1];
     }
     push_EXP(nil);
     push_EXP(tower->ivals[0]); // self, bottom interpreter
@@ -223,7 +223,7 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
     int idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */
     /* TODO optimize by claim + poke instead of push */
-    Type_Object iss = (Type_Object)tget(_ISS_);
+    Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
         push_EXP(nil);
         push_EXP(self);
@@ -248,7 +248,7 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     int idx;
-    Type_Object iss = (Type_Object)tget(_ISS_);
+    Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
         push_EXP(nil);
         push_EXP(self);

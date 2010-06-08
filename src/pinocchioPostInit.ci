@@ -1,5 +1,5 @@
 post_init_SmallInt();
-post_init_Type_Object();
+post_init_Object();
 post_init_Array();
 post_init_CharacterTable();
 post_init_Character();
