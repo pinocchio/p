@@ -8,14 +8,14 @@
 /* ========================================================================= */
 
 struct ReflectionMethod_t {
-    uns_int          size;
-    Info         info;
-    Array params;
-    Array locals;
-    Optr           package;
-    Array annotations;
-    native           cache;
-    Optr           body[];
+    uns_int size;
+    Info    info;
+    Array   params;
+    Array   locals;
+    Optr    package;
+    Array   annotations;
+    native  cache;
+    Optr    body[];
 };
 
 extern ReflectionMethod new_ReflectionMethod_with(Array params,

@@ -59,6 +59,9 @@ void t_jump_1(long pc)
 PUSH(nil, nil_Const)
 PUSH(0, new_SmallInt(0))
 PUSH(1, new_SmallInt(1))
+PUSH(true, true_Const)
+PUSH(false, false_Const)
+
 
 void t_push_self(long pc)
 {
@@ -80,6 +83,14 @@ void t_push_variable(int pc)
     Optr object = Variable_eval(variable);
     set_pc(pc + 2);
     push_EXP(object);
+}
+
+void t_push_closure(int pc)
+{
+	Block block  = (Block)threaded_code()->values[pc + 1];
+	Runtime_BlockClosure closure = new_Runtime_BlockClosure(block, current_env());
+	inc_pc(pc);
+	push_EXP(closure);
 }
 
 /* ========================================================================= */
@@ -109,6 +120,14 @@ void t_return_next(long pc)
 {   
     t_push_next(pc);
     t_return(pc);
+}
+
+void t_return_self(int pc)
+{
+    inc_pc(pc);
+    claim_EXP(1);
+    Self_eval();
+	t_return();
 }
 
 /* ========================================================================= */
@@ -163,7 +182,7 @@ void t_send_n(long pc)
 
 void CNT_eval_threaded()
 {
-    int pc                = (int)(uns_int)peekn_CNT(1);
+    int pc     = (int)(uns_int)peekn_CNT(1);
     Array code = (Array)peekn_CNT(2);
     ((threaded)code->values[pc])(pc);
 }

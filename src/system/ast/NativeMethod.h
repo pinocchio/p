@@ -8,14 +8,14 @@
 /* ========================================================================= */
 
 struct NativeMethod_t {
-    uns_int          size;
-    Info         info;
-    Array params;
-    Array locals;
-    Optr           package;
-    Array annotations;
-    native           code;
-    Optr           body[];
+    uns_int size;
+    Info    info;
+	Array   params;
+    Array   locals;
+    Optr    package;
+    Array   annotations;
+    native  code;
+    Optr    body[];
 };
 
 extern NativeMethod new_NativeMethod_with(Array params,
