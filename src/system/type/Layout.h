@@ -43,8 +43,8 @@ extern Optr file_layout;
     (((Array)tag)->values[index])
 
 #define ASSERT_TAG_SIZE(tag, size)\
-    assert(0 <= size, printf("Invalid tag size: %i\n", (int)size));\
-    assert(TAG_SIZE(tag) > size, printf("Invalid tag size was %i but expected > %i\n", (int)TAG_SIZE(tag), (int)size));
+    assert(0 <= size, printf("Invalid tag size: %li\n", (long)size));\
+    assert(TAG_SIZE(tag) > size, printf("Invalid tag size was %li but expected > %li\n", (long)TAG_SIZE(tag), (long)size));
 
 #define GETTAG(o)\
     HEADER(o)->layout
@@ -62,7 +62,7 @@ void post_init_Type_Layout();
 extern Optr create_layout(uns_int size, Type_Tag tag, ...);
 extern Array create_layout_with_vars(Class layout, uns_int size);
 
-extern void change_slot_type(Class class, Class type, int counter, ...);
+extern void change_slot_type(Class class, Class type, long counter, ...);
 
 /* ========================================================================= */
 

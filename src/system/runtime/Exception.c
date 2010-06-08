@@ -10,7 +10,7 @@ void fail(const Class exception_class, uns_int argc, ...)
 
     va_list args;
     va_start(args, argc);
-    int idx;
+    long idx;
     for (idx = 1; idx <= argc; idx++) {
         error->ivals[idx] = va_arg(args, Optr);
     }

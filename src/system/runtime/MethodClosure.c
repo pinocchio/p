@@ -41,7 +41,7 @@ NATIVE1(Runtime_MethodClosure_valueWithArguments_)
     Array args = (Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
     
-    int pos = args->size;
+    long pos = args->size;
     while(pos > 0) {
         pos--;
         push_EXP(args->values[pos]);

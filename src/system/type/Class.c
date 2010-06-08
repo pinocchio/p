@@ -220,7 +220,7 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
 {
     va_list args;
     va_start(args, argc);
-    int idx;
+    long idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */
     /* TODO optimize by claim + poke instead of push */
     Object iss = (Object)tget(_ISS_);
@@ -247,7 +247,7 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
                                               Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
-    int idx;
+    long idx;
     Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
         push_EXP(nil);

@@ -16,7 +16,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
-    int i;
+    long i;
     for (i = 0; i < annotations->size; i++) {
         assert1(annotations->values[i], "Empty annotation found..?");
     }

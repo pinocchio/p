@@ -201,7 +201,7 @@ NATIVE1(Runtime_BlockClosure_valueWithArguments_)
     Array args = (Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
-    int pos = 0;
+    long pos = 0;
     while(pos < args->size) {
         push_EXP(args->values[pos]);
         pos++;

@@ -29,7 +29,7 @@ Runtime_MethodClosure fName() {\
     method->info->sourceFile = new_String_from_charp(__FILE__);\
     method->info->name       = new_String_from_charp(__FUNCTION__);\
     method->info->line       = new_SmallInt(__LINE__);\
-    unsigned int _st_count   = 0;
+    uns_int _st_count   = 0;
 
 #define ADD_STATEMENT(value)\
     body->body[_st_count++] = (Optr)(value);

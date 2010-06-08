@@ -58,7 +58,7 @@ String String_concat_(String str1, String str2)
     return new_String(concatenated);
 }
 
-int Words_compare(Symbol s1, Symbol s2)
+long Words_compare(Symbol s1, Symbol s2)
 {
     if (s1->size != s2->size) {
         return 0;

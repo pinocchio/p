@@ -69,7 +69,7 @@ NATIVE0(Float_hash)
 String Float_asString(float self, uns_int base)
 {
     char *chrs;
-    int size = asprintf(&chrs, "%f", self);
+    long size = asprintf(&chrs, "%f", self);
     assert1(size != -1, "Unable to convert float to string");
     String result = new_String(ascii_to_unicode(chrs));
     free(chrs);

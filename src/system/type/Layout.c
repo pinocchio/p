@@ -35,13 +35,13 @@ Array create_layout_with_vars(Class layout, uns_int size)
     return result;
 }
 
-void change_slot_type(Class class, Class type, int counter, ...)
+void change_slot_type(Class class, Class type, long counter, ...)
 {
     Array layout = (Array)class->layout;
     va_list args;
     va_start(args, counter);
     while (counter--) {
-        int idx = va_arg(args, int);
+        long idx = va_arg(args, long);
         HEADER(layout->values[idx]) = type;
     }
     va_end(args);
@@ -51,7 +51,7 @@ Optr create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
     Array result = create_layout_with_vars(ObjectLayout_Class, size);
-    int i;
+    long i;
     for (i = 0; i < size; i++) {
         result->values[i] = (Optr)new_Slot(i, va_arg(args, wchar_t *));
     }
@@ -63,7 +63,7 @@ Optr create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
     Array result = create_layout_with_vars(ArrayLayout_Class, size);
-    int i;
+    long i;
     for (i = 0; i < size; i++) {
         result->values[i] = (Optr)new_Slot(i, va_arg(args, wchar_t*));
     }
