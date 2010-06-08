@@ -31,7 +31,6 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
     INVOKE_IF(NativeMethod)
     INVOKE_IF(ReflectionMethod)
     INVOKE_IF(Method)
-    INVOKE_IF(ThreadedMethod)
 
     assert1(NULL, "Unknown type of method");
 }

@@ -84,14 +84,14 @@ SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
 String SmallInt_asString(long self, uns_int base)
 {
-    long size;
+    uns_int size;
     if (self == 0) { 
-        size = 1; 
+        size = 2; 
     } else {
-        size = 1+(long)floorl(log10l(labs(self)));
+        size = 2+(long)floorl(log10l((unsigned long)labs(self)));
+        if (self < 0) { size += 1; }
     }
-    if (self < 0) { size += 1; };
-    size += 1;
+    
     wchar_t wchar_copy[size];
     swprintf(&wchar_copy[0], size, L"%li", self);
     String result   =  new_String(wchar_copy);

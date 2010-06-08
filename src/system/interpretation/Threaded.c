@@ -127,7 +127,7 @@ void t_return_self(long pc)
     inc_pc(pc);
     claim_EXP(1);
     Self_eval();
-	t_return();
+	t_return(pc);
 }
 
 /* ========================================================================= */
@@ -188,8 +188,8 @@ void CNT_eval_threaded()
 }
 
 void ThreadedMethod_invoke(Runtime_MethodClosure closure,
-                               ThreadedMethod method,
-                               Optr self, uns_int argc)
+                           Method method,
+                           Optr self, uns_int argc)
 {
     if (method->code == (Array)nil) {
         return Method_invoke(closure, (Method)method, self, argc);

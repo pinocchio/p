@@ -17,7 +17,7 @@ Method new_Method(uns_int paramCount,
     result->info   = empty_Info;
     result->size   = statementCount;
     result->package = nil;
-    result->unused = nil;
+    result->code = (Array)nil;
     return result;
 }
 
@@ -44,7 +44,7 @@ Method new_Method_with(Array params,
     result->info   = empty_Info;
     result->size   = statementCount;
     result->package = nil;
-    result->unused = nil;
+    result->code = (Array)nil;
     COPY_ARGS(statementCount, result->body);
 
     return result;
