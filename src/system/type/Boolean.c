@@ -6,8 +6,8 @@
 
 Object true;
 Object false;
-AST_Constant false_Const;
-AST_Constant true_Const;
+Constant false_Const;
+Constant true_Const;
 
 /* ========================================================================= */
 
@@ -54,10 +54,10 @@ NATIVE2(False_ifTrue_ifFalse_)
 void post_init_Boolean()
 {
     true         = instantiate(True_Class);
-    true_Const   = new_AST_Constant((Object)true);
+    true_Const   = new_Constant((Object)true);
 
     false        = instantiate(False_Class);
-    false_Const  = new_AST_Constant((Object)false);
+    false_Const  = new_Constant((Object)false);
 
     Dictionary natives;
     

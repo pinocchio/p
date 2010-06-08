@@ -3,16 +3,16 @@
 
 /* ========================================================================= */
 
-AST_Annotation new_AST_Annotation_raw(Object selector, uns_int argc) {
-    NEW_ARRAY_OBJECT(AST_Annotation, Object[argc]);
+Annotation new_Annotation_raw(Object selector, uns_int argc) {
+    NEW_ARRAY_OBJECT(Annotation, Object[argc]);
     result->selector = selector;
     result->size     = argc;
     return result;
 }
 
-AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...)
+Annotation new_Annotation(Object selector, uns_int argc, ...)
 {
-    AST_Annotation result = new_AST_Annotation_raw(selector, argc);
+    Annotation result = new_Annotation_raw(selector, argc);
     va_list args;
     va_start(args, argc);
     int idx;
@@ -25,13 +25,13 @@ AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...)
 
 /* ========================================================================= */
 
-AST_Annotation lookup_annotation(Array annotations, Object selector)
+Annotation lookup_annotation(Array annotations, Object selector)
 {
     assert1(HEADER(annotations) == Array_Class, "Annotations should be an array");
     int i;
     for (i = 0; i < annotations->size; i++) {
-        AST_Annotation annotation = (AST_Annotation)annotations->values[i];
-        if (HEADER(annotation) != AST_Annotation_Class) { continue; }
+        Annotation annotation = (Annotation)annotations->values[i];
+        if (HEADER(annotation) != Annotation_Class) { continue; }
         if (annotation->selector == selector) {
             return annotation;
         }

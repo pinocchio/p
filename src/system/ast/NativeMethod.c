@@ -7,12 +7,12 @@
 
 /* ========================================================================= */
 
-AST_NativeMethod new_AST_NativeMethod_with(Array params,
+NativeMethod new_NativeMethod_with(Array params,
                                Array locals,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(AST_NativeMethod, Object[statementCount]);
+    NEW_ARRAY_OBJECT(NativeMethod, Object[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -39,12 +39,12 @@ native lookup_native(Object primitive_name, Object module_name)
     return (native)primitive;
 }
 
-void AST_NativeMethod_invoke(Runtime_MethodClosure closure,
-                             AST_NativeMethod method,
+void NativeMethod_invoke(Runtime_MethodClosure closure,
+                             NativeMethod method,
                              Object self, uns_int argc)
 {
     if (method->code == NULL) {
-        AST_Annotation annotation =
+        Annotation annotation =
             lookup_annotation(method->annotations, 
                               (Object)SMB_pPrimitive_plugin_);
         assert1(annotation, "No primitive annotation found");
@@ -53,7 +53,7 @@ void AST_NativeMethod_invoke(Runtime_MethodClosure closure,
                                      annotation->arguments[1]);
     }
     if (method->code == (native)-1) {
-        return AST_Method_invoke(closure, (AST_Method)method, self, argc);
+        return Method_invoke(closure, (Method)method, self, argc);
     }
     method->code(self, closure->host, argc);
 }

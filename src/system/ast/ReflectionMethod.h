@@ -7,7 +7,7 @@
 
 /* ========================================================================= */
 
-struct AST_ReflectionMethod_t {
+struct ReflectionMethod_t {
     uns_int          size;
     AST_Info         info;
     Array params;
@@ -18,15 +18,15 @@ struct AST_ReflectionMethod_t {
     Object           body[];
 };
 
-extern AST_ReflectionMethod new_AST_ReflectionMethod_with(Array params,
+extern ReflectionMethod new_ReflectionMethod_with(Array params,
                                       Array locals,
                                       Array annotations,
                                       uns_int statementCount, ...);
 
 /* ========================================================================= */
 
-extern void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure,
-                                        AST_ReflectionMethod method, Object self,
+extern void ReflectionMethod_invoke(Runtime_MethodClosure closure,
+                                        ReflectionMethod method, Object self,
                                         uns_int argc);
 
 /* ========================================================================= */

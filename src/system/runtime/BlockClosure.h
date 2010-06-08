@@ -6,12 +6,12 @@
 /* ========================================================================= */
 
 struct Runtime_BlockClosure_t {
-    AST_Block            code;
+    Block            code;
     Runtime_BlockContext context;
 };
 
 extern void post_init_Runtime_BlockClosure();
-extern Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
+extern Runtime_BlockClosure new_Runtime_BlockClosure(Block code,
                                            Runtime_BlockContext context);
 
 /* ========================================================================= */
@@ -23,7 +23,7 @@ extern void apply(Object closure, uns_int argc);
 
 #define METHOD(fName, paramCount, localCount, numStatements)\
 Runtime_MethodClosure fName() {\
-    AST_Method body          = new_AST_Method(paramCount, localCount, numStatements);\
+    Method body          = new_Method(paramCount, localCount, numStatements);\
     Runtime_MethodClosure method = new_Runtime_MethodClosure(body, (Class)nil);\
     method->info             = new_raw_AST_Info();\
     method->info->sourceFile = new_String_from_charp(__FILE__);\

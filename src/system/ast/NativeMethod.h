@@ -7,7 +7,7 @@
 
 /* ========================================================================= */
 
-struct AST_NativeMethod_t {
+struct NativeMethod_t {
     uns_int          size;
     AST_Info         info;
     Array params;
@@ -18,7 +18,7 @@ struct AST_NativeMethod_t {
     Object           body[];
 };
 
-extern AST_NativeMethod new_AST_NativeMethod_with(Array params,
+extern NativeMethod new_NativeMethod_with(Array params,
                                       Array locals,
                                       Array annotations,
                                       uns_int statementCount, ...);
@@ -42,8 +42,8 @@ static void NM_##name(Object self, Class class, uns_int argc) {
 #define SELF ((Type_Object) self)
 /* ========================================================================= */
 
-extern void AST_NativeMethod_invoke(Runtime_MethodClosure closure,
-                                    AST_NativeMethod method,
+extern void NativeMethod_invoke(Runtime_MethodClosure closure,
+                                    NativeMethod method,
                                     Object self, uns_int argc);
 extern native lookup_native(Object primitive_name, Object module_name);
 

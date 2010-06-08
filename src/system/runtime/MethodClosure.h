@@ -6,14 +6,14 @@
 /* ========================================================================= */
 
 struct Runtime_MethodClosure_t {
-    AST_Method          code;
+    Method          code;
     AST_Info            info;
     Object              selector;
     Class          host;
 };
 
 extern void post_init_Runtime_MethodClosure();
-extern Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code,
+extern Runtime_MethodClosure new_Runtime_MethodClosure(Method code,
                                                        Class host);
 
 /* ========================================================================= */

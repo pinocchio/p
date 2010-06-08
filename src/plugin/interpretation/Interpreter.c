@@ -8,7 +8,7 @@ CNT(restore_iss)
 
 NATIVE4(Interpreter_invokeNative)
     Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
-    AST_NativeMethod receiver    = (AST_NativeMethod)NATIVE_ARG(1);
+    NativeMethod receiver    = (NativeMethod)NATIVE_ARG(1);
     Runtime_Message message       = (Runtime_Message)NATIVE_ARG(2);
     if (peek_CNT() == &CNT_restore_iss) {
         claim_EXP(message->size - 4);
@@ -25,7 +25,7 @@ NATIVE4(Interpreter_invokeNative)
     for (i = 0; i < message->size; i++) {
         poke_EXP(message->size - i - 1, message->arguments[i]);
     }
-    AST_NativeMethod_invoke(
+    NativeMethod_invoke(
             closure,
             receiver,
             (Object)closure->host,

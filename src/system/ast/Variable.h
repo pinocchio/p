@@ -5,20 +5,20 @@
 
 /* ========================================================================= */
 
-struct AST_Variable_t {
+struct Variable_t {
     AST_Info    info;
     Object      local_id;
     Object      scope_id;
     Object      name;
 };
 
-extern AST_Variable new_AST_Variable_named(const wchar_t* name, uns_int scope_id);
-extern AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id);
+extern Variable new_Variable_named(const wchar_t* name, uns_int scope_id);
+extern Variable new_Variable(uns_int scope_id, uns_int local_id);
 
 /* ========================================================================= */
 
-extern void AST_Variable_eval(AST_Variable self);
-extern void AST_Variable_assign(AST_Variable self, Object value);
+extern void Variable_eval(Variable self);
+extern void Variable_assign(Variable self, Object value);
 
 /* ========================================================================= */
 

@@ -73,7 +73,7 @@ CNT(Class_super)
 }
 
 
-void Method_invoke(Object method, Object self, uns_int argc) {
+static void Method_invoke_inline(Object method, Object self, uns_int argc) {
     if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, argc);
     } else {
@@ -120,7 +120,7 @@ static CNT(Class_lookup_cache_invoke)
     Array cache    = send->cache;
     Runtime_InlineCache_store(cache, (Object)class, method);
     
-    Method_invoke(method, self, argc);
+    Method_invoke_inline(method, self, argc);
 }
 
 static CNT(Class_lookup_invoke)
@@ -134,7 +134,7 @@ static CNT(Class_lookup_invoke)
         return does_not_understand(self, class, msg, argc);
     }
     zapn_EXP(5);
-    Method_invoke(method, self, argc);
+    Method_invoke_inline(method, self, argc);
 }
 
 void Class_lookup(Class class, Object msg)
@@ -291,7 +291,7 @@ void Class_dispatch(Object self, Class class, uns_int argc)
     if ((Object)cache != nil) {
         Object method = Runtime_InlineCache_lookup(cache, (Object)class);
         if (method) {
-            return Method_invoke(method, self, argc);
+            return Method_invoke_inline(method, self, argc);
         }
     } else {
         send->cache = new_Runtime_InlineCache();

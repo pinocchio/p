@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-struct AST_Block_t {
+struct Block_t {
     uns_int     size;
     AST_Info    info;
     Array  params;
@@ -13,13 +13,13 @@ struct AST_Block_t {
     Object      body[];
 };
 
-extern AST_Block new_AST_Block(uns_int paramCount,
+extern Block new_Block(uns_int paramCount,
                                uns_int localCount,
                                uns_int depth,
                                uns_int statementCount,
                                ...);
 
-extern AST_Block new_AST_Block_with(Array params,
+extern Block new_Block_with(Array params,
                                     Array locals,
                                     uns_int statementCount,
                                     ...);
@@ -27,9 +27,9 @@ extern AST_Block new_AST_Block_with(Array params,
 /* ========================================================================= */
 
 #define BLOCK_PARAM(block, param)\
-    ((AST_Variable)((AST_Block)block)->params->values[param])
+    ((Variable)((Block)block)->params->values[param])
 #define BLOCK_LOCAL(block, local)\
-    ((AST_Variable)((AST_Block)block)->locals->values[local])
+    ((Variable)((Block)block)->locals->values[local])
 
 /* ========================================================================= */
 
@@ -39,7 +39,7 @@ extern void init_variable_array(Array array, uns_int local_id);
 
 /* ========================================================================= */
 
-extern void AST_Block_eval(AST_Block self);
+extern void Block_eval(Block self);
 
 /* ========================================================================= */
 

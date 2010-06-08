@@ -5,18 +5,18 @@
 
 /* ========================================================================= */
 
-struct AST_Annotation_t {
+struct Annotation_t {
     uns_int size;
     Object  selector;
     Object  arguments[];
 };
 
-extern AST_Annotation new_AST_Annotation_raw(Object selector, uns_int argc);
-extern AST_Annotation new_AST_Annotation(Object selector, uns_int argc, ...);
+extern Annotation new_Annotation_raw(Object selector, uns_int argc);
+extern Annotation new_Annotation(Object selector, uns_int argc, ...);
 
 /* ========================================================================= */
 
-extern AST_Annotation lookup_annotation(Array annotations,
+extern Annotation lookup_annotation(Array annotations,
                                         Object selector);
 
 /* ========================================================================= */

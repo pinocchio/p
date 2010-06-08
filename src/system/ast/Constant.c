@@ -4,9 +4,9 @@
 
 /* ========================================================================= */
 
-AST_Constant new_AST_Constant(Object constant)
+Constant new_Constant(Object constant)
 {
-    NEW_OBJECT(AST_Constant);
+    NEW_OBJECT(Constant);
     result->constant = constant;
     result->info     = empty_AST_Info;
     return result;
@@ -14,7 +14,7 @@ AST_Constant new_AST_Constant(Object constant)
 
 /* ========================================================================= */
 
-void AST_Constant_eval(AST_Constant self)
+void Constant_eval(Constant self)
 {
     // replace self with the constant
     poke_EXP(0, self->constant);

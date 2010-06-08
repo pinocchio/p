@@ -5,15 +5,15 @@
 
 /* ========================================================================= */
 
-struct AST_Constant_t {
+struct Constant_t {
     AST_Info        info;
     Object          constant;
 };
 
-extern AST_Constant new_AST_Constant(Object constant);
+extern Constant new_Constant(Object constant);
 
 /* ========================================================================= */
 
-extern void AST_Constant_eval(AST_Constant self);
+extern void Constant_eval(Constant self);
 
 #endif // CONSTANT_H

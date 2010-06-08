@@ -15,8 +15,8 @@ extern Object get_bool(bool value);
 
 extern Object true;
 extern Object false;
-extern AST_Constant true_Const;
-extern AST_Constant false_Const;
+extern Constant true_Const;
+extern Constant false_Const;
 
 /* ========================================================================= */
 

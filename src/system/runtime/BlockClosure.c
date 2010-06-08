@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code, 
+Runtime_BlockClosure new_Runtime_BlockClosure(Block code, 
                                               Runtime_BlockContext context) {
     NEW_OBJECT(Runtime_BlockClosure);
     assert1(HEADER(context) == Runtime_BlockContext_Class ||
@@ -21,7 +21,7 @@ Runtime_BlockClosure new_Runtime_BlockClosure(AST_Block code,
 Runtime_BlockContext activation_from_native(uns_int argc)
 {
     Runtime_BlockClosure closure = current_env()->closure;
-    AST_Block block = closure->code;
+    Block block = closure->code;
     uns_int paramc = block->params->size;
     uns_int localc = block->locals->size;
 
@@ -45,10 +45,10 @@ Runtime_BlockContext activation_from_native(uns_int argc)
     return context;
 }
 
-static void CNT_AST_Block_continue()
+static void CNT_Block_continue()
 {
     Runtime_BlockContext env = current_env();
-    AST_Block code = env->closure->code;
+    Block code = env->closure->code;
     uns_int pc = (uns_int)peek_EXP(1);
     poke_EXP(0, code->body[pc]);
     poke_EXP(1, ++pc);
@@ -60,10 +60,10 @@ static void CNT_AST_Block_continue()
     }
 }
 
-static void start_eval(AST_Block block)
+static void start_eval(Block block)
 {
     if (1 < block->size) {
-        push_CNT(AST_Block_continue);
+        push_CNT(Block_continue);
         push_CNT(send_Eval);
     } else {
         push_CNT(tail_send_Eval);
@@ -73,9 +73,9 @@ static void start_eval(AST_Block block)
     push_EXP(block->body[0]);
 }
 
-static void CNT_AST_Block_inline_continue()
+static void CNT_Block_inline_continue()
 {
-    AST_Block code = (AST_Block)peek_EXP(2); 
+    Block code = (Block)peek_EXP(2); 
     uns_int pc = (uns_int)peek_EXP(1);
     Object exp = code->body[pc];
     pc += 1;
@@ -91,12 +91,12 @@ static void CNT_AST_Block_inline_continue()
     poke_EXP(0, exp);
 }
 
-static void start_inline_eval(AST_Block block)
+static void start_inline_eval(Block block)
 {
     if (1 < block->size) {
         poke_EXP(0, block);
         push_EXP(1);
-        push_CNT(AST_Block_inline_continue);
+        push_CNT(Block_inline_continue);
         push_EXP(block->body[0]);
     } else {
         poke_EXP(0, block->body[0]);
@@ -112,7 +112,7 @@ CNT(restore_pop_env)
 
 void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
 {
-    AST_Block block = closure->code;
+    Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
 
     if (block->size == 0) { 

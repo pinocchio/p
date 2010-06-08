@@ -5,9 +5,9 @@
 
 /* ========================================================================= */
 
-AST_Variable new_AST_Variable_named(const wchar_t* name, uns_int scope_id)
+Variable new_Variable_named(const wchar_t* name, uns_int scope_id)
 {
-    NEW_OBJECT(AST_Variable);
+    NEW_OBJECT(Variable);
     result->name     = (Object)new_String(name);
     result->info     = empty_AST_Info;
     result->scope_id = (Object)new_SmallInt(scope_id);
@@ -15,9 +15,9 @@ AST_Variable new_AST_Variable_named(const wchar_t* name, uns_int scope_id)
     return result;
 }
 
-AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
+Variable new_Variable(uns_int scope_id, uns_int local_id)
 {
-    NEW_OBJECT(AST_Variable);
+    NEW_OBJECT(Variable);
     result->local_id = (Object)new_SmallInt(local_id);
     result->scope_id = (Object)new_SmallInt(scope_id);
     result->name     = nil;
@@ -27,7 +27,7 @@ AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
 
 /* ========================================================================= */
 
-void AST_Variable_eval(AST_Variable self)
+void Variable_eval(Variable self)
 {
     // LOGFUN;
     Object env = (Object)current_env();
@@ -47,7 +47,7 @@ void AST_Variable_eval(AST_Variable self)
     }
 }
 
-void AST_Variable_assign(AST_Variable self, Object value)
+void Variable_assign(Variable self, Object value)
 {
     Object env = (Object)current_env();
 

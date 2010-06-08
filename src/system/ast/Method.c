@@ -5,11 +5,11 @@
 
 /* ========================================================================= */
 
-AST_Method new_AST_Method(uns_int paramCount,
+Method new_Method(uns_int paramCount,
                           uns_int localCount,
                           uns_int statementCount)
 {
-    NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);
+    NEW_ARRAY_OBJECT(Method, Object[statementCount]);
     result->params = new_Array_raw(paramCount);
     result->locals = new_Array_raw(localCount);
     init_raw_variable_array(result->params, 0, paramCount, 0);
@@ -21,21 +21,21 @@ AST_Method new_AST_Method(uns_int paramCount,
     return result;
 }
 
-AST_Method new_AST_Method_withAll(uns_int paramCount,
+Method new_Method_withAll(uns_int paramCount,
                                   uns_int localCount,
                                   uns_int statementCount, ...)
 {
-    AST_Method result = new_AST_Method(paramCount, localCount, statementCount);
+    Method result = new_Method(paramCount, localCount, statementCount);
     COPY_ARGS(statementCount, result->body);
     return result;
 }
 
-AST_Method new_AST_Method_with(Array params,
+Method new_Method_with(Array params,
                                Array locals,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(AST_Method, Object[statementCount]);
+    NEW_ARRAY_OBJECT(Method, Object[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -52,10 +52,10 @@ AST_Method new_AST_Method_with(Array params,
 
 /* ========================================================================= */
 
-static void CNT_AST_Method_continue()
+static void CNT_Method_continue()
 {
     Runtime_MethodContext env = (Runtime_MethodContext)current_env();
-    AST_Method code = env->closure->code;
+    Method code = env->closure->code;
     uns_int pc = (uns_int)peek_EXP(1);
     poke_EXP(0, code->body[pc]);
     poke_EXP(1, ++pc);
@@ -68,10 +68,10 @@ static void CNT_AST_Method_continue()
 
 }
 
-static void start_eval(AST_Method method)
+static void start_eval(Method method)
 {
     if (1 < method->size) {
-        push_CNT(AST_Method_continue);
+        push_CNT(Method_continue);
         push_CNT(send_Eval);
     } else {
         push_CNT(tail_send_Eval);
@@ -83,7 +83,7 @@ static void start_eval(AST_Method method)
 
 /* ========================================================================= */
 
-void AST_Method_invoke(Runtime_MethodClosure closure, AST_Method method,
+void Method_invoke(Runtime_MethodClosure closure, Method method,
                            Object self, uns_int argc)
 {
     assert(argc == method->params->size,

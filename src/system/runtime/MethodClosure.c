@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Class host) 
+Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host) 
 {
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
@@ -25,13 +25,13 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
      
-    AST_Method method       = closure->code;
+    Method method       = closure->code;
     Class method_class = HEADER(method);
     
-    INVOKE_IF(AST_NativeMethod)
-    INVOKE_IF(AST_ReflectionMethod)
-    INVOKE_IF(AST_Method)
-    INVOKE_IF(AST_ThreadedMethod)
+    INVOKE_IF(NativeMethod)
+    INVOKE_IF(ReflectionMethod)
+    INVOKE_IF(Method)
+    INVOKE_IF(ThreadedMethod)
 
     assert1(NULL, "Unknown type of method");
 }

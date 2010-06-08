@@ -8,7 +8,7 @@
 struct Nil_t{};
 
 extern Object nil;
-extern AST_Constant nil_Const;
+extern Constant nil_Const;
 CREATE_INITIALIZERS(Nil)
 
 /* ========================================================================= */

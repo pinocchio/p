@@ -7,7 +7,7 @@
 
 /* ========================================================================= */
 
-struct AST_ThreadedMethod_t {
+struct ThreadedMethod_t {
     uns_int          size;
     AST_Info         info;
     Array params;
@@ -18,13 +18,13 @@ struct AST_ThreadedMethod_t {
     Object           body[];
 };
 
-extern AST_ThreadedMethod new_AST_ThreadedMethod_with(Array params,
+extern ThreadedMethod new_ThreadedMethod_with(Array params,
                                       Array locals,
                                       Array annotations,
                                       uns_int statementCount, ...);
 
-extern void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
-                                      AST_ThreadedMethod method,
+extern void ThreadedMethod_invoke(Runtime_MethodClosure closure,
+                                      ThreadedMethod method,
                                       Object self, uns_int argc);
 
 /* ========================================================================= */

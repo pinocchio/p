@@ -5,9 +5,9 @@
 
 /* ========================================================================= */
 
-AST_Assign new_AST_Assign(Object variable, Object expression)
+Assign new_Assign(Object variable, Object expression)
 {
-    NEW_OBJECT(AST_Assign);
+    NEW_OBJECT(Assign);
     result->variable   = variable;
     result->expression = expression;
     result->info       = empty_AST_Info;
@@ -16,10 +16,10 @@ AST_Assign new_AST_Assign(Object variable, Object expression)
 
 /* ========================================================================= */
 
-void AST_Assign_eval(AST_Assign self)
+void Assign_eval(Assign self)
 {
     // LOGFUN;
-    push_CNT(AST_Assign_assign);
+    push_CNT(Assign_assign);
     push_CNT(send_Eval);
     push_EXP(self->expression);
 }
@@ -29,16 +29,16 @@ void AST_Assign_eval(AST_Assign self)
         return name##_assign((name)var, value);\
     }
 
-CNT(AST_Assign_assign)
+CNT(Assign_assign)
     Object value    = pop_EXP();
-    AST_Assign self = (AST_Assign)peek_EXP(0);
+    Assign self = (Assign)peek_EXP(0);
     Object var      = self->variable;
     /* result of evaluating expression is result of assignment */
     poke_EXP(0, value);
 
     Class class = HEADER(var);
     
-    ASSIGN_IF(AST_Variable)
+    ASSIGN_IF(Variable)
     ASSIGN_IF(Slot)
     ASSIGN_IF(UIntSlot)
     

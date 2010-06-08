@@ -6,12 +6,12 @@
 /* ========================================================================= */
 
 Object nil;
-AST_Constant nil_Const;
+Constant nil_Const;
 
 /* ========================================================================= */
 
 void post_init_Nil()
 {
     HEADER(nil)        = Nil_Class;
-    nil_Const          = new_AST_Constant(nil);
+    nil_Const          = new_Constant(nil);
 }

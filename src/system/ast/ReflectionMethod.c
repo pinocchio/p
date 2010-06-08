@@ -7,12 +7,12 @@
 
 /* ========================================================================= */
 
-AST_ReflectionMethod new_AST_ReflectionMethod_with(Array params,
+ReflectionMethod new_ReflectionMethod_with(Array params,
                                Array locals,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(AST_ReflectionMethod, Object[statementCount]);
+    NEW_ARRAY_OBJECT(ReflectionMethod, Object[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -31,12 +31,12 @@ AST_ReflectionMethod new_AST_ReflectionMethod_with(Array params,
 
 /* ========================================================================= */
 
-void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure,
-                                 AST_ReflectionMethod method, 
+void ReflectionMethod_invoke(Runtime_MethodClosure closure,
+                                 ReflectionMethod method, 
                                  Object self, uns_int argc)
 {
     if (method->cache == NULL) {
-        AST_Annotation annotation =
+        Annotation annotation =
             lookup_annotation(method->annotations, 
                               (Object)SMB_pinocchioReflective_);
         assert1(annotation, "No reflection annotation found");
@@ -46,7 +46,7 @@ void AST_ReflectionMethod_invoke(Runtime_MethodClosure closure,
                                   (Object)SMB_Reflection_Reflection);
     }
     if (method->cache == (native)-1) {
-        return AST_Method_invoke(closure, (AST_Method)method, self, argc);
+        return Method_invoke(closure, (Method)method, self, argc);
     }
     method->cache(self, closure->host, argc);
 }

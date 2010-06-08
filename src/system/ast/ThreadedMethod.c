@@ -118,12 +118,12 @@ Array create_fac_code()
     return code;
 }
 
-AST_ThreadedMethod new_AST_ThreadedMethod_with(Array params,
+ThreadedMethod new_ThreadedMethod_with(Array params,
                                Array locals,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(AST_ThreadedMethod, Object[statementCount]);
+    NEW_ARRAY_OBJECT(ThreadedMethod, Object[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -139,12 +139,12 @@ AST_ThreadedMethod new_AST_ThreadedMethod_with(Array params,
     return result;
 }
 
-void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
-                               AST_ThreadedMethod method,
+void ThreadedMethod_invoke(Runtime_MethodClosure closure,
+                               ThreadedMethod method,
                                Object self, uns_int argc)
 {
     if (method->code == (Array)nil) {
-        return AST_Method_invoke(closure, (AST_Method)method, self, argc);
+        return Method_invoke(closure, (Method)method, self, argc);
     }
 
     assert(argc == method->params->size,
@@ -175,6 +175,6 @@ void CNT_eval_threaded()
     ((threaded)code->values[pc])(pc);
 }
 
-void post_init_AST_ThreadedMethod()
+void post_init_ThreadedMethod()
 {
 }
