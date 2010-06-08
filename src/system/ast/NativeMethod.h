@@ -19,9 +19,10 @@ struct NativeMethod_t {
 };
 
 extern NativeMethod new_NativeMethod_with(Array params,
-                                      Array locals,
-                                      Array annotations,
-                                      uns_int statementCount, ...);
+										  Array locals,
+										  Array annotations,
+									      Array threaded,
+										  uns_int statementCount, ...);
 
 /* ========================================================================= */
 

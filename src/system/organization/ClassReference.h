@@ -5,19 +5,19 @@
 
 /* ========================================================================= */
 
-struct Organization_ClassReference_t {
+struct ClassReference_t {
     Optr referenceName;
     Optr package;
     Optr class;
 };
 
-extern Organization_ClassReference new_Organization_ClassReference(Class class);
-extern Organization_ClassReference new_Organization_ClassReference_empty();
+extern ClassReference new_ClassReference(Class class);
+extern ClassReference new_ClassReference_empty();
 
 
 /* ========================================================================= */
 
-extern void Organization_ClassReference_eval();
+extern void ClassReference_eval();
 
 /* ========================================================================= */
 

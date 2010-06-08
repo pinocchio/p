@@ -20,12 +20,13 @@ extern Method new_Method(uns_int paramCount,
                                  uns_int localCount,
                                  uns_int statementCount);
 extern Method new_Method_withAll(uns_int paramCount,
-                                         uns_int localCount,
-                                         uns_int statementCount, ...);
+                                 uns_int localCount,
+                                 uns_int statementCount, ...);
 extern Method new_Method_with(Array params,
-                                      Array locals,
-                                      Array annotations,
-                                      uns_int statementCount, ...);
+                              Array locals,
+                              Array annotations,
+							  Array threaded,
+                              uns_int statementCount, ...);
 
 /* ========================================================================= */
 

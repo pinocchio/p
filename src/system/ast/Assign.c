@@ -30,9 +30,9 @@ void Assign_eval(Assign self)
     }
 
 CNT(Assign_assign)
-    Optr value    = pop_EXP();
+    Optr value  = pop_EXP();
     Assign self = (Assign)peek_EXP(0);
-    Optr var      = self->variable;
+    Optr var    = self->variable;
     /* result of evaluating expression is result of assignment */
     poke_EXP(0, value);
 

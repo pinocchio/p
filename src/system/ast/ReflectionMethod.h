@@ -19,9 +19,10 @@ struct ReflectionMethod_t {
 };
 
 extern ReflectionMethod new_ReflectionMethod_with(Array params,
-                                      Array locals,
-                                      Array annotations,
-                                      uns_int statementCount, ...);
+                                                  Array locals,
+                                                  Array annotations,
+					                              Array threaded,
+                                                  uns_int statementCount, ...);
 
 /* ========================================================================= */
 

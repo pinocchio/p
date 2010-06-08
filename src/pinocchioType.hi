@@ -19,7 +19,7 @@ TYPE(IO_File);
 TYPE(IO_Stream);
 TYPE(Float);
 TYPE(SmallInt);
-TYPE(Organization_ClassReference);
+TYPE(ClassReference);
 TYPE(Runtime_BlockClosure);
 TYPE(Runtime_BlockContext);
 TYPE(Runtime_Continuation);

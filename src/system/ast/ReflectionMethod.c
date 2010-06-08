@@ -8,9 +8,10 @@
 /* ========================================================================= */
 
 ReflectionMethod new_ReflectionMethod_with(Array params,
-                               Array locals,
-                               Array annotations,
-                               uns_int statementCount, ...)
+                                           Array locals,
+                                           Array annotations,
+					                       Array threaded,
+                                           uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(ReflectionMethod, Optr[statementCount]);
     result->params = params;

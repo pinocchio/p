@@ -59,6 +59,7 @@ void t_jump_1(long pc)
 PUSH(nil, nil_Const)
 PUSH(0, new_SmallInt(0))
 PUSH(1, new_SmallInt(1))
+PUSH(2, new_SmallInt(2))
 PUSH(true, true_Const)
 PUSH(false, false_Const)
 
@@ -85,6 +86,22 @@ void t_push_variable(long pc)
     Variable_eval(variable);
 }
 
+void t_push_class_reference(long pc) 
+{
+    ClassReference reference = (ClassReference)threaded_code()->values[pc + 1];
+    set_pc(pc + 2);
+	claim_EXP(1);
+    ClassReference_eval(reference);
+}
+
+void t_push_slot(long pc) 
+{
+    Slot slot = (Slot)threaded_code()->values[pc + 1];
+    set_pc(pc + 2);
+	claim_EXP(1);
+    Slot_eval(slot);
+}
+
 void t_push_closure(long pc)
 {
 	Block block  = (Block)threaded_code()->values[pc + 1];
@@ -92,6 +109,8 @@ void t_push_closure(long pc)
 	inc_pc(pc);
 	push_EXP(closure);
 }
+
+
 
 /* ========================================================================= */
 void t_return(long pc)
@@ -156,7 +175,7 @@ void t_plus_int(long pc)
 }
 
 /* ========================================================================= */
-#define SEND(n) void t_send_##n(long pc) {\
+#define SEND(n) void t_send##n(long pc) {\
     inc_pc(pc);\
     Optr self = peek_EXP(n);\
     Class_dispatch(self, HEADER(self),n);\
@@ -169,7 +188,29 @@ SEND(3)
 SEND(4)
 SEND(5)
 
-void t_send_n(long pc)
+void t_sendn(long pc)
+{
+    set_pc(pc+2);
+    uns_int n = (uns_int)threaded_code()->values[pc + 1];
+    Optr self = peek_EXP(n);    
+    Class_dispatch(self, HEADER(self), n);
+}
+
+/* ========================================================================= */
+#define SUPER(n) void t_super##n(long pc) {\
+    inc_pc(pc);\
+    Optr self = peek_EXP(n);\
+    Class_dispatch(self, HEADER(self),n);\
+}
+
+SUPER(0)
+SUPER(1)
+SUPER(2)
+SUPER(3)
+SUPER(4)
+SUPER(5)
+
+void t_supern(long pc)
 {
     set_pc(pc+2);
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
@@ -178,7 +219,24 @@ void t_send_n(long pc)
 }
 
 
+
 /* ========================================================================= */
+
+void t_assign(long pc)
+{
+    inc_pc(pc);
+	CNT_Assign_assign();
+}
+
+/* ========================================================================= */
+
+
+void post_init_Threaded()
+{
+	Dictionary dict = new_Dictionary();
+	Compiler_ThreadedCompiler_Class->cvars[0] = (Optr)dict;
+}
+
 
 void CNT_eval_threaded()
 {

@@ -5,19 +5,19 @@
 
 /* ========================================================================= */
 
-Organization_ClassReference new_Organization_ClassReference(Class class)
+ClassReference new_ClassReference(Class class)
 {
     
-    NEW_OBJECT(Organization_ClassReference);
+    NEW_OBJECT(ClassReference);
     result->class = (Optr)class;
     result->package = nil;
     return result;
 }
 
-Organization_ClassReference new_Organization_ClassReference_empty()
+ClassReference new_ClassReference_empty()
 {
     
-    NEW_OBJECT(Organization_ClassReference);
+    NEW_OBJECT(ClassReference);
     result->class = nil;
     result->package = nil;
     return result;
@@ -25,7 +25,7 @@ Organization_ClassReference new_Organization_ClassReference_empty()
 
 /* ========================================================================= */
 
-void Organization_ClassReference_eval(Organization_ClassReference self)
+void ClassReference_eval(ClassReference self)
 {
     if (self->class == (Optr)nil) {
         fail(Exception_UndefinedClassReference_Class, 1, self);

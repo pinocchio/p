@@ -22,3 +22,4 @@ post_init_Slot();
 post_init_UIntSlot();
 post_init_DictBucket();
 post_init_Nil();
+post_init_Threaded();

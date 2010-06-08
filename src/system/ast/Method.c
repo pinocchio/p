@@ -6,8 +6,8 @@
 /* ========================================================================= */
 
 Method new_Method(uns_int paramCount,
-                          uns_int localCount,
-                          uns_int statementCount)
+                  uns_int localCount,
+                  uns_int statementCount)
 {
     NEW_ARRAY_OBJECT(Method, Optr[statementCount]);
     result->params = new_Array_raw(paramCount);
@@ -22,8 +22,8 @@ Method new_Method(uns_int paramCount,
 }
 
 Method new_Method_withAll(uns_int paramCount,
-                                  uns_int localCount,
-                                  uns_int statementCount, ...)
+                          uns_int localCount,
+                          uns_int statementCount, ...)
 {
     Method result = new_Method(paramCount, localCount, statementCount);
     COPY_ARGS(statementCount, result->body);
@@ -31,9 +31,10 @@ Method new_Method_withAll(uns_int paramCount,
 }
 
 Method new_Method_with(Array params,
-                               Array locals,
-                               Array annotations,
-                               uns_int statementCount, ...)
+                       Array locals,
+                       Array annotations,
+					   Array threaded,
+                       uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(Method, Optr[statementCount]);
     result->params = params;
@@ -41,10 +42,10 @@ Method new_Method_with(Array params,
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info   = empty_Info;
-    result->size   = statementCount;
+    result->info    = empty_Info;
+    result->size    = statementCount;
     result->package = nil;
-    result->code = (Array)nil;
+    result->code    = threaded;
     COPY_ARGS(statementCount, result->body);
 
     return result;
