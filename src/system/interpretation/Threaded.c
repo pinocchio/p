@@ -182,8 +182,8 @@ void t_send_n(long pc)
 
 void CNT_eval_threaded()
 {
-    int pc     = (int)(uns_int)peekn_CNT(1);
-    Array code = (Array)peekn_CNT(2);
+    long pc     = (long)peekn_CNT(1);
+	Array code = (Array)peekn_CNT(2);
     ((threaded)code->values[pc])(pc);
 }
 
