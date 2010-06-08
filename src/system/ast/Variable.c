@@ -9,7 +9,7 @@ Variable new_Variable_named(const wchar_t* name, uns_int scope_id)
 {
     NEW_OBJECT(Variable);
     result->name     = (Optr)new_String(name);
-    result->info     = empty_AST_Info;
+    result->info     = empty_Info;
     result->scope_id = (Optr)new_SmallInt(scope_id);
     result->local_id = (Optr)new_SmallInt(0);
     return result;
@@ -21,7 +21,7 @@ Variable new_Variable(uns_int scope_id, uns_int local_id)
     result->local_id = (Optr)new_SmallInt(local_id);
     result->scope_id = (Optr)new_SmallInt(scope_id);
     result->name     = nil;
-    result->info     = empty_AST_Info;
+    result->info     = empty_Info;
     return result;
 }
 

@@ -2,7 +2,7 @@ TYPE(Annotation);
 TYPE(Assign);
 TYPE(Block);
 TYPE(Constant);
-TYPE(AST_Info);
+TYPE(Info);
 TYPE(Method);
 TYPE(NativeMethod);
 TYPE(ReflectionMethod);

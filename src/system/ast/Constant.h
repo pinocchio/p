@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Constant_t {
-    AST_Info        info;
+    Info        info;
     Optr          constant;
 };
 

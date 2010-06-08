@@ -6,11 +6,12 @@
 /* ========================================================================= */
 
 struct Block_t {
-    uns_int     size;
-    AST_Info    info;
-    Array  params;
-    Array  locals;
-    Optr      body[];
+    uns_int size;
+    Info    info;
+    Array   params;
+    Array   locals;
+	Array   threaded;
+    Optr    body[];
 };
 
 extern Block new_Block(uns_int paramCount,

@@ -7,7 +7,7 @@
 
 struct Runtime_MethodClosure_t {
     Method          code;
-    AST_Info            info;
+    Info            info;
     Optr              selector;
     Class          host;
 };

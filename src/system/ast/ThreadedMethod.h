@@ -9,7 +9,7 @@
 
 struct ThreadedMethod_t {
     uns_int          size;
-    AST_Info         info;
+    Info         info;
     Array params;
     Array locals;
     Optr           package;

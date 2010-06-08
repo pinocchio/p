@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Assign_t {
-    AST_Info        info;
+    Info        info;
     Optr          variable;
     Optr          expression;
 };

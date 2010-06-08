@@ -5,24 +5,24 @@
 
 /* ========================================================================= */
 
-struct AST_Info_t {
+struct Info_t {
     String   sourceFile;
     String   name;
     SmallInt line;
     SmallInt column;
 };
 
-extern AST_Info empty_AST_Info;
+extern Info empty_Info;
 
-extern void post_init_AST_Info();
+extern void post_init_Info();
 
-extern AST_Info new_raw_AST_Info();
-extern AST_Info new_AST_Info(String sourceFile, String name, 
+extern Info new_raw_Info();
+extern Info new_Info(String sourceFile, String name, 
                       SmallInt line, SmallInt column);
 
 /* ========================================================================= */
 
-extern void print_AST_Info(AST_Info info);
+extern void print_Info(Info info);
 
 /* ========================================================================= */
 

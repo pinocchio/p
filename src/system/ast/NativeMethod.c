@@ -18,7 +18,7 @@ NativeMethod new_NativeMethod_with(Array params,
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info   = empty_AST_Info;
+    result->info   = empty_Info;
     result->size   = statementCount;
     result->code = NULL;
     COPY_ARGS(statementCount, result->body);

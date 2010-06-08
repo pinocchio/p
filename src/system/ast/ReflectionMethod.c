@@ -22,7 +22,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
     }
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info   = empty_AST_Info;
+    result->info   = empty_Info;
     result->size   = statementCount;
     result->cache  = NULL; // Should become InlineCache
     COPY_ARGS(statementCount, result->body);

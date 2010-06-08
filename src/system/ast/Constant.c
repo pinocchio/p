@@ -8,7 +8,7 @@ Constant new_Constant(Optr constant)
 {
     NEW_OBJECT(Constant);
     result->constant = constant;
-    result->info     = empty_AST_Info;
+    result->info     = empty_Info;
     return result;
 }
 

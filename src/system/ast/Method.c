@@ -14,7 +14,7 @@ Method new_Method(uns_int paramCount,
     result->locals = new_Array_raw(localCount);
     init_raw_variable_array(result->params, 0, paramCount, 0);
     init_raw_variable_array(result->locals, 0, localCount, paramCount);
-    result->info   = empty_AST_Info;
+    result->info   = empty_Info;
     result->size   = statementCount;
     result->package = nil;
     result->unused = nil;
@@ -41,7 +41,7 @@ Method new_Method_with(Array params,
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info   = empty_AST_Info;
+    result->info   = empty_Info;
     result->size   = statementCount;
     result->package = nil;
     result->unused = nil;

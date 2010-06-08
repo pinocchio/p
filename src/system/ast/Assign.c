@@ -10,7 +10,7 @@ Assign new_Assign(Optr variable, Optr expression)
     NEW_OBJECT(Assign);
     result->variable   = variable;
     result->expression = expression;
-    result->info       = empty_AST_Info;
+    result->info       = empty_Info;
     return result;
 }
 

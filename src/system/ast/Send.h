@@ -7,7 +7,7 @@
 
 struct Send_t {
     uns_int     size;
-    AST_Info    info;
+    Info    info;
     Array  cache;
     Optr      message;
     Optr      receiver;

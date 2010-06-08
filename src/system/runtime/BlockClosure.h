@@ -25,7 +25,7 @@ extern void apply(Optr closure, uns_int argc);
 Runtime_MethodClosure fName() {\
     Method body          = new_Method(paramCount, localCount, numStatements);\
     Runtime_MethodClosure method = new_Runtime_MethodClosure(body, (Class)nil);\
-    method->info             = new_raw_AST_Info();\
+    method->info             = new_raw_Info();\
     method->info->sourceFile = new_String_from_charp(__FILE__);\
     method->info->name       = new_String_from_charp(__FUNCTION__);\
     method->info->line       = new_SmallInt(__LINE__);\

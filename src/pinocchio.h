@@ -131,7 +131,7 @@ extern void print_EXP();
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); printf("\n");
     #define LOG _indent_(nrsends()); printf
-    #define LOG_AST_INFO(print, info) printf(print); print_AST_Info(info); printf("\n");
+    #define LOG_AST_INFO(print, info) printf(print); print_Info(info); printf("\n");
 #else
     #define LOGFUN
     #define LOG printf0

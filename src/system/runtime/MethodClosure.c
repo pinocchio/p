@@ -8,7 +8,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host)
 {
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
-    result->info        = empty_AST_Info;
+    result->info        = empty_Info;
     result->selector    = (Optr)nil;
     result->host        = host;
     return result;

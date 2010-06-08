@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Variable_t {
-    AST_Info    info;
+    Info    info;
     Optr      local_id;
     Optr      scope_id;
     Optr      name;
