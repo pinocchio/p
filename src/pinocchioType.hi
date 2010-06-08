@@ -36,4 +36,3 @@ TYPE(CharacterTable);
 TYPE(Class);
 TYPE(Object);
 TYPE(Symbol);
-TYPE(ThreadedMethod);

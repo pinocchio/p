@@ -9,43 +9,42 @@
 
 extern void CNT_eval_threaded();
 
-typedef void(*threaded)(int pc);
+typedef void(*threaded)(long pc);
 
 /* ======================================================================== */
 
-extern void set_pc(int pc);
-extern void inc_pc(int pc);
-extern void t_branch_gt_int(int pc);
-extern void t_branch_bool(int pc);
-extern void t_jump_1(int pc);
+extern void set_pc(long pc);
+extern void inc_pc(long pc);
+extern void t_branch_gt_long(long pc);
+extern void t_branch_bool(long pc);
+extern void t_jump_1(long pc);
 
-extern void t_push_nil(int pc);
-extern void t_push_0(int pc);
-extern void t_push_1(int pc);
-extern void t_push_true(int pc);
-extern void t_push_false(int pc);
-extern void t_push_next(int pc);
-extern void t_push_self(int pc);
-extern void t_push_variable(int pc);
-extern void t_push_closure(int pc);
+extern void t_push_nil(long pc);
+extern void t_push_0(long pc);
+extern void t_push_1(long pc);
+extern void t_push_true(long pc);
+extern void t_push_false(long pc);
+extern void t_push_next(long pc);
+extern void t_push_self(long pc);
+extern void t_push_variable(long pc);
+extern void t_push_closure(long pc);
 
+extern void t_return(long pc);
+extern void t_return_true(long pc);
+extern void t_return_false(long pc);
+extern void t_return_nil(long pc);
+extern void t_return_0(long pc);
+extern void t_return_1(long pc);
+extern void t_return_next(long pc);
+extern void t_return_self(long pc);
  
-extern void t_return(int pc);
-extern void t_return_true(int pc);
-extern void t_return_false(int pc);
-extern void t_return_nil(int pc);
-extern void t_return_0(int pc);
-extern void t_return_1(int pc);
-extern void t_return_next(int pc);
-extern void t_return_self(int pc);
- 
-extern void send0(int pc);
-extern void send1(int pc);
-extern void send2(int pc);
-extern void send3(int pc);
-extern void send4(int pc);
-extern void send5(int pc);
-extern void sendn(int pc);
+extern void send0(long pc);
+extern void send1(long pc);
+extern void send2(long pc);
+extern void send3(long pc);
+extern void send4(long pc);
+extern void send5(long pc);
+extern void sendn(long pc);
 
 
 #endif //INTERPRETATION_THREADED

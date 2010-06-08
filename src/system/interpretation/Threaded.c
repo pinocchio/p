@@ -77,15 +77,15 @@ void t_push_next(long pc)
     push_EXP(v);
 }
 
-void t_push_variable(int pc)
+void t_push_variable(long pc)
 {
     Variable variable = (Variable)threaded_code()->values[pc + 1];
-    Optr object = Variable_eval(variable);
     set_pc(pc + 2);
-    push_EXP(object);
+	claim_EXP(1);
+    Variable_eval(variable);
 }
 
-void t_push_closure(int pc)
+void t_push_closure(long pc)
 {
 	Block block  = (Block)threaded_code()->values[pc + 1];
 	Runtime_BlockClosure closure = new_Runtime_BlockClosure(block, current_env());
@@ -122,7 +122,7 @@ void t_return_next(long pc)
     t_return(pc);
 }
 
-void t_return_self(int pc)
+void t_return_self(long pc)
 {
     inc_pc(pc);
     claim_EXP(1);

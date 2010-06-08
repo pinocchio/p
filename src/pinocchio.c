@@ -171,15 +171,6 @@ Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
     return finish_eval();
 }
 
-Optr EvalThreaded(Array code) 
-{
-    start_eval();
-    push_CNT_raw(code);
-    push_CNT_raw(0);
-    push_CNT(eval_threaded);
-    return finish_eval();
-}
-
 /* ========================================================================= */
 
 jmp_buf Assert_Fail;
