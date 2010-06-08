@@ -92,7 +92,7 @@ uns_int nrsends()
     uns_int nr = 0;
     while (cur < size) {
         Object c = tget(Double_Stack)[cur++];
-        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
+        if (c > (Object)10000 && HEADER(c) == Send_Class) {
             nr++;
         }
     }
@@ -105,8 +105,8 @@ void sends()
     uns_int cur = 0;
     while (cur < size) {
         Object c = tget(Double_Stack)[cur++];
-        if (c > (Object)10000 && HEADER(c) == AST_Send_Class) {
-            AST_Send send = (AST_Send)c;
+        if (c > (Object)10000 && HEADER(c) == Send_Class) {
+            Send send = (Send)c;
             print_AST_Info(send->info);
             print_Symbol(send->message);
         }

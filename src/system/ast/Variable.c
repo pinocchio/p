@@ -43,7 +43,7 @@ void AST_Variable_eval(AST_Variable self)
         // TODO
         assert0(NULL);
         // Object args[2] = { (Object)new_SmallInt(self->index), self->key };
-        // return AST_Send(env, SMB_at_in_, 2, args);
+        // return Send(env, SMB_at_in_, 2, args);
     }
 }
 

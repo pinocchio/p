@@ -116,7 +116,7 @@ static CNT(Class_lookup_cache_invoke)
         return does_not_understand(self, class, msg, argc);
     }
     zapn_EXP(5);
-    AST_Send send       = (AST_Send)peek_EXP(argc + 1);
+    Send send       = (Send)peek_EXP(argc + 1);
     Array cache    = send->cache;
     Runtime_InlineCache_store(cache, (Object)class, method);
     
@@ -268,7 +268,7 @@ void Class_direct_dispatch_withArguments(Object self, Class class,
 
 void Class_dispatch(Object self, Class class, uns_int argc)
 {
-    AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
+    Send send       = (Send)peek_EXP(argc + 1); // + self
     Array cache    = send->cache;
     Object msg          = send->message;
     assert0(msg != nil);

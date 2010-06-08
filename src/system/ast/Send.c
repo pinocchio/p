@@ -5,10 +5,10 @@
 
 /* ========================================================================= */
 
-#define AST_Send_args(send) send->arguments
+#define Send_args(send) send->arguments
 
-AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
-    NEW_ARRAY_OBJECT(AST_Send, Object[argc]);
+Send new_Send_raw(Object receiver, Object msg, uns_int argc) {
+    NEW_ARRAY_OBJECT(Send, Object[argc]);
     result->receiver = receiver;
     result->message  = msg;
     result->info     = empty_AST_Info;
@@ -18,14 +18,14 @@ AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc) {
     return result;
 }
 
-AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
+Send new_Send(Object receiver, Object msg, uns_int argc, ...)
 {
-    AST_Send result = new_AST_Send_raw(receiver, msg, argc);
+    Send result = new_Send_raw(receiver, msg, argc);
     va_list args;
     va_start(args, argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        AST_Send_args(result)[idx] = va_arg(args, Object);
+        Send_args(result)[idx] = va_arg(args, Object);
     }
     va_end(args);
     return result;
@@ -33,7 +33,7 @@ AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...)
 
 /* ========================================================================= */
 
-static CNT(AST_Send_send)
+static CNT(Send_send)
     uns_int argc    = (uns_int)pop_EXP();
     Object receiver = peek_EXP(argc);
     Class_dispatch(receiver, HEADER(receiver), argc);
@@ -43,11 +43,11 @@ void CNT_store_argument()
 {
     Object arg    = peek_EXP(0);
     uns_int idx   = (uns_int)peek_EXP(1);
-    AST_Send send = (AST_Send)peek_EXP(idx + 2);
+    Send send = (Send)peek_EXP(idx + 2);
     poke_EXP(1, arg);
     if (idx < send->size) {
         poke_EXP(0, idx+1);
-        push_EXP(AST_Send_args(send)[idx]);
+        push_EXP(Send_args(send)[idx]);
         push_CNT(send_Eval);
     } else {
         poke_EXP(0, idx);
@@ -55,11 +55,11 @@ void CNT_store_argument()
     }
 }
 
-void AST_Send_eval(AST_Send self)
+void Send_eval(Send self)
 {
     // LOGFUN;
 
-    push_CNT(AST_Send_send);
+    push_CNT(Send_send);
 
     push_EXP(0);
     push_EXP(self->receiver);

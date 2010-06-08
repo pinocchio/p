@@ -33,7 +33,7 @@ void send_eval_rest(Object exp, Class class)
     EVAL_IF(AST_Assign)
     EVAL_IF(AST_Constant)
     EVAL_IF(AST_Variable)
-    EVAL_IF(AST_Self)
+    EVAL_IF(Self)
     EVAL_IF(AST_Block)
     EVAL_IF(Slot)
     EVAL_IF(UIntSlot)
@@ -46,8 +46,8 @@ CNT(send_Eval)
     Object exp = peek_EXP(0);
     Class class = HEADER(exp);
 
-    EVAL_IF(AST_Send)
-    EVAL_IF(AST_Super)
+    EVAL_IF(Send)
+    EVAL_IF(Super)
 
     send_eval_rest(exp, class);
 }
@@ -64,8 +64,8 @@ void CNT_tail_send_Eval()
 
     poke_CNT(restore_return);
 
-    EVAL_IF(AST_Send)
-    EVAL_IF(AST_Super)
+    EVAL_IF(Send)
+    EVAL_IF(Super)
 
     send_eval_rest(exp, class);
 }

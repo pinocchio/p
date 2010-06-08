@@ -5,14 +5,14 @@
 
 /* ========================================================================= */
 
-struct AST_Self_t {};
+struct Self_t {};
 
-extern Object Self;
-extern void post_init_AST_Self();
+extern Object self;
 
 /* ========================================================================= */
+extern void post_init_Self();
 
-extern void AST_Self_eval();
-extern void CNT_AST_Self_eval();
+extern void Self_eval();
+extern void CNT_Self_eval();
 
 #endif // SELF_H

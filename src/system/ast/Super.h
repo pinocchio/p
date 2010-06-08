@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-struct AST_Super_t {
+struct Super_t {
     uns_int         size;
     AST_Info        info;   
     Array      cache;
@@ -14,12 +14,12 @@ struct AST_Super_t {
     Object          arguments[];
 };
 
-extern AST_Super new_AST_Super(Object message, uns_int argc, ...);
+extern Super new_Super(Object message, uns_int argc, ...);
 
 /* ========================================================================= */
 
-extern void AST_Super_eval(AST_Super self);
-extern void AST_Super_tail_eval(AST_Super self);
+extern void Super_eval(Super self);
+extern void Super_tail_eval(Super self);
 
 /* ========================================================================= */
 

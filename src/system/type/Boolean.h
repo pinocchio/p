@@ -8,7 +8,7 @@
 
 /* ========================================================================= */
 
-extern void post_init_Type_Boolean();
+extern void post_init_Boolean();
 extern Object get_bool(bool value);
 
 /* ========================================================================= */

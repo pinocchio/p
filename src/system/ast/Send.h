@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-struct AST_Send_t {
+struct Send_t {
     uns_int     size;
     AST_Info    info;
     Array  cache;
@@ -14,14 +14,14 @@ struct AST_Send_t {
     Object      arguments[];
 };
 
-extern AST_Send new_AST_Send_raw(Object receiver, Object msg, uns_int argc);
-extern AST_Send new_AST_Send(Object receiver, Object msg, uns_int argc, ...);
+extern Send new_Send_raw(Object receiver, Object msg, uns_int argc);
+extern Send new_Send(Object receiver, Object msg, uns_int argc, ...);
 
 /* ========================================================================= */
-extern Array AST_Send_args(AST_Send send);
+extern Array Send_args(Send send);
 
-extern void AST_Send_eval(AST_Send self);
-extern void AST_Send_tail_eval(AST_Send self);
+extern void Send_eval(Send self);
+extern void Send_tail_eval(Send self);
 extern void eval_store(uns_int idx);
 extern void CNT_store_argument();
 
