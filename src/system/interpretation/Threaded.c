@@ -1,5 +1,5 @@
-#include <system/ast/ThreadedMethod.h>
-#include <stdarg.h>
+
+#include <system/interpretation/Threaded.h>
 
 /* ========================================================================= */
 
@@ -74,6 +74,13 @@ void t_push_next(long pc)
     push_EXP(v);
 }
 
+void t_push_variable(int pc)
+{
+    Variable variable = (Variable)threaded_code()->values[pc + 1];
+    Optr object = Variable_eval(variable);
+    set_pc(pc + 2);
+    push_EXP(object);
+}
 
 /* ========================================================================= */
 void t_return(long pc)
@@ -152,52 +159,13 @@ void t_send_n(long pc)
 }
 
 
-
-
 /* ========================================================================= */
-#define THREADED(name) RAW_THREADED(&t_##name);
-#define RAW_THREADED(o) code->values[pc++] = (Optr)(o);
 
-Array create_fac_code()
+void CNT_eval_threaded()
 {
-    Array code = new_Array_raw(14);
-    long pc = 0;
-    THREADED(push_self);
-    THREADED(push_1);
-    THREADED(branch_gt_int);
-    THREADED(jump_1);
-    THREADED(return_1);
-    THREADED(push_self);
-    THREADED(push_next);
-    RAW_THREADED(new_Send_raw(nil, (Optr)new_Symbol(L"fac"), 0));
-    THREADED(push_self);
-    THREADED(push_1);
-    THREADED(minus_int);
-    THREADED(send_0);
-    THREADED(times_int);
-    THREADED(return);
-    return code;
-}
-
-ThreadedMethod new_ThreadedMethod_with(Array params,
-                               Array locals,
-                               Array annotations,
-                               uns_int statementCount, ...)
-{
-    NEW_ARRAY_OBJECT(ThreadedMethod, Optr[statementCount]);
-    result->params = params;
-    result->locals = locals;
-    result->annotations = annotations;
-    init_variable_array(result->params, 0);
-    init_variable_array(result->locals, result->params->size);
-    result->info   = empty_Info;
-    result->size   = statementCount;
-    result->code = NULL;
-    COPY_ARGS(statementCount, result->body);
-
-    result->code = create_fac_code();
-
-    return result;
+    int pc                = (int)(uns_int)peekn_CNT(1);
+    Array code = (Array)peekn_CNT(2);
+    ((threaded)code->values[pc])(pc);
 }
 
 void ThreadedMethod_invoke(Runtime_MethodClosure closure,
@@ -227,15 +195,4 @@ void ThreadedMethod_invoke(Runtime_MethodClosure closure,
     CNT_eval_threaded();
 }
 
-/* ========================================================================= */
 
-void CNT_eval_threaded()
-{
-    long pc                = (long)peekn_CNT(1);
-    Array code = (Array)peekn_CNT(2);
-    ((threaded)code->values[pc])(pc);
-}
-
-void post_init_ThreadedMethod()
-{
-}

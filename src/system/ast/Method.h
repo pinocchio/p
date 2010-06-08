@@ -6,14 +6,14 @@
 /* ========================================================================= */
 
 struct Method_t {
-    uns_int     size;
+    uns_int size;
     Info    info;
-    Array  params;
-    Array  locals;
-    Optr      package;
-    Array  annotations;
-    Optr      unused;
-    Optr      body[];
+    Array   params;
+    Array   locals;
+    Optr    package;
+    Array   annotations;
+    Array   code;
+    Optr    body[];
 };
 
 extern Method new_Method(uns_int paramCount,
