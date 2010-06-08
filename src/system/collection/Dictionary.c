@@ -20,9 +20,9 @@ Dictionary new_Dictionary()
 
 /* ========================================================================= */
 
-static int get_hash(Dictionary self, Optr key)
+static long get_hash(Dictionary self, Optr key)
 {
-    int hash;
+    long hash;
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key)->value;
@@ -51,13 +51,13 @@ void push_hash(Optr key)
     push_EXP(hash);
 }
 
-int unwrap_hash(Dictionary self, Optr w_hash)
+long unwrap_hash(Dictionary self, Optr w_hash)
 {
     return unwrap_int(w_hash) % self->data->size;
 }
 
 
-static DictBucket * get_bucketp(Dictionary dictionary, int hash)
+static DictBucket * get_bucketp(Dictionary dictionary, long hash)
 {
     return (DictBucket *)&dictionary->data->values[hash];
 }
@@ -66,7 +66,7 @@ static DictBucket * get_bucketp(Dictionary dictionary, int hash)
  * Quick dictionary functions. Only for bootstrapping.                       *
  * ========================================================================= */
 
-static int Dictionary_grow_check(Dictionary self)
+static long Dictionary_grow_check(Dictionary self)
 {
     uns_int amount = self->size + 1;
     self->size     = amount;
@@ -81,11 +81,11 @@ static void Dictionary_quick_check_grow(Dictionary self)
     Array old = self->data;
     self->data     = new_Array_withAll(old->size << 1, (Optr)nil);
     self->size     = 0;
-    int i;
+    long i;
     for (i = 0; i < old->size; i++) {
         DictBucket bucket = (DictBucket)old->values[i];
         if (bucket == (DictBucket)nil) { continue; }
-        int j;
+        long j;
         uns_int tally = bucket->tally;
         for (j = 0; j < tally; j=j+2) {
             Optr key = bucket->values[j];
@@ -99,7 +99,7 @@ void Dictionary_quick_store(Dictionary self,
                                  Optr key, Optr value)
 {
     assert0(self != (Dictionary)nil);
-    int hash = get_hash(self, key);
+    long hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (DictBucket)nil) {
         *bucketp                     = new_bucket();
@@ -116,13 +116,13 @@ void Dictionary_quick_store(Dictionary self,
 
 Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 {
-    int hash = get_hash(self, key);
+    long hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
     DictBucket bucket = *bucketp;
     if (bucket == (DictBucket)nil) {
         return NULL;
     }
-    int i;
+    long i;
     uns_int tally = bucket->tally;
     for (i = 0; i < tally; i=i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
@@ -140,7 +140,7 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 static CNT(lookup_push)
     Optr w_hash              = peek_EXP(0);
     Dictionary self = (Dictionary)peek_EXP(2);
-    int hash                   = unwrap_hash(self, w_hash);
+    long hash                   = unwrap_hash(self, w_hash);
     Optr key                 = peek_EXP(1);
     zapn_EXP(2);
 
@@ -220,7 +220,7 @@ static CNT(Dictionary_check_grow)
     }
 }
 
-void Dictionary_direct_store(Dictionary self, int hash,
+void Dictionary_direct_store(Dictionary self, long hash,
                                   Optr key, Optr value) 
 {
     DictBucket * bucketp = get_bucketp(self, hash);
@@ -275,7 +275,7 @@ NATIVE2(Dictionary_at_ifAbsent_)
 CNT(Dictionary_at_put_)
     Optr w_hash              = peek_EXP(0);
     Dictionary self = (Dictionary)peek_EXP(3);
-    int hash                   = unwrap_hash(self, w_hash);
+    long hash                   = unwrap_hash(self, w_hash);
     Optr new                 = peek_EXP(1);
     Optr w_index             = peek_EXP(2);
     zapn_EXP(4);

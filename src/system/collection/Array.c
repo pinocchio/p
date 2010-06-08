@@ -36,7 +36,7 @@ Array new_Array_with(uns_int c, ...)
     Array result = new_Array_raw(c);
     va_list args;
     va_start(args, c);
-    int index;
+    long index;
     for (index = 0; index < c; index++) {
         result->values[index] = va_arg(args, Optr);
     }
@@ -57,14 +57,14 @@ Array new_Array_withAll(uns_int c, Optr element)
 
 /* ========================================================================= */
 
-Optr raw_Array_instAt(Array o, Optr tag, int index)
+Optr raw_Array_instAt(Array o, Optr tag, long index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->values[index];
 }
 
 void raw_Array_instAt_put(Array o, Optr tag,
-                               int index, Optr value)
+                               long index, Optr value)
 {
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
@@ -72,7 +72,7 @@ void raw_Array_instAt_put(Array o, Optr tag,
 
 NATIVE1(Array_instVarAt_)
     Optr w_index  = NATIVE_ARG(0);
-    int index       = unwrap_int(w_index) - 1;
+    long index       = unwrap_int(w_index) - 1;
     Optr tag      = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
@@ -82,7 +82,7 @@ NATIVE1(Array_instVarAt_)
 NATIVE2(Array_instVarAt_put_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_arg   = NATIVE_ARG(1);
-    int index      = unwrap_int(w_index) - 1;
+    long index      = unwrap_int(w_index) - 1;
     Optr tag   = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);

@@ -19,15 +19,19 @@
     #endif // GC_MALLOC
 #endif // NOGC
 
+/*
 #define M64
 #ifdef M32
 typedef unsigned int uns_int;
 #define F_I ""
 #endif 
 #ifdef M64
-typedef unsigned long int uns_int;
+*/
+typedef unsigned long uns_int;
 #define F_I "l"
+/*
 #endif
+*/
 
 /* ========================================================================= */
 

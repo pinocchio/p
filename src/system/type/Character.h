@@ -18,7 +18,7 @@ extern void post_init_Character();
 /* ========================================================================= */
 
 extern Character new_Character_raw(wchar_t value);
-extern Character new_Character_fromInt(int value);
+extern Character new_Character_fromInt(long value);
 
 /* ========================================================================= */
 

@@ -18,7 +18,7 @@ Super new_Super(Optr message, uns_int argc, ...)
 
     va_list args;
     va_start(args, argc);
-    int idx;
+    long idx;
     for (idx = 0; idx < argc; idx++) {
         Super_args(result)[idx] = va_arg(args, Optr);
     }

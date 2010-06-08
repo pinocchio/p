@@ -15,7 +15,7 @@ Annotation new_Annotation(Optr selector, uns_int argc, ...)
     Annotation result = new_Annotation_raw(selector, argc);
     va_list args;
     va_start(args, argc);
-    int idx;
+    long idx;
     for (idx = 0; idx < argc; idx++) {
         result->arguments[idx] = va_arg(args, Optr);
     }
@@ -28,7 +28,7 @@ Annotation new_Annotation(Optr selector, uns_int argc, ...)
 Annotation lookup_annotation(Array annotations, Optr selector)
 {
     assert1(HEADER(annotations) == Array_Class, "Annotations should be an array");
-    int i;
+    long i;
     for (i = 0; i < annotations->size; i++) {
         Annotation annotation = (Annotation)annotations->values[i];
         if (HEADER(annotation) != Annotation_Class) { continue; }

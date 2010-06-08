@@ -12,14 +12,14 @@ SmallInt* SmallInt_cache;
 
 /* ========================================================================= */
 
-SmallInt new_SmallInt_raw(int value)
+SmallInt new_SmallInt_raw(long value)
 {
     NEW_OBJECT(SmallInt);
     result->value = value;
     return result;
 }
 
-SmallInt new_SmallInt(int value)
+SmallInt new_SmallInt(long value)
 {
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
@@ -34,7 +34,7 @@ void init_numbercache()
     SmallInt_cache   = (SmallInt*)PALLOC(sizeof(SmallInt[INT_CACHE_UPPER-INT_CACHE_LOWER]));
     SmallInt_cache -= INT_CACHE_LOWER;
     
-    int i;
+    long i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
         SmallInt_cache[i] = new_SmallInt_raw(i);
     }
@@ -44,7 +44,7 @@ void init_numbercache()
 
 #define SmallInt_BINARY_OPERATION(name, op)\
 NATIVE1(SmallInt_##name)\
-    int value = unwrap_int(NATIVE_ARG(0)); \
+    long value = unwrap_int(NATIVE_ARG(0)); \
     RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op value));\
 }
 
@@ -82,18 +82,18 @@ SmallInt_COMPARE_OPERATION(lt_, <)
 SmallInt_COMPARE_OPERATION(gt_, >)
 SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
-String SmallInt_asString(int self, uns_int base)
+String SmallInt_asString(long self, uns_int base)
 {
-    int size = 1;
+    long size;
     if (self == 0) { 
         size = 1; 
     } else {
-        size = 1+(int)floor(log10(abs(self)));
+        size = 1+(long)floorl(log10l(labs(self)));
     }
     if (self < 0) { size += 1; };
     size += 1;
     wchar_t wchar_copy[size];
-    swprintf(&wchar_copy[0], size, L"%i", self);
+    swprintf(&wchar_copy[0], size, L"%li", self);
     String result   =  new_String(wchar_copy);
     return result;
 }
@@ -138,12 +138,12 @@ void post_init_SmallInt()
 
 /* ========================================================================= */
 
-Optr wrap_int(int value)
+Optr wrap_int(long value)
 {
     return (Optr)new_SmallInt(value);
 }
 
-int unwrap_int(Optr integer)
+long unwrap_int(Optr integer)
 {
     // TODO do more stuff in case we are not an int.
     ASSERT_TAG_LAYOUT(GETTAG(integer), Int);

@@ -27,14 +27,14 @@ extern Optr Dictionary_quick_lookup(Dictionary self, Optr key);
 extern void Dictionary_quick_store(Dictionary self,
                                         Optr key, Optr value);
 
-extern void Dictionary_direct_store(Dictionary self, int hash,
+extern void Dictionary_direct_store(Dictionary self, long hash,
                                          Optr key, Optr value);
 extern void Dictionary_lookup_push();
 
 /* ========================================================================= */
 
 extern void push_hash(Optr key);
-extern int unwrap_hash(Dictionary self, Optr w_hash);
+extern long unwrap_hash(Dictionary self, Optr w_hash);
 
 /* ========================================================================= */
 

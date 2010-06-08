@@ -19,7 +19,7 @@ DictBucket new_DictBucket_raw(uns_int size)
 DictBucket new_DictBucket(uns_int size)
 {
     DictBucket result = new_DictBucket_raw(size);
-    int i;
+    long i;
     for (i = 0; i < size; i++) {
         result->values[i] = nil;
     }
@@ -37,7 +37,7 @@ static void Bucket_grow(DictBucket * bucketp)
 {
     DictBucket old_bucket = *bucketp;
     DictBucket new_bucket = new_DictBucket_raw(old_bucket->size << 1);
-    int i;
+    long i;
     for(i = 0; i < old_bucket->size; i++) {
         new_bucket->values[i] = old_bucket->values[i];
     }
@@ -48,7 +48,7 @@ static void Bucket_grow(DictBucket * bucketp)
     *bucketp = new_bucket;
 }
 
-int Bucket_quick_compare_key(Optr inkey, Optr dictkey)
+long Bucket_quick_compare_key(Optr inkey, Optr dictkey)
 {
     if (HEADER(inkey) == SmallInt_Class) {
         if (HEADER(dictkey) == SmallInt_Class) {
@@ -69,10 +69,10 @@ int Bucket_quick_compare_key(Optr inkey, Optr dictkey)
     return -1;
 }
 
-int Bucket_quick_store(DictBucket * bucketp, Optr key, 
+long Bucket_quick_store(DictBucket * bucketp, Optr key, 
 					   Optr value)
 {
-    int i;
+    long i;
     DictBucket bucket = *bucketp;
     uns_int tally                = bucket->tally;
     for (i = 0; i < tally; i = i+2) {
@@ -99,7 +99,7 @@ int Bucket_quick_store(DictBucket * bucketp, Optr key,
 
 static void Bucket_compare_key(Optr inkey, Optr dictkey)
 {
-    int result = Bucket_quick_compare_key(inkey, dictkey);
+    long result = Bucket_quick_compare_key(inkey, dictkey);
 
     if (result == -1) {
         return Class_direct_dispatch(inkey, HEADER(inkey),
@@ -248,7 +248,7 @@ void CNT_bucket_rehash()
 {
     Optr w_hash        = pop_EXP();
     Dictionary dict = (Dictionary)peek_EXP(2);
-    int hash             = unwrap_hash(dict, w_hash);
+    long hash             = unwrap_hash(dict, w_hash);
 
     uns_int idx          = (uns_int)peek_EXP(0);
     DictBucket bucket    = (DictBucket)peek_EXP(1);

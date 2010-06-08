@@ -51,10 +51,10 @@ void pre_init_Symbol()
 NATIVE1(Symbol_at_)
     Optr w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
-    int index     = unwrap_int(w_arg0) - 1;
-    assert(0 <= index, printf("Index below 0: %i", index));
+    long index     = unwrap_int(w_arg0) - 1;
+    assert(0 <= index, printf("Index below 0: %li", index));
     assert(index < ((String)self)->size,
-        printf("%i is out of Bounds[%"F_I"u]\n", index, ((String)self)->size));
+        printf("%li is out of Bounds[%"F_I"u]\n", index, ((String)self)->size));
     // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
     RETURN_FROM_NATIVE(new_Character(((Symbol) self)->value[index]));
 }
@@ -68,7 +68,7 @@ Array Symbol_asArray(Symbol symbol)
     Symbol self_symbol = (Symbol)symbol;
     Array array        = new_Array_raw(self_symbol->size);
     LOG("%ls\n", symbol->value); 
-    int i;
+    long i;
     for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Optr)new_Character(self_symbol->value[i]);
     }
@@ -79,14 +79,14 @@ NATIVE0(Symbol_asArray)
     RETURN_FROM_NATIVE(Symbol_asArray((Symbol)self));
 }
 
-SmallInt wchar_hash(const wchar_t * string, int size)
+SmallInt wchar_hash(const wchar_t * string, long size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
-    unsigned int hash = 5381;
+    uns_int hash = 5381;
     while (size--) {
         hash += (hash << 5) + *string++;
     }
-    if ((int)hash < 0) {
+    if ((long)hash < 0) {
         hash >>= 1;
     }
     return new_SmallInt(hash);

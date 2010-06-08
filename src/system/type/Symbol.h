@@ -21,7 +21,7 @@ extern void init_SymbolTable();
 /* ========================================================================= */
 
 extern void initialize_Symbol();
-extern SmallInt wchar_hash(const wchar_t * string, int size);
+extern SmallInt wchar_hash(const wchar_t * string, long size);
 extern SmallInt Symbol_hash(Symbol symbol_string);
 
 /* ========================================================================= */

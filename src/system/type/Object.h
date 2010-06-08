@@ -18,8 +18,8 @@ CREATE_INITIALIZERS(Object)
 
 /* ========================================================================= */
 
-extern Optr Object_instVarAt_(Optr self, int index);
-extern void Object_instVarAt_put_(Optr self, int index, Optr value);
+extern Optr Object_instVarAt_(Optr self, long index);
+extern void Object_instVarAt_put_(Optr self, long index, Optr value);
 
 extern SmallInt Object_hash(Object object);
 /* ========================================================================= */

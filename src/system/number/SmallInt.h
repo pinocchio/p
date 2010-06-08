@@ -11,17 +11,17 @@
 /* ========================================================================= */
 
 struct SmallInt_t {
-    int value;
+    long value;
 };
 
 CREATE_INITIALIZERS(SmallInt)
-extern SmallInt new_SmallInt(int value);
+extern SmallInt new_SmallInt(long value);
 extern void init_numbercache();
 
 /* ========================================================================= */
 
-extern Optr wrap_int(int value);
-extern int unwrap_int(Optr integer);
+extern Optr wrap_int(long value);
+extern long unwrap_int(Optr integer);
 
 /* ========================================================================= */
 

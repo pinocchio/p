@@ -20,11 +20,11 @@ Character new_Character(wchar_t value)
     return new_Character_raw(value);
 }
 
-Character new_Character_fromInt(int value)
+Character new_Character_fromInt(long value)
 {
     wchar_t casted = (wchar_t)value;
-    assert(((int)casted == value), 
-        printf("Unicode Character \"%lc\" %i out of Range [%"F_I"i Byte]", 
+    assert(((long)casted == value), 
+        printf("Unicode Character \"%lc\" %li out of Range [%"F_I"i Byte]", 
                 casted, value, sizeof(wchar_t)));
     
     return new_Character(casted);

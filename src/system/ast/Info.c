@@ -48,7 +48,7 @@ void print_Info(Info info)
     if (info == NULL || (Optr)info != nil || info == empty_Info) {
         printf("[ NO SOURCE INFO GIVEN ]");
     } else {
-        printf("[%ls %i]", info->name->value, 
+        printf("[%ls %li]", info->name->value, 
                           //info->sourceFile->value,
                           info->line->value);
     }

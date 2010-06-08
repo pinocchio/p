@@ -12,7 +12,7 @@ DECLARE_CLASS(Object);
 
 SmallInt Object_hash(Object object)
 {
-    unsigned int hash = (unsigned int)(uns_int)object;
+    uns_int hash = (uns_int)object;
     return new_SmallInt(hash>>3);
 }
 
@@ -35,19 +35,19 @@ NATIVE1(Object_equals)
     RETURN_FROM_NATIVE(get_bool(self == arg));
 }
 
-Optr raw_Object_at(Object o, Optr tag, int index)
+Optr raw_Object_at(Object o, Optr tag, long index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->ivals[index];
 }
 
 void raw_Object_at_put(Object o, Optr tag,
-                            int index, Optr value)
+                       long index, Optr value)
 {
     ASSERT_TAG_SIZE(tag, index); o->ivals[index] = value;
 }
 
-Optr Object_instVarAt_(Optr self, int index)
+Optr Object_instVarAt_(Optr self, long index)
 {
     Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
@@ -62,7 +62,7 @@ Optr Object_instVarAt_(Optr self, int index)
     return NULL;
 }
 
-void Object_instVarAt_put_(Optr self, int index, Optr value)
+void Object_instVarAt_put_(Optr self, long index, Optr value)
 {
     Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
@@ -79,7 +79,7 @@ void Object_instVarAt_put_(Optr self, int index, Optr value)
 NATIVE1(Array_basicNew_)
     assert_class(self);
     Optr w_size = NATIVE_ARG(0);
-    int size      = unwrap_int(w_size);
+    long size      = unwrap_int(w_size);
     assert0(size >= 0);
     Optr result = instantiate_sized((Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
@@ -101,18 +101,18 @@ NATIVE0(Object_size)
     RETURN_FROM_NATIVE(result);
 }
 
-Optr raw_Array_at(Array array, Optr tag, int index)
+Optr raw_Array_at(Array array, Optr tag, long index)
 {
     assert(array->size > index,
-        printf("Array at: %i out of bounds %"F_I"u\n" , index, array->size));
+        printf("Array at: %li out of bounds %"F_I"u\n" , index, array->size));
     assert(0 <= index, 
-        printf("Array at: %i should be positive\n", index));
+        printf("Array at: %li should be positive\n", index));
     return array->values[TAG_SIZE(tag) + index];
 }
 
 NATIVE1(Array_at_)
     Optr w_index = NATIVE_ARG(0);
-    int index      = unwrap_int(w_index);
+    long index      = unwrap_int(w_index);
     Array as  = (Array)self;
 
     Optr tag = GETTAG(as);    
@@ -122,7 +122,7 @@ NATIVE1(Array_at_)
 }
 
 void raw_Array_at_put(Array array, Optr tag,
-                           int index, Optr value)
+                           long index, Optr value)
 {
     assert0(0 <= index);
     assert0(array->size > index);
@@ -132,7 +132,7 @@ void raw_Array_at_put(Array array, Optr tag,
 NATIVE2(Array_at_put_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_arg   = NATIVE_ARG(1);
-    int index      = unwrap_int(w_index);
+    long index      = unwrap_int(w_index);
     Array as  = (Array)self;
    
     Optr tag = GETTAG(as);

@@ -54,11 +54,11 @@ IO_File new_IO_WriteFile_from(FILE* file)
 
 /* ========================================================================= */
 
-int IO_File_size(IO_File file) {
+long IO_File_size(IO_File file) {
     assert1(file->file != NULL, "Trying to get size from invalid file.");
     long pos = ftell(file->file);
     rewind(file->file);
-    int size = 0;
+    long size = 0;
     char cur;
     while ((cur = fgetwc(file->file)) != WEOF) { size++; }
     fseek(file->file, pos, SEEK_SET);
@@ -74,10 +74,10 @@ void IO_File_readCharacter(IO_File file, wchar_t* result) {
 }
 
 
-int IO_File_atEnd(IO_File file) {
+long IO_File_atEnd(IO_File file) {
     assert1(file != NULL, "Invalid Argument");
-    int c = fgetc(file->file);
-    int result = c == EOF;
+    long c = fgetc(file->file);
+    long result = c == EOF;
     if (!result) {
         ungetc(c, file->file);
     }
@@ -91,9 +91,9 @@ NATIVE0(IO_File_atEnd)
 String IO_File_readAll(IO_File file) 
 {
     assert1(file != NULL, "Invalid Argument");
-    int size = IO_File_size(file);
+    long size = IO_File_size(file);
     String result = new_String_sized(size);
-    int idx;
+    long idx;
     for (idx = 0; idx < size; idx++) {
         IO_File_readCharacter(file, &result->value[idx]);
     }
@@ -110,7 +110,7 @@ String IO_File_readLine(IO_File file)
     assert1(file != NULL, "Invalid Argument");
     uns_int size = 1024;
     wchar_t * chr = (wchar_t *) PALLOC(sizeof(wchar_t)*size);
-    int i = 0;
+    long i = 0;
     while (1) {
         IO_File_readCharacter(file, &chr[i]);
         if (chr[i] == L'\n') {
@@ -118,7 +118,7 @@ String IO_File_readLine(IO_File file)
         }
         if (++i == size) {
             wchar_t * new = (wchar_t *) PALLOC(sizeof(wchar_t)*size*2);
-            int j;
+            long j;
             for (j = 0; j < size; j++) {
                 new[j] = chr[j];
             }
@@ -168,7 +168,7 @@ NATIVE0(IO_File_lf)
 void IO_File_writeAll_(IO_File file, String string) {
     assert1(file != NULL, "Invalid Argument");
     assert1(string != NULL && string->value != NULL, "Invalid Argument");
-    int i;
+    long i;
     for (i =0; i < string->size; i++) { 
         fputwc(string->value[i], file->file);
     }
@@ -223,7 +223,7 @@ NATIVE0(IO_File_stderr)
 }
 
 NATIVE0(IO_File_close)
-    int result = fclose(((IO_File)self)->file);
+    long result = fclose(((IO_File)self)->file);
     assert(result == 0,
         fwprintf(stderr, L"%s\n", strerror(errno)););
     RETURN_FROM_NATIVE(self);

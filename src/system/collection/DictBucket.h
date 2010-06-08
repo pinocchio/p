@@ -20,10 +20,10 @@ extern DictBucket new_DictBucket(uns_int size);
 extern DictBucket new_bucket();
 extern void Bucket_lookup(DictBucket bucket, Optr key);
 extern void Bucket_store_(DictBucket * bucketp, Optr key, Optr value);
-extern int Bucket_quick_store(DictBucket * bucketp, Optr key,
+extern long Bucket_quick_store(DictBucket * bucketp, Optr key,
                               Optr value);
 extern void CNT_bucket_rehash();
-extern int Bucket_quick_compare_key(Optr inkey, Optr dictkey);
+extern long Bucket_quick_compare_key(Optr inkey, Optr dictkey);
 
 /* ========================================================================= */
 

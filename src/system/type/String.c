@@ -35,7 +35,7 @@ String new_String_sized(uns_int size)
 
 String new_String_from_charp(const char * input)
 {
-    int size          = strlen(input)+1;
+    long size          = strlen(input)+1;
     wchar_t cp[size];
     cp[size - 1]      = L'\0';
     wchar_t * copy    = &cp[0];
@@ -47,7 +47,7 @@ String String_concat_(String str1, String str2)
 {
     assert1(str1 && str1->value, "Invalid Argument for String concat:");
     assert1(str2 && str2->value, "Invalid Argument for String concat:");
-    int len = str1->size + str2->size + 1;
+    long len = str1->size + str2->size + 1;
     wchar_t conc[len];
     conc[len - 1] = L'\0';
     wchar_t * concatenated = &conc[0];
@@ -89,10 +89,10 @@ NATIVE2(String_at_put_)
     Optr w_arg1 = NATIVE_ARG(1);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Character_Class);
-    int index = unwrap_int(w_arg0) - 1;
-    assert(0 <= index, printf("Index below 0: %i\n", index));
+    long index = unwrap_int(w_arg0) - 1;
+    assert(0 <= index, printf("Index below 0: %li\n", index));
     assert(index < ((String)self)->size,
-        printf("%i is out of Bounds[%"F_I"u] %p\n",
+        printf("%li is out of Bounds[%"F_I"u] %p\n",
                     index,
                     ((String)self)->size,
                     self));
@@ -104,16 +104,16 @@ NATIVE2(String_at_put_)
 NATIVE1(String_basicNew_)
     // TODO check type
     Optr w_size      = NATIVE_ARG(0);
-    int size           = unwrap_int(w_size);
+    long size           = unwrap_int(w_size);
     String result = new_String_sized(size);
     RETURN_FROM_NATIVE(result);
 }
 
-int wchar_withbase_to_number(uns_int base, const wchar_t * string, uns_int size)
+long wchar_withbase_to_number(uns_int base, const wchar_t * string, uns_int size)
 {
     // TODO handle overflows!
-    int result = 0;
-    int sign;
+    long result = 0;
+    long sign;
 
     if (*string == L'-') {
         sign = -1;
@@ -150,8 +150,8 @@ Optr wchar_to_number(const wchar_t * string, uns_int size)
     // TODO handle overflows!
     // TODO handle floats!
 
-    int result = 0;
-    int sign;
+    long result = 0;
+    long sign;
 
     if (*string == L'-') {
         sign = -1;
@@ -177,7 +177,7 @@ Optr wchar_to_number(const wchar_t * string, uns_int size)
 
 char * unicode_to_ascii(const wchar_t* str)
 {
-    int len        = wcslen(str);
+    long len        = wcslen(str);
     char* charname = (char*)PALLOC(sizeof(char[len]));
     assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
     return charname;
@@ -185,7 +185,7 @@ char * unicode_to_ascii(const wchar_t* str)
 
 wchar_t * ascii_to_unicode(const char* str)
 {
-    int len           = strlen(str);
+    long len           = strlen(str);
     wchar_t* charname = (wchar_t*)PALLOC(sizeof(wchar_t[len]));
     assert1(mbstowcs(charname, str, len) == len, "String not UTF compatible.");
     return charname;
