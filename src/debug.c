@@ -41,13 +41,13 @@ void print_Class(Object obj)
         fwprintf(stderr, L"NULL\n");
         return;
     }
-    if (obj == Nil) {
+    if (obj == nil) {
         fwprintf(stderr, L"Nil\n");
         return;
     }
     Class class = HEADER(obj);
     assert0(class != NULL);
-    assert0((Object)class != Nil);
+    assert0((Object)class != nil);
     if (HEADER(class) == metaclass) {
         fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
         return;
@@ -151,10 +151,10 @@ Object dict_at(Object o, uns_int at)
     uns_int idx = 0;
     for (i = 0; i < ds; i++) {
         Array bucket = (Array)dict->data->values[i];
-        if (bucket == (Array)Nil) { continue; }
+        if (bucket == (Array)nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
-            if (bucket->values[j] == Nil) { break; }
+            if (bucket->values[j] == nil) { break; }
             if (idx == at) {
                 return bucket->values[j+1];
             }
@@ -211,15 +211,15 @@ void shallow_inspect(Object o)
         fwprintf(stderr, L"Object with NULL class\n");
         return;
     }
-    if (o == Nil) {
+    if (o == nil) {
         fwprintf(stderr, L"nil\n");
         return;
     }
-    if (o == (Object)True) {
+    if (o == (Object)true) {
         fwprintf(stderr, L"true\n");
         return;
     }
-    if (o == (Object)False) {
+    if (o == (Object)false) {
         fwprintf(stderr, L"false\n");
         return;
     }
@@ -253,11 +253,11 @@ void inspect_dict(Object o)
     uns_int idx = 0;
     for (i = 0; i < ds; i++) {
         Array bucket = (Array)dict->data->values[i];
-        if (bucket == (Array)Nil) { continue; }
+        if (bucket == (Array)nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
             Symbol key = (Symbol)bucket->values[j];
-            if (key == (Symbol)Nil) { break; }
+            if (key == (Symbol)nil) { break; }
             fwprintf(stderr, L"%"F_I"u %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }

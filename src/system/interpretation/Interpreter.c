@@ -39,7 +39,7 @@ void send_eval_rest(Object exp, Class class)
     EVAL_IF(UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
-    Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, Nil);
+    Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, nil);
 }
 
 CNT(send_Eval)

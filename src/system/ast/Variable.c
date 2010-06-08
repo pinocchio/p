@@ -20,7 +20,7 @@ AST_Variable new_AST_Variable(uns_int scope_id, uns_int local_id)
     NEW_OBJECT(AST_Variable);
     result->local_id = (Object)new_SmallInt(local_id);
     result->scope_id = (Object)new_SmallInt(scope_id);
-    result->name     = Nil;
+    result->name     = nil;
     result->info     = empty_AST_Info;
     return result;
 }

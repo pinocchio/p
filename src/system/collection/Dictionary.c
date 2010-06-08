@@ -14,7 +14,7 @@ Dictionary new_Dictionary()
     result->size      = 0;
     result->ratio     = 500;
     result->maxLinear = 20;
-    result->data      = new_Array_withAll(DICTIONARY_SIZE, Nil);
+    result->data      = new_Array_withAll(DICTIONARY_SIZE, nil);
     return result;
 }
 
@@ -79,12 +79,12 @@ static void Dictionary_quick_check_grow(Dictionary self)
     if (!Dictionary_grow_check(self)) { return; }
 
     Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Object)Nil);
+    self->data     = new_Array_withAll(old->size << 1, (Object)nil);
     self->size     = 0;
     int i;
     for (i = 0; i < old->size; i++) {
         DictBucket bucket = (DictBucket)old->values[i];
-        if (bucket == (DictBucket)Nil) { continue; }
+        if (bucket == (DictBucket)nil) { continue; }
         int j;
         uns_int tally = bucket->tally;
         for (j = 0; j < tally; j=j+2) {
@@ -98,10 +98,10 @@ static void Dictionary_quick_check_grow(Dictionary self)
 void Dictionary_quick_store(Dictionary self,
                                  Object key, Object value)
 {
-    assert0(self != (Dictionary)Nil);
+    assert0(self != (Dictionary)nil);
     int hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)Nil) {
+    if (*bucketp == (DictBucket)nil) {
         *bucketp                     = new_bucket();
         DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
@@ -119,7 +119,7 @@ Object Dictionary_quick_lookup(Dictionary self, Object key)
     int hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
     DictBucket bucket = *bucketp;
-    if (bucket == (DictBucket)Nil) {
+    if (bucket == (DictBucket)nil) {
         return NULL;
     }
     int i;
@@ -145,7 +145,7 @@ static CNT(lookup_push)
     zapn_EXP(2);
 
     DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)Nil) {
+    if (*bucketp == (DictBucket)nil) {
         poke_EXP(0, NULL);
         return;
     }
@@ -175,11 +175,11 @@ static void CNT_dict_grow()
     } else {
         poke_EXP(1, idx - 1);
     }
-    if (bucket == (DictBucket)Nil || bucket->size == 0) {
+    if (bucket == (DictBucket)nil || bucket->size == 0) {
         return;
     }
     Object key = bucket->values[0];
-    if (key == (Object)Nil) { return; }
+    if (key == (Object)nil) { return; }
 
     push_CNT(bucket_rehash);
     claim_EXP(2);
@@ -192,7 +192,7 @@ static void CNT_dict_grow()
 static void Dictionary_grow(Dictionary self)
 {
     Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Object)Nil);
+    self->data     = new_Array_withAll(old->size << 1, (Object)nil);
     self->size     = 0;
     
     push_CNT(dict_grow);
@@ -224,7 +224,7 @@ void Dictionary_direct_store(Dictionary self, int hash,
                                   Object key, Object value) 
 {
     DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)Nil) { 
+    if (*bucketp == (DictBucket)nil) { 
         *bucketp                     = new_bucket();
         DictBucket bucket = *bucketp;
         bucket->values[0]            = key;
@@ -242,7 +242,7 @@ void Dictionary_direct_store(Dictionary self, int hash,
 
 static CNT(fix_dictionary_result)
     if (peek_EXP(0) == NULL) {
-        poke_EXP(0, Nil);
+        poke_EXP(0, nil);
     }
 }
 

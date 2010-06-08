@@ -5,11 +5,11 @@
 
 /* ========================================================================= */
 
-struct Type_Nil_t{};
+struct Nil_t{};
 
-extern Object Nil;
-extern AST_Constant Nil_Const;
-CREATE_INITIALIZERS(Type_Nil)
+extern Object nil;
+extern AST_Constant nil_Const;
+CREATE_INITIALIZERS(Nil)
 
 /* ========================================================================= */
 

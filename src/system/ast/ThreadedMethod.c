@@ -108,7 +108,7 @@ Array create_fac_code()
     THREADED(return_1);
     THREADED(push_self);
     THREADED(push_next);
-    RAW_THREADED(new_AST_Send_raw(Nil, (Object)new_Symbol(L"fac"), 0));
+    RAW_THREADED(new_AST_Send_raw(nil, (Object)new_Symbol(L"fac"), 0));
     THREADED(push_self);
     THREADED(push_1);
     THREADED(minus);
@@ -143,7 +143,7 @@ void AST_ThreadedMethod_invoke(Runtime_MethodClosure closure,
                                AST_ThreadedMethod method,
                                Object self, uns_int argc)
 {
-    if (method->code == (Array)Nil) {
+    if (method->code == (Array)nil) {
         return AST_Method_invoke(closure, (AST_Method)method, self, argc);
     }
 

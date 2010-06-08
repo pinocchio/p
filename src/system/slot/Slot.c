@@ -13,7 +13,7 @@ Slot new_Slot(uns_int index, const wchar_t * name)
     NEW_OBJECT(Slot);
     result->index   = index;
     result->name    = (Object)new_Symbol_cached(name);
-    result->package = (Object)Nil;
+    result->package = (Object)nil;
     return result;
 }
 

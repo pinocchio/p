@@ -90,11 +90,11 @@ Class class##_Class;
 // TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
     assert0(Eval_Send1((Object)(exp1), SMB__pequal, \
-        (Object)(exp2)) == (Object)True);
+        (Object)(exp2)) == (Object)true);
         
 #define ASSERT_NOT_EQUALS(exp1, exp2) \
     assert0(Eval_Send1((Object)(exp1), SMB__pequal, \
-        (Object)(exp2)) == (Object)False);
+        (Object)(exp2)) == (Object)false);
 
 #define COPY_ARGS(source, target)\
 {\
@@ -143,7 +143,7 @@ extern void print_EXP();
 /* ========================================================================= */
 
 typedef unsigned int    bool;
-typedef struct Type_Nil{} Type_Nil;   
+typedef struct Nil{} Nil;   
 
 /* ========================================================================= */
 

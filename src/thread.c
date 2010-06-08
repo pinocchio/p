@@ -32,8 +32,8 @@ void init_Error_Handler()
 void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
-    tset(_ISS_, Nil); 
-    tset(_ENV_, Nil);
+    tset(_ISS_, nil); 
+    tset(_ENV_, nil);
 
     tset(Eval_Exit,     PALLOC(sizeof(jmp_buf)));
     tset(Eval_Continue, PALLOC(sizeof(jmp_buf)));

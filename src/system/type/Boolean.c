@@ -4,16 +4,16 @@
 
 /* ========================================================================= */
 
-Object True;
-Object False;
-AST_Constant False_Const;
-AST_Constant True_Const;
+Object true;
+Object false;
+AST_Constant false_Const;
+AST_Constant true_Const;
 
 /* ========================================================================= */
 
 Object get_bool(bool value)
 {
-    return value ? True : False;
+    return value ? true : false;
 }
 
 /* ========================================================================= */
@@ -29,12 +29,12 @@ void CNT_loop_apply()
 
 NATIVE1(Type_True_whileTrue_)
     push_CNT(loop_apply);
-    push_EXP(Nil);
+    push_EXP(nil);
 }
 
 NATIVE1(Type_False_whileFalse_)
     push_CNT(loop_apply);
-    push_EXP(Nil);
+    push_EXP(nil);
 }
 
 NATIVE2(Type_True_ifTrue_ifFalse_)
@@ -53,11 +53,11 @@ NATIVE2(Type_False_ifTrue_ifFalse_)
 
 void post_init_Type_Boolean()
 {
-    True         = instantiate(Type_True_Class);
-    True_Const   = new_AST_Constant((Object)True);
+    true         = instantiate(Type_True_Class);
+    true_Const   = new_AST_Constant((Object)true);
 
-    False        = instantiate(Type_False_Class);
-    False_Const  = new_AST_Constant((Object)False);
+    false        = instantiate(Type_False_Class);
+    false_Const  = new_AST_Constant((Object)false);
 
     Dictionary natives;
     

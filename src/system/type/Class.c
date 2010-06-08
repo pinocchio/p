@@ -51,7 +51,7 @@ void Class_set_superclass(Class cls, Class superclass)
 {
     Class metaclass = HEADER(cls);
     cls->super           = superclass;
-    if (superclass != (Class)Nil) {
+    if (superclass != (Class)nil) {
         metaclass->super = HEADER(superclass);
     } else {
         metaclass->super = class;
@@ -140,7 +140,7 @@ static CNT(Class_lookup_invoke)
 void Class_lookup(Class class, Object msg)
 {
     // TODO pass along the hash value
-    if (class == (Class)Nil) {
+    if (class == (Class)nil) {
         poke_EXP(0, NULL);
         zap_CNT();
         return;
@@ -189,19 +189,19 @@ CNT(restore_iss)
 void Class_tower_dispatch(Object self, Object class,
                                Type_Object iss, Runtime_Message message)
 {
-    tset(_ISS_, Nil);
+    tset(_ISS_, nil);
     push_EXP(iss);
     push_CNT(restore_iss);
     push_CNT(Class_lookup_invoke);
-    Type_Object tower = (Type_Object)Nil;
-    while (iss != (Type_Object)Nil) {
+    Type_Object tower = (Type_Object)nil;
+    while (iss != (Type_Object)nil) {
         Type_Object newtower = (Type_Object)instantiate((Class)Collection_Link_Class);
         newtower->ivals[0] = iss->ivals[0];
         newtower->ivals[1] = (Object)tower;
         tower = newtower;
         iss = (Type_Object)iss->ivals[1];
     }
-    push_EXP(Nil);
+    push_EXP(nil);
     push_EXP(tower->ivals[0]); // self, bottom interpreter
     push_EXP(message);
     push_EXP(self); // receiver
@@ -224,8 +224,8 @@ void Class_direct_dispatch(Object self, Class class, Object msg,
     /* Send obj. TODO update Send>>eval to be able to remove this */
     /* TODO optimize by claim + poke instead of push */
     Type_Object iss = (Type_Object)tget(_ISS_);
-    if ((Object)iss == Nil) {
-        push_EXP(Nil);
+    if ((Object)iss == nil) {
+        push_EXP(nil);
         push_EXP(self);
         for (idx = 0; idx < argc; idx++) {
             push_EXP(va_arg(args, Object));
@@ -249,8 +249,8 @@ void Class_direct_dispatch_withArguments(Object self, Class class,
     /* Send obj. TODO update Send>>eval to be able to remove this */
     int idx;
     Type_Object iss = (Type_Object)tget(_ISS_);
-    if ((Object)iss == Nil) {
-        push_EXP(Nil);
+    if ((Object)iss == nil) {
+        push_EXP(nil);
         push_EXP(self);
         for (idx = 0; idx < args->size; idx++) {
             push_EXP(args->values[idx]);
@@ -271,7 +271,7 @@ void Class_dispatch(Object self, Class class, uns_int argc)
     AST_Send send       = (AST_Send)peek_EXP(argc + 1); // + self
     Array cache    = send->cache;
     Object msg          = send->message;
-    assert0(msg != Nil);
+    assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol clsname;
@@ -288,7 +288,7 @@ void Class_dispatch(Object self, Class class, uns_int argc)
     #endif // PRINT_DISPATCH_TRACE
     
     // TODO properly initialize the inlinecache when creating new sends
-    if ((Object)cache != Nil) {
+    if ((Object)cache != nil) {
         Object method = Runtime_InlineCache_lookup(cache, (Object)class);
         if (method) {
             return Method_invoke(method, self, argc);

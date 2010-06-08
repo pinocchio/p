@@ -28,7 +28,7 @@ void Runtime_InlineCache_store(Array cache, Object class, Object method)
 {
     int i;
     for (i = 0; i < cache->size; i += 2) {
-        if (cache->values[i] == Nil) {
+        if (cache->values[i] == nil) {
             cache->values[i]    = class;
             cache->values[i+1]  = method;
             return;
@@ -44,7 +44,7 @@ NATIVE1(Runtime_InlineCache_checkCached_)
     if (result) {
         RETURN_FROM_NATIVE(result);
     } else {
-        RETURN_FROM_NATIVE(Nil);
+        RETURN_FROM_NATIVE(nil);
     }
 }
 

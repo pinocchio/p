@@ -40,7 +40,7 @@ static Type_Object load_plugin(Object class, const char * file_path)
     void * handle       = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
-        return (Type_Object)Nil;
+        return (Type_Object)nil;
     }
     
     Type_Object plugin = (Type_Object)instantiate((Class)class);

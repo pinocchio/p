@@ -68,9 +68,9 @@ NATIVE1(SmallInt##_##name)\
         SmallInt number      = ((SmallInt) self);\
         SmallInt otherNumber = (SmallInt)w_arg; \
         if (number->value op otherNumber->value) {\
-            RETURN_FROM_NATIVE(True);\
+            RETURN_FROM_NATIVE(true);\
         } else {\
-            RETURN_FROM_NATIVE(False);\
+            RETURN_FROM_NATIVE(false);\
         }\
     } else {\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \

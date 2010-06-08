@@ -60,7 +60,7 @@ CNT(exit_error)
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
     fwprintf(stderr, L"\n");
-    while ((Object)env != Nil) {
+    while ((Object)env != nil) {
         if (env->home_context == (Runtime_MethodContext)env) {
             fwprintf(stderr, L"\t%ls >> %ls\n",
                 (Symbol)HEADER(env->home_context->self)->name->value,
@@ -83,7 +83,7 @@ bool isInstance(Object object, Object class)
     // TODO check for MetaClass stuff
     assert_class(class);
     Class type = HEADER(object);
-    while ((Object)type != Nil) {
+    while ((Object)type != nil) {
         if ((Object)type == class) {
             return 1;
         }
@@ -197,7 +197,7 @@ void store_method(Class class, Symbol symbol,
 
 static void bootstrap()
 {
-    Nil = (Object) NEW_t(Type_Nil);
+    nil = (Object) NEW_t(Nil);
 
     metaclass                   = NEW_t(Class);
     Class Metaclass_mclass = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);

@@ -23,10 +23,10 @@ Runtime_BlockContext optain_context(uns_int size)
     if (size >= unused_contexts->size) { return make_context(size); }
     Runtime_BlockContext context =
         (Runtime_BlockContext)unused_contexts->values[size];
-    if ((Object)context == Nil) {
+    if ((Object)context == nil) {
         /*gc();
         context = (Runtime_BlockContext)unused_contexts->values[size];
-        if ((Object)context == Nil) {
+        if ((Object)context == nil) {
         */
         return make_context(size);
         /*}*/
@@ -40,13 +40,13 @@ void free_context(Runtime_BlockContext context)
     if (context->captured) { return; }
     uns_int size = context->size;
     Object next = unused_contexts->values[size];
-    context->closure = (Runtime_BlockClosure)Nil;
-    context->home_context = (Runtime_MethodContext)Nil;
+    context->closure = (Runtime_BlockClosure)nil;
+    context->home_context = (Runtime_MethodContext)nil;
     context->parent_frame = (Runtime_BlockContext)next;
-    context->parent_scope = (Runtime_BlockContext)Nil;
+    context->parent_scope = (Runtime_BlockContext)nil;
     int i;
     for (i = 0; i < size; i++) {
-        context->locals[i] = Nil;
+        context->locals[i] = nil;
     }
     unused_contexts->values[size] = (Object)context;
 }
@@ -96,7 +96,7 @@ void set_env(Object env)
 Object Runtime_BlockContext_lookup(Runtime_BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
-    while (scope_id != self->scope_id && (Object)self->parent_scope != Nil) {
+    while (scope_id != self->scope_id && (Object)self->parent_scope != nil) {
         if (IS_CONTEXT(self->parent_scope)) {
             self = (Runtime_BlockContext)self->parent_scope;
         } else {
@@ -118,7 +118,7 @@ Object Runtime_BlockContext_lookup(Runtime_BlockContext self,
 void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
                                  uns_int scope_id, Object value)
 {
-    while (scope_id != self->scope_id && (Object)self->closure->context != Nil) {
+    while (scope_id != self->scope_id && (Object)self->closure->context != nil) {
         if (IS_CONTEXT(self->closure->context)) {
             self = (Runtime_BlockContext)self->closure->context;
         } else {
@@ -151,7 +151,7 @@ NATIVE1(Runtime_BlockContext_errorHandler_)
 void pre_init_Runtime_BlockContext() { }
 void post_init_Runtime_BlockContext()
 {
-    unused_contexts = new_Array_withAll(CONTEXT_CACHE_SIZE, Nil);
+    unused_contexts = new_Array_withAll(CONTEXT_CACHE_SIZE, nil);
     
     Dictionary natives = add_plugin(L"Runtime.BlockClosure");
     store_native(natives, SMB_errorHandler, NM_Runtime_BlockContext_errorHandler);

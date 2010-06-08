@@ -6,15 +6,15 @@ Object instantiate_Array(Class class, Array ivars, uns_int extra)
     uns_int i;
 
     for (i = base; i < base+extra; i++) {
-        result->values[i] = Nil;
+        result->values[i] = nil;
     }
 
     for (i = 0; i < base; i++) {
-        result->values[i] = Nil;
+        result->values[i] = nil;
     }
 
     HEADER(result) = class;
-    assert0(HEADER(result) != (Class)Nil);
+    assert0(HEADER(result) != (Class)nil);
     return (Object)result;
 }
 
@@ -28,7 +28,7 @@ Object instantiate_Words(Class class, Array ivars, uns_int extra)
 {
     Symbol result = NEW_ARRAYED(struct Symbol_t, wchar_t[extra]);
     HEADER(result) = class;
-    assert0(HEADER(result) != (Class)Nil);
+    assert0(HEADER(result) != (Class)nil);
     return (Object)result;
 }
 
@@ -37,10 +37,10 @@ Object basic_instantiate_Object(Class class, uns_int size)
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
-        result->ivals[i] = Nil;
+        result->ivals[i] = nil;
     }
     HEADER(result) = class;
-    assert0(HEADER(result) != (Class)Nil);
+    assert0(HEADER(result) != (Class)nil);
     return (Object)result;
 }
 
@@ -50,10 +50,10 @@ static Object instantiate_Object(Class class, Array ivars)
     Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
-        result->ivals[i] = Nil;
+        result->ivals[i] = nil;
     }
     HEADER(result) = class;
-    assert0(HEADER(result) != (Class)Nil);
+    assert0(HEADER(result) != (Class)nil);
     return (Object)result;
 }
 

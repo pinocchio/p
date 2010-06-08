@@ -5,13 +5,13 @@
 
 /* ========================================================================= */
 
-Object Nil;
-AST_Constant Nil_Const;
+Object nil;
+AST_Constant nil_Const;
 
 /* ========================================================================= */
 
-void post_init_Type_Nil()
+void post_init_Nil()
 {
-    HEADER(Nil)        = Type_Nil_Class;
-    Nil_Const          = new_AST_Constant(Nil);
+    HEADER(nil)        = Nil_Class;
+    nil_Const          = new_AST_Constant(nil);
 }

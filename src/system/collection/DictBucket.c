@@ -21,7 +21,7 @@ DictBucket new_DictBucket(uns_int size)
     DictBucket result = new_DictBucket_raw(size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = Nil;
+        result->values[i] = nil;
     }
     return result;
 }
@@ -43,7 +43,7 @@ static void Bucket_grow(DictBucket * bucketp)
     }
     new_bucket->tally = old_bucket->tally;
     for(; i < new_bucket->size; i++) {
-        new_bucket->values[i] = (Object)Nil;
+        new_bucket->values[i] = (Object)nil;
     }
     *bucketp = new_bucket;
 }
@@ -114,7 +114,7 @@ void CNT_bucket_lookup()
     DictBucket bucket = (DictBucket)peek_EXP(1);
     uns_int idx                  = (uns_int)peek_EXP(2);
     
-    if (boolean == (Object)True) {
+    if (boolean == (Object)true) {
         zapn_EXP(4);
         poke_EXP(0, bucket->values[idx + 1]);
         zap_CNT();
@@ -163,7 +163,7 @@ static void CNT_Bucket_store()
     DictBucket bucket    = *bucketp;
     uns_int idx          = (uns_int)peek_EXP(1);
 
-    if (boolean == (Object)True) {
+    if (boolean == (Object)true) {
         return bucket_do_store(bucket, idx, 0);
     }
 

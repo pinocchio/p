@@ -47,9 +47,9 @@ NATIVE1(Float##_##name)\
         Float number      = ((Float) self);\
         Float otherNumber = (Float)w_arg; \
         if (number->value op otherNumber->value) {\
-            RETURN_FROM_NATIVE(True);\
+            RETURN_FROM_NATIVE(true);\
         } else {\
-            RETURN_FROM_NATIVE(False);\
+            RETURN_FROM_NATIVE(false);\
         }\
     } else {\
         assert1(NULL, "Invalid Type for Float Boolean BinOP "#name"\n"); \

@@ -38,7 +38,7 @@ Runtime_BlockContext activation_from_native(uns_int argc)
     argc = paramc;
     // Set locals to nil.
     while (argc < paramc + localc) {
-        context->locals[argc] = Nil;
+        context->locals[argc] = nil;
         argc++;
     }
 
@@ -116,7 +116,7 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     assert1(argc == block->params->size, "Argument count mismatch");
 
     if (block->size == 0) { 
-        RETURN_FROM_NATIVE(Nil);
+        RETURN_FROM_NATIVE(nil);
         return; 
     }
 
@@ -151,18 +151,18 @@ void apply(Object closure, uns_int argc)
 CNT(check_while_true)
     Object boolean = peek_EXP(0);
 
-    if (boolean == (Object)True) {
+    if (boolean == (Object)true) {
         Object closure = peek_EXP(1);
-        poke_EXP(0, Nil);
+        poke_EXP(0, nil);
         push_EXP(closure);
         Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
         return;
     }
 
-    if (boolean == (Object)False) {
+    if (boolean == (Object)false) {
         zap_CNT();
         zapn_EXP(3);
-        poke_EXP(0, Nil);
+        poke_EXP(0, nil);
         return;
     }
     
@@ -173,7 +173,7 @@ void CNT_while_true()
 {
     Object self = peek_EXP(2);
     push_CNT(check_while_true);
-    poke_EXP(0, Nil);
+    poke_EXP(0, nil);
     push_EXP(self);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)self, 0);
 }
@@ -183,7 +183,7 @@ void CNT_while_true()
 NATIVE1(Runtime_BlockClosure_whileTrue_)
     push_CNT(while_true);
     push_CNT(check_while_true);
-    push_EXP(Nil);
+    push_EXP(nil);
     push_EXP(self);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)self, 0);
 }

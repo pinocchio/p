@@ -101,11 +101,11 @@ NATIVE1(Symbol__equal)
     // TODO think about this! Are Symbols = Strings?
     Object w_arg = NATIVE_ARG(0);
     if (w_arg == self) {
-        RETURN_FROM_NATIVE(True);
+        RETURN_FROM_NATIVE(true);
         return;
     }
     if (!OBJECT_OF_LAYOUT(w_arg, Words)) {
-        RETURN_FROM_NATIVE(False);
+        RETURN_FROM_NATIVE(false);
         return;
     }
     RETURN_FROM_NATIVE(

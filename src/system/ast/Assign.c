@@ -42,5 +42,5 @@ CNT(AST_Assign_assign)
     ASSIGN_IF(Slot)
     ASSIGN_IF(UIntSlot)
     
-    Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, Nil, value);
+    Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, nil, value);
 }

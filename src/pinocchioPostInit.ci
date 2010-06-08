@@ -21,4 +21,4 @@ post_init_Type_Layout();
 post_init_Slot();
 post_init_UIntSlot();
 post_init_DictBucket();
-post_init_Type_Nil();
+post_init_Nil();

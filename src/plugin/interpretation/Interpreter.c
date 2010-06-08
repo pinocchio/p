@@ -15,7 +15,7 @@ NATIVE4(Interpreter_invokeNative)
     } else {
         claim_EXP(message->size - 4 + 1);
         poke_EXP(message->size+0, receiver);    
-        //poke_EXP(message->size+1, Nil);    
+        //poke_EXP(message->size+1, nil);    
         poke_EXP(message->size+2, tget(_ISS_));    
         push_CNT(restore_iss);
     }
@@ -36,7 +36,7 @@ static CNT(fix_lookup_result)
 	Object result = peek_EXP(0);
 	zapn_EXP(3);
 	if (result == NULL) {
-		poke_EXP(0, Nil);
+		poke_EXP(0, nil);
 	} else {
 		poke_EXP(0, result);
 	}

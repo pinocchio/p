@@ -13,10 +13,10 @@ extern Object get_bool(bool value);
 
 /* ========================================================================= */
 
-extern Object True;
-extern Object False;
-extern AST_Constant True_Const;
-extern AST_Constant False_Const;
+extern Object true;
+extern Object false;
+extern AST_Constant true_Const;
+extern AST_Constant false_Const;
 
 /* ========================================================================= */
 

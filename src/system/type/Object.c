@@ -54,7 +54,7 @@ Object Object_instVarAt_(Object self, int index)
         return raw_Type_Object_at((Type_Object)self, tag, index);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         return raw_Array_instAt((Array)self, tag, index);
-    } else if (tag == Nil) {
+    } else if (tag == nil) {
         assert1(NULL, "Trying to access object with Nil as layout");
     } else {
         assert1(NULL, "Trying to access object without instvars");
@@ -69,7 +69,7 @@ void Object_instVarAt_put_(Object self, int index, Object value)
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
         raw_Array_instAt_put((Array)self, tag, index, value);
-    } else if (tag == Nil) {
+    } else if (tag == nil) {
         assert1(NULL, "Trying to access object with Nil as layout");
     } else {
         assert1(NULL, "Trying to access object without instvars");

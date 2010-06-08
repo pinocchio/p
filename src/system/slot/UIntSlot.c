@@ -9,7 +9,7 @@ UIntSlot new_UIntSlot(uns_int index, const wchar_t * name)
     NEW_OBJECT(UIntSlot);
     result->index   = index;
     result->name    = (Object)new_Symbol(name);
-    result->package = (Object)Nil;
+    result->package = (Object)nil;
     return result;
 }
 

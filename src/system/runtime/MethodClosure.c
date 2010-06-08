@@ -9,7 +9,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(AST_Method code, Class host)
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
     result->info        = empty_AST_Info;
-    result->selector    = (Object)Nil;
+    result->selector    = (Object)nil;
     result->host        = host;
     return result;
 }
