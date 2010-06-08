@@ -15,6 +15,6 @@ void post_init_CharacterTable()
                                             CHARACTER_TABLE_SIZE);
     int i;
     for (i = 0; i < CHARACTER_TABLE_SIZE; i++) {
-        character_table->values[i] = (Object)new_Character_raw(i);
+        character_table->values[i] = (Optr)new_Character_raw(i);
     }
 }

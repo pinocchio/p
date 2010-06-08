@@ -12,10 +12,10 @@ struct ThreadedMethod_t {
     AST_Info         info;
     Array params;
     Array locals;
-    Object           package;
+    Optr           package;
     Array annotations;
     Array code;
-    Object           body[];
+    Optr           body[];
 };
 
 extern ThreadedMethod new_ThreadedMethod_with(Array params,
@@ -25,7 +25,7 @@ extern ThreadedMethod new_ThreadedMethod_with(Array params,
 
 extern void ThreadedMethod_invoke(Runtime_MethodClosure closure,
                                       ThreadedMethod method,
-                                      Object self, uns_int argc);
+                                      Optr self, uns_int argc);
 
 /* ========================================================================= */
 

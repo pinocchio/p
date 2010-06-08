@@ -15,8 +15,8 @@ Runtime_Continuation new_Runtime_Continuation()
 NATIVE1(Runtime_Continuation_continue_)
     // LOGFUN;
     Runtime_Continuation cont = (Runtime_Continuation)self;
-    Object * ds = tget(Double_Stack);
-    Object arg  = NATIVE_ARG(0);
+    Optr * ds = tget(Double_Stack);
+    Optr arg  = NATIVE_ARG(0);
     // restore the stack
     tset(_EXP_, cont->exp_stack->size + (&ds[-1]));
     tset(_CNT_, (&ds[STACK_SIZE]) - cont->cnt_stack->size);
@@ -43,9 +43,9 @@ NATIVE1(Runtime_Continuation_on_)
     cont->exp_stack = new_Array(EXP_size() - (argc + 1),
                                      tget(Double_Stack));
     cont->cnt_stack = new_Array(CNT_size(), tget(_CNT_));
-    cont->iss       = (Object)tget(_ISS_);
-    cont->env       = (Object)current_env();
-    Object closure  = NATIVE_ARG(0);
+    cont->iss       = (Optr)tget(_ISS_);
+    cont->env       = (Optr)current_env();
+    Optr closure  = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);
 }

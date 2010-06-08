@@ -17,7 +17,7 @@ extern Runtime_BlockClosure new_Runtime_BlockClosure(Block code,
 /* ========================================================================= */
 
 extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc);
-extern void apply(Object closure, uns_int argc);
+extern void apply(Optr closure, uns_int argc);
 
 /* ========================================================================= */
 
@@ -32,7 +32,7 @@ Runtime_MethodClosure fName() {\
     unsigned int _st_count   = 0;
 
 #define ADD_STATEMENT(value)\
-    body->body[_st_count++] = (Object)(value);
+    body->body[_st_count++] = (Optr)(value);
 
 /* ========================================================================= */
 

@@ -8,8 +8,8 @@
 struct Runtime_Continuation_t {
     Array  exp_stack;
     Array  cnt_stack;
-    Object      iss;
-    Object      env;
+    Optr      iss;
+    Optr      env;
 };
 
 extern void post_init_Runtime_Continuation();

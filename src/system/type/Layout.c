@@ -15,21 +15,21 @@ DECLARE_CLASS(LongLayout);
 DECLARE_CLASS(BytesLayout);
 DECLARE_CLASS(FileLayout);
 
-Object empty_object_layout;
-Object empty_array_layout;
-Object words_layout;
-Object bytes_layout;
-Object int_layout;
-Object float_layout;
-Object long_layout;
-Object character_layout;
-Object file_layout;
+Optr empty_object_layout;
+Optr empty_array_layout;
+Optr words_layout;
+Optr bytes_layout;
+Optr int_layout;
+Optr float_layout;
+Optr long_layout;
+Optr character_layout;
+Optr file_layout;
 
 /* ========================================================================= */
 
 Array create_layout_with_vars(Class layout, uns_int size)
 {
-    Array result = NEW_ARRAYED(struct Array_t, Object[size]);
+    Array result = NEW_ARRAYED(struct Array_t, Optr[size]);
     HEADER(result) = layout;
     result->size   = size;
     return result;
@@ -47,31 +47,31 @@ void change_slot_type(Class class, Class type, int counter, ...)
     va_end(args);
 }
 
-Object create_object_layout(uns_int size, va_list args)
+Optr create_object_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_object_layout; }
     Array result = create_layout_with_vars(ObjectLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_Slot(i, va_arg(args, wchar_t *));
+        result->values[i] = (Optr)new_Slot(i, va_arg(args, wchar_t *));
     }
     va_end(args);
-    return (Object)result;
+    return (Optr)result;
 }
 
-Object create_array_layout(uns_int size, va_list args)
+Optr create_array_layout(uns_int size, va_list args)
 {
     if (size == 0) { va_end(args); return empty_array_layout; }
     Array result = create_layout_with_vars(ArrayLayout_Class, size);
     int i;
     for (i = 0; i < size; i++) {
-        result->values[i] = (Object)new_Slot(i, va_arg(args, wchar_t*));
+        result->values[i] = (Optr)new_Slot(i, va_arg(args, wchar_t*));
     }
     va_end(args);
-    return (Object)result;
+    return (Optr)result;
 }
 
-Object create_layout(uns_int size, Type_Tag tag, ...)
+Optr create_layout(uns_int size, Type_Tag tag, ...)
 {
     va_list args;
     va_start(args, tag);

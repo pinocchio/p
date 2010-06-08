@@ -154,7 +154,7 @@ void IO_File_write_(IO_File file, Character chr) {
 
 NATIVE1(IO_File_write_)
     // TODO assert layout, not class
-    Object chr = NATIVE_ARG(0);
+    Optr chr = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(chr, Character_Class);
     IO_File_write_((IO_File)self, (Character)chr);
     RETURN_FROM_NATIVE(self);
@@ -176,7 +176,7 @@ void IO_File_writeAll_(IO_File file, String string) {
 
 NATIVE1(IO_File_writeAll_)
     String str = (String)NATIVE_ARG(0);
-    Object tag = GETTAG(str);
+    Optr tag = GETTAG(str);
     assert1(TAG_IS_LAYOUT(tag, Words), "Words-object expected!");
     IO_File_writeAll_((IO_File)self, str);
     RETURN_FROM_NATIVE(self);
@@ -187,7 +187,7 @@ NATIVE1(IO_File_flush)
     RETURN_FROM_NATIVE(self);
 }
 
-FILE * open_file(Object path, char * mode)
+FILE * open_file(Optr path, char * mode)
 {
     assert1(TAG_IS_LAYOUT(GETTAG(path), Words), "Invalid path-type");    
 

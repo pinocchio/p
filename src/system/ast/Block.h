@@ -10,7 +10,7 @@ struct Block_t {
     AST_Info    info;
     Array  params;
     Array  locals;
-    Object      body[];
+    Optr      body[];
 };
 
 extern Block new_Block(uns_int paramCount,

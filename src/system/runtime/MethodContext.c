@@ -5,7 +5,7 @@
 /* ========================================================================= */
 
 Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                                                Object self)
+                                                Optr self)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
 	Runtime_MethodContext result = (Runtime_MethodContext)optain_context(size);

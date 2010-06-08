@@ -8,7 +8,7 @@
 struct Runtime_MethodClosure_t {
     Method          code;
     AST_Info            info;
-    Object              selector;
+    Optr              selector;
     Class          host;
 };
 
@@ -18,7 +18,7 @@ extern Runtime_MethodClosure new_Runtime_MethodClosure(Method code,
 
 /* ========================================================================= */
 
-extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
+extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
                                          uns_int argc);
 
 /* ========================================================================= */

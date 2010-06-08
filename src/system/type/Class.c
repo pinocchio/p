@@ -28,7 +28,7 @@ Class new_Bootstrapping_Class()
     return cls;
 }
 
-Class new_Class(Class superclass, Object metatype)
+Class new_Class(Class superclass, Optr metatype)
 {    
     ASSERT_TAG_LAYOUT(metatype, Object);
     uns_int meta_size = ((Array)metatype)->size;
@@ -60,20 +60,20 @@ void Class_set_superclass(Class cls, Class superclass)
 
 /* ========================================================================= */
 
-void assert_class(Object class)
+void assert_class(Optr class)
 {
     assert0(HEADER(class) == metaclass ||        /* if metaclass */
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
 CNT(Class_super)
-    Object class = peek_EXP(0);
+    Optr class = peek_EXP(0);
     assert_class(class);
     poke_EXP(0, ((Class)class)->super);
 }
 
 
-static void Method_invoke_inline(Object method, Object self, uns_int argc) {
+static void Method_invoke_inline(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == Runtime_MethodClosure_Class) {
         Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, argc);
     } else {
@@ -82,9 +82,9 @@ static void Method_invoke_inline(Object method, Object self, uns_int argc) {
     }
 }
 
-void does_not_understand(Object self, Class class, Object msg, uns_int argc)
+void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
-    if (msg == (Object)SMB_doesNotUnderstand_) {
+    if (msg == (Optr)SMB_doesNotUnderstand_) {
         Runtime_Message message = (Runtime_Message)pop_EXP();
         // For now keep on printing the message.
         fwprintf(stderr, L"\033[33mDNU: %ls >> %ls\033[0m\n",
@@ -102,34 +102,34 @@ void does_not_understand(Object self, Class class, Object msg, uns_int argc)
 
     zapn_EXP(2);
 
-    Class_direct_dispatch(self, class, (Object)SMB_doesNotUnderstand_, 1, message);
+    Class_direct_dispatch(self, class, (Optr)SMB_doesNotUnderstand_, 1, message);
 }
 
 static CNT(Class_lookup_cache_invoke)
-    Object method    = peek_EXP(0);
+    Optr method    = peek_EXP(0);
     uns_int argc     = (uns_int)peek_EXP(3);
     Class class = (Class)peek_EXP(4);
-    Object self      = peek_EXP(2);
+    Optr self      = peek_EXP(2);
     if (method == NULL) {
-        Object msg  = peek_EXP(1);
+        Optr msg  = peek_EXP(1);
         zapn_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
     zapn_EXP(5);
     Send send       = (Send)peek_EXP(argc + 1);
     Array cache    = send->cache;
-    Runtime_InlineCache_store(cache, (Object)class, method);
+    Runtime_InlineCache_store(cache, (Optr)class, method);
     
     Method_invoke_inline(method, self, argc);
 }
 
 static CNT(Class_lookup_invoke)
-    Object method = peek_EXP(0);
+    Optr method = peek_EXP(0);
     uns_int argc  = (uns_int)peek_EXP(3);
-    Object self   = peek_EXP(2);
+    Optr self   = peek_EXP(2);
     if (method == NULL) {
         Class class = (Class)peek_EXP(4);
-        Object msg       = peek_EXP(1);
+        Optr msg       = peek_EXP(1);
         zapn_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
@@ -137,7 +137,7 @@ static CNT(Class_lookup_invoke)
     Method_invoke_inline(method, self, argc);
 }
 
-void Class_lookup(Class class, Object msg)
+void Class_lookup(Class class, Optr msg)
 {
     // TODO pass along the hash value
     if (class == (Class)nil) {
@@ -145,14 +145,14 @@ void Class_lookup(Class class, Object msg)
         zap_CNT();
         return;
     }
-    assert_class((Object)class);
+    assert_class((Optr)class);
     Dictionary mdict = class->methods;
     Dictionary_lookup_push(mdict, msg);
 }
 
 void CNT_Class_lookup_loop()
 {
-    Object method = peek_EXP(0);
+    Optr method = peek_EXP(0);
     if (method != NULL) {
         zap_EXP();
         zap_CNT();
@@ -161,14 +161,14 @@ void CNT_Class_lookup_loop()
     }
     zap_EXP();
     Class class = (Class)peek_EXP(0);
-    Object msg       = peek_EXP(1);
+    Optr msg       = peek_EXP(1);
     Class next  = class->super;
     poke_EXP(0, next);
     return Class_lookup(next, msg);
 }
 
-static void Class_direct_dispatch_inline(Object self, Class class,
-                                  Object msg, uns_int argc)
+static void Class_direct_dispatch_inline(Optr self, Class class,
+                                  Optr msg, uns_int argc)
 {
     push_EXP(class);
     push_EXP(argc);
@@ -181,12 +181,12 @@ static void Class_direct_dispatch_inline(Object self, Class class,
 }
 
 CNT(restore_iss)
-    Object return_value = pop_EXP();
+    Optr return_value = pop_EXP();
     tset(_ISS_, peek_EXP(0));
     poke_EXP(0, return_value);
 }
 
-void Class_tower_dispatch(Object self, Object class,
+void Class_tower_dispatch(Optr self, Optr class,
                                Type_Object iss, Runtime_Message message)
 {
     tset(_ISS_, nil);
@@ -197,7 +197,7 @@ void Class_tower_dispatch(Object self, Object class,
     while (iss != (Type_Object)nil) {
         Type_Object newtower = (Type_Object)instantiate((Class)Collection_Link_Class);
         newtower->ivals[0] = iss->ivals[0];
-        newtower->ivals[1] = (Object)tower;
+        newtower->ivals[1] = (Optr)tower;
         tower = newtower;
         iss = (Type_Object)iss->ivals[1];
     }
@@ -211,11 +211,11 @@ void Class_tower_dispatch(Object self, Object class,
     Class_direct_dispatch_inline(
         self,
         HEADER(self),
-        (Object)SMB_send_to_class_inInterpreterChain_,
+        (Optr)SMB_send_to_class_inInterpreterChain_,
         4);
 }
 
-void Class_direct_dispatch(Object self, Class class, Object msg,
+void Class_direct_dispatch(Optr self, Class class, Optr msg,
                                 uns_int argc, ...)
 {
     va_list args;
@@ -224,11 +224,11 @@ void Class_direct_dispatch(Object self, Class class, Object msg,
     /* Send obj. TODO update Send>>eval to be able to remove this */
     /* TODO optimize by claim + poke instead of push */
     Type_Object iss = (Type_Object)tget(_ISS_);
-    if ((Object)iss == nil) {
+    if ((Optr)iss == nil) {
         push_EXP(nil);
         push_EXP(self);
         for (idx = 0; idx < argc; idx++) {
-            push_EXP(va_arg(args, Object));
+            push_EXP(va_arg(args, Optr));
         }
         va_end(args);
         push_CNT(Class_lookup_invoke);
@@ -236,20 +236,20 @@ void Class_direct_dispatch(Object self, Class class, Object msg,
     } else {
         Runtime_Message message = new_Runtime_Message(msg, argc);
         for (idx = 0; idx < argc; idx++) {
-            message->arguments[idx] = va_arg(args, Object);
+            message->arguments[idx] = va_arg(args, Optr);
         }
         va_end(args);
-        Class_tower_dispatch(self, (Object)class, iss, message);
+        Class_tower_dispatch(self, (Optr)class, iss, message);
     }
 }
 
-void Class_direct_dispatch_withArguments(Object self, Class class,
-                                              Object msg, Array args)
+void Class_direct_dispatch_withArguments(Optr self, Class class,
+                                              Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     int idx;
     Type_Object iss = (Type_Object)tget(_ISS_);
-    if ((Object)iss == nil) {
+    if ((Optr)iss == nil) {
         push_EXP(nil);
         push_EXP(self);
         for (idx = 0; idx < args->size; idx++) {
@@ -262,15 +262,15 @@ void Class_direct_dispatch_withArguments(Object self, Class class,
         for (idx = 0; idx < args->size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
-        Class_tower_dispatch(self, (Object)class, iss, message);
+        Class_tower_dispatch(self, (Optr)class, iss, message);
     }
 }
 
-void Class_dispatch(Object self, Class class, uns_int argc)
+void Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send       = (Send)peek_EXP(argc + 1); // + self
     Array cache    = send->cache;
-    Object msg          = send->message;
+    Optr msg          = send->message;
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
@@ -288,15 +288,15 @@ void Class_dispatch(Object self, Class class, uns_int argc)
     #endif // PRINT_DISPATCH_TRACE
     
     // TODO properly initialize the inlinecache when creating new sends
-    if ((Object)cache != nil) {
-        Object method = Runtime_InlineCache_lookup(cache, (Object)class);
+    if ((Optr)cache != nil) {
+        Optr method = Runtime_InlineCache_lookup(cache, (Optr)class);
         if (method) {
             return Method_invoke_inline(method, self, argc);
         }
     } else {
         send->cache = new_Runtime_InlineCache();
     }
-    assert_class((Object)class);
+    assert_class((Optr)class);
     
     push_CNT(Class_lookup_cache_invoke);
     return Class_direct_dispatch_inline(self, class, msg, argc);

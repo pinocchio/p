@@ -14,7 +14,7 @@ extern Float new_Float(float value);
 
 /* ========================================================================= */
 
-extern float unwrap_float(Object integer);
+extern float unwrap_float(Optr integer);
 
 /* ========================================================================= */
 

@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-Assign new_Assign(Object variable, Object expression)
+Assign new_Assign(Optr variable, Optr expression)
 {
     NEW_OBJECT(Assign);
     result->variable   = variable;
@@ -30,9 +30,9 @@ void Assign_eval(Assign self)
     }
 
 CNT(Assign_assign)
-    Object value    = pop_EXP();
+    Optr value    = pop_EXP();
     Assign self = (Assign)peek_EXP(0);
-    Object var      = self->variable;
+    Optr var      = self->variable;
     /* result of evaluating expression is result of assignment */
     poke_EXP(0, value);
 
@@ -42,5 +42,5 @@ CNT(Assign_assign)
     ASSIGN_IF(Slot)
     ASSIGN_IF(UIntSlot)
     
-    Class_direct_dispatch(var, class, (Object)SMB_assignFor_to_, 2, nil, value);
+    Class_direct_dispatch(var, class, (Optr)SMB_assignFor_to_, 2, nil, value);
 }

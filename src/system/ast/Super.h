@@ -9,12 +9,12 @@ struct Super_t {
     uns_int         size;
     AST_Info        info;   
     Array      cache;
-    Object          message; 
-    Object          unused;
-    Object          arguments[];
+    Optr          message; 
+    Optr          unused;
+    Optr          arguments[];
 };
 
-extern Super new_Super(Object message, uns_int argc, ...);
+extern Super new_Super(Optr message, uns_int argc, ...);
 
 /* ========================================================================= */
 

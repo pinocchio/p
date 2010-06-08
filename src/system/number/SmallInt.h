@@ -20,8 +20,8 @@ extern void init_numbercache();
 
 /* ========================================================================= */
 
-extern Object wrap_int(int value);
-extern int unwrap_int(Object integer);
+extern Optr wrap_int(int value);
+extern int unwrap_int(Optr integer);
 
 /* ========================================================================= */
 

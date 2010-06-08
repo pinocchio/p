@@ -9,12 +9,12 @@
 /* ========================================================================= */
 
 extern void post_init_Boolean();
-extern Object get_bool(bool value);
+extern Optr get_bool(bool value);
 
 /* ========================================================================= */
 
-extern Object true;
-extern Object false;
+extern Optr true;
+extern Optr false;
 extern Constant true_Const;
 extern Constant false_Const;
 

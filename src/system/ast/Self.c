@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Object self;
+Optr self;
 
 /* ========================================================================= */
 
@@ -19,14 +19,14 @@ void Self_eval()
     // LOGFUN;
     Runtime_BlockContext env = current_env();
     assert0(IS_CONTEXT(env));
-    // replace the current element (an self) with the Object's self
+    // replace the current element (an self) with the Optr's self
     poke_EXP(0, env->home_context->self);
 }
 
 CNT(Self_eval)
     Runtime_BlockContext env = current_env();
     assert0(IS_CONTEXT(env));
-    // replace the current element (an self) with the Object's self
+    // replace the current element (an self) with the Optr's self
     push_EXP(env->home_context->self);
 }
 
@@ -34,7 +34,7 @@ CNT(Self_eval)
 
 void post_init_Self()
 {
-    self           = (Object) NEW_t(Self);
+    self           = (Optr) NEW_t(Self);
     HEADER(self)   = Self_Class;
     Self_Class->cvars[0] = self;
 }

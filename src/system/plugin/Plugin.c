@@ -13,7 +13,7 @@ Dictionary create_plugin()
 
 Dictionary add_plugin(const wchar_t * name)
 {
-    Object symbol = (Object)new_Symbol_cached(name);
+    Optr symbol = (Optr)new_Symbol_cached(name);
     Dictionary plugin = 
         (Dictionary)Dictionary_quick_lookup(_NATIVES_,
                                                                   symbol);
@@ -21,21 +21,21 @@ Dictionary add_plugin(const wchar_t * name)
 
     plugin = new_Dictionary();
     Dictionary_quick_store(_NATIVES_,
-                                      (Object)new_Symbol_cached(name),
-                                      (Object)plugin);
+                                      (Optr)new_Symbol_cached(name),
+                                      (Optr)plugin);
     return plugin;
 }
 
 void store_native(Dictionary dict, Symbol selector, native code)
 {
-    Dictionary_quick_store(dict, (Object)selector, (Object)code);
+    Dictionary_quick_store(dict, (Optr)selector, (Optr)code);
 }
 
 /* ========================================================================= */
 
-typedef Object (*ftype)();
+typedef Optr (*ftype)();
 
-static Type_Object load_plugin(Object class, const char * file_path)
+static Type_Object load_plugin(Optr class, const char * file_path)
 {
     void * handle       = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
@@ -47,18 +47,18 @@ static Type_Object load_plugin(Object class, const char * file_path)
     // TODO
     //plugin->ivals[3] = handle
     
-    Object * natives = (Object *)dlsym(handle, "natives");
+    Optr * natives = (Optr *)dlsym(handle, "natives");
     if (natives) {
         plugin->ivals[2] = *natives; 
     } else {
-        plugin->ivals[2] = (Object)create_plugin();
+        plugin->ivals[2] = (Optr)create_plugin();
     }
 
     return plugin;
 }
 
 NATIVE1(Plugin_load_)
-    Object w_path = NATIVE_ARG(0);
+    Optr w_path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
      
     char * path = unicode_to_ascii(((Symbol)w_path)->value);
@@ -67,7 +67,7 @@ NATIVE1(Plugin_load_)
 }
 
 NATIVE0(Plugin_unload)
-    Object w_path = NATIVE_ARG(0);
+    Optr w_path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
     //unload_plugin();     
 }
@@ -79,6 +79,6 @@ void init_plugin()
     Dictionary natives = add_plugin(L"Plugin.Plugin");
     store_native(natives, SMB_load_,  NM_Plugin_load_);
     store_native(natives, SMB_unload, NM_Plugin_unload);
-    ((Class)Plugin_Plugin_Class)->cvars[0] = (Object)_NATIVES_;
+    ((Class)Plugin_Plugin_Class)->cvars[0] = (Optr)_NATIVES_;
 }
 

@@ -7,17 +7,17 @@
 
 struct Annotation_t {
     uns_int size;
-    Object  selector;
-    Object  arguments[];
+    Optr  selector;
+    Optr  arguments[];
 };
 
-extern Annotation new_Annotation_raw(Object selector, uns_int argc);
-extern Annotation new_Annotation(Object selector, uns_int argc, ...);
+extern Annotation new_Annotation_raw(Optr selector, uns_int argc);
+extern Annotation new_Annotation(Optr selector, uns_int argc, ...);
 
 /* ========================================================================= */
 
 extern Annotation lookup_annotation(Array annotations,
-                                        Object selector);
+                                        Optr selector);
 
 /* ========================================================================= */
 

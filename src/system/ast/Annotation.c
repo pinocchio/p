@@ -3,21 +3,21 @@
 
 /* ========================================================================= */
 
-Annotation new_Annotation_raw(Object selector, uns_int argc) {
-    NEW_ARRAY_OBJECT(Annotation, Object[argc]);
+Annotation new_Annotation_raw(Optr selector, uns_int argc) {
+    NEW_ARRAY_OBJECT(Annotation, Optr[argc]);
     result->selector = selector;
     result->size     = argc;
     return result;
 }
 
-Annotation new_Annotation(Object selector, uns_int argc, ...)
+Annotation new_Annotation(Optr selector, uns_int argc, ...)
 {
     Annotation result = new_Annotation_raw(selector, argc);
     va_list args;
     va_start(args, argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        result->arguments[idx] = va_arg(args, Object);
+        result->arguments[idx] = va_arg(args, Optr);
     }
     va_end(args);
     return result;
@@ -25,7 +25,7 @@ Annotation new_Annotation(Object selector, uns_int argc, ...)
 
 /* ========================================================================= */
 
-Annotation lookup_annotation(Array annotations, Object selector)
+Annotation lookup_annotation(Array annotations, Optr selector)
 {
     assert1(HEADER(annotations) == Array_Class, "Annotations should be an array");
     int i;

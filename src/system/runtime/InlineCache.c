@@ -13,7 +13,7 @@ Array new_Runtime_InlineCache()
 
 /* ========================================================================= */
 
-Object Runtime_InlineCache_lookup(Array cache, Object class)
+Optr Runtime_InlineCache_lookup(Array cache, Optr class)
 {
     int i;
     for (i = 0; i < cache->size; i += 2) {
@@ -24,7 +24,7 @@ Object Runtime_InlineCache_lookup(Array cache, Object class)
     return NULL;
 }
 
-void Runtime_InlineCache_store(Array cache, Object class, Object method)
+void Runtime_InlineCache_store(Array cache, Optr class, Optr method)
 {
     int i;
     for (i = 0; i < cache->size; i += 2) {
@@ -39,8 +39,8 @@ void Runtime_InlineCache_store(Array cache, Object class, Object method)
 /* ========================================================================= */
 
 NATIVE1(Runtime_InlineCache_checkCached_)
-    Object key = NATIVE_ARG(0);
-    Object result = Runtime_InlineCache_lookup((Array)self, key);
+    Optr key = NATIVE_ARG(0);
+    Optr result = Runtime_InlineCache_lookup((Array)self, key);
     if (result) {
         RETURN_FROM_NATIVE(result);
     } else {
@@ -50,8 +50,8 @@ NATIVE1(Runtime_InlineCache_checkCached_)
 
 
 NATIVE2(Runtime_InlineCache_cache_at_) 
-    Object method   = NATIVE_ARG(0);
-    Object key      = NATIVE_ARG(1);
+    Optr method   = NATIVE_ARG(0);
+    Optr key      = NATIVE_ARG(1);
     Runtime_InlineCache_store((Array)self, key, method);
     RETURN_FROM_NATIVE(self);
 }

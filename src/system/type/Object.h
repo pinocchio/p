@@ -11,15 +11,15 @@
 /* ========================================================================= */
 
 struct Type_Object_t {
-    Object ivals[0]; 
+    Optr ivals[0]; 
 };
 
 CREATE_INITIALIZERS(Type_Object)
 
 /* ========================================================================= */
 
-extern Object Object_instVarAt_(Object self, int index);
-extern void Object_instVarAt_put_(Object self, int index, Object value);
+extern Optr Object_instVarAt_(Optr self, int index);
+extern void Object_instVarAt_put_(Optr self, int index, Optr value);
 
 extern SmallInt Type_Object_hash(Type_Object object);
 /* ========================================================================= */

@@ -22,7 +22,7 @@ NATIVE0(Type_Object_hash)
 
 NATIVE0(Type_Object_basicNew)
     assert_class(self);
-    Object result = instantiate((Class)self);
+    Optr result = instantiate((Class)self);
     RETURN_FROM_NATIVE(result);
 }
 
@@ -31,25 +31,25 @@ NATIVE0(Type_Object_class)
 }
 
 NATIVE1(Type_Object_equals)
-    Object arg = NATIVE_ARG(0);
+    Optr arg = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(get_bool(self == arg));
 }
 
-Object raw_Type_Object_at(Type_Object o, Object tag, int index)
+Optr raw_Type_Object_at(Type_Object o, Optr tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->ivals[index];
 }
 
-void raw_Type_Object_at_put(Type_Object o, Object tag,
-                            int index, Object value)
+void raw_Type_Object_at_put(Type_Object o, Optr tag,
+                            int index, Optr value)
 {
     ASSERT_TAG_SIZE(tag, index); o->ivals[index] = value;
 }
 
-Object Object_instVarAt_(Object self, int index)
+Optr Object_instVarAt_(Optr self, int index)
 {
-    Object tag = GETTAG(self);
+    Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
         return raw_Type_Object_at((Type_Object)self, tag, index);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
@@ -62,9 +62,9 @@ Object Object_instVarAt_(Object self, int index)
     return NULL;
 }
 
-void Object_instVarAt_put_(Object self, int index, Object value)
+void Object_instVarAt_put_(Optr self, int index, Optr value)
 {
-    Object tag = GETTAG(self);
+    Optr tag = GETTAG(self);
     if (TAG_IS_LAYOUT(tag, Object)) {
         raw_Type_Object_at_put((Type_Object)self, tag, index, value);
     } else if (TAG_IS_LAYOUT(tag, Array)) {
@@ -78,15 +78,15 @@ void Object_instVarAt_put_(Object self, int index, Object value)
 
 NATIVE1(Array_basicNew_)
     assert_class(self);
-    Object w_size = NATIVE_ARG(0);
+    Optr w_size = NATIVE_ARG(0);
     int size      = unwrap_int(w_size);
     assert0(size >= 0);
-    Object result = instantiate_sized((Class)self, (uns_int)size);
+    Optr result = instantiate_sized((Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
 }
 
 NATIVE0(Type_Object_size)
-    Object tag = GETTAG(self);
+    Optr tag = GETTAG(self);
     uns_int size;
     if (TAG_IS_LAYOUT(tag, Array)) {
         size = ((Array)self)->size;
@@ -101,7 +101,7 @@ NATIVE0(Type_Object_size)
     RETURN_FROM_NATIVE(result);
 }
 
-Object raw_Array_at(Array array, Object tag, int index)
+Optr raw_Array_at(Array array, Optr tag, int index)
 {
     assert(array->size > index,
         printf("Array at: %i out of bounds %"F_I"u\n" , index, array->size));
@@ -111,18 +111,18 @@ Object raw_Array_at(Array array, Object tag, int index)
 }
 
 NATIVE1(Array_at_)
-    Object w_index = NATIVE_ARG(0);
+    Optr w_index = NATIVE_ARG(0);
     int index      = unwrap_int(w_index);
     Array as  = (Array)self;
 
-    Object tag = GETTAG(as);    
+    Optr tag = GETTAG(as);    
     ASSERT_TAG_LAYOUT(tag, Array);
 
     RETURN_FROM_NATIVE(raw_Array_at(as, tag, index - 1));
 }
 
-void raw_Array_at_put(Array array, Object tag,
-                           int index, Object value)
+void raw_Array_at_put(Array array, Optr tag,
+                           int index, Optr value)
 {
     assert0(0 <= index);
     assert0(array->size > index);
@@ -130,22 +130,22 @@ void raw_Array_at_put(Array array, Object tag,
 }
 
 NATIVE2(Array_at_put_)
-    Object w_index = NATIVE_ARG(0);
-    Object w_arg   = NATIVE_ARG(1);
+    Optr w_index = NATIVE_ARG(0);
+    Optr w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index);
     Array as  = (Array)self;
    
-    Object tag = GETTAG(as);
+    Optr tag = GETTAG(as);
     ASSERT_TAG_LAYOUT(tag, Array); 
     raw_Array_at_put(as, tag, index - 1, w_arg);
     RETURN_FROM_NATIVE(w_arg);
 }
 
 NATIVE2(Type_Object_perform_withArguments_)
-    Object w_selector   = NATIVE_ARG(0);
-    Object w_args       = NATIVE_ARG(1);
+    Optr w_selector   = NATIVE_ARG(0);
+    Optr w_args       = NATIVE_ARG(1);
 
-    Object tag = GETTAG(w_args);
+    Optr tag = GETTAG(w_args);
     ASSERT_TAG_LAYOUT(tag, Array);
 
     zapn_EXP(4);    
@@ -155,7 +155,7 @@ NATIVE2(Type_Object_perform_withArguments_)
 }
 
 NATIVE1(Type_Object_perform_)
-    Object w_selector = NATIVE_ARG(0);
+    Optr w_selector = NATIVE_ARG(0);
     zapn_EXP(3);
     Class_direct_dispatch(self, HEADER(self), w_selector, 0);
 }

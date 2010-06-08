@@ -7,8 +7,8 @@
 
 struct PointerSlot_t {
     uns_int index;
-    Object  name;
-    Object  package;
+    Optr  name;
+    Optr  package;
 };
 
 extern PointerSlot new_PointerSlot(uns_int index, const wchar_t * name);

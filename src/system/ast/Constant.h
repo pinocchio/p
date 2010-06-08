@@ -7,10 +7,10 @@
 
 struct Constant_t {
     AST_Info        info;
-    Object          constant;
+    Optr          constant;
 };
 
-extern Constant new_Constant(Object constant);
+extern Constant new_Constant(Optr constant);
 
 /* ========================================================================= */
 

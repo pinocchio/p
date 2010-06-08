@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct Organization_ClassReference_t {
-    Object referenceName;
-    Object package;
-    Object class;
+    Optr referenceName;
+    Optr package;
+    Optr class;
 };
 
 extern Organization_ClassReference new_Organization_ClassReference(Class class);

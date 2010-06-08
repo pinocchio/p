@@ -8,18 +8,18 @@
 Variable new_Variable_named(const wchar_t* name, uns_int scope_id)
 {
     NEW_OBJECT(Variable);
-    result->name     = (Object)new_String(name);
+    result->name     = (Optr)new_String(name);
     result->info     = empty_AST_Info;
-    result->scope_id = (Object)new_SmallInt(scope_id);
-    result->local_id = (Object)new_SmallInt(0);
+    result->scope_id = (Optr)new_SmallInt(scope_id);
+    result->local_id = (Optr)new_SmallInt(0);
     return result;
 }
 
 Variable new_Variable(uns_int scope_id, uns_int local_id)
 {
     NEW_OBJECT(Variable);
-    result->local_id = (Object)new_SmallInt(local_id);
-    result->scope_id = (Object)new_SmallInt(scope_id);
+    result->local_id = (Optr)new_SmallInt(local_id);
+    result->scope_id = (Optr)new_SmallInt(scope_id);
     result->name     = nil;
     result->info     = empty_AST_Info;
     return result;
@@ -30,7 +30,7 @@ Variable new_Variable(uns_int scope_id, uns_int local_id)
 void Variable_eval(Variable self)
 {
     // LOGFUN;
-    Object env = (Object)current_env();
+    Optr env = (Optr)current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);    
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
@@ -42,14 +42,14 @@ void Variable_eval(Variable self)
     } else {
         // TODO
         assert0(NULL);
-        // Object args[2] = { (Object)new_SmallInt(self->index), self->key };
+        // Optr args[2] = { (Optr)new_SmallInt(self->index), self->key };
         // return Send(env, SMB_at_in_, 2, args);
     }
 }
 
-void Variable_assign(Variable self, Object value)
+void Variable_assign(Variable self, Optr value)
 {
-    Object env = (Object)current_env();
+    Optr env = (Optr)current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);    
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    

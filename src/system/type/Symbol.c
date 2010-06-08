@@ -27,12 +27,12 @@ Symbol new_Symbol(const wchar_t* input)
 Symbol new_Symbol_cached(const wchar_t* input)
 {
     Symbol result  = new_Symbol(input);
-    Object cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Object)result);
+    Optr cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Optr)result);
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;
     }
     HEADER(result) = Symbol_Class;
-    Dictionary_quick_store(Symbol_Table, (Object)result, (Object)result);
+    Dictionary_quick_store(Symbol_Table, (Optr)result, (Optr)result);
     return result;
 }
 
@@ -49,7 +49,7 @@ void pre_init_Symbol()
 /* ========================================================================= */
 
 NATIVE1(Symbol_at_)
-    Object w_arg0 = NATIVE_ARG(0);
+    Optr w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
     int index     = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %i", index));
@@ -70,7 +70,7 @@ Array Symbol_asArray(Symbol symbol)
     LOG("%ls\n", symbol->value); 
     int i;
     for (i=0; i<self_symbol->size; i++) {
-        array->values[i] = (Object)new_Character(self_symbol->value[i]);
+        array->values[i] = (Optr)new_Character(self_symbol->value[i]);
     }
     return array;
 }
@@ -99,7 +99,7 @@ SmallInt Symbol_hash(Symbol symbol)
 
 NATIVE1(Symbol__equal)
     // TODO think about this! Are Symbols = Strings?
-    Object w_arg = NATIVE_ARG(0);
+    Optr w_arg = NATIVE_ARG(0);
     if (w_arg == self) {
         RETURN_FROM_NATIVE(true);
         return;
@@ -121,7 +121,7 @@ NATIVE0(Symbol_hash)
 
 
 NATIVE0(Symbol_size)
-    RETURN_FROM_NATIVE((Object)new_SmallInt(((Symbol)self)->size));
+    RETURN_FROM_NATIVE((Optr)new_SmallInt(((Symbol)self)->size));
 }
 
 /* ========================================================================= */

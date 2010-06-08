@@ -7,7 +7,7 @@
 
 struct Self_t {};
 
-extern Object self;
+extern Optr self;
 
 /* ========================================================================= */
 extern void post_init_Self();

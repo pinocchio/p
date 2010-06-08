@@ -20,10 +20,10 @@ Dictionary new_Dictionary()
 
 /* ========================================================================= */
 
-static int get_hash(Dictionary self, Object key)
+static int get_hash(Dictionary self, Optr key)
 {
     int hash;
-    Object tag = GETTAG(key);
+    Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
@@ -37,21 +37,21 @@ static int get_hash(Dictionary self, Object key)
     return hash;
 }
 
-void push_hash(Object key)
+void push_hash(Optr key)
 {
     SmallInt hash;
-    Object tag = GETTAG(key);
+    Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
-        return Class_direct_dispatch(key, HEADER(key), (Object)SMB_hash, 0);
+        return Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
     }
     push_EXP(hash);
 }
 
-int unwrap_hash(Dictionary self, Object w_hash)
+int unwrap_hash(Dictionary self, Optr w_hash)
 {
     return unwrap_int(w_hash) % self->data->size;
 }
@@ -79,7 +79,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
     if (!Dictionary_grow_check(self)) { return; }
 
     Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Object)nil);
+    self->data     = new_Array_withAll(old->size << 1, (Optr)nil);
     self->size     = 0;
     int i;
     for (i = 0; i < old->size; i++) {
@@ -88,7 +88,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
         int j;
         uns_int tally = bucket->tally;
         for (j = 0; j < tally; j=j+2) {
-            Object key = bucket->values[j];
+            Optr key = bucket->values[j];
             Dictionary_quick_store(self, key, bucket->values[j+1]);
         }
         
@@ -96,7 +96,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
 }
 
 void Dictionary_quick_store(Dictionary self,
-                                 Object key, Object value)
+                                 Optr key, Optr value)
 {
     assert0(self != (Dictionary)nil);
     int hash = get_hash(self, key);
@@ -114,7 +114,7 @@ void Dictionary_quick_store(Dictionary self,
     }
 }
 
-Object Dictionary_quick_lookup(Dictionary self, Object key)
+Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 {
     int hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
@@ -138,10 +138,10 @@ Object Dictionary_quick_lookup(Dictionary self, Object key)
 /* ========================================================================= */
 
 static CNT(lookup_push)
-    Object w_hash              = peek_EXP(0);
+    Optr w_hash              = peek_EXP(0);
     Dictionary self = (Dictionary)peek_EXP(2);
     int hash                   = unwrap_hash(self, w_hash);
-    Object key                 = peek_EXP(1);
+    Optr key                 = peek_EXP(1);
     zapn_EXP(2);
 
     DictBucket * bucketp = get_bucketp(self, hash);
@@ -152,7 +152,7 @@ static CNT(lookup_push)
     Bucket_lookup(*bucketp, key);
 }
 
-void Dictionary_lookup_push(Dictionary self, Object key)
+void Dictionary_lookup_push(Dictionary self, Optr key)
 {
     push_CNT(lookup_push);
     claim_EXP(2);
@@ -178,8 +178,8 @@ static void CNT_dict_grow()
     if (bucket == (DictBucket)nil || bucket->size == 0) {
         return;
     }
-    Object key = bucket->values[0];
-    if (key == (Object)nil) { return; }
+    Optr key = bucket->values[0];
+    if (key == (Optr)nil) { return; }
 
     push_CNT(bucket_rehash);
     claim_EXP(2);
@@ -192,7 +192,7 @@ static void CNT_dict_grow()
 static void Dictionary_grow(Dictionary self)
 {
     Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Object)nil);
+    self->data     = new_Array_withAll(old->size << 1, (Optr)nil);
     self->size     = 0;
     
     push_CNT(dict_grow);
@@ -211,7 +211,7 @@ static void Dictionary_check_grow(Dictionary self)
 
 static CNT(Dictionary_check_grow)
     // Check if new element
-    Object test = pop_EXP();
+    Optr test = pop_EXP();
     if (test) {
         Dictionary self = (Dictionary)pop_EXP();
         Dictionary_check_grow(self);
@@ -221,7 +221,7 @@ static CNT(Dictionary_check_grow)
 }
 
 void Dictionary_direct_store(Dictionary self, int hash,
-                                  Object key, Object value) 
+                                  Optr key, Optr value) 
 {
     DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (DictBucket)nil) { 
@@ -232,7 +232,7 @@ void Dictionary_direct_store(Dictionary self, int hash,
         bucket->tally                = 2;
         Dictionary_check_grow(self);
     } else {
-        push_EXP((Object)self);
+        push_EXP((Optr)self);
         push_CNT(Dictionary_check_grow);
         Bucket_store_(bucketp, key, value);
     }
@@ -247,25 +247,25 @@ static CNT(fix_dictionary_result)
 }
 
 static CNT(dictionary_check_absent)
-    Object result = pop_EXP();
+    Optr result = pop_EXP();
     if (result == NULL) {
-        Object block = pop_EXP();
-        Class_direct_dispatch(block, HEADER(block), (Object)SMB_value, 0); 
+        Optr block = pop_EXP();
+        Class_direct_dispatch(block, HEADER(block), (Optr)SMB_value, 0); 
         return;
     }
     poke_EXP(0, result);
 }
 
 NATIVE1(Dictionary_at_)
-    Object w_index = NATIVE_ARG(0);
+    Optr w_index = NATIVE_ARG(0);
     zapn_EXP(3);
     push_CNT(fix_dictionary_result);
     Dictionary_lookup_push((Dictionary)self, w_index);
 }
 
 NATIVE2(Dictionary_at_ifAbsent_)
-    Object w_index = NATIVE_ARG(0);
-    Object w_block = NATIVE_ARG(1);
+    Optr w_index = NATIVE_ARG(0);
+    Optr w_block = NATIVE_ARG(1);
     zapn_EXP(4);
     push_EXP(w_block);
     push_CNT(dictionary_check_absent);
@@ -273,11 +273,11 @@ NATIVE2(Dictionary_at_ifAbsent_)
 }
 
 CNT(Dictionary_at_put_)
-    Object w_hash              = peek_EXP(0);
+    Optr w_hash              = peek_EXP(0);
     Dictionary self = (Dictionary)peek_EXP(3);
     int hash                   = unwrap_hash(self, w_hash);
-    Object new                 = peek_EXP(1);
-    Object w_index             = peek_EXP(2);
+    Optr new                 = peek_EXP(1);
+    Optr w_index             = peek_EXP(2);
     zapn_EXP(4);
     poke_EXP(0, new);
     Dictionary_direct_store((Dictionary)self, hash, w_index, new);
@@ -289,7 +289,7 @@ NATIVE2(Dictionary_at_put_)
 }
 
 static CNT(native_grow_end)
-    Object self = pop_EXP();
+    Optr self = pop_EXP();
     poke_EXP(0, self);
 }
 

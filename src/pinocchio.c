@@ -53,14 +53,14 @@ CNT(exit_eval)
 }
 
 CNT(exit_error)
-    Object assertion = pop_EXP();
+    Optr assertion = pop_EXP();
     Runtime_BlockContext env =
         (Runtime_BlockContext)((Type_Object)assertion)->ivals[0];
     
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
     fwprintf(stderr, L"\n");
-    while ((Object)env != nil) {
+    while ((Optr)env != nil) {
         if (env->home_context == (Runtime_MethodContext)env) {
             fwprintf(stderr, L"\t%ls >> %ls\n",
                 (Symbol)HEADER(env->home_context->self)->name->value,
@@ -78,13 +78,13 @@ void initialize_Natives()
 
 /* ========================================================================= */
 
-bool isInstance(Object object, Object class) 
+bool isInstance(Optr object, Optr class) 
 {
     // TODO check for MetaClass stuff
     assert_class(class);
     Class type = HEADER(object);
-    while ((Object)type != nil) {
-        if ((Object)type == class) {
+    while ((Optr)type != nil) {
+        if ((Optr)type == class) {
             return 1;
         }
         type = type->super;
@@ -114,7 +114,7 @@ void start_eval()
     push_CNT(exit_eval);
 }
 
-Object finish_eval()
+Optr finish_eval()
 {
     #ifndef NOJMP
 
@@ -135,12 +135,12 @@ Object finish_eval()
 
     #endif // NOJMP
     
-    Object result = pop_EXP();
+    Optr result = pop_EXP();
     IN_EVAL = 0;
     return result;
 }
 
-Object Eval(Object code)
+Optr Eval(Optr code)
 {
     start_eval();
     
@@ -150,28 +150,28 @@ Object Eval(Object code)
     return finish_eval();
 }
 
-Object Eval_Send0(Object self, Symbol symbol)
+Optr Eval_Send0(Optr self, Symbol symbol)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 0);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
     return finish_eval();
 }
 
-Object Eval_Send1(Object self, Symbol symbol, Object arg)
+Optr Eval_Send1(Optr self, Symbol symbol, Optr arg)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 1, arg);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
     return finish_eval();
 }
 
-Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2)
+Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Object)symbol, 2, arg1, arg2);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
     return finish_eval();
 }
 
-Object EvalThreaded(Array code) 
+Optr EvalThreaded(Array code) 
 {
     start_eval();
     push_CNT_raw(code);
@@ -187,17 +187,17 @@ jmp_buf Assert_Fail;
 void store_method(Class class, Symbol symbol, 
                   Runtime_MethodClosure method)
 {
-    method->selector    = (Object)symbol;
+    method->selector    = (Optr)symbol;
     method->host        = class;
-    Dictionary_quick_store(class->methods, (Object)symbol, 
-                                      (Object)method);
+    Dictionary_quick_store(class->methods, (Optr)symbol, 
+                                      (Optr)method);
 }
 
 /* ========================================================================= */
 
 static void bootstrap()
 {
-    nil = (Object) NEW_t(Nil);
+    nil = (Optr) NEW_t(Nil);
 
     metaclass                   = NEW_t(Class);
     Class Metaclass_mclass = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
@@ -248,8 +248,8 @@ static void bootstrap()
     empty_Array->size    = 0;
     HEADER(empty_Array)  = Array_Class;
 
-    empty_array_layout  = (Object)create_layout_with_vars(ArrayLayout_Class, 0);
-    empty_object_layout = (Object)create_layout_with_vars(ObjectLayout_Class, 0);
+    empty_array_layout  = (Optr)create_layout_with_vars(ArrayLayout_Class, 0);
+    empty_object_layout = (Optr)create_layout_with_vars(ObjectLayout_Class, 0);
     words_layout        = basic_instantiate_Object(WordsLayout_Class, 0);
     bytes_layout        = basic_instantiate_Object(BytesLayout_Class, 0);
     int_layout          = basic_instantiate_Object(IntLayout_Class, 0);

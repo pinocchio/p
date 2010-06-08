@@ -6,13 +6,13 @@
 void fail(const Class exception_class, uns_int argc, ...)
 {
     Type_Object error = (Type_Object)instantiate(exception_class);
-    error->ivals[0] = (Object)current_env();
+    error->ivals[0] = (Optr)current_env();
 
     va_list args;
     va_start(args, argc);
     int idx;
     for (idx = 1; idx <= argc; idx++) {
-        error->ivals[idx] = va_arg(args, Object);
+        error->ivals[idx] = va_arg(args, Optr);
     }
     va_end(args);
 
@@ -20,7 +20,7 @@ void fail(const Class exception_class, uns_int argc, ...)
 
     if (HEADER(tget(Error_Handler)) == Runtime_Continue_Class) {
         Runtime_Continue_escape((Runtime_Continue)tget(Error_Handler),
-                                (Object)error);
+                                (Optr)error);
     } else {
         push_CNT(exit_error);
         handle_assert("Unsupported type of error-handler installed.");

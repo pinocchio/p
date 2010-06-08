@@ -10,7 +10,7 @@ void init_raw_variable_array(Array array, uns_int scope_id,
 {
     uns_int i;
     for (i = 0; i < size; i++) {
-        array->values[i] = (Object)new_Variable(scope_id, local_id);
+        array->values[i] = (Optr)new_Variable(scope_id, local_id);
         local_id++;
     }
 }
@@ -21,7 +21,7 @@ Block new_Block(uns_int paramCount,
                         uns_int statementCount,
                         ...)
 {
-    NEW_ARRAY_OBJECT(Block, Object[statementCount]);
+    NEW_ARRAY_OBJECT(Block, Optr[statementCount]);
     result->params      = new_Array_raw(paramCount);
     result->locals      = new_Array_raw(localCount);
     init_raw_variable_array(result->params, depth, paramCount, 0);
@@ -37,7 +37,7 @@ void init_variable_array(Array array, uns_int local_id)
     uns_int i;
     for (i = 0; i < array->size; i++) {
         ((Variable)array->values[i])->local_id =
-            (Object)new_SmallInt(local_id);
+            (Optr)new_SmallInt(local_id);
         local_id++;
     }
 }
@@ -45,7 +45,7 @@ void init_variable_array(Array array, uns_int local_id)
 Block new_Block_with(Array params, Array locals,
                              uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(Block, Object[statementCount]);
+    NEW_ARRAY_OBJECT(Block, Optr[statementCount]);
     result->params  = params;
     result->locals  = locals;
     init_variable_array(result->params, 0);

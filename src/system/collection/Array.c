@@ -13,13 +13,13 @@ Array empty_Array;
 Array new_Array_raw(uns_int c)
 {
     if (c == 0) { return empty_Array; }
-    Array result = NEW_ARRAYED(struct Array_t, Object[c]);
+    Array result = NEW_ARRAYED(struct Array_t, Optr[c]);
     HEADER(result)    = Array_Class;
     result->size      = c;
     return result;
 }
 
-Array new_Array(uns_int c, Object v[])
+Array new_Array(uns_int c, Optr v[])
 {
     if (c == 0) { return empty_Array; }
     Array result = new_Array_raw(c);
@@ -38,13 +38,13 @@ Array new_Array_with(uns_int c, ...)
     va_start(args, c);
     int index;
     for (index = 0; index < c; index++) {
-        result->values[index] = va_arg(args, Object);
+        result->values[index] = va_arg(args, Optr);
     }
     va_end(args);
     return result;
 }
 
-Array new_Array_withAll(uns_int c, Object element)
+Array new_Array_withAll(uns_int c, Optr element)
 {
     if (c == 0) { return empty_Array; }
     Array result = new_Array_raw(c);
@@ -57,33 +57,33 @@ Array new_Array_withAll(uns_int c, Object element)
 
 /* ========================================================================= */
 
-Object raw_Array_instAt(Array o, Object tag, int index)
+Optr raw_Array_instAt(Array o, Optr tag, int index)
 {
     ASSERT_TAG_SIZE(tag, index);
     return o->values[index];
 }
 
-void raw_Array_instAt_put(Array o, Object tag,
-                               int index, Object value)
+void raw_Array_instAt_put(Array o, Optr tag,
+                               int index, Optr value)
 {
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
 }
 
 NATIVE1(Array_instVarAt_)
-    Object w_index  = NATIVE_ARG(0);
+    Optr w_index  = NATIVE_ARG(0);
     int index       = unwrap_int(w_index) - 1;
-    Object tag      = GETTAG(self);
+    Optr tag      = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     RETURN_FROM_NATIVE(((Array)self)->values[index]);
 }
 
 NATIVE2(Array_instVarAt_put_)
-    Object w_index = NATIVE_ARG(0);
-    Object w_arg   = NATIVE_ARG(1);
+    Optr w_index = NATIVE_ARG(0);
+    Optr w_arg   = NATIVE_ARG(1);
     int index      = unwrap_int(w_index) - 1;
-    Object tag   = GETTAG(self);
+    Optr tag   = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     ((Array)self)->values[index] = w_arg;

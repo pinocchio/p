@@ -19,7 +19,7 @@ THREAD_OBJECT Error_Handler;
 void init_Stack(uns_int size)
 {
     // TODO allocate the stack with the given size
-    tset(Double_Stack, PALLOC(sizeof(Object[size])));
+    tset(Double_Stack, PALLOC(sizeof(Optr[size])));
     tset(_EXP_, &tget(Double_Stack)[-1]);
     tset(_CNT_, &tget(Double_Stack)[size]);
 }
@@ -40,26 +40,26 @@ void initialize_Thread()
     tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));
 }
 
-void extend_ISS(Object self)
+void extend_ISS(Optr self)
 {
     Type_Object link = (Type_Object)instantiate((Class)Collection_Link_Class);
     link->ivals[0]   = self;
-    link->ivals[1]   = (Object)tget(_ISS_);
+    link->ivals[1]   = (Optr)tget(_ISS_);
     tset(_ISS_, link);
 }
 
 /* ========================================================================= */
 
-Object pop_EXP()
+Optr pop_EXP()
 {
-    Object * p = tget(_EXP_);
+    Optr * p = tget(_EXP_);
     tset(_EXP_, p - 1);
     return *p;
 }
 
-void _push_EXP(Object e)
+void _push_EXP(Optr e)
 {
-    Object * p = tget(_EXP_) + 1;
+    Optr * p = tget(_EXP_) + 1;
     tset(_EXP_, p);
     *p = e;
 }
@@ -84,7 +84,7 @@ Array get_args(int argc, const char ** argv)
         wchar_t warg[length + 1];
         assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
         Symbol sarg = new_Symbol_cached(warg);
-        args->values[i-1] = (Object)sarg;
+        args->values[i-1] = (Optr)sarg;
     }
     return args;
 }
@@ -99,8 +99,8 @@ void * pinocchio_main_thread(void * argc)
     init_lib();
     
     Array args = get_args((int)(uns_int)argc, cargv);
-    Eval_Send1((Object)Interpretation_MainInterpreter_Class,
-               SMB_main_, (Object)args);
+    Eval_Send1((Optr)Interpretation_MainInterpreter_Class,
+               SMB_main_, (Optr)args);
 
     return EXIT_SUCCESS;
 }

@@ -23,18 +23,18 @@ extern Dictionary new_Dictionary();
 
 /* ========================================================================= */
 
-extern Object Dictionary_quick_lookup(Dictionary self, Object key);
+extern Optr Dictionary_quick_lookup(Dictionary self, Optr key);
 extern void Dictionary_quick_store(Dictionary self,
-                                        Object key, Object value);
+                                        Optr key, Optr value);
 
 extern void Dictionary_direct_store(Dictionary self, int hash,
-                                         Object key, Object value);
+                                         Optr key, Optr value);
 extern void Dictionary_lookup_push();
 
 /* ========================================================================= */
 
-extern void push_hash(Object key);
-extern int unwrap_hash(Dictionary self, Object w_hash);
+extern void push_hash(Optr key);
+extern int unwrap_hash(Dictionary self, Optr w_hash);
 
 /* ========================================================================= */
 

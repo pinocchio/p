@@ -77,7 +77,7 @@ static void CNT_Block_inline_continue()
 {
     Block code = (Block)peek_EXP(2); 
     uns_int pc = (uns_int)peek_EXP(1);
-    Object exp = code->body[pc];
+    Optr exp = code->body[pc];
     pc += 1;
     
     if (pc < code->size) {
@@ -106,7 +106,7 @@ static void start_inline_eval(Block block)
 
 CNT(restore_pop_env)
     set_env(peek_EXP(1));
-    Object result = pop_EXP();
+    Optr result = pop_EXP();
     poke_EXP(0, result);
 }
 
@@ -134,13 +134,13 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     }
     */
     
-    set_env((Object)new_Runtime_BlockContext(closure));
+    set_env((Optr)new_Runtime_BlockContext(closure));
     activation_from_native(argc);
 
     start_eval(block);
 }
 
-void apply(Object closure, uns_int argc)
+void apply(Optr closure, uns_int argc)
 {
     // TODO in the alternative case, send "value:*" message.
     // LOG("cls: %ls\n", HEADER(closure)->name->value);
@@ -149,17 +149,17 @@ void apply(Object closure, uns_int argc)
 }
 
 CNT(check_while_true)
-    Object boolean = peek_EXP(0);
+    Optr boolean = peek_EXP(0);
 
-    if (boolean == (Object)true) {
-        Object closure = peek_EXP(1);
+    if (boolean == (Optr)true) {
+        Optr closure = peek_EXP(1);
         poke_EXP(0, nil);
         push_EXP(closure);
         Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
         return;
     }
 
-    if (boolean == (Object)false) {
+    if (boolean == (Optr)false) {
         zap_CNT();
         zapn_EXP(3);
         poke_EXP(0, nil);
@@ -171,7 +171,7 @@ CNT(check_while_true)
 
 void CNT_while_true()
 {
-    Object self = peek_EXP(2);
+    Optr self = peek_EXP(2);
     push_CNT(check_while_true);
     poke_EXP(0, nil);
     push_EXP(self);

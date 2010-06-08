@@ -10,10 +10,10 @@ struct Method_t {
     AST_Info    info;
     Array  params;
     Array  locals;
-    Object      package;
+    Optr      package;
     Array  annotations;
-    Object      unused;
-    Object      body[];
+    Optr      unused;
+    Optr      body[];
 };
 
 extern Method new_Method(uns_int paramCount,
@@ -30,7 +30,7 @@ extern Method new_Method_with(Array params,
 /* ========================================================================= */
 
 extern void Method_invoke(Runtime_MethodClosure closure, Method method,
-                              Object self, uns_int argc);
+                              Optr self, uns_int argc);
 
 /* ========================================================================= */
 

@@ -45,7 +45,7 @@ void post_init_AST_Info()
 
 void print_AST_Info(AST_Info info)
 {
-    if (info == NULL || (Object)info != nil || info == empty_AST_Info) {
+    if (info == NULL || (Optr)info != nil || info == empty_AST_Info) {
         printf("[ NO SOURCE INFO GIVEN ]");
     } else {
         printf("[%ls %i]", info->name->value, 

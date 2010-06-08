@@ -15,14 +15,14 @@ Runtime_Continue new_Runtime_Continue_offset(int offset)
     Runtime_Continue cont = new_Runtime_Continue();
     cont->exp_offset      = EXP_size() - offset;
     cont->cnt_offset      = CNT_size();
-    cont->iss             = (Object)tget(_ISS_);
-    cont->env             = (Object)current_env();
+    cont->iss             = (Optr)tget(_ISS_);
+    cont->env             = (Optr)current_env();
     return cont;
 }
 
 /* ========================================================================= */
 
-void Runtime_Continue_escape(Runtime_Continue cont, Object return_value)
+void Runtime_Continue_escape(Runtime_Continue cont, Optr return_value)
 {
     // restore the stack
     tset(_EXP_, cont->exp_offset + &tget(Double_Stack)[-1]);
@@ -39,7 +39,7 @@ NATIVE1(Runtime_Continue_escape_)
 
 NATIVE1(Runtime_Continue_on_)
     Runtime_Continue cont = new_Runtime_Continue_offset(argc + 1);
-    Object closure        = NATIVE_ARG(0);
+    Optr closure        = NATIVE_ARG(0);
     poke_EXP(0, cont);
     apply(closure, 1);
 }

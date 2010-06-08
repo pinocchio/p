@@ -12,13 +12,13 @@ struct Runtime_MethodContext_t {
     Runtime_MethodClosure   closure;
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;
-    Object                  self;
-    Object                  locals[];
+    Optr                  self;
+    Optr                  locals[];
 };
 
 extern Runtime_MethodContext
     new_Runtime_MethodContext(Runtime_MethodClosure closure,
-                              Object self);
+                              Optr self);
 
 extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
 

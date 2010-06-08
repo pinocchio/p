@@ -8,14 +8,14 @@
 struct Runtime_Continue_t {
     uns_int     exp_offset;
     uns_int     cnt_offset;
-    Object      iss;
-    Object      env;
+    Optr      iss;
+    Optr      env;
 };
 
 extern void post_init_Runtime_Continue();
 extern Runtime_Continue new_Runtime_Continue();
 extern Runtime_Continue new_Runtime_Continue_offset(int offset);
-extern void Runtime_Continue_escape(Runtime_Continue cont, Object return_value);
+extern void Runtime_Continue_escape(Runtime_Continue cont, Optr return_value);
 /* ========================================================================= */
 
 #endif // CONTINUE_H

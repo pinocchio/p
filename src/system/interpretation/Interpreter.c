@@ -6,7 +6,7 @@
 
 void return_from_send()
 {
-    Object result = peek_EXP(0);
+    Optr result = peek_EXP(0);
     zap_EXP();
     poke_EXP(0, result);
 }
@@ -14,7 +14,7 @@ void return_from_send()
 void restore_env()
 {
 	Runtime_BlockContext current = current_env();
-    set_env((Object)current->parent_frame);
+    set_env((Optr)current->parent_frame);
 	free_context(current);
 }
 
@@ -28,7 +28,7 @@ CNT(restore_return)
         return name##_eval((name)exp); \
     }
 
-void send_eval_rest(Object exp, Class class)
+void send_eval_rest(Optr exp, Class class)
 {
     EVAL_IF(Assign)
     EVAL_IF(Constant)
@@ -39,11 +39,11 @@ void send_eval_rest(Object exp, Class class)
     EVAL_IF(UIntSlot)
     EVAL_IF(Organization_ClassReference)
     
-    Class_direct_dispatch(exp, class, (Object)SMB_accept_, 1, nil);
+    Class_direct_dispatch(exp, class, (Optr)SMB_accept_, 1, nil);
 }
 
 CNT(send_Eval)
-    Object exp = peek_EXP(0);
+    Optr exp = peek_EXP(0);
     Class class = HEADER(exp);
 
     EVAL_IF(Send)
@@ -59,7 +59,7 @@ CNT(send_Eval)
 
 void CNT_tail_send_Eval()
 {
-    Object exp = peek_EXP(0);
+    Optr exp = peek_EXP(0);
     Class class = HEADER(exp);
 
     poke_CNT(restore_return);

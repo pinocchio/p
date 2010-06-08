@@ -63,7 +63,7 @@ SmallInt_BINARY_OPERATION(or_,         |);
 // printf("%i "#op" %i\n", number->value, otherNumber->value);
 #define SmallInt_COMPARE_OPERATION(name, op)\
 NATIVE1(SmallInt##_##name)\
-    Object w_arg = NATIVE_ARG(0);\
+    Optr w_arg = NATIVE_ARG(0);\
     if (HEADER(w_arg) == SmallInt_Class) {\
         SmallInt number      = ((SmallInt) self);\
         SmallInt otherNumber = (SmallInt)w_arg; \
@@ -131,19 +131,19 @@ void post_init_SmallInt()
     store_native(natives, SMB_asString,    NM_SmallInt_asString);
     store_native(natives, SMB_asCharacter, NM_SmallInt_asCharacter);
     
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__plus));
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__minus));
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Object)SMB__equal));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__plus));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__minus));
+    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__equal));
 }
 
 /* ========================================================================= */
 
-Object wrap_int(int value)
+Optr wrap_int(int value)
 {
-    return (Object)new_SmallInt(value);
+    return (Optr)new_SmallInt(value);
 }
 
-int unwrap_int(Object integer)
+int unwrap_int(Optr integer)
 {
     // TODO do more stuff in case we are not an int.
     ASSERT_TAG_LAYOUT(GETTAG(integer), Int);

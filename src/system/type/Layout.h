@@ -13,15 +13,15 @@ EXPORT_CLASS(LongLayout);
 EXPORT_CLASS(BytesLayout);
 EXPORT_CLASS(FileLayout);
 
-extern Object empty_object_layout;
-extern Object empty_array_layout;
-extern Object words_layout;
-extern Object bytes_layout;
-extern Object int_layout;
-extern Object float_layout;
-extern Object long_layout;
-extern Object character_layout;
-extern Object file_layout;
+extern Optr empty_object_layout;
+extern Optr empty_array_layout;
+extern Optr words_layout;
+extern Optr bytes_layout;
+extern Optr int_layout;
+extern Optr float_layout;
+extern Optr long_layout;
+extern Optr character_layout;
+extern Optr file_layout;
 
 
 
@@ -59,7 +59,7 @@ void post_init_Type_Layout();
 
 /* ========================================================================= */
 
-extern Object create_layout(uns_int size, Type_Tag tag, ...);
+extern Optr create_layout(uns_int size, Type_Tag tag, ...);
 extern Array create_layout_with_vars(Class layout, uns_int size);
 
 extern void change_slot_type(Class class, Class type, int counter, ...);

@@ -67,16 +67,16 @@ int Words_compare(Symbol s1, Symbol s2)
 }
 
 CNT(String_concat_)
-    Object string = pop_EXP();
-    Object self   = peek_EXP(0);
+    Optr string = pop_EXP();
+    Optr self   = peek_EXP(0);
     poke_EXP(0, String_concat_((String)self, (String)string));
 }
 
 NATIVE1(String_concat_)
-    Object w_arg = NATIVE_ARG(0);
+    Optr w_arg = NATIVE_ARG(0);
     push_CNT(String_concat_);
     RETURN_FROM_NATIVE(self); 
-    Class_direct_dispatch(w_arg, HEADER(w_arg), (Object)SMB_asString, 0);
+    Class_direct_dispatch(w_arg, HEADER(w_arg), (Optr)SMB_asString, 0);
 }
 
 NATIVE0(String_asSymbol)
@@ -85,8 +85,8 @@ NATIVE0(String_asSymbol)
 
 // TODO check types not classes!
 NATIVE2(String_at_put_)
-    Object w_arg0 = NATIVE_ARG(0);
-    Object w_arg1 = NATIVE_ARG(1);
+    Optr w_arg0 = NATIVE_ARG(0);
+    Optr w_arg1 = NATIVE_ARG(1);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
     ASSERT_INSTANCE_OF(w_arg1, Character_Class);
     int index = unwrap_int(w_arg0) - 1;
@@ -103,7 +103,7 @@ NATIVE2(String_at_put_)
 
 NATIVE1(String_basicNew_)
     // TODO check type
-    Object w_size      = NATIVE_ARG(0);
+    Optr w_size      = NATIVE_ARG(0);
     int size           = unwrap_int(w_size);
     String result = new_String_sized(size);
     RETURN_FROM_NATIVE(result);
@@ -144,7 +144,7 @@ int wchar_withbase_to_number(uns_int base, const wchar_t * string, uns_int size)
     return sign * result;
 }
 
-Object wchar_to_number(const wchar_t * string, uns_int size)
+Optr wchar_to_number(const wchar_t * string, uns_int size)
 {
     // TODO make it accept other types ... or just use Pharo's version.
     // TODO handle overflows!
@@ -172,7 +172,7 @@ Object wchar_to_number(const wchar_t * string, uns_int size)
         }
         break;
     }
-    return (Object)new_SmallInt(sign * result);
+    return (Optr)new_SmallInt(sign * result);
 }
 
 char * unicode_to_ascii(const wchar_t* str)

@@ -1,7 +1,7 @@
-Object instantiate_Array(Class class, Array ivars, uns_int extra)
+Optr instantiate_Array(Class class, Array ivars, uns_int extra)
 {
     uns_int base = ivars->size;
-    Array result = NEW_ARRAYED(struct Array_t, Object[base+extra]);
+    Array result = NEW_ARRAYED(struct Array_t, Optr[base+extra]);
     result->size = extra;
     uns_int i;
 
@@ -15,46 +15,46 @@ Object instantiate_Array(Class class, Array ivars, uns_int extra)
 
     HEADER(result) = class;
     assert0(HEADER(result) != (Class)nil);
-    return (Object)result;
+    return (Optr)result;
 }
 
-Object instantiate_Bytes(Class class, Array ivars, uns_int extra)
+Optr instantiate_Bytes(Class class, Array ivars, uns_int extra)
 {
     assert1(NULL, "Bytes are not supported yet.\n");
     return NULL;
 }
 
-Object instantiate_Words(Class class, Array ivars, uns_int extra)
+Optr instantiate_Words(Class class, Array ivars, uns_int extra)
 {
     Symbol result = NEW_ARRAYED(struct Symbol_t, wchar_t[extra]);
     HEADER(result) = class;
     assert0(HEADER(result) != (Class)nil);
-    return (Object)result;
+    return (Optr)result;
 }
 
-Object basic_instantiate_Object(Class class, uns_int size)
+Optr basic_instantiate_Object(Class class, uns_int size)
 {
-    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
+    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Optr[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = nil;
     }
     HEADER(result) = class;
     assert0(HEADER(result) != (Class)nil);
-    return (Object)result;
+    return (Optr)result;
 }
 
-static Object instantiate_Object(Class class, Array ivars)
+static Optr instantiate_Object(Class class, Array ivars)
 {
     uns_int size = ivars->size;
-    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Object[size]);
+    Type_Object result = NEW_ARRAYED(struct Type_Object_t, Optr[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
         result->ivals[i] = nil;
     }
     HEADER(result) = class;
     assert0(HEADER(result) != (Class)nil);
-    return (Object)result;
+    return (Optr)result;
 }
 
 /* ========================================================================= */
@@ -72,9 +72,9 @@ static Object instantiate_Object(Class class, Array ivars)
 /* ========================================================================= */
 
 
-Object instantiate(Class class)
+Optr instantiate(Class class)
 {
-    Object tag = class->layout;
+    Optr tag = class->layout;
 
     INSTANTIATE(Object);
     uns_int size = 0;
@@ -84,9 +84,9 @@ Object instantiate(Class class)
     return NULL;
 }
 
-Object instantiate_sized(Class class, uns_int size)
+Optr instantiate_sized(Class class, uns_int size)
 {
-    Object tag = class->layout;
+    Optr tag = class->layout;
 
     INSTANTIATE_SIZED(Array);
     INSTANTIATE_SIZED(Bytes);

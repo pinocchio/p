@@ -26,19 +26,19 @@ typedef enum Type_Tag {
 } Type_Tag;
 
 struct Class_t {
-    Object     layout;
+    Optr     layout;
     Class      super;
     Dictionary methods;
     Symbol     name;
-    Object     package;
-    Object     cvars[];
+    Optr     package;
+    Optr     cvars[];
 };
 
 CREATE_INITIALIZERS(Class)
 
 /* ========================================================================= */
 
-extern Class new_Class(Class superclass, Object metaType);
+extern Class new_Class(Class superclass, Optr metaType);
 extern Class new_Bootstrapping_Class();
 
 #define DIRECT_INIT_CLASS(cls)\
@@ -49,29 +49,29 @@ extern Class new_Bootstrapping_Class();
 
 /* ========================================================================= */
 
-extern void Class_dispatch(Object receiver, Class class, uns_int argc);
-extern void Class_direct_dispatch(Object receiver, Class class,
-                                       Object msg, uns_int argc, ...);
-extern void Class_direct_dispatch_withArguments(Object receiver,
+extern void Class_dispatch(Optr receiver, Class class, uns_int argc);
+extern void Class_direct_dispatch(Optr receiver, Class class,
+                                       Optr msg, uns_int argc, ...);
+extern void Class_direct_dispatch_withArguments(Optr receiver,
                                                      Class class,
-                                                     Object msg,
+                                                     Optr msg,
                                                      Array args);
 
 extern void Class_set_superclass(Class cls, Class super);
 
 extern void CNT_Class_super();
 extern void CNT_Class_lookup_loop();
-extern void Class_lookup(Class class, Object msg);
+extern void Class_lookup(Class class, Optr msg);
 
 /* ========================================================================= */
 
-extern Object instantiate(Class class);
-extern Object instantiate_sized(Class class, uns_int size);
-extern Object basic_instantiate_Object(Class class, uns_int size);
+extern Optr instantiate(Class class);
+extern Optr instantiate_sized(Class class, uns_int size);
+extern Optr basic_instantiate_Object(Class class, uns_int size);
 
 /* ========================================================================= */
 
-extern void assert_class(Object class);
+extern void assert_class(Optr class);
 
 /* ========================================================================= */
 

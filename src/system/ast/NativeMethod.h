@@ -12,10 +12,10 @@ struct NativeMethod_t {
     AST_Info         info;
     Array params;
     Array locals;
-    Object           package;
+    Optr           package;
     Array annotations;
     native           code;
-    Object           body[];
+    Optr           body[];
 };
 
 extern NativeMethod new_NativeMethod_with(Array params,
@@ -26,7 +26,7 @@ extern NativeMethod new_NativeMethod_with(Array params,
 /* ========================================================================= */
 
 #define NATIVE(name)\
-static void NM_##name(Object self, Class class, uns_int argc) {
+static void NM_##name(Optr self, Class class, uns_int argc) {
 #define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
@@ -44,8 +44,8 @@ static void NM_##name(Object self, Class class, uns_int argc) {
 
 extern void NativeMethod_invoke(Runtime_MethodClosure closure,
                                     NativeMethod method,
-                                    Object self, uns_int argc);
-extern native lookup_native(Object primitive_name, Object module_name);
+                                    Optr self, uns_int argc);
+extern native lookup_native(Optr primitive_name, Optr module_name);
 
 /* ========================================================================= */
 

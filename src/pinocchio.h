@@ -31,16 +31,16 @@ typedef unsigned long int uns_int;
 
 /* ========================================================================= */
 
-#define HEADER_SIZE (sizeof(Object))
-#define POINTER_INC(p) (((Object) (p)) + 1) 
-#define POINTER_DEC(p) (((Object) (p)) - 1)
+#define HEADER_SIZE (sizeof(Optr))
+#define POINTER_INC(p) (((Optr) (p)) + 1) 
+#define POINTER_DEC(p) (((Optr) (p)) - 1)
 
 #define HEADER(o) (*(Class*)POINTER_DEC(o))
 
 /* ========================================================================= */
 
 #define NEW(layout)\
-    NEW_ARRAYED(layout, Object[0])
+    NEW_ARRAYED(layout, Optr[0])
 
 #define NEW_t(name) NEW(struct name##_t)
 
@@ -81,7 +81,7 @@ Class class##_Class;
                 ((Class)(class))->name->value));
 
 #define ASSERT_INSTANCE_OF(expression, class)\
-    assert(isInstance((expression), (Object)(class)), \
+    assert(isInstance((expression), (Optr)(class)), \
         printf("Invalid argument type.\n"); \
         printf("Expected %ls but got %ls.", \
                 HEADER(expression)->name->value, \
@@ -89,12 +89,12 @@ Class class##_Class;
     
 // TODO make sure this is not via c stack
 #define ASSERT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send1((Object)(exp1), SMB__pequal, \
-        (Object)(exp2)) == (Object)true);
+    assert0(Eval_Send1((Optr)(exp1), SMB__pequal, \
+        (Optr)(exp2)) == (Optr)true);
         
 #define ASSERT_NOT_EQUALS(exp1, exp2) \
-    assert0(Eval_Send1((Object)(exp1), SMB__pequal, \
-        (Object)(exp2)) == (Object)false);
+    assert0(Eval_Send1((Optr)(exp1), SMB__pequal, \
+        (Optr)(exp2)) == (Optr)false);
 
 #define COPY_ARGS(source, target)\
 {\
@@ -102,7 +102,7 @@ Class class##_Class;
     va_list args;\
     va_start(args, source);\
     for (i = 0; i < source; i++) {\
-        target[i] = va_arg(args, Object);\
+        target[i] = va_arg(args, Optr);\
     }\
     va_end(args);\
 }
@@ -112,7 +112,7 @@ Class class##_Class;
 
 typedef enum BOOL { FALSE , TRUE } BOOL;
 
-typedef void** Object;
+typedef void** Optr;
 typedef void(*cont)();
 #include <thread.h>
 
@@ -161,7 +161,7 @@ extern void CNT_exit_eval();
 
 #include <pinocchioType.hi>
 
-typedef void(*native)(Object self, Class class, uns_int argc);
+typedef void(*native)(Optr self, Class class, uns_int argc);
 
 /* ========================================================================= */
 
@@ -179,12 +179,12 @@ extern int IN_EVAL;
 /* ========================================================================= */
 
 extern void CNT_exit_error();
-extern Object Eval(Object code);
-extern Object Eval_Send0(Object self, Symbol symbol);
-extern Object Eval_Send1(Object self, Symbol symbol, Object arg);
-extern Object Eval_Send2(Object self, Symbol symbol, Object arg1,  Object arg2);
+extern Optr Eval(Optr code);
+extern Optr Eval_Send0(Optr self, Symbol symbol);
+extern Optr Eval_Send1(Optr self, Symbol symbol, Optr arg);
+extern Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2);
 extern void pinocchio_post_init();
-extern bool isInstance(Object object, Object class);
+extern bool isInstance(Optr object, Optr class);
 extern void store_method(Class class, Symbol symbol, Runtime_MethodClosure method);
 
 /* ========================================================================= */

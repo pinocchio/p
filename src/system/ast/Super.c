@@ -8,9 +8,9 @@
 
 #define Super_args(super) super->arguments
 
-Super new_Super(Object message, uns_int argc, ...)
+Super new_Super(Optr message, uns_int argc, ...)
 {
-    NEW_ARRAY_OBJECT(Super, Object[argc]);
+    NEW_ARRAY_OBJECT(Super, Optr[argc]);
     result->message = message;
     result->info    = empty_AST_Info;
     result->cache   = new_Runtime_InlineCache();
@@ -20,7 +20,7 @@ Super new_Super(Object message, uns_int argc, ...)
     va_start(args, argc);
     int idx;
     for (idx = 0; idx < argc; idx++) {
-        Super_args(result)[idx] = va_arg(args, Object);
+        Super_args(result)[idx] = va_arg(args, Optr);
     }
     va_end(args);
 
@@ -30,16 +30,16 @@ Super new_Super(Object message, uns_int argc, ...)
 /* ========================================================================= */
 
 CNT(Super_send) 
-    Object class    = pop_EXP();
+    Optr class    = pop_EXP();
     uns_int argc    = (uns_int)pop_EXP();
-    Object receiver = peek_EXP(argc);
+    Optr receiver = peek_EXP(argc);
     
     Class_dispatch(receiver, (Class)class, argc);
 }
 
 CNT(push_env_class)
     // TODO directly inline it
-    Object env = (Object)current_env();
+    Optr env = (Optr)current_env();
     assert0(IS_CONTEXT(env));
     push_EXP(((Runtime_BlockContext)env)->home_context->closure->host);
 }

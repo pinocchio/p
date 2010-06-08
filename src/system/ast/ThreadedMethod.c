@@ -83,19 +83,19 @@ void t_times(int pc)
 void t_send_0(int pc)
 {
     inc_pc(pc);
-    Object self = peek_EXP(0);
+    Optr self = peek_EXP(0);
     Class_dispatch(self, HEADER(self), 0);
 }
 
 void t_push_next(int pc)
 {
-    Object v = threaded_code()->values[pc + 1];
+    Optr v = threaded_code()->values[pc + 1];
     set_pc(pc + 2);
     push_EXP(v);
 }
 
 #define THREADED(name) RAW_THREADED(&t_##name);
-#define RAW_THREADED(o) code->values[pc++] = (Object)(o);
+#define RAW_THREADED(o) code->values[pc++] = (Optr)(o);
 
 Array create_fac_code()
 {
@@ -108,7 +108,7 @@ Array create_fac_code()
     THREADED(return_1);
     THREADED(push_self);
     THREADED(push_next);
-    RAW_THREADED(new_Send_raw(nil, (Object)new_Symbol(L"fac"), 0));
+    RAW_THREADED(new_Send_raw(nil, (Optr)new_Symbol(L"fac"), 0));
     THREADED(push_self);
     THREADED(push_1);
     THREADED(minus);
@@ -123,7 +123,7 @@ ThreadedMethod new_ThreadedMethod_with(Array params,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(ThreadedMethod, Object[statementCount]);
+    NEW_ARRAY_OBJECT(ThreadedMethod, Optr[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -141,7 +141,7 @@ ThreadedMethod new_ThreadedMethod_with(Array params,
 
 void ThreadedMethod_invoke(Runtime_MethodClosure closure,
                                ThreadedMethod method,
-                               Object self, uns_int argc)
+                               Optr self, uns_int argc)
 {
     if (method->code == (Array)nil) {
         return Method_invoke(closure, (Method)method, self, argc);
@@ -156,7 +156,7 @@ void ThreadedMethod_invoke(Runtime_MethodClosure closure,
         return;
     }
     
-    set_env((Object)new_Runtime_MethodContext(closure, self));
+    set_env((Optr)new_Runtime_MethodContext(closure, self));
     activation_from_native(argc);
 
 	push_CNT_raw(method->code);

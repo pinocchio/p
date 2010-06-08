@@ -4,14 +4,14 @@
 
 /* ========================================================================= */
 
-Object true;
-Object false;
+Optr true;
+Optr false;
 Constant false_Const;
 Constant true_Const;
 
 /* ========================================================================= */
 
-Object get_bool(bool value)
+Optr get_bool(bool value)
 {
     return value ? true : false;
 }
@@ -20,7 +20,7 @@ Object get_bool(bool value)
 
 void CNT_loop_apply()
 {
-    Object closure = peek_EXP(1);
+    Optr closure = peek_EXP(1);
     push_EXP(closure);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
 }
@@ -38,13 +38,13 @@ NATIVE1(False_whileFalse_)
 }
 
 NATIVE2(True_ifTrue_ifFalse_)
-    Object closure = NATIVE_ARG(0);
+    Optr closure = NATIVE_ARG(0);
     zapn_EXP(2);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
 }
 
 NATIVE2(False_ifTrue_ifFalse_)
-    Object closure = NATIVE_ARG(1);
+    Optr closure = NATIVE_ARG(1);
     zapn_EXP(2);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
 }
@@ -54,10 +54,10 @@ NATIVE2(False_ifTrue_ifFalse_)
 void post_init_Boolean()
 {
     true         = instantiate(True_Class);
-    true_Const   = new_Constant((Object)true);
+    true_Const   = new_Constant((Optr)true);
 
     false        = instantiate(False_Class);
-    false_Const  = new_Constant((Object)false);
+    false_Const  = new_Constant((Optr)false);
 
     Dictionary natives;
     

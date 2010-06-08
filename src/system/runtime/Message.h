@@ -8,10 +8,10 @@
 struct Runtime_Message_t {
     uns_int     size;
     Symbol selector;
-    Object      arguments[];
+    Optr      arguments[];
 };
 
-extern Runtime_Message new_Runtime_Message(Object selector, uns_int size);
+extern Runtime_Message new_Runtime_Message(Optr selector, uns_int size);
 
 /* ========================================================================= */
 

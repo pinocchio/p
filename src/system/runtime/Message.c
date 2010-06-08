@@ -5,9 +5,9 @@
 
 /* ========================================================================= */
 
-Runtime_Message new_Runtime_Message(Object selector, uns_int size)
+Runtime_Message new_Runtime_Message(Optr selector, uns_int size)
 {
-    NEW_ARRAY_OBJECT(Runtime_Message, Object[size]);
+    NEW_ARRAY_OBJECT(Runtime_Message, Optr[size]);
     result->size     = size;
     result->selector = (Symbol)selector;
     return result;

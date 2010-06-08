@@ -12,20 +12,20 @@ Slot new_Slot(uns_int index, const wchar_t * name)
 {
     NEW_OBJECT(Slot);
     result->index   = index;
-    result->name    = (Object)new_Symbol_cached(name);
-    result->package = (Object)nil;
+    result->name    = (Optr)new_Symbol_cached(name);
+    result->package = (Optr)nil;
     return result;
 }
 
 /* ========================================================================= */
 
-static Object Slot_readFrom_(Slot var, Object self)
+static Optr Slot_readFrom_(Slot var, Optr self)
 {
     return Object_instVarAt_(self, var->index);
 }
 
-static void Slot_assign_on_(Slot var, Object value,
-                                        Object self)
+static void Slot_assign_on_(Slot var, Optr value,
+                                        Optr self)
 {
     Object_instVarAt_put_(self,
 						  var->index,
@@ -38,7 +38,7 @@ void Slot_eval(Slot var)
                     current_env()->home_context->self));
 }
 
-void Slot_assign(Slot var, Object value)
+void Slot_assign(Slot var, Optr value)
 {
     Slot_assign_on_(var, value, current_env()->home_context->self);
 }
@@ -46,14 +46,14 @@ void Slot_assign(Slot var, Object value)
 /* ========================================================================= */
 
 NATIVE1(Slot_readFrom_)
-    Object receiver = NATIVE_ARG(0); 
+    Optr receiver = NATIVE_ARG(0); 
     RETURN_FROM_NATIVE(
         Slot_readFrom_((Slot)self, receiver));
 }
 
 NATIVE2(Slot_assign_on_)
-    Object value = NATIVE_ARG(0);
-    Object o = NATIVE_ARG(1);
+    Optr value = NATIVE_ARG(0);
+    Optr o = NATIVE_ARG(1);
     Slot_assign_on_((Slot)self,
                                 value, o);
     RETURN_FROM_NATIVE(value);

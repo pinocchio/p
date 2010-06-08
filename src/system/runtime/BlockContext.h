@@ -18,7 +18,7 @@ struct Runtime_BlockContext_t {
     Runtime_MethodContext   home_context;
     Runtime_BlockContext    parent_frame;
     Runtime_BlockContext    parent_scope;
-    Object                  locals[];
+    Optr                  locals[];
 };
 
 extern void post_init_Runtime_BlockContext();
@@ -27,17 +27,17 @@ extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block)
 
 /* ========================================================================= */
 
-extern Object Runtime_BlockContext_lookup(
+extern Optr Runtime_BlockContext_lookup(
     Runtime_BlockContext self, uns_int local_id, uns_int scope_id);
 extern void Runtime_BlockContext_assign(
-    Runtime_BlockContext self, uns_int local_id, uns_int scope_id, Object value);
+    Runtime_BlockContext self, uns_int local_id, uns_int scope_id, Optr value);
 extern Runtime_BlockContext optain_context(uns_int size);
 extern void free_context(Runtime_BlockContext context);
 
 /* ========================================================================= */
 
 extern Runtime_BlockContext current_env();
-extern void set_env(Object env);
+extern void set_env(Optr env);
 
 /* ========================================================================= */
 

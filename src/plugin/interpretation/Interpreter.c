@@ -1,7 +1,7 @@
 #include <plugin/Plugin.h>
 
 CNT(restore_iss)
-    Object return_value = pop_EXP();
+    Optr return_value = pop_EXP();
     tset(_ISS_, peek_EXP(0));
     poke_EXP(0, return_value);
 }
@@ -28,12 +28,12 @@ NATIVE4(Interpreter_invokeNative)
     NativeMethod_invoke(
             closure,
             receiver,
-            (Object)closure->host,
+            (Optr)closure->host,
             message->size);
 }
 
 static CNT(fix_lookup_result)
-	Object result = peek_EXP(0);
+	Optr result = peek_EXP(0);
 	zapn_EXP(3);
 	if (result == NULL) {
 		poke_EXP(0, nil);
@@ -43,7 +43,7 @@ static CNT(fix_lookup_result)
 }
 
 NATIVE2(Interpreter_lookupSelector_in_)
-	Object selector   = NATIVE_ARG(0);
+	Optr selector   = NATIVE_ARG(0);
 	Class target = (Class)NATIVE_ARG(1);
 	push_CNT(fix_lookup_result);
     push_CNT(Class_lookup_loop);

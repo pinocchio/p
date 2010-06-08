@@ -12,7 +12,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
                                Array annotations,
                                uns_int statementCount, ...)
 {
-    NEW_ARRAY_OBJECT(ReflectionMethod, Object[statementCount]);
+    NEW_ARRAY_OBJECT(ReflectionMethod, Optr[statementCount]);
     result->params = params;
     result->locals = locals;
     result->annotations = annotations;
@@ -33,17 +33,17 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
 
 void ReflectionMethod_invoke(Runtime_MethodClosure closure,
                                  ReflectionMethod method, 
-                                 Object self, uns_int argc)
+                                 Optr self, uns_int argc)
 {
     if (method->cache == NULL) {
         Annotation annotation =
             lookup_annotation(method->annotations, 
-                              (Object)SMB_pinocchioReflective_);
+                              (Optr)SMB_pinocchioReflective_);
         assert1(annotation, "No reflection annotation found");
         assert1(annotation->size == 1, "Invalid annotation format");
         method->cache =
             (native)lookup_native(annotation->arguments[0],
-                                  (Object)SMB_Reflection_Reflection);
+                                  (Optr)SMB_Reflection_Reflection);
     }
     if (method->cache == (native)-1) {
         return Method_invoke(closure, (Method)method, self, argc);

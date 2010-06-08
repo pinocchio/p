@@ -21,7 +21,7 @@ Float new_Float(float value)
 
 #define Float_BINARY_OPERATION(name, op)\
 NATIVE1(Float_##name)\
-    Object w_arg = NATIVE_ARG(0);\
+    Optr w_arg = NATIVE_ARG(0);\
     ASSERT_INSTANCE_OF(w_arg, Float_Class);\
     SmallInt arg = (SmallInt)w_arg;\
     RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op arg->value));\
@@ -42,7 +42,7 @@ Float_BINARY_OPERATION(or_,         |);
 // printf("%i "#op" %i\n", number->value, otherNumber->value);
 #define Float_COMPARE_OPERATION(name, op)\
 NATIVE1(Float##_##name)\
-    Object w_arg = NATIVE_ARG(0);\
+    Optr w_arg = NATIVE_ARG(0);\
     if (HEADER(w_arg) == Float_Class) {\
         Float number      = ((Float) self);\
         Float otherNumber = (Float)w_arg; \
@@ -106,7 +106,7 @@ void post_init_Float()
 
 /* ========================================================================= */
 
-float unwrap_float(Object floatValue)
+float unwrap_float(Optr floatValue)
 {
     // TODO do more stuff in case we are not an float.
     ASSERT_TAG_LAYOUT(GETTAG(floatValue), Float);

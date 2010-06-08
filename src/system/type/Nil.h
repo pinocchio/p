@@ -7,7 +7,7 @@
 
 struct Nil_t{};
 
-extern Object nil;
+extern Optr nil;
 extern Constant nil_Const;
 CREATE_INITIALIZERS(Nil)
 

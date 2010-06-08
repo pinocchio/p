@@ -9,13 +9,13 @@ struct Send_t {
     uns_int     size;
     AST_Info    info;
     Array  cache;
-    Object      message;
-    Object      receiver;
-    Object      arguments[];
+    Optr      message;
+    Optr      receiver;
+    Optr      arguments[];
 };
 
-extern Send new_Send_raw(Object receiver, Object msg, uns_int argc);
-extern Send new_Send(Object receiver, Object msg, uns_int argc, ...);
+extern Send new_Send_raw(Optr receiver, Optr msg, uns_int argc);
+extern Send new_Send(Optr receiver, Optr msg, uns_int argc, ...);
 
 /* ========================================================================= */
 extern Array Send_args(Send send);

@@ -4,7 +4,7 @@
 
 /* ========================================================================= */
 
-Constant new_Constant(Object constant)
+Constant new_Constant(Optr constant)
 {
     NEW_OBJECT(Constant);
     result->constant = constant;

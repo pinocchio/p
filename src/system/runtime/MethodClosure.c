@@ -9,7 +9,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host)
     NEW_OBJECT(Runtime_MethodClosure); 
     result->code        = code;
     result->info        = empty_AST_Info;
-    result->selector    = (Object)nil;
+    result->selector    = (Optr)nil;
     result->host        = host;
     return result;
 }
@@ -20,7 +20,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host)
         return name##_invoke(closure, (name)method, self, argc);\
     }
 
-void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Object self,
+void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
                                   uns_int argc)
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);

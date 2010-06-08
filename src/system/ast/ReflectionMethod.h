@@ -12,10 +12,10 @@ struct ReflectionMethod_t {
     AST_Info         info;
     Array params;
     Array locals;
-    Object           package;
+    Optr           package;
     Array annotations;
     native           cache;
-    Object           body[];
+    Optr           body[];
 };
 
 extern ReflectionMethod new_ReflectionMethod_with(Array params,
@@ -26,7 +26,7 @@ extern ReflectionMethod new_ReflectionMethod_with(Array params,
 /* ========================================================================= */
 
 extern void ReflectionMethod_invoke(Runtime_MethodClosure closure,
-                                        ReflectionMethod method, Object self,
+                                        ReflectionMethod method, Optr self,
                                         uns_int argc);
 
 /* ========================================================================= */
