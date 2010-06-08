@@ -15,12 +15,12 @@ Dictionary Symbol_Table;
 
 Symbol new_Symbol(const wchar_t* input)
 {
-    uns_int size        = wcslen(input) + 1;
+    uns_int size   = wcslen(input) + 1;
     Symbol result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
-    HEADER(result)      = Symbol_Class;
-    result->hash        = wchar_hash(input, size);
+    HEADER(result) = Symbol_Class;
+    result->hash   = wchar_hash(input, size);
     wcsncpy(result->value, input, size);
-    result->size        = size - 1;
+    result->size   = size - 1;
     return result;
 }
 

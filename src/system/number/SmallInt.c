@@ -84,17 +84,9 @@ SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
 String SmallInt_asString(long self, uns_int base)
 {
-    uns_int size;
-    if (self == 0) { 
-        size = 2; 
-    } else {
-        size = 2+(long)floorl(log10l((unsigned long)labs(self)));
-        if (self < 0) { size += 1; }
-    }
-    
-    wchar_t wchar_copy[size];
-    swprintf(&wchar_copy[0], size, L"%li", self);
-    String result   =  new_String(wchar_copy);
+    wchar_t buffer[LONG_MAX_DIGITS + 2];
+    int len = swprintf(buffer, sizeof buffer / sizeof *buffer, L"%li", self);
+    String result = new_String(buffer);
     return result;
 }
 

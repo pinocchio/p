@@ -14,20 +14,20 @@ String empty_String;
 
 String new_String(const wchar_t * str)
 {
-    String string = (String)new_Symbol(str);
-    HEADER(string)     = String_Class;
+    String string  = (String)new_Symbol(str);
+    HEADER(string) = String_Class;
     return string;
 }
 
 String new_String_sized(uns_int size)
 {
-    String result = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
-    HEADER(result)     = String_Class;
-    result->size       = size;
+    String result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
+    HEADER(result) = String_Class;
+    result->size   = size;
     while(size--) {
         result->value[size] = '\0';
     }
-    result->hash       = Symbol_hash((Symbol)result);
+    result->hash   = Symbol_hash((Symbol)result);
     return result;
 }
 

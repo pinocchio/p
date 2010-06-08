@@ -2,8 +2,22 @@
 #define NUMBER_SMALLINT_H
 
 #include <pinocchio.h>
+#include <limits.h>
 
 /* ========================================================================= */
+
+#if LONG_MAX < 1u << 15
+#define LONG_MAX_DIGITS 5
+#elif LONG_MAX < 1u << 31
+#define LONG_MAX_DIGITS 10
+#elif LONG_MAX < 1u << 63
+#define LONG_MAX_DIGITS 19
+#elif LONG_MAX < 1u << 127
+#define LONG_MAX_DIGITS 39
+#else
+#error "unsupported LONG_MAX"
+#endif
+
 
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 127
