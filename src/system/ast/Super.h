@@ -6,15 +6,15 @@
 /* ========================================================================= */
 
 struct Super_t {
-    uns_int         size;
-    Info        info;   
-    Array      cache;
-    Optr          message; 
-    Optr          unused;
-    Optr          arguments[];
+    uns_int size;
+    Info    info;   
+    Array   cache;
+    Symbol  message; 
+    Optr    unused;
+    Optr    arguments[];
 };
 
-extern Super new_Super(Optr message, uns_int argc, ...);
+extern Super new_Super(Symbol message, uns_int argc, ...);
 
 /* ========================================================================= */
 

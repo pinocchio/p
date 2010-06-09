@@ -26,7 +26,7 @@ extern ReflectionMethod new_ReflectionMethod_with(Array params,
 
 /* ========================================================================= */
 
-extern void ReflectionMethod_invoke(Runtime_MethodClosure closure,
+extern void ReflectionMethod_invoke(MethodClosure closure,
                                         ReflectionMethod method, Optr self,
                                         uns_int argc);
 

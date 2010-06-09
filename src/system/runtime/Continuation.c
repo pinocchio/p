@@ -4,17 +4,17 @@
 
 /* ========================================================================= */
 
-Runtime_Continuation new_Runtime_Continuation()
+Continuation new_Continuation()
 {
-    NEW_OBJECT(Runtime_Continuation);
+    NEW_OBJECT(Continuation);
     return result;
 }
 
 /* ========================================================================= */
 
-NATIVE1(Runtime_Continuation_continue_)
+NATIVE1(Continuation_continue_)
     // LOGFUN;
-    Runtime_Continuation cont = (Runtime_Continuation)self;
+    Continuation cont = (Continuation)self;
     Optr * ds = tget(Double_Stack);
     Optr arg  = NATIVE_ARG(0);
     // restore the stack
@@ -38,8 +38,8 @@ NATIVE1(Runtime_Continuation_continue_)
     poke_EXP(0, arg);
 }
 
-NATIVE1(Runtime_Continuation_on_)
-    Runtime_Continuation cont = new_Runtime_Continuation();
+NATIVE1(Continuation_on_)
+    Continuation cont = new_Continuation();
     cont->exp_stack = new_Array(EXP_size() - (argc + 1),
                                      tget(Double_Stack));
     cont->cnt_stack = new_Array(CNT_size(), tget(_CNT_));
@@ -52,11 +52,11 @@ NATIVE1(Runtime_Continuation_on_)
 
 /* ========================================================================= */
 
-void post_init_Runtime_Continuation()
+void post_init_Continuation()
 {
     Dictionary natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, SMB_continuationContinue_message_, 
-                          NM_Runtime_Continuation_continue_);
+                          NM_Continuation_continue_);
     store_native(natives, SMB_continuationOn_message_,       
-                          NM_Runtime_Continuation_on_);
+                          NM_Continuation_on_);
 }

@@ -6,26 +6,26 @@
 
 #define CONTEXT_CACHE_SIZE 128
 
-DECLARE_CLASS(Runtime_BlockContext);
+DECLARE_CLASS(BlockContext);
 static Array unused_contexts;
 
 /* ========================================================================= */
 
-static Runtime_BlockContext make_context(uns_int size)
+static BlockContext make_context(uns_int size)
 {
-    NEW_ARRAY_OBJECT(Runtime_BlockContext, Optr[size]);
+    NEW_ARRAY_OBJECT(BlockContext, Optr[size]);
     result->captured = 0;
     return result;
 }
 
-Runtime_BlockContext optain_context(uns_int size)
+BlockContext optain_context(uns_int size)
 {
     if (size >= unused_contexts->size) { return make_context(size); }
-    Runtime_BlockContext context =
-        (Runtime_BlockContext)unused_contexts->values[size];
+    BlockContext context =
+        (BlockContext)unused_contexts->values[size];
     if ((Optr)context == nil) {
         /*gc();
-        context = (Runtime_BlockContext)unused_contexts->values[size];
+        context = (BlockContext)unused_contexts->values[size];
         if ((Optr)context == nil) {
         */
         return make_context(size);
@@ -35,15 +35,15 @@ Runtime_BlockContext optain_context(uns_int size)
     return context;
 }
 
-void free_context(Runtime_BlockContext context)
+void free_context(BlockContext context)
 {
     if (context->captured) { return; }
     uns_int size = context->size;
     Optr next = unused_contexts->values[size];
-    context->closure = (Runtime_BlockClosure)nil;
-    context->home_context = (Runtime_MethodContext)nil;
-    context->parent_frame = (Runtime_BlockContext)next;
-    context->parent_scope = (Runtime_BlockContext)nil;
+    context->closure = (BlockClosure)nil;
+    context->home_context = (MethodContext)nil;
+    context->parent_frame = (BlockContext)next;
+    context->parent_scope = (BlockContext)nil;
     long i;
     for (i = 0; i < size; i++) {
         context->locals[i] = nil;
@@ -52,25 +52,25 @@ void free_context(Runtime_BlockContext context)
 }
 
 /*
-void free_context(Runtime_BlockContext context)
+void free_context(BlockContext context)
 {
     uns_int size          = context_locals(context)->size;
     if (size >= unused_contexts->size) { return; }
     Optr next           = unused_contexts->values[size];
-    context->parent_frame = (Runtime_BlockContext)next;
+    context->parent_frame = (BlockContext)next;
     unused_contexts->values[size] = (Optr)context;
 }
 */
 
-Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
+BlockContext new_BlockContext(BlockClosure closure)
 {
     uns_int size                = closure->code->params->size + closure->code->locals->size;
-    Runtime_BlockContext result = optain_context(size);
-	HEADER(result)              = Runtime_BlockContext_Class;
+    BlockContext result = optain_context(size);
+	HEADER(result)              = BlockContext_Class;
     result->home_context        = closure->context->home_context;
     result->closure             = closure;
     result->parent_frame        = current_env();
-    Runtime_BlockContext parent = closure->context;
+    BlockContext parent = closure->context;
     result->scope_id            = parent->scope_id + 1;
     if (!parent->size) {
         parent = parent->parent_scope;
@@ -81,9 +81,9 @@ Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure closure)
     return result;
 }
 
-Runtime_BlockContext current_env()
+BlockContext current_env()
 {
-    return (Runtime_BlockContext)tget(_ENV_);
+    return (BlockContext)tget(_ENV_);
 }
 
 void set_env(Optr env)
@@ -93,12 +93,12 @@ void set_env(Optr env)
 
 /* ========================================================================= */
 
-Optr Runtime_BlockContext_lookup(Runtime_BlockContext self, 
+Optr BlockContext_lookup(BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
     while (scope_id != self->scope_id && (Optr)self->parent_scope != nil) {
         if (IS_CONTEXT(self->parent_scope)) {
-            self = (Runtime_BlockContext)self->parent_scope;
+            self = (BlockContext)self->parent_scope;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send.");
@@ -115,12 +115,12 @@ Optr Runtime_BlockContext_lookup(Runtime_BlockContext self,
     return self->locals[local_id];
 }
 
-void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
+void BlockContext_assign(BlockContext self, uns_int local_id,
                                  uns_int scope_id, Optr value)
 {
     while (scope_id != self->scope_id && (Optr)self->closure->context != nil) {
         if (IS_CONTEXT(self->closure->context)) {
-            self = (Runtime_BlockContext)self->closure->context;
+            self = (BlockContext)self->closure->context;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");
@@ -137,23 +137,23 @@ void Runtime_BlockContext_assign(Runtime_BlockContext self, uns_int local_id,
     self->locals[local_id] = value;
 }
 
-NATIVE(Runtime_BlockContext_errorHandler)
+NATIVE(BlockContext_errorHandler)
     RETURN_FROM_NATIVE(tget(Error_Handler));
 }
 
-NATIVE1(Runtime_BlockContext_errorHandler_)
+NATIVE1(BlockContext_errorHandler_)
     tset(Error_Handler, NATIVE_ARG(1));
     RETURN_FROM_NATIVE(self);
 }
 
 /* ========================================================================= */
 
-void pre_init_Runtime_BlockContext() { }
-void post_init_Runtime_BlockContext()
+void pre_init_BlockContext() { }
+void post_init_BlockContext()
 {
     unused_contexts = new_Array_withAll(CONTEXT_CACHE_SIZE, nil);
     
     Dictionary natives = add_plugin(L"Runtime.BlockClosure");
-    store_native(natives, SMB_errorHandler, NM_Runtime_BlockContext_errorHandler);
-    store_native(natives, SMB_errorHandler_, NM_Runtime_BlockContext_errorHandler_);
+    store_native(natives, SMB_errorHandler, NM_BlockContext_errorHandler);
+    store_native(natives, SMB_errorHandler_, NM_BlockContext_errorHandler_);
 }

@@ -12,7 +12,7 @@ void return_from_send()
 
 void restore_env()
 {
-	Runtime_BlockContext current = current_env();
+	BlockContext current = current_env();
     set_env((Optr)current->parent_frame);
 	free_context(current);
 }
@@ -42,7 +42,7 @@ void send_eval_rest(Optr exp, Class class)
 }
 
 CNT(send_Eval)
-    Optr exp = peek_EXP(0);
+    Optr exp    = peek_EXP(0);
     Class class = HEADER(exp);
 
     EVAL_IF(Send)

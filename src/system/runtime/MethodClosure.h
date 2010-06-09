@@ -5,20 +5,20 @@
 
 /* ========================================================================= */
 
-struct Runtime_MethodClosure_t {
+struct MethodClosure_t {
     Method          code;
     Info            info;
     Optr              selector;
     Class          host;
 };
 
-extern void post_init_Runtime_MethodClosure();
-extern Runtime_MethodClosure new_Runtime_MethodClosure(Method code,
+extern void post_init_MethodClosure();
+extern MethodClosure new_MethodClosure(Method code,
                                                        Class host);
 
 /* ========================================================================= */
 
-extern void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
+extern void MethodClosure_invoke(MethodClosure closure, Optr self,
                                          uns_int argc);
 
 /* ========================================================================= */

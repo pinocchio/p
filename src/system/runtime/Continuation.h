@@ -5,15 +5,15 @@
 
 /* ========================================================================= */
 
-struct Runtime_Continuation_t {
+struct Continuation_t {
     Array  exp_stack;
     Array  cnt_stack;
     Optr      iss;
     Optr      env;
 };
 
-extern void post_init_Runtime_Continuation();
-extern Runtime_Continuation new_Runtime_Continuation();
+extern void post_init_Continuation();
+extern Continuation new_Continuation();
 
 /* ========================================================================= */
 

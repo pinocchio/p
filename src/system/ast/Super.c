@@ -8,12 +8,12 @@
 
 #define Super_args(super) super->arguments
 
-Super new_Super(Optr message, uns_int argc, ...)
+Super new_Super(Symbol message, uns_int argc, ...)
 {
     NEW_ARRAY_OBJECT(Super, Optr[argc]);
     result->message = message;
     result->info    = empty_Info;
-    result->cache   = new_Runtime_InlineCache();
+    result->cache   = new_InlineCache();
     result->size    = argc;
 
     va_list args;
@@ -41,7 +41,7 @@ CNT(push_env_class)
     // TODO directly inline it
     Optr env = (Optr)current_env();
     assert0(IS_CONTEXT(env));
-    push_EXP(((Runtime_BlockContext)env)->home_context->closure->host);
+    push_EXP(((BlockContext)env)->home_context->closure->host);
 }
 
 void Super_eval(Super super)

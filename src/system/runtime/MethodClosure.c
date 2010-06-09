@@ -4,9 +4,9 @@
 
 /* ========================================================================= */
 
-Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host) 
+MethodClosure new_MethodClosure(Method code, Class host) 
 {
-    NEW_OBJECT(Runtime_MethodClosure); 
+    NEW_OBJECT(MethodClosure); 
     result->code        = code;
     result->info        = empty_Info;
     result->selector    = (Optr)nil;
@@ -20,7 +20,7 @@ Runtime_MethodClosure new_Runtime_MethodClosure(Method code, Class host)
         return name##_invoke(closure, (name)method, self, argc);\
     }
 
-void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
+void MethodClosure_invoke(MethodClosure closure, Optr self,
                                   uns_int argc)
 {
     // LOG_AST_INFO("Closure Invoke: ", closure->info);
@@ -36,7 +36,7 @@ void Runtime_MethodClosure_invoke(Runtime_MethodClosure closure, Optr self,
 }
 
 
-NATIVE1(Runtime_MethodClosure_valueWithArguments_)
+NATIVE1(MethodClosure_valueWithArguments_)
     Array args = (Array)pop_EXP();
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
     
@@ -46,15 +46,15 @@ NATIVE1(Runtime_MethodClosure_valueWithArguments_)
         push_EXP(args->values[pos]);
     }
     
-    Runtime_BlockClosure closure = (Runtime_BlockClosure)self;
-    Runtime_BlockClosure_apply(closure, args->size);
+    BlockClosure closure = (BlockClosure)self;
+    BlockClosure_apply(closure, args->size);
 }
 
 /* ========================================================================= */
 
-void post_init_Runtime_MethodClosure()
+void post_init_MethodClosure()
 {
     // TODO move the whole class to AST
     Dictionary natives = add_plugin(L"AST.MethodClosure");
-    store_native(natives, SMB_valueWithArguments_, NM_Runtime_MethodClosure_valueWithArguments_);
+    store_native(natives, SMB_valueWithArguments_, NM_MethodClosure_valueWithArguments_);
 }

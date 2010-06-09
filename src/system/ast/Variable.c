@@ -36,7 +36,7 @@ void Variable_eval(Variable self)
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
 
     if (IS_CONTEXT(env)) {
-        poke_EXP(0, Runtime_BlockContext_lookup((Runtime_BlockContext)env, 
+        poke_EXP(0, BlockContext_lookup((BlockContext)env, 
                                                 local_id,
                                                 scope_id));
     } else {
@@ -55,7 +55,7 @@ void Variable_assign(Variable self, Optr value)
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
 
     if (IS_CONTEXT(env)) {
-        return Runtime_BlockContext_assign((Runtime_BlockContext)env,
+        return BlockContext_assign((BlockContext)env,
                                            local_id, scope_id,
                                            value);
     }

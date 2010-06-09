@@ -7,9 +7,9 @@
 
 #define DEFAULT_INLINECACHE_SIZE 4
 
-extern Array new_Runtime_InlineCache();
-extern Optr Runtime_InlineCache_lookup(Array cache, Optr class);
-extern void Runtime_InlineCache_store(Array cache, Optr class, Optr method);
+extern Array new_InlineCache();
+extern Optr InlineCache_lookup(Array cache, Optr class);
+extern void InlineCache_store(Array cache, Optr class, Optr method);
 
 /* ========================================================================= */
 

@@ -7,9 +7,9 @@ CNT(restore_iss)
 }
 
 NATIVE4(Interpreter_invokeNative)
-    Runtime_MethodClosure closure = (Runtime_MethodClosure)NATIVE_ARG(0);
+    MethodClosure closure = (MethodClosure)NATIVE_ARG(0);
     NativeMethod receiver    = (NativeMethod)NATIVE_ARG(1);
-    Runtime_Message message       = (Runtime_Message)NATIVE_ARG(2);
+    Message message       = (Message)NATIVE_ARG(2);
     if (peek_CNT() == &CNT_restore_iss) {
         claim_EXP(message->size - 4);
     } else {

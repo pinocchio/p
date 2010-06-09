@@ -55,7 +55,7 @@ Method new_Method_with(Array params,
 
 static void CNT_Method_continue()
 {
-    Runtime_MethodContext env = (Runtime_MethodContext)current_env();
+    MethodContext env = (MethodContext)current_env();
     Method code = env->closure->code;
     uns_int pc = (uns_int)peek_EXP(1);
     poke_EXP(0, code->body[pc]);
@@ -84,7 +84,7 @@ static void start_eval(Method method)
 
 /* ========================================================================= */
 
-void StandardMethod_invoke(Runtime_MethodClosure closure, Method method,
+void StandardMethod_invoke(MethodClosure closure, Method method,
                            Optr self, uns_int argc)
 {
     assert(argc == method->params->size,
@@ -96,7 +96,7 @@ void StandardMethod_invoke(Runtime_MethodClosure closure, Method method,
         return;
     }
     
-    set_env((Optr)new_Runtime_MethodContext(closure, self));
+    set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
 
     start_eval(method);

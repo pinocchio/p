@@ -114,7 +114,7 @@ THREADED(push_slot)
     if (HEADER(slot) == Slot_Class) {
         Slot_eval(slot);
     } else if (HEADER(slot) == UIntSlot_Class) {
-        UIntSlot_eval(slot);
+        UIntSlot_eval((UIntSlot)slot);
     } else {
         assert1(NULL, "Unknown type of slot");
     }
@@ -242,7 +242,7 @@ THREADED(assign)
 void post_init_Threaded()
 {
 	Dictionary dict = new_Dictionary();
-	Compiler_ThreadedCompiler_Class->cvars[0] = (Optr)dict;
+	Compiler_Threaded_ThreadedCompiler_Class->cvars[0] = (Optr)dict;
 }
 
 
@@ -253,7 +253,7 @@ void CNT_eval_threaded()
     ((threaded)code->values[pc])(pc);
 }
 
-void Method_invoke(Runtime_MethodClosure closure,
+void Method_invoke(MethodClosure closure,
                    Method method,
                    Optr self, uns_int argc)
 {
@@ -270,7 +270,7 @@ void Method_invoke(Runtime_MethodClosure closure,
         return;
     }
     
-    set_env((Optr)new_Runtime_MethodContext(closure, self));
+    set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
 
 	push_CNT_raw(method->code);

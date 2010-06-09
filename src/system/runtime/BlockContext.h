@@ -5,38 +5,38 @@
 
 /* ========================================================================= */
 
-#define IS_CONTEXT(env) (HEADER(env) == Runtime_BlockContext_Class || \
-                         HEADER(env) == Runtime_MethodContext_Class)
+#define IS_CONTEXT(env) (HEADER(env) == BlockContext_Class || \
+                         HEADER(env) == MethodContext_Class)
 
 /* ========================================================================= */
 
-struct Runtime_BlockContext_t {
+struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
     uns_int                 captured;
-    Runtime_BlockClosure    closure;
-    Runtime_MethodContext   home_context;
-    Runtime_BlockContext    parent_frame;
-    Runtime_BlockContext    parent_scope;
+    BlockClosure    closure;
+    MethodContext   home_context;
+    BlockContext    parent_frame;
+    BlockContext    parent_scope;
     Optr                  locals[];
 };
 
-extern void post_init_Runtime_BlockContext();
+extern void post_init_BlockContext();
 
-extern Runtime_BlockContext new_Runtime_BlockContext(Runtime_BlockClosure block);
-
-/* ========================================================================= */
-
-extern Optr Runtime_BlockContext_lookup(
-    Runtime_BlockContext self, uns_int local_id, uns_int scope_id);
-extern void Runtime_BlockContext_assign(
-    Runtime_BlockContext self, uns_int local_id, uns_int scope_id, Optr value);
-extern Runtime_BlockContext optain_context(uns_int size);
-extern void free_context(Runtime_BlockContext context);
+extern BlockContext new_BlockContext(BlockClosure block);
 
 /* ========================================================================= */
 
-extern Runtime_BlockContext current_env();
+extern Optr BlockContext_lookup(
+    BlockContext self, uns_int local_id, uns_int scope_id);
+extern void BlockContext_assign(
+    BlockContext self, uns_int local_id, uns_int scope_id, Optr value);
+extern BlockContext optain_context(uns_int size);
+extern void free_context(BlockContext context);
+
+/* ========================================================================= */
+
+extern BlockContext current_env();
 extern void set_env(Optr env);
 
 /* ========================================================================= */

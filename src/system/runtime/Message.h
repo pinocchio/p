@@ -5,13 +5,13 @@
 
 /* ========================================================================= */
 
-struct Runtime_Message_t {
+struct Message_t {
     uns_int     size;
     Symbol selector;
     Optr      arguments[];
 };
 
-extern Runtime_Message new_Runtime_Message(Optr selector, uns_int size);
+extern Message new_Message(Optr selector, uns_int size);
 
 /* ========================================================================= */
 

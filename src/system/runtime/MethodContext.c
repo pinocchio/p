@@ -4,26 +4,26 @@
 
 /* ========================================================================= */
 
-Runtime_MethodContext new_Runtime_MethodContext(Runtime_MethodClosure closure,
+MethodContext new_MethodContext(MethodClosure closure,
                                                 Optr self)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
-	Runtime_MethodContext result = (Runtime_MethodContext)optain_context(size);
-	HEADER(result)       = Runtime_MethodContext_Class;
+	MethodContext result = (MethodContext)optain_context(size);
+	HEADER(result)       = MethodContext_Class;
 	result->closure      = closure;
 	result->scope_id     = 0;
 	result->home_context = result;
 	result->parent_frame = current_env();
 	result->self         = self;
-    ((Runtime_BlockContext)result)->size = size;
+    ((BlockContext)result)->size = size;
     return result;
 }
 
-Runtime_MethodContext new_Empty_Runtime_MethodContext()
+MethodContext new_Empty_MethodContext()
 {
-    NEW_OBJECT(Runtime_MethodContext);
+    NEW_OBJECT(MethodContext);
     result->home_context    = result;
-    ((Runtime_BlockContext)result)->size = 0;
+    ((BlockContext)result)->size = 0;
     result->scope_id        = 0;
     return result;
 }

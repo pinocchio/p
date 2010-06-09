@@ -7,18 +7,18 @@
 
 #define Send_args(send) send->arguments
 
-Send new_Send_raw(Optr receiver, Optr msg, uns_int argc) {
+Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc) {
     NEW_ARRAY_OBJECT(Send, Optr[argc]);
     result->receiver = receiver;
     result->message  = msg;
     result->info     = empty_Info;
-    result->cache    = new_Runtime_InlineCache();
+    result->cache    = new_InlineCache();
 
     result->size     = argc;
     return result;
 }
 
-Send new_Send(Optr receiver, Optr msg, uns_int argc, ...)
+Send new_Send(Optr receiver, Symbol msg, uns_int argc, ...)
 {
     Send result = new_Send_raw(receiver, msg, argc);
     va_list args;
@@ -34,7 +34,7 @@ Send new_Send(Optr receiver, Optr msg, uns_int argc, ...)
 /* ========================================================================= */
 
 static CNT(Send_send)
-    uns_int argc    = (uns_int)pop_EXP();
+    uns_int argc  = (uns_int)pop_EXP();
     Optr receiver = peek_EXP(argc);
     Class_dispatch(receiver, HEADER(receiver), argc);
 }
@@ -42,8 +42,8 @@ static CNT(Send_send)
 void CNT_store_argument()
 {
     Optr arg    = peek_EXP(0);
-    uns_int idx   = (uns_int)peek_EXP(1);
-    Send send = (Send)peek_EXP(idx + 2);
+    uns_int idx = (uns_int)peek_EXP(1);
+    Send send   = (Send)peek_EXP(idx + 2);
     poke_EXP(1, arg);
     if (idx < send->size) {
         poke_EXP(0, idx+1);
@@ -58,7 +58,6 @@ void CNT_store_argument()
 void Send_eval(Send self)
 {
     // LOGFUN;
-
     push_CNT(Send_send);
 
     push_EXP(0);

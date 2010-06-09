@@ -5,26 +5,26 @@
 
 /* ========================================================================= */
 
-struct Runtime_BlockClosure_t {
+struct BlockClosure_t {
     Block            code;
-    Runtime_BlockContext context;
+    BlockContext context;
 };
 
-extern void post_init_Runtime_BlockClosure();
-extern Runtime_BlockClosure new_Runtime_BlockClosure(Block code,
-                                           Runtime_BlockContext context);
+extern void post_init_BlockClosure();
+extern BlockClosure new_BlockClosure(Block code,
+                                           BlockContext context);
 
 /* ========================================================================= */
 
-extern void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc);
+extern void BlockClosure_apply(BlockClosure closure, uns_int argc);
 extern void apply(Optr closure, uns_int argc);
 
 /* ========================================================================= */
 
 #define METHOD(fName, paramCount, localCount, numStatements)\
-Runtime_MethodClosure fName() {\
+MethodClosure fName() {\
     Method body          = new_Method(paramCount, localCount, numStatements);\
-    Runtime_MethodClosure method = new_Runtime_MethodClosure(body, (Class)nil);\
+    MethodClosure method = new_MethodClosure(body, (Class)nil);\
     method->info             = new_raw_Info();\
     method->info->sourceFile = new_String_from_charp(__FILE__);\
     method->info->name       = new_String_from_charp(__FUNCTION__);\
@@ -36,7 +36,7 @@ Runtime_MethodClosure fName() {\
 
 /* ========================================================================= */
 
-Runtime_BlockContext  activation_from_native(uns_int argc);
+BlockContext  activation_from_native(uns_int argc);
 
 /* ========================================================================= */
 

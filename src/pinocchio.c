@@ -54,14 +54,14 @@ CNT(exit_eval)
 
 CNT(exit_error)
     Optr assertion = pop_EXP();
-    Runtime_BlockContext env =
-        (Runtime_BlockContext)((Object)assertion)->ivals[0];
+    BlockContext env =
+        (BlockContext)((Object)assertion)->ivals[0];
     
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
     fwprintf(stderr, L"\n");
     while ((Optr)env != nil) {
-        if (env->home_context == (Runtime_MethodContext)env) {
+        if (env->home_context == (MethodContext)env) {
             fwprintf(stderr, L"\t%ls >> %ls\n",
                 (Symbol)HEADER(env->home_context->self)->name->value,
                 ((Symbol)env->home_context->closure->selector)->value);
@@ -176,7 +176,7 @@ Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 jmp_buf Assert_Fail;
 
 void store_method(Class class, Symbol symbol, 
-                  Runtime_MethodClosure method)
+                  MethodClosure method)
 {
     method->selector    = (Optr)symbol;
     method->host        = class;

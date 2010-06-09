@@ -32,7 +32,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
 
 /* ========================================================================= */
 
-void ReflectionMethod_invoke(Runtime_MethodClosure closure,
+void ReflectionMethod_invoke(MethodClosure closure,
                                  ReflectionMethod method, 
                                  Optr self, uns_int argc)
 {

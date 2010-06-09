@@ -74,8 +74,8 @@ CNT(Class_super)
 
 
 static void Method_invoke_inline(Optr method, Optr self, uns_int argc) {
-    if (HEADER(method) == Runtime_MethodClosure_Class) {
-        Runtime_MethodClosure_invoke((Runtime_MethodClosure)method, self, argc);
+    if (HEADER(method) == MethodClosure_Class) {
+        MethodClosure_invoke((MethodClosure)method, self, argc);
     } else {
         // inspect(method);
         assert1(NULL, "Unknown type of method installation");
@@ -85,7 +85,7 @@ static void Method_invoke_inline(Optr method, Optr self, uns_int argc) {
 void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
-        Runtime_Message message = (Runtime_Message)pop_EXP();
+        Message message = (Message)pop_EXP();
         // For now keep on printing the message.
         fwprintf(stderr, L"\033[33mDNU: %ls >> %ls\033[0m\n",
                  class->name->value,
@@ -94,7 +94,7 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
              self, class, message);
     }
 
-	Runtime_Message message = new_Runtime_Message(msg, argc);
+	Message message = new_Message(msg, argc);
 
 	while (argc--) {
 		message->arguments[argc] = pop_EXP();
@@ -118,7 +118,7 @@ static CNT(Class_lookup_cache_invoke)
     zapn_EXP(5);
     Send send       = (Send)peek_EXP(argc + 1);
     Array cache    = send->cache;
-    Runtime_InlineCache_store(cache, (Optr)class, method);
+    InlineCache_store(cache, (Optr)class, method);
     
     Method_invoke_inline(method, self, argc);
 }
@@ -187,7 +187,7 @@ CNT(restore_iss)
 }
 
 void Class_tower_dispatch(Optr self, Optr class,
-                               Object iss, Runtime_Message message)
+                               Object iss, Message message)
 {
     tset(_ISS_, nil);
     push_EXP(iss);
@@ -234,7 +234,7 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
         push_CNT(Class_lookup_invoke);
         Class_direct_dispatch_inline(self, class, msg, argc);
     } else {
-        Runtime_Message message = new_Runtime_Message(msg, argc);
+        Message message = new_Message(msg, argc);
         for (idx = 0; idx < argc; idx++) {
             message->arguments[idx] = va_arg(args, Optr);
         }
@@ -258,7 +258,7 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
         push_CNT(Class_lookup_invoke);
         Class_direct_dispatch_inline(self, class, msg, args->size);
     } else {
-        Runtime_Message message = new_Runtime_Message(msg, args->size);
+        Message message = new_Message(msg, args->size);
         for (idx = 0; idx < args->size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
@@ -289,12 +289,12 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
-        Optr method = Runtime_InlineCache_lookup(cache, (Optr)class);
+        Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
             return Method_invoke_inline(method, self, argc);
         }
     } else {
-        send->cache = new_Runtime_InlineCache();
+        send->cache = new_InlineCache();
     }
     assert_class((Optr)class);
     

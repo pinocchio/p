@@ -5,22 +5,22 @@
 
 /* ========================================================================= */
 
-struct Runtime_MethodContext_t {
+struct MethodContext_t {
     uns_int                 size;
     uns_int                 scope_id;
 	uns_int					captured;
-    Runtime_MethodClosure   closure;
-    Runtime_MethodContext   home_context;
-    Runtime_BlockContext    parent_frame;
+    MethodClosure   closure;
+    MethodContext   home_context;
+    BlockContext    parent_frame;
     Optr                  self;
     Optr                  locals[];
 };
 
-extern Runtime_MethodContext
-    new_Runtime_MethodContext(Runtime_MethodClosure closure,
+extern MethodContext
+    new_MethodContext(MethodClosure closure,
                               Optr self);
 
-extern Runtime_MethodContext new_Empty_Runtime_MethodContext();
+extern MethodContext new_Empty_MethodContext();
 
 /* ========================================================================= */
 

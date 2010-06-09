@@ -43,7 +43,7 @@ static void NM_##name(Optr self, Class class, uns_int argc) {
 #define SELF ((Object) self)
 /* ========================================================================= */
 
-extern void NativeMethod_invoke(Runtime_MethodClosure closure,
+extern void NativeMethod_invoke(MethodClosure closure,
                                     NativeMethod method,
                                     Optr self, uns_int argc);
 extern native lookup_native(Optr primitive_name, Optr module_name);

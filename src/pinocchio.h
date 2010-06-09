@@ -190,7 +190,7 @@ extern Optr Eval_Send1(Optr self, Symbol symbol, Optr arg);
 extern Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2);
 extern void pinocchio_post_init();
 extern bool isInstance(Optr object, Optr class);
-extern void store_method(Class class, Symbol symbol, Runtime_MethodClosure method);
+extern void store_method(Class class, Symbol symbol, MethodClosure method);
 
 /* ========================================================================= */
 

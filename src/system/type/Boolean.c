@@ -22,7 +22,7 @@ void CNT_loop_apply()
 {
     Optr closure = peek_EXP(1);
     push_EXP(closure);
-    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
+    BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 /* ========================================================================= */
@@ -40,13 +40,13 @@ NATIVE1(False_whileFalse_)
 NATIVE2(True_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(0);
     zapn_EXP(2);
-    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
+    BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 NATIVE2(False_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(1);
     zapn_EXP(2);
-    Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, 0);
+    BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 /* ========================================================================= */
