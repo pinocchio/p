@@ -5,6 +5,7 @@
 #include <pinocchio.h>
 #include <lib/lib.h>
 #include <system/runtime/InlineCache.h>
+#include <debug.h>
 
 /* ========================================================================= */
 
@@ -218,7 +219,7 @@ void Class_tower_dispatch(Optr self, Optr class,
 void Class_direct_dispatch(Optr self, Class class, Optr msg,
                                 uns_int argc, ...)
 {
-    va_list args;
+	va_list args;
     va_start(args, argc);
     long idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -268,9 +269,9 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
 
 void Class_dispatch(Optr self, Class class, uns_int argc)
 {
-    Send send       = (Send)peek_EXP(argc + 1); // + self
-    Array cache    = send->cache;
-    Optr msg          = send->message;
+    Send send   = (Send)peek_EXP(argc + 1); // + self
+    Array cache = send->cache;
+    Optr msg    = send->message;
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE

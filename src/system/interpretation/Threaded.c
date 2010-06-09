@@ -1,5 +1,6 @@
 
 #include <system/interpretation/Threaded.h>
+#include <debug.h>
 
 /* ========================================================================= */
 
@@ -207,7 +208,10 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
     for (i=0; i<array->size; i++) {
         Optr object = array->values[i];
         if (HEADER(object) == Compiler_Threaded_FunctionPointer_Class) {
-            array->values[i] = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
+            Optr fp = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
+            assert0(fp != nil);
+            assert0(fp != NULL);
+            array->values[i] = fp;
         }
     }
     RETURN_FROM_NATIVE(array)
@@ -280,12 +284,12 @@ void post_init_Threaded()
 
 void CNT_eval_threaded()
 {
-    long pc     = (long)peekn_CNT(1);
-	Array code = (Array)peekn_CNT(2);
+    long pc    = (long)peekn_CNT(1);
+    Array code = (Array)peekn_CNT(2);
     while (pc != -1) {
         threaded p = (threaded)code->values[pc];
-        assert1(p != nil, "Something went terribly wrong");
-        pc = p(pc);
+        assert1( (Optr)p != (Optr)nil, "Something went terribly wrong");
+        pc         = p(pc);
     }
 }
 

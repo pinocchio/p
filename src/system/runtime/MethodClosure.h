@@ -6,10 +6,10 @@
 /* ========================================================================= */
 
 struct MethodClosure_t {
-    Method          code;
-    Info            info;
-    Optr              selector;
-    Class          host;
+    Method code;
+    Info   info;
+    Optr   selector;
+    Class  host;
 };
 
 extern void post_init_MethodClosure();

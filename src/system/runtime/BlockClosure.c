@@ -21,9 +21,9 @@ BlockClosure new_BlockClosure(Block code,
 BlockContext activation_from_native(uns_int argc)
 {
     BlockClosure closure = current_env()->closure;
-    Block block = closure->code;
-    uns_int paramc = block->params->size;
-    uns_int localc = block->locals->size;
+    Block block          = closure->code;
+    uns_int paramc       = block->params->size;
+    uns_int localc       = block->locals->size;
 
     //assert1(argc == paramc, "Catch-all arguments not supported yet!");
 
@@ -75,9 +75,9 @@ static void start_eval(Block block)
 
 static void CNT_Block_inline_continue()
 {
-    Block code = (Block)peek_EXP(2); 
+    Block code = (Block)peek_EXP(2);
     uns_int pc = (uns_int)peek_EXP(1);
-    Optr exp = code->body[pc];
+    Optr exp   = code->body[pc];
     pc += 1;
     
     if (pc < code->size) {

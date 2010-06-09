@@ -62,8 +62,8 @@ profile:
 	./$(TARGET)
 	gprof --flat-profile $(TARGET)
 
-#debug:
-#	CFLAGS="-O1 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET)
+debug:
+	CFLAGS="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET)
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi

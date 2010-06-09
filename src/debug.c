@@ -22,6 +22,10 @@ void h() {
     return help();
 }
 
+Class pclass(Optr o)
+{
+    return HEADER(o);
+}
 
 void _indent_(uns_int i)
 {
@@ -45,10 +49,10 @@ void print_Class(Optr obj)
         fwprintf(stderr, L"Nil\n");
         return;
     }
-    Class class = HEADER(obj);
+    Class class = pclass(obj);
     assert0(class != NULL);
     assert0((Optr)class != nil);
-    if (HEADER(class) == metaclass) {
+    if (pclass((Optr)class) == metaclass) {
         fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
         return;
     }
@@ -92,7 +96,7 @@ uns_int nrsends()
     uns_int nr = 0;
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];
-        if (c > (Optr)10000 && HEADER(c) == Send_Class) {
+        if (c > (Optr)10000 && pclass(c) == Send_Class) {
             nr++;
         }
     }
@@ -105,7 +109,7 @@ void sends()
     uns_int cur = 0;
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];
-        if (c > (Optr)10000 && HEADER(c) == Send_Class) {
+        if (c > (Optr)10000 && pclass(c) == Send_Class) {
             Send send = (Send)c;
             print_Info(send->info);
             print_Symbol((Optr)send->message);
@@ -166,7 +170,7 @@ Optr dict_at(Optr o, uns_int at)
 
 Optr at(Optr o, uns_int i)
 {
-    if (HEADER(o) == Dictionary_Class) {
+    if (pclass(o) == Dictionary_Class) {
         return dict_at(o, i);
     }
     Optr tag = GETTAG(o);
@@ -207,7 +211,7 @@ void shallow_inspect(Optr o)
         fwprintf(stderr, L"Object probably uns_int: %"F_I"u\n", (uns_int)o);
         return;
     } 
-    if (HEADER(o) == NULL) {
+    if (pclass(o) == NULL) {
         fwprintf(stderr, L"Object with NULL class\n");
         return;
     }
@@ -223,9 +227,9 @@ void shallow_inspect(Optr o)
         fwprintf(stderr, L"false\n");
         return;
     }
-    Class cls = HEADER(o);
+    Class cls = pclass(o);
 
-    if (HEADER(cls) == metaclass) {
+    if (pclass((Optr)cls) == metaclass) {
         fwprintf(stderr, L"%ls", ((Class)o)->name->value);
         fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
     } else {
@@ -248,7 +252,7 @@ void shallow_inspect(Optr o)
 void inspect_dict(Optr o)
 {
     Dictionary dict = (Dictionary)o;
-    uns_int ds = dict->data->size;
+    uns_int ds      = dict->data->size;
     uns_int i;
     uns_int idx = 0;
     for (i = 0; i < ds; i++) {
@@ -267,10 +271,10 @@ void inspect_dict(Optr o)
 void inspect(Optr o)
 {
     shallow_inspect(o);
-    if (o == NULL || HEADER(o) == NULL) {
+    if (o == NULL || pclass(o) == NULL) {
         return;
     }
-    if (HEADER(o) == Dictionary_Class) {
+    if (pclass(o) == Dictionary_Class) {
         inspect_dict(o);
         return;
     }
@@ -287,7 +291,7 @@ void inspect(Optr o)
     }
 
     if (TAG_IS_LAYOUT(tag, Array)) {
-        uns_int size = ((Array)tag)->size;
+        uns_int size  = ((Array)tag)->size;
         uns_int isize = ((Array)o)->size;
         int i;
         for (i = 0; i < size; i++) {
@@ -332,13 +336,7 @@ void i_atx(Optr o, uns_int argc, ...) {
     return inspect(atx(o, argc));
 }
 
-
-Class pclass(Optr o)
-{
-    return HEADER(o);
-}
-
 Optr methods(Optr o) {
-    Class class = HEADER(o);
+    Class class = pclass(o);
     return (Optr)class->methods;
 }
