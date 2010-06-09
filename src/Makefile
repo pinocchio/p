@@ -21,7 +21,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL # -DDEBUG -DPRINT_DISPATCH_TRACE
+CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
 LDFLAGS += -lm -lgc -ldl 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
@@ -61,6 +61,9 @@ profile:
 	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)
 	./$(TARGET)
 	gprof --flat-profile $(TARGET)
+
+#debug:
+#	CFLAGS="-O1 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET)
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi

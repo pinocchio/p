@@ -199,20 +199,93 @@ THREADED(assign)
 
 /* ========================================================================= */
 
+Dictionary functions;
+
+NATIVE1(Interpretation_Threaded_compileNatively_)
+    Array array = (Array)NATIVE_ARG(0);
+    int i;
+    for (i=0; i<array->size; i++) {
+        Optr object = array->values[i];
+        if (HEADER(object) == Compiler_Threaded_FunctionPointer_Class) {
+            array->values[i] = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
+        }
+    }
+    RETURN_FROM_NATIVE(array)
+}
+
+#define T_FUNC(name) Dictionary_quick_store(functions, (Optr)new_Symbol(L""#name), (Optr)&t_##name);
 
 void post_init_Threaded()
 {
-	Dictionary dict = new_Dictionary();
-	Compiler_Threaded_ThreadedCompiler_Class->cvars[0] = (Optr)dict;
+    
+    Dictionary natives = add_plugin(L"Interpretation.Threaded");
+    store_native(natives, new_Symbol_cached(L"compileNatively:"), 
+                 NM_Interpretation_Threaded_compileNatively_);
+
+    functions = new_Dictionary();
+    T_FUNC(supern)
+    T_FUNC(push_nil)
+    T_FUNC(push_0)
+    T_FUNC(push_1)
+    T_FUNC(push_2)
+    T_FUNC(push_true)
+    T_FUNC(push_false)
+    T_FUNC(push_self)
+    
+    T_FUNC(push1)
+    T_FUNC(push2)
+    T_FUNC(push3)
+    T_FUNC(push4)
+    T_FUNC(push5)
+    T_FUNC(pushn)
+
+    T_FUNC(push_variable)
+    T_FUNC(push_closure)
+    T_FUNC(push_class_reference)
+    T_FUNC(push_slot)
+
+    T_FUNC(pop)
+
+    T_FUNC(return)
+    T_FUNC(return_true)
+    T_FUNC(return_false)
+    T_FUNC(return_nil)
+    T_FUNC(return_self) 
+    T_FUNC(return_0)
+    T_FUNC(return_1)
+    T_FUNC(return_2)
+    T_FUNC(return_next)   
+
+
+    T_FUNC(send0)
+    T_FUNC(send1)
+    T_FUNC(send2)
+    T_FUNC(send3)
+    T_FUNC(send4)
+    T_FUNC(send5)
+    T_FUNC(sendn)
+
+    T_FUNC(super0)
+    T_FUNC(super1)
+    T_FUNC(super2)
+    T_FUNC(super3)
+    T_FUNC(super4)
+    T_FUNC(super5)
+    T_FUNC(supern)
+
+    T_FUNC(assign)
 }
 
+/* ========================================================================= */
 
 void CNT_eval_threaded()
 {
     long pc     = (long)peekn_CNT(1);
 	Array code = (Array)peekn_CNT(2);
     while (pc != -1) {
-        pc = ((threaded)code->values[pc])(pc);
+        threaded p = (threaded)code->values[pc];
+        assert1(p != nil, "Something went terribly wrong");
+        pc = p(pc);
     }
 }
 
