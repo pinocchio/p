@@ -27,8 +27,8 @@ void branch(long pc, long condition)
     set_pc(pc + 1 + condition);
 }
 
-#define THREADED(name) void t_##name(long pc) {\
-    fwprintf(stderr, L"Executing: "#name"\n");\
+#define THREADED(name) void t_##name(long pc) {
+//    fwprintf(stderr, L"Executing: "#name"\n");\
 
 THREADED(branch_gt_int)
     long left  = unwrap_int(pop_EXP());
@@ -131,6 +131,7 @@ THREADED(push_closure)
 
 /* ========================================================================= */
 THREADED(return)
+    restore_env();
     zapn_CNT(3);
 }
 

@@ -6,8 +6,7 @@
 
 void return_from_send()
 {
-    Optr result = peek_EXP(0);
-    zap_EXP();
+    Optr result = pop_EXP();
     poke_EXP(0, result);
 }
 
