@@ -40,6 +40,8 @@ extern void t_push_closure(long pc);
 extern void t_push_class_reference(long pc);
 extern void t_push_slot(long pc);
 
+extern void t_pop(long pc);
+
 extern void t_return(long pc);
 extern void t_return_true(long pc);
 extern void t_return_false(long pc);

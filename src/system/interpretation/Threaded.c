@@ -63,6 +63,11 @@ PUSH(2, new_SmallInt(2))
 PUSH(true, true)
 PUSH(false, false)
 
+THREADED(pop)
+    inc_pc(pc);
+    pop_EXP();
+}
+
 #define PUSHN(count) THREADED(push##count) \
     long i;\
     set_pc(pc + 1 + count);\
@@ -152,7 +157,6 @@ THREADED(return_next)
 }
 
 THREADED(return_self)
-    inc_pc(pc);
     claim_EXP(1);
     Self_eval();
 	t_return(pc);

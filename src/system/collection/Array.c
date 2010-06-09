@@ -66,6 +66,9 @@ Optr raw_Array_instAt(Array o, Optr tag, long index)
 void raw_Array_instAt_put(Array o, Optr tag,
                                long index, Optr value)
 {
+    inspect(o);
+    inspect(tag);
+    fwprintf(stderr, L"%li\n", index);
     ASSERT_TAG_SIZE(tag, index);
     o->values[index] = value;
 }
