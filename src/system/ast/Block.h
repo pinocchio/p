@@ -15,15 +15,16 @@ struct Block_t {
 };
 
 extern Block new_Block(uns_int paramCount,
-                               uns_int localCount,
-                               uns_int depth,
-                               uns_int statementCount,
-                               ...);
+                       uns_int localCount,
+                       uns_int depth,
+                       uns_int statementCount,
+                       ...);
 
 extern Block new_Block_with(Array params,
-                                    Array locals,
-                                    uns_int statementCount,
-                                    ...);
+                            Array locals,
+                            Array threaded,
+                            uns_int statementCount,
+                            ...);
 
 /* ========================================================================= */
 

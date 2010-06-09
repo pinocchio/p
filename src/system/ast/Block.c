@@ -16,10 +16,10 @@ void init_raw_variable_array(Array array, uns_int scope_id,
 }
 
 Block new_Block(uns_int paramCount,
-                        uns_int localCount,
-                        uns_int depth,
-                        uns_int statementCount,
-                        ...)
+                uns_int localCount,
+                uns_int depth,
+                uns_int statementCount,
+                ...)
 {
     NEW_ARRAY_OBJECT(Block, Optr[statementCount]);
     result->params      = new_Array_raw(paramCount);
@@ -42,8 +42,8 @@ void init_variable_array(Array array, uns_int local_id)
     }
 }
 
-Block new_Block_with(Array params, Array locals,
-                             uns_int statementCount, ...)
+Block new_Block_with(Array params, Array locals, Array threaded,
+                     uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(Block, Optr[statementCount]);
     result->params  = params;
@@ -52,6 +52,7 @@ Block new_Block_with(Array params, Array locals,
     init_variable_array(result->locals, result->params->size);
     result->info    = empty_Info;
     result->size    = statementCount;
+    result->threaded = threaded;
     COPY_ARGS(statementCount, result->body);
     return result;
 }

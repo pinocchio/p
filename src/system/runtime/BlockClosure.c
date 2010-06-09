@@ -137,13 +137,16 @@ void Runtime_BlockClosure_apply(Runtime_BlockClosure closure, uns_int argc)
     set_env((Optr)new_Runtime_BlockContext(closure));
     activation_from_native(argc);
 
-    start_eval(block);
+    push_CNT_raw(block->threaded);
+    push_CNT_raw(0);
+    push_CNT(eval_threaded);
+    zap_EXP();
+    CNT_eval_threaded();
+    //start_eval(block);
 }
 
 void apply(Optr closure, uns_int argc)
 {
-    // TODO in the alternative case, send "value:*" message.
-    // LOG("cls: %ls\n", HEADER(closure)->name->value);
     assert0(HEADER(closure) == Runtime_BlockClosure_Class);
     Runtime_BlockClosure_apply((Runtime_BlockClosure)closure, argc);
 }
