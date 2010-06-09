@@ -36,7 +36,7 @@ void t_branch_gt_int(long pc)
 
 void t_branch_bool(long pc)
 {
-    branch(pc, pop_EXP() == (Optr)true_Const);
+    branch(pc, pop_EXP() == true);
 }
 
 /* ========================================================================= */
@@ -56,12 +56,12 @@ void t_jump_1(long pc)
     push_EXP(value);\
 }
 
-PUSH(nil, nil_Const)
+PUSH(nil, nil)
 PUSH(0, new_SmallInt(0))
 PUSH(1, new_SmallInt(1))
 PUSH(2, new_SmallInt(2))
-PUSH(true, true_Const)
-PUSH(false, false_Const)
+PUSH(true, true)
+PUSH(false, false)
 
 
 void t_push_self(long pc)
@@ -125,15 +125,15 @@ void t_return_value(long pc, Optr value)
 }
 
 #define RETURN(name, value) void t_return_##name(long pc) { \
-    push_EXP(value);\
-    t_return(pc); \
+    t_return_value(pc, value); \
 }
 
-RETURN(true,    true_Const)
-RETURN(false,   false_Const)
-RETURN(nil,     nil_Const)
-RETURN(0,       new_SmallInt(0))
-RETURN(1,       new_SmallInt(1))
+RETURN(true,    true)
+RETURN(false,   false)
+RETURN(nil,     nil)
+RETURN(0,       (Optr)new_SmallInt(0))
+RETURN(1,       (Optr)new_SmallInt(1))
+RETURN(2,       (Optr)new_SmallInt(2))
 
 void t_return_next(long pc)
 {   
@@ -199,8 +199,8 @@ void t_sendn(long pc)
 /* ========================================================================= */
 #define SUPER(n) void t_super##n(long pc) {\
     inc_pc(pc);\
-    Optr self = peek_EXP(n);\
-    Class_dispatch(self, HEADER(self),n);\
+    Super super = (Super)peek_EXP(n);\
+    Super_eval(super);\
 }
 
 SUPER(0)
@@ -214,8 +214,8 @@ void t_supern(long pc)
 {
     set_pc(pc+2);
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
-    Optr self = peek_EXP(n);    
-    Class_dispatch(self, HEADER(self), n);
+    Super super = (Super)peek_EXP(n);    
+    Super_eval(super);
 }
 
 
@@ -245,12 +245,12 @@ void CNT_eval_threaded()
     ((threaded)code->values[pc])(pc);
 }
 
-void ThreadedMethod_invoke(Runtime_MethodClosure closure,
-                           Method method,
-                           Optr self, uns_int argc)
+void Method_invoke(Runtime_MethodClosure closure,
+                   Method method,
+                   Optr self, uns_int argc)
 {
     if (method->code == (Array)nil) {
-        return Method_invoke(closure, (Method)method, self, argc);
+        return StandardMethod_invoke(closure, (Method)method, self, argc);
     }
 
     assert(argc == method->params->size,

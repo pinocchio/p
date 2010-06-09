@@ -84,7 +84,7 @@ static void start_eval(Method method)
 
 /* ========================================================================= */
 
-void Method_invoke(Runtime_MethodClosure closure, Method method,
+void StandardMethod_invoke(Runtime_MethodClosure closure, Method method,
                            Optr self, uns_int argc)
 {
     assert(argc == method->params->size,

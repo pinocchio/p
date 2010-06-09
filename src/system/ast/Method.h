@@ -30,8 +30,8 @@ extern Method new_Method_with(Array params,
 
 /* ========================================================================= */
 
-extern void Method_invoke(Runtime_MethodClosure closure, Method method,
-                              Optr self, uns_int argc);
+extern void Method_invoke(Runtime_MethodClosure closure, Method method, Optr self, uns_int argc);
+extern void StandardMethod_invoke(Runtime_MethodClosure closure, Method method, Optr self, uns_int argc);
 
 /* ========================================================================= */
 
