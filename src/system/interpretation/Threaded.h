@@ -26,8 +26,15 @@ extern void t_push_1(long pc);
 extern void t_push_2(long pc);
 extern void t_push_true(long pc);
 extern void t_push_false(long pc);
-extern void t_push_next(long pc);
 extern void t_push_self(long pc);
+
+extern void t_push1(long pc);
+extern void t_push2(long pc);
+extern void t_push3(long pc);
+extern void t_push4(long pc);
+extern void t_push5(long pc);
+extern void t_pushn(long pc);
+
 extern void t_push_variable(long pc);
 extern void t_push_closure(long pc);
 extern void t_push_class_reference(long pc);

@@ -63,43 +63,46 @@ PUSH(2, new_SmallInt(2))
 PUSH(true, true)
 PUSH(false, false)
 
+#define PUSHN(count)void t_push##count(long pc) {\
+    long i;\
+    set_pc(pc + count + 1);\
+    claim_EXP(count);\
+    for (i=1; i<=count; ++i) {\
+        poke_EXP(i, threaded_code()->values[pc + i]);\
+    }\
+}
+PUSHN(1)
+PUSHN(2)
+PUSHN(3)
+PUSHN(4)
+PUSHN(5)
+
+void t_pushn(long pc)
+{
+    long i;
+    uns_int count = (uns_int)unwrap_int(threaded_code()->values[pc + 1]);
+    set_pc(pc + count + 1);
+    claim_EXP(count);
+    for (i=1; i<=count; ++i) {
+        poke_EXP(i, threaded_code()->values[pc + 1 + i]);
+    }
+}
+
+#define PUSH_EVAL(name, type) void t_push_##name(long pc) {\
+    type name = (type)threaded_code()->values[pc + 1];\
+    set_pc(pc + 2);\
+	claim_EXP(1);\
+    type##_eval(name);\
+}
+PUSH_EVAL(variable, Variable)
+PUSH_EVAL(class_reference, ClassReference)
+PUSH_EVAL(slot, Slot)
 
 void t_push_self(long pc)
 {
     inc_pc(pc);
     claim_EXP(1);
     Self_eval();
-}
-
-void t_push_next(long pc)
-{
-    Optr v = threaded_code()->values[pc + 1];
-    set_pc(pc + 2);
-    push_EXP(v);
-}
-
-void t_push_variable(long pc)
-{
-    Variable variable = (Variable)threaded_code()->values[pc + 1];
-    set_pc(pc + 2);
-	claim_EXP(1);
-    Variable_eval(variable);
-}
-
-void t_push_class_reference(long pc) 
-{
-    ClassReference reference = (ClassReference)threaded_code()->values[pc + 1];
-    set_pc(pc + 2);
-	claim_EXP(1);
-    ClassReference_eval(reference);
-}
-
-void t_push_slot(long pc) 
-{
-    Slot slot = (Slot)threaded_code()->values[pc + 1];
-    set_pc(pc + 2);
-	claim_EXP(1);
-    Slot_eval(slot);
 }
 
 void t_push_closure(long pc)
@@ -137,7 +140,7 @@ RETURN(2,       (Optr)new_SmallInt(2))
 
 void t_return_next(long pc)
 {   
-    t_push_next(pc);
+    t_push1(pc);
     t_return(pc);
 }
 
@@ -218,8 +221,6 @@ void t_supern(long pc)
     Super_eval(super);
 }
 
-
-
 /* ========================================================================= */
 
 void t_assign(long pc)
@@ -229,7 +230,6 @@ void t_assign(long pc)
 }
 
 /* ========================================================================= */
-
 
 void post_init_Threaded()
 {
