@@ -16,20 +16,13 @@ Assign new_Assign(Optr variable, Optr expression)
 
 /* ========================================================================= */
 
-void Assign_eval(Assign self)
-{
-    // LOGFUN;
-    push_CNT(Assign_assign);
-    push_CNT(send_Eval);
-    push_EXP(self->expression);
-}
-
 #define ASSIGN_IF(name) \
     if (class == name##_Class) {\
         return name##_assign((name)var, value);\
     }
 
-CNT(Assign_assign)
+void do_assign()
+{
     Optr value  = pop_EXP();
     Assign self = (Assign)peek_EXP(0);
     Optr var    = self->variable;
@@ -43,4 +36,16 @@ CNT(Assign_assign)
     ASSIGN_IF(UIntSlot)
     
     Class_direct_dispatch(var, class, (Optr)SMB_assignFor_to_, 2, nil, value);
+}
+
+CNT(Assign_assign)
+    do_assign();
+}
+
+void Assign_eval(Assign self)
+{
+    // LOGFUN;
+    push_CNT(Assign_assign);
+    push_CNT(send_Eval);
+    push_EXP(self->expression);
 }

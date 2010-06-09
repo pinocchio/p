@@ -15,7 +15,7 @@ extern Assign new_Assign(Optr variable, Optr expression);
 
 /* ========================================================================= */
 
-extern void CNT_Assign_assign();
+extern void do_assign();
 extern void Assign_eval(Assign self);
 
 #endif // ASSIGN_H
