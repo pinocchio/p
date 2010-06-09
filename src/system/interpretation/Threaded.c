@@ -22,38 +22,13 @@ void inc_pc(long pc)
 }
 
 /* ========================================================================= */
-void branch(long pc, long condition)
-{
-    set_pc(pc + 1 + condition);
-}
-
-#define THREADED(name) void t_##name(long pc) {
-//    fwprintf(stderr, L"Executing: "#name"\n");\
-
-THREADED(branch_gt_int)
-    long left  = unwrap_int(pop_EXP());
-    long right = unwrap_int(pop_EXP());
-    branch(pc, left > right);
-}
-
-THREADED(branch_bool)
-    branch(pc, pop_EXP() == true);
-}
-
+#define THREADED(name) long t_##name(long pc) {
+//    fwprintf(stderr, L"Executing: "#name"\n");
 /* ========================================================================= */
-void jump(long pc, long offset)
-{
-    set_pc(pc + offset);
-}
 
-THREADED(jump_1)
-    jump(pc, 2);
-}
-
-/* ========================================================================= */
 #define PUSH(name, value) THREADED(push_##name) \
-    inc_pc(pc);\
     push_EXP(value);\
+    return pc + 1;\
 }
 
 PUSH(nil, nil)
@@ -64,17 +39,17 @@ PUSH(true, true)
 PUSH(false, false)
 
 THREADED(pop)
-    inc_pc(pc);
     pop_EXP();
+    return pc + 1;
 }
 
 #define PUSHN(count) THREADED(push##count) \
     long i;\
-    set_pc(pc + 1 + count);\
     claim_EXP(count);\
     for (i=1; i<=count; i++) {\
         poke_EXP(count-i, threaded_code()->values[pc + i]);\
     }\
+    return pc + 1 + count;\
 }
 PUSHN(1)
 PUSHN(2)
@@ -85,31 +60,31 @@ PUSHN(5)
 THREADED(pushn)
     long i;
     uns_int count = (uns_int)unwrap_int(threaded_code()->values[pc + 1]);
-    set_pc(pc + count + 1);
     claim_EXP(count);
     for (i=1; i<=count; ++i) {
         poke_EXP(i, threaded_code()->values[pc + 1 + i]);
     }
+    return pc + count + 1;
 }
 
 #define PUSH_EVAL(name, type) THREADED(push_##name) \
     type name = (type)threaded_code()->values[pc + 1];\
-    set_pc(pc + 2);\
 	claim_EXP(1);\
     type##_eval(name);\
+    return pc + 2;\
 }
+
 PUSH_EVAL(variable, Variable)
 PUSH_EVAL(class_reference, ClassReference)
 
 THREADED(push_self)
-    inc_pc(pc);
     claim_EXP(1);
     Self_eval();
+    return pc + 1;
 }
 
 THREADED(push_slot) 
     Slot slot = (Slot)threaded_code()->values[pc + 1];
-    set_pc(pc + 2);
 	claim_EXP(1);
     if (HEADER(slot) == Slot_Class) {
         Slot_eval(slot);
@@ -118,13 +93,14 @@ THREADED(push_slot)
     } else {
         assert1(NULL, "Unknown type of slot");
     }
+    return pc + 2;
 }
 
 THREADED(push_closure)
 	Block block  = (Block)threaded_code()->values[pc + 1];
-    set_pc(pc+2);
     claim_EXP(1);
     Block_eval(block);
+    return pc + 2;
 }
 
 
@@ -133,16 +109,17 @@ THREADED(push_closure)
 THREADED(return)
     restore_env();
     zapn_CNT(3);
+    return -1;
 }
 
-void return_value(long pc, Optr value)
+long return_value(long pc, Optr value)
 {
     push_EXP(value);
-    t_return(pc);
+    return t_return(pc);
 }
 
 #define RETURN(name, value) THREADED(return_##name) \
-    return_value(pc, value); \
+    return return_value(pc, value); \
 }
 
 RETURN(true,    true)
@@ -154,42 +131,21 @@ RETURN(2,       (Optr)new_SmallInt(2))
 
 THREADED(return_next)
     t_push_1(pc);
-    t_return(pc);
+    return t_return(pc);
 }
 
 THREADED(return_self)
     claim_EXP(1);
     Self_eval();
-	t_return(pc);
-}
-
-/* ========================================================================= */
-THREADED(minus_int)
-    inc_pc(pc);
-    long right = unwrap_int(pop_EXP());
-    long left  = unwrap_int(peek_EXP(0));
-    poke_EXP(0, new_SmallInt(left - right));
-}
-
-THREADED(times_int)
-    inc_pc(pc);
-    long right = unwrap_int(pop_EXP());
-    long left  = unwrap_int(peek_EXP(0));
-    poke_EXP(0, new_SmallInt(left * right));
-}
-
-THREADED(plus_int)
-    inc_pc(pc);
-    long right = unwrap_int(pop_EXP());
-    long left  = unwrap_int(peek_EXP(0));
-    poke_EXP(0, new_SmallInt(left - right));
+	return t_return(pc);
 }
 
 /* ========================================================================= */
 #define SEND(n) THREADED(send##n) \
     inc_pc(pc);\
     Optr self = peek_EXP(n);\
-    Class_dispatch(self, HEADER(self),n);\
+    Class_dispatch(self, HEADER(self), n);\
+    return -1;\
 }
 
 SEND(0)
@@ -204,13 +160,16 @@ THREADED(sendn)
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
     Optr self = peek_EXP(n);    
     Class_dispatch(self, HEADER(self), n);
+    return -1;
 }
 
 /* ========================================================================= */
 #define SUPER(n) THREADED(super##n) \
     inc_pc(pc);\
     Super super = (Super)peek_EXP(n);\
-    Super_eval(super);\
+    push_EXP(n);\
+    Super_eval_threaded(super);\
+    return -1;\
 }
 
 SUPER(0)
@@ -224,7 +183,9 @@ THREADED(supern)
     set_pc(pc+2);
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
     Super super = (Super)peek_EXP(n);    
-    Super_eval(super);
+    push_EXP(n);
+    Super_eval_threaded(super);
+    return -1;
 }
 
 
@@ -232,8 +193,8 @@ THREADED(supern)
 /* ========================================================================= */
 
 THREADED(assign)
-    inc_pc(pc);
 	do_assign();
+    return pc + 1;
 }
 
 /* ========================================================================= */
@@ -250,7 +211,9 @@ void CNT_eval_threaded()
 {
     long pc     = (long)peekn_CNT(1);
 	Array code = (Array)peekn_CNT(2);
-    ((threaded)code->values[pc])(pc);
+    while (pc != -1) {
+        pc = ((threaded)code->values[pc])(pc);
+    }
 }
 
 void Method_invoke(MethodClosure closure,

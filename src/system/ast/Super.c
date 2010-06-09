@@ -44,17 +44,19 @@ CNT(push_env_class)
     push_EXP(((BlockContext)env)->home_context->closure->host);
 }
 
-void Super_eval(Super super)
+void Super_eval_threaded(Super super)
 {
-    // LOGFUN;
-
     // execute the method
     push_CNT(Super_send);
     push_CNT(Class_super);
     push_CNT(push_env_class);
+}
+
+void Super_eval(Super super)
+{
+    Super_eval_threaded(super);
 
     push_EXP(0);
-
     push_CNT(store_argument);
     push_CNT(Self_eval);
 }

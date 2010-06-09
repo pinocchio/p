@@ -21,7 +21,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -DASSERT_FAIL -I. -Wall -g -std=c99
+CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL # -DDEBUG -DPRINT_DISPATCH_TRACE
 LDFLAGS += -lm -lgc -ldl 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
