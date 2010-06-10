@@ -188,6 +188,35 @@ THREADED(send_ifTrue_)
     }
 }
 
+THREADED(send_ifTrue_ifFalse_) 
+    Optr bool = peek_EXP(0);
+    if (bool == (Optr) true) {
+        zap_EXP();
+        set_pc(pc + 4);
+        Block block = (Block)threaded_code()->values[pc + 2];
+        push_CNT_raw(block->threaded);
+        push_CNT_raw(0);
+        push_CNT(eval_threaded);
+        CNT_eval_threaded();
+        return -1;
+    } else if (bool == (Optr) false) {
+        zap_EXP();
+        set_pc(pc + 4);
+        Block block = (Block)threaded_code()->values[pc + 3];
+        push_CNT_raw(block->threaded);
+        push_CNT_raw(0);
+        push_CNT(eval_threaded);
+        CNT_eval_threaded();
+        return -1;
+    } else {
+        Send send = (Send)threaded_code()->values[pc + 1];
+        poke_EXP(0, send);
+        push_EXP(bool);
+        t_push_closure(pc + 1);
+        t_push_closure(pc + 2);
+        return t_send2(pc + 3);
+    }
+}
 
 /* ========================================================================= */
 #define SUPER(n) THREADED(super##n) \
@@ -294,6 +323,7 @@ void post_init_Threaded()
     T_FUNC(send5)
     T_FUNC(sendn)
     T_FUNC(send_ifTrue_)
+    T_FUNC(send_ifTrue_ifFalse_)
 
     T_FUNC(super0)
     T_FUNC(super1)

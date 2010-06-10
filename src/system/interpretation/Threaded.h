@@ -53,6 +53,7 @@ extern long t_send4(long pc);
 extern long t_send5(long pc);
 extern long t_sendn(long pc);
 extern long t_send_ifTrue_(long pc);
+extern long t_send_ifTrue_ifFalse_(long pc);
 
 extern long t_super0(long pc);
 extern long t_super1(long pc);

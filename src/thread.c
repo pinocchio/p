@@ -99,9 +99,9 @@ void * pinocchio_main_thread(void * argc)
     init_lib();
     
     Array args = get_args((int)(uns_int)argc, cargv);
-    // Eval_Send0(new_SmallInt(30), new_Symbol(L"fib"));
-    Eval_Send1((Optr)Interpretation_MainInterpreter_Class,
-                SMB_main_, (Optr)args);
+    Eval_Send0(new_SmallInt(30), new_Symbol(L"fib"));
+    // Eval_Send1((Optr)Interpretation_MainInterpreter_Class,
+    //             SMB_main_, (Optr)args);
 
     return EXIT_SUCCESS;
 }
