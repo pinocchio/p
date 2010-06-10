@@ -164,6 +164,25 @@ THREADED(sendn)
     return -1;
 }
 
+THREADED(send_ifTrue_) 
+    Optr bool = peek_EXP(0);
+    inspect(bool);
+    if (bool == (Optr) true) {
+        // insert the send in front of the receiver
+        Send send = (Send)threaded_code()->values[pc + 1];
+        push_EXP(peek_EXP(0));
+        poke_EXP(1, send);
+        t_push_closure(pc + 1);
+        return t_send1(pc + 3);
+    } else if (bool == (Optr) false) {
+        return pc + 3;
+    } else {
+        printf("#### fallback ifTrue: \n");
+        return t_send1(pc);
+    }
+}
+
+
 /* ========================================================================= */
 #define SUPER(n) THREADED(super##n) \
     inc_pc(pc);\
@@ -268,6 +287,7 @@ void post_init_Threaded()
     T_FUNC(send4)
     T_FUNC(send5)
     T_FUNC(sendn)
+    T_FUNC(send_ifTrue_)
 
     T_FUNC(super0)
     T_FUNC(super1)
