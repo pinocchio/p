@@ -163,21 +163,28 @@ THREADED(sendn)
     return -1;
 }
 
+/* ========================================================================= */
+
 THREADED(send_ifTrue_) 
     Optr bool = peek_EXP(0);
     if (bool == (Optr) true) {
-        // insert the send in front of the receiver
-        Send send = (Send)threaded_code()->values[pc + 1];
-        push_EXP(bool);
-        poke_EXP(1, send);
-        t_push_closure(pc + 1);
-        return t_send1(pc + 2);
+        zap_EXP();
+        set_pc(pc + 3);
+        Block block = (Block)threaded_code()->values[pc + 2];
+        push_CNT_raw(block->threaded);
+        push_CNT_raw(0);
+        push_CNT(eval_threaded);
+        CNT_eval_threaded();
+        return -1;
     } else if (bool == (Optr) false) {
         poke_EXP(0, nil);
         return pc + 3;
     } else {
-        fwprintf(stderr, L"#### fallback ifTrue: \n");
-        return t_send1(pc);
+        Send send = (Send)threaded_code()->values[pc + 1];
+        poke_EXP(0, send);
+        push_EXP(bool);
+        t_push_closure(pc + 1);
+        return t_send1(pc + 2);
     }
 }
 
