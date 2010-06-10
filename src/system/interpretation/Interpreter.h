@@ -3,6 +3,6 @@
 
 extern void CNT_send_Eval();
 extern void CNT_tail_send_Eval();
-extern void restore_env();
+extern void CNT_restore_env();
 
 #endif // INTERPRETATION_INTERPRETER_H

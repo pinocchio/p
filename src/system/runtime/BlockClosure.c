@@ -45,69 +45,11 @@ BlockContext activation_from_native(uns_int argc)
     return context;
 }
 
-static void CNT_Block_continue()
-{
-    BlockContext env = current_env();
-    Block code = env->closure->code;
-    uns_int pc = (uns_int)peek_EXP(1);
-    poke_EXP(0, code->body[pc]);
-    poke_EXP(1, ++pc);
-    
-    if (code->size <= pc) {
-        poke_CNT(tail_send_Eval);
-    } else { 
-        push_CNT(send_Eval);
-    }
-}
-
-static void start_eval(Block block)
-{
-    if (1 < block->size) {
-        push_CNT(Block_continue);
-        push_CNT(send_Eval);
-    } else {
-        push_CNT(tail_send_Eval);
-    }
-    
-    poke_EXP(0, 1);
-    push_EXP(block->body[0]);
-}
-
-static void CNT_Block_inline_continue()
-{
-    Block code = (Block)peek_EXP(2);
-    uns_int pc = (uns_int)peek_EXP(1);
-    Optr exp   = code->body[pc];
-    pc += 1;
-    
-    if (pc < code->size) {
-        poke_EXP(1, pc);
-        push_CNT(send_Eval);
-    } else { 
-        zapn_EXP(2);
-        poke_CNT(send_Eval);
-    }
-
-    poke_EXP(0, exp);
-}
-
-static void start_inline_eval(Block block)
-{
-    if (1 < block->size) {
-        poke_EXP(0, block);
-        push_EXP(1);
-        push_CNT(Block_inline_continue);
-        push_EXP(block->body[0]);
-    } else {
-        poke_EXP(0, block->body[0]);
-    }
-    push_CNT(send_Eval);
-}
-
 CNT(restore_pop_env)
     set_env(peek_EXP(1));
     Optr result = pop_EXP();
     poke_EXP(0, result);
+
 }
 
 void BlockClosure_apply(BlockClosure closure, uns_int argc)
@@ -120,29 +62,31 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
         return; 
     }
 
-    /*
     if (block->locals->size == 0 && argc == 0) {
         BlockContext env = current_env();
         if (env != closure->context) {
-            poke_EXP(1, current_env());
-            push_CNT(restore_pop_env);
-            set_env(closure->context);
-        } else {
             zap_EXP();
+            poke_EXP(0, env);
+            push_CNT(restore_pop_env);
+            set_env((Optr)closure->context);
+        } else {
+            zapn_EXP(2);
         }
-        return start_inline_eval(block);
+        push_CNT_raw(block->threaded);
+        push_CNT_raw(0);
+        push_CNT(eval_threaded);
+        return CNT_eval_threaded();
     }
-    */
     
     set_env((Optr)new_BlockContext(closure));
     activation_from_native(argc);
 
+    push_CNT(restore_env);
     push_CNT_raw(block->threaded);
     push_CNT_raw(0);
     push_CNT(eval_threaded);
     zap_EXP();
     CNT_eval_threaded();
-    //start_eval(block);
 }
 
 void apply(Optr closure, uns_int argc)

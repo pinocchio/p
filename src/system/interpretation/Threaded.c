@@ -108,7 +108,6 @@ THREADED(push_closure)
 
 /* ========================================================================= */
 THREADED(return)
-    restore_env();
     zapn_CNT(3);
     return -1;
 }
@@ -166,18 +165,18 @@ THREADED(sendn)
 
 THREADED(send_ifTrue_) 
     Optr bool = peek_EXP(0);
-    inspect(bool);
     if (bool == (Optr) true) {
         // insert the send in front of the receiver
         Send send = (Send)threaded_code()->values[pc + 1];
-        push_EXP(peek_EXP(0));
+        push_EXP(bool);
         poke_EXP(1, send);
         t_push_closure(pc + 1);
-        return t_send1(pc + 3);
+        return t_send1(pc + 2);
     } else if (bool == (Optr) false) {
+        poke_EXP(0, nil);
         return pc + 3;
     } else {
-        printf("#### fallback ifTrue: \n");
+        fwprintf(stderr, L"#### fallback ifTrue: \n");
         return t_send1(pc);
     }
 }
@@ -332,6 +331,7 @@ void Method_invoke(MethodClosure closure,
     set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
 
+    push_CNT(restore_env);
 	push_CNT_raw(method->code);
 	push_CNT_raw(0);
 	push_CNT(eval_threaded);

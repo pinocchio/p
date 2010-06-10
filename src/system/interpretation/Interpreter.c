@@ -10,15 +10,15 @@ void return_from_send()
     poke_EXP(0, result);
 }
 
-void restore_env()
-{
+CNT(restore_env)
 	BlockContext current = current_env();
     set_env((Optr)current->parent_frame);
 	free_context(current);
 }
 
-CNT(restore_return)
-    restore_env();
+void CNT_restore_return()
+{
+    CNT_restore_env();
     return_from_send();
 }
 
