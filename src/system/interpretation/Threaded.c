@@ -308,7 +308,6 @@ void CNT_eval_threaded()
     Array code = (Array)peekn_CNT(2);
     while (pc != -1) {
         threaded p = (threaded)code->values[pc];
-        assert1( (Optr)p != (Optr)nil, "Something went terribly wrong");
         pc         = p(pc);
     }
 }
