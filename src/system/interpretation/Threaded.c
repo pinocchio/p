@@ -174,7 +174,6 @@ THREADED(send_ifTrue_)
         push_CNT_raw(block->threaded);
         push_CNT_raw(0);
         push_CNT(eval_threaded);
-        CNT_eval_threaded();
         return -1;
     } else if (bool == (Optr) false) {
         poke_EXP(0, nil);
@@ -197,7 +196,6 @@ THREADED(send_ifTrue_ifFalse_)
         push_CNT_raw(block->threaded);
         push_CNT_raw(0);
         push_CNT(eval_threaded);
-        CNT_eval_threaded();
         return -1;
     } else if (bool == (Optr) false) {
         zap_EXP();
@@ -206,7 +204,6 @@ THREADED(send_ifTrue_ifFalse_)
         push_CNT_raw(block->threaded);
         push_CNT_raw(0);
         push_CNT(eval_threaded);
-        CNT_eval_threaded();
         return -1;
     } else {
         Send send = (Send)threaded_code()->values[pc + 1];
