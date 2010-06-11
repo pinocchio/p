@@ -68,9 +68,9 @@ void assert_class(Optr class)
 }
 
 CNT(Class_super)
-    Optr class = peek_EXP(0);
+    Optr class = PEEK_EXP(0);
     assert_class(class);
-    poke_EXP(0, ((Class)class)->super);
+    POKE_EXP(0, ((Class)class)->super);
 }
 
 
@@ -101,23 +101,23 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 		message->arguments[argc] = pop_EXP();
 	}
 
-    zapn_EXP(2);
+    ZAPN_EXP(2);
 
     Class_direct_dispatch(self, class, (Optr)SMB_doesNotUnderstand_, 1, message);
 }
 
 static CNT(Class_lookup_cache_invoke)
-    Optr method    = peek_EXP(0);
-    uns_int argc     = (uns_int)peek_EXP(3);
-    Class class = (Class)peek_EXP(4);
-    Optr self      = peek_EXP(2);
+    Optr method    = PEEK_EXP(0);
+    uns_int argc     = (uns_int)PEEK_EXP(3);
+    Class class = (Class)PEEK_EXP(4);
+    Optr self      = PEEK_EXP(2);
     if (method == NULL) {
-        Optr msg  = peek_EXP(1);
-        zapn_EXP(5);
+        Optr msg  = PEEK_EXP(1);
+        ZAPN_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
-    zapn_EXP(5);
-    Send send       = (Send)peek_EXP(argc + 1);
+    ZAPN_EXP(5);
+    Send send       = (Send)PEEK_EXP(argc + 1);
     Array cache    = send->cache;
     InlineCache_store(cache, (Optr)class, method);
     
@@ -125,16 +125,16 @@ static CNT(Class_lookup_cache_invoke)
 }
 
 static CNT(Class_lookup_invoke)
-    Optr method = peek_EXP(0);
-    uns_int argc  = (uns_int)peek_EXP(3);
-    Optr self   = peek_EXP(2);
+    Optr method = PEEK_EXP(0);
+    uns_int argc  = (uns_int)PEEK_EXP(3);
+    Optr self   = PEEK_EXP(2);
     if (method == NULL) {
-        Class class = (Class)peek_EXP(4);
-        Optr msg       = peek_EXP(1);
-        zapn_EXP(5);
+        Class class = (Class)PEEK_EXP(4);
+        Optr msg       = PEEK_EXP(1);
+        ZAPN_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
-    zapn_EXP(5);
+    ZAPN_EXP(5);
     Method_invoke_inline(method, self, argc);
 }
 
@@ -142,8 +142,8 @@ void Class_lookup(Class class, Optr msg)
 {
     // TODO pass along the hash value
     if (class == (Class)nil) {
-        poke_EXP(0, NULL);
-        zap_CNT();
+        POKE_EXP(0, NULL);
+        ZAP_CNT();
         return;
     }
     assert_class((Optr)class);
@@ -153,47 +153,47 @@ void Class_lookup(Class class, Optr msg)
 
 void CNT_Class_lookup_loop()
 {
-    Optr method = peek_EXP(0);
+    Optr method = PEEK_EXP(0);
     if (method != NULL) {
-        zap_EXP();
-        zap_CNT();
-        poke_EXP(0, method);
+        ZAP_EXP();
+        ZAP_CNT();
+        POKE_EXP(0, method);
         return;
     }
-    zap_EXP();
-    Class class = (Class)peek_EXP(0);
-    Optr msg       = peek_EXP(1);
+    ZAP_EXP();
+    Class class = (Class)PEEK_EXP(0);
+    Optr msg       = PEEK_EXP(1);
     Class next  = class->super;
-    poke_EXP(0, next);
+    POKE_EXP(0, next);
     return Class_lookup(next, msg);
 }
 
 static void Class_direct_dispatch_inline(Optr self, Class class,
                                   Optr msg, uns_int argc)
 {
-    push_EXP(class);
-    push_EXP(argc);
-    push_EXP(self);
+    PUSH_EXP(class);
+    PUSH_EXP(argc);
+    PUSH_EXP(self);
 
-    push_EXP(msg);
-    push_EXP(class);
-    push_CNT(Class_lookup_loop);
+    PUSH_EXP(msg);
+    PUSH_EXP(class);
+    PUSH_CNT(Class_lookup_loop);
     Class_lookup(class, msg);
 }
 
 CNT(restore_iss)
     Optr return_value = pop_EXP();
-    tset(_ISS_, peek_EXP(0));
-    poke_EXP(0, return_value);
+    tset(_ISS_, PEEK_EXP(0));
+    POKE_EXP(0, return_value);
 }
 
 void Class_tower_dispatch(Optr self, Optr class,
                                Object iss, Message message)
 {
     tset(_ISS_, nil);
-    push_EXP(iss);
-    push_CNT(restore_iss);
-    push_CNT(Class_lookup_invoke);
+    PUSH_EXP(iss);
+    PUSH_CNT(restore_iss);
+    PUSH_CNT(Class_lookup_invoke);
     Object tower = (Object)nil;
     while (iss != (Object)nil) {
         Object newtower = (Object)instantiate((Class)Collection_Link_Class);
@@ -202,12 +202,12 @@ void Class_tower_dispatch(Optr self, Optr class,
         tower = newtower;
         iss = (Object)iss->ivals[1];
     }
-    push_EXP(nil);
-    push_EXP(tower->ivals[0]); // self, bottom interpreter
-    push_EXP(message);
-    push_EXP(self); // receiver
-    push_EXP(class);
-    push_EXP(tower->ivals[1]); // tower of interpreters
+    PUSH_EXP(nil);
+    PUSH_EXP(tower->ivals[0]); // self, bottom interpreter
+    PUSH_EXP(message);
+    PUSH_EXP(self); // receiver
+    PUSH_EXP(class);
+    PUSH_EXP(tower->ivals[1]); // tower of interpreters
     self = tower->ivals[0];
     Class_direct_dispatch_inline(
         self,
@@ -226,13 +226,13 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
     /* TODO optimize by claim + poke instead of push */
     Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
-        push_EXP(nil);
-        push_EXP(self);
+        PUSH_EXP(nil);
+        PUSH_EXP(self);
         for (idx = 0; idx < argc; idx++) {
-            push_EXP(va_arg(args, Optr));
+            PUSH_EXP(va_arg(args, Optr));
         }
         va_end(args);
-        push_CNT(Class_lookup_invoke);
+        PUSH_CNT(Class_lookup_invoke);
         Class_direct_dispatch_inline(self, class, msg, argc);
     } else {
         Message message = new_Message(msg, argc);
@@ -251,12 +251,12 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
     long idx;
     Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
-        push_EXP(nil);
-        push_EXP(self);
+        PUSH_EXP(nil);
+        PUSH_EXP(self);
         for (idx = 0; idx < args->size; idx++) {
-            push_EXP(args->values[idx]);
+            PUSH_EXP(args->values[idx]);
         }
-        push_CNT(Class_lookup_invoke);
+        PUSH_CNT(Class_lookup_invoke);
         Class_direct_dispatch_inline(self, class, msg, args->size);
     } else {
         Message message = new_Message(msg, args->size);
@@ -269,7 +269,7 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
 
 void Class_dispatch(Optr self, Class class, uns_int argc)
 {
-    Send send   = (Send)peek_EXP(argc + 1); // + self
+    Send send   = (Send)PEEK_EXP(argc + 1); // + self
     Array cache = send->cache;
     Optr msg    = send->message;
     assert0(msg != nil);
@@ -299,6 +299,6 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     }
     assert_class((Optr)class);
     
-    push_CNT(Class_lookup_cache_invoke);
+    PUSH_CNT(Class_lookup_cache_invoke);
     return Class_direct_dispatch_inline(self, class, msg, argc);
 }

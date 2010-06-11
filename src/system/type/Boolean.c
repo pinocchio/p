@@ -20,32 +20,32 @@ Optr get_bool(bool value)
 
 void CNT_loop_apply()
 {
-    Optr closure = peek_EXP(1);
-    push_EXP(closure);
+    Optr closure = PEEK_EXP(1);
+    PUSH_EXP(closure);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 /* ========================================================================= */
 
 NATIVE1(True_whileTrue_)
-    push_CNT(loop_apply);
-    push_EXP(nil);
+    PUSH_CNT(loop_apply);
+    PUSH_EXP(nil);
 }
 
 NATIVE1(False_whileFalse_)
-    push_CNT(loop_apply);
-    push_EXP(nil);
+    PUSH_CNT(loop_apply);
+    PUSH_EXP(nil);
 }
 
 NATIVE2(True_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(0);
-    zapn_EXP(2);
+    ZAPN_EXP(2);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 NATIVE2(False_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(1);
-    zapn_EXP(2);
+    ZAPN_EXP(2);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 

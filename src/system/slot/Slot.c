@@ -34,7 +34,7 @@ static void Slot_assign_on_(Slot var, Optr value,
 
 void Slot_eval(Slot var)
 {
-    poke_EXP(0, Slot_readFrom_(var,
+    POKE_EXP(0, Slot_readFrom_(var,
                     current_env()->home_context->self));
 }
 

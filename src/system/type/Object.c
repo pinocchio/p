@@ -148,7 +148,7 @@ NATIVE2(Object_perform_withArguments_)
     Optr tag = GETTAG(w_args);
     ASSERT_TAG_LAYOUT(tag, Array);
 
-    zapn_EXP(4);    
+    ZAPN_EXP(4);    
 
     Class_direct_dispatch_withArguments(self, HEADER(self),
                                              w_selector, (Array)w_args);
@@ -156,7 +156,7 @@ NATIVE2(Object_perform_withArguments_)
 
 NATIVE1(Object_perform_)
     Optr w_selector = NATIVE_ARG(0);
-    zapn_EXP(3);
+    ZAPN_EXP(3);
     Class_direct_dispatch(self, HEADER(self), w_selector, 0);
 }
 

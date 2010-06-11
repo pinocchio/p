@@ -13,8 +13,8 @@ Continue new_Continue()
 Continue new_Continue_offset(int offset)
 {
     Continue cont = new_Continue();
-    cont->exp_offset      = EXP_size() - offset;
-    cont->cnt_offset      = CNT_size();
+    cont->exp_offset      = EXP_SIZE() - offset;
+    cont->cnt_offset      = CNT_SIZE();
     cont->iss             = (Optr)tget(_ISS_);
     cont->env             = (Optr)current_env();
     return cont;
@@ -30,7 +30,7 @@ void Continue_escape(Continue cont, Optr return_value)
     tset(_ISS_, cont->iss);
     set_env(cont->env);
     // Overwrite the top of stack that created the continue.
-    poke_EXP(0, return_value);
+    POKE_EXP(0, return_value);
 }
 
 NATIVE1(Continue_escape_)
@@ -40,7 +40,7 @@ NATIVE1(Continue_escape_)
 NATIVE1(Continue_on_)
     Continue cont = new_Continue_offset(argc + 1);
     Optr closure        = NATIVE_ARG(0);
-    poke_EXP(0, cont);
+    POKE_EXP(0, cont);
     apply(closure, 1);
 }
 

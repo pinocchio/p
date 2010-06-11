@@ -105,19 +105,19 @@ static void Bucket_compare_key(Optr inkey, Optr dictkey)
         return Class_direct_dispatch(inkey, HEADER(inkey),
                                           (Optr)SMB__equal, 1, dictkey);
     }
-    push_EXP(get_bool(result));
+    PUSH_EXP(get_bool(result));
 }
 
 void CNT_bucket_lookup()
 {
-    Optr boolean               = peek_EXP(0);
-    DictBucket bucket = (DictBucket)peek_EXP(1);
-    uns_int idx                  = (uns_int)peek_EXP(2);
+    Optr boolean               = PEEK_EXP(0);
+    DictBucket bucket = (DictBucket)PEEK_EXP(1);
+    uns_int idx                  = (uns_int)PEEK_EXP(2);
     
     if (boolean == (Optr)true) {
-        zapn_EXP(4);
-        poke_EXP(0, bucket->values[idx + 1]);
-        zap_CNT();
+        ZAPN_EXP(4);
+        POKE_EXP(0, bucket->values[idx + 1]);
+        ZAP_CNT();
         return;
     }    
 
@@ -125,28 +125,28 @@ void CNT_bucket_lookup()
 
     uns_int tally = bucket->tally;
     if (idx >= tally) {
-        zapn_EXP(4);
-        poke_EXP(0, NULL);
-        zap_CNT();
+        ZAPN_EXP(4);
+        POKE_EXP(0, NULL);
+        ZAP_CNT();
         return;
     }
 
-    zap_EXP();
+    ZAP_EXP();
 
-    Optr key = peek_EXP(2);
-    poke_EXP(1, idx);
+    Optr key = PEEK_EXP(2);
+    POKE_EXP(1, idx);
     Bucket_compare_key(key, bucket->values[idx]);
 }
 
 static void bucket_do_store(DictBucket bucket, uns_int idx, 
 							uns_int addition)
 {
-    Optr value          = peek_EXP(3);
+    Optr value          = PEEK_EXP(3);
     bucket->values[idx+1] = value;
     bucket->tally         = idx+2;
-    zapn_EXP(3);
-    poke_EXP(0, (Optr)addition);
-    zap_CNT();
+    ZAPN_EXP(3);
+    POKE_EXP(0, (Optr)addition);
+    ZAP_CNT();
 }
 
 static void bucket_store_new(DictBucket bucket, uns_int idx, 
@@ -159,15 +159,15 @@ static void bucket_store_new(DictBucket bucket, uns_int idx,
 static void CNT_Bucket_store()
 {
     Optr boolean       = pop_EXP();
-    DictBucket * bucketp = (DictBucket *)peek_EXP(0);
+    DictBucket * bucketp = (DictBucket *)PEEK_EXP(0);
     DictBucket bucket    = *bucketp;
-    uns_int idx          = (uns_int)peek_EXP(1);
+    uns_int idx          = (uns_int)PEEK_EXP(1);
 
     if (boolean == (Optr)true) {
         return bucket_do_store(bucket, idx, 0);
     }
 
-    Optr key = peek_EXP(2);
+    Optr key = PEEK_EXP(2);
     idx       += 2;
 
     if (idx >= bucket->size) {
@@ -180,7 +180,7 @@ static void CNT_Bucket_store()
         return bucket_store_new(bucket, idx, key); 
     }
 
-    poke_EXP(1, (Optr)idx);
+    POKE_EXP(1, (Optr)idx);
     Bucket_compare_key(key, bucket->values[idx]);
 }
 
@@ -194,16 +194,16 @@ void Bucket_store_(DictBucket * bucketp, Optr key, Optr value)
         bucket->values[0] = key;
         bucket->values[1] = value;
         bucket->tally     = 2;
-        push_EXP((Optr)1);
+        PUSH_EXP((Optr)1);
         return;
     }
 
-    claim_EXP(4);
-    poke_EXP(3, value);
-    poke_EXP(2, key);
-    poke_EXP(1, 0);
-    poke_EXP(0, bucketp);
-    push_CNT(Bucket_store);
+    CLAIM_EXP(4);
+    POKE_EXP(3, value);
+    POKE_EXP(2, key);
+    POKE_EXP(1, 0);
+    POKE_EXP(0, bucketp);
+    PUSH_CNT(Bucket_store);
 
     Bucket_compare_key(key, bucket->values[0]);
 }
@@ -212,49 +212,49 @@ void Bucket_lookup(DictBucket bucket, Optr key)
 {
     uns_int tally = bucket->tally;
     if (tally == 0) {
-        poke_EXP(0, NULL);
+        POKE_EXP(0, NULL);
         return;
     }
 
-    claim_EXP(3);
-    poke_EXP(2, key);
-    poke_EXP(1, 0);
-    poke_EXP(0, bucket);
-    push_CNT(bucket_lookup);
+    CLAIM_EXP(3);
+    POKE_EXP(2, key);
+    POKE_EXP(1, 0);
+    POKE_EXP(0, bucket);
+    PUSH_CNT(bucket_lookup);
     Bucket_compare_key(key, bucket->values[0]);
 }
 
 static void CNT_bucket_rehash_end()
 {
-    uns_int idx                  = (uns_int)peek_EXP(0);
-    DictBucket bucket = (DictBucket)peek_EXP(1);
+    uns_int idx                  = (uns_int)PEEK_EXP(0);
+    DictBucket bucket = (DictBucket)PEEK_EXP(1);
     Optr key                   = bucket->values[idx];
     idx += 2;
 
     uns_int tally = bucket->tally;
     if (idx >= tally) {
-        zap_CNT();
-        zapn_EXP(2);
+        ZAP_CNT();
+        ZAPN_EXP(2);
         return;
     }
     
     key = bucket->values[idx];
-    poke_CNT(bucket_rehash);
-    poke_EXP(0, idx);
+    POKE_CNT(bucket_rehash);
+    POKE_EXP(0, idx);
     push_hash(key);
 }
 
 void CNT_bucket_rehash()
 {
     Optr w_hash        = pop_EXP();
-    Dictionary dict = (Dictionary)peek_EXP(2);
+    Dictionary dict = (Dictionary)PEEK_EXP(2);
     long hash             = unwrap_hash(dict, w_hash);
 
-    uns_int idx          = (uns_int)peek_EXP(0);
-    DictBucket bucket    = (DictBucket)peek_EXP(1);
+    uns_int idx          = (uns_int)PEEK_EXP(0);
+    DictBucket bucket    = (DictBucket)PEEK_EXP(1);
     Optr key           = bucket->values[idx];
 
-    poke_CNT(bucket_rehash_end);
+    POKE_CNT(bucket_rehash_end);
     Dictionary_direct_store(dict, hash, key, bucket->values[idx + 1]);
 }
 

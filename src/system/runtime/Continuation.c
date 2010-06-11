@@ -35,18 +35,18 @@ NATIVE1(Continuation_continue_)
     set_env(cont->env);
     tset(_ISS_, cont->iss);
     // Overwrite the top of stack that created the continuation.
-    poke_EXP(0, arg);
+    POKE_EXP(0, arg);
 }
 
 NATIVE1(Continuation_on_)
     Continuation cont = new_Continuation();
-    cont->exp_stack = new_Array(EXP_size() - (argc + 1),
+    cont->exp_stack = new_Array(EXP_SIZE() - (argc + 1),
                                      tget(Double_Stack));
-    cont->cnt_stack = new_Array(CNT_size(), tget(_CNT_));
+    cont->cnt_stack = new_Array(CNT_SIZE(), tget(_CNT_));
     cont->iss       = (Optr)tget(_ISS_);
     cont->env       = (Optr)current_env();
     Optr closure  = NATIVE_ARG(0);
-    poke_EXP(0, cont);
+    POKE_EXP(0, cont);
     apply(closure, 1);
 }
 

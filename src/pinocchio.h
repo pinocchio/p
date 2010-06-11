@@ -121,7 +121,7 @@ typedef void(*cont)();
 #include <thread.h>
 
 #define CNT(name) void CNT_##name() {\
-    zap_CNT();
+    ZAP_CNT();
 
 /* ========================================================================= */
 

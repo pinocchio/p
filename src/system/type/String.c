@@ -68,13 +68,13 @@ long Words_compare(Symbol s1, Symbol s2)
 
 CNT(String_concat_)
     Optr string = pop_EXP();
-    Optr self   = peek_EXP(0);
-    poke_EXP(0, String_concat_((String)self, (String)string));
+    Optr self   = PEEK_EXP(0);
+    POKE_EXP(0, String_concat_((String)self, (String)string));
 }
 
 NATIVE1(String_concat_)
     Optr w_arg = NATIVE_ARG(0);
-    push_CNT(String_concat_);
+    PUSH_CNT(String_concat_);
     RETURN_FROM_NATIVE(self); 
     Class_direct_dispatch(w_arg, HEADER(w_arg), (Optr)SMB_asString, 0);
 }

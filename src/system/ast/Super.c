@@ -32,7 +32,7 @@ Super new_Super(Symbol message, uns_int argc, ...)
 CNT(Super_send) 
     Optr class    = pop_EXP();
     uns_int argc    = (uns_int)pop_EXP();
-    Optr receiver = peek_EXP(argc);
+    Optr receiver = PEEK_EXP(argc);
     
     Class_dispatch(receiver, (Class)class, argc);
 }
@@ -41,13 +41,13 @@ CNT(push_env_class)
     // TODO directly inline it
     Optr env = (Optr)current_env();
     assert0(IS_CONTEXT(env));
-    push_EXP(((BlockContext)env)->home_context->closure->host);
+    PUSH_EXP(((BlockContext)env)->home_context->closure->host);
 }
 
 void Super_eval_threaded(Super super)
 {
     // execute the method
-    push_CNT(Super_send);
-    push_CNT(Class_super);
-    push_CNT(push_env_class);
+    PUSH_CNT(Super_send);
+    PUSH_CNT(Class_super);
+    PUSH_CNT(push_env_class);
 }

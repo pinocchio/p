@@ -33,7 +33,7 @@ static void UIntSlot_assign_on_(UIntSlot var,
 }
 void UIntSlot_eval(UIntSlot var)
 {
-    poke_EXP(0, UIntSlot_readFrom_(var,
+    POKE_EXP(0, UIntSlot_readFrom_(var,
                     current_env()->home_context->self));
 }
 

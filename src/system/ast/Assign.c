@@ -24,10 +24,10 @@ Assign new_Assign(Optr variable, Optr expression)
 void do_assign()
 {
     Optr value  = pop_EXP();
-    Assign self = (Assign)peek_EXP(0);
+    Assign self = (Assign)PEEK_EXP(0);
     Optr var    = self->variable;
     /* result of evaluating expression is result of assignment */
-    poke_EXP(0, value);
+    POKE_EXP(0, value);
 
     Class class = HEADER(var);
     

@@ -2,28 +2,28 @@
 
 CNT(restore_iss)
     Optr return_value = pop_EXP();
-    tset(_ISS_, peek_EXP(0));
-    poke_EXP(0, return_value);
+    tset(_ISS_, PEEK_EXP(0));
+    POKE_EXP(0, return_value);
 }
 
 NATIVE4(Interpreter_invokeNative)
     MethodClosure closure = (MethodClosure)NATIVE_ARG(0);
     NativeMethod receiver    = (NativeMethod)NATIVE_ARG(1);
     Message message       = (Message)NATIVE_ARG(2);
-    if (peek_CNT() == &CNT_restore_iss) {
-        claim_EXP(message->size - 4);
+    if (PEEK_CNT() == &CNT_restore_iss) {
+        CLAIM_EXP(message->size - 4);
     } else {
-        claim_EXP(message->size - 4 + 1);
-        poke_EXP(message->size+0, receiver);    
-        //poke_EXP(message->size+1, nil);    
-        poke_EXP(message->size+2, tget(_ISS_));    
-        push_CNT(restore_iss);
+        CLAIM_EXP(message->size - 4 + 1);
+        POKE_EXP(message->size+0, receiver);    
+        //POKE_EXP(message->size+1, nil);    
+        POKE_EXP(message->size+2, tget(_ISS_));    
+        PUSH_CNT(restore_iss);
     }
     extend_ISS(self);
 
     int i;
     for (i = 0; i < message->size; i++) {
-        poke_EXP(message->size - i - 1, message->arguments[i]);
+        POKE_EXP(message->size - i - 1, message->arguments[i]);
     }
     NativeMethod_invoke(
             closure,
@@ -33,20 +33,20 @@ NATIVE4(Interpreter_invokeNative)
 }
 
 static CNT(fix_lookup_result)
-	Optr result = peek_EXP(0);
-	zapn_EXP(3);
+	Optr result = PEEK_EXP(0);
+	ZAPN_EXP(3);
 	if (result == NULL) {
-		poke_EXP(0, nil);
+		POKE_EXP(0, nil);
 	} else {
-		poke_EXP(0, result);
+		POKE_EXP(0, result);
 	}
 }
 
 NATIVE2(Interpreter_lookupSelector_in_)
 	Optr selector   = NATIVE_ARG(0);
 	Class target = (Class)NATIVE_ARG(1);
-	push_CNT(fix_lookup_result);
-    push_CNT(Class_lookup_loop);
+	PUSH_CNT(fix_lookup_result);
+    PUSH_CNT(Class_lookup_loop);
     Class_lookup(target, selector);
 }
 

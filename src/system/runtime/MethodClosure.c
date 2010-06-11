@@ -43,7 +43,7 @@ NATIVE1(MethodClosure_valueWithArguments_)
     long pos = args->size;
     while(pos > 0) {
         pos--;
-        push_EXP(args->values[pos]);
+        PUSH_EXP(args->values[pos]);
     }
     
     BlockClosure closure = (BlockClosure)self;

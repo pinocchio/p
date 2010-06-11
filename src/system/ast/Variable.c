@@ -36,7 +36,7 @@ void Variable_eval(Variable self)
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
 
     if (IS_CONTEXT(env)) {
-        poke_EXP(0, BlockContext_lookup((BlockContext)env, 
+        POKE_EXP(0, BlockContext_lookup((BlockContext)env, 
                                                 local_id,
                                                 scope_id));
     } else {

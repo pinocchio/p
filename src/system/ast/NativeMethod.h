@@ -35,10 +35,10 @@ static void NM_##name(Optr self, Class class, uns_int argc) {
 #define NATIVE4(name)  NATIVE(name) ASSERT_ARG_SIZE(4);
 
 #define RETURN_FROM_NATIVE(exp)\
-    zapn_EXP(argc + 1);\
-    poke_EXP(0, exp);
+    ZAPN_EXP(argc + 1);\
+    POKE_EXP(0, exp);
 
-#define NATIVE_ARG(idx) peek_EXP(argc - idx - 1)
+#define NATIVE_ARG(idx) PEEK_EXP(argc - idx - 1)
 
 #define SELF ((Object) self)
 /* ========================================================================= */

@@ -33,7 +33,7 @@ BlockContext activation_from_native(uns_int argc)
         argc--;
         context->locals[argc] = pop_EXP();
     }
-    zap_EXP(); // remove self
+    ZAP_EXP(); // remove self
 
     argc = paramc;
     // Set locals to nil.
@@ -46,9 +46,9 @@ BlockContext activation_from_native(uns_int argc)
 }
 
 CNT(restore_pop_env)
-    set_env(peek_EXP(1));
+    set_env(PEEK_EXP(1));
     Optr result = pop_EXP();
-    poke_EXP(0, result);
+    POKE_EXP(0, result);
 
 }
 
@@ -65,27 +65,27 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
     if (block->locals->size == 0 && argc == 0) {
         BlockContext env = current_env();
         if (env != closure->context) {
-            zap_EXP();
-            poke_EXP(0, env);
-            push_CNT(restore_pop_env);
+            ZAP_EXP();
+            POKE_EXP(0, env);
+            PUSH_CNT(restore_pop_env);
             set_env((Optr)closure->context);
         } else {
-            zapn_EXP(2);
+            ZAPN_EXP(2);
         }
-        push_CNT_raw(block->threaded);
-        push_CNT_raw(0);
-        push_CNT(eval_threaded);
+        PUSH_CNT_RAW(block->threaded);
+        PUSH_CNT_RAW(0);
+        PUSH_CNT(eval_threaded);
         return CNT_eval_threaded();
     }
     
     set_env((Optr)new_BlockContext(closure));
     activation_from_native(argc);
 
-    push_CNT(restore_env);
-    push_CNT_raw(block->threaded);
-    push_CNT_raw(0);
-    push_CNT(eval_threaded);
-    zap_EXP();
+    PUSH_CNT(restore_env);
+    PUSH_CNT_RAW(block->threaded);
+    PUSH_CNT_RAW(0);
+    PUSH_CNT(eval_threaded);
+    ZAP_EXP();
     CNT_eval_threaded();
 }
 
@@ -98,20 +98,20 @@ void apply(Optr closure, uns_int argc)
 }
 
 CNT(check_while_true)
-    Optr boolean = peek_EXP(0);
+    Optr boolean = PEEK_EXP(0);
 
     if (boolean == (Optr)true) {
-        Optr closure = peek_EXP(1);
-        poke_EXP(0, nil);
-        push_EXP(closure);
+        Optr closure = PEEK_EXP(1);
+        POKE_EXP(0, nil);
+        PUSH_EXP(closure);
         BlockClosure_apply((BlockClosure)closure, 0);
         return;
     }
 
     if (boolean == (Optr)false) {
-        zap_CNT();
-        zapn_EXP(3);
-        poke_EXP(0, nil);
+        ZAP_CNT();
+        ZAPN_EXP(3);
+        POKE_EXP(0, nil);
         return;
     }
     
@@ -120,20 +120,20 @@ CNT(check_while_true)
 
 void CNT_while_true()
 {
-    Optr self = peek_EXP(2);
-    push_CNT(check_while_true);
-    poke_EXP(0, nil);
-    push_EXP(self);
+    Optr self = PEEK_EXP(2);
+    PUSH_CNT(check_while_true);
+    POKE_EXP(0, nil);
+    PUSH_EXP(self);
     BlockClosure_apply((BlockClosure)self, 0);
 }
 
 /* ========================================================================= */
 
 NATIVE1(BlockClosure_whileTrue_)
-    push_CNT(while_true);
-    push_CNT(check_while_true);
-    push_EXP(nil);
-    push_EXP(self);
+    PUSH_CNT(while_true);
+    PUSH_CNT(check_while_true);
+    PUSH_EXP(nil);
+    PUSH_EXP(self);
     BlockClosure_apply((BlockClosure)self, 0);
 }
 
@@ -152,7 +152,7 @@ NATIVE1(BlockClosure_valueWithArguments_)
 
     long pos = 0;
     while(pos < args->size) {
-        push_EXP(args->values[pos]);
+        PUSH_EXP(args->values[pos]);
         pos++;
     }
     

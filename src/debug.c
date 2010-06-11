@@ -61,7 +61,7 @@ void print_Class(Optr obj)
 
 void print_EXP()
 {
-    uns_int size = EXP_size();
+    uns_int size = EXP_SIZE();
     uns_int cur = 0;
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];
@@ -91,7 +91,7 @@ void print_Symbol(Optr s)
 
 uns_int nrsends()
 {
-    uns_int size = EXP_size();
+    uns_int size = EXP_SIZE();
     uns_int cur = 0;
     uns_int nr = 0;
     while (cur < size) {
@@ -105,7 +105,7 @@ uns_int nrsends()
 
 void sends()
 {
-    uns_int size = EXP_size();
+    uns_int size = EXP_SIZE();
     uns_int cur = 0;
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];

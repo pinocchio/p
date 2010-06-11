@@ -30,5 +30,5 @@ void ClassReference_eval(ClassReference self)
     if (self->class == (Optr)nil) {
         fail(Exception_UndefinedClassReference_Class, 1, self);
     }
-    poke_EXP(0, self->class);
+    POKE_EXP(0, self->class);
 }
