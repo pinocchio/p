@@ -140,16 +140,6 @@ Optr finish_eval()
     return result;
 }
 
-Optr Eval(Optr code)
-{
-    start_eval();
-    
-    push_EXP(code);
-    push_CNT(send_Eval);
-
-    return finish_eval();
-}
-
 Optr Eval_Send0(Optr self, Symbol symbol)
 {
     start_eval();

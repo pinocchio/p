@@ -32,37 +32,3 @@ Send new_Send(Optr receiver, Symbol msg, uns_int argc, ...)
 }
 
 /* ========================================================================= */
-
-static CNT(Send_send)
-    uns_int argc  = (uns_int)pop_EXP();
-    Optr receiver = peek_EXP(argc);
-    Class_dispatch(receiver, HEADER(receiver), argc);
-}
-
-void CNT_store_argument()
-{
-    Optr arg    = peek_EXP(0);
-    uns_int idx = (uns_int)peek_EXP(1);
-    Send send   = (Send)peek_EXP(idx + 2);
-    poke_EXP(1, arg);
-    if (idx < send->size) {
-        poke_EXP(0, idx+1);
-        push_EXP(Send_args(send)[idx]);
-        push_CNT(send_Eval);
-    } else {
-        poke_EXP(0, idx);
-        zap_CNT();
-    }
-}
-
-void Send_eval(Send self)
-{
-    // LOGFUN;
-    push_CNT(Send_send);
-
-    push_EXP(0);
-    push_EXP(self->receiver);
-
-    push_CNT(store_argument);
-    push_CNT(send_Eval);
-}

@@ -41,11 +41,3 @@ void do_assign()
 CNT(Assign_assign)
     do_assign();
 }
-
-void Assign_eval(Assign self)
-{
-    // LOGFUN;
-    push_CNT(Assign_assign);
-    push_CNT(send_Eval);
-    push_EXP(self->expression);
-}

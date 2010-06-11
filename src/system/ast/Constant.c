@@ -13,9 +13,3 @@ Constant new_Constant(Optr constant)
 }
 
 /* ========================================================================= */
-
-void Constant_eval(Constant self)
-{
-    // replace self with the constant
-    poke_EXP(0, self->constant);
-}

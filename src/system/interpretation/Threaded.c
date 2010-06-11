@@ -9,14 +9,33 @@ Array threaded_code()
     return (Array)peekn_CNT(2);
 }
 
+/* ========================================================================= */
+
+void return_from_send()
+{
+    Optr result = pop_EXP();
+    poke_EXP(0, result);
+}
+
+CNT(restore_env)
+	BlockContext current = current_env();
+    set_env((Optr)current->parent_frame);
+	free_context(current);
+}
+
+void CNT_restore_return()
+{
+    CNT_restore_env();
+    return_from_send();
+}
 
 /* ========================================================================= */
+
 void set_pc(long pc)
 {
     poken_CNT_raw(1, (uns_int)pc);
 }
 
-/* ========================================================================= */
 void inc_pc(long pc)
 {
     set_pc(pc + 1);
@@ -349,9 +368,7 @@ void Method_invoke(MethodClosure closure,
                    Method method,
                    Optr self, uns_int argc)
 {
-    if (method->code == (Array)nil) {
-        return StandardMethod_invoke(closure, (Method)method, self, argc);
-    }
+    assert1(method->code != (Array)nil, "Uncompiled method found!");
 
     assert(argc == method->params->size,
         printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",

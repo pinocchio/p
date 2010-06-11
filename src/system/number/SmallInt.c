@@ -86,6 +86,7 @@ String SmallInt_asString(long self, uns_int base)
 {
     wchar_t buffer[LONG_MAX_DIGITS + 2];
     int len = swprintf(buffer, sizeof buffer / sizeof *buffer, L"%li", self);
+    assert0(len < LONG_MAX_DIGITS + 2);
     String result = new_String(buffer);
     return result;
 }

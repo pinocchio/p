@@ -8,6 +8,7 @@
 /* ======================================================================== */
 
 extern void CNT_eval_threaded();
+extern void CNT_restore_env();
 
 typedef long(*threaded)(long pc);
 

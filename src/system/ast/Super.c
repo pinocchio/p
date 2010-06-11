@@ -51,12 +51,3 @@ void Super_eval_threaded(Super super)
     push_CNT(Class_super);
     push_CNT(push_env_class);
 }
-
-void Super_eval(Super super)
-{
-    Super_eval_threaded(super);
-
-    push_EXP(0);
-    push_CNT(store_argument);
-    push_CNT(Self_eval);
-}
