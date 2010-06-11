@@ -41,8 +41,4 @@ extern void init_variable_array(Array array, uns_int local_id);
 
 /* ========================================================================= */
 
-extern void Block_eval(Block self);
-
-/* ========================================================================= */
-
 #endif // AST_BLOCK_H

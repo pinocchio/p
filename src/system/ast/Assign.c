@@ -37,7 +37,3 @@ void do_assign()
     
     Class_direct_dispatch(var, class, (Optr)SMB_assignFor_to_, 2, nil, value);
 }
-
-CNT(Assign_assign)
-    do_assign();
-}

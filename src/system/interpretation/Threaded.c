@@ -41,6 +41,14 @@ void inc_pc(long pc)
     set_pc(pc + 1);
 }
 
+long push_code(Array code)
+{
+    PUSH_CNT_RAW(code);
+    PUSH_CNT_RAW(0);
+    PUSH_CNT(eval_threaded);
+    return -1;
+}
+
 /* ========================================================================= */
 #define THREADED(name) long t_##name(long pc) {
 //    fwprintf(stderr, L"Executing: "#name"\n");
@@ -58,9 +66,69 @@ PUSH(2, new_SmallInt(2))
 PUSH(true, true)
 PUSH(false, false)
 
-THREADED(pop)
-    pop_EXP();
-    return pc + 1;
+#define ZAPN(num) THREADED(zap##num) \
+    ZAPN_EXP(num);\
+    return pc + 1;\
+}
+
+ZAPN(1)
+ZAPN(2)
+ZAPN(3)
+ZAPN(4)
+ZAPN(5)
+
+THREADED(zap)
+    return t_zap1(pc);
+}
+
+THREADED(restart)
+    return 0;
+}
+
+#define CHECK(num) THREADED(check##num)\
+    Optr bool = pop_EXP();\
+    if (bool == true) {\
+        return pc + 1;\
+    } else if (bool == false) {\
+        return pc + 1 + num;\
+    } else {\
+        assert1(NULL, "Non-boolean type receiver for truth");\
+        return -1;\
+    }\
+}
+
+CHECK(1)
+CHECK(2)
+CHECK(3)
+CHECK(4)
+CHECK(5)
+
+#define PEEK(num) THREADED(peek##num) \
+    Optr o = PEEK_EXP(num);\
+    PUSH_EXP(o);\
+    return pc + 1;\
+}
+
+PEEK(0)
+PEEK(1)
+PEEK(2)
+PEEK(3)
+PEEK(4)
+PEEK(5)
+
+THREADED(dup)
+    return t_peek0(pc);
+}
+
+THREADED(send_value)
+    inc_pc(pc);
+    Optr o = pop_EXP();
+    if (HEADER(o) == BlockClosure_Class) {
+        apply(o, 0);
+    } else {
+        Class_direct_dispatch(o, HEADER(o), (Optr)SMB_value, 0);
+    }
+    return -1;
 }
 
 #define PUSHN(count) THREADED(push##count) \
@@ -118,8 +186,7 @@ THREADED(push_slot)
 
 THREADED(push_closure)
 	Block block  = (Block)threaded_code()->values[pc + 1];
-    CLAIM_EXP(1);
-    Block_eval(block);
+    PUSH_EXP(new_BlockClosure(block, current_env()));
     return pc + 2;
 }
 
@@ -190,11 +257,8 @@ THREADED(send_ifTrue_)
         ZAP_EXP();
         set_pc(pc + 3);
         Block block = (Block)threaded_code()->values[pc + 2];
-        PUSH_CNT_RAW(block->threaded);
-        PUSH_CNT_RAW(0);
-        PUSH_CNT(eval_threaded);
-        return -1;
-    } else if (bool == (Optr) false) {
+        return push_code(block->threaded);
+    } else if (bool == false) {
         POKE_EXP(0, nil);
         return pc + 3;
     } else {
@@ -212,18 +276,12 @@ THREADED(send_ifTrue_ifFalse_)
         ZAP_EXP();
         set_pc(pc + 4);
         Block block = (Block)threaded_code()->values[pc + 2];
-        PUSH_CNT_RAW(block->threaded);
-        PUSH_CNT_RAW(0);
-        PUSH_CNT(eval_threaded);
-        return -1;
-    } else if (bool == (Optr) false) {
+        return push_code(block->threaded);
+    } else if (bool == false) {
         ZAP_EXP();
         set_pc(pc + 4);
         Block block = (Block)threaded_code()->values[pc + 3];
-        PUSH_CNT_RAW(block->threaded);
-        PUSH_CNT_RAW(0);
-        PUSH_CNT(eval_threaded);
-        return -1;
+        return push_code(block->threaded);
     } else {
         Send send = (Send)threaded_code()->values[pc + 1];
         POKE_EXP(0, send);
@@ -318,7 +376,7 @@ void post_init_Threaded()
     T_FUNC(push_class_reference)
     T_FUNC(push_slot)
 
-    T_FUNC(pop)
+    T_FUNC(zap)
 
     T_FUNC(return)
     T_FUNC(return_true)
@@ -383,9 +441,7 @@ void Method_invoke(MethodClosure closure,
     activation_from_native(argc);
 
     PUSH_CNT(restore_env);
-	PUSH_CNT_RAW(method->code);
-	PUSH_CNT_RAW(0);
-	PUSH_CNT(eval_threaded);
+    push_code(method->code);
     ZAP_EXP();
     CNT_eval_threaded();
 }

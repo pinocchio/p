@@ -58,10 +58,3 @@ Block new_Block_with(Array params, Array locals, Array threaded,
 }
 
 /* ========================================================================= */
-
-void Block_eval(Block self)
-{
-    POKE_EXP(0, new_BlockClosure(self, current_env()));
-}
-
-/* ========================================================================= */

@@ -12,6 +12,7 @@ extern void CNT_restore_env();
 
 typedef long(*threaded)(long pc);
 
+extern long push_code(Array code);
 extern void post_init_Threaded();
 /* ======================================================================== */
 
@@ -35,7 +36,12 @@ extern long t_push_closure(long pc);
 extern long t_push_class_reference(long pc);
 extern long t_push_slot(long pc);
 
-extern long t_pop(long pc);
+extern long t_zap(long pc);
+extern long t_zap1(long pc);
+extern long t_zap2(long pc);
+extern long t_zap3(long pc);
+extern long t_zap4(long pc);
+extern long t_zap5(long pc);
 
 extern long t_return(long pc);
 extern long t_return_true(long pc);
@@ -65,6 +71,20 @@ extern long t_super5(long pc);
 extern long t_supern(long pc);
 
 extern long t_assign(long pc);
+extern long t_dup(long pc);
+extern long t_send_value(long pc);
+extern long t_restart(long pc);
 
+extern long t_peek1(long pc);
+extern long t_peek2(long pc);
+extern long t_peek3(long pc);
+extern long t_peek4(long pc);
+extern long t_peek5(long pc);
+
+extern long t_check1(long pc);
+extern long t_check2(long pc);
+extern long t_check3(long pc);
+extern long t_check4(long pc);
+extern long t_check5(long pc);
 
 #endif //INTERPRETATION_THREADED
