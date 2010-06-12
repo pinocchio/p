@@ -45,8 +45,8 @@ extern Optr pop_EXP();
 #define CLAIM_EXP(value)		tset(_EXP_, tget(_EXP_)+(value))
 #define PEEK_EXP(depth)         (*(tget(_EXP_) - (depth)))
 #define POKE_EXP(depth, value)  (*(tget(_EXP_) - (depth)) = ((Optr)(value)))
-#define ZAP_EXP()               tset(_EXP_, tget(_EXP_)-1)
 #define ZAPN_EXP(n)             tset(_EXP_, tget(_EXP_)-(n))
+#define ZAP_EXP()               ZAPN_EXP(1)
 #define EXP_SIZE()              (tget(_EXP_) - &tget(Double_Stack)[-1])
 #define EMPTY_EXP()             (EXP_SIZE() == 0) 
 
