@@ -250,7 +250,7 @@ THREADED(send_to_do_)
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
         ZAPN_EXP(2);
         set_pc(pc + 3);
-        Block block = (Block)threaded_code()->values[pc + 2];
+        Block block = (Block)get_code(pc + 2);
         int start   = unwrap_int(from);
         int stop    = unwrap_int(to);
         for (;start<=stop; start++) {
@@ -261,7 +261,7 @@ THREADED(send_to_do_)
         }
         return -1;
     } else {
-        Send send = (Send)threaded_code()->values[pc + 1];
+        Send send = (Send)get_code(pc + 1);
         POKE_EXP(1, send);
         POKE_EXP(0, from);
         PUSH_EXP(to);
@@ -291,23 +291,20 @@ THREADED(send_ifTrue_)
 
 THREADED(send_ifFalse_) 
     Optr bool = PEEK_EXP(0);
-    if (bool == (Optr) false) {
-        ZAP_EXP();
-        set_pc(pc + 3);
-        Block block = (Block)threaded_code()->values[pc + 2];
-        PUSH_CNT_RAW(block->threaded);
-        PUSH_CNT_RAW(0); // pc
-        PUSH_CNT(eval_threaded);
-        return -1;
-    } else if (bool == (Optr) true) {
+    if (bool == (Optr) true) {
         POKE_EXP(0, nil);
         return pc + 3;
+    } else if (bool == false) {
+        ZAP_EXP();
+        set_pc(pc + 3);
+        Block block = (Block)get_code(pc + 2);
+        return push_code(block->threaded);
     } else {
-        Send send = (Send)threaded_code()->values[pc + 1];
-        POKE_EXP(0, send);
-        PUSH_EXP(bool);
+        Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
-        return t_send1(pc + 2);
+        PUSH_EXP(send);
+    	Class_dispatch(bool, HEADER(bool), 1);
+        return -1;
     }
 }
 
