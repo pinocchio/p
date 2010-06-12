@@ -14,15 +14,13 @@ Dictionary create_plugin()
 Dictionary add_plugin(const wchar_t * name)
 {
     Optr symbol = (Optr)new_Symbol_cached(name);
-    Dictionary plugin = 
-        (Dictionary)Dictionary_quick_lookup(_NATIVES_,
-                                                                  symbol);
+    Dictionary plugin = (Dictionary)Dictionary_quick_lookup(_NATIVES_, symbol);
     if (plugin) { return plugin; }
 
     plugin = new_Dictionary();
     Dictionary_quick_store(_NATIVES_,
-                                      (Optr)new_Symbol_cached(name),
-                                      (Optr)plugin);
+                           (Optr)new_Symbol_cached(name),
+                           (Optr)plugin);
     return plugin;
 }
 
@@ -37,7 +35,7 @@ typedef Optr (*ftype)();
 
 static Object load_plugin(Optr class, const char * file_path)
 {
-    void * handle       = dlopen(file_path, RTLD_LAZY);
+    void * handle = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
         return (Object)nil;
@@ -70,6 +68,7 @@ NATIVE0(Plugin_unload)
     Optr w_path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
     //unload_plugin();     
+    ZAP_NATIVE_INPUT();
 }
 
 /* ========================================================================= */

@@ -110,9 +110,9 @@ static void Bucket_compare_key(Optr inkey, Optr dictkey)
 
 void CNT_bucket_lookup()
 {
-    Optr boolean               = PEEK_EXP(0);
+    Optr boolean      = PEEK_EXP(0);
     DictBucket bucket = (DictBucket)PEEK_EXP(1);
-    uns_int idx                  = (uns_int)PEEK_EXP(2);
+    uns_int idx       = (uns_int)PEEK_EXP(2);
     
     if (boolean == (Optr)true) {
         ZAPN_EXP(4);
@@ -141,7 +141,7 @@ void CNT_bucket_lookup()
 static void bucket_do_store(DictBucket bucket, uns_int idx, 
 							uns_int addition)
 {
-    Optr value          = PEEK_EXP(3);
+    Optr value            = PEEK_EXP(3);
     bucket->values[idx+1] = value;
     bucket->tally         = idx+2;
     ZAPN_EXP(3);
@@ -158,7 +158,7 @@ static void bucket_store_new(DictBucket bucket, uns_int idx,
 
 static void CNT_Bucket_store()
 {
-    Optr boolean       = pop_EXP();
+    Optr boolean         = pop_EXP();
     DictBucket * bucketp = (DictBucket *)PEEK_EXP(0);
     DictBucket bucket    = *bucketp;
     uns_int idx          = (uns_int)PEEK_EXP(1);

@@ -25,8 +25,6 @@ BlockContext activation_from_native(uns_int argc)
     uns_int paramc       = block->params->size;
     uns_int localc       = block->locals->size;
 
-    //assert1(argc == paramc, "Catch-all arguments not supported yet!");
-
     BlockContext context = current_env();
 
     while (argc > 0) {
@@ -47,9 +45,8 @@ BlockContext activation_from_native(uns_int argc)
 
 CNT(restore_pop_env)
     set_env(PEEK_EXP(1));
-    Optr result = pop_EXP();
-    POKE_EXP(0, result);
-
+	Optr result = pop_EXP();
+	POKE_EXP(0, result);
 }
 
 void BlockClosure_apply(BlockClosure closure, uns_int argc)
@@ -65,12 +62,11 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
     if (block->locals->size == 0 && argc == 0) {
         BlockContext env = current_env();
         if (env != closure->context) {
-            ZAP_EXP();
             POKE_EXP(0, env);
             PUSH_CNT(restore_pop_env);
             set_env((Optr)closure->context);
         } else {
-            ZAPN_EXP(2);
+            ZAP_EXP();
         }
         PUSH_CNT_RAW(block->threaded);
         PUSH_CNT_RAW(0);
@@ -85,7 +81,6 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
     PUSH_CNT_RAW(block->threaded);
     PUSH_CNT_RAW(0);
     PUSH_CNT(eval_threaded);
-    ZAP_EXP();
     CNT_eval_threaded();
 }
 
@@ -102,15 +97,14 @@ CNT(check_while_true)
 
     if (boolean == (Optr)true) {
         Optr closure = PEEK_EXP(1);
-        POKE_EXP(0, nil);
-        PUSH_EXP(closure);
+        POKE_EXP(0, closure);
         BlockClosure_apply((BlockClosure)closure, 0);
         return;
     }
 
     if (boolean == (Optr)false) {
         ZAP_CNT();
-        ZAPN_EXP(3);
+        ZAPN_EXP(2);
         POKE_EXP(0, nil);
         return;
     }
@@ -122,8 +116,7 @@ void CNT_while_true()
 {
     Optr self = PEEK_EXP(2);
     PUSH_CNT(check_while_true);
-    POKE_EXP(0, nil);
-    PUSH_EXP(self);
+    POKE_EXP(0, self);
     BlockClosure_apply((BlockClosure)self, 0);
 }
 
@@ -132,7 +125,6 @@ void CNT_while_true()
 NATIVE1(BlockClosure_whileTrue_)
     PUSH_CNT(while_true);
     PUSH_CNT(check_while_true);
-    PUSH_EXP(nil);
     PUSH_EXP(self);
     BlockClosure_apply((BlockClosure)self, 0);
 }
@@ -143,7 +135,7 @@ NATIVE(BlockClosure_apply_)
 }
 
 NATIVE0(BlockClosure_numArgs) 
-    RETURN_FROM_NATIVE(new_SmallInt(((BlockClosure) self)->code->params->size));
+    RETURN_FROM_NATIVE(new_SmallInt(((BlockClosure)self)->code->params->size));
 }
 
 NATIVE1(BlockClosure_valueWithArguments_)

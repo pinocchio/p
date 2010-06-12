@@ -51,8 +51,8 @@ void Variable_assign(Variable self, Optr value)
 {
     Optr env = (Optr)current_env();
 
-    uns_int local_id = (uns_int)unwrap_int(self->local_id);    
-    uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
+    uns_int local_id = (uns_int)unwrap_int(self->local_id);
+    uns_int scope_id = (uns_int)unwrap_int(self->scope_id);
 
     if (IS_CONTEXT(env)) {
         return BlockContext_assign((BlockContext)env,

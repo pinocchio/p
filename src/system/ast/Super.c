@@ -31,8 +31,8 @@ Super new_Super(Symbol message, uns_int argc, ...)
 
 CNT(Super_send) 
     Optr class    = pop_EXP();
-    uns_int argc    = (uns_int)pop_EXP();
-    Optr receiver = PEEK_EXP(argc);
+    uns_int argc  = (uns_int)pop_EXP();
+    Optr receiver = PEEK_EXP(argc + 1); // SUPER object on top
     
     Class_dispatch(receiver, (Class)class, argc);
 }
@@ -44,7 +44,7 @@ CNT(push_env_class)
     PUSH_EXP(((BlockContext)env)->home_context->closure->host);
 }
 
-void Super_eval_threaded(Super super)
+void Super_eval_threaded()
 {
     // execute the method
     PUSH_CNT(Super_send);

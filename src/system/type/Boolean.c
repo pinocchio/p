@@ -21,31 +21,33 @@ Optr get_bool(bool value)
 void CNT_loop_apply()
 {
     Optr closure = PEEK_EXP(1);
-    PUSH_EXP(closure);
+    POKE_EXP(0, closure);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 /* ========================================================================= */
 
 NATIVE1(True_whileTrue_)
+	PUSH_EXP(nil);
     PUSH_CNT(loop_apply);
-    PUSH_EXP(nil);
 }
 
 NATIVE1(False_whileFalse_)
+	PUSH_EXP(nil);
     PUSH_CNT(loop_apply);
-    PUSH_EXP(nil);
 }
 
 NATIVE2(True_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(0);
-    ZAPN_EXP(2);
+	ZAP_NATIVE_INPUT();
+	PUSH_EXP(closure);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 
 NATIVE2(False_ifTrue_ifFalse_)
     Optr closure = NATIVE_ARG(1);
-    ZAPN_EXP(2);
+	ZAP_NATIVE_INPUT();
+	PUSH_EXP(closure);
     BlockClosure_apply((BlockClosure)closure, 0);
 }
 

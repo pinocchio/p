@@ -61,8 +61,12 @@ void print_Class(Optr obj)
 
 void print_EXP()
 {
-    uns_int size = EXP_SIZE();
+    long size = EXP_SIZE();
     uns_int cur = 0;
+    if (size <= 0) {
+        fwprintf(stderr, L"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Stack underflow!\n");
+        return;
+    }
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];
         if (c > (Optr)10000) {

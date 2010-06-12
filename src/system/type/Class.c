@@ -101,36 +101,36 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 		message->arguments[argc] = pop_EXP();
 	}
 
-    ZAPN_EXP(2);
+    ZAP_EXP();
 
     Class_direct_dispatch(self, class, (Optr)SMB_doesNotUnderstand_, 1, message);
 }
 
 static CNT(Class_lookup_cache_invoke)
-    Optr method    = PEEK_EXP(0);
-    uns_int argc     = (uns_int)PEEK_EXP(3);
-    Class class = (Class)PEEK_EXP(4);
-    Optr self      = PEEK_EXP(2);
+    Optr method  = PEEK_EXP(0);
+    uns_int argc = (uns_int)PEEK_EXP(3);
+    Class class  = (Class)PEEK_EXP(4);
+    Optr self    = PEEK_EXP(2);
     if (method == NULL) {
         Optr msg  = PEEK_EXP(1);
-        ZAPN_EXP(5);
+        ZAPN_EXP(6);
         return does_not_understand(self, class, msg, argc);
     }
-    ZAPN_EXP(5);
-    Send send       = (Send)PEEK_EXP(argc + 1);
-    Array cache    = send->cache;
+    Send send   = (Send)PEEK_EXP(5);
+    Array cache = send->cache;
     InlineCache_store(cache, (Optr)class, method);
+    ZAPN_EXP(6);
     
     Method_invoke_inline(method, self, argc);
 }
 
 static CNT(Class_lookup_invoke)
-    Optr method = PEEK_EXP(0);
-    uns_int argc  = (uns_int)PEEK_EXP(3);
-    Optr self   = PEEK_EXP(2);
+    Optr method  = PEEK_EXP(0);
+    uns_int argc = (uns_int)PEEK_EXP(3);
+    Optr self    = PEEK_EXP(2);
     if (method == NULL) {
         Class class = (Class)PEEK_EXP(4);
-        Optr msg       = PEEK_EXP(1);
+        Optr msg    = PEEK_EXP(1);
         ZAPN_EXP(5);
         return does_not_understand(self, class, msg, argc);
     }
@@ -162,14 +162,14 @@ void CNT_Class_lookup_loop()
     }
     ZAP_EXP();
     Class class = (Class)PEEK_EXP(0);
-    Optr msg       = PEEK_EXP(1);
+    Optr msg    = PEEK_EXP(1);
     Class next  = class->super;
     POKE_EXP(0, next);
     return Class_lookup(next, msg);
 }
 
 static void Class_direct_dispatch_inline(Optr self, Class class,
-                                  Optr msg, uns_int argc)
+                                         Optr msg, uns_int argc)
 {
     PUSH_EXP(class);
     PUSH_EXP(argc);
@@ -202,7 +202,6 @@ void Class_tower_dispatch(Optr self, Optr class,
         tower = newtower;
         iss = (Object)iss->ivals[1];
     }
-    PUSH_EXP(nil);
     PUSH_EXP(tower->ivals[0]); // self, bottom interpreter
     PUSH_EXP(message);
     PUSH_EXP(self); // receiver
@@ -226,7 +225,6 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
     /* TODO optimize by claim + poke instead of push */
     Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
-        PUSH_EXP(nil);
         PUSH_EXP(self);
         for (idx = 0; idx < argc; idx++) {
             PUSH_EXP(va_arg(args, Optr));
@@ -245,13 +243,12 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
 }
 
 void Class_direct_dispatch_withArguments(Optr self, Class class,
-                                              Optr msg, Array args)
+                                         Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     long idx;
     Object iss = (Object)tget(_ISS_);
     if ((Optr)iss == nil) {
-        PUSH_EXP(nil);
         PUSH_EXP(self);
         for (idx = 0; idx < args->size; idx++) {
             PUSH_EXP(args->values[idx]);
@@ -263,16 +260,18 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
         for (idx = 0; idx < args->size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
+        PUSH_EXP(nil);
         Class_tower_dispatch(self, (Optr)class, iss, message);
     }
 }
 
 void Class_dispatch(Optr self, Class class, uns_int argc)
 {
-    Send send   = (Send)PEEK_EXP(argc + 1); // + self
+    Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;
-    Optr msg    = send->message;
+    Optr msg    = (Optr)send->message;
     assert0(msg != nil);
+    assert0(EXP_SIZE() >= argc + 1);
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol clsname;
@@ -285,13 +284,14 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     }
     Symbol msgname = (Symbol)msg;
     Symbol method  = String_concat_(clsname, msgname);
-    LOG("%ls (%"F_I"u)\n", method->value, self);
+    LOG("%ls (%p) %li\n", method->value, self, EXP_SIZE());
     #endif // PRINT_DISPATCH_TRACE
     
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
+            ZAP_EXP();
             return Method_invoke_inline(method, self, argc);
         }
     } else {

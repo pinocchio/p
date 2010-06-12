@@ -79,7 +79,7 @@ void Object_instVarAt_put_(Optr self, long index, Optr value)
 NATIVE1(Array_basicNew_)
     assert_class(self);
     Optr w_size = NATIVE_ARG(0);
-    long size      = unwrap_int(w_size);
+    long size   = unwrap_int(w_size);
     assert0(size >= 0);
     Optr result = instantiate_sized((Class)self, (uns_int)size);
     RETURN_FROM_NATIVE(result);
@@ -132,10 +132,10 @@ void raw_Array_at_put(Array array, Optr tag,
 NATIVE2(Array_at_put_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_arg   = NATIVE_ARG(1);
-    long index      = unwrap_int(w_index);
-    Array as  = (Array)self;
-   
-    Optr tag = GETTAG(as);
+    long index   = unwrap_int(w_index);
+    Array as     = (Array)self;
+    Optr tag     = GETTAG(as);
+
     ASSERT_TAG_LAYOUT(tag, Array); 
     raw_Array_at_put(as, tag, index - 1, w_arg);
     RETURN_FROM_NATIVE(w_arg);
@@ -148,7 +148,7 @@ NATIVE2(Object_perform_withArguments_)
     Optr tag = GETTAG(w_args);
     ASSERT_TAG_LAYOUT(tag, Array);
 
-    ZAPN_EXP(4);    
+    ZAP_NATIVE_INPUT();
 
     Class_direct_dispatch_withArguments(self, HEADER(self),
                                              w_selector, (Array)w_args);
@@ -156,7 +156,7 @@ NATIVE2(Object_perform_withArguments_)
 
 NATIVE1(Object_perform_)
     Optr w_selector = NATIVE_ARG(0);
-    ZAPN_EXP(3);
+	ZAP_NATIVE_INPUT();
     Class_direct_dispatch(self, HEADER(self), w_selector, 0);
 }
 

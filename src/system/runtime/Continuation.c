@@ -39,13 +39,13 @@ NATIVE1(Continuation_continue_)
 }
 
 NATIVE1(Continuation_on_)
-    Continuation cont = new_Continuation();
-    cont->exp_stack = new_Array(EXP_SIZE() - (argc + 1),
-                                     tget(Double_Stack));
-    cont->cnt_stack = new_Array(CNT_SIZE(), tget(_CNT_));
-    cont->iss       = (Optr)tget(_ISS_);
-    cont->env       = (Optr)current_env();
-    Optr closure  = NATIVE_ARG(0);
+    Continuation cont    = new_Continuation();
+    cont->exp_stack      = new_Array(EXP_SIZE() - (argc + 1),
+    tget(Double_Stack));
+    cont->cnt_stack      = new_Array(CNT_SIZE(), tget(_CNT_));
+    cont->iss            = (Optr)tget(_ISS_);
+    cont->env            = (Optr)current_env();
+    Optr closure         = NATIVE_ARG(0);
     POKE_EXP(0, cont);
     apply(closure, 1);
 }

@@ -138,10 +138,10 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 /* ========================================================================= */
 
 static CNT(lookup_push)
-    Optr w_hash              = PEEK_EXP(0);
+    Optr w_hash     = PEEK_EXP(0);
     Dictionary self = (Dictionary)PEEK_EXP(2);
-    long hash                   = unwrap_hash(self, w_hash);
-    Optr key                 = PEEK_EXP(1);
+    long hash       = unwrap_hash(self, w_hash);
+    Optr key        = PEEK_EXP(1);
     ZAPN_EXP(2);
 
     DictBucket * bucketp = get_bucketp(self, hash);
@@ -191,9 +191,9 @@ static void CNT_dict_grow()
 
 static void Dictionary_grow(Dictionary self)
 {
-    Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Optr)nil);
-    self->size     = 0;
+    Array old  = self->data;
+    self->data = new_Array_withAll(old->size << 1, (Optr)nil);
+    self->size = 0;
     
     PUSH_CNT(dict_grow);
     CLAIM_EXP(3);
@@ -225,11 +225,11 @@ void Dictionary_direct_store(Dictionary self, long hash,
 {
     DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (DictBucket)nil) { 
-        *bucketp                     = new_bucket();
+        *bucketp          = new_bucket();
         DictBucket bucket = *bucketp;
-        bucket->values[0]            = key;
-        bucket->values[1]            = value;
-        bucket->tally                = 2;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        bucket->tally     = 2;
         Dictionary_check_grow(self);
     } else {
         PUSH_EXP((Optr)self);
@@ -258,7 +258,7 @@ static CNT(dictionary_check_absent)
 
 NATIVE1(Dictionary_at_)
     Optr w_index = NATIVE_ARG(0);
-    ZAPN_EXP(3);
+	ZAP_NATIVE_INPUT();
     PUSH_CNT(fix_dictionary_result);
     Dictionary_lookup_push((Dictionary)self, w_index);
 }
@@ -266,19 +266,20 @@ NATIVE1(Dictionary_at_)
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_block = NATIVE_ARG(1);
-    ZAPN_EXP(4);
+	ZAP_NATIVE_INPUT();
     PUSH_EXP(w_block);
     PUSH_CNT(dictionary_check_absent);
     Dictionary_lookup_push((Dictionary)self, w_index);
 }
 
 CNT(Dictionary_at_put_)
-    Optr w_hash              = PEEK_EXP(0);
+    Optr w_hash     = PEEK_EXP(0);
     Dictionary self = (Dictionary)PEEK_EXP(3);
-    long hash                   = unwrap_hash(self, w_hash);
-    Optr new                 = PEEK_EXP(1);
-    Optr w_index             = PEEK_EXP(2);
-    ZAPN_EXP(4);
+    long hash       = unwrap_hash(self, w_hash);
+    Optr new        = PEEK_EXP(1);
+    Optr w_index    = PEEK_EXP(2);
+	uns_int argc = 2;
+	ZAP_NATIVE_INPUT();
     POKE_EXP(0, new);
     Dictionary_direct_store((Dictionary)self, hash, w_index, new);
 }
@@ -288,14 +289,9 @@ NATIVE2(Dictionary_at_put_)
     push_hash(NATIVE_ARG(0));
 }
 
-static CNT(native_grow_end)
-    Optr self = pop_EXP();
-    POKE_EXP(0, self);
-}
-
 NATIVE(Dictionary_grow)
-    PUSH_CNT(native_grow_end);
-    PUSH_EXP(self);
+    assert1(NULL, "Untested for now!\n");
+    ZAP_NATIVE_INPUT();
     Dictionary_grow((Dictionary)self);
 }
 

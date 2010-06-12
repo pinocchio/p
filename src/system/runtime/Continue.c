@@ -29,8 +29,7 @@ void Continue_escape(Continue cont, Optr return_value)
     tset(_CNT_, (&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_offset);
     tset(_ISS_, cont->iss);
     set_env(cont->env);
-    // Overwrite the top of stack that created the continue.
-    POKE_EXP(0, return_value);
+    PUSH_EXP(return_value);
 }
 
 NATIVE1(Continue_escape_)
@@ -39,7 +38,7 @@ NATIVE1(Continue_escape_)
 
 NATIVE1(Continue_on_)
     Continue cont = new_Continue_offset(argc + 1);
-    Optr closure        = NATIVE_ARG(0);
+    Optr closure  = NATIVE_ARG(0);
     POKE_EXP(0, cont);
     apply(closure, 1);
 }

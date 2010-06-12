@@ -11,12 +11,6 @@ Array threaded_code()
 
 /* ========================================================================= */
 
-void return_from_send()
-{
-    Optr result = pop_EXP();
-    POKE_EXP(0, result);
-}
-
 CNT(restore_env)
 	BlockContext current = current_env();
     set_env((Optr)current->parent_frame);
@@ -26,7 +20,6 @@ CNT(restore_env)
 void CNT_restore_return()
 {
     CNT_restore_env();
-    return_from_send();
 }
 
 /* ========================================================================= */
@@ -229,7 +222,7 @@ THREADED(return_self)
 /* ========================================================================= */
 #define SEND(n) THREADED(send##n) \
     inc_pc(pc);\
-    Optr self = PEEK_EXP(n);\
+    Optr self = PEEK_EXP(n+1);\
     Class_dispatch(self, HEADER(self), n);\
     return -1;\
 }
@@ -244,7 +237,7 @@ SEND(5)
 THREADED(sendn)
     set_pc(pc+2);
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
-    Optr self = PEEK_EXP(n);    
+    Optr self = PEEK_EXP(n+1);    
     Class_dispatch(self, HEADER(self), n);
     return -1;
 }
@@ -263,9 +256,8 @@ THREADED(send_ifTrue_)
         return pc + 3;
     } else {
         Send send = (Send)threaded_code()->values[pc + 1];
-        POKE_EXP(0, send);
-        PUSH_EXP(bool);
         t_push_closure(pc + 1);
+        PUSH_EXP(send);
         return t_send1(pc + 2);
     }
 }
@@ -284,10 +276,9 @@ THREADED(send_ifTrue_ifFalse_)
         return push_code(block->threaded);
     } else {
         Send send = (Send)threaded_code()->values[pc + 1];
-        POKE_EXP(0, send);
-        PUSH_EXP(bool);
         t_push_closure(pc + 1);
         t_push_closure(pc + 2);
+        PUSH_EXP(send);
         return t_send2(pc + 3);
     }
 }
@@ -295,7 +286,7 @@ THREADED(send_ifTrue_ifFalse_)
 /* ========================================================================= */
 #define SUPER(n) THREADED(super##n) \
     inc_pc(pc);\
-    Super super = (Super)PEEK_EXP(n);\
+    Super super = (Super)PEEK_EXP(n+1);\
     PUSH_EXP(n);\
     Super_eval_threaded(super);\
     return -1;\
@@ -311,9 +302,9 @@ SUPER(5)
 THREADED(supern)
     set_pc(pc+2);
     uns_int n = (uns_int)threaded_code()->values[pc + 1];
-    Super super = (Super)PEEK_EXP(n);    
+    Super super = (Super)PEEK_EXP(n+1);    
     PUSH_EXP(n);
-    Super_eval_threaded(super);
+    Super_eval_threaded();
     return -1;
 }
 
@@ -442,8 +433,5 @@ void Method_invoke(MethodClosure closure,
 
     PUSH_CNT(restore_env);
     push_code(method->code);
-    ZAP_EXP();
     CNT_eval_threaded();
 }
-
-
