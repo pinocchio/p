@@ -78,7 +78,7 @@ static void Method_invoke_inline(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         MethodClosure_invoke((MethodClosure)method, self, argc);
     } else {
-        // inspect(method);
+        inspect(method);
         assert1(NULL, "Unknown type of method installation");
     }
 }
@@ -147,6 +147,7 @@ void Class_lookup(Class class, Optr msg)
         return;
     }
     assert_class((Optr)class);
+    inspect(class);
     Dictionary mdict = class->methods;
     Dictionary_lookup_push(mdict, msg);
 }

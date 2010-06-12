@@ -41,9 +41,6 @@ long push_code(Array code)
 }
 
 /* ========================================================================= */
-#define THREADED(name) long t_##name(long pc) {
-//    fwprintf(stderr, L"Executing: "#name"\n");
-/* ========================================================================= */
 
 #define PUSH(name, value) THREADED(push_##name) \
     PUSH_EXP(value);\
@@ -272,7 +269,7 @@ THREADED(send_to_do_)
 
 THREADED(send_ifTrue_) 
     Optr bool = PEEK_EXP(0);
-    if (bool == (Optr) true) {
+    if (bool == true) {
         ZAP_EXP();
         set_pc(pc + 3);
         Block block = (Block)get_code(pc + 2);
@@ -291,7 +288,7 @@ THREADED(send_ifTrue_)
 
 THREADED(send_ifFalse_) 
     Optr bool = PEEK_EXP(0);
-    if (bool == (Optr) true) {
+    if (bool == true) {
         POKE_EXP(0, nil);
         return pc + 3;
     } else if (bool == false) {
@@ -310,7 +307,7 @@ THREADED(send_ifFalse_)
 
 THREADED(send_ifTrue_ifFalse_) 
     Optr bool = PEEK_EXP(0);
-    if (bool == (Optr) true) {
+    if (bool == true) {
         ZAP_EXP();
         set_pc(pc + 4);
         Block block = (Block)get_code(pc + 2);
@@ -470,7 +467,7 @@ void Method_invoke(MethodClosure closure,
 
     assert(argc == method->params->size,
         printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
-                    method->params->size, argc););
+               method->params->size, argc););
     
     if (method->size == 0) { 
         RETURN_FROM_NATIVE(self);
