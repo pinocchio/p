@@ -271,7 +271,6 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     Array cache = send->cache;
     Optr msg    = (Optr)send->message;
     assert0(msg != nil);
-    assert0(EXP_SIZE() >= argc + 1);
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol clsname;
@@ -284,7 +283,7 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     }
     Symbol msgname = (Symbol)msg;
     Symbol method  = String_concat_(clsname, msgname);
-    LOG("%ls (%p) %li\n", method->value, self, EXP_SIZE());
+    LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
     // TODO properly initialize the inlinecache when creating new sends
