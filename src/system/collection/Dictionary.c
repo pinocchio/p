@@ -224,6 +224,7 @@ THREADED(push_hash)
         hash = (SmallInt)key;
     } else {
         ZAP_EXP();
+        set_pc(pc + 1);
         Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
         return -1;
     }
@@ -326,13 +327,6 @@ NNATIVE(iDictionary_at_, 5,
     t_bucket_lookup,
     t_return)
 
-NNATIVE(Dictionary_at_, 5,
-    t_dup,
-    t_push_hash,
-    t_dictionary_bucket,
-    t_bucket_lookup,
-    t_dictionary_check_result)
-
 void Dictionary_lookup_push(Dictionary dict, Optr msg)
 {
     CLAIM_EXP(2);
@@ -343,11 +337,37 @@ void Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 /* ========================================================================= */
 
+NNATIVE(Dictionary_at_, 5,
+    t_dup,
+    t_push_hash,
+    t_dictionary_bucket,
+    t_bucket_lookup,
+    t_dictionary_check_result)
+
 NATIVE1(Dictionary_at_)
     push_code(T_Dictionary_at_);
 }
 
-/*
+THREADED(dictionary_check_ifAbsent_)
+    Optr result = pop_EXP();
+    t_return(pc);
+
+    if (result == NULL) {
+        Optr block = PEEK_EXP(0);
+        apply(block, 0);
+    } else {
+        POKE_EXP(0, result);
+    }
+    return -1;
+}
+
+NNATIVE(Dictionary_at_ifAbsent_, 5,
+    t_dup,
+    t_push_hash,
+    t_dictionary_bucket,
+    t_bucket_lookup,
+    t_dictionary_check_ifAbsent_)
+
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_block = NATIVE_ARG(1);
@@ -355,7 +375,7 @@ NATIVE2(Dictionary_at_ifAbsent_)
     POKE_EXP(1, self);
     POKE_EXP(0, w_index);
     push_code(T_Dictionary_at_ifAbsent_);
-}*/
+}
 
 CNT(Dictionary_at_put_)
     Optr w_hash     = PEEK_EXP(0);
@@ -385,11 +405,12 @@ void post_init_Dictionary()
     change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
 
     INIT_NATIVE(Dictionary_at_);
+    INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(iDictionary_at_);
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, SMB_at_put_,      NM_Dictionary_at_put_);
     store_native(natives, SMB_at_,          NM_Dictionary_at_);
-    // store_native(natives, SMB_at_ifAbsent_, NM_Dictionary_at_ifAbsent_);
+    store_native(natives, SMB_at_ifAbsent_, NM_Dictionary_at_ifAbsent_);
     store_native(natives, SMB_grow,         NM_Dictionary_grow);
 }
