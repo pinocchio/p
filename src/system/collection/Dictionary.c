@@ -223,12 +223,11 @@ THREADED(push_hash)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
-        ZAP_EXP();
         set_pc(pc + 1);
         Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
         return -1;
     }
-    POKE_EXP(0, hash);
+    PUSH_EXP(hash);
     return pc + 1;
 }
 
@@ -320,8 +319,7 @@ Array TG_##name()\
 
 #define INIT_NATIVE(name) T_##name = TG_##name()
 
-NNATIVE(iDictionary_at_, 5,
-    t_dup,
+NNATIVE(iDictionary_at_, 4,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
@@ -337,8 +335,7 @@ void Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 /* ========================================================================= */
 
-NNATIVE(Dictionary_at_, 5,
-    t_dup,
+NNATIVE(Dictionary_at_, 4,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
@@ -361,8 +358,7 @@ THREADED(dictionary_check_ifAbsent_)
     return -1;
 }
 
-NNATIVE(Dictionary_at_ifAbsent_, 5,
-    t_dup,
+NNATIVE(Dictionary_at_ifAbsent_, 4,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
