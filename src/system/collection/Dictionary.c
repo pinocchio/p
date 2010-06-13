@@ -135,32 +135,6 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
     return NULL;
 }
 
-/* ========================================================================= */
-
-static CNT(lookup_push)
-    Optr w_hash     = PEEK_EXP(0);
-    Dictionary self = (Dictionary)PEEK_EXP(2);
-    long hash       = unwrap_hash(self, w_hash);
-    Optr key        = PEEK_EXP(1);
-    ZAPN_EXP(2);
-
-    DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)nil) {
-        POKE_EXP(0, NULL);
-        return;
-    }
-    Bucket_lookup(*bucketp, key);
-}
-
-void Dictionary_lookup_push(Dictionary self, Optr key)
-{
-    PUSH_CNT(lookup_push);
-    CLAIM_EXP(2);
-    POKE_EXP(1, self);
-    POKE_EXP(0, key);
-    push_hash(key);
-}
-
 static CNT(dict_grow_end)
     ZAPN_EXP(3);
 }
@@ -240,36 +214,163 @@ void Dictionary_direct_store(Dictionary self, long hash,
 
 /* ========================================================================= */
 
-static CNT(fix_dictionary_result)
-    if (PEEK_EXP(0) == NULL) {
+THREADED(push_hash)
+    Optr key = PEEK_EXP(0);
+    SmallInt hash;
+    Optr tag = GETTAG(key);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        hash = Symbol_hash((Symbol)key);
+    } else if (TAG_IS_LAYOUT(tag, Int)) { 
+        hash = (SmallInt)key;
+    } else {
+        set_pc(pc + 1);
+        Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
+        return -1;
+    }
+    PUSH_EXP(hash);
+    return pc + 1;
+}
+
+static long nBucket_compare_key(long pc, Optr inkey, Optr dictkey)
+{
+    long result = Bucket_quick_compare_key(inkey, dictkey);
+
+    if (result == -1) {
+        Class_direct_dispatch(inkey, HEADER(inkey),
+                              (Optr)SMB__equal, 1, dictkey);
+        return -1;
+    }
+    PUSH_EXP(get_bool(result));
+    return pc;
+}
+
+THREADED(dictionary_bucket)
+    Optr w_hash     = PEEK_EXP(0);
+    Optr key        = PEEK_EXP(1);
+    Dictionary self = (Dictionary)PEEK_EXP(2);
+    long hash       = unwrap_hash(self, w_hash);
+
+    DictBucket bucket = *get_bucketp(self, hash);
+
+    if (bucket == (DictBucket)nil) {
+        ZAPN_EXP(2);
+        POKE_EXP(0, NULL);
+        return pc + 2;
+    }
+
+    uns_int tally = bucket->tally;
+    if (tally == 0) {
+        ZAPN_EXP(2);
+        POKE_EXP(0, NULL);
+        return pc + 2;
+    }
+
+    POKE_EXP(0, bucket);
+    PUSH_EXP(0);
+    set_pc(pc + 1);
+    return nBucket_compare_key(pc + 1, key, bucket->values[0]);
+}
+
+THREADED(bucket_lookup)
+    Optr boolean      = PEEK_EXP(0);
+    uns_int idx       = (uns_int)PEEK_EXP(1);
+    DictBucket bucket = (DictBucket)PEEK_EXP(2);
+    
+    if (boolean == (Optr)true) {
+        ZAPN_EXP(4);
+        Optr result = bucket->values[idx + 1];
+        POKE_EXP(0, result);
+        return pc + 1;
+    }    
+
+    idx += 2;
+
+    uns_int tally = bucket->tally;
+    if (idx >= tally) {
+        ZAPN_EXP(4);
+        POKE_EXP(0, NULL);
+        return pc + 1;
+    }
+
+    // zap boolean
+    ZAP_EXP();
+
+    Optr key = PEEK_EXP(2);
+    POKE_EXP(0, idx);
+    return nBucket_compare_key(pc, key, bucket->values[idx]);
+}
+
+THREADED(dictionary_check_result)
+    Optr result = PEEK_EXP(0);
+
+    if (result == NULL) {
         POKE_EXP(0, nil);
     }
+    
+    return t_return(pc);
 }
 
-static CNT(dictionary_check_absent)
-    Optr result = pop_EXP();
-    if (result == NULL) {
-        Optr block = pop_EXP();
-        Class_direct_dispatch(block, HEADER(block), (Optr)SMB_value, 0); 
-        return;
-    }
-    POKE_EXP(0, result);
+#define NNATIVE(name, size, ...) \
+Array T_##name;\
+Array TG_##name()\
+{\
+    return new_Array_with(size, __VA_ARGS__);\
 }
+
+#define INIT_NATIVE(name) T_##name = TG_##name()
+
+NNATIVE(iDictionary_at_, 4,
+    t_push_hash,
+    t_dictionary_bucket,
+    t_bucket_lookup,
+    t_return)
+
+void Dictionary_lookup_push(Dictionary dict, Optr msg)
+{
+    CLAIM_EXP(2);
+    POKE_EXP(1, dict);
+    POKE_EXP(0, msg);
+    push_code(T_iDictionary_at_);
+}
+
+/* ========================================================================= */
+
+NNATIVE(Dictionary_at_, 4,
+    t_push_hash,
+    t_dictionary_bucket,
+    t_bucket_lookup,
+    t_dictionary_check_result)
 
 NATIVE1(Dictionary_at_)
-    Optr w_index = NATIVE_ARG(0);
-	ZAP_NATIVE_INPUT();
-    PUSH_CNT(fix_dictionary_result);
-    Dictionary_lookup_push((Dictionary)self, w_index);
+    push_code(T_Dictionary_at_);
 }
+
+THREADED(dictionary_check_ifAbsent_)
+    Optr result = pop_EXP();
+    t_return(pc);
+
+    if (result == NULL) {
+        Optr block = PEEK_EXP(0);
+        apply(block, 0);
+    } else {
+        POKE_EXP(0, result);
+    }
+    return -1;
+}
+
+NNATIVE(Dictionary_at_ifAbsent_, 4,
+    t_push_hash,
+    t_dictionary_bucket,
+    t_bucket_lookup,
+    t_dictionary_check_ifAbsent_)
 
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_block = NATIVE_ARG(1);
-	ZAP_NATIVE_INPUT();
-    PUSH_EXP(w_block);
-    PUSH_CNT(dictionary_check_absent);
-    Dictionary_lookup_push((Dictionary)self, w_index);
+    POKE_EXP(2, w_block);
+    POKE_EXP(1, self);
+    POKE_EXP(0, w_index);
+    push_code(T_Dictionary_at_ifAbsent_);
 }
 
 CNT(Dictionary_at_put_)
@@ -298,6 +399,10 @@ NATIVE(Dictionary_grow)
 void post_init_Dictionary()
 {
     change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
+
+    INIT_NATIVE(Dictionary_at_);
+    INIT_NATIVE(Dictionary_at_ifAbsent_);
+    INIT_NATIVE(iDictionary_at_);
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, SMB_at_put_,      NM_Dictionary_at_put_);
