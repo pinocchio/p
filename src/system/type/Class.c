@@ -108,33 +108,33 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 
 static CNT(Class_lookup_cache_invoke)
     Optr method  = PEEK_EXP(0);
-    uns_int argc = (uns_int)PEEK_EXP(3);
-    Class class  = (Class)PEEK_EXP(4);
-    Optr self    = PEEK_EXP(2);
+    uns_int argc = (uns_int)PEEK_EXP(4);
+    Class class  = (Class)PEEK_EXP(5);
+    Optr self    = PEEK_EXP(3);
     if (method == NULL) {
-        Optr msg  = PEEK_EXP(1);
-        ZAPN_EXP(6);
+        Optr msg  = PEEK_EXP(2);
+        ZAPN_EXP(7);
         return does_not_understand(self, class, msg, argc);
     }
-    Send send   = (Send)PEEK_EXP(5);
+    Send send   = (Send)PEEK_EXP(6);
     Array cache = send->cache;
     InlineCache_store(cache, (Optr)class, method);
-    ZAPN_EXP(6);
+    ZAPN_EXP(7);
     
     Method_invoke_inline(method, self, argc);
 }
 
 static CNT(Class_lookup_invoke)
     Optr method  = PEEK_EXP(0);
-    uns_int argc = (uns_int)PEEK_EXP(3);
-    Optr self    = PEEK_EXP(2);
+    uns_int argc = (uns_int)PEEK_EXP(4);
+    Optr self    = PEEK_EXP(3);
     if (method == NULL) {
-        Class class = (Class)PEEK_EXP(4);
-        Optr msg    = PEEK_EXP(1);
-        ZAPN_EXP(5);
+        Class class = (Class)PEEK_EXP(5);
+        Optr msg    = PEEK_EXP(2);
+        ZAPN_EXP(6);
         return does_not_understand(self, class, msg, argc);
     }
-    ZAPN_EXP(5);
+    ZAPN_EXP(6);
     Method_invoke_inline(method, self, argc);
 }
 
@@ -142,12 +142,11 @@ void Class_lookup(Class class, Optr msg)
 {
     // TODO pass along the hash value
     if (class == (Class)nil) {
-        POKE_EXP(0, NULL);
+        PUSH_EXP(NULL);
         ZAP_CNT();
         return;
     }
     assert_class((Optr)class);
-    inspect(class);
     Dictionary mdict = class->methods;
     Dictionary_lookup_push(mdict, msg);
 }
@@ -156,11 +155,10 @@ void CNT_Class_lookup_loop()
 {
     Optr method = PEEK_EXP(0);
     if (method != NULL) {
-        ZAP_EXP();
         ZAP_CNT();
-        POKE_EXP(0, method);
         return;
     }
+    
     ZAP_EXP();
     Class class = (Class)PEEK_EXP(0);
     Optr msg    = PEEK_EXP(1);
@@ -175,9 +173,9 @@ static void Class_direct_dispatch_inline(Optr self, Class class,
     PUSH_EXP(class);
     PUSH_EXP(argc);
     PUSH_EXP(self);
-
     PUSH_EXP(msg);
     PUSH_EXP(class);
+
     PUSH_CNT(Class_lookup_loop);
     Class_lookup(class, msg);
 }

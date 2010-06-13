@@ -277,11 +277,9 @@ THREADED(bucket_lookup)
     DictBucket bucket = (DictBucket)PEEK_EXP(2);
     
     if (boolean == (Optr)true) {
-        exps();
         ZAPN_EXP(4);
         Optr result = bucket->values[idx + 1];
         POKE_EXP(0, result);
-        exps();
         return pc + 1;
     }    
 
@@ -289,7 +287,7 @@ THREADED(bucket_lookup)
 
     uns_int tally = bucket->tally;
     if (idx >= tally) {
-        ZAPN_EXP(3);
+        ZAPN_EXP(4);
         POKE_EXP(0, NULL);
         return pc + 1;
     }
