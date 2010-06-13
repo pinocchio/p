@@ -68,20 +68,14 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
         } else {
             ZAP_EXP();
         }
-        PUSH_CNT_RAW(block->threaded);
-        PUSH_CNT_RAW(0);
-        PUSH_CNT(eval_threaded);
-        return CNT_eval_threaded();
+    } else {
+        set_env((Optr)new_BlockContext(closure));
+        activation_from_native(argc);
+        PUSH_CNT(restore_env);
     }
-    
-    set_env((Optr)new_BlockContext(closure));
-    activation_from_native(argc);
 
-    PUSH_CNT(restore_env);
-    PUSH_CNT_RAW(block->threaded);
-    PUSH_CNT_RAW(0);
-    PUSH_CNT(eval_threaded);
-    CNT_eval_threaded();
+    push_code(block->threaded);
+    return CNT_eval_threaded();
 }
 
 void apply(Optr closure, uns_int argc)

@@ -7,6 +7,11 @@
 
 /* ======================================================================== */
 
+#define THREADED(name) long t_##name(long pc) {
+//    fwprintf(stderr, L"         : "#name"\n");
+
+/* ========================================================================= */
+
 extern void CNT_eval_threaded();
 extern void CNT_restore_env();
 
