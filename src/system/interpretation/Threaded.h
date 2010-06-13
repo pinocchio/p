@@ -7,8 +7,8 @@
 
 /* ======================================================================== */
 
-#define THREADED(name) long t_##name(long pc) {\
-    fwprintf(stderr, L"Executing: "#name"\n");
+#define THREADED(name) long t_##name(long pc) {
+//    fwprintf(stderr, L"         : "#name"\n");
 
 /* ========================================================================= */
 

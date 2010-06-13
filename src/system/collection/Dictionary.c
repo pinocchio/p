@@ -301,7 +301,7 @@ THREADED(bucket_lookup)
 }
 
 THREADED(dictionary_check_result)
-    Optr result = pop_EXP();
+    Optr result = PEEK_EXP(0);
 
     if (result == NULL) {
         POKE_EXP(0, nil);

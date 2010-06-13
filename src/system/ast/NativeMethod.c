@@ -54,7 +54,7 @@ void NativeMethod_invoke(MethodClosure closure,
                                      annotation->arguments[1]);
     }
     if (method->code == (native)-1) {
-        return Method_invoke(closure, (Method)method, self, argc);
+        assert1(NULL, "Alternatives to native methods currently aren't supported!");
     }
     method->code(self, closure->host, argc);
 }
