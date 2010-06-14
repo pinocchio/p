@@ -108,17 +108,6 @@ THREADED(dup)
     return t_peek0(pc);
 }
 
-THREADED(send_value)
-    inc_pc(pc);
-    Optr o = pop_EXP();
-    if (HEADER(o) == BlockClosure_Class) {
-        apply(o, 0);
-    } else {
-        Class_direct_dispatch(o, HEADER(o), (Optr)SMB_value, 0);
-    }
-    return BREAK;
-}
-
 #define PUSHN(count) THREADED(push##count) \
     long i;\
     CLAIM_EXP(count);\
@@ -323,8 +312,42 @@ THREADED(send_ifTrue_ifFalse_)
         t_push_closure(pc + 2);
         PUSH_EXP(send);
     	Class_dispatch(bool, HEADER(bool), 2);
-        return BREAK;
+        return -1;
     }
+}
+
+THREADED(send_hash)
+    SmallInt hash;
+    Optr self = PEEK_EXP(0);
+    Optr tag  = GETTAG(self);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        hash = ((Symbol)self)->hash;
+    } else if (TAG_IS_LAYOUT(tag, Int)) { 
+        hash = (SmallInt)self;
+    } else {
+        Send send = (Send)get_code(pc + 1);
+        set_pc(pc + 2);
+        PUSH_EXP(send);
+        Class_dispatch(self, HEADER(self), 0);
+        return -1;
+    }
+    POKE_EXP(0, hash);
+    return pc + 2;
+}
+
+
+THREADED(send_value)
+    inc_pc(pc);
+    Optr o = pop_EXP();
+    if (HEADER(o) == BlockClosure_Class) {
+        BlockClosure_apply((BlockClosure)o, 0);
+    } else {
+        Send send = (Send)get_code(pc);
+        set_pc(pc + 1);
+        PUSH_EXP(send);
+        Class_dispatch(o, HEADER(o), 0);
+    }
+    return -1;
 }
 
 /* ========================================================================= */
@@ -431,6 +454,8 @@ void post_init_Threaded()
     T_FUNC(send4)
     T_FUNC(send5)
     T_FUNC(sendn)
+    T_FUNC(send_hash);
+    T_FUNC(send_value);
     T_FUNC(send_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
