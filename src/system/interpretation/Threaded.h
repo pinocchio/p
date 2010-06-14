@@ -12,6 +12,15 @@
 
 #define BREAK (threaded*)-1
 
+#define NNATIVE(name, size, ...) \
+Array T_##name;\
+Array TG_##name()\
+{\
+    return new_Array_with(size, __VA_ARGS__);\
+}
+
+#define INIT_NATIVE(name) T_##name = TG_##name()
+
 /* ========================================================================= */
 
 extern void CNT_eval_threaded();

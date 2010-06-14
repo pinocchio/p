@@ -37,7 +37,7 @@ threaded* push_code(Array code)
 {
     PUSH_CNT_RAW(&code->values[0]);
     PUSH_CNT_RAW(&CNT_eval_threaded);
-    return BREAK;
+    return &code->values[0];
 }
 
 /* ========================================================================= */

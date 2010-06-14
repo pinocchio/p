@@ -20,12 +20,9 @@ MethodClosure new_MethodClosure(Method code, Class host)
         return name##_invoke(closure, (name)method, self, argc);\
     }
 
-void MethodClosure_invoke(MethodClosure closure, Optr self,
-                                  uns_int argc)
+void MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
 {
-    // LOG_AST_INFO("Closure Invoke: ", closure->info);
-     
-    Method method       = closure->code;
+    Method method      = closure->code;
     Class method_class = HEADER(method);
     
     INVOKE_IF(NativeMethod)

@@ -19,7 +19,7 @@ extern MethodClosure new_MethodClosure(Method code,
 /* ========================================================================= */
 
 extern void MethodClosure_invoke(MethodClosure closure, Optr self,
-                                         uns_int argc);
+                                 uns_int argc);
 
 /* ========================================================================= */
 
