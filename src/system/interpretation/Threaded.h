@@ -7,7 +7,7 @@
 
 /* ======================================================================== */
 
-#define THREADED(name) threaded* t_##name(threaded* pc) { 
+#define THREADED(name) threaded* t_##name(threaded* pc) {
 //    fwprintf(stderr, L"         : "#name"\n");
 
 #define BREAK (threaded*)-1
