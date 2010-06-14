@@ -15,29 +15,29 @@ void CNT_restore_return()
     CNT_restore_env();
 }
 
+
 /* ========================================================================= */
 
-void set_pc(long pc)
+void set_pc(threaded* pc)
 {
-    POKEN_CNT_RAW(1, (uns_int)pc);
+    POKEN_CNT_RAW(1, pc);
 }
 
-void inc_pc(long pc)
+void inc_pc(threaded* pc)
 {
     set_pc(pc + 1);
 }
 
-Optr get_code(long idx)
+Optr get_code(threaded* idx)
 {
-	return ((Array)PEEKN_CNT(2))->values[idx];
+    return (Optr)*idx;
 }
 
-long push_code(Array code)
+threaded* push_code(Array code)
 {
-    PUSH_CNT_RAW(code);
-    PUSH_CNT_RAW(0);
+    PUSH_CNT_RAW(&code->values[0]);
     PUSH_CNT(eval_threaded);
-    return -1;
+    return BREAK;
 }
 
 /* ========================================================================= */
@@ -81,7 +81,7 @@ THREADED(restart)
         return pc + 1 + num;\
     } else {\
         assert1(NULL, "Non-boolean type receiver for truth");\
-        return -1;\
+        return BREAK;\
     }\
 }
 
@@ -171,11 +171,11 @@ THREADED(push_closure)
 
 /* ========================================================================= */
 THREADED(return)
-    ZAPN_CNT(3);
-    return -1;
+    ZAPN_CNT(2);
+    return BREAK;
 }
 
-long return_value(long pc, Optr value)
+threaded* return_value(threaded* pc, Optr value)
 {
     PUSH_EXP(value);
     return t_return(pc);
@@ -209,7 +209,7 @@ THREADED(return_self)
     Optr self = PEEK_EXP(n);\
 	PUSH_EXP(get_code(pc + 1));\
     Class_dispatch(self, HEADER(self), n);\
-    return -1;\
+    return BREAK;\
 }
 
 SEND(0)
@@ -226,7 +226,7 @@ THREADED(sendn)
     Optr self = PEEK_EXP(n);    
 	PUSH_EXP(send);
     Class_dispatch(self, HEADER(self), n);
-    return -1;
+    return BREAK;
 }
 
 /* ========================================================================= */
@@ -260,7 +260,7 @@ THREADED(send_ifTrue_)
         t_push_closure(pc + 1);
         PUSH_EXP(send);
     	Class_dispatch(bool, HEADER(bool), 1);
-        return -1;
+        return BREAK;
     }
 }
 
@@ -279,7 +279,7 @@ THREADED(send_ifFalse_)
         t_push_closure(pc + 1);
         PUSH_EXP(send);
     	Class_dispatch(bool, HEADER(bool), 1);
-        return -1;
+        return BREAK;
     }
 }
 
@@ -345,7 +345,7 @@ THREADED(send_value)
 	PUSH_EXP(get_code(pc + 1));\
     PUSH_EXP(n);\
     Super_eval_threaded();\
-    return -1;\
+    return BREAK;\
 }
 
 SUPER(0)
@@ -361,7 +361,7 @@ THREADED(supern)
 	PUSH_EXP(super);
 	PUSH_EXP(super->size);
     Super_eval_threaded();
-    return -1;
+    return BREAK;
 }
 
 
@@ -465,11 +465,9 @@ void post_init_Threaded()
 
 void CNT_eval_threaded()
 {
-    long pc    = (long)PEEKN_CNT(1);
-    Array code = (Array)PEEKN_CNT(2);
-    while (pc != -1) {
-        threaded p = (threaded)code->values[pc];
-        pc         = p(pc);
+    threaded* fp = (threaded*)PEEKN_CNT(1);
+    while (fp != BREAK) {
+        fp = (threaded*)(*fp)((void*)fp);
     }
 }
 

@@ -225,20 +225,20 @@ THREADED(push_hash)
     } else {
         set_pc(pc + 1);
         Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
-        return -1;
+        return BREAK;
     }
     PUSH_EXP(hash);
     return pc + 1;
 }
 
-static long nBucket_compare_key(long pc, Optr inkey, Optr dictkey)
+static threaded* nBucket_compare_key(threaded * pc, Optr inkey, Optr dictkey)
 {
     long result = Bucket_quick_compare_key(inkey, dictkey);
 
     if (result == -1) {
         Class_direct_dispatch(inkey, HEADER(inkey),
                               (Optr)SMB__equal, 1, dictkey);
-        return -1;
+        return BREAK;
     }
     PUSH_EXP(get_bool(result));
     return pc;
@@ -355,7 +355,7 @@ THREADED(dictionary_check_ifAbsent_)
     } else {
         POKE_EXP(0, result);
     }
-    return -1;
+    return BREAK;
 }
 
 NNATIVE(Dictionary_at_ifAbsent_, 4,
