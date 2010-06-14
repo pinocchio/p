@@ -327,6 +327,23 @@ THREADED(send_ifTrue_ifFalse_)
     }
 }
 
+THREADED(send_hash)
+    Optr self = PEEK_EXP(0);
+    Class class = HEADER(self);
+    if (class == Symbol_Class) {
+        POKE_EXP(0, ((Symbol)self)->hash);
+        return pc + 2;
+    } else if (class == SmallInt_Class) {
+        POKE_EXP(0, ((SmallInt)self)->value);
+        return pc + 2;
+    } else {
+        Send send = (Send)get_code(pc + 1);
+        PUSH_EXP(send);
+    	Class_dispatch(self, HEADER(self), 0);
+        return -1;
+    } 
+}
+
 /* ========================================================================= */
 #define SUPER(n) THREADED(super##n) \
     set_pc(pc + 2);\
