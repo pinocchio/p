@@ -7,8 +7,9 @@
 
 /* ======================================================================== */
 
-#define THREADED(name) threaded* t_##name(threaded* pc) {
+#define THREADED(name) threaded* t_##name(threaded* pc) { 
 //    fwprintf(stderr, L"         : "#name"\n");
+
 #define BREAK (threaded*)-1
 
 /* ========================================================================= */
@@ -17,9 +18,18 @@ extern void CNT_eval_threaded();
 extern void CNT_restore_env();
 
 typedef void*(*threaded)(void* pc);
+#define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
 extern threaded* push_code(Array code);
 extern void post_init_Threaded();
+/* ======================================================================== */
+
+extern threaded* t_jump_back(threaded* fp);
+extern threaded* t_jump_back2(threaded* fp);
+extern threaded* t_jump_back3(threaded* fp);
+extern threaded* t_jump_back4(threaded* fp);
+extern threaded* t_jump_back5(threaded* fp);
+
 /* ======================================================================== */
 
 extern threaded* t_push_nil(threaded* fp);
@@ -65,7 +75,11 @@ extern threaded* t_send3(threaded* fp);
 extern threaded* t_send4(threaded* fp);
 extern threaded* t_send5(threaded* fp);
 extern threaded* t_sendn(threaded* fp);
+
+extern threaded* t_send_value(threaded* fp);
+extern threaded* t_send_hash(threaded* fp);
 extern threaded* t_send_to_do_(threaded* fp);
+extern threaded* t_continue_to_do_(threaded* fp);
 extern threaded* t_send_ifFalse_(threaded* fp);
 extern threaded* t_send_ifTrue_(threaded* fp);
 extern threaded* t_send_ifTrue_ifFalse_(threaded* fp);
