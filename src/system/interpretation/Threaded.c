@@ -253,6 +253,8 @@ THREADED(send_to_do_)
     Optr from = PEEK_EXP(1);
     Optr to   = PEEK_EXP(0);
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
+        POKE_EXP(1, unwrap_int(from));
+        POKE_EXP(0, unwrap_int(to));
         return pc + 1;
     } else {
         Send send = (Send)get_code(pc + 5);
@@ -264,15 +266,15 @@ THREADED(send_to_do_)
 }
 
 THREADED(continue_to_do_)
-    long index   = (long)PEEK_EXP(2);
-    long max     = (long)PEEK_EXP(1);
+    long index   = (long)PEEK_EXP(1);
+    long max     = (long)PEEK_EXP(0);
     if (index > max) {
         ZAPN_EXP(2);
         return pc + 5;
     }
+    PUSH_EXP(wrap_int(index));
     index++;
     POKE_EXP(2, index);
-    PUSH_EXP(wrap_int(index));
     Block block = (Block)get_code(pc + 1);
     set_pc(pc + 2); 
     return push_code(block->threaded);
