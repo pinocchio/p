@@ -312,7 +312,7 @@ THREADED(send_ifTrue_ifFalse_)
         t_push_closure(pc + 2);
         PUSH_EXP(send);
     	Class_dispatch(bool, HEADER(bool), 2);
-        return -1;
+        return BREAK;
     }
 }
 
@@ -347,7 +347,7 @@ THREADED(send_value)
         PUSH_EXP(send);
         Class_dispatch(o, HEADER(o), 0);
     }
-    return -1;
+    return BREAK;
 }
 
 /* ========================================================================= */
