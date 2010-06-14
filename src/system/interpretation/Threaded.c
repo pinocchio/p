@@ -251,28 +251,35 @@ THREADED(send_to_do_)
     Optr from = PEEK_EXP(1);
     Optr to   = PEEK_EXP(0);
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
-        return pc + 1;
-    } else {
-        Send send = (Send)get_code(pc + 5);
-        t_push_closure(pc + 2);
-        PUSH_EXP(send);
-    	return Class_dispatch(from, HEADER(from), 0);
+        POKE_EXP(1, unwrap_int(from));
+        POKE_EXP(0, unwrap_int(to));
+        return t_push_closure(pc);
     }
+    Send send = (Send)get_code(pc + 5);
+    t_push_closure(pc + 2);
+    PUSH_EXP(send);
+    Class_dispatch(from, HEADER(from), 0);
+    return BREAK;
 }
 
 THREADED(continue_to_do_)
-    long index   = (long)PEEK_EXP(2);
-    long max     = (long)PEEK_EXP(1);
+    long index = (long)PEEK_EXP(2);
+    long max   = (long)PEEK_EXP(1);
     if (index > max) {
         ZAPN_EXP(2);
-        return pc + 5;
+        return pc + 4;
     }
-    index++;
-    POKE_EXP(2, index);
+    // update the index
+    POKE_EXP(2, index+1);
+    BlockClosure closure = (BlockClosure)PEEK_EXP(0);
+    // the self
+    // TODO only create the block closure once
+    PUSH_EXP(closure);
+    // arg to the do: block
     PUSH_EXP(wrap_int(index));
-    Block block = (Block)get_code(pc + 1);
-    set_pc(pc + 2); 
-    return push_code(block->threaded);
+    set_pc(pc + 1);
+    apply((Optr)closure, 1);
+    return BREAK;
 }
 
 THREADED(send_ifTrue_) 
@@ -362,6 +369,20 @@ THREADED(send_value)
         PUSH_EXP(send);
         return Class_dispatch(o, HEADER(o), 0);
     }
+}
+
+THREADED(send_value_)
+    inc_pc(pc);
+    Optr o = pop_EXP();
+    if (HEADER(o) == BlockClosure_Class) {
+        BlockClosure_apply((BlockClosure)o, 1);
+    } else {
+        Send send = (Send)get_code(pc);
+        set_pc(pc + 1);
+        PUSH_EXP(send);
+        Class_dispatch(o, HEADER(o), 1);
+    }
+    return BREAK;
 }
 
 /* ========================================================================= */
@@ -465,8 +486,10 @@ void post_init_Threaded()
     T_FUNC(send4)
     T_FUNC(send5)
     T_FUNC(sendn)
-    T_FUNC(send_hash);
-    T_FUNC(send_value);
+
+    T_FUNC(send_hash)
+    T_FUNC(send_value)
+    T_FUNC(send_value_)
     T_FUNC(send_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)

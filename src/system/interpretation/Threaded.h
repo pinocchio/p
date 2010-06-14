@@ -7,8 +7,12 @@
 
 /* ======================================================================== */
 
-#define THREADED(name) threaded* t_##name(threaded* pc) {
-//    fwprintf(stderr, L"         : "#name"\n");
+#ifdef DEBUG
+    #define THREADED(name) threaded* t_##name(threaded* pc) {\
+        fwprintf(stderr, L"         : "#name"\n");
+#else //DEBUG
+    #define THREADED(name) threaded* t_##name(threaded* pc) {
+#endif // DEBUG
 
 #define BREAK (threaded*)-1
 
@@ -85,6 +89,7 @@ T_CODE(send5)
 T_CODE(sendn)
 
 T_CODE(send_value)
+T_CODE(send_value_)
 T_CODE(send_hash)
 T_CODE(send_to_do_)
 T_CODE(continue_to_do_)
