@@ -32,7 +32,7 @@ T_CODE(jump_back5)
 
 /* ======================================================================== */
 
-T_CODE(jpush_nil)
+T_CODE(push_nil)
 T_CODE(push_0)
 T_CODE(push_1)
 T_CODE(push_2)
@@ -63,7 +63,7 @@ T_CODE(return)
 T_CODE(return_true)
 T_CODE(return_false)
 T_CODE(return_nil)
-T_CODE(return_self
+T_CODE(return_self)
 T_CODE(return_0)
 T_CODE(return_1)
 T_CODE(return_next)
