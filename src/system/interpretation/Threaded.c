@@ -227,8 +227,7 @@ THREADED(return_self)
     set_pc(pc + 2);\
     Optr self = PEEK_EXP(n);\
 	PUSH_EXP(get_code(pc + 1));\
-    Class_dispatch(self, HEADER(self), n);\
-    return BREAK;\
+    return Class_dispatch(self, HEADER(self), n);\
 }
 
 SEND(0)
@@ -244,8 +243,7 @@ THREADED(sendn)
 	uns_int n = send->size;
     Optr self = PEEK_EXP(n);    
 	PUSH_EXP(send);
-    Class_dispatch(self, HEADER(self), n);
-    return BREAK;
+    return Class_dispatch(self, HEADER(self), n);
 }
 
 /* ========================================================================= */
@@ -258,8 +256,7 @@ THREADED(send_to_do_)
         Send send = (Send)get_code(pc + 5);
         t_push_closure(pc + 2);
         PUSH_EXP(send);
-    	Class_dispatch(from, HEADER(from), 0);
-        return BREAK;
+    	return Class_dispatch(from, HEADER(from), 0);
     }
 }
 
@@ -292,8 +289,7 @@ THREADED(send_ifTrue_)
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 1);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 1);
     }
 }
 
@@ -311,8 +307,7 @@ THREADED(send_ifFalse_)
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 1);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 1);
     }
 }
 
@@ -333,8 +328,7 @@ THREADED(send_ifTrue_ifFalse_)
         t_push_closure(pc + 1);
         t_push_closure(pc + 2);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 2);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 2);
     }
 }
 
@@ -350,8 +344,7 @@ THREADED(send_hash)
         Send send = (Send)get_code(pc + 1);
         set_pc(pc + 2);
         PUSH_EXP(send);
-        Class_dispatch(self, HEADER(self), 0);
-        return BREAK;
+        return Class_dispatch(self, HEADER(self), 0);
     }
     POKE_EXP(0, hash);
     return pc + 2;
@@ -362,17 +355,17 @@ THREADED(send_value)
     inc_pc(pc);
     Optr o = pop_EXP();
     if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 0);
+        return BlockClosure_apply((BlockClosure)o, 0);
     } else {
         Send send = (Send)get_code(pc);
         set_pc(pc + 1);
         PUSH_EXP(send);
-        Class_dispatch(o, HEADER(o), 0);
+        return Class_dispatch(o, HEADER(o), 0);
     }
-    return BREAK;
 }
 
 /* ========================================================================= */
+
 #define SUPER(n) THREADED(super##n) \
     set_pc(pc + 2);\
 	PUSH_EXP(get_code(pc + 1));\
@@ -394,8 +387,6 @@ THREADED(supern)
 	PUSH_EXP(super->size);
     return Super_eval_threaded();
 }
-
-
 
 /* ========================================================================= */
 
