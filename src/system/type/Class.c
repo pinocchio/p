@@ -150,8 +150,7 @@ threaded* Class_lookup(Class class, Optr msg, threaded * pc)
     }
     assert_class((Optr)class);
     Dictionary mdict = class->methods;
-    Dictionary_lookup_push(mdict, msg);
-    return BREAK;
+    return Dictionary_lookup_push(mdict, msg);
 }
 
 THREADED(class_lookup)
