@@ -72,13 +72,14 @@ CNT(Class_super)
     POKE_EXP(0, ((Class)class)->super);
 }
 
-static void invoke(Optr method, Optr self, uns_int argc) {
+static threaded* invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         return MethodClosure_invoke((MethodClosure)method, self, argc);
     } else {
         inspect(method);
         assert1(NULL, "Unknown type of method installation");
     }
+    return BREAK;
 }
 
 void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
@@ -181,7 +182,7 @@ void post_init_Class()
     INIT_NATIVE(Class_dispatch);
 }
 
-static void Class_do_dispatch(Optr self, Class class, Optr msg,
+static threaded* Class_do_dispatch(Optr self, Class class, Optr msg,
                               uns_int argc, Array code)
 {
     PUSH_EXP(class);
@@ -190,10 +191,10 @@ static void Class_do_dispatch(Optr self, Class class, Optr msg,
     PUSH_EXP(msg);
     PUSH_EXP(class);
 
-    Class_lookup(class, msg, push_code(code));
+    return Class_lookup(class, msg, push_code(code));
 }
 
-void Class_direct_dispatch(Optr self, Class class, Optr msg,
+threaded* Class_direct_dispatch(Optr self, Class class, Optr msg,
                                 uns_int argc, ...)
 {
 	va_list args;
@@ -209,7 +210,7 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
     return Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
 }
 
-void Class_direct_dispatch_withArguments(Optr self, Class class,
+threaded* Class_direct_dispatch_withArguments(Optr self, Class class,
                                          Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -221,7 +222,7 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
     return Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
 }
 
-void Class_dispatch(Optr self, Class class, uns_int argc)
+threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;

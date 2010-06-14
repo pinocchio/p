@@ -504,9 +504,9 @@ void CNT_eval_threaded()
     }
 }
 
-void Method_invoke(MethodClosure closure,
-                   Method method,
-                   Optr self, uns_int argc)
+threaded* Method_invoke(MethodClosure closure,
+                        Method method,
+                        Optr self, uns_int argc)
 {
     assert1(method->code != (Array)nil, "Uncompiled method found!");
 
@@ -514,15 +514,14 @@ void Method_invoke(MethodClosure closure,
         printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
                method->params->size, argc););
     
-    if (method->size == 0) { 
+    if (method->size == 0) {
         RETURN_FROM_NATIVE(self);
-        return;
+        return BREAK;
     }
     
     set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
 
     PUSH_CNT(restore_env);
-    push_code(method->code);
-    CNT_eval_threaded();
+    return push_code(method->code);
 }

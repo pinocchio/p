@@ -32,9 +32,9 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
 
 /* ========================================================================= */
 
-void ReflectionMethod_invoke(MethodClosure closure,
-                                 ReflectionMethod method, 
-                                 Optr self, uns_int argc)
+threaded* ReflectionMethod_invoke(MethodClosure closure,
+                                  ReflectionMethod method, 
+                                  Optr self, uns_int argc)
 {
     if (method->cache == NULL) {
         Annotation annotation =
@@ -50,4 +50,5 @@ void ReflectionMethod_invoke(MethodClosure closure,
         return Method_invoke(closure, (Method)method, self, argc);
     }
     method->cache(self, closure->host, argc);
+	return BREAK;
 }

@@ -30,7 +30,7 @@ extern Method new_Method_with(Array params,
 
 /* ========================================================================= */
 
-extern void Method_invoke(MethodClosure closure, Method method, Optr self, uns_int argc);
+extern threaded* Method_invoke(MethodClosure closure, Method method, Optr self, uns_int argc);
 
 /* ========================================================================= */
 
