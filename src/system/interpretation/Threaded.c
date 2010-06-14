@@ -278,7 +278,7 @@ THREADED(continue_to_do_)
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
     set_pc(pc + 1);
-    apply(closure, 1);
+    apply((Optr)closure, 1);
     return BREAK;
 }
 
