@@ -310,27 +310,18 @@ THREADED(dictionary_check_result)
     return t_return(pc);
 }
 
-#define NNATIVE(name, size, ...) \
-Array T_##name;\
-Array TG_##name()\
-{\
-    return new_Array_with(size, __VA_ARGS__);\
-}
-
-#define INIT_NATIVE(name) T_##name = TG_##name()
-
 NNATIVE(iDictionary_at_, 4,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
     t_return)
 
-void Dictionary_lookup_push(Dictionary dict, Optr msg)
+threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 {
     CLAIM_EXP(2);
     POKE_EXP(1, dict);
     POKE_EXP(0, msg);
-    push_code(T_iDictionary_at_);
+    return push_code(T_iDictionary_at_);
 }
 
 /* ========================================================================= */

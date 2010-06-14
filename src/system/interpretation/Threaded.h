@@ -16,12 +16,20 @@
 
 #define BREAK (threaded*)-1
 
+#define NNATIVE(name, size, ...) \
+Array T_##name;\
+Array TG_##name()\
+{\
+    return new_Array_with(size, __VA_ARGS__);\
+}
+
+#define INIT_NATIVE(name) T_##name = TG_##name()
+
 /* ========================================================================= */
 
 extern void CNT_eval_threaded();
 extern void CNT_restore_env();
 
-typedef void*(*threaded)(void* pc);
 #define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
 extern threaded* push_code(Array code);

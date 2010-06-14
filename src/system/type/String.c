@@ -92,7 +92,7 @@ NATIVE2(String_at_put_)
     long index = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %li\n", index));
     assert(index < ((String)self)->size,
-        printf("%li is out of Bounds[%"F_I"u] %p\n",
+        printf("%li is out of Bounds[%lu] %p\n",
                     index,
                     ((String)self)->size,
                     self));

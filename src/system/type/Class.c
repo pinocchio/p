@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include <pinocchio.h>
 #include <lib/lib.h>
-#include <system/runtime/InlineCache.h>
 #include <debug.h>
 
 /* ========================================================================= */
@@ -66,23 +65,17 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
-CNT(Class_super)
-    Optr class = PEEK_EXP(0);
-    assert_class(class);
-    POKE_EXP(0, ((Class)class)->super);
-}
-
-
-static void Method_invoke_inline(Optr method, Optr self, uns_int argc) {
+static threaded* invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
-        MethodClosure_invoke((MethodClosure)method, self, argc);
+        return MethodClosure_invoke((MethodClosure)method, self, argc);
     } else {
         inspect(method);
         assert1(NULL, "Unknown type of method installation");
     }
+    return BREAK;
 }
 
-void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
+threaded* does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
         Message message = (Message)pop_EXP();
@@ -101,11 +94,11 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 	}
 
     ZAP_EXP();
-
-    Class_direct_dispatch(self, class, (Optr)SMB_doesNotUnderstand_, 1, message);
+    return Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
-static CNT(Class_lookup_cache_invoke)
+THREADED(class_cache_invoke)
+    t_return(pc);
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
     Class class  = (Class)PEEK_EXP(5);
@@ -120,10 +113,11 @@ static CNT(Class_lookup_cache_invoke)
     InlineCache_store(cache, (Optr)class, method);
     ZAPN_EXP(7);
     
-    Method_invoke_inline(method, self, argc);
+    return invoke(method, self, argc);
 }
 
-static CNT(Class_lookup_invoke)
+THREADED(class_invoke)
+    t_return(pc);
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
     Optr self    = PEEK_EXP(3);
@@ -134,28 +128,25 @@ static CNT(Class_lookup_invoke)
         return does_not_understand(self, class, msg, argc);
     }
     ZAPN_EXP(6);
-    Method_invoke_inline(method, self, argc);
+    return invoke(method, self, argc);
 }
 
-void Class_lookup(Class class, Optr msg)
+threaded* Class_lookup(Class class, Optr msg, threaded * pc)
 {
     // TODO pass along the hash value
     if (class == (Class)nil) {
-        PUSH_EXP(NULL);
-        ZAP_CNT();
-        return;
+        PUSH_EXP(NULL); 
+        return pc + 1;
     }
     assert_class((Optr)class);
     Dictionary mdict = class->methods;
-    Dictionary_lookup_push(mdict, msg);
+    return Dictionary_lookup_push(mdict, msg);
 }
 
-void CNT_Class_lookup_loop()
-{
+THREADED(class_lookup)
     Optr method = PEEK_EXP(0);
     if (method != NULL) {
-        ZAP_CNT();
-        return;
+        return pc + 1;
     }
     
     ZAP_EXP();
@@ -163,23 +154,37 @@ void CNT_Class_lookup_loop()
     Optr msg    = PEEK_EXP(1);
     Class next  = class->super;
     POKE_EXP(0, next);
-    return Class_lookup(next, msg);
+    return Class_lookup(next, msg, pc);
 }
 
-static void Class_direct_dispatch_inline(Optr self, Class class,
-                                         Optr msg, uns_int argc)
+NNATIVE(Class_direct_dispatch, 2,
+    t_class_lookup,
+    t_class_invoke)
+
+NNATIVE(Class_dispatch, 2,
+    t_class_lookup,
+    t_class_cache_invoke)
+
+void post_init_Class()
 {
-    PUSH_EXP(class);
-    PUSH_EXP(argc);
-    PUSH_EXP(self);
-    PUSH_EXP(msg);
-    PUSH_EXP(class);
-
-    PUSH_CNT(Class_lookup_loop);
-    Class_lookup(class, msg);
+    INIT_NATIVE(Class_direct_dispatch);
+    INIT_NATIVE(Class_dispatch);
 }
 
-void Class_direct_dispatch(Optr self, Class class, Optr msg,
+static threaded* Class_do_dispatch(Optr self, Class class, Optr msg,
+                              uns_int argc, Array code)
+{
+    CLAIM_EXP(5);
+    POKE_EXP(4, class);
+    POKE_EXP(3, argc);
+    POKE_EXP(2, self);
+    POKE_EXP(1, msg);
+    POKE_EXP(0, class);
+
+    return Class_lookup(class, msg, push_code(code));
+}
+
+threaded* Class_direct_dispatch(Optr self, Class class, Optr msg,
                                 uns_int argc, ...)
 {
 	va_list args;
@@ -192,11 +197,10 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
         PUSH_EXP(va_arg(args, Optr));
     }
     va_end(args);
-    PUSH_CNT(Class_lookup_invoke);
-    Class_direct_dispatch_inline(self, class, msg, argc);
+    return Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
 }
 
-void Class_direct_dispatch_withArguments(Optr self, Class class,
+threaded* Class_direct_dispatch_withArguments(Optr self, Class class,
                                          Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -205,11 +209,10 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
     for (idx = 0; idx < args->size; idx++) {
         PUSH_EXP(args->values[idx]);
     }
-    PUSH_CNT(Class_lookup_invoke);
-    Class_direct_dispatch_inline(self, class, msg, args->size);
+    return Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
 }
 
-void Class_dispatch(Optr self, Class class, uns_int argc)
+threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;
@@ -235,13 +238,12 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
             ZAP_EXP();
-            return Method_invoke_inline(method, self, argc);
+            return invoke(method, self, argc);
         }
     } else {
         send->cache = new_InlineCache();
     }
     assert_class((Optr)class);
     
-    PUSH_CNT(Class_lookup_cache_invoke);
-    return Class_direct_dispatch_inline(self, class, msg, argc);
+    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }

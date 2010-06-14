@@ -49,10 +49,10 @@ extern Class new_Bootstrapping_Class();
 
 /* ========================================================================= */
 
-extern void Class_dispatch(Optr receiver, Class class, uns_int argc);
-extern void Class_direct_dispatch(Optr receiver, Class class,
+extern threaded* Class_dispatch(Optr receiver, Class class, uns_int argc);
+extern threaded* Class_direct_dispatch(Optr receiver, Class class,
                                        Optr msg, uns_int argc, ...);
-extern void Class_direct_dispatch_withArguments(Optr receiver,
+extern threaded* Class_direct_dispatch_withArguments(Optr receiver,
                                                      Class class,
                                                      Optr msg,
                                                      Array args);
@@ -60,8 +60,6 @@ extern void Class_direct_dispatch_withArguments(Optr receiver,
 extern void Class_set_superclass(Class cls, Class super);
 
 extern void CNT_Class_super();
-extern void CNT_Class_lookup_loop();
-extern void Class_lookup(Class class, Optr msg);
 
 /* ========================================================================= */
 

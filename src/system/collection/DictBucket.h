@@ -18,7 +18,6 @@ extern DictBucket new_DictBucket(uns_int size);
 /* ========================================================================= */
 
 extern DictBucket new_bucket();
-extern void Bucket_lookup(DictBucket bucket, Optr key);
 extern void Bucket_store_(DictBucket * bucketp, Optr key, Optr value);
 extern long Bucket_quick_store(DictBucket * bucketp, Optr key,
                               Optr value);

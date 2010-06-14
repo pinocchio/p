@@ -1,3 +1,4 @@
+post_init_Class();
 post_init_SmallInt();
 post_init_Object();
 post_init_Array();
@@ -23,3 +24,4 @@ post_init_UIntSlot();
 post_init_DictBucket();
 post_init_Nil();
 post_init_Threaded();
+post_init_Super();

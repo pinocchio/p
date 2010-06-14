@@ -104,7 +104,7 @@ NATIVE0(Object_size)
 Optr raw_Array_at(Array array, Optr tag, long index)
 {
     assert(array->size > index,
-        printf("Array at: %li out of bounds %"F_I"u\n" , index, array->size));
+        printf("Array at: %li out of bounds %lu\n" , index, array->size));
     assert(0 <= index, 
         printf("Array at: %li should be positive\n", index));
     return array->values[TAG_SIZE(tag) + index];

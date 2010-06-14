@@ -54,7 +54,7 @@ NATIVE1(Symbol_at_)
     long index     = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %li", index));
     assert(index < ((String)self)->size,
-        printf("%li is out of Bounds[%"F_I"u]\n", index, ((String)self)->size));
+        printf("%li is out of Bounds[%lu]\n", index, ((String)self)->size));
     // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
     RETURN_FROM_NATIVE(new_Character(((Symbol) self)->value[index]));
 }

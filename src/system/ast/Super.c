@@ -29,25 +29,41 @@ Super new_Super(Symbol message, uns_int argc, ...)
 
 /* ========================================================================= */
 
-CNT(Super_send) 
+THREADED(super_send) 
+    t_return(pc);
     Optr class    = pop_EXP();
     uns_int argc  = (uns_int)pop_EXP();
     Optr receiver = PEEK_EXP(argc + 1); // SUPER object on top
     
-    Class_dispatch(receiver, (Class)class, argc);
+    return Class_dispatch(receiver, (Class)class, argc);
 }
 
-CNT(push_env_class)
+THREADED(push_env_class)
     // TODO directly inline it
     Optr env = (Optr)current_env();
     assert0(IS_CONTEXT(env));
     PUSH_EXP(((BlockContext)env)->home_context->closure->host);
+    return pc + 1;
 }
 
-void Super_eval_threaded()
+THREADED(class_super)
+    Optr class = PEEK_EXP(0);
+    assert_class(class);
+    POKE_EXP(0, ((Class)class)->super);
+    return pc + 1;
+}
+
+NNATIVE(Super_eval, 3,
+    t_push_env_class,
+    t_class_super,
+    t_super_send);
+
+void post_init_Super()
 {
-    // execute the method
-    PUSH_CNT(Super_send);
-    PUSH_CNT(Class_super);
-    PUSH_CNT(push_env_class);
+    INIT_NATIVE(Super_eval);
+}
+
+threaded* Super_eval_threaded()
+{
+    return push_code(T_Super_eval);
 }

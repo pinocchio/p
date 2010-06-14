@@ -109,7 +109,7 @@ Optr BlockContext_lookup(BlockContext self,
     /* TODO jump to error handler. */
     assert1(scope_id == self->scope_id, "TODO jump to error handler");
     assert(local_id < self->size,
-		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
+		   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
                  local_id, self->size));
     
     return self->locals[local_id];
@@ -131,7 +131,7 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
     /* TODO jump to error handler. */
     assert1(scope_id == scope_id, "TODO jump to error handler");
     assert(local_id < self->size,
-		   printf("Lookup failed, index \"%"F_I"u\" out of range [0:%"F_I"u]", 
+		   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
                   local_id, self->size));
 
     self->locals[local_id] = value;

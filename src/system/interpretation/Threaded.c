@@ -37,7 +37,7 @@ threaded* push_code(Array code)
 {
     PUSH_CNT_RAW(&code->values[0]);
     PUSH_CNT_RAW(&CNT_eval_threaded);
-    return BREAK;
+    return (threaded*)&code->values[0];
 }
 
 /* ========================================================================= */
@@ -227,8 +227,7 @@ THREADED(return_self)
     set_pc(pc + 2);\
     Optr self = PEEK_EXP(n);\
 	PUSH_EXP(get_code(pc + 1));\
-    Class_dispatch(self, HEADER(self), n);\
-    return BREAK;\
+    return Class_dispatch(self, HEADER(self), n);\
 }
 
 SEND(0)
@@ -244,8 +243,7 @@ THREADED(sendn)
 	uns_int n = send->size;
     Optr self = PEEK_EXP(n);    
 	PUSH_EXP(send);
-    Class_dispatch(self, HEADER(self), n);
-    return BREAK;
+    return Class_dispatch(self, HEADER(self), n);
 }
 
 /* ========================================================================= */
@@ -298,8 +296,7 @@ THREADED(send_ifTrue_)
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 1);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 1);
     }
 }
 
@@ -317,8 +314,7 @@ THREADED(send_ifFalse_)
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 1);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 1);
     }
 }
 
@@ -339,8 +335,7 @@ THREADED(send_ifTrue_ifFalse_)
         t_push_closure(pc + 1);
         t_push_closure(pc + 2);
         PUSH_EXP(send);
-    	Class_dispatch(bool, HEADER(bool), 2);
-        return BREAK;
+    	return Class_dispatch(bool, HEADER(bool), 2);
     }
 }
 
@@ -356,8 +351,7 @@ THREADED(send_hash)
         Send send = (Send)get_code(pc + 1);
         set_pc(pc + 2);
         PUSH_EXP(send);
-        Class_dispatch(self, HEADER(self), 0);
-        return BREAK;
+        return Class_dispatch(self, HEADER(self), 0);
     }
     POKE_EXP(0, hash);
     return pc + 2;
@@ -368,14 +362,13 @@ THREADED(send_value)
     inc_pc(pc);
     Optr o = pop_EXP();
     if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 0);
+        return BlockClosure_apply((BlockClosure)o, 0);
     } else {
         Send send = (Send)get_code(pc);
         set_pc(pc + 1);
         PUSH_EXP(send);
-        Class_dispatch(o, HEADER(o), 0);
+        return Class_dispatch(o, HEADER(o), 0);
     }
-    return BREAK;
 }
 
 THREADED(send_value_)
@@ -393,12 +386,12 @@ THREADED(send_value_)
 }
 
 /* ========================================================================= */
+
 #define SUPER(n) THREADED(super##n) \
     set_pc(pc + 2);\
 	PUSH_EXP(get_code(pc + 1));\
     PUSH_EXP(n);\
-    Super_eval_threaded();\
-    return BREAK;\
+    return Super_eval_threaded();\
 }
 
 SUPER(0)
@@ -413,11 +406,8 @@ THREADED(supern)
 	Super super = (Super)get_code(pc + 1);
 	PUSH_EXP(super);
 	PUSH_EXP(super->size);
-    Super_eval_threaded();
-    return BREAK;
+    return Super_eval_threaded();
 }
-
-
 
 /* ========================================================================= */
 
@@ -526,25 +516,24 @@ void CNT_eval_threaded()
     }
 }
 
-void Method_invoke(MethodClosure closure,
-                   Method method,
-                   Optr self, uns_int argc)
+threaded* Method_invoke(MethodClosure closure,
+                        Method method,
+                        Optr self, uns_int argc)
 {
     assert1(method->code != (Array)nil, "Uncompiled method found!");
 
     assert(argc == method->params->size,
-        printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
+        printf("Argument count mismatch. Expected: %lu given: %lu\n",
                method->params->size, argc););
     
-    if (method->size == 0) { 
+    if (method->size == 0) {
         RETURN_FROM_NATIVE(self);
-        return;
+        return BREAK;
     }
     
     set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
 
     PUSH_CNT(restore_env);
-    push_code(method->code);
-    CNT_eval_threaded();
+    return push_code(method->code);
 }
