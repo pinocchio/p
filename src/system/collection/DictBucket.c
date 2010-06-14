@@ -108,36 +108,6 @@ static void Bucket_compare_key(Optr inkey, Optr dictkey)
     PUSH_EXP(get_bool(result));
 }
 
-void CNT_bucket_lookup()
-{
-    Optr boolean      = PEEK_EXP(0);
-    DictBucket bucket = (DictBucket)PEEK_EXP(1);
-    uns_int idx       = (uns_int)PEEK_EXP(2);
-    
-    if (boolean == (Optr)true) {
-        ZAPN_EXP(4);
-        POKE_EXP(0, bucket->values[idx + 1]);
-        ZAP_CNT();
-        return;
-    }    
-
-    idx += 2;
-
-    uns_int tally = bucket->tally;
-    if (idx >= tally) {
-        ZAPN_EXP(4);
-        POKE_EXP(0, NULL);
-        ZAP_CNT();
-        return;
-    }
-
-    ZAP_EXP();
-
-    Optr key = PEEK_EXP(2);
-    POKE_EXP(1, idx);
-    Bucket_compare_key(key, bucket->values[idx]);
-}
-
 static void bucket_do_store(DictBucket bucket, uns_int idx, 
 							uns_int addition)
 {
@@ -205,22 +175,6 @@ void Bucket_store_(DictBucket * bucketp, Optr key, Optr value)
     POKE_EXP(0, bucketp);
     PUSH_CNT(Bucket_store);
 
-    Bucket_compare_key(key, bucket->values[0]);
-}
-
-void Bucket_lookup(DictBucket bucket, Optr key)
-{
-    uns_int tally = bucket->tally;
-    if (tally == 0) {
-        POKE_EXP(0, NULL);
-        return;
-    }
-
-    CLAIM_EXP(3);
-    POKE_EXP(2, key);
-    POKE_EXP(1, 0);
-    POKE_EXP(0, bucket);
-    PUSH_CNT(bucket_lookup);
     Bucket_compare_key(key, bucket->values[0]);
 }
 
