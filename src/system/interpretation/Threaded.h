@@ -81,6 +81,7 @@ T_CODE(send5)
 T_CODE(sendn)
 
 T_CODE(send_value)
+T_CODE(send_value_)
 T_CODE(send_hash)
 T_CODE(send_to_do_)
 T_CODE(continue_to_do_)

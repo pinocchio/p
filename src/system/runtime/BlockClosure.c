@@ -4,8 +4,7 @@
 
 /* ========================================================================= */
 
-BlockClosure new_BlockClosure(Block code, 
-                                              BlockContext context) {
+BlockClosure new_BlockClosure(Block code, BlockContext context) {
     NEW_OBJECT(BlockClosure);
     assert1(HEADER(context) == BlockContext_Class ||
             HEADER(context) == MethodContext_Class,

@@ -63,7 +63,7 @@ void print_EXP()
 {
     long size = EXP_SIZE();
     uns_int cur = 0;
-    if (size <= 0) {
+    if (size < 0) {
         fwprintf(stderr, L"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Stack underflow!\n");
         return;
     }
