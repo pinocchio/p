@@ -21,9 +21,8 @@ Class behavior;
 
 Class new_Bootstrapping_Class()
 {
-    Class metacls =
-        (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
-    Class cls  = (Class)basic_instantiate_Object(metacls, CLASS_SIZE);
+    Class metacls = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
+    Class cls     = (Class)basic_instantiate_Object(metacls, CLASS_SIZE);
     // Name of metaclass is its instance pointer.
     metacls->name = (Symbol)cls;
     return cls;
@@ -37,12 +36,12 @@ Class new_Class(Class superclass, Optr metatype)
                              // methods, super, layout and instance.
 
     Class metacls    = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
-    metacls->layout       = metatype;
-    Class result       = (Class)basic_instantiate_Object(metacls, meta_size);
-    metacls->name         = (Symbol)result;
+    metacls->layout  = metatype;
+    Class result     = (Class)basic_instantiate_Object(metacls, meta_size);
+    metacls->name    = (Symbol)result;
 
-    result->methods         = new_Dictionary();
-    metacls->methods      = new_Dictionary();
+    result->methods  = new_Dictionary();
+    metacls->methods = new_Dictionary();
     Class_set_superclass(result, superclass);
 
     return result;
@@ -51,7 +50,7 @@ Class new_Class(Class superclass, Optr metatype)
 void Class_set_superclass(Class cls, Class superclass)
 {
     Class metaclass = HEADER(cls);
-    cls->super           = superclass;
+    cls->super      = superclass;
     if (superclass != (Class)nil) {
         metaclass->super = HEADER(superclass);
     } else {
@@ -180,40 +179,6 @@ static void Class_direct_dispatch_inline(Optr self, Class class,
     Class_lookup(class, msg);
 }
 
-CNT(restore_iss)
-    Optr return_value = pop_EXP();
-    tset(_ISS_, PEEK_EXP(0));
-    POKE_EXP(0, return_value);
-}
-
-void Class_tower_dispatch(Optr self, Optr class,
-                               Object iss, Message message)
-{
-    tset(_ISS_, nil);
-    PUSH_EXP(iss);
-    PUSH_CNT(restore_iss);
-    PUSH_CNT(Class_lookup_invoke);
-    Object tower = (Object)nil;
-    while (iss != (Object)nil) {
-        Object newtower = (Object)instantiate((Class)Collection_Link_Class);
-        newtower->ivals[0] = iss->ivals[0];
-        newtower->ivals[1] = (Optr)tower;
-        tower = newtower;
-        iss = (Object)iss->ivals[1];
-    }
-    PUSH_EXP(tower->ivals[0]); // self, bottom interpreter
-    PUSH_EXP(message);
-    PUSH_EXP(self); // receiver
-    PUSH_EXP(class);
-    PUSH_EXP(tower->ivals[1]); // tower of interpreters
-    self = tower->ivals[0];
-    Class_direct_dispatch_inline(
-        self,
-        HEADER(self),
-        (Optr)SMB_send_to_class_inInterpreterChain_,
-        4);
-}
-
 void Class_direct_dispatch(Optr self, Class class, Optr msg,
                                 uns_int argc, ...)
 {
@@ -222,23 +187,13 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
     long idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */
     /* TODO optimize by claim + poke instead of push */
-    Object iss = (Object)tget(_ISS_);
-    if ((Optr)iss == nil) {
-        PUSH_EXP(self);
-        for (idx = 0; idx < argc; idx++) {
-            PUSH_EXP(va_arg(args, Optr));
-        }
-        va_end(args);
-        PUSH_CNT(Class_lookup_invoke);
-        Class_direct_dispatch_inline(self, class, msg, argc);
-    } else {
-        Message message = new_Message(msg, argc);
-        for (idx = 0; idx < argc; idx++) {
-            message->arguments[idx] = va_arg(args, Optr);
-        }
-        va_end(args);
-        Class_tower_dispatch(self, (Optr)class, iss, message);
+    PUSH_EXP(self);
+    for (idx = 0; idx < argc; idx++) {
+        PUSH_EXP(va_arg(args, Optr));
     }
+    va_end(args);
+    PUSH_CNT(Class_lookup_invoke);
+    Class_direct_dispatch_inline(self, class, msg, argc);
 }
 
 void Class_direct_dispatch_withArguments(Optr self, Class class,
@@ -246,22 +201,12 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
     long idx;
-    Object iss = (Object)tget(_ISS_);
-    if ((Optr)iss == nil) {
-        PUSH_EXP(self);
-        for (idx = 0; idx < args->size; idx++) {
-            PUSH_EXP(args->values[idx]);
-        }
-        PUSH_CNT(Class_lookup_invoke);
-        Class_direct_dispatch_inline(self, class, msg, args->size);
-    } else {
-        Message message = new_Message(msg, args->size);
-        for (idx = 0; idx < args->size; idx++) {
-            message->arguments[idx] = args->values[idx];
-        }
-        PUSH_EXP(nil);
-        Class_tower_dispatch(self, (Optr)class, iss, message);
+    PUSH_EXP(self);
+    for (idx = 0; idx < args->size; idx++) {
+        PUSH_EXP(args->values[idx]);
     }
+    PUSH_CNT(Class_lookup_invoke);
+    Class_direct_dispatch_inline(self, class, msg, args->size);
 }
 
 void Class_dispatch(Optr self, Class class, uns_int argc)
@@ -275,10 +220,10 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     Symbol clsname;
     if (HEADER(class) != metaclass) {
         clsname = String_concat_(((Class)class)->name,
-                                      new_String(L">>"));
+                                 new_String(L">>"));
     } else {
         clsname = String_concat_(((Class)self)->name,
-                                      new_String(L" class>>"));
+                                 new_String(L" class>>"));
     }
     Symbol msgname = (Symbol)msg;
     Symbol method  = String_concat_(clsname, msgname);

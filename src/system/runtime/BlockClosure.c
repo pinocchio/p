@@ -86,42 +86,7 @@ void apply(Optr closure, uns_int argc)
     BlockClosure_apply((BlockClosure)closure, argc);
 }
 
-CNT(check_while_true)
-    Optr boolean = PEEK_EXP(0);
-
-    if (boolean == (Optr)true) {
-        Optr closure = PEEK_EXP(1);
-        POKE_EXP(0, closure);
-        BlockClosure_apply((BlockClosure)closure, 0);
-        return;
-    }
-
-    if (boolean == (Optr)false) {
-        ZAP_CNT();
-        ZAPN_EXP(2);
-        POKE_EXP(0, nil);
-        return;
-    }
-    
-    assert1(NULL, "Non-boolean type receiver for truth");
-}
-
-void CNT_while_true()
-{
-    Optr self = PEEK_EXP(2);
-    PUSH_CNT(check_while_true);
-    POKE_EXP(0, self);
-    BlockClosure_apply((BlockClosure)self, 0);
-}
-
 /* ========================================================================= */
-
-NATIVE1(BlockClosure_whileTrue_)
-    PUSH_CNT(while_true);
-    PUSH_CNT(check_while_true);
-    PUSH_EXP(self);
-    BlockClosure_apply((BlockClosure)self, 0);
-}
 
 NATIVE(BlockClosure_apply_)
     BlockClosure closure = (BlockClosure)self;
@@ -156,5 +121,4 @@ void post_init_BlockClosure()
                           NM_BlockClosure_valueWithArguments_);
     natives = add_plugin(L"Runtime.BlockClosure");
     store_native(natives, SMB_numArgs, NM_BlockClosure_numArgs);
-    store_native(natives, new_Symbol_cached(L"whileTrue:"), NM_BlockClosure_whileTrue_);
 }
