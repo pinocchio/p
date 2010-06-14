@@ -215,8 +215,8 @@ void Dictionary_direct_store(Dictionary self, long hash,
 /* ========================================================================= */
 
 THREADED(push_hash)
-    Optr key = PEEK_EXP(0);
     SmallInt hash;
+    Optr key = PEEK_EXP(0);
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
         hash = Symbol_hash((Symbol)key);
