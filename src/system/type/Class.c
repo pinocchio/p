@@ -65,12 +65,6 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
-CNT(Class_super)
-    Optr class = PEEK_EXP(0);
-    assert_class(class);
-    POKE_EXP(0, ((Class)class)->super);
-}
-
 static threaded* invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         return MethodClosure_invoke((MethodClosure)method, self, argc);

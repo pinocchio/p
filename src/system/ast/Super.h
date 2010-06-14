@@ -15,6 +15,8 @@ struct Super_t {
 };
 
 extern Super new_Super(Symbol message, uns_int argc, ...);
+extern threaded* Super_eval_threaded();
+extern void post_init_Super();
 
 /* ========================================================================= */
 
