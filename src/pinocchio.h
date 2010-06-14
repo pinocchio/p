@@ -23,12 +23,10 @@
 #define M64
 #ifdef M32
 typedef unsigned int uns_int;
-#define F_I ""
 #endif 
 #ifdef M64
 */
 typedef unsigned long uns_int;
-#define F_I "l"
 /*
 #endif
 */
@@ -74,7 +72,7 @@ Class class##_Class;
 #define ASSERT_ARG_SIZE(raw_size) \
 	uns_int size_value = (raw_size); \
     assert((argc <= size_value && argc >= 0), \
-		printf("Invalid argument size! Expected %"F_I"u but was %"F_I"u\n", size_value, argc));
+		printf("Invalid argument size! Expected %lu but was %lu\n", size_value, argc));
 
 // TODO make sure we do a proper class lookup here
 #define ASSERT_TYPE(expression, class) \

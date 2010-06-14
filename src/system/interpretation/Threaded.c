@@ -500,7 +500,7 @@ threaded* Method_invoke(MethodClosure closure,
     assert1(method->code != (Array)nil, "Uncompiled method found!");
 
     assert(argc == method->params->size,
-        printf("Argument count mismatch. Expected: %"F_I"u given: %"F_I"u\n",
+        printf("Argument count mismatch. Expected: %lu given: %lu\n",
                method->params->size, argc););
     
     if (method->size == 0) {
