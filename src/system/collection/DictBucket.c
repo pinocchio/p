@@ -33,7 +33,7 @@ DictBucket new_bucket()
     return new_DictBucket(DICTIONARY_BUCKET_SIZE * 2);
 }
 
-static void Bucket_grow(DictBucket * bucketp)
+void Bucket_grow(DictBucket * bucketp)
 {
     DictBucket old_bucket = *bucketp;
     DictBucket new_bucket = new_DictBucket_raw(old_bucket->size << 1);
@@ -178,39 +178,6 @@ void Bucket_store_(DictBucket * bucketp, Optr key, Optr value)
     Bucket_compare_key(key, bucket->values[0]);
 }
 
-static void CNT_bucket_rehash_end()
-{
-    uns_int idx                  = (uns_int)PEEK_EXP(0);
-    DictBucket bucket = (DictBucket)PEEK_EXP(1);
-    Optr key                   = bucket->values[idx];
-    idx += 2;
-
-    uns_int tally = bucket->tally;
-    if (idx >= tally) {
-        ZAP_CNT();
-        ZAPN_EXP(2);
-        return;
-    }
-    
-    key = bucket->values[idx];
-    POKE_CNT(bucket_rehash);
-    POKE_EXP(0, idx);
-    push_hash(key);
-}
-
-void CNT_bucket_rehash()
-{
-    Optr w_hash        = pop_EXP();
-    Dictionary dict = (Dictionary)PEEK_EXP(2);
-    long hash             = unwrap_hash(dict, w_hash);
-
-    uns_int idx          = (uns_int)PEEK_EXP(0);
-    DictBucket bucket    = (DictBucket)PEEK_EXP(1);
-    Optr key           = bucket->values[idx];
-
-    POKE_CNT(bucket_rehash_end);
-    Dictionary_direct_store(dict, hash, key, bucket->values[idx + 1]);
-}
 
 /* ========================================================================= */
 

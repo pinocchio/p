@@ -46,7 +46,8 @@ void push_hash(Optr key)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
-        return Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
+        Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
+        return;
     }
     PUSH_EXP(hash);
 }
@@ -135,45 +136,124 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
     return NULL;
 }
 
-static CNT(dict_grow_end)
-    ZAPN_EXP(3);
+static void remove_from_bucket(uns_int idx, DictBucket bucket)
+{
+    uns_int tally = bucket->tally;
+    bucket->values[idx]     = bucket->values[tally-2];
+    bucket->values[idx+1]   = bucket->values[tally-1];
+    bucket->values[tally-2] = nil;
+    bucket->values[tally-1] = nil;
+    bucket->tally = tally-2;
 }
 
-static void CNT_dict_grow()
+static void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
 {
-    uns_int idx    = (uns_int)PEEK_EXP(1);
-    Array old = (Array)PEEK_EXP(2);
-    DictBucket bucket  = (DictBucket)old->values[idx];
-    if (idx == 0) {
-        POKE_CNT(dict_grow_end);
-    } else {
-        POKE_EXP(1, idx - 1);
+    if ((Optr)*bucketp == nil) {
+        *bucketp = new_bucket();
+    } else if ((*bucketp)->tally == (*bucketp)->size) {
+        Bucket_grow(bucketp);
     }
-    if (bucket == (DictBucket)nil || bucket->size == 0) {
-        return;
-    }
-    Optr key = bucket->values[0];
-    if (key == (Optr)nil) { return; }
 
-    PUSH_CNT(bucket_rehash);
-    CLAIM_EXP(2);
+    DictBucket b       = *bucketp;
+    uns_int tally      = b->tally;
+    b->values[tally]   = key;
+    b->values[tally+1] = value;
+    b->tally = tally+2;
+}
+
+threaded* tpush_hash(Optr key)
+{
+    SmallInt hash;
+    Optr tag = GETTAG(key);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        hash = Symbol_hash((Symbol)key);
+    } else if (TAG_IS_LAYOUT(tag, Int)) { 
+        hash = (SmallInt)key;
+    } else {
+        return Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
+    }
+    PUSH_EXP(hash);
+    return NULL;
+}
+
+THREADED(bucket_rehash)
+    Dictionary dict   = (Dictionary)PEEK_EXP(3);
+    uns_int idx       = (uns_int)PEEK_EXP(1);
+    DictBucket bucket = (DictBucket)PEEK_EXP(2);
+    Optr key          = bucket->values[idx];
+    threaded* next_pc = 0;
+
+    while(!next_pc) {
+        Optr w_hash = pop_EXP();
+        long hash   = unwrap_hash(dict, w_hash);
+        DictBucket * bucketp = get_bucketp(dict, hash);
+        if (*bucketp != bucket) {
+            Optr value = bucket->values[idx + 1];
+            remove_from_bucket(idx, bucket);
+            add_to_bucket(bucketp, key, value);
+        }
+        idx += 2;
+        if (idx >= bucket->tally) {
+            return pc - 1;
+        }
+        POKE_EXP(0, idx);
+        next_pc = tpush_hash(bucket->values[idx]);
+    }
+
+    return next_pc;
+}
+
+static THREADED(dict_grow)
+    uns_int idx     = (uns_int)PEEK_EXP(3);
+    Array old       = (Array)PEEK_EXP(4);
+    Dictionary dict = (Dictionary)PEEK_EXP(5);
+
+    if (idx == old->size) {
+        ZAPN_EXP(6);
+        return t_return(pc);
+    }
+
+    DictBucket bucket = (DictBucket)old->values[idx];
+    POKE_EXP(3, idx + 1);
+
+    if ((Optr)bucket == nil || bucket->tally == 0) {
+        return pc;
+    }
+
+   dict->data->values[idx] = bucket;
+
     POKE_EXP(1, bucket);
     POKE_EXP(0, 0);
 
-    push_hash(key);
+    inc_pc(pc);
+
+    threaded* next_pc = tpush_hash(bucket->values[0]);
+    if (next_pc) {
+        return next_pc;
+    }
+    return t_bucket_rehash(pc + 1);
 }
+
+NNATIVE(Dictionary_grow, 2,
+    t_dict_grow,
+    t_bucket_rehash)
 
 static void Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
-    self->data = new_Array_withAll(old->size << 1, (Optr)nil);
+    if (old->size >= 32) {
+        self->data = new_Array_withAll(old->size << 1, (Optr)nil);
+    } else {
+        self->data = new_Array_withAll(old->size << 32, (Optr)nil);
+    }
     self->size = 0;
     
-    PUSH_CNT(dict_grow);
-    CLAIM_EXP(3);
-    POKE_EXP(2, old);
-    POKE_EXP(1, old->size - 1);
-    POKE_EXP(0, self);
+    CLAIM_EXP(6);
+    POKE_EXP(5, self);
+    POKE_EXP(4, old);
+    POKE_EXP(3, 0);
+    POKE_EXP(2, self);
+    push_code(T_Dictionary_grow);
 }
 
 static void Dictionary_check_grow(Dictionary self)
@@ -382,8 +462,6 @@ NATIVE2(Dictionary_at_put_)
 }
 
 NATIVE(Dictionary_grow)
-    assert1(NULL, "Untested for now!\n");
-    ZAP_NATIVE_INPUT();
     Dictionary_grow((Dictionary)self);
 }
 
@@ -394,6 +472,7 @@ void post_init_Dictionary()
     INIT_NATIVE(Dictionary_at_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(iDictionary_at_);
+    INIT_NATIVE(Dictionary_grow);
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, SMB_at_put_,      NM_Dictionary_at_put_);
