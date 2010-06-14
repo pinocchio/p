@@ -42,6 +42,25 @@ threaded* push_code(Array code)
 
 /* ========================================================================= */
 
+THREADED(jump_back)
+    return pc - 1;
+}
+
+#define JUMP_BACKN(n) THREADED(jump_back##n) \
+    return pc - n;\
+}
+
+JUMP_BACKN(2)
+JUMP_BACKN(3)
+JUMP_BACKN(4)
+JUMP_BACKN(5)
+
+THREADED(jump_backn)
+    return pc - (long)get_code(pc + 1);
+}
+
+/* ========================================================================= */
+
 #define PUSH(name, value) THREADED(push_##name) \
     PUSH_EXP(value);\
     return pc + 1;\
@@ -234,15 +253,29 @@ THREADED(send_to_do_)
     Optr from = PEEK_EXP(1);
     Optr to   = PEEK_EXP(0);
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
-        ZAPN_EXP(2);
         return pc + 1;
     } else {
-        Send send = (Send)get_code(pc + 1);
-        PUSH_EXP(to);
-        t_push_closure(pc + 1);
-    	Class_dispatch(bool, HEADER(bool), 1);
-        return -1;
+        Send send = (Send)get_code(pc + 5);
+        t_push_closure(pc + 2);
+        PUSH_EXP(send);
+    	Class_dispatch(from, HEADER(from), 0);
+        return BREAK;
     }
+}
+
+THREADED(continue_to_do_)
+    long index   = (long)PEEK_EXP(2);
+    long max     = (long)PEEK_EXP(1);
+    if (index > max) {
+        ZAPN_EXP(2);
+        return pc + 5;
+    }
+    index++;
+    POKE_EXP(2, index);
+    PUSH_EXP(wrap_int(index));
+    Block block = (Block)get_code(pc + 1);
+    set_pc(pc + 2); 
+    return push_code(block->threaded);
 }
 
 THREADED(send_ifTrue_) 
@@ -318,7 +351,7 @@ THREADED(send_hash)
         set_pc(pc + 2);
         PUSH_EXP(send);
         Class_dispatch(self, HEADER(self), 0);
-        return -1;
+        return BREAK;
     }
     POKE_EXP(0, hash);
     return pc + 2;
