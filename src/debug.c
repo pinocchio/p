@@ -72,7 +72,7 @@ void print_EXP()
         if (c > (Optr)10000) {
             print_Class(c);
         } else {
-            fwprintf(stderr, L"%"F_I"i\n", (uns_int)c);
+            fwprintf(stderr, L"%li\n", (uns_int)c);
         }
     }
 }
@@ -212,7 +212,7 @@ void shallow_inspect(Optr o)
         return;
     }
     if (o < (Optr)100000) {
-        fwprintf(stderr, L"Object probably uns_int: %"F_I"u\n", (uns_int)o);
+        fwprintf(stderr, L"Object probably uns_int: %lu\n", (uns_int)o);
         return;
     } 
     if (pclass(o) == NULL) {
@@ -235,10 +235,10 @@ void shallow_inspect(Optr o)
 
     if (pclass((Optr)cls) == metaclass) {
         fwprintf(stderr, L"%ls", ((Class)o)->name->value);
-        fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
+        fwprintf(stderr, L" (%lu)", (uns_int)o);
     } else {
         fwprintf(stderr, L"Instance of %ls", cls->name->value);
-        fwprintf(stderr, L" (%"F_I"u)", (uns_int)o);
+        fwprintf(stderr, L" (%lu)", (uns_int)o);
     }
 
     Optr tag = GETTAG(o);
@@ -266,7 +266,7 @@ void inspect_dict(Optr o)
         for (j = 0; j < bucket->size; j+=2) {
             Symbol key = (Symbol)bucket->values[j];
             if (key == (Symbol)nil) { break; }
-            fwprintf(stderr, L"%"F_I"u %25ls -> ", idx++, key->value);
+            fwprintf(stderr, L"%lu %25ls -> ", idx++, key->value);
             shallow_inspect(bucket->values[j+1]);
         }
     }
