@@ -235,24 +235,13 @@ THREADED(send_to_do_)
     Optr to   = PEEK_EXP(0);
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
         ZAPN_EXP(2);
-        set_pc(pc + 3);
-        Block block = (Block)get_code(pc + 2);
-        int start   = unwrap_int(from);
-        int stop    = unwrap_int(to);
-        for (;start<=stop; start++) {
-            PUSH_CNT_RAW(block->threaded);
-            PUSH_CNT_RAW(2); // pc
-            PUSH_CNT(eval_threaded);
-            PUSH_EXP(wrap_int(start));
-        }
-        return BREAK;
+        return pc + 1;
     } else {
         Send send = (Send)get_code(pc + 1);
-        POKE_EXP(1, send);
-        POKE_EXP(0, from);
         PUSH_EXP(to);
         t_push_closure(pc + 1);
-        return t_send2(pc + 2);
+    	Class_dispatch(bool, HEADER(bool), 1);
+        return -1;
     }
 }
 
