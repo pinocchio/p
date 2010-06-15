@@ -57,8 +57,6 @@ extern void _push_CNT(cont e);
 #define PEEK_CNT()              PEEKN_CNT(0)
 #define ZAPN_CNT(n)             tset(_CNT_, ((cont*)tget(_CNT_))+(n))
 #define ZAP_CNT()               ZAPN_CNT(1)
-#define POKE_CNT_RAW(value)     (*(cont*)tget(_CNT_) = ((cont)(value)))
-#define POKE_CNT(value)         POKE_CNT_RAW((CNT_##value))
 #define POKEN_CNT_RAW(depth, value) (*((cont*)tget(_CNT_) + (depth)) = ((cont)(value)))
 #define POKEN_CNT(depth, value) POKEN_CNT_RAW((depth), (CNT_##value))
 #define EMPTY_CNT()             ((Optr*)tget(_CNT_) == &(tget(Double_Stack)[STACK_SIZE]))

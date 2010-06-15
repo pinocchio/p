@@ -45,11 +45,7 @@ CNT(abort_eval)
 }
 
 CNT(exit_eval)
-    #ifndef NOJMP
     longjmp(tget_buf(Eval_Exit), 1);
-    #else
-    ZAP_CNT();
-    #endif
 }
 
 CNT(exit_error)
@@ -116,8 +112,6 @@ void start_eval()
 
 Optr finish_eval()
 {
-    #ifndef NOJMP
-
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(tget_buf(Eval_Continue));
         for (;;) {
@@ -125,16 +119,6 @@ Optr finish_eval()
         }
     }
 
-    ZAP_CNT();
-
-    #else // NOJMP
-
-    while (!EMPTY_CNT()) {
-        PEEK_CNT()();
-    }
-
-    #endif // NOJMP
-    
     Optr result = pop_EXP();
     IN_EVAL = 0;
     return result;
