@@ -65,21 +65,15 @@ SmallInt_BINARY_OPERATION(or_,         |);
 NATIVE1(SmallInt##_##name)\
     Optr w_arg = NATIVE_ARG(0);\
     if (HEADER(w_arg) == SmallInt_Class) {\
-        SmallInt number      = ((SmallInt) self);\
+        SmallInt number      = ((SmallInt)self);\
         SmallInt otherNumber = (SmallInt)w_arg; \
-        if (number->value op otherNumber->value) {\
-            RETURN_FROM_NATIVE(true);\
-        } else {\
-            RETURN_FROM_NATIVE(false);\
-        }\
+        RETURN_FROM_NATIVE(get_bool(number->value op otherNumber->value));\
     } else {\
         assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \
     }\
 }
-//TODO return false on == and != if wrong type given
-SmallInt_COMPARE_OPERATION(equals_, ==)
-SmallInt_COMPARE_OPERATION(lt_, <)
-SmallInt_COMPARE_OPERATION(gt_, >)
+SmallInt_COMPARE_OPERATION(lt_,       <)
+SmallInt_COMPARE_OPERATION(gt_,       >)
 SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
 String SmallInt_asString(long self, uns_int base)
@@ -99,6 +93,19 @@ NATIVE0(SmallInt_asCharacter)
     RETURN_FROM_NATIVE(new_Character_fromInt(unwrap_int(self)));
 }
 
+Optr SmallInt_pequal_(SmallInt self, Optr other) 
+{
+    if (HEADER(other) != SmallInt_Class) {
+        return (Boolean)false;
+    }
+    return (Boolean)get_bool(self->value == ((SmallInt)other)->value);
+}
+
+NATIVE1(SmallInt_pequal_)
+    Optr arg =  NATIVE_ARG(0);
+    RETURN_FROM_NATIVE(SmallInt_pequal_((SmallInt)self, arg));
+}
+
 
 /* ========================================================================= */
 
@@ -108,7 +115,8 @@ void post_init_SmallInt()
     init_numbercache();
     Dictionary natives = add_plugin(L"Type.SmallInt");
     
-    store_native(natives, SMB__equal,      NM_SmallInt_equals_);
+    store_native(natives, SMB__pequal,     NM_SmallInt_pequal_);
+    store_native(natives, SMB__equal,      NM_SmallInt_pequal_);
     store_native(natives, SMB__plus,       NM_SmallInt_plus_);
     store_native(natives, SMB__minus,      NM_SmallInt_minus_);   
     store_native(natives, SMB__times,      NM_SmallInt_times_); 
@@ -123,10 +131,6 @@ void post_init_SmallInt()
     store_native(natives, SMB__notEqual,   NM_SmallInt_notEqual_);
     store_native(natives, SMB_asString,    NM_SmallInt_asString);
     store_native(natives, SMB_asCharacter, NM_SmallInt_asCharacter);
-    
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__plus));
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__minus));
-    //assert0(Dictionary_lookup(SmallInt_Class->methods, (Optr)SMB__equal));
 }
 
 /* ========================================================================= */
