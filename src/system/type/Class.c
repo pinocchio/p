@@ -4,7 +4,6 @@
 #include <stdarg.h>
 #include <pinocchio.h>
 #include <lib/lib.h>
-#include <system/runtime/InlineCache.h>
 #include <debug.h>
 
 /* ========================================================================= */
@@ -181,11 +180,12 @@ void post_init_Class()
 static threaded* Class_do_dispatch(Optr self, Class class, Optr msg,
                               uns_int argc, Array code)
 {
-    PUSH_EXP(class);
-    PUSH_EXP(argc);
-    PUSH_EXP(self);
-    PUSH_EXP(msg);
-    PUSH_EXP(class);
+    CLAIM_EXP(5);
+    POKE_EXP(4, class);
+    POKE_EXP(3, argc);
+    POKE_EXP(2, self);
+    POKE_EXP(1, msg);
+    POKE_EXP(0, class);
 
     return Class_lookup(class, msg, push_code(code));
 }
