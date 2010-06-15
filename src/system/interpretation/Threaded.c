@@ -379,8 +379,7 @@ THREADED(send_value)
     set_pc(pc + 2);\
 	PUSH_EXP(get_code(pc + 1));\
     PUSH_EXP(n);\
-    Super_eval_threaded();\
-    return BREAK;\
+    return Super_eval_threaded();\
 }
 
 SUPER(0)
@@ -395,8 +394,7 @@ THREADED(supern)
 	Super super = (Super)get_code(pc + 1);
 	PUSH_EXP(super);
 	PUSH_EXP(super->size);
-    Super_eval_threaded();
-    return BREAK;
+    return Super_eval_threaded();
 }
 
 
