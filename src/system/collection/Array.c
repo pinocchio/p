@@ -71,9 +71,9 @@ void raw_Array_instAt_put(Array o, Optr tag,
 }
 
 NATIVE1(Array_instVarAt_)
-    Optr w_index  = NATIVE_ARG(0);
-    long index       = unwrap_int(w_index) - 1;
-    Optr tag      = GETTAG(self);
+    Optr w_index = NATIVE_ARG(0);
+    long index   = unwrap_int(w_index) - 1;
+    Optr tag     = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     RETURN_FROM_NATIVE(((Array)self)->values[index]);
@@ -82,8 +82,8 @@ NATIVE1(Array_instVarAt_)
 NATIVE2(Array_instVarAt_put_)
     Optr w_index = NATIVE_ARG(0);
     Optr w_arg   = NATIVE_ARG(1);
-    long index      = unwrap_int(w_index) - 1;
-    Optr tag   = GETTAG(self);
+    long index   = unwrap_int(w_index) - 1;
+    Optr tag     = GETTAG(self);
     ASSERT_TAG_LAYOUT(tag, Array);
     ASSERT_TAG_SIZE(tag, index);
     ((Array)self)->values[index] = w_arg;

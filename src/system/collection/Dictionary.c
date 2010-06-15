@@ -491,7 +491,7 @@ NATIVE2(Dictionary_at_put_)
     push_code(T_Dictionary_at_put_);
 }
 
-NATIVE(Dictionary_grow)
+NATIVE0(Dictionary_grow)
     Dictionary_grow((Dictionary)self);
 }
 

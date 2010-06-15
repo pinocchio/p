@@ -56,14 +56,13 @@ NATIVE1(Float##_##name)\
     }\
 }
 
-Float_COMPARE_OPERATION(equals_, ==)
 Float_COMPARE_OPERATION(lt_, <)
 Float_COMPARE_OPERATION(gt_, >)
 Float_COMPARE_OPERATION(notEqual_, !=)
 
 NATIVE0(Float_hash)
     float f = unwrap_float(self);
-    RETURN_FROM_NATIVE(new_SmallInt((uns_int)f)); 
+    RETURN_FROM_NATIVE(wrap_int((uns_int)f)); 
 }
 
 String Float_asString(float self, uns_int base)
@@ -80,6 +79,19 @@ NATIVE0(Float_asString)
     RETURN_FROM_NATIVE(Float_asString(unwrap_int(self), 10));
 }
 
+Boolean Float_pequal_(Float self, Optr other) 
+{
+    if (HEADER(other) != Float_Class) {
+        return (Boolean)false;
+    }
+    return (Boolean)get_bool(self->value == ((Float)other)->value);
+}
+
+NATIVE1(Float_pequal_)
+    Optr arg =  NATIVE_ARG(0);
+    RETURN_FROM_NATIVE(Float_pequal_((Float)self, arg));
+}
+
 
 /* ========================================================================= */
 
@@ -87,7 +99,8 @@ void post_init_Float()
 {
     Dictionary natives = add_plugin(L"Type.Float");
 
-    store_native(natives, SMB__equal,      NM_Float_equals_);
+    store_native(natives, SMB__equal,      NM_Float_pequal_);
+    store_native(natives, SMB__pequal,     NM_Float_pequal_);
     store_native(natives, SMB__plus,       NM_Float_plus_);
     store_native(natives, SMB__minus,      NM_Float_minus_);   
     store_native(natives, SMB__times,      NM_Float_times_); 

@@ -18,7 +18,7 @@ ClassReference new_ClassReference_empty()
 {
     
     NEW_OBJECT(ClassReference);
-    result->class = nil;
+    result->class   = nil;
     result->package = nil;
     return result;
 }
