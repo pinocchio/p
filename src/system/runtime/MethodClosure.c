@@ -20,7 +20,7 @@ MethodClosure new_MethodClosure(Method code, Class host)
         return name##_invoke(closure, (name)method, self, argc);\
     }
 
-void MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
+threaded* MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
 {
     Method method      = closure->code;
     Class method_class = HEADER(method);
@@ -30,6 +30,7 @@ void MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
     INVOKE_IF(Method)
 
     assert1(NULL, "Unknown type of method");
+    return BREAK;
 }
 
 
