@@ -275,24 +275,6 @@ static CNT(Dictionary_check_grow)
     }
 }
 
-void Dictionary_direct_store(Dictionary self, long hash,
-                                  Optr key, Optr value) 
-{
-    DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)nil) { 
-        *bucketp          = new_bucket();
-        DictBucket bucket = *bucketp;
-        bucket->values[0] = key;
-        bucket->values[1] = value;
-        bucket->tally     = 2;
-        Dictionary_check_grow(self);
-    } else {
-        PUSH_EXP((Optr)self);
-        PUSH_CNT(Dictionary_check_grow);
-        Bucket_store_(bucketp, key, value);
-    }
-}
-
 /* ========================================================================= */
 
 THREADED(push_hash)
@@ -305,8 +287,7 @@ THREADED(push_hash)
         hash = (SmallInt)key;
     } else {
         set_pc(pc + 1);
-        Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
-        return BREAK;
+        return Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
     }
     PUSH_EXP(hash);
     return pc + 1;
@@ -332,17 +313,9 @@ THREADED(dictionary_bucket)
 
     DictBucket bucket = *get_bucketp(self, hash);
 
-    if (bucket == (DictBucket)nil) {
-        ZAPN_EXP(2);
-        POKE_EXP(0, NULL);
-        return pc + 2;
-    }
-
-    uns_int tally = bucket->tally;
-    if (tally == 0) {
-        ZAPN_EXP(2);
-        POKE_EXP(0, NULL);
-        return pc + 2;
+    if (bucket == (DictBucket)nil || bucket->tally == 0) {
+        ZAPN_EXP(3);
+        return pc + 3;
     }
 
     POKE_EXP(0, bucket);
@@ -373,9 +346,8 @@ THREADED(bucket_lookup)
 
         uns_int tally = bucket->tally;
         if (idx >= tally) {
-            ZAPN_EXP(4);
-            POKE_EXP(0, NULL);
-            return pc + 1;
+            ZAPN_EXP(5);
+            return pc + 2;
         }
 
         // zap boolean
@@ -388,21 +360,17 @@ THREADED(bucket_lookup)
     return next_pc;
 }
 
-THREADED(dictionary_check_result)
-    Optr result = PEEK_EXP(0);
-
-    if (result == NULL) {
-        POKE_EXP(0, nil);
-    }
-    
+THREADED(return_null)
+    PUSH_EXP(NULL);
     return t_return(pc);
 }
 
-NNATIVE(iDictionary_at_, 4,
+NNATIVE(iDictionary_at_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_return)
+    t_return,
+    t_return_null)
 
 threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 {
@@ -414,34 +382,35 @@ threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 /* ========================================================================= */
 
-NNATIVE(Dictionary_at_, 4,
+NNATIVE(Dictionary_at_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_dictionary_check_result)
+    t_return,
+    t_return_nil)
 
 NATIVE1(Dictionary_at_)
     push_code(T_Dictionary_at_);
 }
 
-THREADED(dictionary_check_ifAbsent_)
-    Optr result = pop_EXP();
+THREADED(dictionary_ifAbsent_)
     t_return(pc);
-
-    if (result == NULL) {
-        Optr block = PEEK_EXP(0);
-        apply(block, 0);
-    } else {
-        POKE_EXP(0, result);
-    }
-    return BREAK;
+    Optr block = PEEK_EXP(0);
+    return apply(block, 0);
 }
 
-NNATIVE(Dictionary_at_ifAbsent_, 4,
+THREADED(pop_return)
+    Optr result = pop_EXP();
+    POKE_EXP(0, result);
+    return t_return(pc);
+}
+
+NNATIVE(Dictionary_at_ifAbsent_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_dictionary_check_ifAbsent_)
+    t_pop_return,
+    t_dictionary_ifAbsent_)
 
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
@@ -452,21 +421,38 @@ NATIVE2(Dictionary_at_ifAbsent_)
     push_code(T_Dictionary_at_ifAbsent_);
 }
 
-CNT(Dictionary_at_put_)
+THREADED(dictionary_at_put_)
+    t_return(pc);
     Optr w_hash     = PEEK_EXP(0);
-    Dictionary self = (Dictionary)PEEK_EXP(3);
+    Dictionary self = (Dictionary)PEEK_EXP(4);
     long hash       = unwrap_hash(self, w_hash);
-    Optr new        = PEEK_EXP(1);
-    Optr w_index    = PEEK_EXP(2);
-	uns_int argc = 2;
-	ZAP_NATIVE_INPUT();
-    POKE_EXP(0, new);
-    Dictionary_direct_store((Dictionary)self, hash, w_index, new);
+    Optr value      = PEEK_EXP(2);
+    Optr key        = PEEK_EXP(3);
+    ZAPN_EXP(4);
+    POKE_EXP(0, value);
+    DictBucket * bucketp = get_bucketp(self, hash);
+    if (*bucketp == (DictBucket)nil) { 
+        *bucketp          = new_bucket();
+        DictBucket bucket = *bucketp;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        bucket->tally     = 2;
+        Dictionary_check_grow(self);
+    } else {
+        PUSH_EXP((Optr)self);
+        PUSH_CNT(Dictionary_check_grow);
+        Bucket_store_(bucketp, key, value);
+    }
+    return BREAK;
 }
 
+NNATIVE(Dictionary_at_put_, 3,
+    t_peek1,
+    t_push_hash,
+    t_dictionary_at_put_);
+
 NATIVE2(Dictionary_at_put_)
-    PUSH_CNT(Dictionary_at_put_);
-    push_hash(NATIVE_ARG(0));
+    push_code(T_Dictionary_at_put_);
 }
 
 NATIVE0(Dictionary_grow)
@@ -478,6 +464,7 @@ void post_init_Dictionary()
     change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
 
     INIT_NATIVE(Dictionary_at_);
+    INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(iDictionary_at_);
     INIT_NATIVE(Dictionary_grow);
