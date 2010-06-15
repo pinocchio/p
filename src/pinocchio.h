@@ -118,6 +118,7 @@ typedef enum BOOL { FALSE , TRUE } BOOL;
 
 typedef void** Optr;
 typedef void(*cont)();
+typedef void*(*threaded)(void* pc);
 #include <thread.h>
 
 #define CNT(name) void CNT_##name() {\

@@ -316,12 +316,12 @@ NNATIVE(iDictionary_at_, 4,
     t_bucket_lookup,
     t_return)
 
-void Dictionary_lookup_push(Dictionary dict, Optr msg)
+threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 {
     CLAIM_EXP(2);
     POKE_EXP(1, dict);
     POKE_EXP(0, msg);
-    push_code(T_iDictionary_at_);
+    return push_code(T_iDictionary_at_);
 }
 
 /* ========================================================================= */

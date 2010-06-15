@@ -30,7 +30,6 @@ Array TG_##name()\
 extern void CNT_eval_threaded();
 extern void CNT_restore_env();
 
-typedef void*(*threaded)(void* pc);
 #define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
 extern threaded* push_code(Array code);
