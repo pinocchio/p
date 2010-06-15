@@ -133,9 +133,9 @@ extern uns_int nrsends();
 extern void print_EXP();
 
 #ifdef DEBUG
-    #define LOGFUN LOG(__FUNCTION__); printf("\n");
-    #define LOG _indent_(nrsends()); printf
-    #define LOG_AST_INFO(print, info) printf(print); print_Info(info); printf("\n");
+    #define LOGFUN LOG(__FUNCTION__); printf(stderr, "\n");
+    #define LOG(args...) _indent_(nrsends()); fprintf(stderr, args);
+    #define LOG_AST_INFO(print, info) fprintf(stderr, print); print_Info(info); fprintf(stderr, "\n");
 #else
     #define LOGFUN
     #define LOG printf0
