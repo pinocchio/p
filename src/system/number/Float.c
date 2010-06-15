@@ -79,7 +79,7 @@ NATIVE0(Float_asString)
     RETURN_FROM_NATIVE(Float_asString(unwrap_int(self), 10));
 }
 
-Optr Float_pequal_(Float self, Optr other) 
+Boolean Float_pequal_(Float self, Optr other) 
 {
     if (HEADER(other) != Float_Class) {
         return (Boolean)false;
@@ -99,8 +99,8 @@ void post_init_Float()
 {
     Dictionary natives = add_plugin(L"Type.Float");
 
-    store_native(natives, SMB__equal,      NM_Float_pequals_);
-    store_native(natives, SMB__pequal,     NM_Float_pequals_);
+    store_native(natives, SMB__equal,      NM_Float_pequal_);
+    store_native(natives, SMB__pequal,     NM_Float_pequal_);
     store_native(natives, SMB__plus,       NM_Float_plus_);
     store_native(natives, SMB__minus,      NM_Float_minus_);   
     store_native(natives, SMB__times,      NM_Float_times_); 
