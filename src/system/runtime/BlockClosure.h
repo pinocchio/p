@@ -16,8 +16,8 @@ extern BlockClosure new_BlockClosure(Block code,
 
 /* ========================================================================= */
 
-extern void BlockClosure_apply(BlockClosure closure, uns_int argc);
-extern void apply(Optr closure, uns_int argc);
+extern threaded* BlockClosure_apply(BlockClosure closure, uns_int argc);
+extern threaded* apply(Optr closure, uns_int argc);
 
 /* ========================================================================= */
 

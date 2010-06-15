@@ -49,14 +49,14 @@ CNT(restore_pop_env)
 	POKE_EXP(0, result);
 }
 
-void BlockClosure_apply(BlockClosure closure, uns_int argc)
+threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
 
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(nil);
-        return; 
+        return BREAK; 
     }
 
     if (block->locals->size == 0 && argc == 0) {
@@ -74,16 +74,15 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
         PUSH_CNT(restore_env);
     }
 
-    push_code(block->threaded);
-    return CNT_eval_threaded();
+    return push_code(block->threaded);
 }
 
-void apply(Optr closure, uns_int argc)
+threaded* apply(Optr closure, uns_int argc)
 {
     // TODO in the alternative case, send "value:*" message.
     // LOG("cls: %ls\n", HEADER(closure)->name->value);
     assert0(HEADER(closure) == BlockClosure_Class);
-    BlockClosure_apply((BlockClosure)closure, argc);
+    return BlockClosure_apply((BlockClosure)closure, argc);
 }
 
 /* ========================================================================= */
