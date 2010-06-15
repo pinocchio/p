@@ -181,7 +181,7 @@ THREADED(bucket_rehash)
     uns_int idx       = (uns_int)PEEK_EXP(1);
     DictBucket bucket = (DictBucket)PEEK_EXP(2);
     Optr key          = bucket->values[idx];
-    threaded* next_pc = 0;
+    threaded* next_pc = NULL;
 
     while(!next_pc) {
         Optr w_hash = pop_EXP();
@@ -312,17 +312,16 @@ THREADED(push_hash)
     return pc + 1;
 }
 
-static threaded* nBucket_compare_key(threaded * pc, Optr inkey, Optr dictkey)
+static threaded* nBucket_compare_key(Optr inkey, Optr dictkey)
 {
     long result = Bucket_quick_compare_key(inkey, dictkey);
 
     if (result == -1) {
-        Class_direct_dispatch(inkey, HEADER(inkey),
-                              (Optr)SMB__equal, 1, dictkey);
-        return BREAK;
+        return Class_direct_dispatch(inkey, HEADER(inkey),
+                                     (Optr)SMB__equal, 1, dictkey);
     }
     PUSH_EXP(get_bool(result));
-    return pc;
+    return NULL;
 }
 
 THREADED(dictionary_bucket)
@@ -349,36 +348,44 @@ THREADED(dictionary_bucket)
     POKE_EXP(0, bucket);
     PUSH_EXP(0);
     set_pc(pc + 1);
-    return nBucket_compare_key(pc + 1, key, bucket->values[0]);
+    threaded * next_pc = nBucket_compare_key(key, bucket->values[0]);
+    if (next_pc) {
+        return next_pc;
+    }
+    return pc + 1;
 }
 
 THREADED(bucket_lookup)
-    Optr boolean      = PEEK_EXP(0);
     uns_int idx       = (uns_int)PEEK_EXP(1);
     DictBucket bucket = (DictBucket)PEEK_EXP(2);
     
-    if (boolean == (Optr)true) {
-        ZAPN_EXP(4);
-        Optr result = bucket->values[idx + 1];
-        POKE_EXP(0, result);
-        return pc + 1;
-    }    
+    threaded* next_pc = NULL;
+    while (!next_pc) {
+        Optr boolean = PEEK_EXP(0);
+        if (boolean == (Optr)true) {
+            ZAPN_EXP(4);
+            Optr result = bucket->values[idx + 1];
+            POKE_EXP(0, result);
+            return pc + 1;
+        }    
 
-    idx += 2;
+        idx += 2;
 
-    uns_int tally = bucket->tally;
-    if (idx >= tally) {
-        ZAPN_EXP(4);
-        POKE_EXP(0, NULL);
-        return pc + 1;
+        uns_int tally = bucket->tally;
+        if (idx >= tally) {
+            ZAPN_EXP(4);
+            POKE_EXP(0, NULL);
+            return pc + 1;
+        }
+
+        // zap boolean
+        ZAP_EXP();
+
+        Optr key = PEEK_EXP(2);
+        POKE_EXP(0, idx);
+        next_pc = nBucket_compare_key(key, bucket->values[idx]);
     }
-
-    // zap boolean
-    ZAP_EXP();
-
-    Optr key = PEEK_EXP(2);
-    POKE_EXP(0, idx);
-    return nBucket_compare_key(pc, key, bucket->values[idx]);
+    return next_pc;
 }
 
 THREADED(dictionary_check_result)
