@@ -206,10 +206,9 @@ THREADED(bucket_rehash)
 static THREADED(dict_grow)
     uns_int idx     = (uns_int)PEEK_EXP(3);
     Array old       = (Array)PEEK_EXP(4);
-    Dictionary dict = (Dictionary)PEEK_EXP(5);
 
     if (idx == old->size) {
-        ZAPN_EXP(6);
+        ZAPN_EXP(5);
         return t_return(pc);
     }
 
@@ -219,8 +218,6 @@ static THREADED(dict_grow)
     if ((Optr)bucket == nil || bucket->tally == 0) {
         return pc;
     }
-
-   dict->data->values[idx] = bucket;
 
     POKE_EXP(1, bucket);
     POKE_EXP(0, 0);
@@ -247,9 +244,13 @@ static void Dictionary_grow(Dictionary self)
         self->data = new_Array_withAll(old->size << 32, (Optr)nil);
     }
     self->size = 0;
+
+    uns_int i = 0;
+    for (i = 0; i < old->size; i++) {
+        self->data->values[i] = old->values[i];
+    }
     
-    CLAIM_EXP(6);
-    POKE_EXP(5, self);
+    CLAIM_EXP(5);
     POKE_EXP(4, old);
     POKE_EXP(3, 0);
     POKE_EXP(2, self);
