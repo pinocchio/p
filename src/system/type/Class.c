@@ -82,7 +82,7 @@ static threaded* invoke(Optr method, Optr self, uns_int argc) {
     return BREAK;
 }
 
-void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
+threaded* does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
         Message message = (Message)pop_EXP();
@@ -101,7 +101,7 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 	}
 
     ZAP_EXP();
-    Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
+    return Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
 THREADED(class_cache_invoke)
@@ -113,16 +113,14 @@ THREADED(class_cache_invoke)
     if (method == NULL) {
         Optr msg  = PEEK_EXP(2);
         ZAPN_EXP(7);
-        does_not_understand(self, class, msg, argc);
-        return BREAK;
+        return does_not_understand(self, class, msg, argc);
     }
     Send send   = (Send)PEEK_EXP(6);
     Array cache = send->cache;
     InlineCache_store(cache, (Optr)class, method);
     ZAPN_EXP(7);
     
-    invoke(method, self, argc);
-    return BREAK;
+    return invoke(method, self, argc);
 }
 
 THREADED(class_invoke)
@@ -134,12 +132,10 @@ THREADED(class_invoke)
         Class class = (Class)PEEK_EXP(5);
         Optr msg    = PEEK_EXP(2);
         ZAPN_EXP(6);
-        does_not_understand(self, class, msg, argc);
-        return BREAK;
+        return does_not_understand(self, class, msg, argc);
     }
     ZAPN_EXP(6);
-    invoke(method, self, argc);
-    return BREAK;
+    return invoke(method, self, argc);
 }
 
 threaded* Class_lookup(Class class, Optr msg, threaded * pc)
