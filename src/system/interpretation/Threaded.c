@@ -336,7 +336,7 @@ THREADED(send_value)
         PUSH_EXP(send);
         Class_dispatch(o, HEADER(o), 0);
     }
-    return -1;
+    return BREAK;
 }
 
 /* ========================================================================= */
