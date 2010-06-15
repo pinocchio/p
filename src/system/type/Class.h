@@ -60,8 +60,6 @@ extern void Class_direct_dispatch_withArguments(Optr receiver,
 extern void Class_set_superclass(Class cls, Class super);
 
 extern void CNT_Class_super();
-extern void CNT_Class_lookup_loop();
-extern void Class_lookup(Class class, Optr msg);
 
 /* ========================================================================= */
 

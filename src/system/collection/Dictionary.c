@@ -310,15 +310,6 @@ THREADED(dictionary_check_result)
     return t_return(pc);
 }
 
-#define NNATIVE(name, size, ...) \
-Array T_##name;\
-Array TG_##name()\
-{\
-    return new_Array_with(size, __VA_ARGS__);\
-}
-
-#define INIT_NATIVE(name) T_##name = TG_##name()
-
 NNATIVE(iDictionary_at_, 4,
     t_push_hash,
     t_dictionary_bucket,
