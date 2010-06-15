@@ -36,7 +36,7 @@ Optr get_code(threaded* idx)
 threaded* push_code(Array code)
 {
     PUSH_CNT_RAW(&code->values[0]);
-    PUSH_CNT(eval_threaded);
+    PUSH_CNT_RAW(&CNT_eval_threaded);
     return BREAK;
 }
 
