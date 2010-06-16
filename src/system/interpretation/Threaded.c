@@ -265,8 +265,7 @@ THREADED(method_return_self)
 #define SEND(n) THREADED(send##n) \
     set_pc(pc + 2);\
     Optr self = PEEK_EXP(n);\
-	PUSH_EXP(get_code(pc + 1));\
-    return Class_dispatch(self, HEADER(self), n);\
+    return Class_normal_dispatch(self, (Send)get_code(pc + 1), n);\
 }
 
 SEND(0)
@@ -281,8 +280,7 @@ THREADED(sendn)
     Send send = (Send)get_code(pc + 1);
 	uns_int n = send->size;
     Optr self = PEEK_EXP(n);    
-	PUSH_EXP(send);
-    return Class_dispatch(self, HEADER(self), n);
+    return Class_normal_dispatch(self, send, n);
 }
 
 /* ========================================================================= */
