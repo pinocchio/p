@@ -22,7 +22,7 @@ EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
-LDFLAGS += -lm -lgc -ldl 
+LDFLAGS += -lgc -lm -ldl 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
@@ -58,7 +58,7 @@ fast:
 	CFLAGS="-O3" make  $(TARGET)
 
 profile:
-	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)
+	LDFLAGS="-pg" CFLAGS="-pg -DNOGC" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
