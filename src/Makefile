@@ -59,7 +59,7 @@ fast:
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-O3 -pg" make $(TARGET)
-	./$(TARGET)
+	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
 debug:
