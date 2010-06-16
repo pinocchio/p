@@ -31,7 +31,6 @@ Symbol new_Symbol_cached(const wchar_t* input)
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;
     }
-    HEADER(result) = Symbol_Class;
     Dictionary_quick_store(Symbol_Table, (Optr)result, (Optr)result);
     return result;
 }

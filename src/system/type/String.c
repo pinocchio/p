@@ -21,6 +21,7 @@ String new_String(const wchar_t * str)
 
 String new_String_sized(uns_int size)
 {
+    size += 1;
     String result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
     HEADER(result) = String_Class;
     result->size   = size;

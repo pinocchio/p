@@ -111,9 +111,6 @@ typedef void(*cont)();
 typedef void*(*threaded)(void* pc);
 #include <thread.h>
 
-#define CNT(name) void CNT_##name() {\
-    ZAP_CNT();
-
 /* ========================================================================= */
 
 
