@@ -107,7 +107,6 @@ Class class##_Class;
 typedef enum BOOL { FALSE , TRUE } BOOL;
 
 typedef void** Optr;
-typedef void(*cont)();
 typedef void*(*threaded)(void* pc);
 #include <thread.h>
 
