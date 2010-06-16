@@ -25,9 +25,9 @@ threaded* MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
     Method method      = closure->code;
     Class method_class = HEADER(method);
     
+    INVOKE_IF(Method)
     INVOKE_IF(NativeMethod)
     INVOKE_IF(ReflectionMethod)
-    INVOKE_IF(Method)
 
     assert1(NULL, "Unknown type of method");
     return BREAK;
