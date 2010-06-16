@@ -52,9 +52,9 @@ extern Optr pop_EXP();
 
 extern void _push_CNT(cont e);
 #define PUSH_CNT(value)         _push_CNT((cont)(value))
-#define PEEK_CNT(depth)         (*(cont*)(tget(_CNT_)))
-#define ZAP_CNT()               tset(_CNT_, ((cont*)tget(_CNT_))+1)
-#define POKE_CNT(value)         (*((cont*)tget(_CNT_)) = ((cont)(value)))
+#define PEEK_CNT()              (*(threaded**)(tget(_CNT_)))
+#define ZAP_CNT()               tset(_CNT_, ((threaded**)tget(_CNT_))+1)
+#define POKE_CNT(value)         (*((threaded**)tget(_CNT_)) = ((threaded*)(value)))
 #define EMPTY_CNT()             ((Optr*)tget(_CNT_) == &(tget(Double_Stack)[STACK_SIZE]))
 #define CNT_SIZE()              ((&tget(Double_Stack)[STACK_SIZE]) - tget(_CNT_))
 
