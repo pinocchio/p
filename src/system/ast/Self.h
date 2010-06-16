@@ -13,6 +13,5 @@ extern Optr self;
 extern void post_init_Self();
 
 extern void Self_eval();
-extern void CNT_Self_eval();
 
 #endif // SELF_H
