@@ -5,7 +5,7 @@
 
 /* ========================================================================= */
 
-#define DEFAULT_INLINECACHE_SIZE 4
+#define DEFAULT_INLINECACHE_SIZE 8
 
 extern Array new_InlineCache();
 extern Optr InlineCache_lookup(Array cache, Optr class);

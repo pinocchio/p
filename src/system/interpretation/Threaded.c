@@ -265,8 +265,7 @@ THREADED(method_return_self)
 #define SEND(n) THREADED(send##n) \
     set_pc(pc + 2);\
     Optr self = PEEK_EXP(n);\
-	PUSH_EXP(get_code(pc + 1));\
-    return Class_dispatch(self, HEADER(self), n);\
+    return Class_normal_dispatch(self, (Send)get_code(pc + 1), n);\
 }
 
 SEND(0)
@@ -281,8 +280,7 @@ THREADED(sendn)
     Send send = (Send)get_code(pc + 1);
 	uns_int n = send->size;
     Optr self = PEEK_EXP(n);    
-	PUSH_EXP(send);
-    return Class_dispatch(self, HEADER(self), n);
+    return Class_normal_dispatch(self, send, n);
 }
 
 /* ========================================================================= */
@@ -296,8 +294,7 @@ THREADED(send_to_do_)
     }
     Send send = (Send)get_code(pc + 5);
     t_push_closure(pc + 2);
-    PUSH_EXP(send);
-    return Class_dispatch(from, HEADER(from), 0);
+    return Class_normal_dispatch(from, send, 0);
 }
 
 THREADED(continue_to_do_)
@@ -332,8 +329,7 @@ THREADED(send_ifTrue_)
     } else {
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
-        PUSH_EXP(send);
-    	return Class_dispatch(bool, HEADER(bool), 1);
+    	return Class_normal_dispatch(bool, send, 1);
     }
 }
 
@@ -350,8 +346,7 @@ THREADED(send_ifFalse_)
     } else {
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
-        PUSH_EXP(send);
-    	return Class_dispatch(bool, HEADER(bool), 1);
+    	return Class_normal_dispatch(bool, send, 1);
     }
 }
 
@@ -371,8 +366,7 @@ THREADED(send_ifTrue_ifFalse_)
         Send send = (Send)get_code(pc + 1);
         t_push_closure(pc + 1);
         t_push_closure(pc + 2);
-        PUSH_EXP(send);
-    	return Class_dispatch(bool, HEADER(bool), 2);
+    	return Class_normal_dispatch(bool, send, 2);
     }
 }
 
@@ -387,8 +381,7 @@ THREADED(send_hash)
     } else {
         Send send = (Send)get_code(pc + 1);
         set_pc(pc + 2);
-        PUSH_EXP(send);
-        return Class_dispatch(self, HEADER(self), 0);
+        return Class_normal_dispatch(self, send, 0);
     }
     POKE_EXP(0, hash);
     return pc + 2;
@@ -403,8 +396,7 @@ THREADED(send_value)
     } else {
         Send send = (Send)get_code(pc);
         set_pc(pc + 1);
-        PUSH_EXP(send);
-        return Class_dispatch(o, HEADER(o), 0);
+        return Class_normal_dispatch(o, send, 0);
     }
 }
 
@@ -416,8 +408,7 @@ THREADED(send_value_)
     }
     Send send = (Send)get_code(pc);
     set_pc(pc + 1);
-    PUSH_EXP(send);
-    return Class_dispatch(o, HEADER(o), 1);
+    return Class_normal_dispatch(o, send, 1);
 }
 
 /* ========================================================================= */

@@ -99,9 +99,9 @@ Optr finish_eval()
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(tget_buf(Eval_Continue));
-        threaded* fp = (threaded*)PEEK_CNT();
+        threaded* fp = PEEK_CNT();
         for (;;) {
-            fp = (threaded*)(*fp)((void*)fp);
+            fp = (*fp)(fp);
         }
     }
 

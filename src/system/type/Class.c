@@ -215,9 +215,7 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;
-    Symbol msg  = (Symbol)send->message;
-    assert0((Optr)msg != nil);
-
+    
     #if defined PRINT_DISPATCH_TRACE || DTRACE
     Symbol clsname;
     if (HEADER(class) != metaclass) {
@@ -226,6 +224,25 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
         clsname = ((Class)self)->name;
     }
     #endif // PRINT_DISPATCH_TRACE || DTRACE
+    
+    // TODO properly initialize the inlinecache when creating new sends
+    if ((Optr)cache != nil) {
+        Optr method = InlineCache_lookup(cache, (Optr)class);
+        if (method) {
+            DT(MESSAGE_CACHEHIT, unicode_to_ascii(clsname->value), 
+                                 unicode_to_ascii(send->message->value));
+            ZAP_EXP();
+            return invoke(method, self, argc);
+        }
+        DT(MESSAGE_CACHEMISS, unicode_to_ascii(clsname->value), 
+                              unicode_to_ascii(send->message->value));
+    } else {
+        send->cache = new_InlineCache();
+    }
+    assert_class((Optr)class);
+    
+    Optr msg = (Optr)send->message;
+    assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol method  = String_concat_(clsname, new_String(L">>"));
@@ -234,22 +251,47 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
     #endif // PRINT_DISPATCH_TRACE
     
     DT(MESSAGE, unicode_to_ascii(clsname->value), unicode_to_ascii(msg->value));
+    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
+}
+
+threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
+{
+    Class class = HEADER(self);
+    Array cache = send->cache;
+    
+    #if defined PRINT_DISPATCH_TRACE || DTRACE
+    Symbol clsname;
+    if (HEADER(class) != metaclass) {
+        clsname = class->name;
+    } else {
+        clsname = ((Class)self)->name;
+    }
+    #endif // PRINT_DISPATCH_TRACE || DTRACE
     
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
-            ZAP_EXP();
             DT(MESSAGE_CACHEHIT, unicode_to_ascii(clsname->value), 
-                                 unicode_to_ascii(msg->value));
+                                 unicode_to_ascii(send->message->value));
             return invoke(method, self, argc);
         }
         DT(MESSAGE_CACHEMISS, unicode_to_ascii(clsname->value), 
-                              unicode_to_ascii(msg->value));
+                              unicode_to_ascii(send->message->value));
     } else {
         send->cache = new_InlineCache();
     }
     assert_class((Optr)class);
     
-    return Class_do_dispatch(self, class, (Optr)msg, argc, T_Class_dispatch);
+    Optr msg = (Optr)send->message;
+    assert0(msg != nil);
+
+    #ifdef PRINT_DISPATCH_TRACE
+    Symbol method  = String_concat_(clsname, new_String(L">>"));
+    method = String_concat_(method, msg);
+    LOG("%ls (%p)\n", method->value, self);
+    #endif // PRINT_DISPATCH_TRACE
+
+    PUSH_EXP(send);
+    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
