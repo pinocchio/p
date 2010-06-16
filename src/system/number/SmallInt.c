@@ -93,7 +93,7 @@ NATIVE0(SmallInt_asCharacter)
     RETURN_FROM_NATIVE(new_Character_fromInt(unwrap_int(self)));
 }
 
-Optr SmallInt_pequal_(SmallInt self, Optr other) 
+Boolean SmallInt_pequal_(SmallInt self, Optr other) 
 {
     if (HEADER(other) != SmallInt_Class) {
         return (Boolean)false;
