@@ -333,9 +333,8 @@ THREADED(dictionary_bucket)
     DictBucket bucket = *get_bucketp(self, hash);
 
     if (bucket == (DictBucket)nil || bucket->tally == 0) {
-        ZAPN_EXP(2);
-        POKE_EXP(0, NULL);
-        return pc + 2;
+        ZAPN_EXP(3);
+        return pc + 3;
     }
 
     POKE_EXP(0, bucket);
@@ -366,9 +365,8 @@ THREADED(bucket_lookup)
 
         uns_int tally = bucket->tally;
         if (idx >= tally) {
-            ZAPN_EXP(4);
-            POKE_EXP(0, NULL);
-            return pc + 1;
+            ZAPN_EXP(5);
+            return pc + 2;
         }
 
         // zap boolean
@@ -381,21 +379,17 @@ THREADED(bucket_lookup)
     return next_pc;
 }
 
-THREADED(dictionary_check_result)
-    Optr result = PEEK_EXP(0);
-
-    if (result == NULL) {
-        POKE_EXP(0, nil);
-    }
-    
+THREADED(return_null)
+    PUSH_EXP(NULL);
     return t_return(pc);
 }
 
-NNATIVE(iDictionary_at_, 4,
+NNATIVE(iDictionary_at_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_return)
+    t_return,
+    t_return_null)
 
 threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 {
@@ -407,34 +401,35 @@ threaded* Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 /* ========================================================================= */
 
-NNATIVE(Dictionary_at_, 4,
+NNATIVE(Dictionary_at_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_dictionary_check_result)
+    t_return,
+    t_return_nil)
 
 NATIVE1(Dictionary_at_)
     push_code(T_Dictionary_at_);
 }
 
-THREADED(dictionary_check_ifAbsent_)
-    Optr result = pop_EXP();
+THREADED(dictionary_ifAbsent_)
     t_return(pc);
-
-    if (result == NULL) {
-        Optr block = PEEK_EXP(0);
-        apply(block, 0);
-    } else {
-        POKE_EXP(0, result);
-    }
-    return BREAK;
+    Optr block = PEEK_EXP(0);
+    return apply(block, 0);
 }
 
-NNATIVE(Dictionary_at_ifAbsent_, 4,
+THREADED(dictionary_ifAbsent_return)
+    Optr result = pop_EXP();
+    POKE_EXP(0, result);
+    return t_return(pc);
+}
+
+NNATIVE(Dictionary_at_ifAbsent_, 5,
     t_push_hash,
     t_dictionary_bucket,
     t_bucket_lookup,
-    t_dictionary_check_ifAbsent_)
+    t_dictionary_ifAbsent_return,
+    t_dictionary_ifAbsent_)
 
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
