@@ -50,8 +50,8 @@ extern Optr pop_EXP();
 #define EXP_SIZE()              (tget(_EXP_) - &tget(Double_Stack)[-1])
 #define EMPTY_EXP()             (EXP_SIZE() == 0) 
 
-extern void _push_CNT(cont e);
-#define PUSH_CNT(value)         _push_CNT((cont)(value))
+extern void _push_CNT(threaded* e);
+#define PUSH_CNT(value)         _push_CNT((threaded*)(value))
 #define PEEK_CNT()              (*(threaded**)(tget(_CNT_)))
 #define ZAP_CNT()               tset(_CNT_, ((threaded**)tget(_CNT_))+1)
 #define POKE_CNT(value)         (*((threaded**)tget(_CNT_)) = ((threaded*)(value)))
