@@ -11,10 +11,6 @@ static void restore_env()
 	free_context(current);
 }
 
-CNT(restore_env)
-    restore_env();
-}
-
 /* ========================================================================= */
 
 void set_pc(threaded* pc)
@@ -188,19 +184,30 @@ THREADED(push_closure)
 
 
 /* ========================================================================= */
+
 THREADED(return)
     ZAPN_CNT(2);
     return BREAK;
 }
 
-threaded* return_value(threaded* pc, Optr value)
-{
-    PUSH_EXP(value);
-    return t_return(pc);
+THREADED(block_return)
+    exps();
+    set_env(PEEK_EXP(1));
+	Optr result = pop_EXP();
+    POKE_EXP(0, result);
+    ZAPN_CNT(2);
+    return BREAK;
 }
 
-#define RETURN(name, value) THREADED(return_##name) \
-    return return_value(pc, value); \
+threaded* block_return_value(threaded* pc, Optr value)
+{
+    //TODo optimize
+    PUSH_EXP(value);
+    return t_block_return(pc);
+}
+
+#define RETURN(name, value) THREADED(block_return_##name) \
+    return block_return_value(pc, value); \
 }
 
 RETURN(true,    true)
@@ -210,15 +217,15 @@ RETURN(0,       (Optr)new_SmallInt(0))
 RETURN(1,       (Optr)new_SmallInt(1))
 RETURN(2,       (Optr)new_SmallInt(2))
 
-THREADED(return_next)
+THREADED(block_return_next)
     t_push_1(pc);
-    return t_return(pc);
+    return t_block_return(pc);
 }
 
-THREADED(return_self)
+THREADED(block_return_self)
     CLAIM_EXP(1);
     Self_eval();
-	return t_return(pc);
+	return t_block_return(pc);
 }
 
 
@@ -226,7 +233,8 @@ THREADED(return_self)
 /* ========================================================================= */
 THREADED(method_return)
     restore_env();    
-    return t_return(pc);
+    ZAPN_CNT(2);
+    return BREAK;
 }
 
 threaded* method_return_value(threaded* pc, Optr value)
@@ -504,14 +512,16 @@ void post_init_Threaded()
     T_FUNC(zap)
 
     T_FUNC(return)
-    T_FUNC(return_true)
-    T_FUNC(return_false)
-    T_FUNC(return_nil)
-    T_FUNC(return_self) 
-    T_FUNC(return_0)
-    T_FUNC(return_1)
-    T_FUNC(return_2)
-    T_FUNC(return_next)   
+    
+    T_FUNC(block_return)
+    T_FUNC(block_return_true)
+    T_FUNC(block_return_false)
+    T_FUNC(block_return_nil)
+    T_FUNC(block_return_self) 
+    T_FUNC(block_return_0)
+    T_FUNC(block_return_1)
+    T_FUNC(block_return_2)
+    T_FUNC(block_return_next)   
 
     T_FUNC(method_return)
     T_FUNC(method_return_true)

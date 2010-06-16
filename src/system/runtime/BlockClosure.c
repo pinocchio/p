@@ -42,12 +42,6 @@ BlockContext activation_from_native(uns_int argc)
     return context;
 }
 
-CNT(restore_pop_env)
-    set_env(PEEK_EXP(1));
-	Optr result = pop_EXP();
-	POKE_EXP(0, result);
-}
-
 threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
@@ -60,19 +54,15 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
 
     if (block->locals->size == 0 && argc == 0) {
         BlockContext env = current_env();
-        if (env != closure->context) {
-            POKE_EXP(0, env);
-            PUSH_CNT(restore_pop_env);
-            set_env((Optr)closure->context);
-        } else {
-            ZAP_EXP();
-        }
+        POKE_EXP(0, env);
+        //PUSH_CNT(restore_pop_env);
+        set_env((Optr)closure->context);
     } else {
         set_env((Optr)new_BlockContext(closure));
         activation_from_native(argc);
-        PUSH_CNT(restore_env);
+        //PUSH_CNT(restore_env);
     }
-
+    exps();
     return push_code(block->threaded);
 }
 

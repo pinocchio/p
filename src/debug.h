@@ -3,6 +3,7 @@ extern void help();
 extern void inspect(Optr o);
 extern void i(Optr o);
 extern void sends();
+extern void exps();
 extern void print_EXP();
 extern Optr atn(Optr o, const wchar_t * s);
 extern Optr at(Optr o, uns_int i);
