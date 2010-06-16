@@ -246,11 +246,12 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method = String_concat_(method, msg);
+    method         = String_concat_(method, msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
-    DT(MESSAGE, unicode_to_ascii(clsname->value), unicode_to_ascii(msg->value));
+    DT(MESSAGE, unicode_to_ascii(clsname->value), 
+                unicode_to_ascii(send->message->value));
     return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
 
@@ -288,10 +289,12 @@ threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method = String_concat_(method, msg);
+    method         = String_concat_(method, msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
 
     PUSH_EXP(send);
+    DT(MESSAGE, unicode_to_ascii(clsname->value), 
+                unicode_to_ascii(send->message->value));
     return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
