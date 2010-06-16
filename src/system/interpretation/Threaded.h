@@ -32,8 +32,13 @@ extern void CNT_restore_env();
 
 #define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
-extern threaded* push_code(Array code);
 extern void post_init_Threaded();
+
+extern void set_pc(threaded* pc);
+extern void inc_pc(threaded* pc);
+extern Optr get_code(threaded* idx);
+extern threaded* push_code(Array code);
+
 /* ======================================================================== */
 
 T_CODE(jump_back)

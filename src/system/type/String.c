@@ -66,17 +66,33 @@ long Words_compare(Symbol s1, Symbol s2)
     return !wcsncmp(s1->value, s2->value, s1->size);
 }
 
-CNT(String_concat_)
-    Optr string = pop_EXP();
-    Optr self   = PEEK_EXP(0);
-    POKE_EXP(0, String_concat_((String)self, (String)string));
+THREADED(string_concat)
+    String self   = (String)PEEK_EXP(1);
+    String string = (String)PEEK_EXP(0);
+    ZAP_EXP();
+    POKE_EXP(0, String_concat_(self, (String)string));
+    return t_return(pc);
 }
 
+THREADED(string_concat_asString)
+    Optr obj = pop_EXP();
+    Optr tag = GETTAG(obj);
+    if (TAG_IS_LAYOUT(tag, Words)) {
+        String self = (String)PEEK_EXP(0);
+        POKE_EXP(0, String_concat_(self, (String)obj));
+        return t_return(pc);
+    } else {
+        set_pc(pc + 1);
+        return Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
+    }
+}
+
+NNATIVE(String_concat_, 2,
+    t_string_concat_asString,
+    t_string_concat)
+
 NATIVE1(String_concat_)
-    Optr w_arg = NATIVE_ARG(0);
-    PUSH_CNT(String_concat_);
-    RETURN_FROM_NATIVE(self); 
-    Class_direct_dispatch(w_arg, HEADER(w_arg), (Optr)SMB_asString, 0);
+    push_code(T_String_concat_);
 }
 
 NATIVE0(String_asSymbol)
@@ -203,6 +219,9 @@ void post_init_String()
     String_Class->layout = create_layout(0, WORDS);
     empty_String = new_String(L"");
     Dictionary natives = add_plugin(L"Type.String");
+    
+    INIT_NATIVE(String_concat_);    
+
     store_native(natives, SMB__concat,   NM_String_concat_);
     store_native(natives, SMB_asSymbol,  NM_String_asSymbol);
     store_native(natives, SMB_at_put_,   NM_String_at_put_);
