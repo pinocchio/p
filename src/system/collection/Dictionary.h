@@ -18,7 +18,6 @@ extern Dictionary new_Dictionary();
 
 /* ========================================================================= */
 
-#define DICTIONARY_SIZE 1
 #define DICTIONARY_BUCKET_SIZE 2
 
 /* ========================================================================= */
@@ -33,7 +32,6 @@ extern threaded* Dictionary_lookup_push();
 
 /* ========================================================================= */
 
-extern void push_hash(Optr key);
 extern long unwrap_hash(Dictionary self, Optr w_hash);
 
 /* ========================================================================= */
