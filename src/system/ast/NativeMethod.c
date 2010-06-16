@@ -57,5 +57,5 @@ threaded* NativeMethod_invoke(MethodClosure closure,
         assert1(NULL, "Alternatives to native methods currently aren't supported!");
     }
     method->code(self, closure->host, argc);
-	return BREAK;
+	return PEEK_CNT();
 }
