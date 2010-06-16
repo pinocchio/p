@@ -68,10 +68,9 @@ void assert_class(Optr class)
 static threaded* invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         return MethodClosure_invoke((MethodClosure)method, self, argc);
-    } else {
-        inspect(method);
-        assert1(NULL, "Unknown type of method installation");
     }
+    inspect(method);
+    assert1(NULL, "Unknown type of method installation");
     return BREAK;
 }
 

@@ -50,5 +50,5 @@ threaded* ReflectionMethod_invoke(MethodClosure closure,
         return Method_invoke(closure, (Method)method, self, argc);
     }
     method->cache(self, closure->host, argc);
-	return BREAK;
+	return PEEK_CNT();
 }

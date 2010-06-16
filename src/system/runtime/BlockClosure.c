@@ -49,7 +49,7 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
 
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(nil);
-        return BREAK; 
+        return PEEK_CNT(); 
     }
 
     if (block->locals->size == 0 && argc == 0) {

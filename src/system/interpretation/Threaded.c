@@ -15,7 +15,7 @@ static void restore_env()
 
 void set_pc(threaded* pc)
 {
-    POKEN_CNT_RAW(1, pc);
+    POKEN_CNT_RAW(0, pc);
 }
 
 void inc_pc(threaded* pc)
@@ -31,7 +31,6 @@ Optr get_code(threaded* idx)
 threaded* push_code(Array code)
 {
     PUSH_CNT_RAW(&code->values[0]);
-    PUSH_CNT_RAW(&CNT_eval_threaded);
     return (threaded*)&code->values[0];
 }
 
@@ -186,21 +185,20 @@ THREADED(push_closure)
 /* ========================================================================= */
 
 THREADED(return)
-    ZAPN_CNT(2);
-    return BREAK;
+    ZAP_CNT();
+    return PEEK_CNT();
 }
 
 THREADED(block_return)
     set_env(PEEK_EXP(1));
 	Optr result = pop_EXP();
     POKE_EXP(0, result);
-    ZAPN_CNT(2);
-    return BREAK;
+    return t_return(pc);
 }
 
 threaded* block_return_value(threaded* pc, Optr value)
 {
-    //TODo optimize
+    //TODO optimize
     PUSH_EXP(value);
     return t_block_return(pc);
 }
@@ -232,8 +230,7 @@ THREADED(block_return_self)
 /* ========================================================================= */
 THREADED(method_return)
     restore_env();    
-    ZAPN_CNT(2);
-    return BREAK;
+    return t_return(pc);
 }
 
 threaded* method_return_value(threaded* pc, Optr value)
@@ -300,8 +297,7 @@ THREADED(send_to_do_)
     Send send = (Send)get_code(pc + 5);
     t_push_closure(pc + 2);
     PUSH_EXP(send);
-    Class_dispatch(from, HEADER(from), 0);
-    return BREAK;
+    return Class_dispatch(from, HEADER(from), 0);
 }
 
 THREADED(continue_to_do_)
@@ -320,8 +316,7 @@ THREADED(continue_to_do_)
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
     set_pc(pc + 1);
-    apply((Optr)closure, 1);
-    return BREAK;
+    return apply((Optr)closure, 1);
 }
 
 THREADED(send_ifTrue_) 
@@ -417,14 +412,12 @@ THREADED(send_value_)
     inc_pc(pc);
     Optr o = pop_EXP();
     if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 1);
-    } else {
-        Send send = (Send)get_code(pc);
-        set_pc(pc + 1);
-        PUSH_EXP(send);
-        Class_dispatch(o, HEADER(o), 1);
+        return BlockClosure_apply((BlockClosure)o, 1);
     }
-    return BREAK;
+    Send send = (Send)get_code(pc);
+    set_pc(pc + 1);
+    PUSH_EXP(send);
+    return Class_dispatch(o, HEADER(o), 1);
 }
 
 /* ========================================================================= */
@@ -561,14 +554,6 @@ void post_init_Threaded()
 
 /* ========================================================================= */
 
-void CNT_eval_threaded()
-{
-    threaded* fp = (threaded*)PEEKN_CNT(1);
-    while (fp != BREAK) {
-        fp = (threaded*)(*fp)((void*)fp);
-    }
-}
-
 threaded* Method_invoke(MethodClosure closure,
                         Method method,
                         Optr self, uns_int argc)
@@ -581,7 +566,7 @@ threaded* Method_invoke(MethodClosure closure,
     
     if (method->size == 0) {
         RETURN_FROM_NATIVE(self);
-        return BREAK;
+        return PEEK_CNT();
     }
     
     set_env((Optr)new_MethodContext(closure, self));
