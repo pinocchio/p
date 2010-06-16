@@ -22,7 +22,6 @@ void fail(const Class exception_class, uns_int argc, ...)
         Continue_escape((Continue)tget(Error_Handler),
                                 (Optr)error);
     } else {
-        PUSH_CNT(exit_error);
         handle_assert("Unsupported type of error-handler installed.");
     }
     longjmp(tget_buf(Eval_Continue), 1);

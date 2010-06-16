@@ -4,17 +4,16 @@
 
 /* ========================================================================= */
 
-CNT(restore_env)
+static void restore_env()
+{
 	BlockContext current = current_env();
     set_env((Optr)current->parent_frame);
 	free_context(current);
 }
 
-void CNT_restore_return()
-{
-    CNT_restore_env();
+CNT(restore_env)
+    restore_env();
 }
-
 
 /* ========================================================================= */
 
@@ -223,6 +222,40 @@ THREADED(return_self)
 }
 
 
+
+/* ========================================================================= */
+THREADED(method_return)
+    restore_env();    
+    return t_return(pc);
+}
+
+threaded* method_return_value(threaded* pc, Optr value)
+{
+    PUSH_EXP(value);
+    return t_method_return(pc);
+}
+
+#define METHOD_RETURN(name, value) THREADED(method_return_##name) \
+    return method_return_value(pc, value); \
+}
+
+METHOD_RETURN(true,    true)
+METHOD_RETURN(false,   false)
+METHOD_RETURN(nil,     nil)
+METHOD_RETURN(0,       (Optr)new_SmallInt(0))
+METHOD_RETURN(1,       (Optr)new_SmallInt(1))
+METHOD_RETURN(2,       (Optr)new_SmallInt(2))
+
+THREADED(method_return_next)
+    t_push_1(pc);
+    return t_method_return(pc);
+}
+
+THREADED(method_return_self)
+    CLAIM_EXP(1);
+    Self_eval();
+	return t_method_return(pc);
+}
 
 /* ========================================================================= */
 #define SEND(n) THREADED(send##n) \
@@ -480,6 +513,15 @@ void post_init_Threaded()
     T_FUNC(return_2)
     T_FUNC(return_next)   
 
+    T_FUNC(method_return)
+    T_FUNC(method_return_true)
+    T_FUNC(method_return_false)
+    T_FUNC(method_return_nil)
+    T_FUNC(method_return_self) 
+    T_FUNC(method_return_0)
+    T_FUNC(method_return_1)
+    T_FUNC(method_return_2)
+    T_FUNC(method_return_next)   
 
     T_FUNC(send0)
     T_FUNC(send1)
@@ -535,7 +577,5 @@ threaded* Method_invoke(MethodClosure closure,
     
     set_env((Optr)new_MethodContext(closure, self));
     activation_from_native(argc);
-
-    PUSH_CNT(restore_env);
     return push_code(method->code);
 }
