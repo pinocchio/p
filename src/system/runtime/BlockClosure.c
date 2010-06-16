@@ -55,14 +55,11 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
     if (block->locals->size == 0 && argc == 0) {
         BlockContext env = current_env();
         POKE_EXP(0, env);
-        //PUSH_CNT(restore_pop_env);
         set_env((Optr)closure->context);
     } else {
         set_env((Optr)new_BlockContext(closure));
         activation_from_native(argc);
-        //PUSH_CNT(restore_env);
     }
-    exps();
     return push_code(block->threaded);
 }
 

@@ -191,7 +191,6 @@ THREADED(return)
 }
 
 THREADED(block_return)
-    exps();
     set_env(PEEK_EXP(1));
 	Optr result = pop_EXP();
     POKE_EXP(0, result);
@@ -328,9 +327,9 @@ THREADED(continue_to_do_)
 THREADED(send_ifTrue_) 
     Optr bool = PEEK_EXP(0);
     if (bool == true) {
-        ZAP_EXP();
         set_pc(pc + 3);
         Block block = (Block)get_code(pc + 2);
+        POKE_EXP(0, current_env());
         return push_code(block->threaded);
     } else if (bool == false) {
         POKE_EXP(0, nil);
@@ -349,9 +348,9 @@ THREADED(send_ifFalse_)
         POKE_EXP(0, nil);
         return pc + 3;
     } else if (bool == false) {
-        ZAP_EXP();
         set_pc(pc + 3);
         Block block = (Block)get_code(pc + 2);
+        POKE_EXP(0, current_env());
         return push_code(block->threaded);
     } else {
         Send send = (Send)get_code(pc + 1);
@@ -364,14 +363,14 @@ THREADED(send_ifFalse_)
 THREADED(send_ifTrue_ifFalse_) 
     Optr bool = PEEK_EXP(0);
     if (bool == true) {
-        ZAP_EXP();
         set_pc(pc + 4);
         Block block = (Block)get_code(pc + 2);
+        POKE_EXP(0, current_env());
         return push_code(block->threaded);
     } else if (bool == false) {
-        ZAP_EXP();
         set_pc(pc + 4);
         Block block = (Block)get_code(pc + 3);
+        POKE_EXP(0, current_env());
         return push_code(block->threaded);
     } else {
         Send send = (Send)get_code(pc + 1);
