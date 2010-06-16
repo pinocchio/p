@@ -332,14 +332,7 @@ THREADED(dictionary_bucket)
 
     DictBucket bucket = *get_bucketp(self, hash);
 
-    if (bucket == (DictBucket)nil) {
-        ZAPN_EXP(2);
-        POKE_EXP(0, NULL);
-        return pc + 2;
-    }
-
-    uns_int tally = bucket->tally;
-    if (tally == 0) {
+    if (bucket == (DictBucket)nil || bucket->tally == 0) {
         ZAPN_EXP(2);
         POKE_EXP(0, NULL);
         return pc + 2;
