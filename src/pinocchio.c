@@ -32,23 +32,11 @@ Dictionary _NATIVES_;
 
 /* ========================================================================= */
 
-/* 
- * Avoid longjmps as much as possible since they impose a large
- * performance penalty!
- */
-CNT(continue_eval)
-    longjmp(tget_buf(Eval_Continue), 1);
-}
-
-CNT(abort_eval)
-    longjmp(tget_buf(Eval_Abort), 1);
-}
-
-CNT(exit_eval)
+THREADED(exit_eval)
     longjmp(tget_buf(Eval_Exit), 1);
 }
 
-CNT(exit_error)
+THREADED(exit_error)
     Optr assertion = pop_EXP();
     BlockContext env =
         (BlockContext)((Object)assertion)->ivals[0];
@@ -66,6 +54,9 @@ CNT(exit_error)
     }
     exit(EXIT_FAILURE);
 }
+
+NNATIVE(exit_eval,  1, t_exit_eval)
+NNATIVE(exit_error, 1, t_exit_error)
 
 void initialize_Natives()
 {
@@ -90,24 +81,18 @@ bool isInstance(Optr object, Optr class)
 
 /* ========================================================================= */
 
-/**
- * setjmp and longjmp have an overhead but they allow us to avoid testing if
- * we are at the end of the stack. It's only expensive for starting new
- * threads, and the boosts performance for longer living threads.
- */
 int IN_EVAL = 0;
 
 void start_eval()
 {
     if (IN_EVAL) {
-        assert(NULL, printf("Re-entering evaluation thread!\n"));
+        assert1(NULL, "Re-entering evaluation thread!");
     }
     IN_EVAL = 1;
 
-    PUSH_CNT(exit_error);
+    push_code(T_exit_error);
     init_Error_Handler();
-
-    PUSH_CNT(exit_eval);
+    push_code(T_exit_eval);
 }
 
 Optr finish_eval()
@@ -241,6 +226,8 @@ static void bootstrap()
 
 void pinocchio_post_init()
 {
+    INIT_NATIVE(exit_eval);
+    INIT_NATIVE(exit_error);
     #include <pinocchioPostInit.ci>
 }
 
