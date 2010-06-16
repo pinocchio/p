@@ -23,13 +23,6 @@ void Self_eval()
     POKE_EXP(0, env->home_context->self);
 }
 
-CNT(Self_eval)
-    BlockContext env = current_env();
-    assert0(IS_CONTEXT(env));
-    // replace the current element (an self) with the Optr's self
-    PUSH_EXP(env->home_context->self);
-}
-
 /* ========================================================================= */
 
 void post_init_Self()
