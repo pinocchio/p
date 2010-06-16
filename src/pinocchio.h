@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include <errno.h>
+#include <stdio.h>
+#include <wchar.h>
 
 /* ========================================================================= */
 
@@ -19,17 +21,7 @@
     #endif // GC_MALLOC
 #endif // NOGC
 
-/*
-#define M64
-#ifdef M32
-typedef unsigned int uns_int;
-#endif 
-#ifdef M64
-*/
 typedef unsigned long uns_int;
-/*
-#endif
-*/
 
 /* ========================================================================= */
 
@@ -213,7 +205,7 @@ extern jmp_buf Assert_Fail;
 
 #define assert(test, message) \
 if (!(test)) {\
-    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
     message; \
     FLUSH_STDOUT; \
     ERROR_HANDLER("Assertion failed: "#test);\
@@ -221,15 +213,15 @@ if (!(test)) {\
 
 #define assert0(test)\
 if (!(test)) {\
-    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
+    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
     FLUSH_STDOUT; \
     ERROR_HANDLER("Assertion failed: "#test);\
 }
 
 #define assert1(test, message)  \
 if (!(test)) { \
-    printf ("%s:%u: failed assertion `%s'\n", __FILE__, __LINE__, #test); \
-    printf(message"\n"); \
+    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
+    fwprintf(stderr, L""message"\n"); \
     FLUSH_STDOUT; \
     ERROR_HANDLER(message);\
 }
