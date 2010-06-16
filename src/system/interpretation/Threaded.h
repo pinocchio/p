@@ -27,8 +27,6 @@ Array TG_##name()\
 
 /* ========================================================================= */
 
-extern void CNT_eval_threaded();
-
 #define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
 extern void post_init_Threaded();
