@@ -95,6 +95,7 @@ NATIVE2(Array_instVarAt_put_)
 void post_init_Array()
 {
     Dictionary natives = add_plugin(L"Collection.Array");
+
     store_native(natives, SMB_instVarAt_,     NM_Array_instVarAt_);
     store_native(natives, SMB_instVarAt_put_, NM_Array_instVarAt_put_);
 }
