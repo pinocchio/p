@@ -14,7 +14,7 @@ Dictionary new_Dictionary()
     result->size      = 0;
     result->ratio     = 500;
     result->maxLinear = 20;
-    result->data      = new_Array_withAll(DICTIONARY_SIZE, nil);
+    result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
     return result;
 }
 
@@ -84,7 +84,11 @@ static void Dictionary_quick_check_grow(Dictionary self)
     if (!Dictionary_grow_check(self)) { return; }
 
     Array old = self->data;
-    self->data     = new_Array_withAll(old->size << 1, (Optr)nil);
+    if (old->size == 1) {
+        self->data = new_Array_withAll(32, nil);
+    } else {
+        self->data = new_Array_withAll(old->size << 1, nil);
+    }
     self->size     = 0;
     long i;
     for (i = 0; i < old->size; i++) {
@@ -195,8 +199,9 @@ THREADED(bucket_rehash)
             Optr value = bucket->values[idx+1];
             remove_from_bucket(idx, bucket);
             add_to_bucket(bucketp, key, value);
+        } else {
+            idx += 2;
         }
-        idx += 2;
         if (idx >= bucket->tally) {
             return pc - 1;
         }
@@ -242,10 +247,10 @@ NNATIVE(Dictionary_grow, 2,
 static threaded* Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
-    if (old->size >= 32) {
-        self->data = new_Array_withAll(old->size << 1, (Optr)nil);
-    } else {
+    if (old->size == 1) {
         self->data = new_Array_withAll(32, (Optr)nil);
+    } else {
+        self->data = new_Array_withAll(old->size << 1, (Optr)nil);
     }
     self->size = 0;
 
