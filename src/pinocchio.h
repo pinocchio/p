@@ -7,6 +7,15 @@
 #include <stdio.h>
 #include <wchar.h>
 
+#ifdef DTRACE
+    #include <probes.h>
+    #define DT(name, args...) if (PINOCCHIO_##name##_ENABLED()) {\
+        PINOCCHIO_##name(args);\
+    }
+#else // DTRACE
+    #define DT(name, args...)
+#endif // DTRACE
+
 /* ========================================================================= */
 
 #ifdef NOGC

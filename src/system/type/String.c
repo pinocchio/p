@@ -194,17 +194,20 @@ Optr wchar_to_number(const wchar_t * string, uns_int size)
 
 char * unicode_to_ascii(const wchar_t* str)
 {
-    long len        = wcslen(str);
+    long len       = wcslen(str);
     char* charname = (char*)PALLOC(sizeof(char[len]));
-    assert1(wcstombs(charname, str, len) == len, "String not ASCII compatible.");
+    int charLen    = wcstombs(charname, str, len);
+    assert(charLen == len, 
+           printf("String '%ls' -> '%s' not ASCII compatible.\n", str, charname));
     return charname;
 }
 
 wchar_t * ascii_to_unicode(const char* str)
 {
-    long len           = strlen(str);
+    long len          = strlen(str);
     wchar_t* charname = (wchar_t*)PALLOC(sizeof(wchar_t[len]));
-    assert1(mbstowcs(charname, str, len) == len, "String not UTF compatible.");
+    assert(mbstowcs(charname, str, len) == len, 
+                    printf("String '%s' -> '%ls' not UTF compatible.", str, charname));
     return charname;
 }
 

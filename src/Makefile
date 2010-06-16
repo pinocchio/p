@@ -62,8 +62,18 @@ profile:
 	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
+	
+probes: probes.d
+	dtrace -h -s probes.d
+	
+probes.o: probes.d
+	@if [[ $$(uname) != "Darwin" ]]; then dtrace -G -s probes.d -o probes.o $(OBJECTS); fi
+
+dtrace:
+	LDFLAGS="" CFLAGS="-03 -DDTRACE" make $(TARGET)
+
 debug:
-	CFLAGS="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET)
+	CFLAGS="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
