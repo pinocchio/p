@@ -43,7 +43,7 @@ void Bucket_grow(DictBucket * bucketp)
     }
     new_bucket->tally = old_bucket->tally;
     for(; i < new_bucket->size; i++) {
-        new_bucket->values[i] = (Optr)nil;
+        new_bucket->values[i] = nil;
     }
     *bucketp = new_bucket;
 }
@@ -94,90 +94,6 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
     
     return 1;
 }
-
-/* ========================================================================= */
-
-static void Bucket_compare_key(Optr inkey, Optr dictkey)
-{
-    long result = Bucket_quick_compare_key(inkey, dictkey);
-
-    if (result == -1) {
-        return Class_direct_dispatch(inkey, HEADER(inkey),
-                                          (Optr)SMB__equal, 1, dictkey);
-    }
-    PUSH_EXP(get_bool(result));
-}
-
-static void bucket_do_store(DictBucket bucket, uns_int idx, 
-							uns_int addition)
-{
-    Optr value            = PEEK_EXP(3);
-    bucket->values[idx+1] = value;
-    bucket->tally         = idx+2;
-    ZAPN_EXP(3);
-    POKE_EXP(0, (Optr)addition);
-    ZAP_CNT();
-}
-
-static void bucket_store_new(DictBucket bucket, uns_int idx, 
-						     Optr key)
-{
-    bucket->values[idx] = key;
-    bucket_do_store(bucket, idx, 1); 
-}
-
-static void CNT_Bucket_store()
-{
-    Optr boolean         = pop_EXP();
-    DictBucket * bucketp = (DictBucket *)PEEK_EXP(0);
-    DictBucket bucket    = *bucketp;
-    uns_int idx          = (uns_int)PEEK_EXP(1);
-
-    if (boolean == (Optr)true) {
-        return bucket_do_store(bucket, idx, 0);
-    }
-
-    Optr key = PEEK_EXP(2);
-    idx       += 2;
-
-    if (idx >= bucket->size) {
-        Bucket_grow(bucketp);
-        return bucket_store_new(*bucketp, idx, key);
-    }
-
-    uns_int tally = bucket->tally;
-    if (idx >= tally) {
-        return bucket_store_new(bucket, idx, key); 
-    }
-
-    POKE_EXP(1, (Optr)idx);
-    Bucket_compare_key(key, bucket->values[idx]);
-}
-
-void Bucket_store_(DictBucket * bucketp, Optr key, Optr value)
-{
-    /* just store at the first empty location */
-    DictBucket bucket = *bucketp;
-
-    uns_int tally = bucket->tally;
-    if (tally == 0) {
-        bucket->values[0] = key;
-        bucket->values[1] = value;
-        bucket->tally     = 2;
-        PUSH_EXP((Optr)1);
-        return;
-    }
-
-    CLAIM_EXP(4);
-    POKE_EXP(3, value);
-    POKE_EXP(2, key);
-    POKE_EXP(1, 0);
-    POKE_EXP(0, bucketp);
-    PUSH_CNT(Bucket_store);
-
-    Bucket_compare_key(key, bucket->values[0]);
-}
-
 
 /* ========================================================================= */
 
