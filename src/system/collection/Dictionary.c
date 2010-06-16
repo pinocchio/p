@@ -344,6 +344,11 @@ THREADED(return_null)
     return t_return(pc);
 }
 
+THREADED(return_nil)
+    PUSH_EXP(nil);
+    return t_return(pc);
+}
+
 NNATIVE(iDictionary_at_, 5,
     t_push_hash,
     t_dictionary_bucket,

@@ -28,7 +28,6 @@ Array TG_##name()\
 /* ========================================================================= */
 
 extern void CNT_eval_threaded();
-extern void CNT_restore_env();
 
 #define T_CODE(name) extern threaded* t_##name(threaded* fp);
 
@@ -77,13 +76,15 @@ T_CODE(zap4)
 T_CODE(zap5)
 
 T_CODE(return)
-T_CODE(return_true)
-T_CODE(return_false)
-T_CODE(return_nil)
-T_CODE(return_self)
-T_CODE(return_0)
-T_CODE(return_1)
-T_CODE(return_next)
+
+T_CODE(block_return)
+T_CODE(block_return_true)
+T_CODE(block_return_false)
+T_CODE(block_return_nil)
+T_CODE(block_return_self)
+T_CODE(block_return_0)
+T_CODE(block_return_1)
+T_CODE(block_return_next)
 
 T_CODE(method_return)
 T_CODE(method_return_true)
