@@ -15,7 +15,7 @@ static void restore_env()
 
 void set_pc(threaded* pc)
 {
-    POKEN_CNT_RAW(0, pc);
+    POKE_CNT(pc);
 }
 
 void inc_pc(threaded* pc)
@@ -30,7 +30,7 @@ Optr get_code(threaded* idx)
 
 threaded* push_code(Array code)
 {
-    PUSH_CNT_RAW(&code->values[0]);
+    PUSH_CNT(&code->values[0]);
     return (threaded*)&code->values[0];
 }
 
