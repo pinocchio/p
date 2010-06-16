@@ -132,16 +132,16 @@ extern uns_int nrsends();
 extern void print_EXP();
 
 #ifdef DEBUG
-    #define LOGFUN LOG(__FUNCTION__); printf(stderr, "\n");
-    #define LOG(args...) _indent_(nrsends()); fprintf(stderr, args);
-    #define LOG_AST_INFO(print, info) fprintf(stderr, print); print_Info(info); fprintf(stderr, "\n");
+    #define LOGFUN LOG(__FUNCTION__); fwprintf(stderr, L"\n");
+    #define LOG(args...) _indent_(nrsends()); fwprintf(stderr, L""args);
+    #define LOG_AST_INFO(print, info) fwprintf(stderr, L""print); print_Info(info); fwprintf(stderr, L"\n");
 #else
     #define LOGFUN
     #define LOG printf0
     #define LOG_AST_INFO(print, info)
 #endif
 
-#define RESET_LOG() printf("\n");
+#define RESET_LOG() fwprintf(stderr, L"\n");
 
 /* ========================================================================= */
 
