@@ -246,3 +246,39 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
     
     return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
+
+threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
+{
+    Class class = HEADER(self);
+    Array cache = send->cache;
+    // TODO properly initialize the inlinecache when creating new sends
+    if ((Optr)cache != nil) {
+        Optr method = InlineCache_lookup(cache, (Optr)class);
+        if (method) {
+            return invoke(method, self, argc);
+        }
+    } else {
+        send->cache = new_InlineCache();
+    }
+    assert_class((Optr)class);
+    
+    Optr msg = (Optr)send->message;
+    assert0(msg != nil);
+
+    #ifdef PRINT_DISPATCH_TRACE
+    Symbol clsname;
+    if (HEADER(class) != metaclass) {
+        clsname = String_concat_(((Class)class)->name,
+                                 new_String(L">>"));
+    } else {
+        clsname = String_concat_(((Class)self)->name,
+                                 new_String(L" class>>"));
+    }
+    Symbol msgname = (Symbol)msg;
+    Symbol method  = String_concat_(clsname, msgname);
+    LOG("%ls (%p)\n", method->value, self);
+    #endif // PRINT_DISPATCH_TRACE
+    
+    PUSH_EXP(send);
+    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
+}

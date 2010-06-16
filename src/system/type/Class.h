@@ -50,6 +50,7 @@ extern Class new_Bootstrapping_Class();
 /* ========================================================================= */
 
 extern threaded* Class_dispatch(Optr receiver, Class class, uns_int argc);
+extern threaded* Class_normal_dispatch(Optr receiver, Send send, uns_int argc);
 extern threaded* Class_direct_dispatch(Optr receiver, Class class,
                                        Optr msg, uns_int argc, ...);
 extern threaded* Class_direct_dispatch_withArguments(Optr receiver,
