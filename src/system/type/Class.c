@@ -215,13 +215,27 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;
+    
+    #if defined PRINT_DISPATCH_TRACE || DTRACE
+    Symbol clsname;
+    if (HEADER(class) != metaclass) {
+        clsname = class->name;
+    } else {
+        clsname = ((Class)self)->name;
+    }
+    #endif // PRINT_DISPATCH_TRACE || DTRACE
+    
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
+            DT(MESSAGE_CACHEHIT, unicode_to_ascii(clsname->value), 
+                                 unicode_to_ascii(send->message->value));
             ZAP_EXP();
             return invoke(method, self, argc);
         }
+        DT(MESSAGE_CACHEMISS, unicode_to_ascii(clsname->value), 
+                              unicode_to_ascii(send->message->value));
     } else {
         send->cache = new_InlineCache();
     }
@@ -231,19 +245,13 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
-    Symbol clsname;
-    if (HEADER(class) != metaclass) {
-        clsname = String_concat_(((Class)class)->name,
-                                 new_String(L">>"));
-    } else {
-        clsname = String_concat_(((Class)self)->name,
-                                 new_String(L" class>>"));
-    }
-    Symbol msgname = (Symbol)msg;
-    Symbol method  = String_concat_(clsname, msgname);
+    Symbol method  = String_concat_(clsname, new_String(L">>"));
+    method         = String_concat_(method, msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
+    DT(MESSAGE, unicode_to_ascii(clsname->value), 
+                unicode_to_ascii(send->message->value));
     return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
 
@@ -251,12 +259,26 @@ threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
 {
     Class class = HEADER(self);
     Array cache = send->cache;
+    
+    #if defined PRINT_DISPATCH_TRACE || DTRACE
+    Symbol clsname;
+    if (HEADER(class) != metaclass) {
+        clsname = class->name;
+    } else {
+        clsname = ((Class)self)->name;
+    }
+    #endif // PRINT_DISPATCH_TRACE || DTRACE
+    
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
+            DT(MESSAGE_CACHEHIT, unicode_to_ascii(clsname->value), 
+                                 unicode_to_ascii(send->message->value));
             return invoke(method, self, argc);
         }
+        DT(MESSAGE_CACHEMISS, unicode_to_ascii(clsname->value), 
+                              unicode_to_ascii(send->message->value));
     } else {
         send->cache = new_InlineCache();
     }
@@ -266,19 +288,13 @@ threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
-    Symbol clsname;
-    if (HEADER(class) != metaclass) {
-        clsname = String_concat_(((Class)class)->name,
-                                 new_String(L">>"));
-    } else {
-        clsname = String_concat_(((Class)self)->name,
-                                 new_String(L" class>>"));
-    }
-    Symbol msgname = (Symbol)msg;
-    Symbol method  = String_concat_(clsname, msgname);
+    Symbol method  = String_concat_(clsname, new_String(L">>"));
+    method         = String_concat_(method, msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
-    
+
     PUSH_EXP(send);
+    DT(MESSAGE, unicode_to_ascii(clsname->value), 
+                unicode_to_ascii(send->message->value));
     return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }

@@ -9,9 +9,11 @@
 
 #ifdef DEBUG
     #define THREADED(name) threaded* t_##name(threaded* pc) {\
+        DT(THREADED, ""#name) \
         fwprintf(stderr, L"         : "#name"\n");
 #else //DEBUG
-    #define THREADED(name) threaded* t_##name(threaded* pc) {
+    #define THREADED(name) threaded* t_##name(threaded* pc) {\
+    DT(THREADED, ""#name)
 #endif // DEBUG
 
 #define BREAK (threaded*)-1
