@@ -17,7 +17,7 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
 
 /* ========================================================================= */
 
-BlockContext activation_from_native(uns_int argc)
+BlockContext activation_from_native(long argc)
 {
     BlockClosure closure = current_env()->closure;
     Block block          = closure->code;
@@ -26,11 +26,11 @@ BlockContext activation_from_native(uns_int argc)
 
     BlockContext context = current_env();
 
-    while (argc > 0) {
+    while (argc) {
         argc--;
         context->locals[argc] = pop_EXP();
     }
-    ZAP_EXP(); // remove self
+    ZAP_EXP();
 
     argc = paramc;
     // Set locals to nil.

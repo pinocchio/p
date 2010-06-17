@@ -36,8 +36,6 @@ extern THREAD_OBJECT Error_Handler;
 #endif // THREAD
 
 
-extern void extend_ISS(Optr self);
-
 extern void _push_EXP(Optr e);
 extern Optr pop_EXP();
 

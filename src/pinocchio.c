@@ -95,11 +95,10 @@ void start_eval()
     push_code(T_exit_eval);
 }
 
-Optr finish_eval()
+Optr finish_eval(threaded* fp)
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(tget_buf(Eval_Continue));
-        threaded* fp = PEEK_CNT();
         for (;;) {
             fp = (*fp)(fp);
         }
@@ -113,22 +112,22 @@ Optr finish_eval()
 Optr Eval_Send0(Optr self, Symbol symbol)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
-    return finish_eval();
+    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
+    return finish_eval(fp);
 }
 
 Optr Eval_Send1(Optr self, Symbol symbol, Optr arg)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
-    return finish_eval();
+    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
+    return finish_eval(fp);
 }
 
 Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
-    return finish_eval();
+    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
+    return finish_eval(fp);
 }
 
 /* ========================================================================= */
