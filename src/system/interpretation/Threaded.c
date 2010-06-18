@@ -30,8 +30,9 @@ Optr get_code(threaded* idx)
 
 threaded* push_code(Array code)
 {
-    PUSH_CNT(&code->values[0]);
-    return (threaded*)&code->values[0];
+    threaded* f = &code->values[0];
+    PUSH_CNT(f);
+    return f;
 }
 
 /* ========================================================================= */
