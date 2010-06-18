@@ -40,14 +40,6 @@ void initialize_Thread()
     tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));
 }
 
-void extend_ISS(Optr self)
-{
-    Object link = (Object)instantiate((Class)Collection_Link_Class);
-    link->ivals[0]   = self;
-    link->ivals[1]   = (Optr)tget(_ISS_);
-    tset(_ISS_, link);
-}
-
 /* ========================================================================= */
 
 Optr pop_EXP()
