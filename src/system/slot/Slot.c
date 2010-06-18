@@ -53,7 +53,7 @@ NATIVE1(Slot_readFrom_)
 
 NATIVE2(Slot_assign_on_)
     Optr value = NATIVE_ARG(0);
-    Optr o = NATIVE_ARG(1);
+    Optr o     = NATIVE_ARG(1);
     Slot_assign_on_((Slot)self,
                                 value, o);
     RETURN_FROM_NATIVE(value);
