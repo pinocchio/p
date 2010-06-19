@@ -57,7 +57,10 @@ fast:
 	CFLAGS="-O4" make  $(TARGET)
 
 llvm:
-	CC=llvm-gcc CFLAGS="-O4 -DLLVM" make $(TARGET)
+	CC=llvm-gcc LDFLAGS="-O4" CFLAGS="-O4 -DLLVM" make $(TARGET)
+
+clang:
+	CC=clang LDFLAGS="-O4" CFLAGS="-O4 -DLLVM" make $(TARGET)
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg -DNOGC" make $(TARGET)
