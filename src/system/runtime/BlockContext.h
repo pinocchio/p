@@ -13,12 +13,11 @@
 struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
-    uns_int                 captured;
-    BlockClosure    closure;
-    MethodContext   home_context;
-    BlockContext    parent_frame;
-    BlockContext    parent_scope;
-    Optr                  locals[];
+    BlockClosure            closure;
+    MethodContext           home_context;
+    BlockContext            parent_frame;
+    BlockContext            parent_scope;
+    Optr                    locals[];
 };
 
 extern void post_init_BlockContext();

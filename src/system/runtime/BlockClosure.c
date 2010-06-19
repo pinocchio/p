@@ -11,7 +11,6 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
             "Wrong type of context!");
     result->code      = code;
     result->context   = context;
-    context->captured = 1;
     return result;
 }
 
