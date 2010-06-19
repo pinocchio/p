@@ -5,7 +5,6 @@ EDGEVERSION  = svn$(SVNVERSION)_mc$(PHAROVERSION)
 EDGEPV       = pinocchio_$(EDGEVERSION)
 MAKEOPTS     = -j3
 OS           = $(shell uname)
-#CC           = llvm-gcc
 # ============================================================================
 TARGET       = pinocchio
 
@@ -55,7 +54,15 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS="-O3" make  $(TARGET)
+	CFLAGS="-O4" make  $(TARGET)
+
+
+llvm:
+	CC=llvm-gcc LDFLAGS="-O4" CFLAGS="-O4 -DLLVM" make $(TARGET)
+
+clang:
+	CC=clang CFLAGS="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
+
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg -DNOGC" make $(TARGET)
