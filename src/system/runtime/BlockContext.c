@@ -32,8 +32,8 @@ BlockContext current_env()
 
 BlockContext capture_current_env()
 {
-    BlockContext context = current_env();
     BlockContext target;
+    BlockContext context = current_env();
     uns_int size         = context->size;
     if (context->for_method) {
         target = new_MethodContext(size);

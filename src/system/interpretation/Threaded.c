@@ -6,8 +6,9 @@
 
 static void restore_env()
 {
-	BlockContext current = current_env();
+	BlockContext current  = current_env();
     set_env((Optr)current->parent_frame);
+    current->parent_frame = nil;
 }
 
 /* ========================================================================= */
