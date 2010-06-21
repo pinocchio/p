@@ -4,26 +4,9 @@
 
 /* ========================================================================= */
 
-MethodContext new_MethodContext(MethodClosure closure,
-                                Optr self)
+MethodContext new_MethodContext(uns_int size)
 {
-    uns_int size = closure->code->params->size + closure->code->locals->size;
-	MethodContext result         = (MethodContext)optain_context(size);
-	HEADER(result)               = MethodContext_Class;
-	result->closure              = closure;
-	result->scope_id             = 0;
-	result->home_context         = result;
-	result->parent_frame         = current_env();
-	result->self                 = self;
-	result->size                 = size;
-    return result;
-}
-
-MethodContext new_Empty_MethodContext()
-{
-    NEW_OBJECT(MethodContext);
-    result->home_context         = result;
-    ((BlockContext)result)->size = 0;
-    result->scope_id             = 0;
+	MethodContext result = (MethodContext)optain_context(size);
+	HEADER(result)       = MethodContext_Class;
     return result;
 }

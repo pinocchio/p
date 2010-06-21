@@ -13,6 +13,8 @@
 struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
+    uns_int                 stacked;
+    uns_int                 for_method;
     BlockClosure            closure;
     MethodContext           home_context;
     BlockContext            parent_frame;
@@ -22,7 +24,7 @@ struct BlockContext_t {
 
 extern void post_init_BlockContext();
 
-extern BlockContext new_BlockContext(BlockClosure block);
+extern BlockContext new_BlockContext(uns_int size);
 
 /* ========================================================================= */
 

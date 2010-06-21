@@ -176,7 +176,8 @@ THREADED(push_slot)
 
 THREADED(push_closure)
 	Block block  = (Block)get_code(pc + 1);
-    PUSH_EXP(new_BlockClosure(block, current_env()));
+    PUSH_EXP(new_Closure_from_Block(block));
+    //PUSH_EXP(new_BlockClosure(block, current_env()));
     return pc + 2;
 }
 
@@ -548,24 +549,3 @@ void post_init_Threaded()
 }
 
 /* ========================================================================= */
-
-threaded* Method_invoke(MethodClosure closure,
-                        Method method,
-                        Optr self, uns_int argc)
-{
-    assert1(method->code != (Array)nil, "Uncompiled method found!");
-
-    assert(argc == method->params->size,
-        printf("Argument count mismatch. Expected: %lu given: %lu\n",
-               method->params->size, argc););
-    
-    if (method->size == 0) {
-        RETURN_FROM_NATIVE(self);
-        return PEEK_CNT();
-    }
-    
-    // set_env((Optr)new_MethodContext(closure, self));
-    activation_from_native(closure, argc);
-
-    return push_code(method->code);
-}

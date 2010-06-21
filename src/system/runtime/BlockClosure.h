@@ -36,8 +36,7 @@ MethodClosure fName() {\
 
 /* ========================================================================= */
 
-extern BlockContext activation_from_native(BlockClosure closure, long argc);
-
+extern BlockClosure new_Closure_from_Block(Block block);
 /* ========================================================================= */
 
 #endif // RUNTIME_CLOSURE_H

@@ -18,28 +18,39 @@ BlockContext optain_context(uns_int size)
 {
     return make_context(size);}
 
-BlockContext new_BlockContext(BlockClosure closure)
+BlockContext new_BlockContext(uns_int size)
 {
-    uns_int size                = closure->code->params->size + closure->code->locals->size;
     BlockContext result         = optain_context(size);
 	HEADER(result)              = BlockContext_Class;
-    result->home_context        = closure->context->home_context;
-    result->closure             = closure;
-    result->parent_frame        = current_env();
-    BlockContext parent         = closure->context;
-    result->scope_id            = parent->scope_id + 1;
-    if (!parent->size) {
-        parent = parent->parent_scope;
-    }
-    result->parent_scope = parent;
-    result->size = size;
-    
     return result;
 }
 
 BlockContext current_env()
 {
     return (BlockContext)tget(_ENV_);
+}
+
+BlockContext capture_current_env()
+{
+    BlockContext context = current_env();
+    BlockContext target;
+    uns_int size         = context->size;
+    if (context->for_method) {
+        target = new_MethodContext(size);
+    } else {
+        target = new_BlockContext(size);
+    }
+    size += CONTEXT_SIZE;
+    Optr * from = (Optr*)context;
+    Optr * to   = (Optr*)target;
+
+    while(size) {
+        size--;
+        *to++ = *from++;
+    }
+
+    set_env(target);
+    return target;
 }
 
 void set_env(Optr env)
