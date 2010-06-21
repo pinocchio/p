@@ -53,6 +53,7 @@ BlockContext capture_current_env()
         target->home_context = target;
     }
 
+    target->stacked = 0;
     set_env(target);
     return target;
 }
