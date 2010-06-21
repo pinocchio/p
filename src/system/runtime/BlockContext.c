@@ -63,9 +63,9 @@ void set_env(Optr env)
 Optr BlockContext_lookup(BlockContext self, 
                                    uns_int local_id, uns_int scope_id)
 {
-    while (scope_id != self->scope_id && (Optr)self->parent_scope != nil) {
-        if (IS_CONTEXT(self->parent_scope)) {
-            self = (BlockContext)self->parent_scope;
+    while (scope_id != self->scope_id && (Optr)self->outer_scope != nil) {
+        if (IS_CONTEXT(self->outer_scope)) {
+            self = (BlockContext)self->outer_scope;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send.");
@@ -85,9 +85,9 @@ Optr BlockContext_lookup(BlockContext self,
 void BlockContext_assign(BlockContext self, uns_int local_id,
                                  uns_int scope_id, Optr value)
 {
-    while (scope_id != self->scope_id && (Optr)self->closure->context != nil) {
-        if (IS_CONTEXT(self->closure->context)) {
-            self = (BlockContext)self->closure->context;
+    while (scope_id != self->scope_id && (Optr)self->outer_scope != nil) {
+        if (IS_CONTEXT(self->outer_scope)) {
+            self = (BlockContext)self->outer_scope;
         } else {
             /* TODO Schedule at:in: message send. */
             assert1(NULL, "TODO Schedule at:in: message send");

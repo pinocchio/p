@@ -41,16 +41,14 @@ static MethodContext activate_method(MethodClosure closure, long argc)
     }
     
 	context->size         = size;
-    context->scope_id     = 0;
 	context->stacked      = 1;
-    context->home_context = context;
     context->parent_frame = current_env();
-    context->closure      = closure;
-
-	context->for_method   = 1;
-
-    //inspect(context);
     set_env(context);
+
+    context->scope_id     = 0;
+	context->for_method   = 1;
+    context->home_context = context;
+    context->closure      = closure;
 
     return context;
 }
