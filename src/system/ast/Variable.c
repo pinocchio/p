@@ -29,36 +29,20 @@ Variable new_Variable(uns_int scope_id, uns_int local_id)
 
 void Variable_eval(Variable self)
 {
-    // LOGFUN;
-    Optr env = (Optr)current_env();
+    BlockContext env = current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);    
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
 
-    if (IS_CONTEXT(env)) {
-        POKE_EXP(0, BlockContext_lookup((BlockContext)env, 
-                                                local_id,
-                                                scope_id));
-    } else {
-        // TODO
-        assert0(NULL);
-        // Optr args[2] = { (Optr)new_SmallInt(self->index), self->key };
-        // return Send(env, SMB_at_in_, 2, args);
-    }
+    POKE_EXP(0, BlockContext_lookup(env, local_id, scope_id));
 }
 
 void Variable_assign(Variable self, Optr value)
 {
-    Optr env = (Optr)current_env();
+    BlockContext env = current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);
 
-    if (IS_CONTEXT(env)) {
-        return BlockContext_assign((BlockContext)env,
-                                           local_id, scope_id,
-                                           value);
-    }
-    // TODO
-    assert0(NULL);
+    return BlockContext_assign(env, local_id, scope_id, value);
 }

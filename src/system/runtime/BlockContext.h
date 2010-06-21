@@ -13,17 +13,18 @@
 struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
-    uns_int                 captured;
-    BlockClosure    closure;
-    MethodContext   home_context;
-    BlockContext    parent_frame;
-    BlockContext    parent_scope;
-    Optr                  locals[];
+    uns_int                 stacked;
+    uns_int                 for_method;
+    BlockContext            outer_scope;
+    MethodContext           home_context;
+    BlockContext            parent_frame;
+    BlockClosure            closure;
+    Optr                    locals[];
 };
 
 extern void post_init_BlockContext();
 
-extern BlockContext new_BlockContext(BlockClosure block);
+extern BlockContext new_BlockContext(uns_int size);
 
 /* ========================================================================= */
 
@@ -32,10 +33,10 @@ extern Optr BlockContext_lookup(
 extern void BlockContext_assign(
     BlockContext self, uns_int local_id, uns_int scope_id, Optr value);
 extern BlockContext optain_context(uns_int size);
-extern void free_context(BlockContext context);
 
 /* ========================================================================= */
 
+extern BlockContext capture_current_env();
 extern BlockContext current_env();
 extern void set_env(Optr env);
 

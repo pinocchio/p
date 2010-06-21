@@ -6,9 +6,9 @@
 
 static void restore_env()
 {
-	BlockContext current = current_env();
+	BlockContext current  = current_env();
     set_env((Optr)current->parent_frame);
-	free_context(current);
+    current->parent_frame = (BlockContext)nil;
 }
 
 /* ========================================================================= */
@@ -30,7 +30,7 @@ Optr get_code(threaded* idx)
 
 threaded* push_code(Array code)
 {
-    threaded* f = &code->values[0];
+    threaded* f = (threaded*)&code->values[0];
     PUSH_CNT(f);
     return f;
 }
@@ -177,7 +177,7 @@ THREADED(push_slot)
 
 THREADED(push_closure)
 	Block block  = (Block)get_code(pc + 1);
-    PUSH_EXP(new_BlockClosure(block, current_env()));
+    PUSH_EXP(new_Closure_from_Block(block));
     return pc + 2;
 }
 
@@ -230,7 +230,11 @@ THREADED(block_return_self)
 
 /* ========================================================================= */
 THREADED(method_return)
-    restore_env();    
+    uns_int size = current_env()->size;
+    restore_env();
+    Optr result = PEEK_EXP(0);
+    ZAPN_EXP(CONTEXT_SIZE + size + 1);
+    POKE_EXP(0, result);
     return t_return(pc);
 }
 
@@ -545,23 +549,3 @@ void post_init_Threaded()
 }
 
 /* ========================================================================= */
-
-threaded* Method_invoke(MethodClosure closure,
-                        Method method,
-                        Optr self, uns_int argc)
-{
-    assert1(method->code != (Array)nil, "Uncompiled method found!");
-
-    assert(argc == method->params->size,
-        printf("Argument count mismatch. Expected: %lu given: %lu\n",
-               method->params->size, argc););
-    
-    if (method->size == 0) {
-        RETURN_FROM_NATIVE(self);
-        return PEEK_CNT();
-    }
-    
-    set_env((Optr)new_MethodContext(closure, self));
-    activation_from_native(argc);
-    return push_code(method->code);
-}

@@ -10,14 +10,10 @@
 #ifdef DEBUG
     #define THREADED(name) threaded* t_##name(threaded* pc) {\
         DT(THREADED, ""#name) \
-        fwprintf(stderr, L"         : "#name"\n");\
-        Optr* _exp_ = _EXP_;\
-        threaded* _cont_ = _CNT_;
+        fwprintf(stderr, L"         : "#name"\n");
 #else //DEBUG
     #define THREADED(name) threaded* t_##name(threaded* pc) {\
-        DT(THREADED, ""#name) \
-        Optr* _exp_ = _EXP_;\
-        threaded* _cont_ = _CNT_;
+        DT(THREADED, ""#name) 
 #endif // DEBUG
 
 #define BREAK (threaded*)-1

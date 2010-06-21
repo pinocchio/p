@@ -11,33 +11,47 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
             "Wrong type of context!");
     result->code      = code;
     result->context   = context;
-    context->captured = 1;
     return result;
 }
 
 /* ========================================================================= */
 
-BlockContext activation_from_native(long argc)
+static BlockContext activate_block(BlockClosure closure, long argc)
 {
-    BlockClosure closure = current_env()->closure;
+	//TODO merge with BlockContext
     Block block          = closure->code;
     uns_int paramc       = block->params->size;
     uns_int localc       = block->locals->size;
+    uns_int size         = paramc + localc;
 
-    BlockContext context = current_env();
+    BlockContext context = (BlockContext)&PEEK_EXP(argc - 1);
 
-    while (argc) {
-        argc--;
-        context->locals[argc] = pop_EXP();
+    CLAIM_EXP(CONTEXT_SIZE);
+
+    uns_int i;
+    for (i = 0; i < argc + 1; i++) {
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
     }
-    ZAP_EXP();
 
-    argc = paramc;
+    CLAIM_EXP(localc);
+
     // Set locals to nil.
-    while (argc < paramc + localc) {
-        context->locals[argc] = nil;
-        argc++;
+    for (; paramc < size; paramc++) {
+        context->locals[paramc] = nil;
     }
+    
+    HEADER(context)       = BlockContext_Class;
+	context->size         = size;
+	context->stacked      = 1;
+    context->parent_frame = current_env();
+    set_env((Optr)context);
+
+    BlockContext outer_scope = closure->context;
+
+    context->scope_id     = outer_scope->scope_id + 1;
+	context->for_method   = 0;
+    context->outer_scope  = outer_scope;
+    context->home_context = outer_scope->home_context;
 
     return context;
 }
@@ -57,9 +71,8 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
         POKE_EXP(0, env);
         set_env((Optr)closure->context);
     } else {
-        set_env((Optr)new_BlockContext(closure));
-        activation_from_native(argc);
-    }
+        activate_block(closure, argc);
+   }
     return push_code(block->threaded);
 }
 
@@ -71,6 +84,15 @@ threaded* apply(Optr closure, uns_int argc)
     return BlockClosure_apply((BlockClosure)closure, argc);
 }
 
+
+BlockClosure new_Closure_from_Block(Block block) 
+{
+    BlockContext context = current_env();
+    if (context->stacked) {
+        context = capture_current_env();
+    }
+    return new_BlockClosure(block, context);
+}
 /* ========================================================================= */
 
 NATIVE(BlockClosure_apply_)

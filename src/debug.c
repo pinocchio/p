@@ -50,7 +50,7 @@ void print_Class(Optr obj)
         return;
     }
     Class class = pclass(obj);
-    assert0(class != NULL);
+    assert(class != NULL, fwprintf(stderr, L"%p\n", obj));
     assert0((Optr)class != nil);
     if (pclass((Optr)class) == metaclass) {
         fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
@@ -238,7 +238,7 @@ void shallow_inspect(Optr o)
         fwprintf(stderr, L" (%lu)", (uns_int)o);
     } else {
         fwprintf(stderr, L"Instance of %ls", cls->name->value);
-        fwprintf(stderr, L" (%lu)", (uns_int)o);
+        fwprintf(stderr, L" (%p)", o);
     }
 
     Optr tag = GETTAG(o);

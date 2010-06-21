@@ -147,6 +147,9 @@ void store_method(Class class, Symbol symbol,
 
 static void bootstrap()
 {
+	#ifdef NOGC
+    init_gc();
+	#endif //NOGC
     nil = (Optr) NEW_t(Nil);
 
     metaclass                   = NEW_t(Class);

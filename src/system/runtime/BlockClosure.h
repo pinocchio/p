@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct BlockClosure_t {
-    Block            code;
+    Block        code;
     BlockContext context;
 };
 
@@ -36,8 +36,7 @@ MethodClosure fName() {\
 
 /* ========================================================================= */
 
-BlockContext  activation_from_native(long argc);
-
+extern BlockClosure new_Closure_from_Block(Block block);
 /* ========================================================================= */
 
 #endif // RUNTIME_CLOSURE_H
