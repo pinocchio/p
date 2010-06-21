@@ -147,9 +147,9 @@ void Dictionary_quick_store(Dictionary self,
     if (*bucketp == (DictBucket)nil) {
         *bucketp                     = new_bucket();
         DictBucket bucket = *bucketp;
-        bucket->values[0]            = key;
-        bucket->values[1]            = value;
-        bucket->tally                = 2;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        bucket->tally     = 2;
         return Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
@@ -220,12 +220,9 @@ static THREADED(dict_grow)
     POKE_EXP(1, bucket);
     POKE_EXP(0, 0);
 
-    pc = pc + 1;
+    pc += 1;
 
-    int test = tpush_hash(bucket->values[0]);
-    if (test) {
-        return;
-    }
+    if (tpush_hash(bucket->values[0])) { return; }
 
     t_bucket_rehash();
 }
@@ -259,7 +256,7 @@ static void Dictionary_grow(Dictionary self)
 /* ========================================================================= */
 
 THREADED(push_hash)
-    pc = pc + 1;
+    pc += 1;
     SmallInt hash;
     Optr key = PEEK_EXP(0);
     Optr tag = GETTAG(key);
@@ -424,11 +421,11 @@ THREADED(dictionary_store)
         add_to_bucket(bucketp, key, value);
         ZAPN_EXP(3);
         POKE_EXP(0, value);
-        pc = pc + 2;
+        pc += 2;
         return;
     }
 
-    pc = pc + 1;
+    pc += 1;
     POKE_EXP(0, 0);
     POKE_EXP(1, bucketp);
     Bucket_compare_key(key, (*bucketp)->values[0]);
@@ -459,7 +456,7 @@ THREADED(bucket_store)
             add_to_bucket(bucketp, key, value);
             ZAPN_EXP(4);
             POKE_EXP(0, value);
-            pc = pc + 1;
+            pc += 1;
             return;
         }
         ZAP_EXP();
