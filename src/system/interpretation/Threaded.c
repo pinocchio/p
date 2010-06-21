@@ -22,9 +22,8 @@ Optr get_code(threaded* idx)
 
 void push_code(Array code)
 {
-    POKE_CNT(pc);
-    pc = (threaded*)&code->values[0];
     PUSH_CNT(pc);
+    pc = (threaded*)&code->values[0];
 }
 
 /* ========================================================================= */
@@ -62,7 +61,7 @@ PUSH(false, false)
 
 #define ZAPN(num) THREADED(zap##num) \
     ZAPN_EXP(num);\
-    pc = pc + 1;\
+    pc += 1;\
 }
 
 ZAPN(1)
@@ -82,9 +81,9 @@ THREADED(restart)
 #define CHECK(num) THREADED(check##num)\
     Optr bool = pop_EXP();\
     if (bool == true) {\
-        pc = pc + 1;\
+        pc += 1;\
     } else if (bool == false) {\
-        pc = pc + 1 + num;\
+        pc += 1 + num;\
     } else {\
         assert1(NULL, "Non-boolean type receiver for truth");\
         pc = BREAK;\
@@ -100,7 +99,7 @@ CHECK(5)
 #define PEEK(num) THREADED(peek##num) \
     Optr o = PEEK_EXP(num);\
     PUSH_EXP(o);\
-    pc = pc + 1;\
+    pc += 1;\
 }
 
 PEEK(0)
@@ -183,8 +182,8 @@ THREADED(push_closure)
 /* ========================================================================= */
 
 THREADED(return)
-    ZAP_CNT();
     pc = PEEK_CNT();
+    ZAP_CNT();
 }
 
 THREADED(block_return)
