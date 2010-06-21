@@ -55,31 +55,30 @@ static MethodContext activate_method(MethodClosure closure, long argc)
 }
 
 
-threaded* Method_invoke(MethodClosure closure,
-                        Method method,
-                        Optr self, uns_int argc)
+void Method_invoke(MethodClosure closure,
+                   Method method,
+                   Optr self, uns_int argc)
 {
     assert1(method->code != (Array)nil, "Uncompiled method found!");
-
     assert(argc == method->params->size,
         printf("Argument count mismatch. Expected: %lu given: %lu\n",
                method->params->size, argc););
     
     if (method->size == 0) {
         RETURN_FROM_NATIVE(self);
-        return PEEK_CNT();
+        return;
     }
     
     activate_method(closure, argc);
 
-    return push_code(method->code);
+    push_code(method->code);
 }
 
 #define INVOKE_IF(name) if(method_class == name##_Class) {\
         return name##_invoke(closure, (name)method, self, argc);\
     }
 
-threaded* MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
+void MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
 {
     Method method      = closure->code;
     Class method_class = HEADER(method);
@@ -89,7 +88,6 @@ threaded* MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
     INVOKE_IF(ReflectionMethod)
 
     assert1(NULL, "Unknown type of method");
-    return BREAK;
 }
 
 

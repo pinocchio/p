@@ -4,6 +4,8 @@
 
 /* ========================================================================= */
 
+threaded* pc;
+
 static void restore_env()
 {
 	BlockContext current  = current_env();
@@ -13,36 +15,26 @@ static void restore_env()
 
 /* ========================================================================= */
 
-void set_pc(threaded* pc)
-{
-    POKE_CNT(pc);
-}
-
-void inc_pc(threaded* pc)
-{
-    set_pc(pc + 1);
-}
-
 Optr get_code(threaded* idx)
 {
     return (Optr)*idx;
 }
 
-threaded* push_code(Array code)
+void push_code(Array code)
 {
-    threaded* f = (threaded*)&code->values[0];
-    PUSH_CNT(f);
-    return f;
+    POKE_CNT(pc);
+    pc = (threaded*)&code->values[0];
+    PUSH_CNT(pc);
 }
 
 /* ========================================================================= */
 
 THREADED(jump_back)
-    return pc - 1;
+    pc -= 1;
 }
 
 #define JUMP_BACKN(n) THREADED(jump_back##n) \
-    return pc - n;\
+    pc -= n;\
 }
 
 JUMP_BACKN(2)
@@ -51,14 +43,14 @@ JUMP_BACKN(4)
 JUMP_BACKN(5)
 
 THREADED(jump_backn)
-    return pc - (long)get_code(pc + 1);
+    pc -= (long)get_code(pc + 1);
 }
 
 /* ========================================================================= */
 
 #define PUSH(name, value) THREADED(push_##name) \
     PUSH_EXP(value);\
-    return pc + 1;\
+    pc = pc + 1;\
 }
 
 PUSH(nil, nil)
@@ -70,7 +62,7 @@ PUSH(false, false)
 
 #define ZAPN(num) THREADED(zap##num) \
     ZAPN_EXP(num);\
-    return pc + 1;\
+    pc = pc + 1;\
 }
 
 ZAPN(1)
@@ -80,22 +72,22 @@ ZAPN(4)
 ZAPN(5)
 
 THREADED(zap)
-    return t_zap1(pc);
+    t_zap1();
 }
 
 THREADED(restart)
-    return 0;
+    pc = 0;
 }
 
 #define CHECK(num) THREADED(check##num)\
     Optr bool = pop_EXP();\
     if (bool == true) {\
-        return pc + 1;\
+        pc = pc + 1;\
     } else if (bool == false) {\
-        return pc + 1 + num;\
+        pc = pc + 1 + num;\
     } else {\
         assert1(NULL, "Non-boolean type receiver for truth");\
-        return BREAK;\
+        pc = BREAK;\
     }\
 }
 
@@ -108,7 +100,7 @@ CHECK(5)
 #define PEEK(num) THREADED(peek##num) \
     Optr o = PEEK_EXP(num);\
     PUSH_EXP(o);\
-    return pc + 1;\
+    pc = pc + 1;\
 }
 
 PEEK(0)
@@ -119,7 +111,7 @@ PEEK(4)
 PEEK(5)
 
 THREADED(dup)
-    return t_peek0(pc);
+    t_peek0(pc);
 }
 
 #define PUSHN(count) THREADED(push##count) \
@@ -128,7 +120,7 @@ THREADED(dup)
     for (i=1; i<=count; i++) {\
         POKE_EXP(count-i, get_code(pc + i));\
     }\
-    return pc + 1 + count;\
+    pc += 1 + count;\
 }
 PUSHN(1)
 PUSHN(2)
@@ -143,14 +135,14 @@ THREADED(pushn)
     for (i=1; i<=count; ++i) {
         POKE_EXP(i, get_code(pc + 1 + i));
     }
-    return pc + count + 1;
+    pc += count + 1;
 }
 
 #define PUSH_EVAL(name, type) THREADED(push_##name) \
     type name = (type)get_code(pc + 1);\
 	CLAIM_EXP(1);\
     type##_eval(name);\
-    return pc + 2;\
+    pc += 2;\
 }
 
 PUSH_EVAL(variable, Variable)
@@ -159,7 +151,7 @@ PUSH_EVAL(class_reference, ClassReference)
 THREADED(push_self)
     CLAIM_EXP(1);
     Self_eval();
-    return pc + 1;
+    pc += 1;
 }
 
 THREADED(push_slot) 
@@ -172,13 +164,18 @@ THREADED(push_slot)
     } else {
         assert1(NULL, "Unknown type of slot");
     }
-    return pc + 2;
+    pc += 2;
+}
+
+void push_closure(threaded* pc)
+{
+	Block block  = (Block)get_code(pc);
+    PUSH_EXP(new_Closure_from_Block(block));
 }
 
 THREADED(push_closure)
-	Block block  = (Block)get_code(pc + 1);
-    PUSH_EXP(new_Closure_from_Block(block));
-    return pc + 2;
+    push_closure(pc + 1);
+    pc += 2;
 }
 
 
@@ -187,25 +184,25 @@ THREADED(push_closure)
 
 THREADED(return)
     ZAP_CNT();
-    return PEEK_CNT();
+    pc = PEEK_CNT();
 }
 
 THREADED(block_return)
     set_env(PEEK_EXP(1));
 	Optr result = pop_EXP();
     POKE_EXP(0, result);
-    return t_return(pc);
+    t_return();
 }
 
-threaded* block_return_value(threaded* pc, Optr value)
+void block_return_value(Optr value)
 {
     //TODO optimize
     PUSH_EXP(value);
-    return t_block_return(pc);
+    t_block_return();
 }
 
 #define RETURN(name, value) THREADED(block_return_##name) \
-    return block_return_value(pc, value); \
+    block_return_value(value); \
 }
 
 RETURN(true,    true)
@@ -216,14 +213,14 @@ RETURN(1,       (Optr)new_SmallInt(1))
 RETURN(2,       (Optr)new_SmallInt(2))
 
 THREADED(block_return_next)
-    t_push_1(pc);
-    return t_block_return(pc);
+    t_push_1();
+    t_block_return();
 }
 
 THREADED(block_return_self)
     CLAIM_EXP(1);
     Self_eval();
-	return t_block_return(pc);
+	t_block_return();
 }
 
 
@@ -235,17 +232,18 @@ THREADED(method_return)
     Optr result = PEEK_EXP(0);
     ZAPN_EXP(CONTEXT_SIZE + size + 1);
     POKE_EXP(0, result);
-    return t_return(pc);
+    t_return();
 }
 
-threaded* method_return_value(threaded* pc, Optr value)
+void method_return_value(Optr value)
 {
+    // TODO optimize
     PUSH_EXP(value);
-    return t_method_return(pc);
+    t_method_return();
 }
 
 #define METHOD_RETURN(name, value) THREADED(method_return_##name) \
-    return method_return_value(pc, value); \
+    return method_return_value(value); \
 }
 
 METHOD_RETURN(true,    true)
@@ -256,21 +254,21 @@ METHOD_RETURN(1,       (Optr)new_SmallInt(1))
 METHOD_RETURN(2,       (Optr)new_SmallInt(2))
 
 THREADED(method_return_next)
-    t_push_1(pc);
-    return t_method_return(pc);
+    t_push_1();
+    t_method_return();
 }
 
 THREADED(method_return_self)
     CLAIM_EXP(1);
     Self_eval();
-	return t_method_return(pc);
+	t_method_return();
 }
 
 /* ========================================================================= */
 #define SEND(n) THREADED(send##n) \
-    set_pc(pc + 2);\
     Optr self = PEEK_EXP(n);\
-    return Class_normal_dispatch(self, (Send)get_code(pc + 1), n);\
+    pc += 2;\
+    Class_normal_dispatch(self, (Send)get_code(pc - 1), n);\
 }
 
 SEND(0)
@@ -281,11 +279,11 @@ SEND(4)
 SEND(5)
 
 THREADED(sendn)
-    set_pc(pc+2);
     Send send = (Send)get_code(pc + 1);
+    pc += 2;
 	uns_int n = send->size;
     Optr self = PEEK_EXP(n);    
-    return Class_normal_dispatch(self, send, n);
+    Class_normal_dispatch(self, send, n);
 }
 
 /* ========================================================================= */
@@ -295,11 +293,12 @@ THREADED(send_to_do_)
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
         POKE_EXP(1, unwrap_int(from));
         POKE_EXP(0, unwrap_int(to));
-        return t_push_closure(pc);
+        push_closure(pc + 1);
+        return;
     }
     Send send = (Send)get_code(pc + 5);
-    t_push_closure(pc + 2);
-    return Class_normal_dispatch(from, send, 0);
+    push_closure(pc + 3);
+    Class_normal_dispatch(from, send, 0);
 }
 
 THREADED(continue_to_do_)
@@ -307,34 +306,35 @@ THREADED(continue_to_do_)
     long max   = (long)PEEK_EXP(1);
     if (index > max) {
         ZAPN_EXP(2);
-        return pc + 4;
+        pc += 4;
+        return;
     }
     // update the index
-    POKE_EXP(2, index+1);
+    POKE_EXP(2, index + 1);
     BlockClosure closure = (BlockClosure)PEEK_EXP(0);
     // the self
     // TODO only create the block closure once
     PUSH_EXP(closure);
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
-    set_pc(pc + 1);
-    return apply((Optr)closure, 1);
+    pc += 1;
+    apply((Optr)closure, 1);
 }
 
 THREADED(send_ifTrue_) 
     Optr bool = PEEK_EXP(0);
     if (bool == true) {
-        set_pc(pc + 3);
         Block block = (Block)get_code(pc + 2);
+        pc += 3;
         POKE_EXP(0, current_env());
-        return push_code(block->threaded);
+        push_code(block->threaded);
     } else if (bool == false) {
         POKE_EXP(0, nil);
-        return pc + 3;
+        pc += 3;
     } else {
         Send send = (Send)get_code(pc + 1);
-        t_push_closure(pc + 1);
-    	return Class_normal_dispatch(bool, send, 1);
+        push_closure(pc + 2);
+    	Class_normal_dispatch(bool, send, 1);
     }
 }
 
@@ -342,40 +342,42 @@ THREADED(send_ifFalse_)
     Optr bool = PEEK_EXP(0);
     if (bool == true) {
         POKE_EXP(0, nil);
-        return pc + 3;
+        pc += 3;
+        return;
     } else if (bool == false) {
-        set_pc(pc + 3);
         Block block = (Block)get_code(pc + 2);
+        pc += 3;
         POKE_EXP(0, current_env());
-        return push_code(block->threaded);
+        push_code(block->threaded);
     } else {
         Send send = (Send)get_code(pc + 1);
-        t_push_closure(pc + 1);
-    	return Class_normal_dispatch(bool, send, 1);
+        push_closure(pc + 2);
+    	Class_normal_dispatch(bool, send, 1);
     }
 }
 
 THREADED(send_ifTrue_ifFalse_) 
     Optr bool = PEEK_EXP(0);
     if (bool == true) {
-        set_pc(pc + 4);
         Block block = (Block)get_code(pc + 2);
+        pc += 4;
         POKE_EXP(0, current_env());
-        return push_code(block->threaded);
+        push_code(block->threaded);
     } else if (bool == false) {
-        set_pc(pc + 4);
         Block block = (Block)get_code(pc + 3);
+        pc += 4;
         POKE_EXP(0, current_env());
-        return push_code(block->threaded);
+        push_code(block->threaded);
     } else {
         Send send = (Send)get_code(pc + 1);
-        t_push_closure(pc + 1);
-        t_push_closure(pc + 2);
-    	return Class_normal_dispatch(bool, send, 2);
+        push_closure(pc + 2);
+        push_closure(pc + 3);
+    	Class_normal_dispatch(bool, send, 2);
     }
 }
 
 THREADED(send_hash)
+    pc += 2;
     SmallInt hash;
     Optr self = PEEK_EXP(0);
     Optr tag  = GETTAG(self);
@@ -384,45 +386,43 @@ THREADED(send_hash)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)self;
     } else {
-        Send send = (Send)get_code(pc + 1);
-        set_pc(pc + 2);
-        return Class_normal_dispatch(self, send, 0);
+        Send send = (Send)get_code(pc - 1);
+        Class_normal_dispatch(self, send, 0);
+        return;
     }
     POKE_EXP(0, hash);
-    return pc + 2;
 }
 
 
 THREADED(send_value)
-    inc_pc(pc);
+    pc += 1;
     Optr o = pop_EXP();
     if (HEADER(o) == BlockClosure_Class) {
-        return BlockClosure_apply((BlockClosure)o, 0);
+        BlockClosure_apply((BlockClosure)o, 0);
     } else {
         Send send = (Send)get_code(pc);
-        set_pc(pc + 1);
-        return Class_normal_dispatch(o, send, 0);
+        Class_normal_dispatch(o, send, 0);
     }
 }
 
 THREADED(send_value_)
-    inc_pc(pc);
+    pc += 1;
     Optr o = pop_EXP();
     if (HEADER(o) == BlockClosure_Class) {
-        return BlockClosure_apply((BlockClosure)o, 1);
+        BlockClosure_apply((BlockClosure)o, 1);
+        return;
     }
     Send send = (Send)get_code(pc);
-    set_pc(pc + 1);
-    return Class_normal_dispatch(o, send, 1);
+    Class_normal_dispatch(o, send, 1);
 }
 
 /* ========================================================================= */
 
 #define SUPER(n) THREADED(super##n) \
-    set_pc(pc + 2);\
 	PUSH_EXP(get_code(pc + 1));\
+    pc += 2;\
     PUSH_EXP(n);\
-    return Super_eval_threaded();\
+    Super_eval_threaded();\
 }
 
 SUPER(0)
@@ -433,18 +433,18 @@ SUPER(4)
 SUPER(5)
 
 THREADED(supern)
-    set_pc(pc+2);
 	Super super = (Super)get_code(pc + 1);
+    pc += 2;
 	PUSH_EXP(super);
 	PUSH_EXP(super->size);
-    return Super_eval_threaded();
+    Super_eval_threaded();
 }
 
 /* ========================================================================= */
 
 THREADED(assign)
+    pc += 1;
 	do_assign();
-    return pc + 1;
 }
 
 /* ========================================================================= */

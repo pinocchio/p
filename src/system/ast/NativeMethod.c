@@ -40,9 +40,9 @@ native lookup_native(Optr primitive_name, Optr module_name)
     return (native)primitive;
 }
 
-threaded* NativeMethod_invoke(MethodClosure closure,
-                              NativeMethod method,
-                              Optr self, uns_int argc)
+void NativeMethod_invoke(MethodClosure closure,
+                         NativeMethod method,
+                         Optr self, uns_int argc)
 {
     if (method->code == NULL) {
         Annotation annotation =
@@ -57,5 +57,4 @@ threaded* NativeMethod_invoke(MethodClosure closure,
         assert1(NULL, "Alternatives to native methods currently aren't supported!");
     }
     method->code(self, closure->host, argc);
-	return PEEK_CNT();
 }
