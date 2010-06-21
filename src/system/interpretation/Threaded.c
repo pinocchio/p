@@ -230,10 +230,17 @@ THREADED(block_return_self)
 
 /* ========================================================================= */
 THREADED(method_return)
+    fwprintf(stderr, L"1===============================================\n");
+    exps();
+    fwprintf(stderr, L"1===============================================\n");
     uns_int size = current_env()->size;
     restore_env();
     Optr result = PEEK_EXP(0);
-    ZAPN_EXP(CONTEXT_SIZE + size);
+    ZAPN_EXP(CONTEXT_SIZE + size + 1);
+    fwprintf(stderr, L"2===============================================\n");
+    exps();
+    fwprintf(stderr, L"2===============================================\n");
+    i(result);
     POKE_EXP(0, result);
     return t_return(pc);
 }

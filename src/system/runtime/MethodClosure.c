@@ -24,13 +24,13 @@ static MethodContext activate_method(MethodClosure closure, long argc)
     uns_int localc       = method->locals->size;
     uns_int size         = paramc + localc;
 
-    MethodContext context = (MethodContext)&PEEK_EXP(argc);
+    MethodContext context = (MethodContext)&PEEK_EXP(argc - 1);
 
-    CLAIM_EXP(CONTEXT_SIZE - 1);
+    CLAIM_EXP(CONTEXT_SIZE);
 
     uns_int i;
     for (i = 0; i < argc + 1; i++) {
-        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE - 1));
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
     }
 
     // Set locals to nil.
@@ -38,9 +38,10 @@ static MethodContext activate_method(MethodClosure closure, long argc)
         context->locals[paramc] = nil;
     }
     
+	HEADER(context)       = MethodContext_Class;
 	context->size         = size;
 	context->stacked      = 1;
-    context->parent_frame = current_env();
+	context->parent_frame = current_env();
     set_env((Optr)context);
 
     context->scope_id     = 0;

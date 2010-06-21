@@ -50,7 +50,7 @@ void print_Class(Optr obj)
         return;
     }
     Class class = pclass(obj);
-    assert0(class != NULL);
+    assert(class != NULL, fwprintf(stderr, L"%p\n", obj));
     assert0((Optr)class != nil);
     if (pclass((Optr)class) == metaclass) {
         fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
