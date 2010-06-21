@@ -7,12 +7,14 @@
 
 /* ======================================================================== */
 
+extern threaded* pc;
+
 #ifdef DEBUG
-    #define THREADED(name) threaded* t_##name(threaded* pc) {\
+    #define THREADED(name) void t_##name() {\
         DT(THREADED, ""#name) \
         fwprintf(stderr, L"         : "#name"\n");
 #else //DEBUG
-    #define THREADED(name) threaded* t_##name(threaded* pc) {\
+    #define THREADED(name) void t_##name() {\
         DT(THREADED, ""#name) 
 #endif // DEBUG
 
@@ -29,14 +31,12 @@ Array TG_##name()\
 
 /* ========================================================================= */
 
-#define T_CODE(name) extern threaded* t_##name(threaded* fp);
+#define T_CODE(name) extern void t_##name();
 
 extern void post_init_Threaded();
 
-extern void set_pc(threaded* pc);
-extern void inc_pc(threaded* pc);
 extern Optr get_code(threaded* idx);
-extern threaded* push_code(Array code);
+extern void push_code(Array code);
 
 /* ======================================================================== */
 

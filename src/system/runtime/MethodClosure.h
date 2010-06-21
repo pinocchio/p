@@ -18,8 +18,8 @@ extern MethodClosure new_MethodClosure(Method code,
 
 /* ========================================================================= */
 
-extern threaded* MethodClosure_invoke(MethodClosure closure, Optr self,
-                                 	  uns_int argc);
+extern void MethodClosure_invoke(MethodClosure closure, Optr self,
+                                 uns_int argc);
 
 /* ========================================================================= */
 

@@ -72,7 +72,7 @@ THREADED(string_concat)
     String string = (String)PEEK_EXP(0);
     ZAP_EXP();
     POKE_EXP(0, String_concat_(self, (String)string));
-    return t_return(pc);
+    t_return();
 }
 
 THREADED(string_concat_asString)
@@ -81,10 +81,10 @@ THREADED(string_concat_asString)
     if (TAG_IS_LAYOUT(tag, Words)) {
         String self = (String)PEEK_EXP(0);
         POKE_EXP(0, String_concat_(self, (String)obj));
-        return t_return(pc);
+        t_return();
     } else {
-        set_pc(pc + 1);
-        return Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
+        pc = pc + 1;
+        Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
     }
 }
 

@@ -81,9 +81,9 @@ bool isInstance(Optr object, Optr class)
 
 /* ========================================================================= */
 
-int IN_EVAL = 0;
+static int IN_EVAL = 0;
 
-void start_eval()
+static void start_eval()
 {
     if (IN_EVAL) {
         assert1(NULL, "Re-entering evaluation thread!");
@@ -95,12 +95,12 @@ void start_eval()
     push_code(T_exit_eval);
 }
 
-Optr finish_eval(threaded* fp)
+static Optr finish_eval()
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(tget_buf(Eval_Continue));
         for (;;) {
-            fp = (*fp)(fp);
+            (*pc)();
         }
     }
 
@@ -112,22 +112,22 @@ Optr finish_eval(threaded* fp)
 Optr Eval_Send0(Optr self, Symbol symbol)
 {
     start_eval();
-    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
-    return finish_eval(fp);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
+    return finish_eval();
 }
 
 Optr Eval_Send1(Optr self, Symbol symbol, Optr arg)
 {
     start_eval();
-    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
-    return finish_eval(fp);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
+    return finish_eval();
 }
 
 Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 {
     start_eval();
-    threaded* fp = Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
-    return finish_eval(fp);
+    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
+    return finish_eval();
 }
 
 /* ========================================================================= */

@@ -65,16 +65,15 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
-static threaded* invoke(Optr method, Optr self, uns_int argc) {
+static void invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         return MethodClosure_invoke((MethodClosure)method, self, argc);
     }
     inspect(method);
     assert1(NULL, "Unknown type of method installation");
-    return BREAK;
 }
 
-threaded* does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
+void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
         Message message = (Message)pop_EXP();
@@ -93,11 +92,11 @@ threaded* does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 	}
 
     ZAP_EXP();
-    return Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
+    Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
 THREADED(class_cache_invoke)
-    t_return(pc);
+    t_return();
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
     Class class  = (Class)PEEK_EXP(5);
@@ -111,12 +110,11 @@ THREADED(class_cache_invoke)
     Array cache = send->cache;
     InlineCache_store(cache, (Optr)class, method);
     ZAPN_EXP(7);
-    
     return invoke(method, self, argc);
 }
 
 THREADED(class_invoke)
-    t_return(pc);
+    t_return();
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
     Optr self    = PEEK_EXP(3);
@@ -130,22 +128,24 @@ THREADED(class_invoke)
     return invoke(method, self, argc);
 }
 
-threaded* Class_lookup(Class class, Optr msg, threaded * pc)
+void Class_lookup(Class class, Optr msg)
 {
     // TODO pass along the hash value
     if (class == (Class)nil) {
         PUSH_EXP(NULL); 
-        return pc + 1;
+        pc += 1;
+        return;
     }
     assert_class((Optr)class);
     Dictionary mdict = class->methods;
-    return Dictionary_lookup_push(mdict, msg);
+    Dictionary_lookup_push(mdict, msg);
 }
 
 THREADED(class_lookup)
     Optr method = PEEK_EXP(0);
     if (method != NULL) {
-        return pc + 1;
+        pc += 1;
+        return;
     }
     
     ZAP_EXP();
@@ -153,7 +153,7 @@ THREADED(class_lookup)
     Optr msg    = PEEK_EXP(1);
     Class next  = class->super;
     POKE_EXP(0, next);
-    return Class_lookup(next, msg, pc);
+    Class_lookup(next, msg);
 }
 
 NNATIVE(Class_direct_dispatch, 2,
@@ -170,7 +170,7 @@ void post_init_Class()
     INIT_NATIVE(Class_dispatch);
 }
 
-static threaded* Class_do_dispatch(Optr self, Class class, Optr msg,
+static void Class_do_dispatch(Optr self, Class class, Optr msg,
                               uns_int argc, Array code)
 {
     CLAIM_EXP(5);
@@ -179,12 +179,12 @@ static threaded* Class_do_dispatch(Optr self, Class class, Optr msg,
     POKE_EXP(2, self);
     POKE_EXP(1, msg);
     POKE_EXP(0, class);
-
-    return Class_lookup(class, msg, push_code(code));
+    push_code(code);
+    Class_lookup(class, msg);
 }
 
-threaded* Class_direct_dispatch(Optr self, Class class, Optr msg,
-                                uns_int argc, ...)
+void Class_direct_dispatch(Optr self, Class class, Optr msg,
+                           uns_int argc, ...)
 {
 	va_list args;
     va_start(args, argc);
@@ -196,10 +196,10 @@ threaded* Class_direct_dispatch(Optr self, Class class, Optr msg,
         PUSH_EXP(va_arg(args, Optr));
     }
     va_end(args);
-    return Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
+    Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
 }
 
-threaded* Class_direct_dispatch_withArguments(Optr self, Class class,
+void Class_direct_dispatch_withArguments(Optr self, Class class,
                                          Optr msg, Array args)
 {
     /* Send obj. TODO update Send>>eval to be able to remove this */
@@ -208,10 +208,10 @@ threaded* Class_direct_dispatch_withArguments(Optr self, Class class,
     for (idx = 0; idx < args->size; idx++) {
         PUSH_EXP(args->values[idx]);
     }
-    return Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
+    Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
 }
 
-threaded* Class_dispatch(Optr self, Class class, uns_int argc)
+void Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
     Array cache = send->cache;
@@ -246,16 +246,16 @@ threaded* Class_dispatch(Optr self, Class class, uns_int argc)
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method         = String_concat_(method, msg);
+    method         = String_concat_(method, (String)msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
     DT(MESSAGE, unicode_to_ascii(clsname->value), 
                 unicode_to_ascii(send->message->value));
-    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
+    Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }
 
-threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
+void Class_normal_dispatch(Optr self, Send send, uns_int argc)
 {
     Class class = HEADER(self);
     Array cache = send->cache;
@@ -289,12 +289,12 @@ threaded* Class_normal_dispatch(Optr self, Send send, uns_int argc)
 
     #ifdef PRINT_DISPATCH_TRACE
     Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method         = String_concat_(method, msg);
+    method         = String_concat_(method, (String)msg);
     LOG("%ls (%p)\n", method->value, self);
     #endif // PRINT_DISPATCH_TRACE
 
     PUSH_EXP(send);
     DT(MESSAGE, unicode_to_ascii(clsname->value), 
                 unicode_to_ascii(send->message->value));
-    return Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
+    Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
 }

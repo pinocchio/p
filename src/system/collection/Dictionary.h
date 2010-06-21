@@ -28,7 +28,7 @@ extern void Dictionary_quick_store(Dictionary self,
 
 extern void Dictionary_direct_store(Dictionary self, long hash,
                                          Optr key, Optr value);
-extern threaded* Dictionary_lookup_push();
+extern void Dictionary_lookup_push();
 
 /* ========================================================================= */
 

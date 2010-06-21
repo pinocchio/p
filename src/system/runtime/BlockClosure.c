@@ -56,14 +56,14 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     return context;
 }
 
-threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
+void BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
 
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(nil);
-        return PEEK_CNT(); 
+        return;
     }
 
     if (block->locals->size == 0 && argc == 0) {
@@ -72,16 +72,16 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
         set_env((Optr)closure->context);
     } else {
         activate_block(closure, argc);
-   }
-    return push_code(block->threaded);
+    }
+    push_code(block->threaded);
 }
 
-threaded* apply(Optr closure, uns_int argc)
+void apply(Optr closure, uns_int argc)
 {
     // TODO in the alternative case, send "value:*" message.
     // LOG("cls: %ls\n", HEADER(closure)->name->value);
     assert0(HEADER(closure) == BlockClosure_Class);
-    return BlockClosure_apply((BlockClosure)closure, argc);
+    BlockClosure_apply((BlockClosure)closure, argc);
 }
 
 

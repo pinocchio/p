@@ -20,7 +20,7 @@
 
 typedef enum BOOL { FALSE , TRUE } BOOL;
 typedef void** Optr;
-typedef void*(*threaded)(void* pc);
+typedef void(*threaded)();
 typedef unsigned long uns_int;
 
 /* ========================================================================= */
@@ -167,10 +167,6 @@ typedef void(*native)(Optr self, Class class, uns_int argc);
 /* ========================================================================= */
 
 extern Dictionary _NATIVES_;
-
-/* ========================================================================= */
-
-extern int IN_EVAL;
 
 /* ========================================================================= */
 
