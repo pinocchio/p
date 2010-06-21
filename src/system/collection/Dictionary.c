@@ -118,7 +118,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
     } else {
         self->data = new_Array_withAll(old->size << 1, nil);
     }
-    self->size     = 0;
+    self->size = 0;
     uns_int i;
     for (i = 0; i < old->size; i++) {
         DictBucket bucket = (DictBucket)old->values[i];
