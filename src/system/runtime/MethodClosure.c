@@ -26,11 +26,11 @@ static MethodContext activate_method(MethodClosure closure, long argc)
 
     MethodContext context = (MethodContext)&PEEK_EXP(argc);
 
-    CLAIM_EXP(CONTEXT_SIZE);
+    CLAIM_EXP(CONTEXT_SIZE - 1);
 
     uns_int i;
     for (i = 0; i < argc + 1; i++) {
-        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE - 1));
     }
 
     argc = paramc;

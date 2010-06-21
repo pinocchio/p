@@ -233,7 +233,7 @@ THREADED(method_return)
     uns_int size = current_env()->size;
     restore_env();
     Optr result = PEEK_EXP(0);
-    ZAPN_EXP(CONTEXT_SIZE + 1 + size);
+    ZAPN_EXP(CONTEXT_SIZE + size);
     POKE_EXP(0, result);
     return t_return(pc);
 }

@@ -17,7 +17,7 @@ struct MethodContext_t {
     Optr                    locals[];
 };
 
-#define CONTEXT_SIZE ((sizeof(struct MethodContext_t) / sizeof(Optr)) - 1)
+#define CONTEXT_SIZE ((sizeof(struct MethodContext_t) / sizeof(Optr)))
 
 extern MethodContext new_MethodContext(uns_int size);
 
