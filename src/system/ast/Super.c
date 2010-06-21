@@ -41,7 +41,6 @@ THREADED(super_send)
 THREADED(push_env_class)
     // TODO directly inline it
     Optr env = (Optr)current_env();
-    assert0(IS_CONTEXT(env));
     PUSH_EXP(((BlockContext)env)->home_context->closure->host);
     return pc + 1;
 }

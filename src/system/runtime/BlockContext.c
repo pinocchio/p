@@ -49,6 +49,10 @@ BlockContext capture_current_env()
         *to++ = *from++;
     }
 
+    if (context->home_context == context) {
+        target->home_context = target;
+    }
+
     set_env(target);
     return target;
 }

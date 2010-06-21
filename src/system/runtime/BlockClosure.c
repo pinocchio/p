@@ -16,6 +16,45 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
 
 /* ========================================================================= */
 
+static BlockContext activate_block(BlockClosure closure, long argc)
+{
+	//TODO merge with BlockContext
+    Block block          = closure->code;
+    uns_int paramc       = block->params->size;
+    uns_int localc       = block->locals->size;
+    uns_int size         = paramc + localc;
+
+    BlockContext context = (BlockContext)&PEEK_EXP(argc);
+
+    CLAIM_EXP(CONTEXT_SIZE - 1);
+
+    uns_int i;
+    for (i = 0; i < argc + 1; i++) {
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE - 1));
+    }
+
+    argc = paramc;
+    // Set locals to nil.
+    while (argc < size) {
+        context->locals[argc] = nil;
+        argc++;
+    }
+    
+	context->size         = size;
+	context->stacked      = 1;
+    context->parent_frame = current_env();
+    set_env(context);
+
+    BlockContext outer_scope = closure->context;
+
+    context->scope_id     = outer_scope->scope_id + 1;
+	context->for_method   = 0;
+    context->outer_scope  = outer_scope;
+    context->home_context = outer_scope->home_context;
+
+    return context;
+}
+
 threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
@@ -31,9 +70,7 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
         POKE_EXP(0, env);
         set_env((Optr)closure->context);
     } else {
-        set_env((Optr)new_BlockContext(closure));
-        //activation_from_native(closure, argc);
-        assert1(0, "should not get here");
+        activate_block(closure, argc);
    }
     return push_code(block->threaded);
 }

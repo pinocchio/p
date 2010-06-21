@@ -177,7 +177,6 @@ THREADED(push_slot)
 THREADED(push_closure)
 	Block block  = (Block)get_code(pc + 1);
     PUSH_EXP(new_Closure_from_Block(block));
-    //PUSH_EXP(new_BlockClosure(block, current_env()));
     return pc + 2;
 }
 

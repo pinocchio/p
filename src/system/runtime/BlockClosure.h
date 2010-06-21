@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct BlockClosure_t {
-    Block            code;
+    Block        code;
     BlockContext context;
 };
 
