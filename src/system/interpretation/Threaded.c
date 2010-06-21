@@ -8,7 +8,7 @@ static void restore_env()
 {
 	BlockContext current  = current_env();
     set_env((Optr)current->parent_frame);
-    current->parent_frame = nil;
+    current->parent_frame = (BlockContext)nil;
 }
 
 /* ========================================================================= */
@@ -30,7 +30,7 @@ Optr get_code(threaded* idx)
 
 threaded* push_code(Array code)
 {
-    threaded* f = &code->values[0];
+    threaded* f = (threaded*)&code->values[0];
     PUSH_CNT(f);
     return f;
 }

@@ -41,7 +41,7 @@ static MethodContext activate_method(MethodClosure closure, long argc)
 	context->size         = size;
 	context->stacked      = 1;
     context->parent_frame = current_env();
-    set_env(context);
+    set_env((Optr)context);
 
     context->scope_id     = 0;
 	context->for_method   = 1;

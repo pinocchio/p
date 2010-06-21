@@ -41,7 +41,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
 	context->size         = size;
 	context->stacked      = 1;
     context->parent_frame = current_env();
-    set_env(context);
+    set_env((Optr)context);
 
     BlockContext outer_scope = closure->context;
 

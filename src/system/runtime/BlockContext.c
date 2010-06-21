@@ -36,7 +36,7 @@ BlockContext capture_current_env()
     BlockContext context = current_env();
     uns_int size         = context->size;
     if (context->for_method) {
-        target = new_MethodContext(size);
+        target = (BlockContext)new_MethodContext(size);
     } else {
         target = new_BlockContext(size);
     }
@@ -49,12 +49,12 @@ BlockContext capture_current_env()
         *to++ = *from++;
     }
 
-    if (context->home_context == context) {
-        target->home_context = target;
+    if (context->home_context == (MethodContext)context) {
+        target->home_context = (MethodContext)target;
     }
 
     target->stacked = 0;
-    set_env(target);
+    set_env((Optr)target);
     return target;
 }
 
