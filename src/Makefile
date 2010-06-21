@@ -50,26 +50,32 @@ plugin:
 	@cd plugin; make;
 
 clean:
-	@rm -rf $(OBJECTS) $(TARGET) make.depend
+	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
 fast:
 	CFLAGS="-O3" make  $(TARGET)
 
+fast-profiled:
+	CFLAGS="-O3 -fprofile-generate" LDFLAGS="-fprofile-generate" make $(TARGET)
+	./$(TARGET) benchmark/fib/fib.p
+	make clean
+	CFLAGS="-O3 -fprofile-use" LDFLAGS="-fprofile-use" make $(TARGET)
 
 llvm:
+	CC=llvm-gcc LDFLAGS="-O0" CFLAGS="-O0 -DLLVM" make $(TARGET)
+
+llvm-fast:
 	CC=llvm-gcc LDFLAGS="-O4" CFLAGS="-O4 -DLLVM" make $(TARGET)
 
 clang:
 	CC=clang CFLAGS="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
-
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg -DNOGC" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
-	
 probes: probes.d
 	dtrace -h -s probes.d
 	
