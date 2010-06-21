@@ -8,7 +8,6 @@ static void restore_env()
 {
 	BlockContext current = current_env();
     set_env((Optr)current->parent_frame);
-	// free_context(current);
 }
 
 /* ========================================================================= */
@@ -230,7 +229,11 @@ THREADED(block_return_self)
 
 /* ========================================================================= */
 THREADED(method_return)
-    restore_env();    
+    uns_int size = current_env()->size;
+    restore_env();
+    Optr result = PEEK_EXP(0);
+    ZAPN_EXP(CONTEXT_SIZE + 1 + size);
+    POKE_EXP(0, result);
     return t_return(pc);
 }
 
@@ -561,7 +564,8 @@ threaded* Method_invoke(MethodClosure closure,
         return PEEK_CNT();
     }
     
-    set_env((Optr)new_MethodContext(closure, self));
-    activation_from_native(argc);
+    // set_env((Optr)new_MethodContext(closure, self));
+    activation_from_native(closure, argc);
+
     return push_code(method->code);
 }

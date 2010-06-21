@@ -5,7 +5,7 @@
 /* ========================================================================= */
 
 MethodContext new_MethodContext(MethodClosure closure,
-                                                Optr self)
+                                Optr self)
 {
     uns_int size = closure->code->params->size + closure->code->locals->size;
 	MethodContext result         = (MethodContext)optain_context(size);
@@ -15,7 +15,7 @@ MethodContext new_MethodContext(MethodClosure closure,
 	result->home_context         = result;
 	result->parent_frame         = current_env();
 	result->self                 = self;
-	((BlockContext)result)->size = size;
+	result->size                 = size;
     return result;
 }
 

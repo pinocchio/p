@@ -16,27 +16,37 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
 
 /* ========================================================================= */
 
-BlockContext activation_from_native(long argc)
+BlockContext activation_from_native(BlockClosure closure, long argc)
 {
-    BlockClosure closure = current_env()->closure;
     Block block          = closure->code;
     uns_int paramc       = block->params->size;
     uns_int localc       = block->locals->size;
+    uns_int size         = paramc + localc;
 
-    BlockContext context = current_env();
+    BlockContext context = (BlockContext)&PEEK_EXP(argc);
 
-    while (argc) {
-        argc--;
-        context->locals[argc] = pop_EXP();
+    CLAIM_EXP(CONTEXT_SIZE);
+
+    uns_int i;
+    for (i = 0; i < argc + 1; i++) {
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
     }
-    ZAP_EXP();
+
+    context->size         = size;
+    context->scope_id     = 0;
+    context->home_context = context;
+    context->parent_frame = current_env();
+    context->closure      = closure;
 
     argc = paramc;
     // Set locals to nil.
-    while (argc < paramc + localc) {
+    while (argc < size) {
         context->locals[argc] = nil;
         argc++;
     }
+
+    //inspect(context);
+    set_env(context);
 
     return context;
 }
@@ -57,7 +67,7 @@ threaded* BlockClosure_apply(BlockClosure closure, uns_int argc)
         set_env((Optr)closure->context);
     } else {
         set_env((Optr)new_BlockContext(closure));
-        activation_from_native(argc);
+        activation_from_native(closure, argc);
     }
     return push_code(block->threaded);
 }

@@ -36,7 +36,7 @@ MethodClosure fName() {\
 
 /* ========================================================================= */
 
-BlockContext  activation_from_native(long argc);
+extern BlockContext activation_from_native(BlockClosure closure, long argc);
 
 /* ========================================================================= */
 

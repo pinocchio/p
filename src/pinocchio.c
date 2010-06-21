@@ -147,6 +147,8 @@ void store_method(Class class, Symbol symbol,
 
 static void bootstrap()
 {
+    init_gc();
+
     nil = (Optr) NEW_t(Nil);
 
     metaclass                   = NEW_t(Class);
