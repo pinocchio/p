@@ -195,9 +195,9 @@ THREADED(block_return)
 
 void block_return_value(Optr value)
 {
-    //TODO optimize
-    PUSH_EXP(value);
-    t_block_return();
+    set_env(PEEK_EXP(0));
+    POKE_EXP(0, value);
+    t_return();
 }
 
 #define RETURN(name, value) THREADED(block_return_##name) \
@@ -236,9 +236,11 @@ THREADED(method_return)
 
 void method_return_value(Optr value)
 {
-    // TODO optimize
-    PUSH_EXP(value);
-    t_method_return();
+    uns_int size = current_env()->size;
+    restore_env();
+    ZAPN_EXP(CONTEXT_SIZE + size);
+    POKE_EXP(0, value);
+    t_return();
 }
 
 #define METHOD_RETURN(name, value) THREADED(method_return_##name) \
