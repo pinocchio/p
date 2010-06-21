@@ -33,11 +33,9 @@ static BlockContext activate_block(BlockClosure closure, long argc)
         POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE - 1));
     }
 
-    argc = paramc;
     // Set locals to nil.
-    while (argc < size) {
-        context->locals[argc] = nil;
-        argc++;
+    for (; paramc < size; paramc++) {
+        context->locals[paramc] = nil;
     }
     
 	context->size         = size;
