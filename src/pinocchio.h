@@ -18,9 +18,16 @@
 
 /* ========================================================================= */
 
+typedef enum BOOL { FALSE , TRUE } BOOL;
+typedef void** Optr;
+typedef void*(*threaded)(void* pc);
+typedef unsigned long uns_int;
+
+/* ========================================================================= */
+
 #ifdef NOGC
-    #undef PALLOC
-    #define PALLOC malloc
+    #include <system/gc/gc.h>
+    #define PALLOC palloc
 #else
     #include <gc/gc.h>
     #ifdef GC_MALLOC
@@ -29,8 +36,6 @@
         #define PALLOC malloc
     #endif // GC_MALLOC
 #endif // NOGC
-
-typedef unsigned long uns_int;
 
 /* ========================================================================= */
 
@@ -113,10 +118,6 @@ Class class##_Class;
 
 /* ========================================================================= */
 
-typedef enum BOOL { FALSE , TRUE } BOOL;
-
-typedef void** Optr;
-typedef void*(*threaded)(void* pc);
 #include <thread.h>
 
 /* ========================================================================= */
@@ -149,7 +150,7 @@ typedef struct Nil{} Nil;
 
 #define STACK_SIZE 1024*1024
 #define INT_CACHE_LOWER -1
-#define INT_CACHE_UPPER 127
+#define INT_CACHE_UPPER 1023
 
 extern void CNT_continue_eval();
 extern void CNT_abort_eval();

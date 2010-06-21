@@ -18,10 +18,6 @@
 #error "unsupported LONG_MAX"
 #endif
 
-
-#define INT_CACHE_LOWER -1
-#define INT_CACHE_UPPER 127
-
 /* ========================================================================= */
 
 struct SmallInt_t {

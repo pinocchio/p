@@ -238,7 +238,7 @@ void shallow_inspect(Optr o)
         fwprintf(stderr, L" (%lu)", (uns_int)o);
     } else {
         fwprintf(stderr, L"Instance of %ls", cls->name->value);
-        fwprintf(stderr, L" (%lu)", (uns_int)o);
+        fwprintf(stderr, L" (%p)", o);
     }
 
     Optr tag = GETTAG(o);

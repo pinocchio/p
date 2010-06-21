@@ -54,7 +54,7 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS="-O4" make  $(TARGET)
+	CFLAGS="-DNOGC -O3" make  $(TARGET)
 
 
 llvm:
