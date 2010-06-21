@@ -33,6 +33,8 @@ static MethodContext activate_method(MethodClosure closure, long argc)
         POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
     }
 
+    CLAIM_EXP(localc);
+
     // Set locals to nil.
     for (; paramc < size; paramc++) {
         context->locals[paramc] = nil;

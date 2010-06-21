@@ -24,14 +24,16 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     uns_int localc       = block->locals->size;
     uns_int size         = paramc + localc;
 
-    BlockContext context = (BlockContext)&PEEK_EXP(argc);
+    BlockContext context = (BlockContext)&PEEK_EXP(argc - 1);
 
     CLAIM_EXP(CONTEXT_SIZE);
 
     uns_int i;
     for (i = 0; i < argc + 1; i++) {
-        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE - 1));
+        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
     }
+
+    CLAIM_EXP(localc);
 
     // Set locals to nil.
     for (; paramc < size; paramc++) {
