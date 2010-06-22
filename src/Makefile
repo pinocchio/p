@@ -76,6 +76,10 @@ profile:
 	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
+fib:
+	@make fast
+	@benchmark/time.rb 40 ./pinocchio benchmark/fib/fib.p
+
 probes: probes.d
 	dtrace -h -s probes.d
 	
