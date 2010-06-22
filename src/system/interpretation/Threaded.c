@@ -148,8 +148,7 @@ PUSH_EVAL(variable, Variable)
 PUSH_EVAL(class_reference, ClassReference)
 
 THREADED(push_self)
-    CLAIM_EXP(1);
-    Self_eval();
+    PUSH_EXP(current_env()->home_context->self);
     pc += 1;
 }
 

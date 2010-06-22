@@ -37,7 +37,6 @@ extern BlockContext optain_context(uns_int size);
 /* ========================================================================= */
 
 extern BlockContext capture_current_env();
-extern BlockContext current_env();
 extern void set_env(Optr env);
 
 /* ========================================================================= */

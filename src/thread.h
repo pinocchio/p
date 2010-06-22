@@ -31,10 +31,12 @@ extern THREAD_OBJECT Error_Handler;
     #define tkey(key_t, deconstructor) pthread_key_create(&key_t, deconstructor)
 #else // THREAD    
     #define tget(key) (key)
-    #define tset(key, value) (key) = (THREAD_OBJECT)(value)
+    #define tset(key, value) ((key) = (THREAD_OBJECT)(value))
     #define tkey(key_t, deconstructor) 
 #endif // THREAD
 
+
+#define current_env() ((BlockContext)tget(_ENV_))
 
 extern void _push_EXP(Optr e);
 extern Optr pop_EXP();
