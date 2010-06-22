@@ -35,7 +35,7 @@ BlockContext capture_current_env()
     } else {
         target = new_BlockContext(size);
     }
-    size += CONTEXT_SIZE;
+    size += CONTEXT_SIZE + 1;
     Optr * from = (Optr*)context;
     Optr * to   = (Optr*)target;
 

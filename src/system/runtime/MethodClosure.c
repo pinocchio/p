@@ -24,7 +24,7 @@ static MethodContext activate_method(MethodClosure closure, long argc)
     uns_int localc       = method->locals->size;
     uns_int size         = paramc + localc;
 
-    MethodContext context = (MethodContext)&PEEK_EXP(argc - 1);
+    MethodContext context = (MethodContext)&PEEK_EXP(argc);
 
     CLAIM_EXP(CONTEXT_SIZE);
 
@@ -40,7 +40,6 @@ static MethodContext activate_method(MethodClosure closure, long argc)
         context->locals[paramc] = nil;
     }
     
-	HEADER(context)       = MethodContext_Class;
 	context->size         = size;
 	context->stacked      = 1;
 	context->parent_frame = current_env();

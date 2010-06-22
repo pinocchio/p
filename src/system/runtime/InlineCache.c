@@ -7,8 +7,8 @@
 
 Array new_InlineCache()
 {
-    return (Array)instantiate_sized((Class)InlineCache_Class,
-                                         DEFAULT_INLINECACHE_SIZE << 1);
+    return (Array)instantiate_sized(InlineCache_Class,
+                                    DEFAULT_INLINECACHE_SIZE << 1);
 }
 
 /* ========================================================================= */
