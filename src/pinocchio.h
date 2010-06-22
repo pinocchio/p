@@ -26,8 +26,7 @@ typedef unsigned long uns_int;
 /* ========================================================================= */
 
 #ifdef NOGC
-    #include <system/gc/gc.h>
-    #define PALLOC palloc
+    #define PALLOC malloc
 #else
     #include <gc/gc.h>
     #ifdef GC_MALLOC

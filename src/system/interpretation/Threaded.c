@@ -397,8 +397,6 @@ THREADED(send_ifFalse_ifTrue_)
     	Class_normal_dispatch(bool, send, 2);
     }
 }
-
-
 /* ========================================================================= */
 
 #define SUPER(n) THREADED(super##n) \

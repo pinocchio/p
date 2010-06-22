@@ -72,7 +72,7 @@ clang:
 	CC=clang CFLAGS="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
 
 profile:
-	LDFLAGS="-pg" CFLAGS="-pg -DNOGC" make $(TARGET)
+	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib.p
 	gprof --flat-profile $(TARGET)
 
