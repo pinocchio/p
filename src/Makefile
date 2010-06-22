@@ -73,7 +73,7 @@ clang:
 
 profile:
 	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
-	./$(TARGET) benchmark/fib/fib.p
+	./$(TARGET) benchmark/fib/fib34.p
 	gprof --flat-profile $(TARGET)
 
 fib:

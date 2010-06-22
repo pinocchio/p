@@ -112,7 +112,6 @@ THREADED(restart)
         pc += 1 + num;\
     } else {\
         assert1(NULL, "Non-boolean type receiver for truth");\
-        pc = BREAK;\
     }\
 }
 
