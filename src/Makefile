@@ -1,7 +1,7 @@
 SHELL        = /bin/bash
 PHAROVERSION = `cat lib/VERSION`
-SVNVERSION   = `cat SVNVERSION`
-EDGEVERSION  = svn$(SVNVERSION)_mc$(PHAROVERSION)
+GITVERSION   = `cat GITVERSION`
+EDGEVERSION  = svn$(GITVERSION)_mc$(PHAROVERSION)
 EDGEPV       = pinocchio_$(EDGEVERSION)
 MAKEOPTS     = -j3
 OS           = $(shell uname)
@@ -17,7 +17,7 @@ HFILES      += $(CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES) $(HIFILES) $(CIFILES)
 PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(wildcard plugin/**/*.h) $(wildcard plugin/**/*.c)
-EXTRASOURCES = SETUP lib/VERSION SVNVERSION Makefile $(PLUGINSOURCES)
+EXTRASOURCES = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
@@ -36,8 +36,8 @@ all: $(TARGET)
 	@echo Compiling: $@
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
-SVNVERSION:
-	@(svn info 2>/dev/null||git svn info)|grep Revision|awk '{print $$2}'>$@
+GITVERSION:
+	@git show-ref --hash=20 HEAD>$@
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
@@ -105,7 +105,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist SVNVERSION
+.PHONY: test vtest run clean profile plugin dist GITVERSION
 # ============================================================================
 include make.depend
 
