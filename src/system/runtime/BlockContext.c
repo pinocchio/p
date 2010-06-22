@@ -25,11 +25,6 @@ BlockContext new_BlockContext(uns_int size)
     return result;
 }
 
-BlockContext current_env()
-{
-    return (BlockContext)tget(_ENV_);
-}
-
 BlockContext capture_current_env()
 {
     BlockContext target;

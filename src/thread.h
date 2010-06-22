@@ -36,6 +36,8 @@ extern THREAD_OBJECT Error_Handler;
 #endif // THREAD
 
 
+#define current_env() ((BlockContext)tget(_ENV_))
+
 extern void _push_EXP(Optr e);
 extern Optr pop_EXP();
 
