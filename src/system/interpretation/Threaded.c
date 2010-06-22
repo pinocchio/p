@@ -377,46 +377,25 @@ THREADED(send_ifTrue_ifFalse_)
     }
 }
 
-THREADED(send_hash)
-    pc += 2;
-    SmallInt hash;
-    Optr self = PEEK_EXP(0);
-    Optr tag  = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = ((Symbol)self)->hash;
-    } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (SmallInt)self;
+THREADED(send_ifFalse_ifTrue_) 
+    Optr bool = PEEK_EXP(0);
+    if (bool == false) {
+        Block block = (Block)get_code(pc + 2);
+        pc += 4;
+        POKE_EXP(0, current_env());
+        push_code(block->threaded);
+    } else if (bool == true) {
+        Block block = (Block)get_code(pc + 3);
+        pc += 4;
+        POKE_EXP(0, current_env());
+        push_code(block->threaded);
     } else {
-        Send send = (Send)get_code(pc - 1);
-        Class_normal_dispatch(self, send, 0);
-        return;
-    }
-    POKE_EXP(0, hash);
-}
-
-
-THREADED(send_value)
-    pc += 1;
-    Optr o = pop_EXP();
-    if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 0);
-    } else {
-        Send send = (Send)get_code(pc);
-        Class_normal_dispatch(o, send, 0);
+        Send send = (Send)get_code(pc + 1);
+        push_closure(pc + 2);
+        push_closure(pc + 3);
+    	Class_normal_dispatch(bool, send, 2);
     }
 }
-
-THREADED(send_value_)
-    pc += 1;
-    Optr o = pop_EXP();
-    if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 1);
-        return;
-    }
-    Send send = (Send)get_code(pc);
-    Class_normal_dispatch(o, send, 1);
-}
-
 /* ========================================================================= */
 
 #define SUPER(n) THREADED(super##n) \
@@ -530,9 +509,6 @@ void post_init_Threaded()
     T_FUNC(send5)
     T_FUNC(sendn)
 
-    T_FUNC(send_hash)
-    T_FUNC(send_value)
-    T_FUNC(send_value_)
     T_FUNC(send_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
