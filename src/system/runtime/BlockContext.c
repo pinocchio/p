@@ -53,11 +53,6 @@ BlockContext capture_current_env()
     return target;
 }
 
-void set_env(Optr env)
-{
-    tset(_ENV_, env);
-}
-
 /* ========================================================================= */
 
 Optr BlockContext_lookup(BlockContext self, uns_int local_id, uns_int scope_id)

@@ -5,6 +5,9 @@
 /* ========================================================================= */
 
 threaded* pc;
+THREAD_OBJECT _ENV_;
+THREAD_OBJECT _EXP_;
+THREAD_OBJECT _CNT_;
 
 static void restore_env()
 {
