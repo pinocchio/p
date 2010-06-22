@@ -16,12 +16,6 @@ struct Method_t {
     Optr    body[];
 };
 
-extern Method new_Method(uns_int paramCount,
-                                 uns_int localCount,
-                                 uns_int statementCount);
-extern Method new_Method_withAll(uns_int paramCount,
-                                 uns_int localCount,
-                                 uns_int statementCount, ...);
 extern Method new_Method_with(Array params,
                               Array locals,
                               Array annotations,
