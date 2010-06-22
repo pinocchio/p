@@ -112,4 +112,3 @@ include make.depend
 make.depend: $(SOURCES)
 	@$(CC) -M -I. $(CFILES) > $@
 	@#makedepend $(INCLUDES) $^
-
