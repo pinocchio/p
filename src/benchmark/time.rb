@@ -48,7 +48,7 @@ count.times {
     next unless $?.success?
     a = a.grep(/user/).first
     time =  a.match(/([0-9]+\.[0-9]+)/)[1].to_f
-    time += $1.to_f * 60 if a.match(/([0-9]+)m/)
+    time += $1.to_f * 60 if a.match(/([0-9]+)m[0-9]/)
     probes.push(time)
 }
 

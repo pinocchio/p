@@ -41,7 +41,6 @@ extern THREAD_OBJECT Error_Handler;
 extern void _push_EXP(Optr e);
 extern Optr pop_EXP();
 
-
 #define PUSH_EXP(e)             _push_EXP((Optr)e);
 #define CLAIM_EXP(value)		tset(_EXP_, tget(_EXP_)+(value))
 #define PEEK_EXP(depth)         (*(tget(_EXP_) - (depth)))
