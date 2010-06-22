@@ -54,7 +54,7 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS="-O3" make  $(TARGET)
+	CFLAGS="-O3" make $(TARGET)
 
 fast-profiled:
 	CFLAGS="-O3 -fprofile-generate" LDFLAGS="-fprofile-generate" make $(TARGET)

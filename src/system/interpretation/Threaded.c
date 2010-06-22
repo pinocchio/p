@@ -288,17 +288,18 @@ THREADED(sendn)
 }
 
 /* ========================================================================= */
-THREADED(send_to_do_) 
+THREADED(send_to_do_)
+    pc += 1;
     Optr from = PEEK_EXP(1);
     Optr to   = PEEK_EXP(0);
     if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
         POKE_EXP(1, unwrap_int(from));
         POKE_EXP(0, unwrap_int(to));
-        push_closure(pc + 1);
+        push_closure(pc);
         return;
     }
-    Send send = (Send)get_code(pc + 5);
-    push_closure(pc + 3);
+    Send send = (Send)get_code(pc + 4);
+    push_closure(pc + 2);
     Class_normal_dispatch(from, send, 0);
 }
 
@@ -377,22 +378,26 @@ THREADED(send_ifTrue_ifFalse_)
     }
 }
 
-THREADED(send_hash)
-    pc += 2;
-    SmallInt hash;
-    Optr self = PEEK_EXP(0);
-    Optr tag  = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = ((Symbol)self)->hash;
-    } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (SmallInt)self;
+THREADED(send_ifFalse_ifTrue_) 
+    Optr bool = PEEK_EXP(0);
+    if (bool == false) {
+        Block block = (Block)get_code(pc + 2);
+        pc += 4;
+        POKE_EXP(0, current_env());
+        push_code(block->threaded);
+    } else if (bool == true) {
+        Block block = (Block)get_code(pc + 3);
+        pc += 4;
+        POKE_EXP(0, current_env());
+        push_code(block->threaded);
     } else {
-        Send send = (Send)get_code(pc - 1);
-        Class_normal_dispatch(self, send, 0);
-        return;
+        Send send = (Send)get_code(pc + 1);
+        push_closure(pc + 2);
+        push_closure(pc + 3);
+    	Class_normal_dispatch(bool, send, 2);
     }
-    POKE_EXP(0, hash);
 }
+
 
 /* ========================================================================= */
 
@@ -507,11 +512,11 @@ void post_init_Threaded()
     T_FUNC(send5)
     T_FUNC(sendn)
 
-    T_FUNC(send_hash)
     T_FUNC(send_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
     T_FUNC(send_ifTrue_ifFalse_)
+    T_FUNC(send_ifFalse_ifTrue_)
 
     T_FUNC(super0)
     T_FUNC(super1)

@@ -104,12 +104,12 @@ T_CODE(send4)
 T_CODE(send5)
 T_CODE(sendn)
 
-T_CODE(send_hash)
 T_CODE(send_to_do_)
 T_CODE(continue_to_do_)
 T_CODE(send_ifFalse_)
 T_CODE(send_ifTrue_)
 T_CODE(send_ifTrue_ifFalse_)
+T_CODE(send_ifFalse_ifTrue_)
 
 T_CODE(super0)
 T_CODE(super1)
@@ -121,7 +121,6 @@ T_CODE(supern)
 
 T_CODE(assign)
 T_CODE(dup)
-T_CODE(send_value)
 T_CODE(restart)
 
 T_CODE(peek1)
