@@ -394,42 +394,6 @@ THREADED(send_hash)
     POKE_EXP(0, hash);
 }
 
-
-THREADED(send_value)
-    pc += 1;
-    Optr o = pop_EXP();
-    if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 0);
-    } else {
-        Send send = (Send)get_code(pc);
-        Class_normal_dispatch(o, send, 0);
-    }
-}
-
-THREADED(send_value_)
-    pc += 1;
-    Optr o = pop_EXP();
-    if (HEADER(o) == BlockClosure_Class) {
-        BlockClosure_apply((BlockClosure)o, 1);
-        return;
-    }
-    Send send = (Send)get_code(pc);
-    Class_normal_dispatch(o, send, 1);
-}
-
-THREADED(send_smallerthan_)
-    pc += 2;
-    Optr right = PEEK_EXP(0);
-    Optr left = PEEK_EXP(1);
-    if (HEADER(left) == SmallInt_Class && HEADER(right) ==  SmallInt_Class) {
-        ZAP_EXP();
-        POKE_EXP(0, get_bool(unwrap_int(left) < unwrap_int(right)));
-        return;
-    }
-    Send send = (Send)get_code(pc - 1);
-    Class_normal_dispatch(left, send, 1);
-}
-
 /* ========================================================================= */
 
 #define SUPER(n) THREADED(super##n) \
@@ -543,10 +507,7 @@ void post_init_Threaded()
     T_FUNC(send5)
     T_FUNC(sendn)
 
-    T_FUNC(send_smallerthan_)
     T_FUNC(send_hash)
-    T_FUNC(send_value)
-    T_FUNC(send_value_)
     T_FUNC(send_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
