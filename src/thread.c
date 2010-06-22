@@ -42,29 +42,6 @@ void initialize_Thread()
 
 /* ========================================================================= */
 
-Optr pop_EXP()
-{
-    Optr * p = tget(_EXP_);
-    tset(_EXP_, p - 1);
-    return *p;
-}
-
-void _push_EXP(Optr e)
-{
-    Optr * p = tget(_EXP_) + 1;
-    tset(_EXP_, p);
-    *p = e;
-}
-
-void _push_CNT(threaded* e)
-{
-    threaded ** p = (threaded**)tget(_CNT_) - 1;
-    tset(_CNT_, p);
-    *p = e;
-}
-
-/* ========================================================================= */
-
 Array get_args(int argc, const char ** argv)
 {
     Array args = new_Array_raw(argc - 1);

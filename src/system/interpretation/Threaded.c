@@ -28,6 +28,29 @@ void push_code(Array code)
 
 /* ========================================================================= */
 
+Optr pop_EXP()
+{
+    Optr * p = tget(_EXP_);
+    tset(_EXP_, p - 1);
+    return *p;
+}
+
+void _push_EXP(Optr e)
+{
+    Optr * p = tget(_EXP_) + 1;
+    tset(_EXP_, p);
+    *p = e;
+}
+
+void _push_CNT(threaded* e)
+{
+    threaded ** p = (threaded**)tget(_CNT_) - 1;
+    tset(_CNT_, p);
+    *p = e;
+}
+
+/* ========================================================================= */
+
 THREADED(jump_back)
     pc -= 1;
 }
