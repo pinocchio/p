@@ -24,7 +24,7 @@ String new_String_sized(uns_int size)
     size += 1;
     String result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
     HEADER(result) = String_Class;
-    result->size   = size;
+    result->size   = size - 1;
     while(size--) {
         result->value[size] = '\0';
     }
