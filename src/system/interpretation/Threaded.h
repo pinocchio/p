@@ -9,7 +9,7 @@
 
 extern threaded* pc;
 
-#ifdef DEBUG
+#ifdef TDEBUG
     #define THREADED(name) void t_##name() {\
         DT(THREADED, ""#name) \
         fwprintf(stderr, L"         : "#name"\n");
