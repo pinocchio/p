@@ -40,7 +40,9 @@ all: $(TARGET)
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 GITVERSION:
-	@git show-ref --hash=20 HEAD>$@
+	@ruby -e 'print `git branch 2> /dev/null`.chomp[2..-1]' > $@
+	@echo -n '_' >> $@
+	@git show-ref --hash=20 HEAD >> $@
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@

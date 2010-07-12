@@ -93,6 +93,9 @@ SmallInt wchar_hash(const wchar_t * string, long size)
 
 SmallInt Symbol_hash(Symbol symbol)
 {
+    if (!symbol->hash) {
+        symbol->hash = wchar_hash(symbol->value, symbol->size);
+    }
     return symbol->hash;
 }
 

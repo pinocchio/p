@@ -24,11 +24,11 @@ String new_String_sized(uns_int size)
     size += 1;
     String result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
     HEADER(result) = String_Class;
-    result->size   = size;
+    result->size   = size - 1;
     while(size--) {
         result->value[size] = '\0';
     }
-    result->hash   = Symbol_hash((Symbol)result);
+    result->hash = wchar_hash(result->value, result->size);
     return result;
 }
 
@@ -108,13 +108,14 @@ NATIVE2(String_at_put_)
     ASSERT_INSTANCE_OF(w_arg1, Character_Class);
     long index = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %li\n", index));
-    assert(index < ((String)self)->size,
+    String s = (String)self;
+    assert(index < s->size,
         printf("%li is out of Bounds[%lu] %p\n",
                     index,
-                    ((String)self)->size,
+                    s->size,
                     self));
-    ((String)self)->value[index] = ((Character)w_arg1)->value;
-    ((String)self)->hash         = Symbol_hash((Symbol)self);
+    s->value[index] = ((Character)w_arg1)->value;
+    s->hash         = wchar_hash(s->value, s->size);
     RETURN_FROM_NATIVE(self);
 }
 
