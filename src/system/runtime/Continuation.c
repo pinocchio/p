@@ -19,14 +19,14 @@ NATIVE1(Continuation_continue_)
     Optr arg  = NATIVE_ARG(0);
     // restore the stack
     tset(_EXP_, cont->exp_stack->size + (&ds[-1]));
-    tset(_CNT_, (&ds[STACK_SIZE]) - cont->cnt_stack->size);
+    tset(_CNT_, (threaded**)(&ds[STACK_SIZE]) - cont->cnt_stack->size);
 
     int i;
     for (i = 0; i < cont->exp_stack->size; i++) {
         ds[i] = cont->exp_stack->values[i];
     }
 
-    ds = tget(_CNT_);
+    ds = (Optr *)tget(_CNT_);
     
     for (i = 0; i < cont->cnt_stack->size; i++) {
         ds[i] = cont->cnt_stack->values[i];
@@ -41,7 +41,7 @@ NATIVE1(Continuation_on_)
     Continuation cont    = new_Continuation();
     cont->exp_stack      = new_Array(EXP_SIZE() - (argc + 1),
     tget(Double_Stack));
-    cont->cnt_stack      = new_Array(CNT_SIZE(), tget(_CNT_));
+    cont->cnt_stack      = new_Array(CNT_SIZE(), (Optr *)tget(_CNT_));
     cont->env            = (Optr)current_env();
     Optr closure         = NATIVE_ARG(0);
     POKE_EXP(0, cont);

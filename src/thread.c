@@ -13,7 +13,7 @@ void init_Stack(uns_int size)
 
 void init_Error_Handler()
 {
-    tset(Error_Handler, new_Continue_offset(0));
+    tset(Error_Handler, (Optr)new_Continue_offset(0));
 }
 
 void initialize_Thread()
