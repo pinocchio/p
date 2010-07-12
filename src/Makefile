@@ -5,6 +5,7 @@ EDGEVERSION  = git$(GITVERSION)_mc$(PHAROVERSION)
 EDGEPV       = pinocchio_$(EDGEVERSION)
 MAKEOPTS     = -j3
 OS           = $(shell uname)
+CC			 = clang
 # ============================================================================
 TARGET       = pinocchio
 
@@ -21,7 +22,9 @@ EXTRASOURCES = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS      = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
-LDFLAGS += -lgc -lm -ldl 
+#CFLAGS  += -DTHREAD -DNOGC
+LDFLAGS += -lgc -lm -ldl
+#LDFLAGS += -lpthread
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc

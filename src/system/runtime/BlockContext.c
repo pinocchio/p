@@ -76,7 +76,7 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
         self = self->outer_scope;
     }
     /* TODO jump to error handler. */
-    assert1(scope_id == scope_id, "TODO jump to error handler");
+    //assert1(scope_id == scope_id, "TODO jump to error handler");
     assert(local_id < self->size,
 		   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
                   local_id, self->size));
