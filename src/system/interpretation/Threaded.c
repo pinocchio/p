@@ -5,9 +5,6 @@
 /* ========================================================================= */
 
 threaded* pc;
-THREAD_OBJECT _ENV_;
-THREAD_OBJECT _EXP_;
-THREAD_OBJECT _CNT_;
 
 static void restore_env()
 {
@@ -135,7 +132,7 @@ PEEK(4)
 PEEK(5)
 
 THREADED(dup)
-    t_peek0(pc);
+    t_peek0();
 }
 
 #define PUSHN(count) THREADED(push##count) \

@@ -15,7 +15,6 @@ Continue new_Continue_offset(int offset)
     Continue cont    = new_Continue();
     cont->exp_offset = EXP_SIZE() - offset + 1;
     cont->cnt_offset = CNT_SIZE() + 1;
-    cont->iss        = (Optr)tget(_ISS_);
     cont->env        = (Optr)current_env();
     return cont;
 }
@@ -27,7 +26,6 @@ void Continue_escape(Continue cont, Optr return_value)
     // restore the stack
     tset(_EXP_, cont->exp_offset + &tget(Double_Stack)[-1]);
     tset(_CNT_, (&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_offset);
-    tset(_ISS_, cont->iss);
     set_env(cont->env);
     t_return();
     POKE_EXP(0, return_value);

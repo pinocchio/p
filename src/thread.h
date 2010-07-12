@@ -10,18 +10,7 @@
     typedef Optr * THREAD_OBJECT;
 #endif // THREAD
 
-extern THREAD_OBJECT Double_Stack;
-extern THREAD_OBJECT _EXP_;
-extern THREAD_OBJECT _CNT_;
-
-extern THREAD_OBJECT _ENV_;
-extern THREAD_OBJECT _ISS_;
-
-extern THREAD_OBJECT Eval_Exit;
-extern THREAD_OBJECT Eval_Continue;
-extern THREAD_OBJECT Eval_Abort;
-
-extern THREAD_OBJECT Error_Handler;
+extern Thread _thread_;
 
 #define tget_buf(key) *(jmp_buf*)tget(key)
 
@@ -30,8 +19,8 @@ extern THREAD_OBJECT Error_Handler;
     #define tset(key, value) pthread_setspecific((key), (value))
     #define tkey(key_t, deconstructor) pthread_key_create(&key_t, deconstructor)
 #else // THREAD    
-    #define tget(key) (key)
-    #define tset(key, value) ((key) = (THREAD_OBJECT)(value))
+    #define tget(key) (_thread_->key)
+    #define tset(key, value) ((_thread_->key) = (THREAD_OBJECT)(value))
     #define tkey(key_t, deconstructor) 
 #endif // THREAD
 

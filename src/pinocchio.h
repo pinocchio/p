@@ -117,10 +117,6 @@ Class class##_Class;
 
 /* ========================================================================= */
 
-#include <thread.h>
-
-/* ========================================================================= */
-
 
 extern void printf0(const char * string, ...);
 extern void _indent_(uns_int i);
@@ -158,10 +154,13 @@ extern void CNT_exit_eval();
 /* ========================================================================= */
 
 #define TYPE(name) typedef struct name##_##t * name;
-
 #include <pinocchioType.hi>
 
 typedef void(*native)(Optr self, Class class, uns_int argc);
+
+/* ========================================================================= */
+
+#include <thread.h>
 
 /* ========================================================================= */
 
