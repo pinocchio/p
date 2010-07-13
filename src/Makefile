@@ -16,10 +16,10 @@ CIFILES      = $(wildcard *.ci) $(wildcard system/**/*.ci)
 HIFILES      = $(wildcard *.hi) $(wildcard system/**/*.hi)
 HFILES      += $(CFILES:%.c=%.h)
 
-SOURCES      = $(CFILES) $(HFILES) $(HIFILES) $(CIFILES)
+SOURCES       = $(CFILES) $(HFILES) $(HIFILES) $(CIFILES)
 PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(wildcard plugin/**/*.h) $(wildcard plugin/**/*.c)
-EXTRASOURCES = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
-OBJECTS      = $(CFILES:%.c=%.o)
+EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
+OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
 #CFLAGS  += -DTHREAD -DNOGC

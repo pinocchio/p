@@ -83,22 +83,9 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
 
     self->locals[local_id] = value;
 }
-
-NATIVE(BlockContext_errorHandler)
-    RETURN_FROM_NATIVE(tget(Error_Handler));
-}
-
-NATIVE1(BlockContext_errorHandler_)
-    tset(Error_Handler, NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
-}
-
 /* ========================================================================= */
 
 void pre_init_BlockContext() { }
 void post_init_BlockContext()
 {
-    Dictionary natives = add_plugin(L"Runtime.BlockClosure");
-    store_native(natives, SMB_errorHandler, NM_BlockContext_errorHandler);
-    store_native(natives, SMB_errorHandler_, NM_BlockContext_errorHandler_);
 }

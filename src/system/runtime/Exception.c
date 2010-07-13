@@ -5,7 +5,7 @@
 
 void fail(const Class exception_class, uns_int argc, ...)
 {
-    Object error = (Object)instantiate(exception_class);
+    Object error    = (Object)instantiate(exception_class);
     error->ivals[0] = (Optr)current_env();
 
     va_list args;
@@ -19,8 +19,7 @@ void fail(const Class exception_class, uns_int argc, ...)
     //raise(SIGSEGV);
 
     if (HEADER(tget(Error_Handler)) == Continue_Class) {
-        Continue_escape((Continue)tget(Error_Handler),
-                                (Optr)error);
+        Continue_escape((Continue)tget(Error_Handler), (Optr)error);
     } else {
         handle_assert("Unsupported type of error-handler installed.");
     }
@@ -30,7 +29,27 @@ void fail(const Class exception_class, uns_int argc, ...)
 void handle_assert(const char * message)
 {
     raise(SIGSEGV);
-    //fail(Exception_AssertionFailure_Class, 1,
-    //     new_String_from_charp(message));
+    //fail(Exception_AssertionFailure_Class, 1, new_String_from_charp(message));
+}
+
+/* ========================================================================= */
+
+NATIVE0(Exception_handler)
+    Optr error_handler = tget(Error_Handler);
+    RETURN_FROM_NATIVE(error_handler);
+}
+
+NATIVE1(Exception_handler_)
+    tset(Error_Handler, NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(self);
+}
+
+/* ========================================================================= */
+
+void post_init_Exception()
+{
+    Dictionary natives = add_plugin(L"Runtime.Exception");
+    store_native(natives, new_Symbol(L"handler"),  NM_Exception_handler);
+    store_native(natives, new_Symbol(L"handler:"), NM_Exception_handler_);
 }
 
