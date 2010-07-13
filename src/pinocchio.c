@@ -17,7 +17,6 @@ void init_thread_keys()
     tkey(_EXP_,         NULL);
     tkey(_CNT_,         NULL);
     tkey(_ENV_,         NULL);
-    tkey(_ISS_,         NULL);
  
     tkey(Eval_Exit,     NULL);
     tkey(Eval_Continue, NULL);

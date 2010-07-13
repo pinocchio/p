@@ -2,39 +2,23 @@
 #include <lib/lib.h>
 #include <string.h>
 
-THREAD_OBJECT Double_Stack;
-THREAD_OBJECT _ISS_;
-
-THREAD_OBJECT Eval_Exit;
-THREAD_OBJECT Eval_Continue;
-THREAD_OBJECT Eval_Abort;
-
-THREAD_OBJECT Error_Handler;
+Thread _thread_;
 
 /* ========================================================================= */
 
 void init_Stack(uns_int size)
 {
-    // TODO allocate the stack with the given size
-    tset(Double_Stack, PALLOC(sizeof(Optr[size])));
-    tset(_EXP_, &tget(Double_Stack)[-1]);
-    tset(_CNT_, &tget(Double_Stack)[size]);
+    _thread_ = new_Thread(size);
 }
 
 void init_Error_Handler()
 {
-    tset(Error_Handler, new_Continue_offset(0));
+    tset(Error_Handler, (Optr)new_Continue_offset(0));
 }
 
 void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
-    tset(_ISS_, nil); 
-    tset(_ENV_, nil);
-
-    tset(Eval_Exit,     PALLOC(sizeof(jmp_buf)));
-    tset(Eval_Continue, PALLOC(sizeof(jmp_buf)));
-    tset(Eval_Abort,    PALLOC(sizeof(jmp_buf)));
 }
 
 /* ========================================================================= */
