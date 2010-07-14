@@ -42,12 +42,6 @@ void init_numbercache()
 
 /* ========================================================================= */
 
-#define SmallInt_BINARY_OPERATION(name, op)\
-NATIVE1(SmallInt_##name)\
-    long value = unwrap_int(NATIVE_ARG(0)); \
-    RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op value));\
-}
-
 NATIVE1(SmallInt_plus_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
