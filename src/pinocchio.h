@@ -134,8 +134,6 @@ extern void print_EXP();
     #define LOG_AST_INFO(print, info)
 #endif
 
-#define RESET_LOG() fwprintf(stderr, L"\n");
-
 /* ========================================================================= */
 
 typedef unsigned int    bool;
@@ -187,8 +185,6 @@ extern void store_method(Class class, Symbol symbol, MethodClosure method);
 #include <signal.h>
 #include <setjmp.h>
 
-#define SIGFAIL SIGABRT
-
 #define NYI assert1(NULL, "NYI");
 
 #define ERROR_HANDLER handle_assert
@@ -201,6 +197,7 @@ extern void store_method(Class class, Symbol symbol, MethodClosure method);
     #define FLUSH_STDOUT fpurge(stdout);
 #endif
 
+/* Convenience macros for inserting debug info into strings */
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
 #define AT __FILE__ ":" TOSTRING(__LINE__)
