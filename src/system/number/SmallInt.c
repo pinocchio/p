@@ -91,8 +91,8 @@ NATIVE1(SmallInt_shiftLeft_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
     if (left != 0) {
-        long bits = log2l(abs(left)) + 1;
-        assert0(right + bits < sizeof(long) * 8);
+        long bits = log2l(abs(left));
+        assert0(right + bits < sizeof(long) * 8 - 1);
     }
     RETURN_FROM_NATIVE(new_SmallInt(left << right));
 }
