@@ -36,5 +36,6 @@ clean:
 
 tags: $(SOURCES)
 	@cd ..; make tags
+
 # ============================================================================
 .PHONY: plugin tags clean tags

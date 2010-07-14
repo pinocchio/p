@@ -125,6 +125,7 @@ void post_init_BlockClosure()
     store_native(natives, SMB_blockclosureValue_message_, NM_BlockClosure_apply_);
     store_native(natives, SMB_blockclosureValueWithArguments_message_,
                           NM_BlockClosure_valueWithArguments_);
+
     natives = add_plugin(L"Runtime.BlockClosure");
-    store_native(natives, SMB_numArgs, NM_BlockClosure_numArgs);
+    store_native(natives, new_Symbol(L"numArgs"),  NM_BlockClosure_numArgs);
 }

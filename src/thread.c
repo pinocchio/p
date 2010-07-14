@@ -61,9 +61,11 @@ void pinocchio_main(int argc, const char ** argv)
 {
     cargv = argv;
 #ifdef THREAD
-    pthread_t main_thread;
-    pthread_create(&main_thread, NULL, &pinocchio_main_thread, (void*)(uns_int)argc);
-    pthread_join(main_thread, NULL);
+    pthread_t thread;
+    pthread_attr_t pthread_custom_attr;
+    pthread_attr_init(&pthread_custom_attr);
+    pthread_create(&thread, &pthread_custom_attr, &pinocchio_main_thread, (void*)(uns_int)argc);
+    pthread_join(thread, NULL);
 #else //THREAD
      pinocchio_main_thread((void*)(uns_int)argc);
 #endif //THREAD

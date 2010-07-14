@@ -76,28 +76,15 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
         self = self->outer_scope;
     }
     /* TODO jump to error handler. */
-    assert1(scope_id == scope_id, "TODO jump to error handler");
+    //assert1(scope_id == scope_id, "TODO jump to error handler");
     assert(local_id < self->size,
     	   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
                   local_id, self->size));
 
     self->locals[local_id] = value;
 }
-
-NATIVE(BlockContext_errorHandler)
-    RETURN_FROM_NATIVE(tget(Error_Handler));
-}
-
-NATIVE1(BlockContext_errorHandler_)
-    tset(Error_Handler, NATIVE_ARG(1));
-    RETURN_FROM_NATIVE(self);
-}
-
 /* ========================================================================= */
 
 void post_init_BlockContext()
 {
-    Dictionary natives = add_plugin(L"Runtime.BlockClosure");
-    store_native(natives, SMB_errorHandler, NM_BlockContext_errorHandler);
-    store_native(natives, SMB_errorHandler_, NM_BlockContext_errorHandler_);
 }
