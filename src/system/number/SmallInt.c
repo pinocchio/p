@@ -52,14 +52,24 @@ NATIVE1(SmallInt_plus_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left + right;
-    assert0((right < 0 && result < left) || result > left);
+    if (right <= 0) {
+        assert0(result <= left);
+    } else {
+        assert0(result > left);
+    }
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
 
 NATIVE1(SmallInt_minus_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
-    RETURN_FROM_NATIVE(new_SmallInt(left - right));
+    long result = left - right;
+    if (right < 0) {
+        assert0(result > left);
+    } else {
+        assert0(result <= left);
+    }
+    RETURN_FROM_NATIVE(new_SmallInt(result));
 }
 
 NATIVE1(SmallInt_times_)
