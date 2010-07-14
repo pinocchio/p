@@ -48,16 +48,68 @@ NATIVE1(SmallInt_##name)\
     RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op value));\
 }
 
-SmallInt_BINARY_OPERATION(plus_,       +);
-SmallInt_BINARY_OPERATION(minus_,      -);
-SmallInt_BINARY_OPERATION(times_,      *);
-SmallInt_BINARY_OPERATION(divide_,     /);
-SmallInt_BINARY_OPERATION(modulo_,     %);
-SmallInt_BINARY_OPERATION(shiftRight_, >>);
-SmallInt_BINARY_OPERATION(shiftLeft_,  <<);
-SmallInt_BINARY_OPERATION(and_,        &);
-SmallInt_BINARY_OPERATION(or_,         |);
+NATIVE1(SmallInt_plus_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    long result = left + right;
+    assert0((right < 0 && result < left) || result > left);
+    RETURN_FROM_NATIVE(new_SmallInt(result));
+}
 
+NATIVE1(SmallInt_minus_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(new_SmallInt(left - right));
+}
+
+NATIVE1(SmallInt_times_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    long result = left * right;
+    assert0(result / right == left);
+    RETURN_FROM_NATIVE(new_SmallInt(result));
+}
+
+NATIVE1(SmallInt_divide_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    assert0(right != 0);
+    RETURN_FROM_NATIVE(new_SmallInt(left / right));
+}
+
+NATIVE1(SmallInt_modulo_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(new_SmallInt(left % right));
+}
+
+NATIVE1(SmallInt_shiftLeft_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    if (left != 0) {
+        long bits = log2l(abs(left)) + 1;
+        assert0(right + bits < sizeof(long) * 8);
+    }
+    RETURN_FROM_NATIVE(new_SmallInt(left << right));
+}
+
+NATIVE1(SmallInt_shiftRight_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(new_SmallInt(left >> right));
+}
+
+NATIVE1(SmallInt_and_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(new_SmallInt(left & right));
+}
+
+NATIVE1(SmallInt_or_)
+    long left = unwrap_int(self);
+    long right = unwrap_int(NATIVE_ARG(0));
+    RETURN_FROM_NATIVE(new_SmallInt(left | right));
+}
 
 // TODO fix this damn typecheck!
 // printf("%i "#op" %i\n", number->value, otherNumber->value);
