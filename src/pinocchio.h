@@ -188,7 +188,6 @@ extern void store_method(Class class, Symbol symbol, MethodClosure method);
 #include <setjmp.h>
 
 #define SIGFAIL SIGABRT
-extern jmp_buf Assert_Fail;
 
 #define NYI assert1(NULL, "NYI");
 
@@ -202,28 +201,25 @@ extern jmp_buf Assert_Fail;
     #define FLUSH_STDOUT fpurge(stdout);
 #endif
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define AT __FILE__ ":" TOSTRING(__LINE__)
 
 #define assert(test, message) \
 if (!(test)) {\
-    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
     message; \
     FLUSH_STDOUT; \
-    ERROR_HANDLER("Assertion failed: "#test);\
+    ERROR_HANDLER(AT": "#test);\
 }
 
 #define assert0(test)\
 if (!(test)) {\
-    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
-    FLUSH_STDOUT; \
-    ERROR_HANDLER("Assertion failed: "#test);\
+    ERROR_HANDLER(AT": "#test);\
 }
 
 #define assert1(test, message)  \
 if (!(test)) { \
-    fwprintf(stderr,L"%s:%u: failed assertion `%s'\n",__FILE__,__LINE__,#test);\
-    fwprintf(stderr, L""message"\n"); \
-    FLUSH_STDOUT; \
-    ERROR_HANDLER(message);\
+    ERROR_HANDLER(AT": "message" ("#test")");\
 }
 
 /* ========================================================================== */

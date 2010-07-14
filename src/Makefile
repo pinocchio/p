@@ -5,7 +5,6 @@ EDGEVERSION  = git$(GITVERSION)_mc$(PHAROVERSION)
 EDGEPV       = pinocchio_$(EDGEVERSION)
 MAKEOPTS     = -j3
 OS           = $(shell uname)
-CC			 = clang
 # ============================================================================
 TARGET       = pinocchio
 
@@ -28,6 +27,7 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
+	CC	= clang
 else
     LDFLAGS +=  -export-dynamic
 endif

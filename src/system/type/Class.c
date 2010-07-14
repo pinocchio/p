@@ -77,10 +77,6 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
         Message message = (Message)pop_EXP();
-        // For now keep on printing the message.
-        fwprintf(stderr, L"\033[33mDNU: %ls >> %ls\033[0m\n",
-                 class->name->value,
-                 message->selector->value);
         fail(Exception_RecursiveDoesNotUnderstand_Class, 3,
              self, class, message);
     }

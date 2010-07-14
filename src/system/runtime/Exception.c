@@ -16,8 +16,6 @@ void fail(const Class exception_class, uns_int argc, ...)
     }
     va_end(args);
 
-    //raise(SIGSEGV);
-
     if (HEADER(tget(Error_Handler)) == Continue_Class) {
         Continue_escape((Continue)tget(Error_Handler), (Optr)error);
     } else {
@@ -28,8 +26,7 @@ void fail(const Class exception_class, uns_int argc, ...)
 
 void handle_assert(const char * message)
 {
-    raise(SIGSEGV);
-    //fail(Exception_AssertionFailure_Class, 1, new_String_from_charp(message));
+    fail(Exception_AssertionFailure_Class, 1, new_String_from_charp(message));
 }
 
 /* ========================================================================= */

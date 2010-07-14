@@ -131,34 +131,33 @@ Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 
 /* ========================================================================= */
 
-jmp_buf Assert_Fail;
-
 void store_method(Class class, Symbol symbol, 
                   MethodClosure method)
 {
     method->selector    = (Optr)symbol;
     method->host        = class;
-    Dictionary_quick_store(class->methods, (Optr)symbol, 
-                                      (Optr)method);
+    Dictionary_quick_store(class->methods,
+                           (Optr)symbol, 
+                           (Optr)method);
 }
 
 /* ========================================================================= */
 
 static void bootstrap()
 {
-    nil = (Optr) NEW_t(Nil);
+    nil                    = (Optr) NEW_t(Nil);
 
-    metaclass                   = NEW_t(Class);
+    metaclass              = NEW_t(Class);
     Class Metaclass_mclass = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);
-    HEADER(metaclass)           = Metaclass_mclass;
-    Metaclass_mclass->name      = (String)metaclass;
+    HEADER(metaclass)      = Metaclass_mclass;
+    Metaclass_mclass->name = (String)metaclass;
 
-    behavior                    = new_Bootstrapping_Class();
-    class                       = new_Bootstrapping_Class();
+    behavior               = new_Bootstrapping_Class();
+    class                  = new_Bootstrapping_Class();
     Object_Class           = new_Bootstrapping_Class();
-    Array_Class      = new_Bootstrapping_Class();
-    DictBucket_Class = new_Bootstrapping_Class();
-    Dictionary_Class = new_Bootstrapping_Class();
+    Array_Class            = new_Bootstrapping_Class();
+    DictBucket_Class       = new_Bootstrapping_Class();
+    Dictionary_Class       = new_Bootstrapping_Class();
 
     DIRECT_INIT_CLASS(metaclass);
     DIRECT_INIT_CLASS(behavior);
@@ -168,23 +167,23 @@ static void bootstrap()
     INIT_CLASS(DictBucket);
     INIT_CLASS(Dictionary);
 
-    Slot_Class             = new_Bootstrapping_Class();
-    SmallInt_Class       = new_Bootstrapping_Class();
-    Symbol_Class           = new_Bootstrapping_Class();
+    Slot_Class            = new_Bootstrapping_Class();
+    SmallInt_Class        = new_Bootstrapping_Class();
+    Symbol_Class          = new_Bootstrapping_Class();
 
     INIT_CLASS(Slot);
     INIT_CLASS(Symbol);
     INIT_CLASS(SmallInt);
 
-    ArrayLayout_Class      = new_Bootstrapping_Class();
-    BytesLayout_Class      = new_Bootstrapping_Class();
-    CharacterLayout_Class  = new_Bootstrapping_Class();
-    FileLayout_Class       = new_Bootstrapping_Class();
-    FloatLayout_Class      = new_Bootstrapping_Class();
-    IntLayout_Class        = new_Bootstrapping_Class();
-    LongLayout_Class       = new_Bootstrapping_Class();
-    ObjectLayout_Class     = new_Bootstrapping_Class();
-    WordsLayout_Class      = new_Bootstrapping_Class();
+    ArrayLayout_Class     = new_Bootstrapping_Class();
+    BytesLayout_Class     = new_Bootstrapping_Class();
+    CharacterLayout_Class = new_Bootstrapping_Class();
+    FileLayout_Class      = new_Bootstrapping_Class();
+    FloatLayout_Class     = new_Bootstrapping_Class();
+    IntLayout_Class       = new_Bootstrapping_Class();
+    LongLayout_Class      = new_Bootstrapping_Class();
+    ObjectLayout_Class    = new_Bootstrapping_Class();
+    WordsLayout_Class     = new_Bootstrapping_Class();
 
     INIT_CLASS(ArrayLayout);
     INIT_CLASS(CharacterLayout);
