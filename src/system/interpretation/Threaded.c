@@ -44,7 +44,7 @@ void _push_EXP(Optr e)
 
 void _push_CNT(threaded* e)
 {
-    threaded ** p = (threaded**)tget(_CNT_) - 1;
+    threaded ** p = tget(_CNT_) - 1;
     tset(_CNT_, p);
     *p = e;
 }
