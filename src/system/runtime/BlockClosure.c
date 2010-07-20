@@ -86,11 +86,7 @@ void apply(Optr closure, uns_int argc)
 
 BlockClosure new_Closure_from_Block(Block block) 
 {
-    BlockContext context = current_env();
-    if (context->stacked) {
-        context = capture_current_env();
-    }
-    return new_BlockClosure(block, context);
+	return new_BlockClosure(block, capture_current_env());
 }
 /* ========================================================================= */
 
@@ -122,10 +118,10 @@ NATIVE1(BlockClosure_valueWithArguments_)
 void post_init_BlockClosure()
 {
     Dictionary natives = add_plugin(L"Reflection.Reflection");
-    store_native(natives, SMB_blockclosureValue_message_, NM_BlockClosure_apply_);
-    store_native(natives, SMB_blockclosureValueWithArguments_message_,
+    store_native(natives, L"blockclosureValue:message:", NM_BlockClosure_apply_);
+    store_native(natives, L"blockclosureValueWithArguments:message:",
                           NM_BlockClosure_valueWithArguments_);
 
     natives = add_plugin(L"Runtime.BlockClosure");
-    store_native(natives, new_Symbol(L"numArgs"),  NM_BlockClosure_numArgs);
+    store_native(natives, L"numArgs",  NM_BlockClosure_numArgs);
 }

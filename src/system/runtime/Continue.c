@@ -51,6 +51,6 @@ void post_init_Continue()
     // HEADER(layout->values[0]) = UIntSlot_Class;
     // HEADER(layout->values[1]) = UIntSlot_Class;
     Dictionary natives = add_plugin(L"Reflection.Reflection");
-    store_native(natives, SMB_continueEscape_message_, NM_Continue_escape_);
-    store_native(natives, SMB_continueOn_message_,     NM_Continue_on_);
+    store_native(natives, L"continueEscape:message:", NM_Continue_escape_);
+    store_native(natives, L"continueOn:message:",     NM_Continue_on_);
 }

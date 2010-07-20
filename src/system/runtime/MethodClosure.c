@@ -110,5 +110,5 @@ void post_init_MethodClosure()
 {
     // TODO move the whole class to AST
     Dictionary natives = add_plugin(L"AST.MethodClosure");
-    store_native(natives, SMB_valueWithArguments_, NM_MethodClosure_valueWithArguments_);
+    store_native(natives, L"valueWithArguments:", NM_MethodClosure_valueWithArguments_);
 }

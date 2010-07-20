@@ -7,7 +7,7 @@
 
 extern Dictionary create_plugin();
 extern Dictionary add_plugin(const wchar_t * name);
-extern void store_native(Dictionary plugin, Symbol selector, native code);
+extern void store_native(Dictionary plugin, const wchar_t * selector, native code);
 
 extern void init_plugin();
 

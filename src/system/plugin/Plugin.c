@@ -24,9 +24,9 @@ Dictionary add_plugin(const wchar_t * name)
     return plugin;
 }
 
-void store_native(Dictionary dict, Symbol selector, native code)
+void store_native(Dictionary dict, const wchar_t *selector, native code)
 {
-    Dictionary_quick_store(dict, (Optr)selector, (Optr)code);
+    Dictionary_quick_store(dict, (Optr)new_Symbol_cached(selector), (Optr)code);
 }
 
 /* ========================================================================= */
@@ -76,8 +76,8 @@ NATIVE0(Plugin_unload)
 void init_plugin()
 {
     Dictionary natives = add_plugin(L"Plugin.Plugin");
-    store_native(natives, SMB_load_,  NM_Plugin_load_);
-    store_native(natives, SMB_unload, NM_Plugin_unload);
+    store_native(natives, L"load:",  NM_Plugin_load_);
+    store_native(natives, L"unload", NM_Plugin_unload);
     ((Class)Plugin_Plugin_Class)->cvars[0] = (Optr)_NATIVES_;
 }
 

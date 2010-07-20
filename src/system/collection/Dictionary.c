@@ -502,8 +502,8 @@ void post_init_Dictionary()
     INIT_NATIVE(Dictionary_grow);
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
-    store_native(natives, SMB_at_put_,      NM_Dictionary_at_put_);
-    store_native(natives, SMB_at_,          NM_Dictionary_at_);
-    store_native(natives, SMB_at_ifAbsent_, NM_Dictionary_at_ifAbsent_);
-    store_native(natives, SMB_grow,         NM_Dictionary_grow);
+    store_native(natives, L"at:put:",      NM_Dictionary_at_put_);
+    store_native(natives, L"at:",          NM_Dictionary_at_);
+    store_native(natives, L"at:ifAbsent:", NM_Dictionary_at_ifAbsent_);
+    store_native(natives, L"grow",         NM_Dictionary_grow);
 }
