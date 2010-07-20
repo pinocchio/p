@@ -227,10 +227,10 @@ void post_init_String()
     
     INIT_NATIVE(String_concat_);    
 
-    store_native(natives, SMB__concat,   NM_String_concat_);
-    store_native(natives, SMB_asSymbol,  NM_String_asSymbol);
-    store_native(natives, SMB_at_put_,   NM_String_at_put_);
-    store_native(natives, SMB_asNumber,  NM_String_asNumber);
-    store_native(natives, SMB_basicNew_, NM_String_basicNew_);
+    store_native(natives, L",",   NM_String_concat_);
+    store_native(natives, L"asSymbol",  NM_String_asSymbol);
+    store_native(natives, L"at:put:",   NM_String_at_put_);
+    store_native(natives, L"asNumber",  NM_String_asNumber);
+    store_native(natives, L"basicNew:", NM_String_basicNew_);
 }
 

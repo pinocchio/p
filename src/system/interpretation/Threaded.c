@@ -159,6 +159,11 @@ THREADED(pushn)
     pc += count + 1;
 }
 
+THREADED(push_context) 
+	PUSH_EXP(capture_current_env());
+    pc += 1;
+}
+
 #define PUSH_EVAL(name, type) THREADED(push_##name) \
     type name = (type)get_code(pc + 1);\
 	CLAIM_EXP(1);\
@@ -474,7 +479,7 @@ void post_init_Threaded()
 {
     
     Dictionary natives = add_plugin(L"Interpretation.Threaded");
-    store_native(natives, new_Symbol_cached(L"compileNatively:"), 
+    store_native(natives, L"compileNatively:", 
                  NM_Interpretation_Threaded_compileNatively_);
 
     functions = new_Dictionary();
@@ -493,6 +498,8 @@ void post_init_Threaded()
     T_FUNC(push4)
     T_FUNC(push5)
     T_FUNC(pushn)
+	
+	T_FUNC(push_context)
 
     T_FUNC(push_variable)
     T_FUNC(push_closure)

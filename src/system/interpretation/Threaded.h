@@ -64,6 +64,8 @@ T_CODE(push4)
 T_CODE(push5)
 T_CODE(pushn)
 
+T_CODE(push_context)
+
 T_CODE(push_variable)
 T_CODE(push_closure)
 T_CODE(push_class_reference)
