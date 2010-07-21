@@ -277,7 +277,7 @@ static int Bucket_compare_key(Optr inkey, Optr dictkey)
 
     if (result == -1) {
         Class_direct_dispatch(inkey, HEADER(inkey),
-                              (Optr)SMB__equal, 1, dictkey);
+                              (Optr)SMB__equals_, 1, dictkey);
         return 1;
     }
     PUSH_EXP(get_bool(result));

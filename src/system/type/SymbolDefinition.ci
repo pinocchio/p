@@ -8,3 +8,4 @@ Symbol SMB_hash;
 Symbol SMB_Reflection_Reflection;
 Symbol SMB_pPrimitive_plugin_;
 Symbol SMB_pPrimitive_plugin_code_;
+Symbol SMB_main_;
