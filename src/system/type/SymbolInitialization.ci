@@ -1,0 +1,9 @@
+SMB_Reflection_Reflection= new_Symbol_cached(L"Reflection.Reflection");
+SMB__equals_             = new_Symbol_cached(L"=");
+SMB__pequals_            = new_Symbol_cached(L"==");
+SMB_asString             = new_Symbol_cached(L"asString");
+SMB_assignFor_to_        = new_Symbol_cached(L"assignFor:to:");
+SMB_doesNotUnderstand_   = new_Symbol_cached(L"doesNotUnderstand:");
+SMB_hash                 = new_Symbol_cached(L"hash");
+SMB_pinocchioReflective_ = new_Symbol_cached(L"pinocchioReflective:");
+SMB_pPrimitive_plugin_ = new_Symbol_cached(L"pPrimitive:plugin:");

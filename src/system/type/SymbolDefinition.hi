@@ -1,0 +1,9 @@
+extern Symbol SMB__equals_;
+extern Symbol SMB__pequals_;
+extern Symbol SMB_assignFor_to_;
+extern Symbol SMB_doesNotUnderstand_;
+extern Symbol SMB_asString;
+extern Symbol SMB_pinocchioReflective_;
+extern Symbol SMB_hash;
+extern Symbol SMB_Reflection_Reflection;
+extern Symbol SMB_pPrimitive_plugin_;
