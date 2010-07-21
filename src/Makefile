@@ -21,7 +21,7 @@ EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
-#CFLAGS  += -DNO_EXCEPTION
+CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
 #LDFLAGS += -lpthread

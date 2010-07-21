@@ -35,5 +35,5 @@ void do_assign()
     ASSIGN_IF(Slot)
     ASSIGN_IF(UIntSlot)
     
-    Class_direct_dispatch(var, class, (Optr)SMB_assignFor_to_, 2, nil, value);
+    Class_direct_dispatch(var, class, (Optr)SMB_assign_on_, 2, value, current_env());
 }

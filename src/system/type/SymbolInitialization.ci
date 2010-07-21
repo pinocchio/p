@@ -9,3 +9,4 @@ SMB_pinocchioReflective_ = new_Symbol_cached(L"pinocchioReflective:");
 SMB_pPrimitive_plugin_ = new_Symbol_cached(L"pPrimitive:plugin:");
 SMB_pPrimitive_plugin_code_ = new_Symbol_cached(L"pPrimitive:plugin:code:");
 SMB_main_ = new_Symbol_cached(L"main:");
+SMB_assign_on_ = new_Symbol_cached(L"assign:on:");
