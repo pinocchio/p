@@ -48,8 +48,12 @@ void NativeMethod_invoke(MethodClosure closure,
         Annotation annotation =
             lookup_annotation(method->annotations, 
                               (Optr)SMB_pPrimitive_plugin_);
+        if (annotation == NULL) {
+            annotation = lookup_annotation(method->annotations,
+                              (Optr)SMB_pPrimitive_plugin_code_);
+        }
         assert1(annotation, "No primitive annotation found");
-        assert1(annotation->size == 2, "Invalid annotation format");
+        assert1(annotation->size == 2 || annotation->size == 3, "Invalid annotation format");
         method->code = lookup_native(annotation->arguments[0],
                                      annotation->arguments[1]);
     }

@@ -7,3 +7,4 @@ Symbol SMB_pinocchioReflective_;
 Symbol SMB_hash;
 Symbol SMB_Reflection_Reflection;
 Symbol SMB_pPrimitive_plugin_;
+Symbol SMB_pPrimitive_plugin_code_;
