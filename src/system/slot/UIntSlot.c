@@ -64,6 +64,6 @@ NATIVE2(UIntSlot_assign_on_)
 void post_init_UIntSlot()
 {
     Dictionary natives = add_plugin(L"Slot.UIntSlot");
-    store_native(natives, SMB_assign_on_, NM_UIntSlot_assign_on_);
-    store_native(natives, SMB_readFrom_ , NM_UIntSlot_readFrom_);
+    store_native(natives, L"assign:on:", NM_UIntSlot_assign_on_);
+    store_native(natives, L"readFrom:" , NM_UIntSlot_readFrom_);
 }

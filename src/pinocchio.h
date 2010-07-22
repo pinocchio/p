@@ -191,7 +191,11 @@ extern void store_method(Class class, Symbol symbol, MethodClosure method);
 
 #define NYI assert1(NULL, "NYI");
 
-#define ERROR_HANDLER handle_assert
+#ifdef NO_EXCEPTION
+	#define ERROR_HANDLER(arg) raise(SIGABRT)
+#else // NO_ERROR
+	#define ERROR_HANDLER handle_assert
+#endif // NO_ERROR
 
 #ifdef __linux
     #include <stdio_ext.h>

@@ -132,10 +132,10 @@ NATIVE0(Symbol_size)
 void post_init_Symbol()
 {
     Dictionary natives = add_plugin(L"Type.Symbol");
-    store_native(natives, SMB_at_,       NM_Symbol_at_);
-    store_native(natives, SMB_asString,  NM_Symbol_asString);
-    store_native(natives, SMB__equal,    NM_Symbol__equal);
-    store_native(natives, SMB_size,      NM_Symbol_size);
-    store_native(natives, SMB_asArray,   NM_Symbol_asArray);
-    store_native(natives, SMB_hash,      NM_Symbol_hash);
+    store_native(natives, L"at:",       NM_Symbol_at_);
+    store_native(natives, L"asString",  NM_Symbol_asString);
+    store_native(natives, L"=",			NM_Symbol__equal);
+    store_native(natives, L"size",      NM_Symbol_size);
+    store_native(natives, L"asArray",   NM_Symbol_asArray);
+    store_native(natives, L"hash",      NM_Symbol_hash);
 }

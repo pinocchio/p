@@ -29,6 +29,9 @@ BlockContext capture_current_env()
 {
     BlockContext target;
     BlockContext context = current_env();
+    if (!context->stacked) {
+		return context;
+    }
     uns_int size         = context->size;
     if (context->for_method) {
         target = (BlockContext)new_MethodContext(size);

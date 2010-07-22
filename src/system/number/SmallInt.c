@@ -171,22 +171,24 @@ void post_init_SmallInt()
     init_numbercache();
     Dictionary natives = add_plugin(L"Type.SmallInt");
     
-    store_native(natives, SMB__pequal,     NM_SmallInt_pequal_);
-    store_native(natives, SMB__equal,      NM_SmallInt_pequal_);
-    store_native(natives, SMB__plus,       NM_SmallInt_plus_);
-    store_native(natives, SMB__minus,      NM_SmallInt_minus_);   
-    store_native(natives, SMB__times,      NM_SmallInt_times_); 
-    store_native(natives, SMB__divide,     NM_SmallInt_divide_);
-    store_native(natives, SMB__modulo,     NM_SmallInt_modulo_);
-    store_native(natives, SMB__shiftLeft,  NM_SmallInt_shiftLeft_);
-    store_native(natives, SMB__shiftRight, NM_SmallInt_shiftRight_);
-    store_native(natives, SMB__and,        NM_SmallInt_and_);
-    store_native(natives, SMB__or,         NM_SmallInt_or_);
-    store_native(natives, SMB__lt,         NM_SmallInt_lt_);
-    store_native(natives, SMB__gt,         NM_SmallInt_gt_);
-    store_native(natives, SMB__notEqual,   NM_SmallInt_notEqual_);
-    store_native(natives, SMB_asString,    NM_SmallInt_asString);
-    store_native(natives, SMB_asCharacter, NM_SmallInt_asCharacter);
+    store_native(natives, L"=",  NM_SmallInt_pequal_);
+    store_native(natives, L"==", NM_SmallInt_pequal_);
+    store_native(natives, L"+",  NM_SmallInt_plus_);
+    store_native(natives, L"-",  NM_SmallInt_minus_);   
+    store_native(natives, L"*",  NM_SmallInt_times_); 
+    store_native(natives, L"//",  NM_SmallInt_divide_);
+    store_native(natives, L"%",  NM_SmallInt_modulo_);
+    store_native(natives, L"\\\\", NM_SmallInt_modulo_);
+    store_native(natives, L"<<", NM_SmallInt_shiftLeft_);
+    store_native(natives, L">>", NM_SmallInt_shiftRight_);
+    store_native(natives, L"&",  NM_SmallInt_and_);
+    store_native(natives, L"|",  NM_SmallInt_or_);
+    store_native(natives, L"<",  NM_SmallInt_lt_);
+    store_native(natives, L">",  NM_SmallInt_gt_);
+    store_native(natives, L"!=", NM_SmallInt_notEqual_);
+    store_native(natives, L"~=", NM_SmallInt_notEqual_);
+    store_native(natives, L"asString",    NM_SmallInt_asString);
+    store_native(natives, L"asCharacter", NM_SmallInt_asCharacter);
 }
 
 /* ========================================================================= */

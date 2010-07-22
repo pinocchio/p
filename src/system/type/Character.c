@@ -60,8 +60,8 @@ NATIVE0(Character_asSmallInt)
 void post_init_Character()
 { 
     Dictionary natives = add_plugin(L"Type.Character");
-    store_native(natives, SMB_hash,       NM_Character_hash);
-    store_native(natives, SMB_asString,   NM_Character_asString);
-    store_native(natives, SMB_asSymbol,   NM_Character_asSymbol);
-    store_native(natives, SMB_asSmallInt, NM_Character_asSmallInt);
+    store_native(natives, L"hash",       NM_Character_hash);
+    store_native(natives, L"asString",   NM_Character_asString);
+    store_native(natives, L"asSymbol",   NM_Character_asSymbol);
+    store_native(natives, L"asSmallInt", NM_Character_asSmallInt);
 }

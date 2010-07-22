@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct Message_t {
-    uns_int     size;
-    Symbol selector;
-    Optr      arguments[];
+    uns_int size;
+    Symbol 	selector;
+    Optr    arguments[];
 };
 
 extern Message new_Message(Optr selector, uns_int size);

@@ -99,22 +99,24 @@ void post_init_Float()
 {
     Dictionary natives = add_plugin(L"Type.Float");
 
-    store_native(natives, SMB__equal,      NM_Float_pequal_);
-    store_native(natives, SMB__pequal,     NM_Float_pequal_);
-    store_native(natives, SMB__plus,       NM_Float_plus_);
-    store_native(natives, SMB__minus,      NM_Float_minus_);   
-    store_native(natives, SMB__times,      NM_Float_times_); 
-    store_native(natives, SMB__divide,     NM_Float_divide_);
-    store_native(natives, SMB__modulo,     NM_Float_modulo_);
-    store_native(natives, SMB__shiftLeft,  NM_Float_shiftLeft_);
-    store_native(natives, SMB__shiftRight, NM_Float_shiftRight_);
-    store_native(natives, SMB__and,        NM_Float_and_);
-    store_native(natives, SMB__or,         NM_Float_or_);
-    store_native(natives, SMB__lt,         NM_Float_lt_);
-    store_native(natives, SMB__gt,         NM_Float_gt_);
-    store_native(natives, SMB__notEqual,   NM_Float_notEqual_);
-    store_native(natives, SMB_hash,        NM_Float_hash);
-    store_native(natives, SMB_asString,    NM_Float_asString);
+    store_native(natives, L"=",      NM_Float_pequal_);
+    store_native(natives, L"==",     NM_Float_pequal_);
+    store_native(natives, L"+",       NM_Float_plus_);
+    store_native(natives, L"-",      NM_Float_minus_);   
+    store_native(natives, L"*",      NM_Float_times_); 
+    store_native(natives, L"//",     NM_Float_divide_);
+    store_native(natives, L"%",     NM_Float_modulo_);
+    store_native(natives, L"\\\\",     NM_Float_modulo_);
+    store_native(natives, L"<<",  NM_Float_shiftLeft_);
+    store_native(natives, L">>", NM_Float_shiftRight_);
+    store_native(natives, L"&",        NM_Float_and_);
+    store_native(natives, L"|",         NM_Float_or_);
+    store_native(natives, L"<",         NM_Float_lt_);
+    store_native(natives, L">",         NM_Float_gt_);
+    store_native(natives, L"!=",         NM_Float_notEqual_);
+    store_native(natives, L"~=",         NM_Float_notEqual_);
+    store_native(natives, L"hash",        NM_Float_hash);
+    store_native(natives, L"asString",    NM_Float_asString);
 }
 
 /* ========================================================================= */

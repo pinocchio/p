@@ -21,6 +21,7 @@ EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
 CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
+CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
 #LDFLAGS += -lpthread
@@ -59,25 +60,25 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS="-O3" make $(TARGET)
+	CFLAGS+="-O3" make $(TARGET)
 
 fast-profiled:
-	CFLAGS="-O3 -fprofile-generate" LDFLAGS="-fprofile-generate" make $(TARGET)
+	CFLAGS+="-O3 -fprofile-generate" LDFLAGS+="-fprofile-generate" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib.p
 	make clean
-	CFLAGS="-O3 -fprofile-use" LDFLAGS="-fprofile-use" make $(TARGET)
+	CFLAGS+="-O3 -fprofile-use" LDFLAGS+="-fprofile-use" make $(TARGET)
 
 llvm:
-	CC=llvm-gcc LDFLAGS="-O0" CFLAGS="-O0 -DLLVM" make $(TARGET)
+	CC=llvm-gcc LDFLAGS+="-O0" CFLAGS+="-O0 -DLLVM" make $(TARGET)
 
 llvm-fast:
-	CC=llvm-gcc LDFLAGS="-O4" CFLAGS="-O4 -DLLVM" make $(TARGET)
+	CC=llvm-gcc LDFLAGS+="-O4" CFLAGS+="-O4 -DLLVM" make $(TARGET)
 
 clang:
-	CC=clang CFLAGS="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
+	CC=clang CFLAGS+="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
 
 profile:
-	LDFLAGS="-pg" CFLAGS="-pg" make $(TARGET)
+	LDFLAGS+="-pg" CFLAGS+="-pg" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib34.p
 	gprof --flat-profile $(TARGET)
 
@@ -92,10 +93,10 @@ probes.o: probes.d
 	@if [[ $$(uname) != "Darwin" ]]; then dtrace -G -s probes.d -o probes.o $(OBJECTS); fi
 
 dtrace:
-	LDFLAGS="" CFLAGS="-03 -DDTRACE" make $(TARGET)
+	LDFLAGS+="" CFLAGS+="-03 -DDTRACE" make $(TARGET)
 
 debug:
-	CFLAGS="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
@@ -115,5 +116,5 @@ dist: $(SOURCES) $(EXTRASOURCES)
 include make.depend
 
 make.depend: $(SOURCES)
-	@$(CC) -M -I. $(CFILES) > $@
+	@gcc -M -I. $(CFILES) > $@
 	@#makedepend $(INCLUDES) $^

@@ -10,7 +10,7 @@
 NativeMethod new_NativeMethod_with(Array params,
                                    Array locals,
                                    Array annotations,
-					               Array threaded,
+    				               Array threaded,
                                    uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(NativeMethod, Optr[statementCount]);

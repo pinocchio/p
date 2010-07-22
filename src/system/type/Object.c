@@ -166,15 +166,15 @@ NATIVE1(Object_perform_)
 void post_init_Object()
 {
     Dictionary natives = add_plugin(L"Type.Object");
-    store_native(natives, SMB_size,                   NM_Object_size);
-    store_native(natives, SMB_at_,                    NM_Array_at_);
-    store_native(natives, SMB_at_put_,                NM_Array_at_put_);
-    store_native(natives, SMB_basicNew,               NM_Object_basicNew);
-    store_native(natives, SMB_basicNew_,              NM_Array_basicNew_);
-    store_native(natives, SMB__pequal,                NM_Object_equals);
-    store_native(natives, SMB__equal,                 NM_Object_equals);
-    store_native(natives, SMB_class,                  NM_Object_class);
-    store_native(natives, SMB_hash,                   NM_Object_hash);
-    store_native(natives, SMB_perform_withArguments_, NM_Object_perform_withArguments_);
-    store_native(natives, SMB_perform_,               NM_Object_perform_);
+    store_native(natives, L"size",                   NM_Object_size);
+    store_native(natives, L"at:",                    NM_Array_at_);
+    store_native(natives, L"at:put:",                NM_Array_at_put_);
+    store_native(natives, L"basicNew",               NM_Object_basicNew);
+    store_native(natives, L"basicNew:",              NM_Array_basicNew_);
+    store_native(natives, L"==",                NM_Object_equals);
+    store_native(natives, L"=",                 NM_Object_equals);
+    store_native(natives, L"class",                  NM_Object_class);
+    store_native(natives, L"hash",                   NM_Object_hash);
+    store_native(natives, L"perform:withArguments:", NM_Object_perform_withArguments_);
+    store_native(natives, L"perform:",               NM_Object_perform_);
 }
