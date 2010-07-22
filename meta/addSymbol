@@ -5,13 +5,13 @@ SMB_init = "system/type/SymbolInitialization.ci"
 def addSymbol(symbol)
     symbol_name = symbol.gsub(':', "_") 
     File.open("system/type/SymbolDefinition.hi", "a+") do |f|
-        f.puts "extern Type_Symbol SMB_#{symbol_name};"
+        f.puts "extern Symbol SMB_#{symbol_name};"
     end
     File.open("system/type/SymbolDefinition.ci", "a+") do |f|
-        f.puts "Type_Symbol SMB_#{symbol_name};"
+        f.puts "Symbol SMB_#{symbol_name};"
     end
     File.open(SMB_init, "a+") do |f|
-        f.puts "SMB_#{symbol_name} = new_Type_Symbol_cached(L\"#{symbol}\");"
+        f.puts "SMB_#{symbol_name} = new_Symbol_cached(L\"#{symbol}\");"
     end
 end
 

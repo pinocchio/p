@@ -7,9 +7,9 @@
 
 struct Variable_t {
     Info    info;
+    Optr      name;
     Optr      local_id;
     Optr      scope_id;
-    Optr      name;
 };
 
 extern Variable new_Variable_named(const wchar_t* name, uns_int scope_id);

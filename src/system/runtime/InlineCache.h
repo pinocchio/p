@@ -10,6 +10,7 @@
 extern Array new_InlineCache();
 extern Optr InlineCache_lookup(Array cache, Optr class);
 extern void InlineCache_store(Array cache, Optr class, Optr method);
+extern void post_init_InlineCache();
 
 /* ========================================================================= */
 

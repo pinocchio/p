@@ -82,10 +82,10 @@ NATIVE1(Thread_sleep_)
 void post_init_Thread()
 {
     Dictionary natives = add_plugin(L"Runtime.Thread");
-    store_native(natives, new_Symbol_cached(L"current"), NM_Thread_current);
-    store_native(natives, new_Symbol_cached(L"resume"), NM_Thread_resume);
-    store_native(natives, new_Symbol_cached(L"new:"), NM_Thread_new_);
-    store_native(natives, new_Symbol_cached(L"sleep"), NM_Thread_sleep_);
+    store_native(natives, L"current", NM_Thread_current);
+    store_native(natives, L"resume", NM_Thread_resume);
+    store_native(natives, L"new:", NM_Thread_new_);
+    store_native(natives, L"sleep", NM_Thread_sleep_);
     //  ((Class)Thread_Class)->cvars[0] = (Optr)_threads_;
    // ((Class)Thread_Class)->cvars[1] = (Optr)_thread_;
 }
