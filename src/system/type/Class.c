@@ -65,9 +65,17 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
+int counter = 0;
+
 static void invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
-        return MethodClosure_invoke((MethodClosure)method, self, argc);
+        MethodClosure_invoke((MethodClosure)method, self, argc);
+
+        if ( ( _thread_ != _scheduler_thread_ ) &&
+           ( (++counter % 50) == 0))
+        { yield(); }
+
+        return;
     }
     inspect(method);
     assert1(NULL, "Unknown type of method installation");

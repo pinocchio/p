@@ -128,3 +128,4 @@ extern Symbol SMB_flush;
 extern Symbol SMB_immediate;
 extern Symbol SMB_errorHandler;
 extern Symbol SMB_errorHandler_;
+extern Symbol SMB_yield;

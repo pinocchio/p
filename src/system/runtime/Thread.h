@@ -6,6 +6,7 @@
 
 struct Thread_t {
     uns_int         size;
+    threaded*       backup_pc;
     Optr            _ENV_;
     Optr *          _EXP_;
     Optr            storage;
@@ -15,6 +16,10 @@ struct Thread_t {
     jmp_buf         Eval_Continue;
     Optr            Double_Stack[];
 };
+
+CREATE_INITIALIZERS(Object)
+
+/* ========================================================================= */
 
 extern Thread new_Thread(uns_int size);
 

@@ -123,3 +123,4 @@ SMB_whileTrue_                              = new_Symbol_cached(L"whileTrue:");
 SMB_writeAll_                               = new_Symbol_cached(L"writeAll:");
 SMB_writeOpen_                              = new_Symbol_cached(L"writeOpen:");
 SMB_write_                                  = new_Symbol_cached(L"write:");
+SMB_yield                                   = new_Symbol_cached(L"yield");

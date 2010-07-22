@@ -166,6 +166,10 @@ extern Dictionary _NATIVES_;
 
 /* ========================================================================= */
 
+extern int bootstrapped;
+
+/* ========================================================================= */
+
 #include <system/interpretation/Threaded.h>
 #include <pinocchioTypeInclude.hi>
 

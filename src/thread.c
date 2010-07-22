@@ -2,13 +2,16 @@
 #include <lib/lib.h>
 #include <string.h>
 
-Thread _thread_;
+THREAD_OBJECT _thread_;
+Thread _scheduler_thread_;
+//Array _threads_;
 
 /* ========================================================================= */
 
 void init_Stack(uns_int size)
 {
-    _thread_ = new_Thread(size);
+    _scheduler_thread_ = new_Thread(size);
+    _thread_ = _scheduler_thread_;
 }
 
 void init_Error_Handler()
@@ -19,6 +22,7 @@ void init_Error_Handler()
 void initialize_Thread()
 {
     init_Stack(STACK_SIZE);
+  //   _threads_ = new_Array_with(1, _thread_);
 }
 
 /* ========================================================================= */
@@ -47,7 +51,13 @@ void * pinocchio_main_thread(void * argc)
 {
     initialize_Thread();
     init_lib();
-    
+
+    _thread_ = new_Thread(STACK_SIZE);
+
+    // TODO find a nicer fix to bootstrap Threads correctly
+   // HEADER(_thread_) = Thread_Class;
+   // HEADER(_scheduler_thread_) = Thread_Class;
+
     Array args = get_args((int)(uns_int)argc, cargv);
     // Optr result = Eval_Send0(new_SmallInt(30), new_Symbol(L"fib"));
     // inspect(result);

@@ -94,11 +94,15 @@ static void start_eval()
     push_code(T_exit_eval);
 }
 
+
+int bootstrapped = 0;
+
 static Optr finish_eval()
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(tget_buf(Eval_Continue));
         for (;;) {
+          
             (*pc)();
         }
     }
