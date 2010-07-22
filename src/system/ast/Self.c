@@ -17,10 +17,9 @@ void pre_init_Self()
 void Self_eval()
 {
     // LOGFUN;
-    BlockContext env = current_env();
     // assert0(IS_CONTEXT(env));
     // replace the current element (an self) with the Optr's self
-    POKE_EXP(0, env->home_context->self);
+    POKE_EXP(0, current_env()->home_context->self);
 }
 
 /* ========================================================================= */

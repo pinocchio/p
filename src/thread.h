@@ -8,6 +8,8 @@
     typedef pthread_key_t THREAD_OBJECT;
 #else // THREAD
     typedef Thread THREAD_OBJECT;
+    extern Thread _scheduler_thread_;
+    extern Array _threads_;
 #endif // THREAD
 
 extern THREAD_OBJECT _thread_;

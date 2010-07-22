@@ -6,7 +6,7 @@
 void fail(const Class exception_class, uns_int argc, ...)
 {
     Object error    = (Object)instantiate(exception_class);
-    error->ivals[0] = (Optr)current_env();
+    error->ivals[0] = nil; // (Optr)current_env();
 
     va_list args;
     va_start(args, argc);
