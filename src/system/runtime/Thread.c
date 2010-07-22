@@ -22,7 +22,6 @@ Thread new_Thread(uns_int size)
 
 void yield()
 {
-    fwprintf( stderr, L"Switch to the scheduler thread\n");
     _thread_->backup_pc = pc;
     Thread previous = _thread_;
     _thread_ = _scheduler_thread_;
@@ -38,7 +37,6 @@ NATIVE0(Thread_current)
 
 NATIVE0(Thread_resume)
 
-    fwprintf( stderr, L"Switch to the sleeping thread\n");
     Thread next_thread = (Thread) self;
     _thread_->backup_pc = pc;
     RETURN_FROM_NATIVE(nil);
@@ -59,24 +57,6 @@ NATIVE1(Thread_new_)
     RETURN_FROM_NATIVE(new_thread);
 }
 
-
-time_t start_sleep_time;
-
-NATIVE1(Thread_sleep_)
-    Optr value = NATIVE_ARG(0);
-    start_sleep_time = time( NULL );
-
-    time_t now = time( NULL );
-    if ( now - start_sleep_time > value )
-    {
-        RETURN_FROM_NATIVE(nil);
-    }
-    else
-    {
-    }
-
-}
-
 /* ========================================================================= */
 
 void post_init_Thread()
@@ -85,7 +65,4 @@ void post_init_Thread()
     store_native(natives, L"current", NM_Thread_current);
     store_native(natives, L"resume", NM_Thread_resume);
     store_native(natives, L"new:", NM_Thread_new_);
-    store_native(natives, L"sleep", NM_Thread_sleep_);
-    //  ((Class)Thread_Class)->cvars[0] = (Optr)_threads_;
-   // ((Class)Thread_Class)->cvars[1] = (Optr)_thread_;
 }
