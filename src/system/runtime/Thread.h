@@ -19,10 +19,14 @@ struct Thread_t {
 
 CREATE_INITIALIZERS(Object)
 
+
 /* ========================================================================= */
 
 extern Thread new_Thread(uns_int size);
 
+extern void yield();
+
+extern void post_init_Thread();
 /* ========================================================================= */
 
 #endif // RUNTIME_THREAD_H
