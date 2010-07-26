@@ -3,7 +3,6 @@ PHAROVERSION = `cat lib/VERSION`
 GITVERSION   = `cat GITVERSION`
 EDGEVERSION  = git$(GITVERSION)_mc$(PHAROVERSION)
 EDGEPV       = pinocchio_$(EDGEVERSION)
-MAKEOPTS     = -j3
 OS           = $(shell uname)
 # ============================================================================
 TARGET       = pinocchio
