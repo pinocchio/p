@@ -72,9 +72,8 @@ static void invoke(Optr method, Optr self, uns_int argc) {
         MethodClosure_invoke((MethodClosure)method, self, argc);
 
         if ( ( _thread_ != _scheduler_thread_ ) &&
-           ( (++counter % 50) == 0))
+           ( (++counter % 500) == 0))
         { yield(); }
-
         return;
     }
     inspect(method);
