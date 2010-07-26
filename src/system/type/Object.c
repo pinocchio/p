@@ -20,12 +20,6 @@ NATIVE0(Object_hash)
     RETURN_FROM_NATIVE(Object_hash((Object)self));
 }
 
-NATIVE0(Object_basicNew)
-    assert_class(self);
-    Optr result = instantiate((Class)self);
-    RETURN_FROM_NATIVE(result);
-}
-
 NATIVE0(Object_class)
     RETURN_FROM_NATIVE(HEADER(self))
 }
@@ -74,15 +68,6 @@ void Object_instVarAt_put_(Optr self, long index, Optr value)
     } else {
         assert1(NULL, "Trying to access object without instvars");
     }
-}
-
-NATIVE1(Array_basicNew_)
-    assert_class(self);
-    Optr w_size = NATIVE_ARG(0);
-    long size   = unwrap_int(w_size);
-    assert0(size >= 0);
-    Optr result = instantiate_sized((Class)self, (uns_int)size);
-    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE0(Object_size)
@@ -169,10 +154,8 @@ void post_init_Object()
     store_native(natives, L"size",                   NM_Object_size);
     store_native(natives, L"at:",                    NM_Array_at_);
     store_native(natives, L"at:put:",                NM_Array_at_put_);
-    store_native(natives, L"basicNew",               NM_Object_basicNew);
-    store_native(natives, L"basicNew:",              NM_Array_basicNew_);
-    store_native(natives, L"==",                NM_Object_equals);
-    store_native(natives, L"=",                 NM_Object_equals);
+    store_native(natives, L"==",                     NM_Object_equals);
+    store_native(natives, L"=",                      NM_Object_equals);
     store_native(natives, L"class",                  NM_Object_class);
     store_native(natives, L"hash",                   NM_Object_hash);
     store_native(natives, L"perform:withArguments:", NM_Object_perform_withArguments_);
