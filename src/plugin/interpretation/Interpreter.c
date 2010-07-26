@@ -6,11 +6,11 @@
 NATIVE(Interpreter_invokeNative)
     ASSERT_ARG_SIZE(4);
 
-    Optr interpreter     = self;
+    //Optr interpreter     = self;
     MethodClosure method = (MethodClosure)NATIVE_ARG(0);
     Optr receiver        = NATIVE_ARG(1);
     Message message      = (Message)NATIVE_ARG(2);
-    Optr alternative     = NATIVE_ARG(3);
+    //Optr alternative     = NATIVE_ARG(3);
 
     ZAP_NATIVE_INPUT();
 

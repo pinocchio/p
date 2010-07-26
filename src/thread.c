@@ -62,7 +62,7 @@ void * pinocchio_main_thread(void * argc)
     // Optr result = Eval_Send0(new_SmallInt(30), new_Symbol(L"fib"));
     // inspect(result);
     Eval_Send1((Optr)Interpretation_MainInterpreter_Class,
-               SMB_main_, (Optr)args);
+               new_Symbol_cached(L"main:"), (Optr)args);
 
     return EXIT_SUCCESS;
 }
@@ -74,7 +74,8 @@ void pinocchio_main(int argc, const char ** argv)
     pthread_t thread;
     pthread_attr_t pthread_custom_attr;
     pthread_attr_init(&pthread_custom_attr);
-    pthread_create(&thread, &pthread_custom_attr, &pinocchio_main_thread, (void*)(uns_int)argc);
+    pthread_create(&thread, &pthread_custom_attr, &pinocchio_main_thread, 
+                   (void*)(uns_int)argc);
     pthread_join(thread, NULL);
 #else //THREAD
      pinocchio_main_thread((void*)(uns_int)argc);

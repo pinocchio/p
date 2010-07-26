@@ -27,7 +27,7 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
-	CC	= gcc #clang
+	CC	= clang
 else
     LDFLAGS +=  -export-dynamic
 endif

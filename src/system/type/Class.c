@@ -12,6 +12,8 @@ Class metaclass;
 Class class;
 Class behavior;
 
+static Symbol SMB_doesNotUnderstand_;
+
 /* ========================================================================= */
 
 #include <system/type/Instantiate.ci>
@@ -167,6 +169,9 @@ THREADED(class_lookup)
     Class_lookup(next, msg);
 }
 
+
+/* ========================================================================= */
+
 NNATIVE(Class_direct_dispatch, 2,
     t_class_lookup,
     t_class_invoke)
@@ -175,12 +180,7 @@ NNATIVE(Class_dispatch, 2,
     t_class_lookup,
     t_class_cache_invoke)
 
-void post_init_Class()
-{
-    INIT_NATIVE(Class_direct_dispatch);
-    INIT_NATIVE(Class_dispatch);
-}
-
+/* ========================================================================= */
 static void Class_do_dispatch(Optr self, Class class, Optr msg,
                               uns_int argc, Array code)
 {
@@ -308,4 +308,13 @@ void Class_normal_dispatch(Optr self, Send send, uns_int argc)
     DT(MESSAGE, unicode_to_ascii(clsname->value), 
                 unicode_to_ascii(send->message->value));
     Class_do_dispatch(self, class, msg, argc, T_Class_dispatch);
+}
+
+/* ========================================================================= */
+
+void post_init_Class()
+{
+    SMB_doesNotUnderstand_ = new_Symbol_cached(L"doesNotUnderstand:");
+    INIT_NATIVE(Class_direct_dispatch);
+    INIT_NATIVE(Class_dispatch);
 }

@@ -28,3 +28,6 @@ post_init_Super();
 post_init_Exception();
 post_init_Thread();
 post_init_InlineCache();
+post_init_Assign();
+post_init_NativeMethod();
+post_init_ReflectionMethod();

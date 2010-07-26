@@ -26,8 +26,4 @@ extern SmallInt Symbol_hash(Symbol symbol_string);
 
 /* ========================================================================= */
 
-#include <system/type/SymbolDefinition.hi>
-
-/* ========================================================================= */
-
 #endif // SYMBOL_H

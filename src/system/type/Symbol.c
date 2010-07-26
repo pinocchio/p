@@ -9,8 +9,6 @@
 DECLARE_CLASS(Symbol);
 Dictionary Symbol_Table;
 
-#include <system/type/SymbolDefinition.ci>
-
 /* ========================================================================= */
 
 Symbol new_Symbol(const wchar_t* input)

@@ -7,6 +7,11 @@
 
 /* ========================================================================= */
 
+static Symbol SMB_Reflection_Reflection;
+static Symbol SMB_pinocchioReflective_;
+
+/* ========================================================================= */
+
 ReflectionMethod new_ReflectionMethod_with(Array params,
                                            Array locals,
                                            Array annotations,
@@ -50,4 +55,12 @@ void ReflectionMethod_invoke(MethodClosure closure,
         return Method_invoke(closure, (Method)method, self, argc);
     }
     method->cache(self, closure->host, argc);
+}
+
+/* ========================================================================= */
+
+void post_init_ReflectionMethod()
+{
+    SMB_Reflection_Reflection = new_Symbol_cached(L"Reflection.Reflection");
+    SMB_pinocchioReflective_  = new_Symbol_cached(L"pinocchioReflective:");
 }

@@ -4,6 +4,8 @@
 #include <system/ast/Assign.h>
 
 /* ========================================================================= */
+static Symbol SMB_assign_on_;
+/* ========================================================================= */
 
 Assign new_Assign(Optr variable, Optr expression)
 {
@@ -38,4 +40,11 @@ void do_assign()
     ZAP_EXP();
     
     Class_direct_dispatch(var, class, (Optr)SMB_assign_on_, 2, value, current_env());
+}
+
+/* ========================================================================= */
+
+void post_init_Assign()
+{
+    SMB_assign_on_ = new_Symbol_cached(L"assign:on:");
 }

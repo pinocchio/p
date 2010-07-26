@@ -223,7 +223,6 @@ static void bootstrap()
     Symbol_Class->layout          = words_layout;
 
     Symbol_Table = new_Dictionary();
-    #include <system/type/SymbolInitialization.ci> 
 }
 
 void pinocchio_post_init()

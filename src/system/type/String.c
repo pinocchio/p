@@ -9,6 +9,7 @@
 
 DECLARE_CLASS(String);
 String empty_String;
+static Symbol SMB_asString;
 
 /* ========================================================================= */
 
@@ -221,6 +222,7 @@ NATIVE0(String_asNumber)
 
 void post_init_String()
 {
+    SMB_asString = new_Symbol_cached(L"asString");
     String_Class->layout = create_layout(0, WORDS);
     empty_String = new_String(L"");
     Dictionary natives = add_plugin(L"Type.String");

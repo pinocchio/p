@@ -6,6 +6,9 @@
 
 DECLARE_CLASS(Dictionary);
 
+static Symbol SMB_hash;
+static Symbol SMB__equals_;
+
 /* ========================================================================= */
 
 Dictionary new_Dictionary()
@@ -493,8 +496,11 @@ NATIVE0(Dictionary_grow)
 
 void post_init_Dictionary()
 {
-    change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
+    SMB_hash     = new_Symbol_cached(L"hash");
+    SMB__equals_ = new_Symbol_cached(L"=");
 
+    change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
+    
     INIT_NATIVE(Dictionary_at_);
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);

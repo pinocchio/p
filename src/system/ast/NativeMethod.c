@@ -7,6 +7,11 @@
 
 /* ========================================================================= */
 
+static Symbol SMB_pPrimitive_plugin_;
+static Symbol SMB_pPrimitive_plugin_code_;
+
+/* ========================================================================= */
+
 NativeMethod new_NativeMethod_with(Array params,
                                    Array locals,
                                    Array annotations,
@@ -61,4 +66,12 @@ void NativeMethod_invoke(MethodClosure closure,
         assert1(NULL, "Alternatives to native methods currently aren't supported!");
     }
     method->code(self, closure->host, argc);
+}
+
+/* ========================================================================= */
+
+void post_init_NativeMethod() 
+{
+    SMB_pPrimitive_plugin_ = new_Symbol_cached(L"pPrimitive:plugin:");
+    SMB_pPrimitive_plugin_code_ = new_Symbol_cached(L"pPrimitive:plugin:code:");
 }
