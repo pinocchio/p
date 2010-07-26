@@ -16,7 +16,17 @@ static Symbol SMB_doesNotUnderstand_;
 
 /* ========================================================================= */
 
-#include <system/type/Instantiate.ci>
+Optr basic_instantiate_Object(Class class, uns_int size)
+{
+    Object result = NEW_ARRAYED(struct Object_t, Optr[size]);
+    uns_int i;
+    for (i = 0; i < size; i++) {
+        result->ivals[i] = nil;
+    }
+    HEADER(result) = class;
+    assert0(HEADER(result) != (Class)nil);
+    return (Optr)result;
+}
 
 /* ========================================================================= */
 
