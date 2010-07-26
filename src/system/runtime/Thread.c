@@ -62,6 +62,19 @@ NATIVE1(Thread_new_)
     RETURN_FROM_NATIVE(new_thread);
 }
 
+time_t start_sleep_time;
+
+NATIVE1(Thread_sleep_)
+    Optr value = NATIVE_ARG(0);
+    start_sleep_time = time(NULL);
+
+    time_t now = time(NULL);
+    if (now - start_sleep_time > value) {
+        RETURN_FROM_NATIVE(nil);
+    } else {
+    }
+}
+
 /* ========================================================================= */
 
 void post_init_Thread()
@@ -73,4 +86,7 @@ void post_init_Thread()
     store_native(natives, L"current", NM_Thread_current);
     store_native(natives, L"resume", NM_Thread_resume);
     store_native(natives, L"new:", NM_Thread_new_);
+    store_native(natives, L"sleep", NM_Thread_sleep_);
+    //  ((Class)Thread_Class)->cvars[0] = (Optr)_threads_;
+    // ((Class)Thread_Class)->cvars[1] = (Optr)_thread_;   
 }
