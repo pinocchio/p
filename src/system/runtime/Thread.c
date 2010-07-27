@@ -70,7 +70,7 @@ NATIVE1(Thread_sleep_)
     start_sleep_time = time(NULL);
 
     time_t now = time(NULL);
-    if (now - start_sleep_time > value) {
+    if (now - start_sleep_time > unwrap_int(value)) {
         RETURN_FROM_NATIVE(nil);
     } else {
     }
