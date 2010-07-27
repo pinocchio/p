@@ -264,9 +264,11 @@ void inspect_dict(Optr o)
         if (bucket == (Array)nil) { continue; }
         uns_int j;
         for (j = 0; j < bucket->size; j+=2) {
-            Symbol key = (Symbol)bucket->values[j];
-            if (key == (Symbol)nil) { break; }
-            fwprintf(stderr, L"%lu %25ls -> ", idx++, key->value);
+            Optr key = bucket->values[j];
+            if (key == nil) { break; }
+            fwprintf(stderr, L"%lu ", idx++);
+            shallow_inspect(key);
+            fwprintf(stderr, L" -> ");
             shallow_inspect(bucket->values[j+1]);
         }
     }

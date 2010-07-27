@@ -4,6 +4,8 @@
 #include <pinocchio.h>
 
 extern Class metaclass;
+extern Class behavior;
+extern Class class;
 
 /* ========================================================================= */
 
@@ -72,8 +74,6 @@ extern void assert_class(Optr class);
 
 /* ========================================================================= */
 
-extern Class behavior;
-extern Class class;
 
 /* ========================================================================= */
 
