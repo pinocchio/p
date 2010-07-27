@@ -120,14 +120,6 @@ NATIVE2(String_at_put_)
     RETURN_FROM_NATIVE(self);
 }
 
-NATIVE1(String_basicNew_)
-    // TODO check type
-    Optr w_size      = NATIVE_ARG(0);
-    long size           = unwrap_int(w_size);
-    String result = new_String_sized(size);
-    RETURN_FROM_NATIVE(result);
-}
-
 long wchar_withbase_to_number(uns_int base, const wchar_t * string, uns_int size)
 {
     // TODO handle overflows!
@@ -233,6 +225,5 @@ void post_init_String()
     store_native(natives, L"asSymbol",  NM_String_asSymbol);
     store_native(natives, L"at:put:",   NM_String_at_put_);
     store_native(natives, L"asNumber",  NM_String_asNumber);
-    store_native(natives, L"basicNew:", NM_String_basicNew_);
 }
 

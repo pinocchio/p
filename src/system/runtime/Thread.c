@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <system/runtime/Thread.h>
 #include <system/interpretation/Threaded.h>
+#include <time.h>
 
 /* ========================================================================= */
 static Symbol SMB_yield_;

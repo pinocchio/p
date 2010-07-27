@@ -64,8 +64,6 @@ extern void Class_set_superclass(Class cls, Class super);
 
 /* ========================================================================= */
 
-extern Optr instantiate(Class class);
-extern Optr instantiate_sized(Class class, uns_int size);
 extern Optr basic_instantiate_Object(Class class, uns_int size);
 
 /* ========================================================================= */
