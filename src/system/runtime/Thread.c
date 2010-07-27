@@ -40,9 +40,13 @@ NATIVE0(Thread_current)
     RETURN_FROM_NATIVE(_thread_);
 }
 
-NATIVE0(Thread_resume)
+NATIVE0(Thread_primYield)
+    RETURN_FROM_NATIVE(self);
+    yield();
+}
 
-    Thread next_thread  = (Thread) self;
+NATIVE0(Thread_resume)
+    Thread next_thread = (Thread) self;
     _thread_->backup_pc = pc;
     RETURN_FROM_NATIVE(nil);
     pc       = next_thread->backup_pc;
@@ -70,11 +74,16 @@ NATIVE1(Thread_sleep_)
     start_sleep_time = time(NULL);
 
     time_t now = time(NULL);
-    if (now - start_sleep_time > unwrap_int(value)) {
+    /*if (now - start_sleep_time > unwrap_int(value)) {
         RETURN_FROM_NATIVE(nil);
-    } else {
     }
+    else
+    {
+        yield();
+    }*/
 }
+
+
 
 /* ========================================================================= */
 
@@ -88,6 +97,7 @@ void post_init_Thread()
     store_native(natives, L"resume", NM_Thread_resume);
     store_native(natives, L"new:", NM_Thread_new_);
     store_native(natives, L"sleep", NM_Thread_sleep_);
+    store_native(natives, L"primYield", NM_Thread_primYield);
     //  ((Class)Thread_Class)->cvars[0] = (Optr)_threads_;
     // ((Class)Thread_Class)->cvars[1] = (Optr)_thread_;   
 }
