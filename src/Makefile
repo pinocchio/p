@@ -8,7 +8,7 @@ OS           = $(shell uname)
 TARGET       = pinocchio
 
 CFILES      += $(wildcard *.c) $(wildcard system/**/*.c)
-CFILES      += $(wildcard lib/**/*.c) $(wildcard lib/*.c)
+CFILES      += $(wildcard lib/**/**/**/*.c) $(wildcard lib/**/**/*.c) $(wildcard lib/**/*.c) $(wildcard lib/*.c)
 
 CIFILES      = $(wildcard *.ci) $(wildcard system/**/*.ci)
 HIFILES      = $(wildcard *.hi) $(wildcard system/**/*.hi)
