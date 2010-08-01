@@ -48,12 +48,23 @@ void pre_init_Symbol()
 NATIVE1(Symbol_at_)
     Optr w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
-    long index     = unwrap_int(w_arg0) - 1;
+    long index  = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %li", index));
     assert(index < ((String)self)->size,
         printf("%li is out of Bounds[%lu]\n", index, ((String)self)->size));
     // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
     RETURN_FROM_NATIVE(new_Character(((Symbol) self)->value[index]));
+}
+
+NATIVE1(Symbol_basicAt_)
+    Optr w_arg0 = NATIVE_ARG(0);
+    ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
+    long index  = unwrap_int(w_arg0) - 1;
+    assert(0 <= index, printf("Index below 0: %li", index));
+    assert(index < ((String)self)->size,
+        printf("%li is out of Bounds[%lu]\n", index, ((String)self)->size));
+    // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
+    RETURN_FROM_NATIVE(wrap_int(((Symbol) self)->value[index]));
 }
 
 NATIVE0(Symbol_asString)
@@ -131,6 +142,7 @@ void post_init_Symbol()
 {
     Dictionary natives = add_plugin(L"Type.Symbol");
     store_native(natives, L"at:",       NM_Symbol_at_);
+    store_native(natives, L"basicAt:",       NM_Symbol_basicAt_);
     store_native(natives, L"asString",  NM_Symbol_asString);
     store_native(natives, L"=",			NM_Symbol__equal);
     store_native(natives, L"size",      NM_Symbol_size);
