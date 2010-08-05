@@ -9,7 +9,8 @@ struct Dictionary_t {
     uns_int             size;
     uns_int             maxLinear;
     uns_int             ratio;
-    Array    data;
+    Array               data;
+    Optr                linear;
 };
 
 CREATE_INITIALIZERS(Dictionary);

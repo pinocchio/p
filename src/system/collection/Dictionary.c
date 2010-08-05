@@ -18,6 +18,7 @@ Dictionary new_Dictionary()
     result->ratio     = 500;
     result->maxLinear = 20;
     result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
+    result->linear    = true;
     return result;
 }
 
@@ -118,6 +119,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
     Array old = self->data;
     if (old->size == 1) {
         self->data = new_Array_withAll(32, nil);
+        self->linear = false;
     } else {
         self->data = new_Array_withAll(old->size << 1, nil);
     }
@@ -239,6 +241,7 @@ static void Dictionary_grow(Dictionary self)
     Array old  = self->data;
     if (old->size == 1) {
         self->data = new_Array_withAll(32, (Optr)nil);
+        self->linear = false;
     } else {
         self->data = new_Array_withAll(old->size << 1, (Optr)nil);
     }

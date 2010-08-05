@@ -84,6 +84,9 @@ static int IN_EVAL = 0;
 
 static void start_eval()
 {
+    #ifdef DEBUG
+        fwprintf(stderr, L"\n");
+    #endif // DEBUG
     if (IN_EVAL) {
         assert1(NULL, "Re-entering evaluation thread!");
     }
