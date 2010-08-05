@@ -62,7 +62,7 @@ static long Dictionary_grow_check(Dictionary self)
     if (self->data->size == 1) {
         return self->size == self->maxLinear;
     }
-    uns_int size   = self->data->size;
+    uns_int size = self->data->size;
     return (100 * self->size) / size > self->ratio;
 }
 
@@ -94,7 +94,7 @@ static void remove_from_bucket(uns_int idx, DictBucket bucket)
     bucket->values[idx+1]   = bucket->values[tally-1];
     bucket->values[tally-2] = nil;
     bucket->values[tally-1] = nil;
-    bucket->tally = tally-2;
+    bucket->tally = tally - 2;
 }
 
 static void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
@@ -109,7 +109,7 @@ static void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
     uns_int tally      = b->tally;
     b->values[tally]   = key;
     b->values[tally+1] = value;
-    b->tally = tally+2;
+    b->tally = tally + 2;
 }
 
 static void Dictionary_quick_check_grow(Dictionary self)
@@ -123,23 +123,23 @@ static void Dictionary_quick_check_grow(Dictionary self)
     } else {
         self->data = new_Array_withAll(old->size << 1, nil);
     }
-    self->size = 0;
     uns_int i;
     for (i = 0; i < old->size; i++) {
         DictBucket bucket = (DictBucket)old->values[i];
         if (bucket == (DictBucket)nil) { continue; }
         self->data->values[i] = (Optr)bucket;
         uns_int j;
-        uns_int tally = bucket->tally;
-        for (j = 0; j < tally; j=j+2) {
+        for (j = 0; j < bucket->tally;) {
             Optr key = bucket->values[j];
             long hash = get_hash(self, key);
             if (hash != i) {
                 DictBucket * bucketp = get_bucketp(self, hash);
                 add_to_bucket(bucketp, key, bucket->values[j+1]);
+                remove_from_bucket(j, bucket);
+            } else {
+                j = j + 2;
             }
         }
-        
     }
 }
 
@@ -245,7 +245,6 @@ static void Dictionary_grow(Dictionary self)
     } else {
         self->data = new_Array_withAll(old->size << 1, (Optr)nil);
     }
-    self->size = 0;
 
     uns_int i = 0;
     for (i = 0; i < old->size; i++) {
