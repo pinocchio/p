@@ -8,7 +8,7 @@
 Variable new_Variable_named(const wchar_t* name, uns_int scope_id)
 {
     NEW_OBJECT(Variable);
-    result->name     = (Optr)new_String(name);
+    result->name     = (Symbol)new_String(name);
     result->info     = empty_Info;
     result->scope_id = (Optr)new_SmallInt(scope_id);
     result->local_id = (Optr)new_SmallInt(0);
@@ -20,7 +20,7 @@ Variable new_Variable(uns_int scope_id, uns_int local_id)
     NEW_OBJECT(Variable);
     result->local_id = (Optr)new_SmallInt(local_id);
     result->scope_id = (Optr)new_SmallInt(scope_id);
-    result->name     = nil;
+    result->name     = (Symbol)nil;
     result->info     = empty_Info;
     return result;
 }
@@ -32,7 +32,7 @@ void Variable_eval(Variable self)
     BlockContext env = current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);    
-    uns_int scope_id = (uns_int)unwrap_int(self->scope_id);    
+    uns_int scope_id = (uns_int)unwrap_int(self->scope_id);
 
     POKE_EXP(0, BlockContext_lookup(env, local_id, scope_id));
 }
