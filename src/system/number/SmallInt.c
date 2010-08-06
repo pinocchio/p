@@ -47,9 +47,9 @@ NATIVE1(SmallInt_plus_)
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left + right;
     if (right <= 0) {
-        assert0(result <= left);
+        assert1(result <= left, "Addition overflow");
     } else {
-        assert0(result > left);
+        assert1(result > left, "Addition underflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
@@ -59,9 +59,9 @@ NATIVE1(SmallInt_minus_)
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left - right;
     if (right < 0) {
-        assert0(result > left);
+        assert1(result > left, "Substraction underflow");
     } else {
-        assert0(result <= left);
+        assert1(result <= left, "Substraction overflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
@@ -70,14 +70,14 @@ NATIVE1(SmallInt_times_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left * right;
-    assert0(result / right == left);
+    assert1(result / right == left, "Multiplication overflow");
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
 
 NATIVE1(SmallInt_divide_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
-    assert0(right != 0);
+    assert1(right != 0, "Division by zero");
     RETURN_FROM_NATIVE(new_SmallInt(left / right));
 }
 
@@ -92,7 +92,7 @@ NATIVE1(SmallInt_shiftLeft_)
     long right = unwrap_int(NATIVE_ARG(0));
     if (left != 0) {
         long bits = log2l(abs(left));
-        assert0(right + bits < sizeof(long) * 8 - 1);
+        assert1(right + bits < sizeof(long) * 8 - 1, "Bitshift overflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(left << right));
 }
