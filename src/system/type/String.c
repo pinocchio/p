@@ -7,7 +7,6 @@
 
 /* ========================================================================= */
 
-DECLARE_CLASS(String);
 String empty_String;
 static Symbol SMB_asString;
 
@@ -214,13 +213,13 @@ NATIVE0(String_asNumber)
 
 void post_init_String()
 {
-    SMB_asString = new_Symbol_cached(L"asString");
-    String_Class->layout = create_layout(0, WORDS);
-    empty_String = new_String(L"");
-    Dictionary natives = add_plugin(L"Type.String");
+    String_Class->layout = words_layout;
+    SMB_asString         = new_Symbol_cached(L"asString");
+    empty_String         = new_String(L"");
     
     INIT_NATIVE(String_concat_);    
 
+    Dictionary natives = add_plugin(L"Type.String");
     store_native(natives, L",",   NM_String_concat_);
     store_native(natives, L"asSymbol",  NM_String_asSymbol);
     store_native(natives, L"at:put:",   NM_String_at_put_);

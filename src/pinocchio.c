@@ -222,7 +222,6 @@ static void bootstrap()
     LongLayout_Class->layout      = empty_object_layout;
     BytesLayout_Class->layout     = empty_object_layout;
     FileLayout_Class->layout      = empty_object_layout;
-
     Symbol_Class->layout          = words_layout;
 
     Symbol_Table = new_Dictionary();
