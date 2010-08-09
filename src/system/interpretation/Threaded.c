@@ -463,7 +463,7 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
     int i;
     for (i=0; i<array->size; i++) {
         Optr object = array->values[i];
-        if (HEADER(object) == Compiler_Threaded_FunctionPointer_Class) {
+        if (HEADER(object) == Kernel_Threading_FunctionPointer_Class) {
             Optr fp = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
             assert0(fp != nil);
             assert0(fp != NULL);

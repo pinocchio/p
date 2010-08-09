@@ -104,7 +104,7 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 {
     if (msg == (Optr)SMB_doesNotUnderstand_) {
         Message message = (Message)pop_EXP();
-        fail(Exception_RecursiveDoesNotUnderstand_Class, 3,
+        fail(RecursiveDoesNotUnderstand_Class, 3,
              self, class, message);
     }
 
