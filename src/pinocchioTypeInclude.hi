@@ -1,17 +1,17 @@
-#include <system/type/Nil.h>
+#include <system/object/Nil.h>
 
-#include <system/type/Character.h>
-#include <system/type/String.h>
+#include <system/string/Character.h>
+#include <system/string/String.h>
 #include <system/collection/Array.h>
 #include <system/runtime/Context.h>
 #include <system/runtime/MethodContext.h>
 #include <system/runtime/BlockContext.h>
 #include <system/collection/Dictionary.h>
-#include <system/type/Class.h>
-#include <system/type/Object.h>
+#include <system/class/Class.h>
+#include <system/object/Object.h>
 #include <system/number/SmallInt.h>
-#include <system/type/Boolean.h>
-#include <system/type/Symbol.h>
+#include <system/object/Boolean.h>
+#include <system/string/Symbol.h>
 
 #include <system/io/File.h>
 
@@ -30,10 +30,10 @@
 #include <system/runtime/Continue.h>
 #include <system/runtime/Continuation.h>
 #include <system/runtime/BlockClosure.h>
-#include <system/type/CharacterTable.h>
+#include <system/string/CharacterTable.h>
 #include <system/ast/Method.h>
 #include <system/runtime/MethodClosure.h>
-#include <system/type/Layout.h>
+#include <system/layout/Layout.h>
 #include <system/slot/Slot.h>
 #include <system/slot/UIntSlot.h>
 #include <system/organization/ClassReference.h>

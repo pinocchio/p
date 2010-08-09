@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <system/type/Symbol.h>
-#include <system/type/String.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <wchar.h>
-#include <system/type/Symbol.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 

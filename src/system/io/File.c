@@ -4,11 +4,7 @@
 #include <wchar.h>
 #include <string.h>
 #include <termios.h>
-#include <system/io/File.h>
-#include <system/type/Boolean.h>
-#include <system/type/String.h>
-#include <system/number/SmallInt.h>
-#include <system/type/Character.h>
+#include <pinocchio.h>
 
 
 /* ========================================================================= */
