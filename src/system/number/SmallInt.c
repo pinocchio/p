@@ -172,7 +172,6 @@ void post_init_SmallInt()
     Dictionary natives = add_plugin(L"Type.SmallInt");
     
     store_native(natives, L"=",  NM_SmallInt_pequal_);
-    store_native(natives, L"==", NM_SmallInt_pequal_);
     store_native(natives, L"+",  NM_SmallInt_plus_);
     store_native(natives, L"-",  NM_SmallInt_minus_);   
     store_native(natives, L"*",  NM_SmallInt_times_); 
