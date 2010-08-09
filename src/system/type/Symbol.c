@@ -75,7 +75,6 @@ Array Symbol_asArray(Symbol symbol)
 {
     Symbol self_symbol = (Symbol)symbol;
     Array array        = new_Array_raw(self_symbol->size);
-    LOG("%ls\n", symbol->value); 
     long i;
     for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Optr)new_Character(self_symbol->value[i]);
