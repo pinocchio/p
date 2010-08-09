@@ -78,9 +78,7 @@ NATIVE0(Object_size)
     } else if (TAG_IS_LAYOUT(tag, Words)) {
         size = ((Symbol)self)->size;
     } else {
-        assert(NULL, printf("Not indexable\n"););       
-        // make the compiler happy :)
-        return;
+        assert1(NULL, "Object is not indexable");       
     }
     SmallInt result = new_SmallInt(size);
     RETURN_FROM_NATIVE(result);
@@ -88,19 +86,17 @@ NATIVE0(Object_size)
 
 Optr raw_Array_at(Array array, Optr tag, long index)
 {
-    assert(array->size > index,
-        printf("Array at: %li out of bounds %lu\n" , index, array->size));
-    assert(0 <= index, 
-        printf("Array at: %li should be positive\n", index));
+    assert1(array->size > index, "Trying to read past end");
+    assert1(0 <= index, "Trying to read before start");
     return array->values[TAG_SIZE(tag) + index];
 }
 
 NATIVE1(Array_at_)
     Optr w_index = NATIVE_ARG(0);
-    long index      = unwrap_int(w_index);
-    Array as  = (Array)self;
+    long index   = unwrap_int(w_index);
+    Array as     = (Array)self;
 
-    Optr tag = GETTAG(as);    
+    Optr tag     = GETTAG(as);
     ASSERT_TAG_LAYOUT(tag, Array);
 
     RETURN_FROM_NATIVE(raw_Array_at(as, tag, index - 1));
@@ -109,8 +105,8 @@ NATIVE1(Array_at_)
 void raw_Array_at_put(Array array, Optr tag,
                            long index, Optr value)
 {
-    assert0(0 <= index);
-    assert0(array->size > index);
+    assert1(0 <= index, "Trying to write before start");
+    assert1(array->size > index, "Trying to write past end");
     array->values[TAG_SIZE(tag) + index] = value;
 }
 
@@ -136,7 +132,7 @@ NATIVE2(Object_perform_withArguments_)
     ZAP_NATIVE_INPUT();
 
     Class_direct_dispatch_withArguments(self, HEADER(self),
-                                             w_selector, (Array)w_args);
+                                        w_selector, (Array)w_args);
 }
 
 NATIVE1(Object_perform_)

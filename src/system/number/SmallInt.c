@@ -200,11 +200,6 @@ Optr wrap_int(long value)
 
 long unwrap_int(Optr integer)
 {
-    // TODO do more stuff in case we are not an int.
     ASSERT_TAG_LAYOUT(GETTAG(integer), Int);
-    //if (GETTAG(class) == INT) {
-        return ((SmallInt)integer)->value;
-    //}
-    //assert1(NULL, "Only SmallInts supported for now\n");
-    //return 0;
+    return ((SmallInt)integer)->value;
 }
