@@ -185,7 +185,6 @@ void post_init_SmallInt()
     store_native(natives, L"|",  NM_SmallInt_or_);
     store_native(natives, L"<",  NM_SmallInt_lt_);
     store_native(natives, L">",  NM_SmallInt_gt_);
-    store_native(natives, L"!=", NM_SmallInt_notEqual_);
     store_native(natives, L"~=", NM_SmallInt_notEqual_);
     store_native(natives, L"asString",    NM_SmallInt_asString);
     store_native(natives, L"asCharacter", NM_SmallInt_asCharacter);
