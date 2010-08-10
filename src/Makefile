@@ -95,6 +95,7 @@ dtrace:
 	LDFLAGS+="" CFLAGS+="-03 -DDTRACE" make $(TARGET)
 
 debug:
+	touch -c 'system/class/Class.c'
 	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 tags: $(SOURCES)

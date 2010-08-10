@@ -42,6 +42,9 @@ THREADED(exit_error)
     
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
     inspect(assertion);
+    if (HEADER(assertion) == Kernel_Exception_DoesNotUnderstand_Class) {
+        inspect_at(assertion, 3);
+    }
     fwprintf(stderr, L"\n");
     while ((Optr)env != nil) {
         if (env->home_context == (MethodContext)env) {
