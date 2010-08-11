@@ -24,7 +24,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     uns_int localc       = block->locals->size;
     uns_int size         = paramc + localc;
 
-    BlockContext context = (BlockContext)&PEEK_EXP(argc);
+    BlockContext context = (BlockContext)&PEEK_EXP(argc - 1);
 
     CLAIM_EXP(CONTEXT_SIZE);
 
@@ -40,6 +40,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
         context->locals[paramc] = nil;
     }
     
+    HEADER(context)       = BlockContext_Class;
 	context->size         = size;
 	context->stacked      = 1;
     context->parent_frame = current_env();
@@ -48,7 +49,6 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     BlockContext outer_scope = closure->context;
 
     context->scope_id     = outer_scope->scope_id + 1;
-	context->for_method   = 0;
     context->outer_scope  = outer_scope;
     context->home_context = outer_scope->home_context;
 

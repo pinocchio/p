@@ -32,15 +32,12 @@ BlockContext capture_current_env()
     if (!context->stacked) {
 		return context;
     }
-    uns_int size         = context->size;
-    if (context->for_method) {
-        target = (BlockContext)new_MethodContext(size);
-    } else {
-        target = new_BlockContext(size);
-    }
-    size += CONTEXT_SIZE + 1;
-    Optr * from = (Optr*)context;
-    Optr * to   = (Optr*)target;
+    uns_int size   = context->size;
+    target         = optain_context(size);
+    HEADER(target) = HEADER(context);
+    size          += CONTEXT_SIZE;
+    Optr * from    = (Optr*)context;
+    Optr * to      = (Optr*)target;
 
     while(size) {
         size--;
