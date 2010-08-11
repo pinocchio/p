@@ -21,8 +21,6 @@ struct BlockContext_t {
     Optr                    locals[];
 };
 
-extern void post_init_BlockContext();
-
 extern BlockContext new_BlockContext(uns_int size);
 
 /* ========================================================================= */

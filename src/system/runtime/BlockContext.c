@@ -75,8 +75,3 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
 
     self->locals[local_id] = value;
 }
-/* ========================================================================= */
-
-void post_init_BlockContext()
-{
-}
