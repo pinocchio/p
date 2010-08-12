@@ -10,13 +10,18 @@
 extern threaded* pc;
 
 #ifdef TDEBUG
-    #define THREADED(name) void t_##name() {\
-        DT(THREADED, ""#name) \
+    #define OPCODE(name) void t_##name() {\
+        DT(OPCODE, ""#name) \
         fwprintf(stderr, L"         : "#name"\n");
 #else //DEBUG
-    #define THREADED(name) void t_##name() {\
-        DT(THREADED, ""#name) 
+    #define OPCODE(name) void t_##name() {\
+        DT(OPCODE, ""#name) 
 #endif // DEBUG
+
+
+#define RETURN_OPCODE return;
+
+#define END_OPCODE }
 
 #define BREAK (threaded*)-1
 
@@ -87,6 +92,7 @@ T_CODE(block_return_nil)
 T_CODE(block_return_self)
 T_CODE(block_return_0)
 T_CODE(block_return_1)
+T_CODE(block_return_2)
 T_CODE(block_return_next)
 
 T_CODE(method_return)

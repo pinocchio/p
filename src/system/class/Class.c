@@ -96,7 +96,7 @@ static void invoke(Optr method, Optr self, uns_int argc) {
 
         return;
     }
-    inspect(method);
+    inspect(stderr, method);
     assert1(NULL, "Unknown type of method installation");
 }
 
@@ -118,7 +118,7 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
     Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
-THREADED(class_cache_invoke)
+OPCODE(class_cache_invoke)
     t_return();
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
@@ -136,7 +136,7 @@ THREADED(class_cache_invoke)
     return invoke(method, self, argc);
 }
 
-THREADED(class_invoke)
+OPCODE(class_invoke)
     t_return();
     Optr method  = PEEK_EXP(0);
     uns_int argc = (uns_int)PEEK_EXP(4);
@@ -164,7 +164,7 @@ void Class_lookup(Class class, Optr msg)
     Dictionary_lookup_push(mdict, msg);
 }
 
-THREADED(class_lookup)
+OPCODE(class_lookup)
     Optr method = PEEK_EXP(0);
     if (method != NULL) {
         pc += 1;

@@ -1,6 +1,7 @@
 extern void h();
 extern void help();
-extern void inspect(Optr o);
+extern void inspect(FILE* stream, Optr o);
+extern void _indent_(FILE* stream,uns_int i);
 extern void i(Optr o);
 extern void sends();
 extern void exps();
