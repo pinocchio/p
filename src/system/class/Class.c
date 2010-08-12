@@ -79,7 +79,7 @@ void assert_class(Optr class)
 
 int counter = 0;
 
-static void invoke(Optr method, Optr self, uns_int argc) {
+void invoke(Optr method, Optr self, uns_int argc) {
     if (HEADER(method) == MethodClosure_Class) {
         MethodClosure_invoke((MethodClosure)method, self, argc);
 
@@ -118,39 +118,6 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
     Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
-OPCODE(class_cache_invoke)
-    t_return();
-    Optr method  = PEEK_EXP(0);
-    uns_int argc = (uns_int)PEEK_EXP(4);
-    Class class  = (Class)PEEK_EXP(5);
-    Optr self    = PEEK_EXP(3);
-    if (method == NULL) {
-        Optr msg  = PEEK_EXP(2);
-        ZAPN_EXP(7);
-        return does_not_understand(self, class, msg, argc);
-    }
-    Send send   = (Send)PEEK_EXP(6);
-    Array cache = send->cache;
-    InlineCache_store(cache, (Optr)class, method);
-    ZAPN_EXP(7);
-    return invoke(method, self, argc);
-}
-
-OPCODE(class_invoke)
-    t_return();
-    Optr method  = PEEK_EXP(0);
-    uns_int argc = (uns_int)PEEK_EXP(4);
-    Optr self    = PEEK_EXP(3);
-    if (method == NULL) {
-        Class class = (Class)PEEK_EXP(5);
-        Optr msg    = PEEK_EXP(2);
-        ZAPN_EXP(6);
-        return does_not_understand(self, class, msg, argc);
-    }
-    ZAPN_EXP(6);
-    return invoke(method, self, argc);
-}
-
 void Class_lookup(Class class, Optr msg)
 {
     // TODO pass along the hash value
@@ -163,22 +130,6 @@ void Class_lookup(Class class, Optr msg)
     Dictionary mdict = class->methods;
     Dictionary_lookup_push(mdict, msg);
 }
-
-OPCODE(class_lookup)
-    Optr method = PEEK_EXP(0);
-    if (method != NULL) {
-        pc += 1;
-        return;
-    }
-    
-    ZAP_EXP();
-    Class class = (Class)PEEK_EXP(0);
-    Optr msg    = PEEK_EXP(1);
-    Class next  = class->super;
-    POKE_EXP(0, next);
-    Class_lookup(next, msg);
-}
-
 
 /* ========================================================================= */
 

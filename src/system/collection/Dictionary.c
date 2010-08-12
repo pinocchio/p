@@ -46,8 +46,7 @@ long unwrap_hash(Dictionary self, Optr w_hash)
     return unwrap_int(w_hash) % self->data->size;
 }
 
-
-static DictBucket * get_bucketp(Dictionary dictionary, long hash)
+DictBucket * get_bucketp(Dictionary dictionary, long hash)
 {
     return (DictBucket *)&dictionary->data->values[hash];
 }
@@ -56,7 +55,7 @@ static DictBucket * get_bucketp(Dictionary dictionary, long hash)
  * Quick dictionary functions. Only for bootstrapping.                       *
  * ========================================================================= */
 
-static long Dictionary_grow_check(Dictionary self)
+long Dictionary_grow_check(Dictionary self)
 {
     self->size++;
     if (self->data->size == 1) {
@@ -87,7 +86,7 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
     return NULL;
 }
 
-static void remove_from_bucket(uns_int idx, DictBucket bucket)
+void remove_from_bucket(uns_int idx, DictBucket bucket)
 {
     uns_int tally = bucket->tally;
     bucket->values[idx]     = bucket->values[tally-2];
@@ -97,7 +96,7 @@ static void remove_from_bucket(uns_int idx, DictBucket bucket)
     bucket->tally = tally - 2;
 }
 
-static void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
+void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
 {
     if ((Optr)*bucketp == nil) {
         *bucketp = new_bucket();
@@ -178,65 +177,13 @@ int tpush_hash(Optr key)
     return 0;
 }
 
-OPCODE(bucket_rehash)
-    Dictionary dict   = (Dictionary)PEEK_EXP(3);
-    uns_int idx       = (uns_int)PEEK_EXP(1);
-    DictBucket bucket = (DictBucket)PEEK_EXP(2);
-    int test          = 0;
 
-    while(!test) {
-        Optr w_hash = pop_EXP();
-        long hash   = unwrap_hash(dict, w_hash);
-        DictBucket * bucketp = get_bucketp(dict, hash);
-        if (*bucketp != bucket) {
-            Optr key   = bucket->values[idx];
-            Optr value = bucket->values[idx+1];
-            remove_from_bucket(idx, bucket);
-            add_to_bucket(bucketp, key, value);
-        } else {
-            idx += 2;
-            POKE_EXP(0, idx);
-        }
-        if (idx >= bucket->tally) {
-            pc -= 1;
-            return;
-        }
-        test = tpush_hash(bucket->values[idx]);
-    }
-END_OPCODE
-
-static OPCODE(dict_grow)
-    uns_int idx     = (uns_int)PEEK_EXP(3);
-    Array old       = (Array)PEEK_EXP(4);
-
-    if (idx == old->size) {
-        ZAPN_EXP(5);
-        t_return();
-        return;
-    }
-
-    DictBucket bucket = (DictBucket)old->values[idx];
-    POKE_EXP(3, idx + 1);
-
-    if ((Optr)bucket == nil || bucket->tally == 0) {
-        return;
-    }
-
-    POKE_EXP(1, bucket);
-    POKE_EXP(0, 0);
-
-    pc += 1;
-
-    if (tpush_hash(bucket->values[0])) { return; }
-
-    t_bucket_rehash();
-END_OPCODE
 
 NNATIVE(Dictionary_grow, 2,
     t_dict_grow,
     t_bucket_rehash)
 
-static void Dictionary_grow(Dictionary self)
+void Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
     if (old->size == 1) {
@@ -260,23 +207,7 @@ static void Dictionary_grow(Dictionary self)
 
 /* ========================================================================= */
 
-OPCODE(push_hash)
-    pc += 1;
-    SmallInt hash;
-    Optr key = PEEK_EXP(0);
-    Optr tag = GETTAG(key);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key);
-    } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (SmallInt)key;
-    } else {
-        Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
-        return;
-    }
-    PUSH_EXP(hash);
-END_OPCODE
-
-static int Bucket_compare_key(Optr inkey, Optr dictkey)
+int Bucket_compare_key(Optr inkey, Optr dictkey)
 {
     long result = Bucket_quick_compare_key(inkey, dictkey);
 
@@ -289,68 +220,6 @@ static int Bucket_compare_key(Optr inkey, Optr dictkey)
     return 0;
 }
 
-OPCODE(dictionary_bucket)
-    Optr w_hash     = PEEK_EXP(0);
-    Optr key        = PEEK_EXP(1);
-    Dictionary self = (Dictionary)PEEK_EXP(2);
-    long hash       = unwrap_hash(self, w_hash);
-
-    DictBucket bucket = *get_bucketp(self, hash);
-
-    if (bucket == (DictBucket)nil || bucket->tally == 0) {
-        ZAPN_EXP(3);
-        pc += 3;
-        return;
-    }
-
-    POKE_EXP(0, bucket);
-    PUSH_EXP(0);
-    pc += 1;
-    Bucket_compare_key(key, bucket->values[0]);
-END_OPCODE
-
-OPCODE(bucket_lookup)
-    uns_int idx       = (uns_int)PEEK_EXP(1);
-    DictBucket bucket = (DictBucket)PEEK_EXP(2);
-    Optr key = PEEK_EXP(3);
-    
-    int test = 0;
-    while (!test) {
-        Optr boolean = PEEK_EXP(0);
-        if (boolean == (Optr)true) {
-            ZAPN_EXP(4);
-            Optr result = bucket->values[idx + 1];
-            POKE_EXP(0, result);
-            pc += 1;
-            return;
-        }    
-
-        idx += 2;
-
-        uns_int tally = bucket->tally;
-        if (idx >= tally) {
-            ZAPN_EXP(5);
-            pc += 2;
-            return;
-        }
-
-        // zap boolean
-        ZAP_EXP();
-
-        POKE_EXP(0, idx);
-        test = Bucket_compare_key(key, bucket->values[idx]);
-    }
-END_OPCODE
-
-OPCODE(return_null)
-    PUSH_EXP(NULL);
-    t_return();
-END_OPCODE
-
-OPCODE(return_nil)
-    PUSH_EXP(nil);
-    t_return();
-END_OPCODE
 
 NNATIVE(iDictionary_at_, 5,
     t_push_hash,
@@ -380,18 +249,6 @@ NATIVE1(Dictionary_at_)
     push_code(T_Dictionary_at_);
 }
 
-OPCODE(dictionary_ifAbsent_)
-    t_return();
-    Optr block = PEEK_EXP(0);
-    apply(block, 0);
-END_OPCODE
-
-OPCODE(pop_return)
-    Optr result = pop_EXP();
-    POKE_EXP(0, result);
-    t_return();
-END_OPCODE
-
 NNATIVE(Dictionary_at_ifAbsent_, 5,
     t_push_hash,
     t_dictionary_bucket,
@@ -408,78 +265,12 @@ NATIVE2(Dictionary_at_ifAbsent_)
     push_code(T_Dictionary_at_ifAbsent_);
 }
 
-static void Bucket_store(DictBucket bucket, Optr key, Optr value, uns_int idx)
+void Bucket_store(DictBucket bucket, Optr key, Optr value, uns_int idx)
 {
     bucket->values[idx]   = key;
     bucket->values[idx+1] = value;
 }
 
-OPCODE(dictionary_store)
-    Optr w_hash     = PEEK_EXP(0);
-    Dictionary self = (Dictionary)PEEK_EXP(4);
-    long hash       = unwrap_hash(self, w_hash);
-    Optr key        = PEEK_EXP(3);
-    Optr value      = PEEK_EXP(2);
-
-    DictBucket * bucketp = get_bucketp(self, hash);
-    if (*bucketp == (DictBucket)nil || (*bucketp)->tally == 0) { 
-        add_to_bucket(bucketp, key, value);
-        ZAPN_EXP(3);
-        POKE_EXP(0, value);
-        pc += 2;
-        return;
-    }
-
-    pc += 1;
-    POKE_EXP(0, 0);
-    POKE_EXP(1, bucketp);
-    Bucket_compare_key(key, (*bucketp)->values[0]);
-END_OPCODE
-
-OPCODE(bucket_store)
-    uns_int idx          = (uns_int)PEEK_EXP(1);
-    DictBucket * bucketp = (DictBucket*)PEEK_EXP(2);
-    Optr key             = PEEK_EXP(4);
-    DictBucket bucket    = *bucketp;
-    int test             = 0;
-
-    while (!test) {
-        Optr bool = PEEK_EXP(0);
-        if (bool == true) {
-            Optr value = PEEK_EXP(3);
-            ZAPN_EXP(5);
-            POKE_EXP(0, value);
-            Bucket_store(bucket, key, value, idx);
-            t_return();
-            return;
-        }
-        
-        idx += 2;
-
-        if (idx >= bucket->tally) {
-            Optr value = PEEK_EXP(3);
-            add_to_bucket(bucketp, key, value);
-            ZAPN_EXP(4);
-            POKE_EXP(0, value);
-            pc += 1;
-            return;
-        }
-        ZAP_EXP();
-        POKE_EXP(0, idx);
-        test = Bucket_compare_key(key, bucket->values[idx]);
-    }
-END_OPCODE
-
-OPCODE(dictionary_check_grow)
-    Optr value      = PEEK_EXP(0);
-    Dictionary self = (Dictionary)PEEK_EXP(1);
-    POKE_EXP(1, value);
-    ZAP_EXP();
-    t_return();
-    if (Dictionary_grow_check(self)) {
-        Dictionary_grow(self);
-    }
-END_OPCODE
 
 NNATIVE(Dictionary_at_put_, 5,
     t_peek1,

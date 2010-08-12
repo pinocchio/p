@@ -66,27 +66,6 @@ long Words_compare(Symbol s1, Symbol s2)
     return !wcsncmp(s1->value, s2->value, s1->size);
 }
 
-THREADED(string_concat)
-    String self   = (String)PEEK_EXP(1);
-    String string = (String)PEEK_EXP(0);
-    ZAP_EXP();
-    POKE_EXP(0, String_concat_(self, (String)string));
-    t_return();
-}
-
-THREADED(string_concat_asString)
-    Optr obj = pop_EXP();
-    Optr tag = GETTAG(obj);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        String self = (String)PEEK_EXP(0);
-        POKE_EXP(0, String_concat_(self, (String)obj));
-        t_return();
-    } else {
-        pc = pc + 1;
-        Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
-    }
-}
-
 NNATIVE(String_concat_, 2,
     t_string_concat_asString,
     t_string_concat)
