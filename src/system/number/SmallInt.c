@@ -12,7 +12,7 @@ SmallInt* SmallInt_cache;
 
 /* ========================================================================= */
 
-SmallInt new_SmallInt_raw(long value)
+SmallInt raw_SmallInt(long value)
 {
     NEW_OBJECT(SmallInt);
     result->value = value;
@@ -24,7 +24,7 @@ SmallInt new_SmallInt(long value)
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
     }
-    return new_SmallInt_raw(value);
+    return raw_SmallInt(value);
 }
 
 /* ========================================================================= */
@@ -36,7 +36,7 @@ void init_numbercache()
     
     long i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        SmallInt_cache[i] = new_SmallInt_raw(i);
+        SmallInt_cache[i] = raw_SmallInt(i);
     }
 }
 
