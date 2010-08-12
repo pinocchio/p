@@ -33,16 +33,6 @@ Symbol new_Symbol_cached(const wchar_t* input)
     return result;
 }
 
-/*
- * Initialize Symbols before installing methods.
- */
-void init_SymbolTable()
-{
-}
-
-void pre_init_Symbol()
-{
-}
 /* ========================================================================= */
 
 NATIVE1(Symbol_at_)

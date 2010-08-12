@@ -100,24 +100,23 @@ NATIVE0(IO_File_readAll)
     RETURN_FROM_NATIVE(IO_File_readAll((IO_File)self));
 }
 
+wchar_t * READLINE_BUFFER;
 
 String IO_File_readLine(IO_File file) 
 {
     assert1(file != NULL, "Invalid Argument");
-    uns_int size = 1024;
+    uns_int size = 10;
     wchar_t * chr = (wchar_t *) PALLOC(sizeof(wchar_t)*size);
     long i = 0;
     while (1) {
         IO_File_readCharacter(file, &chr[i]);
+        // fwprintf(stderr, L"Read character: %i\n", chr[i]);
         if (chr[i] == L'\n') {
             break;
         }
         if (++i == size) {
             wchar_t * new = (wchar_t *) PALLOC(sizeof(wchar_t)*size*2);
-            long j;
-            for (j = 0; j < size; j++) {
-                new[j] = chr[j];
-            }
+            wcsncpy(new, chr, size);
             size *= 2;
             chr = new;
         }
@@ -258,12 +257,12 @@ void post_init_IO_File()
 
 
     /* make stdin unbuffered */
-    //struct termios settings;
-    //tcgetattr(fileno(stdin), &settings);
-    //settings.c_lflag &= (~ICANON);
-    //settings.c_lflag &= (~ECHO); // don't echo the character
-    //settings.c_lflag &= (~ISIG); // don't automatically handle control-C
-    //tcsetattr(fileno(stdin), TCSANOW, &settings);
+    struct termios settings;
+    tcgetattr(fileno(stdin), &settings);
+    settings.c_lflag &= (~ICANON);
+    // settings.c_lflag &= (~ECHO); // don't echo the character
+    // settings.c_lflag &= (~ISIG); // don't automatically handle control-C
+    tcsetattr(fileno(stdin), TCSANOW, &settings);
 
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);
