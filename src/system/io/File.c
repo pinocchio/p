@@ -260,7 +260,7 @@ void post_init_IO_File()
     struct termios settings;
     tcgetattr(fileno(stdin), &settings);
     settings.c_lflag &= (~ICANON);
-    // settings.c_lflag &= (~ECHO); // don't echo the character
+    settings.c_lflag &= (~ECHO); // don't echo the character
     // settings.c_lflag &= (~ISIG); // don't automatically handle control-C
     tcsetattr(fileno(stdin), TCSANOW, &settings);
 
