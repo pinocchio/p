@@ -11,7 +11,7 @@ Dictionary Symbol_Table;
 
 /* ========================================================================= */
 
-Symbol new_Symbol(const wchar_t* input)
+Symbol raw_Symbol(const wchar_t* input)
 {
     uns_int size   = wcslen(input) + 1;
     Symbol result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
@@ -22,9 +22,9 @@ Symbol new_Symbol(const wchar_t* input)
     return result;
 }
 
-Symbol new_Symbol_cached(const wchar_t* input)
+Symbol new_Symbol(const wchar_t* input)
 {
-    Symbol result  = new_Symbol(input);
+    Symbol result  = raw_Symbol(input);
     Optr cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Optr)result);
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;

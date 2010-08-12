@@ -289,8 +289,8 @@ NATIVE0(Dictionary_grow)
 
 void post_init_Dictionary()
 {
-    SMB_hash     = new_Symbol_cached(L"hash");
-    SMB__equals_ = new_Symbol_cached(L"=");
+    SMB_hash     = new_Symbol(L"hash");
+    SMB__equals_ = new_Symbol(L"=");
 
     change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
     

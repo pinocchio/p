@@ -275,7 +275,7 @@ void Class_normal_dispatch(Optr self, Send send, uns_int argc)
 
 void post_init_Class()
 {
-    SMB_doesNotUnderstand_ = new_Symbol_cached(L"doesNotUnderstand:");
+    SMB_doesNotUnderstand_ = new_Symbol(L"doesNotUnderstand:");
     INIT_NATIVE(Class_direct_dispatch);
     INIT_NATIVE(Class_dispatch);
 }

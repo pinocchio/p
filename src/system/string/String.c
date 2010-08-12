@@ -13,7 +13,7 @@ static Symbol SMB_asString;
 
 String new_String(const wchar_t * str)
 {
-    String string  = (String)new_Symbol(str);
+    String string  = (String)raw_Symbol(str);
     HEADER(string) = String_Class;
     return string;
 }
@@ -75,7 +75,7 @@ NATIVE1(String_concat_)
 }
 
 NATIVE0(String_asSymbol)
-    RETURN_FROM_NATIVE(new_Symbol_cached(((String)self)->value));
+    RETURN_FROM_NATIVE(new_Symbol(((String)self)->value));
 }
 
 // TODO check types not classes!
@@ -192,7 +192,7 @@ NATIVE0(String_asNumber)
 void post_init_String()
 {
     String_Class->layout = words_layout;
-    SMB_asString         = new_Symbol_cached(L"asString");
+    SMB_asString         = new_Symbol(L"asString");
     empty_String         = new_String(L"");
     
     INIT_NATIVE(String_concat_);    

@@ -46,5 +46,5 @@ void do_assign()
 
 void post_init_Assign()
 {
-    SMB_assign_on_ = new_Symbol_cached(L"assign:on:");
+    SMB_assign_on_ = new_Symbol(L"assign:on:");
 }

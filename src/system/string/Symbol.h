@@ -14,8 +14,8 @@ struct Symbol_t {
 };
 
 CREATE_INITIALIZERS(Symbol)
-extern Symbol new_Symbol_cached(const wchar_t* name);
 extern Symbol new_Symbol(const wchar_t* name);
+extern Symbol raw_Symbol(const wchar_t* name);
 
 /* ========================================================================= */
 

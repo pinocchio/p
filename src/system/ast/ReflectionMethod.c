@@ -61,6 +61,6 @@ void ReflectionMethod_invoke(MethodClosure closure,
 
 void post_init_ReflectionMethod()
 {
-    SMB_Reflection_Reflection = new_Symbol_cached(L"Reflection.Reflection");
-    SMB_pinocchioReflective_  = new_Symbol_cached(L"pinocchioReflective:");
+    SMB_Reflection_Reflection = new_Symbol(L"Reflection.Reflection");
+    SMB_pinocchioReflective_  = new_Symbol(L"pinocchioReflective:");
 }

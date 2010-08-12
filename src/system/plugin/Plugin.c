@@ -13,20 +13,20 @@ Dictionary create_plugin()
 
 Dictionary add_plugin(const wchar_t * name)
 {
-    Optr symbol = (Optr)new_Symbol_cached(name);
+    Optr symbol = (Optr)new_Symbol(name);
     Dictionary plugin = (Dictionary)Dictionary_quick_lookup(_NATIVES_, symbol);
     if (plugin) { return plugin; }
 
     plugin = new_Dictionary();
     Dictionary_quick_store(_NATIVES_,
-                           (Optr)new_Symbol_cached(name),
+                           (Optr)new_Symbol(name),
                            (Optr)plugin);
     return plugin;
 }
 
 void store_native(Dictionary dict, const wchar_t *selector, native code)
 {
-    Dictionary_quick_store(dict, (Optr)new_Symbol_cached(selector), (Optr)code);
+    Dictionary_quick_store(dict, (Optr)new_Symbol(selector), (Optr)code);
 }
 
 /* ========================================================================= */

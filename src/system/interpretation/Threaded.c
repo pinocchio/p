@@ -99,14 +99,14 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
      #define T_FUNC(name) l_##name = &&label_##name;
 #else //THREADED
 
-    #define T_FUNC(name) Dictionary_quick_store(functions, (Optr)new_Symbol(L""#name), (Optr)&t_##name);
+    #define T_FUNC(name) Dictionary_quick_store(functions, (Optr)raw_Symbol(L""#name), (Optr)&t_##name);
 #endif //THREADED
 
 void post_init_Threaded()
 {
  
-    SMB_hash = new_Symbol_cached(L"hash");
-    SMB_asString = new_Symbol_cached(L"asString");
+    SMB_hash = new_Symbol(L"hash");
+    SMB_asString = new_Symbol(L"asString");
 
     Dictionary natives = add_plugin(L"Interpretation.Threaded");
     store_native(natives, L"compileNatively:", 

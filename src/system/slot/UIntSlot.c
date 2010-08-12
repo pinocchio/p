@@ -8,7 +8,7 @@ UIntSlot new_UIntSlot(uns_int index, const wchar_t * name)
 {
     NEW_OBJECT(UIntSlot);
     result->index   = index;
-    result->name    = (Optr)new_Symbol(name);
+    result->name    = (Optr)raw_Symbol(name);
     result->package = (Optr)nil;
     return result;
 }
