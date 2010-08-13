@@ -27,36 +27,36 @@ Class pclass(Optr o)
     return HEADER(o);
 }
 
-void _indent_(uns_int i)
+void _indent_(FILE* stream, uns_int i)
 {
     uns_int todo = 0;
     while (todo++ != i) {
         if (todo % 4) {
-            fwprintf(stderr, L"  ");
+            fwprintf(stream, L"  ");
         } else {
-            fwprintf(stderr, L"| ");
+            fwprintf(stream, L"| ");
         }
     }
 }
 
-void print_Class(Optr obj)
+void print_Class(FILE* stream, Optr obj)
 {
     if (obj == NULL) {
-        fwprintf(stderr, L"NULL\n");
+        fwprintf(stream, L"NULL\n");
         return;
     }
     if (obj == nil) {
-        fwprintf(stderr, L"Nil\n");
+        fwprintf(stream, L"Nil\n");
         return;
     }
     Class class = pclass(obj);
-    assert(class != NULL, fwprintf(stderr, L"%p\n", obj));
+    assert(class != NULL, fwprintf(stream, L"%p\n", obj));
     assert0((Optr)class != nil);
     if (pclass((Optr)class) == metaclass) {
-        fwprintf(stderr, L"Class class: %ls\n", ((Class)obj)->name->value);
+        fwprintf(stream, L"Class class: %ls\n", ((Class)obj)->name->value);
         return;
     }
-    fwprintf(stderr, L"%p Class: %p %ls\n", obj, class, class->name->value);
+    fwprintf(stream, L"%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
 void print_EXP()
@@ -70,7 +70,7 @@ void print_EXP()
     while (cur < size) {
         Optr c = tget(Double_Stack)[cur++];
         if (c > (Optr)10000) {
-            print_Class(c);
+            print_Class(stderr, c);
         } else {
             fwprintf(stderr, L"%li\n", (uns_int)c);
         }
@@ -82,14 +82,14 @@ void exps() {
 }
 
 
-void print_Symbol(Optr s)
+void print_Symbol(FILE* stream, Optr s)
 {
     Optr tag = GETTAG(s);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fwprintf(stderr, L"\"%ls\"\n", ((Symbol)s)->value);
+        fwprintf(stream, L"\"%ls\"\n", ((Symbol)s)->value);
     } else {
-        fwprintf(stderr, L"Not a symbol: %p\n", s);
-        print_Class(s);
+        fwprintf(stream, L"Not a symbol: %p\n", s);
+        print_Class(stream, s);
     }
 }
 
@@ -116,7 +116,7 @@ void sends()
         if (c > (Optr)10000 && pclass(c) == Send_Class) {
             Send send = (Send)c;
             print_Info(send->info);
-            print_Symbol((Optr)send->message);
+            print_Symbol(stderr, (Optr)send->message);
         }
     }
 }
@@ -205,55 +205,55 @@ Optr atx(Optr o, uns_int argc, ...)
     return o;
 }
 
-void shallow_inspect(Optr o)
+void shallow_inspect(FILE* stream, Optr o)
 {
     if (o == NULL) {
-        fwprintf(stderr, L"NULL object\n");
+        fwprintf(stream, L"NULL object\n");
         return;
     }
     if (o < (Optr)100000) {
-        fwprintf(stderr, L"Object probably uns_int: %lu\n", (uns_int)o);
+        fwprintf(stream, L"Object probably uns_int: %lu\n", (uns_int)o);
         return;
     } 
     if (pclass(o) == NULL) {
-        fwprintf(stderr, L"Object with NULL class\n");
+        fwprintf(stream, L"Object with NULL class\n");
         return;
     }
     if (o == nil) {
-        fwprintf(stderr, L"nil\n");
+        fwprintf(stream, L"nil\n");
         return;
     }
     if (o == (Optr)true) {
-        fwprintf(stderr, L"true\n");
+        fwprintf(stream, L"true\n");
         return;
     }
     if (o == (Optr)false) {
-        fwprintf(stderr, L"false\n");
+        fwprintf(stream, L"false\n");
         return;
     }
     Class cls = pclass(o);
 
     if (pclass((Optr)cls) == metaclass) {
-        fwprintf(stderr, L"%ls", ((Class)o)->name->value);
-        fwprintf(stderr, L" (%lu)", (uns_int)o);
+        fwprintf(stream, L"%ls", ((Class)o)->name->value);
+        fwprintf(stream, L" (%lu)", (uns_int)o);
     } else {
-        fwprintf(stderr, L"Instance of %ls", cls->name->value);
-        fwprintf(stderr, L" (%p)", o);
+        fwprintf(stream, L"Instance of %ls", cls->name->value);
+        fwprintf(stream, L" (%p)", o);
     }
 
     Optr tag = GETTAG(o);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        fwprintf(stderr, L": '%ls'\n", ((Symbol)o)->value);
+        fwprintf(stream, L": '%ls'\n", ((Symbol)o)->value);
         return;
     }
     if (TAG_IS_LAYOUT(tag, Int)) {
-        fwprintf(stderr, L": %i\n", ((SmallInt)o)->value);
+        fwprintf(stream, L": %i\n", ((SmallInt)o)->value);
         return;
     }
-    fwprintf(stderr, L"\n");
+    fwprintf(stream, L"\n");
 }
 
-void inspect_dict(Optr o)
+void inspect_dict(FILE* stream, Optr o)
 {
     Dictionary dict = (Dictionary)o;
     uns_int ds      = dict->data->size;
@@ -266,22 +266,22 @@ void inspect_dict(Optr o)
         for (j = 0; j < bucket->size; j+=2) {
             Optr key = bucket->values[j];
             if (key == nil) { break; }
-            fwprintf(stderr, L"%lu ", idx++);
-            shallow_inspect(key);
-            fwprintf(stderr, L" -> ");
-            shallow_inspect(bucket->values[j+1]);
+            fwprintf(stream, L"%lu ", idx++);
+            shallow_inspect(stream, key);
+            fwprintf(stream, L" -> ");
+            shallow_inspect(stream, bucket->values[j+1]);
         }
     }
 }
 
-void inspect(Optr o)
+void inspect(FILE* stream, Optr o)
 {
-    shallow_inspect(o);
+    shallow_inspect(stream, o);
     if (o == NULL || pclass(o) == NULL) {
         return;
     }
     if (pclass(o) == Dictionary_Class) {
-        inspect_dict(o);
+        inspect_dict(stream, o);
         return;
     }
     Optr tag = GETTAG(o);
@@ -290,8 +290,8 @@ void inspect(Optr o)
         int i;
         for (i = 0; i < size; i++) {
             Slot v = (Slot)((Array)tag)->values[i];
-            fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
-            shallow_inspect(((Object)o)->ivals[i]);
+            fwprintf(stream, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
+            shallow_inspect(stream, ((Object)o)->ivals[i]);
         }
         return;
     }
@@ -302,12 +302,12 @@ void inspect(Optr o)
         int i;
         for (i = 0; i < size; i++) {
             Slot v = (Slot)((Array)tag)->values[i];
-            fwprintf(stderr, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
-            shallow_inspect(((Array)o)->values[i]);
+            fwprintf(stream, L"%i %15ls:\t", i, ((Symbol)v->name)->value);
+            shallow_inspect(stream, ((Array)o)->values[i]);
         }
         for (; i < size + isize; i++) {
-            fwprintf(stderr, L"%i:\t", i);
-            shallow_inspect(((Array)o)->values[i]);
+            fwprintf(stream, L"%i:\t", i);
+            shallow_inspect(stream, ((Array)o)->values[i]);
         }
         return;
     }
@@ -315,13 +315,13 @@ void inspect(Optr o)
 
 void i(Optr o) 
 {
-    inspect(o);
+    inspect(stderr, o);
 }
 
 
 void inspect_at(Optr o, uns_int i)
 {
-    inspect(at(o, i));
+    inspect(stderr, at(o, i));
 }
 
 void i_at(Optr o, uns_int i) {
@@ -331,7 +331,7 @@ void i_at(Optr o, uns_int i) {
 
 void inspect_atn(Optr o, const wchar_t * s)
 {
-    inspect(atn(o, s));
+    inspect(stderr, atn(o, s));
 }
 
 void i_atn(Optr o, const wchar_t * s) {
@@ -339,7 +339,7 @@ void i_atn(Optr o, const wchar_t * s) {
 }
 
 void i_atx(Optr o, uns_int argc, ...) {
-    return inspect(atx(o, argc));
+    return inspect(stderr, atx(o, argc));
 }
 
 Optr methods(Optr o) {

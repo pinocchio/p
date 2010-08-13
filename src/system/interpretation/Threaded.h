@@ -10,13 +10,18 @@
 extern threaded* pc;
 
 #ifdef TDEBUG
-    #define THREADED(name) void t_##name() {\
-        DT(THREADED, ""#name) \
+    #define OPCODE(name) void t_##name() {\
+        DT(OPCODE, ""#name) \
         fwprintf(stderr, L"         : "#name"\n");
 #else //DEBUG
-    #define THREADED(name) void t_##name() {\
-        DT(THREADED, ""#name) 
+    #define OPCODE(name) void t_##name() {\
+        DT(OPCODE, ""#name) 
 #endif // DEBUG
+
+
+#define RETURN_OPCODE return;
+
+#define END_OPCODE }
 
 #define BREAK (threaded*)-1
 
@@ -87,6 +92,7 @@ T_CODE(block_return_nil)
 T_CODE(block_return_self)
 T_CODE(block_return_0)
 T_CODE(block_return_1)
+T_CODE(block_return_2)
 T_CODE(block_return_next)
 
 T_CODE(method_return)
@@ -137,5 +143,28 @@ T_CODE(check2)
 T_CODE(check3)
 T_CODE(check4)
 T_CODE(check5)
+
+// ============================================================================
+
+T_CODE(class_cache_invoke)
+T_CODE(class_invoke)
+T_CODE(class_lookup)
+
+T_CODE(string_concat)
+T_CODE(string_concat_asString)
+
+
+T_CODE(bucket_rehash)
+T_CODE(dict_grow)
+T_CODE(push_hash)
+T_CODE(dictionary_bucket)
+T_CODE(bucket_lookup)
+T_CODE(return_null)
+T_CODE(return_nil)
+T_CODE(dictionary_ifAbsent_)
+T_CODE(pop_return)
+T_CODE(dictionary_store)
+T_CODE(bucket_store)
+T_CODE(dictionary_check_grow)
 
 #endif //INTERPRETATION_THREADED

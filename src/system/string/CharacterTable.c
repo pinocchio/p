@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/type/CharacterTable.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 

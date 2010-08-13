@@ -37,7 +37,7 @@ Array get_args(int argc, const char ** argv)
         int length = strlen(arg);
         wchar_t warg[length + 1];
         assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
-        Symbol sarg = new_Symbol_cached(warg);
+        Symbol sarg = new_Symbol(warg);
         args->values[i-1] = (Optr)sarg;
     }
     return args;
@@ -59,10 +59,10 @@ void * pinocchio_main_thread(void * argc)
    // HEADER(_scheduler_thread_) = Thread_Class;
 
     Array args = get_args((int)(uns_int)argc, cargv);
-    // Optr result = Eval_Send0(new_SmallInt(30), new_Symbol(L"fib"));
+    // Optr result = Eval_Send0(new_SmallInt(30), raw_Symbol(L"fib"));
     // inspect(result);
     Eval_Send1((Optr)Interpretation_MainInterpreter_Class,
-               new_Symbol_cached(L"main:"), (Optr)args);
+               new_Symbol(L"main:"), (Optr)args);
 
     return EXIT_SUCCESS;
 }

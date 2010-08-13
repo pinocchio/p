@@ -12,7 +12,7 @@ SmallInt* SmallInt_cache;
 
 /* ========================================================================= */
 
-SmallInt new_SmallInt_raw(long value)
+SmallInt raw_SmallInt(long value)
 {
     NEW_OBJECT(SmallInt);
     result->value = value;
@@ -24,7 +24,7 @@ SmallInt new_SmallInt(long value)
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         return SmallInt_cache[value];
     }
-    return new_SmallInt_raw(value);
+    return raw_SmallInt(value);
 }
 
 /* ========================================================================= */
@@ -36,7 +36,7 @@ void init_numbercache()
     
     long i;
     for (i = INT_CACHE_LOWER; i < INT_CACHE_UPPER; i++) {
-        SmallInt_cache[i] = new_SmallInt_raw(i);
+        SmallInt_cache[i] = raw_SmallInt(i);
     }
 }
 
@@ -47,9 +47,9 @@ NATIVE1(SmallInt_plus_)
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left + right;
     if (right <= 0) {
-        assert0(result <= left);
+        assert1(result <= left, "Addition overflow");
     } else {
-        assert0(result > left);
+        assert1(result > left, "Addition underflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
@@ -59,9 +59,9 @@ NATIVE1(SmallInt_minus_)
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left - right;
     if (right < 0) {
-        assert0(result > left);
+        assert1(result > left, "Substraction underflow");
     } else {
-        assert0(result <= left);
+        assert1(result <= left, "Substraction overflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
@@ -70,14 +70,14 @@ NATIVE1(SmallInt_times_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
     long result = left * right;
-    assert0(result / right == left);
+    assert1(result / right == left, "Multiplication overflow");
     RETURN_FROM_NATIVE(new_SmallInt(result));
 }
 
 NATIVE1(SmallInt_divide_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
-    assert0(right != 0);
+    assert1(right != 0, "Division by zero");
     RETURN_FROM_NATIVE(new_SmallInt(left / right));
 }
 
@@ -92,7 +92,7 @@ NATIVE1(SmallInt_shiftLeft_)
     long right = unwrap_int(NATIVE_ARG(0));
     if (left != 0) {
         long bits = log2l(abs(left));
-        assert0(right + bits < sizeof(long) * 8 - 1);
+        assert1(right + bits < sizeof(long) * 8 - 1, "Bitshift overflow");
     }
     RETURN_FROM_NATIVE(new_SmallInt(left << right));
 }
@@ -172,7 +172,6 @@ void post_init_SmallInt()
     Dictionary natives = add_plugin(L"Type.SmallInt");
     
     store_native(natives, L"=",  NM_SmallInt_pequal_);
-    store_native(natives, L"==", NM_SmallInt_pequal_);
     store_native(natives, L"+",  NM_SmallInt_plus_);
     store_native(natives, L"-",  NM_SmallInt_minus_);   
     store_native(natives, L"*",  NM_SmallInt_times_); 
@@ -185,7 +184,6 @@ void post_init_SmallInt()
     store_native(natives, L"|",  NM_SmallInt_or_);
     store_native(natives, L"<",  NM_SmallInt_lt_);
     store_native(natives, L">",  NM_SmallInt_gt_);
-    store_native(natives, L"!=", NM_SmallInt_notEqual_);
     store_native(natives, L"~=", NM_SmallInt_notEqual_);
     store_native(natives, L"asString",    NM_SmallInt_asString);
     store_native(natives, L"asCharacter", NM_SmallInt_asCharacter);
@@ -200,11 +198,6 @@ Optr wrap_int(long value)
 
 long unwrap_int(Optr integer)
 {
-    // TODO do more stuff in case we are not an int.
     ASSERT_TAG_LAYOUT(GETTAG(integer), Int);
-    //if (GETTAG(class) == INT) {
-        return ((SmallInt)integer)->value;
-    //}
-    //assert1(NULL, "Only SmallInts supported for now\n");
-    //return 0;
+    return ((SmallInt)integer)->value;
 }

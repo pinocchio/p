@@ -32,17 +32,20 @@ Dictionary _NATIVES_;
 
 /* ========================================================================= */
 
-THREADED(exit_eval)
+OPCODE(exit_eval)
     longjmp(tget_buf(Eval_Exit), 1);
 }
 
-THREADED(exit_error)
+OPCODE(exit_error)
     Optr assertion = pop_EXP();
     BlockContext env =
         (BlockContext)((Object)assertion)->ivals[0];
     
     fwprintf(stderr, L"\033[031mUnrecoverable error occurred:\033[0m\n\n");
-    inspect(assertion);
+    inspect(stderr, assertion);
+    if (HEADER(assertion) == Kernel_Exception_DoesNotUnderstand_Class) {
+        inspect_at(assertion, 3);
+    }
     fwprintf(stderr, L"\n");
     while ((Optr)env != nil) {
         if (env->home_context == (MethodContext)env) {
@@ -85,6 +88,9 @@ static int IN_EVAL = 0;
 
 static void start_eval()
 {
+    #ifdef DEBUG
+        fwprintf(stderr, L"\n");
+    #endif // DEBUG
     if (IN_EVAL) {
         assert1(NULL, "Re-entering evaluation thread!");
     }
@@ -220,7 +226,6 @@ static void bootstrap()
     LongLayout_Class->layout      = empty_object_layout;
     BytesLayout_Class->layout     = empty_object_layout;
     FileLayout_Class->layout      = empty_object_layout;
-
     Symbol_Class->layout          = words_layout;
 
     Symbol_Table = new_Dictionary();

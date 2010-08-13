@@ -28,7 +28,7 @@ ClassReference new_ClassReference_empty()
 void ClassReference_eval(ClassReference self)
 {
     if (self->class == (Optr)nil) {
-        fail(Exception_UndefinedClassReference_Class, 1, self);
+        fail(UndefinedClassReference_Class, 1, self);
     }
     POKE_EXP(0, self->class);
 }

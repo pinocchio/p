@@ -6,7 +6,6 @@
 /* ========================================================================= */
 
 struct ClassReference_t {
-    Optr referenceName;
     Optr package;
     Optr class;
 };

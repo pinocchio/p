@@ -26,7 +26,7 @@ void fail(const Class exception_class, uns_int argc, ...)
 
 void handle_assert(const char * message)
 {
-    fail(Exception_AssertionFailure_Class, 1, new_String_from_charp(message));
+    fail(AssertionFailure_Class, 1, new_String_from_charp(message));
 }
 
 /* ========================================================================= */

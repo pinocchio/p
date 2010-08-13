@@ -9,7 +9,6 @@ struct MethodContext_t {
     uns_int                 size;
     uns_int                 scope_id;
     uns_int                 stacked;
-    uns_int                 for_method;
     MethodClosure           closure;
     MethodContext           home_context;
     BlockContext            parent_frame;
@@ -17,7 +16,7 @@ struct MethodContext_t {
     Optr                    locals[];
 };
 
-#define CONTEXT_SIZE ((sizeof(struct MethodContext_t) / sizeof(Optr)) - 1)
+#define CONTEXT_SIZE (sizeof(struct MethodContext_t) / sizeof(Optr))
 
 extern MethodContext new_MethodContext(uns_int size);
 

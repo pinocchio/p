@@ -72,6 +72,6 @@ void NativeMethod_invoke(MethodClosure closure,
 
 void post_init_NativeMethod() 
 {
-    SMB_pPrimitive_plugin_ = new_Symbol_cached(L"pPrimitive:plugin:");
-    SMB_pPrimitive_plugin_code_ = new_Symbol_cached(L"pPrimitive:plugin:code:");
+    SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
+    SMB_pPrimitive_plugin_code_ = new_Symbol(L"pPrimitive:plugin:code:");
 }

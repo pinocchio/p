@@ -29,7 +29,7 @@ Super new_Super(Symbol message, uns_int argc, ...)
 
 /* ========================================================================= */
 
-THREADED(super_send) 
+OPCODE(super_send) 
     t_return();
     Optr class    = pop_EXP();
     uns_int argc  = (uns_int)pop_EXP();
@@ -38,14 +38,14 @@ THREADED(super_send)
     Class_dispatch(receiver, (Class)class, argc);
 }
 
-THREADED(push_env_class)
+OPCODE(push_env_class)
     // TODO directly inline it
     Optr env = (Optr)current_env();
     PUSH_EXP(((BlockContext)env)->home_context->closure->host);
     pc += 1;
 }
 
-THREADED(class_super)
+OPCODE(class_super)
     Optr class = PEEK_EXP(0);
     assert_class(class);
     POKE_EXP(0, ((Class)class)->super);

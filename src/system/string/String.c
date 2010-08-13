@@ -2,12 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <system/type/Symbol.h>
-#include <system/type/String.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 
-DECLARE_CLASS(String);
 String empty_String;
 static Symbol SMB_asString;
 
@@ -15,7 +13,7 @@ static Symbol SMB_asString;
 
 String new_String(const wchar_t * str)
 {
-    String string  = (String)new_Symbol(str);
+    String string  = (String)raw_Symbol(str);
     HEADER(string) = String_Class;
     return string;
 }
@@ -68,27 +66,6 @@ long Words_compare(Symbol s1, Symbol s2)
     return !wcsncmp(s1->value, s2->value, s1->size);
 }
 
-THREADED(string_concat)
-    String self   = (String)PEEK_EXP(1);
-    String string = (String)PEEK_EXP(0);
-    ZAP_EXP();
-    POKE_EXP(0, String_concat_(self, (String)string));
-    t_return();
-}
-
-THREADED(string_concat_asString)
-    Optr obj = pop_EXP();
-    Optr tag = GETTAG(obj);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        String self = (String)PEEK_EXP(0);
-        POKE_EXP(0, String_concat_(self, (String)obj));
-        t_return();
-    } else {
-        pc = pc + 1;
-        Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
-    }
-}
-
 NNATIVE(String_concat_, 2,
     t_string_concat_asString,
     t_string_concat)
@@ -98,7 +75,7 @@ NATIVE1(String_concat_)
 }
 
 NATIVE0(String_asSymbol)
-    RETURN_FROM_NATIVE(new_Symbol_cached(((String)self)->value));
+    RETURN_FROM_NATIVE(new_Symbol(((String)self)->value));
 }
 
 // TODO check types not classes!
@@ -214,13 +191,13 @@ NATIVE0(String_asNumber)
 
 void post_init_String()
 {
-    SMB_asString = new_Symbol_cached(L"asString");
-    String_Class->layout = create_layout(0, WORDS);
-    empty_String = new_String(L"");
-    Dictionary natives = add_plugin(L"Type.String");
+    String_Class->layout = words_layout;
+    SMB_asString         = new_Symbol(L"asString");
+    empty_String         = new_String(L"");
     
     INIT_NATIVE(String_concat_);    
 
+    Dictionary natives = add_plugin(L"Type.String");
     store_native(natives, L",",   NM_String_concat_);
     store_native(natives, L"asSymbol",  NM_String_asSymbol);
     store_native(natives, L"at:put:",   NM_String_at_put_);

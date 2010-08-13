@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/type/Character.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 
@@ -47,7 +47,7 @@ NATIVE0(Character_asString)
 
 NATIVE0(Character_asSymbol)
     const wchar_t str[2] = { ((Character)self)->value, '\0' };
-    RETURN_FROM_NATIVE(new_Symbol(str));
+    RETURN_FROM_NATIVE(raw_Symbol(str));
 }
 
 NATIVE0(Character_asSmallInt)
@@ -59,6 +59,8 @@ NATIVE0(Character_asSmallInt)
 
 void post_init_Character()
 { 
+    Character_Class->layout = character_layout;
+
     Dictionary natives = add_plugin(L"Type.Character");
     store_native(natives, L"hash",       NM_Character_hash);
     store_native(natives, L"asString",   NM_Character_asString);

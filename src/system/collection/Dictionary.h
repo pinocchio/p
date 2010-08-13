@@ -9,7 +9,8 @@ struct Dictionary_t {
     uns_int             size;
     uns_int             maxLinear;
     uns_int             ratio;
-    Array    data;
+    Array               data;
+    Optr                linear;
 };
 
 CREATE_INITIALIZERS(Dictionary);
@@ -33,7 +34,14 @@ extern void Dictionary_lookup_push();
 /* ========================================================================= */
 
 extern long unwrap_hash(Dictionary self, Optr w_hash);
-
+extern void Dictionary_grow(Dictionary self);
+extern long Dictionary_grow_check(Dictionary self);
+extern DictBucket * get_bucketp(Dictionary dictionary, long hash);
+extern int Bucket_compare_key(Optr inkey, Optr dictkey);
+extern void add_to_bucket(DictBucket * bucketp, Optr key, Optr value);
+extern void Bucket_store(DictBucket bucket, Optr key, Optr value, uns_int idx);
+extern void remove_from_bucket(uns_int idx, DictBucket bucket);
+extern int tpush_hash(Optr key);
 /* ========================================================================= */
 
 #endif // DICTIONARY_H

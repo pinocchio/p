@@ -69,7 +69,9 @@ extern Optr basic_instantiate_Object(Class class, uns_int size);
 /* ========================================================================= */
 
 extern void assert_class(Optr class);
-
+extern void does_not_understand(Optr self, Class class, Optr msg, uns_int argc);
+extern void invoke(Optr method, Optr self, uns_int argc);
+extern void Class_lookup(Class class, Optr msg);
 /* ========================================================================= */
 
 

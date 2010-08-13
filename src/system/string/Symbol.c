@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <wchar.h>
-#include <system/type/Symbol.h>
+#include <pinocchio.h>
 
 /* ========================================================================= */
 
@@ -11,7 +11,7 @@ Dictionary Symbol_Table;
 
 /* ========================================================================= */
 
-Symbol new_Symbol(const wchar_t* input)
+Symbol raw_Symbol(const wchar_t* input)
 {
     uns_int size   = wcslen(input) + 1;
     Symbol result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
@@ -22,9 +22,9 @@ Symbol new_Symbol(const wchar_t* input)
     return result;
 }
 
-Symbol new_Symbol_cached(const wchar_t* input)
+Symbol new_Symbol(const wchar_t* input)
 {
-    Symbol result  = new_Symbol(input);
+    Symbol result  = raw_Symbol(input);
     Optr cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Optr)result);
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;
@@ -33,27 +33,28 @@ Symbol new_Symbol_cached(const wchar_t* input)
     return result;
 }
 
-/*
- * Initialize Symbols before installing methods.
- */
-void init_SymbolTable()
-{
-}
-
-void pre_init_Symbol()
-{
-}
 /* ========================================================================= */
 
 NATIVE1(Symbol_at_)
     Optr w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
-    long index     = unwrap_int(w_arg0) - 1;
+    long index  = unwrap_int(w_arg0) - 1;
     assert(0 <= index, printf("Index below 0: %li", index));
     assert(index < ((String)self)->size,
         printf("%li is out of Bounds[%lu]\n", index, ((String)self)->size));
     // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
     RETURN_FROM_NATIVE(new_Character(((Symbol) self)->value[index]));
+}
+
+NATIVE1(Symbol_basicAt_)
+    Optr w_arg0 = NATIVE_ARG(0);
+    ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
+    long index  = unwrap_int(w_arg0) - 1;
+    assert(0 <= index, printf("Index below 0: %li", index));
+    assert(index < ((String)self)->size,
+        printf("%li is out of Bounds[%lu]\n", index, ((String)self)->size));
+    // printf("at: %i '%lc'\n", index, ((Symbol)self)->value[index]);
+    RETURN_FROM_NATIVE(wrap_int(((Symbol) self)->value[index]));
 }
 
 NATIVE0(Symbol_asString)
@@ -64,7 +65,6 @@ Array Symbol_asArray(Symbol symbol)
 {
     Symbol self_symbol = (Symbol)symbol;
     Array array        = new_Array_raw(self_symbol->size);
-    LOG("%ls\n", symbol->value); 
     long i;
     for (i=0; i<self_symbol->size; i++) {
         array->values[i] = (Optr)new_Character(self_symbol->value[i]);
@@ -131,6 +131,7 @@ void post_init_Symbol()
 {
     Dictionary natives = add_plugin(L"Type.Symbol");
     store_native(natives, L"at:",       NM_Symbol_at_);
+    store_native(natives, L"basicAt:",       NM_Symbol_basicAt_);
     store_native(natives, L"asString",  NM_Symbol_asString);
     store_native(natives, L"=",			NM_Symbol__equal);
     store_native(natives, L"size",      NM_Symbol_size);

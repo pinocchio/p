@@ -121,14 +121,13 @@ Class class##_Class;
 
 
 extern void printf0(const char * string, ...);
-extern void _indent_(uns_int i);
 extern uns_int nrsends();
 
 extern void print_EXP();
 
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); fwprintf(stderr, L"\n");
-    #define LOG(args...) _indent_(nrsends()); fwprintf(stderr, L""args);
+    #define LOG(args...) _indent_(stderr, nrsends()); fwprintf(stderr, L""args);
     #define LOG_AST_INFO(print, info) fwprintf(stderr, L""print); print_Info(info); fwprintf(stderr, L"\n");
 #else
     #define LOGFUN
