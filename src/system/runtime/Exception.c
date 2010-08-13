@@ -21,7 +21,7 @@ void fail(const Class exception_class, uns_int argc, ...)
     } else {
         handle_assert("Unsupported type of error-handler installed.");
     }
-    longjmp(tget_buf(Eval_Continue), 1);
+    longjmp(Eval_Continue, 1);
 }
 
 void handle_assert(const char * message)

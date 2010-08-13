@@ -18,6 +18,8 @@
 
 /* ========================================================================= */
 
+extern jmp_buf         Eval_Continue;
+
 typedef enum BOOL { FALSE , TRUE } BOOL;
 typedef void** Optr;
 typedef void(*threaded)();

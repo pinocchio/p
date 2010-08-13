@@ -13,6 +13,7 @@
 
 struct IO_Socket_t {
     SmallInt handle;
+    Optr connected;
 };
 
 TYPE(IO_Socket)

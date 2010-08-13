@@ -21,5 +21,6 @@ make_nonblocking(int fd) {
 IO_Socket new_IO_Socket_withHandle(SmallInt handle) {
     NEW_OBJECT(IO_Socket);
     result->handle = handle;
+    result->connected = true;
     return result;
 }

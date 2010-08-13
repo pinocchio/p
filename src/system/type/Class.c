@@ -115,6 +115,10 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 	}
 
     ZAP_EXP();
+    fwprintf(stderr, L"Does not understand");
+    inspect( msg );
+    fwprintf(stderr, L"Self");
+    inspect( self );
     Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
 }
 
