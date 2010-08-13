@@ -13,7 +13,6 @@ struct Thread_t {
     Optr            Error_Handler;
     threaded**      _CNT_;
     jmp_buf         Eval_Exit;
-    jmp_buf         Eval_Continue;
     Optr            Double_Stack[];
 };
 
