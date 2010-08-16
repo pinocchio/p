@@ -6,6 +6,8 @@
 #include <debug.h>
 #include <locale.h>
 
+jmp_buf         Eval_Continue;
+
 void printf0(const char * string, ...) 
 {
 }
@@ -20,7 +22,6 @@ void init_thread_keys()
     tkey(_ENV_,         NULL);
  
     tkey(Eval_Exit,     NULL);
-    tkey(Eval_Continue, NULL);
     tkey(Eval_Abort,    NULL);
  
     tkey(Error_Handler, NULL);
@@ -107,7 +108,7 @@ int bootstrapped = 0;
 static Optr finish_eval()
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
-        setjmp(tget_buf(Eval_Continue));
+        setjmp(Eval_Continue);
         for (;;) {
           
             (*pc)();
