@@ -37,7 +37,7 @@ Array get_args(int argc, const char ** argv)
         int length = strlen(arg);
         wchar_t warg[length + 1];
         assert1(mbstowcs(warg, arg, length + 1) != -1, "failed to parse arguments");
-        Symbol sarg = new_Symbol(warg);
+        String sarg = new_String(warg);
         args->values[i-1] = (Optr)sarg;
     }
     return args;

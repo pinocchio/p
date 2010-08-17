@@ -52,4 +52,6 @@ extern void _push_CNT(threaded* e);
 extern void pinocchio_main(int argc, const char ** argv);
 extern void init_Error_Handler();
 
+extern Array get_args(int argc, const char ** argv);
+
 #endif // THREAD_H
