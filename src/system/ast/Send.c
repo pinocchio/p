@@ -11,7 +11,6 @@ Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc) {
     NEW_ARRAY_OBJECT(Send, Optr[argc]);
     result->receiver = receiver;
     result->message  = msg;
-    result->info     = empty_Info;
     result->cache    = new_InlineCache();
 
     result->size     = argc;

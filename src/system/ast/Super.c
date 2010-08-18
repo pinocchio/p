@@ -12,7 +12,6 @@ Super new_Super(Symbol message, uns_int argc, ...)
 {
     NEW_ARRAY_OBJECT(Super, Optr[argc]);
     result->message = message;
-    result->info    = empty_Info;
     result->cache   = new_InlineCache();
     result->size    = argc;
 

@@ -26,7 +26,6 @@ Block new_Block(uns_int paramCount,
     result->locals      = new_Array_raw(localCount);
     init_raw_variable_array(result->params, depth, paramCount, 0);
     init_raw_variable_array(result->locals, depth, localCount, paramCount);
-    result->info        = empty_Info;
     result->size        = statementCount;
     COPY_ARGS(statementCount, result->body);
     return result;
@@ -50,7 +49,6 @@ Block new_Block_with(Array params, Array locals, Array threaded,
     result->locals  = locals;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info    = empty_Info;
     result->size    = statementCount;
     result->threaded = threaded;
     COPY_ARGS(statementCount, result->body);

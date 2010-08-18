@@ -7,7 +7,6 @@
 
 struct Super_t {
     uns_int size;
-    Info    info;   
     Array   cache;
     Symbol  message; 
     Optr    unused;

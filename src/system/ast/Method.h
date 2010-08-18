@@ -7,11 +7,11 @@
 
 struct Method_t {
     uns_int size;
-    Info    info;
     Array   params;
     Array   locals;
     Optr    package;
     Array   annotations;
+    Info    info;
     Array   code;
     Optr    body[];
 };

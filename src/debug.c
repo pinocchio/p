@@ -115,7 +115,6 @@ void sends()
         Optr c = tget(Double_Stack)[cur++];
         if (c > (Optr)10000 && pclass(c) == Send_Class) {
             Send send = (Send)c;
-            print_Info(send->info);
             print_Symbol(stderr, (Optr)send->message);
         }
     }

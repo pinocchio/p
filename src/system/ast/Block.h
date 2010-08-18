@@ -7,7 +7,6 @@
 
 struct Block_t {
     uns_int size;
-    Info    info;
     Array   params;
     Array   locals;
 	Array   threaded;
