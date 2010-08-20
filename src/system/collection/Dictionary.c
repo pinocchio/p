@@ -238,17 +238,6 @@ void Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 /* ========================================================================= */
 
-NNATIVE(Dictionary_at_, 5,
-    t_push_hash,
-    t_dictionary_bucket,
-    t_bucket_lookup,
-    t_return,
-    t_return_nil)
-
-NATIVE1(Dictionary_at_)
-    push_code(T_Dictionary_at_);
-}
-
 NNATIVE(Dictionary_at_ifAbsent_, 5,
     t_push_hash,
     t_dictionary_bucket,
@@ -294,7 +283,6 @@ void post_init_Dictionary()
 
     change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
     
-    INIT_NATIVE(Dictionary_at_);
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(iDictionary_at_);
@@ -302,7 +290,6 @@ void post_init_Dictionary()
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, L"at:put:",      NM_Dictionary_at_put_);
-    store_native(natives, L"at:",          NM_Dictionary_at_);
     store_native(natives, L"at:ifAbsent:", NM_Dictionary_at_ifAbsent_);
     store_native(natives, L"grow",         NM_Dictionary_grow);
 }
