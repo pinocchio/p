@@ -7,11 +7,11 @@ OS           = $(shell uname)
 # ============================================================================
 TARGET       = pinocchio
 
-CFILES      += $(wildcard *.c) $(wildcard system/**/*.c)
-CFILES      += $(wildcard lib/**/**/**/*.c) $(wildcard lib/**/**/*.c) $(wildcard lib/**/*.c) $(wildcard lib/*.c)
+CFILES      += $(wildcard *.c) $(shell find system -name '*.c')
+CFILES      += $(shell find lib -name '*.c')
 
-CIFILES      = $(wildcard *.ci) $(wildcard system/**/*.ci)
-HIFILES      = $(wildcard *.hi) $(wildcard system/**/*.hi)
+CIFILES      = $(wildcard *.ci) $(shell find system -name '*.ci')
+HIFILES      = $(wildcard *.hi) $(shell find system -name '*.hi')
 HFILES      += $(CFILES:%.c=%.h)
 
 SOURCES       = $(CFILES) $(HFILES) $(HIFILES) $(CIFILES)

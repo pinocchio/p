@@ -10,14 +10,14 @@ DECLARE_CLASS(Object);
 
 /* ========================================================================= */
 
-SmallInt Object_hash(Object object)
+SmallInt Object_identityHash(Object object)
 {
     uns_int hash = (uns_int)object;
     return new_SmallInt(hash>>3);
 }
 
-NATIVE0(Object_hash)
-    RETURN_FROM_NATIVE(Object_hash((Object)self));
+NATIVE0(Object_identityHash)
+    RETURN_FROM_NATIVE(Object_identityHash((Object)self));
 }
 
 NATIVE0(Object_class)
@@ -153,7 +153,7 @@ void post_init_Object()
     store_native(natives, L"==",                     NM_Object_equals);
     store_native(natives, L"=",                      NM_Object_equals);
     store_native(natives, L"class",                  NM_Object_class);
-    store_native(natives, L"hash",                   NM_Object_hash);
+    store_native(natives, L"identityHash",           NM_Object_identityHash);
     store_native(natives, L"perform:withArguments:", NM_Object_perform_withArguments_);
     store_native(natives, L"perform:",               NM_Object_perform_);
 }
