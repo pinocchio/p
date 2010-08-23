@@ -23,7 +23,7 @@ BlockContext capture_current_env()
 {
     BlockContext target;
     BlockContext context = current_env();
-    if (!context->stacked) {
+    if (context->stacked == false) {
 		return context;
     }
     uns_int size   = context->size;
@@ -42,7 +42,7 @@ BlockContext capture_current_env()
         target->home_context = (MethodContext)target;
     }
 
-    target->stacked = 0;
+    target->stacked = false;
     set_env((Optr)target);
     return target;
 }

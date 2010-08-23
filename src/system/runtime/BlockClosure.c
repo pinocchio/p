@@ -42,7 +42,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     
     HEADER(context)       = BlockContext_Class;
 	context->size         = size;
-	context->stacked      = 1;
+	context->stacked      = true;
     context->parent_frame = current_env();
     set_env((Optr)context);
 

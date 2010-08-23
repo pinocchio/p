@@ -38,36 +38,8 @@ Optr raw_Object_at(Object o, Optr tag, long index)
 void raw_Object_at_put(Object o, Optr tag,
                        long index, Optr value)
 {
-    ASSERT_TAG_SIZE(tag, index); o->ivals[index] = value;
-}
-
-Optr Object_instVarAt_(Optr self, long index)
-{
-    Optr tag = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Object)) {
-        return raw_Object_at((Object)self, tag, index);
-    } else if (TAG_IS_LAYOUT(tag, Array)) {
-        return raw_Array_instAt((Array)self, tag, index);
-    } else if (tag == nil) {
-        assert1(NULL, "Trying to access object with Nil as layout");
-    } else {
-        assert1(NULL, "Trying to access object without instvars");
-    }
-    return NULL;
-}
-
-void Object_instVarAt_put_(Optr self, long index, Optr value)
-{
-    Optr tag = GETTAG(self);
-    if (TAG_IS_LAYOUT(tag, Object)) {
-        raw_Object_at_put((Object)self, tag, index, value);
-    } else if (TAG_IS_LAYOUT(tag, Array)) {
-        raw_Array_instAt_put((Array)self, tag, index, value);
-    } else if (tag == nil) {
-        assert1(NULL, "Trying to access object with Nil as layout");
-    } else {
-        assert1(NULL, "Trying to access object without instvars");
-    }
+    ASSERT_TAG_SIZE(tag, index);
+    o->ivals[index] = value;
 }
 
 NATIVE0(Object_size)

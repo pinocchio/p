@@ -15,8 +15,8 @@ Dictionary new_Dictionary()
 {
     NEW_OBJECT(Dictionary);
     result->size      = 0;
-    result->ratio     = 500;
-    result->maxLinear = 20;
+    result->ratio     = new_SmallInt(500);
+    result->maxLinear = new_SmallInt(20);
     result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
     result->linear    = true;
     return result;
@@ -59,10 +59,10 @@ long Dictionary_grow_check(Dictionary self)
 {
     self->size++;
     if (self->data->size == 1) {
-        return self->size == self->maxLinear;
+        return self->size == unwrap_int(self->maxLinear);
     }
     uns_int size = self->data->size;
-    return (100 * self->size) / size > self->ratio;
+    return (100 * self->size) / size > unwrap_int(self->ratio);
 }
 
 Optr Dictionary_quick_lookup(Dictionary self, Optr key)
@@ -281,7 +281,7 @@ void post_init_Dictionary()
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
 
-    change_slot_type(Dictionary_Class, UIntSlot_Class, 3, 0,1,2);
+    change_slot_type(Dictionary_Class, UIntSlot_Class, 1, 0);
     
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);

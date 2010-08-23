@@ -7,8 +7,8 @@
 
 struct Dictionary_t {
     uns_int             size;
-    uns_int             maxLinear;
-    uns_int             ratio;
+    SmallInt            maxLinear;
+    SmallInt            ratio;
     Array               data;
     Optr                linear;
 };
