@@ -167,8 +167,6 @@ NATIVE1(SmallInt_pequal_)
 
 void post_init_SmallInt()
 {
-    SmallInt_Class->layout = int_layout;
-    init_numbercache();
     Dictionary natives = add_plugin(L"Type.SmallInt");
     
     store_native(natives, L"=",  NM_SmallInt_pequal_);

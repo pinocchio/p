@@ -57,19 +57,6 @@ Array new_Array_withAll(uns_int c, Optr element)
 
 /* ========================================================================= */
 
-Optr raw_Array_instAt(Array o, Optr tag, long index)
-{
-    ASSERT_TAG_SIZE(tag, index);
-    return o->values[index];
-}
-
-void raw_Array_instAt_put(Array o, Optr tag,
-                               long index, Optr value)
-{
-    ASSERT_TAG_SIZE(tag, index);
-    o->values[index] = value;
-}
-
 NATIVE1(Array_instVarAt_)
     Optr w_index = NATIVE_ARG(0);
     long index   = unwrap_int(w_index) - 1;

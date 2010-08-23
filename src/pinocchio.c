@@ -1,4 +1,4 @@
-#include <stdlib.h>
+        #include <stdlib.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include <wchar.h>
@@ -102,9 +102,6 @@ static void start_eval()
     push_code(T_exit_eval);
 }
 
-
-int bootstrapped = 0;
-
 static Optr finish_eval()
 {
     if (!setjmp(tget_buf(Eval_Exit))) {
@@ -170,6 +167,9 @@ static void bootstrap()
     Array_Class            = new_Bootstrapping_Class();
     DictBucket_Class       = new_Bootstrapping_Class();
     Dictionary_Class       = new_Bootstrapping_Class();
+    SmallInt_Class         = new_Bootstrapping_Class();
+
+    init_numbercache();
 
     DIRECT_INIT_CLASS(metaclass);
     DIRECT_INIT_CLASS(behavior);
@@ -180,7 +180,6 @@ static void bootstrap()
     INIT_CLASS(Dictionary);
 
     Slot_Class            = new_Bootstrapping_Class();
-    SmallInt_Class        = new_Bootstrapping_Class();
     Symbol_Class          = new_Bootstrapping_Class();
 
     INIT_CLASS(Slot);
@@ -228,6 +227,7 @@ static void bootstrap()
     BytesLayout_Class->layout     = empty_object_layout;
     FileLayout_Class->layout      = empty_object_layout;
     Symbol_Class->layout          = words_layout;
+    SmallInt_Class->layout        = int_layout;
 
     Symbol_Table = new_Dictionary();
 }

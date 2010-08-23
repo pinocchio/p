@@ -21,9 +21,6 @@ extern Array new_Array_withAll(uns_int c, Optr element);
 extern Optr raw_Array_at(Array array, Optr tag, long index);
 extern void raw_Array_at_put(Array array, Optr tag,
                                   long index, Optr value);
-extern Optr raw_Array_instAt(Array array, Optr tag, long index);
-extern void raw_Array_instAt_put(Array array, Optr tag,
-                                      long index, Optr value);
 /* ========================================================================= */
 
 #endif // ARRAY_H

@@ -13,7 +13,7 @@
 struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
-    uns_int                 stacked;
+    Optr                    stacked;
     BlockContext            outer_scope;
     MethodContext           home_context;
     BlockContext            parent_frame;

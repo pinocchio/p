@@ -19,17 +19,34 @@ Slot new_Slot(uns_int index, const wchar_t * name)
 
 /* ========================================================================= */
 
+Optr Object_instVarAt_(Optr self, long index)
+{
+    Optr tag = GETTAG(self);
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        index += 1;
+    }
+    return ((Object)self)->ivals[index];
+}
+
+void Object_instVarAt_put_(Optr self, long index, Optr value)
+{
+    Optr tag = GETTAG(self);
+    if (TAG_IS_LAYOUT(tag, Array)) {
+        index += 1;
+    }
+    ((Object)self)->ivals[index] = value;
+}
+
+/* ========================================================================= */
+
 static Optr Slot_readFrom_(Slot var, Optr self)
 {
     return Object_instVarAt_(self, var->index);
 }
 
-static void Slot_assign_on_(Slot var, Optr value,
-                                        Optr self)
+static void Slot_assign_on_(Slot var, Optr value, Optr self)
 {
-    Object_instVarAt_put_(self,
-						  var->index,
-						  value);
+    Object_instVarAt_put_(self, var->index, value);
 }
 
 void Slot_eval(Slot var)

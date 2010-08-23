@@ -8,7 +8,7 @@
 struct MethodContext_t {
     uns_int                 size;
     uns_int                 scope_id;
-    uns_int                 stacked;
+    Optr                    stacked;
     MethodClosure           closure;
     MethodContext           home_context;
     BlockContext            parent_frame;
