@@ -1,4 +1,4 @@
-        #include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include <wchar.h>
@@ -155,6 +155,10 @@ void store_method(Class class, Symbol symbol,
 static void bootstrap()
 {
     nil                    = (Optr) NEW_t(Nil);
+
+    // placeholder true/false used in the methodDicts
+    true =  basic_instantiate_Object(NULL, 0);
+    false =  basic_instantiate_Object(NULL, 0);
 
     metaclass              = NEW_t(Class);
     Class Metaclass_mclass = (Class)basic_instantiate_Object(metaclass, METACLASS_SIZE);

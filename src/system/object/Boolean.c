@@ -20,10 +20,10 @@ Optr get_bool(bool value)
 
 void post_init_Boolean()
 {
-    true         = (Optr)instantiate(True_Class);
-    true_Const   = new_Constant((Optr)true);
+    HEADER(true)  = True_Class;
+    HEADER(false) = False_Class;
 
-    false        = (Optr)instantiate(False_Class);
-    false_Const  = new_Constant((Optr)false);
+    true_Const      = new_Constant((Optr)true);
+    false_Const     = new_Constant((Optr)false);
 }
 
