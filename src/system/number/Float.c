@@ -18,23 +18,33 @@ Float new_Float(float value)
 
 /* ========================================================================= */
 
+Float Float_plus_Float(float left, float right) {
+   return wrap_float(left + right); 
+}
+
+NATIVE(Float_plus_)
+    Optr w_arg = NATIVE_ARG(0);
+    Class type = HEADER(w_arg);
+    float right;
+    if (type == Float_Class) {
+        right = unwrap_float(w_arg);
+    } else if (type == SmallInt_Class) {
+        right = (float)unwrap_int(w_arg);
+    }
+    RETURN_FROM_NATIVE(Float_plus_Float(((Float)self)->value, right));
+}
+
 #define Float_BINARY_OPERATION(name, op)\
 NATIVE1(Float_##name)\
     Optr w_arg = NATIVE_ARG(0);\
     ASSERT_INSTANCE_OF(w_arg, Float_Class);\
-    SmallInt arg = (SmallInt)w_arg;\
-    RETURN_FROM_NATIVE(new_SmallInt(((SmallInt) self)->value op arg->value));\
+    Float arg = (Float)w_arg;\
+    RETURN_FROM_NATIVE(new_Float(((Float) self)->value op arg->value));\
 }
 
-Float_BINARY_OPERATION(plus_,       +);
 Float_BINARY_OPERATION(minus_,      -);
 Float_BINARY_OPERATION(times_,      *);
 Float_BINARY_OPERATION(divide_,     /);
-Float_BINARY_OPERATION(modulo_,     %);
-Float_BINARY_OPERATION(shiftRight_, >>);
-Float_BINARY_OPERATION(shiftLeft_,  <<);
-Float_BINARY_OPERATION(and_,        &);
-Float_BINARY_OPERATION(or_,         |);
 
 
 // TODO fix this damn typecheck!
@@ -64,6 +74,10 @@ NATIVE0(Float_hash)
     RETURN_FROM_NATIVE(wrap_int((uns_int)f)); 
 }
 
+NATIVE0(Float_asInteger)
+    RETURN_FROM_NATIVE(wrap_int((long)unwrap_float(self)));
+}
+
 String Float_asString(float self, uns_int base)
 {
     char *chrs;
@@ -75,7 +89,7 @@ String Float_asString(float self, uns_int base)
 }
 
 NATIVE0(Float_asString)
-    RETURN_FROM_NATIVE(Float_asString(unwrap_int(self), 10));
+    RETURN_FROM_NATIVE(Float_asString(unwrap_float(self), 10));
 }
 
 Boolean Float_pequal_(Float self, Optr other) 
@@ -96,6 +110,8 @@ NATIVE1(Float_pequal_)
 
 void post_init_Float()
 {
+    Float_Class->layout = float_layout;
+
     Dictionary natives = add_plugin(L"Type.Float");
 
     store_native(natives, L"=",      NM_Float_pequal_);
@@ -104,21 +120,20 @@ void post_init_Float()
     store_native(natives, L"-",      NM_Float_minus_);   
     store_native(natives, L"*",      NM_Float_times_); 
     store_native(natives, L"//",     NM_Float_divide_);
-    store_native(natives, L"%",     NM_Float_modulo_);
-    store_native(natives, L"\\\\",     NM_Float_modulo_);
-    store_native(natives, L"<<",  NM_Float_shiftLeft_);
-    store_native(natives, L">>", NM_Float_shiftRight_);
-    store_native(natives, L"&",        NM_Float_and_);
-    store_native(natives, L"|",         NM_Float_or_);
     store_native(natives, L"<",         NM_Float_lt_);
     store_native(natives, L">",         NM_Float_gt_);
     store_native(natives, L"!=",         NM_Float_notEqual_);
     store_native(natives, L"~=",         NM_Float_notEqual_);
     store_native(natives, L"hash",        NM_Float_hash);
     store_native(natives, L"asString",    NM_Float_asString);
+    store_native(natives, L"asInteger",    NM_Float_asInteger);
 }
 
 /* ========================================================================= */
+
+Float wrap_float(float value) {
+    return new_Float(value);
+}
 
 float unwrap_float(Optr floatValue)
 {

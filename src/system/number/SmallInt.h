@@ -29,6 +29,8 @@ extern SmallInt new_SmallInt(long value);
 extern void init_numbercache();
 
 /* ========================================================================= */
+extern SmallInt SmallInt_plus_SmallInt(long left, long right);
+/* ========================================================================= */
 
 extern Optr wrap_int(long value);
 extern long unwrap_int(Optr integer);

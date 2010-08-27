@@ -226,10 +226,11 @@ static void bootstrap()
     CharacterLayout_Class->layout = empty_object_layout;
     WordsLayout_Class->layout     = empty_object_layout;
     IntLayout_Class->layout       = empty_object_layout;
-    FloatLayout_Class->layout     = empty_object_layout;
-    LongLayout_Class->layout      = empty_object_layout;
+    LongLayout_Class->layout      = empty_array_layout;
     BytesLayout_Class->layout     = empty_object_layout;
     FileLayout_Class->layout      = empty_object_layout;
+    FloatLayout_Class->layout     = empty_object_layout;
+
     Symbol_Class->layout          = words_layout;
     SmallInt_Class->layout        = int_layout;
 

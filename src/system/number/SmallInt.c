@@ -42,16 +42,27 @@ void init_numbercache()
 
 /* ========================================================================= */
 
-NATIVE1(SmallInt_plus_)
-    long left = unwrap_int(self);
-    long right = unwrap_int(NATIVE_ARG(0));
+SmallInt SmallInt_plus_SmallInt(long left, long right) {
     long result = left + right;
     if (right <= 0) {
         assert1(result <= left, "Addition overflow");
     } else {
         assert1(result > left, "Addition underflow");
     }
-    RETURN_FROM_NATIVE(new_SmallInt(result));
+    return new_SmallInt(result);
+}
+
+NATIVE1(SmallInt_plus_)
+    Optr right = NATIVE_ARG(0);
+    Class type = HEADER(right); 
+
+    if (type == SmallInt_Class) {
+        RETURN_FROM_NATIVE(SmallInt_plus_SmallInt(unwrap_int(self), unwrap_int(right)));
+    } else if (type == Float_Class) {
+        RETURN_FROM_NATIVE(Float_plus_Float((float)unwrap_int(self), unwrap_float(right)));
+    } else {
+        assert0(L"unsupported operand for +");
+    }
 }
 
 NATIVE1(SmallInt_minus_)
@@ -136,6 +147,10 @@ SmallInt_COMPARE_OPERATION(lt_,       <)
 SmallInt_COMPARE_OPERATION(gt_,       >)
 SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
+NATIVE0(SmallInt_asFloat)
+    RETURN_FROM_NATIVE(wrap_float((float)unwrap_int(self)));
+}
+
 String SmallInt_asString(long self, uns_int base)
 {
     wchar_t buffer[LONG_MAX_DIGITS + 2];
@@ -187,6 +202,7 @@ void post_init_SmallInt()
     store_native(natives, L"<",  NM_SmallInt_lt_);
     store_native(natives, L">",  NM_SmallInt_gt_);
     store_native(natives, L"~=", NM_SmallInt_notEqual_);
+    store_native(natives, L"asFloat",    NM_SmallInt_asFloat);
     store_native(natives, L"asString",    NM_SmallInt_asString);
     store_native(natives, L"asCharacter", NM_SmallInt_asCharacter);
 }
