@@ -9,7 +9,7 @@ DECLARE_CLASS(Float);
 
 /* ========================================================================= */
 
-Float new_Float(float value)
+Float new_Float(double value)
 {
     NEW_OBJECT(Float);
     result->value = value;
@@ -18,18 +18,18 @@ Float new_Float(float value)
 
 /* ========================================================================= */
 
-Float Float_plus_Float(float left, float right) {
+Float Float_plus_Float(double left, double right) {
    return wrap_float(left + right); 
 }
 
 NATIVE(Float_plus_)
     Optr w_arg = NATIVE_ARG(0);
     Class type = HEADER(w_arg);
-    float right;
+    double right;
     if (type == Float_Class) {
         right = unwrap_float(w_arg);
     } else if (type == SmallInt_Class) {
-        right = (float)unwrap_int(w_arg);
+        right = unwrap_int(w_arg);
     }
     RETURN_FROM_NATIVE(Float_plus_Float(((Float)self)->value, right));
 }
@@ -70,7 +70,7 @@ Float_COMPARE_OPERATION(gt_, >)
 Float_COMPARE_OPERATION(notEqual_, !=)
 
 NATIVE0(Float_hash)
-    float f = unwrap_float(self);
+    double f = unwrap_float(self);
     RETURN_FROM_NATIVE(wrap_int((uns_int)f)); 
 }
 
@@ -78,10 +78,10 @@ NATIVE0(Float_asInteger)
     RETURN_FROM_NATIVE(wrap_int((long)unwrap_float(self)));
 }
 
-String Float_asString(float self, uns_int base)
+String Float_asString(double self, uns_int base)
 {
     char *chrs;
-    long size = asprintf(&chrs, "%f", self);
+    long size = asprintf(&chrs, "%d", self);
     assert1(size != -1, "Unable to convert float to string");
     String result = new_String(ascii_to_unicode(chrs));
     free(chrs);
@@ -131,11 +131,11 @@ void post_init_Float()
 
 /* ========================================================================= */
 
-Float wrap_float(float value) {
+Float wrap_float(double value) {
     return new_Float(value);
 }
 
-float unwrap_float(Optr floatValue)
+double unwrap_float(Optr floatValue)
 {
     // TODO do more stuff in case we are not an float.
     ASSERT_TAG_LAYOUT(GETTAG(floatValue), Float);

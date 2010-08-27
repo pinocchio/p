@@ -59,7 +59,7 @@ NATIVE1(SmallInt_plus_)
     if (type == SmallInt_Class) {
         RETURN_FROM_NATIVE(SmallInt_plus_SmallInt(unwrap_int(self), unwrap_int(right)));
     } else if (type == Float_Class) {
-        RETURN_FROM_NATIVE(Float_plus_Float((float)unwrap_int(self), unwrap_float(right)));
+        RETURN_FROM_NATIVE(Float_plus_Float((double)unwrap_int(self), unwrap_float(right)));
     } else {
         assert0(L"unsupported operand for +");
     }
@@ -148,7 +148,7 @@ SmallInt_COMPARE_OPERATION(gt_,       >)
 SmallInt_COMPARE_OPERATION(notEqual_, !=)
 
 NATIVE0(SmallInt_asFloat)
-    RETURN_FROM_NATIVE(wrap_float((float)unwrap_int(self)));
+    RETURN_FROM_NATIVE(wrap_float(unwrap_int(self)));
 }
 
 String SmallInt_asString(long self, uns_int base)
