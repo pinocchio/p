@@ -55,13 +55,12 @@ SmallInt SmallInt_plus_SmallInt(long left, long right) {
 NATIVE1(SmallInt_plus_)
     Optr right = NATIVE_ARG(0);
     Class type = HEADER(right); 
-
     if (type == SmallInt_Class) {
         RETURN_FROM_NATIVE(SmallInt_plus_SmallInt(unwrap_int(self), unwrap_int(right)));
     } else if (type == Float_Class) {
-        RETURN_FROM_NATIVE(Float_plus_Float((double)unwrap_int(self), unwrap_float(right)));
+        RETURN_FROM_NATIVE(Float_plus_Float(unwrap_int(self), unwrap_float(right)));
     } else {
-        assert0(L"unsupported operand for +");
+        assert1(NULL, "unsupported operand for +");
     }
 }
 
@@ -87,6 +86,24 @@ NATIVE1(SmallInt_times_)
         assert1(result / right == left, "Multiplication overflow");
         RETURN_FROM_NATIVE(new_SmallInt(result));
     }
+}
+
+NATIVE1(SmallInt_div_)
+    Optr w_arg = NATIVE_ARG(0);
+    Class type = HEADER(w_arg); 
+    double right;
+    if (type == SmallInt_Class) {
+        //TODO return a Fraction here
+        long value = unwrap_int(w_arg);
+        assert1(value != 0, "Division by 0");
+        right = value;
+    } else if (type == Float_Class) {
+        right = unwrap_float(w_arg);
+    } else {
+        assert1(NULL, "invalid argument type for int /: fix MOP!");
+    }
+    Float result = Float_divide_Float(unwrap_int(self), right);
+    RETURN_FROM_NATIVE(result);
 }
 
 NATIVE1(SmallInt_divide_)
@@ -192,6 +209,7 @@ void post_init_SmallInt()
     store_native(natives, L"+",  NM_SmallInt_plus_);
     store_native(natives, L"-",  NM_SmallInt_minus_);   
     store_native(natives, L"*",  NM_SmallInt_times_); 
+    store_native(natives, L"/",  NM_SmallInt_div_);
     store_native(natives, L"//",  NM_SmallInt_divide_);
     store_native(natives, L"%",  NM_SmallInt_modulo_);
     store_native(natives, L"\\\\", NM_SmallInt_modulo_);

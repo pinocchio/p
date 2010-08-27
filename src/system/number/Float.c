@@ -18,33 +18,64 @@ Float new_Float(double value)
 
 /* ========================================================================= */
 
+#define FLOAT_BINOP_TYPE_SWITCH(op) \
+    Optr w_arg = NATIVE_ARG(0);\
+    Class type = HEADER(w_arg);\
+    double right;\
+    if (type == Float_Class) {\
+        right = unwrap_float(w_arg);\
+    } else if (type == SmallInt_Class) {\
+        right = unwrap_int(w_arg);\
+    } else {\
+        assert1(NULL, "missing MOP for Float "#op" \n");\
+    }
+
+
 Float Float_plus_Float(double left, double right) {
    return wrap_float(left + right); 
 }
 
-NATIVE(Float_plus_)
+Float Float_minus_Float(double left, double right) {
+   return wrap_float(left - right); 
+}
+
+Float Float_times_Float(double left, double right) {
+   return wrap_float(left * right); 
+}
+
+Float Float_divide_Float(double left, double right) {
+   return wrap_float(left / right); 
+}
+
+NATIVE(Float_divide_)
     Optr w_arg = NATIVE_ARG(0);
     Class type = HEADER(w_arg);
     double right;
     if (type == Float_Class) {
         right = unwrap_float(w_arg);
     } else if (type == SmallInt_Class) {
-        right = unwrap_int(w_arg);
+        long value = unwrap_int(w_arg);
+        assert1(value != 0, "Division by 0");
+        right = value;
+    } else {
+        assert1(NULL, "missing MOP for Float + \n");
     }
-    RETURN_FROM_NATIVE(Float_plus_Float(((Float)self)->value, right));
+ 
+    RETURN_FROM_NATIVE(Float_divide_Float(unwrap_float(self), right));
 }
 
-#define Float_BINARY_OPERATION(name, op)\
-NATIVE1(Float_##name)\
-    Optr w_arg = NATIVE_ARG(0);\
-    ASSERT_INSTANCE_OF(w_arg, Float_Class);\
-    Float arg = (Float)w_arg;\
-    RETURN_FROM_NATIVE(new_Float(((Float) self)->value op arg->value));\
+
+#define FLOAT_BINARY_OPERATION(name, op)\
+NATIVE1(Float_##name##_)\
+    FLOAT_BINOP_TYPE_SWITCH(op);\
+    RETURN_FROM_NATIVE(Float_##name##_Float(unwrap_float(self), right));\
 }
 
-Float_BINARY_OPERATION(minus_,      -);
-Float_BINARY_OPERATION(times_,      *);
-Float_BINARY_OPERATION(divide_,     /);
+FLOAT_BINARY_OPERATION(minus,     -);
+FLOAT_BINARY_OPERATION(plus,      +);
+FLOAT_BINARY_OPERATION(times,     *);
+
+
 
 
 // TODO fix this damn typecheck!
@@ -81,7 +112,7 @@ NATIVE0(Float_asInteger)
 String Float_asString(double self, uns_int base)
 {
     char *chrs;
-    long size = asprintf(&chrs, "%g", self);
+    long size = asprintf(&chrs, "%-#.2g", self);
     assert1(size != -1, "Unable to convert float to string");
     String result = new_String(ascii_to_unicode(chrs));
     free(chrs);
@@ -120,6 +151,7 @@ void post_init_Float()
     store_native(natives, L"-",      NM_Float_minus_);   
     store_native(natives, L"*",      NM_Float_times_); 
     store_native(natives, L"//",     NM_Float_divide_);
+    store_native(natives, L"/",      NM_Float_divide_);
     store_native(natives, L"<",         NM_Float_lt_);
     store_native(natives, L">",         NM_Float_gt_);
     store_native(natives, L"!=",         NM_Float_notEqual_);

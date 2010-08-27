@@ -14,6 +14,9 @@ extern Float new_Float(double value);
 
 /* ========================================================================= */
 extern Float Float_plus_Float(double left, double right);
+extern Float Float_times_Float(double left, double right);
+extern Float Float_divide_Float(double left, double right);
+extern Float Float_minus_Float(double left, double right);
 /* ========================================================================= */
 
 extern Float wrap_float(double value);
