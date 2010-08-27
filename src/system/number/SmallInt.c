@@ -69,9 +69,13 @@ NATIVE1(SmallInt_minus_)
 NATIVE1(SmallInt_times_)
     long left = unwrap_int(self);
     long right = unwrap_int(NATIVE_ARG(0));
-    long result = left * right;
-    assert1(result / right == left, "Multiplication overflow");
-    RETURN_FROM_NATIVE(new_SmallInt(result));
+    if (right == 0) {;
+        RETURN_FROM_NATIVE(new_SmallInt(0));
+    } else {
+        long result = left * right;
+        assert1(result / right == left, "Multiplication overflow");
+        RETURN_FROM_NATIVE(new_SmallInt(result));
+    }
 }
 
 NATIVE1(SmallInt_divide_)
