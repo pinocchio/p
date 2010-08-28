@@ -64,27 +64,47 @@ NATIVE1(SmallInt_plus_)
     }
 }
 
-NATIVE1(SmallInt_minus_)
-    long left = unwrap_int(self);
-    long right = unwrap_int(NATIVE_ARG(0));
+SmallInt SmallInt_minus_SmallInt(long left, long right) {
     long result = left - right;
     if (right < 0) {
         assert1(result > left, "Substraction underflow");
     } else {
         assert1(result <= left, "Substraction overflow");
     }
-    RETURN_FROM_NATIVE(new_SmallInt(result));
+    return new_SmallInt(result);
 }
 
-NATIVE1(SmallInt_times_)
-    long left = unwrap_int(self);
-    long right = unwrap_int(NATIVE_ARG(0));
+NATIVE1(SmallInt_minus_)
+    Optr right = NATIVE_ARG(0);
+    Class type = HEADER(right); 
+    if (type == SmallInt_Class) {
+        RETURN_FROM_NATIVE(SmallInt_minus_SmallInt(unwrap_int(self), unwrap_int(right)));
+    } else if (type == Float_Class) {
+        RETURN_FROM_NATIVE(Float_minus_Float(unwrap_int(self), unwrap_float(right)));
+    } else {
+        assert1(NULL, "unsupported operand for (int - XXX) fix MOP");
+    }
+}
+
+SmallInt SmallInt_times_SmallInt(long left, long right) {
     if (right == 0) {;
-        RETURN_FROM_NATIVE(new_SmallInt(0));
+        return new_SmallInt(0);
     } else {
         long result = left * right;
         assert1(result / right == left, "Multiplication overflow");
-        RETURN_FROM_NATIVE(new_SmallInt(result));
+        return new_SmallInt(result);
+    }
+}
+
+NATIVE1(SmallInt_times_)
+    Optr right = NATIVE_ARG(0);
+    Class type = HEADER(right); 
+    if (type == SmallInt_Class) {
+        RETURN_FROM_NATIVE(SmallInt_times_SmallInt(unwrap_int(self), unwrap_int(right)));
+    } else if (type == Float_Class) {
+        RETURN_FROM_NATIVE(Float_times_Float(unwrap_int(self), unwrap_float(right)));
+    } else {
+        assert1(NULL, "unsupported operand for (int * XXX) fix MOP");
     }
 }
 
@@ -100,7 +120,7 @@ NATIVE1(SmallInt_div_)
     } else if (type == Float_Class) {
         right = unwrap_float(w_arg);
     } else {
-        assert1(NULL, "invalid argument type for int /: fix MOP!");
+        assert1(NULL, "invalid argument type for (int / XXX) fix MOP!");
     }
     Float result = Float_divide_Float(unwrap_int(self), right);
     RETURN_FROM_NATIVE(result);
@@ -152,17 +172,19 @@ NATIVE1(SmallInt_or_)
 #define SmallInt_COMPARE_OPERATION(name, op)\
 NATIVE1(SmallInt##_##name)\
     Optr w_arg = NATIVE_ARG(0);\
-    if (HEADER(w_arg) == SmallInt_Class) {\
-        SmallInt number      = ((SmallInt)self);\
-        SmallInt otherNumber = (SmallInt)w_arg; \
-        RETURN_FROM_NATIVE(get_bool(number->value op otherNumber->value));\
+    Class type = HEADER(w_arg);\
+    if (type == SmallInt_Class) {\
+        RETURN_FROM_NATIVE(get_bool(unwrap_int(self) op unwrap_int(w_arg)));\
+    } else if (type == Float_Class) {\
+        RETURN_FROM_NATIVE(Float##_##name##Float(unwrap_int(self), unwrap_float(w_arg)));\
     } else {\
-        assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#name"\n"); \
+        assert1(NULL, "Invalid Type for SmallInt Boolean BinOP "#op" Please extend the MOP\n"); \
     }\
 }
+
 SmallInt_COMPARE_OPERATION(lt_,       <)
 SmallInt_COMPARE_OPERATION(gt_,       >)
-SmallInt_COMPARE_OPERATION(notEqual_, !=)
+SmallInt_COMPARE_OPERATION(notEqual_, !=) //TODO fix check with Floats
 
 NATIVE0(SmallInt_asFloat)
     RETURN_FROM_NATIVE(wrap_float(unwrap_int(self)));
@@ -188,9 +210,10 @@ NATIVE0(SmallInt_asCharacter)
 Boolean SmallInt_pequal_(SmallInt self, Optr other) 
 {
     if (HEADER(other) != SmallInt_Class) {
+        //TODO minor type based checks and fallbock into ST code
         return (Boolean)false;
     }
-    return (Boolean)get_bool(self->value == ((SmallInt)other)->value);
+    return (Boolean)get_bool(self->value == unwrap_int(other));
 }
 
 NATIVE1(SmallInt_pequal_)

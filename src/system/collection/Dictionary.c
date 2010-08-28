@@ -59,17 +59,17 @@ long Dictionary_grow_check(Dictionary self)
 {
     self->size++;
     if (self->data->size == 1) {
-        return self->size == unwrap_int(self->maxLinear);
+        return self->size == unwrap_int((Optr)self->maxLinear);
     }
     uns_int size = self->data->size;
-    return (100 * self->size) / size > unwrap_int(self->ratio);
+    return (100 * self->size) / size > unwrap_int((Optr)self->ratio);
 }
 
 Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 {
-    long hash = get_hash(self, key);
+    long hash            = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
-    DictBucket bucket = *bucketp;
+    DictBucket bucket    = *bucketp;
     if (bucket == (DictBucket)nil) {
         return NULL;
     }
@@ -88,7 +88,7 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 
 void remove_from_bucket(uns_int idx, DictBucket bucket)
 {
-    uns_int tally = bucket->tally;
+    uns_int tally           = bucket->tally;
     bucket->values[idx]     = bucket->values[tally-2];
     bucket->values[idx+1]   = bucket->values[tally-1];
     bucket->values[tally-2] = nil;
