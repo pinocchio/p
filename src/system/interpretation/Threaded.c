@@ -86,8 +86,11 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
         Optr object = array->values[i];
         if (HEADER(object) == Kernel_Threading_FunctionPointer_Class) {
             Optr fp = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
-            assert0(fp != nil);
-            assert0(fp != NULL);
+            if (fp == nil || fp == NULL) {
+                inspect(stderr, object);
+            }
+            assert1(fp != nil,  "Invalid opcode: cannot be nil") 
+            assert1(fp != NULL, "Invalid opcode: cannot be NULL")
             array->values[i] = fp;
         }
     }
@@ -116,6 +119,10 @@ void post_init_Threaded()
 #ifdef THREADED 
 }
 #endif
+    T_FUNC(jump_back)
+    T_FUNC(jump_back2)
+    T_FUNC(jump_back3)
+    
     T_FUNC(supern)
     T_FUNC(push_nil)
     T_FUNC(push_0)
@@ -172,6 +179,7 @@ void post_init_Threaded()
     T_FUNC(sendn)
 
     T_FUNC(send_to_do_)
+    T_FUNC(continue_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
     T_FUNC(send_ifTrue_ifFalse_)
