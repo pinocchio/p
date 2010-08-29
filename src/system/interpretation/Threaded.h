@@ -9,34 +9,52 @@
 
 extern threaded* pc;
 
-#ifdef TDEBUG
-    #define OPCODE(name) void t_##name() {\
-        DT(OPCODE, ""#name) \
-        fwprintf(stderr, L"         : "#name"\n");
-#else //DEBUG
-    #define OPCODE(name) void t_##name() {\
-        DT(OPCODE, ""#name) 
-#endif // DEBUG
+#ifdef THREADED // -----------------------------------------------------------
+    #ifdef TDEBUG
+        #define OPCODE(name) label_##name:\
+            DT(OPCODE, ""#name) \
+            fwprintf(stderr, L"         : "#name"\n");
+    #else // DEBUG
+        #define OPCODE(name) label_##name:\
+            DT(OPCODE, ""#name) 
+    #endif // DEBUG
+    
+    #define RETURN_OPCODE return;
+    #define END_OPCODE goto  &&(pc++);
+    #define T_CODE(name) extern void * t_##name;
+    #define BREAK (threaded*)-1
 
+#else // THREADED ------------------------------------------------------------
 
-#define RETURN_OPCODE return;
+    #ifdef TDEBUG
+        #define OPCODE(name) void t_##name() {\
+            DT(OPCODE, ""#name) \
+            fwprintf(stderr, L"         : "#name"\n");
+    #else // DEBUG
+        #define OPCODE(name) void t_##name() {\
+            DT(OPCODE, ""#name) 
+    #endif // DEBUG
+    
+    #define RETURN_OPCODE return;
+    #define END_OPCODE }
+    #define T_CODE(name) extern void t_##name();
+    #define BREAK (threaded*)-1
 
-#define END_OPCODE }
+#endif // THREADED -----------------------------------------------------------
 
-#define BREAK (threaded*)-1
 
 #define NNATIVE(name, size, ...) \
-Array T_##name;\
-Array TG_##name()\
-{\
-    return new_Array_with(size, __VA_ARGS__);\
-}
+    Array T_##name;\
+    Array TG_##name()\
+    {\
+        return new_Array_with(size, __VA_ARGS__);\
+    }
 
 #define INIT_NATIVE(name) T_##name = TG_##name()
 
-/* ========================================================================= */
 
-#define T_CODE(name) extern void t_##name();
+
+/* ========================================================================= */
 
 extern void post_init_Threaded();
 

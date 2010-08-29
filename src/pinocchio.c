@@ -107,11 +107,12 @@ static Optr finish_eval()
     if (!setjmp(tget_buf(Eval_Exit))) {
         setjmp(Eval_Continue);
         for (;;) {
-          
+        #ifdef THREADED
+        #else //THREADED
             (*pc)();
+        #endif //THREADED
         }
     }
-
     Optr result = pop_EXP();
     IN_EVAL = 0;
     return result;

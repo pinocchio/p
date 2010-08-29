@@ -99,7 +99,7 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
 /* ========================================================================= */
 
 #ifdef THREADED
-     #define T_FUNC(name) l_##name = &&label_##name;
+     #define T_FUNC(name) t_##name = &&label_##name;
 #else //THREADED
 
     #define T_FUNC(name) Dictionary_quick_store(functions, (Optr)raw_Symbol(L""#name), (Optr)&t_##name);
@@ -117,7 +117,17 @@ void post_init_Threaded()
 
     functions = new_Dictionary();
 #ifdef THREADED 
+    // initialize the goto pointers
+    threaded(NULL);
 }
+
+
+void threaded(void *label) {
+
+    if (label != NULL) {
+        goto &&label;
+    }
+    initialize:
 #endif
     T_FUNC(jump_back)
     T_FUNC(jump_back2)
@@ -338,13 +348,10 @@ OPCODE(push_slot)
     pc += 2;
 END_OPCODE
 
-
 OPCODE(push_closure)
     push_closure(pc + 1);
     pc += 2;
 END_OPCODE
-
-
 
 /* ========================================================================= */
 
@@ -383,9 +390,8 @@ OPCODE(block_return_self)
     t_block_return();
 END_OPCODE
 
-
-
 /* ========================================================================= */
+
 OPCODE(method_return)
     uns_int size = current_env()->size;
     restore_env();
@@ -418,6 +424,7 @@ OPCODE(method_return_self)
 END_OPCODE
 
 /* ========================================================================= */
+
 #define SEND(n) OPCODE(send##n) \
     Optr self = PEEK_EXP(n);\
     pc += 2;\
@@ -440,6 +447,7 @@ OPCODE(sendn)
 END_OPCODE
 
 /* ========================================================================= */
+
 OPCODE(send_to_do_)
     pc += 1;
     Optr from = PEEK_EXP(1);
@@ -872,9 +880,10 @@ OPCODE(dictionary_check_grow)
         Dictionary_grow(self);
     }
 END_OPCODE
-
-
 /* ========================================================================= */
+#ifdef THREADED
+} // end the thread function
+#endif //THREADED
 /* ========================================================================= */
 
 
