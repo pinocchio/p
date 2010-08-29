@@ -444,15 +444,19 @@ OPCODE(send_to_do_)
     pc += 1;
     Optr from = PEEK_EXP(1);
     Optr to   = PEEK_EXP(0);
-    if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
-        POKE_EXP(1, unwrap_int(from));
-        POKE_EXP(0, unwrap_int(to));
-        push_closure(pc);
-        RETURN_OPCODE;
-    }
+    //if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
+    //    POKE_EXP(1, unwrap_int(from));
+    //    POKE_EXP(0, unwrap_int(to));
+    //    Block block = (Block)get_code(pc);
+    //    pc += 1;
+    //    PUSH_EXP(current_env());
+    //    push_code(block->threaded);
+    //    RETURN_OPCODE;
+    //}
     Send send = (Send)get_code(pc + 4);
-    push_closure(pc + 2);
-    Class_normal_dispatch(from, send, 0);
+    push_closure(pc);
+    pc += 5;
+    Class_normal_dispatch(from, send, 2);
 END_OPCODE
 
 OPCODE(continue_to_do_)
