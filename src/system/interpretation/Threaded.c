@@ -443,16 +443,17 @@ END_OPCODE
 OPCODE(send_to_do_)
     pc += 1;
     Optr from = PEEK_EXP(1);
-    Optr to   = PEEK_EXP(0);
-    //if (HEADER(from) == SmallInt_Class && HEADER(to) == SmallInt_Class) {
-    //    POKE_EXP(1, unwrap_int(from));
-    //    POKE_EXP(0, unwrap_int(to));
-    //    Block block = (Block)get_code(pc);
-    //    pc += 1;
-    //    PUSH_EXP(current_env());
-    //    push_code(block->threaded);
-    //    RETURN_OPCODE;
-    //}
+    if (HEADER(from) == SmallInt_Class) {
+        Optr to = PEEK_EXP(0);
+        if (HEADER(to) == SmallInt_Class) {
+            // keep the current receiver (from) on the stack
+            POKE_EXP(0, unwrap_int(from));
+            PUSH_EXP(unwrap_int(to));
+            push_closure(pc);
+            pc += 1;
+            RETURN_OPCODE;
+        }
+    }
     Send send = (Send)get_code(pc + 4);
     push_closure(pc);
     pc += 5;
@@ -463,7 +464,7 @@ OPCODE(continue_to_do_)
     long index = (long)PEEK_EXP(2);
     long max   = (long)PEEK_EXP(1);
     if (index > max) {
-        ZAPN_EXP(2);
+        ZAPN_EXP(3); // index, max, closure
         pc += 4;
         RETURN_OPCODE;
     }
@@ -472,7 +473,8 @@ OPCODE(continue_to_do_)
     BlockClosure closure = (BlockClosure)PEEK_EXP(0);
     // the self
     // TODO only create the block closure once
-    PUSH_EXP(closure);
+    //PUSH_EXP(closure);
+    PUSH_EXP(current_env());
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
     pc += 1;
