@@ -5,7 +5,7 @@ extern void _indent_(FILE* stream,uns_int i);
 extern void i(Optr o);
 extern void sends();
 extern void exps();
-extern void print_EXP();
+extern void nexps(int size);
 extern Optr atn(Optr o, const wchar_t * s);
 extern Optr at(Optr o, uns_int i);
 extern Optr atx(Optr o, uns_int argc, ...);

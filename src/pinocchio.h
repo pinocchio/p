@@ -123,8 +123,6 @@ Class class##_Class;
 extern void printf0(const char * string, ...);
 extern uns_int nrsends();
 
-extern void print_EXP();
-
 #ifdef DEBUG
     #define LOGFUN LOG(__FUNCTION__); fwprintf(stderr, L"\n");
     #define LOG(args...) _indent_(stderr, nrsends()); fwprintf(stderr, L""args);

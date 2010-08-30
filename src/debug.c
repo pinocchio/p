@@ -15,6 +15,7 @@ void help() {
     fwprintf(stderr, L"    inspect_atn     (Object, wchar_t *)    \n");
     fwprintf(stderr, L"    methods         (Object)               \n");
     fwprintf(stderr, L"    exps                                   \n");
+    fwprintf(stderr, L"    nexps           (int count)            \n");
     fwprintf(stderr, L"    sends                                  \n");
 }
 
@@ -59,7 +60,7 @@ void print_Class(FILE* stream, Optr obj)
     fwprintf(stream, L"%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
-void print_EXP()
+void print_EXP(int count)
 {
     long size = EXP_SIZE();
     uns_int cur = 0;
@@ -67,7 +68,7 @@ void print_EXP()
         fwprintf(stderr, L"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Stack underflow!\n");
         return;
     }
-    while (cur < size) {
+    while (cur < size && (count == -1 || cur < count)) {
         Optr c = tget(Double_Stack)[cur++];
         if (c > (Optr)10000) {
             print_Class(stderr, c);
@@ -78,8 +79,13 @@ void print_EXP()
 }
 
 void exps() {
-    print_EXP();
+    print_EXP(15);
 }
+
+void nexps(int count) {
+    print_EXP(count);
+}
+
 
 
 void print_Symbol(FILE* stream, Optr s)
