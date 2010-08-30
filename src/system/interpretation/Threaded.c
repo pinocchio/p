@@ -157,6 +157,10 @@ void threaded(void *label) {
     T_FUNC(push_slot)
 
     T_FUNC(zap)
+    T_FUNC(zap1)
+    T_FUNC(zap2)
+    T_FUNC(zap3)
+    T_FUNC(zap4)
 
     T_FUNC(return)
     
