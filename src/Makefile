@@ -71,7 +71,10 @@ llvm:
 	CC=llvm-gcc LDFLAGS+="-O0" CFLAGS+="-O0 -DLLVM" make $(TARGET)
 
 llvm-fast:
-	CC=llvm-gcc LDFLAGS+="-O4" CFLAGS+="-O4 -DLLVM" make $(TARGET)
+	CC=llvm-gcc LDFLAGS+="-03 -O4" CFLAGS+="-O4 -03 -DLLVM" make $(TARGET)
+	
+clang-fast:
+	CC=llvm-gcc LDFLAGS+="-03 -O4" CFLAGS+="-03 -O4" make $(TARGET)
 
 clang:
 	CC=clang CFLAGS+="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
