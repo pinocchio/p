@@ -174,7 +174,7 @@ NATIVE0(Float_asInteger)
 String Float_asString(double self, uns_int base)
 {
     char *chrs;
-    long size = asprintf(&chrs, "%-#.2g", self);
+    long size = asprintf(&chrs, "%-.6f", self);
     assert1(size != -1, "Unable to convert float to string");
     String result = new_String(ascii_to_unicode(chrs));
     free(chrs);
