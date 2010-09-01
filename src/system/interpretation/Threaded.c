@@ -460,34 +460,30 @@ OPCODE(send_to_do_)
             // keep the current receiver (from) on the stack
             POKE_EXP(2, unwrap_int(from));
             POKE_EXP(1, unwrap_int(to));
+            CLAIM_EXP(1);
             pc += 1;
             RETURN_OPCODE;
         }
     }
-    Send send = (Send)get_code(pc + 3);
-    pc += 5;
+    Send send = (Send)get_code(pc + 2);
+    pc += 3;
     Class_normal_dispatch(from, send, 2);
 END_OPCODE
 
 OPCODE(continue_to_do_)
-    long index = (long)PEEK_EXP(2);
-    long max   = (long)PEEK_EXP(1);
+    long index = (long)PEEK_EXP(3);
+    long max   = (long)PEEK_EXP(2);
     if (index > max) {
-        ZAPN_EXP(2); // index, max, closure
+        ZAPN_EXP(3); // max, closure, <closure(void)/result>
         POKE_EXP(0, wrap_int(max));
-        pc += 4;
+        pc += 2;
         RETURN_OPCODE;
     }
     // update the index
-    POKE_EXP(2, index + 1);
-    BlockClosure closure = (BlockClosure)PEEK_EXP(0);
-    // the self
-    // TODO only create the block closure once
-    //PUSH_EXP(closure);
-    PUSH_EXP(current_env());
+    POKE_EXP(3, index + 1);
+    BlockClosure closure = (BlockClosure)PEEK_EXP(1);
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
-    pc += 1;
     apply((Optr)closure, 1);
 END_OPCODE
 
