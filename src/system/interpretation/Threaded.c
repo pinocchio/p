@@ -453,21 +453,18 @@ END_OPCODE
 /* ========================================================================= */
 
 OPCODE(send_to_do_)
-    pc += 1;
-    Optr from = PEEK_EXP(1);
+    Optr from = PEEK_EXP(2);
     if (HEADER(from) == SmallInt_Class) {
-        Optr to = PEEK_EXP(0);
+        Optr to = PEEK_EXP(1);
         if (HEADER(to) == SmallInt_Class) {
             // keep the current receiver (from) on the stack
-            POKE_EXP(0, unwrap_int(from));
-            PUSH_EXP(unwrap_int(to));
-            push_closure(pc);
+            POKE_EXP(2, unwrap_int(from));
+            POKE_EXP(1, unwrap_int(to));
             pc += 1;
             RETURN_OPCODE;
         }
     }
-    Send send = (Send)get_code(pc + 4);
-    push_closure(pc);
+    Send send = (Send)get_code(pc + 3);
     pc += 5;
     Class_normal_dispatch(from, send, 2);
 END_OPCODE
@@ -476,7 +473,8 @@ OPCODE(continue_to_do_)
     long index = (long)PEEK_EXP(2);
     long max   = (long)PEEK_EXP(1);
     if (index > max) {
-        ZAPN_EXP(3); // index, max, closure
+        ZAPN_EXP(2); // index, max, closure
+        POKE_EXP(0, wrap_int(max));
         pc += 4;
         RETURN_OPCODE;
     }
@@ -743,7 +741,7 @@ OPCODE(push_hash)
     PUSH_EXP(hash);
 END_OPCODE
 
-OPCODE(dictionary_bucket)
+OPCODE(dictionary_lookup)
     Optr w_hash     = PEEK_EXP(0);
     Optr key        = PEEK_EXP(1);
     Dictionary self = (Dictionary)PEEK_EXP(2);
@@ -818,6 +816,16 @@ OPCODE(pop_return)
     t_return();
 END_OPCODE
 
+OPCODE(poke_true_return)
+    POKE_EXP(0, true);
+    t_return();
+END_OPCODE
+
+OPCODE(push_false_return)
+    PUSH_EXP(false);
+    t_return();
+END_OPCODE
+
 OPCODE(dictionary_store)
     Optr w_hash     = PEEK_EXP(0);
     Dictionary self = (Dictionary)PEEK_EXP(4);
@@ -826,6 +834,7 @@ OPCODE(dictionary_store)
     Optr value      = PEEK_EXP(2);
 
     DictBucket * bucketp = get_bucketp(self, hash);
+    
     if (*bucketp == (DictBucket)nil || (*bucketp)->tally == 0) { 
         add_to_bucket(bucketp, key, value);
         ZAPN_EXP(3);
@@ -853,7 +862,7 @@ OPCODE(bucket_store)
             Optr value = PEEK_EXP(3);
             ZAPN_EXP(5);
             POKE_EXP(0, value);
-            Bucket_store(bucket, key, value, idx);
+            bucket->values[idx + 1] = value;
             t_return();
             return;
         }
@@ -889,5 +898,3 @@ END_OPCODE
 } // end the thread function
 #endif //THREADED
 /* ========================================================================= */
-
-
