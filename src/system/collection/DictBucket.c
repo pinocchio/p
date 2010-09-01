@@ -50,6 +50,10 @@ void Bucket_grow(DictBucket * bucketp)
 
 long Bucket_quick_compare_key(Optr inkey, Optr dictkey)
 {
+    if (inkey == dictkey) {
+        return 1;
+    }
+
     if (HEADER(inkey) == SmallInt_Class) {
         if (HEADER(dictkey) == SmallInt_Class) {
             return ((SmallInt)inkey)->value ==
@@ -74,7 +78,15 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
 {
     long i;
     DictBucket bucket = *bucketp;
-    uns_int tally                = bucket->tally;
+    uns_int tally     = bucket->tally;
+
+    for (i = 0; i < tally; i = i+2) {
+        if (key == bucket->values[i]) {
+            bucket->values[i+1] = value;
+            return 0;
+        }
+    }    
+
     for (i = 0; i < tally; i = i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
         {

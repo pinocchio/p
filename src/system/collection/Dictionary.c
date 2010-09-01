@@ -76,6 +76,11 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
     long i;
     uns_int tally = bucket->tally;
     for (i = 0; i < tally; i=i+2) {
+        if (key == bucket->values[i]) {
+            return bucket->values[i+1];
+        }
+    }
+    for (i = 0; i < tally; i=i+2) {
         switch (Bucket_quick_compare_key(key, bucket->values[i]))
         {
             case -1: assert1(NULL, "Invalid key for quickstore!\n");
@@ -223,7 +228,7 @@ int Bucket_compare_key(Optr inkey, Optr dictkey)
 
 NNATIVE(iDictionary_at_, 5,
     t_push_hash,
-    t_dictionary_bucket,
+    t_dictionary_lookup,
     t_bucket_lookup,
     t_return,
     t_return_null)
@@ -240,10 +245,17 @@ void Dictionary_lookup_push(Dictionary dict, Optr msg)
 
 NNATIVE(Dictionary_at_ifAbsent_, 5,
     t_push_hash,
-    t_dictionary_bucket,
+    t_dictionary_lookup,
     t_bucket_lookup,
     t_pop_return,
     t_dictionary_ifAbsent_)
+
+NNATIVE(Dictionary_includesKey_, 5,
+    t_push_hash,
+    t_dictionary_lookup,
+    t_bucket_lookup,
+    t_poke_true_return,
+    t_push_false_return)
 
 NATIVE2(Dictionary_at_ifAbsent_)
     Optr w_index = NATIVE_ARG(0);
@@ -254,12 +266,9 @@ NATIVE2(Dictionary_at_ifAbsent_)
     push_code(T_Dictionary_at_ifAbsent_);
 }
 
-void Bucket_store(DictBucket bucket, Optr key, Optr value, uns_int idx)
-{
-    bucket->values[idx]   = key;
-    bucket->values[idx+1] = value;
+NATIVE1(Dictionary_includesKey_)
+    push_code(T_Dictionary_includesKey_);
 }
-
 
 NNATIVE(Dictionary_at_put_, 5,
     t_peek1,
@@ -284,6 +293,7 @@ void post_init_Dictionary()
     change_slot_type(Dictionary_Class, UIntSlot_Class, 1, 0);
     
     INIT_NATIVE(Dictionary_at_put_);
+    INIT_NATIVE(Dictionary_includesKey_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(iDictionary_at_);
     INIT_NATIVE(Dictionary_grow);
@@ -291,5 +301,6 @@ void post_init_Dictionary()
     Dictionary natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, L"at:put:",      NM_Dictionary_at_put_);
     store_native(natives, L"at:ifAbsent:", NM_Dictionary_at_ifAbsent_);
+    store_native(natives, L"includesKey:", NM_Dictionary_includesKey_);
     store_native(natives, L"grow",         NM_Dictionary_grow);
 }

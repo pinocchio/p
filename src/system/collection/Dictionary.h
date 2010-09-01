@@ -39,7 +39,6 @@ extern long Dictionary_grow_check(Dictionary self);
 extern DictBucket * get_bucketp(Dictionary dictionary, long hash);
 extern int Bucket_compare_key(Optr inkey, Optr dictkey);
 extern void add_to_bucket(DictBucket * bucketp, Optr key, Optr value);
-extern void Bucket_store(DictBucket bucket, Optr key, Optr value, uns_int idx);
 extern void remove_from_bucket(uns_int idx, DictBucket bucket);
 extern int tpush_hash(Optr key);
 /* ========================================================================= */
