@@ -193,6 +193,7 @@ void threaded(void *label) {
     T_FUNC(sendn)
 
     T_FUNC(send_to_do_)
+    T_FUNC(send_to_by_do_)
     T_FUNC(continue_to_do_)
     T_FUNC(send_ifTrue_)
     T_FUNC(send_ifFalse_)
@@ -460,7 +461,8 @@ OPCODE(send_to_do_)
             // keep the current receiver (from) on the stack
             POKE_EXP(2, unwrap_int(from));
             POKE_EXP(1, unwrap_int(to));
-            CLAIM_EXP(1);
+            CLAIM_EXP(2);
+            POKE_EXP(1, 1); // increment
             pc += 1;
             RETURN_OPCODE;
         }
@@ -470,18 +472,42 @@ OPCODE(send_to_do_)
     Class_normal_dispatch(from, send, 2);
 END_OPCODE
 
+OPCODE(send_to_by_do_)
+    Optr from = PEEK_EXP(3);
+    if (HEADER(from) == SmallInt_Class) {
+        Optr to = PEEK_EXP(2);
+        if (HEADER(to) == SmallInt_Class) {
+            // keep the current receiver (from) on the stack
+            POKE_EXP(3, unwrap_int(from));
+            POKE_EXP(2, unwrap_int(to));
+            Optr closure = PEEK_EXP(0);
+            Optr increment = PEEK_EXP(1);
+            POKE_EXP(1, closure);
+            POKE_EXP(0, unwrap_int(increment)); // increment
+            CLAIM_EXP(1);
+            pc += 1;
+            RETURN_OPCODE;
+        }
+    }
+    Send send = (Send)get_code(pc + 2);
+    pc += 3;
+    Class_normal_dispatch(from, send, 3);
+END_OPCODE
+
 OPCODE(continue_to_do_)
-    long index = (long)PEEK_EXP(3);
-    long max   = (long)PEEK_EXP(2);
-    if (index > max) {
-        ZAPN_EXP(3); // max, closure, <closure(void)/result>
-        POKE_EXP(0, wrap_int(max));
+    long index      = (long)PEEK_EXP(4);
+    long max        = (long)PEEK_EXP(3);
+    long increment  = (long)PEEK_EXP(1);
+    if ((increment > 0 && index > max) ||
+        (increment <= 0 && index < max)) {
+        ZAPN_EXP(4); // max, closure, increment, <closure(void)/result>
+        POKE_EXP(0, nil);
         pc += 2;
         RETURN_OPCODE;
     }
     // update the index
-    POKE_EXP(3, index + 1);
-    BlockClosure closure = (BlockClosure)PEEK_EXP(1);
+    POKE_EXP(4, index + increment);
+    BlockClosure closure = (BlockClosure)PEEK_EXP(2);
     // arg to the do: block
     PUSH_EXP(wrap_int(index));
     apply((Optr)closure, 1);
@@ -727,7 +753,7 @@ OPCODE(push_hash)
     Optr key = PEEK_EXP(0);
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key);
+        hash = String_hash((Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {

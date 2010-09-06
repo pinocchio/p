@@ -5,7 +5,12 @@
 
 /* ========================================================================= */
 
-typedef Symbol String;
+struct String_t {
+	SmallInt hash;
+	uns_int size;
+	wchar_t value[];
+};
+
 
 extern String empty_String;
 
@@ -21,6 +26,7 @@ extern String new_String_from_charp(const char * input);
 extern long Words_compare(Symbol s1, Symbol s2);
 extern char* unicode_to_ascii(const wchar_t* str);
 extern wchar_t * ascii_to_unicode(const char* str);
+extern SmallInt String_hash(String string);
 
 /* ========================================================================= */
 

@@ -29,7 +29,7 @@ static long get_hash(Dictionary self, Optr key)
     long hash;
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key)->value;
+        hash = String_hash((String)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((SmallInt)key)->value;
     } else {
@@ -154,7 +154,7 @@ void Dictionary_quick_store(Dictionary self,
     long hash = get_hash(self, key);
     DictBucket * bucketp = get_bucketp(self, hash);
     if (*bucketp == (DictBucket)nil) {
-        *bucketp                     = new_bucket();
+        *bucketp          = new_bucket();
         DictBucket bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
@@ -171,7 +171,7 @@ int tpush_hash(Optr key)
     SmallInt hash;
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key);
+        hash = String_hash((String)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {

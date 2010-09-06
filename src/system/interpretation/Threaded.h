@@ -132,6 +132,7 @@ T_CODE(send5)
 T_CODE(sendn)
 
 T_CODE(send_to_do_)
+T_CODE(send_to_by_do_)
 T_CODE(continue_to_do_)
 T_CODE(send_ifFalse_)
 T_CODE(send_ifTrue_)

@@ -11,23 +11,27 @@ static Symbol SMB_asString;
 
 /* ========================================================================= */
 
-String new_String(const wchar_t * str)
+String new_String(const wchar_t * input)
 {
-    String string  = (String)raw_Symbol(str);
-    HEADER(string) = String_Class;
-    return string;
+    uns_int size   = wcslen(input) + 1;
+    String result  = NEW_ARRAYED(struct String_t, wchar_t[size]);
+    HEADER(result) = String_Class;
+    wcsncpy(result->value, input, size);
+    result->size   = size - 1;
+    // result->hash = NULL;
+    return result;
 }
 
 String new_String_sized(uns_int size)
 {
     size += 1;
-    String result  = NEW_ARRAYED(struct Symbol_t, wchar_t[size]);
+    String result  = NEW_ARRAYED(struct String_t, wchar_t[size]);
     HEADER(result) = String_Class;
     result->size   = size - 1;
     while(size--) {
         result->value[size] = '\0';
     }
-    result->hash = wchar_hash(result->value, result->size);
+    // result->hash = NULL;
     return result;
 }
 
@@ -41,6 +45,14 @@ String new_String_from_charp(const char * input)
     wchar_t * copy    = &cp[0];
     swprintf(copy, size, L"%s", input);
     return new_String(copy);
+}
+
+SmallInt String_hash(String string)
+{
+    if (!string->hash) {
+        string->hash = wchar_hash(string->value, string->size);
+    }
+    return string->hash;
 }
 
 String String_concat_(String str1, String str2)
@@ -93,7 +105,7 @@ NATIVE2(String_at_put_)
                     s->size,
                     self));
     s->value[index] = ((Character)w_arg1)->value;
-    s->hash         = wchar_hash(s->value, s->size);
+    s->hash         = NULL;
     RETURN_FROM_NATIVE(self);
 }
 

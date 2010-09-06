@@ -20,7 +20,7 @@ extern Symbol raw_Symbol(const wchar_t* name);
 /* ========================================================================= */
 
 extern SmallInt wchar_hash(const wchar_t * string, long size);
-extern SmallInt Symbol_hash(Symbol symbol_string);
+extern SmallInt Symbol_hash(Symbol symbol);
 
 /* ========================================================================= */
 
