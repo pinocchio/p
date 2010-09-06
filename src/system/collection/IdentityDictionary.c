@@ -4,6 +4,8 @@
 
 /* ========================================================================= */
 
+DECLARE_CLASS(IdentityDictionary);
+
 IdentityDictionary new_IdentityDictionary()
 {
     NEW_OBJECT(IdentityDictionary);
@@ -25,10 +27,7 @@ static long get_identity_hash(IdentityDictionary self, Optr key)
     } else if (HEADER(key) == SmallInt_Class) { 
         hash = ((SmallInt)key)->value;
     } else {
-        assert1(NULL,
-            "IdentityDictionary currently only supports SmallInt and Symbol");
-        // make the compiler happy :)
-        return 0;
+        hash = ((uns_int)key) >> 3;
     }
     hash %= self->data->size;
     return hash;

@@ -7,6 +7,7 @@
 #include <system/runtime/MethodContext.h>
 #include <system/runtime/BlockContext.h>
 #include <system/collection/Dictionary.h>
+#include <system/collection/IdentityDictionary.h>
 #include <system/class/Class.h>
 #include <system/object/Object.h>
 #include <system/number/SmallInt.h>

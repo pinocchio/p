@@ -12,8 +12,13 @@ DECLARE_CLASS(Object);
 
 SmallInt Object_identityHash(Object object)
 {
-    uns_int hash = (uns_int)object;
-    return new_SmallInt(hash>>3);
+	Class cls = HEADER(object);
+    if (cls == Symbol_Class) {
+        return Symbol_hash((Symbol)object);
+    } else if (cls == SmallInt_Class) { 
+        return (SmallInt)object;
+    }
+	return new_SmallInt(((uns_int)object) >> 3);
 }
 
 NATIVE0(Object_identityHash)

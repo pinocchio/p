@@ -51,8 +51,8 @@ Class new_Class(Class superclass, Optr metatype)
     Class result     = (Class)basic_instantiate_Object(metacls, meta_size);
     metacls->name    = (Symbol)result;
 
-    result->methods  = new_Dictionary();
-    metacls->methods = new_Dictionary();
+    result->methods  = new_IdentityDictionary();
+    metacls->methods = new_IdentityDictionary();
     Class_set_superclass(result, superclass);
 
     return result;
@@ -108,11 +108,11 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
              self, class, message);
     }
 
-	Message message = new_Message(msg, argc);
+    Message message = new_Message(msg, argc);
 
-	while (argc--) {
-		message->arguments[argc] = pop_EXP();
-	}
+    while (argc--) {
+        message->arguments[argc] = pop_EXP();
+    }
 
     ZAP_EXP();
     Class_direct_dispatch(self,class,(Optr)SMB_doesNotUnderstand_,1,message);
@@ -120,15 +120,19 @@ void does_not_understand(Optr self, Class class, Optr msg, uns_int argc)
 
 void Class_lookup(Class class, Optr msg)
 {
-    // TODO pass along the hash value
-    if (class == (Class)nil) {
-        PUSH_EXP(NULL); 
-        pc += 1;
-        return;
+    Optr method = NULL;
+    while (class != (Class)nil) {
+        assert_class((Optr)class);
+        IdentityDictionary mdict = class->methods;
+        // TODO check type of mdict;
+        method = IdentityDictionary_lookup(mdict, msg);
+        if (method != NULL) {
+            break;
+        }
+        class = class->super;
     }
-    assert_class((Optr)class);
-    Dictionary mdict = class->methods;
-    Dictionary_lookup_push(mdict, msg);
+    PUSH_EXP(method); 
+    pc += 1;
 }
 
 /* ========================================================================= */
@@ -158,7 +162,7 @@ static void Class_do_dispatch(Optr self, Class class, Optr msg,
 void Class_direct_dispatch(Optr self, Class class, Optr msg,
                            uns_int argc, ...)
 {
-	va_list args;
+    va_list args;
     va_start(args, argc);
     long idx;
     /* Send obj. TODO update Send>>eval to be able to remove this */

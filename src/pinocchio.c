@@ -147,7 +147,7 @@ void store_method(Class class, Symbol symbol,
     method->selector    = (Optr)symbol;
     method->host        = class;
     IdentityDictionary_store(
-		class->methods,
+        class->methods,
         (Optr)symbol, 
         (Optr)method);
 }
@@ -167,13 +167,14 @@ static void bootstrap()
     HEADER(metaclass)      = Metaclass_mclass;
     Metaclass_mclass->name = (String)metaclass;
 
-    behavior               = new_Bootstrapping_Class();
-    class                  = new_Bootstrapping_Class();
-    Object_Class           = new_Bootstrapping_Class();
-    Array_Class            = new_Bootstrapping_Class();
-    DictBucket_Class       = new_Bootstrapping_Class();
-    Dictionary_Class       = new_Bootstrapping_Class();
-    SmallInt_Class         = new_Bootstrapping_Class();
+    behavior                 = new_Bootstrapping_Class();
+    class                    = new_Bootstrapping_Class();
+    Object_Class             = new_Bootstrapping_Class();
+    Array_Class              = new_Bootstrapping_Class();
+    DictBucket_Class         = new_Bootstrapping_Class();
+    Dictionary_Class         = new_Bootstrapping_Class();
+    IdentityDictionary_Class = new_Bootstrapping_Class();
+    SmallInt_Class           = new_Bootstrapping_Class();
 
     init_numbercache();
 
@@ -184,6 +185,7 @@ static void bootstrap()
     INIT_CLASS(Array);
     INIT_CLASS(DictBucket);
     INIT_CLASS(Dictionary);
+    INIT_CLASS(IdentityDictionary);
 
     Slot_Class            = new_Bootstrapping_Class();
     Symbol_Class          = new_Bootstrapping_Class();

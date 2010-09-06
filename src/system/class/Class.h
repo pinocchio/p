@@ -15,25 +15,13 @@ extern Class class;
 
 /* ========================================================================= */
 
-typedef enum Type_Tag {
-    ARRAY,
-    OBJECT,
-    CHAR,
-    WORDS,
-    INT,
-    FLOAT,
-    BYTES,
-    LONG,
-    FILETAG,
-} Type_Tag;
-
 struct Class_t {
-    Optr     layout;
-    Class      super;
-    Dictionary methods;
-    Symbol     name;
-    Optr     package;
-    Optr     cvars[];
+    Optr                layout;
+    Class               super;
+    IdentityDictionary  methods;
+    Symbol              name;
+    Optr                package;
+    Optr                cvars[];
 };
 
 CREATE_INITIALIZERS(Class)
@@ -44,8 +32,8 @@ extern Class new_Class(Class superclass, Optr metaType);
 extern Class new_Bootstrapping_Class();
 
 #define DIRECT_INIT_CLASS(cls)\
-    cls->methods            = new_Dictionary();\
-    HEADER(cls)->methods    = new_Dictionary();
+    cls->methods            = new_IdentityDictionary();\
+    HEADER(cls)->methods    = new_IdentityDictionary();
 
 #define INIT_CLASS(cls) DIRECT_INIT_CLASS(cls##_Class);
 

@@ -71,23 +71,6 @@ Optr create_array_layout(uns_int size, va_list args)
     return (Optr)result;
 }
 
-Optr create_layout(uns_int size, Type_Tag tag, ...)
-{
-    va_list args;
-    va_start(args, tag);
-    if (tag == OBJECT)  { return create_object_layout(size, args); }
-    if (tag == ARRAY)   { return create_array_layout(size, args); }
-    if (tag == WORDS)   { return words_layout; }
-    if (tag == BYTES)   { return bytes_layout; }
-    if (tag == INT)     { return int_layout; }
-    if (tag == FLOAT)   { return float_layout; }
-    if (tag == LONG)    { return long_layout; }
-    if (tag == CHAR)    { return character_layout; }
-    if (tag == FILETAG) { return file_layout; }
-    assert1(NULL, "Unknown layout, should never happen!");
-    return NULL;
-}
-
 /* ========================================================================= */
 
 static Optr instantiate_Array(Class class, Array ivars, uns_int extra)
