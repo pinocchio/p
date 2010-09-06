@@ -146,9 +146,10 @@ void store_method(Class class, Symbol symbol,
 {
     method->selector    = (Optr)symbol;
     method->host        = class;
-    Dictionary_quick_store(class->methods,
-                           (Optr)symbol, 
-                           (Optr)method);
+    IdentityDictionary_store(
+		class->methods,
+        (Optr)symbol, 
+        (Optr)method);
 }
 
 /* ========================================================================= */

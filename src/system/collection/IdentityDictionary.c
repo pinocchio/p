@@ -34,10 +34,10 @@ static long get_identity_hash(IdentityDictionary self, Optr key)
     return hash;
 }
 
-Optr IdentityDictionary_quick_lookup(IdentityDictionary self, Optr key)
+Optr IdentityDictionary_lookup(IdentityDictionary self, Optr key)
 {
     long hash            = get_identity_hash(self, key);
-    DictBucket * bucketp = get_bucketp(self, hash);
+    DictBucket * bucketp = get_bucketp((Dictionary)self, hash);
     DictBucket bucket    = *bucketp;
     if (bucket == (DictBucket)nil) {
         return NULL;
@@ -51,3 +51,54 @@ Optr IdentityDictionary_quick_lookup(IdentityDictionary self, Optr key)
     }
     return NULL;
 }
+
+static void IdentityDictionary_check_grow(IdentityDictionary self)
+{
+    if (!Dictionary_grow_check((Dictionary)self)) { return; }
+
+    Array old = self->data;
+    if (old->size == 1) {
+        self->data = new_Array_withAll(32, nil);
+        self->linear = false;
+    } else {
+        self->data = new_Array_withAll(old->size << 1, nil);
+    }
+    uns_int i;
+    for (i = 0; i < old->size; i++) {
+        DictBucket bucket = (DictBucket)old->values[i];
+        if (bucket == (DictBucket)nil) { continue; }
+        self->data->values[i] = (Optr)bucket;
+        uns_int j;
+        for (j = 0; j < bucket->tally;) {
+            Optr key = bucket->values[j];
+            long hash = get_identity_hash(self, key);
+            if (hash != i) {
+                DictBucket * bucketp = get_bucketp((Dictionary)self, hash);
+                add_to_bucket(bucketp, key, bucket->values[j+1]);
+                remove_from_bucket(j, bucket);
+            } else {
+                j = j + 2;
+            }
+        }
+    }
+}
+
+void IdentityDictionary_store(IdentityDictionary self,
+                              Optr key, Optr value)
+{
+    assert0(self != (IdentityDictionary)nil);
+    long hash = get_identity_hash(self, key);
+    DictBucket * bucketp = get_bucketp((Dictionary)self, hash);
+    if (*bucketp == (DictBucket)nil) {
+        *bucketp          = new_bucket();
+        DictBucket bucket = *bucketp;
+        bucket->values[0] = key;
+        bucket->values[1] = value;
+        bucket->tally     = 2;
+        return IdentityDictionary_check_grow(self);
+    }
+    if (Bucket_quick_store(bucketp, key, value)) {
+        IdentityDictionary_check_grow(self);
+    }
+}
+
