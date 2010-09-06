@@ -24,7 +24,7 @@ Symbol raw_Symbol(const wchar_t* input)
 
 Symbol new_Symbol(const wchar_t* input)
 {
-    Symbol result  = raw_Symbol(input);
+    Symbol result = raw_Symbol(input);
     Optr cachedSymbol = Dictionary_quick_lookup(Symbol_Table, (Optr)result);
     if (cachedSymbol != NULL) {
         return (Symbol)cachedSymbol;

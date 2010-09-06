@@ -16,7 +16,8 @@ struct IdentityDictionary_t {
 EXPORT_CLASS(IdentityDictionary);
 
 extern IdentityDictionary new_IdentityDictionary();
-extern Optr IdentityDictionary_quick_lookup(IdentityDictionary self, Optr key);
+extern Optr IdentityDictionary_lookup(IdentityDictionary self, Optr key);
+extern void IdentityDictionary_store(IdentityDictionary self, Optr key, Optr value);
 
 /* ========================================================================= */
 
