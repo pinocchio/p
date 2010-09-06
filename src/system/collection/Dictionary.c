@@ -225,22 +225,6 @@ int Bucket_compare_key(Optr inkey, Optr dictkey)
     return 0;
 }
 
-
-NNATIVE(iDictionary_at_, 5,
-    t_push_hash,
-    t_dictionary_lookup,
-    t_bucket_lookup,
-    t_return,
-    t_return_null)
-
-void Dictionary_lookup_push(Dictionary dict, Optr msg)
-{
-    CLAIM_EXP(2);
-    POKE_EXP(1, dict);
-    POKE_EXP(0, msg);
-    push_code(T_iDictionary_at_);
-}
-
 /* ========================================================================= */
 
 NNATIVE(Dictionary_at_ifAbsent_, 5,
@@ -295,7 +279,6 @@ void post_init_Dictionary()
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_includesKey_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);
-    INIT_NATIVE(iDictionary_at_);
     INIT_NATIVE(Dictionary_grow);
 
     Dictionary natives = add_plugin(L"Collection.Dictionary");
