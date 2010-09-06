@@ -77,7 +77,7 @@ void method_return_value(Optr value)
 }
 
 /* ========================================================================= */
-Dictionary functions;
+IdentityDictionary functions;
 
 NATIVE1(Interpretation_Threaded_compileNatively_)
     Array array = (Array)NATIVE_ARG(0);
@@ -85,7 +85,7 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
     for (i=0; i<array->size; i++) {
         Optr object = array->values[i];
         if (HEADER(object) == Kernel_Threading_FunctionPointer_Class) {
-            Optr fp = Dictionary_quick_lookup(functions, ((Object)object)->ivals[0]);
+            Optr fp = IdentityDictionary_lookup(functions, ((Object)object)->ivals[0]);
             if (fp == nil || fp == NULL) {
                 inspect(stderr, object);
             }
@@ -101,8 +101,10 @@ NATIVE1(Interpretation_Threaded_compileNatively_)
 #ifdef THREADED
      #define T_FUNC(name) t_##name = &&label_##name;
 #else //THREADED
-
-    #define T_FUNC(name) Dictionary_quick_store(functions, (Optr)raw_Symbol(L""#name), (Optr)&t_##name);
+    #define T_FUNC(name)\
+        IdentityDictionary_store(functions,\
+        (Optr)new_Symbol(L""#name),\
+        (Optr)&t_##name);
 #endif //THREADED
 
 void post_init_Threaded()
@@ -115,7 +117,7 @@ void post_init_Threaded()
     store_native(natives, L"compileNatively:", 
                  NM_Interpretation_Threaded_compileNatively_);
 
-    functions = new_Dictionary();
+    functions = new_IdentityDictionary();
 #ifdef THREADED 
     // initialize the goto pointers
     threaded(NULL);
@@ -753,7 +755,7 @@ OPCODE(push_hash)
     Optr key = PEEK_EXP(0);
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = String_hash((Symbol)key);
+        hash = String_hash((String)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
