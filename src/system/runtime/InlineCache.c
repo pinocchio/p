@@ -60,7 +60,7 @@ NATIVE2(InlineCache_cache_at_)
 
 void post_init_InlineCache()
 {
-    Dictionary natives = add_plugin(L"Runtime.InlineCache");
+    PLUGIN natives = add_plugin(L"Runtime.InlineCache");
     store_native(natives, L"checkCached:", NM_InlineCache_checkCached_);
     store_native(natives, L"cache:at:",    NM_InlineCache_cache_at_);
 }

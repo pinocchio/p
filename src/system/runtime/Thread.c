@@ -92,7 +92,7 @@ void post_init_Thread()
     SMB_yield_    = new_Symbol(L"yield:");
     SMB_evaluate_ = new_Symbol(L"evaluate:");
     
-    Dictionary natives = add_plugin(L"Runtime.Thread");
+    PLUGIN natives = add_plugin(L"Runtime.Thread");
     store_native(natives, L"current", NM_Thread_current);
     store_native(natives, L"resume", NM_Thread_resume);
     store_native(natives, L"new:", NM_Thread_new_);

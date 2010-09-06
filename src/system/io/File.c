@@ -234,7 +234,8 @@ void post_init_IO_File()
     HEADER(((Array)IO_ReadFile_Class->layout)->values[0]) = UIntSlot_Class;
     HEADER(((Array)IO_WriteFile_Class->layout)->values[0]) = UIntSlot_Class;
     */
-    Dictionary natives = add_plugin(L"IO.File");
+    
+    PLUGIN natives = add_plugin(L"IO.File");
     store_native(natives, L"stdin"  , NM_IO_File_stdin);
     store_native(natives, L"stdout" , NM_IO_File_stdout);
     store_native(natives, L"stderr" , NM_IO_File_stderr);

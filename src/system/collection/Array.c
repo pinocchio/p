@@ -81,7 +81,7 @@ NATIVE2(Array_instVarAt_put_)
 
 void post_init_Array()
 {
-    Dictionary natives = add_plugin(L"Collection.Array");
+    PLUGIN natives = add_plugin(L"Collection.Array");
 
     store_native(natives, L"instVarAt:",     NM_Array_instVarAt_);
     store_native(natives, L"instVarAt:put:", NM_Array_instVarAt_put_);

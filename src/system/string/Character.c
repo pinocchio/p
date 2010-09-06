@@ -61,7 +61,7 @@ void post_init_Character()
 { 
     Character_Class->layout = character_layout;
 
-    Dictionary natives = add_plugin(L"Type.Character");
+    PLUGIN natives = add_plugin(L"Type.Character");
     store_native(natives, L"hash",       NM_Character_hash);
     store_native(natives, L"asString",   NM_Character_asString);
     store_native(natives, L"asSymbol",   NM_Character_asSymbol);

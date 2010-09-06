@@ -281,7 +281,7 @@ void post_init_Dictionary()
     INIT_NATIVE(Dictionary_at_ifAbsent_);
     INIT_NATIVE(Dictionary_grow);
 
-    Dictionary natives = add_plugin(L"Collection.Dictionary");
+    PLUGIN natives = add_plugin(L"Collection.Dictionary");
     store_native(natives, L"at:put:",      NM_Dictionary_at_put_);
     store_native(natives, L"at:ifAbsent:", NM_Dictionary_at_ifAbsent_);
     store_native(natives, L"includesKey:", NM_Dictionary_includesKey_);

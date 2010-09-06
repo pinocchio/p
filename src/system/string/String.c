@@ -209,7 +209,7 @@ void post_init_String()
     
     INIT_NATIVE(String_concat_);    
 
-    Dictionary natives = add_plugin(L"Type.String");
+    PLUGIN natives = add_plugin(L"Type.String");
     store_native(natives, L",",   NM_String_concat_);
     store_native(natives, L"asSymbol",  NM_String_asSymbol);
     store_native(natives, L"at:put:",   NM_String_at_put_);

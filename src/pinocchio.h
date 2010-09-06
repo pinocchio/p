@@ -161,7 +161,7 @@ typedef void(*native)(Optr self, Class class, uns_int argc);
 
 /* ========================================================================= */
 
-extern Dictionary _NATIVES_;
+extern IdentityDictionary _NATIVES_;
 
 /* ========================================================================= */
 

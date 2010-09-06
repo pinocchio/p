@@ -52,7 +52,7 @@ NATIVE1(Continuation_on_)
 
 void post_init_Continuation()
 {
-    Dictionary natives = add_plugin(L"Reflection.Reflection");
+    PLUGIN natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, L"continuationContinue:message:", 
                           NM_Continuation_continue_);
     store_native(natives, L"continuationOn:message:",       

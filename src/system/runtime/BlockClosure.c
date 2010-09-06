@@ -117,7 +117,7 @@ NATIVE1(BlockClosure_valueWithArguments_)
 
 void post_init_BlockClosure()
 {
-    Dictionary natives = add_plugin(L"Reflection.Reflection");
+    PLUGIN natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, L"blockclosureValue:message:", NM_BlockClosure_apply_);
     store_native(natives, L"blockclosureValueWithArguments:message:",
                           NM_BlockClosure_valueWithArguments_);

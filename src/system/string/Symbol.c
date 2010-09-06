@@ -126,7 +126,7 @@ NATIVE0(Symbol_size)
 
 void post_init_Symbol()
 {
-    Dictionary natives = add_plugin(L"Type.Symbol");
+    PLUGIN natives = add_plugin(L"Type.Symbol");
     store_native(natives, L"at:",       NM_Symbol_at_);
     store_native(natives, L"basicAt:",       NM_Symbol_basicAt_);
     store_native(natives, L"asString",  NM_Symbol_asString);

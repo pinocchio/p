@@ -154,7 +154,7 @@ Array instantiate_sized(Class cls, uns_int size)
 
 void post_init_Type_Layout()
 {   
-    Dictionary natives = add_plugin(L"Class.Layout.Object");
+    PLUGIN natives = add_plugin(L"Class.Layout.Object");
     store_native(natives, L"basicInstantiate:",       NM_Object_basicInstantiate_);
     natives = add_plugin(L"Class.Layout.Array");
     store_native(natives, L"basicInstantiate:sized:", NM_Array_basicInstantiate_sized_);

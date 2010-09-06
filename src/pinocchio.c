@@ -29,7 +29,7 @@ void init_thread_keys()
 
 /* ========================================================================= */
 
-Dictionary _NATIVES_;
+IdentityDictionary _NATIVES_;
 
 /* ========================================================================= */
 
@@ -64,7 +64,7 @@ NNATIVE(exit_error, 1, t_exit_error)
 
 void initialize_Natives()
 {
-    _NATIVES_ = new_Dictionary();
+    _NATIVES_ = new_IdentityDictionary();
 }
 
 /* ========================================================================= */

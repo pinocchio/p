@@ -45,7 +45,7 @@ NATIVE1(Exception_handler_)
 
 void post_init_Exception()
 {
-    Dictionary natives = add_plugin(L"Runtime.Exception");
+    PLUGIN natives = add_plugin(L"Runtime.Exception");
     store_native(natives, L"handler",  NM_Exception_handler);
     store_native(natives, L"handler:", NM_Exception_handler_);
 }

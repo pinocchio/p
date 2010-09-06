@@ -35,12 +35,13 @@ NativeMethod new_NativeMethod_with(Array params,
 
 native lookup_native(Optr primitive_name, Optr module_name)
 {
-    Optr module = Dictionary_quick_lookup(_NATIVES_, module_name);
+    Optr module = IdentityDictionary_lookup(_NATIVES_, module_name);
     if (module == NULL) { return (native)-1; }
     if (HEADER(module) == (Class)Plugin_Plugin_Class) {
         module = ((Object)module)->ivals[2]; 
     }
-    Optr primitive = Dictionary_quick_lookup((Dictionary)module, primitive_name);
+    Optr primitive = IdentityDictionary_lookup(
+                        (IdentityDictionary)module, primitive_name);
     if (primitive == NULL) { return (native)-1; }
     return (native)primitive;
 }

@@ -111,7 +111,7 @@ void post_init_Threaded()
     SMB_hash = new_Symbol(L"hash");
     SMB_asString = new_Symbol(L"asString");
 
-    Dictionary natives = add_plugin(L"Interpretation.Threaded");
+    PLUGIN natives = add_plugin(L"Interpretation.Threaded");
     store_native(natives, L"compileNatively:", 
                  NM_Interpretation_Threaded_compileNatively_);
 

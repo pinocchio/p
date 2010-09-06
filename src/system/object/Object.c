@@ -123,7 +123,7 @@ NATIVE1(Object_perform_)
 
 void post_init_Object()
 {
-    Dictionary natives = add_plugin(L"Type.Object");
+    PLUGIN natives = add_plugin(L"Type.Object");
     store_native(natives, L"size",                   NM_Object_size);
     store_native(natives, L"at:",                    NM_Array_at_);
     store_native(natives, L"at:put:",                NM_Array_at_put_);
