@@ -19,7 +19,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
+CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL 
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -71,7 +71,10 @@ llvm:
 	CC=llvm-gcc LDFLAGS+="-O0" CFLAGS+="-O0 -DLLVM" make $(TARGET)
 
 llvm-fast:
-	CC=llvm-gcc LDFLAGS+="-O4" CFLAGS+="-O4 -DLLVM" make $(TARGET)
+	CC=llvm-gcc LDFLAGS+="-03 -O4" CFLAGS+="-O4 -03 -DLLVM" make $(TARGET)
+	
+clang-fast:
+	CC=llvm-gcc LDFLAGS+="-03 -O4" CFLAGS+="-03 -O4" make $(TARGET)
 
 clang:
 	CC=clang CFLAGS+="-O0 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
@@ -97,6 +100,9 @@ dtrace:
 debug:
 	touch -c 'system/class/Class.c'
 	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+
+gdb:
+	CFLAGS+="-g" make $(TARGET)
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
