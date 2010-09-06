@@ -35,6 +35,11 @@ Symbol new_Symbol(const wchar_t* input)
 
 /* ========================================================================= */
 
+SmallInt Symbol_hash(Symbol symbol)
+{
+    return symbol->hash;
+}
+
 NATIVE1(Symbol_at_)
     Optr w_arg0 = NATIVE_ARG(0);
     ASSERT_INSTANCE_OF(w_arg0, SmallInt_Class);
@@ -87,14 +92,6 @@ SmallInt wchar_hash(const wchar_t * string, long size)
         hash >>= 1;
     }
     return new_SmallInt(hash);
-}
-
-SmallInt Symbol_hash(Symbol symbol)
-{
-    if (!symbol->hash) {
-        symbol->hash = wchar_hash(symbol->value, symbol->size);
-    }
-    return symbol->hash;
 }
 
 NATIVE1(Symbol__equal)

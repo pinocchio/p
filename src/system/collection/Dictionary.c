@@ -29,7 +29,7 @@ static long get_hash(Dictionary self, Optr key)
     long hash;
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key)->value;
+        hash = String_hash((Symbol)key)->value;
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = ((SmallInt)key)->value;
     } else {
@@ -171,7 +171,7 @@ int tpush_hash(Optr key)
     SmallInt hash;
     Optr tag = GETTAG(key);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = Symbol_hash((Symbol)key);
+        hash = String_hash((Symbol)key);
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
