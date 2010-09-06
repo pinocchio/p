@@ -19,7 +19,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -g -std=c99 -DASSERT_FAIL 
+CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL 
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -100,6 +100,9 @@ dtrace:
 debug:
 	touch -c 'system/class/Class.c'
 	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+
+gdb:
+	CFLAGS+="-g" make $(TARGET)
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
