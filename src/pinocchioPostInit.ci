@@ -19,7 +19,7 @@ post_init_BlockClosure();
 post_init_MethodClosure();
 post_init_Type_Layout();
 post_init_Slot();
-post_init_UIntSlot();
+post_init_UintSlot();
 post_init_DictBucket();
 post_init_Nil();
 post_init_Threaded();

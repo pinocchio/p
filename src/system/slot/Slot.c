@@ -80,7 +80,7 @@ NATIVE2(Slot_assign_on_)
 
 void post_init_Slot()
 {
-    change_slot_type(AbstractSlot_Class, UIntSlot_Class, 1, 0);
+    change_slot_type(AbstractSlot_Class, UintSlot_Class, 1, 0);
 
     PLUGIN natives = add_plugin(L"Slot.Slot");
     store_native(natives, L"assign:on:", NM_Slot_assign_on_);

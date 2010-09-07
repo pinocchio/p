@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <system/slot/UIntSlot.h>
+#include <system/slot/UintSlot.h>
 
 /* ========================================================================= */
 
-UIntSlot new_UIntSlot(uns_int index, const wchar_t * name) 
+UintSlot new_UintSlot(uns_int index, const wchar_t * name) 
 {
-    NEW_OBJECT(UIntSlot);
+    NEW_OBJECT(UintSlot);
     result->index   = index;
     result->name    = (Optr)raw_Symbol(name);
     result->package = (Optr)nil;
@@ -16,14 +16,14 @@ UIntSlot new_UIntSlot(uns_int index, const wchar_t * name)
 /* ========================================================================= */
 
 
-static Optr UIntSlot_readFrom_(UIntSlot var, Optr self)
+static Optr UintSlot_readFrom_(UintSlot var, Optr self)
 {
     return wrap_int((uns_int)Object_instVarAt_(
 						self,
 						var->index));
 }
 
-static void UIntSlot_assign_on_(UIntSlot var,
+static void UintSlot_assign_on_(UintSlot var,
                                               Optr value,
                                               Optr self)
 {
@@ -31,39 +31,39 @@ static void UIntSlot_assign_on_(UIntSlot var,
 						  var->index,
 						  (Optr)(uns_int)unwrap_int(value));
 }
-void UIntSlot_eval(UIntSlot var)
+void UintSlot_eval(UintSlot var)
 {
-    POKE_EXP(0, UIntSlot_readFrom_(var,
+    POKE_EXP(0, UintSlot_readFrom_(var,
                     current_env()->home_context->self));
 }
 
-void UIntSlot_assign(UIntSlot var, Optr value)
+void UintSlot_assign(UintSlot var, Optr value)
 {
-    UIntSlot_assign_on_(var, value, current_env()->home_context->self);
+    UintSlot_assign_on_(var, value, current_env()->home_context->self);
 }
 
 /* ========================================================================= */
 
-NATIVE1(UIntSlot_readFrom_)
+NATIVE1(UintSlot_readFrom_)
     Optr receiver = NATIVE_ARG(0);
     RETURN_FROM_NATIVE(
-        UIntSlot_readFrom_((UIntSlot)self,
+        UintSlot_readFrom_((UintSlot)self,
                                          receiver));
 }
 
-NATIVE2(UIntSlot_assign_on_)
+NATIVE2(UintSlot_assign_on_)
     Optr value = NATIVE_ARG(0);
     Optr o = NATIVE_ARG(1);
-    UIntSlot_assign_on_((UIntSlot)self,
+    UintSlot_assign_on_((UintSlot)self,
                                 value, o);
     RETURN_FROM_NATIVE(value);
 }
 
 /* ========================================================================= */
 
-void post_init_UIntSlot()
+void post_init_UintSlot()
 {
-    PLUGIN natives = add_plugin(L"Slot.UIntSlot");
-    store_native(natives, L"assign:on:", NM_UIntSlot_assign_on_);
-    store_native(natives, L"readFrom:" , NM_UIntSlot_readFrom_);
+    PLUGIN natives = add_plugin(L"Slot.UintSlot");
+    store_native(natives, L"assign:on:", NM_UintSlot_assign_on_);
+    store_native(natives, L"readFrom:" , NM_UintSlot_readFrom_);
 }

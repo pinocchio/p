@@ -230,9 +230,9 @@ void post_init_IO_File()
 {
     /*
     TODO LAYOUT
-    HEADER(((Array)IO_File_Class->layout)->values[0]) = UIntSlot_Class;
-    HEADER(((Array)IO_ReadFile_Class->layout)->values[0]) = UIntSlot_Class;
-    HEADER(((Array)IO_WriteFile_Class->layout)->values[0]) = UIntSlot_Class;
+    HEADER(((Array)IO_File_Class->layout)->values[0]) = UintSlot_Class;
+    HEADER(((Array)IO_ReadFile_Class->layout)->values[0]) = UintSlot_Class;
+    HEADER(((Array)IO_WriteFile_Class->layout)->values[0]) = UintSlot_Class;
     */
     
     PLUGIN natives = add_plugin(L"IO.File");

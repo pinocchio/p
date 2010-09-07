@@ -34,7 +34,7 @@ void do_assign()
     
     ASSIGN_IF(Variable)
     ASSIGN_IF(Slot)
-    ASSIGN_IF(UIntSlot)
+    ASSIGN_IF(UintSlot)
 
     ZAP_EXP();
     

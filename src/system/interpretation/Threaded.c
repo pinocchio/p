@@ -347,8 +347,8 @@ OPCODE(push_slot)
 	CLAIM_EXP(1);
     if (HEADER(slot) == Slot_Class) {
         Slot_eval(slot);
-    } else if (HEADER(slot) == UIntSlot_Class) {
-        UIntSlot_eval((UIntSlot)slot);
+    } else if (HEADER(slot) == UintSlot_Class) {
+        UintSlot_eval((UintSlot)slot);
     } else {
         assert1(NULL, "Unknown type of slot");
     }

@@ -4,5 +4,5 @@
 
 void post_init_Context()
 {
-    change_slot_type(Context_Class, UIntSlot_Class, 1, 0);
+    change_slot_type(Context_Class, UintSlot_Class, 1, 0);
 }

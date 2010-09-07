@@ -274,7 +274,7 @@ void post_init_Dictionary()
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
 
-    change_slot_type(Dictionary_Class, UIntSlot_Class, 1, 0);
+    change_slot_type(Dictionary_Class, UintSlot_Class, 1, 0);
     
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_includesKey_);

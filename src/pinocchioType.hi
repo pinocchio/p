@@ -30,7 +30,7 @@ TYPE(MethodClosure);
 TYPE(MethodContext);
 TYPE(PointerSlot);
 TYPE(Slot);
-TYPE(UIntSlot);
+TYPE(UintSlot);
 TYPE(Boolean);
 TYPE(Character);
 TYPE(CharacterTable);

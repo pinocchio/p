@@ -111,5 +111,5 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
 
 void post_init_DictBucket()
 {
-    change_slot_type(DictBucket_Class, UIntSlot_Class, 1, 0);
+    change_slot_type(DictBucket_Class, UintSlot_Class, 1, 0);
 }
