@@ -182,8 +182,6 @@ int tpush_hash(Optr key)
     return 0;
 }
 
-
-
 NNATIVE(Dictionary_grow, 2,
     t_dict_grow,
     t_bucket_rehash)
@@ -271,11 +269,11 @@ NATIVE0(Dictionary_grow)
 
 void post_init_Dictionary()
 {
+    change_slot_type(Dictionary_Class, UintSlot_Class, 1, 0);
+    
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
 
-    change_slot_type(Dictionary_Class, UintSlot_Class, 1, 0);
-    
     INIT_NATIVE(Dictionary_at_put_);
     INIT_NATIVE(Dictionary_includesKey_);
     INIT_NATIVE(Dictionary_at_ifAbsent_);

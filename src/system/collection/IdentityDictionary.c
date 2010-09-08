@@ -82,6 +82,36 @@ static void IdentityDictionary_check_grow(IdentityDictionary self)
     }
 }
 
+
+/* ========================================================================= */
+// TODO make sure to use IdentityDictBuckets rather than DictBuckets!
+// Currently it breaks interpreted code!
+/* ========================================================================= */
+
+long IdentityBucket_store(DictBucket * bucketp, Optr key, Optr value)
+{
+    long i;
+    DictBucket bucket = *bucketp;
+    uns_int tally     = bucket->tally;
+    for (i = 0; i < tally; i = i+2) {
+        if (key == bucket->values[i]) {
+            bucket->values[i+1] = value;
+            return 0;
+        }
+    }
+
+    if (tally == bucket->size) {
+        Bucket_grow(bucketp);
+        bucket = *bucketp;
+    }
+
+    bucket->values[tally]   = key;
+    bucket->values[tally+1] = value;
+    bucket->tally           = tally+2;
+
+    return 1;
+}
+
 void IdentityDictionary_store(IdentityDictionary self,
                               Optr key, Optr value)
 {
@@ -96,8 +126,36 @@ void IdentityDictionary_store(IdentityDictionary self,
         bucket->tally     = 2;
         return IdentityDictionary_check_grow(self);
     }
-    if (Bucket_quick_store(bucketp, key, value)) {
+    if (IdentityBucket_store(bucketp, key, value)) {
         IdentityDictionary_check_grow(self);
     }
 }
 
+NATIVE2(IdentityDictionary_at_put_)
+    Optr key   = NATIVE_ARG(0);
+    Optr value = NATIVE_ARG(1);
+    IdentityDictionary_store((IdentityDictionary)self, key, value);
+    RETURN_FROM_NATIVE(value);
+}
+
+NATIVE2(IdentityDictionary_at_ifAbsent_)
+    Optr key   = NATIVE_ARG(0);
+    Optr result = IdentityDictionary_lookup((IdentityDictionary)self, key);
+    if (result) {
+        RETURN_FROM_NATIVE(result);
+        return;
+    }
+    Optr block = NATIVE_ARG(1);
+    ZAP_NATIVE_INPUT();
+    PUSH_EXP(block);
+    apply(block, 0);
+}
+
+void post_init_IdentityDictionary()
+{
+    PLUGIN natives = add_plugin(L"Collection.IdentityDictionary");
+    store_native(natives, L"at:put:",      NM_IdentityDictionary_at_put_);
+    store_native(natives, L"at:ifAbsent:", NM_IdentityDictionary_at_ifAbsent_);
+    //store_native(natives, L"includesKey:", NM_IdentityDictionary_includesKey_);
+    //store_native(natives, L"grow",         NM_IdentityDictionary_grow);
+}

@@ -13,7 +13,7 @@ struct IdentityDictionary_t {
     Optr                linear;
 };
 
-EXPORT_CLASS(IdentityDictionary);
+CREATE_INITIALIZERS(IdentityDictionary);
 
 extern IdentityDictionary new_IdentityDictionary();
 extern Optr IdentityDictionary_lookup(IdentityDictionary self, Optr key);
