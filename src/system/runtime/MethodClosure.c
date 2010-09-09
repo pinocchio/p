@@ -67,15 +67,15 @@ void Method_invoke(MethodClosure closure,
         RETURN_FROM_NATIVE(self);
         return;
     }
-    
+
     activate_method(closure, argc);
 
     push_code(method->code);
 }
 
 #define INVOKE_IF(name) if(method_class == name##_Class) {\
-        return name##_invoke(closure, (name)method, self, argc);\
-    }
+    return name##_invoke(closure, (name)method, self, argc);\
+}
 
 void MethodClosure_invoke(MethodClosure closure, Optr self, uns_int argc)
 {

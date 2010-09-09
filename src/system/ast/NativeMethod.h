@@ -14,7 +14,8 @@ struct NativeMethod_t {
     Optr    package;
     Array   annotations;
     Info    info;
-    native  code;
+    Array   code;
+	native  native;
     Optr    body[];
 };
 

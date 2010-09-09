@@ -14,7 +14,8 @@ struct ReflectionMethod_t {
     Optr    package;
     Array   annotations;
     Info    info;
-    native  cache;
+    Array   code;
+	native  native;
     Optr    body[];
 };
 

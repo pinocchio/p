@@ -19,14 +19,15 @@ NativeMethod new_NativeMethod_with(Array params,
                                    uns_int statementCount, ...)
 {
     NEW_ARRAY_OBJECT(NativeMethod, Optr[statementCount]);
-    result->params = params;
-    result->locals = locals;
+    result->params      = params;
+    result->locals      = locals;
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);
-    result->info   = empty_Info;
-    result->size   = statementCount;
-    result->code = NULL;
+    result->info = empty_Info;
+    result->size = statementCount;
+    result->code = threaded;
+    result->native = (native)nil;
     COPY_ARGS(statementCount, result->body);
     return result;
 }
@@ -50,7 +51,7 @@ void NativeMethod_invoke(MethodClosure closure,
                          NativeMethod method,
                          Optr self, uns_int argc)
 {
-    if (method->code == NULL) {
+    if (method->native == (native)nil) {
         Annotation annotation =
             lookup_annotation(method->annotations, 
                               (Optr)SMB_pPrimitive_plugin_);
@@ -60,13 +61,13 @@ void NativeMethod_invoke(MethodClosure closure,
         }
         assert1(annotation, "No primitive annotation found");
         assert1(annotation->size == 2 || annotation->size == 3, "Invalid annotation format");
-        method->code = lookup_native(annotation->arguments[0],
-                                     annotation->arguments[1]);
+        method->native = lookup_native(annotation->arguments[0],
+                                       annotation->arguments[1]);
     }
-    if (method->code == (native)-1) {
-        assert1(NULL, "Alternatives to native methods currently aren't supported!");
+    if (method->native == (native)-1) {
+        return Method_invoke(closure, (Method)method, self, argc);
     }
-    method->code(self, closure->host, argc);
+    method->native(self, closure->host, argc);
 }
 
 /* ========================================================================= */

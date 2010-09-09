@@ -917,6 +917,7 @@ OPCODE(dictionary_check_grow)
         Dictionary_grow(self);
     }
 END_OPCODE
+
 /* ========================================================================= */
 #ifdef THREADED
 } // end the thread function
