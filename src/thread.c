@@ -80,4 +80,5 @@ void pinocchio_main(int argc, const char ** argv)
 #else //THREAD
      pinocchio_main_thread((void*)(uns_int)argc);
 #endif //THREAD
+    pinocchio_exit(EXIT_SUCCESS);
 }
