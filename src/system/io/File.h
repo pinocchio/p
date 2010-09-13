@@ -13,6 +13,7 @@ struct IO_File_t {
 };
 
 extern void post_init_IO_File();
+extern void cleanup_IO_File();
 
 IO_File new_IO_File();
 IO_File new_IO_File_fromFile(FILE* file);

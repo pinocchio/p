@@ -33,6 +33,19 @@ IdentityDictionary _NATIVES_;
 
 /* ========================================================================= */
 
+static void cleanup()
+{
+    cleanup_IO_File();
+}
+
+void pinocchio_exit(int status)
+{
+    cleanup();
+    exit(status);
+}
+
+/* ========================================================================= */
+
 OPCODE(exit_eval)
     longjmp(tget_buf(Eval_Exit), 1);
 }
@@ -56,7 +69,8 @@ OPCODE(exit_error)
         }
         env = env->parent_frame;
     }
-    exit(EXIT_FAILURE);
+
+    pinocchio_exit(EXIT_FAILURE);
 }
 
 NNATIVE(exit_eval,  1, t_exit_eval)

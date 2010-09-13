@@ -1,10 +1,10 @@
+#include <pinocchio.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <wchar.h>
 #include <string.h>
 #include <termios.h>
-#include <pinocchio.h>
 
 
 /* ========================================================================= */
@@ -226,6 +226,8 @@ NATIVE0(IO_File_close)
 
 /* ========================================================================= */
 
+static struct termios stdin_term_settings;
+
 void post_init_IO_File()
 {
     /*
@@ -259,6 +261,7 @@ void post_init_IO_File()
 
     /* make stdin unbuffered */
     struct termios settings;
+    tcgetattr(fileno(stdin), &stdin_term_settings);
     tcgetattr(fileno(stdin), &settings);
     settings.c_lflag &= (~ICANON);
     settings.c_lflag &= (~ECHO); // don't echo the character
@@ -268,4 +271,9 @@ void post_init_IO_File()
     StandardIn    = new_IO_ReadFile_from(stdin);
     StandardOut   = new_IO_WriteFile_from(stdout);
     StandardError = new_IO_WriteFile_from(stderr);
+}
+
+void cleanup_IO_File()
+{
+    tcsetattr(fileno(stdin), TCSANOW, &stdin_term_settings);
 }

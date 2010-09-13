@@ -171,6 +171,7 @@ extern IdentityDictionary _NATIVES_;
 /* ========================================================================= */
 
 extern void CNT_exit_error();
+extern void pinocchio_exit(int status);
 extern Optr Eval(Optr code);
 extern Optr Eval_Send0(Optr self, Symbol symbol);
 extern Optr Eval_Send1(Optr self, Symbol symbol, Optr arg);
