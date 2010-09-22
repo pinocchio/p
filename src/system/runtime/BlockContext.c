@@ -42,7 +42,10 @@ BlockContext capture_current_env()
         target->home_context = (MethodContext)target;
     }
 
-    /* Mark & keep a pointer to the new version */
+    /* Mark & keep a pointer to the new version
+     * This is used by "BlockContext alive_env(BlockContext context)" to
+     * retrieve the actual context
+     */
     HEADER(context) = NULL;
     context->stacked = (Optr)target;
 
@@ -51,6 +54,9 @@ BlockContext capture_current_env()
     return target;
 }
 
+/* Retrieves the actual context in case the stacked context was unstacked in the
+ * meanwhile
+ */
 BlockContext alive_env(BlockContext context)
 {
     if (HEADER(context) == NULL) {
@@ -63,13 +69,11 @@ BlockContext alive_env(BlockContext context)
 
 Optr BlockContext_lookup(BlockContext self, uns_int local_id, uns_int scope_id)
 {
-    while (scope_id != self->scope_id && (Optr)self->outer_scope != nil) {
+    while (scope_id < self->scope_id && (Optr)self->outer_scope != nil) {
         self = self->outer_scope;
     }
-    assert1(scope_id == self->scope_id, "TODO jump to error handler");
-    assert(local_id < self->size,
-    	   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
-                 local_id, self->size));
+    assert1(scope_id == self->scope_id, "Failed to locate scope.");
+    assert1(local_id < self->size, "Variable index out of range");
 
     return self->locals[local_id];
 }
@@ -77,13 +81,11 @@ Optr BlockContext_lookup(BlockContext self, uns_int local_id, uns_int scope_id)
 void BlockContext_assign(BlockContext self, uns_int local_id,
                          uns_int scope_id, Optr value)
 {
-    while (scope_id != self->scope_id && (Optr)self->outer_scope != nil) {
+    while (scope_id < self->scope_id && (Optr)self->outer_scope != nil) {
         self = self->outer_scope;
     }
-    assert1(scope_id == scope_id, "TODO jump to error handler");
-    assert(local_id < self->size,
-    	   printf("Lookup failed, index \"%lu\" out of range [0:%lu]", 
-                  local_id, self->size));
+    assert1(scope_id == scope_id, "Failed to locate scope.");
+    assert1(local_id < self->size, "Variable index out of range");
 
     self->locals[local_id] = value;
 }
