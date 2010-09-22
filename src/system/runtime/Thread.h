@@ -10,6 +10,7 @@ struct Thread_t {
     Optr            _ENV_;
     Optr *          _EXP_;
     Optr            storage;
+    Optr            next_interpreter;
     Optr            Error_Handler;
     threaded**      _CNT_;
     jmp_buf         Eval_Exit;

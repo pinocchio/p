@@ -102,7 +102,7 @@ debug:
 	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 gdb:
-	CFLAGS+="-g" make $(TARGET)
+	CFLAGS+="-DNO_EXCEPTION -g" make $(TARGET)
 
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi

@@ -42,9 +42,21 @@ BlockContext capture_current_env()
         target->home_context = (MethodContext)target;
     }
 
+    /* Mark & keep a pointer to the new version */
+    HEADER(context) = NULL;
+    context->stacked = (Optr)target;
+
     target->stacked = false;
-    set_env((Optr)target);
+    set_env(target);
     return target;
+}
+
+BlockContext alive_env(BlockContext context)
+{
+    if (HEADER(context) == NULL) {
+        return (BlockContext)context->stacked;
+    }
+    return context;
 }
 
 /* ========================================================================= */

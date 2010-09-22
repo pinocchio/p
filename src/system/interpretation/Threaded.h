@@ -60,7 +60,7 @@ extern void post_init_Threaded();
 
 extern Optr get_code(threaded* idx);
 extern void push_code(Array code);
-#define set_env(env) (tset(_ENV_, (env)))
+#define set_env(env) (tset(_ENV_, (Optr)alive_env((BlockContext)(env))))
 
 /* ======================================================================== */
 

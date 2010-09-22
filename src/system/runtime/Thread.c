@@ -11,9 +11,11 @@ static Symbol SMB_evaluate_;
 
 void reset_thread(Thread thread)
 {
-    thread->_EXP_ = &thread->Double_Stack[-1];
-    thread->_CNT_ = (threaded**)&thread->Double_Stack[thread->size];
-    thread->_ENV_ = nil;
+    thread->_EXP_            = &thread->Double_Stack[-1];
+    thread->_CNT_            = (threaded**)&thread->Double_Stack[thread->size];
+    thread->_ENV_            = nil;
+    thread->next_interpreter = nil;
+    thread->storage          = new_IdentityDictionary();
 }
 
 Thread new_Thread(uns_int size)

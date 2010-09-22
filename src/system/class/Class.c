@@ -12,8 +12,9 @@ Class metaclass;
 Class class;
 Class behavior;
 
+/* ========================================================================= */
 static Symbol SMB_doesNotUnderstand_;
-
+static Symbol SMB_sendNext_to_class_;
 /* ========================================================================= */
 
 Optr basic_instantiate_Object(Class class, uns_int size)
@@ -163,28 +164,57 @@ void Class_direct_dispatch(Optr self, Class class, Optr msg,
                            uns_int argc, ...)
 {
     va_list args;
-    va_start(args, argc);
     long idx;
-    /* Send obj. TODO update Send>>eval to be able to remove this */
-    /* TODO optimize by claim + poke instead of push */
-    PUSH_EXP(self);
-    for (idx = 0; idx < argc; idx++) {
-        PUSH_EXP(va_arg(args, Optr));
+    va_start(args, argc);
+
+    if (_thread_->next_interpreter != nil) {
+        Message message = new_Message((Optr)msg, argc);
+        for (idx = 0; idx < argc; idx++) {
+            message->arguments[idx] = va_arg(args, Optr);
+        }
+        Optr next_interpreter = _thread_->next_interpreter;
+        _thread_->next_interpreter = nil;
+        Class_direct_dispatch(
+            next_interpreter,
+            HEADER(next_interpreter),
+            (Optr)SMB_sendNext_to_class_, 3,
+            (Optr)message, self, (Optr)class);
+    } else {
+        /* Send obj. TODO update Send>>eval to be able to remove this */
+        /* TODO optimize by claim + poke instead of push */
+        PUSH_EXP(self);
+        for (idx = 0; idx < argc; idx++) {
+            PUSH_EXP(va_arg(args, Optr));
+        }
+        Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
     }
     va_end(args);
-    Class_do_dispatch(self, class, msg, argc, T_Class_direct_dispatch);
 }
 
 void Class_direct_dispatch_withArguments(Optr self, Class class,
                                          Optr msg, Array args)
 {
-    /* Send obj. TODO update Send>>eval to be able to remove this */
     long idx;
-    PUSH_EXP(self);
-    for (idx = 0; idx < args->size; idx++) {
-        PUSH_EXP(args->values[idx]);
+    
+    if (_thread_->next_interpreter != nil) {
+        Message message = new_Message((Optr)msg, args->size);
+        for (idx = 0; idx < args->size; idx++) {
+            message->arguments[idx] = args->values[idx];
+        }
+        Optr next_interpreter = _thread_->next_interpreter;
+        _thread_->next_interpreter = nil;
+        Class_direct_dispatch(
+            next_interpreter,
+            HEADER(next_interpreter),
+            (Optr)SMB_sendNext_to_class_, 3,
+            (Optr)message, self, (Optr)class);
+    } else {
+        PUSH_EXP(self);
+        for (idx = 0; idx < args->size; idx++) {
+            PUSH_EXP(args->values[idx]);
+        }
+        Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
     }
-    Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
 }
 
 void Class_dispatch(Optr self, Class class, uns_int argc)
@@ -279,6 +309,7 @@ void Class_normal_dispatch(Optr self, Send send, uns_int argc)
 
 void post_init_Class()
 {
+    SMB_sendNext_to_class_ = new_Symbol(L"sendNext:to:class:");
     SMB_doesNotUnderstand_ = new_Symbol(L"doesNotUnderstand:");
     INIT_NATIVE(Class_direct_dispatch);
     INIT_NATIVE(Class_dispatch);

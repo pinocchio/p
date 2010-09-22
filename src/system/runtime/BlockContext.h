@@ -14,10 +14,10 @@ struct BlockContext_t {
     uns_int                 size;
     uns_int                 scope_id;
     Optr                    stacked;
-    BlockContext            outer_scope;
+    BlockClosure            closure;
     MethodContext           home_context;
     BlockContext            parent_frame;
-    BlockClosure            closure;
+    BlockContext            outer_scope;
     Optr                    locals[];
 };
 
@@ -34,6 +34,7 @@ extern BlockContext optain_context(uns_int size);
 /* ========================================================================= */
 
 extern BlockContext capture_current_env();
+extern BlockContext alive_env(BlockContext context);
 
 /* ========================================================================= */
 

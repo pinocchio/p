@@ -20,7 +20,7 @@ Info new_raw_Info()
 }
 
 Info new_Info(String sourceFile, String name, 
-                      SmallInt line, SmallInt column)
+              SmallInt line, SmallInt column)
 {
     Info result     = new_raw_Info();
     result->sourceFile  = sourceFile;
