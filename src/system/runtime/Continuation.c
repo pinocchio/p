@@ -34,10 +34,7 @@ NATIVE1(Continuation_continue_)
 
     set_env(cont->env);
     t_return();
-    fwprintf(stderr, L"PC: %p\n", pc);
-
-    // Overwrite the top of stack that created the continuation.
-    POKE_EXP(0, arg);
+    PUSH_EXP(arg);
 }
 
 NATIVE1(Continuation_on_)
@@ -45,10 +42,12 @@ NATIVE1(Continuation_on_)
     Optr closure         = NATIVE_ARG(0);
     cont->exp_stack      = new_Array(EXP_SIZE() - (argc + 1),
                                      tget(Double_Stack));
+    PUSH_CNT(pc);
     cont->cnt_stack      = new_Array(CNT_SIZE(),
                                      (Optr *)tget(_CNT_));
+    ZAP_CNT();
     cont->env            = (Optr)current_env();
-    
+
     POKE_EXP(0, cont);
     apply(closure, 1);
 }

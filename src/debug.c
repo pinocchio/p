@@ -51,7 +51,10 @@ void print_Class(FILE* stream, Optr obj)
         return;
     }
     Class class = pclass(obj);
-    assert(class != NULL, fwprintf(stream, L"%p\n", obj));
+    if (class == NULL) {
+        fwprintf(stream, L"Object with NULL class\n");
+        return;
+    }
     assert0((Optr)class != nil);
     if (pclass((Optr)class) == metaclass) {
         fwprintf(stream, L"Class class: %ls\n", ((Class)obj)->name->value);
