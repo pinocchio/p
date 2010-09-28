@@ -7,7 +7,6 @@
 
 struct Info_t {
     String   sourceFile;
-    String   name;
     SmallInt line;
     SmallInt column;
 };
@@ -17,8 +16,7 @@ extern Info empty_Info;
 extern void post_init_Info();
 
 extern Info new_raw_Info();
-extern Info new_Info(String sourceFile, String name, 
-                      SmallInt line, SmallInt column);
+extern Info new_Info(const wchar_t * sourceFile, SmallInt line, SmallInt column);
 
 /* ========================================================================= */
 
