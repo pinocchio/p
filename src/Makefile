@@ -99,7 +99,7 @@ dtrace:
 
 debug:
 	touch -c 'system/class/Class.c'
-	CFLAGS+="-O0 -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 gdb:
 	CFLAGS+="-DNO_EXCEPTION -g" make $(TARGET)

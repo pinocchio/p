@@ -21,6 +21,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
     NEW_ARRAY_OBJECT(ReflectionMethod, Optr[statementCount]);
     result->params = params;
     result->locals = locals;
+    result->package = nil;
     result->annotations = annotations;
     long i;
     for (i = 0; i < annotations->size; i++) {

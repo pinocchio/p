@@ -21,6 +21,7 @@ NativeMethod new_NativeMethod_with(Array params,
     NEW_ARRAY_OBJECT(NativeMethod, Optr[statementCount]);
     result->params      = params;
     result->locals      = locals;
+    result->package     = nil;
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, result->params->size);

@@ -13,7 +13,7 @@ Continue new_Continue()
 Continue new_Continue_offset(int offset)
 {
     Continue cont    = new_Continue();
-    cont->exp_offset = EXP_SIZE() - offset + 1;
+    cont->exp_offset = EXP_SIZE() - offset;
     cont->cnt_offset = CNT_SIZE() + 1;
     cont->env        = (Optr)current_env();
     return cont;
@@ -36,7 +36,7 @@ NATIVE1(Continue_escape_)
 }
 
 NATIVE1(Continue_on_)
-    Continue cont = new_Continue_offset(argc + 1);
+    Continue cont = new_Continue_offset(argc);
     Optr closure  = NATIVE_ARG(0);
     POKE_EXP(0, cont);
     apply(closure, 1);
