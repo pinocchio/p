@@ -205,7 +205,7 @@ void post_init_Float()
 {
     Float_Class->layout = float_layout;
 
-    PLUGIN natives = add_plugin(L"Type.Float");
+    PLUGIN natives = add_plugin(L"Number.Float");
 
     store_native(natives, L"=",      NM_Float_pequal_);
     store_native(natives, L"==",     NM_Float_pequal_);

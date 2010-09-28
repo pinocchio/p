@@ -226,7 +226,7 @@ NATIVE1(SmallInt_pequal_)
 
 void post_init_SmallInt()
 {
-    PLUGIN natives = add_plugin(L"Type.SmallInt");
+    PLUGIN natives = add_plugin(L"Number.SmallInt");
     
     store_native(natives, L"=",  NM_SmallInt_pequal_);
     store_native(natives, L"+",  NM_SmallInt_plus_);

@@ -66,21 +66,6 @@ NATIVE0(Symbol_asString)
     RETURN_FROM_NATIVE(new_String(((Symbol)self)->value));
 }
 
-Array Symbol_asArray(Symbol symbol)
-{
-    Symbol self_symbol = (Symbol)symbol;
-    Array array        = new_Array_raw(self_symbol->size);
-    long i;
-    for (i=0; i<self_symbol->size; i++) {
-        array->values[i] = (Optr)new_Character(self_symbol->value[i]);
-    }
-    return array;
-}
-
-NATIVE0(Symbol_asArray)
-    RETURN_FROM_NATIVE(Symbol_asArray((Symbol)self));
-}
-
 SmallInt wchar_hash(const wchar_t * string, long size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
@@ -95,7 +80,6 @@ SmallInt wchar_hash(const wchar_t * string, long size)
 }
 
 NATIVE1(Symbol__equal)
-    // TODO think about this! Are Symbols = Strings?
     Optr w_arg = NATIVE_ARG(0);
     if (w_arg == self) {
         RETURN_FROM_NATIVE(true);
@@ -126,12 +110,11 @@ NATIVE0(Symbol_size)
 
 void post_init_Symbol()
 {
-    PLUGIN natives = add_plugin(L"Type.Symbol");
+    PLUGIN natives = add_plugin(L"String.Symbol");
     store_native(natives, L"at:",       NM_Symbol_at_);
     store_native(natives, L"basicAt:",       NM_Symbol_basicAt_);
     store_native(natives, L"asString",  NM_Symbol_asString);
     store_native(natives, L"=",			NM_Symbol__equal);
     store_native(natives, L"size",      NM_Symbol_size);
-    store_native(natives, L"asArray",   NM_Symbol_asArray);
     store_native(natives, L"hash",      NM_Symbol_hash);
 }
