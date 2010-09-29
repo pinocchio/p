@@ -65,8 +65,8 @@ Class new_Class(Class superclass, Optr metatype)
     Class result     = (Class)basic_instantiate_Object(metacls, meta_size);
     metacls->name    = (Symbol)result;
 
-    result->methods  = new_IdentityDictionary();
-    metacls->methods = new_IdentityDictionary();
+    result->methods  = new_MethodDictionary();
+    metacls->methods = new_MethodDictionary();
     Class_set_superclass(result, superclass);
 
     return result;
