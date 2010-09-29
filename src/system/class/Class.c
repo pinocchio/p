@@ -11,6 +11,7 @@
 Class metaclass;
 Class class;
 Class behavior;
+Class MethodDictionary_Class;
 
 /* ========================================================================= */
 static Symbol SMB_doesNotUnderstand_;
@@ -30,6 +31,18 @@ Optr basic_instantiate_Object(Class class, uns_int size)
 }
 
 /* ========================================================================= */
+
+IdentityDictionary new_MethodDictionary()
+{
+    IdentityDictionary result = NEW_t(IdentityDictionary);\
+    HEADER(result) = MethodDictionary_Class;
+    result->size      = 0;
+    result->ratio     = new_SmallInt(500);
+    result->maxLinear = new_SmallInt(20);
+    result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
+    result->linear    = true;
+    return result;
+}
 
 Class new_Bootstrapping_Class()
 {

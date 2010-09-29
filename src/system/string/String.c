@@ -13,12 +13,12 @@ static Symbol SMB_asString;
 
 String new_String(const wchar_t * input)
 {
-    uns_int size   = wcslen(input) + 1;
-    String result  = NEW_ARRAYED(struct String_t, wchar_t[size]);
+    uns_int size   = wcslen(input);
+    String result  = NEW_ARRAYED(struct String_t, wchar_t[size + 1]);
     HEADER(result) = String_Class;
-    wcsncpy(result->value, input, size);
-    result->size   = size - 1;
-    // result->hash = NULL;
+    wcsncpy(result->value, input, size + 1);
+    result->size   = size;
+    result->hash = NULL;
     return result;
 }
 
@@ -31,7 +31,7 @@ String new_String_sized(uns_int size)
     while(size--) {
         result->value[size] = '\0';
     }
-    // result->hash = NULL;
+    result->hash = NULL;
     return result;
 }
 

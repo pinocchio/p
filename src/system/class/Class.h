@@ -6,6 +6,7 @@
 extern Class metaclass;
 extern Class behavior;
 extern Class class;
+extern Class MethodDictionary_Class;
 
 /* ========================================================================= */
 
@@ -32,8 +33,8 @@ extern Class new_Class(Class superclass, Optr metaType);
 extern Class new_Bootstrapping_Class();
 
 #define DIRECT_INIT_CLASS(cls)\
-    cls->methods            = new_IdentityDictionary();\
-    HEADER(cls)->methods    = new_IdentityDictionary();
+    cls->methods            = new_MethodDictionary();\
+    HEADER(cls)->methods    = new_MethodDictionary();
 
 #define INIT_CLASS(cls) DIRECT_INIT_CLASS(cls##_Class);
 
@@ -49,6 +50,7 @@ extern void Class_direct_dispatch_withArguments(Optr receiver,
                                                      Array args);
 
 extern void Class_set_superclass(Class cls, Class super);
+extern IdentityDictionary new_MethodDictionary();
 
 /* ========================================================================= */
 
