@@ -116,6 +116,21 @@ static Optr instantiate_Object(Class class, Array ivars)
     return (Optr)result;
 }
 
+Array instantiate_Array_with(Class class, uns_int base, uns_int extra, ...)
+{
+    Array result   = NEW_ARRAYED(struct Array_t, Optr[base + extra]);
+    HEADER(result) = class;
+    result->size   = extra;
+    va_list args;
+    va_start(args, extra);
+    long index;
+    for (index = 0; index < base + extra; index++) {
+        result->values[index] = va_arg(args, Optr);
+    }
+    va_end(args);
+    return result;
+}
+
 NATIVE1(Object_basicInstantiate_)
     Optr cls    = NATIVE_ARG(0);
     assert_class(cls);
