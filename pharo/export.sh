@@ -5,4 +5,4 @@ DIR=`dirname "$DIR"`;
 cd "$DIR"
 
 
-squeak -vm-display-X11 -headless Pharo-1.0.image $PWD/export.st
+squeak -vm-display-X11 -headless Pharo-1.1.image $PWD/export.st
