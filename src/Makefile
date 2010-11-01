@@ -19,7 +19,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL 
+CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL -03 -04
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -57,17 +57,20 @@ $(TARGET): $(OBJECTS)
 
 
 # ============================================================================
-fast:
-	CFLAGS+="-O3" make
-
-clang:
-	CC=clang CFLAGS+="-O4 -g -fdiagnostics-show-option -DLLVM" make $(TARGET)
-
-
 profile:
 	LDFLAGS+="-pg" CFLAGS+="-pg" make $(TARGET)
 	./$(TARGET) benchmark/fib/fib34.p
 	gprof --flat-profile $(TARGET)
+
+dict-nonative:
+	touch -c 'system/collection/Dictionary.c'
+	touch -c 'system/collection/DictBucket.c' 
+	CFLAGS+="-DDICT_NONATIVE" make $(TARGET)
+
+array-nonative:
+	touch -c 'system/collection/Array.c'
+	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
+	
 
 # ============================================================================
 probes: probes.d
@@ -85,7 +88,7 @@ debug:
 	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
 
 gdb:
-	CFLAGS+="-DNO_EXCEPTION -g" make $(TARGET)
+	CFLAGS+="-O0 -DNO_EXCEPTION -g" make $(TARGET)
 
 # ============================================================================
 tags: $(SOURCES)

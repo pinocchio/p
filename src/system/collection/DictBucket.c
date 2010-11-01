@@ -113,3 +113,11 @@ void post_init_DictBucket()
 {
     change_slot_type(DictBucket_Class, UintSlot_Class, 1, 0);
 }
+
+void late_init_DictBucket()
+{
+#ifdef DICT_NONATIVE
+	// remove all the additional natives from the DICT class
+	Eval_Send0((Optr)DictBucket_Class, new_Symbol(L"removeNatives"));
+#endif
+}

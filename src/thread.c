@@ -51,6 +51,7 @@ void * pinocchio_main_thread(void * argc)
 {
     initialize_Thread();
     init_lib();
+	#include <pinocchioLateInit.ci>
 
     _thread_ = new_Thread(STACK_SIZE);
 

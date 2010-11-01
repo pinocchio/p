@@ -86,3 +86,11 @@ void post_init_Array()
     store_native(natives, L"instVarAt:",     NM_Array_instVarAt_);
     store_native(natives, L"instVarAt:put:", NM_Array_instVarAt_put_);
 }
+
+void late_init_Array()
+{
+#ifdef ARRAY_NONATIVE
+	// remove all the additional natives from the DICT class
+	Eval_Send0((Optr)Array_Class, new_Symbol(L"removeNatives"));
+#endif
+}

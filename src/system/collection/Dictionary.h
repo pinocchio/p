@@ -14,6 +14,7 @@ struct Dictionary_t {
 };
 
 CREATE_INITIALIZERS(Dictionary);
+extern void late_init_Dictionary();
 
 extern Dictionary new_Dictionary();
 

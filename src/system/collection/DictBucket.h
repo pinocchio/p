@@ -12,6 +12,9 @@ struct DictBucket_t {
 };
 
 CREATE_INITIALIZERS(DictBucket);
+
+extern void late_init_DictBucket();
+
 extern DictBucket new_DictBucket_raw(uns_int size);
 extern DictBucket new_DictBucket(uns_int size);
 extern void Bucket_grow(DictBucket * bucketp);

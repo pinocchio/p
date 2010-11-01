@@ -12,7 +12,9 @@ struct Array_t {
 
 extern Array empty_Array;
 
-CREATE_INITIALIZERS(Array)
+CREATE_INITIALIZERS(Array);
+
+extern void late_init_Array();
 
 extern Array new_Array_raw(uns_int c);
 extern Array new_Array(uns_int c, Optr v[]);

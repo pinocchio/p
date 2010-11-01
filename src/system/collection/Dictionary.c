@@ -285,3 +285,12 @@ void post_init_Dictionary()
     store_native(natives, L"includesKey:", NM_Dictionary_includesKey_);
     store_native(natives, L"grow",         NM_Dictionary_grow);
 }
+
+
+void late_init_Dictionary()
+{
+#ifdef DICT_NONATIVE
+	// remove all the additional natives from the DICT class
+	Eval_Send0((Optr)Dictionary_Class, new_Symbol(L"removeNatives"));
+#endif
+}

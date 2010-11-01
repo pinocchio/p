@@ -73,8 +73,17 @@ void NativeMethod_invoke(MethodClosure closure,
 
 /* ========================================================================= */
 
+NATIVE0(NativeMethod_clearNative)
+    ((NativeMethod)self)->native = (native)-1;
+}
+
+/* ========================================================================= */
+
 void post_init_NativeMethod() 
 {
     SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     SMB_pPrimitive_plugin_code_ = new_Symbol(L"pPrimitive:plugin:code:");
+
+    PLUGIN natives = add_plugin(L"AST.NativeMethod");
+    store_native(natives, L"clearNative",      NM_NativeMethod_clearNative);
 }
