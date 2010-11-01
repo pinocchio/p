@@ -27,8 +27,8 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
-	CC	= clang
-#	CFLAGS += -O4
+	CC	= gcc
+	CFLAGS += -O3
 else
 	CFLAGS += -O3
     LDFLAGS +=  -export-dynamic
@@ -82,7 +82,7 @@ array-nonative:
 	
 array-wrapped:
 	touch -c 'system/collection/Array.c'
-	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUB -DPRINT_DISPATCH_TRACE -DARRAY_WRAPPED" make $(TARGET)
+	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
 	
 
 # ============================================================================

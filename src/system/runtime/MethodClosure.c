@@ -40,7 +40,7 @@ static MethodContext activate_method(MethodClosure closure, long argc)
     }
     
     HEADER(context)       = MethodContext_Class;
-    SET_SIZE(context->size, size);
+    SET_SIZE(context, size);
 	context->stacked      = true;
 	context->parent_frame = current_env();
     set_env((Optr)context);

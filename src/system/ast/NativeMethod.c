@@ -25,10 +25,10 @@ NativeMethod new_NativeMethod_with(Array params,
     result->annotations = annotations;
     init_variable_array(result->params, 0);
     init_variable_array(result->locals, GET_SIZE(result->params));
-    result->info = empty_Info;
+    result->info        = empty_Info;
     SET_SIZE(result, statementCount);
-    result->code = threaded;
-    result->native = (native)nil;
+    result->code        = threaded;
+    result->native      = (native)nil;
     COPY_ARGS(statementCount, result->body);
     return result;
 }
@@ -61,7 +61,7 @@ void NativeMethod_invoke(MethodClosure closure,
                               (Optr)SMB_pPrimitive_plugin_code_);
         }
         assert1(annotation, "No primitive annotation found");
-        assert1(GET_SIZE(annotation) == 2 || annotation->size == 3, "Invalid annotation format");
+        assert1(GET_SIZE(annotation) == 2 || GET_SIZE(annotation) == 3, "Invalid annotation format");
         method->native = lookup_native(annotation->arguments[0],
                                        annotation->arguments[1]);
     }
@@ -81,7 +81,7 @@ NATIVE0(NativeMethod_clearNative)
 
 void post_init_NativeMethod() 
 {
-    SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
+    SMB_pPrimitive_plugin_      = new_Symbol(L"pPrimitive:plugin:");
     SMB_pPrimitive_plugin_code_ = new_Symbol(L"pPrimitive:plugin:code:");
 
     PLUGIN natives = add_plugin(L"AST.NativeMethod");

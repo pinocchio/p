@@ -84,7 +84,7 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
     while (scope_id < self->scope_id && (Optr)self->outer_scope != nil) {
         self = self->outer_scope;
     }
-    assert1(scope_id == scope_id, "Failed to locate scope.");
+    //assert1(scope_id == scope_id, "Failed to locate scope.");
     assert1(local_id < GET_SIZE(self), "Variable index out of range");
 
     self->locals[local_id] = value;
