@@ -6,9 +6,22 @@
 /* ========================================================================= */
 
 struct Array_t {
+#ifdef ARRAY_WRAPPED
+	SmallInt size;
+#else //ARRAY_WRAPPED
     uns_int size;
+#endif //ARRAY_WRAPPED
     Optr  values[];
 };
+
+#ifdef ARRAY_WRAPPED
+	ARRAY_SIZE(array) ((Array)(array))->size->value
+	SET_ARRAY_SIZE(array, size) ((Array)(array))->size = new_SmallInt(size)
+#else //ARRAY_WRAPPED
+	ARRAY_SIZE(array) ((Array)(array))->size
+    SET_ARRAY_SIZE(array, size) ((Array)(array))->size = (size)
+#endif //ARRAY_WRAPPED
+
 
 extern Array empty_Array;
 

@@ -31,7 +31,7 @@ Array create_layout_with_vars(Class layout, uns_int size)
 {
     Array result = NEW_ARRAYED(struct Array_t, Optr[size]);
     HEADER(result) = layout;
-    result->size   = size;
+    SET_ARRAY_SIZE(result->size, size);
     return result;
 }
 
@@ -75,9 +75,9 @@ Optr create_array_layout(uns_int size, va_list args)
 
 static Optr instantiate_Array(Class class, Array ivars, uns_int extra)
 {
-    uns_int base = ivars->size;
+    uns_int base = ARRAY_SIZE(ivars);
     Array result = NEW_ARRAYED(struct Array_t, Optr[base+extra]);
-    result->size = extra;
+    SET_ARRAY_SIZE(result, extra);
     uns_int i;
 
     for (i = base; i < base+extra; i++) {
@@ -105,7 +105,7 @@ NATIVE2(Array_basicInstantiate_sized_)
 
 static Optr instantiate_Object(Class class, Array ivars)
 {
-    uns_int size = ivars->size;
+    uns_int size = ARRAY_SIZE(ivars);
     Object result = NEW_ARRAYED(struct Object_t, Optr[size]);
     uns_int i;
     for (i = 0; i < size; i++) {
@@ -120,7 +120,7 @@ Array instantiate_Array_with(Class class, uns_int base, uns_int extra, ...)
 {
     Array result   = NEW_ARRAYED(struct Array_t, Optr[base + extra]);
     HEADER(result) = class;
-    result->size   = extra;
+    SET_ARRAY_SIZE(result, extra);
     va_list args;
     va_start(args, extra);
     long index;

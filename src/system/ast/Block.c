@@ -34,7 +34,7 @@ Block new_Block(uns_int paramCount,
 void init_variable_array(Array array, uns_int local_id)
 {
     uns_int i;
-    for (i = 0; i < array->size; i++) {
+    for (i = 0; i < ARRAY_SIZE(array); i++) {
         ((Variable)array->values[i])->local_id =
             (Optr)new_SmallInt(local_id);
         local_id++;
@@ -48,7 +48,7 @@ Block new_Block_with(Array params, Array locals, Array threaded,
     result->params  = params;
     result->locals  = locals;
     init_variable_array(result->params, 0);
-    init_variable_array(result->locals, result->params->size);
+    init_variable_array(result->locals, ARRAY_SIZE(result->params));
     result->size    = statementCount;
     result->threaded = threaded;
     COPY_ARGS(statementCount, result->body);

@@ -20,8 +20,8 @@ static BlockContext activate_block(BlockClosure closure, long argc)
 {
 	//TODO merge with BlockContext
     Block block          = closure->code;
-    uns_int paramc       = block->params->size;
-    uns_int localc       = block->locals->size;
+    uns_int paramc       = ARRAY_SIZE(block->params);
+    uns_int localc       = ARRAY_SIZE(block->locals);
     uns_int size         = paramc + localc;
 
     BlockContext context = (BlockContext)&PEEK_EXP(argc - 1);
@@ -58,14 +58,14 @@ static BlockContext activate_block(BlockClosure closure, long argc)
 void BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
-    assert1(argc == block->params->size, "Argument count mismatch");
+    assert1(argc == ARRAY_SIZE(block->params), "Argument count mismatch");
 
     if (block->size == 0) { 
         RETURN_FROM_NATIVE(nil);
         return;
     }
 
-    if (block->locals->size == 0 && argc == 0) {
+    if (ARRAY_SIZE(block->locals) == 0 && argc == 0) {
         BlockContext env = current_env();
         POKE_EXP(0, env);
         set_env((Optr)closure->context);
@@ -96,7 +96,7 @@ NATIVE(BlockClosure_apply_)
 }
 
 NATIVE0(BlockClosure_numArgs) 
-    RETURN_FROM_NATIVE(new_SmallInt(((BlockClosure)self)->code->params->size));
+    RETURN_FROM_NATIVE(ARRAY_SIZE(new_SmallInt(((BlockClosure)self)->code->params)));
 }
 
 NATIVE1(BlockClosure_valueWithArguments_)
@@ -104,13 +104,13 @@ NATIVE1(BlockClosure_valueWithArguments_)
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
     long pos = 0;
-    while(pos < args->size) {
+    while(pos < ARRAY_SIZE(args)) {
         PUSH_EXP(args->values[pos]);
         pos++;
     }
     
     BlockClosure closure = (BlockClosure)self;
-    BlockClosure_apply(closure, args->size);
+    BlockClosure_apply(closure, ARRAY_SIZE(args));
 }
 
 /* ========================================================================= */

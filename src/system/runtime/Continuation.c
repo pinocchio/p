@@ -18,17 +18,17 @@ NATIVE1(Continuation_continue_)
     Optr * ds = tget(Double_Stack);
     Optr arg  = NATIVE_ARG(0);
     // restore the stack
-    tset(_EXP_, cont->exp_stack->size + (&ds[-1]));
-    tset(_CNT_, (threaded**)(&ds[STACK_SIZE]) - cont->cnt_stack->size);
+    tset(_EXP_, ARRAY_SIZE(cont->exp_stack) + (&ds[-1]));
+    tset(_CNT_, (threaded**)(&ds[STACK_SIZE]) - ARRAY_SIZE(cont->cnt_stack));
 
     int i;
-    for (i = 0; i < cont->exp_stack->size; i++) {
+    for (i = 0; i < ARRAY_SIZE(cont->exp_stack); i++) {
         ds[i] = cont->exp_stack->values[i];
     }
 
     ds = (Optr *)tget(_CNT_);
     
-    for (i = 0; i < cont->cnt_stack->size; i++) {
+    for (i = 0; i < ARRAY_SIZE(cont->cnt_stack); i++) {
         ds[i] = cont->cnt_stack->values[i];
     }
 

@@ -62,14 +62,25 @@ profile:
 	./$(TARGET) benchmark/fib/fib34.p
 	gprof --flat-profile $(TARGET)
 
+dict-nn:
+	make dict-nonative
+	
 dict-nonative:
 	touch -c 'system/collection/Dictionary.c'
 	touch -c 'system/collection/DictBucket.c' 
-	CFLAGS+="-DDICT_NONATIVE" make $(TARGET)
+	touch -c 'system/class/Class.c'
+	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUG -DDICT_NONATIVE -DPRINT_DISPATCH_TRACE" make $(TARGET)
 
+array-nn:
+	make array-nonativgdb ./pe
+	
 array-nonative:
 	touch -c 'system/collection/Array.c'
 	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
+	
+array-wrapped:
+	touch -c 'system/collection/Array.c'
+	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
 	
 
 # ============================================================================

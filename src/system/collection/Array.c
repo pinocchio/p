@@ -15,7 +15,7 @@ Array new_Array_raw(uns_int c)
     if (c == 0) { return empty_Array; }
     Array result   = NEW_ARRAYED(struct Array_t, Optr[c]);
     HEADER(result) = Array_Class;
-    result->size   = c;
+    SET_ARRAY_SIZE(result, c)
     return result;
 }
 

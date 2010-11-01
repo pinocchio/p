@@ -37,7 +37,7 @@ extern Optr file_layout;
     assert0(TAG_IS_LAYOUT(tag, layout));
 
 #define TAG_SIZE(tag)\
-    (((Array)tag)->size)
+    ARRAY_SIZE(tag)
 
 #define TAG_VAR(tag, index)\
     (((Array)tag)->values[index])

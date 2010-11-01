@@ -82,7 +82,7 @@ IdentityDictionary functions;
 NATIVE1(Interpretation_Threaded_compileNatively_)
     Array array = (Array)NATIVE_ARG(0);
     int i;
-    for (i=0; i<array->size; i++) {
+    for (i=0; i<ARRAY_SIZE(array); i++) {
         Optr object = array->values[i];
         if (HEADER(object) == Kernel_Threading_FunctionPointer_Class) {
             Optr fp = IdentityDictionary_lookup(functions, ((Object)object)->ivals[0]);
@@ -726,7 +726,7 @@ OPCODE(dict_grow)
     uns_int idx     = (uns_int)PEEK_EXP(3);
     Array old       = (Array)PEEK_EXP(4);
 
-    if (idx == old->size) {
+    if (idx == ARRAY_SIZE(old)) {
         ZAPN_EXP(5);
         t_return();
         return;

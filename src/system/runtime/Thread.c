@@ -15,7 +15,7 @@ void reset_thread(Thread thread)
     thread->_CNT_            = (threaded**)&thread->Double_Stack[thread->size];
     thread->_ENV_            = nil;
     thread->next_interpreter = nil;
-    thread->storage          = new_IdentityDictionary();
+    thread->storage          = (Optr)new_IdentityDictionary();
 }
 
 Thread new_Thread(uns_int size)
@@ -72,11 +72,11 @@ NATIVE1(Thread_new_)
 time_t start_sleep_time;
 
 NATIVE1(Thread_sleep_)
-    Optr value = NATIVE_ARG(0);
+	/*Optr value = NATIVE_ARG(0);
     start_sleep_time = time(NULL);
 
     time_t now = time(NULL);
-    /*if (now - start_sleep_time > unwrap_int(value)) {
+    if (now - start_sleep_time > unwrap_int(value)) {
         RETURN_FROM_NATIVE(nil);
     }
     else

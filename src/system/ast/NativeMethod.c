@@ -24,7 +24,7 @@ NativeMethod new_NativeMethod_with(Array params,
     result->package     = nil;
     result->annotations = annotations;
     init_variable_array(result->params, 0);
-    init_variable_array(result->locals, result->params->size);
+    init_variable_array(result->locals, ARRAY_SIZE(result->params));
     result->info = empty_Info;
     result->size = statementCount;
     result->code = threaded;
