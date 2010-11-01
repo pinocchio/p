@@ -19,7 +19,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL -03 -04
+CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -28,7 +28,9 @@ ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 	CC	= clang
+#	CFLAGS += -O4
 else
+	CFLAGS += -O3
     LDFLAGS +=  -export-dynamic
 endif
 # ============================================================================
@@ -53,7 +55,7 @@ GITVERSION:
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
-	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 
 # ============================================================================
@@ -69,18 +71,18 @@ dict-nonative:
 	touch -c 'system/collection/Dictionary.c'
 	touch -c 'system/collection/DictBucket.c' 
 	touch -c 'system/class/Class.c'
-	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUG -DDICT_NONATIVE -DPRINT_DISPATCH_TRACE" make $(TARGET)
+	CFLAGS+="-g -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE -DDICT_NONATIVE" make $(TARGET)
 
 array-nn:
-	make array-nonativgdb ./pe
+	make array-nonative
 	
 array-nonative:
 	touch -c 'system/collection/Array.c'
-	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
+	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUB -DPRINT_DISPATCH_TRACE -DARRAY_NONATIVE" make $(TARGET)
 	
 array-wrapped:
 	touch -c 'system/collection/Array.c'
-	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
+	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUB -DPRINT_DISPATCH_TRACE -DARRAY_WRAPPED" make $(TARGET)
 	
 
 # ============================================================================

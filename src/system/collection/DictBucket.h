@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct DictBucket_t {
-    uns_int size;
+    ARRAY_SIZE_TYPE;
     uns_int tally;
     Optr  values[];
 };

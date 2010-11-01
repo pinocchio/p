@@ -51,7 +51,7 @@ NATIVE0(Object_size)
     Optr tag = GETTAG(self);
     uns_int size;
     if (TAG_IS_LAYOUT(tag, Array)) {
-        size = ARRAY_SIZE(self);
+        size = GET_SIZE(self);
     } else if (TAG_IS_LAYOUT(tag, Words)) {
         size = ((Symbol)self)->size;
     } else {
@@ -63,7 +63,7 @@ NATIVE0(Object_size)
 
 Optr raw_Array_at(Array array, Optr tag, long index)
 {
-    assert1(ARRAY_SIZE(array) > index, "Trying to read past end");
+    assert1(GET_SIZE(array) > index, "Trying to read past end");
     assert1(0 <= index, "Trying to read before start");
     return array->values[TAG_SIZE(tag) + index];
 }
@@ -83,7 +83,7 @@ void raw_Array_at_put(Array array, Optr tag,
                            long index, Optr value)
 {
     assert1(0 <= index, "Trying to write before start");
-    assert1(ARRAY_SIZE(array) > index, "Trying to write past end");
+    assert1(GET_SIZE(array) > index, "Trying to write past end");
     array->values[TAG_SIZE(tag) + index] = value;
 }
 

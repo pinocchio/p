@@ -21,7 +21,7 @@ void reset_thread(Thread thread)
 Thread new_Thread(uns_int size)
 {
     NEW_ARRAY_OBJECT(Thread, Optr[size]);
-    result->size  = size;
+    SET_SIZE(result, size);
     reset_thread(result);
     return result;
 }

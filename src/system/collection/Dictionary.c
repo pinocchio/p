@@ -37,13 +37,13 @@ static long get_hash(Dictionary self, Optr key)
         // make the compiler happy :)
         return 0;
     }
-    hash %= self->data->size;
+    hash %= GET_SIZE(self->data);
     return hash;
 }
 
 long unwrap_hash(Dictionary self, Optr w_hash)
 {
-    return unwrap_int(w_hash) % self->data->size;
+    return unwrap_int(w_hash) % GET_SIZE(self->data);
 }
 
 DictBucket * get_bucketp(Dictionary dictionary, long hash)
@@ -58,10 +58,10 @@ DictBucket * get_bucketp(Dictionary dictionary, long hash)
 long Dictionary_grow_check(Dictionary self)
 {
     self->size++;
-    if (self->data->size == 1) {
+    if (GET_SIZE(self->data) == 1) {
         return self->size == unwrap_int((Optr)self->maxLinear);
     }
-    uns_int size = self->data->size;
+    uns_int size = GET_SIZE(self->data);
     return (100 * self->size) / size > unwrap_int((Optr)self->ratio);
 }
 
@@ -105,7 +105,7 @@ void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
 {
     if ((Optr)*bucketp == nil) {
         *bucketp = new_bucket();
-    } else if ((*bucketp)->tally == (*bucketp)->size) {
+    } else if ((*bucketp)->tally == GET_SIZE(*bucketp)) {
         Bucket_grow(bucketp);
     }
 
@@ -121,14 +121,15 @@ static void Dictionary_quick_check_grow(Dictionary self)
     if (!Dictionary_grow_check(self)) { return; }
 
     Array old = self->data;
-    if (old->size == 1) {
+    uns_int size = GET_SIZE(old);
+    if (size == 1) {
         self->data = new_Array_withAll(32, nil);
         self->linear = false;
     } else {
-        self->data = new_Array_withAll(old->size << 1, nil);
+        self->data = new_Array_withAll(size << 1, nil);
     }
     uns_int i;
-    for (i = 0; i < old->size; i++) {
+    for (i = 0; i < size; i++) {
         DictBucket bucket = (DictBucket)old->values[i];
         if (bucket == (DictBucket)nil) { continue; }
         self->data->values[i] = (Optr)bucket;
@@ -189,15 +190,16 @@ NNATIVE(Dictionary_grow, 2,
 void Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
-    if (old->size == 1) {
+    uns_int size = GET_SIZE(old);
+    if (size == 1) {
         self->data = new_Array_withAll(32, (Optr)nil);
         self->linear = false;
     } else {
-        self->data = new_Array_withAll(old->size << 1, (Optr)nil);
+        self->data = new_Array_withAll(size << 1, (Optr)nil);
     }
 
     uns_int i = 0;
-    for (i = 0; i < old->size; i++) {
+    for (i = 0; i < size; i++) {
         self->data->values[i] = old->values[i];
     }
     

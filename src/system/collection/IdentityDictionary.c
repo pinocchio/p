@@ -29,7 +29,7 @@ static long get_identity_hash(IdentityDictionary self, Optr key)
     } else {
         hash = ((uns_int)key) >> 3;
     }
-    hash %= ARRAY_SIZE(self->data);
+    hash %= GET_SIZE(self->data);
     return hash;
 }
 
@@ -56,14 +56,14 @@ static void IdentityDictionary_check_grow(IdentityDictionary self)
     if (!Dictionary_grow_check((Dictionary)self)) { return; }
 
     Array old = self->data;
-    if (ARRAY_SIZE(old) == 1) {
+    if (GET_SIZE(old) == 1) {
         self->data = new_Array_withAll(32, nil);
         self->linear = false;
     } else {
-        self->data = new_Array_withAll(ARRAY_SIZE(old) << 1, nil);
+        self->data = new_Array_withAll(GET_SIZE(old) << 1, nil);
     }
     uns_int i;
-    for (i = 0; i < ARRAY_SIZE(old); i++) {
+    for (i = 0; i < GET_SIZE(old); i++) {
         DictBucket bucket = (DictBucket)old->values[i];
         if (bucket == (DictBucket)nil) { continue; }
         self->data->values[i] = (Optr)bucket;
@@ -100,7 +100,7 @@ long IdentityBucket_store(DictBucket * bucketp, Optr key, Optr value)
         }
     }
 
-    if (tally == bucket->size) {
+    if (tally == GET_SIZE(bucket)) {
         Bucket_grow(bucketp);
         bucket = *bucketp;
     }

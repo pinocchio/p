@@ -69,7 +69,7 @@ void block_return_value(Optr value)
 
 void method_return_value(Optr value)
 {
-    uns_int size = current_env()->size;
+    uns_int size = GET_SIZE(current_env());
     restore_env();
     ZAPN_EXP(CONTEXT_SIZE + size);
     POKE_EXP(0, value);
@@ -82,7 +82,7 @@ IdentityDictionary functions;
 NATIVE1(Interpretation_Threaded_compileNatively_)
     Array array = (Array)NATIVE_ARG(0);
     int i;
-    for (i=0; i<ARRAY_SIZE(array); i++) {
+    for (i=0; i<GET_SIZE(array); i++) {
         Optr object = array->values[i];
         if (HEADER(object) == Kernel_Threading_FunctionPointer_Class) {
             Optr fp = IdentityDictionary_lookup(functions, ((Object)object)->ivals[0]);
@@ -400,7 +400,7 @@ END_OPCODE
 /* ========================================================================= */
 
 OPCODE(method_return)
-    uns_int size = current_env()->size;
+    uns_int size = GET_SIZE(current_env());
     restore_env();
     Optr result = PEEK_EXP(0);
     ZAPN_EXP(CONTEXT_SIZE + size + 1);
@@ -448,7 +448,7 @@ SEND(5)
 OPCODE(sendn)
     Send send = (Send)get_code(pc + 1);
     pc += 2;
-	uns_int n = send->size;
+	uns_int n = GET_SIZE(send);
     Optr self = PEEK_EXP(n);    
     Class_normal_dispatch(self, send, n);
 END_OPCODE
@@ -610,7 +610,7 @@ OPCODE(supern)
 	Super super = (Super)get_code(pc + 1);
     pc += 2;
 	PUSH_EXP(super);
-	PUSH_EXP(super->size);
+	PUSH_EXP(GET_SIZE(super));
     Super_eval_threaded();
 END_OPCODE
 
@@ -726,7 +726,7 @@ OPCODE(dict_grow)
     uns_int idx     = (uns_int)PEEK_EXP(3);
     Array old       = (Array)PEEK_EXP(4);
 
-    if (idx == ARRAY_SIZE(old)) {
+    if (idx == GET_SIZE(old)) {
         ZAPN_EXP(5);
         t_return();
         return;

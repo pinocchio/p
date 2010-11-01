@@ -56,7 +56,7 @@ Class new_Bootstrapping_Class()
 Class new_Class(Class superclass, Optr metatype)
 {    
     ASSERT_TAG_LAYOUT(metatype, Object);
-    uns_int meta_size = ((Array)metatype)->size;
+    uns_int meta_size = GET_SIZE(metatype);
     assert0(meta_size >= 4); // we need at least place for
                              // methods, super, layout and instance.
 
@@ -208,10 +208,11 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
                                          Optr msg, Array args)
 {
     long idx;
+    uns_int arg_size = GET_SIZE(args);
     
     if (_thread_->next_interpreter != nil) {
-        Message message = new_Message((Optr)msg, args->size);
-        for (idx = 0; idx < args->size; idx++) {
+        Message message = new_Message((Optr)msg, arg_size);
+        for (idx = 0; idx < arg_size; idx++) {
             message->arguments[idx] = args->values[idx];
         }
         Optr next_interpreter = _thread_->next_interpreter;
@@ -223,10 +224,10 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
             (Optr)message, self, (Optr)class);
     } else {
         PUSH_EXP(self);
-        for (idx = 0; idx < args->size; idx++) {
+        for (idx = 0; idx < arg_size; idx++) {
             PUSH_EXP(args->values[idx]);
         }
-        Class_do_dispatch(self, class, msg, args->size, T_Class_direct_dispatch);
+        Class_do_dispatch(self, class, msg, arg_size, T_Class_direct_dispatch);
     }
 }
 

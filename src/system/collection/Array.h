@@ -6,21 +6,19 @@
 /* ========================================================================= */
 
 #ifdef ARRAY_WRAPPED
-    #define ARRAY_SIZE(array) ((Array)(array))->size->value
-    #define SET_ARRAY_SIZE(array, size) ((Array)(array))->size = new_SmallInt(value)
+    #define GET_SIZE(array) ((Array)(array))->size->value
+    #define SET_SIZE(array, value) ((Array)array)->size = new_SmallInt(value)
+    #define ARRAY_SIZE_TYPE SmallInt size
 #else //ARRAY_WRAPPED
-    #define ARRAY_SIZE(array) ((Array)(array))->size
-    #define SET_ARRAY_SIZE(array, value) ((Array)(array))->size = (value)
+    #define GET_SIZE(array) ((Array)(array))->size
+    #define SET_SIZE(array, value) ((Array)array)->size = (value)
+    #define ARRAY_SIZE_TYPE uns_int size
 #endif //ARRAY_WRAPPED
 
 /* ========================================================================= */
 
 struct Array_t {
-#ifdef ARRAY_WRAPPED
-	SmallInt size;
-#else //ARRAY_WRAPPED
-    uns_int size;
-#endif //ARRAY_WRAPPED
+    ARRAY_SIZE_TYPE;
     Optr  values[];
 };
 

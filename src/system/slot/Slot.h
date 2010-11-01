@@ -20,6 +20,8 @@ extern Slot new_Slot(uns_int index, const wchar_t * name);
 extern void Slot_eval(Slot var);
 extern void Slot_assign(Slot var, Optr value);
 
+extern void Object_instVarAt_put_(Optr self, long index, Optr value);
+
 /* ========================================================================= */
 
 #endif // SLOT_SLOT_H

@@ -3,8 +3,7 @@
 #include <stdarg.h>
 #include <pinocchio.h>
 /* ========================================================================= */
-DECLARE_CLASS(Array)
-;
+DECLARE_CLASS(Array);
 Array empty_Array;
 
 /* ========================================================================= */
@@ -17,7 +16,7 @@ Array new_Array_raw(uns_int c)
     }
     Array result = NEW_ARRAYED(struct Array_t, Optr[c]);
     HEADER(result) = Array_Class;
-    SET_ARRAY_SIZE(result, c);
+    SET_SIZE(result, c);
     return result;
 }
 

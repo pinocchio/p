@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Super_t {
-    uns_int size;
+    ARRAY_SIZE_TYPE;
     Array   cache;
     Symbol  message; 
     Optr    arguments[];

@@ -8,7 +8,7 @@
 /* ========================================================================= */
 
 struct ReflectionMethod_t {
-    uns_int size;
+    ARRAY_SIZE_TYPE;
     Array   params;
     Array   locals;
     Optr    package;

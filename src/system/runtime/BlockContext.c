@@ -26,7 +26,7 @@ BlockContext capture_current_env()
     if (context->stacked == false) {
 		return context;
     }
-    uns_int size   = context->size;
+    uns_int size   = GET_SIZE(context);
     target         = optain_context(size);
     HEADER(target) = HEADER(context);
     size          += CONTEXT_SIZE;
@@ -73,7 +73,7 @@ Optr BlockContext_lookup(BlockContext self, uns_int local_id, uns_int scope_id)
         self = self->outer_scope;
     }
     assert1(scope_id == self->scope_id, "Failed to locate scope.");
-    assert1(local_id < self->size, "Variable index out of range");
+    assert1(local_id < GET_SIZE(self), "Variable index out of range");
 
     return self->locals[local_id];
 }
@@ -85,7 +85,7 @@ void BlockContext_assign(BlockContext self, uns_int local_id,
         self = self->outer_scope;
     }
     assert1(scope_id == scope_id, "Failed to locate scope.");
-    assert1(local_id < self->size, "Variable index out of range");
+    assert1(local_id < GET_SIZE(self), "Variable index out of range");
 
     self->locals[local_id] = value;
 }

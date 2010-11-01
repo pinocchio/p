@@ -16,7 +16,7 @@ Array new_InlineCache()
 Optr InlineCache_lookup(Array cache, Optr class)
 {
     int i;
-    for (i = 0; i < ARRAY_SIZE(cache); i += 2) {
+    for (i = 0; i < GET_SIZE(cache); i += 2) {
         if (cache->values[i] == class) {
             return cache->values[i+1];
         }
@@ -27,7 +27,7 @@ Optr InlineCache_lookup(Array cache, Optr class)
 void InlineCache_store(Array cache, Optr class, Optr method)
 {
     int i;
-    for (i = 0; i < ARRAY_SIZE(cache); i += 2) {
+    for (i = 0; i < GET_SIZE(cache); i += 2) {
         if (cache->values[i] == nil) {
             cache->values[i]    = class;
             cache->values[i+1]  = method;

@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Block_t {
-    uns_int size;
+    ARRAY_SIZE_TYPE;
     Array   params;
     Array   locals;
 	Array   threaded;

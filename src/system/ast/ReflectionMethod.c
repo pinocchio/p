@@ -24,13 +24,13 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
     result->package = nil;
     result->annotations = annotations;
     long i;
-    for (i = 0; i < ARRAY_SIZE(annotations); i++) {
+    for (i = 0; i < GET_SIZE(annotations); i++) {
         assert1(annotations->values[i], "Empty annotation found..?");
     }
     init_variable_array(result->params, 0);
-    init_variable_array(result->locals, ARRAY_SIZE(result->params));
+    init_variable_array(result->locals, GET_SIZE(result->params));
     result->info   = empty_Info;
-    result->size   = statementCount;
+    SET_SIZE(result, statementCount);
     result->code   = threaded;
 	result->native = (native)nil;
     COPY_ARGS(statementCount, result->body);
@@ -48,7 +48,7 @@ void ReflectionMethod_invoke(MethodClosure closure,
             lookup_annotation(method->annotations, 
                               (Optr)SMB_pinocchioReflective_);
         assert1(annotation, "No reflection annotation found");
-        assert1(annotation->size == 1, "Invalid annotation format");
+        assert1(GET_SIZE(annotation) == 1, "Invalid annotation format");
         method->native =
             (native)lookup_native(annotation->arguments[0],
                                   (Optr)SMB_Reflection_Reflection);

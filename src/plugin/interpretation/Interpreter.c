@@ -17,7 +17,8 @@ NATIVE(Interpreter_invokeNative)
     PUSH_EXP(receiver);
 
     uns_int i;
-    for (i = 0; i < message->size; i++) {
+    uns_int message_size = GET_SIZE(message);
+    for (i = 0; i < message_size; i++) {
         PUSH_EXP(message->arguments[i]);
     }
    
@@ -25,7 +26,7 @@ NATIVE(Interpreter_invokeNative)
         method,
         (NativeMethod)method->code,
         receiver,
-        message->size);
+        message_size);
 }
 
 // ============================================================================

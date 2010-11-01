@@ -12,8 +12,7 @@ Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc) {
     result->receiver = receiver;
     result->message  = msg;
     result->cache    = new_InlineCache();
-
-    result->size     = argc;
+    SET_SIZE(result, argc);
     return result;
 }
 

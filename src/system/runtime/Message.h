@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Message_t {
-    uns_int size;
+    ARRAY_SIZE_TYPE;
     Symbol 	selector;
     Optr    arguments[];
 };

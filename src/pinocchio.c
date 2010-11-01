@@ -228,7 +228,7 @@ static void bootstrap()
     INIT_CLASS(WordsLayout);
 
     empty_Array          = NEW_t(Array);
-    empty_Array->size    = 0;
+    SET_SIZE(empty_Array, 0);
     HEADER(empty_Array)  = Array_Class;
 
     empty_array_layout  = (Optr)create_layout_with_vars(ArrayLayout_Class, 0);

@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct MethodContext_t {
-    uns_int                 size;
+    ARRAY_SIZE_TYPE;
     uns_int                 scope_id;
     Optr                    stacked;
     MethodClosure           closure;

@@ -24,9 +24,9 @@ NativeMethod new_NativeMethod_with(Array params,
     result->package     = nil;
     result->annotations = annotations;
     init_variable_array(result->params, 0);
-    init_variable_array(result->locals, ARRAY_SIZE(result->params));
+    init_variable_array(result->locals, GET_SIZE(result->params));
     result->info = empty_Info;
-    result->size = statementCount;
+    SET_SIZE(result, statementCount);
     result->code = threaded;
     result->native = (native)nil;
     COPY_ARGS(statementCount, result->body);
@@ -61,7 +61,7 @@ void NativeMethod_invoke(MethodClosure closure,
                               (Optr)SMB_pPrimitive_plugin_code_);
         }
         assert1(annotation, "No primitive annotation found");
-        assert1(annotation->size == 2 || annotation->size == 3, "Invalid annotation format");
+        assert1(GET_SIZE(annotation) == 2 || annotation->size == 3, "Invalid annotation format");
         method->native = lookup_native(annotation->arguments[0],
                                        annotation->arguments[1]);
     }

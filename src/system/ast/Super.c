@@ -13,7 +13,7 @@ Super new_Super(Symbol message, uns_int argc, ...)
     NEW_ARRAY_OBJECT(Super, Optr[argc]);
     result->message = message;
     result->cache   = new_InlineCache();
-    result->size    = argc;
+    SET_SIZE(result, argc);
 
     va_list args;
     va_start(args, argc);
