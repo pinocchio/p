@@ -31,7 +31,7 @@ Array create_layout_with_vars(Class layout, uns_int size)
 {
     Array result = NEW_ARRAYED(struct Array_t, Optr[size]);
     HEADER(result) = layout;
-    SET_ARRAY_SIZE(result->size, size);
+    SET_ARRAY_SIZE(result, size);
     return result;
 }
 

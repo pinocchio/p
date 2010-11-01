@@ -5,6 +5,16 @@
 
 /* ========================================================================= */
 
+#ifdef ARRAY_WRAPPED
+    #define ARRAY_SIZE(array) ((Array)(array))->size->value
+    #define SET_ARRAY_SIZE(array, size) ((Array)(array))->size = new_SmallInt(value)
+#else //ARRAY_WRAPPED
+    #define ARRAY_SIZE(array) ((Array)(array))->size
+    #define SET_ARRAY_SIZE(array, value) ((Array)(array))->size = (value)
+#endif //ARRAY_WRAPPED
+
+/* ========================================================================= */
+
 struct Array_t {
 #ifdef ARRAY_WRAPPED
 	SmallInt size;
@@ -13,15 +23,6 @@ struct Array_t {
 #endif //ARRAY_WRAPPED
     Optr  values[];
 };
-
-#ifdef ARRAY_WRAPPED
-	ARRAY_SIZE(array) ((Array)(array))->size->value
-	SET_ARRAY_SIZE(array, size) ((Array)(array))->size = new_SmallInt(size)
-#else //ARRAY_WRAPPED
-	ARRAY_SIZE(array) ((Array)(array))->size
-    SET_ARRAY_SIZE(array, size) ((Array)(array))->size = (size)
-#endif //ARRAY_WRAPPED
-
 
 extern Array empty_Array;
 

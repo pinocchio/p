@@ -24,7 +24,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
     result->package = nil;
     result->annotations = annotations;
     long i;
-    for (i = 0; i < ARRAY_SIZE(annotations->size); i++) {
+    for (i = 0; i < ARRAY_SIZE(annotations); i++) {
         assert1(annotations->values[i], "Empty annotation found..?");
     }
     init_variable_array(result->params, 0);
