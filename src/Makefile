@@ -64,24 +64,30 @@ profile:
 	./$(TARGET) benchmark/fib/fib34.p
 	gprof --flat-profile $(TARGET)
 
+# ============================================================================
+
+touch-benchmark-files:
+	touch -c 'system/class/Class.c'
+	touch -c 'system/collection/Dictionary.c'
+	touch -c 'system/collection/DictBucket.c' 
+	touch -c 'system/collection/Array.c'
+
 dict-nn:
 	make dict-nonative
 	
 dict-nonative:
-	touch -c 'system/collection/Dictionary.c'
-	touch -c 'system/collection/DictBucket.c' 
-	touch -c 'system/class/Class.c'
-	CFLAGS+="-g -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE -DDICT_NONATIVE" make $(TARGET)
+	make touch-benchmark-files
+	CFLAGS+="-DDICT_NONATIVE" make $(TARGET)
 
 array-nn:
 	make array-nonative
 	
 array-nonative:
-	touch -c 'system/collection/Array.c'
-	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUB -DPRINT_DISPATCH_TRACE -DARRAY_NONATIVE" make $(TARGET)
+	make touch-benchmark-files
+	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
 	
 array-wrapped:
-	touch -c 'system/collection/Array.c'
+	make clean
 	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
 	
 
