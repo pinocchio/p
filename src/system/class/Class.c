@@ -264,9 +264,9 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
-    Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method         = String_concat_(method, (String)msg);
-    LOG("%ls (%p)\n", method->value, self);
+    String method_name  = String_concat_((String)clsname, new_String(L">>"));
+    method_name         = String_concat_(method_name, (String)msg);
+    LOG("%ls (%p)\n", method_name->value, self);
     #endif // PRINT_DISPATCH_TRACE
     
     DT(MESSAGE, unicode_to_ascii(clsname->value), 
@@ -307,9 +307,9 @@ void Class_normal_dispatch(Optr self, Send send, uns_int argc)
     assert0(msg != nil);
 
     #ifdef PRINT_DISPATCH_TRACE
-    Symbol method  = String_concat_(clsname, new_String(L">>"));
-    method         = String_concat_(method, (String)msg);
-    LOG("%ls (%p)\n", method->value, self);
+    String method_name  = String_concat_((String)clsname, new_String(L">>"));
+    method_name         = String_concat_(method_name, (String)msg);
+    LOG("%ls (%p)\n", method_name->value, self);
     #endif // PRINT_DISPATCH_TRACE
 
     PUSH_EXP(send);
