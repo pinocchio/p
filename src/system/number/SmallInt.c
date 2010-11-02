@@ -21,9 +21,9 @@ SmallInt raw_SmallInt(long value)
 
 SmallInt new_SmallInt(long value)
 {
-    if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
-        return SmallInt_cache[value];
-    }
+//    if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
+//        return SmallInt_cache[value];
+//    }
     return raw_SmallInt(value);
 }
 

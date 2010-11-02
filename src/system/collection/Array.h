@@ -7,11 +7,11 @@
 
 #ifdef ARRAY_WRAPPED
     #define GET_SIZE(array) ((Array)(array))->size->value
-    #define SET_SIZE(array, value) ((Array)array)->size = new_SmallInt(value)
+    #define SET_SIZE(array, value) ((Array)array)->size = new_SmallInt(value);
     #define ARRAY_SIZE_TYPE SmallInt size
 #else //ARRAY_WRAPPED
     #define GET_SIZE(array) ((Array)(array))->size
-    #define SET_SIZE(array, value) ((Array)array)->size = (value)
+    #define SET_SIZE(array, value) ((Array)array)->size = (value);
     #define ARRAY_SIZE_TYPE uns_int size
 #endif //ARRAY_WRAPPED
 

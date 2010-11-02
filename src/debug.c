@@ -104,7 +104,8 @@ void print_Symbol(FILE* stream, Optr s)
 
 uns_int nrsends()
 {
-    uns_int size = EXP_SIZE();
+    return 1;
+    /*uns_int size = EXP_SIZE();
     uns_int cur = 0;
     uns_int nr = 0;
     while (cur < size) {
@@ -113,7 +114,7 @@ uns_int nrsends()
             nr++;
         }
     }
-    return nr;
+    return nr;*/
 }
 
 void sends()

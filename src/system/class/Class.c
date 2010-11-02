@@ -234,18 +234,19 @@ void Class_direct_dispatch_withArguments(Optr self, Class class,
 void Class_dispatch(Optr self, Class class, uns_int argc)
 {
     Send send   = (Send)PEEK_EXP(0);
-    Array cache = send->cache;
     
-    #if defined PRINT_DISPATCH_TRACE || DTRACE
+#if defined PRINT_DISPATCH_TRACE || DTRACE
     Symbol clsname;
     if (HEADER(class) != metaclass) {
         clsname = class->name;
     } else {
         clsname = ((Class)self)->name;
     }
-    #endif // PRINT_DISPATCH_TRACE || DTRACE
+#endif // PRINT_DISPATCH_TRACE || DTRACE
     
+#ifndef NO_IC
     // TODO properly initialize the inlinecache when creating new sends
+    Array cache = send->cache;
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
         if (method) {
@@ -259,16 +260,17 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
     } else {
         send->cache = new_InlineCache();
     }
+#endif //NO_IC
     assert_class((Optr)class);
     
     Optr msg = (Optr)send->message;
     assert0(msg != nil);
 
-    #ifdef PRINT_DISPATCH_TRACE
+#ifdef PRINT_DISPATCH_TRACE
     String method_name  = String_concat_((String)clsname, new_String(L">>"));
     method_name         = String_concat_(method_name, (String)msg);
     LOG("%ls (%p)\n", method_name->value, self);
-    #endif // PRINT_DISPATCH_TRACE
+#endif // PRINT_DISPATCH_TRACE
     
     DT(MESSAGE, unicode_to_ascii(clsname->value), 
                 unicode_to_ascii(send->message->value));
@@ -278,17 +280,18 @@ void Class_dispatch(Optr self, Class class, uns_int argc)
 void Class_normal_dispatch(Optr self, Send send, uns_int argc)
 {
     Class class = HEADER(self);
-    Array cache = send->cache;
     
-    #if defined PRINT_DISPATCH_TRACE || DTRACE
+#if defined PRINT_DISPATCH_TRACE || DTRACE
     Symbol clsname;
     if (HEADER(class) != metaclass) {
         clsname = class->name;
     } else {
         clsname = ((Class)self)->name;
     }
-    #endif // PRINT_DISPATCH_TRACE || DTRACE
+#endif // PRINT_DISPATCH_TRACE || DTRACE
     
+#ifndef NO_IC
+    Array cache = send->cache;
     // TODO properly initialize the inlinecache when creating new sends
     if ((Optr)cache != nil) {
         Optr method = InlineCache_lookup(cache, (Optr)class);
@@ -302,16 +305,17 @@ void Class_normal_dispatch(Optr self, Send send, uns_int argc)
     } else {
         send->cache = new_InlineCache();
     }
+#endif //NO_IC
     assert_class((Optr)class);
     
     Optr msg = (Optr)send->message;
     assert0(msg != nil);
 
-    #ifdef PRINT_DISPATCH_TRACE
+#ifdef PRINT_DISPATCH_TRACE
     String method_name  = String_concat_((String)clsname, new_String(L">>"));
     method_name         = String_concat_(method_name, (String)msg);
     LOG("%ls (%p)\n", method_name->value, self);
-    #endif // PRINT_DISPATCH_TRACE
+#endif // PRINT_DISPATCH_TRACE
 
     PUSH_EXP(send);
     DT(MESSAGE, unicode_to_ascii(clsname->value), 

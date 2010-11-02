@@ -635,8 +635,10 @@ OPCODE(class_cache_invoke)
         return does_not_understand(self, class, msg, argc);
     }
     Send send   = (Send)PEEK_EXP(6);
+#ifndef NO_IC
     Array cache = send->cache;
     InlineCache_store(cache, (Optr)class, method);
+#endif //NO_IC
     ZAPN_EXP(7);
     return invoke(method, self, argc);
 END_OPCODE

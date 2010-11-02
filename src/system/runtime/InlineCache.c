@@ -15,17 +15,33 @@ Array new_InlineCache()
 
 Optr InlineCache_lookup(Array cache, Optr class)
 {
+#ifndef NO_IC
+    #ifdef NO_PIC
+    if (cache->values[0] == class) {
+        return cache->values[1];
+    }
+    #else //NO_PIC
     int i;
     for (i = 0; i < GET_SIZE(cache); i += 2) {
         if (cache->values[i] == class) {
             return cache->values[i+1];
         }
     }
+    #endif // NO_PIC
+#endif //NO_IC
     return NULL;
 }
 
 void InlineCache_store(Array cache, Optr class, Optr method)
 {
+#ifndef NO_IC
+    #ifdef NO_PIC
+    if (cache->values[0] == nil) {
+        cache->values[0]    = class;
+        cache->values[1]  = method;
+        return;
+     }
+    #else // NO_PIC
     int i;
     for (i = 0; i < GET_SIZE(cache); i += 2) {
         if (cache->values[i] == nil) {
@@ -34,6 +50,9 @@ void InlineCache_store(Array cache, Optr class, Optr method)
             return;
         }
     }
+    #endif // NO_PIC
+#endif //NO_IC
+    return;
 }
 
 /* ========================================================================= */

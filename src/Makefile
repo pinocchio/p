@@ -1,3 +1,4 @@
+
 SHELL        = /bin/bash
 PHAROVERSION = `cat lib/VERSION`
 GITVERSION   = `cat GITVERSION`
@@ -71,6 +72,9 @@ touch-benchmark-files:
 	touch -c 'system/collection/Dictionary.c'
 	touch -c 'system/collection/DictBucket.c' 
 	touch -c 'system/collection/Array.c'
+	touch -c 'system/runtime/InlineCache.c'
+	touch -c 'system/interpretation/Threaded.c'
+
 
 dict-nn:
 	make dict-nonative
@@ -79,6 +83,7 @@ dict-nonative:
 	make touch-benchmark-files
 	CFLAGS+="-DDICT_NONATIVE" make $(TARGET)
 
+
 array-nn:
 	make array-nonative
 	
@@ -86,10 +91,25 @@ array-nonative:
 	make touch-benchmark-files
 	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
 	
+	
 array-wrapped:
 	make clean
 	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
 	
+	
+no-ic:
+	make no-inline-cache
+	
+no-inline-cache:
+	make touch-benchmark-files
+	CFLAGS+="-DNO_IC" make $(TARGET)
+	
+no-pic:
+	make no-polymorphic-inline-cache
+	
+no-polymorphic-inline-cache:
+	make touch-benchmark-files
+	CFLAGS+="-DNO_PIC" make $(TARGET)
 
 # ============================================================================
 probes: probes.d
