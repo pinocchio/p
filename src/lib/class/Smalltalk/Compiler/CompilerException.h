@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILEREXCEPTION
+#define PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILEREXCEPTION 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_Compiler_PCompilerException_methods();
+
+extern void init_Smalltalk_Compiler_PCompilerException_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_Compiler_CompilerException_Class_class;
+extern Optr slot_Smalltalk_Compiler_CompilerException_target;
+extern Optr slot_Smalltalk_Compiler_CompilerException_method;
+extern Optr layout_Smalltalk_Compiler_CompilerException;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILEREXCEPTION

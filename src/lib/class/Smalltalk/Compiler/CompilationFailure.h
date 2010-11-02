@@ -1,0 +1,16 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILATIONFAILURE
+#define PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILATIONFAILURE 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_Compiler_PCompilationFailure_methods();
+
+extern void init_Smalltalk_Compiler_PCompilationFailure_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_Compiler_CompilationFailure_Class_class;
+extern Optr slot_Smalltalk_Compiler_CompilationFailure_message;
+extern Optr layout_Smalltalk_Compiler_CompilationFailure;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_COMPILER_PCOMPILATIONFAILURE

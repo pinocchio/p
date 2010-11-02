@@ -1,0 +1,18 @@
+#ifndef PINOCCHIO_LIB_KERNEL_EXCEPTION_PDOESNOTUNDERSTAND
+#define PINOCCHIO_LIB_KERNEL_EXCEPTION_PDOESNOTUNDERSTAND 
+
+#include <pinocchio.h>
+extern void init_Kernel_Exception_PDoesNotUnderstand_methods();
+
+extern void init_Kernel_Exception_PDoesNotUnderstand_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Kernel_Exception_DoesNotUnderstand_Class_class;
+extern Optr slot_Kernel_Exception_DoesNotUnderstand_receiver;
+extern Optr slot_Kernel_Exception_DoesNotUnderstand_cls;
+extern Optr slot_Kernel_Exception_DoesNotUnderstand_message;
+extern Optr layout_Kernel_Exception_DoesNotUnderstand;
+
+
+#endif //PINOCCHIO_LIB_KERNEL_EXCEPTION_PDOESNOTUNDERSTAND

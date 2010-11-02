@@ -1,0 +1,31 @@
+#ifndef PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSERVER
+#define PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSERVER 
+
+#include <pinocchio.h>
+extern void init_WebClient_Core_PWebServer_methods();
+
+extern void init_WebClient_Core_PWebServer_layout();
+
+#include <lib/lib.h>
+
+extern Optr slot_WebClient_Core_WebServer_Class_class_default;
+extern Optr layout_WebClient_Core_WebServer_Class_class;
+extern Optr slot_WebClient_Core_WebServer_listenerSocket;
+extern Optr slot_WebClient_Core_WebServer_listenerProcess;
+extern Optr slot_WebClient_Core_WebServer_interface;
+extern Optr slot_WebClient_Core_WebServer_port;
+extern Optr slot_WebClient_Core_WebServer_mutex;
+extern Optr slot_WebClient_Core_WebServer_connections;
+extern Optr slot_WebClient_Core_WebServer_entryPoints;
+extern Optr slot_WebClient_Core_WebServer_vault;
+extern Optr slot_WebClient_Core_WebServer_logAction;
+extern Optr slot_WebClient_Core_WebServer_nonceCache;
+extern Optr slot_WebClient_Core_WebServer_sessions;
+extern Optr slot_WebClient_Core_WebServer_serverString;
+extern Optr slot_WebClient_Core_WebServer_errorHandler;
+extern Optr slot_WebClient_Core_WebServer_accessLog;
+extern Optr slot_WebClient_Core_WebServer_certName;
+extern Optr layout_WebClient_Core_WebServer;
+
+
+#endif //PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSERVER

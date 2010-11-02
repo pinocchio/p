@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBABSTRACTDICTIONARY
+#define PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBABSTRACTDICTIONARY 
+
+#include <pinocchio.h>
+extern void init_PBenchmark_Collection_Dictionary_PBAbstractDictionary_methods();
+
+extern void init_PBenchmark_Collection_Dictionary_PBAbstractDictionary_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_PBenchmark_Collection_Dictionary_AbstractDictionary_Class_class;
+extern Optr slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict;
+extern Optr slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dictSize;
+extern Optr layout_PBenchmark_Collection_Dictionary_AbstractDictionary;
+
+
+#endif //PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBABSTRACTDICTIONARY

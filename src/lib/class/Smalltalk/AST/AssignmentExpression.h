@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_AST_ASTASSIGNMENTEXPRESSION
+#define PINOCCHIO_LIB_SMALLTALK_AST_ASTASSIGNMENTEXPRESSION 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_AST_ASTAssignmentExpression_methods();
+
+extern void init_Smalltalk_AST_ASTAssignmentExpression_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_AST_AssignmentExpression_Class_class;
+extern Optr slot_Smalltalk_AST_AssignmentExpression_variable;
+extern Optr slot_Smalltalk_AST_AssignmentExpression_expression;
+extern Optr layout_Smalltalk_AST_AssignmentExpression;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_AST_ASTASSIGNMENTEXPRESSION
