@@ -75,7 +75,6 @@ void NativeMethod_invoke(MethodClosure closure,
 
 NATIVE0(NativeMethod_clearNative)
     ((NativeMethod)self)->native = (native)-1;
-    printf("clearning native \n");
 }
 
 /* ========================================================================= */

@@ -55,7 +55,7 @@ GITVERSION:
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
-	$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 
 # ============================================================================
