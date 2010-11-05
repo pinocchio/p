@@ -159,7 +159,7 @@ benchmarks:
 	@echo 'NO DICT NATIVES ===========================================' | tee -a benchmark_results.txt
 	@make dict-nonative >> /dev/null;
 	@make run-benchmarks
-	
+	reset
 	
 run-benchmarks:
 	@./pinocchio benchmark/evalution/fib.p    | tee -a benchmark_results.txt
