@@ -7,11 +7,11 @@ Optr layout_PEG_FailedOptionalResult_Class_class;
 static void init_class_SMB_ifMatched_() {
     Symbol SMB_ifMatched_ = new_Symbol(L"ifMatched:");
     Variable VAR_block_0_0 = new_Variable_named(L"block", 0);
-    Array PArray20068 = new_Array_with(1, (Optr)VAR_block_0_0);
-    Array PThreadedCode20069 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod20067 = new_Method_with(PArray20068, empty_Array, empty_Array, PThreadedCode20069, 1, self);
+    Array PArray20032 = new_Array_with(1, (Optr)VAR_block_0_0);
+    Array PThreadedCode20033 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod20031 = new_Method_with(PArray20032, empty_Array, empty_Array, PThreadedCode20033, 1, self);
     
-    MethodClosure MC_SMB_ifMatched_ = new_MethodClosure((Method)PMethod20067, HEADER(PEG_FailedOptionalResult_Class));
+    MethodClosure MC_SMB_ifMatched_ = new_MethodClosure((Method)PMethod20031, HEADER(PEG_FailedOptionalResult_Class));
     store_method(HEADER(PEG_FailedOptionalResult_Class), SMB_ifMatched_, MC_SMB_ifMatched_);
 }
 
@@ -20,14 +20,14 @@ static void init_class_SMB_ifMatched_ifFailed_() {
     Symbol SMB_ifMatched_ifFailed_ = new_Symbol(L"ifMatched:ifFailed:");
     Variable VAR_block_0_0 = new_Variable_named(L"block", 0);
     Variable VAR_alternative_0_1 = new_Variable_named(L"alternative", 0);
-    Array PArray20071 = new_Array_with(2, (Optr)VAR_block_0_0, (Optr)VAR_alternative_0_1);
+    Array PArray20035 = new_Array_with(2, (Optr)VAR_block_0_0, (Optr)VAR_alternative_0_1);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend20073 = new_Send((Optr)VAR_alternative_0_1, SMB_value, 0);
-    Array PThreadedCode20072 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_alternative_0_1, (Optr)&t_send0, (Optr)PSend20073, (Optr)&t_method_return);
-    Method PMethod20070 = new_Method_with(PArray20071, empty_Array, empty_Array, PThreadedCode20072, 1, PSend20073);
+    Send PSend20037 = new_Send((Optr)VAR_alternative_0_1, SMB_value, 0);
+    Array PThreadedCode20036 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_alternative_0_1, (Optr)&t_send0, (Optr)PSend20037, (Optr)&t_method_return);
+    Method PMethod20034 = new_Method_with(PArray20035, empty_Array, empty_Array, PThreadedCode20036, 1, PSend20037);
     
-    MethodClosure MC_SMB_ifMatched_ifFailed_ = new_MethodClosure((Method)PMethod20070, HEADER(PEG_FailedOptionalResult_Class));
+    MethodClosure MC_SMB_ifMatched_ifFailed_ = new_MethodClosure((Method)PMethod20034, HEADER(PEG_FailedOptionalResult_Class));
     store_method(HEADER(PEG_FailedOptionalResult_Class), SMB_ifMatched_ifFailed_, MC_SMB_ifMatched_ifFailed_);
 }
 
@@ -43,10 +43,10 @@ static void init_class_SMB_new() {
 // 		ifFalse: [self error: 'A Metaclass should only have one instance!']
     */
     Symbol SMB_new = new_Symbol(L"new");
-    Array PThreadedCode20075 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod20074 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20075, 1, self);
+    Array PThreadedCode20039 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod20038 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20039, 1, self);
     
-    MethodClosure MC_SMB_new = new_MethodClosure((Method)PMethod20074, HEADER(PEG_FailedOptionalResult_Class));
+    MethodClosure MC_SMB_new = new_MethodClosure((Method)PMethod20038, HEADER(PEG_FailedOptionalResult_Class));
     store_method(HEADER(PEG_FailedOptionalResult_Class), SMB_new, MC_SMB_new);
 }
 
@@ -54,14 +54,14 @@ static void init_class_SMB_new() {
 static void init_class_SMB_resultIfFailed_() {
     Symbol SMB_resultIfFailed_ = new_Symbol(L"resultIfFailed:");
     Variable VAR_alternative_0_0 = new_Variable_named(L"alternative", 0);
-    Array PArray20077 = new_Array_with(1, (Optr)VAR_alternative_0_0);
+    Array PArray20041 = new_Array_with(1, (Optr)VAR_alternative_0_0);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend20079 = new_Send((Optr)VAR_alternative_0_0, SMB_value, 0);
-    Array PThreadedCode20078 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_alternative_0_0, (Optr)&t_send0, (Optr)PSend20079, (Optr)&t_method_return);
-    Method PMethod20076 = new_Method_with(PArray20077, empty_Array, empty_Array, PThreadedCode20078, 1, PSend20079);
+    Send PSend20043 = new_Send((Optr)VAR_alternative_0_0, SMB_value, 0);
+    Array PThreadedCode20042 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_alternative_0_0, (Optr)&t_send0, (Optr)PSend20043, (Optr)&t_method_return);
+    Method PMethod20040 = new_Method_with(PArray20041, empty_Array, empty_Array, PThreadedCode20042, 1, PSend20043);
     
-    MethodClosure MC_SMB_resultIfFailed_ = new_MethodClosure((Method)PMethod20076, HEADER(PEG_FailedOptionalResult_Class));
+    MethodClosure MC_SMB_resultIfFailed_ = new_MethodClosure((Method)PMethod20040, HEADER(PEG_FailedOptionalResult_Class));
     store_method(HEADER(PEG_FailedOptionalResult_Class), SMB_resultIfFailed_, MC_SMB_resultIfFailed_);
 }
 

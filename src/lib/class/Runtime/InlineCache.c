@@ -7,15 +7,15 @@ Optr layout_Runtime_InlineCache_Class_class;
 static void init_SMB_checkCached_() {
     Symbol SMB_checkCached_ = new_Symbol(L"checkCached:");
     Variable VAR_aClass_0_0 = new_Variable_named(L"aClass", 0);
-    Array PArray8434 = new_Array_with(1, (Optr)VAR_aClass_0_0);
+    Array PArray8430 = new_Array_with(1, (Optr)VAR_aClass_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Runtime_minus_InlineCache = new_Symbol(L"Runtime.InlineCache");
-    Annotation PAnnotation8436 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_checkCached_, (Optr)SMB_Runtime_minus_InlineCache);
-    Array PArray8435 = new_Array_with(1, (Optr)PAnnotation8436);
-    Array PThreadedCode8437 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_nil);
-    NativeMethod PNativeMethod8433 = new_NativeMethod_with(PArray8434, empty_Array, PArray8435, PThreadedCode8437, 1, nil_Const);
+    Annotation PAnnotation8432 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_checkCached_, (Optr)SMB_Runtime_minus_InlineCache);
+    Array PArray8431 = new_Array_with(1, (Optr)PAnnotation8432);
+    Array PThreadedCode8433 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_nil);
+    NativeMethod PNativeMethod8429 = new_NativeMethod_with(PArray8430, empty_Array, PArray8431, PThreadedCode8433, 1, nil_Const);
     
-    MethodClosure MC_SMB_checkCached_ = new_MethodClosure((Method)PNativeMethod8433, InlineCache_Class);
+    MethodClosure MC_SMB_checkCached_ = new_MethodClosure((Method)PNativeMethod8429, InlineCache_Class);
     store_method(InlineCache_Class, SMB_checkCached_, MC_SMB_checkCached_);
 }
 
@@ -24,15 +24,15 @@ static void init_SMB_cache_at_() {
     Symbol SMB_cache_at_ = new_Symbol(L"cache:at:");
     Variable VAR_aMethod_0_0 = new_Variable_named(L"aMethod", 0);
     Variable VAR_aClass_0_1 = new_Variable_named(L"aClass", 0);
-    Array PArray8439 = new_Array_with(2, (Optr)VAR_aMethod_0_0, (Optr)VAR_aClass_0_1);
+    Array PArray8435 = new_Array_with(2, (Optr)VAR_aMethod_0_0, (Optr)VAR_aClass_0_1);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Runtime_minus_InlineCache = new_Symbol(L"Runtime.InlineCache");
-    Annotation PAnnotation8441 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_cache_at_, (Optr)SMB_Runtime_minus_InlineCache);
-    Array PArray8440 = new_Array_with(1, (Optr)PAnnotation8441);
-    Array PThreadedCode8442 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod8438 = new_NativeMethod_with(PArray8439, empty_Array, PArray8440, PThreadedCode8442, 1, self);
+    Annotation PAnnotation8437 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_cache_at_, (Optr)SMB_Runtime_minus_InlineCache);
+    Array PArray8436 = new_Array_with(1, (Optr)PAnnotation8437);
+    Array PThreadedCode8438 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod8434 = new_NativeMethod_with(PArray8435, empty_Array, PArray8436, PThreadedCode8438, 1, self);
     
-    MethodClosure MC_SMB_cache_at_ = new_MethodClosure((Method)PNativeMethod8438, InlineCache_Class);
+    MethodClosure MC_SMB_cache_at_ = new_MethodClosure((Method)PNativeMethod8434, InlineCache_Class);
     store_method(InlineCache_Class, SMB_cache_at_, MC_SMB_cache_at_);
 }
 
@@ -52,11 +52,11 @@ static void init_class_SMB_new() {
     Symbol SMB_new_ = new_Symbol(L"new:");
     Constant int_3_Const = new_Constant((Optr)int_3);
     // new:. 
-    Send PSend8445 = new_Send((Optr)self, SMB_new_, 1, (Optr)int_3_Const);
-    Array PThreadedCode8444 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend8445, (Optr)&t_method_return);
-    Method PMethod8443 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8444, 1, PSend8445);
+    Send PSend8441 = new_Send((Optr)self, SMB_new_, 1, (Optr)int_3_Const);
+    Array PThreadedCode8440 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend8441, (Optr)&t_method_return);
+    Method PMethod8439 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8440, 1, PSend8441);
     
-    MethodClosure MC_SMB_new = new_MethodClosure((Method)PMethod8443, HEADER(InlineCache_Class));
+    MethodClosure MC_SMB_new = new_MethodClosure((Method)PMethod8439, HEADER(InlineCache_Class));
     store_method(HEADER(InlineCache_Class), SMB_new, MC_SMB_new);
 }
 

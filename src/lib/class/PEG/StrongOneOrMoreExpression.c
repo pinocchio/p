@@ -8,35 +8,35 @@ Optr layout_PEG_StrongOneOrMoreExpression;
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19635 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19599 = new_Array_with(1, (Optr)VAR_input_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray19638 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray19602 = new_Array_with(1, (Optr)VAR__return__1_0);
     // parseOn:. 
-    Send PSend19640 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
+    Send PSend19604 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend19644 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19643 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19644, (Optr)&t_block_return);
-    Block PBlock19642 = new_Block_with(empty_Array, empty_Array, PThreadedCode19643, 1, PSend19644);
+    Send PSend19608 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19607 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19608, (Optr)&t_block_return);
+    Block PBlock19606 = new_Block_with(empty_Array, empty_Array, PThreadedCode19607, 1, PSend19608);
     // ifFalse:. 
-    Send PSend19641 = new_Send((Optr)PSend19640, SMB_ifFalse_, 1, (Optr)PBlock19642);
+    Send PSend19605 = new_Send((Optr)PSend19604, SMB_ifFalse_, 1, (Optr)PBlock19606);
     // parseOn:. 
-    Send PSend19647 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
-    Array PThreadedCode19646 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19647, (Optr)&t_block_return);
-    Block PBlock19645 = new_Block_with(empty_Array, empty_Array, PThreadedCode19646, 1, PSend19647);
+    Send PSend19611 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
+    Array PThreadedCode19610 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19611, (Optr)&t_block_return);
+    Block PBlock19609 = new_Block_with(empty_Array, empty_Array, PThreadedCode19610, 1, PSend19611);
     Symbol SMB_whileTrue = new_Symbol(L"whileTrue");
     // whileTrue. 
-    Send PSend19648 = new_Send((Optr)PBlock19645, SMB_whileTrue, 0);
-    Array PThreadedCode19639 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19640, (Optr)&t_send_ifFalse_, (Optr)PSend19641, (Optr)PBlock19642, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock19645, (Optr)&t_send0, (Optr)PSend19648, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Block PBlock19637 = new_Block_with(PArray19638, empty_Array, PThreadedCode19639, 3, PSend19641, PSend19648, true_Const);
+    Send PSend19612 = new_Send((Optr)PBlock19609, SMB_whileTrue, 0);
+    Array PThreadedCode19603 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19604, (Optr)&t_send_ifFalse_, (Optr)PSend19605, (Optr)PBlock19606, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock19609, (Optr)&t_send0, (Optr)PSend19612, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Block PBlock19601 = new_Block_with(PArray19602, empty_Array, PThreadedCode19603, 3, PSend19605, PSend19612, true_Const);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend19649 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19637);
-    Array PThreadedCode19636 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19637, (Optr)&t_send1, (Optr)PSend19649, (Optr)&t_method_return);
-    Method PMethod19634 = new_Method_with(PArray19635, empty_Array, empty_Array, PThreadedCode19636, 1, PSend19649);
+    Send PSend19613 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19601);
+    Array PThreadedCode19600 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19601, (Optr)&t_send1, (Optr)PSend19613, (Optr)&t_method_return);
+    Method PMethod19598 = new_Method_with(PArray19599, empty_Array, empty_Array, PThreadedCode19600, 1, PSend19613);
     
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19634, PEG_StrongOneOrMoreExpression_Class);
+    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19598, PEG_StrongOneOrMoreExpression_Class);
     store_method(PEG_StrongOneOrMoreExpression_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 
@@ -44,35 +44,35 @@ static void init_SMB_parseOn_() {
 static void init_SMB_omitMatch_() {
     Symbol SMB_omitMatch_ = new_Symbol(L"omitMatch:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19651 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19615 = new_Array_with(1, (Optr)VAR_input_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray19654 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray19618 = new_Array_with(1, (Optr)VAR__return__1_0);
     // omitMatch:. 
-    Send PSend19656 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
+    Send PSend19620 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend19660 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19659 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19660, (Optr)&t_block_return);
-    Block PBlock19658 = new_Block_with(empty_Array, empty_Array, PThreadedCode19659, 1, PSend19660);
+    Send PSend19624 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19623 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19624, (Optr)&t_block_return);
+    Block PBlock19622 = new_Block_with(empty_Array, empty_Array, PThreadedCode19623, 1, PSend19624);
     // ifFalse:. 
-    Send PSend19657 = new_Send((Optr)PSend19656, SMB_ifFalse_, 1, (Optr)PBlock19658);
+    Send PSend19621 = new_Send((Optr)PSend19620, SMB_ifFalse_, 1, (Optr)PBlock19622);
     // omitMatch:. 
-    Send PSend19663 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
-    Array PThreadedCode19662 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19663, (Optr)&t_block_return);
-    Block PBlock19661 = new_Block_with(empty_Array, empty_Array, PThreadedCode19662, 1, PSend19663);
+    Send PSend19627 = new_Send((Optr)slot_PEG_ZeroOrMoreExpression_child, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
+    Array PThreadedCode19626 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19627, (Optr)&t_block_return);
+    Block PBlock19625 = new_Block_with(empty_Array, empty_Array, PThreadedCode19626, 1, PSend19627);
     Symbol SMB_whileTrue = new_Symbol(L"whileTrue");
     // whileTrue. 
-    Send PSend19664 = new_Send((Optr)PBlock19661, SMB_whileTrue, 0);
-    Array PThreadedCode19655 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19656, (Optr)&t_send_ifFalse_, (Optr)PSend19657, (Optr)PBlock19658, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock19661, (Optr)&t_send0, (Optr)PSend19664, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Block PBlock19653 = new_Block_with(PArray19654, empty_Array, PThreadedCode19655, 3, PSend19657, PSend19664, true_Const);
+    Send PSend19628 = new_Send((Optr)PBlock19625, SMB_whileTrue, 0);
+    Array PThreadedCode19619 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_PEG_ZeroOrMoreExpression_child, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19620, (Optr)&t_send_ifFalse_, (Optr)PSend19621, (Optr)PBlock19622, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock19625, (Optr)&t_send0, (Optr)PSend19628, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Block PBlock19617 = new_Block_with(PArray19618, empty_Array, PThreadedCode19619, 3, PSend19621, PSend19628, true_Const);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend19665 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19653);
-    Array PThreadedCode19652 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19653, (Optr)&t_send1, (Optr)PSend19665, (Optr)&t_method_return);
-    Method PMethod19650 = new_Method_with(PArray19651, empty_Array, empty_Array, PThreadedCode19652, 1, PSend19665);
+    Send PSend19629 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19617);
+    Array PThreadedCode19616 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19617, (Optr)&t_send1, (Optr)PSend19629, (Optr)&t_method_return);
+    Method PMethod19614 = new_Method_with(PArray19615, empty_Array, empty_Array, PThreadedCode19616, 1, PSend19629);
     
-    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19650, PEG_StrongOneOrMoreExpression_Class);
+    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19614, PEG_StrongOneOrMoreExpression_Class);
     store_method(PEG_StrongOneOrMoreExpression_Class, SMB_omitMatch_, MC_SMB_omitMatch_);
 }
 

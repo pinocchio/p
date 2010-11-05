@@ -9,66 +9,66 @@ Optr layout_Organization_UndefinedClassReference;
 static void init_SMB_warnOn_() {
     Symbol SMB_warnOn_ = new_Symbol(L"warnOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21894 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21858 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray21897 = new_Array_with(1, (Optr)VAR__return__1_0);
-    String string_21899 = new_String(L"Reference to undefined class in package ");
+    Array PArray21861 = new_Array_with(1, (Optr)VAR__return__1_0);
+    String string_21863 = new_String(L"Reference to undefined class in package ");
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant string_21899_Const = new_Constant((Optr)string_21899);
+    Constant string_21863_Const = new_Constant((Optr)string_21863);
     // <<. 
-    Send PSend21900 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_21899_Const);
+    Send PSend21864 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_21863_Const);
     Symbol SMB_package = new_Symbol(L"package");
     // package. 
-    Send PSend21901 = new_Send((Optr)slot_Organization_UndefinedClassReference_reference, SMB_package, 0);
+    Send PSend21865 = new_Send((Optr)slot_Organization_UndefinedClassReference_reference, SMB_package, 0);
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     // printOn:. 
-    Send PSend21902 = new_Send((Optr)PSend21901, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21866 = new_Send((Optr)PSend21865, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     // package. 
-    Send PSend21903 = new_Send((Optr)slot_Organization_UndefinedClassReference_reference, SMB_package, 0);
+    Send PSend21867 = new_Send((Optr)slot_Organization_UndefinedClassReference_reference, SMB_package, 0);
     Variable VAR_key_2_0 = new_Variable_named(L"key", 2);
     Variable VAR_value_2_1 = new_Variable_named(L"value", 2);
-    Array PArray21905 = new_Array_with(2, (Optr)VAR_key_2_0, (Optr)VAR_value_2_1);
+    Array PArray21869 = new_Array_with(2, (Optr)VAR_key_2_0, (Optr)VAR_value_2_1);
     Symbol SMB__pequals_ = new_Symbol(L"==");
     // ==. 
-    Send PSend21907 = new_Send((Optr)VAR_value_2_1, SMB__pequals_, 1, (Optr)slot_Organization_UndefinedClassReference_reference);
+    Send PSend21871 = new_Send((Optr)VAR_value_2_1, SMB__pequals_, 1, (Optr)slot_Organization_UndefinedClassReference_reference);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    String string_21911 = new_String(L": ");
-    Constant string_21911_Const = new_Constant((Optr)string_21911);
+    String string_21875 = new_String(L": ");
+    Constant string_21875_Const = new_Constant((Optr)string_21875);
     // <<. 
-    Send PSend21912 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_21911_Const);
+    Send PSend21876 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_21875_Const);
     // <<. 
-    Send PSend21913 = new_Send((Optr)PSend21912, SMB__shiftLeft_, 1, (Optr)VAR_key_2_0);
+    Send PSend21877 = new_Send((Optr)PSend21876, SMB__shiftLeft_, 1, (Optr)VAR_key_2_0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend21914 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend21913);
-    Array PThreadedCode21910 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_21911, (Optr)&t_send1, (Optr)PSend21912, (Optr)&t_push_variable, (Optr)VAR_key_2_0, (Optr)&t_send1, (Optr)PSend21913, (Optr)&t_send1, (Optr)PSend21914, (Optr)&t_block_return);
-    Block PBlock21909 = new_Block_with(empty_Array, empty_Array, PThreadedCode21910, 1, PSend21914);
+    Send PSend21878 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend21877);
+    Array PThreadedCode21874 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_21875, (Optr)&t_send1, (Optr)PSend21876, (Optr)&t_push_variable, (Optr)VAR_key_2_0, (Optr)&t_send1, (Optr)PSend21877, (Optr)&t_send1, (Optr)PSend21878, (Optr)&t_block_return);
+    Block PBlock21873 = new_Block_with(empty_Array, empty_Array, PThreadedCode21874, 1, PSend21878);
     // ifTrue:. 
-    Send PSend21908 = new_Send((Optr)PSend21907, SMB_ifTrue_, 1, (Optr)PBlock21909);
-    Array PThreadedCode21906 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_variable, (Optr)VAR_value_2_1, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send1, (Optr)PSend21907, (Optr)&t_send_ifTrue_, (Optr)PSend21908, (Optr)PBlock21909, (Optr)&t_method_return);
-    Block PBlock21904 = new_Block_with(PArray21905, empty_Array, PThreadedCode21906, 1, PSend21908);
+    Send PSend21872 = new_Send((Optr)PSend21871, SMB_ifTrue_, 1, (Optr)PBlock21873);
+    Array PThreadedCode21870 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_variable, (Optr)VAR_value_2_1, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send1, (Optr)PSend21871, (Optr)&t_send_ifTrue_, (Optr)PSend21872, (Optr)PBlock21873, (Optr)&t_method_return);
+    Block PBlock21868 = new_Block_with(PArray21869, empty_Array, PThreadedCode21870, 1, PSend21872);
     Symbol SMB_keysAndValuesDo_ = new_Symbol(L"keysAndValuesDo:");
     // keysAndValuesDo:. 
-    Send PSend21915 = new_Send((Optr)PSend21903, SMB_keysAndValuesDo_, 1, (Optr)PBlock21904);
-    Array PThreadedCode21898 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_21899, (Optr)&t_send1, (Optr)PSend21900, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send0, (Optr)PSend21901, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21902, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send0, (Optr)PSend21903, (Optr)&t_push_closure, (Optr)PBlock21904, (Optr)&t_send1, (Optr)PSend21915, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock21896 = new_Block_with(PArray21897, empty_Array, PThreadedCode21898, 4, PSend21900, PSend21902, PSend21915, self);
+    Send PSend21879 = new_Send((Optr)PSend21867, SMB_keysAndValuesDo_, 1, (Optr)PBlock21868);
+    Array PThreadedCode21862 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_21863, (Optr)&t_send1, (Optr)PSend21864, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send0, (Optr)PSend21865, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21866, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_send0, (Optr)PSend21867, (Optr)&t_push_closure, (Optr)PBlock21868, (Optr)&t_send1, (Optr)PSend21879, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock21860 = new_Block_with(PArray21861, empty_Array, PThreadedCode21862, 4, PSend21864, PSend21866, PSend21879, self);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend21916 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock21896);
-    Array PThreadedCode21895 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock21896, (Optr)&t_send1, (Optr)PSend21916, (Optr)&t_method_return);
-    Method PMethod21893 = new_Method_with(PArray21894, empty_Array, empty_Array, PThreadedCode21895, 1, PSend21916);
+    Send PSend21880 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock21860);
+    Array PThreadedCode21859 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock21860, (Optr)&t_send1, (Optr)PSend21880, (Optr)&t_method_return);
+    Method PMethod21857 = new_Method_with(PArray21858, empty_Array, empty_Array, PThreadedCode21859, 1, PSend21880);
     
-    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod21893, UndefinedClassReference_Class);
+    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod21857, UndefinedClassReference_Class);
     store_method(UndefinedClassReference_Class, SMB_warnOn_, MC_SMB_warnOn_);
 }
 
 
 static void init_SMB_reference() {
     Symbol SMB_reference = new_Symbol(L"reference");
-    Array PThreadedCode21918 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_method_return);
-    Method PMethod21917 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21918, 1, slot_Organization_UndefinedClassReference_reference);
+    Array PThreadedCode21882 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_UndefinedClassReference_reference, (Optr)&t_method_return);
+    Method PMethod21881 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21882, 1, slot_Organization_UndefinedClassReference_reference);
     
-    MethodClosure MC_SMB_reference = new_MethodClosure((Method)PMethod21917, UndefinedClassReference_Class);
+    MethodClosure MC_SMB_reference = new_MethodClosure((Method)PMethod21881, UndefinedClassReference_Class);
     store_method(UndefinedClassReference_Class, SMB_reference, MC_SMB_reference);
 }
 
@@ -76,12 +76,12 @@ static void init_SMB_reference() {
 static void init_SMB_reference_() {
     Symbol SMB_reference_ = new_Symbol(L"reference:");
     Variable VAR_ref_0_0 = new_Variable_named(L"ref", 0);
-    Array PArray21920 = new_Array_with(1, (Optr)VAR_ref_0_0);
-    Assign PAssign21922 = new_Assign((Optr)slot_Organization_UndefinedClassReference_reference, (Optr)VAR_ref_0_0);
-    Array PThreadedCode21921 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21922, (Optr)&t_push_variable, (Optr)VAR_ref_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21919 = new_Method_with(PArray21920, empty_Array, empty_Array, PThreadedCode21921, 2, PAssign21922, self);
+    Array PArray21884 = new_Array_with(1, (Optr)VAR_ref_0_0);
+    Assign PAssign21886 = new_Assign((Optr)slot_Organization_UndefinedClassReference_reference, (Optr)VAR_ref_0_0);
+    Array PThreadedCode21885 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21886, (Optr)&t_push_variable, (Optr)VAR_ref_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21883 = new_Method_with(PArray21884, empty_Array, empty_Array, PThreadedCode21885, 2, PAssign21886, self);
     
-    MethodClosure MC_SMB_reference_ = new_MethodClosure((Method)PMethod21919, UndefinedClassReference_Class);
+    MethodClosure MC_SMB_reference_ = new_MethodClosure((Method)PMethod21883, UndefinedClassReference_Class);
     store_method(UndefinedClassReference_Class, SMB_reference_, MC_SMB_reference_);
 }
 

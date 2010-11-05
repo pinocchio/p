@@ -12,12 +12,12 @@ Optr layout_Runtime_NativeMethodContext;
 static void init_SMB_message_() {
     Symbol SMB_message_ = new_Symbol(L"message:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8332 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8334 = new_Assign((Optr)slot_Runtime_NativeMethodContext_message, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8333 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8334, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8331 = new_Method_with(PArray8332, empty_Array, empty_Array, PThreadedCode8333, 2, PAssign8334, self);
+    Array PArray8328 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8330 = new_Assign((Optr)slot_Runtime_NativeMethodContext_message, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8329 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8330, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8327 = new_Method_with(PArray8328, empty_Array, empty_Array, PThreadedCode8329, 2, PAssign8330, self);
     
-    MethodClosure MC_SMB_message_ = new_MethodClosure((Method)PMethod8331, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_message_ = new_MethodClosure((Method)PMethod8327, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_message_, MC_SMB_message_);
 }
 
@@ -25,12 +25,12 @@ static void init_SMB_message_() {
 static void init_SMB_receiver_() {
     Symbol SMB_receiver_ = new_Symbol(L"receiver:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8336 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8338 = new_Assign((Optr)slot_Runtime_NativeMethodContext_receiver, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8337 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8338, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8335 = new_Method_with(PArray8336, empty_Array, empty_Array, PThreadedCode8337, 2, PAssign8338, self);
+    Array PArray8332 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8334 = new_Assign((Optr)slot_Runtime_NativeMethodContext_receiver, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8333 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8334, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8331 = new_Method_with(PArray8332, empty_Array, empty_Array, PThreadedCode8333, 2, PAssign8334, self);
     
-    MethodClosure MC_SMB_receiver_ = new_MethodClosure((Method)PMethod8335, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_receiver_ = new_MethodClosure((Method)PMethod8331, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_receiver_, MC_SMB_receiver_);
 }
 
@@ -38,62 +38,62 @@ static void init_SMB_receiver_() {
 static void init_SMB_returnContext_() {
     Symbol SMB_returnContext_ = new_Symbol(L"returnContext:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8340 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8342 = new_Assign((Optr)slot_Runtime_NativeMethodContext_returnContext, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8341 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8342, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8339 = new_Method_with(PArray8340, empty_Array, empty_Array, PThreadedCode8341, 2, PAssign8342, self);
+    Array PArray8336 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8338 = new_Assign((Optr)slot_Runtime_NativeMethodContext_returnContext, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8337 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8338, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8335 = new_Method_with(PArray8336, empty_Array, empty_Array, PThreadedCode8337, 2, PAssign8338, self);
     
-    MethodClosure MC_SMB_returnContext_ = new_MethodClosure((Method)PMethod8339, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_returnContext_ = new_MethodClosure((Method)PMethod8335, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_returnContext_, MC_SMB_returnContext_);
 }
 
 
 static void init_SMB_receiver() {
     Symbol SMB_receiver = new_Symbol(L"receiver");
-    Array PThreadedCode8344 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_receiver, (Optr)&t_method_return);
-    Method PMethod8343 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8344, 1, slot_Runtime_NativeMethodContext_receiver);
+    Array PThreadedCode8340 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_receiver, (Optr)&t_method_return);
+    Method PMethod8339 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8340, 1, slot_Runtime_NativeMethodContext_receiver);
     
-    MethodClosure MC_SMB_receiver = new_MethodClosure((Method)PMethod8343, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_receiver = new_MethodClosure((Method)PMethod8339, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_receiver, MC_SMB_receiver);
 }
 
 
 static void init_SMB_closure() {
     Symbol SMB_closure = new_Symbol(L"closure");
-    Array PThreadedCode8346 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_closure, (Optr)&t_method_return);
-    Method PMethod8345 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8346, 1, slot_Runtime_NativeMethodContext_closure);
+    Array PThreadedCode8342 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_closure, (Optr)&t_method_return);
+    Method PMethod8341 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8342, 1, slot_Runtime_NativeMethodContext_closure);
     
-    MethodClosure MC_SMB_closure = new_MethodClosure((Method)PMethod8345, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_closure = new_MethodClosure((Method)PMethod8341, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_closure, MC_SMB_closure);
 }
 
 
 static void init_SMB_homeContext() {
     Symbol SMB_homeContext = new_Symbol(L"homeContext");
-    Array PThreadedCode8348 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod8347 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8348, 1, self);
+    Array PThreadedCode8344 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod8343 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8344, 1, self);
     
-    MethodClosure MC_SMB_homeContext = new_MethodClosure((Method)PMethod8347, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_homeContext = new_MethodClosure((Method)PMethod8343, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_homeContext, MC_SMB_homeContext);
 }
 
 
 static void init_SMB_returnContext() {
     Symbol SMB_returnContext = new_Symbol(L"returnContext");
-    Array PThreadedCode8350 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_returnContext, (Optr)&t_method_return);
-    Method PMethod8349 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8350, 1, slot_Runtime_NativeMethodContext_returnContext);
+    Array PThreadedCode8346 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_returnContext, (Optr)&t_method_return);
+    Method PMethod8345 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8346, 1, slot_Runtime_NativeMethodContext_returnContext);
     
-    MethodClosure MC_SMB_returnContext = new_MethodClosure((Method)PMethod8349, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_returnContext = new_MethodClosure((Method)PMethod8345, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_returnContext, MC_SMB_returnContext);
 }
 
 
 static void init_SMB_message() {
     Symbol SMB_message = new_Symbol(L"message");
-    Array PThreadedCode8352 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_message, (Optr)&t_method_return);
-    Method PMethod8351 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8352, 1, slot_Runtime_NativeMethodContext_message);
+    Array PThreadedCode8348 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_NativeMethodContext_message, (Optr)&t_method_return);
+    Method PMethod8347 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8348, 1, slot_Runtime_NativeMethodContext_message);
     
-    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod8351, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod8347, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_message, MC_SMB_message);
 }
 
@@ -101,12 +101,12 @@ static void init_SMB_message() {
 static void init_SMB_closure_() {
     Symbol SMB_closure_ = new_Symbol(L"closure:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8354 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8356 = new_Assign((Optr)slot_Runtime_NativeMethodContext_closure, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8355 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8356, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8353 = new_Method_with(PArray8354, empty_Array, empty_Array, PThreadedCode8355, 2, PAssign8356, self);
+    Array PArray8350 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8352 = new_Assign((Optr)slot_Runtime_NativeMethodContext_closure, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8351 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8352, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8349 = new_Method_with(PArray8350, empty_Array, empty_Array, PThreadedCode8351, 2, PAssign8352, self);
     
-    MethodClosure MC_SMB_closure_ = new_MethodClosure((Method)PMethod8353, Runtime_NativeMethodContext_Class);
+    MethodClosure MC_SMB_closure_ = new_MethodClosure((Method)PMethod8349, Runtime_NativeMethodContext_Class);
     store_method(Runtime_NativeMethodContext_Class, SMB_closure_, MC_SMB_closure_);
 }
 

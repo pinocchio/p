@@ -39,12 +39,12 @@ static void init_SMB_benchLongMethod() {
 }
 
 
-static void init_SMB_benchAnnotation() {
-    Symbol SMB_benchAnnotation = new_Symbol(L"benchAnnotation");
+static void init_SMB_benchString() {
+    Symbol SMB_benchString = new_Symbol(L"benchString");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14097 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14101 = new_String(L"a\n\t\t<abcdefghil>");
+    String string_14101 = new_String(L"a\n\t^ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'");
     Constant string_14101_Const = new_Constant((Optr)string_14101);
     // on:. 
     Send PSend14100 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14101_Const);
@@ -66,8 +66,8 @@ static void init_SMB_benchAnnotation() {
     Array PThreadedCode14098 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14099, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14101, (Optr)&t_send1, (Optr)PSend14100, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14102, (Optr)&t_push_closure, (Optr)PBlock14103, (Optr)&t_send1, (Optr)PSend14107, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14096 = new_Method_with(empty_Array, PArray14097, empty_Array, PThreadedCode14098, 3, PAssign14099, PSend14107, self);
     
-    MethodClosure MC_SMB_benchAnnotation = new_MethodClosure((Method)PMethod14096, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchAnnotation, MC_SMB_benchAnnotation);
+    MethodClosure MC_SMB_benchString = new_MethodClosure((Method)PMethod14096, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchString, MC_SMB_benchString);
 }
 
 
@@ -103,12 +103,12 @@ static void init_SMB_benchMediumMethod() {
 }
 
 
-static void init_SMB_benchBlockWithArg() {
-    Symbol SMB_benchBlockWithArg = new_Symbol(L"benchBlockWithArg");
+static void init_SMB_benchAnnotation() {
+    Symbol SMB_benchAnnotation = new_Symbol(L"benchAnnotation");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14121 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14125 = new_String(L"a\n\t\t^ [ :a| ]");
+    String string_14125 = new_String(L"a\n\t\t<abcdefghil>");
     Constant string_14125_Const = new_Constant((Optr)string_14125);
     // on:. 
     Send PSend14124 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14125_Const);
@@ -130,17 +130,17 @@ static void init_SMB_benchBlockWithArg() {
     Array PThreadedCode14122 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14123, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14125, (Optr)&t_send1, (Optr)PSend14124, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14126, (Optr)&t_push_closure, (Optr)PBlock14127, (Optr)&t_send1, (Optr)PSend14131, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14120 = new_Method_with(empty_Array, PArray14121, empty_Array, PThreadedCode14122, 3, PAssign14123, PSend14131, self);
     
-    MethodClosure MC_SMB_benchBlockWithArg = new_MethodClosure((Method)PMethod14120, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlockWithArg, MC_SMB_benchBlockWithArg);
+    MethodClosure MC_SMB_benchAnnotation = new_MethodClosure((Method)PMethod14120, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchAnnotation, MC_SMB_benchAnnotation);
 }
 
 
-static void init_SMB_benchSmallMethod() {
-    Symbol SMB_benchSmallMethod = new_Symbol(L"benchSmallMethod");
+static void init_SMB_benchBlockWithArg() {
+    Symbol SMB_benchBlockWithArg = new_Symbol(L"benchBlockWithArg");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14133 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14137 = new_String(L"a\n\t^ self");
+    String string_14137 = new_String(L"a\n\t\t^ [ :a| ]");
     Constant string_14137_Const = new_Constant((Optr)string_14137);
     // on:. 
     Send PSend14136 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14137_Const);
@@ -162,7 +162,39 @@ static void init_SMB_benchSmallMethod() {
     Array PThreadedCode14134 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14135, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14137, (Optr)&t_send1, (Optr)PSend14136, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14138, (Optr)&t_push_closure, (Optr)PBlock14139, (Optr)&t_send1, (Optr)PSend14143, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14132 = new_Method_with(empty_Array, PArray14133, empty_Array, PThreadedCode14134, 3, PAssign14135, PSend14143, self);
     
-    MethodClosure MC_SMB_benchSmallMethod = new_MethodClosure((Method)PMethod14132, Smalltalk_Parser_ParserBenchmark_Class);
+    MethodClosure MC_SMB_benchBlockWithArg = new_MethodClosure((Method)PMethod14132, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlockWithArg, MC_SMB_benchBlockWithArg);
+}
+
+
+static void init_SMB_benchSmallMethod() {
+    Symbol SMB_benchSmallMethod = new_Symbol(L"benchSmallMethod");
+    Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
+    Array PArray14145 = new_Array_with(1, (Optr)VAR_string_0_0);
+    Symbol SMB_on_ = new_Symbol(L"on:");
+    String string_14149 = new_String(L"a\n\t^ self");
+    Constant string_14149_Const = new_Constant((Optr)string_14149);
+    // on:. 
+    Send PSend14148 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14149_Const);
+    Assign PAssign14147 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14148);
+    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
+    // repetitionCount. 
+    Send PSend14150 = new_Send((Optr)self, SMB_repetitionCount, 0);
+    Symbol SMB_match_ = new_Symbol(L"match:");
+    // match:. 
+    Send PSend14153 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
+    Symbol SMB_reset = new_Symbol(L"reset");
+    // reset. 
+    Send PSend14154 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
+    Array PThreadedCode14152 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14153, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14154, (Optr)&t_block_return);
+    Block PBlock14151 = new_Block_with(empty_Array, empty_Array, PThreadedCode14152, 2, PSend14153, PSend14154);
+    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
+    // timesRepeat:. 
+    Send PSend14155 = new_Send((Optr)PSend14150, SMB_timesRepeat_, 1, (Optr)PBlock14151);
+    Array PThreadedCode14146 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14147, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14149, (Optr)&t_send1, (Optr)PSend14148, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14150, (Optr)&t_push_closure, (Optr)PBlock14151, (Optr)&t_send1, (Optr)PSend14155, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod14144 = new_Method_with(empty_Array, PArray14145, empty_Array, PThreadedCode14146, 3, PAssign14147, PSend14155, self);
+    
+    MethodClosure MC_SMB_benchSmallMethod = new_MethodClosure((Method)PMethod14144, Smalltalk_Parser_ParserBenchmark_Class);
     store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchSmallMethod, MC_SMB_benchSmallMethod);
 }
 
@@ -171,102 +203,70 @@ static void init_SMB_setUp() {
     Symbol SMB_setUp = new_Symbol(L"setUp");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend14147 = new_Send((Optr)PSmalltalkParser_classReference, SMB_new, 0);
-    Assign PAssign14146 = new_Assign((Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, (Optr)PSend14147);
+    Send PSend14159 = new_Send((Optr)PSmalltalkParser_classReference, SMB_new, 0);
+    Assign PAssign14158 = new_Assign((Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, (Optr)PSend14159);
     Symbol SMB_method = new_Symbol(L"method");
     // method. 
-    Send PSend14149 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, SMB_method, 0);
-    Assign PAssign14148 = new_Assign((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)PSend14149);
-    Array PThreadedCode14145 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push1, (Optr)PAssign14146, (Optr)&t_push_class_reference, (Optr)PSmalltalkParser_classReference, (Optr)&t_send0, (Optr)PSend14147, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign14148, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, (Optr)&t_send0, (Optr)PSend14149, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14144 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14145, 3, PAssign14146, PAssign14148, self);
+    Send PSend14161 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, SMB_method, 0);
+    Assign PAssign14160 = new_Assign((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)PSend14161);
+    Array PThreadedCode14157 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push1, (Optr)PAssign14158, (Optr)&t_push_class_reference, (Optr)PSmalltalkParser_classReference, (Optr)&t_send0, (Optr)PSend14159, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign14160, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_parser, (Optr)&t_send0, (Optr)PSend14161, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod14156 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14157, 3, PAssign14158, PAssign14160, self);
     
-    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod14144, Smalltalk_Parser_ParserBenchmark_Class);
+    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod14156, Smalltalk_Parser_ParserBenchmark_Class);
     store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_setUp, MC_SMB_setUp);
-}
-
-
-static void init_SMB_repetitionCount() {
-    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
-    SmallInt int_300 = new_SmallInt(300);
-    Array PThreadedCode14151 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_300, (Optr)&t_method_return);
-    Constant int_300_Const = new_Constant((Optr)int_300);
-    Method PMethod14150 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14151, 1, int_300_Const);
-    
-    MethodClosure MC_SMB_repetitionCount = new_MethodClosure((Method)PMethod14150, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_repetitionCount, MC_SMB_repetitionCount);
-}
-
-
-static void init_SMB_benchBlockWithArgAndBody() {
-    Symbol SMB_benchBlockWithArgAndBody = new_Symbol(L"benchBlockWithArgAndBody");
-    Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
-    Array PArray14153 = new_Array_with(1, (Optr)VAR_string_0_0);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14157 = new_String(L"a\n\t\t^ [ :a| a]");
-    Constant string_14157_Const = new_Constant((Optr)string_14157);
-    // on:. 
-    Send PSend14156 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14157_Const);
-    Assign PAssign14155 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14156);
-    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
-    // repetitionCount. 
-    Send PSend14158 = new_Send((Optr)self, SMB_repetitionCount, 0);
-    Symbol SMB_match_ = new_Symbol(L"match:");
-    // match:. 
-    Send PSend14161 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
-    Symbol SMB_reset = new_Symbol(L"reset");
-    // reset. 
-    Send PSend14162 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
-    Array PThreadedCode14160 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14161, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14162, (Optr)&t_block_return);
-    Block PBlock14159 = new_Block_with(empty_Array, empty_Array, PThreadedCode14160, 2, PSend14161, PSend14162);
-    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
-    // timesRepeat:. 
-    Send PSend14163 = new_Send((Optr)PSend14158, SMB_timesRepeat_, 1, (Optr)PBlock14159);
-    Array PThreadedCode14154 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14155, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14157, (Optr)&t_send1, (Optr)PSend14156, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14158, (Optr)&t_push_closure, (Optr)PBlock14159, (Optr)&t_send1, (Optr)PSend14163, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14152 = new_Method_with(empty_Array, PArray14153, empty_Array, PThreadedCode14154, 3, PAssign14155, PSend14163, self);
-    
-    MethodClosure MC_SMB_benchBlockWithArgAndBody = new_MethodClosure((Method)PMethod14152, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlockWithArgAndBody, MC_SMB_benchBlockWithArgAndBody);
 }
 
 
 static void init_SMB_benchBlock() {
     Symbol SMB_benchBlock = new_Symbol(L"benchBlock");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
-    Array PArray14165 = new_Array_with(1, (Optr)VAR_string_0_0);
+    Array PArray14163 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14169 = new_String(L"a\n\t\t^ []");
-    Constant string_14169_Const = new_Constant((Optr)string_14169);
+    String string_14167 = new_String(L"a\n\t\t^ []");
+    Constant string_14167_Const = new_Constant((Optr)string_14167);
     // on:. 
-    Send PSend14168 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14169_Const);
-    Assign PAssign14167 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14168);
+    Send PSend14166 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14167_Const);
+    Assign PAssign14165 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14166);
     Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
     // repetitionCount. 
-    Send PSend14170 = new_Send((Optr)self, SMB_repetitionCount, 0);
+    Send PSend14168 = new_Send((Optr)self, SMB_repetitionCount, 0);
     Symbol SMB_match_ = new_Symbol(L"match:");
     // match:. 
-    Send PSend14173 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
+    Send PSend14171 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
     Symbol SMB_reset = new_Symbol(L"reset");
     // reset. 
-    Send PSend14174 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
-    Array PThreadedCode14172 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14173, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14174, (Optr)&t_block_return);
-    Block PBlock14171 = new_Block_with(empty_Array, empty_Array, PThreadedCode14172, 2, PSend14173, PSend14174);
+    Send PSend14172 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
+    Array PThreadedCode14170 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14171, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14172, (Optr)&t_block_return);
+    Block PBlock14169 = new_Block_with(empty_Array, empty_Array, PThreadedCode14170, 2, PSend14171, PSend14172);
     Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
     // timesRepeat:. 
-    Send PSend14175 = new_Send((Optr)PSend14170, SMB_timesRepeat_, 1, (Optr)PBlock14171);
-    Array PThreadedCode14166 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14167, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14169, (Optr)&t_send1, (Optr)PSend14168, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14170, (Optr)&t_push_closure, (Optr)PBlock14171, (Optr)&t_send1, (Optr)PSend14175, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14164 = new_Method_with(empty_Array, PArray14165, empty_Array, PThreadedCode14166, 3, PAssign14167, PSend14175, self);
+    Send PSend14173 = new_Send((Optr)PSend14168, SMB_timesRepeat_, 1, (Optr)PBlock14169);
+    Array PThreadedCode14164 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14165, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14167, (Optr)&t_send1, (Optr)PSend14166, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14168, (Optr)&t_push_closure, (Optr)PBlock14169, (Optr)&t_send1, (Optr)PSend14173, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod14162 = new_Method_with(empty_Array, PArray14163, empty_Array, PThreadedCode14164, 3, PAssign14165, PSend14173, self);
     
-    MethodClosure MC_SMB_benchBlock = new_MethodClosure((Method)PMethod14164, Smalltalk_Parser_ParserBenchmark_Class);
+    MethodClosure MC_SMB_benchBlock = new_MethodClosure((Method)PMethod14162, Smalltalk_Parser_ParserBenchmark_Class);
     store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlock, MC_SMB_benchBlock);
 }
 
 
-static void init_SMB_benchSymbol() {
-    Symbol SMB_benchSymbol = new_Symbol(L"benchSymbol");
+static void init_SMB_repetitionCount() {
+    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
+    SmallInt int_300 = new_SmallInt(300);
+    Array PThreadedCode14175 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_300, (Optr)&t_method_return);
+    Constant int_300_Const = new_Constant((Optr)int_300);
+    Method PMethod14174 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14175, 1, int_300_Const);
+    
+    MethodClosure MC_SMB_repetitionCount = new_MethodClosure((Method)PMethod14174, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_repetitionCount, MC_SMB_repetitionCount);
+}
+
+
+static void init_SMB_benchStringNumbers() {
+    Symbol SMB_benchStringNumbers = new_Symbol(L"benchStringNumbers");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14177 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14181 = new_String(L"a\n\t^ #abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+    String string_14181 = new_String(L"a\n\t^ '012345689'");
     Constant string_14181_Const = new_Constant((Optr)string_14181);
     // on:. 
     Send PSend14180 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14181_Const);
@@ -288,17 +288,17 @@ static void init_SMB_benchSymbol() {
     Array PThreadedCode14178 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14179, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14181, (Optr)&t_send1, (Optr)PSend14180, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14182, (Optr)&t_push_closure, (Optr)PBlock14183, (Optr)&t_send1, (Optr)PSend14187, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14176 = new_Method_with(empty_Array, PArray14177, empty_Array, PThreadedCode14178, 3, PAssign14179, PSend14187, self);
     
-    MethodClosure MC_SMB_benchSymbol = new_MethodClosure((Method)PMethod14176, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchSymbol, MC_SMB_benchSymbol);
+    MethodClosure MC_SMB_benchStringNumbers = new_MethodClosure((Method)PMethod14176, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchStringNumbers, MC_SMB_benchStringNumbers);
 }
 
 
-static void init_SMB_benchInteger() {
-    Symbol SMB_benchInteger = new_Symbol(L"benchInteger");
+static void init_SMB_benchBlockWithArgAndBody() {
+    Symbol SMB_benchBlockWithArgAndBody = new_Symbol(L"benchBlockWithArgAndBody");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14189 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14193 = new_String(L"a\n\t^ 1234567890");
+    String string_14193 = new_String(L"a\n\t\t^ [ :a| a]");
     Constant string_14193_Const = new_Constant((Optr)string_14193);
     // on:. 
     Send PSend14192 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14193_Const);
@@ -320,17 +320,17 @@ static void init_SMB_benchInteger() {
     Array PThreadedCode14190 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14191, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14193, (Optr)&t_send1, (Optr)PSend14192, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14194, (Optr)&t_push_closure, (Optr)PBlock14195, (Optr)&t_send1, (Optr)PSend14199, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14188 = new_Method_with(empty_Array, PArray14189, empty_Array, PThreadedCode14190, 3, PAssign14191, PSend14199, self);
     
-    MethodClosure MC_SMB_benchInteger = new_MethodClosure((Method)PMethod14188, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchInteger, MC_SMB_benchInteger);
+    MethodClosure MC_SMB_benchBlockWithArgAndBody = new_MethodClosure((Method)PMethod14188, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlockWithArgAndBody, MC_SMB_benchBlockWithArgAndBody);
 }
 
 
-static void init_SMB_benchFloat() {
-    Symbol SMB_benchFloat = new_Symbol(L"benchFloat");
+static void init_SMB_benchSymbol() {
+    Symbol SMB_benchSymbol = new_Symbol(L"benchSymbol");
     Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
     Array PArray14201 = new_Array_with(1, (Optr)VAR_string_0_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14205 = new_String(L"a\n\t^ -1.2345678");
+    String string_14205 = new_String(L"a\n\t^ #abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
     Constant string_14205_Const = new_Constant((Optr)string_14205);
     // on:. 
     Send PSend14204 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14205_Const);
@@ -352,104 +352,8 @@ static void init_SMB_benchFloat() {
     Array PThreadedCode14202 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14203, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14205, (Optr)&t_send1, (Optr)PSend14204, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14206, (Optr)&t_push_closure, (Optr)PBlock14207, (Optr)&t_send1, (Optr)PSend14211, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod14200 = new_Method_with(empty_Array, PArray14201, empty_Array, PThreadedCode14202, 3, PAssign14203, PSend14211, self);
     
-    MethodClosure MC_SMB_benchFloat = new_MethodClosure((Method)PMethod14200, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchFloat, MC_SMB_benchFloat);
-}
-
-
-static void init_SMB_benchString() {
-    Symbol SMB_benchString = new_Symbol(L"benchString");
-    Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
-    Array PArray14213 = new_Array_with(1, (Optr)VAR_string_0_0);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14217 = new_String(L"a\n\t^ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'");
-    Constant string_14217_Const = new_Constant((Optr)string_14217);
-    // on:. 
-    Send PSend14216 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14217_Const);
-    Assign PAssign14215 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14216);
-    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
-    // repetitionCount. 
-    Send PSend14218 = new_Send((Optr)self, SMB_repetitionCount, 0);
-    Symbol SMB_match_ = new_Symbol(L"match:");
-    // match:. 
-    Send PSend14221 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
-    Symbol SMB_reset = new_Symbol(L"reset");
-    // reset. 
-    Send PSend14222 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
-    Array PThreadedCode14220 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14221, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14222, (Optr)&t_block_return);
-    Block PBlock14219 = new_Block_with(empty_Array, empty_Array, PThreadedCode14220, 2, PSend14221, PSend14222);
-    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
-    // timesRepeat:. 
-    Send PSend14223 = new_Send((Optr)PSend14218, SMB_timesRepeat_, 1, (Optr)PBlock14219);
-    Array PThreadedCode14214 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14215, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14217, (Optr)&t_send1, (Optr)PSend14216, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14218, (Optr)&t_push_closure, (Optr)PBlock14219, (Optr)&t_send1, (Optr)PSend14223, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14212 = new_Method_with(empty_Array, PArray14213, empty_Array, PThreadedCode14214, 3, PAssign14215, PSend14223, self);
-    
-    MethodClosure MC_SMB_benchString = new_MethodClosure((Method)PMethod14212, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchString, MC_SMB_benchString);
-}
-
-
-static void init_SMB_benchStringNumbers() {
-    Symbol SMB_benchStringNumbers = new_Symbol(L"benchStringNumbers");
-    Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
-    Array PArray14225 = new_Array_with(1, (Optr)VAR_string_0_0);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14229 = new_String(L"a\n\t^ '012345689'");
-    Constant string_14229_Const = new_Constant((Optr)string_14229);
-    // on:. 
-    Send PSend14228 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14229_Const);
-    Assign PAssign14227 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14228);
-    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
-    // repetitionCount. 
-    Send PSend14230 = new_Send((Optr)self, SMB_repetitionCount, 0);
-    Symbol SMB_match_ = new_Symbol(L"match:");
-    // match:. 
-    Send PSend14233 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
-    Symbol SMB_reset = new_Symbol(L"reset");
-    // reset. 
-    Send PSend14234 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
-    Array PThreadedCode14232 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14233, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14234, (Optr)&t_block_return);
-    Block PBlock14231 = new_Block_with(empty_Array, empty_Array, PThreadedCode14232, 2, PSend14233, PSend14234);
-    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
-    // timesRepeat:. 
-    Send PSend14235 = new_Send((Optr)PSend14230, SMB_timesRepeat_, 1, (Optr)PBlock14231);
-    Array PThreadedCode14226 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14227, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14229, (Optr)&t_send1, (Optr)PSend14228, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14230, (Optr)&t_push_closure, (Optr)PBlock14231, (Optr)&t_send1, (Optr)PSend14235, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14224 = new_Method_with(empty_Array, PArray14225, empty_Array, PThreadedCode14226, 3, PAssign14227, PSend14235, self);
-    
-    MethodClosure MC_SMB_benchStringNumbers = new_MethodClosure((Method)PMethod14224, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchStringNumbers, MC_SMB_benchStringNumbers);
-}
-
-
-static void init_SMB_benchBlockNested() {
-    Symbol SMB_benchBlockNested = new_Symbol(L"benchBlockNested");
-    Variable VAR_string_0_0 = new_Variable_named(L"string", 0);
-    Array PArray14237 = new_Array_with(1, (Optr)VAR_string_0_0);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    String string_14241 = new_String(L"a\n\t\t^ [[[[[[[[[[[]]]]]]]]]]]");
-    Constant string_14241_Const = new_Constant((Optr)string_14241);
-    // on:. 
-    Send PSend14240 = new_Send((Optr)PEGStringScanner_classReference, SMB_on_, 1, (Optr)string_14241_Const);
-    Assign PAssign14239 = new_Assign((Optr)VAR_string_0_0, (Optr)PSend14240);
-    Symbol SMB_repetitionCount = new_Symbol(L"repetitionCount");
-    // repetitionCount. 
-    Send PSend14242 = new_Send((Optr)self, SMB_repetitionCount, 0);
-    Symbol SMB_match_ = new_Symbol(L"match:");
-    // match:. 
-    Send PSend14245 = new_Send((Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, SMB_match_, 1, (Optr)VAR_string_0_0);
-    Symbol SMB_reset = new_Symbol(L"reset");
-    // reset. 
-    Send PSend14246 = new_Send((Optr)VAR_string_0_0, SMB_reset, 0);
-    Array PThreadedCode14244 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Parser_ParserBenchmark_methodParser, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send1, (Optr)PSend14245, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_string_0_0, (Optr)&t_send0, (Optr)PSend14246, (Optr)&t_block_return);
-    Block PBlock14243 = new_Block_with(empty_Array, empty_Array, PThreadedCode14244, 2, PSend14245, PSend14246);
-    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
-    // timesRepeat:. 
-    Send PSend14247 = new_Send((Optr)PSend14242, SMB_timesRepeat_, 1, (Optr)PBlock14243);
-    Array PThreadedCode14238 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign14239, (Optr)&t_push_class_reference, (Optr)PEGStringScanner_classReference, (Optr)&t_push1, (Optr)string_14241, (Optr)&t_send1, (Optr)PSend14240, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14242, (Optr)&t_push_closure, (Optr)PBlock14243, (Optr)&t_send1, (Optr)PSend14247, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14236 = new_Method_with(empty_Array, PArray14237, empty_Array, PThreadedCode14238, 3, PAssign14239, PSend14247, self);
-    
-    MethodClosure MC_SMB_benchBlockNested = new_MethodClosure((Method)PMethod14236, Smalltalk_Parser_ParserBenchmark_Class);
-    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchBlockNested, MC_SMB_benchBlockNested);
+    MethodClosure MC_SMB_benchSymbol = new_MethodClosure((Method)PMethod14200, Smalltalk_Parser_ParserBenchmark_Class);
+    store_method(Smalltalk_Parser_ParserBenchmark_Class, SMB_benchSymbol, MC_SMB_benchSymbol);
 }
 
 void init_Smalltalk_Parser_PParserBenchmark_layout() {
@@ -476,19 +380,16 @@ void init_Smalltalk_Parser_PParserBenchmark_layout() {
 
 void init_Smalltalk_Parser_PParserBenchmark_methods() {
     init_SMB_benchLongMethod();
-    init_SMB_benchAnnotation();
+    init_SMB_benchString();
     init_SMB_benchMediumMethod();
+    init_SMB_benchAnnotation();
     init_SMB_benchBlockWithArg();
     init_SMB_benchSmallMethod();
     init_SMB_setUp();
-    init_SMB_repetitionCount();
-    init_SMB_benchBlockWithArgAndBody();
     init_SMB_benchBlock();
-    init_SMB_benchSymbol();
-    init_SMB_benchInteger();
-    init_SMB_benchFloat();
-    init_SMB_benchString();
+    init_SMB_repetitionCount();
     init_SMB_benchStringNumbers();
-    init_SMB_benchBlockNested();
+    init_SMB_benchBlockWithArgAndBody();
+    init_SMB_benchSymbol();
     
 }
