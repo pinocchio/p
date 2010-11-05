@@ -126,44 +126,47 @@ no-char-cache:
 # ============================================================================
 
 benchmarks:
-	make clean;
-	make -j3;
+	@make clean;
+	@make -j3;
 	echo 'STANDARD PINOCCHIO/ =======================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make no-char-cache;
+	@make no-char-cache;
 	echo 'NO CHARACTER CACHE ========================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make no-int-cache;
+	@make no-int-cache;
 	echo 'NO INTEGER CACHE ==========================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make no-pic;
+	@make no-pic;
 	echo 'NO POLYMORPHIC INLINE CACHE ===============================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make no-pic;
+	@make no-pic;
 	echo 'NO INLINE CACHE ===========================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make array-wrapped;
+	@make array-wrapped;
 	echo 'ARRAYED WITH WRAPPED INTS =================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make array-nonative;
+	@make array-nonative;
 	echo 'NO ARRAY NATIVES ==========================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
-	make dict-nonative;
+	@make dict-nonative;
 	echo 'NO DICT NATIVES ===========================================' >> benchmark_results.txt
-	make run-benchmarks
+	@make run-benchmarks
 	
 	
 run-benchmarks:
-	./pinocchio benchmark/evalution/fib.p    >> benchmark_results.txt
-	./pinocchio benchmark/evalution/parser.p >> benchmark_results.txt
-	./pinocchio benchmark/evalution/dict.p   >> benchmark_results.txt
+	echo "    Fibonacci"
+	@./pinocchio benchmark/evalution/fib.p    >> benchmark_results.txt
+	echo "    Parser"
+	@./pinocchio benchmark/evalution/parser.p >> benchmark_results.txt
+	eecho "   Dictionary"
+	@./pinocchio benchmark/evalution/dict.p   >> benchmark_results.txt
 
 # ============================================================================
 probes: probes.d
