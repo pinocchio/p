@@ -126,37 +126,37 @@ no-char-cache:
 # ============================================================================
 
 benchmarks:
-	@make clean;
-	@make -j3;
-	echo 'STANDARD PINOCCHIO/ =======================================' >> benchmark_results.txt
+	@make clean >> /dev/null;
+	@make -j3  >> /dev/null;
+	@echo 'STANDARD PINOCCHIO/ =======================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make no-char-cache;
-	echo 'NO CHARACTER CACHE ========================================' >> benchmark_results.txt
+	@make no-char-cache >> /dev/null;
+	@echo 'NO CHARACTER CACHE ========================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make no-int-cache;
-	echo 'NO INTEGER CACHE ==========================================' >> benchmark_results.txt
+	@make no-int-cache >> /dev/null;
+	@echo 'NO INTEGER CACHE ==========================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make no-pic;
-	echo 'NO POLYMORPHIC INLINE CACHE ===============================' >> benchmark_results.txt
+	@make no-pic >> /dev/null;
+	@echo 'NO POLYMORPHIC INLINE CACHE ===============================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make no-pic;
-	echo 'NO INLINE CACHE ===========================================' >> benchmark_results.txt
+	@make no-pic >> /dev/null;
+	@echo 'NO INLINE CACHE ===========================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make array-wrapped;
-	echo 'ARRAYED WITH WRAPPED INTS =================================' >> benchmark_results.txt
+	@make array-wrapped >> /dev/null;
+	@echo 'ARRAYED WITH WRAPPED INTS =================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make array-nonative;
-	echo 'NO ARRAY NATIVES ==========================================' >> benchmark_results.txt
+	@make array-nonative >> /dev/null;
+	@echo 'NO ARRAY NATIVES ==========================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
-	@make dict-nonative;
-	echo 'NO DICT NATIVES ===========================================' >> benchmark_results.txt
+	@make dict-nonative >> /dev/null;
+	@echo 'NO DICT NATIVES ===========================================' | tee -a benchmark_results.txt
 	@make run-benchmarks
 	
 	
