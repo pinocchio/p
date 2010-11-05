@@ -156,12 +156,14 @@ benchmarks:
 	make run-benchmarks
 	
 	make dict-nonative;
-	echo 'NO DICT NATIVES ==========================================' >> benchmark_results.txt
+	echo 'NO DICT NATIVES ===========================================' >> benchmark_results.txt
 	make run-benchmarks
 	
 	
 run-benchmarks:
-	./$(TARGET) 
+	./pinocchio benchmark/evalution/fib.p    >> benchmark_results.txt
+	./pinocchio benchmark/evalution/parser.p >> benchmark_results.txt
+	./pinocchio benchmark/evalution/dict.p   >> benchmark_results.txt
 
 # ============================================================================
 probes: probes.d
