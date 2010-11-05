@@ -127,7 +127,9 @@ no-char-cache:
 
 benchmarks:
 	@make clean >> /dev/null;
-	
+	@echo "" >> benchmark_results.txt
+	@date    >> benchmark_results.txt
+
 	@echo 'STANDARD PINOCCHIO/ =======================================' | tee -a benchmark_results.txt
 	@make -j3  >> /dev/null;
 	@make run-benchmarks
