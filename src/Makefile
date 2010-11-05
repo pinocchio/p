@@ -29,7 +29,7 @@ ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 	CC	= llvm-gcc
-	CFLAGS += -O4
+	CFLAGS += -O3
 else
 	CFLAGS += -O3
     LDFLAGS +=  -export-dynamic
@@ -75,6 +75,8 @@ touch-benchmark-files:
 	touch -c 'system/collection/Array.c'
 	touch -c 'system/runtime/InlineCache.c'
 	touch -c 'system/interpretation/Threaded.c'
+	touch -c 'system/number/SmallInt.c'
+	touch -c 'system/string/Character.c'
 
 
 dict-nn:
@@ -111,6 +113,55 @@ no-pic:
 no-polymorphic-inline-cache:
 	make touch-benchmark-files
 	CFLAGS+="-DNO_PIC" make $(TARGET)
+	
+	
+no-int-cache:
+	make touch-benchmark-files
+	CFLAGS+="-DNO_SMALLINT_CACHE" make $(TARGET)
+
+no-char-cache:
+	make touch-benchmark-files
+	CFLAGS+="-DNO_CHAR_CACHE" make $(TARGET)
+	
+# ============================================================================
+
+benchmarks:
+	make clean;
+	make -j3;
+	echo 'STANDARD PINOCCHIO/ =======================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make no-char-cache;
+	echo 'NO CHARACTER CACHE ========================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make no-int-cache;
+	echo 'NO INTEGER CACHE ==========================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make no-pic;
+	echo 'NO POLYMORPHIC INLINE CACHE ===============================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make no-pic;
+	echo 'NO INLINE CACHE ===========================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make array-wrapped;
+	echo 'ARRAYED WITH WRAPPED INTS =================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make array-nonative;
+	echo 'NO ARRAY NATIVES ==========================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	make dict-nonative;
+	echo 'NO DICT NATIVES ==========================================' >> benchmark_results.txt
+	make run-benchmarks
+	
+	
+run-benchmarks:
+	./$(TARGET) 
 
 # ============================================================================
 probes: probes.d
@@ -120,6 +171,7 @@ probes.o: probes.d
 	@if [[ $$(uname) != "Darwin" ]]; then dtrace -G -s probes.d -o probes.o $(OBJECTS); fi
 
 dtrace:
+	make touch-benchmark-files
 	LDFLAGS+="" CFLAGS+="-03 -DDTRACE" make $(TARGET)
 
 # ============================================================================

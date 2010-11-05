@@ -21,9 +21,13 @@ SmallInt raw_SmallInt(long value)
 
 SmallInt new_SmallInt(long value)
 {
-//    if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
-//        return SmallInt_cache[value];
-//    }
+#ifndef NO_SMALLINT_CACHE
+    if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
+        DT(SMALLINT_CACHEHIT, value);
+        return SmallInt_cache[value];
+    }
+#endif //NO_SMALLINT_CACHE
+    DT(SMALLINT_CACHEMISS, value);
     return raw_SmallInt(value);
 }
 

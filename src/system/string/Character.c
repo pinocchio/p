@@ -14,9 +14,13 @@ Character new_Character_raw(wchar_t value)
 
 Character new_Character(wchar_t value)
 {
+#ifndef NO_CHAR_CACHE
     if (value < CHARACTER_TABLE_SIZE) {
+        DT(CHARACTER_CACHEHIT, value);
         return (Character)character_table->values[value];
     }
+#endif //NO_CHAR_CACHE
+    DT(CHARACTER_CACHEMISS, value);
     return new_Character_raw(value);
 }
 

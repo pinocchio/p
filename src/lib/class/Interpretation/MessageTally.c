@@ -9,12 +9,12 @@ Optr layout_Interpretation_MessageTally;
 static void init_SMB_interpret_() {
     Symbol SMB_interpret_ = new_Symbol(L"interpret:");
     Variable VAR_aClosure_0_0 = new_Variable_named(L"aClosure", 0);
-    Array PArray17264 = new_Array_with(1, (Optr)VAR_aClosure_0_0);
-    Super PSuper17266 = new_Super(SMB_interpret_, 1, (Optr)VAR_aClosure_0_0);
-    Array PThreadedCode17265 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aClosure_0_0, (Optr)&t_super1, (Optr)PSuper17266, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Interpretation_MessageTally_tally, (Optr)&t_method_return);
-    Method PMethod17263 = new_Method_with(PArray17264, empty_Array, empty_Array, PThreadedCode17265, 2, PSuper17266, slot_Interpretation_MessageTally_tally);
+    Array PArray17430 = new_Array_with(1, (Optr)VAR_aClosure_0_0);
+    Super PSuper17432 = new_Super(SMB_interpret_, 1, (Optr)VAR_aClosure_0_0);
+    Array PThreadedCode17431 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aClosure_0_0, (Optr)&t_super1, (Optr)PSuper17432, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Interpretation_MessageTally_tally, (Optr)&t_method_return);
+    Method PMethod17429 = new_Method_with(PArray17430, empty_Array, empty_Array, PThreadedCode17431, 2, PSuper17432, slot_Interpretation_MessageTally_tally);
     
-    MethodClosure MC_SMB_interpret_ = new_MethodClosure((Method)PMethod17263, Interpretation_MessageTally_Class);
+    MethodClosure MC_SMB_interpret_ = new_MethodClosure((Method)PMethod17429, Interpretation_MessageTally_Class);
     store_method(Interpretation_MessageTally_Class, SMB_interpret_, MC_SMB_interpret_);
 }
 
@@ -25,36 +25,36 @@ static void init_SMB_defaultStepBlock() {
     Variable VAR_class_1_1 = new_Variable_named(L"class", 1);
     Variable VAR_aMessage_1_2 = new_Variable_named(L"aMessage", 1);
     Variable VAR_action_1_3 = new_Variable_named(L"action", 1);
-    Array PArray17270 = new_Array_with(4, (Optr)VAR_receiver_1_0, (Optr)VAR_class_1_1, (Optr)VAR_aMessage_1_2, (Optr)VAR_action_1_3);
+    Array PArray17436 = new_Array_with(4, (Optr)VAR_receiver_1_0, (Optr)VAR_class_1_1, (Optr)VAR_aMessage_1_2, (Optr)VAR_action_1_3);
     Symbol SMB__plus_ = new_Symbol(L"+");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // +. 
-    Send PSend17273 = new_Send((Optr)slot_Interpretation_MessageTally_tally, SMB__plus_, 1, (Optr)int_1_Const);
-    Assign PAssign17272 = new_Assign((Optr)slot_Interpretation_MessageTally_tally, (Optr)PSend17273);
+    Send PSend17439 = new_Send((Optr)slot_Interpretation_MessageTally_tally, SMB__plus_, 1, (Optr)int_1_Const);
+    Assign PAssign17438 = new_Assign((Optr)slot_Interpretation_MessageTally_tally, (Optr)PSend17439);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend17274 = new_Send((Optr)VAR_action_1_3, SMB_value, 0);
-    Array PThreadedCode17271 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push1, (Optr)PAssign17272, (Optr)&t_push_slot, (Optr)slot_Interpretation_MessageTally_tally, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend17273, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_1_3, (Optr)&t_send0, (Optr)PSend17274, (Optr)&t_method_return);
-    Block PBlock17269 = new_Block_with(PArray17270, empty_Array, PThreadedCode17271, 2, PAssign17272, PSend17274);
-    Array PThreadedCode17268 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_closure, (Optr)PBlock17269, (Optr)&t_method_return);
-    Method PMethod17267 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17268, 1, PBlock17269);
+    Send PSend17440 = new_Send((Optr)VAR_action_1_3, SMB_value, 0);
+    Array PThreadedCode17437 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push1, (Optr)PAssign17438, (Optr)&t_push_slot, (Optr)slot_Interpretation_MessageTally_tally, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend17439, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_1_3, (Optr)&t_send0, (Optr)PSend17440, (Optr)&t_method_return);
+    Block PBlock17435 = new_Block_with(PArray17436, empty_Array, PThreadedCode17437, 2, PAssign17438, PSend17440);
+    Array PThreadedCode17434 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_closure, (Optr)PBlock17435, (Optr)&t_method_return);
+    Method PMethod17433 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17434, 1, PBlock17435);
     
-    MethodClosure MC_SMB_defaultStepBlock = new_MethodClosure((Method)PMethod17267, Interpretation_MessageTally_Class);
+    MethodClosure MC_SMB_defaultStepBlock = new_MethodClosure((Method)PMethod17433, Interpretation_MessageTally_Class);
     store_method(Interpretation_MessageTally_Class, SMB_defaultStepBlock, MC_SMB_defaultStepBlock);
 }
 
 
 static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
-    Super PSuper17277 = new_Super(SMB_initialize, 0);
+    Super PSuper17443 = new_Super(SMB_initialize, 0);
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
-    Assign PAssign17278 = new_Assign((Optr)slot_Interpretation_MessageTally_tally, (Optr)int_0_Const);
-    Array PThreadedCode17276 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper17277, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17278, (Optr)&t_push_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17275 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17276, 3, PSuper17277, PAssign17278, self);
+    Assign PAssign17444 = new_Assign((Optr)slot_Interpretation_MessageTally_tally, (Optr)int_0_Const);
+    Array PThreadedCode17442 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper17443, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17444, (Optr)&t_push_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17441 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17442, 3, PSuper17443, PAssign17444, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod17275, Interpretation_MessageTally_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod17441, Interpretation_MessageTally_Class);
     store_method(Interpretation_MessageTally_Class, SMB_initialize, MC_SMB_initialize);
 }
 

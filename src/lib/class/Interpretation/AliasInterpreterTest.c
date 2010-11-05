@@ -9,155 +9,155 @@ Optr layout_Interpretation_AliasInterpreterTest;
 static void init_SMB_testInstanceCreation() {
     Symbol SMB_testInstanceCreation = new_Symbol(L"testInstanceCreation");
     Variable VAR_result_0_0 = new_Variable_named(L"result", 0);
-    Array PArray17018 = new_Array_with(1, (Optr)VAR_result_0_0);
+    Array PArray17184 = new_Array_with(1, (Optr)VAR_result_0_0);
     Symbol SMB_interpret_ = new_Symbol(L"interpret:");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend17024 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
-    Array PThreadedCode17023 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17024, (Optr)&t_block_return);
-    Block PBlock17022 = new_Block_with(empty_Array, empty_Array, PThreadedCode17023, 1, PSend17024);
+    Send PSend17190 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
+    Array PThreadedCode17189 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17190, (Optr)&t_block_return);
+    Block PBlock17188 = new_Block_with(empty_Array, empty_Array, PThreadedCode17189, 1, PSend17190);
     // interpret:. 
-    Send PSend17021 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17022);
-    Assign PAssign17020 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17021);
+    Send PSend17187 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17188);
+    Assign PAssign17186 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17187);
     Symbol SMB_should = new_Symbol(L"should");
     // should. 
-    Send PSend17025 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17191 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     Symbol SMB_beKindOf_ = new_Symbol(L"beKindOf:");
     // beKindOf:. 
-    Send PSend17026 = new_Send((Optr)PSend17025, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17192 = new_Send((Optr)PSend17191, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend17027 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17193 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17028 = new_Send((Optr)PSend17027, SMB_should, 0);
+    Send PSend17194 = new_Send((Optr)PSend17193, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17029 = new_Send((Optr)PSend17028, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
+    Send PSend17195 = new_Send((Optr)PSend17194, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
     Symbol SMB_context = new_Symbol(L"context");
     // context. 
-    Send PSend17030 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17196 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17031 = new_Send((Optr)PSend17030, SMB_should, 0);
+    Send PSend17197 = new_Send((Optr)PSend17196, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17032 = new_Send((Optr)PSend17031, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
+    Send PSend17198 = new_Send((Optr)PSend17197, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
     // context. 
-    Send PSend17033 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17199 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     Symbol SMB_homeContext = new_Symbol(L"homeContext");
     // homeContext. 
-    Send PSend17034 = new_Send((Optr)PSend17033, SMB_homeContext, 0);
+    Send PSend17200 = new_Send((Optr)PSend17199, SMB_homeContext, 0);
     Symbol SMB_closure = new_Symbol(L"closure");
     // closure. 
-    Send PSend17035 = new_Send((Optr)PSend17034, SMB_closure, 0);
+    Send PSend17201 = new_Send((Optr)PSend17200, SMB_closure, 0);
     Symbol SMB_selector = new_Symbol(L"selector");
     // selector. 
-    Send PSend17036 = new_Send((Optr)PSend17035, SMB_selector, 0);
+    Send PSend17202 = new_Send((Optr)PSend17201, SMB_selector, 0);
     // should. 
-    Send PSend17037 = new_Send((Optr)PSend17036, SMB_should, 0);
+    Send PSend17203 = new_Send((Optr)PSend17202, SMB_should, 0);
     Symbol SMB_be_ = new_Symbol(L"be:");
     Constant SMB_testInstanceCreation_Const = new_Constant((Optr)SMB_testInstanceCreation);
     // be:. 
-    Send PSend17038 = new_Send((Optr)PSend17037, SMB_be_, 1, (Optr)SMB_testInstanceCreation_Const);
+    Send PSend17204 = new_Send((Optr)PSend17203, SMB_be_, 1, (Optr)SMB_testInstanceCreation_Const);
     Symbol SMB_origin = new_Symbol(L"origin");
     // origin. 
-    Send PSend17040 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17039 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17040);
+    Send PSend17206 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17205 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17206);
     // should. 
-    Send PSend17041 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17207 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17042 = new_Send((Optr)PSend17041, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17208 = new_Send((Optr)PSend17207, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     // value. 
-    Send PSend17043 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17209 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17044 = new_Send((Optr)PSend17043, SMB_should, 0);
+    Send PSend17210 = new_Send((Optr)PSend17209, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17045 = new_Send((Optr)PSend17044, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
+    Send PSend17211 = new_Send((Optr)PSend17210, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
     // context. 
-    Send PSend17046 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17212 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17047 = new_Send((Optr)PSend17046, SMB_should, 0);
+    Send PSend17213 = new_Send((Optr)PSend17212, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17048 = new_Send((Optr)PSend17047, SMB_beKindOf_, 1, (Optr)PMethodContext_classReference);
+    Send PSend17214 = new_Send((Optr)PSend17213, SMB_beKindOf_, 1, (Optr)PMethodContext_classReference);
     // context. 
-    Send PSend17049 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17215 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // homeContext. 
-    Send PSend17050 = new_Send((Optr)PSend17049, SMB_homeContext, 0);
+    Send PSend17216 = new_Send((Optr)PSend17215, SMB_homeContext, 0);
     // closure. 
-    Send PSend17051 = new_Send((Optr)PSend17050, SMB_closure, 0);
+    Send PSend17217 = new_Send((Optr)PSend17216, SMB_closure, 0);
     // selector. 
-    Send PSend17052 = new_Send((Optr)PSend17051, SMB_selector, 0);
+    Send PSend17218 = new_Send((Optr)PSend17217, SMB_selector, 0);
     // should. 
-    Send PSend17053 = new_Send((Optr)PSend17052, SMB_should, 0);
+    Send PSend17219 = new_Send((Optr)PSend17218, SMB_should, 0);
     Constant SMB_new_Const = new_Constant((Optr)SMB_new);
     // be:. 
-    Send PSend17054 = new_Send((Optr)PSend17053, SMB_be_, 1, (Optr)SMB_new_Const);
+    Send PSend17220 = new_Send((Optr)PSend17219, SMB_be_, 1, (Optr)SMB_new_Const);
     // origin. 
-    Send PSend17056 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17055 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17056);
+    Send PSend17222 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17221 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17222);
     // should. 
-    Send PSend17057 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17223 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17058 = new_Send((Optr)PSend17057, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17224 = new_Send((Optr)PSend17223, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     // value. 
-    Send PSend17059 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17225 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17060 = new_Send((Optr)PSend17059, SMB_should, 0);
+    Send PSend17226 = new_Send((Optr)PSend17225, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17061 = new_Send((Optr)PSend17060, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
+    Send PSend17227 = new_Send((Optr)PSend17226, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
     // context. 
-    Send PSend17062 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17228 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17063 = new_Send((Optr)PSend17062, SMB_should, 0);
+    Send PSend17229 = new_Send((Optr)PSend17228, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17064 = new_Send((Optr)PSend17063, SMB_beKindOf_, 1, (Optr)PMethodContext_classReference);
+    Send PSend17230 = new_Send((Optr)PSend17229, SMB_beKindOf_, 1, (Optr)PMethodContext_classReference);
     // context. 
-    Send PSend17065 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17231 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // homeContext. 
-    Send PSend17066 = new_Send((Optr)PSend17065, SMB_homeContext, 0);
+    Send PSend17232 = new_Send((Optr)PSend17231, SMB_homeContext, 0);
     // closure. 
-    Send PSend17067 = new_Send((Optr)PSend17066, SMB_closure, 0);
+    Send PSend17233 = new_Send((Optr)PSend17232, SMB_closure, 0);
     // selector. 
-    Send PSend17068 = new_Send((Optr)PSend17067, SMB_selector, 0);
+    Send PSend17234 = new_Send((Optr)PSend17233, SMB_selector, 0);
     // should. 
-    Send PSend17069 = new_Send((Optr)PSend17068, SMB_should, 0);
+    Send PSend17235 = new_Send((Optr)PSend17234, SMB_should, 0);
     Symbol  SMB_initialize = new_Symbol(L"initialize");
     Constant SMB_initialize_Const = new_Constant((Optr)SMB_initialize);
     // be:. 
-    Send PSend17070 = new_Send((Optr)PSend17069, SMB_be_, 1, (Optr)SMB_initialize_Const);
+    Send PSend17236 = new_Send((Optr)PSend17235, SMB_be_, 1, (Optr)SMB_initialize_Const);
     // origin. 
-    Send PSend17072 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17071 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17072);
+    Send PSend17238 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17237 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17238);
     // should. 
-    Send PSend17073 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17239 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17074 = new_Send((Optr)PSend17073, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
+    Send PSend17240 = new_Send((Optr)PSend17239, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
     // context. 
-    Send PSend17075 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17241 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17076 = new_Send((Optr)PSend17075, SMB_should, 0);
+    Send PSend17242 = new_Send((Optr)PSend17241, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17077 = new_Send((Optr)PSend17076, SMB_beKindOf_, 1, (Optr)PNativeMethodContext_classReference);
+    Send PSend17243 = new_Send((Optr)PSend17242, SMB_beKindOf_, 1, (Optr)PNativeMethodContext_classReference);
     // context. 
-    Send PSend17078 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17244 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     Symbol SMB_message = new_Symbol(L"message");
     // message. 
-    Send PSend17079 = new_Send((Optr)PSend17078, SMB_message, 0);
+    Send PSend17245 = new_Send((Optr)PSend17244, SMB_message, 0);
     // selector. 
-    Send PSend17080 = new_Send((Optr)PSend17079, SMB_selector, 0);
+    Send PSend17246 = new_Send((Optr)PSend17245, SMB_selector, 0);
     // should. 
-    Send PSend17081 = new_Send((Optr)PSend17080, SMB_should, 0);
+    Send PSend17247 = new_Send((Optr)PSend17246, SMB_should, 0);
     Symbol  SMB_basicNew = new_Symbol(L"basicNew");
     Constant SMB_basicNew_Const = new_Constant((Optr)SMB_basicNew);
     // be:. 
-    Send PSend17082 = new_Send((Optr)PSend17081, SMB_be_, 1, (Optr)SMB_basicNew_Const);
+    Send PSend17248 = new_Send((Optr)PSend17247, SMB_be_, 1, (Optr)SMB_basicNew_Const);
     // origin. 
-    Send PSend17083 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Send PSend17249 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
     // should. 
-    Send PSend17084 = new_Send((Optr)PSend17083, SMB_should, 0);
+    Send PSend17250 = new_Send((Optr)PSend17249, SMB_should, 0);
     // be:. 
-    Send PSend17085 = new_Send((Optr)PSend17084, SMB_be_, 1, (Optr)nil_Const);
-    Array PThreadedCode17019 = instantiate_Array_with(ThreadedCode_Class, 0, 224, (Optr)&t_push1, (Optr)PAssign17020, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17022, (Optr)&t_send1, (Optr)PSend17021, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17025, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17026, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17027, (Optr)&t_send0, (Optr)PSend17028, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17029, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17030, (Optr)&t_send0, (Optr)PSend17031, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17032, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17033, (Optr)&t_send0, (Optr)PSend17034, (Optr)&t_send0, (Optr)PSend17035, (Optr)&t_send0, (Optr)PSend17036, (Optr)&t_send0, (Optr)PSend17037, (Optr)&t_push1, (Optr)SMB_testInstanceCreation, (Optr)&t_send1, (Optr)PSend17038, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17039, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17040, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17041, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17042, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17043, (Optr)&t_send0, (Optr)PSend17044, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17045, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17046, (Optr)&t_send0, (Optr)PSend17047, (Optr)&t_push_class_reference, (Optr)PMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17048, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17049, (Optr)&t_send0, (Optr)PSend17050, (Optr)&t_send0, (Optr)PSend17051, (Optr)&t_send0, (Optr)PSend17052, (Optr)&t_send0, (Optr)PSend17053, (Optr)&t_push1, (Optr)SMB_new, (Optr)&t_send1, (Optr)PSend17054, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17055, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17056, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17057, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17058, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17059, (Optr)&t_send0, (Optr)PSend17060, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17061, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17062, (Optr)&t_send0, (Optr)PSend17063, (Optr)&t_push_class_reference, (Optr)PMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17064, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17065, (Optr)&t_send0, (Optr)PSend17066, (Optr)&t_send0, (Optr)PSend17067, (Optr)&t_send0, (Optr)PSend17068, (Optr)&t_send0, (Optr)PSend17069, (Optr)&t_push1, (Optr)SMB_initialize, (Optr)&t_send1, (Optr)PSend17070, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17071, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17072, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17073, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17074, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17075, (Optr)&t_send0, (Optr)PSend17076, (Optr)&t_push_class_reference, (Optr)PNativeMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17077, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17078, (Optr)&t_send0, (Optr)PSend17079, (Optr)&t_send0, (Optr)PSend17080, (Optr)&t_send0, (Optr)PSend17081, (Optr)&t_push1, (Optr)SMB_basicNew, (Optr)&t_send1, (Optr)PSend17082, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17083, (Optr)&t_send0, (Optr)PSend17084, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17085, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17017 = new_Method_with(empty_Array, PArray17018, empty_Array, PThreadedCode17019, 21, PAssign17020, PSend17026, PSend17029, PSend17032, PSend17038, PAssign17039, PSend17042, PSend17045, PSend17048, PSend17054, PAssign17055, PSend17058, PSend17061, PSend17064, PSend17070, PAssign17071, PSend17074, PSend17077, PSend17082, PSend17085, self);
+    Send PSend17251 = new_Send((Optr)PSend17250, SMB_be_, 1, (Optr)nil_Const);
+    Array PThreadedCode17185 = instantiate_Array_with(ThreadedCode_Class, 0, 224, (Optr)&t_push1, (Optr)PAssign17186, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17188, (Optr)&t_send1, (Optr)PSend17187, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17191, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17192, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17193, (Optr)&t_send0, (Optr)PSend17194, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17195, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17196, (Optr)&t_send0, (Optr)PSend17197, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17198, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17199, (Optr)&t_send0, (Optr)PSend17200, (Optr)&t_send0, (Optr)PSend17201, (Optr)&t_send0, (Optr)PSend17202, (Optr)&t_send0, (Optr)PSend17203, (Optr)&t_push1, (Optr)SMB_testInstanceCreation, (Optr)&t_send1, (Optr)PSend17204, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17205, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17206, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17207, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17208, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17209, (Optr)&t_send0, (Optr)PSend17210, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17211, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17212, (Optr)&t_send0, (Optr)PSend17213, (Optr)&t_push_class_reference, (Optr)PMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17214, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17215, (Optr)&t_send0, (Optr)PSend17216, (Optr)&t_send0, (Optr)PSend17217, (Optr)&t_send0, (Optr)PSend17218, (Optr)&t_send0, (Optr)PSend17219, (Optr)&t_push1, (Optr)SMB_new, (Optr)&t_send1, (Optr)PSend17220, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17221, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17222, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17223, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17224, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17225, (Optr)&t_send0, (Optr)PSend17226, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17227, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17228, (Optr)&t_send0, (Optr)PSend17229, (Optr)&t_push_class_reference, (Optr)PMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17230, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17231, (Optr)&t_send0, (Optr)PSend17232, (Optr)&t_send0, (Optr)PSend17233, (Optr)&t_send0, (Optr)PSend17234, (Optr)&t_send0, (Optr)PSend17235, (Optr)&t_push1, (Optr)SMB_initialize, (Optr)&t_send1, (Optr)PSend17236, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17237, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17238, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17239, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17240, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17241, (Optr)&t_send0, (Optr)PSend17242, (Optr)&t_push_class_reference, (Optr)PNativeMethodContext_classReference, (Optr)&t_send1, (Optr)PSend17243, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17244, (Optr)&t_send0, (Optr)PSend17245, (Optr)&t_send0, (Optr)PSend17246, (Optr)&t_send0, (Optr)PSend17247, (Optr)&t_push1, (Optr)SMB_basicNew, (Optr)&t_send1, (Optr)PSend17248, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17249, (Optr)&t_send0, (Optr)PSend17250, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17251, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17183 = new_Method_with(empty_Array, PArray17184, empty_Array, PThreadedCode17185, 21, PAssign17186, PSend17192, PSend17195, PSend17198, PSend17204, PAssign17205, PSend17208, PSend17211, PSend17214, PSend17220, PAssign17221, PSend17224, PSend17227, PSend17230, PSend17236, PAssign17237, PSend17240, PSend17243, PSend17248, PSend17251, self);
     
-    MethodClosure MC_SMB_testInstanceCreation = new_MethodClosure((Method)PMethod17017, Interpretation_AliasInterpreterTest_Class);
+    MethodClosure MC_SMB_testInstanceCreation = new_MethodClosure((Method)PMethod17183, Interpretation_AliasInterpreterTest_Class);
     store_method(Interpretation_AliasInterpreterTest_Class, SMB_testInstanceCreation, MC_SMB_testInstanceCreation);
 }
 
@@ -165,131 +165,131 @@ static void init_SMB_testInstanceCreation() {
 static void init_SMB_testFieldWrite() {
     Symbol SMB_testFieldWrite = new_Symbol(L"testFieldWrite");
     Variable VAR_result_0_0 = new_Variable_named(L"result", 0);
-    Array PArray17087 = new_Array_with(1, (Optr)VAR_result_0_0);
+    Array PArray17253 = new_Array_with(1, (Optr)VAR_result_0_0);
     Symbol SMB_interpret_ = new_Symbol(L"interpret:");
     Variable VAR_c_1_0 = new_Variable_named(L"c", 1);
-    Array PArray17092 = new_Array_with(1, (Optr)VAR_c_1_0);
+    Array PArray17258 = new_Array_with(1, (Optr)VAR_c_1_0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend17095 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
-    Assign PAssign17094 = new_Assign((Optr)VAR_c_1_0, (Optr)PSend17095);
+    Send PSend17261 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
+    Assign PAssign17260 = new_Assign((Optr)VAR_c_1_0, (Optr)PSend17261);
     SmallInt int_10 = new_SmallInt(10);
     Symbol SMB_a_ = new_Symbol(L"a:");
     Constant int_10_Const = new_Constant((Optr)int_10);
     // a:. 
-    Send PSend17096 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_10_Const);
-    Array PThreadedCode17093 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push1, (Optr)PAssign17094, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17095, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17096, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_method_return);
-    Block PBlock17091 = new_Block_with(empty_Array, PArray17092, PThreadedCode17093, 3, PAssign17094, PSend17096, VAR_c_1_0);
+    Send PSend17262 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_10_Const);
+    Array PThreadedCode17259 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push1, (Optr)PAssign17260, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17261, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17262, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_method_return);
+    Block PBlock17257 = new_Block_with(empty_Array, PArray17258, PThreadedCode17259, 3, PAssign17260, PSend17262, VAR_c_1_0);
     // interpret:. 
-    Send PSend17090 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17091);
-    Assign PAssign17089 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17090);
+    Send PSend17256 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17257);
+    Assign PAssign17255 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17256);
     Symbol SMB_should = new_Symbol(L"should");
     // should. 
-    Send PSend17097 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17263 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     Symbol SMB_beKindOf_ = new_Symbol(L"beKindOf:");
     // beKindOf:. 
-    Send PSend17098 = new_Send((Optr)PSend17097, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17264 = new_Send((Optr)PSend17263, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend17099 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17265 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17100 = new_Send((Optr)PSend17099, SMB_should, 0);
+    Send PSend17266 = new_Send((Optr)PSend17265, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17101 = new_Send((Optr)PSend17100, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
+    Send PSend17267 = new_Send((Optr)PSend17266, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
     Symbol SMB_context = new_Symbol(L"context");
     // context. 
-    Send PSend17102 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17268 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17103 = new_Send((Optr)PSend17102, SMB_should, 0);
+    Send PSend17269 = new_Send((Optr)PSend17268, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17104 = new_Send((Optr)PSend17103, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
+    Send PSend17270 = new_Send((Optr)PSend17269, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
     // context. 
-    Send PSend17105 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17271 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     Symbol SMB_homeContext = new_Symbol(L"homeContext");
     // homeContext. 
-    Send PSend17106 = new_Send((Optr)PSend17105, SMB_homeContext, 0);
+    Send PSend17272 = new_Send((Optr)PSend17271, SMB_homeContext, 0);
     Symbol SMB_closure = new_Symbol(L"closure");
     // closure. 
-    Send PSend17107 = new_Send((Optr)PSend17106, SMB_closure, 0);
+    Send PSend17273 = new_Send((Optr)PSend17272, SMB_closure, 0);
     Symbol SMB_selector = new_Symbol(L"selector");
     // selector. 
-    Send PSend17108 = new_Send((Optr)PSend17107, SMB_selector, 0);
+    Send PSend17274 = new_Send((Optr)PSend17273, SMB_selector, 0);
     // should. 
-    Send PSend17109 = new_Send((Optr)PSend17108, SMB_should, 0);
+    Send PSend17275 = new_Send((Optr)PSend17274, SMB_should, 0);
     Symbol SMB_be_ = new_Symbol(L"be:");
     Constant SMB_testFieldWrite_Const = new_Constant((Optr)SMB_testFieldWrite);
     // be:. 
-    Send PSend17110 = new_Send((Optr)PSend17109, SMB_be_, 1, (Optr)SMB_testFieldWrite_Const);
+    Send PSend17276 = new_Send((Optr)PSend17275, SMB_be_, 1, (Optr)SMB_testFieldWrite_Const);
     // value. 
-    Send PSend17112 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
-    Assign PAssign17111 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17112);
+    Send PSend17278 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Assign PAssign17277 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17278);
     Symbol SMB_a = new_Symbol(L"a");
     // a. 
-    Send PSend17113 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
+    Send PSend17279 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
     // should. 
-    Send PSend17114 = new_Send((Optr)PSend17113, SMB_should, 0);
+    Send PSend17280 = new_Send((Optr)PSend17279, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17115 = new_Send((Optr)PSend17114, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
+    Send PSend17281 = new_Send((Optr)PSend17280, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
     Symbol SMB_b = new_Symbol(L"b");
     // b. 
-    Send PSend17116 = new_Send((Optr)VAR_result_0_0, SMB_b, 0);
+    Send PSend17282 = new_Send((Optr)VAR_result_0_0, SMB_b, 0);
     // should. 
-    Send PSend17117 = new_Send((Optr)PSend17116, SMB_should, 0);
+    Send PSend17283 = new_Send((Optr)PSend17282, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17118 = new_Send((Optr)PSend17117, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
+    Send PSend17284 = new_Send((Optr)PSend17283, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
     // a. 
-    Send PSend17120 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
-    Assign PAssign17119 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17120);
+    Send PSend17286 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
+    Assign PAssign17285 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17286);
     // value. 
-    Send PSend17121 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17287 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17122 = new_Send((Optr)PSend17121, SMB_should, 0);
+    Send PSend17288 = new_Send((Optr)PSend17287, SMB_should, 0);
     // be:. 
-    Send PSend17123 = new_Send((Optr)PSend17122, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17289 = new_Send((Optr)PSend17288, SMB_be_, 1, (Optr)int_10_Const);
     Symbol SMB_predecessor = new_Symbol(L"predecessor");
     // predecessor. 
-    Send PSend17124 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17290 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // should. 
-    Send PSend17125 = new_Send((Optr)PSend17124, SMB_should, 0);
+    Send PSend17291 = new_Send((Optr)PSend17290, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17126 = new_Send((Optr)PSend17125, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
+    Send PSend17292 = new_Send((Optr)PSend17291, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
     Symbol SMB_origin = new_Symbol(L"origin");
     // origin. 
-    Send PSend17128 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17127 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17128);
+    Send PSend17294 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17293 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17294);
     // should. 
-    Send PSend17129 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17295 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17130 = new_Send((Optr)PSend17129, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
+    Send PSend17296 = new_Send((Optr)PSend17295, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
     // value. 
-    Send PSend17131 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17297 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17132 = new_Send((Optr)PSend17131, SMB_should, 0);
+    Send PSend17298 = new_Send((Optr)PSend17297, SMB_should, 0);
     // be:. 
-    Send PSend17133 = new_Send((Optr)PSend17132, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17299 = new_Send((Optr)PSend17298, SMB_be_, 1, (Optr)int_10_Const);
     // origin. 
-    Send PSend17135 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17134 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17135);
+    Send PSend17301 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17300 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17301);
     // should. 
-    Send PSend17136 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17302 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17137 = new_Send((Optr)PSend17136, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
+    Send PSend17303 = new_Send((Optr)PSend17302, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
     // value. 
-    Send PSend17138 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17304 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17139 = new_Send((Optr)PSend17138, SMB_should, 0);
+    Send PSend17305 = new_Send((Optr)PSend17304, SMB_should, 0);
     // be:. 
-    Send PSend17140 = new_Send((Optr)PSend17139, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17306 = new_Send((Optr)PSend17305, SMB_be_, 1, (Optr)int_10_Const);
     // origin. 
-    Send PSend17141 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Send PSend17307 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
     // should. 
-    Send PSend17142 = new_Send((Optr)PSend17141, SMB_should, 0);
+    Send PSend17308 = new_Send((Optr)PSend17307, SMB_should, 0);
     // be:. 
-    Send PSend17143 = new_Send((Optr)PSend17142, SMB_be_, 1, (Optr)nil_Const);
-    Array PThreadedCode17088 = instantiate_Array_with(ThreadedCode_Class, 0, 185, (Optr)&t_push1, (Optr)PAssign17089, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17091, (Optr)&t_send1, (Optr)PSend17090, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17097, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17098, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17099, (Optr)&t_send0, (Optr)PSend17100, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17101, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17102, (Optr)&t_send0, (Optr)PSend17103, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17104, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17105, (Optr)&t_send0, (Optr)PSend17106, (Optr)&t_send0, (Optr)PSend17107, (Optr)&t_send0, (Optr)PSend17108, (Optr)&t_send0, (Optr)PSend17109, (Optr)&t_push1, (Optr)SMB_testFieldWrite, (Optr)&t_send1, (Optr)PSend17110, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17111, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17112, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17113, (Optr)&t_send0, (Optr)PSend17114, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17115, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17116, (Optr)&t_send0, (Optr)PSend17117, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17118, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17119, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17120, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17121, (Optr)&t_send0, (Optr)PSend17122, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17123, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17124, (Optr)&t_send0, (Optr)PSend17125, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17126, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17127, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17128, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17129, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17130, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17131, (Optr)&t_send0, (Optr)PSend17132, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17133, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17134, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17135, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17136, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17137, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17138, (Optr)&t_send0, (Optr)PSend17139, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17140, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17141, (Optr)&t_send0, (Optr)PSend17142, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17143, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17086 = new_Method_with(empty_Array, PArray17087, empty_Array, PThreadedCode17088, 19, PAssign17089, PSend17098, PSend17101, PSend17104, PSend17110, PAssign17111, PSend17115, PSend17118, PAssign17119, PSend17123, PSend17126, PAssign17127, PSend17130, PSend17133, PAssign17134, PSend17137, PSend17140, PSend17143, self);
+    Send PSend17309 = new_Send((Optr)PSend17308, SMB_be_, 1, (Optr)nil_Const);
+    Array PThreadedCode17254 = instantiate_Array_with(ThreadedCode_Class, 0, 185, (Optr)&t_push1, (Optr)PAssign17255, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17257, (Optr)&t_send1, (Optr)PSend17256, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17263, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17264, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17265, (Optr)&t_send0, (Optr)PSend17266, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17267, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17268, (Optr)&t_send0, (Optr)PSend17269, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17270, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17271, (Optr)&t_send0, (Optr)PSend17272, (Optr)&t_send0, (Optr)PSend17273, (Optr)&t_send0, (Optr)PSend17274, (Optr)&t_send0, (Optr)PSend17275, (Optr)&t_push1, (Optr)SMB_testFieldWrite, (Optr)&t_send1, (Optr)PSend17276, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17277, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17278, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17279, (Optr)&t_send0, (Optr)PSend17280, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17281, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17282, (Optr)&t_send0, (Optr)PSend17283, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17284, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17285, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17286, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17287, (Optr)&t_send0, (Optr)PSend17288, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17289, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17290, (Optr)&t_send0, (Optr)PSend17291, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17292, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17293, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17294, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17295, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17296, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17297, (Optr)&t_send0, (Optr)PSend17298, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17299, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17300, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17301, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17302, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17303, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17304, (Optr)&t_send0, (Optr)PSend17305, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17306, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17307, (Optr)&t_send0, (Optr)PSend17308, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17309, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17252 = new_Method_with(empty_Array, PArray17253, empty_Array, PThreadedCode17254, 19, PAssign17255, PSend17264, PSend17267, PSend17270, PSend17276, PAssign17277, PSend17281, PSend17284, PAssign17285, PSend17289, PSend17292, PAssign17293, PSend17296, PSend17299, PAssign17300, PSend17303, PSend17306, PSend17309, self);
     
-    MethodClosure MC_SMB_testFieldWrite = new_MethodClosure((Method)PMethod17086, Interpretation_AliasInterpreterTest_Class);
+    MethodClosure MC_SMB_testFieldWrite = new_MethodClosure((Method)PMethod17252, Interpretation_AliasInterpreterTest_Class);
     store_method(Interpretation_AliasInterpreterTest_Class, SMB_testFieldWrite, MC_SMB_testFieldWrite);
 }
 
@@ -298,12 +298,12 @@ static void init_SMB_setUp() {
     Symbol SMB_setUp = new_Symbol(L"setUp");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend17147 = new_Send((Optr)PAliasInterpreter_classReference, SMB_new, 0);
-    Assign PAssign17146 = new_Assign((Optr)slot_Interpretation_AliasInterpreterTest_i, (Optr)PSend17147);
-    Array PThreadedCode17145 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign17146, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_send0, (Optr)PSend17147, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17144 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17145, 2, PAssign17146, self);
+    Send PSend17313 = new_Send((Optr)PAliasInterpreter_classReference, SMB_new, 0);
+    Assign PAssign17312 = new_Assign((Optr)slot_Interpretation_AliasInterpreterTest_i, (Optr)PSend17313);
+    Array PThreadedCode17311 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign17312, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_send0, (Optr)PSend17313, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17310 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode17311, 2, PAssign17312, self);
     
-    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod17144, Interpretation_AliasInterpreterTest_Class);
+    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod17310, Interpretation_AliasInterpreterTest_Class);
     store_method(Interpretation_AliasInterpreterTest_Class, SMB_setUp, MC_SMB_setUp);
 }
 
@@ -311,53 +311,53 @@ static void init_SMB_setUp() {
 static void init_SMB_testConstant() {
     Symbol SMB_testConstant = new_Symbol(L"testConstant");
     Variable VAR_result_0_0 = new_Variable_named(L"result", 0);
-    Array PArray17149 = new_Array_with(1, (Optr)VAR_result_0_0);
+    Array PArray17315 = new_Array_with(1, (Optr)VAR_result_0_0);
     Symbol SMB_interpret_ = new_Symbol(L"interpret:");
-    Array PThreadedCode17154 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_2);
+    Array PThreadedCode17320 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_2);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
-    Block PBlock17153 = new_Block_with(empty_Array, empty_Array, PThreadedCode17154, 1, int_2_Const);
+    Block PBlock17319 = new_Block_with(empty_Array, empty_Array, PThreadedCode17320, 1, int_2_Const);
     // interpret:. 
-    Send PSend17152 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17153);
-    Assign PAssign17151 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17152);
+    Send PSend17318 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17319);
+    Assign PAssign17317 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17318);
     Symbol SMB_should = new_Symbol(L"should");
     // should. 
-    Send PSend17155 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17321 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     Symbol SMB_beKindOf_ = new_Symbol(L"beKindOf:");
     // beKindOf:. 
-    Send PSend17156 = new_Send((Optr)PSend17155, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17322 = new_Send((Optr)PSend17321, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend17157 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17323 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17158 = new_Send((Optr)PSend17157, SMB_should, 0);
+    Send PSend17324 = new_Send((Optr)PSend17323, SMB_should, 0);
     Symbol SMB_be_ = new_Symbol(L"be:");
     // be:. 
-    Send PSend17159 = new_Send((Optr)PSend17158, SMB_be_, 1, (Optr)int_2_Const);
+    Send PSend17325 = new_Send((Optr)PSend17324, SMB_be_, 1, (Optr)int_2_Const);
     Symbol SMB_origin = new_Symbol(L"origin");
     // origin. 
-    Send PSend17161 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17160 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17161);
+    Send PSend17327 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17326 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17327);
     // should. 
-    Send PSend17162 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17328 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17163 = new_Send((Optr)PSend17162, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
+    Send PSend17329 = new_Send((Optr)PSend17328, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
     // origin. 
-    Send PSend17164 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Send PSend17330 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
     // should. 
-    Send PSend17165 = new_Send((Optr)PSend17164, SMB_should, 0);
+    Send PSend17331 = new_Send((Optr)PSend17330, SMB_should, 0);
     // be:. 
-    Send PSend17166 = new_Send((Optr)PSend17165, SMB_be_, 1, (Optr)nil_Const);
+    Send PSend17332 = new_Send((Optr)PSend17331, SMB_be_, 1, (Optr)nil_Const);
     // value. 
-    Send PSend17167 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17333 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17168 = new_Send((Optr)PSend17167, SMB_should, 0);
+    Send PSend17334 = new_Send((Optr)PSend17333, SMB_should, 0);
     // be:. 
-    Send PSend17169 = new_Send((Optr)PSend17168, SMB_be_, 1, (Optr)int_2_Const);
-    Array PThreadedCode17150 = instantiate_Array_with(ThreadedCode_Class, 0, 67, (Optr)&t_push1, (Optr)PAssign17151, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17153, (Optr)&t_send1, (Optr)PSend17152, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17155, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17156, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17157, (Optr)&t_send0, (Optr)PSend17158, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend17159, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17160, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17161, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17162, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17163, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17164, (Optr)&t_send0, (Optr)PSend17165, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17166, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17167, (Optr)&t_send0, (Optr)PSend17168, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend17169, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17148 = new_Method_with(empty_Array, PArray17149, empty_Array, PThreadedCode17150, 8, PAssign17151, PSend17156, PSend17159, PAssign17160, PSend17163, PSend17166, PSend17169, self);
+    Send PSend17335 = new_Send((Optr)PSend17334, SMB_be_, 1, (Optr)int_2_Const);
+    Array PThreadedCode17316 = instantiate_Array_with(ThreadedCode_Class, 0, 67, (Optr)&t_push1, (Optr)PAssign17317, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17319, (Optr)&t_send1, (Optr)PSend17318, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17321, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17322, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17323, (Optr)&t_send0, (Optr)PSend17324, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend17325, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17326, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17327, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17328, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17329, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17330, (Optr)&t_send0, (Optr)PSend17331, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17332, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17333, (Optr)&t_send0, (Optr)PSend17334, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend17335, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17314 = new_Method_with(empty_Array, PArray17315, empty_Array, PThreadedCode17316, 8, PAssign17317, PSend17322, PSend17325, PAssign17326, PSend17329, PSend17332, PSend17335, self);
     
-    MethodClosure MC_SMB_testConstant = new_MethodClosure((Method)PMethod17148, Interpretation_AliasInterpreterTest_Class);
+    MethodClosure MC_SMB_testConstant = new_MethodClosure((Method)PMethod17314, Interpretation_AliasInterpreterTest_Class);
     store_method(Interpretation_AliasInterpreterTest_Class, SMB_testConstant, MC_SMB_testConstant);
 }
 
@@ -365,203 +365,203 @@ static void init_SMB_testConstant() {
 static void init_SMB_testFieldOverwrite() {
     Symbol SMB_testFieldOverwrite = new_Symbol(L"testFieldOverwrite");
     Variable VAR_result_0_0 = new_Variable_named(L"result", 0);
-    Array PArray17171 = new_Array_with(1, (Optr)VAR_result_0_0);
+    Array PArray17337 = new_Array_with(1, (Optr)VAR_result_0_0);
     Symbol SMB_interpret_ = new_Symbol(L"interpret:");
     Variable VAR_c_1_0 = new_Variable_named(L"c", 1);
-    Array PArray17176 = new_Array_with(1, (Optr)VAR_c_1_0);
+    Array PArray17342 = new_Array_with(1, (Optr)VAR_c_1_0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend17179 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
-    Assign PAssign17178 = new_Assign((Optr)VAR_c_1_0, (Optr)PSend17179);
+    Send PSend17345 = new_Send((Optr)ChildClassTestClass_classReference, SMB_new, 0);
+    Assign PAssign17344 = new_Assign((Optr)VAR_c_1_0, (Optr)PSend17345);
     SmallInt int_10 = new_SmallInt(10);
     Symbol SMB_a_ = new_Symbol(L"a:");
     Constant int_10_Const = new_Constant((Optr)int_10);
     // a:. 
-    Send PSend17180 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_10_Const);
+    Send PSend17346 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_10_Const);
     SmallInt int_20 = new_SmallInt(20);
     Constant int_20_Const = new_Constant((Optr)int_20);
     // a:. 
-    Send PSend17181 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_20_Const);
-    Array PThreadedCode17177 = instantiate_Array_with(ThreadedCode_Class, 0, 25, (Optr)&t_push1, (Optr)PAssign17178, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17179, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17180, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17181, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_method_return);
-    Block PBlock17175 = new_Block_with(empty_Array, PArray17176, PThreadedCode17177, 4, PAssign17178, PSend17180, PSend17181, VAR_c_1_0);
+    Send PSend17347 = new_Send((Optr)VAR_c_1_0, SMB_a_, 1, (Optr)int_20_Const);
+    Array PThreadedCode17343 = instantiate_Array_with(ThreadedCode_Class, 0, 25, (Optr)&t_push1, (Optr)PAssign17344, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send0, (Optr)PSend17345, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17346, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17347, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_c_1_0, (Optr)&t_method_return);
+    Block PBlock17341 = new_Block_with(empty_Array, PArray17342, PThreadedCode17343, 4, PAssign17344, PSend17346, PSend17347, VAR_c_1_0);
     // interpret:. 
-    Send PSend17174 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17175);
-    Assign PAssign17173 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17174);
+    Send PSend17340 = new_Send((Optr)PAliasInterpreter_classReference, SMB_interpret_, 1, (Optr)PBlock17341);
+    Assign PAssign17339 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17340);
     Symbol SMB_should = new_Symbol(L"should");
     // should. 
-    Send PSend17182 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17348 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     Symbol SMB_beKindOf_ = new_Symbol(L"beKindOf:");
     // beKindOf:. 
-    Send PSend17183 = new_Send((Optr)PSend17182, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
+    Send PSend17349 = new_Send((Optr)PSend17348, SMB_beKindOf_, 1, (Optr)PReturnAlias_classReference);
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend17184 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17350 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17185 = new_Send((Optr)PSend17184, SMB_should, 0);
+    Send PSend17351 = new_Send((Optr)PSend17350, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17186 = new_Send((Optr)PSend17185, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
+    Send PSend17352 = new_Send((Optr)PSend17351, SMB_beKindOf_, 1, (Optr)ChildClassTestClass_classReference);
     Symbol SMB_context = new_Symbol(L"context");
     // context. 
-    Send PSend17187 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17353 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     // should. 
-    Send PSend17188 = new_Send((Optr)PSend17187, SMB_should, 0);
+    Send PSend17354 = new_Send((Optr)PSend17353, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17189 = new_Send((Optr)PSend17188, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
+    Send PSend17355 = new_Send((Optr)PSend17354, SMB_beKindOf_, 1, (Optr)PBlockContext_classReference);
     // context. 
-    Send PSend17190 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
+    Send PSend17356 = new_Send((Optr)VAR_result_0_0, SMB_context, 0);
     Symbol SMB_homeContext = new_Symbol(L"homeContext");
     // homeContext. 
-    Send PSend17191 = new_Send((Optr)PSend17190, SMB_homeContext, 0);
+    Send PSend17357 = new_Send((Optr)PSend17356, SMB_homeContext, 0);
     Symbol SMB_closure = new_Symbol(L"closure");
     // closure. 
-    Send PSend17192 = new_Send((Optr)PSend17191, SMB_closure, 0);
+    Send PSend17358 = new_Send((Optr)PSend17357, SMB_closure, 0);
     Symbol SMB_selector = new_Symbol(L"selector");
     // selector. 
-    Send PSend17193 = new_Send((Optr)PSend17192, SMB_selector, 0);
+    Send PSend17359 = new_Send((Optr)PSend17358, SMB_selector, 0);
     // should. 
-    Send PSend17194 = new_Send((Optr)PSend17193, SMB_should, 0);
+    Send PSend17360 = new_Send((Optr)PSend17359, SMB_should, 0);
     Symbol SMB_be_ = new_Symbol(L"be:");
     Constant SMB_testFieldOverwrite_Const = new_Constant((Optr)SMB_testFieldOverwrite);
     // be:. 
-    Send PSend17195 = new_Send((Optr)PSend17194, SMB_be_, 1, (Optr)SMB_testFieldOverwrite_Const);
+    Send PSend17361 = new_Send((Optr)PSend17360, SMB_be_, 1, (Optr)SMB_testFieldOverwrite_Const);
     // value. 
-    Send PSend17197 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
-    Assign PAssign17196 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17197);
+    Send PSend17363 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Assign PAssign17362 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17363);
     Symbol SMB_a = new_Symbol(L"a");
     // a. 
-    Send PSend17198 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
+    Send PSend17364 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
     // should. 
-    Send PSend17199 = new_Send((Optr)PSend17198, SMB_should, 0);
+    Send PSend17365 = new_Send((Optr)PSend17364, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17200 = new_Send((Optr)PSend17199, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
+    Send PSend17366 = new_Send((Optr)PSend17365, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
     Symbol SMB_b = new_Symbol(L"b");
     // b. 
-    Send PSend17201 = new_Send((Optr)VAR_result_0_0, SMB_b, 0);
+    Send PSend17367 = new_Send((Optr)VAR_result_0_0, SMB_b, 0);
     // should. 
-    Send PSend17202 = new_Send((Optr)PSend17201, SMB_should, 0);
+    Send PSend17368 = new_Send((Optr)PSend17367, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17203 = new_Send((Optr)PSend17202, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
+    Send PSend17369 = new_Send((Optr)PSend17368, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
     // a. 
-    Send PSend17205 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
-    Assign PAssign17204 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17205);
+    Send PSend17371 = new_Send((Optr)VAR_result_0_0, SMB_a, 0);
+    Assign PAssign17370 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17371);
     // value. 
-    Send PSend17206 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17372 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17207 = new_Send((Optr)PSend17206, SMB_should, 0);
+    Send PSend17373 = new_Send((Optr)PSend17372, SMB_should, 0);
     // be:. 
-    Send PSend17208 = new_Send((Optr)PSend17207, SMB_be_, 1, (Optr)int_20_Const);
+    Send PSend17374 = new_Send((Optr)PSend17373, SMB_be_, 1, (Optr)int_20_Const);
     Symbol SMB_predecessor = new_Symbol(L"predecessor");
     // predecessor. 
-    Send PSend17209 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17375 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // should. 
-    Send PSend17210 = new_Send((Optr)PSend17209, SMB_should, 0);
+    Send PSend17376 = new_Send((Optr)PSend17375, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17211 = new_Send((Optr)PSend17210, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
+    Send PSend17377 = new_Send((Optr)PSend17376, SMB_beKindOf_, 1, (Optr)PFieldWriteAlias_classReference);
     // predecessor. 
-    Send PSend17212 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17378 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // value. 
-    Send PSend17213 = new_Send((Optr)PSend17212, SMB_value, 0);
+    Send PSend17379 = new_Send((Optr)PSend17378, SMB_value, 0);
     // should. 
-    Send PSend17214 = new_Send((Optr)PSend17213, SMB_should, 0);
+    Send PSend17380 = new_Send((Optr)PSend17379, SMB_should, 0);
     // be:. 
-    Send PSend17215 = new_Send((Optr)PSend17214, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17381 = new_Send((Optr)PSend17380, SMB_be_, 1, (Optr)int_10_Const);
     // predecessor. 
-    Send PSend17216 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17382 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // predecessor. 
-    Send PSend17217 = new_Send((Optr)PSend17216, SMB_predecessor, 0);
+    Send PSend17383 = new_Send((Optr)PSend17382, SMB_predecessor, 0);
     // should. 
-    Send PSend17218 = new_Send((Optr)PSend17217, SMB_should, 0);
+    Send PSend17384 = new_Send((Optr)PSend17383, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17219 = new_Send((Optr)PSend17218, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
+    Send PSend17385 = new_Send((Optr)PSend17384, SMB_beKindOf_, 1, (Optr)PAllocationAlias_classReference);
     // predecessor. 
-    Send PSend17220 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17386 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     Symbol SMB_origin = new_Symbol(L"origin");
     // origin. 
-    Send PSend17221 = new_Send((Optr)PSend17220, SMB_origin, 0);
+    Send PSend17387 = new_Send((Optr)PSend17386, SMB_origin, 0);
     // should. 
-    Send PSend17222 = new_Send((Optr)PSend17221, SMB_should, 0);
+    Send PSend17388 = new_Send((Optr)PSend17387, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17223 = new_Send((Optr)PSend17222, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
+    Send PSend17389 = new_Send((Optr)PSend17388, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
     // predecessor. 
-    Send PSend17224 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17390 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // origin. 
-    Send PSend17225 = new_Send((Optr)PSend17224, SMB_origin, 0);
+    Send PSend17391 = new_Send((Optr)PSend17390, SMB_origin, 0);
     // value. 
-    Send PSend17226 = new_Send((Optr)PSend17225, SMB_value, 0);
+    Send PSend17392 = new_Send((Optr)PSend17391, SMB_value, 0);
     // should. 
-    Send PSend17227 = new_Send((Optr)PSend17226, SMB_should, 0);
+    Send PSend17393 = new_Send((Optr)PSend17392, SMB_should, 0);
     // be:. 
-    Send PSend17228 = new_Send((Optr)PSend17227, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17394 = new_Send((Optr)PSend17393, SMB_be_, 1, (Optr)int_10_Const);
     // predecessor. 
-    Send PSend17229 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17395 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // origin. 
-    Send PSend17230 = new_Send((Optr)PSend17229, SMB_origin, 0);
+    Send PSend17396 = new_Send((Optr)PSend17395, SMB_origin, 0);
     // origin. 
-    Send PSend17231 = new_Send((Optr)PSend17230, SMB_origin, 0);
+    Send PSend17397 = new_Send((Optr)PSend17396, SMB_origin, 0);
     // should. 
-    Send PSend17232 = new_Send((Optr)PSend17231, SMB_should, 0);
+    Send PSend17398 = new_Send((Optr)PSend17397, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17233 = new_Send((Optr)PSend17232, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
+    Send PSend17399 = new_Send((Optr)PSend17398, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
     // predecessor. 
-    Send PSend17234 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17400 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // origin. 
-    Send PSend17235 = new_Send((Optr)PSend17234, SMB_origin, 0);
+    Send PSend17401 = new_Send((Optr)PSend17400, SMB_origin, 0);
     // origin. 
-    Send PSend17236 = new_Send((Optr)PSend17235, SMB_origin, 0);
+    Send PSend17402 = new_Send((Optr)PSend17401, SMB_origin, 0);
     // value. 
-    Send PSend17237 = new_Send((Optr)PSend17236, SMB_value, 0);
+    Send PSend17403 = new_Send((Optr)PSend17402, SMB_value, 0);
     // should. 
-    Send PSend17238 = new_Send((Optr)PSend17237, SMB_should, 0);
+    Send PSend17404 = new_Send((Optr)PSend17403, SMB_should, 0);
     // be:. 
-    Send PSend17239 = new_Send((Optr)PSend17238, SMB_be_, 1, (Optr)int_10_Const);
+    Send PSend17405 = new_Send((Optr)PSend17404, SMB_be_, 1, (Optr)int_10_Const);
     // predecessor. 
-    Send PSend17240 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
+    Send PSend17406 = new_Send((Optr)VAR_result_0_0, SMB_predecessor, 0);
     // origin. 
-    Send PSend17241 = new_Send((Optr)PSend17240, SMB_origin, 0);
+    Send PSend17407 = new_Send((Optr)PSend17406, SMB_origin, 0);
     // origin. 
-    Send PSend17242 = new_Send((Optr)PSend17241, SMB_origin, 0);
+    Send PSend17408 = new_Send((Optr)PSend17407, SMB_origin, 0);
     // origin. 
-    Send PSend17243 = new_Send((Optr)PSend17242, SMB_origin, 0);
+    Send PSend17409 = new_Send((Optr)PSend17408, SMB_origin, 0);
     // should. 
-    Send PSend17244 = new_Send((Optr)PSend17243, SMB_should, 0);
+    Send PSend17410 = new_Send((Optr)PSend17409, SMB_should, 0);
     // be:. 
-    Send PSend17245 = new_Send((Optr)PSend17244, SMB_be_, 1, (Optr)nil_Const);
+    Send PSend17411 = new_Send((Optr)PSend17410, SMB_be_, 1, (Optr)nil_Const);
     // origin. 
-    Send PSend17247 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17246 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17247);
+    Send PSend17413 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17412 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17413);
     // should. 
-    Send PSend17248 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17414 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17249 = new_Send((Optr)PSend17248, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
+    Send PSend17415 = new_Send((Optr)PSend17414, SMB_beKindOf_, 1, (Optr)PParameterAlias_classReference);
     // value. 
-    Send PSend17250 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17416 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17251 = new_Send((Optr)PSend17250, SMB_should, 0);
+    Send PSend17417 = new_Send((Optr)PSend17416, SMB_should, 0);
     // be:. 
-    Send PSend17252 = new_Send((Optr)PSend17251, SMB_be_, 1, (Optr)int_20_Const);
+    Send PSend17418 = new_Send((Optr)PSend17417, SMB_be_, 1, (Optr)int_20_Const);
     // origin. 
-    Send PSend17254 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
-    Assign PAssign17253 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17254);
+    Send PSend17420 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Assign PAssign17419 = new_Assign((Optr)VAR_result_0_0, (Optr)PSend17420);
     // should. 
-    Send PSend17255 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
+    Send PSend17421 = new_Send((Optr)VAR_result_0_0, SMB_should, 0);
     // beKindOf:. 
-    Send PSend17256 = new_Send((Optr)PSend17255, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
+    Send PSend17422 = new_Send((Optr)PSend17421, SMB_beKindOf_, 1, (Optr)PLiteralAlias_classReference);
     // value. 
-    Send PSend17257 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
+    Send PSend17423 = new_Send((Optr)VAR_result_0_0, SMB_value, 0);
     // should. 
-    Send PSend17258 = new_Send((Optr)PSend17257, SMB_should, 0);
+    Send PSend17424 = new_Send((Optr)PSend17423, SMB_should, 0);
     // be:. 
-    Send PSend17259 = new_Send((Optr)PSend17258, SMB_be_, 1, (Optr)int_20_Const);
+    Send PSend17425 = new_Send((Optr)PSend17424, SMB_be_, 1, (Optr)int_20_Const);
     // origin. 
-    Send PSend17260 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
+    Send PSend17426 = new_Send((Optr)VAR_result_0_0, SMB_origin, 0);
     // should. 
-    Send PSend17261 = new_Send((Optr)PSend17260, SMB_should, 0);
+    Send PSend17427 = new_Send((Optr)PSend17426, SMB_should, 0);
     // be:. 
-    Send PSend17262 = new_Send((Optr)PSend17261, SMB_be_, 1, (Optr)nil_Const);
-    Array PThreadedCode17172 = instantiate_Array_with(ThreadedCode_Class, 0, 287, (Optr)&t_push1, (Optr)PAssign17173, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17175, (Optr)&t_send1, (Optr)PSend17174, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17182, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17183, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17184, (Optr)&t_send0, (Optr)PSend17185, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17186, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17187, (Optr)&t_send0, (Optr)PSend17188, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17189, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17190, (Optr)&t_send0, (Optr)PSend17191, (Optr)&t_send0, (Optr)PSend17192, (Optr)&t_send0, (Optr)PSend17193, (Optr)&t_send0, (Optr)PSend17194, (Optr)&t_push1, (Optr)SMB_testFieldOverwrite, (Optr)&t_send1, (Optr)PSend17195, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17196, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17197, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17198, (Optr)&t_send0, (Optr)PSend17199, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17200, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17201, (Optr)&t_send0, (Optr)PSend17202, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17203, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17204, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17205, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17206, (Optr)&t_send0, (Optr)PSend17207, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17208, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17209, (Optr)&t_send0, (Optr)PSend17210, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17211, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17212, (Optr)&t_send0, (Optr)PSend17213, (Optr)&t_send0, (Optr)PSend17214, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17215, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17216, (Optr)&t_send0, (Optr)PSend17217, (Optr)&t_send0, (Optr)PSend17218, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17219, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17220, (Optr)&t_send0, (Optr)PSend17221, (Optr)&t_send0, (Optr)PSend17222, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17223, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17224, (Optr)&t_send0, (Optr)PSend17225, (Optr)&t_send0, (Optr)PSend17226, (Optr)&t_send0, (Optr)PSend17227, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17228, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17229, (Optr)&t_send0, (Optr)PSend17230, (Optr)&t_send0, (Optr)PSend17231, (Optr)&t_send0, (Optr)PSend17232, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17233, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17234, (Optr)&t_send0, (Optr)PSend17235, (Optr)&t_send0, (Optr)PSend17236, (Optr)&t_send0, (Optr)PSend17237, (Optr)&t_send0, (Optr)PSend17238, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17239, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17240, (Optr)&t_send0, (Optr)PSend17241, (Optr)&t_send0, (Optr)PSend17242, (Optr)&t_send0, (Optr)PSend17243, (Optr)&t_send0, (Optr)PSend17244, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17245, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17246, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17247, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17248, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17249, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17250, (Optr)&t_send0, (Optr)PSend17251, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17252, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17253, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17254, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17255, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17256, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17257, (Optr)&t_send0, (Optr)PSend17258, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17259, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17260, (Optr)&t_send0, (Optr)PSend17261, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17262, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod17170 = new_Method_with(empty_Array, PArray17171, empty_Array, PThreadedCode17172, 26, PAssign17173, PSend17183, PSend17186, PSend17189, PSend17195, PAssign17196, PSend17200, PSend17203, PAssign17204, PSend17208, PSend17211, PSend17215, PSend17219, PSend17223, PSend17228, PSend17233, PSend17239, PSend17245, PAssign17246, PSend17249, PSend17252, PAssign17253, PSend17256, PSend17259, PSend17262, self);
+    Send PSend17428 = new_Send((Optr)PSend17427, SMB_be_, 1, (Optr)nil_Const);
+    Array PThreadedCode17338 = instantiate_Array_with(ThreadedCode_Class, 0, 287, (Optr)&t_push1, (Optr)PAssign17339, (Optr)&t_push_class_reference, (Optr)PAliasInterpreter_classReference, (Optr)&t_push_closure, (Optr)PBlock17341, (Optr)&t_send1, (Optr)PSend17340, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17348, (Optr)&t_push_class_reference, (Optr)PReturnAlias_classReference, (Optr)&t_send1, (Optr)PSend17349, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17350, (Optr)&t_send0, (Optr)PSend17351, (Optr)&t_push_class_reference, (Optr)ChildClassTestClass_classReference, (Optr)&t_send1, (Optr)PSend17352, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17353, (Optr)&t_send0, (Optr)PSend17354, (Optr)&t_push_class_reference, (Optr)PBlockContext_classReference, (Optr)&t_send1, (Optr)PSend17355, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17356, (Optr)&t_send0, (Optr)PSend17357, (Optr)&t_send0, (Optr)PSend17358, (Optr)&t_send0, (Optr)PSend17359, (Optr)&t_send0, (Optr)PSend17360, (Optr)&t_push1, (Optr)SMB_testFieldOverwrite, (Optr)&t_send1, (Optr)PSend17361, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17362, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17363, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17364, (Optr)&t_send0, (Optr)PSend17365, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17366, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17367, (Optr)&t_send0, (Optr)PSend17368, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17369, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17370, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17371, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17372, (Optr)&t_send0, (Optr)PSend17373, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17374, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17375, (Optr)&t_send0, (Optr)PSend17376, (Optr)&t_push_class_reference, (Optr)PFieldWriteAlias_classReference, (Optr)&t_send1, (Optr)PSend17377, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17378, (Optr)&t_send0, (Optr)PSend17379, (Optr)&t_send0, (Optr)PSend17380, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17381, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17382, (Optr)&t_send0, (Optr)PSend17383, (Optr)&t_send0, (Optr)PSend17384, (Optr)&t_push_class_reference, (Optr)PAllocationAlias_classReference, (Optr)&t_send1, (Optr)PSend17385, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17386, (Optr)&t_send0, (Optr)PSend17387, (Optr)&t_send0, (Optr)PSend17388, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17389, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17390, (Optr)&t_send0, (Optr)PSend17391, (Optr)&t_send0, (Optr)PSend17392, (Optr)&t_send0, (Optr)PSend17393, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17394, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17395, (Optr)&t_send0, (Optr)PSend17396, (Optr)&t_send0, (Optr)PSend17397, (Optr)&t_send0, (Optr)PSend17398, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17399, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17400, (Optr)&t_send0, (Optr)PSend17401, (Optr)&t_send0, (Optr)PSend17402, (Optr)&t_send0, (Optr)PSend17403, (Optr)&t_send0, (Optr)PSend17404, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend17405, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17406, (Optr)&t_send0, (Optr)PSend17407, (Optr)&t_send0, (Optr)PSend17408, (Optr)&t_send0, (Optr)PSend17409, (Optr)&t_send0, (Optr)PSend17410, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17411, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17412, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17413, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17414, (Optr)&t_push_class_reference, (Optr)PParameterAlias_classReference, (Optr)&t_send1, (Optr)PSend17415, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17416, (Optr)&t_send0, (Optr)PSend17417, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17418, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign17419, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17420, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17421, (Optr)&t_push_class_reference, (Optr)PLiteralAlias_classReference, (Optr)&t_send1, (Optr)PSend17422, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17423, (Optr)&t_send0, (Optr)PSend17424, (Optr)&t_push1, (Optr)int_20, (Optr)&t_send1, (Optr)PSend17425, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_result_0_0, (Optr)&t_send0, (Optr)PSend17426, (Optr)&t_send0, (Optr)PSend17427, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend17428, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod17336 = new_Method_with(empty_Array, PArray17337, empty_Array, PThreadedCode17338, 26, PAssign17339, PSend17349, PSend17352, PSend17355, PSend17361, PAssign17362, PSend17366, PSend17369, PAssign17370, PSend17374, PSend17377, PSend17381, PSend17385, PSend17389, PSend17394, PSend17399, PSend17405, PSend17411, PAssign17412, PSend17415, PSend17418, PAssign17419, PSend17422, PSend17425, PSend17428, self);
     
-    MethodClosure MC_SMB_testFieldOverwrite = new_MethodClosure((Method)PMethod17170, Interpretation_AliasInterpreterTest_Class);
+    MethodClosure MC_SMB_testFieldOverwrite = new_MethodClosure((Method)PMethod17336, Interpretation_AliasInterpreterTest_Class);
     store_method(Interpretation_AliasInterpreterTest_Class, SMB_testFieldOverwrite, MC_SMB_testFieldOverwrite);
 }
 

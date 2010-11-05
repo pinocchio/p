@@ -8,7 +8,12 @@ provider pinocchio {
    probe message__cachemiss(char* class, char* selector);
 
    probe new_smallint(long i);
+   probe smallint__cachemiss(long i);
+   probe smallint__cachehit(long i);
+
    probe new_string(char* str);
 
+   probe character__cachemiss(char i);
+   probe character__cachehit(char i);
 };
 

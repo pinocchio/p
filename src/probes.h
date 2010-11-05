@@ -39,6 +39,22 @@ do { \
 } while (0)
 #define	PINOCCHIO_MESSAGE_CACHEMISS_ENABLED() \
 	__dtrace_isenabled$pinocchio$message__cachemiss$v1()
+#define	PINOCCHIO_NEW_SMALLINT(arg0) \
+do { \
+	__asm__ volatile(".reference " PINOCCHIO_TYPEDEFS); \
+	__dtrace_probe$pinocchio$new_smallint$v1$6c6f6e67(arg0); \
+	__asm__ volatile(".reference " PINOCCHIO_STABILITY); \
+} while (0)
+#define	PINOCCHIO_NEW_SMALLINT_ENABLED() \
+	__dtrace_isenabled$pinocchio$new_smallint$v1()
+#define	PINOCCHIO_NEW_STRING(arg0) \
+do { \
+	__asm__ volatile(".reference " PINOCCHIO_TYPEDEFS); \
+	__dtrace_probe$pinocchio$new_string$v1$63686172202a(arg0); \
+	__asm__ volatile(".reference " PINOCCHIO_STABILITY); \
+} while (0)
+#define	PINOCCHIO_NEW_STRING_ENABLED() \
+	__dtrace_isenabled$pinocchio$new_string$v1()
 #define	PINOCCHIO_THREADED(arg0) \
 do { \
 	__asm__ volatile(".reference " PINOCCHIO_TYPEDEFS); \
@@ -55,6 +71,10 @@ extern void __dtrace_probe$pinocchio$message__cachehit$v1$63686172202a$636861722
 extern int __dtrace_isenabled$pinocchio$message__cachehit$v1(void);
 extern void __dtrace_probe$pinocchio$message__cachemiss$v1$63686172202a$63686172202a(char *, char *);
 extern int __dtrace_isenabled$pinocchio$message__cachemiss$v1(void);
+extern void __dtrace_probe$pinocchio$new_smallint$v1$6c6f6e67(long);
+extern int __dtrace_isenabled$pinocchio$new_smallint$v1(void);
+extern void __dtrace_probe$pinocchio$new_string$v1$63686172202a(char *);
+extern int __dtrace_isenabled$pinocchio$new_string$v1(void);
 extern void __dtrace_probe$pinocchio$threaded$v1$63686172202a(char *);
 extern int __dtrace_isenabled$pinocchio$threaded$v1(void);
 

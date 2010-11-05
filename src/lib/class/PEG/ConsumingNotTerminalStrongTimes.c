@@ -8,14 +8,14 @@ Optr layout_PEG_ConsumingNotTerminalStrongTimes;
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19954 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray20120 = new_Array_with(1, (Optr)VAR_input_0_0);
     Symbol SMB_pushUntil_ = new_Symbol(L"pushUntil:");
     // pushUntil:. 
-    Send PSend19956 = new_Send((Optr)VAR_input_0_0, SMB_pushUntil_, 1, (Optr)slot_PEG_NotTerminal_char);
-    Array PThreadedCode19955 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_NotTerminal_char, (Optr)&t_send1, (Optr)PSend19956, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Method PMethod19953 = new_Method_with(PArray19954, empty_Array, empty_Array, PThreadedCode19955, 2, PSend19956, true_Const);
+    Send PSend20122 = new_Send((Optr)VAR_input_0_0, SMB_pushUntil_, 1, (Optr)slot_PEG_NotTerminal_char);
+    Array PThreadedCode20121 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_NotTerminal_char, (Optr)&t_send1, (Optr)PSend20122, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Method PMethod20119 = new_Method_with(PArray20120, empty_Array, empty_Array, PThreadedCode20121, 2, PSend20122, true_Const);
     
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19953, PEG_ConsumingNotTerminalStrongTimes_Class);
+    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod20119, PEG_ConsumingNotTerminalStrongTimes_Class);
     store_method(PEG_ConsumingNotTerminalStrongTimes_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 
@@ -23,14 +23,14 @@ static void init_SMB_parseOn_() {
 static void init_SMB_omitMatch_() {
     Symbol SMB_omitMatch_ = new_Symbol(L"omitMatch:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19958 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray20124 = new_Array_with(1, (Optr)VAR_input_0_0);
     Symbol SMB_scanUntil_ = new_Symbol(L"scanUntil:");
     // scanUntil:. 
-    Send PSend19960 = new_Send((Optr)VAR_input_0_0, SMB_scanUntil_, 1, (Optr)slot_PEG_NotTerminal_char);
-    Array PThreadedCode19959 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_NotTerminal_char, (Optr)&t_send1, (Optr)PSend19960, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Method PMethod19957 = new_Method_with(PArray19958, empty_Array, empty_Array, PThreadedCode19959, 2, PSend19960, true_Const);
+    Send PSend20126 = new_Send((Optr)VAR_input_0_0, SMB_scanUntil_, 1, (Optr)slot_PEG_NotTerminal_char);
+    Array PThreadedCode20125 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_NotTerminal_char, (Optr)&t_send1, (Optr)PSend20126, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Method PMethod20123 = new_Method_with(PArray20124, empty_Array, empty_Array, PThreadedCode20125, 2, PSend20126, true_Const);
     
-    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19957, PEG_ConsumingNotTerminalStrongTimes_Class);
+    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod20123, PEG_ConsumingNotTerminalStrongTimes_Class);
     store_method(PEG_ConsumingNotTerminalStrongTimes_Class, SMB_omitMatch_, MC_SMB_omitMatch_);
 }
 

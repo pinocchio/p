@@ -141,8 +141,6 @@ typedef struct Nil{} Nil;
 /* ========================================================================= */
 
 #define STACK_SIZE 1024*1024
-#define INT_CACHE_LOWER -1
-#define INT_CACHE_UPPER 1023
 
 extern void CNT_continue_eval();
 extern void CNT_abort_eval();
