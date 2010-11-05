@@ -162,11 +162,8 @@ benchmarks:
 	
 	
 run-benchmarks:
-	@echo "    Fibonacci"
 	@./pinocchio benchmark/evalution/fib.p    | tee -a benchmark_results.txt
-	@echo "    Parser"
 	@./pinocchio benchmark/evalution/parser.p | tee -a benchmark_results.txt
-	@echo "   Dictionary"
 	@./pinocchio benchmark/evalution/dict.p   | tee -a benchmark_results.txt
 
 # ============================================================================
