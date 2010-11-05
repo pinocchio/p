@@ -8,14 +8,14 @@ Optr layout_Slot_PointerSlot;
 static void init_SMB_readFrom_() {
     Symbol SMB_readFrom_ = new_Symbol(L"readFrom:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray21864 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Array PArray21894 = new_Array_with(1, (Optr)VAR_anObject_0_0);
     Symbol SMB_shouldNotCall = new_Symbol(L"shouldNotCall");
     // shouldNotCall. 
-    Send PSend21866 = new_Send((Optr)self, SMB_shouldNotCall, 0);
-    Array PThreadedCode21865 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21866, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21863 = new_Method_with(PArray21864, empty_Array, empty_Array, PThreadedCode21865, 2, PSend21866, self);
+    Send PSend21896 = new_Send((Optr)self, SMB_shouldNotCall, 0);
+    Array PThreadedCode21895 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21896, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21893 = new_Method_with(PArray21894, empty_Array, empty_Array, PThreadedCode21895, 2, PSend21896, self);
     
-    MethodClosure MC_SMB_readFrom_ = new_MethodClosure((Method)PMethod21863, PointerSlot_Class);
+    MethodClosure MC_SMB_readFrom_ = new_MethodClosure((Method)PMethod21893, PointerSlot_Class);
     store_method(PointerSlot_Class, SMB_readFrom_, MC_SMB_readFrom_);
 }
 
@@ -24,14 +24,14 @@ static void init_SMB_assign_on_() {
     Symbol SMB_assign_on_ = new_Symbol(L"assign:on:");
     Variable VAR_value_0_0 = new_Variable_named(L"value", 0);
     Variable VAR_anObject_0_1 = new_Variable_named(L"anObject", 0);
-    Array PArray21868 = new_Array_with(2, (Optr)VAR_value_0_0, (Optr)VAR_anObject_0_1);
+    Array PArray21898 = new_Array_with(2, (Optr)VAR_value_0_0, (Optr)VAR_anObject_0_1);
     Symbol SMB_shouldNotCall = new_Symbol(L"shouldNotCall");
     // shouldNotCall. 
-    Send PSend21870 = new_Send((Optr)self, SMB_shouldNotCall, 0);
-    Array PThreadedCode21869 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21870, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21867 = new_Method_with(PArray21868, empty_Array, empty_Array, PThreadedCode21869, 2, PSend21870, self);
+    Send PSend21900 = new_Send((Optr)self, SMB_shouldNotCall, 0);
+    Array PThreadedCode21899 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21900, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21897 = new_Method_with(PArray21898, empty_Array, empty_Array, PThreadedCode21899, 2, PSend21900, self);
     
-    MethodClosure MC_SMB_assign_on_ = new_MethodClosure((Method)PMethod21867, PointerSlot_Class);
+    MethodClosure MC_SMB_assign_on_ = new_MethodClosure((Method)PMethod21897, PointerSlot_Class);
     store_method(PointerSlot_Class, SMB_assign_on_, MC_SMB_assign_on_);
 }
 
@@ -39,14 +39,14 @@ static void init_SMB_assign_on_() {
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray21872 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray21902 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitPointerSlot_ = new_Symbol(L"visitPointerSlot:");
     // visitPointerSlot:. 
-    Send PSend21874 = new_Send((Optr)VAR_visitor_0_0, SMB_visitPointerSlot_, 1, (Optr)self);
-    Array PThreadedCode21873 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend21874, (Optr)&t_method_return);
-    Method PMethod21871 = new_Method_with(PArray21872, empty_Array, empty_Array, PThreadedCode21873, 1, PSend21874);
+    Send PSend21904 = new_Send((Optr)VAR_visitor_0_0, SMB_visitPointerSlot_, 1, (Optr)self);
+    Array PThreadedCode21903 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend21904, (Optr)&t_method_return);
+    Method PMethod21901 = new_Method_with(PArray21902, empty_Array, empty_Array, PThreadedCode21903, 1, PSend21904);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod21871, PointerSlot_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod21901, PointerSlot_Class);
     store_method(PointerSlot_Class, SMB_accept_, MC_SMB_accept_);
 }
 
@@ -55,14 +55,14 @@ static void init_SMB_assignFor_to_() {
     Symbol SMB_assignFor_to_ = new_Symbol(L"assignFor:to:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
     Variable VAR_value_0_1 = new_Variable_named(L"value", 0);
-    Array PArray21876 = new_Array_with(2, (Optr)VAR_visitor_0_0, (Optr)VAR_value_0_1);
+    Array PArray21906 = new_Array_with(2, (Optr)VAR_visitor_0_0, (Optr)VAR_value_0_1);
     Symbol SMB_shouldNotCall = new_Symbol(L"shouldNotCall");
     // shouldNotCall. 
-    Send PSend21878 = new_Send((Optr)self, SMB_shouldNotCall, 0);
-    Array PThreadedCode21877 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21878, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21875 = new_Method_with(PArray21876, empty_Array, empty_Array, PThreadedCode21877, 2, PSend21878, self);
+    Send PSend21908 = new_Send((Optr)self, SMB_shouldNotCall, 0);
+    Array PThreadedCode21907 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21908, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21905 = new_Method_with(PArray21906, empty_Array, empty_Array, PThreadedCode21907, 2, PSend21908, self);
     
-    MethodClosure MC_SMB_assignFor_to_ = new_MethodClosure((Method)PMethod21875, PointerSlot_Class);
+    MethodClosure MC_SMB_assignFor_to_ = new_MethodClosure((Method)PMethod21905, PointerSlot_Class);
     store_method(PointerSlot_Class, SMB_assignFor_to_, MC_SMB_assignFor_to_);
 }
 

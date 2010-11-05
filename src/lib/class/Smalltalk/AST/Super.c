@@ -7,14 +7,14 @@ Optr layout_Smalltalk_AST_Super_Class_class;
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray15012 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray15042 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitSuper_ = new_Symbol(L"visitSuper:");
     // visitSuper:. 
-    Send PSend15014 = new_Send((Optr)VAR_visitor_0_0, SMB_visitSuper_, 1, (Optr)self);
-    Array PThreadedCode15013 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend15014, (Optr)&t_method_return);
-    Method PMethod15011 = new_Method_with(PArray15012, empty_Array, empty_Array, PThreadedCode15013, 1, PSend15014);
+    Send PSend15044 = new_Send((Optr)VAR_visitor_0_0, SMB_visitSuper_, 1, (Optr)self);
+    Array PThreadedCode15043 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend15044, (Optr)&t_method_return);
+    Method PMethod15041 = new_Method_with(PArray15042, empty_Array, empty_Array, PThreadedCode15043, 1, PSend15044);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod15011, Smalltalk_AST_Super_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod15041, Smalltalk_AST_Super_Class);
     store_method(Smalltalk_AST_Super_Class, SMB_accept_, MC_SMB_accept_);
 }
 

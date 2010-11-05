@@ -11,14 +11,14 @@ static void init_SMB_accept_on_message_boundBy_() {
     Variable VAR_receiver_0_1 = new_Variable_named(L"receiver", 0);
     Variable VAR_message_0_2 = new_Variable_named(L"message", 0);
     Variable VAR_closure_0_3 = new_Variable_named(L"closure", 0);
-    Array PArray4710 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
+    Array PArray4709 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
     Symbol SMB_invokeMethod_on_message_ = new_Symbol(L"invokeMethod:on:message:");
     // invokeMethod:on:message:. 
-    Send PSend4712 = new_Send((Optr)VAR_visitor_0_0, SMB_invokeMethod_on_message_, 3, (Optr)VAR_closure_0_3, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2);
-    Array PThreadedCode4711 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_variable, (Optr)VAR_closure_0_3, (Optr)&t_push_variable, (Optr)VAR_receiver_0_1, (Optr)&t_push_variable, (Optr)VAR_message_0_2, (Optr)&t_send3, (Optr)PSend4712, (Optr)&t_method_return);
-    Method PMethod4709 = new_Method_with(PArray4710, empty_Array, empty_Array, PThreadedCode4711, 1, PSend4712);
+    Send PSend4711 = new_Send((Optr)VAR_visitor_0_0, SMB_invokeMethod_on_message_, 3, (Optr)VAR_closure_0_3, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2);
+    Array PThreadedCode4710 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_variable, (Optr)VAR_closure_0_3, (Optr)&t_push_variable, (Optr)VAR_receiver_0_1, (Optr)&t_push_variable, (Optr)VAR_message_0_2, (Optr)&t_send3, (Optr)PSend4711, (Optr)&t_method_return);
+    Method PMethod4708 = new_Method_with(PArray4709, empty_Array, empty_Array, PThreadedCode4710, 1, PSend4711);
     
-    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4709, Method_Class);
+    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4708, Method_Class);
     store_method(Method_Class, SMB_accept_on_message_boundBy_, MC_SMB_accept_on_message_boundBy_);
 }
 
@@ -26,14 +26,14 @@ static void init_SMB_accept_on_message_boundBy_() {
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray4714 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray4713 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitMethod_ = new_Symbol(L"visitMethod:");
     // visitMethod:. 
-    Send PSend4716 = new_Send((Optr)VAR_visitor_0_0, SMB_visitMethod_, 1, (Optr)self);
-    Array PThreadedCode4715 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4716, (Optr)&t_method_return);
-    Method PMethod4713 = new_Method_with(PArray4714, empty_Array, empty_Array, PThreadedCode4715, 1, PSend4716);
+    Send PSend4715 = new_Send((Optr)VAR_visitor_0_0, SMB_visitMethod_, 1, (Optr)self);
+    Array PThreadedCode4714 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4715, (Optr)&t_method_return);
+    Method PMethod4712 = new_Method_with(PArray4713, empty_Array, empty_Array, PThreadedCode4714, 1, PSend4715);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4713, Method_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4712, Method_Class);
     store_method(Method_Class, SMB_accept_, MC_SMB_accept_);
 }
 

@@ -11,12 +11,12 @@ Optr layout_Kernel_AST_Info;
 static void init_SMB_sourceFile_() {
     Symbol SMB_sourceFile_ = new_Symbol(L"sourceFile:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray4848 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign4850 = new_Assign((Optr)slot_Kernel_AST_Info_sourceFile, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode4849 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4850, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod4847 = new_Method_with(PArray4848, empty_Array, empty_Array, PThreadedCode4849, 2, PAssign4850, self);
+    Array PArray4847 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign4849 = new_Assign((Optr)slot_Kernel_AST_Info_sourceFile, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode4848 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4849, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod4846 = new_Method_with(PArray4847, empty_Array, empty_Array, PThreadedCode4848, 2, PAssign4849, self);
     
-    MethodClosure MC_SMB_sourceFile_ = new_MethodClosure((Method)PMethod4847, Info_Class);
+    MethodClosure MC_SMB_sourceFile_ = new_MethodClosure((Method)PMethod4846, Info_Class);
     store_method(Info_Class, SMB_sourceFile_, MC_SMB_sourceFile_);
 }
 
@@ -24,12 +24,12 @@ static void init_SMB_sourceFile_() {
 static void init_SMB_column_() {
     Symbol SMB_column_ = new_Symbol(L"column:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray4852 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign4854 = new_Assign((Optr)slot_Kernel_AST_Info_column, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode4853 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4854, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod4851 = new_Method_with(PArray4852, empty_Array, empty_Array, PThreadedCode4853, 2, PAssign4854, self);
+    Array PArray4851 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign4853 = new_Assign((Optr)slot_Kernel_AST_Info_column, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode4852 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4853, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod4850 = new_Method_with(PArray4851, empty_Array, empty_Array, PThreadedCode4852, 2, PAssign4853, self);
     
-    MethodClosure MC_SMB_column_ = new_MethodClosure((Method)PMethod4851, Info_Class);
+    MethodClosure MC_SMB_column_ = new_MethodClosure((Method)PMethod4850, Info_Class);
     store_method(Info_Class, SMB_column_, MC_SMB_column_);
 }
 
@@ -37,42 +37,42 @@ static void init_SMB_column_() {
 static void init_SMB_line_() {
     Symbol SMB_line_ = new_Symbol(L"line:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray4856 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign4858 = new_Assign((Optr)slot_Kernel_AST_Info_line, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode4857 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4858, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod4855 = new_Method_with(PArray4856, empty_Array, empty_Array, PThreadedCode4857, 2, PAssign4858, self);
+    Array PArray4855 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign4857 = new_Assign((Optr)slot_Kernel_AST_Info_line, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode4856 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign4857, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod4854 = new_Method_with(PArray4855, empty_Array, empty_Array, PThreadedCode4856, 2, PAssign4857, self);
     
-    MethodClosure MC_SMB_line_ = new_MethodClosure((Method)PMethod4855, Info_Class);
+    MethodClosure MC_SMB_line_ = new_MethodClosure((Method)PMethod4854, Info_Class);
     store_method(Info_Class, SMB_line_, MC_SMB_line_);
 }
 
 
 static void init_SMB_column() {
     Symbol SMB_column = new_Symbol(L"column");
-    Array PThreadedCode4860 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_column, (Optr)&t_method_return);
-    Method PMethod4859 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4860, 1, slot_Kernel_AST_Info_column);
+    Array PThreadedCode4859 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_column, (Optr)&t_method_return);
+    Method PMethod4858 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4859, 1, slot_Kernel_AST_Info_column);
     
-    MethodClosure MC_SMB_column = new_MethodClosure((Method)PMethod4859, Info_Class);
+    MethodClosure MC_SMB_column = new_MethodClosure((Method)PMethod4858, Info_Class);
     store_method(Info_Class, SMB_column, MC_SMB_column);
 }
 
 
 static void init_SMB_line() {
     Symbol SMB_line = new_Symbol(L"line");
-    Array PThreadedCode4862 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_line, (Optr)&t_method_return);
-    Method PMethod4861 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4862, 1, slot_Kernel_AST_Info_line);
+    Array PThreadedCode4861 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_line, (Optr)&t_method_return);
+    Method PMethod4860 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4861, 1, slot_Kernel_AST_Info_line);
     
-    MethodClosure MC_SMB_line = new_MethodClosure((Method)PMethod4861, Info_Class);
+    MethodClosure MC_SMB_line = new_MethodClosure((Method)PMethod4860, Info_Class);
     store_method(Info_Class, SMB_line, MC_SMB_line);
 }
 
 
 static void init_SMB_sourceFile() {
     Symbol SMB_sourceFile = new_Symbol(L"sourceFile");
-    Array PThreadedCode4864 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_sourceFile, (Optr)&t_method_return);
-    Method PMethod4863 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4864, 1, slot_Kernel_AST_Info_sourceFile);
+    Array PThreadedCode4863 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Kernel_AST_Info_sourceFile, (Optr)&t_method_return);
+    Method PMethod4862 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4863, 1, slot_Kernel_AST_Info_sourceFile);
     
-    MethodClosure MC_SMB_sourceFile = new_MethodClosure((Method)PMethod4863, Info_Class);
+    MethodClosure MC_SMB_sourceFile = new_MethodClosure((Method)PMethod4862, Info_Class);
     store_method(Info_Class, SMB_sourceFile, MC_SMB_sourceFile);
 }
 

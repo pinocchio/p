@@ -6,10 +6,10 @@ Optr layout_Smalltalk_AST_Node_Class_class;
 
 static void init_SMB_isReturnExpression() {
     Symbol SMB_isReturnExpression = new_Symbol(L"isReturnExpression");
-    Array PThreadedCode14772 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
-    Method PMethod14771 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14772, 1, false_Const);
+    Array PThreadedCode14802 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
+    Method PMethod14801 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14802, 1, false_Const);
     
-    MethodClosure MC_SMB_isReturnExpression = new_MethodClosure((Method)PMethod14771, Smalltalk_AST_Node_Class);
+    MethodClosure MC_SMB_isReturnExpression = new_MethodClosure((Method)PMethod14801, Smalltalk_AST_Node_Class);
     store_method(Smalltalk_AST_Node_Class, SMB_isReturnExpression, MC_SMB_isReturnExpression);
 }
 
@@ -17,28 +17,28 @@ static void init_SMB_isReturnExpression() {
 static void init_SMB__equals_() {
     Symbol SMB__equals_ = new_Symbol(L"=");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray14774 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray14804 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_species = new_Symbol(L"species");
     // species. 
-    Send PSend14776 = new_Send((Optr)self, SMB_species, 0);
+    Send PSend14806 = new_Send((Optr)self, SMB_species, 0);
     // species. 
-    Send PSend14777 = new_Send((Optr)VAR_other_0_0, SMB_species, 0);
+    Send PSend14807 = new_Send((Optr)VAR_other_0_0, SMB_species, 0);
     // =. 
-    Send PSend14778 = new_Send((Optr)PSend14776, SMB__equals_, 1, (Optr)PSend14777);
-    Array PThreadedCode14775 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14776, (Optr)&t_push_variable, (Optr)VAR_other_0_0, (Optr)&t_send0, (Optr)PSend14777, (Optr)&t_send1, (Optr)PSend14778, (Optr)&t_method_return);
-    Method PMethod14773 = new_Method_with(PArray14774, empty_Array, empty_Array, PThreadedCode14775, 1, PSend14778);
+    Send PSend14808 = new_Send((Optr)PSend14806, SMB__equals_, 1, (Optr)PSend14807);
+    Array PThreadedCode14805 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14806, (Optr)&t_push_variable, (Optr)VAR_other_0_0, (Optr)&t_send0, (Optr)PSend14807, (Optr)&t_send1, (Optr)PSend14808, (Optr)&t_method_return);
+    Method PMethod14803 = new_Method_with(PArray14804, empty_Array, empty_Array, PThreadedCode14805, 1, PSend14808);
     
-    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod14773, Smalltalk_AST_Node_Class);
+    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod14803, Smalltalk_AST_Node_Class);
     store_method(Smalltalk_AST_Node_Class, SMB__equals_, MC_SMB__equals_);
 }
 
 
 static void init_SMB_scoped() {
     Symbol SMB_scoped = new_Symbol(L"scoped");
-    Array PThreadedCode14780 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod14779 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14780, 1, self);
+    Array PThreadedCode14810 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod14809 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14810, 1, self);
     
-    MethodClosure MC_SMB_scoped = new_MethodClosure((Method)PMethod14779, Smalltalk_AST_Node_Class);
+    MethodClosure MC_SMB_scoped = new_MethodClosure((Method)PMethod14809, Smalltalk_AST_Node_Class);
     store_method(Smalltalk_AST_Node_Class, SMB_scoped, MC_SMB_scoped);
 }
 
@@ -46,24 +46,24 @@ static void init_SMB_scoped() {
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray14782 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray14812 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
     // subclassResponsibility. 
-    Send PSend14784 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
-    Array PThreadedCode14783 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14784, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod14781 = new_Method_with(PArray14782, empty_Array, empty_Array, PThreadedCode14783, 2, PSend14784, self);
+    Send PSend14814 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
+    Array PThreadedCode14813 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend14814, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod14811 = new_Method_with(PArray14812, empty_Array, empty_Array, PThreadedCode14813, 2, PSend14814, self);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod14781, Smalltalk_AST_Node_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod14811, Smalltalk_AST_Node_Class);
     store_method(Smalltalk_AST_Node_Class, SMB_accept_, MC_SMB_accept_);
 }
 
 
 static void init_SMB_hasReturnExpression() {
     Symbol SMB_hasReturnExpression = new_Symbol(L"hasReturnExpression");
-    Array PThreadedCode14786 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
-    Method PMethod14785 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14786, 1, false_Const);
+    Array PThreadedCode14816 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
+    Method PMethod14815 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode14816, 1, false_Const);
     
-    MethodClosure MC_SMB_hasReturnExpression = new_MethodClosure((Method)PMethod14785, Smalltalk_AST_Node_Class);
+    MethodClosure MC_SMB_hasReturnExpression = new_MethodClosure((Method)PMethod14815, Smalltalk_AST_Node_Class);
     store_method(Smalltalk_AST_Node_Class, SMB_hasReturnExpression, MC_SMB_hasReturnExpression);
 }
 

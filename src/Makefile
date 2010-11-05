@@ -28,8 +28,8 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
-	CC	= gcc
-	CFLAGS += -O3
+	CC	= llvm-gcc
+	CFLAGS += -O4
 else
 	CFLAGS += -O3
     LDFLAGS +=  -export-dynamic
@@ -42,6 +42,10 @@ all: $(TARGET)
 	@echo Compiling: $@
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
+$(TARGET): $(OBJECTS)
+	@echo Linking $@
+	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	
 plugin:
 	@cd plugin; make;
 
@@ -54,9 +58,6 @@ GITVERSION:
 	@echo -n '_' >> $@
 	@git show-ref --hash=20 HEAD >> $@
 
-$(TARGET): $(OBJECTS)
-	@echo Linking $@
-	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 
 # ============================================================================

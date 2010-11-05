@@ -8,14 +8,14 @@ Optr layout_PEG_TerminalChoiceStrongTimes;
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19556 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19586 = new_Array_with(1, (Optr)VAR_input_0_0);
     Symbol SMB_pushAllIn_ = new_Symbol(L"pushAllIn:");
     // pushAllIn:. 
-    Send PSend19558 = new_Send((Optr)VAR_input_0_0, SMB_pushAllIn_, 1, (Optr)slot_PEG_Terminal_terminal);
-    Array PThreadedCode19557 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_Terminal_terminal, (Optr)&t_send1, (Optr)PSend19558, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Method PMethod19555 = new_Method_with(PArray19556, empty_Array, empty_Array, PThreadedCode19557, 2, PSend19558, true_Const);
+    Send PSend19588 = new_Send((Optr)VAR_input_0_0, SMB_pushAllIn_, 1, (Optr)slot_PEG_Terminal_terminal);
+    Array PThreadedCode19587 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_Terminal_terminal, (Optr)&t_send1, (Optr)PSend19588, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Method PMethod19585 = new_Method_with(PArray19586, empty_Array, empty_Array, PThreadedCode19587, 2, PSend19588, true_Const);
     
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19555, PEG_TerminalChoiceStrongTimes_Class);
+    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19585, PEG_TerminalChoiceStrongTimes_Class);
     store_method(PEG_TerminalChoiceStrongTimes_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 
@@ -23,14 +23,14 @@ static void init_SMB_parseOn_() {
 static void init_SMB_omitMatch_() {
     Symbol SMB_omitMatch_ = new_Symbol(L"omitMatch:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19560 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19590 = new_Array_with(1, (Optr)VAR_input_0_0);
     Symbol SMB_scanAllIn_ = new_Symbol(L"scanAllIn:");
     // scanAllIn:. 
-    Send PSend19562 = new_Send((Optr)VAR_input_0_0, SMB_scanAllIn_, 1, (Optr)slot_PEG_Terminal_terminal);
-    Array PThreadedCode19561 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_Terminal_terminal, (Optr)&t_send1, (Optr)PSend19562, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Method PMethod19559 = new_Method_with(PArray19560, empty_Array, empty_Array, PThreadedCode19561, 2, PSend19562, true_Const);
+    Send PSend19592 = new_Send((Optr)VAR_input_0_0, SMB_scanAllIn_, 1, (Optr)slot_PEG_Terminal_terminal);
+    Array PThreadedCode19591 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_Terminal_terminal, (Optr)&t_send1, (Optr)PSend19592, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Method PMethod19589 = new_Method_with(PArray19590, empty_Array, empty_Array, PThreadedCode19591, 2, PSend19592, true_Const);
     
-    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19559, PEG_TerminalChoiceStrongTimes_Class);
+    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19589, PEG_TerminalChoiceStrongTimes_Class);
     store_method(PEG_TerminalChoiceStrongTimes_Class, SMB_omitMatch_, MC_SMB_omitMatch_);
 }
 

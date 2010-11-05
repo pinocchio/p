@@ -15,12 +15,12 @@ static void init_SMB_a_() {
     */
     Symbol SMB_a_ = new_Symbol(L"a:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray24306 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign24308 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_a, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode24307 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24308, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24305 = new_Method_with(PArray24306, empty_Array, empty_Array, PThreadedCode24307, 2, PAssign24308, self);
+    Array PArray24336 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign24338 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_a, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode24337 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24338, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24335 = new_Method_with(PArray24336, empty_Array, empty_Array, PThreadedCode24337, 2, PAssign24338, self);
     
-    MethodClosure MC_SMB_a_ = new_MethodClosure((Method)PMethod24305, Bridge_Test_SuperClassTestClass_Class);
+    MethodClosure MC_SMB_a_ = new_MethodClosure((Method)PMethod24335, Bridge_Test_SuperClassTestClass_Class);
     store_method(Bridge_Test_SuperClassTestClass_Class, SMB_a_, MC_SMB_a_);
 }
 
@@ -31,10 +31,10 @@ static void init_SMB_a() {
 // 	^ a
     */
     Symbol SMB_a = new_Symbol(L"a");
-    Array PThreadedCode24310 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_a, (Optr)&t_method_return);
-    Method PMethod24309 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24310, 1, slot_Bridge_Test_SuperClassTestClass_a);
+    Array PThreadedCode24340 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_a, (Optr)&t_method_return);
+    Method PMethod24339 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24340, 1, slot_Bridge_Test_SuperClassTestClass_a);
     
-    MethodClosure MC_SMB_a = new_MethodClosure((Method)PMethod24309, Bridge_Test_SuperClassTestClass_Class);
+    MethodClosure MC_SMB_a = new_MethodClosure((Method)PMethod24339, Bridge_Test_SuperClassTestClass_Class);
     store_method(Bridge_Test_SuperClassTestClass_Class, SMB_a, MC_SMB_a);
 }
 
@@ -42,21 +42,21 @@ static void init_SMB_a() {
 static void init_SMB_test() {
     Symbol SMB_test = new_Symbol(L"test");
     SmallInt int_10 = new_SmallInt(10);
-    Array PThreadedCode24312 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_method_return);
+    Array PThreadedCode24342 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_method_return);
     Constant int_10_Const = new_Constant((Optr)int_10);
-    Method PMethod24311 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24312, 1, int_10_Const);
+    Method PMethod24341 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24342, 1, int_10_Const);
     
-    MethodClosure MC_SMB_test = new_MethodClosure((Method)PMethod24311, Bridge_Test_SuperClassTestClass_Class);
+    MethodClosure MC_SMB_test = new_MethodClosure((Method)PMethod24341, Bridge_Test_SuperClassTestClass_Class);
     store_method(Bridge_Test_SuperClassTestClass_Class, SMB_test, MC_SMB_test);
 }
 
 
 static void init_class_SMB_a() {
     Symbol SMB_a = new_Symbol(L"a");
-    Array PThreadedCode24314 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_a, (Optr)&t_method_return);
-    Method PMethod24313 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24314, 1, slot_Bridge_Test_SuperClassTestClass_Class_class_a);
+    Array PThreadedCode24344 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_a, (Optr)&t_method_return);
+    Method PMethod24343 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24344, 1, slot_Bridge_Test_SuperClassTestClass_Class_class_a);
     
-    MethodClosure MC_SMB_a = new_MethodClosure((Method)PMethod24313, HEADER(Bridge_Test_SuperClassTestClass_Class));
+    MethodClosure MC_SMB_a = new_MethodClosure((Method)PMethod24343, HEADER(Bridge_Test_SuperClassTestClass_Class));
     store_method(HEADER(Bridge_Test_SuperClassTestClass_Class), SMB_a, MC_SMB_a);
 }
 
@@ -64,22 +64,22 @@ static void init_class_SMB_a() {
 static void init_class_SMB_a_() {
     Symbol SMB_a_ = new_Symbol(L"a:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray24316 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign24318 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_a, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode24317 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24318, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24315 = new_Method_with(PArray24316, empty_Array, empty_Array, PThreadedCode24317, 2, PAssign24318, self);
+    Array PArray24346 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign24348 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_a, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode24347 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24348, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24345 = new_Method_with(PArray24346, empty_Array, empty_Array, PThreadedCode24347, 2, PAssign24348, self);
     
-    MethodClosure MC_SMB_a_ = new_MethodClosure((Method)PMethod24315, HEADER(Bridge_Test_SuperClassTestClass_Class));
+    MethodClosure MC_SMB_a_ = new_MethodClosure((Method)PMethod24345, HEADER(Bridge_Test_SuperClassTestClass_Class));
     store_method(HEADER(Bridge_Test_SuperClassTestClass_Class), SMB_a_, MC_SMB_a_);
 }
 
 
 static void init_class_SMB_b() {
     Symbol SMB_b = new_Symbol(L"b");
-    Array PThreadedCode24320 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_b, (Optr)&t_method_return);
-    Method PMethod24319 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24320, 1, slot_Bridge_Test_SuperClassTestClass_Class_class_b);
+    Array PThreadedCode24350 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_b, (Optr)&t_method_return);
+    Method PMethod24349 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24350, 1, slot_Bridge_Test_SuperClassTestClass_Class_class_b);
     
-    MethodClosure MC_SMB_b = new_MethodClosure((Method)PMethod24319, HEADER(Bridge_Test_SuperClassTestClass_Class));
+    MethodClosure MC_SMB_b = new_MethodClosure((Method)PMethod24349, HEADER(Bridge_Test_SuperClassTestClass_Class));
     store_method(HEADER(Bridge_Test_SuperClassTestClass_Class), SMB_b, MC_SMB_b);
 }
 
@@ -87,12 +87,12 @@ static void init_class_SMB_b() {
 static void init_class_SMB_b_() {
     Symbol SMB_b_ = new_Symbol(L"b:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray24322 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign24324 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_b, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode24323 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24324, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24321 = new_Method_with(PArray24322, empty_Array, empty_Array, PThreadedCode24323, 2, PAssign24324, self);
+    Array PArray24352 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign24354 = new_Assign((Optr)slot_Bridge_Test_SuperClassTestClass_Class_class_b, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode24353 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24354, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24351 = new_Method_with(PArray24352, empty_Array, empty_Array, PThreadedCode24353, 2, PAssign24354, self);
     
-    MethodClosure MC_SMB_b_ = new_MethodClosure((Method)PMethod24321, HEADER(Bridge_Test_SuperClassTestClass_Class));
+    MethodClosure MC_SMB_b_ = new_MethodClosure((Method)PMethod24351, HEADER(Bridge_Test_SuperClassTestClass_Class));
     store_method(HEADER(Bridge_Test_SuperClassTestClass_Class), SMB_b_, MC_SMB_b_);
 }
 
