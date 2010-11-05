@@ -20,7 +20,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -pipe -I. -Wall -std=c99 -DASSERT_FAIL
+CFLAGS  += -g -pipe -I. -Wall -std=c99 -DNO_EXCEPTION -DDEBUG 
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -28,10 +28,10 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
-	CC	= llvm-gcc
-	CFLAGS += -O3
+	CC	= gcc
+	CFLAGS += -O0
 else
-	CFLAGS += -O3
+	CFLAGS += -O0
     LDFLAGS +=  -export-dynamic
 endif
 # ============================================================================
@@ -182,7 +182,11 @@ dtrace:
 # ============================================================================
 debug:
 	touch -c 'system/class/Class.c'
-	CFLAGS+="-g -O0 -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+	CFLAGS+="-g -O0 -DNO_IC -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+
+debug-silent:
+	touch -c 'system/class/Class.c'
+	CFLAGS+="-g -O0 -DNO_IC -DNO_EXCEPTION -DDEBUG" make $(TARGET) 
 
 gdb:
 	CFLAGS+="-O0 -DNO_EXCEPTION -g" make $(TARGET)

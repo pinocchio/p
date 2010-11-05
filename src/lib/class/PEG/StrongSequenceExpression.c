@@ -8,76 +8,76 @@ Optr layout_PEG_StrongSequenceExpression;
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19538 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19465 = new_Array_with(1, (Optr)VAR_input_0_0);
     Variable VAR_position_0_1 = new_Variable_named(L"position", 0);
     Variable VAR_outputPosition_0_2 = new_Variable_named(L"outputPosition", 0);
-    Array PArray19539 = new_Array_with(2, (Optr)VAR_position_0_1, (Optr)VAR_outputPosition_0_2);
+    Array PArray19466 = new_Array_with(2, (Optr)VAR_position_0_1, (Optr)VAR_outputPosition_0_2);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray19542 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray19469 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_stack = new_Symbol(L"stack");
     // stack. 
-    Send PSend19546 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
+    Send PSend19473 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
     Symbol SMB_position = new_Symbol(L"position");
     // position. 
-    Send PSend19545 = new_Send((Optr)PSend19546, SMB_position, 0);
-    Assign PAssign19544 = new_Assign((Optr)VAR_outputPosition_0_2, (Optr)PSend19545);
+    Send PSend19472 = new_Send((Optr)PSend19473, SMB_position, 0);
+    Assign PAssign19471 = new_Assign((Optr)VAR_outputPosition_0_2, (Optr)PSend19472);
     // position. 
-    Send PSend19548 = new_Send((Optr)VAR_input_0_0, SMB_position, 0);
-    Assign PAssign19547 = new_Assign((Optr)VAR_position_0_1, (Optr)PSend19548);
+    Send PSend19475 = new_Send((Optr)VAR_input_0_0, SMB_position, 0);
+    Assign PAssign19474 = new_Assign((Optr)VAR_position_0_1, (Optr)PSend19475);
     Symbol SMB_at_ = new_Symbol(L"at:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:. 
-    Send PSend19549 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)int_1_Const);
+    Send PSend19476 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)int_1_Const);
     // parseOn:. 
-    Send PSend19550 = new_Send((Optr)PSend19549, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
+    Send PSend19477 = new_Send((Optr)PSend19476, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend19554 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19553 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19554, (Optr)&t_block_return);
-    Block PBlock19552 = new_Block_with(empty_Array, empty_Array, PThreadedCode19553, 1, PSend19554);
+    Send PSend19481 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19480 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19481, (Optr)&t_block_return);
+    Block PBlock19479 = new_Block_with(empty_Array, empty_Array, PThreadedCode19480, 1, PSend19481);
     // ifFalse:. 
-    Send PSend19551 = new_Send((Optr)PSend19550, SMB_ifFalse_, 1, (Optr)PBlock19552);
+    Send PSend19478 = new_Send((Optr)PSend19477, SMB_ifFalse_, 1, (Optr)PBlock19479);
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
-    Send PSend19555 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_size, 0);
+    Send PSend19482 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_size, 0);
     Variable VAR_index_2_0 = new_Variable_named(L"index", 2);
-    Array PArray19557 = new_Array_with(1, (Optr)VAR_index_2_0);
+    Array PArray19484 = new_Array_with(1, (Optr)VAR_index_2_0);
     // at:. 
-    Send PSend19559 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)VAR_index_2_0);
+    Send PSend19486 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)VAR_index_2_0);
     // parseOn:. 
-    Send PSend19560 = new_Send((Optr)PSend19559, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
+    Send PSend19487 = new_Send((Optr)PSend19486, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_position_ = new_Symbol(L"position:");
     // position:. 
-    Send PSend19564 = new_Send((Optr)VAR_input_0_0, SMB_position_, 1, (Optr)VAR_position_0_1);
+    Send PSend19491 = new_Send((Optr)VAR_input_0_0, SMB_position_, 1, (Optr)VAR_position_0_1);
     // stack. 
-    Send PSend19565 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
+    Send PSend19492 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
     Symbol SMB_zapTo_ = new_Symbol(L"zapTo:");
     // zapTo:. 
-    Send PSend19566 = new_Send((Optr)PSend19565, SMB_zapTo_, 1, (Optr)VAR_outputPosition_0_2);
+    Send PSend19493 = new_Send((Optr)PSend19492, SMB_zapTo_, 1, (Optr)VAR_outputPosition_0_2);
     // escape:. 
-    Send PSend19567 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19563 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_variable, (Optr)VAR_position_0_1, (Optr)&t_send1, (Optr)PSend19564, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19565, (Optr)&t_push_variable, (Optr)VAR_outputPosition_0_2, (Optr)&t_send1, (Optr)PSend19566, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19567, (Optr)&t_block_return);
-    Block PBlock19562 = new_Block_with(empty_Array, empty_Array, PThreadedCode19563, 3, PSend19564, PSend19566, PSend19567);
+    Send PSend19494 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19490 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_variable, (Optr)VAR_position_0_1, (Optr)&t_send1, (Optr)PSend19491, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19492, (Optr)&t_push_variable, (Optr)VAR_outputPosition_0_2, (Optr)&t_send1, (Optr)PSend19493, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19494, (Optr)&t_block_return);
+    Block PBlock19489 = new_Block_with(empty_Array, empty_Array, PThreadedCode19490, 3, PSend19491, PSend19493, PSend19494);
     // ifFalse:. 
-    Send PSend19561 = new_Send((Optr)PSend19560, SMB_ifFalse_, 1, (Optr)PBlock19562);
-    Array PThreadedCode19558 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_variable, (Optr)VAR_index_2_0, (Optr)&t_send1, (Optr)PSend19559, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19560, (Optr)&t_send_ifFalse_, (Optr)PSend19561, (Optr)PBlock19562, (Optr)&t_method_return);
-    Block PBlock19556 = new_Block_with(PArray19557, empty_Array, PThreadedCode19558, 1, PSend19561);
+    Send PSend19488 = new_Send((Optr)PSend19487, SMB_ifFalse_, 1, (Optr)PBlock19489);
+    Array PThreadedCode19485 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_variable, (Optr)VAR_index_2_0, (Optr)&t_send1, (Optr)PSend19486, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19487, (Optr)&t_send_ifFalse_, (Optr)PSend19488, (Optr)PBlock19489, (Optr)&t_method_return);
+    Block PBlock19483 = new_Block_with(PArray19484, empty_Array, PThreadedCode19485, 1, PSend19488);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     Symbol SMB_to_do_ = new_Symbol(L"to:do:");
     // to:do:. 
-    Send PSend19568 = new_Send((Optr)int_2_Const, SMB_to_do_, 2, (Optr)PSend19555, (Optr)PBlock19556);
-    Array PThreadedCode19543 = instantiate_Array_with(ThreadedCode_Class, 0, 43, (Optr)&t_push1, (Optr)PAssign19544, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19546, (Optr)&t_send0, (Optr)PSend19545, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign19547, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19548, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend19549, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19550, (Optr)&t_send_ifFalse_, (Optr)PSend19551, (Optr)PBlock19552, (Optr)&t_zap, (Optr)&t_push_2, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_send0, (Optr)PSend19555, (Optr)&t_push_closure, (Optr)PBlock19556, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend19568, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Block PBlock19541 = new_Block_with(PArray19542, empty_Array, PThreadedCode19543, 5, PAssign19544, PAssign19547, PSend19551, PSend19568, true_Const);
+    Send PSend19495 = new_Send((Optr)int_2_Const, SMB_to_do_, 2, (Optr)PSend19482, (Optr)PBlock19483);
+    Array PThreadedCode19470 = instantiate_Array_with(ThreadedCode_Class, 0, 43, (Optr)&t_push1, (Optr)PAssign19471, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19473, (Optr)&t_send0, (Optr)PSend19472, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign19474, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19475, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend19476, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19477, (Optr)&t_send_ifFalse_, (Optr)PSend19478, (Optr)PBlock19479, (Optr)&t_zap, (Optr)&t_push_2, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_send0, (Optr)PSend19482, (Optr)&t_push_closure, (Optr)PBlock19483, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend19495, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Block PBlock19468 = new_Block_with(PArray19469, empty_Array, PThreadedCode19470, 5, PAssign19471, PAssign19474, PSend19478, PSend19495, true_Const);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend19569 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19541);
-    Array PThreadedCode19540 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19541, (Optr)&t_send1, (Optr)PSend19569, (Optr)&t_method_return);
-    Method PMethod19537 = new_Method_with(PArray19538, PArray19539, empty_Array, PThreadedCode19540, 1, PSend19569);
+    Send PSend19496 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19468);
+    Array PThreadedCode19467 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19468, (Optr)&t_send1, (Optr)PSend19496, (Optr)&t_method_return);
+    Method PMethod19464 = new_Method_with(PArray19465, PArray19466, empty_Array, PThreadedCode19467, 1, PSend19496);
     
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19537, PEG_StrongSequenceExpression_Class);
+    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19464, PEG_StrongSequenceExpression_Class);
     store_method(PEG_StrongSequenceExpression_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 
@@ -85,64 +85,64 @@ static void init_SMB_parseOn_() {
 static void init_SMB_omitMatch_() {
     Symbol SMB_omitMatch_ = new_Symbol(L"omitMatch:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray19571 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray19498 = new_Array_with(1, (Optr)VAR_input_0_0);
     Variable VAR_position_0_1 = new_Variable_named(L"position", 0);
-    Array PArray19572 = new_Array_with(1, (Optr)VAR_position_0_1);
+    Array PArray19499 = new_Array_with(1, (Optr)VAR_position_0_1);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray19575 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray19502 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_position = new_Symbol(L"position");
     // position. 
-    Send PSend19578 = new_Send((Optr)VAR_input_0_0, SMB_position, 0);
-    Assign PAssign19577 = new_Assign((Optr)VAR_position_0_1, (Optr)PSend19578);
+    Send PSend19505 = new_Send((Optr)VAR_input_0_0, SMB_position, 0);
+    Assign PAssign19504 = new_Assign((Optr)VAR_position_0_1, (Optr)PSend19505);
     Symbol SMB_at_ = new_Symbol(L"at:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:. 
-    Send PSend19579 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)int_1_Const);
+    Send PSend19506 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)int_1_Const);
     // omitMatch:. 
-    Send PSend19580 = new_Send((Optr)PSend19579, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
+    Send PSend19507 = new_Send((Optr)PSend19506, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend19584 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19583 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19584, (Optr)&t_block_return);
-    Block PBlock19582 = new_Block_with(empty_Array, empty_Array, PThreadedCode19583, 1, PSend19584);
+    Send PSend19511 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19510 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19511, (Optr)&t_block_return);
+    Block PBlock19509 = new_Block_with(empty_Array, empty_Array, PThreadedCode19510, 1, PSend19511);
     // ifFalse:. 
-    Send PSend19581 = new_Send((Optr)PSend19580, SMB_ifFalse_, 1, (Optr)PBlock19582);
+    Send PSend19508 = new_Send((Optr)PSend19507, SMB_ifFalse_, 1, (Optr)PBlock19509);
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
-    Send PSend19585 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_size, 0);
+    Send PSend19512 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_size, 0);
     Variable VAR_index_2_0 = new_Variable_named(L"index", 2);
-    Array PArray19587 = new_Array_with(1, (Optr)VAR_index_2_0);
+    Array PArray19514 = new_Array_with(1, (Optr)VAR_index_2_0);
     // at:. 
-    Send PSend19589 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)VAR_index_2_0);
+    Send PSend19516 = new_Send((Optr)slot_PEG_SequenceExpression_children, SMB_at_, 1, (Optr)VAR_index_2_0);
     // omitMatch:. 
-    Send PSend19590 = new_Send((Optr)PSend19589, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
+    Send PSend19517 = new_Send((Optr)PSend19516, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_position_ = new_Symbol(L"position:");
     // position:. 
-    Send PSend19594 = new_Send((Optr)VAR_input_0_0, SMB_position_, 1, (Optr)VAR_position_0_1);
+    Send PSend19521 = new_Send((Optr)VAR_input_0_0, SMB_position_, 1, (Optr)VAR_position_0_1);
     // escape:. 
-    Send PSend19595 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode19593 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_variable, (Optr)VAR_position_0_1, (Optr)&t_send1, (Optr)PSend19594, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19595, (Optr)&t_block_return);
-    Block PBlock19592 = new_Block_with(empty_Array, empty_Array, PThreadedCode19593, 2, PSend19594, PSend19595);
+    Send PSend19522 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode19520 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_variable, (Optr)VAR_position_0_1, (Optr)&t_send1, (Optr)PSend19521, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend19522, (Optr)&t_block_return);
+    Block PBlock19519 = new_Block_with(empty_Array, empty_Array, PThreadedCode19520, 2, PSend19521, PSend19522);
     // ifFalse:. 
-    Send PSend19591 = new_Send((Optr)PSend19590, SMB_ifFalse_, 1, (Optr)PBlock19592);
-    Array PThreadedCode19588 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_variable, (Optr)VAR_index_2_0, (Optr)&t_send1, (Optr)PSend19589, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19590, (Optr)&t_send_ifFalse_, (Optr)PSend19591, (Optr)PBlock19592, (Optr)&t_method_return);
-    Block PBlock19586 = new_Block_with(PArray19587, empty_Array, PThreadedCode19588, 1, PSend19591);
+    Send PSend19518 = new_Send((Optr)PSend19517, SMB_ifFalse_, 1, (Optr)PBlock19519);
+    Array PThreadedCode19515 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_variable, (Optr)VAR_index_2_0, (Optr)&t_send1, (Optr)PSend19516, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19517, (Optr)&t_send_ifFalse_, (Optr)PSend19518, (Optr)PBlock19519, (Optr)&t_method_return);
+    Block PBlock19513 = new_Block_with(PArray19514, empty_Array, PThreadedCode19515, 1, PSend19518);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     Symbol SMB_to_do_ = new_Symbol(L"to:do:");
     // to:do:. 
-    Send PSend19596 = new_Send((Optr)int_2_Const, SMB_to_do_, 2, (Optr)PSend19585, (Optr)PBlock19586);
-    Array PThreadedCode19576 = instantiate_Array_with(ThreadedCode_Class, 0, 33, (Optr)&t_push1, (Optr)PAssign19577, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19578, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend19579, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19580, (Optr)&t_send_ifFalse_, (Optr)PSend19581, (Optr)PBlock19582, (Optr)&t_zap, (Optr)&t_push_2, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_send0, (Optr)PSend19585, (Optr)&t_push_closure, (Optr)PBlock19586, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend19596, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Block PBlock19574 = new_Block_with(PArray19575, empty_Array, PThreadedCode19576, 4, PAssign19577, PSend19581, PSend19596, true_Const);
+    Send PSend19523 = new_Send((Optr)int_2_Const, SMB_to_do_, 2, (Optr)PSend19512, (Optr)PBlock19513);
+    Array PThreadedCode19503 = instantiate_Array_with(ThreadedCode_Class, 0, 33, (Optr)&t_push1, (Optr)PAssign19504, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend19505, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend19506, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend19507, (Optr)&t_send_ifFalse_, (Optr)PSend19508, (Optr)PBlock19509, (Optr)&t_zap, (Optr)&t_push_2, (Optr)&t_push_slot, (Optr)slot_PEG_SequenceExpression_children, (Optr)&t_send0, (Optr)PSend19512, (Optr)&t_push_closure, (Optr)PBlock19513, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend19523, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Block PBlock19501 = new_Block_with(PArray19502, empty_Array, PThreadedCode19503, 4, PAssign19504, PSend19508, PSend19523, true_Const);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend19597 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19574);
-    Array PThreadedCode19573 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19574, (Optr)&t_send1, (Optr)PSend19597, (Optr)&t_method_return);
-    Method PMethod19570 = new_Method_with(PArray19571, PArray19572, empty_Array, PThreadedCode19573, 1, PSend19597);
+    Send PSend19524 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock19501);
+    Array PThreadedCode19500 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock19501, (Optr)&t_send1, (Optr)PSend19524, (Optr)&t_method_return);
+    Method PMethod19497 = new_Method_with(PArray19498, PArray19499, empty_Array, PThreadedCode19500, 1, PSend19524);
     
-    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19570, PEG_StrongSequenceExpression_Class);
+    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod19497, PEG_StrongSequenceExpression_Class);
     store_method(PEG_StrongSequenceExpression_Class, SMB_omitMatch_, MC_SMB_omitMatch_);
 }
 

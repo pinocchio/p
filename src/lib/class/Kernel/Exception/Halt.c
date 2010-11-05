@@ -9,16 +9,16 @@ Optr layout_Kernel_Exception_Halt;
 static void init_SMB_warnOn_() {
     Symbol SMB_warnOn_ = new_Symbol(L"warnOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray921 = new_Array_with(1, (Optr)VAR_aStream_0_0);
-    String string_923 = new_String(L"Halt");
+    Array PArray930 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    String string_932 = new_String(L"Halt");
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant string_923_Const = new_Constant((Optr)string_923);
+    Constant string_932_Const = new_Constant((Optr)string_932);
     // <<. 
-    Send PSend924 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_923_Const);
-    Array PThreadedCode922 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_923, (Optr)&t_send1, (Optr)PSend924, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod920 = new_Method_with(PArray921, empty_Array, empty_Array, PThreadedCode922, 2, PSend924, self);
+    Send PSend933 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_932_Const);
+    Array PThreadedCode931 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_932, (Optr)&t_send1, (Optr)PSend933, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod929 = new_Method_with(PArray930, empty_Array, empty_Array, PThreadedCode931, 2, PSend933, self);
     
-    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod920, Kernel_Exception_Halt_Class);
+    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod929, Kernel_Exception_Halt_Class);
     store_method(Kernel_Exception_Halt_Class, SMB_warnOn_, MC_SMB_warnOn_);
 }
 
@@ -27,17 +27,17 @@ static void init_class_SMB_instance() {
     Symbol SMB_instance = new_Symbol(L"instance");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend930 = new_Send((Optr)self, SMB_new, 0);
-    Assign PAssign929 = new_Assign((Optr)slot_Kernel_Exception_Halt_Class_class_instance, (Optr)PSend930);
-    Array PThreadedCode928 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign929, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend930, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock927 = new_Block_with(empty_Array, empty_Array, PThreadedCode928, 1, PAssign929);
+    Send PSend939 = new_Send((Optr)self, SMB_new, 0);
+    Assign PAssign938 = new_Assign((Optr)slot_Kernel_Exception_Halt_Class_class_instance, (Optr)PSend939);
+    Array PThreadedCode937 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign938, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend939, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock936 = new_Block_with(empty_Array, empty_Array, PThreadedCode937, 1, PAssign938);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend931 = new_Send((Optr)slot_Kernel_Exception_Halt_Class_class_instance, SMB_ifNil_, 1, (Optr)PBlock927);
-    Array PThreadedCode926 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_Kernel_Exception_Halt_Class_class_instance, (Optr)&t_push_closure, (Optr)PBlock927, (Optr)&t_send1, (Optr)PSend931, (Optr)&t_method_return);
-    Method PMethod925 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode926, 1, PSend931);
+    Send PSend940 = new_Send((Optr)slot_Kernel_Exception_Halt_Class_class_instance, SMB_ifNil_, 1, (Optr)PBlock936);
+    Array PThreadedCode935 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_Kernel_Exception_Halt_Class_class_instance, (Optr)&t_push_closure, (Optr)PBlock936, (Optr)&t_send1, (Optr)PSend940, (Optr)&t_method_return);
+    Method PMethod934 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode935, 1, PSend940);
     
-    MethodClosure MC_SMB_instance = new_MethodClosure((Method)PMethod925, HEADER(Kernel_Exception_Halt_Class));
+    MethodClosure MC_SMB_instance = new_MethodClosure((Method)PMethod934, HEADER(Kernel_Exception_Halt_Class));
     store_method(HEADER(Kernel_Exception_Halt_Class), SMB_instance, MC_SMB_instance);
 }
 
@@ -46,13 +46,13 @@ static void init_class_SMB_signal() {
     Symbol SMB_signal = new_Symbol(L"signal");
     Symbol SMB_instance = new_Symbol(L"instance");
     // instance. 
-    Send PSend934 = new_Send((Optr)self, SMB_instance, 0);
+    Send PSend943 = new_Send((Optr)self, SMB_instance, 0);
     // signal. 
-    Send PSend935 = new_Send((Optr)PSend934, SMB_signal, 0);
-    Array PThreadedCode933 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend934, (Optr)&t_send0, (Optr)PSend935, (Optr)&t_method_return);
-    Method PMethod932 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode933, 1, PSend935);
+    Send PSend944 = new_Send((Optr)PSend943, SMB_signal, 0);
+    Array PThreadedCode942 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend943, (Optr)&t_send0, (Optr)PSend944, (Optr)&t_method_return);
+    Method PMethod941 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode942, 1, PSend944);
     
-    MethodClosure MC_SMB_signal = new_MethodClosure((Method)PMethod932, HEADER(Kernel_Exception_Halt_Class));
+    MethodClosure MC_SMB_signal = new_MethodClosure((Method)PMethod941, HEADER(Kernel_Exception_Halt_Class));
     store_method(HEADER(Kernel_Exception_Halt_Class), SMB_signal, MC_SMB_signal);
 }
 

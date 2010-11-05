@@ -6,10 +6,10 @@ Optr layout_Collection_Array_Class_class;
 
 static void init_SMB_asArray() {
     Symbol SMB_asArray = new_Symbol(L"asArray");
-    Array PThreadedCode5678 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod5677 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode5678, 1, self);
+    Array PThreadedCode5679 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod5678 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode5679, 1, self);
     
-    MethodClosure MC_SMB_asArray = new_MethodClosure((Method)PMethod5677, Array_Class);
+    MethodClosure MC_SMB_asArray = new_MethodClosure((Method)PMethod5678, Array_Class);
     store_method(Array_Class, SMB_asArray, MC_SMB_asArray);
 }
 
@@ -17,14 +17,14 @@ static void init_SMB_asArray() {
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray5680 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray5681 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitArray_ = new_Symbol(L"visitArray:");
     // visitArray:. 
-    Send PSend5682 = new_Send((Optr)VAR_visitor_0_0, SMB_visitArray_, 1, (Optr)self);
-    Array PThreadedCode5681 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend5682, (Optr)&t_method_return);
-    Method PMethod5679 = new_Method_with(PArray5680, empty_Array, empty_Array, PThreadedCode5681, 1, PSend5682);
+    Send PSend5683 = new_Send((Optr)VAR_visitor_0_0, SMB_visitArray_, 1, (Optr)self);
+    Array PThreadedCode5682 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend5683, (Optr)&t_method_return);
+    Method PMethod5680 = new_Method_with(PArray5681, empty_Array, empty_Array, PThreadedCode5682, 1, PSend5683);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod5679, Array_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod5680, Array_Class);
     store_method(Array_Class, SMB_accept_, MC_SMB_accept_);
 }
 

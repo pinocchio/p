@@ -7,17 +7,17 @@ Optr layout_Kernel_Number_Float_Class_class;
 static void init_SMB__lt__equals_() {
     Symbol SMB__lt__equals_ = new_Symbol(L"<=");
     Variable VAR_aNumber_0_0 = new_Variable_named(L"aNumber", 0);
-    Array PArray3962 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
+    Array PArray3963 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
     Symbol SMB__gt_ = new_Symbol(L">");
     // >. 
-    Send PSend3964 = new_Send((Optr)self, SMB__gt_, 1, (Optr)VAR_aNumber_0_0);
+    Send PSend3965 = new_Send((Optr)self, SMB__gt_, 1, (Optr)VAR_aNumber_0_0);
     Symbol SMB_not = new_Symbol(L"not");
     // not. 
-    Send PSend3965 = new_Send((Optr)PSend3964, SMB_not, 0);
-    Array PThreadedCode3963 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_send1, (Optr)PSend3964, (Optr)&t_send0, (Optr)PSend3965, (Optr)&t_method_return);
-    Method PMethod3961 = new_Method_with(PArray3962, empty_Array, empty_Array, PThreadedCode3963, 1, PSend3965);
+    Send PSend3966 = new_Send((Optr)PSend3965, SMB_not, 0);
+    Array PThreadedCode3964 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_send1, (Optr)PSend3965, (Optr)&t_send0, (Optr)PSend3966, (Optr)&t_method_return);
+    Method PMethod3962 = new_Method_with(PArray3963, empty_Array, empty_Array, PThreadedCode3964, 1, PSend3966);
     
-    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod3961, Float_Class);
+    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod3962, Float_Class);
     store_method(Float_Class, SMB__lt__equals_, MC_SMB__lt__equals_);
 }
 
@@ -25,18 +25,18 @@ static void init_SMB__lt__equals_() {
 static void init_SMB__divide_() {
     Symbol SMB__divide_ = new_Symbol(L"/");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray3967 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray3968 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation3969 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__divide_, (Optr)SMB_Number_minus_Float);
-    Array PArray3968 = new_Array_with(1, (Optr)PAnnotation3969);
+    Annotation PAnnotation3970 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__divide_, (Optr)SMB_Number_minus_Float);
+    Array PArray3969 = new_Array_with(1, (Optr)PAnnotation3970);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend3971 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode3970 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3971, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod3966 = new_NativeMethod_with(PArray3967, empty_Array, PArray3968, PThreadedCode3970, 2, PSend3971, self);
+    Send PSend3972 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode3971 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3972, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod3967 = new_NativeMethod_with(PArray3968, empty_Array, PArray3969, PThreadedCode3971, 2, PSend3972, self);
     
-    MethodClosure MC_SMB__divide_ = new_MethodClosure((Method)PNativeMethod3966, Float_Class);
+    MethodClosure MC_SMB__divide_ = new_MethodClosure((Method)PNativeMethod3967, Float_Class);
     store_method(Float_Class, SMB__divide_, MC_SMB__divide_);
 }
 
@@ -44,18 +44,18 @@ static void init_SMB__divide_() {
 static void init_SMB__lt_() {
     Symbol SMB__lt_ = new_Symbol(L"<");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray3973 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray3974 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation3975 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__lt_, (Optr)SMB_Number_minus_Float);
-    Array PArray3974 = new_Array_with(1, (Optr)PAnnotation3975);
+    Annotation PAnnotation3976 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__lt_, (Optr)SMB_Number_minus_Float);
+    Array PArray3975 = new_Array_with(1, (Optr)PAnnotation3976);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend3977 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode3976 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3977, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod3972 = new_NativeMethod_with(PArray3973, empty_Array, PArray3974, PThreadedCode3976, 2, PSend3977, self);
+    Send PSend3978 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode3977 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3978, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod3973 = new_NativeMethod_with(PArray3974, empty_Array, PArray3975, PThreadedCode3977, 2, PSend3978, self);
     
-    MethodClosure MC_SMB__lt_ = new_MethodClosure((Method)PNativeMethod3972, Float_Class);
+    MethodClosure MC_SMB__lt_ = new_MethodClosure((Method)PNativeMethod3973, Float_Class);
     store_method(Float_Class, SMB__lt_, MC_SMB__lt_);
 }
 
@@ -63,17 +63,17 @@ static void init_SMB__lt_() {
 static void init_SMB_putOn_() {
     Symbol SMB_putOn_ = new_Symbol(L"putOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray3979 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray3980 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_asString = new_Symbol(L"asString");
     // asString. 
-    Send PSend3981 = new_Send((Optr)self, SMB_asString, 0);
+    Send PSend3982 = new_Send((Optr)self, SMB_asString, 0);
     Symbol SMB_writeAll_ = new_Symbol(L"writeAll:");
     // writeAll:. 
-    Send PSend3982 = new_Send((Optr)VAR_aStream_0_0, SMB_writeAll_, 1, (Optr)PSend3981);
-    Array PThreadedCode3980 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3981, (Optr)&t_send1, (Optr)PSend3982, (Optr)&t_method_return);
-    Method PMethod3978 = new_Method_with(PArray3979, empty_Array, empty_Array, PThreadedCode3980, 1, PSend3982);
+    Send PSend3983 = new_Send((Optr)VAR_aStream_0_0, SMB_writeAll_, 1, (Optr)PSend3982);
+    Array PThreadedCode3981 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3982, (Optr)&t_send1, (Optr)PSend3983, (Optr)&t_method_return);
+    Method PMethod3979 = new_Method_with(PArray3980, empty_Array, empty_Array, PThreadedCode3981, 1, PSend3983);
     
-    MethodClosure MC_SMB_putOn_ = new_MethodClosure((Method)PMethod3978, Float_Class);
+    MethodClosure MC_SMB_putOn_ = new_MethodClosure((Method)PMethod3979, Float_Class);
     store_method(Float_Class, SMB_putOn_, MC_SMB_putOn_);
 }
 
@@ -81,18 +81,18 @@ static void init_SMB_putOn_() {
 static void init_SMB__plus_() {
     Symbol SMB__plus_ = new_Symbol(L"+");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray3984 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray3985 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation3986 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__plus_, (Optr)SMB_Number_minus_Float);
-    Array PArray3985 = new_Array_with(1, (Optr)PAnnotation3986);
+    Annotation PAnnotation3987 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__plus_, (Optr)SMB_Number_minus_Float);
+    Array PArray3986 = new_Array_with(1, (Optr)PAnnotation3987);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend3988 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode3987 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3988, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod3983 = new_NativeMethod_with(PArray3984, empty_Array, PArray3985, PThreadedCode3987, 2, PSend3988, self);
+    Send PSend3989 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode3988 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3989, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod3984 = new_NativeMethod_with(PArray3985, empty_Array, PArray3986, PThreadedCode3988, 2, PSend3989, self);
     
-    MethodClosure MC_SMB__plus_ = new_MethodClosure((Method)PNativeMethod3983, Float_Class);
+    MethodClosure MC_SMB__plus_ = new_MethodClosure((Method)PNativeMethod3984, Float_Class);
     store_method(Float_Class, SMB__plus_, MC_SMB__plus_);
 }
 
@@ -100,18 +100,18 @@ static void init_SMB__plus_() {
 static void init_SMB__minus_() {
     Symbol SMB__minus_ = new_Symbol(L"-");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray3990 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray3991 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation3992 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__minus_, (Optr)SMB_Number_minus_Float);
-    Array PArray3991 = new_Array_with(1, (Optr)PAnnotation3992);
+    Annotation PAnnotation3993 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__minus_, (Optr)SMB_Number_minus_Float);
+    Array PArray3992 = new_Array_with(1, (Optr)PAnnotation3993);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend3994 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode3993 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3994, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod3989 = new_NativeMethod_with(PArray3990, empty_Array, PArray3991, PThreadedCode3993, 2, PSend3994, self);
+    Send PSend3995 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode3994 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend3995, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod3990 = new_NativeMethod_with(PArray3991, empty_Array, PArray3992, PThreadedCode3994, 2, PSend3995, self);
     
-    MethodClosure MC_SMB__minus_ = new_MethodClosure((Method)PNativeMethod3989, Float_Class);
+    MethodClosure MC_SMB__minus_ = new_MethodClosure((Method)PNativeMethod3990, Float_Class);
     store_method(Float_Class, SMB__minus_, MC_SMB__minus_);
 }
 
@@ -119,18 +119,18 @@ static void init_SMB__minus_() {
 static void init_SMB__modulo_() {
     Symbol SMB__modulo_ = new_Symbol(L"\\\\");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray3996 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray3997 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation3998 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__modulo_, (Optr)SMB_Number_minus_Float);
-    Array PArray3997 = new_Array_with(1, (Optr)PAnnotation3998);
+    Annotation PAnnotation3999 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__modulo_, (Optr)SMB_Number_minus_Float);
+    Array PArray3998 = new_Array_with(1, (Optr)PAnnotation3999);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4000 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode3999 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4000, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod3995 = new_NativeMethod_with(PArray3996, empty_Array, PArray3997, PThreadedCode3999, 2, PSend4000, self);
+    Send PSend4001 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4000 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4001, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod3996 = new_NativeMethod_with(PArray3997, empty_Array, PArray3998, PThreadedCode4000, 2, PSend4001, self);
     
-    MethodClosure MC_SMB__modulo_ = new_MethodClosure((Method)PNativeMethod3995, Float_Class);
+    MethodClosure MC_SMB__modulo_ = new_MethodClosure((Method)PNativeMethod3996, Float_Class);
     store_method(Float_Class, SMB__modulo_, MC_SMB__modulo_);
 }
 
@@ -139,15 +139,15 @@ static void init_SMB_asInteger() {
     Symbol SMB_asInteger = new_Symbol(L"asInteger");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4003 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_asInteger, (Optr)SMB_Number_minus_Float);
-    Array PArray4002 = new_Array_with(1, (Optr)PAnnotation4003);
+    Annotation PAnnotation4004 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_asInteger, (Optr)SMB_Number_minus_Float);
+    Array PArray4003 = new_Array_with(1, (Optr)PAnnotation4004);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4005 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4004 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4005, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4001 = new_NativeMethod_with(empty_Array, empty_Array, PArray4002, PThreadedCode4004, 2, PSend4005, self);
+    Send PSend4006 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4005 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4006, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4002 = new_NativeMethod_with(empty_Array, empty_Array, PArray4003, PThreadedCode4005, 2, PSend4006, self);
     
-    MethodClosure MC_SMB_asInteger = new_MethodClosure((Method)PNativeMethod4001, Float_Class);
+    MethodClosure MC_SMB_asInteger = new_MethodClosure((Method)PNativeMethod4002, Float_Class);
     store_method(Float_Class, SMB_asInteger, MC_SMB_asInteger);
 }
 
@@ -156,15 +156,15 @@ static void init_SMB_floor() {
     Symbol SMB_floor = new_Symbol(L"floor");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4008 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_floor, (Optr)SMB_Number_minus_Float);
-    Array PArray4007 = new_Array_with(1, (Optr)PAnnotation4008);
+    Annotation PAnnotation4009 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_floor, (Optr)SMB_Number_minus_Float);
+    Array PArray4008 = new_Array_with(1, (Optr)PAnnotation4009);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4010 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4009 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4010, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4006 = new_NativeMethod_with(empty_Array, empty_Array, PArray4007, PThreadedCode4009, 2, PSend4010, self);
+    Send PSend4011 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4010 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4011, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4007 = new_NativeMethod_with(empty_Array, empty_Array, PArray4008, PThreadedCode4010, 2, PSend4011, self);
     
-    MethodClosure MC_SMB_floor = new_MethodClosure((Method)PNativeMethod4006, Float_Class);
+    MethodClosure MC_SMB_floor = new_MethodClosure((Method)PNativeMethod4007, Float_Class);
     store_method(Float_Class, SMB_floor, MC_SMB_floor);
 }
 
@@ -172,14 +172,14 @@ static void init_SMB_floor() {
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray4012 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray4013 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitFloat_ = new_Symbol(L"visitFloat:");
     // visitFloat:. 
-    Send PSend4014 = new_Send((Optr)VAR_visitor_0_0, SMB_visitFloat_, 1, (Optr)self);
-    Array PThreadedCode4013 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4014, (Optr)&t_method_return);
-    Method PMethod4011 = new_Method_with(PArray4012, empty_Array, empty_Array, PThreadedCode4013, 1, PSend4014);
+    Send PSend4015 = new_Send((Optr)VAR_visitor_0_0, SMB_visitFloat_, 1, (Optr)self);
+    Array PThreadedCode4014 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4015, (Optr)&t_method_return);
+    Method PMethod4012 = new_Method_with(PArray4013, empty_Array, empty_Array, PThreadedCode4014, 1, PSend4015);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4011, Float_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4012, Float_Class);
     store_method(Float_Class, SMB_accept_, MC_SMB_accept_);
 }
 
@@ -187,18 +187,18 @@ static void init_SMB_accept_() {
 static void init_SMB__quotient_() {
     Symbol SMB__quotient_ = new_Symbol(L"//");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray4016 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray4017 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4018 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__quotient_, (Optr)SMB_Number_minus_Float);
-    Array PArray4017 = new_Array_with(1, (Optr)PAnnotation4018);
+    Annotation PAnnotation4019 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__quotient_, (Optr)SMB_Number_minus_Float);
+    Array PArray4018 = new_Array_with(1, (Optr)PAnnotation4019);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4020 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4019 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4020, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4015 = new_NativeMethod_with(PArray4016, empty_Array, PArray4017, PThreadedCode4019, 2, PSend4020, self);
+    Send PSend4021 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4020 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4021, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4016 = new_NativeMethod_with(PArray4017, empty_Array, PArray4018, PThreadedCode4020, 2, PSend4021, self);
     
-    MethodClosure MC_SMB__quotient_ = new_MethodClosure((Method)PNativeMethod4015, Float_Class);
+    MethodClosure MC_SMB__quotient_ = new_MethodClosure((Method)PNativeMethod4016, Float_Class);
     store_method(Float_Class, SMB__quotient_, MC_SMB__quotient_);
 }
 
@@ -206,17 +206,17 @@ static void init_SMB__quotient_() {
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray4022 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray4023 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_asString = new_Symbol(L"asString");
     // asString. 
-    Send PSend4024 = new_Send((Optr)self, SMB_asString, 0);
+    Send PSend4025 = new_Send((Optr)self, SMB_asString, 0);
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
     // <<. 
-    Send PSend4025 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend4024);
-    Array PThreadedCode4023 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4024, (Optr)&t_send1, (Optr)PSend4025, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod4021 = new_Method_with(PArray4022, empty_Array, empty_Array, PThreadedCode4023, 2, PSend4025, self);
+    Send PSend4026 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend4025);
+    Array PThreadedCode4024 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4025, (Optr)&t_send1, (Optr)PSend4026, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod4022 = new_Method_with(PArray4023, empty_Array, empty_Array, PThreadedCode4024, 2, PSend4026, self);
     
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod4021, Float_Class);
+    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod4022, Float_Class);
     store_method(Float_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
@@ -224,20 +224,20 @@ static void init_SMB_printOn_() {
 static void init_SMB_roundTo_() {
     Symbol SMB_roundTo_ = new_Symbol(L"roundTo:");
     Variable VAR_quantum_0_0 = new_Variable_named(L"quantum", 0);
-    Array PArray4027 = new_Array_with(1, (Optr)VAR_quantum_0_0);
+    Array PArray4028 = new_Array_with(1, (Optr)VAR_quantum_0_0);
     Symbol SMB__divide_ = new_Symbol(L"/");
     // /. 
-    Send PSend4029 = new_Send((Optr)self, SMB__divide_, 1, (Optr)VAR_quantum_0_0);
+    Send PSend4030 = new_Send((Optr)self, SMB__divide_, 1, (Optr)VAR_quantum_0_0);
     Symbol SMB_rounded = new_Symbol(L"rounded");
     // rounded. 
-    Send PSend4030 = new_Send((Optr)PSend4029, SMB_rounded, 0);
+    Send PSend4031 = new_Send((Optr)PSend4030, SMB_rounded, 0);
     Symbol SMB__times_ = new_Symbol(L"*");
     // *. 
-    Send PSend4031 = new_Send((Optr)PSend4030, SMB__times_, 1, (Optr)VAR_quantum_0_0);
-    Array PThreadedCode4028 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_quantum_0_0, (Optr)&t_send1, (Optr)PSend4029, (Optr)&t_send0, (Optr)PSend4030, (Optr)&t_push_variable, (Optr)VAR_quantum_0_0, (Optr)&t_send1, (Optr)PSend4031, (Optr)&t_method_return);
-    Method PMethod4026 = new_Method_with(PArray4027, empty_Array, empty_Array, PThreadedCode4028, 1, PSend4031);
+    Send PSend4032 = new_Send((Optr)PSend4031, SMB__times_, 1, (Optr)VAR_quantum_0_0);
+    Array PThreadedCode4029 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_quantum_0_0, (Optr)&t_send1, (Optr)PSend4030, (Optr)&t_send0, (Optr)PSend4031, (Optr)&t_push_variable, (Optr)VAR_quantum_0_0, (Optr)&t_send1, (Optr)PSend4032, (Optr)&t_method_return);
+    Method PMethod4027 = new_Method_with(PArray4028, empty_Array, empty_Array, PThreadedCode4029, 1, PSend4032);
     
-    MethodClosure MC_SMB_roundTo_ = new_MethodClosure((Method)PMethod4026, Float_Class);
+    MethodClosure MC_SMB_roundTo_ = new_MethodClosure((Method)PMethod4027, Float_Class);
     store_method(Float_Class, SMB_roundTo_, MC_SMB_roundTo_);
 }
 
@@ -246,15 +246,15 @@ static void init_SMB_asString() {
     Symbol SMB_asString = new_Symbol(L"asString");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4034 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_asString, (Optr)SMB_Number_minus_Float);
-    Array PArray4033 = new_Array_with(1, (Optr)PAnnotation4034);
+    Annotation PAnnotation4035 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_asString, (Optr)SMB_Number_minus_Float);
+    Array PArray4034 = new_Array_with(1, (Optr)PAnnotation4035);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4036 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4035 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4036, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4032 = new_NativeMethod_with(empty_Array, empty_Array, PArray4033, PThreadedCode4035, 2, PSend4036, self);
+    Send PSend4037 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4036 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4037, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4033 = new_NativeMethod_with(empty_Array, empty_Array, PArray4034, PThreadedCode4036, 2, PSend4037, self);
     
-    MethodClosure MC_SMB_asString = new_MethodClosure((Method)PNativeMethod4032, Float_Class);
+    MethodClosure MC_SMB_asString = new_MethodClosure((Method)PNativeMethod4033, Float_Class);
     store_method(Float_Class, SMB_asString, MC_SMB_asString);
 }
 
@@ -263,11 +263,11 @@ static void init_SMB_squared() {
     Symbol SMB_squared = new_Symbol(L"squared");
     Symbol SMB__times_ = new_Symbol(L"*");
     // *. 
-    Send PSend4039 = new_Send((Optr)self, SMB__times_, 1, (Optr)self);
-    Array PThreadedCode4038 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4039, (Optr)&t_method_return);
-    Method PMethod4037 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4038, 1, PSend4039);
+    Send PSend4040 = new_Send((Optr)self, SMB__times_, 1, (Optr)self);
+    Array PThreadedCode4039 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4040, (Optr)&t_method_return);
+    Method PMethod4038 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4039, 1, PSend4040);
     
-    MethodClosure MC_SMB_squared = new_MethodClosure((Method)PMethod4037, Float_Class);
+    MethodClosure MC_SMB_squared = new_MethodClosure((Method)PMethod4038, Float_Class);
     store_method(Float_Class, SMB_squared, MC_SMB_squared);
 }
 
@@ -275,18 +275,18 @@ static void init_SMB_squared() {
 static void init_SMB__gt_() {
     Symbol SMB__gt_ = new_Symbol(L">");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray4041 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray4042 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4043 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__gt_, (Optr)SMB_Number_minus_Float);
-    Array PArray4042 = new_Array_with(1, (Optr)PAnnotation4043);
+    Annotation PAnnotation4044 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__gt_, (Optr)SMB_Number_minus_Float);
+    Array PArray4043 = new_Array_with(1, (Optr)PAnnotation4044);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4045 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4044 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4045, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4040 = new_NativeMethod_with(PArray4041, empty_Array, PArray4042, PThreadedCode4044, 2, PSend4045, self);
+    Send PSend4046 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4045 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4046, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4041 = new_NativeMethod_with(PArray4042, empty_Array, PArray4043, PThreadedCode4045, 2, PSend4046, self);
     
-    MethodClosure MC_SMB__gt_ = new_MethodClosure((Method)PNativeMethod4040, Float_Class);
+    MethodClosure MC_SMB__gt_ = new_MethodClosure((Method)PNativeMethod4041, Float_Class);
     store_method(Float_Class, SMB__gt_, MC_SMB__gt_);
 }
 
@@ -295,15 +295,15 @@ static void init_SMB_hash() {
     Symbol SMB_hash = new_Symbol(L"hash");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4048 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_hash, (Optr)SMB_Number_minus_Float);
-    Array PArray4047 = new_Array_with(1, (Optr)PAnnotation4048);
+    Annotation PAnnotation4049 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_hash, (Optr)SMB_Number_minus_Float);
+    Array PArray4048 = new_Array_with(1, (Optr)PAnnotation4049);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4050 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4049 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4050, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4046 = new_NativeMethod_with(empty_Array, empty_Array, PArray4047, PThreadedCode4049, 2, PSend4050, self);
+    Send PSend4051 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4050 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4051, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4047 = new_NativeMethod_with(empty_Array, empty_Array, PArray4048, PThreadedCode4050, 2, PSend4051, self);
     
-    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PNativeMethod4046, Float_Class);
+    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PNativeMethod4047, Float_Class);
     store_method(Float_Class, SMB_hash, MC_SMB_hash);
 }
 
@@ -312,15 +312,15 @@ static void init_SMB_ceil() {
     Symbol SMB_ceil = new_Symbol(L"ceil");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4053 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_ceil, (Optr)SMB_Number_minus_Float);
-    Array PArray4052 = new_Array_with(1, (Optr)PAnnotation4053);
+    Annotation PAnnotation4054 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_ceil, (Optr)SMB_Number_minus_Float);
+    Array PArray4053 = new_Array_with(1, (Optr)PAnnotation4054);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4055 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4054 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4055, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4051 = new_NativeMethod_with(empty_Array, empty_Array, PArray4052, PThreadedCode4054, 2, PSend4055, self);
+    Send PSend4056 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4055 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4056, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4052 = new_NativeMethod_with(empty_Array, empty_Array, PArray4053, PThreadedCode4055, 2, PSend4056, self);
     
-    MethodClosure MC_SMB_ceil = new_MethodClosure((Method)PNativeMethod4051, Float_Class);
+    MethodClosure MC_SMB_ceil = new_MethodClosure((Method)PNativeMethod4052, Float_Class);
     store_method(Float_Class, SMB_ceil, MC_SMB_ceil);
 }
 
@@ -329,15 +329,15 @@ static void init_SMB_sqrt() {
     Symbol SMB_sqrt = new_Symbol(L"sqrt");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4058 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_sqrt, (Optr)SMB_Number_minus_Float);
-    Array PArray4057 = new_Array_with(1, (Optr)PAnnotation4058);
+    Annotation PAnnotation4059 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_sqrt, (Optr)SMB_Number_minus_Float);
+    Array PArray4058 = new_Array_with(1, (Optr)PAnnotation4059);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4060 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4059 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4060, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4056 = new_NativeMethod_with(empty_Array, empty_Array, PArray4057, PThreadedCode4059, 2, PSend4060, self);
+    Send PSend4061 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4060 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4061, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4057 = new_NativeMethod_with(empty_Array, empty_Array, PArray4058, PThreadedCode4060, 2, PSend4061, self);
     
-    MethodClosure MC_SMB_sqrt = new_MethodClosure((Method)PNativeMethod4056, Float_Class);
+    MethodClosure MC_SMB_sqrt = new_MethodClosure((Method)PNativeMethod4057, Float_Class);
     store_method(Float_Class, SMB_sqrt, MC_SMB_sqrt);
 }
 
@@ -346,15 +346,15 @@ static void init_SMB_log() {
     Symbol SMB_log = new_Symbol(L"log");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4063 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_log, (Optr)SMB_Number_minus_Float);
-    Array PArray4062 = new_Array_with(1, (Optr)PAnnotation4063);
+    Annotation PAnnotation4064 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_log, (Optr)SMB_Number_minus_Float);
+    Array PArray4063 = new_Array_with(1, (Optr)PAnnotation4064);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4065 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4064 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4065, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4061 = new_NativeMethod_with(empty_Array, empty_Array, PArray4062, PThreadedCode4064, 2, PSend4065, self);
+    Send PSend4066 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4065 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4066, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4062 = new_NativeMethod_with(empty_Array, empty_Array, PArray4063, PThreadedCode4065, 2, PSend4066, self);
     
-    MethodClosure MC_SMB_log = new_MethodClosure((Method)PNativeMethod4061, Float_Class);
+    MethodClosure MC_SMB_log = new_MethodClosure((Method)PNativeMethod4062, Float_Class);
     store_method(Float_Class, SMB_log, MC_SMB_log);
 }
 
@@ -362,17 +362,17 @@ static void init_SMB_log() {
 static void init_SMB__gt__equals_() {
     Symbol SMB__gt__equals_ = new_Symbol(L">=");
     Variable VAR_aNumber_0_0 = new_Variable_named(L"aNumber", 0);
-    Array PArray4067 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
+    Array PArray4068 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
     Symbol SMB__lt_ = new_Symbol(L"<");
     // <. 
-    Send PSend4069 = new_Send((Optr)self, SMB__lt_, 1, (Optr)VAR_aNumber_0_0);
+    Send PSend4070 = new_Send((Optr)self, SMB__lt_, 1, (Optr)VAR_aNumber_0_0);
     Symbol SMB_not = new_Symbol(L"not");
     // not. 
-    Send PSend4070 = new_Send((Optr)PSend4069, SMB_not, 0);
-    Array PThreadedCode4068 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_send1, (Optr)PSend4069, (Optr)&t_send0, (Optr)PSend4070, (Optr)&t_method_return);
-    Method PMethod4066 = new_Method_with(PArray4067, empty_Array, empty_Array, PThreadedCode4068, 1, PSend4070);
+    Send PSend4071 = new_Send((Optr)PSend4070, SMB_not, 0);
+    Array PThreadedCode4069 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_send1, (Optr)PSend4070, (Optr)&t_send0, (Optr)PSend4071, (Optr)&t_method_return);
+    Method PMethod4067 = new_Method_with(PArray4068, empty_Array, empty_Array, PThreadedCode4069, 1, PSend4071);
     
-    MethodClosure MC_SMB__gt__equals_ = new_MethodClosure((Method)PMethod4066, Float_Class);
+    MethodClosure MC_SMB__gt__equals_ = new_MethodClosure((Method)PMethod4067, Float_Class);
     store_method(Float_Class, SMB__gt__equals_, MC_SMB__gt__equals_);
 }
 
@@ -380,28 +380,28 @@ static void init_SMB__gt__equals_() {
 static void init_SMB_raisedTo_() {
     Symbol SMB_raisedTo_ = new_Symbol(L"raisedTo:");
     Variable VAR_aNumber_0_0 = new_Variable_named(L"aNumber", 0);
-    Array PArray4072 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
+    Array PArray4073 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4074 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_raisedTo_, (Optr)SMB_Number_minus_Float);
-    Array PArray4073 = new_Array_with(1, (Optr)PAnnotation4074);
+    Annotation PAnnotation4075 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_raisedTo_, (Optr)SMB_Number_minus_Float);
+    Array PArray4074 = new_Array_with(1, (Optr)PAnnotation4075);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4076 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4075 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4076, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4071 = new_NativeMethod_with(PArray4072, empty_Array, PArray4073, PThreadedCode4075, 2, PSend4076, self);
+    Send PSend4077 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4076 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4077, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4072 = new_NativeMethod_with(PArray4073, empty_Array, PArray4074, PThreadedCode4076, 2, PSend4077, self);
     
-    MethodClosure MC_SMB_raisedTo_ = new_MethodClosure((Method)PNativeMethod4071, Float_Class);
+    MethodClosure MC_SMB_raisedTo_ = new_MethodClosure((Method)PNativeMethod4072, Float_Class);
     store_method(Float_Class, SMB_raisedTo_, MC_SMB_raisedTo_);
 }
 
 
 static void init_SMB_asFloat() {
     Symbol SMB_asFloat = new_Symbol(L"asFloat");
-    Array PThreadedCode4078 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod4077 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4078, 1, self);
+    Array PThreadedCode4079 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod4078 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4079, 1, self);
     
-    MethodClosure MC_SMB_asFloat = new_MethodClosure((Method)PMethod4077, Float_Class);
+    MethodClosure MC_SMB_asFloat = new_MethodClosure((Method)PMethod4078, Float_Class);
     store_method(Float_Class, SMB_asFloat, MC_SMB_asFloat);
 }
 
@@ -409,18 +409,18 @@ static void init_SMB_asFloat() {
 static void init_SMB__equals_() {
     Symbol SMB__equals_ = new_Symbol(L"=");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray4080 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray4081 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4082 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__equals_, (Optr)SMB_Number_minus_Float);
-    Array PArray4081 = new_Array_with(1, (Optr)PAnnotation4082);
+    Annotation PAnnotation4083 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__equals_, (Optr)SMB_Number_minus_Float);
+    Array PArray4082 = new_Array_with(1, (Optr)PAnnotation4083);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4084 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4083 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4084, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4079 = new_NativeMethod_with(PArray4080, empty_Array, PArray4081, PThreadedCode4083, 2, PSend4084, self);
+    Send PSend4085 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4084 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4085, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4080 = new_NativeMethod_with(PArray4081, empty_Array, PArray4082, PThreadedCode4084, 2, PSend4085, self);
     
-    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PNativeMethod4079, Float_Class);
+    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PNativeMethod4080, Float_Class);
     store_method(Float_Class, SMB__equals_, MC_SMB__equals_);
 }
 
@@ -428,18 +428,18 @@ static void init_SMB__equals_() {
 static void init_SMB__times_() {
     Symbol SMB__times_ = new_Symbol(L"*");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray4086 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray4087 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4088 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__times_, (Optr)SMB_Number_minus_Float);
-    Array PArray4087 = new_Array_with(1, (Optr)PAnnotation4088);
+    Annotation PAnnotation4089 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__times_, (Optr)SMB_Number_minus_Float);
+    Array PArray4088 = new_Array_with(1, (Optr)PAnnotation4089);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4090 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4089 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4090, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4085 = new_NativeMethod_with(PArray4086, empty_Array, PArray4087, PThreadedCode4089, 2, PSend4090, self);
+    Send PSend4091 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4090 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4091, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4086 = new_NativeMethod_with(PArray4087, empty_Array, PArray4088, PThreadedCode4090, 2, PSend4091, self);
     
-    MethodClosure MC_SMB__times_ = new_MethodClosure((Method)PNativeMethod4085, Float_Class);
+    MethodClosure MC_SMB__times_ = new_MethodClosure((Method)PNativeMethod4086, Float_Class);
     store_method(Float_Class, SMB__times_, MC_SMB__times_);
 }
 
@@ -448,15 +448,15 @@ static void init_SMB_rounded() {
     Symbol SMB_rounded = new_Symbol(L"rounded");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4093 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_rounded, (Optr)SMB_Number_minus_Float);
-    Array PArray4092 = new_Array_with(1, (Optr)PAnnotation4093);
+    Annotation PAnnotation4094 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_rounded, (Optr)SMB_Number_minus_Float);
+    Array PArray4093 = new_Array_with(1, (Optr)PAnnotation4094);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4095 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4094 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4095, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4091 = new_NativeMethod_with(empty_Array, empty_Array, PArray4092, PThreadedCode4094, 2, PSend4095, self);
+    Send PSend4096 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4095 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4096, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4092 = new_NativeMethod_with(empty_Array, empty_Array, PArray4093, PThreadedCode4095, 2, PSend4096, self);
     
-    MethodClosure MC_SMB_rounded = new_MethodClosure((Method)PNativeMethod4091, Float_Class);
+    MethodClosure MC_SMB_rounded = new_MethodClosure((Method)PNativeMethod4092, Float_Class);
     store_method(Float_Class, SMB_rounded, MC_SMB_rounded);
 }
 
@@ -464,18 +464,18 @@ static void init_SMB_rounded() {
 static void init_SMB__notEquals_() {
     Symbol SMB__notEquals_ = new_Symbol(L"~=");
     Variable VAR_other_0_0 = new_Variable_named(L"other", 0);
-    Array PArray4097 = new_Array_with(1, (Optr)VAR_other_0_0);
+    Array PArray4098 = new_Array_with(1, (Optr)VAR_other_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Number_minus_Float = new_Symbol(L"Number.Float");
-    Annotation PAnnotation4099 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__notEquals_, (Optr)SMB_Number_minus_Float);
-    Array PArray4098 = new_Array_with(1, (Optr)PAnnotation4099);
+    Annotation PAnnotation4100 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB__notEquals_, (Optr)SMB_Number_minus_Float);
+    Array PArray4099 = new_Array_with(1, (Optr)PAnnotation4100);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend4101 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode4100 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4101, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4096 = new_NativeMethod_with(PArray4097, empty_Array, PArray4098, PThreadedCode4100, 2, PSend4101, self);
+    Send PSend4102 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode4101 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4102, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4097 = new_NativeMethod_with(PArray4098, empty_Array, PArray4099, PThreadedCode4101, 2, PSend4102, self);
     
-    MethodClosure MC_SMB__notEquals_ = new_MethodClosure((Method)PNativeMethod4096, Float_Class);
+    MethodClosure MC_SMB__notEquals_ = new_MethodClosure((Method)PNativeMethod4097, Float_Class);
     store_method(Float_Class, SMB__notEquals_, MC_SMB__notEquals_);
 }
 

@@ -6,20 +6,20 @@ Optr layout_Kernel_AST_Node_Class_class;
 
 static void init_SMB_isScoped() {
     Symbol SMB_isScoped = new_Symbol(L"isScoped");
-    Array PThreadedCode4103 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
-    Method PMethod4102 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4103, 1, true_Const);
+    Array PThreadedCode4104 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
+    Method PMethod4103 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4104, 1, true_Const);
     
-    MethodClosure MC_SMB_isScoped = new_MethodClosure((Method)PMethod4102, Kernel_AST_Node_Class);
+    MethodClosure MC_SMB_isScoped = new_MethodClosure((Method)PMethod4103, Kernel_AST_Node_Class);
     store_method(Kernel_AST_Node_Class, SMB_isScoped, MC_SMB_isScoped);
 }
 
 
 static void init_SMB_asNode() {
     Symbol SMB_asNode = new_Symbol(L"asNode");
-    Array PThreadedCode4105 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod4104 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4105, 1, self);
+    Array PThreadedCode4106 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod4105 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4106, 1, self);
     
-    MethodClosure MC_SMB_asNode = new_MethodClosure((Method)PMethod4104, Kernel_AST_Node_Class);
+    MethodClosure MC_SMB_asNode = new_MethodClosure((Method)PMethod4105, Kernel_AST_Node_Class);
     store_method(Kernel_AST_Node_Class, SMB_asNode, MC_SMB_asNode);
 }
 

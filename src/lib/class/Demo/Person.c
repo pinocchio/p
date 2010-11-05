@@ -9,22 +9,22 @@ Optr layout_Demo_Person;
 static void init_SMB_name_() {
     Symbol SMB_name_ = new_Symbol(L"name:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray24502 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign24504 = new_Assign((Optr)slot_Demo_Person_name, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode24503 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24504, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24501 = new_Method_with(PArray24502, empty_Array, empty_Array, PThreadedCode24503, 2, PAssign24504, self);
+    Array PArray24429 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign24431 = new_Assign((Optr)slot_Demo_Person_name, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode24430 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24431, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24428 = new_Method_with(PArray24429, empty_Array, empty_Array, PThreadedCode24430, 2, PAssign24431, self);
     
-    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod24501, Demo_Person_Class);
+    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod24428, Demo_Person_Class);
     store_method(Demo_Person_Class, SMB_name_, MC_SMB_name_);
 }
 
 
 static void init_SMB_name() {
     Symbol SMB_name = new_Symbol(L"name");
-    Array PThreadedCode24506 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Demo_Person_name, (Optr)&t_method_return);
-    Method PMethod24505 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24506, 1, slot_Demo_Person_name);
+    Array PThreadedCode24433 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Demo_Person_name, (Optr)&t_method_return);
+    Method PMethod24432 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24433, 1, slot_Demo_Person_name);
     
-    MethodClosure MC_SMB_name = new_MethodClosure((Method)PMethod24505, Demo_Person_Class);
+    MethodClosure MC_SMB_name = new_MethodClosure((Method)PMethod24432, Demo_Person_Class);
     store_method(Demo_Person_Class, SMB_name, MC_SMB_name);
 }
 

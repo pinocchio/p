@@ -7,12 +7,12 @@ Optr layout_Organization_UndefinedPathReference;
 
 static void init_SMB_message() {
     Symbol SMB_message = new_Symbol(L"message");
-    String string_21856 = new_String(L"Reference to unbound path");
-    Array PThreadedCode21855 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_21856, (Optr)&t_method_return);
-    Constant string_21856_Const = new_Constant((Optr)string_21856);
-    Method PMethod21854 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21855, 1, string_21856_Const);
+    String string_21783 = new_String(L"Reference to unbound path");
+    Array PThreadedCode21782 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_21783, (Optr)&t_method_return);
+    Constant string_21783_Const = new_Constant((Optr)string_21783);
+    Method PMethod21781 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21782, 1, string_21783_Const);
     
-    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod21854, Organization_UndefinedPathReference_Class);
+    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod21781, Organization_UndefinedPathReference_Class);
     store_method(Organization_UndefinedPathReference_Class, SMB_message, MC_SMB_message);
 }
 

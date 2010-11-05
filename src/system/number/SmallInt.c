@@ -71,9 +71,9 @@ NATIVE1(SmallInt_plus_)
 SmallInt SmallInt_minus_SmallInt(long left, long right) {
     long result = left - right;
     if (right < 0) {
-        assert1(result > left, "Substraction underflow");
+        assert(result > left, fwprintf(stderr, L"Substraction underflow: %li - %li\n", left, right));
     } else {
-        assert1(result <= left, "Substraction overflow");
+        assert(result <= left, fwprintf(stderr, L"Substraction overflow: %li - %li\n", left, right));
     }
     return new_SmallInt(result);
 }
