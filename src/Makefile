@@ -161,12 +161,12 @@ benchmarks:
 	
 	
 run-benchmarks:
-	echo "    Fibonacci"
-	@./pinocchio benchmark/evalution/fib.p    >> benchmark_results.txt
-	echo "    Parser"
-	@./pinocchio benchmark/evalution/parser.p >> benchmark_results.txt
-	eecho "   Dictionary"
-	@./pinocchio benchmark/evalution/dict.p   >> benchmark_results.txt
+	@echo "    Fibonacci"
+	@./pinocchio benchmark/evalution/fib.p    | tee -a benchmark_results.txt
+	@echo "    Parser"
+	@./pinocchio benchmark/evalution/parser.p | tee -a benchmark_results.txt
+	@echo "   Dictionary"
+	@./pinocchio benchmark/evalution/dict.p   | tee -a benchmark_results.txt
 
 # ============================================================================
 probes: probes.d
