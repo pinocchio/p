@@ -20,7 +20,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -g -pipe -I. -Wall -std=c99 
+CFLAGS  += -pipe -I. -Wall -std=c99 
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -33,7 +33,7 @@ ifeq ($(findstring Darwin,$(OS)),Darwin)
 	LDFLAGS += --export-dynamic
 else
 	CFLAGS += -O3
-    LDFLAGS +=  -export-dynamic
+    LDFLAGS += -export-dynamic
 endif
 # ============================================================================
 
@@ -130,39 +130,65 @@ benchmarks:
 	@make clean >> /dev/null;
 	@echo "" >> benchmark_results.txt
 	@date    >> benchmark_results.txt
+	
+	make benchmark
+	make benchmark-no-char-cache
+	make benchmark-no-int-cache
+	make benchmark-no-pic
+	make benchmark-no-ic
+	make benchmark-array-wrapped
+	make benchmark-array-nonative
+	make benchmark-dict-nonative
+	
+	reset
 
+benchmark:
 	@echo 'STANDARD PINOCCHIO/ =======================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make -j3  >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-no-char-cache:
 	@echo 'NO CHARACTER CACHE ========================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make no-char-cache >> /dev/null;
 	@make run-benchmarks
-	
+
+benchmark-no-int-cache:
 	@echo 'NO INTEGER CACHE ==========================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make no-int-cache >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-no-pic:
 	@echo 'NO POLYMORPHIC INLINE CACHE ===============================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make no-pic >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-no-ic:
 	@echo 'NO INLINE CACHE ===========================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make no-pic >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-array-wrapped:
 	@echo 'ARRAYED WITH WRAPPED INTS =================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make array-wrapped >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-array-nonative:
 	@echo 'NO ARRAY NATIVES ==========================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make array-nonative >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-dict-nonative:
 	@echo 'NO DICT NATIVES ===========================================' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
 	@make dict-nonative >> /dev/null;
 	@make run-benchmarks
-	reset
 	
 run-benchmarks:
 	@./pinocchio benchmark/evalution/fib.p    | tee -a benchmark_results.txt
