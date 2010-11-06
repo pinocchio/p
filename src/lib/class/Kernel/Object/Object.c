@@ -682,15 +682,15 @@ static void init_SMB_removeNatives() {
     Symbol SMB_methods = new_Symbol(L"methods");
     // methods. 
     Send PSend194 = new_Send((Optr)self, SMB_methods, 0);
-    Variable VAR_methodClosure_1_0 = new_Variable_named(L"methodClosure", 1);
-    Array PArray196 = new_Array_with(1, (Optr)VAR_methodClosure_1_0);
+    Variable VAR_method_1_0 = new_Variable_named(L"method", 1);
+    Array PArray196 = new_Array_with(1, (Optr)VAR_method_1_0);
     Symbol SMB_code = new_Symbol(L"code");
     // code. 
-    Send PSend198 = new_Send((Optr)VAR_methodClosure_1_0, SMB_code, 0);
+    Send PSend198 = new_Send((Optr)VAR_method_1_0, SMB_code, 0);
     Symbol SMB_clearNative = new_Symbol(L"clearNative");
     // clearNative. 
     Send PSend199 = new_Send((Optr)PSend198, SMB_clearNative, 0);
-    Array PThreadedCode197 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_methodClosure_1_0, (Optr)&t_send0, (Optr)PSend198, (Optr)&t_send0, (Optr)PSend199, (Optr)&t_method_return);
+    Array PThreadedCode197 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_method_1_0, (Optr)&t_send0, (Optr)PSend198, (Optr)&t_send0, (Optr)PSend199, (Optr)&t_method_return);
     Block PBlock195 = new_Block_with(PArray196, empty_Array, PThreadedCode197, 1, PSend199);
     Symbol SMB_do_ = new_Symbol(L"do:");
     // do:. 

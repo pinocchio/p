@@ -8,24 +8,24 @@ Optr layout_Testing_ResumableTestFailure;
 static void init_SMB_sunitExitWith_() {
     Symbol SMB_sunitExitWith_ = new_Symbol(L"sunitExitWith:");
     Variable VAR_aValue_0_0 = new_Variable_named(L"aValue", 0);
-    Array PArray12004 = new_Array_with(1, (Optr)VAR_aValue_0_0);
+    Array PArray12088 = new_Array_with(1, (Optr)VAR_aValue_0_0);
     Symbol SMB_resume_ = new_Symbol(L"resume:");
     // resume:. 
-    Send PSend12006 = new_Send((Optr)self, SMB_resume_, 1, (Optr)VAR_aValue_0_0);
-    Array PThreadedCode12005 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aValue_0_0, (Optr)&t_send1, (Optr)PSend12006, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod12003 = new_Method_with(PArray12004, empty_Array, empty_Array, PThreadedCode12005, 2, PSend12006, self);
+    Send PSend12090 = new_Send((Optr)self, SMB_resume_, 1, (Optr)VAR_aValue_0_0);
+    Array PThreadedCode12089 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aValue_0_0, (Optr)&t_send1, (Optr)PSend12090, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod12087 = new_Method_with(PArray12088, empty_Array, empty_Array, PThreadedCode12089, 2, PSend12090, self);
     
-    MethodClosure MC_SMB_sunitExitWith_ = new_MethodClosure((Method)PMethod12003, Testing_ResumableTestFailure_Class);
+    MethodClosure MC_SMB_sunitExitWith_ = new_MethodClosure((Method)PMethod12087, Testing_ResumableTestFailure_Class);
     store_method(Testing_ResumableTestFailure_Class, SMB_sunitExitWith_, MC_SMB_sunitExitWith_);
 }
 
 
 static void init_SMB_isResumable() {
     Symbol SMB_isResumable = new_Symbol(L"isResumable");
-    Array PThreadedCode12008 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
-    Method PMethod12007 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12008, 1, true_Const);
+    Array PThreadedCode12092 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
+    Method PMethod12091 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12092, 1, true_Const);
     
-    MethodClosure MC_SMB_isResumable = new_MethodClosure((Method)PMethod12007, Testing_ResumableTestFailure_Class);
+    MethodClosure MC_SMB_isResumable = new_MethodClosure((Method)PMethod12091, Testing_ResumableTestFailure_Class);
     store_method(Testing_ResumableTestFailure_Class, SMB_isResumable, MC_SMB_isResumable);
 }
 

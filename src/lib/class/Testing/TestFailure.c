@@ -7,10 +7,10 @@ Optr layout_Testing_TestFailure;
 
 static void init_SMB_isResumable() {
     Symbol SMB_isResumable = new_Symbol(L"isResumable");
-    Array PThreadedCode12002 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
-    Method PMethod12001 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12002, 1, false_Const);
+    Array PThreadedCode12086 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
+    Method PMethod12085 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12086, 1, false_Const);
     
-    MethodClosure MC_SMB_isResumable = new_MethodClosure((Method)PMethod12001, Testing_TestFailure_Class);
+    MethodClosure MC_SMB_isResumable = new_MethodClosure((Method)PMethod12085, Testing_TestFailure_Class);
     store_method(Testing_TestFailure_Class, SMB_isResumable, MC_SMB_isResumable);
 }
 

@@ -9,12 +9,12 @@ Optr layout_Smalltalk_Compiler_CompilationFailure;
 static void init_SMB_message_() {
     Symbol SMB_message_ = new_Symbol(L"message:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray13241 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign13243 = new_Assign((Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode13242 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign13243, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13240 = new_Method_with(PArray13241, empty_Array, empty_Array, PThreadedCode13242, 2, PAssign13243, self);
+    Array PArray13325 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign13327 = new_Assign((Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode13326 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign13327, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13324 = new_Method_with(PArray13325, empty_Array, empty_Array, PThreadedCode13326, 2, PAssign13327, self);
     
-    MethodClosure MC_SMB_message_ = new_MethodClosure((Method)PMethod13240, Smalltalk_Compiler_CompilationFailure_Class);
+    MethodClosure MC_SMB_message_ = new_MethodClosure((Method)PMethod13324, Smalltalk_Compiler_CompilationFailure_Class);
     store_method(Smalltalk_Compiler_CompilationFailure_Class, SMB_message_, MC_SMB_message_);
 }
 
@@ -22,24 +22,24 @@ static void init_SMB_message_() {
 static void init_SMB_warnMessageOn_() {
     Symbol SMB_warnMessageOn_ = new_Symbol(L"warnMessageOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray13245 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray13329 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
     // <<. 
-    Send PSend13247 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message);
-    Array PThreadedCode13246 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)&t_send1, (Optr)PSend13247, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13244 = new_Method_with(PArray13245, empty_Array, empty_Array, PThreadedCode13246, 2, PSend13247, self);
+    Send PSend13331 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message);
+    Array PThreadedCode13330 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)&t_send1, (Optr)PSend13331, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13328 = new_Method_with(PArray13329, empty_Array, empty_Array, PThreadedCode13330, 2, PSend13331, self);
     
-    MethodClosure MC_SMB_warnMessageOn_ = new_MethodClosure((Method)PMethod13244, Smalltalk_Compiler_CompilationFailure_Class);
+    MethodClosure MC_SMB_warnMessageOn_ = new_MethodClosure((Method)PMethod13328, Smalltalk_Compiler_CompilationFailure_Class);
     store_method(Smalltalk_Compiler_CompilationFailure_Class, SMB_warnMessageOn_, MC_SMB_warnMessageOn_);
 }
 
 
 static void init_SMB_message() {
     Symbol SMB_message = new_Symbol(L"message");
-    Array PThreadedCode13249 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)&t_method_return);
-    Method PMethod13248 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13249, 1, slot_Smalltalk_Compiler_CompilationFailure_message);
+    Array PThreadedCode13333 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_CompilationFailure_message, (Optr)&t_method_return);
+    Method PMethod13332 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13333, 1, slot_Smalltalk_Compiler_CompilationFailure_message);
     
-    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod13248, Smalltalk_Compiler_CompilationFailure_Class);
+    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod13332, Smalltalk_Compiler_CompilationFailure_Class);
     store_method(Smalltalk_Compiler_CompilationFailure_Class, SMB_message, MC_SMB_message);
 }
 

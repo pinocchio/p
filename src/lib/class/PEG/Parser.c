@@ -16,12 +16,12 @@ Optr layout_PEG_Parser;
 static void init_SMB_separator_() {
     Symbol SMB_separator_ = new_Symbol(L"separator:");
     Variable VAR_aSeparator_0_0 = new_Variable_named(L"aSeparator", 0);
-    Array PArray18749 = new_Array_with(1, (Optr)VAR_aSeparator_0_0);
-    Assign PAssign18751 = new_Assign((Optr)slot_PEG_Parser_separator, (Optr)VAR_aSeparator_0_0);
-    Array PThreadedCode18750 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18751, (Optr)&t_push_variable, (Optr)VAR_aSeparator_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18748 = new_Method_with(PArray18749, empty_Array, empty_Array, PThreadedCode18750, 2, PAssign18751, self);
+    Array PArray18833 = new_Array_with(1, (Optr)VAR_aSeparator_0_0);
+    Assign PAssign18835 = new_Assign((Optr)slot_PEG_Parser_separator, (Optr)VAR_aSeparator_0_0);
+    Array PThreadedCode18834 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18835, (Optr)&t_push_variable, (Optr)VAR_aSeparator_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18832 = new_Method_with(PArray18833, empty_Array, empty_Array, PThreadedCode18834, 2, PAssign18835, self);
     
-    MethodClosure MC_SMB_separator_ = new_MethodClosure((Method)PMethod18748, PEG_Parser_Class);
+    MethodClosure MC_SMB_separator_ = new_MethodClosure((Method)PMethod18832, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_separator_, MC_SMB_separator_);
 }
 
@@ -30,21 +30,21 @@ static void init_SMB_memo() {
     Symbol SMB_memo = new_Symbol(L"memo");
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend18754 = new_Send((Optr)PEGMemo_classReference, SMB_on_, 1, (Optr)self);
-    Array PThreadedCode18753 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_class_reference, (Optr)PEGMemo_classReference, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend18754, (Optr)&t_method_return);
-    Method PMethod18752 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18753, 1, PSend18754);
+    Send PSend18838 = new_Send((Optr)PEGMemo_classReference, SMB_on_, 1, (Optr)self);
+    Array PThreadedCode18837 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_class_reference, (Optr)PEGMemo_classReference, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend18838, (Optr)&t_method_return);
+    Method PMethod18836 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18837, 1, PSend18838);
     
-    MethodClosure MC_SMB_memo = new_MethodClosure((Method)PMethod18752, PEG_Parser_Class);
+    MethodClosure MC_SMB_memo = new_MethodClosure((Method)PMethod18836, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_memo, MC_SMB_memo);
 }
 
 
 static void init_SMB_expression() {
     Symbol SMB_expression = new_Symbol(L"expression");
-    Array PThreadedCode18756 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_method_return);
-    Method PMethod18755 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18756, 1, slot_PEG_Parser_expression);
+    Array PThreadedCode18840 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_method_return);
+    Method PMethod18839 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18840, 1, slot_PEG_Parser_expression);
     
-    MethodClosure MC_SMB_expression = new_MethodClosure((Method)PMethod18755, PEG_Parser_Class);
+    MethodClosure MC_SMB_expression = new_MethodClosure((Method)PMethod18839, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_expression, MC_SMB_expression);
 }
 
@@ -53,16 +53,16 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend18761 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend18845 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_separator = new_Symbol(L"separator");
     // separator. 
-    Send PSend18760 = new_Send((Optr)PSend18761, SMB_separator, 0);
-    Assign PAssign18759 = new_Assign((Optr)slot_PEG_Parser_separator, (Optr)PSend18760);
-    Assign PAssign18762 = new_Assign((Optr)slot_PEG_Parser_semantics, (Optr)nil_Const);
-    Array PThreadedCode18758 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push1, (Optr)PAssign18759, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18761, (Optr)&t_send0, (Optr)PSend18760, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign18762, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18757 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18758, 3, PAssign18759, PAssign18762, self);
+    Send PSend18844 = new_Send((Optr)PSend18845, SMB_separator, 0);
+    Assign PAssign18843 = new_Assign((Optr)slot_PEG_Parser_separator, (Optr)PSend18844);
+    Assign PAssign18846 = new_Assign((Optr)slot_PEG_Parser_semantics, (Optr)nil_Const);
+    Array PThreadedCode18842 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push1, (Optr)PAssign18843, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18845, (Optr)&t_send0, (Optr)PSend18844, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign18846, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18841 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18842, 3, PAssign18843, PAssign18846, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod18757, PEG_Parser_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod18841, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -70,49 +70,49 @@ static void init_SMB_initialize() {
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray18764 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray18848 = new_Array_with(1, (Optr)VAR_input_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray18767 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray18851 = new_Array_with(1, (Optr)VAR__return__1_0);
     // parseOn:. 
-    Send PSend18769 = new_Send((Optr)slot_PEG_Parser_expression, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
+    Send PSend18853 = new_Send((Optr)slot_PEG_Parser_expression, SMB_parseOn_, 1, (Optr)VAR_input_0_0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend18773 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode18772 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend18773, (Optr)&t_block_return);
-    Block PBlock18771 = new_Block_with(empty_Array, empty_Array, PThreadedCode18772, 1, PSend18773);
+    Send PSend18857 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode18856 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend18857, (Optr)&t_block_return);
+    Block PBlock18855 = new_Block_with(empty_Array, empty_Array, PThreadedCode18856, 1, PSend18857);
     // ifFalse:. 
-    Send PSend18770 = new_Send((Optr)PSend18769, SMB_ifFalse_, 1, (Optr)PBlock18771);
+    Send PSend18854 = new_Send((Optr)PSend18853, SMB_ifFalse_, 1, (Optr)PBlock18855);
     // escape:. 
-    Send PSend18776 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)true_Const);
-    Array PThreadedCode18775 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend18776, (Optr)&t_block_return);
-    Block PBlock18774 = new_Block_with(empty_Array, empty_Array, PThreadedCode18775, 1, PSend18776);
+    Send PSend18860 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)true_Const);
+    Array PThreadedCode18859 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend18860, (Optr)&t_block_return);
+    Block PBlock18858 = new_Block_with(empty_Array, empty_Array, PThreadedCode18859, 1, PSend18860);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend18777 = new_Send((Optr)slot_PEG_Parser_semantics, SMB_ifNil_, 1, (Optr)PBlock18774);
+    Send PSend18861 = new_Send((Optr)slot_PEG_Parser_semantics, SMB_ifNil_, 1, (Optr)PBlock18858);
     Symbol SMB_stack = new_Symbol(L"stack");
     // stack. 
-    Send PSend18778 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
+    Send PSend18862 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
     // stack. 
-    Send PSend18779 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
+    Send PSend18863 = new_Send((Optr)VAR_input_0_0, SMB_stack, 0);
     Symbol SMB_peek = new_Symbol(L"peek");
     // peek. 
-    Send PSend18780 = new_Send((Optr)PSend18779, SMB_peek, 0);
+    Send PSend18864 = new_Send((Optr)PSend18863, SMB_peek, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend18781 = new_Send((Optr)slot_PEG_Parser_semantics, SMB_value_, 1, (Optr)PSend18780);
+    Send PSend18865 = new_Send((Optr)slot_PEG_Parser_semantics, SMB_value_, 1, (Optr)PSend18864);
     Symbol SMB_poke_ = new_Symbol(L"poke:");
     // poke:. 
-    Send PSend18782 = new_Send((Optr)PSend18778, SMB_poke_, 1, (Optr)PSend18781);
-    Array PThreadedCode18768 = instantiate_Array_with(ThreadedCode_Class, 0, 35, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend18769, (Optr)&t_send_ifFalse_, (Optr)PSend18770, (Optr)PBlock18771, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_semantics, (Optr)&t_push_closure, (Optr)PBlock18774, (Optr)&t_send1, (Optr)PSend18777, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend18778, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_semantics, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend18779, (Optr)&t_send0, (Optr)PSend18780, (Optr)&t_send1, (Optr)PSend18781, (Optr)&t_send1, (Optr)PSend18782, (Optr)&t_zap, (Optr)&t_method_return_true);
-    Block PBlock18766 = new_Block_with(PArray18767, empty_Array, PThreadedCode18768, 4, PSend18770, PSend18777, PSend18782, true_Const);
+    Send PSend18866 = new_Send((Optr)PSend18862, SMB_poke_, 1, (Optr)PSend18865);
+    Array PThreadedCode18852 = instantiate_Array_with(ThreadedCode_Class, 0, 35, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend18853, (Optr)&t_send_ifFalse_, (Optr)PSend18854, (Optr)PBlock18855, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_semantics, (Optr)&t_push_closure, (Optr)PBlock18858, (Optr)&t_send1, (Optr)PSend18861, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend18862, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_semantics, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send0, (Optr)PSend18863, (Optr)&t_send0, (Optr)PSend18864, (Optr)&t_send1, (Optr)PSend18865, (Optr)&t_send1, (Optr)PSend18866, (Optr)&t_zap, (Optr)&t_method_return_true);
+    Block PBlock18850 = new_Block_with(PArray18851, empty_Array, PThreadedCode18852, 4, PSend18854, PSend18861, PSend18866, true_Const);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend18783 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock18766);
-    Array PThreadedCode18765 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock18766, (Optr)&t_send1, (Optr)PSend18783, (Optr)&t_method_return);
-    Method PMethod18763 = new_Method_with(PArray18764, empty_Array, empty_Array, PThreadedCode18765, 1, PSend18783);
+    Send PSend18867 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock18850);
+    Array PThreadedCode18849 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock18850, (Optr)&t_send1, (Optr)PSend18867, (Optr)&t_method_return);
+    Method PMethod18847 = new_Method_with(PArray18848, empty_Array, empty_Array, PThreadedCode18849, 1, PSend18867);
     
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod18763, PEG_Parser_Class);
+    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod18847, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 
@@ -120,12 +120,12 @@ static void init_SMB_parseOn_() {
 static void init_SMB_name_() {
     Symbol SMB_name_ = new_Symbol(L"name:");
     Variable VAR_aName_0_0 = new_Variable_named(L"aName", 0);
-    Array PArray18785 = new_Array_with(1, (Optr)VAR_aName_0_0);
-    Assign PAssign18787 = new_Assign((Optr)slot_PEG_Parser_name, (Optr)VAR_aName_0_0);
-    Array PThreadedCode18786 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18787, (Optr)&t_push_variable, (Optr)VAR_aName_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18784 = new_Method_with(PArray18785, empty_Array, empty_Array, PThreadedCode18786, 2, PAssign18787, self);
+    Array PArray18869 = new_Array_with(1, (Optr)VAR_aName_0_0);
+    Assign PAssign18871 = new_Assign((Optr)slot_PEG_Parser_name, (Optr)VAR_aName_0_0);
+    Array PThreadedCode18870 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18871, (Optr)&t_push_variable, (Optr)VAR_aName_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18868 = new_Method_with(PArray18869, empty_Array, empty_Array, PThreadedCode18870, 2, PAssign18871, self);
     
-    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod18784, PEG_Parser_Class);
+    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod18868, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_name_, MC_SMB_name_);
 }
 
@@ -133,13 +133,13 @@ static void init_SMB_name_() {
 static void init_SMB_omitMatch_() {
     Symbol SMB_omitMatch_ = new_Symbol(L"omitMatch:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-    Array PArray18789 = new_Array_with(1, (Optr)VAR_input_0_0);
+    Array PArray18873 = new_Array_with(1, (Optr)VAR_input_0_0);
     // omitMatch:. 
-    Send PSend18791 = new_Send((Optr)slot_PEG_Parser_expression, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
-    Array PThreadedCode18790 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend18791, (Optr)&t_method_return);
-    Method PMethod18788 = new_Method_with(PArray18789, empty_Array, empty_Array, PThreadedCode18790, 1, PSend18791);
+    Send PSend18875 = new_Send((Optr)slot_PEG_Parser_expression, SMB_omitMatch_, 1, (Optr)VAR_input_0_0);
+    Array PThreadedCode18874 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_expression, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_send1, (Optr)PSend18875, (Optr)&t_method_return);
+    Method PMethod18872 = new_Method_with(PArray18873, empty_Array, empty_Array, PThreadedCode18874, 1, PSend18875);
     
-    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod18788, PEG_Parser_Class);
+    MethodClosure MC_SMB_omitMatch_ = new_MethodClosure((Method)PMethod18872, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_omitMatch_, MC_SMB_omitMatch_);
 }
 
@@ -147,12 +147,12 @@ static void init_SMB_omitMatch_() {
 static void init_SMB_semantics_() {
     Symbol SMB_semantics_ = new_Symbol(L"semantics:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray18793 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
-    Assign PAssign18795 = new_Assign((Optr)slot_PEG_Parser_semantics, (Optr)VAR_aBlock_0_0);
-    Array PThreadedCode18794 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18795, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18792 = new_Method_with(PArray18793, empty_Array, empty_Array, PThreadedCode18794, 2, PAssign18795, self);
+    Array PArray18877 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Assign PAssign18879 = new_Assign((Optr)slot_PEG_Parser_semantics, (Optr)VAR_aBlock_0_0);
+    Array PThreadedCode18878 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign18879, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18876 = new_Method_with(PArray18877, empty_Array, empty_Array, PThreadedCode18878, 2, PAssign18879, self);
     
-    MethodClosure MC_SMB_semantics_ = new_MethodClosure((Method)PMethod18792, PEG_Parser_Class);
+    MethodClosure MC_SMB_semantics_ = new_MethodClosure((Method)PMethod18876, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB_semantics_, MC_SMB_semantics_);
 }
 
@@ -160,15 +160,15 @@ static void init_SMB_semantics_() {
 static void init_SMB__lt__equals_() {
     Symbol SMB__lt__equals_ = new_Symbol(L"<=");
     Variable VAR_theExpression_0_0 = new_Variable_named(L"theExpression", 0);
-    Array PArray18797 = new_Array_with(1, (Optr)VAR_theExpression_0_0);
+    Array PArray18881 = new_Array_with(1, (Optr)VAR_theExpression_0_0);
     Symbol SMB_asChildParser = new_Symbol(L"asChildParser");
     // asChildParser. 
-    Send PSend18800 = new_Send((Optr)VAR_theExpression_0_0, SMB_asChildParser, 0);
-    Assign PAssign18799 = new_Assign((Optr)slot_PEG_Parser_expression, (Optr)PSend18800);
-    Array PThreadedCode18798 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign18799, (Optr)&t_push_variable, (Optr)VAR_theExpression_0_0, (Optr)&t_send0, (Optr)PSend18800, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18796 = new_Method_with(PArray18797, empty_Array, empty_Array, PThreadedCode18798, 2, PAssign18799, self);
+    Send PSend18884 = new_Send((Optr)VAR_theExpression_0_0, SMB_asChildParser, 0);
+    Assign PAssign18883 = new_Assign((Optr)slot_PEG_Parser_expression, (Optr)PSend18884);
+    Array PThreadedCode18882 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign18883, (Optr)&t_push_variable, (Optr)VAR_theExpression_0_0, (Optr)&t_send0, (Optr)PSend18884, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18880 = new_Method_with(PArray18881, empty_Array, empty_Array, PThreadedCode18882, 2, PAssign18883, self);
     
-    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod18796, PEG_Parser_Class);
+    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod18880, PEG_Parser_Class);
     store_method(PEG_Parser_Class, SMB__lt__equals_, MC_SMB__lt__equals_);
 }
 
@@ -177,11 +177,11 @@ static void init_class_SMB_separators() {
     Symbol SMB_separators = new_Symbol(L"separators");
     Symbol SMB_basicSeparators = new_Symbol(L"basicSeparators");
     // basicSeparators. 
-    Send PSend18803 = new_Send((Optr)PEGParser_classReference, SMB_basicSeparators, 0);
-    Array PThreadedCode18802 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)PEGParser_classReference, (Optr)&t_send0, (Optr)PSend18803, (Optr)&t_method_return);
-    Method PMethod18801 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18802, 1, PSend18803);
+    Send PSend18887 = new_Send((Optr)PEGParser_classReference, SMB_basicSeparators, 0);
+    Array PThreadedCode18886 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)PEGParser_classReference, (Optr)&t_send0, (Optr)PSend18887, (Optr)&t_method_return);
+    Method PMethod18885 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18886, 1, PSend18887);
     
-    MethodClosure MC_SMB_separators = new_MethodClosure((Method)PMethod18801, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_separators = new_MethodClosure((Method)PMethod18885, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_separators, MC_SMB_separators);
 }
 
@@ -190,11 +190,11 @@ static void init_class_SMB_separator() {
     Symbol SMB_separator = new_Symbol(L"separator");
     Symbol SMB_basicSeparator = new_Symbol(L"basicSeparator");
     // basicSeparator. 
-    Send PSend18806 = new_Send((Optr)PEGParser_classReference, SMB_basicSeparator, 0);
-    Array PThreadedCode18805 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)PEGParser_classReference, (Optr)&t_send0, (Optr)PSend18806, (Optr)&t_method_return);
-    Method PMethod18804 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18805, 1, PSend18806);
+    Send PSend18890 = new_Send((Optr)PEGParser_classReference, SMB_basicSeparator, 0);
+    Array PThreadedCode18889 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)PEGParser_classReference, (Optr)&t_send0, (Optr)PSend18890, (Optr)&t_method_return);
+    Method PMethod18888 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18889, 1, PSend18890);
     
-    MethodClosure MC_SMB_separator = new_MethodClosure((Method)PMethod18804, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_separator = new_MethodClosure((Method)PMethod18888, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_separator, MC_SMB_separator);
 }
 
@@ -202,60 +202,60 @@ static void init_class_SMB_separator() {
 static void init_class_SMB_basicSeparators() {
     Symbol SMB_basicSeparators = new_Symbol(L"basicSeparators");
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray18815 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray18899 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_space = new_Symbol(L"space");
     // space. 
-    Send PSend18817 = new_Send((Optr)Character_classReference, SMB_space, 0);
+    Send PSend18901 = new_Send((Optr)Character_classReference, SMB_space, 0);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:put:. 
-    Send PSend18818 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend18817);
+    Send PSend18902 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend18901);
     Symbol SMB_cr = new_Symbol(L"cr");
     // cr. 
-    Send PSend18819 = new_Send((Optr)Character_classReference, SMB_cr, 0);
+    Send PSend18903 = new_Send((Optr)Character_classReference, SMB_cr, 0);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // at:put:. 
-    Send PSend18820 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend18819);
+    Send PSend18904 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend18903);
     SmallInt int_3 = new_SmallInt(3);
     Symbol SMB_lf = new_Symbol(L"lf");
     // lf. 
-    Send PSend18821 = new_Send((Optr)Character_classReference, SMB_lf, 0);
+    Send PSend18905 = new_Send((Optr)Character_classReference, SMB_lf, 0);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // at:put:. 
-    Send PSend18822 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend18821);
+    Send PSend18906 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend18905);
     SmallInt int_4 = new_SmallInt(4);
     Symbol SMB_tab = new_Symbol(L"tab");
     // tab. 
-    Send PSend18823 = new_Send((Optr)Character_classReference, SMB_tab, 0);
+    Send PSend18907 = new_Send((Optr)Character_classReference, SMB_tab, 0);
     Constant int_4_Const = new_Constant((Optr)int_4);
     // at:put:. 
-    Send PSend18824 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)PSend18823);
+    Send PSend18908 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)PSend18907);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend18825 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode18816 = instantiate_Array_with(ThreadedCode_Class, 0, 47, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18817, (Optr)&t_send2, (Optr)PSend18818, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18819, (Optr)&t_send2, (Optr)PSend18820, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18821, (Optr)&t_send2, (Optr)PSend18822, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_4, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18823, (Optr)&t_send2, (Optr)PSend18824, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend18825, (Optr)&t_method_return);
-    Block PBlock18814 = new_Block_with(PArray18815, empty_Array, PThreadedCode18816, 5, PSend18818, PSend18820, PSend18822, PSend18824, PSend18825);
+    Send PSend18909 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode18900 = instantiate_Array_with(ThreadedCode_Class, 0, 47, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18901, (Optr)&t_send2, (Optr)PSend18902, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18903, (Optr)&t_send2, (Optr)PSend18904, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18905, (Optr)&t_send2, (Optr)PSend18906, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_4, (Optr)&t_push_class_reference, (Optr)Character_classReference, (Optr)&t_send0, (Optr)PSend18907, (Optr)&t_send2, (Optr)PSend18908, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend18909, (Optr)&t_method_return);
+    Block PBlock18898 = new_Block_with(PArray18899, empty_Array, PThreadedCode18900, 5, PSend18902, PSend18904, PSend18906, PSend18908, PSend18909);
     Symbol SMB_value_ = new_Symbol(L"value:");
     Symbol SMB_new_ = new_Symbol(L"new:");
     // new:. 
-    Send PSend18826 = new_Send((Optr)String_classReference, SMB_new_, 1, (Optr)int_4_Const);
+    Send PSend18910 = new_Send((Optr)String_classReference, SMB_new_, 1, (Optr)int_4_Const);
     // value:. 
-    Send PSend18813 = new_Send((Optr)PBlock18814, SMB_value_, 1, (Optr)PSend18826);
+    Send PSend18897 = new_Send((Optr)PBlock18898, SMB_value_, 1, (Optr)PSend18910);
     Symbol SMB_asPEGChoice = new_Symbol(L"asPEGChoice");
     // asPEGChoice. 
-    Send PSend18812 = new_Send((Optr)PSend18813, SMB_asPEGChoice, 0);
-    Assign PAssign18811 = new_Assign((Optr)slot_PEG_Parser_Class_class_separators, (Optr)PSend18812);
-    Array PThreadedCode18810 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)PAssign18811, (Optr)&t_push_closure, (Optr)PBlock18814, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend18826, (Optr)&t_send1, (Optr)PSend18813, (Optr)&t_send0, (Optr)PSend18812, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock18809 = new_Block_with(empty_Array, empty_Array, PThreadedCode18810, 1, PAssign18811);
+    Send PSend18896 = new_Send((Optr)PSend18897, SMB_asPEGChoice, 0);
+    Assign PAssign18895 = new_Assign((Optr)slot_PEG_Parser_Class_class_separators, (Optr)PSend18896);
+    Array PThreadedCode18894 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)PAssign18895, (Optr)&t_push_closure, (Optr)PBlock18898, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend18910, (Optr)&t_send1, (Optr)PSend18897, (Optr)&t_send0, (Optr)PSend18896, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock18893 = new_Block_with(empty_Array, empty_Array, PThreadedCode18894, 1, PAssign18895);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend18827 = new_Send((Optr)slot_PEG_Parser_Class_class_separators, SMB_ifNil_, 1, (Optr)PBlock18809);
-    Array PThreadedCode18808 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_Class_class_separators, (Optr)&t_push_closure, (Optr)PBlock18809, (Optr)&t_send1, (Optr)PSend18827, (Optr)&t_method_return);
-    Method PMethod18807 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18808, 1, PSend18827);
+    Send PSend18911 = new_Send((Optr)slot_PEG_Parser_Class_class_separators, SMB_ifNil_, 1, (Optr)PBlock18893);
+    Array PThreadedCode18892 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_Class_class_separators, (Optr)&t_push_closure, (Optr)PBlock18893, (Optr)&t_send1, (Optr)PSend18911, (Optr)&t_method_return);
+    Method PMethod18891 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18892, 1, PSend18911);
     
-    MethodClosure MC_SMB_basicSeparators = new_MethodClosure((Method)PMethod18807, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_basicSeparators = new_MethodClosure((Method)PMethod18891, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_basicSeparators, MC_SMB_basicSeparators);
 }
 
@@ -263,17 +263,17 @@ static void init_class_SMB_basicSeparators() {
 static void init_class_SMB_named_() {
     Symbol SMB_named_ = new_Symbol(L"named:");
     Variable VAR_theName_0_0 = new_Variable_named(L"theName", 0);
-    Array PArray18829 = new_Array_with(1, (Optr)VAR_theName_0_0);
+    Array PArray18913 = new_Array_with(1, (Optr)VAR_theName_0_0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend18831 = new_Send((Optr)self, SMB_new, 0);
+    Send PSend18915 = new_Send((Optr)self, SMB_new, 0);
     Symbol SMB_name_ = new_Symbol(L"name:");
     // name:. 
-    Send PSend18832 = new_Send((Optr)PSend18831, SMB_name_, 1, (Optr)VAR_theName_0_0);
-    Array PThreadedCode18830 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18831, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_send1, (Optr)PSend18832, (Optr)&t_method_return);
-    Method PMethod18828 = new_Method_with(PArray18829, empty_Array, empty_Array, PThreadedCode18830, 1, PSend18832);
+    Send PSend18916 = new_Send((Optr)PSend18915, SMB_name_, 1, (Optr)VAR_theName_0_0);
+    Array PThreadedCode18914 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18915, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_send1, (Optr)PSend18916, (Optr)&t_method_return);
+    Method PMethod18912 = new_Method_with(PArray18913, empty_Array, empty_Array, PThreadedCode18914, 1, PSend18916);
     
-    MethodClosure MC_SMB_named_ = new_MethodClosure((Method)PMethod18828, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_named_ = new_MethodClosure((Method)PMethod18912, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_named_, MC_SMB_named_);
 }
 
@@ -282,29 +282,29 @@ static void init_class_SMB_named_parsing_() {
     Symbol SMB_named_parsing_ = new_Symbol(L"named:parsing:");
     Variable VAR_theName_0_0 = new_Variable_named(L"theName", 0);
     Variable VAR_expression_0_1 = new_Variable_named(L"expression", 0);
-    Array PArray18834 = new_Array_with(2, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1);
+    Array PArray18918 = new_Array_with(2, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1);
     Symbol SMB_named_ = new_Symbol(L"named:");
     // named:. 
-    Send PSend18836 = new_Send((Optr)self, SMB_named_, 1, (Optr)VAR_theName_0_0);
+    Send PSend18920 = new_Send((Optr)self, SMB_named_, 1, (Optr)VAR_theName_0_0);
     Symbol SMB__lt__equals_ = new_Symbol(L"<=");
     // <=. 
-    Send PSend18837 = new_Send((Optr)PSend18836, SMB__lt__equals_, 1, (Optr)VAR_expression_0_1);
-    Array PThreadedCode18835 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_send1, (Optr)PSend18836, (Optr)&t_push_variable, (Optr)VAR_expression_0_1, (Optr)&t_send1, (Optr)PSend18837, (Optr)&t_method_return);
-    Method PMethod18833 = new_Method_with(PArray18834, empty_Array, empty_Array, PThreadedCode18835, 1, PSend18837);
+    Send PSend18921 = new_Send((Optr)PSend18920, SMB__lt__equals_, 1, (Optr)VAR_expression_0_1);
+    Array PThreadedCode18919 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_send1, (Optr)PSend18920, (Optr)&t_push_variable, (Optr)VAR_expression_0_1, (Optr)&t_send1, (Optr)PSend18921, (Optr)&t_method_return);
+    Method PMethod18917 = new_Method_with(PArray18918, empty_Array, empty_Array, PThreadedCode18919, 1, PSend18921);
     
-    MethodClosure MC_SMB_named_parsing_ = new_MethodClosure((Method)PMethod18833, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_named_parsing_ = new_MethodClosure((Method)PMethod18917, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_named_parsing_, MC_SMB_named_parsing_);
 }
 
 
 static void init_class_SMB_reset() {
     Symbol SMB_reset = new_Symbol(L"reset");
-    Assign PAssign18840 = new_Assign((Optr)slot_PEG_Parser_Class_class_separator, (Optr)nil_Const);
-    Assign PAssign18841 = new_Assign((Optr)slot_PEG_Parser_Class_class_separators, (Optr)nil_Const);
-    Array PThreadedCode18839 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign18840, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign18841, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18838 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18839, 3, PAssign18840, PAssign18841, self);
+    Assign PAssign18924 = new_Assign((Optr)slot_PEG_Parser_Class_class_separator, (Optr)nil_Const);
+    Assign PAssign18925 = new_Assign((Optr)slot_PEG_Parser_Class_class_separators, (Optr)nil_Const);
+    Array PThreadedCode18923 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign18924, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign18925, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18922 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18923, 3, PAssign18924, PAssign18925, self);
     
-    MethodClosure MC_SMB_reset = new_MethodClosure((Method)PMethod18838, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_reset = new_MethodClosure((Method)PMethod18922, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_reset, MC_SMB_reset);
 }
 
@@ -313,23 +313,23 @@ static void init_class_SMB_basicSeparator() {
     Symbol SMB_basicSeparator = new_Symbol(L"basicSeparator");
     Symbol SMB_basicSeparators = new_Symbol(L"basicSeparators");
     // basicSeparators. 
-    Send PSend18849 = new_Send((Optr)self, SMB_basicSeparators, 0);
+    Send PSend18933 = new_Send((Optr)self, SMB_basicSeparators, 0);
     Symbol SMB_strongTimes = new_Symbol(L"strongTimes");
     // strongTimes. 
-    Send PSend18848 = new_Send((Optr)PSend18849, SMB_strongTimes, 0);
+    Send PSend18932 = new_Send((Optr)PSend18933, SMB_strongTimes, 0);
     Symbol SMB_omit = new_Symbol(L"omit");
     // omit. 
-    Send PSend18847 = new_Send((Optr)PSend18848, SMB_omit, 0);
-    Assign PAssign18846 = new_Assign((Optr)slot_PEG_Parser_Class_class_separator, (Optr)PSend18847);
-    Array PThreadedCode18845 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign18846, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18849, (Optr)&t_send0, (Optr)PSend18848, (Optr)&t_send0, (Optr)PSend18847, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock18844 = new_Block_with(empty_Array, empty_Array, PThreadedCode18845, 1, PAssign18846);
+    Send PSend18931 = new_Send((Optr)PSend18932, SMB_omit, 0);
+    Assign PAssign18930 = new_Assign((Optr)slot_PEG_Parser_Class_class_separator, (Optr)PSend18931);
+    Array PThreadedCode18929 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign18930, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend18933, (Optr)&t_send0, (Optr)PSend18932, (Optr)&t_send0, (Optr)PSend18931, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock18928 = new_Block_with(empty_Array, empty_Array, PThreadedCode18929, 1, PAssign18930);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend18850 = new_Send((Optr)slot_PEG_Parser_Class_class_separator, SMB_ifNil_, 1, (Optr)PBlock18844);
-    Array PThreadedCode18843 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_Class_class_separator, (Optr)&t_push_closure, (Optr)PBlock18844, (Optr)&t_send1, (Optr)PSend18850, (Optr)&t_method_return);
-    Method PMethod18842 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18843, 1, PSend18850);
+    Send PSend18934 = new_Send((Optr)slot_PEG_Parser_Class_class_separator, SMB_ifNil_, 1, (Optr)PBlock18928);
+    Array PThreadedCode18927 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_PEG_Parser_Class_class_separator, (Optr)&t_push_closure, (Optr)PBlock18928, (Optr)&t_send1, (Optr)PSend18934, (Optr)&t_method_return);
+    Method PMethod18926 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18927, 1, PSend18934);
     
-    MethodClosure MC_SMB_basicSeparator = new_MethodClosure((Method)PMethod18842, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_basicSeparator = new_MethodClosure((Method)PMethod18926, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_basicSeparator, MC_SMB_basicSeparator);
 }
 
@@ -339,17 +339,17 @@ static void init_class_SMB_named_parsing_semantics_() {
     Variable VAR_theName_0_0 = new_Variable_named(L"theName", 0);
     Variable VAR_expression_0_1 = new_Variable_named(L"expression", 0);
     Variable VAR_semantics_0_2 = new_Variable_named(L"semantics", 0);
-    Array PArray18852 = new_Array_with(3, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1, (Optr)VAR_semantics_0_2);
+    Array PArray18936 = new_Array_with(3, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1, (Optr)VAR_semantics_0_2);
     Symbol SMB_named_parsing_ = new_Symbol(L"named:parsing:");
     // named:parsing:. 
-    Send PSend18854 = new_Send((Optr)self, SMB_named_parsing_, 2, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1);
+    Send PSend18938 = new_Send((Optr)self, SMB_named_parsing_, 2, (Optr)VAR_theName_0_0, (Optr)VAR_expression_0_1);
     Symbol SMB_semantics_ = new_Symbol(L"semantics:");
     // semantics:. 
-    Send PSend18855 = new_Send((Optr)PSend18854, SMB_semantics_, 1, (Optr)VAR_semantics_0_2);
-    Array PThreadedCode18853 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_push_variable, (Optr)VAR_expression_0_1, (Optr)&t_send2, (Optr)PSend18854, (Optr)&t_push_variable, (Optr)VAR_semantics_0_2, (Optr)&t_send1, (Optr)PSend18855, (Optr)&t_method_return);
-    Method PMethod18851 = new_Method_with(PArray18852, empty_Array, empty_Array, PThreadedCode18853, 1, PSend18855);
+    Send PSend18939 = new_Send((Optr)PSend18938, SMB_semantics_, 1, (Optr)VAR_semantics_0_2);
+    Array PThreadedCode18937 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_theName_0_0, (Optr)&t_push_variable, (Optr)VAR_expression_0_1, (Optr)&t_send2, (Optr)PSend18938, (Optr)&t_push_variable, (Optr)VAR_semantics_0_2, (Optr)&t_send1, (Optr)PSend18939, (Optr)&t_method_return);
+    Method PMethod18935 = new_Method_with(PArray18936, empty_Array, empty_Array, PThreadedCode18937, 1, PSend18939);
     
-    MethodClosure MC_SMB_named_parsing_semantics_ = new_MethodClosure((Method)PMethod18851, HEADER(PEG_Parser_Class));
+    MethodClosure MC_SMB_named_parsing_semantics_ = new_MethodClosure((Method)PMethod18935, HEADER(PEG_Parser_Class));
     store_method(HEADER(PEG_Parser_Class), SMB_named_parsing_semantics_, MC_SMB_named_parsing_semantics_);
 }
 

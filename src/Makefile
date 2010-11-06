@@ -20,7 +20,7 @@ PLUGINSOURCES = plugin/Makefile $(wildcard plugin/*.h) $(wildcard plugin/*.c) $(
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 # ============================================================================
-CFLAGS  += -g -pipe -I. -Wall -std=c99 -DNO_EXCEPTION -DDEBUG 
+CFLAGS  += -g -pipe -I. -Wall -std=c99 
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS += -lgc -lm -ldl
@@ -28,10 +28,11 @@ LDFLAGS += -lgc -lm -ldl
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
-	CC	= gcc
-	CFLAGS += -O0
+	CC	= llvm-gcc
+	CFLAGS += -O4
+	LDFLAGS += --export-dynamic
 else
-	CFLAGS += -O0
+	CFLAGS += -O3
     LDFLAGS +=  -export-dynamic
 endif
 # ============================================================================

@@ -8,7 +8,13 @@ extern void init_PBenchmark_PBenchmarkRun_layout();
 
 #include <lib/lib.h>
 
+extern Optr slot_PBenchmark_BenchmarkRun_Class_class_layout;
+extern Optr slot_PBenchmark_BenchmarkRun_Class_class_superclass;
+extern Optr slot_PBenchmark_BenchmarkRun_Class_class_methods;
+extern Optr slot_PBenchmark_BenchmarkRun_Class_class_name;
+extern Optr slot_PBenchmark_BenchmarkRun_Class_class_package;
 extern Optr layout_PBenchmark_BenchmarkRun_Class_class;
+extern Optr slot_PBenchmark_BenchmarkRun_probeCount;
 extern Optr slot_PBenchmark_BenchmarkRun_probes;
 extern Optr slot_PBenchmark_BenchmarkRun_target;
 extern Optr slot_PBenchmark_BenchmarkRun_selector;
