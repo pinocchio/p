@@ -21,6 +21,7 @@ SmallInt raw_SmallInt(long value)
 
 SmallInt new_SmallInt(long value)
 {
+    DT(SMALLINT_NEW, value);
 #ifndef NO_SMALLINT_CACHE
     if (INT_CACHE_LOWER <= value && value < INT_CACHE_UPPER) {
         DT(SMALLINT_CACHEHIT, value);

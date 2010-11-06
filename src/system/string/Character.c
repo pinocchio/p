@@ -14,6 +14,7 @@ Character new_Character_raw(wchar_t value)
 
 Character new_Character(wchar_t value)
 {
+    DT(CHARACTER_NEW, value);
 #ifndef NO_CHAR_CACHE
     if (value < CHARACTER_TABLE_SIZE) {
         DT(CHARACTER_CACHEHIT, value);

@@ -13,7 +13,6 @@ LDFLAGS += -O3 -lm -lgc -lncurses
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 	CFLAGS  += -DPIC 
 	LDFLAGS += -dynamiclib -undefined dynamic_lookup
-	CC = gcc
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 else
@@ -25,7 +24,7 @@ plugin: $(SOFILES)
 
 %.o: %.c
 	@echo Compiling: $@
-	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 %.so: %.o
 	@$(CC) $(LDFLAGS) -o $@ $^  

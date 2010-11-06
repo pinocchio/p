@@ -29,7 +29,7 @@ ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 	CC	= llvm-gcc
-	CFLAGS += -O4
+	CFLAGS += -O3
 	LDFLAGS += --export-dynamic
 else
 	CFLAGS += -O3
@@ -41,7 +41,7 @@ all: $(TARGET)
 
 %.o: %.c
 	@echo Compiling: $@
-	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
@@ -206,6 +206,11 @@ dtrace:
 	make touch-benchmark-files
 	LDFLAGS+="" CFLAGS+="-03 -DDTRACE" make $(TARGET)
 
+dtrace-no-pic:
+	make touch-benchmark-files
+	LDFLAGS+="" CFLAGS+="-03 -DDTRACE -DNO_PIC" make $(TARGET)
+
+
 # ============================================================================
 debug:
 	touch -c 'system/class/Class.c'
@@ -233,7 +238,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist GITVERSION
+.PHONY: test vtest run clean profile plugin dist dtrace GITVERSION
 # ============================================================================
 include make.depend
 
