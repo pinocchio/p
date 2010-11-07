@@ -25,7 +25,7 @@ plugin: $(SOFILES)
 
 %.o: %.c
 	@echo Compiling: $@
-	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 %.so: %.o
 	@$(CC) $(LDFLAGS) -o $@ $^  

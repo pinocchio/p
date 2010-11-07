@@ -1,2 +1,2 @@
-(PBenchmark.Fib run: 100) inspect.
+(PBenchmark.Fib run: 1000) inspect.
 IO.File stdout lf.

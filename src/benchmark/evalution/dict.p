@@ -1,2 +1,2 @@
-(Collection.Benchmark.Dictionary run: 100) inspect.
+(Collection.Benchmark.Dictionary run: 1000) inspect.
 IO.File stdout lf.

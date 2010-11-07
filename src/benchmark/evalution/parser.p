@@ -1,2 +1,2 @@
-(Smalltalk.Parser.ParserBenchmark run: 100) inspect.
+(Smalltalk.Parser.ParserBenchmark run: 1000) inspect.
 IO.File stdout lf.

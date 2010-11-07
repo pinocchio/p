@@ -84,7 +84,7 @@ dict-nn:
 	make dict-nonative
 	
 dict-nonative:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DDICT_NONATIVE" make $(TARGET)
 
 
@@ -92,7 +92,7 @@ array-nn:
 	make array-nonative
 	
 array-nonative:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DARRAY_NONATIVE" make $(TARGET)
 	
 	
@@ -105,23 +105,23 @@ no-ic:
 	make no-inline-cache
 	
 no-inline-cache:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DNO_IC" make $(TARGET)
 	
 no-pic:
 	make no-polymorphic-inline-cache
 	
 no-polymorphic-inline-cache:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DNO_PIC" make $(TARGET)
 	
 	
 no-int-cache:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DNO_SMALLINT_CACHE" make $(TARGET)
 
 no-char-cache:
-	make touch-benchmark-files
+	make clean
 	CFLAGS+="-DNO_CHAR_CACHE" make $(TARGET)
 	
 # ============================================================================
@@ -131,14 +131,14 @@ benchmarks:
 	@echo "" >> benchmark_results.txt
 	@date    >> benchmark_results.txt
 	
-	make benchmark
-	make benchmark-no-char-cache
-	make benchmark-no-int-cache
-	make benchmark-no-pic
-	make benchmark-no-ic
-	make benchmark-array-wrapped
-	make benchmark-array-nonative
-	make benchmark-dict-nonative
+	make benchmark;
+	make benchmark-no-char-cache;
+	make benchmark-no-int-cache;
+	make benchmark-no-pic;
+	make benchmark-no-ic;
+	make benchmark-array-wrapped;
+	make benchmark-array-nonative;
+	make benchmark-dict-nonative;
 	
 	reset
 
@@ -233,7 +233,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist GITVERSION
+.PHONY: test vtest run clean profile plugin dist GITVERSION benchmark benchmark-dict-nonative benchmark-array-nonative benchmark-array-wrapped benchmark-no-char-cache benchmark-no-int-cache benchmark-no-pic benchmark-no-ic
 # ============================================================================
 include make.depend
 
