@@ -100,6 +100,9 @@ array-wrapped:
 	make clean
 	CFLAGS+="-DARRAY_WRAPPED" make $(TARGET)
 	
+array-wrapped-no-int-cache:
+	make clean
+	CFLAGS+="-DARRAY_WRAPPED -DNO_SMALLINT_CACHE" make $(TARGET)
 	
 no-ic:
 	make no-inline-cache
@@ -137,6 +140,7 @@ benchmarks:
 	make benchmark-no-pic;
 	make benchmark-no-ic;
 	make benchmark-array-wrapped;
+	make benchmark-array-wrapped-no-int-cache;
 	make benchmark-array-nonative;
 	make benchmark-dict-nonative;
 	
@@ -178,6 +182,12 @@ benchmark-array-wrapped:
 	@make array-wrapped >> /dev/null;
 	@make run-benchmarks
 	
+benchmark-array-wrapped-no-int-cache:
+	@echo 'ARRAYED WITH WRAPPED INTS AND NO SMALLINT CACHE ===========' | tee -a benchmark_results.txt
+	@date >> benchmark_results.txt
+	@make array-wrapped-no-int-cache >> /dev/null;
+	@make run-benchmarks
+
 benchmark-array-nonative:
 	@echo 'NO ARRAY NATIVES ==========================================' | tee -a benchmark_results.txt
 	@date >> benchmark_results.txt
