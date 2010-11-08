@@ -204,3 +204,102 @@ Dictionary: 1.93804900 +/-0.002157
 	AtPutNew: 0.94621900 +/-0.001014
 	AtPutExisting: 0.06860600 +/-0.001090
 	AtIfAbsentPut: 0.25990600 +/-0.000944
+ARRAYED WITH WRAPPED INTS AND NO SMALLINT CACHE ===========
+Sun Nov  7 21:39:37 CET 2010
+ARRAYED WITH WRAPPED INTS AND NO SMALLINT CACHE ===========
+Sun Nov  7 21:39:53 CET 2010
+Fib
+	Fib: 3.8182620 +/-0.002981
+ParserBenchmark: 5.70537400 +/-0.002152
+	Annotation: 0.248935000 +/-0.000655
+	BlockWithArgAndBody: 0.185241000 +/-0.000463
+	BlockWithArg: 0.185635000 +/-0.000459
+	MediumMethod: 1.169036000 +/-0.000691
+	LongMethod: 3.06019800 +/-0.001285
+	Block: 0.170307000 +/-0.000549
+	StringNumbers: 0.165890000 +/-0.000529
+	Symbol: 0.167628000 +/-0.000557
+	String: 0.166422000 +/-0.000551
+	SmallMethod: 0.186082000 +/-0.000672
+Dictionary: 0.2920820 +/-0.002824
+	IncludesKey: 0.02298200 +/-0.001188
+	Includes: 0.0004330000 +/-0.000180
+	AtPut: 0.02351100 +/-0.001211
+	KeysAndValuesDo: 0.083538000 +/-0.000744
+	Do: 0.068314000 +/-0.000758
+	RemoveKey: 0.0018700000 +/-0.000244
+	AtPutNew: 0.06877000 +/-0.001491
+	AtPutExisting: 0.004815000 +/-0.000720
+	AtIfAbsentPut: 0.01784900 +/-0.001065
+NO BOOL OPCODE SUPPORT ====================================
+Fib
+        Fib: 3.39428400 +/-0.001371
+ParserBenchmark: 4.30002400 +/-0.001996
+        Annotation: 0.199032000 +/-0.000599
+        BlockWithArgAndBody: 0.145382000 +/-0.000518
+        BlockWithArg: 0.145303000 +/-0.000522
+        MediumMethod: 0.910768000 +/-0.000638
+        LongMethod: 2.15656900 +/-0.001006
+        Block: 0.146142000 +/-0.000557
+        StringNumbers: 0.144549000 +/-0.000559
+        Symbol: 0.145791000 +/-0.000564
+        String: 0.144835000 +/-0.000560
+        SmallMethod: 0.161653000 +/-0.000640
+Dictionary: 0.18433600 +/-0.001776
+        IncludesKey: 0.015790000 +/-0.000708
+        Includes: 0.000167000000 +/-0.000041
+        AtPut: 0.016567000 +/-0.000754
+        KeysAndValuesDo: 0.049000000 +/-0.000626
+        Do: 0.043890000 +/-0.000625
+        RemoveKey: 0.00096500000 +/-0.000085
+        AtPutExisting: 0.004600000 +/-0.000436
+        AtPutNew: 0.040285000 +/-0.000905
+        AtIfAbsentPut: 0.013072000 +/-0.000534
+NO TO:BY:DO: OPCODE SUPPORT ===============================
+Fib     
+        Fib: 0.82524300 +/-0.001499
+ParserBenchmark: 4.33345400 +/-0.001296
+        Annotation: 0.202408000 +/-0.000455
+        BlockWithArgAndBody: 0.153368000 +/-0.000404
+        BlockWithArg: 0.153390000 +/-0.000408
+        MediumMethod: 0.934896000 +/-0.000584
+        LongMethod: 2.102733000 +/-0.000606
+        Block: 0.1567030000 +/-0.000285
+        StringNumbers: 0.1537440000 +/-0.000311
+        Symbol: 0.1533620000 +/-0.000298
+        String: 0.1523030000 +/-0.000316
+        SmallMethod: 0.1705470000 +/-0.000259
+Dictionary: 0.18069200 +/-0.001876
+        IncludesKey: 0.017277000 +/-0.000904
+        Includes: 0.000123000000 +/-0.000044
+        AtPut: 0.010779000 +/-0.000442
+        KeysAndValuesDo: 0.049510000 +/-0.000628
+        Do: 0.043277000 +/-0.000580
+        RemoveKey: 0.000682000000 +/-0.000037
+        AtPutExisting: 0.005449000 +/-0.000663
+        AtPutNew: 0.036160000 +/-0.000489
+        AtIfAbsentPut: 0.01743500 +/-0.001047
+NO TO:DO: OPCODE SUPPORT ==================================
+Fib
+	Fib: 0.87677000 +/-0.001018
+ParserBenchmark: 2.88629600 +/-0.001555
+	Annotation: 0.1428180000 +/-0.000252
+	BlockWithArgAndBody: 0.104516000 +/-0.000554
+	BlockWithArg: 0.104325000 +/-0.000556
+	MediumMethod: 0.641463000 +/-0.000482
+	LongMethod: 1.359027000 +/-0.000527
+	Block: 0.105216000 +/-0.000502
+	StringNumbers: 0.103750000 +/-0.000514
+	Symbol: 0.104699000 +/-0.000508
+	String: 0.103933000 +/-0.000514
+	SmallMethod: 0.116549000 +/-0.000437
+Dictionary: 0.26421400 +/-0.001896
+	IncludesKey: 0.016351000 +/-0.000710
+	Includes: 0.0005260000 +/-0.000181
+	AtPut: 0.016773000 +/-0.000738
+	KeysAndValuesDo: 0.085355000 +/-0.000620
+	Do: 0.081466000 +/-0.000630
+	RemoveKey: 0.001175000000 +/-0.000043
+	AtPutExisting: 0.006174000 +/-0.000548
+	AtPutNew: 0.04247400 +/-0.001011
+	AtIfAbsentPut: 0.013920000 +/-0.000639
