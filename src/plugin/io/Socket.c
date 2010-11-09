@@ -49,9 +49,9 @@ NATIVE(Socket_primConnectTo_95_port_95_)
     sin.sin_family = AF_INET;
     sin.sin_port = htons(((SmallInt)NATIVE_ARG(1))->value);
 
-    //Bcopy((char *)server->h_addr,
-    //    (char *)&sin.sin_addr.s_addr,
-    //    server->h_length);
+    bcopy((char *)server->h_addr,
+        (char *)&sin.sin_addr.s_addr,
+        server->h_length);
 
     assert(!(connect(unwrap_int(SELF->ivals[0]), (struct sockaddr *) &sin, sizeof(sin)) == -1),
         fwprintf(stderr, L"Socket failed to connect"););

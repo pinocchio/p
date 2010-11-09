@@ -275,8 +275,8 @@ static void init_SMB_run_() {
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
     Send PSend7092 = new_Send((Optr)slot_PBenchmark_BenchmarkSuite_runs, SMB_at_put_, 2, (Optr)VAR_selector_0_0, (Optr)VAR_run_0_1);
-    Array PThreadedCode7078 = instantiate_Array_with(ThreadedCode_Class, 0, 30, (Optr)&t_push1, (Optr)PAssign7079, (Optr)&t_push_class_reference, (Optr)PBenchmarkRun_classReference, (Optr)&t_send0, (Optr)PSend7080, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock7081, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send1, (Optr)PSend7090, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send0, (Optr)PSend7091, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PBenchmark_BenchmarkSuite_runs, (Optr)&t_push_variable, (Optr)VAR_selector_0_0, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send2, (Optr)PSend7092, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod7075 = new_Method_with(PArray7076, PArray7077, empty_Array, PThreadedCode7078, 5, PAssign7079, PSend7090, PSend7091, PSend7092, self);
+    Array PThreadedCode7078 = instantiate_Array_with(ThreadedCode_Class, 0, 32, (Optr)&t_push1, (Optr)PAssign7079, (Optr)&t_push_class_reference, (Optr)PBenchmarkRun_classReference, (Optr)&t_send0, (Optr)PSend7080, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock7081, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send1, (Optr)PSend7090, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send0, (Optr)PSend7091, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PBenchmark_BenchmarkSuite_runs, (Optr)&t_push_variable, (Optr)VAR_selector_0_0, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send2, (Optr)PSend7092, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_method_return);
+    Method PMethod7075 = new_Method_with(PArray7076, PArray7077, empty_Array, PThreadedCode7078, 5, PAssign7079, PSend7090, PSend7091, PSend7092, VAR_run_0_1);
     
     MethodClosure MC_SMB_run_ = new_MethodClosure((Method)PMethod7075, PBenchmark_BenchmarkSuite_Class);
     store_method(PBenchmark_BenchmarkSuite_Class, SMB_run_, MC_SMB_run_);
