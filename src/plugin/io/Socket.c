@@ -49,9 +49,9 @@ NATIVE(Socket_primConnectTo_95_port_95_)
     sin.sin_family = AF_INET;
     sin.sin_port = htons(((SmallInt)NATIVE_ARG(1))->value);
 
-    //Bcopy((char *)server->h_addr,
-    //    (char *)&sin.sin_addr.s_addr,
-    //    server->h_length);
+    bcopy((char *)server->h_addr,
+        (char *)&sin.sin_addr.s_addr,
+        server->h_length);
 
     assert(!(connect(unwrap_int(SELF->ivals[0]), (struct sockaddr *) &sin, sizeof(sin)) == -1),
         fwprintf(stderr, L"Socket failed to connect"););
@@ -166,6 +166,23 @@ NATIVE(Socket_primListenOn_95_)
         fwprintf(stderr, L"Socket failed to listen"););
 
     RETURN_FROM_NATIVE(self);
+ 
+}
+
+#line 3 "Socket >> primSocketRemoteAddress"
+NATIVE(Socket_primSocketRemoteAddress)
+    ASSERT_ARG_SIZE(0);
+
+    struct sockaddr_in sin;
+    socklen_t addrlen;
+
+    /* --- TCP --- */
+    addrlen = sizeof(sin);
+    if (getpeername(unwrap_int(SELF->ivals[0]), (struct sockaddr *)&sin, &addrlen)
+        || (AF_INET != sin.sin_family)) {
+        RETURN_FROM_NATIVE(wrap_int(0));
+    }
+    RETURN_FROM_NATIVE(wrap_int(ntohl(sin.sin_addr.s_addr)));
  
 }
 
@@ -346,23 +363,6 @@ NATIVE(Socket_primStatus)
  
 }
 
-#line 3 "Socket >> primSocketRemoteAddress"
-NATIVE(Socket_primSocketRemoteAddress)
-    ASSERT_ARG_SIZE(0);
-
-    struct sockaddr_in sin;
-    socklen_t addrlen;
-
-    /* --- TCP --- */
-    addrlen = sizeof(sin);
-    if (getpeername(unwrap_int(SELF->ivals[0]), (struct sockaddr *)&sin, &addrlen)
-        || (AF_INET != sin.sin_family)) {
-        RETURN_FROM_NATIVE(wrap_int(0));
-    }
-    RETURN_FROM_NATIVE(wrap_int(ntohl(sin.sin_addr.s_addr)));
- 
-}
-
 // ============================================================================
 
 PLUGIN()
@@ -372,6 +372,7 @@ PLUGIN()
     EXPORT(L"primReadyToReceive", Socket_primReadyToReceive);
     EXPORT(L"primReceiveInto:", Socket_primReceiveInto_95_);
     EXPORT(L"primListenOn:", Socket_primListenOn_95_);
+    EXPORT(L"primSocketRemoteAddress", Socket_primSocketRemoteAddress);
     EXPORT(L"primSocketRemotePort", Socket_primSocketRemotePort);
     EXPORT(L"primClose", Socket_primClose);
     EXPORT(L"primWrite:", Socket_primWrite_95_);
@@ -379,7 +380,6 @@ PLUGIN()
     EXPORT(L"primReadyToAccept", Socket_primReadyToAccept);
     EXPORT(L"primReceive:", Socket_primReceive_95_);
     EXPORT(L"primStatus", Socket_primStatus);
-    EXPORT(L"primSocketRemoteAddress", Socket_primSocketRemoteAddress);
 }
 
 void unload_plugin() {}

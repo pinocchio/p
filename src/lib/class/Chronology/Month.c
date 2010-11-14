@@ -8,29 +8,29 @@ Optr layout_Chronology_Month;
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21267 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21456 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_monthName = new_Symbol(L"monthName");
     // monthName. 
-    Send PSend21269 = new_Send((Optr)self, SMB_monthName, 0);
+    Send PSend21458 = new_Send((Optr)self, SMB_monthName, 0);
     Character char_4726 = new_Character(L' ');
     Symbol SMB__append_ = new_Symbol(L",");
     Constant char_4726_Const = new_Constant((Optr)char_4726);
     // ,. 
-    Send PSend21270 = new_Send((Optr)PSend21269, SMB__append_, 1, (Optr)char_4726_Const);
+    Send PSend21459 = new_Send((Optr)PSend21458, SMB__append_, 1, (Optr)char_4726_Const);
     Symbol SMB_year = new_Symbol(L"year");
     // year. 
-    Send PSend21271 = new_Send((Optr)self, SMB_year, 0);
+    Send PSend21460 = new_Send((Optr)self, SMB_year, 0);
     Symbol SMB_printString = new_Symbol(L"printString");
     // printString. 
-    Send PSend21272 = new_Send((Optr)PSend21271, SMB_printString, 0);
+    Send PSend21461 = new_Send((Optr)PSend21460, SMB_printString, 0);
     // ,. 
-    Send PSend21273 = new_Send((Optr)PSend21270, SMB__append_, 1, (Optr)PSend21272);
+    Send PSend21462 = new_Send((Optr)PSend21459, SMB__append_, 1, (Optr)PSend21461);
     // printOn:. 
-    Send PSend21274 = new_Send((Optr)PSend21273, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode21268 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21269, (Optr)&t_push1, (Optr)char_4726, (Optr)&t_send1, (Optr)PSend21270, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21271, (Optr)&t_send0, (Optr)PSend21272, (Optr)&t_send1, (Optr)PSend21273, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21274, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21266 = new_Method_with(PArray21267, empty_Array, empty_Array, PThreadedCode21268, 2, PSend21274, self);
+    Send PSend21463 = new_Send((Optr)PSend21462, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21457 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21458, (Optr)&t_push1, (Optr)char_4726, (Optr)&t_send1, (Optr)PSend21459, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21460, (Optr)&t_send0, (Optr)PSend21461, (Optr)&t_send1, (Optr)PSend21462, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21463, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21455 = new_Method_with(PArray21456, empty_Array, empty_Array, PThreadedCode21457, 2, PSend21463, self);
     
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21266, Chronology_Month_Class);
+    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21455, Chronology_Month_Class);
     store_method(Chronology_Month_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
@@ -38,17 +38,17 @@ static void init_SMB_printOn_() {
 static void init_class_SMB_nameOfMonth_() {
     Symbol SMB_nameOfMonth_ = new_Symbol(L"nameOfMonth:");
     Variable VAR_anIndex_0_0 = new_Variable_named(L"anIndex", 0);
-    Array PArray21276 = new_Array_with(1, (Optr)VAR_anIndex_0_0);
+    Array PArray21465 = new_Array_with(1, (Optr)VAR_anIndex_0_0);
     Symbol SMB_monthNames = new_Symbol(L"monthNames");
     // monthNames. 
-    Send PSend21278 = new_Send((Optr)PChronologyConstants_classReference, SMB_monthNames, 0);
+    Send PSend21467 = new_Send((Optr)PChronologyConstants_classReference, SMB_monthNames, 0);
     Symbol SMB_at_ = new_Symbol(L"at:");
     // at:. 
-    Send PSend21279 = new_Send((Optr)PSend21278, SMB_at_, 1, (Optr)VAR_anIndex_0_0);
-    Array PThreadedCode21277 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21278, (Optr)&t_push_variable, (Optr)VAR_anIndex_0_0, (Optr)&t_send1, (Optr)PSend21279, (Optr)&t_method_return);
-    Method PMethod21275 = new_Method_with(PArray21276, empty_Array, empty_Array, PThreadedCode21277, 1, PSend21279);
+    Send PSend21468 = new_Send((Optr)PSend21467, SMB_at_, 1, (Optr)VAR_anIndex_0_0);
+    Array PThreadedCode21466 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21467, (Optr)&t_push_variable, (Optr)VAR_anIndex_0_0, (Optr)&t_send1, (Optr)PSend21468, (Optr)&t_method_return);
+    Method PMethod21464 = new_Method_with(PArray21465, empty_Array, empty_Array, PThreadedCode21466, 1, PSend21468);
     
-    MethodClosure MC_SMB_nameOfMonth_ = new_MethodClosure((Method)PMethod21275, HEADER(Chronology_Month_Class));
+    MethodClosure MC_SMB_nameOfMonth_ = new_MethodClosure((Method)PMethod21464, HEADER(Chronology_Month_Class));
     store_method(HEADER(Chronology_Month_Class), SMB_nameOfMonth_, MC_SMB_nameOfMonth_);
 }
 

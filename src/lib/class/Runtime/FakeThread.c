@@ -10,22 +10,22 @@ Optr layout_Runtime_FakeThread;
 static void init_SMB_context_() {
     Symbol SMB_context_ = new_Symbol(L"context:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8327 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8329 = new_Assign((Optr)slot_Runtime_FakeThread_context, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8328 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8329, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8326 = new_Method_with(PArray8327, empty_Array, empty_Array, PThreadedCode8328, 2, PAssign8329, self);
+    Array PArray8516 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8518 = new_Assign((Optr)slot_Runtime_FakeThread_context, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8517 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8518, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8515 = new_Method_with(PArray8516, empty_Array, empty_Array, PThreadedCode8517, 2, PAssign8518, self);
     
-    MethodClosure MC_SMB_context_ = new_MethodClosure((Method)PMethod8326, Runtime_FakeThread_Class);
+    MethodClosure MC_SMB_context_ = new_MethodClosure((Method)PMethod8515, Runtime_FakeThread_Class);
     store_method(Runtime_FakeThread_Class, SMB_context_, MC_SMB_context_);
 }
 
 
 static void init_SMB_continuation() {
     Symbol SMB_continuation = new_Symbol(L"continuation");
-    Array PThreadedCode8331 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_FakeThread_continuation, (Optr)&t_method_return);
-    Method PMethod8330 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8331, 1, slot_Runtime_FakeThread_continuation);
+    Array PThreadedCode8520 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_FakeThread_continuation, (Optr)&t_method_return);
+    Method PMethod8519 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8520, 1, slot_Runtime_FakeThread_continuation);
     
-    MethodClosure MC_SMB_continuation = new_MethodClosure((Method)PMethod8330, Runtime_FakeThread_Class);
+    MethodClosure MC_SMB_continuation = new_MethodClosure((Method)PMethod8519, Runtime_FakeThread_Class);
     store_method(Runtime_FakeThread_Class, SMB_continuation, MC_SMB_continuation);
 }
 
@@ -33,22 +33,22 @@ static void init_SMB_continuation() {
 static void init_SMB_continuation_() {
     Symbol SMB_continuation_ = new_Symbol(L"continuation:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray8333 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign8335 = new_Assign((Optr)slot_Runtime_FakeThread_continuation, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode8334 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8335, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8332 = new_Method_with(PArray8333, empty_Array, empty_Array, PThreadedCode8334, 2, PAssign8335, self);
+    Array PArray8522 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign8524 = new_Assign((Optr)slot_Runtime_FakeThread_continuation, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode8523 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign8524, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8521 = new_Method_with(PArray8522, empty_Array, empty_Array, PThreadedCode8523, 2, PAssign8524, self);
     
-    MethodClosure MC_SMB_continuation_ = new_MethodClosure((Method)PMethod8332, Runtime_FakeThread_Class);
+    MethodClosure MC_SMB_continuation_ = new_MethodClosure((Method)PMethod8521, Runtime_FakeThread_Class);
     store_method(Runtime_FakeThread_Class, SMB_continuation_, MC_SMB_continuation_);
 }
 
 
 static void init_SMB_context() {
     Symbol SMB_context = new_Symbol(L"context");
-    Array PThreadedCode8337 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_FakeThread_context, (Optr)&t_method_return);
-    Method PMethod8336 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8337, 1, slot_Runtime_FakeThread_context);
+    Array PThreadedCode8526 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Runtime_FakeThread_context, (Optr)&t_method_return);
+    Method PMethod8525 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8526, 1, slot_Runtime_FakeThread_context);
     
-    MethodClosure MC_SMB_context = new_MethodClosure((Method)PMethod8336, Runtime_FakeThread_Class);
+    MethodClosure MC_SMB_context = new_MethodClosure((Method)PMethod8525, Runtime_FakeThread_Class);
     store_method(Runtime_FakeThread_Class, SMB_context, MC_SMB_context);
 }
 

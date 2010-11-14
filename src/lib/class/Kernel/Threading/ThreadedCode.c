@@ -7,11 +7,11 @@ Optr layout_Kernel_Threading_ThreadedCode_Class_class;
 static void init_SMB_inspectChildrenOn_() {
     Symbol SMB_inspectChildrenOn_ = new_Symbol(L"inspectChildrenOn:");
     Variable VAR_inspector_0_0 = new_Variable_named(L"inspector", 0);
-    Array PArray5685 = new_Array_with(1, (Optr)VAR_inspector_0_0);
-    Array PThreadedCode5686 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod5684 = new_Method_with(PArray5685, empty_Array, empty_Array, PThreadedCode5686, 1, self);
+    Array PArray5684 = new_Array_with(1, (Optr)VAR_inspector_0_0);
+    Array PThreadedCode5685 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod5683 = new_Method_with(PArray5684, empty_Array, empty_Array, PThreadedCode5685, 1, self);
     
-    MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod5684, ThreadedCode_Class);
+    MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod5683, ThreadedCode_Class);
     store_method(ThreadedCode_Class, SMB_inspectChildrenOn_, MC_SMB_inspectChildrenOn_);
 }
 
