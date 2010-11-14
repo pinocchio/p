@@ -41,7 +41,7 @@ all: $(TARGET)
 
 %.o: %.c
 	@echo Compiling: $@
-	$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
+	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking $@
@@ -248,7 +248,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist GITVERSION benchmark benchmark-dict-nonative benchmark-array-nonative benchmark-array-wrapped benchmark-no-char-cache benchmark-no-int-cache benchmark-no-pic benchmark-no-ic
+.PHONY: test vtest run clean profile plugin dist dtrace GITVERSION benchmark benchmark-dict-nonative benchmark-array-nonative benchmark-array-wrapped benchmark-no-char-cache benchmark-no-int-cache benchmark-no-pic benchmark-no-ic
 # ============================================================================
 include make.depend
 

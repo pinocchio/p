@@ -2,7 +2,7 @@
 
 pid$1::new_SmallInt:entry
 {
-    @smallint = lquantize(arg0, -10000, 10000, 1);
+    @smallint = lquantize(arg0, -1, 1023, 1);
     @smallint_q = quantize(arg0);
 
 }
@@ -17,7 +17,7 @@ pinocchio::smallint-cachemiss
      @smallint_cache["miss"] = count();    
 }
 
-tick-10sec
+tick-5sec
 {
     printa(@smallint_cache);
 }

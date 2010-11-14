@@ -89,6 +89,14 @@
 		364E670710C562DE00AD4616 /* Symbol.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E668C10C562DE00AD4616 /* Symbol.c */; };
 		364E670D10C562DE00AD4616 /* pinocchioTest.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E669610C562DE00AD4616 /* pinocchioTest.c */; };
 		3654964710C57D0E00D0C56F /* BlockContext.c in Sources */ = {isa = PBXBuildFile; fileRef = 364E664910C562DE00AD4616 /* BlockContext.c */; };
+		3661A0B812870637005F1F39 /* Boolean.c in Sources */ = {isa = PBXBuildFile; fileRef = 3661A0AF12870637005F1F39 /* Boolean.c */; };
+		3661A0B912870637005F1F39 /* Boolean.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3661A0B112870637005F1F39 /* Boolean.o */; };
+		3661A0BA12870637005F1F39 /* Nil.c in Sources */ = {isa = PBXBuildFile; fileRef = 3661A0B212870637005F1F39 /* Nil.c */; };
+		3661A0BB12870637005F1F39 /* Nil.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3661A0B412870637005F1F39 /* Nil.o */; };
+		3661A0BC12870637005F1F39 /* Object.c in Sources */ = {isa = PBXBuildFile; fileRef = 3661A0B512870637005F1F39 /* Object.c */; };
+		3661A0BD12870637005F1F39 /* Object.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3661A0B712870637005F1F39 /* Object.o */; };
+		3661A0C2128707E4005F1F39 /* Class.c in Sources */ = {isa = PBXBuildFile; fileRef = 3661A0BF128707E4005F1F39 /* Class.c */; };
+		3661A0C3128707E4005F1F39 /* Class.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 3661A0C1128707E4005F1F39 /* Class.o */; };
 		36660054119AB89300DE1938 /* DictBucket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666004A119AB89300DE1938 /* DictBucket.c */; };
 		36660056119AB89300DE1938 /* Dictionary.c in Sources */ = {isa = PBXBuildFile; fileRef = 3666004E119AB89300DE1938 /* Dictionary.c */; };
 		36660067119AB8F000DE1938 /* Context.c in Sources */ = {isa = PBXBuildFile; fileRef = 36660061119AB8F000DE1938 /* Context.c */; };
@@ -420,6 +428,18 @@
 		364E671610C562EB00AD4616 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		364E671710C562EB00AD4616 /* logo.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = logo.svg; sourceTree = "<group>"; };
 		364E671810C562EB00AD4616 /* mac_install_boehm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mac_install_boehm; sourceTree = "<group>"; };
+		3661A0AF12870637005F1F39 /* Boolean.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Boolean.c; sourceTree = "<group>"; };
+		3661A0B012870637005F1F39 /* Boolean.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Boolean.h; sourceTree = "<group>"; };
+		3661A0B112870637005F1F39 /* Boolean.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Boolean.o; sourceTree = "<group>"; };
+		3661A0B212870637005F1F39 /* Nil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Nil.c; sourceTree = "<group>"; };
+		3661A0B312870637005F1F39 /* Nil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nil.h; sourceTree = "<group>"; };
+		3661A0B412870637005F1F39 /* Nil.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Nil.o; sourceTree = "<group>"; };
+		3661A0B512870637005F1F39 /* Object.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Object.c; sourceTree = "<group>"; };
+		3661A0B612870637005F1F39 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		3661A0B712870637005F1F39 /* Object.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Object.o; sourceTree = "<group>"; };
+		3661A0BF128707E4005F1F39 /* Class.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Class.c; sourceTree = "<group>"; };
+		3661A0C0128707E4005F1F39 /* Class.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Class.h; sourceTree = "<group>"; };
+		3661A0C1128707E4005F1F39 /* Class.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; path = Class.o; sourceTree = "<group>"; };
 		3666004A119AB89300DE1938 /* DictBucket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DictBucket.c; sourceTree = "<group>"; };
 		3666004B119AB89300DE1938 /* DictBucket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictBucket.h; sourceTree = "<group>"; };
 		3666004E119AB89300DE1938 /* Dictionary.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Dictionary.c; sourceTree = "<group>"; };
@@ -674,6 +694,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3661A0B912870637005F1F39 /* Boolean.o in Frameworks */,
+				3661A0BB12870637005F1F39 /* Nil.o in Frameworks */,
+				3661A0BD12870637005F1F39 /* Object.o in Frameworks */,
+				3661A0C3128707E4005F1F39 /* Class.o in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,6 +1122,8 @@
 		364E660310C562DE00AD4616 /* system */ = {
 			isa = PBXGroup;
 			children = (
+				3661A0BE128707E4005F1F39 /* class */,
+				3661A0AE12870637005F1F39 /* object */,
 				3643A4CA119AF98900B17165 /* number */,
 				3643A4D0119AF98900B17165 /* slot */,
 				36660046119AB89200DE1938 /* collection */,
@@ -1260,6 +1286,32 @@
 			path = ..;
 			sourceTree = SOURCE_ROOT;
 		};
+		3661A0AE12870637005F1F39 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				3661A0AF12870637005F1F39 /* Boolean.c */,
+				3661A0B012870637005F1F39 /* Boolean.h */,
+				3661A0B112870637005F1F39 /* Boolean.o */,
+				3661A0B212870637005F1F39 /* Nil.c */,
+				3661A0B312870637005F1F39 /* Nil.h */,
+				3661A0B412870637005F1F39 /* Nil.o */,
+				3661A0B512870637005F1F39 /* Object.c */,
+				3661A0B612870637005F1F39 /* Object.h */,
+				3661A0B712870637005F1F39 /* Object.o */,
+			);
+			path = object;
+			sourceTree = "<group>";
+		};
+		3661A0BE128707E4005F1F39 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				3661A0BF128707E4005F1F39 /* Class.c */,
+				3661A0C0128707E4005F1F39 /* Class.h */,
+				3661A0C1128707E4005F1F39 /* Class.o */,
+			);
+			path = class;
+			sourceTree = "<group>";
+		};
 		36660046119AB89200DE1938 /* collection */ = {
 			isa = PBXGroup;
 			children = (
@@ -1309,7 +1361,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "pinocchio" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* pinocchio */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1529,6 +1588,10 @@
 				3643A4DB119AF98900B17165 /* Slot.c in Sources */,
 				3643A4DC119AF98900B17165 /* UIntSlot.c in Sources */,
 				3643A4DF119AF99000B17165 /* Array.c in Sources */,
+				3661A0B812870637005F1F39 /* Boolean.c in Sources */,
+				3661A0BA12870637005F1F39 /* Nil.c in Sources */,
+				3661A0BC12870637005F1F39 /* Object.c in Sources */,
+				3661A0C2128707E4005F1F39 /* Class.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
