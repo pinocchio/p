@@ -49,7 +49,8 @@ NATIVE1(Continuation_on_)
     cont->env            = (Optr)current_env();
 
     POKE_EXP(0, cont);
-    apply(closure, 1);
+    // FIXME apply block in new way!
+    apply(closure);
 }
 
 /* ========================================================================= */

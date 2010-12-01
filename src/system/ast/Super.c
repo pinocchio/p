@@ -29,40 +29,6 @@ Super new_Super(Variable returnAddress, Symbol message, uns_int argc, ...)
 
 /* ========================================================================= */
 
-OPCODE(super_send) 
-    pop_code();
-    Optr class    = pop_EXP();
-    uns_int argc  = (uns_int)pop_EXP();
-    Optr receiver = PEEK_EXP(argc + 1); // SUPER object on top
-    
-    Class_dispatch(receiver, (Class)class, argc);
-}
-
-OPCODE(push_env_class)
-    // TODO directly inline it
-    Optr env = (Optr)current_env();
-    PUSH_EXP(((BlockContext)env)->home_context->closure->host);
-    pc += 1;
-}
-
-OPCODE(class_super)
-    Optr class = PEEK_EXP(0);
-    assert_class(class);
-    POKE_EXP(0, ((Class)class)->super);
-    pc += 1;
-}
-
-NNATIVE(Super_eval, 3,
-    t_push_env_class,
-    t_class_super,
-    t_super_send);
-
 void post_init_Super()
 {
-    INIT_NATIVE(Super_eval);
-}
-
-void Super_eval_threaded()
-{
-    push_code(T_Super_eval);
 }

@@ -148,7 +148,8 @@ NATIVE2(IdentityDictionary_at_ifAbsent_)
     Optr block = NATIVE_ARG(1);
     ZAP_NATIVE_INPUT();
     PUSH_EXP(block);
-    apply(block, 0);
+    // FIXME new way of applying closure!
+    apply(block);
 }
 
 void post_init_IdentityDictionary()

@@ -193,14 +193,12 @@ OPCODE(supern)
     Super super = (Super)next_value();
     PUSH_EXP(super);
     PUSH_EXP(super->size);
-    Super_eval_threaded();
 END_OPCODE
 
 #define SUPER(n) OPCODE(super##n)\
     Super super = (Super)next_value();\
     PUSH_EXP(super);\
     PUSH_EXP(super->size);\
-    Super_eval_threaded();\
 END_OPCODE
 
 SUPER(0)
@@ -323,7 +321,7 @@ OPCODE(string_concat_asString)
         pop_code();
     } else {
         pc = pc + 1;
-        Class_direct_dispatch(obj, HEADER(obj), (Optr)SMB_asString, 0);
+        send_message(obj, SMB_asString, 0);
     }
 END_OPCODE
 

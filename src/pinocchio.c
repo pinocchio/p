@@ -135,21 +135,21 @@ static Optr finish_eval()
 Optr Eval_Send0(Optr self, Symbol symbol)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 0);
+    send_message(self, symbol, 0);
     return finish_eval();
 }
 
 Optr Eval_Send1(Optr self, Symbol symbol, Optr arg)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 1, arg);
+    send_message(self, symbol, 1, arg);
     return finish_eval();
 }
 
 Optr Eval_Send2(Optr self, Symbol symbol, Optr arg1,  Optr arg2)
 {
     start_eval();
-    Class_direct_dispatch(self, HEADER(self), (Optr)symbol, 2, arg1, arg2);
+    send_message(self, symbol, 1, arg1, arg2);
     return finish_eval();
 }
 

@@ -39,7 +39,8 @@ NATIVE1(Continue_on_)
     Continue cont = new_Continue_offset(argc);
     Optr closure  = NATIVE_ARG(0);
     POKE_EXP(0, cont);
-    apply(closure, 1);
+    // FIXME new way of closure application!
+    apply(closure);
 }
 
 /* ========================================================================= */

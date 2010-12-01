@@ -175,7 +175,7 @@ int tpush_hash(Optr key)
     } else if (TAG_IS_LAYOUT(tag, Int)) { 
         hash = (SmallInt)key;
     } else {
-        Class_direct_dispatch(key, HEADER(key), (Optr)SMB_hash, 0);
+        send_message(key, SMB_hash, 0);
         return 1;
     }
     PUSH_EXP(hash);
@@ -201,7 +201,7 @@ void Dictionary_grow(Dictionary self)
     POKE_EXP(4, old);
     POKE_EXP(3, 0);
     POKE_EXP(2, self);
-    push_code(T_Dictionary_grow);
+    // push_code(T_Dictionary_grow);
 }
 
 /* ========================================================================= */
@@ -211,8 +211,7 @@ int Bucket_compare_key(Optr inkey, Optr dictkey)
     long result = Bucket_quick_compare_key(inkey, dictkey);
 
     if (result == -1) {
-        Class_direct_dispatch(inkey, HEADER(inkey),
-                              (Optr)SMB__equals_, 1, dictkey);
+        send_message(inkey, SMB__equals_, 1, dictkey);
         return 1;
     }
     PUSH_EXP(get_bool(result));
@@ -228,5 +227,4 @@ void post_init_Dictionary()
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
 
-    PLUGIN natives = add_plugin(L"Collection.Dictionary");
 }

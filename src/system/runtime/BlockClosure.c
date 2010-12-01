@@ -18,22 +18,14 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
 
 /* ========================================================================= */
 
-static BlockContext activate_block(BlockClosure closure, long argc)
+static BlockContext activate_block(BlockClosure closure)
 {
 	//TODO merge with BlockContext
+	BlockContext context = current_env();
     Block block          = closure->code;
     uns_int paramc       = block->params->size;
     uns_int localc       = block->locals->size;
     uns_int size         = paramc + localc;
-
-    BlockContext context = (BlockContext)&PEEK_EXP(argc - 1);
-
-    CLAIM_EXP(CONTEXT_SIZE);
-
-    uns_int i;
-    for (i = 0; i < argc + 1; i++) {
-        POKE_EXP(i, PEEK_EXP(i + CONTEXT_SIZE));
-    }
 
     CLAIM_EXP(localc);
 
@@ -45,8 +37,6 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     HEADER(context)       = BlockContext_Class;
 	context->size         = size;
 	context->stacked      = true;
-    context->return_context = current_env();
-    set_env((Optr)context);
 
     BlockContext outer_scope = closure->context;
 
@@ -57,36 +47,35 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     return context;
 }
 
-static void BlockClosure_apply(BlockClosure closure, uns_int argc)
+static void BlockClosure_apply()
 {
+    BlockClosure closure = (BlockClosure)current_self();
     Block block = closure->code;
-    assert1(argc == block->params->size, "Argument count mismatch");
+    assert1(
+        current_env()->size == block->params->size,
+        "Argument count mismatch");
 
     if (block->size == 0) { 
-        RETURN_FROM_NATIVE(nil);
+        direct_return(nil);
         return;
     }
 
-    if (block->locals->size == 0 && argc == 0) {
+    if (block->locals->size == 0 && current_env()->size == 0) {
         BlockContext env = current_env();
         POKE_EXP(0, env);
         set_env((Optr)closure->context);
     } else {
-        activate_block(closure, argc);
+        activate_block(closure);
     }
     push_code(block->threaded);
 }
 
-void apply(Optr closure, uns_int argc)
+void apply(Optr closure)
 {
-    if (_thread_->next_interpreter != nil) {
-        assert1(NULL, "TODO: Stacked apply NYI");
-    } else {
-        if (HEADER(closure) != BlockClosure_Class) {
-            assert1(NULL, "TODO: MOP for apply NYI");
-        }
-        BlockClosure_apply((BlockClosure)closure, argc);
+    if (HEADER(closure) != BlockClosure_Class) {
+        assert1(NULL, "TODO: MOP for apply NYI");
     }
+    BlockClosure_apply();
 }
 
 
@@ -97,8 +86,7 @@ BlockClosure new_Closure_from_Block(Block block)
 /* ========================================================================= */
 
 NATIVE(BlockClosure_apply_)
-    BlockClosure closure = (BlockClosure)self;
-    BlockClosure_apply(closure, argc);
+    BlockClosure_apply();
 }
 
 NATIVE0(BlockClosure_numArgs) 
@@ -106,7 +94,8 @@ NATIVE0(BlockClosure_numArgs)
 }
 
 NATIVE1(BlockClosure_valueWithArguments_)
-    Array args = (Array)pop_EXP();
+
+    Array args = (Array)NATIVE_ARG(0);
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
     long pos = 0;
@@ -115,8 +104,7 @@ NATIVE1(BlockClosure_valueWithArguments_)
         pos++;
     }
     
-    BlockClosure closure = (BlockClosure)self;
-    BlockClosure_apply(closure, args->size);
+    BlockClosure_apply();
 }
 
 /* ========================================================================= */

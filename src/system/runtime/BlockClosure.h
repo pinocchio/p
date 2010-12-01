@@ -16,7 +16,7 @@ extern BlockClosure new_BlockClosure(Block code,
 
 /* ========================================================================= */
 
-extern void apply(Optr closure, uns_int argc);
+extern void apply(Optr closure);
 
 /* ========================================================================= */
 
