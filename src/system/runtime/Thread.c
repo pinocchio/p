@@ -32,8 +32,7 @@ void yield()
     Thread previous     = _thread_;
     _thread_            = _scheduler_thread_;
     reset_thread(_scheduler_thread_);
-    Class_direct_dispatch((Optr)Thread_Class, HEADER(Thread_Class), 
-                          (Optr)SMB_yield_, 1, (Optr)previous);
+    send_message((Optr)Thread_Class, SMB_yield_, 1, (Optr)previous);
 }
 
 /* ========================================================================= */
@@ -61,8 +60,7 @@ NATIVE1(Thread_new_)
     Thread previous     = _thread_;
     Thread new_thread   = new_Thread(STACK_SIZE);
     _thread_            = new_thread;
-    Class_direct_dispatch((Optr)_thread_, HEADER(_thread_), 
-                          (Optr)SMB_evaluate_, 1, (Optr)value);
+    send_message((Optr)_thread_, SMB_evaluate_, 1, (Optr)value);
     _thread_->backup_pc = pc;
     _thread_            = previous;
     pc                  = previous->backup_pc;

@@ -206,7 +206,7 @@ static Optr Class_lookup(Class class, Symbol message)
     return NULL;
 }
 
-static void lookup_invoke(Class class, Symbol message)
+void lookup_invoke(Class class, Symbol message)
 {
     Optr method = Class_lookup(class, message);
     if (method == NULL) {
@@ -260,6 +260,23 @@ void send_message(Optr receiver, Symbol message, uns_int argc, ...)
         context->locals[idx] = va_arg(args, Optr);
     }
     va_end(args);
+
+    set_env(context);
+
+    lookup_invoke(HEADER(receiver), message);
+}
+
+void send_message_with_arguments(Optr receiver, Symbol message, Array arguments)
+{
+    uns_int argc            = arguments->size;
+    MethodContext context   = allocate_context(argc);
+    context->self           = receiver;
+    context->return_context = current_env();
+
+    uns_int idx;
+    for (idx = 0; idx < argc; idx++) {
+        context->locals[idx] = arguments->values[idx];
+    }
 
     set_env(context);
 

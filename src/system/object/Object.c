@@ -100,7 +100,7 @@ NATIVE2(Array_at_put_)
 }
 
 NATIVE2(Object_perform_withArguments_)
-    Optr w_selector   = NATIVE_ARG(0);
+    Symbol w_selector = (Symbol)NATIVE_ARG(0);
     Optr w_args       = NATIVE_ARG(1);
 
     Optr tag = GETTAG(w_args);
@@ -108,14 +108,13 @@ NATIVE2(Object_perform_withArguments_)
 
     ZAP_NATIVE_INPUT();
 
-    Class_direct_dispatch_withArguments(self, HEADER(self),
-                                        w_selector, (Array)w_args);
+    send_message_with_arguments(self, w_selector, (Array)w_args);
 }
 
 NATIVE1(Object_perform_)
     Optr w_selector = NATIVE_ARG(0);
 	ZAP_NATIVE_INPUT();
-    Class_direct_dispatch(self, HEADER(self), w_selector, 0);
+    send_message(self, w_selector, 0);
 }
 
 

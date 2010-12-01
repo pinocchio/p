@@ -160,25 +160,37 @@ END_OPCODE
 
 /* ========================================================================= */
 
+static Optr fetch(Optr key)
+{
+    Class class = HEADER(key);
+    if (class == Variable_Class) {
+        return Variable_lookup((Variable)key);
+    } else if (class == Self_Class) {
+        return current_self();
+    } else if (class == Slot_Class) {
+        return Slot_lookup((Slot)key);
+    } else if (class == Constant_Class) {
+        return ((Constant)key)->constant;
+    }
+    assert1(NULL, "Invalid type of argument");
+    return NULL;
+}
+
 OPCODE(sendn)
     Send send = (Send)next_value();
+    uns_int size = send->size;
+    MethodContext context = allocate_context(size);
     uns_int i;
-    uns_int n = send->size;
-    Optr self = fetch_push(send->receiver);
-    for (i = 0; i < n; i++) {
-        fetch_push(i, send->arguments[i]);
+    context->self = fetch(send->receiver);
+    for (i = 0; i < size; i++) {
+        context->locals[i] = fetch(send->arguments[i]);
     }
-    Class_normal_dispatch(self, send, n);
+    set_env(context);
+    lookup_invoke(HEADER(context->self), send->message);
 END_OPCODE
 
 #define SEND(n) OPCODE(send##n)\
-    Send send = (Send)next_value();\
-    uns_int i;\
-    Optr self = fetch_push(send->receiver);\
-    for (i = 0; i < n; i++) {\
-        fetch_push(send->arguments[i]);\
-    }\
-    Class_normal_dispatch(self, send, n);\
+    t_sendn();\
 END_OPCODE
 
 SEND(0)
