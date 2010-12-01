@@ -16,7 +16,7 @@ extern ClassReference new_ClassReference_empty();
 
 /* ========================================================================= */
 
-extern void ClassReference_eval();
+extern Optr ClassReference_eval(ClassReference reference);
 
 /* ========================================================================= */
 

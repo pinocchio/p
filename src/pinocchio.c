@@ -67,7 +67,7 @@ OPCODE(exit_error)
                 (Symbol)HEADER(env->home_context->self)->name->value,
                 ((Symbol)env->home_context->closure->selector)->value);
         }
-        env = env->parent_frame;
+        env = env->return_context;
     }
 
     pinocchio_exit(EXIT_FAILURE);

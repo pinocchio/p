@@ -16,7 +16,7 @@ struct BlockContext_t {
     Optr                    stacked;
     BlockClosure            closure;
     MethodContext           home_context;
-    BlockContext            parent_frame;
+    BlockContext            return_context;
     BlockContext            outer_scope;
     Optr                    locals[];
 };

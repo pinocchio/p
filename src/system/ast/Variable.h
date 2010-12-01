@@ -16,7 +16,7 @@ extern Variable new_Variable(uns_int scope_id, uns_int local_id);
 
 /* ========================================================================= */
 
-extern void Variable_eval(Variable self);
+extern Optr Variable_lookup(Variable self);
 extern void Variable_assign(Variable self, Optr value);
 
 /* ========================================================================= */

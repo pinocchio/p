@@ -182,10 +182,6 @@ int tpush_hash(Optr key)
     return 0;
 }
 
-NNATIVE(Dictionary_grow, 2,
-    t_dict_grow,
-    t_bucket_rehash)
-
 void Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
@@ -225,48 +221,6 @@ int Bucket_compare_key(Optr inkey, Optr dictkey)
 
 /* ========================================================================= */
 
-NNATIVE(Dictionary_at_ifAbsent_, 5,
-    t_push_hash,
-    t_dictionary_lookup,
-    t_bucket_lookup,
-    t_pop_return,
-    t_dictionary_ifAbsent_)
-
-NNATIVE(Dictionary_includesKey_, 5,
-    t_push_hash,
-    t_dictionary_lookup,
-    t_bucket_lookup,
-    t_poke_true_return,
-    t_push_false_return)
-
-NATIVE2(Dictionary_at_ifAbsent_)
-    Optr w_index = NATIVE_ARG(0);
-    Optr w_block = NATIVE_ARG(1);
-    POKE_EXP(2, w_block);
-    POKE_EXP(1, self);
-    POKE_EXP(0, w_index);
-    push_code(T_Dictionary_at_ifAbsent_);
-}
-
-NATIVE1(Dictionary_includesKey_)
-    push_code(T_Dictionary_includesKey_);
-}
-
-NNATIVE(Dictionary_at_put_, 5,
-    t_peek1,
-    t_push_hash,
-    t_dictionary_store,
-    t_bucket_store,
-    t_dictionary_check_grow);
-
-NATIVE2(Dictionary_at_put_)
-    push_code(T_Dictionary_at_put_);
-}
-
-NATIVE0(Dictionary_grow)
-    Dictionary_grow((Dictionary)self);
-}
-
 void post_init_Dictionary()
 {
     change_slot_type(Dictionary_Class, UintSlot_Class, 1, 0);
@@ -274,14 +228,5 @@ void post_init_Dictionary()
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
 
-    INIT_NATIVE(Dictionary_at_put_);
-    INIT_NATIVE(Dictionary_includesKey_);
-    INIT_NATIVE(Dictionary_at_ifAbsent_);
-    INIT_NATIVE(Dictionary_grow);
-
     PLUGIN natives = add_plugin(L"Collection.Dictionary");
-    store_native(natives, L"at:put:",      NM_Dictionary_at_put_);
-    store_native(natives, L"at:ifAbsent:", NM_Dictionary_at_ifAbsent_);
-    store_native(natives, L"includesKey:", NM_Dictionary_includesKey_);
-    store_native(natives, L"grow",         NM_Dictionary_grow);
 }

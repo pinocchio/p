@@ -7,8 +7,10 @@
 
 #define Send_args(send) send->arguments
 
-Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc) {
+Send new_Send_raw(Variable returnAddress, Optr receiver, Symbol msg, uns_int argc)
+{
     NEW_ARRAY_OBJECT(Send, Optr[argc]);
+    result->returnAddress = returnAddress;
     result->receiver = receiver;
     result->message  = msg;
     result->cache    = new_InlineCache();
@@ -17,9 +19,9 @@ Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc) {
     return result;
 }
 
-Send new_Send(Optr receiver, Symbol msg, uns_int argc, ...)
+Send new_Send(Variable returnAddress, Optr receiver, Symbol msg, uns_int argc, ...)
 {
-    Send result = new_Send_raw(receiver, msg, argc);
+    Send result = new_Send_raw(returnAddress, receiver, msg, argc);
     va_list args;
     va_start(args, argc);
     long idx;

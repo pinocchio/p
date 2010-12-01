@@ -17,7 +17,7 @@ extern Slot new_Slot(uns_int index, const wchar_t * name);
 
 /* ========================================================================= */
 
-extern void Slot_eval(Slot var);
+extern Optr Slot_lookup(Slot var);
 extern void Slot_assign(Slot var, Optr value);
 
 /* ========================================================================= */

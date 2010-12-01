@@ -33,7 +33,7 @@ NATIVE1(Continuation_continue_)
     }
 
     set_env(cont->env);
-    t_return();
+    pop_code();
     PUSH_EXP(arg);
 }
 

@@ -27,7 +27,7 @@ void Continue_escape(Continue cont, Optr return_value)
     tset(_EXP_, cont->exp_offset + &tget(Double_Stack)[-1]);
     tset(_CNT_, (threaded**)(&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_offset);
     set_env(cont->env);
-    t_return();
+    pop_code();
     POKE_EXP(0, return_value);
 }
 

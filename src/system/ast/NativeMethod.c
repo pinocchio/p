@@ -49,8 +49,7 @@ native lookup_native(Optr primitive_name, Optr module_name)
 }
 
 void NativeMethod_invoke(MethodClosure closure,
-                         NativeMethod method,
-                         Optr self, uns_int argc)
+                         NativeMethod method)
 {
     if (method->native == (native)nil) {
         Annotation annotation =
@@ -66,9 +65,9 @@ void NativeMethod_invoke(MethodClosure closure,
                                        annotation->arguments[1]);
     }
     if (method->native == (native)-1) {
-        return Method_invoke(closure, (Method)method, self, argc);
+        return Method_invoke(closure, (Method)method);
     }
-    method->native(self, closure->host, argc);
+    method->native(closure->host);
 }
 
 /* ========================================================================= */

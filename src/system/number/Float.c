@@ -134,8 +134,6 @@ NATIVE1(Float_log)
 	RETURN_FROM_NATIVE(Float_log(value));
 }
 
-
-
 SmallInt Float_floor(double value) {
 	return (SmallInt)wrap_int(floor(value));
 }

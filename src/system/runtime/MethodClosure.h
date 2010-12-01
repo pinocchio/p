@@ -12,13 +12,11 @@ struct MethodClosure_t {
 };
 
 extern void post_init_MethodClosure();
-extern MethodClosure new_MethodClosure(Method code,
-                                                       Class host);
+extern MethodClosure new_MethodClosure(Method code, Class host);
 
 /* ========================================================================= */
 
-extern void MethodClosure_invoke(MethodClosure closure, Optr self,
-                                 uns_int argc);
+extern void MethodClosure_invoke(MethodClosure closure);
 
 /* ========================================================================= */
 

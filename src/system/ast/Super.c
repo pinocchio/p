@@ -8,9 +8,10 @@
 
 #define Super_args(super) super->arguments
 
-Super new_Super(Symbol message, uns_int argc, ...)
+Super new_Super(Variable returnAddress, Symbol message, uns_int argc, ...)
 {
     NEW_ARRAY_OBJECT(Super, Optr[argc]);
+    result->returnAddress = returnAddress;
     result->message = message;
     result->cache   = new_InlineCache();
     result->size    = argc;
@@ -29,7 +30,7 @@ Super new_Super(Symbol message, uns_int argc, ...)
 /* ========================================================================= */
 
 OPCODE(super_send) 
-    t_return();
+    pop_code();
     Optr class    = pop_EXP();
     uns_int argc  = (uns_int)pop_EXP();
     Optr receiver = PEEK_EXP(argc + 1); // SUPER object on top

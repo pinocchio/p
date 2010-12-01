@@ -49,10 +49,9 @@ static void Slot_assign_on_(Slot var, Optr value, Optr self)
     Object_instVarAt_put_(self, var->index, value);
 }
 
-void Slot_eval(Slot var)
+Optr Slot_lookup(Slot var)
 {
-    POKE_EXP(0, Slot_readFrom_(var,
-                    current_env()->home_context->self));
+    return Slot_readFrom_(var, current_env()->home_context->self);
 }
 
 void Slot_assign(Slot var, Optr value)

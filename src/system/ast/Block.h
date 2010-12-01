@@ -6,20 +6,16 @@
 /* ========================================================================= */
 
 struct Block_t {
-    uns_int size;
-    Array   params;
-    Array   locals;
-	Array   threaded;
-    Optr    body[];
+    uns_int  size;
+    Array    params;
+    Array    locals;
+    Variable returnAddress;
+	Array    threaded;
+    Optr     body[];
 };
 
-extern Block new_Block(uns_int paramCount,
-                       uns_int localCount,
-                       uns_int depth,
-                       uns_int statementCount,
-                       ...);
-
-extern Block new_Block_with(Array params,
+extern Block new_Block_with(Variable returnAddress,
+                            Array params,
                             Array locals,
                             Array threaded,
                             uns_int statementCount,

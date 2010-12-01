@@ -78,14 +78,6 @@ long Words_compare(Symbol s1, Symbol s2)
     return !wcsncmp(s1->value, s2->value, s1->size);
 }
 
-NNATIVE(String_concat_, 2,
-    t_string_concat_asString,
-    t_string_concat)
-
-NATIVE1(String_concat_)
-    push_code(T_String_concat_);
-}
-
 NATIVE0(String_asSymbol)
     RETURN_FROM_NATIVE(new_Symbol(((String)self)->value));
 }
@@ -207,10 +199,7 @@ void post_init_String()
     SMB_asString         = new_Symbol(L"asString");
     empty_String         = new_String(L"");
     
-    INIT_NATIVE(String_concat_);    
-
     PLUGIN natives = add_plugin(L"String.String");
-    store_native(natives, L",",   NM_String_concat_);
     store_native(natives, L"asSymbol",  NM_String_asSymbol);
     store_native(natives, L"at:put:",   NM_String_at_put_);
     store_native(natives, L"asNumber",  NM_String_asNumber);

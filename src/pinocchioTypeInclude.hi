@@ -45,3 +45,5 @@
 #include <system/collection/DictBucket.h>
 #include <system/slot/PointerSlot.h>
 #include <system/runtime/Thread.h>
+#include <system/ast/Return.h>
+#include <system/ast/NonLocalReturn.h>

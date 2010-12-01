@@ -6,15 +6,16 @@
 /* ========================================================================= */
 
 struct Send_t {
-    uns_int size;
-    Array   cache;
-    Symbol  message;
-    Optr    receiver;
-    Optr    arguments[];
+    uns_int  size;
+    Array    cache;
+    Symbol   message;
+    Variable returnAddress;
+    Optr     receiver;
+    Optr     arguments[];
 };
 
-extern Send new_Send_raw(Optr receiver, Symbol msg, uns_int argc);
-extern Send new_Send(Optr receiver, Symbol msg, uns_int argc, ...);
+extern Send new_Send_raw(Variable returnAddress, Optr receiver, Symbol msg, uns_int argc);
+extern Send new_Send(Variable returnAddress, Optr receiver, Symbol msg, uns_int argc, ...);
 
 /* ========================================================================= */
 extern Array Send_args(Send send);

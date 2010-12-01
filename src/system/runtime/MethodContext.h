@@ -11,7 +11,7 @@ struct MethodContext_t {
     Optr                    stacked;
     MethodClosure           closure;
     MethodContext           home_context;
-    BlockContext            parent_frame;
+    BlockContext            return_context;
     Optr                    self;
     Optr                    locals[];
 };

@@ -39,3 +39,5 @@ TYPE(Object);
 TYPE(Symbol);
 TYPE(String);
 TYPE(Thread);
+TYPE(Return);
+TYPE(NonLocalReturn);

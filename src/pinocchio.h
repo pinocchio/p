@@ -78,6 +78,7 @@ Class class##_Class;
 
 #define ASSERT_ARG_SIZE(raw_size) \
 	uns_int size_value = (raw_size); \
+	uns_int argc       = current_env()->size; \
     assert((argc <= size_value && argc >= 0), \
 		printf("Invalid argument size! Expected %lu but was %lu\n", size_value, argc));
 
@@ -153,7 +154,7 @@ extern void CNT_exit_eval();
 #define TYPE(name) typedef struct name##_##t * name;
 #include <pinocchioType.hi>
 
-typedef void(*native)(Optr self, Class class, uns_int argc);
+typedef void(*native)(Class class);
 
 /* ========================================================================= */
 

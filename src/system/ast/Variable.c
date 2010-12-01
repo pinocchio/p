@@ -25,14 +25,14 @@ Variable new_Variable(uns_int scope_id, uns_int local_id)
 
 /* ========================================================================= */
 
-void Variable_eval(Variable self)
+Optr Variable_lookup(Variable self)
 {
     BlockContext env = current_env();
 
     uns_int local_id = (uns_int)unwrap_int(self->local_id);    
     uns_int scope_id = (uns_int)unwrap_int(self->scope_id);
 
-    POKE_EXP(0, BlockContext_lookup(env, local_id, scope_id));
+    return BlockContext_lookup(env, local_id, scope_id);
 }
 
 void Variable_assign(Variable self, Optr value)

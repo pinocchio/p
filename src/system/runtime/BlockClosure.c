@@ -3,6 +3,8 @@
 #include <system/runtime/BlockClosure.h>
 
 /* ========================================================================= */
+static Symbol SMB_sendNext_to_class_;
+/* ========================================================================= */
 
 BlockClosure new_BlockClosure(Block code, BlockContext context) {
     NEW_OBJECT(BlockClosure);
@@ -43,7 +45,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     HEADER(context)       = BlockContext_Class;
 	context->size         = size;
 	context->stacked      = true;
-    context->parent_frame = current_env();
+    context->return_context = current_env();
     set_env((Optr)context);
 
     BlockContext outer_scope = closure->context;
@@ -55,7 +57,7 @@ static BlockContext activate_block(BlockClosure closure, long argc)
     return context;
 }
 
-void BlockClosure_apply(BlockClosure closure, uns_int argc)
+static void BlockClosure_apply(BlockClosure closure, uns_int argc)
 {
     Block block = closure->code;
     assert1(argc == block->params->size, "Argument count mismatch");
@@ -77,10 +79,14 @@ void BlockClosure_apply(BlockClosure closure, uns_int argc)
 
 void apply(Optr closure, uns_int argc)
 {
-    // TODO in the alternative case, send "value:*" message.
-    // LOG("cls: %ls\n", HEADER(closure)->name->value);
-    assert0(HEADER(closure) == BlockClosure_Class);
-    BlockClosure_apply((BlockClosure)closure, argc);
+    if (_thread_->next_interpreter != nil) {
+        assert1(NULL, "TODO: Stacked apply NYI");
+    } else {
+        if (HEADER(closure) != BlockClosure_Class) {
+            assert1(NULL, "TODO: MOP for apply NYI");
+        }
+        BlockClosure_apply((BlockClosure)closure, argc);
+    }
 }
 
 
@@ -117,6 +123,7 @@ NATIVE1(BlockClosure_valueWithArguments_)
 
 void post_init_BlockClosure()
 {
+    SMB_sendNext_to_class_ = new_Symbol(L"sendNext:to:class:");
     PLUGIN natives = add_plugin(L"Reflection.Reflection");
     store_native(natives, L"blockclosureValue:message:", NM_BlockClosure_apply_);
     store_native(natives, L"blockclosureValueWithArguments:message:",

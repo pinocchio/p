@@ -39,9 +39,7 @@ ReflectionMethod new_ReflectionMethod_with(Array params,
 
 /* ========================================================================= */
 
-void ReflectionMethod_invoke(MethodClosure closure,
-                             ReflectionMethod method, 
-                             Optr self, uns_int argc)
+void ReflectionMethod_invoke(MethodClosure closure, ReflectionMethod method)
 {
     if (method->native == (native)nil) {
         Annotation annotation =
@@ -54,9 +52,9 @@ void ReflectionMethod_invoke(MethodClosure closure,
                                   (Optr)SMB_Reflection_Reflection);
     }
     if (method->native == (native)-1) {
-        return Method_invoke(closure, (Method)method, self, argc);
+        return Method_invoke(closure, (Method)method);
     }
-    method->native(self, closure->host, argc);
+    method->native(closure->host);
 }
 
 /* ========================================================================= */
