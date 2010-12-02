@@ -21,7 +21,7 @@ Continue new_Continue_offset(int offset)
 
 void Continue_escape(Continue cont, Optr return_value)
 {
-    set_env(cont->env);
+    SET_CONTEXT(cont->env);
     direct_return(return_value);
 }
 

@@ -108,7 +108,7 @@ NATIVE2(Object_perform_withArguments_)
 
     ZAP_NATIVE_FRAME();
 
-    send_message_with_arguments(self, w_selector, (Array)w_args);
+    send_message_with(self, w_selector, (Array)w_args);
 }
 
 NATIVE1(Object_perform_)

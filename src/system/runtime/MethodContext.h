@@ -7,6 +7,7 @@
 
 struct MethodContext_t {
     uns_int                 size;
+    threaded*               pc;
     uns_int                 scope_id;
     Optr                    stacked;
     MethodClosure           closure;

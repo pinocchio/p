@@ -92,17 +92,21 @@ void assert_class(Optr class)
 
 static void set_return_value(Optr value)
 {
-    assert1(NULL, "Not yet implemented");
+    rv = value;
 }
 
 void direct_return(Optr value)
 {
-    assert1(NULL, "Not yet implemented");
+    set_return_value(value);
+    SET_CONTEXT(current_env()->return_context);
+    pc = current_env()->pc;
 }
 
 void long_return(Optr value)
 {
-    assert1(NULL, "Not yet implemented");
+    SET_CONTEXT(current_env()->home_context->return_context);
+    pc = current_env()->pc;
+    set_return_value(value);
 }
 
 
@@ -204,7 +208,7 @@ static void does_not_understand(Class class, Symbol message)
         failed_message->arguments[idx] = context->locals[idx];
     }
 
-    set_env(context->return_context);
+    SET_CONTEXT(context->return_context);
     send_message_at(context->self, class, SMB_doesNotUnderstand_, 
                     1, failed_message);
 }
@@ -251,7 +255,7 @@ void send_message_at(Optr receiver, Class class, Symbol message,
     }
     va_end(args);
 
-    set_env(context);
+    SET_CONTEXT(context);
 
     lookup_invoke(class, message);
 }
@@ -270,12 +274,12 @@ void send_message(Optr receiver, Symbol message, uns_int argc, ...)
     }
     va_end(args);
 
-    set_env(context);
+    SET_CONTEXT(context);
 
     lookup_invoke(HEADER(receiver), message);
 }
 
-void send_message_with_arguments(Optr receiver, Symbol message, Array arguments)
+void send_message_with(Optr receiver, Symbol message, Array arguments)
 {
     uns_int argc            = arguments->size;
     MethodContext context   = allocate_context(argc);
@@ -287,7 +291,7 @@ void send_message_with_arguments(Optr receiver, Symbol message, Array arguments)
         context->locals[idx] = arguments->values[idx];
     }
 
-    set_env(context);
+    SET_CONTEXT(context);
 
     lookup_invoke(HEADER(receiver), message);
 }

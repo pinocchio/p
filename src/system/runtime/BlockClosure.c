@@ -63,7 +63,7 @@ static void BlockClosure_apply()
 
     if (block->locals->size == 0 && current_env()->size == 0) {
         BlockContext env = current_env();
-        set_env((Optr)closure->context);
+        SET_CONTEXT(closure->context);
     } else {
         activate_block(closure);
     }

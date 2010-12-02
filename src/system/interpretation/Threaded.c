@@ -10,6 +10,7 @@ Symbol SMB_asString;
 /* ========================================================================= */
 
 threaded* pc;
+Optr      rv;
 
 /* ========================================================================= */
 
@@ -156,7 +157,7 @@ OPCODE(sendn)
     for (i = 0; i < size; i++) {
         context->locals[i] = fetch(send->arguments[i]);
     }
-    set_env(context);
+    SET_CONTEXT(context);
     lookup_invoke(HEADER(context->self), send->message);
 END_OPCODE
 

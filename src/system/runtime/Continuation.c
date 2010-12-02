@@ -25,7 +25,7 @@ NATIVE1(Continuation_continue_)
         ds[i] = cont->exp_stack->values[i];
     }
 
-    set_env(cont->env);
+    SET_CONTEXT(cont->env);
     pop_code();
     direct_return(arg);
 }

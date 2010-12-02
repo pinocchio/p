@@ -50,7 +50,7 @@ BlockContext capture_current_env()
     context->stacked = (Optr)target;
 
     target->stacked = false;
-    set_env(target);
+    SET_CONTEXT(target);
     return target;
 }
 

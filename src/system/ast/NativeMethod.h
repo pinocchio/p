@@ -40,7 +40,7 @@ static void NM_##name(Class class) {
     direct_return(_return_value_);
 
 #define NATIVE_ARG(idx) current_env()->locals[idx]
-#define ZAP_NATIVE_FRAME() set_env(current_env()->return_context)
+#define ZAP_NATIVE_FRAME() SET_CONTEXT(current_env()->return_context)
 
 #define SELF ((Object)((MethodContext)current_env())->self)
 /* ========================================================================= */

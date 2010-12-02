@@ -8,6 +8,7 @@
 /* ======================================================================== */
 
 extern threaded* pc;
+extern Optr      rv;
 
 #ifdef THREADED // -----------------------------------------------------------
     #ifdef TDEBUG
@@ -61,7 +62,7 @@ extern void post_init_Threaded();
 extern Optr get_code(threaded* idx);
 extern void push_code(Array code);
 extern void pop_code();
-#define set_env(env) (tset(_ENV_, (Optr)alive_env((BlockContext)(env))))
+#define SET_CONTEXT(env) (tset(_ENV_, (Optr)alive_env((BlockContext)(env))))
 
 /* ======================================================================== */
 

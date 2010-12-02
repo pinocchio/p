@@ -45,7 +45,7 @@ extern Class new_Bootstrapping_Class();
 /* ========================================================================= */
 
 extern void send_message(Optr receiver, Symbol message, uns_int argc, ...);
-extern void send_message_with_arguments(Optr receiver, Symbol message, Array arguments);
+extern void send_message_with(Optr receiver, Symbol message, Array arguments);
 extern void send_message_at(Optr receiver, Class class,
 						    Symbol message, uns_int argc, ...);
 extern void direct_return(Optr value);
