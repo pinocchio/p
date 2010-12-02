@@ -6,7 +6,7 @@
 /* ========================================================================= */
 
 struct Dictionary_t {
-    uns_int             size;
+    SmallInt            size;
     SmallInt            maxLinear;
     SmallInt            ratio;
     Array               data;

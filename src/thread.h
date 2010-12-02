@@ -33,7 +33,7 @@ extern THREAD_OBJECT _thread_;
 #define ZAPN_EXP(n)             tset(_EXP_, tget(_EXP_)-(n))
 #define EXP_SIZE()              (tget(_EXP_) - &tget(Double_Stack)[-1])
 #define EMPTY_EXP()             (EXP_SIZE() == 0) 
-#define EXP()                   tget(_EXP_)
+#define EXP()                   (tget(_EXP_) + HEADER_SIZE)
 
 extern void pinocchio_main(int argc, const char ** argv);
 extern void init_Error_Handler();

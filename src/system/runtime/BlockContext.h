@@ -35,7 +35,6 @@ extern BlockContext optain_context(uns_int size);
 /* ========================================================================= */
 
 extern BlockContext capture_current_env();
-extern BlockContext alive_env(BlockContext context);
 
 /* ========================================================================= */
 

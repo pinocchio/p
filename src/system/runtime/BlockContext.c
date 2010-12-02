@@ -46,23 +46,12 @@ BlockContext capture_current_env()
      * This is used by "BlockContext alive_env(BlockContext context)" to
      * retrieve the actual context
      */
-    HEADER(context) = NULL;
-    context->stacked = (Optr)target;
+    // HEADER(context) = NULL;
+    // context->stacked = (Optr)target;
 
     target->stacked = false;
     SET_CONTEXT(target);
     return target;
-}
-
-/* Retrieves the actual context in case the stacked context was unstacked in the
- * meanwhile
- */
-BlockContext alive_env(BlockContext context)
-{
-    if (HEADER(context) == NULL) {
-        return (BlockContext)context->stacked;
-    }
-    return context;
 }
 
 /* ========================================================================= */

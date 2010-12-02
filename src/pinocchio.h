@@ -40,7 +40,7 @@ typedef unsigned long uns_int;
 
 /* ========================================================================= */
 
-#define HEADER_SIZE (sizeof(Optr))
+#define HEADER_SIZE 1
 #define POINTER_INC(p) (((Optr) (p)) + 1) 
 #define POINTER_DEC(p) (((Optr) (p)) - 1)
 
@@ -62,7 +62,7 @@ typedef unsigned long uns_int;
     HEADER(result) = class##_Class;
 
 #define NEW_ARRAYED(base, end) \
-   (base *)(POINTER_INC(PALLOC(HEADER_SIZE + sizeof(base) + sizeof(end))))
+   (base *)(POINTER_INC(PALLOC(HEADER_SIZE * sizeof(Optr) + sizeof(base) + sizeof(end))))
 
 #define EXPORT_CLASS(class)\
 extern Class class##_Class;\

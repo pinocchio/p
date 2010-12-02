@@ -1,6 +1,7 @@
 #include <thread.h>
 #include <lib/lib.h>
 #include <string.h>
+#include <debug.h>
 
 THREAD_OBJECT _thread_;
 Thread _scheduler_thread_;
@@ -52,11 +53,12 @@ void * pinocchio_main_thread(void * argc)
 
     _thread_ = new_Thread(STACK_SIZE);
 
-    Array args = get_args((int)(uns_int)argc, cargv);
-    // Optr result = Eval_Send0(new_SmallInt(30), raw_Symbol(L"fib"));
-    // inspect(result);
-    Eval_Send1((Optr)Interpretation_Main_Class,
-               new_Symbol(L"main:"), (Optr)args);
+    Optr result = Eval_Send0((Optr)new_SmallInt(30), new_Symbol(L"fib"));
+    i(result);
+
+    //Array args = get_args((int)(uns_int)argc, cargv);
+    //Eval_Send1((Optr)Interpretation_Main_Class,
+    //           new_Symbol(L"main:"), (Optr)args);
 
     return EXIT_SUCCESS;
 }

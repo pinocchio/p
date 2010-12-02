@@ -35,7 +35,7 @@ IdentityDictionary new_MethodDictionary()
 {
     IdentityDictionary result = NEW_t(IdentityDictionary);
     HEADER(result) = MethodDictionary_Class;
-    result->size      = 0;
+    result->size      = new_SmallInt(0);
     result->ratio     = new_SmallInt(500);
     result->maxLinear = new_SmallInt(20);
     result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
@@ -90,22 +90,19 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
-static void set_return_value(Optr value)
-{
-    rv = value;
-}
-
 void direct_return(Optr value)
 {
-    set_return_value(value);
-    SET_CONTEXT(current_env()->return_context);
     pc = current_env()->pc;
+    SET_CONTEXT(current_env()->return_context);
+    // fwprintf(stderr, L">> returning to %ls\n", current_env()->home_context->closure->selector->value);
+    set_return_value(value);
 }
 
 void long_return(Optr value)
 {
-    SET_CONTEXT(current_env()->home_context->return_context);
-    pc = current_env()->pc;
+    MethodContext context = current_env()->home_context;
+    pc = context->pc;
+    SET_CONTEXT(context->return_context);
     set_return_value(value);
 }
 
@@ -144,12 +141,13 @@ void Method_invoke(MethodClosure closure,
                method->params->size, current_env()->size););
     
     if (method->size == 0) {
-        set_return_value(self);
+        set_return_value(((MethodContext)current_env())->self);
         return;
     }
 
     activate_method(closure);
-    push_code(method->code);
+    current_env()->pc = pc;
+    pc = (threaded*)&method->code->values[0];
 }
 
 #define INVOKE_IF(name) if(method_class == name##_Class) {\
@@ -199,6 +197,8 @@ static void does_not_understand(Class class, Symbol message)
              self, class, failed_message);
     }
 
+    fwprintf(stderr, L"DOES NOT UNDERSTAND: %ls\n", message->value);
+
     MethodContext context = (MethodContext)current_env();
     uns_int argc = context->size;
     Message failed_message = new_Message(message, argc);
@@ -231,6 +231,16 @@ static Optr Class_lookup(Class class, Symbol message)
 
 void lookup_invoke(Class class, Symbol message)
 {
+    #ifdef PRINT_DISPATCH_TRACE
+    const wchar_t * class_name;
+    if (HEADER(class) == metaclass) {
+        class_name = ((Class)class->name)->name->value;
+    } else {
+        class_name = class->name->value;
+    }
+    fwprintf(stderr, L"%ls>>%ls\n", class_name, message->value);
+    #endif // PRINT_DISPATCH_TRACE
+
     Optr method = Class_lookup(class, message);
     if (method == NULL) {
         does_not_understand(class, message);
@@ -262,6 +272,7 @@ void send_message_at(Optr receiver, Class class, Symbol message,
 
 void send_message(Optr receiver, Symbol message, uns_int argc, ...)
 {
+    fwprintf(stderr, L"Sending message\n");
     MethodContext context   = allocate_context(argc);
     context->self           = receiver;
     context->return_context = current_env();

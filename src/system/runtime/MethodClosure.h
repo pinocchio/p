@@ -7,7 +7,7 @@
 
 struct MethodClosure_t {
     Method code;
-    Optr   selector;
+    Symbol selector;
     Class  host;
 };
 

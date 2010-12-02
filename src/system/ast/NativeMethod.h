@@ -28,7 +28,9 @@ extern NativeMethod new_NativeMethod_with(Array params,
 /* ========================================================================= */
 
 #define NATIVE(name)\
-static void NM_##name(Class class) {
+static void NM_##name(Class class) {\
+    Optr self = ((MethodContext)current_env())->self;
+
 #define NATIVE0(name)  NATIVE(name) ASSERT_ARG_SIZE(0);
 #define NATIVE1(name)  NATIVE(name) ASSERT_ARG_SIZE(1);
 #define NATIVE2(name)  NATIVE(name) ASSERT_ARG_SIZE(2);
@@ -36,8 +38,8 @@ static void NM_##name(Class class) {
 #define NATIVE4(name)  NATIVE(name) ASSERT_ARG_SIZE(4);
 
 #define RETURN_FROM_NATIVE(exp)\
-    Optr _return_value_ = (Optr)(exp);\
-    direct_return(_return_value_);
+    set_return_value((Optr)(exp));\
+    SET_CONTEXT(current_env()->return_context);
 
 #define NATIVE_ARG(idx) current_env()->locals[idx]
 #define ZAP_NATIVE_FRAME() SET_CONTEXT(current_env()->return_context)

@@ -9,7 +9,7 @@ DECLARE_CLASS(IdentityDictionary);
 IdentityDictionary new_IdentityDictionary()
 {
     NEW_OBJECT(IdentityDictionary);
-    result->size      = 0;
+    result->size      = new_SmallInt(0);
     result->ratio     = new_SmallInt(500);
     result->maxLinear = new_SmallInt(20);
     result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
@@ -42,7 +42,7 @@ Optr IdentityDictionary_lookup(IdentityDictionary self, Optr key)
         return NULL;
     }
     long i;
-    uns_int tally = bucket->tally;
+    uns_int tally = bucket->tally->value;
     for (i = 0; i < tally; i=i+2) {
         if (key == bucket->values[i]) {
             return bucket->values[i+1];
@@ -68,7 +68,7 @@ static void IdentityDictionary_check_grow(IdentityDictionary self)
         if (bucket == (DictBucket)nil) { continue; }
         self->data->values[i] = (Optr)bucket;
         uns_int j;
-        for (j = 0; j < bucket->tally;) {
+        for (j = 0; j < bucket->tally->value;) {
             Optr key = bucket->values[j];
             long hash = get_identity_hash(self, key);
             if (hash != i) {
@@ -92,7 +92,7 @@ long IdentityBucket_store(DictBucket * bucketp, Optr key, Optr value)
 {
     long i;
     DictBucket bucket = *bucketp;
-    uns_int tally     = bucket->tally;
+    uns_int tally     = bucket->tally->value;
     for (i = 0; i < tally; i = i+2) {
         if (key == bucket->values[i]) {
             bucket->values[i+1] = value;
@@ -107,7 +107,7 @@ long IdentityBucket_store(DictBucket * bucketp, Optr key, Optr value)
 
     bucket->values[tally]   = key;
     bucket->values[tally+1] = value;
-    bucket->tally           = tally+2;
+    bucket->tally           = new_SmallInt(tally+2);
 
     return 1;
 }
@@ -123,7 +123,7 @@ void IdentityDictionary_store(IdentityDictionary self,
         DictBucket bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
-        bucket->tally     = 2;
+        bucket->tally     = new_SmallInt(2);
         return IdentityDictionary_check_grow(self);
     }
     if (IdentityBucket_store(bucketp, key, value)) {
@@ -147,7 +147,11 @@ NATIVE2(IdentityDictionary_at_ifAbsent_)
     }
     Optr block = NATIVE_ARG(1);
     ZAP_NATIVE_FRAME();
-    // FIXME new way of applying closure!
+
+    MethodContext context   = allocate_context(0);
+    context->self           = block;
+    context->return_context = current_env();
+    SET_CONTEXT(context);
     apply(block);
 }
 

@@ -40,13 +40,11 @@ static Object load_plugin(Optr class, const char * file_path)
 {
     void * handle = dlopen(file_path, RTLD_LAZY);
     if (!handle) {
-        fprintf(stderr, "Loading plugin failed: '%s'\n", dlerror());
+        fwprintf(stderr, L"Loading plugin failed: '%s'\n", dlerror());
         return (Object)nil;
     }
     
     Object plugin = (Object)instantiate((Class)class);
-    // TODO
-    //plugin->ivals[3] = handle
     
     Optr * natives = (Optr *)dlsym(handle, "natives");
     if (natives) {

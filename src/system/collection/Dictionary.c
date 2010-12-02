@@ -14,7 +14,7 @@ static Symbol SMB__equals_;
 Dictionary new_Dictionary()
 {
     NEW_OBJECT(Dictionary);
-    result->size      = 0;
+    result->size      = new_SmallInt(0);
     result->ratio     = new_SmallInt(500);
     result->maxLinear = new_SmallInt(20);
     result->data      = new_Array_withAll(1, (Optr)new_DictBucket(20 << 1));
@@ -57,12 +57,13 @@ DictBucket * get_bucketp(Dictionary dictionary, long hash)
 
 long Dictionary_grow_check(Dictionary self)
 {
-    self->size++;
+    long size = unwrap_int((Optr)self->size) + 1;
+    self->size = new_SmallInt(size);
     if (self->data->size == 1) {
-        return self->size == unwrap_int((Optr)self->maxLinear);
+        return size == unwrap_int((Optr)self->maxLinear);
     }
-    uns_int size = self->data->size;
-    return (100 * self->size) / size > unwrap_int((Optr)self->ratio);
+    uns_int data_size = self->data->size;
+    return (100 * size) / data_size > unwrap_int((Optr)self->ratio);
 }
 
 Optr Dictionary_quick_lookup(Dictionary self, Optr key)
@@ -74,7 +75,7 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
         return NULL;
     }
     long i;
-    uns_int tally = bucket->tally;
+    uns_int tally = bucket->tally->value;
     for (i = 0; i < tally; i=i+2) {
         if (key == bucket->values[i]) {
             return bucket->values[i+1];
@@ -93,27 +94,27 @@ Optr Dictionary_quick_lookup(Dictionary self, Optr key)
 
 void remove_from_bucket(uns_int idx, DictBucket bucket)
 {
-    uns_int tally           = bucket->tally;
+    uns_int tally           = bucket->tally->value;
     bucket->values[idx]     = bucket->values[tally-2];
     bucket->values[idx+1]   = bucket->values[tally-1];
     bucket->values[tally-2] = nil;
     bucket->values[tally-1] = nil;
-    bucket->tally = tally - 2;
+    bucket->tally = new_SmallInt(tally - 2);
 }
 
 void add_to_bucket(DictBucket * bucketp, Optr key, Optr value)
 {
     if ((Optr)*bucketp == nil) {
         *bucketp = new_bucket();
-    } else if ((*bucketp)->tally == (*bucketp)->size) {
+    } else if ((*bucketp)->tally->value == (*bucketp)->size) {
         Bucket_grow(bucketp);
     }
 
-    DictBucket b       = *bucketp;
-    uns_int tally      = b->tally;
-    b->values[tally]   = key;
-    b->values[tally+1] = value;
-    b->tally = tally + 2;
+    DictBucket bucket       = *bucketp;
+    uns_int tally           = bucket->tally->value;
+    bucket->values[tally]   = key;
+    bucket->values[tally+1] = value;
+    bucket->tally           = new_SmallInt(tally + 2);
 }
 
 static void Dictionary_quick_check_grow(Dictionary self)
@@ -133,7 +134,7 @@ static void Dictionary_quick_check_grow(Dictionary self)
         if (bucket == (DictBucket)nil) { continue; }
         self->data->values[i] = (Optr)bucket;
         uns_int j;
-        for (j = 0; j < bucket->tally;) {
+        for (j = 0; j < bucket->tally->value;) {
             Optr key = bucket->values[j];
             long hash = get_hash(self, key);
             if (hash != i) {
@@ -158,7 +159,7 @@ void Dictionary_quick_store(Dictionary self,
         DictBucket bucket = *bucketp;
         bucket->values[0] = key;
         bucket->values[1] = value;
-        bucket->tally     = 2;
+        bucket->tally     = new_SmallInt(2);
         return Dictionary_quick_check_grow(self);
     }
     if (Bucket_quick_store(bucketp, key, value)) {
@@ -187,9 +188,6 @@ void Dictionary_grow(Dictionary self)
 
 void post_init_Dictionary()
 {
-    change_slot_type(Dictionary_Class, UintSlot_Class, 1, 0);
-    
     SMB_hash     = new_Symbol(L"hash");
     SMB__equals_ = new_Symbol(L"=");
-
 }

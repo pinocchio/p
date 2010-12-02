@@ -111,9 +111,11 @@ static void start_eval()
     }
     IN_EVAL = 1;
 
-    push_code(T_exit_error);
+    // FIXME initialize handlers in new stack-format
+    // push_code(T_exit_error);
     init_Error_Handler();
-    push_code(T_exit_eval);
+    // push_code(T_exit_eval);
+    pc = (threaded*)&T_exit_eval->values[0];
 }
 
 static Optr finish_eval()
@@ -127,10 +129,8 @@ static Optr finish_eval()
         #endif //THREADED
         }
     }
-    // FIXME retrieve the result somehow
-    Optr result = NULL;
     IN_EVAL = 0;
-    return result;
+    return return_value();
 }
 
 Optr Eval_Send0(Optr self, Symbol symbol)

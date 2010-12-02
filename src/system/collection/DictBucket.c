@@ -12,7 +12,7 @@ DictBucket new_DictBucket_raw(uns_int size)
 {
     NEW_ARRAY_OBJECT(DictBucket, Optr[size]);
     result->size  = size;
-    result->tally = 0;
+    result->tally = new_SmallInt(0);
     return result;
 }
 
@@ -78,7 +78,7 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
 {
     long i;
     DictBucket bucket = *bucketp;
-    uns_int tally     = bucket->tally;
+    uns_int tally     = bucket->tally->value;
 
     for (i = 0; i < tally; i = i+2) {
         if (key == bucket->values[i]) {
@@ -102,7 +102,7 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
     }
     bucket->values[tally]   = key;
     bucket->values[tally+1] = value;
-    bucket->tally           = tally+2;
+    bucket->tally           = new_SmallInt(tally+2);
     
     return 1;
 }
@@ -111,5 +111,4 @@ long Bucket_quick_store(DictBucket * bucketp, Optr key,
 
 void post_init_DictBucket()
 {
-    change_slot_type(DictBucket_Class, UintSlot_Class, 1, 0);
 }

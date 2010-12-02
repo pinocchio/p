@@ -6,9 +6,9 @@
 /* ========================================================================= */
 
 struct DictBucket_t {
-    uns_int size;
-    uns_int tally;
-    Optr  values[];
+    uns_int  size;
+    SmallInt tally;
+    Optr     values[];
 };
 
 CREATE_INITIALIZERS(DictBucket);

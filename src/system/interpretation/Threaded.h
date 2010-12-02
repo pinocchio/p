@@ -8,7 +8,13 @@
 /* ======================================================================== */
 
 extern threaded* pc;
-extern Optr      rv;
+
+/* ======================================================================== */
+
+extern Optr return_value();
+extern void set_return_value(Optr value);
+
+/* ======================================================================== */
 
 #ifdef THREADED // -----------------------------------------------------------
     #ifdef TDEBUG
@@ -59,10 +65,8 @@ extern Optr      rv;
 
 extern void post_init_Threaded();
 
-extern Optr get_code(threaded* idx);
-extern void push_code(Array code);
-extern void pop_code();
-#define SET_CONTEXT(env) (tset(_ENV_, (Optr)alive_env((BlockContext)(env))))
+#define SET_CONTEXT(env)\
+    tset(_ENV_, (BlockContext)(env));
 
 /* ======================================================================== */
 
@@ -78,29 +82,15 @@ T_CODE(nonlocalreturn_self)
 T_CODE(nonlocalreturn_slot)
 T_CODE(nonlocalreturn_variable)
 
-T_CODE(send0)
-T_CODE(send1)
-T_CODE(send2)
-T_CODE(send3)
-T_CODE(send4)
-T_CODE(send5)
-T_CODE(send6)
-T_CODE(sendn)
-
-T_CODE(super0)
-T_CODE(super1)
-T_CODE(super2)
-T_CODE(super3)
-T_CODE(super4)
-T_CODE(super5)
-T_CODE(super6)
-T_CODE(supern)
+T_CODE(send)
+T_CODE(super)
 
 T_CODE(copy_variable_variable)
 T_CODE(copy_constant_variable)
 T_CODE(copy_variable_slot)
 T_CODE(copy_slot_variable)
 T_CODE(copy_self_variable)
+T_CODE(copy_return_variable)
 
 T_CODE(capture)
 

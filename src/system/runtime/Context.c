@@ -5,7 +5,7 @@
 MethodContext allocate_context(uns_int argc)
 {
     MethodContext context = (MethodContext)EXP();
-    CLAIM_EXP(CONTEXT_SIZE + argc);
+    CLAIM_EXP(HEADER_SIZE + CONTEXT_SIZE + argc);
     context->size = argc;
     return context;
 }

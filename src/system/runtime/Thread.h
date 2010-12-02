@@ -7,7 +7,7 @@
 struct Thread_t {
     uns_int         size;
     threaded*       backup_pc;
-    Optr            _ENV_;
+    BlockContext    _ENV_;
     Optr *          _EXP_;
     Optr            storage;
     Optr            next_interpreter;

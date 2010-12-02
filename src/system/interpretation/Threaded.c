@@ -10,29 +10,23 @@ Symbol SMB_asString;
 /* ========================================================================= */
 
 threaded* pc;
-Optr      rv;
+static Optr rv;
 
 /* ========================================================================= */
-
-Optr get_code(threaded* idx)
-{
-    return (Optr)*idx;
-}
-
-void push_code(Array code)
-{
-    // FIXME save old pc
-    pc = (threaded*)&code->values[0];
-}
-
-void pop_code()
-{
-    // FIXME restore pc
-}
 
 Optr next_value()
 {
     return (Optr)*(++pc);
+}
+
+void set_return_value(Optr value)
+{
+    rv = value;
+}
+
+Optr return_value()
+{
+    return rv;
 }
 
 /* ========================================================================= */
@@ -103,29 +97,15 @@ void threaded(void *label) {
     T_FUNC(nonlocalreturn_slot)
     T_FUNC(nonlocalreturn_variable)
 
-    T_FUNC(send0)
-    T_FUNC(send1)
-    T_FUNC(send2)
-    T_FUNC(send3)
-    T_FUNC(send4)
-    T_FUNC(send5)
-    T_FUNC(send6)
-    T_FUNC(sendn)
-
-    T_FUNC(super0)
-    T_FUNC(super1)
-    T_FUNC(super2)
-    T_FUNC(super3)
-    T_FUNC(super4)
-    T_FUNC(super5)
-    T_FUNC(super6)
-    T_FUNC(supern)
+    T_FUNC(send)
+    T_FUNC(super)
 
     T_FUNC(copy_variable_variable)
     T_FUNC(copy_constant_variable)
     T_FUNC(copy_variable_slot)
     T_FUNC(copy_slot_variable)
     T_FUNC(copy_self_variable)
+    T_FUNC(copy_return_variable)
 
     T_FUNC(capture)
 END_OPCODE
@@ -143,12 +123,15 @@ static Optr fetch(Optr key)
         return Slot_lookup((Slot)key);
     } else if (class == Constant_Class) {
         return ((Constant)key)->constant;
+    } else if (class == ClassReference_Class) {
+        return ((ClassReference)key)->class;
     }
+    i(key);
     assert1(NULL, "Invalid type of argument");
     return NULL;
 }
 
-OPCODE(sendn)
+OPCODE(send)
     Send send = (Send)next_value();
     uns_int size = send->size;
     MethodContext context = allocate_context(size);
@@ -157,129 +140,119 @@ OPCODE(sendn)
     for (i = 0; i < size; i++) {
         context->locals[i] = fetch(send->arguments[i]);
     }
+    context->return_context = current_env();
     SET_CONTEXT(context);
+    pc++;
     lookup_invoke(HEADER(context->self), send->message);
 END_OPCODE
 
-#define SEND(n) OPCODE(send##n)\
-    t_sendn();\
+OPCODE(super)
+    Super super = (Super)next_value();
+    uns_int size = super->size;
+    MethodContext context = allocate_context(size);
+    uns_int i;
+    context->self = current_self();
+    for (i = 0; i < size; i++) {
+        context->locals[i] = fetch(super->arguments[i]);
+    }
+    Class class = current_env()->home_context->closure->host;
+    context->return_context = current_env();
+    SET_CONTEXT(context);
+    pc++;
+    lookup_invoke(class->super, super->message);
 END_OPCODE
-
-SEND(0)
-SEND(1)
-SEND(2)
-SEND(3)
-SEND(4)
-SEND(5)
-SEND(6)
-
-OPCODE(supern)
-    // Super super = (Super)next_value();
-END_OPCODE
-
-#define SUPER(n) OPCODE(super##n)\
-    t_supern();\
-END_OPCODE
-
-SUPER(0)
-SUPER(1)
-SUPER(2)
-SUPER(3)
-SUPER(4)
-SUPER(5)
-SUPER(6)
 
 OPCODE(copy_variable_variable)
     Variable input = (Variable)next_value();
     Variable output = (Variable)next_value();
     Variable_assign(output, Variable_lookup(input));
+    pc++;
 END_OPCODE
 
 OPCODE(copy_constant_variable)
     Optr value = next_value();
     Variable output = (Variable)next_value();
     Variable_assign(output, value);
+    pc++;
 END_OPCODE
 
 OPCODE(copy_variable_slot)
     Variable input = (Variable)next_value();
     Slot output = (Slot)next_value();
     Slot_assign(output, Variable_lookup(input));
+    pc++;
 END_OPCODE
 
 OPCODE(copy_slot_variable)
     Slot input = (Slot)next_value();
     Variable output = (Variable)next_value();
     Variable_assign(output, Slot_lookup(input));
+    pc++;
 END_OPCODE
 
 OPCODE(copy_self_variable)
     Variable output = (Variable)next_value();
     Variable_assign(output, current_self());
+    pc++;
 END_OPCODE
 
-void return_value(Optr value)
-{
-    // NYI
-    assert0(NULL);
-}
+OPCODE(copy_return_variable)
+    Variable output = (Variable)next_value();
+    Variable_assign(output, return_value());
+    pc++;
+END_OPCODE
 
 OPCODE(return_slot)
     Slot input = (Slot)next_value();
-    return_value(Slot_lookup(input));
+    direct_return(Slot_lookup(input));
 END_OPCODE
 
 OPCODE(return_variable)
     Variable input = (Variable)next_value();
-    return_value(Variable_lookup(input));
+    direct_return(Variable_lookup(input));
 END_OPCODE
 
 OPCODE(return_constant)
-    return_value(next_value());
+    direct_return(next_value());
 END_OPCODE
 
 OPCODE(return_self)
-    return_value(current_self());
+    direct_return(current_self());
 END_OPCODE
 
 OPCODE(return_reference)
     ClassReference input = (ClassReference)next_value();
-    return_value(ClassReference_eval(input));
+    direct_return(ClassReference_eval(input));
 END_OPCODE
-
-void nonlocalreturn_value(Optr value)
-{
-    // NYI
-    assert0(NULL);
-}
 
 OPCODE(nonlocalreturn_slot)
     Slot input = (Slot)next_value();
-    nonlocalreturn_value(Slot_lookup(input));
+    long_return(Slot_lookup(input));
 END_OPCODE
 
 OPCODE(nonlocalreturn_variable)
     Variable input = (Variable)next_value();
-    nonlocalreturn_value(Variable_lookup(input));
+    long_return(Variable_lookup(input));
 END_OPCODE
 
 OPCODE(nonlocalreturn_constant)
-    nonlocalreturn_value(next_value());
+    long_return(next_value());
 END_OPCODE
 
 OPCODE(nonlocalreturn_self)
-    nonlocalreturn_value(current_self());
+    long_return(current_self());
 END_OPCODE
 
 OPCODE(nonlocalreturn_reference)
     ClassReference input = (ClassReference)next_value();
-    nonlocalreturn_value(ClassReference_eval(input));
+    long_return(ClassReference_eval(input));
 END_OPCODE
 
 OPCODE(capture)
     Block block = (Block)next_value();
     BlockClosure closure = new_BlockClosure(block, current_env());
     Variable_assign(block->returnAddress, (Optr)closure);
+    pc++;
 END_OPCODE
 
 /* ========================================================================= */

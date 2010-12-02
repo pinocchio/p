@@ -26,7 +26,6 @@ NATIVE1(Continuation_continue_)
     }
 
     SET_CONTEXT(cont->env);
-    pop_code();
     direct_return(arg);
 }
 

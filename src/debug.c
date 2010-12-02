@@ -74,34 +74,6 @@ void print_Symbol(FILE* stream, Optr s)
     }
 }
 
-uns_int nrsends()
-{
-    uns_int size = EXP_SIZE();
-    uns_int cur = 0;
-    uns_int nr = 0;
-    while (cur < size) {
-        Optr c = tget(Double_Stack)[cur++];
-        if (c > (Optr)10000 && pclass(c) == Send_Class) {
-            nr++;
-        }
-    }
-    return nr;
-}
-
-void sends()
-{
-    uns_int size = EXP_SIZE();
-    uns_int cur = 0;
-    while (cur < size) {
-        Optr c = tget(Double_Stack)[cur++];
-        if (c > (Optr)10000 && pclass(c) == Send_Class) {
-            Send send = (Send)c;
-            print_Symbol(stderr, (Optr)send->message);
-        }
-    }
-}
-
-
 Optr atn(Optr o, const wchar_t * s)
 {
     Optr tag = GETTAG(o);

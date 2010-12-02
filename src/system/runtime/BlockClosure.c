@@ -20,7 +20,6 @@ BlockClosure new_BlockClosure(Block code, BlockContext context) {
 
 static BlockContext activate_block(BlockClosure closure)
 {
-	//TODO merge with BlockContext
 	BlockContext context = current_env();
     Block block          = closure->code;
     uns_int paramc       = block->params->size;
@@ -40,6 +39,7 @@ static BlockContext activate_block(BlockClosure closure)
 
     BlockContext outer_scope = closure->context;
 
+    context->closure      = closure;
     context->scope_id     = outer_scope->scope_id + 1;
     context->outer_scope  = outer_scope;
     context->home_context = outer_scope->home_context;
@@ -50,23 +50,20 @@ static BlockContext activate_block(BlockClosure closure)
 static void BlockClosure_apply()
 {
     // FIXME convert to new style of applying
-    BlockClosure closure = (BlockClosure)current_self();
+    BlockClosure closure = (BlockClosure)current_env()->outer_scope;
     Block block = closure->code;
     assert1(
         current_env()->size == block->params->size,
         "Argument count mismatch");
 
     if (block->size == 0) { 
-        direct_return(nil);
+        set_return_value(nil);
         return;
     }
 
-    if (block->locals->size == 0 && current_env()->size == 0) {
-        BlockContext env = current_env();
-        SET_CONTEXT(closure->context);
-    } else {
-        activate_block(closure);
-    }
+    activate_block(closure);
+    current_env()->pc = pc;
+    pc = (threaded*)&block->threaded->values[0];
 }
 
 void apply(Optr closure)

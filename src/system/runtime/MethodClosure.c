@@ -8,7 +8,7 @@ MethodClosure new_MethodClosure(Method code, Class host)
 {
     NEW_OBJECT(MethodClosure); 
     result->code        = code;
-    result->selector    = (Optr)nil;
+    result->selector    = (Symbol)nil;
     result->host        = host;
     return result;
 }

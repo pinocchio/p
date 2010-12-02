@@ -49,6 +49,7 @@ extern void send_message_with(Optr receiver, Symbol message, Array arguments);
 extern void send_message_at(Optr receiver, Class class,
 						    Symbol message, uns_int argc, ...);
 extern void direct_return(Optr value);
+extern void long_return(Optr value);
 extern void lookup_invoke(Class class, Symbol message);
 
 /* ========================================================================= */
