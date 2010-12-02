@@ -20,14 +20,13 @@ Optr get_code(threaded* idx)
 
 void push_code(Array code)
 {
-    PUSH_CNT(pc);
+    // FIXME save old pc
     pc = (threaded*)&code->values[0];
 }
 
 void pop_code()
 {
-    pc = PEEK_CNT();
-    ZAP_CNT();
+    // FIXME restore pc
 }
 
 Optr next_value()
@@ -37,34 +36,6 @@ Optr next_value()
 
 /* ========================================================================= */
 
-Optr pop_EXP()
-{
-    Optr * p = tget(_EXP_);
-    tset(_EXP_, p - 1);
-    return *p;
-}
-
-void _push_EXP(Optr e)
-{
-    Optr * p = tget(_EXP_) + 1;
-    tset(_EXP_, p);
-    *p = e;
-}
-
-void _push_CNT(threaded* e)
-{
-    threaded ** p = tget(_CNT_) - 1;
-    tset(_CNT_, p);
-    *p = e;
-}
-
-void push_closure(threaded* pc)
-{
-	Block block  = (Block)get_code(pc);
-    PUSH_EXP(new_Closure_from_Block(block));
-}
-
-/* ========================================================================= */
 IdentityDictionary functions;
 
 NATIVE1(Interpretation_Threaded_compileNatively_)
@@ -202,15 +173,11 @@ SEND(5)
 SEND(6)
 
 OPCODE(supern)
-    Super super = (Super)next_value();
-    PUSH_EXP(super);
-    PUSH_EXP(super->size);
+    // Super super = (Super)next_value();
 END_OPCODE
 
 #define SUPER(n) OPCODE(super##n)\
-    Super super = (Super)next_value();\
-    PUSH_EXP(super);\
-    PUSH_EXP(super->size);\
+    t_supern();\
 END_OPCODE
 
 SUPER(0)
@@ -317,20 +284,16 @@ END_OPCODE
 /* ========================================================================= */
 
 OPCODE(string_concat)
-    String self   = (String)PEEK_EXP(1);
-    String string = (String)PEEK_EXP(0);
-    ZAP_EXP();
-    POKE_EXP(0, String_concat_(self, (String)string));
-    pop_code();
+    String self   = (String)((MethodContext)current_env())->self;
+    String string = (String)current_env()->locals[0];
+    direct_return((Optr)String_concat_(self, string));
 END_OPCODE
 
 OPCODE(string_concat_asString)
-    Optr obj = pop_EXP();
+    Optr obj = ((MethodContext)current_env())->self;
     Optr tag = GETTAG(obj);
     if (TAG_IS_LAYOUT(tag, Words)) {
-        String self = (String)PEEK_EXP(0);
-        POKE_EXP(0, String_concat_(self, (String)obj));
-        pop_code();
+        return t_string_concat();
     } else {
         pc = pc + 1;
         send_message(obj, SMB_asString, 0);

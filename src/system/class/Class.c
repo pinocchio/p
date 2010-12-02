@@ -90,6 +90,22 @@ void assert_class(Optr class)
             HEADER(HEADER(class)) == metaclass); /* if class */
 }
 
+static void set_return_value(Optr value)
+{
+    assert1(NULL, "Not yet implemented");
+}
+
+void direct_return(Optr value)
+{
+    assert1(NULL, "Not yet implemented");
+}
+
+void long_return(Optr value)
+{
+    assert1(NULL, "Not yet implemented");
+}
+
+
 static void activate_method(MethodClosure closure)
 {
     MethodContext context = (MethodContext)current_env();
@@ -173,21 +189,24 @@ static void invoke(Optr method) {
 
 static void does_not_understand(Class class, Symbol message)
 {
-    assert0(NULL); // NYI!
-    // if (msg == (Optr)SMB_doesNotUnderstand_) {
-    //     Message message = (Message)pop_EXP();
-    //     fail(RecursiveDoesNotUnderstand_Class, 3,
-    //          self, class, message);
-    // }
+    if (message == SMB_doesNotUnderstand_) {
+        Optr failed_message = current_env()->locals[0];
+        fail(RecursiveDoesNotUnderstand_Class, 3,
+             self, class, failed_message);
+    }
 
-    // Message message = new_Message(msg, argc);
+    MethodContext context = (MethodContext)current_env();
+    uns_int argc = context->size;
+    Message failed_message = new_Message(message, argc);
 
-    // while (argc--) {
-    //     message->arguments[argc] = pop_EXP();
-    // }
+    uns_int idx;
+    for (idx = 0; idx < argc; idx++) {
+        failed_message->arguments[idx] = context->locals[idx];
+    }
 
-    // ZAP_EXP();
-    // Class_direct_dispatch(self, class, (Optr)SMB_doesNotUnderstand_, 1, message);
+    set_env(context->return_context);
+    send_message_at(context->self, class, SMB_doesNotUnderstand_, 
+                    1, failed_message);
 }
 
 static Optr Class_lookup(Class class, Symbol message)
@@ -217,16 +236,6 @@ void lookup_invoke(Class class, Symbol message)
 }
 
 /* ========================================================================= */
-
-void direct_return(Optr value)
-{
-    assert1(NULL, "Not yet implemented");
-}
-
-void long_return(Optr value)
-{
-    assert1(NULL, "Not yet implemented");
-}
 
 void send_message_at(Optr receiver, Class class, Symbol message,
                      uns_int argc, ...)

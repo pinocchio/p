@@ -166,22 +166,6 @@ void Dictionary_quick_store(Dictionary self,
     }
 }
 
-int tpush_hash(Optr key)
-{
-    SmallInt hash;
-    Optr tag = GETTAG(key);
-    if (TAG_IS_LAYOUT(tag, Words)) {
-        hash = String_hash((String)key);
-    } else if (TAG_IS_LAYOUT(tag, Int)) { 
-        hash = (SmallInt)key;
-    } else {
-        send_message(key, SMB_hash, 0);
-        return 1;
-    }
-    PUSH_EXP(hash);
-    return 0;
-}
-
 void Dictionary_grow(Dictionary self)
 {
     Array old  = self->data;
@@ -196,26 +180,7 @@ void Dictionary_grow(Dictionary self)
     for (i = 0; i < old->size; i++) {
         self->data->values[i] = old->values[i];
     }
-    
-    CLAIM_EXP(5);
-    POKE_EXP(4, old);
-    POKE_EXP(3, 0);
-    POKE_EXP(2, self);
-    // push_code(T_Dictionary_grow);
-}
-
-/* ========================================================================= */
-
-int Bucket_compare_key(Optr inkey, Optr dictkey)
-{
-    long result = Bucket_quick_compare_key(inkey, dictkey);
-
-    if (result == -1) {
-        send_message(inkey, SMB__equals_, 1, dictkey);
-        return 1;
-    }
-    PUSH_EXP(get_bool(result));
-    return 0;
+    // FIXME transform to new version of natives...    
 }
 
 /* ========================================================================= */

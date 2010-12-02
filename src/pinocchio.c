@@ -18,7 +18,6 @@ void init_thread_keys()
 {
     tkey(Double_Stack,  NULL);
     tkey(_EXP_,         NULL);
-    tkey(_CNT_,         NULL);
     tkey(_ENV_,         NULL);
  
     tkey(Eval_Exit,     NULL);
@@ -51,7 +50,8 @@ OPCODE(exit_eval)
 }
 
 OPCODE(exit_error)
-    Optr assertion = pop_EXP();
+    // FIXME retrieve the assertion return value somehow
+    Optr assertion = NULL;
     BlockContext env =
         (BlockContext)((Object)assertion)->ivals[0];
     
@@ -127,7 +127,8 @@ static Optr finish_eval()
         #endif //THREADED
         }
     }
-    Optr result = pop_EXP();
+    // FIXME retrieve the result somehow
+    Optr result = NULL;
     IN_EVAL = 0;
     return result;
 }

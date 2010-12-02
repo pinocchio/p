@@ -63,34 +63,6 @@ void print_Class(FILE* stream, Optr obj)
     fwprintf(stream, L"%p Class: %p %ls\n", obj, class, class->name->value);
 }
 
-void print_EXP(int count)
-{
-    long size = EXP_SIZE();
-    uns_int cur = 0;
-    if (size < 0) {
-        fwprintf(stderr, L"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Stack underflow!\n");
-        return;
-    }
-    while (cur < size && (count == -1 || cur < count)) {
-        Optr c = tget(Double_Stack)[cur++];
-        if (c > (Optr)10000) {
-            print_Class(stderr, c);
-        } else {
-            fwprintf(stderr, L"%li\n", (uns_int)c);
-        }
-    }
-}
-
-void exps() {
-    print_EXP(15);
-}
-
-void nexps(int count) {
-    print_EXP(count);
-}
-
-
-
 void print_Symbol(FILE* stream, Optr s)
 {
     Optr tag = GETTAG(s);

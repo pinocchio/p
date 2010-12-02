@@ -146,8 +146,7 @@ NATIVE2(IdentityDictionary_at_ifAbsent_)
         return;
     }
     Optr block = NATIVE_ARG(1);
-    ZAP_NATIVE_INPUT();
-    PUSH_EXP(block);
+    ZAP_NATIVE_FRAME();
     // FIXME new way of applying closure!
     apply(block);
 }

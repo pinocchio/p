@@ -12,7 +12,6 @@ struct Thread_t {
     Optr            storage;
     Optr            next_interpreter;
     Optr            Error_Handler;
-    threaded**      _CNT_;
     jmp_buf         Eval_Exit;
     Optr            Double_Stack[];
 };

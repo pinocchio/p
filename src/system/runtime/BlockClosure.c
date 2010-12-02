@@ -49,6 +49,7 @@ static BlockContext activate_block(BlockClosure closure)
 
 static void BlockClosure_apply()
 {
+    // FIXME convert to new style of applying
     BlockClosure closure = (BlockClosure)current_self();
     Block block = closure->code;
     assert1(
@@ -62,12 +63,10 @@ static void BlockClosure_apply()
 
     if (block->locals->size == 0 && current_env()->size == 0) {
         BlockContext env = current_env();
-        POKE_EXP(0, env);
         set_env((Optr)closure->context);
     } else {
         activate_block(closure);
     }
-    push_code(block->threaded);
 }
 
 void apply(Optr closure)
@@ -98,11 +97,7 @@ NATIVE1(BlockClosure_valueWithArguments_)
     Array args = (Array)NATIVE_ARG(0);
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
-    long pos = 0;
-    while(pos < args->size) {
-        PUSH_EXP(args->values[pos]);
-        pos++;
-    }
+    // FIXME copy arguments into frame
     
     BlockClosure_apply();
 }

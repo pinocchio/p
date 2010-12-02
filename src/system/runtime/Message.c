@@ -5,10 +5,10 @@
 
 /* ========================================================================= */
 
-Message new_Message(Optr selector, uns_int size)
+Message new_Message(Symbol selector, uns_int size)
 {
     NEW_ARRAY_OBJECT(Message, Optr[size]);
     result->size     = size;
-    result->selector = (Symbol)selector;
+    result->selector = selector;
     return result;
 }

@@ -31,11 +31,6 @@ static void UintSlot_assign_on_(UintSlot var,
 						  var->index,
 						  (Optr)(uns_int)unwrap_int(value));
 }
-void UintSlot_eval(UintSlot var)
-{
-    POKE_EXP(0, UintSlot_readFrom_(var,
-                    current_env()->home_context->self));
-}
 
 void UintSlot_assign(UintSlot var, Optr value)
 {

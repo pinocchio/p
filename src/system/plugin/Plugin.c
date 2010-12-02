@@ -71,7 +71,7 @@ NATIVE0(Plugin_unload)
     Optr w_path = NATIVE_ARG(0);
     assert1(TAG_IS_LAYOUT(GETTAG(w_path), Words), "Invalid path-type");    
     //unload_plugin();     
-    ZAP_NATIVE_INPUT();
+    RETURN_FROM_NATIVE(nil);
 }
 
 /* ========================================================================= */

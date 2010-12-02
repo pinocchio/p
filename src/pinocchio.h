@@ -145,10 +145,6 @@ typedef struct Nil{} Nil;
 #define INT_CACHE_LOWER -1
 #define INT_CACHE_UPPER 1023
 
-extern void CNT_continue_eval();
-extern void CNT_abort_eval();
-extern void CNT_exit_eval();
-
 /* ========================================================================= */
 
 #define TYPE(name) typedef struct name##_##t * name;
@@ -171,7 +167,6 @@ extern IdentityDictionary _NATIVES_;
 
 /* ========================================================================= */
 
-extern void CNT_exit_error();
 extern void pinocchio_exit(int status);
 extern Optr Eval(Optr code);
 extern Optr Eval_Send0(Optr self, Symbol symbol);

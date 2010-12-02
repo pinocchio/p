@@ -106,14 +106,14 @@ NATIVE2(Object_perform_withArguments_)
     Optr tag = GETTAG(w_args);
     ASSERT_TAG_LAYOUT(tag, Array);
 
-    ZAP_NATIVE_INPUT();
+    ZAP_NATIVE_FRAME();
 
     send_message_with_arguments(self, w_selector, (Array)w_args);
 }
 
 NATIVE1(Object_perform_)
-    Optr w_selector = NATIVE_ARG(0);
-	ZAP_NATIVE_INPUT();
+    Symbol w_selector = (Symbol)NATIVE_ARG(0);
+	ZAP_NATIVE_FRAME();
     send_message(self, w_selector, 0);
 }
 

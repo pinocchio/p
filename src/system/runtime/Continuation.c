@@ -19,22 +19,15 @@ NATIVE1(Continuation_continue_)
     Optr arg  = NATIVE_ARG(0);
     // restore the stack
     tset(_EXP_, cont->exp_stack->size + (&ds[-1]));
-    tset(_CNT_, (threaded**)(&ds[STACK_SIZE]) - cont->cnt_stack->size);
 
     int i;
     for (i = 0; i < cont->exp_stack->size; i++) {
         ds[i] = cont->exp_stack->values[i];
     }
 
-    ds = (Optr *)tget(_CNT_);
-    
-    for (i = 0; i < cont->cnt_stack->size; i++) {
-        ds[i] = cont->cnt_stack->values[i];
-    }
-
     set_env(cont->env);
     pop_code();
-    PUSH_EXP(arg);
+    direct_return(arg);
 }
 
 NATIVE1(Continuation_on_)
@@ -42,13 +35,8 @@ NATIVE1(Continuation_on_)
     Optr closure         = NATIVE_ARG(0);
     cont->exp_stack      = new_Array(EXP_SIZE() - (argc + 1),
                                      tget(Double_Stack));
-    PUSH_CNT(pc);
-    cont->cnt_stack      = new_Array(CNT_SIZE(),
-                                     (Optr *)tget(_CNT_));
-    ZAP_CNT();
     cont->env            = (Optr)current_env();
 
-    POKE_EXP(0, cont);
     // FIXME apply block in new way!
     apply(closure);
 }

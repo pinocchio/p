@@ -12,20 +12,18 @@ NATIVE(Interpreter_invokeNative)
     Message message      = (Message)NATIVE_ARG(2);
     //Optr alternative     = NATIVE_ARG(3);
 
-    ZAP_NATIVE_INPUT();
+    ZAP_NATIVE_FRAME();
 
-    PUSH_EXP(receiver);
+    // FIXME transform frame; push receiver and arguments
 
     uns_int i;
     for (i = 0; i < message->size; i++) {
-        PUSH_EXP(message->arguments[i]);
     }
    
+    // FIXME transform to new version
     NativeMethod_invoke(
         method,
-        (NativeMethod)method->code,
-        receiver,
-        message->size);
+        (NativeMethod)method->code);
 }
 
 // ============================================================================

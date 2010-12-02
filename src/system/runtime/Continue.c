@@ -13,9 +13,7 @@ Continue new_Continue()
 Continue new_Continue_offset(int offset)
 {
     Continue cont    = new_Continue();
-    cont->exp_offset = EXP_SIZE() - offset;
-    cont->cnt_offset = CNT_SIZE() + 1;
-    cont->env        = (Optr)current_env();
+    cont->env        = current_env();
     return cont;
 }
 
@@ -23,12 +21,8 @@ Continue new_Continue_offset(int offset)
 
 void Continue_escape(Continue cont, Optr return_value)
 {
-    // restore the stack
-    tset(_EXP_, cont->exp_offset + &tget(Double_Stack)[-1]);
-    tset(_CNT_, (threaded**)(&tget(Double_Stack)[STACK_SIZE]) - cont->cnt_offset);
     set_env(cont->env);
-    pop_code();
-    POKE_EXP(0, return_value);
+    direct_return(return_value);
 }
 
 NATIVE1(Continue_escape_)
@@ -38,7 +32,6 @@ NATIVE1(Continue_escape_)
 NATIVE1(Continue_on_)
     Continue cont = new_Continue_offset(argc);
     Optr closure  = NATIVE_ARG(0);
-    POKE_EXP(0, cont);
     // FIXME new way of closure application!
     apply(closure);
 }

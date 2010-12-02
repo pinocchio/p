@@ -4,7 +4,7 @@
 
 MethodContext allocate_context(uns_int argc)
 {
-    MethodContext context = (MethodContext)&PEEK_EXP(0);
+    MethodContext context = (MethodContext)EXP();
     CLAIM_EXP(CONTEXT_SIZE + argc);
     context->size = argc;
     return context;

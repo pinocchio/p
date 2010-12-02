@@ -11,7 +11,7 @@ struct Message_t {
     Optr    arguments[];
 };
 
-extern Message new_Message(Optr selector, uns_int size);
+extern Message new_Message(Symbol selector, uns_int size);
 
 /* ========================================================================= */
 
