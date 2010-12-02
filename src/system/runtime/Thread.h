@@ -5,15 +5,16 @@
 /* ========================================================================= */
 
 struct Thread_t {
-    uns_int         size;
-    threaded*       backup_pc;
-    BlockContext    _ENV_;
-    Optr *          _EXP_;
-    Optr            storage;
-    Optr            next_interpreter;
-    Optr            Error_Handler;
-    jmp_buf         Eval_Exit;
-    Optr            Double_Stack[];
+    uns_int            size;
+    threaded*          backup_pc;
+	Optr			   backup_rv;
+    BlockContext       _ENV_;
+    Optr *             _EXP_;
+    IdentityDictionary storage;
+    Optr               next_interpreter;
+    Optr               Error_Handler;
+    jmp_buf            Eval_Exit;
+    Optr               Double_Stack[];
 };
 
 CREATE_INITIALIZERS(Object)

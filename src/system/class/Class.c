@@ -93,16 +93,19 @@ void assert_class(Optr class)
 void direct_return(Optr value)
 {
     pc = current_env()->pc;
+    SET_EXP(((Optr)current_env()) - 1);
     SET_CONTEXT(current_env()->return_context);
-    // fwprintf(stderr, L">> returning to %ls\n", current_env()->home_context->closure->selector->value);
     set_return_value(value);
 }
 
 void long_return(Optr value)
 {
     MethodContext context = current_env()->home_context;
+    BlockContext return_context = context->return_context;
     pc = context->pc;
-    SET_CONTEXT(context->return_context);
+    SET_EXP(((Optr)context) - 1);
+    SET_CONTEXT(return_context);
+    
     set_return_value(value);
 }
 
@@ -272,7 +275,6 @@ void send_message_at(Optr receiver, Class class, Symbol message,
 
 void send_message(Optr receiver, Symbol message, uns_int argc, ...)
 {
-    fwprintf(stderr, L"Sending message\n");
     MethodContext context   = allocate_context(argc);
     context->self           = receiver;
     context->return_context = current_env();

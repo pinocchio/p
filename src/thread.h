@@ -34,6 +34,7 @@ extern THREAD_OBJECT _thread_;
 #define EXP_SIZE()              (tget(_EXP_) - &tget(Double_Stack)[-1])
 #define EMPTY_EXP()             (EXP_SIZE() == 0) 
 #define EXP()                   (tget(_EXP_) + HEADER_SIZE)
+#define SET_EXP(value)			tset(_EXP_, (value))
 
 extern void pinocchio_main(int argc, const char ** argv);
 extern void init_Error_Handler();

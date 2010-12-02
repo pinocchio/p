@@ -11,22 +11,22 @@ static Symbol SMB_evaluate_;
 
 void reset_thread(Thread thread)
 {
-    thread->_EXP_            = &thread->Double_Stack[-1];
-    thread->_ENV_            = nil;
-    thread->next_interpreter = nil;
-    thread->storage          = new_IdentityDictionary();
+    thread->_EXP_            = &thread->Double_Stack[0];
 }
 
 Thread new_Thread(uns_int size)
 {
     NEW_ARRAY_OBJECT(Thread, Optr[size]);
-    result->size  = size;
+    result->size             = size;
+    result->next_interpreter = nil;
+    result->storage          = new_IdentityDictionary();
     reset_thread(result);
     return result;
 }
 
 void yield()
 {
+    _thread_->backup_rv = return_value();
     _thread_->backup_pc = pc;
     Thread previous     = _thread_;
     _thread_            = _scheduler_thread_;
@@ -48,12 +48,15 @@ NATIVE0(Thread_primYield)
 NATIVE0(Thread_resume)
     Thread next_thread  = (Thread)self;
     _thread_->backup_pc = pc;
+    _thread_->backup_rv = return_value();
     RETURN_FROM_NATIVE(nil);
+    set_return_value(next_thread->backup_rv);
     pc       = next_thread->backup_pc;
     _thread_ = next_thread;
 }
 
 NATIVE1(Thread_new_)
+    assert0(NULL);
     Optr value          = NATIVE_ARG(0);
     _thread_->backup_pc = pc;
     Thread previous     = _thread_;
