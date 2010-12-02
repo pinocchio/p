@@ -50,7 +50,7 @@ static BlockContext activate_block(BlockClosure closure)
 static void BlockClosure_apply()
 {
     // FIXME convert to new style of applying
-    BlockClosure closure = (BlockClosure)current_env()->outer_scope;
+    BlockClosure closure = (BlockClosure)((MethodContext)current_env())->self;
     Block block = closure->code;
     assert1(
         current_env()->size == block->params->size,
@@ -94,7 +94,11 @@ NATIVE1(BlockClosure_valueWithArguments_)
     Array args = (Array)NATIVE_ARG(0);
     ASSERT_TAG_LAYOUT(GETTAG(args), Array);
 
-    // FIXME copy arguments into frame
+    CLAIM_EXP(args->size - 1);
+    uns_int idx;
+    for (idx = 0; idx < args->size; idx++) {
+        current_env()->locals[idx] = args->values[idx];
+    }
     
     BlockClosure_apply();
 }

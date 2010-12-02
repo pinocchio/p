@@ -46,7 +46,7 @@ NATIVE0(Thread_primYield)
 }
 
 NATIVE0(Thread_resume)
-    Thread next_thread = (Thread) self;
+    Thread next_thread  = (Thread)self;
     _thread_->backup_pc = pc;
     RETURN_FROM_NATIVE(nil);
     pc       = next_thread->backup_pc;
