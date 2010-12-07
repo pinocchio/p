@@ -24,63 +24,63 @@ Optr layout_WebClient_Core_WebServer;
 static void init_SMB_asyncHandleConnectionFrom_() {
     Symbol SMB_asyncHandleConnectionFrom_ = new_Symbol(L"asyncHandleConnectionFrom:");
     Variable VAR_aSocket_0_0 = new_Variable_named(L"aSocket", 0);
-    Array PArray22233 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
+    Array PArray22603 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
     Variable VAR_handlerProcess_0_1 = new_Variable_named(L"handlerProcess", 0);
-    Array PArray22234 = new_Array_with(1, (Optr)VAR_handlerProcess_0_1);
+    Array PArray22604 = new_Array_with(1, (Optr)VAR_handlerProcess_0_1);
     Symbol SMB_handleConnectionFrom_ = new_Symbol(L"handleConnectionFrom:");
     // handleConnectionFrom:. 
-    Send PSend22244 = new_Send((Optr)self, SMB_handleConnectionFrom_, 1, (Optr)VAR_aSocket_0_0);
-    Array PThreadedCode22243 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send1, (Optr)PSend22244, (Optr)&t_block_return);
-    Block PBlock22242 = new_Block_with(empty_Array, empty_Array, PThreadedCode22243, 1, PSend22244);
+    Send PSend22614 = new_Send((Optr)self, SMB_handleConnectionFrom_, 1, (Optr)VAR_aSocket_0_0);
+    Array PThreadedCode22613 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send1, (Optr)PSend22614, (Optr)&t_block_return);
+    Block PBlock22612 = new_Block_with(empty_Array, empty_Array, PThreadedCode22613, 1, PSend22614);
     Variable VAR_ex_1_0 = new_Variable_named(L"ex", 1);
-    Array PArray22246 = new_Array_with(1, (Optr)VAR_ex_1_0);
+    Array PArray22616 = new_Array_with(1, (Optr)VAR_ex_1_0);
     Symbol SMB_destroy = new_Symbol(L"destroy");
     // destroy. 
-    Send PSend22248 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
-    Array PThreadedCode22247 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22248, (Optr)&t_method_return);
-    Block PBlock22245 = new_Block_with(PArray22246, empty_Array, PThreadedCode22247, 1, PSend22248);
+    Send PSend22618 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
+    Array PThreadedCode22617 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22618, (Optr)&t_method_return);
+    Block PBlock22615 = new_Block_with(PArray22616, empty_Array, PThreadedCode22617, 1, PSend22618);
     Symbol SMB_on_do_ = new_Symbol(L"on:do:");
     // on:do:. 
-    Send PSend22249 = new_Send((Optr)PBlock22242, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22245);
+    Send PSend22619 = new_Send((Optr)PBlock22612, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22615);
     Symbol SMB_current = new_Symbol(L"current");
     // current. 
-    Send PSend22252 = new_Send((Optr)PThread_classReference, SMB_current, 0);
-    Array PThreadedCode22254 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22253 = new_Block_with(empty_Array, empty_Array, PThreadedCode22254, 0);
+    Send PSend22622 = new_Send((Optr)PThread_classReference, SMB_current, 0);
+    Array PThreadedCode22624 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock22623 = new_Block_with(empty_Array, empty_Array, PThreadedCode22624, 0);
     Symbol SMB_remove_ifAbsent_ = new_Symbol(L"remove:ifAbsent:");
     // remove:ifAbsent:. 
-    Send PSend22255 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_remove_ifAbsent_, 2, (Optr)PSend22252, (Optr)PBlock22253);
-    Array PThreadedCode22251 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_class_reference, (Optr)PThread_classReference, (Optr)&t_send0, (Optr)PSend22252, (Optr)&t_push_closure, (Optr)PBlock22253, (Optr)&t_send2, (Optr)PSend22255, (Optr)&t_block_return);
-    Block PBlock22250 = new_Block_with(empty_Array, empty_Array, PThreadedCode22251, 1, PSend22255);
+    Send PSend22625 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_remove_ifAbsent_, 2, (Optr)PSend22622, (Optr)PBlock22623);
+    Array PThreadedCode22621 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_class_reference, (Optr)PThread_classReference, (Optr)&t_send0, (Optr)PSend22622, (Optr)&t_push_closure, (Optr)PBlock22623, (Optr)&t_send2, (Optr)PSend22625, (Optr)&t_block_return);
+    Block PBlock22620 = new_Block_with(empty_Array, empty_Array, PThreadedCode22621, 1, PSend22625);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22256 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22250);
-    Array PThreadedCode22241 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_closure, (Optr)PBlock22242, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22245, (Optr)&t_send2, (Optr)PSend22249, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22250, (Optr)&t_send1, (Optr)PSend22256, (Optr)&t_block_return);
-    Block PBlock22240 = new_Block_with(empty_Array, empty_Array, PThreadedCode22241, 2, PSend22249, PSend22256);
+    Send PSend22626 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22620);
+    Array PThreadedCode22611 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_closure, (Optr)PBlock22612, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22615, (Optr)&t_send2, (Optr)PSend22619, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22620, (Optr)&t_send1, (Optr)PSend22626, (Optr)&t_block_return);
+    Block PBlock22610 = new_Block_with(empty_Array, empty_Array, PThreadedCode22611, 2, PSend22619, PSend22626);
     // destroy. 
-    Send PSend22259 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
-    Array PThreadedCode22258 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22259, (Optr)&t_block_return);
-    Block PBlock22257 = new_Block_with(empty_Array, empty_Array, PThreadedCode22258, 1, PSend22259);
+    Send PSend22629 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
+    Array PThreadedCode22628 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22629, (Optr)&t_block_return);
+    Block PBlock22627 = new_Block_with(empty_Array, empty_Array, PThreadedCode22628, 1, PSend22629);
     Symbol SMB_ensure_ = new_Symbol(L"ensure:");
     // ensure:. 
-    Send PSend22260 = new_Send((Optr)PBlock22240, SMB_ensure_, 1, (Optr)PBlock22257);
-    Array PThreadedCode22239 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22240, (Optr)&t_push_closure, (Optr)PBlock22257, (Optr)&t_send1, (Optr)PSend22260, (Optr)&t_block_return);
-    Block PBlock22238 = new_Block_with(empty_Array, empty_Array, PThreadedCode22239, 1, PSend22260);
+    Send PSend22630 = new_Send((Optr)PBlock22610, SMB_ensure_, 1, (Optr)PBlock22627);
+    Array PThreadedCode22609 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22610, (Optr)&t_push_closure, (Optr)PBlock22627, (Optr)&t_send1, (Optr)PSend22630, (Optr)&t_block_return);
+    Block PBlock22608 = new_Block_with(empty_Array, empty_Array, PThreadedCode22609, 1, PSend22630);
     Symbol SMB_fork = new_Symbol(L"fork");
     // fork. 
-    Send PSend22237 = new_Send((Optr)PBlock22238, SMB_fork, 0);
-    Assign PAssign22236 = new_Assign((Optr)VAR_handlerProcess_0_1, (Optr)PSend22237);
+    Send PSend22607 = new_Send((Optr)PBlock22608, SMB_fork, 0);
+    Assign PAssign22606 = new_Assign((Optr)VAR_handlerProcess_0_1, (Optr)PSend22607);
     Symbol SMB_add_ = new_Symbol(L"add:");
     // add:. 
-    Send PSend22263 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_add_, 1, (Optr)VAR_handlerProcess_0_1);
-    Array PThreadedCode22262 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_variable, (Optr)VAR_handlerProcess_0_1, (Optr)&t_send1, (Optr)PSend22263, (Optr)&t_block_return);
-    Block PBlock22261 = new_Block_with(empty_Array, empty_Array, PThreadedCode22262, 1, PSend22263);
+    Send PSend22633 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_add_, 1, (Optr)VAR_handlerProcess_0_1);
+    Array PThreadedCode22632 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_variable, (Optr)VAR_handlerProcess_0_1, (Optr)&t_send1, (Optr)PSend22633, (Optr)&t_block_return);
+    Block PBlock22631 = new_Block_with(empty_Array, empty_Array, PThreadedCode22632, 1, PSend22633);
     // critical:. 
-    Send PSend22264 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22261);
-    Array PThreadedCode22235 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)PAssign22236, (Optr)&t_push_closure, (Optr)PBlock22238, (Optr)&t_send0, (Optr)PSend22237, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22261, (Optr)&t_send1, (Optr)PSend22264, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22232 = new_Method_with(PArray22233, PArray22234, empty_Array, PThreadedCode22235, 3, PAssign22236, PSend22264, self);
+    Send PSend22634 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22631);
+    Array PThreadedCode22605 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)PAssign22606, (Optr)&t_push_closure, (Optr)PBlock22608, (Optr)&t_send0, (Optr)PSend22607, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22631, (Optr)&t_send1, (Optr)PSend22634, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22602 = new_Method_with(PArray22603, PArray22604, empty_Array, PThreadedCode22605, 3, PAssign22606, PSend22634, self);
     
-    MethodClosure MC_SMB_asyncHandleConnectionFrom_ = new_MethodClosure((Method)PMethod22232, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_asyncHandleConnectionFrom_ = new_MethodClosure((Method)PMethod22602, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_asyncHandleConnectionFrom_, MC_SMB_asyncHandleConnectionFrom_);
 }
 
@@ -89,50 +89,50 @@ static void init_SMB_sessionAt_ifAbsentPut_() {
     Symbol SMB_sessionAt_ifAbsentPut_ = new_Symbol(L"sessionAt:ifAbsentPut:");
     Variable VAR_key_0_0 = new_Variable_named(L"key", 0);
     Variable VAR_session_0_1 = new_Variable_named(L"session", 0);
-    Array PArray22266 = new_Array_with(2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
-    Array PThreadedCode22271 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_session_0_1, (Optr)&t_block_return);
-    Block PBlock22270 = new_Block_with(empty_Array, empty_Array, PThreadedCode22271, 1, VAR_session_0_1);
+    Array PArray22636 = new_Array_with(2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
+    Array PThreadedCode22641 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_session_0_1, (Optr)&t_block_return);
+    Block PBlock22640 = new_Block_with(empty_Array, empty_Array, PThreadedCode22641, 1, VAR_session_0_1);
     Symbol SMB_at_ifAbsentPut_ = new_Symbol(L"at:ifAbsentPut:");
     // at:ifAbsentPut:. 
-    Send PSend22272 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_ifAbsentPut_, 2, (Optr)VAR_key_0_0, (Optr)PBlock22270);
-    Array PThreadedCode22269 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_closure, (Optr)PBlock22270, (Optr)&t_send2, (Optr)PSend22272, (Optr)&t_block_return);
-    Block PBlock22268 = new_Block_with(empty_Array, empty_Array, PThreadedCode22269, 1, PSend22272);
+    Send PSend22642 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_ifAbsentPut_, 2, (Optr)VAR_key_0_0, (Optr)PBlock22640);
+    Array PThreadedCode22639 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_closure, (Optr)PBlock22640, (Optr)&t_send2, (Optr)PSend22642, (Optr)&t_block_return);
+    Block PBlock22638 = new_Block_with(empty_Array, empty_Array, PThreadedCode22639, 1, PSend22642);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22273 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22268);
-    Array PThreadedCode22267 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22268, (Optr)&t_send1, (Optr)PSend22273, (Optr)&t_method_return);
-    Method PMethod22265 = new_Method_with(PArray22266, empty_Array, empty_Array, PThreadedCode22267, 1, PSend22273);
+    Send PSend22643 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22638);
+    Array PThreadedCode22637 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22638, (Optr)&t_send1, (Optr)PSend22643, (Optr)&t_method_return);
+    Method PMethod22635 = new_Method_with(PArray22636, empty_Array, empty_Array, PThreadedCode22637, 1, PSend22643);
     
-    MethodClosure MC_SMB_sessionAt_ifAbsentPut_ = new_MethodClosure((Method)PMethod22265, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_sessionAt_ifAbsentPut_ = new_MethodClosure((Method)PMethod22635, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_sessionAt_ifAbsentPut_, MC_SMB_sessionAt_ifAbsentPut_);
 }
 
 
 static void init_SMB_accessLog() {
     Symbol SMB_accessLog = new_Symbol(L"accessLog");
-    Array PThreadedCode22275 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)&t_method_return);
-    Method PMethod22274 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22275, 1, slot_WebClient_Core_WebServer_accessLog);
+    Array PThreadedCode22645 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)&t_method_return);
+    Method PMethod22644 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22645, 1, slot_WebClient_Core_WebServer_accessLog);
     
-    MethodClosure MC_SMB_accessLog = new_MethodClosure((Method)PMethod22274, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_accessLog = new_MethodClosure((Method)PMethod22644, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_accessLog, MC_SMB_accessLog);
 }
 
 
 static void init_SMB_builtinHttpMethods() {
     Symbol SMB_builtinHttpMethods = new_Symbol(L"builtinHttpMethods");
-    String string_22278 = new_String(L"HEAD");
-    String string_22279 = new_String(L"TRACE");
-    String string_22280 = new_String(L"OPTIONS");
+    String string_22648 = new_String(L"HEAD");
+    String string_22649 = new_String(L"TRACE");
+    String string_22650 = new_String(L"OPTIONS");
     Symbol SMB_with_with_with_ = new_Symbol(L"with:with:with:");
-    Constant string_22278_Const = new_Constant((Optr)string_22278);
-    Constant string_22279_Const = new_Constant((Optr)string_22279);
-    Constant string_22280_Const = new_Constant((Optr)string_22280);
+    Constant string_22648_Const = new_Constant((Optr)string_22648);
+    Constant string_22649_Const = new_Constant((Optr)string_22649);
+    Constant string_22650_Const = new_Constant((Optr)string_22650);
     // with:with:with:. 
-    Send PSend22281 = new_Send((Optr)Array_classReference, SMB_with_with_with_, 3, (Optr)string_22278_Const, (Optr)string_22279_Const, (Optr)string_22280_Const);
-    Array PThreadedCode22277 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_22278, (Optr)&t_push1, (Optr)string_22279, (Optr)&t_push1, (Optr)string_22280, (Optr)&t_send3, (Optr)PSend22281, (Optr)&t_method_return);
-    Method PMethod22276 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22277, 1, PSend22281);
+    Send PSend22651 = new_Send((Optr)Array_classReference, SMB_with_with_with_, 3, (Optr)string_22648_Const, (Optr)string_22649_Const, (Optr)string_22650_Const);
+    Array PThreadedCode22647 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_22648, (Optr)&t_push1, (Optr)string_22649, (Optr)&t_push1, (Optr)string_22650, (Optr)&t_send3, (Optr)PSend22651, (Optr)&t_method_return);
+    Method PMethod22646 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22647, 1, PSend22651);
     
-    MethodClosure MC_SMB_builtinHttpMethods = new_MethodClosure((Method)PMethod22276, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_builtinHttpMethods = new_MethodClosure((Method)PMethod22646, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_builtinHttpMethods, MC_SMB_builtinHttpMethods);
 }
 
@@ -141,26 +141,26 @@ static void init_SMB_logRequest_response_() {
     Symbol SMB_logRequest_response_ = new_Symbol(L"logRequest:response:");
     Variable VAR_request_0_0 = new_Variable_named(L"request", 0);
     Variable VAR_response_0_1 = new_Variable_named(L"response", 0);
-    Array PArray22283 = new_Array_with(2, (Optr)VAR_request_0_0, (Optr)VAR_response_0_1);
+    Array PArray22653 = new_Array_with(2, (Optr)VAR_request_0_0, (Optr)VAR_response_0_1);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray22286 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray22656 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend22290 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)self);
-    Array PThreadedCode22289 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend22290, (Optr)&t_block_return);
-    Block PBlock22288 = new_Block_with(empty_Array, empty_Array, PThreadedCode22289, 1, PSend22290);
+    Send PSend22660 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)self);
+    Array PThreadedCode22659 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend22660, (Optr)&t_block_return);
+    Block PBlock22658 = new_Block_with(empty_Array, empty_Array, PThreadedCode22659, 1, PSend22660);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend22291 = new_Send((Optr)slot_WebClient_Core_WebServer_accessLog, SMB_ifNil_, 1, (Optr)PBlock22288);
-    Array PThreadedCode22287 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)&t_push_closure, (Optr)PBlock22288, (Optr)&t_send1, (Optr)PSend22291, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock22285 = new_Block_with(PArray22286, empty_Array, PThreadedCode22287, 2, PSend22291, self);
+    Send PSend22661 = new_Send((Optr)slot_WebClient_Core_WebServer_accessLog, SMB_ifNil_, 1, (Optr)PBlock22658);
+    Array PThreadedCode22657 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)&t_push_closure, (Optr)PBlock22658, (Optr)&t_send1, (Optr)PSend22661, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock22655 = new_Block_with(PArray22656, empty_Array, PThreadedCode22657, 2, PSend22661, self);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend22292 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22285);
-    Array PThreadedCode22284 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22285, (Optr)&t_send1, (Optr)PSend22292, (Optr)&t_method_return);
-    Method PMethod22282 = new_Method_with(PArray22283, empty_Array, empty_Array, PThreadedCode22284, 1, PSend22292);
+    Send PSend22662 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22655);
+    Array PThreadedCode22654 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22655, (Optr)&t_send1, (Optr)PSend22662, (Optr)&t_method_return);
+    Method PMethod22652 = new_Method_with(PArray22653, empty_Array, empty_Array, PThreadedCode22654, 1, PSend22662);
     
-    MethodClosure MC_SMB_logRequest_response_ = new_MethodClosure((Method)PMethod22282, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_logRequest_response_ = new_MethodClosure((Method)PMethod22652, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_logRequest_response_, MC_SMB_logRequest_response_);
 }
 
@@ -168,24 +168,24 @@ static void init_SMB_logRequest_response_() {
 static void init_SMB_listenOn_() {
     Symbol SMB_listenOn_ = new_Symbol(L"listenOn:");
     Variable VAR_aPort_0_0 = new_Variable_named(L"aPort", 0);
-    Array PArray22294 = new_Array_with(1, (Optr)VAR_aPort_0_0);
+    Array PArray22664 = new_Array_with(1, (Optr)VAR_aPort_0_0);
     Symbol SMB_listenOn_interface_ = new_Symbol(L"listenOn:interface:");
     // listenOn:interface:. 
-    Send PSend22296 = new_Send((Optr)self, SMB_listenOn_interface_, 2, (Optr)VAR_aPort_0_0, (Optr)nil_Const);
-    Array PThreadedCode22295 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_push_nil, (Optr)&t_send2, (Optr)PSend22296, (Optr)&t_method_return);
-    Method PMethod22293 = new_Method_with(PArray22294, empty_Array, empty_Array, PThreadedCode22295, 1, PSend22296);
+    Send PSend22666 = new_Send((Optr)self, SMB_listenOn_interface_, 2, (Optr)VAR_aPort_0_0, (Optr)nil_Const);
+    Array PThreadedCode22665 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_push_nil, (Optr)&t_send2, (Optr)PSend22666, (Optr)&t_method_return);
+    Method PMethod22663 = new_Method_with(PArray22664, empty_Array, empty_Array, PThreadedCode22665, 1, PSend22666);
     
-    MethodClosure MC_SMB_listenOn_ = new_MethodClosure((Method)PMethod22293, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenOn_ = new_MethodClosure((Method)PMethod22663, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenOn_, MC_SMB_listenOn_);
 }
 
 
 static void init_SMB_listenerProcess() {
     Symbol SMB_listenerProcess = new_Symbol(L"listenerProcess");
-    Array PThreadedCode22298 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_method_return);
-    Method PMethod22297 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22298, 1, slot_WebClient_Core_WebServer_listenerProcess);
+    Array PThreadedCode22668 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_method_return);
+    Method PMethod22667 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22668, 1, slot_WebClient_Core_WebServer_listenerProcess);
     
-    MethodClosure MC_SMB_listenerProcess = new_MethodClosure((Method)PMethod22297, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenerProcess = new_MethodClosure((Method)PMethod22667, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenerProcess, MC_SMB_listenerProcess);
 }
 
@@ -193,76 +193,76 @@ static void init_SMB_listenerProcess() {
 static void init_SMB_reportBadRequestOn_() {
     Symbol SMB_reportBadRequestOn_ = new_Symbol(L"reportBadRequestOn:");
     Variable VAR_aSocket_0_0 = new_Variable_named(L"aSocket", 0);
-    Array PArray22300 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
+    Array PArray22670 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
     Variable VAR_message_0_1 = new_Variable_named(L"message", 0);
-    Array PArray22301 = new_Array_with(1, (Optr)VAR_message_0_1);
-    String string_22305 = new_String(L"<html><head><title>400 Bad Request</title></head><body>");
-    Constant string_22305_Const = new_Constant((Optr)string_22305);
+    Array PArray22671 = new_Array_with(1, (Optr)VAR_message_0_1);
+    String string_22675 = new_String(L"<html><head><title>400 Bad Request</title></head><body>");
+    Constant string_22675_Const = new_Constant((Optr)string_22675);
     Symbol SMB__append_ = new_Symbol(L",");
-    String string_22306 = new_String(L"<h1>Bad Request</h1>\n\t\t<p>The server encountered a request it did not understand.\n\t\t</body></html>");
-    Constant string_22306_Const = new_Constant((Optr)string_22306);
+    String string_22676 = new_String(L"<h1>Bad Request</h1>\n\t\t<p>The server encountered a request it did not understand.\n\t\t</body></html>");
+    Constant string_22676_Const = new_Constant((Optr)string_22676);
     // ,. 
-    Send PSend22304 = new_Send((Optr)string_22305_Const, SMB__append_, 1, (Optr)string_22306_Const);
-    Assign PAssign22303 = new_Assign((Optr)VAR_message_0_1, (Optr)PSend22304);
-    String string_22309 = new_String(L"HTTP/1.0 400 Bad Request");
+    Send PSend22674 = new_Send((Optr)string_22675_Const, SMB__append_, 1, (Optr)string_22676_Const);
+    Assign PAssign22673 = new_Assign((Optr)VAR_message_0_1, (Optr)PSend22674);
+    String string_22679 = new_String(L"HTTP/1.0 400 Bad Request");
     Symbol SMB_crlf = new_Symbol(L"crlf");
     // crlf. 
-    Send PSend22310 = new_Send((Optr)String_classReference, SMB_crlf, 0);
-    Constant string_22309_Const = new_Constant((Optr)string_22309);
+    Send PSend22680 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Constant string_22679_Const = new_Constant((Optr)string_22679);
     // ,. 
-    Send PSend22311 = new_Send((Optr)string_22309_Const, SMB__append_, 1, (Optr)PSend22310);
-    String string_22312 = new_String(L"Content-Type:\ttext/html; charset=utf-8");
-    Constant string_22312_Const = new_Constant((Optr)string_22312);
+    Send PSend22681 = new_Send((Optr)string_22679_Const, SMB__append_, 1, (Optr)PSend22680);
+    String string_22682 = new_String(L"Content-Type:\ttext/html; charset=utf-8");
+    Constant string_22682_Const = new_Constant((Optr)string_22682);
     // ,. 
-    Send PSend22313 = new_Send((Optr)PSend22311, SMB__append_, 1, (Optr)string_22312_Const);
+    Send PSend22683 = new_Send((Optr)PSend22681, SMB__append_, 1, (Optr)string_22682_Const);
     // crlf. 
-    Send PSend22314 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Send PSend22684 = new_Send((Optr)String_classReference, SMB_crlf, 0);
     // ,. 
-    Send PSend22315 = new_Send((Optr)PSend22313, SMB__append_, 1, (Optr)PSend22314);
-    String string_22316 = new_String(L"Connection: close");
-    Constant string_22316_Const = new_Constant((Optr)string_22316);
+    Send PSend22685 = new_Send((Optr)PSend22683, SMB__append_, 1, (Optr)PSend22684);
+    String string_22686 = new_String(L"Connection: close");
+    Constant string_22686_Const = new_Constant((Optr)string_22686);
     // ,. 
-    Send PSend22317 = new_Send((Optr)PSend22315, SMB__append_, 1, (Optr)string_22316_Const);
+    Send PSend22687 = new_Send((Optr)PSend22685, SMB__append_, 1, (Optr)string_22686_Const);
     // crlf. 
-    Send PSend22318 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Send PSend22688 = new_Send((Optr)String_classReference, SMB_crlf, 0);
     // ,. 
-    Send PSend22319 = new_Send((Optr)PSend22317, SMB__append_, 1, (Optr)PSend22318);
-    String string_22320 = new_String(L"Content-Length: ");
-    Constant string_22320_Const = new_Constant((Optr)string_22320);
+    Send PSend22689 = new_Send((Optr)PSend22687, SMB__append_, 1, (Optr)PSend22688);
+    String string_22690 = new_String(L"Content-Length: ");
+    Constant string_22690_Const = new_Constant((Optr)string_22690);
     // ,. 
-    Send PSend22321 = new_Send((Optr)PSend22319, SMB__append_, 1, (Optr)string_22320_Const);
+    Send PSend22691 = new_Send((Optr)PSend22689, SMB__append_, 1, (Optr)string_22690_Const);
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
-    Send PSend22322 = new_Send((Optr)VAR_message_0_1, SMB_size, 0);
+    Send PSend22692 = new_Send((Optr)VAR_message_0_1, SMB_size, 0);
     Symbol SMB_asString = new_Symbol(L"asString");
     // asString. 
-    Send PSend22323 = new_Send((Optr)PSend22322, SMB_asString, 0);
+    Send PSend22693 = new_Send((Optr)PSend22692, SMB_asString, 0);
     // ,. 
-    Send PSend22324 = new_Send((Optr)PSend22321, SMB__append_, 1, (Optr)PSend22323);
+    Send PSend22694 = new_Send((Optr)PSend22691, SMB__append_, 1, (Optr)PSend22693);
     // crlf. 
-    Send PSend22325 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Send PSend22695 = new_Send((Optr)String_classReference, SMB_crlf, 0);
     // ,. 
-    Send PSend22326 = new_Send((Optr)PSend22324, SMB__append_, 1, (Optr)PSend22325);
+    Send PSend22696 = new_Send((Optr)PSend22694, SMB__append_, 1, (Optr)PSend22695);
     // crlf. 
-    Send PSend22327 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Send PSend22697 = new_Send((Optr)String_classReference, SMB_crlf, 0);
     // ,. 
-    Send PSend22328 = new_Send((Optr)PSend22326, SMB__append_, 1, (Optr)PSend22327);
+    Send PSend22698 = new_Send((Optr)PSend22696, SMB__append_, 1, (Optr)PSend22697);
     // ,. 
-    Send PSend22329 = new_Send((Optr)PSend22328, SMB__append_, 1, (Optr)VAR_message_0_1);
+    Send PSend22699 = new_Send((Optr)PSend22698, SMB__append_, 1, (Optr)VAR_message_0_1);
     Symbol SMB_sendData_ = new_Symbol(L"sendData:");
     // sendData:. 
-    Send PSend22330 = new_Send((Optr)VAR_aSocket_0_0, SMB_sendData_, 1, (Optr)PSend22329);
-    Array PThreadedCode22308 = instantiate_Array_with(ThreadedCode_Class, 0, 61, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_push1, (Optr)string_22309, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22310, (Optr)&t_send1, (Optr)PSend22311, (Optr)&t_push1, (Optr)string_22312, (Optr)&t_send1, (Optr)PSend22313, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22314, (Optr)&t_send1, (Optr)PSend22315, (Optr)&t_push1, (Optr)string_22316, (Optr)&t_send1, (Optr)PSend22317, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22318, (Optr)&t_send1, (Optr)PSend22319, (Optr)&t_push1, (Optr)string_22320, (Optr)&t_send1, (Optr)PSend22321, (Optr)&t_push_variable, (Optr)VAR_message_0_1, (Optr)&t_send0, (Optr)PSend22322, (Optr)&t_send0, (Optr)PSend22323, (Optr)&t_send1, (Optr)PSend22324, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22325, (Optr)&t_send1, (Optr)PSend22326, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22327, (Optr)&t_send1, (Optr)PSend22328, (Optr)&t_push_variable, (Optr)VAR_message_0_1, (Optr)&t_send1, (Optr)PSend22329, (Optr)&t_send1, (Optr)PSend22330, (Optr)&t_block_return);
-    Block PBlock22307 = new_Block_with(empty_Array, empty_Array, PThreadedCode22308, 1, PSend22330);
-    Array PThreadedCode22332 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22331 = new_Block_with(empty_Array, empty_Array, PThreadedCode22332, 0);
+    Send PSend22700 = new_Send((Optr)VAR_aSocket_0_0, SMB_sendData_, 1, (Optr)PSend22699);
+    Array PThreadedCode22678 = instantiate_Array_with(ThreadedCode_Class, 0, 61, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_push1, (Optr)string_22679, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22680, (Optr)&t_send1, (Optr)PSend22681, (Optr)&t_push1, (Optr)string_22682, (Optr)&t_send1, (Optr)PSend22683, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22684, (Optr)&t_send1, (Optr)PSend22685, (Optr)&t_push1, (Optr)string_22686, (Optr)&t_send1, (Optr)PSend22687, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22688, (Optr)&t_send1, (Optr)PSend22689, (Optr)&t_push1, (Optr)string_22690, (Optr)&t_send1, (Optr)PSend22691, (Optr)&t_push_variable, (Optr)VAR_message_0_1, (Optr)&t_send0, (Optr)PSend22692, (Optr)&t_send0, (Optr)PSend22693, (Optr)&t_send1, (Optr)PSend22694, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22695, (Optr)&t_send1, (Optr)PSend22696, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22697, (Optr)&t_send1, (Optr)PSend22698, (Optr)&t_push_variable, (Optr)VAR_message_0_1, (Optr)&t_send1, (Optr)PSend22699, (Optr)&t_send1, (Optr)PSend22700, (Optr)&t_block_return);
+    Block PBlock22677 = new_Block_with(empty_Array, empty_Array, PThreadedCode22678, 1, PSend22700);
+    Array PThreadedCode22702 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock22701 = new_Block_with(empty_Array, empty_Array, PThreadedCode22702, 0);
     Symbol SMB_on_do_ = new_Symbol(L"on:do:");
     // on:do:. 
-    Send PSend22333 = new_Send((Optr)PBlock22307, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22331);
-    Array PThreadedCode22302 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push1, (Optr)PAssign22303, (Optr)&t_push1, (Optr)string_22305, (Optr)&t_push1, (Optr)string_22306, (Optr)&t_send1, (Optr)PSend22304, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22307, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22331, (Optr)&t_send2, (Optr)PSend22333, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22299 = new_Method_with(PArray22300, PArray22301, empty_Array, PThreadedCode22302, 3, PAssign22303, PSend22333, self);
+    Send PSend22703 = new_Send((Optr)PBlock22677, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22701);
+    Array PThreadedCode22672 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push1, (Optr)PAssign22673, (Optr)&t_push1, (Optr)string_22675, (Optr)&t_push1, (Optr)string_22676, (Optr)&t_send1, (Optr)PSend22674, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22677, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22701, (Optr)&t_send2, (Optr)PSend22703, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22669 = new_Method_with(PArray22670, PArray22671, empty_Array, PThreadedCode22672, 3, PAssign22673, PSend22703, self);
     
-    MethodClosure MC_SMB_reportBadRequestOn_ = new_MethodClosure((Method)PMethod22299, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_reportBadRequestOn_ = new_MethodClosure((Method)PMethod22669, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_reportBadRequestOn_, MC_SMB_reportBadRequestOn_);
 }
 
@@ -270,22 +270,22 @@ static void init_SMB_reportBadRequestOn_() {
 static void init_SMB_serverString_() {
     Symbol SMB_serverString_ = new_Symbol(L"serverString:");
     Variable VAR_aString_0_0 = new_Variable_named(L"aString", 0);
-    Array PArray22335 = new_Array_with(1, (Optr)VAR_aString_0_0);
-    Assign PAssign22337 = new_Assign((Optr)slot_WebClient_Core_WebServer_serverString, (Optr)VAR_aString_0_0);
-    Array PThreadedCode22336 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)PAssign22337, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_method_return);
-    Method PMethod22334 = new_Method_with(PArray22335, empty_Array, empty_Array, PThreadedCode22336, 1, PAssign22337);
+    Array PArray22705 = new_Array_with(1, (Optr)VAR_aString_0_0);
+    Assign PAssign22707 = new_Assign((Optr)slot_WebClient_Core_WebServer_serverString, (Optr)VAR_aString_0_0);
+    Array PThreadedCode22706 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)PAssign22707, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_method_return);
+    Method PMethod22704 = new_Method_with(PArray22705, empty_Array, empty_Array, PThreadedCode22706, 1, PAssign22707);
     
-    MethodClosure MC_SMB_serverString_ = new_MethodClosure((Method)PMethod22334, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_serverString_ = new_MethodClosure((Method)PMethod22704, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_serverString_, MC_SMB_serverString_);
 }
 
 
 static void init_SMB_logAction() {
     Symbol SMB_logAction = new_Symbol(L"logAction");
-    Array PThreadedCode22339 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_method_return);
-    Method PMethod22338 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22339, 1, slot_WebClient_Core_WebServer_logAction);
+    Array PThreadedCode22709 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_method_return);
+    Method PMethod22708 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22709, 1, slot_WebClient_Core_WebServer_logAction);
     
-    MethodClosure MC_SMB_logAction = new_MethodClosure((Method)PMethod22338, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_logAction = new_MethodClosure((Method)PMethod22708, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_logAction, MC_SMB_logAction);
 }
 
@@ -294,20 +294,20 @@ static void init_SMB_startListener() {
     Symbol SMB_startListener = new_Symbol(L"startListener");
     Symbol SMB_stopListener = new_Symbol(L"stopListener");
     // stopListener. 
-    Send PSend22342 = new_Send((Optr)self, SMB_stopListener, 0);
+    Send PSend22712 = new_Send((Optr)self, SMB_stopListener, 0);
     Symbol SMB_runListener = new_Symbol(L"runListener");
     // runListener. 
-    Send PSend22347 = new_Send((Optr)self, SMB_runListener, 0);
-    Array PThreadedCode22346 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22347, (Optr)&t_block_return);
-    Block PBlock22345 = new_Block_with(empty_Array, empty_Array, PThreadedCode22346, 1, PSend22347);
+    Send PSend22717 = new_Send((Optr)self, SMB_runListener, 0);
+    Array PThreadedCode22716 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22717, (Optr)&t_block_return);
+    Block PBlock22715 = new_Block_with(empty_Array, empty_Array, PThreadedCode22716, 1, PSend22717);
     Symbol SMB_fork = new_Symbol(L"fork");
     // fork. 
-    Send PSend22344 = new_Send((Optr)PBlock22345, SMB_fork, 0);
-    Assign PAssign22343 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)PSend22344);
-    Array PThreadedCode22341 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22342, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22343, (Optr)&t_push_closure, (Optr)PBlock22345, (Optr)&t_send0, (Optr)PSend22344, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22340 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22341, 3, PSend22342, PAssign22343, self);
+    Send PSend22714 = new_Send((Optr)PBlock22715, SMB_fork, 0);
+    Assign PAssign22713 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)PSend22714);
+    Array PThreadedCode22711 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22712, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22713, (Optr)&t_push_closure, (Optr)PBlock22715, (Optr)&t_send0, (Optr)PSend22714, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22710 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22711, 3, PSend22712, PAssign22713, self);
     
-    MethodClosure MC_SMB_startListener = new_MethodClosure((Method)PMethod22340, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_startListener = new_MethodClosure((Method)PMethod22710, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_startListener, MC_SMB_startListener);
 }
 
@@ -316,50 +316,50 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend22351 = new_Send((Optr)Mutex_classReference, SMB_new, 0);
-    Assign PAssign22350 = new_Assign((Optr)slot_WebClient_Core_WebServer_mutex, (Optr)PSend22351);
+    Send PSend22721 = new_Send((Optr)Mutex_classReference, SMB_new, 0);
+    Assign PAssign22720 = new_Assign((Optr)slot_WebClient_Core_WebServer_mutex, (Optr)PSend22721);
     // new. 
-    Send PSend22353 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign22352 = new_Assign((Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)PSend22353);
+    Send PSend22723 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign22722 = new_Assign((Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)PSend22723);
     // new. 
-    Send PSend22355 = new_Send((Optr)IdentitySet_classReference, SMB_new, 0);
-    Assign PAssign22354 = new_Assign((Optr)slot_WebClient_Core_WebServer_connections, (Optr)PSend22355);
+    Send PSend22725 = new_Send((Optr)IdentitySet_classReference, SMB_new, 0);
+    Assign PAssign22724 = new_Assign((Optr)slot_WebClient_Core_WebServer_connections, (Optr)PSend22725);
     // new. 
-    Send PSend22357 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign22356 = new_Assign((Optr)slot_WebClient_Core_WebServer_vault, (Optr)PSend22357);
+    Send PSend22727 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign22726 = new_Assign((Optr)slot_WebClient_Core_WebServer_vault, (Optr)PSend22727);
     // new. 
-    Send PSend22359 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign22358 = new_Assign((Optr)slot_WebClient_Core_WebServer_nonceCache, (Optr)PSend22359);
+    Send PSend22729 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign22728 = new_Assign((Optr)slot_WebClient_Core_WebServer_nonceCache, (Optr)PSend22729);
     // new. 
-    Send PSend22361 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign22360 = new_Assign((Optr)slot_WebClient_Core_WebServer_sessions, (Optr)PSend22361);
+    Send PSend22731 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign22730 = new_Assign((Optr)slot_WebClient_Core_WebServer_sessions, (Optr)PSend22731);
     Variable VAR_aString_1_0 = new_Variable_named(L"aString", 1);
-    Array PArray22363 = new_Array_with(1, (Optr)VAR_aString_1_0);
+    Array PArray22733 = new_Array_with(1, (Optr)VAR_aString_1_0);
     Variable VAR__receiver__2_0 = new_Variable_named(L"_receiver_", 2);
-    Array PArray22366 = new_Array_with(1, (Optr)VAR__receiver__2_0);
+    Array PArray22736 = new_Array_with(1, (Optr)VAR__receiver__2_0);
     Symbol SMB_lf = new_Symbol(L"lf");
     // lf. 
-    Send PSend22368 = new_Send((Optr)VAR__receiver__2_0, SMB_lf, 0);
+    Send PSend22738 = new_Send((Optr)VAR__receiver__2_0, SMB_lf, 0);
     Symbol SMB_writeAll_ = new_Symbol(L"writeAll:");
     // writeAll:. 
-    Send PSend22369 = new_Send((Optr)VAR__receiver__2_0, SMB_writeAll_, 1, (Optr)VAR_aString_1_0);
-    Array PThreadedCode22367 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend22368, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_variable, (Optr)VAR_aString_1_0, (Optr)&t_send1, (Optr)PSend22369, (Optr)&t_method_return);
-    Block PBlock22365 = new_Block_with(PArray22366, empty_Array, PThreadedCode22367, 2, PSend22368, PSend22369);
+    Send PSend22739 = new_Send((Optr)VAR__receiver__2_0, SMB_writeAll_, 1, (Optr)VAR_aString_1_0);
+    Array PThreadedCode22737 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend22738, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_variable, (Optr)VAR_aString_1_0, (Optr)&t_send1, (Optr)PSend22739, (Optr)&t_method_return);
+    Block PBlock22735 = new_Block_with(PArray22736, empty_Array, PThreadedCode22737, 2, PSend22738, PSend22739);
     Symbol SMB_stdout = new_Symbol(L"stdout");
     // stdout. 
-    Send PSend22370 = new_Send((Optr)PFile_classReference, SMB_stdout, 0);
+    Send PSend22740 = new_Send((Optr)PFile_classReference, SMB_stdout, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend22371 = new_Send((Optr)PBlock22365, SMB_value_, 1, (Optr)PSend22370);
-    Array PThreadedCode22364 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_closure, (Optr)PBlock22365, (Optr)&t_push_class_reference, (Optr)PFile_classReference, (Optr)&t_send0, (Optr)PSend22370, (Optr)&t_send1, (Optr)PSend22371, (Optr)&t_method_return);
-    Block PBlock22362 = new_Block_with(PArray22363, empty_Array, PThreadedCode22364, 1, PSend22371);
+    Send PSend22741 = new_Send((Optr)PBlock22735, SMB_value_, 1, (Optr)PSend22740);
+    Array PThreadedCode22734 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_closure, (Optr)PBlock22735, (Optr)&t_push_class_reference, (Optr)PFile_classReference, (Optr)&t_send0, (Optr)PSend22740, (Optr)&t_send1, (Optr)PSend22741, (Optr)&t_method_return);
+    Block PBlock22732 = new_Block_with(PArray22733, empty_Array, PThreadedCode22734, 1, PSend22741);
     Symbol SMB_logAction_ = new_Symbol(L"logAction:");
     // logAction:. 
-    Send PSend22372 = new_Send((Optr)self, SMB_logAction_, 1, (Optr)PBlock22362);
-    Array PThreadedCode22349 = instantiate_Array_with(ThreadedCode_Class, 0, 55, (Optr)&t_push1, (Optr)PAssign22350, (Optr)&t_push_class_reference, (Optr)Mutex_classReference, (Optr)&t_send0, (Optr)PSend22351, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22352, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22353, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22354, (Optr)&t_push_class_reference, (Optr)IdentitySet_classReference, (Optr)&t_send0, (Optr)PSend22355, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22356, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22357, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22358, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22359, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22360, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22361, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock22362, (Optr)&t_send1, (Optr)PSend22372, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22348 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22349, 8, PAssign22350, PAssign22352, PAssign22354, PAssign22356, PAssign22358, PAssign22360, PSend22372, self);
+    Send PSend22742 = new_Send((Optr)self, SMB_logAction_, 1, (Optr)PBlock22732);
+    Array PThreadedCode22719 = instantiate_Array_with(ThreadedCode_Class, 0, 55, (Optr)&t_push1, (Optr)PAssign22720, (Optr)&t_push_class_reference, (Optr)Mutex_classReference, (Optr)&t_send0, (Optr)PSend22721, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22722, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22723, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22724, (Optr)&t_push_class_reference, (Optr)IdentitySet_classReference, (Optr)&t_send0, (Optr)PSend22725, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22726, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22727, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22728, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22729, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22730, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend22731, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock22732, (Optr)&t_send1, (Optr)PSend22742, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22718 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22719, 8, PAssign22720, PAssign22722, PAssign22724, PAssign22726, PAssign22728, PAssign22730, PSend22742, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod22348, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod22718, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -367,12 +367,12 @@ static void init_SMB_initialize() {
 static void init_SMB_errorHandler_() {
     Symbol SMB_errorHandler_ = new_Symbol(L"errorHandler:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray22374 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
-    Assign PAssign22376 = new_Assign((Optr)slot_WebClient_Core_WebServer_errorHandler, (Optr)VAR_aBlock_0_0);
-    Array PThreadedCode22375 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22376, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22373 = new_Method_with(PArray22374, empty_Array, empty_Array, PThreadedCode22375, 2, PAssign22376, self);
+    Array PArray22744 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Assign PAssign22746 = new_Assign((Optr)slot_WebClient_Core_WebServer_errorHandler, (Optr)VAR_aBlock_0_0);
+    Array PThreadedCode22745 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22746, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22743 = new_Method_with(PArray22744, empty_Array, empty_Array, PThreadedCode22745, 2, PAssign22746, self);
     
-    MethodClosure MC_SMB_errorHandler_ = new_MethodClosure((Method)PMethod22373, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_errorHandler_ = new_MethodClosure((Method)PMethod22743, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_errorHandler_, MC_SMB_errorHandler_);
 }
 
@@ -380,126 +380,126 @@ static void init_SMB_errorHandler_() {
 static void init_SMB_handleConnectionFrom_() {
     Symbol SMB_handleConnectionFrom_ = new_Symbol(L"handleConnectionFrom:");
     Variable VAR_aSocket_0_0 = new_Variable_named(L"aSocket", 0);
-    Array PArray22378 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
+    Array PArray22748 = new_Array_with(1, (Optr)VAR_aSocket_0_0);
     Variable VAR_stream_0_1 = new_Variable_named(L"stream", 0);
     Variable VAR_request_0_2 = new_Variable_named(L"request", 0);
-    Array PArray22379 = new_Array_with(2, (Optr)VAR_stream_0_1, (Optr)VAR_request_0_2);
+    Array PArray22749 = new_Array_with(2, (Optr)VAR_stream_0_1, (Optr)VAR_request_0_2);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray22382 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray22752 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend22389 = new_Send((Optr)PSocketStream_classReference, SMB_on_, 1, (Optr)VAR_aSocket_0_0);
-    Assign PAssign22388 = new_Assign((Optr)VAR_stream_0_1, (Optr)PSend22389);
-    Array PThreadedCode22387 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push1, (Optr)PAssign22388, (Optr)&t_push_class_reference, (Optr)PSocketStream_classReference, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send1, (Optr)PSend22389, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22386 = new_Block_with(empty_Array, empty_Array, PThreadedCode22387, 1, PAssign22388);
-    String string_22392 = new_String(L"No support for SSL in Pinocchio");
+    Send PSend22759 = new_Send((Optr)PSocketStream_classReference, SMB_on_, 1, (Optr)VAR_aSocket_0_0);
+    Assign PAssign22758 = new_Assign((Optr)VAR_stream_0_1, (Optr)PSend22759);
+    Array PThreadedCode22757 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push1, (Optr)PAssign22758, (Optr)&t_push_class_reference, (Optr)PSocketStream_classReference, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send1, (Optr)PSend22759, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock22756 = new_Block_with(empty_Array, empty_Array, PThreadedCode22757, 1, PAssign22758);
+    String string_22762 = new_String(L"No support for SSL in Pinocchio");
     Symbol SMB_error_ = new_Symbol(L"error:");
-    Constant string_22392_Const = new_Constant((Optr)string_22392);
+    Constant string_22762_Const = new_Constant((Optr)string_22762);
     // error:. 
-    Send PSend22393 = new_Send((Optr)self, SMB_error_, 1, (Optr)string_22392_Const);
-    Array PThreadedCode22391 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22392, (Optr)&t_send1, (Optr)PSend22393, (Optr)&t_block_return);
-    Block PBlock22390 = new_Block_with(empty_Array, empty_Array, PThreadedCode22391, 1, PSend22393);
+    Send PSend22763 = new_Send((Optr)self, SMB_error_, 1, (Optr)string_22762_Const);
+    Array PThreadedCode22761 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22762, (Optr)&t_send1, (Optr)PSend22763, (Optr)&t_block_return);
+    Block PBlock22760 = new_Block_with(empty_Array, empty_Array, PThreadedCode22761, 1, PSend22763);
     Symbol SMB_ifNil_ifNotNil_ = new_Symbol(L"ifNil:ifNotNil:");
     // ifNil:ifNotNil:. 
-    Send PSend22394 = new_Send((Optr)slot_WebClient_Core_WebServer_certName, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22386, (Optr)PBlock22390);
+    Send PSend22764 = new_Send((Optr)slot_WebClient_Core_WebServer_certName, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22756, (Optr)PBlock22760);
     Symbol SMB_isConnected = new_Symbol(L"isConnected");
     // isConnected. 
-    Send PSend22397 = new_Send((Optr)VAR_aSocket_0_0, SMB_isConnected, 0);
-    Array PThreadedCode22396 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22397, (Optr)&t_block_return);
-    Block PBlock22395 = new_Block_with(empty_Array, empty_Array, PThreadedCode22396, 1, PSend22397);
+    Send PSend22767 = new_Send((Optr)VAR_aSocket_0_0, SMB_isConnected, 0);
+    Array PThreadedCode22766 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22767, (Optr)&t_block_return);
+    Block PBlock22765 = new_Block_with(empty_Array, empty_Array, PThreadedCode22766, 1, PSend22767);
     Symbol SMB_peek = new_Symbol(L"peek");
     // peek. 
-    Send PSend22400 = new_Send((Optr)VAR_stream_0_1, SMB_peek, 0);
+    Send PSend22770 = new_Send((Optr)VAR_stream_0_1, SMB_peek, 0);
     Symbol SMB_destroy = new_Symbol(L"destroy");
     // destroy. 
-    Send PSend22403 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
+    Send PSend22773 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend22404 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22403);
-    Array PThreadedCode22402 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22403, (Optr)&t_send1, (Optr)PSend22404, (Optr)&t_block_return);
-    Block PBlock22401 = new_Block_with(empty_Array, empty_Array, PThreadedCode22402, 1, PSend22404);
+    Send PSend22774 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22773);
+    Array PThreadedCode22772 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22773, (Optr)&t_send1, (Optr)PSend22774, (Optr)&t_block_return);
+    Block PBlock22771 = new_Block_with(empty_Array, empty_Array, PThreadedCode22772, 1, PSend22774);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend22405 = new_Send((Optr)PSend22400, SMB_ifNil_, 1, (Optr)PBlock22401);
-    String string_22406 = new_String(L"WebServer>>handleConnectionFrom:: peek successful");
+    Send PSend22775 = new_Send((Optr)PSend22770, SMB_ifNil_, 1, (Optr)PBlock22771);
+    String string_22776 = new_String(L"WebServer>>handleConnectionFrom:: peek successful");
     Symbol SMB_warn_ = new_Symbol(L"warn:");
-    Constant string_22406_Const = new_Constant((Optr)string_22406);
+    Constant string_22776_Const = new_Constant((Optr)string_22776);
     // warn:. 
-    Send PSend22407 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22406_Const);
+    Send PSend22777 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22776_Const);
     Symbol SMB_newRequest = new_Symbol(L"newRequest");
     // newRequest. 
-    Send PSend22409 = new_Send((Optr)self, SMB_newRequest, 0);
-    Assign PAssign22408 = new_Assign((Optr)VAR_request_0_2, (Optr)PSend22409);
-    String string_22410 = new_String(L"WebServer>>handleConnectionFrom:: request created");
-    Constant string_22410_Const = new_Constant((Optr)string_22410);
+    Send PSend22779 = new_Send((Optr)self, SMB_newRequest, 0);
+    Assign PAssign22778 = new_Assign((Optr)VAR_request_0_2, (Optr)PSend22779);
+    String string_22780 = new_String(L"WebServer>>handleConnectionFrom:: request created");
+    Constant string_22780_Const = new_Constant((Optr)string_22780);
     // warn:. 
-    Send PSend22411 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22410_Const);
+    Send PSend22781 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22780_Const);
     Symbol SMB_readFrom_ = new_Symbol(L"readFrom:");
     // readFrom:. 
-    Send PSend22414 = new_Send((Optr)VAR_request_0_2, SMB_readFrom_, 1, (Optr)VAR_stream_0_1);
-    Array PThreadedCode22413 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_request_0_2, (Optr)&t_push_variable, (Optr)VAR_stream_0_1, (Optr)&t_send1, (Optr)PSend22414, (Optr)&t_block_return);
-    Block PBlock22412 = new_Block_with(empty_Array, empty_Array, PThreadedCode22413, 1, PSend22414);
+    Send PSend22784 = new_Send((Optr)VAR_request_0_2, SMB_readFrom_, 1, (Optr)VAR_stream_0_1);
+    Array PThreadedCode22783 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_request_0_2, (Optr)&t_push_variable, (Optr)VAR_stream_0_1, (Optr)&t_send1, (Optr)PSend22784, (Optr)&t_block_return);
+    Block PBlock22782 = new_Block_with(empty_Array, empty_Array, PThreadedCode22783, 1, PSend22784);
     Variable VAR_ex_2_0 = new_Variable_named(L"ex", 2);
-    Array PArray22416 = new_Array_with(1, (Optr)VAR_ex_2_0);
+    Array PArray22786 = new_Array_with(1, (Optr)VAR_ex_2_0);
     // destroy. 
-    Send PSend22418 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
+    Send PSend22788 = new_Send((Optr)VAR_aSocket_0_0, SMB_destroy, 0);
     // escape:. 
-    Send PSend22419 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22418);
-    Array PThreadedCode22417 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22418, (Optr)&t_send1, (Optr)PSend22419, (Optr)&t_method_return);
-    Block PBlock22415 = new_Block_with(PArray22416, empty_Array, PThreadedCode22417, 1, PSend22419);
+    Send PSend22789 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22788);
+    Array PThreadedCode22787 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aSocket_0_0, (Optr)&t_send0, (Optr)PSend22788, (Optr)&t_send1, (Optr)PSend22789, (Optr)&t_method_return);
+    Block PBlock22785 = new_Block_with(PArray22786, empty_Array, PThreadedCode22787, 1, PSend22789);
     Symbol SMB_on_do_ = new_Symbol(L"on:do:");
     // on:do:. 
-    Send PSend22420 = new_Send((Optr)PBlock22412, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22415);
-    String string_22421 = new_String(L"WebServer>>handleConnectionFrom:: request read in successfully");
-    Constant string_22421_Const = new_Constant((Optr)string_22421);
+    Send PSend22790 = new_Send((Optr)PBlock22782, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22785);
+    String string_22791 = new_String(L"WebServer>>handleConnectionFrom:: request read in successfully");
+    Constant string_22791_Const = new_Constant((Optr)string_22791);
     // warn:. 
-    Send PSend22422 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22421_Const);
+    Send PSend22792 = new_Send((Optr)self, SMB_warn_, 1, (Optr)string_22791_Const);
     Symbol SMB_dispatchRequest_ = new_Symbol(L"dispatchRequest:");
     // dispatchRequest:. 
-    Send PSend22423 = new_Send((Optr)self, SMB_dispatchRequest_, 1, (Optr)VAR_request_0_2);
-    Array PThreadedCode22399 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push_variable, (Optr)VAR_stream_0_1, (Optr)&t_send0, (Optr)PSend22400, (Optr)&t_push_closure, (Optr)PBlock22401, (Optr)&t_send1, (Optr)PSend22405, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22406, (Optr)&t_send1, (Optr)PSend22407, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22408, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22409, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22410, (Optr)&t_send1, (Optr)PSend22411, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22412, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22415, (Optr)&t_send2, (Optr)PSend22420, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22421, (Optr)&t_send1, (Optr)PSend22422, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_request_0_2, (Optr)&t_send1, (Optr)PSend22423, (Optr)&t_block_return);
-    Block PBlock22398 = new_Block_with(empty_Array, empty_Array, PThreadedCode22399, 7, PSend22405, PSend22407, PAssign22408, PSend22411, PSend22420, PSend22422, PSend22423);
+    Send PSend22793 = new_Send((Optr)self, SMB_dispatchRequest_, 1, (Optr)VAR_request_0_2);
+    Array PThreadedCode22769 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push_variable, (Optr)VAR_stream_0_1, (Optr)&t_send0, (Optr)PSend22770, (Optr)&t_push_closure, (Optr)PBlock22771, (Optr)&t_send1, (Optr)PSend22775, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22776, (Optr)&t_send1, (Optr)PSend22777, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22778, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22779, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22780, (Optr)&t_send1, (Optr)PSend22781, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22782, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22785, (Optr)&t_send2, (Optr)PSend22790, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22791, (Optr)&t_send1, (Optr)PSend22792, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_request_0_2, (Optr)&t_send1, (Optr)PSend22793, (Optr)&t_block_return);
+    Block PBlock22768 = new_Block_with(empty_Array, empty_Array, PThreadedCode22769, 7, PSend22775, PSend22777, PAssign22778, PSend22781, PSend22790, PSend22792, PSend22793);
     Symbol SMB_whileTrue_ = new_Symbol(L"whileTrue:");
     // whileTrue:. 
-    Send PSend22424 = new_Send((Optr)PBlock22395, SMB_whileTrue_, 1, (Optr)PBlock22398);
-    Array PThreadedCode22385 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_certName, (Optr)&t_push_closure, (Optr)PBlock22386, (Optr)&t_push_closure, (Optr)PBlock22390, (Optr)&t_send2, (Optr)PSend22394, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22395, (Optr)&t_push_closure, (Optr)PBlock22398, (Optr)&t_send1, (Optr)PSend22424, (Optr)&t_block_return);
-    Block PBlock22384 = new_Block_with(empty_Array, empty_Array, PThreadedCode22385, 2, PSend22394, PSend22424);
-    Array PArray22426 = new_Array_with(1, (Optr)VAR_ex_2_0);
+    Send PSend22794 = new_Send((Optr)PBlock22765, SMB_whileTrue_, 1, (Optr)PBlock22768);
+    Array PThreadedCode22755 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_certName, (Optr)&t_push_closure, (Optr)PBlock22756, (Optr)&t_push_closure, (Optr)PBlock22760, (Optr)&t_send2, (Optr)PSend22764, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22765, (Optr)&t_push_closure, (Optr)PBlock22768, (Optr)&t_send1, (Optr)PSend22794, (Optr)&t_block_return);
+    Block PBlock22754 = new_Block_with(empty_Array, empty_Array, PThreadedCode22755, 2, PSend22764, PSend22794);
+    Array PArray22796 = new_Array_with(1, (Optr)VAR_ex_2_0);
     Symbol SMB_signal = new_Symbol(L"signal");
     // signal. 
-    Send PSend22428 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
-    Array PThreadedCode22427 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend22428, (Optr)&t_method_return);
-    Block PBlock22425 = new_Block_with(PArray22426, empty_Array, PThreadedCode22427, 1, PSend22428);
+    Send PSend22798 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
+    Array PThreadedCode22797 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend22798, (Optr)&t_method_return);
+    Block PBlock22795 = new_Block_with(PArray22796, empty_Array, PThreadedCode22797, 1, PSend22798);
     // on:do:. 
-    Send PSend22429 = new_Send((Optr)PBlock22384, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22425);
-    Array PThreadedCode22383 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock22384, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22425, (Optr)&t_send2, (Optr)PSend22429, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock22381 = new_Block_with(PArray22382, empty_Array, PThreadedCode22383, 2, PSend22429, self);
+    Send PSend22799 = new_Send((Optr)PBlock22754, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22795);
+    Array PThreadedCode22753 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock22754, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22795, (Optr)&t_send2, (Optr)PSend22799, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock22751 = new_Block_with(PArray22752, empty_Array, PThreadedCode22753, 2, PSend22799, self);
     // on:. 
-    Send PSend22430 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22381);
-    Array PThreadedCode22380 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22381, (Optr)&t_send1, (Optr)PSend22430, (Optr)&t_method_return);
-    Method PMethod22377 = new_Method_with(PArray22378, PArray22379, empty_Array, PThreadedCode22380, 1, PSend22430);
+    Send PSend22800 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22751);
+    Array PThreadedCode22750 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22751, (Optr)&t_send1, (Optr)PSend22800, (Optr)&t_method_return);
+    Method PMethod22747 = new_Method_with(PArray22748, PArray22749, empty_Array, PThreadedCode22750, 1, PSend22800);
     
-    MethodClosure MC_SMB_handleConnectionFrom_ = new_MethodClosure((Method)PMethod22377, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_handleConnectionFrom_ = new_MethodClosure((Method)PMethod22747, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_handleConnectionFrom_, MC_SMB_handleConnectionFrom_);
 }
 
 
 static void init_SMB_connections() {
     Symbol SMB_connections = new_Symbol(L"connections");
-    Array PThreadedCode22432 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_method_return);
-    Method PMethod22431 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22432, 1, slot_WebClient_Core_WebServer_connections);
+    Array PThreadedCode22802 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_method_return);
+    Method PMethod22801 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22802, 1, slot_WebClient_Core_WebServer_connections);
     
-    MethodClosure MC_SMB_connections = new_MethodClosure((Method)PMethod22431, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_connections = new_MethodClosure((Method)PMethod22801, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_connections, MC_SMB_connections);
 }
 
 
 static void init_SMB_vault() {
     Symbol SMB_vault = new_Symbol(L"vault");
-    Array PThreadedCode22434 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_vault, (Optr)&t_method_return);
-    Method PMethod22433 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22434, 1, slot_WebClient_Core_WebServer_vault);
+    Array PThreadedCode22804 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_vault, (Optr)&t_method_return);
+    Method PMethod22803 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22804, 1, slot_WebClient_Core_WebServer_vault);
     
-    MethodClosure MC_SMB_vault = new_MethodClosure((Method)PMethod22433, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_vault = new_MethodClosure((Method)PMethod22803, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_vault, MC_SMB_vault);
 }
 
@@ -507,12 +507,12 @@ static void init_SMB_vault() {
 static void init_SMB_sessions_() {
     Symbol SMB_sessions_ = new_Symbol(L"sessions:");
     Variable VAR_aDictionary_0_0 = new_Variable_named(L"aDictionary", 0);
-    Array PArray22436 = new_Array_with(1, (Optr)VAR_aDictionary_0_0);
-    Assign PAssign22438 = new_Assign((Optr)slot_WebClient_Core_WebServer_sessions, (Optr)VAR_aDictionary_0_0);
-    Array PThreadedCode22437 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22438, (Optr)&t_push_variable, (Optr)VAR_aDictionary_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22435 = new_Method_with(PArray22436, empty_Array, empty_Array, PThreadedCode22437, 2, PAssign22438, self);
+    Array PArray22806 = new_Array_with(1, (Optr)VAR_aDictionary_0_0);
+    Assign PAssign22808 = new_Assign((Optr)slot_WebClient_Core_WebServer_sessions, (Optr)VAR_aDictionary_0_0);
+    Array PThreadedCode22807 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22808, (Optr)&t_push_variable, (Optr)VAR_aDictionary_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22805 = new_Method_with(PArray22806, empty_Array, empty_Array, PThreadedCode22807, 2, PAssign22808, self);
     
-    MethodClosure MC_SMB_sessions_ = new_MethodClosure((Method)PMethod22435, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_sessions_ = new_MethodClosure((Method)PMethod22805, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_sessions_, MC_SMB_sessions_);
 }
 
@@ -521,11 +521,11 @@ static void init_SMB_isStopped() {
     Symbol SMB_isStopped = new_Symbol(L"isStopped");
     Symbol SMB__pequals_ = new_Symbol(L"==");
     // ==. 
-    Send PSend22441 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB__pequals_, 1, (Optr)nil_Const);
-    Array PThreadedCode22440 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend22441, (Optr)&t_method_return);
-    Method PMethod22439 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22440, 1, PSend22441);
+    Send PSend22811 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB__pequals_, 1, (Optr)nil_Const);
+    Array PThreadedCode22810 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend22811, (Optr)&t_method_return);
+    Method PMethod22809 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22810, 1, PSend22811);
     
-    MethodClosure MC_SMB_isStopped = new_MethodClosure((Method)PMethod22439, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_isStopped = new_MethodClosure((Method)PMethod22809, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_isStopped, MC_SMB_isStopped);
 }
 
@@ -533,111 +533,111 @@ static void init_SMB_isStopped() {
 static void init_SMB_runListener() {
     Symbol SMB_runListener = new_Symbol(L"runListener");
     Variable VAR_connectionSocket_0_0 = new_Variable_named(L"connectionSocket", 0);
-    Array PArray22443 = new_Array_with(1, (Optr)VAR_connectionSocket_0_0);
+    Array PArray22813 = new_Array_with(1, (Optr)VAR_connectionSocket_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray22446 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray22816 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_isNotNil = new_Symbol(L"isNotNil");
     // isNotNil. 
-    Send PSend22454 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isNotNil, 0);
+    Send PSend22824 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isNotNil, 0);
     Symbol SMB_isValid = new_Symbol(L"isValid");
     // isValid. 
-    Send PSend22457 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isValid, 0);
-    Array PThreadedCode22456 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22457, (Optr)&t_block_return);
-    Block PBlock22455 = new_Block_with(empty_Array, empty_Array, PThreadedCode22456, 1, PSend22457);
+    Send PSend22827 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isValid, 0);
+    Array PThreadedCode22826 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22827, (Optr)&t_block_return);
+    Block PBlock22825 = new_Block_with(empty_Array, empty_Array, PThreadedCode22826, 1, PSend22827);
     Symbol SMB_and_ = new_Symbol(L"and:");
     // and:. 
-    Send PSend22458 = new_Send((Optr)PSend22454, SMB_and_, 1, (Optr)PBlock22455);
-    Array PThreadedCode22453 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22454, (Optr)&t_push_closure, (Optr)PBlock22455, (Optr)&t_send1, (Optr)PSend22458, (Optr)&t_block_return);
-    Block PBlock22452 = new_Block_with(empty_Array, empty_Array, PThreadedCode22453, 1, PSend22458);
+    Send PSend22828 = new_Send((Optr)PSend22824, SMB_and_, 1, (Optr)PBlock22825);
+    Array PThreadedCode22823 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22824, (Optr)&t_push_closure, (Optr)PBlock22825, (Optr)&t_send1, (Optr)PSend22828, (Optr)&t_block_return);
+    Block PBlock22822 = new_Block_with(empty_Array, empty_Array, PThreadedCode22823, 1, PSend22828);
     Symbol SMB_accept = new_Symbol(L"accept");
     // accept. 
-    Send PSend22462 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_accept, 0);
-    Assign PAssign22461 = new_Assign((Optr)VAR_connectionSocket_0_0, (Optr)PSend22462);
+    Send PSend22832 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_accept, 0);
+    Assign PAssign22831 = new_Assign((Optr)VAR_connectionSocket_0_0, (Optr)PSend22832);
     Symbol SMB_asyncHandleConnectionFrom_ = new_Symbol(L"asyncHandleConnectionFrom:");
     // asyncHandleConnectionFrom:. 
-    Send PSend22465 = new_Send((Optr)self, SMB_asyncHandleConnectionFrom_, 1, (Optr)VAR_connectionSocket_0_0);
-    Array PThreadedCode22464 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_connectionSocket_0_0, (Optr)&t_send1, (Optr)PSend22465, (Optr)&t_block_return);
-    Block PBlock22463 = new_Block_with(empty_Array, empty_Array, PThreadedCode22464, 1, PSend22465);
+    Send PSend22835 = new_Send((Optr)self, SMB_asyncHandleConnectionFrom_, 1, (Optr)VAR_connectionSocket_0_0);
+    Array PThreadedCode22834 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_connectionSocket_0_0, (Optr)&t_send1, (Optr)PSend22835, (Optr)&t_block_return);
+    Block PBlock22833 = new_Block_with(empty_Array, empty_Array, PThreadedCode22834, 1, PSend22835);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend22466 = new_Send((Optr)VAR_connectionSocket_0_0, SMB_ifNotNil_, 1, (Optr)PBlock22463);
-    Array PThreadedCode22460 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push1, (Optr)PAssign22461, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22462, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_connectionSocket_0_0, (Optr)&t_push_closure, (Optr)PBlock22463, (Optr)&t_send1, (Optr)PSend22466, (Optr)&t_block_return);
-    Block PBlock22459 = new_Block_with(empty_Array, empty_Array, PThreadedCode22460, 2, PAssign22461, PSend22466);
+    Send PSend22836 = new_Send((Optr)VAR_connectionSocket_0_0, SMB_ifNotNil_, 1, (Optr)PBlock22833);
+    Array PThreadedCode22830 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push1, (Optr)PAssign22831, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22832, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_connectionSocket_0_0, (Optr)&t_push_closure, (Optr)PBlock22833, (Optr)&t_send1, (Optr)PSend22836, (Optr)&t_block_return);
+    Block PBlock22829 = new_Block_with(empty_Array, empty_Array, PThreadedCode22830, 2, PAssign22831, PSend22836);
     Symbol SMB_whileTrue_ = new_Symbol(L"whileTrue:");
     // whileTrue:. 
-    Send PSend22467 = new_Send((Optr)PBlock22452, SMB_whileTrue_, 1, (Optr)PBlock22459);
-    Array PThreadedCode22451 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22452, (Optr)&t_push_closure, (Optr)PBlock22459, (Optr)&t_send1, (Optr)PSend22467, (Optr)&t_block_return);
-    Block PBlock22450 = new_Block_with(empty_Array, empty_Array, PThreadedCode22451, 1, PSend22467);
-    String string_22470 = new_String(L"listener terminating, socket: ");
+    Send PSend22837 = new_Send((Optr)PBlock22822, SMB_whileTrue_, 1, (Optr)PBlock22829);
+    Array PThreadedCode22821 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22822, (Optr)&t_push_closure, (Optr)PBlock22829, (Optr)&t_send1, (Optr)PSend22837, (Optr)&t_block_return);
+    Block PBlock22820 = new_Block_with(empty_Array, empty_Array, PThreadedCode22821, 1, PSend22837);
+    String string_22840 = new_String(L"listener terminating, socket: ");
     Variable VAR_s_2_0 = new_Variable_named(L"s", 2);
-    Array PArray22472 = new_Array_with(1, (Optr)VAR_s_2_0);
+    Array PArray22842 = new_Array_with(1, (Optr)VAR_s_2_0);
     Symbol SMB_statusString = new_Symbol(L"statusString");
     // statusString. 
-    Send PSend22474 = new_Send((Optr)VAR_s_2_0, SMB_statusString, 0);
-    Array PThreadedCode22473 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_s_2_0, (Optr)&t_send0, (Optr)PSend22474, (Optr)&t_method_return);
-    Block PBlock22471 = new_Block_with(PArray22472, empty_Array, PThreadedCode22473, 1, PSend22474);
+    Send PSend22844 = new_Send((Optr)VAR_s_2_0, SMB_statusString, 0);
+    Array PThreadedCode22843 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_s_2_0, (Optr)&t_send0, (Optr)PSend22844, (Optr)&t_method_return);
+    Block PBlock22841 = new_Block_with(PArray22842, empty_Array, PThreadedCode22843, 1, PSend22844);
     // ifNotNil:. 
-    Send PSend22475 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_ifNotNil_, 1, (Optr)PBlock22471);
-    Constant string_22470_Const = new_Constant((Optr)string_22470);
+    Send PSend22845 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_ifNotNil_, 1, (Optr)PBlock22841);
+    Constant string_22840_Const = new_Constant((Optr)string_22840);
     Symbol SMB__append_ = new_Symbol(L",");
     // ,. 
-    Send PSend22476 = new_Send((Optr)string_22470_Const, SMB__append_, 1, (Optr)PSend22475);
+    Send PSend22846 = new_Send((Optr)string_22840_Const, SMB__append_, 1, (Optr)PSend22845);
     Symbol SMB_log_ = new_Symbol(L"log:");
     // log:. 
-    Send PSend22477 = new_Send((Optr)self, SMB_log_, 1, (Optr)PSend22476);
+    Send PSend22847 = new_Send((Optr)self, SMB_log_, 1, (Optr)PSend22846);
     Symbol SMB_notNil = new_Symbol(L"notNil");
     // notNil. 
-    Send PSend22478 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_notNil, 0);
+    Send PSend22848 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_notNil, 0);
     // isValid. 
-    Send PSend22481 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isValid, 0);
+    Send PSend22851 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_isValid, 0);
     Symbol SMB_not = new_Symbol(L"not");
     // not. 
-    Send PSend22482 = new_Send((Optr)PSend22481, SMB_not, 0);
-    Array PThreadedCode22480 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22481, (Optr)&t_send0, (Optr)PSend22482, (Optr)&t_block_return);
-    Block PBlock22479 = new_Block_with(empty_Array, empty_Array, PThreadedCode22480, 1, PSend22482);
+    Send PSend22852 = new_Send((Optr)PSend22851, SMB_not, 0);
+    Array PThreadedCode22850 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22851, (Optr)&t_send0, (Optr)PSend22852, (Optr)&t_block_return);
+    Block PBlock22849 = new_Block_with(empty_Array, empty_Array, PThreadedCode22850, 1, PSend22852);
     // and:. 
-    Send PSend22483 = new_Send((Optr)PSend22478, SMB_and_, 1, (Optr)PBlock22479);
+    Send PSend22853 = new_Send((Optr)PSend22848, SMB_and_, 1, (Optr)PBlock22849);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_destroy = new_Symbol(L"destroy");
     // destroy. 
-    Send PSend22487 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_destroy, 0);
-    Assign PAssign22488 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)nil_Const);
+    Send PSend22857 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_destroy, 0);
+    Assign PAssign22858 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)nil_Const);
     Symbol SMB_listenOn_interface_ = new_Symbol(L"listenOn:interface:");
     // listenOn:interface:. 
-    Send PSend22489 = new_Send((Optr)self, SMB_listenOn_interface_, 2, (Optr)slot_WebClient_Core_WebServer_port, (Optr)slot_WebClient_Core_WebServer_interface);
+    Send PSend22859 = new_Send((Optr)self, SMB_listenOn_interface_, 2, (Optr)slot_WebClient_Core_WebServer_port, (Optr)slot_WebClient_Core_WebServer_interface);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend22490 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22489);
-    Array PThreadedCode22486 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22487, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22488, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_self, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send2, (Optr)PSend22489, (Optr)&t_send1, (Optr)PSend22490, (Optr)&t_block_return);
-    Block PBlock22485 = new_Block_with(empty_Array, empty_Array, PThreadedCode22486, 3, PSend22487, PAssign22488, PSend22490);
+    Send PSend22860 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22859);
+    Array PThreadedCode22856 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22857, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22858, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_self, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send2, (Optr)PSend22859, (Optr)&t_send1, (Optr)PSend22860, (Optr)&t_block_return);
+    Block PBlock22855 = new_Block_with(empty_Array, empty_Array, PThreadedCode22856, 3, PSend22857, PAssign22858, PSend22860);
     // ifTrue:. 
-    Send PSend22484 = new_Send((Optr)PSend22483, SMB_ifTrue_, 1, (Optr)PBlock22485);
-    Array PThreadedCode22469 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22470, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_closure, (Optr)PBlock22471, (Optr)&t_send1, (Optr)PSend22475, (Optr)&t_send1, (Optr)PSend22476, (Optr)&t_send1, (Optr)PSend22477, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22478, (Optr)&t_push_closure, (Optr)PBlock22479, (Optr)&t_send1, (Optr)PSend22483, (Optr)&t_send_ifTrue_, (Optr)PSend22484, (Optr)PBlock22485, (Optr)&t_block_return);
-    Block PBlock22468 = new_Block_with(empty_Array, empty_Array, PThreadedCode22469, 2, PSend22477, PSend22484);
+    Send PSend22854 = new_Send((Optr)PSend22853, SMB_ifTrue_, 1, (Optr)PBlock22855);
+    Array PThreadedCode22839 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22840, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_closure, (Optr)PBlock22841, (Optr)&t_send1, (Optr)PSend22845, (Optr)&t_send1, (Optr)PSend22846, (Optr)&t_send1, (Optr)PSend22847, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22848, (Optr)&t_push_closure, (Optr)PBlock22849, (Optr)&t_send1, (Optr)PSend22853, (Optr)&t_send_ifTrue_, (Optr)PSend22854, (Optr)PBlock22855, (Optr)&t_block_return);
+    Block PBlock22838 = new_Block_with(empty_Array, empty_Array, PThreadedCode22839, 2, PSend22847, PSend22854);
     Symbol SMB_ensure_ = new_Symbol(L"ensure:");
     // ensure:. 
-    Send PSend22491 = new_Send((Optr)PBlock22450, SMB_ensure_, 1, (Optr)PBlock22468);
-    Array PThreadedCode22449 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22450, (Optr)&t_push_closure, (Optr)PBlock22468, (Optr)&t_send1, (Optr)PSend22491, (Optr)&t_block_return);
-    Block PBlock22448 = new_Block_with(empty_Array, empty_Array, PThreadedCode22449, 1, PSend22491);
+    Send PSend22861 = new_Send((Optr)PBlock22820, SMB_ensure_, 1, (Optr)PBlock22838);
+    Array PThreadedCode22819 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_closure, (Optr)PBlock22820, (Optr)&t_push_closure, (Optr)PBlock22838, (Optr)&t_send1, (Optr)PSend22861, (Optr)&t_block_return);
+    Block PBlock22818 = new_Block_with(empty_Array, empty_Array, PThreadedCode22819, 1, PSend22861);
     Variable VAR_ex_2_0 = new_Variable_named(L"ex", 2);
-    Array PArray22493 = new_Array_with(1, (Optr)VAR_ex_2_0);
+    Array PArray22863 = new_Array_with(1, (Optr)VAR_ex_2_0);
     Symbol SMB_signal = new_Symbol(L"signal");
     // signal. 
-    Send PSend22495 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
-    Array PThreadedCode22494 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend22495, (Optr)&t_method_return);
-    Block PBlock22492 = new_Block_with(PArray22493, empty_Array, PThreadedCode22494, 1, PSend22495);
+    Send PSend22865 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
+    Array PThreadedCode22864 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend22865, (Optr)&t_method_return);
+    Block PBlock22862 = new_Block_with(PArray22863, empty_Array, PThreadedCode22864, 1, PSend22865);
     Symbol SMB_on_do_ = new_Symbol(L"on:do:");
     // on:do:. 
-    Send PSend22496 = new_Send((Optr)PBlock22448, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22492);
-    Array PThreadedCode22447 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock22448, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22492, (Optr)&t_send2, (Optr)PSend22496, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock22445 = new_Block_with(PArray22446, empty_Array, PThreadedCode22447, 2, PSend22496, self);
+    Send PSend22866 = new_Send((Optr)PBlock22818, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22862);
+    Array PThreadedCode22817 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock22818, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22862, (Optr)&t_send2, (Optr)PSend22866, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock22815 = new_Block_with(PArray22816, empty_Array, PThreadedCode22817, 2, PSend22866, self);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend22497 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22445);
-    Array PThreadedCode22444 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22445, (Optr)&t_send1, (Optr)PSend22497, (Optr)&t_method_return);
-    Method PMethod22442 = new_Method_with(empty_Array, PArray22443, empty_Array, PThreadedCode22444, 1, PSend22497);
+    Send PSend22867 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22815);
+    Array PThreadedCode22814 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22815, (Optr)&t_send1, (Optr)PSend22867, (Optr)&t_method_return);
+    Method PMethod22812 = new_Method_with(empty_Array, PArray22813, empty_Array, PThreadedCode22814, 1, PSend22867);
     
-    MethodClosure MC_SMB_runListener = new_MethodClosure((Method)PMethod22442, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_runListener = new_MethodClosure((Method)PMethod22812, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_runListener, MC_SMB_runListener);
 }
 
@@ -646,21 +646,21 @@ static void init_SMB_destroy() {
     Symbol SMB_destroy = new_Symbol(L"destroy");
     Symbol SMB_stopListener = new_Symbol(L"stopListener");
     // stopListener. 
-    Send PSend22500 = new_Send((Optr)self, SMB_stopListener, 0);
+    Send PSend22870 = new_Send((Optr)self, SMB_stopListener, 0);
     Symbol SMB_destroyConnections = new_Symbol(L"destroyConnections");
     // destroyConnections. 
-    Send PSend22501 = new_Send((Optr)self, SMB_destroyConnections, 0);
+    Send PSend22871 = new_Send((Optr)self, SMB_destroyConnections, 0);
     // destroy. 
-    Send PSend22504 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_destroy, 0);
-    Array PThreadedCode22503 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22504, (Optr)&t_block_return);
-    Block PBlock22502 = new_Block_with(empty_Array, empty_Array, PThreadedCode22503, 1, PSend22504);
+    Send PSend22874 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_destroy, 0);
+    Array PThreadedCode22873 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_send0, (Optr)PSend22874, (Optr)&t_block_return);
+    Block PBlock22872 = new_Block_with(empty_Array, empty_Array, PThreadedCode22873, 1, PSend22874);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend22505 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_ifNotNil_, 1, (Optr)PBlock22502);
-    Array PThreadedCode22499 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22500, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22501, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_closure, (Optr)PBlock22502, (Optr)&t_send1, (Optr)PSend22505, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22498 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22499, 4, PSend22500, PSend22501, PSend22505, self);
+    Send PSend22875 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_ifNotNil_, 1, (Optr)PBlock22872);
+    Array PThreadedCode22869 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22870, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22871, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_closure, (Optr)PBlock22872, (Optr)&t_send1, (Optr)PSend22875, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22868 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22869, 4, PSend22870, PSend22871, PSend22875, self);
     
-    MethodClosure MC_SMB_destroy = new_MethodClosure((Method)PMethod22498, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_destroy = new_MethodClosure((Method)PMethod22868, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_destroy, MC_SMB_destroy);
 }
 
@@ -668,13 +668,13 @@ static void init_SMB_destroy() {
 static void init_SMB_critical_() {
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray22507 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PArray22877 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
     // critical:. 
-    Send PSend22509 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)VAR_aBlock_0_0);
-    Array PThreadedCode22508 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_send1, (Optr)PSend22509, (Optr)&t_method_return);
-    Method PMethod22506 = new_Method_with(PArray22507, empty_Array, empty_Array, PThreadedCode22508, 1, PSend22509);
+    Send PSend22879 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)VAR_aBlock_0_0);
+    Array PThreadedCode22878 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_send1, (Optr)PSend22879, (Optr)&t_method_return);
+    Method PMethod22876 = new_Method_with(PArray22877, empty_Array, empty_Array, PThreadedCode22878, 1, PSend22879);
     
-    MethodClosure MC_SMB_critical_ = new_MethodClosure((Method)PMethod22506, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_critical_ = new_MethodClosure((Method)PMethod22876, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_critical_, MC_SMB_critical_);
 }
 
@@ -682,54 +682,54 @@ static void init_SMB_critical_() {
 static void init_SMB_destroyConnections() {
     Symbol SMB_destroyConnections = new_Symbol(L"destroyConnections");
     Variable VAR_p_1_0 = new_Variable_named(L"p", 1);
-    Array PArray22515 = new_Array_with(1, (Optr)VAR_p_1_0);
+    Array PArray22885 = new_Array_with(1, (Optr)VAR_p_1_0);
     Symbol SMB_terminate = new_Symbol(L"terminate");
     // terminate. 
-    Send PSend22517 = new_Send((Optr)VAR_p_1_0, SMB_terminate, 0);
-    Array PThreadedCode22516 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_p_1_0, (Optr)&t_send0, (Optr)PSend22517, (Optr)&t_method_return);
-    Block PBlock22514 = new_Block_with(PArray22515, empty_Array, PThreadedCode22516, 1, PSend22517);
+    Send PSend22887 = new_Send((Optr)VAR_p_1_0, SMB_terminate, 0);
+    Array PThreadedCode22886 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_p_1_0, (Optr)&t_send0, (Optr)PSend22887, (Optr)&t_method_return);
+    Block PBlock22884 = new_Block_with(PArray22885, empty_Array, PThreadedCode22886, 1, PSend22887);
     Symbol SMB_do_ = new_Symbol(L"do:");
     // do:. 
-    Send PSend22518 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_do_, 1, (Optr)PBlock22514);
+    Send PSend22888 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_do_, 1, (Optr)PBlock22884);
     Symbol SMB_removeAll = new_Symbol(L"removeAll");
     // removeAll. 
-    Send PSend22519 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_removeAll, 0);
-    Array PThreadedCode22513 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_closure, (Optr)PBlock22514, (Optr)&t_send1, (Optr)PSend22518, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_send0, (Optr)PSend22519, (Optr)&t_block_return);
-    Block PBlock22512 = new_Block_with(empty_Array, empty_Array, PThreadedCode22513, 2, PSend22518, PSend22519);
+    Send PSend22889 = new_Send((Optr)slot_WebClient_Core_WebServer_connections, SMB_removeAll, 0);
+    Array PThreadedCode22883 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_push_closure, (Optr)PBlock22884, (Optr)&t_send1, (Optr)PSend22888, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_connections, (Optr)&t_send0, (Optr)PSend22889, (Optr)&t_block_return);
+    Block PBlock22882 = new_Block_with(empty_Array, empty_Array, PThreadedCode22883, 2, PSend22888, PSend22889);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22520 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22512);
-    Array PThreadedCode22511 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22512, (Optr)&t_send1, (Optr)PSend22520, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22510 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22511, 2, PSend22520, self);
+    Send PSend22890 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22882);
+    Array PThreadedCode22881 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22882, (Optr)&t_send1, (Optr)PSend22890, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22880 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22881, 2, PSend22890, self);
     
-    MethodClosure MC_SMB_destroyConnections = new_MethodClosure((Method)PMethod22510, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_destroyConnections = new_MethodClosure((Method)PMethod22880, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_destroyConnections, MC_SMB_destroyConnections);
 }
 
 
 static void init_SMB_defaultHttpMethods() {
     Symbol SMB_defaultHttpMethods = new_Symbol(L"defaultHttpMethods");
-    String string_22523 = new_String(L"GET");
-    String string_22524 = new_String(L"POST");
+    String string_22893 = new_String(L"GET");
+    String string_22894 = new_String(L"POST");
     Symbol SMB_with_with_ = new_Symbol(L"with:with:");
-    Constant string_22523_Const = new_Constant((Optr)string_22523);
-    Constant string_22524_Const = new_Constant((Optr)string_22524);
+    Constant string_22893_Const = new_Constant((Optr)string_22893);
+    Constant string_22894_Const = new_Constant((Optr)string_22894);
     // with:with:. 
-    Send PSend22525 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_22523_Const, (Optr)string_22524_Const);
-    Array PThreadedCode22522 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_22523, (Optr)&t_push1, (Optr)string_22524, (Optr)&t_send2, (Optr)PSend22525, (Optr)&t_method_return);
-    Method PMethod22521 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22522, 1, PSend22525);
+    Send PSend22895 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_22893_Const, (Optr)string_22894_Const);
+    Array PThreadedCode22892 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_22893, (Optr)&t_push1, (Optr)string_22894, (Optr)&t_send2, (Optr)PSend22895, (Optr)&t_method_return);
+    Method PMethod22891 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22892, 1, PSend22895);
     
-    MethodClosure MC_SMB_defaultHttpMethods = new_MethodClosure((Method)PMethod22521, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_defaultHttpMethods = new_MethodClosure((Method)PMethod22891, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_defaultHttpMethods, MC_SMB_defaultHttpMethods);
 }
 
 
 static void init_SMB_listenerInterface() {
     Symbol SMB_listenerInterface = new_Symbol(L"listenerInterface");
-    Array PThreadedCode22527 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_method_return);
-    Method PMethod22526 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22527, 1, slot_WebClient_Core_WebServer_interface);
+    Array PThreadedCode22897 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_method_return);
+    Method PMethod22896 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22897, 1, slot_WebClient_Core_WebServer_interface);
     
-    MethodClosure MC_SMB_listenerInterface = new_MethodClosure((Method)PMethod22526, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenerInterface = new_MethodClosure((Method)PMethod22896, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenerInterface, MC_SMB_listenerInterface);
 }
 
@@ -739,75 +739,75 @@ static void init_SMB_listenOn_interface_backlogSize_() {
     Variable VAR_aPort_0_0 = new_Variable_named(L"aPort", 0);
     Variable VAR_anInterface_0_1 = new_Variable_named(L"anInterface", 0);
     Variable VAR_backlog_0_2 = new_Variable_named(L"backlog", 0);
-    Array PArray22529 = new_Array_with(3, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1, (Optr)VAR_backlog_0_2);
+    Array PArray22899 = new_Array_with(3, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1, (Optr)VAR_backlog_0_2);
     Variable VAR_ipString_0_3 = new_Variable_named(L"ipString", 0);
-    Array PArray22530 = new_Array_with(1, (Optr)VAR_ipString_0_3);
-    Assign PAssign22532 = new_Assign((Optr)slot_WebClient_Core_WebServer_interface, (Optr)VAR_anInterface_0_1);
-    Assign PAssign22533 = new_Assign((Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_aPort_0_0);
+    Array PArray22900 = new_Array_with(1, (Optr)VAR_ipString_0_3);
+    Assign PAssign22902 = new_Assign((Optr)slot_WebClient_Core_WebServer_interface, (Optr)VAR_anInterface_0_1);
+    Assign PAssign22903 = new_Assign((Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_aPort_0_0);
     Symbol SMB_ifNil_ifNotNil_ = new_Symbol(L"ifNil:ifNotNil:");
-    String string_22538 = new_String(L"*");
-    Array PThreadedCode22537 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22538, (Optr)&t_block_return);
-    Constant string_22538_Const = new_Constant((Optr)string_22538);
-    Block PBlock22536 = new_Block_with(empty_Array, empty_Array, PThreadedCode22537, 1, string_22538_Const);
+    String string_22908 = new_String(L"*");
+    Array PThreadedCode22907 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22908, (Optr)&t_block_return);
+    Constant string_22908_Const = new_Constant((Optr)string_22908);
+    Block PBlock22906 = new_Block_with(empty_Array, empty_Array, PThreadedCode22907, 1, string_22908_Const);
     Symbol SMB_asString = new_Symbol(L"asString");
     // asString. 
-    Send PSend22541 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_asString, 0);
-    Array PThreadedCode22540 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send0, (Optr)PSend22541, (Optr)&t_block_return);
-    Block PBlock22539 = new_Block_with(empty_Array, empty_Array, PThreadedCode22540, 1, PSend22541);
+    Send PSend22911 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_asString, 0);
+    Array PThreadedCode22910 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send0, (Optr)PSend22911, (Optr)&t_block_return);
+    Block PBlock22909 = new_Block_with(empty_Array, empty_Array, PThreadedCode22910, 1, PSend22911);
     // ifNil:ifNotNil:. 
-    Send PSend22535 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22536, (Optr)PBlock22539);
-    Assign PAssign22534 = new_Assign((Optr)VAR_ipString_0_3, (Optr)PSend22535);
-    String string_22542 = new_String(L"Listener starting (interface: ");
-    Constant string_22542_Const = new_Constant((Optr)string_22542);
+    Send PSend22905 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22906, (Optr)PBlock22909);
+    Assign PAssign22904 = new_Assign((Optr)VAR_ipString_0_3, (Optr)PSend22905);
+    String string_22912 = new_String(L"Listener starting (interface: ");
+    Constant string_22912_Const = new_Constant((Optr)string_22912);
     Symbol SMB__append_ = new_Symbol(L",");
     // ,. 
-    Send PSend22543 = new_Send((Optr)string_22542_Const, SMB__append_, 1, (Optr)VAR_ipString_0_3);
-    String string_22544 = new_String(L" port: ");
-    Constant string_22544_Const = new_Constant((Optr)string_22544);
+    Send PSend22913 = new_Send((Optr)string_22912_Const, SMB__append_, 1, (Optr)VAR_ipString_0_3);
+    String string_22914 = new_String(L" port: ");
+    Constant string_22914_Const = new_Constant((Optr)string_22914);
     // ,. 
-    Send PSend22545 = new_Send((Optr)PSend22543, SMB__append_, 1, (Optr)string_22544_Const);
+    Send PSend22915 = new_Send((Optr)PSend22913, SMB__append_, 1, (Optr)string_22914_Const);
     // ,. 
-    Send PSend22546 = new_Send((Optr)PSend22545, SMB__append_, 1, (Optr)slot_WebClient_Core_WebServer_port);
-    String string_22547 = new_String(L")");
-    Constant string_22547_Const = new_Constant((Optr)string_22547);
+    Send PSend22916 = new_Send((Optr)PSend22915, SMB__append_, 1, (Optr)slot_WebClient_Core_WebServer_port);
+    String string_22917 = new_String(L")");
+    Constant string_22917_Const = new_Constant((Optr)string_22917);
     // ,. 
-    Send PSend22548 = new_Send((Optr)PSend22546, SMB__append_, 1, (Optr)string_22547_Const);
+    Send PSend22918 = new_Send((Optr)PSend22916, SMB__append_, 1, (Optr)string_22917_Const);
     Symbol SMB_log_ = new_Symbol(L"log:");
     // log:. 
-    Send PSend22549 = new_Send((Optr)self, SMB_log_, 1, (Optr)PSend22548);
+    Send PSend22919 = new_Send((Optr)self, SMB_log_, 1, (Optr)PSend22918);
     Symbol SMB_newTCP = new_Symbol(L"newTCP");
     // newTCP. 
-    Send PSend22551 = new_Send((Optr)PSocket_classReference, SMB_newTCP, 0);
-    Assign PAssign22550 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)PSend22551);
+    Send PSend22921 = new_Send((Optr)PSocket_classReference, SMB_newTCP, 0);
+    Assign PAssign22920 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)PSend22921);
     Symbol SMB_listenOn_backlogSize_ = new_Symbol(L"listenOn:backlogSize:");
     // listenOn:backlogSize:. 
-    Send PSend22554 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_listenOn_backlogSize_, 2, (Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_backlog_0_2);
-    Array PThreadedCode22553 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_variable, (Optr)VAR_backlog_0_2, (Optr)&t_send2, (Optr)PSend22554, (Optr)&t_block_return);
-    Block PBlock22552 = new_Block_with(empty_Array, empty_Array, PThreadedCode22553, 1, PSend22554);
+    Send PSend22924 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_listenOn_backlogSize_, 2, (Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_backlog_0_2);
+    Array PThreadedCode22923 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_variable, (Optr)VAR_backlog_0_2, (Optr)&t_send2, (Optr)PSend22924, (Optr)&t_block_return);
+    Block PBlock22922 = new_Block_with(empty_Array, empty_Array, PThreadedCode22923, 1, PSend22924);
     Symbol SMB_listenOn_backlogSize_interface_ = new_Symbol(L"listenOn:backlogSize:interface:");
     // listenOn:backlogSize:interface:. 
-    Send PSend22557 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_listenOn_backlogSize_interface_, 3, (Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_backlog_0_2, (Optr)slot_WebClient_Core_WebServer_interface);
-    Array PThreadedCode22556 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_variable, (Optr)VAR_backlog_0_2, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send3, (Optr)PSend22557, (Optr)&t_block_return);
-    Block PBlock22555 = new_Block_with(empty_Array, empty_Array, PThreadedCode22556, 1, PSend22557);
+    Send PSend22927 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerSocket, SMB_listenOn_backlogSize_interface_, 3, (Optr)slot_WebClient_Core_WebServer_port, (Optr)VAR_backlog_0_2, (Optr)slot_WebClient_Core_WebServer_interface);
+    Array PThreadedCode22926 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_push_variable, (Optr)VAR_backlog_0_2, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_send3, (Optr)PSend22927, (Optr)&t_block_return);
+    Block PBlock22925 = new_Block_with(empty_Array, empty_Array, PThreadedCode22926, 1, PSend22927);
     // ifNil:ifNotNil:. 
-    Send PSend22558 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22552, (Optr)PBlock22555);
+    Send PSend22928 = new_Send((Optr)slot_WebClient_Core_WebServer_interface, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22922, (Optr)PBlock22925);
     Symbol SMB_startListener = new_Symbol(L"startListener");
     // startListener. 
-    Send PSend22559 = new_Send((Optr)self, SMB_startListener, 0);
-    Array PThreadedCode22531 = instantiate_Array_with(ThreadedCode_Class, 0, 68, (Optr)&t_push1, (Optr)PAssign22532, (Optr)&t_push_variable, (Optr)VAR_anInterface_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22533, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22534, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_push_closure, (Optr)PBlock22536, (Optr)&t_push_closure, (Optr)PBlock22539, (Optr)&t_send2, (Optr)PSend22535, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22542, (Optr)&t_push_variable, (Optr)VAR_ipString_0_3, (Optr)&t_send1, (Optr)PSend22543, (Optr)&t_push1, (Optr)string_22544, (Optr)&t_send1, (Optr)PSend22545, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_send1, (Optr)PSend22546, (Optr)&t_push1, (Optr)string_22547, (Optr)&t_send1, (Optr)PSend22548, (Optr)&t_send1, (Optr)PSend22549, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22550, (Optr)&t_push_class_reference, (Optr)PSocket_classReference, (Optr)&t_send0, (Optr)PSend22551, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_push_closure, (Optr)PBlock22552, (Optr)&t_push_closure, (Optr)PBlock22555, (Optr)&t_send2, (Optr)PSend22558, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22559, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22528 = new_Method_with(PArray22529, PArray22530, empty_Array, PThreadedCode22531, 8, PAssign22532, PAssign22533, PAssign22534, PSend22549, PAssign22550, PSend22558, PSend22559, self);
+    Send PSend22929 = new_Send((Optr)self, SMB_startListener, 0);
+    Array PThreadedCode22901 = instantiate_Array_with(ThreadedCode_Class, 0, 68, (Optr)&t_push1, (Optr)PAssign22902, (Optr)&t_push_variable, (Optr)VAR_anInterface_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22903, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22904, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_push_closure, (Optr)PBlock22906, (Optr)&t_push_closure, (Optr)PBlock22909, (Optr)&t_send2, (Optr)PSend22905, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_22912, (Optr)&t_push_variable, (Optr)VAR_ipString_0_3, (Optr)&t_send1, (Optr)PSend22913, (Optr)&t_push1, (Optr)string_22914, (Optr)&t_send1, (Optr)PSend22915, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_send1, (Optr)PSend22916, (Optr)&t_push1, (Optr)string_22917, (Optr)&t_send1, (Optr)PSend22918, (Optr)&t_send1, (Optr)PSend22919, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22920, (Optr)&t_push_class_reference, (Optr)PSocket_classReference, (Optr)&t_send0, (Optr)PSend22921, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_interface, (Optr)&t_push_closure, (Optr)PBlock22922, (Optr)&t_push_closure, (Optr)PBlock22925, (Optr)&t_send2, (Optr)PSend22928, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22929, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22898 = new_Method_with(PArray22899, PArray22900, empty_Array, PThreadedCode22901, 8, PAssign22902, PAssign22903, PAssign22904, PSend22919, PAssign22920, PSend22928, PSend22929, self);
     
-    MethodClosure MC_SMB_listenOn_interface_backlogSize_ = new_MethodClosure((Method)PMethod22528, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenOn_interface_backlogSize_ = new_MethodClosure((Method)PMethod22898, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenOn_interface_backlogSize_, MC_SMB_listenOn_interface_backlogSize_);
 }
 
 
 static void init_SMB_sessions() {
     Symbol SMB_sessions = new_Symbol(L"sessions");
-    Array PThreadedCode22561 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_method_return);
-    Method PMethod22560 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22561, 1, slot_WebClient_Core_WebServer_sessions);
+    Array PThreadedCode22931 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_method_return);
+    Method PMethod22930 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22931, 1, slot_WebClient_Core_WebServer_sessions);
     
-    MethodClosure MC_SMB_sessions = new_MethodClosure((Method)PMethod22560, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_sessions = new_MethodClosure((Method)PMethod22930, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_sessions, MC_SMB_sessions);
 }
 
@@ -816,17 +816,17 @@ static void init_SMB_addService_action_() {
     Symbol SMB_addService_action_ = new_Symbol(L"addService:action:");
     Variable VAR_entryPoint_0_0 = new_Variable_named(L"entryPoint", 0);
     Variable VAR_aBlockOrMessage_0_1 = new_Variable_named(L"aBlockOrMessage", 0);
-    Array PArray22563 = new_Array_with(2, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1);
+    Array PArray22933 = new_Array_with(2, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1);
     Symbol SMB_defaultHttpMethods = new_Symbol(L"defaultHttpMethods");
     // defaultHttpMethods. 
-    Send PSend22565 = new_Send((Optr)self, SMB_defaultHttpMethods, 0);
+    Send PSend22935 = new_Send((Optr)self, SMB_defaultHttpMethods, 0);
     Symbol SMB_addService_action_methods_ = new_Symbol(L"addService:action:methods:");
     // addService:action:methods:. 
-    Send PSend22566 = new_Send((Optr)self, SMB_addService_action_methods_, 3, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1, (Optr)PSend22565);
-    Array PThreadedCode22564 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_1, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22565, (Optr)&t_send3, (Optr)PSend22566, (Optr)&t_method_return);
-    Method PMethod22562 = new_Method_with(PArray22563, empty_Array, empty_Array, PThreadedCode22564, 1, PSend22566);
+    Send PSend22936 = new_Send((Optr)self, SMB_addService_action_methods_, 3, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1, (Optr)PSend22935);
+    Array PThreadedCode22934 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_1, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22935, (Optr)&t_send3, (Optr)PSend22936, (Optr)&t_method_return);
+    Method PMethod22932 = new_Method_with(PArray22933, empty_Array, empty_Array, PThreadedCode22934, 1, PSend22936);
     
-    MethodClosure MC_SMB_addService_action_ = new_MethodClosure((Method)PMethod22562, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_addService_action_ = new_MethodClosure((Method)PMethod22932, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_addService_action_, MC_SMB_addService_action_);
 }
 
@@ -835,17 +835,17 @@ static void init_SMB_stopListener() {
     Symbol SMB_stopListener = new_Symbol(L"stopListener");
     Symbol SMB_terminate = new_Symbol(L"terminate");
     // terminate. 
-    Send PSend22571 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB_terminate, 0);
-    Array PThreadedCode22570 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_send0, (Optr)PSend22571, (Optr)&t_block_return);
-    Block PBlock22569 = new_Block_with(empty_Array, empty_Array, PThreadedCode22570, 1, PSend22571);
+    Send PSend22941 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB_terminate, 0);
+    Array PThreadedCode22940 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_send0, (Optr)PSend22941, (Optr)&t_block_return);
+    Block PBlock22939 = new_Block_with(empty_Array, empty_Array, PThreadedCode22940, 1, PSend22941);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend22572 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB_ifNotNil_, 1, (Optr)PBlock22569);
-    Assign PAssign22573 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)nil_Const);
-    Array PThreadedCode22568 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_push_closure, (Optr)PBlock22569, (Optr)&t_send1, (Optr)PSend22572, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22573, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22567 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22568, 3, PSend22572, PAssign22573, self);
+    Send PSend22942 = new_Send((Optr)slot_WebClient_Core_WebServer_listenerProcess, SMB_ifNotNil_, 1, (Optr)PBlock22939);
+    Assign PAssign22943 = new_Assign((Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)nil_Const);
+    Array PThreadedCode22938 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerProcess, (Optr)&t_push_closure, (Optr)PBlock22939, (Optr)&t_send1, (Optr)PSend22942, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22943, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22937 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22938, 3, PSend22942, PAssign22943, self);
     
-    MethodClosure MC_SMB_stopListener = new_MethodClosure((Method)PMethod22567, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_stopListener = new_MethodClosure((Method)PMethod22937, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_stopListener, MC_SMB_stopListener);
 }
 
@@ -853,12 +853,12 @@ static void init_SMB_stopListener() {
 static void init_SMB_logAction_() {
     Symbol SMB_logAction_ = new_Symbol(L"logAction:");
     Variable VAR_aBlockOrMessage_0_0 = new_Variable_named(L"aBlockOrMessage", 0);
-    Array PArray22575 = new_Array_with(1, (Optr)VAR_aBlockOrMessage_0_0);
-    Assign PAssign22577 = new_Assign((Optr)slot_WebClient_Core_WebServer_logAction, (Optr)VAR_aBlockOrMessage_0_0);
-    Array PThreadedCode22576 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22577, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22574 = new_Method_with(PArray22575, empty_Array, empty_Array, PThreadedCode22576, 2, PAssign22577, self);
+    Array PArray22945 = new_Array_with(1, (Optr)VAR_aBlockOrMessage_0_0);
+    Assign PAssign22947 = new_Assign((Optr)slot_WebClient_Core_WebServer_logAction, (Optr)VAR_aBlockOrMessage_0_0);
+    Array PThreadedCode22946 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22947, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22944 = new_Method_with(PArray22945, empty_Array, empty_Array, PThreadedCode22946, 2, PAssign22947, self);
     
-    MethodClosure MC_SMB_logAction_ = new_MethodClosure((Method)PMethod22574, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_logAction_ = new_MethodClosure((Method)PMethod22944, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_logAction_, MC_SMB_logAction_);
 }
 
@@ -867,24 +867,24 @@ static void init_SMB_isRunning() {
     Symbol SMB_isRunning = new_Symbol(L"isRunning");
     Symbol SMB_isStopped = new_Symbol(L"isStopped");
     // isStopped. 
-    Send PSend22580 = new_Send((Optr)self, SMB_isStopped, 0);
+    Send PSend22950 = new_Send((Optr)self, SMB_isStopped, 0);
     Symbol SMB_not = new_Symbol(L"not");
     // not. 
-    Send PSend22581 = new_Send((Optr)PSend22580, SMB_not, 0);
-    Array PThreadedCode22579 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22580, (Optr)&t_send0, (Optr)PSend22581, (Optr)&t_method_return);
-    Method PMethod22578 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22579, 1, PSend22581);
+    Send PSend22951 = new_Send((Optr)PSend22950, SMB_not, 0);
+    Array PThreadedCode22949 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22950, (Optr)&t_send0, (Optr)PSend22951, (Optr)&t_method_return);
+    Method PMethod22948 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22949, 1, PSend22951);
     
-    MethodClosure MC_SMB_isRunning = new_MethodClosure((Method)PMethod22578, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_isRunning = new_MethodClosure((Method)PMethod22948, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_isRunning, MC_SMB_isRunning);
 }
 
 
 static void init_SMB_listenerSocket() {
     Symbol SMB_listenerSocket = new_Symbol(L"listenerSocket");
-    Array PThreadedCode22583 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_method_return);
-    Method PMethod22582 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22583, 1, slot_WebClient_Core_WebServer_listenerSocket);
+    Array PThreadedCode22953 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_listenerSocket, (Optr)&t_method_return);
+    Method PMethod22952 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22953, 1, slot_WebClient_Core_WebServer_listenerSocket);
     
-    MethodClosure MC_SMB_listenerSocket = new_MethodClosure((Method)PMethod22582, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenerSocket = new_MethodClosure((Method)PMethod22952, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenerSocket, MC_SMB_listenerSocket);
 }
 
@@ -893,208 +893,208 @@ static void init_SMB_dispatchRequest_url_() {
     Symbol SMB_dispatchRequest_url_ = new_Symbol(L"dispatchRequest:url:");
     Variable VAR_request_0_0 = new_Variable_named(L"request", 0);
     Variable VAR_dispatchUrl_0_1 = new_Variable_named(L"dispatchUrl", 0);
-    Array PArray22585 = new_Array_with(2, (Optr)VAR_request_0_0, (Optr)VAR_dispatchUrl_0_1);
+    Array PArray22955 = new_Array_with(2, (Optr)VAR_request_0_0, (Optr)VAR_dispatchUrl_0_1);
     Variable VAR_entryUrl_0_2 = new_Variable_named(L"entryUrl", 0);
     Variable VAR_action_0_3 = new_Variable_named(L"action", 0);
-    Array PArray22586 = new_Array_with(2, (Optr)VAR_entryUrl_0_2, (Optr)VAR_action_0_3);
+    Array PArray22956 = new_Array_with(2, (Optr)VAR_entryUrl_0_2, (Optr)VAR_action_0_3);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray22589 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray22959 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_method = new_Symbol(L"method");
     // method. 
-    Send PSend22591 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
-    String string_22592 = new_String(L"TRACE");
+    Send PSend22961 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
+    String string_22962 = new_String(L"TRACE");
     Symbol SMB__equals_ = new_Symbol(L"=");
-    Constant string_22592_Const = new_Constant((Optr)string_22592);
+    Constant string_22962_Const = new_Constant((Optr)string_22962);
     // =. 
-    Send PSend22593 = new_Send((Optr)PSend22591, SMB__equals_, 1, (Optr)string_22592_Const);
+    Send PSend22963 = new_Send((Optr)PSend22961, SMB__equals_, 1, (Optr)string_22962_Const);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_asString = new_Symbol(L"asString");
     // asString. 
-    Send PSend22597 = new_Send((Optr)VAR_request_0_0, SMB_asString, 0);
-    String string_22598 = new_String(L"message/http");
+    Send PSend22967 = new_Send((Optr)VAR_request_0_0, SMB_asString, 0);
+    String string_22968 = new_String(L"message/http");
     Symbol SMB_send200Response_contentType_ = new_Symbol(L"send200Response:contentType:");
-    Constant string_22598_Const = new_Constant((Optr)string_22598);
+    Constant string_22968_Const = new_Constant((Optr)string_22968);
     // send200Response:contentType:. 
-    Send PSend22599 = new_Send((Optr)VAR_request_0_0, SMB_send200Response_contentType_, 2, (Optr)PSend22597, (Optr)string_22598_Const);
+    Send PSend22969 = new_Send((Optr)VAR_request_0_0, SMB_send200Response_contentType_, 2, (Optr)PSend22967, (Optr)string_22968_Const);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend22600 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22599);
-    Array PThreadedCode22596 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22597, (Optr)&t_push1, (Optr)string_22598, (Optr)&t_send2, (Optr)PSend22599, (Optr)&t_send1, (Optr)PSend22600, (Optr)&t_block_return);
-    Block PBlock22595 = new_Block_with(empty_Array, empty_Array, PThreadedCode22596, 1, PSend22600);
+    Send PSend22970 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22969);
+    Array PThreadedCode22966 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22967, (Optr)&t_push1, (Optr)string_22968, (Optr)&t_send2, (Optr)PSend22969, (Optr)&t_send1, (Optr)PSend22970, (Optr)&t_block_return);
+    Block PBlock22965 = new_Block_with(empty_Array, empty_Array, PThreadedCode22966, 1, PSend22970);
     // ifTrue:. 
-    Send PSend22594 = new_Send((Optr)PSend22593, SMB_ifTrue_, 1, (Optr)PBlock22595);
-    Assign PAssign22601 = new_Assign((Optr)VAR_action_0_3, (Optr)nil_Const);
+    Send PSend22964 = new_Send((Optr)PSend22963, SMB_ifTrue_, 1, (Optr)PBlock22965);
+    Assign PAssign22971 = new_Assign((Optr)VAR_action_0_3, (Optr)nil_Const);
     Symbol SMB_asLowercase = new_Symbol(L"asLowercase");
     // asLowercase. 
-    Send PSend22603 = new_Send((Optr)VAR_dispatchUrl_0_1, SMB_asLowercase, 0);
-    Assign PAssign22602 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22603);
-    String string_22604 = new_String(L"/");
+    Send PSend22973 = new_Send((Optr)VAR_dispatchUrl_0_1, SMB_asLowercase, 0);
+    Assign PAssign22972 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22973);
+    String string_22974 = new_String(L"/");
     Symbol SMB_beginsWith_ = new_Symbol(L"beginsWith:");
-    Constant string_22604_Const = new_Constant((Optr)string_22604);
+    Constant string_22974_Const = new_Constant((Optr)string_22974);
     // beginsWith:. 
-    Send PSend22605 = new_Send((Optr)VAR_entryUrl_0_2, SMB_beginsWith_, 1, (Optr)string_22604_Const);
+    Send PSend22975 = new_Send((Optr)VAR_entryUrl_0_2, SMB_beginsWith_, 1, (Optr)string_22974_Const);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
-    String string_22611 = new_String(L"/");
-    Constant string_22611_Const = new_Constant((Optr)string_22611);
+    String string_22981 = new_String(L"/");
+    Constant string_22981_Const = new_Constant((Optr)string_22981);
     Symbol SMB__append_ = new_Symbol(L",");
     // ,. 
-    Send PSend22610 = new_Send((Optr)string_22611_Const, SMB__append_, 1, (Optr)VAR_entryUrl_0_2);
-    Assign PAssign22609 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22610);
-    Array PThreadedCode22608 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push1, (Optr)PAssign22609, (Optr)&t_push1, (Optr)string_22611, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_send1, (Optr)PSend22610, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22607 = new_Block_with(empty_Array, empty_Array, PThreadedCode22608, 1, PAssign22609);
+    Send PSend22980 = new_Send((Optr)string_22981_Const, SMB__append_, 1, (Optr)VAR_entryUrl_0_2);
+    Assign PAssign22979 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22980);
+    Array PThreadedCode22978 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push1, (Optr)PAssign22979, (Optr)&t_push1, (Optr)string_22981, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_send1, (Optr)PSend22980, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock22977 = new_Block_with(empty_Array, empty_Array, PThreadedCode22978, 1, PAssign22979);
     // ifFalse:. 
-    Send PSend22606 = new_Send((Optr)PSend22605, SMB_ifFalse_, 1, (Optr)PBlock22607);
+    Send PSend22976 = new_Send((Optr)PSend22975, SMB_ifFalse_, 1, (Optr)PBlock22977);
     Symbol SMB_notEmpty = new_Symbol(L"notEmpty");
     // notEmpty. 
-    Send PSend22616 = new_Send((Optr)VAR_entryUrl_0_2, SMB_notEmpty, 0);
+    Send PSend22986 = new_Send((Optr)VAR_entryUrl_0_2, SMB_notEmpty, 0);
     Symbol SMB__pequals_ = new_Symbol(L"==");
     // ==. 
-    Send PSend22619 = new_Send((Optr)VAR_action_0_3, SMB__pequals_, 1, (Optr)nil_Const);
-    Array PThreadedCode22618 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend22619, (Optr)&t_block_return);
-    Block PBlock22617 = new_Block_with(empty_Array, empty_Array, PThreadedCode22618, 1, PSend22619);
+    Send PSend22989 = new_Send((Optr)VAR_action_0_3, SMB__pequals_, 1, (Optr)nil_Const);
+    Array PThreadedCode22988 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend22989, (Optr)&t_block_return);
+    Block PBlock22987 = new_Block_with(empty_Array, empty_Array, PThreadedCode22988, 1, PSend22989);
     Symbol SMB_and_ = new_Symbol(L"and:");
     // and:. 
-    Send PSend22620 = new_Send((Optr)PSend22616, SMB_and_, 1, (Optr)PBlock22617);
-    Array PThreadedCode22615 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_send0, (Optr)PSend22616, (Optr)&t_push_closure, (Optr)PBlock22617, (Optr)&t_send1, (Optr)PSend22620, (Optr)&t_block_return);
-    Block PBlock22614 = new_Block_with(empty_Array, empty_Array, PThreadedCode22615, 1, PSend22620);
+    Send PSend22990 = new_Send((Optr)PSend22986, SMB_and_, 1, (Optr)PBlock22987);
+    Array PThreadedCode22985 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_send0, (Optr)PSend22986, (Optr)&t_push_closure, (Optr)PBlock22987, (Optr)&t_send1, (Optr)PSend22990, (Optr)&t_block_return);
+    Block PBlock22984 = new_Block_with(empty_Array, empty_Array, PThreadedCode22985, 1, PSend22990);
     Symbol SMB_at_ifAbsent_ = new_Symbol(L"at:ifAbsent:");
-    Array PThreadedCode22626 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22625 = new_Block_with(empty_Array, empty_Array, PThreadedCode22626, 1, nil_Const);
+    Array PThreadedCode22996 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock22995 = new_Block_with(empty_Array, empty_Array, PThreadedCode22996, 1, nil_Const);
     // at:ifAbsent:. 
-    Send PSend22624 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_ifAbsent_, 2, (Optr)VAR_entryUrl_0_2, (Optr)PBlock22625);
-    Assign PAssign22623 = new_Assign((Optr)VAR_action_0_3, (Optr)PSend22624);
+    Send PSend22994 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_ifAbsent_, 2, (Optr)VAR_entryUrl_0_2, (Optr)PBlock22995);
+    Assign PAssign22993 = new_Assign((Optr)VAR_action_0_3, (Optr)PSend22994);
     Symbol SMB_copyUpToLast_ = new_Symbol(L"copyUpToLast:");
-    Character char_22629 = new_Character(L'/');
-    Constant char_22629_Const = new_Constant((Optr)char_22629);
+    Character char_22999 = new_Character(L'/');
+    Constant char_22999_Const = new_Constant((Optr)char_22999);
     // copyUpToLast:. 
-    Send PSend22628 = new_Send((Optr)VAR_entryUrl_0_2, SMB_copyUpToLast_, 1, (Optr)char_22629_Const);
-    Assign PAssign22627 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22628);
-    Array PThreadedCode22622 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push1, (Optr)PAssign22623, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push_closure, (Optr)PBlock22625, (Optr)&t_send2, (Optr)PSend22624, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22627, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push1, (Optr)char_22629, (Optr)&t_send1, (Optr)PSend22628, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22621 = new_Block_with(empty_Array, empty_Array, PThreadedCode22622, 2, PAssign22623, PAssign22627);
+    Send PSend22998 = new_Send((Optr)VAR_entryUrl_0_2, SMB_copyUpToLast_, 1, (Optr)char_22999_Const);
+    Assign PAssign22997 = new_Assign((Optr)VAR_entryUrl_0_2, (Optr)PSend22998);
+    Array PThreadedCode22992 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push1, (Optr)PAssign22993, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push_closure, (Optr)PBlock22995, (Optr)&t_send2, (Optr)PSend22994, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22997, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push1, (Optr)char_22999, (Optr)&t_send1, (Optr)PSend22998, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock22991 = new_Block_with(empty_Array, empty_Array, PThreadedCode22992, 2, PAssign22993, PAssign22997);
     Symbol SMB_whileTrue_ = new_Symbol(L"whileTrue:");
     // whileTrue:. 
-    Send PSend22630 = new_Send((Optr)PBlock22614, SMB_whileTrue_, 1, (Optr)PBlock22621);
-    String string_22635 = new_String(L"/");
-    Constant string_22635_Const = new_Constant((Optr)string_22635);
-    Array PThreadedCode22637 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22636 = new_Block_with(empty_Array, empty_Array, PThreadedCode22637, 1, nil_Const);
+    Send PSend23000 = new_Send((Optr)PBlock22984, SMB_whileTrue_, 1, (Optr)PBlock22991);
+    String string_23005 = new_String(L"/");
+    Constant string_23005_Const = new_Constant((Optr)string_23005);
+    Array PThreadedCode23007 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock23006 = new_Block_with(empty_Array, empty_Array, PThreadedCode23007, 1, nil_Const);
     // at:ifAbsent:. 
-    Send PSend22634 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_ifAbsent_, 2, (Optr)string_22635_Const, (Optr)PBlock22636);
-    Assign PAssign22633 = new_Assign((Optr)VAR_action_0_3, (Optr)PSend22634);
-    Array PThreadedCode22632 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push1, (Optr)PAssign22633, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push1, (Optr)string_22635, (Optr)&t_push_closure, (Optr)PBlock22636, (Optr)&t_send2, (Optr)PSend22634, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22631 = new_Block_with(empty_Array, empty_Array, PThreadedCode22632, 1, PAssign22633);
+    Send PSend23004 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_ifAbsent_, 2, (Optr)string_23005_Const, (Optr)PBlock23006);
+    Assign PAssign23003 = new_Assign((Optr)VAR_action_0_3, (Optr)PSend23004);
+    Array PThreadedCode23002 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push1, (Optr)PAssign23003, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push1, (Optr)string_23005, (Optr)&t_push_closure, (Optr)PBlock23006, (Optr)&t_send2, (Optr)PSend23004, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock23001 = new_Block_with(empty_Array, empty_Array, PThreadedCode23002, 1, PAssign23003);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend22638 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_, 1, (Optr)PBlock22631);
-    Array PThreadedCode22613 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_closure, (Optr)PBlock22614, (Optr)&t_push_closure, (Optr)PBlock22621, (Optr)&t_send1, (Optr)PSend22630, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock22631, (Optr)&t_send1, (Optr)PSend22638, (Optr)&t_block_return);
-    Block PBlock22612 = new_Block_with(empty_Array, empty_Array, PThreadedCode22613, 2, PSend22630, PSend22638);
+    Send PSend23008 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_, 1, (Optr)PBlock23001);
+    Array PThreadedCode22983 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_closure, (Optr)PBlock22984, (Optr)&t_push_closure, (Optr)PBlock22991, (Optr)&t_send1, (Optr)PSend23000, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock23001, (Optr)&t_send1, (Optr)PSend23008, (Optr)&t_block_return);
+    Block PBlock22982 = new_Block_with(empty_Array, empty_Array, PThreadedCode22983, 2, PSend23000, PSend23008);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22639 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22612);
+    Send PSend23009 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22982);
     // method. 
-    Send PSend22640 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
-    String string_22641 = new_String(L"OPTIONS");
-    Constant string_22641_Const = new_Constant((Optr)string_22641);
+    Send PSend23010 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
+    String string_23011 = new_String(L"OPTIONS");
+    Constant string_23011_Const = new_Constant((Optr)string_23011);
     // =. 
-    Send PSend22642 = new_Send((Optr)PSend22640, SMB__equals_, 1, (Optr)string_22641_Const);
+    Send PSend23012 = new_Send((Optr)PSend23010, SMB__equals_, 1, (Optr)string_23011_Const);
     Symbol SMB_builtinHttpMethods = new_Symbol(L"builtinHttpMethods");
     // builtinHttpMethods. 
-    Send PSend22646 = new_Send((Optr)self, SMB_builtinHttpMethods, 0);
+    Send PSend23016 = new_Send((Optr)self, SMB_builtinHttpMethods, 0);
     Symbol SMB_defaultHttpMethods = new_Symbol(L"defaultHttpMethods");
     // defaultHttpMethods. 
-    Send PSend22649 = new_Send((Optr)self, SMB_defaultHttpMethods, 0);
-    Array PThreadedCode22648 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22649, (Optr)&t_block_return);
-    Block PBlock22647 = new_Block_with(empty_Array, empty_Array, PThreadedCode22648, 1, PSend22649);
+    Send PSend23019 = new_Send((Optr)self, SMB_defaultHttpMethods, 0);
+    Array PThreadedCode23018 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23019, (Optr)&t_block_return);
+    Block PBlock23017 = new_Block_with(empty_Array, empty_Array, PThreadedCode23018, 1, PSend23019);
     Symbol SMB_first = new_Symbol(L"first");
     // first. 
-    Send PSend22652 = new_Send((Optr)VAR_action_0_3, SMB_first, 0);
-    Array PThreadedCode22651 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_send0, (Optr)PSend22652, (Optr)&t_block_return);
-    Block PBlock22650 = new_Block_with(empty_Array, empty_Array, PThreadedCode22651, 1, PSend22652);
+    Send PSend23022 = new_Send((Optr)VAR_action_0_3, SMB_first, 0);
+    Array PThreadedCode23021 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_send0, (Optr)PSend23022, (Optr)&t_block_return);
+    Block PBlock23020 = new_Block_with(empty_Array, empty_Array, PThreadedCode23021, 1, PSend23022);
     Symbol SMB_ifNil_ifNotNil_ = new_Symbol(L"ifNil:ifNotNil:");
     // ifNil:ifNotNil:. 
-    Send PSend22653 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock22647, (Optr)PBlock22650);
+    Send PSend23023 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_ifNotNil_, 2, (Optr)PBlock23017, (Optr)PBlock23020);
     // ,. 
-    Send PSend22654 = new_Send((Optr)PSend22646, SMB__append_, 1, (Optr)PSend22653);
+    Send PSend23024 = new_Send((Optr)PSend23016, SMB__append_, 1, (Optr)PSend23023);
     Symbol SMB_sendOptionsResponse_ = new_Symbol(L"sendOptionsResponse:");
     // sendOptionsResponse:. 
-    Send PSend22655 = new_Send((Optr)VAR_request_0_0, SMB_sendOptionsResponse_, 1, (Optr)PSend22654);
-    Array PThreadedCode22645 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22646, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock22647, (Optr)&t_push_closure, (Optr)PBlock22650, (Optr)&t_send2, (Optr)PSend22653, (Optr)&t_send1, (Optr)PSend22654, (Optr)&t_send1, (Optr)PSend22655, (Optr)&t_block_return);
-    Block PBlock22644 = new_Block_with(empty_Array, empty_Array, PThreadedCode22645, 1, PSend22655);
+    Send PSend23025 = new_Send((Optr)VAR_request_0_0, SMB_sendOptionsResponse_, 1, (Optr)PSend23024);
+    Array PThreadedCode23015 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23016, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock23017, (Optr)&t_push_closure, (Optr)PBlock23020, (Optr)&t_send2, (Optr)PSend23023, (Optr)&t_send1, (Optr)PSend23024, (Optr)&t_send1, (Optr)PSend23025, (Optr)&t_block_return);
+    Block PBlock23014 = new_Block_with(empty_Array, empty_Array, PThreadedCode23015, 1, PSend23025);
     // ifTrue:. 
-    Send PSend22643 = new_Send((Optr)PSend22642, SMB_ifTrue_, 1, (Optr)PBlock22644);
+    Send PSend23013 = new_Send((Optr)PSend23012, SMB_ifTrue_, 1, (Optr)PBlock23014);
     Symbol SMB_send404Response = new_Symbol(L"send404Response");
     // send404Response. 
-    Send PSend22658 = new_Send((Optr)VAR_request_0_0, SMB_send404Response, 0);
+    Send PSend23028 = new_Send((Optr)VAR_request_0_0, SMB_send404Response, 0);
     // escape:. 
-    Send PSend22659 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22658);
-    Array PThreadedCode22657 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22658, (Optr)&t_send1, (Optr)PSend22659, (Optr)&t_block_return);
-    Block PBlock22656 = new_Block_with(empty_Array, empty_Array, PThreadedCode22657, 1, PSend22659);
+    Send PSend23029 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend23028);
+    Array PThreadedCode23027 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend23028, (Optr)&t_send1, (Optr)PSend23029, (Optr)&t_block_return);
+    Block PBlock23026 = new_Block_with(empty_Array, empty_Array, PThreadedCode23027, 1, PSend23029);
     // ifNil:. 
-    Send PSend22660 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_, 1, (Optr)PBlock22656);
+    Send PSend23030 = new_Send((Optr)VAR_action_0_3, SMB_ifNil_, 1, (Optr)PBlock23026);
     // method. 
-    Send PSend22661 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
-    String string_22662 = new_String(L"HEAD");
-    Constant string_22662_Const = new_Constant((Optr)string_22662);
+    Send PSend23031 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
+    String string_23032 = new_String(L"HEAD");
+    Constant string_23032_Const = new_Constant((Optr)string_23032);
     // =. 
-    Send PSend22663 = new_Send((Optr)PSend22661, SMB__equals_, 1, (Optr)string_22662_Const);
+    Send PSend23033 = new_Send((Optr)PSend23031, SMB__equals_, 1, (Optr)string_23032_Const);
     Symbol SMB_at_ = new_Symbol(L"at:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:. 
-    Send PSend22666 = new_Send((Optr)VAR_action_0_3, SMB_at_, 1, (Optr)int_1_Const);
+    Send PSend23036 = new_Send((Optr)VAR_action_0_3, SMB_at_, 1, (Optr)int_1_Const);
     // method. 
-    Send PSend22667 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
+    Send PSend23037 = new_Send((Optr)VAR_request_0_0, SMB_method, 0);
     Symbol SMB_includes_ = new_Symbol(L"includes:");
     // includes:. 
-    Send PSend22668 = new_Send((Optr)PSend22666, SMB_includes_, 1, (Optr)PSend22667);
-    Array PThreadedCode22665 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend22666, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22667, (Optr)&t_send1, (Optr)PSend22668, (Optr)&t_block_return);
-    Block PBlock22664 = new_Block_with(empty_Array, empty_Array, PThreadedCode22665, 1, PSend22668);
+    Send PSend23038 = new_Send((Optr)PSend23036, SMB_includes_, 1, (Optr)PSend23037);
+    Array PThreadedCode23035 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend23036, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend23037, (Optr)&t_send1, (Optr)PSend23038, (Optr)&t_block_return);
+    Block PBlock23034 = new_Block_with(empty_Array, empty_Array, PThreadedCode23035, 1, PSend23038);
     Symbol SMB_or_ = new_Symbol(L"or:");
     // or:. 
-    Send PSend22669 = new_Send((Optr)PSend22663, SMB_or_, 1, (Optr)PBlock22664);
+    Send PSend23039 = new_Send((Optr)PSend23033, SMB_or_, 1, (Optr)PBlock23034);
     // builtinHttpMethods. 
-    Send PSend22673 = new_Send((Optr)self, SMB_builtinHttpMethods, 0);
+    Send PSend23043 = new_Send((Optr)self, SMB_builtinHttpMethods, 0);
     // first. 
-    Send PSend22674 = new_Send((Optr)VAR_action_0_3, SMB_first, 0);
+    Send PSend23044 = new_Send((Optr)VAR_action_0_3, SMB_first, 0);
     // ,. 
-    Send PSend22675 = new_Send((Optr)PSend22673, SMB__append_, 1, (Optr)PSend22674);
+    Send PSend23045 = new_Send((Optr)PSend23043, SMB__append_, 1, (Optr)PSend23044);
     Symbol SMB_send405Response_ = new_Symbol(L"send405Response:");
     // send405Response:. 
-    Send PSend22676 = new_Send((Optr)VAR_request_0_0, SMB_send405Response_, 1, (Optr)PSend22675);
+    Send PSend23046 = new_Send((Optr)VAR_request_0_0, SMB_send405Response_, 1, (Optr)PSend23045);
     // escape:. 
-    Send PSend22677 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend22676);
-    Array PThreadedCode22672 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22673, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_send0, (Optr)PSend22674, (Optr)&t_send1, (Optr)PSend22675, (Optr)&t_send1, (Optr)PSend22676, (Optr)&t_send1, (Optr)PSend22677, (Optr)&t_block_return);
-    Block PBlock22671 = new_Block_with(empty_Array, empty_Array, PThreadedCode22672, 1, PSend22677);
+    Send PSend23047 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend23046);
+    Array PThreadedCode23042 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23043, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_send0, (Optr)PSend23044, (Optr)&t_send1, (Optr)PSend23045, (Optr)&t_send1, (Optr)PSend23046, (Optr)&t_send1, (Optr)PSend23047, (Optr)&t_block_return);
+    Block PBlock23041 = new_Block_with(empty_Array, empty_Array, PThreadedCode23042, 1, PSend23047);
     // ifFalse:. 
-    Send PSend22670 = new_Send((Optr)PSend22669, SMB_ifFalse_, 1, (Optr)PBlock22671);
+    Send PSend23040 = new_Send((Optr)PSend23039, SMB_ifFalse_, 1, (Optr)PBlock23041);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // at:. 
-    Send PSend22680 = new_Send((Optr)VAR_action_0_3, SMB_at_, 1, (Optr)int_2_Const);
+    Send PSend23050 = new_Send((Optr)VAR_action_0_3, SMB_at_, 1, (Optr)int_2_Const);
     Symbol SMB_invokeAction_request_ = new_Symbol(L"invokeAction:request:");
     // invokeAction:request:. 
-    Send PSend22681 = new_Send((Optr)self, SMB_invokeAction_request_, 2, (Optr)PSend22680, (Optr)VAR_request_0_0);
-    Array PThreadedCode22679 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend22680, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send2, (Optr)PSend22681, (Optr)&t_block_return);
-    Block PBlock22678 = new_Block_with(empty_Array, empty_Array, PThreadedCode22679, 1, PSend22681);
+    Send PSend23051 = new_Send((Optr)self, SMB_invokeAction_request_, 2, (Optr)PSend23050, (Optr)VAR_request_0_0);
+    Array PThreadedCode23049 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend23050, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send2, (Optr)PSend23051, (Optr)&t_block_return);
+    Block PBlock23048 = new_Block_with(empty_Array, empty_Array, PThreadedCode23049, 1, PSend23051);
     Variable VAR_ex_2_0 = new_Variable_named(L"ex", 2);
-    Array PArray22683 = new_Array_with(1, (Optr)VAR_ex_2_0);
+    Array PArray23053 = new_Array_with(1, (Optr)VAR_ex_2_0);
     Symbol SMB_signal = new_Symbol(L"signal");
     // signal. 
-    Send PSend22685 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
-    Array PThreadedCode22684 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend22685, (Optr)&t_method_return);
-    Block PBlock22682 = new_Block_with(PArray22683, empty_Array, PThreadedCode22684, 1, PSend22685);
+    Send PSend23055 = new_Send((Optr)VAR_ex_2_0, SMB_signal, 0);
+    Array PThreadedCode23054 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_ex_2_0, (Optr)&t_send0, (Optr)PSend23055, (Optr)&t_method_return);
+    Block PBlock23052 = new_Block_with(PArray23053, empty_Array, PThreadedCode23054, 1, PSend23055);
     Symbol SMB_on_do_ = new_Symbol(L"on:do:");
     // on:do:. 
-    Send PSend22686 = new_Send((Optr)PBlock22678, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock22682);
-    Array PThreadedCode22590 = instantiate_Array_with(ThreadedCode_Class, 0, 86, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22591, (Optr)&t_push1, (Optr)string_22592, (Optr)&t_send1, (Optr)PSend22593, (Optr)&t_send_ifTrue_, (Optr)PSend22594, (Optr)PBlock22595, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22601, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22602, (Optr)&t_push_variable, (Optr)VAR_dispatchUrl_0_1, (Optr)&t_send0, (Optr)PSend22603, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push1, (Optr)string_22604, (Optr)&t_send1, (Optr)PSend22605, (Optr)&t_send_ifFalse_, (Optr)PSend22606, (Optr)PBlock22607, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22612, (Optr)&t_send1, (Optr)PSend22639, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22640, (Optr)&t_push1, (Optr)string_22641, (Optr)&t_send1, (Optr)PSend22642, (Optr)&t_send_ifTrue_, (Optr)PSend22643, (Optr)PBlock22644, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock22656, (Optr)&t_send1, (Optr)PSend22660, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22661, (Optr)&t_push1, (Optr)string_22662, (Optr)&t_send1, (Optr)PSend22663, (Optr)&t_push_closure, (Optr)PBlock22664, (Optr)&t_send1, (Optr)PSend22669, (Optr)&t_send_ifFalse_, (Optr)PSend22670, (Optr)PBlock22671, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22678, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock22682, (Optr)&t_send2, (Optr)PSend22686, (Optr)&t_method_return);
-    Block PBlock22588 = new_Block_with(PArray22589, empty_Array, PThreadedCode22590, 9, PSend22594, PAssign22601, PAssign22602, PSend22606, PSend22639, PSend22643, PSend22660, PSend22670, PSend22686);
+    Send PSend23056 = new_Send((Optr)PBlock23048, SMB_on_do_, 2, (Optr)Error_classReference, (Optr)PBlock23052);
+    Array PThreadedCode22960 = instantiate_Array_with(ThreadedCode_Class, 0, 86, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22961, (Optr)&t_push1, (Optr)string_22962, (Optr)&t_send1, (Optr)PSend22963, (Optr)&t_send_ifTrue_, (Optr)PSend22964, (Optr)PBlock22965, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22971, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22972, (Optr)&t_push_variable, (Optr)VAR_dispatchUrl_0_1, (Optr)&t_send0, (Optr)PSend22973, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_entryUrl_0_2, (Optr)&t_push1, (Optr)string_22974, (Optr)&t_send1, (Optr)PSend22975, (Optr)&t_send_ifFalse_, (Optr)PSend22976, (Optr)PBlock22977, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22982, (Optr)&t_send1, (Optr)PSend23009, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend23010, (Optr)&t_push1, (Optr)string_23011, (Optr)&t_send1, (Optr)PSend23012, (Optr)&t_send_ifTrue_, (Optr)PSend23013, (Optr)PBlock23014, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_action_0_3, (Optr)&t_push_closure, (Optr)PBlock23026, (Optr)&t_send1, (Optr)PSend23030, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend23031, (Optr)&t_push1, (Optr)string_23032, (Optr)&t_send1, (Optr)PSend23033, (Optr)&t_push_closure, (Optr)PBlock23034, (Optr)&t_send1, (Optr)PSend23039, (Optr)&t_send_ifFalse_, (Optr)PSend23040, (Optr)PBlock23041, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock23048, (Optr)&t_push_class_reference, (Optr)Error_classReference, (Optr)&t_push_closure, (Optr)PBlock23052, (Optr)&t_send2, (Optr)PSend23056, (Optr)&t_method_return);
+    Block PBlock22958 = new_Block_with(PArray22959, empty_Array, PThreadedCode22960, 9, PSend22964, PAssign22971, PAssign22972, PSend22976, PSend23009, PSend23013, PSend23030, PSend23040, PSend23056);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend22687 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22588);
-    Array PThreadedCode22587 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22588, (Optr)&t_send1, (Optr)PSend22687, (Optr)&t_method_return);
-    Method PMethod22584 = new_Method_with(PArray22585, PArray22586, empty_Array, PThreadedCode22587, 1, PSend22687);
+    Send PSend23057 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22958);
+    Array PThreadedCode22957 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22958, (Optr)&t_send1, (Optr)PSend23057, (Optr)&t_method_return);
+    Method PMethod22954 = new_Method_with(PArray22955, PArray22956, empty_Array, PThreadedCode22957, 1, PSend23057);
     
-    MethodClosure MC_SMB_dispatchRequest_url_ = new_MethodClosure((Method)PMethod22584, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_dispatchRequest_url_ = new_MethodClosure((Method)PMethod22954, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_dispatchRequest_url_, MC_SMB_dispatchRequest_url_);
 }
 
@@ -1103,16 +1103,16 @@ static void init_SMB_listenOn_interface_() {
     Symbol SMB_listenOn_interface_ = new_Symbol(L"listenOn:interface:");
     Variable VAR_aPort_0_0 = new_Variable_named(L"aPort", 0);
     Variable VAR_anInterface_0_1 = new_Variable_named(L"anInterface", 0);
-    Array PArray22689 = new_Array_with(2, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1);
+    Array PArray23059 = new_Array_with(2, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1);
     SmallInt int_8 = new_SmallInt(8);
     Symbol SMB_listenOn_interface_backlogSize_ = new_Symbol(L"listenOn:interface:backlogSize:");
     Constant int_8_Const = new_Constant((Optr)int_8);
     // listenOn:interface:backlogSize:. 
-    Send PSend22691 = new_Send((Optr)self, SMB_listenOn_interface_backlogSize_, 3, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1, (Optr)int_8_Const);
-    Array PThreadedCode22690 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_push_variable, (Optr)VAR_anInterface_0_1, (Optr)&t_push1, (Optr)int_8, (Optr)&t_send3, (Optr)PSend22691, (Optr)&t_method_return);
-    Method PMethod22688 = new_Method_with(PArray22689, empty_Array, empty_Array, PThreadedCode22690, 1, PSend22691);
+    Send PSend23061 = new_Send((Optr)self, SMB_listenOn_interface_backlogSize_, 3, (Optr)VAR_aPort_0_0, (Optr)VAR_anInterface_0_1, (Optr)int_8_Const);
+    Array PThreadedCode23060 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPort_0_0, (Optr)&t_push_variable, (Optr)VAR_anInterface_0_1, (Optr)&t_push1, (Optr)int_8, (Optr)&t_send3, (Optr)PSend23061, (Optr)&t_method_return);
+    Method PMethod23058 = new_Method_with(PArray23059, empty_Array, empty_Array, PThreadedCode23060, 1, PSend23061);
     
-    MethodClosure MC_SMB_listenOn_interface_ = new_MethodClosure((Method)PMethod22688, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenOn_interface_ = new_MethodClosure((Method)PMethod23058, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenOn_interface_, MC_SMB_listenOn_interface_);
 }
 
@@ -1121,29 +1121,29 @@ static void init_SMB_sessionAt_put_() {
     Symbol SMB_sessionAt_put_ = new_Symbol(L"sessionAt:put:");
     Variable VAR_key_0_0 = new_Variable_named(L"key", 0);
     Variable VAR_session_0_1 = new_Variable_named(L"session", 0);
-    Array PArray22693 = new_Array_with(2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
+    Array PArray23063 = new_Array_with(2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend22697 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_put_, 2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
-    Array PThreadedCode22696 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_variable, (Optr)VAR_session_0_1, (Optr)&t_send2, (Optr)PSend22697, (Optr)&t_block_return);
-    Block PBlock22695 = new_Block_with(empty_Array, empty_Array, PThreadedCode22696, 1, PSend22697);
+    Send PSend23067 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_put_, 2, (Optr)VAR_key_0_0, (Optr)VAR_session_0_1);
+    Array PThreadedCode23066 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_variable, (Optr)VAR_session_0_1, (Optr)&t_send2, (Optr)PSend23067, (Optr)&t_block_return);
+    Block PBlock23065 = new_Block_with(empty_Array, empty_Array, PThreadedCode23066, 1, PSend23067);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22698 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22695);
-    Array PThreadedCode22694 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22695, (Optr)&t_send1, (Optr)PSend22698, (Optr)&t_method_return);
-    Method PMethod22692 = new_Method_with(PArray22693, empty_Array, empty_Array, PThreadedCode22694, 1, PSend22698);
+    Send PSend23068 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock23065);
+    Array PThreadedCode23064 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock23065, (Optr)&t_send1, (Optr)PSend23068, (Optr)&t_method_return);
+    Method PMethod23062 = new_Method_with(PArray23063, empty_Array, empty_Array, PThreadedCode23064, 1, PSend23068);
     
-    MethodClosure MC_SMB_sessionAt_put_ = new_MethodClosure((Method)PMethod22692, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_sessionAt_put_ = new_MethodClosure((Method)PMethod23062, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_sessionAt_put_, MC_SMB_sessionAt_put_);
 }
 
 
 static void init_SMB_certName() {
     Symbol SMB_certName = new_Symbol(L"certName");
-    Array PThreadedCode22700 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_certName, (Optr)&t_method_return);
-    Method PMethod22699 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22700, 1, slot_WebClient_Core_WebServer_certName);
+    Array PThreadedCode23070 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_certName, (Optr)&t_method_return);
+    Method PMethod23069 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23070, 1, slot_WebClient_Core_WebServer_certName);
     
-    MethodClosure MC_SMB_certName = new_MethodClosure((Method)PMethod22699, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_certName = new_MethodClosure((Method)PMethod23069, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_certName, MC_SMB_certName);
 }
 
@@ -1153,49 +1153,49 @@ static void init_SMB_reportInternalServerError_label_request_() {
     Variable VAR_errReport_0_0 = new_Variable_named(L"errReport", 0);
     Variable VAR_errLabel_0_1 = new_Variable_named(L"errLabel", 0);
     Variable VAR_aRequest_0_2 = new_Variable_named(L"aRequest", 0);
-    Array PArray22702 = new_Array_with(3, (Optr)VAR_errReport_0_0, (Optr)VAR_errLabel_0_1, (Optr)VAR_aRequest_0_2);
+    Array PArray23072 = new_Array_with(3, (Optr)VAR_errReport_0_0, (Optr)VAR_errLabel_0_1, (Optr)VAR_aRequest_0_2);
     Variable VAR_errLog_0_3 = new_Variable_named(L"errLog", 0);
-    Array PArray22703 = new_Array_with(1, (Optr)VAR_errLog_0_3);
-    String string_22711 = new_String(L"<html><head><title>500 Internal Server Error</title></head><body>");
-    Constant string_22711_Const = new_Constant((Optr)string_22711);
+    Array PArray23073 = new_Array_with(1, (Optr)VAR_errLog_0_3);
+    String string_23081 = new_String(L"<html><head><title>500 Internal Server Error</title></head><body>");
+    Constant string_23081_Const = new_Constant((Optr)string_23081);
     Symbol SMB__append_ = new_Symbol(L",");
-    String string_22712 = new_String(L"<h1>Internal Server Error: ");
-    Constant string_22712_Const = new_Constant((Optr)string_22712);
+    String string_23082 = new_String(L"<h1>Internal Server Error: ");
+    Constant string_23082_Const = new_Constant((Optr)string_23082);
     // ,. 
-    Send PSend22710 = new_Send((Optr)string_22711_Const, SMB__append_, 1, (Optr)string_22712_Const);
+    Send PSend23080 = new_Send((Optr)string_23081_Const, SMB__append_, 1, (Optr)string_23082_Const);
     // ,. 
-    Send PSend22709 = new_Send((Optr)PSend22710, SMB__append_, 1, (Optr)VAR_errLabel_0_1);
-    String string_22713 = new_String(L"</h1><pre>");
-    Constant string_22713_Const = new_Constant((Optr)string_22713);
+    Send PSend23079 = new_Send((Optr)PSend23080, SMB__append_, 1, (Optr)VAR_errLabel_0_1);
+    String string_23083 = new_String(L"</h1><pre>");
+    Constant string_23083_Const = new_Constant((Optr)string_23083);
     // ,. 
-    Send PSend22708 = new_Send((Optr)PSend22709, SMB__append_, 1, (Optr)string_22713_Const);
+    Send PSend23078 = new_Send((Optr)PSend23079, SMB__append_, 1, (Optr)string_23083_Const);
     Symbol SMB_copyReplaceAll_with_ = new_Symbol(L"copyReplaceAll:with:");
     Symbol SMB_cr = new_Symbol(L"cr");
     // cr. 
-    Send PSend22715 = new_Send((Optr)String_classReference, SMB_cr, 0);
+    Send PSend23085 = new_Send((Optr)String_classReference, SMB_cr, 0);
     Symbol SMB_crlf = new_Symbol(L"crlf");
     // crlf. 
-    Send PSend22716 = new_Send((Optr)String_classReference, SMB_crlf, 0);
+    Send PSend23086 = new_Send((Optr)String_classReference, SMB_crlf, 0);
     // copyReplaceAll:with:. 
-    Send PSend22714 = new_Send((Optr)VAR_errReport_0_0, SMB_copyReplaceAll_with_, 2, (Optr)PSend22715, (Optr)PSend22716);
+    Send PSend23084 = new_Send((Optr)VAR_errReport_0_0, SMB_copyReplaceAll_with_, 2, (Optr)PSend23085, (Optr)PSend23086);
     // ,. 
-    Send PSend22707 = new_Send((Optr)PSend22708, SMB__append_, 1, (Optr)PSend22714);
-    String string_22717 = new_String(L"</pre></body></html>");
-    Constant string_22717_Const = new_Constant((Optr)string_22717);
+    Send PSend23077 = new_Send((Optr)PSend23078, SMB__append_, 1, (Optr)PSend23084);
+    String string_23087 = new_String(L"</pre></body></html>");
+    Constant string_23087_Const = new_Constant((Optr)string_23087);
     // ,. 
-    Send PSend22706 = new_Send((Optr)PSend22707, SMB__append_, 1, (Optr)string_22717_Const);
-    Assign PAssign22705 = new_Assign((Optr)VAR_errLog_0_3, (Optr)PSend22706);
+    Send PSend23076 = new_Send((Optr)PSend23077, SMB__append_, 1, (Optr)string_23087_Const);
+    Assign PAssign23075 = new_Assign((Optr)VAR_errLog_0_3, (Optr)PSend23076);
     SmallInt int_500 = new_SmallInt(500);
-    String string_22718 = new_String(L"text/plain; charset=utf-8");
+    String string_23088 = new_String(L"text/plain; charset=utf-8");
     Symbol SMB_sendResponseCode_content_type_close_ = new_Symbol(L"sendResponseCode:content:type:close:");
     Constant int_500_Const = new_Constant((Optr)int_500);
-    Constant string_22718_Const = new_Constant((Optr)string_22718);
+    Constant string_23088_Const = new_Constant((Optr)string_23088);
     // sendResponseCode:content:type:close:. 
-    Send PSend22719 = new_Send((Optr)VAR_aRequest_0_2, SMB_sendResponseCode_content_type_close_, 4, (Optr)int_500_Const, (Optr)VAR_errLog_0_3, (Optr)string_22718_Const, (Optr)true_Const);
-    Array PThreadedCode22704 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push1, (Optr)PAssign22705, (Optr)&t_push1, (Optr)string_22711, (Optr)&t_push1, (Optr)string_22712, (Optr)&t_send1, (Optr)PSend22710, (Optr)&t_push_variable, (Optr)VAR_errLabel_0_1, (Optr)&t_send1, (Optr)PSend22709, (Optr)&t_push1, (Optr)string_22713, (Optr)&t_send1, (Optr)PSend22708, (Optr)&t_push_variable, (Optr)VAR_errReport_0_0, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22715, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend22716, (Optr)&t_send2, (Optr)PSend22714, (Optr)&t_send1, (Optr)PSend22707, (Optr)&t_push1, (Optr)string_22717, (Optr)&t_send1, (Optr)PSend22706, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aRequest_0_2, (Optr)&t_push1, (Optr)int_500, (Optr)&t_push_variable, (Optr)VAR_errLog_0_3, (Optr)&t_push1, (Optr)string_22718, (Optr)&t_push_true, (Optr)&t_send4, (Optr)PSend22719, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22701 = new_Method_with(PArray22702, PArray22703, empty_Array, PThreadedCode22704, 3, PAssign22705, PSend22719, self);
+    Send PSend23089 = new_Send((Optr)VAR_aRequest_0_2, SMB_sendResponseCode_content_type_close_, 4, (Optr)int_500_Const, (Optr)VAR_errLog_0_3, (Optr)string_23088_Const, (Optr)true_Const);
+    Array PThreadedCode23074 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push1, (Optr)PAssign23075, (Optr)&t_push1, (Optr)string_23081, (Optr)&t_push1, (Optr)string_23082, (Optr)&t_send1, (Optr)PSend23080, (Optr)&t_push_variable, (Optr)VAR_errLabel_0_1, (Optr)&t_send1, (Optr)PSend23079, (Optr)&t_push1, (Optr)string_23083, (Optr)&t_send1, (Optr)PSend23078, (Optr)&t_push_variable, (Optr)VAR_errReport_0_0, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend23085, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_send0, (Optr)PSend23086, (Optr)&t_send2, (Optr)PSend23084, (Optr)&t_send1, (Optr)PSend23077, (Optr)&t_push1, (Optr)string_23087, (Optr)&t_send1, (Optr)PSend23076, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aRequest_0_2, (Optr)&t_push1, (Optr)int_500, (Optr)&t_push_variable, (Optr)VAR_errLog_0_3, (Optr)&t_push1, (Optr)string_23088, (Optr)&t_push_true, (Optr)&t_send4, (Optr)PSend23089, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23071 = new_Method_with(PArray23072, PArray23073, empty_Array, PThreadedCode23074, 3, PAssign23075, PSend23089, self);
     
-    MethodClosure MC_SMB_reportInternalServerError_label_request_ = new_MethodClosure((Method)PMethod22701, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_reportInternalServerError_label_request_ = new_MethodClosure((Method)PMethod23071, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_reportInternalServerError_label_request_, MC_SMB_reportInternalServerError_label_request_);
 }
 
@@ -1211,19 +1211,19 @@ static void init_SMB_serverString() {
     Symbol SMB_serverString = new_Symbol(L"serverString");
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend22726 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend23096 = new_Send((Optr)self, SMB_class, 0);
     // serverString. 
-    Send PSend22725 = new_Send((Optr)PSend22726, SMB_serverString, 0);
-    Assign PAssign22724 = new_Assign((Optr)slot_WebClient_Core_WebServer_serverString, (Optr)PSend22725);
-    Array PThreadedCode22723 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign22724, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22726, (Optr)&t_send0, (Optr)PSend22725, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22722 = new_Block_with(empty_Array, empty_Array, PThreadedCode22723, 1, PAssign22724);
+    Send PSend23095 = new_Send((Optr)PSend23096, SMB_serverString, 0);
+    Assign PAssign23094 = new_Assign((Optr)slot_WebClient_Core_WebServer_serverString, (Optr)PSend23095);
+    Array PThreadedCode23093 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign23094, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23096, (Optr)&t_send0, (Optr)PSend23095, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock23092 = new_Block_with(empty_Array, empty_Array, PThreadedCode23093, 1, PAssign23094);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend22727 = new_Send((Optr)slot_WebClient_Core_WebServer_serverString, SMB_ifNil_, 1, (Optr)PBlock22722);
-    Array PThreadedCode22721 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_serverString, (Optr)&t_push_closure, (Optr)PBlock22722, (Optr)&t_send1, (Optr)PSend22727, (Optr)&t_method_return);
-    Method PMethod22720 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22721, 1, PSend22727);
+    Send PSend23097 = new_Send((Optr)slot_WebClient_Core_WebServer_serverString, SMB_ifNil_, 1, (Optr)PBlock23092);
+    Array PThreadedCode23091 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_serverString, (Optr)&t_push_closure, (Optr)PBlock23092, (Optr)&t_send1, (Optr)PSend23097, (Optr)&t_method_return);
+    Method PMethod23090 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23091, 1, PSend23097);
     
-    MethodClosure MC_SMB_serverString = new_MethodClosure((Method)PMethod22720, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_serverString = new_MethodClosure((Method)PMethod23090, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_serverString, MC_SMB_serverString);
 }
 
@@ -1231,22 +1231,22 @@ static void init_SMB_serverString() {
 static void init_SMB_log_() {
     Symbol SMB_log_ = new_Symbol(L"log:");
     Variable VAR_aString_0_0 = new_Variable_named(L"aString", 0);
-    Array PArray22729 = new_Array_with(1, (Optr)VAR_aString_0_0);
+    Array PArray23099 = new_Array_with(1, (Optr)VAR_aString_0_0);
     Symbol SMB_with_ = new_Symbol(L"with:");
     // with:. 
-    Send PSend22733 = new_Send((Optr)Array_classReference, SMB_with_, 1, (Optr)VAR_aString_0_0);
+    Send PSend23103 = new_Send((Optr)Array_classReference, SMB_with_, 1, (Optr)VAR_aString_0_0);
     Symbol SMB_valueWithArguments_ = new_Symbol(L"valueWithArguments:");
     // valueWithArguments:. 
-    Send PSend22734 = new_Send((Optr)slot_WebClient_Core_WebServer_logAction, SMB_valueWithArguments_, 1, (Optr)PSend22733);
-    Array PThreadedCode22732 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_send1, (Optr)PSend22733, (Optr)&t_send1, (Optr)PSend22734, (Optr)&t_block_return);
-    Block PBlock22731 = new_Block_with(empty_Array, empty_Array, PThreadedCode22732, 1, PSend22734);
+    Send PSend23104 = new_Send((Optr)slot_WebClient_Core_WebServer_logAction, SMB_valueWithArguments_, 1, (Optr)PSend23103);
+    Array PThreadedCode23102 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_send1, (Optr)PSend23103, (Optr)&t_send1, (Optr)PSend23104, (Optr)&t_block_return);
+    Block PBlock23101 = new_Block_with(empty_Array, empty_Array, PThreadedCode23102, 1, PSend23104);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend22735 = new_Send((Optr)slot_WebClient_Core_WebServer_logAction, SMB_ifNotNil_, 1, (Optr)PBlock22731);
-    Array PThreadedCode22730 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_push_closure, (Optr)PBlock22731, (Optr)&t_send1, (Optr)PSend22735, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22728 = new_Method_with(PArray22729, empty_Array, empty_Array, PThreadedCode22730, 2, PSend22735, self);
+    Send PSend23105 = new_Send((Optr)slot_WebClient_Core_WebServer_logAction, SMB_ifNotNil_, 1, (Optr)PBlock23101);
+    Array PThreadedCode23100 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_logAction, (Optr)&t_push_closure, (Optr)PBlock23101, (Optr)&t_send1, (Optr)PSend23105, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23098 = new_Method_with(PArray23099, empty_Array, empty_Array, PThreadedCode23100, 2, PSend23105, self);
     
-    MethodClosure MC_SMB_log_ = new_MethodClosure((Method)PMethod22728, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_log_ = new_MethodClosure((Method)PMethod23098, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_log_, MC_SMB_log_);
 }
 
@@ -1254,25 +1254,25 @@ static void init_SMB_log_() {
 static void init_SMB_newRequest() {
     Symbol SMB_newRequest = new_Symbol(L"newRequest");
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray22739 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray23109 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_server_ = new_Symbol(L"server:");
     // server:. 
-    Send PSend22741 = new_Send((Optr)VAR__receiver__1_0, SMB_server_, 1, (Optr)self);
+    Send PSend23111 = new_Send((Optr)VAR__receiver__1_0, SMB_server_, 1, (Optr)self);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend22742 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode22740 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend22741, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend22742, (Optr)&t_method_return);
-    Block PBlock22738 = new_Block_with(PArray22739, empty_Array, PThreadedCode22740, 2, PSend22741, PSend22742);
+    Send PSend23112 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode23110 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend23111, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend23112, (Optr)&t_method_return);
+    Block PBlock23108 = new_Block_with(PArray23109, empty_Array, PThreadedCode23110, 2, PSend23111, PSend23112);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend22743 = new_Send((Optr)PWebRequest_classReference, SMB_new, 0);
+    Send PSend23113 = new_Send((Optr)PWebRequest_classReference, SMB_new, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend22744 = new_Send((Optr)PBlock22738, SMB_value_, 1, (Optr)PSend22743);
-    Array PThreadedCode22737 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_closure, (Optr)PBlock22738, (Optr)&t_push_class_reference, (Optr)PWebRequest_classReference, (Optr)&t_send0, (Optr)PSend22743, (Optr)&t_send1, (Optr)PSend22744, (Optr)&t_method_return);
-    Method PMethod22736 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22737, 1, PSend22744);
+    Send PSend23114 = new_Send((Optr)PBlock23108, SMB_value_, 1, (Optr)PSend23113);
+    Array PThreadedCode23107 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_closure, (Optr)PBlock23108, (Optr)&t_push_class_reference, (Optr)PWebRequest_classReference, (Optr)&t_send0, (Optr)PSend23113, (Optr)&t_send1, (Optr)PSend23114, (Optr)&t_method_return);
+    Method PMethod23106 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23107, 1, PSend23114);
     
-    MethodClosure MC_SMB_newRequest = new_MethodClosure((Method)PMethod22736, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_newRequest = new_MethodClosure((Method)PMethod23106, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_newRequest, MC_SMB_newRequest);
 }
 
@@ -1280,32 +1280,32 @@ static void init_SMB_newRequest() {
 static void init_SMB_vault_() {
     Symbol SMB_vault_ = new_Symbol(L"vault:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray22746 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign22748 = new_Assign((Optr)slot_WebClient_Core_WebServer_vault, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode22747 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22748, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22745 = new_Method_with(PArray22746, empty_Array, empty_Array, PThreadedCode22747, 2, PAssign22748, self);
+    Array PArray23116 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign23118 = new_Assign((Optr)slot_WebClient_Core_WebServer_vault, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode23117 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign23118, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23115 = new_Method_with(PArray23116, empty_Array, empty_Array, PThreadedCode23117, 2, PAssign23118, self);
     
-    MethodClosure MC_SMB_vault_ = new_MethodClosure((Method)PMethod22745, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_vault_ = new_MethodClosure((Method)PMethod23115, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_vault_, MC_SMB_vault_);
 }
 
 
 static void init_SMB_errorHandler() {
     Symbol SMB_errorHandler = new_Symbol(L"errorHandler");
-    Array PThreadedCode22750 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_errorHandler, (Optr)&t_method_return);
-    Method PMethod22749 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22750, 1, slot_WebClient_Core_WebServer_errorHandler);
+    Array PThreadedCode23120 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_errorHandler, (Optr)&t_method_return);
+    Method PMethod23119 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23120, 1, slot_WebClient_Core_WebServer_errorHandler);
     
-    MethodClosure MC_SMB_errorHandler = new_MethodClosure((Method)PMethod22749, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_errorHandler = new_MethodClosure((Method)PMethod23119, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_errorHandler, MC_SMB_errorHandler);
 }
 
 
 static void init_SMB_listenerPort() {
     Symbol SMB_listenerPort = new_Symbol(L"listenerPort");
-    Array PThreadedCode22752 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_method_return);
-    Method PMethod22751 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22752, 1, slot_WebClient_Core_WebServer_port);
+    Array PThreadedCode23122 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_port, (Optr)&t_method_return);
+    Method PMethod23121 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23122, 1, slot_WebClient_Core_WebServer_port);
     
-    MethodClosure MC_SMB_listenerPort = new_MethodClosure((Method)PMethod22751, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_listenerPort = new_MethodClosure((Method)PMethod23121, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_listenerPort, MC_SMB_listenerPort);
 }
 
@@ -1329,13 +1329,13 @@ static void init_SMB_serverDate() {
     Symbol SMB_serverDate = new_Symbol(L"serverDate");
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend22755 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend23125 = new_Send((Optr)self, SMB_class, 0);
     // serverDate. 
-    Send PSend22756 = new_Send((Optr)PSend22755, SMB_serverDate, 0);
-    Array PThreadedCode22754 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22755, (Optr)&t_send0, (Optr)PSend22756, (Optr)&t_method_return);
-    Method PMethod22753 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22754, 1, PSend22756);
+    Send PSend23126 = new_Send((Optr)PSend23125, SMB_serverDate, 0);
+    Array PThreadedCode23124 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23125, (Optr)&t_send0, (Optr)PSend23126, (Optr)&t_method_return);
+    Method PMethod23123 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23124, 1, PSend23126);
     
-    MethodClosure MC_SMB_serverDate = new_MethodClosure((Method)PMethod22753, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_serverDate = new_MethodClosure((Method)PMethod23123, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_serverDate, MC_SMB_serverDate);
 }
 
@@ -1343,17 +1343,17 @@ static void init_SMB_serverDate() {
 static void init_SMB_dispatchRequest_() {
     Symbol SMB_dispatchRequest_ = new_Symbol(L"dispatchRequest:");
     Variable VAR_request_0_0 = new_Variable_named(L"request", 0);
-    Array PArray22758 = new_Array_with(1, (Optr)VAR_request_0_0);
+    Array PArray23128 = new_Array_with(1, (Optr)VAR_request_0_0);
     Symbol SMB_url = new_Symbol(L"url");
     // url. 
-    Send PSend22760 = new_Send((Optr)VAR_request_0_0, SMB_url, 0);
+    Send PSend23130 = new_Send((Optr)VAR_request_0_0, SMB_url, 0);
     Symbol SMB_dispatchRequest_url_ = new_Symbol(L"dispatchRequest:url:");
     // dispatchRequest:url:. 
-    Send PSend22761 = new_Send((Optr)self, SMB_dispatchRequest_url_, 2, (Optr)VAR_request_0_0, (Optr)PSend22760);
-    Array PThreadedCode22759 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend22760, (Optr)&t_send2, (Optr)PSend22761, (Optr)&t_method_return);
-    Method PMethod22757 = new_Method_with(PArray22758, empty_Array, empty_Array, PThreadedCode22759, 1, PSend22761);
+    Send PSend23131 = new_Send((Optr)self, SMB_dispatchRequest_url_, 2, (Optr)VAR_request_0_0, (Optr)PSend23130);
+    Array PThreadedCode23129 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_push_variable, (Optr)VAR_request_0_0, (Optr)&t_send0, (Optr)PSend23130, (Optr)&t_send2, (Optr)PSend23131, (Optr)&t_method_return);
+    Method PMethod23127 = new_Method_with(PArray23128, empty_Array, empty_Array, PThreadedCode23129, 1, PSend23131);
     
-    MethodClosure MC_SMB_dispatchRequest_ = new_MethodClosure((Method)PMethod22757, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_dispatchRequest_ = new_MethodClosure((Method)PMethod23127, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_dispatchRequest_, MC_SMB_dispatchRequest_);
 }
 
@@ -1362,17 +1362,17 @@ static void init_SMB_invokeAction_request_() {
     Symbol SMB_invokeAction_request_ = new_Symbol(L"invokeAction:request:");
     Variable VAR_action_0_0 = new_Variable_named(L"action", 0);
     Variable VAR_request_0_1 = new_Variable_named(L"request", 0);
-    Array PArray22763 = new_Array_with(2, (Optr)VAR_action_0_0, (Optr)VAR_request_0_1);
+    Array PArray23133 = new_Array_with(2, (Optr)VAR_action_0_0, (Optr)VAR_request_0_1);
     Symbol SMB_with_ = new_Symbol(L"with:");
     // with:. 
-    Send PSend22765 = new_Send((Optr)Array_classReference, SMB_with_, 1, (Optr)VAR_request_0_1);
+    Send PSend23135 = new_Send((Optr)Array_classReference, SMB_with_, 1, (Optr)VAR_request_0_1);
     Symbol SMB_valueWithArguments_ = new_Symbol(L"valueWithArguments:");
     // valueWithArguments:. 
-    Send PSend22766 = new_Send((Optr)VAR_action_0_0, SMB_valueWithArguments_, 1, (Optr)PSend22765);
-    Array PThreadedCode22764 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_action_0_0, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_request_0_1, (Optr)&t_send1, (Optr)PSend22765, (Optr)&t_send1, (Optr)PSend22766, (Optr)&t_method_return);
-    Method PMethod22762 = new_Method_with(PArray22763, empty_Array, empty_Array, PThreadedCode22764, 1, PSend22766);
+    Send PSend23136 = new_Send((Optr)VAR_action_0_0, SMB_valueWithArguments_, 1, (Optr)PSend23135);
+    Array PThreadedCode23134 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_action_0_0, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_request_0_1, (Optr)&t_send1, (Optr)PSend23135, (Optr)&t_send1, (Optr)PSend23136, (Optr)&t_method_return);
+    Method PMethod23132 = new_Method_with(PArray23133, empty_Array, empty_Array, PThreadedCode23134, 1, PSend23136);
     
-    MethodClosure MC_SMB_invokeAction_request_ = new_MethodClosure((Method)PMethod22762, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_invokeAction_request_ = new_MethodClosure((Method)PMethod23132, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_invokeAction_request_, MC_SMB_invokeAction_request_);
 }
 
@@ -1380,26 +1380,26 @@ static void init_SMB_invokeAction_request_() {
 static void init_SMB_systemInfoOn_() {
     Symbol SMB_systemInfoOn_ = new_Symbol(L"systemInfoOn:");
     Variable VAR_strm_0_0 = new_Variable_named(L"strm", 0);
-    Array PArray22768 = new_Array_with(1, (Optr)VAR_strm_0_0);
+    Array PArray23138 = new_Array_with(1, (Optr)VAR_strm_0_0);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray22771 = new_Array_with(1, (Optr)VAR__receiver__1_0);
-    String string_22773 = new_String(L"VM: Pinocchio");
+    Array PArray23141 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    String string_23143 = new_String(L"VM: Pinocchio");
     Symbol SMB_nextPutAll_ = new_Symbol(L"nextPutAll:");
-    Constant string_22773_Const = new_Constant((Optr)string_22773);
+    Constant string_23143_Const = new_Constant((Optr)string_23143);
     // nextPutAll:. 
-    Send PSend22774 = new_Send((Optr)VAR__receiver__1_0, SMB_nextPutAll_, 1, (Optr)string_22773_Const);
+    Send PSend23144 = new_Send((Optr)VAR__receiver__1_0, SMB_nextPutAll_, 1, (Optr)string_23143_Const);
     Symbol SMB_cr = new_Symbol(L"cr");
     // cr. 
-    Send PSend22775 = new_Send((Optr)VAR__receiver__1_0, SMB_cr, 0);
-    Array PThreadedCode22772 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)string_22773, (Optr)&t_send1, (Optr)PSend22774, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend22775, (Optr)&t_method_return);
-    Block PBlock22770 = new_Block_with(PArray22771, empty_Array, PThreadedCode22772, 2, PSend22774, PSend22775);
+    Send PSend23145 = new_Send((Optr)VAR__receiver__1_0, SMB_cr, 0);
+    Array PThreadedCode23142 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)string_23143, (Optr)&t_send1, (Optr)PSend23144, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend23145, (Optr)&t_method_return);
+    Block PBlock23140 = new_Block_with(PArray23141, empty_Array, PThreadedCode23142, 2, PSend23144, PSend23145);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend22776 = new_Send((Optr)PBlock22770, SMB_value_, 1, (Optr)VAR_strm_0_0);
-    Array PThreadedCode22769 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock22770, (Optr)&t_push_variable, (Optr)VAR_strm_0_0, (Optr)&t_send1, (Optr)PSend22776, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22767 = new_Method_with(PArray22768, empty_Array, empty_Array, PThreadedCode22769, 2, PSend22776, self);
+    Send PSend23146 = new_Send((Optr)PBlock23140, SMB_value_, 1, (Optr)VAR_strm_0_0);
+    Array PThreadedCode23139 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock23140, (Optr)&t_push_variable, (Optr)VAR_strm_0_0, (Optr)&t_send1, (Optr)PSend23146, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23137 = new_Method_with(PArray23138, empty_Array, empty_Array, PThreadedCode23139, 2, PSend23146, self);
     
-    MethodClosure MC_SMB_systemInfoOn_ = new_MethodClosure((Method)PMethod22767, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_systemInfoOn_ = new_MethodClosure((Method)PMethod23137, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_systemInfoOn_, MC_SMB_systemInfoOn_);
 }
 
@@ -1407,12 +1407,12 @@ static void init_SMB_systemInfoOn_() {
 static void init_SMB_accessLog_() {
     Symbol SMB_accessLog_ = new_Symbol(L"accessLog:");
     Variable VAR_aStreamOrFilename_0_0 = new_Variable_named(L"aStreamOrFilename", 0);
-    Array PArray22778 = new_Array_with(1, (Optr)VAR_aStreamOrFilename_0_0);
-    Assign PAssign22780 = new_Assign((Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)VAR_aStreamOrFilename_0_0);
-    Array PThreadedCode22779 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22780, (Optr)&t_push_variable, (Optr)VAR_aStreamOrFilename_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22777 = new_Method_with(PArray22778, empty_Array, empty_Array, PThreadedCode22779, 2, PAssign22780, self);
+    Array PArray23148 = new_Array_with(1, (Optr)VAR_aStreamOrFilename_0_0);
+    Assign PAssign23150 = new_Assign((Optr)slot_WebClient_Core_WebServer_accessLog, (Optr)VAR_aStreamOrFilename_0_0);
+    Array PThreadedCode23149 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign23150, (Optr)&t_push_variable, (Optr)VAR_aStreamOrFilename_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23147 = new_Method_with(PArray23148, empty_Array, empty_Array, PThreadedCode23149, 2, PAssign23150, self);
     
-    MethodClosure MC_SMB_accessLog_ = new_MethodClosure((Method)PMethod22777, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_accessLog_ = new_MethodClosure((Method)PMethod23147, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_accessLog_, MC_SMB_accessLog_);
 }
 
@@ -1420,21 +1420,21 @@ static void init_SMB_accessLog_() {
 static void init_SMB_sessionAt_() {
     Symbol SMB_sessionAt_ = new_Symbol(L"sessionAt:");
     Variable VAR_key_0_0 = new_Variable_named(L"key", 0);
-    Array PArray22782 = new_Array_with(1, (Optr)VAR_key_0_0);
-    Array PThreadedCode22787 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22786 = new_Block_with(empty_Array, empty_Array, PThreadedCode22787, 1, nil_Const);
+    Array PArray23152 = new_Array_with(1, (Optr)VAR_key_0_0);
+    Array PThreadedCode23157 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock23156 = new_Block_with(empty_Array, empty_Array, PThreadedCode23157, 1, nil_Const);
     Symbol SMB_at_ifAbsent_ = new_Symbol(L"at:ifAbsent:");
     // at:ifAbsent:. 
-    Send PSend22788 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_ifAbsent_, 2, (Optr)VAR_key_0_0, (Optr)PBlock22786);
-    Array PThreadedCode22785 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_closure, (Optr)PBlock22786, (Optr)&t_send2, (Optr)PSend22788, (Optr)&t_block_return);
-    Block PBlock22784 = new_Block_with(empty_Array, empty_Array, PThreadedCode22785, 1, PSend22788);
+    Send PSend23158 = new_Send((Optr)slot_WebClient_Core_WebServer_sessions, SMB_at_ifAbsent_, 2, (Optr)VAR_key_0_0, (Optr)PBlock23156);
+    Array PThreadedCode23155 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_sessions, (Optr)&t_push_variable, (Optr)VAR_key_0_0, (Optr)&t_push_closure, (Optr)PBlock23156, (Optr)&t_send2, (Optr)PSend23158, (Optr)&t_block_return);
+    Block PBlock23154 = new_Block_with(empty_Array, empty_Array, PThreadedCode23155, 1, PSend23158);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22789 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22784);
-    Array PThreadedCode22783 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22784, (Optr)&t_send1, (Optr)PSend22789, (Optr)&t_method_return);
-    Method PMethod22781 = new_Method_with(PArray22782, empty_Array, empty_Array, PThreadedCode22783, 1, PSend22789);
+    Send PSend23159 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock23154);
+    Array PThreadedCode23153 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock23154, (Optr)&t_send1, (Optr)PSend23159, (Optr)&t_method_return);
+    Method PMethod23151 = new_Method_with(PArray23152, empty_Array, empty_Array, PThreadedCode23153, 1, PSend23159);
     
-    MethodClosure MC_SMB_sessionAt_ = new_MethodClosure((Method)PMethod22781, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_sessionAt_ = new_MethodClosure((Method)PMethod23151, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_sessionAt_, MC_SMB_sessionAt_);
 }
 
@@ -1442,12 +1442,12 @@ static void init_SMB_sessionAt_() {
 static void init_SMB_certName_() {
     Symbol SMB_certName_ = new_Symbol(L"certName:");
     Variable VAR_aString_0_0 = new_Variable_named(L"aString", 0);
-    Array PArray22791 = new_Array_with(1, (Optr)VAR_aString_0_0);
-    Assign PAssign22793 = new_Assign((Optr)slot_WebClient_Core_WebServer_certName, (Optr)VAR_aString_0_0);
-    Array PThreadedCode22792 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22793, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22790 = new_Method_with(PArray22791, empty_Array, empty_Array, PThreadedCode22792, 2, PAssign22793, self);
+    Array PArray23161 = new_Array_with(1, (Optr)VAR_aString_0_0);
+    Assign PAssign23163 = new_Assign((Optr)slot_WebClient_Core_WebServer_certName, (Optr)VAR_aString_0_0);
+    Array PThreadedCode23162 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign23163, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23160 = new_Method_with(PArray23161, empty_Array, empty_Array, PThreadedCode23162, 2, PAssign23163, self);
     
-    MethodClosure MC_SMB_certName_ = new_MethodClosure((Method)PMethod22790, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_certName_ = new_MethodClosure((Method)PMethod23160, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_certName_, MC_SMB_certName_);
 }
 
@@ -1457,25 +1457,25 @@ static void init_SMB_addService_action_methods_() {
     Variable VAR_entryPoint_0_0 = new_Variable_named(L"entryPoint", 0);
     Variable VAR_aBlockOrMessage_0_1 = new_Variable_named(L"aBlockOrMessage", 0);
     Variable VAR_methods_0_2 = new_Variable_named(L"methods", 0);
-    Array PArray22795 = new_Array_with(3, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1, (Optr)VAR_methods_0_2);
+    Array PArray23165 = new_Array_with(3, (Optr)VAR_entryPoint_0_0, (Optr)VAR_aBlockOrMessage_0_1, (Optr)VAR_methods_0_2);
     Symbol SMB_asLowercase = new_Symbol(L"asLowercase");
     // asLowercase. 
-    Send PSend22799 = new_Send((Optr)VAR_entryPoint_0_0, SMB_asLowercase, 0);
+    Send PSend23169 = new_Send((Optr)VAR_entryPoint_0_0, SMB_asLowercase, 0);
     Symbol SMB_with_with_ = new_Symbol(L"with:with:");
     // with:with:. 
-    Send PSend22800 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)VAR_methods_0_2, (Optr)VAR_aBlockOrMessage_0_1);
+    Send PSend23170 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)VAR_methods_0_2, (Optr)VAR_aBlockOrMessage_0_1);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend22801 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_put_, 2, (Optr)PSend22799, (Optr)PSend22800);
-    Array PThreadedCode22798 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_send0, (Optr)PSend22799, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_methods_0_2, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_1, (Optr)&t_send2, (Optr)PSend22800, (Optr)&t_send2, (Optr)PSend22801, (Optr)&t_block_return);
-    Block PBlock22797 = new_Block_with(empty_Array, empty_Array, PThreadedCode22798, 1, PSend22801);
+    Send PSend23171 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_at_put_, 2, (Optr)PSend23169, (Optr)PSend23170);
+    Array PThreadedCode23168 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_send0, (Optr)PSend23169, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_variable, (Optr)VAR_methods_0_2, (Optr)&t_push_variable, (Optr)VAR_aBlockOrMessage_0_1, (Optr)&t_send2, (Optr)PSend23170, (Optr)&t_send2, (Optr)PSend23171, (Optr)&t_block_return);
+    Block PBlock23167 = new_Block_with(empty_Array, empty_Array, PThreadedCode23168, 1, PSend23171);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22802 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22797);
-    Array PThreadedCode22796 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22797, (Optr)&t_send1, (Optr)PSend22802, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22794 = new_Method_with(PArray22795, empty_Array, empty_Array, PThreadedCode22796, 2, PSend22802, self);
+    Send PSend23172 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock23167);
+    Array PThreadedCode23166 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock23167, (Optr)&t_send1, (Optr)PSend23172, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23164 = new_Method_with(PArray23165, empty_Array, empty_Array, PThreadedCode23166, 2, PSend23172, self);
     
-    MethodClosure MC_SMB_addService_action_methods_ = new_MethodClosure((Method)PMethod22794, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_addService_action_methods_ = new_MethodClosure((Method)PMethod23164, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_addService_action_methods_, MC_SMB_addService_action_methods_);
 }
 
@@ -1483,36 +1483,36 @@ static void init_SMB_addService_action_methods_() {
 static void init_SMB_removeService_() {
     Symbol SMB_removeService_ = new_Symbol(L"removeService:");
     Variable VAR_entryPoint_0_0 = new_Variable_named(L"entryPoint", 0);
-    Array PArray22804 = new_Array_with(1, (Optr)VAR_entryPoint_0_0);
+    Array PArray23174 = new_Array_with(1, (Optr)VAR_entryPoint_0_0);
     Symbol SMB_asLowercase = new_Symbol(L"asLowercase");
     // asLowercase. 
-    Send PSend22808 = new_Send((Optr)VAR_entryPoint_0_0, SMB_asLowercase, 0);
-    Array PThreadedCode22810 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
-    Block PBlock22809 = new_Block_with(empty_Array, empty_Array, PThreadedCode22810, 0);
+    Send PSend23178 = new_Send((Optr)VAR_entryPoint_0_0, SMB_asLowercase, 0);
+    Array PThreadedCode23180 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_nil);
+    Block PBlock23179 = new_Block_with(empty_Array, empty_Array, PThreadedCode23180, 0);
     Symbol SMB_removeKey_ifAbsent_ = new_Symbol(L"removeKey:ifAbsent:");
     // removeKey:ifAbsent:. 
-    Send PSend22811 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_removeKey_ifAbsent_, 2, (Optr)PSend22808, (Optr)PBlock22809);
-    Array PThreadedCode22807 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_send0, (Optr)PSend22808, (Optr)&t_push_closure, (Optr)PBlock22809, (Optr)&t_send2, (Optr)PSend22811, (Optr)&t_block_return);
-    Block PBlock22806 = new_Block_with(empty_Array, empty_Array, PThreadedCode22807, 1, PSend22811);
+    Send PSend23181 = new_Send((Optr)slot_WebClient_Core_WebServer_entryPoints, SMB_removeKey_ifAbsent_, 2, (Optr)PSend23178, (Optr)PBlock23179);
+    Array PThreadedCode23177 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_entryPoints, (Optr)&t_push_variable, (Optr)VAR_entryPoint_0_0, (Optr)&t_send0, (Optr)PSend23178, (Optr)&t_push_closure, (Optr)PBlock23179, (Optr)&t_send2, (Optr)PSend23181, (Optr)&t_block_return);
+    Block PBlock23176 = new_Block_with(empty_Array, empty_Array, PThreadedCode23177, 1, PSend23181);
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     // critical:. 
-    Send PSend22812 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock22806);
-    Array PThreadedCode22805 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock22806, (Optr)&t_send1, (Optr)PSend22812, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22803 = new_Method_with(PArray22804, empty_Array, empty_Array, PThreadedCode22805, 2, PSend22812, self);
+    Send PSend23182 = new_Send((Optr)slot_WebClient_Core_WebServer_mutex, SMB_critical_, 1, (Optr)PBlock23176);
+    Array PThreadedCode23175 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_mutex, (Optr)&t_push_closure, (Optr)PBlock23176, (Optr)&t_send1, (Optr)PSend23182, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23173 = new_Method_with(PArray23174, empty_Array, empty_Array, PThreadedCode23175, 2, PSend23182, self);
     
-    MethodClosure MC_SMB_removeService_ = new_MethodClosure((Method)PMethod22803, WebClient_Core_WebServer_Class);
+    MethodClosure MC_SMB_removeService_ = new_MethodClosure((Method)PMethod23173, WebClient_Core_WebServer_Class);
     store_method(WebClient_Core_WebServer_Class, SMB_removeService_, MC_SMB_removeService_);
 }
 
 
 static void init_class_SMB_examplePage2() {
     Symbol SMB_examplePage2 = new_Symbol(L"examplePage2");
-    String string_22815 = new_String(L"<html>\n<p id=\"status\">WebSocket: Not connected</p> \n<form> \n    <input type=\"text\" id=\"chat\" placeholder=\"type and press enter to chat\" /> \n</form> \n<p>To test, open two windows with Web Socket support, type a message above and press return.</p> \n<ul id=\"log\"></ul> \n\n<script>\n\nvar conn = {};\nvar log = document.getElementById(\"log\");\nvar chat = document.getElementById(\"chat\");\nvar form = chat.form;\nvar state = document.getElementById(\"status\"); \n \nif (window.WebSocket === undefined) {\n  state.innerHTML = \"(WebSockets not supported)\";\n} else {\n    conn = new WebSocket(\"ws://localhost:8080/broadcast\");\n    conn.onopen = function () {\n      state.innerHTML = \"WebSocket: Connected\";\n    };\n \n    conn.onmessage = function (event) {\n      log.innerHTML = \"<li>\" + event.data + \"</li>\" + log.innerHTML;\n    };\n    \n    conn.onclose = function (event) {\n      state.innerHTML = \"WebSocket: Closed\";\n    };\n\n\tform.addEventListener(\"submit\", function (event) {\n\t\tevent.preventDefault();\n\t\tif (conn.readyState === 1) {\n\t\t\tconn.send(chat.value);      \n\t\t\tchat.value = \"\";\n\t\t}\n\t}, false);\n};\n \n</script> \n\n</body>\n</html>");
-    Array PThreadedCode22814 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22815, (Optr)&t_method_return);
-    Constant string_22815_Const = new_Constant((Optr)string_22815);
-    Method PMethod22813 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22814, 1, string_22815_Const);
+    String string_23185 = new_String(L"<html>\n<p id=\"status\">WebSocket: Not connected</p> \n<form> \n    <input type=\"text\" id=\"chat\" placeholder=\"type and press enter to chat\" /> \n</form> \n<p>To test, open two windows with Web Socket support, type a message above and press return.</p> \n<ul id=\"log\"></ul> \n\n<script>\n\nvar conn = {};\nvar log = document.getElementById(\"log\");\nvar chat = document.getElementById(\"chat\");\nvar form = chat.form;\nvar state = document.getElementById(\"status\"); \n \nif (window.WebSocket === undefined) {\n  state.innerHTML = \"(WebSockets not supported)\";\n} else {\n    conn = new WebSocket(\"ws://localhost:8080/broadcast\");\n    conn.onopen = function () {\n      state.innerHTML = \"WebSocket: Connected\";\n    };\n \n    conn.onmessage = function (event) {\n      log.innerHTML = \"<li>\" + event.data + \"</li>\" + log.innerHTML;\n    };\n    \n    conn.onclose = function (event) {\n      state.innerHTML = \"WebSocket: Closed\";\n    };\n\n\tform.addEventListener(\"submit\", function (event) {\n\t\tevent.preventDefault();\n\t\tif (conn.readyState === 1) {\n\t\t\tconn.send(chat.value);      \n\t\t\tchat.value = \"\";\n\t\t}\n\t}, false);\n};\n \n</script> \n\n</body>\n</html>");
+    Array PThreadedCode23184 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_23185, (Optr)&t_method_return);
+    Constant string_23185_Const = new_Constant((Optr)string_23185);
+    Method PMethod23183 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23184, 1, string_23185_Const);
     
-    MethodClosure MC_SMB_examplePage2 = new_MethodClosure((Method)PMethod22813, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_examplePage2 = new_MethodClosure((Method)PMethod23183, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_examplePage2, MC_SMB_examplePage2);
 }
 
@@ -1521,17 +1521,17 @@ static void init_class_SMB_reset() {
     Symbol SMB_reset = new_Symbol(L"reset");
     Symbol SMB_destroy = new_Symbol(L"destroy");
     // destroy. 
-    Send PSend22820 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_destroy, 0);
-    Assign PAssign22821 = new_Assign((Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)nil_Const);
-    Array PThreadedCode22819 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_send0, (Optr)PSend22820, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22821, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22818 = new_Block_with(empty_Array, empty_Array, PThreadedCode22819, 2, PSend22820, PAssign22821);
+    Send PSend23190 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_destroy, 0);
+    Assign PAssign23191 = new_Assign((Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)nil_Const);
+    Array PThreadedCode23189 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_send0, (Optr)PSend23190, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign23191, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock23188 = new_Block_with(empty_Array, empty_Array, PThreadedCode23189, 2, PSend23190, PAssign23191);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend22822 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_ifNotNil_, 1, (Optr)PBlock22818);
-    Array PThreadedCode22817 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_push_closure, (Optr)PBlock22818, (Optr)&t_send1, (Optr)PSend22822, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22816 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22817, 2, PSend22822, self);
+    Send PSend23192 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_ifNotNil_, 1, (Optr)PBlock23188);
+    Array PThreadedCode23187 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_push_closure, (Optr)PBlock23188, (Optr)&t_send1, (Optr)PSend23192, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23186 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23187, 2, PSend23192, self);
     
-    MethodClosure MC_SMB_reset = new_MethodClosure((Method)PMethod22816, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_reset = new_MethodClosure((Method)PMethod23186, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_reset, MC_SMB_reset);
 }
 
@@ -1539,129 +1539,129 @@ static void init_class_SMB_reset() {
 static void init_class_SMB_serverDate() {
     Symbol SMB_serverDate = new_Symbol(L"serverDate");
     Variable VAR_date_0_0 = new_Variable_named(L"date", 0);
-    Array PArray22824 = new_Array_with(1, (Optr)VAR_date_0_0);
+    Array PArray23194 = new_Array_with(1, (Optr)VAR_date_0_0);
     Variable VAR_s_1_0 = new_Variable_named(L"s", 1);
-    Array PArray22827 = new_Array_with(1, (Optr)VAR_s_1_0);
+    Array PArray23197 = new_Array_with(1, (Optr)VAR_s_1_0);
     Symbol SMB_now = new_Symbol(L"now");
     // now. 
-    Send PSend22831 = new_Send((Optr)DateAndTime_classReference, SMB_now, 0);
+    Send PSend23201 = new_Send((Optr)DateAndTime_classReference, SMB_now, 0);
     Symbol SMB_asUTC = new_Symbol(L"asUTC");
     // asUTC. 
-    Send PSend22830 = new_Send((Optr)PSend22831, SMB_asUTC, 0);
-    Assign PAssign22829 = new_Assign((Optr)VAR_date_0_0, (Optr)PSend22830);
+    Send PSend23200 = new_Send((Optr)PSend23201, SMB_asUTC, 0);
+    Assign PAssign23199 = new_Assign((Optr)VAR_date_0_0, (Optr)PSend23200);
     Symbol SMB_dayOfWeekAbbreviation = new_Symbol(L"dayOfWeekAbbreviation");
     // dayOfWeekAbbreviation. 
-    Send PSend22832 = new_Send((Optr)VAR_date_0_0, SMB_dayOfWeekAbbreviation, 0);
-    String string_22833 = new_String(L", ");
+    Send PSend23202 = new_Send((Optr)VAR_date_0_0, SMB_dayOfWeekAbbreviation, 0);
+    String string_23203 = new_String(L", ");
     Symbol SMB__append_ = new_Symbol(L",");
-    Constant string_22833_Const = new_Constant((Optr)string_22833);
+    Constant string_23203_Const = new_Constant((Optr)string_23203);
     // ,. 
-    Send PSend22834 = new_Send((Optr)PSend22832, SMB__append_, 1, (Optr)string_22833_Const);
+    Send PSend23204 = new_Send((Optr)PSend23202, SMB__append_, 1, (Optr)string_23203_Const);
     Symbol SMB_nextPutAll_ = new_Symbol(L"nextPutAll:");
     // nextPutAll:. 
-    Send PSend22835 = new_Send((Optr)VAR_s_1_0, SMB_nextPutAll_, 1, (Optr)PSend22834);
+    Send PSend23205 = new_Send((Optr)VAR_s_1_0, SMB_nextPutAll_, 1, (Optr)PSend23204);
     Symbol SMB_asDate = new_Symbol(L"asDate");
     // asDate. 
-    Send PSend22836 = new_Send((Optr)VAR_date_0_0, SMB_asDate, 0);
+    Send PSend23206 = new_Send((Optr)VAR_date_0_0, SMB_asDate, 0);
     Variable VAR__receiver__2_0 = new_Variable_named(L"_receiver_", 2);
-    Array PArray22838 = new_Array_with(1, (Optr)VAR__receiver__2_0);
+    Array PArray23208 = new_Array_with(1, (Optr)VAR__receiver__2_0);
     Symbol SMB_add_ = new_Symbol(L"add:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // add:. 
-    Send PSend22840 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_1_Const);
+    Send PSend23210 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_1_Const);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // add:. 
-    Send PSend22841 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
+    Send PSend23211 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
     SmallInt int_3 = new_SmallInt(3);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // add:. 
-    Send PSend22842 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_3_Const);
+    Send PSend23212 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_3_Const);
     Character char_4726 = new_Character(L' ');
     Constant char_4726_Const = new_Constant((Optr)char_4726);
     // add:. 
-    Send PSend22843 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)char_4726_Const);
+    Send PSend23213 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)char_4726_Const);
     // add:. 
-    Send PSend22844 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
+    Send PSend23214 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
     // add:. 
-    Send PSend22845 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_1_Const);
+    Send PSend23215 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_1_Const);
     // add:. 
-    Send PSend22846 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
+    Send PSend23216 = new_Send((Optr)VAR__receiver__2_0, SMB_add_, 1, (Optr)int_2_Const);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend22847 = new_Send((Optr)VAR__receiver__2_0, SMB_yourself, 0);
-    Array PThreadedCode22839 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend22840, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend22841, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend22842, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push1, (Optr)char_4726, (Optr)&t_send1, (Optr)PSend22843, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend22844, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend22845, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend22846, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend22847, (Optr)&t_method_return);
-    Block PBlock22837 = new_Block_with(PArray22838, empty_Array, PThreadedCode22839, 8, PSend22840, PSend22841, PSend22842, PSend22843, PSend22844, PSend22845, PSend22846, PSend22847);
+    Send PSend23217 = new_Send((Optr)VAR__receiver__2_0, SMB_yourself, 0);
+    Array PThreadedCode23209 = instantiate_Array_with(ThreadedCode_Class, 0, 49, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend23210, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend23211, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend23212, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push1, (Optr)char_4726, (Optr)&t_send1, (Optr)PSend23213, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend23214, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend23215, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend23216, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend23217, (Optr)&t_method_return);
+    Block PBlock23207 = new_Block_with(PArray23208, empty_Array, PThreadedCode23209, 8, PSend23210, PSend23211, PSend23212, PSend23213, PSend23214, PSend23215, PSend23216, PSend23217);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend22848 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
+    Send PSend23218 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend22849 = new_Send((Optr)PBlock22837, SMB_value_, 1, (Optr)PSend22848);
+    Send PSend23219 = new_Send((Optr)PBlock23207, SMB_value_, 1, (Optr)PSend23218);
     Symbol SMB_asArray = new_Symbol(L"asArray");
     // asArray. 
-    Send PSend22850 = new_Send((Optr)PSend22849, SMB_asArray, 0);
+    Send PSend23220 = new_Send((Optr)PSend23219, SMB_asArray, 0);
     Symbol SMB_printOn_format_ = new_Symbol(L"printOn:format:");
     // printOn:format:. 
-    Send PSend22851 = new_Send((Optr)PSend22836, SMB_printOn_format_, 2, (Optr)VAR_s_1_0, (Optr)PSend22850);
-    Array PArray22853 = new_Array_with(1, (Optr)VAR__receiver__2_0);
+    Send PSend23221 = new_Send((Optr)PSend23206, SMB_printOn_format_, 2, (Optr)VAR_s_1_0, (Optr)PSend23220);
+    Array PArray23223 = new_Array_with(1, (Optr)VAR__receiver__2_0);
     Symbol SMB_space = new_Symbol(L"space");
     // space. 
-    Send PSend22855 = new_Send((Optr)VAR__receiver__2_0, SMB_space, 0);
+    Send PSend23225 = new_Send((Optr)VAR__receiver__2_0, SMB_space, 0);
     Symbol SMB_seconds = new_Symbol(L"seconds");
     // seconds. 
-    Send PSend22856 = new_Send((Optr)VAR_date_0_0, SMB_seconds, 0);
+    Send PSend23226 = new_Send((Optr)VAR_date_0_0, SMB_seconds, 0);
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend22857 = new_Send((Optr)Time_classReference, SMB_seconds_, 1, (Optr)PSend22856);
+    Send PSend23227 = new_Send((Optr)Time_classReference, SMB_seconds_, 1, (Optr)PSend23226);
     Symbol SMB_print24 = new_Symbol(L"print24");
     // print24. 
-    Send PSend22858 = new_Send((Optr)PSend22857, SMB_print24, 0);
+    Send PSend23228 = new_Send((Optr)PSend23227, SMB_print24, 0);
     // nextPutAll:. 
-    Send PSend22859 = new_Send((Optr)VAR__receiver__2_0, SMB_nextPutAll_, 1, (Optr)PSend22858);
-    Array PThreadedCode22854 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend22855, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend22856, (Optr)&t_send1, (Optr)PSend22857, (Optr)&t_send0, (Optr)PSend22858, (Optr)&t_send1, (Optr)PSend22859, (Optr)&t_method_return);
-    Block PBlock22852 = new_Block_with(PArray22853, empty_Array, PThreadedCode22854, 2, PSend22855, PSend22859);
+    Send PSend23229 = new_Send((Optr)VAR__receiver__2_0, SMB_nextPutAll_, 1, (Optr)PSend23228);
+    Array PThreadedCode23224 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_send0, (Optr)PSend23225, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__2_0, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend23226, (Optr)&t_send1, (Optr)PSend23227, (Optr)&t_send0, (Optr)PSend23228, (Optr)&t_send1, (Optr)PSend23229, (Optr)&t_method_return);
+    Block PBlock23222 = new_Block_with(PArray23223, empty_Array, PThreadedCode23224, 2, PSend23225, PSend23229);
     // value:. 
-    Send PSend22860 = new_Send((Optr)PBlock22852, SMB_value_, 1, (Optr)VAR_s_1_0);
-    String string_22861 = new_String(L" GMT");
+    Send PSend23230 = new_Send((Optr)PBlock23222, SMB_value_, 1, (Optr)VAR_s_1_0);
+    String string_23231 = new_String(L" GMT");
     Symbol SMB_writeAll_ = new_Symbol(L"writeAll:");
-    Constant string_22861_Const = new_Constant((Optr)string_22861);
+    Constant string_23231_Const = new_Constant((Optr)string_23231);
     // writeAll:. 
-    Send PSend22862 = new_Send((Optr)VAR_s_1_0, SMB_writeAll_, 1, (Optr)string_22861_Const);
-    Array PThreadedCode22828 = instantiate_Array_with(ThreadedCode_Class, 0, 56, (Optr)&t_push1, (Optr)PAssign22829, (Optr)&t_push_class_reference, (Optr)DateAndTime_classReference, (Optr)&t_send0, (Optr)PSend22831, (Optr)&t_send0, (Optr)PSend22830, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend22832, (Optr)&t_push1, (Optr)string_22833, (Optr)&t_send1, (Optr)PSend22834, (Optr)&t_send1, (Optr)PSend22835, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend22836, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push_closure, (Optr)PBlock22837, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend22848, (Optr)&t_send1, (Optr)PSend22849, (Optr)&t_send0, (Optr)PSend22850, (Optr)&t_send2, (Optr)PSend22851, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock22852, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_send1, (Optr)PSend22860, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push1, (Optr)string_22861, (Optr)&t_send1, (Optr)PSend22862, (Optr)&t_method_return);
-    Block PBlock22826 = new_Block_with(PArray22827, empty_Array, PThreadedCode22828, 5, PAssign22829, PSend22835, PSend22851, PSend22860, PSend22862);
+    Send PSend23232 = new_Send((Optr)VAR_s_1_0, SMB_writeAll_, 1, (Optr)string_23231_Const);
+    Array PThreadedCode23198 = instantiate_Array_with(ThreadedCode_Class, 0, 56, (Optr)&t_push1, (Optr)PAssign23199, (Optr)&t_push_class_reference, (Optr)DateAndTime_classReference, (Optr)&t_send0, (Optr)PSend23201, (Optr)&t_send0, (Optr)PSend23200, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend23202, (Optr)&t_push1, (Optr)string_23203, (Optr)&t_send1, (Optr)PSend23204, (Optr)&t_send1, (Optr)PSend23205, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_date_0_0, (Optr)&t_send0, (Optr)PSend23206, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push_closure, (Optr)PBlock23207, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend23218, (Optr)&t_send1, (Optr)PSend23219, (Optr)&t_send0, (Optr)PSend23220, (Optr)&t_send2, (Optr)PSend23221, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock23222, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_send1, (Optr)PSend23230, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_1_0, (Optr)&t_push1, (Optr)string_23231, (Optr)&t_send1, (Optr)PSend23232, (Optr)&t_method_return);
+    Block PBlock23196 = new_Block_with(PArray23197, empty_Array, PThreadedCode23198, 5, PAssign23199, PSend23205, PSend23221, PSend23230, PSend23232);
     Symbol SMB_streamContents_ = new_Symbol(L"streamContents:");
     // streamContents:. 
-    Send PSend22863 = new_Send((Optr)String_classReference, SMB_streamContents_, 1, (Optr)PBlock22826);
-    Array PThreadedCode22825 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_push_closure, (Optr)PBlock22826, (Optr)&t_send1, (Optr)PSend22863, (Optr)&t_method_return);
-    Method PMethod22823 = new_Method_with(empty_Array, PArray22824, empty_Array, PThreadedCode22825, 1, PSend22863);
+    Send PSend23233 = new_Send((Optr)String_classReference, SMB_streamContents_, 1, (Optr)PBlock23196);
+    Array PThreadedCode23195 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)String_classReference, (Optr)&t_push_closure, (Optr)PBlock23196, (Optr)&t_send1, (Optr)PSend23233, (Optr)&t_method_return);
+    Method PMethod23193 = new_Method_with(empty_Array, PArray23194, empty_Array, PThreadedCode23195, 1, PSend23233);
     
-    MethodClosure MC_SMB_serverDate = new_MethodClosure((Method)PMethod22823, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_serverDate = new_MethodClosure((Method)PMethod23193, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_serverDate, MC_SMB_serverDate);
 }
 
 
 static void init_class_SMB_examplePage() {
     Symbol SMB_examplePage = new_Symbol(L"examplePage");
-    String string_22866 = new_String(L"<html><h1>David rocks!</hi></html>");
-    Array PThreadedCode22865 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22866, (Optr)&t_method_return);
-    Constant string_22866_Const = new_Constant((Optr)string_22866);
-    Method PMethod22864 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22865, 1, string_22866_Const);
+    String string_23236 = new_String(L"<html><h1>David rocks!</hi></html>");
+    Array PThreadedCode23235 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_23236, (Optr)&t_method_return);
+    Constant string_23236_Const = new_Constant((Optr)string_23236);
+    Method PMethod23234 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23235, 1, string_23236_Const);
     
-    MethodClosure MC_SMB_examplePage = new_MethodClosure((Method)PMethod22864, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_examplePage = new_MethodClosure((Method)PMethod23234, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_examplePage, MC_SMB_examplePage);
 }
 
 
 static void init_class_SMB_serverString() {
     Symbol SMB_serverString = new_Symbol(L"serverString");
-    String string_22869 = new_String(L"WebServer/1.3 (Minimal port for Pinocchio)");
-    Array PThreadedCode22868 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22869, (Optr)&t_method_return);
-    Constant string_22869_Const = new_Constant((Optr)string_22869);
-    Method PMethod22867 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22868, 1, string_22869_Const);
+    String string_23239 = new_String(L"WebServer/1.3 (Minimal port for Pinocchio)");
+    Array PThreadedCode23238 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_23239, (Optr)&t_method_return);
+    Constant string_23239_Const = new_Constant((Optr)string_23239);
+    Method PMethod23237 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23238, 1, string_23239_Const);
     
-    MethodClosure MC_SMB_serverString = new_MethodClosure((Method)PMethod22867, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_serverString = new_MethodClosure((Method)PMethod23237, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_serverString, MC_SMB_serverString);
 }
 
@@ -1670,17 +1670,17 @@ static void init_class_SMB_default() {
     Symbol SMB_default = new_Symbol(L"default");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend22875 = new_Send((Optr)self, SMB_new, 0);
-    Assign PAssign22874 = new_Assign((Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)PSend22875);
-    Array PThreadedCode22873 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22874, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22875, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock22872 = new_Block_with(empty_Array, empty_Array, PThreadedCode22873, 1, PAssign22874);
+    Send PSend23245 = new_Send((Optr)self, SMB_new, 0);
+    Assign PAssign23244 = new_Assign((Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)PSend23245);
+    Array PThreadedCode23243 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign23244, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23245, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock23242 = new_Block_with(empty_Array, empty_Array, PThreadedCode23243, 1, PAssign23244);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend22876 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_ifNil_, 1, (Optr)PBlock22872);
-    Array PThreadedCode22871 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_push_closure, (Optr)PBlock22872, (Optr)&t_send1, (Optr)PSend22876, (Optr)&t_method_return);
-    Method PMethod22870 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22871, 1, PSend22876);
+    Send PSend23246 = new_Send((Optr)slot_WebClient_Core_WebServer_Class_class_default, SMB_ifNil_, 1, (Optr)PBlock23242);
+    Array PThreadedCode23241 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_WebClient_Core_WebServer_Class_class_default, (Optr)&t_push_closure, (Optr)PBlock23242, (Optr)&t_send1, (Optr)PSend23246, (Optr)&t_method_return);
+    Method PMethod23240 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode23241, 1, PSend23246);
     
-    MethodClosure MC_SMB_default = new_MethodClosure((Method)PMethod22870, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_default = new_MethodClosure((Method)PMethod23240, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_default, MC_SMB_default);
 }
 
@@ -1689,48 +1689,48 @@ static void init_class_SMB_example() {
     Symbol SMB_example = new_Symbol(L"example");
     Variable VAR_mutex_0_0 = new_Variable_named(L"mutex", 0);
     Variable VAR_sockets_0_1 = new_Variable_named(L"sockets", 0);
-    Array PArray22878 = new_Array_with(2, (Optr)VAR_mutex_0_0, (Optr)VAR_sockets_0_1);
+    Array PArray23248 = new_Array_with(2, (Optr)VAR_mutex_0_0, (Optr)VAR_sockets_0_1);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend22881 = new_Send((Optr)Mutex_classReference, SMB_new, 0);
-    Assign PAssign22880 = new_Assign((Optr)VAR_mutex_0_0, (Optr)PSend22881);
+    Send PSend23251 = new_Send((Optr)Mutex_classReference, SMB_new, 0);
+    Assign PAssign23250 = new_Assign((Optr)VAR_mutex_0_0, (Optr)PSend23251);
     // new. 
-    Send PSend22883 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
-    Assign PAssign22882 = new_Assign((Optr)VAR_sockets_0_1, (Optr)PSend22883);
+    Send PSend23253 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
+    Assign PAssign23252 = new_Assign((Optr)VAR_sockets_0_1, (Optr)PSend23253);
     Symbol SMB_reset = new_Symbol(L"reset");
     // reset. 
-    Send PSend22884 = new_Send((Optr)PWebServer_classReference, SMB_reset, 0);
+    Send PSend23254 = new_Send((Optr)PWebServer_classReference, SMB_reset, 0);
     Symbol SMB_default = new_Symbol(L"default");
     // default. 
-    Send PSend22885 = new_Send((Optr)PSend22884, SMB_default, 0);
+    Send PSend23255 = new_Send((Optr)PSend23254, SMB_default, 0);
     SmallInt int_8080 = new_SmallInt(8080);
     Symbol SMB_listenOn_ = new_Symbol(L"listenOn:");
     Constant int_8080_Const = new_Constant((Optr)int_8080);
     // listenOn:. 
-    Send PSend22886 = new_Send((Optr)PSend22885, SMB_listenOn_, 1, (Optr)int_8080_Const);
+    Send PSend23256 = new_Send((Optr)PSend23255, SMB_listenOn_, 1, (Optr)int_8080_Const);
     // default. 
-    Send PSend22887 = new_Send((Optr)PWebServer_classReference, SMB_default, 0);
-    String string_22888 = new_String(L"/");
+    Send PSend23257 = new_Send((Optr)PWebServer_classReference, SMB_default, 0);
+    String string_23258 = new_String(L"/");
     Variable VAR_req_1_0 = new_Variable_named(L"req", 1);
-    Array PArray22890 = new_Array_with(1, (Optr)VAR_req_1_0);
+    Array PArray23260 = new_Array_with(1, (Optr)VAR_req_1_0);
     Symbol SMB_examplePage = new_Symbol(L"examplePage");
     // examplePage. 
-    Send PSend22892 = new_Send((Optr)self, SMB_examplePage, 0);
-    String string_22893 = new_String(L"text/html");
+    Send PSend23262 = new_Send((Optr)self, SMB_examplePage, 0);
+    String string_23263 = new_String(L"text/html");
     Symbol SMB_send200Response_contentType_ = new_Symbol(L"send200Response:contentType:");
-    Constant string_22893_Const = new_Constant((Optr)string_22893);
+    Constant string_23263_Const = new_Constant((Optr)string_23263);
     // send200Response:contentType:. 
-    Send PSend22894 = new_Send((Optr)VAR_req_1_0, SMB_send200Response_contentType_, 2, (Optr)PSend22892, (Optr)string_22893_Const);
-    Array PThreadedCode22891 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_variable, (Optr)VAR_req_1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22892, (Optr)&t_push1, (Optr)string_22893, (Optr)&t_send2, (Optr)PSend22894, (Optr)&t_method_return);
-    Block PBlock22889 = new_Block_with(PArray22890, empty_Array, PThreadedCode22891, 1, PSend22894);
+    Send PSend23264 = new_Send((Optr)VAR_req_1_0, SMB_send200Response_contentType_, 2, (Optr)PSend23262, (Optr)string_23263_Const);
+    Array PThreadedCode23261 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_variable, (Optr)VAR_req_1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend23262, (Optr)&t_push1, (Optr)string_23263, (Optr)&t_send2, (Optr)PSend23264, (Optr)&t_method_return);
+    Block PBlock23259 = new_Block_with(PArray23260, empty_Array, PThreadedCode23261, 1, PSend23264);
     Symbol SMB_addService_action_ = new_Symbol(L"addService:action:");
-    Constant string_22888_Const = new_Constant((Optr)string_22888);
+    Constant string_23258_Const = new_Constant((Optr)string_23258);
     // addService:action:. 
-    Send PSend22895 = new_Send((Optr)PSend22887, SMB_addService_action_, 2, (Optr)string_22888_Const, (Optr)PBlock22889);
-    Array PThreadedCode22879 = instantiate_Array_with(ThreadedCode_Class, 0, 39, (Optr)&t_push1, (Optr)PAssign22880, (Optr)&t_push_class_reference, (Optr)Mutex_classReference, (Optr)&t_send0, (Optr)PSend22881, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22882, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend22883, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)PWebServer_classReference, (Optr)&t_send0, (Optr)PSend22884, (Optr)&t_send0, (Optr)PSend22885, (Optr)&t_push1, (Optr)int_8080, (Optr)&t_send1, (Optr)PSend22886, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)PWebServer_classReference, (Optr)&t_send0, (Optr)PSend22887, (Optr)&t_push1, (Optr)string_22888, (Optr)&t_push_closure, (Optr)PBlock22889, (Optr)&t_send2, (Optr)PSend22895, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod22877 = new_Method_with(empty_Array, PArray22878, empty_Array, PThreadedCode22879, 5, PAssign22880, PAssign22882, PSend22886, PSend22895, self);
+    Send PSend23265 = new_Send((Optr)PSend23257, SMB_addService_action_, 2, (Optr)string_23258_Const, (Optr)PBlock23259);
+    Array PThreadedCode23249 = instantiate_Array_with(ThreadedCode_Class, 0, 39, (Optr)&t_push1, (Optr)PAssign23250, (Optr)&t_push_class_reference, (Optr)Mutex_classReference, (Optr)&t_send0, (Optr)PSend23251, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign23252, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend23253, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)PWebServer_classReference, (Optr)&t_send0, (Optr)PSend23254, (Optr)&t_send0, (Optr)PSend23255, (Optr)&t_push1, (Optr)int_8080, (Optr)&t_send1, (Optr)PSend23256, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)PWebServer_classReference, (Optr)&t_send0, (Optr)PSend23257, (Optr)&t_push1, (Optr)string_23258, (Optr)&t_push_closure, (Optr)PBlock23259, (Optr)&t_send2, (Optr)PSend23265, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod23247 = new_Method_with(empty_Array, PArray23248, empty_Array, PThreadedCode23249, 5, PAssign23250, PAssign23252, PSend23256, PSend23265, self);
     
-    MethodClosure MC_SMB_example = new_MethodClosure((Method)PMethod22877, HEADER(WebClient_Core_WebServer_Class));
+    MethodClosure MC_SMB_example = new_MethodClosure((Method)PMethod23247, HEADER(WebClient_Core_WebServer_Class));
     store_method(HEADER(WebClient_Core_WebServer_Class), SMB_example, MC_SMB_example);
 }
 

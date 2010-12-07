@@ -10,12 +10,12 @@ Optr layout_Organization_PathSegmentException;
 static void init_SMB_path_() {
     Symbol SMB_path_ = new_Symbol(L"path:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray21823 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign21825 = new_Assign((Optr)slot_Organization_PathSegmentException_path, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode21824 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21825, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21822 = new_Method_with(PArray21823, empty_Array, empty_Array, PThreadedCode21824, 2, PAssign21825, self);
+    Array PArray22193 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign22195 = new_Assign((Optr)slot_Organization_PathSegmentException_path, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode22194 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22195, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22192 = new_Method_with(PArray22193, empty_Array, empty_Array, PThreadedCode22194, 2, PAssign22195, self);
     
-    MethodClosure MC_SMB_path_ = new_MethodClosure((Method)PMethod21822, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_path_ = new_MethodClosure((Method)PMethod22192, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_path_, MC_SMB_path_);
 }
 
@@ -23,77 +23,77 @@ static void init_SMB_path_() {
 static void init_SMB_warnOn_() {
     Symbol SMB_warnOn_ = new_Symbol(L"warnOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21827 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray22197 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_message = new_Symbol(L"message");
     // message. 
-    Send PSend21829 = new_Send((Optr)self, SMB_message, 0);
+    Send PSend22199 = new_Send((Optr)self, SMB_message, 0);
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
     // <<. 
-    Send PSend21830 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend21829);
-    String string_21831 = new_String(L": ");
-    Constant string_21831_Const = new_Constant((Optr)string_21831);
+    Send PSend22200 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend22199);
+    String string_22201 = new_String(L": ");
+    Constant string_22201_Const = new_Constant((Optr)string_22201);
     // <<. 
-    Send PSend21832 = new_Send((Optr)PSend21830, SMB__shiftLeft_, 1, (Optr)string_21831_Const);
+    Send PSend22202 = new_Send((Optr)PSend22200, SMB__shiftLeft_, 1, (Optr)string_22201_Const);
     Symbol SMB__minus_ = new_Symbol(L"-");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // -. 
-    Send PSend21833 = new_Send((Optr)slot_Organization_PathSegmentException_index, SMB__minus_, 1, (Optr)int_1_Const);
+    Send PSend22203 = new_Send((Optr)slot_Organization_PathSegmentException_index, SMB__minus_, 1, (Optr)int_1_Const);
     Variable VAR_i_1_0 = new_Variable_named(L"i", 1);
-    Array PArray21835 = new_Array_with(1, (Optr)VAR_i_1_0);
+    Array PArray22205 = new_Array_with(1, (Optr)VAR_i_1_0);
     Symbol SMB_at_ = new_Symbol(L"at:");
     // at:. 
-    Send PSend21837 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)VAR_i_1_0);
+    Send PSend22207 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)VAR_i_1_0);
     // <<. 
-    Send PSend21838 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend21837);
+    Send PSend22208 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend22207);
     Character char_2907 = new_Character(L'.');
     Constant char_2907_Const = new_Constant((Optr)char_2907);
     // <<. 
-    Send PSend21839 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2907_Const);
-    Array PThreadedCode21836 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend21837, (Optr)&t_send1, (Optr)PSend21838, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2907, (Optr)&t_send1, (Optr)PSend21839, (Optr)&t_method_return);
-    Block PBlock21834 = new_Block_with(PArray21835, empty_Array, PThreadedCode21836, 2, PSend21838, PSend21839);
+    Send PSend22209 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2907_Const);
+    Array PThreadedCode22206 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend22207, (Optr)&t_send1, (Optr)PSend22208, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2907, (Optr)&t_send1, (Optr)PSend22209, (Optr)&t_method_return);
+    Block PBlock22204 = new_Block_with(PArray22205, empty_Array, PThreadedCode22206, 2, PSend22208, PSend22209);
     Symbol SMB_to_do_ = new_Symbol(L"to:do:");
     // to:do:. 
-    Send PSend21840 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend21833, (Optr)PBlock21834);
-    String string_21841 = new_String(L"--> ");
-    Constant string_21841_Const = new_Constant((Optr)string_21841);
+    Send PSend22210 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend22203, (Optr)PBlock22204);
+    String string_22211 = new_String(L"--> ");
+    Constant string_22211_Const = new_Constant((Optr)string_22211);
     // <<. 
-    Send PSend21842 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_21841_Const);
+    Send PSend22212 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_22211_Const);
     // at:. 
-    Send PSend21843 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)slot_Organization_PathSegmentException_index);
+    Send PSend22213 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)slot_Organization_PathSegmentException_index);
     // <<. 
-    Send PSend21844 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend21843);
+    Send PSend22214 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend22213);
     Symbol SMB__plus_ = new_Symbol(L"+");
     // +. 
-    Send PSend21845 = new_Send((Optr)slot_Organization_PathSegmentException_index, SMB__plus_, 1, (Optr)int_1_Const);
+    Send PSend22215 = new_Send((Optr)slot_Organization_PathSegmentException_index, SMB__plus_, 1, (Optr)int_1_Const);
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
-    Send PSend21846 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_size, 0);
-    Array PArray21848 = new_Array_with(1, (Optr)VAR_i_1_0);
+    Send PSend22216 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_size, 0);
+    Array PArray22218 = new_Array_with(1, (Optr)VAR_i_1_0);
     // <<. 
-    Send PSend21850 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2907_Const);
+    Send PSend22220 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2907_Const);
     // at:. 
-    Send PSend21851 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)VAR_i_1_0);
+    Send PSend22221 = new_Send((Optr)slot_Organization_PathSegmentException_path, SMB_at_, 1, (Optr)VAR_i_1_0);
     // <<. 
-    Send PSend21852 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend21851);
-    Array PThreadedCode21849 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2907, (Optr)&t_send1, (Optr)PSend21850, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend21851, (Optr)&t_send1, (Optr)PSend21852, (Optr)&t_method_return);
-    Block PBlock21847 = new_Block_with(PArray21848, empty_Array, PThreadedCode21849, 2, PSend21850, PSend21852);
+    Send PSend22222 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend22221);
+    Array PThreadedCode22219 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2907, (Optr)&t_send1, (Optr)PSend22220, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend22221, (Optr)&t_send1, (Optr)PSend22222, (Optr)&t_method_return);
+    Block PBlock22217 = new_Block_with(PArray22218, empty_Array, PThreadedCode22219, 2, PSend22220, PSend22222);
     // to:do:. 
-    Send PSend21853 = new_Send((Optr)PSend21845, SMB_to_do_, 2, (Optr)PSend21846, (Optr)PBlock21847);
-    Array PThreadedCode21828 = instantiate_Array_with(ThreadedCode_Class, 0, 58, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21829, (Optr)&t_send1, (Optr)PSend21830, (Optr)&t_push1, (Optr)string_21831, (Optr)&t_send1, (Optr)PSend21832, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21833, (Optr)&t_push_closure, (Optr)PBlock21834, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend21840, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_21841, (Optr)&t_send1, (Optr)PSend21842, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_send1, (Optr)PSend21843, (Optr)&t_send1, (Optr)PSend21844, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21845, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_send0, (Optr)PSend21846, (Optr)&t_push_closure, (Optr)PBlock21847, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend21853, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21826 = new_Method_with(PArray21827, empty_Array, empty_Array, PThreadedCode21828, 6, PSend21832, PSend21840, PSend21842, PSend21844, PSend21853, self);
+    Send PSend22223 = new_Send((Optr)PSend22215, SMB_to_do_, 2, (Optr)PSend22216, (Optr)PBlock22217);
+    Array PThreadedCode22198 = instantiate_Array_with(ThreadedCode_Class, 0, 58, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22199, (Optr)&t_send1, (Optr)PSend22200, (Optr)&t_push1, (Optr)string_22201, (Optr)&t_send1, (Optr)PSend22202, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend22203, (Optr)&t_push_closure, (Optr)PBlock22204, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend22210, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_22211, (Optr)&t_send1, (Optr)PSend22212, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_send1, (Optr)PSend22213, (Optr)&t_send1, (Optr)PSend22214, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend22215, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_send0, (Optr)PSend22216, (Optr)&t_push_closure, (Optr)PBlock22217, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend22223, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22196 = new_Method_with(PArray22197, empty_Array, empty_Array, PThreadedCode22198, 6, PSend22202, PSend22210, PSend22212, PSend22214, PSend22223, self);
     
-    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod21826, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_warnOn_ = new_MethodClosure((Method)PMethod22196, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_warnOn_, MC_SMB_warnOn_);
 }
 
 
 static void init_SMB_path() {
     Symbol SMB_path = new_Symbol(L"path");
-    Array PThreadedCode21855 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_method_return);
-    Method PMethod21854 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21855, 1, slot_Organization_PathSegmentException_path);
+    Array PThreadedCode22225 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_path, (Optr)&t_method_return);
+    Method PMethod22224 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22225, 1, slot_Organization_PathSegmentException_path);
     
-    MethodClosure MC_SMB_path = new_MethodClosure((Method)PMethod21854, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_path = new_MethodClosure((Method)PMethod22224, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_path, MC_SMB_path);
 }
 
@@ -101,12 +101,12 @@ static void init_SMB_path() {
 static void init_SMB_index_() {
     Symbol SMB_index_ = new_Symbol(L"index:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray21857 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign21859 = new_Assign((Optr)slot_Organization_PathSegmentException_index, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode21858 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21859, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21856 = new_Method_with(PArray21857, empty_Array, empty_Array, PThreadedCode21858, 2, PAssign21859, self);
+    Array PArray22227 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign22229 = new_Assign((Optr)slot_Organization_PathSegmentException_index, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode22228 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22229, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22226 = new_Method_with(PArray22227, empty_Array, empty_Array, PThreadedCode22228, 2, PAssign22229, self);
     
-    MethodClosure MC_SMB_index_ = new_MethodClosure((Method)PMethod21856, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_index_ = new_MethodClosure((Method)PMethod22226, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_index_, MC_SMB_index_);
 }
 
@@ -115,21 +115,21 @@ static void init_SMB_message() {
     Symbol SMB_message = new_Symbol(L"message");
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
     // subclassResponsibility. 
-    Send PSend21862 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
-    Array PThreadedCode21861 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21862, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21860 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21861, 2, PSend21862, self);
+    Send PSend22232 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
+    Array PThreadedCode22231 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22232, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22230 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22231, 2, PSend22232, self);
     
-    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod21860, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod22230, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_message, MC_SMB_message);
 }
 
 
 static void init_SMB_index() {
     Symbol SMB_index = new_Symbol(L"index");
-    Array PThreadedCode21864 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_method_return);
-    Method PMethod21863 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21864, 1, slot_Organization_PathSegmentException_index);
+    Array PThreadedCode22234 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Organization_PathSegmentException_index, (Optr)&t_method_return);
+    Method PMethod22233 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22234, 1, slot_Organization_PathSegmentException_index);
     
-    MethodClosure MC_SMB_index = new_MethodClosure((Method)PMethod21863, Organization_PathSegmentException_Class);
+    MethodClosure MC_SMB_index = new_MethodClosure((Method)PMethod22233, Organization_PathSegmentException_Class);
     store_method(Organization_PathSegmentException_Class, SMB_index, MC_SMB_index);
 }
 

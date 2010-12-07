@@ -7,12 +7,12 @@ Optr layout_Organization_NestedClassException;
 
 static void init_SMB_message() {
     Symbol SMB_message = new_Symbol(L"message");
-    String string_21900 = new_String(L"Classes are not nested");
-    Array PThreadedCode21899 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_21900, (Optr)&t_method_return);
-    Constant string_21900_Const = new_Constant((Optr)string_21900);
-    Method PMethod21898 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21899, 1, string_21900_Const);
+    String string_22270 = new_String(L"Classes are not nested");
+    Array PThreadedCode22269 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)string_22270, (Optr)&t_method_return);
+    Constant string_22270_Const = new_Constant((Optr)string_22270);
+    Method PMethod22268 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22269, 1, string_22270_Const);
     
-    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod21898, Organization_NestedClassException_Class);
+    MethodClosure MC_SMB_message = new_MethodClosure((Method)PMethod22268, Organization_NestedClassException_Class);
     store_method(Organization_NestedClassException_Class, SMB_message, MC_SMB_message);
 }
 

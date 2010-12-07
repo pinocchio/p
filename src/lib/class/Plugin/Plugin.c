@@ -12,22 +12,22 @@ Optr layout_Plugin_Plugin;
 static void init_SMB_path_() {
     Symbol SMB_path_ = new_Symbol(L"path:");
     Variable VAR_aPath_0_0 = new_Variable_named(L"aPath", 0);
-    Array PArray21902 = new_Array_with(1, (Optr)VAR_aPath_0_0);
-    Assign PAssign21904 = new_Assign((Optr)slot_Plugin_Plugin_path, (Optr)VAR_aPath_0_0);
-    Array PThreadedCode21903 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21904, (Optr)&t_push_variable, (Optr)VAR_aPath_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21901 = new_Method_with(PArray21902, empty_Array, empty_Array, PThreadedCode21903, 2, PAssign21904, self);
+    Array PArray22272 = new_Array_with(1, (Optr)VAR_aPath_0_0);
+    Assign PAssign22274 = new_Assign((Optr)slot_Plugin_Plugin_path, (Optr)VAR_aPath_0_0);
+    Array PThreadedCode22273 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22274, (Optr)&t_push_variable, (Optr)VAR_aPath_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22271 = new_Method_with(PArray22272, empty_Array, empty_Array, PThreadedCode22273, 2, PAssign22274, self);
     
-    MethodClosure MC_SMB_path_ = new_MethodClosure((Method)PMethod21901, Plugin_Plugin_Class);
+    MethodClosure MC_SMB_path_ = new_MethodClosure((Method)PMethod22271, Plugin_Plugin_Class);
     store_method(Plugin_Plugin_Class, SMB_path_, MC_SMB_path_);
 }
 
 
 static void init_SMB_identifier() {
     Symbol SMB_identifier = new_Symbol(L"identifier");
-    Array PThreadedCode21906 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_identifier, (Optr)&t_method_return);
-    Method PMethod21905 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21906, 1, slot_Plugin_Plugin_identifier);
+    Array PThreadedCode22276 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_identifier, (Optr)&t_method_return);
+    Method PMethod22275 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode22276, 1, slot_Plugin_Plugin_identifier);
     
-    MethodClosure MC_SMB_identifier = new_MethodClosure((Method)PMethod21905, Plugin_Plugin_Class);
+    MethodClosure MC_SMB_identifier = new_MethodClosure((Method)PMethod22275, Plugin_Plugin_Class);
     store_method(Plugin_Plugin_Class, SMB_identifier, MC_SMB_identifier);
 }
 
@@ -35,12 +35,12 @@ static void init_SMB_identifier() {
 static void init_SMB_identifier_() {
     Symbol SMB_identifier_ = new_Symbol(L"identifier:");
     Variable VAR_anIdentifier_0_0 = new_Variable_named(L"anIdentifier", 0);
-    Array PArray21908 = new_Array_with(1, (Optr)VAR_anIdentifier_0_0);
-    Assign PAssign21910 = new_Assign((Optr)slot_Plugin_Plugin_identifier, (Optr)VAR_anIdentifier_0_0);
-    Array PThreadedCode21909 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21910, (Optr)&t_push_variable, (Optr)VAR_anIdentifier_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21907 = new_Method_with(PArray21908, empty_Array, empty_Array, PThreadedCode21909, 2, PAssign21910, self);
+    Array PArray22278 = new_Array_with(1, (Optr)VAR_anIdentifier_0_0);
+    Assign PAssign22280 = new_Assign((Optr)slot_Plugin_Plugin_identifier, (Optr)VAR_anIdentifier_0_0);
+    Array PThreadedCode22279 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign22280, (Optr)&t_push_variable, (Optr)VAR_anIdentifier_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod22277 = new_Method_with(PArray22278, empty_Array, empty_Array, PThreadedCode22279, 2, PAssign22280, self);
     
-    MethodClosure MC_SMB_identifier_ = new_MethodClosure((Method)PMethod21907, Plugin_Plugin_Class);
+    MethodClosure MC_SMB_identifier_ = new_MethodClosure((Method)PMethod22277, Plugin_Plugin_Class);
     store_method(Plugin_Plugin_Class, SMB_identifier_, MC_SMB_identifier_);
 }
 
@@ -49,12 +49,12 @@ static void init_SMB_unload() {
     Symbol SMB_unload = new_Symbol(L"unload");
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Plugin_minus_Plugin = new_Symbol(L"Plugin.Plugin");
-    Annotation PAnnotation21913 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_unload, (Optr)SMB_Plugin_minus_Plugin);
-    Array PArray21912 = new_Array_with(1, (Optr)PAnnotation21913);
-    Array PThreadedCode21914 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod21911 = new_NativeMethod_with(empty_Array, empty_Array, PArray21912, PThreadedCode21914, 1, self);
+    Annotation PAnnotation22283 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_unload, (Optr)SMB_Plugin_minus_Plugin);
+    Array PArray22282 = new_Array_with(1, (Optr)PAnnotation22283);
+    Array PThreadedCode22284 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod22281 = new_NativeMethod_with(empty_Array, empty_Array, PArray22282, PThreadedCode22284, 1, self);
     
-    MethodClosure MC_SMB_unload = new_MethodClosure((Method)PNativeMethod21911, Plugin_Plugin_Class);
+    MethodClosure MC_SMB_unload = new_MethodClosure((Method)PNativeMethod22281, Plugin_Plugin_Class);
     store_method(Plugin_Plugin_Class, SMB_unload, MC_SMB_unload);
 }
 
@@ -63,43 +63,43 @@ static void init_class_SMB_require_at_() {
     Symbol SMB_require_at_ = new_Symbol(L"require:at:");
     Variable VAR_identifier_0_0 = new_Variable_named(L"identifier", 0);
     Variable VAR_aPath_0_1 = new_Variable_named(L"aPath", 0);
-    Array PArray21916 = new_Array_with(2, (Optr)VAR_identifier_0_0, (Optr)VAR_aPath_0_1);
+    Array PArray22286 = new_Array_with(2, (Optr)VAR_identifier_0_0, (Optr)VAR_aPath_0_1);
     Variable VAR_newPlugin_0_2 = new_Variable_named(L"newPlugin", 0);
-    Array PArray21917 = new_Array_with(1, (Optr)VAR_newPlugin_0_2);
+    Array PArray22287 = new_Array_with(1, (Optr)VAR_newPlugin_0_2);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray21920 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray22290 = new_Array_with(1, (Optr)VAR__return__1_0);
     Variable VAR_plugin_2_0 = new_Variable_named(L"plugin", 2);
-    Array PArray21923 = new_Array_with(1, (Optr)VAR_plugin_2_0);
+    Array PArray22293 = new_Array_with(1, (Optr)VAR_plugin_2_0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend21925 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_plugin_2_0);
-    Array PThreadedCode21924 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_plugin_2_0, (Optr)&t_send1, (Optr)PSend21925, (Optr)&t_method_return);
-    Block PBlock21922 = new_Block_with(PArray21923, empty_Array, PThreadedCode21924, 1, PSend21925);
+    Send PSend22295 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_plugin_2_0);
+    Array PThreadedCode22294 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_plugin_2_0, (Optr)&t_send1, (Optr)PSend22295, (Optr)&t_method_return);
+    Block PBlock22292 = new_Block_with(PArray22293, empty_Array, PThreadedCode22294, 1, PSend22295);
     Symbol SMB_at_ifPresent_ = new_Symbol(L"at:ifPresent:");
     // at:ifPresent:. 
-    Send PSend21926 = new_Send((Optr)slot_Plugin_Plugin_Class_class_plugins, SMB_at_ifPresent_, 2, (Optr)VAR_identifier_0_0, (Optr)PBlock21922);
+    Send PSend22296 = new_Send((Optr)slot_Plugin_Plugin_Class_class_plugins, SMB_at_ifPresent_, 2, (Optr)VAR_identifier_0_0, (Optr)PBlock22292);
     Symbol SMB_load_ = new_Symbol(L"load:");
     // load:. 
-    Send PSend21928 = new_Send((Optr)self, SMB_load_, 1, (Optr)VAR_aPath_0_1);
-    Assign PAssign21927 = new_Assign((Optr)VAR_newPlugin_0_2, (Optr)PSend21928);
+    Send PSend22298 = new_Send((Optr)self, SMB_load_, 1, (Optr)VAR_aPath_0_1);
+    Assign PAssign22297 = new_Assign((Optr)VAR_newPlugin_0_2, (Optr)PSend22298);
     Symbol SMB_path_ = new_Symbol(L"path:");
     // path:. 
-    Send PSend21929 = new_Send((Optr)VAR_newPlugin_0_2, SMB_path_, 1, (Optr)VAR_aPath_0_1);
+    Send PSend22299 = new_Send((Optr)VAR_newPlugin_0_2, SMB_path_, 1, (Optr)VAR_aPath_0_1);
     Symbol SMB_identifier_ = new_Symbol(L"identifier:");
     // identifier:. 
-    Send PSend21930 = new_Send((Optr)VAR_newPlugin_0_2, SMB_identifier_, 1, (Optr)VAR_identifier_0_0);
+    Send PSend22300 = new_Send((Optr)VAR_newPlugin_0_2, SMB_identifier_, 1, (Optr)VAR_identifier_0_0);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend21931 = new_Send((Optr)slot_Plugin_Plugin_Class_class_plugins, SMB_at_put_, 2, (Optr)VAR_identifier_0_0, (Optr)VAR_newPlugin_0_2);
-    Array PThreadedCode21921 = instantiate_Array_with(ThreadedCode_Class, 0, 44, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_Class_class_plugins, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_push_closure, (Optr)PBlock21922, (Optr)&t_send2, (Optr)PSend21926, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21927, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPath_0_1, (Optr)&t_send1, (Optr)PSend21928, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_push_variable, (Optr)VAR_aPath_0_1, (Optr)&t_send1, (Optr)PSend21929, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_send1, (Optr)PSend21930, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_Class_class_plugins, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_send2, (Optr)PSend21931, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_method_return);
-    Block PBlock21919 = new_Block_with(PArray21920, empty_Array, PThreadedCode21921, 6, PSend21926, PAssign21927, PSend21929, PSend21930, PSend21931, VAR_newPlugin_0_2);
+    Send PSend22301 = new_Send((Optr)slot_Plugin_Plugin_Class_class_plugins, SMB_at_put_, 2, (Optr)VAR_identifier_0_0, (Optr)VAR_newPlugin_0_2);
+    Array PThreadedCode22291 = instantiate_Array_with(ThreadedCode_Class, 0, 44, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_Class_class_plugins, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_push_closure, (Optr)PBlock22292, (Optr)&t_send2, (Optr)PSend22296, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign22297, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aPath_0_1, (Optr)&t_send1, (Optr)PSend22298, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_push_variable, (Optr)VAR_aPath_0_1, (Optr)&t_send1, (Optr)PSend22299, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_send1, (Optr)PSend22300, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Plugin_Plugin_Class_class_plugins, (Optr)&t_push_variable, (Optr)VAR_identifier_0_0, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_send2, (Optr)PSend22301, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_newPlugin_0_2, (Optr)&t_method_return);
+    Block PBlock22289 = new_Block_with(PArray22290, empty_Array, PThreadedCode22291, 6, PSend22296, PAssign22297, PSend22299, PSend22300, PSend22301, VAR_newPlugin_0_2);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend21932 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock21919);
-    Array PThreadedCode21918 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock21919, (Optr)&t_send1, (Optr)PSend21932, (Optr)&t_method_return);
-    Method PMethod21915 = new_Method_with(PArray21916, PArray21917, empty_Array, PThreadedCode21918, 1, PSend21932);
+    Send PSend22302 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock22289);
+    Array PThreadedCode22288 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock22289, (Optr)&t_send1, (Optr)PSend22302, (Optr)&t_method_return);
+    Method PMethod22285 = new_Method_with(PArray22286, PArray22287, empty_Array, PThreadedCode22288, 1, PSend22302);
     
-    MethodClosure MC_SMB_require_at_ = new_MethodClosure((Method)PMethod21915, HEADER(Plugin_Plugin_Class));
+    MethodClosure MC_SMB_require_at_ = new_MethodClosure((Method)PMethod22285, HEADER(Plugin_Plugin_Class));
     store_method(HEADER(Plugin_Plugin_Class), SMB_require_at_, MC_SMB_require_at_);
 }
 
@@ -107,18 +107,18 @@ static void init_class_SMB_require_at_() {
 static void init_class_SMB_load_() {
     Symbol SMB_load_ = new_Symbol(L"load:");
     Variable VAR_aPath_0_0 = new_Variable_named(L"aPath", 0);
-    Array PArray21934 = new_Array_with(1, (Optr)VAR_aPath_0_0);
+    Array PArray22304 = new_Array_with(1, (Optr)VAR_aPath_0_0);
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_Plugin_minus_Plugin = new_Symbol(L"Plugin.Plugin");
-    Annotation PAnnotation21936 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_load_, (Optr)SMB_Plugin_minus_Plugin);
-    Array PArray21935 = new_Array_with(1, (Optr)PAnnotation21936);
+    Annotation PAnnotation22306 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_load_, (Optr)SMB_Plugin_minus_Plugin);
+    Array PArray22305 = new_Array_with(1, (Optr)PAnnotation22306);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend21938 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode21937 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21938, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod21933 = new_NativeMethod_with(PArray21934, empty_Array, PArray21935, PThreadedCode21937, 2, PSend21938, self);
+    Send PSend22308 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode22307 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend22308, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod22303 = new_NativeMethod_with(PArray22304, empty_Array, PArray22305, PThreadedCode22307, 2, PSend22308, self);
     
-    MethodClosure MC_SMB_load_ = new_MethodClosure((Method)PNativeMethod21933, HEADER(Plugin_Plugin_Class));
+    MethodClosure MC_SMB_load_ = new_MethodClosure((Method)PNativeMethod22303, HEADER(Plugin_Plugin_Class));
     store_method(HEADER(Plugin_Plugin_Class), SMB_load_, MC_SMB_load_);
 }
 

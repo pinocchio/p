@@ -13,11 +13,11 @@ static void init_SMB_minutes() {
     Symbol SMB_minutes = new_Symbol(L"minutes");
     Symbol SMB_minute = new_Symbol(L"minute");
     // minute. 
-    Send PSend20695 = new_Send((Optr)self, SMB_minute, 0);
-    Array PThreadedCode20694 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20695, (Optr)&t_method_return);
-    Method PMethod20693 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20694, 1, PSend20695);
+    Send PSend20916 = new_Send((Optr)self, SMB_minute, 0);
+    Array PThreadedCode20915 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20916, (Optr)&t_method_return);
+    Method PMethod20914 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20915, 1, PSend20916);
     
-    MethodClosure MC_SMB_minutes = new_MethodClosure((Method)PMethod20693, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_minutes = new_MethodClosure((Method)PMethod20914, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_minutes, MC_SMB_minutes);
 }
 
@@ -26,19 +26,19 @@ static void init_SMB_asSeconds() {
     Symbol SMB_asSeconds = new_Symbol(L"asSeconds");
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend20698 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend20919 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_epoch = new_Symbol(L"epoch");
     // epoch. 
-    Send PSend20699 = new_Send((Optr)PSend20698, SMB_epoch, 0);
+    Send PSend20920 = new_Send((Optr)PSend20919, SMB_epoch, 0);
     Symbol SMB__minus_ = new_Symbol(L"-");
     // -. 
-    Send PSend20700 = new_Send((Optr)self, SMB__minus_, 1, (Optr)PSend20699);
+    Send PSend20921 = new_Send((Optr)self, SMB__minus_, 1, (Optr)PSend20920);
     // asSeconds. 
-    Send PSend20701 = new_Send((Optr)PSend20700, SMB_asSeconds, 0);
-    Array PThreadedCode20697 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20698, (Optr)&t_send0, (Optr)PSend20699, (Optr)&t_send1, (Optr)PSend20700, (Optr)&t_send0, (Optr)PSend20701, (Optr)&t_method_return);
-    Method PMethod20696 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20697, 1, PSend20701);
+    Send PSend20922 = new_Send((Optr)PSend20921, SMB_asSeconds, 0);
+    Array PThreadedCode20918 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20919, (Optr)&t_send0, (Optr)PSend20920, (Optr)&t_send1, (Optr)PSend20921, (Optr)&t_send0, (Optr)PSend20922, (Optr)&t_method_return);
+    Method PMethod20917 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20918, 1, PSend20922);
     
-    MethodClosure MC_SMB_asSeconds = new_MethodClosure((Method)PMethod20696, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asSeconds = new_MethodClosure((Method)PMethod20917, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asSeconds, MC_SMB_asSeconds);
 }
 
@@ -47,11 +47,11 @@ static void init_SMB_seconds() {
     Symbol SMB_seconds = new_Symbol(L"seconds");
     Symbol SMB_second = new_Symbol(L"second");
     // second. 
-    Send PSend20704 = new_Send((Optr)self, SMB_second, 0);
-    Array PThreadedCode20703 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20704, (Optr)&t_method_return);
-    Method PMethod20702 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20703, 1, PSend20704);
+    Send PSend20925 = new_Send((Optr)self, SMB_second, 0);
+    Array PThreadedCode20924 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20925, (Optr)&t_method_return);
+    Method PMethod20923 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20924, 1, PSend20925);
     
-    MethodClosure MC_SMB_seconds = new_MethodClosure((Method)PMethod20702, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_seconds = new_MethodClosure((Method)PMethod20923, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_seconds, MC_SMB_seconds);
 }
 
@@ -60,21 +60,21 @@ static void init_SMB_hour() {
     Symbol SMB_hour = new_Symbol(L"hour");
     Symbol SMB_hour24 = new_Symbol(L"hour24");
     // hour24. 
-    Send PSend20707 = new_Send((Optr)self, SMB_hour24, 0);
-    Array PThreadedCode20706 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20707, (Optr)&t_method_return);
-    Method PMethod20705 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20706, 1, PSend20707);
+    Send PSend20928 = new_Send((Optr)self, SMB_hour24, 0);
+    Array PThreadedCode20927 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20928, (Optr)&t_method_return);
+    Method PMethod20926 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20927, 1, PSend20928);
     
-    MethodClosure MC_SMB_hour = new_MethodClosure((Method)PMethod20705, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_hour = new_MethodClosure((Method)PMethod20926, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_hour, MC_SMB_hour);
 }
 
 
 static void init_SMB_offset() {
     Symbol SMB_offset = new_Symbol(L"offset");
-    Array PThreadedCode20709 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_method_return);
-    Method PMethod20708 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20709, 1, slot_Chronology_DateAndTime_offset);
+    Array PThreadedCode20930 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_method_return);
+    Method PMethod20929 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20930, 1, slot_Chronology_DateAndTime_offset);
     
-    MethodClosure MC_SMB_offset = new_MethodClosure((Method)PMethod20708, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_offset = new_MethodClosure((Method)PMethod20929, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_offset, MC_SMB_offset);
 }
 
@@ -83,21 +83,21 @@ static void init_SMB_asDuration() {
     Symbol SMB_asDuration = new_Symbol(L"asDuration");
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend20712 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
-    Array PThreadedCode20711 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend20712, (Optr)&t_method_return);
-    Method PMethod20710 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20711, 1, PSend20712);
+    Send PSend20933 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
+    Array PThreadedCode20932 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend20933, (Optr)&t_method_return);
+    Method PMethod20931 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20932, 1, PSend20933);
     
-    MethodClosure MC_SMB_asDuration = new_MethodClosure((Method)PMethod20710, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asDuration = new_MethodClosure((Method)PMethod20931, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asDuration, MC_SMB_asDuration);
 }
 
 
 static void init_SMB_julianDayNumber() {
     Symbol SMB_julianDayNumber = new_Symbol(L"julianDayNumber");
-    Array PThreadedCode20714 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_method_return);
-    Method PMethod20713 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20714, 1, slot_Chronology_DateAndTime_jdn);
+    Array PThreadedCode20935 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_method_return);
+    Method PMethod20934 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20935, 1, slot_Chronology_DateAndTime_jdn);
     
-    MethodClosure MC_SMB_julianDayNumber = new_MethodClosure((Method)PMethod20713, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_julianDayNumber = new_MethodClosure((Method)PMethod20934, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_julianDayNumber, MC_SMB_julianDayNumber);
 }
 
@@ -107,16 +107,16 @@ static void init_SMB_dayOfMonth() {
     Variable VAR_d_1_0 = new_Variable_named(L"d", 1);
     Variable VAR_m_1_1 = new_Variable_named(L"m", 1);
     Variable VAR_y_1_2 = new_Variable_named(L"y", 1);
-    Array PArray20718 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
-    Array PThreadedCode20719 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_d_1_0, (Optr)&t_method_return);
-    Block PBlock20717 = new_Block_with(PArray20718, empty_Array, PThreadedCode20719, 1, VAR_d_1_0);
+    Array PArray20939 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
+    Array PThreadedCode20940 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_d_1_0, (Optr)&t_method_return);
+    Block PBlock20938 = new_Block_with(PArray20939, empty_Array, PThreadedCode20940, 1, VAR_d_1_0);
     Symbol SMB_dayMonthYearDo_ = new_Symbol(L"dayMonthYearDo:");
     // dayMonthYearDo:. 
-    Send PSend20720 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock20717);
-    Array PThreadedCode20716 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock20717, (Optr)&t_send1, (Optr)PSend20720, (Optr)&t_method_return);
-    Method PMethod20715 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20716, 1, PSend20720);
+    Send PSend20941 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock20938);
+    Array PThreadedCode20937 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock20938, (Optr)&t_send1, (Optr)PSend20941, (Optr)&t_method_return);
+    Method PMethod20936 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20937, 1, PSend20941);
     
-    MethodClosure MC_SMB_dayOfMonth = new_MethodClosure((Method)PMethod20715, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_dayOfMonth = new_MethodClosure((Method)PMethod20936, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_dayOfMonth, MC_SMB_dayOfMonth);
 }
 
@@ -125,29 +125,29 @@ static void init_SMB_ticks_offset_() {
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     Variable VAR_ticks_0_0 = new_Variable_named(L"ticks", 0);
     Variable VAR_utcOffset_0_1 = new_Variable_named(L"utcOffset", 0);
-    Array PArray20722 = new_Array_with(2, (Optr)VAR_ticks_0_0, (Optr)VAR_utcOffset_0_1);
+    Array PArray20943 = new_Array_with(2, (Optr)VAR_ticks_0_0, (Optr)VAR_utcOffset_0_1);
     Symbol SMB_secondsInDay = new_Symbol(L"secondsInDay");
     // secondsInDay. 
-    Send PSend20724 = new_Send((Optr)PChronologyConstants_classReference, SMB_secondsInDay, 0);
+    Send PSend20945 = new_Send((Optr)PChronologyConstants_classReference, SMB_secondsInDay, 0);
     Symbol SMB_normalize_ticks_base_ = new_Symbol(L"normalize:ticks:base:");
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // normalize:ticks:base:. 
-    Send PSend20725 = new_Send((Optr)self, SMB_normalize_ticks_base_, 3, (Optr)int_2_Const, (Optr)VAR_ticks_0_0, (Optr)PSend20724);
+    Send PSend20946 = new_Send((Optr)self, SMB_normalize_ticks_base_, 3, (Optr)int_2_Const, (Optr)VAR_ticks_0_0, (Optr)PSend20945);
     Symbol SMB_at_ = new_Symbol(L"at:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:. 
-    Send PSend20727 = new_Send((Optr)VAR_ticks_0_0, SMB_at_, 1, (Optr)int_1_Const);
-    Assign PAssign20726 = new_Assign((Optr)slot_Chronology_DateAndTime_jdn, (Optr)PSend20727);
+    Send PSend20948 = new_Send((Optr)VAR_ticks_0_0, SMB_at_, 1, (Optr)int_1_Const);
+    Assign PAssign20947 = new_Assign((Optr)slot_Chronology_DateAndTime_jdn, (Optr)PSend20948);
     // at:. 
-    Send PSend20729 = new_Send((Optr)VAR_ticks_0_0, SMB_at_, 1, (Optr)int_2_Const);
-    Assign PAssign20728 = new_Assign((Optr)slot_Chronology_DateAndTime_seconds, (Optr)PSend20729);
-    Assign PAssign20730 = new_Assign((Optr)slot_Chronology_DateAndTime_offset, (Optr)VAR_utcOffset_0_1);
-    Array PThreadedCode20723 = instantiate_Array_with(ThreadedCode_Class, 0, 36, (Optr)&t_push_self, (Optr)&t_push_2, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend20724, (Optr)&t_send3, (Optr)PSend20725, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20726, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend20727, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20728, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend20729, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20730, (Optr)&t_push_variable, (Optr)VAR_utcOffset_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod20721 = new_Method_with(PArray20722, empty_Array, empty_Array, PThreadedCode20723, 5, PSend20725, PAssign20726, PAssign20728, PAssign20730, self);
+    Send PSend20950 = new_Send((Optr)VAR_ticks_0_0, SMB_at_, 1, (Optr)int_2_Const);
+    Assign PAssign20949 = new_Assign((Optr)slot_Chronology_DateAndTime_seconds, (Optr)PSend20950);
+    Assign PAssign20951 = new_Assign((Optr)slot_Chronology_DateAndTime_offset, (Optr)VAR_utcOffset_0_1);
+    Array PThreadedCode20944 = instantiate_Array_with(ThreadedCode_Class, 0, 36, (Optr)&t_push_self, (Optr)&t_push_2, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend20945, (Optr)&t_send3, (Optr)PSend20946, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20947, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend20948, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20949, (Optr)&t_push_variable, (Optr)VAR_ticks_0_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend20950, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20951, (Optr)&t_push_variable, (Optr)VAR_utcOffset_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod20942 = new_Method_with(PArray20943, empty_Array, empty_Array, PThreadedCode20944, 5, PSend20946, PAssign20947, PAssign20949, PAssign20951, self);
     
-    MethodClosure MC_SMB_ticks_offset_ = new_MethodClosure((Method)PMethod20721, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_ticks_offset_ = new_MethodClosure((Method)PMethod20942, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_ticks_offset_, MC_SMB_ticks_offset_);
 }
 
@@ -155,63 +155,63 @@ static void init_SMB_ticks_offset_() {
 static void init_SMB__plus_() {
     Symbol SMB__plus_ = new_Symbol(L"+");
     Variable VAR_operand_0_0 = new_Variable_named(L"operand", 0);
-    Array PArray20732 = new_Array_with(1, (Optr)VAR_operand_0_0);
+    Array PArray20953 = new_Array_with(1, (Optr)VAR_operand_0_0);
     Variable VAR_ticks_0_1 = new_Variable_named(L"ticks", 0);
-    Array PArray20733 = new_Array_with(1, (Optr)VAR_ticks_0_1);
+    Array PArray20954 = new_Array_with(1, (Optr)VAR_ticks_0_1);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend20736 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
-    Assign PAssign20735 = new_Assign((Optr)VAR_ticks_0_1, (Optr)PSend20736);
+    Send PSend20957 = new_Send((Optr)OrderedCollection_classReference, SMB_new, 0);
+    Assign PAssign20956 = new_Assign((Optr)VAR_ticks_0_1, (Optr)PSend20957);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend20737 = new_Send((Optr)self, SMB_ticks, 0);
+    Send PSend20958 = new_Send((Optr)self, SMB_ticks, 0);
     Symbol SMB_asDuration = new_Symbol(L"asDuration");
     // asDuration. 
-    Send PSend20738 = new_Send((Optr)VAR_operand_0_0, SMB_asDuration, 0);
+    Send PSend20959 = new_Send((Optr)VAR_operand_0_0, SMB_asDuration, 0);
     // ticks. 
-    Send PSend20739 = new_Send((Optr)PSend20738, SMB_ticks, 0);
+    Send PSend20960 = new_Send((Optr)PSend20959, SMB_ticks, 0);
     Variable VAR_ticks1_1_0 = new_Variable_named(L"ticks1", 1);
     Variable VAR_dticks_1_1 = new_Variable_named(L"dticks", 1);
-    Array PArray20741 = new_Array_with(2, (Optr)VAR_ticks1_1_0, (Optr)VAR_dticks_1_1);
+    Array PArray20962 = new_Array_with(2, (Optr)VAR_ticks1_1_0, (Optr)VAR_dticks_1_1);
     // +. 
-    Send PSend20743 = new_Send((Optr)VAR_ticks1_1_0, SMB__plus_, 1, (Optr)VAR_dticks_1_1);
+    Send PSend20964 = new_Send((Optr)VAR_ticks1_1_0, SMB__plus_, 1, (Optr)VAR_dticks_1_1);
     Symbol SMB_addLast_ = new_Symbol(L"addLast:");
     // addLast:. 
-    Send PSend20744 = new_Send((Optr)VAR_ticks_0_1, SMB_addLast_, 1, (Optr)PSend20743);
-    Array PThreadedCode20742 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_ticks1_1_0, (Optr)&t_push_variable, (Optr)VAR_dticks_1_1, (Optr)&t_send1, (Optr)PSend20743, (Optr)&t_send1, (Optr)PSend20744, (Optr)&t_method_return);
-    Block PBlock20740 = new_Block_with(PArray20741, empty_Array, PThreadedCode20742, 1, PSend20744);
+    Send PSend20965 = new_Send((Optr)VAR_ticks_0_1, SMB_addLast_, 1, (Optr)PSend20964);
+    Array PThreadedCode20963 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_ticks1_1_0, (Optr)&t_push_variable, (Optr)VAR_dticks_1_1, (Optr)&t_send1, (Optr)PSend20964, (Optr)&t_send1, (Optr)PSend20965, (Optr)&t_method_return);
+    Block PBlock20961 = new_Block_with(PArray20962, empty_Array, PThreadedCode20963, 1, PSend20965);
     Symbol SMB_with_do_ = new_Symbol(L"with:do:");
     // with:do:. 
-    Send PSend20745 = new_Send((Optr)PSend20737, SMB_with_do_, 2, (Optr)PSend20739, (Optr)PBlock20740);
+    Send PSend20966 = new_Send((Optr)PSend20958, SMB_with_do_, 2, (Optr)PSend20960, (Optr)PBlock20961);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray20747 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray20968 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_asArray = new_Symbol(L"asArray");
     // asArray. 
-    Send PSend20749 = new_Send((Optr)VAR_ticks_0_1, SMB_asArray, 0);
+    Send PSend20970 = new_Send((Optr)VAR_ticks_0_1, SMB_asArray, 0);
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend20750 = new_Send((Optr)self, SMB_offset, 0);
+    Send PSend20971 = new_Send((Optr)self, SMB_offset, 0);
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     // ticks:offset:. 
-    Send PSend20751 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend20749, (Optr)PSend20750);
+    Send PSend20972 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend20970, (Optr)PSend20971);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend20752 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode20748 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_send0, (Optr)PSend20749, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20750, (Optr)&t_send2, (Optr)PSend20751, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend20752, (Optr)&t_method_return);
-    Block PBlock20746 = new_Block_with(PArray20747, empty_Array, PThreadedCode20748, 2, PSend20751, PSend20752);
+    Send PSend20973 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode20969 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_send0, (Optr)PSend20970, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20971, (Optr)&t_send2, (Optr)PSend20972, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend20973, (Optr)&t_method_return);
+    Block PBlock20967 = new_Block_with(PArray20968, empty_Array, PThreadedCode20969, 2, PSend20972, PSend20973);
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend20753 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend20974 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend20754 = new_Send((Optr)PSend20753, SMB_basicNew, 0);
+    Send PSend20975 = new_Send((Optr)PSend20974, SMB_basicNew, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend20755 = new_Send((Optr)PBlock20746, SMB_value_, 1, (Optr)PSend20754);
-    Array PThreadedCode20734 = instantiate_Array_with(ThreadedCode_Class, 0, 32, (Optr)&t_push1, (Optr)PAssign20735, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend20736, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20737, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend20738, (Optr)&t_send0, (Optr)PSend20739, (Optr)&t_push_closure, (Optr)PBlock20740, (Optr)&t_send2, (Optr)PSend20745, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock20746, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20753, (Optr)&t_send0, (Optr)PSend20754, (Optr)&t_send1, (Optr)PSend20755, (Optr)&t_method_return);
-    Method PMethod20731 = new_Method_with(PArray20732, PArray20733, empty_Array, PThreadedCode20734, 3, PAssign20735, PSend20745, PSend20755);
+    Send PSend20976 = new_Send((Optr)PBlock20967, SMB_value_, 1, (Optr)PSend20975);
+    Array PThreadedCode20955 = instantiate_Array_with(ThreadedCode_Class, 0, 32, (Optr)&t_push1, (Optr)PAssign20956, (Optr)&t_push_class_reference, (Optr)OrderedCollection_classReference, (Optr)&t_send0, (Optr)PSend20957, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20958, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend20959, (Optr)&t_send0, (Optr)PSend20960, (Optr)&t_push_closure, (Optr)PBlock20961, (Optr)&t_send2, (Optr)PSend20966, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock20967, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20974, (Optr)&t_send0, (Optr)PSend20975, (Optr)&t_send1, (Optr)PSend20976, (Optr)&t_method_return);
+    Method PMethod20952 = new_Method_with(PArray20953, PArray20954, empty_Array, PThreadedCode20955, 3, PAssign20956, PSend20966, PSend20976);
     
-    MethodClosure MC_SMB__plus_ = new_MethodClosure((Method)PMethod20731, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB__plus_ = new_MethodClosure((Method)PMethod20952, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB__plus_, MC_SMB__plus_);
 }
 
@@ -219,71 +219,71 @@ static void init_SMB__plus_() {
 static void init_SMB__minus_() {
     Symbol SMB__minus_ = new_Symbol(L"-");
     Variable VAR_operand_0_0 = new_Variable_named(L"operand", 0);
-    Array PArray20757 = new_Array_with(1, (Optr)VAR_operand_0_0);
+    Array PArray20978 = new_Array_with(1, (Optr)VAR_operand_0_0);
     Symbol  SMB_asDateAndTime = new_Symbol(L"asDateAndTime");
     Symbol SMB_respondsTo_ = new_Symbol(L"respondsTo:");
     Constant SMB_asDateAndTime_Const = new_Constant((Optr)SMB_asDateAndTime);
     // respondsTo:. 
-    Send PSend20759 = new_Send((Optr)VAR_operand_0_0, SMB_respondsTo_, 1, (Optr)SMB_asDateAndTime_Const);
+    Send PSend20980 = new_Send((Optr)VAR_operand_0_0, SMB_respondsTo_, 1, (Optr)SMB_asDateAndTime_Const);
     Variable VAR_lticks_1_0 = new_Variable_named(L"lticks", 1);
     Variable VAR_rticks_1_1 = new_Variable_named(L"rticks", 1);
-    Array PArray20761 = new_Array_with(2, (Optr)VAR_lticks_1_0, (Optr)VAR_rticks_1_1);
+    Array PArray20982 = new_Array_with(2, (Optr)VAR_lticks_1_0, (Optr)VAR_rticks_1_1);
     Symbol SMB_asLocal = new_Symbol(L"asLocal");
     // asLocal. 
-    Send PSend20765 = new_Send((Optr)self, SMB_asLocal, 0);
+    Send PSend20986 = new_Send((Optr)self, SMB_asLocal, 0);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend20764 = new_Send((Optr)PSend20765, SMB_ticks, 0);
-    Assign PAssign20763 = new_Assign((Optr)VAR_lticks_1_0, (Optr)PSend20764);
+    Send PSend20985 = new_Send((Optr)PSend20986, SMB_ticks, 0);
+    Assign PAssign20984 = new_Assign((Optr)VAR_lticks_1_0, (Optr)PSend20985);
     // asDateAndTime. 
-    Send PSend20769 = new_Send((Optr)VAR_operand_0_0, SMB_asDateAndTime, 0);
+    Send PSend20990 = new_Send((Optr)VAR_operand_0_0, SMB_asDateAndTime, 0);
     // asLocal. 
-    Send PSend20768 = new_Send((Optr)PSend20769, SMB_asLocal, 0);
+    Send PSend20989 = new_Send((Optr)PSend20990, SMB_asLocal, 0);
     // ticks. 
-    Send PSend20767 = new_Send((Optr)PSend20768, SMB_ticks, 0);
-    Assign PAssign20766 = new_Assign((Optr)VAR_rticks_1_1, (Optr)PSend20767);
+    Send PSend20988 = new_Send((Optr)PSend20989, SMB_ticks, 0);
+    Assign PAssign20987 = new_Assign((Optr)VAR_rticks_1_1, (Optr)PSend20988);
     Symbol SMB_secondsInDay = new_Symbol(L"secondsInDay");
     // secondsInDay. 
-    Send PSend20770 = new_Send((Optr)PChronologyConstants_classReference, SMB_secondsInDay, 0);
+    Send PSend20991 = new_Send((Optr)PChronologyConstants_classReference, SMB_secondsInDay, 0);
     Symbol SMB_first = new_Symbol(L"first");
     // first. 
-    Send PSend20771 = new_Send((Optr)VAR_lticks_1_0, SMB_first, 0);
+    Send PSend20992 = new_Send((Optr)VAR_lticks_1_0, SMB_first, 0);
     // first. 
-    Send PSend20772 = new_Send((Optr)VAR_rticks_1_1, SMB_first, 0);
+    Send PSend20993 = new_Send((Optr)VAR_rticks_1_1, SMB_first, 0);
     // -. 
-    Send PSend20773 = new_Send((Optr)PSend20771, SMB__minus_, 1, (Optr)PSend20772);
+    Send PSend20994 = new_Send((Optr)PSend20992, SMB__minus_, 1, (Optr)PSend20993);
     Symbol SMB__times_ = new_Symbol(L"*");
     // *. 
-    Send PSend20774 = new_Send((Optr)PSend20770, SMB__times_, 1, (Optr)PSend20773);
+    Send PSend20995 = new_Send((Optr)PSend20991, SMB__times_, 1, (Optr)PSend20994);
     Symbol SMB_second = new_Symbol(L"second");
     // second. 
-    Send PSend20775 = new_Send((Optr)VAR_lticks_1_0, SMB_second, 0);
+    Send PSend20996 = new_Send((Optr)VAR_lticks_1_0, SMB_second, 0);
     // second. 
-    Send PSend20776 = new_Send((Optr)VAR_rticks_1_1, SMB_second, 0);
+    Send PSend20997 = new_Send((Optr)VAR_rticks_1_1, SMB_second, 0);
     // -. 
-    Send PSend20777 = new_Send((Optr)PSend20775, SMB__minus_, 1, (Optr)PSend20776);
+    Send PSend20998 = new_Send((Optr)PSend20996, SMB__minus_, 1, (Optr)PSend20997);
     Symbol SMB__plus_ = new_Symbol(L"+");
     // +. 
-    Send PSend20778 = new_Send((Optr)PSend20774, SMB__plus_, 1, (Optr)PSend20777);
+    Send PSend20999 = new_Send((Optr)PSend20995, SMB__plus_, 1, (Optr)PSend20998);
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend20779 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)PSend20778);
-    Array PThreadedCode20762 = instantiate_Array_with(ThreadedCode_Class, 0, 54, (Optr)&t_push1, (Optr)PAssign20763, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20765, (Optr)&t_send0, (Optr)PSend20764, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20766, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend20769, (Optr)&t_send0, (Optr)PSend20768, (Optr)&t_send0, (Optr)PSend20767, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend20770, (Optr)&t_push_variable, (Optr)VAR_lticks_1_0, (Optr)&t_send0, (Optr)PSend20771, (Optr)&t_push_variable, (Optr)VAR_rticks_1_1, (Optr)&t_send0, (Optr)PSend20772, (Optr)&t_send1, (Optr)PSend20773, (Optr)&t_send1, (Optr)PSend20774, (Optr)&t_push_variable, (Optr)VAR_lticks_1_0, (Optr)&t_send0, (Optr)PSend20775, (Optr)&t_push_variable, (Optr)VAR_rticks_1_1, (Optr)&t_send0, (Optr)PSend20776, (Optr)&t_send1, (Optr)PSend20777, (Optr)&t_send1, (Optr)PSend20778, (Optr)&t_send1, (Optr)PSend20779, (Optr)&t_method_return);
-    Block PBlock20760 = new_Block_with(empty_Array, PArray20761, PThreadedCode20762, 3, PAssign20763, PAssign20766, PSend20779);
+    Send PSend21000 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)PSend20999);
+    Array PThreadedCode20983 = instantiate_Array_with(ThreadedCode_Class, 0, 54, (Optr)&t_push1, (Optr)PAssign20984, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20986, (Optr)&t_send0, (Optr)PSend20985, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20987, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend20990, (Optr)&t_send0, (Optr)PSend20989, (Optr)&t_send0, (Optr)PSend20988, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend20991, (Optr)&t_push_variable, (Optr)VAR_lticks_1_0, (Optr)&t_send0, (Optr)PSend20992, (Optr)&t_push_variable, (Optr)VAR_rticks_1_1, (Optr)&t_send0, (Optr)PSend20993, (Optr)&t_send1, (Optr)PSend20994, (Optr)&t_send1, (Optr)PSend20995, (Optr)&t_push_variable, (Optr)VAR_lticks_1_0, (Optr)&t_send0, (Optr)PSend20996, (Optr)&t_push_variable, (Optr)VAR_rticks_1_1, (Optr)&t_send0, (Optr)PSend20997, (Optr)&t_send1, (Optr)PSend20998, (Optr)&t_send1, (Optr)PSend20999, (Optr)&t_send1, (Optr)PSend21000, (Optr)&t_method_return);
+    Block PBlock20981 = new_Block_with(empty_Array, PArray20982, PThreadedCode20983, 3, PAssign20984, PAssign20987, PSend21000);
     Symbol SMB_negated = new_Symbol(L"negated");
     // negated. 
-    Send PSend20782 = new_Send((Optr)VAR_operand_0_0, SMB_negated, 0);
+    Send PSend21003 = new_Send((Optr)VAR_operand_0_0, SMB_negated, 0);
     // +. 
-    Send PSend20783 = new_Send((Optr)self, SMB__plus_, 1, (Optr)PSend20782);
-    Array PThreadedCode20781 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend20782, (Optr)&t_send1, (Optr)PSend20783, (Optr)&t_block_return);
-    Block PBlock20780 = new_Block_with(empty_Array, empty_Array, PThreadedCode20781, 1, PSend20783);
+    Send PSend21004 = new_Send((Optr)self, SMB__plus_, 1, (Optr)PSend21003);
+    Array PThreadedCode21002 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_send0, (Optr)PSend21003, (Optr)&t_send1, (Optr)PSend21004, (Optr)&t_block_return);
+    Block PBlock21001 = new_Block_with(empty_Array, empty_Array, PThreadedCode21002, 1, PSend21004);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
     // ifTrue:ifFalse:. 
-    Send PSend20784 = new_Send((Optr)PSend20759, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20760, (Optr)PBlock20780);
-    Array PThreadedCode20758 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_push1, (Optr)SMB_asDateAndTime, (Optr)&t_send1, (Optr)PSend20759, (Optr)&t_push_closure, (Optr)PBlock20760, (Optr)&t_push_closure, (Optr)PBlock20780, (Optr)&t_send2, (Optr)PSend20784, (Optr)&t_method_return);
-    Method PMethod20756 = new_Method_with(PArray20757, empty_Array, empty_Array, PThreadedCode20758, 1, PSend20784);
+    Send PSend21005 = new_Send((Optr)PSend20980, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20981, (Optr)PBlock21001);
+    Array PThreadedCode20979 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR_operand_0_0, (Optr)&t_push1, (Optr)SMB_asDateAndTime, (Optr)&t_send1, (Optr)PSend20980, (Optr)&t_push_closure, (Optr)PBlock20981, (Optr)&t_push_closure, (Optr)PBlock21001, (Optr)&t_send2, (Optr)PSend21005, (Optr)&t_method_return);
+    Method PMethod20977 = new_Method_with(PArray20978, empty_Array, empty_Array, PThreadedCode20979, 1, PSend21005);
     
-    MethodClosure MC_SMB__minus_ = new_MethodClosure((Method)PMethod20756, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB__minus_ = new_MethodClosure((Method)PMethod20977, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB__minus_, MC_SMB__minus_);
 }
 
@@ -292,14 +292,14 @@ static void init_SMB_monthName() {
     Symbol SMB_monthName = new_Symbol(L"monthName");
     Symbol SMB_month = new_Symbol(L"month");
     // month. 
-    Send PSend20787 = new_Send((Optr)self, SMB_month, 0);
+    Send PSend21008 = new_Send((Optr)self, SMB_month, 0);
     Symbol SMB_nameOfMonth_ = new_Symbol(L"nameOfMonth:");
     // nameOfMonth:. 
-    Send PSend20788 = new_Send((Optr)Month_classReference, SMB_nameOfMonth_, 1, (Optr)PSend20787);
-    Array PThreadedCode20786 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_class_reference, (Optr)Month_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20787, (Optr)&t_send1, (Optr)PSend20788, (Optr)&t_method_return);
-    Method PMethod20785 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20786, 1, PSend20788);
+    Send PSend21009 = new_Send((Optr)Month_classReference, SMB_nameOfMonth_, 1, (Optr)PSend21008);
+    Array PThreadedCode21007 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_class_reference, (Optr)Month_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21008, (Optr)&t_send1, (Optr)PSend21009, (Optr)&t_method_return);
+    Method PMethod21006 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21007, 1, PSend21009);
     
-    MethodClosure MC_SMB_monthName = new_MethodClosure((Method)PMethod20785, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_monthName = new_MethodClosure((Method)PMethod21006, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_monthName, MC_SMB_monthName);
 }
 
@@ -308,11 +308,11 @@ static void init_SMB_asDate() {
     Symbol SMB_asDate = new_Symbol(L"asDate");
     Symbol SMB_starting_ = new_Symbol(L"starting:");
     // starting:. 
-    Send PSend20791 = new_Send((Optr)Date_classReference, SMB_starting_, 1, (Optr)self);
-    Array PThreadedCode20790 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_class_reference, (Optr)Date_classReference, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend20791, (Optr)&t_method_return);
-    Method PMethod20789 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20790, 1, PSend20791);
+    Send PSend21012 = new_Send((Optr)Date_classReference, SMB_starting_, 1, (Optr)self);
+    Array PThreadedCode21011 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_class_reference, (Optr)Date_classReference, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend21012, (Optr)&t_method_return);
+    Method PMethod21010 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21011, 1, PSend21012);
     
-    MethodClosure MC_SMB_asDate = new_MethodClosure((Method)PMethod20789, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asDate = new_MethodClosure((Method)PMethod21010, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asDate, MC_SMB_asDate);
 }
 
@@ -321,18 +321,18 @@ static void init_SMB_dayOfWeekAbbreviation() {
     Symbol SMB_dayOfWeekAbbreviation = new_Symbol(L"dayOfWeekAbbreviation");
     Symbol SMB_dayOfWeekName = new_Symbol(L"dayOfWeekName");
     // dayOfWeekName. 
-    Send PSend20794 = new_Send((Optr)self, SMB_dayOfWeekName, 0);
+    Send PSend21015 = new_Send((Optr)self, SMB_dayOfWeekName, 0);
     SmallInt int_3 = new_SmallInt(3);
     Symbol SMB_copyFrom_to_ = new_Symbol(L"copyFrom:to:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // copyFrom:to:. 
-    Send PSend20795 = new_Send((Optr)PSend20794, SMB_copyFrom_to_, 2, (Optr)int_1_Const, (Optr)int_3_Const);
-    Array PThreadedCode20793 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20794, (Optr)&t_push_1, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send2, (Optr)PSend20795, (Optr)&t_method_return);
-    Method PMethod20792 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20793, 1, PSend20795);
+    Send PSend21016 = new_Send((Optr)PSend21015, SMB_copyFrom_to_, 2, (Optr)int_1_Const, (Optr)int_3_Const);
+    Array PThreadedCode21014 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21015, (Optr)&t_push_1, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send2, (Optr)PSend21016, (Optr)&t_method_return);
+    Method PMethod21013 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21014, 1, PSend21016);
     
-    MethodClosure MC_SMB_dayOfWeekAbbreviation = new_MethodClosure((Method)PMethod20792, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_dayOfWeekAbbreviation = new_MethodClosure((Method)PMethod21013, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_dayOfWeekAbbreviation, MC_SMB_dayOfWeekAbbreviation);
 }
 
@@ -340,14 +340,14 @@ static void init_SMB_dayOfWeekAbbreviation() {
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray20797 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21018 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_printOn_withLeadingSpace_ = new_Symbol(L"printOn:withLeadingSpace:");
     // printOn:withLeadingSpace:. 
-    Send PSend20799 = new_Send((Optr)self, SMB_printOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)false_Const);
-    Array PThreadedCode20798 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_false, (Optr)&t_send2, (Optr)PSend20799, (Optr)&t_method_return);
-    Method PMethod20796 = new_Method_with(PArray20797, empty_Array, empty_Array, PThreadedCode20798, 1, PSend20799);
+    Send PSend21020 = new_Send((Optr)self, SMB_printOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)false_Const);
+    Array PThreadedCode21019 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_false, (Optr)&t_send2, (Optr)PSend21020, (Optr)&t_method_return);
+    Method PMethod21017 = new_Method_with(PArray21018, empty_Array, empty_Array, PThreadedCode21019, 1, PSend21020);
     
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod20796, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21017, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
@@ -356,111 +356,111 @@ static void init_SMB_printYMDOn_withLeadingSpace_() {
     Symbol SMB_printYMDOn_withLeadingSpace_ = new_Symbol(L"printYMDOn:withLeadingSpace:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
     Variable VAR_printLeadingSpaceToo_0_1 = new_Variable_named(L"printLeadingSpaceToo", 0);
-    Array PArray20801 = new_Array_with(2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
+    Array PArray21022 = new_Array_with(2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
     Variable VAR_year_0_2 = new_Variable_named(L"year", 0);
     Variable VAR_month_0_3 = new_Variable_named(L"month", 0);
     Variable VAR_day_0_4 = new_Variable_named(L"day", 0);
-    Array PArray20802 = new_Array_with(3, (Optr)VAR_year_0_2, (Optr)VAR_month_0_3, (Optr)VAR_day_0_4);
+    Array PArray21023 = new_Array_with(3, (Optr)VAR_year_0_2, (Optr)VAR_month_0_3, (Optr)VAR_day_0_4);
     Variable VAR_d_1_0 = new_Variable_named(L"d", 1);
     Variable VAR_m_1_1 = new_Variable_named(L"m", 1);
     Variable VAR_y_1_2 = new_Variable_named(L"y", 1);
-    Array PArray20805 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
-    Assign PAssign20807 = new_Assign((Optr)VAR_year_0_2, (Optr)VAR_y_1_2);
-    Assign PAssign20808 = new_Assign((Optr)VAR_month_0_3, (Optr)VAR_m_1_1);
-    Assign PAssign20809 = new_Assign((Optr)VAR_day_0_4, (Optr)VAR_d_1_0);
-    Array PThreadedCode20806 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push1, (Optr)PAssign20807, (Optr)&t_push_variable, (Optr)VAR_y_1_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20808, (Optr)&t_push_variable, (Optr)VAR_m_1_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20809, (Optr)&t_push_variable, (Optr)VAR_d_1_0, (Optr)&t_assign, (Optr)&t_method_return);
-    Block PBlock20804 = new_Block_with(PArray20805, empty_Array, PThreadedCode20806, 3, PAssign20807, PAssign20808, PAssign20809);
+    Array PArray21026 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
+    Assign PAssign21028 = new_Assign((Optr)VAR_year_0_2, (Optr)VAR_y_1_2);
+    Assign PAssign21029 = new_Assign((Optr)VAR_month_0_3, (Optr)VAR_m_1_1);
+    Assign PAssign21030 = new_Assign((Optr)VAR_day_0_4, (Optr)VAR_d_1_0);
+    Array PThreadedCode21027 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push1, (Optr)PAssign21028, (Optr)&t_push_variable, (Optr)VAR_y_1_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21029, (Optr)&t_push_variable, (Optr)VAR_m_1_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21030, (Optr)&t_push_variable, (Optr)VAR_d_1_0, (Optr)&t_assign, (Optr)&t_method_return);
+    Block PBlock21025 = new_Block_with(PArray21026, empty_Array, PThreadedCode21027, 3, PAssign21028, PAssign21029, PAssign21030);
     Symbol SMB_dayMonthYearDo_ = new_Symbol(L"dayMonthYearDo:");
     // dayMonthYearDo:. 
-    Send PSend20810 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock20804);
+    Send PSend21031 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock21025);
     Symbol SMB_negative = new_Symbol(L"negative");
     // negative. 
-    Send PSend20811 = new_Send((Optr)VAR_year_0_2, SMB_negative, 0);
+    Send PSend21032 = new_Send((Optr)VAR_year_0_2, SMB_negative, 0);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
     Character char_2182 = new_Character(L'-');
     Symbol SMB_nextPut_ = new_Symbol(L"nextPut:");
     Constant char_2182_Const = new_Constant((Optr)char_2182);
     // nextPut:. 
-    Send PSend20815 = new_Send((Optr)VAR_aStream_0_0, SMB_nextPut_, 1, (Optr)char_2182_Const);
-    Array PThreadedCode20814 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend20815, (Optr)&t_block_return);
-    Block PBlock20813 = new_Block_with(empty_Array, empty_Array, PThreadedCode20814, 1, PSend20815);
+    Send PSend21036 = new_Send((Optr)VAR_aStream_0_0, SMB_nextPut_, 1, (Optr)char_2182_Const);
+    Array PThreadedCode21035 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend21036, (Optr)&t_block_return);
+    Block PBlock21034 = new_Block_with(empty_Array, empty_Array, PThreadedCode21035, 1, PSend21036);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_space = new_Symbol(L"space");
     // space. 
-    Send PSend20821 = new_Send((Optr)VAR_aStream_0_0, SMB_space, 0);
-    Array PThreadedCode20820 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send0, (Optr)PSend20821, (Optr)&t_block_return);
-    Block PBlock20819 = new_Block_with(empty_Array, empty_Array, PThreadedCode20820, 1, PSend20821);
+    Send PSend21042 = new_Send((Optr)VAR_aStream_0_0, SMB_space, 0);
+    Array PThreadedCode21041 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send0, (Optr)PSend21042, (Optr)&t_block_return);
+    Block PBlock21040 = new_Block_with(empty_Array, empty_Array, PThreadedCode21041, 1, PSend21042);
     // ifTrue:. 
-    Send PSend20818 = new_Send((Optr)VAR_printLeadingSpaceToo_0_1, SMB_ifTrue_, 1, (Optr)PBlock20819);
-    Array PThreadedCode20817 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_printLeadingSpaceToo_0_1, (Optr)&t_send_ifTrue_, (Optr)PSend20818, (Optr)PBlock20819, (Optr)&t_block_return);
-    Block PBlock20816 = new_Block_with(empty_Array, empty_Array, PThreadedCode20817, 1, PSend20818);
+    Send PSend21039 = new_Send((Optr)VAR_printLeadingSpaceToo_0_1, SMB_ifTrue_, 1, (Optr)PBlock21040);
+    Array PThreadedCode21038 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_printLeadingSpaceToo_0_1, (Optr)&t_send_ifTrue_, (Optr)PSend21039, (Optr)PBlock21040, (Optr)&t_block_return);
+    Block PBlock21037 = new_Block_with(empty_Array, empty_Array, PThreadedCode21038, 1, PSend21039);
     // ifTrue:ifFalse:. 
-    Send PSend20812 = new_Send((Optr)PSend20811, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20813, (Optr)PBlock20816);
+    Send PSend21033 = new_Send((Optr)PSend21032, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21034, (Optr)PBlock21037);
     SmallInt int_1000 = new_SmallInt(1000);
     Symbol SMB__lt_ = new_Symbol(L"<");
     Constant int_1000_Const = new_Constant((Optr)int_1000);
     // <. 
-    Send PSend20822 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_1000_Const);
-    Character char_9208 = new_Character(L'0');
+    Send PSend21043 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_1000_Const);
+    Character char_9429 = new_Character(L'0');
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant char_9208_Const = new_Constant((Optr)char_9208);
+    Constant char_9429_Const = new_Constant((Optr)char_9429);
     // <<. 
-    Send PSend20826 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20825 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20826, (Optr)&t_block_return);
-    Block PBlock20824 = new_Block_with(empty_Array, empty_Array, PThreadedCode20825, 1, PSend20826);
+    Send PSend21047 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21046 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21047, (Optr)&t_block_return);
+    Block PBlock21045 = new_Block_with(empty_Array, empty_Array, PThreadedCode21046, 1, PSend21047);
     // ifTrue:. 
-    Send PSend20823 = new_Send((Optr)PSend20822, SMB_ifTrue_, 1, (Optr)PBlock20824);
+    Send PSend21044 = new_Send((Optr)PSend21043, SMB_ifTrue_, 1, (Optr)PBlock21045);
     SmallInt int_100 = new_SmallInt(100);
     Constant int_100_Const = new_Constant((Optr)int_100);
     // <. 
-    Send PSend20827 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_100_Const);
+    Send PSend21048 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_100_Const);
     // <<. 
-    Send PSend20831 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20830 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20831, (Optr)&t_block_return);
-    Block PBlock20829 = new_Block_with(empty_Array, empty_Array, PThreadedCode20830, 1, PSend20831);
+    Send PSend21052 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21051 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21052, (Optr)&t_block_return);
+    Block PBlock21050 = new_Block_with(empty_Array, empty_Array, PThreadedCode21051, 1, PSend21052);
     // ifTrue:. 
-    Send PSend20828 = new_Send((Optr)PSend20827, SMB_ifTrue_, 1, (Optr)PBlock20829);
+    Send PSend21049 = new_Send((Optr)PSend21048, SMB_ifTrue_, 1, (Optr)PBlock21050);
     SmallInt int_10 = new_SmallInt(10);
     Constant int_10_Const = new_Constant((Optr)int_10);
     // <. 
-    Send PSend20832 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21053 = new_Send((Optr)VAR_year_0_2, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend20836 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20835 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20836, (Optr)&t_block_return);
-    Block PBlock20834 = new_Block_with(empty_Array, empty_Array, PThreadedCode20835, 1, PSend20836);
+    Send PSend21057 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21056 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21057, (Optr)&t_block_return);
+    Block PBlock21055 = new_Block_with(empty_Array, empty_Array, PThreadedCode21056, 1, PSend21057);
     // ifTrue:. 
-    Send PSend20833 = new_Send((Optr)PSend20832, SMB_ifTrue_, 1, (Optr)PBlock20834);
+    Send PSend21054 = new_Send((Optr)PSend21053, SMB_ifTrue_, 1, (Optr)PBlock21055);
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     // printOn:. 
-    Send PSend20837 = new_Send((Optr)VAR_year_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21058 = new_Send((Optr)VAR_year_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     // <<. 
-    Send PSend20838 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2182_Const);
+    Send PSend21059 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2182_Const);
     // <. 
-    Send PSend20839 = new_Send((Optr)VAR_month_0_3, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21060 = new_Send((Optr)VAR_month_0_3, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend20843 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20842 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20843, (Optr)&t_block_return);
-    Block PBlock20841 = new_Block_with(empty_Array, empty_Array, PThreadedCode20842, 1, PSend20843);
+    Send PSend21064 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21063 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21064, (Optr)&t_block_return);
+    Block PBlock21062 = new_Block_with(empty_Array, empty_Array, PThreadedCode21063, 1, PSend21064);
     // ifTrue:. 
-    Send PSend20840 = new_Send((Optr)PSend20839, SMB_ifTrue_, 1, (Optr)PBlock20841);
+    Send PSend21061 = new_Send((Optr)PSend21060, SMB_ifTrue_, 1, (Optr)PBlock21062);
     // printOn:. 
-    Send PSend20844 = new_Send((Optr)VAR_month_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21065 = new_Send((Optr)VAR_month_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     // <<. 
-    Send PSend20845 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2182_Const);
+    Send PSend21066 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_2182_Const);
     // <. 
-    Send PSend20846 = new_Send((Optr)VAR_day_0_4, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21067 = new_Send((Optr)VAR_day_0_4, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend20850 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20849 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20850, (Optr)&t_block_return);
-    Block PBlock20848 = new_Block_with(empty_Array, empty_Array, PThreadedCode20849, 1, PSend20850);
+    Send PSend21071 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21070 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21071, (Optr)&t_block_return);
+    Block PBlock21069 = new_Block_with(empty_Array, empty_Array, PThreadedCode21070, 1, PSend21071);
     // ifTrue:. 
-    Send PSend20847 = new_Send((Optr)PSend20846, SMB_ifTrue_, 1, (Optr)PBlock20848);
+    Send PSend21068 = new_Send((Optr)PSend21067, SMB_ifTrue_, 1, (Optr)PBlock21069);
     // printOn:. 
-    Send PSend20851 = new_Send((Optr)VAR_day_0_4, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode20803 = instantiate_Array_with(ThreadedCode_Class, 0, 101, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock20804, (Optr)&t_send1, (Optr)PSend20810, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_send0, (Optr)PSend20811, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend20812, (Optr)PBlock20813, (Optr)PBlock20816, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_1000, (Optr)&t_send1, (Optr)PSend20822, (Optr)&t_send_ifTrue_, (Optr)PSend20823, (Optr)PBlock20824, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_100, (Optr)&t_send1, (Optr)PSend20827, (Optr)&t_send_ifTrue_, (Optr)PSend20828, (Optr)PBlock20829, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend20832, (Optr)&t_send_ifTrue_, (Optr)PSend20833, (Optr)PBlock20834, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20837, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend20838, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_month_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend20839, (Optr)&t_send_ifTrue_, (Optr)PSend20840, (Optr)PBlock20841, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_month_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20844, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend20845, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_day_0_4, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend20846, (Optr)&t_send_ifTrue_, (Optr)PSend20847, (Optr)PBlock20848, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_day_0_4, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20851, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod20800 = new_Method_with(PArray20801, PArray20802, empty_Array, PThreadedCode20803, 13, PSend20810, PSend20812, PSend20823, PSend20828, PSend20833, PSend20837, PSend20838, PSend20840, PSend20844, PSend20845, PSend20847, PSend20851, self);
+    Send PSend21072 = new_Send((Optr)VAR_day_0_4, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21024 = instantiate_Array_with(ThreadedCode_Class, 0, 101, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock21025, (Optr)&t_send1, (Optr)PSend21031, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_send0, (Optr)PSend21032, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21033, (Optr)PBlock21034, (Optr)PBlock21037, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_1000, (Optr)&t_send1, (Optr)PSend21043, (Optr)&t_send_ifTrue_, (Optr)PSend21044, (Optr)PBlock21045, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_100, (Optr)&t_send1, (Optr)PSend21048, (Optr)&t_send_ifTrue_, (Optr)PSend21049, (Optr)PBlock21050, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21053, (Optr)&t_send_ifTrue_, (Optr)PSend21054, (Optr)PBlock21055, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_year_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21058, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend21059, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_month_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21060, (Optr)&t_send_ifTrue_, (Optr)PSend21061, (Optr)PBlock21062, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_month_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21065, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_send1, (Optr)PSend21066, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_day_0_4, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21067, (Optr)&t_send_ifTrue_, (Optr)PSend21068, (Optr)PBlock21069, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_day_0_4, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21072, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21021 = new_Method_with(PArray21022, PArray21023, empty_Array, PThreadedCode21024, 13, PSend21031, PSend21033, PSend21044, PSend21049, PSend21054, PSend21058, PSend21059, PSend21061, PSend21065, PSend21066, PSend21068, PSend21072, self);
     
-    MethodClosure MC_SMB_printYMDOn_withLeadingSpace_ = new_MethodClosure((Method)PMethod20800, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_printYMDOn_withLeadingSpace_ = new_MethodClosure((Method)PMethod21021, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_printYMDOn_withLeadingSpace_, MC_SMB_printYMDOn_withLeadingSpace_);
 }
 
@@ -471,18 +471,18 @@ static void init_SMB_dayOfWeek() {
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // +. 
-    Send PSend20854 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__plus_, 1, (Optr)int_1_Const);
+    Send PSend21075 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__plus_, 1, (Optr)int_1_Const);
     SmallInt int_7 = new_SmallInt(7);
     Symbol SMB_rem_ = new_Symbol(L"rem:");
     Constant int_7_Const = new_Constant((Optr)int_7);
     // rem:. 
-    Send PSend20855 = new_Send((Optr)PSend20854, SMB_rem_, 1, (Optr)int_7_Const);
+    Send PSend21076 = new_Send((Optr)PSend21075, SMB_rem_, 1, (Optr)int_7_Const);
     // +. 
-    Send PSend20856 = new_Send((Optr)PSend20855, SMB__plus_, 1, (Optr)int_1_Const);
-    Array PThreadedCode20853 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend20854, (Optr)&t_push1, (Optr)int_7, (Optr)&t_send1, (Optr)PSend20855, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend20856, (Optr)&t_method_return);
-    Method PMethod20852 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20853, 1, PSend20856);
+    Send PSend21077 = new_Send((Optr)PSend21076, SMB__plus_, 1, (Optr)int_1_Const);
+    Array PThreadedCode21074 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21075, (Optr)&t_push1, (Optr)int_7, (Optr)&t_send1, (Optr)PSend21076, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21077, (Optr)&t_method_return);
+    Method PMethod21073 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21074, 1, PSend21077);
     
-    MethodClosure MC_SMB_dayOfWeek = new_MethodClosure((Method)PMethod20852, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_dayOfWeek = new_MethodClosure((Method)PMethod21073, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_dayOfWeek, MC_SMB_dayOfWeek);
 }
 
@@ -491,14 +491,14 @@ static void init_SMB_second() {
     Symbol SMB_second = new_Symbol(L"second");
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend20859 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
+    Send PSend21080 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
     Symbol SMB_seconds = new_Symbol(L"seconds");
     // seconds. 
-    Send PSend20860 = new_Send((Optr)PSend20859, SMB_seconds, 0);
-    Array PThreadedCode20858 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend20859, (Optr)&t_send0, (Optr)PSend20860, (Optr)&t_method_return);
-    Method PMethod20857 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20858, 1, PSend20860);
+    Send PSend21081 = new_Send((Optr)PSend21080, SMB_seconds, 0);
+    Array PThreadedCode21079 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend21080, (Optr)&t_send0, (Optr)PSend21081, (Optr)&t_method_return);
+    Method PMethod21078 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21079, 1, PSend21081);
     
-    MethodClosure MC_SMB_second = new_MethodClosure((Method)PMethod20857, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_second = new_MethodClosure((Method)PMethod21078, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_second, MC_SMB_second);
 }
 
@@ -507,14 +507,14 @@ static void init_SMB_hour24() {
     Symbol SMB_hour24 = new_Symbol(L"hour24");
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend20863 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
+    Send PSend21084 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
     Symbol SMB_hours = new_Symbol(L"hours");
     // hours. 
-    Send PSend20864 = new_Send((Optr)PSend20863, SMB_hours, 0);
-    Array PThreadedCode20862 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend20863, (Optr)&t_send0, (Optr)PSend20864, (Optr)&t_method_return);
-    Method PMethod20861 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20862, 1, PSend20864);
+    Send PSend21085 = new_Send((Optr)PSend21084, SMB_hours, 0);
+    Array PThreadedCode21083 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend21084, (Optr)&t_send0, (Optr)PSend21085, (Optr)&t_method_return);
+    Method PMethod21082 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21083, 1, PSend21085);
     
-    MethodClosure MC_SMB_hour24 = new_MethodClosure((Method)PMethod20861, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_hour24 = new_MethodClosure((Method)PMethod21082, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_hour24, MC_SMB_hour24);
 }
 
@@ -523,11 +523,11 @@ static void init_SMB_hours() {
     Symbol SMB_hours = new_Symbol(L"hours");
     Symbol SMB_hour = new_Symbol(L"hour");
     // hour. 
-    Send PSend20867 = new_Send((Optr)self, SMB_hour, 0);
-    Array PThreadedCode20866 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20867, (Optr)&t_method_return);
-    Method PMethod20865 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20866, 1, PSend20867);
+    Send PSend21088 = new_Send((Optr)self, SMB_hour, 0);
+    Array PThreadedCode21087 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21088, (Optr)&t_method_return);
+    Method PMethod21086 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21087, 1, PSend21088);
     
-    MethodClosure MC_SMB_hours = new_MethodClosure((Method)PMethod20865, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_hours = new_MethodClosure((Method)PMethod21086, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_hours, MC_SMB_hours);
 }
 
@@ -536,14 +536,14 @@ static void init_SMB_minute() {
     Symbol SMB_minute = new_Symbol(L"minute");
     Symbol SMB_seconds_ = new_Symbol(L"seconds:");
     // seconds:. 
-    Send PSend20870 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
+    Send PSend21091 = new_Send((Optr)Duration_classReference, SMB_seconds_, 1, (Optr)slot_Chronology_DateAndTime_seconds);
     Symbol SMB_minutes = new_Symbol(L"minutes");
     // minutes. 
-    Send PSend20871 = new_Send((Optr)PSend20870, SMB_minutes, 0);
-    Array PThreadedCode20869 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend20870, (Optr)&t_send0, (Optr)PSend20871, (Optr)&t_method_return);
-    Method PMethod20868 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20869, 1, PSend20871);
+    Send PSend21092 = new_Send((Optr)PSend21091, SMB_minutes, 0);
+    Array PThreadedCode21090 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send1, (Optr)PSend21091, (Optr)&t_send0, (Optr)PSend21092, (Optr)&t_method_return);
+    Method PMethod21089 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21090, 1, PSend21092);
     
-    MethodClosure MC_SMB_minute = new_MethodClosure((Method)PMethod20868, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_minute = new_MethodClosure((Method)PMethod21089, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_minute, MC_SMB_minute);
 }
 
@@ -551,27 +551,27 @@ static void init_SMB_minute() {
 static void init_SMB_hasEqualTicks_() {
     Symbol SMB_hasEqualTicks_ = new_Symbol(L"hasEqualTicks:");
     Variable VAR_aDateAndTime_0_0 = new_Variable_named(L"aDateAndTime", 0);
-    Array PArray20873 = new_Array_with(1, (Optr)VAR_aDateAndTime_0_0);
+    Array PArray21094 = new_Array_with(1, (Optr)VAR_aDateAndTime_0_0);
     Symbol SMB_julianDayNumber = new_Symbol(L"julianDayNumber");
     // julianDayNumber. 
-    Send PSend20875 = new_Send((Optr)VAR_aDateAndTime_0_0, SMB_julianDayNumber, 0);
+    Send PSend21096 = new_Send((Optr)VAR_aDateAndTime_0_0, SMB_julianDayNumber, 0);
     Symbol SMB__equals_ = new_Symbol(L"=");
     // =. 
-    Send PSend20876 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__equals_, 1, (Optr)PSend20875);
+    Send PSend21097 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__equals_, 1, (Optr)PSend21096);
     Symbol SMB_secondsSinceMidnight = new_Symbol(L"secondsSinceMidnight");
     // secondsSinceMidnight. 
-    Send PSend20879 = new_Send((Optr)VAR_aDateAndTime_0_0, SMB_secondsSinceMidnight, 0);
+    Send PSend21100 = new_Send((Optr)VAR_aDateAndTime_0_0, SMB_secondsSinceMidnight, 0);
     // =. 
-    Send PSend20880 = new_Send((Optr)slot_Chronology_DateAndTime_seconds, SMB__equals_, 1, (Optr)PSend20879);
-    Array PThreadedCode20878 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_push_variable, (Optr)VAR_aDateAndTime_0_0, (Optr)&t_send0, (Optr)PSend20879, (Optr)&t_send1, (Optr)PSend20880, (Optr)&t_block_return);
-    Block PBlock20877 = new_Block_with(empty_Array, empty_Array, PThreadedCode20878, 1, PSend20880);
+    Send PSend21101 = new_Send((Optr)slot_Chronology_DateAndTime_seconds, SMB__equals_, 1, (Optr)PSend21100);
+    Array PThreadedCode21099 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_push_variable, (Optr)VAR_aDateAndTime_0_0, (Optr)&t_send0, (Optr)PSend21100, (Optr)&t_send1, (Optr)PSend21101, (Optr)&t_block_return);
+    Block PBlock21098 = new_Block_with(empty_Array, empty_Array, PThreadedCode21099, 1, PSend21101);
     Symbol SMB_and_ = new_Symbol(L"and:");
     // and:. 
-    Send PSend20881 = new_Send((Optr)PSend20876, SMB_and_, 1, (Optr)PBlock20877);
-    Array PThreadedCode20874 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_variable, (Optr)VAR_aDateAndTime_0_0, (Optr)&t_send0, (Optr)PSend20875, (Optr)&t_send1, (Optr)PSend20876, (Optr)&t_push_closure, (Optr)PBlock20877, (Optr)&t_send1, (Optr)PSend20881, (Optr)&t_method_return);
-    Method PMethod20872 = new_Method_with(PArray20873, empty_Array, empty_Array, PThreadedCode20874, 1, PSend20881);
+    Send PSend21102 = new_Send((Optr)PSend21097, SMB_and_, 1, (Optr)PBlock21098);
+    Array PThreadedCode21095 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_variable, (Optr)VAR_aDateAndTime_0_0, (Optr)&t_send0, (Optr)PSend21096, (Optr)&t_send1, (Optr)PSend21097, (Optr)&t_push_closure, (Optr)PBlock21098, (Optr)&t_send1, (Optr)PSend21102, (Optr)&t_method_return);
+    Method PMethod21093 = new_Method_with(PArray21094, empty_Array, empty_Array, PThreadedCode21095, 1, PSend21102);
     
-    MethodClosure MC_SMB_hasEqualTicks_ = new_MethodClosure((Method)PMethod20872, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_hasEqualTicks_ = new_MethodClosure((Method)PMethod21093, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_hasEqualTicks_, MC_SMB_hasEqualTicks_);
 }
 
@@ -581,16 +581,16 @@ static void init_SMB_month() {
     Variable VAR_d_1_0 = new_Variable_named(L"d", 1);
     Variable VAR_m_1_1 = new_Variable_named(L"m", 1);
     Variable VAR_y_1_2 = new_Variable_named(L"y", 1);
-    Array PArray20885 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
-    Array PThreadedCode20886 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_m_1_1, (Optr)&t_method_return);
-    Block PBlock20884 = new_Block_with(PArray20885, empty_Array, PThreadedCode20886, 1, VAR_m_1_1);
+    Array PArray21106 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
+    Array PThreadedCode21107 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_m_1_1, (Optr)&t_method_return);
+    Block PBlock21105 = new_Block_with(PArray21106, empty_Array, PThreadedCode21107, 1, VAR_m_1_1);
     Symbol SMB_dayMonthYearDo_ = new_Symbol(L"dayMonthYearDo:");
     // dayMonthYearDo:. 
-    Send PSend20887 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock20884);
-    Array PThreadedCode20883 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock20884, (Optr)&t_send1, (Optr)PSend20887, (Optr)&t_method_return);
-    Method PMethod20882 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20883, 1, PSend20887);
+    Send PSend21108 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock21105);
+    Array PThreadedCode21104 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock21105, (Optr)&t_send1, (Optr)PSend21108, (Optr)&t_method_return);
+    Method PMethod21103 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21104, 1, PSend21108);
     
-    MethodClosure MC_SMB_month = new_MethodClosure((Method)PMethod20882, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_month = new_MethodClosure((Method)PMethod21103, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_month, MC_SMB_month);
 }
 
@@ -599,34 +599,34 @@ static void init_SMB_asLocal() {
     Symbol SMB_asLocal = new_Symbol(L"asLocal");
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend20890 = new_Send((Optr)self, SMB_offset, 0);
+    Send PSend21111 = new_Send((Optr)self, SMB_offset, 0);
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend20891 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend21112 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_localOffset = new_Symbol(L"localOffset");
     // localOffset. 
-    Send PSend20892 = new_Send((Optr)PSend20891, SMB_localOffset, 0);
+    Send PSend21113 = new_Send((Optr)PSend21112, SMB_localOffset, 0);
     Symbol SMB__equals_ = new_Symbol(L"=");
     // =. 
-    Send PSend20893 = new_Send((Optr)PSend20890, SMB__equals_, 1, (Optr)PSend20892);
+    Send PSend21114 = new_Send((Optr)PSend21111, SMB__equals_, 1, (Optr)PSend21113);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
-    Array PThreadedCode20896 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_self);
-    Block PBlock20895 = new_Block_with(empty_Array, empty_Array, PThreadedCode20896, 1, self);
+    Array PThreadedCode21117 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_self);
+    Block PBlock21116 = new_Block_with(empty_Array, empty_Array, PThreadedCode21117, 1, self);
     // class. 
-    Send PSend20899 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend21120 = new_Send((Optr)self, SMB_class, 0);
     // localOffset. 
-    Send PSend20900 = new_Send((Optr)PSend20899, SMB_localOffset, 0);
+    Send PSend21121 = new_Send((Optr)PSend21120, SMB_localOffset, 0);
     Symbol SMB_utcOffset_ = new_Symbol(L"utcOffset:");
     // utcOffset:. 
-    Send PSend20901 = new_Send((Optr)self, SMB_utcOffset_, 1, (Optr)PSend20900);
-    Array PThreadedCode20898 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20899, (Optr)&t_send0, (Optr)PSend20900, (Optr)&t_send1, (Optr)PSend20901, (Optr)&t_block_return);
-    Block PBlock20897 = new_Block_with(empty_Array, empty_Array, PThreadedCode20898, 1, PSend20901);
+    Send PSend21122 = new_Send((Optr)self, SMB_utcOffset_, 1, (Optr)PSend21121);
+    Array PThreadedCode21119 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21120, (Optr)&t_send0, (Optr)PSend21121, (Optr)&t_send1, (Optr)PSend21122, (Optr)&t_block_return);
+    Block PBlock21118 = new_Block_with(empty_Array, empty_Array, PThreadedCode21119, 1, PSend21122);
     // ifTrue:ifFalse:. 
-    Send PSend20894 = new_Send((Optr)PSend20893, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20895, (Optr)PBlock20897);
-    Array PThreadedCode20889 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20890, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20891, (Optr)&t_send0, (Optr)PSend20892, (Optr)&t_send1, (Optr)PSend20893, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend20894, (Optr)PBlock20895, (Optr)PBlock20897, (Optr)&t_method_return);
-    Method PMethod20888 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20889, 1, PSend20894);
+    Send PSend21115 = new_Send((Optr)PSend21114, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21116, (Optr)PBlock21118);
+    Array PThreadedCode21110 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21111, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21112, (Optr)&t_send0, (Optr)PSend21113, (Optr)&t_send1, (Optr)PSend21114, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21115, (Optr)PBlock21116, (Optr)PBlock21118, (Optr)&t_method_return);
+    Method PMethod21109 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21110, 1, PSend21115);
     
-    MethodClosure MC_SMB_asLocal = new_MethodClosure((Method)PMethod20888, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asLocal = new_MethodClosure((Method)PMethod21109, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asLocal, MC_SMB_asLocal);
 }
 
@@ -635,111 +635,111 @@ static void init_SMB_printOn_withLeadingSpace_() {
     Symbol SMB_printOn_withLeadingSpace_ = new_Symbol(L"printOn:withLeadingSpace:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
     Variable VAR_printLeadingSpaceToo_0_1 = new_Variable_named(L"printLeadingSpaceToo", 0);
-    Array PArray20903 = new_Array_with(2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
+    Array PArray21124 = new_Array_with(2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
     Variable VAR_h_0_2 = new_Variable_named(L"h", 0);
     Variable VAR_m_0_3 = new_Variable_named(L"m", 0);
     Variable VAR_s_0_4 = new_Variable_named(L"s", 0);
-    Array PArray20904 = new_Array_with(3, (Optr)VAR_h_0_2, (Optr)VAR_m_0_3, (Optr)VAR_s_0_4);
+    Array PArray21125 = new_Array_with(3, (Optr)VAR_h_0_2, (Optr)VAR_m_0_3, (Optr)VAR_s_0_4);
     Symbol SMB_printYMDOn_withLeadingSpace_ = new_Symbol(L"printYMDOn:withLeadingSpace:");
     // printYMDOn:withLeadingSpace:. 
-    Send PSend20906 = new_Send((Optr)self, SMB_printYMDOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
-    Character char_20907 = new_Character(L'T');
+    Send PSend21127 = new_Send((Optr)self, SMB_printYMDOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)VAR_printLeadingSpaceToo_0_1);
+    Character char_21128 = new_Character(L'T');
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant char_20907_Const = new_Constant((Optr)char_20907);
+    Constant char_21128_Const = new_Constant((Optr)char_21128);
     // <<. 
-    Send PSend20908 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_20907_Const);
+    Send PSend21129 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_21128_Const);
     Symbol SMB_printHMSOn_ = new_Symbol(L"printHMSOn:");
     // printHMSOn:. 
-    Send PSend20909 = new_Send((Optr)self, SMB_printHMSOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21130 = new_Send((Optr)self, SMB_printHMSOn_, 1, (Optr)VAR_aStream_0_0);
     Symbol SMB_positive = new_Symbol(L"positive");
     // positive. 
-    Send PSend20910 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_positive, 0);
+    Send PSend21131 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_positive, 0);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
-    Character char_20914 = new_Character(L'+');
-    Array PThreadedCode20913 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)char_20914, (Optr)&t_block_return);
-    Constant char_20914_Const = new_Constant((Optr)char_20914);
-    Block PBlock20912 = new_Block_with(empty_Array, empty_Array, PThreadedCode20913, 1, char_20914_Const);
+    Character char_21135 = new_Character(L'+');
+    Array PThreadedCode21134 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)char_21135, (Optr)&t_block_return);
+    Constant char_21135_Const = new_Constant((Optr)char_21135);
+    Block PBlock21133 = new_Block_with(empty_Array, empty_Array, PThreadedCode21134, 1, char_21135_Const);
     Character char_2182 = new_Character(L'-');
-    Array PThreadedCode20916 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_block_return);
+    Array PThreadedCode21137 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)char_2182, (Optr)&t_block_return);
     Constant char_2182_Const = new_Constant((Optr)char_2182);
-    Block PBlock20915 = new_Block_with(empty_Array, empty_Array, PThreadedCode20916, 1, char_2182_Const);
+    Block PBlock21136 = new_Block_with(empty_Array, empty_Array, PThreadedCode21137, 1, char_2182_Const);
     // ifTrue:ifFalse:. 
-    Send PSend20911 = new_Send((Optr)PSend20910, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20912, (Optr)PBlock20915);
+    Send PSend21132 = new_Send((Optr)PSend21131, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21133, (Optr)PBlock21136);
     // <<. 
-    Send PSend20917 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend20911);
+    Send PSend21138 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)PSend21132);
     Symbol SMB_hours = new_Symbol(L"hours");
     // hours. 
-    Send PSend20920 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_hours, 0);
+    Send PSend21141 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_hours, 0);
     Symbol SMB_abs = new_Symbol(L"abs");
     // abs. 
-    Send PSend20919 = new_Send((Optr)PSend20920, SMB_abs, 0);
-    Assign PAssign20918 = new_Assign((Optr)VAR_h_0_2, (Optr)PSend20919);
+    Send PSend21140 = new_Send((Optr)PSend21141, SMB_abs, 0);
+    Assign PAssign21139 = new_Assign((Optr)VAR_h_0_2, (Optr)PSend21140);
     SmallInt int_10 = new_SmallInt(10);
     Symbol SMB__lt_ = new_Symbol(L"<");
     Constant int_10_Const = new_Constant((Optr)int_10);
     // <. 
-    Send PSend20921 = new_Send((Optr)VAR_h_0_2, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21142 = new_Send((Optr)VAR_h_0_2, SMB__lt_, 1, (Optr)int_10_Const);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    Character char_9208 = new_Character(L'0');
-    Constant char_9208_Const = new_Constant((Optr)char_9208);
+    Character char_9429 = new_Character(L'0');
+    Constant char_9429_Const = new_Constant((Optr)char_9429);
     // <<. 
-    Send PSend20925 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20924 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20925, (Optr)&t_block_return);
-    Block PBlock20923 = new_Block_with(empty_Array, empty_Array, PThreadedCode20924, 1, PSend20925);
+    Send PSend21146 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21145 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21146, (Optr)&t_block_return);
+    Block PBlock21144 = new_Block_with(empty_Array, empty_Array, PThreadedCode21145, 1, PSend21146);
     // ifTrue:. 
-    Send PSend20922 = new_Send((Optr)PSend20921, SMB_ifTrue_, 1, (Optr)PBlock20923);
+    Send PSend21143 = new_Send((Optr)PSend21142, SMB_ifTrue_, 1, (Optr)PBlock21144);
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     // printOn:. 
-    Send PSend20926 = new_Send((Optr)VAR_h_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21147 = new_Send((Optr)VAR_h_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     Character char_444 = new_Character(L':');
     Constant char_444_Const = new_Constant((Optr)char_444);
     // <<. 
-    Send PSend20927 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
+    Send PSend21148 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
     Symbol SMB_minutes = new_Symbol(L"minutes");
     // minutes. 
-    Send PSend20930 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_minutes, 0);
+    Send PSend21151 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_minutes, 0);
     // abs. 
-    Send PSend20929 = new_Send((Optr)PSend20930, SMB_abs, 0);
-    Assign PAssign20928 = new_Assign((Optr)VAR_m_0_3, (Optr)PSend20929);
+    Send PSend21150 = new_Send((Optr)PSend21151, SMB_abs, 0);
+    Assign PAssign21149 = new_Assign((Optr)VAR_m_0_3, (Optr)PSend21150);
     // <. 
-    Send PSend20931 = new_Send((Optr)VAR_m_0_3, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21152 = new_Send((Optr)VAR_m_0_3, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend20935 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode20934 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend20935, (Optr)&t_block_return);
-    Block PBlock20933 = new_Block_with(empty_Array, empty_Array, PThreadedCode20934, 1, PSend20935);
+    Send PSend21156 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21155 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21156, (Optr)&t_block_return);
+    Block PBlock21154 = new_Block_with(empty_Array, empty_Array, PThreadedCode21155, 1, PSend21156);
     // ifTrue:. 
-    Send PSend20932 = new_Send((Optr)PSend20931, SMB_ifTrue_, 1, (Optr)PBlock20933);
+    Send PSend21153 = new_Send((Optr)PSend21152, SMB_ifTrue_, 1, (Optr)PBlock21154);
     // printOn:. 
-    Send PSend20936 = new_Send((Optr)VAR_m_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21157 = new_Send((Optr)VAR_m_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     Symbol SMB_seconds = new_Symbol(L"seconds");
     // seconds. 
-    Send PSend20937 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_seconds, 0);
+    Send PSend21158 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_seconds, 0);
     Symbol SMB__equals_ = new_Symbol(L"=");
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
     // =. 
-    Send PSend20938 = new_Send((Optr)PSend20937, SMB__equals_, 1, (Optr)int_0_Const);
+    Send PSend21159 = new_Send((Optr)PSend21158, SMB__equals_, 1, (Optr)int_0_Const);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     // seconds. 
-    Send PSend20945 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_seconds, 0);
+    Send PSend21166 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_seconds, 0);
     // abs. 
-    Send PSend20944 = new_Send((Optr)PSend20945, SMB_abs, 0);
+    Send PSend21165 = new_Send((Optr)PSend21166, SMB_abs, 0);
     Symbol SMB_truncated = new_Symbol(L"truncated");
     // truncated. 
-    Send PSend20943 = new_Send((Optr)PSend20944, SMB_truncated, 0);
-    Assign PAssign20942 = new_Assign((Optr)VAR_s_0_4, (Optr)PSend20943);
+    Send PSend21164 = new_Send((Optr)PSend21165, SMB_truncated, 0);
+    Assign PAssign21163 = new_Assign((Optr)VAR_s_0_4, (Optr)PSend21164);
     // <<. 
-    Send PSend20946 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
+    Send PSend21167 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
     // printOn:. 
-    Send PSend20947 = new_Send((Optr)VAR_s_0_4, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode20941 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push1, (Optr)PAssign20942, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20945, (Optr)&t_send0, (Optr)PSend20944, (Optr)&t_send0, (Optr)PSend20943, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend20946, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_4, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20947, (Optr)&t_block_return);
-    Block PBlock20940 = new_Block_with(empty_Array, empty_Array, PThreadedCode20941, 3, PAssign20942, PSend20946, PSend20947);
+    Send PSend21168 = new_Send((Optr)VAR_s_0_4, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21162 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push1, (Optr)PAssign21163, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21166, (Optr)&t_send0, (Optr)PSend21165, (Optr)&t_send0, (Optr)PSend21164, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21167, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_4, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21168, (Optr)&t_block_return);
+    Block PBlock21161 = new_Block_with(empty_Array, empty_Array, PThreadedCode21162, 3, PAssign21163, PSend21167, PSend21168);
     // ifFalse:. 
-    Send PSend20939 = new_Send((Optr)PSend20938, SMB_ifFalse_, 1, (Optr)PBlock20940);
-    Array PThreadedCode20905 = instantiate_Array_with(ThreadedCode_Class, 0, 107, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_variable, (Optr)VAR_printLeadingSpaceToo_0_1, (Optr)&t_send2, (Optr)PSend20906, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_20907, (Optr)&t_send1, (Optr)PSend20908, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20909, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20910, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend20911, (Optr)PBlock20912, (Optr)PBlock20915, (Optr)&t_send1, (Optr)PSend20917, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20918, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20920, (Optr)&t_send0, (Optr)PSend20919, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend20921, (Optr)&t_send_ifTrue_, (Optr)PSend20922, (Optr)PBlock20923, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20926, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend20927, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20928, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20930, (Optr)&t_send0, (Optr)PSend20929, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend20931, (Optr)&t_send_ifTrue_, (Optr)PSend20932, (Optr)PBlock20933, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend20936, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20937, (Optr)&t_push_0, (Optr)&t_send1, (Optr)PSend20938, (Optr)&t_send_ifFalse_, (Optr)PSend20939, (Optr)PBlock20940, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod20902 = new_Method_with(PArray20903, PArray20904, empty_Array, PThreadedCode20905, 13, PSend20906, PSend20908, PSend20909, PSend20917, PAssign20918, PSend20922, PSend20926, PSend20927, PAssign20928, PSend20932, PSend20936, PSend20939, self);
+    Send PSend21160 = new_Send((Optr)PSend21159, SMB_ifFalse_, 1, (Optr)PBlock21161);
+    Array PThreadedCode21126 = instantiate_Array_with(ThreadedCode_Class, 0, 107, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_variable, (Optr)VAR_printLeadingSpaceToo_0_1, (Optr)&t_send2, (Optr)PSend21127, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_21128, (Optr)&t_send1, (Optr)PSend21129, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21130, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21131, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21132, (Optr)PBlock21133, (Optr)PBlock21136, (Optr)&t_send1, (Optr)PSend21138, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21139, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21141, (Optr)&t_send0, (Optr)PSend21140, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21142, (Optr)&t_send_ifTrue_, (Optr)PSend21143, (Optr)PBlock21144, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21147, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21148, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21149, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21151, (Optr)&t_send0, (Optr)PSend21150, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21152, (Optr)&t_send_ifTrue_, (Optr)PSend21153, (Optr)PBlock21154, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21157, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21158, (Optr)&t_push_0, (Optr)&t_send1, (Optr)PSend21159, (Optr)&t_send_ifFalse_, (Optr)PSend21160, (Optr)PBlock21161, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21123 = new_Method_with(PArray21124, PArray21125, empty_Array, PThreadedCode21126, 13, PSend21127, PSend21129, PSend21130, PSend21138, PAssign21139, PSend21143, PSend21147, PSend21148, PAssign21149, PSend21153, PSend21157, PSend21160, self);
     
-    MethodClosure MC_SMB_printOn_withLeadingSpace_ = new_MethodClosure((Method)PMethod20902, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_printOn_withLeadingSpace_ = new_MethodClosure((Method)PMethod21123, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_printOn_withLeadingSpace_, MC_SMB_printOn_withLeadingSpace_);
 }
 
@@ -749,14 +749,14 @@ static void init_SMB_setJdn_seconds_offset_() {
     Variable VAR_julDays_0_0 = new_Variable_named(L"julDays", 0);
     Variable VAR_secs_0_1 = new_Variable_named(L"secs", 0);
     Variable VAR_anOffset_0_2 = new_Variable_named(L"anOffset", 0);
-    Array PArray20949 = new_Array_with(3, (Optr)VAR_julDays_0_0, (Optr)VAR_secs_0_1, (Optr)VAR_anOffset_0_2);
-    Assign PAssign20951 = new_Assign((Optr)slot_Chronology_DateAndTime_jdn, (Optr)VAR_julDays_0_0);
-    Assign PAssign20952 = new_Assign((Optr)slot_Chronology_DateAndTime_seconds, (Optr)VAR_secs_0_1);
-    Assign PAssign20953 = new_Assign((Optr)slot_Chronology_DateAndTime_offset, (Optr)VAR_anOffset_0_2);
-    Array PThreadedCode20950 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign20951, (Optr)&t_push_variable, (Optr)VAR_julDays_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20952, (Optr)&t_push_variable, (Optr)VAR_secs_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20953, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod20948 = new_Method_with(PArray20949, empty_Array, empty_Array, PThreadedCode20950, 4, PAssign20951, PAssign20952, PAssign20953, self);
+    Array PArray21170 = new_Array_with(3, (Optr)VAR_julDays_0_0, (Optr)VAR_secs_0_1, (Optr)VAR_anOffset_0_2);
+    Assign PAssign21172 = new_Assign((Optr)slot_Chronology_DateAndTime_jdn, (Optr)VAR_julDays_0_0);
+    Assign PAssign21173 = new_Assign((Optr)slot_Chronology_DateAndTime_seconds, (Optr)VAR_secs_0_1);
+    Assign PAssign21174 = new_Assign((Optr)slot_Chronology_DateAndTime_offset, (Optr)VAR_anOffset_0_2);
+    Array PThreadedCode21171 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign21172, (Optr)&t_push_variable, (Optr)VAR_julDays_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21173, (Optr)&t_push_variable, (Optr)VAR_secs_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21174, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21169 = new_Method_with(PArray21170, empty_Array, empty_Array, PThreadedCode21171, 4, PAssign21172, PAssign21173, PAssign21174, self);
     
-    MethodClosure MC_SMB_setJdn_seconds_offset_ = new_MethodClosure((Method)PMethod20948, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_setJdn_seconds_offset_ = new_MethodClosure((Method)PMethod21169, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_setJdn_seconds_offset_, MC_SMB_setJdn_seconds_offset_);
 }
 
@@ -765,23 +765,23 @@ static void init_SMB_asUTC() {
     Symbol SMB_asUTC = new_Symbol(L"asUTC");
     Symbol SMB_isZero = new_Symbol(L"isZero");
     // isZero. 
-    Send PSend20956 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_isZero, 0);
+    Send PSend21177 = new_Send((Optr)slot_Chronology_DateAndTime_offset, SMB_isZero, 0);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
-    Array PThreadedCode20959 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_self);
-    Block PBlock20958 = new_Block_with(empty_Array, empty_Array, PThreadedCode20959, 1, self);
+    Array PThreadedCode21180 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_block_return_self);
+    Block PBlock21179 = new_Block_with(empty_Array, empty_Array, PThreadedCode21180, 1, self);
     Symbol SMB_utcOffset_ = new_Symbol(L"utcOffset:");
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
     // utcOffset:. 
-    Send PSend20962 = new_Send((Optr)self, SMB_utcOffset_, 1, (Optr)int_0_Const);
-    Array PThreadedCode20961 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send1, (Optr)PSend20962, (Optr)&t_block_return);
-    Block PBlock20960 = new_Block_with(empty_Array, empty_Array, PThreadedCode20961, 1, PSend20962);
+    Send PSend21183 = new_Send((Optr)self, SMB_utcOffset_, 1, (Optr)int_0_Const);
+    Array PThreadedCode21182 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send1, (Optr)PSend21183, (Optr)&t_block_return);
+    Block PBlock21181 = new_Block_with(empty_Array, empty_Array, PThreadedCode21182, 1, PSend21183);
     // ifTrue:ifFalse:. 
-    Send PSend20957 = new_Send((Optr)PSend20956, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock20958, (Optr)PBlock20960);
-    Array PThreadedCode20955 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend20956, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend20957, (Optr)PBlock20958, (Optr)PBlock20960, (Optr)&t_method_return);
-    Method PMethod20954 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20955, 1, PSend20957);
+    Send PSend21178 = new_Send((Optr)PSend21177, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21179, (Optr)PBlock21181);
+    Array PThreadedCode21176 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_offset, (Optr)&t_send0, (Optr)PSend21177, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21178, (Optr)PBlock21179, (Optr)PBlock21181, (Optr)&t_method_return);
+    Method PMethod21175 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21176, 1, PSend21178);
     
-    MethodClosure MC_SMB_asUTC = new_MethodClosure((Method)PMethod20954, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asUTC = new_MethodClosure((Method)PMethod21175, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asUTC, MC_SMB_asUTC);
 }
 
@@ -790,14 +790,14 @@ static void init_SMB_dayOfWeekName() {
     Symbol SMB_dayOfWeekName = new_Symbol(L"dayOfWeekName");
     Symbol SMB_dayOfWeek = new_Symbol(L"dayOfWeek");
     // dayOfWeek. 
-    Send PSend20965 = new_Send((Optr)self, SMB_dayOfWeek, 0);
+    Send PSend21186 = new_Send((Optr)self, SMB_dayOfWeek, 0);
     Symbol SMB_nameOfDay_ = new_Symbol(L"nameOfDay:");
     // nameOfDay:. 
-    Send PSend20966 = new_Send((Optr)PWeek_classReference, SMB_nameOfDay_, 1, (Optr)PSend20965);
-    Array PThreadedCode20964 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_class_reference, (Optr)PWeek_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20965, (Optr)&t_send1, (Optr)PSend20966, (Optr)&t_method_return);
-    Method PMethod20963 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode20964, 1, PSend20966);
+    Send PSend21187 = new_Send((Optr)PWeek_classReference, SMB_nameOfDay_, 1, (Optr)PSend21186);
+    Array PThreadedCode21185 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_class_reference, (Optr)PWeek_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21186, (Optr)&t_send1, (Optr)PSend21187, (Optr)&t_method_return);
+    Method PMethod21184 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21185, 1, PSend21187);
     
-    MethodClosure MC_SMB_dayOfWeekName = new_MethodClosure((Method)PMethod20963, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_dayOfWeekName = new_MethodClosure((Method)PMethod21184, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_dayOfWeekName, MC_SMB_dayOfWeekName);
 }
 
@@ -805,44 +805,44 @@ static void init_SMB_dayOfWeekName() {
 static void init_SMB_utcOffset_() {
     Symbol SMB_utcOffset_ = new_Symbol(L"utcOffset:");
     Variable VAR_anOffset_0_0 = new_Variable_named(L"anOffset", 0);
-    Array PArray20968 = new_Array_with(1, (Optr)VAR_anOffset_0_0);
+    Array PArray21189 = new_Array_with(1, (Optr)VAR_anOffset_0_0);
     Variable VAR_equiv_0_1 = new_Variable_named(L"equiv", 0);
-    Array PArray20969 = new_Array_with(1, (Optr)VAR_equiv_0_1);
+    Array PArray21190 = new_Array_with(1, (Optr)VAR_equiv_0_1);
     Symbol SMB__plus_ = new_Symbol(L"+");
     Symbol SMB_asDuration = new_Symbol(L"asDuration");
     // asDuration. 
-    Send PSend20974 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
+    Send PSend21195 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
     Symbol SMB__minus_ = new_Symbol(L"-");
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend20975 = new_Send((Optr)self, SMB_offset, 0);
+    Send PSend21196 = new_Send((Optr)self, SMB_offset, 0);
     // -. 
-    Send PSend20973 = new_Send((Optr)PSend20974, SMB__minus_, 1, (Optr)PSend20975);
+    Send PSend21194 = new_Send((Optr)PSend21195, SMB__minus_, 1, (Optr)PSend21196);
     // +. 
-    Send PSend20972 = new_Send((Optr)self, SMB__plus_, 1, (Optr)PSend20973);
-    Assign PAssign20971 = new_Assign((Optr)VAR_equiv_0_1, (Optr)PSend20972);
+    Send PSend21193 = new_Send((Optr)self, SMB__plus_, 1, (Optr)PSend21194);
+    Assign PAssign21192 = new_Assign((Optr)VAR_equiv_0_1, (Optr)PSend21193);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray20977 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray21198 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend20979 = new_Send((Optr)VAR_equiv_0_1, SMB_ticks, 0);
+    Send PSend21200 = new_Send((Optr)VAR_equiv_0_1, SMB_ticks, 0);
     // asDuration. 
-    Send PSend20980 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
+    Send PSend21201 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     // ticks:offset:. 
-    Send PSend20981 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend20979, (Optr)PSend20980);
+    Send PSend21202 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend21200, (Optr)PSend21201);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend20982 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode20978 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_equiv_0_1, (Optr)&t_send0, (Optr)PSend20979, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend20980, (Optr)&t_send2, (Optr)PSend20981, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend20982, (Optr)&t_method_return);
-    Block PBlock20976 = new_Block_with(PArray20977, empty_Array, PThreadedCode20978, 2, PSend20981, PSend20982);
+    Send PSend21203 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode21199 = instantiate_Array_with(ThreadedCode_Class, 0, 18, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_equiv_0_1, (Optr)&t_send0, (Optr)PSend21200, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend21201, (Optr)&t_send2, (Optr)PSend21202, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21203, (Optr)&t_method_return);
+    Block PBlock21197 = new_Block_with(PArray21198, empty_Array, PThreadedCode21199, 2, PSend21202, PSend21203);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend20983 = new_Send((Optr)PBlock20976, SMB_value_, 1, (Optr)VAR_equiv_0_1);
-    Array PThreadedCode20970 = instantiate_Array_with(ThreadedCode_Class, 0, 23, (Optr)&t_push1, (Optr)PAssign20971, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend20974, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20975, (Optr)&t_send1, (Optr)PSend20973, (Optr)&t_send1, (Optr)PSend20972, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock20976, (Optr)&t_push_variable, (Optr)VAR_equiv_0_1, (Optr)&t_send1, (Optr)PSend20983, (Optr)&t_method_return);
-    Method PMethod20967 = new_Method_with(PArray20968, PArray20969, empty_Array, PThreadedCode20970, 2, PAssign20971, PSend20983);
+    Send PSend21204 = new_Send((Optr)PBlock21197, SMB_value_, 1, (Optr)VAR_equiv_0_1);
+    Array PThreadedCode21191 = instantiate_Array_with(ThreadedCode_Class, 0, 23, (Optr)&t_push1, (Optr)PAssign21192, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend21195, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21196, (Optr)&t_send1, (Optr)PSend21194, (Optr)&t_send1, (Optr)PSend21193, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock21197, (Optr)&t_push_variable, (Optr)VAR_equiv_0_1, (Optr)&t_send1, (Optr)PSend21204, (Optr)&t_method_return);
+    Method PMethod21188 = new_Method_with(PArray21189, PArray21190, empty_Array, PThreadedCode21191, 2, PAssign21192, PSend21204);
     
-    MethodClosure MC_SMB_utcOffset_ = new_MethodClosure((Method)PMethod20967, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_utcOffset_ = new_MethodClosure((Method)PMethod21188, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_utcOffset_, MC_SMB_utcOffset_);
 }
 
@@ -850,74 +850,74 @@ static void init_SMB_utcOffset_() {
 static void init_SMB__equals_() {
     Symbol SMB__equals_ = new_Symbol(L"=");
     Variable VAR_comparand_0_0 = new_Variable_named(L"comparand", 0);
-    Array PArray20985 = new_Array_with(1, (Optr)VAR_comparand_0_0);
+    Array PArray21206 = new_Array_with(1, (Optr)VAR_comparand_0_0);
     Variable VAR_comparandAsDateAndTime_0_1 = new_Variable_named(L"comparandAsDateAndTime", 0);
-    Array PArray20986 = new_Array_with(1, (Optr)VAR_comparandAsDateAndTime_0_1);
+    Array PArray21207 = new_Array_with(1, (Optr)VAR_comparandAsDateAndTime_0_1);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray20989 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray21210 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB__pequals_ = new_Symbol(L"==");
     // ==. 
-    Send PSend20991 = new_Send((Optr)self, SMB__pequals_, 1, (Optr)VAR_comparand_0_0);
+    Send PSend21212 = new_Send((Optr)self, SMB__pequals_, 1, (Optr)VAR_comparand_0_0);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend20995 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)true_Const);
-    Array PThreadedCode20994 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend20995, (Optr)&t_block_return);
-    Block PBlock20993 = new_Block_with(empty_Array, empty_Array, PThreadedCode20994, 1, PSend20995);
+    Send PSend21216 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)true_Const);
+    Array PThreadedCode21215 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend21216, (Optr)&t_block_return);
+    Block PBlock21214 = new_Block_with(empty_Array, empty_Array, PThreadedCode21215, 1, PSend21216);
     // ifTrue:. 
-    Send PSend20992 = new_Send((Optr)PSend20991, SMB_ifTrue_, 1, (Optr)PBlock20993);
+    Send PSend21213 = new_Send((Optr)PSend21212, SMB_ifTrue_, 1, (Optr)PBlock21214);
     Symbol SMB_asDateAndTime = new_Symbol(L"asDateAndTime");
     // asDateAndTime. 
-    Send PSend20997 = new_Send((Optr)VAR_comparand_0_0, SMB_asDateAndTime, 0);
-    Assign PAssign20996 = new_Assign((Optr)VAR_comparandAsDateAndTime_0_1, (Optr)PSend20997);
+    Send PSend21218 = new_Send((Optr)VAR_comparand_0_0, SMB_asDateAndTime, 0);
+    Assign PAssign21217 = new_Assign((Optr)VAR_comparandAsDateAndTime_0_1, (Optr)PSend21218);
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend20998 = new_Send((Optr)self, SMB_offset, 0);
+    Send PSend21219 = new_Send((Optr)self, SMB_offset, 0);
     // offset. 
-    Send PSend20999 = new_Send((Optr)VAR_comparandAsDateAndTime_0_1, SMB_offset, 0);
+    Send PSend21220 = new_Send((Optr)VAR_comparandAsDateAndTime_0_1, SMB_offset, 0);
     // =. 
-    Send PSend21000 = new_Send((Optr)PSend20998, SMB__equals_, 1, (Optr)PSend20999);
+    Send PSend21221 = new_Send((Optr)PSend21219, SMB__equals_, 1, (Optr)PSend21220);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
     Symbol SMB_hasEqualTicks_ = new_Symbol(L"hasEqualTicks:");
     // hasEqualTicks:. 
-    Send PSend21004 = new_Send((Optr)self, SMB_hasEqualTicks_, 1, (Optr)VAR_comparandAsDateAndTime_0_1);
-    Array PThreadedCode21003 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send1, (Optr)PSend21004, (Optr)&t_block_return);
-    Block PBlock21002 = new_Block_with(empty_Array, empty_Array, PThreadedCode21003, 1, PSend21004);
+    Send PSend21225 = new_Send((Optr)self, SMB_hasEqualTicks_, 1, (Optr)VAR_comparandAsDateAndTime_0_1);
+    Array PThreadedCode21224 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send1, (Optr)PSend21225, (Optr)&t_block_return);
+    Block PBlock21223 = new_Block_with(empty_Array, empty_Array, PThreadedCode21224, 1, PSend21225);
     Symbol SMB_asUTC = new_Symbol(L"asUTC");
     // asUTC. 
-    Send PSend21007 = new_Send((Optr)self, SMB_asUTC, 0);
+    Send PSend21228 = new_Send((Optr)self, SMB_asUTC, 0);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend21008 = new_Send((Optr)PSend21007, SMB_ticks, 0);
+    Send PSend21229 = new_Send((Optr)PSend21228, SMB_ticks, 0);
     // asUTC. 
-    Send PSend21009 = new_Send((Optr)VAR_comparandAsDateAndTime_0_1, SMB_asUTC, 0);
+    Send PSend21230 = new_Send((Optr)VAR_comparandAsDateAndTime_0_1, SMB_asUTC, 0);
     // ticks. 
-    Send PSend21010 = new_Send((Optr)PSend21009, SMB_ticks, 0);
+    Send PSend21231 = new_Send((Optr)PSend21230, SMB_ticks, 0);
     // =. 
-    Send PSend21011 = new_Send((Optr)PSend21008, SMB__equals_, 1, (Optr)PSend21010);
-    Array PThreadedCode21006 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21007, (Optr)&t_send0, (Optr)PSend21008, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send0, (Optr)PSend21009, (Optr)&t_send0, (Optr)PSend21010, (Optr)&t_send1, (Optr)PSend21011, (Optr)&t_block_return);
-    Block PBlock21005 = new_Block_with(empty_Array, empty_Array, PThreadedCode21006, 1, PSend21011);
+    Send PSend21232 = new_Send((Optr)PSend21229, SMB__equals_, 1, (Optr)PSend21231);
+    Array PThreadedCode21227 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21228, (Optr)&t_send0, (Optr)PSend21229, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send0, (Optr)PSend21230, (Optr)&t_send0, (Optr)PSend21231, (Optr)&t_send1, (Optr)PSend21232, (Optr)&t_block_return);
+    Block PBlock21226 = new_Block_with(empty_Array, empty_Array, PThreadedCode21227, 1, PSend21232);
     // ifTrue:ifFalse:. 
-    Send PSend21001 = new_Send((Optr)PSend21000, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21002, (Optr)PBlock21005);
-    Array PThreadedCode20990 = instantiate_Array_with(ThreadedCode_Class, 0, 31, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_comparand_0_0, (Optr)&t_send1, (Optr)PSend20991, (Optr)&t_send_ifTrue_, (Optr)PSend20992, (Optr)PBlock20993, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign20996, (Optr)&t_push_variable, (Optr)VAR_comparand_0_0, (Optr)&t_send0, (Optr)PSend20997, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend20998, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send0, (Optr)PSend20999, (Optr)&t_send1, (Optr)PSend21000, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21001, (Optr)PBlock21002, (Optr)PBlock21005, (Optr)&t_method_return);
-    Block PBlock20988 = new_Block_with(PArray20989, empty_Array, PThreadedCode20990, 3, PSend20992, PAssign20996, PSend21001);
+    Send PSend21222 = new_Send((Optr)PSend21221, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock21223, (Optr)PBlock21226);
+    Array PThreadedCode21211 = instantiate_Array_with(ThreadedCode_Class, 0, 31, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_comparand_0_0, (Optr)&t_send1, (Optr)PSend21212, (Optr)&t_send_ifTrue_, (Optr)PSend21213, (Optr)PBlock21214, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21217, (Optr)&t_push_variable, (Optr)VAR_comparand_0_0, (Optr)&t_send0, (Optr)PSend21218, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21219, (Optr)&t_push_variable, (Optr)VAR_comparandAsDateAndTime_0_1, (Optr)&t_send0, (Optr)PSend21220, (Optr)&t_send1, (Optr)PSend21221, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend21222, (Optr)PBlock21223, (Optr)PBlock21226, (Optr)&t_method_return);
+    Block PBlock21209 = new_Block_with(PArray21210, empty_Array, PThreadedCode21211, 3, PSend21213, PAssign21217, PSend21222);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend21012 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock20988);
-    Array PThreadedCode20987 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock20988, (Optr)&t_send1, (Optr)PSend21012, (Optr)&t_method_return);
-    Method PMethod20984 = new_Method_with(PArray20985, PArray20986, empty_Array, PThreadedCode20987, 1, PSend21012);
+    Send PSend21233 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock21209);
+    Array PThreadedCode21208 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock21209, (Optr)&t_send1, (Optr)PSend21233, (Optr)&t_method_return);
+    Method PMethod21205 = new_Method_with(PArray21206, PArray21207, empty_Array, PThreadedCode21208, 1, PSend21233);
     
-    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod20984, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod21205, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB__equals_, MC_SMB__equals_);
 }
 
 
 static void init_SMB_secondsSinceMidnight() {
     Symbol SMB_secondsSinceMidnight = new_Symbol(L"secondsSinceMidnight");
-    Array PThreadedCode21014 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_method_return);
-    Method PMethod21013 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21014, 1, slot_Chronology_DateAndTime_seconds);
+    Array PThreadedCode21235 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_method_return);
+    Method PMethod21234 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21235, 1, slot_Chronology_DateAndTime_seconds);
     
-    MethodClosure MC_SMB_secondsSinceMidnight = new_MethodClosure((Method)PMethod21013, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_secondsSinceMidnight = new_MethodClosure((Method)PMethod21234, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_secondsSinceMidnight, MC_SMB_secondsSinceMidnight);
 }
 
@@ -927,58 +927,58 @@ static void init_SMB_normalize_ticks_base_() {
     Variable VAR_i_0_0 = new_Variable_named(L"i", 0);
     Variable VAR_ticks_0_1 = new_Variable_named(L"ticks", 0);
     Variable VAR_base_0_2 = new_Variable_named(L"base", 0);
-    Array PArray21016 = new_Array_with(3, (Optr)VAR_i_0_0, (Optr)VAR_ticks_0_1, (Optr)VAR_base_0_2);
+    Array PArray21237 = new_Array_with(3, (Optr)VAR_i_0_0, (Optr)VAR_ticks_0_1, (Optr)VAR_base_0_2);
     Variable VAR_tick_0_3 = new_Variable_named(L"tick", 0);
     Variable VAR_quo_0_4 = new_Variable_named(L"quo", 0);
     Variable VAR_rem_0_5 = new_Variable_named(L"rem", 0);
-    Array PArray21017 = new_Array_with(3, (Optr)VAR_tick_0_3, (Optr)VAR_quo_0_4, (Optr)VAR_rem_0_5);
+    Array PArray21238 = new_Array_with(3, (Optr)VAR_tick_0_3, (Optr)VAR_quo_0_4, (Optr)VAR_rem_0_5);
     Symbol SMB_at_ = new_Symbol(L"at:");
     // at:. 
-    Send PSend21020 = new_Send((Optr)VAR_ticks_0_1, SMB_at_, 1, (Optr)VAR_i_0_0);
-    Assign PAssign21019 = new_Assign((Optr)VAR_tick_0_3, (Optr)PSend21020);
+    Send PSend21241 = new_Send((Optr)VAR_ticks_0_1, SMB_at_, 1, (Optr)VAR_i_0_0);
+    Assign PAssign21240 = new_Assign((Optr)VAR_tick_0_3, (Optr)PSend21241);
     Symbol SMB_quo_ = new_Symbol(L"quo:");
     // quo:. 
-    Send PSend21022 = new_Send((Optr)VAR_tick_0_3, SMB_quo_, 1, (Optr)VAR_base_0_2);
-    Assign PAssign21021 = new_Assign((Optr)VAR_quo_0_4, (Optr)PSend21022);
+    Send PSend21243 = new_Send((Optr)VAR_tick_0_3, SMB_quo_, 1, (Optr)VAR_base_0_2);
+    Assign PAssign21242 = new_Assign((Optr)VAR_quo_0_4, (Optr)PSend21243);
     Symbol SMB_rem_ = new_Symbol(L"rem:");
     // rem:. 
-    Send PSend21024 = new_Send((Optr)VAR_tick_0_3, SMB_rem_, 1, (Optr)VAR_base_0_2);
-    Assign PAssign21023 = new_Assign((Optr)VAR_rem_0_5, (Optr)PSend21024);
+    Send PSend21245 = new_Send((Optr)VAR_tick_0_3, SMB_rem_, 1, (Optr)VAR_base_0_2);
+    Assign PAssign21244 = new_Assign((Optr)VAR_rem_0_5, (Optr)PSend21245);
     Symbol SMB_negative = new_Symbol(L"negative");
     // negative. 
-    Send PSend21025 = new_Send((Optr)VAR_rem_0_5, SMB_negative, 0);
+    Send PSend21246 = new_Send((Optr)VAR_rem_0_5, SMB_negative, 0);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB__minus_ = new_Symbol(L"-");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // -. 
-    Send PSend21030 = new_Send((Optr)VAR_quo_0_4, SMB__minus_, 1, (Optr)int_1_Const);
-    Assign PAssign21029 = new_Assign((Optr)VAR_quo_0_4, (Optr)PSend21030);
+    Send PSend21251 = new_Send((Optr)VAR_quo_0_4, SMB__minus_, 1, (Optr)int_1_Const);
+    Assign PAssign21250 = new_Assign((Optr)VAR_quo_0_4, (Optr)PSend21251);
     Symbol SMB__plus_ = new_Symbol(L"+");
     // +. 
-    Send PSend21032 = new_Send((Optr)VAR_base_0_2, SMB__plus_, 1, (Optr)VAR_rem_0_5);
-    Assign PAssign21031 = new_Assign((Optr)VAR_rem_0_5, (Optr)PSend21032);
-    Array PThreadedCode21028 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign21029, (Optr)&t_push_variable, (Optr)VAR_quo_0_4, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21030, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21031, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send1, (Optr)PSend21032, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock21027 = new_Block_with(empty_Array, empty_Array, PThreadedCode21028, 2, PAssign21029, PAssign21031);
+    Send PSend21253 = new_Send((Optr)VAR_base_0_2, SMB__plus_, 1, (Optr)VAR_rem_0_5);
+    Assign PAssign21252 = new_Assign((Optr)VAR_rem_0_5, (Optr)PSend21253);
+    Array PThreadedCode21249 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push1, (Optr)PAssign21250, (Optr)&t_push_variable, (Optr)VAR_quo_0_4, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21251, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21252, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send1, (Optr)PSend21253, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock21248 = new_Block_with(empty_Array, empty_Array, PThreadedCode21249, 2, PAssign21250, PAssign21252);
     // ifTrue:. 
-    Send PSend21026 = new_Send((Optr)PSend21025, SMB_ifTrue_, 1, (Optr)PBlock21027);
+    Send PSend21247 = new_Send((Optr)PSend21246, SMB_ifTrue_, 1, (Optr)PBlock21248);
     // -. 
-    Send PSend21033 = new_Send((Optr)VAR_i_0_0, SMB__minus_, 1, (Optr)int_1_Const);
+    Send PSend21254 = new_Send((Optr)VAR_i_0_0, SMB__minus_, 1, (Optr)int_1_Const);
     // -. 
-    Send PSend21034 = new_Send((Optr)VAR_i_0_0, SMB__minus_, 1, (Optr)int_1_Const);
+    Send PSend21255 = new_Send((Optr)VAR_i_0_0, SMB__minus_, 1, (Optr)int_1_Const);
     // at:. 
-    Send PSend21035 = new_Send((Optr)VAR_ticks_0_1, SMB_at_, 1, (Optr)PSend21034);
+    Send PSend21256 = new_Send((Optr)VAR_ticks_0_1, SMB_at_, 1, (Optr)PSend21255);
     // +. 
-    Send PSend21036 = new_Send((Optr)PSend21035, SMB__plus_, 1, (Optr)VAR_quo_0_4);
+    Send PSend21257 = new_Send((Optr)PSend21256, SMB__plus_, 1, (Optr)VAR_quo_0_4);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend21037 = new_Send((Optr)VAR_ticks_0_1, SMB_at_put_, 2, (Optr)PSend21033, (Optr)PSend21036);
+    Send PSend21258 = new_Send((Optr)VAR_ticks_0_1, SMB_at_put_, 2, (Optr)PSend21254, (Optr)PSend21257);
     // at:put:. 
-    Send PSend21038 = new_Send((Optr)VAR_ticks_0_1, SMB_at_put_, 2, (Optr)VAR_i_0_0, (Optr)VAR_rem_0_5);
-    Array PThreadedCode21018 = instantiate_Array_with(ThreadedCode_Class, 0, 71, (Optr)&t_push1, (Optr)PAssign21019, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_send1, (Optr)PSend21020, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21021, (Optr)&t_push_variable, (Optr)VAR_tick_0_3, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_send1, (Optr)PSend21022, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21023, (Optr)&t_push_variable, (Optr)VAR_tick_0_3, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_send1, (Optr)PSend21024, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send0, (Optr)PSend21025, (Optr)&t_send_ifTrue_, (Optr)PSend21026, (Optr)PBlock21027, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21033, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21034, (Optr)&t_send1, (Optr)PSend21035, (Optr)&t_push_variable, (Optr)VAR_quo_0_4, (Optr)&t_send1, (Optr)PSend21036, (Optr)&t_send2, (Optr)PSend21037, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send2, (Optr)PSend21038, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21015 = new_Method_with(PArray21016, PArray21017, empty_Array, PThreadedCode21018, 7, PAssign21019, PAssign21021, PAssign21023, PSend21026, PSend21037, PSend21038, self);
+    Send PSend21259 = new_Send((Optr)VAR_ticks_0_1, SMB_at_put_, 2, (Optr)VAR_i_0_0, (Optr)VAR_rem_0_5);
+    Array PThreadedCode21239 = instantiate_Array_with(ThreadedCode_Class, 0, 71, (Optr)&t_push1, (Optr)PAssign21240, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_send1, (Optr)PSend21241, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21242, (Optr)&t_push_variable, (Optr)VAR_tick_0_3, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_send1, (Optr)PSend21243, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21244, (Optr)&t_push_variable, (Optr)VAR_tick_0_3, (Optr)&t_push_variable, (Optr)VAR_base_0_2, (Optr)&t_send1, (Optr)PSend21245, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send0, (Optr)PSend21246, (Optr)&t_send_ifTrue_, (Optr)PSend21247, (Optr)PBlock21248, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21254, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21255, (Optr)&t_send1, (Optr)PSend21256, (Optr)&t_push_variable, (Optr)VAR_quo_0_4, (Optr)&t_send1, (Optr)PSend21257, (Optr)&t_send2, (Optr)PSend21258, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_ticks_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_0, (Optr)&t_push_variable, (Optr)VAR_rem_0_5, (Optr)&t_send2, (Optr)PSend21259, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21236 = new_Method_with(PArray21237, PArray21238, empty_Array, PThreadedCode21239, 7, PAssign21240, PAssign21242, PAssign21244, PSend21247, PSend21258, PSend21259, self);
     
-    MethodClosure MC_SMB_normalize_ticks_base_ = new_MethodClosure((Method)PMethod21015, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_normalize_ticks_base_ = new_MethodClosure((Method)PMethod21236, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_normalize_ticks_base_, MC_SMB_normalize_ticks_base_);
 }
 
@@ -986,46 +986,46 @@ static void init_SMB_normalize_ticks_base_() {
 static void init_SMB_offset_() {
     Symbol SMB_offset_ = new_Symbol(L"offset:");
     Variable VAR_anOffset_0_0 = new_Variable_named(L"anOffset", 0);
-    Array PArray21040 = new_Array_with(1, (Optr)VAR_anOffset_0_0);
+    Array PArray21261 = new_Array_with(1, (Optr)VAR_anOffset_0_0);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray21043 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray21264 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend21045 = new_Send((Optr)self, SMB_ticks, 0);
+    Send PSend21266 = new_Send((Optr)self, SMB_ticks, 0);
     Symbol SMB_asDuration = new_Symbol(L"asDuration");
     // asDuration. 
-    Send PSend21046 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
+    Send PSend21267 = new_Send((Optr)VAR_anOffset_0_0, SMB_asDuration, 0);
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     // ticks:offset:. 
-    Send PSend21047 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend21045, (Optr)PSend21046);
+    Send PSend21268 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend21266, (Optr)PSend21267);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend21048 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode21044 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21045, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend21046, (Optr)&t_send2, (Optr)PSend21047, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21048, (Optr)&t_method_return);
-    Block PBlock21042 = new_Block_with(PArray21043, empty_Array, PThreadedCode21044, 2, PSend21047, PSend21048);
+    Send PSend21269 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode21265 = instantiate_Array_with(ThreadedCode_Class, 0, 17, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21266, (Optr)&t_push_variable, (Optr)VAR_anOffset_0_0, (Optr)&t_send0, (Optr)PSend21267, (Optr)&t_send2, (Optr)PSend21268, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21269, (Optr)&t_method_return);
+    Block PBlock21263 = new_Block_with(PArray21264, empty_Array, PThreadedCode21265, 2, PSend21268, PSend21269);
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend21049 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend21270 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend21050 = new_Send((Optr)PSend21049, SMB_basicNew, 0);
+    Send PSend21271 = new_Send((Optr)PSend21270, SMB_basicNew, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend21051 = new_Send((Optr)PBlock21042, SMB_value_, 1, (Optr)PSend21050);
-    Array PThreadedCode21041 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock21042, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21049, (Optr)&t_send0, (Optr)PSend21050, (Optr)&t_send1, (Optr)PSend21051, (Optr)&t_method_return);
-    Method PMethod21039 = new_Method_with(PArray21040, empty_Array, empty_Array, PThreadedCode21041, 1, PSend21051);
+    Send PSend21272 = new_Send((Optr)PBlock21263, SMB_value_, 1, (Optr)PSend21271);
+    Array PThreadedCode21262 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_closure, (Optr)PBlock21263, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21270, (Optr)&t_send0, (Optr)PSend21271, (Optr)&t_send1, (Optr)PSend21272, (Optr)&t_method_return);
+    Method PMethod21260 = new_Method_with(PArray21261, empty_Array, empty_Array, PThreadedCode21262, 1, PSend21272);
     
-    MethodClosure MC_SMB_offset_ = new_MethodClosure((Method)PMethod21039, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_offset_ = new_MethodClosure((Method)PMethod21260, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_offset_, MC_SMB_offset_);
 }
 
 
 static void init_SMB_asDateAndTime() {
     Symbol SMB_asDateAndTime = new_Symbol(L"asDateAndTime");
-    Array PThreadedCode21053 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod21052 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21053, 1, self);
+    Array PThreadedCode21274 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod21273 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21274, 1, self);
     
-    MethodClosure MC_SMB_asDateAndTime = new_MethodClosure((Method)PMethod21052, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_asDateAndTime = new_MethodClosure((Method)PMethod21273, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_asDateAndTime, MC_SMB_asDateAndTime);
 }
 
@@ -1040,24 +1040,24 @@ static void init_SMB_midnight() {
     Symbol SMB_midnight = new_Symbol(L"midnight");
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend21056 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend21277 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend21057 = new_Send((Optr)PSend21056, SMB_basicNew, 0);
+    Send PSend21278 = new_Send((Optr)PSend21277, SMB_basicNew, 0);
     // class. 
-    Send PSend21058 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend21279 = new_Send((Optr)self, SMB_class, 0);
     Symbol SMB_localOffset = new_Symbol(L"localOffset");
     // localOffset. 
-    Send PSend21059 = new_Send((Optr)PSend21058, SMB_localOffset, 0);
+    Send PSend21280 = new_Send((Optr)PSend21279, SMB_localOffset, 0);
     Symbol SMB_setJdn_seconds_offset_ = new_Symbol(L"setJdn:seconds:offset:");
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
     // setJdn:seconds:offset:. 
-    Send PSend21060 = new_Send((Optr)PSend21057, SMB_setJdn_seconds_offset_, 3, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)int_0_Const, (Optr)PSend21059);
-    Array PThreadedCode21055 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21056, (Optr)&t_send0, (Optr)PSend21057, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21058, (Optr)&t_send0, (Optr)PSend21059, (Optr)&t_send3, (Optr)PSend21060, (Optr)&t_method_return);
-    Method PMethod21054 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21055, 1, PSend21060);
+    Send PSend21281 = new_Send((Optr)PSend21278, SMB_setJdn_seconds_offset_, 3, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)int_0_Const, (Optr)PSend21280);
+    Array PThreadedCode21276 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21277, (Optr)&t_send0, (Optr)PSend21278, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21279, (Optr)&t_send0, (Optr)PSend21280, (Optr)&t_send3, (Optr)PSend21281, (Optr)&t_method_return);
+    Method PMethod21275 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21276, 1, PSend21281);
     
-    MethodClosure MC_SMB_midnight = new_MethodClosure((Method)PMethod21054, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_midnight = new_MethodClosure((Method)PMethod21275, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_midnight, MC_SMB_midnight);
 }
 
@@ -1065,7 +1065,7 @@ static void init_SMB_midnight() {
 static void init_SMB_dayMonthYearDo_() {
     Symbol SMB_dayMonthYearDo_ = new_Symbol(L"dayMonthYearDo:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray21062 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PArray21283 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
     Variable VAR_l_0_1 = new_Variable_named(L"l", 0);
     Variable VAR_n_0_2 = new_Variable_named(L"n", 0);
     Variable VAR_i_0_3 = new_Variable_named(L"i", 0);
@@ -1073,114 +1073,114 @@ static void init_SMB_dayMonthYearDo_() {
     Variable VAR_dd_0_5 = new_Variable_named(L"dd", 0);
     Variable VAR_mm_0_6 = new_Variable_named(L"mm", 0);
     Variable VAR_yyyy_0_7 = new_Variable_named(L"yyyy", 0);
-    Array PArray21063 = new_Array_with(7, (Optr)VAR_l_0_1, (Optr)VAR_n_0_2, (Optr)VAR_i_0_3, (Optr)VAR_j_0_4, (Optr)VAR_dd_0_5, (Optr)VAR_mm_0_6, (Optr)VAR_yyyy_0_7);
+    Array PArray21284 = new_Array_with(7, (Optr)VAR_l_0_1, (Optr)VAR_n_0_2, (Optr)VAR_i_0_3, (Optr)VAR_j_0_4, (Optr)VAR_dd_0_5, (Optr)VAR_mm_0_6, (Optr)VAR_yyyy_0_7);
     Symbol SMB__plus_ = new_Symbol(L"+");
     SmallInt int_68569 = new_SmallInt(68569);
     Constant int_68569_Const = new_Constant((Optr)int_68569);
     // +. 
-    Send PSend21066 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__plus_, 1, (Optr)int_68569_Const);
-    Assign PAssign21065 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21066);
+    Send PSend21287 = new_Send((Optr)slot_Chronology_DateAndTime_jdn, SMB__plus_, 1, (Optr)int_68569_Const);
+    Assign PAssign21286 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21287);
     Symbol SMB__times_ = new_Symbol(L"*");
     SmallInt int_4 = new_SmallInt(4);
     Constant int_4_Const = new_Constant((Optr)int_4);
     // *. 
-    Send PSend21069 = new_Send((Optr)VAR_l_0_1, SMB__times_, 1, (Optr)int_4_Const);
+    Send PSend21290 = new_Send((Optr)VAR_l_0_1, SMB__times_, 1, (Optr)int_4_Const);
     Symbol SMB__quotient_ = new_Symbol(L"//");
     SmallInt int_146097 = new_SmallInt(146097);
     Constant int_146097_Const = new_Constant((Optr)int_146097);
     // //. 
-    Send PSend21068 = new_Send((Optr)PSend21069, SMB__quotient_, 1, (Optr)int_146097_Const);
-    Assign PAssign21067 = new_Assign((Optr)VAR_n_0_2, (Optr)PSend21068);
+    Send PSend21289 = new_Send((Optr)PSend21290, SMB__quotient_, 1, (Optr)int_146097_Const);
+    Assign PAssign21288 = new_Assign((Optr)VAR_n_0_2, (Optr)PSend21289);
     Symbol SMB__minus_ = new_Symbol(L"-");
     // *. 
-    Send PSend21074 = new_Send((Optr)VAR_n_0_2, SMB__times_, 1, (Optr)int_146097_Const);
+    Send PSend21295 = new_Send((Optr)VAR_n_0_2, SMB__times_, 1, (Optr)int_146097_Const);
     SmallInt int_3 = new_SmallInt(3);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // +. 
-    Send PSend21073 = new_Send((Optr)PSend21074, SMB__plus_, 1, (Optr)int_3_Const);
+    Send PSend21294 = new_Send((Optr)PSend21295, SMB__plus_, 1, (Optr)int_3_Const);
     // //. 
-    Send PSend21072 = new_Send((Optr)PSend21073, SMB__quotient_, 1, (Optr)int_4_Const);
+    Send PSend21293 = new_Send((Optr)PSend21294, SMB__quotient_, 1, (Optr)int_4_Const);
     // -. 
-    Send PSend21071 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21072);
-    Assign PAssign21070 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21071);
+    Send PSend21292 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21293);
+    Assign PAssign21291 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21292);
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // +. 
-    Send PSend21078 = new_Send((Optr)VAR_l_0_1, SMB__plus_, 1, (Optr)int_1_Const);
+    Send PSend21299 = new_Send((Optr)VAR_l_0_1, SMB__plus_, 1, (Optr)int_1_Const);
     SmallInt int_4000 = new_SmallInt(4000);
     Constant int_4000_Const = new_Constant((Optr)int_4000);
     // *. 
-    Send PSend21077 = new_Send((Optr)PSend21078, SMB__times_, 1, (Optr)int_4000_Const);
+    Send PSend21298 = new_Send((Optr)PSend21299, SMB__times_, 1, (Optr)int_4000_Const);
     SmallInt int_1461001 = new_SmallInt(1461001);
     Constant int_1461001_Const = new_Constant((Optr)int_1461001);
     // //. 
-    Send PSend21076 = new_Send((Optr)PSend21077, SMB__quotient_, 1, (Optr)int_1461001_Const);
-    Assign PAssign21075 = new_Assign((Optr)VAR_i_0_3, (Optr)PSend21076);
+    Send PSend21297 = new_Send((Optr)PSend21298, SMB__quotient_, 1, (Optr)int_1461001_Const);
+    Assign PAssign21296 = new_Assign((Optr)VAR_i_0_3, (Optr)PSend21297);
     SmallInt int_1461 = new_SmallInt(1461);
     Constant int_1461_Const = new_Constant((Optr)int_1461);
     // *. 
-    Send PSend21083 = new_Send((Optr)VAR_i_0_3, SMB__times_, 1, (Optr)int_1461_Const);
+    Send PSend21304 = new_Send((Optr)VAR_i_0_3, SMB__times_, 1, (Optr)int_1461_Const);
     // //. 
-    Send PSend21082 = new_Send((Optr)PSend21083, SMB__quotient_, 1, (Optr)int_4_Const);
+    Send PSend21303 = new_Send((Optr)PSend21304, SMB__quotient_, 1, (Optr)int_4_Const);
     // -. 
-    Send PSend21081 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21082);
+    Send PSend21302 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21303);
     SmallInt int_31 = new_SmallInt(31);
     Constant int_31_Const = new_Constant((Optr)int_31);
     // +. 
-    Send PSend21080 = new_Send((Optr)PSend21081, SMB__plus_, 1, (Optr)int_31_Const);
-    Assign PAssign21079 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21080);
+    Send PSend21301 = new_Send((Optr)PSend21302, SMB__plus_, 1, (Optr)int_31_Const);
+    Assign PAssign21300 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21301);
     SmallInt int_80 = new_SmallInt(80);
     Constant int_80_Const = new_Constant((Optr)int_80);
     // *. 
-    Send PSend21086 = new_Send((Optr)int_80_Const, SMB__times_, 1, (Optr)VAR_l_0_1);
+    Send PSend21307 = new_Send((Optr)int_80_Const, SMB__times_, 1, (Optr)VAR_l_0_1);
     SmallInt int_2447 = new_SmallInt(2447);
     Constant int_2447_Const = new_Constant((Optr)int_2447);
     // //. 
-    Send PSend21085 = new_Send((Optr)PSend21086, SMB__quotient_, 1, (Optr)int_2447_Const);
-    Assign PAssign21084 = new_Assign((Optr)VAR_j_0_4, (Optr)PSend21085);
+    Send PSend21306 = new_Send((Optr)PSend21307, SMB__quotient_, 1, (Optr)int_2447_Const);
+    Assign PAssign21305 = new_Assign((Optr)VAR_j_0_4, (Optr)PSend21306);
     // *. 
-    Send PSend21090 = new_Send((Optr)VAR_j_0_4, SMB__times_, 1, (Optr)int_2447_Const);
+    Send PSend21311 = new_Send((Optr)VAR_j_0_4, SMB__times_, 1, (Optr)int_2447_Const);
     // //. 
-    Send PSend21089 = new_Send((Optr)PSend21090, SMB__quotient_, 1, (Optr)int_80_Const);
+    Send PSend21310 = new_Send((Optr)PSend21311, SMB__quotient_, 1, (Optr)int_80_Const);
     // -. 
-    Send PSend21088 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21089);
-    Assign PAssign21087 = new_Assign((Optr)VAR_dd_0_5, (Optr)PSend21088);
+    Send PSend21309 = new_Send((Optr)VAR_l_0_1, SMB__minus_, 1, (Optr)PSend21310);
+    Assign PAssign21308 = new_Assign((Optr)VAR_dd_0_5, (Optr)PSend21309);
     SmallInt int_11 = new_SmallInt(11);
     Constant int_11_Const = new_Constant((Optr)int_11);
     // //. 
-    Send PSend21092 = new_Send((Optr)VAR_j_0_4, SMB__quotient_, 1, (Optr)int_11_Const);
-    Assign PAssign21091 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21092);
+    Send PSend21313 = new_Send((Optr)VAR_j_0_4, SMB__quotient_, 1, (Optr)int_11_Const);
+    Assign PAssign21312 = new_Assign((Optr)VAR_l_0_1, (Optr)PSend21313);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // +. 
-    Send PSend21095 = new_Send((Optr)VAR_j_0_4, SMB__plus_, 1, (Optr)int_2_Const);
+    Send PSend21316 = new_Send((Optr)VAR_j_0_4, SMB__plus_, 1, (Optr)int_2_Const);
     SmallInt int_12 = new_SmallInt(12);
     Constant int_12_Const = new_Constant((Optr)int_12);
     // *. 
-    Send PSend21096 = new_Send((Optr)VAR_l_0_1, SMB__times_, 1, (Optr)int_12_Const);
+    Send PSend21317 = new_Send((Optr)VAR_l_0_1, SMB__times_, 1, (Optr)int_12_Const);
     // -. 
-    Send PSend21094 = new_Send((Optr)PSend21095, SMB__minus_, 1, (Optr)PSend21096);
-    Assign PAssign21093 = new_Assign((Optr)VAR_mm_0_6, (Optr)PSend21094);
+    Send PSend21315 = new_Send((Optr)PSend21316, SMB__minus_, 1, (Optr)PSend21317);
+    Assign PAssign21314 = new_Assign((Optr)VAR_mm_0_6, (Optr)PSend21315);
     SmallInt int_49 = new_SmallInt(49);
     Constant int_49_Const = new_Constant((Optr)int_49);
     // -. 
-    Send PSend21101 = new_Send((Optr)VAR_n_0_2, SMB__minus_, 1, (Optr)int_49_Const);
+    Send PSend21322 = new_Send((Optr)VAR_n_0_2, SMB__minus_, 1, (Optr)int_49_Const);
     SmallInt int_100 = new_SmallInt(100);
     Constant int_100_Const = new_Constant((Optr)int_100);
     // *. 
-    Send PSend21100 = new_Send((Optr)PSend21101, SMB__times_, 1, (Optr)int_100_Const);
+    Send PSend21321 = new_Send((Optr)PSend21322, SMB__times_, 1, (Optr)int_100_Const);
     // +. 
-    Send PSend21099 = new_Send((Optr)PSend21100, SMB__plus_, 1, (Optr)VAR_i_0_3);
+    Send PSend21320 = new_Send((Optr)PSend21321, SMB__plus_, 1, (Optr)VAR_i_0_3);
     // +. 
-    Send PSend21098 = new_Send((Optr)PSend21099, SMB__plus_, 1, (Optr)VAR_l_0_1);
-    Assign PAssign21097 = new_Assign((Optr)VAR_yyyy_0_7, (Optr)PSend21098);
+    Send PSend21319 = new_Send((Optr)PSend21320, SMB__plus_, 1, (Optr)VAR_l_0_1);
+    Assign PAssign21318 = new_Assign((Optr)VAR_yyyy_0_7, (Optr)PSend21319);
     Symbol SMB_value_value_value_ = new_Symbol(L"value:value:value:");
     // value:value:value:. 
-    Send PSend21102 = new_Send((Optr)VAR_aBlock_0_0, SMB_value_value_value_, 3, (Optr)VAR_dd_0_5, (Optr)VAR_mm_0_6, (Optr)VAR_yyyy_0_7);
-    Array PThreadedCode21064 = instantiate_Array_with(ThreadedCode_Class, 0, 177, (Optr)&t_push1, (Optr)PAssign21065, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push1, (Optr)int_68569, (Optr)&t_send1, (Optr)PSend21066, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21067, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21069, (Optr)&t_push1, (Optr)int_146097, (Optr)&t_send1, (Optr)PSend21068, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21070, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_n_0_2, (Optr)&t_push1, (Optr)int_146097, (Optr)&t_send1, (Optr)PSend21074, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend21073, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21072, (Optr)&t_send1, (Optr)PSend21071, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21075, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21078, (Optr)&t_push1, (Optr)int_4000, (Optr)&t_send1, (Optr)PSend21077, (Optr)&t_push1, (Optr)int_1461001, (Optr)&t_send1, (Optr)PSend21076, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21079, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_3, (Optr)&t_push1, (Optr)int_1461, (Optr)&t_send1, (Optr)PSend21083, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21082, (Optr)&t_send1, (Optr)PSend21081, (Optr)&t_push1, (Optr)int_31, (Optr)&t_send1, (Optr)PSend21080, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21084, (Optr)&t_push1, (Optr)int_80, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_send1, (Optr)PSend21086, (Optr)&t_push1, (Optr)int_2447, (Optr)&t_send1, (Optr)PSend21085, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21087, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push1, (Optr)int_2447, (Optr)&t_send1, (Optr)PSend21090, (Optr)&t_push1, (Optr)int_80, (Optr)&t_send1, (Optr)PSend21089, (Optr)&t_send1, (Optr)PSend21088, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21091, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push1, (Optr)int_11, (Optr)&t_send1, (Optr)PSend21092, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21093, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend21095, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push1, (Optr)int_12, (Optr)&t_send1, (Optr)PSend21096, (Optr)&t_send1, (Optr)PSend21094, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21097, (Optr)&t_push_variable, (Optr)VAR_n_0_2, (Optr)&t_push1, (Optr)int_49, (Optr)&t_send1, (Optr)PSend21101, (Optr)&t_push1, (Optr)int_100, (Optr)&t_send1, (Optr)PSend21100, (Optr)&t_push_variable, (Optr)VAR_i_0_3, (Optr)&t_send1, (Optr)PSend21099, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_send1, (Optr)PSend21098, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_push_variable, (Optr)VAR_dd_0_5, (Optr)&t_push_variable, (Optr)VAR_mm_0_6, (Optr)&t_push_variable, (Optr)VAR_yyyy_0_7, (Optr)&t_send3, (Optr)PSend21102, (Optr)&t_method_return);
-    Method PMethod21061 = new_Method_with(PArray21062, PArray21063, empty_Array, PThreadedCode21064, 11, PAssign21065, PAssign21067, PAssign21070, PAssign21075, PAssign21079, PAssign21084, PAssign21087, PAssign21091, PAssign21093, PAssign21097, PSend21102);
+    Send PSend21323 = new_Send((Optr)VAR_aBlock_0_0, SMB_value_value_value_, 3, (Optr)VAR_dd_0_5, (Optr)VAR_mm_0_6, (Optr)VAR_yyyy_0_7);
+    Array PThreadedCode21285 = instantiate_Array_with(ThreadedCode_Class, 0, 177, (Optr)&t_push1, (Optr)PAssign21286, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push1, (Optr)int_68569, (Optr)&t_send1, (Optr)PSend21287, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21288, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21290, (Optr)&t_push1, (Optr)int_146097, (Optr)&t_send1, (Optr)PSend21289, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21291, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_n_0_2, (Optr)&t_push1, (Optr)int_146097, (Optr)&t_send1, (Optr)PSend21295, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend21294, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21293, (Optr)&t_send1, (Optr)PSend21292, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21296, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21299, (Optr)&t_push1, (Optr)int_4000, (Optr)&t_send1, (Optr)PSend21298, (Optr)&t_push1, (Optr)int_1461001, (Optr)&t_send1, (Optr)PSend21297, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21300, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_i_0_3, (Optr)&t_push1, (Optr)int_1461, (Optr)&t_send1, (Optr)PSend21304, (Optr)&t_push1, (Optr)int_4, (Optr)&t_send1, (Optr)PSend21303, (Optr)&t_send1, (Optr)PSend21302, (Optr)&t_push1, (Optr)int_31, (Optr)&t_send1, (Optr)PSend21301, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21305, (Optr)&t_push1, (Optr)int_80, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_send1, (Optr)PSend21307, (Optr)&t_push1, (Optr)int_2447, (Optr)&t_send1, (Optr)PSend21306, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21308, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push1, (Optr)int_2447, (Optr)&t_send1, (Optr)PSend21311, (Optr)&t_push1, (Optr)int_80, (Optr)&t_send1, (Optr)PSend21310, (Optr)&t_send1, (Optr)PSend21309, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21312, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push1, (Optr)int_11, (Optr)&t_send1, (Optr)PSend21313, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21314, (Optr)&t_push_variable, (Optr)VAR_j_0_4, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend21316, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_push1, (Optr)int_12, (Optr)&t_send1, (Optr)PSend21317, (Optr)&t_send1, (Optr)PSend21315, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21318, (Optr)&t_push_variable, (Optr)VAR_n_0_2, (Optr)&t_push1, (Optr)int_49, (Optr)&t_send1, (Optr)PSend21322, (Optr)&t_push1, (Optr)int_100, (Optr)&t_send1, (Optr)PSend21321, (Optr)&t_push_variable, (Optr)VAR_i_0_3, (Optr)&t_send1, (Optr)PSend21320, (Optr)&t_push_variable, (Optr)VAR_l_0_1, (Optr)&t_send1, (Optr)PSend21319, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_push_variable, (Optr)VAR_dd_0_5, (Optr)&t_push_variable, (Optr)VAR_mm_0_6, (Optr)&t_push_variable, (Optr)VAR_yyyy_0_7, (Optr)&t_send3, (Optr)PSend21323, (Optr)&t_method_return);
+    Method PMethod21282 = new_Method_with(PArray21283, PArray21284, empty_Array, PThreadedCode21285, 11, PAssign21286, PAssign21288, PAssign21291, PAssign21296, PAssign21300, PAssign21305, PAssign21308, PAssign21312, PAssign21314, PAssign21318, PSend21323);
     
-    MethodClosure MC_SMB_dayMonthYearDo_ = new_MethodClosure((Method)PMethod21061, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_dayMonthYearDo_ = new_MethodClosure((Method)PMethod21282, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_dayMonthYearDo_, MC_SMB_dayMonthYearDo_);
 }
 
@@ -1188,14 +1188,14 @@ static void init_SMB_dayMonthYearDo_() {
 static void init_SMB_printYMDOn_() {
     Symbol SMB_printYMDOn_ = new_Symbol(L"printYMDOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21104 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21325 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Symbol SMB_printYMDOn_withLeadingSpace_ = new_Symbol(L"printYMDOn:withLeadingSpace:");
     // printYMDOn:withLeadingSpace:. 
-    Send PSend21106 = new_Send((Optr)self, SMB_printYMDOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)false_Const);
-    Array PThreadedCode21105 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_false, (Optr)&t_send2, (Optr)PSend21106, (Optr)&t_method_return);
-    Method PMethod21103 = new_Method_with(PArray21104, empty_Array, empty_Array, PThreadedCode21105, 1, PSend21106);
+    Send PSend21327 = new_Send((Optr)self, SMB_printYMDOn_withLeadingSpace_, 2, (Optr)VAR_aStream_0_0, (Optr)false_Const);
+    Array PThreadedCode21326 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_false, (Optr)&t_send2, (Optr)PSend21327, (Optr)&t_method_return);
+    Method PMethod21324 = new_Method_with(PArray21325, empty_Array, empty_Array, PThreadedCode21326, 1, PSend21327);
     
-    MethodClosure MC_SMB_printYMDOn_ = new_MethodClosure((Method)PMethod21103, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_printYMDOn_ = new_MethodClosure((Method)PMethod21324, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_printYMDOn_, MC_SMB_printYMDOn_);
 }
 
@@ -1204,11 +1204,11 @@ static void init_SMB_ticks() {
     Symbol SMB_ticks = new_Symbol(L"ticks");
     Symbol SMB_with_with_ = new_Symbol(L"with:with:");
     // with:with:. 
-    Send PSend21109 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)slot_Chronology_DateAndTime_seconds);
-    Array PThreadedCode21108 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send2, (Optr)PSend21109, (Optr)&t_method_return);
-    Method PMethod21107 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21108, 1, PSend21109);
+    Send PSend21330 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)slot_Chronology_DateAndTime_seconds);
+    Array PThreadedCode21329 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_jdn, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_seconds, (Optr)&t_send2, (Optr)PSend21330, (Optr)&t_method_return);
+    Method PMethod21328 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21329, 1, PSend21330);
     
-    MethodClosure MC_SMB_ticks = new_MethodClosure((Method)PMethod21107, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_ticks = new_MethodClosure((Method)PMethod21328, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_ticks, MC_SMB_ticks);
 }
 
@@ -1218,16 +1218,16 @@ static void init_SMB_year() {
     Variable VAR_d_1_0 = new_Variable_named(L"d", 1);
     Variable VAR_m_1_1 = new_Variable_named(L"m", 1);
     Variable VAR_y_1_2 = new_Variable_named(L"y", 1);
-    Array PArray21113 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
-    Array PThreadedCode21114 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_y_1_2, (Optr)&t_method_return);
-    Block PBlock21112 = new_Block_with(PArray21113, empty_Array, PThreadedCode21114, 1, VAR_y_1_2);
+    Array PArray21334 = new_Array_with(3, (Optr)VAR_d_1_0, (Optr)VAR_m_1_1, (Optr)VAR_y_1_2);
+    Array PThreadedCode21335 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_y_1_2, (Optr)&t_method_return);
+    Block PBlock21333 = new_Block_with(PArray21334, empty_Array, PThreadedCode21335, 1, VAR_y_1_2);
     Symbol SMB_dayMonthYearDo_ = new_Symbol(L"dayMonthYearDo:");
     // dayMonthYearDo:. 
-    Send PSend21115 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock21112);
-    Array PThreadedCode21111 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock21112, (Optr)&t_send1, (Optr)PSend21115, (Optr)&t_method_return);
-    Method PMethod21110 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21111, 1, PSend21115);
+    Send PSend21336 = new_Send((Optr)self, SMB_dayMonthYearDo_, 1, (Optr)PBlock21333);
+    Array PThreadedCode21332 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock21333, (Optr)&t_send1, (Optr)PSend21336, (Optr)&t_method_return);
+    Method PMethod21331 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21332, 1, PSend21336);
     
-    MethodClosure MC_SMB_year = new_MethodClosure((Method)PMethod21110, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_year = new_MethodClosure((Method)PMethod21331, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_year, MC_SMB_year);
 }
 
@@ -1235,78 +1235,78 @@ static void init_SMB_year() {
 static void init_SMB_printHMSOn_() {
     Symbol SMB_printHMSOn_ = new_Symbol(L"printHMSOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21117 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21338 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Variable VAR_h_0_1 = new_Variable_named(L"h", 0);
     Variable VAR_m_0_2 = new_Variable_named(L"m", 0);
     Variable VAR_s_0_3 = new_Variable_named(L"s", 0);
-    Array PArray21118 = new_Array_with(3, (Optr)VAR_h_0_1, (Optr)VAR_m_0_2, (Optr)VAR_s_0_3);
+    Array PArray21339 = new_Array_with(3, (Optr)VAR_h_0_1, (Optr)VAR_m_0_2, (Optr)VAR_s_0_3);
     Symbol SMB_hours = new_Symbol(L"hours");
     // hours. 
-    Send PSend21122 = new_Send((Optr)self, SMB_hours, 0);
+    Send PSend21343 = new_Send((Optr)self, SMB_hours, 0);
     Symbol SMB_abs = new_Symbol(L"abs");
     // abs. 
-    Send PSend21121 = new_Send((Optr)PSend21122, SMB_abs, 0);
-    Assign PAssign21120 = new_Assign((Optr)VAR_h_0_1, (Optr)PSend21121);
+    Send PSend21342 = new_Send((Optr)PSend21343, SMB_abs, 0);
+    Assign PAssign21341 = new_Assign((Optr)VAR_h_0_1, (Optr)PSend21342);
     Symbol SMB_minutes = new_Symbol(L"minutes");
     // minutes. 
-    Send PSend21125 = new_Send((Optr)self, SMB_minutes, 0);
+    Send PSend21346 = new_Send((Optr)self, SMB_minutes, 0);
     // abs. 
-    Send PSend21124 = new_Send((Optr)PSend21125, SMB_abs, 0);
-    Assign PAssign21123 = new_Assign((Optr)VAR_m_0_2, (Optr)PSend21124);
+    Send PSend21345 = new_Send((Optr)PSend21346, SMB_abs, 0);
+    Assign PAssign21344 = new_Assign((Optr)VAR_m_0_2, (Optr)PSend21345);
     Symbol SMB_seconds = new_Symbol(L"seconds");
     // seconds. 
-    Send PSend21128 = new_Send((Optr)self, SMB_seconds, 0);
+    Send PSend21349 = new_Send((Optr)self, SMB_seconds, 0);
     // abs. 
-    Send PSend21127 = new_Send((Optr)PSend21128, SMB_abs, 0);
-    Assign PAssign21126 = new_Assign((Optr)VAR_s_0_3, (Optr)PSend21127);
+    Send PSend21348 = new_Send((Optr)PSend21349, SMB_abs, 0);
+    Assign PAssign21347 = new_Assign((Optr)VAR_s_0_3, (Optr)PSend21348);
     SmallInt int_10 = new_SmallInt(10);
     Symbol SMB__lt_ = new_Symbol(L"<");
     Constant int_10_Const = new_Constant((Optr)int_10);
     // <. 
-    Send PSend21129 = new_Send((Optr)VAR_h_0_1, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21350 = new_Send((Optr)VAR_h_0_1, SMB__lt_, 1, (Optr)int_10_Const);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    Character char_9208 = new_Character(L'0');
+    Character char_9429 = new_Character(L'0');
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant char_9208_Const = new_Constant((Optr)char_9208);
+    Constant char_9429_Const = new_Constant((Optr)char_9429);
     // <<. 
-    Send PSend21133 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode21132 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend21133, (Optr)&t_block_return);
-    Block PBlock21131 = new_Block_with(empty_Array, empty_Array, PThreadedCode21132, 1, PSend21133);
+    Send PSend21354 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21353 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21354, (Optr)&t_block_return);
+    Block PBlock21352 = new_Block_with(empty_Array, empty_Array, PThreadedCode21353, 1, PSend21354);
     // ifTrue:. 
-    Send PSend21130 = new_Send((Optr)PSend21129, SMB_ifTrue_, 1, (Optr)PBlock21131);
+    Send PSend21351 = new_Send((Optr)PSend21350, SMB_ifTrue_, 1, (Optr)PBlock21352);
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     // printOn:. 
-    Send PSend21134 = new_Send((Optr)VAR_h_0_1, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21355 = new_Send((Optr)VAR_h_0_1, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     Character char_444 = new_Character(L':');
     Constant char_444_Const = new_Constant((Optr)char_444);
     // <<. 
-    Send PSend21135 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
+    Send PSend21356 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
     // <. 
-    Send PSend21136 = new_Send((Optr)VAR_m_0_2, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21357 = new_Send((Optr)VAR_m_0_2, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend21140 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode21139 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend21140, (Optr)&t_block_return);
-    Block PBlock21138 = new_Block_with(empty_Array, empty_Array, PThreadedCode21139, 1, PSend21140);
+    Send PSend21361 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21360 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21361, (Optr)&t_block_return);
+    Block PBlock21359 = new_Block_with(empty_Array, empty_Array, PThreadedCode21360, 1, PSend21361);
     // ifTrue:. 
-    Send PSend21137 = new_Send((Optr)PSend21136, SMB_ifTrue_, 1, (Optr)PBlock21138);
+    Send PSend21358 = new_Send((Optr)PSend21357, SMB_ifTrue_, 1, (Optr)PBlock21359);
     // printOn:. 
-    Send PSend21141 = new_Send((Optr)VAR_m_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21362 = new_Send((Optr)VAR_m_0_2, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     // <<. 
-    Send PSend21142 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
+    Send PSend21363 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_444_Const);
     // <. 
-    Send PSend21143 = new_Send((Optr)VAR_s_0_3, SMB__lt_, 1, (Optr)int_10_Const);
+    Send PSend21364 = new_Send((Optr)VAR_s_0_3, SMB__lt_, 1, (Optr)int_10_Const);
     // <<. 
-    Send PSend21147 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9208_Const);
-    Array PThreadedCode21146 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9208, (Optr)&t_send1, (Optr)PSend21147, (Optr)&t_block_return);
-    Block PBlock21145 = new_Block_with(empty_Array, empty_Array, PThreadedCode21146, 1, PSend21147);
+    Send PSend21368 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)char_9429_Const);
+    Array PThreadedCode21367 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_9429, (Optr)&t_send1, (Optr)PSend21368, (Optr)&t_block_return);
+    Block PBlock21366 = new_Block_with(empty_Array, empty_Array, PThreadedCode21367, 1, PSend21368);
     // ifTrue:. 
-    Send PSend21144 = new_Send((Optr)PSend21143, SMB_ifTrue_, 1, (Optr)PBlock21145);
+    Send PSend21365 = new_Send((Optr)PSend21364, SMB_ifTrue_, 1, (Optr)PBlock21366);
     // printOn:. 
-    Send PSend21148 = new_Send((Optr)VAR_s_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode21119 = instantiate_Array_with(ThreadedCode_Class, 0, 93, (Optr)&t_push1, (Optr)PAssign21120, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21122, (Optr)&t_send0, (Optr)PSend21121, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21123, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21125, (Optr)&t_send0, (Optr)PSend21124, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21126, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21128, (Optr)&t_send0, (Optr)PSend21127, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_1, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21129, (Optr)&t_send_ifTrue_, (Optr)PSend21130, (Optr)PBlock21131, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_1, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21134, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21135, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21136, (Optr)&t_send_ifTrue_, (Optr)PSend21137, (Optr)PBlock21138, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21141, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21142, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21143, (Optr)&t_send_ifTrue_, (Optr)PSend21144, (Optr)PBlock21145, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21148, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21116 = new_Method_with(PArray21117, PArray21118, empty_Array, PThreadedCode21119, 12, PAssign21120, PAssign21123, PAssign21126, PSend21130, PSend21134, PSend21135, PSend21137, PSend21141, PSend21142, PSend21144, PSend21148, self);
+    Send PSend21369 = new_Send((Optr)VAR_s_0_3, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21340 = instantiate_Array_with(ThreadedCode_Class, 0, 93, (Optr)&t_push1, (Optr)PAssign21341, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21343, (Optr)&t_send0, (Optr)PSend21342, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21344, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21346, (Optr)&t_send0, (Optr)PSend21345, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21347, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21349, (Optr)&t_send0, (Optr)PSend21348, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_1, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21350, (Optr)&t_send_ifTrue_, (Optr)PSend21351, (Optr)PBlock21352, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_h_0_1, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21355, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21356, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_2, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21357, (Optr)&t_send_ifTrue_, (Optr)PSend21358, (Optr)PBlock21359, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_m_0_2, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21362, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)char_444, (Optr)&t_send1, (Optr)PSend21363, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_3, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send1, (Optr)PSend21364, (Optr)&t_send_ifTrue_, (Optr)PSend21365, (Optr)PBlock21366, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_s_0_3, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21369, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21337 = new_Method_with(PArray21338, PArray21339, empty_Array, PThreadedCode21340, 12, PAssign21341, PAssign21344, PAssign21347, PSend21351, PSend21355, PSend21356, PSend21358, PSend21362, PSend21363, PSend21365, PSend21369, self);
     
-    MethodClosure MC_SMB_printHMSOn_ = new_MethodClosure((Method)PMethod21116, Chronology_DateAndTime_Class);
+    MethodClosure MC_SMB_printHMSOn_ = new_MethodClosure((Method)PMethod21337, Chronology_DateAndTime_Class);
     store_method(Chronology_DateAndTime_Class, SMB_printHMSOn_, MC_SMB_printHMSOn_);
 }
 
@@ -1314,36 +1314,36 @@ static void init_SMB_printHMSOn_() {
 static void init_class_SMB_julianDayNumber_() {
     Symbol SMB_julianDayNumber_ = new_Symbol(L"julianDayNumber:");
     Variable VAR_aJulianDayNumber_0_0 = new_Variable_named(L"aJulianDayNumber", 0);
-    Array PArray21150 = new_Array_with(1, (Optr)VAR_aJulianDayNumber_0_0);
+    Array PArray21371 = new_Array_with(1, (Optr)VAR_aJulianDayNumber_0_0);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray21153 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray21374 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_days = new_Symbol(L"days");
     // days. 
-    Send PSend21155 = new_Send((Optr)VAR_aJulianDayNumber_0_0, SMB_days, 0);
+    Send PSend21376 = new_Send((Optr)VAR_aJulianDayNumber_0_0, SMB_days, 0);
     Symbol SMB_ticks = new_Symbol(L"ticks");
     // ticks. 
-    Send PSend21156 = new_Send((Optr)PSend21155, SMB_ticks, 0);
+    Send PSend21377 = new_Send((Optr)PSend21376, SMB_ticks, 0);
     Symbol SMB_localOffset = new_Symbol(L"localOffset");
     // localOffset. 
-    Send PSend21157 = new_Send((Optr)self, SMB_localOffset, 0);
+    Send PSend21378 = new_Send((Optr)self, SMB_localOffset, 0);
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     // ticks:offset:. 
-    Send PSend21158 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend21156, (Optr)PSend21157);
+    Send PSend21379 = new_Send((Optr)VAR__receiver__1_0, SMB_ticks_offset_, 2, (Optr)PSend21377, (Optr)PSend21378);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend21159 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode21154 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aJulianDayNumber_0_0, (Optr)&t_send0, (Optr)PSend21155, (Optr)&t_send0, (Optr)PSend21156, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21157, (Optr)&t_send2, (Optr)PSend21158, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21159, (Optr)&t_method_return);
-    Block PBlock21152 = new_Block_with(PArray21153, empty_Array, PThreadedCode21154, 2, PSend21158, PSend21159);
+    Send PSend21380 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode21375 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aJulianDayNumber_0_0, (Optr)&t_send0, (Optr)PSend21376, (Optr)&t_send0, (Optr)PSend21377, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21378, (Optr)&t_send2, (Optr)PSend21379, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21380, (Optr)&t_method_return);
+    Block PBlock21373 = new_Block_with(PArray21374, empty_Array, PThreadedCode21375, 2, PSend21379, PSend21380);
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend21160 = new_Send((Optr)self, SMB_basicNew, 0);
+    Send PSend21381 = new_Send((Optr)self, SMB_basicNew, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend21161 = new_Send((Optr)PBlock21152, SMB_value_, 1, (Optr)PSend21160);
-    Array PThreadedCode21151 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21152, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21160, (Optr)&t_send1, (Optr)PSend21161, (Optr)&t_method_return);
-    Method PMethod21149 = new_Method_with(PArray21150, empty_Array, empty_Array, PThreadedCode21151, 1, PSend21161);
+    Send PSend21382 = new_Send((Optr)PBlock21373, SMB_value_, 1, (Optr)PSend21381);
+    Array PThreadedCode21372 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21373, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21381, (Optr)&t_send1, (Optr)PSend21382, (Optr)&t_method_return);
+    Method PMethod21370 = new_Method_with(PArray21371, empty_Array, empty_Array, PThreadedCode21372, 1, PSend21382);
     
-    MethodClosure MC_SMB_julianDayNumber_ = new_MethodClosure((Method)PMethod21149, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_julianDayNumber_ = new_MethodClosure((Method)PMethod21370, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_julianDayNumber_, MC_SMB_julianDayNumber_);
 }
 
@@ -1352,17 +1352,17 @@ static void init_class_SMB_localTimeZone() {
     Symbol SMB_localTimeZone = new_Symbol(L"localTimeZone");
     Symbol SMB_default = new_Symbol(L"default");
     // default. 
-    Send PSend21167 = new_Send((Optr)PTimeZone_classReference, SMB_default, 0);
-    Assign PAssign21166 = new_Assign((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)PSend21167);
-    Array PThreadedCode21165 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push1, (Optr)PAssign21166, (Optr)&t_push_class_reference, (Optr)PTimeZone_classReference, (Optr)&t_send0, (Optr)PSend21167, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock21164 = new_Block_with(empty_Array, empty_Array, PThreadedCode21165, 1, PAssign21166);
+    Send PSend21388 = new_Send((Optr)PTimeZone_classReference, SMB_default, 0);
+    Assign PAssign21387 = new_Assign((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)PSend21388);
+    Array PThreadedCode21386 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push1, (Optr)PAssign21387, (Optr)&t_push_class_reference, (Optr)PTimeZone_classReference, (Optr)&t_send0, (Optr)PSend21388, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock21385 = new_Block_with(empty_Array, empty_Array, PThreadedCode21386, 1, PAssign21387);
     Symbol SMB_ifNil_ = new_Symbol(L"ifNil:");
     // ifNil:. 
-    Send PSend21168 = new_Send((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, SMB_ifNil_, 1, (Optr)PBlock21164);
-    Array PThreadedCode21163 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)&t_push_closure, (Optr)PBlock21164, (Optr)&t_send1, (Optr)PSend21168, (Optr)&t_method_return);
-    Method PMethod21162 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21163, 1, PSend21168);
+    Send PSend21389 = new_Send((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, SMB_ifNil_, 1, (Optr)PBlock21385);
+    Array PThreadedCode21384 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_slot, (Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)&t_push_closure, (Optr)PBlock21385, (Optr)&t_send1, (Optr)PSend21389, (Optr)&t_method_return);
+    Method PMethod21383 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21384, 1, PSend21389);
     
-    MethodClosure MC_SMB_localTimeZone = new_MethodClosure((Method)PMethod21162, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_localTimeZone = new_MethodClosure((Method)PMethod21383, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_localTimeZone, MC_SMB_localTimeZone);
 }
 
@@ -1371,11 +1371,11 @@ static void init_class_SMB_today() {
     Symbol SMB_today = new_Symbol(L"today");
     Symbol SMB_midnight = new_Symbol(L"midnight");
     // midnight. 
-    Send PSend21171 = new_Send((Optr)self, SMB_midnight, 0);
-    Array PThreadedCode21170 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21171, (Optr)&t_method_return);
-    Method PMethod21169 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21170, 1, PSend21171);
+    Send PSend21392 = new_Send((Optr)self, SMB_midnight, 0);
+    Array PThreadedCode21391 = instantiate_Array_with(ThreadedCode_Class, 0, 4, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21392, (Optr)&t_method_return);
+    Method PMethod21390 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21391, 1, PSend21392);
     
-    MethodClosure MC_SMB_today = new_MethodClosure((Method)PMethod21169, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_today = new_MethodClosure((Method)PMethod21390, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_today, MC_SMB_today);
 }
 
@@ -1384,14 +1384,14 @@ static void init_class_SMB_epoch() {
     Symbol SMB_epoch = new_Symbol(L"epoch");
     Symbol SMB_squeakEpoch = new_Symbol(L"squeakEpoch");
     // squeakEpoch. 
-    Send PSend21174 = new_Send((Optr)PChronologyConstants_classReference, SMB_squeakEpoch, 0);
+    Send PSend21395 = new_Send((Optr)PChronologyConstants_classReference, SMB_squeakEpoch, 0);
     Symbol SMB_julianDayNumber_ = new_Symbol(L"julianDayNumber:");
     // julianDayNumber:. 
-    Send PSend21175 = new_Send((Optr)self, SMB_julianDayNumber_, 1, (Optr)PSend21174);
-    Array PThreadedCode21173 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21174, (Optr)&t_send1, (Optr)PSend21175, (Optr)&t_method_return);
-    Method PMethod21172 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21173, 1, PSend21175);
+    Send PSend21396 = new_Send((Optr)self, SMB_julianDayNumber_, 1, (Optr)PSend21395);
+    Array PThreadedCode21394 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21395, (Optr)&t_send1, (Optr)PSend21396, (Optr)&t_method_return);
+    Method PMethod21393 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21394, 1, PSend21396);
     
-    MethodClosure MC_SMB_epoch = new_MethodClosure((Method)PMethod21172, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_epoch = new_MethodClosure((Method)PMethod21393, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_epoch, MC_SMB_epoch);
 }
 
@@ -1399,12 +1399,12 @@ static void init_class_SMB_epoch() {
 static void init_class_SMB_localTimeZone_() {
     Symbol SMB_localTimeZone_ = new_Symbol(L"localTimeZone:");
     Variable VAR_aTimeZone_0_0 = new_Variable_named(L"aTimeZone", 0);
-    Array PArray21177 = new_Array_with(1, (Optr)VAR_aTimeZone_0_0);
-    Assign PAssign21179 = new_Assign((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)VAR_aTimeZone_0_0);
-    Array PThreadedCode21178 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21179, (Optr)&t_push_variable, (Optr)VAR_aTimeZone_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21176 = new_Method_with(PArray21177, empty_Array, empty_Array, PThreadedCode21178, 2, PAssign21179, self);
+    Array PArray21398 = new_Array_with(1, (Optr)VAR_aTimeZone_0_0);
+    Assign PAssign21400 = new_Assign((Optr)slot_Chronology_DateAndTime_Class_class_localTimeZone, (Optr)VAR_aTimeZone_0_0);
+    Array PThreadedCode21399 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21400, (Optr)&t_push_variable, (Optr)VAR_aTimeZone_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21397 = new_Method_with(PArray21398, empty_Array, empty_Array, PThreadedCode21399, 2, PAssign21400, self);
     
-    MethodClosure MC_SMB_localTimeZone_ = new_MethodClosure((Method)PMethod21176, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_localTimeZone_ = new_MethodClosure((Method)PMethod21397, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_localTimeZone_, MC_SMB_localTimeZone_);
 }
 
@@ -1413,14 +1413,14 @@ static void init_class_SMB_localOffset() {
     Symbol SMB_localOffset = new_Symbol(L"localOffset");
     Symbol SMB_localTimeZone = new_Symbol(L"localTimeZone");
     // localTimeZone. 
-    Send PSend21182 = new_Send((Optr)self, SMB_localTimeZone, 0);
+    Send PSend21403 = new_Send((Optr)self, SMB_localTimeZone, 0);
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend21183 = new_Send((Optr)PSend21182, SMB_offset, 0);
-    Array PThreadedCode21181 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21182, (Optr)&t_send0, (Optr)PSend21183, (Optr)&t_method_return);
-    Method PMethod21180 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21181, 1, PSend21183);
+    Send PSend21404 = new_Send((Optr)PSend21403, SMB_offset, 0);
+    Array PThreadedCode21402 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21403, (Optr)&t_send0, (Optr)PSend21404, (Optr)&t_method_return);
+    Method PMethod21401 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21402, 1, PSend21404);
     
-    MethodClosure MC_SMB_localOffset = new_MethodClosure((Method)PMethod21180, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_localOffset = new_MethodClosure((Method)PMethod21401, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_localOffset, MC_SMB_localOffset);
 }
 
@@ -1429,29 +1429,29 @@ static void init_class_SMB_now() {
     Symbol SMB_now = new_Symbol(L"now");
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend21186 = new_Send((Optr)self, SMB_basicNew, 0);
+    Send PSend21407 = new_Send((Optr)self, SMB_basicNew, 0);
     Symbol SMB_squeakEpoch = new_Symbol(L"squeakEpoch");
     // squeakEpoch. 
-    Send PSend21187 = new_Send((Optr)PChronologyConstants_classReference, SMB_squeakEpoch, 0);
+    Send PSend21408 = new_Send((Optr)PChronologyConstants_classReference, SMB_squeakEpoch, 0);
     Symbol SMB_totalSeconds = new_Symbol(L"totalSeconds");
     // totalSeconds. 
-    Send PSend21188 = new_Send((Optr)Time_classReference, SMB_totalSeconds, 0);
+    Send PSend21409 = new_Send((Optr)Time_classReference, SMB_totalSeconds, 0);
     Symbol SMB_with_with_ = new_Symbol(L"with:with:");
     // with:with:. 
-    Send PSend21189 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)PSend21187, (Optr)PSend21188);
+    Send PSend21410 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)PSend21408, (Optr)PSend21409);
     Symbol SMB_localTimeZone = new_Symbol(L"localTimeZone");
     // localTimeZone. 
-    Send PSend21190 = new_Send((Optr)self, SMB_localTimeZone, 0);
+    Send PSend21411 = new_Send((Optr)self, SMB_localTimeZone, 0);
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend21191 = new_Send((Optr)PSend21190, SMB_offset, 0);
+    Send PSend21412 = new_Send((Optr)PSend21411, SMB_offset, 0);
     Symbol SMB_ticks_offset_ = new_Symbol(L"ticks:offset:");
     // ticks:offset:. 
-    Send PSend21192 = new_Send((Optr)PSend21186, SMB_ticks_offset_, 2, (Optr)PSend21189, (Optr)PSend21191);
-    Array PThreadedCode21185 = instantiate_Array_with(ThreadedCode_Class, 0, 23, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21186, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21187, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_send0, (Optr)PSend21188, (Optr)&t_send2, (Optr)PSend21189, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21190, (Optr)&t_send0, (Optr)PSend21191, (Optr)&t_send2, (Optr)PSend21192, (Optr)&t_method_return);
-    Method PMethod21184 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21185, 1, PSend21192);
+    Send PSend21413 = new_Send((Optr)PSend21407, SMB_ticks_offset_, 2, (Optr)PSend21410, (Optr)PSend21412);
+    Array PThreadedCode21406 = instantiate_Array_with(ThreadedCode_Class, 0, 23, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21407, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21408, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_send0, (Optr)PSend21409, (Optr)&t_send2, (Optr)PSend21410, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21411, (Optr)&t_send0, (Optr)PSend21412, (Optr)&t_send2, (Optr)PSend21413, (Optr)&t_method_return);
+    Method PMethod21405 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21406, 1, PSend21413);
     
-    MethodClosure MC_SMB_now = new_MethodClosure((Method)PMethod21184, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_now = new_MethodClosure((Method)PMethod21405, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_now, MC_SMB_now);
 }
 
@@ -1460,13 +1460,13 @@ static void init_class_SMB_midnight() {
     Symbol SMB_midnight = new_Symbol(L"midnight");
     Symbol SMB_now = new_Symbol(L"now");
     // now. 
-    Send PSend21195 = new_Send((Optr)self, SMB_now, 0);
+    Send PSend21416 = new_Send((Optr)self, SMB_now, 0);
     // midnight. 
-    Send PSend21196 = new_Send((Optr)PSend21195, SMB_midnight, 0);
-    Array PThreadedCode21194 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21195, (Optr)&t_send0, (Optr)PSend21196, (Optr)&t_method_return);
-    Method PMethod21193 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21194, 1, PSend21196);
+    Send PSend21417 = new_Send((Optr)PSend21416, SMB_midnight, 0);
+    Array PThreadedCode21415 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21416, (Optr)&t_send0, (Optr)PSend21417, (Optr)&t_method_return);
+    Method PMethod21414 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21415, 1, PSend21417);
     
-    MethodClosure MC_SMB_midnight = new_MethodClosure((Method)PMethod21193, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_midnight = new_MethodClosure((Method)PMethod21414, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_midnight, MC_SMB_midnight);
 }
 
@@ -1474,11 +1474,11 @@ static void init_class_SMB_midnight() {
 static void init_class_SMB_totalSeconds() {
     Symbol SMB_totalSeconds = new_Symbol(L"totalSeconds");
     // totalSeconds. 
-    Send PSend21199 = new_Send((Optr)Time_classReference, SMB_totalSeconds, 0);
-    Array PThreadedCode21198 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_send0, (Optr)PSend21199, (Optr)&t_method_return);
-    Method PMethod21197 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21198, 1, PSend21199);
+    Send PSend21420 = new_Send((Optr)Time_classReference, SMB_totalSeconds, 0);
+    Array PThreadedCode21419 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_send0, (Optr)PSend21420, (Optr)&t_method_return);
+    Method PMethod21418 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21419, 1, PSend21420);
     
-    MethodClosure MC_SMB_totalSeconds = new_MethodClosure((Method)PMethod21197, HEADER(Chronology_DateAndTime_Class));
+    MethodClosure MC_SMB_totalSeconds = new_MethodClosure((Method)PMethod21418, HEADER(Chronology_DateAndTime_Class));
     store_method(HEADER(Chronology_DateAndTime_Class), SMB_totalSeconds, MC_SMB_totalSeconds);
 }
 

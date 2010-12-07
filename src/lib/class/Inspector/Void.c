@@ -9,10 +9,10 @@ static void init_SMB_inspect() {
     inspect
     */
     Symbol SMB_inspect = new_Symbol(L"inspect");
-    Array PThreadedCode12166 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod12165 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12166, 1, self);
+    Array PThreadedCode12387 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod12386 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12387, 1, self);
     
-    MethodClosure MC_SMB_inspect = new_MethodClosure((Method)PMethod12165, Inspector_Void_Class);
+    MethodClosure MC_SMB_inspect = new_MethodClosure((Method)PMethod12386, Inspector_Void_Class);
     store_method(Inspector_Void_Class, SMB_inspect, MC_SMB_inspect);
 }
 
@@ -20,21 +20,21 @@ static void init_SMB_inspect() {
 static void init_SMB_doesNotUnderstand_() {
     Symbol SMB_doesNotUnderstand_ = new_Symbol(L"doesNotUnderstand:");
     Variable VAR_aMessage_0_0 = new_Variable_named(L"aMessage", 0);
-    Array PArray12168 = new_Array_with(1, (Optr)VAR_aMessage_0_0);
-    Array PThreadedCode12169 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod12167 = new_Method_with(PArray12168, empty_Array, empty_Array, PThreadedCode12169, 1, self);
+    Array PArray12389 = new_Array_with(1, (Optr)VAR_aMessage_0_0);
+    Array PThreadedCode12390 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod12388 = new_Method_with(PArray12389, empty_Array, empty_Array, PThreadedCode12390, 1, self);
     
-    MethodClosure MC_SMB_doesNotUnderstand_ = new_MethodClosure((Method)PMethod12167, Inspector_Void_Class);
+    MethodClosure MC_SMB_doesNotUnderstand_ = new_MethodClosure((Method)PMethod12388, Inspector_Void_Class);
     store_method(Inspector_Void_Class, SMB_doesNotUnderstand_, MC_SMB_doesNotUnderstand_);
 }
 
 
 static void init_class_SMB_inspect() {
     Symbol SMB_inspect = new_Symbol(L"inspect");
-    Array PThreadedCode12171 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod12170 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12171, 1, self);
+    Array PThreadedCode12392 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod12391 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12392, 1, self);
     
-    MethodClosure MC_SMB_inspect = new_MethodClosure((Method)PMethod12170, HEADER(Inspector_Void_Class));
+    MethodClosure MC_SMB_inspect = new_MethodClosure((Method)PMethod12391, HEADER(Inspector_Void_Class));
     store_method(HEADER(Inspector_Void_Class), SMB_inspect, MC_SMB_inspect);
 }
 

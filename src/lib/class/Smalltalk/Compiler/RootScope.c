@@ -16,36 +16,36 @@ static void init_SMB_lookup_() {
     */
     Symbol SMB_lookup_ = new_Symbol(L"lookup:");
     Variable VAR_anASTVariable_0_0 = new_Variable_named(L"anASTVariable", 0);
-    Array PArray13147 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
+    Array PArray13368 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray13150 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray13371 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_name = new_Symbol(L"name");
     // name. 
-    Send PSend13152 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
+    Send PSend13373 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
     Variable VAR_el_2_0 = new_Variable_named(L"el", 2);
-    Array PArray13154 = new_Array_with(1, (Optr)VAR_el_2_0);
+    Array PArray13375 = new_Array_with(1, (Optr)VAR_el_2_0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend13156 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_el_2_0);
-    Array PThreadedCode13155 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_el_2_0, (Optr)&t_send1, (Optr)PSend13156, (Optr)&t_method_return);
-    Block PBlock13153 = new_Block_with(PArray13154, empty_Array, PThreadedCode13155, 1, PSend13156);
+    Send PSend13377 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_el_2_0);
+    Array PThreadedCode13376 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_el_2_0, (Optr)&t_send1, (Optr)PSend13377, (Optr)&t_method_return);
+    Block PBlock13374 = new_Block_with(PArray13375, empty_Array, PThreadedCode13376, 1, PSend13377);
     Symbol SMB_at_ifPresent_ = new_Symbol(L"at:ifPresent:");
     // at:ifPresent:. 
-    Send PSend13157 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_ifPresent_, 2, (Optr)PSend13152, (Optr)PBlock13153);
+    Send PSend13378 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_ifPresent_, 2, (Optr)PSend13373, (Optr)PBlock13374);
     Symbol SMB_class = new_Symbol(L"class");
     // class. 
-    Send PSend13158 = new_Send((Optr)self, SMB_class, 0);
+    Send PSend13379 = new_Send((Optr)self, SMB_class, 0);
     // lookup:. 
-    Send PSend13159 = new_Send((Optr)PSend13158, SMB_lookup_, 1, (Optr)VAR_anASTVariable_0_0);
-    Array PThreadedCode13151 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13152, (Optr)&t_push_closure, (Optr)PBlock13153, (Optr)&t_send2, (Optr)PSend13157, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13158, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send1, (Optr)PSend13159, (Optr)&t_method_return);
-    Block PBlock13149 = new_Block_with(PArray13150, empty_Array, PThreadedCode13151, 2, PSend13157, PSend13159);
+    Send PSend13380 = new_Send((Optr)PSend13379, SMB_lookup_, 1, (Optr)VAR_anASTVariable_0_0);
+    Array PThreadedCode13372 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13373, (Optr)&t_push_closure, (Optr)PBlock13374, (Optr)&t_send2, (Optr)PSend13378, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13379, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send1, (Optr)PSend13380, (Optr)&t_method_return);
+    Block PBlock13370 = new_Block_with(PArray13371, empty_Array, PThreadedCode13372, 2, PSend13378, PSend13380);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend13160 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13149);
-    Array PThreadedCode13148 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13149, (Optr)&t_send1, (Optr)PSend13160, (Optr)&t_method_return);
-    Method PMethod13146 = new_Method_with(PArray13147, empty_Array, empty_Array, PThreadedCode13148, 1, PSend13160);
+    Send PSend13381 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13370);
+    Array PThreadedCode13369 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13370, (Optr)&t_send1, (Optr)PSend13381, (Optr)&t_method_return);
+    Method PMethod13367 = new_Method_with(PArray13368, empty_Array, empty_Array, PThreadedCode13369, 1, PSend13381);
     
-    MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13146, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13367, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_lookup_, MC_SMB_lookup_);
 }
 
@@ -53,26 +53,26 @@ static void init_SMB_lookup_() {
 static void init_SMB_declareAll_() {
     Symbol SMB_declareAll_ = new_Symbol(L"declareAll:");
     Variable VAR_aCollection_0_0 = new_Variable_named(L"aCollection", 0);
-    Array PArray13162 = new_Array_with(1, (Optr)VAR_aCollection_0_0);
+    Array PArray13383 = new_Array_with(1, (Optr)VAR_aCollection_0_0);
     Variable VAR_element_1_0 = new_Variable_named(L"element", 1);
-    Array PArray13167 = new_Array_with(1, (Optr)VAR_element_1_0);
+    Array PArray13388 = new_Array_with(1, (Optr)VAR_element_1_0);
     Symbol SMB_declare_ = new_Symbol(L"declare:");
     // declare:. 
-    Send PSend13169 = new_Send((Optr)self, SMB_declare_, 1, (Optr)VAR_element_1_0);
-    Array PThreadedCode13168 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_element_1_0, (Optr)&t_send1, (Optr)PSend13169, (Optr)&t_method_return);
-    Block PBlock13166 = new_Block_with(PArray13167, empty_Array, PThreadedCode13168, 1, PSend13169);
+    Send PSend13390 = new_Send((Optr)self, SMB_declare_, 1, (Optr)VAR_element_1_0);
+    Array PThreadedCode13389 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_element_1_0, (Optr)&t_send1, (Optr)PSend13390, (Optr)&t_method_return);
+    Block PBlock13387 = new_Block_with(PArray13388, empty_Array, PThreadedCode13389, 1, PSend13390);
     Symbol SMB_do_ = new_Symbol(L"do:");
     // do:. 
-    Send PSend13170 = new_Send((Optr)VAR_aCollection_0_0, SMB_do_, 1, (Optr)PBlock13166);
-    Array PThreadedCode13165 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aCollection_0_0, (Optr)&t_push_closure, (Optr)PBlock13166, (Optr)&t_send1, (Optr)PSend13170, (Optr)&t_block_return);
-    Block PBlock13164 = new_Block_with(empty_Array, empty_Array, PThreadedCode13165, 1, PSend13170);
+    Send PSend13391 = new_Send((Optr)VAR_aCollection_0_0, SMB_do_, 1, (Optr)PBlock13387);
+    Array PThreadedCode13386 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aCollection_0_0, (Optr)&t_push_closure, (Optr)PBlock13387, (Optr)&t_send1, (Optr)PSend13391, (Optr)&t_block_return);
+    Block PBlock13385 = new_Block_with(empty_Array, empty_Array, PThreadedCode13386, 1, PSend13391);
     Symbol SMB_ifNotNil_ = new_Symbol(L"ifNotNil:");
     // ifNotNil:. 
-    Send PSend13171 = new_Send((Optr)VAR_aCollection_0_0, SMB_ifNotNil_, 1, (Optr)PBlock13164);
-    Array PThreadedCode13163 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aCollection_0_0, (Optr)&t_push_closure, (Optr)PBlock13164, (Optr)&t_send1, (Optr)PSend13171, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13161 = new_Method_with(PArray13162, empty_Array, empty_Array, PThreadedCode13163, 2, PSend13171, self);
+    Send PSend13392 = new_Send((Optr)VAR_aCollection_0_0, SMB_ifNotNil_, 1, (Optr)PBlock13385);
+    Array PThreadedCode13384 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_variable, (Optr)VAR_aCollection_0_0, (Optr)&t_push_closure, (Optr)PBlock13385, (Optr)&t_send1, (Optr)PSend13392, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13382 = new_Method_with(PArray13383, empty_Array, empty_Array, PThreadedCode13384, 2, PSend13392, self);
     
-    MethodClosure MC_SMB_declareAll_ = new_MethodClosure((Method)PMethod13161, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_declareAll_ = new_MethodClosure((Method)PMethod13382, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_declareAll_, MC_SMB_declareAll_);
 }
 
@@ -88,12 +88,12 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend13175 = new_Send((Optr)IdentityDictionary_classReference, SMB_new, 0);
-    Assign PAssign13174 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)PSend13175);
-    Array PThreadedCode13173 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign13174, (Optr)&t_push_class_reference, (Optr)IdentityDictionary_classReference, (Optr)&t_send0, (Optr)PSend13175, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13172 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13173, 2, PAssign13174, self);
+    Send PSend13396 = new_Send((Optr)IdentityDictionary_classReference, SMB_new, 0);
+    Assign PAssign13395 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)PSend13396);
+    Array PThreadedCode13394 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign13395, (Optr)&t_push_class_reference, (Optr)IdentityDictionary_classReference, (Optr)&t_send0, (Optr)PSend13396, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13393 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13394, 2, PAssign13395, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod13172, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod13393, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -102,62 +102,62 @@ static void init_SMB_declare_as_() {
     Symbol SMB_declare_as_ = new_Symbol(L"declare:as:");
     Variable VAR_name_0_0 = new_Variable_named(L"name", 0);
     Variable VAR_value_0_1 = new_Variable_named(L"value", 0);
-    Array PArray13177 = new_Array_with(2, (Optr)VAR_name_0_0, (Optr)VAR_value_0_1);
+    Array PArray13398 = new_Array_with(2, (Optr)VAR_name_0_0, (Optr)VAR_value_0_1);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray13180 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray13401 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend13184 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_put_, 2, (Optr)VAR_name_0_0, (Optr)VAR_value_0_1);
+    Send PSend13405 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_put_, 2, (Optr)VAR_name_0_0, (Optr)VAR_value_0_1);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend13185 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_value_0_1);
-    Array PThreadedCode13183 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_push_variable, (Optr)VAR_value_0_1, (Optr)&t_send2, (Optr)PSend13184, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_value_0_1, (Optr)&t_send1, (Optr)PSend13185, (Optr)&t_block_return);
-    Block PBlock13182 = new_Block_with(empty_Array, empty_Array, PThreadedCode13183, 2, PSend13184, PSend13185);
+    Send PSend13406 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)VAR_value_0_1);
+    Array PThreadedCode13404 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_push_variable, (Optr)VAR_value_0_1, (Optr)&t_send2, (Optr)PSend13405, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_value_0_1, (Optr)&t_send1, (Optr)PSend13406, (Optr)&t_block_return);
+    Block PBlock13403 = new_Block_with(empty_Array, empty_Array, PThreadedCode13404, 2, PSend13405, PSend13406);
     Symbol SMB_at_ifAbsent_ = new_Symbol(L"at:ifAbsent:");
     // at:ifAbsent:. 
-    Send PSend13186 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_ifAbsent_, 2, (Optr)VAR_name_0_0, (Optr)PBlock13182);
-    String string_13187 = new_String(L"Double declaration for: ");
-    Constant string_13187_Const = new_Constant((Optr)string_13187);
+    Send PSend13407 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_declarations, SMB_at_ifAbsent_, 2, (Optr)VAR_name_0_0, (Optr)PBlock13403);
+    String string_13408 = new_String(L"Double declaration for: ");
+    Constant string_13408_Const = new_Constant((Optr)string_13408);
     Symbol SMB__append_ = new_Symbol(L",");
     // ,. 
-    Send PSend13188 = new_Send((Optr)string_13187_Const, SMB__append_, 1, (Optr)VAR_name_0_0);
+    Send PSend13409 = new_Send((Optr)string_13408_Const, SMB__append_, 1, (Optr)VAR_name_0_0);
     Symbol SMB_error_ = new_Symbol(L"error:");
     // error:. 
-    Send PSend13189 = new_Send((Optr)self, SMB_error_, 1, (Optr)PSend13188);
-    Array PThreadedCode13181 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_push_closure, (Optr)PBlock13182, (Optr)&t_send2, (Optr)PSend13186, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_13187, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_send1, (Optr)PSend13188, (Optr)&t_send1, (Optr)PSend13189, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock13179 = new_Block_with(PArray13180, empty_Array, PThreadedCode13181, 3, PSend13186, PSend13189, self);
+    Send PSend13410 = new_Send((Optr)self, SMB_error_, 1, (Optr)PSend13409);
+    Array PThreadedCode13402 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_declarations, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_push_closure, (Optr)PBlock13403, (Optr)&t_send2, (Optr)PSend13407, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_13408, (Optr)&t_push_variable, (Optr)VAR_name_0_0, (Optr)&t_send1, (Optr)PSend13409, (Optr)&t_send1, (Optr)PSend13410, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock13400 = new_Block_with(PArray13401, empty_Array, PThreadedCode13402, 3, PSend13407, PSend13410, self);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend13190 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13179);
-    Array PThreadedCode13178 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13179, (Optr)&t_send1, (Optr)PSend13190, (Optr)&t_method_return);
-    Method PMethod13176 = new_Method_with(PArray13177, empty_Array, empty_Array, PThreadedCode13178, 1, PSend13190);
+    Send PSend13411 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13400);
+    Array PThreadedCode13399 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13400, (Optr)&t_send1, (Optr)PSend13411, (Optr)&t_method_return);
+    Method PMethod13397 = new_Method_with(PArray13398, empty_Array, empty_Array, PThreadedCode13399, 1, PSend13411);
     
-    MethodClosure MC_SMB_declare_as_ = new_MethodClosure((Method)PMethod13176, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_declare_as_ = new_MethodClosure((Method)PMethod13397, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_declare_as_, MC_SMB_declare_as_);
 }
 
 
 static void init_SMB_isRootScope() {
     Symbol SMB_isRootScope = new_Symbol(L"isRootScope");
-    Array PThreadedCode13192 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
-    Method PMethod13191 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13192, 1, true_Const);
+    Array PThreadedCode13413 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_true);
+    Method PMethod13412 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13413, 1, true_Const);
     
-    MethodClosure MC_SMB_isRootScope = new_MethodClosure((Method)PMethod13191, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_isRootScope = new_MethodClosure((Method)PMethod13412, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_isRootScope, MC_SMB_isRootScope);
 }
 
 
 static void init_SMB_parentScope() {
     Symbol SMB_parentScope = new_Symbol(L"parentScope");
-    String string_13195 = new_String(L"RootScope has no parent!");
+    String string_13416 = new_String(L"RootScope has no parent!");
     Symbol SMB_error_ = new_Symbol(L"error:");
-    Constant string_13195_Const = new_Constant((Optr)string_13195);
+    Constant string_13416_Const = new_Constant((Optr)string_13416);
     // error:. 
-    Send PSend13196 = new_Send((Optr)self, SMB_error_, 1, (Optr)string_13195_Const);
-    Array PThreadedCode13194 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_13195, (Optr)&t_send1, (Optr)PSend13196, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13193 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13194, 2, PSend13196, self);
+    Send PSend13417 = new_Send((Optr)self, SMB_error_, 1, (Optr)string_13416_Const);
+    Array PThreadedCode13415 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_self, (Optr)&t_push1, (Optr)string_13416, (Optr)&t_send1, (Optr)PSend13417, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13414 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13415, 2, PSend13417, self);
     
-    MethodClosure MC_SMB_parentScope = new_MethodClosure((Method)PMethod13193, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_parentScope = new_MethodClosure((Method)PMethod13414, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_parentScope, MC_SMB_parentScope);
 }
 
@@ -165,20 +165,20 @@ static void init_SMB_parentScope() {
 static void init_SMB_declare_() {
     Symbol SMB_declare_ = new_Symbol(L"declare:");
     Variable VAR_anASTVariable_0_0 = new_Variable_named(L"anASTVariable", 0);
-    Array PArray13198 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
+    Array PArray13419 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
     Symbol SMB_name = new_Symbol(L"name");
     // name. 
-    Send PSend13200 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
+    Send PSend13421 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
     Symbol SMB_asVariableAt_ = new_Symbol(L"asVariableAt:");
     // asVariableAt:. 
-    Send PSend13201 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_asVariableAt_, 1, (Optr)self);
+    Send PSend13422 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_asVariableAt_, 1, (Optr)self);
     Symbol SMB_declare_as_ = new_Symbol(L"declare:as:");
     // declare:as:. 
-    Send PSend13202 = new_Send((Optr)self, SMB_declare_as_, 2, (Optr)PSend13200, (Optr)PSend13201);
-    Array PThreadedCode13199 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13200, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend13201, (Optr)&t_send2, (Optr)PSend13202, (Optr)&t_method_return);
-    Method PMethod13197 = new_Method_with(PArray13198, empty_Array, empty_Array, PThreadedCode13199, 1, PSend13202);
+    Send PSend13423 = new_Send((Optr)self, SMB_declare_as_, 2, (Optr)PSend13421, (Optr)PSend13422);
+    Array PThreadedCode13420 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13421, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend13422, (Optr)&t_send2, (Optr)PSend13423, (Optr)&t_method_return);
+    Method PMethod13418 = new_Method_with(PArray13419, empty_Array, empty_Array, PThreadedCode13420, 1, PSend13423);
     
-    MethodClosure MC_SMB_declare_ = new_MethodClosure((Method)PMethod13197, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_declare_ = new_MethodClosure((Method)PMethod13418, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_declare_, MC_SMB_declare_);
 }
 
@@ -186,11 +186,11 @@ static void init_SMB_declare_() {
 static void init_SMB_depth() {
     Symbol SMB_depth = new_Symbol(L"depth");
     SmallInt int_n1 = new_SmallInt(-1);
-    Array PThreadedCode13204 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_n1, (Optr)&t_method_return);
+    Array PThreadedCode13425 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)int_n1, (Optr)&t_method_return);
     Constant int_n1_Const = new_Constant((Optr)int_n1);
-    Method PMethod13203 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13204, 1, int_n1_Const);
+    Method PMethod13424 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13425, 1, int_n1_Const);
     
-    MethodClosure MC_SMB_depth = new_MethodClosure((Method)PMethod13203, Smalltalk_Compiler_RootScope_Class);
+    MethodClosure MC_SMB_depth = new_MethodClosure((Method)PMethod13424, Smalltalk_Compiler_RootScope_Class);
     store_method(Smalltalk_Compiler_RootScope_Class, SMB_depth, MC_SMB_depth);
 }
 
@@ -198,29 +198,29 @@ static void init_SMB_depth() {
 static void init_class_SMB_lookup_() {
     Symbol SMB_lookup_ = new_Symbol(L"lookup:");
     Variable VAR_anASTVariable_0_0 = new_Variable_named(L"anASTVariable", 0);
-    Array PArray13206 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
+    Array PArray13427 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray13209 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray13430 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_name = new_Symbol(L"name");
     // name. 
-    Send PSend13211 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
+    Send PSend13432 = new_Send((Optr)VAR_anASTVariable_0_0, SMB_name, 0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend13214 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)nil_Const);
-    Array PThreadedCode13213 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend13214, (Optr)&t_block_return);
-    Block PBlock13212 = new_Block_with(empty_Array, empty_Array, PThreadedCode13213, 1, PSend13214);
+    Send PSend13435 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)nil_Const);
+    Array PThreadedCode13434 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend13435, (Optr)&t_block_return);
+    Block PBlock13433 = new_Block_with(empty_Array, empty_Array, PThreadedCode13434, 1, PSend13435);
     Symbol SMB_at_ifAbsent_ = new_Symbol(L"at:ifAbsent:");
     // at:ifAbsent:. 
-    Send PSend13215 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_ifAbsent_, 2, (Optr)PSend13211, (Optr)PBlock13212);
-    Array PThreadedCode13210 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13211, (Optr)&t_push_closure, (Optr)PBlock13212, (Optr)&t_send2, (Optr)PSend13215, (Optr)&t_method_return);
-    Block PBlock13208 = new_Block_with(PArray13209, empty_Array, PThreadedCode13210, 1, PSend13215);
+    Send PSend13436 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_ifAbsent_, 2, (Optr)PSend13432, (Optr)PBlock13433);
+    Array PThreadedCode13431 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_anASTVariable_0_0, (Optr)&t_send0, (Optr)PSend13432, (Optr)&t_push_closure, (Optr)PBlock13433, (Optr)&t_send2, (Optr)PSend13436, (Optr)&t_method_return);
+    Block PBlock13429 = new_Block_with(PArray13430, empty_Array, PThreadedCode13431, 1, PSend13436);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend13216 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13208);
-    Array PThreadedCode13207 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13208, (Optr)&t_send1, (Optr)PSend13216, (Optr)&t_method_return);
-    Method PMethod13205 = new_Method_with(PArray13206, empty_Array, empty_Array, PThreadedCode13207, 1, PSend13216);
+    Send PSend13437 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock13429);
+    Array PThreadedCode13428 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock13429, (Optr)&t_send1, (Optr)PSend13437, (Optr)&t_method_return);
+    Method PMethod13426 = new_Method_with(PArray13427, empty_Array, empty_Array, PThreadedCode13428, 1, PSend13437);
     
-    MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13205, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13426, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_lookup_, MC_SMB_lookup_);
 }
 
@@ -228,40 +228,40 @@ static void init_class_SMB_lookup_() {
 static void init_class_SMB_lookupNamed_() {
     Symbol SMB_lookupNamed_ = new_Symbol(L"lookupNamed:");
     Variable VAR_aSymbol_0_0 = new_Variable_named(L"aSymbol", 0);
-    Array PArray13218 = new_Array_with(1, (Optr)VAR_aSymbol_0_0);
+    Array PArray13439 = new_Array_with(1, (Optr)VAR_aSymbol_0_0);
     Symbol SMB_variableNotFound = new_Symbol(L"variableNotFound");
     // variableNotFound. 
-    Send PSend13222 = new_Send((Optr)VAR_aSymbol_0_0, SMB_variableNotFound, 0);
-    Array PThreadedCode13221 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_send0, (Optr)PSend13222, (Optr)&t_block_return);
-    Block PBlock13220 = new_Block_with(empty_Array, empty_Array, PThreadedCode13221, 1, PSend13222);
+    Send PSend13443 = new_Send((Optr)VAR_aSymbol_0_0, SMB_variableNotFound, 0);
+    Array PThreadedCode13442 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_send0, (Optr)PSend13443, (Optr)&t_block_return);
+    Block PBlock13441 = new_Block_with(empty_Array, empty_Array, PThreadedCode13442, 1, PSend13443);
     Symbol SMB_lookupNamed_ifAbsent_ = new_Symbol(L"lookupNamed:ifAbsent:");
     // lookupNamed:ifAbsent:. 
-    Send PSend13223 = new_Send((Optr)self, SMB_lookupNamed_ifAbsent_, 2, (Optr)VAR_aSymbol_0_0, (Optr)PBlock13220);
-    Array PThreadedCode13219 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_push_closure, (Optr)PBlock13220, (Optr)&t_send2, (Optr)PSend13223, (Optr)&t_method_return);
-    Method PMethod13217 = new_Method_with(PArray13218, empty_Array, empty_Array, PThreadedCode13219, 1, PSend13223);
+    Send PSend13444 = new_Send((Optr)self, SMB_lookupNamed_ifAbsent_, 2, (Optr)VAR_aSymbol_0_0, (Optr)PBlock13441);
+    Array PThreadedCode13440 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_push_closure, (Optr)PBlock13441, (Optr)&t_send2, (Optr)PSend13444, (Optr)&t_method_return);
+    Method PMethod13438 = new_Method_with(PArray13439, empty_Array, empty_Array, PThreadedCode13440, 1, PSend13444);
     
-    MethodClosure MC_SMB_lookupNamed_ = new_MethodClosure((Method)PMethod13217, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_lookupNamed_ = new_MethodClosure((Method)PMethod13438, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_lookupNamed_, MC_SMB_lookupNamed_);
 }
 
 
 static void init_class_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
-    Super PSuper13226 = new_Super(SMB_initialize, 0);
+    Super PSuper13447 = new_Super(SMB_initialize, 0);
     Symbol SMB_clearGlobals = new_Symbol(L"clearGlobals");
     // clearGlobals. 
-    Send PSend13227 = new_Send((Optr)self, SMB_clearGlobals, 0);
+    Send PSend13448 = new_Send((Optr)self, SMB_clearGlobals, 0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend13229 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign13228 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)PSend13229);
+    Send PSend13450 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign13449 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)PSend13450);
     Symbol SMB_initializeGlobals = new_Symbol(L"initializeGlobals");
     // initializeGlobals. 
-    Send PSend13230 = new_Send((Optr)self, SMB_initializeGlobals, 0);
-    Array PThreadedCode13225 = instantiate_Array_with(ThreadedCode_Class, 0, 21, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper13226, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13227, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign13228, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend13229, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13230, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13224 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13225, 5, PSuper13226, PSend13227, PAssign13228, PSend13230, self);
+    Send PSend13451 = new_Send((Optr)self, SMB_initializeGlobals, 0);
+    Array PThreadedCode13446 = instantiate_Array_with(ThreadedCode_Class, 0, 21, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper13447, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13448, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign13449, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend13450, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13451, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13445 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13446, 5, PSuper13447, PSend13448, PAssign13449, PSend13451, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod13224, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod13445, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_initialize, MC_SMB_initialize);
 }
 
@@ -270,15 +270,15 @@ static void init_class_SMB_clearGlobals() {
     Symbol SMB_clearGlobals = new_Symbol(L"clearGlobals");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend13234 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
-    Assign PAssign13233 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)PSend13234);
+    Send PSend13455 = new_Send((Optr)Dictionary_classReference, SMB_new, 0);
+    Assign PAssign13454 = new_Assign((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)PSend13455);
     Symbol SMB_initializeGlobals = new_Symbol(L"initializeGlobals");
     // initializeGlobals. 
-    Send PSend13235 = new_Send((Optr)self, SMB_initializeGlobals, 0);
-    Array PThreadedCode13232 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign13233, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend13234, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13235, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13231 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13232, 3, PAssign13233, PSend13235, self);
+    Send PSend13456 = new_Send((Optr)self, SMB_initializeGlobals, 0);
+    Array PThreadedCode13453 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign13454, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_send0, (Optr)PSend13455, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13456, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13452 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13453, 3, PAssign13454, PSend13456, self);
     
-    MethodClosure MC_SMB_clearGlobals = new_MethodClosure((Method)PMethod13231, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_clearGlobals = new_MethodClosure((Method)PMethod13452, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_clearGlobals, MC_SMB_clearGlobals);
 }
 
@@ -287,14 +287,14 @@ static void init_class_SMB_lookupNamed_ifAbsent_() {
     Symbol SMB_lookupNamed_ifAbsent_ = new_Symbol(L"lookupNamed:ifAbsent:");
     Variable VAR_aSymbol_0_0 = new_Variable_named(L"aSymbol", 0);
     Variable VAR_aBlock_0_1 = new_Variable_named(L"aBlock", 0);
-    Array PArray13237 = new_Array_with(2, (Optr)VAR_aSymbol_0_0, (Optr)VAR_aBlock_0_1);
+    Array PArray13458 = new_Array_with(2, (Optr)VAR_aSymbol_0_0, (Optr)VAR_aBlock_0_1);
     Symbol SMB_at_ifAbsent_ = new_Symbol(L"at:ifAbsent:");
     // at:ifAbsent:. 
-    Send PSend13239 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_ifAbsent_, 2, (Optr)VAR_aSymbol_0_0, (Optr)VAR_aBlock_0_1);
-    Array PThreadedCode13238 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_1, (Optr)&t_send2, (Optr)PSend13239, (Optr)&t_method_return);
-    Method PMethod13236 = new_Method_with(PArray13237, empty_Array, empty_Array, PThreadedCode13238, 1, PSend13239);
+    Send PSend13460 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_ifAbsent_, 2, (Optr)VAR_aSymbol_0_0, (Optr)VAR_aBlock_0_1);
+    Array PThreadedCode13459 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_aSymbol_0_0, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_1, (Optr)&t_send2, (Optr)PSend13460, (Optr)&t_method_return);
+    Method PMethod13457 = new_Method_with(PArray13458, empty_Array, empty_Array, PThreadedCode13459, 1, PSend13460);
     
-    MethodClosure MC_SMB_lookupNamed_ifAbsent_ = new_MethodClosure((Method)PMethod13236, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_lookupNamed_ifAbsent_ = new_MethodClosure((Method)PMethod13457, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_lookupNamed_ifAbsent_, MC_SMB_lookupNamed_ifAbsent_);
 }
 
@@ -302,54 +302,54 @@ static void init_class_SMB_lookupNamed_ifAbsent_() {
 static void init_class_SMB_globalDefinition() {
     Symbol SMB_globalDefinition = new_Symbol(L"globalDefinition");
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray13243 = new_Array_with(1, (Optr)VAR__receiver__1_0);
-    String string_13245 = new_String(L"nil");
+    Array PArray13464 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    String string_13466 = new_String(L"nil");
     Symbol SMB_new_ = new_Symbol(L"new:");
     // new:. 
-    Send PSend13246 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)nil_Const);
+    Send PSend13467 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)nil_Const);
     Symbol SMB_with_with_ = new_Symbol(L"with:with:");
-    Constant string_13245_Const = new_Constant((Optr)string_13245);
+    Constant string_13466_Const = new_Constant((Optr)string_13466);
     // with:with:. 
-    Send PSend13247 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13245_Const, (Optr)PSend13246);
+    Send PSend13468 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13466_Const, (Optr)PSend13467);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:put:. 
-    Send PSend13248 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend13247);
-    String string_13249 = new_String(L"true");
+    Send PSend13469 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend13468);
+    String string_13470 = new_String(L"true");
     // new:. 
-    Send PSend13250 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)true_Const);
-    Constant string_13249_Const = new_Constant((Optr)string_13249);
+    Send PSend13471 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)true_Const);
+    Constant string_13470_Const = new_Constant((Optr)string_13470);
     // with:with:. 
-    Send PSend13251 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13249_Const, (Optr)PSend13250);
+    Send PSend13472 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13470_Const, (Optr)PSend13471);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // at:put:. 
-    Send PSend13252 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend13251);
+    Send PSend13473 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend13472);
     SmallInt int_3 = new_SmallInt(3);
-    String string_13253 = new_String(L"false");
+    String string_13474 = new_String(L"false");
     // new:. 
-    Send PSend13254 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)false_Const);
-    Constant string_13253_Const = new_Constant((Optr)string_13253);
+    Send PSend13475 = new_Send((Optr)PConstant_classReference, SMB_new_, 1, (Optr)false_Const);
+    Constant string_13474_Const = new_Constant((Optr)string_13474);
     // with:with:. 
-    Send PSend13255 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13253_Const, (Optr)PSend13254);
+    Send PSend13476 = new_Send((Optr)Array_classReference, SMB_with_with_, 2, (Optr)string_13474_Const, (Optr)PSend13475);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // at:put:. 
-    Send PSend13256 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend13255);
+    Send PSend13477 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend13476);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend13257 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode13244 = instantiate_Array_with(ThreadedCode_Class, 0, 57, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13245, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend13246, (Optr)&t_send2, (Optr)PSend13247, (Optr)&t_send2, (Optr)PSend13248, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13249, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend13250, (Optr)&t_send2, (Optr)PSend13251, (Optr)&t_send2, (Optr)PSend13252, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13253, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend13254, (Optr)&t_send2, (Optr)PSend13255, (Optr)&t_send2, (Optr)PSend13256, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend13257, (Optr)&t_method_return);
-    Block PBlock13242 = new_Block_with(PArray13243, empty_Array, PThreadedCode13244, 4, PSend13248, PSend13252, PSend13256, PSend13257);
+    Send PSend13478 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode13465 = instantiate_Array_with(ThreadedCode_Class, 0, 57, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13466, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend13467, (Optr)&t_send2, (Optr)PSend13468, (Optr)&t_send2, (Optr)PSend13469, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13470, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_true, (Optr)&t_send1, (Optr)PSend13471, (Optr)&t_send2, (Optr)PSend13472, (Optr)&t_send2, (Optr)PSend13473, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)string_13474, (Optr)&t_push_class_reference, (Optr)PConstant_classReference, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend13475, (Optr)&t_send2, (Optr)PSend13476, (Optr)&t_send2, (Optr)PSend13477, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend13478, (Optr)&t_method_return);
+    Block PBlock13463 = new_Block_with(PArray13464, empty_Array, PThreadedCode13465, 4, PSend13469, PSend13473, PSend13477, PSend13478);
     // new:. 
-    Send PSend13258 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_3_Const);
+    Send PSend13479 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_3_Const);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend13259 = new_Send((Optr)PBlock13242, SMB_value_, 1, (Optr)PSend13258);
-    Array PThreadedCode13241 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_closure, (Optr)PBlock13242, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend13258, (Optr)&t_send1, (Optr)PSend13259, (Optr)&t_method_return);
-    Method PMethod13240 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13241, 1, PSend13259);
+    Send PSend13480 = new_Send((Optr)PBlock13463, SMB_value_, 1, (Optr)PSend13479);
+    Array PThreadedCode13462 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_closure, (Optr)PBlock13463, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)int_3, (Optr)&t_send1, (Optr)PSend13479, (Optr)&t_send1, (Optr)PSend13480, (Optr)&t_method_return);
+    Method PMethod13461 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13462, 1, PSend13480);
     
-    MethodClosure MC_SMB_globalDefinition = new_MethodClosure((Method)PMethod13240, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_globalDefinition = new_MethodClosure((Method)PMethod13461, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_globalDefinition, MC_SMB_globalDefinition);
 }
 
@@ -358,30 +358,30 @@ static void init_class_SMB_initializeGlobals() {
     Symbol SMB_initializeGlobals = new_Symbol(L"initializeGlobals");
     Symbol SMB_globalDefinition = new_Symbol(L"globalDefinition");
     // globalDefinition. 
-    Send PSend13262 = new_Send((Optr)self, SMB_globalDefinition, 0);
+    Send PSend13483 = new_Send((Optr)self, SMB_globalDefinition, 0);
     Variable VAR_pair_1_0 = new_Variable_named(L"pair", 1);
-    Array PArray13264 = new_Array_with(1, (Optr)VAR_pair_1_0);
+    Array PArray13485 = new_Array_with(1, (Optr)VAR_pair_1_0);
     Symbol SMB_at_ = new_Symbol(L"at:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:. 
-    Send PSend13266 = new_Send((Optr)VAR_pair_1_0, SMB_at_, 1, (Optr)int_1_Const);
+    Send PSend13487 = new_Send((Optr)VAR_pair_1_0, SMB_at_, 1, (Optr)int_1_Const);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // at:. 
-    Send PSend13267 = new_Send((Optr)VAR_pair_1_0, SMB_at_, 1, (Optr)int_2_Const);
+    Send PSend13488 = new_Send((Optr)VAR_pair_1_0, SMB_at_, 1, (Optr)int_2_Const);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend13268 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_put_, 2, (Optr)PSend13266, (Optr)PSend13267);
-    Array PThreadedCode13265 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_pair_1_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend13266, (Optr)&t_push_variable, (Optr)VAR_pair_1_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend13267, (Optr)&t_send2, (Optr)PSend13268, (Optr)&t_method_return);
-    Block PBlock13263 = new_Block_with(PArray13264, empty_Array, PThreadedCode13265, 1, PSend13268);
+    Send PSend13489 = new_Send((Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, SMB_at_put_, 2, (Optr)PSend13487, (Optr)PSend13488);
+    Array PThreadedCode13486 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_RootScope_Class_class_decls, (Optr)&t_push_variable, (Optr)VAR_pair_1_0, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend13487, (Optr)&t_push_variable, (Optr)VAR_pair_1_0, (Optr)&t_push_2, (Optr)&t_send1, (Optr)PSend13488, (Optr)&t_send2, (Optr)PSend13489, (Optr)&t_method_return);
+    Block PBlock13484 = new_Block_with(PArray13485, empty_Array, PThreadedCode13486, 1, PSend13489);
     Symbol SMB_do_ = new_Symbol(L"do:");
     // do:. 
-    Send PSend13269 = new_Send((Optr)PSend13262, SMB_do_, 1, (Optr)PBlock13263);
-    Array PThreadedCode13261 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13262, (Optr)&t_push_closure, (Optr)PBlock13263, (Optr)&t_send1, (Optr)PSend13269, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13260 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13261, 2, PSend13269, self);
+    Send PSend13490 = new_Send((Optr)PSend13483, SMB_do_, 1, (Optr)PBlock13484);
+    Array PThreadedCode13482 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13483, (Optr)&t_push_closure, (Optr)PBlock13484, (Optr)&t_send1, (Optr)PSend13490, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13481 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13482, 2, PSend13490, self);
     
-    MethodClosure MC_SMB_initializeGlobals = new_MethodClosure((Method)PMethod13260, HEADER(Smalltalk_Compiler_RootScope_Class));
+    MethodClosure MC_SMB_initializeGlobals = new_MethodClosure((Method)PMethod13481, HEADER(Smalltalk_Compiler_RootScope_Class));
     store_method(HEADER(Smalltalk_Compiler_RootScope_Class), SMB_initializeGlobals, MC_SMB_initializeGlobals);
 }
 

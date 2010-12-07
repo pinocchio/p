@@ -7,38 +7,38 @@ Optr layout_Collection_Benchmark_Dictionary;
 
 static void init_SMB_setUp() {
     Symbol SMB_setUp = new_Symbol(L"setUp");
-    Super PSuper7363 = new_Super(SMB_setUp, 0);
+    Super PSuper7384 = new_Super(SMB_setUp, 0);
     Symbol SMB_new_ = new_Symbol(L"new:");
     Symbol SMB_dictSize = new_Symbol(L"dictSize");
     // dictSize. 
-    Send PSend7366 = new_Send((Optr)self, SMB_dictSize, 0);
+    Send PSend7387 = new_Send((Optr)self, SMB_dictSize, 0);
     // new:. 
-    Send PSend7365 = new_Send((Optr)Dictionary_classReference, SMB_new_, 1, (Optr)PSend7366);
-    Assign PAssign7364 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, (Optr)PSend7365);
+    Send PSend7386 = new_Send((Optr)Dictionary_classReference, SMB_new_, 1, (Optr)PSend7387);
+    Assign PAssign7385 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, (Optr)PSend7386);
     // dictSize. 
-    Send PSend7367 = new_Send((Optr)self, SMB_dictSize, 0);
+    Send PSend7388 = new_Send((Optr)self, SMB_dictSize, 0);
     Variable VAR_i_1_0 = new_Variable_named(L"i", 1);
-    Array PArray7369 = new_Array_with(1, (Optr)VAR_i_1_0);
+    Array PArray7390 = new_Array_with(1, (Optr)VAR_i_1_0);
     Symbol SMB_key_ = new_Symbol(L"key:");
     // key:. 
-    Send PSend7371 = new_Send((Optr)self, SMB_key_, 1, (Optr)VAR_i_1_0);
+    Send PSend7392 = new_Send((Optr)self, SMB_key_, 1, (Optr)VAR_i_1_0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend7372 = new_Send((Optr)self, SMB_value_, 1, (Optr)VAR_i_1_0);
+    Send PSend7393 = new_Send((Optr)self, SMB_value_, 1, (Optr)VAR_i_1_0);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-    Send PSend7373 = new_Send((Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, SMB_at_put_, 2, (Optr)PSend7371, (Optr)PSend7372);
-    Array PThreadedCode7370 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend7371, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend7372, (Optr)&t_send2, (Optr)PSend7373, (Optr)&t_method_return);
-    Block PBlock7368 = new_Block_with(PArray7369, empty_Array, PThreadedCode7370, 1, PSend7373);
+    Send PSend7394 = new_Send((Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, SMB_at_put_, 2, (Optr)PSend7392, (Optr)PSend7393);
+    Array PThreadedCode7391 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_AbstractDictionary_dict, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend7392, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_i_1_0, (Optr)&t_send1, (Optr)PSend7393, (Optr)&t_send2, (Optr)PSend7394, (Optr)&t_method_return);
+    Block PBlock7389 = new_Block_with(PArray7390, empty_Array, PThreadedCode7391, 1, PSend7394);
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     Symbol SMB_to_do_ = new_Symbol(L"to:do:");
     // to:do:. 
-    Send PSend7374 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend7367, (Optr)PBlock7368);
-    Array PThreadedCode7362 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper7363, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign7364, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7366, (Optr)&t_send1, (Optr)PSend7365, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7367, (Optr)&t_push_closure, (Optr)PBlock7368, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend7374, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod7361 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7362, 4, PSuper7363, PAssign7364, PSend7374, self);
+    Send PSend7395 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend7388, (Optr)PBlock7389);
+    Array PThreadedCode7383 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper7384, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign7385, (Optr)&t_push_class_reference, (Optr)Dictionary_classReference, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7387, (Optr)&t_send1, (Optr)PSend7386, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7388, (Optr)&t_push_closure, (Optr)PBlock7389, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend7395, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod7382 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7383, 4, PSuper7384, PAssign7385, PSend7395, self);
     
-    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod7361, Collection_Benchmark_Dictionary_Class);
+    MethodClosure MC_SMB_setUp = new_MethodClosure((Method)PMethod7382, Collection_Benchmark_Dictionary_Class);
     store_method(Collection_Benchmark_Dictionary_Class, SMB_setUp, MC_SMB_setUp);
 }
 

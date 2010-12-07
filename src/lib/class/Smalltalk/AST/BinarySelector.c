@@ -8,14 +8,14 @@ Optr layout_Smalltalk_AST_BinarySelector;
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray15432 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray15653 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitBinarySelector_ = new_Symbol(L"visitBinarySelector:");
     // visitBinarySelector:. 
-    Send PSend15434 = new_Send((Optr)VAR_visitor_0_0, SMB_visitBinarySelector_, 1, (Optr)self);
-    Array PThreadedCode15433 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend15434, (Optr)&t_method_return);
-    Method PMethod15431 = new_Method_with(PArray15432, empty_Array, empty_Array, PThreadedCode15433, 1, PSend15434);
+    Send PSend15655 = new_Send((Optr)VAR_visitor_0_0, SMB_visitBinarySelector_, 1, (Optr)self);
+    Array PThreadedCode15654 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend15655, (Optr)&t_method_return);
+    Method PMethod15652 = new_Method_with(PArray15653, empty_Array, empty_Array, PThreadedCode15654, 1, PSend15655);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod15431, Smalltalk_AST_BinarySelector_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod15652, Smalltalk_AST_BinarySelector_Class);
     store_method(Smalltalk_AST_BinarySelector_Class, SMB_accept_, MC_SMB_accept_);
 }
 
