@@ -226,15 +226,9 @@ static void init_SMB_run_() {
     Send PSend7069 = new_Send((Optr)VAR_run_0_1, SMB_run, 0);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     // at:put:. 
-<<<<<<< HEAD
     Send PSend7070 = new_Send((Optr)slot_PBenchmark_BenchmarkSuite_runs, SMB_at_put_, 2, (Optr)VAR_selector_0_0, (Optr)VAR_run_0_1);
     Array PThreadedCode7056 = instantiate_Array_with(ThreadedCode_Class, 0, 32, (Optr)&t_push1, (Optr)PAssign7057, (Optr)&t_push_class_reference, (Optr)PBenchmarkRun_classReference, (Optr)&t_send0, (Optr)PSend7058, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock7059, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send1, (Optr)PSend7068, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send0, (Optr)PSend7069, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PBenchmark_BenchmarkSuite_runs, (Optr)&t_push_variable, (Optr)VAR_selector_0_0, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send2, (Optr)PSend7070, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_method_return);
     Method PMethod7053 = new_Method_with(PArray7054, PArray7055, empty_Array, PThreadedCode7056, 5, PAssign7057, PSend7068, PSend7069, PSend7070, VAR_run_0_1);
-=======
-    Send PSend7092 = new_Send((Optr)slot_PBenchmark_BenchmarkSuite_runs, SMB_at_put_, 2, (Optr)VAR_selector_0_0, (Optr)VAR_run_0_1);
-    Array PThreadedCode7078 = instantiate_Array_with(ThreadedCode_Class, 0, 32, (Optr)&t_push1, (Optr)PAssign7079, (Optr)&t_push_class_reference, (Optr)PBenchmarkRun_classReference, (Optr)&t_send0, (Optr)PSend7080, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_closure, (Optr)PBlock7081, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send1, (Optr)PSend7090, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send0, (Optr)PSend7091, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_PBenchmark_BenchmarkSuite_runs, (Optr)&t_push_variable, (Optr)VAR_selector_0_0, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_send2, (Optr)PSend7092, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_run_0_1, (Optr)&t_method_return);
-    Method PMethod7075 = new_Method_with(PArray7076, PArray7077, empty_Array, PThreadedCode7078, 5, PAssign7079, PSend7090, PSend7091, PSend7092, VAR_run_0_1);
->>>>>>> 8274d526aa332bb13dfd33a1bd5e57e77760164a
     
     MethodClosure MC_SMB_run_ = new_MethodClosure((Method)PMethod7053, PBenchmark_BenchmarkSuite_Class);
     store_method(PBenchmark_BenchmarkSuite_Class, SMB_run_, MC_SMB_run_);

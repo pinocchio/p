@@ -9,12 +9,12 @@ Optr layout_Smalltalk_Compiler_UndefinedVariable;
 static void init_SMB_variable_() {
     Symbol SMB_variable_ = new_Symbol(L"variable:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray13524 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign13526 = new_Assign((Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode13525 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign13526, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13523 = new_Method_with(PArray13524, empty_Array, empty_Array, PThreadedCode13525, 2, PAssign13526, self);
+    Array PArray13522 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign13524 = new_Assign((Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode13523 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign13524, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13521 = new_Method_with(PArray13522, empty_Array, empty_Array, PThreadedCode13523, 2, PAssign13524, self);
     
-    MethodClosure MC_SMB_variable_ = new_MethodClosure((Method)PMethod13523, Smalltalk_Compiler_UndefinedVariable_Class);
+    MethodClosure MC_SMB_variable_ = new_MethodClosure((Method)PMethod13521, Smalltalk_Compiler_UndefinedVariable_Class);
     store_method(Smalltalk_Compiler_UndefinedVariable_Class, SMB_variable_, MC_SMB_variable_);
 }
 
@@ -22,31 +22,31 @@ static void init_SMB_variable_() {
 static void init_SMB_warnMessageOn_() {
     Symbol SMB_warnMessageOn_ = new_Symbol(L"warnMessageOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray13528 = new_Array_with(1, (Optr)VAR_aStream_0_0);
-    String string_13530 = new_String(L"reference to undefined variable: ");
+    Array PArray13526 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    String string_13528 = new_String(L"reference to undefined variable: ");
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant string_13530_Const = new_Constant((Optr)string_13530);
+    Constant string_13528_Const = new_Constant((Optr)string_13528);
     // <<. 
-    Send PSend13531 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_13530_Const);
+    Send PSend13529 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_13528_Const);
     Symbol SMB_name = new_Symbol(L"name");
     // name. 
-    Send PSend13532 = new_Send((Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, SMB_name, 0);
+    Send PSend13530 = new_Send((Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, SMB_name, 0);
     // <<. 
-    Send PSend13533 = new_Send((Optr)PSend13531, SMB__shiftLeft_, 1, (Optr)PSend13532);
-    Array PThreadedCode13529 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_13530, (Optr)&t_send1, (Optr)PSend13531, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)&t_send0, (Optr)PSend13532, (Optr)&t_send1, (Optr)PSend13533, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod13527 = new_Method_with(PArray13528, empty_Array, empty_Array, PThreadedCode13529, 2, PSend13533, self);
+    Send PSend13531 = new_Send((Optr)PSend13529, SMB__shiftLeft_, 1, (Optr)PSend13530);
+    Array PThreadedCode13527 = instantiate_Array_with(ThreadedCode_Class, 0, 14, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_13528, (Optr)&t_send1, (Optr)PSend13529, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)&t_send0, (Optr)PSend13530, (Optr)&t_send1, (Optr)PSend13531, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13525 = new_Method_with(PArray13526, empty_Array, empty_Array, PThreadedCode13527, 2, PSend13531, self);
     
-    MethodClosure MC_SMB_warnMessageOn_ = new_MethodClosure((Method)PMethod13527, Smalltalk_Compiler_UndefinedVariable_Class);
+    MethodClosure MC_SMB_warnMessageOn_ = new_MethodClosure((Method)PMethod13525, Smalltalk_Compiler_UndefinedVariable_Class);
     store_method(Smalltalk_Compiler_UndefinedVariable_Class, SMB_warnMessageOn_, MC_SMB_warnMessageOn_);
 }
 
 
 static void init_SMB_variable() {
     Symbol SMB_variable = new_Symbol(L"variable");
-    Array PThreadedCode13535 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)&t_method_return);
-    Method PMethod13534 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13535, 1, slot_Smalltalk_Compiler_UndefinedVariable_variable);
+    Array PThreadedCode13533 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Smalltalk_Compiler_UndefinedVariable_variable, (Optr)&t_method_return);
+    Method PMethod13532 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13533, 1, slot_Smalltalk_Compiler_UndefinedVariable_variable);
     
-    MethodClosure MC_SMB_variable = new_MethodClosure((Method)PMethod13534, Smalltalk_Compiler_UndefinedVariable_Class);
+    MethodClosure MC_SMB_variable = new_MethodClosure((Method)PMethod13532, Smalltalk_Compiler_UndefinedVariable_Class);
     store_method(Smalltalk_Compiler_UndefinedVariable_Class, SMB_variable, MC_SMB_variable);
 }
 

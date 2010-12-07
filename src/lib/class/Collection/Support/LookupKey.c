@@ -9,14 +9,14 @@ Optr layout_Collection_Support_LookupKey;
 static void init_SMB__gt_() {
     Symbol SMB__gt_ = new_Symbol(L">");
     Variable VAR_aMagnitude_0_0 = new_Variable_named(L"aMagnitude", 0);
-    Array PArray7664 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
+    Array PArray7662 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
     Symbol SMB__lt_ = new_Symbol(L"<");
     // <. 
-    Send PSend7666 = new_Send((Optr)VAR_aMagnitude_0_0, SMB__lt_, 1, (Optr)self);
-    Array PThreadedCode7665 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend7666, (Optr)&t_method_return);
-    Method PMethod7663 = new_Method_with(PArray7664, empty_Array, empty_Array, PThreadedCode7665, 1, PSend7666);
+    Send PSend7664 = new_Send((Optr)VAR_aMagnitude_0_0, SMB__lt_, 1, (Optr)self);
+    Array PThreadedCode7663 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend7664, (Optr)&t_method_return);
+    Method PMethod7661 = new_Method_with(PArray7662, empty_Array, empty_Array, PThreadedCode7663, 1, PSend7664);
     
-    MethodClosure MC_SMB__gt_ = new_MethodClosure((Method)PMethod7663, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB__gt_ = new_MethodClosure((Method)PMethod7661, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB__gt_, MC_SMB__gt_);
 }
 
@@ -24,11 +24,11 @@ static void init_SMB__gt_() {
 static void init_SMB_hash() {
     Symbol SMB_hash = new_Symbol(L"hash");
     // hash. 
-    Send PSend7669 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB_hash, 0);
-    Array PThreadedCode7668 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_send0, (Optr)PSend7669, (Optr)&t_method_return);
-    Method PMethod7667 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7668, 1, PSend7669);
+    Send PSend7667 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB_hash, 0);
+    Array PThreadedCode7666 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_send0, (Optr)PSend7667, (Optr)&t_method_return);
+    Method PMethod7665 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7666, 1, PSend7667);
     
-    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PMethod7667, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PMethod7665, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB_hash, MC_SMB_hash);
 }
 
@@ -42,12 +42,12 @@ static void init_SMB_key_() {
     */
     Symbol SMB_key_ = new_Symbol(L"key:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray7671 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign7673 = new_Assign((Optr)slot_Collection_Support_LookupKey_key, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode7672 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign7673, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod7670 = new_Method_with(PArray7671, empty_Array, empty_Array, PThreadedCode7672, 2, PAssign7673, self);
+    Array PArray7669 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign7671 = new_Assign((Optr)slot_Collection_Support_LookupKey_key, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode7670 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign7671, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod7668 = new_Method_with(PArray7669, empty_Array, empty_Array, PThreadedCode7670, 2, PAssign7671, self);
     
-    MethodClosure MC_SMB_key_ = new_MethodClosure((Method)PMethod7670, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB_key_ = new_MethodClosure((Method)PMethod7668, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB_key_, MC_SMB_key_);
 }
 
@@ -55,14 +55,14 @@ static void init_SMB_key_() {
 static void init_SMB__gt__equals_() {
     Symbol SMB__gt__equals_ = new_Symbol(L">=");
     Variable VAR_aMagnitude_0_0 = new_Variable_named(L"aMagnitude", 0);
-    Array PArray7675 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
+    Array PArray7673 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
     Symbol SMB__lt__equals_ = new_Symbol(L"<=");
     // <=. 
-    Send PSend7677 = new_Send((Optr)VAR_aMagnitude_0_0, SMB__lt__equals_, 1, (Optr)self);
-    Array PThreadedCode7676 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend7677, (Optr)&t_method_return);
-    Method PMethod7674 = new_Method_with(PArray7675, empty_Array, empty_Array, PThreadedCode7676, 1, PSend7677);
+    Send PSend7675 = new_Send((Optr)VAR_aMagnitude_0_0, SMB__lt__equals_, 1, (Optr)self);
+    Array PThreadedCode7674 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend7675, (Optr)&t_method_return);
+    Method PMethod7672 = new_Method_with(PArray7673, empty_Array, empty_Array, PThreadedCode7674, 1, PSend7675);
     
-    MethodClosure MC_SMB__gt__equals_ = new_MethodClosure((Method)PMethod7674, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB__gt__equals_ = new_MethodClosure((Method)PMethod7672, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB__gt__equals_, MC_SMB__gt__equals_);
 }
 
@@ -70,16 +70,16 @@ static void init_SMB__gt__equals_() {
 static void init_SMB__lt_() {
     Symbol SMB__lt_ = new_Symbol(L"<");
     Variable VAR_aLookupKey_0_0 = new_Variable_named(L"aLookupKey", 0);
-    Array PArray7679 = new_Array_with(1, (Optr)VAR_aLookupKey_0_0);
+    Array PArray7677 = new_Array_with(1, (Optr)VAR_aLookupKey_0_0);
     Symbol SMB_key = new_Symbol(L"key");
     // key. 
-    Send PSend7681 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_key, 0);
+    Send PSend7679 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_key, 0);
     // <. 
-    Send PSend7682 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB__lt_, 1, (Optr)PSend7681);
-    Array PThreadedCode7680 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7681, (Optr)&t_send1, (Optr)PSend7682, (Optr)&t_method_return);
-    Method PMethod7678 = new_Method_with(PArray7679, empty_Array, empty_Array, PThreadedCode7680, 1, PSend7682);
+    Send PSend7680 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB__lt_, 1, (Optr)PSend7679);
+    Array PThreadedCode7678 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7679, (Optr)&t_send1, (Optr)PSend7680, (Optr)&t_method_return);
+    Method PMethod7676 = new_Method_with(PArray7677, empty_Array, empty_Array, PThreadedCode7678, 1, PSend7680);
     
-    MethodClosure MC_SMB__lt_ = new_MethodClosure((Method)PMethod7678, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB__lt_ = new_MethodClosure((Method)PMethod7676, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB__lt_, MC_SMB__lt_);
 }
 
@@ -87,52 +87,52 @@ static void init_SMB__lt_() {
 static void init_SMB__equals_() {
     Symbol SMB__equals_ = new_Symbol(L"=");
     Variable VAR_aLookupKey_0_0 = new_Variable_named(L"aLookupKey", 0);
-    Array PArray7684 = new_Array_with(1, (Optr)VAR_aLookupKey_0_0);
+    Array PArray7682 = new_Array_with(1, (Optr)VAR_aLookupKey_0_0);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray7687 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray7685 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_species = new_Symbol(L"species");
     // species. 
-    Send PSend7689 = new_Send((Optr)self, SMB_species, 0);
+    Send PSend7687 = new_Send((Optr)self, SMB_species, 0);
     // species. 
-    Send PSend7690 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_species, 0);
+    Send PSend7688 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_species, 0);
     // =. 
-    Send PSend7691 = new_Send((Optr)PSend7689, SMB__equals_, 1, (Optr)PSend7690);
+    Send PSend7689 = new_Send((Optr)PSend7687, SMB__equals_, 1, (Optr)PSend7688);
     Symbol SMB_ifTrue_ifFalse_ = new_Symbol(L"ifTrue:ifFalse:");
     Symbol SMB_key = new_Symbol(L"key");
     // key. 
-    Send PSend7695 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_key, 0);
+    Send PSend7693 = new_Send((Optr)VAR_aLookupKey_0_0, SMB_key, 0);
     // =. 
-    Send PSend7696 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB__equals_, 1, (Optr)PSend7695);
+    Send PSend7694 = new_Send((Optr)slot_Collection_Support_LookupKey_key, SMB__equals_, 1, (Optr)PSend7693);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend7697 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend7696);
-    Array PThreadedCode7694 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7695, (Optr)&t_send1, (Optr)PSend7696, (Optr)&t_send1, (Optr)PSend7697, (Optr)&t_block_return);
-    Block PBlock7693 = new_Block_with(empty_Array, empty_Array, PThreadedCode7694, 1, PSend7697);
+    Send PSend7695 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend7694);
+    Array PThreadedCode7692 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7693, (Optr)&t_send1, (Optr)PSend7694, (Optr)&t_send1, (Optr)PSend7695, (Optr)&t_block_return);
+    Block PBlock7691 = new_Block_with(empty_Array, empty_Array, PThreadedCode7692, 1, PSend7695);
     // escape:. 
-    Send PSend7700 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
-    Array PThreadedCode7699 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend7700, (Optr)&t_block_return);
-    Block PBlock7698 = new_Block_with(empty_Array, empty_Array, PThreadedCode7699, 1, PSend7700);
+    Send PSend7698 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)false_Const);
+    Array PThreadedCode7697 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_false, (Optr)&t_send1, (Optr)PSend7698, (Optr)&t_block_return);
+    Block PBlock7696 = new_Block_with(empty_Array, empty_Array, PThreadedCode7697, 1, PSend7698);
     // ifTrue:ifFalse:. 
-    Send PSend7692 = new_Send((Optr)PSend7691, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock7693, (Optr)PBlock7698);
-    Array PThreadedCode7688 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7689, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7690, (Optr)&t_send1, (Optr)PSend7691, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend7692, (Optr)PBlock7693, (Optr)PBlock7698, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Block PBlock7686 = new_Block_with(PArray7687, empty_Array, PThreadedCode7688, 2, PSend7692, self);
+    Send PSend7690 = new_Send((Optr)PSend7689, SMB_ifTrue_ifFalse_, 2, (Optr)PBlock7691, (Optr)PBlock7696);
+    Array PThreadedCode7686 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7687, (Optr)&t_push_variable, (Optr)VAR_aLookupKey_0_0, (Optr)&t_send0, (Optr)PSend7688, (Optr)&t_send1, (Optr)PSend7689, (Optr)&t_send_ifTrue_ifFalse_, (Optr)PSend7690, (Optr)PBlock7691, (Optr)PBlock7696, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Block PBlock7684 = new_Block_with(PArray7685, empty_Array, PThreadedCode7686, 2, PSend7690, self);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend7701 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock7686);
-    Array PThreadedCode7685 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock7686, (Optr)&t_send1, (Optr)PSend7701, (Optr)&t_method_return);
-    Method PMethod7683 = new_Method_with(PArray7684, empty_Array, empty_Array, PThreadedCode7685, 1, PSend7701);
+    Send PSend7699 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock7684);
+    Array PThreadedCode7683 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock7684, (Optr)&t_send1, (Optr)PSend7699, (Optr)&t_method_return);
+    Method PMethod7681 = new_Method_with(PArray7682, empty_Array, empty_Array, PThreadedCode7683, 1, PSend7699);
     
-    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod7683, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod7681, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB__equals_, MC_SMB__equals_);
 }
 
 
 static void init_SMB_key() {
     Symbol SMB_key = new_Symbol(L"key");
-    Array PThreadedCode7703 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_method_return);
-    Method PMethod7702 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7703, 1, slot_Collection_Support_LookupKey_key);
+    Array PThreadedCode7701 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Collection_Support_LookupKey_key, (Optr)&t_method_return);
+    Method PMethod7700 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode7701, 1, slot_Collection_Support_LookupKey_key);
     
-    MethodClosure MC_SMB_key = new_MethodClosure((Method)PMethod7702, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB_key = new_MethodClosure((Method)PMethod7700, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB_key, MC_SMB_key);
 }
 
@@ -140,17 +140,17 @@ static void init_SMB_key() {
 static void init_SMB__lt__equals_() {
     Symbol SMB__lt__equals_ = new_Symbol(L"<=");
     Variable VAR_aMagnitude_0_0 = new_Variable_named(L"aMagnitude", 0);
-    Array PArray7705 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
+    Array PArray7703 = new_Array_with(1, (Optr)VAR_aMagnitude_0_0);
     Symbol SMB__gt_ = new_Symbol(L">");
     // >. 
-    Send PSend7707 = new_Send((Optr)self, SMB__gt_, 1, (Optr)VAR_aMagnitude_0_0);
+    Send PSend7705 = new_Send((Optr)self, SMB__gt_, 1, (Optr)VAR_aMagnitude_0_0);
     Symbol SMB_not = new_Symbol(L"not");
     // not. 
-    Send PSend7708 = new_Send((Optr)PSend7707, SMB_not, 0);
-    Array PThreadedCode7706 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_send1, (Optr)PSend7707, (Optr)&t_send0, (Optr)PSend7708, (Optr)&t_method_return);
-    Method PMethod7704 = new_Method_with(PArray7705, empty_Array, empty_Array, PThreadedCode7706, 1, PSend7708);
+    Send PSend7706 = new_Send((Optr)PSend7705, SMB_not, 0);
+    Array PThreadedCode7704 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_aMagnitude_0_0, (Optr)&t_send1, (Optr)PSend7705, (Optr)&t_send0, (Optr)PSend7706, (Optr)&t_method_return);
+    Method PMethod7702 = new_Method_with(PArray7703, empty_Array, empty_Array, PThreadedCode7704, 1, PSend7706);
     
-    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod7704, Collection_Support_LookupKey_Class);
+    MethodClosure MC_SMB__lt__equals_ = new_MethodClosure((Method)PMethod7702, Collection_Support_LookupKey_Class);
     store_method(Collection_Support_LookupKey_Class, SMB__lt__equals_, MC_SMB__lt__equals_);
 }
 
@@ -158,16 +158,16 @@ static void init_SMB__lt__equals_() {
 static void init_class_SMB_key_() {
     Symbol SMB_key_ = new_Symbol(L"key:");
     Variable VAR_aKey_0_0 = new_Variable_named(L"aKey", 0);
-    Array PArray7710 = new_Array_with(1, (Optr)VAR_aKey_0_0);
+    Array PArray7708 = new_Array_with(1, (Optr)VAR_aKey_0_0);
     Symbol SMB_basicNew = new_Symbol(L"basicNew");
     // basicNew. 
-    Send PSend7712 = new_Send((Optr)self, SMB_basicNew, 0);
+    Send PSend7710 = new_Send((Optr)self, SMB_basicNew, 0);
     // key:. 
-    Send PSend7713 = new_Send((Optr)PSend7712, SMB_key_, 1, (Optr)VAR_aKey_0_0);
-    Array PThreadedCode7711 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7712, (Optr)&t_push_variable, (Optr)VAR_aKey_0_0, (Optr)&t_send1, (Optr)PSend7713, (Optr)&t_method_return);
-    Method PMethod7709 = new_Method_with(PArray7710, empty_Array, empty_Array, PThreadedCode7711, 1, PSend7713);
+    Send PSend7711 = new_Send((Optr)PSend7710, SMB_key_, 1, (Optr)VAR_aKey_0_0);
+    Array PThreadedCode7709 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend7710, (Optr)&t_push_variable, (Optr)VAR_aKey_0_0, (Optr)&t_send1, (Optr)PSend7711, (Optr)&t_method_return);
+    Method PMethod7707 = new_Method_with(PArray7708, empty_Array, empty_Array, PThreadedCode7709, 1, PSend7711);
     
-    MethodClosure MC_SMB_key_ = new_MethodClosure((Method)PMethod7709, HEADER(Collection_Support_LookupKey_Class));
+    MethodClosure MC_SMB_key_ = new_MethodClosure((Method)PMethod7707, HEADER(Collection_Support_LookupKey_Class));
     store_method(HEADER(Collection_Support_LookupKey_Class), SMB_key_, MC_SMB_key_);
 }
 

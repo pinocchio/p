@@ -1,6 +1,6 @@
 |md|
 md := Collection.Benchmark.MultiDictBenchmark new.
-md probeCount: 1000.
+md probeCount: 10.
 md useStDict: false.
 md keyBlock: [:i| PBenchmark.Collection.Dictionary.HashObject with: i hash].
 md run.

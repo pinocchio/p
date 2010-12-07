@@ -8,10 +8,10 @@ Optr layout_Shell_ReadLine_StartLink;
 
 static void init_SMB_next() {
     Symbol SMB_next = new_Symbol(L"next");
-    Array PThreadedCode18555 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Shell_ReadLine_StartLink_next, (Optr)&t_method_return);
-    Method PMethod18554 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18555, 1, slot_Shell_ReadLine_StartLink_next);
+    Array PThreadedCode18553 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Shell_ReadLine_StartLink_next, (Optr)&t_method_return);
+    Method PMethod18552 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18553, 1, slot_Shell_ReadLine_StartLink_next);
     
-    MethodClosure MC_SMB_next = new_MethodClosure((Method)PMethod18554, Shell_ReadLine_StartLink_Class);
+    MethodClosure MC_SMB_next = new_MethodClosure((Method)PMethod18552, Shell_ReadLine_StartLink_Class);
     store_method(Shell_ReadLine_StartLink_Class, SMB_next, MC_SMB_next);
 }
 
@@ -19,25 +19,25 @@ static void init_SMB_next() {
 static void init_SMB_next_() {
     Symbol SMB_next_ = new_Symbol(L"next:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray18557 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign18559 = new_Assign((Optr)slot_Shell_ReadLine_StartLink_next, (Optr)VAR_anObject_0_0);
+    Array PArray18555 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign18557 = new_Assign((Optr)slot_Shell_ReadLine_StartLink_next, (Optr)VAR_anObject_0_0);
     Symbol SMB_previous_ = new_Symbol(L"previous:");
     // previous:. 
-    Send PSend18560 = new_Send((Optr)VAR_anObject_0_0, SMB_previous_, 1, (Optr)self);
-    Array PThreadedCode18558 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign18559, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend18560, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod18556 = new_Method_with(PArray18557, empty_Array, empty_Array, PThreadedCode18558, 3, PAssign18559, PSend18560, self);
+    Send PSend18558 = new_Send((Optr)VAR_anObject_0_0, SMB_previous_, 1, (Optr)self);
+    Array PThreadedCode18556 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign18557, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend18558, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod18554 = new_Method_with(PArray18555, empty_Array, empty_Array, PThreadedCode18556, 3, PAssign18557, PSend18558, self);
     
-    MethodClosure MC_SMB_next_ = new_MethodClosure((Method)PMethod18556, Shell_ReadLine_StartLink_Class);
+    MethodClosure MC_SMB_next_ = new_MethodClosure((Method)PMethod18554, Shell_ReadLine_StartLink_Class);
     store_method(Shell_ReadLine_StartLink_Class, SMB_next_, MC_SMB_next_);
 }
 
 
 static void init_SMB_previous() {
     Symbol SMB_previous = new_Symbol(L"previous");
-    Array PThreadedCode18562 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod18561 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18562, 1, self);
+    Array PThreadedCode18560 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod18559 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode18560, 1, self);
     
-    MethodClosure MC_SMB_previous = new_MethodClosure((Method)PMethod18561, Shell_ReadLine_StartLink_Class);
+    MethodClosure MC_SMB_previous = new_MethodClosure((Method)PMethod18559, Shell_ReadLine_StartLink_Class);
     store_method(Shell_ReadLine_StartLink_Class, SMB_previous, MC_SMB_previous);
 }
 
