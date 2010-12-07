@@ -1,0 +1,23 @@
+#ifndef PINOCCHIO_LIB_CHRONOLOGY_PCHRONOLOGYCONSTANTS
+#define PINOCCHIO_LIB_CHRONOLOGY_PCHRONOLOGYCONSTANTS 
+
+#include <pinocchio.h>
+extern void init_Chronology_PChronologyConstants_methods();
+
+extern void init_Chronology_PChronologyConstants_layout();
+
+#include <lib/lib.h>
+
+extern Optr slot_Chronology_ChronologyConstants_Class_class_squeakEpoch;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_secondsInDay;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_secondsInHour;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_secondsInMinute;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_nanosInSecond;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_nanosInMillisecond;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_dayNames;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_monthNames;
+extern Optr slot_Chronology_ChronologyConstants_Class_class_daysInMonth;
+extern Optr layout_Chronology_ChronologyConstants_Class_class;
+
+
+#endif //PINOCCHIO_LIB_CHRONOLOGY_PCHRONOLOGYCONSTANTS

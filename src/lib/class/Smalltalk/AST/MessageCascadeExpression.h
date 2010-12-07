@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGECASCADEEXPRESSION
+#define PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGECASCADEEXPRESSION 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_AST_ASTMessageCascadeExpression_methods();
+
+extern void init_Smalltalk_AST_ASTMessageCascadeExpression_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_AST_MessageCascadeExpression_Class_class;
+extern Optr slot_Smalltalk_AST_MessageCascadeExpression_receiver;
+extern Optr slot_Smalltalk_AST_MessageCascadeExpression_cascades;
+extern Optr layout_Smalltalk_AST_MessageCascadeExpression;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGECASCADEEXPRESSION

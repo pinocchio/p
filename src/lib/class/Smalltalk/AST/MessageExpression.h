@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGEEXPRESSION
+#define PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGEEXPRESSION 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_AST_ASTMessageExpression_methods();
+
+extern void init_Smalltalk_AST_ASTMessageExpression_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_AST_MessageExpression_Class_class;
+extern Optr slot_Smalltalk_AST_MessageExpression_receiver;
+extern Optr slot_Smalltalk_AST_MessageExpression_arguments;
+extern Optr layout_Smalltalk_AST_MessageExpression;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_AST_ASTMESSAGEEXPRESSION

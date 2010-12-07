@@ -1,0 +1,16 @@
+#ifndef PINOCCHIO_LIB_SMALLTALK_AST_ASTBINARYMESSAGEDEFINITION
+#define PINOCCHIO_LIB_SMALLTALK_AST_ASTBINARYMESSAGEDEFINITION 
+
+#include <pinocchio.h>
+extern void init_Smalltalk_AST_ASTBinaryMessageDefinition_methods();
+
+extern void init_Smalltalk_AST_ASTBinaryMessageDefinition_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Smalltalk_AST_BinaryMessageDefinition_Class_class;
+extern Optr slot_Smalltalk_AST_BinaryMessageDefinition_parameter;
+extern Optr layout_Smalltalk_AST_BinaryMessageDefinition;
+
+
+#endif //PINOCCHIO_LIB_SMALLTALK_AST_ASTBINARYMESSAGEDEFINITION

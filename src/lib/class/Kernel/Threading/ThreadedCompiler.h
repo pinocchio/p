@@ -1,0 +1,20 @@
+#ifndef PINOCCHIO_LIB_KERNEL_THREADING_PTHREADEDCOMPILER
+#define PINOCCHIO_LIB_KERNEL_THREADING_PTHREADEDCOMPILER 
+
+#include <pinocchio.h>
+extern void init_Kernel_Threading_PThreadedCompiler_methods();
+
+extern void init_Kernel_Threading_PThreadedCompiler_layout();
+
+#include <lib/lib.h>
+
+extern Optr slot_Kernel_Threading_ThreadedCompiler_Class_class_functionPointers;
+extern Optr layout_Kernel_Threading_ThreadedCompiler_Class_class;
+extern Optr slot_Kernel_Threading_ThreadedCompiler_code;
+extern Optr slot_Kernel_Threading_ThreadedCompiler_internalConstantCode;
+extern Optr slot_Kernel_Threading_ThreadedCompiler_scopes;
+extern Optr slot_Kernel_Threading_ThreadedCompiler_optimizers;
+extern Optr layout_Kernel_Threading_ThreadedCompiler;
+
+
+#endif //PINOCCHIO_LIB_KERNEL_THREADING_PTHREADEDCOMPILER

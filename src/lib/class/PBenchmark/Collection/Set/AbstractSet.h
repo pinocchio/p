@@ -1,0 +1,17 @@
+#ifndef PINOCCHIO_LIB_PBENCHMARK_COLLECTION_SET_PBABSTRACTSET
+#define PINOCCHIO_LIB_PBENCHMARK_COLLECTION_SET_PBABSTRACTSET 
+
+#include <pinocchio.h>
+extern void init_PBenchmark_Collection_Set_PBAbstractSet_methods();
+
+extern void init_PBenchmark_Collection_Set_PBAbstractSet_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_PBenchmark_Collection_Set_AbstractSet_Class_class;
+extern Optr slot_PBenchmark_Collection_Set_AbstractSet_set;
+extern Optr slot_PBenchmark_Collection_Set_AbstractSet_setSize;
+extern Optr layout_PBenchmark_Collection_Set_AbstractSet;
+
+
+#endif //PINOCCHIO_LIB_PBENCHMARK_COLLECTION_SET_PBABSTRACTSET

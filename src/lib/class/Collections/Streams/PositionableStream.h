@@ -1,0 +1,18 @@
+#ifndef PINOCCHIO_LIB_COLLECTIONS_STREAMS_POSITIONABLESTREAM
+#define PINOCCHIO_LIB_COLLECTIONS_STREAMS_POSITIONABLESTREAM 
+
+#include <pinocchio.h>
+extern void init_Collections_Streams_PositionableStream_methods();
+
+extern void init_Collections_Streams_PositionableStream_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Collections_Streams_PositionableStream_Class_class;
+extern Optr slot_Collections_Streams_PositionableStream_collection;
+extern Optr slot_Collections_Streams_PositionableStream_position;
+extern Optr slot_Collections_Streams_PositionableStream_readLimit;
+extern Optr layout_Collections_Streams_PositionableStream;
+
+
+#endif //PINOCCHIO_LIB_COLLECTIONS_STREAMS_POSITIONABLESTREAM

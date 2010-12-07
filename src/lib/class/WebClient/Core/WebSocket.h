@@ -1,0 +1,23 @@
+#ifndef PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSOCKET
+#define PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSOCKET 
+
+#include <pinocchio.h>
+extern void init_WebClient_Core_PWebSocket_methods();
+
+extern void init_WebClient_Core_PWebSocket_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_WebClient_Core_WebSocket_Class_class;
+extern Optr slot_WebClient_Core_WebSocket_name;
+extern Optr slot_WebClient_Core_WebSocket_process;
+extern Optr slot_WebClient_Core_WebSocket_stream;
+extern Optr slot_WebClient_Core_WebSocket_frameType;
+extern Optr slot_WebClient_Core_WebSocket_frameData;
+extern Optr slot_WebClient_Core_WebSocket_messageBlock;
+extern Optr slot_WebClient_Core_WebSocket_errorBlock;
+extern Optr slot_WebClient_Core_WebSocket_closeBlock;
+extern Optr layout_WebClient_Core_WebSocket;
+
+
+#endif //PINOCCHIO_LIB_WEBCLIENT_CORE_PWEBSOCKET
