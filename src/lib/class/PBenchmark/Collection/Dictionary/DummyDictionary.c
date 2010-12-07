@@ -10,21 +10,21 @@ static void init_SMB_at_ifAbsentPut_() {
     Symbol SMB_at_ifAbsentPut_ = new_Symbol(L"at:ifAbsentPut:");
     Variable VAR_aSmallInteger_0_0 = new_Variable_named(L"aSmallInteger", 0);
     Variable VAR_aSmallInteger2_0_1 = new_Variable_named(L"aSmallInteger2", 0);
-    Array PArray24927 = new_Array_with(2, (Optr)VAR_aSmallInteger_0_0, (Optr)VAR_aSmallInteger2_0_1);
-    Array PThreadedCode24928 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod24926 = new_Method_with(PArray24927, empty_Array, empty_Array, PThreadedCode24928, 1, self);
+    Array PArray24932 = new_Array_with(2, (Optr)VAR_aSmallInteger_0_0, (Optr)VAR_aSmallInteger2_0_1);
+    Array PThreadedCode24933 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod24931 = new_Method_with(PArray24932, empty_Array, empty_Array, PThreadedCode24933, 1, self);
     
-    MethodClosure MC_SMB_at_ifAbsentPut_ = new_MethodClosure((Method)PMethod24926, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_at_ifAbsentPut_ = new_MethodClosure((Method)PMethod24931, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_at_ifAbsentPut_, MC_SMB_at_ifAbsentPut_);
 }
 
 
 static void init_SMB_size() {
     Symbol SMB_size = new_Symbol(L"size");
-    Array PThreadedCode24930 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)&t_method_return);
-    Method PMethod24929 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24930, 1, slot_PBenchmark_Collection_Dictionary_DummyDictionary_size);
+    Array PThreadedCode24935 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)&t_method_return);
+    Method PMethod24934 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24935, 1, slot_PBenchmark_Collection_Dictionary_DummyDictionary_size);
     
-    MethodClosure MC_SMB_size = new_MethodClosure((Method)PMethod24929, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_size = new_MethodClosure((Method)PMethod24934, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_size, MC_SMB_size);
 }
 
@@ -32,12 +32,12 @@ static void init_SMB_size() {
 static void init_SMB_size_() {
     Symbol SMB_size_ = new_Symbol(L"size:");
     Variable VAR_number_0_0 = new_Variable_named(L"number", 0);
-    Array PArray24932 = new_Array_with(1, (Optr)VAR_number_0_0);
-    Assign PAssign24934 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)VAR_number_0_0);
-    Array PThreadedCode24933 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24934, (Optr)&t_push_variable, (Optr)VAR_number_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24931 = new_Method_with(PArray24932, empty_Array, empty_Array, PThreadedCode24933, 2, PAssign24934, self);
+    Array PArray24937 = new_Array_with(1, (Optr)VAR_number_0_0);
+    Assign PAssign24939 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)VAR_number_0_0);
+    Array PThreadedCode24938 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24939, (Optr)&t_push_variable, (Optr)VAR_number_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24936 = new_Method_with(PArray24937, empty_Array, empty_Array, PThreadedCode24938, 2, PAssign24939, self);
     
-    MethodClosure MC_SMB_size_ = new_MethodClosure((Method)PMethod24931, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_size_ = new_MethodClosure((Method)PMethod24936, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_size_, MC_SMB_size_);
 }
 
@@ -45,11 +45,11 @@ static void init_SMB_size_() {
 static void init_SMB_removeKey_() {
     Symbol SMB_removeKey_ = new_Symbol(L"removeKey:");
     Variable VAR_value_0_0 = new_Variable_named(L"value", 0);
-    Array PArray24936 = new_Array_with(1, (Optr)VAR_value_0_0);
-    Array PThreadedCode24937 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod24935 = new_Method_with(PArray24936, empty_Array, empty_Array, PThreadedCode24937, 1, self);
+    Array PArray24941 = new_Array_with(1, (Optr)VAR_value_0_0);
+    Array PThreadedCode24942 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod24940 = new_Method_with(PArray24941, empty_Array, empty_Array, PThreadedCode24942, 1, self);
     
-    MethodClosure MC_SMB_removeKey_ = new_MethodClosure((Method)PMethod24935, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_removeKey_ = new_MethodClosure((Method)PMethod24940, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_removeKey_, MC_SMB_removeKey_);
 }
 
@@ -58,11 +58,11 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
-    Assign PAssign24940 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)int_0_Const);
-    Array PThreadedCode24939 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)PAssign24940, (Optr)&t_push_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24938 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24939, 2, PAssign24940, self);
+    Assign PAssign24945 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_DummyDictionary_size, (Optr)int_0_Const);
+    Array PThreadedCode24944 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)PAssign24945, (Optr)&t_push_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24943 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24944, 2, PAssign24945, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24938, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24943, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -70,11 +70,11 @@ static void init_SMB_initialize() {
 static void init_SMB_do_() {
     Symbol SMB_do_ = new_Symbol(L"do:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray24942 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
-    Array PThreadedCode24943 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod24941 = new_Method_with(PArray24942, empty_Array, empty_Array, PThreadedCode24943, 1, self);
+    Array PArray24947 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PThreadedCode24948 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod24946 = new_Method_with(PArray24947, empty_Array, empty_Array, PThreadedCode24948, 1, self);
     
-    MethodClosure MC_SMB_do_ = new_MethodClosure((Method)PMethod24941, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_do_ = new_MethodClosure((Method)PMethod24946, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_do_, MC_SMB_do_);
 }
 
@@ -82,11 +82,11 @@ static void init_SMB_do_() {
 static void init_SMB_keysAndValuesDo_() {
     Symbol SMB_keysAndValuesDo_ = new_Symbol(L"keysAndValuesDo:");
     Variable VAR_aBlockClosure_0_0 = new_Variable_named(L"aBlockClosure", 0);
-    Array PArray24945 = new_Array_with(1, (Optr)VAR_aBlockClosure_0_0);
-    Array PThreadedCode24946 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod24944 = new_Method_with(PArray24945, empty_Array, empty_Array, PThreadedCode24946, 1, self);
+    Array PArray24950 = new_Array_with(1, (Optr)VAR_aBlockClosure_0_0);
+    Array PThreadedCode24951 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod24949 = new_Method_with(PArray24950, empty_Array, empty_Array, PThreadedCode24951, 1, self);
     
-    MethodClosure MC_SMB_keysAndValuesDo_ = new_MethodClosure((Method)PMethod24944, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
+    MethodClosure MC_SMB_keysAndValuesDo_ = new_MethodClosure((Method)PMethod24949, PBenchmark_Collection_Dictionary_DummyDictionary_Class);
     store_method(PBenchmark_Collection_Dictionary_DummyDictionary_Class, SMB_keysAndValuesDo_, MC_SMB_keysAndValuesDo_);
 }
 
@@ -94,17 +94,17 @@ static void init_SMB_keysAndValuesDo_() {
 static void init_class_SMB_new_() {
     Symbol SMB_new_ = new_Symbol(L"new:");
     Variable VAR_size_0_0 = new_Variable_named(L"size", 0);
-    Array PArray24948 = new_Array_with(1, (Optr)VAR_size_0_0);
+    Array PArray24953 = new_Array_with(1, (Optr)VAR_size_0_0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend24950 = new_Send((Optr)self, SMB_new, 0);
+    Send PSend24955 = new_Send((Optr)self, SMB_new, 0);
     Symbol SMB_size_ = new_Symbol(L"size:");
     // size:. 
-    Send PSend24951 = new_Send((Optr)PSend24950, SMB_size_, 1, (Optr)VAR_size_0_0);
-    Array PThreadedCode24949 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend24950, (Optr)&t_push_variable, (Optr)VAR_size_0_0, (Optr)&t_send1, (Optr)PSend24951, (Optr)&t_method_return);
-    Method PMethod24947 = new_Method_with(PArray24948, empty_Array, empty_Array, PThreadedCode24949, 1, PSend24951);
+    Send PSend24956 = new_Send((Optr)PSend24955, SMB_size_, 1, (Optr)VAR_size_0_0);
+    Array PThreadedCode24954 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend24955, (Optr)&t_push_variable, (Optr)VAR_size_0_0, (Optr)&t_send1, (Optr)PSend24956, (Optr)&t_method_return);
+    Method PMethod24952 = new_Method_with(PArray24953, empty_Array, empty_Array, PThreadedCode24954, 1, PSend24956);
     
-    MethodClosure MC_SMB_new_ = new_MethodClosure((Method)PMethod24947, HEADER(PBenchmark_Collection_Dictionary_DummyDictionary_Class));
+    MethodClosure MC_SMB_new_ = new_MethodClosure((Method)PMethod24952, HEADER(PBenchmark_Collection_Dictionary_DummyDictionary_Class));
     store_method(HEADER(PBenchmark_Collection_Dictionary_DummyDictionary_Class), SMB_new_, MC_SMB_new_);
 }
 

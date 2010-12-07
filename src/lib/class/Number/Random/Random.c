@@ -23,7 +23,7 @@ static void init_SMB_seed_() {
 static void init_SMB_next() {
     /*
     next
-// 	^ self instance next.
+// 	^ self instance next
     */
     Symbol SMB_next = new_Symbol(L"next");
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
@@ -54,6 +54,10 @@ static void init_SMB_initialize() {
 
 
 static void init_SMB_nextInt_() {
+    /*
+    nextInt: max
+// 	^ self instance nextInt: max.
+    */
     Symbol SMB_nextInt_ = new_Symbol(L"nextInt:");
     Variable VAR_anInteger_0_0 = new_Variable_named(L"anInteger", 0);
     Array PArray21644 = new_Array_with(1, (Optr)VAR_anInteger_0_0);
@@ -187,6 +191,23 @@ static void init_class_SMB_instance() {
     store_method(HEADER(Number_Random_Random_Class), SMB_instance, MC_SMB_instance);
 }
 
+
+static void init_class_SMB_nextInt_() {
+    Symbol SMB_nextInt_ = new_Symbol(L"nextInt:");
+    Variable VAR_max_0_0 = new_Variable_named(L"max", 0);
+    Array PArray21693 = new_Array_with(1, (Optr)VAR_max_0_0);
+    Symbol SMB_instance = new_Symbol(L"instance");
+    // instance. 
+    Send PSend21695 = new_Send((Optr)self, SMB_instance, 0);
+    // nextInt:. 
+    Send PSend21696 = new_Send((Optr)PSend21695, SMB_nextInt_, 1, (Optr)VAR_max_0_0);
+    Array PThreadedCode21694 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21695, (Optr)&t_push_variable, (Optr)VAR_max_0_0, (Optr)&t_send1, (Optr)PSend21696, (Optr)&t_method_return);
+    Method PMethod21692 = new_Method_with(PArray21693, empty_Array, empty_Array, PThreadedCode21694, 1, PSend21696);
+    
+    MethodClosure MC_SMB_nextInt_ = new_MethodClosure((Method)PMethod21692, HEADER(Number_Random_Random_Class));
+    store_method(HEADER(Number_Random_Random_Class), SMB_nextInt_, MC_SMB_nextInt_);
+}
+
 void init_Number_Random_PRandom_layout() {
     slot_Number_Random_Random_Class_class_instance = (Optr)new_Slot(5, L"instance");
     layout_Number_Random_Random_Class_class = (Optr)create_layout_with_vars(ObjectLayout_Class, 6);
@@ -213,5 +234,6 @@ void init_Number_Random_PRandom_methods() {
     init_class_SMB_randomArray_();
     init_class_SMB_reset();
     init_class_SMB_instance();
+    init_class_SMB_nextInt_();
     
 }
