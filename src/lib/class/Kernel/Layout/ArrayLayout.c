@@ -69,57 +69,57 @@ static void init_SMB_accept_() {
 }
 
 
-static void init_SMB_basicInstantiate_sized_() {
-    Symbol SMB_basicInstantiate_sized_ = new_Symbol(L"basicInstantiate:sized:");
-    Variable VAR_class_0_0 = new_Variable_named(L"class", 0);
-    Variable VAR_sizeRequested_0_1 = new_Variable_named(L"sizeRequested", 0);
-    Array PArray5149 = new_Array_with(2, (Optr)VAR_class_0_0, (Optr)VAR_sizeRequested_0_1);
-    Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
-    Symbol SMB_Class_minus_Layout_minus_Array = new_Symbol(L"Class.Layout.Array");
-    Annotation PAnnotation5151 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_basicInstantiate_sized_, (Optr)SMB_Class_minus_Layout_minus_Array);
-    Array PArray5150 = new_Array_with(1, (Optr)PAnnotation5151);
-    Symbol SMB_primitiveFailed = new_Symbol(L"primitiveFailed");
-    // primitiveFailed. 
-    Send PSend5153 = new_Send((Optr)self, SMB_primitiveFailed, 0);
-    Array PThreadedCode5152 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend5153, (Optr)&t_zap, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod5148 = new_NativeMethod_with(PArray5149, empty_Array, PArray5150, PThreadedCode5152, 2, PSend5153, self);
-    
-    MethodClosure MC_SMB_basicInstantiate_sized_ = new_MethodClosure((Method)PNativeMethod5148, ArrayLayout_Class);
-    store_method(ArrayLayout_Class, SMB_basicInstantiate_sized_, MC_SMB_basicInstantiate_sized_);
-}
-
-
 static void init_SMB_inspectChildrenFrom_on_() {
     Symbol SMB_inspectChildrenFrom_on_ = new_Symbol(L"inspectChildrenFrom:on:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
     Variable VAR_inspector_0_1 = new_Variable_named(L"inspector", 0);
-    Array PArray5155 = new_Array_with(2, (Optr)VAR_anObject_0_0, (Optr)VAR_inspector_0_1);
-    Super PSuper5157 = new_Super(SMB_inspectChildrenFrom_on_, 2, (Optr)VAR_anObject_0_0, (Optr)VAR_inspector_0_1);
+    Array PArray5149 = new_Array_with(2, (Optr)VAR_anObject_0_0, (Optr)VAR_inspector_0_1);
+    Super PSuper5151 = new_Super(SMB_inspectChildrenFrom_on_, 2, (Optr)VAR_anObject_0_0, (Optr)VAR_inspector_0_1);
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
-    Send PSend5158 = new_Send((Optr)VAR_anObject_0_0, SMB_size, 0);
+    Send PSend5152 = new_Send((Optr)VAR_anObject_0_0, SMB_size, 0);
     Variable VAR_index_1_0 = new_Variable_named(L"index", 1);
-    Array PArray5160 = new_Array_with(1, (Optr)VAR_index_1_0);
+    Array PArray5154 = new_Array_with(1, (Optr)VAR_index_1_0);
     Symbol SMB_at_ = new_Symbol(L"at:");
     // at:. 
-    Send PSend5164 = new_Send((Optr)VAR_anObject_0_0, SMB_at_, 1, (Optr)VAR_index_1_0);
-    Array PThreadedCode5163 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_variable, (Optr)VAR_index_1_0, (Optr)&t_send1, (Optr)PSend5164, (Optr)&t_block_return);
-    Block PBlock5162 = new_Block_with(empty_Array, empty_Array, PThreadedCode5163, 1, PSend5164);
+    Send PSend5158 = new_Send((Optr)VAR_anObject_0_0, SMB_at_, 1, (Optr)VAR_index_1_0);
+    Array PThreadedCode5157 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_variable, (Optr)VAR_index_1_0, (Optr)&t_send1, (Optr)PSend5158, (Optr)&t_block_return);
+    Block PBlock5156 = new_Block_with(empty_Array, empty_Array, PThreadedCode5157, 1, PSend5158);
     Symbol SMB_child_value_ = new_Symbol(L"child:value:");
     // child:value:. 
-    Send PSend5165 = new_Send((Optr)VAR_inspector_0_1, SMB_child_value_, 2, (Optr)VAR_index_1_0, (Optr)PBlock5162);
-    Array PThreadedCode5161 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_inspector_0_1, (Optr)&t_push_variable, (Optr)VAR_index_1_0, (Optr)&t_push_closure, (Optr)PBlock5162, (Optr)&t_send2, (Optr)PSend5165, (Optr)&t_method_return);
-    Block PBlock5159 = new_Block_with(PArray5160, empty_Array, PThreadedCode5161, 1, PSend5165);
+    Send PSend5159 = new_Send((Optr)VAR_inspector_0_1, SMB_child_value_, 2, (Optr)VAR_index_1_0, (Optr)PBlock5156);
+    Array PThreadedCode5155 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR_inspector_0_1, (Optr)&t_push_variable, (Optr)VAR_index_1_0, (Optr)&t_push_closure, (Optr)PBlock5156, (Optr)&t_send2, (Optr)PSend5159, (Optr)&t_method_return);
+    Block PBlock5153 = new_Block_with(PArray5154, empty_Array, PThreadedCode5155, 1, PSend5159);
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     Symbol SMB_to_do_ = new_Symbol(L"to:do:");
     // to:do:. 
-    Send PSend5166 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend5158, (Optr)PBlock5159);
-    Array PThreadedCode5156 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_variable, (Optr)VAR_inspector_0_1, (Optr)&t_super2, (Optr)PSuper5157, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_send0, (Optr)PSend5158, (Optr)&t_push_closure, (Optr)PBlock5159, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend5166, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod5154 = new_Method_with(PArray5155, empty_Array, empty_Array, PThreadedCode5156, 3, PSuper5157, PSend5166, self);
+    Send PSend5160 = new_Send((Optr)int_1_Const, SMB_to_do_, 2, (Optr)PSend5152, (Optr)PBlock5153);
+    Array PThreadedCode5150 = instantiate_Array_with(ThreadedCode_Class, 0, 20, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_push_variable, (Optr)VAR_inspector_0_1, (Optr)&t_super2, (Optr)PSuper5151, (Optr)&t_zap, (Optr)&t_push_1, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_send0, (Optr)PSend5152, (Optr)&t_push_closure, (Optr)PBlock5153, (Optr)&t_send_to_do_, (Optr)&t_continue_to_do_, (Optr)PSend5160, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod5148 = new_Method_with(PArray5149, empty_Array, empty_Array, PThreadedCode5150, 3, PSuper5151, PSend5160, self);
     
-    MethodClosure MC_SMB_inspectChildrenFrom_on_ = new_MethodClosure((Method)PMethod5154, ArrayLayout_Class);
+    MethodClosure MC_SMB_inspectChildrenFrom_on_ = new_MethodClosure((Method)PMethod5148, ArrayLayout_Class);
     store_method(ArrayLayout_Class, SMB_inspectChildrenFrom_on_, MC_SMB_inspectChildrenFrom_on_);
+}
+
+
+static void init_SMB_basicInstantiate_sized_() {
+    Symbol SMB_basicInstantiate_sized_ = new_Symbol(L"basicInstantiate:sized:");
+    Variable VAR_class_0_0 = new_Variable_named(L"class", 0);
+    Variable VAR_sizeRequested_0_1 = new_Variable_named(L"sizeRequested", 0);
+    Array PArray5162 = new_Array_with(2, (Optr)VAR_class_0_0, (Optr)VAR_sizeRequested_0_1);
+    Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
+    Symbol SMB_Class_minus_Layout_minus_Array = new_Symbol(L"Class.Layout.Array");
+    Annotation PAnnotation5164 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_basicInstantiate_sized_, (Optr)SMB_Class_minus_Layout_minus_Array);
+    Array PArray5163 = new_Array_with(1, (Optr)PAnnotation5164);
+    Symbol SMB_primitiveFailed = new_Symbol(L"primitiveFailed");
+    // primitiveFailed. 
+    Send PSend5166 = new_Send((Optr)self, SMB_primitiveFailed, 0);
+    Array PThreadedCode5165 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend5166, (Optr)&t_zap, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod5161 = new_NativeMethod_with(PArray5162, empty_Array, PArray5163, PThreadedCode5165, 2, PSend5166, self);
+    
+    MethodClosure MC_SMB_basicInstantiate_sized_ = new_MethodClosure((Method)PNativeMethod5161, ArrayLayout_Class);
+    store_method(ArrayLayout_Class, SMB_basicInstantiate_sized_, MC_SMB_basicInstantiate_sized_);
 }
 
 
@@ -172,8 +172,8 @@ void init_Kernel_Layout_PArrayLayout_methods() {
     init_SMB_aliasChildrenFrom_to_in_();
     init_SMB_basicInstantiate_();
     init_SMB_accept_();
-    init_SMB_basicInstantiate_sized_();
     init_SMB_inspectChildrenFrom_on_();
+    init_SMB_basicInstantiate_sized_();
     init_SMB_alias_in_();
     
 }

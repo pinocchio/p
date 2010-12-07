@@ -11,19 +11,11 @@ static void init_SMB_benchFib() {
     Constant int_31_Const = new_Constant((Optr)int_31);
     Symbol SMB_fib = new_Symbol(L"fib");
     // fib. 
-<<<<<<< HEAD
-    Send PSend25086 = new_Send((Optr)int_31_Const, SMB_fib, 0);
-    Array PThreadedCode25085 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)int_31, (Optr)&t_send0, (Optr)PSend25086, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod25084 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode25085, 2, PSend25086, self);
+    Send PSend25124 = new_Send((Optr)int_31_Const, SMB_fib, 0);
+    Array PThreadedCode25123 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)int_31, (Optr)&t_send0, (Optr)PSend25124, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod25122 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode25123, 2, PSend25124, self);
     
-    MethodClosure MC_SMB_benchFib = new_MethodClosure((Method)PMethod25084, PBenchmark_Fib_Class);
-=======
-    Send PSend24903 = new_Send((Optr)int_31_Const, SMB_fib, 0);
-    Array PThreadedCode24902 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push1, (Optr)int_31, (Optr)&t_send0, (Optr)PSend24903, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24901 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24902, 2, PSend24903, self);
-    
-    MethodClosure MC_SMB_benchFib = new_MethodClosure((Method)PMethod24901, PBenchmark_Fib_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
+    MethodClosure MC_SMB_benchFib = new_MethodClosure((Method)PMethod25122, PBenchmark_Fib_Class);
     store_method(PBenchmark_Fib_Class, SMB_benchFib, MC_SMB_benchFib);
 }
 

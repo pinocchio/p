@@ -8,7 +8,6 @@ Optr layout_PEG_PushCharacterTerminal;
 static void init_SMB_parseOn_() {
     Symbol SMB_parseOn_ = new_Symbol(L"parseOn:");
     Variable VAR_input_0_0 = new_Variable_named(L"input", 0);
-<<<<<<< HEAD
     Array PArray19989 = new_Array_with(1, (Optr)VAR_input_0_0);
     Symbol SMB_scanPushCharacter_ = new_Symbol(L"scanPushCharacter:");
     // scanPushCharacter:. 
@@ -17,16 +16,6 @@ static void init_SMB_parseOn_() {
     Method PMethod19988 = new_Method_with(PArray19989, empty_Array, empty_Array, PThreadedCode19990, 1, PSend19991);
     
     MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19988, PEG_PushCharacterTerminal_Class);
-=======
-    Array PArray19955 = new_Array_with(1, (Optr)VAR_input_0_0);
-    Symbol SMB_scanPushCharacter_ = new_Symbol(L"scanPushCharacter:");
-    // scanPushCharacter:. 
-    Send PSend19957 = new_Send((Optr)VAR_input_0_0, SMB_scanPushCharacter_, 1, (Optr)slot_PEG_Terminal_terminal);
-    Array PThreadedCode19956 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_input_0_0, (Optr)&t_push_slot, (Optr)slot_PEG_Terminal_terminal, (Optr)&t_send1, (Optr)PSend19957, (Optr)&t_method_return);
-    Method PMethod19954 = new_Method_with(PArray19955, empty_Array, empty_Array, PThreadedCode19956, 1, PSend19957);
-    
-    MethodClosure MC_SMB_parseOn_ = new_MethodClosure((Method)PMethod19954, PEG_PushCharacterTerminal_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PEG_PushCharacterTerminal_Class, SMB_parseOn_, MC_SMB_parseOn_);
 }
 

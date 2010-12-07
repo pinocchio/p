@@ -6,37 +6,17 @@ Optr slot_PBenchmark_AbstractBenchmark_probeCount;
 Optr layout_PBenchmark_AbstractBenchmark;
 
 
-static void init_SMB_gaussianConfidenceFactor() {
-    Symbol SMB_gaussianConfidenceFactor = new_Symbol(L"gaussianConfidenceFactor");
-    Float float_1_644853626951 = new_Float(1.644853626951);
-    Array PThreadedCode6863 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push1, (Optr)float_1_644853626951, (Optr)&t_method_return);
-    Constant float_1_644853626951_Const = new_Constant((Optr)float_1_644853626951);
-    Method PMethod6862 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6863, 1, float_1_644853626951_Const);
-    
-    MethodClosure MC_SMB_gaussianConfidenceFactor = new_MethodClosure((Method)PMethod6862, PBenchmark_AbstractBenchmark_Class);
-    store_method(PBenchmark_AbstractBenchmark_Class, SMB_gaussianConfidenceFactor, MC_SMB_gaussianConfidenceFactor);
-}
-
-
 static void init_SMB_confidenceVariance() {
     Symbol SMB_confidenceVariance = new_Symbol(L"confidenceVariance");
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-<<<<<<< HEAD
     Array PArray6865 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_probeCount = new_Symbol(L"probeCount");
     // probeCount. 
     Send PSend6867 = new_Send((Optr)self, SMB_probeCount, 0);
-=======
-    Array PArray6867 = new_Array_with(1, (Optr)VAR__return__1_0);
-    Symbol SMB_probeCount = new_Symbol(L"probeCount");
-    // probeCount. 
-    Send PSend6869 = new_Send((Optr)self, SMB_probeCount, 0);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_30 = new_SmallInt(30);
     Symbol SMB__gt__equals_ = new_Symbol(L">=");
     Constant int_30_Const = new_Constant((Optr)int_30);
     // >=. 
-<<<<<<< HEAD
     Send PSend6868 = new_Send((Optr)PSend6867, SMB__gt__equals_, 1, (Optr)int_30_Const);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_gaussianConfidenceFactor = new_Symbol(L"gaussianConfidenceFactor");
@@ -90,61 +70,6 @@ static void init_SMB_confidenceVariance() {
     Method PMethod6862 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6863, 1, PSend6887);
     
     MethodClosure MC_SMB_confidenceVariance = new_MethodClosure((Method)PMethod6862, PBenchmark_AbstractBenchmark_Class);
-=======
-    Send PSend6870 = new_Send((Optr)PSend6869, SMB__gt__equals_, 1, (Optr)int_30_Const);
-    Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    Symbol SMB_gaussianConfidenceFactor = new_Symbol(L"gaussianConfidenceFactor");
-    // gaussianConfidenceFactor. 
-    Send PSend6874 = new_Send((Optr)self, SMB_gaussianConfidenceFactor, 0);
-    Symbol SMB_stdev = new_Symbol(L"stdev");
-    // stdev. 
-    Send PSend6875 = new_Send((Optr)self, SMB_stdev, 0);
-    Symbol SMB__times_ = new_Symbol(L"*");
-    // *. 
-    Send PSend6876 = new_Send((Optr)PSend6874, SMB__times_, 1, (Optr)PSend6875);
-    // probeCount. 
-    Send PSend6877 = new_Send((Optr)self, SMB_probeCount, 0);
-    Symbol SMB_asFloat = new_Symbol(L"asFloat");
-    // asFloat. 
-    Send PSend6878 = new_Send((Optr)PSend6877, SMB_asFloat, 0);
-    Symbol SMB_sqrt = new_Symbol(L"sqrt");
-    // sqrt. 
-    Send PSend6879 = new_Send((Optr)PSend6878, SMB_sqrt, 0);
-    Symbol SMB__divide_ = new_Symbol(L"/");
-    // /. 
-    Send PSend6880 = new_Send((Optr)PSend6876, SMB__divide_, 1, (Optr)PSend6879);
-    Symbol SMB_escape_ = new_Symbol(L"escape:");
-    // escape:. 
-    Send PSend6881 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend6880);
-    Array PThreadedCode6873 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6874, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6875, (Optr)&t_send1, (Optr)PSend6876, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6877, (Optr)&t_send0, (Optr)PSend6878, (Optr)&t_send0, (Optr)PSend6879, (Optr)&t_send1, (Optr)PSend6880, (Optr)&t_send1, (Optr)PSend6881, (Optr)&t_block_return);
-    Block PBlock6872 = new_Block_with(empty_Array, empty_Array, PThreadedCode6873, 1, PSend6881);
-    // ifTrue:. 
-    Send PSend6871 = new_Send((Optr)PSend6870, SMB_ifTrue_, 1, (Optr)PBlock6872);
-    Symbol SMB_studentsTConfidenceFactor = new_Symbol(L"studentsTConfidenceFactor");
-    // studentsTConfidenceFactor. 
-    Send PSend6882 = new_Send((Optr)self, SMB_studentsTConfidenceFactor, 0);
-    // stdev. 
-    Send PSend6883 = new_Send((Optr)self, SMB_stdev, 0);
-    // *. 
-    Send PSend6884 = new_Send((Optr)PSend6882, SMB__times_, 1, (Optr)PSend6883);
-    // probeCount. 
-    Send PSend6885 = new_Send((Optr)self, SMB_probeCount, 0);
-    // asFloat. 
-    Send PSend6886 = new_Send((Optr)PSend6885, SMB_asFloat, 0);
-    // sqrt. 
-    Send PSend6887 = new_Send((Optr)PSend6886, SMB_sqrt, 0);
-    // /. 
-    Send PSend6888 = new_Send((Optr)PSend6884, SMB__divide_, 1, (Optr)PSend6887);
-    Array PThreadedCode6868 = instantiate_Array_with(ThreadedCode_Class, 0, 29, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6869, (Optr)&t_push1, (Optr)int_30, (Optr)&t_send1, (Optr)PSend6870, (Optr)&t_send_ifTrue_, (Optr)PSend6871, (Optr)PBlock6872, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6882, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6883, (Optr)&t_send1, (Optr)PSend6884, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6885, (Optr)&t_send0, (Optr)PSend6886, (Optr)&t_send0, (Optr)PSend6887, (Optr)&t_send1, (Optr)PSend6888, (Optr)&t_method_return);
-    Block PBlock6866 = new_Block_with(PArray6867, empty_Array, PThreadedCode6868, 2, PSend6871, PSend6888);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    // on:. 
-    Send PSend6889 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock6866);
-    Array PThreadedCode6865 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock6866, (Optr)&t_send1, (Optr)PSend6889, (Optr)&t_method_return);
-    Method PMethod6864 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6865, 1, PSend6889);
-    
-    MethodClosure MC_SMB_confidenceVariance = new_MethodClosure((Method)PMethod6864, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_confidenceVariance, MC_SMB_confidenceVariance);
 }
 
@@ -154,7 +79,6 @@ static void init_SMB_currentMillis() {
     Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
     Symbol SMB_millisecondClock = new_Symbol(L"millisecondClock");
     Symbol SMB_Chronology_minus_Time = new_Symbol(L"Chronology.Time");
-<<<<<<< HEAD
     Annotation PAnnotation6890 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_millisecondClock, (Optr)SMB_Chronology_minus_Time);
     Array PArray6889 = new_Array_with(1, (Optr)PAnnotation6890);
     Symbol SMB_millisecondClockValue = new_Symbol(L"millisecondClockValue");
@@ -164,17 +88,6 @@ static void init_SMB_currentMillis() {
     NativeMethod PNativeMethod6888 = new_NativeMethod_with(empty_Array, empty_Array, PArray6889, PThreadedCode6891, 1, PSend6892);
     
     MethodClosure MC_SMB_currentMillis = new_MethodClosure((Method)PNativeMethod6888, PBenchmark_AbstractBenchmark_Class);
-=======
-    Annotation PAnnotation6892 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_millisecondClock, (Optr)SMB_Chronology_minus_Time);
-    Array PArray6891 = new_Array_with(1, (Optr)PAnnotation6892);
-    Symbol SMB_millisecondClockValue = new_Symbol(L"millisecondClockValue");
-    // millisecondClockValue. 
-    Send PSend6894 = new_Send((Optr)Time_classReference, SMB_millisecondClockValue, 0);
-    Array PThreadedCode6893 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_class_reference, (Optr)Time_classReference, (Optr)&t_send0, (Optr)PSend6894, (Optr)&t_method_return);
-    NativeMethod PNativeMethod6890 = new_NativeMethod_with(empty_Array, empty_Array, PArray6891, PThreadedCode6893, 1, PSend6894);
-    
-    MethodClosure MC_SMB_currentMillis = new_MethodClosure((Method)PNativeMethod6890, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_currentMillis, MC_SMB_currentMillis);
 }
 
@@ -182,309 +95,187 @@ static void init_SMB_currentMillis() {
 static void init_SMB_studentsTConfidenceFactor() {
     Symbol SMB_studentsTConfidenceFactor = new_Symbol(L"studentsTConfidenceFactor");
     Variable VAR_values_0_0 = new_Variable_named(L"values", 0);
-<<<<<<< HEAD
     Array PArray6894 = new_Array_with(1, (Optr)VAR_values_0_0);
-=======
-    Array PArray6896 = new_Array_with(1, (Optr)VAR_values_0_0);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Symbol SMB_new_ = new_Symbol(L"new:");
     SmallInt int_30 = new_SmallInt(30);
     Constant int_30_Const = new_Constant((Optr)int_30);
     // new:. 
-<<<<<<< HEAD
     Send PSend6897 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_30_Const);
     Assign PAssign6896 = new_Assign((Optr)VAR_values_0_0, (Optr)PSend6897);
-=======
-    Send PSend6899 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_30_Const);
-    Assign PAssign6898 = new_Assign((Optr)VAR_values_0_0, (Optr)PSend6899);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Float float_6_314 = new_Float(6.314);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     Constant float_6_314_Const = new_Constant((Optr)float_6_314);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6898 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)float_6_314_Const);
-=======
-    Send PSend6900 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)float_6_314_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Float float_2_92 = new_Float(2.92);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     Constant float_2_92_Const = new_Constant((Optr)float_2_92);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6899 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)float_2_92_Const);
-=======
-    Send PSend6901 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)float_2_92_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_3 = new_SmallInt(3);
     Float float_2_353 = new_Float(2.353);
     Constant int_3_Const = new_Constant((Optr)int_3);
     Constant float_2_353_Const = new_Constant((Optr)float_2_353);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6900 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)float_2_353_Const);
-=======
-    Send PSend6902 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)float_2_353_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_4 = new_SmallInt(4);
     Float float_2_132 = new_Float(2.132);
     Constant int_4_Const = new_Constant((Optr)int_4);
     Constant float_2_132_Const = new_Constant((Optr)float_2_132);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6901 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)float_2_132_Const);
-=======
-    Send PSend6903 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)float_2_132_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_5 = new_SmallInt(5);
     Float float_2_015 = new_Float(2.015);
     Constant int_5_Const = new_Constant((Optr)int_5);
     Constant float_2_015_Const = new_Constant((Optr)float_2_015);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6902 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_5_Const, (Optr)float_2_015_Const);
-=======
-    Send PSend6904 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_5_Const, (Optr)float_2_015_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_6 = new_SmallInt(6);
     Float float_1_943 = new_Float(1.943);
     Constant int_6_Const = new_Constant((Optr)int_6);
     Constant float_1_943_Const = new_Constant((Optr)float_1_943);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6903 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_6_Const, (Optr)float_1_943_Const);
-=======
-    Send PSend6905 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_6_Const, (Optr)float_1_943_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_7 = new_SmallInt(7);
     Float float_1_895 = new_Float(1.895);
     Constant int_7_Const = new_Constant((Optr)int_7);
     Constant float_1_895_Const = new_Constant((Optr)float_1_895);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6904 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_7_Const, (Optr)float_1_895_Const);
-=======
-    Send PSend6906 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_7_Const, (Optr)float_1_895_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_8 = new_SmallInt(8);
     Float float_1_86 = new_Float(1.86);
     Constant int_8_Const = new_Constant((Optr)int_8);
     Constant float_1_86_Const = new_Constant((Optr)float_1_86);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6905 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_8_Const, (Optr)float_1_86_Const);
-=======
-    Send PSend6907 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_8_Const, (Optr)float_1_86_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_9 = new_SmallInt(9);
     Float float_1_833 = new_Float(1.833);
     Constant int_9_Const = new_Constant((Optr)int_9);
     Constant float_1_833_Const = new_Constant((Optr)float_1_833);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6906 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_9_Const, (Optr)float_1_833_Const);
-=======
-    Send PSend6908 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_9_Const, (Optr)float_1_833_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_10 = new_SmallInt(10);
     Float float_1_812 = new_Float(1.812);
     Constant int_10_Const = new_Constant((Optr)int_10);
     Constant float_1_812_Const = new_Constant((Optr)float_1_812);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6907 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_10_Const, (Optr)float_1_812_Const);
-=======
-    Send PSend6909 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_10_Const, (Optr)float_1_812_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_11 = new_SmallInt(11);
     Float float_1_796 = new_Float(1.796);
     Constant int_11_Const = new_Constant((Optr)int_11);
     Constant float_1_796_Const = new_Constant((Optr)float_1_796);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6908 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_11_Const, (Optr)float_1_796_Const);
-=======
-    Send PSend6910 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_11_Const, (Optr)float_1_796_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_12 = new_SmallInt(12);
     Float float_1_782 = new_Float(1.782);
     Constant int_12_Const = new_Constant((Optr)int_12);
     Constant float_1_782_Const = new_Constant((Optr)float_1_782);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6909 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_12_Const, (Optr)float_1_782_Const);
-=======
-    Send PSend6911 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_12_Const, (Optr)float_1_782_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_13 = new_SmallInt(13);
     Float float_1_771 = new_Float(1.771);
     Constant int_13_Const = new_Constant((Optr)int_13);
     Constant float_1_771_Const = new_Constant((Optr)float_1_771);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6910 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_13_Const, (Optr)float_1_771_Const);
-=======
-    Send PSend6912 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_13_Const, (Optr)float_1_771_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_14 = new_SmallInt(14);
     Float float_1_761 = new_Float(1.761);
     Constant int_14_Const = new_Constant((Optr)int_14);
     Constant float_1_761_Const = new_Constant((Optr)float_1_761);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6911 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_14_Const, (Optr)float_1_761_Const);
-=======
-    Send PSend6913 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_14_Const, (Optr)float_1_761_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_15 = new_SmallInt(15);
     Float float_1_753 = new_Float(1.753);
     Constant int_15_Const = new_Constant((Optr)int_15);
     Constant float_1_753_Const = new_Constant((Optr)float_1_753);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6912 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_15_Const, (Optr)float_1_753_Const);
-=======
-    Send PSend6914 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_15_Const, (Optr)float_1_753_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_16 = new_SmallInt(16);
     Float float_1_746 = new_Float(1.746);
     Constant int_16_Const = new_Constant((Optr)int_16);
     Constant float_1_746_Const = new_Constant((Optr)float_1_746);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6913 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_16_Const, (Optr)float_1_746_Const);
-=======
-    Send PSend6915 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_16_Const, (Optr)float_1_746_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_17 = new_SmallInt(17);
     Float float_1_74 = new_Float(1.74);
     Constant int_17_Const = new_Constant((Optr)int_17);
     Constant float_1_74_Const = new_Constant((Optr)float_1_74);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6914 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_17_Const, (Optr)float_1_74_Const);
-=======
-    Send PSend6916 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_17_Const, (Optr)float_1_74_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_18 = new_SmallInt(18);
     Float float_1_734 = new_Float(1.734);
     Constant int_18_Const = new_Constant((Optr)int_18);
     Constant float_1_734_Const = new_Constant((Optr)float_1_734);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6915 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_18_Const, (Optr)float_1_734_Const);
-=======
-    Send PSend6917 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_18_Const, (Optr)float_1_734_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_19 = new_SmallInt(19);
     Float float_1_729 = new_Float(1.729);
     Constant int_19_Const = new_Constant((Optr)int_19);
     Constant float_1_729_Const = new_Constant((Optr)float_1_729);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6916 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_19_Const, (Optr)float_1_729_Const);
-=======
-    Send PSend6918 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_19_Const, (Optr)float_1_729_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_20 = new_SmallInt(20);
     Float float_1_725 = new_Float(1.725);
     Constant int_20_Const = new_Constant((Optr)int_20);
     Constant float_1_725_Const = new_Constant((Optr)float_1_725);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6917 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_20_Const, (Optr)float_1_725_Const);
-=======
-    Send PSend6919 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_20_Const, (Optr)float_1_725_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_21 = new_SmallInt(21);
     Float float_1_721 = new_Float(1.721);
     Constant int_21_Const = new_Constant((Optr)int_21);
     Constant float_1_721_Const = new_Constant((Optr)float_1_721);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6918 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_21_Const, (Optr)float_1_721_Const);
-=======
-    Send PSend6920 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_21_Const, (Optr)float_1_721_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_22 = new_SmallInt(22);
     Float float_1_717 = new_Float(1.717);
     Constant int_22_Const = new_Constant((Optr)int_22);
     Constant float_1_717_Const = new_Constant((Optr)float_1_717);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6919 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_22_Const, (Optr)float_1_717_Const);
-=======
-    Send PSend6921 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_22_Const, (Optr)float_1_717_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_23 = new_SmallInt(23);
     Float float_1_714 = new_Float(1.714);
     Constant int_23_Const = new_Constant((Optr)int_23);
     Constant float_1_714_Const = new_Constant((Optr)float_1_714);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6920 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_23_Const, (Optr)float_1_714_Const);
-=======
-    Send PSend6922 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_23_Const, (Optr)float_1_714_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_24 = new_SmallInt(24);
     Float float_1_711 = new_Float(1.711);
     Constant int_24_Const = new_Constant((Optr)int_24);
     Constant float_1_711_Const = new_Constant((Optr)float_1_711);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6921 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_24_Const, (Optr)float_1_711_Const);
-=======
-    Send PSend6923 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_24_Const, (Optr)float_1_711_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_25 = new_SmallInt(25);
     Float float_1_708 = new_Float(1.708);
     Constant int_25_Const = new_Constant((Optr)int_25);
     Constant float_1_708_Const = new_Constant((Optr)float_1_708);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6922 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_25_Const, (Optr)float_1_708_Const);
-=======
-    Send PSend6924 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_25_Const, (Optr)float_1_708_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_26 = new_SmallInt(26);
     Float float_1_706 = new_Float(1.706);
     Constant int_26_Const = new_Constant((Optr)int_26);
     Constant float_1_706_Const = new_Constant((Optr)float_1_706);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6923 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_26_Const, (Optr)float_1_706_Const);
-=======
-    Send PSend6925 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_26_Const, (Optr)float_1_706_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_27 = new_SmallInt(27);
     Float float_1_703 = new_Float(1.703);
     Constant int_27_Const = new_Constant((Optr)int_27);
     Constant float_1_703_Const = new_Constant((Optr)float_1_703);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6924 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_27_Const, (Optr)float_1_703_Const);
-=======
-    Send PSend6926 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_27_Const, (Optr)float_1_703_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_28 = new_SmallInt(28);
     Float float_1_701 = new_Float(1.701);
     Constant int_28_Const = new_Constant((Optr)int_28);
     Constant float_1_701_Const = new_Constant((Optr)float_1_701);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6925 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_28_Const, (Optr)float_1_701_Const);
-=======
-    Send PSend6927 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_28_Const, (Optr)float_1_701_Const);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_29 = new_SmallInt(29);
     Float float_1_699 = new_Float(1.699);
     Constant int_29_Const = new_Constant((Optr)int_29);
     Constant float_1_699_Const = new_Constant((Optr)float_1_699);
     // at:put:. 
-<<<<<<< HEAD
     Send PSend6926 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_29_Const, (Optr)float_1_699_Const);
     Float float_1_697 = new_Float(1.697);
     Constant float_1_697_Const = new_Constant((Optr)float_1_697);
@@ -500,23 +291,6 @@ static void init_SMB_studentsTConfidenceFactor() {
     Method PMethod6893 = new_Method_with(empty_Array, PArray6894, empty_Array, PThreadedCode6895, 32, PAssign6896, PSend6898, PSend6899, PSend6900, PSend6901, PSend6902, PSend6903, PSend6904, PSend6905, PSend6906, PSend6907, PSend6908, PSend6909, PSend6910, PSend6911, PSend6912, PSend6913, PSend6914, PSend6915, PSend6916, PSend6917, PSend6918, PSend6919, PSend6920, PSend6921, PSend6922, PSend6923, PSend6924, PSend6925, PSend6926, PSend6927, PSend6929);
     
     MethodClosure MC_SMB_studentsTConfidenceFactor = new_MethodClosure((Method)PMethod6893, PBenchmark_AbstractBenchmark_Class);
-=======
-    Send PSend6928 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_29_Const, (Optr)float_1_699_Const);
-    Float float_1_697 = new_Float(1.697);
-    Constant float_1_697_Const = new_Constant((Optr)float_1_697);
-    // at:put:. 
-    Send PSend6929 = new_Send((Optr)VAR_values_0_0, SMB_at_put_, 2, (Optr)int_30_Const, (Optr)float_1_697_Const);
-    Symbol SMB_probeCount = new_Symbol(L"probeCount");
-    // probeCount. 
-    Send PSend6930 = new_Send((Optr)self, SMB_probeCount, 0);
-    Symbol SMB_at_ = new_Symbol(L"at:");
-    // at:. 
-    Send PSend6931 = new_Send((Optr)VAR_values_0_0, SMB_at_, 1, (Optr)PSend6930);
-    Array PThreadedCode6897 = instantiate_Array_with(ThreadedCode_Class, 0, 286, (Optr)&t_push1, (Optr)PAssign6898, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)int_30, (Optr)&t_send1, (Optr)PSend6899, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push_1, (Optr)&t_push1, (Optr)float_6_314, (Optr)&t_send2, (Optr)PSend6900, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push_2, (Optr)&t_push1, (Optr)float_2_92, (Optr)&t_send2, (Optr)PSend6901, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push1, (Optr)float_2_353, (Optr)&t_send2, (Optr)PSend6902, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_4, (Optr)&t_push1, (Optr)float_2_132, (Optr)&t_send2, (Optr)PSend6903, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_5, (Optr)&t_push1, (Optr)float_2_015, (Optr)&t_send2, (Optr)PSend6904, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_6, (Optr)&t_push1, (Optr)float_1_943, (Optr)&t_send2, (Optr)PSend6905, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_7, (Optr)&t_push1, (Optr)float_1_895, (Optr)&t_send2, (Optr)PSend6906, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_8, (Optr)&t_push1, (Optr)float_1_86, (Optr)&t_send2, (Optr)PSend6907, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_9, (Optr)&t_push1, (Optr)float_1_833, (Optr)&t_send2, (Optr)PSend6908, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_push1, (Optr)float_1_812, (Optr)&t_send2, (Optr)PSend6909, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_11, (Optr)&t_push1, (Optr)float_1_796, (Optr)&t_send2, (Optr)PSend6910, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_12, (Optr)&t_push1, (Optr)float_1_782, (Optr)&t_send2, (Optr)PSend6911, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_13, (Optr)&t_push1, (Optr)float_1_771, (Optr)&t_send2, (Optr)PSend6912, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_14, (Optr)&t_push1, (Optr)float_1_761, (Optr)&t_send2, (Optr)PSend6913, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_15, (Optr)&t_push1, (Optr)float_1_753, (Optr)&t_send2, (Optr)PSend6914, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_16, (Optr)&t_push1, (Optr)float_1_746, (Optr)&t_send2, (Optr)PSend6915, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_17, (Optr)&t_push1, (Optr)float_1_74, (Optr)&t_send2, (Optr)PSend6916, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_18, (Optr)&t_push1, (Optr)float_1_734, (Optr)&t_send2, (Optr)PSend6917, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_19, (Optr)&t_push1, (Optr)float_1_729, (Optr)&t_send2, (Optr)PSend6918, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_20, (Optr)&t_push1, (Optr)float_1_725, (Optr)&t_send2, (Optr)PSend6919, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_21, (Optr)&t_push1, (Optr)float_1_721, (Optr)&t_send2, (Optr)PSend6920, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_22, (Optr)&t_push1, (Optr)float_1_717, (Optr)&t_send2, (Optr)PSend6921, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_23, (Optr)&t_push1, (Optr)float_1_714, (Optr)&t_send2, (Optr)PSend6922, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_24, (Optr)&t_push1, (Optr)float_1_711, (Optr)&t_send2, (Optr)PSend6923, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_25, (Optr)&t_push1, (Optr)float_1_708, (Optr)&t_send2, (Optr)PSend6924, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_26, (Optr)&t_push1, (Optr)float_1_706, (Optr)&t_send2, (Optr)PSend6925, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_27, (Optr)&t_push1, (Optr)float_1_703, (Optr)&t_send2, (Optr)PSend6926, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_28, (Optr)&t_push1, (Optr)float_1_701, (Optr)&t_send2, (Optr)PSend6927, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_29, (Optr)&t_push1, (Optr)float_1_699, (Optr)&t_send2, (Optr)PSend6928, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push1, (Optr)int_30, (Optr)&t_push1, (Optr)float_1_697, (Optr)&t_send2, (Optr)PSend6929, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_values_0_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6930, (Optr)&t_send1, (Optr)PSend6931, (Optr)&t_method_return);
-    Method PMethod6895 = new_Method_with(empty_Array, PArray6896, empty_Array, PThreadedCode6897, 32, PAssign6898, PSend6900, PSend6901, PSend6902, PSend6903, PSend6904, PSend6905, PSend6906, PSend6907, PSend6908, PSend6909, PSend6910, PSend6911, PSend6912, PSend6913, PSend6914, PSend6915, PSend6916, PSend6917, PSend6918, PSend6919, PSend6920, PSend6921, PSend6922, PSend6923, PSend6924, PSend6925, PSend6926, PSend6927, PSend6928, PSend6929, PSend6931);
-    
-    MethodClosure MC_SMB_studentsTConfidenceFactor = new_MethodClosure((Method)PMethod6895, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_studentsTConfidenceFactor, MC_SMB_studentsTConfidenceFactor);
 }
 
@@ -525,7 +299,6 @@ static void init_SMB_absdev() {
     Symbol SMB_absdev = new_Symbol(L"absdev");
     Symbol SMB_average = new_Symbol(L"average");
     // average. 
-<<<<<<< HEAD
     Send PSend6932 = new_Send((Optr)self, SMB_average, 0);
     Symbol SMB_stdev = new_Symbol(L"stdev");
     // stdev. 
@@ -537,19 +310,6 @@ static void init_SMB_absdev() {
     Method PMethod6930 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6931, 1, PSend6934);
     
     MethodClosure MC_SMB_absdev = new_MethodClosure((Method)PMethod6930, PBenchmark_AbstractBenchmark_Class);
-=======
-    Send PSend6934 = new_Send((Optr)self, SMB_average, 0);
-    Symbol SMB_stdev = new_Symbol(L"stdev");
-    // stdev. 
-    Send PSend6935 = new_Send((Optr)self, SMB_stdev, 0);
-    Symbol SMB__times_ = new_Symbol(L"*");
-    // *. 
-    Send PSend6936 = new_Send((Optr)PSend6934, SMB__times_, 1, (Optr)PSend6935);
-    Array PThreadedCode6933 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6934, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6935, (Optr)&t_send1, (Optr)PSend6936, (Optr)&t_method_return);
-    Method PMethod6932 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6933, 1, PSend6936);
-    
-    MethodClosure MC_SMB_absdev = new_MethodClosure((Method)PMethod6932, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_absdev, MC_SMB_absdev);
 }
 
@@ -558,19 +318,11 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     SmallInt int_100 = new_SmallInt(100);
     Constant int_100_Const = new_Constant((Optr)int_100);
-<<<<<<< HEAD
     Assign PAssign6937 = new_Assign((Optr)slot_PBenchmark_AbstractBenchmark_probeCount, (Optr)int_100_Const);
     Array PThreadedCode6936 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign6937, (Optr)&t_push1, (Optr)int_100, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod6935 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6936, 2, PAssign6937, self);
     
     MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod6935, PBenchmark_AbstractBenchmark_Class);
-=======
-    Assign PAssign6939 = new_Assign((Optr)slot_PBenchmark_AbstractBenchmark_probeCount, (Optr)int_100_Const);
-    Array PThreadedCode6938 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign6939, (Optr)&t_push1, (Optr)int_100, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod6937 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode6938, 2, PAssign6939, self);
-    
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod6937, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -578,29 +330,17 @@ static void init_SMB_initialize() {
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-<<<<<<< HEAD
     Array PArray6939 = new_Array_with(1, (Optr)VAR_aStream_0_0);
-=======
-    Array PArray6941 = new_Array_with(1, (Optr)VAR_aStream_0_0);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Variable VAR_significantDigits_0_1 = new_Variable_named(L"significantDigits", 0);
     Variable VAR_quantum_0_2 = new_Variable_named(L"quantum", 0);
     Variable VAR_total_0_3 = new_Variable_named(L"total", 0);
     Variable VAR_stdev_0_4 = new_Variable_named(L"stdev", 0);
     Variable VAR_totalSignificantDigits_0_5 = new_Variable_named(L"totalSignificantDigits", 0);
-<<<<<<< HEAD
     Array PArray6940 = new_Array_with(5, (Optr)VAR_significantDigits_0_1, (Optr)VAR_quantum_0_2, (Optr)VAR_total_0_3, (Optr)VAR_stdev_0_4, (Optr)VAR_totalSignificantDigits_0_5);
     Symbol SMB_significantDigits = new_Symbol(L"significantDigits");
     // significantDigits. 
     Send PSend6943 = new_Send((Optr)self, SMB_significantDigits, 0);
     Assign PAssign6942 = new_Assign((Optr)VAR_significantDigits_0_1, (Optr)PSend6943);
-=======
-    Array PArray6942 = new_Array_with(5, (Optr)VAR_significantDigits_0_1, (Optr)VAR_quantum_0_2, (Optr)VAR_total_0_3, (Optr)VAR_stdev_0_4, (Optr)VAR_totalSignificantDigits_0_5);
-    Symbol SMB_significantDigits = new_Symbol(L"significantDigits");
-    // significantDigits. 
-    Send PSend6945 = new_Send((Optr)self, SMB_significantDigits, 0);
-    Assign PAssign6944 = new_Assign((Optr)VAR_significantDigits_0_1, (Optr)PSend6945);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     Symbol SMB__divide_ = new_Symbol(L"/");
@@ -608,7 +348,6 @@ static void init_SMB_printOn_() {
     Constant int_10_Const = new_Constant((Optr)int_10);
     Symbol SMB_asFloat = new_Symbol(L"asFloat");
     // asFloat. 
-<<<<<<< HEAD
     Send PSend6947 = new_Send((Optr)int_10_Const, SMB_asFloat, 0);
     // /. 
     Send PSend6946 = new_Send((Optr)int_1_Const, SMB__divide_, 1, (Optr)PSend6947);
@@ -635,40 +374,11 @@ static void init_SMB_printOn_() {
     Symbol SMB_size = new_Symbol(L"size");
     // size. 
     Send PSend6957 = new_Send((Optr)VAR_total_0_3, SMB_size, 0);
-=======
-    Send PSend6949 = new_Send((Optr)int_10_Const, SMB_asFloat, 0);
-    // /. 
-    Send PSend6948 = new_Send((Optr)int_1_Const, SMB__divide_, 1, (Optr)PSend6949);
-    Symbol SMB_raisedTo_ = new_Symbol(L"raisedTo:");
-    // raisedTo:. 
-    Send PSend6947 = new_Send((Optr)PSend6948, SMB_raisedTo_, 1, (Optr)VAR_significantDigits_0_1);
-    Assign PAssign6946 = new_Assign((Optr)VAR_quantum_0_2, (Optr)PSend6947);
-    Symbol SMB_confidenceVariance = new_Symbol(L"confidenceVariance");
-    // confidenceVariance. 
-    Send PSend6952 = new_Send((Optr)self, SMB_confidenceVariance, 0);
-    Symbol SMB_roundTo_ = new_Symbol(L"roundTo:");
-    // roundTo:. 
-    Send PSend6951 = new_Send((Optr)PSend6952, SMB_roundTo_, 1, (Optr)VAR_quantum_0_2);
-    Assign PAssign6950 = new_Assign((Optr)VAR_stdev_0_4, (Optr)PSend6951);
-    Symbol SMB_total = new_Symbol(L"total");
-    // total. 
-    Send PSend6956 = new_Send((Optr)self, SMB_total, 0);
-    // roundTo:. 
-    Send PSend6955 = new_Send((Optr)PSend6956, SMB_roundTo_, 1, (Optr)VAR_quantum_0_2);
-    Symbol SMB_printString = new_Symbol(L"printString");
-    // printString. 
-    Send PSend6954 = new_Send((Optr)PSend6955, SMB_printString, 0);
-    Assign PAssign6953 = new_Assign((Optr)VAR_total_0_3, (Optr)PSend6954);
-    Symbol SMB_size = new_Symbol(L"size");
-    // size. 
-    Send PSend6959 = new_Send((Optr)VAR_total_0_3, SMB_size, 0);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Symbol SMB__minus_ = new_Symbol(L"-");
     Symbol SMB_indexOf_ = new_Symbol(L"indexOf:");
-    Character char_2919 = new_Character(L'.');
-    Constant char_2919_Const = new_Constant((Optr)char_2919);
+    Character char_2907 = new_Character(L'.');
+    Constant char_2907_Const = new_Constant((Optr)char_2907);
     // indexOf:. 
-<<<<<<< HEAD
     Send PSend6958 = new_Send((Optr)VAR_total_0_3, SMB_indexOf_, 1, (Optr)char_2907_Const);
     // -. 
     Send PSend6956 = new_Send((Optr)PSend6957, SMB__minus_, 1, (Optr)PSend6958);
@@ -705,49 +415,10 @@ static void init_SMB_printOn_() {
     Method PMethod6938 = new_Method_with(PArray6939, PArray6940, empty_Array, PThreadedCode6941, 9, PAssign6942, PAssign6944, PAssign6948, PAssign6951, PAssign6955, PSend6959, PSend6961, PSend6972, self);
     
     MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod6938, PBenchmark_AbstractBenchmark_Class);
-=======
-    Send PSend6960 = new_Send((Optr)VAR_total_0_3, SMB_indexOf_, 1, (Optr)char_2919_Const);
-    // -. 
-    Send PSend6958 = new_Send((Optr)PSend6959, SMB__minus_, 1, (Optr)PSend6960);
-    Assign PAssign6957 = new_Assign((Optr)VAR_totalSignificantDigits_0_5, (Optr)PSend6958);
-    Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    // <<. 
-    Send PSend6961 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)VAR_total_0_3);
-    Symbol SMB__lt_ = new_Symbol(L"<");
-    // <. 
-    Send PSend6962 = new_Send((Optr)VAR_totalSignificantDigits_0_5, SMB__lt_, 1, (Optr)VAR_significantDigits_0_1);
-    Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    // -. 
-    Send PSend6966 = new_Send((Optr)VAR_significantDigits_0_1, SMB__minus_, 1, (Optr)VAR_totalSignificantDigits_0_5);
-    String string_6969 = new_String(L"0");
-    Constant string_6969_Const = new_Constant((Optr)string_6969);
-    // <<. 
-    Send PSend6970 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_6969_Const);
-    Array PThreadedCode6968 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_6969, (Optr)&t_send1, (Optr)PSend6970, (Optr)&t_block_return);
-    Block PBlock6967 = new_Block_with(empty_Array, empty_Array, PThreadedCode6968, 1, PSend6970);
-    Symbol SMB_timesRepeat_ = new_Symbol(L"timesRepeat:");
-    // timesRepeat:. 
-    Send PSend6971 = new_Send((Optr)PSend6966, SMB_timesRepeat_, 1, (Optr)PBlock6967);
-    Array PThreadedCode6965 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_significantDigits_0_1, (Optr)&t_push_variable, (Optr)VAR_totalSignificantDigits_0_5, (Optr)&t_send1, (Optr)PSend6966, (Optr)&t_push_closure, (Optr)PBlock6967, (Optr)&t_send1, (Optr)PSend6971, (Optr)&t_block_return);
-    Block PBlock6964 = new_Block_with(empty_Array, empty_Array, PThreadedCode6965, 1, PSend6971);
-    // ifTrue:. 
-    Send PSend6963 = new_Send((Optr)PSend6962, SMB_ifTrue_, 1, (Optr)PBlock6964);
-    String string_6972 = new_String(L" +/-");
-    Constant string_6972_Const = new_Constant((Optr)string_6972);
-    // <<. 
-    Send PSend6973 = new_Send((Optr)VAR_aStream_0_0, SMB__shiftLeft_, 1, (Optr)string_6972_Const);
-    // <<. 
-    Send PSend6974 = new_Send((Optr)PSend6973, SMB__shiftLeft_, 1, (Optr)VAR_stdev_0_4);
-    Array PThreadedCode6943 = instantiate_Array_with(ThreadedCode_Class, 0, 91, (Optr)&t_push1, (Optr)PAssign6944, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6945, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign6946, (Optr)&t_push_1, (Optr)&t_push1, (Optr)int_10, (Optr)&t_send0, (Optr)PSend6949, (Optr)&t_send1, (Optr)PSend6948, (Optr)&t_push_variable, (Optr)VAR_significantDigits_0_1, (Optr)&t_send1, (Optr)PSend6947, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign6950, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6952, (Optr)&t_push_variable, (Optr)VAR_quantum_0_2, (Optr)&t_send1, (Optr)PSend6951, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign6953, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend6956, (Optr)&t_push_variable, (Optr)VAR_quantum_0_2, (Optr)&t_send1, (Optr)PSend6955, (Optr)&t_send0, (Optr)PSend6954, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign6957, (Optr)&t_push_variable, (Optr)VAR_total_0_3, (Optr)&t_send0, (Optr)PSend6959, (Optr)&t_push_variable, (Optr)VAR_total_0_3, (Optr)&t_push1, (Optr)char_2919, (Optr)&t_send1, (Optr)PSend6960, (Optr)&t_send1, (Optr)PSend6958, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push_variable, (Optr)VAR_total_0_3, (Optr)&t_send1, (Optr)PSend6961, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_totalSignificantDigits_0_5, (Optr)&t_push_variable, (Optr)VAR_significantDigits_0_1, (Optr)&t_send1, (Optr)PSend6962, (Optr)&t_send_ifTrue_, (Optr)PSend6963, (Optr)PBlock6964, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_push1, (Optr)string_6972, (Optr)&t_send1, (Optr)PSend6973, (Optr)&t_push_variable, (Optr)VAR_stdev_0_4, (Optr)&t_send1, (Optr)PSend6974, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod6940 = new_Method_with(PArray6941, PArray6942, empty_Array, PThreadedCode6943, 9, PAssign6944, PAssign6946, PAssign6950, PAssign6953, PAssign6957, PSend6961, PSend6963, PSend6974, self);
-    
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod6940, PBenchmark_AbstractBenchmark_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(PBenchmark_AbstractBenchmark_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
 
-<<<<<<< HEAD
 static void init_SMB_gaussianConfidenceFactor() {
     Symbol SMB_gaussianConfidenceFactor = new_Symbol(L"gaussianConfidenceFactor");
     Float float_1_644853626951 = new_Float(1.644853626951);
@@ -760,8 +431,6 @@ static void init_SMB_gaussianConfidenceFactor() {
 }
 
 
-=======
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
 static void init_SMB_probeCount() {
     Symbol SMB_probeCount = new_Symbol(L"probeCount");
     Array PThreadedCode6976 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PBenchmark_AbstractBenchmark_probeCount, (Optr)&t_method_return);
@@ -863,13 +532,13 @@ void init_PBenchmark_PAbstractBenchmark_layout() {
 }
 
 void init_PBenchmark_PAbstractBenchmark_methods() {
-    init_SMB_gaussianConfidenceFactor();
     init_SMB_confidenceVariance();
     init_SMB_currentMillis();
     init_SMB_studentsTConfidenceFactor();
     init_SMB_absdev();
     init_SMB_initialize();
     init_SMB_printOn_();
+    init_SMB_gaussianConfidenceFactor();
     init_SMB_probeCount();
     init_SMB_significantDigits();
     init_SMB_probeCount_();

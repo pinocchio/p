@@ -10,95 +10,49 @@ Optr layout_Concurrency_Mutex;
 static void init_SMB_critical_() {
     Symbol SMB_critical_ = new_Symbol(L"critical:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-<<<<<<< HEAD
-    Array PArray24819 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PArray24857 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
     Variable VAR_activeProcess_0_1 = new_Variable_named(L"activeProcess", 0);
-    Array PArray24820 = new_Array_with(1, (Optr)VAR_activeProcess_0_1);
+    Array PArray24858 = new_Array_with(1, (Optr)VAR_activeProcess_0_1);
     Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray24823 = new_Array_with(1, (Optr)VAR__return__1_0);
+    Array PArray24861 = new_Array_with(1, (Optr)VAR__return__1_0);
     Symbol SMB_current = new_Symbol(L"current");
     // current. 
-    Send PSend24826 = new_Send((Optr)PThread_classReference, SMB_current, 0);
-    Assign PAssign24825 = new_Assign((Optr)VAR_activeProcess_0_1, (Optr)PSend24826);
+    Send PSend24864 = new_Send((Optr)PThread_classReference, SMB_current, 0);
+    Assign PAssign24863 = new_Assign((Optr)VAR_activeProcess_0_1, (Optr)PSend24864);
     Symbol SMB__pequals_ = new_Symbol(L"==");
     // ==. 
-    Send PSend24827 = new_Send((Optr)VAR_activeProcess_0_1, SMB__pequals_, 1, (Optr)slot_Concurrency_Mutex_owner);
+    Send PSend24865 = new_Send((Optr)VAR_activeProcess_0_1, SMB__pequals_, 1, (Optr)slot_Concurrency_Mutex_owner);
     Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
     Symbol SMB_value = new_Symbol(L"value");
     // value. 
-    Send PSend24831 = new_Send((Optr)VAR_aBlock_0_0, SMB_value, 0);
+    Send PSend24869 = new_Send((Optr)VAR_aBlock_0_0, SMB_value, 0);
     Symbol SMB_escape_ = new_Symbol(L"escape:");
     // escape:. 
-    Send PSend24832 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend24831);
-    Array PThreadedCode24830 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_send0, (Optr)PSend24831, (Optr)&t_send1, (Optr)PSend24832, (Optr)&t_block_return);
-    Block PBlock24829 = new_Block_with(empty_Array, empty_Array, PThreadedCode24830, 1, PSend24832);
+    Send PSend24870 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend24869);
+    Array PThreadedCode24868 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_send0, (Optr)PSend24869, (Optr)&t_send1, (Optr)PSend24870, (Optr)&t_block_return);
+    Block PBlock24867 = new_Block_with(empty_Array, empty_Array, PThreadedCode24868, 1, PSend24870);
     // ifTrue:. 
-    Send PSend24828 = new_Send((Optr)PSend24827, SMB_ifTrue_, 1, (Optr)PBlock24829);
-    Assign PAssign24835 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)VAR_activeProcess_0_1);
-    Assign PAssign24838 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)nil_Const);
-    Array PThreadedCode24837 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push1, (Optr)PAssign24838, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock24836 = new_Block_with(empty_Array, empty_Array, PThreadedCode24837, 1, PAssign24838);
+    Send PSend24866 = new_Send((Optr)PSend24865, SMB_ifTrue_, 1, (Optr)PBlock24867);
+    Assign PAssign24873 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)VAR_activeProcess_0_1);
+    Assign PAssign24876 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)nil_Const);
+    Array PThreadedCode24875 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push1, (Optr)PAssign24876, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_block_return);
+    Block PBlock24874 = new_Block_with(empty_Array, empty_Array, PThreadedCode24875, 1, PAssign24876);
     Symbol SMB_ensure_ = new_Symbol(L"ensure:");
     // ensure:. 
-    Send PSend24839 = new_Send((Optr)VAR_aBlock_0_0, SMB_ensure_, 1, (Optr)PBlock24836);
-    Array PThreadedCode24834 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign24835, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_push_closure, (Optr)PBlock24836, (Optr)&t_send1, (Optr)PSend24839, (Optr)&t_block_return);
-    Block PBlock24833 = new_Block_with(empty_Array, empty_Array, PThreadedCode24834, 2, PAssign24835, PSend24839);
+    Send PSend24877 = new_Send((Optr)VAR_aBlock_0_0, SMB_ensure_, 1, (Optr)PBlock24874);
+    Array PThreadedCode24872 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign24873, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_push_closure, (Optr)PBlock24874, (Optr)&t_send1, (Optr)PSend24877, (Optr)&t_block_return);
+    Block PBlock24871 = new_Block_with(empty_Array, empty_Array, PThreadedCode24872, 2, PAssign24873, PSend24877);
     // critical:. 
-    Send PSend24840 = new_Send((Optr)slot_Concurrency_Mutex_semaphore, SMB_critical_, 1, (Optr)PBlock24833);
-    Array PThreadedCode24824 = instantiate_Array_with(ThreadedCode_Class, 0, 25, (Optr)&t_push1, (Optr)PAssign24825, (Optr)&t_push_class_reference, (Optr)PThread_classReference, (Optr)&t_send0, (Optr)PSend24826, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_owner, (Optr)&t_send1, (Optr)PSend24827, (Optr)&t_send_ifTrue_, (Optr)PSend24828, (Optr)PBlock24829, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_semaphore, (Optr)&t_push_closure, (Optr)PBlock24833, (Optr)&t_send1, (Optr)PSend24840, (Optr)&t_method_return);
-    Block PBlock24822 = new_Block_with(PArray24823, empty_Array, PThreadedCode24824, 3, PAssign24825, PSend24828, PSend24840);
+    Send PSend24878 = new_Send((Optr)slot_Concurrency_Mutex_semaphore, SMB_critical_, 1, (Optr)PBlock24871);
+    Array PThreadedCode24862 = instantiate_Array_with(ThreadedCode_Class, 0, 25, (Optr)&t_push1, (Optr)PAssign24863, (Optr)&t_push_class_reference, (Optr)PThread_classReference, (Optr)&t_send0, (Optr)PSend24864, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_owner, (Optr)&t_send1, (Optr)PSend24865, (Optr)&t_send_ifTrue_, (Optr)PSend24866, (Optr)PBlock24867, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_semaphore, (Optr)&t_push_closure, (Optr)PBlock24871, (Optr)&t_send1, (Optr)PSend24878, (Optr)&t_method_return);
+    Block PBlock24860 = new_Block_with(PArray24861, empty_Array, PThreadedCode24862, 3, PAssign24863, PSend24866, PSend24878);
     Symbol SMB_on_ = new_Symbol(L"on:");
     // on:. 
-    Send PSend24841 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock24822);
-    Array PThreadedCode24821 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock24822, (Optr)&t_send1, (Optr)PSend24841, (Optr)&t_method_return);
-    Method PMethod24818 = new_Method_with(PArray24819, PArray24820, empty_Array, PThreadedCode24821, 1, PSend24841);
+    Send PSend24879 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock24860);
+    Array PThreadedCode24859 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock24860, (Optr)&t_send1, (Optr)PSend24879, (Optr)&t_method_return);
+    Method PMethod24856 = new_Method_with(PArray24857, PArray24858, empty_Array, PThreadedCode24859, 1, PSend24879);
     
-    MethodClosure MC_SMB_critical_ = new_MethodClosure((Method)PMethod24818, Concurrency_Mutex_Class);
-=======
-    Array PArray24636 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
-    Variable VAR_activeProcess_0_1 = new_Variable_named(L"activeProcess", 0);
-    Array PArray24637 = new_Array_with(1, (Optr)VAR_activeProcess_0_1);
-    Variable VAR__return__1_0 = new_Variable_named(L"_return_", 1);
-    Array PArray24640 = new_Array_with(1, (Optr)VAR__return__1_0);
-    Symbol SMB_current = new_Symbol(L"current");
-    // current. 
-    Send PSend24643 = new_Send((Optr)PThread_classReference, SMB_current, 0);
-    Assign PAssign24642 = new_Assign((Optr)VAR_activeProcess_0_1, (Optr)PSend24643);
-    Symbol SMB__pequals_ = new_Symbol(L"==");
-    // ==. 
-    Send PSend24644 = new_Send((Optr)VAR_activeProcess_0_1, SMB__pequals_, 1, (Optr)slot_Concurrency_Mutex_owner);
-    Symbol SMB_ifTrue_ = new_Symbol(L"ifTrue:");
-    Symbol SMB_value = new_Symbol(L"value");
-    // value. 
-    Send PSend24648 = new_Send((Optr)VAR_aBlock_0_0, SMB_value, 0);
-    Symbol SMB_escape_ = new_Symbol(L"escape:");
-    // escape:. 
-    Send PSend24649 = new_Send((Optr)VAR__return__1_0, SMB_escape_, 1, (Optr)PSend24648);
-    Array PThreadedCode24647 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_variable, (Optr)VAR__return__1_0, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_send0, (Optr)PSend24648, (Optr)&t_send1, (Optr)PSend24649, (Optr)&t_block_return);
-    Block PBlock24646 = new_Block_with(empty_Array, empty_Array, PThreadedCode24647, 1, PSend24649);
-    // ifTrue:. 
-    Send PSend24645 = new_Send((Optr)PSend24644, SMB_ifTrue_, 1, (Optr)PBlock24646);
-    Assign PAssign24652 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)VAR_activeProcess_0_1);
-    Assign PAssign24655 = new_Assign((Optr)slot_Concurrency_Mutex_owner, (Optr)nil_Const);
-    Array PThreadedCode24654 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push1, (Optr)PAssign24655, (Optr)&t_push_nil, (Optr)&t_assign, (Optr)&t_block_return);
-    Block PBlock24653 = new_Block_with(empty_Array, empty_Array, PThreadedCode24654, 1, PAssign24655);
-    Symbol SMB_ensure_ = new_Symbol(L"ensure:");
-    // ensure:. 
-    Send PSend24656 = new_Send((Optr)VAR_aBlock_0_0, SMB_ensure_, 1, (Optr)PBlock24653);
-    Array PThreadedCode24651 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push1, (Optr)PAssign24652, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_aBlock_0_0, (Optr)&t_push_closure, (Optr)PBlock24653, (Optr)&t_send1, (Optr)PSend24656, (Optr)&t_block_return);
-    Block PBlock24650 = new_Block_with(empty_Array, empty_Array, PThreadedCode24651, 2, PAssign24652, PSend24656);
-    // critical:. 
-    Send PSend24657 = new_Send((Optr)slot_Concurrency_Mutex_semaphore, SMB_critical_, 1, (Optr)PBlock24650);
-    Array PThreadedCode24641 = instantiate_Array_with(ThreadedCode_Class, 0, 25, (Optr)&t_push1, (Optr)PAssign24642, (Optr)&t_push_class_reference, (Optr)PThread_classReference, (Optr)&t_send0, (Optr)PSend24643, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR_activeProcess_0_1, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_owner, (Optr)&t_send1, (Optr)PSend24644, (Optr)&t_send_ifTrue_, (Optr)PSend24645, (Optr)PBlock24646, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Concurrency_Mutex_semaphore, (Optr)&t_push_closure, (Optr)PBlock24650, (Optr)&t_send1, (Optr)PSend24657, (Optr)&t_method_return);
-    Block PBlock24639 = new_Block_with(PArray24640, empty_Array, PThreadedCode24641, 3, PAssign24642, PSend24645, PSend24657);
-    Symbol SMB_on_ = new_Symbol(L"on:");
-    // on:. 
-    Send PSend24658 = new_Send((Optr)PContinue_classReference, SMB_on_, 1, (Optr)PBlock24639);
-    Array PThreadedCode24638 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PContinue_classReference, (Optr)&t_push_closure, (Optr)PBlock24639, (Optr)&t_send1, (Optr)PSend24658, (Optr)&t_method_return);
-    Method PMethod24635 = new_Method_with(PArray24636, PArray24637, empty_Array, PThreadedCode24638, 1, PSend24658);
-    
-    MethodClosure MC_SMB_critical_ = new_MethodClosure((Method)PMethod24635, Concurrency_Mutex_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
+    MethodClosure MC_SMB_critical_ = new_MethodClosure((Method)PMethod24856, Concurrency_Mutex_Class);
     store_method(Concurrency_Mutex_Class, SMB_critical_, MC_SMB_critical_);
 }
 
@@ -107,21 +61,12 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-<<<<<<< HEAD
-    Send PSend24845 = new_Send((Optr)Semaphore_classReference, SMB_new, 0);
-    Assign PAssign24844 = new_Assign((Optr)slot_Concurrency_Mutex_semaphore, (Optr)PSend24845);
-    Array PThreadedCode24843 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign24844, (Optr)&t_push_class_reference, (Optr)Semaphore_classReference, (Optr)&t_send0, (Optr)PSend24845, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24842 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24843, 2, PAssign24844, self);
+    Send PSend24883 = new_Send((Optr)Semaphore_classReference, SMB_new, 0);
+    Assign PAssign24882 = new_Assign((Optr)slot_Concurrency_Mutex_semaphore, (Optr)PSend24883);
+    Array PThreadedCode24881 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign24882, (Optr)&t_push_class_reference, (Optr)Semaphore_classReference, (Optr)&t_send0, (Optr)PSend24883, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod24880 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24881, 2, PAssign24882, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24842, Concurrency_Mutex_Class);
-=======
-    Send PSend24662 = new_Send((Optr)Semaphore_classReference, SMB_new, 0);
-    Assign PAssign24661 = new_Assign((Optr)slot_Concurrency_Mutex_semaphore, (Optr)PSend24662);
-    Array PThreadedCode24660 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push1, (Optr)PAssign24661, (Optr)&t_push_class_reference, (Optr)Semaphore_classReference, (Optr)&t_send0, (Optr)PSend24662, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24659 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24660, 2, PAssign24661, self);
-    
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24659, Concurrency_Mutex_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24880, Concurrency_Mutex_Class);
     store_method(Concurrency_Mutex_Class, SMB_initialize, MC_SMB_initialize);
 }
 

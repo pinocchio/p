@@ -6,27 +6,17 @@ Optr slot_Kernel_AST_NativeMethod_native;
 Optr layout_Kernel_AST_NativeMethod;
 
 
-static void init_SMB_inspectChildrenOn_() {
-    Symbol SMB_inspectChildrenOn_ = new_Symbol(L"inspectChildrenOn:");
-    Variable VAR_inspector_0_0 = new_Variable_named(L"inspector", 0);
-    Array PArray4676 = new_Array_with(1, (Optr)VAR_inspector_0_0);
-    Symbol SMB_class = new_Symbol(L"class");
-    // class. 
-    Send PSend4678 = new_Send((Optr)self, SMB_class, 0);
-    Symbol SMB_superclass = new_Symbol(L"superclass");
-    // superclass. 
-    Send PSend4679 = new_Send((Optr)PSend4678, SMB_superclass, 0);
-    Symbol SMB_layout = new_Symbol(L"layout");
-    // layout. 
-    Send PSend4680 = new_Send((Optr)PSend4679, SMB_layout, 0);
-    Symbol SMB_inspectChildrenFrom_on_ = new_Symbol(L"inspectChildrenFrom:on:");
-    // inspectChildrenFrom:on:. 
-    Send PSend4681 = new_Send((Optr)PSend4680, SMB_inspectChildrenFrom_on_, 2, (Optr)self, (Optr)VAR_inspector_0_0);
-    Array PThreadedCode4677 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4678, (Optr)&t_send0, (Optr)PSend4679, (Optr)&t_send0, (Optr)PSend4680, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_inspector_0_0, (Optr)&t_send2, (Optr)PSend4681, (Optr)&t_method_return);
-    Method PMethod4675 = new_Method_with(PArray4676, empty_Array, empty_Array, PThreadedCode4677, 1, PSend4681);
+static void init_SMB_clearNative() {
+    Symbol SMB_clearNative = new_Symbol(L"clearNative");
+    Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
+    Symbol SMB_AST_minus_NativeMethod = new_Symbol(L"AST.NativeMethod");
+    Annotation PAnnotation4677 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_clearNative, (Optr)SMB_AST_minus_NativeMethod);
+    Array PArray4676 = new_Array_with(1, (Optr)PAnnotation4677);
+    Array PThreadedCode4678 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    NativeMethod PNativeMethod4675 = new_NativeMethod_with(empty_Array, empty_Array, PArray4676, PThreadedCode4678, 1, self);
     
-    MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod4675, NativeMethod_Class);
-    store_method(NativeMethod_Class, SMB_inspectChildrenOn_, MC_SMB_inspectChildrenOn_);
+    MethodClosure MC_SMB_clearNative = new_MethodClosure((Method)PNativeMethod4675, NativeMethod_Class);
+    store_method(NativeMethod_Class, SMB_clearNative, MC_SMB_clearNative);
 }
 
 
@@ -36,29 +26,39 @@ static void init_SMB_accept_on_message_boundBy_() {
     Variable VAR_receiver_0_1 = new_Variable_named(L"receiver", 0);
     Variable VAR_message_0_2 = new_Variable_named(L"message", 0);
     Variable VAR_closure_0_3 = new_Variable_named(L"closure", 0);
-    Array PArray4683 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
+    Array PArray4680 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
     Symbol SMB_invokeNativeMethod_on_message_ = new_Symbol(L"invokeNativeMethod:on:message:");
     // invokeNativeMethod:on:message:. 
-    Send PSend4685 = new_Send((Optr)VAR_visitor_0_0, SMB_invokeNativeMethod_on_message_, 3, (Optr)VAR_closure_0_3, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2);
-    Array PThreadedCode4684 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_variable, (Optr)VAR_closure_0_3, (Optr)&t_push_variable, (Optr)VAR_receiver_0_1, (Optr)&t_push_variable, (Optr)VAR_message_0_2, (Optr)&t_send3, (Optr)PSend4685, (Optr)&t_method_return);
-    Method PMethod4682 = new_Method_with(PArray4683, empty_Array, empty_Array, PThreadedCode4684, 1, PSend4685);
+    Send PSend4682 = new_Send((Optr)VAR_visitor_0_0, SMB_invokeNativeMethod_on_message_, 3, (Optr)VAR_closure_0_3, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2);
+    Array PThreadedCode4681 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_variable, (Optr)VAR_closure_0_3, (Optr)&t_push_variable, (Optr)VAR_receiver_0_1, (Optr)&t_push_variable, (Optr)VAR_message_0_2, (Optr)&t_send3, (Optr)PSend4682, (Optr)&t_method_return);
+    Method PMethod4679 = new_Method_with(PArray4680, empty_Array, empty_Array, PThreadedCode4681, 1, PSend4682);
     
-    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4682, NativeMethod_Class);
+    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4679, NativeMethod_Class);
     store_method(NativeMethod_Class, SMB_accept_on_message_boundBy_, MC_SMB_accept_on_message_boundBy_);
 }
 
 
-static void init_SMB_clearNative() {
-    Symbol SMB_clearNative = new_Symbol(L"clearNative");
-    Symbol SMB_pPrimitive_plugin_ = new_Symbol(L"pPrimitive:plugin:");
-    Symbol SMB_AST_minus_NativeMethod = new_Symbol(L"AST.NativeMethod");
-    Annotation PAnnotation4688 = new_Annotation((Optr)SMB_pPrimitive_plugin_, 2, (Optr)SMB_clearNative, (Optr)SMB_AST_minus_NativeMethod);
-    Array PArray4687 = new_Array_with(1, (Optr)PAnnotation4688);
-    Array PThreadedCode4689 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    NativeMethod PNativeMethod4686 = new_NativeMethod_with(empty_Array, empty_Array, PArray4687, PThreadedCode4689, 1, self);
+static void init_SMB_inspectChildrenOn_() {
+    Symbol SMB_inspectChildrenOn_ = new_Symbol(L"inspectChildrenOn:");
+    Variable VAR_inspector_0_0 = new_Variable_named(L"inspector", 0);
+    Array PArray4684 = new_Array_with(1, (Optr)VAR_inspector_0_0);
+    Symbol SMB_class = new_Symbol(L"class");
+    // class. 
+    Send PSend4686 = new_Send((Optr)self, SMB_class, 0);
+    Symbol SMB_superclass = new_Symbol(L"superclass");
+    // superclass. 
+    Send PSend4687 = new_Send((Optr)PSend4686, SMB_superclass, 0);
+    Symbol SMB_layout = new_Symbol(L"layout");
+    // layout. 
+    Send PSend4688 = new_Send((Optr)PSend4687, SMB_layout, 0);
+    Symbol SMB_inspectChildrenFrom_on_ = new_Symbol(L"inspectChildrenFrom:on:");
+    // inspectChildrenFrom:on:. 
+    Send PSend4689 = new_Send((Optr)PSend4688, SMB_inspectChildrenFrom_on_, 2, (Optr)self, (Optr)VAR_inspector_0_0);
+    Array PThreadedCode4685 = instantiate_Array_with(ThreadedCode_Class, 0, 13, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4686, (Optr)&t_send0, (Optr)PSend4687, (Optr)&t_send0, (Optr)PSend4688, (Optr)&t_push_self, (Optr)&t_push_variable, (Optr)VAR_inspector_0_0, (Optr)&t_send2, (Optr)PSend4689, (Optr)&t_method_return);
+    Method PMethod4683 = new_Method_with(PArray4684, empty_Array, empty_Array, PThreadedCode4685, 1, PSend4689);
     
-    MethodClosure MC_SMB_clearNative = new_MethodClosure((Method)PNativeMethod4686, NativeMethod_Class);
-    store_method(NativeMethod_Class, SMB_clearNative, MC_SMB_clearNative);
+    MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod4683, NativeMethod_Class);
+    store_method(NativeMethod_Class, SMB_inspectChildrenOn_, MC_SMB_inspectChildrenOn_);
 }
 
 
@@ -101,9 +101,9 @@ void init_Kernel_AST_PNativeMethod_layout() {
 }
 
 void init_Kernel_AST_PNativeMethod_methods() {
-    init_SMB_inspectChildrenOn_();
-    init_SMB_accept_on_message_boundBy_();
     init_SMB_clearNative();
+    init_SMB_accept_on_message_boundBy_();
+    init_SMB_inspectChildrenOn_();
     init_SMB_accept_();
     
 }

@@ -79,7 +79,6 @@ static void init_SMB_remove_ifAbsent_() {
 }
 
 
-<<<<<<< HEAD
 static void init_SMB_newBucket_() {
     Symbol SMB_newBucket_ = new_Symbol(L"newBucket:");
     Variable VAR_sizeRequested_0_0 = new_Variable_named(L"sizeRequested", 0);
@@ -106,24 +105,10 @@ static void init_SMB_inspectChildrenOn_() {
     Assign PAssign5793 = new_Assign((Optr)VAR_index_0_1, (Optr)int_0_Const);
     Variable VAR_value_1_0 = new_Variable_named(L"value", 1);
     Array PArray5795 = new_Array_with(1, (Optr)VAR_value_1_0);
-=======
-static void init_SMB_inspectChildrenOn_() {
-    Symbol SMB_inspectChildrenOn_ = new_Symbol(L"inspectChildrenOn:");
-    Variable VAR_inspector_0_0 = new_Variable_named(L"inspector", 0);
-    Array PArray5786 = new_Array_with(1, (Optr)VAR_inspector_0_0);
-    Variable VAR_index_0_1 = new_Variable_named(L"index", 0);
-    Array PArray5787 = new_Array_with(1, (Optr)VAR_index_0_1);
-    SmallInt int_0 = new_SmallInt(0);
-    Constant int_0_Const = new_Constant((Optr)int_0);
-    Assign PAssign5789 = new_Assign((Optr)VAR_index_0_1, (Optr)int_0_Const);
-    Variable VAR_value_1_0 = new_Variable_named(L"value", 1);
-    Array PArray5791 = new_Array_with(1, (Optr)VAR_value_1_0);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     Symbol SMB__plus_ = new_Symbol(L"+");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // +. 
-<<<<<<< HEAD
     Send PSend5798 = new_Send((Optr)VAR_index_0_1, SMB__plus_, 1, (Optr)int_1_Const);
     Assign PAssign5797 = new_Assign((Optr)VAR_index_0_1, (Optr)PSend5798);
     Array PThreadedCode5800 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_value_1_0, (Optr)&t_block_return);
@@ -140,40 +125,7 @@ static void init_SMB_inspectChildrenOn_() {
     Method PMethod5789 = new_Method_with(PArray5790, PArray5791, empty_Array, PThreadedCode5792, 3, PAssign5793, PSend5802, self);
     
     MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod5789, Set_Class);
-=======
-    Send PSend5794 = new_Send((Optr)VAR_index_0_1, SMB__plus_, 1, (Optr)int_1_Const);
-    Assign PAssign5793 = new_Assign((Optr)VAR_index_0_1, (Optr)PSend5794);
-    Array PThreadedCode5796 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_variable, (Optr)VAR_value_1_0, (Optr)&t_block_return);
-    Block PBlock5795 = new_Block_with(empty_Array, empty_Array, PThreadedCode5796, 1, VAR_value_1_0);
-    Symbol SMB_child_value_ = new_Symbol(L"child:value:");
-    // child:value:. 
-    Send PSend5797 = new_Send((Optr)VAR_inspector_0_0, SMB_child_value_, 2, (Optr)PAssign5793, (Optr)PBlock5795);
-    Array PThreadedCode5792 = instantiate_Array_with(ThreadedCode_Class, 0, 15, (Optr)&t_push_variable, (Optr)VAR_inspector_0_0, (Optr)&t_push1, (Optr)PAssign5793, (Optr)&t_push_variable, (Optr)VAR_index_0_1, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend5794, (Optr)&t_assign, (Optr)&t_push_closure, (Optr)PBlock5795, (Optr)&t_send2, (Optr)PSend5797, (Optr)&t_method_return);
-    Block PBlock5790 = new_Block_with(PArray5791, empty_Array, PThreadedCode5792, 1, PSend5797);
-    Symbol SMB_do_ = new_Symbol(L"do:");
-    // do:. 
-    Send PSend5798 = new_Send((Optr)self, SMB_do_, 1, (Optr)PBlock5790);
-    Array PThreadedCode5788 = instantiate_Array_with(ThreadedCode_Class, 0, 12, (Optr)&t_push1, (Optr)PAssign5789, (Optr)&t_push_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_push_closure, (Optr)PBlock5790, (Optr)&t_send1, (Optr)PSend5798, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod5785 = new_Method_with(PArray5786, PArray5787, empty_Array, PThreadedCode5788, 3, PAssign5789, PSend5798, self);
-    
-    MethodClosure MC_SMB_inspectChildrenOn_ = new_MethodClosure((Method)PMethod5785, Set_Class);
->>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Set_Class, SMB_inspectChildrenOn_, MC_SMB_inspectChildrenOn_);
-}
-
-
-static void init_SMB_newBucket_() {
-    Symbol SMB_newBucket_ = new_Symbol(L"newBucket:");
-    Variable VAR_sizeRequested_0_0 = new_Variable_named(L"sizeRequested", 0);
-    Array PArray5800 = new_Array_with(1, (Optr)VAR_sizeRequested_0_0);
-    Symbol SMB_new_ = new_Symbol(L"new:");
-    // new:. 
-    Send PSend5802 = new_Send((Optr)PSetBucket_classReference, SMB_new_, 1, (Optr)VAR_sizeRequested_0_0);
-    Array PThreadedCode5801 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push_class_reference, (Optr)PSetBucket_classReference, (Optr)&t_push_variable, (Optr)VAR_sizeRequested_0_0, (Optr)&t_send1, (Optr)PSend5802, (Optr)&t_method_return);
-    Method PMethod5799 = new_Method_with(PArray5800, empty_Array, empty_Array, PThreadedCode5801, 1, PSend5802);
-    
-    MethodClosure MC_SMB_newBucket_ = new_MethodClosure((Method)PMethod5799, Set_Class);
-    store_method(Set_Class, SMB_newBucket_, MC_SMB_newBucket_);
 }
 
 
@@ -527,8 +479,8 @@ void init_Collection_Set_layout() {
 
 void init_Collection_Set_methods() {
     init_SMB_remove_ifAbsent_();
-    init_SMB_inspectChildrenOn_();
     init_SMB_newBucket_();
+    init_SMB_inspectChildrenOn_();
     init_SMB_addInFirstBucket_();
     init_SMB_includes_();
     init_SMB_add_();

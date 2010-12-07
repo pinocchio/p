@@ -11,29 +11,29 @@ Optr layout_Number_Random_PrimeSequence;
 static void init_SMB_seed_() {
     Symbol SMB_seed_ = new_Symbol(L"seed:");
     Variable VAR_aPrime_0_0 = new_Variable_named(L"aPrime", 0);
-    Array PArray21663 = new_Array_with(1, (Optr)VAR_aPrime_0_0);
+    Array PArray21693 = new_Array_with(1, (Optr)VAR_aPrime_0_0);
     Symbol SMB_isPrime = new_Symbol(L"isPrime");
     // isPrime. 
-    Send PSend21665 = new_Send((Optr)VAR_aPrime_0_0, SMB_isPrime, 0);
+    Send PSend21695 = new_Send((Optr)VAR_aPrime_0_0, SMB_isPrime, 0);
     Symbol SMB_ifFalse_ = new_Symbol(L"ifFalse:");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend21669 = new_Send((Optr)PInvalidArgument_classReference, SMB_new, 0);
+    Send PSend21699 = new_Send((Optr)PInvalidArgument_classReference, SMB_new, 0);
     Symbol SMB_signal_ = new_Symbol(L"signal:");
     // signal:. 
-    Send PSend21670 = new_Send((Optr)self, SMB_signal_, 1, (Optr)PSend21669);
-    Array PThreadedCode21668 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_class_reference, (Optr)PInvalidArgument_classReference, (Optr)&t_send0, (Optr)PSend21669, (Optr)&t_send1, (Optr)PSend21670, (Optr)&t_block_return);
-    Block PBlock21667 = new_Block_with(empty_Array, empty_Array, PThreadedCode21668, 1, PSend21670);
+    Send PSend21700 = new_Send((Optr)self, SMB_signal_, 1, (Optr)PSend21699);
+    Array PThreadedCode21698 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_push_class_reference, (Optr)PInvalidArgument_classReference, (Optr)&t_send0, (Optr)PSend21699, (Optr)&t_send1, (Optr)PSend21700, (Optr)&t_block_return);
+    Block PBlock21697 = new_Block_with(empty_Array, empty_Array, PThreadedCode21698, 1, PSend21700);
     // ifFalse:. 
-    Send PSend21666 = new_Send((Optr)PSend21665, SMB_ifFalse_, 1, (Optr)PBlock21667);
-    Assign PAssign21671 = new_Assign((Optr)slot_Number_Random_PrimeSequence_prime, (Optr)VAR_aPrime_0_0);
+    Send PSend21696 = new_Send((Optr)PSend21695, SMB_ifFalse_, 1, (Optr)PBlock21697);
+    Assign PAssign21701 = new_Assign((Optr)slot_Number_Random_PrimeSequence_prime, (Optr)VAR_aPrime_0_0);
     Symbol SMB_refresh = new_Symbol(L"refresh");
     // refresh. 
-    Send PSend21672 = new_Send((Optr)self, SMB_refresh, 0);
-    Array PThreadedCode21664 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_variable, (Optr)VAR_aPrime_0_0, (Optr)&t_send0, (Optr)PSend21665, (Optr)&t_send_ifFalse_, (Optr)PSend21666, (Optr)PBlock21667, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21671, (Optr)&t_push_variable, (Optr)VAR_aPrime_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21672, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21662 = new_Method_with(PArray21663, empty_Array, empty_Array, PThreadedCode21664, 4, PSend21666, PAssign21671, PSend21672, self);
+    Send PSend21702 = new_Send((Optr)self, SMB_refresh, 0);
+    Array PThreadedCode21694 = instantiate_Array_with(ThreadedCode_Class, 0, 19, (Optr)&t_push_variable, (Optr)VAR_aPrime_0_0, (Optr)&t_send0, (Optr)PSend21695, (Optr)&t_send_ifFalse_, (Optr)PSend21696, (Optr)PBlock21697, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21701, (Optr)&t_push_variable, (Optr)VAR_aPrime_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21702, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21692 = new_Method_with(PArray21693, empty_Array, empty_Array, PThreadedCode21694, 4, PSend21696, PAssign21701, PSend21702, self);
     
-    MethodClosure MC_SMB_seed_ = new_MethodClosure((Method)PMethod21662, Number_Random_PrimeSequence_Class);
+    MethodClosure MC_SMB_seed_ = new_MethodClosure((Method)PMethod21692, Number_Random_PrimeSequence_Class);
     store_method(Number_Random_PrimeSequence_Class, SMB_seed_, MC_SMB_seed_);
 }
 
@@ -41,15 +41,15 @@ static void init_SMB_seed_() {
 static void init_SMB_size_() {
     Symbol SMB_size_ = new_Symbol(L"size:");
     Variable VAR_aNumber_0_0 = new_Variable_named(L"aNumber", 0);
-    Array PArray21674 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
-    Assign PAssign21676 = new_Assign((Optr)slot_Number_Random_PrimeSequence_size, (Optr)VAR_aNumber_0_0);
+    Array PArray21704 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
+    Assign PAssign21706 = new_Assign((Optr)slot_Number_Random_PrimeSequence_size, (Optr)VAR_aNumber_0_0);
     Symbol SMB_refresh = new_Symbol(L"refresh");
     // refresh. 
-    Send PSend21677 = new_Send((Optr)self, SMB_refresh, 0);
-    Array PThreadedCode21675 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign21676, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21677, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21673 = new_Method_with(PArray21674, empty_Array, empty_Array, PThreadedCode21675, 3, PAssign21676, PSend21677, self);
+    Send PSend21707 = new_Send((Optr)self, SMB_refresh, 0);
+    Array PThreadedCode21705 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push1, (Optr)PAssign21706, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21707, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21703 = new_Method_with(PArray21704, empty_Array, empty_Array, PThreadedCode21705, 3, PAssign21706, PSend21707, self);
     
-    MethodClosure MC_SMB_size_ = new_MethodClosure((Method)PMethod21673, Number_Random_PrimeSequence_Class);
+    MethodClosure MC_SMB_size_ = new_MethodClosure((Method)PMethod21703, Number_Random_PrimeSequence_Class);
     store_method(Number_Random_PrimeSequence_Class, SMB_size_, MC_SMB_size_);
 }
 
@@ -58,24 +58,24 @@ static void init_SMB_refresh() {
     Symbol SMB_refresh = new_Symbol(L"refresh");
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
     // subclassResponsibility. 
-    Send PSend21680 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
-    Array PThreadedCode21679 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21680, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21678 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21679, 2, PSend21680, self);
+    Send PSend21710 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
+    Array PThreadedCode21709 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21710, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21708 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21709, 2, PSend21710, self);
     
-    MethodClosure MC_SMB_refresh = new_MethodClosure((Method)PMethod21678, Number_Random_PrimeSequence_Class);
+    MethodClosure MC_SMB_refresh = new_MethodClosure((Method)PMethod21708, Number_Random_PrimeSequence_Class);
     store_method(Number_Random_PrimeSequence_Class, SMB_refresh, MC_SMB_refresh);
 }
 
 
 static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
-    SmallInt int_13 = new_SmallInt(13);
-    Constant int_13_Const = new_Constant((Optr)int_13);
-    Assign PAssign21683 = new_Assign((Optr)slot_Number_Random_PrimeSequence_prime, (Optr)int_13_Const);
-    Array PThreadedCode21682 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21683, (Optr)&t_push1, (Optr)int_13, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21681 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21682, 2, PAssign21683, self);
+    SmallInt int_3 = new_SmallInt(3);
+    Constant int_3_Const = new_Constant((Optr)int_3);
+    Assign PAssign21713 = new_Assign((Optr)slot_Number_Random_PrimeSequence_prime, (Optr)int_3_Const);
+    Array PThreadedCode21712 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21713, (Optr)&t_push1, (Optr)int_3, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21711 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21712, 2, PAssign21713, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod21681, Number_Random_PrimeSequence_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod21711, Number_Random_PrimeSequence_Class);
     store_method(Number_Random_PrimeSequence_Class, SMB_initialize, MC_SMB_initialize);
 }
 
