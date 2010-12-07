@@ -1,0 +1,16 @@
+#ifndef PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_HASHOBJECT
+#define PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_HASHOBJECT 
+
+#include <pinocchio.h>
+extern void init_PBenchmark_Collection_Dictionary_HashObject_methods();
+
+extern void init_PBenchmark_Collection_Dictionary_HashObject_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_PBenchmark_Collection_Dictionary_HashObject_Class_class;
+extern Optr slot_PBenchmark_Collection_Dictionary_HashObject_hash;
+extern Optr layout_PBenchmark_Collection_Dictionary_HashObject;
+
+
+#endif //PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_HASHOBJECT

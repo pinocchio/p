@@ -7,6 +7,7 @@ Optr layout_Smalltalk_Compiler_Scope_Class_class;
 static void init_SMB_lookup_() {
     Symbol SMB_lookup_ = new_Symbol(L"lookup:");
     Variable VAR_anASTVariable_0_0 = new_Variable_named(L"anASTVariable", 0);
+<<<<<<< HEAD
     Array PArray13362 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
     // subclassResponsibility. 
@@ -15,16 +16,33 @@ static void init_SMB_lookup_() {
     Method PMethod13361 = new_Method_with(PArray13362, empty_Array, empty_Array, PThreadedCode13363, 2, PSend13364, self);
     
     MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13361, Smalltalk_Compiler_Scope_Class);
+=======
+    Array PArray13328 = new_Array_with(1, (Optr)VAR_anASTVariable_0_0);
+    Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
+    // subclassResponsibility. 
+    Send PSend13330 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
+    Array PThreadedCode13329 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend13330, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod13327 = new_Method_with(PArray13328, empty_Array, empty_Array, PThreadedCode13329, 2, PSend13330, self);
+    
+    MethodClosure MC_SMB_lookup_ = new_MethodClosure((Method)PMethod13327, Smalltalk_Compiler_Scope_Class);
+>>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Smalltalk_Compiler_Scope_Class, SMB_lookup_, MC_SMB_lookup_);
 }
 
 
 static void init_SMB_isRootScope() {
     Symbol SMB_isRootScope = new_Symbol(L"isRootScope");
+<<<<<<< HEAD
     Array PThreadedCode13366 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
     Method PMethod13365 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13366, 1, false_Const);
     
     MethodClosure MC_SMB_isRootScope = new_MethodClosure((Method)PMethod13365, Smalltalk_Compiler_Scope_Class);
+=======
+    Array PThreadedCode13332 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_false);
+    Method PMethod13331 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode13332, 1, false_Const);
+    
+    MethodClosure MC_SMB_isRootScope = new_MethodClosure((Method)PMethod13331, Smalltalk_Compiler_Scope_Class);
+>>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Smalltalk_Compiler_Scope_Class, SMB_isRootScope, MC_SMB_isRootScope);
 }
 

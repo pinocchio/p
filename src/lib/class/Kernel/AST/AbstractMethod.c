@@ -73,13 +73,15 @@ static void init_SMB_locals() {
 }
 
 
-static void init_SMB_clearNative() {
-    Symbol SMB_clearNative = new_Symbol(L"clearNative");
-    Array PThreadedCode4555 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod4554 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4555, 1, self);
+static void init_SMB_depth() {
+    Symbol SMB_depth = new_Symbol(L"depth");
+    Array PThreadedCode4555 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_0);
+    SmallInt int_0 = new_SmallInt(0);
+    Constant int_0_Const = new_Constant((Optr)int_0);
+    Method PMethod4554 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4555, 1, int_0_Const);
     
-    MethodClosure MC_SMB_clearNative = new_MethodClosure((Method)PMethod4554, Kernel_AST_AbstractMethod_Class);
-    store_method(Kernel_AST_AbstractMethod_Class, SMB_clearNative, MC_SMB_clearNative);
+    MethodClosure MC_SMB_depth = new_MethodClosure((Method)PMethod4554, Kernel_AST_AbstractMethod_Class);
+    store_method(Kernel_AST_AbstractMethod_Class, SMB_depth, MC_SMB_depth);
 }
 
 
@@ -111,33 +113,31 @@ static void init_SMB_params_() {
 }
 
 
-static void init_SMB_depth() {
-    Symbol SMB_depth = new_Symbol(L"depth");
-    Array PThreadedCode4564 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_0);
-    SmallInt int_0 = new_SmallInt(0);
-    Constant int_0_Const = new_Constant((Optr)int_0);
-    Method PMethod4563 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4564, 1, int_0_Const);
-    
-    MethodClosure MC_SMB_depth = new_MethodClosure((Method)PMethod4563, Kernel_AST_AbstractMethod_Class);
-    store_method(Kernel_AST_AbstractMethod_Class, SMB_depth, MC_SMB_depth);
-}
-
-
 static void init_SMB_accept_on_message_boundBy_() {
     Symbol SMB_accept_on_message_boundBy_ = new_Symbol(L"accept:on:message:boundBy:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
     Variable VAR_receiver_0_1 = new_Variable_named(L"receiver", 0);
     Variable VAR_message_0_2 = new_Variable_named(L"message", 0);
     Variable VAR_closure_0_3 = new_Variable_named(L"closure", 0);
-    Array PArray4566 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
+    Array PArray4564 = new_Array_with(4, (Optr)VAR_visitor_0_0, (Optr)VAR_receiver_0_1, (Optr)VAR_message_0_2, (Optr)VAR_closure_0_3);
     Symbol SMB_subclassResponsibility = new_Symbol(L"subclassResponsibility");
     // subclassResponsibility. 
-    Send PSend4568 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
-    Array PThreadedCode4567 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4568, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod4565 = new_Method_with(PArray4566, empty_Array, empty_Array, PThreadedCode4567, 2, PSend4568, self);
+    Send PSend4566 = new_Send((Optr)self, SMB_subclassResponsibility, 0);
+    Array PThreadedCode4565 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend4566, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod4563 = new_Method_with(PArray4564, empty_Array, empty_Array, PThreadedCode4565, 2, PSend4566, self);
     
-    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4565, Kernel_AST_AbstractMethod_Class);
+    MethodClosure MC_SMB_accept_on_message_boundBy_ = new_MethodClosure((Method)PMethod4563, Kernel_AST_AbstractMethod_Class);
     store_method(Kernel_AST_AbstractMethod_Class, SMB_accept_on_message_boundBy_, MC_SMB_accept_on_message_boundBy_);
+}
+
+
+static void init_SMB_clearNative() {
+    Symbol SMB_clearNative = new_Symbol(L"clearNative");
+    Array PThreadedCode4568 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod4567 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode4568, 1, self);
+    
+    MethodClosure MC_SMB_clearNative = new_MethodClosure((Method)PMethod4567, Kernel_AST_AbstractMethod_Class);
+    store_method(Kernel_AST_AbstractMethod_Class, SMB_clearNative, MC_SMB_clearNative);
 }
 
 
@@ -486,11 +486,11 @@ void init_Kernel_AST_PAbstractMethod_methods() {
     init_SMB_last();
     init_SMB_locals_();
     init_SMB_locals();
-    init_SMB_clearNative();
+    init_SMB_depth();
     init_SMB_first();
     init_SMB_params_();
-    init_SMB_depth();
     init_SMB_accept_on_message_boundBy_();
+    init_SMB_clearNative();
     init_SMB_first_();
     init_SMB_info_();
     init_SMB_do_();

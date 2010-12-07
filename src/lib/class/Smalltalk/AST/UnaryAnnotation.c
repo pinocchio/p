@@ -8,6 +8,7 @@ Optr layout_Smalltalk_AST_UnaryAnnotation;
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
+<<<<<<< HEAD
     Array PArray16167 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitUnaryAnnotation_ = new_Symbol(L"visitUnaryAnnotation:");
     // visitUnaryAnnotation:. 
@@ -16,6 +17,16 @@ static void init_SMB_accept_() {
     Method PMethod16166 = new_Method_with(PArray16167, empty_Array, empty_Array, PThreadedCode16168, 1, PSend16169);
     
     MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod16166, Smalltalk_AST_UnaryAnnotation_Class);
+=======
+    Array PArray16133 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Symbol SMB_visitUnaryAnnotation_ = new_Symbol(L"visitUnaryAnnotation:");
+    // visitUnaryAnnotation:. 
+    Send PSend16135 = new_Send((Optr)VAR_visitor_0_0, SMB_visitUnaryAnnotation_, 1, (Optr)self);
+    Array PThreadedCode16134 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend16135, (Optr)&t_method_return);
+    Method PMethod16132 = new_Method_with(PArray16133, empty_Array, empty_Array, PThreadedCode16134, 1, PSend16135);
+    
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod16132, Smalltalk_AST_UnaryAnnotation_Class);
+>>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Smalltalk_AST_UnaryAnnotation_Class, SMB_accept_, MC_SMB_accept_);
 }
 

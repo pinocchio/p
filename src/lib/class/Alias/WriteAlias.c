@@ -8,10 +8,17 @@ Optr layout_Alias_WriteAlias;
 
 static void init_SMB_predecessor() {
     Symbol SMB_predecessor = new_Symbol(L"predecessor");
+<<<<<<< HEAD
     Array PThreadedCode21832 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Alias_WriteAlias_predecessor, (Optr)&t_method_return);
     Method PMethod21831 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21832, 1, slot_Alias_WriteAlias_predecessor);
     
     MethodClosure MC_SMB_predecessor = new_MethodClosure((Method)PMethod21831, Alias_WriteAlias_Class);
+=======
+    Array PThreadedCode21649 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Alias_WriteAlias_predecessor, (Optr)&t_method_return);
+    Method PMethod21648 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21649, 1, slot_Alias_WriteAlias_predecessor);
+    
+    MethodClosure MC_SMB_predecessor = new_MethodClosure((Method)PMethod21648, Alias_WriteAlias_Class);
+>>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Alias_WriteAlias_Class, SMB_predecessor, MC_SMB_predecessor);
 }
 
@@ -19,12 +26,21 @@ static void init_SMB_predecessor() {
 static void init_SMB_predecessor_() {
     Symbol SMB_predecessor_ = new_Symbol(L"predecessor:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
+<<<<<<< HEAD
     Array PArray21834 = new_Array_with(1, (Optr)VAR_anObject_0_0);
     Assign PAssign21836 = new_Assign((Optr)slot_Alias_WriteAlias_predecessor, (Optr)VAR_anObject_0_0);
     Array PThreadedCode21835 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21836, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
     Method PMethod21833 = new_Method_with(PArray21834, empty_Array, empty_Array, PThreadedCode21835, 2, PAssign21836, self);
     
     MethodClosure MC_SMB_predecessor_ = new_MethodClosure((Method)PMethod21833, Alias_WriteAlias_Class);
+=======
+    Array PArray21651 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign21653 = new_Assign((Optr)slot_Alias_WriteAlias_predecessor, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode21652 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21653, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21650 = new_Method_with(PArray21651, empty_Array, empty_Array, PThreadedCode21652, 2, PAssign21653, self);
+    
+    MethodClosure MC_SMB_predecessor_ = new_MethodClosure((Method)PMethod21650, Alias_WriteAlias_Class);
+>>>>>>> 0409bfcc3f9379d8b19cce9b02e2a910a0ce2629
     store_method(Alias_WriteAlias_Class, SMB_predecessor_, MC_SMB_predecessor_);
 }
 

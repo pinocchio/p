@@ -1,0 +1,26 @@
+#ifndef PINOCCHIO_LIB_COLLECTION_BENCHMARK_MULTIDICTBENCHMARK
+#define PINOCCHIO_LIB_COLLECTION_BENCHMARK_MULTIDICTBENCHMARK 
+
+#include <pinocchio.h>
+extern void init_Collection_Benchmark_MultiDictBenchmark_methods();
+
+extern void init_Collection_Benchmark_MultiDictBenchmark_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_Collection_Benchmark_MultiDictBenchmark_Class_class;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_stResults;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_pResults;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_sResults;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_stBenchmark;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_pBenchmark;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_sBenchmark;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_probeCount;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_keyBlock;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_useStDict;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_randomized;
+extern Optr slot_Collection_Benchmark_MultiDictBenchmark_keyBlockGenerator;
+extern Optr layout_Collection_Benchmark_MultiDictBenchmark;
+
+
+#endif //PINOCCHIO_LIB_COLLECTION_BENCHMARK_MULTIDICTBENCHMARK

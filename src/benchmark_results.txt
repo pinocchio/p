@@ -279,7 +279,7 @@ Dictionary: 0.18069200 +/-0.001876
         AtPutExisting: 0.005449000 +/-0.000663
         AtPutNew: 0.036160000 +/-0.000489
         AtIfAbsentPut: 0.01743500 +/-0.001047
-NO TO:DO: OPCODE SUPPORT ==================================
+NO TO:DO: OPCODE SUPPORT ===========================
 Fib
 	Fib: 0.87677000 +/-0.001018
 ParserBenchmark: 2.88629600 +/-0.001555
@@ -327,3 +327,28 @@ Dictionary: 0.3901080 +/-0.004303
 	AtPutExisting: 0.00319000 +/-0.001009
 	AtPutNew: 0.0565070 +/-0.002518
 	AtIfAbsentPut: 0.01588700 +/-0.001853
+NO TO:By:DO: OPCODE SUPPORT ========================
+
+Fib
+	Fib: 0.834091000 +/-0.000866
+ParserBenchmark: 2.89152700 +/-0.001523
+	Annotation: 0.1414220000 +/-0.000228
+	BlockWithArgAndBody: 0.103744000 +/-0.000536
+	BlockWithArg: 0.103385000 +/-0.000542
+	MediumMethod: 0.636966000 +/-0.000456
+	LongMethod: 1.371397000 +/-0.000521
+	Block: 0.105441000 +/-0.000500
+	StringNumbers: 0.103780000 +/-0.000506
+	Symbol: 0.104697000 +/-0.000505
+	String: 0.104066000 +/-0.000511
+	SmallMethod: 0.116629000 +/-0.000426
+Dictionary: 0.26151100 +/-0.001825
+	IncludesKey: 0.016009000 +/-0.000703
+	Includes: 0.0005250000 +/-0.000179
+	AtPut: 0.016389000 +/-0.000685
+	KeysAndValuesDo: 0.085973000 +/-0.000620
+	Do: 0.080134000 +/-0.000618
+	RemoveKey: 0.001246000000 +/-0.000038
+	AtPutExisting: 0.005696000 +/-0.000524
+	AtPutNew: 0.04205900 +/-0.000955
+	AtIfAbsentPut: 0.013480000 +/-0.000619

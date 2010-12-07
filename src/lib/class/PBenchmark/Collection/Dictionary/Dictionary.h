@@ -1,0 +1,15 @@
+#ifndef PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBSTDICTIONARY
+#define PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBSTDICTIONARY 
+
+#include <pinocchio.h>
+extern void init_PBenchmark_Collection_Dictionary_PBSTDictionary_methods();
+
+extern void init_PBenchmark_Collection_Dictionary_PBSTDictionary_layout();
+
+#include <lib/lib.h>
+
+extern Optr layout_PBenchmark_Collection_Dictionary_Dictionary_Class_class;
+extern Optr layout_PBenchmark_Collection_Dictionary_Dictionary;
+
+
+#endif //PINOCCHIO_LIB_PBENCHMARK_COLLECTION_DICTIONARY_PBSTDICTIONARY
