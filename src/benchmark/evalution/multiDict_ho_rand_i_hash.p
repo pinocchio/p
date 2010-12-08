@@ -11,5 +11,5 @@ md keyBlockGenerator: [:size || indices |
 				j := indices at: i.
                 PBenchmark.Collection.Dictionary.HashObject with: i hash]]].
 md run.
-IO.File stdout << 'MultiDict [:i| HashObject with: i hash]'; lf.
+IO.File stdout << 'MultiDict randomized [:i| HashObject with: i hash]'; lf.
 IO.File stdout <<  md.
