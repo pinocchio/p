@@ -9,22 +9,22 @@ Optr layout_Testing_TestCase;
 static void init_SMB_testSelector_() {
     Symbol SMB_testSelector_ = new_Symbol(L"testSelector:");
     Variable VAR_anObject_0_0 = new_Variable_named(L"anObject", 0);
-    Array PArray12297 = new_Array_with(1, (Optr)VAR_anObject_0_0);
-    Assign PAssign12299 = new_Assign((Optr)slot_Testing_TestCase_testSelector, (Optr)VAR_anObject_0_0);
-    Array PThreadedCode12298 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign12299, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod12296 = new_Method_with(PArray12297, empty_Array, empty_Array, PThreadedCode12298, 2, PAssign12299, self);
+    Array PArray12324 = new_Array_with(1, (Optr)VAR_anObject_0_0);
+    Assign PAssign12326 = new_Assign((Optr)slot_Testing_TestCase_testSelector, (Optr)VAR_anObject_0_0);
+    Array PThreadedCode12325 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign12326, (Optr)&t_push_variable, (Optr)VAR_anObject_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod12323 = new_Method_with(PArray12324, empty_Array, empty_Array, PThreadedCode12325, 2, PAssign12326, self);
     
-    MethodClosure MC_SMB_testSelector_ = new_MethodClosure((Method)PMethod12296, Testing_TestCase_Class);
+    MethodClosure MC_SMB_testSelector_ = new_MethodClosure((Method)PMethod12323, Testing_TestCase_Class);
     store_method(Testing_TestCase_Class, SMB_testSelector_, MC_SMB_testSelector_);
 }
 
 
 static void init_SMB_testSelector() {
     Symbol SMB_testSelector = new_Symbol(L"testSelector");
-    Array PThreadedCode12301 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Testing_TestCase_testSelector, (Optr)&t_method_return);
-    Method PMethod12300 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12301, 1, slot_Testing_TestCase_testSelector);
+    Array PThreadedCode12328 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Testing_TestCase_testSelector, (Optr)&t_method_return);
+    Method PMethod12327 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12328, 1, slot_Testing_TestCase_testSelector);
     
-    MethodClosure MC_SMB_testSelector = new_MethodClosure((Method)PMethod12300, Testing_TestCase_Class);
+    MethodClosure MC_SMB_testSelector = new_MethodClosure((Method)PMethod12327, Testing_TestCase_Class);
     store_method(Testing_TestCase_Class, SMB_testSelector, MC_SMB_testSelector);
 }
 
@@ -33,13 +33,13 @@ static void init_class_SMB_run() {
     Symbol SMB_run = new_Symbol(L"run");
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend12304 = new_Send((Optr)self, SMB_new, 0);
+    Send PSend12331 = new_Send((Optr)self, SMB_new, 0);
     // run. 
-    Send PSend12305 = new_Send((Optr)PSend12304, SMB_run, 0);
-    Array PThreadedCode12303 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend12304, (Optr)&t_send0, (Optr)PSend12305, (Optr)&t_method_return);
-    Method PMethod12302 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12303, 1, PSend12305);
+    Send PSend12332 = new_Send((Optr)PSend12331, SMB_run, 0);
+    Array PThreadedCode12330 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend12331, (Optr)&t_send0, (Optr)PSend12332, (Optr)&t_method_return);
+    Method PMethod12329 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode12330, 1, PSend12332);
     
-    MethodClosure MC_SMB_run = new_MethodClosure((Method)PMethod12302, HEADER(Testing_TestCase_Class));
+    MethodClosure MC_SMB_run = new_MethodClosure((Method)PMethod12329, HEADER(Testing_TestCase_Class));
     store_method(HEADER(Testing_TestCase_Class), SMB_run, MC_SMB_run);
 }
 

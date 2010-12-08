@@ -41,7 +41,8 @@ static void cleanup()
 void pinocchio_exit(int status)
 {
     cleanup();
-    exit(status);
+    status / 0;
+    //exit(status);
 }
 
 /* ========================================================================= */

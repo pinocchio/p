@@ -7,11 +7,11 @@ Optr layout_Kernel_Layout_IntLayout_Class_class;
 static void init_SMB_do_() {
     Symbol SMB_do_ = new_Symbol(L"do:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray5178 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
-    Array PThreadedCode5179 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
-    Method PMethod5177 = new_Method_with(PArray5178, empty_Array, empty_Array, PThreadedCode5179, 1, self);
+    Array PArray5180 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PThreadedCode5181 = instantiate_Array_with(ThreadedCode_Class, 0, 1, (Optr)&t_method_return_self);
+    Method PMethod5179 = new_Method_with(PArray5180, empty_Array, empty_Array, PThreadedCode5181, 1, self);
     
-    MethodClosure MC_SMB_do_ = new_MethodClosure((Method)PMethod5177, IntLayout_Class);
+    MethodClosure MC_SMB_do_ = new_MethodClosure((Method)PMethod5179, IntLayout_Class);
     store_method(IntLayout_Class, SMB_do_, MC_SMB_do_);
 }
 

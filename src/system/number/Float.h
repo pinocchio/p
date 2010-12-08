@@ -17,6 +17,7 @@ extern Float Float_plus_Float(double left, double right);
 extern Float Float_times_Float(double left, double right);
 extern Float Float_divide_Float(double left, double right);
 extern Float Float_minus_Float(double left, double right);
+extern Float Float_modulo_Float(double left, double right);
 extern Boolean Float_lt_Float(double left, double right);
 extern Boolean Float_gt_Float(double left, double right);
 extern Boolean Float_notEqual_Float(double left, double right);

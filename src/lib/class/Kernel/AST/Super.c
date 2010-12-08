@@ -8,14 +8,14 @@ Optr layout_Kernel_AST_Super;
 static void init_SMB_accept_() {
     Symbol SMB_accept_ = new_Symbol(L"accept:");
     Variable VAR_visitor_0_0 = new_Variable_named(L"visitor", 0);
-    Array PArray4844 = new_Array_with(1, (Optr)VAR_visitor_0_0);
+    Array PArray4846 = new_Array_with(1, (Optr)VAR_visitor_0_0);
     Symbol SMB_visitSuper_ = new_Symbol(L"visitSuper:");
     // visitSuper:. 
-    Send PSend4846 = new_Send((Optr)VAR_visitor_0_0, SMB_visitSuper_, 1, (Optr)self);
-    Array PThreadedCode4845 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4846, (Optr)&t_method_return);
-    Method PMethod4843 = new_Method_with(PArray4844, empty_Array, empty_Array, PThreadedCode4845, 1, PSend4846);
+    Send PSend4848 = new_Send((Optr)VAR_visitor_0_0, SMB_visitSuper_, 1, (Optr)self);
+    Array PThreadedCode4847 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_variable, (Optr)VAR_visitor_0_0, (Optr)&t_push_self, (Optr)&t_send1, (Optr)PSend4848, (Optr)&t_method_return);
+    Method PMethod4845 = new_Method_with(PArray4846, empty_Array, empty_Array, PThreadedCode4847, 1, PSend4848);
     
-    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4843, Super_Class);
+    MethodClosure MC_SMB_accept_ = new_MethodClosure((Method)PMethod4845, Super_Class);
     store_method(Super_Class, SMB_accept_, MC_SMB_accept_);
 }
 

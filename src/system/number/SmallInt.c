@@ -140,8 +140,14 @@ NATIVE1(SmallInt_divide_)
 
 NATIVE1(SmallInt_modulo_)
     long left = unwrap_int(self);
-    long right = unwrap_int(NATIVE_ARG(0));
-    RETURN_FROM_NATIVE(new_SmallInt(left % right));
+    Optr w_arg = NATIVE_ARG(0);
+    Class type = HEADER(w_arg);
+    if (type == Float_Class) {
+        RETURN_FROM_NATIVE(Float_modulo_Float(left, unwrap_float(w_arg)));
+    } else {
+        long right = unwrap_int(NATIVE_ARG(0));
+        RETURN_FROM_NATIVE(new_SmallInt(left % right));
+    }
 }
 
 NATIVE1(SmallInt_shiftLeft_)
@@ -238,7 +244,7 @@ void post_init_SmallInt()
     store_native(natives, L"-",  NM_SmallInt_minus_);   
     store_native(natives, L"*",  NM_SmallInt_times_); 
     store_native(natives, L"/",  NM_SmallInt_div_);
-    store_native(natives, L"//",  NM_SmallInt_divide_);
+    store_native(natives, L"//", NM_SmallInt_divide_);
     store_native(natives, L"%",  NM_SmallInt_modulo_);
     store_native(natives, L"\\\\", NM_SmallInt_modulo_);
     store_native(natives, L"<<", NM_SmallInt_shiftLeft_);

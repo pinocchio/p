@@ -8,20 +8,20 @@ Optr layout_Chronology_Week;
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21621 = new_Array_with(1, (Optr)VAR_aStream_0_0);
-    String string_21623 = new_String(L"a Week starting: ");
-    Constant string_21623_Const = new_Constant((Optr)string_21623);
+    Array PArray21718 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    String string_21720 = new_String(L"a Week starting: ");
+    Constant string_21720_Const = new_Constant((Optr)string_21720);
     // printOn:. 
-    Send PSend21624 = new_Send((Optr)string_21623_Const, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Send PSend21721 = new_Send((Optr)string_21720_Const, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
     Symbol SMB_start = new_Symbol(L"start");
     // start. 
-    Send PSend21625 = new_Send((Optr)self, SMB_start, 0);
+    Send PSend21722 = new_Send((Optr)self, SMB_start, 0);
     // printOn:. 
-    Send PSend21626 = new_Send((Optr)PSend21625, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode21622 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)string_21623, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21624, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21625, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21626, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21620 = new_Method_with(PArray21621, empty_Array, empty_Array, PThreadedCode21622, 3, PSend21624, PSend21626, self);
+    Send PSend21723 = new_Send((Optr)PSend21722, SMB_printOn_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21719 = instantiate_Array_with(ThreadedCode_Class, 0, 16, (Optr)&t_push1, (Optr)string_21720, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21721, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21722, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21723, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21717 = new_Method_with(PArray21718, empty_Array, empty_Array, PThreadedCode21719, 3, PSend21721, PSend21723, self);
     
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21620, Chronology_Week_Class);
+    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21717, Chronology_Week_Class);
     store_method(Chronology_Week_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
@@ -29,17 +29,17 @@ static void init_SMB_printOn_() {
 static void init_class_SMB_nameOfDay_() {
     Symbol SMB_nameOfDay_ = new_Symbol(L"nameOfDay:");
     Variable VAR_anIndex_0_0 = new_Variable_named(L"anIndex", 0);
-    Array PArray21628 = new_Array_with(1, (Optr)VAR_anIndex_0_0);
+    Array PArray21725 = new_Array_with(1, (Optr)VAR_anIndex_0_0);
     Symbol SMB_dayNames = new_Symbol(L"dayNames");
     // dayNames. 
-    Send PSend21630 = new_Send((Optr)PChronologyConstants_classReference, SMB_dayNames, 0);
+    Send PSend21727 = new_Send((Optr)PChronologyConstants_classReference, SMB_dayNames, 0);
     Symbol SMB_at_ = new_Symbol(L"at:");
     // at:. 
-    Send PSend21631 = new_Send((Optr)PSend21630, SMB_at_, 1, (Optr)VAR_anIndex_0_0);
-    Array PThreadedCode21629 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21630, (Optr)&t_push_variable, (Optr)VAR_anIndex_0_0, (Optr)&t_send1, (Optr)PSend21631, (Optr)&t_method_return);
-    Method PMethod21627 = new_Method_with(PArray21628, empty_Array, empty_Array, PThreadedCode21629, 1, PSend21631);
+    Send PSend21728 = new_Send((Optr)PSend21727, SMB_at_, 1, (Optr)VAR_anIndex_0_0);
+    Array PThreadedCode21726 = instantiate_Array_with(ThreadedCode_Class, 0, 9, (Optr)&t_push_class_reference, (Optr)PChronologyConstants_classReference, (Optr)&t_send0, (Optr)PSend21727, (Optr)&t_push_variable, (Optr)VAR_anIndex_0_0, (Optr)&t_send1, (Optr)PSend21728, (Optr)&t_method_return);
+    Method PMethod21724 = new_Method_with(PArray21725, empty_Array, empty_Array, PThreadedCode21726, 1, PSend21728);
     
-    MethodClosure MC_SMB_nameOfDay_ = new_MethodClosure((Method)PMethod21627, HEADER(Chronology_Week_Class));
+    MethodClosure MC_SMB_nameOfDay_ = new_MethodClosure((Method)PMethod21724, HEADER(Chronology_Week_Class));
     store_method(HEADER(Chronology_Week_Class), SMB_nameOfDay_, MC_SMB_nameOfDay_);
 }
 

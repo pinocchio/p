@@ -10,10 +10,10 @@ Optr layout_Chronology_TimeZone;
 
 static void init_SMB_offset() {
     Symbol SMB_offset = new_Symbol(L"offset");
-    Array PThreadedCode21502 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_offset, (Optr)&t_method_return);
-    Method PMethod21501 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21502, 1, slot_Chronology_TimeZone_offset);
+    Array PThreadedCode21599 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_offset, (Optr)&t_method_return);
+    Method PMethod21598 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21599, 1, slot_Chronology_TimeZone_offset);
     
-    MethodClosure MC_SMB_offset = new_MethodClosure((Method)PMethod21501, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_offset = new_MethodClosure((Method)PMethod21598, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_offset, MC_SMB_offset);
 }
 
@@ -21,12 +21,12 @@ static void init_SMB_offset() {
 static void init_SMB_abbreviation_() {
     Symbol SMB_abbreviation_ = new_Symbol(L"abbreviation:");
     Variable VAR_aString_0_0 = new_Variable_named(L"aString", 0);
-    Array PArray21504 = new_Array_with(1, (Optr)VAR_aString_0_0);
-    Assign PAssign21506 = new_Assign((Optr)slot_Chronology_TimeZone_abbreviation, (Optr)VAR_aString_0_0);
-    Array PThreadedCode21505 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21506, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21503 = new_Method_with(PArray21504, empty_Array, empty_Array, PThreadedCode21505, 2, PAssign21506, self);
+    Array PArray21601 = new_Array_with(1, (Optr)VAR_aString_0_0);
+    Assign PAssign21603 = new_Assign((Optr)slot_Chronology_TimeZone_abbreviation, (Optr)VAR_aString_0_0);
+    Array PThreadedCode21602 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21603, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21600 = new_Method_with(PArray21601, empty_Array, empty_Array, PThreadedCode21602, 2, PAssign21603, self);
     
-    MethodClosure MC_SMB_abbreviation_ = new_MethodClosure((Method)PMethod21503, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_abbreviation_ = new_MethodClosure((Method)PMethod21600, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_abbreviation_, MC_SMB_abbreviation_);
 }
 
@@ -34,12 +34,12 @@ static void init_SMB_abbreviation_() {
 static void init_SMB_name_() {
     Symbol SMB_name_ = new_Symbol(L"name:");
     Variable VAR_aString_0_0 = new_Variable_named(L"aString", 0);
-    Array PArray21508 = new_Array_with(1, (Optr)VAR_aString_0_0);
-    Assign PAssign21510 = new_Assign((Optr)slot_Chronology_TimeZone_name, (Optr)VAR_aString_0_0);
-    Array PThreadedCode21509 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21510, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21507 = new_Method_with(PArray21508, empty_Array, empty_Array, PThreadedCode21509, 2, PAssign21510, self);
+    Array PArray21605 = new_Array_with(1, (Optr)VAR_aString_0_0);
+    Assign PAssign21607 = new_Assign((Optr)slot_Chronology_TimeZone_name, (Optr)VAR_aString_0_0);
+    Array PThreadedCode21606 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21607, (Optr)&t_push_variable, (Optr)VAR_aString_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21604 = new_Method_with(PArray21605, empty_Array, empty_Array, PThreadedCode21606, 2, PAssign21607, self);
     
-    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod21507, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_name_ = new_MethodClosure((Method)PMethod21604, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_name_, MC_SMB_name_);
 }
 
@@ -47,32 +47,32 @@ static void init_SMB_name_() {
 static void init_SMB_printOn_() {
     Symbol SMB_printOn_ = new_Symbol(L"printOn:");
     Variable VAR_aStream_0_0 = new_Variable_named(L"aStream", 0);
-    Array PArray21512 = new_Array_with(1, (Optr)VAR_aStream_0_0);
+    Array PArray21609 = new_Array_with(1, (Optr)VAR_aStream_0_0);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray21515 = new_Array_with(1, (Optr)VAR__receiver__1_0);
-    Character char_5736 = new_Character(L'(');
+    Array PArray21612 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Character char_5738 = new_Character(L'(');
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
-    Constant char_5736_Const = new_Constant((Optr)char_5736);
+    Constant char_5738_Const = new_Constant((Optr)char_5738);
     // <<. 
-    Send PSend21517 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)char_5736_Const);
+    Send PSend21614 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)char_5738_Const);
     Symbol SMB_abbreviation = new_Symbol(L"abbreviation");
     // abbreviation. 
-    Send PSend21518 = new_Send((Optr)self, SMB_abbreviation, 0);
+    Send PSend21615 = new_Send((Optr)self, SMB_abbreviation, 0);
     // <<. 
-    Send PSend21519 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)PSend21518);
-    Character char_4147 = new_Character(L')');
-    Constant char_4147_Const = new_Constant((Optr)char_4147);
+    Send PSend21616 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)PSend21615);
+    Character char_4149 = new_Character(L')');
+    Constant char_4149_Const = new_Constant((Optr)char_4149);
     // <<. 
-    Send PSend21520 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)char_4147_Const);
-    Array PThreadedCode21516 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)char_5736, (Optr)&t_send1, (Optr)PSend21517, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21518, (Optr)&t_send1, (Optr)PSend21519, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)char_4147, (Optr)&t_send1, (Optr)PSend21520, (Optr)&t_method_return);
-    Block PBlock21514 = new_Block_with(PArray21515, empty_Array, PThreadedCode21516, 3, PSend21517, PSend21519, PSend21520);
+    Send PSend21617 = new_Send((Optr)VAR__receiver__1_0, SMB__shiftLeft_, 1, (Optr)char_4149_Const);
+    Array PThreadedCode21613 = instantiate_Array_with(ThreadedCode_Class, 0, 22, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)char_5738, (Optr)&t_send1, (Optr)PSend21614, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21615, (Optr)&t_send1, (Optr)PSend21616, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)char_4149, (Optr)&t_send1, (Optr)PSend21617, (Optr)&t_method_return);
+    Block PBlock21611 = new_Block_with(PArray21612, empty_Array, PThreadedCode21613, 3, PSend21614, PSend21616, PSend21617);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend21521 = new_Send((Optr)PBlock21514, SMB_value_, 1, (Optr)VAR_aStream_0_0);
-    Array PThreadedCode21513 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21514, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21521, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21511 = new_Method_with(PArray21512, empty_Array, empty_Array, PThreadedCode21513, 2, PSend21521, self);
+    Send PSend21618 = new_Send((Optr)PBlock21611, SMB_value_, 1, (Optr)VAR_aStream_0_0);
+    Array PThreadedCode21610 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21611, (Optr)&t_push_variable, (Optr)VAR_aStream_0_0, (Optr)&t_send1, (Optr)PSend21618, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21608 = new_Method_with(PArray21609, empty_Array, empty_Array, PThreadedCode21610, 2, PSend21618, self);
     
-    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21511, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_printOn_ = new_MethodClosure((Method)PMethod21608, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_printOn_, MC_SMB_printOn_);
 }
 
@@ -80,32 +80,32 @@ static void init_SMB_printOn_() {
 static void init_SMB_offset_() {
     Symbol SMB_offset_ = new_Symbol(L"offset:");
     Variable VAR_aDuration_0_0 = new_Variable_named(L"aDuration", 0);
-    Array PArray21523 = new_Array_with(1, (Optr)VAR_aDuration_0_0);
-    Assign PAssign21525 = new_Assign((Optr)slot_Chronology_TimeZone_offset, (Optr)VAR_aDuration_0_0);
-    Array PThreadedCode21524 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21525, (Optr)&t_push_variable, (Optr)VAR_aDuration_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21522 = new_Method_with(PArray21523, empty_Array, empty_Array, PThreadedCode21524, 2, PAssign21525, self);
+    Array PArray21620 = new_Array_with(1, (Optr)VAR_aDuration_0_0);
+    Assign PAssign21622 = new_Assign((Optr)slot_Chronology_TimeZone_offset, (Optr)VAR_aDuration_0_0);
+    Array PThreadedCode21621 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign21622, (Optr)&t_push_variable, (Optr)VAR_aDuration_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21619 = new_Method_with(PArray21620, empty_Array, empty_Array, PThreadedCode21621, 2, PAssign21622, self);
     
-    MethodClosure MC_SMB_offset_ = new_MethodClosure((Method)PMethod21522, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_offset_ = new_MethodClosure((Method)PMethod21619, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_offset_, MC_SMB_offset_);
 }
 
 
 static void init_SMB_abbreviation() {
     Symbol SMB_abbreviation = new_Symbol(L"abbreviation");
-    Array PThreadedCode21527 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_abbreviation, (Optr)&t_method_return);
-    Method PMethod21526 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21527, 1, slot_Chronology_TimeZone_abbreviation);
+    Array PThreadedCode21624 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_abbreviation, (Optr)&t_method_return);
+    Method PMethod21623 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21624, 1, slot_Chronology_TimeZone_abbreviation);
     
-    MethodClosure MC_SMB_abbreviation = new_MethodClosure((Method)PMethod21526, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_abbreviation = new_MethodClosure((Method)PMethod21623, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_abbreviation, MC_SMB_abbreviation);
 }
 
 
 static void init_SMB_name() {
     Symbol SMB_name = new_Symbol(L"name");
-    Array PThreadedCode21529 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_name, (Optr)&t_method_return);
-    Method PMethod21528 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21529, 1, slot_Chronology_TimeZone_name);
+    Array PThreadedCode21626 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_Chronology_TimeZone_name, (Optr)&t_method_return);
+    Method PMethod21625 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21626, 1, slot_Chronology_TimeZone_name);
     
-    MethodClosure MC_SMB_name = new_MethodClosure((Method)PMethod21528, Chronology_TimeZone_Class);
+    MethodClosure MC_SMB_name = new_MethodClosure((Method)PMethod21625, Chronology_TimeZone_Class);
     store_method(Chronology_TimeZone_Class, SMB_name, MC_SMB_name);
 }
 
@@ -115,33 +115,33 @@ static void init_class_SMB_offset_name_abbreviation_() {
     Variable VAR_aDuration_0_0 = new_Variable_named(L"aDuration", 0);
     Variable VAR_aName_0_1 = new_Variable_named(L"aName", 0);
     Variable VAR_anAbbreviation_0_2 = new_Variable_named(L"anAbbreviation", 0);
-    Array PArray21531 = new_Array_with(3, (Optr)VAR_aDuration_0_0, (Optr)VAR_aName_0_1, (Optr)VAR_anAbbreviation_0_2);
+    Array PArray21628 = new_Array_with(3, (Optr)VAR_aDuration_0_0, (Optr)VAR_aName_0_1, (Optr)VAR_anAbbreviation_0_2);
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray21534 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray21631 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     Symbol SMB_offset_ = new_Symbol(L"offset:");
     // offset:. 
-    Send PSend21536 = new_Send((Optr)VAR__receiver__1_0, SMB_offset_, 1, (Optr)VAR_aDuration_0_0);
+    Send PSend21633 = new_Send((Optr)VAR__receiver__1_0, SMB_offset_, 1, (Optr)VAR_aDuration_0_0);
     Symbol SMB_name_ = new_Symbol(L"name:");
     // name:. 
-    Send PSend21537 = new_Send((Optr)VAR__receiver__1_0, SMB_name_, 1, (Optr)VAR_aName_0_1);
+    Send PSend21634 = new_Send((Optr)VAR__receiver__1_0, SMB_name_, 1, (Optr)VAR_aName_0_1);
     Symbol SMB_abbreviation_ = new_Symbol(L"abbreviation:");
     // abbreviation:. 
-    Send PSend21538 = new_Send((Optr)VAR__receiver__1_0, SMB_abbreviation_, 1, (Optr)VAR_anAbbreviation_0_2);
+    Send PSend21635 = new_Send((Optr)VAR__receiver__1_0, SMB_abbreviation_, 1, (Optr)VAR_anAbbreviation_0_2);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend21539 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode21535 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aDuration_0_0, (Optr)&t_send1, (Optr)PSend21536, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aName_0_1, (Optr)&t_send1, (Optr)PSend21537, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_anAbbreviation_0_2, (Optr)&t_send1, (Optr)PSend21538, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21539, (Optr)&t_method_return);
-    Block PBlock21533 = new_Block_with(PArray21534, empty_Array, PThreadedCode21535, 4, PSend21536, PSend21537, PSend21538, PSend21539);
+    Send PSend21636 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode21632 = instantiate_Array_with(ThreadedCode_Class, 0, 26, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aDuration_0_0, (Optr)&t_send1, (Optr)PSend21633, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_aName_0_1, (Optr)&t_send1, (Optr)PSend21634, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_variable, (Optr)VAR_anAbbreviation_0_2, (Optr)&t_send1, (Optr)PSend21635, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21636, (Optr)&t_method_return);
+    Block PBlock21630 = new_Block_with(PArray21631, empty_Array, PThreadedCode21632, 4, PSend21633, PSend21634, PSend21635, PSend21636);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend21540 = new_Send((Optr)self, SMB_new, 0);
+    Send PSend21637 = new_Send((Optr)self, SMB_new, 0);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend21541 = new_Send((Optr)PBlock21533, SMB_value_, 1, (Optr)PSend21540);
-    Array PThreadedCode21532 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21533, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21540, (Optr)&t_send1, (Optr)PSend21541, (Optr)&t_method_return);
-    Method PMethod21530 = new_Method_with(PArray21531, empty_Array, empty_Array, PThreadedCode21532, 1, PSend21541);
+    Send PSend21638 = new_Send((Optr)PBlock21630, SMB_value_, 1, (Optr)PSend21637);
+    Array PThreadedCode21629 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_closure, (Optr)PBlock21630, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21637, (Optr)&t_send1, (Optr)PSend21638, (Optr)&t_method_return);
+    Method PMethod21627 = new_Method_with(PArray21628, empty_Array, empty_Array, PThreadedCode21629, 1, PSend21638);
     
-    MethodClosure MC_SMB_offset_name_abbreviation_ = new_MethodClosure((Method)PMethod21530, HEADER(Chronology_TimeZone_Class));
+    MethodClosure MC_SMB_offset_name_abbreviation_ = new_MethodClosure((Method)PMethod21627, HEADER(Chronology_TimeZone_Class));
     store_method(HEADER(Chronology_TimeZone_Class), SMB_offset_name_abbreviation_, MC_SMB_offset_name_abbreviation_);
 }
 
@@ -150,27 +150,27 @@ static void init_class_SMB_default() {
     Symbol SMB_default = new_Symbol(L"default");
     Symbol SMB_timeZones = new_Symbol(L"timeZones");
     // timeZones. 
-    Send PSend21544 = new_Send((Optr)self, SMB_timeZones, 0);
+    Send PSend21641 = new_Send((Optr)self, SMB_timeZones, 0);
     Variable VAR_tz_1_0 = new_Variable_named(L"tz", 1);
-    Array PArray21546 = new_Array_with(1, (Optr)VAR_tz_1_0);
+    Array PArray21643 = new_Array_with(1, (Optr)VAR_tz_1_0);
     Symbol SMB_offset = new_Symbol(L"offset");
     // offset. 
-    Send PSend21548 = new_Send((Optr)VAR_tz_1_0, SMB_offset, 0);
+    Send PSend21645 = new_Send((Optr)VAR_tz_1_0, SMB_offset, 0);
     Symbol SMB_zero = new_Symbol(L"zero");
     // zero. 
-    Send PSend21549 = new_Send((Optr)Duration_classReference, SMB_zero, 0);
+    Send PSend21646 = new_Send((Optr)Duration_classReference, SMB_zero, 0);
     Symbol SMB__equals_ = new_Symbol(L"=");
     // =. 
-    Send PSend21550 = new_Send((Optr)PSend21548, SMB__equals_, 1, (Optr)PSend21549);
-    Array PThreadedCode21547 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_tz_1_0, (Optr)&t_send0, (Optr)PSend21548, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_send0, (Optr)PSend21549, (Optr)&t_send1, (Optr)PSend21550, (Optr)&t_method_return);
-    Block PBlock21545 = new_Block_with(PArray21546, empty_Array, PThreadedCode21547, 1, PSend21550);
+    Send PSend21647 = new_Send((Optr)PSend21645, SMB__equals_, 1, (Optr)PSend21646);
+    Array PThreadedCode21644 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_variable, (Optr)VAR_tz_1_0, (Optr)&t_send0, (Optr)PSend21645, (Optr)&t_push_class_reference, (Optr)Duration_classReference, (Optr)&t_send0, (Optr)PSend21646, (Optr)&t_send1, (Optr)PSend21647, (Optr)&t_method_return);
+    Block PBlock21642 = new_Block_with(PArray21643, empty_Array, PThreadedCode21644, 1, PSend21647);
     Symbol SMB_detect_ = new_Symbol(L"detect:");
     // detect:. 
-    Send PSend21551 = new_Send((Optr)PSend21544, SMB_detect_, 1, (Optr)PBlock21545);
-    Array PThreadedCode21543 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21544, (Optr)&t_push_closure, (Optr)PBlock21545, (Optr)&t_send1, (Optr)PSend21551, (Optr)&t_method_return);
-    Method PMethod21542 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21543, 1, PSend21551);
+    Send PSend21648 = new_Send((Optr)PSend21641, SMB_detect_, 1, (Optr)PBlock21642);
+    Array PThreadedCode21640 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21641, (Optr)&t_push_closure, (Optr)PBlock21642, (Optr)&t_send1, (Optr)PSend21648, (Optr)&t_method_return);
+    Method PMethod21639 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21640, 1, PSend21648);
     
-    MethodClosure MC_SMB_default = new_MethodClosure((Method)PMethod21542, HEADER(Chronology_TimeZone_Class));
+    MethodClosure MC_SMB_default = new_MethodClosure((Method)PMethod21639, HEADER(Chronology_TimeZone_Class));
     store_method(HEADER(Chronology_TimeZone_Class), SMB_default, MC_SMB_default);
 }
 
@@ -178,181 +178,181 @@ static void init_class_SMB_default() {
 static void init_class_SMB_timeZones() {
     Symbol SMB_timeZones = new_Symbol(L"timeZones");
     Variable VAR__receiver__1_0 = new_Variable_named(L"_receiver_", 1);
-    Array PArray21555 = new_Array_with(1, (Optr)VAR__receiver__1_0);
+    Array PArray21652 = new_Array_with(1, (Optr)VAR__receiver__1_0);
     SmallInt int_0 = new_SmallInt(0);
     Constant int_0_Const = new_Constant((Optr)int_0);
     Symbol SMB_hours = new_Symbol(L"hours");
     // hours. 
-    Send PSend21557 = new_Send((Optr)int_0_Const, SMB_hours, 0);
-    String string_21558 = new_String(L"Universal Time");
-    String string_21559 = new_String(L"UTC");
+    Send PSend21654 = new_Send((Optr)int_0_Const, SMB_hours, 0);
+    String string_21655 = new_String(L"Universal Time");
+    String string_21656 = new_String(L"UTC");
     Symbol SMB_offset_name_abbreviation_ = new_Symbol(L"offset:name:abbreviation:");
-    Constant string_21558_Const = new_Constant((Optr)string_21558);
-    Constant string_21559_Const = new_Constant((Optr)string_21559);
+    Constant string_21655_Const = new_Constant((Optr)string_21655);
+    Constant string_21656_Const = new_Constant((Optr)string_21656);
     // offset:name:abbreviation:. 
-    Send PSend21560 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21557, (Optr)string_21558_Const, (Optr)string_21559_Const);
+    Send PSend21657 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21654, (Optr)string_21655_Const, (Optr)string_21656_Const);
     Symbol SMB_at_put_ = new_Symbol(L"at:put:");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // at:put:. 
-    Send PSend21561 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend21560);
+    Send PSend21658 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_1_Const, (Optr)PSend21657);
     // hours. 
-    Send PSend21562 = new_Send((Optr)int_0_Const, SMB_hours, 0);
-    String string_21563 = new_String(L"Greenwich Mean Time");
-    String string_21564 = new_String(L"GMT");
-    Constant string_21563_Const = new_Constant((Optr)string_21563);
-    Constant string_21564_Const = new_Constant((Optr)string_21564);
+    Send PSend21659 = new_Send((Optr)int_0_Const, SMB_hours, 0);
+    String string_21660 = new_String(L"Greenwich Mean Time");
+    String string_21661 = new_String(L"GMT");
+    Constant string_21660_Const = new_Constant((Optr)string_21660);
+    Constant string_21661_Const = new_Constant((Optr)string_21661);
     // offset:name:abbreviation:. 
-    Send PSend21565 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21562, (Optr)string_21563_Const, (Optr)string_21564_Const);
+    Send PSend21662 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21659, (Optr)string_21660_Const, (Optr)string_21661_Const);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
     // at:put:. 
-    Send PSend21566 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend21565);
+    Send PSend21663 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_2_Const, (Optr)PSend21662);
     SmallInt int_3 = new_SmallInt(3);
     // hours. 
-    Send PSend21567 = new_Send((Optr)int_1_Const, SMB_hours, 0);
-    String string_21568 = new_String(L"British Summer Time");
-    String string_21569 = new_String(L"BST");
-    Constant string_21568_Const = new_Constant((Optr)string_21568);
-    Constant string_21569_Const = new_Constant((Optr)string_21569);
+    Send PSend21664 = new_Send((Optr)int_1_Const, SMB_hours, 0);
+    String string_21665 = new_String(L"British Summer Time");
+    String string_21666 = new_String(L"BST");
+    Constant string_21665_Const = new_Constant((Optr)string_21665);
+    Constant string_21666_Const = new_Constant((Optr)string_21666);
     // offset:name:abbreviation:. 
-    Send PSend21570 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21567, (Optr)string_21568_Const, (Optr)string_21569_Const);
+    Send PSend21667 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21664, (Optr)string_21665_Const, (Optr)string_21666_Const);
     Constant int_3_Const = new_Constant((Optr)int_3);
     // at:put:. 
-    Send PSend21571 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend21570);
+    Send PSend21668 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_3_Const, (Optr)PSend21667);
     SmallInt int_4 = new_SmallInt(4);
     // hours. 
-    Send PSend21572 = new_Send((Optr)int_2_Const, SMB_hours, 0);
-    String string_21573 = new_String(L"South African Standard Time");
-    String string_21574 = new_String(L"SAST");
-    Constant string_21573_Const = new_Constant((Optr)string_21573);
-    Constant string_21574_Const = new_Constant((Optr)string_21574);
+    Send PSend21669 = new_Send((Optr)int_2_Const, SMB_hours, 0);
+    String string_21670 = new_String(L"South African Standard Time");
+    String string_21671 = new_String(L"SAST");
+    Constant string_21670_Const = new_Constant((Optr)string_21670);
+    Constant string_21671_Const = new_Constant((Optr)string_21671);
     // offset:name:abbreviation:. 
-    Send PSend21575 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21572, (Optr)string_21573_Const, (Optr)string_21574_Const);
+    Send PSend21672 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21669, (Optr)string_21670_Const, (Optr)string_21671_Const);
     Constant int_4_Const = new_Constant((Optr)int_4);
     // at:put:. 
-    Send PSend21576 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)PSend21575);
+    Send PSend21673 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_4_Const, (Optr)PSend21672);
     SmallInt int_5 = new_SmallInt(5);
     SmallInt int_n8 = new_SmallInt(-8);
     Constant int_n8_Const = new_Constant((Optr)int_n8);
     // hours. 
-    Send PSend21577 = new_Send((Optr)int_n8_Const, SMB_hours, 0);
-    String string_21578 = new_String(L"Pacific Standard Time");
-    String string_21579 = new_String(L"PST");
-    Constant string_21578_Const = new_Constant((Optr)string_21578);
-    Constant string_21579_Const = new_Constant((Optr)string_21579);
+    Send PSend21674 = new_Send((Optr)int_n8_Const, SMB_hours, 0);
+    String string_21675 = new_String(L"Pacific Standard Time");
+    String string_21676 = new_String(L"PST");
+    Constant string_21675_Const = new_Constant((Optr)string_21675);
+    Constant string_21676_Const = new_Constant((Optr)string_21676);
     // offset:name:abbreviation:. 
-    Send PSend21580 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21577, (Optr)string_21578_Const, (Optr)string_21579_Const);
+    Send PSend21677 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21674, (Optr)string_21675_Const, (Optr)string_21676_Const);
     Constant int_5_Const = new_Constant((Optr)int_5);
     // at:put:. 
-    Send PSend21581 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_5_Const, (Optr)PSend21580);
+    Send PSend21678 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_5_Const, (Optr)PSend21677);
     SmallInt int_6 = new_SmallInt(6);
     SmallInt int_n7 = new_SmallInt(-7);
     Constant int_n7_Const = new_Constant((Optr)int_n7);
     // hours. 
-    Send PSend21582 = new_Send((Optr)int_n7_Const, SMB_hours, 0);
-    String string_21583 = new_String(L"Pacific Daylight Time");
-    String string_21584 = new_String(L"PDT");
-    Constant string_21583_Const = new_Constant((Optr)string_21583);
-    Constant string_21584_Const = new_Constant((Optr)string_21584);
+    Send PSend21679 = new_Send((Optr)int_n7_Const, SMB_hours, 0);
+    String string_21680 = new_String(L"Pacific Daylight Time");
+    String string_21681 = new_String(L"PDT");
+    Constant string_21680_Const = new_Constant((Optr)string_21680);
+    Constant string_21681_Const = new_Constant((Optr)string_21681);
     // offset:name:abbreviation:. 
-    Send PSend21585 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21582, (Optr)string_21583_Const, (Optr)string_21584_Const);
+    Send PSend21682 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21679, (Optr)string_21680_Const, (Optr)string_21681_Const);
     Constant int_6_Const = new_Constant((Optr)int_6);
     // at:put:. 
-    Send PSend21586 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_6_Const, (Optr)PSend21585);
+    Send PSend21683 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_6_Const, (Optr)PSend21682);
     SmallInt int_7 = new_SmallInt(7);
     // hours. 
-    Send PSend21587 = new_Send((Optr)int_n7_Const, SMB_hours, 0);
-    String string_21588 = new_String(L"Mountain Standard Time");
-    String string_21589 = new_String(L"MST");
-    Constant string_21588_Const = new_Constant((Optr)string_21588);
-    Constant string_21589_Const = new_Constant((Optr)string_21589);
+    Send PSend21684 = new_Send((Optr)int_n7_Const, SMB_hours, 0);
+    String string_21685 = new_String(L"Mountain Standard Time");
+    String string_21686 = new_String(L"MST");
+    Constant string_21685_Const = new_Constant((Optr)string_21685);
+    Constant string_21686_Const = new_Constant((Optr)string_21686);
     // offset:name:abbreviation:. 
-    Send PSend21590 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21587, (Optr)string_21588_Const, (Optr)string_21589_Const);
+    Send PSend21687 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21684, (Optr)string_21685_Const, (Optr)string_21686_Const);
     Constant int_7_Const = new_Constant((Optr)int_7);
     // at:put:. 
-    Send PSend21591 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_7_Const, (Optr)PSend21590);
+    Send PSend21688 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_7_Const, (Optr)PSend21687);
     SmallInt int_8 = new_SmallInt(8);
     SmallInt int_n6 = new_SmallInt(-6);
     Constant int_n6_Const = new_Constant((Optr)int_n6);
     // hours. 
-    Send PSend21592 = new_Send((Optr)int_n6_Const, SMB_hours, 0);
-    String string_21593 = new_String(L"Mountain Daylight Time");
-    String string_21594 = new_String(L"MDT");
-    Constant string_21593_Const = new_Constant((Optr)string_21593);
-    Constant string_21594_Const = new_Constant((Optr)string_21594);
+    Send PSend21689 = new_Send((Optr)int_n6_Const, SMB_hours, 0);
+    String string_21690 = new_String(L"Mountain Daylight Time");
+    String string_21691 = new_String(L"MDT");
+    Constant string_21690_Const = new_Constant((Optr)string_21690);
+    Constant string_21691_Const = new_Constant((Optr)string_21691);
     // offset:name:abbreviation:. 
-    Send PSend21595 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21592, (Optr)string_21593_Const, (Optr)string_21594_Const);
+    Send PSend21692 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21689, (Optr)string_21690_Const, (Optr)string_21691_Const);
     Constant int_8_Const = new_Constant((Optr)int_8);
     // at:put:. 
-    Send PSend21596 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_8_Const, (Optr)PSend21595);
+    Send PSend21693 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_8_Const, (Optr)PSend21692);
     SmallInt int_9 = new_SmallInt(9);
     // hours. 
-    Send PSend21597 = new_Send((Optr)int_n6_Const, SMB_hours, 0);
-    String string_21598 = new_String(L"Central Standard Time");
-    String string_21599 = new_String(L"CST");
-    Constant string_21598_Const = new_Constant((Optr)string_21598);
-    Constant string_21599_Const = new_Constant((Optr)string_21599);
+    Send PSend21694 = new_Send((Optr)int_n6_Const, SMB_hours, 0);
+    String string_21695 = new_String(L"Central Standard Time");
+    String string_21696 = new_String(L"CST");
+    Constant string_21695_Const = new_Constant((Optr)string_21695);
+    Constant string_21696_Const = new_Constant((Optr)string_21696);
     // offset:name:abbreviation:. 
-    Send PSend21600 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21597, (Optr)string_21598_Const, (Optr)string_21599_Const);
+    Send PSend21697 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21694, (Optr)string_21695_Const, (Optr)string_21696_Const);
     Constant int_9_Const = new_Constant((Optr)int_9);
     // at:put:. 
-    Send PSend21601 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_9_Const, (Optr)PSend21600);
+    Send PSend21698 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_9_Const, (Optr)PSend21697);
     SmallInt int_10 = new_SmallInt(10);
     SmallInt int_n5 = new_SmallInt(-5);
     Constant int_n5_Const = new_Constant((Optr)int_n5);
     // hours. 
-    Send PSend21602 = new_Send((Optr)int_n5_Const, SMB_hours, 0);
-    String string_21603 = new_String(L"Central Daylight Time");
-    String string_21604 = new_String(L"CDT");
-    Constant string_21603_Const = new_Constant((Optr)string_21603);
-    Constant string_21604_Const = new_Constant((Optr)string_21604);
+    Send PSend21699 = new_Send((Optr)int_n5_Const, SMB_hours, 0);
+    String string_21700 = new_String(L"Central Daylight Time");
+    String string_21701 = new_String(L"CDT");
+    Constant string_21700_Const = new_Constant((Optr)string_21700);
+    Constant string_21701_Const = new_Constant((Optr)string_21701);
     // offset:name:abbreviation:. 
-    Send PSend21605 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21602, (Optr)string_21603_Const, (Optr)string_21604_Const);
+    Send PSend21702 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21699, (Optr)string_21700_Const, (Optr)string_21701_Const);
     Constant int_10_Const = new_Constant((Optr)int_10);
     // at:put:. 
-    Send PSend21606 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_10_Const, (Optr)PSend21605);
+    Send PSend21703 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_10_Const, (Optr)PSend21702);
     SmallInt int_11 = new_SmallInt(11);
     // hours. 
-    Send PSend21607 = new_Send((Optr)int_n5_Const, SMB_hours, 0);
-    String string_21608 = new_String(L"Eastern Standard Time");
-    String string_21609 = new_String(L"EST");
-    Constant string_21608_Const = new_Constant((Optr)string_21608);
-    Constant string_21609_Const = new_Constant((Optr)string_21609);
+    Send PSend21704 = new_Send((Optr)int_n5_Const, SMB_hours, 0);
+    String string_21705 = new_String(L"Eastern Standard Time");
+    String string_21706 = new_String(L"EST");
+    Constant string_21705_Const = new_Constant((Optr)string_21705);
+    Constant string_21706_Const = new_Constant((Optr)string_21706);
     // offset:name:abbreviation:. 
-    Send PSend21610 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21607, (Optr)string_21608_Const, (Optr)string_21609_Const);
+    Send PSend21707 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21704, (Optr)string_21705_Const, (Optr)string_21706_Const);
     Constant int_11_Const = new_Constant((Optr)int_11);
     // at:put:. 
-    Send PSend21611 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_11_Const, (Optr)PSend21610);
+    Send PSend21708 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_11_Const, (Optr)PSend21707);
     SmallInt int_12 = new_SmallInt(12);
     SmallInt int_n4 = new_SmallInt(-4);
     Constant int_n4_Const = new_Constant((Optr)int_n4);
     // hours. 
-    Send PSend21612 = new_Send((Optr)int_n4_Const, SMB_hours, 0);
-    String string_21613 = new_String(L"Eastern Daylight Time");
-    String string_21614 = new_String(L"EDT");
-    Constant string_21613_Const = new_Constant((Optr)string_21613);
-    Constant string_21614_Const = new_Constant((Optr)string_21614);
+    Send PSend21709 = new_Send((Optr)int_n4_Const, SMB_hours, 0);
+    String string_21710 = new_String(L"Eastern Daylight Time");
+    String string_21711 = new_String(L"EDT");
+    Constant string_21710_Const = new_Constant((Optr)string_21710);
+    Constant string_21711_Const = new_Constant((Optr)string_21711);
     // offset:name:abbreviation:. 
-    Send PSend21615 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21612, (Optr)string_21613_Const, (Optr)string_21614_Const);
+    Send PSend21712 = new_Send((Optr)self, SMB_offset_name_abbreviation_, 3, (Optr)PSend21709, (Optr)string_21710_Const, (Optr)string_21711_Const);
     Constant int_12_Const = new_Constant((Optr)int_12);
     // at:put:. 
-    Send PSend21616 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_12_Const, (Optr)PSend21615);
+    Send PSend21713 = new_Send((Optr)VAR__receiver__1_0, SMB_at_put_, 2, (Optr)int_12_Const, (Optr)PSend21712);
     Symbol SMB_yourself = new_Symbol(L"yourself");
     // yourself. 
-    Send PSend21617 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
-    Array PThreadedCode21556 = instantiate_Array_with(ThreadedCode_Class, 0, 215, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send0, (Optr)PSend21557, (Optr)&t_push1, (Optr)string_21558, (Optr)&t_push1, (Optr)string_21559, (Optr)&t_send3, (Optr)PSend21560, (Optr)&t_send2, (Optr)PSend21561, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send0, (Optr)PSend21562, (Optr)&t_push1, (Optr)string_21563, (Optr)&t_push1, (Optr)string_21564, (Optr)&t_send3, (Optr)PSend21565, (Optr)&t_send2, (Optr)PSend21566, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_self, (Optr)&t_push_1, (Optr)&t_send0, (Optr)PSend21567, (Optr)&t_push1, (Optr)string_21568, (Optr)&t_push1, (Optr)string_21569, (Optr)&t_send3, (Optr)PSend21570, (Optr)&t_send2, (Optr)PSend21571, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_4, (Optr)&t_push_self, (Optr)&t_push_2, (Optr)&t_send0, (Optr)PSend21572, (Optr)&t_push1, (Optr)string_21573, (Optr)&t_push1, (Optr)string_21574, (Optr)&t_send3, (Optr)PSend21575, (Optr)&t_send2, (Optr)PSend21576, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_5, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n8, (Optr)&t_send0, (Optr)PSend21577, (Optr)&t_push1, (Optr)string_21578, (Optr)&t_push1, (Optr)string_21579, (Optr)&t_send3, (Optr)PSend21580, (Optr)&t_send2, (Optr)PSend21581, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n7, (Optr)&t_send0, (Optr)PSend21582, (Optr)&t_push1, (Optr)string_21583, (Optr)&t_push1, (Optr)string_21584, (Optr)&t_send3, (Optr)PSend21585, (Optr)&t_send2, (Optr)PSend21586, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_7, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n7, (Optr)&t_send0, (Optr)PSend21587, (Optr)&t_push1, (Optr)string_21588, (Optr)&t_push1, (Optr)string_21589, (Optr)&t_send3, (Optr)PSend21590, (Optr)&t_send2, (Optr)PSend21591, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_8, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n6, (Optr)&t_send0, (Optr)PSend21592, (Optr)&t_push1, (Optr)string_21593, (Optr)&t_push1, (Optr)string_21594, (Optr)&t_send3, (Optr)PSend21595, (Optr)&t_send2, (Optr)PSend21596, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_9, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n6, (Optr)&t_send0, (Optr)PSend21597, (Optr)&t_push1, (Optr)string_21598, (Optr)&t_push1, (Optr)string_21599, (Optr)&t_send3, (Optr)PSend21600, (Optr)&t_send2, (Optr)PSend21601, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n5, (Optr)&t_send0, (Optr)PSend21602, (Optr)&t_push1, (Optr)string_21603, (Optr)&t_push1, (Optr)string_21604, (Optr)&t_send3, (Optr)PSend21605, (Optr)&t_send2, (Optr)PSend21606, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_11, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n5, (Optr)&t_send0, (Optr)PSend21607, (Optr)&t_push1, (Optr)string_21608, (Optr)&t_push1, (Optr)string_21609, (Optr)&t_send3, (Optr)PSend21610, (Optr)&t_send2, (Optr)PSend21611, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_12, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n4, (Optr)&t_send0, (Optr)PSend21612, (Optr)&t_push1, (Optr)string_21613, (Optr)&t_push1, (Optr)string_21614, (Optr)&t_send3, (Optr)PSend21615, (Optr)&t_send2, (Optr)PSend21616, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21617, (Optr)&t_method_return);
-    Block PBlock21554 = new_Block_with(PArray21555, empty_Array, PThreadedCode21556, 13, PSend21561, PSend21566, PSend21571, PSend21576, PSend21581, PSend21586, PSend21591, PSend21596, PSend21601, PSend21606, PSend21611, PSend21616, PSend21617);
+    Send PSend21714 = new_Send((Optr)VAR__receiver__1_0, SMB_yourself, 0);
+    Array PThreadedCode21653 = instantiate_Array_with(ThreadedCode_Class, 0, 215, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_1, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send0, (Optr)PSend21654, (Optr)&t_push1, (Optr)string_21655, (Optr)&t_push1, (Optr)string_21656, (Optr)&t_send3, (Optr)PSend21657, (Optr)&t_send2, (Optr)PSend21658, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push_2, (Optr)&t_push_self, (Optr)&t_push_0, (Optr)&t_send0, (Optr)PSend21659, (Optr)&t_push1, (Optr)string_21660, (Optr)&t_push1, (Optr)string_21661, (Optr)&t_send3, (Optr)PSend21662, (Optr)&t_send2, (Optr)PSend21663, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_3, (Optr)&t_push_self, (Optr)&t_push_1, (Optr)&t_send0, (Optr)PSend21664, (Optr)&t_push1, (Optr)string_21665, (Optr)&t_push1, (Optr)string_21666, (Optr)&t_send3, (Optr)PSend21667, (Optr)&t_send2, (Optr)PSend21668, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_4, (Optr)&t_push_self, (Optr)&t_push_2, (Optr)&t_send0, (Optr)PSend21669, (Optr)&t_push1, (Optr)string_21670, (Optr)&t_push1, (Optr)string_21671, (Optr)&t_send3, (Optr)PSend21672, (Optr)&t_send2, (Optr)PSend21673, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_5, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n8, (Optr)&t_send0, (Optr)PSend21674, (Optr)&t_push1, (Optr)string_21675, (Optr)&t_push1, (Optr)string_21676, (Optr)&t_send3, (Optr)PSend21677, (Optr)&t_send2, (Optr)PSend21678, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_6, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n7, (Optr)&t_send0, (Optr)PSend21679, (Optr)&t_push1, (Optr)string_21680, (Optr)&t_push1, (Optr)string_21681, (Optr)&t_send3, (Optr)PSend21682, (Optr)&t_send2, (Optr)PSend21683, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_7, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n7, (Optr)&t_send0, (Optr)PSend21684, (Optr)&t_push1, (Optr)string_21685, (Optr)&t_push1, (Optr)string_21686, (Optr)&t_send3, (Optr)PSend21687, (Optr)&t_send2, (Optr)PSend21688, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_8, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n6, (Optr)&t_send0, (Optr)PSend21689, (Optr)&t_push1, (Optr)string_21690, (Optr)&t_push1, (Optr)string_21691, (Optr)&t_send3, (Optr)PSend21692, (Optr)&t_send2, (Optr)PSend21693, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_9, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n6, (Optr)&t_send0, (Optr)PSend21694, (Optr)&t_push1, (Optr)string_21695, (Optr)&t_push1, (Optr)string_21696, (Optr)&t_send3, (Optr)PSend21697, (Optr)&t_send2, (Optr)PSend21698, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_10, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n5, (Optr)&t_send0, (Optr)PSend21699, (Optr)&t_push1, (Optr)string_21700, (Optr)&t_push1, (Optr)string_21701, (Optr)&t_send3, (Optr)PSend21702, (Optr)&t_send2, (Optr)PSend21703, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_11, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n5, (Optr)&t_send0, (Optr)PSend21704, (Optr)&t_push1, (Optr)string_21705, (Optr)&t_push1, (Optr)string_21706, (Optr)&t_send3, (Optr)PSend21707, (Optr)&t_send2, (Optr)PSend21708, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_push1, (Optr)int_12, (Optr)&t_push_self, (Optr)&t_push1, (Optr)int_n4, (Optr)&t_send0, (Optr)PSend21709, (Optr)&t_push1, (Optr)string_21710, (Optr)&t_push1, (Optr)string_21711, (Optr)&t_send3, (Optr)PSend21712, (Optr)&t_send2, (Optr)PSend21713, (Optr)&t_zap, (Optr)&t_push_variable, (Optr)VAR__receiver__1_0, (Optr)&t_send0, (Optr)PSend21714, (Optr)&t_method_return);
+    Block PBlock21651 = new_Block_with(PArray21652, empty_Array, PThreadedCode21653, 13, PSend21658, PSend21663, PSend21668, PSend21673, PSend21678, PSend21683, PSend21688, PSend21693, PSend21698, PSend21703, PSend21708, PSend21713, PSend21714);
     Symbol SMB_new_ = new_Symbol(L"new:");
     // new:. 
-    Send PSend21618 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_12_Const);
+    Send PSend21715 = new_Send((Optr)Array_classReference, SMB_new_, 1, (Optr)int_12_Const);
     Symbol SMB_value_ = new_Symbol(L"value:");
     // value:. 
-    Send PSend21619 = new_Send((Optr)PBlock21554, SMB_value_, 1, (Optr)PSend21618);
-    Array PThreadedCode21553 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_closure, (Optr)PBlock21554, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)int_12, (Optr)&t_send1, (Optr)PSend21618, (Optr)&t_send1, (Optr)PSend21619, (Optr)&t_method_return);
-    Method PMethod21552 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21553, 1, PSend21619);
+    Send PSend21716 = new_Send((Optr)PBlock21651, SMB_value_, 1, (Optr)PSend21715);
+    Array PThreadedCode21650 = instantiate_Array_with(ThreadedCode_Class, 0, 11, (Optr)&t_push_closure, (Optr)PBlock21651, (Optr)&t_push_class_reference, (Optr)Array_classReference, (Optr)&t_push1, (Optr)int_12, (Optr)&t_send1, (Optr)PSend21715, (Optr)&t_send1, (Optr)PSend21716, (Optr)&t_method_return);
+    Method PMethod21649 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21650, 1, PSend21716);
     
-    MethodClosure MC_SMB_timeZones = new_MethodClosure((Method)PMethod21552, HEADER(Chronology_TimeZone_Class));
+    MethodClosure MC_SMB_timeZones = new_MethodClosure((Method)PMethod21649, HEADER(Chronology_TimeZone_Class));
     store_method(HEADER(Chronology_TimeZone_Class), SMB_timeZones, MC_SMB_timeZones);
 }
 

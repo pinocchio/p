@@ -66,13 +66,23 @@ NATIVE(Float_divide_)
 }
 
 
-Float Float_raisedTo_(double left, double right) {
+Float Float_raisedTo_Float(double left, double right) {
 	return wrap_float(pow(left, right));
 }
 
 NATIVE1(Float_raisedTo_)    
 	FLOAT_BINOP_TYPE_SWITCH(raisedTo:)
-	RETURN_FROM_NATIVE(Float_raisedTo_(unwrap_float(self), right));
+	RETURN_FROM_NATIVE(Float_raisedTo_Float(unwrap_float(self), right));
+}
+
+
+Float Float_modulo_Float(double left, double right) {
+	return wrap_float(fmod(left, right));
+}
+
+NATIVE1(Float_modulo_)    
+	FLOAT_BINOP_TYPE_SWITCH(\\)
+	RETURN_FROM_NATIVE(Float_modulo_Float(unwrap_float(self), right));
 }
 
 
@@ -133,7 +143,6 @@ NATIVE1(Float_log)
 	double value = unwrap_float(self);
 	RETURN_FROM_NATIVE(Float_log(value));
 }
-
 
 
 SmallInt Float_floor(double value) {
@@ -207,26 +216,28 @@ void post_init_Float()
 
     PLUGIN natives = add_plugin(L"Number.Float");
 
-    store_native(natives, L"=",      NM_Float_pequal_);
-    store_native(natives, L"==",     NM_Float_pequal_);
-    store_native(natives, L"+",       NM_Float_plus_);
-    store_native(natives, L"-",      NM_Float_minus_);   
-    store_native(natives, L"*",      NM_Float_times_); 
-    store_native(natives, L"//",     NM_Float_divide_);
-    store_native(natives, L"/",      NM_Float_divide_);
+    store_native(natives, L"=",         NM_Float_pequal_);
+    store_native(natives, L"==",        NM_Float_pequal_);
+    store_native(natives, L"+",         NM_Float_plus_);
+    store_native(natives, L"-",         NM_Float_minus_);   
+    store_native(natives, L"*",         NM_Float_times_); 
+    store_native(natives, L"%",         NM_Float_modulo_);
+    store_native(natives, L"\\\\",      NM_Float_modulo_);
+    store_native(natives, L"//",        NM_Float_divide_);
+    store_native(natives, L"/",         NM_Float_divide_);
     store_native(natives, L"<",         NM_Float_lt_);
     store_native(natives, L">",         NM_Float_gt_);
-    store_native(natives, L"!=",         NM_Float_notEqual_);
-    store_native(natives, L"~=",         NM_Float_notEqual_);
-    store_native(natives, L"sqrt",         NM_Float_sqrt);
-    store_native(natives, L"log",         NM_Float_log);
-    store_native(natives, L"raisedTo:",         NM_Float_raisedTo_);
-    store_native(natives, L"floor",         NM_Float_floor);
-    store_native(natives, L"ceil",         NM_Float_ceil);
-    store_native(natives, L"rounded",         NM_Float_rounded);
-    store_native(natives, L"hash",        NM_Float_hash);
-    store_native(natives, L"asString",    NM_Float_asString);
-    store_native(natives, L"asInteger",    NM_Float_asInteger);
+    store_native(natives, L"!=",        NM_Float_notEqual_);
+    store_native(natives, L"~=",        NM_Float_notEqual_);
+    store_native(natives, L"sqrt",      NM_Float_sqrt);
+    store_native(natives, L"log",       NM_Float_log);
+    store_native(natives, L"raisedTo:", NM_Float_raisedTo_);
+    store_native(natives, L"floor",     NM_Float_floor);
+    store_native(natives, L"ceil",      NM_Float_ceil);
+    store_native(natives, L"rounded",   NM_Float_rounded);
+    store_native(natives, L"hash",      NM_Float_hash);
+    store_native(natives, L"asString",  NM_Float_asString);
+    store_native(natives, L"asInteger", NM_Float_asInteger);
 }
 
 /* ========================================================================= */

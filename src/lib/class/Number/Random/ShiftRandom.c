@@ -13,25 +13,25 @@ Optr layout_Number_Random_ShiftRandom;
 static void init_SMB_seed_() {
     Symbol SMB_seed_ = new_Symbol(L"seed:");
     Variable VAR_aNumber_0_0 = new_Variable_named(L"aNumber", 0);
-    Array PArray21780 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
-    Assign PAssign21782 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)VAR_aNumber_0_0);
+    Array PArray21877 = new_Array_with(1, (Optr)VAR_aNumber_0_0);
+    Assign PAssign21879 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)VAR_aNumber_0_0);
     Symbol SMB_next = new_Symbol(L"next");
     // next. 
-    Send PSend21784 = new_Send((Optr)self, SMB_next, 0);
-    Assign PAssign21783 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)PSend21784);
+    Send PSend21881 = new_Send((Optr)self, SMB_next, 0);
+    Assign PAssign21880 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)PSend21881);
     // next. 
-    Send PSend21786 = new_Send((Optr)self, SMB_next, 0);
-    Assign PAssign21785 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)PSend21786);
+    Send PSend21883 = new_Send((Optr)self, SMB_next, 0);
+    Assign PAssign21882 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)PSend21883);
     // next. 
-    Send PSend21788 = new_Send((Optr)self, SMB_next, 0);
-    Assign PAssign21787 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)PSend21788);
+    Send PSend21885 = new_Send((Optr)self, SMB_next, 0);
+    Assign PAssign21884 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)PSend21885);
     // next. 
-    Send PSend21790 = new_Send((Optr)self, SMB_next, 0);
-    Assign PAssign21789 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)PSend21790);
-    Array PThreadedCode21781 = instantiate_Array_with(ThreadedCode_Class, 0, 35, (Optr)&t_push1, (Optr)PAssign21782, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21783, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21784, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21785, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21786, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21787, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21788, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21789, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21790, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21779 = new_Method_with(PArray21780, empty_Array, empty_Array, PThreadedCode21781, 6, PAssign21782, PAssign21783, PAssign21785, PAssign21787, PAssign21789, self);
+    Send PSend21887 = new_Send((Optr)self, SMB_next, 0);
+    Assign PAssign21886 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)PSend21887);
+    Array PThreadedCode21878 = instantiate_Array_with(ThreadedCode_Class, 0, 35, (Optr)&t_push1, (Optr)PAssign21879, (Optr)&t_push_variable, (Optr)VAR_aNumber_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21880, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21881, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21882, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21883, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21884, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21885, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21886, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend21887, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21876 = new_Method_with(PArray21877, empty_Array, empty_Array, PThreadedCode21878, 6, PAssign21879, PAssign21880, PAssign21882, PAssign21884, PAssign21886, self);
     
-    MethodClosure MC_SMB_seed_ = new_MethodClosure((Method)PMethod21779, Number_Random_ShiftRandom_Class);
+    MethodClosure MC_SMB_seed_ = new_MethodClosure((Method)PMethod21876, Number_Random_ShiftRandom_Class);
     store_method(Number_Random_ShiftRandom_Class, SMB_seed_, MC_SMB_seed_);
 }
 
@@ -41,67 +41,67 @@ static void init_SMB_next() {
     Variable VAR_t_0_0 = new_Variable_named(L"t", 0);
     Variable VAR_v2_0_1 = new_Variable_named(L"v2", 0);
     Variable VAR_t2_0_2 = new_Variable_named(L"t2", 0);
-    Array PArray21792 = new_Array_with(3, (Optr)VAR_t_0_0, (Optr)VAR_v2_0_1, (Optr)VAR_t2_0_2);
+    Array PArray21889 = new_Array_with(3, (Optr)VAR_t_0_0, (Optr)VAR_v2_0_1, (Optr)VAR_t2_0_2);
     Symbol SMB_xor_ = new_Symbol(L"xor:");
     Symbol SMB__shiftRight_ = new_Symbol(L">>");
     SmallInt int_7 = new_SmallInt(7);
     Constant int_7_Const = new_Constant((Optr)int_7);
     // >>. 
-    Send PSend21796 = new_Send((Optr)slot_Number_Random_ShiftRandom_x, SMB__shiftRight_, 1, (Optr)int_7_Const);
+    Send PSend21893 = new_Send((Optr)slot_Number_Random_ShiftRandom_x, SMB__shiftRight_, 1, (Optr)int_7_Const);
     // xor:. 
-    Send PSend21795 = new_Send((Optr)slot_Number_Random_ShiftRandom_x, SMB_xor_, 1, (Optr)PSend21796);
-    Assign PAssign21794 = new_Assign((Optr)VAR_t_0_0, (Optr)PSend21795);
-    Assign PAssign21797 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)slot_Number_Random_ShiftRandom_y);
-    Assign PAssign21798 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)slot_Number_Random_ShiftRandom_z);
-    Assign PAssign21799 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)slot_Number_Random_ShiftRandom_w);
-    Assign PAssign21800 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)slot_Number_Random_ShiftRandom_v);
+    Send PSend21892 = new_Send((Optr)slot_Number_Random_ShiftRandom_x, SMB_xor_, 1, (Optr)PSend21893);
+    Assign PAssign21891 = new_Assign((Optr)VAR_t_0_0, (Optr)PSend21892);
+    Assign PAssign21894 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)slot_Number_Random_ShiftRandom_y);
+    Assign PAssign21895 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)slot_Number_Random_ShiftRandom_z);
+    Assign PAssign21896 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)slot_Number_Random_ShiftRandom_w);
+    Assign PAssign21897 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)slot_Number_Random_ShiftRandom_v);
     Symbol SMB__and_ = new_Symbol(L"&");
     SmallInt int_8388607 = new_SmallInt(8388607);
     Constant int_8388607_Const = new_Constant((Optr)int_8388607);
     // &. 
-    Send PSend21803 = new_Send((Optr)slot_Number_Random_ShiftRandom_v, SMB__and_, 1, (Optr)int_8388607_Const);
+    Send PSend21900 = new_Send((Optr)slot_Number_Random_ShiftRandom_v, SMB__and_, 1, (Optr)int_8388607_Const);
     Symbol SMB__shiftLeft_ = new_Symbol(L"<<");
     SmallInt int_6 = new_SmallInt(6);
     Constant int_6_Const = new_Constant((Optr)int_6);
     // <<. 
-    Send PSend21802 = new_Send((Optr)PSend21803, SMB__shiftLeft_, 1, (Optr)int_6_Const);
-    Assign PAssign21801 = new_Assign((Optr)VAR_v2_0_1, (Optr)PSend21802);
+    Send PSend21899 = new_Send((Optr)PSend21900, SMB__shiftLeft_, 1, (Optr)int_6_Const);
+    Assign PAssign21898 = new_Assign((Optr)VAR_v2_0_1, (Optr)PSend21899);
     SmallInt int_8191 = new_SmallInt(8191);
     Constant int_8191_Const = new_Constant((Optr)int_8191);
     // &. 
-    Send PSend21806 = new_Send((Optr)VAR_t_0_0, SMB__and_, 1, (Optr)int_8191_Const);
+    Send PSend21903 = new_Send((Optr)VAR_t_0_0, SMB__and_, 1, (Optr)int_8191_Const);
     SmallInt int_13 = new_SmallInt(13);
     Constant int_13_Const = new_Constant((Optr)int_13);
     // <<. 
-    Send PSend21805 = new_Send((Optr)PSend21806, SMB__shiftLeft_, 1, (Optr)int_13_Const);
-    Assign PAssign21804 = new_Assign((Optr)VAR_t2_0_2, (Optr)PSend21805);
+    Send PSend21902 = new_Send((Optr)PSend21903, SMB__shiftLeft_, 1, (Optr)int_13_Const);
+    Assign PAssign21901 = new_Assign((Optr)VAR_t2_0_2, (Optr)PSend21902);
     // xor:. 
-    Send PSend21809 = new_Send((Optr)slot_Number_Random_ShiftRandom_v, SMB_xor_, 1, (Optr)VAR_v2_0_1);
+    Send PSend21906 = new_Send((Optr)slot_Number_Random_ShiftRandom_v, SMB_xor_, 1, (Optr)VAR_v2_0_1);
     // xor:. 
-    Send PSend21810 = new_Send((Optr)VAR_t_0_0, SMB_xor_, 1, (Optr)VAR_t2_0_2);
+    Send PSend21907 = new_Send((Optr)VAR_t_0_0, SMB_xor_, 1, (Optr)VAR_t2_0_2);
     // xor:. 
-    Send PSend21808 = new_Send((Optr)PSend21809, SMB_xor_, 1, (Optr)PSend21810);
-    Assign PAssign21807 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)PSend21808);
+    Send PSend21905 = new_Send((Optr)PSend21906, SMB_xor_, 1, (Optr)PSend21907);
+    Assign PAssign21904 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)PSend21905);
     Symbol SMB__plus_ = new_Symbol(L"+");
     // +. 
-    Send PSend21811 = new_Send((Optr)slot_Number_Random_ShiftRandom_y, SMB__plus_, 1, (Optr)slot_Number_Random_ShiftRandom_y);
+    Send PSend21908 = new_Send((Optr)slot_Number_Random_ShiftRandom_y, SMB__plus_, 1, (Optr)slot_Number_Random_ShiftRandom_y);
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
     // +. 
-    Send PSend21812 = new_Send((Optr)PSend21811, SMB__plus_, 1, (Optr)int_1_Const);
+    Send PSend21909 = new_Send((Optr)PSend21908, SMB__plus_, 1, (Optr)int_1_Const);
     SmallInt int_268435455 = new_SmallInt(268435455);
     Constant int_268435455_Const = new_Constant((Optr)int_268435455);
     // &. 
-    Send PSend21813 = new_Send((Optr)PSend21812, SMB__and_, 1, (Optr)int_268435455_Const);
+    Send PSend21910 = new_Send((Optr)PSend21909, SMB__and_, 1, (Optr)int_268435455_Const);
     Symbol SMB__times_ = new_Symbol(L"*");
     // *. 
-    Send PSend21814 = new_Send((Optr)PSend21813, SMB__times_, 1, (Optr)slot_Number_Random_ShiftRandom_v);
+    Send PSend21911 = new_Send((Optr)PSend21910, SMB__times_, 1, (Optr)slot_Number_Random_ShiftRandom_v);
     // &. 
-    Send PSend21815 = new_Send((Optr)PSend21814, SMB__and_, 1, (Optr)int_268435455_Const);
-    Array PThreadedCode21793 = instantiate_Array_with(ThreadedCode_Class, 0, 106, (Optr)&t_push1, (Optr)PAssign21794, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_x, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_x, (Optr)&t_push1, (Optr)int_7, (Optr)&t_send1, (Optr)PSend21796, (Optr)&t_send1, (Optr)PSend21795, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21797, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21798, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_z, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21799, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_w, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21800, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21801, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_push1, (Optr)int_8388607, (Optr)&t_send1, (Optr)PSend21803, (Optr)&t_push1, (Optr)int_6, (Optr)&t_send1, (Optr)PSend21802, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21804, (Optr)&t_push_variable, (Optr)VAR_t_0_0, (Optr)&t_push1, (Optr)int_8191, (Optr)&t_send1, (Optr)PSend21806, (Optr)&t_push1, (Optr)int_13, (Optr)&t_send1, (Optr)PSend21805, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21807, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_push_variable, (Optr)VAR_v2_0_1, (Optr)&t_send1, (Optr)PSend21809, (Optr)&t_push_variable, (Optr)VAR_t_0_0, (Optr)&t_push_variable, (Optr)VAR_t2_0_2, (Optr)&t_send1, (Optr)PSend21810, (Optr)&t_send1, (Optr)PSend21808, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_send1, (Optr)PSend21811, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21812, (Optr)&t_push1, (Optr)int_268435455, (Optr)&t_send1, (Optr)PSend21813, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_send1, (Optr)PSend21814, (Optr)&t_push1, (Optr)int_268435455, (Optr)&t_send1, (Optr)PSend21815, (Optr)&t_method_return);
-    Method PMethod21791 = new_Method_with(empty_Array, PArray21792, empty_Array, PThreadedCode21793, 9, PAssign21794, PAssign21797, PAssign21798, PAssign21799, PAssign21800, PAssign21801, PAssign21804, PAssign21807, PSend21815);
+    Send PSend21912 = new_Send((Optr)PSend21911, SMB__and_, 1, (Optr)int_268435455_Const);
+    Array PThreadedCode21890 = instantiate_Array_with(ThreadedCode_Class, 0, 106, (Optr)&t_push1, (Optr)PAssign21891, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_x, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_x, (Optr)&t_push1, (Optr)int_7, (Optr)&t_send1, (Optr)PSend21893, (Optr)&t_send1, (Optr)PSend21892, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21894, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21895, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_z, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21896, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_w, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21897, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21898, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_push1, (Optr)int_8388607, (Optr)&t_send1, (Optr)PSend21900, (Optr)&t_push1, (Optr)int_6, (Optr)&t_send1, (Optr)PSend21899, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21901, (Optr)&t_push_variable, (Optr)VAR_t_0_0, (Optr)&t_push1, (Optr)int_8191, (Optr)&t_send1, (Optr)PSend21903, (Optr)&t_push1, (Optr)int_13, (Optr)&t_send1, (Optr)PSend21902, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21904, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_push_variable, (Optr)VAR_v2_0_1, (Optr)&t_send1, (Optr)PSend21906, (Optr)&t_push_variable, (Optr)VAR_t_0_0, (Optr)&t_push_variable, (Optr)VAR_t2_0_2, (Optr)&t_send1, (Optr)PSend21907, (Optr)&t_send1, (Optr)PSend21905, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_y, (Optr)&t_send1, (Optr)PSend21908, (Optr)&t_push_1, (Optr)&t_send1, (Optr)PSend21909, (Optr)&t_push1, (Optr)int_268435455, (Optr)&t_send1, (Optr)PSend21910, (Optr)&t_push_slot, (Optr)slot_Number_Random_ShiftRandom_v, (Optr)&t_send1, (Optr)PSend21911, (Optr)&t_push1, (Optr)int_268435455, (Optr)&t_send1, (Optr)PSend21912, (Optr)&t_method_return);
+    Method PMethod21888 = new_Method_with(empty_Array, PArray21889, empty_Array, PThreadedCode21890, 9, PAssign21891, PAssign21894, PAssign21895, PAssign21896, PAssign21897, PAssign21898, PAssign21901, PAssign21904, PSend21912);
     
-    MethodClosure MC_SMB_next = new_MethodClosure((Method)PMethod21791, Number_Random_ShiftRandom_Class);
+    MethodClosure MC_SMB_next = new_MethodClosure((Method)PMethod21888, Number_Random_ShiftRandom_Class);
     store_method(Number_Random_ShiftRandom_Class, SMB_next, MC_SMB_next);
 }
 
@@ -110,24 +110,24 @@ static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     SmallInt int_1 = new_SmallInt(1);
     Constant int_1_Const = new_Constant((Optr)int_1);
-    Assign PAssign21818 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)int_1_Const);
+    Assign PAssign21915 = new_Assign((Optr)slot_Number_Random_ShiftRandom_x, (Optr)int_1_Const);
     SmallInt int_2 = new_SmallInt(2);
     Constant int_2_Const = new_Constant((Optr)int_2);
-    Assign PAssign21819 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)int_2_Const);
+    Assign PAssign21916 = new_Assign((Optr)slot_Number_Random_ShiftRandom_y, (Optr)int_2_Const);
     SmallInt int_3 = new_SmallInt(3);
     Constant int_3_Const = new_Constant((Optr)int_3);
-    Assign PAssign21820 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)int_3_Const);
+    Assign PAssign21917 = new_Assign((Optr)slot_Number_Random_ShiftRandom_z, (Optr)int_3_Const);
     SmallInt int_4 = new_SmallInt(4);
     Constant int_4_Const = new_Constant((Optr)int_4);
-    Assign PAssign21821 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)int_4_Const);
+    Assign PAssign21918 = new_Assign((Optr)slot_Number_Random_ShiftRandom_v, (Optr)int_4_Const);
     SmallInt int_5 = new_SmallInt(5);
     Constant int_5_Const = new_Constant((Optr)int_5);
-    Assign PAssign21822 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)int_5_Const);
-    Super PSuper21823 = new_Super(SMB_initialize, 0);
-    Array PThreadedCode21817 = instantiate_Array_with(ThreadedCode_Class, 0, 33, (Optr)&t_push1, (Optr)PAssign21818, (Optr)&t_push_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21819, (Optr)&t_push_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21820, (Optr)&t_push1, (Optr)int_3, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21821, (Optr)&t_push1, (Optr)int_4, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21822, (Optr)&t_push1, (Optr)int_5, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper21823, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod21816 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21817, 7, PAssign21818, PAssign21819, PAssign21820, PAssign21821, PAssign21822, PSuper21823, self);
+    Assign PAssign21919 = new_Assign((Optr)slot_Number_Random_ShiftRandom_w, (Optr)int_5_Const);
+    Super PSuper21920 = new_Super(SMB_initialize, 0);
+    Array PThreadedCode21914 = instantiate_Array_with(ThreadedCode_Class, 0, 33, (Optr)&t_push1, (Optr)PAssign21915, (Optr)&t_push_1, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21916, (Optr)&t_push_2, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21917, (Optr)&t_push1, (Optr)int_3, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21918, (Optr)&t_push1, (Optr)int_4, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push1, (Optr)PAssign21919, (Optr)&t_push1, (Optr)int_5, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper21920, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod21913 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode21914, 7, PAssign21915, PAssign21916, PAssign21917, PAssign21918, PAssign21919, PSuper21920, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod21816, Number_Random_ShiftRandom_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod21913, Number_Random_ShiftRandom_Class);
     store_method(Number_Random_ShiftRandom_Class, SMB_initialize, MC_SMB_initialize);
 }
 

@@ -7,18 +7,18 @@ Optr layout_Runtime_Continuation_Class_class;
 static void init_SMB__equals_() {
     Symbol SMB__equals_ = new_Symbol(L"=");
     Variable VAR_aContinuation_0_0 = new_Variable_named(L"aContinuation", 0);
-    Array PArray8527 = new_Array_with(1, (Optr)VAR_aContinuation_0_0);
+    Array PArray8554 = new_Array_with(1, (Optr)VAR_aContinuation_0_0);
     Symbol SMB_species = new_Symbol(L"species");
     // species. 
-    Send PSend8529 = new_Send((Optr)self, SMB_species, 0);
+    Send PSend8556 = new_Send((Optr)self, SMB_species, 0);
     // species. 
-    Send PSend8530 = new_Send((Optr)VAR_aContinuation_0_0, SMB_species, 0);
+    Send PSend8557 = new_Send((Optr)VAR_aContinuation_0_0, SMB_species, 0);
     // =. 
-    Send PSend8531 = new_Send((Optr)PSend8529, SMB__equals_, 1, (Optr)PSend8530);
-    Array PThreadedCode8528 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8529, (Optr)&t_push_variable, (Optr)VAR_aContinuation_0_0, (Optr)&t_send0, (Optr)PSend8530, (Optr)&t_send1, (Optr)PSend8531, (Optr)&t_method_return);
-    Method PMethod8526 = new_Method_with(PArray8527, empty_Array, empty_Array, PThreadedCode8528, 1, PSend8531);
+    Send PSend8558 = new_Send((Optr)PSend8556, SMB__equals_, 1, (Optr)PSend8557);
+    Array PThreadedCode8555 = instantiate_Array_with(ThreadedCode_Class, 0, 10, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8556, (Optr)&t_push_variable, (Optr)VAR_aContinuation_0_0, (Optr)&t_send0, (Optr)PSend8557, (Optr)&t_send1, (Optr)PSend8558, (Optr)&t_method_return);
+    Method PMethod8553 = new_Method_with(PArray8554, empty_Array, empty_Array, PThreadedCode8555, 1, PSend8558);
     
-    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod8526, Continuation_Class);
+    MethodClosure MC_SMB__equals_ = new_MethodClosure((Method)PMethod8553, Continuation_Class);
     store_method(Continuation_Class, SMB__equals_, MC_SMB__equals_);
 }
 
@@ -27,11 +27,11 @@ static void init_SMB_continue() {
     Symbol SMB_continue = new_Symbol(L"continue");
     Symbol SMB_continue_ = new_Symbol(L"continue:");
     // continue:. 
-    Send PSend8534 = new_Send((Optr)self, SMB_continue_, 1, (Optr)nil_Const);
-    Array PThreadedCode8533 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend8534, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod8532 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8533, 2, PSend8534, self);
+    Send PSend8561 = new_Send((Optr)self, SMB_continue_, 1, (Optr)nil_Const);
+    Array PThreadedCode8560 = instantiate_Array_with(ThreadedCode_Class, 0, 6, (Optr)&t_push_self, (Optr)&t_push_nil, (Optr)&t_send1, (Optr)PSend8561, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod8559 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode8560, 2, PSend8561, self);
     
-    MethodClosure MC_SMB_continue = new_MethodClosure((Method)PMethod8532, Continuation_Class);
+    MethodClosure MC_SMB_continue = new_MethodClosure((Method)PMethod8559, Continuation_Class);
     store_method(Continuation_Class, SMB_continue, MC_SMB_continue);
 }
 
@@ -39,18 +39,18 @@ static void init_SMB_continue() {
 static void init_SMB_continue_() {
     Symbol SMB_continue_ = new_Symbol(L"continue:");
     Variable VAR_value_0_0 = new_Variable_named(L"value", 0);
-    Array PArray8536 = new_Array_with(1, (Optr)VAR_value_0_0);
+    Array PArray8563 = new_Array_with(1, (Optr)VAR_value_0_0);
     Symbol SMB_pinocchioReflective_ = new_Symbol(L"pinocchioReflective:");
     Symbol SMB_continuationContinue_message_ = new_Symbol(L"continuationContinue:message:");
-    Annotation PAnnotation8538 = new_Annotation((Optr)SMB_pinocchioReflective_, 1, (Optr)SMB_continuationContinue_message_);
-    Array PArray8537 = new_Array_with(1, (Optr)PAnnotation8538);
+    Annotation PAnnotation8565 = new_Annotation((Optr)SMB_pinocchioReflective_, 1, (Optr)SMB_continuationContinue_message_);
+    Array PArray8564 = new_Array_with(1, (Optr)PAnnotation8565);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend8540 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode8539 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8540, (Optr)&t_zap, (Optr)&t_method_return_self);
-    ReflectionMethod PReflectionMethod8535 = new_ReflectionMethod_with(PArray8536, empty_Array, PArray8537, PThreadedCode8539, 2, PSend8540, self);
+    Send PSend8567 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode8566 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8567, (Optr)&t_zap, (Optr)&t_method_return_self);
+    ReflectionMethod PReflectionMethod8562 = new_ReflectionMethod_with(PArray8563, empty_Array, PArray8564, PThreadedCode8566, 2, PSend8567, self);
     
-    MethodClosure MC_SMB_continue_ = new_MethodClosure((Method)PReflectionMethod8535, Continuation_Class);
+    MethodClosure MC_SMB_continue_ = new_MethodClosure((Method)PReflectionMethod8562, Continuation_Class);
     store_method(Continuation_Class, SMB_continue_, MC_SMB_continue_);
 }
 
@@ -58,18 +58,18 @@ static void init_SMB_continue_() {
 static void init_class_SMB_on_() {
     Symbol SMB_on_ = new_Symbol(L"on:");
     Variable VAR_aBlock_0_0 = new_Variable_named(L"aBlock", 0);
-    Array PArray8542 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
+    Array PArray8569 = new_Array_with(1, (Optr)VAR_aBlock_0_0);
     Symbol SMB_pinocchioReflective_ = new_Symbol(L"pinocchioReflective:");
     Symbol SMB_continuationOn_message_ = new_Symbol(L"continuationOn:message:");
-    Annotation PAnnotation8544 = new_Annotation((Optr)SMB_pinocchioReflective_, 1, (Optr)SMB_continuationOn_message_);
-    Array PArray8543 = new_Array_with(1, (Optr)PAnnotation8544);
+    Annotation PAnnotation8571 = new_Annotation((Optr)SMB_pinocchioReflective_, 1, (Optr)SMB_continuationOn_message_);
+    Array PArray8570 = new_Array_with(1, (Optr)PAnnotation8571);
     Symbol SMB_pinocchioPrimitiveFailed = new_Symbol(L"pinocchioPrimitiveFailed");
     // pinocchioPrimitiveFailed. 
-    Send PSend8546 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
-    Array PThreadedCode8545 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8546, (Optr)&t_zap, (Optr)&t_method_return_self);
-    ReflectionMethod PReflectionMethod8541 = new_ReflectionMethod_with(PArray8542, empty_Array, PArray8543, PThreadedCode8545, 2, PSend8546, self);
+    Send PSend8573 = new_Send((Optr)self, SMB_pinocchioPrimitiveFailed, 0);
+    Array PThreadedCode8572 = instantiate_Array_with(ThreadedCode_Class, 0, 5, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend8573, (Optr)&t_zap, (Optr)&t_method_return_self);
+    ReflectionMethod PReflectionMethod8568 = new_ReflectionMethod_with(PArray8569, empty_Array, PArray8570, PThreadedCode8572, 2, PSend8573, self);
     
-    MethodClosure MC_SMB_on_ = new_MethodClosure((Method)PReflectionMethod8541, HEADER(Continuation_Class));
+    MethodClosure MC_SMB_on_ = new_MethodClosure((Method)PReflectionMethod8568, HEADER(Continuation_Class));
     store_method(HEADER(Continuation_Class), SMB_on_, MC_SMB_on_);
 }
 

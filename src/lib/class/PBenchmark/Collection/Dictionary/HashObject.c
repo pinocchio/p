@@ -8,10 +8,10 @@ Optr layout_PBenchmark_Collection_Dictionary_HashObject;
 
 static void init_SMB_hash() {
     Symbol SMB_hash = new_Symbol(L"hash");
-    Array PThreadedCode24972 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)&t_method_return);
-    Method PMethod24971 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24972, 1, slot_PBenchmark_Collection_Dictionary_HashObject_hash);
+    Array PThreadedCode25069 = instantiate_Array_with(ThreadedCode_Class, 0, 3, (Optr)&t_push_slot, (Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)&t_method_return);
+    Method PMethod25068 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode25069, 1, slot_PBenchmark_Collection_Dictionary_HashObject_hash);
     
-    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PMethod24971, PBenchmark_Collection_Dictionary_HashObject_Class);
+    MethodClosure MC_SMB_hash = new_MethodClosure((Method)PMethod25068, PBenchmark_Collection_Dictionary_HashObject_Class);
     store_method(PBenchmark_Collection_Dictionary_HashObject_Class, SMB_hash, MC_SMB_hash);
 }
 
@@ -19,12 +19,12 @@ static void init_SMB_hash() {
 static void init_SMB_hash_() {
     Symbol SMB_hash_ = new_Symbol(L"hash:");
     Variable VAR_anInt_0_0 = new_Variable_named(L"anInt", 0);
-    Array PArray24974 = new_Array_with(1, (Optr)VAR_anInt_0_0);
-    Assign PAssign24976 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)VAR_anInt_0_0);
-    Array PThreadedCode24975 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign24976, (Optr)&t_push_variable, (Optr)VAR_anInt_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24973 = new_Method_with(PArray24974, empty_Array, empty_Array, PThreadedCode24975, 2, PAssign24976, self);
+    Array PArray25071 = new_Array_with(1, (Optr)VAR_anInt_0_0);
+    Assign PAssign25073 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)VAR_anInt_0_0);
+    Array PThreadedCode25072 = instantiate_Array_with(ThreadedCode_Class, 0, 7, (Optr)&t_push1, (Optr)PAssign25073, (Optr)&t_push_variable, (Optr)VAR_anInt_0_0, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod25070 = new_Method_with(PArray25071, empty_Array, empty_Array, PThreadedCode25072, 2, PAssign25073, self);
     
-    MethodClosure MC_SMB_hash_ = new_MethodClosure((Method)PMethod24973, PBenchmark_Collection_Dictionary_HashObject_Class);
+    MethodClosure MC_SMB_hash_ = new_MethodClosure((Method)PMethod25070, PBenchmark_Collection_Dictionary_HashObject_Class);
     store_method(PBenchmark_Collection_Dictionary_HashObject_Class, SMB_hash_, MC_SMB_hash_);
 }
 
@@ -32,12 +32,12 @@ static void init_SMB_hash_() {
 static void init_SMB_initialize() {
     Symbol SMB_initialize = new_Symbol(L"initialize");
     Symbol SMB_hash = new_Symbol(L"hash");
-    Super PSuper24980 = new_Super(SMB_hash, 0);
-    Assign PAssign24979 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)PSuper24980);
-    Array PThreadedCode24978 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push1, (Optr)PAssign24979, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper24980, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
-    Method PMethod24977 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode24978, 2, PAssign24979, self);
+    Super PSuper25077 = new_Super(SMB_hash, 0);
+    Assign PAssign25076 = new_Assign((Optr)slot_PBenchmark_Collection_Dictionary_HashObject_hash, (Optr)PSuper25077);
+    Array PThreadedCode25075 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push1, (Optr)PAssign25076, (Optr)&t_push_self, (Optr)&t_super0, (Optr)PSuper25077, (Optr)&t_assign, (Optr)&t_zap, (Optr)&t_method_return_self);
+    Method PMethod25074 = new_Method_with(empty_Array, empty_Array, empty_Array, PThreadedCode25075, 2, PAssign25076, self);
     
-    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod24977, PBenchmark_Collection_Dictionary_HashObject_Class);
+    MethodClosure MC_SMB_initialize = new_MethodClosure((Method)PMethod25074, PBenchmark_Collection_Dictionary_HashObject_Class);
     store_method(PBenchmark_Collection_Dictionary_HashObject_Class, SMB_initialize, MC_SMB_initialize);
 }
 
@@ -45,17 +45,17 @@ static void init_SMB_initialize() {
 static void init_class_SMB_with_() {
     Symbol SMB_with_ = new_Symbol(L"with:");
     Variable VAR_hash_0_0 = new_Variable_named(L"hash", 0);
-    Array PArray24982 = new_Array_with(1, (Optr)VAR_hash_0_0);
+    Array PArray25079 = new_Array_with(1, (Optr)VAR_hash_0_0);
     Symbol SMB_new = new_Symbol(L"new");
     // new. 
-    Send PSend24984 = new_Send((Optr)self, SMB_new, 0);
+    Send PSend25081 = new_Send((Optr)self, SMB_new, 0);
     Symbol SMB_hash_ = new_Symbol(L"hash:");
     // hash:. 
-    Send PSend24985 = new_Send((Optr)PSend24984, SMB_hash_, 1, (Optr)VAR_hash_0_0);
-    Array PThreadedCode24983 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend24984, (Optr)&t_push_variable, (Optr)VAR_hash_0_0, (Optr)&t_send1, (Optr)PSend24985, (Optr)&t_method_return);
-    Method PMethod24981 = new_Method_with(PArray24982, empty_Array, empty_Array, PThreadedCode24983, 1, PSend24985);
+    Send PSend25082 = new_Send((Optr)PSend25081, SMB_hash_, 1, (Optr)VAR_hash_0_0);
+    Array PThreadedCode25080 = instantiate_Array_with(ThreadedCode_Class, 0, 8, (Optr)&t_push_self, (Optr)&t_send0, (Optr)PSend25081, (Optr)&t_push_variable, (Optr)VAR_hash_0_0, (Optr)&t_send1, (Optr)PSend25082, (Optr)&t_method_return);
+    Method PMethod25078 = new_Method_with(PArray25079, empty_Array, empty_Array, PThreadedCode25080, 1, PSend25082);
     
-    MethodClosure MC_SMB_with_ = new_MethodClosure((Method)PMethod24981, HEADER(PBenchmark_Collection_Dictionary_HashObject_Class));
+    MethodClosure MC_SMB_with_ = new_MethodClosure((Method)PMethod25078, HEADER(PBenchmark_Collection_Dictionary_HashObject_Class));
     store_method(HEADER(PBenchmark_Collection_Dictionary_HashObject_Class), SMB_with_, MC_SMB_with_);
 }
 

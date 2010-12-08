@@ -224,7 +224,11 @@ dtrace-no-pic:
 # ============================================================================
 debug:
 	touch -c 'system/class/Class.c'
-	CFLAGS+="-g -O0 -DNO_IC -DNO_EXCEPTION -DDEBUG -DPRINT_DISPATCH_TRACE" make $(TARGET) 
+	CFLAGS+="-g -O0 -DNO_IC -DNO_EXCEPTION -DPRINT_DISPATCH_TRACE -DDEBUG" make $(TARGET) 
+
+debug-ic:
+	touch -c 'system/class/Class.c'
+	CFLAGS+="-g -O0 -DNO_EXCEPTION -DPRINT_DISPATCH_TRACE -DDEBUG" make $(TARGET) 
 
 debug-silent:
 	touch -c 'system/class/Class.c'
