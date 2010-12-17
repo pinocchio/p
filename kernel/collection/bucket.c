@@ -4,9 +4,8 @@
 Class Bucket_class;
 /* ======================================================================= */
 
-Bucket new_Bucket()
+Bucket new_Bucket_sized(uns_int size)
 {
-    uns_int size = 4<<1;
     NEW_ARRAYED(Bucket, Object[size]);
     result->size  = size;
     result->tally = 0;
@@ -14,6 +13,11 @@ Bucket new_Bucket()
         result->value[size] = nil;
     }
     return result;
+}
+
+Bucket new_Bucket()
+{
+    return new_Bucket_sized(4 << 1);
 }
 
 int Bucket_quick_compare_key(Object key, Object other)

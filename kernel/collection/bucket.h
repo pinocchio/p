@@ -17,6 +17,7 @@ extern Class Bucket_class;
 /* ======================================================================= */
 
 extern Bucket new_Bucket();
+extern Bucket new_Bucket_sized(uns_int size);
 extern int Bucket_quick_compare_key(Object key, Object other);
 extern int Bucket_quick_store(Bucket *bucket, Object key, Object value);
 

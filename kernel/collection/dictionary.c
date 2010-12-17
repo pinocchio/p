@@ -5,13 +5,31 @@ Class Dictionary_class;
 Class BucketArray_class;
 /* ======================================================================= */
 
+static BucketArray new_BucketArray_sized(uns_int size)
+{
+    NEW_ARRAYED(BucketArray, Bucket[size]);
+    result->size = size;
+    while (size--) {
+        result->bucket[size] = (Bucket)nil;
+    }
+    return result;
+}
+
+static BucketArray new_BucketArray()
+{
+    NEW_ARRAYED(BucketArray, Bucket[1]);
+    result->size      = 1;
+    result->bucket[0] = new_Bucket_sized(20 << 1);
+    return result;
+}
+
 Dictionary new_Dictionary()
 {
     NEW_OBJECT(Dictionary);
     result->size      = new_SmallInteger(0);
     result->ratio     = new_SmallInteger(500);
     result->maxLinear = new_SmallInteger(20);
-    // result->data      = new_Array_withAll(1, (Optr)new_Bucket(20 << 1));
+    result->buckets   = new_BucketArray();
     result->linear    = true;
     return result;
 }
@@ -26,7 +44,7 @@ static long Dictionary_hash(Dictionary dictionary, Object key)
 Object Dictionary_quick_lookup(Dictionary dictionary, Object key)
 {
     long hash        = Dictionary_hash(dictionary, key);
-    Bucket * bucketp = &dictionary->buckets->bucket[hash];
+    Bucket *bucketp = &dictionary->buckets->bucket[hash];
     Bucket bucket    = *bucketp;
     if (bucket == (Bucket)nil) {
         return NULL;
@@ -57,7 +75,7 @@ void Dictionary_quick_store(Dictionary dictionary, Object key, Object value)
 {
     assert0(dictionary != (Dictionary)nil);
     long hash = Dictionary_hash(dictionary, key);
-    Bucket * bucketp = &dictionary->buckets->bucket[hash];
+    Bucket *bucketp = &dictionary->buckets->bucket[hash];
     if (*bucketp == (Bucket)nil) {
         *bucketp         = new_Bucket();
         Bucket bucket    = *bucketp;

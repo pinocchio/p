@@ -32,34 +32,11 @@ typedef Behavior                    Header;
 #include <assert.h>
 #include <kernel/string/utility.h>
 #include <kernel/object/object.h>
+#include <kernel/object/class.h>
 #include <kernel/string/symbol.h>
 #include <kernel/number/smallinteger.h>
 #include <kernel/collection/dictionary.h>
 #include <kernel/collection/bucket.h>
-
-struct Behavior {
-    Header   header;
-    Behavior super;
-    Object   methods;
-    Object   classfields[];
-};
-
-struct Class {
-    Header              header;
-    Class               super;
-    MethodDictionary    methods;
-    Symbol              name;
-    Object              package;
-    Object              classfields[];
-};
-
-struct Metaclass {
-    Header              header;
-    Behavior            super;
-    MethodDictionary    methods;
-    Class               instance;
-    Object              classfields[];
-};
 
 struct MethodDictionary {
     Header              header;
