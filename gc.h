@@ -14,9 +14,12 @@
     #define PALLOC malloc
 #endif // PALLOC
 
+#define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
+    type result   = PALLOC(sizeof(struct type));\
+    result->header = (Behavior)class;
+
 #define NEW_OBJECT_NAMED(result, class)\
-    class result   = PALLOC(sizeof(struct class));\
-    result->header = (Behavior)class##_class;
+    NEW_OBJECT_NAMED_WITH_CLASS(result, class, class##_class)
 
 #define NEW_OBJECT(class) NEW_OBJECT_NAMED(result, class)
 

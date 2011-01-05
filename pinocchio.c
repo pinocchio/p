@@ -21,6 +21,7 @@ void bootstrap()
 int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
+    bootstrap();
     Object   object    = PALLOC(sizeof(struct Object));
     Behavior behavior  = PALLOC(sizeof(struct Behavior));
     object->header   = behavior;
