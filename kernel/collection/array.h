@@ -1,25 +1,25 @@
-#ifndef KERNEL_STRING_SYMBOL_H
-#define KERNEL_STRING_SYMBOL_H
+#ifndef KERNEL_COLLECTION_ARRAY_H
+#define KERNEL_COLLECTION_ARRAY_H
 
 #include <pinocchio.h>
 
 /* ======================================================================= */
 
-struct Symbol {
+struct Array {
     Header              header;
     uns_int             size;
-    SmallInteger        hash;
-    wchar_t             character[];
+    Object              value[];
 };
 
-extern Class Symbol_class;
-extern Class SymbolTable_class;
+extern Class Array_class;
+extern Array empty_array;
+
+extern void init_layout();
+/* ======================================================================= */
+
+extern Array new_Array_with(uns_int size, ...);
+extern Array new_Array(uns_int size);
 
 /* ======================================================================= */
 
-extern void init_symboltable();
-extern Symbol new_Symbol(const wchar_t* input);
-
-/* ======================================================================= */
-
-#endif // KERNEL_STRING_SYMBOL_H
+#endif // KERNEL_COLLECTION_ARRAY_H

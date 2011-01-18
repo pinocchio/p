@@ -14,18 +14,28 @@
     #define PALLOC malloc
 #endif // PALLOC
 
-#define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
-    type result   = PALLOC(sizeof(struct type));\
+#define INSTANTIATE(result, type, class)\
+    result         = PALLOC(sizeof(struct type));\
     result->header = (Behavior)class;
 
-#define NEW_OBJECT_NAMED(result, class)\
-    NEW_OBJECT_NAMED_WITH_CLASS(result, class, class##_class)
+#define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
+	type INSTANTIATE(result, type, class)
+
+#define NEW_OBJECT_WITH_CLASS(type, class)\
+    NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)
+
+#define NEW_OBJECT_NAMED(result, type)\
+    NEW_OBJECT_NAMED_WITH_CLASS(result, type, type##_class)
 
 #define NEW_OBJECT(class) NEW_OBJECT_NAMED(result, class)
 
-#define NEW_ARRAYED(class, end)\
-    class result   = PALLOC(sizeof(struct class) + sizeof(end));\
-    result->header = (Behavior)class##_class;
+#define INSTANTIATE_ARRAY(result, class, arraytype, arraysize)\
+    result   = PALLOC(sizeof(struct class) + sizeof(arraytype[arraysize]));\
+    result->header = (Behavior)class##_class;\
+	result->size   = arraysize;
+
+#define NEW_ARRAYED(class, arraytype, arraysize)\
+	class INSTANTIATE_ARRAY(result, class, arraytype, arraysize)
 
 /* ======================================================================= */
 

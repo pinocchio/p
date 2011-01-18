@@ -20,12 +20,14 @@ struct BucketArray {
     uns_int             size;
     Bucket              bucket[];
 };
+
 extern Class BucketArray_class;
 
 /* ======================================================================= */
 
 extern Object Dictionary_quick_lookup(Dictionary dictionary, Object key);
 extern void Dictionary_quick_store(Dictionary dictionary, Object key, Object value);
+extern BucketArray new_BucketArray(uns_int size);
 
 /* ======================================================================= */
 

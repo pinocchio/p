@@ -15,6 +15,7 @@ extern Class SmallInteger_class;
 /* ======================================================================= */
 
 extern SmallInteger new_SmallInteger(long value);
+extern void init_integercache();
 
 /* ======================================================================= */
 
