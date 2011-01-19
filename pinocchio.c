@@ -52,8 +52,5 @@ int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
     bootstrap();
-    Symbol s = new_Symbol(L"test");
-    Symbol t = new_Symbol(L"test");
-    fwprintf(stderr, L"%p %p %ls\n", s, t, s->character);
     return EXIT_SUCCESS;
 }
