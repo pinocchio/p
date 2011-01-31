@@ -19,6 +19,7 @@ extern Class SymbolTable_class;
 
 extern void init_symboltable();
 extern Symbol new_Symbol(const wchar_t* input);
+extern uns_int Symbol_hash(Symbol symbol);
 
 /* ======================================================================= */
 

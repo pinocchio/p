@@ -47,3 +47,20 @@ Behavior get_class(Object object)
 {
     return (Behavior)object->header;
 }
+
+/* ======================================================================= */
+
+Method lookup(Object receiver, Symbol selector)
+{
+    Behavior behavior        = get_class(receiver);
+    MethodDictionary methods = behavior->methods;
+    if (get_class((Object)methods) != (Behavior)MethodDictionary_class) {
+        return NULL;
+    }
+    return MethodDictionary_lookup(methods, selector);
+}
+
+void send(Thread thread, Symbol message)
+{
+    
+}

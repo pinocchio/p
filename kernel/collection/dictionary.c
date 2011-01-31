@@ -33,8 +33,3 @@ Dictionary new_Dictionary()
 }
 
 /* ======================================================================= */
-
-static long Dictionary_hash(Dictionary dictionary, Object key)
-{
-    return 0;
-}

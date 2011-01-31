@@ -8,6 +8,8 @@ Class SymbolTable_class;
 
 static void SymbolTable_grow(SymbolTable table)
 {
+    long size   = table->size->value + 1;
+    table->size = new_SmallInteger(size);
 }
 
 static Symbol raw_Symbol(const wchar_t* input, uns_int size, long hash)
@@ -67,9 +69,9 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
         }
     }
 
-    bucket->tally           = new_SmallInteger(tally + 1);
     symbol                  = raw_Symbol(key, size, hash);
     bucket->value[tally]    = (Object)symbol;
+    bucket->tally           = new_SmallInteger(tally + 1);
     SymbolTable_grow(table);
     return symbol;
 }
@@ -92,4 +94,9 @@ void init_symboltable()
 Symbol new_Symbol(const wchar_t* input)
 {
     return SymbolTable_lookup(symboltable, input);
+}
+
+uns_int Symbol_hash(Symbol symbol)
+{
+    return symbol->hash->value;
 }

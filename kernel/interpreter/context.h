@@ -8,12 +8,10 @@
 struct Context {
     Header              header;
     Raw                 program_counter;
-    SmallInteger        scope_identifier;
-    Object              stacked;
     Object              closure;
     Context             home_context;
     Context             return_context;
-    Object              self_or_outerscope;
+    Object              self;
     Object              locals[];
 };
 

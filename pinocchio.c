@@ -52,5 +52,9 @@ int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
     bootstrap();
+
+    Thread thread = new_Thread(THREAD_SIZE);
+    send(thread, Interpreter_class, new_Symbol("runWith:"));
+
     return EXIT_SUCCESS;
 }
