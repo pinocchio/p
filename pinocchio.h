@@ -57,6 +57,8 @@ typedef Behavior                    Header;
 #include <kernel/interpreter/context.h>
 #include <kernel/interpreter/thread.h>
 
+#include <interpreter/opcodes.h>
+
 /* ======================================================================= */
 
 #endif // PINOCCHIO_H

@@ -3,6 +3,7 @@
 
 void bootstrap()
 {
+    // TODO instantiate nil, true & false
     Metaclass_class         = raw_Bootstrapping_Class();
     set_class((Object)get_class((Object)Metaclass_class), Metaclass_class);
 
@@ -54,7 +55,7 @@ int main(int argc, const char ** argv)
     bootstrap();
 
     Thread thread = new_Thread(THREAD_SIZE);
-    send(thread, Interpreter_class, new_Symbol("runWith:"));
+    // send(thread, Interpreter_class, new_Symbol(L"runWith:"));
 
     return EXIT_SUCCESS;
 }

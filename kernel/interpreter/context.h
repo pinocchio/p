@@ -5,17 +5,26 @@
 
 /* ======================================================================= */
 
-struct Context {
+struct MethodContext {
     Header              header;
     Raw                 program_counter;
     Object              closure;
     Context             home_context;
-    Context             return_context;
+    Context             caller_context;
     Object              self;
-    Object              locals[];
+    Object              local[];
 };
-
 extern Class MethodContext_class;
+
+struct BlockContext {
+    Header              header;
+    Raw                 program_counter;
+    Object              closure;
+    Context             home_context;
+    Context             caller_context;
+    Object              outer_context;
+    Object              local[];
+};
 extern Class BlockContext_class;
 
 /* ======================================================================= */
