@@ -235,8 +235,17 @@ debug-silent:
 	CFLAGS+="-g -O0 -DNO_IC -DNO_EXCEPTION -DDEBUG" make $(TARGET) 
 
 gdb:
+	touch -c 'pinocchio.h'
 	CFLAGS+="-O0 -DNO_EXCEPTION -g" make $(TARGET)
 
+gdb-run:
+	touch -c 'pinocchio.h'
+	CFLAGS+="-O0 -g" make $(TARGET)
+	
+gdb-run-loud:
+	touch -c 'pinocchio.h'
+	CFLAGS+="-O0 -g -DNO_IC -DPRINT_DISPATCH_TRACE -DDEBUG" make $(TARGET)
+	
 # ============================================================================
 tags: $(SOURCES)
 	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
