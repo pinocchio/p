@@ -30,8 +30,11 @@ typedef struct BucketArray*         BucketArray;
 typedef struct Method*              Method;
 
 typedef struct Context*             Context;
+typedef struct MethodContext*       MethodContext;
+typedef struct BlockContext*        BlockContext;
 typedef struct Thread*              Thread;
 typedef struct Raw*                 Raw;
+typedef struct RawArray*            RawArray;
 
 typedef Dictionary                  MethodDictionary;
 typedef Behavior                    Header;
@@ -42,6 +45,7 @@ typedef Behavior                    Header;
 #include <kernel/string/utility.h>
 #include <kernel/object/object.h>
 #include <kernel/object/raw.h>
+#include <kernel/object/rawarray.h>
 #include <kernel/object/class.h>
 #include <kernel/structure/slot/slot.h>
 #include <kernel/structure/layout.h>

@@ -8,19 +8,19 @@
 struct Method {
     Header              header;
     uns_int             size;
-	Array				params;
-	Array				locals;
-	Object				package;
-	Array				annotations;
-	Array				code;
+	Array               params;
+	Array               locals;
+	Object              package;
+	Array               annotations;
+	RawArray            code;
     Object              body[];
 };
 
 extern Method new_Method(Array params,
-						 Array locals,
+                         Array locals,
                          Array annotations,
-						 Array code,
-						 uns_int statement_count, ...);
+                         RawArray code,
+                         uns_int statement_count, ...);
 
 /* ======================================================================= */
 

@@ -11,3 +11,8 @@ Thread new_Thread(uns_int size)
     result->stack_pointer = new_Raw((void**)&result->stack->value[0]);
     return result;
 }
+
+Object Thread_return(Thread thread, Object value)
+{
+    return nil;
+}

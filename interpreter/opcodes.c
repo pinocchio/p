@@ -13,15 +13,15 @@
 
 /* ======================================================================= */
 
-#define SET_PC(value) 
-#define GET_PC() (void**)nil
+#define SET_PC(value) CONTEXT()->pc->data = value
+#define GET_PC() CONTEXT()->pc->data
 
-#define SELF() nil
+#define SELF() CONTEXT()->home_context->self
 
 #define FETCH(type, index)\
     (type)(*index)
 
-#define OBJECT(index) nil
+#define OBJECT(index) ((Object)index)
 
 #define OPCODE(name)\
     void op_##name(Thread thread) {
@@ -32,25 +32,31 @@
 #define UNS_INT_OPERAND(idx)\
     FETCH(uns_int, GET_PC() + idx)
 
+#define INT_OPERAND(idx)\
+    FETCH(long, GET_PC() + idx)
+
 #define OBJECT_OPERAND(idx)\
     OBJECT(FETCH(uns_int, GET_PC() + idx))
 
 #define LOAD(idx)\
-    Context_load(thread, idx);
+    Context_direct_load(CONTEXT(), idx);
 
 #define STORE(idx, object)\
-    Context_store(thread, idx, object);
+    Context_direct_store(CONTEXT(), idx, object);
 
 #define JUMP(offset)\
     SET_PC(GET_PC() + offset);
 
 #define RETURN(value)\
-    Context_return(thread, value);
+    Thread_return(thread, value);
 
-#define CONTEXT_LOAD(depth, index) nil
-#define CONTEXT_STORE(depth, index, object)
-#define READ_FIELD(index) nil
-#define WRITE_FIELD(index, value)
+#define CONTEXT() thread->context
+#define CONTEXT_LOAD(depth, index)\
+    Context_load(CONTEXT(), depth, index)
+#define CONTEXT_STORE(depth, index, object)\
+    Context_store(CONTEXT(), depth, index, object)
+#define READ_FIELD(index) SELF()->field[index]
+#define WRITE_FIELD(index, value) SELF()->field[index] = value
 
 /* ======================================================================= */
 
@@ -104,7 +110,6 @@ OPCODE(store)
 END_OPCODE
 
 OPCODE(slot_read)
-    Object self    = SELF();
     uns_int target = UNS_INT_OPERAND(1);
     uns_int field  = UNS_INT_OPERAND(2);
     Object value   = READ_FIELD(field);
@@ -121,10 +126,10 @@ OPCODE(slot_store)
 END_OPCODE
 
 OPCODE(invoke)
-    Object selector = OBJECT_OPERAND(1);
+    Symbol selector = (Symbol)OBJECT_OPERAND(1);
     uns_int offset  = UNS_INT_OPERAND(2);
     JUMP(2);
-    invoke(selector, offset);
+    invoke(thread, selector, offset);
 END_OPCODE
 
 OPCODE(return)
@@ -143,11 +148,11 @@ OPCODE(iftrue_iffalse)
     uns_int origin = UNS_INT_OPERAND(1);
     Object test = LOAD(origin);
     if (test == false) {
-        uns_int target = UNS_INT_OPERAND(2);
+        long target = INT_OPERAND(2);
         JUMP(target);
     }
     if (test != true) {
-        uns_int target = UNS_INT_OPERAND(3);
+        long target = INT_OPERAND(3);
         JUMP(target);
     }
     JUMP(3);
@@ -157,18 +162,18 @@ OPCODE(iffalse_iftrue)
     uns_int origin = UNS_INT_OPERAND(1);
     Object test = LOAD(origin);
     if (test == true) {
-        uns_int target = UNS_INT_OPERAND(2);
+        long target = INT_OPERAND(2);
         JUMP(target);
     }
     if (test != false) {
-        uns_int target = UNS_INT_OPERAND(3);
+        long target = INT_OPERAND(3);
         JUMP(target);
     }
     JUMP(3);
 END_OPCODE
 
 OPCODE(goto)
-    uns_int target = UNS_INT_OPERAND(1);
+    long target = INT_OPERAND(1);
     JUMP(target);
 END_OPCODE
 

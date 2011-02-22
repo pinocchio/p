@@ -47,6 +47,7 @@ extern Class new_Bootstrapping_Class();
 extern void  set_super(Class child, Class superclass);
 extern void  set_class(Object object, Class class);
 extern Behavior get_class(Object object);
+extern void invoke(Thread thread, Symbol message, uns_int offset);
 
 /* ======================================================================= */
 

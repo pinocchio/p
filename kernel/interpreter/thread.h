@@ -9,7 +9,7 @@
 
 struct Thread {
     Header              header;
-    Context             environment;
+    Context             context;
     Raw                 stack_pointer;
     Dictionary          storage; // TODO IdentityDictionary?
     Object              error_handler;
@@ -21,6 +21,10 @@ extern Class Thread_class;
 
 #define THREAD_SIZE 10*1024*1024
 extern Thread new_Thread(uns_int size);
+
+/* ======================================================================= */
+
+extern Object Thread_return(Thread thread, Object value);
 
 /* ======================================================================= */
 

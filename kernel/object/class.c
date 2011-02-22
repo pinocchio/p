@@ -64,3 +64,8 @@ void send(Thread thread, Symbol message)
 {
     
 }
+
+void invoke(Thread thread, Symbol message, uns_int offset)
+{
+
+}
