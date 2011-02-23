@@ -10,8 +10,3 @@ Object false;
 Object nil;
 /* ======================================================================= */
 
-
-Behavior classof(Object instance)
-{
-    return instance->header;
-}

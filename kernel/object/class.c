@@ -40,12 +40,12 @@ void set_super(Class child, Class super)
 
 void set_class(Object object, Class class)
 {
-    object->header = (Behavior)class;
+    object->header.class = (Behavior)class;
 }
 
 Behavior get_class(Object object)
 {
-    return (Behavior)object->header;
+    return object->header.class;
 }
 
 /* ======================================================================= */

@@ -28,6 +28,7 @@ typedef struct Dictionary*          SymbolTable;
 typedef struct Bucket*              Bucket;
 typedef struct BucketArray*         BucketArray;
 typedef struct Method*              Method;
+typedef struct MethodClosure*       MethodClosure;
 
 typedef struct Context*             Context;
 typedef struct MethodContext*       MethodContext;
@@ -37,7 +38,24 @@ typedef struct Raw*                 Raw;
 typedef struct RawArray*            RawArray;
 
 typedef Dictionary                  MethodDictionary;
-typedef Behavior                    Header;
+
+struct Header {
+    Behavior    class;
+    uns_int     variable: 1;
+    uns_int     raw:      1;
+    uns_int     base: sizeof(uns_int) * 8 - 2;
+};
+
+struct VariableHeader {
+    Behavior    class;
+    uns_int     variable: 1;
+    uns_int     raw:      1;
+    uns_int     base: sizeof(uns_int) * 8 - 2;
+    uns_int     size;
+};
+
+typedef struct Header               Header;
+typedef struct VariableHeader       VariableHeader;
 
 /* ======================================================================= */
 
@@ -57,6 +75,7 @@ typedef Behavior                    Header;
 #include <kernel/collection/array.h>
 #include <kernel/behavior/methoddictionary.h>
 #include <kernel/behavior/method.h>
+#include <kernel/behavior/methodclosure.h>
 
 #include <kernel/interpreter/context.h>
 #include <kernel/interpreter/thread.h>

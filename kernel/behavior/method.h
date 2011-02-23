@@ -1,5 +1,5 @@
-#ifndef KERNEL_OBJECT_BEHAVIOR_METHOD_H
-#define KERNEL_OBJECT_BEHAVIOR_METHOD_H
+#ifndef KERNEL_BEHAVIOR_METHOD_H
+#define KERNEL_BEHAVIOR_METHOD_H
 
 #include <pinocchio.h>
 
@@ -7,20 +7,19 @@
 
 struct Method {
     Header              header;
-    uns_int             size;
-	Array               params;
-	Array               locals;
-	Object              package;
-	Array               annotations;
-	RawArray            code;
-    Object              body[];
+    Array               params;
+    Array               locals;
+    Object              package;
+    Array               annotations;
+    RawArray            code;
+    Array               body;
 };
 
 extern Method new_Method(Array params,
                          Array locals,
                          Array annotations,
                          RawArray code,
-                         uns_int statement_count, ...);
+                         Array body);
 
 /* ======================================================================= */
 
@@ -28,4 +27,4 @@ extern Method new_Method(Array params,
 
 /* ======================================================================= */
 
-#endif // KERNEL_OBJECT_BEHAVIOR_METHOD_H
+#endif // KERNEL_BEHAVIOR_METHOD_H
