@@ -7,6 +7,7 @@
 
 struct Context {
     Header              header;
+    uns_int             size;
     Raw                 pc;
     Object              closure;
     MethodContext       home_context;
@@ -17,6 +18,7 @@ struct Context {
 
 struct MethodContext {
     Header              header;
+    uns_int             size;
     Raw                 pc;
     Object              closure;
     MethodContext       home_context;
@@ -28,6 +30,7 @@ extern Class MethodContext_class;
 
 struct BlockContext {
     Header              header;
+    uns_int             size;
     Raw                 pc;
     Object              closure;
     MethodContext       home_context;
@@ -37,10 +40,45 @@ struct BlockContext {
 };
 extern Class BlockContext_class;
 
+struct StackContext {
+    StackHeader         header;
+    uns_int             size;
+    Raw                 pc;
+    Object              closure;
+    MethodContext       home_context;
+    Context             caller_context;
+    Object              self_or_outer;
+    Object              local[];
+};
+
+struct StackMethodContext {
+    StackHeader         header;
+    uns_int             size;
+    Raw                 pc;
+    Object              closure;
+    MethodContext       home_context;
+    Context             caller_context;
+    Object              self;
+    Object              local[];
+};
+extern Class StackMethodContext_class;
+
+struct StackBlockContext {
+    StackHeader         header;
+    uns_int             size;
+    Raw                 pc;
+    Object              closure;
+    MethodContext       home_context;
+    Context             caller_context;
+    Context             outer_context;
+    Object              local[];
+};
+extern Class StackBlockContext_class;
+
 /* ======================================================================= */
 
-extern Context new_BlockContext(uns_int size);
-extern Context new_MethodContext(uns_int size);
+extern BlockContext new_BlockContext(Thread thread, uns_int size);
+extern MethodContext new_MethodContext(Thread thread, uns_int size);
 
 /* ======================================================================= */
 

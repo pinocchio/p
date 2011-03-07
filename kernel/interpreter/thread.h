@@ -13,7 +13,7 @@ struct Thread {
     Raw                 stack_pointer;
     Dictionary          storage; // TODO IdentityDictionary?
     Object              error_handler;
-    Array               stack;
+    RawArray            stack;
 };
 extern Class Thread_class;
 

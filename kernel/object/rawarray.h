@@ -15,6 +15,7 @@ extern Class RawArray_class;
 /* ======================================================================= */
 
 extern RawArray new_RawArray(uns_int size, ...);
+extern RawArray raw_RawArray(uns_int size);
 
 /* ======================================================================= */
 

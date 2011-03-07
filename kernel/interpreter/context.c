@@ -5,18 +5,22 @@ Class MethodContext_class;
 Class BlockContext_class;
 /* ======================================================================= */
 
-Context new_MethodContext(uns_int size)
+MethodContext new_MethodContext(Thread thread, uns_int size)
 {
-    // NEW_STACK_OBJECT(Context, MethodContext_class, Object, size);
-    // return result;
-    return NULL;
+    NEW_STACK_OBJECT(Context, MethodContext, size);
+    while (size--) {
+        result->local[size] = nil;
+    }
+    return result;
 }
 
-Context new_BlockContext(uns_int size)
+BlockContext new_BlockContext(Thread thread, uns_int size)
 {
-    // NEW_STACK_OBJECT(Context, MethodContext_class, Object, size);
-    // return result;
-    return NULL;
+    NEW_STACK_OBJECT(Context, BlockContext, size);
+    while (size--) {
+        result->local[size] = nil;
+    }
+    return result;
 }
 
 Object Context_direct_load(Context context, uns_int index)

@@ -18,3 +18,10 @@ RawArray new_RawArray(uns_int size, ...)
     va_end(args);
     return result;
 }
+
+RawArray raw_RawArray(uns_int size)
+{
+    NEW_ARRAYED(RawArray, void**, size);
+    result->size = size;
+    return result;
+}

@@ -39,23 +39,44 @@ typedef struct RawArray*            RawArray;
 
 typedef Dictionary                  MethodDictionary;
 
-struct Header {
-    Behavior    class;
+struct StackHeader {
     uns_int     variable: 1;
     uns_int     raw:      1;
-    uns_int     base: sizeof(uns_int) * 8 - 2;
+    uns_int     stack:    1;
+    uns_int     base: sizeof(uns_int) * 8 - 3;
+    Behavior    class;
+};
+
+struct VariableStackHeader {
+    uns_int     variable: 1;
+    uns_int     raw:      1;
+    uns_int     stack:    1;
+    uns_int     base: sizeof(uns_int) * 8 - 3;
+    Behavior    class;
+    uns_int     size;
+};
+
+struct Header {
+    uns_int     variable: 1;
+    uns_int     raw:      1;
+    uns_int     stack:    1;
+    uns_int     base: sizeof(uns_int) * 8 - 3;
+    Behavior    class;
 };
 
 struct VariableHeader {
-    Behavior    class;
     uns_int     variable: 1;
     uns_int     raw:      1;
-    uns_int     base: sizeof(uns_int) * 8 - 2;
+    uns_int     stack:    1;
+    uns_int     base: sizeof(uns_int) * 8 - 3;
+    Behavior    class;
     uns_int     size;
 };
 
 typedef struct Header               Header;
 typedef struct VariableHeader       VariableHeader;
+typedef struct StackHeader          StackHeader;
+typedef struct VariableStackHeader  VariableStackHeader;
 
 /* ======================================================================= */
 
