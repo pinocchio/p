@@ -19,7 +19,7 @@
 #define SELF() CONTEXT()->home_context->self
 
 #define FETCH(type, index)\
-    (type)(*index)
+    (type)(*(index))
 
 #define OBJECT(index) ((Object)index)
 
@@ -180,7 +180,6 @@ OPCODE(goto)
 END_OPCODE
 
 OPCODE(exit)
-    fwprintf(stdout, L"HELLO WORLD!\n");
     exit(0);
 END_OPCODE
 
