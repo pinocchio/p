@@ -12,7 +12,7 @@ DECLARE_OPCODE(move);
 DECLARE_OPCODE(load_constant);
 DECLARE_OPCODE(lookup);
 DECLARE_OPCODE(slot_read);
-DECLARE_OPCODE(slot_store);
+DECLARE_OPCODE(slot_write);
 DECLARE_OPCODE(send);
 DECLARE_OPCODE(return);
 DECLARE_OPCODE(block_return);

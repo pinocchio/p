@@ -66,7 +66,7 @@ INSTALL_OPCODE(move);
 INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
 INSTALL_OPCODE(slot_read);
-INSTALL_OPCODE(slot_store);
+INSTALL_OPCODE(slot_write);
 INSTALL_OPCODE(send);
 INSTALL_OPCODE(return);
 INSTALL_OPCODE(block_return);
@@ -82,14 +82,14 @@ OPCODE(move)
     uns_int origin = UNS_INT_OPERAND(2);
     Object value   = LOAD(origin);
     STORE(target, value);
-    JUMP(2);
+    JUMP(3);
 END_OPCODE
 
 OPCODE(load_constant)
     uns_int target = UNS_INT_OPERAND(1);
     Object value   = OBJECT_OPERAND(2);
     STORE(target, value);
-    JUMP(2);
+    JUMP(3);
 END_OPCODE
 
 OPCODE(lookup)
@@ -98,7 +98,7 @@ OPCODE(lookup)
     uns_int index  = UNS_INT_OPERAND(3);
     Object value   = CONTEXT_LOAD(depth, index);
     STORE(target, value);
-    JUMP(3);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(store)
@@ -107,7 +107,7 @@ OPCODE(store)
     uns_int index  = UNS_INT_OPERAND(3);
     Object value   = LOAD(origin);
     CONTEXT_STORE(depth, index, value);
-    JUMP(3);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(slot_read)
@@ -115,22 +115,22 @@ OPCODE(slot_read)
     uns_int field  = UNS_INT_OPERAND(2);
     Object value   = READ_FIELD(field);
     STORE(target, value);
-    JUMP(2);
+    JUMP(3);
 END_OPCODE
 
-OPCODE(slot_store)
+OPCODE(slot_write)
     uns_int origin = UNS_INT_OPERAND(1);
     uns_int index  = UNS_INT_OPERAND(2);
     Object value   = LOAD(origin);
     WRITE_FIELD(index, value);
-    JUMP(2);
+    JUMP(3);
 END_OPCODE
 
 OPCODE(send)
     Symbol selector = (Symbol)OBJECT_OPERAND(1);
     uns_int size    = UNS_INT_OPERAND(2);
     uns_int offset  = UNS_INT_OPERAND(3);
-    JUMP(3);
+    JUMP(4);
     send(thread, selector, size, offset);
 END_OPCODE
 
@@ -157,7 +157,7 @@ OPCODE(iftrue_iffalse)
         long target = INT_OPERAND(3);
         JUMP(target);
     }
-    JUMP(3);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(iffalse_iftrue)
@@ -171,7 +171,7 @@ OPCODE(iffalse_iftrue)
         long target = INT_OPERAND(3);
         JUMP(target);
     }
-    JUMP(3);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(goto)
