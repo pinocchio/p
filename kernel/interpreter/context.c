@@ -11,6 +11,7 @@ MethodContext new_MethodContext(Thread thread, uns_int size)
     while (size--) {
         result->local[size] = nil;
     }
+    result->home = result;
     return result;
 }
 

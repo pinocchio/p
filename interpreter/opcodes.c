@@ -24,7 +24,8 @@
 #define OBJECT(index) ((Object)index)
 
 #define OPCODE(name)\
-    void op_##name(Thread thread) {
+    void op_##name(Thread thread) {\
+        fwprintf(stderr, L" ## "#name"\n");
 
 #define END_OPCODE\
     }
@@ -63,6 +64,7 @@
 OPCODE_HEAD
 
 INSTALL_OPCODE(move);
+INSTALL_OPCODE(self);
 INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
 INSTALL_OPCODE(slot_read);
@@ -78,6 +80,13 @@ INSTALL_OPCODE(goto);
 INSTALL_OPCODE(exit);
 
 OPCODE_BODY
+
+OPCODE(self)
+    uns_int target = UNS_INT_OPERAND(1);
+    Object value   = SELF();
+    STORE(target, value);
+    JUMP(2);
+END_OPCODE
 
 OPCODE(move)
     uns_int target = UNS_INT_OPERAND(1);

@@ -9,6 +9,7 @@ typedef void (*opcode)(Thread);
 /* ======================================================================= */
 
 DECLARE_OPCODE(move);
+DECLARE_OPCODE(self);
 DECLARE_OPCODE(load_constant);
 DECLARE_OPCODE(lookup);
 DECLARE_OPCODE(slot_read);
