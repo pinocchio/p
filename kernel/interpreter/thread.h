@@ -20,7 +20,7 @@ extern Class Thread_class;
 /* ======================================================================= */
 
 #define THREAD_SIZE 10*1024*1024
-extern Thread new_Thread(uns_int size);
+extern Thread new_Thread(uns_int size, Object receiver, Symbol message);
 
 /* ======================================================================= */
 

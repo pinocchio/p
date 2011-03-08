@@ -67,12 +67,13 @@ INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
 INSTALL_OPCODE(slot_read);
 INSTALL_OPCODE(slot_store);
-INSTALL_OPCODE(invoke);
+INSTALL_OPCODE(send);
 INSTALL_OPCODE(return);
 INSTALL_OPCODE(block_return);
 INSTALL_OPCODE(iftrue_iffalse);
 INSTALL_OPCODE(iffalse_iftrue);
 INSTALL_OPCODE(goto);
+INSTALL_OPCODE(exit);
 
 OPCODE_BODY
 
@@ -125,11 +126,12 @@ OPCODE(slot_store)
     JUMP(2);
 END_OPCODE
 
-OPCODE(invoke)
+OPCODE(send)
     Symbol selector = (Symbol)OBJECT_OPERAND(1);
-    uns_int offset  = UNS_INT_OPERAND(2);
-    JUMP(2);
-    invoke(thread, selector, offset);
+    uns_int size    = UNS_INT_OPERAND(2);
+    uns_int offset  = UNS_INT_OPERAND(3);
+    JUMP(3);
+    send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(return)
@@ -175,6 +177,11 @@ END_OPCODE
 OPCODE(goto)
     long target = INT_OPERAND(1);
     JUMP(target);
+END_OPCODE
+
+OPCODE(exit)
+    fwprintf(stdout, L"HELLO WORLD!\n");
+    exit(0);
 END_OPCODE
 
 OPCODE_END

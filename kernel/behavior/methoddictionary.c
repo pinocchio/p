@@ -17,25 +17,25 @@ MethodDictionary new_MethodDictionary()
 
 /* ======================================================================= */
 
-static uns_int bucket_index(MethodDictionary dictionary, Symbol selector)
+static uns_int bucket_index(MethodDictionary dictionary, Symbol message)
 {
     BucketArray buckets = dictionary->buckets;
     if (buckets->size == 1) {
         return 0;
     } else {
-        uns_int hash = Symbol_hash(selector);
+        uns_int hash = Symbol_hash(message);
         return hash % buckets->size;
     }
 }
 
-Method MethodDictionary_lookup(MethodDictionary dictionary, Symbol selector)
+MethodClosure MethodDictionary_lookup(MethodDictionary dictionary, Symbol message)
 {
-    uns_int bucket_idx = bucket_index(dictionary, selector);
+    uns_int bucket_idx = bucket_index(dictionary, message);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
     uns_int i;
     for (i = 0; i < bucket->tally->value; i = i+2) {
-        if ((Symbol)bucket->value[i] == selector) {
-            return (Method)bucket->value[i+1];
+        if ((Symbol)bucket->value[i] == message) {
+            return (MethodClosure)bucket->value[i+1];
         }
     }
     return NULL;
@@ -127,14 +127,14 @@ static void MethodDictionary_grow(MethodDictionary dictionary)
     }
 }
 
-void MethodDictionary_store(MethodDictionary dictionary, Symbol selector, Method method)
+void MethodDictionary_store(MethodDictionary dictionary, Symbol message, MethodClosure method)
 {
-    uns_int bucket_idx = bucket_index(dictionary, selector);
+    uns_int bucket_idx = bucket_index(dictionary, message);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
     if ((Object)bucket == nil) {
         Bucket new_bucket = new_Bucket();
         dictionary->buckets->bucket[bucket_idx] = new_bucket;
-        new_bucket->value[0] = (Object)selector;
+        new_bucket->value[0] = (Object)message;
         new_bucket->value[1] = (Object)method;
         new_bucket->tally    = new_SmallInteger(2);
         MethodDictionary_grow(dictionary);
@@ -143,7 +143,7 @@ void MethodDictionary_store(MethodDictionary dictionary, Symbol selector, Method
 
     uns_int i;
     for (i = 0; i < bucket->tally->value; i = i+2) {
-        if ((Symbol)bucket->value[i] == selector) {
+        if ((Symbol)bucket->value[i] == message) {
             bucket->value[i+1] = (Object)method;
             return;
         }
@@ -156,7 +156,7 @@ void MethodDictionary_store(MethodDictionary dictionary, Symbol selector, Method
         }
         dictionary->buckets->bucket[bucket_idx] = new_bucket;
     }
-    bucket->value[i]   = (Object)selector;
+    bucket->value[i]   = (Object)message;
     bucket->value[i+1] = (Object)method;
     bucket->tally = new_SmallInteger(i + 2);
     MethodDictionary_grow(dictionary);

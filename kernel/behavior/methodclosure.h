@@ -9,9 +9,11 @@ struct MethodClosure {
     Header              header;
     Behavior            class;
     Method              method;
+    Symbol              selector;
 };
 
 extern MethodClosure new_MethodClosure(Behavior class, 
+                                       Symbol selector,
                                        Method method);
 
 /* ======================================================================= */

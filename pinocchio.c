@@ -1,5 +1,6 @@
 #include <pinocchio.h>
 #include <locale.h>
+#include <test.h>
 
 void bootstrap()
 {
@@ -57,10 +58,7 @@ int main(int argc, const char ** argv)
     setlocale(LC_ALL, "");
     bootstrap();
 
-    Thread thread = new_Thread(THREAD_SIZE);
-	// add_method(ObjectLayout_class, L"basicNew:",
-			   
-    // send(thread, Interpreter_class, new_Symbol(L"runWith:"));
+    test();
 
     return EXIT_SUCCESS;
 }

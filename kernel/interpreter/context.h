@@ -40,41 +40,6 @@ struct BlockContext {
 };
 extern Class BlockContext_class;
 
-struct StackContext {
-    StackHeader         header;
-    uns_int             size;
-    Raw                 pc;
-    Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
-    Object              self_or_outer;
-    Object              local[];
-};
-
-struct StackMethodContext {
-    StackHeader         header;
-    uns_int             size;
-    Raw                 pc;
-    Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
-    Object              self;
-    Object              local[];
-};
-extern Class StackMethodContext_class;
-
-struct StackBlockContext {
-    StackHeader         header;
-    uns_int             size;
-    Raw                 pc;
-    Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
-    Context             outer_context;
-    Object              local[];
-};
-extern Class StackBlockContext_class;
-
 /* ======================================================================= */
 
 extern BlockContext new_BlockContext(Thread thread, uns_int size);

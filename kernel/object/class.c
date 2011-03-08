@@ -50,22 +50,34 @@ Behavior get_class(Object object)
 
 /* ======================================================================= */
 
-Method lookup(Object receiver, Symbol selector)
+MethodClosure lookup(Object receiver, Symbol message)
 {
     Behavior behavior        = get_class(receiver);
     MethodDictionary methods = behavior->methods;
     if (get_class((Object)methods) != (Behavior)MethodDictionary_class) {
         return NULL;
     }
-    return MethodDictionary_lookup(methods, selector);
+    return MethodDictionary_lookup(methods, message);
 }
 
-void send(Thread thread, Symbol message)
+void send(Thread thread, Symbol message, uns_int size, uns_int offset)
 {
-    
-}
+    Context caller        = thread->context;
+    Object receiver       = caller->local[offset];
+    MethodClosure closure = lookup(receiver, message);
 
-void invoke(Thread thread, Symbol message, uns_int offset)
-{
+    if (closure == NULL) {
+        // does_not_understand(thread, message, size, offset);
+    }
 
+    Method method        = closure->method;
+
+    MethodContext callee = new_MethodContext(thread, size);
+
+    callee->pc           = new_Raw((void**)&method->code->data[0]);
+    callee->self         = receiver;
+    while (size--) {
+        callee->local[size] = caller->local[size + offset + 1];
+    }
+    thread->context      = callee;
 }
