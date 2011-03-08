@@ -67,7 +67,9 @@ INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
 INSTALL_OPCODE(slot_read);
 INSTALL_OPCODE(slot_write);
-INSTALL_OPCODE(send);
+INSTALL_OPCODE(first_send);
+INSTALL_OPCODE(cache_send);
+INSTALL_OPCODE(poly_send);
 INSTALL_OPCODE(return);
 INSTALL_OPCODE(block_return);
 INSTALL_OPCODE(iftrue_iffalse);
@@ -126,7 +128,23 @@ OPCODE(slot_write)
     JUMP(3);
 END_OPCODE
 
-OPCODE(send)
+OPCODE(first_send)
+    Symbol selector = (Symbol)OBJECT_OPERAND(1);
+    uns_int size    = UNS_INT_OPERAND(2);
+    uns_int offset  = UNS_INT_OPERAND(3);
+    JUMP(4);
+    send(thread, selector, size, offset);
+END_OPCODE
+
+OPCODE(cache_send)
+    Symbol selector = (Symbol)OBJECT_OPERAND(1);
+    uns_int size    = UNS_INT_OPERAND(2);
+    uns_int offset  = UNS_INT_OPERAND(3);
+    JUMP(4);
+    send(thread, selector, size, offset);
+END_OPCODE
+
+OPCODE(poly_send)
     Symbol selector = (Symbol)OBJECT_OPERAND(1);
     uns_int size    = UNS_INT_OPERAND(2);
     uns_int offset  = UNS_INT_OPERAND(3);
