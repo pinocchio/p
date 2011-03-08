@@ -1,4 +1,5 @@
 #include <pinocchio.h>
+#include <string.h>
 
 /* ======================================================================= */
 Class Behavior_class;
@@ -67,7 +68,7 @@ void send(Thread thread, Symbol message, uns_int size, uns_int offset)
     MethodClosure closure = lookup(receiver, message);
 
     if (closure == NULL) {
-        // does_not_understand(thread, message, size, offset);
+        // TODO does_not_understand(thread, message, size, offset);
     }
 
     Method method        = closure->method;
@@ -76,8 +77,7 @@ void send(Thread thread, Symbol message, uns_int size, uns_int offset)
 
     callee->pc           = new_Raw((void**)&method->code->data[0]);
     callee->self         = receiver;
-    while (size--) {
-        callee->local[size] = caller->local[size + offset + 1];
-    }
-    thread->context      = callee;
+    // TODO test what is faster
+    memcpy(&callee->local[size], &caller->local[size + offset + 1], size * 8);
+    thread->context      = (Context)callee;
 }
