@@ -17,7 +17,10 @@ Thread new_Thread(uns_int size, Object receiver, Symbol message)
     return result;
 }
 
-Object Thread_return(Thread thread, Object value)
+void Thread_return(Thread thread, Object value)
 {
-    return nil;
+    Context receiver = thread->context;
+    Context sender   = receiver->sender;
+
+    thread->context  = sender;
 }

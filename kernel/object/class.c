@@ -63,21 +63,21 @@ MethodClosure lookup(Object receiver, Symbol message)
 
 void send(Thread thread, Symbol message, uns_int size, uns_int offset)
 {
-    Context caller        = thread->context;
-    Object receiver       = caller->local[offset];
-    MethodClosure closure = lookup(receiver, message);
+    Context sender        = thread->context;
+    Object self           = sender->local[offset];
+    MethodClosure closure = lookup(self, message);
 
     if (closure == NULL) {
         // TODO does_not_understand(thread, message, size, offset);
     }
 
-    Method method        = closure->method;
+    Method method          = closure->method;
 
-    MethodContext callee = new_MethodContext(thread, size);
+    MethodContext receiver = new_MethodContext(thread, size);
 
-    callee->pc           = new_Raw((void**)&method->code->data[0]);
-    callee->self         = receiver;
+    receiver->pc           = new_Raw((void**)&method->code->data[0]);
+    receiver->self         = self;
     // TODO test what is faster
-    memcpy(&callee->local[size], &caller->local[size + offset + 1], size * 8);
-    thread->context      = (Context)callee;
+    memcpy(&receiver->local[size], &sender->local[size + offset + 1], size * 8);
+    thread->context        = (Context)receiver;
 }

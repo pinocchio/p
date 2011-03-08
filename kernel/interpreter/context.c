@@ -36,7 +36,7 @@ void Context_direct_store(Context context, uns_int index, Object value)
 Object Context_load(Context context, uns_int depth, uns_int index)
 {
     while (depth--) {
-        context = ((BlockContext)context)->outer_context;
+        context = ((BlockContext)context)->outer;
     }
     return Context_direct_load(context, index);
 }
@@ -44,7 +44,7 @@ Object Context_load(Context context, uns_int depth, uns_int index)
 void Context_store(Context context, uns_int depth, uns_int index, Object value)
 {
     while (depth--) {
-        context = ((BlockContext)context)->outer_context;
+        context = ((BlockContext)context)->outer;
     }
     Context_direct_store(context, index, value);
 }

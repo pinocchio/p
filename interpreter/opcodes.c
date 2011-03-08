@@ -16,7 +16,7 @@
 #define SET_PC(value) CONTEXT()->pc->data = value
 #define GET_PC() CONTEXT()->pc->data
 
-#define SELF() CONTEXT()->home_context->self
+#define SELF() CONTEXT()->home->self
 
 #define FETCH(type, index)\
     (type)(*(index))

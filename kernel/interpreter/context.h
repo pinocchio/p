@@ -10,8 +10,8 @@ struct Context {
     uns_int             size;
     Raw                 pc;
     Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
+    MethodContext       home;
+    Context             sender;
     Object              self_or_outer;
     Object              local[];
 };
@@ -21,8 +21,8 @@ struct MethodContext {
     uns_int             size;
     Raw                 pc;
     Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
+    MethodContext       home;
+    Context             sender;
     Object              self;
     Object              local[];
 };
@@ -33,9 +33,9 @@ struct BlockContext {
     uns_int             size;
     Raw                 pc;
     Object              closure;
-    MethodContext       home_context;
-    Context             caller_context;
-    Context             outer_context;
+    MethodContext       home;
+    Context             sender;
+    Context             outer;
     Object              local[];
 };
 extern Class BlockContext_class;
