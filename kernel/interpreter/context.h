@@ -20,7 +20,7 @@ struct MethodContext {
     Header              header;
     uns_int             size;
     Raw                 pc;
-    Object              closure;
+    MethodClosure       closure;
     MethodContext       home;
     Context             sender;
     Object              self;

@@ -74,9 +74,11 @@ void send(Thread thread, Symbol message, uns_int size, uns_int offset)
     Method method          = closure->method;
 
     MethodContext receiver = new_MethodContext(thread, size);
+    receiver->sender       = sender;
 
     receiver->pc           = new_Raw((void**)&method->code->data[0]);
     receiver->self         = self;
+    receiver->closure      = closure;
     // TODO test what is faster
     memcpy(&receiver->local[size], &sender->local[size + offset + 1], size * 8);
     thread->context        = (Context)receiver;

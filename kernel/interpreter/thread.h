@@ -24,7 +24,7 @@ extern Thread new_Thread(uns_int size, Object receiver, Symbol message);
 
 /* ======================================================================= */
 
-extern void Thread_return(Thread thread, Object value);
+extern void Thread_return(Thread thread);
 
 /* ======================================================================= */
 

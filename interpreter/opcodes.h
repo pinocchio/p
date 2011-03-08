@@ -18,6 +18,7 @@ DECLARE_OPCODE(first_send);
 DECLARE_OPCODE(cache_send);
 DECLARE_OPCODE(poly_send);
 DECLARE_OPCODE(return);
+DECLARE_OPCODE(return_self);
 DECLARE_OPCODE(block_return);
 DECLARE_OPCODE(iftrue_iffalse);
 DECLARE_OPCODE(iffalse_iftrue);
