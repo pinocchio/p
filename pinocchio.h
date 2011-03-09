@@ -60,8 +60,6 @@ struct VariableHeader {
 
 typedef struct Header               Header;
 typedef struct VariableHeader       VariableHeader;
-typedef struct StackHeader          StackHeader;
-typedef struct VariableStackHeader  VariableStackHeader;
 
 /* ======================================================================= */
 
