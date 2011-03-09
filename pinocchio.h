@@ -29,6 +29,8 @@ typedef struct Bucket*              Bucket;
 typedef struct BucketArray*         BucketArray;
 typedef struct Method*              Method;
 typedef struct MethodClosure*       MethodClosure;
+typedef struct Block*               Block;
+typedef struct BlockClosure*        BlockClosure;
 
 typedef struct Context*             Context;
 typedef struct MethodContext*       MethodContext;
@@ -80,6 +82,8 @@ typedef struct VariableStackHeader  VariableStackHeader;
 #include <kernel/behavior/methoddictionary.h>
 #include <kernel/behavior/method.h>
 #include <kernel/behavior/methodclosure.h>
+#include <kernel/behavior/block.h>
+#include <kernel/behavior/blockclosure.h>
 
 #include <kernel/interpreter/context.h>
 #include <kernel/interpreter/thread.h>

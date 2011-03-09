@@ -15,6 +15,7 @@ void op_print2(Thread thread)
 void test()
 {
     // TODO allocate thread objects on C-stack
+    // alloca
     Array params;
     Array locals;
     Array annotations;

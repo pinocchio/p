@@ -23,8 +23,4 @@ extern Method new_Method(Array params,
 
 /* ======================================================================= */
 
-// extern void Method_invoke(Thread thread);
-
-/* ======================================================================= */
-
 #endif // KERNEL_BEHAVIOR_METHOD_H
