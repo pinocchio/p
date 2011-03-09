@@ -67,7 +67,10 @@ uns_int depth;
 uns_int idx;
 uns_int size;
 uns_int offset;
+long    address;
+Symbol  selector;
 Object  value;
+Object  test;
 
 OPCODE_HEAD
 
@@ -147,24 +150,24 @@ OPCODE(slot_write)
 END_OPCODE
 
 OPCODE(send)
-    size            = UNS_INT_OPERAND(1);
-    offset          = UNS_INT_OPERAND(2);
-    Symbol selector = (Symbol)OBJECT_OPERAND(3);
+    size     = UNS_INT_OPERAND(1);
+    offset   = UNS_INT_OPERAND(2);
+    selector = (Symbol)OBJECT_OPERAND(3);
     send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(cache_send)
-    size            = UNS_INT_OPERAND(1);
-    offset          = UNS_INT_OPERAND(2);
-    Symbol selector = (Symbol)OBJECT_OPERAND(3);
+    size     = UNS_INT_OPERAND(1);
+    offset   = UNS_INT_OPERAND(2);
+    selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
     send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(poly_send)
-    size            = UNS_INT_OPERAND(1);
-    offset          = UNS_INT_OPERAND(2);
-    Symbol selector = (Symbol)OBJECT_OPERAND(3);
+    size     = UNS_INT_OPERAND(1);
+    offset   = UNS_INT_OPERAND(2);
+    selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
     send(thread, selector, size, offset);
 END_OPCODE
@@ -193,36 +196,36 @@ OPCODE(block_return)
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
-    origin      = UNS_INT_OPERAND(1);
-    Object test = LOAD(origin);
+    origin = UNS_INT_OPERAND(1);
+    test   = LOAD(origin);
     if (test == false) {
-        long target = INT_OPERAND(2);
-        JUMP(target);
+        address = INT_OPERAND(2);
+        JUMP(address);
     }
     if (test != true) {
-        long target = INT_OPERAND(3);
-        JUMP(target);
+        address = INT_OPERAND(3);
+        JUMP(address);
     }
     JUMP(4);
 END_OPCODE
 
 OPCODE(iffalse_iftrue)
-    origin      = UNS_INT_OPERAND(1);
-    Object test = LOAD(origin);
+    origin = UNS_INT_OPERAND(1);
+    test   = LOAD(origin);
     if (test == true) {
-        long target = INT_OPERAND(2);
+        address = INT_OPERAND(2);
         JUMP(target);
     }
     if (test != false) {
-        long target = INT_OPERAND(3);
-        JUMP(target);
+        address = INT_OPERAND(3);
+        JUMP(address);
     }
     JUMP(4);
 END_OPCODE
 
 OPCODE(goto)
-    long target = INT_OPERAND(1);
-    JUMP(target);
+    address = INT_OPERAND(1);
+    JUMP(address);
 END_OPCODE
 
 OPCODE(exit)
