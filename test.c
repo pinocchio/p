@@ -17,7 +17,7 @@ void test()
     // TODO allocate thread objects on C-stack
     // alloca
     Array annotations;
-    RawArray code = new_RawArray(7, &op_self, 0, &op_first_send, 0, 0, new_Symbol(L"test2"), &op_exit);
+    RawArray code = new_RawArray(7, &op_self, 0, &op_send, 0, 0, new_Symbol(L"test2"), &op_exit);
     Array body;
 
     Method method = new_Method(annotations, code, body);

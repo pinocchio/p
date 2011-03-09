@@ -63,22 +63,22 @@
 
 OPCODE_HEAD
 
-INSTALL_OPCODE(move);
-INSTALL_OPCODE(self);
+INSTALL_OPCODE(block_return);
+INSTALL_OPCODE(cache_send);
+INSTALL_OPCODE(exit);
+INSTALL_OPCODE(goto);
+INSTALL_OPCODE(iffalse_iftrue);
+INSTALL_OPCODE(iftrue_iffalse);
 INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
-INSTALL_OPCODE(slot_read);
-INSTALL_OPCODE(slot_write);
-INSTALL_OPCODE(first_send);
-INSTALL_OPCODE(cache_send);
+INSTALL_OPCODE(move);
 INSTALL_OPCODE(poly_send);
 INSTALL_OPCODE(return);
 INSTALL_OPCODE(return_self);
-INSTALL_OPCODE(block_return);
-INSTALL_OPCODE(iftrue_iffalse);
-INSTALL_OPCODE(iffalse_iftrue);
-INSTALL_OPCODE(goto);
-INSTALL_OPCODE(exit);
+INSTALL_OPCODE(self);
+INSTALL_OPCODE(send);
+INSTALL_OPCODE(slot_read);
+INSTALL_OPCODE(slot_write);
 
 OPCODE_BODY
 
@@ -138,7 +138,7 @@ OPCODE(slot_write)
     JUMP(3);
 END_OPCODE
 
-OPCODE(first_send)
+OPCODE(send)
     uns_int size    = UNS_INT_OPERAND(1);
     uns_int offset  = UNS_INT_OPERAND(2);
     Symbol selector = (Symbol)OBJECT_OPERAND(3);

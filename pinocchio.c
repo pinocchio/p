@@ -28,7 +28,6 @@ void bootstrap()
     Class_class             = new_Bootstrapping_Class();
     Object_class            = new_Bootstrapping_Class();
 
-    Dictionary_class        = new_Bootstrapping_Class();
     Symbol_class            = new_Bootstrapping_Class();
     SymbolTable_class       = new_Bootstrapping_Class();
 
