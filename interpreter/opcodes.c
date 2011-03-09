@@ -2,6 +2,7 @@
 
 /* ======================================================================= */
 
+#define OPCODE_DECLS
 #define OPCODE_HEAD\
     void install_opcodes() {
 
@@ -60,6 +61,8 @@
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
 
 /* ======================================================================= */
+
+OPCODE_DECLS
 
 uns_int target;
 uns_int origin;
