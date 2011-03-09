@@ -7,16 +7,11 @@
 
 struct Block {
     Header              header;
-    Array               params;
-    Array               locals;
     RawArray            code;
     Array               body;
 };
 
-extern Block new_Block(Array params,
-                       Array locals,
-                       RawArray code,
-                       Array body);
+extern Block new_Block(RawArray code, Array body);
 
 /* ======================================================================= */
 

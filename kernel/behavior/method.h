@@ -7,17 +7,13 @@
 
 struct Method {
     Header              header;
-    Array               params;
-    Array               locals;
     Object              package;
     Array               annotations;
     RawArray            code;
     Array               body;
 };
 
-extern Method new_Method(Array params,
-                         Array locals,
-                         Array annotations,
+extern Method new_Method(Array annotations,
                          RawArray code,
                          Array body);
 

@@ -4,12 +4,9 @@
 Class Method_class;
 /* ======================================================================= */
 
-Method new_Method(Array params, Array locals, Array annotations,
-                  RawArray code, Array body)
+Method new_Method(Array annotations, RawArray code, Array body)
 {
     NEW_OBJECT(Method);
-    result->params      = params;
-    result->locals      = locals;
     result->package     = nil;
     result->annotations = annotations;
     result->code        = code;
