@@ -61,6 +61,14 @@
 
 /* ======================================================================= */
 
+uns_int target;
+uns_int origin;
+uns_int depth;
+uns_int idx;
+uns_int size;
+uns_int offset;
+Object  value;
+
 OPCODE_HEAD
 
 INSTALL_OPCODE(block_return);
@@ -83,90 +91,90 @@ INSTALL_OPCODE(slot_write);
 OPCODE_BODY
 
 OPCODE(self)
-    uns_int target = UNS_INT_OPERAND(1);
-    Object value   = SELF();
+    target = UNS_INT_OPERAND(1);
+    value  = SELF();
     STORE(target, value);
     JUMP(2);
 END_OPCODE
 
 OPCODE(move)
-    uns_int target = UNS_INT_OPERAND(1);
-    uns_int origin = UNS_INT_OPERAND(2);
-    Object value   = LOAD(origin);
+    origin = UNS_INT_OPERAND(2);
+    target = UNS_INT_OPERAND(1);
+    value  = LOAD(origin);
     STORE(target, value);
     JUMP(3);
 END_OPCODE
 
 OPCODE(load_constant)
-    uns_int target = UNS_INT_OPERAND(1);
-    Object value   = OBJECT_OPERAND(2);
+    target = UNS_INT_OPERAND(1);
+    value  = OBJECT_OPERAND(2);
     STORE(target, value);
     JUMP(3);
 END_OPCODE
 
 OPCODE(lookup)
-    uns_int target = UNS_INT_OPERAND(1);
-    uns_int depth  = UNS_INT_OPERAND(2);
-    uns_int index  = UNS_INT_OPERAND(3);
-    Object value   = CONTEXT_LOAD(depth, index);
+    target = UNS_INT_OPERAND(1);
+    depth  = UNS_INT_OPERAND(2);
+    idx    = UNS_INT_OPERAND(3);
+    value  = CONTEXT_LOAD(depth, idx);
     STORE(target, value);
     JUMP(4);
 END_OPCODE
 
 OPCODE(store)
-    uns_int origin = UNS_INT_OPERAND(1);
-    uns_int depth  = UNS_INT_OPERAND(2);
-    uns_int index  = UNS_INT_OPERAND(3);
-    Object value   = LOAD(origin);
-    CONTEXT_STORE(depth, index, value);
+    origin = UNS_INT_OPERAND(1);
+    depth  = UNS_INT_OPERAND(2);
+    idx    = UNS_INT_OPERAND(3);
+    value  = LOAD(origin);
+    CONTEXT_STORE(depth, idx, value);
     JUMP(4);
 END_OPCODE
 
 OPCODE(slot_read)
-    uns_int target = UNS_INT_OPERAND(1);
-    uns_int field  = UNS_INT_OPERAND(2);
-    Object value   = READ_FIELD(field);
+    target        = UNS_INT_OPERAND(1);
+    uns_int field = UNS_INT_OPERAND(2);
+    value         = READ_FIELD(field);
     STORE(target, value);
     JUMP(3);
 END_OPCODE
 
 OPCODE(slot_write)
-    uns_int origin = UNS_INT_OPERAND(1);
-    uns_int index  = UNS_INT_OPERAND(2);
-    Object value   = LOAD(origin);
-    WRITE_FIELD(index, value);
+    origin = UNS_INT_OPERAND(1);
+    idx    = UNS_INT_OPERAND(2);
+    value  = LOAD(origin);
+    WRITE_FIELD(idx, value);
     JUMP(3);
 END_OPCODE
 
 OPCODE(send)
-    uns_int size    = UNS_INT_OPERAND(1);
-    uns_int offset  = UNS_INT_OPERAND(2);
+    size            = UNS_INT_OPERAND(1);
+    offset          = UNS_INT_OPERAND(2);
     Symbol selector = (Symbol)OBJECT_OPERAND(3);
     send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(cache_send)
-    uns_int size    = UNS_INT_OPERAND(1);
-    uns_int offset  = UNS_INT_OPERAND(2);
+    size            = UNS_INT_OPERAND(1);
+    offset          = UNS_INT_OPERAND(2);
     Symbol selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
     send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(poly_send)
-    uns_int size    = UNS_INT_OPERAND(1);
-    uns_int offset  = UNS_INT_OPERAND(2);
+    size            = UNS_INT_OPERAND(1);
+    offset          = UNS_INT_OPERAND(2);
     Symbol selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
     send(thread, selector, size, offset);
 END_OPCODE
 
 OPCODE(return)
-    uns_int origin = UNS_INT_OPERAND(1);
-    Object value   = LOAD(origin);
+    origin  = UNS_INT_OPERAND(1);
+    value   = LOAD(origin);
     RETURN();
     JUMP(4);
-    uns_int target = UNS_INT_OPERAND(2);
+    target  = UNS_INT_OPERAND(2);
     STORE(target, value);
 END_OPCODE
 
@@ -176,16 +184,16 @@ OPCODE(return_self)
 END_OPCODE
 
 OPCODE(block_return)
-    uns_int origin = UNS_INT_OPERAND(1);
-    Object value   = LOAD(origin);
+    origin  = UNS_INT_OPERAND(1);
+    value   = LOAD(origin);
     RETURN();
-    uns_int target = UNS_INT_OPERAND(2);
+    target  = UNS_INT_OPERAND(2);
     STORE(target, value);
     JUMP(4);
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
-    uns_int origin = UNS_INT_OPERAND(1);
+    origin      = UNS_INT_OPERAND(1);
     Object test = LOAD(origin);
     if (test == false) {
         long target = INT_OPERAND(2);
@@ -199,7 +207,7 @@ OPCODE(iftrue_iffalse)
 END_OPCODE
 
 OPCODE(iffalse_iftrue)
-    uns_int origin = UNS_INT_OPERAND(1);
+    origin      = UNS_INT_OPERAND(1);
     Object test = LOAD(origin);
     if (test == true) {
         long target = INT_OPERAND(2);
