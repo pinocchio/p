@@ -22,7 +22,8 @@
 
 #define INSTANTIATE(result, type, cls)\
     result = PALLOC(sizeof(struct type));\
-    result->header.class = (Behavior)cls;
+    result->header.class = (Behavior)cls;\
+    result->header.base  = sizeof(struct type) / 8;
 
 #define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
 	type INSTANTIATE(result, type, class)
