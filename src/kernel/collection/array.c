@@ -15,7 +15,7 @@ Array new_Array_with(uns_int size, ...)
 	NEW_ARRAYED(Array, Object, size);
     uns_int i;
     for (i = 0; i < size; i++) {
-        result->data[i] = va_arg(args, void**);
+        result->value[i] = va_arg(args, Object);
     }
     va_end(args);
 	return result;
