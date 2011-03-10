@@ -9,7 +9,12 @@
 #define OPCODE_BODY\
     }
 
-#define OPCODE_END
+#define OPCODE_EVALUATION\
+    void opcode_evaluate(Thread thread) {
+
+#define OPCODE_END\
+    }
+
 #define INSTALL_OPCODE(name)
 
 /* ======================================================================= */
@@ -50,7 +55,8 @@
     SET_PC(GET_PC() + offset);
 
 #define RETURN()\
-    Thread_return(thread);
+    Thread_return(thread);\
+    JUMP(4);
 
 #define CONTEXT() thread->context
 #define CONTEXT_LOAD(depth, index)\
@@ -179,14 +185,12 @@ OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
     RETURN();
-    JUMP(4);
     target  = UNS_INT_OPERAND(2);
     STORE(target, value);
 END_OPCODE
 
 OPCODE(return_self)
     RETURN();
-    JUMP(4);
 END_OPCODE
 
 OPCODE(block_return)
@@ -195,7 +199,6 @@ OPCODE(block_return)
     RETURN();
     target  = UNS_INT_OPERAND(2);
     STORE(target, value);
-    JUMP(4);
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
@@ -234,5 +237,11 @@ END_OPCODE
 OPCODE(exit)
     exit(0);
 END_OPCODE
+
+OPCODE_EVALUATION
+
+    for (;;) {
+        ((opcode)(*thread->context->pc->data))(thread);
+    }
 
 OPCODE_END

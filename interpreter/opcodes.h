@@ -27,4 +27,8 @@ DECLARE_OPCODE(slot_write);
 
 /* ======================================================================= */
 
+extern void opcode_evaluate(Thread thread);
+
+/* ======================================================================= */
+
 #endif // INTERPRETER_OPCODES_H

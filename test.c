@@ -29,7 +29,5 @@ void test()
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test2"), method);
 
     Thread thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
-    for (;;) {
-        ((opcode)(*thread->context->pc->data))(thread);
-    }
+    opcode_evaluate(thread);
 }
