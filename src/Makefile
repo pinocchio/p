@@ -266,5 +266,5 @@ dist: $(SOURCES) $(EXTRASOURCES)
 include make.depend
 
 make.depend: $(SOURCES)
-	@gcc -M -I. $(CFILES) > $@
+	@gcc -M -I. $(CFLAGS) $(CFILES) > $@
 	@#makedepend $(INCLUDES) $^
