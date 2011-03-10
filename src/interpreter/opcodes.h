@@ -8,6 +8,7 @@
 typedef void (*opcode)(Thread);
 
 #define DECLARE_OPCODE(name) extern void op_##name(Thread thread);
+#define OP(name) &op_##name
 
 /* ======================================================================= */
 

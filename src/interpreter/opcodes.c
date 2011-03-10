@@ -249,11 +249,11 @@ OPCODE(lookup_native)
     object          = OBJECT_OPERAND(1);
     native function = lookup_native((NativeName)object);
     if (function) {
-        *GET_PC()     = &op_try_native;
+        *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = new_Raw((void**)function);
         function();
     } else {
-        *GET_PC()     = &op_jump;
+        *GET_PC()     = OP(jump);
         *(GET_PC()+1) = (void**)2;
         JUMP(2);
     }
