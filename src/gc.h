@@ -18,6 +18,8 @@
     cls result = (cls)thread->stack_pointer->data;\
     thread->stack_pointer->data += (sizeof(struct type) + sizeof(Object[size])) / 8;\
     result->header.class        = (Behavior)cls##_class;\
+    result->header.variable     = 1;\
+    result->header.base         = sizeof(struct type) / 8;\
     result->size                = size;
 
 #define INSTANTIATE(result, type, cls)\
