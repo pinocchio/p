@@ -10,6 +10,7 @@ typedef void (*opcode)(Thread);
 
 DECLARE_OPCODE(block_return);
 DECLARE_OPCODE(cache_send);
+DECLARE_OPCODE(capture);
 DECLARE_OPCODE(exit);
 DECLARE_OPCODE(goto);
 DECLARE_OPCODE(iffalse_iftrue);

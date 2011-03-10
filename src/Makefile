@@ -59,7 +59,7 @@ plugin:
 	@cd plugin; make;
 
 clean:
-	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) make.depend tags
+	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
 fast:

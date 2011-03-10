@@ -85,6 +85,7 @@ OPCODE_HEAD
 
 INSTALL_OPCODE(block_return);
 INSTALL_OPCODE(cache_send);
+INSTALL_OPCODE(capture);
 INSTALL_OPCODE(exit);
 INSTALL_OPCODE(goto);
 INSTALL_OPCODE(iffalse_iftrue);
@@ -233,6 +234,14 @@ OPCODE(goto)
     address = INT_OPERAND(1);
     JUMP(address);
 END_OPCODE
+
+OPCODE(capture)
+    value  = OBJECT_OPERAND(1);
+    target = UNS_INT_OPERAND(2);
+    value  = (Object)new_BlockClosure(CONTEXT(), (Block)value);
+    STORE(target, value);
+    JUMP(3);
+END_OPCODE;
 
 OPCODE(exit)
     exit(0);
