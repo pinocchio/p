@@ -40,6 +40,7 @@
     result = PALLOC(sizeof(struct cls) + sizeof(arraytype[arraysize]));\
     result->header.class    = (Behavior)cls##_class;\
     result->header.variable = 1;\
+    result->header.base     = sizeof(struct cls) / 8;\
 	result->size            = arraysize;
 
 #define NEW_ARRAYED(class, arraytype, arraysize)\
