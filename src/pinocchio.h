@@ -31,6 +31,7 @@ typedef struct Method*              Method;
 typedef struct MethodClosure*       MethodClosure;
 typedef struct Block*               Block;
 typedef struct BlockClosure*        BlockClosure;
+typedef struct NativeName*          NativeName;
 
 typedef struct Context*             Context;
 typedef struct MethodContext*       MethodContext;
@@ -87,6 +88,7 @@ typedef struct VariableHeader       VariableHeader;
 #include <kernel/interpreter/thread.h>
 
 #include <interpreter/opcodes.h>
+#include <interpreter/native.h>
 
 /* ======================================================================= */
 

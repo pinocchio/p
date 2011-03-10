@@ -79,7 +79,7 @@ uns_int offset;
 long    address;
 Symbol  selector;
 Object  value;
-Object  test;
+Object  object;
 
 OPCODE_HEAD
 
@@ -87,11 +87,12 @@ INSTALL_OPCODE(block_return);
 INSTALL_OPCODE(cache_send);
 INSTALL_OPCODE(capture);
 INSTALL_OPCODE(exit);
-INSTALL_OPCODE(goto);
 INSTALL_OPCODE(iffalse_iftrue);
 INSTALL_OPCODE(iftrue_iffalse);
+INSTALL_OPCODE(jump);
 INSTALL_OPCODE(load_constant);
 INSTALL_OPCODE(lookup);
+INSTALL_OPCODE(lookup_native);
 INSTALL_OPCODE(move);
 INSTALL_OPCODE(poly_send);
 INSTALL_OPCODE(return);
@@ -100,6 +101,7 @@ INSTALL_OPCODE(self);
 INSTALL_OPCODE(send);
 INSTALL_OPCODE(slot_read);
 INSTALL_OPCODE(slot_write);
+INSTALL_OPCODE(try_native);
 
 OPCODE_BODY
 
@@ -204,12 +206,12 @@ END_OPCODE
 
 OPCODE(iftrue_iffalse)
     origin = UNS_INT_OPERAND(1);
-    test   = LOAD(origin);
-    if (test == false) {
+    object = LOAD(origin);
+    if (object == false) {
         address = INT_OPERAND(2);
         JUMP(address);
     }
-    if (test != true) {
+    if (object != true) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
@@ -218,30 +220,49 @@ END_OPCODE
 
 OPCODE(iffalse_iftrue)
     origin = UNS_INT_OPERAND(1);
-    test   = LOAD(origin);
-    if (test == true) {
+    object = LOAD(origin);
+    if (object == true) {
         address = INT_OPERAND(2);
         JUMP(target);
     }
-    if (test != false) {
+    if (object != false) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
     JUMP(4);
 END_OPCODE
 
-OPCODE(goto)
+OPCODE(jump)
     address = INT_OPERAND(1);
     JUMP(address);
 END_OPCODE
 
 OPCODE(capture)
-    value  = OBJECT_OPERAND(1);
+    object = OBJECT_OPERAND(1);
     target = UNS_INT_OPERAND(2);
-    value  = (Object)new_BlockClosure(CONTEXT(), (Block)value);
+    value  = (Object)new_BlockClosure(CONTEXT(), (Block)object);
     STORE(target, value);
     JUMP(3);
 END_OPCODE;
+
+OPCODE(lookup_native)
+    object          = OBJECT_OPERAND(1);
+    native function = lookup_native((NativeName)object);
+    if (function) {
+        *GET_PC()     = &op_try_native;
+        *(GET_PC()+1) = new_Raw((void**)function);
+        function();
+    } else {
+        *GET_PC()     = &op_jump;
+        *(GET_PC()+1) = (void**)2;
+        JUMP(2);
+    }
+END_OPCODE
+
+OPCODE(try_native)
+    Raw function = (Raw)OBJECT_OPERAND(1);
+    ((native)function->data)();
+END_OPCODE
 
 OPCODE(exit)
     exit(0);
@@ -250,7 +271,7 @@ END_OPCODE
 OPCODE_EVALUATION
 
     for (;;) {
-        ((opcode)(*thread->context->pc->data))(thread);
+        ((opcode)(*GET_PC()))(thread);
     }
 
 OPCODE_END
