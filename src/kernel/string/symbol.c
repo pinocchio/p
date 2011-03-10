@@ -15,9 +15,9 @@ static void SymbolTable_grow(SymbolTable table)
 static Symbol raw_Symbol(const wchar_t* input, uns_int size, long hash)
 {
     NEW_ARRAYED(Symbol, wchar_t, size + 1);
+    result->size = size;
     wcsncpy(result->character, input, size + 1);
     result->hash = new_SmallInteger(hash);
-    result->size = size;
     return result;
 }
 
