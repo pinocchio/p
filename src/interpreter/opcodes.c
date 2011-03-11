@@ -81,7 +81,6 @@ uns_int offset;
 long    address;
 Symbol  selector;
 Object  value;
-Object  object;
 
 OPCODE_HEAD
 
@@ -208,12 +207,12 @@ END_OPCODE
 
 OPCODE(iftrue_iffalse)
     origin = UNS_INT_OPERAND(1);
-    object = LOAD(origin);
-    if (object == false) {
+    value  = LOAD(origin);
+    if (value == false) {
         address = INT_OPERAND(2);
         JUMP(address);
     }
-    if (object != true) {
+    if (value != true) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
@@ -222,12 +221,12 @@ END_OPCODE
 
 OPCODE(iffalse_iftrue)
     origin = UNS_INT_OPERAND(1);
-    object = LOAD(origin);
-    if (object == true) {
+    value  = LOAD(origin);
+    if (value  == true) {
         address = INT_OPERAND(2);
         JUMP(target);
     }
-    if (object != false) {
+    if (value  != false) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
@@ -240,9 +239,9 @@ OPCODE(jump)
 END_OPCODE
 
 OPCODE(capture)
-    object = OBJECT_OPERAND(1);
-    target = UNS_INT_OPERAND(2);
-    value  = (Object)new_BlockClosure(CONTEXT(), (Block)object);
+    Block block = (Block)OBJECT_OPERAND(1);
+    target      = UNS_INT_OPERAND(2);
+    value       = (Object)new_BlockClosure(CONTEXT(), block);
     STORE(target, value);
     JUMP(3);
 END_OPCODE;
