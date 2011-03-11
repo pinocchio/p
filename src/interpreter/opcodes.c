@@ -58,13 +58,15 @@
     Thread_return(thread);\
     JUMP(4);
 
-#define CONTEXT() thread->context
+#define THREAD()  thread
+#define CONTEXT() THREAD()->context
 #define CONTEXT_LOAD(depth, index)\
     Context_load(CONTEXT(), depth, index)
 #define CONTEXT_STORE(depth, index, object)\
     Context_store(CONTEXT(), depth, index, object)
 #define READ_FIELD(index) SELF()->field[index]
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
+#define CALL_NATIVE(function) ((native)function)(THREAD())
 
 /* ======================================================================= */
 
@@ -165,7 +167,7 @@ OPCODE(send)
     size     = UNS_INT_OPERAND(1);
     offset   = UNS_INT_OPERAND(2);
     selector = (Symbol)OBJECT_OPERAND(3);
-    send(thread, selector, size, offset);
+    send(THREAD(), selector, size, offset);
 END_OPCODE
 
 OPCODE(cache_send)
@@ -173,7 +175,7 @@ OPCODE(cache_send)
     offset   = UNS_INT_OPERAND(2);
     selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
-    send(thread, selector, size, offset);
+    send(THREAD(), selector, size, offset);
 END_OPCODE
 
 OPCODE(poly_send)
@@ -181,7 +183,7 @@ OPCODE(poly_send)
     offset   = UNS_INT_OPERAND(2);
     selector = (Symbol)OBJECT_OPERAND(3);
     JUMP(4);
-    send(thread, selector, size, offset);
+    send(THREAD(), selector, size, offset);
 END_OPCODE
 
 OPCODE(return)
@@ -246,12 +248,12 @@ OPCODE(capture)
 END_OPCODE;
 
 OPCODE(lookup_native)
-    object          = OBJECT_OPERAND(1);
-    native function = lookup_native((NativeName)object);
+    NativeName name = (NativeName)OBJECT_OPERAND(1);
+    native function = lookup_native(name);
     if (function) {
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = new_Raw((void**)function);
-        function();
+        CALL_NATIVE(function);
     } else {
         *GET_PC()     = OP(jump);
         *(GET_PC()+1) = (void**)2;
@@ -261,7 +263,7 @@ END_OPCODE
 
 OPCODE(try_native)
     Raw function = (Raw)OBJECT_OPERAND(1);
-    ((native)function->data)();
+    CALL_NATIVE(function->data);
 END_OPCODE
 
 OPCODE(exit)
@@ -271,7 +273,7 @@ END_OPCODE
 OPCODE_EVALUATION
 
     for (;;) {
-        ((opcode)(*GET_PC()))(thread);
+        ((opcode)(*GET_PC()))(THREAD());
     }
 
 OPCODE_END

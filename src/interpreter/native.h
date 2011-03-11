@@ -11,7 +11,7 @@ struct NativeName {
 	Symbol name;
 };
 
-typedef void (*native)();
+typedef void (*native)(Thread thread);
 
 /* ======================================================================= */
 
