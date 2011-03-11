@@ -10,7 +10,7 @@ struct Behavior {
     Layout              layout;
     Behavior            super;
     MethodDictionary    methods;
-    Object              classfields[];
+    Object              classfield[];
 };
 
 struct Class {
@@ -20,7 +20,7 @@ struct Class {
     MethodDictionary    methods;
     Symbol              name;
     Object              package;
-    Object              classfields[];
+    Object              classfield[];
 };
 
 struct Metaclass {
@@ -29,7 +29,7 @@ struct Metaclass {
     Behavior            super;
     MethodDictionary    methods;
     Class               instance;
-    Object              classfields[];
+    Object              classfield[];
 };
 
 extern Class Behavior_class;
