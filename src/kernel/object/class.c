@@ -68,7 +68,8 @@ void send(Thread thread, Symbol message, uns_int size, uns_int offset)
     MethodClosure closure = lookup(self, message);
 
     if (closure == NULL) {
-        // TODO does_not_understand(thread, message, size, offset);
+        // TODO
+		// return does_not_understand(thread, message, size, offset);
     }
 
     Method method          = closure->method;
@@ -76,7 +77,7 @@ void send(Thread thread, Symbol message, uns_int size, uns_int offset)
     MethodContext receiver = new_MethodContext(thread, size);
     receiver->sender       = sender;
 
-    receiver->pc           = new_Raw((void**)&method->code->data[0]);
+    receiver->pc           = new_Raw((void**)method->code->data);
     receiver->self         = self;
     receiver->closure      = closure;
     // TODO test what is faster
