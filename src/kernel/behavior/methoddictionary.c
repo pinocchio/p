@@ -133,13 +133,14 @@ static void MethodDictionary_grow(MethodDictionary dictionary)
 void MethodDictionary_store(MethodDictionary dictionary, Symbol message, MethodClosure method)
 {
     uns_int bucket_idx = bucket_index(dictionary, message);
-    Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
+    BucketArray buckets = dictionary->buckets;
+    Bucket bucket       = buckets->bucket[bucket_idx];
     if ((Object)bucket == nil) {
-        Bucket new_bucket = new_Bucket();
-        dictionary->buckets->bucket[bucket_idx] = new_bucket;
-        new_bucket->value[0] = (Object)message;
-        new_bucket->value[1] = (Object)method;
-        new_bucket->tally    = new_SmallInteger(2);
+        Bucket new_bucket           = new_Bucket();
+        buckets->bucket[bucket_idx] = new_bucket;
+        new_bucket->value[0]        = (Object)message;
+        new_bucket->value[1]        = (Object)method;
+        new_bucket->tally           = new_SmallInteger(2);
         MethodDictionary_grow(dictionary);
         return;
     }
@@ -157,7 +158,7 @@ void MethodDictionary_store(MethodDictionary dictionary, Symbol message, MethodC
         for (i = 0; i < bucket->size; i++) {
             new_bucket->value[i] = bucket->value[i];
         }
-        dictionary->buckets->bucket[bucket_idx] = new_bucket;
+        buckets->bucket[bucket_idx] = new_bucket;
     }
     bucket->value[i]   = (Object)message;
     bucket->value[i+1] = (Object)method;
