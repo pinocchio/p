@@ -67,7 +67,9 @@ Array get_args(int argc, const char ** argv)
         const char * arg = *argv++;
         int length = strlen(arg);
         String sarg = raw_String(length);
-        assert1(mbstowcs(sarg->character, arg, length + 1) != -1, "failed to parse arguments");
+        assert1(
+            mbstowcs(sarg->character, arg, length) != -1,
+            "failed to parse arguments");
         args->value[i-1] = (Object)sarg;
     }
     return args;
