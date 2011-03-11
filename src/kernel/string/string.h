@@ -17,8 +17,7 @@ extern String empty_string;
 
 /* ======================================================================= */
 
-extern void init_symboltable();
-extern Symbol new_Symbol(const wchar_t* input);
+extern String raw_String(uns_int size);
 
 /* ======================================================================= */
 
