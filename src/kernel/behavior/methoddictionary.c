@@ -33,7 +33,8 @@ MethodClosure MethodDictionary_lookup(MethodDictionary dictionary, Symbol messag
     uns_int bucket_idx = bucket_index(dictionary, message);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
     uns_int i;
-    for (i = 0; i < bucket->tally->value; i = i+2) {
+    uns_int limit = bucket->tally->value;
+    for (i = 0; i < limit; i = i+2) {
         if ((Symbol)bucket->value[i] == message) {
             return (MethodClosure)bucket->value[i+1];
         }
@@ -69,11 +70,13 @@ static void MethodDictionary_grow(MethodDictionary dictionary)
      * which of the pair of buckets to use
      */
     uns_int newbit = old_buckets->size;
-    dictionary->buckets = new_BucketArray_sized(newbit << 1);
+    BucketArray buckets = new_BucketArray_sized(newbit << 1);
+    dictionary->buckets = buckets; 
 
     uns_int bucket_idx;
+    uns_int limit = old_buckets->size;
 
-    for (bucket_idx = 0; bucket_idx < old_buckets->size; bucket_idx++) {
+    for (bucket_idx = 0; bucket_idx < limit; bucket_idx++) {
         Bucket bucket = old_buckets->bucket[bucket_idx];
         if ((Object)bucket == nil) {
             continue;
@@ -104,7 +107,7 @@ static void MethodDictionary_grow(MethodDictionary dictionary)
             }
         }
 
-        dictionary->buckets->bucket[bucket_idx] = bucket;
+        buckets->bucket[bucket_idx] = bucket;
 
         /* If there are elements with the high bit set, allocate a bucket and move the
          * elements there
@@ -122,7 +125,7 @@ static void MethodDictionary_grow(MethodDictionary dictionary)
                     new_bucket->value[idx] = bucket->value[bucket->size + idx];
                 }
             }
-            dictionary->buckets->bucket[bucket_idx + newbit] = new_bucket;
+            buckets->bucket[bucket_idx + newbit] = new_bucket;
         }
     }
 }
