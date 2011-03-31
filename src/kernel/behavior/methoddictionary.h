@@ -10,8 +10,9 @@ extern Class MethodDictionary_class;
 /* ======================================================================= */
 
 extern MethodDictionary new_MethodDictionary();
-extern MethodClosure MethodDictionary_lookup(MethodDictionary dictionary, Symbol message);
-extern void MethodDictionary_store(MethodDictionary dictionary, Symbol message, MethodClosure method);
+
+extern inline MethodClosure MethodDictionary_lookup(MethodDictionary,Symbol);
+extern inline void MethodDictionary_store(MethodDictionary,Symbol,MethodClosure);
 
 /* ======================================================================= */
 

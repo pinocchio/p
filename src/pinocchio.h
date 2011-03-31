@@ -41,6 +41,7 @@ typedef struct Raw*                 Raw;
 typedef struct RawArray*            RawArray;
 
 typedef Dictionary                  MethodDictionary;
+typedef Dictionary                  IdentityDictionary;
 
 struct Header {
     uns_int     variable: 1;
@@ -76,6 +77,7 @@ typedef struct VariableHeader       VariableHeader;
 #include <kernel/string/string.h>
 #include <kernel/number/smallinteger.h>
 #include <kernel/collection/dictionary.h>
+#include <kernel/collection/identitydictionary.h>
 #include <kernel/collection/bucket.h>
 #include <kernel/collection/array.h>
 #include <kernel/behavior/methoddictionary.h>
