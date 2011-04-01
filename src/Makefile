@@ -43,7 +43,7 @@ endif
 all: $(TARGET)
 
 %.o: %.c
-	@echo Compiling: $@ $(CFLAGS)
+	@echo Compiling: $@
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 GITVERSION:
@@ -68,7 +68,7 @@ $(T_TARGET): $(T_OBJECTS)
 	@$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
-	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) make.depend
+	@rm -rf $(T_OBJECTS) $(T_CFILES:%.c=%.gcno) $(T_CFILES:%.c=%.gcda) $(TARGET) $(T_TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
 fast:
