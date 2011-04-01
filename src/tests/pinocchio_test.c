@@ -1,72 +1,33 @@
-#include <stdarg.h>
-#include <stddef.h>
-#include <setjmp.h>
-#include <string.h>
-#include <google/cmockery.h>
-#include <pinocchio.h>
-#include <bootstrap.h>
-#include <stdlib.h>
+#include <tests/pinocchio_test.h>
 
-void test_natives_dictionary_add_lookup(void**);
-void test_dictionary_grow(void**);
+#define UNIT_TESTING
+
+// Redirect assert to mock_assert() so assertions can be caught by cmockery.
+#ifdef assert
+#undef assert
+#endif // assert
+#define assert(expression) \
+    mock_assert((int)(expression), #expression, __FILE__, __LINE__)
+void mock_assert(const int result, const char* expression, const char *file,
+                 const int line);
+
+/* Redirect calloc and free to test_calloc() and test_free() so cmockery can
+ * check for memory leaks. */
+#ifdef calloc
+#undef calloc
+#endif // calloc
+#define calloc(num, size) _test_calloc(num, size, __FILE__, __LINE__)
+#ifdef free
+#undef free
+#endif // free
+#define free(ptr) _test_free(ptr, __FILE__, __LINE__)
+void* _test_calloc(const size_t number_of_elements, const size_t size,
+                   const char* file, const int line);
+void _test_free(void* const ptr, const char* file, const int line);
 
 
 
 int main(int argc, char* argv[]) {
 	pinocchio_bootstrap();
-
-	UnitTest tests[] = {
-		unit_test(test_natives_dictionary_add_lookup),
-		unit_test(test_dictionary_grow),
-	};
-	return run_tests(tests);
+	return pinocchio_run_tests();
 }
-
-
-/*************
- * Dictionary
- *************/
-
-void test_natives_dictionary_add_lookup(void **state) {
-	NativeName n = new_NativeName( L"test_module", L"test_name" );
-        NativesDictionary d = new_NativesDictionary();
-
-	void *f = main; 
-
-	NativesDictionary_store( d, n, f );
-        void *native = NativesDictionary_lookup( d, n );
-
-        assert_int_equal( native, f );
-}
-
-void test_dictionary_grow(void **state) {
-        IdentityDictionary d = new_IdentityDictionary();
-	void *f = main; 
-	for( int i= 0; i<200; i++)
-	{
-		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
-		IdentityDictionary_store(d, new_Symbol(str), f );
-		f++;
-	}
-	f--;
-
-	fwprintf(stderr, L"dictionary size:%d\n",((SmallInteger)d->size)->value);
-	assert_true( ((SmallInteger)d->size)->value > 199 );
-	
-	void *fr = IdentityDictionary_lookup( d, new_Symbol(L"0000") );
-	fwprintf(stderr, L"read first entry:%d\n",fr);
-	assert_int_equal( fr, main );
-	
-	fr = IdentityDictionary_lookup( d, new_Symbol(L"0199") );
-	fwprintf(stderr, L"read last entry:%d\n",fr);
-	assert_int_equal( fr, f );
-
-	for( int i= 199; i>=0; i--)
-	{
-		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
-		fr = IdentityDictionary_lookup( d, new_Symbol(str) );
-		assert_int_equal( fr, f );
-		f--;
-	}
-}
-

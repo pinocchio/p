@@ -12,7 +12,7 @@ T_TARGET     = pinocchio_t
 
 CFILES      += $(shell find . -name '*.c' -not -path "./plugin*" -not -path "./tests*")
 T_CFILES    += $(shell find . -name '*.c' -not -path "./plugin*")
-HFILES      += $(CFILES:%.c=%.h)
+HFILES      += $(T_CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES)
 
