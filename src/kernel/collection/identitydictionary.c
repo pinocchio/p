@@ -147,8 +147,8 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
 
     uns_int i;
     for (i = 0; i < bucket->tally->value; i = i+2) {
-        if ((Symbol)bucket->value[i] == value) {
-            bucket->value[i+1] = (Object)symbol;
+        if ((Symbol)bucket->value[i] == symbol) {
+            bucket->value[i+1] = value;
             return;
         }
     }

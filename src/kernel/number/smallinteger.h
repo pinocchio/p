@@ -21,6 +21,8 @@ extern void init_integercache();
 
 extern void init_smallint();
 
+extern void install_natives_SmallInteger();
+
 /* ======================================================================= */
 
 #endif // KERNEL_NUMBER_SMALLINTEGER_H

@@ -35,42 +35,38 @@ void init_integercache()
 
 /* ======================================================================= */
 
-#define NATIVE(module, name)\
-    void NM_##module##_##name(Thread thread) {\
-
-#define END_NATIVE\
-    }
-
-#define ARGUMENT(index) thread->context->local[index]
-#define RETURN(result) thread->context->local[1] = (Object)result
-
 NATIVE(SmallInteger, plus)
     SmallInteger self   = (SmallInteger)ARGUMENT(1);
     SmallInteger right  = (SmallInteger)ARGUMENT(2);
     SmallInteger result = new_SmallInteger(self->value + right->value);
-    RETURN(result);
+    NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, minus)
     SmallInteger self   = (SmallInteger)ARGUMENT(1);
     SmallInteger right  = (SmallInteger)ARGUMENT(2);
     SmallInteger result = new_SmallInteger(self->value - right->value);
-    RETURN(result);
+    NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, times)
     SmallInteger self   = (SmallInteger)ARGUMENT(1);
     SmallInteger right  = (SmallInteger)ARGUMENT(2);
     SmallInteger result = new_SmallInteger(self->value * right->value);
-    RETURN(result);
+    NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, divide)
     SmallInteger self   = (SmallInteger)ARGUMENT(1);
     SmallInteger right  = (SmallInteger)ARGUMENT(2);
     SmallInteger result = new_SmallInteger(self->value / right->value);
-    RETURN(result);
+    NATIVE_RETURN(result);
 END_NATIVE
 
 /* ======================================================================= */
 
+
+void install_natives_SmallInteger()
+{
+    INSTALL_NATIVE(SmallInteger, plus);
+}
