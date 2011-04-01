@@ -40,8 +40,11 @@ typedef struct Thread*              Thread;
 typedef struct Raw*                 Raw;
 typedef struct RawArray*            RawArray;
 
-typedef Dictionary                  MethodDictionary;
 typedef Dictionary                  IdentityDictionary;
+typedef Dictionary                  MethodDictionary;
+typedef Dictionary                  NativesDictionary;
+
+typedef void (*native)(Thread thread);
 
 struct Header {
     uns_int     variable: 1;
@@ -66,6 +69,8 @@ typedef struct VariableHeader       VariableHeader;
 /* ======================================================================= */
 
 #include <assert.h>
+
+
 #include <kernel/string/utility.h>
 #include <kernel/object/object.h>
 #include <kernel/object/raw.h>
@@ -81,6 +86,7 @@ typedef struct VariableHeader       VariableHeader;
 #include <kernel/collection/bucket.h>
 #include <kernel/collection/array.h>
 #include <kernel/behavior/methoddictionary.h>
+#include <kernel/behavior/nativesdictionary.h>
 #include <kernel/behavior/method.h>
 #include <kernel/behavior/methodclosure.h>
 #include <kernel/behavior/block.h>
@@ -89,8 +95,8 @@ typedef struct VariableHeader       VariableHeader;
 #include <kernel/interpreter/context.h>
 #include <kernel/interpreter/thread.h>
 
-#include <interpreter/opcodes.h>
 #include <interpreter/native.h>
+#include <interpreter/opcodes.h>
 
 /* ======================================================================= */
 

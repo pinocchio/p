@@ -31,6 +31,7 @@
 
 #define OPCODE(name)\
     void op_##name(Thread thread) {\
+        fwprintf(stderr, L" PC: %d\n", CONTEXT());\
         fwprintf(stderr, L" ## "#name"\n");
 
 #define END_OPCODE\
@@ -108,6 +109,7 @@ OPCODE_BODY
 
 OPCODE(self)
     target = UNS_INT_OPERAND(1);
+    fwprintf(stderr, L"store self into %s\n", target);
     value  = SELF();
     STORE(target, value);
     JUMP(2);
@@ -250,10 +252,12 @@ OPCODE(lookup_native)
     NativeName name = (NativeName)OBJECT_OPERAND(1);
     native function = lookup_native(name);
     if (function) {
+        fwprintf(stderr, L"Found native: %d\n",function);
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = new_Raw((void**)function);
         CALL_NATIVE(function);
     } else {
+	//TODO: shouldnt we call the funktion if it's not a native??
         *GET_PC()     = OP(jump);
         *(GET_PC()+1) = (void**)2;
         JUMP(2);

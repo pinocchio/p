@@ -8,8 +8,10 @@ OS           = $(shell uname)
 # ============================================================================
 
 TARGET       = pinocchio
+T_TARGET     = pinocchio_t
 
-CFILES      += $(shell find . -name '*.c' -not -path "./plugin*")
+CFILES      += $(shell find . -name '*.c' -not -path "./plugin*" -not -path "./tests*")
+T_CFILES    += $(shell find . -name '*.c' -not -path "./plugin*")
 HFILES      += $(CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES)
@@ -19,15 +21,16 @@ PLUGINHFILES = $(PLUGINCFILES:%.c=%.h)
 PLUGINSOURCES = plugin/Makefile $(PLUGINCFILES) $(PLUGINHFILES)
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
+T_OBJECTS     = $(filter-out %pinocchio.o,$(T_CFILES:%.c=%.o))
 
 # ============================================================================
 
-CFLAGS  += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL 
+CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
-LDFLAGS += -lgc -lm -ldl
+LDFLAGS  += -lgc -lm -ldl -lcmockery
 #LDFLAGS += -lpthread
-CC      = clang
+CC        = clang
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
@@ -40,7 +43,7 @@ endif
 all: $(TARGET)
 
 %.o: %.c
-	@echo Compiling: $@
+	@echo Compiling: $@ $(CFLAGS)
 	@$(CC) $(CFLAGS) -c -o $@ $(@:%.o=%.c)
 
 GITVERSION:
@@ -57,6 +60,12 @@ run: $(TARGET)
 
 plugin:
 	@cd plugin; make;
+
+tests: $(T_TARGET)
+
+$(T_TARGET): $(T_OBJECTS)
+	@echo Linking $@
+	@$(CC) $(LDFLAGS) -o $@ $^
 
 clean:
 	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) make.depend
