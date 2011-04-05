@@ -62,6 +62,7 @@ plugin:
 	@cd plugin; make;
 
 tests: $(T_TARGET)
+	./pinocchio_t
 
 $(T_TARGET): $(T_OBJECTS)
 	@echo Linking $@

@@ -12,5 +12,6 @@
 
 #include <tests/dictionary.h>
 #include <tests/natives.h>
+#include <tests/symbols.h>
 
 #endif // TESTS_PINOCCHIOTESTS_H

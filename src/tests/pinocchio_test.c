@@ -39,6 +39,7 @@ int main(int argc, char* argv[]) {
                 unit_test(test_identity_dictionary_can_grow_over_20),
                 unit_test(test_smallinteger_has_native_plus),
                 unit_test(test_natives_can_be_installed),
+                unit_test(test_symbol_table_can_grow),
         };
         return run_tests(tests);
 }
