@@ -3,7 +3,14 @@
 
 #include <pinocchio.h>
 #include <bootstrap.h>
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <string.h>
+#include <google/cmockery.h>
+#include <stdlib.h>
 
-#include <tests/tests.h>
+#include <tests/dictionary.h>
+#include <tests/natives.h>
 
 #endif // TESTS_PINOCCHIOTESTS_H

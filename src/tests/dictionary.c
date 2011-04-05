@@ -1,34 +1,6 @@
 #include <tests/pinocchio_test.h>
-#include <stdarg.h>
-#include <stddef.h>
-#include <setjmp.h>
-#include <string.h>
-#include <google/cmockery.h>
-#include <stdlib.h>
 
-void test_natives_dictionary_add_lookup(void**);
-void test_dictionary_initial_grow(void**);
-void test_dictionary_huge(void**);
-void test_dictionary(void**);
-
-
-
-int pinocchio_run_tests() {
-	UnitTest tests[] = {
-		unit_test(test_natives_dictionary_add_lookup),
-		unit_test(test_dictionary),
-		unit_test(test_dictionary_huge),
-		unit_test(test_dictionary_initial_grow),
-	};
-	return run_tests(tests);
-}
-
-
-/*************
- * Dictionary
- *************/
-
-void test_natives_dictionary_add_lookup(void **state) {
+void test_natives_dictionary_can_store_and_lookup(void **state) {
 	NativeName n = new_NativeName( L"test_module", L"test_name" );
         NativesDictionary d = new_NativesDictionary();
 
@@ -41,21 +13,25 @@ void test_natives_dictionary_add_lookup(void **state) {
 }
 
 
-void test_dictionary_with(int size ) {
+void test_identity_dictionary_with(int size ) {
         IdentityDictionary d = new_IdentityDictionary();
 	
+	//Generate some entries
 	void *f = (void *)1; 
 	for( int i= 0; i < size; i++)
 	{
+		//convert i to a string that can be used as key
 		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
 		IdentityDictionary_store(d, new_Symbol(str), f );
 		f++;
 	}
 	f--;
 
+	//See if the first entry is in the dictionary
 	void *fr = IdentityDictionary_lookup( d, new_Symbol(L"0000") );
 	assert_int_equal( fr, 1 );
 	
+	//See if all entries are there
 	for( int i= size-1; i>=0; i--)
 	{
 		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
@@ -64,14 +40,16 @@ void test_dictionary_with(int size ) {
 	}
 }
 
-void test_dictionary(void **state) {
-	test_dictionary_with(5);
+void test_identity_dictionary_can_store_and_lookup(void **state) {
+	test_identity_dictionary_with(5);
 }
 
-void test_dictionary_initial_grow(void **state) {
-	test_dictionary_with(30);
+void test_identity_dictionary_can_grow_over_20(void **state) {
+	//initial grow happens after 20 elements where added
+	test_identity_dictionary_with(30);
 }
 
-void test_dictionary_huge(void **state) {
-	test_dictionary_with(3000);
+void test_identity_dictionary_can_be_huge(void **state) {
+	test_identity_dictionary_with(3000);
 }
+

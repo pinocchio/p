@@ -27,7 +27,18 @@ void _test_free(void* const ptr, const char* file, const int line);
 
 
 
+
 int main(int argc, char* argv[]) {
 	pinocchio_bootstrap();
-	return pinocchio_run_tests();
+
+	//List all Tests here:
+        UnitTest tests[] = {
+                unit_test(test_natives_dictionary_can_store_and_lookup),
+                unit_test(test_identity_dictionary_can_store_and_lookup),
+                unit_test(test_identity_dictionary_can_be_huge),
+                unit_test(test_identity_dictionary_can_grow_over_20),
+                unit_test(test_smallinteger_has_native_plus),
+                unit_test(test_natives_can_be_installed),
+        };
+        return run_tests(tests);
 }
