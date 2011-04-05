@@ -44,9 +44,10 @@ void test_identity_dictionary_can_store_and_lookup(void **state) {
 	test_identity_dictionary_with(5);
 }
 
-void test_identity_dictionary_can_grow_over_20(void **state) {
+void test_identity_dictionary_can_do_initital_grow(void **state) {
 	//initial grow happens after 20 elements where added
-	test_identity_dictionary_with(30);
+	int maxLinear = new_IdentityDictionary()->maxLinear->value;
+	test_identity_dictionary_with(maxLinear+10);
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {
