@@ -12,6 +12,15 @@ void test_natives_dictionary_can_store_and_lookup(void **state) {
         assert_int_equal( native, f );
 }
 
+void test_identity_dictionary_can_override_a_value(void **state) {
+        IdentityDictionary d = new_IdentityDictionary();
+	IdentityDictionary_store(d, new_Symbol(L"blabli3$i"), 4 );
+        assert_int_equal( IdentityDictionary_lookup( d, new_Symbol(L"blabli3$i") ), 4 );
+	IdentityDictionary_store(d, new_Symbol(L"blabli3$i"), 5 );
+        assert_int_equal( IdentityDictionary_lookup( d, new_Symbol(L"blabli3$i") ), 5 );
+	assert_int_equal( d->size->value, 1 );
+}
+
 
 void test_identity_dictionary_with(int size ) {
         IdentityDictionary d = new_IdentityDictionary();
@@ -51,6 +60,6 @@ void test_identity_dictionary_can_do_initital_grow(void **state) {
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {
-	test_identity_dictionary_with(3000);
+	test_identity_dictionary_with(5000);
 }
 

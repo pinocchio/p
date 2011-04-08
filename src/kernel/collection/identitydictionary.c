@@ -32,6 +32,7 @@ Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol)
 {
     uns_int bucket_idx = bucket_index(dictionary, symbol);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
+
     uns_int i;
     uns_int limit = bucket->tally->value;
     for (i = 0; i < limit; i = i+2) {
@@ -55,15 +56,16 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
     if (dictionary->linear == true) {
         if (size >= dictionary->maxLinear->value) {
             dictionary->linear = false;
-            // initial grow
-        }
+            //TODO: initial grow
+        } else {
+	        return;
+	}
+    } else if (100*size / dictionary->buckets->size <= dictionary->ratio->value) {
         return;
     }
 
     BucketArray old_buckets = dictionary->buckets;
-    if (size / old_buckets->size <= dictionary->ratio->value) {
-        return;
-    }
+
 
     /* The size is a power of two. So in binary it represents the next
      * bit to be taken into account from the hash. This bit identifies
@@ -91,21 +93,24 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
          */
         uns_int idx = 0;
         uns_int newcount = 0;
-        while (idx < bucket->size) {
+        uns_int bucket_size = bucket->tally->value;
+
+        while (idx < bucket_size) {
             Symbol selector = (Symbol)bucket->value[idx];
+            
             if (Symbol_hash(selector) & newbit) {
-                bucket->size -= 2;
+                bucket_size -= 2;
                 newcount += 2;
                 Object value = bucket->value[idx+1];
-                // if (bucket->size == idx) { break; }
-                bucket->value[idx]   = bucket->value[bucket->size];
-                bucket->value[idx+1] = bucket->value[bucket->size+1];
-                bucket->value[bucket->size]   = (Object)selector;
-                bucket->value[bucket->size+1] = value;
+                bucket->value[idx]   = bucket->value[bucket_size];
+                bucket->value[idx+1] = bucket->value[bucket_size+1];
+                bucket->value[bucket_size]   = (Object)selector;
+                bucket->value[bucket_size+1] = value;
             } else {
                 idx += 2;
             }
         }
+        bucket->tally = new_SmallInteger(bucket_size);
 
         buckets->bucket[bucket_idx] = bucket;
 
@@ -113,19 +118,21 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
          * elements there
          */
         if (newcount > 0) {
-            Bucket new_bucket;
             /* If the old bucket is now empty, use it as the new bucket
              */
-            if (bucket->size == 0) {
-                bucket->size = newcount;
+            Bucket new_bucket;
+            if (bucket_size == 0) {
                 new_bucket = bucket;
+                buckets->bucket[bucket_idx] = nil;
             } else {
-                Bucket new_bucket = new_Bucket_sized(newcount << 2);
+                new_bucket = new_Bucket_sized(newcount << 2);
                 for (idx = 0; idx < newcount; idx += 1) {
-                    new_bucket->value[idx] = bucket->value[bucket->size + idx];
+                    new_bucket->value[idx] = bucket->value[bucket_size + idx];
                 }
             }
-            buckets->bucket[bucket_idx + newbit] = new_bucket;
+            new_bucket->tally = new_SmallInteger(newcount);
+            buckets->bucket[limit+bucket_idx] = new_bucket;
+
         }
     }
 }
@@ -136,7 +143,7 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
     BucketArray buckets = dictionary->buckets;
     Bucket bucket       = buckets->bucket[bucket_idx];
     if ((Object)bucket == nil) {
-        Bucket new_bucket           = new_Bucket();
+        Bucket new_bucket           = new_Bucket_sized(2);
         buckets->bucket[bucket_idx] = new_bucket;
         new_bucket->value[0]        = (Object)symbol;
         new_bucket->value[1]        = value;
@@ -145,8 +152,7 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
         return;
     }
 
-    uns_int i;
-    for (i = 0; i < bucket->tally->value; i = i+2) {
+    uns_int i = 0; for (; i < bucket->tally->value; i = i+2) {
         if ((Symbol)bucket->value[i] == symbol) {
             bucket->value[i+1] = value;
             return;
@@ -155,10 +161,10 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
 
     if (i == bucket->size) {
         Bucket new_bucket = new_Bucket_sized(bucket->size << 1);
-        for (i = 0; i < bucket->size; i++) {
+        for (int i = 0; i < bucket->size; i += 1) {
             new_bucket->value[i] = bucket->value[i];
         }
-        buckets->bucket[bucket_idx] = new_bucket;
+        buckets->bucket[bucket_idx] = bucket = new_bucket;
     }
     bucket->value[i]   = (Object)symbol;
     bucket->value[i+1] = value;

@@ -40,6 +40,8 @@ int main(int argc, char* argv[]) {
                 unit_test(test_smallinteger_has_native_plus),
                 unit_test(test_natives_can_be_installed),
                 unit_test(test_symbol_table_can_grow),
+                unit_test(test_symbol_hashing_works),
+                unit_test(test_identity_dictionary_can_override_a_value),
         };
         return run_tests(tests);
 }
