@@ -56,11 +56,14 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
     if (dictionary->linear == true) {
         if (size >= dictionary->maxLinear->value) {
             dictionary->linear = false;
-            //TODO: initial grow
+            IdentityDictionary_grow( dictionary );        
+            IdentityDictionary_grow( dictionary );        
         } else {
 	        return;
 	}
-    } else if (100*size / dictionary->buckets->size <= dictionary->ratio->value) {
+    } 
+
+    if (100*size / dictionary->buckets->size <= dictionary->ratio->value) {
         return;
     }
 
