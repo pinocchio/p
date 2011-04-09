@@ -1,4 +1,5 @@
 #include <pinocchio.h>
+#include <string.h>
 
 /* ======================================================================= */
 Class IdentityDictionary_class;
@@ -43,6 +44,53 @@ Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol)
     return NULL;
 }
 
+static void initital_grow(IdentityDictionary dictionary)
+{
+    Bucket old_bucket = dictionary->buckets->bucket[0];
+    uns_int old_bucket_size = old_bucket->tally->value;
+
+    /* calculate how many new buckets we need to store the one old_bucket
+     * such that there will be ~5 elements per new bucket.
+     */
+    uns_int new_buckets_size = 2;
+    while( new_buckets_size <= old_bucket_size/10 )
+        new_buckets_size <<= 1;
+
+    /* Create all those new buckets with the same size as the old one */
+    dictionary->buckets = new_BucketArray_sized(new_buckets_size);
+    uns_int newcount[new_buckets_size];
+    for( int i = 0; i < new_buckets_size; i += 1 )
+    {
+        dictionary->buckets->bucket[i] = new_Bucket_sized( old_bucket_size );
+        newcount[i] = 0;
+    }
+
+    /* distribute the old elements over the new buckets */
+    for( int idx = 0; idx < old_bucket_size; idx += 2 )
+    {    
+        Symbol selector = (Symbol)old_bucket->value[idx];
+        uns_int new_bucket_idx = 0;
+
+        //add each matching bit to the index
+        for( int new_bit = 1; new_bit < new_buckets_size; new_bit <<= 1 ) {
+            if (Symbol_hash(selector) & new_bit)
+		new_bucket_idx += new_bit;
+        }
+        Object value = old_bucket->value[idx+1];
+        Bucket bucket = dictionary->buckets->bucket[new_bucket_idx];
+        bucket->value[newcount[new_bucket_idx]] = (Object)selector;
+        bucket->value[newcount[new_bucket_idx]+1] = value;
+        newcount[new_bucket_idx] += 2;
+    }
+    
+    /* update the tallys */
+    for( int i = 0; i < new_buckets_size; i += 1 )
+    {
+        dictionary->buckets->bucket[i]->tally = new_SmallInteger(newcount[i]);
+    }
+}
+
+
 static void IdentityDictionary_grow(IdentityDictionary dictionary)
 {
     long size = dictionary->size->value + 1;
@@ -56,19 +104,15 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
     if (dictionary->linear == true) {
         if (size >= dictionary->maxLinear->value) {
             dictionary->linear = false;
-            IdentityDictionary_grow( dictionary );        
-            IdentityDictionary_grow( dictionary );        
-        } else {
-	        return;
-	}
+            initital_grow( dictionary );
+        }
+        return;
     } 
 
-    if (100*size / dictionary->buckets->size <= dictionary->ratio->value) {
+    if (100*size / dictionary->buckets->size <= dictionary->ratio->value)
         return;
-    }
 
     BucketArray old_buckets = dictionary->buckets;
-
 
     /* The size is a power of two. So in binary it represents the next
      * bit to be taken into account from the hash. This bit identifies
@@ -126,7 +170,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
             Bucket new_bucket;
             if (bucket_size == 0) {
                 new_bucket = bucket;
-                buckets->bucket[bucket_idx] = nil;
+                buckets->bucket[bucket_idx] = (Bucket)nil;
             } else {
                 new_bucket = new_Bucket_sized(newcount << 2);
                 for (idx = 0; idx < newcount; idx += 1) {

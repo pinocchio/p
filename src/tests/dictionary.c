@@ -60,6 +60,6 @@ void test_identity_dictionary_can_do_initital_grow(void **state) {
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {
-	test_identity_dictionary_with(2500);
+	test_identity_dictionary_with(2000);
 }
 
