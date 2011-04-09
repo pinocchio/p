@@ -1,6 +1,6 @@
-#include <tests/pinocchio_test.h>
+#ifdef UNIT_TESTING
 
-#define UNIT_TESTING
+#include <tests/pinocchio_test.h>
 
 // Redirect assert to mock_assert() so assertions can be caught by cmockery.
 #ifdef assert
@@ -26,8 +26,6 @@ void* _test_calloc(const size_t number_of_elements, const size_t size,
 void _test_free(void* const ptr, const char* file, const int line);
 
 
-
-
 int main(int argc, char* argv[]) {
 	pinocchio_bootstrap();
 
@@ -42,6 +40,10 @@ int main(int argc, char* argv[]) {
                 unit_test(test_symbol_table_can_grow),
                 unit_test(test_symbol_hashing_works),
                 unit_test(test_identity_dictionary_can_override_a_value),
+		unit_test(test_interpreter_can_call_native),
+		unit_test(test_interpreter_can_call_methods),
         };
         return run_tests(tests);
 }
+
+#endif //UNIT_TESTING

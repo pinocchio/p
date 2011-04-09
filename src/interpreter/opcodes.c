@@ -269,14 +269,34 @@ OPCODE(try_native)
     CALL_NATIVE(function->data);
 END_OPCODE
 
-OPCODE(exit)
-    exit(0);
-END_OPCODE
+#ifdef UNIT_TESTING
+    
+    int thread_running = 1;
+    
+    OPCODE(exit)
+        thread_running = 0;
+        return;
+    END_OPCODE
+    
+    OPCODE_EVALUATION
+    
+        for (;thread_running;) {
+            ((opcode)(*GET_PC()))(THREAD());
+        }
+    
+    OPCODE_END
+    
+#else
 
-OPCODE_EVALUATION
-
-    for (;;) {
-        ((opcode)(*GET_PC()))(THREAD());
-    }
-
-OPCODE_END
+    OPCODE(exit)
+        exit(0);
+    END_OPCODE
+    
+    OPCODE_EVALUATION
+        for (;;) {
+            ((opcode)(*GET_PC()))(THREAD());
+        }
+    
+    OPCODE_END
+    
+#endif

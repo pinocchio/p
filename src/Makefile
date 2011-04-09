@@ -8,10 +8,8 @@ OS           = $(shell uname)
 # ============================================================================
 
 TARGET       = pinocchio
-T_TARGET     = pinocchio_t
 
-CFILES      += $(shell find . -name '*.c' -not -path "./plugin*" -not -path "./tests*")
-T_CFILES    += $(shell find . -name '*.c' -not -path "./plugin*")
+CFILES      += $(shell find . -name '*.c' -not -path "./plugin*")
 HFILES      += $(T_CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES)
@@ -21,7 +19,6 @@ PLUGINHFILES = $(PLUGINCFILES:%.c=%.h)
 PLUGINSOURCES = plugin/Makefile $(PLUGINCFILES) $(PLUGINHFILES)
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
-T_OBJECTS     = $(filter-out %pinocchio.o,$(T_CFILES:%.c=%.o))
 
 # ============================================================================
 
@@ -61,15 +58,11 @@ run: $(TARGET)
 plugin:
 	@cd plugin; make;
 
-tests: $(T_TARGET)
-	./pinocchio_t
-
-$(T_TARGET): $(T_OBJECTS)
-	@echo Linking $@
-	@$(CC) $(LDFLAGS) -o $@ $^
+tests:
+	CFLAGS+="-D UNIT_TESTING" $(MAKE); ./$(TARGET)
 
 clean:
-	@rm -rf $(T_OBJECTS) $(T_CFILES:%.c=%.gcno) $(T_CFILES:%.c=%.gcda) $(TARGET) $(T_TARGET) make.depend
+	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) $(TARGET) make.depend
 	@cd plugin; ${MAKE} clean;
 
 fast:
@@ -131,7 +124,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: test vtest run clean profile plugin dist GITVERSION
+.PHONY: tests vtest run clean profile plugin dist GITVERSION
 # ============================================================================
 include make.depend
 

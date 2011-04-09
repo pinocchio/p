@@ -2,11 +2,9 @@
 #include <bootstrap.h>
 #include <locale.h>
 #include <string.h>
-#include <test.h>
 
 void thread(Array arguments)
 {
-    test2();
 }
 
 Array get_args(int argc, const char ** argv)
@@ -26,6 +24,8 @@ Array get_args(int argc, const char ** argv)
     return args;
 }
 
+#ifndef UNIT_TESTING
+
 int main(int argc, const char ** argv)
 {
     setlocale(LC_ALL, "");
@@ -36,3 +36,5 @@ int main(int argc, const char ** argv)
 
     return EXIT_SUCCESS;
 }
+
+#endif

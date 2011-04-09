@@ -56,7 +56,7 @@ void test_identity_dictionary_can_do_initital_grow(void **state) {
         IdentityDictionary d = new_IdentityDictionary();
 	
 	//before initital grow there should be 1 bucket
-	int maxLinear = new_IdentityDictionary()->maxLinear->value;
+	int maxLinear = d->maxLinear->value;
 	test_identity_dictionary_with(d,maxLinear-1);
         assert_int_equal( d->buckets->size, 1 );
 	

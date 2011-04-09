@@ -1,7 +1,6 @@
 #include <pinocchio.h>
 #include <locale.h>
 #include <string.h>
-#include <test.h>
 
 void pinocchio_bootstrap()
 {
