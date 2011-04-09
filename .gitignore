@@ -2,9 +2,11 @@
 *.lo
 *.*.swp
 *.so
+.gdbinit
 tags
 make.depend
 pinocchio
+pinocchio_t
 
 # XCODE noise
 *.pbxuser
