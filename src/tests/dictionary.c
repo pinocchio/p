@@ -22,9 +22,7 @@ void test_identity_dictionary_can_override_a_value(void **state) {
 }
 
 
-void test_identity_dictionary_with(int size ) {
-        IdentityDictionary d = new_IdentityDictionary();
-	
+void test_identity_dictionary_with(IdentityDictionary d, int size) {
 	//Generate some entries
 	void *f = (void *)1; 
 	for( int i= 0; i < size; i++)
@@ -50,16 +48,30 @@ void test_identity_dictionary_with(int size ) {
 }
 
 void test_identity_dictionary_can_store_and_lookup(void **state) {
-	test_identity_dictionary_with(5);
+        IdentityDictionary d = new_IdentityDictionary();
+	test_identity_dictionary_with(d,5);
 }
 
 void test_identity_dictionary_can_do_initital_grow(void **state) {
-	//initial grow happens after 20 elements where added
+        IdentityDictionary d = new_IdentityDictionary();
+	
+	//before initital grow there should be 1 bucket
 	int maxLinear = new_IdentityDictionary()->maxLinear->value;
-	test_identity_dictionary_with(maxLinear+10);
+	test_identity_dictionary_with(d,maxLinear-1);
+        assert_int_equal( d->buckets->size, 1 );
+	
+	//after initital grow there should be more than one bucket
+	test_identity_dictionary_with(d,maxLinear);
+        int size = d->buckets->size;
+        assert_true( size > 1 );
+
+        //another add should not trigger yet another grow
+	test_identity_dictionary_with(d,maxLinear+1);
+        assert_int_equal( d->buckets->size, size );
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {
-	test_identity_dictionary_with(2000);
+        IdentityDictionary d = new_IdentityDictionary();
+	test_identity_dictionary_with(d,2000);
 }
 
