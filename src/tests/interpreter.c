@@ -32,13 +32,16 @@ void test_interpreter_can_call_methods(void **state)
 void test_interpreter_can_call_native( void **state )
 {
     Array annotations;
-    RawArray code = new_RawArray(4, OP(self), 0, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
+    
+
+    RawArray code = new_RawArray(5, OP(self), 0, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"), OP(exit));
     Array body;
 
     Method method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
 
     Thread thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
+
 //    opcode_evaluate(thread);
-printf( "skipped\n" );
+printf( "!! skipped !!\n" );
 }

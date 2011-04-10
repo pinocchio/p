@@ -31,7 +31,6 @@
 
 #define OPCODE(name)\
     void op_##name(Thread thread) {\
-        fwprintf(stderr, L" PC: %d\n", CONTEXT());\
         fwprintf(stderr, L" ## "#name"\n");
 
 #define END_OPCODE\
@@ -109,7 +108,6 @@ OPCODE_BODY
 
 OPCODE(self)
     target = UNS_INT_OPERAND(1);
-    fwprintf(stderr, L"store self into %s\n", target);
     value  = SELF();
     STORE(target, value);
     JUMP(2);
