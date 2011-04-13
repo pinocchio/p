@@ -4,9 +4,9 @@
 
 void pinocchio_bootstrap()
 {
-    NEW_OBJECT_NAMED(nil,   Object);
-    NEW_OBJECT_NAMED(true,  Object);
-    NEW_OBJECT_NAMED(false, Object);
+    INSTANTIATE(nil,   Object, NULL);
+    INSTANTIATE(true,  Object, NULL);
+    INSTANTIATE(false, Object, NULL);
 
     Metaclass_class         = raw_Bootstrapping_Class();
     set_class((Object)get_class((Object)Metaclass_class), Metaclass_class);
