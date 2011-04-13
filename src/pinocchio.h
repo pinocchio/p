@@ -47,24 +47,21 @@ typedef Dictionary                  NativesDictionary;
 typedef void (*native)(Thread thread);
 
 struct Header {
-    uns_int     variable: 1;
-    uns_int     raw:      1;
-    uns_int     stack:    1;
-    uns_int     base: sizeof(uns_int) * 8 - 3;
+    uns_int     base:          7;
+    uns_int     variable:      1;
+    uns_int     raw:           1;
+    uns_int     mark:          1;
+    uns_int     padding:       6;
+    uns_int     hash: sizeof(uns_int) * 8 - 16;
     Behavior    class;
 };
+typedef struct Header Header;
 
 struct VariableHeader {
-    uns_int     variable: 1;
-    uns_int     raw:      1;
-    uns_int     stack:    1;
-    uns_int     base: sizeof(uns_int) * 8 - 3;
-    Behavior    class;
+    Header      header;
     uns_int     size;
 };
-
-typedef struct Header               Header;
-typedef struct VariableHeader       VariableHeader;
+typedef struct VariableHeader VariableHeader;
 
 /* ======================================================================= */
 
