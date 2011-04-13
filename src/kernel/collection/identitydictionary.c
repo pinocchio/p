@@ -1,5 +1,5 @@
 #include <pinocchio.h>
-#include <string.h>
+#include <math.h>
 
 /* ======================================================================= */
 Class IdentityDictionary_class;
@@ -50,16 +50,14 @@ static void initital_grow(IdentityDictionary dictionary)
     uns_int old_bucket_size = old_bucket->tally->value;
 
     /* calculate how many new buckets we need to store the one old_bucket
-     * such that there will be ~5 elements per new bucket.
+     * such that the mean will be less than 5 elements per bucket.
      */
-    uns_int new_buckets_size = 2;
-    while( new_buckets_size <= old_bucket_size/10 )
-        new_buckets_size <<= 1;
+    uns_int new_bucketsarray_size = 1 << (1+(int)log2f(old_bucket_size/10.0));
 
     /* Create all those new buckets with the same size as the old one */
-    dictionary->buckets = new_BucketArray_sized(new_buckets_size);
-    uns_int newcount[new_buckets_size];
-    for( int i = 0; i < new_buckets_size; i += 1 )
+    dictionary->buckets = new_BucketArray_sized(new_bucketsarray_size);
+    uns_int newcount[new_bucketsarray_size];
+    for( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i] = new_Bucket_sized( old_bucket_size );
         newcount[i] = 0;
@@ -72,7 +70,7 @@ static void initital_grow(IdentityDictionary dictionary)
         uns_int new_bucket_idx = 0;
 
         //add each matching bit to the index
-        for( int new_bit = 1; new_bit < new_buckets_size; new_bit <<= 1 ) {
+        for( int new_bit = 1; new_bit < new_bucketsarray_size; new_bit <<= 1 ) {
             if (Symbol_hash(selector) & new_bit)
 		new_bucket_idx += new_bit;
         }
@@ -84,7 +82,7 @@ static void initital_grow(IdentityDictionary dictionary)
     }
     
     /* update the tallys */
-    for( int i = 0; i < new_buckets_size; i += 1 )
+    for( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i]->tally = new_SmallInteger(newcount[i]);
     }

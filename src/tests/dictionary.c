@@ -72,6 +72,6 @@ void test_identity_dictionary_can_do_initital_grow(void **state) {
 
 void test_identity_dictionary_can_be_huge(void **state) {
         IdentityDictionary d = new_IdentityDictionary();
-	test_identity_dictionary_with(d,20000);
+	test_identity_dictionary_with(d,9999);
 }
 
