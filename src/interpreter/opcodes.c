@@ -55,8 +55,7 @@
     SET_PC(GET_PC() + offset);
 
 #define RETURN()\
-    Thread_return(thread);\
-    JUMP(4);
+    Thread_return(thread);
 
 #define THREAD()  thread
 #define CONTEXT() THREAD()->context
@@ -166,6 +165,7 @@ OPCODE(send)
     size     = UNS_INT_OPERAND(1);
     offset   = UNS_INT_OPERAND(2);
     selector = (Symbol)OBJECT_OPERAND(3);
+    JUMP(4);
     send(THREAD(), selector, size, offset);
 END_OPCODE
 
