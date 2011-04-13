@@ -11,7 +11,7 @@ static void SymbolTable_grow(SymbolTable table)
     long size   = table->size->value + 1;
     table->size = new_SmallInteger(size);
 
-    if (100*size / table->buckets->size <= table->ratio->value)
+    if (size / table->buckets->size <= table->ratio->value)
         return;
 
     BucketArray old_buckets = table->buckets;
@@ -134,7 +134,7 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
 static SymbolTable new_SymbolTable() {
     NEW_OBJECT_WITH_CLASS(Dictionary, SymbolTable_class);
     result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(500);
+    result->ratio     = new_SmallInteger(5);
     result->maxLinear = new_SmallInteger(0);
     result->buckets   = new_BucketArray(20);
     result->linear    = false;

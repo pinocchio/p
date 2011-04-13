@@ -25,7 +25,7 @@ Dictionary new_Dictionary()
 {
     NEW_OBJECT(Dictionary);
     result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(500);
+    result->ratio     = new_SmallInteger(5);
     result->maxLinear = new_SmallInteger(20);
     result->buckets   = new_BucketArray(20 << 1);
     result->linear    = true;

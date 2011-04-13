@@ -9,7 +9,7 @@ IdentityDictionary new_IdentityDictionary()
 {
     NEW_OBJECT_WITH_CLASS(Dictionary, IdentityDictionary_class);
     result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(500);
+    result->ratio     = new_SmallInteger(5);
     result->maxLinear = new_SmallInteger(20);
     result->buckets   = new_BucketArray(20 << 1);
     result->linear    = true;
@@ -54,7 +54,7 @@ static void initital_grow(IdentityDictionary dictionary)
      * dictionary ratio (to avoid a series of grows)
      */
 
-    float elements_per_bucket = 100*old_bucket_size/dictionary->ratio->value;
+    float elements_per_bucket = old_bucket_size/dictionary->ratio->value;
     uns_int new_bucketsarray_size = 1 << (1+(int)log2f(old_bucket_size/elements_per_bucket));
 
     /* Create all those new buckets with the same size as the old one */
@@ -110,7 +110,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
         return;
     } 
 
-    if (100*size / dictionary->buckets->size <= dictionary->ratio->value)
+    if (size / dictionary->buckets->size <= dictionary->ratio->value)
         return;
 
     BucketArray old_buckets = dictionary->buckets;
