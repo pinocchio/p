@@ -32,7 +32,6 @@ void test_interpreter_can_call_methods(void **state)
 void test_interpreter_can_call_native( void **state )
 {
     Array annotations;
-    
 
     RawArray code = new_RawArray(5, OP(self), 0, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"), OP(exit));
     Array body;
@@ -41,7 +40,20 @@ void test_interpreter_can_call_native( void **state )
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
 
     Thread thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
+    thread->context->local[1] = (Object)new_SmallInteger(1);
+    thread->context->local[2] = (Object)new_SmallInteger(2);
+   
+    opcode_evaluate(thread);
 
-//    opcode_evaluate(thread);
-printf( "!! skipped !!\n" );
+    assert_int_equal( ((SmallInteger)thread->context->local[1])->value, 3 );
+    
+    thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
+    thread->context->local[1] = (Object)new_SmallInteger(1);
+    thread->context->local[2] = (Object)new_SmallInteger(2);
+   
+    opcode_evaluate(thread);
+    
+    //TODO: check that the second time try_native is called (since lookup_native should
+    //      replace itself.
+    assert_int_equal( ((SmallInteger)thread->context->local[1])->value, 3 );
 }

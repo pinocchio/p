@@ -31,7 +31,7 @@
 
 #define OPCODE(name)\
     void op_##name(Thread thread) {\
-        fwprintf(stderr, L" ## "#name"\n");
+        printf(" ## "#name"\n");
 
 #define END_OPCODE\
     }
@@ -250,12 +250,12 @@ OPCODE(lookup_native)
     NativeName name = (NativeName)OBJECT_OPERAND(1);
     native function = lookup_native(name);
     if (function) {
-        fwprintf(stderr, L"Found native: %d\n",function);
+        printf("Found native: %p\n",function);
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = new_Raw((void**)function);
         CALL_NATIVE(function);
+        JUMP(2);
     } else {
-	//TODO: shouldnt we call the funktion if it's not a native??
         *GET_PC()     = OP(jump);
         *(GET_PC()+1) = (void**)2;
         JUMP(2);
@@ -265,11 +265,12 @@ END_OPCODE
 OPCODE(try_native)
     Raw function = (Raw)OBJECT_OPERAND(1);
     CALL_NATIVE(function->data);
+    JUMP(2);
 END_OPCODE
 
 #ifdef UNIT_TESTING
     
-    int thread_running = 1;
+    int thread_running;
     
     OPCODE(exit)
         thread_running = 0;
@@ -277,6 +278,7 @@ END_OPCODE
     END_OPCODE
     
     OPCODE_EVALUATION
+        thread_running = 1;
     
         for (;thread_running;) {
             ((opcode)(*GET_PC()))(THREAD());

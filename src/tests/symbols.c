@@ -1,8 +1,6 @@
 #include <tests/pinocchio_test.h>
 
 void test_symbol_table_can_grow(void **state) {
-        init_symboltable();
-
 	Symbol s = new_Symbol(L"test");
         for( int i= 0; i < 2000; i++)
         {
