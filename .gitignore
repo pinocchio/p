@@ -6,7 +6,7 @@
 tags
 make.depend
 pinocchio
-pinocchio_t
+cppcomplete.tags
 
 # XCODE noise
 *.pbxuser

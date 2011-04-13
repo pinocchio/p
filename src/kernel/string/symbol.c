@@ -29,8 +29,8 @@ static void SymbolTable_grow(SymbolTable table)
             continue;
         }
 
-        uns_int idx = 0;
-        uns_int newcount = 0;
+        uns_int idx         = 0;
+        uns_int newcount    = 0;
         uns_int bucket_size = bucket->tally->value;
 
         while (idx < bucket_size) {
