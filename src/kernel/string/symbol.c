@@ -10,6 +10,61 @@ static void SymbolTable_grow(SymbolTable table)
 {
     long size   = table->size->value + 1;
     table->size = new_SmallInteger(size);
+
+    if (100*size / table->buckets->size <= table->ratio->value)
+        return;
+
+    BucketArray old_buckets = table->buckets;
+
+    uns_int newbit = old_buckets->size;
+    BucketArray buckets = new_BucketArray_sized(newbit << 1);
+    table->buckets = buckets;
+
+    uns_int bucket_idx;
+    uns_int limit = old_buckets->size;
+
+    for (bucket_idx = 0; bucket_idx < limit; bucket_idx++) {
+        Bucket bucket = old_buckets->bucket[bucket_idx];
+        if ((Object)bucket == nil) {
+            continue;
+        }
+
+        uns_int idx = 0;
+        uns_int newcount = 0;
+        uns_int bucket_size = bucket->tally->value;
+
+        while (idx < bucket_size) {
+            Symbol key = (Symbol)bucket->value[idx];
+
+            if (key->hash->value & newbit) {
+                bucket_size -= 1;
+                newcount += 1;
+                bucket->value[idx]   = bucket->value[bucket_size];
+                bucket->value[bucket_size]   = (Object)key;
+            } else {
+                idx += 1;
+            }
+        }
+        bucket->tally = new_SmallInteger(bucket_size);
+
+        buckets->bucket[bucket_idx] = bucket;
+
+        if (newcount > 0) {
+            Bucket new_bucket;
+            if (bucket_size == 0) {
+                new_bucket = bucket;
+                buckets->bucket[bucket_idx] = (Bucket)nil;
+            } else {
+                new_bucket = new_Bucket_sized(newcount << 2);
+                for (idx = 0; idx < newcount; idx += 1) {
+                    new_bucket->value[idx] = bucket->value[bucket_size + idx];
+                }
+            }
+            new_bucket->tally = new_SmallInteger(newcount);
+            buckets->bucket[limit+bucket_idx] = new_bucket;
+
+        }
+    }
 }
 
 static Symbol raw_Symbol(const wchar_t* input, uns_int size, long hash)
@@ -24,6 +79,7 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
 {
     uns_int size = wcslen(key);
     long hash = wchar_hash(key, size);
+
     Bucket *bucketp = &table->buckets->bucket[hash % table->buckets->size];
     Bucket bucket   = *bucketp;
     Symbol symbol;
@@ -79,9 +135,9 @@ static SymbolTable new_SymbolTable() {
     NEW_OBJECT_WITH_CLASS(Dictionary, SymbolTable_class);
     result->size      = new_SmallInteger(0);
     result->ratio     = new_SmallInteger(500);
-    result->maxLinear = new_SmallInteger(20);
+    result->maxLinear = new_SmallInteger(0);
     result->buckets   = new_BucketArray(20);
-    result->linear    = true;
+    result->linear    = false;
     return result;
 }
 
