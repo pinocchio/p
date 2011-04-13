@@ -112,7 +112,8 @@ gdb:
 	CFLAGS+="-DNO_EXCEPTION -g" make $(TARGET)
 
 tags: $(SOURCES)
-	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi
+	if [[ $$(uname) == "Darwin" ]]; then ctags $$(find . -iname "*.ci" -or -iname "*.hi" -or -iname "*.c" -or -iname "*.h"); else ctags -h ".h.hi" --langmap="c:.c.ci" -R .; fi;
+	ctags -R -n -f cppcomplete.tags --fields=+ai --C++-types=+p * 
 
 dist: $(SOURCES) $(EXTRASOURCES)
 	@mkdir -p $(EDGEPV)
