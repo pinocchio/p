@@ -54,8 +54,8 @@ static void initital_grow(IdentityDictionary dictionary)
      * dictionary ratio (to avoid a series of grows)
      */
 
-    float elements_per_bucket = old_bucket_size/dictionary->ratio->value;
-    uns_int new_bucketsarray_size = 1 << (1+(int)log2f(old_bucket_size/elements_per_bucket));
+    float elements_per_bucket = old_bucket_size / ( dictionary->ratio->value * 2);
+    uns_int new_bucketsarray_size = 1 << (1+(int)log2f(elements_per_bucket));
 
     /* Create all those new buckets with the same size as the old one */
     dictionary->buckets = new_BucketArray_sized(new_bucketsarray_size);
