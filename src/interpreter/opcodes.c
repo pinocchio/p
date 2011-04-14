@@ -230,7 +230,7 @@ OPCODE(block_return)
         SET_RETURN(value);
         RETURN(0);
     } else {
-        return_target->args[0] = value;
+        *return_target->return_pointer = value;
         longjmp(return_target->target, 1);
     }
 END_OPCODE

@@ -8,7 +8,7 @@
 struct JumpTarget {
     Header              header;
     jmp_buf             target;
-    Object *            args;
+    Object *            return_pointer;
 };
 
 extern Class JumpTarget_class;
