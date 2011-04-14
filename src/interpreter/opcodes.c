@@ -226,8 +226,13 @@ END_OPCODE
 OPCODE(block_return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
-    SET_RETURN(value);
-    RETURN(0);
+    if (return_target == NULL) {
+        SET_RETURN(value);
+        RETURN(0);
+    } else {
+        return_target->args[0] = value;
+        longjmp(return_target->target, 1);
+    }
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
