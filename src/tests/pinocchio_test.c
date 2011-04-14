@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
             unit_test(test_interpreter_can_return_constant),
             unit_test(test_interpreter_can_call_methods),
             unit_test(test_interpreter_can_call_closure),
+            unit_test(test_interpreter_can_call_closure_ignore_return),
             unit_test(test_interpreter_can_nonlocal_return_from_closure),
     };
     return run_tests(tests);
