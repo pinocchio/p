@@ -16,16 +16,17 @@ struct NativeName {
 /* ======================================================================= */
 
 #define NATIVE(module, name)\
-    void NM_##module##_##name(Thread thread) {
+    char NM_##module##_##name(Object arg[]) {
 
 #define END_NATIVE\
+	return 0;\
     }
 
 #define INSTALL_NATIVE(module, name)\
     install_native( new_NativeName( L""#module, L""#name ), NM_##module##_##name )
 
-#define ARGUMENT(index) thread->context->local[index]
-#define NATIVE_RETURN(result) thread->context->local[1] = (Object)result
+#define ARGUMENT(index) arg[index]
+#define NATIVE_RETURN(result) arg[0] = (Object)result
 
 /* ======================================================================= */
 

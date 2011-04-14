@@ -50,6 +50,8 @@ void pinocchio_bootstrap()
     RawLayout_class         = new_Bootstrapping_Class();
 
     init_layout();
+    
+    method_context( NULL,NULL );
 
     init_natives();
 }

@@ -1,4 +1,5 @@
 #include <pinocchio.h>
+#include <stdarg.h>
 
 /* ======================================================================= */
 Class Array_class;

@@ -60,27 +60,3 @@ MethodClosure lookup(Object receiver, Symbol message)
     }
     return MethodDictionary_lookup(methods, message);
 }
-
-void send(Thread thread, Symbol message, uns_int size, uns_int offset)
-{
-    Context sender        = thread->context;
-    Object self           = sender->local[offset];
-    MethodClosure closure = lookup(self, message);
-
-    if (closure == NULL) {
-        // TODO
-		// return does_not_understand(thread, message, size, offset);
-    }
-
-    Method method          = closure->method;
-
-    MethodContext receiver = new_MethodContext(thread, size);
-    receiver->sender       = sender;
-
-    receiver->pc           = new_Raw((void**)method->code->data);
-    receiver->self         = self;
-    receiver->closure      = closure;
-    // TODO test what is faster
-    memcpy(&receiver->local[size], &sender->local[size + offset + 1], size * 8);
-    thread->context        = (Context)receiver;
-}

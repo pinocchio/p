@@ -5,36 +5,31 @@
 
 /* ======================================================================= */
 
-typedef void (*opcode)(Thread);
+char method_context( Method method, Object arg[] );
 
-#define DECLARE_OPCODE(name) extern void op_##name(Thread thread);
-#define OP(name) &op_##name
-
-/* ======================================================================= */
-
-DECLARE_OPCODE(block_return);
-DECLARE_OPCODE(cache_send);
-DECLARE_OPCODE(capture);
-DECLARE_OPCODE(exit);
-DECLARE_OPCODE(iffalse_iftrue);
-DECLARE_OPCODE(iftrue_iffalse);
-DECLARE_OPCODE(jump);
-DECLARE_OPCODE(load_constant);
-DECLARE_OPCODE(lookup);
-DECLARE_OPCODE(lookup_native);
-DECLARE_OPCODE(move);
-DECLARE_OPCODE(poly_send);
-DECLARE_OPCODE(return);
-DECLARE_OPCODE(return_self);
-DECLARE_OPCODE(self);
-DECLARE_OPCODE(send);
-DECLARE_OPCODE(slot_read);
-DECLARE_OPCODE(slot_write);
-DECLARE_OPCODE(try_native);
+#define EXTERN_OPCODE(name) extern void * op_##name; 
+#define OP(name) op_##name
 
 /* ======================================================================= */
 
-extern void opcode_evaluate(Thread thread);
+EXTERN_OPCODE(allocate_locals)
+EXTERN_OPCODE(block_return)
+EXTERN_OPCODE(cache_send)
+EXTERN_OPCODE(exit)
+EXTERN_OPCODE(iffalse_iftrue)
+EXTERN_OPCODE(iftrue_iffalse)
+EXTERN_OPCODE(jump)
+EXTERN_OPCODE(load_constant)
+EXTERN_OPCODE(lookup_native)
+EXTERN_OPCODE(move)
+EXTERN_OPCODE(poly_send)
+EXTERN_OPCODE(return)
+EXTERN_OPCODE(return_self)
+EXTERN_OPCODE(self)
+EXTERN_OPCODE(send)
+EXTERN_OPCODE(slot_read)
+EXTERN_OPCODE(slot_write)
+EXTERN_OPCODE(try_native)
 
 /* ======================================================================= */
 

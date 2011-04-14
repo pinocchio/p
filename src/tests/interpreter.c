@@ -10,50 +10,47 @@ void op_print1(Thread thread)
 
 void test_interpreter_can_call_methods(void **state)
 {
+    SmallInteger integer = new_SmallInteger(500);
+
     // TODO allocate thread objects on C-stack
     Array annotations;
-    RawArray code = new_RawArray(7, OP(self), 0, OP(send), 0, 0, new_Symbol(L"test2"), OP(exit));
+    RawArray code = new_RawArray(8, OP(allocate_locals), 1, OP(load_constant), 0, integer, OP(return), 0 );
     Array body;
 
     Method method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
 
-    code = new_RawArray(2, OP(print1), OP(return_self));
+    code = new_RawArray(1, OP(return_self));
 
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test2"), method);
+    Object args[] = { (Object)new_SmallInteger(0) };
+    method_context( method, args );
 
-    Thread thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
-    opcode_evaluate(thread);
 
-    assert_true( print_called==1 );
+//    opcode_evaluate(thread);
+
+    assert_true( args[0] == integer );
 }
+
 
 void test_interpreter_can_call_native( void **state )
 {
     Array annotations;
 
-    RawArray code = new_RawArray(5, OP(self), 0, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"), OP(exit));
+    RawArray code = new_RawArray(5, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"), OP(exit));
     Array body;
 
     Method method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
 
-    Thread thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
-    thread->context->local[1] = (Object)new_SmallInteger(1);
-    thread->context->local[2] = (Object)new_SmallInteger(2);
-   
-    opcode_evaluate(thread);
 
-    assert_int_equal( ((SmallInteger)thread->context->local[1])->value, 3 );
+    SmallInteger integer = new_SmallInteger(1);
+
+    Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
+    method_context( method, args );
+
+    assert_int_equal( ((SmallInteger)args[0])->value, 3 );
+
+//    assert_int_equal( , 3 );
     
-    thread = new_Thread(THREAD_SIZE, (Object)new_SmallInteger(0), new_Symbol(L"test"));
-    thread->context->local[1] = (Object)new_SmallInteger(1);
-    thread->context->local[2] = (Object)new_SmallInteger(2);
-   
-    opcode_evaluate(thread);
-    
-    //TODO: check that the second time try_native is called (since lookup_native should
-    //      replace itself.
-    assert_int_equal( ((SmallInteger)thread->context->local[1])->value, 3 );
 }
+

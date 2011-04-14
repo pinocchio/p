@@ -36,29 +36,29 @@ void init_integercache()
 /* ======================================================================= */
 
 NATIVE(SmallInteger, plus)
-    SmallInteger self   = (SmallInteger)ARGUMENT(1);
-    SmallInteger right  = (SmallInteger)ARGUMENT(2);
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
     SmallInteger result = new_SmallInteger(self->value + right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, minus)
-    SmallInteger self   = (SmallInteger)ARGUMENT(1);
-    SmallInteger right  = (SmallInteger)ARGUMENT(2);
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
     SmallInteger result = new_SmallInteger(self->value - right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, times)
-    SmallInteger self   = (SmallInteger)ARGUMENT(1);
-    SmallInteger right  = (SmallInteger)ARGUMENT(2);
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
     SmallInteger result = new_SmallInteger(self->value * right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, divide)
-    SmallInteger self   = (SmallInteger)ARGUMENT(1);
-    SmallInteger right  = (SmallInteger)ARGUMENT(2);
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
     SmallInteger result = new_SmallInteger(self->value / right->value);
     NATIVE_RETURN(result);
 END_NATIVE

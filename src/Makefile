@@ -27,7 +27,7 @@ CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS  += -lgc -lm -ldl -lcmockery
 #LDFLAGS += -lpthread
-CC        = clang
+CC        = gcc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc

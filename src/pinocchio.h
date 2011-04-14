@@ -44,7 +44,7 @@ typedef Dictionary                  IdentityDictionary;
 typedef Dictionary                  MethodDictionary;
 typedef Dictionary                  NativesDictionary;
 
-typedef void (*native)(Thread thread);
+typedef char (*native)( Object arg[]);
 
 struct Header {
     uns_int     base:          7;

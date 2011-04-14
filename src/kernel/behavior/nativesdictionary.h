@@ -11,8 +11,8 @@ extern Class NativesDictionary_class;
 
 extern NativesDictionary new_NativesDictionary();
 
-extern inline native NativesDictionary_lookup(NativesDictionary,NativeName);
-extern inline void NativesDictionary_store(NativesDictionary,NativeName,native);
+extern native NativesDictionary_lookup(NativesDictionary,NativeName);
+extern void NativesDictionary_store(NativesDictionary,NativeName,native);
 
 /* ======================================================================= */
 
