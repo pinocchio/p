@@ -46,20 +46,28 @@ typedef Dictionary                  NativesDictionary;
 
 typedef char (*native)( Object arg[]);
 
-struct Header {
+struct Format {
     uns_int     base:          7;
     uns_int     variable:      1;
     uns_int     raw:           1;
-    uns_int     mark:          1;
-    uns_int     padding:       6;
-    uns_int     hash: sizeof(uns_int) * 8 - 16;
-    Behavior    class;
+    uns_int     mutable:       1;
+    uns_int     gcmark:        1;
+    uns_int     hash: sizeof(uns_int) * 8 - 11;
 };
+
+typedef struct Format Format;
+
+struct Header {
+    Behavior    class;
+    Format      format;
+};
+
 typedef struct Header Header;
 
 struct VariableHeader {
-    Header      header;
     uns_int     size;
+    Behavior    class;
+    Format      format;
 };
 typedef struct VariableHeader VariableHeader;
 

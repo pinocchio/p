@@ -12,8 +12,8 @@ SmallInteger SmallInteger_cache[INT_CACHE_UPPER - INT_CACHE_LOWER];
 static SmallInteger raw_SmallInteger(long value)
 {
     NEW_OBJECT(SmallInteger);
-    result->value      = value;
-    result->header.raw = 1;
+    result->value             = value;
+    result->header.format.raw = 1;
     return result;
 }
 
