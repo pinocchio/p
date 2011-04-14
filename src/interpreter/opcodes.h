@@ -30,6 +30,7 @@ EXTERN_OPCODE(send)
 EXTERN_OPCODE(slot_read)
 EXTERN_OPCODE(slot_write)
 EXTERN_OPCODE(try_native)
+EXTERN_OPCODE(capture)
 
 /* ======================================================================= */
 

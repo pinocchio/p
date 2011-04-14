@@ -100,6 +100,7 @@ DECLARE_OPCODE(send)
 DECLARE_OPCODE(slot_read)
 DECLARE_OPCODE(slot_write)
 DECLARE_OPCODE(try_native)
+DECLARE_OPCODE(capture)
 
 OPCODE_DECLS
 
@@ -138,6 +139,7 @@ INSTALL_OPCODE(send)
 INSTALL_OPCODE(slot_read)
 INSTALL_OPCODE(slot_write)
 INSTALL_OPCODE(try_native)
+INSTALL_OPCODE(capture)
 
 OPCODE_BODY
 
@@ -266,8 +268,8 @@ OPCODE(capture)
             RETURN(0);
         }
     }
-    target      = UNS_INT_OPERAND(2);
-    value       = (Object)new_BlockClosure(return_target, block, 0, arg);
+    target = UNS_INT_OPERAND(2);
+    value  = (Object)new_BlockClosure(block, return_target, SELF(), 0, local);
     STORE(target, value);
     JUMP(3);
 END_OPCODE;

@@ -9,11 +9,13 @@ struct BlockClosure {
     VariableHeader      header;
     JumpTarget          return_target;
     Block               code;
+    Object              self;
     Object              remotes[];
 };
 
 extern BlockClosure new_BlockClosure(Block block,
                                      JumpTarget return_target,
+                                     Object self,
                                      uns_int copies,
                                      Object * local);
 
