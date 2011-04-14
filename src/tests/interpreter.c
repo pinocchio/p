@@ -23,10 +23,8 @@ void test_interpreter_can_call_methods(void **state)
     code = new_RawArray(1, OP(return_self));
 
     Object args[] = { (Object)new_SmallInteger(0) };
-    method_context( method, args );
+    method_context( method, NULL, args );
 
-
-//    opcode_evaluate(thread);
 
     assert_true( args[0] == integer );
 }
@@ -46,11 +44,8 @@ void test_interpreter_can_call_native( void **state )
     SmallInteger integer = new_SmallInteger(1);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( method, args );
+    method_context( method, NULL, args );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 3 );
-
-//    assert_int_equal( , 3 );
-    
 }
 

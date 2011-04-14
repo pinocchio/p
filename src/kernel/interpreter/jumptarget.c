@@ -1,13 +1,14 @@
 #include <pinocchio.h>
 
 /* ======================================================================= */
-Class BlockClosure_class;
+Class JumpTarget_class;
 /* ======================================================================= */
 
-BlockClosure new_BlockClosure(JumpTarget return_target, Block code)
+JumpTarget new_JumpTarget(Object args[])
 {
-    NEW_OBJECT(BlockClosure);
-    result->return_target = return_target;
-    result->code          = code;
+    NEW_OBJECT(JumpTarget);
+    result->args = args;
+    result->header.format.raw = 1;
     return result;
 }
+

@@ -39,6 +39,7 @@ typedef struct BlockContext*        BlockContext;
 typedef struct Thread*              Thread;
 typedef struct Raw*                 Raw;
 typedef struct RawArray*            RawArray;
+typedef struct JumpTarget*          JumpTarget;
 
 typedef Dictionary                  IdentityDictionary;
 typedef Dictionary                  MethodDictionary;
@@ -99,6 +100,7 @@ typedef struct VariableHeader VariableHeader;
 
 #include <kernel/interpreter/context.h>
 #include <kernel/interpreter/thread.h>
+#include <kernel/interpreter/jumptarget.h>
 
 #include <interpreter/native.h>
 #include <interpreter/opcodes.h>

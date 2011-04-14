@@ -4,7 +4,7 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    char method_context( Method method, Object arg[] ) {
+    char method_context( Method method, JumpTarget return_target, Object arg[] ) {
 
 #define OPCODE_HEAD\
     if( arg == NULL ) {\
@@ -13,7 +13,6 @@
     return 0;\
     }\
     void ** pc = (void**)method->code->data;\
-    Object * local;\
     GO_NEXT();
 
 #define OPCODE_EVALUATION
@@ -61,7 +60,7 @@
 #define JUMP(offset)\
     SET_PC(GET_PC() + offset);
 
-#define RETURN() return 0;
+#define RETURN(code) return code;
 #define SET_RETURN(value) arg[0] = (value)
 
 #define READ_FIELD(index) SELF()->field[index]
@@ -70,7 +69,7 @@
 
 #define CALL_METHOD(selector, arg_offset)\
     next_method = lookup(local[arg_offset], selector);\
-    return_code = method_context( next_method->method, &local[arg_offset]);\
+    return_code = method_context( next_method->method, NULL, &local[arg_offset]);\
     if ( return_code != 0 ) {\
     return return_code;\
     }
@@ -116,6 +115,8 @@ NativeName      name;
 native          function;
 MethodClosure   next_method;
 char            return_code;
+Object *        local;
+Block           block;
 
 OPCODE_HEAD
 
@@ -210,18 +211,18 @@ OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
     SET_RETURN(value);
-    RETURN();
+    RETURN(0);
 END_OPCODE
 
 OPCODE(return_self)
-    RETURN();
+    RETURN(0);
 END_OPCODE
 
 OPCODE(block_return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
     SET_RETURN(value);
-    RETURN();
+    RETURN(0);
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
@@ -257,15 +258,19 @@ OPCODE(jump)
     JUMP(address);
 END_OPCODE
 
-/*
 OPCODE(capture)
-    Block block = (Block)OBJECT_OPERAND(1);
+    block = (Block)OBJECT_OPERAND(1);
+    if (return_target == NULL) {
+        return_target = new_JumpTarget(arg);
+        if (setjmp(return_target->target)) {
+            RETURN(0);
+        }
+    }
     target      = UNS_INT_OPERAND(2);
-    value       = (Object)new_BlockClosure(CONTEXT(), block);
+    value       = (Object)new_BlockClosure(return_target, block);
     STORE(target, value);
     JUMP(3);
 END_OPCODE;
-*/
 
 OPCODE(lookup_native)
     name = (NativeName)OBJECT_OPERAND(1);
@@ -274,8 +279,8 @@ OPCODE(lookup_native)
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = (void**)function;
         if (!CALL_NATIVE(function)) {
-        RETURN();
-    }
+            RETURN(0);
+        }
         JUMP(2);
     } else {
         *GET_PC()     = OP(jump);
@@ -287,13 +292,13 @@ END_OPCODE
 OPCODE(try_native)
     function = (native)OBJECT_OPERAND(1);
     if (!CALL_NATIVE(function)) {
-        RETURN();
+        RETURN(0);
     }
     JUMP(2);
 END_OPCODE
 
 OPCODE(exit)
-    return -1;
+    RETURN(-1);
 END_OPCODE
 
 OPCODE_END

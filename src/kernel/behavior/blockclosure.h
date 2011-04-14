@@ -7,11 +7,12 @@
 
 struct BlockClosure {
     Header              header;
-    Context             outer;
+    JumpTarget          return_target;
     Block               code;
+    Object              copies;
 };
 
-extern BlockClosure new_BlockClosure(Context outer, Block block);
+extern BlockClosure new_BlockClosure(JumpTarget return_target, Block block);
 
 /* ======================================================================= */
 
