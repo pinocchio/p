@@ -142,7 +142,7 @@ OPCODE_BODY
 
 OPCODE(allocate_locals)
     size = UNS_INT_OPERAND(1);
-    local = alloca( size * sizeof(Object*) );
+    local = alloca( size * sizeof(Object) );
     JUMP(2);
 END_OPCODE
 
