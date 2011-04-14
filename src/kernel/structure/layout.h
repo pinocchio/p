@@ -6,8 +6,7 @@
 /* ======================================================================= */
 
 struct Layout {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     Slot                slot[];
 };
 

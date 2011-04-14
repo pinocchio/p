@@ -6,13 +6,16 @@
 /* ======================================================================= */
 
 struct BlockClosure {
-    Header              header;
+    VariableHeader      header;
     JumpTarget          return_target;
     Block               code;
-    Object              copies;
+    Object              remotes[];
 };
 
-extern BlockClosure new_BlockClosure(JumpTarget return_target, Block block);
+extern BlockClosure new_BlockClosure(Block block,
+                                     JumpTarget return_target,
+                                     uns_int copies,
+                                     Object * local);
 
 /* ======================================================================= */
 

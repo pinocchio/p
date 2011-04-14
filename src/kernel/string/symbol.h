@@ -6,8 +6,7 @@
 /* ======================================================================= */
 
 struct Symbol {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     SmallInteger        hash;
     wchar_t             character[];
 };

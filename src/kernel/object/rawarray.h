@@ -6,8 +6,7 @@
 /* ======================================================================= */
 
 struct RawArray {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     void**              data[];
 };
 extern Class RawArray_class;

@@ -11,4 +11,3 @@ JumpTarget new_JumpTarget(Object args[])
     result->header.format.raw = 1;
     return result;
 }
-

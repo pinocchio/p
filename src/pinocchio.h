@@ -66,9 +66,9 @@ struct Header {
 typedef struct Header Header;
 
 struct VariableHeader {
-    uns_int     size;
     Behavior    class;
     Format      format;
+    uns_int     size;
 };
 typedef struct VariableHeader VariableHeader;
 

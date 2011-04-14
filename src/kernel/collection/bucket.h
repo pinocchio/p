@@ -6,8 +6,7 @@
 /* ======================================================================= */
 
 struct Bucket {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     SmallInteger        tally;
     Object              value[];
 };

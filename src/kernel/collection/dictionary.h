@@ -16,8 +16,7 @@ struct Dictionary {
 extern Class Dictionary_class;
 
 struct BucketArray {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     Bucket              bucket[];
 };
 

@@ -267,7 +267,7 @@ OPCODE(capture)
         }
     }
     target      = UNS_INT_OPERAND(2);
-    value       = (Object)new_BlockClosure(return_target, block);
+    value       = (Object)new_BlockClosure(return_target, block, 0, arg);
     STORE(target, value);
     JUMP(3);
 END_OPCODE;

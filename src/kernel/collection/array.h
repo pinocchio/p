@@ -6,8 +6,7 @@
 /* ======================================================================= */
 
 struct Array {
-    Header              header;
-    uns_int             size;
+    VariableHeader      header;
     Object              value[];
 };
 

@@ -43,7 +43,7 @@
     result->header.class           = (Behavior)cls##_class;\
     result->header.format.variable = 1;\
     result->header.format.base     = sizeof(struct cls) / 8;\
-	result->size                   = arraysize;
+	result->header.size            = arraysize;
 
 #define NEW_ARRAYED(class, arraytype, arraysize)\
 	class INSTANTIATE_ARRAY(result, class, arraytype, arraysize)
