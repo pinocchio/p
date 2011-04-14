@@ -36,7 +36,7 @@ static void SymbolTable_grow(SymbolTable table)
         while (idx < bucket_size) {
             Symbol key = (Symbol)bucket->value[idx];
 
-            if (key->hash->value & newbit) {
+            if (key->header.format.hash & newbit) {
                 bucket_size -= 1;
                 newcount += 1;
                 bucket->value[idx]   = bucket->value[bucket_size];
@@ -71,7 +71,7 @@ static Symbol raw_Symbol(const wchar_t* input, uns_int size, long hash)
 {
     NEW_ARRAYED(Symbol, wchar_t, size);
     wcsncpy(result->character, input, size);
-    result->hash = new_SmallInteger(hash);
+    result->header.format.hash = hash;
     return result;
 }
 
@@ -153,5 +153,5 @@ Symbol new_Symbol(const wchar_t* input)
 
 uns_int Symbol_hash(Symbol symbol)
 {
-    return symbol->hash->value;
+    return symbol->header.format.hash;
 }

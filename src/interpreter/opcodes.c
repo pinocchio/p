@@ -7,10 +7,13 @@
     char method_context( Method method, JumpTarget return_target, Object arg[] ) {
 
 #define OPCODE_HEAD\
-    if( arg == NULL ) {\
+    if ( arg == NULL ) {\
 
 #define OPCODE_BODY\
     return 0;\
+    }\
+    if (method == NULL) {\
+        RETURN(-2);\
     }\
     void ** pc = (void**)method->code->data;\
     GO_NEXT();
@@ -268,10 +271,12 @@ OPCODE(capture)
             RETURN(0);
         }
     }
-    target = UNS_INT_OPERAND(2);
-    value  = (Object)new_BlockClosure(block, return_target, SELF(), 0, local);
+    offset = UNS_INT_OPERAND(2);
+    size   = UNS_INT_OPERAND(3);
+    target = UNS_INT_OPERAND(4);
+    value  = (Object)new_BlockClosure(block, return_target, SELF(), size, &local[offset]);
     STORE(target, value);
-    JUMP(3);
+    JUMP(5);
 END_OPCODE;
 
 OPCODE(lookup_native)

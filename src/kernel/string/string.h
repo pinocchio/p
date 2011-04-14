@@ -7,7 +7,6 @@
 
 struct String {
     VariableHeader      header;
-    SmallInteger        hash;
     wchar_t             character[];
 };
 

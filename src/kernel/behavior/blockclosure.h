@@ -21,6 +21,8 @@ extern BlockClosure new_BlockClosure(Block block,
 
 /* ======================================================================= */
 
+extern Class BlockClosure_class;
+
 /* ======================================================================= */
 
 #endif // KERNEL_BEHAVIOR_BLOCKCLOSURE_H

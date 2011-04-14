@@ -49,6 +49,9 @@ void pinocchio_bootstrap()
     BytesLayout_class       = new_Bootstrapping_Class();
     RawLayout_class         = new_Bootstrapping_Class();
 
+    BlockClosure_class      = new_Bootstrapping_Class();
+    Block_class             = new_Bootstrapping_Class();
+
     init_layout();
     
     method_context( NULL, NULL, NULL );

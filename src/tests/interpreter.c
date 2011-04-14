@@ -8,13 +8,17 @@ void op_print1(Thread thread)
     thread->context->pc->data++;
 }
 
-void test_interpreter_can_call_methods(void **state)
+void test_interpreter_can_return_constant(void **state)
 {
     SmallInteger integer = new_SmallInteger(500);
 
     // TODO allocate thread objects on C-stack
     Array annotations;
-    RawArray code = new_RawArray(8, OP(allocate_locals), 1, OP(load_constant), 0, integer, OP(return), 0 );
+    RawArray code =
+        new_RawArray(7,
+            OP(allocate_locals), (uns_int)1,
+            OP(load_constant), (uns_int)0, integer,
+            OP(return), (uns_int)0);
     Array body;
 
     Method method = new_Method(annotations, code, body);
@@ -29,12 +33,38 @@ void test_interpreter_can_call_methods(void **state)
     assert_true( args[0] == integer );
 }
 
+void test_interpreter_can_call_methods(void **state)
+{
+    SmallInteger integer = new_SmallInteger(500);
+
+    // TODO allocate thread objects on C-stack
+    Array annotations;
+    RawArray code =
+        new_RawArray(7,
+            OP(allocate_locals), (uns_int)1,
+            OP(load_constant), (uns_int)0, integer,
+            OP(return), (uns_int)0);
+    Array body;
+
+    Method method = new_Method(annotations, code, body);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
+
+    code = new_RawArray(1, OP(return_self));
+
+    Object args[] = { (Object)new_SmallInteger(0) };
+    method_context( method, NULL, args );
+
+
+    assert_true( args[0] == integer );
+}
 
 void test_interpreter_can_call_native( void **state )
 {
     Array annotations;
 
-    RawArray code = new_RawArray(5, OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"), OP(exit));
+    RawArray code =
+        new_RawArray(2,
+            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
     Array body;
 
     Method method = new_Method(annotations, code, body);
@@ -45,6 +75,36 @@ void test_interpreter_can_call_native( void **state )
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
     method_context( method, NULL, args );
+
+    assert_int_equal( ((SmallInteger)args[0])->value, 3 );
+}
+
+void test_interpreter_can_call_closure( void **state )
+{
+    Array annotations;
+    RawArray code =
+        new_RawArray(7,
+            OP(allocate_locals), (uns_int)1,
+            OP(load_constant), (uns_int)0, new_SmallInteger(500),
+            OP(return), (uns_int)0);
+    Block block = new_Block(code, NULL);
+
+    code =
+        new_RawArray(12,
+            OP(allocate_locals), (uns_int)1,
+            OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
+            OP(send), (uns_int)0, new_Symbol(L"value"),
+            OP(return), (uns_int)0);
+    Array body;
+
+    Method method = new_Method(annotations, code, body);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
+
+
+    SmallInteger integer = new_SmallInteger(1);
+
+    Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
+    printf("return code3: %i\n", method_context( method, NULL, args ));
 
     assert_int_equal( ((SmallInteger)args[0])->value, 3 );
 }
