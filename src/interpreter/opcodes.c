@@ -268,11 +268,9 @@ END_OPCODE;
 */
 
 OPCODE(lookup_native)
-        printf("search native: \n");
     name = (NativeName)OBJECT_OPERAND(1);
     function = lookup_native(name);
     if (function) {
-        printf("Found native: %p\n", function);
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = (void**)function;
         if (!CALL_NATIVE(function)) {
