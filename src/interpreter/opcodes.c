@@ -10,7 +10,7 @@
     if( arg == NULL ) {\
 
 #define OPCODE_BODY\
-	return 0;\
+    return 0;\
     }\
     void ** pc = (void**)method->code->data;\
     Object * local;\
@@ -72,7 +72,7 @@
     next_method = lookup(local[arg_offset], selector);\
     return_code = method_context( next_method->method, &local[arg_offset]);\
     if ( return_code != 0 ) {\
-	return return_code;\
+    return return_code;\
     }
 
 /* ======================================================================= */
@@ -104,19 +104,18 @@ DECLARE_OPCODE(try_native)
 
 OPCODE_DECLS
 
-uns_int target;
-uns_int origin;
-uns_int idx;
-uns_int offset;
-uns_int size;
-long    address;
-Symbol  selector;
-Object  value;
-NativeName name;
-Raw function;
-native native_function;
-MethodClosure next_method;
-char return_code;
+uns_int         target;
+uns_int         origin;
+uns_int         idx;
+uns_int         offset;
+uns_int         size;
+long            address;
+Symbol          selector;
+Object          value;
+NativeName      name;
+native          function;
+MethodClosure   next_method;
+char            return_code;
 
 OPCODE_HEAD
 
@@ -271,14 +270,14 @@ END_OPCODE;
 OPCODE(lookup_native)
         printf("search native: \n");
     name = (NativeName)OBJECT_OPERAND(1);
-    native_function = lookup_native(name);
-    if (native_function) {
-        printf("Found native: %p\n",native_function);
+    function = lookup_native(name);
+    if (function) {
+        printf("Found native: %p\n", function);
         *GET_PC()     = OP(try_native);
-        *(GET_PC()+1) = new_Raw((void**)native_function);
-        if (!CALL_NATIVE(native_function)) {
-	    RETURN();
-	}
+        *(GET_PC()+1) = (void**)function;
+        if (!CALL_NATIVE(function)) {
+        RETURN();
+    }
         JUMP(2);
     } else {
         *GET_PC()     = OP(jump);
@@ -288,9 +287,9 @@ OPCODE(lookup_native)
 END_OPCODE
 
 OPCODE(try_native)
-    function = (Raw)OBJECT_OPERAND(1);
-    if (!CALL_NATIVE(function->data)) {
-	RETURN();
+    function = (native)OBJECT_OPERAND(1);
+    if (!CALL_NATIVE(function)) {
+        RETURN();
     }
     JUMP(2);
 END_OPCODE
