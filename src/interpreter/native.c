@@ -21,11 +21,12 @@ native lookup_native(NativeName name)
 
 void install_native(NativeName name, native aNative)
 {
-    NativesDictionary_store(NATIVES,name,aNative);
+    NativesDictionary_store(NATIVES, name, aNative);
 }
 
 void init_natives() 
 {
     NATIVES = new_NativesDictionary();
     install_natives_SmallInteger();    
+    install_natives_BlockClosure();
 }

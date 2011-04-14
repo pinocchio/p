@@ -18,6 +18,8 @@ extern MethodClosure new_MethodClosure(Behavior class,
 
 /* ======================================================================= */
 
+extern Class MethodClosure_class;
+
 /* ======================================================================= */
 
 #endif // KERNEL_BEHAVIOR_METHODCLOSURE_H

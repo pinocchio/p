@@ -26,3 +26,10 @@ NATIVE(BlockClosure, apply)
     method_context( closure->code, closure->return_target, &ARGUMENT(0) );
     NATIVE_RETURN(ARGUMENT(0));
 END_NATIVE
+
+/* ======================================================================= */
+
+void install_natives_BlockClosure()
+{
+    INSTALL_NATIVE(BlockClosure, apply);
+}

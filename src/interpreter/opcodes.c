@@ -12,9 +12,6 @@
 #define OPCODE_BODY\
     return 0;\
     }\
-    if (method == NULL) {\
-        RETURN(-2);\
-    }\
     void ** pc = (void**)method->code->data;\
     GO_NEXT();
 
@@ -72,6 +69,9 @@
 
 #define CALL_METHOD(selector, arg_offset)\
     next_method = lookup(local[arg_offset], selector);\
+    if (next_method == NULL) {\
+        RETURN(-2);\
+    }\
     return_code = method_context( next_method->method, NULL, &local[arg_offset]);\
     if ( return_code != 0 ) {\
     return return_code;\

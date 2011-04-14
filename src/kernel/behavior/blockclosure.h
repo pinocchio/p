@@ -25,4 +25,8 @@ extern Class BlockClosure_class;
 
 /* ======================================================================= */
 
+extern void install_natives_BlockClosure();
+
+/* ======================================================================= */
+
 #endif // KERNEL_BEHAVIOR_BLOCKCLOSURE_H

@@ -26,10 +26,9 @@ native NativesDictionary_lookup(NativesDictionary dictionary, NativeName name)
 void NativesDictionary_store(NativesDictionary dictionary, NativeName name, native aNative)
 {
 	IdentityDictionary module = (IdentityDictionary)IdentityDictionary_lookup((IdentityDictionary)dictionary, name->module );
-        if( module == NULL )
-        {
-                module = new_IdentityDictionary();
-        	IdentityDictionary_store((IdentityDictionary)dictionary, name->module, (Object)module );
-        }
+    if( module == NULL ) {
+        module = new_IdentityDictionary();
+    	IdentityDictionary_store((IdentityDictionary)dictionary, name->module, (Object)module );
+    }
 	IdentityDictionary_store(module, name->name, (Object)aNative );
 }
