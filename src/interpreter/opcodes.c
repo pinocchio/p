@@ -109,7 +109,6 @@ OPCODE_DECLS
 
 uns_int         target;
 uns_int         origin;
-uns_int         idx;
 uns_int         offset;
 uns_int         size;
 long            address;
@@ -185,9 +184,9 @@ END_OPCODE
 
 OPCODE(slot_write)
     origin = UNS_INT_OPERAND(1);
-    idx    = UNS_INT_OPERAND(2);
+    offset = UNS_INT_OPERAND(2);
     value  = LOAD(origin);
-    WRITE_FIELD(idx, value);
+    WRITE_FIELD(offset, value);
     JUMP(3);
 END_OPCODE
 
