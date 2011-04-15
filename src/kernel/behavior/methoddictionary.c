@@ -19,7 +19,7 @@ MethodDictionary new_MethodDictionary()
 
 MethodClosure MethodDictionary_lookup(MethodDictionary dictionary, Symbol message)
 {
-    return (MethodClosure)IdentityDictionary_lookup((IdentityDictionary)dictionary, message);
+    return IdentityDictionary_lookup((IdentityDictionary)dictionary, message);
 }
 
 void MethodDictionary_store(MethodDictionary dictionary, Symbol message, MethodClosure method)

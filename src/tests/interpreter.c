@@ -202,9 +202,9 @@ void test_interpreter_can_fib( void **state )
     Method method;
 
     code = new_RawArray(2,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
+            OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
     method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), method);
 
     code = new_RawArray(2,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"minus"));
@@ -212,9 +212,9 @@ void test_interpreter_can_fib( void **state )
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), method);
 
     code = new_RawArray(2,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
+            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
     method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), method);
 
     code = new_RawArray(43,
             OP(allocate_locals), (uns_int)3,
@@ -241,7 +241,7 @@ void test_interpreter_can_fib( void **state )
     method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), method);
 
-    SmallInteger integer = new_SmallInteger(5);
+    SmallInteger integer = new_SmallInteger(34);
 
     Object args[] = { (Object)integer };
     method_context( method, NULL, args );

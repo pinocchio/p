@@ -24,8 +24,7 @@ static uns_int bucket_index(IdentityDictionary dictionary, Symbol symbol)
     if (buckets->header.size == 1) {
         return 0;
     } else {
-        uns_int hash = Symbol_hash(symbol);
-        return hash % buckets->header.size;
+        return symbol->header.format.hash % buckets->header.size;
     }
 }
 
@@ -36,9 +35,10 @@ Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol)
 
     uns_int i;
     uns_int limit = bucket->tally->value;
+    Object * value = bucket->value;
     for (i = 0; i < limit; i = i+2) {
-        if ((Symbol)bucket->value[i] == symbol) {
-            return bucket->value[i+1];
+        if ((Symbol)value[i] == symbol) {
+            return value[i+1];
         }
     }
     return NULL;
