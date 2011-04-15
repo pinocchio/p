@@ -36,6 +36,7 @@
 
 #define OBJECT(index) ((Object)index)
 
+//#define DEBUG
 #ifndef DEBUG
 #define OPCODE(name)\
     label_##name:
@@ -81,7 +82,6 @@
 /* ======================================================================= */
 
 DECLARE_OPCODE(nop)
-DECLARE_OPCODE(allocate_locals)
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(capture)
 DECLARE_OPCODE(exit)
@@ -120,7 +120,6 @@ Behavior        cache_type;
 OPCODE_HEAD
 
 INSTALL_OPCODE(nop)
-INSTALL_OPCODE(allocate_locals)
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(capture)
 INSTALL_OPCODE(exit)
@@ -143,13 +142,6 @@ OPCODE_BODY
 OPCODE(nop)
     JUMP(1);
 END_OPCODE
-
-OPCODE(allocate_locals)
-    size = UNS_INT_OPERAND(1);
-    local = alloca( size * sizeof(Object) );
-    JUMP(2);
-END_OPCODE
-
 
 OPCODE(self)
     target = UNS_INT_OPERAND(1);

@@ -33,7 +33,7 @@ void test_interpreter_can_return_constant(void **state)
 {
 
     SmallInteger integer = new_SmallInteger(500);
-    RawArray code = new_RawArray(7, OP(allocate_locals), (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
+    RawArray code = new_RawArray(7, &method_context, (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
 
     SmallInteger returned = (SmallInteger) test_code( (Object)new_SmallInteger(0), code );
 
@@ -45,7 +45,7 @@ void test_interpreter_can_call_methods(void **state)
     SmallInteger integer = new_SmallInteger(500);
     RawArray code =
         new_RawArray(7,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(load_constant), (uns_int)0, integer,
             OP(return), (uns_int)0);
 
@@ -73,7 +73,7 @@ void test_interpreter_can_call_closure( void **state )
 {
     RawArray code =
         new_RawArray(7,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(load_constant), (uns_int)0, new_SmallInteger(500),
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
@@ -85,7 +85,7 @@ void test_interpreter_can_call_closure( void **state )
 
     code =
         new_RawArray(12,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
             OP(return), (uns_int)0);
@@ -105,7 +105,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
     Array annotations;
     RawArray code =
         new_RawArray(7,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(load_constant), (uns_int)0, new_SmallInteger(500),
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
@@ -120,7 +120,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
 
     code =
         new_RawArray(15,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
             OP(load_constant), (uns_int)0, new_SmallInteger(700),
@@ -143,24 +143,25 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
     Array annotations;
     RawArray code =
         new_RawArray(7,
-            OP(allocate_locals), (uns_int)1,
+            &method_context, (uns_int)1,
             OP(load_constant), (uns_int)0, new_SmallInteger(500),
             OP(block_return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
     Array body;
     code =
-        new_RawArray(2,
+        new_RawArray(4,
+            &method_context, (uns_int)0,
             OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
     Method method = new_Method(annotations, code, body);
 
     new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), method);
 
     code =
-        new_RawArray(15,
-            OP(allocate_locals), (uns_int)1,
+        new_RawArray(17,
+            &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"),OP(nop),
+            OP(send), (uns_int)0, new_Symbol(L"value"), (uns_int)0, (uns_int)0,
             OP(load_constant), (uns_int)0, new_SmallInteger(700),
             OP(return), (uns_int)0);
 
@@ -171,7 +172,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
     SmallInteger integer = new_SmallInteger(489);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( method, NULL, args );
+    method_context( &method->code->data[1], NULL, args );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 500 );
 }
