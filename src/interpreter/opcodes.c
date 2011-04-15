@@ -47,6 +47,9 @@
 
 #define END_OPCODE GO_NEXT();
 
+#define OPERAND(idx)\
+    FETCH(void**, GET_PC() + idx)
+
 #define UNS_INT_OPERAND(idx)\
     FETCH(uns_int, GET_PC() + idx)
 
@@ -71,8 +74,6 @@
 #define READ_FIELD(index) SELF()->field[index]
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
 #define CALL_NATIVE(function) ((native)function)(pc, return_target, arg)
-
-#define CALL_METHOD(selector, arg_offset)\
 
 /* ======================================================================= */
 
@@ -115,6 +116,7 @@ char            return_code;
 Object *        local;
 Block           block;
 void **         method_code;
+Behavior        cache_type;
 
 OPCODE_HEAD
 
@@ -189,18 +191,29 @@ OPCODE(field_write)
 END_OPCODE
 
 OPCODE(send)
-    offset   = UNS_INT_OPERAND(1);
-    selector = (Symbol)OBJECT_OPERAND(2);
-    JUMP(5);
-    next_method = lookup(local[offset], selector);
-    if (next_method == NULL) {
-        RETURN(-2);
+    offset     = UNS_INT_OPERAND(1);
+    selector   = (Symbol)OBJECT_OPERAND(2);
+    cache_type = (Behavior)OBJECT_OPERAND(3);
+
+    if (cache_type == local[offset]->header.class) {
+        method_code = OPERAND(4);
+    } else {
+        next_method = lookup(local[offset], selector);
+        if (next_method == NULL) {
+            RETURN(-2);
+        }
+        method_code = next_method->method->code->data;
+        *(GET_PC() + 3) = local[offset]->header.class;
+        *(GET_PC() + 4) = method_code;
     }
-    method_code = next_method->method->code->data;
+
     return_code = ((native)method_code[0])(method_code + 1, NULL, &local[offset]);
+
     if ( return_code != 0 ) {
 	    return return_code;
     }
+
+    JUMP(5);
 END_OPCODE
 
 OPCODE(return_constant)
