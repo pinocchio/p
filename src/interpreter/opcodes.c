@@ -73,7 +73,6 @@
 
 #define READ_FIELD(index) SELF()->field[index]
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
-#define CALL_NATIVE(function) ((native)function)(pc, return_target, arg)
 
 /* ======================================================================= */
 
@@ -305,8 +304,7 @@ OPCODE(lookup_native)
     OPERAND(1) = (void**)2;
     if (function) {
         OPERAND(-2) = function;
-        CALL_NATIVE(function);
-        RETURN(0);
+        return function(pc-1, return_target, arg);
     } else {
         JUMP(2);
     }

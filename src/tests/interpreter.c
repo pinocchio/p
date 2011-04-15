@@ -1,13 +1,5 @@
 #include <tests/pinocchio_test.h>
 
-int print_called = 0;
-
-void op_print1(Thread thread)
-{
-    print_called = 1;
-    thread->context->pc->data++;
-}
-
 static Object test_machine_return( Object self_and_arguments[], Symbol message, char expected_return_code ) 
 {
     Object self = self_and_arguments[0];
