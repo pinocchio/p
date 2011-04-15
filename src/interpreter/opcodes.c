@@ -13,8 +13,7 @@
     return 0;\
     }\
     local = (Object*)alloca(((uns_int)*(pc)) * sizeof(Object));\
-    JUMP(1);\
-    GO_NEXT();
+    JUMP(1);
 
 #define OPCODE_END\
     }
@@ -67,7 +66,8 @@
     local[idx] = object
 
 #define JUMP(offset)\
-    SET_PC(GET_PC() + offset);
+    SET_PC(GET_PC() + offset);\
+    GO_NEXT();
 
 #define RETURN(code) return code;
 #define SET_RETURN(value) arg[0] = (value)
@@ -242,12 +242,10 @@ OPCODE(iftrue_iffalse)
     if (value == false) {
         address = INT_OPERAND(2);
         JUMP(address);
-        GO_NEXT();
     }
     if (value != true) {
         address = INT_OPERAND(3);
         JUMP(address);
-        GO_NEXT();
     }
     JUMP(4);
 END_OPCODE
@@ -258,12 +256,10 @@ OPCODE(iffalse_iftrue)
     if (value  == true) {
         address = INT_OPERAND(2);
         JUMP(address);
-        GO_NEXT();
     }
     if (value  != false) {
         address = INT_OPERAND(3);
         JUMP(address);
-        GO_NEXT();
     }
     JUMP(4);
 END_OPCODE
