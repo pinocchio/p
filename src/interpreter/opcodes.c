@@ -100,8 +100,8 @@ DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
-DECLARE_OPCODE(slot_read)
-DECLARE_OPCODE(slot_write)
+DECLARE_OPCODE(field_read)
+DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(try_native)
 
 OPCODE_DECLS
@@ -139,8 +139,8 @@ INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
-INSTALL_OPCODE(slot_read)
-INSTALL_OPCODE(slot_write)
+INSTALL_OPCODE(field_read)
+INSTALL_OPCODE(field_write)
 INSTALL_OPCODE(try_native)
 
 OPCODE_BODY
@@ -174,7 +174,7 @@ OPCODE(load_constant)
     JUMP(3);
 END_OPCODE
 
-OPCODE(slot_read)
+OPCODE(field_read)
     target        = UNS_INT_OPERAND(1);
     uns_int field = UNS_INT_OPERAND(2);
     value         = READ_FIELD(field);
@@ -182,7 +182,7 @@ OPCODE(slot_read)
     JUMP(3);
 END_OPCODE
 
-OPCODE(slot_write)
+OPCODE(field_write)
     origin = UNS_INT_OPERAND(1);
     offset = UNS_INT_OPERAND(2);
     value  = LOAD(origin);
