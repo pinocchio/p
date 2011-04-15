@@ -59,7 +59,7 @@ plugin:
 	@cd plugin; make;
 
 tests:
-	CFLAGS+="-O3 -D UNIT_TESTING" $(MAKE); ./$(TARGET)
+	CFLAGS+="-D UNIT_TESTING" $(MAKE) && ./$(TARGET)
 
 clean:
 	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) $(TARGET) make.depend
