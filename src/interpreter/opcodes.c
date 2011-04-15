@@ -65,7 +65,7 @@
 
 #define READ_FIELD(index) SELF()->field[index]
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
-#define CALL_NATIVE(function) ((native)function)(arg)
+#define CALL_NATIVE(function) ((native)function)(method, return_target, arg)
 
 #define CALL_METHOD(selector, arg_offset)\
     next_method = lookup(local[arg_offset], selector);\
