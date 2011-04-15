@@ -146,14 +146,14 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
         Object * value      = bucket->value;
 
         while (idx < bucket_size) {
-            Object key = bucket->value[idx];
+            Object key = value[idx];
             
             if (HASH(key) & newbit) {
                 bucket_size         -= 2;
                 newcount            += 2;
-                Object v             = bucket->value[idx+1];
-                value[idx]           = bucket->value[bucket_size];
-                value[idx+1]         = bucket->value[bucket_size+1];
+                Object v             = value[idx+1];
+                value[idx]           = value[bucket_size];
+                value[idx+1]         = value[bucket_size+1];
                 value[bucket_size]   = key;
                 value[bucket_size+1] = v;
             } else {
