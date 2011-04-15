@@ -198,7 +198,7 @@ OPCODE(send)
         OPERAND(4)  = method_code;
     }
 
-    return_code = ((native)method_code[0])(method_code + 1, NULL, &local[offset]);
+    return_code = ((native)*method_code)(method_code+1, NULL, &local[offset]);
 
     if ( return_code != 0 ) {
 	    return return_code;
