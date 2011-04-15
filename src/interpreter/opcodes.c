@@ -193,7 +193,7 @@ OPCODE(send)
         if (next_method == NULL) {
             RETURN(-2);
         }
-        method_code = next_method->method->code->data;
+        method_code = next_method->code->data;
         OPERAND(3)  = local[offset]->header.class;
         OPERAND(4)  = method_code;
     }

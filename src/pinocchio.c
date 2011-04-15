@@ -30,26 +30,21 @@ int main(int argc, const char ** argv)
     //Array args = get_args(argc, argv);
 
     RawArray code;
-    Block block;
-    Method method;
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
-    method = new_Method(NULL, code, NULL);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), code);
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"minus"));
-    method = new_Method(NULL, code, NULL);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), code);
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
-    method = new_Method(NULL, code, NULL);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
     code = new_RawArray(57,
             &method_context, (uns_int)3,
@@ -73,13 +68,12 @@ int main(int argc, const char ** argv)
 
             OP(return), (uns_int)0);
 
-    method = new_Method(NULL, code, NULL);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), code);
 
     SmallInteger integer = new_SmallInteger(34);
 
     Object args[] = { (Object)integer };
-    method_context( &method->code->data[1], NULL, args );
+    method_context( &code->data[1], NULL, args );
 
     return EXIT_SUCCESS;
 }

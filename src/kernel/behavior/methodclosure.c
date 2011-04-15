@@ -4,11 +4,11 @@
 Class MethodClosure_class;
 /* ======================================================================= */
 
-MethodClosure new_MethodClosure(Behavior cls, Symbol selector, Method method)
+MethodClosure new_MethodClosure(Behavior cls, Symbol selector, RawArray code)
 {
     NEW_OBJECT(MethodClosure);
+    result->code     = code;
     result->class    = cls;
-    result->method   = method;
     result->selector = selector;
     MethodDictionary_store(cls->methods, selector, result);
     return result;

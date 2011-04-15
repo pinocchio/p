@@ -7,14 +7,14 @@
 
 struct MethodClosure {
     Header              header;
+    RawArray            code;
     Behavior            class;
-    Method              method;
     Symbol              selector;
 };
 
 extern MethodClosure new_MethodClosure(Behavior class, 
                                        Symbol selector,
-                                       Method method);
+                                       RawArray code);
 
 /* ======================================================================= */
 

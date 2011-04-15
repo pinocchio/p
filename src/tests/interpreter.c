@@ -4,7 +4,7 @@ static Object test_machine_return( Object self_and_arguments[], Symbol message, 
 {
     Object self = self_and_arguments[0];
     MethodClosure method = lookup( self, message );
-    assert_int_equal( expected_return_code, method_context( method->method, NULL, self_and_arguments ) );
+    assert_int_equal( expected_return_code, method_context( &method->code->data[1], NULL, self_and_arguments ) );
 
     return self_and_arguments[0];
 }
@@ -16,10 +16,7 @@ static Object test_machine( Object self_and_args[], Symbol message )
 
 static void install_method( Behavior class, Symbol name, RawArray bytecode )
 {
-    Array annotations = NULL;
-    Array body = NULL;
-    Method method = new_Method(annotations, bytecode, body);
-    new_MethodClosure(class, name, method);
+    new_MethodClosure(class, name, bytecode);
 }
 
 static Object test_code( Object self, RawArray bytecode )
@@ -102,7 +99,6 @@ void test_interpreter_can_call_closure( void **state )
 
 void test_interpreter_can_call_closure_ignore_return( void **state )
 {
-    Array annotations;
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
@@ -114,9 +110,8 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
     code =
         new_RawArray(2,
             OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
-    Method method = new_Method(annotations, code, body);
 
-    new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), method);
+    new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), code);
 
     code =
         new_RawArray(15,
@@ -126,21 +121,19 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
             OP(load_constant), new_SmallInteger(700), (uns_int)0,
             OP(return), (uns_int)0);
 
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), code);
 
 
     SmallInteger integer = new_SmallInteger(489);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( method, NULL, args );
+    method_context( &code->data[1], NULL, args );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 700 );
 }
 
 void test_interpreter_can_nonlocal_return_from_closure( void **state )
 {
-    Array annotations;
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
@@ -148,14 +141,12 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
             OP(block_return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
-    Array body;
     code =
         new_RawArray(4,
             &method_context, (uns_int)0,
             OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
-    Method method = new_Method(annotations, code, body);
 
-    new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), method);
+    new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), code);
 
     code =
         new_RawArray(17,
@@ -165,14 +156,12 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
             OP(load_constant), new_SmallInteger(700), (uns_int)0, 
             OP(return), (uns_int)0);
 
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
-
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), code);
 
     SmallInteger integer = new_SmallInteger(489);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( &method->code->data[1], NULL, args );
+    method_context( &code->data[1], NULL, args );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 500 );
 }
@@ -180,29 +169,23 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
 void test_interpreter_can_fib( void **state )
 {
 
-    Array annotations;
-    Array body;
     RawArray code;
     Block block;
-    Method method;
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), code);
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"minus"));
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), code);
 
     code = new_RawArray(4,
             &method_context, 0,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
     code = new_RawArray(57,
             &method_context, (uns_int)3,
@@ -226,13 +209,12 @@ void test_interpreter_can_fib( void **state )
 
             OP(return), (uns_int)0);
 
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), method);
+    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), code);
 
     SmallInteger integer = new_SmallInteger(5);
 
     Object args[] = { (Object)integer };
-    method_context( &method->code->data[1], NULL, args );
+    method_context( &code->data[1], NULL, args );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 8 );
 }

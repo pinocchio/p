@@ -27,7 +27,6 @@ typedef struct String*              String;
 typedef struct Dictionary*          SymbolTable;
 typedef struct Bucket*              Bucket;
 typedef struct BucketArray*         BucketArray;
-typedef struct Method*              Method;
 typedef struct MethodClosure*       MethodClosure;
 typedef struct Block*               Block;
 typedef struct BlockClosure*        BlockClosure;
@@ -98,7 +97,6 @@ typedef struct VariableHeader VariableHeader;
 #include <kernel/collection/array.h>
 #include <kernel/behavior/methoddictionary.h>
 #include <kernel/behavior/nativesdictionary.h>
-#include <kernel/behavior/method.h>
 #include <kernel/behavior/methodclosure.h>
 #include <kernel/behavior/block.h>
 #include <kernel/behavior/blockclosure.h>
