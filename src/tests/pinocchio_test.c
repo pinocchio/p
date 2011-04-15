@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
             unit_test(test_interpreter_can_call_closure),
             unit_test(test_interpreter_can_call_closure_ignore_return),
             unit_test(test_interpreter_can_nonlocal_return_from_closure),
+            unit_test(test_interpreter_can_fib),
     };
     return run_tests(tests);
 }
