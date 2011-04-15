@@ -10,7 +10,7 @@
     if ( arg == NULL ) {\
 
 #define OPCODE_BODY\
-    return 0;\
+        return 0;\
     }\
     local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
@@ -34,7 +34,7 @@
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
 
-#define SET_RETURN(value)           arg[0] = (value)
+#define SET_RETURN(value)           SELF() = (value)
 #define RETURN(code)                return code;
 #define END_OPCODE                  GO_NEXT();
 
@@ -133,8 +133,8 @@ OPCODE(self)
 END_OPCODE
 
 OPCODE(move)
-    origin = UNS_INT_OPERAND(2);
     target = UNS_INT_OPERAND(1);
+    origin = UNS_INT_OPERAND(2);
     value  = LOAD(origin);
     STORE(target, value);
     JUMP(3);
@@ -164,20 +164,19 @@ OPCODE(field_write)
 END_OPCODE
 
 OPCODE(send)
-    offset     = UNS_INT_OPERAND(1);
-    selector   = (Symbol)OPERAND(2);
-    cache_type = (Behavior)OPERAND(3);
+    offset      = UNS_INT_OPERAND(1);
+    cache_type  = (Behavior)OPERAND(2);
+    method_code = OPERAND(3);
 
-    if (cache_type == local[offset]->header.class) {
-        method_code = OPERAND(4);
-    } else {
+    if (cache_type != local[offset]->header.class) {
+        selector    = (Symbol)OPERAND(4);
         next_method = lookup(local[offset], selector);
         if (next_method == NULL) {
             RETURN(-2);
         }
         method_code = next_method->code->data;
-        OPERAND(3)  = local[offset]->header.class;
-        OPERAND(4)  = method_code;
+        OPERAND(2)  = local[offset]->header.class;
+        OPERAND(3)  = method_code;
     }
 
     return_code = ((native)*method_code)(method_code, NULL, &local[offset]);
@@ -210,12 +209,10 @@ OPCODE(block_return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
     if (return_target == NULL) {
-        SET_RETURN(value);
-        RETURN(0);
-    } else {
-        *return_target->return_pointer = value;
-        longjmp(return_target->target, 1);
+        RETURN(-1);
     }
+    *return_target->return_pointer = value;
+    longjmp(return_target->target, 1);
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
@@ -224,8 +221,7 @@ OPCODE(iftrue_iffalse)
     if (value == false) {
         address = INT_OPERAND(2);
         JUMP(address);
-    }
-    if (value != true) {
+    } else if (value != true) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
@@ -238,8 +234,7 @@ OPCODE(iffalse_iftrue)
     if (value  == true) {
         address = INT_OPERAND(2);
         JUMP(address);
-    }
-    if (value  != false) {
+    } else if (value  != false) {
         address = INT_OPERAND(3);
         JUMP(address);
     }
@@ -275,9 +270,8 @@ OPCODE(lookup_native)
     if (function) {
         OPERAND(-2) = function;
         return function(pc-1, return_target, arg);
-    } else {
-        JUMP(2);
     }
+    JUMP(2);
 END_OPCODE
 
 OPCODE(exit)
