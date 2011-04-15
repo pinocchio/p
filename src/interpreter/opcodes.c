@@ -23,17 +23,26 @@
 
 /* ======================================================================= */
 
-#define GO_NEXT() goto **GET_PC()
+#define GO_NEXT()                   goto **GET_PC()
+#define SET_PC(value)               pc = value
+#define GET_PC()                    pc
 
-#define SET_PC(value) pc = value
-#define GET_PC() pc
+#define FETCH(index)                *(index)
 
-#define SELF() arg[0]
+#define SELF()                      arg[0]
+#define OPERAND(idx)                FETCH(GET_PC() + idx)
+#define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
+#define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
+#define OBJECT_OPERAND(idx)         (Object)(FETCH(GET_PC() + idx))
 
-#define FETCH(index)\
-    *(index)
+#define SET_RETURN(value)           arg[0] = (value)
+#define RETURN(code)                return code;
+#define END_OPCODE                  GO_NEXT();
 
-#define OBJECT(index) ((Object)index)
+#define LOAD(idx)                   local[idx]
+#define STORE(idx, object)          local[idx] = object
+#define READ_FIELD(index)           SELF()->field[index]
+#define WRITE_FIELD(index, value)   SELF()->field[index] = value
 
 //#define DEBUG
 #ifndef DEBUG
@@ -45,35 +54,9 @@
         printf(" ## op_"#name"\n");
 #endif
 
-#define END_OPCODE GO_NEXT();
-
-#define OPERAND(idx)\
-    FETCH(GET_PC() + idx)
-
-#define UNS_INT_OPERAND(idx)\
-    (uns_int)(FETCH(GET_PC() + idx))
-
-#define INT_OPERAND(idx)\
-    (long)(FETCH(GET_PC() + idx))
-
-#define OBJECT_OPERAND(idx)\
-    OBJECT(FETCH(GET_PC() + idx))
-
-#define LOAD(idx)\
-    local[idx]
-
-#define STORE(idx, object)\
-    local[idx] = object
-
 #define JUMP(offset)\
     SET_PC(GET_PC() + offset);\
     GO_NEXT();
-
-#define RETURN(code) return code;
-#define SET_RETURN(value) arg[0] = (value)
-
-#define READ_FIELD(index) SELF()->field[index]
-#define WRITE_FIELD(index, value) SELF()->field[index] = value
 
 /* ======================================================================= */
 
