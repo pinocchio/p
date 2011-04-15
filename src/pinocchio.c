@@ -54,18 +54,18 @@ int main(int argc, const char ** argv)
     code = new_RawArray(57,
             &method_context, (uns_int)3,
             OP(self), (uns_int)0,
-            OP(load_constant), (uns_int)1, new_SmallInteger(2),
+            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
             OP(send), (uns_int)0, new_Symbol(L"<"), (uns_int)0, (uns_int)0,
             OP(iftrue_iffalse), (uns_int)0, (uns_int)6, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
             OP(self), (uns_int)0,
-            OP(load_constant), (uns_int)1, new_SmallInteger(2),
+            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
             OP(send), (uns_int)0, new_Symbol(L"-"), (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"fib"), (uns_int)0, (uns_int)0,
             
             OP(self), (uns_int)1,
-            OP(load_constant), (uns_int)2, new_SmallInteger(1),
+            OP(load_constant), new_SmallInteger(1), (uns_int)2,
             OP(send), (uns_int)1, new_Symbol(L"-"), (uns_int)0, (uns_int)0,
             OP(send), (uns_int)1, new_Symbol(L"fib"), (uns_int)0, (uns_int)0,
 
