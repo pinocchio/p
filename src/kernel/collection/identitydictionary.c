@@ -60,32 +60,33 @@ static void initital_grow(IdentityDictionary dictionary)
     /* Create all those new buckets with the same size as the old one */
     dictionary->buckets = new_BucketArray_sized(new_bucketsarray_size);
     uns_int newcount[new_bucketsarray_size];
-    for( int i = 0; i < new_bucketsarray_size; i += 1 )
+    for ( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i] = new_Bucket_sized( old_bucket_size );
         newcount[i] = 0;
     }
 
     /* distribute the old elements over the new buckets */
-    for( int idx = 0; idx < old_bucket_size; idx += 2 )
+    for ( int idx = 0; idx < old_bucket_size; idx += 2 )
     {    
-        Symbol selector = (Symbol)old_bucket->value[idx];
+        Object key = old_bucket->value[idx];
         uns_int new_bucket_idx = 0;
 
         //add each matching bit to the index
-        for( int new_bit = 1; new_bit < new_bucketsarray_size; new_bit <<= 1 ) {
-            if (Symbol_hash(selector) & new_bit)
-		new_bucket_idx += new_bit;
+        for ( int new_bit = 1; new_bit < new_bucketsarray_size; new_bit <<= 1 ) {
+            if (HASH(key) & new_bit) {
+                new_bucket_idx += new_bit;
+            }
         }
         Object value = old_bucket->value[idx+1];
         Bucket bucket = dictionary->buckets->bucket[new_bucket_idx];
-        bucket->value[newcount[new_bucket_idx]] = (Object)selector;
+        bucket->value[newcount[new_bucket_idx]]   = key;
         bucket->value[newcount[new_bucket_idx]+1] = value;
         newcount[new_bucket_idx] += 2;
     }
     
     /* update the tallys */
-    for( int i = 0; i < new_bucketsarray_size; i += 1 )
+    for ( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i]->tally = new_SmallInteger(newcount[i]);
     }
@@ -144,15 +145,15 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
         uns_int bucket_size = bucket->tally->value;
 
         while (idx < bucket_size) {
-            Symbol selector = (Symbol)bucket->value[idx];
+            Object key = bucket->value[idx];
             
-            if (Symbol_hash(selector) & newbit) {
+            if (HASH(key) & newbit) {
                 bucket_size -= 2;
                 newcount += 2;
                 Object value = bucket->value[idx+1];
                 bucket->value[idx]   = bucket->value[bucket_size];
                 bucket->value[idx+1] = bucket->value[bucket_size+1];
-                bucket->value[bucket_size]   = (Object)selector;
+                bucket->value[bucket_size]   = key;
                 bucket->value[bucket_size+1] = value;
             } else {
                 idx += 2;
