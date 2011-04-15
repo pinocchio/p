@@ -17,15 +17,9 @@ static Object test_machine_return( Object self_and_arguments[], Symbol message, 
     return self_and_arguments[0];
 }
 
-static Object test_machine_args( Object self_and_arguments[], Symbol message ) 
+static Object test_machine( Object self_and_args[], Symbol message )
 {
-    return test_machine_return( self_and_arguments, message, 0 );
-}
-
-static Object test_machine( Object self, Symbol message )
-{
-    Object self_and_args[] = { self };
-    return test_machine_args( self_and_args, message );
+    return test_machine_return( self_and_args, message, 0);
 }
 
 static void install_method( Behavior class, Symbol name, RawArray bytecode )
@@ -36,14 +30,20 @@ static void install_method( Behavior class, Symbol name, RawArray bytecode )
     new_MethodClosure(class, name, method);
 }
 
+static Object test_code( Object self, RawArray bytecode )
+{
+    install_method( get_class( self ), new_Symbol(L"test"), bytecode );
+    Object self_and_args[] = { self };
+    return test_machine( self_and_args, new_Symbol(L"test") );
+}
+
 void test_interpreter_can_return_constant(void **state)
 {
 
     SmallInteger integer = new_SmallInteger(500);
     RawArray code = new_RawArray(7, OP(allocate_locals), (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
-    install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
-    SmallInteger returned = (SmallInteger)test_machine( (Object)new_SmallInteger(0), new_Symbol(L"test") );
+    SmallInteger returned = (SmallInteger) test_code( (Object)new_SmallInteger(0), code );
 
     assert_true( returned == integer );
 }
@@ -56,10 +56,8 @@ void test_interpreter_can_call_methods(void **state)
             OP(allocate_locals), (uns_int)1,
             OP(load_constant), (uns_int)0, integer,
             OP(return), (uns_int)0);
-    install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
-
-    SmallInteger returned = (SmallInteger)test_machine( (Object)new_SmallInteger(0), new_Symbol(L"test") );
+    SmallInteger returned = (SmallInteger)test_code( (Object)new_SmallInteger(0), code );
 
     assert_true( returned == integer );
 }
@@ -74,7 +72,7 @@ void test_interpreter_can_call_native( void **state )
     install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
     Object args[] = { (Object)new_SmallInteger(1), (Object)new_SmallInteger(2) };
-    SmallInteger returned = (SmallInteger)test_machine_args( args, new_Symbol(L"test") );
+    SmallInteger returned = (SmallInteger)test_machine( args, new_Symbol(L"test") );
 
     assert_int_equal( returned->value, 3 );
 }
@@ -105,7 +103,7 @@ void test_interpreter_can_call_closure( void **state )
     SmallInteger integer = new_SmallInteger(489);
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
     
-    SmallInteger returned = (SmallInteger) test_machine_args( args, new_Symbol(L"test") );
+    SmallInteger returned = (SmallInteger) test_machine( args, new_Symbol(L"test") );
 
     assert_int_equal( returned->value, 500 );
 }
