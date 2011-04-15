@@ -17,7 +17,6 @@ int main(int argc, char* argv[]) {
     //List all Tests here:
     UnitTest tests[] = {
             unit_test(test_symbol_table_can_grow),
-            unit_test(test_symbol_hashing_works),
             unit_test(test_natives_dictionary_can_store_and_lookup),
             unit_test(test_identity_dictionary_can_store_and_lookup),
             unit_test(test_identity_dictionary_can_be_huge),
