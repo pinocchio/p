@@ -8,7 +8,7 @@ void op_print1(Thread thread)
     thread->context->pc->data++;
 }
 
-static Object test_machine( Symbol message, Object self_and_arguments[], char expected_return_code ) 
+static Object test_machine_return( Object self_and_arguments[], Symbol message, char expected_return_code ) 
 {
     Object self = self_and_arguments[0];
     MethodClosure method = lookup( self, message );
@@ -17,10 +17,21 @@ static Object test_machine( Symbol message, Object self_and_arguments[], char ex
     return self_and_arguments[0];
 }
 
+static Object test_machine_args( Object self_and_arguments[], Symbol message ) 
+{
+    return test_machine_return( self_and_arguments, message, 0 );
+}
+
+static Object test_machine( Object self, Symbol message )
+{
+    Object self_and_args[] = { self };
+    return test_machine_args( self_and_args, message );
+}
+
 static void install_method( Behavior class, Symbol name, RawArray bytecode )
 {
-    Array annotations;
-    Array body;
+    Array annotations = NULL;
+    Array body = NULL;
     Method method = new_Method(annotations, bytecode, body);
     new_MethodClosure(class, name, method);
 }
@@ -29,14 +40,10 @@ void test_interpreter_can_return_constant(void **state)
 {
 
     SmallInteger integer = new_SmallInteger(500);
-    
     RawArray code = new_RawArray(7, OP(allocate_locals), (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
+    install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
-    install_method( SmallInteger_class, new_Symbol(L"test"), code );
-
-    Object arguments[] = {new_SmallInteger(0)};
-
-    SmallInteger returned = test_machine( new_Symbol(L"test"), arguments, 0 );
+    SmallInteger returned = (SmallInteger)test_machine( (Object)new_SmallInteger(0), new_Symbol(L"test") );
 
     assert_true( returned == integer );
 }
@@ -44,52 +51,36 @@ void test_interpreter_can_return_constant(void **state)
 void test_interpreter_can_call_methods(void **state)
 {
     SmallInteger integer = new_SmallInteger(500);
-
-    // TODO allocate thread objects on C-stack
-    Array annotations;
     RawArray code =
         new_RawArray(7,
             OP(allocate_locals), (uns_int)1,
             OP(load_constant), (uns_int)0, integer,
             OP(return), (uns_int)0);
-    Array body;
-
-    Method method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
-
-    code = new_RawArray(1, OP(return_self));
-
-    Object args[] = { (Object)new_SmallInteger(0) };
-    method_context( method, NULL, args );
+    install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
 
-    assert_true( args[0] == integer );
+    SmallInteger returned = (SmallInteger)test_machine( (Object)new_SmallInteger(0), new_Symbol(L"test") );
+
+    assert_true( returned == integer );
 }
 
 void test_interpreter_can_call_native( void **state )
 {
-    Array annotations;
-
     RawArray code =
         new_RawArray(2,
             OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
-    Array body;
-
-    Method method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
 
 
-    SmallInteger integer = new_SmallInteger(1);
+    install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
-    Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( method, NULL, args );
+    Object args[] = { (Object)new_SmallInteger(1), (Object)new_SmallInteger(2) };
+    SmallInteger returned = (SmallInteger)test_machine_args( args, new_Symbol(L"test") );
 
-    assert_int_equal( ((SmallInteger)args[0])->value, 3 );
+    assert_int_equal( returned->value, 3 );
 }
 
 void test_interpreter_can_call_closure( void **state )
 {
-    Array annotations;
     RawArray code =
         new_RawArray(7,
             OP(allocate_locals), (uns_int)1,
@@ -97,13 +88,10 @@ void test_interpreter_can_call_closure( void **state )
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
-    Array body;
     code =
         new_RawArray(2,
             OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
-    Method method = new_Method(annotations, code, body);
-
-    new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), method);
+    install_method((Behavior)BlockClosure_class, new_Symbol(L"value"), code );
 
     code =
         new_RawArray(12,
@@ -112,16 +100,14 @@ void test_interpreter_can_call_closure( void **state )
             OP(send), (uns_int)0, new_Symbol(L"value"),
             OP(return), (uns_int)0);
 
-    method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
-
+    install_method((Behavior)SmallInteger_class, new_Symbol(L"test"), code);
 
     SmallInteger integer = new_SmallInteger(489);
-
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( method, NULL, args );
+    
+    SmallInteger returned = (SmallInteger) test_machine_args( args, new_Symbol(L"test") );
 
-    assert_int_equal( ((SmallInteger)args[0])->value, 500 );
+    assert_int_equal( returned->value, 500 );
 }
 
 void test_interpreter_can_call_closure_ignore_return( void **state )
