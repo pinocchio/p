@@ -15,8 +15,14 @@ struct NativeName {
 
 /* ======================================================================= */
 
+#ifndef DEBUG
 #define NATIVE(module, name)\
-    char NM_##module##_##name( Method method, JumpTarget return_target, Object arg[] ) {
+    char NM_##module##_##name( void ** pc, JumpTarget return_target, Object arg[] ) {
+#else
+#define NATIVE(module, name)\
+    char NM_##module##_##name( void ** pc, JumpTarget return_target, Object arg[] ) {\
+        printf("Calling "#module">>"#name"\n");
+#endif
 
 #define END_NATIVE\
 	return 0;\

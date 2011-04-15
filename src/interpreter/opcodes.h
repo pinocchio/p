@@ -5,7 +5,7 @@
 
 /* ======================================================================= */
 
-char method_context( Method method, JumpTarget return_target, Object arg[] );
+char method_context( void ** pc, JumpTarget return_target, Object arg[] );
 
 #define EXTERN_OPCODE(name) extern void * op_##name; 
 #define OP(name) op_##name
@@ -16,7 +16,6 @@ EXTERN_OPCODE(nop)
 EXTERN_OPCODE(inline_native)
 EXTERN_OPCODE(allocate_locals)
 EXTERN_OPCODE(block_return)
-EXTERN_OPCODE(cache_send)
 EXTERN_OPCODE(capture)
 EXTERN_OPCODE(exit)
 EXTERN_OPCODE(iffalse_iftrue)
@@ -25,7 +24,6 @@ EXTERN_OPCODE(jump)
 EXTERN_OPCODE(load_constant)
 EXTERN_OPCODE(lookup_native)
 EXTERN_OPCODE(move)
-EXTERN_OPCODE(poly_send)
 EXTERN_OPCODE(return)
 EXTERN_OPCODE(return_constant)
 EXTERN_OPCODE(return_self)
