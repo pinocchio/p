@@ -8,29 +8,37 @@ void op_print1(Thread thread)
     thread->context->pc->data++;
 }
 
+static Object test_machine( Symbol message, Object self_and_arguments[], char expected_return_code ) 
+{
+    Object self = self_and_arguments[0];
+    MethodClosure method = lookup( self, message );
+    assert_int_equal( expected_return_code, method_context( method->method, NULL, self_and_arguments ) );
+
+    return self_and_arguments[0];
+}
+
+static void install_method( Behavior class, Symbol name, RawArray bytecode )
+{
+    Array annotations;
+    Array body;
+    Method method = new_Method(annotations, bytecode, body);
+    new_MethodClosure(class, name, method);
+}
+
 void test_interpreter_can_return_constant(void **state)
 {
+
     SmallInteger integer = new_SmallInteger(500);
+    
+    RawArray code = new_RawArray(7, OP(allocate_locals), (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
 
-    // TODO allocate thread objects on C-stack
-    Array annotations;
-    RawArray code =
-        new_RawArray(7,
-            OP(allocate_locals), (uns_int)1,
-            OP(load_constant), (uns_int)0, integer,
-            OP(return), (uns_int)0);
-    Array body;
+    install_method( SmallInteger_class, new_Symbol(L"test"), code );
 
-    Method method = new_Method(annotations, code, body);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"test"), method);
+    Object arguments[] = {new_SmallInteger(0)};
 
-    code = new_RawArray(1, OP(return_self));
+    SmallInteger returned = test_machine( new_Symbol(L"test"), arguments, 0 );
 
-    Object args[] = { (Object)new_SmallInteger(0) };
-    method_context( method, NULL, args );
-
-
-    assert_true( args[0] == integer );
+    assert_true( returned == integer );
 }
 
 void test_interpreter_can_call_methods(void **state)
