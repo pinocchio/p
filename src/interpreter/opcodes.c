@@ -12,7 +12,7 @@
 #define OPCODE_BODY\
     return 0;\
     }\
-    void ** pc = (void**)method->code->data;\
+    void ** pc = (void*)method->code->data;\
     GO_NEXT();
 
 #define OPCODE_EVALUATION
@@ -74,7 +74,7 @@
     }\
     return_code = method_context( next_method->method, NULL, &local[arg_offset]);\
     if ( return_code != 0 ) {\
-    return return_code;\
+        return return_code;\
     }
 
 /* ======================================================================= */
@@ -82,8 +82,6 @@
 #define DECLARE_OPCODE(name) void * op_##name; 
 
 /* ======================================================================= */
-
-
 
 DECLARE_OPCODE(allocate_locals)
 DECLARE_OPCODE(block_return)

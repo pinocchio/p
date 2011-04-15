@@ -7,7 +7,7 @@
 
 struct RawArray {
     VariableHeader      header;
-    void**              data[];
+    void*               data[];
 };
 extern Class RawArray_class;
 
