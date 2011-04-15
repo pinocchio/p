@@ -140,21 +140,22 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
          * This trick avoids multiple allocations of growing size for the
          * paired bucket, or alternatively allocating potentially too much memory.
          */
-        uns_int idx = 0;
-        uns_int newcount = 0;
+        uns_int idx         = 0;
+        uns_int newcount    = 0;
         uns_int bucket_size = bucket->tally->value;
+        Object * value      = bucket->value;
 
         while (idx < bucket_size) {
             Object key = bucket->value[idx];
             
             if (HASH(key) & newbit) {
-                bucket_size -= 2;
-                newcount += 2;
-                Object value = bucket->value[idx+1];
-                bucket->value[idx]   = bucket->value[bucket_size];
-                bucket->value[idx+1] = bucket->value[bucket_size+1];
-                bucket->value[bucket_size]   = key;
-                bucket->value[bucket_size+1] = value;
+                bucket_size         -= 2;
+                newcount            += 2;
+                Object v             = bucket->value[idx+1];
+                value[idx]           = bucket->value[bucket_size];
+                value[idx+1]         = bucket->value[bucket_size+1];
+                value[bucket_size]   = key;
+                value[bucket_size+1] = v;
             } else {
                 idx += 2;
             }
