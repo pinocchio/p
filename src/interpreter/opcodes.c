@@ -31,8 +31,8 @@
 
 #define SELF() arg[0]
 
-#define FETCH(type, index)\
-    (type)(*(index))
+#define FETCH(index)\
+    *(index)
 
 #define OBJECT(index) ((Object)index)
 
@@ -48,16 +48,16 @@
 #define END_OPCODE GO_NEXT();
 
 #define OPERAND(idx)\
-    FETCH(void**, GET_PC() + idx)
+    FETCH(GET_PC() + idx)
 
 #define UNS_INT_OPERAND(idx)\
-    FETCH(uns_int, GET_PC() + idx)
+    (uns_int)(FETCH(GET_PC() + idx))
 
 #define INT_OPERAND(idx)\
-    FETCH(long, GET_PC() + idx)
+    (long)(FETCH(GET_PC() + idx))
 
 #define OBJECT_OPERAND(idx)\
-    OBJECT(FETCH(uns_int, GET_PC() + idx))
+    OBJECT(FETCH(GET_PC() + idx))
 
 #define LOAD(idx)\
     local[idx]
@@ -203,8 +203,8 @@ OPCODE(send)
             RETURN(-2);
         }
         method_code = next_method->method->code->data;
-        *(GET_PC() + 3) = local[offset]->header.class;
-        *(GET_PC() + 4) = method_code;
+        OPERAND(3)  = local[offset]->header.class;
+        OPERAND(4)  = method_code;
     }
 
     return_code = ((native)method_code[0])(method_code + 1, NULL, &local[offset]);
@@ -299,12 +299,12 @@ OPCODE(capture)
 END_OPCODE;
 
 OPCODE(lookup_native)
-    name     = (NativeName)OBJECT_OPERAND(1);
-    function = lookup_native(name);
-    *GET_PC()     = OP(jump);
-    *(GET_PC()+1) = (void**)2;
+    name       = (NativeName)OBJECT_OPERAND(1);
+    function   = lookup_native(name);
+    OPERAND(0) = OP(jump);
+    OPERAND(1) = (void**)2;
     if (function) {
-        *(GET_PC()-2) = (void**)function;
+        OPERAND(-2) = function;
         CALL_NATIVE(function);
         RETURN(0);
     } else {
