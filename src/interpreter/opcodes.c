@@ -15,8 +15,6 @@
     void ** pc = (void*)method->code->data;\
     GO_NEXT();
 
-#define OPCODE_EVALUATION
-
 #define OPCODE_END\
     }
 
