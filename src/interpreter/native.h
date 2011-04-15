@@ -16,7 +16,7 @@ struct NativeName {
 /* ======================================================================= */
 
 #define NATIVE(module, name)\
-    char NM_##module##_##name(Object arg[]) {
+    char NM_##module##_##name( Method method, JumpTarget return_target, Object arg[] ) {
 
 #define END_NATIVE\
 	return 0;\

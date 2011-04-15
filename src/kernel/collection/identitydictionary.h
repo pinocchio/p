@@ -10,8 +10,8 @@ extern Class IdentityDictionary_class;
 /* ======================================================================= */
 
 extern IdentityDictionary new_IdentityDictionary();
-extern Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol);
-extern void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Object value);
+extern Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key);
+extern void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object value);
 
 /* ======================================================================= */
 

@@ -18,26 +18,26 @@ IdentityDictionary new_IdentityDictionary()
 
 /* ======================================================================= */
 
-static uns_int bucket_index(IdentityDictionary dictionary, Symbol symbol)
+static uns_int bucket_index(IdentityDictionary dictionary, Object key)
 {
     BucketArray buckets = dictionary->buckets;
-    if (buckets->header.size == 1) {
+    if (SIZE(buckets) == 1) {
         return 0;
     } else {
-        return symbol->header.format.hash % buckets->header.size;
+        return HASH(key) % SIZE(buckets);
     }
 }
 
-Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol)
+Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key)
 {
-    uns_int bucket_idx = bucket_index(dictionary, symbol);
+    uns_int bucket_idx = bucket_index(dictionary, key);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
 
     uns_int i;
     uns_int limit = bucket->tally->value;
     Object * value = bucket->value;
     for (i = 0; i < limit; i = i+2) {
-        if ((Symbol)value[i] == symbol) {
+        if (value[i] == key) {
             return value[i+1];
         }
     }
@@ -60,32 +60,33 @@ static void initital_grow(IdentityDictionary dictionary)
     /* Create all those new buckets with the same size as the old one */
     dictionary->buckets = new_BucketArray_sized(new_bucketsarray_size);
     uns_int newcount[new_bucketsarray_size];
-    for( int i = 0; i < new_bucketsarray_size; i += 1 )
+    for ( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i] = new_Bucket_sized( old_bucket_size );
         newcount[i] = 0;
     }
 
     /* distribute the old elements over the new buckets */
-    for( int idx = 0; idx < old_bucket_size; idx += 2 )
+    for ( int idx = 0; idx < old_bucket_size; idx += 2 )
     {    
-        Symbol selector = (Symbol)old_bucket->value[idx];
+        Object key = old_bucket->value[idx];
         uns_int new_bucket_idx = 0;
 
         //add each matching bit to the index
-        for( int new_bit = 1; new_bit < new_bucketsarray_size; new_bit <<= 1 ) {
-            if (Symbol_hash(selector) & new_bit)
-		new_bucket_idx += new_bit;
+        for ( int new_bit = 1; new_bit < new_bucketsarray_size; new_bit <<= 1 ) {
+            if (HASH(key) & new_bit) {
+                new_bucket_idx += new_bit;
+            }
         }
         Object value = old_bucket->value[idx+1];
         Bucket bucket = dictionary->buckets->bucket[new_bucket_idx];
-        bucket->value[newcount[new_bucket_idx]] = (Object)selector;
+        bucket->value[newcount[new_bucket_idx]]   = key;
         bucket->value[newcount[new_bucket_idx]+1] = value;
         newcount[new_bucket_idx] += 2;
     }
     
     /* update the tallys */
-    for( int i = 0; i < new_bucketsarray_size; i += 1 )
+    for ( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
         dictionary->buckets->bucket[i]->tally = new_SmallInteger(newcount[i]);
     }
@@ -110,7 +111,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
         return;
     } 
 
-    if (size / dictionary->buckets->header.size <= dictionary->ratio->value)
+    if (size / SIZE(dictionary->buckets) <= dictionary->ratio->value)
         return;
 
     BucketArray old_buckets = dictionary->buckets;
@@ -119,12 +120,12 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
      * bit to be taken into account from the hash. This bit identifies
      * which of the pair of buckets to use
      */
-    uns_int newbit = old_buckets->header.size;
+    uns_int newbit = SIZE(old_buckets);
     BucketArray buckets = new_BucketArray_sized(newbit << 1);
     dictionary->buckets = buckets; 
 
     uns_int bucket_idx;
-    uns_int limit = old_buckets->header.size;
+    uns_int limit = SIZE(old_buckets);
 
     for (bucket_idx = 0; bucket_idx < limit; bucket_idx++) {
         Bucket bucket = old_buckets->bucket[bucket_idx];
@@ -139,21 +140,22 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
          * This trick avoids multiple allocations of growing size for the
          * paired bucket, or alternatively allocating potentially too much memory.
          */
-        uns_int idx = 0;
-        uns_int newcount = 0;
+        uns_int idx         = 0;
+        uns_int newcount    = 0;
         uns_int bucket_size = bucket->tally->value;
+        Object * value      = bucket->value;
 
         while (idx < bucket_size) {
-            Symbol selector = (Symbol)bucket->value[idx];
+            Object key = value[idx];
             
-            if (Symbol_hash(selector) & newbit) {
-                bucket_size -= 2;
-                newcount += 2;
-                Object value = bucket->value[idx+1];
-                bucket->value[idx]   = bucket->value[bucket_size];
-                bucket->value[idx+1] = bucket->value[bucket_size+1];
-                bucket->value[bucket_size]   = (Object)selector;
-                bucket->value[bucket_size+1] = value;
+            if (HASH(key) & newbit) {
+                bucket_size         -= 2;
+                newcount            += 2;
+                Object v             = value[idx+1];
+                value[idx]           = value[bucket_size];
+                value[idx+1]         = value[bucket_size+1];
+                value[bucket_size]   = key;
+                value[bucket_size+1] = v;
             } else {
                 idx += 2;
             }
@@ -185,36 +187,37 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
     }
 }
 
-void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Object value)
+void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object value)
 {
-    uns_int bucket_idx = bucket_index(dictionary, symbol);
+    uns_int bucket_idx = bucket_index(dictionary, key);
     BucketArray buckets = dictionary->buckets;
     Bucket bucket       = buckets->bucket[bucket_idx];
     if ((Object)bucket == nil) {
         Bucket new_bucket           = new_Bucket_sized(2);
         buckets->bucket[bucket_idx] = new_bucket;
-        new_bucket->value[0]        = (Object)symbol;
+        new_bucket->value[0]        = key;
         new_bucket->value[1]        = value;
         new_bucket->tally           = new_SmallInteger(2);
         IdentityDictionary_grow(dictionary);
         return;
     }
 
-    uns_int i = 0; for (; i < bucket->tally->value; i = i+2) {
-        if ((Symbol)bucket->value[i] == symbol) {
+    uns_int i;
+    for (i = 0; i < bucket->tally->value; i = i+2) {
+        if (bucket->value[i] == key) {
             bucket->value[i+1] = value;
             return;
         }
     }
 
-    if (i == bucket->header.size) {
-        Bucket new_bucket = new_Bucket_sized(bucket->header.size << 1);
-        for (int i = 0; i < bucket->header.size; i += 1) {
+    if (i == SIZE(bucket)) {
+        Bucket new_bucket = new_Bucket_sized(SIZE(bucket) << 1);
+        for (int i = 0; i < SIZE(bucket); i += 1) {
             new_bucket->value[i] = bucket->value[i];
         }
         buckets->bucket[bucket_idx] = bucket = new_bucket;
     }
-    bucket->value[i]   = (Object)symbol;
+    bucket->value[i]   = key;
     bucket->value[i+1] = value;
     bucket->tally = new_SmallInteger(i + 2);
     IdentityDictionary_grow(dictionary);

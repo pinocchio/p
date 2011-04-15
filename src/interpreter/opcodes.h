@@ -31,8 +31,8 @@ EXTERN_OPCODE(return_constant)
 EXTERN_OPCODE(return_self)
 EXTERN_OPCODE(self)
 EXTERN_OPCODE(send)
-EXTERN_OPCODE(slot_read)
-EXTERN_OPCODE(slot_write)
+EXTERN_OPCODE(field_read)
+EXTERN_OPCODE(field_write)
 EXTERN_OPCODE(try_native)
 
 /* ======================================================================= */

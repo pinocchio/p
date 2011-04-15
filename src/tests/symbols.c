@@ -12,11 +12,3 @@ void test_symbol_table_can_grow(void **state) {
 	assert_int_not_equal( s, new_Symbol(L"test2") );
 	assert_int_not_equal( s, new_Symbol(L"0000") );
 }
-
-void test_symbol_hashing_works(void **state) {
-	Symbol s = new_Symbol(L"test");
-	assert_int_equal( Symbol_hash(new_Symbol(L"test")), s->header.format.hash );
-	s = new_Symbol(L"0");
-	assert_int_equal( Symbol_hash(new_Symbol(L"0")), s->header.format.hash );
-	assert_int_not_equal( Symbol_hash(new_Symbol(L"1")), s->header.format.hash );
-}

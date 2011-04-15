@@ -19,16 +19,16 @@ NativesDictionary new_NativesDictionary()
 
 native NativesDictionary_lookup(NativesDictionary dictionary, NativeName name)
 {
-	IdentityDictionary module = (IdentityDictionary)IdentityDictionary_lookup((IdentityDictionary)dictionary, name->module );
-	return (native) IdentityDictionary_lookup( module, name->name );
+	IdentityDictionary module = (IdentityDictionary)IdentityDictionary_lookup((IdentityDictionary)dictionary, (Object)name->module );
+	return (native) IdentityDictionary_lookup( module, (Object)name->name );
 }
 
 void NativesDictionary_store(NativesDictionary dictionary, NativeName name, native aNative)
 {
-	IdentityDictionary module = (IdentityDictionary)IdentityDictionary_lookup((IdentityDictionary)dictionary, name->module );
+	IdentityDictionary module = (IdentityDictionary)IdentityDictionary_lookup((IdentityDictionary)dictionary, (Object)name->module );
     if( module == NULL ) {
         module = new_IdentityDictionary();
-    	IdentityDictionary_store((IdentityDictionary)dictionary, name->module, (Object)module );
+    	IdentityDictionary_store((IdentityDictionary)dictionary, (Object)name->module, (Object)module );
     }
-	IdentityDictionary_store(module, name->name, (Object)aNative );
+	IdentityDictionary_store(module, (Object)name->name, (Object)aNative );
 }
