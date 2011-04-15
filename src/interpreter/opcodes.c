@@ -159,8 +159,8 @@ OPCODE(move)
 END_OPCODE
 
 OPCODE(load_constant)
-    target = UNS_INT_OPERAND(1);
-    value  = OBJECT_OPERAND(2);
+    value  = OBJECT_OPERAND(1);
+    target = UNS_INT_OPERAND(2);
     STORE(target, value);
     JUMP(3);
 END_OPCODE

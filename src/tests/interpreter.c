@@ -33,7 +33,7 @@ void test_interpreter_can_return_constant(void **state)
 {
 
     SmallInteger integer = new_SmallInteger(500);
-    RawArray code = new_RawArray(7, &method_context, (uns_int)1, OP(load_constant), (uns_int)0, integer, OP(return), (uns_int)0);
+    RawArray code = new_RawArray(7, &method_context, (uns_int)1, OP(load_constant), integer, (uns_int)0, OP(return), (uns_int)0);
 
     SmallInteger returned = (SmallInteger) test_code( (Object)new_SmallInteger(0), code );
 
@@ -46,7 +46,7 @@ void test_interpreter_can_call_methods(void **state)
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
-            OP(load_constant), (uns_int)0, integer,
+            OP(load_constant), integer, (uns_int)0, 
             OP(return), (uns_int)0);
 
     SmallInteger returned = (SmallInteger)test_code( (Object)new_SmallInteger(0), code );
@@ -74,7 +74,7 @@ void test_interpreter_can_call_closure( void **state )
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
-            OP(load_constant), (uns_int)0, new_SmallInteger(500),
+            OP(load_constant), new_SmallInteger(500), (uns_int)0, 
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
@@ -106,7 +106,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
-            OP(load_constant), (uns_int)0, new_SmallInteger(500),
+            OP(load_constant), new_SmallInteger(500), (uns_int)0, 
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
@@ -123,7 +123,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
             &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
-            OP(load_constant), (uns_int)0, new_SmallInteger(700),
+            OP(load_constant), new_SmallInteger(700), (uns_int)0,
             OP(return), (uns_int)0);
 
     method = new_Method(annotations, code, body);
@@ -144,7 +144,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
     RawArray code =
         new_RawArray(7,
             &method_context, (uns_int)1,
-            OP(load_constant), (uns_int)0, new_SmallInteger(500),
+            OP(load_constant), new_SmallInteger(500), (uns_int)0, 
             OP(block_return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
@@ -162,7 +162,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
             &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"value"), (uns_int)0, (uns_int)0,
-            OP(load_constant), (uns_int)0, new_SmallInteger(700),
+            OP(load_constant), new_SmallInteger(700), (uns_int)0, 
             OP(return), (uns_int)0);
 
     method = new_Method(annotations, code, body);
@@ -207,18 +207,18 @@ void test_interpreter_can_fib( void **state )
     code = new_RawArray(57,
             &method_context, (uns_int)3,
             OP(self), (uns_int)0,
-            OP(load_constant), (uns_int)1, new_SmallInteger(2),
+            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
             OP(send), (uns_int)0, new_Symbol(L"<"), (uns_int)0, (uns_int)0,
             OP(iftrue_iffalse), (uns_int)0, (uns_int)6, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
             OP(self), (uns_int)0,
-            OP(load_constant), (uns_int)1, new_SmallInteger(2),
+            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
             OP(send), (uns_int)0, new_Symbol(L"-"), (uns_int)0, (uns_int)0,
             OP(send), (uns_int)0, new_Symbol(L"fib"), (uns_int)0, (uns_int)0,
             
             OP(self), (uns_int)1,
-            OP(load_constant), (uns_int)2, new_SmallInteger(1),
+            OP(load_constant), new_SmallInteger(1), (uns_int)2, 
             OP(send), (uns_int)1, new_Symbol(L"-"), (uns_int)0, (uns_int)0,
             OP(send), (uns_int)1, new_Symbol(L"fib"), (uns_int)0, (uns_int)0,
 
