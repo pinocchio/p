@@ -229,7 +229,7 @@ void test_interpreter_can_fib( void **state )
     method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), method);
 
-    SmallInteger integer = new_SmallInteger(34);
+    SmallInteger integer = new_SmallInteger(5);
 
     Object args[] = { (Object)integer };
     method_context( &method->code->data[1], NULL, args );

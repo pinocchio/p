@@ -13,7 +13,7 @@
     return 0;\
     }\
     local = (Object*)alloca(((uns_int)*(pc)) * sizeof(Object));\
-    pc += 1;\
+    JUMP(1);\
     GO_NEXT();
 
 #define OPCODE_END\
