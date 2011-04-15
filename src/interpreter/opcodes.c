@@ -66,6 +66,7 @@
 #define READ_FIELD(index) SELF()->field[index]
 #define WRITE_FIELD(index, value) SELF()->field[index] = value
 #define CALL_NATIVE(function) ((native)function)(arg)
+#define CALL_INLINE_NATIVE(function, arg_offset) ((native)function)(&local[arg_offset])
 
 #define CALL_METHOD(selector, arg_offset)\
     next_method = lookup(local[arg_offset], selector);\
@@ -74,7 +75,13 @@
     }\
     return_code = method_context( next_method->method, NULL, &local[arg_offset]);\
     if ( return_code != 0 ) {\
-        return return_code;\
+	if( return_code == 3 ) {\
+	    function = next_method->method->code->data[1];\
+	    *(GET_PC()-4) = OP(inline_native);\
+	    *(GET_PC()-1) = (void**)function;\
+	} else {\
+	    return return_code;\
+	}\
     }
 
 /* ======================================================================= */
@@ -83,6 +90,8 @@
 
 /* ======================================================================= */
 
+DECLARE_OPCODE(nop)
+DECLARE_OPCODE(inline_native)
 DECLARE_OPCODE(allocate_locals)
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(cache_send)
@@ -122,6 +131,8 @@ Block           block;
 
 OPCODE_HEAD
 
+INSTALL_OPCODE(nop)
+INSTALL_OPCODE(inline_native)
 INSTALL_OPCODE(allocate_locals)
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(cache_send)
@@ -144,6 +155,10 @@ INSTALL_OPCODE(slot_write)
 INSTALL_OPCODE(try_native)
 
 OPCODE_BODY
+
+OPCODE(nop)
+    JUMP(1);
+END_OPCODE
 
 OPCODE(allocate_locals)
     size = UNS_INT_OPERAND(1);
@@ -193,21 +208,21 @@ END_OPCODE
 OPCODE(send)
     offset   = UNS_INT_OPERAND(1);
     selector = (Symbol)OBJECT_OPERAND(2);
-    JUMP(3);
+    JUMP(4);
     CALL_METHOD(selector, offset);
 END_OPCODE
 
 OPCODE(cache_send)
     offset   = UNS_INT_OPERAND(1);
     selector = (Symbol)OBJECT_OPERAND(2);
-    JUMP(3);
+    JUMP(4);
     CALL_METHOD(selector, offset);
 END_OPCODE
 
 OPCODE(poly_send)
     offset   = UNS_INT_OPERAND(1);
     selector = (Symbol)OBJECT_OPERAND(2);
-    JUMP(3);
+    JUMP(4);
     CALL_METHOD(selector, offset);
 END_OPCODE
 
@@ -300,7 +315,8 @@ OPCODE(lookup_native)
         *GET_PC()     = OP(try_native);
         *(GET_PC()+1) = (void**)function;
         if (!CALL_NATIVE(function)) {
-            RETURN(0);
+	    //Native call successfull. signalling that this call can be inlined
+            RETURN(3);
         }
         JUMP(2);
     } else {
@@ -316,6 +332,16 @@ OPCODE(try_native)
         RETURN(0);
     }
     JUMP(2);
+END_OPCODE
+
+OPCODE(inline_native)
+    offset   = UNS_INT_OPERAND(1);
+    function = (native)OBJECT_OPERAND(3);
+    JUMP(4);
+    if(CALL_INLINE_NATIVE(function, offset)) {
+        selector = (Symbol)OBJECT_OPERAND(2);
+        CALL_METHOD(selector, offset);
+    }
 END_OPCODE
 
 OPCODE(exit)

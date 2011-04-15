@@ -72,7 +72,7 @@ void test_interpreter_can_call_native( void **state )
     install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
 
     Object args[] = { (Object)new_SmallInteger(1), (Object)new_SmallInteger(2) };
-    SmallInteger returned = (SmallInteger)test_machine( args, new_Symbol(L"test") );
+    SmallInteger returned = (SmallInteger)test_machine_return( args, new_Symbol(L"test"), 3 );
 
     assert_int_equal( returned->value, 3 );
 }
@@ -95,7 +95,7 @@ void test_interpreter_can_call_closure( void **state )
         new_RawArray(12,
             OP(allocate_locals), (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"),
+            OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
             OP(return), (uns_int)0);
 
     install_method((Behavior)SmallInteger_class, new_Symbol(L"test"), code);
@@ -130,7 +130,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
         new_RawArray(15,
             OP(allocate_locals), (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"),
+            OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
             OP(load_constant), (uns_int)0, new_SmallInteger(700),
             OP(return), (uns_int)0);
 
@@ -168,7 +168,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
         new_RawArray(15,
             OP(allocate_locals), (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"),
+            OP(send), (uns_int)0, new_Symbol(L"value"),OP(nop),
             OP(load_constant), (uns_int)0, new_SmallInteger(700),
             OP(return), (uns_int)0);
 
@@ -208,25 +208,25 @@ void test_interpreter_can_fib( void **state )
     method = new_Method(annotations, code, body);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), method);
 
-    code = new_RawArray(43,
+    code = new_RawArray(55,
             OP(allocate_locals), (uns_int)3,
             OP(self), (uns_int)0,
             OP(load_constant), (uns_int)1, new_SmallInteger(2),
-            OP(send), (uns_int)0, new_Symbol(L"<"),
+            OP(send), (uns_int)0, new_Symbol(L"<"), OP(nop),
             OP(iftrue_iffalse), (uns_int)0, (uns_int)6, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
             OP(self), (uns_int)0,
             OP(load_constant), (uns_int)1, new_SmallInteger(2),
-            OP(send), (uns_int)0, new_Symbol(L"-"),
-            OP(send), (uns_int)0, new_Symbol(L"fib"),
+            OP(send), (uns_int)0, new_Symbol(L"-"), OP(nop),
+            OP(send), (uns_int)0, new_Symbol(L"fib"), OP(nop),
             
             OP(self), (uns_int)1,
             OP(load_constant), (uns_int)2, new_SmallInteger(1),
-            OP(send), (uns_int)1, new_Symbol(L"-"),
-            OP(send), (uns_int)1, new_Symbol(L"fib"),
+            OP(send), (uns_int)1, new_Symbol(L"-"), OP(nop),
+            OP(send), (uns_int)1, new_Symbol(L"fib"), OP(nop),
 
-            OP(send), (uns_int)0, new_Symbol(L"+"),
+            OP(send), (uns_int)0, new_Symbol(L"+"), OP(nop),
 
             OP(return), (uns_int)0);
 

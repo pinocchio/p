@@ -12,6 +12,8 @@ char method_context( Method method, JumpTarget return_target, Object arg[] );
 
 /* ======================================================================= */
 
+EXTERN_OPCODE(nop)
+EXTERN_OPCODE(inline_native)
 EXTERN_OPCODE(allocate_locals)
 EXTERN_OPCODE(block_return)
 EXTERN_OPCODE(cache_send)
