@@ -12,8 +12,8 @@
 #define OPCODE_BODY\
     return 0;\
     }\
-    local = (Object*)alloca(((uns_int)*(pc)) * sizeof(Object));\
-    JUMP(1);
+    local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
+    JUMP(2);
 
 #define OPCODE_END\
     }
@@ -33,7 +33,6 @@
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
-#define OBJECT_OPERAND(idx)         (Object)(FETCH(GET_PC() + idx))
 
 #define SET_RETURN(value)           arg[0] = (value)
 #define RETURN(code)                return code;
@@ -44,7 +43,7 @@
 #define READ_FIELD(index)           SELF()->field[index]
 #define WRITE_FIELD(index, value)   SELF()->field[index] = value
 
-//#define DEBUG
+// #define DEBUG
 #ifndef DEBUG
 #define OPCODE(name)\
     label_##name:
@@ -142,7 +141,7 @@ OPCODE(move)
 END_OPCODE
 
 OPCODE(load_constant)
-    value  = OBJECT_OPERAND(1);
+    value  = (Object)OPERAND(1);
     target = UNS_INT_OPERAND(2);
     STORE(target, value);
     JUMP(3);
@@ -166,8 +165,8 @@ END_OPCODE
 
 OPCODE(send)
     offset     = UNS_INT_OPERAND(1);
-    selector   = (Symbol)OBJECT_OPERAND(2);
-    cache_type = (Behavior)OBJECT_OPERAND(3);
+    selector   = (Symbol)OPERAND(2);
+    cache_type = (Behavior)OPERAND(3);
 
     if (cache_type == local[offset]->header.class) {
         method_code = OPERAND(4);
@@ -181,7 +180,7 @@ OPCODE(send)
         OPERAND(4)  = method_code;
     }
 
-    return_code = ((native)*method_code)(method_code+1, NULL, &local[offset]);
+    return_code = ((native)*method_code)(method_code, NULL, &local[offset]);
 
     if ( return_code != 0 ) {
 	    return return_code;
@@ -191,7 +190,7 @@ OPCODE(send)
 END_OPCODE
 
 OPCODE(return_constant)
-    value = OBJECT_OPERAND(1);
+    value = (Object)OPERAND(1);
     SET_RETURN(value);
     RETURN(0);
 END_OPCODE
@@ -253,7 +252,7 @@ OPCODE(jump)
 END_OPCODE
 
 OPCODE(capture)
-    block = (Block)OBJECT_OPERAND(1);
+    block = (Block)OPERAND(1);
     if (return_target == NULL) {
         return_target = new_JumpTarget(arg);
         if (setjmp(return_target->target)) {
@@ -269,10 +268,10 @@ OPCODE(capture)
 END_OPCODE;
 
 OPCODE(lookup_native)
-    name       = (NativeName)OBJECT_OPERAND(1);
+    name       = (NativeName)OPERAND(1);
     function   = lookup_native(name);
     OPERAND(0) = OP(jump);
-    OPERAND(1) = (void**)2;
+    OPERAND(1) = 2;
     if (function) {
         OPERAND(-2) = function;
         return function(pc-1, return_target, arg);

@@ -73,7 +73,7 @@ int main(int argc, const char ** argv)
     SmallInteger integer = new_SmallInteger(34);
 
     Object args[] = { (Object)integer };
-    method_context( &code->data[1], NULL, args );
+    method_context( code->data, NULL, args );
 
     return EXIT_SUCCESS;
 }
