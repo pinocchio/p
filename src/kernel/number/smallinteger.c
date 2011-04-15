@@ -63,10 +63,29 @@ NATIVE(SmallInteger, divide)
     NATIVE_RETURN(result);
 END_NATIVE
 
+NATIVE(SmallInteger, smaller)
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
+    Object result       = self->value < right->value ? true : false;
+    NATIVE_RETURN(result);
+END_NATIVE
+
+NATIVE(SmallInteger, greater)
+    SmallInteger self   = (SmallInteger)ARGUMENT(0);
+    SmallInteger right  = (SmallInteger)ARGUMENT(1);
+    Object result       = self->value > right->value ? true : false;
+    NATIVE_RETURN(result);
+END_NATIVE
+
 /* ======================================================================= */
 
 
 void install_natives_SmallInteger()
 {
     INSTALL_NATIVE(SmallInteger, plus);
+    INSTALL_NATIVE(SmallInteger, minus);
+    INSTALL_NATIVE(SmallInteger, times);
+    INSTALL_NATIVE(SmallInteger, divide);
+    INSTALL_NATIVE(SmallInteger, smaller);
+    INSTALL_NATIVE(SmallInteger, greater);
 }

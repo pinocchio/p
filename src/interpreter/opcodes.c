@@ -12,7 +12,7 @@
 #define OPCODE_BODY\
     return 0;\
     }\
-    void ** pc = (void**)method->code->data;\
+    void ** pc = (void*)method->code->data;\
     GO_NEXT();
 
 #define OPCODE_EVALUATION
@@ -74,7 +74,7 @@
     }\
     return_code = method_context( next_method->method, NULL, &local[arg_offset]);\
     if ( return_code != 0 ) {\
-    return return_code;\
+        return return_code;\
     }
 
 /* ======================================================================= */
@@ -83,11 +83,10 @@
 
 /* ======================================================================= */
 
-
-
 DECLARE_OPCODE(allocate_locals)
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(cache_send)
+DECLARE_OPCODE(capture)
 DECLARE_OPCODE(exit)
 DECLARE_OPCODE(iffalse_iftrue)
 DECLARE_OPCODE(iftrue_iffalse)
@@ -97,13 +96,13 @@ DECLARE_OPCODE(lookup_native)
 DECLARE_OPCODE(move)
 DECLARE_OPCODE(poly_send)
 DECLARE_OPCODE(return)
+DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
 DECLARE_OPCODE(slot_read)
 DECLARE_OPCODE(slot_write)
 DECLARE_OPCODE(try_native)
-DECLARE_OPCODE(capture)
 
 OPCODE_DECLS
 
@@ -126,6 +125,7 @@ OPCODE_HEAD
 INSTALL_OPCODE(allocate_locals)
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(cache_send)
+INSTALL_OPCODE(capture)
 INSTALL_OPCODE(exit)
 INSTALL_OPCODE(iffalse_iftrue)
 INSTALL_OPCODE(iftrue_iffalse)
@@ -135,13 +135,13 @@ INSTALL_OPCODE(lookup_native)
 INSTALL_OPCODE(move)
 INSTALL_OPCODE(poly_send)
 INSTALL_OPCODE(return)
+INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
 INSTALL_OPCODE(slot_read)
 INSTALL_OPCODE(slot_write)
 INSTALL_OPCODE(try_native)
-INSTALL_OPCODE(capture)
 
 OPCODE_BODY
 
@@ -211,6 +211,12 @@ OPCODE(poly_send)
     CALL_METHOD(selector, offset);
 END_OPCODE
 
+OPCODE(return_constant)
+    value = OBJECT_OPERAND(1);
+    SET_RETURN(value);
+    RETURN(0);
+END_OPCODE
+
 OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
@@ -240,10 +246,12 @@ OPCODE(iftrue_iffalse)
     if (value == false) {
         address = INT_OPERAND(2);
         JUMP(address);
+        GO_NEXT();
     }
     if (value != true) {
         address = INT_OPERAND(3);
         JUMP(address);
+        GO_NEXT();
     }
     JUMP(4);
 END_OPCODE
@@ -254,10 +262,12 @@ OPCODE(iffalse_iftrue)
     if (value  == true) {
         address = INT_OPERAND(2);
         JUMP(target);
+        GO_NEXT();
     }
     if (value  != false) {
         address = INT_OPERAND(3);
         JUMP(address);
+        GO_NEXT();
     }
     JUMP(4);
 END_OPCODE
