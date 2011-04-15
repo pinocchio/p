@@ -14,10 +14,10 @@ void test_natives_dictionary_can_store_and_lookup(void **state) {
 
 void test_identity_dictionary_can_override_a_value(void **state) {
         IdentityDictionary d = new_IdentityDictionary();
-	IdentityDictionary_store(d, new_Symbol(L"blabli3$i"), (Object)4 );
-        assert_int_equal( IdentityDictionary_lookup( d, new_Symbol(L"blabli3$i") ), 4 );
-	IdentityDictionary_store(d, new_Symbol(L"blabli3$i"), (Object)5 );
-        assert_int_equal( IdentityDictionary_lookup( d, new_Symbol(L"blabli3$i") ), 5 );
+	IdentityDictionary_store(d, (Object)new_Symbol(L"blabli3$i"), (Object)4 );
+        assert_int_equal( IdentityDictionary_lookup( d, (Object)new_Symbol(L"blabli3$i") ), (Object)4 );
+	IdentityDictionary_store(d, (Object)new_Symbol(L"blabli3$i"), (Object)5 );
+        assert_int_equal( IdentityDictionary_lookup( d, (Object)new_Symbol(L"blabli3$i") ), (Object)5 );
 	assert_int_equal( d->size->value, 1 );
 }
 
@@ -29,49 +29,49 @@ void test_identity_dictionary_with(IdentityDictionary d, int size) {
 	{
 		//convert i to a string that can be used as key
 		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
-		IdentityDictionary_store(d, new_Symbol(str), f );
+		IdentityDictionary_store(d, (Object)new_Symbol(str), (Object)f );
 		f++;
 	}
 	f--;
 
 	//See if the first entry is in the dictionary
-	void *fr = IdentityDictionary_lookup( d, new_Symbol(L"0000") );
+	void *fr = IdentityDictionary_lookup( d, (Object)new_Symbol(L"0000") );
 	assert_int_equal( fr, 1 );
 	
 	//See if all entries are there
 	for( int i= size-1; i>=0; i--)
 	{
 		wchar_t str[] = { (int)'0'+(i/1000), (int)'0'+(i/100%100), (int)'0'+(i/10%10), (int)'0'+(i%10), 0 };
-		fr = IdentityDictionary_lookup( d, new_Symbol(str) );
+		fr = IdentityDictionary_lookup( d, (Object)new_Symbol(str) );
 		assert_int_equal( fr, i+1 );
 	}
 }
 
 void test_identity_dictionary_can_store_and_lookup(void **state) {
-        IdentityDictionary d = new_IdentityDictionary();
+    IdentityDictionary d = new_IdentityDictionary();
 	test_identity_dictionary_with(d,5);
 }
 
 void test_identity_dictionary_can_do_initital_grow(void **state) {
-        IdentityDictionary d = new_IdentityDictionary();
+    IdentityDictionary d = new_IdentityDictionary();
 	
 	//before initital grow there should be 1 bucket
 	int maxLinear = d->maxLinear->value;
 	test_identity_dictionary_with(d,maxLinear-1);
-        assert_int_equal( SIZE(d->buckets), 1 );
+    assert_int_equal( SIZE(d->buckets), 1 );
 	
 	//after initital grow there should be more than one bucket
 	test_identity_dictionary_with(d,maxLinear);
-        int size = SIZE(d->buckets);
-        assert_true( size > 1 );
+    int size = SIZE(d->buckets);
+    assert_true( size > 1 );
 
-        //another add should not trigger yet another grow
+    //another add should not trigger yet another grow
 	test_identity_dictionary_with(d,maxLinear+1);
         assert_int_equal( SIZE(d->buckets), size );
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {
-        IdentityDictionary d = new_IdentityDictionary();
+    IdentityDictionary d = new_IdentityDictionary();
 	test_identity_dictionary_with(d,9999);
 }
 

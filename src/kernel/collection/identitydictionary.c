@@ -18,26 +18,26 @@ IdentityDictionary new_IdentityDictionary()
 
 /* ======================================================================= */
 
-static uns_int bucket_index(IdentityDictionary dictionary, Symbol symbol)
+static uns_int bucket_index(IdentityDictionary dictionary, Object key)
 {
     BucketArray buckets = dictionary->buckets;
     if (SIZE(buckets) == 1) {
         return 0;
     } else {
-        return HASH(symbol) % SIZE(buckets);
+        return HASH(key) % SIZE(buckets);
     }
 }
 
-Object IdentityDictionary_lookup(IdentityDictionary dictionary, Symbol symbol)
+Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key)
 {
-    uns_int bucket_idx = bucket_index(dictionary, symbol);
+    uns_int bucket_idx = bucket_index(dictionary, key);
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
 
     uns_int i;
     uns_int limit = bucket->tally->value;
     Object * value = bucket->value;
     for (i = 0; i < limit; i = i+2) {
-        if ((Symbol)value[i] == symbol) {
+        if (value[i] == key) {
             return value[i+1];
         }
     }
@@ -187,23 +187,24 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
     }
 }
 
-void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Object value)
+void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object value)
 {
-    uns_int bucket_idx = bucket_index(dictionary, symbol);
+    uns_int bucket_idx = bucket_index(dictionary, key);
     BucketArray buckets = dictionary->buckets;
     Bucket bucket       = buckets->bucket[bucket_idx];
     if ((Object)bucket == nil) {
         Bucket new_bucket           = new_Bucket_sized(2);
         buckets->bucket[bucket_idx] = new_bucket;
-        new_bucket->value[0]        = (Object)symbol;
+        new_bucket->value[0]        = key;
         new_bucket->value[1]        = value;
         new_bucket->tally           = new_SmallInteger(2);
         IdentityDictionary_grow(dictionary);
         return;
     }
 
-    uns_int i = 0; for (; i < bucket->tally->value; i = i+2) {
-        if ((Symbol)bucket->value[i] == symbol) {
+    uns_int i;
+    for (i = 0; i < bucket->tally->value; i = i+2) {
+        if (bucket->value[i] == key) {
             bucket->value[i+1] = value;
             return;
         }
@@ -216,7 +217,7 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
         }
         buckets->bucket[bucket_idx] = bucket = new_bucket;
     }
-    bucket->value[i]   = (Object)symbol;
+    bucket->value[i]   = key;
     bucket->value[i+1] = value;
     bucket->tally = new_SmallInteger(i + 2);
     IdentityDictionary_grow(dictionary);
