@@ -11,17 +11,17 @@ static void SymbolTable_grow(SymbolTable table)
     long size   = table->size->value + 1;
     table->size = new_SmallInteger(size);
 
-    if (size / table->buckets->header.size <= table->ratio->value)
+    if (size / SIZE(table->buckets) <= table->ratio->value)
         return;
 
     BucketArray old_buckets = table->buckets;
 
-    uns_int newbit = old_buckets->header.size;
+    uns_int newbit = SIZE(old_buckets);
     BucketArray buckets = new_BucketArray_sized(newbit << 1);
     table->buckets = buckets;
 
     uns_int bucket_idx;
-    uns_int limit = old_buckets->header.size;
+    uns_int limit = SIZE(old_buckets);
 
     for (bucket_idx = 0; bucket_idx < limit; bucket_idx++) {
         Bucket bucket = old_buckets->bucket[bucket_idx];
@@ -80,7 +80,7 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
     uns_int size = wcslen(key);
     long hash = wchar_hash(key, size);
 
-    Bucket *bucketp = &table->buckets->bucket[hash % table->buckets->header.size];
+    Bucket *bucketp = &table->buckets->bucket[hash % SIZE(table->buckets)];
     Bucket bucket   = *bucketp;
     Symbol symbol;
     if (bucket == (Bucket)nil) {
@@ -100,16 +100,16 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
     for (i = 0; i < tally; i++) {
         symbol = (Symbol)bucket->value[i];
         if ((Class)get_class((Object)symbol) == Symbol_class
-            && symbol->header.size == size
+            && SIZE(symbol) == size
             && !wcsncmp(symbol->character, key, size)) {
             return symbol;
         }
     }
 
     /* Grow bucket if full */
-    if (tally == bucket->header.size) {
+    if (tally == SIZE(bucket)) {
         Bucket old_bucket = bucket;
-        *bucketp = new_Bucket_sized(bucket->header.size * 2);
+        *bucketp = new_Bucket_sized(SIZE(bucket) * 2);
         bucket   = *bucketp;
         
         for (i = 0; i < tally; i++) {
@@ -119,7 +119,7 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
         /* Skip over the new element */
         i++;
 
-        for (; i < bucket->header.size; i++) {
+        for (; i < SIZE(bucket); i++) {
             bucket->value[i] = nil;
         }
     }

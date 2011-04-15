@@ -58,16 +58,16 @@ void test_identity_dictionary_can_do_initital_grow(void **state) {
 	//before initital grow there should be 1 bucket
 	int maxLinear = d->maxLinear->value;
 	test_identity_dictionary_with(d,maxLinear-1);
-        assert_int_equal( d->buckets->header.size, 1 );
+        assert_int_equal( SIZE(d->buckets), 1 );
 	
 	//after initital grow there should be more than one bucket
 	test_identity_dictionary_with(d,maxLinear);
-        int size = d->buckets->header.size;
+        int size = SIZE(d->buckets);
         assert_true( size > 1 );
 
         //another add should not trigger yet another grow
 	test_identity_dictionary_with(d,maxLinear+1);
-        assert_int_equal( d->buckets->header.size, size );
+        assert_int_equal( SIZE(d->buckets), size );
 }
 
 void test_identity_dictionary_can_be_huge(void **state) {

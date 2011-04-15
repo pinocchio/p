@@ -47,6 +47,11 @@ typedef Dictionary                  NativesDictionary;
 
 typedef char (*native)( Object arg[]);
 
+#define HASH(object) object->header.format.hash
+#define BASE(object) object->header.format.base
+#define MARK(object) object->header.format.gcmark
+#define SIZE(object) object->header.size
+
 struct Format {
     uns_int     base:          7;
     uns_int     variable:      1;

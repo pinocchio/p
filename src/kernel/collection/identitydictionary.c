@@ -21,10 +21,10 @@ IdentityDictionary new_IdentityDictionary()
 static uns_int bucket_index(IdentityDictionary dictionary, Symbol symbol)
 {
     BucketArray buckets = dictionary->buckets;
-    if (buckets->header.size == 1) {
+    if (SIZE(buckets) == 1) {
         return 0;
     } else {
-        return symbol->header.format.hash % buckets->header.size;
+        return HASH(symbol) % SIZE(buckets);
     }
 }
 
@@ -110,7 +110,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
         return;
     } 
 
-    if (size / dictionary->buckets->header.size <= dictionary->ratio->value)
+    if (size / SIZE(dictionary->buckets) <= dictionary->ratio->value)
         return;
 
     BucketArray old_buckets = dictionary->buckets;
@@ -119,12 +119,12 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
      * bit to be taken into account from the hash. This bit identifies
      * which of the pair of buckets to use
      */
-    uns_int newbit = old_buckets->header.size;
+    uns_int newbit = SIZE(old_buckets);
     BucketArray buckets = new_BucketArray_sized(newbit << 1);
     dictionary->buckets = buckets; 
 
     uns_int bucket_idx;
-    uns_int limit = old_buckets->header.size;
+    uns_int limit = SIZE(old_buckets);
 
     for (bucket_idx = 0; bucket_idx < limit; bucket_idx++) {
         Bucket bucket = old_buckets->bucket[bucket_idx];
@@ -207,9 +207,9 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Symbol symbol, Obje
         }
     }
 
-    if (i == bucket->header.size) {
-        Bucket new_bucket = new_Bucket_sized(bucket->header.size << 1);
-        for (int i = 0; i < bucket->header.size; i += 1) {
+    if (i == SIZE(bucket)) {
+        Bucket new_bucket = new_Bucket_sized(SIZE(bucket) << 1);
+        for (int i = 0; i < SIZE(bucket); i += 1) {
             new_bucket->value[i] = bucket->value[i];
         }
         buckets->bucket[bucket_idx] = bucket = new_bucket;
