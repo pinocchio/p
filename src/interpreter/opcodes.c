@@ -36,7 +36,7 @@
 
 #define SET_RETURN(value)           SELF() = (value)
 #define RETURN(code)                return code;
-#define END_OPCODE                  GO_NEXT();
+#define END_OPCODE                  
 
 #define LOAD(idx)                   local[idx]
 #define STORE(idx, object)          local[idx] = object
