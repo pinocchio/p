@@ -50,21 +50,25 @@ int main(int argc, const char ** argv)
             &method_context, (uns_int)3,
             OP(self), (uns_int)0,
             OP(load_constant), new_SmallInteger(2), (uns_int)1, 
-            OP(send), (uns_int)0, (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
             OP(iftrue_iffalse), (uns_int)0, (uns_int)6, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
             OP(self), (uns_int)0,
             OP(load_constant), new_SmallInteger(2), (uns_int)1, 
-            OP(send), (uns_int)0, (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(send), (uns_int)0, (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
-            
-            OP(self), (uns_int)1,
-            OP(load_constant), new_SmallInteger(1), (uns_int)2,
-            OP(send), (uns_int)1, (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(send), (uns_int)1, (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
 
-            OP(send), (uns_int)0, (uns_int)0, (uns_int)0, new_Symbol(L"+"),
+            OP(move), (uns_int)0, (uns_int)2,            
+
+            OP(self), (uns_int)0,
+            OP(load_constant), new_SmallInteger(1), (uns_int)1,
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
+
+            OP(move), (uns_int)2, (uns_int)1,
+
+            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
 
             OP(return), (uns_int)0);
 
@@ -73,7 +77,7 @@ int main(int argc, const char ** argv)
     SmallInteger integer = new_SmallInteger(34);
 
     Object args[] = { (Object)integer };
-    method_context( code->data, NULL, args );
+    method_context( code->data, args );
 
     return EXIT_SUCCESS;
 }

@@ -44,7 +44,7 @@ typedef Dictionary                  IdentityDictionary;
 typedef Dictionary                  MethodDictionary;
 typedef Dictionary                  NativesDictionary;
 
-typedef char (*native)( void ** pc, JumpTarget return_target, Object arg[] );
+typedef void (*native)( void ** pc, Object arg[] );
 
 #define HASH(object) object->header.format.hash
 #define BASE(object) object->header.format.base

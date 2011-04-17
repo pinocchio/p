@@ -4,14 +4,19 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    char method_context( void ** pc, JumpTarget return_target, Object arg[] ) {
+    void method_context( void ** pc, Object arg[] ) {
 
 #define OPCODE_HEAD\
-    if ( arg == NULL ) {\
+    if ( pc == NULL ) {\
 
+/*
+    __asm("mov %%rbp, %0;": "=r"(args));\
+    printf("%li, %li\n", arg - (args + 2), (uns_int)*(pc + 1));\
+*/
 #define OPCODE_BODY\
-        return 0;\
+        return;\
     }\
+    Object * args;\
     local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
 
@@ -35,7 +40,7 @@
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
 
 #define SET_RETURN(value)           SELF() = (value)
-#define RETURN(code)                return code;
+#define RETURN(code)                return;
 #define END_OPCODE                  
 
 #define LOAD(idx)                   local[idx]
@@ -93,7 +98,6 @@ Object          value;
 NativeName      name;
 native          function;
 MethodClosure   next_method;
-char            return_code;
 Object *        local;
 Block           block;
 void **         method_code;
@@ -164,28 +168,23 @@ OPCODE(field_write)
 END_OPCODE
 
 OPCODE(send)
-    offset      = UNS_INT_OPERAND(1);
-    cache_type  = (Behavior)OPERAND(2);
-    method_code = OPERAND(3);
+    cache_type  = (Behavior)OPERAND(1);
+    method_code = OPERAND(2);
 
-    if (cache_type != local[offset]->header.class) {
-        selector    = (Symbol)OPERAND(4);
-        next_method = lookup(local[offset], selector);
+    if (cache_type != local[0]->header.class) {
+        selector    = (Symbol)OPERAND(3);
+        next_method = lookup(local[0], selector);
         if (next_method == NULL) {
             RETURN(-2);
         }
         method_code = next_method->code->data;
-        OPERAND(2)  = local[offset]->header.class;
-        OPERAND(3)  = method_code;
+        OPERAND(1)  = local[0]->header.class;
+        OPERAND(2)  = method_code;
     }
 
-    return_code = ((native)*method_code)(method_code, NULL, &local[offset]);
+    ((native)*method_code)(method_code, &local[0]);
 
-    if ( return_code != 0 ) {
-	    return return_code;
-    }
-
-    JUMP(5);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(return_constant)
@@ -208,11 +207,13 @@ END_OPCODE
 OPCODE(block_return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
+    /*
     if (return_target == NULL) {
         RETURN(-1);
     }
     *return_target->return_pointer = value;
     longjmp(return_target->target, 1);
+    */
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
@@ -248,6 +249,7 @@ END_OPCODE
 
 OPCODE(capture)
     block = (Block)OPERAND(1);
+    /*
     if (return_target == NULL) {
         return_target = new_JumpTarget(arg);
         if (setjmp(return_target->target)) {
@@ -259,6 +261,7 @@ OPCODE(capture)
     target = UNS_INT_OPERAND(4);
     value  = (Object)new_BlockClosure(block, return_target, SELF(), size, &local[offset]);
     STORE(target, value);
+    */
     JUMP(5);
 END_OPCODE;
 
@@ -266,10 +269,10 @@ OPCODE(lookup_native)
     name       = (NativeName)OPERAND(1);
     function   = lookup_native(name);
     OPERAND(0) = OP(jump);
-    OPERAND(1) = 2;
+    OPERAND(1) = (uns_int)2;
     if (function) {
         OPERAND(-2) = function;
-        return function(pc-1, return_target, arg);
+        return function(pc-1, arg);
     }
     JUMP(2);
 END_OPCODE

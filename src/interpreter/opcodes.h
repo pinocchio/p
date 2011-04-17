@@ -5,7 +5,7 @@
 
 /* ======================================================================= */
 
-char method_context( void ** pc, JumpTarget return_target, Object arg[] );
+void method_context( void ** pc, Object arg[] );
 
 #define EXTERN_OPCODE(name) extern void * op_##name; 
 #define OP(name) op_##name
