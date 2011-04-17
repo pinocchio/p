@@ -24,8 +24,7 @@ NATIVE(BlockClosure, apply)
     BlockClosure closure = (BlockClosure)ARGUMENT(0);
     ARGUMENT(0)          = closure->self;
     method_context(
-        closure->code->code->data,
-        &ARGUMENT(0) );
+        closure->code->code->data );
     NATIVE_RETURN(ARGUMENT(0));
 END_NATIVE
 

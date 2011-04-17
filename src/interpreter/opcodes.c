@@ -4,19 +4,19 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    void method_context( void ** pc, Object arg[] ) {
+    void method_context( void ** pc ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
 
 /*
-    __asm("mov %%rbp, %0;": "=r"(args));\
-    printf("%li, %li\n", arg - (args + 2), (uns_int)*(pc + 1));\
 */
 #define OPCODE_BODY\
         return;\
     }\
     Object * args;\
+    __asm("mov %%rbp, %0;": "=r"(args));\
+    args += 2;\
     local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
 
@@ -34,7 +34,7 @@
 
 #define FETCH(index)                *(index)
 
-#define SELF()                      arg[0]
+#define SELF()                      args[0]
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
@@ -272,7 +272,7 @@ OPCODE(lookup_native)
     OPERAND(1) = (uns_int)2;
     if (function) {
         OPERAND(-2) = function;
-        return function(pc-1, arg);
+        return function(pc-1, args);
     }
     JUMP(2);
 END_OPCODE

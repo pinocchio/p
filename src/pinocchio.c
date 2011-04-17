@@ -3,32 +3,15 @@
 #include <locale.h>
 #include <string.h>
 
-Array get_args(int argc, const char ** argv)
+void start_send(void** code, Object receiver)
 {
-    Array args = new_Array(argc - 1);
-    int i;
-    argv++;
-    for (i = 1; i < argc; i++) {
-        const char * arg = *argv++;
-        int length = strlen(arg);
-        String sarg = raw_String(length);
-        assert1(
-            mbstowcs(sarg->character, arg, length) != -1,
-            "failed to parse arguments");
-        args->value[i-1] = (Object)sarg;
-    }
-    return args;
+    Object * args = alloca(sizeof(Object));
+    args[0] = receiver;
+    method_context( code );
 }
 
-#ifndef UNIT_TESTING
-
-int main(int argc, const char ** argv)
+void pinocchio()
 {
-    setlocale(LC_ALL, "");
-    pinocchio_bootstrap();
-
-    //Array args = get_args(argc, argv);
-
     RawArray code;
 
     code = new_RawArray(4,
@@ -76,9 +59,35 @@ int main(int argc, const char ** argv)
 
     SmallInteger integer = new_SmallInteger(34);
 
-    Object args[] = { (Object)integer };
-    method_context( code->data, args );
+    start_send(code->data, (Object)integer);
+}
 
+Array get_args(int argc, const char ** argv)
+{
+    Array args = new_Array(argc - 1);
+    int i;
+    argv++;
+    for (i = 1; i < argc; i++) {
+        const char * arg = *argv++;
+        int length = strlen(arg);
+        String sarg = raw_String(length);
+        assert1(
+            mbstowcs(sarg->character, arg, length) != -1,
+            "failed to parse arguments");
+        args->value[i-1] = (Object)sarg;
+    }
+    return args;
+}
+
+#ifndef UNIT_TESTING
+
+int main(int argc, const char ** argv)
+{
+    setlocale(LC_ALL, "");
+    pinocchio_bootstrap();
+
+    //Array args = get_args(argc, argv);
+    pinocchio();
     return EXIT_SUCCESS;
 }
 

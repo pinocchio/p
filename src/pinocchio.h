@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <wchar.h>
+#include <alloca.h>
 
 #include <gc.h>
 
