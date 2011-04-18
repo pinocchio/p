@@ -34,7 +34,7 @@ void pinocchio()
             OP(self), (uns_int)0,
             OP(load_constant), new_SmallInteger(2), (uns_int)1, 
             OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
-            OP(iftrue_iffalse), (uns_int)0, (uns_int)6, (uns_int)0,
+            OP(iftrue_iffalse), (uns_int)5, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
             OP(self), (uns_int)0,

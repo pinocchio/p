@@ -4,19 +4,17 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    void method_context( void ** pc ) {
+    Object method_context( void ** pc ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
 
-/*
-*/
 #define OPCODE_BODY\
-        return;\
+        return NULL;\
     }\
-    Object * args;\
-    __asm("mov %%rbp, %0;": "=r"(args));\
-    args += 2;\
+    Object * arg;\
+    __asm("mov %%rbp, %0;": "=r"(arg));\
+    arg += 2;\
     local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
 
@@ -34,13 +32,12 @@
 
 #define FETCH(index)                *(index)
 
-#define SELF()                      args[0]
+#define SELF()                      arg[0]
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
 
-#define SET_RETURN(value)           SELF() = (value)
-#define RETURN(code)                return;
+#define RETURN(result)              return result;
 #define END_OPCODE                  
 
 #define LOAD(idx)                   local[idx]
@@ -173,35 +170,35 @@ OPCODE(send)
 
     if (cache_type != local[0]->header.class) {
         selector    = (Symbol)OPERAND(3);
+        //printf("Sending: %ls %p\n", selector->character, local);
         next_method = lookup(local[0], selector);
         if (next_method == NULL) {
-            RETURN(-2);
+            RETURN(NULL);
         }
         method_code = next_method->code->data;
         OPERAND(1)  = local[0]->header.class;
         OPERAND(2)  = method_code;
     }
 
-    ((native)*method_code)(method_code, &local[0]);
+    local[0] = ((native)*method_code)(method_code);
 
     JUMP(4);
 END_OPCODE
 
 OPCODE(return_constant)
     value = (Object)OPERAND(1);
-    SET_RETURN(value);
-    RETURN(0);
+    RETURN(value);
 END_OPCODE
 
 OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
-    SET_RETURN(value);
-    RETURN(0);
+    RETURN(value);
 END_OPCODE
 
 OPCODE(return_self)
-    RETURN(0);
+    value = SELF();
+    RETURN(value);
 END_OPCODE
 
 OPCODE(block_return)
@@ -217,29 +214,29 @@ OPCODE(block_return)
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
-    origin = UNS_INT_OPERAND(1);
-    value  = LOAD(origin);
+    value  = LOAD(0);
     if (value == false) {
-        address = INT_OPERAND(2);
+        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value != true) {
-        address = INT_OPERAND(3);
+        address = INT_OPERAND(2);
+        exit(-1);
         JUMP(address);
     }
-    JUMP(4);
+    JUMP(3);
 END_OPCODE
 
 OPCODE(iffalse_iftrue)
-    origin = UNS_INT_OPERAND(1);
-    value  = LOAD(origin);
+    value  = LOAD(0);
     if (value  == true) {
-        address = INT_OPERAND(2);
+        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value  != false) {
-        address = INT_OPERAND(3);
+        address = INT_OPERAND(2);
+        exit(-1);
         JUMP(address);
     }
-    JUMP(4);
+    JUMP(3);
 END_OPCODE
 
 OPCODE(jump)
@@ -259,7 +256,7 @@ OPCODE(capture)
     offset = UNS_INT_OPERAND(2);
     size   = UNS_INT_OPERAND(3);
     target = UNS_INT_OPERAND(4);
-    value  = (Object)new_BlockClosure(block, return_target, SELF(), size, &local[offset]);
+    value  = (Object)new_BlockClosure(block, return_target, SELF(), size, local);
     STORE(target, value);
     */
     JUMP(5);
@@ -269,16 +266,21 @@ OPCODE(lookup_native)
     name       = (NativeName)OPERAND(1);
     function   = lookup_native(name);
     OPERAND(0) = OP(jump);
-    OPERAND(1) = (uns_int)2;
+    OPERAND(1) = (void**)2;
     if (function) {
         OPERAND(-2) = function;
-        return function(pc-1, args);
+        offset = (*(void***)(arg - 2)) - (void**)arg;
+        local = alloca(offset * sizeof(Object));
+        while (offset--) {
+            local[offset] = arg[offset];
+        }
+        return function(pc-1);
     }
     JUMP(2);
 END_OPCODE
 
 OPCODE(exit)
-    RETURN(-1);
+    exit(-1);
 END_OPCODE
 
 OPCODE_END
