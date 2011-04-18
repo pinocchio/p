@@ -5,9 +5,10 @@
 
 void start_send(void** code, Object receiver)
 {
-    Object * args = alloca(sizeof(Object));
-    args[0] = receiver;
-    method_context( code );
+    Object * arg = alloca(sizeof(Object));
+    arg[0] = receiver;
+    Object result = method_context( code, arg );
+    printf("Returning from initial send!\n");
 }
 
 void pinocchio()
@@ -53,7 +54,7 @@ void pinocchio()
 
             OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
 
-            OP(return), (uns_int)0);
+            OP(return_result));
 
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), code);
 

@@ -5,7 +5,7 @@
 
 /* ======================================================================= */
 
-extern Object method_context( void ** pc );
+extern Object method_context( void ** pc, Object arg[] );
 
 #define EXTERN_OPCODE(name) extern void * op_##name; 
 #define OP(name) op_##name
@@ -25,6 +25,8 @@ EXTERN_OPCODE(move)
 EXTERN_OPCODE(return)
 EXTERN_OPCODE(return_constant)
 EXTERN_OPCODE(return_self)
+EXTERN_OPCODE(return_result)
+EXTERN_OPCODE(store_result)
 EXTERN_OPCODE(self)
 EXTERN_OPCODE(send)
 EXTERN_OPCODE(field_read)

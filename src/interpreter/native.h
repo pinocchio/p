@@ -17,23 +17,15 @@ struct NativeName {
 
 #ifndef DEBUG
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc ) {\
-        Object * arg;\
-        __asm("mov %%rbp, %0;": "=q"(arg));\
-        arg += 2;\
-        if (arg[0]->header.class != SmallInteger_class) {\
-            printf("invalid arg: %p\n", arg);\
-            exit(-1);\
-        }
+    Object NM_##module##_##name( void ** pc, Object arg[] ) {
 
 #else
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc ) {\
+    Object NM_##module##_##name( void ** pc, Object arg[] ) {\
         printf("Calling "#module">>"#name"\n");
 #endif
 
 #define END_NATIVE\
-	return;\
     }
 
 #define INSTALL_NATIVE(module, name)\

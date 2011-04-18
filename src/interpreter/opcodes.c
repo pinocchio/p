@@ -4,17 +4,19 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    Object method_context( void ** pc ) {
+    Object method_context( void ** pc, Object * arg ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
 
-#define OPCODE_BODY\
-        return NULL;\
-    }\
+/*
     Object * arg;\
     __asm("mov %%rbp, %0;": "=r"(arg));\
     arg += 2;\
+*/
+#define OPCODE_BODY\
+        return NULL;\
+    }\
     local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
 
@@ -82,6 +84,7 @@ DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
 DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
+DECLARE_OPCODE(return_result)
 
 OPCODE_DECLS
 
@@ -119,6 +122,7 @@ INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
+INSTALL_OPCODE(return_result)
 
 OPCODE_BODY
 
@@ -165,24 +169,29 @@ OPCODE(field_write)
 END_OPCODE
 
 OPCODE(send)
+    value       = LOAD(0);
     cache_type  = (Behavior)OPERAND(1);
     method_code = OPERAND(2);
 
-    if (cache_type != local[0]->header.class) {
+    if (cache_type != value->header.class) {
         selector    = (Symbol)OPERAND(3);
-        //printf("Sending: %ls %p\n", selector->character, local);
-        next_method = lookup(local[0], selector);
+        next_method = lookup(value, selector);
         if (next_method == NULL) {
             RETURN(NULL);
         }
         method_code = next_method->code->data;
-        OPERAND(1)  = local[0]->header.class;
+        OPERAND(1)  = value->header.class;
         OPERAND(2)  = method_code;
     }
 
-    local[0] = ((native)*method_code)(method_code);
+    STORE(0, ((native)*method_code)(method_code, local));
 
     JUMP(4);
+END_OPCODE
+
+OPCODE(return_result)
+    value = LOAD(0);
+    RETURN(value);
 END_OPCODE
 
 OPCODE(return_constant)
@@ -193,6 +202,11 @@ END_OPCODE
 OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
+    /*
+    if (((SmallInteger)SELF())->value > 30) {
+        printf("Returning from: %li\n", ((SmallInteger)SELF())->value);
+    }
+    */
     RETURN(value);
 END_OPCODE
 
@@ -214,7 +228,7 @@ OPCODE(block_return)
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
-    value  = LOAD(0);
+    value = LOAD(0);
     if (value == false) {
         address = INT_OPERAND(1);
         JUMP(address);
@@ -227,8 +241,8 @@ OPCODE(iftrue_iffalse)
 END_OPCODE
 
 OPCODE(iffalse_iftrue)
-    value  = LOAD(0);
-    if (value  == true) {
+    value = LOAD(0);
+    if (value == true) {
         address = INT_OPERAND(1);
         JUMP(address);
     } else if (value  != false) {
@@ -269,12 +283,7 @@ OPCODE(lookup_native)
     OPERAND(1) = (void**)2;
     if (function) {
         OPERAND(-2) = function;
-        offset = (*(void***)(arg - 2)) - (void**)arg;
-        local = alloca(offset * sizeof(Object));
-        while (offset--) {
-            local[offset] = arg[offset];
-        }
-        return function(pc-1);
+        return function(pc-1, arg);
     }
     JUMP(2);
 END_OPCODE

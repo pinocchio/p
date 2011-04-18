@@ -4,7 +4,7 @@ static Object test_machine_return( Object self_and_arguments[], Symbol message, 
 {
     Object self = self_and_arguments[0];
     MethodClosure method = lookup( self, message );
-    method_context( method->code->data );
+    // method_context( method->code->data );
     // assert_int_equal( expected_return_code,  );
 
     return self_and_arguments[0];
@@ -128,7 +128,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
     SmallInteger integer = new_SmallInteger(489);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( &code->data[1] );
+    // method_context( &code->data[1] );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 700 );
 }
@@ -162,7 +162,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
     SmallInteger integer = new_SmallInteger(489);
 
     Object args[] = { (Object)integer, (Object)new_SmallInteger(2) };
-    method_context( code->data );
+    // method_context( code->data );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 500 );
 }
@@ -215,7 +215,7 @@ void test_interpreter_can_fib( void **state )
     SmallInteger integer = new_SmallInteger(5);
 
     Object args[] = { (Object)integer };
-    method_context( code->data );
+    // method_context( code->data );
 
     assert_int_equal( ((SmallInteger)args[0])->value, 8 );
 }
