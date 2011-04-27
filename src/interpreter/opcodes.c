@@ -19,7 +19,7 @@
     register Object * stack_pointer __asm("rsp");\
     alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
-    // stack_pointer -= (uns_int)*(pc + 1);\
+    // stack_pointer -= (uns_int)*(pc + 1);
 
 #define OPCODE_END\
     }
@@ -189,11 +189,11 @@ OPCODE(lookup_send)
 END_OPCODE
 
 OPCODE(send)
+    //prefetch method. will be discarded on cache miss.
+    method_code = OPERAND(2);
+    
     value = LOAD(0);
-
-    if ((Behavior)OPERAND(1) == value->header.class) {
-        method_code = OPERAND(2);
-    } else {
+    if ((Behavior)OPERAND(1) != value->header.class) {
         goto *OP(lookup_send);
     }
 
