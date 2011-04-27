@@ -189,14 +189,12 @@ OPCODE(lookup_send)
 END_OPCODE
 
 OPCODE(send)
-    //prefetch method. will be discarded on cache miss.
-    method_code = OPERAND(2);
-    
     value = LOAD(0);
-    if ((Behavior)OPERAND(1) != value->header.class) {
+    if ((Behavior)OPERAND(1) == value->header.class) {
+        method_code = OPERAND(2);
+    } else {
         goto *OP(lookup_send);
     }
-
     STORE(0, ((native)*method_code)(method_code, stack_pointer));
     JUMP(4);
 END_OPCODE
