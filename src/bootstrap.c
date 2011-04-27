@@ -55,7 +55,7 @@ void pinocchio_bootstrap()
 
     init_layout();
     
-    method_context( NULL );
+    method_context( NULL, NULL );
 
     init_natives();
 }

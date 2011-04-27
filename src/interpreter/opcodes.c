@@ -4,26 +4,22 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    Object method_context( void ** pc, ... ) {
+    Object method_context( void ** pc, Object * arg ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
 
-/*
-    Object * arg;\
-    __asm("mov %%rbp, %0;": "=r"(arg));\
-    arg += 2;\
-*/
-
-// local -= uses 1 less register than when we use alloca. god knows why
+/* use alloca rather than manually changing the RSP since it
+ * stores it as the RBP and can return immediately without
+ * calculating the frame size again
+ */
 #define OPCODE_BODY\
         return NULL;\
     }\
+    register Object * stack_pointer __asm("rsp");\
     alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
-    register Object * local __asm("rsp");\
-    register Object * arg   __asm("rbp");\
     JUMP(2);
-    // local -= (uns_int)*(pc + 1);\
+    // stack_pointer -= (uns_int)*(pc + 1);\
 
 #define OPCODE_END\
     }
@@ -39,7 +35,7 @@
 
 #define FETCH(index)                *(index)
 
-#define ARG(index)	            arg[2 + index]
+#define ARG(index)	                arg[index]
 
 #define SELF()                      ARG(0)
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
@@ -49,8 +45,8 @@
 #define RETURN(result)              return result;
 #define END_OPCODE                  
 
-#define LOAD(idx)                   local[idx]
-#define STORE(idx, object)          local[idx] = object
+#define LOAD(idx)                   stack_pointer[idx]
+#define STORE(idx, object)          stack_pointer[idx] = object
 #define READ_FIELD(index)           SELF()->field[index]
 #define WRITE_FIELD(index, value)   SELF()->field[index] = value
 
@@ -99,6 +95,7 @@ OPCODE_DECLS
 uns_int         target;
 uns_int         origin;
 uns_int         offset;
+uns_int         size;
 long            address;
 Symbol          selector;
 Object          value;
@@ -178,16 +175,16 @@ OPCODE(lookup_send)
     selector    = (Symbol)OPERAND(3);
     value       = LOAD(0);
     next_method = lookup(value, selector);
-    //reload value so that gcc doesn't save and restore it on the C stack for lookup call. It is already on the stack at *[ER]SP
     if (next_method == NULL) {
         RETURN(NULL);
     }
     method_code = next_method->code->data;
+    //reload value so that gcc doesn't save and restore it on the C stack for lookup call. It is already on the stack at *[ER]SP
     value       = LOAD(0);
     OPERAND(1)  = value->header.class;
     OPERAND(2)  = method_code;
 
-    STORE(0, ((native)*method_code)(method_code));
+    STORE(0, ((native)*method_code)(method_code, stack_pointer));
     JUMP(4);
 END_OPCODE
 
@@ -197,10 +194,10 @@ OPCODE(send)
     if ((Behavior)OPERAND(1) == value->header.class) {
         method_code = OPERAND(2);
     } else {
-	goto *OP(lookup_send);
+        goto *OP(lookup_send);
     }
 
-    STORE(0, ((native)*method_code)(method_code));
+    STORE(0, ((native)*method_code)(method_code, stack_pointer));
     JUMP(4);
 END_OPCODE
 
@@ -217,11 +214,6 @@ END_OPCODE
 OPCODE(return)
     origin  = UNS_INT_OPERAND(1);
     value   = LOAD(origin);
-    /*
-    if (((SmallInteger)SELF())->value > 30) {
-        printf("Returning from: %li\n", ((SmallInteger)SELF())->value);
-    }
-    */
     RETURN(value);
 END_OPCODE
 
@@ -285,7 +277,7 @@ OPCODE(capture)
     offset = UNS_INT_OPERAND(2);
     size   = UNS_INT_OPERAND(3);
     target = UNS_INT_OPERAND(4);
-    value  = (Object)new_BlockClosure(block, return_target, SELF(), size, local);
+    value  = (Object)new_BlockClosure(block, return_target, SELF(), size, stack_pointer);
     STORE(target, value);
     */
     JUMP(5);
@@ -298,7 +290,7 @@ OPCODE(lookup_native)
     OPERAND(1) = (void**)2;
     if (function) {
         OPERAND(-2) = function;
-        return function(pc-1);
+        return function(pc - 1, arg);
     }
     JUMP(2);
 END_OPCODE

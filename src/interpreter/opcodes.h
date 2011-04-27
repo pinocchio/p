@@ -5,7 +5,7 @@
 
 /* ======================================================================= */
 
-extern Object method_context( void ** pc, ... );
+extern Object method_context( void ** pc, Object * arg );
 
 #define EXTERN_OPCODE(name) extern void * op_##name; 
 #define OP(name) op_##name

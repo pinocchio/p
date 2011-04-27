@@ -15,15 +15,14 @@ struct NativeName {
 
 /* ======================================================================= */
 
+// #define DEBUG
 #ifndef DEBUG
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc, ... ) {\
-    	register Object * arg   __asm("rbp");\
+    Object NM_##module##_##name( void ** pc, Object * arg ) {\
 
 #else
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc, ... ) {\
-    	register Object * arg   __asm("rbp");\
+    Object NM_##module##_##name( void ** pc, Object * arg ) {\
         printf("Calling "#module">>"#name"\n");
 #endif
 
@@ -33,7 +32,7 @@ struct NativeName {
 #define INSTALL_NATIVE(module, name)\
     install_native( new_NativeName( L""#module, L""#name ), NM_##module##_##name )
 
-#define ARGUMENT(index) arg[2 + index]
+#define ARGUMENT(index) arg[index]
 #define NATIVE_RETURN(result) return (Object)result
 
 /* ======================================================================= */
