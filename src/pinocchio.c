@@ -3,12 +3,11 @@
 #include <locale.h>
 #include <string.h>
 
-void start_send(void** code, Object receiver)
+Object start_send(void** code, Object receiver)
 {
     Object * arg = alloca(sizeof(Object));
     arg[0] = receiver;
-    Object result = method_context( code, arg );
-    printf("Returning from initial send!\n");
+    return method_context( code, arg );
 }
 
 void pinocchio()

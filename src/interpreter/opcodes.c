@@ -4,7 +4,7 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    Object method_context( void ** pc, Object * arg ) {
+    Object method_context( void ** pc, ... ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
@@ -14,11 +14,16 @@
     __asm("mov %%rbp, %0;": "=r"(arg));\
     arg += 2;\
 */
+
+// local -= uses 1 less register than when we use alloca. god knows why
 #define OPCODE_BODY\
         return NULL;\
     }\
-    local = (Object*)alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
+    alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
+    register Object * local __asm("rsp");\
+    register Object * arg   __asm("rbp");\
     JUMP(2);
+    // local -= (uns_int)*(pc + 1);\
 
 #define OPCODE_END\
     }
@@ -34,7 +39,9 @@
 
 #define FETCH(index)                *(index)
 
-#define SELF()                      arg[0]
+#define ARG(index)	            arg[2 + index]
+
+#define SELF()                      ARG(0)
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
@@ -82,6 +89,7 @@ DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
+DECLARE_OPCODE(lookup_send)
 DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(return_result)
@@ -91,17 +99,14 @@ OPCODE_DECLS
 uns_int         target;
 uns_int         origin;
 uns_int         offset;
-uns_int         size;
 long            address;
 Symbol          selector;
 Object          value;
 NativeName      name;
 native          function;
 MethodClosure   next_method;
-Object *        local;
 Block           block;
 void **         method_code;
-Behavior        cache_type;
 
 OPCODE_HEAD
 
@@ -120,6 +125,7 @@ INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
+INSTALL_OPCODE(lookup_send)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
 INSTALL_OPCODE(return_result)
@@ -168,24 +174,33 @@ OPCODE(field_write)
     JUMP(3);
 END_OPCODE
 
-OPCODE(send)
+OPCODE(lookup_send)
+    selector    = (Symbol)OPERAND(3);
     value       = LOAD(0);
-    cache_type  = (Behavior)OPERAND(1);
-    method_code = OPERAND(2);
+    next_method = lookup(value, selector);
+    //reload value so that gcc doesn't save and restore it on the C stack for lookup call. It is already on the stack at *[ER]SP
+    if (next_method == NULL) {
+        RETURN(NULL);
+    }
+    method_code = next_method->code->data;
+    value       = LOAD(0);
+    OPERAND(1)  = value->header.class;
+    OPERAND(2)  = method_code;
 
-    if (cache_type != value->header.class) {
-        selector    = (Symbol)OPERAND(3);
-        next_method = lookup(value, selector);
-        if (next_method == NULL) {
-            RETURN(NULL);
-        }
-        method_code = next_method->code->data;
-        OPERAND(1)  = value->header.class;
-        OPERAND(2)  = method_code;
+    STORE(0, ((native)*method_code)(method_code));
+    JUMP(4);
+END_OPCODE
+
+OPCODE(send)
+    value = LOAD(0);
+
+    if ((Behavior)OPERAND(1) == value->header.class) {
+        method_code = OPERAND(2);
+    } else {
+	goto *OP(lookup_send);
     }
 
-    STORE(0, ((native)*method_code)(method_code, local));
-
+    STORE(0, ((native)*method_code)(method_code));
     JUMP(4);
 END_OPCODE
 
@@ -283,7 +298,7 @@ OPCODE(lookup_native)
     OPERAND(1) = (void**)2;
     if (function) {
         OPERAND(-2) = function;
-        return function(pc-1, arg);
+        return function(pc-1);
     }
     JUMP(2);
 END_OPCODE
