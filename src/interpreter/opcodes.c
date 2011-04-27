@@ -236,8 +236,8 @@ END_OPCODE
 
 OPCODE(iftrue_iffalse)
     value = LOAD(0);
+    address = INT_OPERAND(1);
     if (value == false) {
-        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value != true) {
         address = INT_OPERAND(2);
@@ -249,8 +249,8 @@ END_OPCODE
 
 OPCODE(iffalse_iftrue)
     value = LOAD(0);
+    address = INT_OPERAND(1);
     if (value == true) {
-        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value  != false) {
         address = INT_OPERAND(2);
