@@ -22,12 +22,12 @@ OBJECTS       = $(CFILES:%.c=%.o)
 
 # ============================================================================
 
-CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
+CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL -fno-omit-frame-pointer
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS  += -lgc -lm -ldl -lcmockery
 #LDFLAGS += -lpthread
-CC        = gcc-4.5 
+CC        = llvm-gcc #gcc-4.5 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
@@ -49,7 +49,7 @@ GITVERSION:
 	@git show-ref --hash=20 HEAD >> $@
 
 $(TARGET): $(OBJECTS)
-	@echo Linking $@
+	@echo Linking ${CC} ${LDFLAGS} $@
 	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
 run: $(TARGET)
@@ -66,7 +66,7 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS+="-O3" make
+	CFLAGS+="-O4" LDFLAGS+="-O4" make
 
 fast-profiled:
 	CFLAGS+="-O3 -fprofile-generate" LDFLAGS+="-fprofile-generate" make $(TARGET)

@@ -82,7 +82,7 @@ void test_interpreter_can_call_closure( void **state )
         new_RawArray(12,
             &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
+            OP(send), (uns_int)0, new_Symbol(L"value"), 
             OP(return), (uns_int)0);
 
     install_method((Behavior)SmallInteger_class, new_Symbol(L"test"), code);
@@ -113,7 +113,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
         new_RawArray(15,
             &method_context, (uns_int)1,
             OP(capture), block, (uns_int)0, (uns_int)0, (uns_int)0,
-            OP(send), (uns_int)0, new_Symbol(L"value"), OP(nop),
+            OP(send), (uns_int)0, new_Symbol(L"value"), 
             OP(load_constant), new_SmallInteger(700), (uns_int)0,
             OP(return), (uns_int)0);
 

@@ -16,7 +16,7 @@
 #define OPCODE_BODY\
         return NULL;\
     }\
-    alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
+    stack_pointer = alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
     // stack_pointer -= (uns_int)*(pc + 1);
 
@@ -47,7 +47,7 @@
 #define READ_FIELD(index)           SELF()->field[index]
 #define WRITE_FIELD(index, value)   SELF()->field[index] = value
 
-//#define DEBUG
+// #define DEBUG
 #ifndef DEBUG
 #define OPCODE(name)\
     label_##name:
@@ -67,7 +67,6 @@
 
 /* ======================================================================= */
 
-DECLARE_OPCODE(nop)
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(capture)
 DECLARE_OPCODE(exit)
@@ -103,7 +102,6 @@ void **         method_code;
 
 OPCODE_HEAD
 
-INSTALL_OPCODE(nop)
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(capture)
 INSTALL_OPCODE(exit)
@@ -123,10 +121,6 @@ INSTALL_OPCODE(field_write)
 INSTALL_OPCODE(return_result)
 
 OPCODE_BODY
-
-OPCODE(nop)
-    JUMP(1);
-END_OPCODE
 
 OPCODE(self)
     target = UNS_INT_OPERAND(1);
