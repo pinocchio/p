@@ -22,7 +22,7 @@ OBJECTS       = $(CFILES:%.c=%.o)
 
 # ============================================================================
 
-CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL -fno-omit-frame-pointer
+CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS  += -lgc -lm -ldl -lcmockery
@@ -66,7 +66,7 @@ clean:
 	@cd plugin; ${MAKE} clean;
 
 fast:
-	CFLAGS+="-O4" LDFLAGS+="-O4" make
+	CFLAGS+="-O3" LDFLAGS+="-O3" make
 
 fast-profiled:
 	CFLAGS+="-O3 -fprofile-generate" LDFLAGS+="-fprofile-generate" make $(TARGET)

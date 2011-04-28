@@ -19,10 +19,12 @@ struct NativeName {
 #ifndef DEBUG
 #define NATIVE(module, name)\
     __attribute__((optimize("-fno-omit-frame-pointer"))) Object NM_##module##_##name( void ** pc, Object self ) {\
+        __builtin_unwind_init();
 
 #else
 #define NATIVE(module, name)\
     __attribute__((optimize("-fno-omit-frame-pointer"))) Object NM_##module##_##name( void ** pc, Object self ) {\
+        __builtin_unwind_init();\
         printf("Calling "#module">>"#name"\n");
 #endif
 
