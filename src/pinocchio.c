@@ -59,7 +59,7 @@ void pinocchio()
 
     SmallInteger integer = new_SmallInteger(34);
 
-    Object result = start_send(code->data, (Object)integer);
+    SmallInteger result = (SmallInteger)start_send(code->data, (Object)integer);
 }
 
 Array get_args(int argc, const char ** argv)

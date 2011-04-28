@@ -141,8 +141,8 @@ OPCODE(self)
 END_OPCODE
 
 OPCODE(move)
-    target = UNS_INT_OPERAND(1);
-    origin = UNS_INT_OPERAND(2);
+    origin = UNS_INT_OPERAND(1);
+    target = UNS_INT_OPERAND(2);
     value  = LOAD(origin);
     STORE(target, value);
     JUMP(3);
