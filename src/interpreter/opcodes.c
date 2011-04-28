@@ -17,6 +17,7 @@
         return NULL;\
     }\
     register Object * stack_pointer __asm("rsp");\
+    register Object * base_pointer  __asm("rbp");\
     alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
     // stack_pointer -= (uns_int)*(pc + 1);
@@ -78,7 +79,6 @@ DECLARE_OPCODE(iffalse_iftrue)
 DECLARE_OPCODE(iftrue_iffalse)
 DECLARE_OPCODE(jump)
 DECLARE_OPCODE(load_constant)
-DECLARE_OPCODE(lookup_native)
 DECLARE_OPCODE(move)
 DECLARE_OPCODE(return)
 DECLARE_OPCODE(return_constant)
@@ -115,7 +115,6 @@ INSTALL_OPCODE(iffalse_iftrue)
 INSTALL_OPCODE(iftrue_iffalse)
 INSTALL_OPCODE(jump)
 INSTALL_OPCODE(load_constant)
-INSTALL_OPCODE(lookup_native)
 INSTALL_OPCODE(move)
 INSTALL_OPCODE(return)
 INSTALL_OPCODE(return_constant)
@@ -280,18 +279,6 @@ OPCODE(capture)
     */
     JUMP(5);
 END_OPCODE;
-
-OPCODE(lookup_native)
-    name       = (NativeName)OPERAND(1);
-    function   = lookup_native(name);
-    OPERAND(0) = OP(jump);
-    OPERAND(1) = (void**)2;
-    if (function) {
-        OPERAND(-2) = function;
-        return function(pc - 1, arg);
-    }
-    JUMP(2);
-END_OPCODE
 
 OPCODE(exit)
     exit(-1);

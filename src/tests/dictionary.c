@@ -2,14 +2,14 @@
 
 void test_natives_dictionary_can_store_and_lookup(void **state) {
 	NativeName n = new_NativeName( L"test_module", L"test_name" );
-        NativesDictionary d = new_NativesDictionary();
+    NativesDictionary d = new_NativesDictionary();
 
 	void *f = (void*)123; 
 
 	NativesDictionary_store( d, n, f );
-        void *native = NativesDictionary_lookup( d, n );
+    void *native = NativesDictionary_lookup( d, n );
 
-        assert_int_equal( native, f );
+    assert_int_equal( native, f );
 }
 
 void test_identity_dictionary_can_override_a_value(void **state) {

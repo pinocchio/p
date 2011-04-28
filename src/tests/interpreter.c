@@ -55,8 +55,7 @@ void test_interpreter_can_call_methods(void **state)
 void test_interpreter_can_call_native( void **state )
 {
     RawArray code =
-        new_RawArray(2,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
+        new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"plus")), 0);
 
 
     install_method( (Behavior)SmallInteger_class, new_Symbol(L"test"), code );
@@ -76,9 +75,7 @@ void test_interpreter_can_call_closure( void **state )
             OP(return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
-    code =
-        new_RawArray(2,
-            OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"BlockClosure", L"apply")), 0);
     install_method((Behavior)BlockClosure_class, new_Symbol(L"value"), code );
 
     code =
@@ -108,9 +105,7 @@ void test_interpreter_can_call_closure_ignore_return( void **state )
     Block block = new_Block(code, NULL);
 
     Array body;
-    code =
-        new_RawArray(2,
-            OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"BlockClosure", L"apply")), 0);
 
     new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), code);
 
@@ -142,10 +137,7 @@ void test_interpreter_can_nonlocal_return_from_closure( void **state )
             OP(block_return), (uns_int)0);
     Block block = new_Block(code, NULL);
 
-    code =
-        new_RawArray(4,
-            &method_context, (uns_int)0,
-            OP(lookup_native), new_NativeName( L"BlockClosure", L"apply"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"BlockClosure", L"apply")), 0);
 
     new_MethodClosure((Behavior)BlockClosure_class, new_Symbol(L"value"), code);
 
@@ -173,19 +165,13 @@ void test_interpreter_can_fib( void **state )
     RawArray code;
     Block block;
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"smaller")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), code);
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"minus"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"minus")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), code);
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"plus")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
     code = new_RawArray(57,

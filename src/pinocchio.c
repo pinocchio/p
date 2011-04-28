@@ -14,19 +14,13 @@ void pinocchio()
 {
     RawArray code;
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"smaller"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"smaller")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), code);
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"minus"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"minus")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), code);
 
-    code = new_RawArray(4,
-            &method_context, 0,
-            OP(lookup_native), new_NativeName( L"SmallInteger", L"plus"));
+    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"plus")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
     code = new_RawArray(57,
