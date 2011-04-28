@@ -18,13 +18,11 @@ struct NativeName {
 // #define DEBUG
 #ifndef DEBUG
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc, Object self ) {\
-        alloca(0);
+    __attribute__((optimize("-fno-omit-frame-pointer"))) Object NM_##module##_##name( void ** pc, Object self ) {\
 
 #else
 #define NATIVE(module, name)\
-    Object NM_##module##_##name( void ** pc, Object self, ... ) {\
-        alloca(0);\
+    __attribute__((optimize("-fno-omit-frame-pointer"))) Object NM_##module##_##name( void ** pc, Object self ) {\
         printf("Calling "#module">>"#name"\n");
 #endif
 

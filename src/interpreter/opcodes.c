@@ -4,7 +4,7 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    Object method_context( void ** pc, Object self ) {
+    __attribute__((optimize("-fno-omit-frame-pointer"))) Object method_context( void ** pc, Object self ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
