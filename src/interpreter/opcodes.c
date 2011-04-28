@@ -3,6 +3,9 @@
 
 /* ======================================================================= */
 
+register Object * stack_pointer __asm("rsp");
+register Object * base_pointer  __asm("rbp");
+
 #define OPCODE_DECLS\
     Object method_context( void ** pc, Object self ) {
 
@@ -16,8 +19,6 @@
 #define OPCODE_BODY\
         return NULL;\
     }\
-    register Object * stack_pointer __asm("rsp");\
-    register Object * base_pointer  __asm("rbp");\
     alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
     // stack_pointer -= (uns_int)*(pc + 1);
