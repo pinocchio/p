@@ -19,7 +19,7 @@
     register Object * stack_pointer __asm("rsp");\
     alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
     JUMP(2);
-    // stack_pointer -= (uns_int)*(pc + 1);\
+    // stack_pointer -= (uns_int)*(pc + 1);
 
 #define OPCODE_END\
     }
@@ -190,13 +190,11 @@ END_OPCODE
 
 OPCODE(send)
     value = LOAD(0);
-
     if ((Behavior)OPERAND(1) == value->header.class) {
         method_code = OPERAND(2);
     } else {
         goto *OP(lookup_send);
     }
-
     STORE(0, ((native)*method_code)(method_code, stack_pointer));
     JUMP(4);
 END_OPCODE
@@ -236,8 +234,8 @@ END_OPCODE
 
 OPCODE(iftrue_iffalse)
     value = LOAD(0);
+    address = INT_OPERAND(1);
     if (value == false) {
-        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value != true) {
         address = INT_OPERAND(2);
@@ -249,8 +247,8 @@ END_OPCODE
 
 OPCODE(iffalse_iftrue)
     value = LOAD(0);
+    address = INT_OPERAND(1);
     if (value == true) {
-        address = INT_OPERAND(1);
         JUMP(address);
     } else if (value  != false) {
         address = INT_OPERAND(2);
