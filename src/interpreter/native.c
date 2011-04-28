@@ -16,7 +16,9 @@ NativeName new_NativeName(const wchar_t * module, const wchar_t * name)
 
 native lookup_native(NativeName name)
 {
-    return NativesDictionary_lookup(NATIVES, name);
+    native n = NativesDictionary_lookup(NATIVES, name);
+    if (n) { return n; }
+    return &method_context;
 }
 
 void install_native(NativeName name, native aNative)
