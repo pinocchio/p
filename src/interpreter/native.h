@@ -19,14 +19,12 @@ struct NativeName {
 #ifndef DEBUG
 #define NATIVE(module, name)\
     Object NM_##module##_##name( void ** pc, Object self ) {\
-        alloca(0);\
-        register Object * base_pointer  __asm("rbp");\
+        alloca(0);
 
 #else
 #define NATIVE(module, name)\
     Object NM_##module##_##name( void ** pc, Object self, ... ) {\
         alloca(0);\
-        register Object * base_pointer  __asm("rbp");\
         printf("Calling "#module">>"#name"\n");
 #endif
 

@@ -46,6 +46,8 @@ typedef Dictionary                  MethodDictionary;
 typedef Dictionary                  NativesDictionary;
 
 typedef Object (*native)( void ** pc, Object self );
+register Object * stack_pointer __asm("rsp");
+register Object * base_pointer  __asm("rbp");
 
 #define HASH(object) object->header.format.hash
 #define BASE(object) object->header.format.base

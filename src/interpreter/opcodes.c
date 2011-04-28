@@ -3,9 +3,6 @@
 
 /* ======================================================================= */
 
-register Object * stack_pointer __asm("rsp");
-register Object * base_pointer  __asm("rbp");
-
 #define OPCODE_DECLS\
     Object method_context( void ** pc, Object self ) {
 
