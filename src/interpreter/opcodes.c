@@ -4,7 +4,7 @@
 /* ======================================================================= */
 
 #define OPCODE_DECLS\
-    Object method_context( void ** pc, Object * arg ) {
+    Object method_context( void ** pc, Object self ) {
 
 #define OPCODE_HEAD\
     if ( pc == NULL ) {\
@@ -36,9 +36,7 @@
 
 #define FETCH(index)                *(index)
 
-#define ARG(index)	                arg[index]
-
-#define SELF()                      ARG(0)
+#define SELF()                      self
 #define OPERAND(idx)                FETCH(GET_PC() + idx)
 #define UNS_INT_OPERAND(idx)        (uns_int)(FETCH(GET_PC() + idx))
 #define INT_OPERAND(idx)            (long)(FETCH(GET_PC() + idx))
@@ -134,8 +132,7 @@ END_OPCODE
 
 OPCODE(self)
     target = UNS_INT_OPERAND(1);
-    value  = SELF();
-    STORE(target, value);
+    STORE(target, self);
     JUMP(2);
 END_OPCODE
 
@@ -183,7 +180,7 @@ OPCODE(lookup_send)
     OPERAND(1)  = value->header.class;
     OPERAND(2)  = method_code;
 
-    STORE(0, ((native)*method_code)(method_code, stack_pointer));
+    STORE(0, ((native)*method_code)(method_code, LOAD(0)));
     JUMP(4);
 END_OPCODE
 
@@ -194,7 +191,7 @@ OPCODE(send)
     } else {
         goto *OP(lookup_send);
     }
-    STORE(0, ((native)*method_code)(method_code, stack_pointer));
+    STORE(0, ((native)*method_code)(method_code, LOAD(0)));
     JUMP(4);
 END_OPCODE
 

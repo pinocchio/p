@@ -5,9 +5,7 @@
 
 Object start_send(void** code, Object receiver)
 {
-    Object * arg = alloca(sizeof(Object));
-    arg[0] = receiver;
-    return method_context( code, arg );
+    return method_context( code, receiver );
 }
 
 void pinocchio()

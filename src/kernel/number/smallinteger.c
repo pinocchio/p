@@ -36,44 +36,38 @@ void init_integercache()
 /* ======================================================================= */
 
 NATIVE(SmallInteger, plus)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    SmallInteger result = new_SmallInteger(self->value + right->value);
+    SmallInteger result = new_SmallInteger(((SmallInteger)self)->value + right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, minus)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    SmallInteger result = new_SmallInteger(self->value - right->value);
+    SmallInteger result = new_SmallInteger(((SmallInteger)self)->value - right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, times)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    SmallInteger result = new_SmallInteger(self->value * right->value);
+    SmallInteger result = new_SmallInteger(((SmallInteger)self)->value * right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, divide)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    SmallInteger result = new_SmallInteger(self->value / right->value);
+    SmallInteger result = new_SmallInteger(((SmallInteger)self)->value / right->value);
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, smaller)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    Object result       = self->value < right->value ? true : false;
+    Object result       = ((SmallInteger)self)->value < right->value ? true : false;
     NATIVE_RETURN(result);
 END_NATIVE
 
 NATIVE(SmallInteger, greater)
-    SmallInteger self   = (SmallInteger)ARGUMENT(0);
     SmallInteger right  = (SmallInteger)ARGUMENT(1);
-    Object result       = self->value > right->value ? true : false;
+    Object result       = ((SmallInteger)self)->value > right->value ? true : false;
     NATIVE_RETURN(result);
 END_NATIVE
 
