@@ -49,7 +49,7 @@
 #define READ_FIELD(index)           SELF()->field[index]
 #define WRITE_FIELD(index, value)   SELF()->field[index] = value
 
-// #define DEBUG
+//#define DEBUG
 #ifndef DEBUG
 #define OPCODE(name)\
     label_##name:
@@ -83,7 +83,9 @@ DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
+DECLARE_OPCODE(send_return)
 DECLARE_OPCODE(lookup_send)
+DECLARE_OPCODE(lookup_send_return)
 DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(return_result)
@@ -119,7 +121,9 @@ INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
+INSTALL_OPCODE(send_return)
 INSTALL_OPCODE(lookup_send)
+INSTALL_OPCODE(lookup_send_return)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
 INSTALL_OPCODE(return_result)
@@ -184,6 +188,33 @@ OPCODE(lookup_send)
     JUMP(4);
 END_OPCODE
 
+OPCODE(lookup_send_return)
+    selector    = (Symbol)OPERAND(3);
+    value       = LOAD(0);
+    next_method = lookup(value, selector);
+    if (next_method == NULL) {
+        RETURN(NULL);
+    }
+    method_code = next_method->code->data;
+    //reload value so that gcc doesn't save and restore it on the C stack for lookup call. It is already on the stack at *[ER]SP
+    value       = LOAD(0);
+    OPERAND(1)  = value->header.class;
+    OPERAND(2)  = method_code;
+
+    RETURN(((native)*method_code)(method_code, LOAD(0)));
+END_OPCODE
+
+
+OPCODE(send_return)
+    value = LOAD(0);
+    if ((Behavior)OPERAND(1) == value->header.class) {
+        method_code = OPERAND(2);
+    } else {
+        goto *OP(lookup_send_return);
+    }
+    RETURN( ((native)*method_code)(method_code, LOAD(0)));
+END_OPCODE
+
 OPCODE(send)
     value = LOAD(0);
     if ((Behavior)OPERAND(1) == value->header.class) {
@@ -212,8 +243,7 @@ OPCODE(return)
 END_OPCODE
 
 OPCODE(return_self)
-    value = SELF();
-    RETURN(value);
+    RETURN(SELF());
 END_OPCODE
 
 OPCODE(block_return)

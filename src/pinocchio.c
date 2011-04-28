@@ -43,9 +43,8 @@ void pinocchio()
 
             OP(move), (uns_int)2, (uns_int)1,
 
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
+            OP(send_return), (uns_int)0, (uns_int)0, new_Symbol(L"+") );
 
-            OP(return_result));
 
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), code);
 
