@@ -31,6 +31,7 @@ EXTERN_OPCODE(field_write)
 EXTERN_OPCODE(try_native)
 
 #define U(v) (uns_int)v
+#define INLINE_CACHE U(0), U(0)
 
 EXTERN_OPCODE(self_send)
 EXTERN_OPCODE(result_send)
