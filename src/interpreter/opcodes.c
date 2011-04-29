@@ -24,8 +24,8 @@
 #define OPCODE_END\
     }
 
-#define INSTALL_OPCODE(name)\
-    op_##name = &&label_##name;
+#define SET_OPCODE(name, value) op_##name = (void*)value;
+#define INSTALL_OPCODE(name)    SET_OPCODE(name, &&label_##name)
 
 /* ======================================================================= */
 
@@ -85,40 +85,55 @@ DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(return_result)
 
+DECLARE_OPCODE(result_receiver)
+DECLARE_OPCODE(arg_receiver)
+DECLARE_OPCODE(self_receiver)
+DECLARE_OPCODE(temp_receiver)
+
 OPCODE_DECLS
 
 uns_int         target;
 uns_int         origin;
 uns_int         offset;
-uns_int         size;
 long            address;
 Symbol          selector;
-Object          value;
-Object          return_value;
-NativeName      name;
-native          function;
 MethodClosure   next_method;
 Block           block;
 void **         method_code;
+
+Object          value;
+Object          return_value;
+Object          receiver;
 
 OPCODE_HEAD
 
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(capture)
 INSTALL_OPCODE(exit)
-INSTALL_OPCODE(iftrue_iffalse)
 INSTALL_OPCODE(jump)
 INSTALL_OPCODE(load_constant)
 INSTALL_OPCODE(move)
 INSTALL_OPCODE(return)
-INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
+INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
-INSTALL_OPCODE(store_result)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
+
+INSTALL_OPCODE(store_result)
 INSTALL_OPCODE(return_result)
+INSTALL_OPCODE(iftrue_iffalse)
+
+#define RCV_RESULT 0
+#define RCV_SELF   1
+#define RCV_ARG    2
+#define RCV_TEMP   3
+
+SET_OPCODE(result_receiver, RCV_RESULT)
+SET_OPCODE(self_receiver,   RCV_SELF)
+SET_OPCODE(arg_receiver,    RCV_ARG)
+SET_OPCODE(temp_receiver,   RCV_TEMP)
 
 OPCODE_BODY
 
@@ -160,22 +175,26 @@ OPCODE(field_write)
 END_OPCODE
 
 OPCODE(send)
-    value = LOAD(0);
-    if ((Behavior)OPERAND(1) == value->header.class) {
-        method_code = OPERAND(2);
+    switch (UNS_INT_OPERAND(1)) {
+        case RCV_RESULT: receiver = return_value; break;
+        case RCV_SELF:   receiver = self; break;
+        default: receiver = self;
+    }
+    if ((Behavior)OPERAND(2) == receiver->header.class) {
+        method_code = OPERAND(3);
     } else {
-        selector    = (Symbol)OPERAND(3);
-        OPERAND(1)  = value->header.class;
-        next_method = lookup(value, selector);
+        selector    = (Symbol)OPERAND(4);
+        OPERAND(2)  = receiver->header.class;
+        next_method = lookup(receiver, selector);
         if (next_method == NULL) {
             OPERAND(1) = NULL;
             RETURN(NULL);
         }
         method_code = next_method->code->data;
-        OPERAND(2)  = method_code;
+        OPERAND(3)  = method_code;
     }
-    return_value = ((native)*method_code)(method_code, LOAD(0));
-    JUMP(4);
+    return_value = ((native)*method_code)(method_code, receiver);
+    JUMP(5);
 END_OPCODE
 
 OPCODE(store_result)

@@ -31,6 +31,11 @@ EXTERN_OPCODE(field_read)
 EXTERN_OPCODE(field_write)
 EXTERN_OPCODE(try_native)
 
+EXTERN_OPCODE(result_receiver)
+EXTERN_OPCODE(arg_receiver)
+EXTERN_OPCODE(self_receiver)
+EXTERN_OPCODE(temp_receiver)
+
 /* ======================================================================= */
 
 #endif // INTERPRETER_OPCODES_H

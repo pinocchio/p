@@ -34,7 +34,7 @@ struct NativeName {
 #define INSTALL_NATIVE(module, name)\
     install_native( new_NativeName( L""#module, L""#name ), NM_##module##_##name )
 
-#define ARGUMENT(index) base_pointer[2 + index]
+#define ARGUMENT(index) base_pointer[1 + index]
 #define NATIVE_RETURN(result) return (Object)result
 
 /* ======================================================================= */

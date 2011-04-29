@@ -21,31 +21,25 @@ void pinocchio()
     code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"plus")), 0);
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
-    code = new_RawArray(65,
-            &method_context, (uns_int)3,
-            OP(self), (uns_int)0,
-            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
+    code = new_RawArray(55,
+            &method_context, (uns_int)2,
+            OP(load_constant), new_SmallInteger(2), (uns_int)0, 
+            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
             OP(iftrue_iffalse), (uns_int)5, (uns_int)0,
             OP(return_constant), new_SmallInteger(1),
             
-            OP(self), (uns_int)0,
-            OP(load_constant), new_SmallInteger(2), (uns_int)1, 
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(store_result), (uns_int)0,
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
-            OP(store_result), (uns_int)2,
+            OP(load_constant), new_SmallInteger(2), (uns_int)0, 
+            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
+            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
+            OP(store_result), (uns_int)1,
 
-            OP(self), (uns_int)0,
-            OP(load_constant), new_SmallInteger(1), (uns_int)1,
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(store_result), (uns_int)0,
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
-            OP(store_result), (uns_int)0,
+            OP(load_constant), new_SmallInteger(1), (uns_int)0,
+            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
+            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
 
-            OP(move), (uns_int)2, (uns_int)1,
+            OP(move), (uns_int)1, (uns_int)0,
 
-            OP(send), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
+            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
             OP(return_result) );
 
 
