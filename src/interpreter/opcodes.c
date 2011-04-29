@@ -68,6 +68,25 @@
 
 /* ======================================================================= */
 
+static Object invoke(void** pc, Object receiver)
+{
+    void ** method_code;
+    if ((Behavior)OPERAND(1) == receiver->header.class) {
+        method_code = OPERAND(2);
+    } else {
+        Symbol selector           = (Symbol)OPERAND(3);
+        OPERAND(1)                = receiver->header.class;
+        MethodClosure next_method = lookup(receiver, selector);
+        if (next_method == NULL) {
+            OPERAND(1) = NULL;
+            RETURN(NULL);
+        }
+        method_code = next_method->code->data;
+        OPERAND(2)  = method_code;
+    }
+    return ((native)*method_code)(method_code, receiver);
+}
+
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(capture)
 DECLARE_OPCODE(exit)
@@ -186,21 +205,8 @@ OPCODE(self_send)
 END_OPCODE
 
 OPCODE(result_send)
-    receiver = return_value;
-    if ((Behavior)OPERAND(1) == receiver->header.class) {
-        method_code = OPERAND(2);
-    } else {
-        selector    = (Symbol)OPERAND(3);
-        OPERAND(1)  = receiver->header.class;
-        next_method = lookup(receiver, selector);
-        if (next_method == NULL) {
-            OPERAND(1) = NULL;
-            RETURN(NULL);
-        }
-        method_code = next_method->code->data;
-        OPERAND(2)  = method_code;
-    }
-    return_value = ((native)*method_code)(method_code, receiver);
+    receiver     = return_value;
+    return_value = invoke(pc, receiver);
     JUMP(4);
 END_OPCODE
 
