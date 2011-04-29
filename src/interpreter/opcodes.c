@@ -17,6 +17,7 @@
         return NULL;\
     }\
     stack_pointer = alloca(((uns_int)*(pc + 1)) * sizeof(Object));\
+    return_value  = self;\
     JUMP(2);
     // stack_pointer -= (uns_int)*(pc + 1);
 
@@ -79,7 +80,7 @@ DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
 DECLARE_OPCODE(send)
-DECLARE_OPCODE(send_return)
+DECLARE_OPCODE(store_result)
 DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(return_result)
@@ -114,7 +115,7 @@ INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(self)
 INSTALL_OPCODE(send)
-INSTALL_OPCODE(send_return)
+INSTALL_OPCODE(store_result)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
 INSTALL_OPCODE(return_result)
@@ -158,24 +159,6 @@ OPCODE(field_write)
     JUMP(3);
 END_OPCODE
 
-OPCODE(send_return)
-    value = LOAD(0);
-    if ((Behavior)OPERAND(1) == value->header.class) {
-        method_code = OPERAND(2);
-    } else {
-        selector    = (Symbol)OPERAND(3);
-        OPERAND(1)  = value->header.class;
-        next_method = lookup(value, selector);
-        if (next_method == NULL) {
-            OPERAND(1) = NULL;
-            RETURN(NULL);
-        }
-        method_code = next_method->code->data;
-        OPERAND(2)  = method_code;
-    }
-    RETURN(((native)*method_code)(method_code, LOAD(0)));
-END_OPCODE
-
 OPCODE(send)
     value = LOAD(0);
     if ((Behavior)OPERAND(1) == value->header.class) {
@@ -192,13 +175,17 @@ OPCODE(send)
         OPERAND(2)  = method_code;
     }
     return_value = ((native)*method_code)(method_code, LOAD(0));
-    STORE(0, return_value);
     JUMP(4);
 END_OPCODE
 
+OPCODE(store_result)
+    offset = UNS_INT_OPERAND(1);
+    STORE(offset, return_value);
+    JUMP(2);
+END_OPCODE
+
 OPCODE(return_result)
-    value = LOAD(0);
-    RETURN(value);
+    RETURN(return_value);
 END_OPCODE
 
 OPCODE(return_constant)
