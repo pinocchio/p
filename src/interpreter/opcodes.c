@@ -89,7 +89,6 @@ static Object invoke(void** pc, Object receiver)
 
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(capture)
-DECLARE_OPCODE(exit)
 DECLARE_OPCODE(iftrue_iffalse)
 DECLARE_OPCODE(jump)
 DECLARE_OPCODE(load_constant)
@@ -115,10 +114,7 @@ uns_int         target;
 uns_int         origin;
 uns_int         offset;
 long            address;
-Symbol          selector;
-MethodClosure   next_method;
 Block           block;
-void **         method_code;
 
 Object          value;
 Object          return_value;
@@ -128,7 +124,6 @@ OPCODE_HEAD
 
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(capture)
-INSTALL_OPCODE(exit)
 INSTALL_OPCODE(jump)
 INSTALL_OPCODE(load_constant)
 INSTALL_OPCODE(move)
@@ -187,20 +182,7 @@ END_OPCODE
 
 OPCODE(self_send)
     receiver = self;
-    if ((Behavior)OPERAND(1) == receiver->header.class) {
-        method_code = OPERAND(2);
-    } else {
-        selector    = (Symbol)OPERAND(3);
-        OPERAND(1)  = receiver->header.class;
-        next_method = lookup(receiver, selector);
-        if (next_method == NULL) {
-            OPERAND(1) = NULL;
-            RETURN(NULL);
-        }
-        method_code = next_method->code->data;
-        OPERAND(2)  = method_code;
-    }
-    return_value = ((native)*method_code)(method_code, receiver);
+    return_value = invoke(pc, receiver);
     JUMP(4);
 END_OPCODE
 
@@ -281,9 +263,5 @@ OPCODE(capture)
     */
     JUMP(5);
 END_OPCODE;
-
-OPCODE(exit)
-    exit(-1);
-END_OPCODE
 
 OPCODE_END

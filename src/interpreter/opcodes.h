@@ -14,7 +14,6 @@ extern Object method_context( void ** pc, Object self );
 
 EXTERN_OPCODE(block_return)
 EXTERN_OPCODE(capture)
-EXTERN_OPCODE(exit)
 EXTERN_OPCODE(iftrue_iffalse)
 EXTERN_OPCODE(jump)
 EXTERN_OPCODE(load_constant)
