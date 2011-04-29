@@ -31,10 +31,12 @@ EXTERN_OPCODE(field_read)
 EXTERN_OPCODE(field_write)
 EXTERN_OPCODE(try_native)
 
-EXTERN_OPCODE(result_receiver)
-EXTERN_OPCODE(arg_receiver)
-EXTERN_OPCODE(self_receiver)
-EXTERN_OPCODE(temp_receiver)
+#define U(v) (uns_int)v
+
+#define RCV_RESULT U(0)
+#define RCV_SELF   U(1)
+#define RCV_ARG    U(2)
+#define RCV_TEMP   U(3)
 
 /* ======================================================================= */
 

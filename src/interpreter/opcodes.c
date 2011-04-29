@@ -121,19 +121,9 @@ INSTALL_OPCODE(send)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
 
-INSTALL_OPCODE(store_result)
-INSTALL_OPCODE(return_result)
 INSTALL_OPCODE(iftrue_iffalse)
-
-#define RCV_RESULT 0
-#define RCV_SELF   1
-#define RCV_ARG    2
-#define RCV_TEMP   3
-
-SET_OPCODE(result_receiver, RCV_RESULT)
-SET_OPCODE(self_receiver,   RCV_SELF)
-SET_OPCODE(arg_receiver,    RCV_ARG)
-SET_OPCODE(temp_receiver,   RCV_TEMP)
+INSTALL_OPCODE(return_result)
+INSTALL_OPCODE(store_result)
 
 OPCODE_BODY
 

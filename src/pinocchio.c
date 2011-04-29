@@ -22,24 +22,24 @@ void pinocchio()
     new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
 
     code = new_RawArray(55,
-            &method_context, (uns_int)2,
-            OP(load_constant), new_SmallInteger(2), (uns_int)0, 
-            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"<"), 
-            OP(iftrue_iffalse), (uns_int)5, (uns_int)0,
+            &method_context, U(2),
+            OP(load_constant), new_SmallInteger(2), U(0), 
+            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"<"), 
+            OP(iftrue_iffalse), U(5), U(0),
             OP(return_constant), new_SmallInteger(1),
             
-            OP(load_constant), new_SmallInteger(2), (uns_int)0, 
-            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
-            OP(store_result), (uns_int)1,
+            OP(load_constant), new_SmallInteger(2), U(0), 
+            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"-"),
+            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"fib"),
+            OP(store_result), U(1),
 
-            OP(load_constant), new_SmallInteger(1), (uns_int)0,
-            OP(send), OP(self_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"-"),
-            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"fib"),
+            OP(load_constant), new_SmallInteger(1), U(0),
+            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"-"),
+            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"fib"),
 
-            OP(move), (uns_int)1, (uns_int)0,
+            OP(move), U(1), U(0),
 
-            OP(send), OP(result_receiver), (uns_int)0, (uns_int)0, new_Symbol(L"+"),
+            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"+"),
             OP(return_result) );
 
 
