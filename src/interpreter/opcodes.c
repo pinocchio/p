@@ -70,7 +70,6 @@
 DECLARE_OPCODE(block_return)
 DECLARE_OPCODE(capture)
 DECLARE_OPCODE(exit)
-DECLARE_OPCODE(iffalse_iftrue)
 DECLARE_OPCODE(iftrue_iffalse)
 DECLARE_OPCODE(jump)
 DECLARE_OPCODE(load_constant)
@@ -94,6 +93,7 @@ uns_int         size;
 long            address;
 Symbol          selector;
 Object          value;
+Object          return_value;
 NativeName      name;
 native          function;
 MethodClosure   next_method;
@@ -105,7 +105,6 @@ OPCODE_HEAD
 INSTALL_OPCODE(block_return)
 INSTALL_OPCODE(capture)
 INSTALL_OPCODE(exit)
-INSTALL_OPCODE(iffalse_iftrue)
 INSTALL_OPCODE(iftrue_iffalse)
 INSTALL_OPCODE(jump)
 INSTALL_OPCODE(load_constant)
@@ -174,7 +173,7 @@ OPCODE(send_return)
         method_code = next_method->code->data;
         OPERAND(2)  = method_code;
     }
-    RETURN( ((native)*method_code)(method_code, LOAD(0)));
+    RETURN(((native)*method_code)(method_code, LOAD(0)));
 END_OPCODE
 
 OPCODE(send)
@@ -192,8 +191,8 @@ OPCODE(send)
         method_code = next_method->code->data;
         OPERAND(2)  = method_code;
     }
-    value = ((native)*method_code)(method_code, LOAD(0));
-    STORE(0, value);
+    return_value = ((native)*method_code)(method_code, LOAD(0));
+    STORE(0, return_value);
     JUMP(4);
 END_OPCODE
 
@@ -230,24 +229,10 @@ OPCODE(block_return)
 END_OPCODE
 
 OPCODE(iftrue_iffalse)
-    value = LOAD(0);
     address = INT_OPERAND(1);
-    if (value == false) {
+    if (return_value == false) {
         JUMP(address);
-    } else if (value != true) {
-        address = INT_OPERAND(2);
-        exit(-1);
-        JUMP(address);
-    }
-    JUMP(3);
-END_OPCODE
-
-OPCODE(iffalse_iftrue)
-    value = LOAD(0);
-    address = INT_OPERAND(1);
-    if (value == true) {
-        JUMP(address);
-    } else if (value  != false) {
+    } else if (return_value != true) {
         address = INT_OPERAND(2);
         exit(-1);
         JUMP(address);
