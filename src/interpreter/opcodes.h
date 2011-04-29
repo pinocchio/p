@@ -25,7 +25,6 @@ EXTERN_OPCODE(return_self)
 EXTERN_OPCODE(return_result)
 EXTERN_OPCODE(store_result)
 EXTERN_OPCODE(self)
-EXTERN_OPCODE(send)
 EXTERN_OPCODE(store_result)
 EXTERN_OPCODE(field_read)
 EXTERN_OPCODE(field_write)
@@ -33,10 +32,8 @@ EXTERN_OPCODE(try_native)
 
 #define U(v) (uns_int)v
 
-#define RCV_RESULT U(0)
-#define RCV_SELF   U(1)
-#define RCV_ARG    U(2)
-#define RCV_TEMP   U(3)
+EXTERN_OPCODE(self_send)
+EXTERN_OPCODE(result_send)
 
 /* ======================================================================= */
 

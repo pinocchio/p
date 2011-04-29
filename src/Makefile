@@ -9,7 +9,7 @@ OS           = $(shell uname)
 
 TARGET       = pinocchio
 
-CFILES      += $(shell find . -name '*.c' -not -path "./plugin*")
+CFILES      += $(shell find . -name '*.c' -not -path "./plugin*" -not -path "./tests*")
 HFILES      += $(T_CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES)

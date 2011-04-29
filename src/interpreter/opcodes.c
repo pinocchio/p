@@ -79,16 +79,16 @@ DECLARE_OPCODE(return)
 DECLARE_OPCODE(return_constant)
 DECLARE_OPCODE(return_self)
 DECLARE_OPCODE(self)
-DECLARE_OPCODE(send)
 DECLARE_OPCODE(store_result)
 DECLARE_OPCODE(field_read)
 DECLARE_OPCODE(field_write)
 DECLARE_OPCODE(return_result)
 
-DECLARE_OPCODE(result_receiver)
-DECLARE_OPCODE(arg_receiver)
-DECLARE_OPCODE(self_receiver)
+DECLARE_OPCODE(self_send)
+DECLARE_OPCODE(result_send)
+
 DECLARE_OPCODE(temp_receiver)
+DECLARE_OPCODE(arg_receiver)
 
 OPCODE_DECLS
 
@@ -117,13 +117,15 @@ INSTALL_OPCODE(return)
 INSTALL_OPCODE(return_self)
 INSTALL_OPCODE(return_constant)
 INSTALL_OPCODE(self)
-INSTALL_OPCODE(send)
 INSTALL_OPCODE(field_read)
 INSTALL_OPCODE(field_write)
 
 INSTALL_OPCODE(iftrue_iffalse)
 INSTALL_OPCODE(return_result)
 INSTALL_OPCODE(store_result)
+
+INSTALL_OPCODE(self_send)
+INSTALL_OPCODE(result_send)
 
 OPCODE_BODY
 
@@ -164,27 +166,42 @@ OPCODE(field_write)
     JUMP(3);
 END_OPCODE
 
-OPCODE(send)
-    switch (UNS_INT_OPERAND(1)) {
-        case RCV_RESULT: receiver = return_value; break;
-        case RCV_SELF:   receiver = self; break;
-        default: receiver = self;
-    }
-    if ((Behavior)OPERAND(2) == receiver->header.class) {
-        method_code = OPERAND(3);
+OPCODE(self_send)
+    receiver = self;
+    if ((Behavior)OPERAND(1) == receiver->header.class) {
+        method_code = OPERAND(2);
     } else {
-        selector    = (Symbol)OPERAND(4);
-        OPERAND(2)  = receiver->header.class;
+        selector    = (Symbol)OPERAND(3);
+        OPERAND(1)  = receiver->header.class;
         next_method = lookup(receiver, selector);
         if (next_method == NULL) {
             OPERAND(1) = NULL;
             RETURN(NULL);
         }
         method_code = next_method->code->data;
-        OPERAND(3)  = method_code;
+        OPERAND(2)  = method_code;
     }
     return_value = ((native)*method_code)(method_code, receiver);
-    JUMP(5);
+    JUMP(4);
+END_OPCODE
+
+OPCODE(result_send)
+    receiver = return_value;
+    if ((Behavior)OPERAND(1) == receiver->header.class) {
+        method_code = OPERAND(2);
+    } else {
+        selector    = (Symbol)OPERAND(3);
+        OPERAND(1)  = receiver->header.class;
+        next_method = lookup(receiver, selector);
+        if (next_method == NULL) {
+            OPERAND(1) = NULL;
+            RETURN(NULL);
+        }
+        method_code = next_method->code->data;
+        OPERAND(2)  = method_code;
+    }
+    return_value = ((native)*method_code)(method_code, receiver);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(store_result)

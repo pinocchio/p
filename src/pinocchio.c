@@ -24,22 +24,22 @@ void pinocchio()
     code = new_RawArray(55,
             &method_context, U(2),
             OP(load_constant), new_SmallInteger(2), U(0), 
-            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"<"), 
+            OP(self_send), U(0), U(0), new_Symbol(L"<"), 
             OP(iftrue_iffalse), U(5), U(0),
             OP(return_constant), new_SmallInteger(1),
             
             OP(load_constant), new_SmallInteger(2), U(0), 
-            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"-"),
-            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"fib"),
+            OP(self_send), U(0), U(0), new_Symbol(L"-"),
+            OP(result_send), U(0), U(0), new_Symbol(L"fib"),
             OP(store_result), U(1),
 
             OP(load_constant), new_SmallInteger(1), U(0),
-            OP(send), RCV_SELF, U(0), U(0), new_Symbol(L"-"),
-            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"fib"),
+            OP(self_send), U(0), U(0), new_Symbol(L"-"),
+            OP(result_send), U(0), U(0), new_Symbol(L"fib"),
 
             OP(move), U(1), U(0),
 
-            OP(send), RCV_RESULT, U(0), U(0), new_Symbol(L"+"),
+            OP(result_send), U(0), U(0), new_Symbol(L"+"),
             OP(return_result) );
 
 
@@ -48,6 +48,7 @@ void pinocchio()
     SmallInteger integer = new_SmallInteger(34);
 
     SmallInteger result = (SmallInteger)start_send(code->data, (Object)integer);
+    printf("Result: %li\n", result->value);
 }
 
 Array get_args(int argc, const char ** argv)
