@@ -105,6 +105,7 @@ DECLARE_OPCODE(return_result)
 DECLARE_OPCODE(self_send)
 DECLARE_OPCODE(result_send)
 DECLARE_OPCODE(temp_send)
+DECLARE_OPCODE(arg_send)
 
 OPCODE_DECLS
 
@@ -139,6 +140,7 @@ INSTALL_OPCODE(store_result)
 INSTALL_OPCODE(self_send)
 INSTALL_OPCODE(result_send)
 INSTALL_OPCODE(temp_send)
+INSTALL_OPCODE(arg_send)
 
 OPCODE_BODY
 
@@ -194,8 +196,17 @@ END_OPCODE
 OPCODE(temp_send)
     offset       = UNS_INT_OPERAND(1);
     receiver     = LOAD(offset);
-    return_value = invoke(GET_PC() + 1, receiver);
-    JUMP(5);
+    SET_PC(GET_PC() + 1);
+    return_value = invoke(GET_PC(), receiver);
+    JUMP(4);
+END_OPCODE
+
+OPCODE(arg_send)
+    offset       = UNS_INT_OPERAND(1);
+    receiver     = ARGUMENT(offset);
+    SET_PC(GET_PC() + 1);
+    return_value = invoke(GET_PC(), receiver);
+    JUMP(4);
 END_OPCODE
 
 OPCODE(store_result)
