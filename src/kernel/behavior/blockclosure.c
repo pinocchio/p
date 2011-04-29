@@ -23,7 +23,8 @@ BlockClosure new_BlockClosure(Block code, JumpTarget return_target,
 NATIVE(BlockClosure, apply)
     BlockClosure closure = (BlockClosure)ARGUMENT(0);
     ARGUMENT(0)          = closure->self;
-    Object result        = method_context( closure->code->code->data, &ARGUMENT(0) );
+    stack_pointer        = base_pointer;
+    Object result        = method_context( closure->code->code->data, ARGUMENT(0) );
     NATIVE_RETURN(result);
 END_NATIVE
 
