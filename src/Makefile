@@ -20,6 +20,8 @@ PLUGINSOURCES = plugin/Makefile $(PLUGINCFILES) $(PLUGINHFILES)
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 
+EXTRAOBJECTS  = $(shell find lib -name '*.o')
+
 # ============================================================================
 
 CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
@@ -27,7 +29,7 @@ CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS  += -lgc -lm -ldl -lcmockery
 #LDFLAGS += -lpthread
-CC        = llvm-gcc #gcc-4.5 
+CC        = gcc-4.5 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
 #	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
 #	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
@@ -48,7 +50,7 @@ GITVERSION:
 	@echo -n '_' >> $@
 	@git show-ref --hash=20 HEAD >> $@
 
-$(TARGET): $(OBJECTS)
+$(TARGET): $(OBJECTS) $(EXTRAOBJECTS)
 	@echo Linking ${CC} ${LDFLAGS} $@
 	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
 
