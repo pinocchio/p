@@ -19,10 +19,10 @@ long * intNew();
 long * plus(long *left, long *right)
 {
         printf( "plus: %p + %p\n", left, right );
-        printf( "  ->   %d + %d\n", left[0], right[0] );
+        printf( "  ->   %ld + %ld\n", left[0], right[0] );
         long * res = intNew();
         res[0] = left[0] + right[0];
-        printf( "  ->   %d\n", res[0] );
+        printf( "  ->   %ld\n", res[0] );
         return res;
 }
 
