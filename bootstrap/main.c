@@ -27,7 +27,7 @@ int main()
        init();
 
        //void * method[] = {(void*)22,(void*)1,(void*)2,(void*)3,(void*)4,(void*)PLUS,(void*)p_1,(void*)PLUS};
-       void * method[] = {(void*)22,(void*)1,(void*)2,(void*)3,(void*)4,(void*)p_1,(void*)p_1,(void*)PLUS};
+       void * method[] = {(void*)22,(void*)0,(void*)1,(void*)2,(void*)3,(void*)4,(void*)p_1,(void*)PLUS,(void*)p_2};
 
        int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
        void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
