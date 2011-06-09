@@ -3,11 +3,6 @@
 #include <gc/gc.h>
 #include <signal.h>
 
-#define SMALLER (void*)11
-#define MINUS (void*)21
-#define FIB (void*)31
-#define PLUS (void*)41
-
 extern void * fib(void*i);
 
 
@@ -28,6 +23,8 @@ long * plus(long *left, long *right)
 
 long * minus(long *left, long *right)
 {
+        printf( "minus: %p - %p\n", left, right );
+        printf( "  ->   %ld - %ld\n", left[0], right[0] );
         long * res = intNew();
         res[0] = left[0] - right[0];
         return res;
@@ -35,6 +32,8 @@ long * minus(long *left, long *right)
 
 void * smaller(long *left, long *right)
 {
+        printf( "smaller: %p < %p\n", left, right );
+        printf( "  ->   %ld < %ld\n", left[0], right[0] );
         return left[0] < right[0] ? p_true : p_false;
 }
 
@@ -45,6 +44,10 @@ void invoke() {
     __asm( "je plus");
     __asm("cmp $11, %rax");
     __asm( "je smaller");
+    __asm("cmp $31, %rax");
+    __asm( "je fib");
+    __asm("cmp $51, %rax");
+    __asm( "je fibSend+0xa");
 
     __asm( "int $3" );
 }
