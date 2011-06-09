@@ -43,7 +43,7 @@ int main(int argc, char**argv)
         self[0] = argc > 1 ? atoi(argv[1]) : 0;
 
         printf("address: %p\n", method_pointer);
-        printf("self: %d\n", self[0]);
+        printf("self: %ld\n", self[0]);
         
         long self_type = self[-1];
         long * result;
