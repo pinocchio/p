@@ -13,18 +13,18 @@ long * intNew();
 
 long * plus(long *left, long *right)
 {
-        printf( "plus: %p + %p\n", left, right );
-        printf( "  ->   %ld + %ld\n", left[0], right[0] );
+//        printf( "plus: %p + %p\n", left, right );
+//        printf( "  ->   %ld + %ld\n", left[0], right[0] );
         long * res = intNew();
         res[0] = left[0] + right[0];
-        printf( "  ->   %ld\n", res[0] );
+//        printf( "  ->   %ld\n", res[0] );
         return res;
 }
 
 long * minus(long *left, long *right)
 {
-        printf( "minus: %p - %p\n", left, right );
-        printf( "  ->   %ld - %ld\n", left[0], right[0] );
+//        printf( "minus: %p - %p\n", left, right );
+ //       printf( "  ->   %ld - %ld\n", left[0], right[0] );
         long * res = intNew();
         res[0] = left[0] - right[0];
         return res;
@@ -32,8 +32,8 @@ long * minus(long *left, long *right)
 
 void * smaller(long *left, long *right)
 {
-        printf( "smaller: %p < %p\n", left, right );
-        printf( "  ->   %ld < %ld\n", left[0], right[0] );
+//        printf( "smaller: %p < %p\n", left, right );
+//        printf( "  ->   %ld < %ld\n", left[0], right[0] );
         return left[0] < right[0] ? p_true : p_false;
 }
 
@@ -45,7 +45,7 @@ void invoke() {
     __asm("cmp $11, %rax");
     __asm( "je smaller");
     __asm("cmp $31, %rax");
-    __asm( "je fib");
+    __asm( "je fib+0xa");
     __asm("cmp $51, %rax");
     __asm( "je fibSend+0xa");
 
@@ -55,7 +55,7 @@ void invoke() {
 long * intNew() {
     long * c = GC_MALLOC( sizeof(long)+sizeof(long));
     c[0] = 66;
-    printf( "- new int at: %p\n", c );
+//    printf( "- new int at: %p\n", c );
     return &c[1];
 }
 
