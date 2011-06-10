@@ -17,6 +17,7 @@ long p_1[3];
 long p_2[3];
 long p_true[2];
 long p_false[2];
+long p_nil[2];
 
 long * true;
 long * false;
