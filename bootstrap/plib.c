@@ -45,10 +45,10 @@ void invoke() {
     __asm( "je minus");
     __asm("cmp $41, %rax");
     __asm( "je plus");
-    __asm("cmp $11, %rax");
-    __asm( "je smaller");
     __asm("cmp $31, %rax");
     __asm( "je fib+0xa");
+    __asm("cmp $11, %rax");
+    __asm( "je smaller");
     __asm("cmp $51, %rax");
     __asm( "je fibSend+0xa");
 

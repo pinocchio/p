@@ -41,17 +41,19 @@ int main(int argc, char**argv)
     int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
     void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
     
-    printf("of: %d\n", offset);
+    // printf("of: %d\n", offset);
  
     *method_pointer = method+1;
  
     long * self = intNew();
     self[0] = argc > 1 ? atoi(argv[1]) : 0;
  
+    /*
     printf("address: %p\n", method_pointer);
     printf("self: %ld\n", self[0]);
     
     printf("false: %p\n", p_false + 2);
+    */
     
     long self_type = self[-1];
     long * result;
@@ -60,7 +62,8 @@ int main(int argc, char**argv)
     __asm(METHOD_CALL);
     __asm("mov %%rax, %0":"=r"(result));
  
-    printf("result: %p\n",result);
+    
+    //printf("result: %p\n",result);
     printf("result: %li\n",result[0]);
     return 0;
 }
