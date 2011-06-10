@@ -59,14 +59,14 @@ long * closureNew(int size) {
     long * c = GC_MALLOC( sizeof(long*)+size*sizeof(long*) );
     c[0] = 77;
     printf( "- new closure at: %p\n", c );
-    return &c[1];
+    return c + 1;
 }
 
-long * arrayNew(int size) {
+long * remoteArrayNew(int size) {
     long * c = GC_MALLOC( sizeof(long*)+size*sizeof(long*) );
     c[0] = 33;
     printf( "- new array at: %p\n", c );
-    return &c[1];
+    return c + 1;
 }
 
 void closureValue() {
