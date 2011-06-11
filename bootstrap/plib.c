@@ -7,7 +7,7 @@ extern long * true;
 extern long * false;
 extern void * fib(long* i);
 
-long * int_cache[1024];
+long * int_cache[1026];
 long * raw_int(long value) {
     long * c = GC_MALLOC(3*sizeof(long));
     c[1] = 66;
@@ -16,7 +16,7 @@ long * raw_int(long value) {
 }
 
 long * intNew(long value) {
-    if (-1 <= value && value < 1023) {
+    if (-1 <= value && value < 1025) {
         return int_cache[value + 1];
     }
     return raw_int(value);

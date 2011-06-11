@@ -32,7 +32,7 @@ int init() {
     p_2[2] = 2;
 
     long i;
-    for (i = -1; i < 1023; i++) {
+    for (i = -1; i < 1025; i++) {
         int_cache[i+1] = raw_int(i);
     }
 
