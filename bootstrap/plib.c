@@ -7,30 +7,25 @@ extern long * true;
 extern long * false;
 extern void * fib(void*i);
 
-long * intNew() {
+long * intNew(long value) {
     long * c = GC_MALLOC(2*sizeof(long));
     c[0] = 66;
-//    printf( "- new int at: %p\n", c );
-    return &c[1];
+    c[1] = value;
+    return c + 1;
 }
 
 long * plus(long *left, long *right)
 {
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    long * res = intNew();
-    res[0] = left[0] + right[0];
-//    printf( "  ->   %ld\n", res[0] );
-    return res;
+    return intNew(left[0] + right[0]);
 }
 
 long * minus(long *left, long *right)
 {
 //    printf( "minus: %p - %p\n", left, right );
- //       printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    long * res = intNew();
-    res[0] = left[0] - right[0];
-    return res;
+//    printf( "  ->   %ld - %ld\n", left[0], right[0] );
+    return intNew(left[0] - right[0]);
 }
 
 void * smaller(long *left, long *right)

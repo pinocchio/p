@@ -11,7 +11,7 @@
 extern void * METHOD_NAME();
 extern void * blockTest();
 extern void * arrayNew();
-extern long * intNew();
+extern long * intNew(long);
 
 long p_1[3];
 long p_2[3];
@@ -46,8 +46,7 @@ int main(int argc, char**argv)
  
     *method_pointer = method+1;
  
-    long * self = intNew();
-    self[0] = argc > 1 ? atoi(argv[1]) : 0;
+    long * self = intNew(argc > 1 ? atoi(argv[1]) : 0);
  
     /*
     printf("address: %p\n", method_pointer);
