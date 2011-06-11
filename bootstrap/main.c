@@ -12,6 +12,8 @@ extern void * METHOD_NAME();
 extern void * blockTest();
 extern void * arrayNew();
 extern long * intNew(long);
+extern long * raw_int(long);
+extern long * int_cache[];
 
 long p_1[3];
 long p_2[3];
@@ -28,6 +30,11 @@ int init() {
 
     p_2[1] = 66; 
     p_2[2] = 2;
+
+    long i;
+    for (i = -1; i < 1023; i++) {
+        int_cache[i+1] = raw_int(i);
+    }
 
     true  = p_true + 2;
     false = p_false + 2;

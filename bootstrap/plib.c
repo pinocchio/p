@@ -5,13 +5,21 @@
 
 extern long * true;
 extern long * false;
-extern void * fib(void*i);
+extern void * fib(long* i);
+
+long * int_cache[1024];
+long * raw_int(long value) {
+    long * c = GC_MALLOC(3*sizeof(long));
+    c[1] = 66;
+    c[2] = value;
+    return c + 2;
+}
 
 long * intNew(long value) {
-    long * c = GC_MALLOC(2*sizeof(long));
-    c[0] = 66;
-    c[1] = value;
-    return c + 1;
+    if (-1 <= value && value < 1023) {
+        return int_cache[value + 1];
+    }
+    return raw_int(value);
 }
 
 long * plus(long *left, long *right)
