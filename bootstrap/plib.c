@@ -43,9 +43,9 @@ void * smaller(long *left, long *right)
     return left[0] < right[0] ? true : false;
 }
 
-void invoke_error(long c)
+void invoke_error(long msg, void* receiver)
 {
-    printf("Lookup failed: %ld\n", c);
+    printf("Lookup of msg %ld failed on %p\n", msg, receiver);
     __asm("int3");
 }
 
@@ -61,6 +61,7 @@ void invoke() {
     __asm("cmp $51, %rax");
     __asm( "je fibSend+0xa");
 
+    __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");
     __asm("call invoke_error");
 }
