@@ -35,6 +35,8 @@ int init() {
     for (i = -1; i < 1025; i++) {
         int_cache[i+1] = raw_int(i);
     }
+    int_cache[1] = p_1;
+    int_cache[2] = p_2;
 
     true  = p_true + 2;
     false = p_false + 2;
