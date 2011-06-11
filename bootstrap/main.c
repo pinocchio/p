@@ -35,8 +35,8 @@ int init() {
     for (i = -1; i < 1025; i++) {
         int_cache[i+1] = raw_int(i);
     }
-    int_cache[1] = p_1;
-    int_cache[2] = p_2;
+    int_cache[2] = p_1 + 2;
+    int_cache[3] = p_2 + 2;
 
     true  = p_true + 2;
     false = p_false + 2;
@@ -55,14 +55,14 @@ int main(int argc, char**argv)
  
     *method_pointer = method+1;
  
-    long * self = intNew(argc > 1 ? atoi(argv[1]) : 0);
+    long * self = intNew(argc > 1 ? atol(argv[1]) : 0);
  
     /*
     printf("address: %p\n", method_pointer);
-    printf("self: %ld\n", self[0]);
     
     printf("false: %p\n", p_false + 2);
     */
+    printf("self: %ld\n", self[0]);
     
     long self_type = self[-1];
     long * result;
