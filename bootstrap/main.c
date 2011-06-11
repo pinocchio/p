@@ -59,10 +59,9 @@ int main(int argc, char**argv)
  
     /*
     printf("address: %p\n", method_pointer);
-    
+    printf("self: %ld\n", self[0]);
     printf("false: %p\n", p_false + 2);
     */
-    printf("self: %ld\n", self[0]);
     
     long self_type = self[-1];
     long * result;
