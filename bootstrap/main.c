@@ -8,15 +8,14 @@
 #define PLUS (void*)41
 #define FIB_SEND (void*)51
 
+#define ENC_INT(v) ((long*)(((v) << 1) + 1))
+#define DEC_INT(v) ((long)(v) >> 1)
+#define IS_INT(v)  ((long)(v) & 1 == 1)
+
 extern void * METHOD_NAME();
 extern void * blockTest();
 extern void * arrayNew();
-extern long * intNew(long);
-extern long * raw_int(long);
-extern long * int_cache[];
 
-long p_1[3];
-long p_2[3];
 long p_true[2];
 long p_false[2];
 long p_nil[2];
@@ -24,20 +23,9 @@ long p_nil[2];
 long * true;
 long * false;
 
+long SmallInteger = 66;
+
 int init() {
-    p_1[1] = 66; 
-    p_1[2] = 1;
-
-    p_2[1] = 66; 
-    p_2[2] = 2;
-
-    long i;
-    for (i = -1; i < 1025; i++) {
-        int_cache[i+1] = raw_int(i);
-    }
-    int_cache[2] = p_1 + 2;
-    int_cache[3] = p_2 + 2;
-
     true  = p_true + 2;
     false = p_false + 2;
 }
@@ -55,7 +43,7 @@ int main(int argc, char**argv)
  
     *method_pointer = method+1;
  
-    long * self = intNew(argc > 1 ? atol(argv[1]) : 0);
+    long * self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
  
     /*
     printf("address: %p\n", method_pointer);
@@ -63,16 +51,17 @@ int main(int argc, char**argv)
     printf("false: %p\n", p_false + 2);
     */
     
-    long self_type = self[-1];
     long * result;
     __asm("mov %0, %%rdi"::"r"(self));
-    __asm("mov %0, %%rax"::"r"(self_type));
+    __asm("mov %0, %%rax"::"r"(SmallInteger));
     __asm(METHOD_CALL);
     __asm("mov %%rax, %0":"=r"(result));
  
-    
-    //printf("result: %p\n",result);
-    printf("result: %li\n",result[0]);
+    if (IS_INT(result)) {
+        printf("result: %li\n", DEC_INT(result));
+    } else {
+        printf("result: %p\n", result);
+    }
     return 0;
 }
 
