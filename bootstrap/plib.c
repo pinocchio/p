@@ -20,7 +20,7 @@ long plus(long left, long right)
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
     if (IS_INT(left) && IS_INT(right))
-        return (left - 1) + right;
+        return (left ^ 1) + right;
 }
 
 long minus(long left, long right)
@@ -28,7 +28,7 @@ long minus(long left, long right)
 //    printf( "minus: %p - %p\n", left, right );
 //    printf( "  ->   %ld - %ld\n", left[0], right[0] );
     if (IS_INT(left) && IS_INT(right))
-        return left - right + 1;
+        return (left - right) | 1;
 }
 
 void * smaller(long *left, long *right)
