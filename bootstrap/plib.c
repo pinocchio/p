@@ -3,19 +3,23 @@
 #include <gc/gc.h>
 #include <signal.h>
 
+extern long p_true[];
+extern long p_false[];
+
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
 #define IS_INT(v)   ((long)(v) & 1 == 1)
 
-extern long * true;
-extern long * false;
+#define TRUE  (p_true + 2)
+#define FALSE (p_false + 2)
+
 extern void * fib(long* i);
 
 long * plus(long *left, long *right)
 {
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    if (IS_INT(left) && IS_INT(right))
+//    if (IS_INT(left) && IS_INT(right))
         return ENC_INT(DEC_INT(left) + DEC_INT(right));
 }
 
@@ -23,7 +27,7 @@ long * minus(long *left, long *right)
 {
 //    printf( "minus: %p - %p\n", left, right );
 //    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    if (IS_INT(left) && IS_INT(right))
+//    if (IS_INT(left) && IS_INT(right))
         return ENC_INT(DEC_INT(left) - DEC_INT(right));
 }
 
@@ -31,8 +35,9 @@ void * smaller(long *left, long *right)
 {
 //    printf( "smaller: %p < %p\n", left, right );
 //    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    if (IS_INT(left) && IS_INT(right))
-        return DEC_INT(left) < DEC_INT(right) ? true : false;
+//    if (IS_INT(left) && IS_INT(right))
+    // we don't need to remove the tag since it will end up being the same order.
+        return left < right ? TRUE : FALSE;
 }
 
 void invoke_error(long msg, void* receiver)

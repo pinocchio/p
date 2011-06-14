@@ -20,19 +20,10 @@ long p_true[2];
 long p_false[2];
 long p_nil[2];
 
-long * true;
-long * false;
-
 long SmallInteger = 66;
-
-int init() {
-    true  = p_true + 2;
-    false = p_false + 2;
-}
 
 int main(int argc, char**argv)
 {
-    init();
  
     void * method[] = {(void*)22,(void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
                        PLUS, MINUS, SMALLER, FIB, FIB_SEND, (void*)SmallInteger };
