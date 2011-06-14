@@ -3,9 +3,9 @@
 #include <gc/gc.h>
 #include <signal.h>
 
-#define ENC_INT(v) ((long*)(((v) << 1) + 1))
-#define DEC_INT(v) ((long)(v) >> 1)
-#define IS_INT(v)  ((long)(v) & 1 == 1)
+#define ENC_INT(v)  ((long*)(((v) << 1) + 1))
+#define DEC_INT(v)  ((long)(v) >> 1)
+#define IS_INT(v)   ((long)(v) & 1 == 1)
 
 extern long * true;
 extern long * false;
@@ -15,21 +15,24 @@ long * plus(long *left, long *right)
 {
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    return ENC_INT(DEC_INT(left) + DEC_INT(right));
+    if (IS_INT(left) && IS_INT(right))
+        return ENC_INT(DEC_INT(left) + DEC_INT(right));
 }
 
 long * minus(long *left, long *right)
 {
 //    printf( "minus: %p - %p\n", left, right );
 //    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    return ENC_INT(DEC_INT(left) - DEC_INT(right));
+    if (IS_INT(left) && IS_INT(right))
+        return ENC_INT(DEC_INT(left) - DEC_INT(right));
 }
 
 void * smaller(long *left, long *right)
 {
 //    printf( "smaller: %p < %p\n", left, right );
 //    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    return DEC_INT(left) < DEC_INT(right) ? true : false;
+    if (IS_INT(left) && IS_INT(right))
+        return DEC_INT(left) < DEC_INT(right) ? true : false;
 }
 
 void invoke_error(long msg, void* receiver)
@@ -48,7 +51,7 @@ void invoke() {
     __asm("cmp $11, %rax");
     __asm( "je smaller");
     __asm("cmp $51, %rax");
-    __asm( "je fibSend+0x27");
+    __asm( "je fibSend+0x22");
 
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");

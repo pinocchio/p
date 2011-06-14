@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "settings.h"
 
-#define SMALLER (void*)11
-#define MINUS (void*)21
-#define FIB (void*)31
-#define PLUS (void*)41
-#define FIB_SEND (void*)51
+#define SMALLER     (void*)11
+#define MINUS       (void*)21
+#define FIB         (void*)31
+#define PLUS        (void*)41
+#define FIB_SEND    (void*)51
 
-#define ENC_INT(v) ((long*)(((v) << 1) + 1))
-#define DEC_INT(v) ((long)(v) >> 1)
-#define IS_INT(v)  ((long)(v) & 1 == 1)
+#define ENC_INT(v)  ((long*)(((v) << 1) + 1))
+#define DEC_INT(v)  ((long)(v) >> 1)
+#define IS_INT(v)   ((long)(v) & 1 == 1)
 
 extern void * METHOD_NAME();
 extern void * blockTest();
@@ -65,4 +65,3 @@ int main(int argc, char**argv)
     }
     return 0;
 }
-
