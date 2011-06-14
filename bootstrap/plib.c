@@ -9,6 +9,7 @@ extern long p_false[];
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
 #define IS_INT(v)   ((long)(v) & 1 == 1)
+#define ARE_INTS(x, y) ((char)(x) & (char)(y) & 1)
 
 #define TRUE  (p_true + 2)
 #define FALSE (p_false + 2)
@@ -19,7 +20,7 @@ long plus(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    if ((char)left & (char)right & 1)
+    if (ARE_INTS(left, right))
         return (left ^ 1) + right;
 }
 
@@ -27,15 +28,15 @@ long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
 //    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    if ((char)left & (char)right & 1)
+    if (ARE_INTS(left, right))
         return (left - right) | 1;
 }
 
-void * smaller(long left, long right)
+long * smaller(long left, long right)
 {
 //    printf( "smaller: %p < %p\n", left, right );
 //    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    if ((char)left & (char)right & 1)
+    if (ARE_INTS(left, right))
     // we don't need to remove the tag since it will end up being the same order.
         return left < right ? TRUE : FALSE;
 }
