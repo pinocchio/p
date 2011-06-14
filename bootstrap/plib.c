@@ -19,7 +19,7 @@ long * plus(long *left, long *right)
 {
 //    printf( "plus: %p + %p\n", left, right );
 //    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-//    if (IS_INT(left) && IS_INT(right))
+    if (IS_INT(left) && IS_INT(right))
         return ENC_INT(DEC_INT(left) + DEC_INT(right));
 }
 
@@ -27,7 +27,7 @@ long * minus(long *left, long *right)
 {
 //    printf( "minus: %p - %p\n", left, right );
 //    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-//    if (IS_INT(left) && IS_INT(right))
+    if (IS_INT(left) && IS_INT(right))
         return ENC_INT(DEC_INT(left) - DEC_INT(right));
 }
 
@@ -35,7 +35,7 @@ void * smaller(long *left, long *right)
 {
 //    printf( "smaller: %p < %p\n", left, right );
 //    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-//    if (IS_INT(left) && IS_INT(right))
+    if (IS_INT(left) && IS_INT(right))
     // we don't need to remove the tag since it will end up being the same order.
         return left < right ? TRUE : FALSE;
 }
