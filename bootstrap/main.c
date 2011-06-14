@@ -34,7 +34,8 @@ int main(int argc, char**argv)
 {
     init();
  
-    void * method[] = {(void*)22,(void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,(void*)PLUS,(void*)MINUS,(void*)SMALLER,(void*)FIB,(void*)FIB_SEND, (void*)66 };
+    void * method[] = {(void*)22,(void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
+                       PLUS, MINUS, SMALLER, FIB, FIB_SEND, (void*)SmallInteger };
  
     int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
     void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
