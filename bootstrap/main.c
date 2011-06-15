@@ -10,7 +10,7 @@
 
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
-#define IS_INT(v)   ((long)(v) & 1 == 1)
+#define IS_INT(v)   ((long)(v) & 1)
 
 extern void * METHOD_NAME();
 extern void * blockTest();

@@ -8,7 +8,7 @@ extern long p_false[];
 
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
-#define IS_INT(v)   ((long)(v) & 1 == 1)
+#define IS_INT(v)   ((long)(v) & 1)
 #define ARE_INTS(x, y) ((char)(x) & (char)(y) & 1)
 
 #define TRUE  (p_true + 2)
