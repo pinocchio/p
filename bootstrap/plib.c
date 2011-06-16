@@ -24,13 +24,13 @@ long plus(long left, long right)
         return (left ^ 1) + right;
 }
 
-long inv_plus()
+long cache_and_call()
 {
     __asm("mov 0(%rsp), %eax");
-    __asm("mov $plus, %edx");
+    __asm("mov %r10, %rdx");
     __asm("sub %eax, %edx");
     __asm("movl %edx, -4(%eax)");
-    goto *&plus;
+    __asm("jmp *%r10");
 }
 
 long minus(long left, long right)
@@ -58,15 +58,24 @@ void invoke_error(long msg, void* receiver)
 
 void invoke() {
     __asm("cmp $21, %rax");
-    __asm( "je minus");
+    __asm("mov $minus, %r10");
+    __asm("je cache_and_call");
+
     __asm("cmp $41, %rax");
-    __asm( "je inv_plus");
+    __asm("mov $plus, %r10");
+    __asm("je cache_and_call");
+
     __asm("cmp $31, %rax");
-    __asm( "je fib+0xa");
+    __asm("mov $fib+0xa, %r10");
+    __asm("je cache_and_call");
+
     __asm("cmp $11, %rax");
-    __asm( "je smaller");
+    __asm("mov $smaller, %r10");
+    __asm("je cache_and_call");
+
     __asm("cmp $51, %rax");
-    __asm( "je fibSend+0x22");
+    __asm("mov $fibSend+0x22, %r10");
+    __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");
