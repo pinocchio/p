@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "settings.h"
 
@@ -13,6 +14,7 @@
 #define IS_INT(v)   ((long)(v) & 1)
 
 extern void * METHOD_NAME();
+extern void ** METHOD_OBJECT;
 extern void * blockTest();
 extern void * arrayNew();
 
@@ -25,15 +27,19 @@ long SmallInteger = 66;
 int main(int argc, char**argv)
 {
  
-    void * method[] = {(void*)22,(void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
+    void * method[] = {(void*)22,(void*)01234, (void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
                        PLUS, MINUS, SMALLER, FIB, FIB_SEND, (void*)SmallInteger };
+
+
+    memcpy( &METHOD_OBJECT, method, METHOD_OBJECT_SIZE * sizeof(void*) );
+
  
-    int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
-    void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
+//    int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
+//    void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
     
     // printf("of: %d\n", offset);
  
-    *method_pointer = method+1;
+//    *method_pointer = method+1;
  
     long * self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
  

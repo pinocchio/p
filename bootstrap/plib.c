@@ -65,16 +65,16 @@ void invoke() {
 }
 
 long * closureNew(int size) {
-    long * c = GC_MALLOC( sizeof(long*)+size*sizeof(long*) );
+    long * c = GC_MALLOC( sizeof(long*) + size*sizeof(long*) );
     c[0] = 77;
-    printf( "- new closure at: %p\n", c );
+    printf( "- new closure at: %p\n", c+1 );
     return c + 1;
 }
 
 long * remoteArrayNew(int size) {
-    long * c = GC_MALLOC( sizeof(long*)+size*sizeof(long*) );
+    long * c = GC_MALLOC( sizeof(long*) + size*sizeof(long*) );
     c[0] = 33;
-    printf( "- new array at: %p\n", c );
+    printf( "- new array at: %p\n", c+1 );
     return c + 1;
 }
 
