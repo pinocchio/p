@@ -14,7 +14,7 @@
 #define IS_INT(v)   ((long)(v) & 1)
 
 extern void * METHOD_NAME();
-extern void ** METHOD_OBJECT;
+extern void * METHOD_OBJECT[];
 extern void * blockTest();
 extern void * arrayNew();
 
@@ -30,8 +30,10 @@ int main(int argc, char**argv)
     void * method[] = {(void*)22,(void*)01234, (void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
                        PLUS, MINUS, SMALLER, FIB, FIB_SEND, (void*)SmallInteger };
 
-
-    memcpy( &METHOD_OBJECT, method, METHOD_OBJECT_SIZE * sizeof(void*) );
+    int i;
+    for (i = 0; i < METHOD_OBJECT_SIZE; i++) {
+        METHOD_OBJECT[i] = method[i];
+    }
 
  
 //    int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
