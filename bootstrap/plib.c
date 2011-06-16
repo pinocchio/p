@@ -24,6 +24,15 @@ long plus(long left, long right)
         return (left ^ 1) + right;
 }
 
+long inv_plus()
+{
+    __asm("mov 0(%rsp), %eax");
+    __asm("mov $plus, %edx");
+    __asm("sub %eax, %edx");
+    __asm("movl %edx, -4(%eax)");
+    goto *&plus;
+}
+
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
@@ -51,7 +60,7 @@ void invoke() {
     __asm("cmp $21, %rax");
     __asm( "je minus");
     __asm("cmp $41, %rax");
-    __asm( "je plus");
+    __asm( "je inv_plus");
     __asm("cmp $31, %rax");
     __asm( "je fib+0xa");
     __asm("cmp $11, %rax");
