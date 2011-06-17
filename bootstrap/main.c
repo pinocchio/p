@@ -22,38 +22,25 @@ long p_true[2];
 long p_false[2];
 long p_nil[2];
 
-long SmallInteger = 66;
+long SmallInteger[2];
 
 int main(int argc, char**argv)
 {
  
     void * method[] = {(void*)22,(void*)01234, (void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
-                       PLUS, MINUS, SMALLER, FIB, FIB_SEND, (void*)SmallInteger };
+                       PLUS, MINUS, SMALLER, FIB, FIB_SEND, SmallInteger+2 };
 
     int i;
+    // printf("SmallInteger: %x\n", si_c);
     for (i = 0; i < METHOD_OBJECT_SIZE; i++) {
         METHOD_OBJECT[i] = method[i];
     }
 
- 
-//    int offset = *(int*)&((unsigned char*)&METHOD_NAME)[METHOD_OFFSET-4];
-//    void** method_pointer = (void**)&(((unsigned char*)&METHOD_NAME)[offset+METHOD_OFFSET]);    
-    
-    // printf("of: %d\n", offset);
- 
-//    *method_pointer = method+1;
- 
     long * self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
- 
-    /*
-    printf("address: %p\n", method_pointer);
-    printf("self: %ld\n", self[0]);
-    printf("false: %p\n", p_false + 2);
-    */
     
     long * result;
     __asm("mov %0, %%rdi"::"r"(self));
-    __asm("mov %0, %%rax"::"r"(SmallInteger));
+    __asm("mov %0, %%rax"::"r"(SmallInteger+2));
     __asm(METHOD_CALL);
     __asm("mov %%rax, %0":"=r"(result));
  

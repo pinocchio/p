@@ -74,7 +74,7 @@ void invoke() {
     __asm("je cache_and_call");
 
     __asm("cmp $51, %rax");
-    __asm("mov $fibSend+0x19, %r10");
+    __asm("mov $fibSend+0x18, %r10");
     __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");
