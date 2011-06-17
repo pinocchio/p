@@ -66,7 +66,7 @@ void invoke() {
     __asm("je cache_and_call");
 
     __asm("cmp $31, %rax");
-    __asm("mov $fib+0xa, %r10");
+    __asm("mov $fib, %r10");
     __asm("je cache_and_call");
 
     __asm("cmp $11, %rax");
@@ -74,7 +74,7 @@ void invoke() {
     __asm("je cache_and_call");
 
     __asm("cmp $51, %rax");
-    __asm("mov $fibSend+0x22, %r10");
+    __asm("mov $fibSend+0x20, %r10");
     __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");
