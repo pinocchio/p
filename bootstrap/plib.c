@@ -16,35 +16,13 @@ extern long SmallInteger[];
 #define FALSE (p_false + 2)
 
 extern void * fib(long* i);
-
-long plus(long left, long right)
-{
-//    printf( "plus: %p + %p\n", left, right );
-//    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
-        return (left ^ 1) + right;
-}
-
-long minus(long left, long right)
-{
-//    printf( "minus: %p - %p\n", left, right );
-//    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
-        return (left - right) | 1;
-}
-
-long * smaller(long left, long right)
-{
-//    printf( "smaller: %p < %p\n", left, right );
-//    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
-    // we don't need to remove the tag since it will end up being the same order.
-        return left < right ? TRUE : FALSE;
-}
+long plus(long left, long right);
+long minus(long left, long right);
+long * smaller(long left, long right);
 
 long cache_and_call()
 {
-    // Fetch the calling instruction pointer
+    // Fetch the calling instruction pointer (stack-stored ip)
     __asm("mov 0(%rsp), %eax");
     // Calculate the offset of the actual code pointer
     __asm("mov %r10, %rdx");
@@ -123,5 +101,30 @@ void closureValue() {
     //load code-pointer from the closure-object
     __asm( "mov (%rdi), %rax");
     __asm( "jmpq *%rax");
+}
+
+long plus(long left, long right)
+{
+//    printf( "plus: %p + %p\n", left, right );
+//    printf( "  ->   %ld + %ld\n", left[0], right[0] );
+    if (ARE_INTS(left, right))
+        return (left ^ 1) + right;
+}
+
+long minus(long left, long right)
+{
+//    printf( "minus: %p - %p\n", left, right );
+//    printf( "  ->   %ld - %ld\n", left[0], right[0] );
+    if (ARE_INTS(left, right))
+        return (left - right) | 1;
+}
+
+long * smaller(long left, long right)
+{
+//    printf( "smaller: %p < %p\n", left, right );
+//    printf( "  ->   %ld < %ld\n", left[0], right[0] );
+    if (ARE_INTS(left, right))
+    // we don't need to remove the tag since it will end up being the same order.
+        return left < right ? TRUE : FALSE;
 }
 
