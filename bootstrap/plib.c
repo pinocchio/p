@@ -25,27 +25,6 @@ long plus(long left, long right)
         return (left ^ 1) + right;
 }
 
-long cache_and_call()
-{
-    __asm("mov 0(%rsp), %eax");
-    __asm("mov %r10, %rdx");
-    __asm("sub %eax, %edx");
-    __asm("movl %edx, -4(%eax)");
-    __asm("lea -5(%eax), %edx");
-    __asm("movl -9(%eax), %eax");
-    __asm("add %rax, %rdx");
-    __asm("bt $0, %rdi");
-    __asm("jae not_tagged");
-    __asm("mov %0, %%rax"::"r"(SmallInteger + 2));
-    __asm("mov %rax, (%rdx)");
-    // __asm("int3");
-    __asm("jmp *%r10");
-__asm("not_tagged:");
-    __asm("mov -8(%rdi), %rdx");
-    __asm("mov %rdx, (%rax)");
-    __asm("jmp *%r10");
-}
-
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
@@ -61,6 +40,34 @@ long * smaller(long left, long right)
     if (ARE_INTS(left, right))
     // we don't need to remove the tag since it will end up being the same order.
         return left < right ? TRUE : FALSE;
+}
+
+long cache_and_call()
+{
+    // Fetch the calling instruction pointer
+    __asm("mov 0(%rsp), %eax");
+    // Calculate the offset of the actual code pointer
+    __asm("mov %r10, %rdx");
+    __asm("sub %eax, %edx");
+    // Overwrite the 4-byte call-target offset with the method
+    __asm("movl %edx, -4(%eax)");
+    // Calculate the location of the literal in the frame
+    __asm("lea -5(%eax), %edx");
+    __asm("movl -9(%eax), %eax");
+    __asm("add %rax, %rdx");
+    // Calculate the class
+    // If tagged integer, store the SmallInteger class
+    __asm("bt $0, %rdi");
+    __asm("jae not_tagged");
+    __asm("mov %0, %%rax"::"r"(SmallInteger + 2));
+    __asm("mov %rax, (%rdx)");
+    // __asm("int3");
+    __asm("jmp *%r10");
+    // If not tagged, store the class of the receiver
+__asm("not_tagged:");
+    __asm("mov -8(%rdi), %rdx");
+    __asm("mov %rdx, (%rax)");
+    __asm("jmp *%r10");
 }
 
 void invoke_error(long msg, void* receiver)
