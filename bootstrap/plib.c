@@ -96,11 +96,13 @@ long * remoteArrayNew(int size) {
 
 void closureValue() {
     //if its not a closure then jmp to invoke
+    __asm("bt $0, %rdi");
+    __asm("jnae invoke");
     __asm("cmp $77, -0x8(%rdi)");
-    __asm( "jne invoke");
+    __asm("jne invoke");
     //load code-pointer from the closure-object
-    __asm( "mov (%rdi), %rax");
-    __asm( "jmpq *%rax");
+    __asm("mov (%rdi), %rax");
+    __asm("jmpq *%rax");
 }
 
 long plus(long left, long right)
