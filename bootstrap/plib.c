@@ -5,6 +5,7 @@
 
 extern long p_true[];
 extern long p_false[];
+extern long SmallInteger[];
 
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
@@ -30,6 +31,18 @@ long cache_and_call()
     __asm("mov %r10, %rdx");
     __asm("sub %eax, %edx");
     __asm("movl %edx, -4(%eax)");
+    __asm("lea -5(%eax), %edx");
+    __asm("movl -9(%eax), %eax");
+    __asm("add %rax, %rdx");
+    __asm("bt $0, %rdi");
+    __asm("jae not_tagged");
+    __asm("mov %0, %%rax"::"r"(SmallInteger + 2));
+    __asm("mov %rax, (%rdx)");
+    // __asm("int3");
+    __asm("jmp *%r10");
+__asm("not_tagged:");
+    __asm("mov -8(%rdi), %rdx");
+    __asm("mov %rdx, (%rax)");
     __asm("jmp *%r10");
 }
 
@@ -74,7 +87,7 @@ void invoke() {
     __asm("je cache_and_call");
 
     __asm("cmp $51, %rax");
-    __asm("mov $fibSend+0x18, %r10");
+    __asm("mov $fibSend, %r10");
     __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");

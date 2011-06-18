@@ -4,8 +4,8 @@ NAME=$1
 #echo "$ADDR"
 #echo "#define METHOD_OFFSET $ADDR" > settings.h
 echo "#define METHOD_CALL \"call $NAME\"" > settings.h
-echo "#define METHOD_NAME $NAME" >> settings.h
-echo "#define METHOD_OBJECT __$NAME" >> settings.h
-size=$(readelf -a $2 | grep  "GLOBAL DEFAULT .* __$1$" | head -c 30 | tail -c 5)
-echo "#define METHOD_OBJECT_SIZE $size" >> settings.h
+#echo "#define METHOD_NAME $NAME" >> settings.h
+#echo "#define METHOD_OBJECT __$NAME" >> settings.h
+#size=$(readelf -a $2 | grep  "GLOBAL DEFAULT .* __$1$" | head -c 30 | tail -c 5)
+#echo "#define METHOD_OBJECT_SIZE $size" >> settings.h
 

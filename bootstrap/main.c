@@ -23,18 +23,34 @@ long p_false[2];
 long p_nil[2];
 
 long SmallInteger[2];
+extern void* __fibSend[];
+extern void* __fib[];
+extern void* __simpleMethod[];
+extern void* __blockTest[];
+extern void* __blockTest2[];
 
 int main(int argc, char**argv)
 {
- 
-    void * method[] = {(void*)22,(void*)01234, (void*)123456,(void*)234561,(void*)345612,(void*)456123,(void*)561234,
-                       PLUS, MINUS, SMALLER, FIB, FIB_SEND, SmallInteger+2 };
+    __fibSend[0x7] = SMALLER;
+    __fibSend[0x8] = MINUS;
+    __fibSend[0x9] = FIB_SEND;
+    __fibSend[0xa] = MINUS;
+    __fibSend[0xb] = FIB_SEND;
+    __fibSend[0xc] = PLUS;
 
-    int i;
-    // printf("SmallInteger: %x\n", si_c);
-    for (i = 0; i < METHOD_OBJECT_SIZE; i++) {
-        METHOD_OBJECT[i] = method[i];
-    }
+    __simpleMethod[0x7] = PLUS;
+
+    __fib[0x7] = SmallInteger + 2;
+    __fib[0x8] = SmallInteger + 2;
+    __fib[0x9] = SmallInteger + 2;
+    __fib[0xa] = SmallInteger + 2;
+    __fib[0xb] = SmallInteger + 2;
+    __fib[0xc] = PLUS;
+
+    __blockTest[0x7] = PLUS;
+    __blockTest[0x8] = PLUS;
+
+    __blockTest2[0x7] = PLUS;
 
     long * self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
     
