@@ -32,6 +32,7 @@ long cache_and_call()
     // Calculate the location of the literal in the frame
     __asm("lea -5(%eax), %edx");
     __asm("movl -9(%eax), %eax");
+    __asm("cltq");
     __asm("add %rax, %rdx");
     // Calculate the class
     // If tagged integer, store the SmallInteger class
