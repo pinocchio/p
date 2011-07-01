@@ -31,6 +31,8 @@ extern void* __blockTest2[];
 
 int main(int argc, char**argv)
 {
+  bootstrap();
+
     __fibSend[0x7] = SMALLER;
     __fibSend[0x8] = MINUS;
     __fibSend[0x9] = FIB_SEND;
