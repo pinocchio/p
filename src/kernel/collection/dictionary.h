@@ -7,9 +7,9 @@
 
 struct Dictionary {
     Header              header;
-    SmallInteger        size;
-    SmallInteger        maxLinear;
-    SmallInteger        ratio;
+    int                 size;
+    int                 maxLinear;
+    int                 ratio;
     BucketArray         buckets;
     Object              linear;
 };

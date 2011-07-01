@@ -7,7 +7,7 @@
 
 struct Slot {
     Header              header;
-    SmallInteger        index;
+    int                 index;
     Symbol              name;
 };
 

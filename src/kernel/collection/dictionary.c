@@ -24,9 +24,9 @@ BucketArray new_BucketArray(uns_int size)
 Dictionary new_Dictionary()
 {
     NEW_OBJECT(Dictionary);
-    result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(5);
-    result->maxLinear = new_SmallInteger(20);
+    result->size      = ENC_NUM(0);
+    result->ratio     = ENC_NUM(5);
+    result->maxLinear = ENC_NUM(20);
     result->buckets   = new_BucketArray(20 << 1);
     result->linear    = true;
     return result;

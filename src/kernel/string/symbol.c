@@ -8,10 +8,10 @@ Class SymbolTable_class;
 
 static void SymbolTable_grow(SymbolTable table)
 {
-    long size   = table->size->value + 1;
-    table->size = new_SmallInteger(size);
+    long size   = DEC_INT(table->size) + 1;
+    table->size = ENC_NUM(size);
 
-    if (size / SIZE(table->buckets) <= table->ratio->value)
+    if (size / SIZE(table->buckets) <= DEC_INT(table->ratio))
         return;
 
     BucketArray old_buckets = table->buckets;
@@ -31,7 +31,7 @@ static void SymbolTable_grow(SymbolTable table)
 
         uns_int idx         = 0;
         uns_int newcount    = 0;
-        uns_int bucket_size = bucket->tally->value;
+        uns_int bucket_size = DEC_INT(bucket->tally);
         Object * value      = bucket->value;
 
         while (idx < bucket_size) {
@@ -47,7 +47,7 @@ static void SymbolTable_grow(SymbolTable table)
             }
         }
 
-        bucket->tally = new_SmallInteger(bucket_size);
+        bucket->tally = ENC_NUM(bucket_size);
         buckets->bucket[bucket_idx] = bucket;
 
         if (newcount > 0) {
@@ -61,7 +61,7 @@ static void SymbolTable_grow(SymbolTable table)
                     new_bucket->value[idx] = bucket->value[bucket_size + idx];
                 }
             }
-            new_bucket->tally = new_SmallInteger(newcount);
+            new_bucket->tally = ENC_NUM(newcount);
             buckets->bucket[limit+bucket_idx] = new_bucket;
         }
     }
@@ -88,12 +88,12 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
         bucket           = *bucketp;
         symbol           = raw_Symbol(key, size, hash);
         bucket->value[0] = (Object)symbol;
-        bucket->tally    = new_SmallInteger(1);
+        bucket->tally    = ENC_NUM(1);
         SymbolTable_grow(table);
         return symbol;
     }
 
-    uns_int tally = bucket->tally->value;
+    uns_int tally = DEC_INT(bucket->tally);
     uns_int i;
     
     /* Find key in bucket */
@@ -126,16 +126,16 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
 
     symbol               = raw_Symbol(key, size, hash);
     bucket->value[tally] = (Object)symbol;
-    bucket->tally        = new_SmallInteger(tally + 1);
+    bucket->tally        = ENC_NUM(tally + 1);
     SymbolTable_grow(table);
     return symbol;
 }
 
 static SymbolTable new_SymbolTable() {
     NEW_OBJECT_WITH_CLASS(Dictionary, SymbolTable_class);
-    result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(5);
-    result->maxLinear = new_SmallInteger(0);
+    result->size      = ENC_NUM(0);
+    result->ratio     = ENC_NUM(5);
+    result->maxLinear = ENC_NUM(0);
     result->buckets   = new_BucketArray(20);
     result->linear    = false;
     return result;

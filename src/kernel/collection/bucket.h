@@ -7,7 +7,7 @@
 
 struct Bucket {
     VariableHeader      header;
-    SmallInteger        tally;
+    int                 tally;
     Object              value[];
 };
 

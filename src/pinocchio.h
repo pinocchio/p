@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <alloca.h>
+#include <stdint.h> 
 
 #include <gc.h>
 
@@ -21,7 +22,6 @@ typedef struct Slot*                Slot;
 typedef struct Layout*              Layout;
 typedef struct Metaclass*           Metaclass;
 typedef struct Dictionary*          Dictionary;
-typedef struct SmallInteger*        SmallInteger;
 typedef struct Array*               Array;
 typedef struct Symbol*              Symbol;
 typedef struct String*              String;
@@ -79,6 +79,9 @@ struct VariableHeader {
 };
 typedef struct VariableHeader VariableHeader;
 
+extern void * pinocchio_rodata;
+extern void * pinocchio_bootstrap;
+
 /* ======================================================================= */
 
 #include <assert.h>
@@ -93,23 +96,12 @@ typedef struct VariableHeader VariableHeader;
 #include <kernel/structure/layout.h>
 #include <kernel/string/symbol.h>
 #include <kernel/string/string.h>
-#include <kernel/number/smallinteger.h>
 #include <kernel/collection/dictionary.h>
 #include <kernel/collection/identitydictionary.h>
 #include <kernel/collection/bucket.h>
 #include <kernel/collection/array.h>
-#include <kernel/behavior/methoddictionary.h>
-#include <kernel/behavior/nativesdictionary.h>
-#include <kernel/behavior/methodclosure.h>
-#include <kernel/behavior/block.h>
-#include <kernel/behavior/blockclosure.h>
 
-#include <kernel/interpreter/context.h>
-#include <kernel/interpreter/thread.h>
-#include <kernel/interpreter/jumptarget.h>
-
-#include <interpreter/native.h>
-#include <interpreter/opcodes.h>
+#include <hacks/plib.h>
 
 /* ======================================================================= */
 

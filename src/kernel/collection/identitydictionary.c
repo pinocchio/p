@@ -8,9 +8,9 @@ Class IdentityDictionary_class;
 IdentityDictionary new_IdentityDictionary()
 {
     NEW_OBJECT_WITH_CLASS(Dictionary, IdentityDictionary_class);
-    result->size      = new_SmallInteger(0);
-    result->ratio     = new_SmallInteger(5);
-    result->maxLinear = new_SmallInteger(20);
+    result->size      = ENC_NUM(0);
+    result->ratio     = ENC_NUM(5);
+    result->maxLinear = ENC_NUM(20);
     result->buckets   = new_BucketArray(20 << 1);
     result->linear    = true;
     return result;
@@ -34,7 +34,7 @@ Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key)
     Bucket bucket      = dictionary->buckets->bucket[bucket_idx];
 
     uns_int i;
-    uns_int limit = bucket->tally->value;
+    uns_int limit = DEC_INT(bucket->tally);
     Object * value = bucket->value;
     for (i = 0; i < limit; i = i+2) {
         if (value[i] == key) {
@@ -47,14 +47,14 @@ Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key)
 static void initital_grow(IdentityDictionary dictionary)
 {
     Bucket old_bucket = dictionary->buckets->bucket[0];
-    uns_int old_bucket_size = old_bucket->tally->value;
+    uns_int old_bucket_size = DEC_INT(old_bucket->tally);
 
     /* calculate how many new buckets we need to store the old_bucket
      * such that the elements per bucket ratio will be below the
      * dictionary ratio (to avoid a series of grows)
      */
 
-    float elements_per_bucket = old_bucket_size / ( dictionary->ratio->value * 2);
+    float elements_per_bucket = old_bucket_size / ( DEC_INT(dictionary->ratio) * 2);
     uns_int new_bucketsarray_size = 1 << (1+(int)log2f(elements_per_bucket));
 
     /* Create all those new buckets with the same size as the old one */
@@ -88,15 +88,15 @@ static void initital_grow(IdentityDictionary dictionary)
     /* update the tallys */
     for ( int i = 0; i < new_bucketsarray_size; i += 1 )
     {
-        dictionary->buckets->bucket[i]->tally = new_SmallInteger(newcount[i]);
+        dictionary->buckets->bucket[i]->tally = ENC_NUM(newcount[i]);
     }
 }
 
 
 static void IdentityDictionary_grow(IdentityDictionary dictionary)
 {
-    long size = dictionary->size->value + 1;
-    dictionary->size = new_SmallInteger(size);
+    long size = DEC_INT(dictionary->size) + 1;
+    dictionary->size = ENC_NUM(size);
 
     /* If the dictionary is still in the linear phase, 
      * we grow differently to make sure that we immediately
@@ -104,14 +104,14 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
      * Otherwise it would trigger multiple grows at once.
      */
     if (dictionary->linear == true) {
-        if (size >= dictionary->maxLinear->value) {
+        if (size >= DEC_INT(dictionary->maxLinear)) {
             dictionary->linear = false;
             initital_grow( dictionary );
         }
         return;
     } 
 
-    if (size / SIZE(dictionary->buckets) <= dictionary->ratio->value)
+    if (size / SIZE(dictionary->buckets) <= DEC_INT(dictionary->ratio))
         return;
 
     BucketArray old_buckets = dictionary->buckets;
@@ -142,7 +142,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
          */
         uns_int idx         = 0;
         uns_int newcount    = 0;
-        uns_int bucket_size = bucket->tally->value;
+        uns_int bucket_size = DEC_INT(bucket->tally);
         Object * value      = bucket->value;
 
         while (idx < bucket_size) {
@@ -160,7 +160,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
                 idx += 2;
             }
         }
-        bucket->tally = new_SmallInteger(bucket_size);
+        bucket->tally = ENC_NUM(bucket_size);
 
         buckets->bucket[bucket_idx] = bucket;
 
@@ -180,7 +180,7 @@ static void IdentityDictionary_grow(IdentityDictionary dictionary)
                     new_bucket->value[idx] = bucket->value[bucket_size + idx];
                 }
             }
-            new_bucket->tally = new_SmallInteger(newcount);
+            new_bucket->tally = ENC_NUM(newcount);
             buckets->bucket[limit+bucket_idx] = new_bucket;
 
         }
@@ -197,13 +197,13 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object 
         buckets->bucket[bucket_idx] = new_bucket;
         new_bucket->value[0]        = key;
         new_bucket->value[1]        = value;
-        new_bucket->tally           = new_SmallInteger(2);
+        new_bucket->tally           = ENC_NUM(2);
         IdentityDictionary_grow(dictionary);
         return;
     }
 
     uns_int i;
-    for (i = 0; i < bucket->tally->value; i = i+2) {
+    for (i = 0; i < DEC_INT(bucket->tally); i = i+2) {
         if (bucket->value[i] == key) {
             bucket->value[i+1] = value;
             return;
@@ -219,6 +219,6 @@ void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object 
     }
     bucket->value[i]   = key;
     bucket->value[i+1] = value;
-    bucket->tally = new_SmallInteger(i + 2);
+    bucket->tally = ENC_NUM(i + 2);
     IdentityDictionary_grow(dictionary);
 }

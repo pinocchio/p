@@ -2,82 +2,38 @@
 #include <bootstrap.h>
 #include <locale.h>
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-Object start_send(void** code, Object receiver)
+extern void* __fibSend[];
+
+extern void * fibSend();
+extern void * arrayNew();
+
+long p_true[2];
+long p_false[2];
+long p_nil[2];
+
+int main(int argc, char**argv)
 {
-    return method_context( code, receiver );
-}
 
-void pinocchio()
-{
-    RawArray code;
-
-    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"smaller")), 0);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"<"), code);
-
-    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"minus")), 0);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"-"), code);
-
-    code = new_RawArray(2, lookup_native(new_NativeName( L"SmallInteger", L"plus")), 0);
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"+"), code);
-
-    code = new_RawArray(55,
-            &method_context, U(2),
-            OP(load_constant), new_SmallInteger(2), U(0), 
-            OP(self_send), INLINE_CACHE, new_Symbol(L"<"), 
-            OP(iftrue_iffalse), U(5), U(0),
-            OP(return_constant), new_SmallInteger(1),
-            
-            OP(load_constant), new_SmallInteger(2), U(0), 
-            OP(self_send), INLINE_CACHE, new_Symbol(L"-"),
-            OP(result_send), INLINE_CACHE, new_Symbol(L"fib"),
-            OP(store_result), U(1),
-
-            OP(load_constant), new_SmallInteger(1), U(0),
-            OP(self_send), INLINE_CACHE, new_Symbol(L"-"),
-            OP(result_send), INLINE_CACHE, new_Symbol(L"fib"),
-
-            OP(move), U(1), U(0),
-
-            OP(result_send), INLINE_CACHE, new_Symbol(L"+"),
-            OP(return_result) );
-
-
-    new_MethodClosure((Behavior)SmallInteger_class, new_Symbol(L"fib"), code);
-
-    SmallInteger integer = new_SmallInteger(34);
-
-    SmallInteger result = (SmallInteger)start_send(code->data, (Object)integer);
-    printf("Result: %li\n", result->value);
-}
-
-Array get_args(int argc, const char ** argv)
-{
-    Array args = new_Array(argc - 1);
-    int i;
-    argv++;
-    for (i = 1; i < argc; i++) {
-        const char * arg = *argv++;
-        int length = strlen(arg);
-        String sarg = raw_String(length);
-        assert1(
-            mbstowcs(sarg->character, arg, length) != -1,
-            "failed to parse arguments");
-        args->value[i-1] = (Object)sarg;
-    }
-    return args;
-}
-
-#ifndef UNIT_TESTING
-
-int main(int argc, const char ** argv)
-{
     setlocale(LC_ALL, "");
-    pinocchio_bootstrap();
+    pinocchio_do_bootstrap();
 
-    //Array args = get_args(argc, argv);
-    pinocchio();
-    return EXIT_SUCCESS;
+    printf( "__fibSend[7] %p\n", __fibSend[7] );
+    
+    long * self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
+    
+    long * result;
+    __asm("mov %0, %%rdi"::"r"(self));
+    __asm("mov %0, %%rax"::"r"(SmallInteger+2));
+    __asm("call fibSend");
+    __asm("mov %%rax, %0":"=r"(result));
+ 
+    if (IS_INT(result)) {
+        printf("result: %li\n", DEC_INT(result));
+    } else {
+        printf("result: %p\n", result);
+    }
+    return 0;
 }
-
-#endif

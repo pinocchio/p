@@ -1,3 +1,4 @@
+#include <pinocchio.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <gc/gc.h>
@@ -5,15 +6,6 @@
 
 extern long p_true[];
 extern long p_false[];
-extern long SmallInteger[];
-
-#define ENC_INT(v)  ((long*)(((v) << 1) + 1))
-#define DEC_INT(v)  ((long)(v) >> 1)
-#define IS_INT(v)   ((long)(v) & 1)
-#define ARE_INTS(x, y) ((char)(x) & (char)(y) & 1)
-
-#define TRUE  (p_true + 2)
-#define FALSE (p_false + 2)
 
 extern void * fib(long* i);
 long plus(long left, long right);
@@ -51,28 +43,41 @@ __asm("not_tagged:");
 
 void invoke_error(long msg, void* receiver)
 {
-    printf("Lookup of msg %ld failed on %p\n", msg, receiver);
+    printf("Lookup of msg %p failed on %p\n", msg, receiver);
     __asm("int3");
 }
 
+void * minus_sym;
+void * less_sym;
+void * plus_sym;
+void * fibSend_sym;
+
+void init_selectors() {
+  minus_sym = new_Symbol(L"-");
+  less_sym = new_Symbol(L"<");
+  plus_sym = new_Symbol(L"+");
+  fibSend_sym = new_Symbol(L"fibSend");
+  printf("init_selectors : %p %p %p %p\n", minus_sym, less_sym, plus_sym, fibSend_sym);
+}
+
 void invoke() {
-    __asm("cmp $21, %rax");
+    __asm("cmp $minus_sym, %rax");
     __asm("mov $minus, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $41, %rax");
+    __asm("cmp $plus_sym, %rax");
     __asm("mov $plus, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $31, %rax");
+/*    __asm("cmp $31, %rax");
     __asm("mov $fib, %r10");
     __asm("je cache_and_call");
-
-    __asm("cmp $11, %rax");
+*/
+    __asm("cmp $less_sym, %rax");
     __asm("mov $smaller, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $51, %rax");
+    __asm("cmp $fibSend_sym, %rax");
     __asm("mov $fibSend, %r10");
     __asm("je cache_and_call");
 

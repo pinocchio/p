@@ -20,8 +20,8 @@ Class new_Bootstrapping_Class()
     NEW_OBJECT_NAMED(metaclass, Metaclass);
     NEW_OBJECT_NAMED_WITH_CLASS(class, Class, metaclass);
     metaclass->instance = class;
-    metaclass->methods  = new_MethodDictionary();
-    class->methods      = new_MethodDictionary();
+    metaclass->methods  = new_IdentityDictionary();
+    class->methods      = new_IdentityDictionary();
     return class;
 }
 
@@ -29,8 +29,8 @@ Class new_Bootstrapping_Class()
 
 void init_class(Class class)
 {
-    class->methods                    = new_MethodDictionary();
-    get_class((Object)class)->methods = new_MethodDictionary();
+    class->methods                    = new_IdentityDictionary();
+    get_class((Object)class)->methods = new_IdentityDictionary();
 }
 
 void set_super(Class child, Class super)
@@ -54,9 +54,9 @@ Behavior get_class(Object object)
 MethodClosure lookup(Object receiver, Symbol message)
 {
     Behavior behavior        = get_class(receiver);
-    MethodDictionary methods = behavior->methods;
-    if (get_class((Object)methods) != (Behavior)MethodDictionary_class) {
+    IdentityDictionary methods = behavior->methods;
+    if (get_class((Object)methods) != (Behavior)IdentityDictionary_class) {
         return NULL;
     }
-    return MethodDictionary_lookup(methods, message);
+    return (MethodClosure)IdentityDictionary_lookup(methods, (Object)message);
 }
