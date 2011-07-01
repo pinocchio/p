@@ -41,16 +41,16 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(long msg, void* receiver)
+void invoke_error(long* msg, void* receiver)
 {
     printf("Lookup of msg %p failed on %p\n", msg, receiver);
     __asm("int3");
 }
 
-void * minus_sym;
-void * less_sym;
-void * plus_sym;
-void * fibSend_sym;
+long * minus_sym;
+long * less_sym;
+long * plus_sym;
+long * fibSend_sym;
 
 void init_selectors() {
   minus_sym = new_Symbol(L"-");
@@ -61,11 +61,11 @@ void init_selectors() {
 }
 
 void invoke() {
-    __asm("cmp $minus_sym, %rax");
+    __asm("cmp minus_sym, %rax");
     __asm("mov $minus, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $plus_sym, %rax");
+    __asm("cmp plus_sym, %rax");
     __asm("mov $plus, %r10");
     __asm("je cache_and_call");
 
@@ -73,11 +73,11 @@ void invoke() {
     __asm("mov $fib, %r10");
     __asm("je cache_and_call");
 */
-    __asm("cmp $less_sym, %rax");
+    __asm("cmp less_sym, %rax");
     __asm("mov $smaller, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $fibSend_sym, %rax");
+    __asm("cmp fibSend_sym, %rax");
     __asm("mov $fibSend, %r10");
     __asm("je cache_and_call");
 
