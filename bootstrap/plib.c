@@ -2,18 +2,17 @@
 #include <stdio.h>
 #include <gc/gc.h>
 #include <signal.h>
+#include <malloc.h>
+#include <string.h>
 
-extern long p_true[];
-extern long p_false[];
+extern long true[];
+extern long false[];
 extern long SmallInteger[];
 
 #define ENC_INT(v)  ((long*)(((v) << 1) + 1))
 #define DEC_INT(v)  ((long)(v) >> 1)
-#define IS_INT(v)   ((long)(v) & 1)
-#define ARE_INTS(x, y) ((char)(x) & (char)(y) & 1)
-
-#define TRUE  (p_true + 2)
-#define FALSE (p_false + 2)
+#define IS_INT(v)   ((char)(long)(v) & 1)
+#define ARE_INTS(x, y) ((char)(x) & (char)(y) & (char)1)
 
 extern void * fib(long* i);
 long plus(long left, long right);
@@ -38,7 +37,7 @@ long cache_and_call()
     // If tagged integer, store the SmallInteger class
     __asm("bt $0, %rdi");
     __asm("jae not_tagged");
-    __asm("mov %0, %%rax"::"r"(SmallInteger + 2));
+    __asm("mov %0, %%rax"::"r"(SmallInteger));
     __asm("mov %rax, (%rdx)");
     // __asm("int3");
     __asm("jmp *%r10");
@@ -56,12 +55,12 @@ void invoke_error(long msg, void* receiver)
 }
 
 void invoke() {
-    __asm("cmp $21, %rax");
-    __asm("mov $minus, %r10");
+    __asm("cmp $0x611b38, %rax");
+    __asm("mov $plus, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $41, %rax");
-    __asm("mov $plus, %r10");
+    __asm("cmp $21, %rax");
+    __asm("mov $minus, %r10");
     __asm("je cache_and_call");
 
     __asm("cmp $31, %rax");
@@ -109,7 +108,6 @@ void closureValue() {
 long plus(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
-//    printf( "  ->   %ld + %ld\n", left[0], right[0] );
     if (ARE_INTS(left, right))
         return (left ^ 1) + right;
 }
@@ -117,17 +115,70 @@ long plus(long left, long right)
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
-//    printf( "  ->   %ld - %ld\n", left[0], right[0] );
     if (ARE_INTS(left, right))
         return (left - right) | 1;
 }
 
 long * smaller(long left, long right)
 {
-//    printf( "smaller: %p < %p\n", left, right );
-//    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
+    // printf( "smaller: %d < %d\n", left, right );
+    if (ARE_INTS(left, right)) {
     // we don't need to remove the tag since it will end up being the same order.
-        return left < right ? TRUE : FALSE;
+        // printf( "smaller: %d < %d\n", left, right );
+        return left < right ? true : false;
+    }
 }
 
+extern void* Kernel_String_Symbol[];
+
+void* get_class(void* object[]) {
+    return object[-2];
+}
+
+void* get_name(void* object[]) {
+    return object[3];
+}
+
+typedef struct header {
+    unsigned char base:     8;
+    unsigned char variable: 1;
+    unsigned char bytes:    1;
+    unsigned char mutable:  1;
+    unsigned char gcmark:   1;
+    unsigned long hash:     sizeof(unsigned long) * 8 - 12;
+} header;
+
+header get_header(header * object) {
+    return object[-1];
+}
+
+char* get_symbol(void* object[]) {
+    long size = (long)object[-3];
+    char * buffer = malloc( sizeof(char)*(size+1));
+    strncpy(buffer, (char*)object, size);
+    buffer[size] = 0;
+    return buffer;
+}
+
+void print_object(void* object[]) {
+    
+    if (IS_INT(object)) {
+        printf(" %ld\n", DEC_INT(object));
+        return;
+    }
+
+    printf("printing object: %p\n", object);
+    header h = get_header((header*)object);
+    if (h.variable || h.bytes) {
+        printf("size: %lu\n", (long)object[-3]);
+    }
+    printf(" header: (base: %i var: %i bytes: %i mutable: %i gcmark: %i hash: %lu)\n", 
+                      h.base, h.variable, h.bytes, h.mutable, h.gcmark, (unsigned long)h.hash);
+
+    if (Kernel_String_Symbol == get_class(object)) {
+        printf(" #'%s' (%p)\n", get_symbol(object), object);
+        return;
+    }
+
+    printf(" is a: %s\n", get_symbol(get_name(get_class(object))));
+}
