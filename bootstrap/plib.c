@@ -135,8 +135,23 @@ void* get_class(void* object[]) {
     return object[-2];
 }
 
-void* get_name(void* object[]) {
-    return object[3];
+extern void* Kernel_Object_Metaclass[];
+
+void print_symbol(void* object[]) {
+    long size = (long)object[-3];
+    char buffer[size+1];
+    strncpy(buffer, (char*)object, size);
+    buffer[size] = 0;
+    printf("%s", buffer);
+}
+
+void* print_class_name(void* object[]) {
+    if (get_class(object) == Kernel_Object_Metaclass) {
+        print_symbol(((void**)object[4])[4]);
+        printf(" class");
+    } else {
+        print_symbol(object[4]);
+    }
 }
 
 typedef struct header {
@@ -150,14 +165,6 @@ typedef struct header {
 
 header get_header(header * object) {
     return object[-1];
-}
-
-char* get_symbol(void* object[]) {
-    long size = (long)object[-3];
-    char * buffer = malloc( sizeof(char)*(size+1));
-    strncpy(buffer, (char*)object, size);
-    buffer[size] = 0;
-    return buffer;
 }
 
 void print_object(void* object[]) {
@@ -176,9 +183,62 @@ void print_object(void* object[]) {
                       h.base, h.variable, h.bytes, h.mutable, h.gcmark, (unsigned long)h.hash);
 
     if (Kernel_String_Symbol == get_class(object)) {
-        printf(" #'%s' (%p)\n", get_symbol(object), object);
+        printf(" #'");
+        print_symbol(object);
+        printf("' (%p)\n", object);
         return;
     }
 
-    printf(" is a: %s\n", get_symbol(get_name(get_class(object))));
+    printf(" is a: ");
+    print_class_name(get_class(object));
+    printf("\n");
+}
+
+typedef void ** MethodDictionary;
+typedef long    SmallInt;
+typedef void ** Layout;
+typedef void ** Object;
+
+typedef struct Behavior* Behavior;
+
+struct Behavior {
+    MethodDictionary    methods;
+    Behavior            superclass;
+    SmallInt            instanceHeader;
+    Layout              layout;
+};
+
+Object* basicNew(Behavior b) {
+    printf("Behavior: %p\n", b);
+    long _h = b->instanceHeader >> 1;
+    printf("header: %li\n", _h);
+    header h = *(header*)&_h;
+    Object* result;
+    if (h.variable) {
+        result = GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
+        result[-3] = (Object)0;
+    } else {
+        printf("Allocating object of size: %u\n", h.base);
+        result = GC_MALLOC(sizeof(void**) * (h.base + 2)) + 2;
+    }
+    result[-2] = (Object)b;
+    result[-1] = (Object)_h;
+    return result;
+}
+
+Object* basicNew_(Behavior b, long tagged_size) {
+    long h = b->instanceHeader;
+    long base = (h >> 1) & ((2 << 8) - 1);
+    long extra = tagged_size >> 1;
+    Object* result;
+    if (h & (1 << 9)) {
+        result = GC_MALLOC(sizeof(void**) * (base + 3 + extra)) + 3;
+        result[-3] = (Object)extra;
+    } else {
+        // should not happen
+        exit(-1);
+    }
+    result[-2] = (Object)b;
+    result[-1] = (Object)(h >> 1);
+    return result;
 }
