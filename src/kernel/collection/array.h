@@ -5,19 +5,13 @@
 
 /* ======================================================================= */
 
-struct Array {
-    VariableHeader      header;
-    Object              value[];
-};
-
-extern Class Array_class;
-extern Array empty_array;
+extern struct Class Array_class;
 
 extern void init_layout();
 /* ======================================================================= */
 
-extern Array new_Array_with(uns_int size, ...);
-extern Array new_Array(uns_int size);
+extern tArray new_Array_with(uns_int size, ...);
+extern tArray new_Array(uns_int size);
 
 /* ======================================================================= */
 

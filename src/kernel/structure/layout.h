@@ -5,35 +5,30 @@
 
 /* ======================================================================= */
 
-struct Layout {
-    VariableHeader      header;
-    Slot                slot[];
-};
+extern struct Class ObjectLayout;
+extern struct Class ArrayLayout;
+extern struct Class CharacterLayout;
+extern struct Class WordsLayout;
+extern struct Class IntegerLayout;
+extern struct Class FloatLayout;
+extern struct Class LongLayout;
+extern struct Class BytesLayout;
+extern struct Class RawLayout;
 
-extern Class ObjectLayout_class;
-extern Class ArrayLayout_class;
-extern Class CharacterLayout_class;
-extern Class WordsLayout_class;
-extern Class IntegerLayout_class;
-extern Class FloatLayout_class;
-extern Class LongLayout_class;
-extern Class BytesLayout_class;
-extern Class RawLayout_class;
-
-extern Object empty_object_layout;
-extern Object empty_array_layout;
-extern Object words_layout;
-extern Object bytes_layout;
-extern Object integer_layout;
-extern Object float_layout;
-extern Object long_layout;
-extern Object character_layout;
-extern Object raw_layout;
+extern tObject empty_object_layout;
+extern tObject empty_array_layout;
+extern tObject words_layout;
+extern tObject bytes_layout;
+extern tObject integer_layout;
+extern tObject float_layout;
+extern tObject long_layout;
+extern tObject character_layout;
+extern tObject raw_layout;
 
 extern void init_layout();
 /* ======================================================================= */
 
-extern Layout new_Layout(uns_int size, ...);
+extern tLayout new_Layout(uns_int size, ...);
 
 /* ======================================================================= */
 

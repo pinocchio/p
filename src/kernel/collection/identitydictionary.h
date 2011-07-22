@@ -5,13 +5,13 @@
 
 /* ======================================================================= */
 
-extern Class IdentityDictionary_class;
+extern struct Class IdentityDictionary_class;
 
 /* ======================================================================= */
 
-extern IdentityDictionary new_IdentityDictionary();
-extern Object IdentityDictionary_lookup(IdentityDictionary dictionary, Object key);
-extern void IdentityDictionary_store(IdentityDictionary dictionary, Object key, Object value);
+extern tIdentityDictionary new_IdentityDictionary();
+extern tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key);
+extern void IdentityDictionary_store(tIdentityDictionary dictionary, tObject key, tObject value);
 
 /* ======================================================================= */
 

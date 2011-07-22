@@ -5,18 +5,14 @@
 
 /* ======================================================================= */
 
-struct Object {
-    Header header;
-    Object field[];
-};
-
-extern Class Object_class;
-extern Class True_class;
-extern Class False_class;
-extern Class UndefinedObject_class;
-extern Object true;
-extern Object false;
-extern Object nil;
+extern struct Class Object;
+extern struct Class True;
+extern struct Class False;
+extern struct Class UndefinedObject;
+extern struct Class SmallInteger;
+extern struct Object true;
+extern struct Object false;
+extern struct Object nil;
 
 /* ======================================================================= */
 

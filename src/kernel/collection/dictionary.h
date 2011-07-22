@@ -6,28 +6,14 @@
 /* ======================================================================= */
 
 struct Dictionary {
-    Header              header;
-    int                 size;
-    int                 maxLinear;
-    int                 ratio;
-    BucketArray         buckets;
-    Object              linear;
+    tSmallInteger        size;
+    tSmallInteger        maxLinear;
+    tSmallInteger        ratio;
+    tBucketArray         buckets;
+    tObject              linear;
 };
-extern Class Dictionary_class;
-
-struct BucketArray {
-    VariableHeader      header;
-    Bucket              bucket[];
-};
-
-extern Class BucketArray_class;
-
-/* ======================================================================= */
-
-extern Object Dictionary_quick_lookup(Dictionary dictionary, Object key);
-extern void Dictionary_quick_store(Dictionary dictionary, Object key, Object value);
-extern BucketArray new_BucketArray(uns_int size);
-extern BucketArray new_BucketArray_sized(uns_int size);
+extern struct Class Dictionary_class;
+extern struct Class BucketArray_class;
 
 /* ======================================================================= */
 

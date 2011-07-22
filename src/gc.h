@@ -24,7 +24,7 @@
 
 #define INSTANTIATE(result, type, cls)\
     result = PALLOC(sizeof(struct type));\
-    result->header.class = (Behavior)cls;\
+    result->header.class = (Behavior)&cls;\
     BASE(result)         = sizeof(struct type) / 8;
 
 #define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
@@ -40,7 +40,7 @@
 
 #define INSTANTIATE_ARRAY(result, cls, arraytype, arraysize)\
     result = PALLOC(sizeof(struct cls) + sizeof(arraytype[arraysize]));\
-    result->header.class           = (Behavior)cls##_class;\
+    result->header.class           = (Behavior)&cls##_class;\
     result->header.format.variable = 1;\
     BASE(result)                   = sizeof(struct cls) / 8;\
 	SIZE(result)                   = arraysize;

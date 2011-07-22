@@ -3,52 +3,43 @@
 
 #include <pinocchio.h>
 
-/* ======================================================================= */
+/*  =======================================================================  */
 
 struct Behavior {
-    Header              header;
-    Layout              layout;
-    Behavior            super;
-    MethodDictionary    methods;
-    Object              classfield[];
+    tMethodDictionary    methods;
+    tBehavior            super;
+    tSmallInteger        instanceHeader;
+    tLayout              layout;
+    tObject              classfield[];
 };
 
 struct Class {
-    Header              header;
-    Layout              layout;
-    Class               super;
-    MethodDictionary    methods;
-    Symbol              name;
-    Object              package;
-    Object              classfield[];
+    tMethodDictionary    methods;
+    tBehavior            super;
+    tSmallInteger        instanceHeader;
+    tLayout              layout;
+    tSymbol              name;
+    tObject              package;
+    tObject              classfield[];
 };
 
 struct Metaclass {
-    Header              header;
-    Layout              layout;
-    Behavior            super;
-    MethodDictionary    methods;
-    Class               instance;
-    Object              classfield[];
+    tMethodDictionary    methods;
+    tBehavior            super;
+    tSmallInteger        instanceHeader;
+    tLayout              layout;
+    tClass               instance;
+    tObject              classfield[];
 };
 
-extern Class Behavior_class;
-extern Class Class_class;
-extern Class Metaclass_class;
+extern struct Class Behavior;
+extern struct Class Class;
+extern struct Class Metaclass;
 
-/* ======================================================================= */
+/*  =======================================================================  */
 
-extern Class raw_Bootstrapping_Class();
-extern void init_class(Class class);
-extern Class new_Bootstrapping_Class();
+extern tMethodClosure lookup(tObject receiver, tSymbol message);
 
-/* ======================================================================= */
-
-extern void set_super(Class child, Class superclass);
-extern void set_class(Object object, Class class);
-extern Behavior get_class(Object object);
-extern MethodClosure lookup(Object receiver, Symbol message);
-
-/* ======================================================================= */
+/*  =======================================================================  */
 
 #endif // KERNEL_OBJECT_CLASS_H

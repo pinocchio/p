@@ -5,18 +5,13 @@
 
 /* ======================================================================= */
 
-struct Symbol {
-    VariableHeader      header;
-    wchar_t             character[];
-};
 
-extern Class Symbol_class;
-extern Class SymbolTable_class;
+extern struct Class Symbol_class;
+extern struct Class SymbolTable_class;
 
 /* ======================================================================= */
 
-extern void init_symboltable();
-extern Symbol new_Symbol(const wchar_t* input);
+extern tSymbol new_Symbol(const wchar_t* input);
 
 /* ======================================================================= */
 

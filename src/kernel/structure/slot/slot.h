@@ -6,12 +6,11 @@
 /* ======================================================================= */
 
 struct Slot {
-    Header              header;
-    int                 index;
-    Symbol              name;
+    tSmallInteger        index;
+    tSymbol              name;
 };
 
-extern Class Slot_class;
+extern struct Class Slot;
 
 /* ======================================================================= */
 

@@ -5,17 +5,7 @@
 
 /* ======================================================================= */
 
-struct String {
-    VariableHeader      header;
-    wchar_t             character[];
-};
-
-extern Class String_class;
-extern String empty_string;
-
-/* ======================================================================= */
-
-extern String raw_String(uns_int size);
+extern struct Class String_class;
 
 /* ======================================================================= */
 

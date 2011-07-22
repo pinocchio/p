@@ -1,18 +1,14 @@
-#include <pinocchio.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <gc/gc.h>
 #include <signal.h>
-
-extern long p_true[];
-extern long p_false[];
+#include <string.h>
+#include <pinocchio.h>
 
 extern void * fib(long* i);
 long plus(long left, long right);
 long minus(long left, long right);
-long * smaller(long left, long right);
+tObject smaller(long left, long right);
 
-long cache_and_call()
+void cache_and_call()
 {
     // Fetch the calling instruction pointer (stack-stored ip)
     __asm("mov 0(%rsp), %eax");
@@ -30,7 +26,7 @@ long cache_and_call()
     // If tagged integer, store the SmallInteger class
     __asm("bt $0, %rdi");
     __asm("jae not_tagged");
-    __asm("mov %0, %%rax"::"r"(SmallInteger + 2));
+    __asm("mov %0, %%rax"::"r"(&SmallInteger));
     __asm("mov %rax, (%rdx)");
     // __asm("int3");
     __asm("jmp *%r10");
@@ -41,43 +37,30 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(long* msg, void* receiver)
+void invoke_error(long msg, void* receiver)
 {
-    printf("Lookup of msg %p failed on %p\n", msg, receiver);
+    printf("Lookup of msg %ld failed on %p\n", msg, receiver);
     __asm("int3");
 }
 
-long * minus_sym;
-long * less_sym;
-long * plus_sym;
-long * fibSend_sym;
-
-void init_selectors() {
-  minus_sym = new_Symbol(L"-");
-  less_sym = new_Symbol(L"<");
-  plus_sym = new_Symbol(L"+");
-  fibSend_sym = new_Symbol(L"fibSend");
-  printf("init_selectors : %p %p %p %p\n", minus_sym, less_sym, plus_sym, fibSend_sym);
-}
-
 void invoke() {
-    __asm("cmp minus_sym, %rax");
-    __asm("mov $minus, %r10");
-    __asm("je cache_and_call");
-
-    __asm("cmp plus_sym, %rax");
+    __asm("cmp $0x611b38, %rax");
     __asm("mov $plus, %r10");
     __asm("je cache_and_call");
 
-/*    __asm("cmp $31, %rax");
+    __asm("cmp $21, %rax");
+    __asm("mov $minus, %r10");
+    __asm("je cache_and_call");
+
+    __asm("cmp $31, %rax");
     __asm("mov $fib, %r10");
     __asm("je cache_and_call");
-*/
-    __asm("cmp less_sym, %rax");
+
+    __asm("cmp $11, %rax");
     __asm("mov $smaller, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp fibSend_sym, %rax");
+    __asm("cmp $51, %rax");
     __asm("mov $fibSend, %r10");
     __asm("je cache_and_call");
 
@@ -114,25 +97,124 @@ void closureValue() {
 long plus(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
-//    printf( "  ->   %ld + %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
+    if (ARE_INTS(left, right)) {
         return (left ^ 1) + right;
+    }
+    PINOCCHIO_FAIL("Ints expected");
 }
 
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
-//    printf( "  ->   %ld - %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
+    if (ARE_INTS(left, right)) {
         return (left - right) | 1;
+    }
+    PINOCCHIO_FAIL("Ints expected");
 }
 
-long * smaller(long left, long right)
+tObject smaller(long left, long right)
 {
-//    printf( "smaller: %p < %p\n", left, right );
-//    printf( "  ->   %ld < %ld\n", left[0], right[0] );
-    if (ARE_INTS(left, right))
+    // printf( "smaller: %d < %d\n", left, right );
+    if (ARE_INTS(left, right)) {
     // we don't need to remove the tag since it will end up being the same order.
-        return left < right ? TRUE : FALSE;
+        // printf( "smaller: %d < %d\n", left, right );
+        return (tObject)(left < right ? &true : &false);
+    }
+    PINOCCHIO_FAIL("Ints expected");
 }
 
+extern struct Class Kernel_String_Symbol;
+
+extern struct Class Kernel_Object_Metaclass;
+
+void print_symbol(tSymbol symbol) {
+    tObject object = (tObject)symbol;
+    long size = (long)object[-3];
+    char buffer[size+1];
+    strncpy(buffer, (char*)object, size);
+    buffer[size] = 0;
+    printf("%s", buffer);
+}
+
+void print_class_name(tClass cls) {
+    if (CLASS_OF(cls) == &Kernel_Object_Metaclass) {
+        print_symbol(((tMetaclass)cls)->instance->name);
+        printf(" class");
+    } else {
+        print_symbol(cls->name);
+    }
+}
+
+typedef struct header {
+    unsigned char base:     8;
+    unsigned char variable: 1;
+    unsigned char bytes:    1;
+    unsigned char mutable:  1;
+    unsigned char gcmark:   1;
+    unsigned long hash:     sizeof(unsigned long) * 8 - 12;
+} header;
+
+header get_header(header * object) {
+    return object[-1];
+}
+
+void print_object(void* object[]) {
+    
+    if (IS_INT(object)) {
+        printf(" %ld\n", DEC_INT(object));
+        return;
+    }
+
+    printf("printing object: %p\n", object);
+    header h = get_header((header*)object);
+    if (h.variable || h.bytes) {
+        printf("size: %lu\n", (long)object[-3]);
+    }
+    printf(" header: (base: %i var: %i bytes: %i mutable: %i gcmark: %i hash: %lu)\n", 
+                      h.base, h.variable, h.bytes, h.mutable, h.gcmark, (unsigned long)h.hash);
+
+    if (&Kernel_String_Symbol == CLASS_OF(object)) {
+        printf(" #'");
+        print_symbol((tSymbol)object);
+        printf("' (%p)\n", object);
+        return;
+    }
+
+    printf(" is a: ");
+    print_class_name(CLASS_OF(object));
+    printf("\n");
+}
+
+tObject basicNew(tBehavior b) {
+    long _h = b->instanceHeader >> 1;
+    header h = *(header*)&_h;
+    tObject result;
+    if (h.variable) {
+        result = (tObject)GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
+        result[-3] = (tObject)0;
+    } else {
+        result = (tObject)GC_MALLOC(sizeof(void**) * (h.base + 2)) + 2;
+    }
+    result[-2] = (tObject)b;
+    result[-1] = (tObject)_h;
+    return result;
+}
+
+tObject basicNew_(tBehavior b, long tagged_size) {
+    if (!(tagged_size & 1)) {
+        PINOCCHIO_FAIL("Invalid size type given, expects SmallInteger");
+    }
+    long size = tagged_size >> 1;
+    long _h   = b->instanceHeader >> 1;
+    header h = *(header*)&_h;
+    tObject result;
+    if (h.variable) {
+        result = (tObject)GC_MALLOC(sizeof(void**) * (size + h.base + 3)) + 3;
+        result[-3] = (tObject)size;
+    } else {
+        PINOCCHIO_FAIL("Trying to instantiate non-variable-sized class");
+    }
+    result[-2] = (tObject)b;
+    result[-1] = (tObject)_h;
+    return result;
+}

@@ -20,7 +20,7 @@ PLUGINSOURCES = plugin/Makefile $(PLUGINCFILES) $(PLUGINHFILES)
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 
-EXTRAOBJECTS  = $(shell find ../../f -name '*.o')
+EXTRAOBJECTS  = $(shell find ../pharo -name '*.o')
 
 # ============================================================================
 
