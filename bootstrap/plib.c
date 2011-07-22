@@ -194,6 +194,8 @@ void print_object(void* object[]) {
     printf("\n");
 }
 
+#define PINOCCHIO_FAIL(msg) printf(""#msg"\n"); exit(-1)
+
 typedef void ** MethodDictionary;
 typedef long    SmallInt;
 typedef void ** Layout;
@@ -209,17 +211,14 @@ struct Behavior {
 };
 
 Object* basicNew(Behavior b) {
-    printf("Behavior: %p\n", b);
     long _h = b->instanceHeader >> 1;
-    printf("header: %li\n", _h);
     header h = *(header*)&_h;
     Object* result;
     if (h.variable) {
-        result = GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
+        result = (Object*)GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
         result[-3] = (Object)0;
     } else {
-        printf("Allocating object of size: %u\n", h.base);
-        result = GC_MALLOC(sizeof(void**) * (h.base + 2)) + 2;
+        result = (Object*)GC_MALLOC(sizeof(void**) * (h.base + 2)) + 2;
     }
     result[-2] = (Object)b;
     result[-1] = (Object)_h;
@@ -227,18 +226,20 @@ Object* basicNew(Behavior b) {
 }
 
 Object* basicNew_(Behavior b, long tagged_size) {
-    long h = b->instanceHeader;
-    long base = (h >> 1) & ((2 << 8) - 1);
-    long extra = tagged_size >> 1;
+    if (!(tagged_size & 1)) {
+        PINOCCHIO_FAIL("Invalid size type given, expects SmallInteger");
+    }
+    long size = tagged_size >> 1;
+    long _h   = b->instanceHeader >> 1;
+    header h = *(header*)&_h;
     Object* result;
-    if (h & (1 << 9)) {
-        result = GC_MALLOC(sizeof(void**) * (base + 3 + extra)) + 3;
-        result[-3] = (Object)extra;
+    if (h.variable) {
+        result = (Object*)GC_MALLOC(sizeof(void**) * (size + h.base + 3)) + 3;
+        result[-3] = (Object)size;
     } else {
-        // should not happen
-        exit(-1);
+        PINOCCHIO_FAIL("Trying to instantiate non-variable-sized class");
     }
     result[-2] = (Object)b;
-    result[-1] = (Object)(h >> 1);
+    result[-1] = (Object)_h;
     return result;
 }
