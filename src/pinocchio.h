@@ -39,11 +39,11 @@ typedef tDictionary                 tMethodDictionary;
 typedef tDictionary                 tNativesDictionary;
 
 typedef void**      tObject;
-typedef tObject**   tArray;
-typedef tSlot**     tLayout;
-typedef char**      tSymbol;
-typedef char**      tString;
-typedef tBucket**   tBucketArray;
+typedef tObject*    tArray;
+typedef tSlot*      tLayout;
+typedef char*       tSymbol;
+typedef char*       tString;
+typedef tBucket*    tBucketArray;
 
 #define ENC_INT(v)  (((v) << 1) + 1)
 #define DEC_INT(v)  ((long)(v) >> 1)
