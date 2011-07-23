@@ -3,7 +3,7 @@
 /* ======================================================================= */
 
 /*
-static void SymbolTable_grow(SymbolTable table)
+static void SymbolTable_grow(tSymbolTable table)
 {
     long size   = DEC_INT(table->size) + 1;
     table->size = ENC_INT(size);
@@ -32,7 +32,7 @@ static void SymbolTable_grow(SymbolTable table)
         Object * value      = bucket->value;
 
         while (idx < bucket_size) {
-            Symbol key = (Symbol)value[idx];
+            tSymbol key = (tSymbol)value[idx];
 
             if (HASH(key) & newbit) {
                 bucket_size       -= 1;
@@ -63,45 +63,53 @@ static void SymbolTable_grow(SymbolTable table)
         }
     }
 }
-static Symbol raw_Symbol(const wchar_t* input, uns_int size, long hash)
+
+static tSymbol raw_Symbol(const char* input, uns_int size, long hash)
 {
-    NEW_ARRAYED(Symbol, wchar_t, size);
-    wcsncpy(result->character, input, size);
+    NEW_ARRAYED(Symbol, char, size);
+    strncpy(result->character, input, size);
     HASH(result) = hash;
     return result;
 }
+*/
 
-static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
+static tSymbol SymbolTable_lookup(tSymbolTable table, const char* key)
 {
-    uns_int size = wcslen(key);
-    long hash = wchar_hash(key, size);
+    uns_int size     = strlen(key);
+    long hash        = char_hash(key, size);
 
-    Bucket *bucketp = &table->buckets->bucket[hash % SIZE(table->buckets)];
-    Bucket bucket   = *bucketp;
-    Symbol symbol;
-    if (bucket == (Bucket)&nil) {
+    tBucket *bucketp = &table->buckets[hash % SIZE(table->buckets)];
+    tBucket bucket   = *bucketp;
+    tSymbol symbol;
+    if (bucket == (tBucket)&nil) {
+        PINOCCHIO_FAIL("Symbol not found!");
+    /*
         *bucketp         = new_Bucket();
         bucket           = *bucketp;
         symbol           = raw_Symbol(key, size, hash);
-        bucket->value[0] = (Object)symbol;
+        bucket->value[0] = (tObject)symbol;
         bucket->tally    = ENC_INT(1);
         SymbolTable_grow(table);
         return symbol;
+    */
     }
 
     uns_int tally = DEC_INT(bucket->tally);
     uns_int i;
-    
+
     // Find key in bucket 
     for (i = 0; i < tally; i++) {
-        symbol = (Symbol)bucket->value[i];
-        if (CLASS_OF(symbol) == Symbol_class
+        symbol = (tSymbol)bucket->value[i];
+        if (CLASS_OF(symbol) == &Symbol
             && SIZE(symbol) == size
-            && !wcsncmp(symbol->character, key, size)) {
+            && !strncmp(symbol, key, size)) {
             return symbol;
         }
     }
 
+    PINOCCHIO_FAIL("Symbol not found!");
+    
+    /*
     // Grow bucket if full
     if (tally == SIZE(bucket)) {
         Bucket old_bucket = bucket;
@@ -125,11 +133,10 @@ static Symbol SymbolTable_lookup(SymbolTable table, const wchar_t* key)
     bucket->tally        = ENC_INT(tally + 1);
     SymbolTable_grow(table);
     return symbol;
+    */
 }
 
-Symbol new_Symbol(const wchar_t* input)
+tSymbol new_Symbol(const char* input)
 {
-    return SymbolTable_lookup(symboltable, input);
+    return SymbolTable_lookup(&symboltable, input);
 }
-*/
-

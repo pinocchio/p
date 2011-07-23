@@ -123,7 +123,17 @@ tObject smaller(long left, long right)
     PINOCCHIO_FAIL("Ints expected");
 }
 
-extern struct Class Kernel_String_Symbol;
+
+tObject smallerEqual(long left, long right)
+{
+    // printf( "smaller: %d < %d\n", left, right );
+    if (ARE_INTS(left, right)) {
+    // we don't need to remove the tag since it will end up being the same order.
+        // printf( "smaller: %d < %d\n", left, right );
+        return (tObject)(left <= right ? &true : &false);
+    }
+    PINOCCHIO_FAIL("Ints expected");
+}
 
 extern struct Class Kernel_Object_Metaclass;
 
@@ -173,7 +183,7 @@ void print_object(void* object[]) {
     printf(" header: (base: %i var: %i bytes: %i mutable: %i gcmark: %i hash: %lu)\n", 
                       h.base, h.variable, h.bytes, h.mutable, h.gcmark, (unsigned long)h.hash);
 
-    if (&Kernel_String_Symbol == CLASS_OF(object)) {
+    if (&Symbol == CLASS_OF(object)) {
         printf(" #'");
         print_symbol((tSymbol)object);
         printf("' (%p)\n", object);
@@ -217,4 +227,18 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     result[-2] = (tObject)b;
     result[-1] = (tObject)_h;
     return result;
+}
+
+void basicAtPut(tObject receiver, tSmallInteger index, tObject value)
+{
+}
+
+tObject basicAt(tObject receiver, tSmallInteger index)
+{
+    return NULL;
+}
+
+tSmallInteger size(tObject receiver)
+{
+    return ENC_INT(SIZE(receiver));
 }

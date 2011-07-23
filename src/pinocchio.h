@@ -5,7 +5,7 @@
 #include <setjmp.h>
 #include <errno.h>
 #include <stdio.h>
-#include <wchar.h>
+#include <string.h>
 #include <alloca.h>
 #include <stdint.h> 
 
@@ -50,7 +50,7 @@ typedef tBucket*    tBucketArray;
 #define IS_INT(v)   ((char)(long)(v) & 1)
 #define ARE_INTS(x, y) ((char)(x) & (char)(y) & (char)1)
 
-#define PINOCCHIO_FAIL(msg) printf(""#msg"\n"); exit(-1)
+#define PINOCCHIO_FAIL(msg) printf(""#msg"\n"); __asm("int3"); return 0 
 #define CLASS_OF(object)    (((long)object) & 1?&SmallInteger:((tClass*)object)[-2])
 
 #define HEADER(object)      (((tHeader*)object)[-1])

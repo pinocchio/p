@@ -6,12 +6,13 @@
 /* ======================================================================= */
 
 
-extern struct Class Symbol_class;
-extern struct Class SymbolTable_class;
+extern struct Class Symbol;
+extern struct Class SymbolTable;
+extern struct Dictionary symboltable;
 
 /* ======================================================================= */
 
-extern tSymbol new_Symbol(const wchar_t* input);
+extern tSymbol new_Symbol(const char* input);
 
 /* ======================================================================= */
 

@@ -1,6 +1,6 @@
 #ifndef KERNEL_STRING_UTILITY_H
 #define KERNEL_STRING_UTILITY_H
 
-extern long wchar_hash(const wchar_t* string, long size);
+extern long char_hash(const char* string, long size);
 
 #endif // KERNEL_STRING_UTILITY_H

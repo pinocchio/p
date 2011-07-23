@@ -28,7 +28,7 @@
     BASE(result)         = sizeof(struct type) / 8;
 
 #define NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)\
-	type INSTANTIATE(result, type, class)
+	t#type INSTANTIATE(result, type, class)
 
 #define NEW_OBJECT_WITH_CLASS(type, class)\
     NEW_OBJECT_NAMED_WITH_CLASS(result, type, class)
@@ -46,7 +46,7 @@
 	SIZE(result)                   = arraysize;
 
 #define NEW_ARRAYED(class, arraytype, arraysize)\
-	class INSTANTIATE_ARRAY(result, class, arraytype, arraysize)
+	t##class INSTANTIATE_ARRAY(result, class, arraytype, arraysize)
 
 /* ======================================================================= */
 

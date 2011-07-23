@@ -1,9 +1,9 @@
 #include <pinocchio.h>
 
-long wchar_hash(const wchar_t* string, long size)
+long char_hash(const char* string, long size)
 {
     // http://www.cse.yorku.ca/~oz/hash.html
-    uns_int hash = 5381;
+    unsigned long hash = 5381ul;
     while (size--) {
         hash += (hash << 5) + *string++;
     }   
