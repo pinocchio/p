@@ -15,7 +15,7 @@ struct Behavior {
 
 struct Class {
     tMethodDictionary    methods;
-    tBehavior            super;
+    tClass               super;
     tSmallInteger        instanceHeader;
     tLayout              layout;
     tSymbol              name;
@@ -25,7 +25,7 @@ struct Class {
 
 struct Metaclass {
     tMethodDictionary    methods;
-    tBehavior            super;
+    tMetaclass           super;
     tSmallInteger        instanceHeader;
     tLayout              layout;
     tClass               instance;
