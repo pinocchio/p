@@ -51,7 +51,7 @@ typedef tBucket*    tBucketArray;
 #define ARE_INTS(x, y) ((char)(x) & (char)(y) & (char)1)
 
 #define PINOCCHIO_FAIL(msg) printf(""#msg"\n"); exit(-1)
-#define CLASS_OF(object)    (((tClass*)object)[-2])
+#define CLASS_OF(object)    (((long)object) & 1?&SmallInteger:((tClass*)object)[-2])
 
 #define HEADER(object)      (((tHeader*)object)[-1])
 #define HASH(object)        HEADER(object).hash
