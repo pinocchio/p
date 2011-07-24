@@ -1,18 +1,19 @@
-#ifndef KERNEL_COLLECTION_ARRAY_H
-#define KERNEL_COLLECTION_ARRAY_H
+#ifndef SYMBOL_H
+#define SYMBOL_H
 
 #include <pinocchio.h>
 
 /* ======================================================================= */
 
-extern struct Class Array_class;
 
-extern void init_layout();
-/* ======================================================================= */
-
-extern tArray new_Array_with(uns_int size, ...);
-extern tArray new_Array(uns_int size);
+extern struct Class Symbol;
+extern struct Class SymbolTable;
+extern struct Dictionary symboltable;
 
 /* ======================================================================= */
 
-#endif // KERNEL_COLLECTION_ARRAY_H
+extern tSymbol new_Symbol(const char* input);
+
+/* ======================================================================= */
+
+#endif // SYMBOL_H

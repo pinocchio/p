@@ -45,6 +45,8 @@ typedef char*       tSymbol;
 typedef char*       tString;
 typedef tBucket*    tBucketArray;
 
+extern struct Class Array;
+
 #define ENC_INT(v)  (((v) << 1) + 1)
 #define DEC_INT(v)  ((long)(v) >> 1)
 #define IS_INT(v)   ((char)(long)(v) & 1)
@@ -74,18 +76,14 @@ typedef struct Header tHeader;
 
 #include <assert.h>
 
-
+#include <symbol.h>
+#include <dictionary.h>
 #include <kernel/string/utility.h>
 #include <kernel/object/object.h>
 #include <kernel/object/class.h>
 #include <kernel/structure/slot/slot.h>
 #include <kernel/structure/layout.h>
-#include <kernel/string/symbol.h>
 #include <kernel/string/string.h>
-#include <kernel/collection/dictionary.h>
-#include <kernel/collection/identitydictionary.h>
-#include <kernel/collection/bucket.h>
-#include <kernel/collection/array.h>
 
 /* ======================================================================= */
 

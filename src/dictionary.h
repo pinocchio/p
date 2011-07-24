@@ -5,13 +5,27 @@
 
 /* ======================================================================= */
 
-extern struct Class IdentityDictionary_class;
+struct Dictionary {
+    tSmallInteger        size;
+    tSmallInteger        maxLinear;
+    tSmallInteger        ratio;
+    tBucketArray         buckets;
+    tObject              linear;
+};
+
+struct Bucket {
+    tSmallInteger        tally;
+    tObject              value[];
+};
+
+extern struct Class Bucket;
+extern struct Class Dictionary;
+extern struct Class BucketArray;
+extern struct Class IdentityDictionary;
 
 /* ======================================================================= */
 
-extern tIdentityDictionary new_IdentityDictionary();
 extern tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key);
-extern void IdentityDictionary_store(tIdentityDictionary dictionary, tObject key, tObject value);
 
 /* ======================================================================= */
 

@@ -3,7 +3,7 @@
 
 /* ======================================================================= */
 
-static uns_int bucket_index(tIdentityDictionary dictionary, tObject key)
+static long bucket_index(tIdentityDictionary dictionary, tObject key)
 {
     tBucketArray buckets = dictionary->buckets;
     if (SIZE(buckets) == 1) {
@@ -15,8 +15,8 @@ static uns_int bucket_index(tIdentityDictionary dictionary, tObject key)
 
 tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
 {
-    uns_int bucket_idx = bucket_index(dictionary, key);
-    tBucket bucket     = dictionary->buckets[bucket_idx];
+    long bucket_idx = bucket_index(dictionary, key);
+    tBucket bucket  = dictionary->buckets[bucket_idx];
 
     uns_int i;
     uns_int limit = DEC_INT(bucket->tally);
