@@ -24,6 +24,7 @@ typedef struct Dictionary*          tDictionary;
 typedef struct Dictionary*          tSymbolTable;
 typedef struct Bucket*              tBucket;
 typedef struct Block*               tBlock;
+typedef struct Method*              tMethod;
 typedef struct BlockClosure*        tBlockClosure;
 typedef struct NativeName*          tNativeName;
 

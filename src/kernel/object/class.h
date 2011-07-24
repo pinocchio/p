@@ -38,7 +38,7 @@ extern struct Class Metaclass;
 
 /*  =======================================================================  */
 
-extern tMethodClosure lookup(tObject receiver, tSymbol message);
+extern tMethod lookup(tObject receiver, tSymbol message);
 
 /*  =======================================================================  */
 
