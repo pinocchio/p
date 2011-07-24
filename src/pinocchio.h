@@ -78,13 +78,21 @@ typedef struct Header tHeader;
 
 #include <symbol.h>
 #include <dictionary.h>
+#include <class.h>
 #include <kernel/string/utility.h>
-#include <kernel/object/object.h>
-#include <kernel/object/class.h>
 #include <kernel/structure/slot/slot.h>
 #include <kernel/structure/layout.h>
 #include <kernel/string/string.h>
 
+/* ======================================================================= */
+extern struct Class Object;
+extern struct Class UndefinedObject;
+extern struct Class True;
+extern struct Class False;
+extern struct Class SmallInteger;
+extern struct Object true;
+extern struct Object false;
+extern struct Object nil;
 /* ======================================================================= */
 
 #endif // PINOCCHIO_H
