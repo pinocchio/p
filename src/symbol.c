@@ -91,7 +91,7 @@ static tSymbol SymbolTable_lookup(tSymbolTable table, const char* key)
     uns_int size     = strlen(key);
     long hash        = char_hash(key, size);
 
-    tBucket *bucketp = &table->buckets[hash % SIZE(table->buckets)];
+    tBucket *bucketp = &table->buckets->bucket[hash % SIZE(table->buckets)];
     tBucket bucket   = *bucketp;
     tSymbol symbol;
     if (bucket == (tBucket)&nil) {
@@ -121,6 +121,7 @@ static tSymbol SymbolTable_lookup(tSymbolTable table, const char* key)
     }
 
     PINOCCHIO_FAIL("Symbol not found!");
+    return 0;
     
     /*
     // Grow bucket if full

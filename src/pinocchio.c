@@ -12,9 +12,10 @@ int main(int argc, char** argv)
     setlocale(LC_ALL, "");
 
     // tObject self    = basicNew((tBehavior)&Kernel_Package_Package);
-    tObject self    = basicNew((tBehavior)&Test_StaticKernelTest);
+    // tObject self    = basicNew((tBehavior)&Test_StaticKernelTest);
     // tObject result  = 
-        send(self, "testStatic");
+    //    send(self, "testStatic");
+    print_object(send((tObject)&Kernel_Package_Package, "new"));
     
 //    long * result;
  

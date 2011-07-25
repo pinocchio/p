@@ -35,10 +35,10 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(void* msg, void* receiver)
+void invoke_error(char* msg, tObject receiver)
 {
-    printf("Lookup of msg %p failed on %p\n", msg, receiver);
-    __asm("int3");
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s (on %p)\n", msg, receiver);
 }
 
 void invoke() {
@@ -89,7 +89,8 @@ long plus(long left, long right)
     if (ARE_INTS(left, right)) {
         return (left ^ 1) + right;
     }
-    PINOCCHIO_FAIL("Ints expected");
+    PINOCCHIO_FAIL("Ints expected, given %lx, %lx", left, right);
+    return 0;
 }
 
 long minus(long left, long right)
@@ -98,7 +99,8 @@ long minus(long left, long right)
     if (ARE_INTS(left, right)) {
         return (left - right) | 1;
     }
-    PINOCCHIO_FAIL("Ints expected");
+    PINOCCHIO_FAIL("Ints expected, given %lx, %lx", left, right);
+    return 0;
 }
 
 long bitShift(long self, long bits)
@@ -108,7 +110,8 @@ long bitShift(long self, long bits)
         
         return ENC_INT(DEC_INT(self)<<DEC_INT(bits));
     }
-    PINOCCHIO_FAIL("Ints expected");
+    PINOCCHIO_FAIL("Ints expected, given %lx, %lx", self, bits);
+    return 0;
 }
 
 
@@ -120,7 +123,8 @@ tObject smaller(long left, long right)
         // printf( "smaller: %d < %d\n", left, right );
         return left < right ? &true : &false;
     }
-    PINOCCHIO_FAIL("Ints expected");
+    PINOCCHIO_FAIL("Ints expected, given %lx, %lx", left, right);
+    return 0;
 }
 
 
@@ -132,7 +136,8 @@ tObject smallerEqual(long left, long right)
         // printf( "smaller: %d < %d\n", left, right );
         return left <= right ? &true : &false;
     }
-    PINOCCHIO_FAIL("Ints expected");
+    PINOCCHIO_FAIL("Ints expected, given %lx, %lx", left, right);
+    return 0;
 }
 
 tObject print(tObject receiver, tSymbol msg) {

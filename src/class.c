@@ -16,7 +16,7 @@ static long bucket_index(tIdentityDictionary dictionary, tObject key)
 tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
 {
     long bucket_idx = bucket_index(dictionary, key);
-    tBucket bucket  = dictionary->buckets[bucket_idx];
+    tBucket bucket  = dictionary->buckets->bucket[bucket_idx];
 
     uns_int i;
     uns_int limit = DEC_INT(bucket->tally);
@@ -32,9 +32,9 @@ tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
 tMethod lookup(tObject receiver, tSymbol message)
 {
     tClass c                  = CLASS_OF(receiver);
-    tMethodDictionary methods = c->methods;
     tMethod method;
     do { 
+        tMethodDictionary methods = c->methods;
         if (CLASS_OF(methods) != &MethodDictionary) {
             return NULL;
         }
@@ -53,7 +53,6 @@ tObject send(tObject receiver, const char* msg)
         PINOCCHIO_FAIL(" does not understand: #%s", msg);
     }
     method code = (method)((void**)m + DEC_INT(m->code));
-    printf("code: %p\n", code);
     __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
     return code(receiver);
 }
