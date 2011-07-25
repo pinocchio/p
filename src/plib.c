@@ -30,8 +30,8 @@ void cache_and_call()
     __asm("jmp *%r10");
     // If not tagged, store the class of the receiver
 __asm("not_tagged:");
-    __asm("mov -8(%rdi), %rdx");
-    __asm("mov %rdx, (%rax)");
+    __asm("mov -16(%rdi), %rax");
+    __asm("mov %rax, (%rdx)");
     __asm("jmp *%r10");
 }
 
@@ -49,7 +49,6 @@ void invoke() {
     __asm("push %r8");
     __asm("push %r9");
 
-    __asm("mov %rax, %rbx");
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     __asm("mov %rax, %r10");
@@ -60,7 +59,7 @@ void invoke() {
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("call *%rax");
+    __asm("jmp cache_and_call");
 }
 
 long * closureNew(int size) {

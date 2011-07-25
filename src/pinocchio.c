@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     tObject self = basicNew((tBehavior)&Test_KernelTest);
     // tObject result  = 
     //    send(self, "testStatic");
-    print_object(send(self, "test1"));
+    print_object(send(self, "test0"));
     
 //    long * result;
  
