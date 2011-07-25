@@ -42,21 +42,18 @@ void invoke_error(tObject receiver, char* msg)
 }
 
 void invoke() {
+    // backup all call registers
+    __asm("push %rdi");
     __asm("push %rsi");
     __asm("push %rdx");
     __asm("push %rcx");
     __asm("push %r8");
     __asm("push %r9");
-    __asm("push %rdi");
 
-    __asm("mov %rax, %r9");
+    // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
-    __asm("pop %rdi");
-    __asm("test %rax, %rax");
-    __asm("jne continue");
-    __asm("mov %r9, %rsi");
-__asm("continue:");
+    // store the result as r10 for cache_and_call
     __asm("mov %rax, %r10");
 
     __asm("pop %r9");
@@ -64,6 +61,7 @@ __asm("continue:");
     __asm("pop %rcx");
     __asm("pop %rdx");
     __asm("pop %rsi");
+    __asm("pop %rdi");
     __asm("jmp cache_and_call");
 }
 
