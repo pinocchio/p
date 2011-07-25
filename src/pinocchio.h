@@ -49,7 +49,7 @@ typedef tBucket*    tBucketArray;
 extern struct Class Array;
 
 #define ENC_INT(v)  (((v) << 1) + 1)
-#define DEC_INT(v)  ((unsigned long)(v) >> 1)
+#define DEC_INT(v)  ((long)(v) >> 1)
 #define IS_INT(v)   ((unsigned char)(long)(v) & 1)
 #define ARE_INTS(x, y) ((unsigned char)(x) & (unsigned char)(y) & (char)1)
 

@@ -69,25 +69,28 @@ void invoke() {
     __asm("call invoke_error");
 }
 
+void allTestsDone() {
+  puts("all tests finished successfully");
+}
+
 long * closureNew(int size) {
-    long * c = GC_MALLOC( sizeof(long*) + size*sizeof(long*) );
+    long * c = GC_MALLOC( 2*sizeof(long*) + size*sizeof(long*) );
+    printf( "- new closure at: %p\n", c+2 );
     c[0] = 77;
-    printf( "- new closure at: %p\n", c+1 );
-    return c + 1;
+    return c + 2;
 }
 
 long * remoteArrayNew(int size) {
-    long * c = GC_MALLOC( sizeof(long*) + size*sizeof(long*) );
-    c[0] = 33;
-    printf( "- new array at: %p\n", c+1 );
-    return c + 1;
+    long * c = GC_MALLOC( 2*sizeof(long*) + size*sizeof(long*) );
+    printf( "- new array at: %p\n", c+2 );
+    return c + 2;
 }
 
 void closureValue() {
     //if its not a closure then jmp to invoke
     __asm("bt $0, %rdi");
     __asm("jnae invoke");
-    __asm("cmp $77, -0x8(%rdi)");
+    __asm("cmp $77, -0x10(%rdi)");
     __asm("jne invoke");
     //load code-pointer from the closure-object
     __asm("mov (%rdi), %rax");
@@ -111,6 +114,17 @@ long minus(long left, long right)
     }
     PINOCCHIO_FAIL("Ints expected");
 }
+
+long bitShift(long self, long bits)
+{
+//    printf( "minus: %p - %p\n", left, right );
+    if (ARE_INTS(self, bits)) {
+        
+        return ENC_INT(DEC_INT(self)<<DEC_INT(bits));
+    }
+    PINOCCHIO_FAIL("Ints expected");
+}
+
 
 tObject smaller(long left, long right)
 {
