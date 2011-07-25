@@ -45,7 +45,8 @@ tObject send(tObject receiver, const char* msg)
 {
     tMethod m = lookup(receiver, new_Symbol(msg)); 
     method code = (method)((void**)m + DEC_INT(m->code));
-    code(receiver);
+    __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
+    return code(receiver);
 }
 
 /* ======================================================================= */

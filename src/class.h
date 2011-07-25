@@ -70,7 +70,7 @@ struct Method {
 
 /* ======================================================================= */
 
-extern tMethod lookup(tObject receiver, tSymbol message);
+extern tObject send(tObject receiver, const char* msg);
 extern tObject basicNew(tBehavior b);
 extern tObject basicNew_(tBehavior b, long tagged_size);
 
