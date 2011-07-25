@@ -135,8 +135,6 @@ tObject smallerEqual(long left, long right)
     PINOCCHIO_FAIL("Ints expected");
 }
 
-extern struct Class Kernel_Object_Metaclass;
-
 void print_symbol(tSymbol symbol) {
     tObject object = (tObject)symbol;
     long size = (long)object[-3];
@@ -147,7 +145,7 @@ void print_symbol(tSymbol symbol) {
 }
 
 void print_class_name(tClass cls) {
-    if (CLASS_OF(cls) == &Kernel_Object_Metaclass) {
+    if (CLASS_OF(cls) == &Metaclass) {
         print_symbol(((tMetaclass)cls)->instance->name);
         printf(" class");
     } else {
