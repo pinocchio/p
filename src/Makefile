@@ -52,7 +52,8 @@ GITVERSION:
 
 $(TARGET): $(OBJECTS) $(EXTRAOBJECTS)
 	@echo Linking ${CC} ${LDFLAGS} $@
-	@$(CC) $(LDFLAGS) -o $@ $^; make plugin
+	@$(CC) $(LDFLAGS) -o $@ $^;
+#	make plugin
 
 run: $(TARGET)
 	rlwrap --file=completion.txt ./$(TARGET)

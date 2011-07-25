@@ -39,7 +39,7 @@ __asm("not_tagged:");
 
 void invoke_error(long msg, void* receiver)
 {
-    printf("Lookup of msg %ld failed on %p\n", msg, receiver);
+    printf("Lookup of msg %p failed on %p\n", msg, receiver);
     __asm("int3");
 }
 
@@ -52,17 +52,17 @@ void invoke() {
     __asm("mov $minus, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $31, %rax");
-    __asm("mov $fib, %r10");
-    __asm("je cache_and_call");
+//    __asm("cmp $31, %rax");
+//    __asm("mov $fib, %r10");
+//    __asm("je cache_and_call");
 
     __asm("cmp $11, %rax");
     __asm("mov $smaller, %r10");
     __asm("je cache_and_call");
 
-    __asm("cmp $51, %rax");
-    __asm("mov $fibSend, %r10");
-    __asm("je cache_and_call");
+//    __asm("cmp $51, %rax");
+//    __asm("mov $fibSend, %r10");
+//    __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");

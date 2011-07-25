@@ -4,24 +4,27 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern long fib(long receiver);
+extern long testStatic(long receiver);
+extern void* Test_StaticKernelTest_class;
+extern void* Test_StaticKernelTest;
+
 
 int main(int argc, char**argv)
 {
     setlocale(LC_ALL, "");
 
-    long self = ENC_INT(argc > 1 ? atol(argv[1]) : 0);
+    long self = basicNew(Test_StaticKernelTest_class);
     
-    long * result;
+//    long * result;
     __asm("mov %0, %%rdi"::"r"(self));
-    __asm("mov %0, %%rax"::"r"(&SmallInteger));
-    __asm("call fib");
-    __asm("mov %%rax, %0":"=r"(result));
+    __asm("mov %0, %%rax"::"r"(&Test_StaticKernelTest));
+    __asm("call testStatic");
+//    __asm("mov %%rax, %0":"=r"(result));
  
-    if (IS_INT(result)) {
-        printf("result: %li\n", DEC_INT(result));
-    } else {
-        printf("result: %p\n", result);
-    }
+//    if (IS_INT(result)) {
+//        printf("result: %li\n", DEC_INT(result));
+//    } else {
+//        printf("result: %p\n", result);
+//   }
     return 0;
 }

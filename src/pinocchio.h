@@ -49,9 +49,9 @@ typedef tBucket*    tBucketArray;
 extern struct Class Array;
 
 #define ENC_INT(v)  (((v) << 1) + 1)
-#define DEC_INT(v)  ((long)(v) >> 1)
-#define IS_INT(v)   ((char)(long)(v) & 1)
-#define ARE_INTS(x, y) ((char)(x) & (char)(y) & (char)1)
+#define DEC_INT(v)  ((unsigned long)(v) >> 1)
+#define IS_INT(v)   ((unsigned char)(long)(v) & 1)
+#define ARE_INTS(x, y) ((long)(x) & (long)(y) & (char)1)
 
 #define PINOCCHIO_FAIL(msg) printf(""#msg"\n"); __asm("int3"); return 0 
 #define CLASS_OF(object)    (((long)object) & 1?&SmallInteger:((tClass*)object)[-2])
@@ -82,6 +82,7 @@ typedef struct Header tHeader;
 #include <dictionary.h>
 #include <class.h>
 #include <slot.h>
+#include <hacks/plib.h>
 
 /* ======================================================================= */
 extern struct Class Object;
