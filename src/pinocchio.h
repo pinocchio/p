@@ -79,10 +79,9 @@ typedef struct Header tHeader;
 /* ======================================================================= */
 
 #include <symbol.h>
-#include <dictionary.h>
 #include <class.h>
 #include <slot.h>
-#include <hacks/plib.h>
+#include <plib.h>
 
 /* ======================================================================= */
 extern struct Class Object;

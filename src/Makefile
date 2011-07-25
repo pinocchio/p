@@ -9,14 +9,11 @@ OS           = $(shell uname)
 
 TARGET       = pinocchio
 
-CFILES      += $(shell find . -name '*.c' -not -path "./plugin*" -not -path "./tests*")
+CFILES      += $(shell find . -name '*.c')
 HFILES      += $(T_CFILES:%.c=%.h)
 
 SOURCES      = $(CFILES) $(HFILES)
 
-PLUGINCFILES = $(shell find plugin -name "*.c")
-PLUGINHFILES = $(PLUGINCFILES:%.c=%.h)
-PLUGINSOURCES = plugin/Makefile $(PLUGINCFILES) $(PLUGINHFILES)
 EXTRASOURCES  = SETUP lib/VERSION GITVERSION Makefile $(PLUGINSOURCES)
 OBJECTS       = $(CFILES:%.c=%.o)
 
@@ -53,20 +50,12 @@ GITVERSION:
 $(TARGET): $(OBJECTS) $(EXTRAOBJECTS)
 	@echo Linking ${CC} ${LDFLAGS} $@
 	@$(CC) $(LDFLAGS) -o $@ $^;
-#	make plugin
 
 run: $(TARGET)
 	rlwrap --file=completion.txt ./$(TARGET)
 
-plugin:
-	@cd plugin; make;
-
-tests:
-	CFLAGS+="-D UNIT_TESTING" $(MAKE) && ./$(TARGET)
-
 clean:
 	@rm -rf $(OBJECTS) $(CFILES:%.c=%.gcno) $(CFILES:%.c=%.gcda) $(TARGET) $(TARGET) make.depend
-	@cd plugin; ${MAKE} clean;
 
 fast:
 	CFLAGS+="-O3" LDFLAGS+="-O3" make
@@ -128,7 +117,7 @@ dist: $(SOURCES) $(EXTRASOURCES)
 	@rm -rf $(EDGEPV)
 
 # ============================================================================
-.PHONY: tests vtest run clean profile plugin dist GITVERSION
+.PHONY: run clean profile dist GITVERSION
 # ============================================================================
 include make.depend
 
