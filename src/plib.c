@@ -59,24 +59,26 @@ void invoke() {
     __asm("jmp cache_and_call");
 }
 
-long * closureNew(int size) {
-    long * c = GC_MALLOC( 2*sizeof(long*) + size*sizeof(long*) );
-    printf( "- new closure at: %p\n", c+2 );
-    c[0] = 77;
-    return c + 2;
+extern struct Class Kernel_Behavior_Closure;
+extern struct Class Kernel_Collection_RemoteArray;
+
+tObject closureNew(int size) {
+    tObject closure = basicNew_((tBehavior)&Kernel_Behavior_Closure, ENC_INT(size));
+    printf( "- new closure at: %p\n", closure );
+    return closure;
 }
 
-long * remoteArrayNew(int size) {
-    long * c = GC_MALLOC( 2*sizeof(long*) + size*sizeof(long*) );
-    printf( "- new array at: %p\n", c+2 );
-    return c + 2;
+tObject remoteArrayNew(int size) {
+    tObject array = basicNew_((tBehavior)&Kernel_Collection_RemoteArray, ENC_INT(size));
+    printf( "- new array at: %p\n", array );
+    return array;
 }
 
 void closureValue() {
     //if its not a closure then jmp to invoke
     __asm("bt $0, %rdi");
     __asm("jnae invoke");
-    __asm("cmp $77, -0x10(%rdi)");
+    __asm("cmp %0, -0x10(%%rdi)"::"r"(&Kernel_Behavior_Closure));
     __asm("jne invoke");
     //load code-pointer from the closure-object
     __asm("mov (%rdi), %rax");
