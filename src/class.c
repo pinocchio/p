@@ -42,7 +42,7 @@ tMethod lookup(tObject receiver, tSymbol message)
 /* ======================================================================= */
 
 tObject basicNew(tBehavior b) {
-    long _h = b->instanceHeader >> 1;
+    long _h = DEC_INT(b->instanceHeader);
     tHeader h = *(tHeader*)&_h;
     tObject result;
     if (h.variable) {
@@ -60,8 +60,8 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     if (!(tagged_size & 1)) {
         PINOCCHIO_FAIL("Invalid size type given, expects SmallInteger");
     }
-    long size = tagged_size >> 1;
-    long _h   = b->instanceHeader >> 1;
+    long size = DEC_INT(tagged_size);
+    long _h   = DEC_INT(b->instanceHeader);
     tHeader h = *(tHeader*)&_h;
     tObject result;
     if (h.variable) {
