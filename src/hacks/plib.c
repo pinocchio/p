@@ -69,8 +69,9 @@ void invoke() {
     __asm("call invoke_error");
 }
 
-void allTestsDone() {
-  puts("all tests finished successfully");
+void print(void *receiver, void *msg) {
+  print_symbol((tSymbol)msg);
+  printf("\n");
 }
 
 long * closureNew(int size) {
@@ -199,13 +200,19 @@ void print_object(void* object[]) {
     printf("\n");
 }
 
-void basicAtPut(tObject receiver, tSmallInteger index, tObject value)
+void basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
 {
+  int size = BASE(receiver);
+  int index = DEC_INT(tagged_index);
+  receiver[size+index-1] = value;
+  return receiver;
 }
 
-tObject basicAt(tObject receiver, tSmallInteger index)
+tObject basicAt(tObject receiver, tSmallInteger tagged_index)
 {
-    return NULL;
+  int size = BASE(receiver);
+  int index = DEC_INT(tagged_index);
+  return receiver[size+index-1];
 }
 
 tSmallInteger size(tObject receiver)
