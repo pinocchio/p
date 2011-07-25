@@ -60,6 +60,8 @@ extern struct Class MethodDictionary;
 /* ======================================================================= */
 
 extern tMethod lookup(tObject receiver, tSymbol message);
+extern tObject basicNew(tBehavior b);
+extern tObject basicNew_(tBehavior b, long tagged_size);
 
 /*  =======================================================================  */
 

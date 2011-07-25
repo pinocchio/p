@@ -81,7 +81,6 @@ typedef struct Header tHeader;
 #include <symbol.h>
 #include <class.h>
 #include <slot.h>
-#include <plib.h>
 
 /* ======================================================================= */
 extern struct Class Object;
