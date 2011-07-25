@@ -2,10 +2,6 @@
 #include <string.h>
 #include <pinocchio.h>
 
-long plus(long left, long right);
-long minus(long left, long right);
-tObject smaller(long left, long right);
-
 void cache_and_call()
 {
     __asm("mov %r10, %rdx");
@@ -57,32 +53,6 @@ void invoke() {
     __asm("pop %rsi");
     __asm("pop %rdi");
     __asm("jmp cache_and_call");
-}
-
-extern struct Class Kernel_Behavior_Closure;
-extern struct Class Kernel_Collection_RemoteArray;
-
-tObject closureNew(int size) {
-    tObject closure = basicNew_((tBehavior)&Kernel_Behavior_Closure, ENC_INT(size));
-    printf( "- new closure at: %p\n", closure );
-    return closure;
-}
-
-tObject remoteArrayNew(int size) {
-    tObject array = basicNew_((tBehavior)&Kernel_Collection_RemoteArray, ENC_INT(size));
-    printf( "- new array at: %p\n", array );
-    return array;
-}
-
-void closureValue() {
-    //if its not a closure then jmp to invoke
-    __asm("bt $0, %rdi");
-    __asm("jnae invoke");
-    __asm("cmp %0, -0x10(%%rdi)"::"r"(&Kernel_Behavior_Closure));
-    __asm("jne invoke");
-    //load code-pointer from the closure-object
-    __asm("mov (%rdi), %rax");
-    __asm("jmpq *%rax");
 }
 
 long plus(long left, long right)
