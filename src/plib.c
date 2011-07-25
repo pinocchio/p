@@ -35,22 +35,28 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(char* msg, tObject receiver)
+void invoke_error(tObject receiver, char* msg)
 {
     print_class_name(CLASS_OF(receiver));
     PINOCCHIO_FAIL(" does not understand #%s (on %p)\n", msg, receiver);
 }
 
 void invoke() {
-    __asm("push %rdi");
     __asm("push %rsi");
     __asm("push %rdx");
     __asm("push %rcx");
     __asm("push %r8");
     __asm("push %r9");
+    __asm("push %rdi");
 
+    __asm("mov %rax, %r9");
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("pop %rdi");
+    __asm("test %rax, %rax");
+    __asm("jne continue");
+    __asm("mov %r9, %rsi");
+__asm("continue:");
     __asm("mov %rax, %r10");
 
     __asm("pop %r9");
@@ -58,7 +64,6 @@ void invoke() {
     __asm("pop %rcx");
     __asm("pop %rdx");
     __asm("pop %rsi");
-    __asm("pop %rdi");
     __asm("jmp cache_and_call");
 }
 
