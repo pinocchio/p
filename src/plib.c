@@ -119,7 +119,7 @@ tObject smaller(long left, long right)
     if (ARE_INTS(left, right)) {
     // we don't need to remove the tag since it will end up being the same order.
         // printf( "smaller: %d < %d\n", left, right );
-        return (tObject)(left < right ? &true : &false);
+        return left < right ? &true : &false;
     }
     PINOCCHIO_FAIL("Ints expected");
 }
