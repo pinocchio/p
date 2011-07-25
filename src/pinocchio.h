@@ -89,8 +89,8 @@ extern struct Class UndefinedObject;
 extern struct Class True;
 extern struct Class False;
 extern struct Class SmallInteger;
-extern struct Class String;
 extern struct Class Symbol;
+extern struct Class String;
 
 extern struct Class ObjectLayout;
 extern struct Class ArrayLayout;
