@@ -1,6 +1,7 @@
 #ifndef PINOCCHIO_H
 #define PINOCCHIO_H
 
+#include <assert.h>
 #include <stdlib.h>
 #include <setjmp.h>
 #include <errno.h>
@@ -56,15 +57,18 @@ extern struct Class Array;
 #define CLASS_OF(object)    (((long)object) & 1?&SmallInteger:((tClass*)object)[-2])
 
 #define HEADER(object)      (((tHeader*)object)[-1])
-#define HASH(object)        HEADER(object).hash
 #define BASE(object)        HEADER(object).base
-#define MARK(object)        HEADER(object).gcmark
+#define BYTES(object)       HEADER(object).bytes
+#define VARIABLE(object)    HEADER(object).variable
+#define MUTABLE(object)     HEADER(object).mutable
+#define GCMARK(object)      HEADER(object).gcmark
+#define HASH(object)        ((unsigned long)HEADER(object).hash)
 #define SIZE(object)        ((long)((tObject*)object)[-3])
 
 struct Header {
     uns_int     base:          8;
     uns_int     variable:      1;
-    uns_int     raw:           1;
+    uns_int     bytes:         1;
     uns_int     mutable:       1;
     uns_int     gcmark:        1;
     uns_int     hash: sizeof(uns_int) * 8 - 12;
@@ -73,8 +77,6 @@ struct Header {
 typedef struct Header tHeader;
 
 /* ======================================================================= */
-
-#include <assert.h>
 
 #include <symbol.h>
 #include <dictionary.h>

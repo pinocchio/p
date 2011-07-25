@@ -155,16 +155,7 @@ void print_class_name(tClass cls) {
     }
 }
 
-typedef struct header {
-    unsigned char base:     8;
-    unsigned char variable: 1;
-    unsigned char bytes:    1;
-    unsigned char mutable:  1;
-    unsigned char gcmark:   1;
-    unsigned long hash:     sizeof(unsigned long) * 8 - 12;
-} header;
-
-header get_header(header * object) {
+tHeader get_header(tHeader * object) {
     return object[-1];
 }
 
@@ -176,12 +167,13 @@ void print_object(void* object[]) {
     }
 
     printf("printing object: %p\n", object);
-    header h = get_header((header*)object);
-    if (h.variable || h.bytes) {
+    if (VARIABLE(object) || BYTES(object)) {
         printf("size: %lu\n", (long)object[-3]);
     }
     printf(" header: (base: %i var: %i bytes: %i mutable: %i gcmark: %i hash: %lu)\n", 
-                      h.base, h.variable, h.bytes, h.mutable, h.gcmark, (unsigned long)h.hash);
+                      BASE(object), VARIABLE(object),
+                      BYTES(object), MUTABLE(object),
+                      GCMARK(object), HASH(object));
 
     if (&Symbol == CLASS_OF(object)) {
         printf(" #'");
@@ -197,7 +189,7 @@ void print_object(void* object[]) {
 
 tObject basicNew(tBehavior b) {
     long _h = b->instanceHeader >> 1;
-    header h = *(header*)&_h;
+    tHeader h = *(tHeader*)&_h;
     tObject result;
     if (h.variable) {
         result = (tObject)GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
@@ -216,7 +208,7 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     }
     long size = tagged_size >> 1;
     long _h   = b->instanceHeader >> 1;
-    header h = *(header*)&_h;
+    tHeader h = *(tHeader*)&_h;
     tObject result;
     if (h.variable) {
         result = (tObject)GC_MALLOC(sizeof(void**) * (size + h.base + 3)) + 3;
