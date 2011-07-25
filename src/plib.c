@@ -1,6 +1,7 @@
 #include <gc/gc.h>
 #include <string.h>
 #include <pinocchio.h>
+#include <debug.h>
 
 long plus(long left, long right);
 long minus(long left, long right);
@@ -57,20 +58,6 @@ void invoke() {
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");
     __asm("call invoke_error");
-}
-
-void print_symbol(tSymbol symbol) {
-    tObject object = (tObject)symbol;
-    long size = (long)object[-3];
-    char buffer[size+1];
-    strncpy(buffer, (char*)object, size);
-    buffer[size] = 0;
-    printf("%s", buffer);
-}
-
-void print(void *receiver, void *msg) {
-  print_symbol((tSymbol)msg);
-  printf("\n");
 }
 
 long * closureNew(int size) {
@@ -144,68 +131,13 @@ tObject smallerEqual(long left, long right)
     if (ARE_INTS(left, right)) {
     // we don't need to remove the tag since it will end up being the same order.
         // printf( "smaller: %d < %d\n", left, right );
-        return (tObject)(left <= right ? &true : &false);
+        return left <= right ? &true : &false;
     }
     PINOCCHIO_FAIL("Ints expected");
 }
 
-void print_class_name(tClass cls) {
-    if (CLASS_OF(cls) == &Metaclass) {
-        print_symbol(((tMetaclass)cls)->instance->name);
-        printf(" class");
-    } else {
-        print_symbol(cls->name);
-    }
-}
-
-tHeader get_header(tHeader * object) {
-    return object[-1];
-}
-
-void print_object(void* object[]) {
-    
-    if (IS_INT(object)) {
-        printf(" %ld\n", DEC_INT(object));
-        return;
-    }
-
-    printf("printing object: %p\n", object);
-    if (VARIABLE(object) || BYTES(object)) {
-        printf("size: %lu\n", (long)object[-3]);
-    }
-    printf(" header: (base: %i var: %i bytes: %i mutable: %i gcmark: %i hash: %lu)\n", 
-                      BASE(object), VARIABLE(object),
-                      BYTES(object), MUTABLE(object),
-                      GCMARK(object), HASH(object));
-
-    if (&Symbol == CLASS_OF(object)) {
-        printf(" #'");
-        print_symbol((tSymbol)object);
-        printf("' (%p)\n", object);
-        return;
-    }
-
-    printf(" is a: ");
-    print_class_name(CLASS_OF(object));
+tObject print(tObject receiver, tSymbol msg) {
+    print_symbol(msg);
     printf("\n");
-}
-
-tObject basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
-{
-  int size = BASE(receiver);
-  int index = DEC_INT(tagged_index);
-  receiver[size+index-1] = value;
-  return receiver;
-}
-
-tObject basicAt(tObject receiver, tSmallInteger tagged_index)
-{
-  int size = BASE(receiver);
-  int index = DEC_INT(tagged_index);
-  return receiver[size+index-1];
-}
-
-tSmallInteger size(tObject receiver)
-{
-    return ENC_INT(SIZE(receiver));
+    return receiver;
 }

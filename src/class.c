@@ -47,12 +47,12 @@ tObject basicNew(tBehavior b) {
     tObject result;
     if (h.variable) {
         result = (tObject)GC_MALLOC(sizeof(void**) * (h.base + 3)) + 3;
-        result[-3] = (tObject)0;
+        result->value[-3] = (tObject)0;
     } else {
         result = (tObject)GC_MALLOC(sizeof(void**) * (h.base + 2)) + 2;
     }
-    result[-2] = (tObject)b;
-    result[-1] = (tObject)_h;
+    result->value[-2] = (tObject)b;
+    result->value[-1] = (tObject)_h;
     return result;
 }
 
@@ -66,11 +66,11 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     tObject result;
     if (h.variable) {
         result = (tObject)GC_MALLOC(sizeof(void**) * (size + h.base + 3)) + 3;
-        result[-3] = (tObject)size;
+        result->value[-3] = (tObject)size;
     } else {
         PINOCCHIO_FAIL("Trying to instantiate non-variable-sized class");
     }
-    result[-2] = (tObject)b;
-    result[-1] = (tObject)_h;
+    result->value[-2] = (tObject)b;
+    result->value[-1] = (tObject)_h;
     return result;
 }

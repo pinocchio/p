@@ -1,5 +1,5 @@
-#ifndef KERNEL_OBJECT_CLASS_H
-#define KERNEL_OBJECT_CLASS_H
+#ifndef CLASS_H
+#define CLASS_H
 
 #include <pinocchio.h>
 
@@ -65,4 +65,4 @@ extern tObject basicNew_(tBehavior b, long tagged_size);
 
 /*  =======================================================================  */
 
-#endif // KERNEL_OBJECT_CLASS_H
+#endif // CLASS_H

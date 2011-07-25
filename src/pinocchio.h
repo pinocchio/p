@@ -17,6 +17,7 @@
 typedef unsigned long               uns_int;
 typedef long                        tSmallInteger;
 
+typedef struct Object*              tObject;
 typedef struct Behavior*            tBehavior;
 typedef struct Class*               tClass;
 typedef struct Slot*                tSlot;
@@ -39,7 +40,6 @@ typedef tDictionary                 tIdentityDictionary;
 typedef tDictionary                 tMethodDictionary;
 typedef tDictionary                 tNativesDictionary;
 
-typedef void**      tObject;
 typedef tObject*    tArray;
 typedef tSlot*      tLayout;
 typedef char*       tSymbol;
@@ -65,22 +65,13 @@ extern struct Class Array;
 #define HASH(object)        ((unsigned long)HEADER(object).hash)
 #define SIZE(object)        ((long)((tObject*)object)[-3])
 
-struct Header {
-    uns_int     base:          8;
-    uns_int     variable:      1;
-    uns_int     bytes:         1;
-    uns_int     mutable:       1;
-    uns_int     gcmark:        1;
-    uns_int     hash: sizeof(uns_int) * 8 - 12;
-};
-
 typedef struct Header tHeader;
 
 /* ======================================================================= */
 
-#include <symbol.h>
+#include <object.h>
 #include <class.h>
-#include <slot.h>
+#include <symbol.h>
 
 /* ======================================================================= */
 extern struct Class Object;
