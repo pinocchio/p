@@ -43,16 +43,23 @@ tMethod lookup(tObject receiver, tSymbol message)
     return method;
 }
 
+/* ======================================================================= */
 typedef tObject (*method)(tObject receiver);
+/* ======================================================================= */
 
-tObject send(tObject receiver, const char* msg)
+method do_lookup(tObject receiver, tSymbol msg)
 {
-    tMethod m = lookup(receiver, new_Symbol(msg)); 
+    tMethod m = lookup(receiver, msg);
     if (!m) {
         print_class_name(CLASS_OF(receiver));
         PINOCCHIO_FAIL(" does not understand: #%s", msg);
     }
-    method code = (method)((void**)m + DEC_INT(m->code));
+    return (method)((void**)m + DEC_INT(m->code));
+}
+
+tObject send(tObject receiver, const char* msg)
+{
+    method code = do_lookup(receiver, new_Symbol(msg));
     __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
     return code(receiver);
 }

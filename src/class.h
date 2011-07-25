@@ -71,6 +71,7 @@ struct Method {
 /* ======================================================================= */
 
 extern tObject send(tObject receiver, const char* msg);
+extern tMethod lookup(tObject receiver, tSymbol message);
 extern tObject basicNew(tBehavior b);
 extern tObject basicNew_(tBehavior b, long tagged_size);
 

@@ -8,10 +8,10 @@ tObject smaller(long left, long right);
 
 void cache_and_call()
 {
+    __asm("mov %rax, %rdx");
     // Fetch the calling instruction pointer (stack-stored ip)
     __asm("mov 0(%rsp), %eax");
     // Calculate the offset of the actual code pointer
-    __asm("mov %r10, %rdx");
     __asm("sub %eax, %edx");
     // Overwrite the 4-byte call-target offset with the method
     __asm("movl %edx, -4(%eax)");
@@ -42,21 +42,24 @@ void invoke_error(char* msg, tObject receiver)
 }
 
 void invoke() {
-    __asm("cmp $0x611b38, %rax");
-    __asm("mov $plus, %r10");
-    __asm("je cache_and_call");
+    __asm("push %rdi");
+    __asm("push %rsi");
+    __asm("push %rdx");
+    __asm("push %rcx");
+    __asm("push %r8");
+    __asm("push %r9");
 
-    __asm("cmp $21, %rax");
-    __asm("mov $minus, %r10");
-    __asm("je cache_and_call");
+    __asm("mov %rax, %rbx");
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
 
-    __asm("cmp $11, %rax");
-    __asm("mov $smaller, %r10");
-    __asm("je cache_and_call");
-
-    __asm("mov %rdi, %rsi");
-    __asm("mov %rax, %rdi");
-    __asm("call invoke_error");
+    __asm("pop %r9");
+    __asm("pop %r8");
+    __asm("pop %rcx");
+    __asm("pop %rdx");
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("call *%rax");
 }
 
 long * closureNew(int size) {
