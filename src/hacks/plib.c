@@ -37,7 +37,7 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(long msg, void* receiver)
+void invoke_error(void* msg, void* receiver)
 {
     printf("Lookup of msg %p failed on %p\n", msg, receiver);
     __asm("int3");
@@ -67,6 +67,15 @@ void invoke() {
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");
     __asm("call invoke_error");
+}
+
+void print_symbol(tSymbol symbol) {
+    tObject object = (tObject)symbol;
+    long size = (long)object[-3];
+    char buffer[size+1];
+    strncpy(buffer, (char*)object, size);
+    buffer[size] = 0;
+    printf("%s", buffer);
 }
 
 void print(void *receiver, void *msg) {
@@ -150,15 +159,6 @@ tObject smallerEqual(long left, long right)
     PINOCCHIO_FAIL("Ints expected");
 }
 
-void print_symbol(tSymbol symbol) {
-    tObject object = (tObject)symbol;
-    long size = (long)object[-3];
-    char buffer[size+1];
-    strncpy(buffer, (char*)object, size);
-    buffer[size] = 0;
-    printf("%s", buffer);
-}
-
 void print_class_name(tClass cls) {
     if (CLASS_OF(cls) == &Metaclass) {
         print_symbol(((tMetaclass)cls)->instance->name);
@@ -200,7 +200,7 @@ void print_object(void* object[]) {
     printf("\n");
 }
 
-void basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
+tObject basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
 {
   int size = BASE(receiver);
   int index = DEC_INT(tagged_index);

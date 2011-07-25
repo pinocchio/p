@@ -13,7 +13,7 @@ int main(int argc, char**argv)
 {
     setlocale(LC_ALL, "");
 
-    long self = basicNew(Test_StaticKernelTest_class);
+    tObject self = basicNew(Test_StaticKernelTest_class);
     
 //    long * result;
     __asm("mov %0, %%rdi"::"r"(self));
