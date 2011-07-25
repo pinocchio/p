@@ -59,6 +59,17 @@ extern struct Class MethodDictionary;
 
 /* ======================================================================= */
 
+struct Method {
+    tSmallInteger       code;
+    tArray              arguments;
+    tSymbol             selector;
+    tBehavior           host;
+    tObject             package;
+    tObject             literal[];
+};
+
+/* ======================================================================= */
+
 extern tMethod lookup(tObject receiver, tSymbol message);
 extern tObject basicNew(tBehavior b);
 extern tObject basicNew_(tBehavior b, long tagged_size);

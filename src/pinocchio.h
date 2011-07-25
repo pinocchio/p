@@ -18,6 +18,7 @@ typedef unsigned long               uns_int;
 typedef long                        tSmallInteger;
 
 typedef struct Object*              tObject;
+typedef tObject                     tArray;
 typedef struct Behavior*            tBehavior;
 typedef struct Class*               tClass;
 typedef struct Slot*                tSlot;
@@ -40,7 +41,6 @@ typedef tDictionary                 tIdentityDictionary;
 typedef tDictionary                 tMethodDictionary;
 typedef tDictionary                 tNativesDictionary;
 
-typedef tObject*    tArray;
 typedef tSlot*      tLayout;
 typedef char*       tSymbol;
 typedef char*       tString;

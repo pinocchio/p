@@ -31,12 +31,21 @@ tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
 
 tMethod lookup(tObject receiver, tSymbol message)
 {
-    tClass c                    = CLASS_OF(receiver);
-    tIdentityDictionary methods = c->methods;
-    if (CLASS_OF(methods) != &IdentityDictionary) {
+    tClass c                  = CLASS_OF(receiver);
+    tMethodDictionary methods = c->methods;
+    if (CLASS_OF(methods) != &MethodDictionary) {
         return NULL;
     }
     return (tMethod)IdentityDictionary_lookup(methods, (tObject)message);
+}
+
+typedef tObject (*method)(tObject receiver);
+
+tObject send(tObject receiver, const char* msg)
+{
+    tMethod m = lookup(receiver, new_Symbol(msg)); 
+    method code = (method)((void**)m + DEC_INT(m->code));
+    code(receiver);
 }
 
 /* ======================================================================= */
