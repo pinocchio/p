@@ -8,7 +8,7 @@ tObject smaller(long left, long right);
 
 void cache_and_call()
 {
-    __asm("mov %rax, %rdx");
+    __asm("mov %r10, %rdx");
     // Fetch the calling instruction pointer (stack-stored ip)
     __asm("mov 0(%rsp), %eax");
     // Calculate the offset of the actual code pointer
@@ -52,6 +52,7 @@ void invoke() {
     __asm("mov %rax, %rbx");
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("mov %rax, %r10");
 
     __asm("pop %r9");
     __asm("pop %r8");
