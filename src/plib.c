@@ -1,7 +1,6 @@
 #include <gc/gc.h>
 #include <string.h>
 #include <pinocchio.h>
-#include <debug.h>
 
 long plus(long left, long right);
 long minus(long left, long right);

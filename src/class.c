@@ -33,10 +33,14 @@ tMethod lookup(tObject receiver, tSymbol message)
 {
     tClass c                  = CLASS_OF(receiver);
     tMethodDictionary methods = c->methods;
-    if (CLASS_OF(methods) != &MethodDictionary) {
-        return NULL;
-    }
-    return (tMethod)IdentityDictionary_lookup(methods, (tObject)message);
+    tMethod method;
+    do { 
+        if (CLASS_OF(methods) != &MethodDictionary) {
+            return NULL;
+        }
+        method = (tMethod)IdentityDictionary_lookup(methods, (tObject)message);
+    } while (!method && (c = c->super) != (tClass)&nil);
+    return method;
 }
 
 typedef tObject (*method)(tObject receiver);
@@ -44,7 +48,12 @@ typedef tObject (*method)(tObject receiver);
 tObject send(tObject receiver, const char* msg)
 {
     tMethod m = lookup(receiver, new_Symbol(msg)); 
+    if (!m) {
+        print_class_name(CLASS_OF(receiver));
+        PINOCCHIO_FAIL(" does not understand: #%s", msg);
+    }
     method code = (method)((void**)m + DEC_INT(m->code));
+    printf("code: %p\n", code);
     __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
     return code(receiver);
 }

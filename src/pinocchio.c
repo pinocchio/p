@@ -5,11 +5,13 @@
 #include <stdlib.h>
 
 extern struct Class Test_StaticKernelTest;
+extern struct Class Kernel_Package_Package;
 
-int main(int argc, char**argv)
+int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "");
 
+    // tObject self    = basicNew((tBehavior)&Kernel_Package_Package);
     tObject self    = basicNew((tBehavior)&Test_StaticKernelTest);
     // tObject result  = 
         send(self, "testStatic");
