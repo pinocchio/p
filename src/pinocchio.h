@@ -79,8 +79,8 @@ typedef struct Header tHeader;
 #include <symbol.h>
 #include <dictionary.h>
 #include <class.h>
-#include <kernel/structure/slot/slot.h>
-#include <kernel/structure/layout.h>
+#include <slot.h>
+#include <layout.h>
 
 /* ======================================================================= */
 extern struct Class Object;
@@ -91,7 +91,6 @@ extern struct Class SmallInteger;
 extern struct Class String;
 extern struct Class Symbol;
 /* ======================================================================= */
-
 extern struct Object true;
 extern struct Object false;
 extern struct Object nil;
