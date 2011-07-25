@@ -80,7 +80,6 @@ typedef struct Header tHeader;
 #include <dictionary.h>
 #include <class.h>
 #include <slot.h>
-#include <layout.h>
 
 /* ======================================================================= */
 extern struct Class Object;
@@ -90,6 +89,12 @@ extern struct Class False;
 extern struct Class SmallInteger;
 extern struct Class String;
 extern struct Class Symbol;
+
+extern struct Class ObjectLayout;
+extern struct Class ArrayLayout;
+extern struct Class BytesLayout;
+extern struct Class WordsLayout;
+extern struct Class IntegerLayout;
 /* ======================================================================= */
 extern struct Object true;
 extern struct Object false;
