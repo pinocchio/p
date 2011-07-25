@@ -1,9 +1,7 @@
 #include <gc/gc.h>
-#include <signal.h>
 #include <string.h>
 #include <pinocchio.h>
 
-extern void * fib(long* i);
 long plus(long left, long right);
 long minus(long left, long right);
 tObject smaller(long left, long right);
@@ -52,17 +50,9 @@ void invoke() {
     __asm("mov $minus, %r10");
     __asm("je cache_and_call");
 
-//    __asm("cmp $31, %rax");
-//    __asm("mov $fib, %r10");
-//    __asm("je cache_and_call");
-
     __asm("cmp $11, %rax");
     __asm("mov $smaller, %r10");
     __asm("je cache_and_call");
-
-//    __asm("cmp $51, %rax");
-//    __asm("mov $fibSend, %r10");
-//    __asm("je cache_and_call");
 
     __asm("mov %rdi, %rsi");
     __asm("mov %rax, %rdi");
