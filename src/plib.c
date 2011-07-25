@@ -35,12 +35,6 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke_error(tObject receiver, char* msg)
-{
-    print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s (on %p)\n", msg, receiver);
-}
-
 void invoke() {
     // backup all call registers
     __asm("push %rdi");
