@@ -5,15 +5,13 @@
 #include <stdlib.h>
 
 extern long testStatic(long receiver);
-extern void* Test_StaticKernelTest_class;
 extern void* Test_StaticKernelTest;
-
 
 int main(int argc, char**argv)
 {
     setlocale(LC_ALL, "");
 
-    tObject self = basicNew(Test_StaticKernelTest_class);
+    tObject self = basicNew(&Test_StaticKernelTest);
     
 //    long * result;
     __asm("mov %0, %%rdi"::"r"(self));
