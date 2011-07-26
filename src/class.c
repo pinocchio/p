@@ -62,8 +62,8 @@ tObject send(tObject receiver, const char* msg)
     tObject result;
     method code = do_lookup(receiver, new_Symbol(msg));
     __asm("mov %0, %%rdx"::"r"(code));
-    __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
     __asm("mov %0, %%rdi"::"r"(receiver));
+    __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
     __asm("call *%rdx");
     __asm("mov %%rax, %0":"=r"(result));
     return result;
