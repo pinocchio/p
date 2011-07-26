@@ -97,7 +97,6 @@ void invoke0() {
     __asm("call do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    //__asm("mov $does_not_understand0, %rdi");
     __asm("mov $does_not_understand0, %r10");
     __asm("cmovne %rax, %r10");
 
@@ -115,6 +114,7 @@ void invoke1() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
     __asm("mov does_not_understand1, %r10");
     __asm("cmovne %rax, %r10");
@@ -135,6 +135,7 @@ void invoke2() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
     __asm("mov $does_not_understand2, %r10");
     __asm("cmovne %rax, %r10");
@@ -157,6 +158,7 @@ void invoke3() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
     __asm("mov does_not_understand3, %r10");
     __asm("cmovne %rax, %r10");
@@ -180,6 +182,7 @@ void invoke4() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
     __asm("mov does_not_understand4, %r10");
     __asm("cmovne %rax, %r10");
@@ -206,6 +209,7 @@ void invoke5() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
     __asm("mov does_not_understand5, %r10");
     __asm("cmovne %rax, %r10");
@@ -221,6 +225,7 @@ void invoke5() {
 }
 
 void invokeN() {
+    __asm("int3");
     // backup all call registers
     __asm("push %rdi");
     __asm("push %rsi");
@@ -234,6 +239,7 @@ void invokeN() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
+    __asm("test %rax, %rax");
     __asm("mov does_not_understandN, %r10");
     __asm("cmovne %rax, %r10");
 
