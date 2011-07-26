@@ -89,7 +89,6 @@ void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject 
 
 void invoke0() {
     // backup all call registers
-    __asm("int3");
     __asm("push %rdi");
     __asm("push %rax");
 
