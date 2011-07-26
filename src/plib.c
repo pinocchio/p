@@ -256,7 +256,7 @@ void invokeN() {
 long plus(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
-    if (IS_INT(right)) {
+    if (ARE_INTS(left,right)) {
         return (left ^ 1) + right;
     }
     return 0;
