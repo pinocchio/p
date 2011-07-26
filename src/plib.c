@@ -256,7 +256,7 @@ void invokeN() {
 long plus(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
-    if (ARE_INTS(left, right)) {
+    if (IS_INT(right)) {
         return (left ^ 1) + right;
     }
     return 0;
@@ -265,7 +265,7 @@ long plus(long left, long right)
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );
-    if (ARE_INTS(left, right)) {
+    if (IS_INT(right)) {
         return (left - right) | 1;
     }
     return 0;
@@ -274,7 +274,7 @@ long minus(long left, long right)
 long bitShift(long self, long bits)
 {
 //    printf( "minus: %p - %p\n", left, right );
-    if (ARE_INTS(self, bits)) {
+    if (IS_INT(bits)) {
         
         return ENC_INT(DEC_INT(self)<<DEC_INT(bits));
     }
@@ -285,7 +285,7 @@ long bitShift(long self, long bits)
 tObject smaller(long left, long right)
 {
     // printf( "smaller: %d < %d\n", left, right );
-    if (ARE_INTS(left, right)) {
+    if (IS_INT(right)) {
     // we don't need to remove the tag since it will end up being the same order.
         // printf( "smaller: %d < %d\n", left, right );
         return left < right ? &true : &false;
@@ -297,7 +297,7 @@ tObject smaller(long left, long right)
 tObject smallerEqual(long left, long right)
 {
     // printf( "smaller: %d < %d\n", left, right );
-    if (ARE_INTS(left, right)) {
+    if (IS_INT(right)) {
     // we don't need to remove the tag since it will end up being the same order.
         // printf( "smaller: %d < %d\n", left, right );
         return left <= right ? &true : &false;
