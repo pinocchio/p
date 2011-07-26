@@ -33,58 +33,72 @@ __asm("not_tagged:");
 
 void does_not_understand0(tObject receiver)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understand1(tObject receiver, tObject arg1)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understand2(tObject receiver, tObject arg1, tObject arg2)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understand3(tObject receiver, tObject arg1, tObject arg2, tObject arg3)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understand4(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understand5(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tObject arg5)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tObject arg5, ...)
 {
-    tSymbol msg;
+    tObject msg;
     __asm("mov %%r11, %0":"=r"(msg));
     print_class_name(CLASS_OF(receiver));
-    PINOCCHIO_FAIL(" does not understand #%s", msg);
+    puts(" does not understand ");
+    print_object(msg);
+    PINOCCHIO_FAIL("FAILURE!");
 }
 
 void invoke0() {
