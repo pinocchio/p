@@ -67,7 +67,7 @@ void does_not_understand5(tObject receiver, tObject arg1, tObject arg2, tObject 
     PINOCCHIO_FAIL(" does not understand #%s", msg);
 }
 
-void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tSymbol msg, long argCount)
+void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tSymbol msg, long argCount, ...)
 {
     print_class_name(CLASS_OF(receiver));
     PINOCCHIO_FAIL(" does not understand #%s", msg);
@@ -76,6 +76,7 @@ void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject 
 void invoke0() {
     // backup all call registers
     __asm("push %rdi");
+    __asm("push %rax");
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
@@ -86,6 +87,7 @@ void invoke0() {
     __asm("mov $does_not_understand0, %r10");
     __asm("cmovne %rax, %r10");
 
+    __asm("pop %rsi");
     __asm("pop %rdi");
     __asm("jmp cache_and_call");
 }
@@ -94,6 +96,7 @@ void invoke1() {
     // backup all call registers
     __asm("push %rdi");
     __asm("push %rsi");
+    __asm("push %rax");
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
@@ -102,6 +105,7 @@ void invoke1() {
     __asm("mov does_not_understand1, %r10");
     __asm("cmovne %rax, %r10");
 
+    __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
     __asm("jmp cache_and_call");
@@ -112,6 +116,7 @@ void invoke2() {
     __asm("push %rdi");
     __asm("push %rsi");
     __asm("push %rdx");
+    __asm("push %rax");
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
@@ -120,6 +125,7 @@ void invoke2() {
     __asm("mov $does_not_understand2, %r10");
     __asm("cmovne %rax, %r10");
 
+    __asm("pop %rcx");
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
@@ -132,6 +138,7 @@ void invoke3() {
     __asm("push %rsi");
     __asm("push %rdx");
     __asm("push %rcx");
+    __asm("push %rax");
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
@@ -140,6 +147,7 @@ void invoke3() {
     __asm("mov does_not_understand3, %r10");
     __asm("cmovne %rax, %r10");
 
+    __asm("pop %r8");
     __asm("pop %rcx");
     __asm("pop %rdx");
     __asm("pop %rsi");
@@ -154,6 +162,7 @@ void invoke4() {
     __asm("push %rdx");
     __asm("push %rcx");
     __asm("push %r8");
+    __asm("push %rax");
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
@@ -162,6 +171,7 @@ void invoke4() {
     __asm("mov does_not_understand4, %r10");
     __asm("cmovne %rax, %r10");
 
+    __asm("pop %r9");
     __asm("pop %r8");
     __asm("pop %rcx");
     __asm("pop %rdx");
@@ -172,6 +182,7 @@ void invoke4() {
 
 void invoke5() {
     // backup all call registers
+    __asm("push %rax");
     __asm("push %rdi");
     __asm("push %rsi");
     __asm("push %rdx");
@@ -197,6 +208,7 @@ void invoke5() {
 
 void invokeN() {
     // backup all call registers
+    __asm("push %rax");
     __asm("push %rdi");
     __asm("push %rsi");
     __asm("push %rdx");
