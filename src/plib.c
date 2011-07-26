@@ -79,7 +79,7 @@ void does_not_understand5(tObject receiver, tObject arg1, tObject arg2, tObject 
     PINOCCHIO_FAIL(" does not understand #%s", msg);
 }
 
-void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tObject arg5, long argCount, ...)
+void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tObject arg5, ...)
 {
     tSymbol msg;
     __asm("mov %%r11, %0":"=r"(msg));
@@ -177,7 +177,6 @@ void invoke4() {
     __asm("push %rcx");
     __asm("push %r8");
     __asm("push %rax");
-
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
