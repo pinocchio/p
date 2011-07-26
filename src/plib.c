@@ -31,7 +31,144 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
-void invoke() {
+void does_not_understand0(tObject receiver, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understand1(tObject receiver, tObject arg1, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understand2(tObject receiver, tObject arg1, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understand3(tObject receiver, tObject arg1, tObject arg2, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understand4(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understand5(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tSymbol msg)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void does_not_understandN(tObject receiver, tObject arg1, tObject arg2, tObject arg3, tObject arg4, tSymbol msg, long argCount)
+{
+    print_class_name(CLASS_OF(receiver));
+    PINOCCHIO_FAIL(" does not understand #%s", msg);
+}
+
+void invoke0() {
+    // backup all call registers
+    __asm("push %rdi");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understand0, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invoke1() {
+    // backup all call registers
+    __asm("push %rdi");
+    __asm("push %rsi");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understand1, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invoke2() {
+    // backup all call registers
+    __asm("push %rdi");
+    __asm("push %rsi");
+    __asm("push %rdx");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understand2, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %rdx");
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invoke3() {
+    // backup all call registers
+    __asm("push %rdi");
+    __asm("push %rsi");
+    __asm("push %rdx");
+    __asm("push %rcx");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understand3, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %rcx");
+    __asm("pop %rdx");
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invoke4() {
+    // backup all call registers
+    __asm("push %rdi");
+    __asm("push %rsi");
+    __asm("push %rdx");
+    __asm("push %rcx");
+    __asm("push %r8");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understand4, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %r8");
+    __asm("pop %rcx");
+    __asm("pop %rdx");
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invoke5() {
     // backup all call registers
     __asm("push %rdi");
     __asm("push %rsi");
@@ -44,7 +181,33 @@ void invoke() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("mov %rax, %r10");
+    __asm("cmove does_not_understand5, %r10");
+    __asm("cmovne %rax, %r10");
+
+    __asm("pop %r9");
+    __asm("pop %r8");
+    __asm("pop %rcx");
+    __asm("pop %rdx");
+    __asm("pop %rsi");
+    __asm("pop %rdi");
+    __asm("jmp cache_and_call");
+}
+
+void invokeN() {
+    // backup all call registers
+    __asm("push %rdi");
+    __asm("push %rsi");
+    __asm("push %rdx");
+    __asm("push %rcx");
+    __asm("push %r8");
+    __asm("push %r9");
+
+    // use msg as second argument to do_lookup
+    __asm("mov %rax, %rsi");
+    __asm("call do_lookup");
+    // store the result as r10 for cache_and_call
+    __asm("cmove does_not_understandN, %r10");
+    __asm("cmovne %rax, %r10");
 
     __asm("pop %r9");
     __asm("pop %r8");

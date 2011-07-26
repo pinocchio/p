@@ -51,10 +51,10 @@ method do_lookup(tObject receiver, tSymbol msg)
 {
     tMethod m = lookup(receiver, msg);
     if (!m) {
-        print_class_name(CLASS_OF(receiver));
-        PINOCCHIO_FAIL(" does not understand: #%s", msg);
+        return NULL;
+    } else {
+        return (method)((void**)m + DEC_INT(m->code));
     }
-    return (method)((void**)m + DEC_INT(m->code));
 }
 
 tObject send(tObject receiver, const char* msg)
