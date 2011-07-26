@@ -80,8 +80,10 @@ void invoke0() {
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
+    __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand0, %r10");
+    //__asm("mov $does_not_understand0, %rdi");
+    __asm("mov $does_not_understand0, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %rdi");
@@ -97,7 +99,7 @@ void invoke1() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand1, %r10");
+    __asm("mov does_not_understand1, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %rsi");
@@ -115,7 +117,7 @@ void invoke2() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand2, %r10");
+    __asm("mov $does_not_understand2, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %rdx");
@@ -135,7 +137,7 @@ void invoke3() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand3, %r10");
+    __asm("mov does_not_understand3, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %rcx");
@@ -157,7 +159,7 @@ void invoke4() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand4, %r10");
+    __asm("mov does_not_understand4, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r8");
@@ -181,7 +183,7 @@ void invoke5() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understand5, %r10");
+    __asm("mov does_not_understand5, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r9");
@@ -206,7 +208,7 @@ void invokeN() {
     __asm("mov %rax, %rsi");
     __asm("call do_lookup");
     // store the result as r10 for cache_and_call
-    __asm("cmove does_not_understandN, %r10");
+    __asm("mov does_not_understandN, %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r9");
