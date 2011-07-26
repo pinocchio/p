@@ -17,6 +17,11 @@ tObject basicAt(tObject receiver, tSmallInteger tagged_index)
   return receiver->value[size+index-1];
 }
 
+long identityHash(tObject receiver)
+{
+  return HASH(receiver);
+}
+
 tSmallInteger size(tObject receiver)
 {
     return ENC_INT(SIZE(receiver));

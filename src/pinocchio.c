@@ -14,10 +14,13 @@ int main(int argc, char** argv)
 
     // tObject self    = basicNew((tBehavior)&Kernel_Package_Package);
     tObject self = basicNew((tBehavior)&Test_StaticKernelTest);
-    tObject result  =  send(self, "testStatic");
+    send(self, "testStatic");
 
     self = basicNew((tBehavior)&Test_KernelTest);
-    print_object(send(self, "test1"));
+    tObject result = send(self, "testDynamic");
+
+    puts("Object new:");
+    print_object( result );
     
 //    long * result;
  
