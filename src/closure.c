@@ -18,9 +18,9 @@ tObject remoteArrayNew(long size) {
 void closureValue() {
     //if its not a closure then jmp to invoke
     __asm("bt $0, %rdi");
-    __asm("jnae invoke0");
+    __asm("jnae "FN_PREFIX"invoke0");
     __asm("cmp %0, -0x10(%%rdi)"::"r"(&Kernel_Behavior_Closure));
-    __asm("jne invoke5");
+    __asm("jne "FN_PREFIX"invoke5");
     //load code-pointer from the closure-object
     __asm("mov (%rdi), %rax");
     __asm("jmpq *%rax");

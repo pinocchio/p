@@ -28,8 +28,9 @@ LDFLAGS  += -lgc -lm -ldl
 #LDFLAGS += -lpthread
 CC        = gcc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
-#	CFLAGS  += -arch i386 -arch x86_64 -arch ppc
-#	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
+	CC = clang
+	CFLAGS += -Wno-array-bounds
+	#	LDFLAGS += -arch i386 -arch x86_64 -arch ppc
 else
 #    LDFLAGS +=  -export-dynamic
 endif
