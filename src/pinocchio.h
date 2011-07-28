@@ -68,6 +68,12 @@ extern struct Class Array;
 #define HASH(object)        ((unsigned long)HEADER(object).hash)
 #define SIZE(object)        ((long)((tObject*)object)[-3])
 
+#ifdef __APPLE__
+    #define FN_PREFIX "_"
+#else   
+    #define FN_PREFIX
+#endif 
+
 typedef struct Header tHeader;
 
 /* ======================================================================= */

@@ -110,15 +110,15 @@ void invoke0() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov $does_not_understand0, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand0(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invoke1() {
@@ -129,16 +129,16 @@ void invoke1() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov does_not_understand1, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand1(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invoke2() {
@@ -150,17 +150,17 @@ void invoke2() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov $does_not_understand2, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand2(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invoke3() {
@@ -173,10 +173,10 @@ void invoke3() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov does_not_understand3, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand3(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
@@ -184,7 +184,7 @@ void invoke3() {
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invoke4() {
@@ -197,10 +197,10 @@ void invoke4() {
     __asm("push %rax");
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov does_not_understand4, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand4(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
@@ -209,7 +209,7 @@ void invoke4() {
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invoke5() {
@@ -224,10 +224,10 @@ void invoke5() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     __asm("test %rax, %rax");
     // store the result as r10 for cache_and_call
-    __asm("mov does_not_understand5, %r10");
+    __asm("lea "FN_PREFIX"does_not_understand5(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
@@ -237,7 +237,7 @@ void invoke5() {
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 void invokeN() {
@@ -253,10 +253,10 @@ void invokeN() {
 
     // use msg as second argument to do_lookup
     __asm("mov %rax, %rsi");
-    __asm("call do_lookup");
+    __asm("call "FN_PREFIX"do_lookup");
     // store the result as r10 for cache_and_call
     __asm("test %rax, %rax");
-    __asm("mov does_not_understandN, %r10");
+    __asm("lea "FN_PREFIX"does_not_understandN(%rip), %r10");
     __asm("cmovne %rax, %r10");
 
     __asm("pop %r11");
@@ -266,7 +266,7 @@ void invokeN() {
     __asm("pop %rdx");
     __asm("pop %rsi");
     __asm("pop %rdi");
-    __asm("jmp cache_and_call");
+    __asm("jmp "FN_PREFIX"cache_and_call");
 }
 
 long plus(long left, long right)
