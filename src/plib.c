@@ -4,9 +4,10 @@
 
 void cache_and_call()
 {
+    __asm("push %rdx");
     __asm("mov %r10, %rdx");
     // Fetch the calling instruction pointer (stack-stored ip)
-    __asm("mov 0(%rsp), %eax");
+    __asm("mov 0x8(%rsp), %eax");
     // Calculate the offset of the actual code pointer
     __asm("sub %eax, %edx");
     // Overwrite the 4-byte call-target offset with the method
@@ -22,12 +23,13 @@ void cache_and_call()
     __asm("jae not_tagged");
     __asm("mov %0, %%rax"::"r"(&SmallInteger));
     __asm("mov %rax, (%rdx)");
-    // __asm("int3");
+    __asm("pop %rdx");
     __asm("jmp *%r10");
     // If not tagged, store the class of the receiver
 __asm("not_tagged:");
     __asm("mov -16(%rdi), %rax");
     __asm("mov %rax, (%rdx)");
+    __asm("pop %rdx");
     __asm("jmp *%r10");
 }
 
@@ -272,6 +274,15 @@ long plus(long left, long right)
 //    printf( "plus: %p + %p\n", left, right );
     if (ARE_INTS(left,right)) {
         return (left ^ 1) + right;
+    }
+    return 0;
+}
+
+long mult(long left, long right)
+{
+//    printf( "plus: %p + %p\n", left, right );
+    if (ARE_INTS(left,right)) {
+        return ENC_INT(DEC_INT(left)*DEC_INT(right));
     }
     return 0;
 }

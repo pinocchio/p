@@ -29,6 +29,8 @@ tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
     return NULL;
 }
 
+
+extern tClass Kernel_Behavior_Method;
 tMethod lookup(tObject receiver, tSymbol message)
 {
     tClass c                  = CLASS_OF(receiver);
