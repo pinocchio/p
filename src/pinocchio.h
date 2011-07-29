@@ -57,7 +57,7 @@ extern struct Class Array;
 #define ARE_INTS(x, y) ((unsigned char)(x) & (unsigned char)(y) & (char)1)
 
 #define PINOCCHIO_FAIL(msg...) printf(msg); printf("\n"); __asm("int3"); 
-#define CLASS_OF(object)    (((long)object) & 1?&SmallInteger:((tClass*)object)[-2])
+#define CLASS_OF(object)    (((long)object) & 1?(&SmallInteger):((tClass*)object)[-2])
 
 #define HEADER(object)      (((tHeader*)object)[-1])
 #define BASE(object)        HEADER(object).base
