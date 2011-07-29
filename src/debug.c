@@ -4,7 +4,6 @@
 
 void print_symbol(tSymbol symbol) {
     tObject object = (tObject)symbol;
-    __asm("int3");
     size_t size = (long)object->value[-3];
     char buffer[size+1];
     memcpy(buffer, (char*)object, size);

@@ -28,13 +28,14 @@ LDFLAGS  += -lgc -lm -ldl
 #LDFLAGS += -lpthread
 CC        = gcc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
-	CC = clang
+	# CC = clang
 	# avoid array out of bounds warnings 
-	CFLAGS += -Wno-array-bounds
+	# CFLAGS += -Wno-array-bounds
+	#ensure that the pinocchio section is read/write/executable
+	LDFLAGS += -Wl,-segprot,__PINOCCHIO,rwx,rwx
+	LDFLAGS += -Wl,-pagezero_size,0x1000
 	# avoid position independent executable
 	LDFLAGS += -Wl,-no_pie
-	#ensure that the pinocchio section is read/write/executable
-	LDFLAGS +=-segprot,__PINOCCHIO,rwx,rwx
 else
 #    LDFLAGS +=  -export-dynamic
 endif

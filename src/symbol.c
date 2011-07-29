@@ -92,6 +92,7 @@ static tSymbol SymbolTable_lookup(tSymbolTable table, const char* key)
     long hash        = char_hash(key, size);
 
     tBucket *bucketp = &table->buckets->bucket[hash % SIZE(table->buckets)];
+    print_object(table);
     tBucket bucket   = *bucketp;
     tSymbol symbol;
     if (bucket == (tBucket)&nil) {
