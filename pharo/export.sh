@@ -1,8 +1,26 @@
 #! /bin/bash
 
+# cd to the current directory ================================================
 DIR=`readlink "$0"` || DIR="$0";
 DIR=`dirname "$DIR"`;
-cd "$DIR"
+cd "$DIR";
 
+# ============================================================================
+EXPORT='exportLinux.st';
+PHARO='pharo'
 
-squeak -vm-display-X11 -headless Pharo-1.3.image $PWD/export.st
+if [[ `uname` ==  'Darwin' ]]; then
+    EXPORT='exportOSX.st';
+    PHARO='/Applications/CogVM.app/Contents/MacOS/CogVM'
+fi
+
+# ============================================================================
+#find the pharo image
+PHARO_IMAGE=`find . -name '*.image' | head -1`;
+
+echo "Exporting core images...";
+
+#find the pharo VM
+$PHARO $PWD/$PHARO_IMAGE $PWD/$EXPORT;
+
+echo "done";

@@ -4,9 +4,10 @@
 
 void print_symbol(tSymbol symbol) {
     tObject object = (tObject)symbol;
-    long size = (long)object->value[-3];
+    __asm("int3");
+    size_t size = (long)object->value[-3];
     char buffer[size+1];
-    strncpy(buffer, (char*)object, size);
+    memcpy(buffer, (char*)object, size);
     buffer[size] = 0;
     printf("%s", buffer);
 }
