@@ -7,7 +7,7 @@ cd "$DIR";
 
 # ============================================================================
 EXPORT='exportLinux.st';
-PHARO='pharo'
+PHARO='/usr/local/bin/cog/bin/squeak'
 
 if [[ `uname` ==  'Darwin' ]]; then
     EXPORT='exportOSX.st';
@@ -21,6 +21,6 @@ PHARO_IMAGE=`find . -name '*.image' | head -1`;
 echo "Exporting core images...";
 
 #find the pharo VM
-$PHARO $PWD/$PHARO_IMAGE $PWD/$EXPORT;
+$PHARO -headless $PWD/$PHARO_IMAGE $PWD/$EXPORT;
 
 echo "done";
