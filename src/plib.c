@@ -330,8 +330,8 @@ tObject smallerEqual(long left, long right)
     return 0;
 }
 
-tSymbol print(tSymbol receiver) {
-    print_symbol(receiver);
+tObject print(tSymbol msg) {
+    print_symbol(msg);
     printf("\n");
-    return receiver;
+    return (tObject)msg;
 }
