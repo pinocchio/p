@@ -30,8 +30,26 @@ void closureValue() {
 }
 
 void closureReturn() {
-  //load return sp
-//  __asm("mov %rdi,%rsp");
-  //TODO pick the last register state from the stack and destroy the call frame....
-  return;
+  __asm("mov (%rdi),%rsp");
+  
+  //compare return token
+  __asm("pop    %r12");
+  __asm("cmp %r12, %rdi");
+  __asm("jne "FN_PREFIX"closureReturnFail");
+
+  __asm("pop    %r15");
+  __asm("pop    %r14");
+  __asm("pop    %r13");
+  __asm("pop    %r12");
+  __asm("pop    %rbp");
+  __asm("pop    %rbx");
+  __asm("ret");
+}
+
+void closureReturnFail() {
+  PINOCCHIO_FAIL("closure returned to a wrong stack frame");
+}
+
+void * newClosureReturnToken() {
+  return GC_MALLOC(sizeof(void*));
 }
