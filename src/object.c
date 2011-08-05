@@ -5,9 +5,9 @@
 tObject basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
 {
   int size = BASE(receiver);
-  int index = DEC_INT(tagged_index);
-  int pos = size+index-1;
-  if( pos >= SIZE(receiver) ) {
+  int index = DEC_INT(tagged_index)-1;
+  int pos = size+index;
+  if( index >= SIZE(receiver) ) {
     PINOCCHIO_FAIL("array access out of bounds" );
   }
   receiver->value[pos] = value;
@@ -17,9 +17,9 @@ tObject basicAtPut(tObject receiver, tSmallInteger tagged_index, tObject value)
 tObject basicAt(tObject receiver, tSmallInteger tagged_index)
 {
   int size = BASE(receiver);
-  int index = DEC_INT(tagged_index);
-  int pos = size+index-1;
-  if( pos >= SIZE(receiver) ) {
+  int index = DEC_INT(tagged_index)-1;
+  int pos = size+index;
+  if( index >= SIZE(receiver) ) {
     PINOCCHIO_FAIL("array access out of bounds" );
   }
   return receiver->value[pos];
