@@ -33,8 +33,7 @@ void closureReturn() {
   __asm("mov (%rdi),%rsp");
   
   //compare return token
-  __asm("pop    %r12");
-  __asm("cmp %r12, %rdi");
+  __asm("cmp -8(%rsp), %rdi");
   __asm("jne "FN_PREFIX"closureReturnFail");
 
   __asm("pop    %r15");
