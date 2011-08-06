@@ -287,7 +287,7 @@ long mult(long left, long right)
     return 0;
 }
 
-long divide(long left, long right)
+long intDivide(long left, long right)
 {
 //    printf( "plus: %p + %p\n", left, right );
     if (ARE_INTS(left,right)) {
@@ -295,6 +295,7 @@ long divide(long left, long right)
     }
     return 0;
 }
+
 
 long modulo(long left, long right)
 {
@@ -327,7 +328,6 @@ long bitShift(long self, long bits)
 
 tObject smaller(long left, long right)
 {
-    // printf( "smaller: %d < %d\n", left, right );
     if (IS_INT(right)) {
     // we don't need to remove the tag since it will end up being the same order.
         // printf( "smaller: %d < %d\n", left, right );
@@ -335,6 +335,17 @@ tObject smaller(long left, long right)
     }
     return 0;
 }
+
+tObject bigger(long left, long right)
+{
+    if (IS_INT(right)) {
+    // we don't need to remove the tag since it will end up being the same order.
+        // printf( "smaller: %d < %d\n", left, right );
+        return left > right ? &true : &false;
+    }
+    return 0;
+}
+
 
 
 tObject smallerEqual(long left, long right)

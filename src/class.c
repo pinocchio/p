@@ -102,6 +102,9 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     } else {
         PINOCCHIO_FAIL("Trying to instantiate non-variable-sized class");
     }
+    for( int i = 0; i < size; i++ ) {
+        result->value[h.base+i] = &nil;
+    }
     result->value[-2] = (tObject)b;
     result->value[-1] = (tObject)_h;
     return result;
