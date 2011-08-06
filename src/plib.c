@@ -296,6 +296,15 @@ long divide(long left, long right)
     return 0;
 }
 
+long modulo(long left, long right)
+{
+//    printf( "modulo: %p + %p\n", left, right );
+    if (ARE_INTS(left,right)) {
+        return ENC_INT(DEC_INT(left)%DEC_INT(right));
+    }
+    return 0;
+}
+
 long minus(long left, long right)
 {
 //    printf( "minus: %p - %p\n", left, right );

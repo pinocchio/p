@@ -27,7 +27,13 @@ tObject basicAt(tObject receiver, tSmallInteger tagged_index)
 
 long identityHash(tObject receiver)
 {
-  return HASH(receiver);
+  if (IS_INT(receiver)) {
+    long self = DEC_INT(receiver);
+    long low = self & 16383;
+    long hash = (0x260D * low + ((0x260D * (self >> 14) + (0x0065 * low) & 16383) * 16384)) & 0x0FFFFFFF;
+    return (long)ENC_INT(hash);
+  }
+  return ENC_INT(HASH(receiver));
 }
 
 tSmallInteger size(tObject receiver)
