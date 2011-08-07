@@ -8,13 +8,13 @@ extern struct Class Kernel_Collection_RemoteArray;
 
 tObject closureNew(long size) {
     tObject closure = basicNew_((tBehavior)&Kernel_Behavior_Closure, size);
-    printf( "- new closure at: %p size %ld\n", closure, DEC_INT(size) );
+//    printf( "- new closure at: %p size %ld\n", closure, DEC_INT(size) );
     return closure;
 }
 
 tObject remoteArrayNew(long size) {
     tObject array = basicNew_((tBehavior)&Kernel_Collection_RemoteArray, size);
-    printf( "- new array at: %p\n", array );
+//    printf( "- new array at: %p\n", array );
     return array;
 }
 
