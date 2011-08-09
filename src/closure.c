@@ -1,7 +1,4 @@
 #include <pinocchio.h>
-#include <asm/signal.h>
-#define UNW_LOCAL_ONLY
-#include <libunwind.h>
 
 extern struct Class Kernel_Behavior_Closure;
 extern struct Class Kernel_Collection_RemoteArray;
@@ -33,8 +30,8 @@ void closureReturn() {
   __asm("mov (%rdi),%rsp");
   
   //compare return token
-  __asm("pop    %rcx");
-  __asm("cmp %rcx, %rdi");
+  __asm("pop    %r10");
+  __asm("cmp %r10, %rdi");
   __asm("jne "FN_PREFIX"closureReturnFail");
 
   __asm("pop    %r15");

@@ -8,6 +8,8 @@
     #ifdef GC_MALLOC
         #define PALLOC GC_MALLOC
     #endif // GC_MALLOC
+#else
+    #define GC_MALLOC malloc
 #endif // NOGC
 
 #ifndef PALLOC
