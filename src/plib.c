@@ -33,6 +33,16 @@ __asm("not_tagged:");
     __asm("jmp *%r10");
 }
 
+void call_method() {
+  __asm("push %rdx");
+  __asm( "mov (%r10), %rdx" );
+  __asm( "shr %rdx" );
+  __asm( "lea (,%rdx,8), %rdx" );
+  __asm( "add %rdx, %r10" );
+  __asm("pop %rdx");
+  __asm("jmp *%r10");
+}
+
 void does_not_understand0(tObject receiver)
 {
     tObject msg;
