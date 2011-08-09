@@ -42,6 +42,7 @@ tMethod lookup(tObject receiver, tSymbol message)
         }
         method = (tMethod)IdentityDictionary_lookup(methods, (tObject)message);
     } while (!method && (c = c->super) != (tClass)&nil);
+    print_object(c);
     return method;
 }
 
@@ -49,24 +50,13 @@ tMethod lookup(tObject receiver, tSymbol message)
 typedef tObject (*method)(tObject receiver);
 /* ======================================================================= */
 
-method do_lookup(tObject receiver, tSymbol msg)
-{
-    tMethod m = lookup(receiver, msg);
-    if (!m) {
-        return NULL;
-    } else {
-        return (method)((void**)m + DEC_INT(m->code));
-    }
-}
-
 tObject send(tObject receiver, const char* msg)
 {
     tObject result;
-    method code = do_lookup(receiver, new_Symbol(msg));
-    __asm("mov %0, %%rdx"::"r"(code));
-    __asm("mov %0, %%rdi"::"r"(receiver));
-    __asm("mov %0, %%rax"::"r"(CLASS_OF(receiver)));
-    __asm("call *%rdx");
+    tSymbol sym = new_Symbol(msg);
+    __asm("mov %0, %%rax"::"r"(sym));
+    __asm("mov %0, %%rdi"::"r"(receiver):"%rax");
+    __asm("call invokeP");
     __asm("mov %%rax, %0":"=r"(result));
     return result;
 }
