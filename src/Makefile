@@ -21,7 +21,7 @@ EXTRAOBJECTS  = $(shell find ../pharo -name '*.o')
 
 # ============================================================================
 
-CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL -DNOGC -fomit-frame-pointer
+CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL -fomit-frame-pointer
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
 LDFLAGS  += -lgc -lm -ldl 
