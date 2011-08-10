@@ -34,12 +34,9 @@ __asm("not_tagged:");
 }*/
 
 void call_method() {
-  __asm("push %rdx");
-  __asm( "mov (%r10), %rdx" );
-  __asm( "shr %rdx" );
-  __asm( "lea (,%rdx,8), %rdx" );
-  __asm( "add %rdx, %r10" );
-  __asm("pop %rdx");
+  __asm( "mov (%r10), %r11" );
+  __asm( "shr %r11" );
+  __asm( "lea (%r10,%r11,8), %r10" );
   __asm("jmp *%r10");
 }
 
