@@ -56,7 +56,8 @@ tObject send(tObject receiver, const char* msg)
     tSymbol sym = new_Symbol(msg);
     __asm("mov %0, %%rax"::"r"(sym));
     __asm("mov %0, %%rdi"::"r"(receiver):"%rax");
-    __asm("call invokeP");
+    //we need groundedInvoke here since the normal invoke will try to install an inline cache, but this is no pinocchio method...
+    __asm("call groundedInvoke");
     __asm("mov %%rax, %0":"=r"(result));
     return result;
 }

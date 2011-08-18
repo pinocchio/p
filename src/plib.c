@@ -2,8 +2,11 @@
 #include <string.h>
 #include <pinocchio.h>
 
-/*void cache_and_call()
-{
+void cache_and_call_method() {
+  __asm( "mov (%r10), %r11" );
+  __asm( "shr %r11" );
+  __asm( "lea (%r10,%r11,8), %r10" );
+    
     __asm("push %rdx");
     __asm("mov %r10, %rdx");
     // Fetch the calling instruction pointer (stack-stored ip)
@@ -31,7 +34,7 @@ __asm("not_tagged:");
     __asm("mov %rax, (%rdx)");
     __asm("pop %rdx");
     __asm("jmp *%r10");
-}*/
+}
 
 void call_method() {
   __asm( "mov (%r10), %r11" );

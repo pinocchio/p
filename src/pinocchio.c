@@ -21,13 +21,13 @@ int main(int argc, char** argv)
     tObject self = basicNew((tBehavior)&Test_KernelTest);
     __asm("mov %0, %%rdi"::"r"(self));
     __asm("mov %0, %%rax"::"r"(&s_ok));
-    __asm("call invokeP");
+    __asm("call groundedInvoke");
     
     puts("");
     puts( "sending an unknown message:" );
     __asm("mov %0, %%rdi"::"r"(self));
     __asm("mov %0, %%rax"::"r"(&s_print));
-    __asm("call invokeP");
+    __asm("call groundedInvoke");
     puts("");
     
     // tObject self    = basicNew((tBehavior)&Kernel_Package_Package);
