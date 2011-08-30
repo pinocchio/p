@@ -9,6 +9,7 @@
 #include <string.h>
 #include <alloca.h>
 #include <stdint.h> 
+#include <alloca.h> 
 
 #include <gc.h>
 

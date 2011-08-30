@@ -48,5 +48,5 @@ void closureReturnFail() {
 }
 
 void * newClosureReturnToken() {
-  return GC_MALLOC(sizeof(void*));
+  return GC_malloc_atomic(sizeof(void*));
 }

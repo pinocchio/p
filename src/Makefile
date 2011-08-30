@@ -24,7 +24,7 @@ EXTRAOBJECTS  = $(shell find ../pharo -name '*.o')
 CFLAGS   += -g -pipe -I. -Wall -std=c99 -DASSERT_FAIL -fomit-frame-pointer
 #CFLAGS  += -DNO_EXCEPTION
 #CFLAGS  += -DTHREAD -DNOGC
-LDFLAGS  += -lgc -lm -ldl 
+LDFLAGS  += -lgc -lm -ldl
 #LDFLAGS += -lpthread
 CC        = gcc 
 ifeq ($(findstring Darwin,$(OS)),Darwin)
