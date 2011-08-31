@@ -47,6 +47,14 @@ void closureReturnFail() {
   PINOCCHIO_FAIL("closure returned to a wrong stack frame");
 }
 
+#define return_token_space_size 400
+unsigned int return_tokens_allocated = return_token_space_size;
+void** return_token_space;
+
 void * newClosureReturnToken() {
-  return GC_malloc_atomic(sizeof(void*));
+  if( return_token_space_size == return_tokens_allocated ) {
+    return_token_space = GC_malloc_atomic(return_token_space_size*sizeof(void*));
+    return_tokens_allocated=0;
+  }
+  return &return_token_space[return_tokens_allocated++];
 }
