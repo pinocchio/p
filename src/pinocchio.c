@@ -15,7 +15,6 @@ int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "");
     GC_INIT();
-
     puts("");
     puts( "testing invokeP" );
     tObject self = basicNew((tBehavior)&Test_KernelTest);

@@ -2,15 +2,11 @@
 #include <string.h>
 #include <pinocchio.h>
 
-void cache_and_call_method() {
-  __asm( "mov (%r10), %r11" );
-  __asm( "shr %r11" );
-  __asm( "lea (%r10,%r11,8), %r10" );
-    
-    __asm("push %rdx");
+void inline_cache_and_call() {
+    __asm("mov %rdx, %r11");
     __asm("mov %r10, %rdx");
     // Fetch the calling instruction pointer (stack-stored ip)
-    __asm("mov 0x8(%rsp), %eax");
+    __asm("mov (%rsp), %eax");
     // Calculate the offset of the actual code pointer
     __asm("sub %eax, %edx");
     // Overwrite the 4-byte call-target offset with the method
@@ -26,21 +22,14 @@ void cache_and_call_method() {
     __asm("jae not_tagged");
     __asm("mov %0, %%rax"::"r"(&SmallInteger));
     __asm("mov %rax, (%rdx)");
-    __asm("pop %rdx");
+    __asm("mov %r11, %rdx");
     __asm("jmp *%r10");
     // If not tagged, store the class of the receiver
 __asm("not_tagged:");
     __asm("mov -16(%rdi), %rax");
     __asm("mov %rax, (%rdx)");
-    __asm("pop %rdx");
+    __asm("mov %r11, %rdx");
     __asm("jmp *%r10");
-}
-
-void call_method() {
-  __asm( "mov (%r10), %r11" );
-  __asm( "shr %r11" );
-  __asm( "lea (%r10,%r11,8), %r10" );
-  __asm("jmp *%r10");
 }
 
 long plus(long left, long right)
