@@ -5,11 +5,15 @@
 extern void * Kernel_Collection_Array;
 
 void inline_cache_and_call() {
-    //backup rdx & class
+    //invoke-frame is already gone
+    //r10 is the target code address
+
+    //backup rdx
     __asm("mov %rdx, %r11");
+    //backup class in the red zone
     __asm("mov %rax, -0x8(%rsp)");
 
-    //copy method
+    //copy in method
     __asm("mov %r10, %rdx");
 
     // Fetch the calling instruction pointer (stack-stored ip)
@@ -18,6 +22,7 @@ void inline_cache_and_call() {
     __asm("sub %eax, %edx");
     // Overwrite the 4-byte call-target offset with the method
     __asm("movl %edx, -4(%eax)");
+
     // Calculate the location of the literal in the frame
     __asm("lea -5(%eax), %edx");
     __asm("movl -9(%eax), %eax");
@@ -26,18 +31,25 @@ void inline_cache_and_call() {
 
     //restore the class
     __asm("mov -0x8(%rsp), %rax");
+    //copy the class into literal frame
     __asm("mov %rax, (%rdx)");
 
     //restore rdx
     __asm("mov %r11, %rdx");
+    //jump to the method
     __asm("jmp *%r10");
 }
 
 void wrap_and_call() {
-    //get numOfArgs
+    //invoke-frame is half-gone, call arguments are still on the stack
+    //ready to call: "aMethod perform: selector on: receiver with: arguments"
+
+    //untag numOfArgs
     __asm("shr %r10");
 
-    //copyArgs
+    //wrap all arguments in the arguments array
+    //call arguments are on the stack in reverse order, first arg (the original receiver) is already copied.
+    //the 4th call register (=arguments) already contains an array with the appropriate size
   __asm( "loop:" );
     __asm("cmp $0, %r10");
     __asm("je done");
@@ -48,11 +60,11 @@ void wrap_and_call() {
     __asm("jmp loop");
 
   __asm("done:");
-    //load original receiver
-    __asm("mov (%rsp), %rdx");
 
-    //invoke on method
+    //remove the call arguments (saved by invoke) from the stack
     __asm("add $0x30, %rsp");
+
+    //invoke this
     __asm( "jmp groundedInvoke" );
 }
 
