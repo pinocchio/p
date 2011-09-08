@@ -2,11 +2,18 @@
 #include <string.h>
 #include <pinocchio.h>
 
+extern void * Kernel_Collection_Array;
+
 void inline_cache_and_call() {
+    //backup rdx & class
     __asm("mov %rdx, %r11");
+    __asm("mov %rax, -0x8(%rsp)");
+
+    //copy method
     __asm("mov %r10, %rdx");
+
     // Fetch the calling instruction pointer (stack-stored ip)
-    __asm("mov (%rsp), %eax");
+    __asm("mov 0x0(%rsp), %eax");
     // Calculate the offset of the actual code pointer
     __asm("sub %eax, %edx");
     // Overwrite the 4-byte call-target offset with the method
@@ -16,21 +23,40 @@ void inline_cache_and_call() {
     __asm("movl -9(%eax), %eax");
     __asm("cltq");
     __asm("add %rax, %rdx");
-    // Calculate the class
-    // If tagged integer, store the SmallInteger class
-    __asm("bt $0, %rdi");
-    __asm("jae not_tagged");
-    __asm("mov %0, %%rax"::"r"(&SmallInteger));
+
+    //restore the class
+    __asm("mov -0x8(%rsp), %rax");
     __asm("mov %rax, (%rdx)");
-    __asm("mov %r11, %rdx");
-    __asm("jmp *%r10");
-    // If not tagged, store the class of the receiver
-__asm("not_tagged:");
-    __asm("mov -16(%rdi), %rax");
-    __asm("mov %rax, (%rdx)");
+
+    //restore rdx
     __asm("mov %r11, %rdx");
     __asm("jmp *%r10");
 }
+
+void wrap_and_call() {
+    //get numOfArgs
+    __asm("shr %r10");
+
+    //copyArgs
+  __asm( "loop:" );
+    __asm("cmp $0, %r10");
+    __asm("je done");
+
+    __asm("mov (%rsp,%r10,8), %r9");
+    __asm("sub $1, %r10");
+    __asm("mov %r9, (%rdx,%r10,8)");
+    __asm("jmp loop");
+
+  __asm("done:");
+    //load original receiver
+    __asm("mov (%rsp), %rsi");
+
+    //invoke on method
+    __asm("add $0x30, %rsp");
+    __asm( "jmp groundedInvoke" );
+}
+
+
 
 long plus(long left, long right)
 {
@@ -107,6 +133,16 @@ tObject bigger(long left, long right)
         return left > right ? &true : &false;
     }
     return 0;
+}
+
+long count_args(tSymbol sym) {
+  int count = 0;
+  size_t len = (long)((tObject)sym)->value[-3];
+  for(int i = 0; i<len; ++i) {
+    if( sym[i] == ':' )
+      ++count;
+  }
+  return ENC_INT(count);
 }
 
 
