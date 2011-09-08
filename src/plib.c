@@ -44,12 +44,12 @@ void wrap_and_call() {
 
     __asm("mov (%rsp,%r10,8), %r9");
     __asm("sub $1, %r10");
-    __asm("mov %r9, (%rdx,%r10,8)");
+    __asm("mov %r9, (%rcx,%r10,8)");
     __asm("jmp loop");
 
   __asm("done:");
     //load original receiver
-    __asm("mov (%rsp), %rsi");
+    __asm("mov (%rsp), %rdx");
 
     //invoke on method
     __asm("add $0x30, %rsp");
