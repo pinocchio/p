@@ -17,6 +17,7 @@ struct Class {
     tMethodDictionary    methods;
     tClass               super;
     tSmallInteger        instanceHeader;
+    tObject              behavior;
     tLayout              layout;
     tSymbol              name;
     tObject              package;

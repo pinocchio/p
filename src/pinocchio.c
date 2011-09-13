@@ -7,8 +7,10 @@
 extern struct Class Test_KernelTest;
 extern struct Class Test_StaticKernelTest;
 extern struct Class Kernel_Package_Package;
+extern struct Class Examples_PrototypeTest;
 extern void * s_ok;
 extern void * s_loadClasses;
+extern void * s_run;
 extern void * invokeP();
 
 int main(int argc, char** argv)
@@ -32,9 +34,12 @@ int main(int argc, char** argv)
     // tObject self    = basicNew((tBehavior)&Kernel_Package_Package);
     self = basicNew((tBehavior)&Test_StaticKernelTest);
     send(self, "testStatic");
-
+    
     self = basicNew((tBehavior)&Test_KernelTest);
     tObject result = send(self, "testDynamic");
+    
+    self = basicNew((tBehavior)&Examples_PrototypeTest);
+    send(self, "run");
 
     puts("Object new:");
     print_object( result );
