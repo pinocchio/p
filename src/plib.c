@@ -68,6 +68,20 @@ void wrap_and_call() {
     __asm( "jmp groundedInvoke" );
 }
 
+void unwrap() {
+    //%r11 = theArgs
+
+    __asm("mov 0x0(%r11), %rsi");
+    __asm("mov 0x8(%r11), %rdx");
+    __asm("mov 0x10(%r11), %rcx");
+    __asm("mov 0x18(%r11), %r8");
+    __asm("mov 0x20(%r11), %r9");
+
+    //todo push the rest to the stack...
+    //get size
+    //__asm("mov -0x18(%r11) ");
+}
+
 
 
 long plus(long left, long right)

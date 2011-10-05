@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 extern struct Class Test_KernelTest;
+extern struct Class Test_PerformanceTest;
 extern struct Class Test_StaticKernelTest;
 extern struct Class Kernel_Package_Package;
 extern struct Class Examples_PrototypeTest;
@@ -17,6 +18,11 @@ int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "");
     GC_INIT();
+
+/*    tObject self = basicNew((tBehavior)&Test_PerformanceTest);
+    send(self, "run");
+}*/
+
     puts("");
     puts( "testing invokeP" );
     tObject self = basicNew((tBehavior)&Test_KernelTest);
