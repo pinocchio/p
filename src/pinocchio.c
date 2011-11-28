@@ -5,10 +5,10 @@
 #include <stdlib.h>
 
 extern struct Class Test_KernelTest;
-extern struct Class Test_PerformanceTest;
+//extern struct Class Test_PerformanceTest;
 extern struct Class Test_StaticKernelTest;
 extern struct Class Kernel_Package_Package;
-extern struct Class Examples_PrototypeTest;
+extern struct Class Examples_ExamplesTest;
 extern void * s_ok;
 extern void * s_loadClasses;
 extern void * s_run;
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     self = basicNew((tBehavior)&Test_KernelTest);
     tObject result = send(self, "testDynamic");
     
-    self = basicNew((tBehavior)&Examples_PrototypeTest);
+    self = basicNew((tBehavior)&Examples_ExamplesTest);
     send(self, "run");
 
     puts("Object new:");
