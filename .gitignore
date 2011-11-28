@@ -8,12 +8,7 @@ make.depend
 pinocchio
 cppcomplete.tags
 
-pharo/PharoDebug.log
-pharo/PharoV10.sources
-pharo/package-cache/*
-pharo/pharo.changes
-pharo/pharo.image
-
+pharo/*
 
 # XCODE noise
 *.pbxuser
