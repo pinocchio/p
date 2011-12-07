@@ -114,7 +114,7 @@ static tSymbol SymbolTable_lookup(tSymbolTable table, const char* key)
     // Find key in bucket 
     for (i = 0; i < tally; i++) {
         symbol = (tSymbol)bucket->value[i];
-        if (CLASS_OF(symbol) == &Symbol
+        if (BEHAVIOR_OF(symbol) == &Symbol_behavior
             && SIZE(symbol) == size
             && !strncmp(symbol, key, size)) {
             return symbol;

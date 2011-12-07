@@ -44,8 +44,8 @@ int main(int argc, char** argv)
     self = basicNew((tBehavior)&Test_KernelTest);
     tObject result = send(self, "testDynamic");
     
-    self = basicNew((tBehavior)&Examples_ExamplesTest);
-    send(self, "run");
+    //self = basicNew((tBehavior)&Examples_ExamplesTest);
+    //send(self, "run");
 
     puts("Object new:");
     print_object( result );

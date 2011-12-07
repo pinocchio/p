@@ -11,12 +11,12 @@ void print_symbol(tSymbol symbol) {
     printf("%s", buffer);
 }
 
-void print_class_name(tClass cls) {
-    if (CLASS_OF(cls) == &Metaclass) {
-        print_symbol(((tMetaclass)cls)->instance->name);
+void print_class_name(tSTBehavior cls) {
+    if (BEHAVIOR_OF(cls) == &Metaclass_behavior) {
+        print_symbol(((tMetaclass)(cls->class))->instance->name);
         printf(" class");
     } else {
-        print_symbol(cls->name);
+        print_symbol(cls->class->name);
     }
 }
 
@@ -36,7 +36,7 @@ void print_object(tObject object) {
                       BYTES(object), MUTABLE(object),
                       GCMARK(object), HASH(object));
 
-    if (&Symbol == CLASS_OF(object)) {
+    if (&Symbol_behavior == BEHAVIOR_OF(object)) {
         printf(" #'");
         print_symbol((tSymbol)object);
         printf("' (%p)\n", object);
@@ -44,6 +44,6 @@ void print_object(tObject object) {
     }
 
     printf(" is a: ");
-    print_class_name(CLASS_OF(object));
+    print_class_name(BEHAVIOR_OF(object));
     printf("\n");
 }

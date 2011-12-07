@@ -1,10 +1,10 @@
 #include <pinocchio.h>
 
-extern struct Class Kernel_Behavior_Closure;
+extern struct Class Kernel_Callable_Closure;
 extern struct Class Kernel_Collection_RemoteArray;
 
 tObject closureNew(long size) {
-    tObject closure = basicNew_((tBehavior)&Kernel_Behavior_Closure, size);
+    tObject closure = basicNew_((tBehavior)&Kernel_Callable_Closure, size);
 //    printf( "- new closure at: %p size %ld\n", closure, DEC_INT(size) );
     return closure;
 }

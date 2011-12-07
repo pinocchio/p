@@ -6,16 +6,12 @@
 /*  =======================================================================  */
 
 struct Behavior {
-    tMethodDictionary    methods;
-    tBehavior            super;
     tSmallInteger        instanceHeader;
+    tObject              behavior;
     tLayout              layout;
-    tObject              classfield[];
 };
 
 struct Class {
-    tMethodDictionary    methods;
-    tClass               super;
     tSmallInteger        instanceHeader;
     tObject              behavior;
     tLayout              layout;
@@ -25,9 +21,8 @@ struct Class {
 };
 
 struct Metaclass {
-    tMethodDictionary    methods;
-    tMetaclass           super;
     tSmallInteger        instanceHeader;
+    tObject              behavior;
     tLayout              layout;
     tClass               instance;
     tObject              classfield[];
@@ -36,6 +31,14 @@ struct Metaclass {
 extern struct Class Behavior;
 extern struct Class Class;
 extern struct Class Metaclass;
+
+struct STBehavior {
+    tMethodDictionary    methods;
+    tClass               class;
+    tSTBehavior            super;
+};
+
+
 
 /* ======================================================================= */
 

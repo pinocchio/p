@@ -41,6 +41,6 @@ tSmallInteger size(tObject receiver)
     return ENC_INT(SIZE(receiver));
 }
 
-tClass class(tObject receiver) {
-    return CLASS_OF(receiver);
+tClass behavior(tObject receiver) {
+    return BEHAVIOR_OF(receiver);
 }

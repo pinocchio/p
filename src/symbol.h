@@ -9,6 +9,7 @@
 extern struct Class Symbol;
 extern struct Class SymbolTable;
 extern struct Dictionary symboltable;
+extern struct STBehavior Symbol_behavior;
 
 /* ======================================================================= */
 

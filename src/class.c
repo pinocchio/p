@@ -33,11 +33,11 @@ tObject IdentityDictionary_lookup(tIdentityDictionary dictionary, tObject key)
 extern tClass Kernel_Behavior_Method;
 tMethod lookup(tObject receiver, tSymbol message)
 {
-    tClass c                  = CLASS_OF(receiver);
+    tSTBehavior c                  = BEHAVIOR_OF(receiver);
     tMethod method;
     do { 
         tMethodDictionary methods = c->methods;
-        if (CLASS_OF(methods) != &MethodDictionary) {
+        if (BEHAVIOR_OF(methods) != &MethodDictionary) {
             return NULL;
         }
         method = (tMethod)IdentityDictionary_lookup(methods, (tObject)message);
@@ -78,7 +78,7 @@ tObject basicNew(tBehavior b) {
         tmp[h.base+2] = tmp;
         result = tmp+2;
     }
-    result->value[-2] = (tObject)b;
+    result->value[-2] = b->behavior;
     result->value[-1] = (tObject)_h;
     return result;
 }
@@ -102,7 +102,7 @@ tObject basicNew_(tBehavior b, long tagged_size) {
     for( int i = 0; i < size; i++ ) {
         result->value[h.base+i] = &nil;
     }
-    result->value[-2] = (tObject)b;
+    result->value[-2] = b->behavior;
     result->value[-1] = (tObject)_h;
     return result;
 }
