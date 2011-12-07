@@ -44,3 +44,11 @@ tSmallInteger size(tObject receiver)
 tClass behavior(tObject receiver) {
     return BEHAVIOR_OF(receiver);
 }
+
+tClass set_behavior(tObject receiver, tSTBehavior b) {
+    if( BEHAVIOR_OF(receiver) == &SmallInteger_behavior ) {
+      return 0;
+    }
+    ((tClass*)receiver)[-2] = b;
+    return receiver;
+}
